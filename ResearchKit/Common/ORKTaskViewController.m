@@ -149,7 +149,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
     return [super initWithTarget:target
-                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"]
+                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView"]
                         delegate:delegate
                           action:@selector(collectToolbarItemsFromViewController:)
                          context:_ORKViewControllerToolbarObserverContext];
@@ -304,10 +304,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     if (self) {
         self.delegate = delegate;
-        self.restorationClass = [self class];
-        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        [self decodeRestorableStateWithCoder:unarchiver];
-        [self applicationFinishedRestoringState];
+        if (data != nil) {
+            self.restorationClass = [self class];
+            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+            [self decodeRestorableStateWithCoder:unarchiver];
+            [self applicationFinishedRestoringState];
+        }
     }
     return self;
 }
@@ -694,7 +696,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *identifier = obj;
         ORKResult *result = _managedResults[identifier];
-        NSAssert(result, @"Not expect result to be nil for identifier %@", identifier);
+        NSAssert(result, @"Result should not be nil for identifier %@", identifier);
         [results addObject:result];
     }];
     
@@ -813,6 +815,16 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [_currentStepViewController goBackward];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    UIInterfaceOrientationMask supportedOrientations;
+    if (self.currentStepViewController) {
+        supportedOrientations = self.currentStepViewController.supportedInterfaceOrientations;
+    } else {
+        supportedOrientations = [[self nextStep].stepViewControllerClass supportedInterfaceOrientations];
+    }
+    return supportedOrientations;
+}
+
 #pragma mark - internal helpers
 
 - (void)updateLastBeginningInstructionStepIdentifierForStep:(ORKStep *)step
@@ -896,6 +908,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
+
     if ([step isRestorable]) {
         _lastRestorableStepIdentifier = step.identifier;
     }
@@ -1007,7 +1020,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     if (!stepViewController) {
-        Class stepViewControllerClass = [[step class] stepViewControllerClass];
+        Class stepViewControllerClass = step.stepViewControllerClass;
         
         ORKStepResult *result = nil;
         result = _managedResults[step.identifier];
@@ -1049,7 +1062,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (BOOL)shouldDisplayProgressLabel {
-    return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)];
+    return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)] && self.currentStepViewController.step.showsProgress;
 }
 
 #pragma mark - internal action Handlers
@@ -1132,7 +1145,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [self finishWithReason:ORKTaskViewControllerFinishReasonFailed error:error];
 }
 
-- (IBAction)flipToNextPageFrom:(ORKStepViewController *)fromController {
+- (void)flipToNextPageFrom:(ORKStepViewController *)fromController {
     if (fromController != _currentStepViewController) {
         return;
     }
@@ -1153,7 +1166,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
 }
 
-- (IBAction)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
+- (void)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
     if (fromController != _currentStepViewController) {
         return;
     }
@@ -1166,7 +1179,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         NSString *itemId = currentStep.identifier;
         
         stepViewController = [self viewControllerForStep:step];
-        
         if (stepViewController) {
             // Remove the identifier from the list
             assert([itemId isEqualToString:_managedStepIdentifiers.lastObject]);
@@ -1174,7 +1186,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             [self showViewController:stepViewController goForward:NO animated:YES];
         }
-        
     }
 }
 

@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Godkännande";
+"CONSENT_NAME_GIVEN" = "Förnamn";
+"CONSENT_NAME_FAMILY" = "Efternamn";
+"CONSENT_NAME_PLACEHOLDER" = "Krävs";
+"CONSENT_REVIEW_TITLE" = "Granska";
+"CONSENT_REVIEW_INSTRUCTION" = "Granska formuläret nedan och tryck på Godkänn om du är redo att fortsätta.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Granska";
+"CONSENT_SIGNATURE_TITLE" = "Signatur";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signera med hjälp av fingret på raden nedan.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Signera här";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Sidan %1$ld av %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Välkommen";
+"CONSENT_SECTION_DATA_GATHERING" = "Datainsamling";
+"CONSENT_SECTION_PRIVACY" = "Integritet";
+"CONSENT_SECTION_DATA_USE" = "Dataanvändning";
+"CONSENT_SECTION_STUDY_SURVEY" = "Studieenkät";
+"CONSENT_SECTION_STUDY_TASKS" = "Studieåtgärder";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Tidsåtgång";
+"CONSENT_SECTION_WITHDRAWING" = "Tillbakadragning";
+"CONSENT_LEARN_MORE_TITLE" = "Läs mer";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Läs mer om hur data samlas in";
+"LEARN_MORE_DATA_USE" = "Läs mer om hur data används";
+"LEARN_MORE_PRIVACY" = "Läs mer om hur din integritet och identitet skyddas";
+"LEARN_MORE_WELCOME" = "Läs mer om studien först";
+"LEARN_MORE_STUDY_SURVEY" = "Läs mer om studieenkäten";
+"LEARN_MORE_TIME_COMMITMENT" = "Läs mer om studiens påverkan på din tid";
+"LEARN_MORE_TASKS" = "Läs mer om de berörda åtgärderna";
+"LEARN_MORE_WITHDRAWING" = "Läs mer om tillbakadragning";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Delningsalternativ";
+"CONSENT_SHARE_WIDELY_%@" = "Dela mina data med %@ och kvalificerade forskare över hela världen";
+"CONSENT_SHARE_ONLY_%@" = "Dela mina data endast med %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ kommer att få dina studiedata från deltagandet i den här studien.\n\nGenom att dela dina kodade studiedata mer brett (utan information som ditt namn) kan vi gagna både denna och framtida forskning.";
+"LEARN_MORE_CONSENT_SHARING" = "Läs mer om datadelning";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@s namn (tryckt)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@s signatur";
+"CONSENT_DOC_LINE_DATE" = "Datum";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Steg %1$@ av %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ogiltigt värde";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ överskrider det högsta tillåtna värdet (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ är mindre än det minsta tillåtna värdet (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ är inte ett giltigt värde.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ogiltig e-postadress: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Ange en adress";
+"LOCATION_ERROR_TITLE" = "Kunde inte hitta den angivna adressen";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Kunde inte bestämma din aktuella plats. Ange en adress eller flytta dig till en plats med bättre GPS-signal om det är tillämpligt.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Åtkomst till platstjänster har nekats. Tillåt att den här appen använder platstjänster via Inställningar.";
+"LOCATION_ERROR_GEOCODE" = "Det gick inte att hitta något resultat för den angivna adressen. Kontrollera att adressen är giltig.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Antingen är du inte ansluten till internet eller så har du överskridit det maximala antalet addressökbegäranden. Om du inte är ansluten till internet aktiverar du Wi-Fi så att du kan svara på frågan, hoppa över frågan om en sådan knapp är tillgänglig eller gå tillbaka till enkäten när du är ansluten till internet. I annat fall försöker du igen om några minuter.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinnehållet överskrider maximal längd: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera inte tillgänglig i delad skärm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-post";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Lösenord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenord";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekräfta";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenordet igen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lösenorden stämmer inte överens.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ytterligare information";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Kön";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Välj ett kön";
+"DOB_FORM_ITEM_TITLE" = "Födelsedatum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Välj ett datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifiering";
+"VERIFICATION_STEP_TITLE" = "Bekräfta ditt e-brev";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryck på länken nedan om du inte fick något bekräftelsebrev och vill att det skickas på nytt.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Skicka bekräftelsebrev igen";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggning";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Har du glömt lösenordet?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Ange lösenkod";
+"PASSCODE_CONFIRM_MESSAGE" = "Bekräfta lösenkod";
+"PASSCODE_SAVED_MESSAGE" = "Lösenkoden sparad";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Autentiserad med lösenkod";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ange din gamla lösenkod";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Ange din nya lösenkod";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekräfta den nya lösenkoden";
+"PASSCODE_INVALID_ALERT_TITLE" = "Felaktig lösenkod";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Lösenkoderna stämde inte överens. Försök igen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentisera med Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fel";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Endast numeriska tecken tillåts.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Förloppsindikator för angivande av lösenkod";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ siffror angivna";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunde inte lägga till nyckelringsobjekt.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Kunde inte uppdatera nyckelringsobjekt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Kunde inte radera nyckelringsobjekt.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Kunde inte hitta nyckelringsobjekt.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Kvinna";
+"GENDER_MALE" = "Man";
+"GENDER_OTHER" = "Annat";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nej";
+"BOOL_YES" = "Ja";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Tryck för att svara";
+"NULL_ANSWER" = "Välj ett svar";
+"PLACEHOLDER_IMAGE_CHOICES" = "Tryck för att markera";
+"PLACEHOLDER_LONG_TEXT" = "Tryck för att skriva";
+
+/* Button titles */
+"BUTTON_AGREE" = "Godkänn";
+"BUTTON_CANCEL" = "Avbryt";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Rensa";
+"BUTTON_DISAGREE" = "Avböj";
+"BUTTON_DONE" = "Klar";
+"BUTTON_GET_STARTED" = "Kom igång";
+"BUTTON_LEARN_MORE" = "Läs mer";
+"BUTTON_NEXT" = "Nästa";
+"BUTTON_SKIP" = "Hoppa över";
+"BUTTON_SKIP_QUESTION" = "Hoppa över denna fråga";
+"BUTTON_START_TIMER" = "Starta timern";
+"BUTTON_OPTION_SAVE" = "Spara till senare";
+"BUTTON_OPTION_DISCARD" = "Bortse från träffar";
+"BUTTON_OPTION_STOP_TASK" = "Avsluta åtgärd";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Startar aktivitet om";
+"TASK_COMPLETE_TITLE" = "Aktiviteten är klar";
+"TASK_COMPLETE_TEXT" = "Dina data kommer att analyseras, och du blir meddelad när resultaten är klara.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Spara bild";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Spara bild igen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Ingen kamera hittades. Steget kan inte slutföras.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "För att slutföra det här steget måste du ge denna app tillgång till kameran i Inställningar.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Ingen utmatningskatalog har angetts för de sparade bilderna.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Bilden kunde inte sparas.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Motion";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distans (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Puls – slag/minut";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sitt bekvämt under %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gå så fort du kan under %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Den här aktiviteten registrerar din puls och mäter hur långt du kan gå på %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gå utomhus i snabbast möjliga takt under %1$@. När du är klar sitter du och vilar bekvämt under %2$@. Tryck på Kom igång för att börja.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gång och balans";
+"WALK_INTRO_TEXT" = "Den här aktiviteten mäter din gångstil och balans medan du går och står still. Fortsätt endast om du säkert kan gå utan hjälp.";
+"WALK_INTRO_2_TEXT_%ld" = "Hitta en plats där du säkert kan gå ungefär %ld steg i en rak linje utan hjälp.";
+"WALK_INTRO_2_DETAIL" = "Placera telefonen i en ficka eller väska och följ de talade anvisningarna.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå nu stilla under %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stå stilla under %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Vänd om och gå tillbaka till utgångsplatsen.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå upp till %ld steg i en rak linje.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Tryckhastighet";
+"TAPPING_INTRO_TEXT" = "Den här aktiviteten mäter din tryckhastighet.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Lägg telefonen på en plan yta. Två knappar kommer att synas på skärmen under %@. Använd två fingrar på samma hand till att omväxlande trycka på knapparna så fort du kan.";
+"TAPPING_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"TAP_BUTTON_TITLE" = "Tryck";
+"TOTAL_TAPS_LABEL" = "Totalt antal tryckningar";
+"TAPPING_INSTRUCTION" = "Tryck på knapparna så fort du kan med två fingrar.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Röst";
+"AUDIO_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"AUDIO_INSTRUCTION" = "Säg ”aaah” i mikrofonen så länge du kan.";
+"AUDIO_INTRO_TEXT" = "Ta ett djupt andetag och säg ”aaah” i mikrofonen så länge du kan. Håll röststyrkan stadig så att ljudstaplarna förblir blå.";
+"AUDIO_INTENDED_USE" = "Den här aktiviteten utvärderar din röst genom att spela in den med mikrofonen i nederkanten av telefonen.";
+"AUDIO_TOO_LOUD_LABEL" = "För högt";
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan inte spela in ljud";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten mäter din förmåga att höra olika ljud.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nu bör du höra en ton. Justera volymen med reglagen på sidan av enheten.\n\nTryck på knappen när du är redo att börja.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tryck på knappen varje gång du börjar höra ett ljud.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, vänster";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, höger";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Spatialt minne";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Den här aktiviteten mäter ditt spatiala korttidsminne genom att be dig upprepa den ordning i vilken %@ lyser upp.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blommor";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blommor";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i samma ordning som de lyser upp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "En del av %@na kommer att lysa upp en i taget. Tryck på de %@na i omvänd ordning jämfört med hur de lyser upp.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja och titta noggrant.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Poäng";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Se när %@ lyser upp";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tryck på %@ i den ordning de lyser upp";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tryck på %@ i omvänd ordning";
+"MEMORY_GAME_COMPLETE_TITLE" = "Sekvensen är klar";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Tryck på Nästa när du vill fortsätta";
+"MEMORY_GAME_FAILED_TITLE" = "Försök igen";
+"MEMORY_GAME_FAILED_MESSAGE" = "Du klarade dig inte riktigt igenom den gången. Tryck på Nästa för att fortsätta.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Tiden är slut";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Tiden tog slut.\nTryck på Nästa för att fortsätta.";
+"MEMORY_GAME_COMPLETE" = "Spelet är klart";
+"MEMORY_GAME_PAUSED_TITLE" = "Pausat";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Tryck på Nästa när du vill fortsätta";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktionstid";
+"REACTION_TIME_TASK_INTENDED_USE" = "Den här aktiviteten utvärderar den tid det tar för dig att reagera på visuella stimuli.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Skaka enheten i valfri riktning så fort den blå punkten visas på skärmen. Du blir ombedd att göra detta %D gånger.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Försök %@ av %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Skaka snabbt enheten när den blå cirkeln visas";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tornen i Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Den här aktiviteten utvärderar din förmåga att lösa pussel.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytta hela traven till den markerade plattformen med så få drag som möjligt.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tryck på Kom igång för att börja";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Lös pusslet";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antal drag: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jag kan inte lösa pusslet";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gång med tidtagning";
+"TIMED_WALK_INTRO_DETAIL" = "Den här aktiviteten mäter benfunktionen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Hitta en plats, helst utomhus, där du kan gå ungefär %@ i en rät linje så fort som möjligt (men fortfarande säkert). Sakta inte ned förrän du har passerat mållinjen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tryck på Nästa för att börja.";
+"TIMED_WALK_FORM_TITLE" = "Hjälpmedel";
+"TIMED_WALK_FORM_TEXT" = "Använd samma hjälpmedel för alla test.";
+"TIMED_WALK_QUESTION_TEXT" = "Bär du en ankel- och fotortos?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Använder du ett hjälpmedel?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tryck här för att välja ett svar.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Inget";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Ensidig käpp";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Ensidig krycka";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dubbelsidig käpp";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dubbelsidig krycka";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstativ/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gå upp till %@ i en rät linje.";
+"TIMED_WALK_INSTRUCTION_2" = "Vänd om och gå tillbaka till utgångsplatsen.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tryck på Klar när du är färdig.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT (Paced Auditory Serial Addition Test) mäter din auditiva bearbetningshastighet och beräkningsförmåga.";
+"PVSAT_INTRO_TEXT" = "PVSAT (Paced Visual Serial Addition Test) mäter din visuella bearbetningshastighet och beräkningsförmåga.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT (Paced Auditory and Visual Serial Addition Test) mäter din auditiva och visuella bearbetningshastighet och beräkningsförmåga.";
+"PSAT_INTRO_TEXT_2_%@" = "Ensiffriga tal visas med intervall på %@ sekunder.\nDu måste addera varje nytt tal till talet som visades omedelbart före det.\nObs! Du ska inte beräkna en löpande totalsumma, utan bara summan av de senaste två talen.";
+"PSAT_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"PSAT_INITIAL_INSTRUCTION" = "Kom ihåg den första siffran.";
+"PSAT_INSTRUCTION" = "Addera det nya talet till det föregående.";
+"PSAT_NO_DIGIT" = "–";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-håls pegtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Den här aktiviteten mäter funktionen för dina övre extremiteter genom att be dig placera en pinne i ett hål. Du uppmanas att göra detta %@ gånger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din vänstra och högra hand kommer att testas.\nDu måste plocka upp pinnen så snabbt som möjligt och stoppa in den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din högra och vänstra hand kommer att testas.\nDu måste plocka upp pinnen så snabbt som möjligt och stoppa in den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placera pinnen i hålet med hjälp av vänster hand.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Placera pinnen i hålet med hjälp av höger hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Placera pinnen bakom strecket med hjälp av vänster hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Placera pinnen bakom strecket med hjälp av höger hand.";
+"HOLE_PEG_TEST_TEXT" = "Lyft upp pinnen med två fingrar.";
+"HOLE_PEG_TEST_TEXT_2" = "Släpp pinnen genom att lyfta på fingrarna.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Kunde inte skapa fil";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunde inte ta bort tillräckligt många loggfiler för att nå tröskelvärdet";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Fel vid angivning av attribut";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Filen är inte markerad som raderad (ej markerad som öveförd)";
+"ERROR_DATALOGGER_MULTIPLE" = "Flera fel vid borttagning av loggar";
+"ERROR_RECORDER_NO_DATA" = "Inga insamlade data hittades.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen utmatningskatalog har angetts";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Inga data";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Tillbaka";
+
+"AX_IMAGE_ILLUSTRATION" = "Illustration av %@";
+
+"AX_SIGNVIEW_LABEL" = "Tilldelat signaturfält";
+"AX_SIGNVIEW_HINT" = "Rör vid skärmen och signera genom att röra fingret";
+"AX_SIGNVIEW_SIGNED" = "Signerat";
+"AX_SIGNVIEW_UNSIGNED" = "Osignerat";
+
+"AX_SELECTED" = "Markerat";
+"AX_UNSELECTED" = "Avmarkerat";
+
+"AX_SLIDER_LABEL" = "Svarsreglage. Intervall från %@ till %@";
+"AX_UNLABELED_IMAGE" = "Omärkt bild";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Påbörja åtgärd";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktiv";
+"AX.MEMORY.TILE.CORRECT" = "rätt";
+"AX.MEMORY.TILE.INCORRECT" = "fel";
+"AX.MEMORY.TILE.QUIESCENT" = "inaktiv";
+"AX.MEMORY.TILE.LABEL" = "Minnesspelbricka";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Spara förhandsvisning";
+"AX_IMAGE_CAPTURED_LABEL" = "Sparad bild";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Ka inte placera skivan med storleken %@ på skivan med storleken %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+"AX_TOWER_OF_HANOI_TOWER" = "Torn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tryck snabbt två gånger för att placera skivan";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tryck snabbt två gånger för att markera den översta skivan";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skivor med storlekarna %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tomt";
+
+"AX_GRAPH_RANGE_FORMAT" = "Intervall från %@ till %@";
+"AX_GRAPH_AND_SEPARATOR" = " och ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

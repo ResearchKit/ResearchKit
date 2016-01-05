@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Beleegyezés";
+"CONSENT_NAME_GIVEN" = "Utónév";
+"CONSENT_NAME_FAMILY" = "Családi név";
+"CONSENT_NAME_PLACEHOLDER" = "Szükséges";
+"CONSENT_REVIEW_TITLE" = "Áttekintés";
+"CONSENT_REVIEW_INSTRUCTION" = "Tekintse át az alábbi űrlapot, majd koppintson az Elfogadom gombra, ha készen áll a folytatásra.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Áttekintés";
+"CONSENT_SIGNATURE_TITLE" = "Aláírás";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Kérjük, írja alá az ujjával az alábbi vonalon.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Itt írja alá";
+"CONSENT_PAGE_NUMBER_FORMAT" = "%2$ld/%1$ld oldal";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Üdvözöljük";
+"CONSENT_SECTION_DATA_GATHERING" = "Adatgyűjtés";
+"CONSENT_SECTION_PRIVACY" = "Adatvédelem";
+"CONSENT_SECTION_DATA_USE" = "Adathasználat";
+"CONSENT_SECTION_STUDY_SURVEY" = "Kérdőív";
+"CONSENT_SECTION_STUDY_TASKS" = "A vizsgálat feladatai";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Szükséges idő";
+"CONSENT_SECTION_WITHDRAWING" = "Visszavonás";
+"CONSENT_LEARN_MORE_TITLE" = "További infók";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "További információk az adatok gyűjtésének módjáról";
+"LEARN_MORE_DATA_USE" = "További információk az adatok felhasználásának módjáról";
+"LEARN_MORE_PRIVACY" = "További információk az adatok és személyes információk védelmének módjáról";
+"LEARN_MORE_WELCOME" = "További információk a vizsgálatról";
+"LEARN_MORE_STUDY_SURVEY" = "További információk a kérdőívről";
+"LEARN_MORE_TIME_COMMITMENT" = "További információk arról, mennyi időt vesz igénybe a felmérés";
+"LEARN_MORE_TASKS" = "További információk a bennfoglalt feladatokról";
+"LEARN_MORE_WITHDRAWING" = "További információk a visszavonásról";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Megosztási beállítások";
+"CONSENT_SHARE_WIDELY_%@" = "Az adataim megosztása a következővel és világszerte szakképzett kutatókkal: %@";
+"CONSENT_SHARE_ONLY_%@" = "Az adataim megosztása csak a következővel: %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "A(z) %@ meg fogja kapni az Ön vizsgálati adatait az Ön vizsgálatban való részvételéről.\n\nA kódolt vizsgálati adatok szélesebb körű megosztása (az olyan információk nélkül, mint az Ön neve) segítheti ezt és a jövőbeli kutatásokat.";
+"LEARN_MORE_CONSENT_SHARING" = "További infó az adatok megosztásáról";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ neve (kinyomtatva)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ aláírása";
+"CONSENT_DOC_LINE_DATE" = "Dátum";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@. lépés";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Érvénytelen érték";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "A(z) %1$@ túllépi a maximálisan engedélyezett értéket (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "A(z) %1$@ kisebb a minimálisan engedélyezett értéknél (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "A(z) %@ nem érvényes érték.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Érvénytelen e-mail cím: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Adjon meg egy címet";
+"LOCATION_ERROR_TITLE" = "A megadott cím nem található";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Az aktuális hely feloldása nem sikerült. Írjon be egy címet, vagy menjen olyan helyre, ahol a GPS-jelerősség kedvezőbb.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "A helymeghatározáshoz való hozzáférés le van tiltva. Engedélyezze az alkalmazás számára a helymeghatározás funkció használatát a Beállításokban.";
+"LOCATION_ERROR_GEOCODE" = "A megadott címhez nem található eredmény. Győződjön meg arról, hogy a cím érvényes.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ön nem csatlakozik az internethez, vagy túllépte a címkeresési kérelmek maximálisan engedélyezett számát. Ha nem csatlakozik az internethez, akkor kapcsolja be a Wi-Fi-t és válaszoljon erre a kérdésre, ha a kihagyás gomb megjelenik, akkor hagyja ki ezt a kérdést, vagy térjen vissza a kérdőívre, amikor már csatlakozik az internethez. Ellenkező esetben próbálkozzon újra néhány perc múlva.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "A szöveg túllépi a maximális hosszt: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "A kamera nem érhető el osztott képernyős nézetben.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "nagyede@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Jelszó";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Jelszó megadása";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Megerősítés";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Jelszó ismételt megadása";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "A jelszavak nem egyeznek meg.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "További információk";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ede";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Nagy";
+"GENDER_FORM_ITEM_TITLE" = "Nem";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Nem kiválasztása";
+"DOB_FORM_ITEM_TITLE" = "Születési dátum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Dátum kiválasztása";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ellenőrzés";
+"VERIFICATION_STEP_TITLE" = "E-mail ellenőrzése";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Koppintson az alábbi linkre, ha nem kapott ellenőrző e-mailt, és azt szeretné, ha újra elküldenénk.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Ellenőrző e-mail újraküldése";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Bejelentkezés";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Elfelejtette a jelszót?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Adja meg a jelkódot";
+"PASSCODE_CONFIRM_MESSAGE" = "Erősítse meg a jelkódját";
+"PASSCODE_SAVED_MESSAGE" = "A jelkód mentve";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "A jelkód hitelesítve van";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Adja meg a régi jelkódját";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Adja meg az új jelkódját";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Erősítse meg az új jelkódját";
+"PASSCODE_INVALID_ALERT_TITLE" = "A jelkód helytelen";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "A jelkódok nem egyeznek meg. Próbálja újra.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Kérjük, végezzen hitelesítést a Touch ID-val";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-val kapcsolatos hiba";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kizárólag számkarakterek engedélyezettek.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Jelkóddal történő belépés folyamatjelzője";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@ számjegy megadva";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nem lehetett hozzáadni a Kulcskarika-elemet.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nem lehetett frissíteni a Kulcskarika-elemet.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nem lehetett törölni a Kulcskarika-elemet.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "A Kulcskarika-elem nem található.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Nő";
+"GENDER_MALE" = "Férfi";
+"GENDER_OTHER" = "Egyéb";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nem";
+"BOOL_YES" = "Igen";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Koppintson a válaszhoz";
+"NULL_ANSWER" = "Válasz kiválasztása";
+"PLACEHOLDER_IMAGE_CHOICES" = "Koppintson a kijelöléshez";
+"PLACEHOLDER_LONG_TEXT" = "Koppintson az íráshoz.";
+
+/* Button titles */
+"BUTTON_AGREE" = "Elfogadom";
+"BUTTON_CANCEL" = "Mégsem";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Törlés";
+"BUTTON_DISAGREE" = "Nem fogadom el";
+"BUTTON_DONE" = "Kész";
+"BUTTON_GET_STARTED" = "Kezdés";
+"BUTTON_LEARN_MORE" = "További infók";
+"BUTTON_NEXT" = "Következő";
+"BUTTON_SKIP" = "Kihagyás";
+"BUTTON_SKIP_QUESTION" = "A kérdés kihagyása";
+"BUTTON_START_TIMER" = "Időzítő indítása";
+"BUTTON_OPTION_SAVE" = "Mentés későbbre";
+"BUTTON_OPTION_DISCARD" = "Eredmények elvetése";
+"BUTTON_OPTION_STOP_TASK" = "Feladat vége";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Tevékenység indítása:";
+"TASK_COMPLETE_TITLE" = "Tevékenység befejezve";
+"TASK_COMPLETE_TEXT" = "Az adatok ki lesznek elemezve, és értesítést fog kapni, ha az eredmény elkészült.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kép készítése";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Kép készítése újra";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nem található kamera. Ezt a lépést nem lehet végrehajtani.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "A lépés végrehajtásához a Beállításokban engedélyezze az alkalmazás számára, hogy hozzáférjen a kamerához.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Az elkészített képekhez nem lett megadva kimeneti könyvtár.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Az elkészített képet nem sikerült menteni.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitnesz";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Távolság (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Pulzusszám (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Üljön kényelmesen %@ időtartamig.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gyalogoljon olayn gyorsan, amilyen gyorsan tud %@ időtartam alatt.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Ez a tevékenység a pulzusát figyeli, és megméri, milyen messzire tud gyalogolni %1$@ időtartam alatt.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Kültéren gyalogoljon olyan gyorsan, ahogy csak tud %1$@ időtartamig. Amikor befejezte, üljön le, és pihenjen kényelmesen %2$@ időtartamig. A kezdéshez koppintson a Kezdés elemre.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Testtartás és egyensúly";
+"WALK_INTRO_TEXT" = "Ez a tevékenység a testtartását és egyensúlyát méri járás és állás közben. Ne folytassa, ha segítség nélkül nem tud biztonságosan gyalogolni.";
+"WALK_INTRO_2_TEXT_%ld" = "Keressen olyan helyet, ahol segítség nélkül gyalogolhat egyenesen körülbelül %ld lépést.";
+"WALK_INTRO_2_DETAIL" = "Tegye a telefont a zsebébe vagy a táskájába, és kövesse a hangutasításokat.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Most álljon mozdulatlanul %@ időtartamig.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Álljon mozdulatlanul %@ időtartamig.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Tegyen meg legalább %ld lépést egyenesen.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Koppintási sebesség";
+"TAPPING_INTRO_TEXT" = "Ez a tevékenység megméri a koppintási sebességét.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Helyezze a telefont egy sima felületre. Két gomb jelenik meg a képernyőn a következőhöz: %@. Egy kezének két ujjával felváltva koppintson a megjelenő gombokra olyan gyorsan, ahogy csak tud.";
+"TAPPING_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"TAP_BUTTON_TITLE" = "Koppintás";
+"TOTAL_TAPS_LABEL" = "Összes koppintás";
+"TAPPING_INSTRUCTION" = "Két ujjal koppintson a gombokra olyan gyorsan, ahogy csak tud.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Hang";
+"AUDIO_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"AUDIO_INSTRUCTION" = "Amilyen hosszan csak tudja, mondja, hogy „Áááááá” a mikrofonba.";
+"AUDIO_INTRO_TEXT" = "Vegyen mély levegőt, és amilyen hosszan csak tudja, mondja a mikrofonba, hogy „Áááááá”. Próbáljon egyenletes hangerőt tartani, hogy a hangsávok kékek maradjanak.";
+"AUDIO_INTENDED_USE" = "Ez a tevékenység kiértékeli a hangját, rögzítve, ahogy a telefon alján lévő mikrofonba beszél.";
+"AUDIO_TOO_LOUD_LABEL" = "Túl hangos";
+"AUDIO_GENERIC_ERROR_LABEL" = "Nem sikerült hangot felvenni";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység azt méri fel, hogyan hallja Ön a különböző hangokat.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Először is csatlakoztassa és tegye fel a fejhallgatót.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt a készülék oldalán található vezérlőkkel.\n\nKoppintson a gombra, amikor készen áll a kezdésre.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Koppintson a gombra mindig, amikor egy hangot hall.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, bal";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, jobb";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Térbeli memória";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ez a tevékenység a rövidtávú térbeli memóriát vizsgálja. Ehhez ismételje meg a felvillanó %@ képeinek sorrendjét.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "virágok";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "virágok";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésükkel azonos sorrendben.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésük fordított sorrendjében.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre, majd figyeljen.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Eredmény";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Figyelje, ahogy a(z) %@ felvillannak";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Koppintson a(z) %@ képekre olyan sorrendben, ahogy felvillantak";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Koppintson a(z) %@ képekre fordított sorrendben";
+"MEMORY_GAME_COMPLETE_TITLE" = "A sorozat befejeződött";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "A folytatáshoz koppintson a Következő gombra";
+"MEMORY_GAME_FAILED_TITLE" = "Újrapróbálkozás";
+"MEMORY_GAME_FAILED_MESSAGE" = "Ez alkalommal nem sikerült. A folytatáshoz koppintson a Következő gombra.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Letelt az idő";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Elfogyott az idő.\nA folytatáshoz koppintson a Következő gombra.";
+"MEMORY_GAME_COMPLETE" = "Játék befejezve";
+"MEMORY_GAME_PAUSED_TITLE" = "Szüneteltetve";
+"MEMORY_GAME_PAUSED_MESSAGE" = "A folytatáshoz koppintson a Következő gombra";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakcióidő";
+"REACTION_TIME_TASK_INTENDED_USE" = "Ez a tevékenység felméri, hogy mennyi ideig tart Önnek válaszolni egy vizuális jelzésre.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rázza meg a készüléket tetszőleges irányban, amint megjelenik a képernyőn a kék pont. A készülék %D alkalommal fogja megkérni erre.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@. kísérlet";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gyorsan rázza meg a készüléket, amikor megjelenik a kék kör";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanoi tornyai";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ez a tevékenység kiértékeli az Ön kirakómegoldási képességeit.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Helyezze át a teljes köteget a kijelölt oszlopra a lehető legkevesebb lépésben.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "A kirakós megoldása";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Lépések száma: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nem tudom megoldani ezt a kirakót";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Időre mért gyaloglás";
+"TIMED_WALK_INTRO_DETAIL" = "Ez a tevékenység az alsó végtagok működését méri.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Keressen olyan helyet, lehetőleg kültéren, ahol %@ ideig egyenesen tud gyalogolni olyan gyorsan, ahogy csak tud, de biztonságosan. Ne lassítson le, amíg el nem hagyta a célvonalat.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Koppintson\na Tovább elemre\na kezdéshez.";
+"TIMED_WALK_FORM_TITLE" = "Segítőeszköz";
+"TIMED_WALK_FORM_TEXT" = "Ugyanazt a segítőeszközt használja minden teszthez.";
+"TIMED_WALK_QUESTION_TEXT" = "Használ boka-járáskönnyítőt?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Használ segítőeszközt?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Válasz kijelöléséhez koppintson ide.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nincs";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Egyoldali bot";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Egyoldali mankó";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Kétoldali bot";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Kétoldali mankó";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Járókeret/rollátor";
+"TIMED_WALK_INSTRUCTION_%@" = "Gyalogoljon legalább %@ távolságra egyenesen.";
+"TIMED_WALK_INSTRUCTION_2" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Koppintson a Kész lehetőségre, ha elkészült.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Az Ütemes hallási sorozatösszeadási teszt a hallási információfeldolgozási sebességet és számítási képességet méri.";
+"PVSAT_INTRO_TEXT" = "Az Ütemes vizuális sorozatösszeadási teszt a vizuális információfeldolgozási sebességet és számítási képességet méri.";
+"PAVSAT_INTRO_TEXT" = "Az Ütemes hallási és vizuális sorozatösszeadási teszt a hallási és vizuális információfeldolgozási sebességet és számítási képességet méri.";
+"PSAT_INTRO_TEXT_2_%@" = "%@ másodpercenként számjegyek jelennek meg.\nMinden új számjegyet adjon hozzá az előtte lévőhöz.\nFigyelem: Ne számítsa ki a teljes sorozat összegét, csak az utolsó két számjegy összegét.";
+"PSAT_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"PSAT_INITIAL_INSTRUCTION" = "Jegyezze meg ezt az első számkegyet.";
+"PSAT_INSTRUCTION" = "Adja hozzá ezt az új számjegyet az előzőhöz.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ lyukú körillesztő teszt";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ez a tevékenység a felső végtagok mozgását vizsgálja, amelynek során a rendszer megkéri Önt, hogy illesszen bele egy kört egy lyukba. Ezt %@ alkalommal kell megtennie.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "A bal és a jobb keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "A jobb és a bal keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a lyukba a bal kezével.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a lyukba a jobb kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a vonal mögé a bal kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a vonal mögé a jobb kezével.";
+"HOLE_PEG_TEST_TEXT" = "Fogja meg a kört két ujjal.";
+"HOLE_PEG_TEST_TEXT_2" = "Emelje fel az ujjait a kör elhelyezéséhez.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nem sikerült elég naplófájlt eltávolítani a küszöb eléréséhez";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Hiba történt az attribútum beállításakor";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "A fájl nincs töröltként megjelölve (nincs feltöltöttként megjelölve)";
+"ERROR_DATALOGGER_MULTIPLE" = "Több hiba történt a naplók eltávolításakor";
+"ERROR_RECORDER_NO_DATA" = "Nem található összegyűjtött adat.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nincs megadva kimeneti könyvtár";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nincs adat";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Vissza";
+
+"AX_IMAGE_ILLUSTRATION" = "%@ illusztrációja";
+
+"AX_SIGNVIEW_LABEL" = "Külön aláírásmező";
+"AX_SIGNVIEW_HINT" = "Érintse meg a képernyőt, és mozgassa az ujját az aláíráshoz";
+"AX_SIGNVIEW_SIGNED" = "Aláírva";
+"AX_SIGNVIEW_UNSIGNED" = "Aláírás nélküli";
+
+"AX_SELECTED" = "Kiválasztva";
+"AX_UNSELECTED" = "Nincs kijelölve";
+
+"AX_SLIDER_LABEL" = "Válaszcsúszka. Tartomány: %@ - %@";
+"AX_UNLABELED_IMAGE" = "Címke nélküli kép";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Feladat megkezdése";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktív";
+"AX.MEMORY.TILE.CORRECT" = "helyes";
+"AX.MEMORY.TILE.INCORRECT" = "helytelen";
+"AX.MEMORY.TILE.QUIESCENT" = "nyugodt";
+"AX.MEMORY.TILE.LABEL" = "Memóriajáték címe";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Előnézet rögzítése";
+"AX_IMAGE_CAPTURED_LABEL" = "Készített kép";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nem helyezhető %@ méretű korong %@ méretű korongra";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cél";
+"AX_TOWER_OF_HANOI_TOWER" = "Torony";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Koppintson duplán a korong elhelyezéséhez";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Koppintson duplán a legfelső korong kijelöléséhez";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Üres";
+
+"AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
+"AX_GRAPH_AND_SEPARATOR" = " és ";
+"AX_GRAPH_POINT_%@" = "Pont: %@";

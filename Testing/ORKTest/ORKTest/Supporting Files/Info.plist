@@ -22,6 +22,8 @@
 	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app records your location during certian tasks.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

@@ -55,6 +55,17 @@
     return [ORKStepViewController class];
 }
 
+- (Class)stepViewControllerClass {
+    return [[self class] stepViewControllerClass];
+}
+
+- (instancetype)copyWithIdentifier:(NSString *)identifier {
+    ORKThrowInvalidArgumentExceptionIfNil(identifier)
+    ORKStep *step = [self copy];
+    step->_identifier = [identifier copy];
+    return step;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;

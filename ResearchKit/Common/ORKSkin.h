@@ -128,6 +128,10 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricSignatureViewHeight,
     ORKScreenMetricPSATKeyboardViewWidth,
     ORKScreenMetricPSATKeyboardViewHeight,
+    ORKScreenMetricLocationQuestionMapHeight,
+    ORKScreenMetricTopToIconImageViewTop,
+    ORKScreenMetricIconImageViewToCaptionBaseline,
+    ORKScreenMetricVerificationTextBaselineToResendButtonBaseline,
     ORKScreenMetric_COUNT
 };
 

@@ -265,11 +265,11 @@
 
 - (ORKStepResult *)result {
     
-    ORKStepResult *sResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    sResult.startDate = self.presentedDate;
-    sResult.endDate = self.dismissedDate? :[NSDate date];
+    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
+    stepResult.startDate = self.presentedDate;
+    stepResult.endDate = self.dismissedDate? :[NSDate date];
     
-    return sResult;
+    return stepResult;
 }
 
 - (void)notifyDelegateOnResultChange {
@@ -282,6 +282,16 @@
 
 - (BOOL)hasBeenPresented {
     return _hasBeenPresented;
+}
+
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    // The default values for a view controller's supported interface orientations is set to
+    // UIInterfaceOrientationMaskAll for the iPad idiom and UIInterfaceOrientationMaskAllButUpsideDown for the iPhone idiom.
+    UIInterfaceOrientationMask supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
+    }
+    return supportedOrientations;
 }
 
 #pragma mark - Action Handlers
@@ -317,8 +327,11 @@
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
-    
-    if (!text.length) {
+    [self showValidityAlertWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil) message:text];
+}
+
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if (![title length] && ![message length]) {
         // No alert if the value is empty
         return;
     }
@@ -331,8 +344,8 @@
         return;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil)
-                                                                   message:text
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
@@ -344,6 +357,7 @@
         _presentingAlert = NO;
     }];
 }
+
 
 #pragma mark - UIStateRestoring
 

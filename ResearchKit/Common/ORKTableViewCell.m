@@ -34,15 +34,12 @@
 #import "ORKSelectionTitleLabel.h"
 
 
-@interface ORKTableViewCell ()
-
-@property (nonatomic, strong) UIView *topSeparator;
-@property (nonatomic, strong) UIView *bottomSeparator;
-
-@end
-
-
-@implementation ORKTableViewCell
+@implementation ORKTableViewCell {
+    UIView *_topSeparator;
+    NSLayoutConstraint *_topSeparatorLeftMarginConstraint;
+    UIView *_bottomSeparator;
+    NSLayoutConstraint *_bottomSeparatorLeftMarginConstraint;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -58,11 +55,9 @@
         }
         
         _orkSeparatorColor = defaultSeparatorColor;
-        _topSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
-        _bottomSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
-        
-        _topSeparator = [UIView new];
-        _bottomSeparator = [UIView new];
+        _topSeparatorLeftInset = 0;
+        _bottomSeparatorLeftInset = 0;
+
         
         [self init_ORKTableViewCell];
         
@@ -70,69 +65,117 @@
     return self;
 }
 
-- (void)updateSeparatorInsets {
-    
-    if (self.topSeparatorLeftInset > 0) {
-        self.topSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
-    }
-    if (self.bottomSeparatorLeftInset > 0) {
-        self.bottomSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
-    }
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self updateSeparatorInsets];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self updateSeparatorInsets];
-}
-
 - (void)setShowBottomSeparator:(BOOL)showBottomSeparator {
     _showBottomSeparator = showBottomSeparator;
-    [self setNeedsLayout];
+    if (showBottomSeparator && _bottomSeparator == nil) {
+        _bottomSeparator = [UIView new];
+        _bottomSeparator.backgroundColor = _orkSeparatorColor;
+        
+        [self addSubview:_bottomSeparator];
+        _bottomSeparator.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        
+        NSMutableArray *constraints = [NSMutableArray array];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_bottomSeparator
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_bottomSeparator
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                           multiplier:1.0
+                                                             constant:separatorHeight]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_bottomSeparator
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        _bottomSeparatorLeftMarginConstraint = [NSLayoutConstraint constraintWithItem:_bottomSeparator
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                           multiplier:1.0
+                                                                             constant:_bottomSeparatorLeftInset];
+        
+        [constraints addObject:_bottomSeparatorLeftMarginConstraint];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
+    _bottomSeparator.hidden = !showBottomSeparator;
 }
 
 - (void)setShowTopSeparator:(BOOL)showTopSeparator {
     _showTopSeparator = showTopSeparator;
-    [self setNeedsLayout];
+    
+    if (showTopSeparator && _topSeparator == nil) {
+        _topSeparator = [UIView new];
+        _topSeparator.backgroundColor = _orkSeparatorColor;
+        
+        [self addSubview:_topSeparator];
+        _topSeparator.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+        
+        NSMutableArray *constraints = [NSMutableArray array];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_topSeparator
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_topSeparator
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                           multiplier:1.0
+                                                             constant:separatorHeight]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_topSeparator
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        _topSeparatorLeftMarginConstraint = [NSLayoutConstraint constraintWithItem:_topSeparator
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeLeft
+                                                                           multiplier:1.0
+                                                                             constant:_topSeparatorLeftInset];
+        
+        [constraints addObject:_topSeparatorLeftMarginConstraint];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
+    _topSeparator.hidden = !showTopSeparator;
 }
 
 - (void)setBottomSeparatorLeftInset:(CGFloat)bottomSeparatorLeftInset {
     _bottomSeparatorLeftInset = bottomSeparatorLeftInset;
-    [self setNeedsLayout];
+    _bottomSeparatorLeftMarginConstraint.constant = _bottomSeparatorLeftInset;
 }
 
 - (void)setTopSeparatorLeftInset:(CGFloat)topSeparatorLeftInset {
     _topSeparatorLeftInset = topSeparatorLeftInset;
-    [self setNeedsLayout];
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    CGFloat cellWidth = self.bounds.size.width;
-    CGFloat cellHeight = self.bounds.size.height;
-    CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
-    
-    if (_showTopSeparator) {
-        _topSeparator.backgroundColor = _orkSeparatorColor;
-        _topSeparator.frame = CGRectMake(_topSeparatorLeftInset, 0.0, cellWidth, separatorHeight);
-        [self addSubview:_topSeparator];
-        
-    } else {
-        [_topSeparator removeFromSuperview];
-    }
-    
-    if (_showBottomSeparator) {
-        _bottomSeparator.backgroundColor = _orkSeparatorColor;
-        _bottomSeparator.frame = CGRectMake(_bottomSeparatorLeftInset, cellHeight-separatorHeight, cellWidth, separatorHeight);
-        [self addSubview:_bottomSeparator];
-    } else {
-        [_bottomSeparator removeFromSuperview];
-    }
+    _topSeparatorLeftMarginConstraint.constant = _topSeparatorLeftInset;
 }
 
 - (void)init_ORKTableViewCell {

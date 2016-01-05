@@ -83,6 +83,15 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
+ Returns a copy of this step initialized with the specified identifier.
+ 
+ @param identifier   The unique identifier for the new step to be returned.
+ 
+ @return A new step.
+ */
+- (instancetype)copyWithIdentifier:(NSString *)identifier;
+
+/**
  A short string that uniquely identifies the step within the task.
  
  The identifier is reproduced in the results of a step. In fact, the only way to link a result

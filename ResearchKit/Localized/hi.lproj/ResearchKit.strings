@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "सहमति";
+"CONSENT_NAME_GIVEN" = "प्रथम नाम";
+"CONSENT_NAME_FAMILY" = "उपनाम";
+"CONSENT_NAME_PLACEHOLDER" = "आवश्यक";
+"CONSENT_REVIEW_TITLE" = "समीक्षा";
+"CONSENT_REVIEW_INSTRUCTION" = "नीचे दिए गए फ़ॉर्म को देखें और जारी रखने के लिए “सहमत” पर टैप करें।";
+"CONSENT_REVIEW_ALERT_TITLE" = "समीक्षा";
+"CONSENT_SIGNATURE_TITLE" = "हस्ताक्षर";
+"CONSENT_SIGNATURE_INSTRUCTION" = "कृपया अपनी ऊँगली का उपयोग करके नीचे दी गई रेखा पर हस्ताक्षर करें।";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "यहाँ हस्ताक्षर करें";
+"CONSENT_PAGE_NUMBER_FORMAT" = "पृष्ठ %1$ld/%2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "स्वागत है";
+"CONSENT_SECTION_DATA_GATHERING" = "डेटा एकत्रीकरण";
+"CONSENT_SECTION_PRIVACY" = "गोपनीयता";
+"CONSENT_SECTION_DATA_USE" = "डेटा उपयोग";
+"CONSENT_SECTION_STUDY_SURVEY" = "सर्वेक्षण अध्ययन";
+"CONSENT_SECTION_STUDY_TASKS" = "अध्ययन कार्य";
+"CONSENT_SECTION_TIME_COMMITMENT" = "समय प्रतिबद्धता";
+"CONSENT_SECTION_WITHDRAWING" = "सहमति वापस लेना";
+"CONSENT_LEARN_MORE_TITLE" = "और अधिक जानें";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "डेटा एकत्रीकरण की प्रक्रिया के बारे में और अधिक जानें";
+"LEARN_MORE_DATA_USE" = "डेटा उपयोग करने की प्रक्रिया के बारे में और अधिक जानें";
+"LEARN_MORE_PRIVACY" = "आपकी गोपनीयता और पहचान की सुरक्षा के बारे में और अधिक जानें";
+"LEARN_MORE_WELCOME" = "अध्ययन से पहले उसके बारे में और अधिक जानें";
+"LEARN_MORE_STUDY_SURVEY" = "सर्वेक्षण अध्ययन के बारे में और अधिक जानें";
+"LEARN_MORE_TIME_COMMITMENT" = "अपने समय पर अध्ययन के प्रभाव के बारे में और अधिक जानें";
+"LEARN_MORE_TASKS" = "सम्मिलित कार्यों के बारे में और अधिक जानें";
+"LEARN_MORE_WITHDRAWING" = "सहमति वापस लेने के बारे में और अधिक जानें";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "साझाकरण विकल्प";
+"CONSENT_SHARE_WIDELY_%@" = "मेरे डेटा को %@ और दुनिया भर के योग्य शोधकर्ताओं के साथ साझा करें";
+"CONSENT_SHARE_ONLY_%@" = "मेरा डेटा केवल %@ के साथ साझा करें";
+"CONSENT_SHARING_DESCRIPTION_%@" = "इस अध्ययन में आपकी सहभागिता से %@ को आपका अध्ययन डेटा प्राप्त होगा।\n\nकोड किए हुए अध्ययन डेटा का विस्तृत रूप से (आपका नाम दिए बिना) साझाकरण, इस शोध और भविष्य में होने वाले शोधों के लिए उपयोगी हो सकता है।";
+"LEARN_MORE_CONSENT_SHARING" = "डेटा साझाकरण के बारे में अधिक जानें";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ का नाम (प्रिंट किया हुआ)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ का हस्ताक्षर";
+"CONSENT_DOC_LINE_DATE" = "तिथि";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "चरण %1$@/%2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "अमान्य मान";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ अधिकतम अनुमत मान (%2$@) से अधिक है।";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ न्यूनतम अनुमत मान (%2$@) से कम है।";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ मान्य मान नहीं है।";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "अमान्य ईमेल पता : %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "पता दर्ज करें";
+"LOCATION_ERROR_TITLE" = "निर्दिष्ट पता ढूँढा नहीं जा सका";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "आपके वर्तमान स्थान का पता लगाने में असमर्थ। कृपया कोई पता टाइप करें या लागू होने पर किसी ऐसे स्थान पर जाएँ जहाँ बेहतर GPS सिग्नल हों।";
+"LOCATION_ERROR_MESSAGE_DENIED" = "“स्थान सेवाएँ” तक पहुँच को अस्वीकृत किया गया। कृपया सेटिंग्ज़ द्वारा इस ऐप को “स्थान सेवाएँ” का उपयोग करने की अनुमति दें।";
+"LOCATION_ERROR_GEOCODE" = "दर्ज किए गए पते के लिए कोई परिणाम नहीं मिले। कृपया सुनिश्चित करें कि यह पता मान्य है।";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "या तो आप इंटरनेट से कनेक्टेड नहीं हैं या आपने पता देखने हेतु अधिकतम अनुमत अनुरोध कर लिए हैं। यदि आप इंटरनेट से कनेक्टेड नहीं हैं, तो इस प्रश्न का जवाब देने के लिए अपने वाई-फ़ाई को चालू करें, यदि स्किप बटन उपलब्ध हो, तो इस प्रश्न को स्किप करें या फिर इंटरनेट से कनेक्ट होने पर इस सर्वेक्षण पर वापस आएँ।";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "टेक्स्ट कॉन्टेंट अधिकतम अनुमत सीमा से अधिक है : %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "स्प्लिट स्क्रीन में कैमरा उपलब्ध नहीं है।";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "ईमेल";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "पासवर्ड";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "पासवर्ड दर्ज करें";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "पुष्टि करें";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "पासवर्ड पुनः दर्ज करें";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "पासवर्ड मेल नहीं खा रहे हैं।";
+"ADDITIONAL_INFO_SECTION_TITLE" = "अतिरिक्त जानकारी";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "साहिल";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "मलिक";
+"GENDER_FORM_ITEM_TITLE" = "लिंग";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "लिंग चुनें";
+"DOB_FORM_ITEM_TITLE" = "जन्मतिथि";
+"DOB_FORM_ITEM_PLACEHOLDER" = "तिथि चुनें";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "सत्यापन";
+"VERIFICATION_STEP_TITLE" = "अपना ईमेल सत्यापित करें";
+"RESEND_EMAIL_LABEL_MESSAGE" = "यदि आपको सत्यापन ईमेल प्राप्त नहीं होता है और आप इसे पुनः प्राप्त करना चाहते हैं तो नीचे दिये गए लिंक पर टैप करें।";
+"RESEND_EMAIL_BUTTON_TITLE" = "सत्यापन ईमेल फिर से भेजें";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "लॉगइन करें";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "पासवर्ड भूल गए?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "पासकोड दर्ज करें";
+"PASSCODE_CONFIRM_MESSAGE" = "पासकोड की पुष्टि करें";
+"PASSCODE_SAVED_MESSAGE" = "पासकोड सहेजा गया";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "पासकोड प्रमाणित किया गया";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "अपना पुराना पासकोड दर्ज करें";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "अपना नया पासकोड दर्ज करें";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "अपने नए पासकोड की पुष्टि करें";
+"PASSCODE_INVALID_ALERT_TITLE" = "ग़लत पासकोड";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "पासकोड एक समान नहीं हैं। पुनः प्रयास करें।";
+"PASSCODE_TOUCH_ID_MESSAGE" = "कृपया Touch ID से प्रमाणित करें।";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID त्रुटि";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "केवल न्यूमैरिक वर्णों की अनुमति है।";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "पासकोड दर्ज करने की प्रक्रिया का संकेतक";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%1$@/%2$@ मान दर्ज किए गए";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "कीचेन आइटम को जोड़ा नहीं जा सका।";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "कीचेन आइटम को अपडेट नहीं किया जा सका।";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "कीचेन आइटम को डिलीट नहीं किया जा सका।";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "कीचेन आइटम को खोजा नहीं जा सका।";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "महिला";
+"GENDER_MALE" = "पुरूष";
+"GENDER_OTHER" = "अन्य";
+
+/* Boolean answer strings */
+"BOOL_NO" = "नहीं";
+"BOOL_YES" = "हाँ";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "उत्तर देने के लिए टैप करें";
+"NULL_ANSWER" = "उत्तर का चयन करें";
+"PLACEHOLDER_IMAGE_CHOICES" = "चयन करने के लिए टैप करें";
+"PLACEHOLDER_LONG_TEXT" = "लिखने के लिए टैप करें";
+
+/* Button titles */
+"BUTTON_AGREE" = "सहमत";
+"BUTTON_CANCEL" = "रद्द करें";
+"BUTTON_OK" = "ठीक";
+"BUTTON_CLEAR" = "साफ़ करें";
+"BUTTON_DISAGREE" = "असहमत";
+"BUTTON_DONE" = "पूर्ण";
+"BUTTON_GET_STARTED" = "आरंभ करें";
+"BUTTON_LEARN_MORE" = "और अधिक जानें";
+"BUTTON_NEXT" = "अगला";
+"BUTTON_SKIP" = "छोड़ें";
+"BUTTON_SKIP_QUESTION" = "यह प्रश्न छोड़ें";
+"BUTTON_START_TIMER" = "टाइमर प्रारंभ करें";
+"BUTTON_OPTION_SAVE" = "बाद के लिए सहेजें";
+"BUTTON_OPTION_DISCARD" = "परिणाम ख़ारिज करें";
+"BUTTON_OPTION_STOP_TASK" = "कार्य समाप्त करें";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "गतिविधि शुरू होने में शेष समय";
+"TASK_COMPLETE_TITLE" = "गतिविधि पूर्ण";
+"TASK_COMPLETE_TEXT" = "आपके डेटा का विश्लेषण किया जाएगा और परिणाम के तैयार होते ही आपको सूचित किया जाएगा।";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "छवि कैप्चर करें";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "छवि पुनः कैप्चर करें";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "कोई कैमरा नहीं मिला। यह चरण पूरा नहीं किया जा सकता है।";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "इस चरण को पूरा करने के लिए “सेटिंग्ज़” में इस ऐप को कैमरे तक पहुँच प्रदान करें।";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "कैप्चर की गई छवियों के लिए कोई आउटपुट निर्देशिका निर्दिष्ट नहीं की गई थी।";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "कैप्चर की गई छवि सहेजी नहीं जा सकी।";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "तंदुरुस्ती";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "दूरी (%@)";
+"FITNESS_HEARTRATE_TITLE" = "हृदय गति (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "%@ तक आराम से बैठें।";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "%@ तक जितना तेज़ हो सके, चलें।";
+"FITNESS_INTRO_TEXT_FORMAT" = "इस गतिविधि द्वारा आपकी हृदय गति का निरीक्षण किया जाता है और यह मापित किया जाता है कि %1$@ में आप कितनी दूर पैदल चल सकते हैं।";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "बाहर %1$@ तक जितनी तेज़ गति से संभव हो, चलें। उसके बाद बैठ जाएँ और आराम से %2$@ तक सुस्ताएँ। आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "चाल और संतुलन";
+"WALK_INTRO_TEXT" = "इस गतिविधि द्वारा आपके पैदल चलने या खड़े रहने पर आपकी चाल और संतुलन का मापन किया जाता है। यदि आप बिना किसी सहायता के सुरक्षित पैदल नहीं चल सकते हैं, तो इसे जारी न रखें।";
+"WALK_INTRO_2_TEXT_%ld" = "ऐसी जगह ढूँढें जहाँ आप बिना किसी सहायता के लगभग %ld क़दम सीधे चल सकें।";
+"WALK_INTRO_2_DETAIL" = "अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का अनुसरण करें।";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "अब %@ तक स्थिर खड़े रहें।";
+"WALK_STAND_INSTRUCTION_FORMAT" = "%@ तक स्थिर खड़े रहें।";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "लगभग %ld कदम सीधे चलें।";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "टैप करने की गति";
+"TAPPING_INTRO_TEXT" = "इस गतिविधि द्वारा आपकी टैप करने की गति का मापन किया जाता है।";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "अपने फ़ोन को किसी समतल सतह पर रखें। %@ के लिए आपकी स्क्रीन पर दो बटन दिखाई देंगे। एक ही हाथ की दो ऊँगलियों से दोनों बटनों को जितना संभव हो सके उतनी तेज़ी से एक के बाद एक दबाएँ।";
+"TAPPING_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"TAP_BUTTON_TITLE" = "टैप करें";
+"TOTAL_TAPS_LABEL" = "कुल टैप";
+"TAPPING_INSTRUCTION" = "दो ऊँगलियों से बटनों को जितना संभव हो सके उतनी तेज़ी से एक के बाद एक दबाएँ।";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "वॉइस";
+"AUDIO_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"AUDIO_INSTRUCTION" = "जितनी देर तक बोल सकें, माइक्रोफ़ोन में “आह” बोलिए।";
+"AUDIO_INTRO_TEXT" = "गहरी साँस लें और जितनी देर तक बोल सकें, माइक्रोफ़ोन में “आह” बोलें। अपनी बोलने की गति और आवाज़ स्थिर रखें ताकि ऑडियो बारों का रंग नीला बना रहे।";
+"AUDIO_INTENDED_USE" = "इस गतिविधि द्वारा आपके फ़ोन के नीचे लगे माइक्रोफ़ोन से आपकी आवाज़ को रिकॉर्ड करके उसका मूल्यांकन किया जाता है।";
+"AUDIO_TOO_LOUD_LABEL" = "बहुत तेज़";
+"AUDIO_GENERIC_ERROR_LABEL" = "ऑडियो रिकॉर्ड करने में असमर्थ";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "टोन ऑडियोमेट्री";
+"TONE_AUDIOMETRY_INTENDED_USE" = "यह गतिविधि अलग-अलग प्रकार की ध्वनियाँ सुनने की आपकी क्षमता का आकलन करती है।";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "आरंभ करने से पहले अपने हेडफ़ोन को प्लग इन करें और कानों पर लगाएं।";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"TONE_AUDIOMETRY_PREP_TEXT" = "अब आपको एक टोन सुनाई देनी चाहिए। अपने उपकरण के किनारे दिए गए नियंत्रणों का उपयोग करके वॉल्यूम समायोजित करें।\n\nजब आप आरंभ करने के लिए तैयार हो जाएँ, तो बटन को टैप करें।";
+"TONE_AUDIOMETRY_INSTRUCTION" = "आपको जितनी बार भी आवाज़ सुनाई दे, उतनी बार बटन को टैप करें।";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, बाएँ";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, दाएँ";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "स्थानिक याददाश्त";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "%@ के चमकने के क्रम को दोहराने के लिए कहकर इस गतिविधि द्वारा आपकी अल्पावधि स्थानिक याददाश्त का मापन किया जाता है।";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "फूलों";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "फूल";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%1$@ में से कुछ एक-एक करके चमकेंगे। उन %2$@ पर उनके चमकने के क्रम में टैप करें।";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%1$@ में से कुछ एक-एक करके चमकेंगे। उन %2$@ पर उनके चमकने के विपरीत क्रम में टैप करें।";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें और फिर ध्यान से देखें।";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "स्कोर";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "%@ को चमकते हुए देखें";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "%@ को उनके चमकने के क्रम में टैप करें";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "%@ को विपरीत क्रम में टैप करें";
+"MEMORY_GAME_COMPLETE_TITLE" = "अनुक्रम पूर्ण";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "जारी रखने के लिए “अगला” पर टैप करें";
+"MEMORY_GAME_FAILED_TITLE" = "पुनः प्रयास करें";
+"MEMORY_GAME_FAILED_MESSAGE" = "आप निर्धारित समय में इसे पूरा नहीं कर पाए। जारी रखने के लिए “अगला” पर टैप करें।";
+"MEMORY_GAME_TIMEOUT_TITLE" = "समय-समाप्त";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "आप निर्धारित समय में इसे पूरा नहीं कर पाए।\nजारी रखने के लिए “अगला” पर टैप करें।";
+"MEMORY_GAME_COMPLETE" = "गेम पूर्ण हुआ";
+"MEMORY_GAME_PAUSED_TITLE" = "ठहरा हुआ";
+"MEMORY_GAME_PAUSED_MESSAGE" = "जारी रखने के लिए “अगला” पर टैप करें";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "प्रतिक्रिया समय";
+"REACTION_TIME_TASK_INTENDED_USE" = "यह गतिविधि किसी दृश्यात्मक संकेत की प्रतिक्रिया देने में आपके द्वारा लिए जाने वाले समय का आकलन करती है।";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "स्क्रीन पर नीले रंग का बिंदु दिखाई देते ही उपकरण को किसी भी दिशा में हिलाएँ। आपसे %D बार ऐसा करने का अनुरोध किया जाएगा।";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %1$@/%2$@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "नीले रंग का वृत्त दिखाई देने पर शीघ्रता से उपकरण को हिलाएँ";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "हनोई का टॉवर";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "इस गतिविधि के द्वारा पहेली को हल करने की आपकी क्षमता का मूल्यांकन किया जाएगा।";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "पूरे स्टैक को चिह्नांकित प्लेटफ़ॉर्म पर कम से कम प्रयासों में स्थानांतरित करें।";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "पहेली हल करें";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %1$@ \n %2$@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "यह पहेली मेरे द्वारा हल नहीं की जा सकती है";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "समयबद्ध चाल";
+"TIMED_WALK_INTRO_DETAIL" = "इस गतिविधि के द्वारा शरीर के निचले हिस्से के कार्य करने की क्षमता को मापा जाता है।";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "ऐसी जगह ढूँढें, यदि संभव हो तो घर के बाहर, जहाँ पर आप लगभग %@ तक जितना संभव हो, उतनी तेज़ी से लेकिन सुरक्षित रूप से सीधे चल सकें। समाप्ति रेखा तक पहुँचने तक गति कम न करें।";
+"TIMED_WALK_INTRO_2_DETAIL" = "आरंभ करने के लिए “अगला” पर टैप करें।";
+"TIMED_WALK_FORM_TITLE" = "सहायक उपकरण";
+"TIMED_WALK_FORM_TEXT" = "प्रत्येक परीक्षण हेतु समान सहायक उपकरण का उपयोग करें।";
+"TIMED_WALK_QUESTION_TEXT" = "क्या आप टखनों और पैरों को सहारा देने वाला उपकरण पहनते हैं?";
+"TIMED_WALK_QUESTION_2_TITLE" = "क्या आप सहायक उपकरण का उपयोग करते हैं?";
+"TIMED_WALK_QUESTION_2_TEXT" = "उत्तर का चयन करने के लिए यहाँ टैप करें।";
+"TIMED_WALK_QUESTION_2_CHOICE" = "कुछ नहीं";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "एक हाथ के लिए बेंत";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "एक हाथ के लिए बैसाखी";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "दोनों हाथों के लिए बेंत";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "दोनों हाथों के लिए बैसाखी";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "वॉकर/रोलेटर";
+"TIMED_WALK_INSTRUCTION_%@" = "सीधी रेखा में लगभग %@ चलें।";
+"TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
+"TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “पूर्ण” पर टैप करें।";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "पेस्ड ऑडिटरी सीरियल ऐडीशन टेस्ट के द्वारा सुनकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PVSAT_INTRO_TEXT" = "पेस्ड विजुअल सीरियल ऐडीशन टेस्ट के द्वारा देखकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PAVSAT_INTRO_TEXT" = "पेस्ड ऑडिटरी एंड विजुअल सीरियल ऐडीशन टेस्ट के द्वारा देख और सुनकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PSAT_INTRO_TEXT_2_%@" = "एकल अंक प्रति %@ सेकंड में प्रस्तुत किए जाते हैं।\nआपको प्रत्येक नए अंक का उससे ठीक पहले वाले अंक से योग करना है।\nध्यान रखें, आपको कुल योग परिकलित नहीं करना है बल्कि केवल अंतिम दो अंकों का योग परिकलित करना है।";
+"PSAT_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"PSAT_INITIAL_INSTRUCTION" = "इस पहले अंक को याद रखें।";
+"PSAT_INSTRUCTION" = "इस नए अंक का पिछले अंक में योग करें।";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-होल पेग परीक्षण";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "छिद्र में पेग को डालने के लिए कहकर इस गतिविधि द्वारा आपके अपर एक्सट्रेमिटी फ़ंक्शन का मापन किया जाता है। आपसे %@ बार ऐसा करने का अनुरोध किया जाएगा।";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "आपके बाएँ और दाएँ, दोनों हाथों का परीक्षण किया जाएगा।\nआपको जितनी जल्दी हो सके, पेग को लेकर छिद्र में डालना होगा और %1$@ बार करने के बाद %2$@ बार पुनः उसे वहाँ से हटाना होगा।";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "आपके दाएँ और बाएँ, दोनों हाथों का परीक्षण किया जाएगा।\nआपको जितनी जल्दी हो सके, पेग को लेकर छिद्र में डालना होगा और %1$@ बार करने के बाद %2$@ बार पुनः उसे वहाँ से हटाना होगा।";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "अपने बाएँ हाथ से पेग को छिद्र में डालें।";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "अपने दाएँ हाथ से पेग को छिद्र में डालें।";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "अपने बाएँ हाथ से पेग को रेखा के पीछे करें।";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "अपने दाएँ हाथ से पेग को रेखा के पीछे करें।";
+"HOLE_PEG_TEST_TEXT" = "दो ऊँगलियों से पेग को उठाएँ।";
+"HOLE_PEG_TEST_TEXT_2" = "पेग को डालने के लिए ऊँगलियों को उठाएँ।";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "अधिकतम संग्रहण सीमा तक पहुँचने के लिए आवश्यक लॉग फ़ाइलें नहीं हटाई जा सकीं";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "विशेषता सेट करने में त्रुटि";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "फ़ाइल डिलीट की गई (अपलोड की गई) के रूप में चिन्हित नहीं है";
+"ERROR_DATALOGGER_MULTIPLE" = "लॉग हटाने में कई त्रुटियाँ";
+"ERROR_RECORDER_NO_DATA" = "कोई संग्रहित डेटा नहीं मिला।";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "कोई आउटपुट निर्देशिका निर्दिष्ट नहीं";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "कोई डेटा नहीं";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "वापस";
+
+"AX_IMAGE_ILLUSTRATION" = "%@ का चित्रांकन";
+
+"AX_SIGNVIEW_LABEL" = "निर्दिष्ट हस्ताक्षर फ़ील्ड";
+"AX_SIGNVIEW_HINT" = "हस्ताक्षर करने के लिए स्क्रीन को स्पर्श करें और अपनी ऊँगली हिलाएँ";
+"AX_SIGNVIEW_SIGNED" = "हस्ताक्षरित";
+"AX_SIGNVIEW_UNSIGNED" = "अहस्ताक्षरित";
+
+"AX_SELECTED" = "चयनित";
+"AX_UNSELECTED" = "अचयनित";
+
+"AX_SLIDER_LABEL" = "प्रतिक्रिया स्लाइडर। %1$@ से %2$@ तक सीमा";
+"AX_UNLABELED_IMAGE" = "बिना लेबल की छवि";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "कार्य आरंभ करें";
+
+"AX.MEMORY.TILE.ACTIVE" = "सक्रिय";
+"AX.MEMORY.TILE.CORRECT" = "सही";
+"AX.MEMORY.TILE.INCORRECT" = "ग़लत";
+"AX.MEMORY.TILE.QUIESCENT" = "निष्क्रिय";
+"AX.MEMORY.TILE.LABEL" = "मेमोरी गेम टाइटल";
+
+"AX_IMAGE_CAPTURE_LABEL" = "पूर्वावलोकन को कैप्चर करें";
+"AX_IMAGE_CAPTURED_LABEL" = "कैप्चर की हुई छवि";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%2$@ आकार के डिस्क पर %1$@ आकार के डिस्क को रखने में असमर्थ";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "लक्ष्य";
+"AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "डिस्क रखने के लिए डबल टैप करें";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "सबसे ऊपर के डिस्क का चयन करने के लिए डबल टैप करें";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं  ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
+
+"AX_GRAPH_RANGE_FORMAT" = "%1$@ से %2$@ तक श्रेणी";
+"AX_GRAPH_AND_SEPARATOR" = " और ";
+"AX_GRAPH_POINT_%@" = "पॉइंट : %@";

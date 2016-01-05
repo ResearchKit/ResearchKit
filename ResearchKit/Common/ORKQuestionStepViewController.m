@@ -42,6 +42,7 @@
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKSurveyAnswerCellForImageSelection.h"
+#import "ORKSurveyAnswerCellForLocation.h"
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
 #import "ORKCustomStepView.h"
@@ -59,9 +60,7 @@
 
 
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
-    ORKQuestionSectionSpace1 = 0,
-    ORKQuestionSectionAnswer = 1,
-    ORKQuestionSectionSpace2 = 2,
+    ORKQuestionSectionAnswer = 0,
     ORKQuestionSection_COUNT
 };
 
@@ -276,6 +275,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if (!scheduledRefresh) {
         [self refreshDefaults];
     }
+    
+    [_tableContainer layoutIfNeeded];
 }
 
 - (void)answerDidChange {
@@ -308,7 +309,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)defaultAnswerDidChange {
     id defaultAnswer = _defaultAnswer;
-    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.hasChangedAnswer) {
+    if (![self hasAnswer] && defaultAnswer && !self.hasChangedAnswer) {
         _answer = defaultAnswer;
         
         [self answerDidChange];
@@ -512,10 +513,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == ORKQuestionSectionSpace1 || section == ORKQuestionSectionSpace2) {
-        return 1;
-    }
-    
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
     if (section == ORKQuestionSectionAnswer) {
@@ -543,7 +540,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDate) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class]};
+                               @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
+                               @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
     });
     
     // SingleSelectionPicker Cell && Other Cells
@@ -588,17 +586,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.layoutMargins = UIEdgeInsetsZero;
     
-    if (indexPath.section == ORKQuestionSectionSpace1 || indexPath.section == ORKQuestionSectionSpace2) {
-        static NSString *SpaceIdentifier = @"Space";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpaceIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpaceIdentifier];
-        }
-        
-        return cell;
-    }
-    
-    
     //////////////////////////////////
     // Section for Answer Area
     //////////////////////////////////
@@ -620,12 +607,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
-    if (indexPath.section == ORKQuestionSectionSpace2) {
-        // Hide double bottom separator (the last answer cell already has one)
-        cell.separatorInset = (UIEdgeInsets){.left = ORKScreenMetricMaxDimension};
-    } else {
-        cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
-    };
+    cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
 }
 
 - (BOOL)shouldContinue {
@@ -695,17 +677,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         // Proceed as continueButton tapped
         ORKSuppressPerformSelectorWarning(
                                          [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
-    } else {
-        [_tableView beginUpdates];
-        [_tableView endUpdates];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == ORKQuestionSectionSpace1 || indexPath.section == ORKQuestionSectionSpace2) {
-        return 1;
-    }
-    
     CGFloat height = [ORKSurveyAnswerCell suggestedCellHeightForView:tableView];
     
     switch (self.questionStep.questionType) {
@@ -760,6 +735,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
+}
+
+- (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";

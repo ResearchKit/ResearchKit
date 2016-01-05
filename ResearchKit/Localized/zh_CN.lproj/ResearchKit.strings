@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "同意";
+"CONSENT_NAME_GIVEN" = "名";
+"CONSENT_NAME_FAMILY" = "姓";
+"CONSENT_NAME_PLACEHOLDER" = "必填";
+"CONSENT_REVIEW_TITLE" = "检查";
+"CONSENT_REVIEW_INSTRUCTION" = "请检查下方的表单，确认后请轻按“同意”。";
+"CONSENT_REVIEW_ALERT_TITLE" = "检查";
+"CONSENT_SIGNATURE_TITLE" = "签名";
+"CONSENT_SIGNATURE_INSTRUCTION" = "请用手指在下方的横线上签名。";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "在此签名";
+"CONSENT_PAGE_NUMBER_FORMAT" = "第 %1$ld/%2$ld 页";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "欢迎使用";
+"CONSENT_SECTION_DATA_GATHERING" = "数据收集";
+"CONSENT_SECTION_PRIVACY" = "隐私权";
+"CONSENT_SECTION_DATA_USE" = "数据使用";
+"CONSENT_SECTION_STUDY_SURVEY" = "研究调查";
+"CONSENT_SECTION_STUDY_TASKS" = "研究任务";
+"CONSENT_SECTION_TIME_COMMITMENT" = "时间保证";
+"CONSENT_SECTION_WITHDRAWING" = "退出研究";
+"CONSENT_LEARN_MORE_TITLE" = "了解更多";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "了解有关数据收集方式的更多信息";
+"LEARN_MORE_DATA_USE" = "了解有关数据使用方式的更多信息";
+"LEARN_MORE_PRIVACY" = "了解有关隐私和身份保护方式的更多信息";
+"LEARN_MORE_WELCOME" = "首先了解有关研究的更多信息";
+"LEARN_MORE_STUDY_SURVEY" = "了解有关研究调查的更多信息";
+"LEARN_MORE_TIME_COMMITMENT" = "了解有关研究所占用时间的更多信息";
+"LEARN_MORE_TASKS" = "了解有关所涉及任务的更多信息";
+"LEARN_MORE_WITHDRAWING" = "了解有关退出研究的更多信息";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "共享选项";
+"CONSENT_SHARE_WIDELY_%@" = "与“%@”及全世界符合资格的研究者共享我的数据";
+"CONSENT_SHARE_ONLY_%@" = "仅与“%@”共享我的数据";
+"CONSENT_SHARING_DESCRIPTION_%@" = "“%@”将从您参与的此研究中接收研究数据。\n\n更广泛地共享经加密的研究数据（不包含诸如姓名的信息）可能有助于本次以及未来的研究。";
+"LEARN_MORE_CONSENT_SHARING" = "了解有关数据共享的更多信息";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@的姓名（正楷书写）";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@的签名";
+"CONSENT_DOC_LINE_DATE" = "日期";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "第 %1$@/%2$@ 步";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "无效值";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ 超出了允许的最大值 (%2$@)。";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ 低于允许的最小值 (%2$@)。";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ 不是有效值。";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "无效的电子邮件地址：%@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "输入地址";
+"LOCATION_ERROR_TITLE" = "无法找到指定地址";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "未能解析您的当前位置。请键入地址或转移到 GPS 信号较好的位置（若条件允许）。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "访问位置服务已被拒绝。请通过“设置”来授权此应用使用位置服务。";
+"LOCATION_ERROR_GEOCODE" = "未能找到所输入地址的相关结果。请确定该地址是否有效。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "您未连接到互联网，或已超出地址查询请求的次数上限。如果未连接到互联网，请打开您的 Wi-Fi 以回答此问题，跳过按钮可用时可跳过此问题，或在连接到互联网后继续参与该调查。如果超出请求次数上限，请等待几分钟后再次尝试。";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文本内容超过最大长度：%@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "相机在拆分屏幕中不可用。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "电子邮件";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "密码";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "输入密码";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "确认";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "再次输入密码";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密码不匹配。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "其他信息";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "性别";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "选择性别";
+"DOB_FORM_ITEM_TITLE" = "出生日期";
+"DOB_FORM_ITEM_PLACEHOLDER" = "选择日期";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "验证";
+"VERIFICATION_STEP_TITLE" = "验证您的电子邮件";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果您未收到验证电子邮件并希望再收一次，请轻点下方的链接。";
+"RESEND_EMAIL_BUTTON_TITLE" = "重新发送验证电子邮件";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "登录";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘记了密码？";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "输入口令";
+"PASSCODE_CONFIRM_MESSAGE" = "确认口令";
+"PASSCODE_SAVED_MESSAGE" = "口令已存储";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "口令已鉴定";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "输入旧口令";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "输入新口令";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "确认新口令";
+"PASSCODE_INVALID_ALERT_TITLE" = "口令不正确";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "口令不匹配。请再试一次。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "请使用 Touch ID 进行鉴定";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 错误";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "仅允许数字字符。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "口令输入进度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已输入 %@/%@ 位";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "无法添加钥匙串项。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "无法更新钥匙串项。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "无法删除钥匙串项。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "无法找到钥匙串项。";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "女";
+"GENDER_MALE" = "男";
+"GENDER_OTHER" = "其他";
+
+/* Boolean answer strings */
+"BOOL_NO" = "否";
+"BOOL_YES" = "是";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "轻按来回答";
+"NULL_ANSWER" = "选择一个答案";
+"PLACEHOLDER_IMAGE_CHOICES" = "轻按来选择";
+"PLACEHOLDER_LONG_TEXT" = "轻按来书写";
+
+/* Button titles */
+"BUTTON_AGREE" = "同意";
+"BUTTON_CANCEL" = "取消";
+"BUTTON_OK" = "好";
+"BUTTON_CLEAR" = "清除";
+"BUTTON_DISAGREE" = "不同意";
+"BUTTON_DONE" = "完成";
+"BUTTON_GET_STARTED" = "开始";
+"BUTTON_LEARN_MORE" = "了解更多";
+"BUTTON_NEXT" = "下一步";
+"BUTTON_SKIP" = "跳过";
+"BUTTON_SKIP_QUESTION" = "跳过此问题";
+"BUTTON_START_TIMER" = "启动定时器";
+"BUTTON_OPTION_SAVE" = "存储以稍后查看";
+"BUTTON_OPTION_DISCARD" = "放弃结果";
+"BUTTON_OPTION_STOP_TASK" = "结束任务";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "即将开始活动";
+"TASK_COMPLETE_TITLE" = "活动完成";
+"TASK_COMPLETE_TEXT" = "将对您的数据进行分析并在结果可用时通知您。";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "捕捉图像";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新捕捉图像";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "未找到相机。此步骤无法完成。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "为了完成此步骤，请在“设置”中允许本应用程序访问相机。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "未指定捕捉图像的输出目录。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "无法存储捕捉的图像。";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "健身";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "距离（%@）";
+"FITNESS_HEARTRATE_TITLE" = "心率（次/分）";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "请静坐 %@。";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "以最快速度步行 %@。";
+"FITNESS_INTRO_TEXT_FORMAT" = "本活动监控您的心率并测量 %1$@内的步行距离。";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "请在室外以最快的速度步行 %1$@。步行完成后，请静坐 %2$@。若要开始，请轻按“开始”。";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "步态和平衡";
+"WALK_INTRO_TEXT" = "本活动测量您在步行和站立时的步态和平衡。请仅在步行安全区域（无外力辅助条件下）进行。";
+"WALK_INTRO_2_TEXT_%ld" = "请在步行安全区域（无外力辅助条件下）直线行走大约 %ld 步。";
+"WALK_INTRO_2_DETAIL" = "请将手机放入口袋或背包中，然后跟随音频指示操作。";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在请站立 %@。";
+"WALK_STAND_INSTRUCTION_FORMAT" = "请站立 %@。";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "转身并走回起点。";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "请直线步行最多 %ld 步。";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "轻按速度";
+"TAPPING_INTRO_TEXT" = "本活动测量您的轻按速度。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "请将您的手机置于平面。两个按钮将在屏幕上显示 %@。使用同一只手的两个手指，以最快速度交替轻按这两个按钮。";
+"TAPPING_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"TAP_BUTTON_TITLE" = "轻按";
+"TOTAL_TAPS_LABEL" = "轻按总次数";
+"TAPPING_INSTRUCTION" = "使用两个手指以最快速度轻按按钮。";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "嗓音";
+"AUDIO_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"AUDIO_INSTRUCTION" = "请对着麦克风说“啊啊啊”，时间越长越好。";
+"AUDIO_INTRO_TEXT" = "请深呼吸并对着麦克风说“啊啊啊”，时间越长越好。保持平稳的声音大小以使音频条保持蓝色。";
+"AUDIO_INTENDED_USE" = "本活动通过将您的嗓音录制到手机底部的麦克风来对其进行评估。";
+"AUDIO_TOO_LOUD_LABEL" = "太大声";
+"AUDIO_GENERIC_ERROR_LABEL" = "无法录音";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
+"TONE_AUDIOMETRY_INTENDED_USE" = "本活动测量您是否可听见不同的声音。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "请在开始前插入并戴上耳机。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "现在您应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后轻按该按钮来开始测试。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "请在每次开始听到声音时轻按该按钮。";
+"TONE_LABEL_%@_LEFT" = "%@ Hz，左";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "空间记忆";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "本活动通过重现%@亮起的顺序来测量您的短期空间记忆能力。";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花朵";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分%@一次只亮起一个。请以亮起的顺序轻按这些%@。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "部分%@一次只亮起一个。请以与亮起相反的顺序轻按这些%@。";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "若要开始，请轻按“开始”，然后留心观察。";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "得分";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "观察亮起的%@";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "请以%@亮起的顺序轻按它们";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "请以相反的顺序轻按%@";
+"MEMORY_GAME_COMPLETE_TITLE" = "顺序完成";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "轻按“下一步”来继续";
+"MEMORY_GAME_FAILED_TITLE" = "再试一次";
+"MEMORY_GAME_FAILED_MESSAGE" = "您好像记错了顺序。轻按“下一步”来继续。";
+"MEMORY_GAME_TIMEOUT_TITLE" = "时间已到";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "时间已到。\n轻按“下一步”来继续。";
+"MEMORY_GAME_COMPLETE" = "游戏完成";
+"MEMORY_GAME_PAUSED_TITLE" = "暂停";
+"MEMORY_GAME_PAUSED_MESSAGE" = "轻按“下一步”来继续";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反应时间";
+"REACTION_TIME_TASK_INTENDED_USE" = "本活动评估您对视觉提示的反应时间。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕出现蓝色圆点时立刻朝任意方向摇动设备。您将需要完成此操作 %D 次。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次尝试";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "蓝色圆圈出现时快速摇动设备";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "汉诺塔";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "本活动评估您的解谜能力。";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "将整个圆盘堆以尽可能少的步数移到高亮显示的平台。";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解谜";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移动次数：%@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我解不开这个谜";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "计时步行";
+"TIMED_WALK_INTRO_DETAIL" = "本活动测量您的下肢功能。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "找到一处地点，最好是户外，能够安全地以最快速度直线步行约 %@。请不要放慢脚步，直到跨过终点线。";
+"TIMED_WALK_INTRO_2_DETAIL" = "轻点“下一步”来开始。";
+"TIMED_WALK_FORM_TITLE" = "辅助设备";
+"TIMED_WALK_FORM_TEXT" = "在每次测试中使用相同的辅助设备。";
+"TIMED_WALK_QUESTION_TEXT" = "您是否穿戴了踝足矫形器？";
+"TIMED_WALK_QUESTION_2_TITLE" = "您是否使用了辅助设备？";
+"TIMED_WALK_QUESTION_2_TEXT" = "轻点此处来选择答案。";
+"TIMED_WALK_QUESTION_2_CHOICE" = "无";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "单杖";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "单拐";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "双杖";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "双拐";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "轮椅/助行车";
+"TIMED_WALK_INSTRUCTION_%@" = "直线步行最多 %@。";
+"TIMED_WALK_INSTRUCTION_2" = "转身并走回起点。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成后，轻点“完成”。";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "“步进式听觉累加实验”测量您的听觉信息处理速度和计算能力。";
+"PVSAT_INTRO_TEXT" = "“步进式视觉累加实验”测量您的视觉信息处理速度和计算能力。";
+"PAVSAT_INTRO_TEXT" = "“步进式听觉和视觉累加实验”测量您的听觉和视觉信息处理速度和计算能力。";
+"PSAT_INTRO_TEXT_2_%@" = "每隔 %@ 秒钟会显示一个一位数。\n您必须将每个新数字与前面相邻的数字相加。\n注意，您不准计算累加值，只能计算最后两个数字之和。";
+"PSAT_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"PSAT_INITIAL_INSTRUCTION" = "记住这第一个数字。";
+"PSAT_INSTRUCTION" = "将这个新数字与前一个数字相加。";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ 孔插棒测试";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "本活动通过将圆饼放入圆孔来测量您的上肢功能。您将需要完成此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "您的左手和右手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成 %@ 次后，再将其移除 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "您的右手和左手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成 %@ 次后，再将其移除 %@ 次。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_TEXT" = "用两个手指拿起圆饼。";
+"HOLE_PEG_TEST_TEXT_2" = "抬起手指以放下圆饼。";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "无法移除足够的日志文件来达到阈值";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "设定属性时出错";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "文件未标记为删除（未标记为上传）";
+"ERROR_DATALOGGER_MULTIPLE" = "移除日志时出现多个错误";
+"ERROR_RECORDER_NO_DATA" = "未找到任何已收集的数据。";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定输出目录";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "无数据";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "上一步";
+
+"AX_IMAGE_ILLUSTRATION" = "“%@”插图";
+
+"AX_SIGNVIEW_LABEL" = "指定签名栏";
+"AX_SIGNVIEW_HINT" = "触摸屏幕并移动手指来签名";
+"AX_SIGNVIEW_SIGNED" = "已签名";
+"AX_SIGNVIEW_UNSIGNED" = "未签名";
+
+"AX_SELECTED" = "已选择";
+"AX_UNSELECTED" = "未选择";
+
+"AX_SLIDER_LABEL" = "响应滑块。范围：%@ ~ %@";
+"AX_UNLABELED_IMAGE" = "无标签图像";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "开始任务";
+
+"AX.MEMORY.TILE.ACTIVE" = "活跃";
+"AX.MEMORY.TILE.CORRECT" = "正确";
+"AX.MEMORY.TILE.INCORRECT" = "不正确";
+"AX.MEMORY.TILE.QUIESCENT" = "不活跃";
+"AX.MEMORY.TILE.LABEL" = "记忆游戏拼贴";
+
+"AX_IMAGE_CAPTURE_LABEL" = "捕捉预览";
+"AX_IMAGE_CAPTURED_LABEL" = "捕捉的图像";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "无法将大小为“%@”的圆盘放在大小为“%@”的圆盘上";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "目标圆盘";
+"AX_TOWER_OF_HANOI_TOWER" = "塔";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "轻点两下来放置圆盘";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "轻点两下来选择最顶端的圆盘";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "包含圆盘，大小为“%@”";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
+
+"AX_GRAPH_RANGE_FORMAT" = "范围：%@ ~ %@";
+"AX_GRAPH_AND_SEPARATOR" = "、";
+"AX_GRAPH_POINT_%@" = "分数：%@";
