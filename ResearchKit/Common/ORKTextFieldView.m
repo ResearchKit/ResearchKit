@@ -194,7 +194,6 @@ static NSString *const FilledBulletString = @"\u25CF";
 
     // re-layout to position the suffix
     [self setNeedsLayout];
-    [self layoutIfNeeded]; // layout immediatly to avoid animation glitch in which the unit label frame grows from left to right when tapping on an empty field with unit and no placeholder
 }
 
 - (void)ork_updateSuffix:(NSString *)suffix {
@@ -278,6 +277,7 @@ static NSString *const FilledBulletString = @"\u25CF";
         }
     }
     [self invalidateIntrinsicContentSize];
+    [self layoutIfNeeded]; // layout immediatly to avoid animation glitch in which the unit label frame grows from left to right
 }
 
 - (void)textFieldTextDidBeginEditing:(NSNotification *)notification {
