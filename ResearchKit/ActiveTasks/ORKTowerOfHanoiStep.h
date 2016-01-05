@@ -34,6 +34,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Tower of Hanoi step.
+ 
+ This step is used to present the interactive Tower of Hanoi activity.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKTowerOfHanoiStep : ORKActiveStep
 
