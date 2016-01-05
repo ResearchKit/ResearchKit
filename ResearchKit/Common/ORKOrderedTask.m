@@ -81,6 +81,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         
         _identifier = [identifier copy];
         _steps = steps;
+        
+        [self validateParameters];
     }
     return self;
 }
