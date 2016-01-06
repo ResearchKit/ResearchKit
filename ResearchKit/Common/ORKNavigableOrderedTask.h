@@ -45,8 +45,18 @@ NS_ASSUME_NONNULL_BEGIN
  `ORKStepNavigationRule` and attach them to trigger steps by using the
  `setNavigationRule:forTriggerStepIdentifier:` method.
  
- For example, if you want to display a survey question only when the user answered yes to a previous
- question, you can use the `ORKPredicateStepNavigationRule` class; or if you want to define an arbitrary jump between two steps, you can use the `ORKDirectStepNavigationRule` class.
+ For example, if you want to display a survey question only when the user answered Yes to a previous
+ question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump
+ between two steps you can use `ORKDirectStepNavigationRule`.
+ 
+ Navigable ordered tasks support looping over previously visited steps. Note, however, that results
+ for steps that are visited more than once will be ovewritten when you revisit the step on the loop.
+ Thus, going over a loop will produce duplicate results within the task results for the steps that
+ are seen more than once, but all the duplicate step results will point to the same result instance:
+ the one corresponding to the last time you visited the step.
+ 
+ The same applies when navigating backwards over looped steps: only your last valid answer is shown
+ every time you encounter a revisited step.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKNavigableOrderedTask : ORKOrderedTask
@@ -87,6 +97,42 @@ ORK_CLASS_AVAILABLE
  Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+
+@end
+
+
+@interface ORKNavigableOrderedTask (ORKPredefinedActiveTask)
+
+/**
+ Returns a predefined task that measures the upper extremity function.
+ 
+ In a hole peg test task, the participant is asked to fill holes with pegs.
+ 
+ A hole peg test task can be used to assess arm and hand function, especially in patients with severe disability.
+ 
+ Data collected in this task is in the form of an `ORKHolePegTestResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text will be displayed.
+ @param dominantHand            The participant dominant hand that will be tested first.
+ @param numberOfPegs            The number of pegs to place in the pegboard.
+ @param threshold               The threshold value used for the detection area.
+ @param rotated                 A test variant that also requires peg rotation.
+ @param timeLimit               The duration allowed to validate the peg position.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                              dominantHand:(ORKBodySagittal)dominantHand
+                                              numberOfPegs:(int)numberOfPegs
+                                                 threshold:(double)threshold
+                                                   rotated:(BOOL)rotated
+                                                 timeLimit:(NSTimeInterval)timeLimit
+                                                   options:(ORKPredefinedTaskOption)options;
 
 @end
 

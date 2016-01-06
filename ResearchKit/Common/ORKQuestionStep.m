@@ -32,6 +32,7 @@
 #import "ORKQuestionStep.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKAnswerFormat_Private.h"
 #import "ORKStep_Private.h"
 #import "ORKQuestionStepViewController.h"
 #import "ORKDefines_Private.h"
@@ -50,6 +51,18 @@
     ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
     step.title = title;
     step.answerFormat = answer;
+    return step;
+}
+
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                                      text:(nullable NSString *)text
+                                    answer:(nullable ORKAnswerFormat *)answerFormat {
+
+    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
+    step.title = title;
+    step.text = text;
+    step.answerFormat = answerFormat;
     return step;
 }
 
@@ -74,6 +87,13 @@
 
 - (void)validateParameters {
     [super validateParameters];
+    
+    if([self.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"ORKConfirmTextAnswerFormat can only be used with an ORKFormStep."
+                                     userInfo:nil];
+    }
+    
     [[self impliedAnswerFormat] validateParameters];
 }
 
@@ -145,8 +165,8 @@
 }
 
 - (BOOL)isFormatFitsChoiceCells {
-    return ((self.questionType == ORKQuestionTypeSingleChoice && NO==[self isFormatChoiceWithImageOptions] && NO==[self isFormatChoiceValuePicker]) ||
-            (self.questionType == ORKQuestionTypeMultipleChoice && NO==[self isFormatChoiceWithImageOptions]) ||
+    return ((self.questionType == ORKQuestionTypeSingleChoice && ![self isFormatChoiceWithImageOptions] && ![self isFormatChoiceValuePicker]) ||
+            (self.questionType == ORKQuestionTypeMultipleChoice && ![self isFormatChoiceWithImageOptions]) ||
             self.questionType == ORKQuestionTypeBoolean);
 }
 

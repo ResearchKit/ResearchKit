@@ -37,7 +37,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 id ORKNullAnswerValue();
-BOOL ORKIsAnswerEmpty(__nullable id answer);
+BOOL ORKIsAnswerEmpty(_Nullable id answer);
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
 NSString *ORKHKBloodTypeString(HKBloodType bloodType);
@@ -61,6 +61,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeOfDayAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKNumericAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKScaleAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKContinuousScaleAnswerFormat);
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat);
 
@@ -123,7 +124,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 - (nullable NSNumber *)minimumNumber;
 - (nullable NSNumber *)maximumNumber;
-- (nullable NSNumber *)defaultNumber;
+- (nullable id)defaultAnswer;
 - (nullable NSString *)localizedStringForNumber:(nullable NSNumber *)number;
 - (NSInteger)numberOfSteps;
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
@@ -136,12 +137,26 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @end
 
 
+@protocol ORKTextScaleAnswerFormatProvider <ORKScaleAnswerFormatProvider>
+
+- (NSArray<ORKTextChoice *> *)textChoices;
+- (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
+- (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value;
+
+@end
+
+
 @interface ORKScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
 
 @end
 
 
 @interface ORKContinuousScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
+
+@end
+
+
+@interface ORKTextScaleAnswerFormat () <ORKTextScaleAnswerFormatProvider>
 
 @end
 
@@ -183,8 +198,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @interface ORKTextAnswerFormat ()
 
-@property (nonatomic, assign, getter=isEmailAddress) BOOL emailAddress;
-
 @end
 
 
@@ -201,6 +214,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
 

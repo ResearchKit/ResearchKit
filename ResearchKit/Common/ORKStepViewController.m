@@ -121,8 +121,8 @@
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot set step after presenting step view controller" userInfo:nil];
     }
-    if ( step && nil == [step identifier]) {
-        NSLog(@"%@ Step's identifier should not be nil.",  NSStringFromSelector(_cmd));
+    if (step && step.identifier == nil) {
+        ORK_Log_Warning(@"Step identifier should not be nil.");
     }
     
     _step = step;
@@ -265,11 +265,11 @@
 
 - (ORKStepResult *)result {
     
-    ORKStepResult *sResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    sResult.startDate = self.presentedDate;
-    sResult.endDate = self.dismissedDate? :[NSDate date];
+    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
+    stepResult.startDate = self.presentedDate;
+    stepResult.endDate = self.dismissedDate? :[NSDate date];
     
-    return sResult;
+    return stepResult;
 }
 
 - (void)notifyDelegateOnResultChange {
@@ -282,6 +282,16 @@
 
 - (BOOL)hasBeenPresented {
     return _hasBeenPresented;
+}
+
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    // The default values for a view controller's supported interface orientations is set to
+    // UIInterfaceOrientationMaskAll for the iPad idiom and UIInterfaceOrientationMaskAllButUpsideDown for the iPhone idiom.
+    UIInterfaceOrientationMask supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
+    }
+    return supportedOrientations;
 }
 
 #pragma mark - Action Handlers
@@ -317,12 +327,15 @@
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
-    
-    if (! [text length]) {
+    [self showValidityAlertWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil) message:text];
+}
+
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if (![title length] && ![message length]) {
         // No alert if the value is empty
         return;
     }
-    if (_dismissing || ![self isViewLoaded] || ! [self.view window]) {
+    if (_dismissing || ![self isViewLoaded] || !self.view.window) {
         // No alert if not in view chain.
         return;
     }
@@ -331,8 +344,8 @@
         return;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil)
-                                                                   message:text
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
@@ -344,6 +357,7 @@
         _presentingAlert = NO;
     }];
 }
+
 
 #pragma mark - UIStateRestoring
 
@@ -364,16 +378,16 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     
     self.outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryKey]);
     
-    if (! self.step) {
+    if (!self.step) {
         // Just logging to the console in this case, since this can happen during a taskVC restoration of a dynamic task.
         // The step VC will get restored, but then never added back to the hierarchy.
-        NSLog(@"%@",[NSString stringWithFormat:@"WARNING: No step provided while restoring %@", NSStringFromClass([self class])]);
+        ORK_Log_Warning(@"%@",[NSString stringWithFormat:@"No step provided while restoring %@", NSStringFromClass([self class])]);
     }
     
     self.presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDateRestoreKey];
     self.restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
     
-    if (self.step && _restoredStepIdentifier && ! [self.step.identifier isEqualToString:_restoredStepIdentifier]) {
+    if (self.step && _restoredStepIdentifier && ![self.step.identifier isEqualToString:_restoredStepIdentifier]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
@@ -382,7 +396,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     ORKStepViewController *viewController = [[[self class] alloc] initWithStep:nil];
-    viewController.restorationIdentifier = [identifierComponents lastObject];
+    viewController.restorationIdentifier = identifierComponents.lastObject;
     viewController.restorationClass = self;
     return viewController;
 }

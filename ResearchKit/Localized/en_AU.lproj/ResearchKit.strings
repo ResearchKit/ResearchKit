@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Consent";
+"CONSENT_NAME_GIVEN" = "First Name";
+"CONSENT_NAME_FAMILY" = "Last Name";
+"CONSENT_NAME_PLACEHOLDER" = "Required";
+"CONSENT_REVIEW_TITLE" = "Review";
+"CONSENT_REVIEW_INSTRUCTION" = "Review the form below and tap Agree if you're ready to continue.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Review";
+"CONSENT_SIGNATURE_TITLE" = "Signature";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger on the line below.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Welcome";
+"CONSENT_SECTION_DATA_GATHERING" = "Data Gathering";
+"CONSENT_SECTION_PRIVACY" = "Privacy";
+"CONSENT_SECTION_DATA_USE" = "Data Use";
+"CONSENT_SECTION_STUDY_SURVEY" = "Study Survey";
+"CONSENT_SECTION_STUDY_TASKS" = "Study Tasks";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Time Commitment";
+"CONSENT_SECTION_WITHDRAWING" = "Withdrawing";
+"CONSENT_LEARN_MORE_TITLE" = "Learn More";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Learn more about how data is gathered";
+"LEARN_MORE_DATA_USE" = "Learn more about how data is used";
+"LEARN_MORE_PRIVACY" = "Learn more about how your privacy and identity are protected";
+"LEARN_MORE_WELCOME" = "Learn more about the study first";
+"LEARN_MORE_STUDY_SURVEY" = "Learn more about the study survey";
+"LEARN_MORE_TIME_COMMITMENT" = "Learn more about the study's impact on your time";
+"LEARN_MORE_TASKS" = "Learn more about the tasks involved";
+"LEARN_MORE_WITHDRAWING" = "Learn more about withdrawing";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Sharing Options";
+"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
+"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
+"LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@'s Name (printed)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@'s Signature";
+"CONSENT_DOC_LINE_DATE" = "Date";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Step %1$@ of %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Invalid value";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
+"LOCATION_ERROR_TITLE" = "Could not Find Specified Address";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
+"LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the Internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the Internet, please turn on your Wi-Fi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the Internet. Otherwise, please try again in a few minutes.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Gender";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
+"DOB_FORM_ITEM_TITLE" = "Birthdate";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verification";
+"VERIFICATION_STEP_TITLE" = "Verify your Email";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tap on the link below if you did not receive a verification email and would like it sent again.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
+"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Passcode Incorrect";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Female";
+"GENDER_MALE" = "Male";
+"GENDER_OTHER" = "Other";
+
+/* Boolean answer strings */
+"BOOL_NO" = "No";
+"BOOL_YES" = "Yes";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
+"NULL_ANSWER" = "Select an answer";
+"PLACEHOLDER_IMAGE_CHOICES" = "Tap to select";
+"PLACEHOLDER_LONG_TEXT" = "Tap to write";
+
+/* Button titles */
+"BUTTON_AGREE" = "Agree";
+"BUTTON_CANCEL" = "Cancel";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Clear";
+"BUTTON_DISAGREE" = "Disagree";
+"BUTTON_DONE" = "Done";
+"BUTTON_GET_STARTED" = "Get Started";
+"BUTTON_LEARN_MORE" = "Learn more";
+"BUTTON_NEXT" = "Next";
+"BUTTON_SKIP" = "Skip";
+"BUTTON_SKIP_QUESTION" = "Skip this question";
+"BUTTON_START_TIMER" = "Start Timer";
+"BUTTON_OPTION_SAVE" = "Save for Later";
+"BUTTON_OPTION_DISCARD" = "Discard Results";
+"BUTTON_OPTION_STOP_TASK" = "End Task";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Starting activity in";
+"TASK_COMPLETE_TITLE" = "Activity Complete";
+"TASK_COMPLETE_TEXT" = "Your data will be analysed and you will be notified when your results are ready.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Heart Rate (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sit comfortably for %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Walk as fast as you can for %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "This activity monitors your heart rate and measures how far you can walk in %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Walk outdoors at your fastest possible pace for %1$@. When you're done, sit and rest comfortably for %2$@. To begin, tap Get Started.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gait and Balance";
+"WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
+"WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
+"WALK_INTRO_2_DETAIL" = "Put your phone in a pocket or bag and follow the audio instructions.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around and walk back to where you started.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Tapping Speed";
+"TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Rest your phone on a flat surface. Two buttons will appear on your screen for %@. Using two fingers on the same hand, take turns tapping the buttons as quickly as you can.";
+"TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TAP_BUTTON_TITLE" = "Tap";
+"TOTAL_TAPS_LABEL" = "Total Taps";
+"TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Voice";
+"AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
+"AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
+"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
+"AUDIO_TOO_LOUD_LABEL" = "Too Loud";
+"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap the button when you are ready to begin.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time you start hearing a sound.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flowers";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flowers";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "To begin, tap Get Started, then watch closely.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Score";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Watch the %@ light up";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tap the %@ in the order they lit up";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tap the %@ in reverse order";
+"MEMORY_GAME_COMPLETE_TITLE" = "Sequence Complete";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "To continue, tap Next";
+"MEMORY_GAME_FAILED_TITLE" = "Try Again";
+"MEMORY_GAME_FAILED_MESSAGE" = "You didn't quite make it through that time. Tap Next to continue.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Time's Up";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "You ran out of time.\nTap Next to continue.";
+"MEMORY_GAME_COMPLETE" = "Game Complete";
+"MEMORY_GAME_PAUSED_TITLE" = "Paused";
+"MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaction Time";
+"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Timed Walk";
+"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
+"TIMED_WALK_FORM_TITLE" = "Assistive device";
+"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
+"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "None";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
+"TIMED_WALK_INSTRUCTION_2" = "Turn around and walk back to where you started.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
+"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
+"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
+"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
+"PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
+"PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole and, once done %@ times, remove it again %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole and, once done %@ times, remove it again %@ times.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Put the peg in the hole using your left hand.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Put the peg in the hole using your right hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Put the peg behind the line using your left hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Put the peg behind the line using your right hand.";
+"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
+"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error setting attribute";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "File not marked deleted (not marked uploaded)";
+"ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
+"ERROR_RECORDER_NO_DATA" = "No collected data was found.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No Data";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Back";
+
+"AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
+
+"AX_SIGNVIEW_LABEL" = "Designated signature field";
+"AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
+"AX_SIGNVIEW_SIGNED" = "Signed";
+"AX_SIGNVIEW_UNSIGNED" = "Unsigned";
+
+"AX_SELECTED" = "Selected";
+"AX_UNSELECTED" = "Un-selected";
+
+"AX_SLIDER_LABEL" = "Response slider. Range from %@ to %@";
+"AX_UNLABELED_IMAGE" = "Unlabelled image";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Begin task";
+
+"AX.MEMORY.TILE.ACTIVE" = "active";
+"AX.MEMORY.TILE.CORRECT" = "correct";
+"AX.MEMORY.TILE.INCORRECT" = "incorrect";
+"AX.MEMORY.TILE.QUIESCENT" = "quiescent";
+"AX.MEMORY.TILE.LABEL" = "Memory game tile";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
+"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
+"AX_TOWER_OF_HANOI_TOWER" = "Tower";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
+
+"AX_GRAPH_RANGE_FORMAT" = "Range from %@ to %@";
+"AX_GRAPH_AND_SEPARATOR" = " and ";
+"AX_GRAPH_POINT_%@" = "Point: %@";

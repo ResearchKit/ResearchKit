@@ -70,7 +70,7 @@
     self.verticalCenteringEnabled = isOverview;
     self.continueHugsContent =  isOverview;
     
-    self.headerView.instructionLabel.hidden = ! [[consentSection summary] length];
+    self.headerView.instructionLabel.hidden = ![consentSection summary].length;
     self.headerView.captionLabel.text = consentSection.title;
     
     self.imageView.image = consentSection.image;
@@ -142,7 +142,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     _sceneView.continueSkipContainer.continueButtonItem = _continueButtonItem;
     _sceneView.imageView.hidden = _imageHidden;
     
-    if ([_section.content length]||[_section.htmlContent length] || _section.contentURL) {
+    if (_section.content.length||_section.htmlContent.length || _section.contentURL) {
         _sceneView.headerView.learnMoreButtonItem = [[UIBarButtonItem alloc] initWithTitle:_learnMoreButtonTitle ? : localizedLearnMoreForType(_section.type) style:UIBarButtonItemStylePlain target:self action:@selector(showContent:)];
     }
 }
@@ -197,7 +197,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     } else {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }
-    viewController.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
+    viewController.title = _section.title ?: ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];

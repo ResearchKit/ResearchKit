@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
               destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
-                   defaultStepIdentifier:(NSString *)defaultStepIdentifier
+                   defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
 
 @end

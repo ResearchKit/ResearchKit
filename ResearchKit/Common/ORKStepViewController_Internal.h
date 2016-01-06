@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
 
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations;
+
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction;
 
 - (void)notifyDelegateOnResultChange;
@@ -64,6 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 - (void)showValidityAlertWithMessage:(NSString *)text;
+
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 - (void)skipForward;
 

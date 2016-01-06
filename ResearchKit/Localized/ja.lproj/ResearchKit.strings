@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "同意";
+"CONSENT_NAME_GIVEN" = "名";
+"CONSENT_NAME_FAMILY" = "姓";
+"CONSENT_NAME_PLACEHOLDER" = "必須";
+"CONSENT_REVIEW_TITLE" = "確認";
+"CONSENT_REVIEW_INSTRUCTION" = "下記のフォームを確認して、続ける場合は“同意する”をタップしてください。";
+"CONSENT_REVIEW_ALERT_TITLE" = "確認";
+"CONSENT_SIGNATURE_TITLE" = "署名";
+"CONSENT_SIGNATURE_INSTRUCTION" = "下の線の上に指で署名してください。";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "ここに署名";
+"CONSENT_PAGE_NUMBER_FORMAT" = "ページ%1$ld/%2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "ようこそ";
+"CONSENT_SECTION_DATA_GATHERING" = "データの収集";
+"CONSENT_SECTION_PRIVACY" = "プライバシー";
+"CONSENT_SECTION_DATA_USE" = "データの使用方法";
+"CONSENT_SECTION_STUDY_SURVEY" = "調査アンケート";
+"CONSENT_SECTION_STUDY_TASKS" = "調査タスク";
+"CONSENT_SECTION_TIME_COMMITMENT" = "所要時間";
+"CONSENT_SECTION_WITHDRAWING" = "同意の撤回";
+"CONSENT_LEARN_MORE_TITLE" = "詳しい情報";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "データの収集方法についての詳しい情報を表示します";
+"LEARN_MORE_DATA_USE" = "データの使用方法についての詳しい情報を表示します";
+"LEARN_MORE_PRIVACY" = "プライバシーおよび個人を特定する情報の保護方法についての詳しい情報を表示します";
+"LEARN_MORE_WELCOME" = "まず調査についての詳しい情報を表示します";
+"LEARN_MORE_STUDY_SURVEY" = "調査アンケートについての詳しい情報を表示します";
+"LEARN_MORE_TIME_COMMITMENT" = "調査にかかる時間についての詳しい情報を表示します";
+"LEARN_MORE_TASKS" = "必要なタスクについての詳しい情報を表示します";
+"LEARN_MORE_WITHDRAWING" = "同意の撤回についての詳しい情報を表示します";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "共有オプション";
+"CONSENT_SHARE_WIDELY_%@" = "自分のデータを%@および資格を持つ世界中の研究者と共有します";
+"CONSENT_SHARE_ONLY_%@" = "自分のデータを%@とのみ共有します";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@は、この調査に参加したあなたの調査データを受信します。\n\n名前などの情報を含まない、大まかにコード化された調査データを共有すると、今回と将来の調査に役立てることができます。";
+"LEARN_MORE_CONSENT_SHARING" = "データ共有についての詳しい情報を表示します";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@さんの名前（活字体）";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@さんの署名";
+"CONSENT_DOC_LINE_DATE" = "日付";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "ステップ%1$@/%2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "値が無効です";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@は許容される最大値（%2$@）を超えています。";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@は許容される最小値（%2$@）より小さいです。";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@は無効な値です。";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "メールアドレスが無効です: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "住所を入力";
+"LOCATION_ERROR_TITLE" = "指定した住所が見つかりませんでした";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "現在地を確認できません。住所を入力するか、GPS信号の受信状況が良好な場所に移動してください。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "位置情報サービスへのアクセスが拒否されました。“設定”でこのAppに位置情報サービスの使用を許可してください。";
+"LOCATION_ERROR_GEOCODE" = "入力した住所の結果が見つかりません。住所が正しいことを確認してください。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "インターネットに接続されていないか、住所検索要求の最大数に達しました。インターネットに接続されていない場合は、Wi-Fiをオンにしてこの質問に回答するか、この質問をスキップするか（スキップボタンが表示されている場合）、またはインターネットに接続されているときにアンケートをやり直してください。インターネットに接続されている場合は、数分待ってからやり直してください。";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字数が最大許容数を超えています: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "分割画面ではカメラを使用できません。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "メール";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "パスワード";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "パスワードを入力";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "パスワードを再入力";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "パスワードが一致しません。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "追加情報";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "性別";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "性別を選択";
+"DOB_FORM_ITEM_TITLE" = "生年月日";
+"DOB_FORM_ITEM_PLACEHOLDER" = "日付を選択";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "確認";
+"VERIFICATION_STEP_TITLE" = "メールを確認";
+"RESEND_EMAIL_LABEL_MESSAGE" = "確認メールが届いておらず、送信し直したい場合は、下のリンクをタップしてください。";
+"RESEND_EMAIL_BUTTON_TITLE" = "確認メールを再送信";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "ログイン";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "パスワードをお忘れですか?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "パスコードを入力してください";
+"PASSCODE_CONFIRM_MESSAGE" = "パスコードを確認してください";
+"PASSCODE_SAVED_MESSAGE" = "パスコードが保存されました";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "パスコードが認証されました";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "古いパスコードを入力してください";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "新しいパスコードを入力してください";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "新しいパスコードを確認してください";
+"PASSCODE_INVALID_ALERT_TITLE" = "パスコードが正しくありません";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "パスコードが一致しません。もう一度入力してください。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Touch IDで認証してください";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch IDエラー";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "入力できるのは数字のみです。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコード入力の進行状況インジケータ";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@桁を入力しました";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "キーチェーン項目を追加できませんでした。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "キーチェーン項目をアップデートできませんでした。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "キーチェーン項目を削除できませんでした。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "キーチェーン項目が見つかりませんでした。";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "女性";
+"GENDER_MALE" = "男性";
+"GENDER_OTHER" = "その他";
+
+/* Boolean answer strings */
+"BOOL_NO" = "いいえ";
+"BOOL_YES" = "はい";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "タップで回答";
+"NULL_ANSWER" = "答えを選択してください";
+"PLACEHOLDER_IMAGE_CHOICES" = "タップで選択";
+"PLACEHOLDER_LONG_TEXT" = "タップで書き込む";
+
+/* Button titles */
+"BUTTON_AGREE" = "同意する";
+"BUTTON_CANCEL" = "キャンセル";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "消去";
+"BUTTON_DISAGREE" = "同意しない";
+"BUTTON_DONE" = "完了";
+"BUTTON_GET_STARTED" = "開始";
+"BUTTON_LEARN_MORE" = "詳しい情報";
+"BUTTON_NEXT" = "次へ";
+"BUTTON_SKIP" = "スキップ";
+"BUTTON_SKIP_QUESTION" = "この質問をスキップ";
+"BUTTON_START_TIMER" = "タイマーを開始";
+"BUTTON_OPTION_SAVE" = "後で使用するために保存";
+"BUTTON_OPTION_DISCARD" = "結果を破棄";
+"BUTTON_OPTION_STOP_TASK" = "タスクを終了";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "アクティビティ開始まで";
+"TASK_COMPLETE_TITLE" = "アクティビティ完了";
+"TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "イメージを取り込む";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "再度イメージを取り込む";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "カメラが見つからないため、この手順を完了できません。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "この手順を完了するには、“設定”でこのAppがカメラにアクセスすることを許可してください。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "取り込んだイメージの出力ディレクトリが指定されていません。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "取り込んだイメージを保存できませんでした。";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "体力";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "距離（%@）";
+"FITNESS_HEARTRATE_TITLE" = "心拍数（bpm）";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "%@間楽な姿勢で座ってください。";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "できるだけ速く%@間歩いてください。";
+"FITNESS_INTRO_TEXT_FORMAT" = "このアクティビティでは、心拍数をモニタし、%1$@で歩ける距離を測定します。";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "屋外でできるだけ速いペースで%1$@間歩いてください。終わったら座って、%2$@間楽にしてください。始めるには、“開始”をタップしてください。";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "歩行/バランス";
+"WALK_INTRO_TEXT" = "このアクティビティでは、歩行中とじっと立っているときの歩行/バランスを測定します。介助なしで安全に歩行できない場合は、続行しないでください。";
+"WALK_INTRO_2_TEXT_%ld" = "介助なしで安全に、まっすぐに%ld歩程度歩ける場所を見つけてください。";
+"WALK_INTRO_2_DETAIL" = "電話をポケットまたはバッグに入れて、音声による指示に従ってください。";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "ここで%@間じっと立っていてください。";
+"WALK_STAND_INSTRUCTION_FORMAT" = "%@間じっと立っていてください。";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "後ろを向いて、元の場所まで歩いて戻ってください。";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "まっすぐに%ld歩まで歩いてください。";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "タップの速度";
+"TAPPING_INTRO_TEXT" = "このアクティビティでは、タップの速度を測定します。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "電話を平らな場所に置いてください。画面に2つのボタンが%@間表示されます。同じ手の2本の指を使って、これらのボタンをできるだけ速く、交互にタップしてください。";
+"TAPPING_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"TAP_BUTTON_TITLE" = "タップ";
+"TOTAL_TAPS_LABEL" = "合計タップ回数";
+"TAPPING_INSTRUCTION" = "2本の指を使ってできるだけ速くボタンをタップしてください。";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "声";
+"AUDIO_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"AUDIO_INSTRUCTION" = "マイクに向かってできるだけ長く「あーーーー」と声を出してください。";
+"AUDIO_INTRO_TEXT" = "大きく息を吸ってから、マイクに向かってできるだけ長く「あーーーー」と声を出してください。声の大きさを一定に保って、オーディオバーを青色のままにしてください。";
+"AUDIO_INTENDED_USE" = "このアクティビティでは、電話の下部にあるマイクで録音することで、あなたの声を評価します。";
+"AUDIO_TOO_LOUD_LABEL" = "大きすぎる";
+"AUDIO_GENERIC_ERROR_LABEL" = "声を録音できません";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
+"TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、さまざまな音がどのように聞こえるかが測定されます。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "始める前にヘッドフォンを接続し、装着してください。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "すると音が聞こえてくるはずです。デバイスの横にあるコントロールで音量を調整してください。\n\n始める準備ができたらボタンをタップしてください。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "音が聞こえるたびにボタンをタップしてください。";
+"TONE_LABEL_%@_LEFT" = "%@ Hz、左";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz、右";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "このアクティビティでは、%@が明るく表示される順番を再現することで、短期空間記憶を測定します。";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と同じ順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と逆の順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてから、じっと見てください。";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "スコア";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "明るく表示される%@に注意してください";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "明るく表示された順番で%@をタップしてください";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "逆の順番で%@をタップしてください";
+"MEMORY_GAME_COMPLETE_TITLE" = "シーケンス完了";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "続けるには、“次へ”をタップしてください";
+"MEMORY_GAME_FAILED_TITLE" = "やり直す";
+"MEMORY_GAME_FAILED_MESSAGE" = "うまくできませんでした。\n続けるには、“次へ”をタップしてください。";
+"MEMORY_GAME_TIMEOUT_TITLE" = "タイムアップ";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "時間がなくなりました。\n続けるには、“次へ”をタップしてください。";
+"MEMORY_GAME_COMPLETE" = "ゲーム完了";
+"MEMORY_GAME_PAUSED_TITLE" = "一時停止";
+"MEMORY_GAME_PAUSED_MESSAGE" = "続けるには、“次へ”をタップしてください";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反応時間";
+"REACTION_TIME_TASK_INTENDED_USE" = "このアクティビティでは、視覚的な合図に反応するまでの時間が測定されます。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "画面に青い点が表示されたらすぐにデバイスを振ってください。測定は%D回行います。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@回";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "青い円が表示されたら、すぐにデバイスを振ってください";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "ハノイの塔";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "このアクティビティでは、パズルの解決力を評価します。";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "塔全体を色の付いた台にできるだけ少ない回数で移動してください。";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "パズルを解く";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動回数: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "降参";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "歩行時間";
+"TIMED_WALK_INTRO_DETAIL" = "このアクティビティでは、下肢の機能を測定します。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "約%@を安全にまっすぐ歩ける場所を見つけてください。できれば屋外が良いでしょう。このアクティビティでは安全にできるだけ速く歩いていただきます。ゴールを過ぎるまで速度を落とさないでください。";
+"TIMED_WALK_INTRO_2_DETAIL" = "始めるには、“次へ”をタップしてください。";
+"TIMED_WALK_FORM_TITLE" = "補助器具";
+"TIMED_WALK_FORM_TEXT" = "すべてのテストで同じ補助器具を使用してください。";
+"TIMED_WALK_QUESTION_TEXT" = "短下肢装具をお付けになりますか?";
+"TIMED_WALK_QUESTION_2_TITLE" = "補助器具をお使いになりますか?";
+"TIMED_WALK_QUESTION_2_TEXT" = "ここをタップして答えを選択。";
+"TIMED_WALK_QUESTION_2_CHOICE" = "なし";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "片側ケイン";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "片側クラッチ";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "両側ケイン";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "両側クラッチ";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "歩行器";
+"TIMED_WALK_INSTRUCTION_%@" = "まっすぐ%@歩いてください。";
+"TIMED_WALK_INSTRUCTION_2" = "後ろを向いて、元の場所まで歩いて戻ってください。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完了したら、“完了”をタップしてください。";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT（定速聴覚的連続加算）では、聴覚による情報処理速度と計算能力を測定します。";
+"PVSAT_INTRO_TEXT" = "PVSAT（定速視覚的連続加算）では、視覚による情報処理速度と計算能力を測定します。";
+"PAVSAT_INTRO_TEXT" = "PAVSAT（定速聴覚および視覚的連続加算）では、聴覚および視覚による情報処理速度と計算能力を測定します。";
+"PSAT_INTRO_TEXT_2_%@" = "%@秒ごとに1つの数字が表示されます。\n表示された数字を、直前に表示された数字と足してください。\nすべての数字を足すのではありません。常に、表示された数字とその直前の数字の2つだけを足してください。";
+"PSAT_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"PSAT_INITIAL_INSTRUCTION" = "この最初の数字を覚えておいてください。";
+"PSAT_INSTRUCTION" = "この数字を直前の数字と足してください。";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "左手で円を穴に置いてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "右手で円を穴に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "左手で円を線の向こう側に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "右手で円を線の向こう側に置いてください。";
+"HOLE_PEG_TEST_TEXT" = "2本の指で円をつまんでください。";
+"HOLE_PEG_TEST_TEXT_2" = "指で円を持ち上げて移動させ落としてください。";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "しきい値に達するのに十分なログファイルを削除できませんでした";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "属性の設定中にエラーが起きました";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "ファイルが削除済みとマークされていません（アップロード済みとマークされていません）";
+"ERROR_DATALOGGER_MULTIPLE" = "ログ削除時に複数のエラー";
+"ERROR_RECORDER_NO_DATA" = "収集したデータが見つかりませんでした。";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "出力ディレクトリが指定されていません";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "データなし";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "戻る";
+
+"AX_IMAGE_ILLUSTRATION" = "%@のイラスト";
+
+"AX_SIGNVIEW_LABEL" = "指定された署名フィールド";
+"AX_SIGNVIEW_HINT" = "画面をタッチしながら指を動かして署名します";
+"AX_SIGNVIEW_SIGNED" = "署名済み";
+"AX_SIGNVIEW_UNSIGNED" = "未署名";
+
+"AX_SELECTED" = "選択";
+"AX_UNSELECTED" = "選択解除";
+
+"AX_SLIDER_LABEL" = "応答スライダ。範囲は%@から%@です";
+"AX_UNLABELED_IMAGE" = "ラベルなしイメージ";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "タスクを開始します";
+
+"AX.MEMORY.TILE.ACTIVE" = "動いている";
+"AX.MEMORY.TILE.CORRECT" = "正解";
+"AX.MEMORY.TILE.INCORRECT" = "不正解";
+"AX.MEMORY.TILE.QUIESCENT" = "止まっている";
+"AX.MEMORY.TILE.LABEL" = "記憶ゲームタイル";
+
+"AX_IMAGE_CAPTURE_LABEL" = "プレビューを取り込む";
+"AX_IMAGE_CAPTURED_LABEL" = "取り込んだイメージ";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "サイズ%@の円盤をサイズ%@の円盤の上に置くことはできません";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "ターゲット";
+"AX_TOWER_OF_HANOI_TOWER" = "塔";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "ダブルタップして円盤を置く";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "ダブルタップして一番上の円盤を選択";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@のサイズの円盤があります";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
+
+"AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
+"AX_GRAPH_AND_SEPARATOR" = "と";
+"AX_GRAPH_POINT_%@" = "ポイント: %@";

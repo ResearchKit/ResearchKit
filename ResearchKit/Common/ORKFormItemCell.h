@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end
 
@@ -55,15 +56,15 @@ NS_ASSUME_NONNULL_BEGIN
                                formItem:(ORKFormItem *)formItem
                                  answer:(nullable id)answer
                           maxLabelWidth:(CGFloat)maxLabelWidth
-                             screenType:(ORKScreenType)screenType;
+                               delegate:(id<ORKFormItemCellDelegate>)delegate;
 
-@property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
+@property (nonatomic, weak, readonly) id<ORKFormItemCellDelegate> delegate;
 @property (nonatomic, copy, nullable) id answer;
-@property (nonatomic, strong, nullable) ORKFormItem *formItem;
+@property (nonatomic, strong) ORKFormItem *formItem;
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
-@property (nonatomic) ORKScreenType screenType;
 @property (nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic) NSDictionary *savedAnswers;
 
 @end
 
@@ -74,6 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ORKFormItemTextFieldCell : ORKFormItemTextFieldBasedCell
+
+@end
+
+
+@interface ORKFormItemConfirmTextCell : ORKFormItemTextFieldCell
 
 @end
 
@@ -97,7 +103,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface ORKFormItemScaleCell : ORKFormItemCell
+
+@end
+
+
+@interface ORKFormItemLocationCell : ORKFormItemCell
 
 @end
 

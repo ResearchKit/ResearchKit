@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "הסכמה";
+"CONSENT_NAME_GIVEN" = "שם פרטי";
+"CONSENT_NAME_FAMILY" = "שם משפחה";
+"CONSENT_NAME_PLACEHOLDER" = "חובה";
+"CONSENT_REVIEW_TITLE" = "סקור/י";
+"CONSENT_REVIEW_INSTRUCTION" = "סקור/י את הטופס הבא, והקש/י על ״אני מסכים/ה״ אם הינך מוכן/ה להמשיך.";
+"CONSENT_REVIEW_ALERT_TITLE" = "סקור/י";
+"CONSENT_SIGNATURE_TITLE" = "חתימה";
+"CONSENT_SIGNATURE_INSTRUCTION" = "חתום/י עם האצבע על הקו שלמטה.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "חתום/י כאן";
+"CONSENT_PAGE_NUMBER_FORMAT" = "עמוד %1$ld מתוך %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "ברוך/ה הבא/ה";
+"CONSENT_SECTION_DATA_GATHERING" = "איסוף נתונים";
+"CONSENT_SECTION_PRIVACY" = "פרטיות";
+"CONSENT_SECTION_DATA_USE" = "שימוש בנתונים";
+"CONSENT_SECTION_STUDY_SURVEY" = "סקר מחקר";
+"CONSENT_SECTION_STUDY_TASKS" = "משימות מחקר";
+"CONSENT_SECTION_TIME_COMMITMENT" = "התחייבות זמן";
+"CONSENT_SECTION_WITHDRAWING" = "ביטול השתתפות";
+"CONSENT_LEARN_MORE_TITLE" = "פרטים נוספים";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "קבל/י מידע נוסף על איסוף הנתונים";
+"LEARN_MORE_DATA_USE" = "קבל/י מידע נוסף על השימוש בנתונים";
+"LEARN_MORE_PRIVACY" = "קבל/י מידע נוסף בנושא ההגנה על הפרטיות והזהות שלך";
+"LEARN_MORE_WELCOME" = "קבל/י מידע נוסף תחילה בנושא המחקר";
+"LEARN_MORE_STUDY_SURVEY" = "קבל/י מידע נוסף בנושא סקר המחקר";
+"LEARN_MORE_TIME_COMMITMENT" = "קבל/י מידע נוסף בנושא השפעת המחקר על זמנך";
+"LEARN_MORE_TASKS" = "קבל/י מידע נוסף בנושא המשימות הכרוכות";
+"LEARN_MORE_WITHDRAWING" = "קבל/י מידע נוסף בנושא ביטול ההשתתפות";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "אפשרויות שיתוף";
+"CONSENT_SHARE_WIDELY_%@" = "שתף את הנתונים שלי עם %@ ועם חוקרים מוסמכים מכל העולם";
+"CONSENT_SHARE_ONLY_%@" = "שתף את הנתונים שלי רק עם %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ תקבל את נתוני המחקר שבו השתתפת.\n\nשיתוף נרחב יותר של נתוני המחקר המקודדים שלך (שאינם מכילים מידע כגון שמך) עשוי לתרום למחקר זה ולמחקרים עתידיים.";
+"LEARN_MORE_CONSENT_SHARING" = "קבל/י מידע נוסף בנושא שיתוף נתונים";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "השם של %@ (מודפס)";
+"CONSENT_DOC_LINE_SIGNATURE" = "החתימה של %@";
+"CONSENT_DOC_LINE_DATE" = "תאריך";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "שלב %1$@ מתוך %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "ערך שאינו תקין";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ חורג מהערך המרבי המותר (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ נמוך מהערך המינימלי המותר (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ הוא לא ערך תקין.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "כתובת דוא״ל לא תקינה: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "הקש/י כתובת";
+"LOCATION_ERROR_TITLE" = "לא ניתן למצוא את הכתובת שצוינה";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "לא ניתן לזהות את מיקומך הנוכחי. הקלד/י כתובת או עבור/י אל מיקום שבו קליטת ה-GPS טובה יותר, אם אפשר.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "הגישה אל שירותי המיקום נדחתה. הענק/י ליישום זה הרשאה להשתמש בשירותי המיקום דרך ״הגדרות״.";
+"LOCATION_ERROR_GEOCODE" = "לא ניתן למצוא תוצאה עבור הכתובת שהוקשה. ודא/י שהכתובת תקינה.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "יתכן שאינך מחובר/ת לאינטרנט, או שחרגת מהמספר המרבי המותר של בקשות בדיקת כתובת. אם אינך מחובר/ת לאינטרנט, הפעל/י את הרשת האלחוטית בכדי לענות על שאלה זו, דלג/י על השאלה אם כפתור הדילוג זמין, או חזור/י ובצע/י שוב את הסקר כשתהיה/י מחובר/ת לאינטרנט. אחרת, נסה/י שוב בעוד כמה דקות.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "תוכן המלל חורג מהאורך המרבי: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "המצלמה אינה זמינה במסך מפוצל.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "שלח בדוא״ל";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "israelisraeli@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "סיסמה";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "הקש/י סיסמה";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "אשר/י";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "הקש/י את הסיסמה שוב";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "הסיסמאות לא היו זהות.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "מידע נוסף";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "ישראל";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "ישראלי";
+"GENDER_FORM_ITEM_TITLE" = "מין";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "בחר/י מין";
+"DOB_FORM_ITEM_TITLE" = "תאריך לידה";
+"DOB_FORM_ITEM_PLACEHOLDER" = "בחר/י תאריך";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "אימות";
+"VERIFICATION_STEP_TITLE" = "אימות הדוא״ל שלך";
+"RESEND_EMAIL_LABEL_MESSAGE" = "הקש/י על הקישור שלמטה אם לא קיבלת דוא״ל אימות וברצונך שהוא יישלח שוב.";
+"RESEND_EMAIL_BUTTON_TITLE" = "שלח הודעת דוא״ל לאימות מחדש";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "התחבר";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "שכחת את הסיסמה?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "הקש/י את קוד הגישה";
+"PASSCODE_CONFIRM_MESSAGE" = "אשר/י קוד גישה";
+"PASSCODE_SAVED_MESSAGE" = "קוד הגישה נשמר";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "קוד הגישה מאומת";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "הקש/י את קוד הגישה הישן";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "הקש/י את קוד הגישה החדש";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "אשר/י את קוד הגישה החדש";
+"PASSCODE_INVALID_ALERT_TITLE" = "קוד הגישה שגוי";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "קודי הגישה לא היו זהים. נסה/י שוב.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "בצע/י אימות באמצעות Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "שגיאת Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "ניתן להשתמש בתווי ספרות בלבד.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של הקשת קוד גישה";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "הוקשו %@ מתוך %@ ספרות";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "לא ניתן היה להוסיף את פריט צרור המפתחות.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "לא ניתן היה לעדכן את פריט צרור המפתחות.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "לא ניתן היה למחוק את פריט צרור המפתחות.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "לא ניתן היה למצוא את פריט צרור המפתחות.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "‎A+‎";
+"BLOOD_TYPE_A-" = "‎A-‎";
+"BLOOD_TYPE_AB+" = "‎AB+‎";
+"BLOOD_TYPE_AB-" = "‎AB-‎";
+"BLOOD_TYPE_B+" = "‎B+‎";
+"BLOOD_TYPE_B-" = "‎B-‎";
+"BLOOD_TYPE_O+" = "‎O+‎";
+"BLOOD_TYPE_O-" = "‎O-‎";
+
+/* Gender values. */
+"GENDER_FEMALE" = "נקבה";
+"GENDER_MALE" = "זכר";
+"GENDER_OTHER" = "אחר";
+
+/* Boolean answer strings */
+"BOOL_NO" = "לא";
+"BOOL_YES" = "כן";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "הקש/י בכדי לענות";
+"NULL_ANSWER" = "בחר/י תשובה";
+"PLACEHOLDER_IMAGE_CHOICES" = "הקש/י לבחירה";
+"PLACEHOLDER_LONG_TEXT" = "הקש/י לכתיבה";
+
+/* Button titles */
+"BUTTON_AGREE" = "אני מסכים/ה";
+"BUTTON_CANCEL" = "ביטול";
+"BUTTON_OK" = "אישור";
+"BUTTON_CLEAR" = "נקה";
+"BUTTON_DISAGREE" = "איני מסכים/ה";
+"BUTTON_DONE" = "סיום";
+"BUTTON_GET_STARTED" = "התחל";
+"BUTTON_LEARN_MORE" = "פרטים נוספים";
+"BUTTON_NEXT" = "הבא";
+"BUTTON_SKIP" = "דלג";
+"BUTTON_SKIP_QUESTION" = "דלג על שאלה זו";
+"BUTTON_START_TIMER" = "הפעל את שעון העצר";
+"BUTTON_OPTION_SAVE" = "שמור למועד מאוחר יותר";
+"BUTTON_OPTION_DISCARD" = "מחק את התוצאות";
+"BUTTON_OPTION_STOP_TASK" = "סיים את המשימה";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "מתחיל פעילות בעוד";
+"TASK_COMPLETE_TITLE" = "הפעילות הושלמה";
+"TASK_COMPLETE_TEXT" = "הנתונים שלך ינותחו וכאשר התוצאות יהיו מוכנות תקבל/י הודעה.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "צלם תמונה";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "צלם תמונה שוב";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "לא נמצאה מצלמה. לא ניתן להשלים שלב זה.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "על-מנת לסיים שלב זה, אפשר/י ליישום זה לגשת למצלמה שלך ב״הגדרות״.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "לא צוינה ספריית פלט עבור התמונות שצולמו.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "לא ניתן היה לשמור את התמונה שצולמה.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "כושר";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "מרחק (%@)";
+"FITNESS_HEARTRATE_TITLE" = "קצב לב (פעימות לדקה)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "שב/י בצורה נוחה למשך %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "לך/י הכי מהר שתוכל/י למשך %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "פעילות זו בודקת את קצב הלב שלך ומודדת כמה רחוק תוכל/י ללכת תוך %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "לך/י בחוץ בקצב המהיר ביותר שלך למשך %1$@. לסיום, התיישב/י והרגע/י למשך %2$@. בכדי להתחיל, הקש/י על ״התחל״.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "הליכה ואיזון";
+"WALK_INTRO_TEXT" = "פעילות זו מודדת את ההליכה והאיזון שלך תוך כדי הליכה ועמידה במקום. אל תמשיך/י אם אינך יכול/ה ללכת בבטחה ללא סיוע.";
+"WALK_INTRO_2_TEXT_%ld" = "מצא/י מקום שבו תוכל/י ללכת בבטחה וללא סיוע למרחק של %ld צעדים בקו ישר.";
+"WALK_INTRO_2_DETAIL" = "הנח/י את הטלפון בכיס או בתיק ופעל/י על-פי הנחיות השמע.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "כעת עמוד/י ללא תזוזה למשך %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "עמוד/י ללא תזוזה למשך %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "הסתובב/י והתהלך/י חזרה למקום שבו התחלת.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "לך/י %ld צעדים לכל היותר בקו ישר.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "מהירות הקשה";
+"TAPPING_INTRO_TEXT" = "פעילות זו מודדת את מהירות ההקשה שלך.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "הנח/י את הטלפון על משטח שטוח. שני כפתורים יופיעו במסך למשך %@. כעת, השתמש/י בשתי אצבעות מאותה יד בכדי להקיש לחלופין על הכפתורים שמופיעים במהירות המרבית שתוכל/י.";
+"TAPPING_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"TAP_BUTTON_TITLE" = "הקש/י";
+"TOTAL_TAPS_LABEL" = "סה״כ הקשות";
+"TAPPING_INSTRUCTION" = "הקש/י על הכפתורים במהירות הכי גבוהה שתוכל/י בשתי אצבעות.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "קול";
+"AUDIO_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"AUDIO_INSTRUCTION" = "אמור/י ״אהההה״ לתוך המיקרופון למשך זמן ארוך ככל שתוכל/י.";
+"AUDIO_INTRO_TEXT" = "נשום/י נשימה עמוקה ואמור/י ״אהההה״ לתוך המיקרופון למשך זמן ארוך ככל שתוכל/י. נסה/י לשמור על עוצמת קול קבועה כך שפסי השמע יישארו כחולים.";
+"AUDIO_INTENDED_USE" = "פעילות זו מעריכה את קולך על-ידי הקלטתו דרך המיקרופון שבתחתית הטלפון.";
+"AUDIO_TOO_LOUD_LABEL" = "חזק מדי";
+"AUDIO_GENERIC_ERROR_LABEL" = "לא ניתן להקליט שמע";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "מדידת היכולת לשמוע צלילים";
+"TONE_AUDIOMETRY_INTENDED_USE" = "פעילות זו מודדת את יכולתך לשמוע צלילים שונים.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "לפני שתתחיל/י, חבר/י את האזניות והרכב/י אותן באזניים.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "כעת הינך אמור/ה לשמוע צליל. כוונן/י את עוצמת הקול בעזרת פקדי הבקרה בצד המכשיר.\n\nהקש/י על הכפתור בכל שלב בכדי להתחיל.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "הקש/י על הכפתור בכל פעם שתתחיל/י לשמוע צליל.";
+"TONE_LABEL_%@_LEFT" = "‏%@ הרץ, שמאל";
+"TONE_LABEL_%@_RIGHT" = "‏%@ הרץ, ימין";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "זכרון מרחבי";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "פעילות זו מודדת את הזכרון המרחבי שלך לטווח קצר על-ידי הנחיה לחזור על הסדר שבו נדלקו ה%@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "פרחים";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "פרחים";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר זהה לזה שבו הם נדלקו.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "כמה מה%@ יידלקו זה אחר זה. הקש/י על ה%@ בסדר הפוך מזה שבו הם נדלקו.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "בכדי להתחיל, הקש/י על ״התחל״ וצפה/י בתשומת לב.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "תוצאה";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "צפה/י ב%@ נדלקים";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "הקש/י על ה%@ לפי הסדר שבו הם נדלקים";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "הקש/י על ה%@ בסדר הפוך";
+"MEMORY_GAME_COMPLETE_TITLE" = "הרצף הושלם";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "להמשך, הקש/י על ״הבא״.";
+"MEMORY_GAME_FAILED_TITLE" = "נסה/י שוב";
+"MEMORY_GAME_FAILED_MESSAGE" = "לא השלמת את המשימה בזמן. הקש/י על ״הבא״ להמשך.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "נגמר הזמן";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "אזל הזמן.\nהקש/י על ״הבא״ להמשך.";
+"MEMORY_GAME_COMPLETE" = "המשחק הושלם";
+"MEMORY_GAME_PAUSED_TITLE" = "מושהה";
+"MEMORY_GAME_PAUSED_MESSAGE" = "להמשך, הקש/י על ״הבא״.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "זמן תגובה";
+"REACTION_TIME_TASK_INTENDED_USE" = "פעילות זו מעריכה את משך הזמן שלוקח לך להגיב לרמז חזותי.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "נער/י את המכשיר בכיוון כלשהו ברגע שהנקודה הכחולה מופיעה על המסך. תתבקש/י לעשות זאת %D פעמים.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "נסיון %@ מתוך %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "נער/י את המכשיר במהירות כשמופיע העיגול הכחול";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "מגדל האנוי";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "פעילות זו מעריכה את מיומנויות פתרון הפאזלים שלך.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "הזז/י את המערום כולו אל הפלטפורמה המסומנת בכמה שפחות מהלכים.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "פתור/י את הפאזל";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "מספר מהלכים: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "איני מצליח/ה לפתור את הפאזל";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "הליכה מתוזמנת";
+"TIMED_WALK_INTRO_DETAIL" = "פעילות זו מודדת את תפקוד פלג הגוף התחתון שלך.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "מצא/י מקום, עדיף בחוץ, שבו תוכל/י ללכת במשך %@ בקו ישר במהירות המרבית שניתן, אך בבטחה. אל תאט/י עד שתעבור/י את קו הסיום.";
+"TIMED_WALK_INTRO_2_DETAIL" = "הקש/י על ״הבא״ בכדי להתחיל.";
+"TIMED_WALK_FORM_TITLE" = "אמצעי עזר";
+"TIMED_WALK_FORM_TEXT" = "השתמש/י באותו אמצעי עזר בכל בדיקה.";
+"TIMED_WALK_QUESTION_TEXT" = "האם הינך חובש/ת תומך לקרסול?";
+"TIMED_WALK_QUESTION_2_TITLE" = "האם הינך משתמש/ת באמצעי עזר?";
+"TIMED_WALK_QUESTION_2_TEXT" = "הקש/י כאן לבחירת תשובה.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "ללא";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "מקל הליכה ליד אחת";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "קב ליד אחת";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "מקל הליכה לשתי הידיים";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "קביים לשתי הידיים";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "הליכון";
+"TIMED_WALK_INSTRUCTION_%@" = "לך/י עד %@ בקו ישר.";
+"TIMED_WALK_INSTRUCTION_2" = "הסתובב/י והתהלך/י חזרה למקום שבו התחלת.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "הקש/י על ״סיום״ לאחר שתסיים/י.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של שמע״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך בשמיעה.";
+"PVSAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של ראיה״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך בראיה.";
+"PAVSAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של שמע וראיה״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך, הן בשמיעה והן בראייה.";
+"PSAT_INTRO_TEXT_2_%@" = "ספרות בודדות מוצגות כל %@ שניות.\nעליך להוסיף ספרה חדשה אל זו שנמצאת ממש לפניה.\nלתשומת לבך, אין לחשב את הסה״כ המצטבר, אלא רק את סכום שני המספרים האחרונים.";
+"PSAT_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"PSAT_INITIAL_INSTRUCTION" = "זכור/י ספרה ראשונה זו.";
+"PSAT_INSTRUCTION" = "הוסף/י ספרה חדשה זו לספרה הקודמת.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד הימנית והשמאלית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך הימנית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך הימנית.";
+"HOLE_PEG_TEST_TEXT" = "הרם/י את הדיסקית בשתי אצבעות.";
+"HOLE_PEG_TEST_TEXT_2" = "הרם/י את אצבעותיך כדי להפיל את הדיסקית.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "לא ניתן ליצור את הקובץ";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "לא ניתן היה להסיר מספיק קובצי רישום בכדי להגיע לסף";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "ארעה שגיאה בהגדרת המאפיין";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "הקובץ אינו מסומן כנמחק (אינו מסומן כקובץ שהועלה)";
+"ERROR_DATALOGGER_MULTIPLE" = "ארעו שגיאות מרובות במהלך הסרת קובצי הרישום";
+"ERROR_RECORDER_NO_DATA" = "לא נמצאו נתונים שנאספו.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "לא צוינה ספריית פלט";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "אין נתונים";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "הקודם";
+
+"AX_IMAGE_ILLUSTRATION" = "איור של %@";
+
+"AX_SIGNVIEW_LABEL" = "שדה חתימה ייעודי";
+"AX_SIGNVIEW_HINT" = "גע/י במסך והזז/י את האצבע בכדי לחתום";
+"AX_SIGNVIEW_SIGNED" = "חתום";
+"AX_SIGNVIEW_UNSIGNED" = "לא חתום";
+
+"AX_SELECTED" = "נבחרו";
+"AX_UNSELECTED" = "לא נבחר";
+
+"AX_SLIDER_LABEL" = "מחוון תגובה. טווח שנע בין %@ ל-%@";
+"AX_UNLABELED_IMAGE" = "תמונה ללא תיוג";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "התחל משימה";
+
+"AX.MEMORY.TILE.ACTIVE" = "פעיל";
+"AX.MEMORY.TILE.CORRECT" = "נכון";
+"AX.MEMORY.TILE.INCORRECT" = "לא נכון";
+"AX.MEMORY.TILE.QUIESCENT" = "ללא תנועה";
+"AX.MEMORY.TILE.LABEL" = "אריח משחק זכרון";
+
+"AX_IMAGE_CAPTURE_LABEL" = "צלם תצוגה מקדימה";
+"AX_IMAGE_CAPTURED_LABEL" = "התמונה צולמה";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "לא ניתן למקם דיסקית בגודל %@ על-גבי דיסקית בגודל %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "יעד";
+"AX_TOWER_OF_HANOI_TOWER" = "מגדל";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "הקש/י פעמיים למיקום הדיסקית";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "הקש/י פעמיים לבחירת הדיסקית הכי עליונה";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "כולל דיסק בגדלים %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ריק";
+
+"AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
+"AX_GRAPH_AND_SEPARATOR" = " וגם";
+"AX_GRAPH_POINT_%@" = "נקודה: %@";

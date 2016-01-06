@@ -105,7 +105,7 @@ static const CGFloat LastLabelHeight = 20.0;
         } else {
             // This "magic" multiplier constraints evenly space the labels among
             // the superview without having to manually specify its width.
-            CGFloat multiplier = 1.0 - ((CGFloat)(numberOfTitleLabels-i-1) / (numberOfTitleLabels-1));
+            CGFloat multiplier = 1.0 - ((CGFloat)(numberOfTitleLabels - i - 1) / (numberOfTitleLabels - 1));
             [constraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                 attribute:NSLayoutAttributeCenterX
                                                                 relatedBy:NSLayoutRelationEqual

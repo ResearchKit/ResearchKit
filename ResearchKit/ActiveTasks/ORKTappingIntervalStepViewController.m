@@ -136,7 +136,7 @@
         return;
     }
     
-    NSTimeInterval mediaTime = CACurrentMediaTime();
+    NSTimeInterval mediaTime = touch.timestamp;
     
     if (_tappingStart == 0) {
         _tappingStart = mediaTime;

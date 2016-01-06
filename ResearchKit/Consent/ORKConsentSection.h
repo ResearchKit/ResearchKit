@@ -217,6 +217,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSURL *contentURL;
 
 /**
+ When set to YES, the section is omitted in a consent review step or in PDF file generation. This property is NO by default.
+ */
+@property (nonatomic) BOOL omitFromDocument;
+
+/**
  A custom illustration for the consent.
  
  The custom image can override the image associated with any of the predefined

@@ -72,7 +72,7 @@
         [self addSubview:_continueSkipContainer];
         
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
+        ORKEnableAutoLayoutForViews(dictionary.allValues);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
@@ -167,7 +167,7 @@
     }
 }
 
-- (void)setCapturedImage:(UIImage * __nullable)capturedImage {
+- (void)setCapturedImage:(UIImage *)capturedImage {
     _previewView.capturedImage = capturedImage;
     [self updateAppearance];
 }
@@ -176,16 +176,15 @@
     return _previewView.capturedImage;
 }
 
-- (void)setError:(NSError * __nullable)error {
+- (void)setError:(NSError *)error {
     _error = error;
     [self updateAppearance];
 }
 
-const CGFloat CONTINUE_ALPHA_TRANSLUCENT = 0.5;
-const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
-
 - (void)updateConstraints {
-    
+    const CGFloat ContinueSkipContainerTranslucentAlpha = 0.5;
+    const CGFloat ContinueSkipContainerOpaqueAlpha = 0.0;
+
     if (_variableConstraints) {
         [NSLayoutConstraint deactivateConstraints:_variableConstraints];
         [_variableConstraints removeAllObjects];
@@ -196,34 +195,36 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     }
     
     NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
     
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
-                                                                                    options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                    metrics:nil
-                                                                                      views:views]];
-
     [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
                                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
                                                                                       metrics:nil
                                                                                         views:views]];
     
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [_variableConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
     
     // Float the continue view over the previewView if in landscape to give more room for the preview
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
-                                                                                            views:views]];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
+                                                   views:views]];
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationEqual
@@ -231,13 +232,14 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
                                                                      attribute:NSLayoutAttributeBottom
                                                                     multiplier:1.0
                                                                       constant:0.0]];
-        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
+        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:ContinueSkipContainerTranslucentAlpha];
     } else {
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:ContinueSkipContainerOpaqueAlpha];
     }
     
     [NSLayoutConstraint activateConstraints:_variableConstraints];
@@ -248,7 +250,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     return _previewView.session;
 }
 
-- (void)setSession:(AVCaptureSession * __nullable)session {
+- (void)setSession:(AVCaptureSession *)session {
     _previewView.session = session;
     // Set up the proper videoOrientation from the start
     [self orientationDidChange];

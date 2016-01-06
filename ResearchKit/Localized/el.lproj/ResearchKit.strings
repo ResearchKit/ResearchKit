@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Συναίνεση";
+"CONSENT_NAME_GIVEN" = "Όνομα";
+"CONSENT_NAME_FAMILY" = "Επώνυμο";
+"CONSENT_NAME_PLACEHOLDER" = "Απαιτείται";
+"CONSENT_REVIEW_TITLE" = "Έλεγχος";
+"CONSENT_REVIEW_INSTRUCTION" = "Διαβάστε την παρακάτω φόρμα και αγγίξτε «Συμφωνώ» όταν είστε έτοιμοι να συνεχίσετε.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Έλεγχος";
+"CONSENT_SIGNATURE_TITLE" = "Υπογραφή";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Υπογράψτε στην παρακάτω γραμμή χρησιμοποιώντας το δάχτυλό σας.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Υπογράψτε εδώ";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Σελίδα %1$ld από %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Καλώς ορίσατε";
+"CONSENT_SECTION_DATA_GATHERING" = "Συλλογή δεδομένων";
+"CONSENT_SECTION_PRIVACY" = "Απόρρητο";
+"CONSENT_SECTION_DATA_USE" = "Χρήση δεδομένων";
+"CONSENT_SECTION_STUDY_SURVEY" = "Έρευνα μελέτης";
+"CONSENT_SECTION_STUDY_TASKS" = "Εργασίες μελέτης";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Απαιτούμενος χρόνος";
+"CONSENT_SECTION_WITHDRAWING" = "Απόσυρση";
+"CONSENT_LEARN_MORE_TITLE" = "Μάθετε περισσότερα";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Μάθετε περισσότερα για τη συλλογή δεδομένων";
+"LEARN_MORE_DATA_USE" = "Μάθετε περισσότερα για τον τρόπο χρήσης των δεδομένων";
+"LEARN_MORE_PRIVACY" = "Μάθετε περισσότερα για τον τρόπο προστασίας του απορρήτου και της ταυτότητάς σας";
+"LEARN_MORE_WELCOME" = "Μάθετε περισσότερα για τη μελέτη πρώτα";
+"LEARN_MORE_STUDY_SURVEY" = "Μάθετε περισσότερα για την έρευνα μελέτης";
+"LEARN_MORE_TIME_COMMITMENT" = "Μάθετε περισσότερα για τον χρόνο που θα χρειαστείτε για να ολοκληρώσετε τη μελέτη";
+"LEARN_MORE_TASKS" = "Μάθετε περισσότερα για τις σχετιζόμενες εργασίες";
+"LEARN_MORE_WITHDRAWING" = "Μάθετε περισσότερα για την απόσυρση από την έρευνα";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Επιλογές κοινοποίησης";
+"CONSENT_SHARE_WIDELY_%@" = "Κοινοποίηση των δεδομένων μου στο %@ και πιστοποιημένους ερευνητές ανά τον κόσμο";
+"CONSENT_SHARE_ONLY_%@" = "Κοινοποίηση των δεδομένων μου μόνο σε: %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Το %@ θα λάβει τα δεδομένα που απορρέουν από τη συμμετοχή σας στην παρούσα μελέτη.\n\nΗ πιο ευρεία κοινοποίηση των κωδικοποιημένων δεδομένων μελέτης σας (χωρίς στοιχεία όπως το όνομά σας) μπορεί να συμβάλλει σε αυτήν την έρευνα, καθώς και σε μελλοντικές έρευνες.";
+"LEARN_MORE_CONSENT_SHARING" = "Μάθετε περισσότερα για την κοινοποίηση δεδομένων";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@: όνομα (με κεφαλαία)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@: υπογραφή";
+"CONSENT_DOC_LINE_DATE" = "Ημερομηνία";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Βήμα %1$@ από %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Μη έγκυρη τιμή";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Η τιμή «%1$@» υπερβαίνει τη μέγιστη επιτρεπόμενη τιμή (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Η τιμή «%1$@» είναι χαμηλότερη από την ελάχιστη επιτρεπόμενη τιμή (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "Το «%@» δεν είναι έγκυρη τιμή.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Μη έγκυρη διεύθυνση email: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Εισαγάγετε διεύθυνση";
+"LOCATION_ERROR_TITLE" = "Δεν βρέθηκε η καθορισμένη διεύθυνση";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Δεν είναι δυνατή η επίλυση της τρέχουσας τοποθεσίας σας. Πληκτρολογήστε μια διεύθυνση ή μετακινηθείτε σε μια τοποθεσία με καλύτερο σήμα GPS, αν είναι δυνατόν.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Δεν επιτράπηκε η πρόσβαση στις υπηρεσίες τοποθεσίας. Παραχωρήστε άδεια σε αυτήν την εφαρμογή για χρήση των υπηρεσιών τοποθεσίας μέσω των Ρυθμίσεων.";
+"LOCATION_ERROR_GEOCODE" = "Δεν είναι δυνατή η εύρεση αποτελέσματος για την εισηγμένη διεύθυνση. Βεβαιωθείτε ότι η διεύθυνση είναι έγκυρη.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Είτε δεν είστε συνδεδεμένοι στο Διαδίκτυο είτε έχετε υπερβεί το μέγιστο πλήθος αιτήσεων αναζήτησης διευθύνσεων. Αν δεν είστε συνδεδεμένοι στο Διαδίκτυο, ενεργοποιήστε το Wi-Fi για να απαντήσετε σε αυτήν την ερώτηση, παραλείψτε την ερώτηση αν είναι διαθέσιμο το κουμπί παράλειψης, ή επιστρέψτε στο ερωτηματολόγιο όταν συνδεθείτε στο Διαδίκτυο. Διαφορετικά, δοκιμάστε ξανά σε λίγα λεπτά.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Το περιεχόμενο κειμένου υπερβαίνει το επιτρεπόμενο όριο χαρακτήρων: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Η κάμερα δεν διατίθεται στην Προβολή διαίρεσης.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmilosporos@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Συνθηματικό";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε συνθηματικό";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Επιβεβαίωση";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε πάλι το συνθηματικό";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Τα συνθηματικά δεν ταιριάζουν.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Πρόσθετες πληροφορίες";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Γιάννης";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Μηλοσπόρος";
+"GENDER_FORM_ITEM_TITLE" = "Φύλο";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε φύλο";
+"DOB_FORM_ITEM_TITLE" = "Ημερομηνία γέννησης";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε ημερομηνία";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Επαλήθευση";
+"VERIFICATION_STEP_TITLE" = "Επαληθεύστε το email σας";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Αν δεν έχετε λάβει email επαλήθευσης, αγγίξτε τον παρακάτω σύνδεσμο για να σταλεί ξανά.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Εκ νέου αποστολή email επιβεβαίωσης";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Είσοδος";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Εισαγάγετε συνθηματικό";
+"PASSCODE_CONFIRM_MESSAGE" = "Επιβεβαίωση συνθηματικού";
+"PASSCODE_SAVED_MESSAGE" = "Το συνθηματικό αποθηκεύτηκε";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Έγινε έλεγχος ταυτότητας συνθηματικού";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Εισαγάγετε το παλιό συνθηματικό";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Εισαγάγετε το νέο συνθηματικό";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Επιβεβαίωση νέου συνθηματικού";
+"PASSCODE_INVALID_ALERT_TITLE" = "Λανθασμένο συνθηματικό";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ασυμφωνία συνθηματικών. Δοκιμάστε ξανά.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Πραγματοποιήστε έλεγχο ταυτότητας με Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Σφάλμα Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Επιτρέπονται μόνο αριθμητικοί χαρακτήρες.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Ένδειξη προόδου εισαγωγής συνθηματικού";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Εισάχθηκαν %@ από %@ ψηφία";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Δεν ήταν δυνατή η προσθήκη στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η ενημέρωση στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η διαγραφή στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Δεν ήταν δυνατή η εύρεση στοιχείου της Κλειδοθήκης.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "Α-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Γυναίκα";
+"GENDER_MALE" = "Άντρας";
+"GENDER_OTHER" = "Άλλο";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Όχι";
+"BOOL_YES" = "Ναι";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Αγγίξτε για απάντηση";
+"NULL_ANSWER" = "Επιλέξτε μια απάντηση";
+"PLACEHOLDER_IMAGE_CHOICES" = "Αγγίξτε για επιλογή";
+"PLACEHOLDER_LONG_TEXT" = "Αγγίξτε για να γράψετε";
+
+/* Button titles */
+"BUTTON_AGREE" = "Συμφωνώ";
+"BUTTON_CANCEL" = "Ακύρωση";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Εκκαθάριση";
+"BUTTON_DISAGREE" = "Διαφωνώ";
+"BUTTON_DONE" = "Τέλος";
+"BUTTON_GET_STARTED" = "Έναρξη";
+"BUTTON_LEARN_MORE" = "Μάθετε περισσότερα";
+"BUTTON_NEXT" = "Επόμενο";
+"BUTTON_SKIP" = "Παράλειψη";
+"BUTTON_SKIP_QUESTION" = "Παράλειψη αυτής της ερώτησης";
+"BUTTON_START_TIMER" = "Έναρξη χρονοδιακόπτη";
+"BUTTON_OPTION_SAVE" = "Αποθήκευση για αργότερα";
+"BUTTON_OPTION_DISCARD" = "Απόρριψη αποτελεσμάτων";
+"BUTTON_OPTION_STOP_TASK" = "Τέλος δοκιμής";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Έναρξη δραστηριότητας σε";
+"TASK_COMPLETE_TITLE" = "Η δραστηριότητα ολοκληρώθηκε";
+"TASK_COMPLETE_TEXT" = "Τα δεδομένα σας θα αναλυθούν και θα ειδοποιηθείτε όταν είναι έτοιμα τα αποτελέσματα.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Καταγραφή εικόνας";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Επανάληψη καταγραφής εικόνας";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Δεν βρέθηκε κάμερα. Δεν είναι δυνατή η ολοκλήρωση αυτού του βήματος.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Για να ολοκληρώσετε αυτό το βήμα, επιτρέψτε σε αυτήν την εφαρμογή να προσπελάζει την κάμερα στις Ρυθμίσεις.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Δεν καθορίστηκε κατάλογος εξόδου για καταγεγραμμένες εικόνες.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Δεν ήταν δυνατή η αποθήκευση της καταγεγραμμένης εικόνας.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Φυσική κατάσταση";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Απόσταση (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Καρδιακοί παλμοί (π.α.λ.)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Καθίστε κάπου άνετα για %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Περπατήστε όσο πιο γρήγορα μπορείτε για %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Αυτή η δραστηριότητα αξιολογεί τους καρδιακούς παλμούς σας και μετρά πόσο μακριά μπορείτε να περπατήσετε σε %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Περπατήστε σε εξωτερικό χώρο όσο πιο γρήγορα μπορείτε για %1$@. Όταν τελειώσετε, καθίστε κάπου άνετα και ξεκουραστείτε για %2$@. Για να αρχίσετε, αγγίξτε «Έναρξη».";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Βάδισμα και ισορροπία";
+"WALK_INTRO_TEXT" = "Αυτή η δραστηριότητα αξιολογεί το βάδισμα και την ισορροπία σας καθώς περπατάτε και στέκεστε όρθιοι. Μην πραγματοποιήσετε τη δραστηριότητα αν δεν μπορείτε να περπατήσετε με ασφάλεια χωρίς βοήθεια.";
+"WALK_INTRO_2_TEXT_%ld" = "Βρείτε έναν χώρο όπου μπορείτε να περπατήσετε με ασφάλεια χωρίς βοήθεια και κάντε περίπου %ld βήματα σε ευθεία γραμμή.";
+"WALK_INTRO_2_DETAIL" = "Τοποθετήστε το τηλέφωνό σας στην τσέπη ή την τσάντα σας και μετά ακολουθήστε τις ηχητικές οδηγίες.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Τώρα μείνετε ακίνητοι για %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Μείνετε ακίνητοι για %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Περπατήστε έως %ld βήματα σε ευθεία γραμμή.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Ταχύτητα αγγίγματος";
+"TAPPING_INTRO_TEXT" = "Αυτή η δραστηριότητα αξιολογεί την ταχύτητα αγγιγμάτων σας.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Ακουμπήστε το τηλέφωνό σας σε μια επίπεδη επιφάνεια. Θα εμφανιστούν δύο κουμπιά στην οθόνη σας για %@. Χρησιμοποιήστε δύο δάχτυλα του ίδιου χεριού για να αγγίζετε εναλλάξ τα κουμπιά όσο πιο γρήγορα μπορείτε.";
+"TAPPING_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"TAP_BUTTON_TITLE" = "Αγγίξτε";
+"TOTAL_TAPS_LABEL" = "Συνολικά αγγίγματα";
+"TAPPING_INSTRUCTION" = "Αγγίξτε τα κουμπιά όσο πιο γρήγορα μπορείτε χρησιμοποιώντας δύο δάχτυλα.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Φωνή";
+"AUDIO_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"AUDIO_INSTRUCTION" = "Πείτε «Ααααα» στο μικρόφωνο για όση περισσότερη ώρα μπορέσετε.";
+"AUDIO_INTRO_TEXT" = "Πάρτε μια βαθιά ανάσα και πείτε «Ααααα» στο μικρόφωνο για όση περισσότερη ώρα μπορέσετε. Κρατήστε σταθερή την ένταση ήχου της φωνής σας για να παραμείνουν μπλε οι γραμμές ήχου.";
+"AUDIO_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τη φωνή σας μέσω εγγραφής ενώ μιλάτε στο μικρόφωνο που βρίσκεται στο κάτω μέρος του τηλεφώνου.";
+"AUDIO_TOO_LOUD_LABEL" = "Πολύ δυνατά";
+"AUDIO_GENERIC_ERROR_LABEL" = "Δεν είναι δυνατή η εγγραφή ήχου";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Τονική ακοομετρία";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Η δραστηριότητα αυτή μετρά την ικανότητά σας να ακούτε διαφορετικούς ήχους.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Πριν ξεκινήσετε, συνδέστε τα ακουστικά και φορέστε τα.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Τώρα θα πρέπει να ακούσετε έναν τόνο. Προσαρμόστε την ένταση ήχου χρησιμοποιώντας τα χειριστήρια στο πλάι της συσκευής σας.\n\nΌταν είστε έτοιμοι να ξεκινήσετε, αγγίξτε το κουμπί.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Αγγίξτε το κουμπί κάθε φορά που θα ακούτε έναν ήχο.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, αριστερά";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, δεξιά";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Χωρική μνήμη";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Αυτή η δραστηριότητα αξιολογεί τη χωρική μνήμη σας ζητώντας σας να επαναλάβετε τη σειρά με την οποία φωτίζονται οι %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "εικόνες";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "εικόνες";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με την ίδια σειρά με αυτήν που φωτίστηκαν.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Κάποιες από τις %@ θα φωτίζονται μία-μία. Αγγίξτε αυτές τις %@ με σειρά αντίστροφη από αυτήν που φωτίστηκαν.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Για να αρχίσετε, αγγίξτε «Έναρξη» και μετά παρακολουθήστε προσεκτικά.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Βαθμολογία";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Δείτε τις %@ να φωτίζονται";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Αγγίξτε τις %@ με τη σειρά που επισημάνθηκαν";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Αγγίξτε τις %@ σε αντίστροφη σειρά";
+"MEMORY_GAME_COMPLETE_TITLE" = "Η ακολουθία ολοκληρώθηκε";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Για να συνεχίσετε, αγγίξτε «Επόμενο»";
+"MEMORY_GAME_FAILED_TITLE" = "Νέα δοκιμή";
+"MEMORY_GAME_FAILED_MESSAGE" = "Δεν τα καταφέρατε αυτήν τη φορά. Αγγίξτε «Επόμενο» για να συνεχίσετε.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Τέλος χρόνου";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ο χρόνος τελείωσε.\nΑγγίξτε «Επόμενο» για να συνεχίσετε.";
+"MEMORY_GAME_COMPLETE" = "Το παιχνίδι ολοκληρώθηκε";
+"MEMORY_GAME_PAUSED_TITLE" = "Σε παύση";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Για να συνεχίσετε, αγγίξτε «Επόμενο»";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Χρόνος αντίδρασης";
+"REACTION_TIME_TASK_INTENDED_USE" = "Η δραστηριότητα αυτή υπολογίζει τον χρόνο που χρειάζεστε για να αποκριθείτε σε μια οπτική ένδειξη.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ανακινήστε τη συσκευή προς οποιαδήποτε κατεύθυνση αμέσως μόλις εμφανιστεί η μπλε κουκκίδα στην οθόνη. Θα σας ζητηθεί να το κάνετε αυτό %D φορές.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Απόπειρα %@ από %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ανακινήστε γρήγορα τη συσκευή όταν εμφανιστεί ο μπλε κύκλος";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Πύργος του Ανόι";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τις ικανότητές σας ως προς την επίλυση παζλ.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Μετακινήστε ολόκληρη τη στοίβα στην επισημασμένη πλατφόρμα με όσο το δυνατό λιγότερες κινήσεις.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Επιλύστε το παζλ";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Αριθμός κινήσεων: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Δεν μπορώ να λύσω αυτό το παζλ";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Χρονισμένο περπάτημα";
+"TIMED_WALK_INTRO_DETAIL" = "Αυτή η δραστηριότητα αξιολογεί τη λειτουργία των κάτω άκρων σας.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Βρείτε ένα μέρος, κατά προτίμηση σε εξωτερικό χώρο, όπου μπορείτε να περπατήσετε για περίπου %@ σε ευθεία γραμμή όσο το δυνατόν πιο γρήγορα αλλά με ασφάλεια. Μη μειώσετε την ταχύτητά σας μέχρι να περάσετε τη γραμμή τερματισμού.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Αγγίξτε «Επόμενο» για να ξεκινήσετε.";
+"TIMED_WALK_FORM_TITLE" = "Βοηθητική συσκευή";
+"TIMED_WALK_FORM_TEXT" = "Χρησιμοποιήστε την ίδια βοηθητική συσκευή για κάθε τεστ.";
+"TIMED_WALK_QUESTION_TEXT" = "Φοράτε νάρθηκα ποδοκνημικής;";
+"TIMED_WALK_QUESTION_2_TITLE" = "Χρησιμοποιείτε βοηθητική συσκευή;";
+"TIMED_WALK_QUESTION_2_TEXT" = "Αγγίξτε εδώ για επιλογή απάντησης";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Όχι";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Μονόπλευρο μπαστούνι";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Μονόπλευρη πατερίτσα";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Δίπλευρο μπαστούνι";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Δίπλευρη πατερίτσα";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Περιπατητήρας";
+"TIMED_WALK_INSTRUCTION_%@" = "Περπατήστε έως %@ σε ευθεία γραμμή.";
+"TIMED_WALK_INSTRUCTION_2" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Αγγίξτε «Τέλος» όταν τελειώσετε.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Η δοκιμασία PASAT (Βηματική ακουστική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PVSAT_INTRO_TEXT" = "Η δοκιμασία PVSAT (Βηματική οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PAVSAT_INTRO_TEXT" = "Η δοκιμασία PAVSAT (Βηματική ακουστική και οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής και οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PSAT_INTRO_TEXT_2_%@" = "Τα μονά ψηφία εμφανίζονται κάθε %@ δευτερόλεπτα.\nΠρέπει να προσθέτετε κάθε νέο ψηφίο στο αμέσως προηγούμενο ψηφίο.\nΠροσοχή: Δεν πρέπει να υπολογίζετε το τρέχον σύνολο, αλλά μόνο το άθροισμα των τελευταίων δύο αριθμών.";
+"PSAT_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"PSAT_INITIAL_INSTRUCTION" = "Θυμηθείτε αυτό το πρώτο ψηφίο.";
+"PSAT_INSTRUCTION" = "Προσθέστε αυτό το νέο ψηφίο στο προηγούμενο ψηφίο.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Δοκιμή %@-HPT";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Η δραστηριότητα αυτή μετρά την επιδεξιότητα των άνω άκρων σας ζητώντας σας να τοποθετήσετε έναν κύκλο σε μια τρύπα. Αυτό θα σας ζητηθεί να το κάνετε %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το αριστερό και το δεξί χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το δεξί και το αριστερό χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_TEXT" = "Σηκώστε τoν κύκλο με δύο δάχτυλα.";
+"HOLE_PEG_TEST_TEXT_2" = "Σηκώστε τα δάχτυλα για να αφήσετε τον κύκλο.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Δεν ήταν δυνατή η δημιουργία αρχείου";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Δεν ήταν δυνατή η αφαίρεση επαρκών αρχείων καταγραφής για την επίτευξη ορίου";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Σφάλμα κατά τον καθορισμό χαρακτηριστικού";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Το αρχείο δεν έχει σημανθεί ως διαγραμμένο (δεν έχει σημανθεί ως απεσταλμένο)";
+"ERROR_DATALOGGER_MULTIPLE" = "Πολλαπλά σφάλματα κατά την αφαίρεση αρχείων καταγραφής";
+"ERROR_RECORDER_NO_DATA" = "Δεν βρέθηκαν συλλεγμένα δεδομένα.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Δεν έχει καθοριστεί κατάλογος εξόδου";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Πίσω";
+
+"AX_IMAGE_ILLUSTRATION" = "Απεικόνιση για %@";
+
+"AX_SIGNVIEW_LABEL" = "Καθορισμένο πεδίο υπογραφής";
+"AX_SIGNVIEW_HINT" = "Αγγίξτε την οθόνη και μετακινήστε το δάχτυλό σας για υπογραφή";
+"AX_SIGNVIEW_SIGNED" = "Υπογεγραμμένο";
+"AX_SIGNVIEW_UNSIGNED" = "Ανυπόγραφο";
+
+"AX_SELECTED" = "Επιλεγμένο";
+"AX_UNSELECTED" = "Μη επιλεγμένο";
+
+"AX_SLIDER_LABEL" = "Ρυθμιστικό απάντησης. Εύρος από %@ έως %@";
+"AX_UNLABELED_IMAGE" = "Εικόνα χωρίς ετικέτα";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Έναρξη εργασίας";
+
+"AX.MEMORY.TILE.ACTIVE" = "ενεργό";
+"AX.MEMORY.TILE.CORRECT" = "σωστό";
+"AX.MEMORY.TILE.INCORRECT" = "λάθος";
+"AX.MEMORY.TILE.QUIESCENT" = "αδρανές";
+"AX.MEMORY.TILE.LABEL" = "Πλακίδιο παιχνιδιού μνήμης";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Προεπισκόπηση καταγραφής";
+"AX_IMAGE_CAPTURED_LABEL" = "Καταγεγραμμένη εικόνα";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Δεν είναι δυνατή η τοποθέτηση δίσκου μεγέθους %@ πάνω σε δίσκο μεγέθους %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Στόχος";
+"AX_TOWER_OF_HANOI_TOWER" = "Πύργος";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Αγγίξτε δύο φορές για τοποθέτηση του δίσκου";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Αγγίξτε δύο φορές για επιλογή του ανώτερου δίσκου";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Κενός";
+
+"AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
+"AX_GRAPH_AND_SEPARATOR" = " και ";
+"AX_GRAPH_POINT_%@" = "Σημείο: %@";

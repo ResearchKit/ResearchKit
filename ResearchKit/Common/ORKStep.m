@@ -55,6 +55,10 @@
     return [ORKStepViewController class];
 }
 
+- (Class)stepViewControllerClass {
+    return [[self class] stepViewControllerClass];
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;
@@ -116,7 +120,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@ %@ %@>", [super description], self.identifier, self.title];
+    return [NSString stringWithFormat:@"<%@ %@ %@>", super.description, self.identifier, self.title];
 }
 
 - (BOOL)showsProgress {

@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Consimțământ";
+"CONSENT_NAME_GIVEN" = "Prenume";
+"CONSENT_NAME_FAMILY" = "Nume de familie";
+"CONSENT_NAME_PLACEHOLDER" = "Obligatoriu";
+"CONSENT_REVIEW_TITLE" = "Recapitulare";
+"CONSENT_REVIEW_INSTRUCTION" = "Recapitulați formularul de mai jos și apăsați “De acord” dacă sunteți gata să continuați.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Recapitulare";
+"CONSENT_SIGNATURE_TITLE" = "Semnătura";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Semnați-vă folosind un deget pe linia de mai jos";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Semnați aici";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Pagina %1$ld din %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Bun venit";
+"CONSENT_SECTION_DATA_GATHERING" = "Colectarea datelor";
+"CONSENT_SECTION_PRIVACY" = "Intimitate";
+"CONSENT_SECTION_DATA_USE" = "Utilizarea datelor";
+"CONSENT_SECTION_STUDY_SURVEY" = "Chestionar studiu";
+"CONSENT_SECTION_STUDY_TASKS" = "Sarcini studiu";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Alocarea timpului";
+"CONSENT_SECTION_WITHDRAWING" = "Retragere";
+"CONSENT_LEARN_MORE_TITLE" = "Aflați mai multe";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Aflați mai multe despre colectarea datelor";
+"LEARN_MORE_DATA_USE" = "Aflați mai multe despre utilizarea datelor";
+"LEARN_MORE_PRIVACY" = "Aflați mai multe despre protejarea intimității și identității dvs.";
+"LEARN_MORE_WELCOME" = "Mai întâi, aflați mai multe despre studiu";
+"LEARN_MORE_STUDY_SURVEY" = "Aflați mai multe despre chestionarul studiului";
+"LEARN_MORE_TIME_COMMITMENT" = "Aflați mai multe despre impactul studiului asupra timpului dvs.";
+"LEARN_MORE_TASKS" = "Aflați mai multe despre sarcinile implicate";
+"LEARN_MORE_WITHDRAWING" = "Aflați mai multe despre retragere";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Opțiuni de partajare";
+"CONSENT_SHARE_WIDELY_%@" = "Partajați datele dvs. cu %@ și cercetători calificați din întreaga lume";
+"CONSENT_SHARE_ONLY_%@" = "Partajați datele dvs. doar cu %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Datele rezultate în urma participării dvs. la acest studiu vor fi trimise la %@ .\n\nPartajarea pe o scară mai largă a datelor dvs. codificate (fără a include informații precum numele dvs.) poate fi utilă pentru acest studiu de cercetare și pentru altele viitoare.";
+"LEARN_MORE_CONSENT_SHARING" = "Mai multe despre partajarea datelor";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nume %@ (tipărit)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Semnătură %@";
+"CONSENT_DOC_LINE_DATE" = "Data";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Pasul %1$@ din %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Valoare nevalidă";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1$@” depășește maximul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Valoarea “%1$@” este mai mică decât minimul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ nu este o valoare validă.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Adresă de e-mail nevalidă: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Introduceți o adresă";
+"LOCATION_ERROR_TITLE" = "Adresa specificată nu a putut fi găsită";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Imposibil de rezolvat localizarea dvs. actuală. Introduceți o adresă sau mergeți într-un loc cu semnal GPS mai bun dacă este cazul.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Accesul la serviciile de localizare a fost refuzat. Acordați acestei aplicații permisiunea de a utiliza serviciile de localizare din Configurări.";
+"LOCATION_ERROR_GEOCODE" = "Imposibil de găsit un rezultat pentru adresa introdusă. Asigurați-vă că adresa este validă.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nu dispuneți de o conexiune la Internet sau ați depășit numărul maxim al solicitărilor de identificare a adreselor. Dacă nu dispuneți de conexiune la Internet, activați Wi-Fi pentru a răspunde la această întrebare, omiteți întrebarea dacă butonul de omitere este disponibil sau reveniți la chestionar după ce vă conectați la Internet. În caz contrar, reîncercați peste câteva minute.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conținutul de text depășește lungimea maximă: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera nu este disponibilă în ecranul divizat.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ioanapopa@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Parolă";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduceți parola";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmați";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduceți din nou parola";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Parolele nu coincid.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informații suplimentare";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ioana";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Popescu";
+"GENDER_FORM_ITEM_TITLE" = "Sex";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Alegeți o opțiune";
+"DOB_FORM_ITEM_TITLE" = "Data nașterii";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Alegeți o dată";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificare";
+"VERIFICATION_STEP_TITLE" = "Verificați-vă e‑mailul";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Apăsați pe linkul de mai jos dacă nu ați primit un e‑mail de verificare și ați dori retrimiterea acestuia.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Retrimite e‑mailul de verificare";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ați uitat parola?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Introduceți codul";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmare cod";
+"PASSCODE_SAVED_MESSAGE" = "Cod salvat";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Cod autentificat";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Introduceți codul vechi";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Introduceți codul nou";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirmați noul cod";
+"PASSCODE_INVALID_ALERT_TITLE" = "Cod incorect";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Codurile nu coincid. Reîncercați.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentificați-vă cu Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Eroare Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sunt permise doar caractere numerice.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicator de progres pentru introducerea codului";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ din %@ cifre introduse";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Imposibil de adăugat articolul din portchei.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Imposibil de actualizat articolul din portchei.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Imposibil de șters articolul din portchei.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Imposibil de găsit articolul din portchei.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Feminin";
+"GENDER_MALE" = "Masculin";
+"GENDER_OTHER" = "Altul";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nu";
+"BOOL_YES" = "Da";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Apăsați pentru a răspunde";
+"NULL_ANSWER" = "Selectați un răspuns";
+"PLACEHOLDER_IMAGE_CHOICES" = "Apăsați pentru a selecta";
+"PLACEHOLDER_LONG_TEXT" = "Apăsați pentru a scrie";
+
+/* Button titles */
+"BUTTON_AGREE" = "De acord";
+"BUTTON_CANCEL" = "Anulați";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Degajați";
+"BUTTON_DISAGREE" = "Nu sunt de acord";
+"BUTTON_DONE" = "OK";
+"BUTTON_GET_STARTED" = "Start";
+"BUTTON_LEARN_MORE" = "Aflați mai multe";
+"BUTTON_NEXT" = "Înainte";
+"BUTTON_SKIP" = "Omiteți";
+"BUTTON_SKIP_QUESTION" = "Omiteți această întrebare";
+"BUTTON_START_TIMER" = "Porniți temporizatorul";
+"BUTTON_OPTION_SAVE" = "Salvați pentru mai târziu";
+"BUTTON_OPTION_DISCARD" = "Abandonați rezultatele";
+"BUTTON_OPTION_STOP_TASK" = "Încheiați sarcina";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Activitatea începe peste";
+"TASK_COMPLETE_TITLE" = "Activitate finalizată";
+"TASK_COMPLETE_TEXT" = "Datele dvs. vor fi analizate și veți primi o notificare atunci când rezultatele vor fi disponibile.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturați imaginea";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapturați imaginea";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nicio cameră găsită. Această etapă nu poate fi finalizată.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Pentru a finaliza această etapă, acordați acestei aplicații acces la cameră în Configurări.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire pentru imaginile capturate.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imaginea capturată nu a putut fi salvată.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distanță (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Ritm cardiac (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Așezați-vă confortabil timp de %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Mergeți cât de repede puteți timp de %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Această activitate vă monitorizează ritmul cardiac și măsoară cât de mult puteți merge în %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Mergeți în aer liber cu viteza maximă posibilă timp de %1$@. Când sunteți gata, așezați-vă și stați confortabil timp de %2$@. Pentru a începe, apăsați “Start”.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Mers și echilibru";
+"WALK_INTRO_TEXT" = "Această activitate vă măsoară mersul și echilibrul în timp ce mergeți și stați în repaus. Nu continuați dacă nu puteți merge în siguranță, fără a necesita asistență.";
+"WALK_INTRO_2_TEXT_%ld" = "Găsiți un loc unde să puteți merge în siguranță, fără a necesita asistență, aproximativ %ld pași în linie dreaptă.";
+"WALK_INTRO_2_DETAIL" = "Puneți-vă telefonul într-un buzunar sau într-o geantă și urmați instrucțiunile audio.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Acum nu vă mișcați timp de %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Nu vă mișcați timp de %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Întorceți-vă și mergeți înapoi la locul de pornire.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Mergeți până la %ld pași în linie dreaptă.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Viteză de apăsare";
+"TAPPING_INTRO_TEXT" = "Această activitate vă măsoară viteza de apăsare cu degetele.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Așezați-vă telefonul pe o suprafață plată. Pe ecran vor apărea două butoane timp de %@. Folosind două degete de la aceeași mână, apăsați pe rând butoanele cât de repede puteți.";
+"TAPPING_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TAP_BUTTON_TITLE" = "Apăsați";
+"TOTAL_TAPS_LABEL" = "Total apăsări";
+"TAPPING_INSTRUCTION" = "Apăsați butoanele cât de repede puteți folosind două degete.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Voce";
+"AUDIO_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"AUDIO_INSTRUCTION" = "Spuneți “Aaaaah” în microfon cât de mult timp puteți.";
+"AUDIO_INTRO_TEXT" = "Inspirați adânc și spuneți “Aaaaah” în microfon cât de mult timp puteți. Mențineți un volum vocal constant, astfel încât barele audio să rămână albastre.";
+"AUDIO_INTENDED_USE" = "Această activitate vă evaluează vocea prin înregistrarea acesteia cu microfonul din partea de jos a telefonului dvs.";
+"AUDIO_TOO_LOUD_LABEL" = "Prea tare";
+"AUDIO_GENERIC_ERROR_LABEL" = "Imposibil de înregistrat audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometrie tonală";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Această activitate vă măsoară capacitatea de a auzi diferite sunete.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Înainte de a începe, conectați căștile și puneți-le pe cap.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ar trebui să auziți un ton acum. Reglați volumul folosind comenzile de pe partea laterală a dispozitivului.\n\nApăsați butonul când sunteți gata să începeți.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Apăsați butonul de fiecare dată când începeți să auziți un sunet.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, stânga";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, dreapta";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Memorie spațială";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Această activitate vă măsoară memoria spațială pe termen scurt, solicitându-vă să repetați ordinea în care se aprind simbolurile reprezentând %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flori";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flori";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea în care s‑au aprins.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea inversă aprinderii lor.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Pentru a începe, apăsați “Start”, apoi priviți cu atenție.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Scor";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Priviți cum se aprind simbolurile de %@";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Apăsați pe %@ în ordinea în care s‑au aprins";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Apăsați pe %@ în ordine inversă";
+"MEMORY_GAME_COMPLETE_TITLE" = "Secvență finalizată";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Pentru a continua, apăsați “Înainte”";
+"MEMORY_GAME_FAILED_TITLE" = "Reîncercați";
+"MEMORY_GAME_FAILED_MESSAGE" = "Nu ați reușit să vă încadrați în timpul alocat. Apăsați “Înainte” pentru a repeta.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Timpul a expirat";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ați epuizat timpul.\nApăsați “Înainte” pentru a continua.";
+"MEMORY_GAME_COMPLETE" = "Joc finalizat";
+"MEMORY_GAME_PAUSED_TITLE" = "Suspendat";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Pentru a continua, apăsați “Înainte”";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Timp de reacție";
+"REACTION_TIME_TASK_INTENDED_USE" = "Această activitate evaluează timpul de care aveți nevoie pentru a răspunde la un stimul vizual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agitați dispozitivul în orice direcție imediat ce apare punctul albastru pe ecran. Va trebui să repetați acțiunea de %D ori.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Încercarea %@ din %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agitați rapid dispozitivul atunci când apare cercul albastru";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Turnul din Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Această activitate evaluează aptitudinile dvs. de rezolvare a puzzle‑urilor";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mutați toată stiva pe platforma evidențiată din cât mai puține mișcări posibil.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rezolvați puzzle‑ul";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Număr de mutări: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nu pot rezolva acest puzzle";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Mers cronometrat";
+"TIMED_WALK_INTRO_DETAIL" = "Această activitate măsoară funcționarea extremităților dvs. inferioare.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Găsiți un loc, preferabil afară, unde să puteți merge aproximativ %@ în linie dreaptă cât de repede posibil, dar în siguranță. Nu încetiniți decât după ce treceți linia de sosire.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Apăsați “Înainte” pentru a începe.";
+"TIMED_WALK_FORM_TITLE" = "Dispozitiv asistiv";
+"TIMED_WALK_FORM_TEXT" = "Utilizați același dispozitiv asistiv pentru fiecare test.";
+"TIMED_WALK_QUESTION_TEXT" = "Purtați o orteză de gleznă?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Utilizați un dispozitiv asistiv?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Apăsați aici pentru un răspuns.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nu";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Baston unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Cârjă unilaterală";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bastoane bilaterale";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Cârje bilaterale";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Cadru de mers/cu rotile";
+"TIMED_WALK_INSTRUCTION_%@" = "Mergeți până la %@ în linie dreaptă.";
+"TIMED_WALK_INSTRUCTION_2" = "Întorceți-vă și mergeți înapoi la locul de pornire.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Apăsați OK când terminați.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Testul PAVSAT (testul auditiv pe etape de adunare în serie) măsoară aptitudinile dvs. de calcul și viteza de procesare a informațiilor auditive.";
+"PVSAT_INTRO_TEXT" = "Testul PAVSAT (testul vizual pe etape de adunare în serie) măsoară aptitudinile dvs. de calcul și viteza de procesare a informațiilor vizuale.";
+"PAVSAT_INTRO_TEXT" = "Testul PAVSAT (testul auditiv și vizual pe etape de adunare în serie) măsoară aptitudinile dvs. de calcul și viteza de procesare a informațiilor auditive și vizuale.";
+"PSAT_INTRO_TEXT_2_%@" = "Pe ecran va fi afișată câte o cifră la fiecare %@ secunde.\nTrebuie să adunați fiecare cifră nouă cu cea imediat precedentă acesteia.\nAtenție, nu trebuie să calculați un total cumulat, ci doar suma ultimelor două numere.";
+"PSAT_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"PSAT_INITIAL_INSTRUCTION" = "Rețineți această primă cifră.";
+"PSAT_INSTRUCTION" = "Adăugați această nouă cifră la cea anterioară.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Testul cu %@ cercuri";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Această activitate vă măsoară funcționalitatea extremităților superioare, solicitându‑vă să plasați un cerc într‑un orificiu. Va trebui să repetați acțiunea de %@ ori.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vor fi testate atât mâna dvs. stângă, cât și cea dreaptă.\nTrebuie să ridicați cercul cât mai repede posibil, să îl puneți în orificiu și, după ce repetați acțiunea de %@ ori, să îl eliminați din nou de %@ ori.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vor fi testate atât mâna dvs. dreaptă, cât și cea stângă.\nTrebuie să ridicați cercul cât mai repede posibil, să îl puneți în orificiu și, după ce repetați acțiunea de %@ ori, să îl eliminați din nou de %@ ori.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Puneți cercul în orificiu folosind mâna stângă.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Puneți cercul în orificiu folosind mâna dreaptă.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Puneți cercul după linie folosind mâna stângă.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Puneți cercul după linie folosind mâna dreaptă.";
+"HOLE_PEG_TEST_TEXT" = "Ridicați cercul folosind două degete.";
+"HOLE_PEG_TEST_TEXT_2" = "Ridicați degetele pentru a elibera cercul.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Fișierul nu a putut fi creat";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nu au putut fi eliminate suficiente fișiere jurnal pentru atingerea pragului admis";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Eroare la definirea atributului";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Fișierul nu a fost marcat drept șters (nu a fost marcat drept încărcat)";
+"ERROR_DATALOGGER_MULTIPLE" = "Mai multe erori la eliminarea jurnalelor";
+"ERROR_RECORDER_NO_DATA" = "Nu au fost găsite date colectate.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nu există date";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Înapoi";
+
+"AX_IMAGE_ILLUSTRATION" = "Ilustrație reprezentând %@";
+
+"AX_SIGNVIEW_LABEL" = "Câmp de semnătură desemnat";
+"AX_SIGNVIEW_HINT" = "Atingeți ecranul și deplasați-vă degetul pentru a semna";
+"AX_SIGNVIEW_SIGNED" = "Semnat";
+"AX_SIGNVIEW_UNSIGNED" = "Nesemnat";
+
+"AX_SELECTED" = "Selectat";
+"AX_UNSELECTED" = "Neselectat";
+
+"AX_SLIDER_LABEL" = "Glisor de răspuns. Variază de la %@ la %@";
+"AX_UNLABELED_IMAGE" = "Imagine neetichetată";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Începeți sarcina";
+
+"AX.MEMORY.TILE.ACTIVE" = "activ";
+"AX.MEMORY.TILE.CORRECT" = "corect";
+"AX.MEMORY.TILE.INCORRECT" = "incorect";
+"AX.MEMORY.TILE.QUIESCENT" = "pasiv";
+"AX.MEMORY.TILE.LABEL" = "Piesă joc memorie";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Previzualizare captură";
+"AX_IMAGE_CAPTURED_LABEL" = "Imagine capturată";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nu se poate plasa un disc de mărimea %@ pe un disc de mărimea %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Țintă";
+"AX_TOWER_OF_HANOI_TOWER" = "Turn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Apăsați dublu pentru a plasa discul";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Apăsați dublu pentru a selecta discul cel mai de sus";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Are disc de mărime %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Gol";
+
+"AX_GRAPH_RANGE_FORMAT" = "Interval de la %@ la %@";
+"AX_GRAPH_AND_SEPARATOR" = " și ";
+"AX_GRAPH_POINT_%@" = "Punctul: %@";

@@ -84,17 +84,17 @@
 - (void)start {
     [super start];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
     }
     
     self.motionManager = [self createMotionManager];
-    self.motionManager.deviceMotionUpdateInterval = 1.0/_frequency;
+    self.motionManager.deviceMotionUpdateInterval = 1.0 / _frequency;
     
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     
@@ -161,11 +161,6 @@
     
     _logger = nil;
 }
-
-@end
-
-
-@interface ORKDeviceMotionRecorderConfiguration ()
 
 @end
 
