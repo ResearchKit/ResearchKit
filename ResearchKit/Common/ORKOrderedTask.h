@@ -452,13 +452,15 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  Data collected by the task is in the form of an `ORKTimedWalkResult` object.
  
- @param identifier              The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription  A localized string describing the intended use of the data
- collected. If the value of this parameter is `nil`, the default
- localized text is displayed.
- @param distanceInMeters        The timed walk distance in meters.
- @param timeLimit               The time limit to complete the trials.
- @param options                 Options that affect the features of the predefined task.
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                      collected. If the value of this parameter is `nil`, the default
+                                      localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+                                      about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
  
  @return An active Timed Walk task that can be presented with an `ORKTaskViewController` object.
  */
@@ -466,6 +468,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options;
 
 /**
