@@ -533,13 +533,8 @@ ORK_CLASS_AVAILABLE
 @property ORKNumberFormattingStyle numberStyle;
 
 /**
-<<<<<<< HEAD
- A number formatter applied to the minimum, maximum, and slider values. 
- @discussion This property can be overridden by subclasses.
-=======
- Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
+ A number formatter applied to the minimum, maximum, and slider values. Can be overridden by
  subclasses.
->>>>>>> convergence
  */
 @property (readonly) NSNumberFormatter *numberFormatter;
 
