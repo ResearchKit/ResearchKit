@@ -23,7 +23,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
 
     *Contributed by [Apple Inc](https://github.com/researchkit).*
 
-    The *[Sample App]** serves as a template application that combines different modules from the ResearchKit framework.
+    The *[Sample App]* serves as a template application that combines different modules from the ResearchKit framework.
 
 - **Account Module**
 
@@ -64,7 +64,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
      - At least one form item has an answer.
      - All answered form items are valid.
      - All the non-optional form items have answers.
-
+     
  - **Location Question**
  
     *Contributed by [Quintiles](https://github.com/QuintilesRK).*
