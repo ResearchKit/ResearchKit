@@ -276,7 +276,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) BOOL puzzleWasSolved;
 
 /**
- An array of moves, in which each item is and `ORKTowerOfHanoiMove` object that represents a move.
+ An array of moves, in which each item is an `ORKTowerOfHanoiMove` object that represents a move.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKTowerOfHanoiMove *> *moves;
 
@@ -310,7 +310,7 @@ ORK_CLASS_AVAILABLE
  The index of the donor tower in the move.
  
  The Tower of Hanoi puzzle has three towers, and so the value of this property is
- therefore always 0, 1, or 2. The indexes seqentially represent the towers from left to right when they are laid out
+ therefore always 0, 1, or 2. The indexes sequentially represent the towers from left to right when they are laid out
  horizontally and from top to bottom when they are layed out vertically. The index for a given tower is consistent
  between changes to and from the horizontal and vertical layouts.
  */
@@ -320,7 +320,7 @@ ORK_CLASS_AVAILABLE
  The index of the recipient tower in the move. 
  
  The Tower of Hanoi puzzle has three towers, and so the value of this property is
- therefore always 0, 1, or 2. The indexes seqentially represent the towers from left to right when they are laid out
+ therefore always 0, 1, or 2. The indexes sequentially represent the towers from left to right when they are laid out
  horizontally and from top to bottom when they are layed out vertically. The index for a given tower is consistent
  between changes to and from the horizontal and vertical layouts.
  */
@@ -720,7 +720,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  The numeric answer;
- -1 if no answer provided.
+ `-1` if no answer is provided.
  */
 @property (nonatomic, assign) NSInteger answer;
 
