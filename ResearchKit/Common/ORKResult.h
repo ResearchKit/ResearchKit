@@ -725,7 +725,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSInteger answer;
 
 /**
- The time interval between the new digit and the answer, or test duration if no answer provided.
+ The time interval between the new digit and the answer, or test duration if no answer is provided.
  */
 @property (nonatomic, assign) NSTimeInterval time;
 
