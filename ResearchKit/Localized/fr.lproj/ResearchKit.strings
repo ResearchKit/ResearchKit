@@ -309,7 +309,8 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Deux béquilles";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Un déambulateur/rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Marchez %@ en ligne droite.";
-"TIMED_WALK_INSTRUCTION_2" = "Faites demi-tour et revenez à votre point de départ.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Faites demi-tour.";
+"TIMED_WALK_INSTRUCTION_2" = "Revenez à votre point de départ.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Touchez Terminé une fois terminé.";
 
 /* PSAT active task. */

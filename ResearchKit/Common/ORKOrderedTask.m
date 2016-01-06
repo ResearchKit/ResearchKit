@@ -298,6 +298,7 @@ NSString * const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
 NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
 NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
 NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
+NSString * const ORKTimedWalkTurnAroundStepIdentifier = @"timed.walk.turn.around";
 NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
 NSString * const ORKPSATStepIdentifier = @"psat";
 NSString * const ORKAudioRecorderIdentifier = @"audio";
@@ -1090,7 +1091,14 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
-        
+
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
+            step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
+
+            ORKStepArrayAddStep(steps, step);
+        }
+
         {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
             if (!(options & ORKPredefinedTaskOptionExcludePedometer)) {
