@@ -17,7 +17,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
     
     The test invovles putting a variable variable number of pegs in a hole, and then remove them. 
     
-    The test is documented in the scientific literature to measure the *MSFC score in Multiple Sclerosis(http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/9-Hole-Peg-Test-(9-HPT))* or *Parkinson's Disease(http://www.ncbi.nlm.nih.gov/pubmed/22020457)*.
+    The test is documented in the scientific literature to measure the *[MSFC score in Multiple Sclerosis](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/9-Hole-Peg-Test-(9-HPT))* or *[Parkinson's Disease](http://www.ncbi.nlm.nih.gov/pubmed/22020457)*.
 
 - **Sample App**
 
@@ -61,10 +61,10 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
     
     The *Continue/Done* button of form steps only enables if:
     
-     - At least one form item has an answer.
-     - All answered form items are valid.
-     - All the non-optional form items have answers.
-     
+        - At least one form item has an answer.
+        - All answered form items are valid.
+        - All the non-optional form items have answers.
+
  - **Location Question**
  
     *Contributed by [Quintiles](https://github.com/QuintilesRK).*
