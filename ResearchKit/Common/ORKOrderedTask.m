@@ -1093,8 +1093,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
 
         {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
             step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
+            step.spokenInstruction = step.title;
+            step.shouldStartTimerAutomatically = YES;
 
             ORKStepArrayAddStep(steps, step);
         }
