@@ -1062,23 +1062,23 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
+        NSMutableArray *recorderConfigurations = [NSMutableArray array];
+        if (!(options & ORKPredefinedTaskOptionExcludePedometer)) {
+            [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
+        }
+        if (!(options & ORKPredefinedTaskOptionExcludeAccelerometer)) {
+            [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
+                                                                                                      frequency:100]];
+        }
+        if (!(options & ORKPredefinedTaskOptionExcludeDeviceMotion)) {
+            [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
+                                                                                                     frequency:100]];
+        }
+        if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
+            [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
+        }
+
         {
-            NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (!(options & ORKPredefinedTaskOptionExcludePedometer)) {
-                [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
-            }
-            if (!(options & ORKPredefinedTaskOptionExcludeAccelerometer)) {
-                [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
-                                                                                                          frequency:100]];
-            }
-            if (!(options & ORKPredefinedTaskOptionExcludeDeviceMotion)) {
-                [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
-                                                                                                         frequency:100]];
-            }
-            if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
-                [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
-            }
-            
             ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTrial1StepIdentifier];
             step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_%@", nil), formattedLength];
             step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
@@ -1093,31 +1093,20 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
 
         {
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
+            ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
             step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
+            step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
             step.spokenInstruction = step.title;
-            step.shouldStartTimerAutomatically = YES;
+            step.recorderConfigurations = recorderConfigurations;
+            step.distanceInMeters = 1;
+            step.shouldTintImages = YES;
+            step.image = [UIImage imageNamed:@"turnaround" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
 
             ORKStepArrayAddStep(steps, step);
         }
 
         {
-            NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (!(options & ORKPredefinedTaskOptionExcludePedometer)) {
-                [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
-            }
-            if (!(options & ORKPredefinedTaskOptionExcludeAccelerometer)) {
-                [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
-                                                                                                          frequency:100]];
-            }
-            if (!(options & ORKPredefinedTaskOptionExcludeDeviceMotion)) {
-                [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
-                                                                                                         frequency:100]];
-            }
-            if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
-                [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
-            }
-            
             ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTrial2StepIdentifier];
             step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_2", nil), formattedLength];
             step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
