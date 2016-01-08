@@ -13,9 +13,9 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
  
     *Contributed by [Julien Therier](https://github.com/julientherier).*
 
-    The *[9-Hole Peg Test] task* is used to test upper extremity function. 
+    The *[9-Hole Peg Test] task* is used to test upper extremity functionality. 
     
-    The test invovles putting a variable variable number of pegs in a hole, and then remove them. 
+    The test involves putting a variable variable number of pegs in a hole, and then removing them. 
     
     The test is documented in the scientific literature to measure the *[MSFC score in Multiple Sclerosis](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/9-Hole-Peg-Test-(9-HPT))* or *[Parkinson's Disease](http://www.ncbi.nlm.nih.gov/pubmed/22020457)*.
 
@@ -29,13 +29,13 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
 
     *Contributed by [Apple Inc](https://github.com/researchkit).*
 
-    The *[Account Module]* provides steps to facilitate with account creation and login.
+    The *[Account Module]* provides steps to facilitate account creation and login.
     
     The module includes the following steps:
     
-    1. Registration step which can be used to create a new account.
-    2. Verification step which can assist with email verification.
-    3. Login step which can allow registered users to login.
+    1. Registration to create a new account.
+    2. Verification to verify email.
+    3. Login to allow registered users to login.
     
 - **Passcode with Touch ID**
 
@@ -43,7 +43,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
 
     The *[Passcode with Touch ID] module* provides the ability to secure any ResearchKit application with a pin entry.
     
-    This module includes a *Keychain Wrapper* that stores the passcode onto the device, as well as the option to use Touch ID on compatible devices. The passcode module supports 4-pin and 6-pin entries.
+    This module includes a *Keychain Wrapper* that stores the passcode on the device, as well as the option to use Touch ID on compatible devices. The passcode module supports 4-pin and 6-pin entries.
     
     The passcode module can be used in the following scenarios:
     
@@ -57,9 +57,9 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
 
     *Contributed by [Ricardo Sánchez-Sáez](https://github.com/rsanchezsaez).*
 
-    Implements `ORKFormItem`'s `optional` property.
+    Implements the `ORKFormItem` `optional` property.
     
-    The *Continue/Done* button of form steps only enables if:
+    The *Continue/Done* button of form steps enables only if:
     
         - At least one form item has an answer.
         - All answered form items are valid.
@@ -85,7 +85,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.3*
  
     *Contributed by [Quintiles](https://github.com/QuintilesRK).*
     
-    The *Validated Text Answer Format* enhances the existing *Text Answer Format* by providing input validaiton using a regular expression.
+    The *Validated Text Answer Format* enhances the existing *Text Answer Format* by providing input validation using a regular expression.
     
     A valid *NSRegularExpression* object and an *error message* string are required to properly use this answer format.
     
