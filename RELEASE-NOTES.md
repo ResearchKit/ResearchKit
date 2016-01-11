@@ -1,6 +1,95 @@
 # ResearchKit Release Notes
 
 
+## ResearchKit 1.3 Release Notes
+
+*ResearchKit 1.3* supports *iOS* and requires *Xcode 7.2* or newer. The minimum supported *Base SDK* is *8.0*.
+
+In addition to general stability and performance improvements, *ResearchKit 1.3* includes the following new features and enhancements.
+
+- **New Active Tasks**
+
+ - **9-Hole Peg Test**
+ 
+    *Contributed by [Julien Therier](https://github.com/julientherier).*
+
+    The *[9-Hole Peg Test] task* is used to test upper extremity functionality. 
+    
+    The test involves putting a variable variable number of pegs in a hole, and then removing them. 
+    
+    The test is documented in the scientific literature to measure the *[MSFC score in Multiple Sclerosis](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/9-Hole-Peg-Test-(9-HPT))* or *[Parkinson's Disease](http://www.ncbi.nlm.nih.gov/pubmed/22020457)*.
+
+- **Sample App**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *[Sample App]* serves as a template application that combines different modules from the ResearchKit framework.
+
+- **Account Module**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *[Account Module]* provides steps to facilitate account creation and login.
+    
+    The module includes the following steps:
+    
+    1. Registration to create a new account.
+    2. Verification to verify email.
+    3. Login to allow registered users to login.
+    
+- **Passcode with Touch ID**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *[Passcode with Touch ID] module* provides the ability to secure any ResearchKit application with a pin entry.
+    
+    This module includes a *Keychain Wrapper* that stores the passcode on the device, as well as the option to use Touch ID on compatible devices. The passcode module supports 4-pin and 6-pin entries.
+    
+    The passcode module can be used in the following scenarios:
+    
+    1. Passcode creation step which can be used as part of onboarding to create a passcode and store it in the keychain.
+    2. Passcode authentication view controller which can be presented modally when appropriate.
+    3. Passcode modification view controller which allows the participant to change their passcode.
+    
+- **Other Improvements**
+
+ - **Optional Form Items**
+
+    *Contributed by [Ricardo Sánchez-Sáez](https://github.com/rsanchezsaez).*
+
+    Implements the `ORKFormItem` `optional` property.
+    
+    The *Continue/Done* button of form steps enables only if:
+    
+        - At least one form item has an answer.
+        - All answered form items are valid.
+        - All the non-optional form items have answers.
+
+ - **Location Question**
+ 
+    *Contributed by [Quintiles](https://github.com/QuintilesRK).*
+    
+    A *Location Question* can be used to request details about the participant's current location or a specific address.
+    
+    The question uses *MapKit* to provides a visual representation for the specified address.
+    
+ - **Wait Step**
+ 
+    *Contributed by [Quintiles](https://github.com/QuintilesRK).*
+    
+    The *Wait Step* provides a step to be used in-between steps when additional data processing is required.
+    
+    The step supports both indeterminate and determinate progress views, as well as the ability to show text status updates.
+    
+ - **Validated Text Answer Format**
+ 
+    *Contributed by [Quintiles](https://github.com/QuintilesRK).*
+    
+    The *Validated Text Answer Format* enhances the existing *Text Answer Format* by providing input validation using a regular expression.
+    
+    A valid *NSRegularExpression* object and an *error message* string are required to properly use this answer format.
+    
+
 ## ResearchKit 1.2 Release Notes
 
 *ResearchKit 1.2* supports *iOS* and requires *Xcode 7.0* or newer. The minimum supported *Base SDK* is *8.0*.
