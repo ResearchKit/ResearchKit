@@ -70,7 +70,7 @@ class ChartListViewController: UITableViewController {
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
         discreteGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
         // Optional custom configuration
-        lineGraphChartView.showsHorizontalReferenceLines = true
+        discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]

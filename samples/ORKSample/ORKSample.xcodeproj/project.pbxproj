@@ -32,6 +32,7 @@
 		B5D35FC71BEA363F004CBB06 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D35FC61BEA363F004CBB06 /* ProfileHeaderView.swift */; };
 		B5D35FC91BEA48D3004CBB06 /* HKHealthStore+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D35FC81BEA48D3004CBB06 /* HKHealthStore+Queries.swift */; };
 		B5FA92E91BF13D98001E46C0 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA92E81BF13D98001E46C0 /* HealthDataStep.swift */; };
+		BC8B1E691C2B3D3300B42E0A /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8632A6B01C22215E00557973 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BC8B1E691C2B3D3300B42E0A /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +273,6 @@
 				TargetAttributes = {
 					161479BF1BD6CE8F0099A068 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = A93A5CM278;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 1;

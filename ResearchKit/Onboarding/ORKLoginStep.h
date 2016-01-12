@@ -63,7 +63,6 @@ ORK_CLASS_AVAILABLE
  @param identifier                      The string that identifies the step (see `ORKStep`).
  @param title                           The title of the form (see `ORKStep`).
  @param text                            The text shown immediately below the title (see `ORKStep`).
- @param email                           The email address that needs to be verified.
  @param loginViewControllerClass        The subclassed login step view controller class.
  
  @return An initialized login step object.

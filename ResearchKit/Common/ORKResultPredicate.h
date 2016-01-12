@@ -176,7 +176,7 @@ ORK_CLASS_AVAILABLE
  the `ORKQuestionResult` subtypes.
  
  You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
- are used to match specific `ORKQuestionResult` instances (created in response to the participant's
+ are used to match specific ORKQuestionResult instances (created in response to the participant's
  answers) and navigate accordingly. You can match results both in an ongoing task or in previously
  completed tasks.
  
@@ -184,8 +184,9 @@ ORK_CLASS_AVAILABLE
 
  Note that each `ORKStep` object produces one `ORKStepResult` collection object. A step
  result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object which has
+
  the same identifier as the step that generated it. A step result produced by an `ORKFormStep`
- object can contain one or more `ORKQuestionResult` objects which have the identifiers of the
+ object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
 
  For matching a single-question step result, you only need to set the `resultIdentifer` when
@@ -196,6 +197,7 @@ ORK_CLASS_AVAILABLE
  
  For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
+
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
@@ -332,7 +334,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
- specified boolean value.
+ specified Boolean value.
  
  @param resultSelector      The result selector object which specifies the question result you are
                                 interested in.
@@ -344,6 +346,7 @@ ORK_CLASS_AVAILABLE
                                                       expectedAnswer:(BOOL)expectedAnswer;
 
 /**
+
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
  specified string.
  
@@ -432,7 +435,7 @@ ORK_CLASS_AVAILABLE
  the specified hour and minute values.
  
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
- If you are interested in additional components, you will have to build the predicate manually.
+ If you are interested in additional components, you must build the predicate manually.
  
  @param resultSelector          The result selector object which specifies the question result you
                                     are interested in.
@@ -450,8 +453,8 @@ ORK_CLASS_AVAILABLE
                                                  maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
 
 /**
- Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
- is within the specified `NSTimeInterval` values.
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
+within the specified `NSTimeInterval` values.
  
  @param resultSelector              The result selector object which specifies the question result
                                         you are interested in.
