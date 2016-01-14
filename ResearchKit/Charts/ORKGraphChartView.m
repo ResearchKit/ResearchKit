@@ -93,8 +93,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return self;
 }
 
-- (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
-    _dataSource = dataSource;
+- (void)reloadData {
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
     [self updateAndLayoutVerticalReferenceLineLayers];
     [self obtainDataPoints];
@@ -106,6 +105,11 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateNoDataLabel];
     
     [self setNeedsLayout];
+}
+
+- (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    [self reloadData];
 }
 
 - (void)setAxisColor:(UIColor *)axisColor {
