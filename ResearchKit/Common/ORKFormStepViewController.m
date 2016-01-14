@@ -166,18 +166,6 @@
             [(NSMutableArray *)self.items addObject:cellItem];
         }];
         
-    } else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
-        _hasChoiceRows = YES;
-        {
-            ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
-            [(NSMutableArray *)self.items addObject:cellItem];
-        }
-        
-        {
-            ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
-            [(NSMutableArray *)self.items addObject:cellItem];
-        }
-        
     } else {
         ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item];
        [(NSMutableArray *)self.items addObject:cellItem];
@@ -289,6 +277,7 @@
 @property (nonatomic, strong) NSMutableDictionary *savedAnswerDates;
 @property (nonatomic, strong) NSMutableDictionary *savedSystemCalendars;
 @property (nonatomic, strong) NSMutableDictionary *savedSystemTimeZones;
+@property (nonatomic, strong) NSDictionary *originalAnswers;
 
 @property (nonatomic, strong) NSMutableDictionary *savedDefaults;
 
@@ -314,6 +303,7 @@
             id answer = result.answer ? : ORKNullAnswerValue();
             [self setAnswer:answer forIdentifier:result.identifier];
         }
+        self.originalAnswers = [[NSDictionary alloc] initWithDictionary:self.savedAnswers];
     }
     return self;
 }
@@ -327,6 +317,11 @@
 
     self = [super initWithStep:step];
     return [self ORKFormStepViewController_initWithResult:result];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self stepDidChange];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -494,7 +489,7 @@
     _headerView = nil;
     _continueSkipView = nil;
     
-    if (self.step) {
+    if (self.isViewLoaded && self.step) {
         [self buildSections];
         
         _formItemCells = [NSMutableSet new];
@@ -523,6 +518,13 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
+        if (self.readOnlyMode) {
+            _continueSkipView.optional = YES;
+            [_continueSkipView setNeverHasContinueButton:YES];
+            _continueSkipView.skipEnabled = [self skipButtonEnabled];
+            _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
+        }
+
     }
 }
 
@@ -582,14 +584,18 @@
     }
 }
 
-- (NSInteger)numberOfAnsweredFormItems {
+- (NSInteger)numberOfAnsweredFormItemsInDictionary:(NSDictionary *)dictionary {
     __block NSInteger nonNilCount = 0;
-    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
         if (ORKIsAnswerEmpty(answer) == NO) {
             nonNilCount ++;
         }
     }];
     return nonNilCount;
+}
+
+- (NSInteger)numberOfAnsweredFormItems {
+    return [self numberOfAnsweredFormItemsInDictionary:self.savedAnswers];
 }
 
 - (BOOL)allAnsweredFormItemsAreValid {
@@ -615,13 +621,27 @@
 }
 
 - (BOOL)continueButtonEnabled {
-    return ([self numberOfAnsweredFormItems] > 0
-            && [self allAnsweredFormItemsAreValid]
-            && [self allNonOptionalFormItemsHaveAnswers]);
+    BOOL enabled = ([self numberOfAnsweredFormItems] > 0
+                    && [self allAnsweredFormItemsAreValid]
+                    && [self allNonOptionalFormItemsHaveAnswers]);
+    if (self.isBeingReviewed) {
+        enabled = enabled && ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
+    }
+    return enabled;
 }
+
+- (BOOL)skipButtonEnabled {
+    BOOL enabled = self.formStep.optional;
+    if (self.isBeingReviewed) {
+        enabled = self.readOnlyMode ? NO : enabled && [self numberOfAnsweredFormItemsInDictionary:self.originalAnswers] > 0;
+    }
+    return enabled;
+}
+
 
 - (void)updateButtonStates {
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
+    _continueSkipView.skipEnabled = [self skipButtonEnabled];
 }
 
 #pragma mark Helpers
@@ -718,6 +738,13 @@
     [self notifyDelegateOnResultChange];
     
     [super skipForward];
+}
+
+- (void)goBackward {
+    if (self.isBeingReviewed) {
+        self.savedAnswers = [[NSMutableDictionary alloc] initWithDictionary:self.originalAnswers];
+    }
+    [super goBackward];
 }
 
 #pragma mark UITableViewDataSource
@@ -829,7 +856,7 @@
             }
         }
     }
-    
+    cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
 }
 
@@ -873,9 +900,7 @@
         ORKTableSection *section = _sections[indexPath.section];
         ORKTableCellItem *cellItem = section.items[indexPath.row];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
-        
-        id answer = (cellItem.formItem.questionType == ORKQuestionTypeBoolean)? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
-        
+        id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]])? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
         NSString *formItemIdentifier = cellItem.formItem.identifier;
         if (answer && formItemIdentifier) {
             [self setAnswer:answer forIdentifier:formItemIdentifier];
@@ -966,6 +991,7 @@ static NSString *const _ORKSavedAnswersRestoreKey = @"savedAnswers";
 static NSString *const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
 static NSString *const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
 static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
+static NSString *const _ORKOriginalAnswersRestoreKey = @"originalAnswers";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -974,6 +1000,7 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
     [coder encodeObject:_savedAnswerDates forKey:_ORKSavedAnswerDatesRestoreKey];
     [coder encodeObject:_savedSystemCalendars forKey:_ORKSavedSystemCalendarsRestoreKey];
     [coder encodeObject:_savedSystemTimeZones forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    [coder encodeObject:_originalAnswers forKey:_ORKOriginalAnswersRestoreKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -983,6 +1010,7 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
     _savedAnswerDates = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswerDatesRestoreKey];
     _savedSystemCalendars = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemCalendarsRestoreKey];
     _savedSystemTimeZones = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    _originalAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKOriginalAnswersRestoreKey];
 }
 
 #pragma mark Rotate

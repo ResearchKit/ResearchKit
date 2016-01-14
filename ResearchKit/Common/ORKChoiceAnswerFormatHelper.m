@@ -54,6 +54,9 @@
         } else if ([answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
             ORKImageChoiceAnswerFormat *imageChoiceAnswerFormat = (ORKImageChoiceAnswerFormat *)answerFormat;
             _choices = imageChoiceAnswerFormat.imageChoices;
+        } else if ([answerFormat isKindOfClass:[ORKTextScaleAnswerFormat class]]) {
+            ORKTextScaleAnswerFormat *textScaleAnswerFormat = (ORKTextScaleAnswerFormat *)answerFormat;
+            _choices = textScaleAnswerFormat.textChoices;
         } else {
             NSString *exceptionReason = [NSString stringWithFormat:@"%@ is not a currently supported answer format for the choice answer format helper.", NSStringFromClass([answerFormat class])];
             @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
@@ -66,22 +69,22 @@
     return _choices.count;
 }
 
-- (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
+- (id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index {
     if (index >= _choices.count) {
         return nil;
     }
     
-    ORKImageChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKImageChoice class]]? choice : nil;
+    return _choices[index];
+}
+
+- (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
 }
 
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
-    if (index >= _choices.count) {
-        return nil;
-    }
-    
-    ORKTextChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKTextChoice class]]? choice : nil;
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKTextChoice class]] ? (ORKTextChoice *) option : nil;
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {
@@ -112,7 +115,7 @@
             [array addObject:value];
         }
     }
-    return [array copy];
+    return array.count > 0 ? [array copy] : ORKNullAnswerValue();
 }
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {
@@ -163,6 +166,18 @@
     
     return [indexArray copy];
     
+}
+
+- (NSString *)stringForChoiceAnswer:(id)answer {
+    NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    NSArray *indexes = [self selectedIndexesForAnswer:answer];
+    for (NSNumber *index in indexes) {
+        NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
+        }
+    }
+    return [answerStrings componentsJoinedByString:@"\n"];
 }
 
 @end

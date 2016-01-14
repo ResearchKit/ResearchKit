@@ -44,6 +44,7 @@
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
+#import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
 
 // Custom steps

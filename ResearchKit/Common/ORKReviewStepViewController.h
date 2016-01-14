@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,20 +29,29 @@
  */
 
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKReviewStepViewController.h>
+#import <ResearchKit/ORKStep.h>
+#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKTaskViewController () <ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
+@class ORKReviewStepViewController;
 
-- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
-- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForWrite;
+@protocol ORKReviewStepViewControllerDelegate <NSObject>
 
-// Any StepVC contains a vertical scroll view should register here.
-// So taskVC can monitor scroll view's content offset and update hairline's alpha.
-@property (nonatomic, weak, nullable) UIScrollView *registeredScrollView;
+- (void)reviewStepViewController:(ORKReviewStepViewController*)reviewStepViewController
+                  willReviewStep:(ORKStep*)step;
+@end
+
+
+
+ORK_CLASS_AVAILABLE
+@interface ORKReviewStepViewController : ORKStepViewController
+
+- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(NSArray<ORKStep *> *)steps resultSource:(id<ORKTaskResultSource>)resultSource;
+
+@property (nonatomic, weak, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 
 @end
 
