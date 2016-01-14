@@ -1,6 +1,8 @@
 ResearchKit Framework
 ===========
 
+[![Build Status](https://travis-ci.org/ResearchKit/ResearchKit.svg?branch=master)](https://travis-ci.org/ResearchKit/ResearchKit) [![Coverage Status](https://coveralls.io/repos/ResearchKit/ResearchKit/badge.svg)](https://coveralls.io/r/ResearchKit/ResearchKit)
+
 The ResearchKit™ framework is an open source software framework that makes it easy to
 create apps for medical research or for other research projects.
 
