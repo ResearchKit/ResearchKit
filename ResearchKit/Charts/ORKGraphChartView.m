@@ -528,19 +528,21 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
-    UIColor *color = [self colorForplotIndex:plotIndex];
-    NSUInteger pointCount = _dataPoints[plotIndex].count;
-    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        ORKRangedPoint *dataPoint = _dataPoints[plotIndex][pointIndex];
-        if (!dataPoint.isUnset) {
-            CALayer *pointLayer = graphPointLayerWithColor(color);
-            [_plotView.layer addSublayer:pointLayer];
-            [_pointLayers[plotIndex] addObject:pointLayer];
-            
-            if (!dataPoint.hasEmptyRange) {
+    if (plotIndex < _dataPoints.count) {
+        UIColor *color = [self colorForplotIndex:plotIndex];
+        NSUInteger pointCount = _dataPoints[plotIndex].count;
+        for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+            ORKRangedPoint *dataPoint = _dataPoints[plotIndex][pointIndex];
+            if (!dataPoint.isUnset) {
                 CALayer *pointLayer = graphPointLayerWithColor(color);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
+                
+                if (!dataPoint.hasEmptyRange) {
+                    CALayer *pointLayer = graphPointLayerWithColor(color);
+                    [_plotView.layer addSublayer:pointLayer];
+                    [_pointLayers[plotIndex] addObject:pointLayer];
+                }
             }
         }
     }
@@ -560,21 +562,23 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)layoutPointLayersForPlotIndex:(NSInteger)plotIndex {
-    NSUInteger pointLayerIndex = 0;
-    for (NSUInteger pointIndex = 0; pointIndex < _dataPoints[plotIndex].count; pointIndex++) {
-        ORKRangedPoint *dataPointValue = _dataPoints[plotIndex][pointIndex];
-        if (!dataPointValue.isUnset) {
-            CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
-            positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            ORKRangedPoint *positionOnYAxis = _yAxisPoints[plotIndex][pointIndex];
-            CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-            pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
-            pointLayerIndex++;
-            
-            if (!positionOnYAxis.hasEmptyRange) {
+    if (plotIndex < _dataPoints.count) {
+        NSUInteger pointLayerIndex = 0;
+        for (NSUInteger pointIndex = 0; pointIndex < _dataPoints[plotIndex].count; pointIndex++) {
+            ORKRangedPoint *dataPointValue = _dataPoints[plotIndex][pointIndex];
+            if (!dataPointValue.isUnset) {
+                CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
+                positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+                ORKRangedPoint *positionOnYAxis = _yAxisPoints[plotIndex][pointIndex];
                 CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
+                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
                 pointLayerIndex++;
+                
+                if (!positionOnYAxis.hasEmptyRange) {
+                    CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                    pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
+                    pointLayerIndex++;
+                }
             }
         }
     }
@@ -915,9 +919,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex {
     NSInteger count = 0;
     
-    for (ORKRangedPoint *rangePoint in _dataPoints[plotIndex]) {
-        if (!rangePoint.isUnset) {
-            count++;
+    if (plotIndex < _dataPoints.count) {
+        for (ORKRangedPoint *rangePoint in _dataPoints[plotIndex]) {
+            if (!rangePoint.isUnset) {
+                count++;
+            }
         }
     }
     return count;
@@ -926,25 +932,27 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (NSMutableArray<ORKRangedPoint *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     NSMutableArray<ORKRangedPoint *> *normalizedPoints = [NSMutableArray new];
     
-    NSUInteger pointCount = _dataPoints[plotIndex].count;
-    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        
-        ORKRangedPoint *normalizedRangePoint = [ORKRangedPoint new];
-        ORKRangedPoint *dataPointValue = _dataPoints[plotIndex][pointIndex];
-        
-        if (dataPointValue.isUnset) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight;
-        } else if (_minimumValue == _maximumValue) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
-        } else {
-            CGFloat range = _maximumValue - _minimumValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * viewHeight;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * viewHeight;
+    if (plotIndex < _dataPoints.count) {
+        NSUInteger pointCount = _dataPoints[plotIndex].count;
+        for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             
-            normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
-            normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
+            ORKRangedPoint *normalizedRangePoint = [ORKRangedPoint new];
+            ORKRangedPoint *dataPointValue = _dataPoints[plotIndex][pointIndex];
+            
+            if (dataPointValue.isUnset) {
+                normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight;
+            } else if (_minimumValue == _maximumValue) {
+                normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
+            } else {
+                CGFloat range = _maximumValue - _minimumValue;
+                CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * viewHeight;
+                CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * viewHeight;
+                
+                normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
+                normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
+            }
+            [normalizedPoints addObject:normalizedRangePoint];
         }
-        [normalizedPoints addObject:normalizedRangePoint];
     }
     
     return normalizedPoints;
