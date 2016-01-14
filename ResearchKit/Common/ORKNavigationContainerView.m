@@ -114,7 +114,7 @@
 
 - (void)skipAction:(id)sender {
     ORKSuppressPerformSelectorWarning(
-                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:self];
+                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:_skipButton];
                                       );
 }
 
@@ -176,6 +176,11 @@
 - (void)setContinueEnabled:(BOOL)continueEnabled {
     _continueEnabled = continueEnabled;
     [self updateContinueAndSkipEnabled];
+}
+
+- (void)setSkipEnabled:(BOOL)skipEnabled {
+    _skipEnabled = skipEnabled;
+    self.skipButton.enabled = _skipEnabled;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {

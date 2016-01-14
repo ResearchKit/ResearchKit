@@ -178,16 +178,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
         }
     }
     
-    [_healthStore enableBackgroundDeliveryForType:_quantityType
-                                        frequency:HKUpdateFrequencyImmediate
-                                   withCompletion:^(BOOL success, NSError *error) {
-                                       
-                                       // Doesn't really matter if this succeeds, but nice if it does.
-                                       if (!success) {
-                                           ORK_Log_Warning(@"Failed to enable background delivery: %@", error);
-                                       }
-                                   }];
-    
     _lastSample = nil;
     _samplePredicate = [HKQuery predicateForSamplesWithStartDate:[NSDate date] endDate:nil options:HKQueryOptionStrictStartDate];
     
