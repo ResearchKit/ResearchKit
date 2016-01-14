@@ -1,0 +1,6 @@
+osx_image: beta-xcode6.3
+language: objective-c
+script:
+  - xcodebuild -scheme ResearchKit test -sdk iphonesimulator8.3
+  - xcodebuild -project samples/ORKCatalog/ORKCatalog.xcodeproj -scheme ORKCatalog -sdk iphonesimulator8.3
+  - xcodebuild -project Testing/ORKTest/ORKTest.xcodeproj -scheme ORKTest -sdk iphonesimulator8.3 test
