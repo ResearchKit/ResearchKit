@@ -99,6 +99,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 // If `hasChangedAnswer`, then a new `defaultAnswer` should not change the answer
 @property (nonatomic, assign) BOOL hasChangedAnswer;
 
+@property (nonatomic, copy) id<NSCopying, NSObject, NSCoding> originalAnswer;
+
 @end
 
 
@@ -120,6 +122,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 answer = ORKNullAnswerValue();
             }
 			self.answer = answer;
+            self.originalAnswer = answer;
 		}
     }
     return self;
@@ -173,6 +176,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
+            if (self.readOnlyMode) {
+                _continueSkipView.optional = YES;
+                [_continueSkipView setNeverHasContinueButton:YES];
+                _continueSkipView.skipEnabled = [self skipButtonEnabled];
+                _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
+            }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -184,6 +193,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
+                _customQuestionView.userInteractionEnabled = !self.readOnlyMode;
             } else {
                 ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
                 cellHolderView.delegate = self;
@@ -191,7 +201,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 [NSLayoutConstraint activateConstraints:
                  [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
                 cellHolderView.answer = [self answer];
-                
+                cellHolderView.userInteractionEnabled = !self.readOnlyMode;
                 _questionView.questionCustomView = cellHolderView;
             }
             
@@ -200,6 +210,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
+            if (self.readOnlyMode) {
+                _questionView.continueSkipContainer.optional = YES;
+                [_questionView.continueSkipContainer setNeverHasContinueButton:YES];
+                _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
+                _questionView.continueSkipContainer.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
+            }
+
             
             NSMutableArray *constraints = [NSMutableArray new];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
@@ -373,6 +390,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
+    _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
+    _continueSkipView.skipEnabled = [self skipButtonEnabled];
 }
 
 // Override to monitor button title change
@@ -463,7 +482,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     self.skipButtonItem = self.internalSkipButtonItem;
-    if (!self.questionStep.optional) {
+    if (!self.questionStep.optional && !self.readOnlyMode) {
         self.skipButtonItem = nil;
     }
 
@@ -486,7 +505,19 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)continueButtonEnabled {
-    return ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    if (self.isBeingReviewed) {
+        enabled = enabled && (![self.answer isEqual:self.originalAnswer]);
+    }
+    return enabled;
+}
+
+- (BOOL)skipButtonEnabled {
+    BOOL enabled = [self questionStep].optional;
+    if (self.isBeingReviewed) {
+        enabled = self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswer);
+    }
+    return enabled;
 }
 
 - (BOOL)allowContinue {
@@ -496,7 +527,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 // Not to use `ImmediateNavigation` when current step already has an answer.
 // So user is able to review the answer when it is present.
 - (BOOL)isStepImmediateNavigation {
-    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO;
+    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.isBeingReviewed;
 }
 
 #pragma mark - ORKQuestionStepCustomViewDelegate
@@ -602,6 +633,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     }
     
+    cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
 }
 
@@ -629,6 +661,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)goBackward {
+    if (self.isBeingReviewed) {
+        [self saveAnswer:self.originalAnswer];
+    }
     [self notifyDelegateOnResultChange];
     [super goBackward];
 }
@@ -743,19 +778,22 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";
 static NSString *const _ORKHasChangedAnswerRestoreKey = @"hasChangedAnswer";
+static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_answer forKey:_ORKAnswerRestoreKey];
     [coder encodeBool:_hasChangedAnswer forKey:_ORKHasChangedAnswerRestoreKey];
+    [coder encodeObject:_originalAnswer forKey:_ORKOriginalAnswerRestoreKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
-    
-    self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKAnswerRestoreKey];
+    NSSet *decodeableSet = [NSSet setWithObjects:[NSNumber class], [NSString class], [NSDateComponents class], [NSArray class], nil];
+    self.answer = [coder decodeObjectOfClasses:decodeableSet forKey:_ORKAnswerRestoreKey];
     self.hasChangedAnswer = [coder decodeBoolForKey:_ORKHasChangedAnswerRestoreKey];
+    self.originalAnswer = [coder decodeObjectOfClasses:decodeableSet forKey:_ORKOriginalAnswerRestoreKey];
     
     [self answerDidChange];
 }
