@@ -380,6 +380,18 @@ ret =
             PROPERTY(shouldTintImages, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(useSurveyMode, NSNumber, NSObject, YES, nil, nil)
             })),
+   ENTRY(ORKReviewStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:GETPROP(dict, identifier)
+                                                                                     steps:GETPROP(dict, steps)
+                                                                              resultSource:GETPROP(dict, resultSource)];
+             return reviewStep;
+         },
+         (@{
+            PROPERTY(steps, ORKStep, NSArray, NO, nil, nil),
+            PROPERTY(resultSource, ORKTaskResult, NSObject, NO, nil, nil),
+            PROPERTY(excludeInstructionSteps, NSNumber, NSObject, YES, nil, nil)
+            })),
    ENTRY(ORKVisualConsentStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKVisualConsentStep alloc] initWithIdentifier:GETPROP(dict, identifier)
