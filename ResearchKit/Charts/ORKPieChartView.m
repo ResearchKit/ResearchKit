@@ -102,13 +102,17 @@ static const CGFloat PieToLegendPadding = 8.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
-    _dataSource = dataSource;
+- (void)reloadData {
     CGFloat sumOfValues = [_pieView normalizeValues];
     [_pieView updatePieLayers];
     [_pieView updatePercentageLabels];
     [_titleTextView showNoDataLabel:(sumOfValues == 0)];
     [self updateLegendView];
+}
+
+- (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    [self reloadData];
 }
 
 - (void)setLineWidth:(CGFloat)lineWidth {
