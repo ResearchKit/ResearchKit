@@ -64,4 +64,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+@interface ORKInstructionStep (ORKPredefinedSteps)
+
++ (ORKInstructionStep*)completionStep;
+
+@end
+
 NS_ASSUME_NONNULL_END

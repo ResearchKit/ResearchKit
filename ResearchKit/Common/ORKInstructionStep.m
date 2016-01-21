@@ -33,6 +33,8 @@
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
 #import "ORKInstructionStepViewController.h"
+#import "ORKCompletionStep.h"
+#import "ORKDefines_Private.h"
 
 
 @implementation ORKInstructionStep
@@ -79,3 +81,18 @@
 }
 
 @end
+
+static NSString * const ORKConclusionStepIdentifier = @"conclusion";
+
+@implementation ORKInstructionStep (ORKPredefinedSteps)
+
++ (ORKInstructionStep *)completionStep {
+    ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
+    step.title = ORKLocalizedString(@"TASK_COMPLETE_TITLE", nil);
+    step.text = ORKLocalizedString(@"TASK_COMPLETE_TEXT", nil);
+    step.shouldTintImages = YES;
+    return step;
+}
+
+@end
+
