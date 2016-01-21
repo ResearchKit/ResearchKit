@@ -93,6 +93,7 @@
     _expired = NO;
     
     _tappingContentView = [[ORKTappingContentView alloc] init];
+    _tappingContentView.hasSkipButton = self.step.optional;
     self.activeStepView.activeCustomView = _tappingContentView;
     
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
