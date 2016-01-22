@@ -207,6 +207,14 @@ ORK_CLASS_AVAILABLE
  */
 - (void)reloadData;
 
+/**
+ A scaling facor for the radius of the pie chart.
+ 
+ Defaults to 0.5. Increase it to increase the radius of the pie chart and vice versa.
+
+ */
+@property (nonatomic) CGFloat radiusScaleFactor;
+
 @end
 
 NS_ASSUME_NONNULL_END

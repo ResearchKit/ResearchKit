@@ -54,6 +54,7 @@ class ChartListViewController: UITableViewController {
         pieChartView.title = "TITLE"
         pieChartView.text = "TEXT"
         pieChartView.lineWidth = 14
+        pieChartView.radiusScaleFactor = 0.6
         
         // ORKLineGraphChartView
         lineGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphChartIdentifier) as! LineGraphChartTableViewCell
