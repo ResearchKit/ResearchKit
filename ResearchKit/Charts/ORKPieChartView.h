@@ -200,6 +200,13 @@ ORK_CLASS_AVAILABLE
 */
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
+/**
+ Reloads the plotted data.
+ 
+ Call this method to reload the data and re-plot the graph. You should call it if the data provided by the dataSource changes.
+ */
+- (void)reloadData;
+
 @end
 
 NS_ASSUME_NONNULL_END
