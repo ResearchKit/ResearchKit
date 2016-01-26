@@ -490,7 +490,7 @@
 		BF91559F1BDE8D7E007FA459 /* ORKReviewStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155991BDE8D7D007FA459 /* ORKReviewStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BF9155A01BDE8D7E007FA459 /* ORKReviewStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF91559A1BDE8D7D007FA459 /* ORKReviewStepViewController.m */; };
 		BF9155A81BDE8DA9007FA459 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9155A21BDE8DA9007FA459 /* ORKWaitStep.m */; };
-		BF9155A91BDE8DA9007FA459 /* ORKWaitStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A31BDE8DA9007FA459 /* ORKWaitStepView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BF9155A91BDE8DA9007FA459 /* ORKWaitStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A31BDE8DA9007FA459 /* ORKWaitStepView.h */; };
 		BF9155AA1BDE8DA9007FA459 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9155A41BDE8DA9007FA459 /* ORKWaitStepView.m */; };
 		BF9155AB1BDE8DA9007FA459 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A51BDE8DA9007FA459 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BF9155AC1BDE8DA9007FA459 /* ORKWaitStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9155A61BDE8DA9007FA459 /* ORKWaitStepViewController.m */; };
