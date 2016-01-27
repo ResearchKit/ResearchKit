@@ -361,9 +361,8 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     ORKStep *step = [[ORKInstructionStep alloc] initWithIdentifier:BlankStepIdentifier];
     [steps addObject:step];
     
-    ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
-                                                                       steps:steps];
-    XCTAssertThrows([orderedTask validateParameters]);
+    XCTAssertThrows([[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
+                                                         steps:steps]);
 }
 
 #define getIndividualNavigableOrderedTaskSteps() \
