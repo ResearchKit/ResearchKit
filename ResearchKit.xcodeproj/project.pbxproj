@@ -657,7 +657,6 @@
 		86AD910F1AB7B8A600361FEB /* ORKActiveStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ORKActiveStepView.m; path = ../Common/ORKActiveStepView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86AD91121AB7B97E00361FEB /* ORKQuestionStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKQuestionStepView.h; sourceTree = "<group>"; };
 		86AD91131AB7B97E00361FEB /* ORKQuestionStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKQuestionStepView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		86B623AD19520B770074CD3C /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B781B71AA668ED00688151 /* ORKTimeIntervalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTimeIntervalPicker.h; sourceTree = "<group>"; };
 		86B781B81AA668ED00688151 /* ORKTimeIntervalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTimeIntervalPicker.m; sourceTree = "<group>"; };
 		86B781B91AA668ED00688151 /* ORKValuePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKValuePicker.h; sourceTree = "<group>"; };
@@ -1354,7 +1353,6 @@
 		3FFF183E1829DB1D00167070 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86B623AD19520B770074CD3C /* ResearchKit.framework */,
 				B183A5951A8535D100C76870 /* ResearchKit.framework */,
 				86CC8E9A1AC09332001CCD89 /* ResearchKitTests.xctest */,
 			);

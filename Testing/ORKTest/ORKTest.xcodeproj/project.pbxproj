@@ -20,13 +20,16 @@
 		86717AFD1AC0C86000AC2A23 /* ORKJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */; };
 		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
-		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; };
+		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BC2A3CA11C58E85D00DA64B7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BC2A3CA01C58E85D00DA64B7 /* README.md */; };
+		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
+		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
 		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
-		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; };
+		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,12 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		86D347F81AC0E198006DB02B /* Embed Frameworks */ = {
+		BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +119,8 @@
 		B1337BA71B1E70AC0098AA54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC2A3CA01C58E85D00DA64B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
 		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			files = (
 				CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */,
 				86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */,
+				BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,8 +154,8 @@
 		86717A811AC0C0FE00AC2A23 = {
 			isa = PBXGroup;
 			children = (
-				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
-				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
+				BC2A3CA01C58E85D00DA64B7 /* README.md */,
+				BC2A3C9F1C58E83B00DA64B7 /* Frameworks */,
 				86717A8C1AC0C0FE00AC2A23 /* ORKTest */,
 				86717AA61AC0C0FE00AC2A23 /* ORKTestTests */,
 				86717A8B1AC0C0FE00AC2A23 /* Products */,
@@ -232,6 +239,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BC2A3C9F1C58E83B00DA64B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */,
+				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
+				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BC9A27111B81732200BDA84D /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,7 +271,7 @@
 				86717A861AC0C0FE00AC2A23 /* Sources */,
 				86717A871AC0C0FE00AC2A23 /* Frameworks */,
 				86717A881AC0C0FE00AC2A23 /* Resources */,
-				86D347F81AC0E198006DB02B /* Embed Frameworks */,
+				BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -409,6 +426,7 @@
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
+				BC2A3CA11C58E85D00DA64B7 /* README.md in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
 			);
