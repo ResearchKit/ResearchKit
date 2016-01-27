@@ -189,6 +189,7 @@
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString];});
+ORK_MAKE_TEST_INIT(ORKReviewStep, ^{return [[self class] standaloneReviewStepWithIdentifier:[NSUUID UUID].UUIDString steps:@[] resultSource:[ORKTaskResult new]];});
 ORK_MAKE_TEST_INIT(ORKOrderedTask, ^{return [self initWithIdentifier:@"test1" steps:nil];});
 ORK_MAKE_TEST_INIT(ORKImageChoice, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKTextChoice, ^{return [super init];});
@@ -249,12 +250,12 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
       [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
       [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
-    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1) exclusive:NO]  ]]];
+    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id1" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1) exclusive:NO]  ]]];
     
-    ORKQuestionStep *questionStep2 = [ORKQuestionStep questionStepWithIdentifier:@"id"
+    ORKQuestionStep *questionStep2 = [ORKQuestionStep questionStepWithIdentifier:@"id2"
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];
 
-    ORKQuestionStep *questionStep3 = [ORKQuestionStep questionStepWithIdentifier:@"id"
+    ORKQuestionStep *questionStep3 = [ORKQuestionStep questionStepWithIdentifier:@"id3"
                                                                            title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES maximumValueDescription:@"High value" minimumValueDescription:@"Low value"]];
 
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"id" steps:@[activeStep, questionStep, questionStep2, questionStep3]];
@@ -334,6 +335,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                        @"firstResult"];
     NSArray *knownNotSerializedProperties = @[@"ORKStep.task",
                                               @"ORKStep.restorable",
+                                              @"ORKReviewStep.isStandalone",
                                               @"ORKAnswerFormat.questionType",
                                               @"ORKQuestionStep.questionType",
                                               @"ORKActiveStep.image",
@@ -458,6 +460,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             [instance setValue:NSStringFromClass([ORKLoginStepViewController class]) forKey:@"loginViewControllerString"];
         } else if ([aClass isSubclassOfClass:[ORKVerificationStep class]]) {
             [instance setValue:NSStringFromClass([ORKVerificationStepViewController class]) forKey:@"verificationViewControllerString"];
+        } else if ([aClass isSubclassOfClass:[ORKReviewStep class]]) {
+            [instance setValue:[ORKTaskResult new] forKey:@"resultSource"]; // Manually add here because it's a protocol and hence property doesn't have a class
         }
         
         // Serialization
@@ -533,6 +537,9 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
+        return NO;
+    } else if (aClass == [ORKReviewStep class] && [p.propertyName isEqualToString:@"resultSource"]) {
+        [instance setValue:[[ORKTaskResult alloc] initWithIdentifier:@"blah"] forKey:p.propertyName];
         return NO;
     } else {
         id instanceForChild = [self instanceForClass:p.propertyClass];
@@ -620,7 +627,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         
         // Set of classes we can check for equality. Would like to get rid of this once we implement
         NSSet *checkableClasses = [NSSet setWithObjects:[NSNumber class], [NSString class], [NSDictionary class], [NSURL class], nil];
-        // All properties should have matching fields in dictionary( allow predefined exceptions)
+        // All properties should have matching fields in dictionary (allow predefined exceptions)
         for (NSString *pName in propertyNames) {
             id newValue = [newInstance valueForKey:pName];
             id oldValue = [instance valueForKey:pName];

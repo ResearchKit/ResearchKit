@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; settings = {ASSET_TAGS = (); }; };
+		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; };
 		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
 		86717A901AC0C0FE00AC2A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A8F1AC0C0FE00AC2A23 /* main.m */; };
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
@@ -20,15 +20,15 @@
 		86717AFD1AC0C86000AC2A23 /* ORKJSONSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */; };
 		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
-		86D347F41AC0E198006DB02B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; };
-		86D347F51AC0E198006DB02B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; };
+		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
+		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
-		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; };
 		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
+		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,44 +39,16 @@
 			remoteGlobalIDString = 86717A891AC0C0FE00AC2A23;
 			remoteInfo = ORKTest;
 		};
-		86717AF41AC0C57600AC2A23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B183A5951A8535D100C76870;
-			remoteInfo = OpenResearchKit;
-		};
-		86717AF61AC0C57600AC2A23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
-			remoteInfo = "ResearchKit Tests";
-		};
-		86717AF81AC0C58300AC2A23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = OpenResearchKit;
-		};
-		86D347F61AC0E198006DB02B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = OpenResearchKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		86D347F81AC0E198006DB02B /* Embed Frameworks */ = {
+		BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				86D347F51AC0E198006DB02B /* ResearchKit.framework in Embed Frameworks */,
+				BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,7 +74,6 @@
 		86717ADE1AC0C53800AC2A23 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		86717AE01AC0C53800AC2A23 /* image_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_example.png; sourceTree = "<group>"; };
 		86717AE31AC0C53800AC2A23 /* signature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signature.png; sourceTree = "<group>"; };
-		86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../../../ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		86717AFC1AC0C86000AC2A23 /* ORKJSONSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKJSONSerializationTests.m; sourceTree = "<group>"; };
 		86717AFF1AC0C93E00AC2A23 /* ORKESerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKESerialization.h; path = ORKTest/ORKESerialization.h; sourceTree = SOURCE_ROOT; };
 		86717B081AC0CC0400AC2A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -147,14 +118,15 @@
 		B1337BA71B1E70AC0098AA54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC2A3CA01C58E85D00DA64B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
 		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
 		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
 		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
-		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
+		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */,
-				86D347F41AC0E198006DB02B /* ResearchKit.framework in Frameworks */,
 				86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */,
+				BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +153,8 @@
 		86717A811AC0C0FE00AC2A23 = {
 			isa = PBXGroup;
 			children = (
-				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
-				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
+				BC2A3CA01C58E85D00DA64B7 /* README.md */,
+				BC2A3C9F1C58E83B00DA64B7 /* Frameworks */,
 				86717A8C1AC0C0FE00AC2A23 /* ORKTest */,
 				86717AA61AC0C0FE00AC2A23 /* ORKTestTests */,
 				86717A8B1AC0C0FE00AC2A23 /* Products */,
@@ -201,7 +173,6 @@
 		86717A8C1AC0C0FE00AC2A23 /* ORKTest */ = {
 			isa = PBXGroup;
 			children = (
-				86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */,
 				86717A911AC0C0FE00AC2A23 /* AppDelegate.h */,
 				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
 				86717ADE1AC0C53800AC2A23 /* MainViewController.h */,
@@ -211,7 +182,6 @@
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
 				BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */,
-				BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */,
 			);
 			path = ORKTest;
 			sourceTree = "<group>";
@@ -246,15 +216,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		86717AEF1AC0C57500AC2A23 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				86717AF51AC0C57600AC2A23 /* ResearchKit.framework */,
-				86717AF71AC0C57600AC2A23 /* ResearchKitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		86717B001AC0C9B100AC2A23 /* CustomizationExamples */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +236,16 @@
 				86717B091AC0CC0400AC2A23 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BC2A3C9F1C58E83B00DA64B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */,
+				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
+				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BC9A27111B81732200BDA84D /* Charts */ = {
@@ -299,13 +270,11 @@
 				86717A861AC0C0FE00AC2A23 /* Sources */,
 				86717A871AC0C0FE00AC2A23 /* Frameworks */,
 				86717A881AC0C0FE00AC2A23 /* Resources */,
-				86D347F81AC0E198006DB02B /* Embed Frameworks */,
+				BC2A3CE31C58F1EE00DA64B7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				86717AF91AC0C58300AC2A23 /* PBXTargetDependency */,
-				86D347F71AC0E198006DB02B /* PBXTargetDependency */,
 			);
 			name = ORKTest;
 			productName = ORKTest;
@@ -413,12 +382,6 @@
 			mainGroup = 86717A811AC0C0FE00AC2A23;
 			productRefGroup = 86717A8B1AC0C0FE00AC2A23 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 86717AEF1AC0C57500AC2A23 /* Products */;
-					ProjectRef = 86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				86717A891AC0C0FE00AC2A23 /* ORKTest */,
@@ -426,23 +389,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		86717AF51AC0C57600AC2A23 /* ResearchKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ResearchKit.framework;
-			remoteRef = 86717AF41AC0C57600AC2A23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		86717AF71AC0C57600AC2A23 /* ResearchKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ResearchKitTests.xctest;
-			remoteRef = 86717AF61AC0C57600AC2A23 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		86717A881AC0C0FE00AC2A23 /* Resources */ = {
@@ -501,16 +447,6 @@
 			isa = PBXTargetDependency;
 			target = 86717A891AC0C0FE00AC2A23 /* ORKTest */;
 			targetProxy = 86717AA41AC0C0FE00AC2A23 /* PBXContainerItemProxy */;
-		};
-		86717AF91AC0C58300AC2A23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OpenResearchKit;
-			targetProxy = 86717AF81AC0C58300AC2A23 /* PBXContainerItemProxy */;
-		};
-		86D347F71AC0E198006DB02B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OpenResearchKit;
-			targetProxy = 86D347F61AC0E198006DB02B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
