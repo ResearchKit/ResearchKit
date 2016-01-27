@@ -21,7 +21,6 @@
 		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		BC2A3CA11C58E85D00DA64B7 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = BC2A3CA01C58E85D00DA64B7 /* README.md */; };
 		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
 		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
@@ -426,7 +425,6 @@
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
-				BC2A3CA11C58E85D00DA64B7 /* README.md in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
 			);
