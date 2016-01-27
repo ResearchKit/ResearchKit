@@ -628,7 +628,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         _noDataLabel.textColor = [UIColor lightGrayColor];
         [_plotView addSubview:_noDataLabel];
-    } else if (!_hasDataPoints && _noDataLabel) {
+    } else if (_hasDataPoints && _noDataLabel) {
         [_noDataLabel removeFromSuperview];
         _noDataLabel = nil;
     }
