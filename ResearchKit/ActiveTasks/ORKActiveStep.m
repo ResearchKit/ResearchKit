@@ -62,7 +62,9 @@
 }
 
 - (BOOL)hasVoice {
-    return  (_spokenInstruction != nil && _spokenInstruction.length > 0);
+    BOOL hasSpokenInstruction = (_spokenInstruction != nil && _spokenInstruction.length > 0);
+    BOOL hasFinishedSpokenInstruction = (_finishedSpokenInstruction != nil && _finishedSpokenInstruction.length > 0);
+    return  (hasSpokenInstruction || hasFinishedSpokenInstruction);
 }
 
 - (BOOL)isRestorable {
