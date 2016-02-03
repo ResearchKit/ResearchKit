@@ -47,6 +47,7 @@
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;
+        _shouldReportProgress = NO;
     }
     return self;
 }
@@ -106,8 +107,12 @@
     return previousStep;
 }
 
-// ORKNavigableOrderedTask doesn't have a linear order
+// Assume ORKNavigableOrderedTask doesn't have a linear order unless user specifically overrides
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    if (_shouldReportProgress) {
+        return [super progressOfCurrentStep:step withResult:result];
+    }
+
     return ORKTaskProgressMake(0, 0);
 }
 
