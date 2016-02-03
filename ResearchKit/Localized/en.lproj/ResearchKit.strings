@@ -354,6 +354,8 @@
 "TREMOR_TEST_ACTIVE_TASK_TOUCH_NOSE_INSTRUCTION_%ld" = "Keep touching phone to nose for %ld seconds";
 "TREMOR_TEST_ACTIVE_TASK_TURN_WRIST_INTRO" = "Prepare to do a queen wave (wave by turning your wrist)";
 "TREMOR_TEST_ACTIVE_TASK_TURN_WRIST_INSTRUCTION_%ld" = "Keep performing a queen wave for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to next task";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

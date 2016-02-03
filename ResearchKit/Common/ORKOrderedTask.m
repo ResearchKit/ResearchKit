@@ -1210,6 +1210,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                          options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
+    NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
@@ -1250,6 +1251,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac1_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac1_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
+        step.finishedSpokenInstruction = stepFinishedInstruction;
         step.stepDuration = activeStepDuration;
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
@@ -1281,6 +1283,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac2_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac2_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
+        step.finishedSpokenInstruction = stepFinishedInstruction;
         step.stepDuration = activeStepDuration;
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
@@ -1312,6 +1315,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac3_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac3_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
+        step.finishedSpokenInstruction = stepFinishedInstruction;
         step.stepDuration = activeStepDuration;
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
@@ -1343,6 +1347,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac4_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac4_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
+        step.finishedSpokenInstruction = stepFinishedInstruction;
         step.stepDuration = activeStepDuration;
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
@@ -1374,6 +1379,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac5_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac5_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
+        step.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
         step.stepDuration = activeStepDuration;
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
