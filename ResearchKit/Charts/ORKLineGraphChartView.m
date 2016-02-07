@@ -201,20 +201,24 @@ const CGFloat FillColorAlpha = 0.4;
     NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
-    CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
-    CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
-    
-    CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
-    CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+    CGFloat canvasYPosition = 0;
+    if (nextValidIndex == previousValidIndex) {
+        canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].maximumValue;
+    } else {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         
-    CGFloat slope = (y2 - y1)/(x2 - x1);
-    
-    //  (y2 - y3)/(x2 - x3) = m
-    CGFloat canvasYPosition = y2 - (slope * (x2 - xPosition));
-    
+        CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+        CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
+        
+        CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].maximumValue;
+        CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].maximumValue;
+        
+        CGFloat slope = (y2 - y1)/(x2 - x1);
+        
+        //  (y2 - y3)/(x2 - x3) = m
+        canvasYPosition = y2 - (slope * (x2 - xPosition));
+    }
     return canvasYPosition;
 }
 
@@ -234,6 +238,9 @@ const CGFloat FillColorAlpha = 0.4;
 
 - (NSInteger)previousValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     NSInteger validPosition = pointIndex - 1;
+    if (validPosition < 0) {
+        validPosition = 0;
+    }
     while (validPosition > 0) {
         if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
             break;

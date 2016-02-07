@@ -836,7 +836,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
     for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
         CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
-        if (xAxisPointValue > xPosition) {
+        if (xAxisPointValue >= xPosition) {
             break;
         }
     }

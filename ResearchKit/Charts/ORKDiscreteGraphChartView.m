@@ -127,7 +127,7 @@
     CGFloat canvasYPosition = 0;
     if (snapped) {
         NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
-        canvasYPosition = self.yAxisPoints[plotIndex][pointIndex - 1].maximumValue;
+        canvasYPosition = self.yAxisPoints[plotIndex][pointIndex].maximumValue;
     }
     return canvasYPosition;
 }
