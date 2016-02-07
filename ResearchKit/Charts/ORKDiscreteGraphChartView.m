@@ -120,16 +120,26 @@
     return offset;
 }
 
-#pragma mark - Graph Calculations
-
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    BOOL snapped = [self isXPositionSnapped:xPosition];
+    BOOL snapped = [self isXPositionSnapped:xPosition plotIndex:plotIndex];
     CGFloat canvasYPosition = 0;
     if (snapped) {
-        NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+        NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
         canvasYPosition = self.yAxisPoints[plotIndex][pointIndex].maximumValue;
     }
     return canvasYPosition;
+}
+
+- (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self offsetForPlotIndex:plotIndex];
+}
+
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    return [super pointIndexForXPosition:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+}
+
+- (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    return [super isXPositionSnapped:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
 
 @end

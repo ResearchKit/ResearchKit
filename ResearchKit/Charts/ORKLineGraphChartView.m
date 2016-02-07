@@ -163,10 +163,9 @@ const CGFloat FillColorAlpha = 0.4;
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     CGFloat value = [super valueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
     if (value == ORKCGFloatInvalidValue) {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         NSInteger pointIndex = 0;
         for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, viewWidth);
@@ -197,7 +196,7 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+    NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
     NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     

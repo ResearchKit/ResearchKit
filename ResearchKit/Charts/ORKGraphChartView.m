@@ -797,19 +797,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat value = ORKCGFloatInvalidValue;
+    BOOL snapped = [self isXPositionSnapped:xPosition plotIndex:(NSInteger)plotIndex];
     if (snapped) {
-
-        NSInteger positionIndex = 0;
-        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-        for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
-            CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
-            if (xAxisPointValue == xPosition) {
-                break;
-            }
-        }
-        value = _dataPoints[plotIndex][positionIndex].maximumValue;
+        NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
+        value = _dataPoints[plotIndex][pointIndex].maximumValue;
     }
     return value;
 }
@@ -831,7 +823,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
-- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition {
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     NSInteger pointIndex = 0;
     NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
     for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
@@ -1007,13 +999,14 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
-- (BOOL)isXPositionSnapped:(CGFloat)xPosition {
+- (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = NO;
     CGFloat viewWidth = _plotView.bounds.size.width;
     NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
     for (NSInteger idx = 0; idx < numberOfXAxisPoints; idx++) {
         if (xPosition == xAxisPoint(idx, numberOfXAxisPoints, viewWidth)) {
             snapped = YES;
+            break;
         }
     }
     return snapped;
