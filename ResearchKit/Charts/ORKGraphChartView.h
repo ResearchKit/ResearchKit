@@ -94,7 +94,7 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Asks the data source for the number of range points to be plotted by the graph chart view at the
+ Asks the data source for the number of float ranges to be plotted by the graph chart view at the
  specified plot index.
 
  @param graphChartView      The graph chart view asking for the number of range points.
@@ -107,15 +107,15 @@ ORK_AVAILABLE_DECL
 
 
 /**
- Asks the data source for the range point to be plotted at the specified point index for the
+ Asks the data source for the float range to be plotted at the specified point index for the
  specified plot.
 
- @param graphChartView      The graph chart view that is asking for the range point.
+ @param graphChartView      The graph chart view that is asking for the float range.
  @param pointIndex          An index number identifying the range point in the graph chart view.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
 
- @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
+ @return The float range specified by `pointIndex` in the plot specified by `plotIndex` for the
  specified graph chart view`.
 */
 - (ORKFloatRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
