@@ -202,7 +202,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     CGFloat canvasYPosition = 0;
     if (nextValidIndex == previousValidIndex) {
-        canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].maximumValue;
+        canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
     } else {
         CGFloat viewWidth = self.plotView.bounds.size.width;
         NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
@@ -210,8 +210,8 @@ const CGFloat FillColorAlpha = 0.4;
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].maximumValue;
-        CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].maximumValue;
+        CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+        CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
         
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
@@ -226,7 +226,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     NSUInteger pointCountMinusOne = (self.dataPoints[plotIndex].count - 1);
     while (validPosition < pointCountMinusOne) {
-        if (self.dataPoints[plotIndex][validPosition].maximumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition++;
