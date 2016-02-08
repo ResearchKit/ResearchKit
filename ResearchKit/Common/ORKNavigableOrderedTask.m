@@ -131,6 +131,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
+        ORK_DECODE_BOOL(aDecoder, shouldReportProgress);
     }
     return self;
 }
@@ -139,6 +140,7 @@
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
+    ORK_ENCODE_BOOL(aCoder, shouldReportProgress);
 }
 
 #pragma mark NSCopying
@@ -146,6 +148,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
+    task->_shouldReportProgress = _shouldReportProgress;
     return task;
 }
 
@@ -154,11 +157,12 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules);
+    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules)
+    && self->_shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash];
+    return [super hash] ^ [_stepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined
