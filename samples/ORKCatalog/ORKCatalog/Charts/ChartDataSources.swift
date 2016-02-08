@@ -61,20 +61,20 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     var plotPoints =
     [
         [
-            ORKRangedPoint(value: 10),
-            ORKRangedPoint(value: 20),
-            ORKRangedPoint(value: 25),
-            ORKRangedPoint(),
-            ORKRangedPoint(value: 30),
-            ORKRangedPoint(value: 40),
+            ORKFloatRange(value: 10),
+            ORKFloatRange(value: 20),
+            ORKFloatRange(value: 25),
+            ORKFloatRange(),
+            ORKFloatRange(value: 30),
+            ORKFloatRange(value: 40),
         ],
         [
-            ORKRangedPoint(value: 2),
-            ORKRangedPoint(value: 4),
-            ORKRangedPoint(value: 8),
-            ORKRangedPoint(value: 16),
-            ORKRangedPoint(value: 32),
-            ORKRangedPoint(value: 64),
+            ORKFloatRange(value: 2),
+            ORKFloatRange(value: 4),
+            ORKFloatRange(value: 8),
+            ORKFloatRange(value: 16),
+            ORKFloatRange(value: 32),
+            ORKFloatRange(value: 64),
         ]
     ]
     
@@ -82,7 +82,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints.count
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
@@ -108,20 +108,20 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     var plotPoints =
     [
         [
-            ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-            ORKRangedPoint(minimumValue: 1, maximumValue: 4),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 8, maximumValue: 13),
+            ORKFloatRange(minimumValue: 0, maximumValue: 2),
+            ORKFloatRange(minimumValue: 1, maximumValue: 4),
+            ORKFloatRange(minimumValue: 2, maximumValue: 6),
+            ORKFloatRange(minimumValue: 3, maximumValue: 8),
+            ORKFloatRange(minimumValue: 5, maximumValue: 10),
+            ORKFloatRange(minimumValue: 8, maximumValue: 13),
         ],
         [
-            ORKRangedPoint(value: 1),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 11),
-            ORKRangedPoint(minimumValue: 7, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 10, maximumValue: 13),
+            ORKFloatRange(value: 1),
+            ORKFloatRange(minimumValue: 2, maximumValue: 6),
+            ORKFloatRange(minimumValue: 3, maximumValue: 10),
+            ORKFloatRange(minimumValue: 5, maximumValue: 11),
+            ORKFloatRange(minimumValue: 7, maximumValue: 13),
+            ORKFloatRange(minimumValue: 10, maximumValue: 13),
         ]
     ]
     
@@ -129,7 +129,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints.count
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatRange {
         return plotPoints[plotIndex][pointIndex]
     }
     

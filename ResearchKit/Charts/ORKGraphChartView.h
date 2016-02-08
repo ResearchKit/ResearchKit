@@ -38,7 +38,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKGraphChartView;
-@class ORKRangedPoint;
+@class ORKFloatRange;
 
 /**
  The graph chart view delegate protocol forwards pan gesture events occuring
@@ -83,7 +83,7 @@ ORK_AVAILABLE_DECL
  At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
  `graphChartView:plot:valueForPointAtIndex:` methods. These methods return
  the number of points in a plot and the points themselves. Each point in a plot is represented by an
- object of the `ORKRangedPoint` class. A data source object may provide additional information to
+ object of the `ORKFloatRange` class. A data source object may provide additional information to
  the graph chart view by implementing the optional methods.
 
  When configuring an `ORKGraphChartView` object, assign your data source to its `dataSource`
@@ -118,7 +118,7 @@ ORK_AVAILABLE_DECL
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
  specified graph chart view`.
 */
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKFloatRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @optional
 /**
@@ -159,7 +159,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
+ If this method is not implemented, the greatest `maximumValue` of all `ORKFloatRange` instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -173,7 +173,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the smallest `minimumValue` of all ORKRangedPoint instances
+ If this method is not implemented, the smallest `minimumValue` of all ORKFloatRange instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -243,7 +243,7 @@ ORK_CLASS_AVAILABLE
  `minimumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `minimumValueForGraphChartView:` is not implemented, the minimum value is assigned to the
- smallest value of the `minimumValue` property of all `ORKRangedPoint` instances returned by the
+ smallest value of the `minimumValue` property of all `ORKFloatRange` instances returned by the
  graph chart view data source.
 */
 @property (nonatomic, readonly) CGFloat minimumValue;
@@ -255,7 +255,7 @@ ORK_CLASS_AVAILABLE
  optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `maximumValueForGraphChartView:` is not implemented, the maximum value is assigned to the
- largest value of the `maximumValue` property of all `ORKRangedPoint` instances returned by the
+ largest value of the `maximumValue` property of all `ORKFloatRange` instances returned by the
  graph chart view data source.
 */
 @property (nonatomic, readonly) CGFloat maximumValue;

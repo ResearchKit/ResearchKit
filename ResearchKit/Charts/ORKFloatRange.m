@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,12 +31,12 @@
 */
 
  
-#import "ORKRangedPoint.h"
+#import "ORKFloatRange.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 
 
-@implementation ORKRangedPoint
+@implementation ORKFloatRange
 
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
     self = [super init];
@@ -58,7 +59,7 @@
     return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
 }
 
-- (BOOL)isRangeZero {
+- (BOOL)isEmpty {
     return (self.minimumValue == self.maximumValue);
 }
 
@@ -73,7 +74,7 @@
         return nil;
     }
 
-    if (self.hasEmptyRange || _minimumValue == _maximumValue) {
+    if (self.isEmpty || _minimumValue == _maximumValue) {
         return @(_maximumValue).stringValue;
     } else {
         NSString *rangeFormat = ORKLocalizedString(@"AX_GRAPH_RANGE_FORMAT", nil);

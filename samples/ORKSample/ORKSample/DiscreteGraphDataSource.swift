@@ -36,20 +36,20 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     var plotPoints =
     [
         [
-            ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-            ORKRangedPoint(minimumValue: 1, maximumValue: 4),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 8, maximumValue: 13),
+            ORKFloatRange(minimumValue: 0, maximumValue: 2),
+            ORKFloatRange(minimumValue: 1, maximumValue: 4),
+            ORKFloatRange(minimumValue: 2, maximumValue: 6),
+            ORKFloatRange(minimumValue: 3, maximumValue: 8),
+            ORKFloatRange(minimumValue: 5, maximumValue: 10),
+            ORKFloatRange(minimumValue: 8, maximumValue: 13),
         ],
         [
-            ORKRangedPoint(value: 1),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 11),
-            ORKRangedPoint(minimumValue: 7, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 10, maximumValue: 13),
+            ORKFloatRange(value: 1),
+            ORKFloatRange(minimumValue: 2, maximumValue: 6),
+            ORKFloatRange(minimumValue: 3, maximumValue: 10),
+            ORKFloatRange(minimumValue: 5, maximumValue: 11),
+            ORKFloatRange(minimumValue: 7, maximumValue: 13),
+            ORKFloatRange(minimumValue: 10, maximumValue: 13),
         ]
     ]
     
@@ -59,7 +59,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatRange {
         return plotPoints[plotIndex][pointIndex]
     }
     

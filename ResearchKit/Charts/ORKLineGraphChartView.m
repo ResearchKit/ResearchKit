@@ -34,7 +34,7 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKRangedPoint.h"
+#import "ORKFloatRange.h"
 
 
 const CGFloat FillColorAlpha = 0.4;
@@ -60,7 +60,7 @@ const CGFloat FillColorAlpha = 0.4;
     [super updatePlotColors];
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSUInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        UIColor *fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
+        UIColor *fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
         CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
         fillLayer.fillColor = fillColor.CGColor;
     }
@@ -89,7 +89,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         CAShapeLayer *lineLayer = graphLineLayer();
-        lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
+        lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
         lineLayer.lineWidth = 2.0;
         
         if (emptyDataPresent) {
@@ -102,7 +102,7 @@ const CGFloat FillColorAlpha = 0.4;
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
+    fillLayer.fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
     _fillLayers[@(plotIndex)] = fillLayer;
@@ -119,7 +119,7 @@ const CGFloat FillColorAlpha = 0.4;
     NSUInteger lineLayerIndex = 0;
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangedPoint *positionOnYAxis = nil;
+    ORKFloatRange *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {

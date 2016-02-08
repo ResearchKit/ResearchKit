@@ -469,8 +469,8 @@
 		BCB6E6611B7D534C000D5B34 /* ORKLineGraphChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E65A1B7D534C000D5B34 /* ORKLineGraphChartView.m */; };
 		BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */; };
 		BCB6E6671B7D535F000D5B34 /* ORKXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */; };
-		BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */; };
+		BCB6E66C1B7D537B000D5B34 /* ORKFloatRange.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E66A1B7D537B000D5B34 /* ORKFloatRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCB6E66D1B7D537B000D5B34 /* ORKFloatRange.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKFloatRange.m */; };
 		BCB96C131B19C0EC002A0B96 /* ORKStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */; };
 		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; };
 		BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */; };
@@ -1024,8 +1024,8 @@
 		BCB6E65A1B7D534C000D5B34 /* ORKLineGraphChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ORKLineGraphChartView.m; path = Charts/ORKLineGraphChartView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKXAxisView.h; path = Charts/ORKXAxisView.h; sourceTree = "<group>"; };
 		BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKXAxisView.m; path = Charts/ORKXAxisView.m; sourceTree = "<group>"; };
-		BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKRangedPoint.h; path = Charts/ORKRangedPoint.h; sourceTree = "<group>"; };
-		BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKRangedPoint.m; path = Charts/ORKRangedPoint.m; sourceTree = "<group>"; };
+		BCB6E66A1B7D537B000D5B34 /* ORKFloatRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKFloatRange.h; path = Charts/ORKFloatRange.h; sourceTree = "<group>"; };
+		BCB6E66B1B7D537B000D5B34 /* ORKFloatRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKFloatRange.m; path = Charts/ORKFloatRange.m; sourceTree = "<group>"; };
 		BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKStepTests.m; sourceTree = "<group>"; };
 		BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKYAxisView.h; path = Charts/ORKYAxisView.h; sourceTree = "<group>"; };
 		BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ORKYAxisView.m; path = Charts/ORKYAxisView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1256,8 +1256,8 @@
 		25BD76601B00A5CF00478C5D /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
-				BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */,
-				BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */,
+				BCB6E66A1B7D537B000D5B34 /* ORKFloatRange.h */,
+				BCB6E66B1B7D537B000D5B34 /* ORKFloatRange.m */,
 				BCB6E6541B7D534C000D5B34 /* ORKDiscreteGraphChartView.h */,
 				BCB6E6551B7D534C000D5B34 /* ORKDiscreteGraphChartView.m */,
 				BCB6E6561B7D534C000D5B34 /* ORKGraphChartView_Internal.h */,
@@ -2479,7 +2479,7 @@
 				24898B0D1B7186C000B0E7E7 /* ORKScaleRangeImageView.h in Headers */,
 				CBD34A5A1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h in Headers */,
 				86C40C5E1A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.h in Headers */,
-				BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */,
+				BCB6E66C1B7D537B000D5B34 /* ORKFloatRange.h in Headers */,
 				86C40D2C1A8D7C5C00081FAC /* ORKHeadlineLabel.h in Headers */,
 				86C40D1C1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.h in Headers */,
 				86C40CBC1A8D7C5C00081FAC /* UITouch+ORKJSONDictionary.h in Headers */,
@@ -2926,7 +2926,7 @@
 				242C9E0E1BBE03F90088B7F4 /* ORKVerificationStepViewController.m in Sources */,
 				86C40DD41A8D7C5C00081FAC /* ORKTextButton.m in Sources */,
 				86C40C981A8D7C5C00081FAC /* ORKDataLogger.m in Sources */,
-				BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */,
+				BCB6E66D1B7D537B000D5B34 /* ORKFloatRange.m in Sources */,
 				86C40D0C1A8D7C5C00081FAC /* ORKCustomStepView.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */,

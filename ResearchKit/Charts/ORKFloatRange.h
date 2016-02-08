@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -37,52 +38,63 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKRangedPoint` class represents a ranged point used in a graph plot.
+ The `ORKFloatRange` class represents a float range. It can be used in graph chart plots to draw a
+ value ranges.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKRangedPoint : NSObject
+@interface ORKFloatRange : NSObject
 
 /**
- Returns a range point initialized using the specified `minimumValue` and `maximumValue`.
+ Returns a float range initialized using the specified `minimumValue` and `maximumValue`.
 
  @param minimumValue     The `minimumValue` to set.
  @param maximumValue     The `maximumValue` to set.
 
- @return A range point.
+ @return A float range object.
 */
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns a range point initialized using the specified `value` for both `minimumValue` and
- `maximumValue`. This is useful for creating points that model a single data value without a range.
+ Returns a float range initialized using the specified `value` for both `minimumValue` and
+ `maximumValue`. This is useful for plotting data points that model a single value with no range.
 
  This method is a convenience initializer.
 
  @param value    The `minimumValue` and `maximumValue` to set.
 
- @return A range point.
+ @return A float range object.
 */
 - (instancetype)initWithValue:(CGFloat)value;
 
 /**
- The upper limit of the range represented by this point.
- The default value of this property is zero.
+ Returns a range point initialized using the `ORKCGFloatInvalidValue` value for both `minimumValue`
+ and `maximumValue`. This denotes an unset or invalid float range. It is useful, for example, for
+ representing unavailable data in discontinous graph chart plots.
+ 
+ This method is a convenience initializer.
+ 
+ @return A float range object initialized with the `ORKCGFloatInvalidValue` value.
+ */
+- (instancetype)init;
+
+/**
+ The upper limit of the float range.
  */
 @property (nonatomic) CGFloat maximumValue;
 
 /**
- The lower limit of the range represented by this point.
- The default value of this property is zero.
+ The lower limit of the float range.
  */
 @property (nonatomic) CGFloat minimumValue;
 
 /**
  A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
 */
-@property (nonatomic, readonly) BOOL hasEmptyRange;
+@property (nonatomic, readonly) BOOL isEmpty;
 
 /**
- A Boolean value indicating that both `minimum value` and `maximum value` have not been set.  (read-only)
+ A Boolean value indicating that both `minimum value` and `maximum value` are equal to the
+ `ORKCGFloatInvalidValue` value. (read-only)
 */
 @property (nonatomic, readonly) BOOL isUnset;
 

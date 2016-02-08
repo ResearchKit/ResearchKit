@@ -34,7 +34,7 @@
 #import "ORKDiscreteGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKRangedPoint.h"
+#import "ORKFloatRange.h"
 
 
 @implementation ORKDiscreteGraphChartView
@@ -63,10 +63,10 @@
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][pointIndex];
-        if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
+        ORKFloatRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
             CAShapeLayer *lineLayer = graphLineLayer();
-            lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
+            lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
             lineLayer.lineWidth = ORKGraphChartViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];
@@ -78,13 +78,13 @@
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangedPoint *positionOnYAxis = nil;
+    ORKFloatRange *positionOnYAxis = nil;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        ORKFloatRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         
-        if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
+        if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
             
             UIBezierPath *linePath = [UIBezierPath bezierPath];
             
