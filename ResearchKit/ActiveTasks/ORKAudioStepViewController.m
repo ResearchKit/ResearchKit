@@ -62,8 +62,14 @@
     if (self) {
         // Continue audio recording in the background
         self.suspendIfInactive = NO;
+        _alertThreshold = -1.f;
     }
     return self;
+}
+
+- (void)setAlertThreshold:(CGFloat)alertThreshold {
+    _alertThreshold = alertThreshold;
+    _audioContentView.alertThreshold = alertThreshold;
 }
 
 - (void)viewDidLoad {
@@ -71,6 +77,11 @@
     // Do any additional setup after loading the view.
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.stepDuration;
+
+    if (self.alertThreshold > 0) {
+        _audioContentView.alertThreshold = self.alertThreshold;
+    }
+
     self.activeStepView.activeCustomView = _audioContentView;
 }
 
