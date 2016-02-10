@@ -1217,6 +1217,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
             step.text = intendedUseDescription;
+            step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
         }
@@ -1225,7 +1227,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL", nil);
-            step.image = [UIImage imageNamed:@"tremorsTestHand.jpg"];
+            step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
         }
@@ -1235,6 +1238,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction3"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
+        step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
     }
@@ -1267,6 +1273,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction4"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
+        step.image = [UIImage imageNamed:@"tremortest4a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.auxiliaryImage = [UIImage imageNamed:@"tremortest4b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
     }
@@ -1285,6 +1294,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.spokenInstruction = step.title;
         step.finishedSpokenInstruction = stepFinishedInstruction;
         step.stepDuration = activeStepDuration;
+        step.image = [UIImage imageNamed:@"tremortest4a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         step.shouldPlaySoundOnStart = YES;
         step.shouldVibrateOnStart = YES;
         step.shouldPlaySoundOnFinish = YES;
@@ -1299,6 +1309,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction5"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
+        step.image = [UIImage imageNamed:@"tremortest5a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.auxiliaryImage = [UIImage imageNamed:@"tremortest5b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
     }
@@ -1331,6 +1344,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction6"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
+        step.image = [UIImage imageNamed:@"tremortest6a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.auxiliaryImage = [UIImage imageNamed:@"tremortest6b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
     }
@@ -1363,6 +1379,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction7"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
+        step.image = [UIImage imageNamed:@"tremortest7" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
     }
