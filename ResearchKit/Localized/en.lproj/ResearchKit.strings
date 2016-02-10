@@ -341,6 +341,7 @@
 
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Tremor Test";
+"TREMOR_TEST_INTENDED_USE" = "This activity measures the tremor of your hands in various positions. Perform this test with your more affected hand.";
 "TREMOR_TEST_INTRO_2_TEXT" = "Hold the phone as shown in the image below and find a place where you can sit comfortably for the duration of this task.";
 "TREMOR_TEST_INTRO_2_DETAIL" = "You will be asked to perform four tasks while in this position.";
 "TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";

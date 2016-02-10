@@ -1216,7 +1216,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
-            step.text = intendedUseDescription;
+            step.text = intendedUseDescription ? : ORKLocalizedString(@"TREMOR_TEST_INTENDED_USE", nil);
             step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             
