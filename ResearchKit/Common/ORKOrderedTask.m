@@ -297,6 +297,11 @@ NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
 NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
 NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
 NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
+NSString * const ORKTremorTestInLapStepIdentifier = @"handInLap.withWristSensorAndPhone";
+NSString * const ORKTremorTestExtendArmStepIdentifier = @"handAtShoulderLength.withWristSensorAndPhone";
+NSString * const ORKTremorTestBendArmStepIdentifier = @"handAtShoulderLengthWithElbowBent.withWristSensorAndPhone";
+NSString * const ORKTremorTestTouchNoseStepIdentifier = @"handToNose.withWristSensorAndPhone";
+NSString * const ORKTremorTestTurnWristStepIdentifier = @"handQueenWave.withWristSensorAndPhone";
 NSString * const ORKPSATStepIdentifier = @"psat";
 NSString * const ORKAudioRecorderIdentifier = @"audio";
 NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
@@ -1235,7 +1240,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction3"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction2"];
         step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO", nil);
         step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
         step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1253,7 +1258,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     {
         NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld", nil);
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"handInLap.withWristSensorAndPhone"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestInLapStepIdentifier];
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac1_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac1_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
@@ -1288,7 +1293,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     {
         NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld", nil);
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"handAtShoulderLength.withWristSensorAndPhone"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestExtendArmStepIdentifier];
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac2_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac2_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
@@ -1324,7 +1329,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     {
         NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld", nil);
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"handAtShoulderLengthWithElbowBent.withWristSensorAndPhone"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestBendArmStepIdentifier];
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac3_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac3_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
@@ -1359,7 +1364,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     {
         NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld", nil);
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"handToNose.withWristSensorAndPhone"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestTouchNoseStepIdentifier];
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac4_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac4_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
@@ -1393,7 +1398,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     {
         NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld", nil);
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"handQueenWave.withWristSensorAndPhone"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestTurnWristStepIdentifier];
         step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac5_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac5_motion" frequency:100.0]];
         step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
         step.spokenInstruction = step.title;
