@@ -503,7 +503,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that measures hand tremor.
  
- TODO: add documentation details
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
