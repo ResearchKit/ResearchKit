@@ -515,12 +515,12 @@ within the specified `NSTimeInterval` values.
                                         maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
 
 /**
- Returns a predicate matching a result of type `ORKConsentSignatureResult` whose consented value matched the
- specified boolean value.
+ Returns a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
+ matches the specified boolean value.
  
  @param resultSelector              The result selector object which specifies the question result
  you are interested in.
- @param didConsent                  Whether the user consented to the
+ @param didConsent                  Whether the user consented to the `ORKConsentReviewStep`
  
  @return A result predicate.
  */
