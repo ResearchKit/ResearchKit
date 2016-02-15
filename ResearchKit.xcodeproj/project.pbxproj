@@ -2563,6 +2563,9 @@
 					86CC8E991AC09332001CCD89 = {
 						CreatedOnToolsVersion = 6.2;
 					};
+					B183A4731A8535D100C76870 = {
+						DevelopmentTeam = SHUXXJL89V;
+					};
 					B18FF3A41A9FE25700C0C3B0 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -3121,6 +3124,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
@@ -3155,6 +3159,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;

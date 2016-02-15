@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9CF6181E3789E3853840089C16D4B9FDDB9B31E2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : 0,
+    "BDF015D54E9ECE420BECA5D41B773C76C5926119" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E4EEBD69-0DC2-4AE9-9310-807A9F3BD221",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : "ResearchKit-Master-Fork\/",
+    "BDF015D54E9ECE420BECA5D41B773C76C5926119" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RKWorkspace",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RKWorkspace.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeffniblack\/ResearchKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9CF6181E3789E3853840089C16D4B9FDDB9B31E2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeffniblack\/MyProtos",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BDF015D54E9ECE420BECA5D41B773C76C5926119"
+    }
+  ]
+}
