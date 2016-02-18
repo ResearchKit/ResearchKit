@@ -227,13 +227,13 @@ ORK_AVAILABLE_DECL
 
 
 /**
- Asks the data source if the plot at specified index should draw indicators for for its points.
+ Asks the data source if the plot at specified index should display circular indicators on its data points.
  
  Points which contain a non-zero range will always be drawn.
  
- If this method is not implemented, the graph chart view will draw point indicators for all plots.
+ If this method is not implemented, point indicators will be drawn for all plots.
  
- @param graphChartView  The graph view asking for the tile.
+ @param graphChartView  The graph view asking whether point indicators should be drawn.
  @param plotIndex       An index number identifying the plot in the graph chart view. This index
  is always 0 in single-plot graph chart views.
  
