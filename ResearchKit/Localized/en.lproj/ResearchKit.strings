@@ -39,7 +39,7 @@
 "CONSENT_SIGNATURE_TITLE" = "Signature";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger on the line below.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
-"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$%ld";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "Welcome";
