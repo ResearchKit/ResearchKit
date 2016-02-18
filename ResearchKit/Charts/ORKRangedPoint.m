@@ -58,7 +58,7 @@
     return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
 }
 
-- (BOOL)isRangeZero {
+- (BOOL)hasEmptyRange {
     return (self.minimumValue == self.maximumValue);
 }
 

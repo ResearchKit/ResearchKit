@@ -248,9 +248,11 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
             CAShapeLayer *lineLayer = _lineLayers[plotIndex][pointIndex];
             lineLayer.strokeColor = color.CGColor;
         }
-        for (NSUInteger pointIndex = 0; pointIndex < _pointLayers[plotIndex].count; pointIndex++) {
-            CALayer *pointLayer = _pointLayers[plotIndex][pointIndex];
-            pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+        for (NSUInteger layerIndex = 0; layerIndex < _pointLayers[plotIndex].count; layerIndex++) {
+            CALayer *pointLayer = _pointLayers[plotIndex][layerIndex];
+            if (pointLayer.contents) {
+                pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+            }
         }
     }
 }
@@ -503,13 +505,45 @@ inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     return pointImage;
 }
 
-inline static CALayer *graphPointLayerWithColor(UIColor *color) {
+inline static CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndicator) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineSize;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
-    pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+    if (drawPointIndicator) {
+        pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+    }
     
     return pointLayer;
+}
+
+- (BOOL)prefersDrawingPointIndicatorsForPlotIndex:(NSInteger)plotIndex {
+    if ([_dataSource respondsToSelector:@selector(graphChartView:drawsPointIndicatorsForPlotIndex:)]) {
+        return [_dataSource graphChartView:self drawsPointIndicatorsForPlotIndex:plotIndex];
+    }
+    return YES;
+}
+
+- (BOOL)needsLayoutOfPointIndicatorsForPlotIndex:(NSInteger)plotIndex {
+    if (![self prefersDrawingPointIndicatorsForPlotIndex:plotIndex]) {
+        for (ORKRangedPoint *dataPoint in _dataPoints[plotIndex]) {
+            if (!dataPoint.hasEmptyRange) {
+                return YES;
+            }
+        }
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)shouldDrawPointIndicatorForPointWithIndex:(NSInteger)pointIndex inPlotWithIndex:(NSInteger)plotIndex {
+    ORKRangedPoint *dataPoint = _dataPoints[plotIndex][pointIndex];
+    if (dataPoint.isUnset) {
+        return NO;
+    }
+    if (!dataPoint.hasEmptyRange) {
+        return YES;
+    }
+    return [self prefersDrawingPointIndicatorsForPlotIndex:plotIndex];
 }
 
 - (void)updatePointLayers {
@@ -532,18 +566,19 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
-    if (plotIndex < _dataPoints.count) {
+    if (plotIndex < _dataPoints.count && [self needsLayoutOfPointIndicatorsForPlotIndex:plotIndex]) {
         UIColor *color = [self colorForplotIndex:plotIndex];
         NSUInteger pointCount = _dataPoints[plotIndex].count;
         for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             ORKRangedPoint *dataPoint = _dataPoints[plotIndex][pointIndex];
             if (!dataPoint.isUnset) {
-                CALayer *pointLayer = graphPointLayerWithColor(color);
+                BOOL drawPointIndicator = [self shouldDrawPointIndicatorForPointWithIndex:pointIndex inPlotWithIndex:plotIndex];
+                CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.hasEmptyRange) {
-                    CALayer *pointLayer = graphPointLayerWithColor(color);
+                    CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                     [_plotView.layer addSublayer:pointLayer];
                     [_pointLayers[plotIndex] addObject:pointLayer];
                 }
@@ -561,7 +596,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        [self layoutPointLayersForPlotIndex:plotIndex];
+        if ([self needsLayoutOfPointIndicatorsForPlotIndex:plotIndex]) {
+            [self layoutPointLayersForPlotIndex:plotIndex];
+        }
     }
 }
 

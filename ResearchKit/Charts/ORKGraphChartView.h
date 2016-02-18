@@ -225,6 +225,22 @@ ORK_AVAILABLE_DECL
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsVerticalReferenceLineAtPointIndex:(NSInteger)pointIndex;
 
+
+/**
+ Asks the data source if the plot at specified index should draw indicators for for its points.
+ 
+ Points which contain a non-zero range will always be drawn.
+ 
+ If this method is not implemented, the graph chart view will draw point indicators for all plots.
+ 
+ @param graphChartView  The graph view asking for the tile.
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return Whether the graph chart view should draw point indicators for its points.
+ */
+- (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
+
 @end
 
 
