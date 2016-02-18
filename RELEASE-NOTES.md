@@ -170,7 +170,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.1*
  A new type of *conditional ordered task* (`ORKNavigableOrderedTask`) has been implemented.
 
  The developer can use the `ORKStepNavigationRule` subclasses to dynamically navigate between the task steps:
- - `ORKPredicateStepNavigationRule` allows to make conditional jumps by matching previous results (either those of the the ongoing task, or those of any previously stored task result tree). You typically use the class methods in the `ORKResultPredicate` class to match answers in the most commonly used result types.
+ - `ORKPredicateStepNavigationRule` allows to make conditional jumps by matching previous results (either those of the ongoing task, or those of any previously stored task result tree). You typically use the class methods in the `ORKResultPredicate` class to match answers in the most commonly used result types.
  - `ORKDirectStepNavigationRule` provides support for unconditional jumps.
 
 - **New Active Tasks**
