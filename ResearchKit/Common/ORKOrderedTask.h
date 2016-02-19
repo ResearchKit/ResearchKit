@@ -500,6 +500,26 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that measures hand tremor.
+ 
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param activeStepDuration      The duration for each active step in the task.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                          intendedUseDescription:(nullable NSString *)intendedUseDescription
+                              activeStepDuration:(NSTimeInterval)activeStepDuration
+                                         options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END
