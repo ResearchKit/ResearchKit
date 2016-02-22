@@ -37,6 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 
+@class ORKStepViewController;
+@class ORKResult;
+
 @protocol ORKTask;
 
 /**
@@ -178,6 +181,18 @@ ORK_CLASS_AVAILABLE
  properties, and must call super.
  */
 - (void)validateParameters;
+
+/**
+ Instantiates a step view controller for this class.
+ 
+ This method is called when a step is about to be presented. The default implementation returns
+ a view controller that is appropriate to this step. 
+ 
+ @param result    The result associated with this step
+ 
+ @return A newly initialized step view controller.
+ */
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result;
 
 @end
 
