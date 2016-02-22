@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 
+@class ORKStepViewController;
+
 @protocol ORKTask;
 
 /**
@@ -177,6 +179,11 @@ ORK_CLASS_AVAILABLE
  properties, and must call super.
  */
 - (void)validateParameters;
+
+/**
+ * Instantiates a step view controller for this class or returns nil if undefined
+ */
+- (ORKStepViewController * _Nullable)instantiateStepViewController;
 
 @end
 

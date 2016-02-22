@@ -1020,6 +1020,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     if (!stepViewController) {
+        stepViewController = [step instantiateStepViewController];
+    }
+    
+    if (!stepViewController) {
         Class stepViewControllerClass = step.stepViewControllerClass;
         
         ORKStepResult *result = nil;

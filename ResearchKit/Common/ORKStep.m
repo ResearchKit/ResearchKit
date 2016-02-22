@@ -59,6 +59,10 @@
     return [[self class] stepViewControllerClass];
 }
 
+- (ORKStepViewController * _Nullable)instantiateStepViewController {
+    return nil;
+}
+
 - (instancetype)copyWithIdentifier:(NSString *)identifier {
     ORKStep *step = [self copy];
     step->_identifier = identifier;
