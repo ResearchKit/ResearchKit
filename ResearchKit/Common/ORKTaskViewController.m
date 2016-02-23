@@ -870,7 +870,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKStep *step = viewController.step;
-    [self updateLastBeginningInstructionStepIdentifierForStep:step goForward:goForward];
+    if ([step isKindOfClass:[ORKInstructionStep class]]) {
+        // Do NOT assume that the first step is an instruction step
+        [self updateLastBeginningInstructionStepIdentifierForStep:step goForward:goForward];
+    }
     
     
     if ([self isStepLastBeginningInstructionStep:step]) {
