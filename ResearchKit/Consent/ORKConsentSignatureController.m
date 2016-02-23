@@ -30,7 +30,7 @@
 
 
 #import "ORKConsentSignatureController.h"
-#import "ORKTextButton.h"
+#import "ORKTextButton_Internal.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
 #import "ORKVerticalContainerView_Internal.h"

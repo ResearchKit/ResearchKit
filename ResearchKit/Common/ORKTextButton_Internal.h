@@ -28,34 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTextButton_Internal.h"
-#import "ORKRoundTappingButton.h"
+#import "ORKTextButton.h"
+#import "ORKDefaultFont.h"
+#import "ORKDefines_Private.h"
 
 
-@implementation ORKRoundTappingButton
+@interface ORKTextButton ()  <ORKDefaultFont>
 
-static const CGFloat RoundTappingButtonDiameter = 104;
-
-- (void)init_ORKTextButton {
-    [super init_ORKTextButton];
-    self.fadeDelay = 0.2;
-    self.layer.cornerRadius = RoundTappingButtonDiameter * 0.5;
-}
-
-- (CGSize)intrinsicContentSize {
-    return CGSizeMake(RoundTappingButtonDiameter, RoundTappingButtonDiameter);
-}
-
-+ (UIFont *)defaultFont {
-    // regular, 20
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 3.0];
-}
-
-#pragma mark Accessibility
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    return [super accessibilityTraits] | UIAccessibilityTraitAllowsDirectInteraction;
-}
+- (void)init_ORKTextButton;
 
 @end
