@@ -246,7 +246,7 @@ ORK_CLASS_AVAILABLE
  smallest value of the `minimumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat minimumValue;
+@property (nonatomic, readonly) IBInspectable CGFloat minimumValue;
 
 /**
  The maximum value of the y-axis.
@@ -258,21 +258,21 @@ ORK_CLASS_AVAILABLE
  largest value of the `maximumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat maximumValue;
+@property (nonatomic, readonly) IBInspectable CGFloat maximumValue;
 
 /**
  A Boolean value indicating whether the graph chart view should draw horizontal reference lines.
 
  The default value of this property is NO.
  */
-@property (nonatomic) BOOL showsHorizontalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsHorizontalReferenceLines;
 
 /**
  A Boolean value indicating whether the graph chart view should draw vertical reference lines.
 
  The default value of this property is NO.
 */
-@property (nonatomic) BOOL showsVerticalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsVerticalReferenceLines;
 
 /**
  The delegate is notified of pan gesture events occuring within the bounds of the graph chart
@@ -295,7 +295,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil`
  resets it to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *axisColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *axisColor;
 
 /**
  The color of the vertical axis titles.
@@ -305,7 +305,7 @@ ORK_CLASS_AVAILABLE
 
  @note The horizontal axis titles use the current `tintColor`.
 */
-@property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.
@@ -313,7 +313,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
@@ -321,7 +321,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a white color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
@@ -329,7 +329,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a gray color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberLineColor;
 
 /**
  The string that is displayed if no data points are provided by the data source.
@@ -337,21 +337,21 @@ ORK_CLASS_AVAILABLE
  The default value for this property is an appropriate message string. Setting this property to
  `nil` resets it to its default value.
 */
-@property (nonatomic, copy, null_resettable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
  An image to be optionally displayed in place of the maximum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *maximumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *maximumValueImage;
 
 /**
  An image to be optionally displayed in place of the minimum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *minimumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *minimumValueImage;
 
 /**
  The gesture recognizer that is used for scrubbing by the graph chart view.
