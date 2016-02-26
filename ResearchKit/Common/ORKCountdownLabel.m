@@ -45,6 +45,10 @@
     NSInteger _currentCountDownValue;
 }
 
++ (UIFont *)defaultFont {
+    return [UIFont systemFontOfSize:65.f weight:UIFontWeightUltraLight];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
