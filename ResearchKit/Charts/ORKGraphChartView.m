@@ -1094,4 +1094,10 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     self.accessibilityElements = accessibilityElements;
 }
 
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+    [self reloadData];
+}
+
 @end

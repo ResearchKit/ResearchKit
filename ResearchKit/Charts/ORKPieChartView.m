@@ -385,4 +385,10 @@ static const CGFloat PieToLegendPadding = 8.0;
     return accessibilityElements;
 }
 
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+    [self reloadData];
+}
+
 @end

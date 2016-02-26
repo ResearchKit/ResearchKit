@@ -234,6 +234,7 @@ ORK_AVAILABLE_DECL
  this class directly; use one of the subclasses instead.
 */
 ORK_CLASS_AVAILABLE
+IB_DESIGNABLE
 @interface ORKGraphChartView : UIView
 
 /**

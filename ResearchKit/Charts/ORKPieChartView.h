@@ -111,6 +111,7 @@ ORK_AVAILABLE_DECL
  `ORKPieChartViewDataSource` protocol as a pie chart.
 */
 ORK_CLASS_AVAILABLE
+IB_DESIGNABLE
 @interface ORKPieChartView : UIView
 
 /**
