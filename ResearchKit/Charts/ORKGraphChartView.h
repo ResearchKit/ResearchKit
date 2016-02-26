@@ -246,7 +246,7 @@ ORK_CLASS_AVAILABLE
  smallest value of the `minimumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) IBInspectable CGFloat minimumValue;
+@property (nonatomic, readonly) CGFloat minimumValue;
 
 /**
  The maximum value of the y-axis.
@@ -258,7 +258,7 @@ ORK_CLASS_AVAILABLE
  largest value of the `maximumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) IBInspectable CGFloat maximumValue;
+@property (nonatomic, readonly) CGFloat maximumValue;
 
 /**
  A Boolean value indicating whether the graph chart view should draw horizontal reference lines.
