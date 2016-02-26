@@ -32,12 +32,6 @@
 #import "ORKResult.h"
 #import "ORKTask.h"
 #import "ORKResult_Private.h"
-#include <sys/socket.h> // Per msqr
-#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
-#import <CoreMotion/CoreMotion.h>
-#import <CoreLocation/CoreLocation.h>
 #import "ORKRecorder.h"
 #import "ORKStep.h"
 #import "ORKHelpers.h"
@@ -47,6 +41,21 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
+#import <CoreMotion/CoreMotion.h>
+#import <CoreLocation/CoreLocation.h>
+
+
+const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
+
+@interface ORKResult ()
+
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+
+@property (nonatomic) NSString *descriptionSuffix;
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+
+@end
 
 
 @implementation ORKResult
@@ -121,6 +130,22 @@
     return self;
 }
 
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@<%@: %p; identifier: \"%@\"", ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces), self.class.description, self, self.identifier];
+}
+
+- (NSString *)descriptionSuffix {
+    return @">";
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.descriptionSuffix];
+}
+
+- (NSString *)description {
+    return [self descriptionWithNumberOfPaddingSpaces:0];
+}
+
 @end
 
 
@@ -168,7 +193,144 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %.03f %@", [super description], @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+}
+
+@end
+
+
+@implementation ORKPasscodeResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, passcodeSaved);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, passcodeSaved);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.isPasscodeSaved == castObject.isPasscodeSaved);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPasscodeResult *result = [super copyWithZone:zone];
+    result.passcodeSaved = self.isPasscodeSaved;
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; passcodeSaved: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKTowerOfHanoiResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, moves);
+    ORK_ENCODE_BOOL(aCoder, puzzleWasSolved);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_ARRAY(aDecoder, moves, ORKTowerOfHanoiMove);
+        ORK_DECODE_BOOL(aDecoder, puzzleWasSolved);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return isParentSame &&
+    self.puzzleWasSolved == castObject.puzzleWasSolved &&
+    ORKEqualObjects(self.moves, castObject.moves);
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ self.puzzleWasSolved ^ self.moves.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTowerOfHanoiResult *result = [super copyWithZone:zone];
+    result.puzzleWasSolved = self.puzzleWasSolved;
+    result.moves = [self.moves copy];
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; puzzleSolved: %d; moves: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.puzzleWasSolved, self.moves, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKTowerOfHanoiMove
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_INTEGER(aCoder, donorTowerIndex);
+    ORK_ENCODE_INTEGER(aCoder, recipientTowerIndex);
+    
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_INTEGER(aDecoder, donorTowerIndex);
+        ORK_DECODE_INTEGER(aDecoder, recipientTowerIndex);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return self.timestamp == castObject.timestamp &&
+            self.donorTowerIndex == castObject.donorTowerIndex &&
+            self.recipientTowerIndex == castObject.recipientTowerIndex;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTowerOfHanoiMove *move = [[[self class] allocWithZone:zone] init];
+    move.timestamp = self.timestamp;
+    move.donorTowerIndex = self.donorTowerIndex;
+    move.recipientTowerIndex = self.recipientTowerIndex;
+    return move;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; donorTower: %@; recipientTower: %@>", self.class.description, self, @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
 }
 
 @end
@@ -215,8 +377,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@", [super description], self.outputVolume, self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; outputvolume: %@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.outputVolume, self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -229,17 +391,17 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, frequency);
+    ORK_ENCODE_DOUBLE(aCoder, frequency);
     ORK_ENCODE_ENUM(aCoder, channel);
-    ORK_ENCODE_OBJ(aCoder, amplitude);
+    ORK_ENCODE_DOUBLE(aCoder, amplitude);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, frequency);
+        ORK_DECODE_DOUBLE(aDecoder, frequency);
         ORK_DECODE_ENUM(aDecoder, channel);
-        ORK_DECODE_OBJ(aDecoder, amplitude);
+        ORK_DECODE_DOUBLE(aDecoder, amplitude);
     }
     return self;
 }
@@ -252,8 +414,8 @@
     __typeof(self) castObject = object;
 
     return ((self.channel == castObject.channel) &&
-            ([self.frequency isEqualToNumber:castObject.frequency]) &&
-            ([self.amplitude isEqualToNumber:castObject.amplitude])) ;
+            (ABS(self.frequency - castObject.frequency) < DBL_EPSILON) &&
+            (ABS(self.amplitude - castObject.amplitude) < DBL_EPSILON)) ;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -265,7 +427,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; amplitude: %.4lf>", self.class.description, self, self.frequency, @(self.channel), self.amplitude];
 }
 
 @end
@@ -322,7 +484,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; targetIndex: %@; location: %@; correct: %@>", self.class.description, self, @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
 }
 
 @end
@@ -390,7 +552,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", [super description], @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
+    return [NSString stringWithFormat:@"<%@: %p; seed: %@; sequence: %@; gameSize: %@; gameStatus: %@; score: %@>", self.class.description, self, @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
 }
 
 @end
@@ -447,8 +609,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@ score=%@", [super description], @(self.score)];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; score: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.score), self.descriptionSuffix];
 }
 
 @end
@@ -503,8 +665,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", [super description], self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -555,8 +717,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ (%lld bytes)", [super description], self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; fileURL: %@ (%lld bytes)%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.fileURL, [[NSFileManager defaultManager] attributesOfItemAtPath:self.fileURL.path error:nil].fileSize, self.descriptionSuffix];
 }
 
 @end
@@ -603,8 +765,316 @@
     return result;
 }
 
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; timestamp: %f; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.timestamp, self.fileResult.description, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKTimedWalkResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, distanceInMeters);
+    ORK_ENCODE_DOUBLE(aCoder, timeLimit);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, distanceInMeters);
+        ORK_DECODE_DOUBLE(aDecoder, timeLimit);
+        ORK_DECODE_DOUBLE(aDecoder, duration);
+    }
+    return self;
+    
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.duration == castObject.distanceInMeters) &&
+            (self.duration == castObject.timeLimit) &&
+            (self.duration == castObject.duration));
+}
+
+- (NSUInteger)hash {
+    return [super hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTimedWalkResult *result = [super copyWithZone:zone];
+    result.duration = self.distanceInMeters;
+    result.duration = self.timeLimit;
+    result.duration = self.duration;
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; distance: %@; timeLimit: %@; duration: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.distanceInMeters), @(self.timeLimit), @(self.duration), self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKPSATSample
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_BOOL(aCoder, correct);
+    ORK_ENCODE_INTEGER(aCoder, digit);
+    ORK_ENCODE_INTEGER(aCoder, answer);
+    ORK_ENCODE_DOUBLE(aCoder, time);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, correct);
+        ORK_DECODE_INTEGER(aDecoder, digit);
+        ORK_DECODE_INTEGER(aDecoder, answer);
+        ORK_DECODE_DOUBLE(aDecoder, time);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.isCorrect == castObject.isCorrect) &&
+            (self.digit == castObject.digit) &&
+            (self.answer == castObject.answer) &&
+            (self.time == castObject.time)) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPSATSample *sample = [[[self class] allocWithZone:zone] init];
+    sample.correct = self.isCorrect;
+    sample.digit = self.digit;
+    sample.answer = self.answer;
+    sample.time = self.time;
+    return sample;
+}
+
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %f %@", [super description], self.timestamp, self.fileResult.description];
+    return [NSString stringWithFormat:@"<%@: %p; correct: %@; digit: %@; answer: %@; time: %@>", self.class.description, self, @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
+}
+
+@end
+
+
+@implementation ORKPSATResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, presentationMode);
+    ORK_ENCODE_DOUBLE(aCoder, interStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, stimulusDuration);
+    ORK_ENCODE_INTEGER(aCoder, length);
+    ORK_ENCODE_INTEGER(aCoder, totalCorrect);
+    ORK_ENCODE_INTEGER(aCoder, totalDyad);
+    ORK_ENCODE_DOUBLE(aCoder, totalTime);
+    ORK_ENCODE_INTEGER(aCoder, initialDigit);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_ENUM(aDecoder, presentationMode);
+        ORK_DECODE_DOUBLE(aDecoder, interStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, stimulusDuration);
+        ORK_DECODE_INTEGER(aDecoder, length);
+        ORK_DECODE_INTEGER(aDecoder, totalCorrect);
+        ORK_DECODE_INTEGER(aDecoder, totalDyad);
+        ORK_DECODE_DOUBLE(aDecoder, totalTime);
+        ORK_DECODE_INTEGER(aDecoder, initialDigit);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPSATSample);
+    }
+    return self;
+    
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.presentationMode == castObject.presentationMode) &&
+            (self.interStimulusInterval == castObject.interStimulusInterval) &&
+            (self.stimulusDuration == castObject.stimulusDuration) &&
+            (self.length == castObject.length) &&
+            (self.totalCorrect == castObject.totalCorrect) &&
+            (self.totalDyad == castObject.totalDyad) &&
+            (self.totalTime == castObject.totalTime) &&
+            (self.initialDigit == castObject.initialDigit) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPSATResult *result = [super copyWithZone:zone];
+    result.presentationMode = self.presentationMode;
+    result.interStimulusInterval = self.interStimulusInterval;
+    result.stimulusDuration = self.stimulusDuration;
+    result.length = self.length;
+    result.totalCorrect = self.totalCorrect;
+    result.totalDyad = self.totalDyad;
+    result.totalTime = self.totalTime;
+    result.initialDigit = self.initialDigit;
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; correct: %@/%@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.totalCorrect), @(self.length), self.samples, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKHolePegTestResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, movingDirection);
+    ORK_ENCODE_BOOL(aCoder, dominantHandTested);
+    ORK_ENCODE_INTEGER(aCoder, numberOfPegs);
+    ORK_ENCODE_INTEGER(aCoder, threshold);
+    ORK_ENCODE_BOOL(aCoder, rotated);
+    ORK_ENCODE_INTEGER(aCoder, totalSuccesses);
+    ORK_ENCODE_INTEGER(aCoder, totalFailures);
+    ORK_ENCODE_DOUBLE(aCoder, totalTime);
+    ORK_ENCODE_DOUBLE(aCoder, totalDistance);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_ENUM(aDecoder, movingDirection);
+        ORK_DECODE_BOOL(aDecoder, dominantHandTested);
+        ORK_DECODE_INTEGER(aDecoder, numberOfPegs);
+        ORK_DECODE_INTEGER(aDecoder, threshold);
+        ORK_DECODE_BOOL(aDecoder, rotated);
+        ORK_DECODE_INTEGER(aDecoder, totalSuccesses);
+        ORK_DECODE_INTEGER(aDecoder, totalFailures);
+        ORK_DECODE_DOUBLE(aDecoder, totalTime);
+        ORK_DECODE_DOUBLE(aDecoder, totalDistance);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKToneAudiometrySample);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.movingDirection == castObject.movingDirection) &&
+            (self.isDominantHandTested == castObject.isDominantHandTested) &&
+            (self.numberOfPegs == castObject.numberOfPegs) &&
+            (self.threshold == castObject.threshold) &&
+            (self.isRotated == castObject.isRotated) &&
+            (self.totalSuccesses == castObject.totalSuccesses) &&
+            (self.totalFailures == castObject.totalFailures) &&
+            (self.totalTime == castObject.totalTime) &&
+            (self.totalDistance == castObject.totalDistance) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKHolePegTestResult *result = [super copyWithZone:zone];
+    result.movingDirection = self.movingDirection;
+    result.dominantHandTested = self.isDominantHandTested;
+    result.numberOfPegs = self.numberOfPegs;
+    result.threshold = self.threshold;
+    result.rotated = self.isRotated;
+    result.totalSuccesses = self.totalSuccesses;
+    result.totalFailures = self.totalFailures;
+    result.totalTime = self.totalTime;
+    result.totalDistance = self.totalDistance;
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; successes: %@; time: %@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.totalSuccesses), @(self.totalTime), self.samples, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKHolePegTestSample
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, time);
+    ORK_ENCODE_DOUBLE(aCoder, distance);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, time);
+        ORK_DECODE_DOUBLE(aDecoder, distance);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.time == castObject.time) &&
+            (self.distance == castObject.distance)) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKHolePegTestSample *sample = [[[self class] allocWithZone:zone] init];
+    sample.time = self.time;
+    sample.distance = self.distance;
+    return sample;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; time: %@; distance: %@>", self.class.description, self, @(self.time), @(self.distance)];
 }
 
 @end
@@ -659,7 +1129,11 @@
 
     return result;
 }
-                                
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; data: %@; filename: %@; contentType: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.data, self.filename, self.contentType, self.descriptionSuffix];
+}
+
 @end
 
 
@@ -714,11 +1188,15 @@
         }
     }];
     
-    if(indexToBeReplaced != NSNotFound) {
+    if (indexToBeReplaced != NSNotFound) {
         NSMutableArray *signatures = [[document signatures] mutableCopy];
         signatures[indexToBeReplaced] = [_signature copy];
         document.signatures = signatures;
     }
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; signature: %@; consented: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.signature, self.consented, self.descriptionSuffix];
 }
 
 @end
@@ -782,6 +1260,32 @@
 
 - (id)answer {
     return nil;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@; answer:", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
+    id answer = self.answer;
+    if ([answer isKindOfClass:[NSArray class]]
+        || [answer isKindOfClass:[NSDictionary class]]
+        || [answer isKindOfClass:[NSSet class]]
+        || [answer isKindOfClass:[NSOrderedSet class]]) {
+        NSMutableString *indentatedAnswerDescription = [NSMutableString new];
+        NSString *answerDescription = [answer description];
+        NSArray *answerLines = [answerDescription componentsSeparatedByString:@"\n"];
+        const NSUInteger numberOfAnswerLines = answerLines.count;
+        [answerLines enumerateObjectsUsingBlock:^(NSString *answerLineString, NSUInteger idx, BOOL *stop) {
+            [indentatedAnswerDescription appendFormat:@"%@%@", ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces + NumberOfPaddingSpacesForIndentationLevel), answerLineString];
+            if (idx != numberOfAnswerLines - 1) {
+                [indentatedAnswerDescription appendString:@"\n"];
+            }
+        }];
+        
+        [description appendFormat:@"\n%@>", indentatedAnswerDescription];
+    } else {
+        [description appendFormat:@" %@%@", answer, self.descriptionSuffix];
+    }
+    
+    return [description copy];
 }
 
 @end
@@ -936,8 +1440,9 @@
 - (void)setAnswer:(id)answer {
     if ([answer isKindOfClass:[NSArray class]]) {
         // Because ORKBooleanAnswerFormat has ORKChoiceAnswerFormat as its implied format.
-        NSAssert([answer count] <= 1, @"Should be no more than one answer");
-        answer = [answer firstObject];
+        NSArray *answerArray = answer;
+        NSAssert(answerArray.count <= 1, @"Should be no more than one answer");
+        answer = answerArray.firstObject;
     }
     answer = [self validateAnswer:answer];
     self.booleanAnswer = answer;
@@ -1327,7 +1832,27 @@
 
 - (ORKResult *)firstResult {
     
-    return [self.results firstObject];
+    return self.results.firstObject;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@; results: (", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
+    
+    NSUInteger numberOfResults = self.results.count;
+    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == 0) {
+            [description appendString:@"\n"];
+        }
+        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + NumberOfPaddingSpacesForIndentationLevel]];
+        if (idx != numberOfResults - 1) {
+            [description appendString:@",\n"];
+        } else {
+            [description appendString:@"\n"];
+        }
+    }];
+    
+    [description appendFormat:@"%@)%@", ORKPaddingWithNumberOfSpaces((numberOfResults == 0) ? 0 : numberOfPaddingSpaces), self.descriptionSuffix];
+    return [description copy];
 }
 
 @end
@@ -1388,6 +1913,140 @@
 
 - (ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier {
     return (ORKStepResult *)[self resultForIdentifier:stepIdentifier];
+}
+
+@end
+
+
+@implementation ORKLocation
+
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                            region:(CLCircularRegion *)region
+                         userInput:(NSString *)userInput
+                 addressDictionary:(NSDictionary *)addressDictionary {
+    self = [super init];
+    if (self) {
+        _coordinate = coordinate;
+        _region = region;
+        _userInput = [userInput copy];
+        _addressDictionary = [addressDictionary copy];
+    }
+    return self;
+}
+
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput {
+    self = [super init];
+    if (self) {
+        _coordinate = placemark.location.coordinate;
+        _userInput =  [userInput copy];
+        _region = (CLCircularRegion *)placemark.region;
+        _addressDictionary = [placemark.addressDictionary copy];
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    // This object is not mutable
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+static NSString * const RegionCenterLatitudeKey = @"region.center.latitude";
+static NSString * const RegionCenterLongitudeKey = @"region.center.longitude";
+static NSString * const RegionRadiusKey = @"region.radius";
+static NSString * const RegionIdentifierKey = @"region.identifier";
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, userInput);
+    ORK_ENCODE_COORDINATE(aCoder, coordinate);
+    ORK_ENCODE_OBJ(aCoder, addressDictionary);
+
+    [aCoder encodeObject:@(_region.center.latitude) forKey:RegionCenterLatitudeKey];
+    [aCoder encodeObject:@(_region.center.longitude) forKey:RegionCenterLongitudeKey];
+    [aCoder encodeObject:_region.identifier forKey:RegionIdentifierKey];
+    [aCoder encodeObject:@(_region.radius) forKey:RegionRadiusKey];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, userInput, NSString);
+        ORK_DECODE_COORDINATE(aDecoder, coordinate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, addressDictionary, NSDictionary);
+        ORK_DECODE_OBJ_CLASS(aDecoder, region, CLCircularRegion);
+        
+        NSNumber *latitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLatitudeKey];
+        NSNumber *longitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLongitudeKey];
+        NSNumber *radius = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionRadiusKey];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+        _region = [[CLCircularRegion alloc] initWithCenter:coordinate
+                                                    radius:radius.doubleValue
+                                                identifier:[aDecoder decodeObjectOfClass:[NSString class] forKey:RegionIdentifierKey]];
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.userInput, castObject.userInput) &&
+            ORKEqualObjects(self.addressDictionary, castObject.addressDictionary) &&
+            ORKEqualObjects(self.region, castObject.region) &&
+            ORKEqualObjects([NSValue valueWithMKCoordinate:self.coordinate], [NSValue valueWithMKCoordinate:castObject.coordinate]));
+}
+
+@end
+
+
+@implementation ORKLocationQuestionResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, locationAnswer);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKLocation);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame && ORKEqualObjects(self.locationAnswer, castObject.locationAnswer));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKLocationQuestionResult *result = [super copyWithZone:zone];
+    result->_locationAnswer = [self.locationAnswer copy];
+    return result;
+}
+
++ (Class)answerClass {
+    return [ORKLocation class];
+}
+
+- (void)setAnswer:(id)answer {
+    answer = [self validateAnswer:answer];
+    self.locationAnswer = [answer copy];
+}
+
+- (id)answer {
+    return self.locationAnswer;
 }
 
 @end

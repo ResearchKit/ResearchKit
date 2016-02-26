@@ -84,10 +84,8 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 #if TARGET_IPHONE_SIMULATOR
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-    if(event.type == UIEventSubtypeMotionShake)
-    {
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (event.type == UIEventSubtypeMotionShake) {
         if (_validResult) {
             ORKReactionTimeResult *reactionTimeResult = [[ORKReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
             reactionTimeResult.timestamp = _stimulusTimestamp;
@@ -153,7 +151,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (void)attemptDidFinish {
     void (^completion)(void) = ^{
-        if ([_results count] == [self reactionTimeStep].numberOfAttempts) {
+        if (_results.count == [self reactionTimeStep].numberOfAttempts) {
             [self finish];
         } else {
             [self resetAfterDelay:2];

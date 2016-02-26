@@ -84,37 +84,32 @@
 - (void)start {
     [super start];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
     }
     
     self.motionManager = [self createMotionManager];
-    self.motionManager.deviceMotionUpdateInterval = 1.0/_frequency;
+    self.motionManager.deviceMotionUpdateInterval = 1.0 / _frequency;
     
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     
     [self.motionManager stopDeviceMotionUpdates];
     
-    [self.motionManager
-     startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue]
-     withHandler:^(CMDeviceMotion *data, NSError *error)
-     {
+    [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *data, NSError *error) {
          BOOL success = NO;
-         if (data)
-         {
+         if (data) {
              success = [_logger append:[data ork_JSONDictionary] error:&error];
              id delegate = self.delegate;
              if ([delegate respondsToSelector:@selector(deviceMotionRecorderDidUpdateWithMotion:)]) {
                  [delegate deviceMotionRecorderDidUpdateWithMotion:data];
              }
          }
-         if (!success)
-         {
+         if (!success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  [self finishRecordingWithError:error];
              });
@@ -166,11 +161,6 @@
     
     _logger = nil;
 }
-
-@end
-
-
-@interface ORKDeviceMotionRecorderConfiguration ()
 
 @end
 

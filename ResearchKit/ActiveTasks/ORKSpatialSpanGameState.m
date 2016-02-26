@@ -31,11 +31,16 @@
 
 #import "ORKSpatialSpanGameState.h"
 #import "ORKSpatialSpanGame.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKSpatialSpanGameState {
     NSMutableArray *_plays;
     ORKSpatialSpanTargetState *_states;
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)initWithGame:(ORKSpatialSpanGame *)game {
@@ -84,13 +89,13 @@
         return ORKSpatialSpanResultIgnore;
     }
     
-    NSInteger sequencePosition = [_plays count];
+    NSInteger sequencePosition = _plays.count;
     BOOL correct = ([_game tileIndexForStep:sequencePosition] == tileIndex);
     _states[tileIndex] = correct ? ORKSpatialSpanTargetStateCorrect : ORKSpatialSpanTargetStateIncorrect;
     if (correct) {
         [_plays addObject:@(tileIndex)];
     }
-    if ([_plays count] >= [_game sequenceLength]) {
+    if (_plays.count >= [_game sequenceLength]) {
         _complete = YES;
     }
     
@@ -98,14 +103,14 @@
 }
 
 - (NSInteger)currentStepIndex {
-    return [_plays count];
+    return _plays.count;
 }
 
 - (NSInteger)lastSuccessfulTileIndex {
-    if (! [_plays count]) {
+    if (!_plays.count) {
         return NSNotFound;
     }
-    return [[_plays lastObject] integerValue];
+    return ((NSNumber *)_plays.lastObject).integerValue;
 }
 
 @end

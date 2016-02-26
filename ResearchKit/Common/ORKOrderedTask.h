@@ -43,11 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  If you want further custom conditional behaviors in a task, it can be easier to subclass
  `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
- to implement the `ORKTask` protocol directly. Override `stepAfterStep:withResult:` and
- `stepBeforeStep:withResult:` and call super for all other methods.
+ to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:` and
+ `stepBeforeStep:withResult:`, and call super for all other methods.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /// @name Initializers
 
@@ -60,7 +62,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized ordered task.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray *)steps NS_DESIGNATED_INITIALIZER;
+                             steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an ordered task initialized from data in the given unarchiver.
@@ -84,7 +86,7 @@ ORK_CLASS_AVAILABLE
  The associated task view controller presents the steps in
  array order.
  */
-@property (nonatomic, copy, readonly) NSArray *steps;
+@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
 @end
 
@@ -326,7 +328,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  frequencies, playing on different channels (left and right), with the volume being progressively
  increased until the participant taps a button.
 
- A tone audiometry task can be used to measure properties of the user's hearing, based on their
+ You can use a tone audiometry task to measure properties of the user's hearing, based on their
  reaction to a wide range of frequencies.
 
  Data collected in this task consists of audio signal amplitude for specific frequencies and
@@ -358,12 +360,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that tests the participant's reaction time.
  
- In a reaction time task the participant is asked to move the device sharply in any
+ In a reaction time task, the participant is asked to move the device sharply in any
  direction in response to a visual cue. You can use this task to accurately assess the participant's
- Simple Reaction Time.
+ simple reaction time.
  
  A reaction time task finishes when the participant has completed the required
- `numberOfAttempts` successfully. An attempt is successful when the participant exerts acceleration
+ number of attempts successfully. An attempt is successful when the participant exerts acceleration
  greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
  `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
  `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
@@ -371,7 +373,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  try again to proceed with the task.
  
  Data collected by the task is in the form of ORKReactionTimeResult objects. These
- objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult which
+ objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult, which
  references the motion data collected during an attempt. The researcher can use these to evaluate
  the response to the stimulus and calculate the reaction time.
  
@@ -407,6 +409,99 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                       timeoutSound:(UInt32)timeoutSoundID
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of a Tower of Hanoi puzzle.
+ 
+ In a Tower of Hanoi task, the participant is asked to solve the classic puzzle in as few moves as possible.
+ You can use this task to assess the participant's problem-solving skills.
+ 
+ A Tower of Hanoi task finishes when the participant has completed the puzzle correctly or concedes that he or she cannot solve it.
+ 
+ Data collected by the task is in the form of an `ORKTowerOfHanoiResult` object. Data collected in this task consists of how many moves were taken and whether the puzzle was successfully completed or not.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the
+                                    default localized text is displayed.
+ @param numberOfDisks               The number of disks in the puzzle; the default value for this property is 3.
+ @param options                     Options that affect the features of the predefined task.
+ 
+ @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                     numberOfDisks:(NSUInteger)numberOfDisks
+                                           options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of a timed walk.
+ 
+ In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+ possible, but safely. The task is immediately administered again by having the patient walk back
+ the same distance.
+ A timed walk task can be used to measure lower extremity function.
+ 
+ The presentation of the timed walk task differs from both the fitness check task and the short
+ walk task in that the distance is fixed. After a first walk, the user is asked to turn and reverse
+ direction.
+ 
+ The data collected by this task can include accelerometer, device motion, pedometer data,
+ and location where available.
+ 
+ Data collected by the task is in the form of an `ORKTimedWalkResult` object.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                      collected. If the value of this parameter is `nil`, the default
+                                      localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+                                      about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
+ 
+ @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of the paced serial addition test (PSAT).
+ 
+ In a PSAT task, the participant is asked to add a new digit to the one immediately before it
+ every 2 or 3 seconds.
+ 
+ A PSAT task can be used to measure the cognitive function that assesses auditory and/or
+ visual information processing speed and flexibility, as well as calculation ability.
+ 
+ Data collected by the task is in the form of an `ORKPSATResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param presentationMode        The presentation mode of the PSAT test (auditory or visual or both).
+ @param interStimulusInterval   The time interval between two digits presented.
+ @param stimulusDuration        The time duration the digit is shown on screen (only for
+                                    visual PSAT, that is PVSAT and PAVSAT).
+ @param seriesLength            The number of digits that will be presented during the task.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active PSAT task that can be presented with an `ORKTaskViewController` object.
+ 
+ */
++ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
+                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                          presentationMode:(ORKPSATPresentationMode)presentationMode
+                     interStimulusInterval:(NSTimeInterval)interStimulusInterval
+                          stimulusDuration:(NSTimeInterval)stimulusDuration
+                              seriesLength:(NSInteger)seriesLength
+                                   options:(ORKPredefinedTaskOption)options;
 
 @end
 

@@ -124,7 +124,7 @@
     NSString *content = @"<h3>A Title</h3>"
                         @"html for section"
                         @"html for section"
-                        @"<h4 class=\"pagebreak\" >Signature Page Title</h4>"
+                        @"<h4 class=\"pagebreak\">Signature Page Title</h4>"
                         @"<p>signature page content</p>"
                         @"html for signature"
                         @"html for signature";

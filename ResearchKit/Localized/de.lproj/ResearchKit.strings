@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Zustimmung";
+"CONSENT_NAME_GIVEN" = "Vorname";
+"CONSENT_NAME_FAMILY" = "Nachname";
+"CONSENT_NAME_PLACEHOLDER" = "Erforderlich";
+"CONSENT_REVIEW_TITLE" = "Überprüfen";
+"CONSENT_REVIEW_INSTRUCTION" = "Überprüfen Sie das nachstehende Formular und tippen Sie auf „Zustimmen“, wenn Sie bereit sind fortzufahren.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Überprüfen";
+"CONSENT_SIGNATURE_TITLE" = "Unterschrift";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Unterschreiben Sie unten auf der Linie mit Ihrem Finger.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Hier unterschreiben";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Seite %1$ld von %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Willkommen";
+"CONSENT_SECTION_DATA_GATHERING" = "Datenerfassung";
+"CONSENT_SECTION_PRIVACY" = "Datenschutz";
+"CONSENT_SECTION_DATA_USE" = "Datennutzung";
+"CONSENT_SECTION_STUDY_SURVEY" = "Studienumfrage";
+"CONSENT_SECTION_STUDY_TASKS" = "Studienaufgaben";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Zeitaufwand";
+"CONSENT_SECTION_WITHDRAWING" = "Aussteigen";
+"CONSENT_LEARN_MORE_TITLE" = "Weitere Infos";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Weitere Infos über die Erfassung der Daten";
+"LEARN_MORE_DATA_USE" = "Weitere Infos über die Verwendung der Daten";
+"LEARN_MORE_PRIVACY" = "Weitere Infos über den Schutz Ihrer Daten und Identität";
+"LEARN_MORE_WELCOME" = "Zunächst weitere Infos über diese Studie";
+"LEARN_MORE_STUDY_SURVEY" = "Weitere Infos über die Studienumfrage";
+"LEARN_MORE_TIME_COMMITMENT" = "Weitere Infos über den für diese Studie benötigten Zeitaufwand";
+"LEARN_MORE_TASKS" = "Weitere Infos über die Aufgaben in der Studie";
+"LEARN_MORE_WITHDRAWING" = "Weitere Infos zum Aussteigen aus der Studie";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Freigabe-Optionen";
+"CONSENT_SHARE_WIDELY_%@" = "Meine Daten für %@ und qualifizierte Forscher auf der ganzen Welt freigeben";
+"CONSENT_SHARE_ONLY_%@" = "Meine Daten nur freigeben für „%@“";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Die Studiendaten von Ihrer Teilnahme an dieser Studie werden an %@ weitergegeben.\n\nDie Freigabe Ihrer verschlüsselten Studiendaten (ohne Infos wie z. B. Ihr Name) können für diese und künftige Studienzwecke von Nutzen sein.";
+"LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Name von%@ (Druckbuchstaben)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Unterschrift von %@";
+"CONSENT_DOC_LINE_DATE" = "Datum";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Schritt %1$@ von %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ungültiger Wert";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ liegt über dem erlaubten Höchstwert (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ liegt unter dem erlaubten Mindestwert (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ ist kein gültiger Wert.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ungültige E-Mail-Adresse: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Eine Adresse eingeben";
+"LOCATION_ERROR_TITLE" = "Angegebene Adresse konnte nicht gefunden werden";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Der aktuelle Standort konnte nicht ermittelt werden. Geben Sie eine Adresse ein oder begeben Sie sich ggf. an einen Ort mit einem besseren GPS-Signal.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Diese App hat keinen Zugriff auf die Ortungsdienste. Erlauben Sie ihr in den Einstellungen das Verwenden der Ortungsdienste.";
+"LOCATION_ERROR_GEOCODE" = "Die eingegebene Adresse konnte nicht gefunden werden. Überprüfen Sie, dass es sich um eine gültige Adresse handelt.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Es besteht entweder keine Internetverbindung oder Sie haben die höchstmögliche Anzahl an Adresssuchen erreicht. Wenn Sie nicht mit dem Internet verbunden sind, aktivieren Sie WLAN, um diese Frage zu beantworten, oder überspringen Sie sie, wenn die Taste „Überspringen“ angezeigt wird. Sie können auch zur Umfrage zurückkehren, wenn eine Internetverbindung hergestellt wurde. Versuchen Sie es andernfalls zu einem späteren Zeitpunkt erneut.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinhalt überschreitet die Maximallänge: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera in der geteilten Darstellung nicht verfügbar.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-Mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "max@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Passwort";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Passwort eingeben";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bestätigen";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Erneut versuchen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Die Passwörter stimmen nicht überein.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Zusätzliche Infos";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Max";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Bauer";
+"GENDER_FORM_ITEM_TITLE" = "Geschlecht";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Geschlecht wählen";
+"DOB_FORM_ITEM_TITLE" = "Geburtsdatum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Datum wählen";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Überprüfung";
+"VERIFICATION_STEP_TITLE" = "E‑Mail überprüfen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Wenn Sie keine E-Mail zur Überprüfung erhalten haben, klicken Sie auf den Link unten, um sie sich erneut senden zu lassen.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Bestätigungs-E‑Mail erneut senden";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Anmeldung";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Passwort vergessen?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Code eingeben";
+"PASSCODE_CONFIRM_MESSAGE" = "Code bestätigen";
+"PASSCODE_SAVED_MESSAGE" = "Code gesichert";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Code authentifiziert";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Alten Code eingeben";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Neuen Code eingeben";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Neuen Code bestätigen";
+"PASSCODE_INVALID_ALERT_TITLE" = "Code nicht korrekt";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Code stimmte nicht überein. Versuchen Sie es erneut.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Mit Touch ID authentifizieren";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-Fehler";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Es sind nur numerische Zeichen zulässig.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusanzeige für Codeeingabe";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ von %@ Stellen eingegeben";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht hinzugefügt werden";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht aktualisiert werden";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht entfernt werden";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht gefunden werden";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Weiblich";
+"GENDER_MALE" = "Männlich";
+"GENDER_OTHER" = "Sonstiges";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nein";
+"BOOL_YES" = "Ja";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Zum Antworten tippen";
+"NULL_ANSWER" = "Antwort wählen";
+"PLACEHOLDER_IMAGE_CHOICES" = "Zur Auswahl tippen";
+"PLACEHOLDER_LONG_TEXT" = "Zum Schreiben tippen";
+
+/* Button titles */
+"BUTTON_AGREE" = "Akzeptieren";
+"BUTTON_CANCEL" = "Abbrechen";
+"BUTTON_OK" = "Ok";
+"BUTTON_CLEAR" = "Löschen";
+"BUTTON_DISAGREE" = "Ablehnen";
+"BUTTON_DONE" = "Fertig";
+"BUTTON_GET_STARTED" = "Los geht’s";
+"BUTTON_LEARN_MORE" = "Weitere Infos";
+"BUTTON_NEXT" = "Weiter";
+"BUTTON_SKIP" = "Überspringen";
+"BUTTON_SKIP_QUESTION" = "Frage überspringen";
+"BUTTON_START_TIMER" = "Timer starten";
+"BUTTON_OPTION_SAVE" = "Für später sichern";
+"BUTTON_OPTION_DISCARD" = "Ergebnisse löschen";
+"BUTTON_OPTION_STOP_TASK" = "Aufgabe beenden";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Aktivität beginnt in";
+"TASK_COMPLETE_TITLE" = "Aktivität abgeschlossen";
+"TASK_COMPLETE_TEXT" = "Ihre Daten werden analysiert und Sie werden benachrichtigt, wenn Ihre Ergebnisse bereitstehen.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Bild aufnehmen";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Bild erneut aufnehmen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Keine Kamera gefunden. Dieser Schritt kann nicht abgeschlossen werden.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Erlauben Sie der App in den Einstellungen Zugriff auf die Kamera, um diesen Schritt abzuschließen.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Es wurde keine Ausgabeverzeichnis für aufgenommene Bilder festgelegt.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Das aufgenommene Bild konnte nicht gesichert werden.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Strecke (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Herzfrequenz (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Setzen Sie sich %@ bequem hin.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gehen Sie %@ lang so schnell wie möglich.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Mit dieser Aktivität wird Ihre Herzfrequenz kontrolliert und gemessen, wie weit Sie in %1$@ laufen können.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gehen Sie draußen %1$@ lang so schnell wie möglich. Setzen Sie sich anschließend %2$@ bequem hin und ruhen Sie sich aus. Tippen Sie zum Starten auf „Los geht’s“.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gang und Gleichgewicht";
+"WALK_INTRO_TEXT" = "Mit dieser Aktivität wird Ihr Gang und Gleichgewichtsinn beim Gehen und Stillstehen getestet. Fahren Sie nur fort, wenn Sie ohne Hilfe sicher gehen können.";
+"WALK_INTRO_2_TEXT_%ld" = "Finden Sie eine Stelle, an der Sie sicher und ohne Hilfe etwa %ld Schritte in einer geraden Linie gehen können.";
+"WALK_INTRO_2_DETAIL" = "Stecken Sie Ihr iPhone in eine Tasche und folgen Sie den Audioanweisungen.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stehen Sie jetzt %@ still.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stehen Sie %@ still.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Drehen Sie sich um und gehen Sie zum Ausgangspunkt zurück.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gehen Sie bis zu %ld Schritte in einer geraden Linie.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Tipptempo";
+"TAPPING_INTRO_TEXT" = "Diese Aktivität misst Ihr Tipptempo.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Legen Sie Ihr Telefon auf eine ebene Fläche. Auf dem Bildschirm werden zwei Tasten %@ lang angezeigt. Tippen Sie mit zwei Fingern derselben Hand abwechselnd auf die Tasten.";
+"TAPPING_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"TAP_BUTTON_TITLE" = "Tippen";
+"TOTAL_TAPS_LABEL" = "Tippanzahl";
+"TAPPING_INSTRUCTION" = "Tippen Sie mit zwei Fingern so schnell wie möglich auf die Tasten.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Stimme";
+"AUDIO_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"AUDIO_INSTRUCTION" = "Sagen Sie solange wie möglich „Aaaaah“ in das Mikrofon.";
+"AUDIO_INTRO_TEXT" = "Holen Sie tief Luft und sagen Sie solange wie möglich und mit gleichbleibender Lautstärke „Aaaaah“ in das Mikrofon, sodass die Audiobalken blau bleiben.";
+"AUDIO_INTENDED_USE" = "Mit dieser Aktivität wird Ihre Stimme mit dem Mikrofon im unteren Bereich des iPhone aufgenommen und dann bewertet.";
+"AUDIO_TOO_LOUD_LABEL" = "Zu laut";
+"AUDIO_GENERIC_ERROR_LABEL" = "Aufnahme von Audiomaterial nicht möglich";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometrie";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Diese Aktivität misst Ihre Fähigkeit, unterschiedliche Töne zu hören.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Bevor Sie beginnen, sollten Sie Ihre Kopfhörer anschließen und aufsetzen.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Sie sollten jetzt einen Ton hören. Passen Sie die Lautstärke mithilfe der Steuerungen an der Seite des Geräts an.\n\nTippen Sie auf die Taste, wenn Sie bereit sind.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tippen Sie jedes Mal, wenn Sie einen Ton hören, auf die Taste.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Links";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Rechts";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Räumliches Gedächtnis";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Mit dieser Aktivität wird Ihr räumliches Kurzzeitgedächtnis gemessen, indem Sie aufgefordert werden, die Reihenfolge, in der die %@ aufleuchten, zu wiederholen.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "Blumen";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "Blumen";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippen Sie in derselben Reihenfolge auf diese %@.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippen Sie in umgekehrter Reihenfolge auf diese %@.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“ und schauen Sie dann genau hin.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Ergebnis";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Auf das Aufleuchten der %@ achten";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tippen Sie auf die %@ in der Reihenfolge, in der sie aufleuchten";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tippen Sie in umgekehrter Reihenfolge auf die %@";
+"MEMORY_GAME_COMPLETE_TITLE" = "Sequenz abgeschlossen";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Zum Fortfahren tippen Sie auf „Weiter“.";
+"MEMORY_GAME_FAILED_TITLE" = "Erneut versuchen";
+"MEMORY_GAME_FAILED_MESSAGE" = "Sie haben es diesmal nicht ganz geschafft. Zum Fortfahren tippen Sie auf „Weiter“.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Zeit ist abgelaufen";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Die Zeit ist abgelaufen.\nZum Fortfahren tippen Sie auf „Weiter“.";
+"MEMORY_GAME_COMPLETE" = "Spiel abgeschlossen";
+"MEMORY_GAME_PAUSED_TITLE" = "Angehalten";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Zum Fortfahren tippen Sie auf „Weiter“.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktionszeit";
+"REACTION_TIME_TASK_INTENDED_USE" = "Mit dieser Aktivität wird bewertet, wie lange Sie brauchen, um auf optische Reize zu reagieren.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schütteln Sie das Gerät, sobald der blaue Punkt auf dem Bildschirm angezeigt wird. Sie werden %D mal darum gebeten.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %@ von %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Wenn der blaue Kreis angezeigt wird, schütteln Sie das Gerät schnell";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Türme von Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Diese Aktivität misst Ihre Fähigkeit, Rätsel zu lösen.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Bewegen Sie den gesamten Stapel in so wenigen Zügen wie möglich auf den markierten Turm.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Lösen Sie das Rätsel";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Anzahl Züge: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ich kann dieses Rätsel nicht lösen";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gehen mit Zeitmessung";
+"TIMED_WALK_INTRO_DETAIL" = "Diese Aktivität misst die Funktion Ihrer unteren Extremitäten";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finden Sie einen Ort, am besten draußen, an dem Sie sicher ca. %@ so schnell wie möglich in einer geraden Linie gehen können. Werden Sie erst langsamer, wenn Sie das Ziel erreicht haben.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tippen Sie auf „Weiter“, um anzufangen.";
+"TIMED_WALK_FORM_TITLE" = "Gehhilfe";
+"TIMED_WALK_FORM_TEXT" = "Verwenden Sie für jeden Test dieselbe Gehhilfe.";
+"TIMED_WALK_QUESTION_TEXT" = "Verwenden Sie eine Unterschenkelorthese?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Verwenden Sie Gehhilfen?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tippen, um eine Antwort auszuwählen.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ohne";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Gehstock, eine Seite";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Krücke, eine Seite";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Gehstock, beide Seiten";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Krücken, beide Seiten";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gehen Sie bis zu %@ in einer geraden Linie.";
+"TIMED_WALK_INSTRUCTION_2" = "Drehen Sie sich um und gehen Sie zum Ausgangspunkt zurück.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tippen Sie danach auf „Fertig“.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Der akustische Serienaddiertest mit Zeitlimit (PASAT, Paced Auditory Serial Addition Test) misst, wie schnell Sie akustische Informationen verarbeiten und rechnen können.";
+"PVSAT_INTRO_TEXT" = "Der visuelle Serienaddiertest mit Zeitlimit (PASAT, Paced Visual Serial Addition Test) misst, wie schnell Sie optische Informationen verarbeiten und rechnen können.";
+"PAVSAT_INTRO_TEXT" = "Der audiovisuelle Serienaddiertest mit Zeitlimit (PAVSAT, Paced Auditory and Visual Serial Addition Test) misst, wie schnell Sie akustische und optische Informationen verarbeiten und rechnen können.";
+"PSAT_INTRO_TEXT_2_%@" = "Alle %@ Sekunden wird eine einstellige Zahl angezeigt.\nSie müssen diese Zahl zu der addieren, die direkt zuvor angezeigt wurde.\nAchtung: Sie sollen nicht die Gesamtsumme der Zahlen errechnen, sondern nur die jeweils beiden letzten Zahlen addieren.";
+"PSAT_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"PSAT_INITIAL_INSTRUCTION" = "Merken Sie sich die erste Zahl.";
+"PSAT_INSTRUCTION" = "Addieren Sie diese Zahl zur vorherigen.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole-Peg-Test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Mit dieser Aktivität wird die Reaktionsfähigkeit Ihrer oberen Extremitäten gemessen, indem Sie aufgefordert werden, einen Kreis auf einem Loch zu platzieren. Das Ganze wird %@-mal wiederholt.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Die Reaktionsfähigkeit Ihrer linken und rechten Hand wird getestet.\nBewegen Sie den Kreis mit zwei Fingern so schnell wie möglich auf das Loch. Wenn Sie dies %@-mal getan haben, entfernen Sie ihn %@-mal.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Die Reaktionsfähigkeit Ihrer linken und rechten Hand wird getestet.\nBewegen Sie den Kreis mit zwei Fingern so schnell wie möglich auf das Loch. Wenn Sie dies %@-mal getan haben, entfernen Sie ihn %@-mal.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Bewegen Sie den Kreis mit der linken Hand in das Loch.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Bewegen Sie den Kreis mit der rechten Hand in das Loch.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Bewegen Sie den Kreis mit der linken Hand hinter die Linie.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Bewegen Sie den Kreis mit der rechten Hand hinter die Linie.";
+"HOLE_PEG_TEST_TEXT" = "Bewegen Sie den Kreis mit zwei Fingern.";
+"HOLE_PEG_TEST_TEXT_2" = "Heben Sie den Finger, um den Kreis auf die Zielposition zu setzen.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Fehler beim Erstellen der Datei";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Es konnten nicht genügend Protokolldateien gelöscht werden, um den Schwellenwert zu erreichen.";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Fehler beim Einstellen des Attributs";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Datei nicht als gelöscht markiert (nicht als geladen markiert)";
+"ERROR_DATALOGGER_MULTIPLE" = "Mehrere Fehler beim Entfernen von Protokollen";
+"ERROR_RECORDER_NO_DATA" = "Es wurden keine erfassten Daten gefunden.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Kein Ausgabeverzeichnis angegeben";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Keine Daten";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Zurück";
+
+"AX_IMAGE_ILLUSTRATION" = "Abbildung von %@";
+
+"AX_SIGNVIEW_LABEL" = "Vorgesehenes Unterschriftsfeld";
+"AX_SIGNVIEW_HINT" = "Bildschirm berühren und mit dem Finger unterschreiben";
+"AX_SIGNVIEW_SIGNED" = "Unterschrieben";
+"AX_SIGNVIEW_UNSIGNED" = "Keine Unterschrift";
+
+"AX_SELECTED" = "Ausgewählt";
+"AX_UNSELECTED" = "Nicht ausgewählt";
+
+"AX_SLIDER_LABEL" = "Antwortregler. Bereich von %@ bis %@";
+"AX_UNLABELED_IMAGE" = "Nicht markiertes Bild";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Aufgabe starten";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktiv";
+"AX.MEMORY.TILE.CORRECT" = "richtig";
+"AX.MEMORY.TILE.INCORRECT" = "falsch";
+"AX.MEMORY.TILE.QUIESCENT" = "inaktiv";
+"AX.MEMORY.TILE.LABEL" = "Gedächtnisspielkarten";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Vorschau aufnehmen";
+"AX_IMAGE_CAPTURED_LABEL" = "Aufgenommenes Bild";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Die Scheibe der Größe %@ kann nicht auf die Scheibe der Größe %@ gelegt werden";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Ziel";
+"AX_TOWER_OF_HANOI_TOWER" = "Turm";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Zum Ablegen der Scheibe doppeltippen";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Zum Auswählen der obersten Scheibe doppeltippen";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mit Scheiben in den Größen %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Leer";
+
+"AX_GRAPH_RANGE_FORMAT" = "Bereich von %@ bis %@";
+"AX_GRAPH_AND_SEPARATOR" = " und ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

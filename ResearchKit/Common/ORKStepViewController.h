@@ -32,6 +32,7 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKRecorder.h>
+#import <ResearchKIt/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -349,6 +350,11 @@ ORK_CLASS_AVAILABLE
  point or a target action for a subclass.
  */
 - (void)goBackward;
+
+/**
+ A Boolean value indicating whether the view controller has been presented before.
+ */
+@property (nonatomic, readonly) BOOL hasBeenPresented;
 
 @end
 

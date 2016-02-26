@@ -30,7 +30,7 @@
 
 
 #import <ResearchKit/ResearchKit_Private.h>
-
+#import <MapKit/MapKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -90,6 +90,18 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) id answer;
 
 @end
+
+@interface ORKLocation ()
+
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                            region:(nullable CLCircularRegion *)region
+                         userInput:(nullable NSString *)userInput
+                 addressDictionary:(NSDictionary *)addressDictionary;
+
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

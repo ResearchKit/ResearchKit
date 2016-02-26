@@ -38,7 +38,7 @@
 
 
 NSURL *ORKCreateRandomBaseURL() {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [[ NSUUID UUID] UUIDString]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [NSUUID UUID].UUIDString]];
 }
 
 NSBundle *ORKAssetsBundle(void) {
@@ -64,7 +64,7 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{ __s = [[UIScreen mainScreen] scale]; });
+        dispatch_once(&onceToken, ^{ __s = [UIScreen mainScreen].scale; });
         s = __s;
     }
     if (s == 1.0) {
@@ -75,20 +75,16 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
 }
 
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
-    return AdjustToScale(ORKCGFloor, value, [view contentScaleFactor]);
+    return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
-static id findInArrayByKey(NSArray * array, NSString *key, id value) {
+id findInArrayByKey(NSArray * array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
     if (matches.count) {
         return matches[0];
     }
     return nil;
-}
-
-id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
-    return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
 }
 
 NSString *ORKStringFromDateISO8601(NSDate *date) {
@@ -247,8 +243,26 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 }
 
 NSBundle *ORKBundle() {
-    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
-    return bundle;
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+    });
+    
+    return __bundle;
+}
+
+NSBundle *ORKDefaultLocaleBundle() {
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [ORKBundle() pathForResource:[ORKBundle() objectForInfoDictionaryKey:@"CFBundleDevelopmentRegion"] ofType:@"lproj"];
+        __bundle = [NSBundle bundleWithPath:path];
+    });
+    
+    return __bundle;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
@@ -323,13 +337,13 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
 }
 
 BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
-    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
+    NSString *language = [[NSLocale preferredLanguages].firstObject substringToIndex:2];
     static dispatch_once_t onceToken;
-    static NSArray *familyNameFirstLangs = nil;
+    static NSArray *familyNameFirstLanguages = nil;
     dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
+        familyNameFirstLanguages = @[@"zh", @"ko", @"ja", @"vi"];
     });
-    return (language != nil) && [familyNameFirstLangs containsObject:language];
+    return (language != nil) && [familyNameFirstLanguages containsObject:language];
 }
 
 BOOL ORKWantsWideContentMargins(UIScreen *screen) {
@@ -341,7 +355,7 @@ BOOL ORKWantsWideContentMargins(UIScreen *screen) {
     // If our screen's minimum dimension is bigger than a fixed threshold,
     // decide to use wide content margins. This is less restrictive than UIKit,
     // but a good enough approximation.
-    CGRect screenRect = [screen bounds];
+    CGRect screenRect = screen.bounds;
     CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
     BOOL isWideScreenFormat = (minDimension > 375.);
     
@@ -372,7 +386,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -385,7 +399,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -398,7 +412,7 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -418,7 +432,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
                                        bookmarkDataIsStale:&bookmarkIsStale
                                                      error:&bookmarkError];
     if (!bookmarkURL) {
-        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+        ORK_Log_Warning(@"Error loading URL from bookmark: %@", bookmarkError);
     }
     
     return bookmarkURL;
@@ -435,7 +449,7 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
                                       relativeToURL:nil
                                               error:&error];
     if (!bookmark) {
-        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+        ORK_Log_Warning(@"Error converting URL to bookmark: %@", error);
     }
     return bookmark;
 }
@@ -448,7 +462,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
     NSString *basePath = [standardizedBaseURL absoluteString];
     
     if ([path hasPrefix:basePath]) {
-        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        NSString *relativePath = [path substringFromIndex:basePath.length];
         if ([relativePath hasPrefix:@"/"]) {
             relativePath = [relativePath substringFromIndex:1];
         }
@@ -497,3 +511,37 @@ id ORKDynamicCast_(id x, Class objClass) {
 }
 
 const CGFloat ORKScrollToTopAnimationDuration = 0.2;
+
+void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason) {
+    NSCParameterAssert(array);
+    NSCParameterAssert(expectedObjectClass);
+    NSCParameterAssert(exceptionReason);
+
+    for (id object in array) {
+        if (![object isKindOfClass:expectedObjectClass]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
+        }
+    }
+}
+
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews) {
+    for (NSLayoutConstraint *constraint in [constraints copy]) {
+        for (UIView *view in removedViews) {
+            if (constraint.firstItem == view || constraint.secondItem == view) {
+                [constraints removeObject:constraint];
+            }
+        }
+    }
+}
+
+const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
+
+void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
+    if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
+        *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
+    }
+}
+
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
+    return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
+}

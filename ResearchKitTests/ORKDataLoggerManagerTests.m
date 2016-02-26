@@ -62,7 +62,7 @@
 - (void)setUp {
     [super setUp];
     
-    _directory = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]] isDirectory:YES];
+    _directory = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[NSUUID UUID].UUIDString] isDirectory:YES];
     
     BOOL success = [[NSFileManager defaultManager] createDirectoryAtURL:_directory withIntermediateDirectories:YES attributes:nil error:nil];
     XCTAssertTrue(success, @"Create log directory");
@@ -92,7 +92,7 @@
     [_manager addJSONDataLoggerForLogName:@"test2"];
     [_manager addJSONDataLoggerForLogName:@"test3"];
     
-    XCTAssertEqual([[_manager logNames] count], 3);
+    XCTAssertEqual([_manager logNames].count, 3);
 }
 
 - (void)testPreservesParameters {

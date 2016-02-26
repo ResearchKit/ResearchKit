@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Consentiment";
+"CONSENT_NAME_GIVEN" = "Nom";
+"CONSENT_NAME_FAMILY" = "Cognoms";
+"CONSENT_NAME_PLACEHOLDER" = "Obligatori";
+"CONSENT_REVIEW_TITLE" = "Revisió";
+"CONSENT_REVIEW_INSTRUCTION" = "Repassa el formulari de sota i prem Acceptar si estàs a punt per continuar.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Revisió";
+"CONSENT_SIGNATURE_TITLE" = "Signatura";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signa amb el dit a la línia de sota.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Signa aquí";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Pàgina %1$ld de %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Benvingut";
+"CONSENT_SECTION_DATA_GATHERING" = "Recopilació de dades";
+"CONSENT_SECTION_PRIVACY" = "Privadesa";
+"CONSENT_SECTION_DATA_USE" = "Ús de dades";
+"CONSENT_SECTION_STUDY_SURVEY" = "Avaluació de l’estudi";
+"CONSENT_SECTION_STUDY_TASKS" = "Tasques d’estudi";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Temps necessari";
+"CONSENT_SECTION_WITHDRAWING" = "Abandonar";
+"CONSENT_LEARN_MORE_TITLE" = "Més informació";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Més informació sobre com es recopilen les dades";
+"LEARN_MORE_DATA_USE" = "Més informació sobre com s’utilitzen les dades";
+"LEARN_MORE_PRIVACY" = "Més informació sobre com es protegeix la privadesa i la identitat";
+"LEARN_MORE_WELCOME" = "Més informació sobre el primer estudi";
+"LEARN_MORE_STUDY_SURVEY" = "Més informació sobre l’avaluació de l’estudi";
+"LEARN_MORE_TIME_COMMITMENT" = "Més informació sobre el temps necessari per a l’estudi";
+"LEARN_MORE_TASKS" = "Més informació sobre les tasques de l’estudi";
+"LEARN_MORE_WITHDRAWING" = "Més informació sobre l’abandonament";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Opcions de compartir";
+"CONSENT_SHARE_WIDELY_%@" = "Compartir les meves dades amb %@ i investigadors qualificats de tot el món";
+"CONSENT_SHARE_ONLY_%@" = "Compartir només les meves dades amb %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ rebrà les teves dades de participació en aquest estudi.\n\nCompartir les dades codificades d’una manera més àmplia (sense informació com el nom) pot ser d’ajut en aquesta investigació i d’altres de futures.";
+"LEARN_MORE_CONSENT_SHARING" = "Més informació sobre com compartir dades";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nom de: %@ (imprès)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Signatura de: %@";
+"CONSENT_DOC_LINE_DATE" = "Data";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Pas %1$@ de %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Valor no vàlid";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ supera el valor màxim permès (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ és menys que el valor mínim permès (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ no és un valor vàlid.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Adreça electrònica no vàlida: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Escriu una adreça";
+"LOCATION_ERROR_TITLE" = "No s’ha trobat l‘adreça especificada";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No s’ha pogut determinar la ubicació actual. Escriu una adreça o vés a un lloc que tingui un senyal de GPS més bo, si pot ser.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’aplicació utilitzi els serveis de localització des de Configuració.";
+"LOCATION_ERROR_GEOCODE" = "No s’ha trobat cap resultat per a l’adreça especificada. Comprova que sigui vàlida.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "O no tens connexió a Internet o has superat el nombre màxim de peticions de cerca d’adreces. Si no tens connexió a Internet, activa la Wi-Fi per contestar aquesta pregunta, passa aquesta pregunta si hi ha disponible un botó d’omissió o recupera l’enquesta quan et puguis connectar a Internet. També pots tornar-ho a provar d’aquí a una mica.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El contingut del text supera la llargada màxima: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "La càmera no està disponible amb la pantalla dividida.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Correu electrònic";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jmartorell@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Contrasenya";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Escriu la contrasenya";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Torna a escriure la contrasenya";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Les contrasenyes no coincideixen.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Més informació";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jordi";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Martorell";
+"GENDER_FORM_ITEM_TITLE" = "Sexe";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona un sexe";
+"DOB_FORM_ITEM_TITLE" = "Data de naixement";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una data";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificació";
+"VERIFICATION_STEP_TITLE" = "Verifica el teu correu electrònic";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Prem l’enllaç de sota si no has rebut cap correu de verificació i vols que se’t torni a enviar.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correu de verificació";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inici de sessió";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Contrasenya oblidada?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Escriu el codi";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirma el codi";
+"PASSCODE_SAVED_MESSAGE" = "Codi desat";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Codi autenticat";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Escriu el codi antic";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Escriu el codi nou";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nou codi";
+"PASSCODE_INVALID_ALERT_TITLE" = "Codi incorrecte";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Els codis no coincideixen. Torna-ho a provar.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Identifica’t amb el Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Només es permeten caràcters numèrics.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés d’ingrés del codi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígits introduïts";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "No s’ha pogut afegir l’ítem del clauer.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "No s’ha pogut actualitzar l’ítem del clauer.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "No s’ha pogut eliminar l’ítem del clauer.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "No s’ha trobat l’ítem del clauer.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Dona";
+"GENDER_MALE" = "Home";
+"GENDER_OTHER" = "Altres";
+
+/* Boolean answer strings */
+"BOOL_NO" = "No";
+"BOOL_YES" = "Sí";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Prémer per contestar";
+"NULL_ANSWER" = "Seleccionar una resposta";
+"PLACEHOLDER_IMAGE_CHOICES" = "Prem per seleccionar";
+"PLACEHOLDER_LONG_TEXT" = "Prem per escriure";
+
+/* Button titles */
+"BUTTON_AGREE" = "Acceptar";
+"BUTTON_CANCEL" = "Cancel·lar";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Esborrar";
+"BUTTON_DISAGREE" = "No acceptar";
+"BUTTON_DONE" = "Fet";
+"BUTTON_GET_STARTED" = "Començar";
+"BUTTON_LEARN_MORE" = "Més informació";
+"BUTTON_NEXT" = "Següent";
+"BUTTON_SKIP" = "Ometre";
+"BUTTON_SKIP_QUESTION" = "Ometre aquesta pregunta";
+"BUTTON_START_TIMER" = "Iniciar el temporitzador";
+"BUTTON_OPTION_SAVE" = "Desar per després";
+"BUTTON_OPTION_DISCARD" = "Descartar resultats";
+"BUTTON_OPTION_STOP_TASK" = "Finalitzar tasca";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Iniciant l’activitat en";
+"TASK_COMPLETE_TITLE" = "Activitat completa";
+"TASK_COMPLETE_TEXT" = "S’analitzaran les dades i rebràs una notificació quan tinguis els resultats a punt.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar la imatge";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tornar a capturar la imatge";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No s’ha trobat cap càmera. Aquest pas no es pot completar.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Per completar aquest pas, permet que aquesta aplicació tingui accés a la càmera a Configuració.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida per a les imatges capturades.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No s’ha pogut desar la imatge capturada.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Activitat física";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Distància (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Ritme cardíac (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Seu còmodament %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Camina tan ràpid com puguis durant %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Aquesta activitat controla la freqüència cardíaca i mesura la distància que pots caminar en %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Camina a l’aire lliure al ritme més alt que puguis durant %1$@. Quan acabis, seu i descansa còmodament %2$@. Per començar, prem Començar.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Marxa i equilibri";
+"WALK_INTRO_TEXT" = "Aquesta activitat valora la marxa i l’equilibri quan camines i quan estàs quiet. No continuïs si no pots caminar sol de manera segura.";
+"WALK_INTRO_2_TEXT_%ld" = "Busca un lloc on puguis caminar sense assistència de manera seguida uns %ld passos en línia recta.";
+"WALK_INTRO_2_DETAIL" = "Posa’t el telèfon a la butxaca o a la bossa i segueix les instruccions d’àudio.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Ara estigues quiet %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Estigues quiet %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Fes mitja volta i torna allà on has començat.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Camina fins a %ld passos en línia recta.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Velocitat de premuda";
+"TAPPING_INTRO_TEXT" = "Aquesta activitat mesura la velocitat de premuda.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Deixa el telèfon sobre una superfície plana. Apareixeran dos botons a la pantalla durant %@. Amb dos dits de la mateixa mà, prem els botons alternadament tan ràpid com puguis.";
+"TAPPING_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"TAP_BUTTON_TITLE" = "Prem";
+"TOTAL_TAPS_LABEL" = "Tocs totals";
+"TAPPING_INSTRUCTION" = "Prem els botons tan ràpid com puguis amb dos dits.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Veu";
+"AUDIO_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"AUDIO_INSTRUCTION" = "Fes un “Aaaaah” tan llarg com puguis al micròfon.";
+"AUDIO_INTRO_TEXT" = "Inspira profundament i fes un “Aaaaah” tan llarg com puguis al micròfon. Mantingues un volum de veu estable fent que les barres d’àudio es mantinguin en blau.";
+"AUDIO_INTENDED_USE" = "Aquesta activitat avalua la teva veu tot gravant-la amb el micròfon de la part inferior del telèfon.";
+"AUDIO_TOO_LOUD_LABEL" = "Massa alt";
+"AUDIO_GENERIC_ERROR_LABEL" = "No s’ha pogut gravar l’àudio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aquesta activitat mesura la capacitat de sentir diversos sons.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecta i posa’t els auriculars.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauries d’escoltar un to. Ajusta el volum amb els controls de la part lateral del dispositiu.\n\nPrem el botó quan estiguis a punt per començar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Prem el botó cada vegada que comencis a escoltar un so.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, esquerra";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, dreta";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Memòria espacial";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aquesta activitat mesura la memòria espacial a curt termini demanant-te que repeteixis l’ordre en què s’il·luminen les %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flors";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flors";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre en què s’hagin il·luminat.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre invers en què s’hagin il·luminat.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Per començar, prem Començar i mira atentament.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Puntuació";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Mira com s’il·luminen les imatges de %@";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Prem les %@ en l’ordre en què s’han il·luminat";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Prem les %@ en ordre invers";
+"MEMORY_GAME_COMPLETE_TITLE" = "Seqüència completa";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Per continuar, prem Següent";
+"MEMORY_GAME_FAILED_TITLE" = "Reintentar";
+"MEMORY_GAME_FAILED_MESSAGE" = "No ho has aconseguit aquesta vegada. Prem Següent per continuar.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "És l’hora";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "T’has quedat sense temps.\nPrem Següent per continuar.";
+"MEMORY_GAME_COMPLETE" = "Joc completat";
+"MEMORY_GAME_PAUSED_TITLE" = "En pausa";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Per continuar, prem Següent";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Temps de reacció";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aquesta activitat avalua el temps que trigues a respondre a un senyal visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agita el dispositiu en qualsevol direcció de seguida que aparegui el punt blau a la pantalla. Se’t demanarà que facis això %D vegades.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %@ de %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agita ràpidament el dispositiu quan aparegui el cercle blau";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aquesta activitat valora la teva capacitat de resoldre trencaclosques.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Trasllada tota la pila a la plataforma ressaltada en el mínim de moviments possibles.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Per iniciar, prem Començar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resol el joc";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Nombre de moviments: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No puc resoldre aquest joc";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Caminada cronometrada";
+"TIMED_WALK_INTRO_DETAIL" = "Aquesta activitat mesura la funcionalitat de les teves extremitats inferiors.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Busca un lloc, preferiblement a l’aire lliure, on puguis caminar aproximadament %@ en línia recta tan ràpid com puguis, amb total seguretat. No abaixis el ritme fins que no hagis passat la línia d’arribada.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Prem Següent per continuar.";
+"TIMED_WALK_FORM_TITLE" = "Tipus d’assistència";
+"TIMED_WALK_FORM_TEXT" = "Utilitza el mateix tipus d’assistència per a cada prova.";
+"TIMED_WALK_QUESTION_TEXT" = "Portes ortesi al turmell?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Fas servir algun tipus d’assistència?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Prem aquí per respondre.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Cap";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Un bastó";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Una crossa";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dos bastons";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dues crosses";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Caminador";
+"TIMED_WALK_INSTRUCTION_%@" = "Camina fins a %@ en línia recta.";
+"TIMED_WALK_INSTRUCTION_2" = "Fes mitja volta i torna allà on has començat.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Prem Fet quan hagis acabat.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "El PAST (test auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i la teva habilitat de càlcul.";
+"PVSAT_INTRO_TEXT" = "El PAVT (test visual de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació visual i la teva habilitat de càlcul.";
+"PAVSAT_INTRO_TEXT" = "El PAVST (test visual i auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i visual i la teva habilitat de càlcul.";
+"PSAT_INTRO_TEXT_2_%@" = "Es presenten números solts cada %@ segons.\nHas de sumar cada nou número al número immediatament anterior.\nAtenció: no has d’anar calculant la suma total, sinó només la suma dels dos últims números.";
+"PSAT_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"PSAT_INITIAL_INSTRUCTION" = "Recorda aquest primer dígit.";
+"PSAT_INSTRUCTION" = "Suma aquest número a l’anterior.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla al forat amb la mà esquerra.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla al forat amb la mà dreta.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla darrere de la línia amb la mà esquerra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla darrere de la línia amb la mà dreta.";
+"HOLE_PEG_TEST_TEXT" = "Agafa la clavilla fent servir dos dits.";
+"HOLE_PEG_TEST_TEXT_2" = "Aixeca els dits per deixar caure la clavilla.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Error al configurar atribut";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Arxiu no marcat eliminat (no marcat carregat)";
+"ERROR_DATALOGGER_MULTIPLE" = "Diversos errors a l’eliminar registres";
+"ERROR_RECORDER_NO_DATA" = "No s’han trobat dades recollides.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sense dades";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Enrere";
+
+"AX_IMAGE_ILLUSTRATION" = "Il·lustració de: %@";
+
+"AX_SIGNVIEW_LABEL" = "Camp designat de signatura";
+"AX_SIGNVIEW_HINT" = "Toca la pantalla i mou el dit per signar";
+"AX_SIGNVIEW_SIGNED" = "Signat";
+"AX_SIGNVIEW_UNSIGNED" = "Sense signar";
+
+"AX_SELECTED" = "Seleccionat";
+"AX_UNSELECTED" = "No seleccionat";
+
+"AX_SLIDER_LABEL" = "Regulador de resposta. Interval de %@ a %@";
+"AX_UNLABELED_IMAGE" = "Imatge sense etiquetar";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Començar tasca";
+
+"AX.MEMORY.TILE.ACTIVE" = "actiu";
+"AX.MEMORY.TILE.CORRECT" = "correcte";
+"AX.MEMORY.TILE.INCORRECT" = "incorrecte";
+"AX.MEMORY.TILE.QUIESCENT" = "inactiu";
+"AX.MEMORY.TILE.LABEL" = "Joc de memòria";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Previsualització de la captura";
+"AX_IMAGE_CAPTURED_LABEL" = "Imatge capturada";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No s’ha pogut situar el disc de mida %@ sobre el disc de mida %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Objectiu";
+"AX_TOWER_OF_HANOI_TOWER" = "Torre";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Prem dos cops per situar el disc";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Prem dos cops per seleccionar el disc superior";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Té disc amb mides %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Buidar";
+
+"AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
+"AX_GRAPH_AND_SEPARATOR" = " i ";
+"AX_GRAPH_POINT_%@" = "Punt: %@";

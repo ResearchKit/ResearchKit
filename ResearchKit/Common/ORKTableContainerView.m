@@ -50,7 +50,6 @@
     UIView *_realFooterView;
     
     NSLayoutConstraint *_bottomConstraint;
-    NSArray *_constraints;
     
     CGFloat _keyboardOverlap;
     BOOL _keyboardIsUp;
@@ -65,7 +64,7 @@
     if (self) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         
-        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStyleGrouped];
         _tableView.backgroundColor = ORKColor(ORKBackgroundColorKey);
         _tableView.allowsSelection = YES;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
@@ -98,7 +97,7 @@
 #endif
         [_realFooterView addSubview:_continueSkipContainerView];
         
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
         
         _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
         _tapOffGestureRecognizer.delegate = self;
@@ -107,7 +106,7 @@
     return self;
 }
 
-- (void)setTapOffView:(UIView * __nullable)tapOffView {
+- (void)setTapOffView:(UIView *)tapOffView {
     _tapOffView = tapOffView;
     
     [_tapOffGestureRecognizer.view removeGestureRecognizer:_tapOffGestureRecognizer];
@@ -136,6 +135,7 @@
         _tableView.tableHeaderView = nil;
         _tableView.tableHeaderView = _stepHeaderView;
     }
+    
     {
         _tableView.tableFooterView = nil;
         [_realFooterView removeFromSuperview];
@@ -154,49 +154,49 @@
     }
 }
 
-- (void)updateContinueButtonConstraints {
+- (void)updateBottomConstraintConstant {
     _bottomConstraint.constant = -_keyboardOverlap;
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeTop
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     _bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                      attribute:NSLayoutAttributeBottom
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:_realFooterView
-                                                     attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0];
-    _bottomConstraint.priority = UILayoutPriorityDefaultHigh-1;
+                                                     attribute:NSLayoutAttributeBottomMargin
+                                                    multiplier:1.0
+                                                      constant:0.0];
+    _bottomConstraint.priority = UILayoutPriorityDefaultHigh - 1;
     [constraints addObject:_bottomConstraint];
     
-    [self updateContinueButtonConstraints];
+    [self updateBottomConstraintConstant];
     [NSLayoutConstraint activateConstraints:constraints];
-    _constraints = constraints;
-    
-    [super updateConstraints];
 }
 
 - (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
@@ -222,7 +222,7 @@
     // On a tap, dismiss the keyboard if the tap was not inside a view that is first responder or a child of a first responder.
     BOOL viewIsChildOfFirstResponder = [self view:_tableView hasFirstResponderOrTableViewCellContainingPoint:[recognizer locationInView:_tableView]];
     
-    if (! viewIsChildOfFirstResponder) {
+    if (!viewIsChildOfFirstResponder) {
         [_tableView endEditing:NO];
     }
 }
@@ -254,8 +254,7 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
-    _continueSkipContainerView.topMargin = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
+    _continueSkipContainerView.topMargin = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMargin, newWindow);
     if (newWindow) {
         [self registerForKeyboardNotifications:YES];
     } else {
@@ -293,7 +292,7 @@
     if (containByVisibleRect == NO) {
         if (CGRectGetHeight(desiredRect) > CGRectGetHeight(visibleRect)) {
             CGFloat desiredCenterY = CGRectGetMidY(desiredRect);
-            offsetY = desiredCenterY - visibleRect.size.height*0.5;
+            offsetY = desiredCenterY - visibleRect.size.height * 0.5;
         } else {
             if (CGRectGetMinY(desiredRect) < CGRectGetMinY(visibleRect)) {
                 offsetY = CGRectGetMinY(desiredRect);
@@ -305,9 +304,8 @@
     }
     
     // If there's room, we'd like to leave space below so you can tap on the next cell
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
     // Only go 3/4 of a cell extra; otherwise user might think they tapped the wrong cell
-    CGFloat desiredExtraSpace  = floor(ORKGetMetricForScreenType(ORKScreenMetricTextFieldCellHeight, screenType)*3/4);
+    CGFloat desiredExtraSpace  = floor(ORKGetMetricForWindow(ORKScreenMetricTextFieldCellHeight, self.window) * (3 / 4.0));
     CGFloat visibleSpaceAboveDesiredRect = CGRectGetMinY(desiredRect) - offsetY;
     CGFloat visibleSpaceBelowDesiredRect = offsetY + visibleHeight - CGRectGetMaxY(desiredRect);
     if ((visibleSpaceAboveDesiredRect > 0) && (visibleSpaceBelowDesiredRect < desiredExtraSpace)) {
@@ -330,7 +328,7 @@
 }
 
 - (void)animateLayoutForKeyboardNotification:(NSNotification *)notification {
-    NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSTimeInterval animationDuration = ((NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey]).doubleValue;
     
     UIScrollView *scrollView = _scrollView;
     
@@ -343,7 +341,7 @@
         // Keep track of the keyboard overlap, so we can adjust the constraint properly.
         _keyboardOverlap = intersectionSize.height;
         
-        [self updateContinueButtonConstraints];
+        [self updateBottomConstraintConstant];
         
         // Trigger layout inside the animation block to get the constraint change to animate.
         [scrollView layoutIfNeeded];

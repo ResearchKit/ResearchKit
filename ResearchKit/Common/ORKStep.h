@@ -60,6 +60,9 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 /**
  Returns a new step initialized with the specified identifier.
  
@@ -79,6 +82,15 @@ ORK_CLASS_AVAILABLE
  @return A new step.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a copy of this step initialized with the specified identifier.
+ 
+ @param identifier   The unique identifier for the new step to be returned.
+ 
+ @return A new step.
+ */
+- (instancetype)copyWithIdentifier:(NSString *)identifier;
 
 /**
  A short string that uniquely identifies the step within the task.

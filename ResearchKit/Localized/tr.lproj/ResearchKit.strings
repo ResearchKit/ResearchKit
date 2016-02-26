@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "İzin";
+"CONSENT_NAME_GIVEN" = "Ad";
+"CONSENT_NAME_FAMILY" = "Soyad";
+"CONSENT_NAME_PLACEHOLDER" = "Gerekli";
+"CONSENT_REVIEW_TITLE" = "Gözden Geçir";
+"CONSENT_REVIEW_INSTRUCTION" = "Aşağıdaki formu gözden geçirin ve sürdürmeye hazırsanız Kabul Ediyorum’a dokunun.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Gözden Geçir";
+"CONSENT_SIGNATURE_TITLE" = "İmza";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Lütfen parmağınızı kullanarak aşağıdaki çizgiye imza atın.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Burayı İmzalayın";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Sayfa %1$ld / %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Hoş Geldiniz";
+"CONSENT_SECTION_DATA_GATHERING" = "Veri Toplama";
+"CONSENT_SECTION_PRIVACY" = "Gizlilik";
+"CONSENT_SECTION_DATA_USE" = "Veri Kullanımı";
+"CONSENT_SECTION_STUDY_SURVEY" = "Çalışma Anketi";
+"CONSENT_SECTION_STUDY_TASKS" = "Çalışma Görevleri";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Zaman Ayırma";
+"CONSENT_SECTION_WITHDRAWING" = "Sözünü Geri Alma";
+"CONSENT_LEARN_MORE_TITLE" = "Daha Fazla Bilgi";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Verilerin toplanması hakkında daha fazla bilgi";
+"LEARN_MORE_DATA_USE" = "Verilerin kullanılması hakkında daha fazla bilgi";
+"LEARN_MORE_PRIVACY" = "Gizliliğinizin ve kimliğinizin korunması hakkında daha fazla bilgi";
+"LEARN_MORE_WELCOME" = "Çalışma hakkında daha fazla bilgi";
+"LEARN_MORE_STUDY_SURVEY" = "Çalışma anketi hakkında daha fazla bilgi";
+"LEARN_MORE_TIME_COMMITMENT" = "Çalışmanın zamanınıza etkisi hakkında daha fazla bilgi";
+"LEARN_MORE_TASKS" = "İlişkili görevler hakkında daha fazla bilgi";
+"LEARN_MORE_WITHDRAWING" = "Sözünü geri alma hakkında daha fazla bilgi";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Paylaşma Seçenekleri";
+"CONSENT_SHARE_WIDELY_%@" = "Verilerimi %@ ve dünya çapında nitelikli araştırmacılarla paylaş";
+"CONSENT_SHARE_ONLY_%@" = "Verilerimi yalnızca %@ ile paylaş";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@, bu çalışmaya katılımınız sonucundaki çalışma verilerinizi alacaktır.\n\nKodlanmış çalışma verilerinizin daha kapsamlı bir biçimde paylaşılması (adınız gibi bilgiler olmadan) bu çalışmaya ve ilerideki çalışmalara faydalı olabilir.";
+"LEARN_MORE_CONSENT_SHARING" = "Veri paylaşımı hakkında daha fazla bilgi";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ Adı (yazılı)";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ İmzası";
+"CONSENT_DOC_LINE_DATE" = "Tarih";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Adım %1$@ / %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Geçersiz değer";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@, izin verilen maksimum değeri (%2$@) aşıyor.";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@, izin verilen minimum değerden (%2$@) küçük.";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ geçerli bir değer değil.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Geçersiz e-posta adresi: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Adres girin";
+"LOCATION_ERROR_TITLE" = "Belirtilen Adres Bulunamadı";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Şu anki konumunuz çözülemedi. Lütfen bir adres girin veya uygunsa daha iyi GPS sinyalı olan bir konuma gidin.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Konum servislerine erişim reddedildi. Lütfen konum servislerini kullanmak için Ayarlar'da bu uygulamaya izin verin.";
+"LOCATION_ERROR_GEOCODE" = "Girilen adres için bir sonuç bulunmadı. Lütfen adresin geçerli olduğundan emin olun.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "İnternet'e bağlı değilsiniz veya en fazla adres arama isteği miktarını aştınız. İnternet'e bağlı değilseniz lütfen bu soruya yanıt vermek için Wi-Fi'yi açın, atlama düğmesi varsa bu soruyu atlayın ya da İnternet'e bağlı olduğunuzda anket için yeniden sayfayı ziyaret edin. Aksi takdirde, birkaç dakika sonra yeniden deneyin.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Metin içeriği maksimum uzunluğu aşıyor: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Bölünmüş ekranda Kamera kullanılamıyor.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-posta";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ad@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Parola";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parola girin";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Doğrula";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parolayı yeniden girin";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Parolalar eşleşmiyor.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ek Bilgi";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ali";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Utku";
+"GENDER_FORM_ITEM_TITLE" = "Cinsiyet";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Bir cinsiyet seçin";
+"DOB_FORM_ITEM_TITLE" = "Doğum Tarihi";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Bir tarih seçin";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Doğrulama";
+"VERIFICATION_STEP_TITLE" = "E-postanızı doğrulayın";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Doğrulama e-postası almadıysanız ve yeniden gönderilmesini istiyorsanız, lütfen aşağıdaki bağlantıya dokunun.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulama E-postasını Yeniden Gönder";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Oturum Aç";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Parolayı mı unuttunuz?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Parola girin";
+"PASSCODE_CONFIRM_MESSAGE" = "Parolayı doğrulayın";
+"PASSCODE_SAVED_MESSAGE" = "Parola kaydedildi";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Parola doğrulandı";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Eski parolanızı girin";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Yeni parolanızı girin";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Yeni parolanızı doğrulayın";
+"PASSCODE_INVALID_ALERT_TITLE" = "Parola Doğru Değil";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Parolalar eşleşmedi. Yeniden deneyin.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Lütfen Touch ID ile kimlik doğrulayın";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID hatası";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Yalnızca sayısal karakterlere izin veriliyor.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Parola giriş ilerleme göstergesi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ / %@ basamak girildi";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Anahtar zinciri öğesi eklenemedi.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Anahtar zinciri öğesi güncellenemedi.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Anahtar zinciri öğesi silinemedi.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Anahtar zinciri öğesi bulunamadı.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Kadın";
+"GENDER_MALE" = "Erkek";
+"GENDER_OTHER" = "Diğer";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Hayır";
+"BOOL_YES" = "Evet";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Yanıtlamak için dokunun";
+"NULL_ANSWER" = "Bir yanıt seçin";
+"PLACEHOLDER_IMAGE_CHOICES" = "Seçmek için dokunun";
+"PLACEHOLDER_LONG_TEXT" = "Yazmak için dokunun";
+
+/* Button titles */
+"BUTTON_AGREE" = "Kabul Ediyorum";
+"BUTTON_CANCEL" = "Vazgeç";
+"BUTTON_OK" = "Tamam";
+"BUTTON_CLEAR" = "Sil";
+"BUTTON_DISAGREE" = "Kabul Etmiyorum";
+"BUTTON_DONE" = "Bitti";
+"BUTTON_GET_STARTED" = "Başla";
+"BUTTON_LEARN_MORE" = "Daha fazla bilgi";
+"BUTTON_NEXT" = "İleri";
+"BUTTON_SKIP" = "Atla";
+"BUTTON_SKIP_QUESTION" = "Bu soruyu atla";
+"BUTTON_START_TIMER" = "Sayacı Başlat";
+"BUTTON_OPTION_SAVE" = "Sonrası İçin Kaydet";
+"BUTTON_OPTION_DISCARD" = "Sonuçları At";
+"BUTTON_OPTION_STOP_TASK" = "Görevi Bitir";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Etkinlik başlatılıyor";
+"TASK_COMPLETE_TITLE" = "Etkinlik Tamamlandı";
+"TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunuzda size haber verilecektir.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Görüntü Yakala";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Görüntüyü Yeniden Yakala";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera bulunamadı. Bu adım tamamlanamıyor.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Bu adımı tamamlamak için Ayarlar'da bu uygulamanın kameraya erişimine izin verin.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Yakalanan görüntülerin kaydedileceği bir dizin belirtilmemiş.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Yakalanan görüntü kaydedilemedi.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Fitness";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Mesafe (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Kalp Atış Hızı (vuruş/dk)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Rahat bir şekilde %@ oturun.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Yürüyebildiğiniz kadar hızlı %@ yürüyün.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Bu etkinlik, kalp atış hızınızı izler ve %1$@ içinde ne kadar mesafe yürüyebileceğinizi ölçer.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Açık havada yürüyebildiğiniz en yüksek hızda %1$@ yürüyün. Bitirdiğinizde, oturun ve %2$@ rahat bir şekilde dinlenin. Başlamak için Başla’ya dokunun.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Yürüyüş Tarzı ve Denge";
+"WALK_INTRO_TEXT" = "Bu etkinlik, yürürken ve ayakta dururken yürüyüş tarzınızı ve dengenizi ölçer. Yardımsız, güvenli bir şekilde yürüyemiyorsanız devam etmeyin.";
+"WALK_INTRO_2_TEXT_%ld" = "Düz bir çizgide yaklaşık %ld adım yardımsız, güvenli bir şekilde yürüyebileceğiniz bir yer bulun.";
+"WALK_INTRO_2_DETAIL" = "Telefonunuzu cebinize veya çantanıza koyun ve sesli yönergeleri izleyin.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Şimdi %@ süresince hareketsiz durun.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Hareketsiz bir şekilde %@ durun.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Geriye dönün ve başladığınız yere yürüyün.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Düz bir çizgide en fazla %ld adım yürüyün.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Dokunma Hızı";
+"TAPPING_INTRO_TEXT" = "Bu etkinlik dokunma hızınızı ölçer.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Telefonunuzu düz bir yüzeye koyun. %@ süresince ekranınızda iki düğme görünecektir. Aynı elinizin iki parmağını kullanarak düğmelere dokunabildiğiniz kadar çabuk sırayla dokunun.";
+"TAPPING_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"TAP_BUTTON_TITLE" = "Dokun";
+"TOTAL_TAPS_LABEL" = "Toplam Dokunma";
+"TAPPING_INSTRUCTION" = "İki parmağınızı kullanarak düğmelere dokunabildiğiniz kadar çabuk dokunun.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Ses";
+"AUDIO_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"AUDIO_INSTRUCTION" = "Mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin.";
+"AUDIO_INTRO_TEXT" = "Derin bir nefes alın ve mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin. Ses çubukları mavi kalacak şekilde ses yüksekliğini sabit tutmaya çalışın.";
+"AUDIO_INTENDED_USE" = "Bu etkinlik, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
+"AUDIO_TOO_LOUD_LABEL" = "Çok Yüksek";
+"AUDIO_GENERIC_ERROR_LABEL" = "Ses kaydı yapılamıyor";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Bu işlem, farklı sesleri duyabilme becerinizi ölçer.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "\nBaşlamadan önce kulaklığınızı bağlayın ve takın.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda düğmeye dokunun.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Her ses duymaya başladığınızda düğmeye dokunun.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Sol";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Sağ";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu etkinlik, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli konumsal belleğinizi ölçer.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "çiçek";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "çiçek";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Bu %@ görüntülerinin bazıları teker teker yanacaktır. Bu %@ görüntülerine yandıkları sırada dokunun.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Bu %@ görüntülerinin bazıları teker teker yanacaktır. Bu %@ görüntülerine yandıkları sıranın tersinde dokunun.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Başlamak için Başla'ya dokunun, sonra dikkatlice izleyin.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Puan";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Bu %@ görüntülerinin yanmasını izleyin";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Bu %@ görüntülerine yandıkları sırada dokunun";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Bu %@ görüntülerine ters sırada dokunun";
+"MEMORY_GAME_COMPLETE_TITLE" = "Dizi Tamamlandı";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Devam etmek için İleri’ye dokunun";
+"MEMORY_GAME_FAILED_TITLE" = "Yeniden Deneyin";
+"MEMORY_GAME_FAILED_MESSAGE" = "Bu sefer pek iyi yapamadınız. Devam etmek için İleri’ye dokunun.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Süre Doldu";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Süreniz kalmadı.\nDevam etmek için İleri’ye dokunun.";
+"MEMORY_GAME_COMPLETE" = "Oyun Tamamlandı";
+"MEMORY_GAME_PAUSED_TITLE" = "Duraklatıldı";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Devam etmek için İleri’ye dokunun";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Tepki Süresi";
+"REACTION_TIME_TASK_INTENDED_USE" = "Bu işlem, görünen bir ipucuna yanıt verebildiğiniz süreyi hesaplar.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ekranda mavi nokta görünür görünmez aygıtı herhangi bir yönde hızlıca sallayın. Bunu %D kez yapmanız istenecek.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ / %@ Girişim";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mavi çember göründüğünde aygıtı hızlıca sallayın";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanoi Kulesi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu etkinlik bulmaca çözme becerilerinizi ölçer.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tüm yığını, vurgulanan platforma mümkün olan en az hamlede taşıyın.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Bulmacayı Çöz";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Hamle Sayısı: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Bu bulmacayı çözemedim";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Süreli Yürüme";
+"TIMED_WALK_INTRO_DETAIL" = "Bu etkinlik, alt ekstremite fonksiyonlarınızı ölçer.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Düz bir çizgide mümkün olduğunca hızlı ama güvenli bir şekilde %@ yürüyebileceğiniz bir yer (tercihen dışarıda) bulun. Bitirme çizgisini geçene dek yavaşlamayın.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Başlamak için İleri’ye dokunun.";
+"TIMED_WALK_FORM_TITLE" = "Yardımcı aygıt";
+"TIMED_WALK_FORM_TEXT" = "Her test için aynı yardımcı aygıtı kullanın.";
+"TIMED_WALK_QUESTION_TEXT" = "Ayak bileği ortezi takıyor musunuz?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Yardımcı aygıt kullanıyor musunuz?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Bir yanıt seçmek için dokunun.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Hiçbiri";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Tek Taraflı Baston";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Tek Taraflı Koltuk Değneği";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Çift Taraflı Baston";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Çift Taraflı Koltuk Değneği";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Yürüteç/Yürüme Desteği";
+"TIMED_WALK_INSTRUCTION_%@" = "Düz bir çizgide en fazla %@ yürüyün.";
+"TIMED_WALK_INSTRUCTION_2" = "Geriye dönün ve başladığınız yere yürüyün.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tamamladığınızda Bitti’ye dokunun.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Tempolu İşitsel Toplama Testi, işitsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PVSAT_INTRO_TEXT" = "Tempolu Görsel Toplama Testi, görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PAVSAT_INTRO_TEXT" = "Tempolu İşitsel-Görsel Toplama Testi, işitsel ve görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PSAT_INTRO_TEXT_2_%@" = "Her %@ saniyede bir tek tek rakamlar sunulur.\nHer yeni rakamı bir önceki rakama eklemeniz gerekir.\nDikkat edin, değişen toplamı değil yalnızca son iki rakamın toplamını hesaplamanız gerekir.";
+"PSAT_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"PSAT_INITIAL_INSTRUCTION" = "Bu ilk rakamı aklınızda tutun.";
+"PSAT_INSTRUCTION" = "Bu yeni rakamı bir öncekine ekleyin.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ Delikli Daire Testi";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Bu aktivite, bir daireyi deliğe yerleştirmenizi isteyerek üst uzuvlarınızın işlevini ölçer. Bunu %@ kez yapmanız istenecektir.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Hem sol hem de sağ eliniz test edilecektir.\nDaireyi mümkün olduğu kadar hızlı bir şekilde almalı, onu deliğe koymalı ve bunu %@ kez yaptıktan sonra yeniden %@ kez kaldırmalısınız.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Hem sağ hem de sol eliniz test edilecektir.\nDaireyi mümkün olduğu kadar hızlı bir şekilde almalı, onu deliğe koymalı ve bunu %@ kez yaptıktan sonra yeniden %@ kez kaldırmalısınız.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Sol elinizi kullanarak daireyi deliğin içine koyun.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Sağ elinizi kullanarak daireyi deliğin içine koyun.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Sol elinizi kullanarak daireyi çizginin arkasına koyun.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Sağ elinizi kullanarak daireyi çizginin arkasına koyun.";
+"HOLE_PEG_TEST_TEXT" = "İki parmağınızla daireyi alın.";
+"HOLE_PEG_TEST_TEXT_2" = "Daireyi bırakmak için parmakları kaldırın.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Özelliği ayarlama hatası";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Dosya silinmiş (karşıya yüklenmiş) olarak işaretlenemedi";
+"ERROR_DATALOGGER_MULTIPLE" = "Günlükleri silmeyle ilgili birden fazla hata";
+"ERROR_RECORDER_NO_DATA" = "Toplanmış bir veri bulunamadı.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Çıkış dizini belirtilmemiş";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Veri Yok";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Geri";
+
+"AX_IMAGE_ILLUSTRATION" = "%@ resmi";
+
+"AX_SIGNVIEW_LABEL" = "Belirtilen imza alanı";
+"AX_SIGNVIEW_HINT" = "İmzalamak için ekrana dokunup parmağınızı hareket ettirin";
+"AX_SIGNVIEW_SIGNED" = "İmzalanmış";
+"AX_SIGNVIEW_UNSIGNED" = "İmzalanmamış";
+
+"AX_SELECTED" = "Seçili";
+"AX_UNSELECTED" = "Seçili değil";
+
+"AX_SLIDER_LABEL" = "Yanıt sürgüsü. %@ ile %@ aralığında";
+"AX_UNLABELED_IMAGE" = "Etiketsiz görüntü";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Göreve başla";
+
+"AX.MEMORY.TILE.ACTIVE" = "etkin";
+"AX.MEMORY.TILE.CORRECT" = "doğru";
+"AX.MEMORY.TILE.INCORRECT" = "yanlış";
+"AX.MEMORY.TILE.QUIESCENT" = "hareketsiz";
+"AX.MEMORY.TILE.LABEL" = "Bellek oyunu taşı";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Yakalanan görüntü önizlemesi";
+"AX_IMAGE_CAPTURED_LABEL" = "Yakalanmış görüntü";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ büyüklüğündeki disk, %@ büyüklüğündeki diskin üzerine yerleştirilemez";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Hedef";
+"AX_TOWER_OF_HANOI_TOWER" = "Kule";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Diski yerleştirmek için çift dokunun";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "En üstteki diski seçmek için çift dokunun";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ büyüklüklerinde disk içeriyor";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Boş";
+
+"AX_GRAPH_RANGE_FORMAT" = "%@ - %@ aralığında";
+"AX_GRAPH_AND_SEPARATOR" = " ve ";
+"AX_GRAPH_POINT_%@" = "Nokta: %@";

@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Souhlas";
+"CONSENT_NAME_GIVEN" = "Jméno";
+"CONSENT_NAME_FAMILY" = "Příjmení";
+"CONSENT_NAME_PLACEHOLDER" = "Požadováno";
+"CONSENT_REVIEW_TITLE" = "Kontrola";
+"CONSENT_REVIEW_INSTRUCTION" = "Projděte si níže uvedený formulář a pokud budete chtít pokračovat, klepněte na Souhlasím.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Kontrola";
+"CONSENT_SIGNATURE_TITLE" = "Podpis";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Na lince níže se prstem podepište.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Zde se podepište";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Stránka %1$ld z %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Vítejte";
+"CONSENT_SECTION_DATA_GATHERING" = "Shromažďování dat";
+"CONSENT_SECTION_PRIVACY" = "Soukromí";
+"CONSENT_SECTION_DATA_USE" = "Využití dat";
+"CONSENT_SECTION_STUDY_SURVEY" = "Studijní průzkum";
+"CONSENT_SECTION_STUDY_TASKS" = "Studijní úkoly";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Věnovaný čas";
+"CONSENT_SECTION_WITHDRAWING" = "Odstoupení";
+"CONSENT_LEARN_MORE_TITLE" = "Další informace";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Informace o shromažďování dat";
+"LEARN_MORE_DATA_USE" = "Informace o způsobech využití dat";
+"LEARN_MORE_PRIVACY" = "Informace o ochraně soukromí a identity";
+"LEARN_MORE_WELCOME" = "Úvodní informace o studii";
+"LEARN_MORE_STUDY_SURVEY" = "Informace o realizaci průzkumu";
+"LEARN_MORE_TIME_COMMITMENT" = "Informace o dopadu studie na váš čas";
+"LEARN_MORE_TASKS" = "Informace o úkolech obsažených ve studii";
+"LEARN_MORE_WITHDRAWING" = "Informace o odstoupení od studie";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Volby sdílení";
+"CONSENT_SHARE_WIDELY_%@" = "Sdílet data se společností %@ a kvalifikovanými výzkumnými pracovišti na celém světě";
+"CONSENT_SHARE_ONLY_%@" = "Sdílet data pouze se společností %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Data z vaší účasti ve studii budou předána společnosti %@.\n\nPro tento i budoucí výzkumy by mohlo být přínosné, kdyby byla zakódovaná data z vaší studie (bez údajů, jako je vaše jméno) sdílena ve větší šíři.";
+"LEARN_MORE_CONSENT_SHARING" = "Další informace o sdílení dat";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ - jméno";
+"CONSENT_DOC_LINE_SIGNATURE" = "%@ - podpis";
+"CONSENT_DOC_LINE_DATE" = "Datum";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Krok %1$@ z %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Neplatná hodnota";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ přesahuje maximální povolenou hodnotu (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ nedosahuje minimální povolené hodnoty (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ není platná hodnota.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Neplatná e‑mailová adresa: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Zadejte adresu";
+"LOCATION_ERROR_TITLE" = "Zadanou adresu se nepodařilo najít";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Vaši aktuální polohu nelze zjistit. Zadejte adresu nebo se přesuňte na místo s lepším GPS signálem, je‑li to možné.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Přístup k polohovým službám byl odepřen. Přejděte do Nastavení a udělte této aplikaci oprávnění k používání polohových služeb.";
+"LOCATION_ERROR_GEOCODE" = "Pro zadanou adresu se nepodařilo najít výsledek. Ověřte správnost adresy.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nejste připojeni k internetu nebo jste překročili maximální počet žádostí o vyhledání adresy. Pokud nejste připojeni k internetu a chcete tuto otázku zodpovědět, zapněte Wi-Fi. Je-li k dispozici tlačítko přeskočit, můžete otázku přeskočit nebo se můžete k průzkumu vrátit, až bude internet dostupný. Případně to můžete zkusit za několik minut znovu.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text překračuje maximální délku: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Fotoaparát není na rozdělené obrazovce k dispozici.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jnovak@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Heslo";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrzení";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo ještě jednou";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Hesla se neshodují.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Doplňující informace";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Novák";
+"GENDER_FORM_ITEM_TITLE" = "Pohlaví";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Vyberte pohlaví";
+"DOB_FORM_ITEM_TITLE" = "Datum narození";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Vyberte datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ověření";
+"VERIFICATION_STEP_TITLE" = "Ověřte svůj e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pokud jste neobdrželi ověřovací e-mail a chcete, abychom vám ho zaslali znovu, klepněte na odkaz níže.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Znovu odeslat ověřovací e‑mail";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Přihlásit se";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Zapomněli jste heslo?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Zadejte kód";
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrďte kód";
+"PASSCODE_SAVED_MESSAGE" = "Kód byl uložen";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kód byl ověřen";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Zadejte starý kód";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Zadejte nový kód";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrďte nový kód";
+"PASSCODE_INVALID_ALERT_TITLE" = "Nesprávný kód";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kódy se neshodují. Zkuste to znovu.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Použijte ověření pomocí Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Chyba Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Jsou povoleny jen číselné znaky.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikátor průběhu zadávání kódu";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Zadané číslice: %@ z %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nepodařilo se přidat položku do svazku klíčů.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nepodařilo se aktualizovat položku ve svazku klíčů.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nepodařilo se smazat položku ze svazku klíčů.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nepodařilo se najít položku ve svazku klíčů.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Žena";
+"GENDER_MALE" = "Muž";
+"GENDER_OTHER" = "Jiné";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Ne";
+"BOOL_YES" = "Ano";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Odpověď";
+"NULL_ANSWER" = "Vyberte odpověď";
+"PLACEHOLDER_IMAGE_CHOICES" = "Chcete‑li vybrat, klepněte";
+"PLACEHOLDER_LONG_TEXT" = "Chcete-li psát, klepněte";
+
+/* Button titles */
+"BUTTON_AGREE" = "Souhlasím";
+"BUTTON_CANCEL" = "Zrušit";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Smazat";
+"BUTTON_DISAGREE" = "Nesouhlasím";
+"BUTTON_DONE" = "Hotovo";
+"BUTTON_GET_STARTED" = "Začít";
+"BUTTON_LEARN_MORE" = "Další informace";
+"BUTTON_NEXT" = "Další";
+"BUTTON_SKIP" = "Přeskočit";
+"BUTTON_SKIP_QUESTION" = "Tuto otázku přeskočit";
+"BUTTON_START_TIMER" = "Spustit odpočet";
+"BUTTON_OPTION_SAVE" = "Nechat na později";
+"BUTTON_OPTION_DISCARD" = "Zahodit výsledky";
+"BUTTON_OPTION_STOP_TASK" = "Konec úlohy";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Aktivita se spustí za";
+"TASK_COMPLETE_TITLE" = "Aktivita byla dokončena";
+"TASK_COMPLETE_TEXT" = "Data budou analyzována a jakmile budou k dispozici výsledky, obdržíte oznámení.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Pořídit obrázek";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Pořídit obrázek znovu";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Fotoaparát nebyl nalezen. Tento krok nelze dokončit.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Před dokončením tohoto kroku musíte v Nastavení povolit této aplikaci přístup k fotoaparátu.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nebyl určen žádný výstupní adresář pro pořízené obrázky.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Pořízený obrázek se nepodařilo uložit.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Kondice";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Vzdálenost (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Srdeční tep (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Po %@ pohodlně seďte.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Po %@ co nejrychleji kráčejte.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Tato aktivita změří váš srdeční tep a vzdálenost, kterou ujdete za %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Po %1$@ se procházejte venku nejvyšším možným tempem. Poté po %2$@ v pohodlné pozici odpočívejte. Chcete-li začít, klepněte na Začít.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Chůze a rovnováha";
+"WALK_INTRO_TEXT" = "Tato aktivita změří váš krok a rovnováhu při chůzi a stání. Pokud nedokážete bezpečně chodit bez pomoci, v tomto testu nepokračujte.";
+"WALK_INTRO_2_TEXT_%ld" = "Najděte si místo, kde můžete bezpečně bez asistence ujít přibližně %ld kroků v přímém směru.";
+"WALK_INTRO_2_DETAIL" = "Uložte telefon do kapsy nebo do tašky či batohu a postupujte podle zvukových instrukcí.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Nyní po %@ klidně stůjte.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Po %@ klidně stůjte.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Obraťte se a jděte zpátky na začátek.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Ujděte až %ld kroků v přímém směru.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Rychlost klepání";
+"TAPPING_INTRO_TEXT" = "Tato aktivita změří vaši rychlost klepání.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Položte telefon na rovný povrch. Na %@ se na obrazovce objeví dvě tlačítka. Dvěma prsty jedné ruky střídavě co nejrychleji na tlačítka klepejte.";
+"TAPPING_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"TAP_BUTTON_TITLE" = "Klepněte";
+"TOTAL_TAPS_LABEL" = "Počet klepnutí";
+"TAPPING_INSTRUCTION" = "Dvěma prsty co nejrychleji klepejte na tlačítka.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Hlas";
+"AUDIO_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"AUDIO_INSTRUCTION" = "Řekněte \"Ááááá\" do mikrofonu a vydržte při tom co nejdéle.";
+"AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \"Ááááá\". Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
+"AUDIO_INTENDED_USE" = "Tato aktivita vyhodnotí váš hlas, který bude zaznamenán pomocí mikrofonu u dolního okraje telefonu.";
+"AUDIO_TOO_LOUD_LABEL" = "Příliš nahlas";
+"AUDIO_GENERIC_ERROR_LABEL" = "Nelze zaznamenávat zvuk";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tónová audiometrie";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Tato aktivita měří vaši schopnost slyšet různé zvuky.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Než začnete, zapněte sluchátka a nasaďte si je.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nyní byste měli slyšet tón. Nastavte hlasitost pomocí ovládacích prvků po straně zařízení.\n\nAž budete připraveni začít, klepněte na tlačítko.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Jakmile uslyšíte zvuk, klepněte na tlačítko.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, vlevo";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, vpravo";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Prostorová paměť";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tato aktivita změří vaši krátkodobou prostorovou paměť. Budete požádáni o zopakování pořadí, ve kterém se budou rozsvěcovat %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "květiny";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "květiny";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v pořadí, ve kterém se rozsvěcovaly.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v obráceném pořadí rozsvěcování.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Chcete-li začít, klepněte na Začít a pozorně se dívejte.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Skóre";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Sledujte, jak se %@ rozsvítí";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Klepejte na %@ v pořadí, ve kterém se budou rozsvěcovat";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Klepejte na %@ v obráceném pořadí";
+"MEMORY_GAME_COMPLETE_TITLE" = "Sekvence byla dokončena";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Pokračujte klepnutím na Další.";
+"MEMORY_GAME_FAILED_TITLE" = "Zkusit znovu";
+"MEMORY_GAME_FAILED_MESSAGE" = "Úplně se vám to tentokrát nepodařilo. Pokračujte klepnutím na Další.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Čas vypršel";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Došel vám čas.\nPokračujte klepnutím na Další.";
+"MEMORY_GAME_COMPLETE" = "Hra byla dokončena";
+"MEMORY_GAME_PAUSED_TITLE" = "Pozastaveno";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Pokračujte klepnutím na Další.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakční doba";
+"REACTION_TIME_TASK_INTENDED_USE" = "Tato aktivita zjišťuje, jak dlouho vám trvá, než zareagujete na vizuální podnět.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Jakmile se na displeji objeví modrá tečka, zatřeste zařízením v libovolném směru. Budete k tomu vyzváni celkem %Dx.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %@ z %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Jakmile se objeví modrý kroužek, krátce zařízením zatřeste";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojské věže";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Tato aktivita vyhodnotí vaši schopnost řešit hlavolamy.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Přesuňte celou sadu na zvýrazněnou podložku s využitím co nejmenšího počtu kroků.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Vyřešte hlavolam";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Počet kroků: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tento hlavolam nedokážu vyřešit";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Chůze na čas";
+"TIMED_WALK_INTRO_DETAIL" = "Tato aktivita změří funkci vašich dolních končetin.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Najděte si místo (nejlépe venku), kde můžete co nejrychleji a bezpečně ujít přibližně %@ v přímém směru. Nezpomalujte, dokud nepřekročíte cílovou čáru.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Začněte klepnutím na Další.";
+"TIMED_WALK_FORM_TITLE" = "Asistenční zařízení";
+"TIMED_WALK_FORM_TEXT" = "Při všech testech používejte při chůzi tutéž oporu.";
+"TIMED_WALK_QUESTION_TEXT" = "Používáte kotníkovou ortézu?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Používáte při chůzi oporu?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Klepněte a vyberte odpověď.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ne";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Jedna hůl";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Jedna berla";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dvě hole";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvě berle";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Chodítko";
+"TIMED_WALK_INSTRUCTION_%@" = "Ujděte až %@ v přímém směru.";
+"TIMED_WALK_INSTRUCTION_2" = "Obraťte se a jděte zpátky na začátek.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Po dokončení klepněte na Hotovo.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Paced Auditory a Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání sluchových informací.";
+"PVSAT_INTRO_TEXT" = "Paced Visual Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání zrakových informací.";
+"PAVSAT_INTRO_TEXT" = "Paced Auditory a Visual Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání sluchových a zrakových informací.";
+"PSAT_INTRO_TEXT_2_%@" = "Vždy po %@ sekundách se vám zobrazí jedno číslo.\nKaždé číslo musíte přičíst k bezprostředně předchozímu.\nPozor, nesčítejte všechna čísla, vždy jen dvě poslední.";
+"PSAT_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"PSAT_INITIAL_INSTRUCTION" = "Zapamatujte si toto první číslo.";
+"PSAT_INSTRUCTION" = "Přičtěte toto číslo k předchozímu.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@kolíkový test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tato aktivita otestuje motoriku vašich horních končetin. Požádáme vás o zasunutí kolíku do otvoru. Budete k tomu vyzváni celkem %@×.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Budeme testovat vaši levou i pravou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Budeme testovat vaši pravou i levou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Zasuňte kolík do otvoru levou rukou.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Zasuňte kolík do otvoru pravou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umístěte kolík za čáru levou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umístěte kolík za čáru pravou rukou.";
+"HOLE_PEG_TEST_TEXT" = "Uchopte kolík dvěma prsty.";
+"HOLE_PEG_TEST_TEXT_2" = "Zvednutím prstů kolík pusťte.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodařilo se odstranit dostatečné množství protokolů pro dosažení prahové hodnoty";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Chyba nastavení atributu";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Soubor není označen jako smazaný (není označen jako odeslaný)";
+"ERROR_DATALOGGER_MULTIPLE" = "Při odstraňování protokolů došlo k více chybám";
+"ERROR_RECORDER_NO_DATA" = "Nebyla nalezena žádná shromážděná data.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nebyl určen výstupní adresář";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Žádná data";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Zpět";
+
+"AX_IMAGE_ILLUSTRATION" = "%@ - ilustrace";
+
+"AX_SIGNVIEW_LABEL" = "Vyhrazené pole pro podpis";
+"AX_SIGNVIEW_HINT" = "Chcete-li se podepsat, dotkněte se obrazovky a pohybujte prstem";
+"AX_SIGNVIEW_SIGNED" = "Podepsáno";
+"AX_SIGNVIEW_UNSIGNED" = "Nepodepsáno";
+
+"AX_SELECTED" = "Vybráno";
+"AX_UNSELECTED" = "Nevybráno";
+
+"AX_SLIDER_LABEL" = "Jezdec odpovědi. Rozsah od %@ do %@";
+"AX_UNLABELED_IMAGE" = "Obrázek bez štítku";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Spustit úlohu";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktivní";
+"AX.MEMORY.TILE.CORRECT" = "správně";
+"AX.MEMORY.TILE.INCORRECT" = "nesprávně";
+"AX.MEMORY.TILE.QUIESCENT" = "klid";
+"AX.MEMORY.TILE.LABEL" = "Kostka paměťové hry";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Náhled";
+"AX_IMAGE_CAPTURED_LABEL" = "Pořízený obrázek";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Disk o velikosti %@ nelze umístit na disk o velikosti %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cíl";
+"AX_TOWER_OF_HANOI_TOWER" = "Věž";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Poklepáním umístíte disk";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Poklepáním vyberte vrchní disk";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje disky o velikosti %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdné";
+
+"AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
+"AX_GRAPH_AND_SEPARATOR" = " a ";
+"AX_GRAPH_POINT_%@" = "Bod: %@";

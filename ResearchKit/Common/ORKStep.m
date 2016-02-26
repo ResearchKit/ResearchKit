@@ -38,12 +38,14 @@
 
 @implementation ORKStep
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
-        if (nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-        }
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
     }
     return self;
@@ -53,9 +55,19 @@
     return [ORKStepViewController class];
 }
 
+- (Class)stepViewControllerClass {
+    return [[self class] stepViewControllerClass];
+}
+
+- (instancetype)copyWithIdentifier:(NSString *)identifier {
+    ORKThrowInvalidArgumentExceptionIfNil(identifier)
+    ORKStep *step = [self copy];
+    step->_identifier = [identifier copy];
+    return step;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKStep *step = [[[self class] allocWithZone:zone] init];
-    step->_identifier = [_identifier copy];
+    ORKStep *step = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]];
     step.title = _title;
     step.optional = _optional;
     step.text = _text;
@@ -114,9 +126,8 @@
     }
 }
 
-
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@ %@ %@>", [super description], self.identifier, self.title];
+    return [NSString stringWithFormat:@"<%@ %@ %@>", super.description, self.identifier, self.title];
 }
 
 - (BOOL)showsProgress {

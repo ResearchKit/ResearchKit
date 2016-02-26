@@ -77,6 +77,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     
 }
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (BOOL)isHealthKitAnswerFormat {
     return YES;
 }
@@ -197,6 +201,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     ORKAnswerFormat *impliedAnswerFormat;
     HKUnit *_userUnit;
     
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
 }
 
 - (BOOL)isHealthKitAnswerFormat {

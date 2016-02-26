@@ -43,25 +43,23 @@
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        NSArray *validClasses = @[[ORKValuePickerAnswerFormat class],
-                                  [ORKTextChoiceAnswerFormat class],
-                                  [ORKImageChoiceAnswerFormat class]];
-        
-        if (![validClasses containsObject:[answerFormat class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Not a valid answerformat for this helper." userInfo:nil];
-        }
-        
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
-            ORKValuePickerAnswerFormat *vpaf = (ORKValuePickerAnswerFormat *)answerFormat;
-            ORKTextChoice *nullChocie = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
-            _choices = [@[nullChocie] arrayByAddingObjectsFromArray:vpaf.textChoices];
+            ORKValuePickerAnswerFormat *valuePickerAnswerFormat = (ORKValuePickerAnswerFormat *)answerFormat;
+            ORKTextChoice *nullChoice = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
+            _choices = [@[nullChoice] arrayByAddingObjectsFromArray:valuePickerAnswerFormat.textChoices];
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
             ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)answerFormat;
             _choices = textChoiceAnswerFormat.textChoices;
         } else if ([answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
-            ORKImageChoiceAnswerFormat *iaf = (ORKImageChoiceAnswerFormat *)answerFormat;
-            _choices = iaf.imageChoices;
+            ORKImageChoiceAnswerFormat *imageChoiceAnswerFormat = (ORKImageChoiceAnswerFormat *)answerFormat;
+            _choices = imageChoiceAnswerFormat.imageChoices;
+        } else if ([answerFormat isKindOfClass:[ORKTextScaleAnswerFormat class]]) {
+            ORKTextScaleAnswerFormat *textScaleAnswerFormat = (ORKTextScaleAnswerFormat *)answerFormat;
+            _choices = textScaleAnswerFormat.textChoices;
+        } else {
+            NSString *exceptionReason = [NSString stringWithFormat:@"%@ is not a currently supported answer format for the choice answer format helper.", NSStringFromClass([answerFormat class])];
+            @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
         }
     }
     return self;
@@ -71,22 +69,22 @@
     return _choices.count;
 }
 
-- (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
+- (id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index {
     if (index >= _choices.count) {
         return nil;
     }
     
-    ORKImageChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKImageChoice class]]? choice : nil;
+    return _choices[index];
+}
+
+- (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
 }
 
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
-    if (index >= _choices.count) {
-        return nil;
-    }
-    
-    ORKTextChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKTextChoice class]]? choice : nil;
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKTextChoice class]] ? (ORKTextChoice *) option : nil;
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {
@@ -98,17 +96,17 @@
     
     for (NSNumber *indexNumber in indexes) {
         
-        NSUInteger index = [indexNumber unsignedIntegerValue];
+        NSUInteger index = indexNumber.unsignedIntegerValue;
         
         if (index >= _choices.count) {
             continue;
         }
         
         id<ORKAnswerOption> choice = _choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
-            value = _isValuePicker? @(index-1) : @(index);
+            value = _isValuePicker? @(index - 1) : @(index);
         }
         
         if (_isValuePicker && index == 0) {
@@ -117,12 +115,12 @@
             [array addObject:value];
         }
     }
-    return [array copy];
+    return array.count > 0 ? [array copy] : ORKNullAnswerValue();
 }
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {
     NSArray *indexes = [self selectedIndexesForAnswer:answer];
-    return [indexes count] > 0 ? [indexes firstObject] : nil;
+    return indexes.count > 0 ? indexes.firstObject : nil;
 }
 
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer {
@@ -149,9 +147,9 @@
             if (nil == matchedChoice) {
                 NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
                 if (_isValuePicker) {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]+1];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue + 1];
                 } else {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue];
                 }
             }
             
@@ -168,6 +166,18 @@
     
     return [indexArray copy];
     
+}
+
+- (NSString *)stringForChoiceAnswer:(id)answer {
+    NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    NSArray *indexes = [self selectedIndexesForAnswer:answer];
+    for (NSNumber *index in indexes) {
+        NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
+        }
+    }
+    return [answerStrings componentsJoinedByString:@"\n"];
 }
 
 @end

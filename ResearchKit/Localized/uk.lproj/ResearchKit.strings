@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Згода";
+"CONSENT_NAME_GIVEN" = "Ім’я";
+"CONSENT_NAME_FAMILY" = "Прізвище";
+"CONSENT_NAME_PLACEHOLDER" = "Обов’язково";
+"CONSENT_REVIEW_TITLE" = "Огляд";
+"CONSENT_REVIEW_INSTRUCTION" = "Перегляньте наведене нижче і торкніть «Погоджуюсь», якщо ви готові продовжити.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Огляд";
+"CONSENT_SIGNATURE_TITLE" = "Підпис";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Будь ласка, розпишіться пальцем на лінії нижче.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Розпишіться тут";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Сторінка %1$ld із %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Ласкаво просимо!";
+"CONSENT_SECTION_DATA_GATHERING" = "Збір даних";
+"CONSENT_SECTION_PRIVACY" = "Приватність";
+"CONSENT_SECTION_DATA_USE" = "Використання даних";
+"CONSENT_SECTION_STUDY_SURVEY" = "Дослідне опитування";
+"CONSENT_SECTION_STUDY_TASKS" = "Дослідні завдання";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Часове навантаження";
+"CONSENT_SECTION_WITHDRAWING" = "Відкликання";
+"CONSENT_LEARN_MORE_TITLE" = "Докладніше";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Докладніше про збір даних";
+"LEARN_MORE_DATA_USE" = "Докладніше про використання даних";
+"LEARN_MORE_PRIVACY" = "Докладніше про захист вашої приватності і особистих даних";
+"LEARN_MORE_WELCOME" = "Докладніше про дослідження";
+"LEARN_MORE_STUDY_SURVEY" = "Докладніше про дослідне опитування";
+"LEARN_MORE_TIME_COMMITMENT" = "Докладніше про вплив дослідження на ваш час";
+"LEARN_MORE_TASKS" = "Докладніше про залучені завдання";
+"LEARN_MORE_WITHDRAWING" = "Докладніше про відкликання";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Опції доступу";
+"CONSENT_SHARE_WIDELY_%@" = "Оприлюднити мої дані для %@ і кваліфікованих вчених в усьому світі";
+"CONSENT_SHARE_ONLY_%@" = "Оприлюднювати тільки для %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ отримають дані дослідження після вашої участі в цьому дослідженні.\n\nОприлюднення шифрованих даних дослідження для ширшої аудиторії (без таких даних, як ваше ім’я) може бути корисним для цього та майбутніх досліджень.";
+"LEARN_MORE_CONSENT_SHARING" = "Докладніше про оприлюднення даних";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Ім’я %@ (друкованими)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Підпис %@";
+"CONSENT_DOC_LINE_DATE" = "Дата";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Крок %1$@ із %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Неправильне значення";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ перевищує максимально дозволене значення (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ є меншим мінімально дозволеного значення (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ не є правильним значенням.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Хибна адреса е-пошти: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Введіть адресу";
+"LOCATION_ERROR_TITLE" = "Не вдалося знайти вказану адресу";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не вдається відстежити ваше поточне місце. Введіть адресу або перейдіть у місце з кращим сигналом GPS, якщо це можливо.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "У доступі до Служби локації відмовлено. Надайте цій програмі дозвіл на використання Служби локації у Параметрах.";
+"LOCATION_ERROR_GEOCODE" = "Не вдається знайти збіги для введеної адреси. Перевірте правильність адреси.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ви або не підключені до Інтернету, або перевищили ліміт запитів пошуку адреси. Якщо ви не підключені до Інтернету, увімкніть Wi-Fi, щоб відповісти на це питання, пропустити це питання, якщо кнопка пропуску доступна, або повертайтесь до опитування, коли підключитесь до Інтернету. У іншому випадку повторіть спробу через кілька хвилин.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Текстовий вміст перевищує ліміт: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "На розділеному екрані Камера недоступна.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Е-пошта";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "syabluchko@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Пароль";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Підтвердити";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль ще раз";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Паролі не збігаються.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Додаткова інформація";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Степан";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Яблучко";
+"GENDER_FORM_ITEM_TITLE" = "Стать";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Виберіть стать";
+"DOB_FORM_ITEM_TITLE" = "Дата народження";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Виберіть дату";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Перевірка";
+"VERIFICATION_STEP_TITLE" = "Перевірка е-пошти";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Торкніть наведене нижче посилання, якщо ви не отримали лист перевірки і хочете, щоб його надіслали повторно.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Надіслати лист перевірки ще раз";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Ім’я";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Забули пароль?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Введіть код допуску";
+"PASSCODE_CONFIRM_MESSAGE" = "Підтвердьте код";
+"PASSCODE_SAVED_MESSAGE" = "Код допуску збережено";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Код допуску прийнято";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Введіть старий код допуску";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Введіть новий код допуску";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Підтвердіть свій новий код";
+"PASSCODE_INVALID_ALERT_TITLE" = "Неправильний код допуску";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Незбіг кодів. Спробуйте ще раз.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Будь ласка, засвідчіть своїм Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Помилка Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Дозволено тільки цифри.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор перебігу вводу коду допуску";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено: %@ із %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Не вдалося додати елемент до В'язки.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Не вдалося оновити елемент В'язки.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Не вдалося видалити елемент із В'язки.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Не вдалося знайти елемент В'язки.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A(II)+";
+"BLOOD_TYPE_A-" = "A(II)-";
+"BLOOD_TYPE_AB+" = "AB(IV)+";
+"BLOOD_TYPE_AB-" = "AB(IV)-";
+"BLOOD_TYPE_B+" = "B(III)+";
+"BLOOD_TYPE_B-" = "B(III)-";
+"BLOOD_TYPE_O+" = "0(I)+";
+"BLOOD_TYPE_O-" = "0(I)-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Жіноча";
+"GENDER_MALE" = "Чоловіча";
+"GENDER_OTHER" = "Інше";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Ні";
+"BOOL_YES" = "Так";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Торкніть, щоб відповісти";
+"NULL_ANSWER" = "Вибрати відповідь";
+"PLACEHOLDER_IMAGE_CHOICES" = "Торкніть, щоб вибрати";
+"PLACEHOLDER_LONG_TEXT" = "Торкніть, щоб написати";
+
+/* Button titles */
+"BUTTON_AGREE" = "Погоджуюсь";
+"BUTTON_CANCEL" = "Скасувати";
+"BUTTON_OK" = "ОК";
+"BUTTON_CLEAR" = "Очистити";
+"BUTTON_DISAGREE" = "Не погоджуюсь";
+"BUTTON_DONE" = "Готово";
+"BUTTON_GET_STARTED" = "Розпочати";
+"BUTTON_LEARN_MORE" = "Докладніше";
+"BUTTON_NEXT" = "Далі";
+"BUTTON_SKIP" = "Пропустити";
+"BUTTON_SKIP_QUESTION" = "Пропустити питання";
+"BUTTON_START_TIMER" = "Запустити таймер";
+"BUTTON_OPTION_SAVE" = "Пізніше";
+"BUTTON_OPTION_DISCARD" = "Відхилити результати";
+"BUTTON_OPTION_STOP_TASK" = "Завершити завдання";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Початок операції через";
+"TASK_COMPLETE_TITLE" = "Операцію завершено";
+"TASK_COMPLETE_TEXT" = "Ваші дані буде проаналізовано, і ви отримаєте сповіщення, коли будуть готові результати.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Зробити знімок";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Зробити знімок ще раз";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Камери не знайдено.  Неможливо виконати цей крок.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Щоб завершити цей крок, надайте цій програмі доступ до камери в Параметрах.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Для зроблених знімків не вказано вихідного каталогу.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не вдається зберегти зроблений знімок.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Фітнес";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Відстань (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Пульс (уд./хв)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Сидіть зручно протягом %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Ідіть якомога швидше протягом %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Ця операція оцінює ваш серцевий ритм і обчислює, скільки ви можете пройти за %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Ідіть надворі своєю найшвидшою ходою протягом %1$@. Завершивши, зручно сядьте і відпочивайте протягом %2$@. Щоб почати, торкніть «Розпочати».";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Хода і рівновага";
+"WALK_INTRO_TEXT" = "Ця операція оцінює вашу ходу і рівновагу під час ходіння і стояння. Не продовжуйте, якщо ви не можете безпечно ходити без допомоги.";
+"WALK_INTRO_2_TEXT_%ld" = "Знайдіть місце, де ви можете безпечно зробити без допомоги інших %ld кроків по прямій.";
+"WALK_INTRO_2_DETAIL" = "Покладіть свій телефон у кишеню або сумку, і виконуйте аудіоінструкції.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Тепер не рухайтесь %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Стійте, не рухаючись, протягом %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Розверніться і йдіть туди, де ви почали.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Зробіть до %ld кроків по прямій.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Темп торкання";
+"TAPPING_INTRO_TEXT" = "Ця операція оцінює вашу швидкість торкання.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Покладіть телефон на рівну поверхню. На екрані з’являться дві кнопки для %@. Двома пальцями однієї руки по черзі торкайте кнопки якомога швидше.";
+"TAPPING_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"TAP_BUTTON_TITLE" = "Торкнути";
+"TOTAL_TAPS_LABEL" = "Всього дотиків";
+"TAPPING_INSTRUCTION" = "Торкайте кнопки якомога швидше двома пальцями.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Голос";
+"AUDIO_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"AUDIO_INSTRUCTION" = "Вимовляйте «А-а-а-а» у мікрофон якомога довше.";
+"AUDIO_INTRO_TEXT" = "Зробіть глибокий подих і вимовляйте «А-а-а-а» у мікрофон якомога довше. Тримайте однакову гучність голосу, щоб смуги звуку залишалися синіми.";
+"AUDIO_INTENDED_USE" = "Ця операція оцінює ваш голос, записуючи його через мікрофон внизу вашого телефону.";
+"AUDIO_TOO_LOUD_LABEL" = "Надто гучно";
+"AUDIO_GENERIC_ERROR_LABEL" = "Не вдається записати аудіо";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Аудіометрія";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ця операція вимірює вашу здатність чути різні звуки.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Перед початком приєднайте і надягніть навушники.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Зараз ви почуєте звук. Регулюйте гучність кнопками на боці вашого пристрою.\n\nТоркніть кнопку, коли ви готові починати.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Торкайте кнопку щоразу, коли почуєте звук.";
+"TONE_LABEL_%@_LEFT" = "%@ Гц, зліва";
+"TONE_LABEL_%@_RIGHT" = "%@ Гц, справа";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Просторова пам’ять";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ця операція оцінює вашу короткострокову пам’ять, коли вам потрібно повторити порядок загоряння %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "квітки";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "квітки";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Деякі %@ будуть загорятися по черзі. Торкайте ці %@ у такому самому порядку загоряння.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Деякі %@ будуть загорятися по черзі. Торкайте %@ у зворотному порядку їх загоряння.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Щоб почати, торкніть «Розпочати», потім уважно слідкуйте.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Рахунок";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Слідкуйте, як загоряються %@";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Торкайте %@ у порядку, у якому вони загоряються";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Торкайте %@ у зворотному порядку";
+"MEMORY_GAME_COMPLETE_TITLE" = "Послідовність завершено";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Щоб продовжити, торкніть «Далі»";
+"MEMORY_GAME_FAILED_TITLE" = "Повторити спробу";
+"MEMORY_GAME_FAILED_MESSAGE" = "У вас не вийшло вкластися у цей час. Торкніть «Далі», щоб продовжити.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Час вийшов";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "У вас вийшов час.\nТоркніть «Далі», щоб продовжити.";
+"MEMORY_GAME_COMPLETE" = "Гру завершено";
+"MEMORY_GAME_PAUSED_TITLE" = "Припинено";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Щоб продовжити, торкніть «Далі»";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Час реакції";
+"REACTION_TIME_TASK_INTENDED_USE" = "Ця операція оцінює час, потрібний вам, щоб зреагувати на візуальну команду.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Трясніть пристроєм в будь-який бік, щойно на екрані з’явиться синя точка. Вас попросять зробити це кілька разів: %D.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %@ із %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Швидко трусніть пристроєм, коли з’явиться синє коло";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Ханойська вежа";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Цей тест оцінює вашу здібність до розв’язання головоломок.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Перенесіть весь стос на виділену платформу мінімальною кількістю ходів.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Розв’яжіть головоломку";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Кількість ходів: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Я не можу розв’язати цю головоломку";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Ходіння за часом";
+"TIMED_WALK_INTRO_DETAIL" = "Цей тест оцінює роботу ваших нижніх кінцівок.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Знайдіть місце, краще надворі, де ви можете якомога швидко і безпечно пройти близько %@ по прямій. Не зменшуйте швидкість, доки не перетнете фінішну лінію.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Торкніть «Далі», щоб почати.";
+"TIMED_WALK_FORM_TITLE" = "Допоміжний пристрій";
+"TIMED_WALK_FORM_TEXT" = "Вживайте однаковий допоміжний засіб для всіх тестів.";
+"TIMED_WALK_QUESTION_TEXT" = "Ви носите гомілкостопний біопротез?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Ви користуєтесь допоміжними засобами?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут і виберіть відповідь";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Немає";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Однобічна тростина";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Однобічна милиця";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Двобічна тростина";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Двобічна милиця";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Ходунки/ролятор";
+"TIMED_WALK_INSTRUCTION_%@" = "Пройдіть до %@ по прямій.";
+"TIMED_WALK_INSTRUCTION_2" = "Розверніться і йдіть туди, де ви почали.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Завершивши, торкніть «Готово».";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "СТСЗТ";
+"PVSAT_TITLE" = "ВТСЗТ";
+"PAVSAT_TITLE" = "ВСТСЗТ";
+"PASAT_INTRO_TEXT" = "Слуховий тест на складання у заданому темпі вимірює швидкість обробки вами слухової інформації та вашу здібність до обчислення.";
+"PVSAT_INTRO_TEXT" = "Візуальний тест на складання у заданому темпі вимірює швидкість обробки вами візуальної інформації та вашу здібність до обчислення.";
+"PAVSAT_INTRO_TEXT" = "Слуховий і візуальний тест на складання у заданому темпі вимірює швидкість обробки вами слухової і візуальної інформації та вашу здібність до обчислення.";
+"PSAT_INTRO_TEXT_2_%@" = "Кожні %@ с будуть відображатися однозначні числа.\nВам потрібно додавати кожне нове число до попереднього.\nЗауважте, що потрібно обчислювати суму лише двох останніх чисел, а не загальну суму всіх чисел.";
+"PSAT_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"PSAT_INITIAL_INSTRUCTION" = "Запам’ятайте цю першу цифру.";
+"PSAT_INSTRUCTION" = "Додайте це нове число до попереднього.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Кілковий тест на %@ отворів";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Цей тест оцінює функцію ваших верхніх кінцівок, коли вам потрібно покласти кілок в отвір. Вас попросять зробити це %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Буде перевірено вашу ліву і праву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Буде перевірено вашу праву і ліву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок в отвір лівою рукою.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок в отвір правою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок за лінію лівою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок за лінію правою рукою.";
+"HOLE_PEG_TEST_TEXT" = "Візьміть кілок двома пальцями.";
+"HOLE_PEG_TEST_TEXT_2" = "Підніміть пальці, щоб опустити кілок.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не вдалося вилучити достатньо файлів журналів, щоб досягти порогу";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Помилка задання атрибуту";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Файл не позначено як видалений (не позначено як відвантажений)";
+"ERROR_DATALOGGER_MULTIPLE" = "Кілька помилок під час вилучення журналів";
+"ERROR_RECORDER_NO_DATA" = "Не знайдено жодних зібраних даних.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не задано вихідний каталог";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Немає даних";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Назад";
+
+"AX_IMAGE_ILLUSTRATION" = "Ілюстрація %@";
+
+"AX_SIGNVIEW_LABEL" = "Спеціальне поле для підпису";
+"AX_SIGNVIEW_HINT" = "Торкніть екран і рухайте пальцем, щоб поставити підпис";
+"AX_SIGNVIEW_SIGNED" = "Підписано";
+"AX_SIGNVIEW_UNSIGNED" = "Без підпису";
+
+"AX_SELECTED" = "Вибрано";
+"AX_UNSELECTED" = "Вибір скасовано";
+
+"AX_SLIDER_LABEL" = "Повзунок відповіді. Діапазон від %@ до %@";
+"AX_UNLABELED_IMAGE" = "Зображення без мітки";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Почати завдання";
+
+"AX.MEMORY.TILE.ACTIVE" = "активна";
+"AX.MEMORY.TILE.CORRECT" = "правильно";
+"AX.MEMORY.TILE.INCORRECT" = "неправильноб";
+"AX.MEMORY.TILE.QUIESCENT" = "неактивний";
+"AX.MEMORY.TILE.LABEL" = "Клітинка тесту на пам’ять";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Перегляд знімку";
+"AX_IMAGE_CAPTURED_LABEL" = "Зроблений знімок";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Неможливо розмістити диск розміру %@ на диск розміру %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Ціль";
+"AX_TOWER_OF_HANOI_TOWER" = "Вежа";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Торкніть двічі, щоб розмістити диск";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Торкніть двічі, щоб вибрати верхній диск";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
+
+"AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
+"AX_GRAPH_AND_SEPARATOR" = " і ";
+"AX_GRAPH_POINT_%@" = "Точка: %@";

@@ -38,6 +38,7 @@
 #import "ORKSkin.h"
 #import "ORKScaleSliderView.h"
 #import "ORKScaleRangeDescriptionLabel.h"
+#import "ORKScaleRangeImageView.h"
 
 
 @implementation ORKScaleSlider {
@@ -86,7 +87,7 @@
 // Tracked here: https://github.com/ResearchKit/ResearchKit/issues/67
 - (UIView *)thumbImageSubview {
     UIView *thumbImageSubview = nil;
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
     CGRect trackRect = [self trackRectForBounds:bounds];
     CGRect thumbRect = [self thumbRectForBounds:bounds trackRect:trackRect value:self.value];
     for (UIView *subview in self.subviews) {
@@ -118,12 +119,20 @@
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     BOOL pointInside = NO;
     if (_vertical) {
-        // In vertical mode, we need to ignore the touch area for the needed extra width
+        
         const CGFloat desiredSliderWidth = 44.0;
-        const CGFloat actualWidth = [self bounds].size.width;
-        const CGFloat centerX = actualWidth / 2;
-        if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
-            pointInside = [super pointInside:point withEvent:event];
+        
+        if (_textChoices) {
+            if (point.y > (self.bounds.size.width - desiredSliderWidth) / 2) {
+                pointInside = [super pointInside:point withEvent:event];
+            }
+        } else {
+            // In vertical mode, we need to ignore the touch area for the needed extra width
+            const CGFloat actualWidth = self.bounds.size.width;
+            const CGFloat centerX = actualWidth / 2;
+            if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
+                pointInside = [super pointInside:point withEvent:event];
+            }
         }
     } else {
         pointInside = [super pointInside:point withEvent:event];
@@ -146,22 +155,22 @@
     if (touchPoint.x < 0) {
         touchPoint.x = 0;
     }
-    CGRect trackRect = [self trackRectForBounds:[self bounds]];
+    CGRect trackRect = [self trackRectForBounds:self.bounds];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
-    CGFloat newValue = position * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
+    CGFloat newValue = position * (self.maximumValue - self.minimumValue) + self.minimumValue;
     if (_numberOfSteps > 0) {
-        CGFloat stepSize = 1.0/_numberOfSteps;
-        NSUInteger steps = round(position/stepSize);
+        CGFloat stepSize = 1.0 / _numberOfSteps;
+        NSUInteger steps = round(position / stepSize);
         
-        newValue = stepSize*steps * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
+        newValue = stepSize*steps * (self.maximumValue - self.minimumValue) + self.minimumValue;
     }
     [self setValue:newValue animated:YES];
 }
 
-static CGFloat kLineWidth = 1.0;
+static CGFloat LineWidth = 1.0;
 - (void)drawRect:(CGRect)rect {
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
     CGRect trackRect = [self trackRectForBounds:bounds];
     CGFloat centerY = bounds.size.height / 2.0;
     
@@ -170,11 +179,11 @@ static CGFloat kLineWidth = 1.0;
     if (_numberOfSteps > 0) {
         
         UIBezierPath *path = [[UIBezierPath alloc] init];
-        [path setLineWidth:kLineWidth];
+        [path setLineWidth:LineWidth];
         
         for (int discreteOffset = 0; discreteOffset <= _numberOfSteps; ++discreteOffset) {
-            CGFloat x = trackRect.origin.x + (trackRect.size.width-kLineWidth)*discreteOffset/_numberOfSteps;
-            x += kLineWidth/2; // Draw in center of line (center of pixel on 1x devices)
+            CGFloat x = trackRect.origin.x + (trackRect.size.width - LineWidth) * discreteOffset / _numberOfSteps;
+            x += LineWidth / 2; // Draw in center of line (center of pixel on 1x devices)
             [path moveToPoint:CGPointMake(x, centerY - 3.5)];
             [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
         }
@@ -183,10 +192,10 @@ static CGFloat kLineWidth = 1.0;
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
 
-static CGFloat kPadding = 2.0;
+static const CGFloat Padding = 2.0;
 - (CGRect)trackRectForBounds:(CGRect)bounds {
-    CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
-    CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
+    CGFloat centerY = (bounds.size.height / 2.0) - (LineWidth / 2.0);
+    CGRect rect = CGRectMake(bounds.origin.x + Padding, centerY, bounds.size.width - 2 * Padding, 1.0);
     return rect;
 }
 
@@ -199,7 +208,7 @@ static CGFloat kPadding = 2.0;
         return rect;
     }
     
-    CGFloat centerX = (value - [self minimumValue]) / ([self maximumValue] - [self minimumValue]) * trackRect.size.width + trackRect.origin.x;
+    CGFloat centerX = (value - self.minimumValue) / (self.maximumValue - self.minimumValue) * trackRect.size.width + trackRect.origin.x;
     rect.origin.x = centerX - rect.size.width / 2.0;
     
     return rect;
@@ -227,8 +236,18 @@ static CGFloat kPadding = 2.0;
     // Include the range description labels if they are set.
     if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
         minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
-        maximumValue = [maximumValue stringByAppendingFormat:@", %@", sliderView.rightRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@, ", sliderView.rightRangeDescriptionLabel.text];
     }
+    
+    // Include the range image accessibilty hints if they are set.
+    if (sliderView.leftRangeImageView.image.accessibilityHint.length > 0) {
+        minimumValue = [minimumValue stringByAppendingString:sliderView.leftRangeImageView.image.accessibilityHint];
+    }
+    if (sliderView.rightRangeImageView.image.accessibilityHint.length > 0) {
+        maximumValue = [maximumValue stringByAppendingString:sliderView.rightRangeImageView.image.accessibilityHint];
+    }
+    
+    
     return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 
@@ -237,6 +256,9 @@ static CGFloat kPadding = 2.0;
     // no value (nor a default value), hence we shouldn't return one to VO.
     if (!self.showThumb) {
         return nil;
+    } else if (self.textChoices) {
+        ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value - 1];
+        return textChoice.text;
     }
     return [self _axFormattedValue:self.value];
 }
@@ -262,6 +284,8 @@ static CGFloat kPadding = 2.0;
 }
 
 - (void)axBumpValue:(BOOL)increment {
+    self.showThumb = YES;
+    
     // If there's no fixed number of steps, we rely on the default implementation.
     if (_numberOfSteps == 0) {
         (increment ? [super accessibilityIncrement] : [super accessibilityDecrement]);
@@ -275,10 +299,10 @@ static CGFloat kPadding = 2.0;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
+static const NSTimeInterval TimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
-    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [self accessibilityValue]);
+    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > TimeoutSpeakThreshold ) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self.accessibilityValue);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }
 }

@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Persetujuan";
+"CONSENT_NAME_GIVEN" = "Nama Depan";
+"CONSENT_NAME_FAMILY" = "Nama Belakang";
+"CONSENT_NAME_PLACEHOLDER" = "Diperlukan";
+"CONSENT_REVIEW_TITLE" = "Tinjauan";
+"CONSENT_REVIEW_INSTRUCTION" = "Tinjau formulir di bawah, dan ketuk Setuju jika Anda siap melanjutkan.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Tinjauan";
+"CONSENT_SIGNATURE_TITLE" = "Tanda Tangan";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Silakan tanda tangan menggunakan jari Anda pada baris di bawah.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan di Sini";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Halaman %1$ld dari %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Selamat Datang";
+"CONSENT_SECTION_DATA_GATHERING" = "Pengumpulan Data";
+"CONSENT_SECTION_PRIVACY" = "Privasi";
+"CONSENT_SECTION_DATA_USE" = "Penggunaan Data";
+"CONSENT_SECTION_STUDY_SURVEY" = "Survei Studi";
+"CONSENT_SECTION_STUDY_TASKS" = "Tugas Studi";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Komitmen Waktu";
+"CONSENT_SECTION_WITHDRAWING" = "Penarikan Diri";
+"CONSENT_LEARN_MORE_TITLE" = "Lebih Lanjut";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Lebih lanjut mengenai cara data dikumpulkan";
+"LEARN_MORE_DATA_USE" = "Lebih lanjut mengenai cara data digunakan";
+"LEARN_MORE_PRIVACY" = "Lebih lanjut mengenai cara privasi dan identitas Anda dilindungi";
+"LEARN_MORE_WELCOME" = "Pelajari lebih lanjut mengenai studi terlebih dahulu";
+"LEARN_MORE_STUDY_SURVEY" = "Lebih lanjut mengenai survei studi";
+"LEARN_MORE_TIME_COMMITMENT" = "Lebih lanjut mengenai dampak studi terhadap waktu Anda";
+"LEARN_MORE_TASKS" = "Lebih lanjut mengenai tugas yang bersangkutan";
+"LEARN_MORE_WITHDRAWING" = "Lebih lanjut mengenai penarikan diri";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Pilihan Berbagi";
+"CONSENT_SHARE_WIDELY_%@" = "Bagikan data saya dengan %@ dan peneliti berkualifikasi di seluruh dunia";
+"CONSENT_SHARE_ONLY_%@" = "Hanya bagikan data saya dengan %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data penelitian dari partisipasi Anda dalam studi ini.\n\nBerbagi data studi yang dikodekan dengan lebih banyak pihak (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan yang akan datang.";
+"LEARN_MORE_CONSENT_SHARING" = "Pelajari berbagi data lebih lanjut";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nama %@ (dicetak)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Tanda Tangan %@";
+"CONSENT_DOC_LINE_DATE" = "Tanggal";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Langkah %1$@ dari %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Nilai tidak sah";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ melebihi nilai maksimum yang diizinkan (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ kurang dari nilai minimum yang diizinkan (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ bukan nilai yang sah.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Alamat email tidak sah: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
+"LOCATION_ERROR_TITLE" = "Tidak Dapat Menemukan Alamat yang Ditetapkan";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menemukan lokasi Anda saat ini. Ketikkan alamat atau pindah ke lokasi dengan sinyal GPS yang lebih baik jika memungkinkan.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Akses ke layanan lokasi telah ditolak. Izinkan app ini untuk menggunakan layanan lokasi melalui Pengaturan.";
+"LOCATION_ERROR_GEOCODE" = "Tidak dapat menemukan hasil untuk alamat yang dimasukkan. Pastikan bahwa alamat sah.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan Wi-Fi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survey setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Konten teks melebihi panjang maksimum: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera tidak tersedia dalam layar terpisah.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Kata Sandi";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata sandi";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Konfirmasi";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata sandi lagi";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Kata sandi tidak cocok.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informasi Tambahan";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Jenis Kelamin";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pilih jenis kelamin";
+"DOB_FORM_ITEM_TITLE" = "Tanggal Lahir";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tanggal";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifikasi";
+"VERIFICATION_STEP_TITLE" = "Verifikasi Email Anda";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ketuk tautan di bawah jika Anda tidak menerima email verifikasi dan ingin email dikirimkan lagi.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Kirim Ulang Email Verifikasi";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Masuk";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Lupa kata sandi?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Masukkan kode sandi";
+"PASSCODE_CONFIRM_MESSAGE" = "Konfirmasi kode sandi";
+"PASSCODE_SAVED_MESSAGE" = "Kode sandi disimpan";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kode sandi disahkan";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang lama";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang baru";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Konfirmasi kode sandi baru Anda";
+"PASSCODE_INVALID_ALERT_TITLE" = "Kode Sandi Salah";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kode sandi tidak cocok. Coba lagi.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Sahkan dengan Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Kesalahan Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya karakter numerik yang diizinkan.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator kemajuan entri kode sandi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ dari %@ digit dimasukkan";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Tidak dapat menambah item Rantai Kunci.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Tidak dapat memperbarui item Rantai Kunci.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Tidak dapat menghapus item Rantai Kunci.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Tidak dapat menemukan item Rantai Kunci.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Wanita";
+"GENDER_MALE" = "Pria";
+"GENDER_OTHER" = "Lainnya";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Tidak";
+"BOOL_YES" = "Ya";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Ketuk untuk menjawab";
+"NULL_ANSWER" = "Pilih jawaban";
+"PLACEHOLDER_IMAGE_CHOICES" = "Ketuk untuk memilih";
+"PLACEHOLDER_LONG_TEXT" = "Ketuk untuk menulis";
+
+/* Button titles */
+"BUTTON_AGREE" = "Setuju";
+"BUTTON_CANCEL" = "Batalkan";
+"BUTTON_OK" = "OKE";
+"BUTTON_CLEAR" = "Bersihkan";
+"BUTTON_DISAGREE" = "Tidak Setuju";
+"BUTTON_DONE" = "Selesai";
+"BUTTON_GET_STARTED" = "Mulai";
+"BUTTON_LEARN_MORE" = "Lebih lanjut";
+"BUTTON_NEXT" = "Berikutnya";
+"BUTTON_SKIP" = "Lewati";
+"BUTTON_SKIP_QUESTION" = "Lewati pertanyaan ini";
+"BUTTON_START_TIMER" = "Mulai Timer";
+"BUTTON_OPTION_SAVE" = "Simpan untuk Nanti";
+"BUTTON_OPTION_DISCARD" = "Hapus Hasil";
+"BUTTON_OPTION_STOP_TASK" = "Akhiri Tugas";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Memulai aktivitas dalam";
+"TASK_COMPLETE_TITLE" = "Aktivitas Selesai";
+"TASK_COMPLETE_TEXT" = "Data Anda akan dianalisis dan Anda akan diberi tahu setelah hasil Anda siap.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ambil Gambar";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ambil Ulang Gambar";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera tidak ditemukan.  Langkah ini tidak dapat diselesaikan.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk menyelesaikan langkah ini, izinkan app ini untuk mengakses kamera di Pengaturan.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tidak ada direktori output yang ditentukan untuk gambar yang diambil.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Gambar yang diambil tidak dapat disimpan.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Kebugaran";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Jarak (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Detak Jantung (bpm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Duduk dengan nyaman selama %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Jalan secepat mungkin selama %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Aktivitas ini memonitor detak jantung Anda dan mengukur seberapa jauh Anda dapat berjalan dalam %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Jalan di luar ruangan dengan laju secepat mungkin selama %1$@. Saat Anda selesai, duduk dan istirahat dengan nyaman selama %2$@. Untuk memulai, ketuk Mulai.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Gaya dan Keseimbangan";
+"WALK_INTRO_TEXT" = "Aktivitas ini mengukur gaya dan keseimbangan Anda saat Anda berjalan dan berdiri. Jangan lanjutkan jika Anda tidak dapat berjalan dengan aman tanpa bantuan.";
+"WALK_INTRO_2_TEXT_%ld" = "Temukan tempat yang memungkinkan Anda untuk berjalan kaki dengan aman tanpa bantuan sejauh sekitar %ld langkah dalam garis lurus.";
+"WALK_INTRO_2_DETAIL" = "Masukkan telepon Anda ke saku atau kantong dan ikuti instruksi audio.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Sekarang berdiri selama %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Berdiri selama %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Putar balik, dan kembali ke tempat Anda memulai.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Berjalan kaki hingga %ld langkah dalam garis lurus.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Kecepatan Mengetuk";
+"TAPPING_INTRO_TEXT" = "Aktivitas ini mengukur kecepatan mengetuk Anda.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Letakkan telepon Anda di permukaan rata. Dua tombol akan muncul di layar Anda selama %@. Dengan menggunakan dua jari di tangan yang sama, ketuk tombol secara bergantian secepat Anda bisa.";
+"TAPPING_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"TAP_BUTTON_TITLE" = "Ketuk";
+"TOTAL_TAPS_LABEL" = "Total Ketukan";
+"TAPPING_INSTRUCTION" = "Ketuk tombol secepat Anda bisa menggunakan dua jari.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Suara";
+"AUDIO_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"AUDIO_INSTRUCTION" = "Katakan “Aaaaah” di mikrofon selama mungkin.";
+"AUDIO_INTRO_TEXT" = "Tarik nafas dalam-dalam dan katakan “Aaaaah” ke mikrofon selama Anda bisa. Pertahankan volume suara sehingga bar audio tetap berwarna biru.";
+"AUDIO_INTENDED_USE" = "Tes ini mengevaluasi suara Anda dengan merekamnya saat Anda berbicara melalui mikrofon di bagian bawah telepon Anda.";
+"AUDIO_TOO_LOUD_LABEL" = "Terlalu Keras";
+"AUDIO_GENERIC_ERROR_LABEL" = "Tidak dapat merekam audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengukur kemampuan Anda untuk mendengar bunyi yang berbeda.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, sambungkan dan pakai headphone Anda.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di bagian samping perangkat Anda.\n\nKetuk tombol jika Anda siap untuk memulai.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Ketuk tombol setiap kali Anda mulai mendengar bunyi.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Memori Spasial";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktivitas ini mengukur memori spasial jangka pendek dengan meminta Anda untuk mengulangi urutan menyalanya %@.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bunga";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bunga";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut sesuai urutan menyalanya.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut berkebalikan dengan urutan menyalanya.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Untuk memulai, ketuk Mulai, lalu perhatikan dengan saksama.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Skor";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Lihat %@ menyala";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Ketuk %@ sesuai urutan menyalanya";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Ketuk %@ dalam urutan terbalik";
+"MEMORY_GAME_COMPLETE_TITLE" = "Urutan Selesai";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Untuk melanjutkan, ketuk Berikutnya";
+"MEMORY_GAME_FAILED_TITLE" = "Coba Lagi";
+"MEMORY_GAME_FAILED_MESSAGE" = "Anda tidak berhasil menyelesaikannya. Ketuk Berikutnya untuk melanjutkan.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Waktu Habis";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Anda kehabisan waktu.\nKetuk Berikutnya untuk melanjutkan.";
+"MEMORY_GAME_COMPLETE" = "Permainan Selesai";
+"MEMORY_GAME_PAUSED_TITLE" = "Dijeda";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Untuk melanjutkan, ketuk Berikutnya";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Waktu Reaksi";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi waktu yang Anda butuhkan untuk merespons isyarat visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goyang perangkat ke arah mana pun segera setelah titik biru muncul di layar. Anda akan diminta untuk melakukannya sebanyak %D kali.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %@ dari %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyang perangkat dengan cepat saat lingkaran biru muncul";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Menara Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi kemampuan Anda dalam menyelesaikan teka-teki.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Pindahkan seluruh tumpukan ke platform yang disorot, semakin sedikit gerakan maka semakin baik.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Selesaikan Teka-Teki";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Jumlah Gerakan: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Saya tidak dapat menyelesaikan teka-teki ini";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Berjalan Kaki dibatasi Waktu";
+"TIMED_WALK_INTRO_DETAIL" = "Aktivitas ini mengukur fungsi ekstrem rendah Anda.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Carilah tempat, lebih baik di luar ruangan, di mana Anda dapat berjalan sekitar %@ dengan lurus secepat mungkin, namun tetap aman. Jangan kurangi kecepatan hingga Anda tiba di garis akhir.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Ketuk Berikutnya untuk memulai.";
+"TIMED_WALK_FORM_TITLE" = "Perangkat bantuan";
+"TIMED_WALK_FORM_TEXT" = "Gunakan perangkat bantuan yang sama untuk tiap pengujian.";
+"TIMED_WALK_QUESTION_TEXT" = "Apakah Anda mengenakan ortosis gelang kaki?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Apakah Anda menggunakan perangkat bantuan?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Ketuk di sini untuk memilih jawaban.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Tiada";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Tongkat Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Kruk Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Tongkat Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Kruk Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Berjalan kaki hingga %@ dalam garis lurus.";
+"TIMED_WALK_INSTRUCTION_2" = "Putar balik, dan kembali ke tempat Anda memulai.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Ketuk Selesai setelah selesai.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Pengujian Paced Auditory Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori Anda.";
+"PVSAT_INTRO_TEXT" = "Pengujian Paced Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung visual Anda.";
+"PAVSAT_INTRO_TEXT" = "Pengujian Paced Auditory dan Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori dan visual Anda.";
+"PSAT_INTRO_TEXT_2_%@" = "Satu digit ditampilkan setiap %@ detik.\nAnda harus segera menambahkan tiap digit baru ke digit sebelumnya.\nPerhatian, jangan hitung total keseluruhan, tetapi hanya jumlah dua angka terakhir.";
+"PSAT_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"PSAT_INITIAL_INSTRUCTION" = "Ingat digit pertama ini.";
+"PSAT_INSTRUCTION" = "Tambahkan digit baru ini ke digit sebelumnya.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan diminta untuk melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kanan Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kanan Anda.";
+"HOLE_PEG_TEST_TEXT" = "Ambil sumbat dengan dua jari.";
+"HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan sumbat.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat menghapus cukup file log untuk mencapai ambang";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Kesalahan saat mengatur atribut";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "File tidak ditandai sebagai dihapus (tidak ditandai sebagai diunggah)";
+"ERROR_DATALOGGER_MULTIPLE" = "Beberapa kesalahan saat menghapus log";
+"ERROR_RECORDER_NO_DATA" = "Tidak ada data terkumpul yang ditemukan.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Tidak ada direktori output yang ditentukan";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Tidak Ada Data";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Kembali";
+
+"AX_IMAGE_ILLUSTRATION" = "Ilustrasi %@";
+
+"AX_SIGNVIEW_LABEL" = "Bidang tanda tangan yang ditetapkan";
+"AX_SIGNVIEW_HINT" = "Sentuh layar dan gerakkan jari Anda untuk menandatangani";
+"AX_SIGNVIEW_SIGNED" = "Ditandatangani";
+"AX_SIGNVIEW_UNSIGNED" = "Tidak ditandatangani";
+
+"AX_SELECTED" = "Dipilih";
+"AX_UNSELECTED" = "Tidak dipilih";
+
+"AX_SLIDER_LABEL" = "Penggeser respons. Berkisar dari %@ hingga %@";
+"AX_UNLABELED_IMAGE" = "Gambar tidak dilabeli";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Mulai tugas";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktif";
+"AX.MEMORY.TILE.CORRECT" = "benar";
+"AX.MEMORY.TILE.INCORRECT" = "salah";
+"AX.MEMORY.TILE.QUIESCENT" = "diam";
+"AX.MEMORY.TILE.LABEL" = "Ubin permainan memori";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Pratinjau gambar";
+"AX_IMAGE_CAPTURED_LABEL" = "Gambar terambil";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat meletakkan disk dengan ukuran %@ pada disk dengan ukuran %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
+"AX_TOWER_OF_HANOI_TOWER" = "Menara";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Ketuk dua kali untuk meletakkan disk";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Ketuk dua kali untuk memilih disk teratas";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Memiliki disk dengan ukuran %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
+
+"AX_GRAPH_RANGE_FORMAT" = "Berkisar dari %@ hingga %@";
+"AX_GRAPH_AND_SEPARATOR" = " dan ";
+"AX_GRAPH_POINT_%@" = "Poin: %@";

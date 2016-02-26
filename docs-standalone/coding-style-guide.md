@@ -1,6 +1,6 @@
 ## ResearchKit Coding Style Guide
 
-Always follow [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
+Always follow the [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
 
 
 ### 1. Visual Style
@@ -17,7 +17,11 @@ Use groups of 4 spaces (instead of tabs) to denote different indentation levels.
 
 ##### Spaces in Declarations
 
-In `@interface` declarations, there should be one space between: the subclass name; the colon symbol; the superclass name; the adopted protocols section; any adopted protocols.
+Single spaces should be used in the cases detailed in this section. Don't use double spaces and don't add spaces elsewhere.
+
+---
+
+In `@interface` declarations, there should be one space between: the subclass name; the colon symbol; the superclass name; the adopted protocols section; and any adopted protocols.
 
     // DO
     @interface ORKProtocolAdoptingClass : NSObject <ORKProtocolA, ORKProtocolB>
@@ -29,45 +33,46 @@ In `@interface` declarations, there should be one space between: the subclass na
 
 ---
 
-In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attributes; the property type; and the pointer asterisk.
+In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attribute; the property type; and the pointer asterisk.
 
     // DO
-    @property (nonatomic, weak) UIView<DelegateProtocol> *delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol> delegate;
 
     // DON'T
-    @property (nonatomic,weak) UIView <DelegateProtocol> *delegate;
-    @property(nonatomic, weak) UIView <DelegateProtocol> *delegate;
-    @property (nonatomic, weak) UIView<DelegateProtocol>*delegate;
+    @property(nonatomic, weak, nullable) id <ORKDelegateProtocol> delegate;
+    @property (nonatomic,weak,nullable) id <ORKDelegateProtocol> delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol>delegate;
 
 ---
 
-In *method* declarations, there should be one space between: the `-` or `+` character and the `(returnType)`; an argument type and its pointer asterisk.
+In *method* declarations, there should be one space between: the `-` or `+` character and the `(returnType)`; and any argument type and its pointer asterisk.
 
     // DO
     - (void)doSomethingWithString:(NSString *)string number:(NSNumber *)number
 
     // DON'T
-    - (void)doSomethingWithString:(NSString*)string number:(NSNumber *)number
     -(void)doSomethingWithString:(NSString *)string number:(NSNumber *)number
+    - (void)doSomethingWithString:(NSString*)string number:(NSNumber *)number
     - (void)doSomethingWithString:(NSString *)string  number:(NSNumber *)number
+
 
 ##### Spaces between Operators
 
 Use spaces if the operator has two or more arguments:
 
     // DO
-    a += 2
-    a = 5
-    z == 3
-    aFlag && aBoolean
-    zOrder > 4
+    steps += 2
+    calories = 5
+    calories == caloryGoal
+    goalAchieved && notReminded
+    flightsClimbed > 4
     success ? YES : NO
 
 Omit the space when the operator takes only one argument:
 
     // DO
-    a++
-    &var
+    calories++
+    &error
     !success
 
 
@@ -111,32 +116,32 @@ Always use brackets even when the conditional code is only one statement.
 
 #### 1.3. Line Wrapping
 
-Hard wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`. 
+Hard-wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`.
 
-When hard wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
+When hard-wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
 
     // DO
-    - (void)doSomethingWith:(Foo *)foo
-                       rect:(NSRect)rect
-                   interval:(float)interval {
+    - (void)doSomethingWithFoo:(Foo *)foo
+                           bar:(Bar *)bar
+                      interval:(NSTimeInterval)interval {
         ...
 
 Method invocations should be formatted much like method declarations. Invocations should have all arguments on one line or have one argument per line, with colons aligned.
 
     // DO
-    [myObject doFooWith:arg1 name:arg2 error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar interval:interval];
 
-    [myObject doFooWith:arg1
-                   name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo
+                             bar:bar
+                        interval:interval];
 
     // DON'T
-    [myObject doFooWith:arg1 name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar
+                        interval:interval];
 
-    [myObject doFooWith:arg1
-              name:arg2
-              error:arg3];
+    [myObject doSomethingWithFoo:foo
+              bar:bar
+              interval:interval];
 
 #### 1.4. Appledoc Header Comments
 
@@ -149,7 +154,7 @@ Follow these guidelines when writing *appledoc comments*:
 - When you name classes or methods, enclose them in backticks so *appledoc* creates a reference (`` `ORKStep` is ...``).
 - For multiline code examples, surround them with a triple backtick (```) for cross references within the code block not to be automatically generated.
 - Don't use abbreviations such as *e.g.* or *i.e.* in the documentation.
-- Hard wrap comment lines at column 100.
+- Hard-wrap comment lines at column 100.
 - Read the latest *ResearchKit* documentation for inspiration and try to follow the same literary style.
 
 #### 1.5. Newlines
@@ -188,7 +193,159 @@ You can optionally use one (and only one) blank like to separate:
 - Groups of related statements in a single method implementation.
 
 
-#### 1.6. Header File Example
+
+### 2. Code Style
+
+#### 2.1. Variable Declarations
+
+Declare one variable per line even if they have the same type. In general it's a good idea to initialize primitive type variables with a reasonable value.
+
+    // DO
+    int floatVariable = -1;
+    double doubleVariable = 0.0;
+    int *cPointerVariable = NULL;
+    CGContextRef context = NULL;
+
+Strong, weak, and autoreleasing stack variables are [implicitly initialized with `nil`](https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW5) so you can either explicitly initialize them (with `nil` or any valid object) for visual homogeneity, or skip initializing them altogether.
+
+    // DO
+    id object = nil;
+    NSString *string = nil;
+    UIView *view = nil;
+    // ALSO OK
+    id object;
+    NSString *string;
+    UIView *view;
+
+When declaring pointers, there should be a space between the asterisk and the variable type, but none between the asterisk and the variable.
+
+    // DON'T
+    int* variablePointer2;
+    int* variablePointer, variable;
+    UIView* view;
+
+
+#### 2.2. Forward Declarations
+
+Use one line for each forward declarations:
+
+    // DO
+    @protocol ORKProtocol;
+    @protocol ORKAnotherProtocol;
+    @class ORKClass;
+    @class ORKAnotherClass;
+    @class ORKYetAnotherClass;
+
+    // DON'T
+    @protocol ORKProtocol, ORKAnotherProtocol;
+    @class ORKClass, ORKAnotherClass, ORKYetAnotherClass;
+
+
+#### 2.3. Constant Declarations
+
+If a constant is only used inside one method, declare it locally to that method. If a constant is used in several methods of a single class, declare it as a `static` constant in the class implementation file. If a constant is used from several files, declare it as an `extern` constant and prefix its name with a suitable `ORK*` prefix.
+
+Static or global constant names should start in uppercase. Constants should never start with the `k` prefix (that naming convention is deprecated). These rules also apply to `enum` value names.
+
+    // Method-local constant
+    - (void)animateView {
+        const CGFloat animationDuration = 0.2;
+        ...
+    }
+
+
+    // Class-local constant
+    static const CGFloat DefaultLineWidth = 10.0;
+    - (void)init {
+        if (self = [super init]) {
+            _lineWidth = DefaultLineWidth
+            ...
+        }
+        return self;
+    }
+
+    - (void)resetView {
+        _lineWidth = DefaultLineWidth
+        ...
+    }
+
+
+    // Global constant
+
+    // ORKSkin.h
+    ORK_EXTERN NSString *const ORKToolBarTintColorKey;
+    ORK_EXTERN const CGFloat ORKScreenMetricMaxDimension;
+
+    // ORKSkin.m
+    NSString *const ORKBackgroundColorKey = @"ORKBackgroundColorKey";
+    const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+
+
+    // Global enum
+    typedef NS_ENUM(NSInteger, ORKQuestionType) {
+        ORKQuestionTypeNone,
+        ORKQuestionTypeScale,
+        ...
+    } ORK_ENUM_AVAILABLE;
+
+
+
+#### 2.4. Dot Notation
+
+Dot notation (`object.property`) is a syntax for using properties in a convenient and compact way. Accessing or setting a property through dot notation is completely equivalent to calling the property accessor methods:
+
+    - (PropertyType *)property
+    - (void)setProperty:(PropertyType *)property
+
+    // DO
+    NSString *oldName = user.name;              // Equivalent to 'NSString *oldName = [user name]'
+    user.name = @"John Appleseed";              // Equivalent to '[user setName:@"John Appleseed"]'
+
+Dot notation should be used when accessing proper properties, but should be avoided when invoking regular methods. Use the syntax corresponding to the official documentation or relevant header declaration.
+
+    // DO
+    CGRect viewFrame = view.frame;                                      // Declared as a property
+    NSUInteger numberOfItems = array.count;                             // Declared as a property since iOS 8
+    NSUInteger stringLength = string.length;                            // Declared as a property since iOS 8
+    [autoreleasePool drain];                                            // A method
+    NSArray<NSLayoutConstraint *> *constraints = [view constraints];    // A method
+
+    // DON'T
+    CGRect viewFrame = [view frame];                                    // 'frame' is not declared as a method
+    NSUInteger numberOfItems = [array count];                           // 'count' is no longer declared as a method
+    NSUInteger stringLength = [string length];                          // 'length' is no longer declared as a method
+    autoreleasePool.drain;                                              // Not a property
+    NSArray<NSLayoutConstraint *> *constraints = view.constraints;      // Not a property
+
+#### 2.5. Nullability Annotations
+
+Always include [*nullability annotations*](https://developer.apple.com/swift/blog/?id=25) in header files.
+
+Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt any property or argument declaration that can take `nil` values out by annotating it as `nullable`.
+
+Do not add *nullability annotations* to implementation files.
+
+See **Section 3** for a nullability-annotated *Header File Example*.
+
+
+#### 2.6. Lightweight Generics
+
+Always use [*lightweight generic parametrization*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID173) when declaring `NSArray`, `NSSet` and `NSDictionary` types. This tells the compiler which kind of objects these *Foundation collection classes* will contain. It improves type-safety and interoperability with *Swift*.
+
+Use the same whitespace rules as when declaring *protocol conformance*:
+
+    // DO
+    @property NSArray<ORKStep *> *steps;
+    @property NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask *> *tasks;
+
+    // DON'T
+    @property NSArray <ORKStep *>*steps;
+    @property NSDictionary<NSString *,ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask*> *tasks;
+
+
+### 3. Header File Example
 
     /*
      Copyright (c) 2015, John Appleseed. All rights reserved.
@@ -213,10 +370,10 @@ You can optionally use one (and only one) blank like to separate:
 
     /**
      appledoc method comment.
-     
+
      @param parameterA   The first parameter.
      @param parameterB   The second parameter.
-     
+
      @return A new MyClass.
      */
     - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
@@ -225,6 +382,11 @@ You can optionally use one (and only one) blank like to separate:
      appledoc property comment.
      */
     @property (nonatomic, copy, readonly) NSString *aProperty;
+
+    /**
+     appledoc property comment.
+     */
+    @property (nonatomic, copy, nullable) NSString *aNullableProperty;
 
     @end
 
@@ -235,69 +397,6 @@ You can optionally use one (and only one) blank like to separate:
     ORK_CLASS_AVAILABLE
     @interface ORKMyOtherClass : ORKMyClass
 
-    @end 
+    @end
 
     NS_ASSUME_NONNULL_END
-
-
-### 2. Code Style
-
-#### 2.1. Variable Declarations
-
-Declare one variable per line even if they have the same type. In general it's a good idea to initialize primitive type variables with a reasonable value.
-
-    // DO
-    int floatVariable = -1;
-    double doubleVariable = 0.0;
-    int *cPointerVariable = NULL;
-
-Strong, weak, and autoreleasing stack variables are [implicitly initialized with `nil`](https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW5) so you can either explicitly initialize them (with `nil` or any valid object) for visual homogeneity, or skip initializing them altogether.
-
-    // DO
-    id object = nil;
-    NSString *string = nil;
-    UIView *view = nil;
-    // ALSO OK
-    id object;
-    NSString *string;
-    UIView *view;
-
-When declaring pointers, there should be a space between the asterisk and the variable type, but none between the asterisk and the variable.
-
-    // DON'T
-    int* variablePointer2;
-    int* variablePointer, variable;
-
-
-#### 2.2. Forward Declarations
-
-Use one line for each forward declarations:
-
-    // DO
-    @protocol forwardProtocol;
-    @class aClass;
-    @class anotherClass;
-    @class yetAnotherClass;
-
-    // DON'T
-    @protocol forwardProtocol, anotherProtocol;
-    @class aClass, anotherClass, yetAnotherClass;
-
-
-#### 2.3. Dot Notation
-
-Dot notation is syntactic sugar added in Objective-C 2.0. Its usage is equivalent to using the auto-synthesized methods:
-
-    - (PropertyType *)property
-    - (void)setProperty:(PropertyType *)property
-
-Dot notation may be used when accessing proper properties, but should not be used to invoke regular methods.
-
-    // DO
-    oldName = myObject.name;    // Equivalent to 'oldName = [myObject name]'
-    myObject.name = @"Alice";   // Equivalent to '[myObject setName:@"Alice"]'
-
-    // DON'T
-    NSUInteger numberOfItems = array.count;     // Not a property
-    NSUInteger stringLength = string.length;    // Not a property
-    array.release;                              // Not a property

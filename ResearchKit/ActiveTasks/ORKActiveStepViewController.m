@@ -103,7 +103,7 @@
     [super viewDidLoad];
     
     _activeStepView = [[ORKActiveStepView alloc] initWithFrame:self.view.bounds];
-    [_activeStepView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    _activeStepView.translatesAutoresizingMaskIntoConstraints = NO;
     [_activeStepView setCustomView:_customView];
     [self updateContinueButtonItem];
     _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
@@ -111,9 +111,17 @@
     _activeStepView.continueSkipContainer.continueEnabled = _finished;
     [self.view addSubview:_activeStepView];
     
-    NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[s]|" options:0 metrics:nil views:@{@"s":_activeStepView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tg][s]|" options:0 metrics:nil views:@{@"s":_activeStepView,@"tg":self.topLayoutGuide}]];
-    [self.view addConstraints:constraints];
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[activeStepView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:@{@"activeStepView": _activeStepView}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topLayoutGuide][activeStepView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:@{@"activeStepView": _activeStepView,
+                                                                                       @"topLayoutGuide": self.topLayoutGuide}]];
+    [NSLayoutConstraint activateConstraints:constraints];
     
     [self prepareStep];
 }
@@ -155,7 +163,10 @@
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([[self activeStep] shouldStartTimerAutomatically]) {
+        if(self.started){
+            // Should call resume instead of start when the task has been started.
+            [self resume];
+        } else if ([[self activeStep] shouldStartTimerAutomatically]) {
             [self start];
         }
     });
@@ -313,7 +324,7 @@
 
 - (void)suspend {
     ORK_Log_Debug(@"%@",self);
-    if (self.finished || ! self.started) {
+    if (self.finished || !self.started) {
         return;
     }
     
@@ -325,7 +336,7 @@
 
 - (void)resume {
     ORK_Log_Debug(@"%@",self);
-    if (self.finished || ! self.started) {
+    if (self.finished || !self.started) {
         return;
     }
     
@@ -351,7 +362,7 @@
     if (self.activeStep.shouldVibrateOnFinish) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
-    if (! self.activeStep.startsFinished) {
+    if (!self.activeStep.startsFinished) {
         if (self.activeStep.shouldContinueOnFinish) {
             [self goForward];
         }

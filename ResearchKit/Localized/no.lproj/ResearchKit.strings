@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Samtykke";
+"CONSENT_NAME_GIVEN" = "Fornavn";
+"CONSENT_NAME_FAMILY" = "Etternavn";
+"CONSENT_NAME_PLACEHOLDER" = "Kreves";
+"CONSENT_REVIEW_TITLE" = "Se gjennom";
+"CONSENT_REVIEW_INSTRUCTION" = "Se gjennom skjemaet nedenfor, og trykk på Enig hvis du er klar til å fortsette.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Se gjennom";
+"CONSENT_SIGNATURE_TITLE" = "Signatur";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signer med fingeren på linjen nedenfor.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Signer her";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Side %1$ld av %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Velkommen";
+"CONSENT_SECTION_DATA_GATHERING" = "Datainnsamling";
+"CONSENT_SECTION_PRIVACY" = "Personvern";
+"CONSENT_SECTION_DATA_USE" = "Databruk";
+"CONSENT_SECTION_STUDY_SURVEY" = "Undersøkelse";
+"CONSENT_SECTION_STUDY_TASKS" = "Oppgaver";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Tidsbruk";
+"CONSENT_SECTION_WITHDRAWING" = "Avslutte studien";
+"CONSENT_LEARN_MORE_TITLE" = "Finn ut mer";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Finn ut mer om hvordan data samles inn";
+"LEARN_MORE_DATA_USE" = "Finn ut mer om hvordan dataene brukes";
+"LEARN_MORE_PRIVACY" = "Finn ut mer om hvordan personvernet og identiteten din beskyttes";
+"LEARN_MORE_WELCOME" = "Finn ut mer om studien";
+"LEARN_MORE_STUDY_SURVEY" = "Finn ut mer om undersøkelsen";
+"LEARN_MORE_TIME_COMMITMENT" = "Finn ut mer om hvor mye tid studien krever";
+"LEARN_MORE_TASKS" = "Finn ut mer om oppgavene i studien";
+"LEARN_MORE_WITHDRAWING" = "Finn ut mer om å avslutte studien";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Delingsvalg";
+"CONSENT_SHARE_WIDELY_%@" = "Del dataene dine med %@ og erfarne forskere over hele verden";
+"CONSENT_SHARE_ONLY_%@" = "Del data kun med %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ vil motta data fra undersøkelsen du deltar i.\n\nEn videre deling av dine kodede opplysninger (navn og lignende fjernes) kan komme til nytte både i denne og framtidige undersøkelser.";
+"LEARN_MORE_CONSENT_SHARING" = "Finn ut mer om datadeling";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Navnet til %@ (store bokstaver)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Signaturen til %@";
+"CONSENT_DOC_LINE_DATE" = "Dato";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Trinn %1$@ av %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ugyldig verdi";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ overstiger høyest tillatte verdi (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ er mindre enn lavest tillatte verdi (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ er ikke en gyldig verdi.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-postadresse: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Skriv inn en adresse";
+"LOCATION_ERROR_TITLE" = "Fant ikke angitt adresse";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Finner ikke din nåværende posisjon. Skriv inn adressen, eller gå om mulig til et sted med bedre GPS-signal.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Du har ikke gitt appen tilgang til stedstjenester. Du kan endre tilgangen til stedstjenester i Innstillinger.";
+"LOCATION_ERROR_GEOCODE" = "Fant ingen treff for angitt adresse. Kontroller at adressen er riktig og prøv igjen.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Du er enten ikke koblet til Internett, eller du har oversteget grensen for antall adressesøk. Hvis du ikke er koblet til Internett, må du slå på Wi-Fi for å svare på spørsmålet. Du kan hoppe over spørsmålet hvis hopp over-knappen er tilgjengelig, eller komme tilbake til undersøkelsen når du er koblet til Internett. Prøv ellers igjen om noen minutter.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksten overstiger makslengden: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kameraet er ikke tilgjengelig på delt skjerm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-post";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Passord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Oppgi passord";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekreft";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Oppgi passordet igjen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passordene er ikke like.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Tilleggsinformasjon";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Kjønn";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Angi kjønn";
+"DOB_FORM_ITEM_TITLE" = "Fødselsdato";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Angi dato";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifisering";
+"VERIFICATION_STEP_TITLE" = "Verifiser e-postadressen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på koblingen nedenfor hvis du ikke mottok verifiseringsmeldingen på e-post og vil sende den på nytt.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Send verifiseringsmelding på nytt";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Logg på";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Glemt passordet?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Oppgi kode";
+"PASSCODE_CONFIRM_MESSAGE" = "Bekreft kode";
+"PASSCODE_SAVED_MESSAGE" = "Kode arkivert";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kode godkjent";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Oppgi den gamle koden";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Angi den nye koden";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekreft den nye koden";
+"PASSCODE_INVALID_ALERT_TITLE" = "Koden er feil";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kodene er ikke like. Prøv igjen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentiser med Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-feil";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tillatt.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Framdriftsindikator for inntasting av kode";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ sifre oppgitt";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunne ikke legge til nøkkelringobjekt.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Kunne ikke oppdatere nøkkelringobjekt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Kunne ikke slette nøkkelringobjekt.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Fant ikke nøkkelringobjekt.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "O+";
+"BLOOD_TYPE_O-" = "O-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Kvinne";
+"GENDER_MALE" = "Mann";
+"GENDER_OTHER" = "Annet";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nei";
+"BOOL_YES" = "Ja";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Trykk for å svare";
+"NULL_ANSWER" = "Velg et svar";
+"PLACEHOLDER_IMAGE_CHOICES" = "Trykk for å velge";
+"PLACEHOLDER_LONG_TEXT" = "Trykk for å skrive";
+
+/* Button titles */
+"BUTTON_AGREE" = "Enig";
+"BUTTON_CANCEL" = "Avbryt";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Fjern";
+"BUTTON_DISAGREE" = "Uenig";
+"BUTTON_DONE" = "Ferdig";
+"BUTTON_GET_STARTED" = "Start";
+"BUTTON_LEARN_MORE" = "Finn ut mer";
+"BUTTON_NEXT" = "Neste";
+"BUTTON_SKIP" = "Hopp over";
+"BUTTON_SKIP_QUESTION" = "Hopp over spørsmålet";
+"BUTTON_START_TIMER" = "Start tidtaker";
+"BUTTON_OPTION_SAVE" = "Spar til senere";
+"BUTTON_OPTION_DISCARD" = "Forkast resultater";
+"BUTTON_OPTION_STOP_TASK" = "Avslutt oppgave";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Starter aktivitet om";
+"TASK_COMPLETE_TITLE" = "Aktivitet fullført";
+"TASK_COMPLETE_TEXT" = "Dataene vil bli analysert, og du blir varslet når resultatene er klare.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ta bilde";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ta nytt bilde";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Finner ikke kamera. Trinnet kunne ikke fullføres.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "For å fullføre trinnet må du først gi appen tilgang til kameraet i Innstillinger.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Du har ikke angitt en katalog for bildene du tar.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Bildet kunne ikke arkiveres.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Kondisjon";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Strekning (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Puls (slag/min)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Sitt komfortabelt i %@.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gå så fort du kan i %@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Denne aktiviteten leser av pulsen din og måler hvor langt du kan gå på %1$@.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gå utendørs så fort du kan i %1$@. Når du er ferdig, setter du deg og hviler komfortabelt i %2$@.Trykk på Start for å begynne.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Balanse og gange";
+"WALK_INTRO_TEXT" = "Denne aktiviteten måler balansen og gangen din mens du går og står i ro. Ikke fortsett hvis du ikke kan gå trygt uten hjelp.";
+"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå omtrent %ld skritt i rett linje.";
+"WALK_INTRO_2_DETAIL" = "Legg telefonen i lommen eller en veske, og følg lydinstruksjonene.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå stille i %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Stå stille i %@.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Snu og gå tilbake der du startet.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå opptil %ld skritt i rett linje.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Trykkhastighet";
+"TAPPING_INTRO_TEXT" = "Denne aktiviteten måler trykkhastigheten din.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Legg telefonen på et flatt underlag. To knapper vises på skjermen i %@. Bruk to fingre på samme hånd og trykk vekselvis på knappene så fort du kan.";
+"TAPPING_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"TAP_BUTTON_TITLE" = "Trykk";
+"TOTAL_TAPS_LABEL" = "Trykk totalt";
+"TAPPING_INSTRUCTION" = "Trykk på knappene så fort du kan med to fingre.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Stemme";
+"AUDIO_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"AUDIO_INSTRUCTION" = "Si «aaa» inn i mikrofonen så lenge du klarer.";
+"AUDIO_INTRO_TEXT" = "Trekk pusten dypt inn og si «aaa» inn i mikrofonen så lenge du klarer. Hold et jevnt volum slik at lydstolpene forblir blå.";
+"AUDIO_INTENDED_USE" = "Aktiviteten vil evaluere stemmen din ved å ta den opp i mikrofonen i nedre kant av telefonen.";
+"AUDIO_TOO_LOUD_LABEL" = "For høyt";
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke ta opp lyd";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviteten måler hvor godt du hører ulike lyder.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Koble til og ta på deg hodetelefonene før du begynner.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på knappen når du er klar til å begynne.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Trykk på knappen hver gang du hører en lyd.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktiviteten måler den visuelle korttidshukommelsen din ved å be deg gjenta i hvilken rekkefølge %@ lyser.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomstrene";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomstrene";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i samme rekkefølge som de lyser opp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i omvendt rekkefølge av hvordan de lyser opp.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Begynn ved å trykke på Start, og følg så nøye med.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Poeng";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Se %@ lyse opp";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Trykk på %@ i samme rekkefølge som de lyste";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Trykk på %@ i omvendt rekkefølge";
+"MEMORY_GAME_COMPLETE_TITLE" = "Mønster fullført";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Trykk på Neste for å fortsette";
+"MEMORY_GAME_FAILED_TITLE" = "Prøv igjen";
+"MEMORY_GAME_FAILED_MESSAGE" = "Testbesvarelsen var ikke helt riktig. Trykk på Neste for å fortsette.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "Tiden er ute";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Du gikk over tiden.\nTrykk på Neste for å fortsette.";
+"MEMORY_GAME_COMPLETE" = "Spill ferdig";
+"MEMORY_GAME_PAUSED_TITLE" = "Pause";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Trykk på Neste for å fortsette";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaksjonstid";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aktiviteten måler hvor lang tid det tar før du reagerer på visuelle signaler.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rist enheten så snart du ser den blå prikken vises på skjermen. Du vil bli bedt om å gjøre dette %D ganger.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %@ av %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten fort når den blå sirkelen vises";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktiviteten vurderer evnen din til å løse oppgaver.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytt hele stabelen til den markerte plattformen med så få trekk som mulig.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs oppgaven";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antall trekk: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg klarer ikke å løse oppgaven";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gå på tid";
+"TIMED_WALK_INTRO_DETAIL" = "Denne aktiviteten måler funksjonen i nedre kroppshalvdel.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %@ i rett linje, så raskt som mulig. Ikke senk farten til etter at du har passert mållinjen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Trykk på Neste for å begynne.";
+"TIMED_WALK_FORM_TITLE" = "Hjelpemiddel";
+"TIMED_WALK_FORM_TEXT" = "Bruk samme hjelpemiddel i hver test.";
+"TIMED_WALK_QUESTION_TEXT" = "Bruker du en ankel- eller fotortose?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Bruker du et hjelpemiddel?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Trykk her for å velge et svar.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Én stokk";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Én krykke";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "To stokker";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "To krykker";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstol/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gå opptil %@ i rett linje.";
+"TIMED_WALK_INSTRUCTION_2" = "Snu og gå tilbake der du startet.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Ferdig når du har fullført oppgaven.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT-testen (Paced Auditory Serial Addition Test) måler hvor raskt du behandler lydinformasjon og evnen din til å gjøre utregninger.";
+"PVSAT_INTRO_TEXT" = "PVSAT-testen (Paced Visual Serial Addition Test) måler hvor raskt du behandler synsinformasjon og evnen din til å gjøre utregninger.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT-testen (Paced Auditory and Visual Serial Addition Test) måler hvor raskt du behandler lyd- og synsinformasjon og evnen din til å gjøre utregninger.";
+"PSAT_INTRO_TEXT_2_%@" = "Enkeltsifre vises hvert %@. sekund.\nDu må legge det nye sifferet sammen med det som ble vist rett før.\nMerk at du ikke skal summere alle tallene, bare de to som ble vist sist.";
+"PSAT_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"PSAT_INITIAL_INSTRUCTION" = "Husk dette første sifferet.";
+"PSAT_INSTRUCTION" = "Legg dette nye sifferet til det forrige.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-hulls pluggtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en plugg i et hull for å måle funksjonen i armene dine. Du vil bli bedt om å gjøre det %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både høyre og venstre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plasser pluggen i hullet med venstre hånd.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plasser pluggen i hullet med høyre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plasser pluggen bak streken med venstre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Plasser pluggen bak streken med høyre hånd.";
+"HOLE_PEG_TEST_TEXT" = "Bruk to fingre til å løfte opp pluggen.";
+"HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for å slippe pluggen.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Feil ved angivelse av attributt";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Fil er ikke merket som slettet (ikke merket som opplastet)";
+"ERROR_DATALOGGER_MULTIPLE" = "Flere feil ved fjerning av logger";
+"ERROR_RECORDER_NO_DATA" = "Fant ingen innsamlede data.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen katalog angitt";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Tilbake";
+
+"AX_IMAGE_ILLUSTRATION" = "Illustrasjon av %@";
+
+"AX_SIGNVIEW_LABEL" = "Eget signaturfelt";
+"AX_SIGNVIEW_HINT" = "Berør skjermen og flytt fingeren for å signere";
+"AX_SIGNVIEW_SIGNED" = "Signert";
+"AX_SIGNVIEW_UNSIGNED" = "Ikke signert";
+
+"AX_SELECTED" = "Markert";
+"AX_UNSELECTED" = "Ikke markert";
+
+"AX_SLIDER_LABEL" = "Svarskyveknapp fra %@ til %@";
+"AX_UNLABELED_IMAGE" = "Bilde uten etikett";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Start oppgave";
+
+"AX.MEMORY.TILE.ACTIVE" = "aktiv";
+"AX.MEMORY.TILE.CORRECT" = "riktig";
+"AX.MEMORY.TILE.INCORRECT" = "feil";
+"AX.MEMORY.TILE.QUIESCENT" = "inaktiv";
+"AX.MEMORY.TILE.LABEL" = "Brikke i bildelottospill";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Forhåndsvisning av bilde";
+"AX_IMAGE_CAPTURED_LABEL" = "Tatt bilde";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke plassere skive med størrelse %@ på skive med størrelse %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+"AX_TOWER_OF_HANOI_TOWER" = "Tårn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dobbelttrykk for å plassere skiven";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dobbelttrykk for å velge øverste skive";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
+
+"AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
+"AX_GRAPH_AND_SEPARATOR" = " og ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

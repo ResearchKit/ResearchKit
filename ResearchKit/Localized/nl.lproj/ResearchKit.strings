@@ -1,0 +1,391 @@
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* Informed consent process. */
+"CONSENT_NAME_TITLE" = "Toestemming";
+"CONSENT_NAME_GIVEN" = "Voornaam";
+"CONSENT_NAME_FAMILY" = "Achternaam";
+"CONSENT_NAME_PLACEHOLDER" = "Vereist";
+"CONSENT_REVIEW_TITLE" = "Bekijk";
+"CONSENT_REVIEW_INSTRUCTION" = "Lees het formulier hieronder door en tik op 'Akkoord' als u gereed bent om verder te gaan.";
+"CONSENT_REVIEW_ALERT_TITLE" = "Bekijk";
+"CONSENT_SIGNATURE_TITLE" = "Handtekening";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Onderteken met uw vinger op de onderstaande lijn.";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Zet hier uw handtekening";
+"CONSENT_PAGE_NUMBER_FORMAT" = "Pagina %1$ld van %2$ld";
+
+/* Consent section titles. */
+"CONSENT_SECTION_WELCOME" = "Welkom";
+"CONSENT_SECTION_DATA_GATHERING" = "Gegevens verzamelen";
+"CONSENT_SECTION_PRIVACY" = "Privacy";
+"CONSENT_SECTION_DATA_USE" = "Gegevensgebruik";
+"CONSENT_SECTION_STUDY_SURVEY" = "Onderzoeksenquête";
+"CONSENT_SECTION_STUDY_TASKS" = "Onderzoekstaken";
+"CONSENT_SECTION_TIME_COMMITMENT" = "Benodigde tijd";
+"CONSENT_SECTION_WITHDRAWING" = "Afzien van deelname";
+"CONSENT_LEARN_MORE_TITLE" = "Meer informatie";
+
+/* Consent section learn more */
+"LEARN_MORE_DATA_GATHERING" = "Meer informatie over het verzamelen van gegevens";
+"LEARN_MORE_DATA_USE" = "Meer informatie over het gebruik van gegevens";
+"LEARN_MORE_PRIVACY" = "Meer informatie over de bescherming van uw privacy en identiteit";
+"LEARN_MORE_WELCOME" = "Meer informatie over het onderzoek";
+"LEARN_MORE_STUDY_SURVEY" = "Meer informatie over de onderzoeksenquête";
+"LEARN_MORE_TIME_COMMITMENT" = "Meer informatie over hoe lang het onderzoek duurt";
+"LEARN_MORE_TASKS" = "Meer informatie over wat u moet doen";
+"LEARN_MORE_WITHDRAWING" = "Meer informatie over afzien van deelname";
+
+/* Consent sharing step */
+"CONSENT_SHARING_TITLE" = "Opties voor delen";
+"CONSENT_SHARE_WIDELY_%@" = "Deel mijn gegevens met %@ en gekwalificeerde onderzoekers wereldwijd";
+"CONSENT_SHARE_ONLY_%@" = "Deel mijn gegevens alleen met %@";
+"CONSENT_SHARING_DESCRIPTION_%@" = "De resultaten van uw deelname aan dit onderzoek worden naar %@ gestuurd.\n\nDoor de gecodeerde onderzoeksgegevens met anderen te delen (zonder persoonlijke gegevens zoals uw naam) kunt u helpen om dit en toekomstig onderzoek te verbeteren.";
+"LEARN_MORE_CONSENT_SHARING" = "Meer informatie over het delen van gegevens";
+
+/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Naam van %@ (voluit)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Handtekening van %@";
+"CONSENT_DOC_LINE_DATE" = "Datum";
+
+/* Progress indication (in navigation bar). */
+"STEP_PROGRESS_FORMAT" = "Stap %1$@ van %2$@";
+
+/* Alert for out of range values. */
+"RANGE_ALERT_TITLE" = "Ongeldige waarde";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ is hoger dan de maximaal toegestane waarde (%2$@).";
+"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is lager dan de minimaal toegestane waarde (%2$@).";
+"RANGE_ALERT_MESSAGE_OTHER" = "%@ is geen geldige waarde.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ongeldig e‑mailadres: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Voer een adres in";
+"LOCATION_ERROR_TITLE" = "Opgegeven adres niet gevonden";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "De huidige locatie kan niet worden bepaald. Typ een adres of ga indien nodig naar een plek met een beter GPS-signaal.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Toegang tot 'Locatievoorzieningen' is geweigerd. Ga naar Instellingen en geef deze app toestemming om 'Locatievoorzieningen' te gebruiken.";
+"LOCATION_ERROR_GEOCODE" = "Het ingevoerde adres is niet gevonden. Zorg dat u een geldig adres invoert.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "U bent niet verbonden met het internet of u hebt te vaak naar een adres gezocht. Zet om deze vraag te beantwoorden Wi‑Fi aan als u niet verbonden bent met het internet. U kunt deze vraag ook overslaan als er een knop 'Sla over' is of verdergaan met deze vragenlijst als de internetverbinding actief is. Of u kunt het over een paar minuten opnieuw proberen.";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekst overschrijdt maximale lengte: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera niet beschikbaar in gedeeld scherm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Wachtwoord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Voer wachtwoord in";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Herhaal";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Herhaal wachtwoord";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "De wachtwoorden komen niet overeen.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Aanvullende informatie";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Geslacht";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Kies een geslacht";
+"DOB_FORM_ITEM_TITLE" = "Geboortedatum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Kies een datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificatie";
+"VERIFICATION_STEP_TITLE" = "Verifieer uw e-mailadres";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tik op de koppeling hieronder als u geen verificatiemail hebt ontvangen en u deze opnieuw wilt laten versturen.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Stuur controlemail opnieuw";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggen";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Wachtwoord vergeten?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Voer toegangscode in";
+"PASSCODE_CONFIRM_MESSAGE" = "Herhaal toegangscode";
+"PASSCODE_SAVED_MESSAGE" = "Toegangscode bewaard";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Toegangscode geverifieerd";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Voer uw oude toegangscode in";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Voer uw nieuwe toegangscode in";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Herhaal uw nieuwe wachtwoord";
+"PASSCODE_INVALID_ALERT_TITLE" = "Toegangscode onjuist";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "De codes komen niet overeen. Probeer het opnieuw.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Log in met Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fout";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Alleen cijfertekens toegestaan.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode-invoer";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ van %@ cijfers ingevoerd";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden toegevoegd.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden bijgewerkt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden verwijderd.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Sleutelhangeronderdeel is onvindbaar.";
+
+/* Blood types */
+"BLOOD_TYPE_A+" = "A+";
+"BLOOD_TYPE_A-" = "A-";
+"BLOOD_TYPE_AB+" = "AB+";
+"BLOOD_TYPE_AB-" = "AB-";
+"BLOOD_TYPE_B+" = "B+";
+"BLOOD_TYPE_B-" = "B-";
+"BLOOD_TYPE_O+" = "0+";
+"BLOOD_TYPE_O-" = "0-";
+
+/* Gender values. */
+"GENDER_FEMALE" = "Vrouw";
+"GENDER_MALE" = "Man";
+"GENDER_OTHER" = "Anders";
+
+/* Boolean answer strings */
+"BOOL_NO" = "Nee";
+"BOOL_YES" = "Ja";
+
+/* Default placeholders to request answers in a questionnaire. */
+"PLACEHOLDER_TEXT_OR_NUMBER" = "Tik om te antwoorden";
+"NULL_ANSWER" = "Kies een antwoord";
+"PLACEHOLDER_IMAGE_CHOICES" = "Tik om te selecteren";
+"PLACEHOLDER_LONG_TEXT" = "Tik om te schrijven";
+
+/* Button titles */
+"BUTTON_AGREE" = "Akkoord";
+"BUTTON_CANCEL" = "Annuleer";
+"BUTTON_OK" = "OK";
+"BUTTON_CLEAR" = "Wis";
+"BUTTON_DISAGREE" = "Niet akkoord";
+"BUTTON_DONE" = "Gereed";
+"BUTTON_GET_STARTED" = "Start";
+"BUTTON_LEARN_MORE" = "Meer informatie";
+"BUTTON_NEXT" = "Volgende";
+"BUTTON_SKIP" = "Sla over";
+"BUTTON_SKIP_QUESTION" = "Sla deze vraag over";
+"BUTTON_START_TIMER" = "Start timer";
+"BUTTON_OPTION_SAVE" = "Bewaar voor later";
+"BUTTON_OPTION_DISCARD" = "Wis resultaten";
+"BUTTON_OPTION_STOP_TASK" = "Stop met taak";
+
+/* General active tasks. */
+"COUNTDOWN_LABEL" = "Activiteit begint over";
+"TASK_COMPLETE_TITLE" = "Activiteit voltooid";
+"TASK_COMPLETE_TEXT" = "Uw gegevens worden geanalyseerd. U ontvangt bericht als de resultaten gereed zijn.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Leg afbeelding vast";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Leg afbeelding opnieuw vast";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Geen camera gevonden. Deze stap kan niet worden voltooid.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Om deze stap te voltooien, moet u in Instellingen deze app toegang tot de camera geven.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Er is geen uitvoermap voor vastgelegde afbeeldingen opgegeven.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "De vastgelegde afbeelding kan niet worden bewaard.";
+
+/* Fitness active task. */
+"FITNESS_TASK_TITLE" = "Conditie";
+"FITNESS_DISTANCE_TITLE_FORMAT" = "Afstand (%@)";
+"FITNESS_HEARTRATE_TITLE" = "Hartslag (spm)";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "Ga %@ gemakkelijk zitten.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Loop %@ zo snel als u kunt.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Tijdens deze activiteit wordt uw hartslag gemeten en wordt gekeken hoe ver u in %1$@ kunt lopen.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Loop buiten %1$@ zo snel als u kunt. Ga daarna gemakkelijk zitten en rust %2$@ uit. Tik op 'Start' om te beginnen.";
+
+/* Short walk active task. */
+"WALK_TASK_TITLE" = "Tred en balans";
+"WALK_INTRO_TEXT" = "Tijdens deze activiteit worden uw tred en balans gemeten terwijl uw loopt en stilstaat. Ga niet verder als u niet veilig zelfstandig kunt lopen.";
+"WALK_INTRO_2_TEXT_%ld" = "Zoek een plek waar u veilig en zelfstandig ongeveer %ld stappen in een rechte lijn kunt zetten.";
+"WALK_INTRO_2_DETAIL" = "Stop uw iPhone in uw zak of tas en volg de audio-instructies.";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Sta nu %@ lang stil.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Sta %@ stil.";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "Draai om en loop terug naar het beginpunt.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Zet maximaal %ld stappen in een rechte lijn.";
+
+
+/* Tapping active task. */
+"TAPPING_TASK_TITLE" = "Tiksnelheid";
+"TAPPING_INTRO_TEXT" = "Tijdens deze activiteit wordt de snelheid waarmee u tikt gemeten.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Leg uw telefoon op een vlakke ondergrond. Er verschijnen %@ lang twee knoppen op het scherm. Tik zo snel mogelijk afwisselend met twee vingers van dezelfde hand op de knoppen.";
+"TAPPING_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TAP_BUTTON_TITLE" = "Tik";
+"TOTAL_TAPS_LABEL" = "Totaal aantal tikken";
+"TAPPING_INSTRUCTION" = "Tik zo snel mogelijk afwisselend met twee vingers op de knoppen.";
+
+
+/* Audio active task. */
+"AUDIO_TASK_TITLE" = "Stem";
+"AUDIO_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"AUDIO_INSTRUCTION" = "Zeg zo lang mogelijk 'aaaaah' in de microfoon.";
+"AUDIO_INTRO_TEXT" = "Haal diep adem en zeg zo lang mogelijk 'aaaaah' in de microfoon. Houd daarbij dezelfde geluidssterkte aan zodat de audiobalken blauw blijven.";
+"AUDIO_INTENDED_USE" = "Tijdens deze activiteit wordt uw stemgeluid gemeten door dit op te nemen met de microfoon aan de onderkant van uw telefoon.";
+"AUDIO_TOO_LOUD_LABEL" = "Te hard";
+"AUDIO_GENERIC_ERROR_LABEL" = "Geluid opnemen niet mogelijk";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toonaudiometrie";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Met deze activiteit wordt gemeten of u verschillende geluiden kunt horen.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sluit om te beginnen uw koptelefoon aan en zet deze op.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "U moet nu een toon horen. Pas het volume aan met de knoppen aan de zijkant van uw apparaat.\n\nTik op de knop wanneer u klaar bent om te beginnen.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tik op de knop telkens wanneer u een geluid begint te horen.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, links";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, rechts";
+
+/* Spatial span memory active task. */
+"SPATIAL_SPAN_MEMORY_TITLE" = "Ruimtelijk geheugen";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tijdens deze activiteit wordt uw ruimtelijk kortetermijngeheugen gemeten door u de volgorde waarin %@ oplichten te laten herhalen.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bloemen";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bloemen";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in dezelfde volgorde als waarin ze oplichtten.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in de omgekeerde volgorde als waarin ze oplichtten.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen en kijk goed.";
+"MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
+"MEMORY_GAME_SCORE_TITLE" = "Score";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Kijk hoe de %@ oplichten";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Tik op de %@ in de volgorde waarin ze oplichtten";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Tik in omgekeerde volgorde op de %@";
+"MEMORY_GAME_COMPLETE_TITLE" = "Volgorde voltooid";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "Tik op 'Ga door' om verder te gaan";
+"MEMORY_GAME_FAILED_TITLE" = "Probeer het opnieuw";
+"MEMORY_GAME_FAILED_MESSAGE" = "Het is niet helemaal gelukt dit keer. Tik op 'Volgende' om verder te gaan.";
+"MEMORY_GAME_TIMEOUT_TITLE" = "De tijd is om";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "U hebt het niet binnen de tijd gehaald.\nTik op 'Volgende' om verder te gaan.";
+"MEMORY_GAME_COMPLETE" = "Spel voltooid";
+"MEMORY_GAME_PAUSED_TITLE" = "Pauze";
+"MEMORY_GAME_PAUSED_MESSAGE" = "Tik op 'Ga door' om verder te gaan";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reactietijd";
+"REACTION_TIME_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe snel u op een visuele aanwijzing reageert.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schud het apparaat in een willekeurige richting zodra de blauwe stip op het scherm verschijnt. U wordt gevraagd om dit %D keer te doen.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %@ van %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schud het apparaat snel heen en weer als de blauwe cirkel verschijnt";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torens van Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe goed u puzzels kunt oplossen.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Verplaats de hele stapel in zo min mogelijk stappen naar het gemarkeerde platform.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Los de puzzel op";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Aantal stappen: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ik kan deze puzzel niet oplossen";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Lopen met tijdmeting";
+"TIMED_WALK_INTRO_DETAIL" = "Met deze activiteit wordt het functioneren van uw onderlichaam gemeten.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Zoek een plek, bij voorkeur buiten, waar u veilig zo snel mogelijk ongeveer %@ in een rechte lijn kunt lopen. Vertraag uw tempo niet totdat u voorbij de eindstreep bent.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tik op 'Volgende' om te beginnen.";
+"TIMED_WALK_FORM_TITLE" = "Loophulpmiddel";
+"TIMED_WALK_FORM_TEXT" = "Gebruik hetzelfde hulpmiddel voor elke test.";
+"TIMED_WALK_QUESTION_TEXT" = "Draagt u een enkel-voetorthese?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Gebruikt u een loophulpmiddel?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tik hier om een antwoord te kiezen.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Geen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Eén wandelstok";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Eén kruk";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Twee wandelstokken";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Twee krukken";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Looprek/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Loop max. %@ in een rechte lijn.";
+"TIMED_WALK_INSTRUCTION_2" = "Draai om en loop terug naar het beginpunt.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tik op 'Gereed' als u klaar bent.";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Met de PASAT (een stapsgewijze auditieve seriële opteltest) wordt gemeten hoe snel u hoorbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PVSAT_INTRO_TEXT" = "Met de PVSAT (een stapsgewijze visuele seriële opteltest) wordt gemeten hoe snel u zichtbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PAVSAT_INTRO_TEXT" = "Met de PAVSAT (een stapsgewijze auditieve en visuele seriële opteltest) wordt gemeten hoe snel u hoorbare en zichtbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PSAT_INTRO_TEXT_2_%@" = "Elke %@ seconden ziet en/of hoort u een cijfer.\nU moet elk nieuw cijfer optellen bij het vorige cijfer.\nLet op: u moet niet het totaal van alle cijfers berekenen, maar alleen de som van de laatste twee cijfers.";
+"PSAT_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"PSAT_INITIAL_INSTRUCTION" = "Onthoud dit eerste cijfer.";
+"PSAT_INSTRUCTION" = "Tel dit nieuwe cijfer op bij het vorige.";
+"PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-schijventest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tijdens deze activiteit meet u het functioneren van uw bovenste ledematen door een schijfje in een cirkel te plaatsen. Dit moet u %@ keer doen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Zowel uw linker- als rechterhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Zowel uw rechter- als linkerhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje achter de lijn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje achter de lijn.";
+"HOLE_PEG_TEST_TEXT" = "Pak het schijfje op met twee vingers.";
+"HOLE_PEG_TEST_TEXT_2" = "Til uw vingers op om het schijfje los te laten.";
+
+/* Potentially user visible error messages. */
+"ERROR_DATALOGGER_CREATE_FILE" = "Bestand aanmaken mislukt";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Er kunnen niet genoeg logbestanden worden verwijderd om de drempel te halen";
+"ERROR_DATALOGGER_SET_ATTRIBUTE" = "Fout bij kenmerk instellen";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Bestand niet gemarkeerd als verwijderd (niet gemarkeerd als geüpload)";
+"ERROR_DATALOGGER_MULTIPLE" = "Meerder fouten bij logbestanden verwijderen";
+"ERROR_RECORDER_NO_DATA" = "Geen verzamelde gegevens gevonden.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Geen uitvoerdirectory opgegeven";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Geen gegevens";
+
+/* Accessibility */
+"AX_BUTTON_BACK" = "Terug";
+
+"AX_IMAGE_ILLUSTRATION" = "Afbeelding van %@";
+
+"AX_SIGNVIEW_LABEL" = "Veld voor handtekening";
+"AX_SIGNVIEW_HINT" = "Beweeg uw vinger over het scherm om uw handtekening te zetten";
+"AX_SIGNVIEW_SIGNED" = "Ondertekend";
+"AX_SIGNVIEW_UNSIGNED" = "Niet ondertekend";
+
+"AX_SELECTED" = "Geselecteerd";
+"AX_UNSELECTED" = "Selectie opgeheven";
+
+"AX_SLIDER_LABEL" = "Antwoordschuifknop. Bereik van %@ tot %@";
+"AX_UNLABELED_IMAGE" = "Naamloze afbeelding";
+
+"AX_ANNOUNCE_BEGIN_TASK" = "Begin met taak";
+
+"AX.MEMORY.TILE.ACTIVE" = "actief";
+"AX.MEMORY.TILE.CORRECT" = "goed";
+"AX.MEMORY.TILE.INCORRECT" = "fout";
+"AX.MEMORY.TILE.QUIESCENT" = "inactief";
+"AX.MEMORY.TILE.LABEL" = "Tegel in geheugenspel";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Voorvertoning opname";
+"AX_IMAGE_CAPTURED_LABEL" = "Vastgelegde afbeelding";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "De schijf met grootte %@ kan niet op de schijf met grootte %@ worden geplaatst.";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Doel";
+"AX_TOWER_OF_HANOI_TOWER" = "Toren";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tik dubbel om de schijf te plaatsen";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tik dubbel om de bovenste schijf te selecteren";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Heeft schijf met groottes %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Leeg";
+
+"AX_GRAPH_RANGE_FORMAT" = "Bereik van %@ tot %@";
+"AX_GRAPH_AND_SEPARATOR" = " en ";
+"AX_GRAPH_POINT_%@" = "Punt: %@";

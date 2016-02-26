@@ -56,6 +56,10 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case TowerOfHanoi
+    case PSAT
+    case TimedWalk
+    case HolePegTest
     case ImageCapture
     case Survey
     case Consent
@@ -135,6 +139,18 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .TowerOfHanoi:
+                return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
+            
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
+            
+            case .TimedWalk:
+                return NSLocalizedString("Timed Walk", comment: "")
+            
+            case .HolePegTest:
+                return NSLocalizedString("Hole Peg Test Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -221,6 +237,10 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case TowerOfHanoi =                                         "TowerOfHanoi"
+        case PSATTask =                                             "PSATTask"
+        case TimedWalkTask =                                        "TimedWalkTask"
+        case HolePegTestTask =                                      "HolePegTestTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -305,6 +325,18 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return reactionTimeTask
+            
+            case .TowerOfHanoi:
+                return towerOfHanoiTask
+            
+            case .PSAT:
+                return PSATTask
+            
+            case .TimedWalk:
+                return TimedWalkTask
+            
+            case .HolePegTest:
+                return holePegTestTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -603,6 +635,25 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
+    private var towerOfHanoiTask: ORKTask {
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+    }
+    
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, presentationMode: (.Auditory | .Visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: nil)
+    }
+    
+    /// This task presents the Timed Walk pre-defined active task.
+    private var timedWalkTask: ORKTask {
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(String(Identifier.TimedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, includeAssistiveDeviceForm: true, options: [])
+    }
+    
+    /// This task presents the Hole Peg Test pre-defined active task.
+    private var holePegTestTask: ORKTask {
+        return ORKNavigableOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: nil)
+    }
+    
     private var exampleSuccessSound: UInt32 {
         var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!
         var soundID: SystemSoundID = 0
@@ -632,6 +683,8 @@ enum TaskListRow: Int, Printable {
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
         imageCaptureStep.optional = false
+        imageCaptureStep.accessibilityInstructions = NSLocalizedString("Your instructions for capturing the image", comment: "")
+        imageCaptureStep.accessibilityHint = NSLocalizedString("Captures the image visible in the preview", comment: "")
         
         imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
         

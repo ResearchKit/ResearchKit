@@ -50,13 +50,11 @@
 
 
 @implementation ORKConsentSignatureWrapperView {
-    NSArray *_constraints;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
-    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType)-ABS([[ORKTextButton defaultFont] descender])-1 };
+    _signatureView.layoutMargins = (UIEdgeInsets){.top = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, newWindow) - ABS([ORKTextButton defaultFont].descender) - 1};
     [self setNeedsLayout];
 }
 
@@ -72,6 +70,7 @@
             _clearButton.alpha = 0;
             [self addSubview:_clearButton];
         }
+        
         {
             _signatureView = [ORKSignatureView new];
             [_signatureView setClipsToBounds:YES];
@@ -84,11 +83,24 @@
             [self addSubview:_signatureView];
         }
         
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
-        
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
 }
 
 - (void)setClearButtonEnabled:(BOOL)clearButtonEnabled {
@@ -107,12 +119,8 @@
     }
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
+    // Static constraints
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_clearButton, _signatureView);
@@ -129,14 +137,6 @@
                                                         attribute:NSLayoutAttributeCenterX
                                                        multiplier:1.0
                                                          constant:0.0]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_signatureView
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1.0
-                                                         constant:ORKWidthForSignatureView(self.window)]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_clearButton]-(>=0)-|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -172,10 +172,7 @@
                                                        multiplier:1.0
                                                          constant:30.0]];
     
-    [self addConstraints:constraints];
-    _constraints = constraints;
-    
-    [super updateConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 @end
