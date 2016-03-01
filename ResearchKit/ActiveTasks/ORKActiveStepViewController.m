@@ -362,6 +362,9 @@
     if (self.activeStep.shouldVibrateOnFinish) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
+    if (self.activeStep.hasVoice && self.activeStep.finishedSpokenInstruction) {
+        [[ORKVoiceEngine sharedVoiceEngine] speakText:self.activeStep.finishedSpokenInstruction];
+    }
     if (!self.activeStep.startsFinished) {
         if (self.activeStep.shouldContinueOnFinish) {
             [self goForward];

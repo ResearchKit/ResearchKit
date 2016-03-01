@@ -95,6 +95,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ToneAudiometry
     case TowerOfHanoi
     case TwoFingerTappingInterval
+    case TremorTest
     
     class TaskListRowSection {
         var title: String
@@ -153,6 +154,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ToneAudiometry,
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
+                    .TremorTest
                 ]),
         ]}
     
@@ -258,6 +260,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .TwoFingerTappingInterval:
             return NSLocalizedString("Two Finger Tapping Interval", comment: "")
+            
+        case .TremorTest:
+            return NSLocalizedString("Tremor Test", comment: "")
         }
     }
     
@@ -402,6 +407,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ToneAudiometryTask
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
+        case TremorTestTask
     }
     
     // MARK: Properties
@@ -507,6 +513,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .TwoFingerTappingInterval:
             return twoFingerTappingIntervalTask
+            
+        case .TremorTest:
+            return tremorTestTask
         }
     }
 
@@ -1172,6 +1181,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents the Two Finger Tapping pre-defined active task.
     private var twoFingerTappingIntervalTask: ORKTask {
         return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(String(Identifier.TwoFingerTappingIntervalTask), intendedUseDescription: exampleDescription, duration: 20, options: [])
+    }
+    
+    /// This task presents the Tremor Test pre-defined active task.
+    private var tremorTestTask: ORKTask {
+        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask), intendedUseDescription: exampleDescription, activeStepDuration: 10, options: [])
     }
 
     // MARK: Consent Document Creation Convenience

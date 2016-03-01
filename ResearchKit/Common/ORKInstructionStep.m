@@ -48,6 +48,7 @@
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_IMAGE(aDecoder, image);
+        ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
     }
     return self;
 }
@@ -56,6 +57,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_IMAGE(aCoder, image);
+    ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -66,6 +68,7 @@
     ORKInstructionStep *step = [super copyWithZone:zone];
     step.detailText = self.detailText;
     step.image = self.image;
+    step.auxiliaryImage = self.auxiliaryImage;
     return step;
 }
 
@@ -73,7 +76,7 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.detailText, castObject.detailText) && ORKEqualObjects(self.image, castObject.image);
+    return isParentSame && ORKEqualObjects(self.detailText, castObject.detailText) && ORKEqualObjects(self.image, castObject.image) && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage);
 }
 
 - (NSUInteger)hash {
