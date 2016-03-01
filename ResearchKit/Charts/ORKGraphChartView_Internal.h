@@ -79,6 +79,8 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 @property (nonatomic) BOOL scrubberAccessoryViewsHidden;
 
+@property (nonatomic) BOOL hasDataPoints;
+
 - (void)sharedInit;
 
 - (NSInteger)numberOfPlots;

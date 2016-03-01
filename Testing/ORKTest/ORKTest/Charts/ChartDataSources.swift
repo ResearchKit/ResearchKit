@@ -72,7 +72,7 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     }
 }
 
-class BaseGraphChartDataSource:  NSObject, ORKGraphChartViewDataSource {
+class BaseGraphChartDataSource:  NSObject, ORKFloatRangeGraphChartViewDataSource {
     var plotPoints: [[ORKFloatRange]] = [[]]
     
     func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
@@ -191,6 +191,12 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
                     ORKFloatRange(minimumValue: 10, maximumValue: 13),
                     ORKFloatRange(minimumValue: 12, maximumValue: 15),
                 ],
+                [
+                    ORKFloatRange(),
+                    ORKFloatRange(minimumValue: 5, maximumValue: 6),
+                    ORKFloatRange(minimumValue: 2, maximumValue: 15),
+                    ORKFloatRange(minimumValue: 4, maximumValue: 11),
+                ],
         ]
     }
     
@@ -203,7 +209,24 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
     }
 
     func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
-        return 1
+        return 2
+    }
+}
+
+class ColoredDiscreteGraphChartDataSource: DiscreteGraphChartDataSource {
+    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.cyanColor()
+        case 1:
+            color = UIColor.magentaColor()
+        case 2:
+            color = UIColor.yellowColor()
+        default:
+            color = UIColor.redColor()
+        }
+        return color
     }
 }
 

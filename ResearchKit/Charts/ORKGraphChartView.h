@@ -37,8 +37,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKGraphChartView;
 @class ORKFloatRange;
+@class ORKFloatStack;
+@class ORKGraphChartView;
 
 /**
  The graph chart view delegate protocol forwards pan gesture events occuring
@@ -77,19 +78,21 @@ ORK_AVAILABLE_DECL
 
 
 /**
- An object that adopts the `ORKGraphChartViewDataSource` protocol is responsible for providing the
- data required to populate an `ORKGraphChartView` object.
+ The abstract `ORKGraphChartViewDataSource` protocol is the base protocol which conforms the basis
+ for the `ORKFloatRangeGraphChartViewDataSource` and `ORKFloatStackGraphChartViewDataSource`
+ protocols, required to populate the concrete `ORKGraphChartView` subclass.
 
  At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
  `graphChartView:plot:valueForPointAtIndex:` methods. These methods return
- the number of points in a plot and the points themselves. Each point in a plot is represented by an
- object of the `ORKFloatRange` class. A data source object may provide additional information to
- the graph chart view by implementing the optional methods.
+ the number of points in a plot and the points themselves. Each point in a plot is represented by
+ an object of the `ORKFloatRange` or `ORKFloatStack` class, depending on the concrete subprotocol.
+ 
+ A data source object may provide additional information to the graph chart view by implementing the
+ optional methods.
 
  When configuring an `ORKGraphChartView` object, assign your data source to its `dataSource`
  property.
 */
-ORK_AVAILABLE_DECL
 @protocol ORKGraphChartViewDataSource <NSObject>
 
 @required
@@ -105,20 +108,6 @@ ORK_AVAILABLE_DECL
 */
 - (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex;
 
-
-/**
- Asks the data source for the float range to be plotted at the specified point index for the
- specified plot.
-
- @param graphChartView      The graph chart view that is asking for the float range.
- @param pointIndex          An index number identifying the range point in the graph chart view.
- @param plotIndex           An index number identifying the plot in the graph chart view. This index
-                                is 0 in a single-plot graph chart view.
-
- @return The float range specified by `pointIndex` in the plot specified by `plotIndex` for the
- specified graph chart view`.
-*/
-- (ORKFloatRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @optional
 /**
@@ -229,9 +218,66 @@ ORK_AVAILABLE_DECL
 
 
 /**
- The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to
- subclasses such as `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate
- this class directly; use one of the subclasses instead.
+ An object that adopts the `ORKFloatRangeGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKFloatRange` values required to populate an
+ `ORKFloatRangeGraphChartView` concrete subclass, such as `ORKLineGraphChartView` and
+ `ORKDiscreteGraphChartView`.
+ */
+ORK_AVAILABLE_DECL
+@protocol ORKFloatRangeGraphChartViewDataSource <ORKGraphChartViewDataSource>
+
+@required
+
+/**
+ Asks the data source for the float range to be plotted at the specified point index for the
+ specified plot.
+ 
+ @param graphChartView      The graph chart view that is asking for the float range.
+ @param pointIndex          An index number identifying the range point in the graph chart view.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+                                is 0 in a single-plot graph chart view.
+ 
+ @return The float range specified by `pointIndex` in the plot specified by `plotIndex` for the
+ specified graph chart view`.
+ */
+- (ORKFloatRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+
+@end
+
+
+/**
+ An object that adopts the `ORKFloatStackGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKFloatStack` values required to populate an `ORKBarGraphChartView`
+ object.
+ */
+ORK_AVAILABLE_DECL
+@protocol ORKFloatStackGraphChartViewDataSource <ORKGraphChartViewDataSource>
+
+@required
+
+/**
+ Asks the data source for the float stack to be plotted at the specified point index for the
+ specified plot.
+ 
+ @param graphChartView      The graph chart view that is asking for the range point.
+ @param pointIndex          An index number identifying the range point in the graph chart view.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+ is 0 in a single-plot graph chart view.
+ 
+ @return The float stack specified by `pointIndex` in the plot specified by `plotIndex` for the
+ specified graph chart view`.
+ */
+- (ORKFloatStack *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+
+@end
+
+
+/**
+ The `ORKGraphChartView` class is an abstract class which holds properties and methods common to
+ concrete subclasseses.
+ 
+ You should not instantiate this class directly; use one of the subclasses instead. The concrete
+ subclasses are `ORKLineGraphChartView`, `ORKDiscreteGraphChartView`, and `ORKBarGraphChartView`.
 */
 ORK_CLASS_AVAILABLE
 @interface ORKGraphChartView : UIView
@@ -376,6 +422,26 @@ ORK_CLASS_AVAILABLE
  Call this method to reload the data and re-plot the graph. You should call it if the data provided by the dataSource changes.
 */
 - (void)reloadData;
+
+@end
+
+
+/**
+ The `ORKFloatRangeGraphChartView` class is an abstract class which holds a data source comforming
+ to the `ORKFloatRangeGraphChartViewDataSource` protocol, common to concrete subclasseses.
+ 
+ You should not instantiate this class directly; use one of the subclasses instead. The concrete
+ subclasses are `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKFloatRangeGraphChartView : ORKGraphChartView
+
+/**
+ The data source responsible for providing the data required to populate the graph chart view.
+ 
+ See the `ORKGraphChartViewDataSource` protocol.
+ */
+@property (nonatomic, weak) id <ORKFloatRangeGraphChartViewDataSource> dataSource;
 
 @end
 

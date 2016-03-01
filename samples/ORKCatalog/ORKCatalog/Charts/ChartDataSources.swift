@@ -56,7 +56,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     }
 }
 
-class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class LineGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
     
     var plotPoints =
     [
@@ -103,7 +103,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     }
 }
 
-class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class DiscreteGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
     
     var plotPoints =
     [

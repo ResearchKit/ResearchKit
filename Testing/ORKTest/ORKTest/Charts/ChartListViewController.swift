@@ -52,6 +52,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     let coloredLineGraphChartDataSource = ColoredLineGraphChartDataSource()
     
     let discreteGraphChartDataSource = DiscreteGraphChartDataSource()
+    let coloredDiscreteGraphChartDataSource = ColoredDiscreteGraphChartDataSource()
 
     let pieChartIdentifier = "PieChartCell"
     let lineGraphChartIdentifier = "LineGraphChartCell"
@@ -143,8 +144,14 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
         discreteGraphChartView.drawsConnectedRanges = true
+        executeAfterDelay(2.5) {
+            discreteGraphChartView.tintColor = UIColor.purpleColor()
+        }
         executeAfterDelay(3.5) {
             discreteGraphChartView.drawsConnectedRanges = false
+        }
+        executeAfterDelay(4.5) {
+            discreteGraphChartView.dataSource = self.coloredDiscreteGraphChartDataSource
         }
         executeAfterDelay(5.5) {
             discreteGraphChartView.drawsConnectedRanges = true

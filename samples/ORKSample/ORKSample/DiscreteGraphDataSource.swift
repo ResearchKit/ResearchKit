@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class DiscreteGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
     // MARK: Properties
     
     var plotPoints =

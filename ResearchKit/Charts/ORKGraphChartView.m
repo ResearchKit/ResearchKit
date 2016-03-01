@@ -69,7 +69,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     UILabel *_noDataLabel;
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
-    BOOL _hasDataPoints;
     CAShapeLayer *_horizontalReferenceLineLayer;
     NSMutableArray<CALayer *> *_verticalReferenceLineLayers;
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
@@ -357,26 +356,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        
-        [_dataPoints addObject:[NSMutableArray new]];
-        NSInteger numberOfPoints = [_dataSource graphChartView:self numberOfPointsForPlotIndex:plotIndex];
-        for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
-            ORKFloatRange *value = [_dataSource graphChartView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
-            [_dataPoints[plotIndex] addObject:value];
-            if (!value.isUnset) {
-                _hasDataPoints = YES;
-            }
-        }
-
-        // Add dummy points for empty data points
-        NSInteger emptyPointsCount = self.numberOfXAxisPoints - _dataPoints[plotIndex].count;
-        for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
-            ORKFloatRange *dummyPoint = [[ORKFloatRange alloc] init];
-            [_dataPoints[plotIndex] addObject:dummyPoint];
-        }
+        [self obtainDataPointsForPlotIndex:plotIndex];
     }
 }
-
 #pragma mark - Layout
 
 - (void)setBounds:(CGRect)bounds {
@@ -1021,6 +1003,10 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                  userInfo:nil];
 }
 
+- (void)obtainDataPointsForPlotIndex:(NSInteger)plotIndex {
+    [self throwOverrideException];
+}
+
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
     return 0;
@@ -1082,6 +1068,31 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
     
     self.accessibilityElements = accessibilityElements;
+}
+
+@end
+
+
+@implementation ORKFloatRangeGraphChartView
+
+@dynamic dataSource;
+
+- (void)obtainDataPointsForPlotIndex:(NSInteger)plotIndex {
+    [self.dataPoints addObject:[NSMutableArray new]];
+    NSInteger numberOfPoints = [self.dataSource graphChartView:self numberOfPointsForPlotIndex:plotIndex];
+    for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+        ORKFloatRange *value = [self.dataSource graphChartView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+        [self.dataPoints[plotIndex] addObject:value];
+        if (!value.isUnset) {
+            self.hasDataPoints = YES;
+        }
+    }
+    // Add dummy points for empty data points
+    NSInteger emptyPointsCount = self.numberOfXAxisPoints - self.dataPoints[plotIndex].count;
+    for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
+        ORKFloatRange *dummyPoint = [[ORKFloatRange alloc] init];
+        [self.dataPoints[plotIndex] addObject:dummyPoint];
+    }
 }
 
 @end
