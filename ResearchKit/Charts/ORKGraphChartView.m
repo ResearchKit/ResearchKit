@@ -228,6 +228,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)tintColorDidChange {
+    _xAxisView.tintColor = self.tintColor;
     [self updatePlotColors];
 }
 
