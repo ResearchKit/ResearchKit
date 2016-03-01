@@ -172,6 +172,14 @@ The default value of this property is `NO`.
 @property (nonatomic, copy, nullable) NSString *spokenInstruction;
 
 /**
+ Localized text that represents an instructional voice prompt for when the step finishes.
+ 
+ Instructional speech begins when the step finishes. If VoiceOver is active,
+ the instruction is spoken by VoiceOver.
+ */
+@property (nonatomic, copy, nullable) NSString *finishedSpokenInstruction;
+
+/**
  An image to be displayed below the instructions for the step.
  
  The image can be stretched to fit the available space. When choosing a size
