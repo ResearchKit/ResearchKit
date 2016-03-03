@@ -59,6 +59,7 @@
 #import <ResearchKit/ORKVisualConsentStep.h>
 #import <ResearchKit/ORKConsentReviewStep.h>
 #import <ResearchKit/ORKConsentSharingStep.h>
+#import <ResearchKit/ORKConsentLearnMoreViewController.h>
 
 #import <ResearchKit/ORKRegistrationStep.h>
 #import <ResearchKit/ORKVerificationStep.h>
