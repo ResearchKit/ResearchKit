@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "ניתן להשתמש בתווי ספרות בלבד.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של הקשת קוד גישה";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "הוקשו %@ מתוך %@ ספרות";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "לא ניתן היה להוסיף את פריט צרור המפתחות.";

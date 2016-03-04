@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "入力できるのは数字のみです。";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコード入力の進行状況インジケータ";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@桁を入力しました";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "キーチェーン項目を追加できませんでした。";

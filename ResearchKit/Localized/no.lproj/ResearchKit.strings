@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tillatt.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Framdriftsindikator for inntasting av kode";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ sifre oppgitt";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunne ikke legge til nøkkelringobjekt.";

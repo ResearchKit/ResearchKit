@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya aksara angka dibenarkan.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Penunjuk kemajuan entri kod laluan";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ daripada %@ digit dimasukkan";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Tidak dapat menambah item Rantai Kunci.";

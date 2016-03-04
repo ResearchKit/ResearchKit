@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sunt permise doar caractere numerice.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicator de progres pentru introducerea codului";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ din %@ cifre introduse";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Imposibil de adăugat articolul din portchei.";

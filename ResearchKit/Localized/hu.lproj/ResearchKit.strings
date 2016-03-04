@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kizárólag számkarakterek engedélyezettek.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Jelkóddal történő belépés folyamatjelzője";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@ számjegy megadva";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nem lehetett hozzáadni a Kulcskarika-elemet.";

@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Дозволено тільки цифри.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор перебігу вводу коду допуску";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено: %@ із %@";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Не вдалося додати елемент до В'язки.";

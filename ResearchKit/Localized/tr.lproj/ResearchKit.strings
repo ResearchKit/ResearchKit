@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Yalnızca sayısal karakterlere izin veriliyor.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Parola giriş ilerleme göstergesi";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ / %@ basamak girildi";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Anahtar zinciri öğesi eklenemedi.";

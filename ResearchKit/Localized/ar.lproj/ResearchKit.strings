@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "فقط الأرقام مسموح بها.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم إدخال رمز الدخول";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "تم إدخال %1$@ من %2$@ من الأرقام";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "تعذر إضافة عنصر سلسلة المفاتيح.";

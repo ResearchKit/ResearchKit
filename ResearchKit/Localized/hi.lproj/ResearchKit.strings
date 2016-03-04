@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "केवल न्यूमैरिक वर्णों की अनुमति है।";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "पासकोड दर्ज करने की प्रक्रिया का संकेतक";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%1$@/%2$@ मान दर्ज किए गए";
+"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "कीचेन आइटम को जोड़ा नहीं जा सका।";
