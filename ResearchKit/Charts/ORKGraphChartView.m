@@ -102,6 +102,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateLineLayers];
     [self updateNoDataLabel];
     
+    [self _axCreateAccessibilityElementsIfNeeded];
+
     [self setNeedsLayout];
 }
 
@@ -941,12 +943,15 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 #pragma mark - Accessibility Helpers
 
 - (void)_axVoiceOverStatusChanged:(NSNotification *)notification {
-    if (UIAccessibilityIsVoiceOverRunning()) {
-        [self _axCreateAccessibilityElements];
-    }
+    [self _axCreateAccessibilityElementsIfNeeded];
 }
 
-- (void)_axCreateAccessibilityElements {
+- (void)_axCreateAccessibilityElementsIfNeeded {
+    if (!UIAccessibilityIsVoiceOverRunning()) {
+        // No need to creating accessibility elements if Voice Over is not running
+        return;
+    }
+    
     NSInteger maxNumberOfPoints = [[_dataPoints valueForKeyPath:@"@max.@count.self"] integerValue];
     NSMutableArray<id> *accessibilityElements = [[NSMutableArray alloc] initWithCapacity:maxNumberOfPoints];
     
@@ -960,8 +965,8 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             // Boundary check
             if ( pointIndex < _dataPoints[plotIndex].count ) {
                 NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
-                NSObject<ORKGraphChartType> *rangePoint = _dataPoints[plotIndex][pointIndex];
-                value = ORKAccessibilityStringForVariables(value, and, rangePoint.accessibilityLabel);
+                NSObject<ORKGraphChartType> *dataPoint = _dataPoints[plotIndex][pointIndex];
+                value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
             }
         }
         
@@ -1124,11 +1129,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         NSMutableArray<CALayer *> *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
-    }
-    
-    // We perform the same double-looping when creating the elements and there is no need to do that if Voice Over is not running.
-    if (!UIAccessibilityIsVoiceOverRunning()) {
-        [self _axCreateAccessibilityElements];
     }
 }
 
