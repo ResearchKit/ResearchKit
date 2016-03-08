@@ -57,15 +57,17 @@
 }
 
 - (BOOL)isUnset {
-    return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
+    return (_minimumValue == ORKCGFloatInvalidValue && _maximumValue == ORKCGFloatInvalidValue);
 }
 
 - (BOOL)isEmpty {
-    return (self.minimumValue == self.maximumValue);
+    return (_minimumValue == _maximumValue);
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"{min: %0.0f, max: %0.0f}", self.minimumValue, self.maximumValue];
+    NSString *minimumValueString = (_minimumValue == ORKCGFloatInvalidValue) ? @"ORKCGFloatInvalidValue" : [NSString stringWithFormat:@"%0.0f", _minimumValue] ;
+    NSString *maximumValueString = (_maximumValue == ORKCGFloatInvalidValue) ? @"ORKCGFloatInvalidValue" : [NSString stringWithFormat:@"%0.0f", _maximumValue] ;
+    return [NSString stringWithFormat:@"<%@: %p; min = %@; max = %@>", self.class.description, self, minimumValueString, maximumValueString];
 }
 
 #pragma mark - Accessibility
@@ -119,7 +121,7 @@
 
 - (NSString *)description {
     NSMutableString *mutableString = [NSMutableString new];
-    [mutableString appendString:@"{"];
+    [mutableString appendFormat:@"<%@: %p; (", self.class.description, self];
     NSUInteger numberOfStackedValues = _stackedValues.count;
     for (NSInteger index = 0; index < numberOfStackedValues; index++) {
         [mutableString appendFormat:@"%0.0f", _stackedValues[index].doubleValue];
@@ -127,7 +129,7 @@
             [mutableString appendString:@", "];
         }
     }
-    [mutableString appendString:@"}"];
+    [mutableString appendString:@")>"];
     return [mutableString copy];
 }
 
