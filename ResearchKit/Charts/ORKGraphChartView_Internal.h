@@ -147,7 +147,9 @@ static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOf
 
 - (UIColor *)colorForPlotIndex:(NSInteger)plotIndex;
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
+- (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex;
+
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex;
 
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath

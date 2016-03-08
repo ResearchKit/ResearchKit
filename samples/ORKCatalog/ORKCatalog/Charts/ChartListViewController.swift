@@ -105,5 +105,6 @@ class ChartListViewController: UITableViewController {
         pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
         lineGraphChartTableViewCell.graphView.animateWithDuration(0.5)
         discreteGraphChartTableViewCell.graphView.animateWithDuration(0.5)
-    }    
+        barGraphChartTableViewCell.graphView.animateWithDuration(0.5)
+    }
 }

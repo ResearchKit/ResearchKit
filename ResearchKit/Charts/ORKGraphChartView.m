@@ -384,7 +384,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     }
 }
 
-#pragma mark - Layout
+#pragma mark - Layout & Drawing
 
 - (void)setBounds:(CGRect)bounds {
     BOOL sizeChanged = !CGSizeEqualToSize(bounds.size, self.bounds.size);
@@ -483,8 +483,6 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
         }
     }
 }
-
-#pragma mark - Drawing
 
 inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineWidth;
@@ -806,6 +804,46 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 
 #pragma Mark - Animation
 
+- (void)animateWithDuration:(NSTimeInterval)duration {
+    if (duration < 0) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
+    }
+    for (NSUInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        [self prepareAnimationsForPlotIndex:plotIndex];
+        [self animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
+    }
+}
+
+- (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex {
+    for (NSMutableArray <CAShapeLayer *> *sublineLayers in self.lineLayers[plotIndex]) {
+        [sublineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+        for (CAShapeLayer *lineLayer in sublineLayers) {
+            lineLayer.strokeEnd = 0;
+        }
+    }
+}
+
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex {
+    NSUInteger numberOfLines = self.lineLayers[plotIndex].count;
+    if (numberOfLines > 0) {
+        CGFloat lineFadeDuration = duration / numberOfLines;
+        CGFloat lineDelay = 0.0;
+        for (NSUInteger lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+            NSUInteger numberOfSublines = self.lineLayers[plotIndex][lineIndex].count;
+            if (numberOfSublines > 0) {
+                CGFloat sublineFadeDuration = lineFadeDuration / numberOfSublines;
+                CGFloat sublineDelay = 0.0;
+                for (NSUInteger sublineIndex = 0; sublineIndex < numberOfSublines; sublineIndex++) {
+                    CAShapeLayer *layer = self.lineLayers[plotIndex][lineIndex][sublineIndex];
+                    [self animateLayer:layer keyPath:@"strokeEnd" duration:sublineFadeDuration startDelay:lineDelay + sublineDelay];
+                    sublineDelay += sublineFadeDuration;
+                }
+                lineDelay += sublineDelay;
+            }
+        }
+    }
+}
+
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath
             duration:(CGFloat)duration
@@ -891,14 +929,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)layoutPointLayers {
-    [self throwOverrideException];
-}
-
-- (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    [self throwOverrideException];
-}
-
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     [self throwOverrideException];
 }
 
@@ -1051,6 +1081,8 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
+#pragma mark - Layout & Drawing
+
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
     if (plotIndex < self.dataPoints.count) {
         UIColor *color = [self colorForPlotIndex:plotIndex];
@@ -1100,6 +1132,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self layoutPointLayers];
+}
+
 - (void)layoutPointLayers {
     NSInteger numberOfPlots = [self numberOfPlots];
     
@@ -1111,11 +1148,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
     }
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self layoutPointLayers];
 }
 
 - (void)layoutPointLayersForPlotIndex:(NSInteger)plotIndex {
@@ -1153,53 +1185,24 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 
 #pragma mark - Animation
 
-- (void)animateWithDuration:(NSTimeInterval)duration {
-    if (duration < 0) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
+- (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex {
+    [super prepareAnimationsForPlotIndex:plotIndex];
+    [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    for (CAShapeLayer *pointLayer in _pointLayers[plotIndex]) {
+        pointLayer.opacity = 0;
     }
-    for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
-        [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeAllAnimations)];
-        for (CAShapeLayer *pointLayer in _pointLayers[plotIndex]) {
-            pointLayer.opacity = 0;
-        }
-        
-        for (NSMutableArray <CAShapeLayer *> *sublineLayers in self.lineLayers[plotIndex]) {
-            [sublineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-            for (CAShapeLayer *lineLayer in sublineLayers) {
-                lineLayer.strokeEnd = 0;
-            }
-        }
-    }
-    [self animateLayersSequentiallyWithDuration:duration];
 }
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
-    
-    for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
-        
-        NSUInteger numberOfPoints = _pointLayers[plotIndex].count;
-        if (numberOfPoints > 0) {
-            CGFloat pointFadeDuration = duration / numberOfPoints;
-            CGFloat pointDelay = 0.0;
-            for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
-                CALayer *layer = _pointLayers[plotIndex][pointIndex];
-                [self animateLayer:layer keyPath:@"opacity" duration:pointFadeDuration startDelay:pointDelay];
-                pointDelay += pointFadeDuration;
-            }
-        }
-        
-        NSUInteger numberOfLines = self.lineLayers[plotIndex].count;
-        if (numberOfLines > 0) {
-            CGFloat lineFadeDuration = duration / numberOfLines;
-            CGFloat lineDelay = 0.0;
-            for (NSUInteger lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
-                NSUInteger numberOfSublines = self.lineLayers[plotIndex][lineIndex].count;
-                for (NSUInteger sublineIndex = 0; sublineIndex < numberOfSublines; sublineIndex++) {
-                    CAShapeLayer *layer = self.lineLayers[plotIndex][lineIndex][sublineIndex];
-                    [self animateLayer:layer keyPath:@"strokeEnd" duration:lineFadeDuration startDelay:lineDelay];
-                    lineDelay += lineFadeDuration;
-                }
-            }
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex {
+    [super animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
+    NSUInteger numberOfPoints = _pointLayers[plotIndex].count;
+    if (numberOfPoints > 0) {
+        CGFloat pointFadeDuration = duration / numberOfPoints;
+        CGFloat pointDelay = 0.0;
+        for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+            CALayer *layer = _pointLayers[plotIndex][pointIndex];
+            [self animateLayer:layer keyPath:@"opacity" duration:pointFadeDuration startDelay:pointDelay];
+            pointDelay += pointFadeDuration;
         }
     }
 }

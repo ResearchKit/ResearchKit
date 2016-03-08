@@ -210,6 +210,7 @@ class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
                 [
                     ORKFloatRange(),
                     ORKFloatRange(minimumValue: 5, maximumValue: 6),
+                    ORKFloatRange(),
                     ORKFloatRange(minimumValue: 2, maximumValue: 15),
                     ORKFloatRange(minimumValue: 4, maximumValue: 11),
                 ],
@@ -274,6 +275,8 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
                     ORKFloatStack(stackedValueArray: [5, 6]),
                     ORKFloatStack(stackedValueArray: [2, 15]),
                     ORKFloatStack(stackedValueArray: [4, 11]),
+                    ORKFloatStack(),
+                    ORKFloatStack(stackedValueArray: [6, 16]),
                 ],
         ]
     }
@@ -288,6 +291,23 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
     
     func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return 2
+    }
+}
+
+class ColoredBarGraphChartDataSource: BarGraphChartDataSource {
+    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.cyanColor()
+        case 1:
+            color = UIColor.magentaColor()
+        case 2:
+            color = UIColor.yellowColor()
+        default:
+            color = UIColor.redColor()
+        }
+        return color
     }
 }
 

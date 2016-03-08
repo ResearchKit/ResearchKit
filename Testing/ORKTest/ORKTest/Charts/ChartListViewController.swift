@@ -55,6 +55,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     let coloredDiscreteGraphChartDataSource = ColoredDiscreteGraphChartDataSource()
 
     let barGraphChartDataSource = BarGraphChartDataSource()
+    let coloredBarGraphChartDataSource = ColoredBarGraphChartDataSource()
     
     let pieChartIdentifier = "PieChartCell"
     let lineGraphChartIdentifier = "LineGraphChartCell"
@@ -85,7 +86,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         pieChartView.showsTitleAboveChart = true
         pieChartView.showsPercentageLabels = false
         pieChartView.drawsClockwise = false
-        executeAfterDelay(1.5) {
+        executeAfterDelay(2.5) {
             pieChartView.showsTitleAboveChart = false
             pieChartView.lineWidth = 12
             pieChartView.title = "UPDATED"
@@ -93,17 +94,50 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             pieChartView.titleColor = UIColor.redColor()
             pieChartView.textColor = UIColor.orangeColor()
         }
-        executeAfterDelay(2.5) {
+        executeAfterDelay(3.5) {
             pieChartView.drawsClockwise = true
             pieChartView.dataSource = self.colorlessPieChartDataSource
         }
-        executeAfterDelay(3.5) {
+        executeAfterDelay(4.5) {
             pieChartView.showsPercentageLabels = true
             pieChartView.tintColor = UIColor.purpleColor()
         }
-        executeAfterDelay(4.5) {
+        executeAfterDelay(5.5) {
             pieChartView.titleColor = nil
             pieChartView.textColor = nil
+        }
+
+        // ORKBarGraphChartView
+        barGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        let barGraphChartView = barGraphChartTableViewCell.graphChartView as! ORKBarGraphChartView
+        barGraphChartView.dataSource = barGraphChartDataSource
+        executeAfterDelay(1.5) {
+            barGraphChartView.tintColor = UIColor.purpleColor()
+            barGraphChartView.showsHorizontalReferenceLines = true
+            barGraphChartView.showsVerticalReferenceLines = true
+        }
+        executeAfterDelay(2.5) {
+            barGraphChartView.axisColor = UIColor.redColor()
+            barGraphChartView.verticalAxisTitleColor = UIColor.redColor()
+            barGraphChartView.referenceLineColor = UIColor.orangeColor()
+            barGraphChartView.scrubberLineColor = UIColor.blueColor()
+            barGraphChartView.scrubberThumbColor = UIColor.greenColor()
+        }
+        executeAfterDelay(3.5) {
+            barGraphChartView.axisColor = nil
+            barGraphChartView.verticalAxisTitleColor = nil
+            barGraphChartView.referenceLineColor = nil
+            barGraphChartView.scrubberLineColor = nil
+            barGraphChartView.scrubberThumbColor = nil
+        }
+        executeAfterDelay(4.5) {
+            barGraphChartView.dataSource = self.coloredBarGraphChartDataSource
+        }
+        executeAfterDelay(5.5) {
+            let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
+            let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
+            barGraphChartView.maximumValueImage = maximumValueImage
+            barGraphChartView.minimumValueImage = minimumValueImage
         }
 
         // ORKLineGraphChartView
@@ -160,13 +194,6 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         executeAfterDelay(5.5) {
             discreteGraphChartView.drawsConnectedRanges = true
         }
-
-        
-        // ORKBarGraphChartView
-        barGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(barGraphChartIdentifier) as! BarGraphChartTableViewCell
-        let barGraphChartView = barGraphChartTableViewCell.graphChartView as! ORKBarGraphChartView
-        barGraphChartView.dataSource = barGraphChartDataSource
-
         
         chartTableViewCells = [barGraphChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, pieChartTableViewCell]
         
@@ -184,9 +211,10 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
-        lineGraphChartTableViewCell.graphChartView.animateWithDuration(0.5)
-        discreteGraphChartTableViewCell.graphChartView.animateWithDuration(0.5)
+        pieChartTableViewCell.pieChartView.animateWithDuration(2.5)
+        barGraphChartTableViewCell.graphChartView.animateWithDuration(2.5)
+        lineGraphChartTableViewCell.graphChartView.animateWithDuration(2.5)
+        discreteGraphChartTableViewCell.graphChartView.animateWithDuration(2.5)
     }    
 }
 

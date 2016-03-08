@@ -251,25 +251,29 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Animations
 
-- (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
-        [fillLayer removeAllAnimations];
-        fillLayer.opacity = 0;
-    }];
-    
-    [super animateWithDuration:animationDuration];
+- (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex {
+    [super prepareAnimationsForPlotIndex:plotIndex];
+    // animate all fill layers at once at the beginning
+    if (plotIndex == 0) {
+        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
+            [fillLayer removeAllAnimations];
+            fillLayer.opacity = 0;
+        }];
+    }
 }
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
-    [super animateLayersSequentiallyWithDuration:duration];
-    
-    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
-        [self animateLayer:layer
-                   keyPath:@"opacity"
-                  duration:duration * (1.0 / 3.0)
-                startDelay:duration * (2.0 / 3.0)
-            timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    }];
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex {
+    [super animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
+    // animate all fill layers at once at the beginning
+    if (plotIndex == 0) {
+        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
+            [self animateLayer:layer
+                       keyPath:@"opacity"
+                      duration:duration * (1.0 / 3.0)
+                    startDelay:duration * (2.0 / 3.0)
+                timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        }];
+    }
 }
 
 @end
