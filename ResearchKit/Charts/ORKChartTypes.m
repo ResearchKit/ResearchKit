@@ -40,6 +40,12 @@
 @implementation ORKFloatRange
 
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
+    if (maximumValue < minimumValue) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"maximumValue cannot be lower than minimumValue"
+                                     userInfo:nil];
+    }
+
     self = [super init];
     if (self) {
         _minimumValue = minimumValue;
