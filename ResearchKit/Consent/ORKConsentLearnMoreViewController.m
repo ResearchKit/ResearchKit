@@ -79,8 +79,6 @@
     _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
     _webView.opaque = NO; // If opaque is set to YES, _webView shows a black right margin during transition when modally presented. This is an artifact due to disabling clipsToBounds to be able to show the scroll indicator outside the view.
     
-    _webView.dataDetectorTypes = UIDataDetectorTypePhoneNumber;
-    
     if (_contentURL) {
         [_webView setScalesPageToFit:YES];
         
