@@ -389,6 +389,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
 
-"AX_GRAPH_RANGE_FORMAT" = "Range from %@ to %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
+"AX_GRAPH_STACK_PREFIX" = "Stack composed of";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
