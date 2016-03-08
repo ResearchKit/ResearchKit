@@ -145,10 +145,9 @@
     
     NSUInteger numberOfStackedValues = _stackedValues.count;
     for (NSInteger index = 1; index < numberOfStackedValues; index++) {
+        [mutableString appendString:@", "];
         if (index == (numberOfStackedValues - 1)) {
             [mutableString appendString:ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil)];
-        } else {
-            [mutableString appendString:@", "];
         }
         [mutableString appendFormat:@"%@", _stackedValues[index].stringValue];
     }
