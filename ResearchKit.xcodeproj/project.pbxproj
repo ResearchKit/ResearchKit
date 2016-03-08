@@ -378,7 +378,7 @@
 		86C40DFE1A8D7C5C00081FAC /* ORKConsentDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF21A8D7C5C00081FAC /* ORKConsentDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BF31A8D7C5C00081FAC /* ORKConsentDocument.m */; };
 		86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF41A8D7C5C00081FAC /* ORKConsentDocument_Internal.h */; };
-		86C40E041A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF51A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86C40E041A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF51A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h */; };
 		86C40E061A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BF61A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.m */; };
 		86C40E081A8D7C5C00081FAC /* ORKConsentReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF71A8D7C5C00081FAC /* ORKConsentReviewStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BF81A8D7C5C00081FAC /* ORKConsentReviewStep.m */; };
