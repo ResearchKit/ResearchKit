@@ -44,4 +44,11 @@
  */
 @interface ORKBarGraphChartView : ORKGraphChartView
 
+/**
+ The data source responsible for providing the data required to populate the graph chart view.
+ 
+ See the `ORKFloatStackGraphChartViewDataSource` protocol.
+ */
+@property (nonatomic, weak) id <ORKFloatStackGraphChartViewDataSource> dataSource;
+
 @end

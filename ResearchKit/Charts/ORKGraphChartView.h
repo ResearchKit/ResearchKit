@@ -439,7 +439,7 @@ ORK_CLASS_AVAILABLE
 /**
  The data source responsible for providing the data required to populate the graph chart view.
  
- See the `ORKGraphChartViewDataSource` protocol.
+ See the `ORKFloatRangeGraphChartViewDataSource` protocol.
  */
 @property (nonatomic, weak) id <ORKFloatRangeGraphChartViewDataSource> dataSource;
 

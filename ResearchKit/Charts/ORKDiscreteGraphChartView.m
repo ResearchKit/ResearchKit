@@ -34,7 +34,7 @@
 #import "ORKDiscreteGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKFloatRange.h"
+#import "ORKChartTypes.h"
 
 
 @implementation ORKDiscreteGraphChartView
@@ -67,10 +67,10 @@
         if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
-            lineLayer.lineWidth = ORKGraphChartViewPointAndLineSize;
+            lineLayer.lineWidth = ORKGraphChartViewPointAndLineWidth;
             
             [self.plotView.layer addSublayer:lineLayer];
-            [self.lineLayers[plotIndex] addObject:lineLayer];
+            [self.lineLayers[plotIndex] addObject:[NSMutableArray arrayWithObject:lineLayer]];
         }
     }
 }
@@ -95,7 +95,7 @@
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
             
-            CAShapeLayer *lineLayer = self.lineLayers[plotIndex][lineLayerIndex];
+            CAShapeLayer *lineLayer = self.lineLayers[plotIndex][lineLayerIndex][0];
             lineLayer.path = linePath.CGPath;
             lineLayerIndex++;
         }
@@ -103,31 +103,7 @@
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointWidth = ORKGraphChartViewPointAndLineSize;
-    
-    NSInteger numberOfPlots = [self numberOfPlots];
-    
-    CGFloat offset = 0;
-    
-    if (numberOfPlots % 2 == 0) {
-        // Even
-        offset = (plotIndex - numberOfPlots / 2 + 0.5) * pointWidth;
-    } else {
-        // Odd
-        offset = (plotIndex - numberOfPlots / 2) * pointWidth;
-    }
-    
-    return offset;
-}
-
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    BOOL snapped = [self isXPositionSnapped:xPosition plotIndex:plotIndex];
-    CGFloat canvasYPosition = 0;
-    if (snapped) {
-        NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
-        canvasYPosition = self.yAxisPoints[plotIndex][pointIndex].maximumValue;
-    }
-    return canvasYPosition;
+    return offsetForPlotIndex(plotIndex, [self numberOfPlots], ORKGraphChartViewPointAndLineWidth);
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {

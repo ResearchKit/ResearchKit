@@ -31,6 +31,7 @@
 
 #import "ORKGraphChartView.h"
 #import "ORKHelpers.h"
+#import "ORKChartTypes.h"
 
 
 @class ORKXAxisView;
@@ -43,13 +44,13 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
 };
 
 extern const CGFloat ORKGraphChartViewLeftPadding;
-extern const CGFloat ORKGraphChartViewPointAndLineSize;
+extern const CGFloat ORKGraphChartViewPointAndLineWidth;
 extern const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 
-inline static CAShapeLayer *graphLineLayer() {
+static inline CAShapeLayer *graphLineLayer() {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.fillColor = [UIColor clearColor].CGColor;
     lineLayer.lineJoin = kCALineJoinRound;
@@ -62,16 +63,39 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
     return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
+static inline UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
+    UIColor *color = baseColor;
+    if (totalColors > 1) {
+        // Avoid pure white and pure black
+        CGFloat divisionFactor = (1.0 / totalColors);
+        CGFloat alphaComponent = 1 - (divisionFactor * colorIndex);
+        color = [baseColor colorWithAlphaComponent:alphaComponent];
+    }
+    return color;
+}
+
+static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
+    CGFloat offset = 0;
+    if (numberOfPlots % 2 == 0) {
+        // Even
+        offset = (plotIndex - numberOfPlots / 2 + 0.5) * plotWidth;
+    } else {
+        // Odd
+        offset = (plotIndex - numberOfPlots / 2) * plotWidth;
+    }
+    return offset;
+}
+
 
 @interface ORKGraphChartView ()
 
-@property (nonatomic) NSMutableArray<NSMutableArray<CAShapeLayer *> *> *lineLayers;
+@property (nonatomic) NSMutableArray<NSMutableArray<NSMutableArray<CAShapeLayer *> *> *> *lineLayers;
 
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKGraphChartType> *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKGraphChartType> *> *> *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic) UIView *plotView; // Holds the plots
 
@@ -81,17 +105,27 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 @property (nonatomic) BOOL hasDataPoints;
 
+@property (nonatomic) CGFloat minimumValue;
+
+@property (nonatomic) CGFloat maximumValue;
+
 - (void)sharedInit;
 
-- (NSInteger)numberOfPlots;
+- (void)calculateMinAndMaxValues;
 
-- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
+- (NSMutableArray<NSObject<ORKGraphChartType> *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight;
+
+- (NSInteger)numberOfPlots;
 
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
 
 - (NSInteger)scrubbingPlotIndex;
 
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
+- (CGFloat)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
+
+- (CGFloat)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
+
+- (CGFloat)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
@@ -109,9 +143,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 - (void)layoutLineLayers;
 
-- (void)updatePointLayers;
-
-- (void)layoutPointLayers;
+- (UIColor *)colorForPlotIndex:(NSInteger)plotIndex subpointIndex:(NSInteger)subpointIndex totalSubpoints:(NSInteger)totalSubpoints;
 
 - (UIColor *)colorForPlotIndex:(NSInteger)plotIndex;
 
@@ -124,3 +156,18 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
       timingFunction:(CAMediaTimingFunction *)timingFunction;
 
 @end
+
+
+// Abstract base class for ORKDiscreteGraphChartView and ORKLineGraphChartView
+@interface ORKFloatRangeGraphChartView ()
+
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *dataPoints; // Actual data
+
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *yAxisPoints; // Normalized for the plot view height
+
+- (void)updatePointLayers;
+
+- (void)layoutPointLayers;
+
+@end
+

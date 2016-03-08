@@ -142,3 +142,43 @@ class DiscreteGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
     }
 
 }
+
+class BarGraphDataSource: NSObject, ORKFloatStackGraphChartViewDataSource {
+    
+    var plotPoints =
+    [
+        [
+            ORKFloatStack(stackedValueArray: [4, 6]),
+            ORKFloatStack(stackedValueArray: [2, 4, 4]),
+            ORKFloatStack(stackedValueArray: [2, 6, 3, 6]),
+            ORKFloatStack(stackedValueArray: [3, 8, 10, 12]),
+            ORKFloatStack(stackedValueArray: [5, 10, 12, 8]),
+            ORKFloatStack(stackedValueArray: [8, 13, 18]),
+        ],
+        [
+            ORKFloatStack(stackedValueArray: [14]),
+            ORKFloatStack(stackedValueArray: [6, 6]),
+            ORKFloatStack(stackedValueArray: [3, 10, 12]),
+            ORKFloatStack(stackedValueArray: [5, 11, 14]),
+            ORKFloatStack(stackedValueArray: [7, 13, 20]),
+            ORKFloatStack(stackedValueArray: [10, 13, 25]),
+        ]
+    ]
+    
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return plotPoints.count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatStack {
+        return plotPoints[plotIndex][pointIndex]
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+        return plotPoints[plotIndex].count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+        return "\(pointIndex + 1)"
+    }
+    
+}

@@ -72,7 +72,7 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     }
 }
 
-class BaseGraphChartDataSource:  NSObject, ORKFloatRangeGraphChartViewDataSource {
+class BaseFloatRangeGraphChartDataSource:  NSObject, ORKFloatRangeGraphChartViewDataSource {
     var plotPoints: [[ORKFloatRange]] = [[]]
     
     func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
@@ -88,7 +88,23 @@ class BaseGraphChartDataSource:  NSObject, ORKFloatRangeGraphChartViewDataSource
     }
 }
 
-class LineGraphChartDataSource: BaseGraphChartDataSource {
+class BaseFloatStackGraphChartDataSource:  NSObject, ORKFloatStackGraphChartViewDataSource {
+    var plotPoints: [[ORKFloatStack]] = [[]]
+    
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return plotPoints.count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatStack {
+        return plotPoints[plotIndex][pointIndex]
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+        return plotPoints[plotIndex].count
+    }
+}
+
+class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
     
     override init() {
         super.init()
@@ -168,7 +184,7 @@ class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
     }
 }
 
-class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
+class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
     
     override init() {
         super.init()
@@ -230,7 +246,52 @@ class ColoredDiscreteGraphChartDataSource: DiscreteGraphChartDataSource {
     }
 }
 
-class PerformanceLineGraphChartDataSource: BaseGraphChartDataSource {
+class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
+    
+    override init() {
+        super.init()
+        plotPoints =
+            [
+                [
+                    ORKFloatStack(),
+                    ORKFloatStack(stackedValueArray: [0, 2, 5]),
+                    ORKFloatStack(stackedValueArray: [1, 3, 2]),
+                    ORKFloatStack(stackedValueArray: [2, 6, 1]),
+                    ORKFloatStack(stackedValueArray: [3, 9, 4]),
+                    ORKFloatStack(stackedValueArray: [4, 13, 2]),
+                ],
+                [
+                    ORKFloatStack(stackedValueArray: [1]),
+                    ORKFloatStack(stackedValueArray: [2, 4]),
+                    ORKFloatStack(stackedValueArray: [3, 8]),
+                    ORKFloatStack(stackedValueArray: [5, 11]),
+                    ORKFloatStack(stackedValueArray: [7, 13]),
+                    ORKFloatStack(stackedValueArray: [10, 13]),
+                    ORKFloatStack(stackedValueArray: [12, 15]),
+                ],
+                [
+                    ORKFloatStack(),
+                    ORKFloatStack(stackedValueArray: [5, 6]),
+                    ORKFloatStack(stackedValueArray: [2, 15]),
+                    ORKFloatStack(stackedValueArray: [4, 11]),
+                ],
+        ]
+    }
+    
+    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 8
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
+        return "\(pointIndex + 1)"
+    }
+    
+    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 2
+    }
+}
+
+class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
     
     override init() {
         super.init()

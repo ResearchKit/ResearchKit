@@ -34,7 +34,7 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKFloatRange.h"
+#import "ORKChartTypes.h"
 
 
 const CGFloat FillColorAlpha = 0.4;
@@ -77,6 +77,7 @@ const CGFloat FillColorAlpha = 0.4;
     BOOL emptyDataPresent = NO;
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+        [self.lineLayers[plotIndex] addObject:[NSMutableArray new]];
         if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             emptyDataPresent = YES;
             continue;
@@ -98,7 +99,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         [self.plotView.layer addSublayer:lineLayer];
-        [self.lineLayers[plotIndex] addObject:lineLayer];
+        [self.lineLayers[plotIndex][pointIndex - 1] addObject:lineLayer];
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
@@ -116,21 +117,18 @@ const CGFloat FillColorAlpha = 0.4;
         return;
     }
     
-    NSUInteger lineLayerIndex = 0;
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKFloatRange *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
-    NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
-    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+    NSUInteger numberOfPoints = self.lineLayers[plotIndex].count;
+    for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
         if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             continue;
         }
-        
         UIBezierPath *linePath = [UIBezierPath bezierPath];
         
         if (positionOnXAxis != ORKCGFloatInvalidValue) {
-            previousPointExists = YES;
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
                 [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
@@ -142,15 +140,17 @@ const CGFloat FillColorAlpha = 0.4;
         positionOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
         
         if (!previousPointExists) {
+            if (positionOnXAxis != ORKCGFloatInvalidValue) {
+                previousPointExists = YES;
+            }
             continue;
         }
         
         [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         
-        CAShapeLayer *lineLayer = self.lineLayers[plotIndex][lineLayerIndex];
+        CAShapeLayer *lineLayer = self.lineLayers[plotIndex][pointIndex - 1][0];
         lineLayer.path = linePath.CGPath;
-        lineLayerIndex++;
     }
     
     [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
@@ -160,8 +160,8 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat value = [super valueForCanvasXPosition:xPosition plotIndex:plotIndex];
+- (CGFloat)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    CGFloat value = [super scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
     if (value == ORKCGFloatInvalidValue) {
         CGFloat viewWidth = self.plotView.bounds.size.width;

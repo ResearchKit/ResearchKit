@@ -54,13 +54,17 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     let discreteGraphChartDataSource = DiscreteGraphChartDataSource()
     let coloredDiscreteGraphChartDataSource = ColoredDiscreteGraphChartDataSource()
 
+    let barGraphChartDataSource = BarGraphChartDataSource()
+    
     let pieChartIdentifier = "PieChartCell"
     let lineGraphChartIdentifier = "LineGraphChartCell"
     let discreteGraphChartIdentifier = "DiscreteGraphChartCell"
+    let barGraphChartIdentifier = "BarGraphChartCell"
     
     var pieChartTableViewCell: PieChartTableViewCell!
     var lineGraphChartTableViewCell: LineGraphChartTableViewCell!
     var discreteGraphChartTableViewCell: DiscreteGraphChartTableViewCell!
+    var barGraphChartTableViewCell: BarGraphChartTableViewCell!
     var chartTableViewCells: [UITableViewCell]!
     
     @IBAction func dimiss(sender: AnyObject) {
@@ -157,7 +161,14 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             discreteGraphChartView.drawsConnectedRanges = true
         }
 
-        chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
+        
+        // ORKBarGraphChartView
+        barGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        let barGraphChartView = barGraphChartTableViewCell.graphChartView as! ORKBarGraphChartView
+        barGraphChartView.dataSource = barGraphChartDataSource
+
+        
+        chartTableViewCells = [barGraphChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, pieChartTableViewCell]
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
     }

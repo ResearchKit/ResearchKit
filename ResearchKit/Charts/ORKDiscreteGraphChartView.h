@@ -38,8 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKDiscreteGraphChartView` class presents data provided by an object conforming to the
- `ORKFloatRangeGraphChartViewDataSource` protocol as a discrete graph of ranged points. You can
- optionally display a line connecting each ranged point pair.
+ `ORKFloatRangeGraphChartViewDataSource` protocol as a discrete graph of ranged points.
+ 
+ You can optionally display a line connecting each ranged point pair.
+ 
+ By default, the primary plot is colored by the `tintColor`, and any additional plots are colored
+ using the `referenceLineColor` property. You can customize the plot colors by implementing the
+ `-graphChartView:colorForPlotIndex:` method in the data source.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphChartView : ORKFloatRangeGraphChartView

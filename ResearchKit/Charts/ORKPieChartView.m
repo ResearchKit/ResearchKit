@@ -36,6 +36,7 @@
 #import "ORKPieChartPieView.h"
 #import "ORKPieChartLegendView.h"
 #import "ORKPieChartTitleTextView.h"
+#import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
@@ -343,14 +344,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     } else {
         // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
-        if (numberOfSegments > 1) {
-            // Avoid pure white and pure black
-            CGFloat divisionFactor = (1.0 / numberOfSegments);
-            CGFloat alphaComponent = 1 - (divisionFactor * index);
-            color = [self.tintColor colorWithAlphaComponent:alphaComponent];
-        } else {
-            color = self.tintColor;
-        }
+        color = colorWithReducedAlphaWithBaseColor(self.tintColor, index, numberOfSegments);
     }
     return color;
 }
