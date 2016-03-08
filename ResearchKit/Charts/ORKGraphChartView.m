@@ -527,7 +527,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
     
     // We perform the same double-looping when creating the elements and there is no need to do that if Voice Over is not running.
-    if (!UIAccessibilityIsVoiceOverRunning()) {
+    if (UIAccessibilityIsVoiceOverRunning()) {
         [self _axCreateAccessibilityElements];
     }
 }
