@@ -59,6 +59,7 @@
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 #import "ORKWaitStep.h"
+#import <limits.h>
 
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
@@ -1238,7 +1239,27 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_TEXT", nil);
-            step.detailText = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL", nil);
+            
+            NSArray<NSString *>*detailStringForNumberOfTasks = @[
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_1_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_2_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_3_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_4_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_5_TASK", nil)
+                                                                 ];
+
+            // start with the count for all the tasks, then subtract one for each excluded task flag
+            static const NSInteger allTasks = 5; // hold in lap, outstretched arm, elbow bent, repeatedly touching nose, queen wave
+            NSInteger actualTasksIndex = allTasks - 1;
+            NSInteger bits = sizeof(activeTaskOptions) * CHAR_BIT; // don't assume exclude flags are sequential--check all positions
+            for (NSInteger i = 0; i < bits ; ++i) {
+                if (activeTaskOptions & (1 << i)) {
+                    actualTasksIndex--;
+                }
+            }
+            
+            NSString *detailFormat = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_%", nil);
+            step.detailText = [NSString stringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
             step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             
