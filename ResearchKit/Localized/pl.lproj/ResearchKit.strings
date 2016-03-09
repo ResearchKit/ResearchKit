@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dozwolone są tylko znaki numeryczne.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Wskaźnik postępu podawania kodu";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Liczba wprowadzonych cyfr: %@ z %@";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nie można było dodać rzeczy pęku kluczy.";

@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Només es permeten caràcters numèrics.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés d’ingrés del codi";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígits introduïts";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "No s’ha pogut afegir l’ítem del clauer.";

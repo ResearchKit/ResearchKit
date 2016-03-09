@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se permiten caracteres numéricos.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador del progreso de ingreso de código";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos ingresados";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "No se pudo agregar el elemento de Llavero.";

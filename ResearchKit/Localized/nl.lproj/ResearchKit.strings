@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Alleen cijfertekens toegestaan.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode-invoer";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ van %@ cijfers ingevoerd";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden toegevoegd.";

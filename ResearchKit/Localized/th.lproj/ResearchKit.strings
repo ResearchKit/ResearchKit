@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "เฉพาะตัวเลขเท่านั้น";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "สัญลักษณ์แสดงว่ากำลังป้อนรหัสผ่านตัวเลขอยู่";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "ตัวเลขที่ป้อนหลักที่ %@ จาก %@ หลัก";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "ไม่สามารถเพิ่มรายการในพวงกุญแจ";

@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Es sind nur numerische Zeichen zulässig.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusanzeige für Codeeingabe";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ von %@ Stellen eingegeben";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Schlüsselbundobjekt konnte nicht hinzugefügt werden";

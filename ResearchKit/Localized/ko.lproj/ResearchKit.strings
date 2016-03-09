@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "숫자만 허용됩니다.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "암호 입력 진행 과정 표시기";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%2$@개 중 %1$@개의 숫자가 입력됨";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "키체인 항목을 추가할 수 없습니다.";

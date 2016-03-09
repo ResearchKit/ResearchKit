@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "只允許輸入數字。";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入 %@ 個數字（共 %@ 個）";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "無法加入「鑰匙圈」項目。";

@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Povolené sú len číselné znaky.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikátor priebehu zadávania hesla";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Zadané číslice: %@ z %@";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nepodarilo sa pridať položku kľúčenky.";

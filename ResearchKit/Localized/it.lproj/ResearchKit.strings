@@ -141,7 +141,6 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sono consentiti solo caratteri numerici.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicatore progresso inserimento codice";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ di %@ cifre inserite";
-"PASSCODE_FORGOT" = "Forgot Passcode?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Impossibile aggiungere l'elemento del portachiavi.";
