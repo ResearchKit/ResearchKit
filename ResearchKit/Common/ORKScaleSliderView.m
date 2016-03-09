@@ -88,7 +88,7 @@
                 ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
                 stepLabel.text = textChoice.text;
                 stepLabel.textAlignment = NSTextAlignmentLeft;
-                stepLabel.numberOfLines = 2;
+                stepLabel.numberOfLines = 0;
                 stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [self addSubview:stepLabel];
                 [_textChoiceLabels addObject:stepLabel];
