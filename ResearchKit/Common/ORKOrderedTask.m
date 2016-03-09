@@ -281,7 +281,18 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 NSString * const ORKInstruction0StepIdentifier = @"instruction";
 NSString * const ORKInstruction1StepIdentifier = @"instruction1";
+NSString * const ORKInstruction2StepIdentifier = @"instruction2";
+NSString * const ORKInstruction3StepIdentifier = @"instruction3";
+NSString * const ORKInstruction4StepIdentifier = @"instruction4";
+NSString * const ORKInstruction5StepIdentifier = @"instruction5";
+NSString * const ORKInstruction6StepIdentifier = @"instruction6";
+NSString * const ORKInstruction7StepIdentifier = @"instruction7";
 NSString * const ORKCountdownStepIdentifier = @"countdown";
+NSString * const ORKCountdown1StepIdentifier = @"countdown1";
+NSString * const ORKCountdown2StepIdentifier = @"countdown2";
+NSString * const ORKCountdown3StepIdentifier = @"countdown3";
+NSString * const ORKCountdown4StepIdentifier = @"countdown4";
+NSString * const ORKCountdown5StepIdentifier = @"countdown5";
 NSString * const ORKAudioStepIdentifier = @"audio";
 NSString * const ORKTappingStepIdentifier = @"tapping";
 NSString * const ORKConclusionStepIdentifier = @"conclusion";
@@ -305,6 +316,9 @@ NSString * const ORKTremorTestExtendArmStepIdentifier = @"tremor.handAtShoulderL
 NSString * const ORKTremorTestBendArmStepIdentifier = @"tremor.handAtShoulderLengthWithElbowBent";
 NSString * const ORKTremorTestTouchNoseStepIdentifier = @"tremor.handToNose";
 NSString * const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
+NSString * const ORKActiveTaskLeftHandIdentifier = @"left";
+NSString * const ORKActiveTaskRightHandIdentifier = @"right";
+NSString * const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
 NSString * const ORKPSATStepIdentifier = @"psat";
 NSString * const ORKAudioRecorderIdentifier = @"audio";
 NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
@@ -1216,60 +1230,26 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
-                          intendedUseDescription:(NSString *)intendedUseDescription
-                              activeStepDuration:(NSTimeInterval)activeStepDuration
-                               activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
-                                         options:(ORKPredefinedTaskOption)options {
-    
-    NSMutableArray *steps = [NSMutableArray array];
-    NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
-    
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
-            step.text = intendedUseDescription ? : ORKLocalizedString(@"TREMOR_TEST_INTENDED_USE", nil);
-            step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.shouldTintImages = YES;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
-            step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_TEXT", nil);
-            
-            NSArray<NSString *>*detailStringForNumberOfTasks = @[
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_1_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_2_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_3_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_4_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_5_TASK", nil)
-                                                                 ];
++ (NSString *)stepIdentifier:(NSString *)stepIdentifier withHandIdentifier:(NSString *)handIdentifier
+{
+    return [NSString stringWithFormat:@"%@.%@", stepIdentifier, handIdentifier];
+}
 
-            // start with the count for all the tasks, then subtract one for each excluded task flag
-            static const NSInteger allTasks = 5; // hold in lap, outstretched arm, elbow bent, repeatedly touching nose, queen wave
-            NSInteger actualTasksIndex = allTasks - 1;
-            NSInteger bits = sizeof(activeTaskOptions) * CHAR_BIT; // don't assume exclude flags are sequential--check all positions
-            for (NSInteger i = 0; i < bits ; ++i) {
-                if (activeTaskOptions & (1 << i)) {
-                    actualTasksIndex--;
-                }
-            }
-            
-            NSString *detailFormat = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_%", nil);
-            step.detailText = [NSString stringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
-            step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.shouldTintImages = YES;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-    
++ (NSMutableArray *)stepsForOneHandTremorTestTaskWithIdentifier:(NSString *)identifier
+                                             activeStepDuration:(NSTimeInterval)activeStepDuration
+                                              activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                                       lastHand:(BOOL)lastHand
+                                                     leftHand:(BOOL)leftHand
+                                                 handIdentifier:(NSString *)handIdentifier
+                                                        options:(ORKPredefinedTaskOption)options
+{
+    NSMutableArray<ORKActiveStep *> *steps = [NSMutableArray array];
+    NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
+
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandInLap)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction2"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction2StepIdentifier withHandIdentifier:handIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1280,14 +1260,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:@"countdown1"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown1StepIdentifier withHandIdentifier:handIdentifier];
+            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
         }
         
         {
             NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld", nil);
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestInLapStepIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestInLapStepIdentifier withHandIdentifier:handIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac1_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac1_motion" frequency:100.0]];
             step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
@@ -1306,7 +1288,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction4"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction4StepIdentifier withHandIdentifier:handIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest4a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1317,14 +1300,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:@"countdown2"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown2StepIdentifier withHandIdentifier:handIdentifier];
+            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
         }
         
         {
             NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld", nil);
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestExtendArmStepIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestExtendArmStepIdentifier withHandIdentifier:handIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac2_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac2_motion" frequency:100.0]];
             step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
@@ -1344,7 +1329,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction5"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction5StepIdentifier withHandIdentifier:handIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest5a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1355,14 +1341,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:@"countdown3"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown3StepIdentifier withHandIdentifier:handIdentifier];
+            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
         }
         
         {
             NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld", nil);
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestBendArmStepIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestBendArmStepIdentifier withHandIdentifier:handIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac3_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac3_motion" frequency:100.0]];
             step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
@@ -1381,7 +1369,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandToNose)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction6"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction6StepIdentifier withHandIdentifier:handIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest6a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1392,14 +1381,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:@"countdown4"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown4StepIdentifier withHandIdentifier:handIdentifier];
+            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
         }
         
         {
             NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld", nil);
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestTouchNoseStepIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestTouchNoseStepIdentifier withHandIdentifier:handIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac4_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac4_motion" frequency:100.0]];
             step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
@@ -1418,7 +1409,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeQueenWave)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"instruction7"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction7StepIdentifier withHandIdentifier:handIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest7" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1428,18 +1420,20 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:@"countdown5"];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown5StepIdentifier withHandIdentifier:handIdentifier];
+            ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
         }
         
         {
             NSString *titleFormat = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld", nil);
-            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:ORKTremorTestTurnWristStepIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestTurnWristStepIdentifier withHandIdentifier:handIdentifier];
+            ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac5_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac5_motion" frequency:100.0]];
             step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
-            step.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
+            step.finishedSpokenInstruction = stepFinishedInstruction;
             step.stepDuration = activeStepDuration;
             step.shouldPlaySoundOnStart = YES;
             step.shouldVibrateOnStart = YES;
@@ -1452,14 +1446,127 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    // if the default final active task (queen wave) is excluded, replace the last included active task's
-    // finished spoken instruction with the test-completed spoken instruction
-    if (activeTaskOptions & ORKTremorActiveTaskOptionExcludeQueenWave) {
-        ORKActiveStep *lastActiveStep = [steps lastObject];
-        if ([lastActiveStep respondsToSelector:@selector(setFinishedSpokenInstruction:)]) {
-            lastActiveStep.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
+    // fix the spoken instruction on the last included step, depending on which hand we're on
+    ORKActiveStep *lastStep = (ORKActiveStep *)[steps lastObject];
+    if (lastHand) {
+        lastStep.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
+    } else if (leftHand) {
+        lastStep.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION", nil);
+    } else {
+        lastStep.finishedSpokenInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION", nil);
+    }
+    
+    return steps;
+}
+
++ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                          intendedUseDescription:(NSString *)intendedUseDescription
+                              activeStepDuration:(NSTimeInterval)activeStepDuration
+                               activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                         options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    // coin toss for which hand first (in case we're doing both)
+    BOOL leftFirstIfDoingBoth = arc4random_uniform(2) == 1;
+    BOOL doingBoth = ((handOptions & ORKPredefinedTaskHandOptionLeft) && (handOptions & ORKPredefinedTaskHandOptionRight));
+    BOOL firstIsLeft = (leftFirstIfDoingBoth && doingBoth) || (!doingBoth && (handOptions & ORKPredefinedTaskHandOptionLeft));
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
+            step.text = intendedUseDescription ? : ORKLocalizedString(@"TREMOR_TEST_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
+            
+            if (handOptions == ORKPredefinedTaskHandOptionUndefined) {
+                step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DEFAULT_TEXT", nil);
+            } else {
+                if (firstIsLeft) {
+                    step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT", nil);
+                } else {
+                    step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT", nil);
+                }
+            }
+            
+            NSArray<NSString *>*detailStringForNumberOfTasks = @[
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_1_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_2_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_3_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_4_TASK", nil),
+                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_5_TASK", nil)
+                                                                 ];
+
+            // start with the count for all the tasks, then subtract one for each excluded task flag
+            static const NSInteger allTasks = 5; // hold in lap, outstretched arm, elbow bent, repeatedly touching nose, queen wave
+            NSInteger actualTasksIndex = allTasks - 1;
+            NSInteger bits = sizeof(activeTaskOptions) * CHAR_BIT; // don't assume exclude flags are sequential--check all positions
+            for (NSInteger i = 0; i < bits ; ++i) {
+                if (activeTaskOptions & (1 << i)) {
+                    actualTasksIndex--;
+                }
+            }
+            
+            NSString *detailFormat = doingBoth ? ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_BOTH_HANDS_%", nil) : ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%", nil);
+            step.detailText = [NSString stringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
+            step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
         }
     }
+    
+    // right or most-affected hand
+    NSArray *rightSteps = nil;
+    if (handOptions == ORKPredefinedTaskHandOptionUndefined) {
+        rightSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
+                                                    activeStepDuration:activeStepDuration
+                                                     activeTaskOptions:activeTaskOptions
+                                                              lastHand:YES
+                                                              leftHand:NO
+                                                        handIdentifier:ORKActiveTaskMostAffectedHandIdentifier
+                                                               options:options];
+    } else if (handOptions & ORKPredefinedTaskHandOptionRight) {
+        rightSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
+                                                    activeStepDuration:activeStepDuration
+                                                     activeTaskOptions:activeTaskOptions
+                                                              lastHand:firstIsLeft
+                                                              leftHand:NO
+                                                        handIdentifier:ORKActiveTaskRightHandIdentifier
+                                                               options:options];
+    }
+    
+    // left hand
+    NSArray *leftSteps = nil;
+    if (handOptions & ORKPredefinedTaskHandOptionLeft) {
+        leftSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
+                                                   activeStepDuration:activeStepDuration
+                                                    activeTaskOptions:activeTaskOptions
+                                                             lastHand:!firstIsLeft || !(handOptions & ORKPredefinedTaskHandOptionRight)
+                                                             leftHand:YES
+                                                       handIdentifier:ORKActiveTaskLeftHandIdentifier
+                                                              options:options];
+    }
+    
+    if (firstIsLeft && leftSteps != nil) {
+        [steps addObjectsFromArray:leftSteps];
+    }
+    
+    if (rightSteps != nil) {
+        [steps addObjectsFromArray:rightSteps];
+    }
+    
+    if (!firstIsLeft && leftSteps != nil) {
+        [steps addObjectsFromArray:leftSteps];
+    }
+    
     
     if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKCompletionStep *step = [self makeCompletionStep];
