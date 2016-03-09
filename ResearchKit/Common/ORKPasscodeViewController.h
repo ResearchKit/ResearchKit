@@ -68,11 +68,6 @@ ORK_AVAILABLE_DECL
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
 /*
- * @return YES and "Forgot Passcode" button will show with text from delegate method textForForgotPasscode and will call forgotPasscodeTapped when pressed.  NO and button will be hidden. Defaults to NO.
- */
-- (BOOL)passcodeViewControllerHasForgotPasscode:(UIViewController *)viewController;
-
-/*
  * Defaults to Localized "Forgot Password?" text
  * @return the text of the forgot passcode button
  */
@@ -86,10 +81,9 @@ ORK_AVAILABLE_DECL
 
 /*
  * Called when forgot passcode button is tapped
- * @param forgotPasscodeButton the button that was tapped
  * @param ORKPasscodeStepViewController
  */
-- (void)passcodeViewController:(UIViewController *)viewController forgotPasscodeTapped:(UIButton *)forgotPasscodeButton;
+- (void)passcodeViewControllerForgotPasscodeTapped:(UIViewController *)viewController;
 
 @end
 

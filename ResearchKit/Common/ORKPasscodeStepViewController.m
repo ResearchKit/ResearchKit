@@ -677,14 +677,15 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 }
 
 - (void)forgotPasscodeTapped {
-    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:forgotPasscodeTapped:)]) {
-        [self.passcodeDelegate passcodeViewController:self forgotPasscodeTapped:_forgotPasscodeButton ];
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
+        [self.passcodeDelegate passcodeViewControllerForgotPasscodeTapped:self ];
     }
 }
 
 - (BOOL) hasForgotPasscode {
-    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerHasForgotPasscode:)]) {
-        return [self.passcodeDelegate passcodeViewControllerHasForgotPasscode:self];
+    if ((self.passcodeFlow == ORKPasscodeFlowAuthenticate) &&
+        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
+        return YES;
     }
     return NO;
 }
@@ -693,11 +694,10 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTextForForgotPasscode:)]) {
         return [self.passcodeDelegate passcodeViewControllerTextForForgotPasscode: self];
     }
-    return ORKLocalizedString(@"PASSCODE_FORGOT", @"Prompt for user forgetting their passcode");
+    return ORKLocalizedString(@"PASSCODE_FORGOT_BUTTON_TITLE", @"Prompt for user forgetting their passcode");
 }
 
-- (UIColor*) forgotPasscodeButtonTintColor
-{
+- (UIColor*) forgotPasscodeButtonTintColor {
     if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTintColorForForgotPasscode:)]) {
         return [self.passcodeDelegate passcodeViewControllerTintColorForForgotPasscode:self];
     }
