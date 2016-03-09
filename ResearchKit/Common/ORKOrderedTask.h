@@ -131,6 +131,25 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 } ORK_ENUM_AVAILABLE;
 
 /**
+ Values that identify the hand(s) to be used in an active task.
+ 
+ By default, the participant will be asked to use their most affected hand.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
+    /// Which hand to use is undefined
+    ORKPredefinedTaskHandOptionUndefined = 0,
+    
+    /// Task should test the left hand
+    ORKPredefinedTaskHandOptionLeft = 1 << 1,
+    
+    /// Task should test the right hand
+    ORKPredefinedTaskHandOptionRight = 1 << 2,
+    
+    /// Task should test both hands (random order)
+    ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+/**
  The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
  tasks in the predefined Tremor `ORKOrderedTask`.
  
@@ -539,6 +558,8 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
  @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
@@ -547,6 +568,7 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                           intendedUseDescription:(nullable NSString *)intendedUseDescription
                               activeStepDuration:(NSTimeInterval)activeStepDuration
                                activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
                                          options:(ORKPredefinedTaskOption)options;
 
 @end
