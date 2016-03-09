@@ -279,7 +279,18 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 NSString * const ORKInstruction0StepIdentifier = @"instruction";
 NSString * const ORKInstruction1StepIdentifier = @"instruction1";
+NSString * const ORKInstruction2StepIdentifier = @"instruction2";
+NSString * const ORKInstruction3StepIdentifier = @"instruction3";
+NSString * const ORKInstruction4StepIdentifier = @"instruction4";
+NSString * const ORKInstruction5StepIdentifier = @"instruction5";
+NSString * const ORKInstruction6StepIdentifier = @"instruction6";
+NSString * const ORKInstruction7StepIdentifier = @"instruction7";
 NSString * const ORKCountdownStepIdentifier = @"countdown";
+NSString * const ORKCountdown1StepIdentifier = @"countdown1";
+NSString * const ORKCountdown2StepIdentifier = @"countdown2";
+NSString * const ORKCountdown3StepIdentifier = @"countdown3";
+NSString * const ORKCountdown4StepIdentifier = @"countdown4";
+NSString * const ORKCountdown5StepIdentifier = @"countdown5";
 NSString * const ORKAudioStepIdentifier = @"audio";
 NSString * const ORKTappingStepIdentifier = @"tapping";
 NSString * const ORKConclusionStepIdentifier = @"conclusion";
@@ -1230,7 +1241,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandInLap)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            NSString *stepIdentifier = [self stepIdentifier:@"instruction2" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction2StepIdentifier withHandIdentifier:handIdentifier];
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
@@ -1242,7 +1253,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            NSString *stepIdentifier = [self stepIdentifier:@"countdown1" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown1StepIdentifier withHandIdentifier:handIdentifier];
             ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
@@ -1270,7 +1281,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            NSString *stepIdentifier = [self stepIdentifier:@"instruction4" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction4StepIdentifier withHandIdentifier:handIdentifier];
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
@@ -1282,7 +1293,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            NSString *stepIdentifier = [self stepIdentifier:@"countdown2" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown2StepIdentifier withHandIdentifier:handIdentifier];
             ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
@@ -1311,7 +1322,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            NSString *stepIdentifier = [self stepIdentifier:@"instruction5" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction5StepIdentifier withHandIdentifier:handIdentifier];
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
@@ -1323,7 +1334,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            NSString *stepIdentifier = [self stepIdentifier:@"countdown3" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown3StepIdentifier withHandIdentifier:handIdentifier];
             ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
@@ -1351,7 +1362,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandToNose)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            NSString *stepIdentifier = [self stepIdentifier:@"instruction6" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction6StepIdentifier withHandIdentifier:handIdentifier];
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
@@ -1363,7 +1374,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            NSString *stepIdentifier = [self stepIdentifier:@"countdown4" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown4StepIdentifier withHandIdentifier:handIdentifier];
             ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
@@ -1391,7 +1402,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeQueenWave)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-            NSString *stepIdentifier = [self stepIdentifier:@"instruction7" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKInstruction7StepIdentifier withHandIdentifier:handIdentifier];
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
@@ -1402,7 +1413,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         
         {
-            NSString *stepIdentifier = [self stepIdentifier:@"countdown5" withHandIdentifier:handIdentifier];
+            NSString *stepIdentifier = [self stepIdentifier:ORKCountdown5StepIdentifier withHandIdentifier:handIdentifier];
             ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:stepIdentifier];
             
             ORKStepArrayAddStep(steps, step);
