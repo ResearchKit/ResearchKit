@@ -653,6 +653,8 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
  @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
@@ -661,6 +663,7 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                           intendedUseDescription:(nullable NSString *)intendedUseDescription
                               activeStepDuration:(NSTimeInterval)activeStepDuration
                                activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
                                          options:(ORKPredefinedTaskOption)options;
 
 @end
