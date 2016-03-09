@@ -676,45 +676,38 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     return _shouldResignFirstResponder;
 }
 
-- (void)forgotPasscodeTapped
-{
-    if ([self.passcodeDelegate respondsToSelector:@selector(forgotPasscodeTapped:onViewController:)])
-    {
-        [self.passcodeDelegate forgotPasscodeTapped:_forgotPasscodeButton onViewController:self];
+- (void)forgotPasscodeTapped {
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:forgotPasscodeTapped:)]) {
+        [self.passcodeDelegate passcodeViewController:self forgotPasscodeTapped:_forgotPasscodeButton ];
     }
 }
 
-- (BOOL) hasForgotPasscode
-{
-    if ([self.passcodeDelegate respondsToSelector:@selector(hasForgotPasscode)])
-    {
-        return [self.passcodeDelegate hasForgotPasscode];
+- (BOOL) hasForgotPasscode {
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerHasForgotPasscode:)]) {
+        return [self.passcodeDelegate passcodeViewControllerHasForgotPasscode:self];
     }
     return NO;
 }
 
-- (NSString*) forgotPasscodeButtonText
-{
-    if ([self.passcodeDelegate respondsToSelector:@selector(textForForgotPasscode)])
-    {
-        return [self.passcodeDelegate textForForgotPasscode];
+- (NSString*) forgotPasscodeButtonText {
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTextForForgotPasscode:)]) {
+        return [self.passcodeDelegate passcodeViewControllerTextForForgotPasscode: self];
     }
     return ORKLocalizedString(@"PASSCODE_FORGOT", @"Prompt for user forgetting their passcode");
 }
 
 - (UIColor*) forgotPasscodeButtonTintColor
 {
-    if ([self.passcodeDelegate respondsToSelector:@selector(tintColorForForgotPasscode)])
-    {
-        return [self.passcodeDelegate tintColorForForgotPasscode];
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTintColorForForgotPasscode:)]) {
+        return [self.passcodeDelegate passcodeViewControllerTintColorForForgotPasscode:self];
     }
     return [UIButton new].tintColor;
 }
 
 #pragma mark - Keyboard Notifications
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
     CGFloat keyboardHeight = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     
     double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -725,8 +718,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     }];
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
     double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 
     [UIView animateWithDuration:animationDuration animations:^

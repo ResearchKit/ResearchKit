@@ -58,6 +58,7 @@ ORK_AVAILABLE_DECL
 - (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController;
 
 @optional
+
 /**
  Notifies the delegate that the user hit the cancel button item. The cancel button is only visible if this method
  is implemented.
@@ -69,27 +70,26 @@ ORK_AVAILABLE_DECL
 /*
  * @return YES and "Forgot Passcode" button will show with text from delegate method textForForgotPasscode and will call forgotPasscodeTapped when pressed.  NO and button will be hidden. Defaults to NO.
  */
-- (BOOL) hasForgotPasscode;
+- (BOOL)passcodeViewControllerHasForgotPasscode:(UIViewController *)viewController;
 
 /*
  * Defaults to Localized "Forgot Password?" text
  * @return the text of the forgot passcode button
  */
-- (NSString*) textForForgotPasscode;
+- (NSString*)passcodeViewControllerTextForForgotPasscode:(UIViewController *)viewController;
 
 /*
  * Defaults to Localized standard Apple blue tint color
  * @return the tint color of the forgot passcode button
  */
-- (UIColor*) tintColorForForgotPasscode;
+- (UIColor*)passcodeViewControllerTintColorForForgotPasscode:(UIViewController *)viewController;
 
 /*
  * Called when forgot passcode button is tapped
  * @param forgotPasscodeButton the button that was tapped
  * @param ORKPasscodeStepViewController
  */
-- (void) forgotPasscodeTapped:(UIButton*) forgotPasscodeButton
-             onViewController:(UIViewController*)viewController;
+- (void)passcodeViewController:(UIViewController *)viewController forgotPasscodeTapped:(UIButton *)forgotPasscodeButton;
 
 @end
 
