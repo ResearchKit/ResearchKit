@@ -62,6 +62,15 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
     return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKIBSampleDiscreteGraphDataSource : NSObject <ORKGraphChartViewDataSource>
+@property (nonatomic, strong, nullable) NSArray <NSArray *> *plotPoints;
+@end
+
+@interface ORKIBSampleLineGraphDataSource : NSObject <ORKGraphChartViewDataSource>
+@property (nonatomic, strong, nullable) NSArray <NSArray *> *plotPoints;
+@end
+#endif
 
 @interface ORKGraphChartView ()
 

@@ -1101,3 +1101,96 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 @end
+
+
+#if TARGET_INTERFACE_BUILDER
+
+@implementation ORKIBSampleDiscreteGraphDataSource
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithMinimumValue: 0 maximumValue: 2],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 1 maximumValue: 4],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 8],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 10],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 8 maximumValue: 13]],
+                            @[[[ORKRangedPoint alloc] initWithValue: 1],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 10],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 11],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 7 maximumValue: 13],
+                              [[ORKRangedPoint alloc] initWithMinimumValue: 10 maximumValue: 13]
+                              ]];
+    }
+    return self;
+}
+
+- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
+    return self.plotPoints.count;
+}
+
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex].count;
+}
+
+- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
+}
+
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
+    return [@(pointIndex + 1) stringValue];
+}
+
+@end
+
+
+@implementation ORKIBSampleLineGraphDataSource
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithValue: 10],
+                              [[ORKRangedPoint alloc] initWithValue: 20],
+                              [[ORKRangedPoint alloc] initWithValue: 25],
+                              [[ORKRangedPoint alloc] init],
+                              [[ORKRangedPoint alloc] initWithValue: 30],
+                              [[ORKRangedPoint alloc] initWithValue: 40]],
+                            @[[[ORKRangedPoint alloc] initWithValue: 2],
+                              [[ORKRangedPoint alloc] initWithValue: 4],
+                              [[ORKRangedPoint alloc] initWithValue: 8],
+                              [[ORKRangedPoint alloc] initWithValue: 16],
+                              [[ORKRangedPoint alloc] initWithValue: 32],
+                              [[ORKRangedPoint alloc] initWithValue: 64]
+                              ]];
+    }
+    return self;
+}
+
+- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
+    return self.plotPoints.count;
+}
+
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex].count;
+}
+
+- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
+}
+
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
+    return [@(pointIndex + 1) stringValue];
+}
+
+- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
+    return 0;
+}
+
+- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
+    return 70;
+}
+
+@end
+#endif
