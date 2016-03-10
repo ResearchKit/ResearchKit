@@ -59,6 +59,7 @@
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 #import "ORKWaitStep.h"
+#import "UIImage+ResearchKit.h"
 #import <limits.h>
 
 
@@ -1254,6 +1255,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+                step.auxiliaryImage = [step.auxiliaryImage ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1294,6 +1299,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest4a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.auxiliaryImage = [UIImage imageNamed:@"tremortest4b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+                step.auxiliaryImage = [step.auxiliaryImage ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1316,6 +1325,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.finishedSpokenInstruction = stepFinishedInstruction;
             step.stepDuration = activeStepDuration;
             step.image = [UIImage imageNamed:@"tremortest4a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldPlaySoundOnStart = YES;
             step.shouldVibrateOnStart = YES;
             step.shouldPlaySoundOnFinish = YES;
@@ -1335,6 +1347,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest5a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.auxiliaryImage = [UIImage imageNamed:@"tremortest5b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+                step.auxiliaryImage = [step.auxiliaryImage ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1375,6 +1391,10 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest6a" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.auxiliaryImage = [UIImage imageNamed:@"tremortest6b" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+                step.auxiliaryImage = [step.auxiliaryImage ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1414,6 +1434,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO", nil);
             step.text = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"tremortest7" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (leftHand) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1478,6 +1501,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
             step.text = intendedUseDescription ? : ORKLocalizedString(@"TREMOR_TEST_INTENDED_USE", nil);
             step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (firstIsLeft) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
@@ -1517,6 +1543,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             NSString *detailFormat = doingBoth ? ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_BOTH_HANDS_%", nil) : ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%", nil);
             step.detailText = [NSString stringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
             step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            if (firstIsLeft) {
+                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+            }
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
