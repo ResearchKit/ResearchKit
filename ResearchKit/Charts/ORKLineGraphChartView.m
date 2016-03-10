@@ -160,10 +160,10 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat value = [super scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
+- (double)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    double value = [super scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
-    if (value == ORKCGFloatInvalidValue) {
+    if (value == ORKDoubleInvalidValue) {
         CGFloat viewWidth = self.plotView.bounds.size.width;
         NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         NSInteger pointIndex = 0;
@@ -180,14 +180,14 @@ const CGFloat FillColorAlpha = 0.4;
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = self.dataPoints[plotIndex][previousValidIndex].minimumValue;
-        CGFloat y2 = self.dataPoints[plotIndex][nextValidIndex].minimumValue;
+        double y1 = self.dataPoints[plotIndex][previousValidIndex].minimumValue;
+        double y2 = self.dataPoints[plotIndex][nextValidIndex].minimumValue;
         
-        if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
-            return ORKCGFloatInvalidValue;
+        if (y1 == ORKDoubleInvalidValue || y2 == ORKDoubleInvalidValue) {
+            return ORKDoubleInvalidValue;
         }
 
-        CGFloat slope = (y2 - y1)/(x2 - x1);
+        double slope = (y2 - y1)/(x2 - x1);
         
         //  (y2 - y3)/(x2 - x3) = m
         value = y2 - (slope * (x2 - xPosition));
@@ -195,12 +195,12 @@ const CGFloat FillColorAlpha = 0.4;
     return value;
 }
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+- (double)canvasYPositionForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
     NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     
-    CGFloat canvasYPosition = 0;
+    double canvasYPosition = 0;
     if (nextValidIndex == previousValidIndex) {
         canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
     } else {
@@ -210,10 +210,10 @@ const CGFloat FillColorAlpha = 0.4;
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
-        CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+        double y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+        double y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
         
-        CGFloat slope = (y2 - y1)/(x2 - x1);
+        double slope = (y2 - y1)/(x2 - x1);
         
         //  (y2 - y3)/(x2 - x3) = m
         canvasYPosition = y2 - (slope * (x2 - xPosition));
@@ -226,7 +226,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     NSUInteger pointCountMinusOne = (self.dataPoints[plotIndex].count - 1);
     while (validPosition < pointCountMinusOne) {
-        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKDoubleInvalidValue) {
             break;
         }
         validPosition++;
@@ -241,7 +241,7 @@ const CGFloat FillColorAlpha = 0.4;
         validPosition = 0;
     }
     while (validPosition > 0) {
-        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKDoubleInvalidValue) {
             break;
         }
         validPosition--;

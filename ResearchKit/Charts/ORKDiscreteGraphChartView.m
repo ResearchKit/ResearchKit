@@ -89,7 +89,7 @@
             UIBezierPath *linePath = [UIBezierPath bezierPath];
             
             positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-            positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+            positionOnXAxis += [self xOffsetForPlotIndex:plotIndex];
             positionOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
             
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
@@ -102,20 +102,20 @@
     }
 }
 
-- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    return offsetForPlotIndex(plotIndex, [self numberOfPlots], ORKGraphChartViewPointAndLineWidth);
+- (CGFloat)xOffsetForPlotIndex:(NSInteger)plotIndex {
+    return xOffsetForPlotIndex(plotIndex, [self numberOfPlots], ORKGraphChartViewPointAndLineWidth);
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self offsetForPlotIndex:plotIndex];
+    return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self xOffsetForPlotIndex:plotIndex];
 }
 
 - (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super pointIndexForXPosition:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+    return [super pointIndexForXPosition:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super isXPositionSnapped:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+    return [super isXPositionSnapped:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
 
 @end

@@ -567,7 +567,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
-- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
+- (CGFloat)xOffsetForPlotIndex:(NSInteger)plotIndex {
     return 0;
 }
 
@@ -688,11 +688,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition plotIndex:plotIndex];
-    CGFloat scrubbingValue = [self scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
+    double scrubberYPosition = [self canvasYPositionForXPosition:xPosition plotIndex:plotIndex];
+    double scrubbingValue = [self scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
 
     _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
-    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue == ORKCGFloatInvalidValue ? 0.0 : scrubbingValue ];
+    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
                                                                            _plotView.bounds.size.height)
                                                         options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
@@ -703,7 +703,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                       textSize.width + ScrubberLabelHorizontalPadding,
                                       textSize.height + ScrubberLabelVerticalPadding);
 
-    if (scrubbingValue == ORKCGFloatInvalidValue) {
+    if (scrubbingValue == ORKDoubleInvalidValue) {
         [self setScrubberAccessoryViewsHidden:YES];
     } else {
         [self setScrubberAccessoryViewsHidden:NO];
@@ -771,21 +771,21 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     NSUInteger positionCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < positionCount; pointIndex++) {
         
-        CGFloat dataPointValue = [self scrubbingValueForPlotIndex:plotIndex pointIndex:pointIndex];
+        double scrubbingValue = [self scrubbingValueForPlotIndex:plotIndex pointIndex:pointIndex];
         
-        if (dataPointValue != ORKCGFloatInvalidValue) {
-            CGFloat value = xAxisPoint(pointIndex, numberOfXAxisPoints, self.plotView.bounds.size.width);
+        if (scrubbingValue != ORKDoubleInvalidValue) {
+            CGFloat snappedXPosition = xAxisPoint(pointIndex, numberOfXAxisPoints, self.plotView.bounds.size.width);
             
-            if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
-                xPosition = value;
+            if (fabs(snappedXPosition - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
+                xPosition = snappedXPosition;
             }
         }
     }
     return xPosition;
 }
 
-- (CGFloat)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat value = ORKCGFloatInvalidValue;
+- (double)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    double value = ORKDoubleInvalidValue;
     BOOL snapped = [self isXPositionSnapped:xPosition plotIndex:(NSInteger)plotIndex];
     if (snapped) {
         NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
@@ -794,9 +794,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     return value;
 }
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+- (double)canvasYPositionForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = [self isXPositionSnapped:xPosition plotIndex:plotIndex];
-    CGFloat canvasYPosition = 0;
+    double canvasYPosition = 0;
     if (snapped) {
         NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
         canvasYPosition = [self scrubbingYAxisPointForPlotIndex:plotIndex pointIndex:pointIndex];
@@ -916,12 +916,12 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     [self throwOverrideException];
 }
 
-- (CGFloat)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     [self throwOverrideException];
     return 0;
 }
 
-- (CGFloat)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     [self throwOverrideException];
     return 0;
 }
@@ -1027,9 +1027,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             } else if (self.minimumValue == self.maximumValue) {
                 normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
             } else {
-                CGFloat range = self.maximumValue - self.minimumValue;
-                CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue) / range * viewHeight;
-                CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue) / range * viewHeight;
+                double range = self.maximumValue - self.minimumValue;
+                double normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue) / range * viewHeight;
+                double normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue) / range * viewHeight;
                 
                 normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
                 normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
@@ -1042,8 +1042,8 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)calculateMinAndMaxValues {
-    self.minimumValue = ORKCGFloatInvalidValue;
-    self.maximumValue = ORKCGFloatInvalidValue;
+    self.minimumValue = ORKDoubleInvalidValue;
+    self.maximumValue = ORKDoubleInvalidValue;
     
     BOOL minimumValueProvided = NO;
     BOOL maximumValueProvided = NO;
@@ -1065,23 +1065,23 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
                 ORKValueRange *point = self.dataPoints[plotIndex][pointIndex];
                 if (!minimumValueProvided &&
-                    point.minimumValue != ORKCGFloatInvalidValue &&
-                    ((self.minimumValue == ORKCGFloatInvalidValue) || (point.minimumValue < self.minimumValue))) {
+                    point.minimumValue != ORKDoubleInvalidValue &&
+                    ((self.minimumValue == ORKDoubleInvalidValue) || (point.minimumValue < self.minimumValue))) {
                     self.minimumValue = point.minimumValue;
                 }
                 if (!maximumValueProvided &&
-                    point.maximumValue != ORKCGFloatInvalidValue &&
-                    ((self.maximumValue == ORKCGFloatInvalidValue) || (point.maximumValue > self.maximumValue))) {
+                    point.maximumValue != ORKDoubleInvalidValue &&
+                    ((self.maximumValue == ORKDoubleInvalidValue) || (point.maximumValue > self.maximumValue))) {
                     self.maximumValue = point.maximumValue;
                 }
             }
         }
     }
     
-    if (self.minimumValue == ORKCGFloatInvalidValue) {
+    if (self.minimumValue == ORKDoubleInvalidValue) {
         self.minimumValue = 0;
     }
-    if (self.maximumValue == ORKCGFloatInvalidValue) {
+    if (self.maximumValue == ORKDoubleInvalidValue) {
         self.maximumValue = 0;
     }
 }
@@ -1157,15 +1157,15 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             ORKValueRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
             if (!dataPointValue.isUnset) {
                 CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-                positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-                ORKValueRange *yAxisFloatRange = self.yAxisPoints[plotIndex][pointIndex];
+                positionOnXAxis += [self xOffsetForPlotIndex:plotIndex];
+                ORKValueRange *yAxisValueRange = self.yAxisPoints[plotIndex][pointIndex];
                 CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                pointLayer.position = CGPointMake(positionOnXAxis, yAxisFloatRange.minimumValue);
+                pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.minimumValue);
                 pointLayerIndex++;
                 
-                if (!yAxisFloatRange.isEmptyRange) {
+                if (!yAxisValueRange.isEmptyRange) {
                     CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisFloatRange.maximumValue);
+                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
                     pointLayerIndex++;
                 }
             }
@@ -1175,11 +1175,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 
 #pragma mark - Scrubbing
 
-- (CGFloat)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     return self.dataPoints[plotIndex][pointIndex].maximumValue;
 }
 
-- (CGFloat)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     return self.yAxisPoints[plotIndex][pointIndex].maximumValue;
 }
 

@@ -39,7 +39,7 @@
 
 @implementation ORKValueRange
 
-- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
+- (instancetype)initWithMinimumValue:(double)minimumValue maximumValue:(double)maximumValue {
     if (maximumValue < minimumValue) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"maximumValue cannot be lower than minimumValue"
@@ -55,15 +55,15 @@
 }
 
 - (instancetype)init {
-    return [self initWithMinimumValue:ORKCGFloatInvalidValue maximumValue:ORKCGFloatInvalidValue];
+    return [self initWithMinimumValue:ORKDoubleInvalidValue maximumValue:ORKDoubleInvalidValue];
 }
 
-- (instancetype)initWithValue:(CGFloat)value {
+- (instancetype)initWithValue:(double)value {
     return [self initWithMinimumValue:value maximumValue:value];
 }
 
 - (BOOL)isUnset {
-    return (_minimumValue == ORKCGFloatInvalidValue && _maximumValue == ORKCGFloatInvalidValue);
+    return (_minimumValue == ORKDoubleInvalidValue && _maximumValue == ORKDoubleInvalidValue);
 }
 
 - (BOOL)isEmptyRange {
@@ -71,8 +71,8 @@
 }
 
 - (NSString *)description {
-    NSString *minimumValueString = (_minimumValue == ORKCGFloatInvalidValue) ? @"ORKCGFloatInvalidValue" : [NSString stringWithFormat:@"%0.0f", _minimumValue] ;
-    NSString *maximumValueString = (_maximumValue == ORKCGFloatInvalidValue) ? @"ORKCGFloatInvalidValue" : [NSString stringWithFormat:@"%0.0f", _maximumValue] ;
+    NSString *minimumValueString = (_minimumValue == ORKDoubleInvalidValue) ? @"ORKDoubleInvalidValue" : [NSString stringWithFormat:@"%0.0f", _minimumValue] ;
+    NSString *maximumValueString = (_maximumValue == ORKDoubleInvalidValue) ? @"ORKDoubleInvalidValue" : [NSString stringWithFormat:@"%0.0f", _maximumValue] ;
     return [NSString stringWithFormat:@"<%@: %p; min = %@; max = %@>", self.class.description, self, minimumValueString, maximumValueString];
 }
 
@@ -104,7 +104,7 @@
     self = [super init];
     if (self) {
         if (stackedValues.count == 0) {
-            _totalValue = ORKCGFloatInvalidValue;
+            _totalValue = ORKDoubleInvalidValue;
         } else {
             _totalValue = 0;
             for (NSNumber *number in stackedValues) {

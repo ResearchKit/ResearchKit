@@ -49,8 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- The `ORKValueRange` class represents a value range. It can be used in graph chart plots to draw a
- value ranges.
+ The `ORKValueRange` class represents a range between two values of the double type. It can be used
+ in graph chart plots to draw value ranges.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKValueRange : NSObject <ORKGraphChartType>
@@ -63,7 +63,7 @@ ORK_CLASS_AVAILABLE
  
  @return A value range object.
  */
-- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMinimumValue:(double)minimumValue maximumValue:(double)maximumValue NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a value range initialized using the specified `value` for both `minimumValue` and
@@ -75,28 +75,28 @@ ORK_CLASS_AVAILABLE
  
  @return A value range object.
  */
-- (instancetype)initWithValue:(CGFloat)value;
+- (instancetype)initWithValue:(double)value;
 
 /**
- Returns a range point initialized using the `ORKCGFloatInvalidValue` value for both `minimumValue`
+ Returns a range point initialized using the `ORKDoubleInvalidValue` value for both `minimumValue`
  and `maximumValue`. This denotes an unset or invalid value range. It is useful, for example, for
  representing unavailable data in discontinous graph chart plots.
  
  This method is a convenience initializer.
  
- @return A value range object initialized with the `ORKCGFloatInvalidValue` value.
+ @return A value range object initialized with the `ORKDoubleInvalidValue` value.
  */
 - (instancetype)init;
 
 /**
  The upper limit of the value range.
  */
-@property (nonatomic) CGFloat maximumValue;
+@property (nonatomic) double maximumValue;
 
 /**
  The lower limit of the value range.
  */
-@property (nonatomic) CGFloat minimumValue;
+@property (nonatomic) double minimumValue;
 
 /**
  A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
@@ -105,7 +105,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  A Boolean value indicating that both `minimum value` and `maximum value` are equal to the
- `ORKCGFloatInvalidValue` value. (read-only)
+ `ORKDoubleInvalidValue` value. (read-only)
  */
 @property (nonatomic, readonly) BOOL isUnset;
 
@@ -113,8 +113,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKValueStack` class represents an arbitrary list of float values, or value stack. It can be
- used in graph chart plots to draw a stacked ranges.
+ The `ORKValueStack` class represents an arbitrary list of values of the double type. It can be used
+ in graph chart plots to draw stacked values.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKValueStack : NSObject <ORKGraphChartType>
@@ -127,23 +127,23 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init;
 
 /**
- Returns an value stack initialized with the passed float values.
+ Returns an value stack initialized with the passed double values.
  
- @param value   A `nil` terminated list of `CGFloat` values.
+ @param value   A `nil` terminated list of `double` values.
  
- @return A value stack object initialized with passed float values.
+ @return A value stack object initialized with the passed double values.
  */
 - (instancetype)initWithStackedValueArray:(NSArray<NSNumber *> *)stackedValues NS_DESIGNATED_INITIALIZER;
 
 /**
- An array of `NSNumber` objects, each one representing a stacked float value.
+ An array of `NSNumber` objects, each one representing a stacked double value.
  */
 @property (nonatomic, strong, readonly) NSArray<NSNumber *> *stackedValues;
 
 /**
- The total sum of the stacked float values
+ The total sum of the stacked double values
  */
-@property (nonatomic) CGFloat totalValue;
+@property (nonatomic) double totalValue;
 
 @end
 

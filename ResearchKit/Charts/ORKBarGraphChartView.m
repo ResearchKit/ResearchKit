@@ -74,27 +74,27 @@ const CGFloat BarWidth = 10.0;
         NSUInteger pointCount = self.dataPoints[plotIndex].count;
         for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             
-            NSMutableArray *normalizedFloatStackValues = [NSMutableArray new];
+            NSMutableArray *normalizedDoubleStackValues = [NSMutableArray new];
             ORKValueStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
             
             if (!dataPointValue.isUnset) {
-                CGFloat range = self.maximumValue - self.minimumValue;
-                CGFloat sum = 0;
+                double range = self.maximumValue - self.minimumValue;
+                double sum = 0;
                 for (NSNumber *value in dataPointValue.stackedValues) {
-                    // normalizedFloatStackValues holds absolute canvas y-positions corresponding to each point
-                    // (rather than incremental y-positions as te dataPoints floatStacks hold).
+                    // normalizedDoubleStackValues holds absolute canvas y-positions corresponding to each point
+                    // (rather than incremental y-positions as the dataPoints valueStacks hold).
                     // E.g. (canvas height = 100)
-                    //      dataPoint floatStack = {10, 10, 20}
+                    //      dataPoint valueStack = {10, 10, 20}
                     //        ->
-                    //      normalized floatStack = {25, 50, 100}
+                    //      normalized valueStack = {25, 50, 100}
                     sum += value.doubleValue;
-                    CGFloat normalizedValue = (sum - self.minimumValue) / range * viewHeight;
+                    double normalizedValue = (sum - self.minimumValue) / range * viewHeight;
                     normalizedValue = viewHeight - normalizedValue;
                     
-                    [normalizedFloatStackValues addObject:@(normalizedValue)];
+                    [normalizedDoubleStackValues addObject:@(normalizedValue)];
                 }
             }
-            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValueArray:normalizedFloatStackValues]];
+            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValueArray:normalizedDoubleStackValues]];
         }
     }
     
@@ -102,8 +102,8 @@ const CGFloat BarWidth = 10.0;
 }
 
 - (void)calculateMinAndMaxValues {
-    self.minimumValue = ORKCGFloatInvalidValue;
-    self.maximumValue = ORKCGFloatInvalidValue;
+    self.minimumValue = ORKDoubleInvalidValue;
+    self.maximumValue = ORKDoubleInvalidValue;
     
     BOOL maximumValueProvided = NO;
     
@@ -125,15 +125,15 @@ const CGFloat BarWidth = 10.0;
             for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
                 ORKValueStack *point = self.dataPoints[plotIndex][pointIndex];
                 if (!maximumValueProvided &&
-                    point.totalValue != ORKCGFloatInvalidValue &&
-                    ((self.maximumValue == ORKCGFloatInvalidValue) || (point.totalValue > self.maximumValue))) {
+                    point.totalValue != ORKDoubleInvalidValue &&
+                    ((self.maximumValue == ORKDoubleInvalidValue) || (point.totalValue > self.maximumValue))) {
                     self.maximumValue = point.totalValue;
                 }
             }
         }
     }
     
-    if (self.maximumValue == ORKCGFloatInvalidValue) {
+    if (self.maximumValue == ORKDoubleInvalidValue) {
         self.maximumValue = 0;
     }
 }
@@ -163,11 +163,11 @@ const CGFloat BarWidth = 10.0;
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger lineLayerIndex = 0;
-    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
+    double positionOnXAxis = ORKDoubleInvalidValue;
     ORKValueStack *positionsOnYAxis = nil;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        CGFloat previousYValue = CGRectGetHeight(self.plotView.bounds);
+        float previousYValue = self.plotView.bounds.size.height;
 
         ORKValueStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         positionsOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
@@ -175,13 +175,13 @@ const CGFloat BarWidth = 10.0;
         if (!dataPointValue.isUnset) {
             NSUInteger numberOfSubpoints = positionsOnYAxis.stackedValues.count;
             for (NSUInteger subpointIndex = 0; subpointIndex < numberOfSubpoints; subpointIndex++) {
-                CGFloat positionOnYAxis = positionsOnYAxis.stackedValues[subpointIndex].doubleValue;
+                double positionOnYAxis = positionsOnYAxis.stackedValues[subpointIndex].doubleValue;
                 UIBezierPath *linePath = [UIBezierPath bezierPath];
                 
-                CGFloat barHeight = fabs(positionOnYAxis - previousYValue);
+                double barHeight = fabs(positionOnYAxis - previousYValue);
 
                 positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-                positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+                positionOnXAxis += [self xOffsetForPlotIndex:plotIndex];
                 
                 [linePath moveToPoint:CGPointMake(positionOnXAxis, previousYValue)];
                 [linePath addLineToPoint:CGPointMake(positionOnXAxis, previousYValue - barHeight)];
@@ -198,28 +198,28 @@ const CGFloat BarWidth = 10.0;
 
 #pragma mark - Scrubbing
 
-- (CGFloat)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     return self.dataPoints[plotIndex][pointIndex].totalValue;
 }
 
-- (CGFloat)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
+- (double)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex {
     return self.yAxisPoints[plotIndex][pointIndex].stackedValues.lastObject.doubleValue; // totalValue is not normalized to canvas coordinates
 }
 
-- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    return offsetForPlotIndex(plotIndex, [self numberOfPlots], BarWidth);
+- (CGFloat)xOffsetForPlotIndex:(NSInteger)plotIndex {
+    return xOffsetForPlotIndex(plotIndex, [self numberOfPlots], BarWidth);
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self offsetForPlotIndex:plotIndex];
+    return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self xOffsetForPlotIndex:plotIndex];
 }
 
 - (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super pointIndexForXPosition:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+    return [super pointIndexForXPosition:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    return [super isXPositionSnapped:xPosition - [self offsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+    return [super isXPositionSnapped:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
 
 @end

@@ -157,7 +157,7 @@ ORK_AVAILABLE_DECL
 
  @return The maximum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
+- (double)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph chart view.
@@ -171,7 +171,7 @@ ORK_AVAILABLE_DECL
 
  @return The minimum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
+- (double)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
@@ -292,7 +292,7 @@ ORK_CLASS_AVAILABLE
  smallest value of the `minimumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat minimumValue;
+@property (nonatomic, readonly) double minimumValue;
 
 /**
  The maximum value of the y-axis.
@@ -304,7 +304,7 @@ ORK_CLASS_AVAILABLE
  largest value of the `maximumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat maximumValue;
+@property (nonatomic, readonly) double maximumValue;
 
 /**
  A Boolean value indicating whether the graph chart view should draw horizontal reference lines.

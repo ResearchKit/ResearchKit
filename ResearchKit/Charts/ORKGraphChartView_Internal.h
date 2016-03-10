@@ -74,7 +74,7 @@ static inline UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NS
     return color;
 }
 
-static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
+static inline CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
     CGFloat offset = 0;
     if (numberOfPlots % 2 == 0) {
         // Even
@@ -105,9 +105,9 @@ static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOf
 
 @property (nonatomic) BOOL hasDataPoints;
 
-@property (nonatomic) CGFloat minimumValue;
+@property (nonatomic) double minimumValue;
 
-@property (nonatomic) CGFloat maximumValue;
+@property (nonatomic) double maximumValue;
 
 - (void)sharedInit;
 
@@ -121,11 +121,11 @@ static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOf
 
 - (NSInteger)scrubbingPlotIndex;
 
-- (CGFloat)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
+- (double)scrubbingValueForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
 
-- (CGFloat)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
+- (double)scrubbingYAxisPointForPlotIndex:(NSInteger)plotIndex pointIndex:(NSInteger)pointIndex;
 
-- (CGFloat)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
+- (double)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
