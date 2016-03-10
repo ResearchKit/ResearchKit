@@ -34,20 +34,101 @@
 
 - (UIImage *)ork_flippedImage:(UIImageOrientation)orientation
 {
-    if (self.images.count > 0)
-    {
+    if (self.images.count > 0) {
         NSMutableArray <UIImage *> *images = [self.images mutableCopy];
         [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop __unused) {
             [images replaceObjectAtIndex:idx
                               withObject:[image ork_flippedImage:orientation]];
         }];
         return [UIImage animatedImageWithImages:images duration:self.duration];
-    }
-    else
-    {
-        return [UIImage imageWithCGImage:self.CGImage
-                                   scale:self.scale
-                             orientation:orientation];
+    } else {
+        // [UIImage imageWithCGImage:self.CGImage scale:self.scale orientation:orientation] doesn't seem
+        // to work with images that are vector PDF rather than PNG, so...
+        CGRect bounds = CGRectMake(0., 0., self.size.width, self.size.height);
+        CGAffineTransform transform = CGAffineTransformIdentity;
+        switch(orientation)
+        {
+            case UIImageOrientationUp:
+            {
+                transform = CGAffineTransformIdentity;
+            }
+                break;
+                
+            case UIImageOrientationUpMirrored:
+            {
+                transform = CGAffineTransformMakeTranslation(self.size.width, 0.);
+                transform = CGAffineTransformScale(transform, -1.0f, 1.0f);
+            }
+                break;
+                
+            case UIImageOrientationDown:
+            {
+                transform = CGAffineTransformMakeTranslation(self.size.width, self.size.height);
+                transform = CGAffineTransformRotate(transform, M_PI);
+            }
+                break;
+                
+            case UIImageOrientationDownMirrored:
+            {
+                transform = CGAffineTransformMakeTranslation (0., self.size.height);
+                transform = CGAffineTransformScale(transform, 1.0f, -1.0f);
+            }
+                break;
+                
+            case UIImageOrientationLeftMirrored:
+            {
+                CGFloat boundHeight = bounds.size.height;
+                bounds.size.height = bounds.size.width;
+                bounds.size.width = boundHeight;
+                transform = CGAffineTransformMakeTranslation (self.size.height, self.size.width);
+                transform = CGAffineTransformScale(transform, -1.0f, 1.0f);
+                transform = CGAffineTransformRotate(transform, 3.0f * M_PI/ 2.0f);
+            }
+                break;
+                
+            case UIImageOrientationLeft:
+            {
+                CGFloat boundHeight = bounds.size.height;
+                bounds.size.height = bounds.size.width;
+                bounds.size.width = boundHeight;
+                transform = CGAffineTransformMakeTranslation (0.0f, self.size.width);
+                transform = CGAffineTransformRotate(transform, 3.0f * M_PI / 2.0f);
+            }
+                break;
+                
+            case UIImageOrientationRightMirrored:
+            {
+                CGFloat boundHeight = bounds.size.height;
+                bounds.size.height = bounds.size.width;
+                bounds.size.width = boundHeight;
+                transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
+                transform = CGAffineTransformRotate(transform, M_PI / 2.0f);
+            }
+                break;
+                
+            case UIImageOrientationRight:
+            {
+                CGFloat boundHeight = bounds.size.height;
+                bounds.size.height = bounds.size.width;
+                bounds.size.width = boundHeight;
+                transform = CGAffineTransformMakeTranslation(self.size.height, 0.0f);
+                transform = CGAffineTransformRotate(transform, M_PI  / 2.0f);
+            }
+                break;
+                
+        }
+
+        UIGraphicsBeginImageContext(self.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextConcatCTM(context, transform);
+
+        [self drawInRect:CGRectMake(0.f, 0.f, self.size.width, self.size.height)];
+        
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return newImage;
     }
 }
 
