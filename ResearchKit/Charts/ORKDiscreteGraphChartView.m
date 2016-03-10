@@ -64,7 +64,7 @@
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         ORKValueRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
-        if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
+        if (!dataPointValue.isUnset && !dataPointValue.isEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
             lineLayer.lineWidth = ORKGraphChartViewPointAndLineWidth;
@@ -84,7 +84,7 @@
         
         ORKValueRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         
-        if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
+        if (!dataPointValue.isUnset && !dataPointValue.isEmptyRange) {
             
             UIBezierPath *linePath = [UIBezierPath bezierPath];
             

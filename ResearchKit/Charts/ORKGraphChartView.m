@@ -1099,7 +1099,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                 [self.plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
-                if (!dataPoint.isEmpty) {
+                if (!dataPoint.isEmptyRange) {
                     CALayer *pointLayer = graphPointLayerWithColor(color);
                     [self.plotView.layer addSublayer:pointLayer];
                     [_pointLayers[plotIndex] addObject:pointLayer];
@@ -1163,7 +1163,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                 pointLayer.position = CGPointMake(positionOnXAxis, yAxisFloatRange.minimumValue);
                 pointLayerIndex++;
                 
-                if (!yAxisFloatRange.isEmpty) {
+                if (!yAxisFloatRange.isEmptyRange) {
                     CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
                     pointLayer.position = CGPointMake(positionOnXAxis, yAxisFloatRange.maximumValue);
                     pointLayerIndex++;

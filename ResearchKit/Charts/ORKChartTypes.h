@@ -101,7 +101,7 @@ ORK_CLASS_AVAILABLE
 /**
  A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
  */
-@property (nonatomic, readonly) BOOL isEmpty;
+@property (nonatomic, readonly) BOOL isEmptyRange;
 
 /**
  A Boolean value indicating that both `minimum value` and `maximum value` are equal to the

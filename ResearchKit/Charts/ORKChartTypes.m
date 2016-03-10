@@ -66,7 +66,7 @@
     return (_minimumValue == ORKCGFloatInvalidValue && _maximumValue == ORKCGFloatInvalidValue);
 }
 
-- (BOOL)isEmpty {
+- (BOOL)isEmptyRange {
     return (_minimumValue == _maximumValue);
 }
 
@@ -83,7 +83,7 @@
         return nil;
     }
     
-    if (self.isEmpty || _minimumValue == _maximumValue) {
+    if (self.isEmptyRange || _minimumValue == _maximumValue) {
         return @(_maximumValue).stringValue;
     } else {
         NSString *rangeFormat = ORKLocalizedString(@"AX_GRAPH_RANGE_FORMAT_%@_%@", nil);
