@@ -2140,6 +2140,10 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
     ORKTextAnswerFormat *_impliedAnswerFormat;
 }
 
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeText;
+}
+
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
 }
