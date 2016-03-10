@@ -63,7 +63,7 @@
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        ORKFloatRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        ORKValueRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
@@ -78,11 +78,11 @@
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKFloatRange *positionOnYAxis = nil;
+    ORKValueRange *positionOnYAxis = nil;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         
-        ORKFloatRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        ORKValueRange *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         
         if (!dataPointValue.isUnset && !dataPointValue.isEmpty) {
             

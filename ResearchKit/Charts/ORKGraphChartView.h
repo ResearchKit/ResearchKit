@@ -37,8 +37,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKFloatRange;
-@class ORKFloatStack;
+@class ORKValueRange;
+@class ORKValueStack;
 @class ORKGraphChartView;
 
 /**
@@ -79,13 +79,13 @@ ORK_AVAILABLE_DECL
 
 /**
  The abstract `ORKGraphChartViewDataSource` protocol is the base protocol which conforms the basis
- for the `ORKFloatRangeGraphChartViewDataSource` and `ORKFloatStackGraphChartViewDataSource`
+ for the `ORKValueRangeGraphChartViewDataSource` and `ORKValueStackGraphChartViewDataSource`
  protocols, required to populate the concrete `ORKGraphChartView` subclass.
 
  At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
  `graphChartView:plot:valueForPointAtIndex:` methods. These methods return
  the number of points in a plot and the points themselves. Each point in a plot is represented by
- an object of the `ORKFloatRange` or `ORKFloatStack` class, depending on the concrete subprotocol.
+ an object of the `ORKValueRange` or `ORKValueStack` class, depending on the concrete subprotocol.
  
  A data source object may provide additional information to the graph chart view by implementing the
  optional methods.
@@ -97,7 +97,7 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Asks the data source for the number of float ranges to be plotted by the graph chart view at the
+ Asks the data source for the number of value ranges to be plotted by the graph chart view at the
  specified plot index.
 
  @param graphChartView      The graph chart view asking for the number of range points.
@@ -148,7 +148,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the greatest `maximumValue` of all `ORKFloatRange` instances
+ If this method is not implemented, the greatest `maximumValue` of all `ORKValueRange` instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -162,7 +162,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the smallest `minimumValue` of all ORKFloatRange instances
+ If this method is not implemented, the smallest `minimumValue` of all ORKValueRange instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -218,45 +218,45 @@ ORK_AVAILABLE_DECL
 
 
 /**
- An object that adopts the `ORKFloatRangeGraphChartViewDataSource` protocol is responsible for
- providing data in the form of `ORKFloatRange` values required to populate an
- `ORKFloatRangeGraphChartView` concrete subclass, such as `ORKLineGraphChartView` and
+ An object that adopts the `ORKValueRangeGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKValueRange` values required to populate an
+ `ORKValueRangeGraphChartView` concrete subclass, such as `ORKLineGraphChartView` and
  `ORKDiscreteGraphChartView`.
  */
 ORK_AVAILABLE_DECL
-@protocol ORKFloatRangeGraphChartViewDataSource <ORKGraphChartViewDataSource>
+@protocol ORKValueRangeGraphChartViewDataSource <ORKGraphChartViewDataSource>
 
 @required
 
 /**
- Asks the data source for the float range to be plotted at the specified point index for the
+ Asks the data source for the value range to be plotted at the specified point index for the
  specified plot.
  
- @param graphChartView      The graph chart view that is asking for the float range.
+ @param graphChartView      The graph chart view that is asking for the value range.
  @param pointIndex          An index number identifying the range point in the graph chart view.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
  
- @return The float range specified by `pointIndex` in the plot specified by `plotIndex` for the
+ @return The value range specified by `pointIndex` in the plot specified by `plotIndex` for the
  specified graph chart view`.
  */
-- (ORKFloatRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @end
 
 
 /**
- An object that adopts the `ORKFloatStackGraphChartViewDataSource` protocol is responsible for
- providing data in the form of `ORKFloatStack` values required to populate an `ORKBarGraphChartView`
+ An object that adopts the `ORKValueStackGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKValueStack` values required to populate an `ORKBarGraphChartView`
  object.
  */
 ORK_AVAILABLE_DECL
-@protocol ORKFloatStackGraphChartViewDataSource <ORKGraphChartViewDataSource>
+@protocol ORKValueStackGraphChartViewDataSource <ORKGraphChartViewDataSource>
 
 @required
 
 /**
- Asks the data source for the float stack to be plotted at the specified point index for the
+ Asks the data source for the value stack to be plotted at the specified point index for the
  specified plot.
  
  @param graphChartView      The graph chart view that is asking for the range point.
@@ -264,10 +264,10 @@ ORK_AVAILABLE_DECL
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
  is 0 in a single-plot graph chart view.
  
- @return The float stack specified by `pointIndex` in the plot specified by `plotIndex` for the
+ @return The value stack specified by `pointIndex` in the plot specified by `plotIndex` for the
  specified graph chart view`.
  */
-- (ORKFloatStack *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKValueStack *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @end
 
@@ -289,7 +289,7 @@ ORK_CLASS_AVAILABLE
  `minimumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `minimumValueForGraphChartView:` is not implemented, the minimum value is assigned to the
- smallest value of the `minimumValue` property of all `ORKFloatRange` instances returned by the
+ smallest value of the `minimumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
 @property (nonatomic, readonly) CGFloat minimumValue;
@@ -301,7 +301,7 @@ ORK_CLASS_AVAILABLE
  optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `maximumValueForGraphChartView:` is not implemented, the maximum value is assigned to the
- largest value of the `maximumValue` property of all `ORKFloatRange` instances returned by the
+ largest value of the `maximumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
 @property (nonatomic, readonly) CGFloat maximumValue;
@@ -427,21 +427,21 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKFloatRangeGraphChartView` class is an abstract class which holds a data source comforming
- to the `ORKFloatRangeGraphChartViewDataSource` protocol, common to concrete subclasseses.
+ The `ORKValueRangeGraphChartView` class is an abstract class which holds a data source comforming
+ to the `ORKValueRangeGraphChartViewDataSource` protocol, common to concrete subclasseses.
  
  You should not instantiate this class directly; use one of the subclasses instead. The concrete
  subclasses are `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKFloatRangeGraphChartView : ORKGraphChartView
+@interface ORKValueRangeGraphChartView : ORKGraphChartView
 
 /**
  The data source responsible for providing the data required to populate the graph chart view.
  
- See the `ORKFloatRangeGraphChartViewDataSource` protocol.
+ See the `ORKValueRangeGraphChartViewDataSource` protocol.
  */
-@property (nonatomic, weak) id <ORKFloatRangeGraphChartViewDataSource> dataSource;
+@property (nonatomic, weak) id <ORKValueRangeGraphChartViewDataSource> dataSource;
 
 @end
 

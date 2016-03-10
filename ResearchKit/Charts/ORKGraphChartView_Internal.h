@@ -161,11 +161,11 @@ static inline CGFloat offsetForPlotIndex(NSInteger plotIndex, NSInteger numberOf
 
 
 // Abstract base class for ORKDiscreteGraphChartView and ORKLineGraphChartView
-@interface ORKFloatRangeGraphChartView ()
+@interface ORKValueRangeGraphChartView ()
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKValueRange *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKValueRange *> *> *yAxisPoints; // Normalized for the plot view height
 
 - (void)updatePointLayers;
 

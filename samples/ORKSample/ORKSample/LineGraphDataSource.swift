@@ -30,26 +30,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class LineGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
+class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     // MARK: Properties
     
     var plotPoints =
     [
         [
-            ORKFloatRange(value: 10),
-            ORKFloatRange(value: 20),
-            ORKFloatRange(value: 25),
-            ORKFloatRange(),
-            ORKFloatRange(value: 30),
-            ORKFloatRange(value: 40),
+            ORKValueRange(value: 10),
+            ORKValueRange(value: 20),
+            ORKValueRange(value: 25),
+            ORKValueRange(),
+            ORKValueRange(value: 30),
+            ORKValueRange(value: 40),
         ],
         [
-            ORKFloatRange(value: 2),
-            ORKFloatRange(value: 4),
-            ORKFloatRange(value: 8),
-            ORKFloatRange(value: 16),
-            ORKFloatRange(value: 32),
-            ORKFloatRange(value: 64),
+            ORKValueRange(value: 2),
+            ORKValueRange(value: 4),
+            ORKValueRange(value: 8),
+            ORKValueRange(value: 16),
+            ORKValueRange(value: 32),
+            ORKValueRange(value: 64),
         ]
     ]
     
@@ -59,7 +59,7 @@ class LineGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatRange {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     

@@ -30,26 +30,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class DiscreteGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
+class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     // MARK: Properties
     
     var plotPoints =
     [
         [
-            ORKFloatRange(minimumValue: 0, maximumValue: 2),
-            ORKFloatRange(minimumValue: 1, maximumValue: 4),
-            ORKFloatRange(minimumValue: 2, maximumValue: 6),
-            ORKFloatRange(minimumValue: 3, maximumValue: 8),
-            ORKFloatRange(minimumValue: 5, maximumValue: 10),
-            ORKFloatRange(minimumValue: 8, maximumValue: 13),
+            ORKValueRange(minimumValue: 0, maximumValue: 2),
+            ORKValueRange(minimumValue: 1, maximumValue: 4),
+            ORKValueRange(minimumValue: 2, maximumValue: 6),
+            ORKValueRange(minimumValue: 3, maximumValue: 8),
+            ORKValueRange(minimumValue: 5, maximumValue: 10),
+            ORKValueRange(minimumValue: 8, maximumValue: 13),
         ],
         [
-            ORKFloatRange(value: 1),
-            ORKFloatRange(minimumValue: 2, maximumValue: 6),
-            ORKFloatRange(minimumValue: 3, maximumValue: 10),
-            ORKFloatRange(minimumValue: 5, maximumValue: 11),
-            ORKFloatRange(minimumValue: 7, maximumValue: 13),
-            ORKFloatRange(minimumValue: 10, maximumValue: 13),
+            ORKValueRange(value: 1),
+            ORKValueRange(minimumValue: 2, maximumValue: 6),
+            ORKValueRange(minimumValue: 3, maximumValue: 10),
+            ORKValueRange(minimumValue: 5, maximumValue: 11),
+            ORKValueRange(minimumValue: 7, maximumValue: 13),
+            ORKValueRange(minimumValue: 10, maximumValue: 13),
         ]
     ]
     
@@ -59,7 +59,7 @@ class DiscreteGraphDataSource: NSObject, ORKFloatRangeGraphChartViewDataSource {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKFloatRange {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     

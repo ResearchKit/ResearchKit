@@ -36,7 +36,7 @@
 
 /**
  The `ORKBarGraphChartView` class presents the data provided by an object conforming to the
- `ORKFloatStackGraphChartViewDataSource` protocol as a bar graph.
+ `ORKValueStackGraphChartViewDataSource` protocol as a bar graph.
  
  By default, the primary plot is colored by the `tintColor`, and any additional plots are colored
  using the `referenceLineColor` property. You can customize the plot colors by implementing the
@@ -47,8 +47,8 @@
 /**
  The data source responsible for providing the data required to populate the graph chart view.
  
- See the `ORKFloatStackGraphChartViewDataSource` protocol.
+ See the `ORKValueStackGraphChartViewDataSource` protocol.
  */
-@property (nonatomic, weak) id <ORKFloatStackGraphChartViewDataSource> dataSource;
+@property (nonatomic, weak) id <ORKValueStackGraphChartViewDataSource> dataSource;
 
 @end

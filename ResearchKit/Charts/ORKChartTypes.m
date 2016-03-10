@@ -37,7 +37,7 @@
 #import "ORKDefines_Private.h"
 
 
-@implementation ORKFloatRange
+@implementation ORKValueRange
 
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
     if (maximumValue < minimumValue) {
@@ -94,7 +94,7 @@
 @end
 
 
-@implementation ORKFloatStack
+@implementation ORKValueStack
 
 - (instancetype)init {
     return [self initWithStackedValueArray:@[]];

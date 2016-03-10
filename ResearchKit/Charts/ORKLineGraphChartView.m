@@ -119,7 +119,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKFloatRange *positionOnYAxis = nil;
+    ORKValueRange *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
     NSUInteger numberOfPoints = self.lineLayers[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {

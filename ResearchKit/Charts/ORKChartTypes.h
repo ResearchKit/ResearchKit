@@ -49,52 +49,52 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- The `ORKFloatRange` class represents a float range. It can be used in graph chart plots to draw a
+ The `ORKValueRange` class represents a value range. It can be used in graph chart plots to draw a
  value ranges.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKFloatRange : NSObject <ORKGraphChartType>
+@interface ORKValueRange : NSObject <ORKGraphChartType>
 
 /**
- Returns a float range initialized using the specified `minimumValue` and `maximumValue`.
+ Returns a value range initialized using the specified `minimumValue` and `maximumValue`.
  
  @param minimumValue     The `minimumValue` to set.
  @param maximumValue     The `maximumValue` to set.
  
- @return A float range object.
+ @return A value range object.
  */
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns a float range initialized using the specified `value` for both `minimumValue` and
+ Returns a value range initialized using the specified `value` for both `minimumValue` and
  `maximumValue`. This is useful for plotting data points that model a single value with no range.
  
  This method is a convenience initializer.
  
  @param value    The `minimumValue` and `maximumValue` to set.
  
- @return A float range object.
+ @return A value range object.
  */
 - (instancetype)initWithValue:(CGFloat)value;
 
 /**
  Returns a range point initialized using the `ORKCGFloatInvalidValue` value for both `minimumValue`
- and `maximumValue`. This denotes an unset or invalid float range. It is useful, for example, for
+ and `maximumValue`. This denotes an unset or invalid value range. It is useful, for example, for
  representing unavailable data in discontinous graph chart plots.
  
  This method is a convenience initializer.
  
- @return A float range object initialized with the `ORKCGFloatInvalidValue` value.
+ @return A value range object initialized with the `ORKCGFloatInvalidValue` value.
  */
 - (instancetype)init;
 
 /**
- The upper limit of the float range.
+ The upper limit of the value range.
  */
 @property (nonatomic) CGFloat maximumValue;
 
 /**
- The lower limit of the float range.
+ The lower limit of the value range.
  */
 @property (nonatomic) CGFloat minimumValue;
 
@@ -113,25 +113,25 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKFloatStack` class represents an arbitrary list of float valuers, or float stack. It can be
+ The `ORKValueStack` class represents an arbitrary list of float values, or value stack. It can be
  used in graph chart plots to draw a stacked ranges.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKFloatStack : NSObject <ORKGraphChartType>
+@interface ORKValueStack : NSObject <ORKGraphChartType>
 
 /**
- Returns an empty float stack.
+ Returns an empty value stack.
  
- @return An empty float stack object.
+ @return An empty value stack object.
  */
 - (instancetype)init;
 
 /**
- Returns an float stack initialized with the passed float values.
+ Returns an value stack initialized with the passed float values.
  
  @param value   A `nil` terminated list of `CGFloat` values.
  
- @return A float stack object initialized with passed float values.
+ @return A value stack object initialized with passed float values.
  */
 - (instancetype)initWithStackedValueArray:(NSArray<NSNumber *> *)stackedValues NS_DESIGNATED_INITIALIZER;
 

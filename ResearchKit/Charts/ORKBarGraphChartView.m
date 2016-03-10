@@ -40,9 +40,9 @@ const CGFloat BarWidth = 10.0;
 
 @interface ORKBarGraphChartView ()
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatStack *> *> *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKValueStack *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatStack *> *> *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKValueStack *> *> *yAxisPoints; // Normalized for the plot view height
 
 @end
 
@@ -55,27 +55,27 @@ const CGFloat BarWidth = 10.0;
 
 #pragma mark - Draw
 
-- (ORKFloatStack *)pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+- (ORKValueStack *)pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     return [self.dataSource graphChartView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
 }
 
-- (ORKFloatStack *)dummyPoint {
-    return [ORKFloatStack new];
+- (ORKValueStack *)dummyPoint {
+    return [ORKValueStack new];
 }
 
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
     return YES;
 }
 
-- (NSMutableArray<ORKFloatStack *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
-    NSMutableArray<ORKFloatStack *> *normalizedPoints = [NSMutableArray new];
+- (NSMutableArray<ORKValueStack *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
+    NSMutableArray<ORKValueStack *> *normalizedPoints = [NSMutableArray new];
     
     if (plotIndex < self.dataPoints.count) {
         NSUInteger pointCount = self.dataPoints[plotIndex].count;
         for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             
             NSMutableArray *normalizedFloatStackValues = [NSMutableArray new];
-            ORKFloatStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+            ORKValueStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
             
             if (!dataPointValue.isUnset) {
                 CGFloat range = self.maximumValue - self.minimumValue;
@@ -94,7 +94,7 @@ const CGFloat BarWidth = 10.0;
                     [normalizedFloatStackValues addObject:@(normalizedValue)];
                 }
             }
-            [normalizedPoints addObject:[[ORKFloatStack alloc] initWithStackedValueArray:normalizedFloatStackValues]];
+            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValueArray:normalizedFloatStackValues]];
         }
     }
     
@@ -123,7 +123,7 @@ const CGFloat BarWidth = 10.0;
         for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
             NSInteger numberOfPlotPoints = self.dataPoints[plotIndex].count;
             for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
-                ORKFloatStack *point = self.dataPoints[plotIndex][pointIndex];
+                ORKValueStack *point = self.dataPoints[plotIndex][pointIndex];
                 if (!maximumValueProvided &&
                     point.totalValue != ORKCGFloatInvalidValue &&
                     ((self.maximumValue == ORKCGFloatInvalidValue) || (point.totalValue > self.maximumValue))) {
@@ -145,7 +145,7 @@ const CGFloat BarWidth = 10.0;
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        ORKFloatStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        ORKValueStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         NSMutableArray *lineLayers = [NSMutableArray new];
         if (!dataPointValue.isUnset) {
             NSUInteger numberOfStackedValues = dataPointValue.stackedValues.count;
@@ -164,12 +164,12 @@ const CGFloat BarWidth = 10.0;
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKFloatStack *positionsOnYAxis = nil;
+    ORKValueStack *positionsOnYAxis = nil;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         CGFloat previousYValue = CGRectGetHeight(self.plotView.bounds);
 
-        ORKFloatStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
+        ORKValueStack *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         positionsOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
 
         if (!dataPointValue.isUnset) {
