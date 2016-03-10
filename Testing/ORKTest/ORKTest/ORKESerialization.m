@@ -366,6 +366,7 @@ ret =
              return task;
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
