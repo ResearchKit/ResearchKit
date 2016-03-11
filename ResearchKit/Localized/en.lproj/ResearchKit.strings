@@ -226,12 +226,23 @@
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tapping Speed";
+"TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
+"TAPPING_TASK_TITLE_LEFT" = "Left Hand";
 "TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Rest your phone on a flat surface. Two buttons will appear on your screen for %@. Using two fingers on the same hand, take turns tapping the buttons as quickly as you can.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Rest your phone on a flat surface.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Then use two fingers on the same hand to alternately tap the buttons that appear.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Then use two fingers on your right hand to alternately tap the buttons that appear.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Then use two fingers on your left hand to alternately tap the buttons that appear.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Now repeat the same test using your right hand.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Now repeat the same test using your left hand.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Keep tapping for %@ and time your taps to be as consistent as possible.";
 "TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Tap Next to begin.";
 "TAP_BUTTON_TITLE" = "Tap";
 "TOTAL_TAPS_LABEL" = "Total Taps";
-"TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
+"TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
+"TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
+"TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
 
 
 /* Audio active task. */
