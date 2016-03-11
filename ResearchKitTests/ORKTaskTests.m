@@ -1472,6 +1472,181 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
 }
 
+#pragma mark - two-finger tapping with both hands
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionUndefined {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                              options:0
+                                                                          handOptions:0];
+    XCTAssertEqual(task.steps.count, 4);
+    
+    for (ORKStep *step in task.steps) {
+        XCTAssertFalse([step.identifier.lowercaseString containsString:@"left"]);
+        XCTAssertFalse([step.identifier.lowercaseString containsString:@"right"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"right"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"left"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"right"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"left"]);
+        if ([step isKindOfClass:[ORKActiveStep class]]) {
+            XCTAssertFalse(step.optional);
+        }
+    }
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionLeft {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                              options:0
+                                                                          handOptions:ORKPredefinedTaskHandOptionLeft];
+    // Check assumption around how many steps
+    XCTAssertEqual(task.steps.count, 4);
+    
+    // Check that none of the language or identifiers contain the word "right"
+    for (ORKStep *step in task.steps) {
+        XCTAssertFalse([step.identifier.lowercaseString hasSuffix:@"right"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"right"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"right"]);
+    }
+    
+    NSArray * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+        NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+        return [task.steps filteredArrayUsingPredicate:predicate];
+    };
+    
+    // Look for instruction step
+    NSArray *instructions = filteredSteps(@"instruction1", @"left");
+    XCTAssertEqual(instructions.count, 1);
+    ORKStep *instructionStep = [instructions firstObject];
+    XCTAssertEqualObjects(instructionStep.title, @"Left Hand");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+    
+    // Look for the activity step
+    NSArray *tappings = filteredSteps(@"tapping", @"left");
+    XCTAssertEqual(tappings.count, 1);
+    ORKStep *tappingStep = [tappings firstObject];
+    XCTAssertEqualObjects(tappingStep.title, @"Tap the buttons using your LEFT hand.");
+    XCTAssertFalse(tappingStep.optional);
+    
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionRight {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                              options:0
+                                                                          handOptions:ORKPredefinedTaskHandOptionRight];
+    // Check assumption around how many steps
+    XCTAssertEqual(task.steps.count, 4);
+    
+    // Check that none of the language or identifiers contain the word "right"
+    for (ORKStep *step in task.steps) {
+        XCTAssertFalse([step.identifier.lowercaseString hasSuffix:@"left"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"left"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"left"]);
+    }
+    
+    NSArray * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+        NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+        return [task.steps filteredArrayUsingPredicate:predicate];
+    };
+    
+    // Look for instruction step
+    NSArray *instructions = filteredSteps(@"instruction1", @"right");
+    XCTAssertEqual(instructions.count, 1);
+    ORKStep *instructionStep = [instructions firstObject];
+    XCTAssertEqualObjects(instructionStep.title, @"Right Hand");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+    
+    // Look for the activity step
+    NSArray *tappings = filteredSteps(@"tapping", @"right");
+    XCTAssertEqual(tappings.count, 1);
+    ORKStep *tappingStep = [tappings firstObject];
+    XCTAssertEqualObjects(tappingStep.title, @"Tap the buttons using your RIGHT hand.");
+    XCTAssertFalse(tappingStep.optional);
+    
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionBoth
+{
+    NSUInteger leftCount = 0;
+    NSUInteger rightCount = 0;
+    NSUInteger totalCount = 100;
+    NSUInteger threshold = 30;
+    
+    for (int ii=0; ii<totalCount; ii++)
+    {
+        
+        
+        ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                                   intendedUseDescription:nil
+                                                                                 duration:10
+                                                                                  options:0
+                                                                              handOptions:ORKPredefinedTaskHandOptionBoth];
+        ORKStep * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+            NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+            return [[task.steps filteredArrayUsingPredicate:predicate] firstObject];
+        };
+        
+        // Look for instruction steps
+        ORKStep *rightInstructionStep = filteredSteps(@"instruction1", @"right");
+        XCTAssertNotNil(rightInstructionStep);
+        ORKStep *leftInstructionStep = filteredSteps(@"instruction1", @"left");
+        XCTAssertNotNil(leftInstructionStep);
+        
+        // Depending upon the seed (clock time) this will be either the right or left hand
+        // Without using OCMock, cannot easily verify that both will display.
+        BOOL isRightFirst = [task.steps indexOfObject:rightInstructionStep] < [task.steps indexOfObject:leftInstructionStep];
+        if (isRightFirst) {
+            rightCount++;
+        }
+        else {
+            leftCount++;
+        }
+        
+        if ((isRightFirst && rightCount == 1) || (!isRightFirst && leftCount == 1)) {
+            
+            // Look for instruction steps
+            XCTAssertEqualObjects(rightInstructionStep.title, @"Right Hand");
+            XCTAssertEqualObjects(leftInstructionStep.title, @"Left Hand");
+            
+            // Depending upon the seed (clock time) this will be either the right or left hand
+            // Without using OCMock, cannot easily verify that both will display.
+            if (isRightFirst) {
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your left hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+            }
+            else {
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your right hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+            }
+            
+            // Look for tapping steps
+            ORKStep *rightTapStep = filteredSteps(@"tapping", @"right");
+            XCTAssertNotNil(rightTapStep);
+            XCTAssertEqualObjects(rightTapStep.title, @"Tap the buttons using your RIGHT hand.");
+            XCTAssertTrue(rightTapStep.optional);
+            
+            ORKStep *leftTapStep = filteredSteps(@"tapping", @"left");
+            XCTAssertNotNil(leftTapStep);
+            XCTAssertEqualObjects(leftTapStep.title, @"Tap the buttons using your LEFT hand.");
+            XCTAssertTrue(leftTapStep.optional);
+        }
+    }
+    
+    XCTAssertGreaterThan(leftCount, threshold);
+    XCTAssertGreaterThan(rightCount, threshold);
+}
+
+
 @end
 
 @implementation MethodObject
