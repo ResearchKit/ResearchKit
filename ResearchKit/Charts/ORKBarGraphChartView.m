@@ -35,7 +35,7 @@
 #import "ORKChartTypes.h"
 
 
-const CGFloat BarWidth = 10.0;
+static const CGFloat BarWidth = 10.0;
 
 
 @interface ORKBarGraphChartView ()
