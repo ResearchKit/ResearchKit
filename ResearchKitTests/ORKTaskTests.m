@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -401,11 +401,16 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     
     ORKDirectStepNavigationRule *mockNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MockDestinationStepIdentifier];
     [_navigableOrderedTask setNavigationRule:mockNavigationRule forTriggerStepIdentifier:MockTriggerStepIdentifier];
-    
+
     XCTAssertEqualObjects([_navigableOrderedTask navigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier], [mockNavigationRule copy]);
+
+    ORKPredicateSkipStepNavigationRule *mockSkipNavigationRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:[NSPredicate predicateWithFormat:@"1 == 1"]];
+    [_navigableOrderedTask setSkipNavigationRule:mockSkipNavigationRule forStepIdentifier:MockTriggerStepIdentifier];
     
-    [_navigableOrderedTask removeNavigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier];
-    XCTAssertNil([_navigableOrderedTask navigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier]);
+    XCTAssertEqualObjects([_navigableOrderedTask skipNavigationRuleForStepIdentifier:MockTriggerStepIdentifier], [mockSkipNavigationRule copy]);
+    
+    [_navigableOrderedTask removeSkipNavigationRuleForStepIdentifier:MockTriggerStepIdentifier];
+    XCTAssertNil([_navigableOrderedTask skipNavigationRuleForStepIdentifier:MockTriggerStepIdentifier]);
 }
 
 - (void)testNavigableOrderedTaskEmpty {
@@ -417,6 +422,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:0];
     
     // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, nil, symptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, otherSymptomStep, endStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
@@ -444,6 +450,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, nil, symptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, severeHeadacheStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severeHeadacheStep, endStep));
@@ -465,6 +472,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDizziness];
     
     // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, nil, symptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, otherSymptomStep, endStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
@@ -484,6 +492,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, nil, symptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, severeHeadacheStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severeHeadacheStep, endStep));
@@ -505,6 +514,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
     
     // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, nil, symptomStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, lightHeadacheStep));
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, lightHeadacheStep, endStep));
@@ -515,6 +525,50 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, lightHeadacheStep, severityStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
+}
+
+- (void)testNavigableOrderedTaskSkip {
+    ORKNavigableOrderedTask *skipTask = [_navigableOrderedTask copy];
+
+    getIndividualNavigableOrderedTaskSteps();
+
+    //
+    // Light headache sequence
+    //
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
+
+    // User chose headache at the symptom step
+    ORKResultSelector *resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:SymptomStepIdentifier];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
+                                                                                        expectedAnswerValue:HeadacheChoiceValue];
+    ORKPredicateSkipStepNavigationRule *skipRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicateHeadache];
+    
+    // Skip endStep
+    [skipTask setSkipNavigationRule:skipRule forStepIdentifier:EndStepIdentifier];
+    
+    // Test forward navigation
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, nil, symptomStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, severityStep, lightHeadacheStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, lightHeadacheStep, nil));
+    
+    
+    // Skip lightHeadacheStep
+    [skipTask removeSkipNavigationRuleForStepIdentifier:EndStepIdentifier];
+    [skipTask setSkipNavigationRule:skipRule forStepIdentifier:LightHeadacheStepIdentifier];
+    
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, nil, symptomStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, severityStep, endStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, endStep, nil));
+
+    
+    // Skip lightHeadache and endStep
+    [skipTask setSkipNavigationRule:skipRule forStepIdentifier:EndStepIdentifier];
+    
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, nil, symptomStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(skipTask, taskResult, severityStep, nil));
 }
 
 ORKDefineStringKey(ScaleStepIdentifier);
@@ -856,6 +910,163 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
         additionalTaskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:YES];
         predicateRule.additionalTaskResults = @[ additionalTaskResult ];
         XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
+    }
+}
+
+- (void)testPredicateSkipStepNavigationRule {
+    NSPredicate *predicate = nil;
+    NSPredicate *predicateA = nil;
+    NSPredicate *predicateB = nil;
+    ORKPredicateSkipStepNavigationRule *predicateRule = nil;
+    ORKTaskResult *taskResult = nil;
+    ORKTaskResult *additionalTaskResult = nil;
+    
+    ORKResultSelector *resultSelector = nil;
+    
+    {
+        // Test predicate step navigation rule initializers
+        resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                          expectedString:TextValue];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        XCTAssertEqualObjects(predicateRule.resultPredicate, predicate);
+    }
+    
+    {
+        // Predicate matching, no additional task results, matching
+        taskResult = [ORKTaskResult new];
+        taskResult.identifier = OrderedTaskIdentifier;
+        
+        resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                          expectedString:TextValue];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+        
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertTrue([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+    }
+    
+    {
+        // Predicate matching, no additional task results, non matching
+        resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                          expectedString:OtherTextValue];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+    }
+
+    {
+        NSPredicate *currentPredicate = nil;
+        NSPredicate *additionalPredicate = nil;
+        
+        // Predicate matching, additional task results
+        resultSelector = [[ORKResultSelector alloc] initWithResultIdentifier:TextStepIdentifier];
+        currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                                 expectedString:TextValue];
+        
+        resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:AdditionalTaskIdentifier
+                                                          resultIdentifier:AdditionalTextStepIdentifier];
+        additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                                    expectedString:AdditionalTextValue];
+        
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        
+        taskResult = [ORKTaskResult new];
+        taskResult.identifier = OrderedTaskIdentifier;
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+        
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+        
+        additionalTaskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:YES];
+        predicateRule.additionalTaskResults = @[ additionalTaskResult ];
+        XCTAssertTrue([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+    }
+
+    {
+        // Test duplicate task identifiers check
+        predicateRule.additionalTaskResults = @[ taskResult ];
+        XCTAssertThrows([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+        
+        // Test duplicate question result identifiers check
+        XCTAssertThrows(predicateRule.additionalTaskResults = @[ [self getSmallTaskResultTreeWithDuplicateStepIdentifiers] ]);
+    }
+    
+    {
+        // Form predicate matching, no additional task results, matching
+        resultSelector = [[ORKResultSelector alloc] initWithStepIdentifier:FormStepIdentifier
+                                                          resultIdentifier:TextFormItemIdentifier];
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                           expectedString:TextValue];
+        
+        resultSelector = [[ORKResultSelector alloc] initWithStepIdentifier:FormStepIdentifier
+                                                          resultIdentifier:NumericFormItemIdentifier];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultSelector:resultSelector
+                                                                              expectedAnswer:IntegerValue];
+        
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertTrue([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+    }
+
+    {
+        // Form predicate matching, no additional task results, non matching
+        resultSelector = [[ORKResultSelector alloc] initWithStepIdentifier:FormStepIdentifier
+                                                          resultIdentifier:TextFormItemIdentifier];
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                          expectedString:OtherTextValue];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+    }
+    
+    {
+        NSPredicate *currentPredicate = nil;
+        NSPredicate *additionalPredicate = nil;
+        
+        // Form predicate matching, additional task results
+        resultSelector = [[ORKResultSelector alloc] initWithStepIdentifier:FormStepIdentifier
+                                                          resultIdentifier:TextFormItemIdentifier];
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                           expectedString:TextValue];
+        
+        resultSelector = [[ORKResultSelector alloc] initWithStepIdentifier:FormStepIdentifier
+                                                          resultIdentifier:NumericFormItemIdentifier];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultSelector:resultSelector
+                                                                              expectedAnswer:IntegerValue];
+        
+        currentPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        
+        resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:AdditionalTaskIdentifier
+                                                            stepIdentifier:AdditionalFormStepIdentifier
+                                                          resultIdentifier:AdditionalTextFormItemIdentifier];
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector
+                                                                           expectedString:AdditionalTextValue];
+        
+        resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:AdditionalTaskIdentifier
+                                                            stepIdentifier:AdditionalFormStepIdentifier
+                                                          resultIdentifier:AdditionalNumericFormItemIdentifier];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultSelector:resultSelector
+                                                                              expectedAnswer:AdditionalIntegerValue];
+        
+        additionalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
+        predicateRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicate];
+        
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertFalse([predicateRule stepShouldSkipWithTaskResult:taskResult]);
+        
+        additionalTaskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:YES];
+        predicateRule.additionalTaskResults = @[ additionalTaskResult ];
+        XCTAssertTrue([predicateRule stepShouldSkipWithTaskResult:taskResult]);
     }
 }
 

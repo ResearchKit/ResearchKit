@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,12 +41,14 @@
 
 @implementation ORKNavigableOrderedTask {
     NSMutableDictionary *_stepNavigationRules;
+    NSMutableDictionary *_skipStepNavigationRules;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;
+        _skipStepNavigationRules = nil;
         _shouldReportProgress = NO;
     }
     return self;
@@ -74,6 +76,28 @@
     [_stepNavigationRules removeObjectForKey:triggerStepIdentifier];
 }
 
+- (void)setSkipNavigationRule:(ORKSkipStepNavigationRule *)skipStepNavigationRule forStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(skipStepNavigationRule);
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    if (!_skipStepNavigationRules) {
+        _skipStepNavigationRules = [NSMutableDictionary new];
+    }
+    _skipStepNavigationRules[stepIdentifier] = skipStepNavigationRule;
+}
+
+- (ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    return _skipStepNavigationRules[stepIdentifier];
+}
+
+- (void)removeSkipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    [_skipStepNavigationRules removeObjectForKey:stepIdentifier];
+}
+
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *nextStep = nil;
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
@@ -87,6 +111,11 @@
             }
         } else {
             nextStep = [super stepAfterStep:step withResult:result];
+        }
+        
+        ORKSkipStepNavigationRule *skipNavigationRule = _skipStepNavigationRules[nextStep.identifier];
+        if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
+            return [self stepAfterStep:nextStep withResult:result];
         }
     }
     return nextStep;
@@ -116,9 +145,15 @@
     return ORKTaskProgressMake(0, 0);
 }
 
-// This method should only be used by serialization (the stepNavigationRules property is published as readonly)
+#pragma mark Serialization private methods
+
+// These methods should only be used by serialization tests (the stepNavigationRules and skipStepNavigationRules properties are published as readonly)
 - (void)setStepNavigationRules:(NSDictionary *)stepNavigationRules {
     _stepNavigationRules = [stepNavigationRules mutableCopy];
+}
+
+- (void)setSkipStepNavigationRules:(NSDictionary *)skipStepNavigationRules {
+    _skipStepNavigationRules = [skipStepNavigationRules mutableCopy];
 }
 
 #pragma mark NSSecureCoding
@@ -131,6 +166,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, skipStepNavigationRules, NSString, ORKSkipStepNavigationRule);
         ORK_DECODE_BOOL(aDecoder, shouldReportProgress);
     }
     return self;
@@ -140,6 +176,7 @@
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
+    ORK_ENCODE_OBJ(aCoder, skipStepNavigationRules);
     ORK_ENCODE_BOOL(aCoder, shouldReportProgress);
 }
 
@@ -148,6 +185,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
+    task->_skipStepNavigationRules = ORKMutableDictionaryCopyObjects(_skipStepNavigationRules);
     task->_shouldReportProgress = _shouldReportProgress;
     return task;
 }
@@ -157,12 +195,13 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules)
-    && self->_shouldReportProgress == castObject.shouldReportProgress;
+    && ORKEqualObjects(_stepNavigationRules, castObject->_stepNavigationRules)
+    && ORKEqualObjects(_skipStepNavigationRules, castObject->_skipStepNavigationRules)
+    && _shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
+    return [super hash] ^ [_stepNavigationRules hash] ^ [_skipStepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined
