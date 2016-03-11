@@ -32,14 +32,10 @@
 #import "ORKVerificationStepView.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
+#import "ORKSkin.h"
 
 
-static const CGFloat VerticalMargin = 30.0;
-
-@implementation ORKVerificationStepView {
-    ORKSubheadlineLabel *_resendEmailLabel;
-    ORKSubheadlineLabel *_verifiedLabel;
-}
+@implementation ORKVerificationStepView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -48,27 +44,10 @@ static const CGFloat VerticalMargin = 30.0;
         self.stepView = [UIView new];
         self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _emailLabel = [ORKLabel new];
-        [_emailLabel setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
-        [self.stepView addSubview:_emailLabel];
-        
-        _changeEmailButton = [UIButton new];
-        [_changeEmailButton setTitle:ORKLocalizedString(@"CHANGE_EMAIL_BUTTON_TITLE", nil) forState:UIControlStateNormal];
-        [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self.stepView addSubview:_changeEmailButton];
-        
-        _resendEmailLabel = [ORKSubheadlineLabel new];
-        _resendEmailLabel.text = ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil);
-        [self.stepView addSubview:_resendEmailLabel];
-        
         _resendEmailButton = [UIButton new];
         [_resendEmailButton setTitle:ORKLocalizedString(@"RESEND_EMAIL_BUTTON_TITLE", nil) forState:UIControlStateNormal];
         [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [self.stepView addSubview:_resendEmailButton];
-        
-        _verifiedLabel = [ORKSubheadlineLabel new];
-        _verifiedLabel.text = ORKLocalizedString(@"VERIFICATION_LABEL_MESSAGE", nil);
-        [self.stepView addSubview:_verifiedLabel];
         
         [self setUpConstraints];
         
@@ -77,46 +56,21 @@ static const CGFloat VerticalMargin = 30.0;
 }
 
 - (void)setUpConstraints {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_emailLabel, _changeEmailButton, _resendEmailLabel, _resendEmailButton, _verifiedLabel);
-    ORKEnableAutoLayoutForViews(views.allValues);
-    
-    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin)};
-    
     NSMutableArray *constraints = [NSMutableArray new];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_emailLabel][_changeEmailButton]-verticalMargin-[_resendEmailLabel][_resendEmailButton]-verticalMargin-[_verifiedLabel]-|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:metrics
-                                                                               views:views]];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_resendEmailButton);
+    ORKEnableAutoLayoutForViews(views.allValues);
+    const CGFloat textBaselineToResendButtonBaselineMetric = ORKGetMetricForWindow(ORKScreenMetricVerificationTextBaselineToResendButtonBaseline, self.window);
+    
     [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:_emailLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_changeEmailButton
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_resendEmailLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
                                        [NSLayoutConstraint constraintWithItem:_resendEmailButton
-                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    attribute:NSLayoutAttributeFirstBaseline
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
+                                                                       toItem:self.headerView.instructionLabel
+                                                                    attribute:NSLayoutAttributeLastBaseline
                                                                    multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_verifiedLabel
+                                                                     constant:textBaselineToResendButtonBaselineMetric],
+                                       [NSLayoutConstraint constraintWithItem:_resendEmailButton
                                                                     attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
                                                                        toItem:self.stepView
@@ -124,13 +78,22 @@ static const CGFloat VerticalMargin = 30.0;
                                                                    multiplier:1.0
                                                                      constant:0.0]
                                        ]];
-
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_resendEmailButton]-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_resendEmailButton]-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
     [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
 }
 

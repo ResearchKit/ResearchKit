@@ -47,19 +47,17 @@
     [super stepDidChange];
     
     if (self.step && [self isViewLoaded]) {
+        self.navigationItem.title = ORKLocalizedString(@"VERIFICATION_NAV_TITLE", nil);
+        
         _verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
         _verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
-        _verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
-        _verificationStepView.emailLabel.text = self.emailAddress;
+        _verificationStepView.headerView.instructionLabel.text = [[self verificationStep].text stringByAppendingString:[NSString stringWithFormat:@"\n\n%@", ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil)]];
+        
         [self.view addSubview:_verificationStepView];
         
         [_verificationStepView.resendEmailButton addTarget:self
                                                    action:@selector(resendEmailButtonHandler:)
-                                         forControlEvents:UIControlEventTouchUpInside];
-        
-        [_verificationStepView.changeEmailButton addTarget:self
-                                                   action:@selector(changeEmailButtonHandler:)
                                          forControlEvents:UIControlEventTouchUpInside];
     }
 }
@@ -69,53 +67,16 @@
     [self stepDidChange];
 }
 
-- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    [super setContinueButtonItem:continueButtonItem];
-    
-    [continueButtonItem setTarget:self];
-    [continueButtonItem setAction:@selector(continueButtonHandler:)];
-    
-    _verificationStepView.continueSkipContainer.continueButtonItem = continueButtonItem;
-    _verificationStepView.continueSkipContainer.continueEnabled = YES;
-}
-
-- (void)continueButtonHandler:(id)sender{
-    [self continueButtonTapped];
-}
-
 - (void)resendEmailButtonHandler:(id)sender {
     [self resendEmailButtonTapped];
 }
 
-- (void)changeEmailButtonHandler:(id)sender {
-    [self changeEmailButtonTapped];
-}
-
 #pragma mark Override methods
-
-- (void)continueButtonTapped {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
-                                 userInfo:nil];
-}
 
 - (void)resendEmailButtonTapped {
     @throw [NSException exceptionWithName:NSInvalidArgumentException
                                    reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
                                  userInfo:nil];
-}
-
-- (void)changeEmailButtonTapped {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
-                                 userInfo:nil];
-}
-
-- (NSString *)emailAddress {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
-                                 userInfo:nil];
-    return nil;
 }
 
 @end

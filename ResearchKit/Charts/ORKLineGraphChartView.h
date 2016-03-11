@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  `ORKGraphChartViewDataSource` protocol as a line graph.
  
  The primary plot is colored by the `tintColor`, and any additional plots are colored using the
- `referenceLineColor`.
+ `referenceLineColor` property.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKLineGraphChartView : ORKGraphChartView

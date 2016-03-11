@@ -80,11 +80,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeBoolean,
     
     /**
-     The Eligibility question type asks the participant to enter Yes or No via a custom boolean control.
-     */
-    ORKQuestionTypeEligibility,
-    
-    /**
      In a text question, the participant can enter multiple lines of text.
      */
     ORKQuestionTypeText,
@@ -153,7 +148,6 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
-@class ORKEligibilityAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
@@ -224,8 +218,6 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
-+ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat;
-
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
@@ -284,8 +276,17 @@ ORK_CLASS_AVAILABLE
  The `ORKScaleAnswerFormat `class represents an answer format that includes a slider control.
  
  The scale answer format produces an `ORKScaleQuestionResult` object that contains an integer whose
- value is between the scale's minimum and maximum values, and represents one of the quantized step 
+ value is between the scale's minimum and maximum values, and represents one of the quantized step
  values.
+
+ The following are the rules bound with scale answer format -
+ 
+ * Minimum number of step in a task should not be less than 1.
+ * Minimum number of section on a scale (step count) should not be less than 1.
+ * Maximum number of section on a scale (step count) should not be more than 13.
+ * The lower bound value in scale answer format cannot be lower than - 10000.
+ * The upper bound value in scale answer format cannot be more than 10000.
+
  */
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
@@ -527,12 +528,12 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
- Formatting style applied to the minimum, maximum, and slider values.
+ A formatting style applied to the minimum, maximum, and slider values.
  */
 @property ORKNumberFormattingStyle numberStyle;
 
 /**
- Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
+ A number formatter applied to the minimum, maximum, and slider values. Can be overridden by
  subclasses.
  */
 @property (readonly) NSNumberFormatter *numberFormatter;
@@ -548,14 +549,14 @@ ORK_CLASS_AVAILABLE
 @property (readonly, nullable) NSString *minimumValueDescription;
 
 /**
- An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
- The maximum range label will not be visible.
+ An image for the upper bound of the slider. 
+ @discussion The recommended image size is 30 x 30 points. The maximum range label will not be visible.
  */
 @property (strong, nullable) UIImage *maximumImage;
 
 /**
- An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
- The minimum range label will not be visible.
+ An image for the lower bound of the slider. 
+ @discussion The recommended image size is 30 x 30 points. The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;
 
@@ -759,22 +760,6 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
-
-@end
-
-
-/**
- The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
- preconfigured to use only Yes and No answers.
- 
- It is recommended to use an `ORKNavigableOrderedTask` along with this answer format
- in order to determine if the user is eligible or not. See `ORKCatalog` for an
- example (`Eligibility Task Example').
- 
- The eligibility answer format produces an `ORKBooleanQuestionResult` object.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKEligibilityAnswerFormat : ORKAnswerFormat
 
 @end
 

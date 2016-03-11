@@ -163,7 +163,10 @@
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([[self activeStep] shouldStartTimerAutomatically]) {
+        if(self.started){
+            // Should call resume instead of start when the task has been started.
+            [self resume];
+        } else if ([[self activeStep] shouldStartTimerAutomatically]) {
             [self start];
         }
     });

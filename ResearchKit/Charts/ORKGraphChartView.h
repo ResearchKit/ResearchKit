@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKRangedPoint;
 
 /**
- The graph chart view delegate protocol declares methods which forward pan gesture events occuring
+ The graph chart view delegate protocol forwards pan gesture events occuring
  within the bounds of an `ORKGraphChartView` object.
 */
 ORK_AVAILABLE_DECL
@@ -66,7 +66,7 @@ ORK_AVAILABLE_DECL
 - (void)graphChartView:(ORKGraphChartView *)graphChartView touchesMovedToXPosition:(CGFloat)xPosition;
 
 /**
- Notifies the delegate that a pan gesture which began within the bounds of an `ORKGraphChartView`
+ Notifies the delegate that a pan gesture that began within the bounds of an `ORKGraphChartView`
  object has ended.
 
 @param graphChartView       The graph chart view object in which the gesture occurred.
@@ -81,7 +81,7 @@ ORK_AVAILABLE_DECL
  data required to populate an `ORKGraphChartView` object.
 
  At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
- `graphChartView:plot:valueForPointAtIndex:` methods. These methods are responsible for returning
+ `graphChartView:plot:valueForPointAtIndex:` methods. These methods return
  the number of points in a plot and the points themselves. Each point in a plot is represented by an
  object of the `ORKRangedPoint` class. A data source object may provide additional information to
  the graph chart view by implementing the optional methods.
@@ -110,7 +110,7 @@ ORK_AVAILABLE_DECL
  Asks the data source for the range point to be plotted at the specified point index for the
  specified plot.
 
- @param graphChartView      The graphChartView asking for the range point.
+ @param graphChartView      The graph chart view that is asking for the range point.
  @param pointIndex          An index number identifying the range point in the graph chart view.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
@@ -123,7 +123,7 @@ ORK_AVAILABLE_DECL
 @optional
 /**
  Asks the data source for the number of plots to be plotted by the graph chart view. If this method
- is not implemented, the graph chart view will assume it has a single plot.
+ is not implemented, the graph chart view assumes that it has a single plot.
 
  @param graphChartView      The graph chart view asking for the number of plots.
 
@@ -134,25 +134,25 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the color of the specified plot.
  
- If this method is not implemented, the first plot will use the graph chart view `tintColor`, and
- all subsequent plots will use the current `referenceLineColor`.
+ If this method is not implemented, the first plot uses the graph chart view `tintColor`, and
+ all subsequent plots uses the current `referenceLineColor`.
  
  @param graphChartView      The graph chart view asking for the color of the segment.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is always 0 in single-plot graph chart views.
  
- @return The color of the segment at the specified `index` in `pieChartView`.
+ @return The color of the segment at the specified index in a pie chart view.
  */
 - (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
 
 /**
- Asks the data source which plot should the scrubber snap to in multi-graph chart views.
+ Asks the data source which plot the scrubber should snap to in multigraph chart views.
  
  If this method is not implemented, the scrubber snaps over the first plot.
  
  @param graphChartView      The graph chart view asking for the scrubbing plot index.
  
- @return The index of the plot the scrubber should snap to.
+ @return The index of the plot that the scrubber should snap to.
  */
 - (NSInteger)scrubbingPlotIndexForGraphChartView:(ORKGraphChartView *)graphChartView;
 
@@ -160,7 +160,7 @@ ORK_AVAILABLE_DECL
  Asks the data source for the upper limit of the y-axis drawn by the graph chart view.
 
  If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
- returned in `graphChartView:plot:valueForPointAtIndex:` will be used.
+ returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
 
@@ -173,8 +173,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, The smallest `minimumValue` of all ORKRangedPoint instances
- returned in `graphChartView:plot:valueForPointAtIndex:` will be used.
+ If this method is not implemented, the smallest `minimumValue` of all ORKRangedPoint instances
+ returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
 
@@ -187,7 +187,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
  than the number of data points. A title appearing adjacent to each
- division may optionally be returned in `graphChartView:titleForXAxisAtPointIndex:`.
+ division may optionally be returned by the `graphChartView:titleForXAxisAtPointIndex:` method.
 
  @param graphChartView      The graph chart view asking for the number of divisions in its x-axis.
 
@@ -196,15 +196,15 @@ ORK_AVAILABLE_DECL
 - (NSInteger)numberOfDivisionsInXAxisForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
- Asks the data source for the title to be displayed adjacent to each division in the x-axis (the 
+ Asks the data source for the title to be displayed adjacent to each division in the x-axis (the
  number returned by `numberOfDivisionsInXAxisForGraphChartView:`). You can return `nil` from this
  method if you don't want to display a title for the specified point index.
 
- If this method is not implemented, the x-axis will not have titles.
+ If this method is not implemented, the x-axis has no titles.
 
  See also: `numberOfDivisionsInXAxisForGraphChartView:`.
 
- @param graphChartView  The graph chart view asking for the tile.
+ @param graphChartView  The graph chart view asking for the title.
  @param pointIndex      The index of the specified x-axis division.
 
  @return The title string to be displayed adjacent to each division of the x-axis of the graph chart
@@ -230,8 +230,8 @@ ORK_AVAILABLE_DECL
 
 /**
  The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to
- subclasses like `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate
- this class directly, use one of the subclasses instead.
+ subclasses such as `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate
+ this class directly; use one of the subclasses instead.
 */
 ORK_CLASS_AVAILABLE
 @interface ORKGraphChartView : UIView
@@ -239,10 +239,10 @@ ORK_CLASS_AVAILABLE
 /**
  The minimum value of the y-axis.
 
- This value can be provided to an instance of `ORKGraphChartView` by implementing the optional
+ You can provide this value to an instance of `ORKGraphChartView` by implementing the optional
  `minimumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
- If `minimumValueForGraphChartView:` is not implemented, the minimum value will be assigned to the
+ If `minimumValueForGraphChartView:` is not implemented, the minimum value is assigned to the
  smallest value of the `minimumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
@@ -251,10 +251,10 @@ ORK_CLASS_AVAILABLE
 /**
  The maximum value of the y-axis.
 
- This value can be provided to an instance of `ORKGraphChartView` by implementing the
+ You can provide this value instance of `ORKGraphChartView` by implementing the
  optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
- If `maximumValueForGraphChartView:` is not implemented, the maximum value will be assigned to the
+ If `maximumValueForGraphChartView:` is not implemented, the maximum value is assigned to the
  largest value of the `maximumValue` property of all `ORKRangedPoint` instances returned by the
  graph chart view data source.
 */
@@ -275,7 +275,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL showsVerticalReferenceLines;
 
 /**
- The delegate will be notified of pan gesture events occuring within the bounds of the graph chart
+ The delegate is notified of pan gesture events occuring within the bounds of the graph chart
  view.
 
  See the `ORKGraphChartViewDelegate` protocol.
@@ -283,7 +283,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, weak, nullable) id <ORKGraphChartViewDelegate> delegate;
 
 /**
- The dataSource responsible for providing the data required to populate the graph chart view.
+ The data source responsible for providing the data required to populate the graph chart view.
 
  See the `ORKGraphChartViewDataSource` protocol.
 */
@@ -292,7 +292,7 @@ ORK_CLASS_AVAILABLE
 /**
  The color of the axes drawn by the graph chart view.
  
- The default value for this property is a very light gray color. Setting this property to `nil` 
+ The default value for this property is a light gray color. Setting this property to `nil`
  resets it to its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *axisColor;
@@ -332,7 +332,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
 
 /**
- The string that will be displayed if no data points are provided by the `dataSource`.
+ The string that is displayed if no data points are provided by the data source.
  
  The default value for this property is an appropriate message string. Setting this property to
  `nil` resets it to its default value.
@@ -369,6 +369,13 @@ ORK_CLASS_AVAILABLE
  @param animationDuration       The duration of the appearing animation.
  */
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
+
+/**
+ Reloads the plotted data.
+ 
+ Call this method to reload the data and re-plot the graph. You should call it if the data provided by the dataSource changes.
+*/
+- (void)reloadData;
 
 @end
 

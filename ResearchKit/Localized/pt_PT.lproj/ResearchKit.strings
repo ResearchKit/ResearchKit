@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Endereço de e‑mail inválido: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Digite um endereço";
+"LOCATION_ERROR_TITLE" = "Não foi possível encontrar o endereço indicado.";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Não foi possível encontrar a localização atual. Digite um endereço ou desloque‑se para um local com sinal GPS mais forte.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "O acesso aos serviços de localização foi recusado. Permita a esta aplicação aceder a estes serviços nas Definições.";
+"LOCATION_ERROR_GEOCODE" = "Não foi encontrado nenhum resultado. Certifique‑se de que o endereço indicado é válido.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ou não dispõe de ligação à Internet ou excedeu o número limite de consultas. Caso não tenha ligação estabelecida à Internet, ative a rede Wi‑Fi para responder a esta pergunta ou para a ignorar (se esta opção estiver disponível). Também pode optar por voltar ao questionário quando tiver estabelecido ligação à Internet ou por voltar a tentar dentro de alguns minutos.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conteúdo de texto que excede o comprimento máximo: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "A câmara não está disponível em ecrã dividido.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "mmacieira@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Palavra‑passe";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Digite a palavra‑passe";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Volte a digitar a palavra‑passe";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "As palavras‑passe não coincidem.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informação adicional";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Manuel";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Macieira";
+"GENDER_FORM_ITEM_TITLE" = "Sexo";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Escolha o sexo";
+"DOB_FORM_ITEM_TITLE" = "Data de nascimento";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Escolha uma data";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Confirmação";
+"VERIFICATION_STEP_TITLE" = "Confirme o e‑mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Caso não tenha recebido um e‑mail de confirmação, toque na hiperligação abaixo; o e‑mail voltará a ser enviado.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar e‑mail de confirmação";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Iniciar sessão";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Não se lembra da palavra‑passe?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Digite o código";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
+"PASSCODE_SAVED_MESSAGE" = "Código guardado";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Código autenticado";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Digite o código antigo";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Digite o novo código";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme o novo código";
+"PASSCODE_INVALID_ALERT_TITLE" = "Código incorreto";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Introduziu códigos diferentes. Volte a tentar.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Efetue autenticação com o Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erro do Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Só são permitidos caracteres numéricos.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progresso de introdução do código";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos introduzidos";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Não foi possível adicionar elemento do Porta‑chaves.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Não foi possível atualizar elemento do Porta‑chaves.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Não foi possível apagar elemento do Porta‑chaves.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Não foi possível encontrar elemento do Porta‑chaves.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Concordo";
 "BUTTON_CANCEL" = "Cancelar";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Limpar";
 "BUTTON_DISAGREE" = "Não concordo";
 "BUTTON_DONE" = "OK";
@@ -175,6 +232,7 @@
 "TOTAL_TAPS_LABEL" = "Total de toques";
 "TAPPING_INSTRUCTION" = "Com dois dedos, toque nos botões o mais depressa que puder.";
 
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
 "AUDIO_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
@@ -229,7 +287,7 @@
 "TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Este exercício avalia a sua capacidade de resolver puzzles.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mova a pilha inteira para a plataforma destacada no menor número de movimentos possível.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toque em Iniciar para começar";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resolver o puzzle";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de movimentos: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo resolver este puzzle";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Dê meia‑volta e ande de volta ao ponto de partida.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Toque em OK quando terminar.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Sem dados";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Adicione este novo dígito ao anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ buracos e pinos";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta exercício mede as funções das extremidades superiores pedindo‑lhe que coloque um círculo dentro de um buraco. Ser-lhe-à pedido que repita %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "As duas mãos serão testadas.\nTem de pegar no círculo o mais depressa possível e arrastá‑lo para o buraco. Depois de o fazer %@ vezes, faça o movimento contrário e remova o círculo do buraco %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "As duas mãos serão testadas.\nTem de pegar no círculo o mais depressa possível e arrastá‑lo para o buraco. Depois de o fazer %@ vezes, faça o movimento contrário e remova o círculo do buraco %@ vezes.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Com a mão esquerda, ponha o círculo dentro do buraco.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Com a mão direita, ponha o círculo dentro do buraco.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Com a mão esquerda, ponha o círculo do outro lado da linha.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Com a mão direita, ponha o círculo do outro lado da linha.";
+"HOLE_PEG_TEST_TEXT" = "Apanhe o círculo com dois dedos.";
+"HOLE_PEG_TEST_TEXT_2" = "Levante os dedos para largar o círculo.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar ficheiro";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Não foi possível remover ficheiros de registo suficientes para atingir o limite.";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Vários erros ao remover registos.";
 "ERROR_RECORDER_NO_DATA" = "Os dados recolhidos não foram encontrados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum diretório de saída.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sem dados";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Voltar";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Intervalo de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
+"AX_GRAPH_POINT_%@" = "Ponto: %@";

@@ -47,6 +47,7 @@
 @implementation ORKWaitStepViewController {
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
+    NSString *_updatedText;
 }
 
 - (ORKWaitStep *)waitStep {
@@ -56,14 +57,21 @@
 - (void)stepDidChange {
     [super stepDidChange];
     
+    [_waitStepView removeFromSuperview];
+    
     if (self.step && [self isViewLoaded]) {
+        if (!_waitStepView) {
+            // Collect the text content from step during the when _waitStepView hasn't been initialized.
+            _updatedText = [self waitStep].text;
+        }
+        
         _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorType:[self waitStep].indicatorType];
-        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
-        _waitStepView.headerView.instructionLabel.text = [self waitStep].text;
-
+        _waitStepView.frame = self.view.bounds;
+        _waitStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_waitStepView];
         
-        [self setUpConstraints];
+        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
+        _waitStepView.headerView.instructionLabel.text = _updatedText;
     }
 }
 
@@ -72,29 +80,13 @@
     [self stepDidChange];
 }
 
-- (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    NSDictionary *views = @{ @"waitStepView": _waitStepView };
-    ORKEnableAutoLayoutForViews(views.allValues);
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[waitStepView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[waitStepView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [NSLayoutConstraint activateConstraints:constraints];
-}
-
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [_waitStepView.progressView setProgress:progress animated:animated];
 }
 
 - (void)updateText:(NSString *)text {
-    _waitStepView.headerView.instructionLabel.text = text;
+    _updatedText = text;
+    [self stepDidChange];
 }
 
 @end

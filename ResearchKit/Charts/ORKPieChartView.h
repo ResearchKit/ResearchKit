@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  An object that adopts the `ORKPieChartViewDataSource` protocol is responsible for providing the
  data required to populate an `ORKPieChartView` object.
 
- At a minimumm a data source object must implement the `numberOfSegmentsInPieChartView` and
+ At a minimumm, a data source object must implement the `numberOfSegmentsInPieChartView` and
  `pieChartView:valueForSegmentAtIndex:` methods. These methods are responsible for returning the
  number of segments in a pie chart view and the value for each segment. A data source object may
  provide additional information to the pie chart by implementing the optional
@@ -67,7 +67,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the value of a segment in the pie chart view.
  
- The value can be any arbitrary integer: the pie chart view will normalize them by the sum of all
+ The value can be any arbitrary integer: the pie chart view normalizes them by the sum of all
  returned values.
 
  @param pieChartView     The pie chart view asking for the value of the segment.
@@ -81,8 +81,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the color of a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view will use a unique shade of the current
- `tintColor` for each segment.
+ If this method is not implemented, the pie chart view uses a unique shade of the current
+ tint color for each segment.
 
  @param pieChartView     The pie chart view asking for the color of the segment.
  @param index            An index number specifying the segment in the pie chart view.
@@ -94,13 +94,13 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the title to appear in the legend for a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view will not display the legend.
+ If this method is not implemented, the pie chart view does not display the legend.
 
  @param pieChartView     The pie chart view asking for the title.
  @param index            An index number specifying the segment in the pie chart view.
 
- @return The string value to appear as the title for the segement at the specified `index` in the
- legend of `pieChartView`.
+ @return The title of the segment at the specified index in the pie chat view's
+ legend.
 */
 - (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
 
@@ -121,23 +121,23 @@ ORK_CLASS_AVAILABLE
 /**
  The width of the line used to draw the circular sections of the pie chart.
  
- If you do not set a value for this property, the pie chart view will assume a sensible value. If
- you set a number higher than the radius of the pie chart, the pie chart will draw completely
- filled.
+ If you do not set a value for this property, the pie chart view assumes a sensible value. If
+ you set a number higher than the radius of the pie chart, the pie chart draws a completely
+ filled pie.
 */
 @property (nonatomic) CGFloat lineWidth;
 
 /**
  The text to display as a title in the pie chart view.
  
- If you do not set a value for this property, the pie chart will not display a title.
+ If you do not set a value for this property, the pie chart does not display a title.
 */
 @property (nonatomic, copy, nullable) NSString *title;
 
 /**
  The text to display beneath the title in the pie chart view.
  
- If you do not set a value for this property, the pie chart will not display any text beneath the
+ If you do not set a value for this property, the pie chart does not display any text beneath the
  title.
 */
 @property (nonatomic, copy, nullable) NSString *text;
@@ -153,13 +153,13 @@ ORK_CLASS_AVAILABLE
 /**
  The color used for the text of the text label.
  
- The default value for this property is a liht gray color. Setting this property to `nil` resets it
+ The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
  */
 @property (nonatomic, strong, null_resettable) UIColor *textColor;
 
 /**
- A Boolean value indicating wheter the title and text labels should be drawn above the chart.
+ A Boolean value indicating whether the title and text labels should be drawn above the chart.
  
  If this value of this property is `NO`, the title and text are drawn at the center of the chart.
  The default value for this property is `NO`.
@@ -167,7 +167,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL showsTitleAboveChart;
 
 /**
- A Boolean value indicating whether the pie chart should draw percentage labels adjacent to each
+ A Boolean value indicating whether the pie chart should draw percentage labels next to each
  segement.
  
  The default value for this property is YES.
@@ -176,7 +176,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  A Boolean value indicating whether the pie chart drawing animation draws clockwise or
- anticlockwise.
+ counterclockwise.
  
  The default value for this property is YES.
 */
@@ -191,7 +191,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, null_resettable) NSString *noDataText;
 
 /**
- Animates the pie chart when it first displays on the screen.
+ Animates the pie chart when it is first displayed on the screen.
  
  You can optionally call this method from the `viewWillAppear:` implementation of the view
  controller that owns the pie chart view.
@@ -199,6 +199,13 @@ ORK_CLASS_AVAILABLE
  @param animationDuration       The duration of the appearing animation.
 */
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
+
+/**
+ Reloads the plotted data.
+ 
+ Call this method to reload the data and re-plot the graph. You should call it if the data provided by the dataSource changes.
+ */
+- (void)reloadData;
 
 @end
 

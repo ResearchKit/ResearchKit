@@ -32,6 +32,7 @@
 #import "ORKPasscodeViewController.h"
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKPasscodeStep.h"
 #import "ORKHelpers.h"
 
@@ -41,6 +42,20 @@
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
     return nil;
+}
+
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationBar.shadowImage = [UIImage new];
+        self.navigationBar.translucent = NO;
+    }
+    return self;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
 }
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
@@ -75,10 +90,6 @@
     passcodeStepViewController.step = step;
     
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
     return navigationController;
 }
 

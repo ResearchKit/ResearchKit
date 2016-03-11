@@ -38,12 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStepNavigationRule;
 
 /**
- The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from
- `ORKOrderedTask`.
+ The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from the
+ `ORKOrderedTask` class.
  
  For implementing conditional task navigation, you must instantiate concrete subclasses of
- `ORKStepNavigationRule` and attach them to trigger steps by using
- `setNavigationRule:forTriggerStepIdentifier:`.
+ `ORKStepNavigationRule` and attach them to trigger steps by using the
+ `setNavigationRule:forTriggerStepIdentifier:` method.
  
  For example, if you want to display a survey question only when the user answered Yes to a previous
  question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump
@@ -65,18 +65,18 @@ ORK_CLASS_AVAILABLE
  Adds a navigation rule for a trigger step identifier.
  
  The rule will be used to obtain a new destination step when the participant goes forward from the
- trigger step. You cannot add two different navigation rules to the same trigger step identifier:
+ trigger step. You cannot add two different navigation rules to the same trigger step identifier;
  only the most recently added rule is kept.
  
  @param stepNavigationRule      The step navigation rule to be used when navigating forward from the
                                     trigger step. A strong reference to the rule is maintained by
                                     the task.
- @param triggerStepIdentifier   The identifier of the step that should trigger the rule.
+ @param triggerStepIdentifier   The identifier of the step that triggers the rule.
  */
 - (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
- Returns the step navigation rule (if any) associated to a trigger step identifier.
+ Returns the step navigation rule (if any) associated with a trigger step identifier.
  
  @param triggerStepIdentifier   The identifier of the step whose rule you want to retrieve.
 
@@ -85,7 +85,7 @@ ORK_CLASS_AVAILABLE
 - (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
- Removes the navigation rule (if any) associated to the specified trigger step identifier.
+ Removes the navigation rule (if any) associated with the specified trigger step identifier.
  
  @param triggerStepIdentifier   The identifier of the step whose rule is to be removed.
  */
@@ -97,6 +97,12 @@ ORK_CLASS_AVAILABLE
  Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+
+/**
+ Determines whether the task should report its progress as a linear ordered task or not. 
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL shouldReportProgress;
 
 @end
 
