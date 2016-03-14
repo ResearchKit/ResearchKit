@@ -1281,7 +1281,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     return success;
 }
 
-- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError *__autoreleasing *)error {
+- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __autoreleasing *)error {
     __block BOOL success = YES;
     dispatch_sync(_queue, ^{
         success = [self queue_unmarkUploadedFiles:fileURLs error:error];
@@ -1289,7 +1289,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     return success;
 }
 
-- (BOOL)queue_removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError *__autoreleasing *)error {
+- (BOOL)queue_removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * __autoreleasing *)error {
     if (bytes == 0) {
         for (ORKDataLogger *logger  in _records) {
             [logger removeAllFilesWithError:nil];
@@ -1346,7 +1346,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     return (totalBytes <= bytes);
 }
 
-- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError *__autoreleasing *)error {
+- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * __autoreleasing *)error {
     __block BOOL success = YES;
     dispatch_sync(_queue, ^{
         success = [self queue_removeOldAndUploadedLogsToThreshold:bytes error:error];

@@ -1401,16 +1401,16 @@ static id jsonObjectForObject(id object) {
     return json;
 }
 
-+ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError *__autoreleasing *)error {
++ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError * __autoreleasing *)error {
     return objectForJsonObject(object, nil, nil);
 }
 
-+ (NSData *)JSONDataForObject:(id)object error:(NSError *__autoreleasing *)error {
++ (NSData *)JSONDataForObject:(id)object error:(NSError * __autoreleasing *)error {
     id json = jsonObjectForObject(object);
     return [NSJSONSerialization dataWithJSONObject:json options:(NSJSONWritingOptions)0 error:error];
 }
 
-+ (id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error {
++ (id)objectFromJSONData:(NSData *)data error:(NSError * __autoreleasing *)error {
     id json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:error];
     id ret = nil;
     if (json != nil) {

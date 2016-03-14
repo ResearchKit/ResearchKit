@@ -45,11 +45,11 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 + (nullable NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error;
 
-+ (nullable NSData *)JSONDataForObject:(id)object error:(NSError *__autoreleasing *)error;
++ (nullable NSData *)JSONDataForObject:(id)object error:(NSError * __autoreleasing *)error;
 
-+ (nullable id)objectFromJSONObject:(NSDictionary *)object error:(NSError *__autoreleasing *)error;
++ (nullable id)objectFromJSONObject:(NSDictionary *)object error:(NSError * __autoreleasing *)error;
 
-+ (nullable id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error;
++ (nullable id)objectFromJSONData:(NSData *)data error:(NSError * __autoreleasing *)error;
 
 + (NSArray *)serializableClasses;
 
