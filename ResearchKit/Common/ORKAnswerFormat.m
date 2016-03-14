@@ -2121,7 +2121,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.secureTextEntry == castObject.secureTextEntry);
 }
 
-static NSString * const kSecureTextEntryEscapeString = @"*";
+static NSString *const kSecureTextEntryEscapeString = @"*";
 
 - (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;
@@ -2371,7 +2371,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
             _useCurrentLocation == castObject.useCurrentLocation);
 }
 
-static NSString * const formattedAddressLinesKey = @"FormattedAddressLines";
+static NSString *const formattedAddressLinesKey = @"FormattedAddressLines";
 
 - (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;

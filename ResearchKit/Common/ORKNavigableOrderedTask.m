@@ -167,10 +167,10 @@
 
 #pragma mark - Predefined
 
-NSString * const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
-NSString * const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
-NSString * const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
-NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
+NSString *const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
+NSString *const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
+NSString *const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
+NSString *const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
 
 + (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -185,7 +185,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
     BOOL dominantHandLeft = (dominantHand == ORKBodySagittalLeft);
     NSTimeInterval stepDuration = (timeLimit == 0) ? CGFLOAT_MAX : timeLimit;
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         NSString *pegs = [NSNumberFormatter localizedStringFromNumber:@(numberOfPegs) numberStyle:NSNumberFormatterNoStyle];
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
@@ -280,7 +280,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);

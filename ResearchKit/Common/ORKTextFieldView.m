@@ -34,8 +34,8 @@
 #import "ORKAccessibility.h"
 
 
-static NSString * const EmptyBullet = @"\u25CB";
-static NSString * const FilledBullet = @"\u25CF";
+static NSString *const EmptyBullet = @"\u25CB";
+static NSString *const FilledBullet = @"\u25CF";
 
 @implementation ORKCaretOptionalTextField
 

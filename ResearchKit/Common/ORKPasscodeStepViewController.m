@@ -357,7 +357,7 @@
 
 - (void)finishTouchId {
     // Only save to keychain if it is not in authenticate flow.
-    if (! (self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
+    if (!(self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
         [self savePasscodeToKeychain];
         
         if (self.passcodeFlow == ORKPasscodeFlowCreate) {

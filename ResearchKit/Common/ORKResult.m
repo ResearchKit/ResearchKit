@@ -1954,10 +1954,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return YES;
 }
 
-static NSString * const RegionCenterLatitudeKey = @"region.center.latitude";
-static NSString * const RegionCenterLongitudeKey = @"region.center.longitude";
-static NSString * const RegionRadiusKey = @"region.radius";
-static NSString * const RegionIdentifierKey = @"region.identifier";
+static NSString *const RegionCenterLatitudeKey = @"region.center.latitude";
+static NSString *const RegionCenterLongitudeKey = @"region.center.longitude";
+static NSString *const RegionRadiusKey = @"region.radius";
+static NSString *const RegionIdentifierKey = @"region.identifier";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, userInput);
