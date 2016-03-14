@@ -35,25 +35,25 @@
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter stringFromDate:date];
+    return [formatter stringFromDate:date];
 }
 
 static NSDate *ORKEDateFromStringISO8601(NSString *string) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter dateFromString:string];
+    return [formatter dateFromString:string];
 }
 
 static NSArray *ORKNumericAnswerStyleTable() {
