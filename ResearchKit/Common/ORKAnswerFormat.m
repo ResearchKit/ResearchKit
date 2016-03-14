@@ -54,7 +54,7 @@ BOOL ORKIsAnswerEmpty(id answer) {
 }
 
 NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
-#define SQT_CASE(x) case ORKQuestionType ## x : return @STRINGIFY(ORKQuestionType ## x);
+#define SQT_CASE(x) case ORKQuestionType ## x : return @ORK_STRINGIFY(ORKQuestionType ## x);
     switch (questionType) {
             SQT_CASE(None);
             SQT_CASE(Scale);
