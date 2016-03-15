@@ -33,7 +33,6 @@
 #import "ORKTintedImageView.h"
 #import "ORKHelpers.h"
 #import <tgmath.h>
-#import "ORKDefines_Private.h"
 
 
 @implementation ORKImageCaptureCameraPreviewView {

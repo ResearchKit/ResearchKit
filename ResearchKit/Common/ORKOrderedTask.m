@@ -45,7 +45,6 @@
 #import "ORKFitnessStepViewController.h"
 #import "ORKCompletionStep.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKAudioStep.h"
 #import "ORKCountdownStep.h"
 #import "ORKFitnessStep.h"

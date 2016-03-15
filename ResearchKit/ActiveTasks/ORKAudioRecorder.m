@@ -33,7 +33,6 @@
 #import "ORKHelpers.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
-#import "ORKDefines_Private.h"
 
 
 @interface ORKAudioRecorder ()

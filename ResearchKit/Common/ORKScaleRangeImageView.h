@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKDefines_Private.h"
+#import "ORKDefines.h"
 
 
 /**

@@ -32,7 +32,6 @@
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStep_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 #import "ORKStep_Private.h"
 
 

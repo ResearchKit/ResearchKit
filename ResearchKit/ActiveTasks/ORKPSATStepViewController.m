@@ -37,6 +37,7 @@
 #import "ORKVerticalContainerView.h"
 #import "ORKActiveStepView.h"
 #import "ORKPSATKeyboardView.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKPSATStepViewController () <ORKPSATKeyboardViewDelegate>

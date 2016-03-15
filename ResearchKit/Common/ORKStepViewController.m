@@ -30,7 +30,6 @@
 
 
 #import "ORKStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKSkin.h"
 #import "ORKStepViewController_Internal.h"

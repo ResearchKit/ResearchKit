@@ -30,9 +30,9 @@
 
 
 #import "ORKLoginStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKFormStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKLoginStepViewController

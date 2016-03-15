@@ -31,8 +31,8 @@
 
 
 #import "ORKConsentSignatureFormatter.h"
-#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
+
 
 @implementation ORKConsentSignatureFormatter
 

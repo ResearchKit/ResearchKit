@@ -36,6 +36,7 @@
 #import <ResearchKit/ORKErrors.h>
 
 
+// Logging
 #if ( defined(ORK_LOG_LEVEL_NONE) && ORK_LOG_LEVEL_NONE )
 #  undef ORK_LOG_LEVEL_DEBUG
 #  undef ORK_LOG_LEVEL_WARNING
@@ -78,6 +79,8 @@
 #    define ORK_INLINE static
 #  endif
 #endif
+
+#define STRONGTYPE(x) __strong __typeof(x)
 
 #define ORK_NARG(...) ORK_NARG_(__VA_ARGS__,ORK_RSEQ_N())
 #define ORK_NARG_(...)  ORK_ARG_N(__VA_ARGS__)
@@ -291,3 +294,16 @@ const CGFloat ORKCGFloatInvalidValue;
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
+
+// Localization
+ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
+ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+
+#define ORKDefaultLocalizedValue(key) \
+[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
+
+#define ORKLocalizedString(key, comment) \
+[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+
+#define ORKLocalizedStringFromNumber(number) \
+[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]

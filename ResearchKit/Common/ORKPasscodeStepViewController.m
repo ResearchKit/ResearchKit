@@ -35,7 +35,7 @@
 #import "ORKPasscodeStepView.h"
 #import "ORKPasscodeStep.h"
 #import "ORKKeychainWrapper.h"
-
+#import "ORKHelpers.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 

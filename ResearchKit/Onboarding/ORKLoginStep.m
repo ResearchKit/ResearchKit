@@ -31,7 +31,6 @@
 
 #import "ORKLoginStep.h"
 #import "ORKLoginStep_Internal.h"
-#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
 

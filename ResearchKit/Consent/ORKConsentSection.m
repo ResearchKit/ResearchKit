@@ -32,7 +32,6 @@
 #import "ORKConsentSection.h"
 #import "ORKHelpers.h"
 #import "ORKConsentDocument_Internal.h"
-#import "ORKDefines_Private.h"
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {

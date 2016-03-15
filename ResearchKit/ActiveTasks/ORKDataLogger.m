@@ -36,7 +36,6 @@
 #import "ORKDataLogger_Private.h"
 #import "HKSample+ORKJSONDictionary.h"
 #import "CMMotionActivity+ORKJSONDictionary.h"
-#import "ORKDefines_Private.h"
 
 
 static const char *ORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";

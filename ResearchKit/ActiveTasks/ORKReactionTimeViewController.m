@@ -34,6 +34,7 @@
 #import "ORKActiveStepView.h"
 #import "ORKReactionTimeContentView.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKHelpers.h"
 #import <CoreMotion/CMDeviceMotion.h>
 #import <AudioToolbox/AudioServices.h>
 

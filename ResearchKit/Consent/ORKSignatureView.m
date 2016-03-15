@@ -32,7 +32,7 @@
 #import "ORKSignatureView.h"
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
-
+#import "ORKHelpers.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 

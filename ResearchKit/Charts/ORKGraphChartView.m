@@ -37,7 +37,6 @@
 #import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
 #import "ORKRangedPoint.h"
-#import "ORKDefines_Private.h"
 #import "ORKAccessibility.h"
 
 

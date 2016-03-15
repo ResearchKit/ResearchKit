@@ -32,7 +32,6 @@
  
 #import "ORKRangedPoint.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 
 
 @implementation ORKRangedPoint

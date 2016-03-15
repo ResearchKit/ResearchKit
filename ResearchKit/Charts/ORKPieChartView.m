@@ -37,7 +37,6 @@
 #import "ORKPieChartLegendView.h"
 #import "ORKPieChartTitleTextView.h"
 #import "ORKSkin.h"
-#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 
 

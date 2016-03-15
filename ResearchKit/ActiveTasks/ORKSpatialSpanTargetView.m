@@ -34,7 +34,6 @@
 #import "ORKSkin.h"
 #import "ORKTintedImageView.h"
 #import "ORKAccessibility.h"
-#import "ORKDefines_Private.h"
 
 
 static const UIEdgeInsets _ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};

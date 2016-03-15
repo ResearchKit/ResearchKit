@@ -33,7 +33,6 @@
 #import "ORKOrderedTask_Internal.h"
 #import "ORKHelpers.h"
 #import "ORKStepNavigationRule.h"
-#import "ORKDefines_Private.h"
 #import "ORKStep_Private.h"
 #import "ORKHolePegTestPlaceStep.h"
 #import "ORKHolePegTestRemoveStep.h"

@@ -33,8 +33,6 @@
 #import "ORKImageCaptureStepViewController.h"
 #import "ORKImageCaptureView.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
-
 #import <AVFoundation/AVFoundation.h>
 
 

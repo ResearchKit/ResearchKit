@@ -31,8 +31,8 @@
 
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKDefines_Private.h"
 #import "ORKResult_Private.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKChoiceAnswerFormatHelper {

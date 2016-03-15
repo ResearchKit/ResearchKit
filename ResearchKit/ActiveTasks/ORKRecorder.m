@@ -35,7 +35,6 @@
 #import "ORKRecorder_Private.h"
 #import "ORKHelpers.h"
 #import "ORKDataLogger.h"
-#import "ORKDefines_Private.h"
 
 
 @implementation ORKRecorderConfiguration

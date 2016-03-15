@@ -43,7 +43,6 @@
 #import "ORKSkin.h"
 #import "ORKCaption1Label.h"
 #import "ORKFormSectionTitleLabel.h"
-#import "ORKDefines_Private.h"
 #import "ORKStep_Private.h"
 #import "ORKTextChoiceCellGroup.h"
 #import "ORKStepHeaderView_Internal.h"

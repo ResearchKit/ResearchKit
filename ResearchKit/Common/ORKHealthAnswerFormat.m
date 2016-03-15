@@ -33,7 +33,6 @@
 #import <UIKit/UIKit.h>
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 
 
 #pragma mark - ORKHealthAnswerFormat

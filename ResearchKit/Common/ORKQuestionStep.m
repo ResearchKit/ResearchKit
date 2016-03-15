@@ -35,7 +35,6 @@
 #import "ORKAnswerFormat_Private.h"
 #import "ORKStep_Private.h"
 #import "ORKQuestionStepViewController.h"
-#import "ORKDefines_Private.h"
 
 
 @implementation ORKQuestionStep

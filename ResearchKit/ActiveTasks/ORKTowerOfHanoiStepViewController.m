@@ -36,6 +36,7 @@
 #import "ORKTowerOfHanoiTower.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKSkin.h"
+#import "ORKHelpers.h"
 
 
 static const NSUInteger NumberOfTowers = 3;
