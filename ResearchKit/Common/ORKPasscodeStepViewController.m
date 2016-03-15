@@ -372,8 +372,8 @@
 
 - (void)savePasscodeToKeychain {
     NSDictionary *dictionary = @{
-                                 KeychainDictionaryPasscodeKey : [_passcode copy],
-                                 KeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
+                                 KeychainDictionaryPasscodeKey: [_passcode copy],
+                                 KeychainDictionaryTouchIdKey: @(_isTouchIdAuthenticated)
                                  };
     NSError *error;
     _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];

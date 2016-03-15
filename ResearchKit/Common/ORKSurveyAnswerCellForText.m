@@ -93,7 +93,7 @@
         
         self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width, 36)];
         self.textView.placeHolder = self.placeHolder;
-        self.placeHolder.text = self.step.placeholder? :ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
+        self.placeHolder.text = self.step.placeholder ? :ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
         self.placeHolder.textColor = [UIColor lightGrayColor];
         self.placeHolder.userInteractionEnabled = NO;
         [self addSubview:self.placeHolder];
@@ -166,7 +166,7 @@
 }
 
 - (void)textDidChange {
-    [self ork_setAnswer:(self.textView.text.length > 0)? self.textView.text : ORKNullAnswerValue()];
+    [self ork_setAnswer:(self.textView.text.length > 0) ? self.textView.text : ORKNullAnswerValue()];
 }
 
 - (BOOL)shouldContinue {
@@ -238,7 +238,7 @@
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
-    _textField.placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    _textField.placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     _textField.textAlignment = NSTextAlignmentNatural;
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;

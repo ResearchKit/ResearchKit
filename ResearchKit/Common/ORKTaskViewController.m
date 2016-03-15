@@ -762,7 +762,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         if (!directoryExists) {
             NSError *error = nil;
             if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
-                @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
+                @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error": error}];
             }
             isDirectory = YES;
         } else if (!isDirectory) {
@@ -898,7 +898,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                 // be highly unexpected.
                 if ([self grantedAtLeastOnePermission] == NO) {
                     [self reportError:[NSError errorWithDomain:NSCocoaErrorDomain
-                                                          code:NSUserCancelledError userInfo:@{@"reason" : @"Required permissions not granted."}]
+                                                          code:NSUserCancelledError
+                                                      userInfo:@{@"reason": @"Required permissions not granted."}]
                                onStep:fromController.step];
                 } else {
                     [self showViewController:viewController goForward:goForward animated:animated];
@@ -919,7 +920,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
     
-    ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
+    ORKStepViewControllerNavigationDirection stepDirection = goForward ? ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
     [viewController willNavigateDirection:stepDirection];
     
@@ -1126,7 +1127,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 }]];
     }
     
-    NSString *discardTitle = saveable? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
+    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
     
     [alert addAction:[UIAlertAction actionWithTitle:discardTitle
                                               style:UIAlertActionStyleDestructive
@@ -1267,7 +1268,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
-        [strongDelegate taskViewController:self didChangeResult: [self result]];
+        [strongDelegate taskViewController:self didChangeResult:[self result]];
     }
 }
 

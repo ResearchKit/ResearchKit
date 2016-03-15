@@ -167,7 +167,7 @@
         displayValue = [_numberFormatter stringFromNumber:answer];
     }
    
-    NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
 
     self.textField.manageUnitAndPlaceholder = YES;
     self.textField.unit = numericFormat.unit;

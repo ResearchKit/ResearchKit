@@ -397,8 +397,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                           recordingSettings:(NSDictionary *)recordingSettings
                                     options:(ORKPredefinedTaskOption)options {
     
-    NSDictionary *defaultRecordingSettings = @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                                AVNumberOfChannelsKey : @(2),
+    NSDictionary *defaultRecordingSettings = @{ AVFormatIDKey: @(kAudioFormatAppleLossless),
+                                                AVNumberOfChannelsKey: @(2),
                                                 AVSampleRateKey: @(44100.0) };
     recordingSettings = recordingSettings ? : defaultRecordingSettings;
     
@@ -422,7 +422,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"AUDIO_TASK_TITLE", nil);
-            step.text = speechInstruction?:ORKLocalizedString(@"AUDIO_INTRO_TEXT",nil);
+            step.text = speechInstruction ? : ORKLocalizedString(@"AUDIO_INTRO_TEXT",nil);
             step.detailText = ORKLocalizedString(@"AUDIO_CALL_TO_ACTION", nil);
             step.image = [UIImage imageNamed:@"phonesoundwaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -837,7 +837,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-            step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
+            step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_CALL_TO_ACTION", nil);
             step.image = [UIImage imageNamed:@"phonefrequencywaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -849,7 +849,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         ORKToneAudiometryPracticeStep *step = [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-        step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
         ORKStepArrayAddStep(steps, step);
         
     }

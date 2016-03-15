@@ -484,7 +484,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         // TODO: Remove these first two cases, which we don't really support anymore.
         if ([object isKindOfClass:[NSString class]]) {
             NSString *string = (NSString *)object;
-            [choices addObject: [ORKTextChoice choiceWithText:string value:string]];
+            [choices addObject:[ORKTextChoice choiceWithText:string value:string]];
         } else if ([object isKindOfClass:[ORKTextChoice class]]) {
             [choices addObject:object];
             
@@ -495,15 +495,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                 [array[0] isKindOfClass:[NSString class]] &&
                 [array[1] isKindOfClass:[NSString class]]) {
                 
-                [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
+                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
             } else if (array.count == 1 &&
                        [array[0] isKindOfClass:[NSString class]]) {
-                [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
+                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
             } else {
-                @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice" : object }];
+                @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice": object }];
             }
         } else {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible choice item's type are ORKTextChoice, NSString, and NSArray" userInfo:@{@"choice" : object }];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible choice item's type are ORKTextChoice, NSString, and NSArray" userInfo:@{@"choice": object }];
         }
     }
     return choices;
@@ -615,7 +615,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                 [choices addObject:obj];
                 
             } else {
-                @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Options should be instances of ORKImageChoice" userInfo:@{ @"option" : obj }];
+                @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Options should be instances of ORKImageChoice" userInfo:@{ @"option": obj }];
             }
         }
         _imageChoices = choices;

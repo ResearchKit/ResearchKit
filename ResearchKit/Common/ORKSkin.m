@@ -75,19 +75,19 @@ static NSMutableDictionary *colors() {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         colors = [@{
-                    ORKSignatureColorKey : ORKRGB(0x000000),
-                    ORKBackgroundColorKey : ORKRGB(0xffffff),
-                    ORKToolBarTintColorKey : ORKRGB(0xffffff),
-                    ORKLightTintColorKey : ORKRGB(0xeeeeee),
-                    ORKDarkTintColorKey : ORKRGB(0x888888),
-                    ORKCaptionTextColorKey : ORKRGB(0xcccccc),
-                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0],
-                    ORKChartDefaultTextColorKey : [UIColor lightGrayColor],
-                    ORKGraphAxisColorKey : [UIColor colorWithRed:217.0 / 255.0 green:217.0 / 255.0 blue:217.0 / 255.0 alpha:1.0],
-                    ORKGraphAxisTitleColorKey : [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
-                    ORKGraphReferenceLineColorKey : [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
-                    ORKGraphScrubberLineColorKey : [UIColor grayColor],
-                    ORKGraphScrubberThumbColorKey : [UIColor colorWithWhite:1.0 alpha:1.0]
+                    ORKSignatureColorKey: ORKRGB(0x000000),
+                    ORKBackgroundColorKey: ORKRGB(0xffffff),
+                    ORKToolBarTintColorKey: ORKRGB(0xffffff),
+                    ORKLightTintColorKey: ORKRGB(0xeeeeee),
+                    ORKDarkTintColorKey: ORKRGB(0x888888),
+                    ORKCaptionTextColorKey: ORKRGB(0xcccccc),
+                    ORKBlueHighlightColorKey: [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0],
+                    ORKChartDefaultTextColorKey: [UIColor lightGrayColor],
+                    ORKGraphAxisColorKey: [UIColor colorWithRed:217.0 / 255.0 green:217.0 / 255.0 blue:217.0 / 255.0 alpha:1.0],
+                    ORKGraphAxisTitleColorKey: [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
+                    ORKGraphReferenceLineColorKey: [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
+                    ORKGraphScrubberLineColorKey: [UIColor grayColor],
+                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0]
                     } mutableCopy];
     });
     return colors;

@@ -185,7 +185,7 @@ static NSString *const FilledBullet = @"\u25CF";
     if (suffix.length == 0) {
         return;
     }
-    _suffixLabel = [self ork_createTextLabelWithTextColor:color ?: [UIColor grayColor]];
+    _suffixLabel = [self ork_createTextLabelWithTextColor:color ? : [UIColor grayColor]];
     _suffixLabel.text = suffix;
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
@@ -261,8 +261,8 @@ static NSString *const FilledBullet = @"\u25CF";
             [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
         } else {
             if (_managedPlaceholder.length > 0) {
-                [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
-                NSString *unit = (self.text.length == 0)? _unitWithPlaceholder : _unitWithNumber;
+                [self ork_setPlaceholder: (self.text.length == 0) ? _managedPlaceholder : nil];
+                NSString *unit = (self.text.length == 0) ? _unitWithPlaceholder : _unitWithNumber;
                 [self ork_updateSuffix:unit withColor:_unitRegularColor];
             } else {
                 if (self.text.length > 0) {

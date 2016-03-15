@@ -200,7 +200,7 @@
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([_captureSession canAddInput:input] && [_captureSession canAddOutput:stillImageOutput]) {
             [_captureSession addInput:input];
-            [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
+            [stillImageOutput setOutputSettings:@{AVVideoCodecKey: AVVideoCodecJPEG}];
             [_captureSession addOutput:stillImageOutput];
             _stillImageOutput = stillImageOutput;
         } else {

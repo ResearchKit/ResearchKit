@@ -110,7 +110,7 @@
 }
 
 - (void)testJSONFormatting {
-    NSDictionary *jsonObject = @{@"test" : @[@"a", @"b"], @"blah" : @(1) };
+    NSDictionary *jsonObject = @{@"test": @[@"a", @"b"], @"blah": @(1) };
     
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     
@@ -149,8 +149,8 @@
 }
 
 - (void)testRemoveAllFiles {
-    NSDictionary *jsonObject = @{@"test" : @(1) };
-    NSDictionary *jsonObject2 = @{@"test" : @(2) };
+    NSDictionary *jsonObject = @{@"test": @(1) };
+    NSDictionary *jsonObject2 = @{@"test": @(2) };
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject2];
     
@@ -173,8 +173,8 @@
 }
 
 - (void)testMarkFileUploaded {
-    NSDictionary *jsonObject = @{@"test" : @(1) };
-    NSDictionary *jsonObject2 = @{@"test" : @(2) };
+    NSDictionary *jsonObject = @{@"test": @(1) };
+    NSDictionary *jsonObject2 = @{@"test": @(2) };
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject2];
     
@@ -222,8 +222,8 @@
 }
 
 - (void)testFileEnumerators {
-    NSDictionary *jsonObject = @{@"test" : @(1) };
-    NSDictionary *jsonObject2 = @{@"test" : @(2) };
+    NSDictionary *jsonObject = @{@"test": @(1) };
+    NSDictionary *jsonObject2 = @{@"test": @(2) };
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject2];
     
@@ -258,7 +258,7 @@
 - (void)testDataProtection {
     _dataLogger.fileProtectionMode = ORKFileProtectionComplete;
     
-    NSDictionary *jsonObject = @{@"test" : @(1) };
+    NSDictionary *jsonObject = @{@"test": @(1) };
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     NSError *error = nil;
     XCTAssertTrue([_dataLogger append:jsonObject error:&error]);
@@ -290,7 +290,7 @@
     _dataLogger.maximumCurrentLogFileSize = 50;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    NSDictionary *jsonObject = @{@"x" : @"1234567890"};
+    NSDictionary *jsonObject = @{@"x": @"1234567890"};
     [self logJsonObject:jsonObject];
     [self logJsonObject:jsonObject];
     
@@ -310,7 +310,7 @@
 
 - (void)testFirstWriteOpensFilehandle {
     XCTAssertNil([_dataLogger fileHandle]);
-    NSDictionary *jsonObject = @{@"x" : @"1234567890"};
+    NSDictionary *jsonObject = @{@"x": @"1234567890"};
     [self logJsonObject:jsonObject];
     XCTAssertNotNil([_dataLogger fileHandle]);
 }
@@ -334,7 +334,7 @@
 }
 
 - (void)testCurrentLogFileAlwaysHasValidJson {
-    NSDictionary *jsonObject = @{@"x" : @"1234567890"};
+    NSDictionary *jsonObject = @{@"x": @"1234567890"};
     [self logJsonObject:jsonObject];
     {
         NSError *error = nil;

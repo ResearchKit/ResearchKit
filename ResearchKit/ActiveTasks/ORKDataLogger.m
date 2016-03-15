@@ -137,7 +137,7 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
     int rc = setxattr(path, attr, data.bytes, data.length, 0, 0);
     if (rc != 0) {
         if (error) {
-            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:rc userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_SET_ATTRIBUTE", nil)}];
+            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:rc userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"ERROR_DATALOGGER_SET_ATTRIBUTE", nil)}];
         }
     }
     return (rc == 0);
@@ -250,7 +250,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
     @catch (NSException *exception) {
         result = NO;
         if (error) {
-            *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{@"exception" : exception}];
+            *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{@"exception": exception}];
         }
     }
     return result;
@@ -501,11 +501,11 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (NSDictionary *)configuration {
-    return @{@"logName" : self.logName,
-             @"formatterClass" : NSStringFromClass([self.logFormatter class]),
-             @"fileProtectionMode" : @(self.fileProtectionMode),
-             @"maximumCurrentLogFileSize" : @(self.maximumCurrentLogFileSize),
-             @"maximumCurrentLogFileLifetime" : @(self.maximumCurrentLogFileLifetime)
+    return @{@"logName": self.logName,
+             @"formatterClass": NSStringFromClass([self.logFormatter class]),
+             @"fileProtectionMode": @(self.fileProtectionMode),
+             @"maximumCurrentLogFileSize": @(self.maximumCurrentLogFileSize),
+             @"maximumCurrentLogFileLifetime": @(self.maximumCurrentLogFileLifetime)
              };
 }
 
@@ -783,7 +783,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         BOOL success = [fileManager createFileAtPath:filePath contents:nil attributes:nil];
         if (!success) {
             if (error) {
-                *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_CREATE_FILE", nil)}];
+                *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"ERROR_DATALOGGER_CREATE_FILE", nil)}];
             }
             return nil;
         }
@@ -798,7 +798,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         assert(fileHandle);
         
         // Set file protection after opening the file, so that class B works as expected.
-        BOOL success = [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(self.fileProtectionMode)} ofItemAtPath:[url path] error:error];
+        BOOL success = [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(self.fileProtectionMode)} ofItemAtPath:[url path] error:error];
         
         // Allow formatter to initialize the log file with header content
         success = success && [self.logFormatter beginLogWithFileHandle:fileHandle error:error];
@@ -867,8 +867,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             if (self.fileProtectionMode == ORKFileProtectionCompleteUnlessOpen) {
                 // Upgrade to complete file protection after roll-over
                 NSError *error = nil;
-                if (![fileManager setAttributes:@{NSFileProtectionKey : NSFileProtectionComplete}
-                           ofItemAtPath:[destinationUrl path] error:&error]) {
+                if (![fileManager setAttributes:@{NSFileProtectionKey: NSFileProtectionComplete}
+                                   ofItemAtPath:[destinationUrl path] error:&error]) {
                     ORK_Log_Warning(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
                 }
             }
@@ -961,7 +961,9 @@ static NSInteger _ORKJSON_terminatorLength = 0;
                 }
             } else {
                 // File was requested to be removed, but was not marked uploaded
-                [errors addObject:[NSError errorWithDomain:ORKErrorDomain code:ORKErrorInvalidObject userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_COULD_NOT_MAORK", nil), @"url" : logFileUrl}]];
+                [errors addObject:[NSError errorWithDomain:ORKErrorDomain
+                                                      code:ORKErrorInvalidObject
+                                                  userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"ERROR_DATALOGGER_COULD_NOT_MAORK", nil), @"url": logFileUrl}]];
             }
         }
     } error:error];
@@ -970,7 +972,9 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (errors.count) {
         if (!success && error && *error) {
             [errors addObject:*error];
-            *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_MULTIPLE", nil), @"errors" : errors}];
+            *error = [NSError errorWithDomain:ORKErrorDomain
+                                         code:ORKErrorMultipleErrors
+                                     userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"ERROR_DATALOGGER_MULTIPLE", nil), @"errors": errors}];
         }
         success = NO;
     }
@@ -1093,9 +1097,9 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 - (NSDictionary *)queue_configuration {
     NSMutableArray *loggerConfigurations = [_records.allValues valueForKey:@"configuration"];
     
-    return @{PendingUploadBytesThresholdKey : @(self.pendingUploadBytesThreshold),
-             TotalBytesThresholdKey : @(self.totalBytesThreshold),
-             LoggerConfigurationsKey : loggerConfigurations };
+    return @{PendingUploadBytesThresholdKey: @(self.pendingUploadBytesThreshold),
+             TotalBytesThresholdKey: @(self.totalBytesThreshold),
+             LoggerConfigurationsKey: loggerConfigurations };
 }
 
 - (void)queue_synchronizeConfiguration {

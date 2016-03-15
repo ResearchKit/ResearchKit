@@ -98,7 +98,7 @@
     if (!self.motionManager || !self.motionManager.accelerometerAvailable) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
-                                         userInfo:@{@"recorder" : self}];
+                                         userInfo:@{@"recorder": self}];
         [self finishRecordingWithError:error];
         return;
     }
@@ -124,7 +124,7 @@
 }
 
 - (NSDictionary *)userInfo {
-    return  @{ @"frequency" : @(self.frequency) };
+    return  @{ @"frequency": @(self.frequency) };
 }
 
 - (void)stop {

@@ -709,7 +709,7 @@
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
             if (dqr.dateAnswer) {
-                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? :systemCalendar;
+                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar] ? : systemCalendar;
                 dqr.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier];
                 dqr.timeZone = systemTimeZone;
             }
@@ -899,7 +899,7 @@
         ORKTableSection *section = _sections[indexPath.section];
         ORKTableCellItem *cellItem = section.items[indexPath.row];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
-        id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]])? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
+        id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]]) ? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
         NSString *formItemIdentifier = cellItem.formItem.identifier;
         if (answer && formItemIdentifier) {
             [self setAnswer:answer forIdentifier:formItemIdentifier];
@@ -925,7 +925,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     NSString *title = _sections[section].title;
     // Make first section header view zero height when there is no title
-    return (title.length > 0)? UITableViewAutomaticDimension : (section == 0)? 0 : UITableViewAutomaticDimension;
+    return (title.length > 0) ? UITableViewAutomaticDimension : ((section == 0) ? 0 : UITableViewAutomaticDimension);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

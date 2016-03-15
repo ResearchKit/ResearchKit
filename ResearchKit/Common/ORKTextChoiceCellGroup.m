@@ -170,7 +170,7 @@
     // Boolean type uses a different format
     if ([_answer isKindOfClass:[NSArray class]] ) {
         NSArray *answerArray = _answer;
-        return (answerArray.count > 0)? answerArray.firstObject : nil;
+        return (answerArray.count > 0) ? answerArray.firstObject : nil;
     }
     return _answer;
 }

@@ -180,7 +180,7 @@
     } else {
         
         // title
-        [body appendFormat:@"<h3>%@</h3>", _title?:@""];
+        [body appendFormat:@"<h3>%@</h3>", _title ? : @""];
         
         // scenes
         for (ORKConsentSection *section in _sections) {
@@ -191,8 +191,8 @@
         
         if (!mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
-            [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
+            [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
             
             for (ORKConsentSignature *signature in self.signatures) {
                 [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];

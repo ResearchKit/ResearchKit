@@ -163,7 +163,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     if (![HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
-                                                       userInfo:@{@"recorder" : self}]];
+                                                       userInfo:@{@"recorder": self}]];
         return;
     }
     

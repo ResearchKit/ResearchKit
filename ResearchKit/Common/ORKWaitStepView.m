@@ -90,16 +90,16 @@
         
         NSMutableArray* constraints = [NSMutableArray new];
         
-        [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[indicatorView]-horizontalMargin-|"
-                                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                  metrics:@{@"horizontalMargin": @(horizontalMargin)}
-                                                                                    views:@{@"indicatorView" : indicatorView}]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[indicatorView]-horizontalMargin-|"
+                                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                 metrics:@{@"horizontalMargin": @(horizontalMargin)}
+                                                                                   views:@{@"indicatorView": indicatorView}]];
         
         
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[indicatorView]-|"
                                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                                  metrics:nil
-                                                                                   views:@{@"indicatorView" : indicatorView}]];
+                                                                                   views:@{@"indicatorView": indicatorView}]];
         
         [NSLayoutConstraint activateConstraints:constraints];
     }

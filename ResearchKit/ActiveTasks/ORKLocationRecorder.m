@@ -94,7 +94,7 @@
     if (!self.locationManager) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
-                                         userInfo:@{@"recorder" : self}];
+                                         userInfo:@{@"recorder": self}];
         [self finishRecordingWithError:error];
         return;
     }

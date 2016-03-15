@@ -105,7 +105,7 @@
     if (![[self.pedometer class] isStepCountingAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
-                                                       userInfo:@{@"recorder" : self}]];
+                                                       userInfo:@{@"recorder": self}]];
         return;
     }
 

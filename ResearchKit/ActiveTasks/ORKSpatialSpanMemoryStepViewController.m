@@ -245,7 +245,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 #pragma mark UpdateGameRecord
 
 - (ORKSpatialSpanMemoryGameRecord *)currentGameRecord {
-    return _gameRecords? _gameRecords.lastObject : nil;
+    return _gameRecords ? _gameRecords.lastObject : nil;
 }
 
 - (void)createGameRecord {

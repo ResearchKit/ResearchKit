@@ -84,11 +84,11 @@
             [body appendString:@"<br/>"];
         }
         NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil);
-        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag?:@"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
+        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag ? : @"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
     }
 
     if (addedSig) {
-        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate?:@"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
+        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate ? : @"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
     }
 
     NSInteger numElements = signatureElements.count;

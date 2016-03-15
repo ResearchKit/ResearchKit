@@ -316,7 +316,7 @@ static UIBezierPath *ORKErrorBezierPath() {
     _checkView.hidden = checkHidden;
     _flowerView.transform = CGAffineTransformMakeScale(_flowerScaleFactor, _flowerScaleFactor);
     
-    [UIView animateWithDuration:(animated?duration:0) delay:0 usingSpringWithDamping:useSpring?0.5:1 initialSpringVelocity:0 options:(UIViewAnimationOptions)UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:(animated ? duration : 0) delay:0 usingSpringWithDamping:useSpring ? 0.5 : 1 initialSpringVelocity:0 options:(UIViewAnimationOptions)UIViewAnimationOptionBeginFromCurrentState animations:^{
         _errorView.alpha = newCircleAlpha;
         _checkView.alpha = newCircleAlpha;
         _errorView.transform = newCircleTransform;
