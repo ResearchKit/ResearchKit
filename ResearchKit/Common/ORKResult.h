@@ -31,7 +31,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 #import <CoreLocation/CoreLocation.h>
 
 

@@ -34,6 +34,7 @@
 #import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
 #import "ORKSkin.h"
+#import "ORKTypes.h"
 #import "ORKDefines_Private.h"
 
 

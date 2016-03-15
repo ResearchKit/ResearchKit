@@ -30,7 +30,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

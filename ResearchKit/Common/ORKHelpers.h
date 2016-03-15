@@ -32,6 +32,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKErrors.h>
 
 
