@@ -127,7 +127,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
                                             initWithType:_quantityType
                                             predicate:_samplePredicate
@@ -141,7 +141,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                     return;
                                                 }
                                                 
-                                                __typeof(self) strongSelf = weakSelf;
+                                                ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                 [strongSelf query_logResults:results withAnchor:newAnchor];
                                                 
                                             }];
@@ -183,12 +183,12 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     
     NSAssert(!_observerQuery, @"observer query should not exist if not recording");
     
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     _observerQuery = [[HKObserverQuery alloc]
                       initWithSampleType:_quantityType
                       predicate:_samplePredicate
                       updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
-                          __typeof(self) strongSelf = weakSelf;
+                          ORKStrongTypeOf(self) strongSelf = weakSelf;
                           
                           dispatch_async(dispatch_get_main_queue(), ^{
                               if (error) {

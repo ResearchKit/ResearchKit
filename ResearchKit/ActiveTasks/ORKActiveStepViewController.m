@@ -390,12 +390,12 @@
     NSTimeInterval stepDuration = self.activeStep.stepDuration;
     
     if (stepDuration > 0) {
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         _activeStepTimer = [[ORKActiveStepTimer alloc] initWithDuration:stepDuration
                                                         interval:_timerUpdateInterval
                                                          runtime:0
                                                          handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                             typeof(self) strongSelf = weakSelf;
+                                                             ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                              [strongSelf countDownTimerFired:timer finished:finished];
                                                          }];
         [_activeStepTimer resume];
@@ -450,7 +450,7 @@
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     if (error) {
-        STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+        ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
         if ([strongDelegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
             [strongDelegate stepViewController:self recorder:recorder didFailWithError:error];
         }

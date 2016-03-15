@@ -915,8 +915,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         _lastRestorableStepIdentifier = step.identifier;
     }
     
-    __weak typeof(self) weakSelf = self;
-    
     UIPageViewControllerNavigationDirection direction = goForward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
@@ -945,8 +943,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         }
     }
     
+    ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
+        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
         
         ORK_Log_Debug(@"%@ %@", strongSelf, viewController);
         
@@ -1016,9 +1015,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (reviewStep.isStandalone) {
         steps = nil;
     } else {
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             ORKStep *nextStep = [strongSelf.task stepWithIdentifier:(NSString*) obj];
             if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier]) {
                 [steps addObject:nextStep];
@@ -1100,7 +1099,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
         [strongDelegate taskViewController:self didFinishWithReason:reason error:error];
     }
@@ -1266,7 +1265,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [self setManagedResult:stepViewController.result forKey:stepViewController.step.identifier];
     }
     
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
         [strongDelegate taskViewController:self didChangeResult: [self result]];
     }
@@ -1297,7 +1296,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:recorder:didFailWithError:)]) {
         [strongDelegate taskViewController:self recorder:recorder didFailWithError:error];
     }

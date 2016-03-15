@@ -302,13 +302,13 @@
         [self makePasscodeViewResignFirstResponder];
         
         NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
                                 reply:^(BOOL success, NSError *error) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
-                typeof(self) strongSelf = weakSelf;
+                ORKStrongTypeOf(self) strongSelf = weakSelf;
                 
                 if (success) {
                     // Store that user passed authentication.
@@ -326,7 +326,7 @@
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
-                                                                typeof(self) strongSelf = weakSelf;
+                                                                ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                                 [strongSelf makePasscodeViewBecomeFirstResponder];
                                                             }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
@@ -348,9 +348,9 @@
     
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [strongSelf promptTouchId];
     });
 }
@@ -441,9 +441,9 @@
     // Update the passcode view after the shake animation has ended.
     double delayInSeconds = 0.27;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [strongSelf updatePasscodeView];
     });
 }
@@ -620,9 +620,9 @@
         // Show the user the last digit was entered before continuing.
         double delayInSeconds = 0.25;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             
             switch (_passcodeFlow) {
                 case ORKPasscodeFlowCreate:

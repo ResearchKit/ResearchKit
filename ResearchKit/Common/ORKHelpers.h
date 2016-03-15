@@ -80,8 +80,6 @@
 #  endif
 #endif
 
-#define STRONGTYPE(x) __strong __typeof(x)
-
 #define ORK_NARG(...) ORK_NARG_(__VA_ARGS__,ORK_RSEQ_N())
 #define ORK_NARG_(...)  ORK_ARG_N(__VA_ARGS__)
 #define ORK_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, N, ...) N
@@ -142,9 +140,9 @@
  * Helpers for completions which call the block only if non-nil
  *
  */
-#define BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
+#define ORK_BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
 
-#define DISPATCH_EXEC(queue, block, ...) if (block) { dispatch_async(queue, ^{ block(__VA_ARGS__); } ); }
+#define ORK_DISPATCH_EXEC(queue, block, ...) if (block) { dispatch_async(queue, ^{ block(__VA_ARGS__); } ); }
 
 /*
  * For testing background delivery
@@ -158,6 +156,9 @@
 
 // Find the first object of the specified class, using method as the iterator
 #define ORKFirstObjectOfClass(C,p,method) ({ id v = p; while (v != nil) { if ([v isKindOfClass:[C class]]) { break; } else { v = [v method]; } }; v; })
+
+#define ORKStrongTypeOf(x) __strong typeof(x)
+#define ORKWeakTypeOf(x) __weak typeof(x)
 
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);

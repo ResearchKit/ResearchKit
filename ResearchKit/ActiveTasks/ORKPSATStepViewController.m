@@ -156,12 +156,12 @@
         ([self psatStep].interStimulusInterval - [self psatStep].stimulusDuration) > 0.05 ) {
         
         // Don't show `-` if the difference between stimulusDuration and interStimulusInterval is less than timer's resolution.
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         self.clearDigitsTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self psatStep].stepDuration
                                                                     interval:[self psatStep].interStimulusInterval
                                                                      runtime:-[self psatStep].stimulusDuration
                                                                      handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                                         typeof(self) strongSelf = weakSelf;
+                                                                         ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                                          [strongSelf clearDigitsTimerFired];
                                                                      }];
         [self.clearDigitsTimer resume];

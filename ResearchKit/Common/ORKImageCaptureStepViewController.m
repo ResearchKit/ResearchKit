@@ -225,7 +225,7 @@
 - (void)handleError:(NSError *)error {
     // Shut down the session, if running
     if (_captureSession.isRunning) {
-        STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
+        ORKStrongTypeOf(_captureSession) strongCaptureSession = _captureSession;
         dispatch_async(_sessionQueue, ^{
             [strongCaptureSession stopRunning];
         });

@@ -395,9 +395,9 @@
 - (void)refreshDefaults {
     NSArray *formItems = [self formItems];
     ORKAnswerDefaultSource *source = _defaultSource;
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-        dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __block NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
         for (ORKFormItem *formItem in formItems) {
             [source fetchDefaultValueForAnswerFormat:formItem.answerFormat handler:^(id defaultValue, NSError *error) {
@@ -406,16 +406,16 @@
                 } else if (error != nil) {
                     ORK_Log_Warning(@"Error fetching default for %@: %@", formItem, error);
                 }
-                dispatch_semaphore_signal(sem);
+                dispatch_semaphore_signal(semaphore);
             }];
         }
         for (__unused ORKFormItem *formItem in formItems) {
-            dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         }
         
         // All fetches have completed.
         dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
             [strongSelf updateDefaults:defaults];
         });
         

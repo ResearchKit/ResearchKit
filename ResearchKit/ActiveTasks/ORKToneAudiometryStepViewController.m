@@ -211,9 +211,9 @@
                                     onChannel:channel
                                fadeInDuration:SoundDuration];
 
-    __weak typeof(self)weakSelf = self;
+    ORKWeakTypeOf(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SoundDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        typeof(self)strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
 
         if (strongSelf.currentTestIndex == testIndex) {
             [strongSelf testExpired];
