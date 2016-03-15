@@ -36,7 +36,7 @@
 #import "ORKAccessibility.h"
 
 
-static const UIEdgeInsets _ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};
+static const UIEdgeInsets ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};
 static const CGSize ORKFlowerBezierPathSize = (CGSize){90,90};
 static UIBezierPath *ORKFlowerBezierPath() {
     UIBezierPath *bezierPath = UIBezierPath.bezierPath;
@@ -183,7 +183,7 @@ static UIBezierPath *ORKErrorBezierPath() {
 
 - (UIView *)newFlowerViewWithImage:(UIImage *)image {
     if (image == nil) {
-        return [[ORKPathView alloc] initWithBezierPath:ORKFlowerBezierPath() canvasSize:ORKFlowerBezierPathSize canvasMargins:_ORKFlowerMargins color:[UIColor blackColor]];
+        return [[ORKPathView alloc] initWithBezierPath:ORKFlowerBezierPath() canvasSize:ORKFlowerBezierPathSize canvasMargins:ORKFlowerMargins color:[UIColor blackColor]];
     } else {
         ORKTintedImageView *imageView = [[ORKTintedImageView alloc] initWithImage:image];
         imageView.shouldApplyTint = YES;
@@ -333,7 +333,7 @@ static UIBezierPath *ORKErrorBezierPath() {
     _flowerView.bounds = bounds;
     _flowerView.transform = CGAffineTransformMakeScale(_flowerScaleFactor, _flowerScaleFactor);
     
-    CGFloat designWidth = ORKFlowerBezierPathSize.width + _ORKFlowerMargins.left + _ORKFlowerMargins.right;
+    CGFloat designWidth = ORKFlowerBezierPathSize.width + ORKFlowerMargins.left + ORKFlowerMargins.right;
     CGFloat scaleFactor = bounds.size.width / designWidth;
     CGAffineTransform transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
     
