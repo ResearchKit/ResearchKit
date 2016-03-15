@@ -50,7 +50,7 @@ extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 
-static inline CAShapeLayer *graphLineLayer() {
+ORK_INLINE CAShapeLayer *graphLineLayer() {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.fillColor = [UIColor clearColor].CGColor;
     lineLayer.lineJoin = kCALineJoinRound;
@@ -59,11 +59,11 @@ static inline CAShapeLayer *graphLineLayer() {
     return lineLayer;
 }
 
-static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
+ORK_INLINE CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
     return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
-static inline UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
+ORK_INLINE UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {
         // Avoid pure white and pure black
@@ -74,7 +74,7 @@ static inline UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NS
     return color;
 }
 
-static inline CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
+ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
     CGFloat offset = 0;
     if (numberOfPlots % 2 == 0) {
         // Even

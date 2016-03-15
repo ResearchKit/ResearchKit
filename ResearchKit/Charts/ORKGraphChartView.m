@@ -326,7 +326,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     }
 }
 
-inline static UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color, CGFloat height) {
+ORK_INLINE UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color, CGFloat height) {
     static UIImage *lineImage = nil;
     static UIColor *lineImageColor = nil;
     static CGFloat lineImageHeight = 0.0;
@@ -350,7 +350,7 @@ inline static UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *co
     return lineImage;
 }
 
-inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGFloat height) {
+ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGFloat height) {
     CALayer *referenceLineLayer = [CALayer new];
     referenceLineLayer.frame = (CGRect){{0, 0}, {[UIScreen mainScreen].scale, height}};
     referenceLineLayer.anchorPoint = CGPointMake(0, 0);
@@ -486,7 +486,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     }
 }
 
-inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
+ORK_INLINE UIImage *graphPointLayerImageWithColor(UIColor *color) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineWidth;
     const CGFloat pointLineWidth = 2.0;
     
@@ -510,7 +510,7 @@ inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     return pointImage;
 }
 
-inline static CALayer *graphPointLayerWithColor(UIColor *color) {
+ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineWidth;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
