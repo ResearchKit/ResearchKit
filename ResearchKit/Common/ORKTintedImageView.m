@@ -37,8 +37,8 @@
 
 #define ORKTintedImageLog(...)
 
-static inline BOOL ORKIsImageAnimated(UIImage *image) {
-    return [image images].count > 1;
+ORK_INLINE BOOL ORKIsImageAnimated(UIImage *image) {
+    return image.images.count > 1;
 }
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {

@@ -52,7 +52,7 @@ NSBundle *ORKAssetsBundle(void) {
     return bundle;
 }
 
-static inline CGFloat ORKCGFloor(CGFloat value) {
+ORK_INLINE CGFloat ORKCGFloor(CGFloat value) {
     if (sizeof(value) == sizeof(float)) {
         return (CGFloat)floorf((float)value);
     } else {
@@ -60,7 +60,7 @@ static inline CGFloat ORKCGFloor(CGFloat value) {
     }
 }
 
-static inline CGFloat ORKAdjustToScale(CGFloat (adjustFunction)(CGFloat), CGFloat value, CGFloat scale) {
+ORK_INLINE CGFloat ORKAdjustToScale(CGFloat (adjustFunction)(CGFloat), CGFloat value, CGFloat scale) {
     if (scale == 0) {
         static CGFloat screenScale = 1.0;
         static dispatch_once_t onceToken;
