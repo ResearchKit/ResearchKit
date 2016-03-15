@@ -76,6 +76,19 @@ Omit the space when the operator takes only one argument:
     !success
 
 
+##### Spaces in array and dictionary literals
+
+Add exactly one space before the first and after the last element in array and dictionary literals. Use exactly one space after each comma-separated element. Do not add any space between the key and the colon symbol on dictionary literals, but add exactly one space between the colon and the pointed object.
+
+    // DO
+    @[ @"Abdomen", @"Chest", @"Back" ];         // Array literal
+    @{ @"red": redImage, @"blue": blueImage };  // Dictionary literal
+
+    // DON'T
+    @[ @"Abdomen",@"Chest",@"Back" ];
+    @{ @"red" : redImage, @"blue":blueImage };
+
+
 #### 1.2. Brackets
 
 Opening brackets should be on the same line as the statement they refer to. Closing brackets should be on their own line, except when followed by `else`.
