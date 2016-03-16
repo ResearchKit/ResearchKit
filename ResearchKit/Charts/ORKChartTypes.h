@@ -78,7 +78,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithValue:(double)value;
 
 /**
- Returns a range point initialized using the `ORKDoubleInvalidValue` value for both `minimumValue`
+ Returns a value range initialized using the `ORKDoubleInvalidValue` value for both `minimumValue`
  and `maximumValue`. This denotes an unset or invalid value range. It is useful, for example, for
  representing unavailable data in discontinous graph chart plots.
  

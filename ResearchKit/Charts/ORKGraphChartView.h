@@ -97,10 +97,10 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Asks the data source for the number of value ranges to be plotted by the graph chart view at the
+ Asks the data source for the number of value points to be plotted by the graph chart view at the
  specified plot index.
 
- @param graphChartView      The graph chart view asking for the number of range points.
+ @param graphChartView      The graph chart view asking for the number of value points.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
 
@@ -233,7 +233,7 @@ ORK_AVAILABLE_DECL
  specified plot.
  
  @param graphChartView      The graph chart view that is asking for the value range.
- @param pointIndex          An index number identifying the range point in the graph chart view.
+ @param pointIndex          An index number identifying the value range in the graph chart view.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
  
@@ -259,8 +259,8 @@ ORK_AVAILABLE_DECL
  Asks the data source for the value stack to be plotted at the specified point index for the
  specified plot.
  
- @param graphChartView      The graph chart view that is asking for the range point.
- @param pointIndex          An index number identifying the range point in the graph chart view.
+ @param graphChartView      The graph chart view that is asking for the value stack.
+ @param pointIndex          An index number identifying the value stack in the graph chart view.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
  is 0 in a single-plot graph chart view.
  
