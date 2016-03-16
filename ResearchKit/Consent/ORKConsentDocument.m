@@ -86,7 +86,8 @@
 }
 
 - (void)makePDFWithCompletionHandler:(void (^)(NSData *data, NSError *error))completionBlock {
-    return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
+    [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil]
+          withCompletionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
             // condition (can only happen if they pass us really invalid content).

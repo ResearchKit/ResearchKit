@@ -126,7 +126,7 @@
     if ([self containsIndexPath:indexPath]== NO) {
         return;
     }
-    return [self didSelectCellAtIndex:indexPath.row-_beginningIndexPath.row];
+    [self didSelectCellAtIndex:indexPath.row - _beginningIndexPath.row];
 }
 
 - (BOOL)containsIndexPath:(NSIndexPath *)indexPath {

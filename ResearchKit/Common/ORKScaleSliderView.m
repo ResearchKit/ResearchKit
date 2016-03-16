@@ -535,7 +535,7 @@
             [self setCurrentTextChoiceValue:[currentAnswerValue firstObject]];
         }
     } else {
-        return [self setCurrentNumberValue:currentAnswerValue];
+        [self setCurrentNumberValue:currentAnswerValue];
     }
 }
 
