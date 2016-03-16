@@ -103,7 +103,7 @@
 #define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * orkTemp_ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:orkTemp_ ## x forKey:@ORK_STRINGIFY(x)]; } }
 
-#define ORK_DECODE_URL(d,x) _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
+#define ORK_DECODE_URL(d,x)  _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
 #define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@ORK_STRINGIFY(x)])
 
 #define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@ORK_STRINGIFY(x)]
@@ -118,19 +118,19 @@
 #define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@ORK_STRINGIFY(x)]
 #define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@ORK_STRINGIFY(x)] unsignedLongValue]
 
-#define ORK_DECODE_ENUM(d,x)  _ ## x = (__typeof(_ ## x))[d decodeIntegerForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_ENUM(d,x)  _ ## x = [d decodeIntegerForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGRECT(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGRectForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_CGRECT(d,x)  _ ## x = [d decodeCGRectForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_CGRECT(c,x)  [c encodeCGRect:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGSIZE(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGSizeForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_CGSIZE(d,x)  _ ## x = [d decodeCGSizeForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_CGSIZE(c,x)  [c encodeCGSize:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGPOINT(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGPointForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_CGPOINT(d,x)  _ ## x = [d decodeCGPointForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_CGPOINT(c,x)  [c encodeCGPoint:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = [d decodeUIEdgeInsetsForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@ORK_STRINGIFY(x.latitude)],[d decodeDoubleForKey:@ORK_STRINGIFY(x.longitude)])
