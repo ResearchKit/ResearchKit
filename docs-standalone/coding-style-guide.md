@@ -55,6 +55,18 @@ In *method* declarations, there should be one space between: the `-` or `+` char
     - (void)doSomethingWithString:(NSString*)string number:(NSNumber *)number
     - (void)doSomethingWithString:(NSString *)string  number:(NSNumber *)number
 
+---
+
+In *variable* declarations, add one space between the type and the pointer asterisk, and omit it between the asterisk and the variable name.
+
+Similarly, omit the space between the asterisk and non-prefixed variable modifiers such as `const`. On the other hand, use one exactly one space before underscored annotations such as `_Nullable` or `_Nonnull`.
+
+    // DO
+    ORKTask *task = [ORKTask new];
+    static NSString *const ActivityUnknown = @"unknown";
+    CGFloat ORKWidthForSignatureView(UIWindow * _Nullable window);
+    - (BOOL)recreateFileWithError:(NSError * _Nullable *)error;
+
 
 ##### Spaces between Operators
 
@@ -336,6 +348,24 @@ Always include [*nullability annotations*](https://developer.apple.com/swift/blo
 
 Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt any property or argument declaration that can take `nil` values out by annotating it as `nullable`.
 
+    // DO
+
+    NS_ASSUME_NONNULL_BEGIN
+
+    - (instancetype)initWithStep:(nullable ORKStep *)step;
+    @property (nonatomic, copy, nullable) NSString *aNullableProperty;
+
+    NS_ASSUME_NONNULL_END
+
+
+When annotating function or blocks, use the `_Nullable` keyword (available since Xcode 7), instead of the legacy `__nullable`.
+
+    // DO
+    CGFloat ORKWidthForSignatureView(UIWindow * _Nullable window);
+
+    // DON'T
+    CGFloat ORKWidthForSignatureView(UIWindow * __nullable window);
+
 Do not add *nullability annotations* to implementation files.
 
 See **Section 3** for a nullability-annotated *Header File Example*.
@@ -345,7 +375,7 @@ See **Section 3** for a nullability-annotated *Header File Example*.
 
 Always use [*lightweight generic parametrization*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID173) when declaring `NSArray`, `NSSet` and `NSDictionary` types. This tells the compiler which kind of objects these *Foundation collection classes* will contain. It improves type-safety and interoperability with *Swift*.
 
-Use the same whitespace rules as when declaring *protocol conformance*:
+Use the same whitespace rules as when declaring *protocol conformance*, but omit the space between the type and the opening bracket:
 
     // DO
     @property NSArray<ORKStep *> *steps;
