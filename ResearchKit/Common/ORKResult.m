@@ -1314,7 +1314,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_scaleAnswer, castObject.scaleAnswer));
+            ORKEqualObjects(self.scaleAnswer, castObject.scaleAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1367,7 +1367,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_choiceAnswers, castObject.choiceAnswers));
+            ORKEqualObjects(self.choiceAnswers, castObject.choiceAnswers));
 }
 
 - (NSUInteger)hash {
@@ -1420,7 +1420,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_booleanAnswer, castObject.booleanAnswer));
+            ORKEqualObjects(self.booleanAnswer, castObject.booleanAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1479,7 +1479,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textAnswer, castObject.textAnswer));
+            ORKEqualObjects(self.textAnswer, castObject.textAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1534,8 +1534,8 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_numericAnswer, castObject.numericAnswer) &&
-            ORKEqualObjects(_unit, castObject.unit));
+            ORKEqualObjects(self.numericAnswer, castObject.numericAnswer) &&
+            ORKEqualObjects(self.unit, castObject.unit));
 }
 
 - (NSUInteger)hash {
@@ -1592,7 +1592,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_dateComponentsAnswer, castObject.dateComponentsAnswer));
+            ORKEqualObjects(self.dateComponentsAnswer, castObject.dateComponentsAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1645,7 +1645,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_intervalAnswer, castObject.intervalAnswer));
+            ORKEqualObjects(self.intervalAnswer, castObject.intervalAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1703,9 +1703,9 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_timeZone, castObject.timeZone) &&
-            ORKEqualObjects(_calendar, castObject.calendar) &&
-            ORKEqualObjects(_dateAnswer, castObject.dateAnswer));
+            ORKEqualObjects(self.timeZone, castObject.timeZone) &&
+            ORKEqualObjects(self.calendar, castObject.calendar) &&
+            ORKEqualObjects(self.dateAnswer, castObject.dateAnswer));
 }
 
 - (NSUInteger)hash {

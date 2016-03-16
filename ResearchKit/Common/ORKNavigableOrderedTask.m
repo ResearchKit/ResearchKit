@@ -156,8 +156,8 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules)
-    && self->_shouldReportProgress == castObject.shouldReportProgress;
+    && ORKEqualObjects(self.stepNavigationRules, castObject.stepNavigationRules)
+    && self.shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {

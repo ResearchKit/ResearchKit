@@ -549,7 +549,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textChoices, castObject.textChoices));
+            ORKEqualObjects(self.textChoices, castObject.textChoices));
 }
 
 - (NSUInteger)hash {
@@ -721,7 +721,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textChoices, castObject.textChoices) &&
+            ORKEqualObjects(self.textChoices, castObject.textChoices) &&
             (_style == castObject.style));
 }
 
@@ -1577,10 +1577,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             (_minimum == castObject.minimum) &&
             (_step == castObject.step) &&
             (_defaultValue == castObject.defaultValue) &&
-            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
-            ORKEqualObjects(_minimumValueDescription, castObject.minimumValueDescription) &&
-            ORKEqualObjects(_maximumImage, castObject.maximumImage) &&
-            ORKEqualObjects(_minimumImage, castObject.minimumImage));
+            ORKEqualObjects(self.maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(self.minimumValueDescription, castObject.minimumValueDescription) &&
+            ORKEqualObjects(self.maximumImage, castObject.maximumImage) &&
+            ORKEqualObjects(self.minimumImage, castObject.minimumImage));
 }
 
 - (ORKQuestionType)questionType {
@@ -1774,10 +1774,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             (_defaultValue == castObject.defaultValue) &&
             (_maximumFractionDigits == castObject.maximumFractionDigits) &&
             (_numberStyle == castObject.numberStyle) &&
-            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
-            ORKEqualObjects(_minimumValueDescription, castObject.minimumValueDescription) &&
-            ORKEqualObjects(_maximumImage, castObject.maximumImage) &&
-            ORKEqualObjects(_minimumImage, castObject.minimumImage));
+            ORKEqualObjects(self.maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(self.minimumValueDescription, castObject.minimumValueDescription) &&
+            ORKEqualObjects(self.maximumImage, castObject.maximumImage) &&
+            ORKEqualObjects(self.minimumImage, castObject.minimumImage));
 }
 
 - (ORKQuestionType)questionType {
@@ -1950,7 +1950,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textChoices, castObject.textChoices) &&
+            ORKEqualObjects(self.textChoices, castObject.textChoices) &&
             (_defaultIndex == castObject.defaultIndex) &&
             (_vertical == castObject.vertical));
 }
