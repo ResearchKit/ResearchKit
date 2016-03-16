@@ -230,7 +230,7 @@
     return [[self recordingDirectoryURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [self logName], [self extension]]];
 }
 
-- (BOOL)recreateFileWithError:(NSError * __autoreleasing *)error {
+- (BOOL)recreateFileWithError:(NSError **)error {
     NSURL *url = [self recordingFileURL];
     if (!url) {
         if (error) {

@@ -144,15 +144,15 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenType_COUNT
 };
 
-ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow *_Nullable window);
-CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *_Nullable window);
+ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
+CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
 
 CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
 CGFloat ORKStandardHorizontalMarginForView(UIView *view);
 UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
-CGFloat ORKWidthForSignatureView(UIWindow *_Nullable window);
+CGFloat ORKWidthForSignatureView(UIWindow * _Nullable window);
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 

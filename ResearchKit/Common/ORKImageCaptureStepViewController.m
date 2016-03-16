@@ -257,7 +257,7 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (NSURL *)writeCapturedDataWithError:(NSError * __autoreleasing *)error {
+- (NSURL *)writeCapturedDataWithError:(NSError **)error {
     NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
     if (!URL) {

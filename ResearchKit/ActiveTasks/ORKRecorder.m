@@ -182,7 +182,7 @@
     return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID.UUIDString];
 }
 
-- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
+- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError **)error {
     NSURL *workingDir = [self recordingDirectoryURL];
     if (!workingDir) {
         if (error) {

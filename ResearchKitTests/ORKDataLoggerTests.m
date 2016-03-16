@@ -199,7 +199,7 @@
     XCTAssertFalse([_dataLogger isFileUploadedAtURL:_finishedLogFiles[1]]);
 }
 
-- (NSArray *)allLogsWithError:(NSError * __autoreleasing *)error {
+- (NSArray *)allLogsWithError:(NSError **)error {
     NSMutableArray *logs = [NSMutableArray array];
     [_dataLogger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         [logs addObject:logFileUrl];
@@ -207,7 +207,7 @@
     return logs;
 }
 
-- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError * __autoreleasing *)error {
+- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError **)error {
     NSMutableArray *logs = [NSMutableArray array];
     if (uploaded) {
         [_dataLogger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
