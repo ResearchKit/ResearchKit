@@ -138,7 +138,7 @@ ORK_CLASS_AVAILABLE
 /**
  An array of `NSNumber` objects, each one representing a stacked double value.
  */
-@property (nonatomic, strong, readonly) NSArray<NSNumber *> *stackedValues;
+@property (nonatomic, copy, readonly) NSArray<NSNumber *> *stackedValues;
 
 /**
  The total sum of the stacked double values
