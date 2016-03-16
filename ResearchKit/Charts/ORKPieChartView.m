@@ -344,7 +344,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     } else {
         // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
-        color = colorWithReducedAlphaWithBaseColor(self.tintColor, index, numberOfSegments);
+        color = opaqueColorWithReducedAlphaFromBaseColor(self.tintColor, index, numberOfSegments);
     }
     return color;
 }

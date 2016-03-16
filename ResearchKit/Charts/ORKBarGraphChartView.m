@@ -139,7 +139,7 @@ static const CGFloat BarWidth = 10.0;
 }
 
 - (UIColor *)colorForPlotIndex:(NSInteger)plotIndex subpointIndex:(NSInteger)subpointIndex totalSubpoints:(NSInteger)totalSubpoints {
-    return colorWithReducedAlphaWithBaseColor([super colorForPlotIndex:plotIndex subpointIndex:subpointIndex totalSubpoints:(NSInteger)totalSubpoints], subpointIndex, totalSubpoints);
+    return opaqueColorWithReducedAlphaFromBaseColor([super colorForPlotIndex:plotIndex subpointIndex:subpointIndex totalSubpoints:(NSInteger)totalSubpoints], subpointIndex, totalSubpoints);
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {

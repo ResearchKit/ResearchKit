@@ -63,13 +63,21 @@ ORK_INLINE CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoint
     return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
-ORK_INLINE UIColor *colorWithReducedAlphaWithBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
+ORK_INLINE UIColor *opaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {
-        // Avoid pure white and pure black
-        CGFloat divisionFactor = (1.0 / totalColors);
-        CGFloat alphaComponent = 1 - (divisionFactor * colorIndex);
-        color = [baseColor colorWithAlphaComponent:alphaComponent];
+        CGFloat red = 0.0;
+        CGFloat green = 0.0;
+        CGFloat blue = 0.0;
+        CGFloat alpha = 0.0;
+        if ([baseColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
+            // Avoid a pure transparent color (alpha = 0)
+            CGFloat targetAlphaFactor = ((1.0 / totalColors) * colorIndex);
+            return [UIColor colorWithRed:red + ((1.0 - red) * targetAlphaFactor)
+                                   green:green + ((1.0 - green) * targetAlphaFactor)
+                                    blue:blue + ((1.0 - blue) * targetAlphaFactor)
+                                   alpha:alpha];
+        }
     }
     return color;
 }
