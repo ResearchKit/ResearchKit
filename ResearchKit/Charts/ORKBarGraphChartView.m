@@ -94,7 +94,7 @@ static const CGFloat BarWidth = 10.0;
                     [normalizedDoubleStackValues addObject:@(normalizedValue)];
                 }
             }
-            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValueArray:normalizedDoubleStackValues]];
+            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValues:normalizedDoubleStackValues]];
         }
     }
     

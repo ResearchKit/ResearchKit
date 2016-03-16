@@ -97,10 +97,10 @@
 @implementation ORKValueStack
 
 - (instancetype)init {
-    return [self initWithStackedValueArray:@[]];
+    return [self initWithStackedValues:@[]];
 }
 
-- (instancetype)initWithStackedValueArray:(NSArray<NSNumber *> *)stackedValues {
+- (instancetype)initWithStackedValues:(NSArray<NSNumber *> *)stackedValues {
     self = [super init];
     if (self) {
         if (stackedValues.count == 0) {

@@ -127,13 +127,13 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init;
 
 /**
- Returns an value stack initialized with the passed double values.
+ Returns a value stack initialized with the passed `NSNumber` array.
  
- @param value   A `nil` terminated list of `double` values.
+ @param stackedValues   An array containing `NSNumber` objects.
  
- @return A value stack object initialized with the passed double values.
+ @return A value stack object initialized with the passed `NSNumber` values.
  */
-- (instancetype)initWithStackedValueArray:(NSArray<NSNumber *> *)stackedValues NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithStackedValues:(NSArray<NSNumber *> *)stackedValues NS_DESIGNATED_INITIALIZER;
 
 /**
  An array of `NSNumber` objects, each one representing a stacked double value.

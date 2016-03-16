@@ -148,20 +148,20 @@ class BarGraphDataSource: NSObject, ORKValueStackGraphChartViewDataSource {
     var plotPoints =
     [
         [
-            ORKValueStack(stackedValueArray: [4, 6]),
-            ORKValueStack(stackedValueArray: [2, 4, 4]),
-            ORKValueStack(stackedValueArray: [2, 6, 3, 6]),
-            ORKValueStack(stackedValueArray: [3, 8, 10, 12]),
-            ORKValueStack(stackedValueArray: [5, 10, 12, 8]),
-            ORKValueStack(stackedValueArray: [8, 13, 18]),
+            ORKValueStack(stackedValues: [4, 6]),
+            ORKValueStack(stackedValues: [2, 4, 4]),
+            ORKValueStack(stackedValues: [2, 6, 3, 6]),
+            ORKValueStack(stackedValues: [3, 8, 10, 12]),
+            ORKValueStack(stackedValues: [5, 10, 12, 8]),
+            ORKValueStack(stackedValues: [8, 13, 18]),
         ],
         [
-            ORKValueStack(stackedValueArray: [14]),
-            ORKValueStack(stackedValueArray: [6, 6]),
-            ORKValueStack(stackedValueArray: [3, 10, 12]),
-            ORKValueStack(stackedValueArray: [5, 11, 14]),
-            ORKValueStack(stackedValueArray: [7, 13, 20]),
-            ORKValueStack(stackedValueArray: [10, 13, 25]),
+            ORKValueStack(stackedValues: [14]),
+            ORKValueStack(stackedValues: [6, 6]),
+            ORKValueStack(stackedValues: [3, 10, 12]),
+            ORKValueStack(stackedValues: [5, 11, 14]),
+            ORKValueStack(stackedValues: [7, 13, 20]),
+            ORKValueStack(stackedValues: [10, 13, 25]),
         ]
     ]
     
