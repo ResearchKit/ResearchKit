@@ -103,7 +103,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 }
 
 - (NSUInteger)hash {
-    return [_identifier hash] ^ [_steps hash];
+    return _identifier.hash ^ _steps.hash;
 }
 
 #pragma mark - ORKTask

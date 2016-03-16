@@ -119,7 +119,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.characteristicType hash];
+    return super.hash ^ self.characteristicType.hash;
 }
 
 // The bare answer format implied by the quantityType or characteristicType.
@@ -249,7 +249,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.quantityType hash] ^ [self.unit hash] ^ _numericAnswerStyle;
+    return super.hash ^ self.quantityType.hash ^ self.unit.hash ^ _numericAnswerStyle;
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {

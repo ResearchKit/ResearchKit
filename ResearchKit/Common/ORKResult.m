@@ -109,7 +109,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [_identifier hash] ^ [_startDate hash] ^ [_endDate hash] ^ [_userInfo hash];
+    return _identifier.hash ^ _startDate.hash ^ _endDate.hash ^ _userInfo.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -269,7 +269,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ self.puzzleWasSolved ^ self.moves.hash;
+    return super.hash ^ self.puzzleWasSolved ^ self.moves.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -367,7 +367,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -470,7 +470,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self targetIndex] ^ [self isCorrect];
+    return super.hash ^ [self targetIndex] ^ [self isCorrect];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -536,7 +536,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self seed] ^ [self gameSize] ^ [self score] ^ [self gameStatus];
+    return super.hash ^ [self seed] ^ [self gameSize] ^ [self score] ^ [self gameStatus];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -597,7 +597,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -653,7 +653,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -707,7 +707,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.fileURL hash];
+    return super.hash ^ self.fileURL.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -755,7 +755,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ [self.fileResult hash];
+    return super.hash ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ self.fileResult.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -807,7 +807,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -931,7 +931,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1010,7 +1010,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1118,7 +1118,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.filename hash] ^ [self.contentType hash];
+    return super.hash ^ self.filename.hash ^ self.contentType.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1175,7 +1175,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.signature hash];
+    return super.hash ^ self.signature.hash;
 }
 
 - (void)applyToDocument:(ORKConsentDocument *)document {
@@ -1234,7 +1234,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.answer hash] ^ _questionType;
+    return super.hash ^ ((id<NSObject>)self.answer).hash ^ _questionType;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1243,7 +1243,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return result;
 }
 
-- (id)validateAnswer:(id)answer {
+- (NSObject *)validateAnswer:(id)answer {
     if (answer == ORKNullAnswerValue()) {
         answer = nil;
     }
@@ -1318,7 +1318,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1371,7 +1371,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1424,7 +1424,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1483,7 +1483,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1539,7 +1539,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1596,7 +1596,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1649,7 +1649,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1709,7 +1709,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1785,7 +1785,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.results hash];
+    return super.hash ^ self.results.hash;
 }
 
 - (void)setResultsCopyObjects:(NSArray *)results {
@@ -1900,7 +1900,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.taskRunUUID hash] ^ [self.outputDirectory hash];
+    return super.hash ^ self.taskRunUUID.hash ^ self.outputDirectory.hash;
 }
 
 

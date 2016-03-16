@@ -82,7 +82,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.consentDocument hash];
+    return super.hash ^ self.consentDocument.hash;
 }
 
 - (BOOL)showsProgress {

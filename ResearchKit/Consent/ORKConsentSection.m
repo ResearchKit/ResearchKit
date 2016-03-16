@@ -249,7 +249,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 - (NSUInteger)hash {
-    return [_title hash] ^ _type;
+    return _title.hash ^ _type;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

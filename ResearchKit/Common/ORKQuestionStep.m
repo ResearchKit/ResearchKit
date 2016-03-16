@@ -113,7 +113,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.answerFormat hash];
+    return super.hash ^ self.answerFormat.hash;
 }
 
 - (ORKQuestionType)questionType {

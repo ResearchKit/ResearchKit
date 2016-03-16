@@ -267,7 +267,7 @@
 }
 
 - (NSUInteger)hash {
-    return [_title hash] ^ [_sections hash];
+    return _title.hash ^ _sections.hash;
 }
 
 @end

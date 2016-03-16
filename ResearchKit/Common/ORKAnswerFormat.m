@@ -551,7 +551,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_textChoices hash];
+    return super.hash ^ _textChoices.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -639,7 +639,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.imageChoices hash];
+    return super.hash ^ self.imageChoices.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -720,7 +720,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_textChoices hash] ^ _style;
+    return super.hash ^ _textChoices.hash ^ _style;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -814,7 +814,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step
-    return [_text hash] ^ [_detailText hash] ^ [_value hash];
+    return _text.hash ^ _detailText.hash ^ _value.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -897,7 +897,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step.
-    return [_text hash] ^ [_value hash];
+    return _text.hash ^ _value.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -996,7 +996,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything
-    return [super hash] & [self.defaultComponents hash];
+    return super.hash & self.defaultComponents.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1071,7 +1071,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item.
-    return [super hash] & [self.defaultDate hash] ^ _style;
+    return super.hash & self.defaultDate.hash ^ _style;
 }
 
 - (NSCalendar *)currentCalendar {
@@ -1234,7 +1234,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item
-    return [super hash] ^ [self.unit hash] & _style;
+    return super.hash ^ self.unit.hash & _style;
 }
 
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style unit:(NSString *)unit {

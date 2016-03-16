@@ -161,7 +161,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
+    return super.hash ^ _stepNavigationRules.hash ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined

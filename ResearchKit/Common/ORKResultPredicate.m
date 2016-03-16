@@ -130,7 +130,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 - (NSUInteger)hash {
-    return [_taskIdentifier hash] ^ [_stepIdentifier hash] ^ [_resultIdentifier hash];
+    return _taskIdentifier.hash ^ _stepIdentifier.hash ^ _resultIdentifier.hash;
 }
 
 + (BOOL)supportsSecureCoding {

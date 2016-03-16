@@ -245,7 +245,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 }
 
 - (NSUInteger)hash {
-    return [_resultPredicates hash] ^ [_destinationStepIdentifiers hash] ^ [_defaultStepIdentifier hash] ^ [_additionalTaskResults hash];
+    return _resultPredicates.hash ^ _destinationStepIdentifiers.hash ^ _defaultStepIdentifier.hash ^ _additionalTaskResults.hash;
 }
 
 @end
@@ -308,7 +308,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 }
 
 - (NSUInteger)hash {
-    return [_destinationStepIdentifier hash];
+    return _destinationStepIdentifier.hash;
 }
 
 @end
