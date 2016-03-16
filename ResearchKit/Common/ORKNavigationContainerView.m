@@ -61,7 +61,7 @@
             [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = (UIEdgeInsets){};
+        self.layoutMargins = (UIEdgeInsets){0, 0, 0, 0};
         
         [self setUpConstraints];
         [self updateContinueAndSkipEnabled];
