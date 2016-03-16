@@ -89,7 +89,7 @@ ORK_CLASS_AVAILABLE
 
  @return A step navigation rule, or `nil` if the trigger step identifier has none.
  */
-- (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+- (nullable ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
  Removes the navigation rule, if any, associated with the specified trigger step identifier.
@@ -128,7 +128,7 @@ ORK_CLASS_AVAILABLE
  
  @return A skip step navigation rule, or `nil` if the step identifier has none.
  */
-- (ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier;
+- (nullable ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier;
 
 /**
  Removes the skip step navigation rule, if any, associated with the specified step identifier.

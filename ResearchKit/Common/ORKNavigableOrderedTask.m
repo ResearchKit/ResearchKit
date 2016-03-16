@@ -40,8 +40,8 @@
 
 
 @implementation ORKNavigableOrderedTask {
-    NSMutableDictionary *_stepNavigationRules;
-    NSMutableDictionary *_skipStepNavigationRules;
+    NSMutableDictionary<NSString *, ORKStepNavigationRule *> *_stepNavigationRules;
+    NSMutableDictionary<NSString *, ORKSkipStepNavigationRule *> *_skipStepNavigationRules;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
@@ -76,6 +76,13 @@
     [_stepNavigationRules removeObjectForKey:triggerStepIdentifier];
 }
 
+- (NSDictionary<NSString *, ORKStepNavigationRule *> *)stepNavigationRules {
+    if (!_stepNavigationRules) {
+        return (NSDictionary<NSString *, ORKStepNavigationRule *> *)@[];
+    }
+    return [_stepNavigationRules copy];
+}
+
 - (void)setSkipNavigationRule:(ORKSkipStepNavigationRule *)skipStepNavigationRule forStepIdentifier:(NSString *)stepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(skipStepNavigationRule);
     ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
@@ -96,6 +103,13 @@
     ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
     
     [_skipStepNavigationRules removeObjectForKey:stepIdentifier];
+}
+
+- (NSDictionary<NSString *, ORKSkipStepNavigationRule *> *)skipStepNavigationRules {
+    if (!_skipStepNavigationRules) {
+        return (NSDictionary<NSString *, ORKSkipStepNavigationRule *> *)@[];
+    }
+    return [_skipStepNavigationRules copy];
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
