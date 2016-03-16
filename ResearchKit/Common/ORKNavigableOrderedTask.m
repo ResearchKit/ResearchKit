@@ -145,7 +145,7 @@
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) task = [super copyWithZone:zone];
+    __typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
     task->_shouldReportProgress = _shouldReportProgress;
     return task;

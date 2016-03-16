@@ -76,7 +76,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    __typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
     return rule;
 }
 
@@ -226,7 +226,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicates:ORKArrayCopyObjects(_resultPredicates)
+    __typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicates:ORKArrayCopyObjects(_resultPredicates)
                                                          destinationStepIdentifiers:ORKArrayCopyObjects(_destinationStepIdentifiers)
                                                               defaultStepIdentifier:[_defaultStepIdentifier copy]
                                                                      validateArrays:YES];
@@ -296,7 +296,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] initWithDestinationStepIdentifier:[_destinationStepIdentifier copy]];
+    __typeof(self) rule = [[[self class] allocWithZone:zone] initWithDestinationStepIdentifier:[_destinationStepIdentifier copy]];
     return rule;
 }
 

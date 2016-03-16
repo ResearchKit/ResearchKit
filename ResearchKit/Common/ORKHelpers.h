@@ -157,8 +157,8 @@
 // Find the first object of the specified class, using method as the iterator
 #define ORKFirstObjectOfClass(C,p,method) ({ id v = p; while (v != nil) { if ([v isKindOfClass:[C class]]) { break; } else { v = [v method]; } }; v; })
 
-#define ORKStrongTypeOf(x) __strong typeof(x)
-#define ORKWeakTypeOf(x) __weak typeof(x)
+#define ORKStrongTypeOf(x) __strong __typeof(x)
+#define ORKWeakTypeOf(x) __weak __typeof(x)
 
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
