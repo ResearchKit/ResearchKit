@@ -73,7 +73,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 
 @implementation ORKHealthKitCharacteristicTypeAnswerFormat {
     ORKAnswerFormat *impliedAnswerFormat;
-    
+}
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {
@@ -199,7 +202,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 @implementation ORKHealthKitQuantityTypeAnswerFormat {
     ORKAnswerFormat *impliedAnswerFormat;
     HKUnit *_userUnit;
-    
+}
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {

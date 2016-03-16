@@ -101,6 +101,7 @@ ORK_CLASS_AVAILABLE
  */
 + (ORKDataLogger *)JSONDataLoggerWithDirectory:(NSURL *)url logName:(NSString *)logName delegate:(nullable id<ORKDataLoggerDelegate>)delegate;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -425,6 +426,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKDataLoggerManager : NSObject <ORKDataLoggerDelegate>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

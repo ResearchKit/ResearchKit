@@ -57,6 +57,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)answerFormatWithCharacteristicType:(HKCharacteristicType *)characteristicType;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -103,6 +104,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)answerFormatWithQuantityType:(HKQuantityType *)quantityType unit:(nullable HKUnit *)unit style:(ORKNumericAnswerStyle)style;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

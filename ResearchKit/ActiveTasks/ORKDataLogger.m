@@ -445,10 +445,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     return [[ORKDataLogger alloc] initWithDirectory:url logName:logName formatter:[ORKJSONLogFormatter new] delegate:delegate];
 }
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
-    return nil;
 }
 
 - (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName formatter:(ORKLogFormatter *)formatter delegate:(id<ORKDataLoggerDelegate>)delegate {
@@ -489,7 +491,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"%@ is not a class", configuration[@"formatterClass"]] userInfo:nil];
     }
     
-    self = [self initWithDirectory:url logName:configuration[@"logName"] formatter:[formatterClass new] delegate:delegate];
+    self = [self initWithDirectory:url logName:configuration[@"logName"] formatter:[[formatterClass alloc] init] delegate:delegate];
     if (self) {
         // Don't notify about initial setup
         [_observer pause];
@@ -1045,10 +1047,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 @implementation ORKDataLoggerManager
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
-    return nil;
 }
 
 - (instancetype)initWithDirectory:(NSURL *)directory delegate:(id<ORKDataLoggerManagerDelegate>)delegate {

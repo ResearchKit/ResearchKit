@@ -1920,6 +1920,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 @implementation ORKLocation
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                             region:(CLCircularRegion *)region
                          userInput:(NSString *)userInput

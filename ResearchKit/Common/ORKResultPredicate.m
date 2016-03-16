@@ -45,6 +45,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 @implementation ORKResultSelector
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 + (instancetype)selectorWithTaskIdentifier:(NSString *)taskIdentifier
                             stepIdentifier:(NSString *)stepIdentifier
                           resultIdentifier:(NSString *)resultIdentifier {
@@ -124,9 +132,9 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     __typeof(self) castObject = object;
-    return (ORKEqualObjects(_taskIdentifier, castObject.taskIdentifier)
-            && ORKEqualObjects(_stepIdentifier, castObject.stepIdentifier)
-            && ORKEqualObjects(_resultIdentifier, castObject.resultIdentifier));
+    return (ORKEqualObjects(self.taskIdentifier, castObject.taskIdentifier)
+            && ORKEqualObjects(self.stepIdentifier, castObject.stepIdentifier)
+            && ORKEqualObjects(self.resultIdentifier, castObject.resultIdentifier));
 }
 
 - (NSUInteger)hash {
@@ -164,6 +172,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 
 @implementation ORKResultPredicate
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
 
 + (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray

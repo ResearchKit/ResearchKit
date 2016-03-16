@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;

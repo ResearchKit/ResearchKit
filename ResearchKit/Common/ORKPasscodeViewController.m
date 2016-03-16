@@ -39,9 +39,12 @@
 
 @implementation ORKPasscodeViewController
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
-    return nil;
 }
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {

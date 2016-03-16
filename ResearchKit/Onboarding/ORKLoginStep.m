@@ -44,6 +44,14 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     return self.loginViewControllerClass;
 }
 
+// Don't throw on -initWithIdentifier: because it's internally used by -copyWithZone:
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text

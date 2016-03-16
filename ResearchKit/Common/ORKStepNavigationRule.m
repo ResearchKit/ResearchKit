@@ -41,12 +41,16 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 @implementation ORKStepNavigationRule
 
-- (instancetype)init_ork {
-    return [super init];
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init_ork {
+    return [super init];
 }
 
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {

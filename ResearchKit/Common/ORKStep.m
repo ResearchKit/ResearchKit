@@ -38,6 +38,10 @@
 
 @implementation ORKStep
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }

@@ -39,6 +39,10 @@
 
 @implementation ORKRecorderConfiguration
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }
@@ -96,6 +100,10 @@
 @implementation ORKRecorder {
     UIBackgroundTaskIdentifier _backgroundTask;
     NSUUID *_recorderUUID;
+}
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {

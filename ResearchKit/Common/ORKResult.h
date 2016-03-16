@@ -1255,6 +1255,7 @@ ORK_CLASS_AVAILABLE
  */
 @interface ORKLocation : NSObject <NSCopying, NSSecureCoding>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

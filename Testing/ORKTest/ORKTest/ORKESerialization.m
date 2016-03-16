@@ -324,8 +324,12 @@ static NSMutableDictionary *ORKESerializationEncodingTable() {
 ret =
 [@{
    ENTRY(ORKResultSelector,
-         nil,
-         (@{
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKResultSelector *selector = [[ORKResultSelector alloc] initWithTaskIdentifier:GETPROP(dict, taskIdentifier)
+                                                                          stepIdentifier:GETPROP(dict, stepIdentifier)
+                                                                        resultIdentifier:GETPROP(dict, resultIdentifier)];
+             return selector;
+         },(@{
             PROPERTY(taskIdentifier, NSString, NSObject, YES, nil, nil),
             PROPERTY(stepIdentifier, NSString, NSObject, YES, nil, nil),
             PROPERTY(resultIdentifier, NSString, NSObject, YES, nil, nil),
