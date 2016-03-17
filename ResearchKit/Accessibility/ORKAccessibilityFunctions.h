@@ -34,10 +34,15 @@
 
 
 @class ORKScaleSlider;
+@class ORKVASSlider;
 
 // Used to properly format values from the ORKScaleSlider.
 ORK_EXTERN NSString *ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *slider);
+
 ORK_EXTERN NSString *ORKAccessibilityFormatContinuousScaleSliderValue(CGFloat value, ORKScaleSlider *slider);
+
+//Used to property format values for the ORKVASSlider.
+ORK_EXTERN NSString *ORKAccessibilityFormatVASSliderValue(CGFloat value, ORKVASSlider *slider);
 
 // Performs a block on the main thread after a delay. If Voice Over is not running, the block is performed immediately.
 ORK_EXTERN void ORKAccessibilityPerformBlockAfterDelay(NSTimeInterval delay, void(^block)(void));

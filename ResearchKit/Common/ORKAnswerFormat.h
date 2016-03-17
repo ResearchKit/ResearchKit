@@ -54,6 +54,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeScale,
 
     /**
+     The scale question type asks participants to place a mark at an appropriate position based on "feeling"
+     with out numbers.
+     */
+    ORKQuestionTypeVAS,
+
+    /**
      In a single choice question, the participant can pick only one predefined option.
      */
     ORKQuestionTypeSingleChoice,
@@ -141,8 +147,28 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
     ORKNumberFormattingStylePercent
 } ORK_ENUM_AVAILABLE;
 
+/**
+ An enumeration of the styles for marker fo VAS slider.
+ */
+typedef NS_ENUM(NSInteger, ORKVASMarkerStyle) {
+    /**
+     The default - no triangles.
+     */
+    ORKVASMerkerStyleDefault,
+    
+    /**
+     Lower traingle style.
+     */
+    ORKVASMerkerStyleLowerOnly,
+    /**
+     Both traingles style.
+     */
+    ORKVASMerkerStyleBoth,
+} ORK_ENUM_AVAILABLE;
+
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
+@class ORKVASScaleAnswerFormat;
 @class ORKTextScaleAnswerFormat;
 @class ORKValuePickerAnswerFormat;
 @class ORKImageChoiceAnswerFormat;
@@ -211,6 +237,10 @@ ORK_CLASS_AVAILABLE
                                                                        vertical:(BOOL)vertical
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
+
++ (ORKVASScaleAnswerFormat *)VASScaleAnswerFormatWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                                                            minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                                                        markerStyle:(ORKVASMarkerStyle)markerStyle;
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray <ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
@@ -632,6 +662,98 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
+/**
+ The `ORKVASScaleAnswerFormat` class represents an answer format that lets participants
+ select a value on a continuous predefined scale without numbers, just "feeling".
+ 
+ The continuous scale answer format produces an `ORKScaleQuestionResult` object that has a
+ real-number value.
+ */
+
+ORK_CLASS_AVAILABLE
+@interface ORKVASScaleAnswerFormat : ORKAnswerFormat
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns an initialized continuous VAS scale answer format using the specified values.
+ 
+ This method is the designated initializer.
+ 
+ @param maximumValueDescription     A localized label to describe the maximum value of the scale.
+ For none, pass `nil`.
+ @param minimumValueDescription     A localized label to describe the minimum value of the scale.
+ For none, pass `nil`.
+ @param markerStyle                 Style for value selection marker.
+ 
+ @return An initialized scale answer format.
+ */
+
+- (instancetype)initWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                        minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                    markerStyle:(ORKVASMarkerStyle) markerStyle;
+
+
+/**
+ Returns an initialized continuous scale answer format using the specified values with default marker style.
+ 
+ @param maximumValueDescription     A localized label to describe the maximum value of the scale.
+ For none, pass `nil`.
+ @param minimumValueDescription     A localized label to describe the minimum value of the scale.
+ For none, pass `nil`.
+ 
+ @return An initialized scale answer format.
+ */
+    
+- (instancetype)initWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                        minimumValueDescription:(nullable NSString *)minimumValueDescription;
+
+/**
+ The upper bound of the scale. (read-only)
+ */
+@property (readonly) double maximum;
+
+/**
+ The lower bound of the scale. (read-only)
+ */
+@property (readonly) double minimum;
+
+/**
+ The default value for the slider. (read-only)
+ 
+ If the value of this property is less than `minimum` or greater than `maximum`, the slider has no
+ default value.
+ */
+@property (readonly) double defaultValue;
+
+/**
+ A formatting style applied to the minimum, maximum, and slider values.
+ */
+@property ORKNumberFormattingStyle numberStyle;
+
+/**
+ A number formatter applied to the minimum, maximum, and slider values. Can be overridden by
+ subclasses.
+ */
+@property (readonly) NSNumberFormatter *numberFormatter;
+
+/**
+ A localized label to describe the maximum value of the scale. (read-only)
+ */
+@property (readonly, nullable) NSString *maximumValueDescription;
+
+/**
+ A localized label to describe the minimum value of the scale. (read-only)
+ */
+@property (readonly, nullable) NSString *minimumValueDescription;
+
+/**
+ Style for VAS marker. (read-only)
+ */
+@property (readonly) ORKVASMarkerStyle markerStyle;
+
+@end
 
 /**
  The `ORKValuePickerAnswerFormat` class represents an answer format that lets participants use a

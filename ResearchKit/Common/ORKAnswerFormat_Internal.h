@@ -61,7 +61,9 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeOfDayAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKNumericAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKScaleAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKContinuousScaleAnswerFormat);
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKVASScaleAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat);
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat);
 
@@ -138,6 +140,16 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
+@protocol ORKVASAnswerFormatProvider <NSObject>
+- (nullable NSString *)localizedStringForNumber:(nullable NSNumber *)number;
+- (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
+- (nullable NSNumber *)minimumNumber;
+- (nullable NSNumber *)maximumNumber;
+- (nullable id)defaultAnswer;
+- (NSString *)maximumValueDescription;
+- (NSString *)minimumValueDescription;
+- (ORKVASMarkerStyle)markerStyle;
+@end
 
 @protocol ORKTextScaleAnswerFormatProvider <ORKScaleAnswerFormatProvider>
 
@@ -157,6 +169,9 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
+@interface ORKVASScaleAnswerFormat() <ORKVASAnswerFormatProvider>
+
+@end
 
 @interface ORKTextScaleAnswerFormat () <ORKTextScaleAnswerFormatProvider>
 
