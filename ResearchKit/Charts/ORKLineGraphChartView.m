@@ -117,6 +117,8 @@ const CGFloat FillColorAlpha = 0.4;
         return;
     }
     
+    CGFloat scalePixelAdjustment = (1.0 / [UIScreen mainScreen].scale);
+    
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKValueRange *positionOnYAxis = nil;
@@ -131,7 +133,7 @@ const CGFloat FillColorAlpha = 0.4;
         if (positionOnXAxis != ORKCGFloatInvalidValue) {
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
-                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment)];
             }
             [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         }
@@ -153,7 +155,7 @@ const CGFloat FillColorAlpha = 0.4;
         lineLayer.path = linePath.CGPath;
     }
     
-    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment)];
         
     fillLayer.path = fillPath.CGPath;
 }

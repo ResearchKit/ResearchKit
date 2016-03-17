@@ -89,7 +89,7 @@ static const CGFloat BarWidth = 10.0;
                     //      normalized valueStack = {25, 50, 100}
                     sum += value.doubleValue;
                     double normalizedValue = (sum - self.minimumValue) / range * viewHeight;
-                    normalizedValue = viewHeight - normalizedValue;
+                    normalizedValue = floor(viewHeight - normalizedValue);
                     
                     [normalizedDoubleStackValues addObject:@(normalizedValue)];
                 }
@@ -162,6 +162,7 @@ static const CGFloat BarWidth = 10.0;
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
+    CGFloat scalePixelAdjustment = (1.0 / [UIScreen mainScreen].scale);
     NSUInteger lineLayerIndex = 0;
     double positionOnXAxis = ORKDoubleInvalidValue;
     ORKValueStack *positionsOnYAxis = nil;
@@ -183,8 +184,8 @@ static const CGFloat BarWidth = 10.0;
                 positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
                 positionOnXAxis += [self xOffsetForPlotIndex:plotIndex];
                 
-                [linePath moveToPoint:CGPointMake(positionOnXAxis, previousYValue)];
-                [linePath addLineToPoint:CGPointMake(positionOnXAxis, previousYValue - barHeight)];
+                [linePath moveToPoint:CGPointMake(positionOnXAxis, previousYValue + scalePixelAdjustment)];
+                [linePath addLineToPoint:CGPointMake(positionOnXAxis, previousYValue + scalePixelAdjustment - barHeight)];
                 
                 previousYValue = positionOnYAxis;
                 
