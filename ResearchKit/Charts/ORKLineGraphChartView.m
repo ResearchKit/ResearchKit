@@ -117,8 +117,6 @@ const CGFloat FillColorAlpha = 0.4;
         return;
     }
     
-    CGFloat scalePixelAdjustment = (1.0 / [UIScreen mainScreen].scale);
-    
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKValueRange *positionOnYAxis = nil;
@@ -133,9 +131,14 @@ const CGFloat FillColorAlpha = 0.4;
         if (positionOnXAxis != ORKCGFloatInvalidValue) {
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
-                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment)];
+                // Substract scalePixelAdjustment() to the first horizontal position of the fillPath so if fully covers the start of the x axis
+                [fillPath moveToPoint:CGPointMake(positionOnXAxis - scalePixelAdjustment(),
+                                                  CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment())];
+                [fillPath addLineToPoint:CGPointMake(positionOnXAxis - scalePixelAdjustment(),
+                                                     positionOnYAxis.minimumValue)];
+            } else {
+                [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             }
-            [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         }
         
         positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
@@ -149,13 +152,16 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-        [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+        // Add scalePixelAdjustment() to the last vertical position of the fillPath so if fully covers the end of the x axis
+        [fillPath addLineToPoint:CGPointMake(positionOnXAxis + ( (pointIndex == (numberOfPoints - 1)) ? scalePixelAdjustment() : 0 ),
+                                             positionOnYAxis.minimumValue)];
         
         CAShapeLayer *lineLayer = self.lineLayers[plotIndex][pointIndex - 1][0];
         lineLayer.path = linePath.CGPath;
     }
     
-    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment)];
+    [fillPath addLineToPoint:CGPointMake(positionOnXAxis + scalePixelAdjustment(),
+                                         CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment())];
         
     fillLayer.path = fillPath.CGPath;
 }

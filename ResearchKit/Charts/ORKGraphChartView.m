@@ -339,6 +339,7 @@ ORK_INLINE UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color
 
         CAShapeLayer *referenceLineLayer = [CAShapeLayer new];
         referenceLineLayer.path = referenceLinePath.CGPath;
+        referenceLineLayer.lineWidth = [UIScreen mainScreen].scale;
         referenceLineLayer.strokeColor = color.CGColor;
         referenceLineLayer.lineDashPattern = @[@6, @4];
         
@@ -352,7 +353,7 @@ ORK_INLINE UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color
 
 ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGFloat height) {
     CALayer *referenceLineLayer = [CALayer new];
-    referenceLineLayer.frame = (CGRect){{0, 0}, {[UIScreen mainScreen].scale, height}};
+    referenceLineLayer.frame = (CGRect){{0, 0}, {1, height}};
     referenceLineLayer.anchorPoint = CGPointMake(0, 0);
     referenceLineLayer.contents = (__bridge id)(graphVerticalReferenceLineLayerImageWithColor(color, height).CGImage);
     
@@ -457,10 +458,10 @@ ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGF
     if (_showsHorizontalReferenceLines) {
         CGSize plotViewSize = _plotView.bounds.size;
         UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
-        [horizontalReferenceLinePath moveToPoint:CGPointMake(0,
-                                                             plotViewSize.height / 2)];
+        [horizontalReferenceLinePath moveToPoint:CGPointMake(0 - scalePixelAdjustment(),
+                                                             floor(plotViewSize.height / 2))];
         [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width + _yAxisView.bounds.size.width,
-                                                                plotViewSize.height / 2)];
+                                                                floor(plotViewSize.height / 2))];
         _horizontalReferenceLineLayer.path = horizontalReferenceLinePath.CGPath;
     }
 }
@@ -478,7 +479,7 @@ ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGF
                 || [_dataSource graphChartView:self drawsVerticalReferenceLineAtPointIndex:pointIndex]) {
                 CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
                 CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, plotViewWidth);
-                verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
+                verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - scalePixelAdjustment(), 0);
                 [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
                 [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
             }

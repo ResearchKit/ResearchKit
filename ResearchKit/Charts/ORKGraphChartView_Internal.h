@@ -50,6 +50,10 @@ extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 
+ORK_INLINE CGFloat scalePixelAdjustment() {
+    return (1.0 / [UIScreen mainScreen].scale);
+}
+
 ORK_INLINE CAShapeLayer *graphLineLayer() {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.fillColor = [UIColor clearColor].CGColor;
@@ -60,7 +64,7 @@ ORK_INLINE CAShapeLayer *graphLineLayer() {
 }
 
 ORK_INLINE CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
-    return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
+    return floor((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
 ORK_INLINE UIColor *opaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
