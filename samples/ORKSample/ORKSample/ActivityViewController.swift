@@ -32,7 +32,7 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case Survey, Microphone, Tapping
+    case Survey, Microphone, Tapping, VASTest, VASTest2, VASTest3
     
     static var allValues: [Activity] {
         var idx = 0
@@ -47,6 +47,12 @@ enum Activity: Int {
                 return "Microphone"
             case .Tapping:
                 return "Tapping"
+            case .VASTest:
+                return "VASTest"
+            case .VASTest2:
+                return "VASTest (bottom)"
+            case .VASTest3:
+                return "VASTest (booth)"
         }
     }
     
@@ -58,6 +64,12 @@ enum Activity: Int {
                 return "Voice evaluation"
             case .Tapping:
                 return "Test tapping speed"
+            case .VASTest:
+                return "Test for VAS question (default)"
+            case .VASTest2:
+                return "Test for VAS question (bottome marker)"
+            case .VASTest3:
+                return "Test for VAS question (both markers)"
         }
     }
 }
@@ -113,6 +125,12 @@ class ActivityViewController: UITableViewController {
                 
             case .Tapping:
                 taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRunUUID: NSUUID())
+            case .VASTest:
+                taskViewController = ORKTaskViewController(task: StudyTasks.VasTestTask, taskRunUUID: NSUUID())
+            case .VASTest2:
+                taskViewController = ORKTaskViewController(task: StudyTasks.VasTestTask2, taskRunUUID: NSUUID())
+            case .VASTest3:
+                taskViewController = ORKTaskViewController(task: StudyTasks.VasTestTask3, taskRunUUID: NSUUID())
         }
 
         taskViewController.delegate = self

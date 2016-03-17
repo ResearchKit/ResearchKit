@@ -124,4 +124,81 @@ struct StudyTasks {
         
         return ORKOrderedTask(identifier: "SurveyTask", steps: steps)
     }()
+    
+    static let VasTestTask: ORKOrderedTask = {
+        var steps = [ORKStep]()
+        
+        // Instruction step
+        let instructionStep = ORKInstructionStep(identifier: "VASIntroStep")
+        instructionStep.title = "We need to test\nVAS slider"
+        instructionStep.text = "It shold be unforgetable experience."
+        
+        steps += [instructionStep]
+        let continuousAnswerFormat = ORKAnswerFormat.VASScaleAnswerFormatWithMaximumValueDescription("Right\nanchor text", minimumValueDescription: "Left\nanchor text", markerStyle: ORKVASMarkerStyle.MerkerStyleDefault)
+        let continuousQuestionStepTitle = "How many difficulty\ndid you have walking at\nyour usual speed?"
+        let continuousQuestionStep = ORKQuestionStep(identifier: "ContinuousQuestionStep", title: continuousQuestionStepTitle, answer: continuousAnswerFormat)
+        
+        steps += [continuousQuestionStep]
+
+        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
+        summaryStep.title = "Thank you for watching."
+        summaryStep.text = "Hope all is as shold be."
+        
+        steps += [summaryStep]
+
+        
+        return ORKOrderedTask(identifier: "VASTestTask", steps: steps)
+        }()
+
+    static let VasTestTask2: ORKOrderedTask = {
+        var steps = [ORKStep]()
+        
+        // Instruction step
+        let instructionStep = ORKInstructionStep(identifier: "VASIntroStep")
+        instructionStep.title = "We need to test\nVAS slider (bottom marker)"
+        instructionStep.text = "It shold be unforgetable experience."
+        
+        steps += [instructionStep]
+        let continuousAnswerFormat = ORKAnswerFormat.VASScaleAnswerFormatWithMaximumValueDescription("Right\nanchor text", minimumValueDescription: "Left\nanchor text", markerStyle: ORKVASMarkerStyle.MerkerStyleLowerOnly)
+        let continuousQuestionStepTitle = "How many difficulty\ndid you have walking at\nyour usual speed?"
+        let continuousQuestionStep = ORKQuestionStep(identifier: "ContinuousQuestionStep", title: continuousQuestionStepTitle, answer: continuousAnswerFormat)
+        
+        steps += [continuousQuestionStep]
+        
+        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
+        summaryStep.title = "Thank you for watching."
+        summaryStep.text = "Hope all is as shold be."
+        
+        steps += [summaryStep]
+        
+        
+        return ORKOrderedTask(identifier: "VASTestTask", steps: steps)
+        }()
+    
+    static let VasTestTask3: ORKOrderedTask = {
+        var steps = [ORKStep]()
+        
+        // Instruction step
+        let instructionStep = ORKInstructionStep(identifier: "VASIntroStep")
+        instructionStep.title = "We need to test\nVAS slider (both marker)"
+        instructionStep.text = "It shold be unforgetable experience."
+        
+        steps += [instructionStep]
+        let continuousAnswerFormat = ORKAnswerFormat.VASScaleAnswerFormatWithMaximumValueDescription("Right\nanchor text", minimumValueDescription: "Left\nanchor text", markerStyle: ORKVASMarkerStyle.MerkerStyleBoth)
+        let continuousQuestionStepTitle = "How many difficulty\ndid you have walking at\nyour usual speed?"
+        let continuousQuestionStep = ORKQuestionStep(identifier: "ContinuousQuestionStep", title: continuousQuestionStepTitle, answer: continuousAnswerFormat)
+        
+        steps += [continuousQuestionStep]
+        
+        let summaryStep = ORKCompletionStep(identifier: "SummaryStep")
+        summaryStep.title = "Thank you for watching."
+        summaryStep.text = "Hope all is as shold be."
+        
+        steps += [summaryStep]
+        
+        
+        return ORKOrderedTask(identifier: "VASTestTask", steps: steps)
+        }()
+
+
 }
