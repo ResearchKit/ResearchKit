@@ -1,7 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -35,8 +34,8 @@
 #import "ORKAccessibility.h"
 
 
-static NSString *const EmptyBulletString = @"\u25CB";
-static NSString *const FilledBulletString = @"\u25CF";
+static NSString * const EmptyBullet = @"\u25CB";
+static NSString * const FilledBullet = @"\u25CF";
 
 @implementation ORKCaretOptionalTextField
 
@@ -88,6 +87,7 @@ static NSString *const FilledBulletString = @"\u25CF";
 }
 
 - (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets {
+    
     // Error checking.
     if (filledBullets > self.numberOfDigits) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
@@ -97,8 +97,8 @@ static NSString *const FilledBulletString = @"\u25CF";
     
     // Append the string with the correct number of filled and empty bullets.
     NSString *text = [NSString new];
-    text = [text stringByPaddingToLength:filledBullets withString:FilledBulletString startingAtIndex:0];
-    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBulletString startingAtIndex:0];
+    text = [text stringByPaddingToLength:filledBullets withString:FilledBullet startingAtIndex:0];
+    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBullet startingAtIndex:0];
     
     // Apply spacing attribute to string.
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
@@ -122,7 +122,7 @@ static NSString *const FilledBulletString = @"\u25CF";
 }
 
 - (NSString *)accessibilityValue {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBulletString options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
     NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
     return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), ORKLocalizedStringFromNumber(@(numberOfFilledBullets)), ORKLocalizedStringFromNumber(@([self.text length]))];
 }
@@ -138,6 +138,7 @@ static NSString *const FilledBulletString = @"\u25CF";
     NSString *_managedPlaceholder;
     
     NSString *_unitWithNumber;
+    NSString *_unitWithPlaceholder;
  
     UIColor *_unitRegularColor;
     UIColor *_unitActiveColor;
@@ -151,9 +152,9 @@ static NSString *const FilledBulletString = @"\u25CF";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self];
         
     }
     return self;
@@ -184,7 +185,7 @@ static NSString *const FilledBulletString = @"\u25CF";
     if (suffix.length == 0) {
         return;
     }
-    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ?: [UIColor ork_midGrayTintColor])];
+    _suffixLabel = [self ork_createTextLabelWithTextColor:color ?: [UIColor grayColor]];
     _suffixLabel.text = suffix;
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
@@ -239,10 +240,12 @@ static NSString *const FilledBulletString = @"\u25CF";
     _unit = unit;
     
     if (_unit.length > 0) {
-        _unitWithNumber = [NSString stringWithFormat:@" %@", unit];
+        _unitWithPlaceholder = [NSString stringWithFormat:@"    %@",unit];
+        _unitWithNumber = [NSString stringWithFormat:@" %@",unit];
         _unitRegularColor = [UIColor blackColor];
         _unitActiveColor = [UIColor ork_midGrayTintColor];
     } else {
+        _unitWithPlaceholder = nil;
         _unitWithNumber = nil;
     }
     
@@ -251,19 +254,24 @@ static NSString *const FilledBulletString = @"\u25CF";
 
 - (void)updateManagedUnitAndPlaceholder {
     if (_manageUnitAndPlaceholder) {
-        BOOL isEditing = self.isEditing;
+        BOOL editing = [self isEditing];
         
-        UIColor *suffixColor = isEditing ? _unitActiveColor : _unitRegularColor;
-        if (_managedPlaceholder.length > 0) {
-            [self ork_setPlaceholder: (isEditing && _unit.length > 0) ? nil : _managedPlaceholder];
-            [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
+        if (editing) {
+            [self ork_setPlaceholder: nil];
+            [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
         } else {
-            if (self.text.length > 0 || isEditing) {
-                [self ork_setPlaceholder:nil];
-                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
+            if (_managedPlaceholder.length > 0) {
+                [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
+                NSString *unit = (self.text.length == 0)? _unitWithPlaceholder : _unitWithNumber;
+                [self ork_updateSuffix:unit withColor:_unitRegularColor];
             } else {
-                [self ork_setPlaceholder: _unit];
-                [self ork_updateSuffix:nil withColor:suffixColor];
+                if (self.text.length > 0) {
+                    [self ork_setPlaceholder:nil];
+                    [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
+                } else {
+                    [self ork_setPlaceholder: _unit];
+                    [self ork_updateSuffix:nil withColor:_unitRegularColor];
+                }
             }
         }
     } else {
@@ -277,19 +285,18 @@ static NSString *const FilledBulletString = @"\u25CF";
         }
     }
     [self invalidateIntrinsicContentSize];
-    [self layoutIfNeeded]; // layout immediatly to avoid animation glitch in which the unit label frame grows from left to right
 }
 
-- (void)textFieldTextDidBeginEditing:(NSNotification *)notification {
+- (void)textFieldDidBeginEditing:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
 }
 
-- (void)textFieldTextDidEndEditing:(NSNotification *)notification {
+- (void)textFieldDidEndEditing:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
     
 }
 
-- (void)textFieldTextDidChange:(NSNotification *)notification {
+- (void)textFieldDidChange:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
 }
 
@@ -299,9 +306,8 @@ static NSString *const FilledBulletString = @"\u25CF";
 }
 
 - (BOOL)isPlaceholderVisible {
-    BOOL isEditing = self.isEditing;
-    return (self.placeholder.length > 0) &&
-            ((!isEditing && self.text.length == 0) || (isEditing && self.text.length == 0 && _unit.length == 0));
+    BOOL editing = [self isEditing];
+    return (!editing) && ([self placeholder].length > 0);
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
@@ -310,7 +316,7 @@ static NSString *const FilledBulletString = @"\u25CF";
     return suffixWidth;
 }
 
-static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
+static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     CGRect textRect = [super textRectForBounds:bounds];
@@ -328,7 +334,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    CGRect rect = [super editingRectForBounds:bounds];
+    CGRect r = [super editingRectForBounds:bounds];
     
     // Leave room for the suffix label
     if (_suffixLabel.text.length) {
@@ -336,15 +342,15 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
         }
-        rect.size.width = MAX(0, rect.size.width - suffixWidth);
+        r.size.width = MAX(0, r.size.width - suffixWidth);
     }
     
-    return rect;
+    return r;
 }
 
 - (CGRect)ork_suffixFrame {
     // Get the text currently 'in' the edit field
-    NSString *textToMeasure = [self isPlaceholderVisible] ? self.placeholder : self.text;
+    NSString *textToMeasure = [self isPlaceholderVisible] ? [self placeholder] : self.text;
     CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
     
     // Get the maximum size of the actual editable area (taking into account prefix/suffix/views/clear button
@@ -393,7 +399,6 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 - (NSString *)accessibilityValue {
     if (self.text.length > 0) {
         return ORKAccessibilityStringForVariables([super accessibilityValue], _unitWithNumber);
-    
     }
     else if ( _managedPlaceholder ) {
         return ORKAccessibilityStringForVariables(_managedPlaceholder, _unitWithNumber);
@@ -423,7 +428,6 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
-    
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
@@ -465,5 +469,6 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     
     return fieldWidth;
 }
+
 
 @end
