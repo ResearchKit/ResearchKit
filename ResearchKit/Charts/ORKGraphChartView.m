@@ -202,12 +202,17 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
-    
-    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+
+    _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
+    _longPressGestureRecognizer.delaysTouchesBegan = YES;
+    _longPressGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_longPressGestureRecognizer];
+
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
-    
+
     [self setUpViews];
     
     [self updateContentSizeCategoryFonts];
@@ -618,15 +623,20 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     return plotIndex;
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
-    CGPoint translation = [gestureRecognizer translationInView:self];
-    if (fabs(translation.x) > fabs(translation.y)) {
-        return YES;
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    BOOL shouldBegin = NO;
+    if (gestureRecognizer == _panGestureRecognizer) {
+        CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self];
+        if (fabs(translation.x) > fabs(translation.y)) {
+            shouldBegin = YES;
+        }
+    } else if (gestureRecognizer == _longPressGestureRecognizer) {
+        shouldBegin = YES;
     }
-    return NO;
+    return shouldBegin;
 }
 
-- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
+- (void)handleScrubbingGesture:(UIGestureRecognizer *)gestureRecognizer {
     NSInteger scrubbingPlotIndex = [self scrubbingPlotIndex];
     if ((_dataPoints.count > scrubbingPlotIndex) && ([self numberOfValidValuesForPlotIndex:scrubbingPlotIndex] > 0)) {
         
@@ -637,14 +647,14 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
         CGFloat snappedXPosition = [self snappedXPosition:location.x plotIndex:scrubbingPlotIndex];
         [self updateScrubberViewForXPosition:snappedXPosition plotIndex:scrubbingPlotIndex];
         
-        if ([_delegate respondsToSelector:@selector(graphChartView:touchesMovedToXPosition:)]) {
-            [_delegate graphChartView:self touchesMovedToXPosition:snappedXPosition];
-        }
-        
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
             [self setScrubberViewsHidden:NO animated:YES];
             if ([_delegate respondsToSelector:@selector(graphChartViewTouchesBegan:)]) {
                 [_delegate graphChartViewTouchesBegan:self];
+            }
+        } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+            if ([_delegate respondsToSelector:@selector(graphChartView:touchesMovedToXPosition:)]) {
+                [_delegate graphChartView:self touchesMovedToXPosition:snappedXPosition];
             }
         } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
             [self setScrubberViewsHidden:YES animated:YES];
@@ -699,7 +709,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
                                                         options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
                                                      attributes:@{NSFontAttributeName: _scrubberLabel.font}
                                                         context:nil].size;
-    _scrubberLabel.frame = CGRectMake(CGRectGetMaxX(_scrubberLine.frame) + ScrubberLineToLabelPadding,
+    _scrubberLabel.frame = CGRectMake(xPosition + ORKGraphChartViewLeftPadding + ScrubberLineToLabelPadding,
                                       CGRectGetMinY(_scrubberLine.frame),
                                       textSize.width + ScrubberLabelHorizontalPadding,
                                       textSize.height + ScrubberLabelVerticalPadding);

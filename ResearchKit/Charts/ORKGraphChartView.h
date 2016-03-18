@@ -400,6 +400,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
 /**
+ The long press gesture recognizer that is used for scrubbing by the graph chart view. You can use
+ this property to prioritize your own gesture recognizers.
+ 
+ This object is instatiated and added to the view when it is created.
+ */
+@property (nonatomic, strong, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
+/**
  The gesture recognizer that is used for scrubbing by the graph chart view.
  
  This object is instatiated and added to the view when it is created.
