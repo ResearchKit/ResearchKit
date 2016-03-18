@@ -353,7 +353,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     if (animationDuration < 0) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
     }
-    [self layoutIfNeeded]; // layout pass needed so _pieView (a UICollectionView subclass) dequees and displays the cells
+    [self layoutIfNeeded]; // layout pass needed so _legendView (a UICollectionView subclass) dequees and displays the cells
     [_pieView animateWithDuration:animationDuration];
     [_legendView animateWithDuration:animationDuration];
     [_titleTextView animateWithDuration:animationDuration];

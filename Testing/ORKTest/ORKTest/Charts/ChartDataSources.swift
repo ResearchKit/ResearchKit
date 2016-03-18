@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2015, James Cox. All rights reserved.
-Copyright (c) 2015, Ricardo Sánchez-Sáez.
+Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -44,7 +44,7 @@ func randomColorArray(number: Int) -> [UIColor] {
         return colors
     }
 
-let NumberOfPieChartSegments = 8
+let NumberOfPieChartSegments = 13
 
 class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
     

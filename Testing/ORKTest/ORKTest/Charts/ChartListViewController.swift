@@ -195,7 +195,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             discreteGraphChartView.drawsConnectedRanges = true
         }
         
-        chartTableViewCells = [barGraphChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, pieChartTableViewCell]
+        chartTableViewCells = [pieChartTableViewCell, barGraphChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
     }
@@ -211,6 +211,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.layoutIfNeeded()
         pieChartTableViewCell.pieChartView.animateWithDuration(2.5)
         barGraphChartTableViewCell.graphChartView.animateWithDuration(2.5)
         lineGraphChartTableViewCell.graphChartView.animateWithDuration(2.5)
