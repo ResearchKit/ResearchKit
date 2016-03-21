@@ -83,6 +83,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         
         _identifier = [identifier copy];
         _steps = steps;
+        
+        [self validateParameters];
     }
     return self;
 }
@@ -1113,6 +1115,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
@@ -1134,7 +1137,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    {
+    if (includeAssistiveDeviceForm) {
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:ORKTimedWalkFormStepIdentifier
                                                               title:ORKLocalizedString(@"TIMED_WALK_FORM_TITLE", nil)
                                                                text:ORKLocalizedString(@"TIMED_WALK_FORM_TEXT", nil)];
@@ -1143,6 +1146,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKFormItem *formItem1 = [[ORKFormItem alloc] initWithIdentifier:ORKTimedWalkFormAFOStepIdentifier
                                                                     text:ORKLocalizedString(@"TIMED_WALK_QUESTION_TEXT", nil)
                                                             answerFormat:answerFormat1];
+        formItem1.optional = NO;
         
         NSArray *textChoices = @[ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE", nil),
                                  ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_2", nil),
@@ -1155,6 +1159,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                                     text:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_TITLE", nil)
                                                             answerFormat:answerFormat2];
         formItem2.placeholder = ORKLocalizedString(@"TIMED_WALK_QUESTION_2_TEXT", nil);
+        formItem2.optional = NO;
+
         step.formItems = @[formItem1, formItem2];
         step.optional = NO;
         

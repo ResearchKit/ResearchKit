@@ -64,8 +64,9 @@
 }
 
 - (instancetype)copyWithIdentifier:(NSString *)identifier {
+    ORKThrowInvalidArgumentExceptionIfNil(identifier)
     ORKStep *step = [self copy];
-    step->_identifier = identifier;
+    step->_identifier = [identifier copy];
     return step;
 }
 

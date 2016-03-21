@@ -42,7 +42,8 @@ class HealthDataStepViewController: ORKInstructionStepViewController {
     
     override func goForward() {
         healthDataStep?.getHealthAuthorization() { succeeded, _ in
-            guard succeeded else { return }
+            // The second part of the guard condition allows the app to proceed on the Simulator (where health data is not available)
+            guard succeeded || (TARGET_OS_SIMULATOR != 0) else { return }
             
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 super.goForward()

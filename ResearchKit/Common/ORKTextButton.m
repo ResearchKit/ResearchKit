@@ -79,6 +79,11 @@
 
 }
 
+-(void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    [self.titleLabel setEnabled:enabled];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
