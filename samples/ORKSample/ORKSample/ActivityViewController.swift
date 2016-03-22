@@ -35,8 +35,14 @@ enum Activity: Int {
     case Survey, Microphone, Tapping
     
     static var allValues: [Activity] {
-        var idx = 0
-        return Array(anyGenerator{ return self.init(rawValue: idx++)})
+        var index = 0
+        return Array (
+            AnyGenerator {
+                let returnedElement = self.init(rawValue: index)
+                index = index + 1
+                return returnedElement
+            }
+        )
     }
     
     var title: String {
