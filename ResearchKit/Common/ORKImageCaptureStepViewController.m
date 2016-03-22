@@ -146,7 +146,7 @@
         // Set this, even if there was an error and we got a nil buffer
         self.capturedImageData = capturedImageData;
         if (handler) {
-            handler(capturedImageData!=nil);
+            handler(capturedImageData != nil);
         }
     });
 }

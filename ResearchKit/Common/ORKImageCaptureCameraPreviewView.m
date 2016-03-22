@@ -164,7 +164,7 @@
 
 - (void)setCapturedImage:(UIImage *)capturedImage {
     _capturedImageView.image = capturedImage;
-    _previewLayer.hidden = capturedImage!=nil;
+    _previewLayer.hidden = (capturedImage != nil);
 }
 
 - (void)layoutSubviews {

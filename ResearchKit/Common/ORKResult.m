@@ -675,7 +675,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @implementation ORKFileResult
 
 - (BOOL)isSaveable {
-    return (_fileURL!=nil);
+    return (_fileURL != nil);
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

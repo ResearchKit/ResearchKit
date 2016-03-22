@@ -71,7 +71,7 @@
     XCTAssert([taskResult1.outputDirectory.absoluteString isEqual:taskResult2.outputDirectory.absoluteString], @"");
     XCTAssert([taskResult1.identifier isEqualToString:taskResult2.identifier], @"");
     
-    XCTAssert(taskResult1!=taskResult2, @"");
+    XCTAssert(taskResult1 != taskResult2, @"");
 
     [taskResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ORKResult *result1 = obj;
@@ -82,7 +82,7 @@
         ORKStepResult *stepResult1 = (ORKStepResult *)result1;
         ORKStepResult *stepResult2 = (ORKStepResult *)result2;
         
-        XCTAssert(stepResult1!=stepResult2, @"");
+        XCTAssert(stepResult1 != stepResult2, @"");
         
         [stepResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKResult *result1 = obj;
@@ -92,7 +92,7 @@
             XCTAssert([result1.startDate isEqualToDate: result2.startDate], @"");
             XCTAssert([result1.endDate isEqualToDate: result2.endDate], @"");
             
-            XCTAssert(result1!=result2, @"");
+            XCTAssert(result1 != result2, @"");
             
             if ([result1 isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *q1 = (ORKQuestionResult *)result1;
@@ -113,10 +113,8 @@
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;
                 ORKConsentSignatureResult *c2 = (ORKConsentSignatureResult *)result2;
                 
-                XCTAssert(c1.signature!=c2.signature, @"");
-                //XCTAssert( [c1.signature isEqual:c2.signature], @"%@ and %@",c1.signature, c2.signature);
+                XCTAssert(c1.signature != c2.signature, @"");
             }
-            
         }];
     }];
 }
