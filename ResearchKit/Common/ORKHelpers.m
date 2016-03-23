@@ -43,12 +43,10 @@ NSURL *ORKCreateRandomBaseURL() {
 
 NSBundle *ORKAssetsBundle(void) {
     static NSBundle *bundle;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         bundle = [NSBundle bundleForClass:[ORKStep class]];
     });
-    
     return bundle;
 }
 
@@ -64,7 +62,9 @@ ORK_INLINE CGFloat ORKAdjustToScale(CGFloat (adjustFunction)(CGFloat), CGFloat v
     if (scale == 0) {
         static CGFloat screenScale = 1.0;
         static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{ screenScale = [UIScreen mainScreen].scale; });
+        dispatch_once(&onceToken, ^{
+            screenScale = [UIScreen mainScreen].scale;
+        });
         scale = screenScale;
     }
     if (scale == 1.0) {

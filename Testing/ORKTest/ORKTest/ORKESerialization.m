@@ -319,9 +319,9 @@ static NSArray *numberFormattingStyleTable() {
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
-    static NSMutableDictionary *ret = nil;
+    static NSMutableDictionary *encondingTable = nil;
     dispatch_once(&onceToken, ^{
-ret =
+encondingTable =
 [@{
    ENTRY(ORKResultSelector,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1238,7 +1238,7 @@ ret =
    
    } mutableCopy];
     });
-    return ret;
+    return encondingTable;
 }
 #undef GETPROP
 

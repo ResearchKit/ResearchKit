@@ -94,7 +94,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     static CGFloat textFieldBottomMargin = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        textFieldBottomMargin = 1.0/[UIScreen mainScreen].scale;
+        textFieldBottomMargin = 1.0 / [UIScreen mainScreen].scale;
     });
     return textFieldBottomMargin;
 }

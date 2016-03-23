@@ -49,29 +49,27 @@ NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey"
 
 @implementation UIColor (ORKColor)
 
-#define cachedColorMethod(m, r, g, b, a) \
+#define ORKCachedColorMethod(m, r, g, b, a) \
 + (UIColor *)m { \
-static UIColor *c##m = nil; \
-static dispatch_once_t onceToken##m; \
-dispatch_once(&onceToken##m, ^{ \
-c##m = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a]; \
-}); \
-return c##m; \
+    static UIColor *c##m = nil; \
+    static dispatch_once_t onceToken##m; \
+    dispatch_once(&onceToken##m, ^{ \
+        c##m = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a]; \
+    }); \
+    return c##m; \
 }
 
-cachedColorMethod(ork_midGrayTintColor, 0.0 / 255.0, 0.0 / 255.0, 25.0 / 255.0, 0.22)
-cachedColorMethod(ork_redColor, 255.0 / 255.0,  59.0 / 255.0,  48.0 / 255.0, 1.0)
-cachedColorMethod(ork_grayColor, 142.0 / 255.0, 142.0 / 255.0, 147.0 / 255.0, 1.0)
-cachedColorMethod(ork_darkGrayColor, 102.0 / 255.0, 102.0 / 255.0, 102.0 / 255.0, 1.0)
+ORKCachedColorMethod(ork_midGrayTintColor, 0.0 / 255.0, 0.0 / 255.0, 25.0 / 255.0, 0.22)
+ORKCachedColorMethod(ork_redColor, 255.0 / 255.0,  59.0 / 255.0,  48.0 / 255.0, 1.0)
+ORKCachedColorMethod(ork_grayColor, 142.0 / 255.0, 142.0 / 255.0, 147.0 / 255.0, 1.0)
+ORKCachedColorMethod(ork_darkGrayColor, 102.0 / 255.0, 102.0 / 255.0, 102.0 / 255.0, 1.0)
 
-#undef cachedColorMethod
+#undef ORKCachedColorMethod
 
 @end
 
 static NSMutableDictionary *colors() {
-    
     static NSMutableDictionary *colors = nil;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         colors = [@{

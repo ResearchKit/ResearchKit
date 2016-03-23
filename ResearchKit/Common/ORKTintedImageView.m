@@ -118,9 +118,9 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 
 + (instancetype)sharedCache
 {
-    static dispatch_once_t pred;
+    static dispatch_once_t onceToken;
     static id sharedInstance = nil;
-    dispatch_once(&pred, ^{
+    dispatch_once(&onceToken, ^{
         sharedInstance = [[[self class] alloc] init];
     });
     return sharedInstance;

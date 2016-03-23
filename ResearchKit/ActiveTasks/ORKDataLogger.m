@@ -825,15 +825,15 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 + (NSURL *)nextUrlForDirectoryUrl:(NSURL *)directory logName:(NSString *)logName {
-    static NSDateFormatter *dfm = nil;
+    static NSDateFormatter *dateFromatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dfm = [NSDateFormatter new];
-        [dfm setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
-        dfm.dateFormat = @"yyyyMMddHHmmss";
+        dateFromatter = [NSDateFormatter new];
+        [dateFromatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        dateFromatter.dateFormat = @"yyyyMMddHHmmss";
     });
     
-    NSString *datedLog = [NSString stringWithFormat:@"%@-%@",logName, [dfm stringFromDate:[NSDate date]]];
+    NSString *datedLog = [NSString stringWithFormat:@"%@-%@",logName, [dateFromatter stringFromDate:[NSDate date]]];
     NSURL *destinationUrl = [directory URLByAppendingPathComponent:datedLog];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
