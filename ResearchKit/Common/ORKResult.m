@@ -1565,6 +1565,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return self.numericAnswer;
 }
 
+- (NSString *)descriptionSuffix {
+    return [NSString stringWithFormat:@" %@>", _unit];
+}
+
 @end
 
 

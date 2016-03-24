@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
- 
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -104,7 +105,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
      In a time interval question, the participant can enter a time span by using a picker.
      */
     ORKQuestionTypeTimeInterval,
-    
+
+    /**
+     In a height question, the participant can enter a height by using a height picker.
+     */
+    ORKQuestionTypeHeight,
+
     /**
      In a location question, the participant can enter a location using a map view.
      */
@@ -154,6 +160,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTextAnswerFormat;
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
+@class ORKHeightAnswerFormat;
 @class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
@@ -255,6 +262,9 @@ ORK_CLASS_AVAILABLE
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                                         step:(NSInteger)step;
+
++ (ORKHeightAnswerFormat *)heightAnswerFormat;
++ (ORKHeightAnswerFormat *)heightAnswerFormatWithMetricSystem:(BOOL)useMetricSystem;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -924,7 +934,7 @@ ORK_CLASS_AVAILABLE
  The text to display when the image is selected, in a localized string. (read-only)
  
  Note that the text you supply may be spoken by VoiceOver even when the item is not selected.
-  */
+*/
 @property (copy, readonly, nullable) NSString *text;
 
 /**
@@ -1111,7 +1121,6 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized date answer format using the specified answer style and default date values.
- 
  
  This method is the designated initializer.
  
@@ -1325,6 +1334,46 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is 1. The minimum value is 1, and the maximum value is 30.
  */
 @property (readonly) NSInteger step;
+
+@end
+
+
+/**
+ The `ORKHeightAnswerFormat` class represents the answer format for questions that require users
+ to enter a height.
+ 
+ A date answer format produces an `ORKNumericQuestionResult` object. The result unit will either be
+ `cm` or `in` depending on the measuring system chosen when building the answer format.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHeightAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized height answer format using the measuring system specified in the current
+ locale.
+ 
+ @return An initialized height answer format.
+ */
+- (instancetype)init;
+
+/**
+ Returns an initialized height answer format using the specified meauring system.
+ 
+ This method is the designated initializer.
+ 
+ @param useMetricSystem     The measuring system to use. Set it to `YES` to use the metric system,
+ set it to `NO` to use the imperial system.
+ 
+ @return An initialized height answer format.
+ */
+- (instancetype)initWithMetricSystem:(BOOL)useMetricSystem NS_DESIGNATED_INITIALIZER;
+
+/**
+ Indicates the measuring system used by the answer format.
+ 
+ A value of `NO` indicates that the imperial system is used.
+ */
+@property (readonly) BOOL useMetricSystem;
 
 @end
 

@@ -545,3 +545,11 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
     return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
 }
+
+NSNumberFormatter *ORKNumberFormatter() {
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.maximumFractionDigits = NSDecimalNoScale;
+    numberFormatter.usesGroupingSeparator = NO;
+    return numberFormatter;
+}

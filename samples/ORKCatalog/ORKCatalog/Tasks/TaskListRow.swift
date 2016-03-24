@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -65,6 +65,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case BooleanQuestion
     case DateQuestion
     case DateTimeQuestion
+    case HeightQuestion
     case ImageChoiceQuestion
     case LocationQuestion
     case NumericQuestion
@@ -119,6 +120,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .BooleanQuestion,
                     .DateQuestion,
                     .DateTimeQuestion,
+                    .HeightQuestion,
                     .ImageChoiceQuestion,
                     .LocationQuestion,
                     .NumericQuestion,
@@ -174,7 +176,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return NSLocalizedString("Date and Time Question", comment: "")
-            
+
+        case .HeightQuestion:
+            return NSLocalizedString("Height Question", comment: "")
+
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -301,6 +306,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case DateTimeQuestionTask
         case DateTimeQuestionStep
 
+        // Task with an example of height entry.
+        case HeightQuestionTask
+        case HeightQuestionStep
+
         // Task with an image choice question.
         case ImageChoiceQuestionTask
         case ImageChoiceQuestionStep
@@ -423,6 +432,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return dateTimeQuestionTask
+
+        case .HeightQuestion:
+            return heightQuestionTask
 
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -610,6 +622,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         step.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.DateTimeQuestionTask), steps: [step])
+    }
+
+    /// This task demonstrates a question asking for the user height.
+    private var heightQuestionTask: ORKTask {
+        let answerFormat = ORKAnswerFormat.heightAnswerFormat()
+        
+        let step = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        step.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(Identifier.HeightQuestionTask), steps: [step])
     }
 
     /**

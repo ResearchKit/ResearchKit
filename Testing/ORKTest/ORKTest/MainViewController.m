@@ -1687,7 +1687,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             item.placeholder = @"Enter Passcode";
             [items addObject:item];
         }
-        
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_001" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMetricSystem:YES]];
+            item.placeholder = @"Pick a height (metric system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_002" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMetricSystem:NO]];
+            item.placeholder = @"Pick a height (imperial system)";
+            [items addObject:item];
+        }
+
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
@@ -1696,7 +1710,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            
             NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear value:-30 toDate:[NSDate date] options:(NSCalendarOptions)0];
             NSDate *minDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:[NSDate date] options:(NSCalendarOptions)0];
 

@@ -167,6 +167,11 @@
 "BOOL_NO" = "No";
 "BOOL_YES" = "Yes";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
 "NULL_ANSWER" = "Select an answer";
@@ -225,7 +230,6 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
 
-
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tapping Speed";
 "TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
@@ -234,7 +238,6 @@
 "TAP_BUTTON_TITLE" = "Tap";
 "TOTAL_TAPS_LABEL" = "Total Taps";
 "TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
-
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";

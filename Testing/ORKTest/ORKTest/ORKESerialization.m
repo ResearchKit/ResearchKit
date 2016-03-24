@@ -912,6 +912,13 @@ ret =
         },
         (@{
           })),
+   ENTRY(ORKHeightAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHeightAnswerFormat alloc] initWithMetricSystem:((NSNumber *)GETPROP(dict, useMetricSystem)).boolValue];
+         },
+         (@{
+            PROPERTY(useMetricSystem, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKLocationAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKLocationAnswerFormat alloc] init];
