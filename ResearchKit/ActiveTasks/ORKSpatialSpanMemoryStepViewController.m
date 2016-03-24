@@ -557,7 +557,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 - (void)continueAction {
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
-    if (_gamesCounter < step.maxTests && _consecutiveGamesFailed < step.maxConsecutiveFailures) {
+    if (_gamesCounter < step.maximumTests && _consecutiveGamesFailed < step.maximumConsecutiveFailures) {
         // Generate a new game
         [self transitionToState:ORKSpatialSpanStepStateRestart];
         UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
@@ -591,7 +591,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 - (BOOL)finishIfCompletedGames {
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
-    if (_consecutiveGamesFailed >= step.maxConsecutiveFailures || _gamesCounter >= step.maxTests) {
+    if (_consecutiveGamesFailed >= step.maximumConsecutiveFailures || _gamesCounter >= step.maximumTests) {
         [self transitionToState:ORKSpatialSpanStepStateComplete];
         return YES;
     }

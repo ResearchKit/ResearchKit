@@ -746,8 +746,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                             minimumSpan:(NSInteger)minimumSpan
                                             maximumSpan:(NSInteger)maximumSpan
                                               playSpeed:(NSTimeInterval)playSpeed
-                                               maxTests:(NSInteger)maxTests
-                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                               maximumTests:(NSInteger)maximumTests
+                                 maximumConsecutiveFailures:(NSInteger)maximumConsecutiveFailures
                                       customTargetImage:(UIImage *)customTargetImage
                                  customTargetPluralName:(NSString *)customTargetPluralName
                                         requireReversal:(BOOL)requireReversal
@@ -795,8 +795,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.minimumSpan = minimumSpan;
         step.maximumSpan = maximumSpan;
         step.playSpeed = playSpeed;
-        step.maxTests = maxTests;
-        step.maxConsecutiveFailures = maxConsecutiveFailures;
+        step.maximumTests = maximumTests;
+        step.maximumConsecutiveFailures = maximumConsecutiveFailures;
         step.customTargetImage = customTargetImage;
         step.customTargetPluralName = customTargetPluralName;
         step.requireReversal = requireReversal;

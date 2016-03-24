@@ -489,8 +489,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                        minimumSpan:2
                                                        maximumSpan:15
                                                          playSpeed:1
-                                                          maxTests:5
-                                            maxConsecutiveFailures:3
+                                                          maximumTests:5
+                                            maximumConsecutiveFailures:3
                                                  customTargetImage:nil
                                             customTargetPluralName:nil
                                                    requireReversal:NO

@@ -295,8 +295,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param maximumSpan             The maximum pattern sequence length.
  @param playSpeed               The time per sequence item; a smaller value means faster sequence
                                     play.
- @param maxTests                The maximum number of rounds to conduct.
- @param maxConsecutiveFailures  The maximum number of consecutive failures the user can make before
+ @param maximumTests                The maximum number of rounds to conduct.
+ @param maximumConsecutiveFailures  The maximum number of consecutive failures the user can make before
                                     the task is terminated.
  @param customTargetImage       The image to use for the task. By default, and if the value of this
                                     parameter is `nil`, the image is a flower. To supply a custom
@@ -315,8 +315,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                             minimumSpan:(NSInteger)minimumSpan
                                             maximumSpan:(NSInteger)maximumSpan
                                               playSpeed:(NSTimeInterval)playSpeed
-                                               maxTests:(NSInteger)maxTests
-                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                               maximumTests:(NSInteger)maximumTests
+                                 maximumConsecutiveFailures:(NSInteger)maximumConsecutiveFailures
                                       customTargetImage:(nullable UIImage *)customTargetImage
                                  customTargetPluralName:(nullable NSString *)customTargetPluralName
                                         requireReversal:(BOOL)requireReversal
