@@ -127,15 +127,15 @@
         return nil;
     }
 
+    NSNumberFormatter *formatter = ORKNumberFormatter();
     NSString *selectedLabelText = nil;
     if (_useMetricSystem) {
-        selectedLabelText = [NSString stringWithFormat:@"%@ %@", [self selectedAnswerValue].stringValue, ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
+        selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber: [self selectedAnswerValue]], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
     } else {
         NSInteger feetRow = [_pickerView selectedRowInComponent:0];
         NSInteger inchesRow = [_pickerView selectedRowInComponent:1];
         NSNumber *feet = [self feetValues][feetRow];
         NSNumber *inches = [self inchesValues][inchesRow];
-        NSNumberFormatter *formatter = ORKNumberFormatter();
         NSString *feetString = [formatter stringFromNumber:feet];
         NSString *inchesString = [formatter stringFromNumber:inches];
 

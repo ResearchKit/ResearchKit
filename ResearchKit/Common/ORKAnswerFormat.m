@@ -2393,10 +2393,19 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 
 - (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;
+    
     if (!ORKIsAnswerEmpty(answer)) {
         NSNumberFormatter *formatter = ORKNumberFormatter();
-        answerString = [formatter stringFromNumber:answer];
-        answerString = [NSString stringWithFormat:@"%@ %@", answerString, [self localizedUnitString]];
+        if (_useMetricSystem) {
+            answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
+        } else {
+            double feet, inches;
+            ORKInchesToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
+            NSString *feetString = [formatter stringFromNumber:@(feet)];
+            NSString *inchesString = [formatter stringFromNumber:@(inches)];
+            answerString = [NSString stringWithFormat:@"%@ %@, %@ %@",
+                            feetString, ORKLocalizedString(@"MEASURING_UNIT_FT", nil), inchesString, ORKLocalizedString(@"MEASURING_UNIT_IN", nil)];
+        }
     }
     return answerString;
 }
