@@ -29,12 +29,10 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
 
-#import "ORKConsentDocument.h"
-#import "ORKConsentSection.h"
 #import "ORKConsentSectionFormatter.h"
-#import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
 #import "ORKHTMLPDFWriter.h"
 

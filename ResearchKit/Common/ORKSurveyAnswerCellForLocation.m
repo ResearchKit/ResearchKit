@@ -41,7 +41,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-#import <MapKit/MapKit.h>
+@import MapKit;
 
 
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>

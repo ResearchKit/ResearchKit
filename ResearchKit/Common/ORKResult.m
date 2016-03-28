@@ -44,7 +44,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-#import <CoreMotion/CoreMotion.h>
+@import CoreMotion;
 #import <CoreLocation/CoreLocation.h>
 
 

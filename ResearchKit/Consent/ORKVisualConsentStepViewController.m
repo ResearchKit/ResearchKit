@@ -40,7 +40,7 @@
 #import "ORKVisualConsentTransitionAnimator.h"
 
 #import "ORKConsentDocument.h"
-#import "ORKConsentSection_Internal.h"
+#import "ORKConsentSection_Private.h"
 #import "ORKResult.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"

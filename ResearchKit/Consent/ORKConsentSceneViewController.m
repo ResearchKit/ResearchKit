@@ -41,7 +41,7 @@
 #import "ORKConsentLearnMoreViewController.h"
 
 #import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
+#import "ORKConsentSection_Private.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"

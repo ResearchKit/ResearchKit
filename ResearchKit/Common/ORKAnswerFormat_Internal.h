@@ -29,13 +29,12 @@
  */
 
 
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKAnswerFormat_Private.h>
+@import HealthKit;
+#import "ORKAnswerFormat_Private.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-id ORKNullAnswerValue();
 BOOL ORKIsAnswerEmpty(_Nullable id answer);
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
@@ -68,6 +67,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @class ORKQuestionResult;
 
 @interface ORKAnswerFormat ()
+
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 - (ORKAnswerFormat *)impliedAnswerFormat;
@@ -77,9 +77,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (nullable HKObjectType *)healthKitObjectType;
 
 @property (nonatomic, strong, readonly, nullable) HKUnit *healthKitUnit;
-@property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
 
-- (BOOL)isAnswerValidWithString:(nullable NSString *)text;
+@property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
 
 - (BOOL)isAnswerValid:(id)answer;
 
@@ -97,6 +96,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @interface ORKNumericAnswerFormat ()
 
 - (NSNumberFormatter *)makeNumberFormatter;
+
 - (nullable NSString *)sanitizedTextFieldText:(nullable NSString *)text decimalSeparator:(nullable NSString *)separator;
 
 @end

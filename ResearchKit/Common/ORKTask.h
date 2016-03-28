@@ -29,10 +29,10 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKTypes.h>
-#import <HealthKit/HealthKit.h>
+@import Foundation;
+#import "ORKDefines.h"
+#import "ORKTypes.h"
+@import HealthKit;
 
 
 NS_ASSUME_NONNULL_BEGIN

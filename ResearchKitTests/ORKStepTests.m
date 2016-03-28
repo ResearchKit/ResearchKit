@@ -29,9 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-
-#import "ORKReactionTimeStep.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKStepTests : XCTestCase

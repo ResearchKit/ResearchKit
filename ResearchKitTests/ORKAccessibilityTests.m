@@ -29,8 +29,7 @@
  */
 
 
-#import <XCTest/XCTest.h>
-
+@import XCTest;
 #import "ORKAccessibilityFunctions.h"
 
 

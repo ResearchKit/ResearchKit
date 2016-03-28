@@ -37,8 +37,8 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-#import <CoreMotion/CoreMotion.h>
-#import <HealthKit/HealthKit.h>
+@import CoreMotion;
+@import HealthKit;
 
 
 // #define LAYOUT_TEST 1

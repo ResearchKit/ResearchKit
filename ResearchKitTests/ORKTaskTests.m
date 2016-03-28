@@ -29,12 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-
-#import "ORKResult_Private.h"
-#import "ORKStepNavigationRule_Internal.h"
-
-#import "ORKHelpers_Internal.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKTaskTests : XCTestCase

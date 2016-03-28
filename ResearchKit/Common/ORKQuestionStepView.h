@@ -29,8 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKVerticalContainerView.h>
+@import UIKit;
+#import "ORKVerticalContainerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

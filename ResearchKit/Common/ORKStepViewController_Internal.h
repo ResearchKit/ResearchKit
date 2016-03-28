@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKStepViewController.h>
+#import "ORKStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

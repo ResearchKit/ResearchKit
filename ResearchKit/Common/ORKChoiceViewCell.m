@@ -31,6 +31,9 @@
 
 #import "ORKChoiceViewCell.h"
 
+#import "ORKSelectionTitleLabel.h"
+#import "ORKSelectionSubTitleLabel.h"
+
 #import "ORKAccessibility.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"

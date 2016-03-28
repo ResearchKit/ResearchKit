@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKActiveStep.h>
+#import "ORKActiveStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

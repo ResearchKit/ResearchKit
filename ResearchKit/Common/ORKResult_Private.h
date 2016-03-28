@@ -30,7 +30,7 @@
 
 
 #import <ResearchKit/ORKResult.h>
-#import <MapKit/MapKit.h>
+@import MapKit;
 
 
 NS_ASSUME_NONNULL_BEGIN

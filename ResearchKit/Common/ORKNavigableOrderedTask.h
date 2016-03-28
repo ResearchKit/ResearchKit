@@ -29,8 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKOrderedTask.h>
+@import Foundation;
+#import "ORKOrderedTask.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

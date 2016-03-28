@@ -29,8 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKStep.h>
+@import Foundation;
+#import "ORKStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -31,7 +31,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKSurveyAnswerCell.h"
 
 

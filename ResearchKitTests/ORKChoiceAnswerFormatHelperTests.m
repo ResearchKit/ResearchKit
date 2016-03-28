@@ -29,11 +29,10 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
 
 #import "ORKChoiceAnswerFormatHelper.h"
-
-#import "ORKAnswerFormat_internal.h"
 
 
 @interface ORKChoiceAnswerFormatHelperTests : XCTestCase

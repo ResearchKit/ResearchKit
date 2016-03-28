@@ -29,10 +29,10 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
 
 #import "ORKConsentSectionFormatter.h"
-#import "ORKConsentSection_Internal.h"
 
 
 @interface ORKConsentSectionFormatterTests : XCTestCase

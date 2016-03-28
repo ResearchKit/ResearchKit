@@ -33,7 +33,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-#import <CoreMotion/CoreMotion.h>
+@import CoreMotion;
 
 
 @implementation CMPedometerData (ORKJSONDictionary)

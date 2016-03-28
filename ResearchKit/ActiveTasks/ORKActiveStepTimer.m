@@ -33,7 +33,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 

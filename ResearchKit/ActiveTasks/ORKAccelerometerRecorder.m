@@ -38,7 +38,7 @@
 #import "ORKHelpers_Internal.h"
 #import "CMAccelerometerData+ORKJSONDictionary.h"
 
-#import <CoreMotion/CoreMotion.h>
+@import CoreMotion;
 
 
 @interface ORKAccelerometerRecorder () {

@@ -40,7 +40,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>

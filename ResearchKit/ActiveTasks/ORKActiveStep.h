@@ -29,10 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKStep.h>
+@import UIKit;
+@import HealthKit;
+#import "ORKDefines.h"
+#import "ORKStep.h"
 
 
 @class ORKRecorderConfiguration;

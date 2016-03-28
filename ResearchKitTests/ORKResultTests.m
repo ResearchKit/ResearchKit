@@ -29,10 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-
-#import "ORKConsentSignature.h"
-#import "ORKResult_Private.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKResultTests : XCTestCase

@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKTintedImageView.h>
+#import "ORKTintedImageView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

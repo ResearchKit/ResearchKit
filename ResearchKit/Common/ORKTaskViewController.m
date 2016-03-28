@@ -56,8 +56,8 @@
 #import "ORKObserver.h"
 #import "ORKSkin.h"
 
-#import <AVFoundation/AVFoundation.h>
-#import <CoreMotion/CoreMotion.h>
+@import AVFoundation;
+@import CoreMotion;
 #import <CoreLocation/CoreLocation.h>
 
 

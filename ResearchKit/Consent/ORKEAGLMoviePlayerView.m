@@ -33,11 +33,9 @@
 
 #import "ORKHelpers_Internal.h"
 
-#import <AVFoundation/AVUtilities.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import <QuartzCore/QuartzCore.h>
-#import <mach/mach_time.h>
+@import AVFoundation;
+@import OpenGLES;
+@import QuartzCore;
 
 
 // Uniform index.

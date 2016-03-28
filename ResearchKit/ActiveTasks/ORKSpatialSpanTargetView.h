@@ -29,8 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKSpatialSpanGameState.h>
+@import UIKit;
+#import "ORKSpatialSpanGameState.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

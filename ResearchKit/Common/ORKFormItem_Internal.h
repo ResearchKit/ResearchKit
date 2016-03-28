@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKFormStep.h>
+#import "ORKFormStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

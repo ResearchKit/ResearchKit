@@ -34,7 +34,7 @@
 #import "ORKConsentReviewStepViewController.h"
 
 #import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
+#import "ORKConsentSection_Private.h"
 #import "ORKConsentSignature.h"
 #import "ORKStep_Private.h"
 

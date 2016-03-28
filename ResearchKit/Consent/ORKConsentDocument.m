@@ -36,7 +36,7 @@
 #import "ORKHeadlineLabel.h"
 #import "ORKSubheadlineLabel.h"
 
-#import "ORKConsentSection_Internal.h"
+#import "ORKConsentSection_Private.h"
 #import "ORKConsentSectionFormatter.h"
 #import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"

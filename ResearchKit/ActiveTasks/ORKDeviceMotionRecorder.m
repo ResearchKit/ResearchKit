@@ -38,7 +38,7 @@
 #import "ORKHelpers_Internal.h"
 #import "CMDeviceMotion+ORKJSONDictionary.h"
 
-#import <CoreMotion/CoreMotion.h>
+@import CoreMotion;
 
 
 @interface ORKDeviceMotionRecorder () {

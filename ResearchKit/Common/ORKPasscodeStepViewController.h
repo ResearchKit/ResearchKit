@@ -29,9 +29,9 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKStepViewController.h>
+@import UIKit;
+#import "ORKDefines.h"
+#import "ORKStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

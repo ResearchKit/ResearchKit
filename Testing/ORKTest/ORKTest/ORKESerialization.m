@@ -30,8 +30,10 @@
 
 
 #import "ORKESerialization.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import <MapKit/MapKit.h>
+
+@import ResearchKit.Private;
+
+@import MapKit;
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {

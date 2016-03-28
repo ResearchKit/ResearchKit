@@ -30,10 +30,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKHelpers_Private.h>
-#import <ResearchKit/ORKTypes.h>
-#import <ResearchKit/ORKErrors.h>
+@import UIKit;
+#import "ORKHelpers_Private.h"
+#import "ORKTypes.h"
+#import "ORKErrors.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -70,25 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 
-#if !defined(ORK_INLINE)
-#  if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-#    define ORK_INLINE static inline
-#  elif defined(__cplusplus)
-#    define ORK_INLINE static inline
-#  elif defined(__GNUC__)
-#    define ORK_INLINE static __inline__
-#  else
-#    define ORK_INLINE static
-#  endif
-#endif
-
 #define ORK_NARG(...) ORK_NARG_(__VA_ARGS__,ORK_RSEQ_N())
 #define ORK_NARG_(...)  ORK_ARG_N(__VA_ARGS__)
 #define ORK_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, N, ...) N
 #define ORK_RSEQ_N()   10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-
-#define ORK_STRINGIFY2( x) #x
-#define ORK_STRINGIFY(x) ORK_STRINGIFY2(x)
 
 #define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@ORK_STRINGIFY(x)]
 #define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@ORK_STRINGIFY(x)]
@@ -173,9 +158,6 @@ UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
 id findInArrayByKey(NSArray * array, NSString *key, id value);
 
-NSString *ORKStringFromDateISO8601(NSDate *date);
-NSDate *ORKDateFromStringISO8601(NSString *string);
-
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL();
@@ -215,18 +197,6 @@ ORKEqualObjects(id o1, id o2) {
 ORK_INLINE BOOL
 ORKEqualFileURLs(NSURL *url1, NSURL *url2) {
     return ORKEqualObjects(url1, url2) || ([url1 isFileURL] && [url2 isFileURL] && [[url1 absoluteString] isEqualToString:[url2 absoluteString]]);
-}
-
-ORK_INLINE NSArray *
-ORKArrayCopyObjects(NSArray *a) {
-    if (!a) {
-        return nil;
-    }
-    NSMutableArray *b = [NSMutableArray arrayWithCapacity:a.count];
-    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [b addObject:[obj copy]];
-    }];
-    return [b copy];
 }
 
 ORK_INLINE NSMutableOrderedSet *
@@ -283,7 +253,6 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
-#define ORKDefineStringKey(x) static NSString *const x = @ORK_STRINGIFY(x)
 
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }

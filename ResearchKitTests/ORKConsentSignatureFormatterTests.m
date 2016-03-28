@@ -29,9 +29,9 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
 
-#import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
 
 

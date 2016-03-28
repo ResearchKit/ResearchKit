@@ -29,11 +29,10 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 typedef _Nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
 typedef _Nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
@@ -56,7 +55,7 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 @end
 
 
-@interface ORKESerializer(Registration)
+@interface ORKESerializer (Registration)
 
 + (void)registerSerializableClass:(Class)serializableClass
                         initBlock:(nullable ORKESerializationInitBlock)initBlock;

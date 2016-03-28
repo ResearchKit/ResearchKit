@@ -29,8 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKTask.h>
+@import UIKit;
+#import "ORKTask.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

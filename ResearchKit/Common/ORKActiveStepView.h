@@ -29,8 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKVerticalContainerView.h>
+@import Foundation;
+#import "ORKVerticalContainerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

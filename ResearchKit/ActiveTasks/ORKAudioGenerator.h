@@ -50,9 +50,9 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
-#import <ResearchKit/ORKTypes.h>
+@import UIKit;
+@import AVFoundation;
+#import "ORKTypes.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -29,7 +29,7 @@
  */
 
 
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
 
 #import "ORKEAGLMoviePlayerView.h"
 

@@ -29,9 +29,9 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import <ResearchKit/ORKTypes.h>
+@import UIKit;
+@import CoreLocation;
+#import "ORKTypes.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

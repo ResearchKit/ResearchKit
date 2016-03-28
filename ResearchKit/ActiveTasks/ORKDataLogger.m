@@ -30,7 +30,6 @@
 
 
 #import "ORKDataLogger.h"
-#import "ORKDataLogger_Private.h"
 
 #import "ORKHelpers_Internal.h"
 #import "CMMotionActivity+ORKJSONDictionary.h"

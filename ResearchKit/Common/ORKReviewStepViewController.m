@@ -34,6 +34,8 @@
 
 #import "ORKChoiceViewCell.h"
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKSelectionTitleLabel.h"
+#import "ORKSelectionSubTitleLabel.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKTableContainerView.h"
 

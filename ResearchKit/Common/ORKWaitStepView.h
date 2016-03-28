@@ -38,7 +38,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKVerticalContainerView.h"
 #import "ORKTypes.h"
 

@@ -29,7 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
 
 #import "ORKVoiceEngine_Internal.h"
 

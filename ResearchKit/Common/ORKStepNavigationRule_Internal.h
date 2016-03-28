@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKStepNavigationRule_Private.h>
+#import "ORKStepNavigationRule_Private.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

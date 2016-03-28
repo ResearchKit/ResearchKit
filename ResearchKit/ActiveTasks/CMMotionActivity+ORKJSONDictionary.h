@@ -29,7 +29,7 @@
  */
 
 
-#import <CoreMotion/CoreMotion.h>
+@import CoreMotion;
 
 
 NS_ASSUME_NONNULL_BEGIN

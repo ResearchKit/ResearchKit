@@ -47,7 +47,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-#import <MapKit/MapKit.h>
+@import MapKit;
 
 
 static const NSString *FormattedAddressLines = @"FormattedAddressLines";

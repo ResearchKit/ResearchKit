@@ -29,9 +29,9 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKQuestionStepViewController.h>
+@import Foundation;
+#import "ORKDefines.h"
+#import "ORKQuestionStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
