@@ -33,6 +33,7 @@
 #import "ORKPasscodeStepViewController_Internal.h"
 
 #import "ORKPasscodeStepView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKTextFieldView.h"
 
 #import "ORKPasscodeViewController.h"

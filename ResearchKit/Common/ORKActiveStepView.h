@@ -36,6 +36,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKActiveStep;
+@class ORKActiveStepCustomView;
 
 @interface ORKActiveStepView : ORKVerticalContainerView
 

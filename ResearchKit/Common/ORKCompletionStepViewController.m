@@ -31,7 +31,10 @@
 
 #import "ORKCompletionStepViewController.h"
 
+#import "ORKCustomStepView_Internal.h"
 #import "ORKInstructionStepView.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKVerticalContainerView_Internal.h"
 
 #import "ORKInstructionStepViewController_Internal.h"

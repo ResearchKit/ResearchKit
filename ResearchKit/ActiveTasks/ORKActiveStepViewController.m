@@ -34,6 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepTimerView.h"
 #import "ORKActiveStepView.h"
+#import "ORKNavigationContainerView.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKVerticalContainerView.h"
 #import "ORKVoiceEngine.h"

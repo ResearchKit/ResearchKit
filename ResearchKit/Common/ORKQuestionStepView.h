@@ -36,6 +36,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKQuestionStep;
+@class ORKQuestionStepCustomView;
 
 @interface ORKQuestionStepView : ORKVerticalContainerView
 

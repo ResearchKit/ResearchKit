@@ -30,13 +30,12 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKCustomStepView_Internal.h>
-#import <ResearchKit/ORKNavigationContainerView.h>
-#import <ResearchKit/ORKStepHeaderView_Internal.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKNavigationContainerView;
+@class ORKStepHeaderView;
 @class ORKTintedImageView;
 
 @interface ORKVerticalContainerView : UIScrollView

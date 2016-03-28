@@ -33,6 +33,7 @@
 
 #import "ORKChoiceViewCell.h"
 #import "ORKQuestionStepView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKSurveyAnswerCellForScale.h"
 #import "ORKSurveyAnswerCellForNumber.h"
 #import "ORKSurveyAnswerCellForText.h"

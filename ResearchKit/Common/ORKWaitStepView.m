@@ -40,6 +40,8 @@
 
 #import "ORKWaitStepView.h"
 
+#import "ORKNavigationContainerView.h"
+
 #import "ORKAccessibility.h"
 #import "ORKSkin.h"
 

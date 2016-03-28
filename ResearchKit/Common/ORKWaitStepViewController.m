@@ -40,6 +40,7 @@
 
 #import "ORKWaitStepViewController.h"
 
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKWaitStepView.h"
 
 #import "ORKStepViewController_Internal.h"

@@ -32,6 +32,7 @@
 #import "ORKSpatialSpanMemoryContentView.h"
 
 #import "ORKActiveStepQuantityView.h"
+#import "ORKNavigationContainerView.h"
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKVerticalContainerView.h"
 
