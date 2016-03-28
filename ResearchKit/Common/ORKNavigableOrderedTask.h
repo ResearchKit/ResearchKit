@@ -98,6 +98,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
 
+/**
+ Determines whether the task should report its progress as a linear ordered task or not. 
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL shouldReportProgress;
+
 @end
 
 

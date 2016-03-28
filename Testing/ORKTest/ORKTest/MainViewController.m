@@ -1564,7 +1564,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_weight4"
                                                                    text:@"Weight"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-            item.placeholder = @"Input your body weight here.";
+            item.placeholder = @"Input your body weight here";
             [items addObject:item];
         }
         

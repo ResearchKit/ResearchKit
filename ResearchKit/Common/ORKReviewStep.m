@@ -63,6 +63,11 @@
     return [ORKReviewStepViewController class];
 }
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -79,6 +84,11 @@
     ORK_ENCODE_OBJ(aCoder, resultSource);
     ORK_ENCODE_BOOL(aCoder, excludeInstructionSteps);
 }
+
+- (NSUInteger)hash {
+    return [super hash] ^ [_steps hash] ^ [_resultSource hash] ^ (_excludeInstructionSteps ? 0xf : 0x0);
+}
+
 
 - (BOOL)isEqual:(id)object {
     __typeof(self) castObject = object;
