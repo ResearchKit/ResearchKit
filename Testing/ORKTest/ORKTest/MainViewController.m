@@ -86,6 +86,8 @@ DefineStringKey(CollectionViewCellReuseIdentifier);
 DefineStringKey(EmbeddedReviewTaskIdentifier);
 DefineStringKey(StandaloneReviewTaskIdentifier);
 
+DefineStringKey(SignatureTaskIdentifier);
+
 @interface SectionHeader: UICollectionReusableView
 
 - (void)configureHeaderWithTitle:(NSString *)title;
@@ -365,6 +367,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
+                           @"Signature Task"
                            ],
                        ];
 }
@@ -565,8 +568,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeStandaloneReviewTask];
     } if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
-    }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
+    } else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
+    } else if ([identifier isEqualToString:SignatureTaskIdentifier]) {
+        return [self makeSignatureTask];
     }
 
     return nil;
@@ -3036,7 +3041,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Review step
+#pragma mark - Review task
 
 - (NSArray<ORKStep *> *)stepsForReviewTasks {
     // ORKInstructionStep
@@ -3121,6 +3126,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
     }
 }
+
+#pragma mark - Signature task
+
+- (id<ORKTask>)makeSignatureTask {
+    ORKSignatureStep *signatureStep = [[ORKSignatureStep alloc] initWithIdentifier:@"signatureStep"];
+    signatureStep.title = @"Signature step";
+    signatureStep.text = @"Please sign";
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SignatureTaskIdentifier steps:@[signatureStep]];
+    return task;
+}
+
+- (IBAction)signatureTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:SignatureTaskIdentifier];
+}
+
 
 #pragma mark - Helpers
 

@@ -42,6 +42,7 @@
 #import <ResearchKit/ORKImageCaptureStep.h>
 #import <ResearchKit/ORKReviewStep.h>
 #import <ResearchKit/ORKWaitStep.h>
+#import <ResearchKit/ORKSignatureStep.h>
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
