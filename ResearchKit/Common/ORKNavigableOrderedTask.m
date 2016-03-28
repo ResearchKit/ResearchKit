@@ -47,6 +47,7 @@
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;
+        _shouldReportProgress = NO;
     }
     return self;
 }
@@ -106,8 +107,12 @@
     return previousStep;
 }
 
-// ORKNavigableOrderedTask doesn't have a linear order
+// Assume ORKNavigableOrderedTask doesn't have a linear order unless user specifically overrides
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    if (_shouldReportProgress) {
+        return [super progressOfCurrentStep:step withResult:result];
+    }
+
     return ORKTaskProgressMake(0, 0);
 }
 
@@ -126,6 +131,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
+        ORK_DECODE_BOOL(aDecoder, shouldReportProgress);
     }
     return self;
 }
@@ -134,6 +140,7 @@
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
+    ORK_ENCODE_BOOL(aCoder, shouldReportProgress);
 }
 
 #pragma mark NSCopying
@@ -141,6 +148,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
+    task->_shouldReportProgress = _shouldReportProgress;
     return task;
 }
 
@@ -149,11 +157,12 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules);
+    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules)
+    && self->_shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash];
+    return [super hash] ^ [_stepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined

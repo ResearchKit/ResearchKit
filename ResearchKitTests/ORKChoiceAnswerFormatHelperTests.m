@@ -192,11 +192,11 @@
         
         id answer = [formatHelper answerForSelectedIndexes:@[@(0)]];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
+        XCTAssert(answer == ORKNullAnswerValue(), @"%@", answer);
         
         answer = [formatHelper answerForSelectedIndex:0];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
+        XCTAssert(answer == ORKNullAnswerValue(), @"%@", answer);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
