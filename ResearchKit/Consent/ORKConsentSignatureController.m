@@ -30,12 +30,13 @@
 
 
 #import "ORKConsentSignatureController.h"
-#import "ORKTextButton.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKVerticalContainerView_Internal.h"
-#import "ORKStepHeaderView_Internal.h"
+
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKConsentSignatureWrapperView : UIView

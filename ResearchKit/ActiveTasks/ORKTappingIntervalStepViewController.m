@@ -30,14 +30,20 @@
 
 
 #import "ORKTappingIntervalStepViewController.h"
-#import "ORKTappingContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKVerticalContainerView.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKActiveStepTimer.h"
-#import "ORKResult.h"
-#import "ORKHelpers.h"
+#import "ORKRoundTappingButton.h"
+#import "ORKTappingContentView.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKActiveStepView.h"
+#import "ORKResult.h"
+#import "ORKStep.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKTappingIntervalStepViewController () <UIGestureRecognizerDelegate>

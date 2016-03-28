@@ -30,8 +30,10 @@
 
 
 #import "ORKActiveStepView.h"
-#import "ORKTintedImageView.h"
+
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKTintedImageView.h"
+
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 

@@ -29,8 +29,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <Foundation/Foundation.h>
+#import <ResearchKit/ORKInstructionStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKCompletionStep` class is a subclass of `ORKInstructionStep` which behaves like
@@ -44,3 +47,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKCompletionStep : ORKInstructionStep
 
 @end
+
+NS_ASSUME_NONNULL_END

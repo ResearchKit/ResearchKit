@@ -31,6 +31,8 @@
 
 #import "ORKPasscodeStepView.h"
 
+#import "ORKTextFieldView.h"
+
 
 @implementation ORKPasscodeStepView {
     ORKPasscodeTextField *_textField;

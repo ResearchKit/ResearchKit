@@ -30,8 +30,10 @@
 
 
 #import "ORKSpatialSpanGameState.h"
+
 #import "ORKSpatialSpanGame.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSpatialSpanGameState {

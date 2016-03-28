@@ -30,8 +30,9 @@
 
 
 #import "ORKTextFieldView.h"
-#import "ORKSkin.h"
+
 #import "ORKAccessibility.h"
+#import "ORKSkin.h"
 
 
 static NSString *const EmptyBullet = @"\u25CB";

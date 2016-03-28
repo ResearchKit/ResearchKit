@@ -30,17 +30,10 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKSpatialSpanGameState.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, ORKSpatialSpanTargetState) {
-    ORKSpatialSpanTargetStateQuiescent,
-    ORKSpatialSpanTargetStateActive,
-    ORKSpatialSpanTargetStateCorrect,
-    ORKSpatialSpanTargetStateIncorrect
-};
 
 @class ORKSpatialSpanTargetView;
 

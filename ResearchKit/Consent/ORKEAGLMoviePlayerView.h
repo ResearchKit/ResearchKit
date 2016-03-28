@@ -32,6 +32,8 @@
 #import <UIKit/UIKit.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ORKEAGLMoviePlayerView : UIView
 
 @property (nonatomic) CGSize presentationSize;
@@ -41,3 +43,5 @@
 - (void)render;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -29,8 +29,13 @@
  */
 
 
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKVerticalContainerView.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKQuestionStep;
 
 @interface ORKQuestionStepView : ORKVerticalContainerView
 
@@ -38,3 +43,5 @@
 @property (nonatomic, strong, nullable) ORKQuestionStepCustomView *questionCustomView;
 
 @end
+
+NS_ASSUME_NONNULL_END

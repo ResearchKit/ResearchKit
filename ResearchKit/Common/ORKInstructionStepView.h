@@ -30,7 +30,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKInstructionStepViewController.h"
 #import "ORKVerticalContainerView.h"
 
 

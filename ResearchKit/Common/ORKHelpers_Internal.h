@@ -30,11 +30,13 @@
  */
 
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ResearchKit/ORKHelpers_Private.h>
 #import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKErrors.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 // Logging
 #if ( defined(ORK_LOG_LEVEL_NONE) && ORK_LOG_LEVEL_NONE )
@@ -308,3 +310,5 @@ ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
 
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+
+NS_ASSUME_NONNULL_END

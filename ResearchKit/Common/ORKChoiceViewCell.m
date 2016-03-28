@@ -30,9 +30,10 @@
 
 
 #import "ORKChoiceViewCell.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
+
 #import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat LabelRightMargin = 44.0;

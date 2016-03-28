@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@class ORKSignatureView;
+
 @interface ORKConsentSignatureController : UIViewController<ORKSignatureViewDelegate>
 
 @property (nonatomic, weak, nullable) id<ORKConsentSignatureControllerDelegate> delegate;

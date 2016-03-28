@@ -30,12 +30,18 @@
 
 
 #import <XCTest/XCTest.h>
+
+#import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
 
+
 @interface ORKConsentSignatureFormatterTests : XCTestCase
+
 @property (nonatomic, strong) ORKConsentSignatureFormatter *formatter;
 @property (nonatomic, strong) ORKConsentSignature *signature;
+
 @end
+
 
 @implementation ORKConsentSignatureFormatterTests
 

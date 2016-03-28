@@ -30,17 +30,20 @@
 
 
 #import "ORKResult.h"
-#import "ORKTask.h"
-#import "ORKResult_Private.h"
-#import "ORKRecorder.h"
-#import "ORKStep.h"
-#import "ORKHelpers.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKQuestionStep.h"
-#import "ORKFormStep.h"
+
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
+#import "ORKFormStep.h"
+#import "ORKQuestionStep.h"
+#import "ORKResult_Private.h"
+#import "ORKStep.h"
+#import "ORKTask.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
 

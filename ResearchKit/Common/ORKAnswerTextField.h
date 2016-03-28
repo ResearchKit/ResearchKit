@@ -34,6 +34,8 @@
 #import "ORKDefines.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Answer's text field.
  */
@@ -41,3 +43,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKAnswerTextField : UITextField <ORKDefaultFont>
 
 @end
+
+NS_ASSUME_NONNULL_END

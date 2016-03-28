@@ -28,8 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
 
 @end
+
+NS_ASSUME_NONNULL_END

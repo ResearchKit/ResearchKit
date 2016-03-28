@@ -30,11 +30,14 @@
 
 
 #import "ORKPasscodeViewController.h"
-#import "ORKPasscodeStepViewController.h"
+
 #import "ORKPasscodeStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStep.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKKeychainWrapper.h"
 
 
 @implementation ORKPasscodeViewController
@@ -97,7 +100,7 @@
 }
 
 + (BOOL)isPasscodeStoredInKeychain {
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
     return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;
 }
 

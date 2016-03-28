@@ -30,7 +30,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit_Private.h>
 #import "ORKSelectionTitleLabel.h"
 #import "ORKSelectionSubTitleLabel.h"
 

@@ -30,13 +30,14 @@
 
 
 #import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
+
 #import "ORKAnswerFormat_Internal.h"
 
 
 @interface ORKAnswerFormatTests : XCTestCase
 
 @end
+
 
 @implementation ORKAnswerFormatTests
 

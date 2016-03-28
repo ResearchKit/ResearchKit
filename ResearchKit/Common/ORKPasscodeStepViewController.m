@@ -31,11 +31,19 @@
 
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStepView.h"
+#import "ORKTextFieldView.h"
+
+#import "ORKPasscodeViewController.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStep.h"
+#import "ORKResult.h"
+
 #import "ORKKeychainWrapper.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 

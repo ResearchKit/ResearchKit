@@ -30,12 +30,15 @@
 
 
 #import "ORKSurveyAnswerCellForText.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>

@@ -30,12 +30,11 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKFormStep.h>
-#import "ORKSkin.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKFormItem;
 @class ORKFormItemCell;
 
 @protocol ORKFormItemCellDelegate <NSObject>

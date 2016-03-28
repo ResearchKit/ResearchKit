@@ -30,11 +30,15 @@
 
 
 #import "ORKImageCaptureView.h"
+
 #import "ORKImageCaptureCameraPreviewView.h"
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
 #import "ORKStepHeaderView_Internal.h"
+
+#import "ORKImageCaptureStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKImageCaptureView {

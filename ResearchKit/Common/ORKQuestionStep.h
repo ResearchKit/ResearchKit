@@ -29,12 +29,14 @@
  */
 
 
+#import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKAnswerFormat.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKAnswerFormat;
 
 /**
  The `ORKQuestionStep` class is a concrete subclass of `ORKStep` that represents

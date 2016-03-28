@@ -29,9 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+
 #import "ORKChoiceAnswerFormatHelper.h"
+
 #import "ORKAnswerFormat_internal.h"
 
 

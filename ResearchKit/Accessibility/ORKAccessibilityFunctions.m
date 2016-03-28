@@ -30,10 +30,13 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKAccessibilityFunctions.h"
-#import "ORKAnswerFormat_Internal.h"
+
 #import "ORKScaleSlider.h"
 #import "ORKScaleSliderView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+
+#import "ORKAccessibilityFunctions.h"
 #import "UIView+ORKAccessibility.h"
 
 

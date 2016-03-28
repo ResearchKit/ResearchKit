@@ -33,11 +33,13 @@
 
 #import "ORKPieChartView.h"
 #import "ORKPieChartView_Internal.h"
-#import "ORKPieChartPieView.h"
+
 #import "ORKPieChartLegendView.h"
+#import "ORKPieChartPieView.h"
 #import "ORKPieChartTitleTextView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;

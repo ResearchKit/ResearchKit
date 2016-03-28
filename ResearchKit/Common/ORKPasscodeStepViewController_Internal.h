@@ -29,10 +29,12 @@
  */
 
 
-#import "ORKPasscodeStepViewController.h"
+#import <ResearchKit/ORKPasscodeStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol ORKPasscodeDelegate;
 
 static NSString *const KeychainDictionaryPasscodeKey = @"passcode";
 static NSString *const KeychainDictionaryTouchIdKey = @"touchIdEnabled";

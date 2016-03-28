@@ -34,6 +34,8 @@
 #import <UIKit/UIKit.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class ORKPieChartView;
 
 @interface ORKPieChartPieView : UIView
@@ -55,3 +57,5 @@
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
 @end
+
+NS_ASSUME_NONNULL_END

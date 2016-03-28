@@ -29,9 +29,8 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
 #import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ORKAnswerFormat_Private.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -65,6 +64,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
+
+@class ORKQuestionResult;
 
 @interface ORKAnswerFormat ()
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

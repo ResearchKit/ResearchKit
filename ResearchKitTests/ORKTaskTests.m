@@ -30,11 +30,11 @@
 
 
 #import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKHelpers.h"
+
 #import "ORKResult_Private.h"
-#import "ORKStepNavigationRule_Private.h"
 #import "ORKStepNavigationRule_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKTaskTests : XCTestCase

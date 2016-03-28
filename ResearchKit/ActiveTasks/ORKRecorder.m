@@ -32,9 +32,11 @@
 
 #import "ORKRecorder.h"
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
-#import "ORKHelpers.h"
+
 #import "ORKDataLogger.h"
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKRecorderConfiguration

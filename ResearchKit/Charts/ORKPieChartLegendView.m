@@ -32,10 +32,12 @@
 
 
 #import "ORKPieChartLegendView.h"
-#import "ORKPieChartView_Internal.h"
-#import "ORKPieChartLegendCell.h"
+
 #import "ORKCenteredCollectionViewLayout.h"
-#import "ORKHelpers.h"
+#import "ORKPieChartLegendCell.h"
+#import "ORKPieChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKPieChartLegendView {
@@ -49,10 +51,12 @@
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentPieChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
     ORKCenteredCollectionViewLayout *centeredCollectionViewLayout = [[ORKCenteredCollectionViewLayout alloc] init];

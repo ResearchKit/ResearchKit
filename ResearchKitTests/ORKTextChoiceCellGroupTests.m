@@ -30,9 +30,11 @@
  */
 
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+
+#import "ORKChoiceViewCell.h"
 #import "ORKTextChoiceCellGroup.h"
+
 #import "ORKAnswerFormat_Internal.h"
 
 

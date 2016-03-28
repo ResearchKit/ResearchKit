@@ -30,11 +30,12 @@
 
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKChoiceViewCell.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKChoiceViewCell;
+@class ORKTextChoiceAnswerFormat;
 
 @interface ORKTextChoiceCellGroup : NSObject
 

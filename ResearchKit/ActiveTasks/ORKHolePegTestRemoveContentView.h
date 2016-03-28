@@ -29,7 +29,9 @@
  */
 
 
+#import <UIKit/UIKit.h>
 #import "ORKCustomStepView_Internal.h"
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

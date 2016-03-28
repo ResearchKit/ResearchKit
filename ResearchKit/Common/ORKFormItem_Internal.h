@@ -30,10 +30,11 @@
 
 
 #import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKAnswerFormat.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKAnswerFormat;
 
 @interface ORKFormItem ()
 

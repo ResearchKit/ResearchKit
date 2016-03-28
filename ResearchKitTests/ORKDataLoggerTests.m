@@ -30,9 +30,10 @@
 
 
 #import <XCTest/XCTest.h>
-#import "ORKDataLogger.h"
+
 #import "ORKDataLogger_Private.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKDataLoggerTests : XCTestCase <ORKDataLoggerDelegate> {

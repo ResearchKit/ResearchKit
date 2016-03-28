@@ -30,13 +30,18 @@
 
 
 #import <XCTest/XCTest.h>
+
 #import "ORKConsentSectionFormatter.h"
 #import "ORKConsentSection_Internal.h"
 
+
 @interface ORKConsentSectionFormatterTests : XCTestCase
+
 @property (nonatomic, strong) ORKConsentSectionFormatter *formatter;
 @property (nonatomic, strong) ORKConsentSection *section;
+
 @end
+
 
 @implementation ORKConsentSectionFormatterTests
 

@@ -29,9 +29,9 @@
  */
 
 
+#import <HealthKit/HealthKit.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKAnswerFormat.h>
-#import <HealthKit/HealthKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -30,9 +30,9 @@
 
 
 #import <XCTest/XCTest.h>
-#import <HealthKit/HealthKit.h>
+
+#import "ORKHelpers_Internal.h"
 #import "HKSample+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
 
 
 @interface ORKHKSampleTests : XCTestCase

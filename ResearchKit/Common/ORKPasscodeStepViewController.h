@@ -29,8 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  An `ORKPasscodeStepViewController` object is the view controller for an `ORKPasscodeStep` object.
@@ -42,3 +46,5 @@
 @interface ORKPasscodeStepViewController : ORKStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

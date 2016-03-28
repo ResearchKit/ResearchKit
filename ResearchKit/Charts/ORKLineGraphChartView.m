@@ -33,8 +33,10 @@
  
 #import "ORKLineGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
-#import "ORKHelpers.h"
+
 #import "ORKRangedPoint.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 const CGFloat FillColorAlpha = 0.4;

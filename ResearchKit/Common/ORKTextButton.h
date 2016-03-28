@@ -34,6 +34,8 @@
 #import "ORKDefines.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  "Skip" button or "Learn More" button.
  */
@@ -48,3 +50,5 @@ ORK_CLASS_AVAILABLE
 - (void)init_ORKTextButton;
 
 @end
+
+NS_ASSUME_NONNULL_END

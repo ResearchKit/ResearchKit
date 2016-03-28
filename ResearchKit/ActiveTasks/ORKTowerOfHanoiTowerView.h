@@ -31,6 +31,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class ORKTowerOfHanoiTowerView;
 
 @protocol ORKTowerOfHanoiTowerViewDataSource <NSObject>
@@ -62,3 +65,5 @@
 - (void)reloadData;
 
 @end
+
+NS_ASSUME_NONNULL_END

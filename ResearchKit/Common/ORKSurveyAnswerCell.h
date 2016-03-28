@@ -30,12 +30,12 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKQuestionStep.h>
 #import "ORKTableViewCell.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKQuestionStep;
 @class ORKSurveyAnswerCell;
 
 @protocol ORKSurveyAnswerCellDelegate

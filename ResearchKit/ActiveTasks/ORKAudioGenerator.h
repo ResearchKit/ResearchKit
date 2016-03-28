@@ -49,8 +49,11 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
-#import <ResearchKit/ORKRecorder.h>
+
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <ResearchKit/ORKTypes.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 

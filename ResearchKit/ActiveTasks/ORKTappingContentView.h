@@ -29,11 +29,13 @@
  */
 
 
+#import <UIKit/UIKit.h>
 #import "ORKCustomStepView_Internal.h"
-#import "ORKRoundTappingButton.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKRoundTappingButton;
 
 @interface ORKTappingContentView : ORKActiveStepCustomView
 

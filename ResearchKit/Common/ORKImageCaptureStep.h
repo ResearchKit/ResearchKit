@@ -29,8 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKImageCaptureStep` class represents a step that captures an image through the device
@@ -66,7 +70,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
 /**
- An accessibility hint of the capture preview.
+ The accessibility hint for the capture preview.
  
  This property can be used to specify accessible instructions for capturing the image.  The
  use of this property can assist when the `templateImage` may not be visible
@@ -81,8 +85,10 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy) NSString *accessibilityInstructions;
 
 /**
- An accessibility hint of the capture button.
+ The accessibility hint for the capture button.
  */
 @property (nonatomic, copy) NSString *accessibilityHint;
 
 @end
+
+NS_ASSUME_NONNULL_END

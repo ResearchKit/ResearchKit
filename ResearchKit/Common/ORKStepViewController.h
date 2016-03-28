@@ -31,18 +31,18 @@
 
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKIt/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKStep;
-@class ORKResult;
 @class ORKEditableResult;
+@class ORKRecorder;
+@class ORKResult;
+@class ORKReviewStep;
+@class ORKStep;
+@class ORKStepResult;
 @class ORKStepViewController;
 @class ORKTaskViewController;
-@class ORKStepResult;
 
 /**
  An enumeration of values used in `ORKStepViewControllerDelegate` to indicate the direction of navigation

@@ -29,10 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <ResearchKit/ORKCustomStepView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKActiveStepViewController;
 
 @interface ORKActiveStepCustomView : UIView
 

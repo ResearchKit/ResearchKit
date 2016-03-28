@@ -38,10 +38,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
 
-@class ORKStepViewController;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKWaitStepViewController` class represents the step view controller that corresponds to an `ORKWaitStep`.
@@ -69,3 +71,5 @@ ORK_CLASS_AVAILABLE
 - (void)updateText:(NSString *)text;
 
 @end
+
+NS_ASSUME_NONNULL_END

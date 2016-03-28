@@ -29,6 +29,8 @@
  */
 
 
+#import <Foundation/Foundation.h>
+#import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStep.h>
 
 

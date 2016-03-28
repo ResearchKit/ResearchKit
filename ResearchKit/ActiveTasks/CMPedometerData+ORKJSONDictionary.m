@@ -30,7 +30,9 @@
 
 
 #import "CMPedometerData+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import <CoreMotion/CoreMotion.h>
 
 

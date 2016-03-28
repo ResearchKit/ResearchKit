@@ -30,13 +30,18 @@
 
 
 #import "ORKTowerOfHanoiStepViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
+
 #import "ORKTowerOfHanoiTowerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+
 #import "ORKActiveStepView.h"
-#import "ORKTowerOfHanoiTower.h"
+#import "ORKResult.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKTowerOfHanoiTower.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
 
 
 static const NSUInteger NumberOfTowers = 3;

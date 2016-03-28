@@ -30,10 +30,13 @@
 
 
 #import "ORKImageSelectionView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
+
 #import "ORKImageChoiceLabel.h"
+
 #import "ORKChoiceAnswerFormatHelper.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKChoiceButtonView : UIView

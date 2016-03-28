@@ -30,8 +30,8 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKDefaultFont.h"
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKDefaultFont.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

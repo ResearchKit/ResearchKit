@@ -30,10 +30,12 @@
 
 
 #import "ORKActiveStepQuantityView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import "ORKTintedImageView.h"
+
 #import "ORKSubheadlineLabel.h"
+#import "ORKTintedImageView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKQuantityLabel

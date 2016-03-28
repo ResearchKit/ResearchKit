@@ -30,7 +30,7 @@
 
 
 #import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
+
 #import "ORKReactionTimeStep.h"
 
 

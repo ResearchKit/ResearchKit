@@ -29,8 +29,10 @@
  */
 
 
+#import <UIKit/UIKit.h>
 #import "ORKStepViewController.h"
 #import "ORKDefines.h"
+#import "ORKTypes.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKDataLogger.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

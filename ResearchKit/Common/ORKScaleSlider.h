@@ -32,6 +32,8 @@
 #import <UIKit/UIKit.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ORKScaleSlider : UISlider
 
 @property (nonatomic, assign) BOOL showThumb;
@@ -43,3 +45,5 @@
 @property (nonatomic, copy, nullable) NSArray *textChoices;
 
 @end
+
+NS_ASSUME_NONNULL_END

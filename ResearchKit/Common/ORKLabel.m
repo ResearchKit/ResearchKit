@@ -30,7 +30,8 @@
 
 
 #import "ORKLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKLabel

@@ -33,11 +33,13 @@
 
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
-#import "ORKSkin.h"
-#import "ORKXAxisView.h"
-#import "ORKYAxisView.h"
+
 #import "ORKRangedPoint.h"
+#import "ORKYAxisView.h"
+#import "ORKXAxisView.h"
+
 #import "ORKAccessibility.h"
+#import "ORKSkin.h"
 
 
 const CGFloat ORKGraphChartViewLeftPadding = 10.0;

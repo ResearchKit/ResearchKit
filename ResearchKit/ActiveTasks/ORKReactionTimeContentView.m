@@ -30,8 +30,9 @@
 
 
 #import "ORKReactionTimeContentView.h"
-#import "ORKReactionTimeStimulusView.h"
+
 #import "ORKNavigationContainerView.h"
+#import "ORKReactionTimeStimulusView.h"
 
 
 @implementation ORKReactionTimeContentView {

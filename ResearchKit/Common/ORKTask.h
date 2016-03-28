@@ -31,13 +31,14 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKTypes.h>
 #import <HealthKit/HealthKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class HKSampleType;
+@class ORKStep;
+@class ORKTaskResult;
 
 /**
 

@@ -29,11 +29,10 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <ResearchKit/ORKOrderedTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 @class ORKCompletionStep, ORKStep;
 

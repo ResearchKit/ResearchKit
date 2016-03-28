@@ -30,7 +30,9 @@
 
 
 #import "ORKConsentSectionFormatter.h"
+
 #import "ORKConsentSection_Internal.h"
+
 
 @implementation ORKConsentSectionFormatter
 

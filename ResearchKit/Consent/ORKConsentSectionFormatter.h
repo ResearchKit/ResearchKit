@@ -29,10 +29,18 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <Foundation/Foundation.h>
+#import <ResearchKit/ORKDefines.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKConsentSection;
 
 @interface ORKConsentSectionFormatter : NSObject
 
 - (NSString *)HTMLForSection:(ORKConsentSection *)section;
 
 @end
+
+NS_ASSUME_NONNULL_END

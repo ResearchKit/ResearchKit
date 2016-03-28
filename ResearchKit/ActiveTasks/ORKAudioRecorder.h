@@ -29,8 +29,9 @@
  */
 
 
-#import <ResearchKit/ORKRecorder.h>
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

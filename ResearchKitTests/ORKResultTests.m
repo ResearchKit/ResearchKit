@@ -30,7 +30,8 @@
 
 
 #import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
+
+#import "ORKConsentSignature.h"
 #import "ORKResult_Private.h"
 
 

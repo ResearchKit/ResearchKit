@@ -39,8 +39,10 @@
 
 
 #import "ORKWaitStepView.h"
+
 #import "ORKAccessibility.h"
 #import "ORKSkin.h"
+
 
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;

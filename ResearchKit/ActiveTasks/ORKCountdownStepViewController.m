@@ -30,17 +30,21 @@
 
 
 #import "ORKCountdownStepViewController.h"
-#import "ORKCustomStepView_Internal.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKVerticalContainerView.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKActiveStepTimer.h"
-#import "ORKResult.h"
-#import "ORKLabel.h"
-#import "ORKSubheadlineLabel.h"
-#import "ORKHelpers.h"
-#import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
+#import "ORKCustomStepView_Internal.h"
+#import "ORKLabel.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKActiveStep.h"
+#import "ORKResult.h"
+
+#import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKCountDownViewLabel : ORKLabel

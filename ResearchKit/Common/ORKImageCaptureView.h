@@ -31,7 +31,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "ORKImageCaptureStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class ORKImageCaptureStep;
 
 @interface ORKImageCaptureView : UIView
 
