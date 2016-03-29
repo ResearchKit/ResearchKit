@@ -2056,16 +2056,15 @@ static NSString * const RegionIdentifierKey = @"region.identifier";
     self = [super initWithIdentifier:stepIdentifier];
     if (self) {
         [self setResultsCopyObjects:results];
-        [self checkEnabledAssistiveTechnology];
+        [self updateEnabledAssistiveTechnology];
     }
     return self;
 }
 
-- (void)checkEnabledAssistiveTechnology {
+- (void)updateEnabledAssistiveTechnology {
     if (UIAccessibilityIsVoiceOverRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
-    }
-    else if (UIAccessibilityIsSwitchControlRunning()) {
+    } else if (UIAccessibilityIsSwitchControlRunning()) {
         _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
     }
 }
