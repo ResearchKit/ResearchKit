@@ -107,12 +107,6 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     if (self) {
         // Characteristic types are immutable, so this should be equivalent to -copy
         _characteristicType = characteristicType;
-        
-        _calendar = [NSCalendar currentCalendar];
-        NSDate *now = [NSDate date];
-        _defaultDate = [_calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:now options:0];
-        _minimumDate = [_calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:now options:0];
-        _maximumDate = [_calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:now options:0];
     }
     return self;
 }
@@ -164,42 +158,20 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             impliedAnswerFormat = format;
             
         } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
-            ORKDateAnswerFormat *format = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:_defaultDate
-                                                                           minimumDate:_minimumDate
-                                                                           maximumDate:_maximumDate
-                                                                              calendar:_calendar];
+            NSCalendar *calendar = _calendar ? : [NSCalendar currentCalendar];
+            NSDate *now = [NSDate date];
+            NSDate *defaultDate = _defaultDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:now options:0];
+            NSDate *minimumDate = _minimumDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:now options:0];
+            NSDate *maximumDate = _maximumDate ? : [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:now options:0];
+
+            ORKDateAnswerFormat *format = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
+                                                                                   minimumDate:minimumDate
+                                                                                   maximumDate:maximumDate
+                                                                                      calendar:calendar];
             impliedAnswerFormat = format;
         }
     }
     return impliedAnswerFormat;
-}
-
-- (void)setDefaultDate:(NSDate *)defaultDate {
-    if (!defaultDate) {
-        defaultDate = [_calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:[NSDate date] options:0];
-    }
-    _defaultDate = defaultDate;
-}
-
-- (void)setMinimumDate:(NSDate *)minimumDate {
-    if (!minimumDate) {
-        minimumDate = [_calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:[NSDate date] options:0];
-    }
-    _minimumDate = minimumDate;
-}
-
-- (void)setMaximumDate:(NSDate *)maximumDate {
-    if (!maximumDate) {
-        maximumDate = [_calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:[NSDate date] options:0];
-    }
-    _maximumDate = maximumDate;
-}
-
-- (void)setCalendar:(NSCalendar *)calendar {
-    if (!calendar) {
-        calendar = [NSCalendar currentCalendar];
-    }
-    _calendar = calendar;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

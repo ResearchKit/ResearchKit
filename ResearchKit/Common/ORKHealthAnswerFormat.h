@@ -78,39 +78,38 @@ ORK_CLASS_AVAILABLE
 /**
  The default date shown by the date picker.
  
- Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type.  The date is
- displayed in the user's time zone. The default value for this property is the date representing 35
- years before the current date. Setting this property to `nil` resets it to its default value.
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. The date is
+ displayed in the user's time zone. If you set this property to `nil`, the date picker will default
+ to the date representing 35 years before the current date.
  */
-@property (nonatomic, strong, null_resettable) NSDate *defaultDate;
+@property (nonatomic, strong, nullable) NSDate *defaultDate;
 
 /**
  The minimum date that is allowed by the date picker.
  
- Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. The default
- value for this property is the date representing 150 years before the curent date. Setting this
- property to `nil` resets it to its default value.
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the date representing 150 years before the curent date
+ as its minimum date.
  */
-@property (nonatomic, strong, null_resettable) NSDate *minimumDate;
+@property (nonatomic, strong, nullable) NSDate *minimumDate;
 
 /**
  The maximum date that is allowed by the date picker.
  
- Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. The default
- value for this property is the date representing 1 day after curent date. Setting this
- property to `nil` resets it to its default value.
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the date representing 1 day after curent date as its
+ maximum date
  */
 
-@property (nonatomic, strong, null_resettable) NSDate *maximumDate;
+@property (nonatomic, strong, nullable) NSDate *maximumDate;
 
 /**
  The calendar used by the date picker.
  
- Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. The default
- value for this property is the  default calendar for the current locale. Setting this property to
- `nil` resets it to its default value.
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the default calendar for the current locale.
  */
-@property (nonatomic, strong, null_resettable) NSCalendar *calendar;
+@property (nonatomic, strong, nullable) NSCalendar *calendar;
 
 @end
 
