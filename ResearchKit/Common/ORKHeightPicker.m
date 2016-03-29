@@ -42,7 +42,7 @@
 
 @implementation ORKHeightPicker {
     UIPickerView *_pickerView;
-    BOOL _useMetricSystem;
+    ORKHeightAnswerFormat *_answerFormat;
     id _answer;
     __weak id<ORKPickerDelegate> _pickerDelegate;
 }
@@ -60,7 +60,7 @@
                                                      name:NSCurrentLocaleDidChangeNotification object:nil];
 
         self.answer = answer;
-        _useMetricSystem = answerFormat.useMetricSystem;
+        _answerFormat = answerFormat;
         _pickerDelegate = delegate;
     }
     return self;
@@ -83,13 +83,24 @@
         answer = [self defaultAnswerValue];
     }
     
-    if (_useMetricSystem) {
-        [_pickerView selectRow:[[self centimeterValues] indexOfObject:answer] inComponent:0 animated:NO];
+    if (_answerFormat.useMetricSystem) {
+        NSUInteger index = [[self centimeterValues] indexOfObject:answer];
+        if (index == NSNotFound) {
+            [self setAnswer:[self defaultAnswerValue]];
+            return;
+        }
+        [_pickerView selectRow:index inComponent:0 animated:NO];
     } else {
         double feet, inches;
         ORKInchesToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
-        [_pickerView selectRow:[[self feetValues] indexOfObject:@((NSInteger)feet)] inComponent:0 animated:NO];
-        [_pickerView selectRow:[[self inchesValues] indexOfObject:@((NSInteger)inches)] inComponent:1 animated:NO];
+        NSUInteger feetIndex = [[self feetValues] indexOfObject:@((NSInteger)feet)];
+        NSUInteger inchesIndex = [[self inchesValues] indexOfObject:@((NSInteger)inches)];
+        if (feetIndex == NSNotFound || inchesIndex == NSNotFound) {
+            [self setAnswer:[self defaultAnswerValue]];
+            return;
+        }
+        [_pickerView selectRow:feetIndex inComponent:0 animated:NO];
+        [_pickerView selectRow:inchesIndex inComponent:1 animated:NO];
     }
 }
 
@@ -99,7 +110,7 @@
 
 - (NSNumber *)defaultAnswerValue {
     NSNumber *defaultAnswerValue = nil;
-    if (_useMetricSystem) {
+    if (_answerFormat.useMetricSystem) {
         defaultAnswerValue = @(162);
     } else {
         defaultAnswerValue = @(64); // 5ft 4in
@@ -109,7 +120,7 @@
 
 - (NSNumber *)selectedAnswerValue {
     NSNumber *answer = nil;
-    if (_useMetricSystem) {
+    if (_answerFormat.useMetricSystem) {
         NSInteger row = [_pickerView selectedRowInComponent:0];
         answer = [self centimeterValues][row];
     } else {
@@ -129,7 +140,7 @@
 
     NSNumberFormatter *formatter = ORKNumberFormatter();
     NSString *selectedLabelText = nil;
-    if (_useMetricSystem) {
+    if (_answerFormat.useMetricSystem) {
         selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber: [self selectedAnswerValue]], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
     } else {
         NSInteger feetRow = [_pickerView selectedRowInComponent:0];
@@ -175,12 +186,12 @@
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return _useMetricSystem ? 1 : 2;
+    return _answerFormat.useMetricSystem ? 1 : 2;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     NSInteger numberOfRows = 0;
-    if (_useMetricSystem) {
+    if (_answerFormat.useMetricSystem) {
         numberOfRows = [self centimeterValues].count;
     } else {
         if (component == 0) {
@@ -194,7 +205,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *title = nil;
-    if (_useMetricSystem) {
+    if (_answerFormat.useMetricSystem) {
         title = [NSString stringWithFormat:@"%@ %@", [self centimeterValues][row], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
     } else {
         if (component == 0) {
@@ -251,7 +262,7 @@
 
 - (void)currentLocaleDidChange:(NSNotification *)notification {
     [_pickerView reloadAllComponents];
-    [self valueDidChange:nil];
+    [self setAnswer:[self defaultAnswerValue]];
 }
 
 - (void)dealloc {

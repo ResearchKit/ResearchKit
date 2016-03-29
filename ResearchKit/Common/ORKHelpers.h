@@ -304,3 +304,7 @@ ORK_INLINE void ORKInchesToFeetAndInches(double feet, double *outFeet, double *o
     *outFeet = floor(feet / 12);
     *outInches = fmod(feet, 12);
 }
+
+ORK_INLINE double ORKInchesToCentimeters(double inches) {
+    return inches * 2.54;
+}

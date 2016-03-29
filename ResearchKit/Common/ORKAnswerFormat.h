@@ -264,7 +264,7 @@ ORK_CLASS_AVAILABLE
                                                                         step:(NSInteger)step;
 
 + (ORKHeightAnswerFormat *)heightAnswerFormat;
-+ (ORKHeightAnswerFormat *)heightAnswerFormatWithMetricSystem:(BOOL)useMetricSystem;
++ (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1342,14 +1342,14 @@ ORK_CLASS_AVAILABLE
  The `ORKHeightAnswerFormat` class represents the answer format for questions that require users
  to enter a height.
  
- A date answer format produces an `ORKNumericQuestionResult` object. The result unit will either be
- `cm` or `in` depending on the measuring system chosen when building the answer format.
+ A date answer format produces an `ORKNumericQuestionResult` object. The result is always reported
+ in the metric system using the `cm` unit.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKHeightAnswerFormat : ORKAnswerFormat
 
 /**
- Returns an initialized height answer format using the measuring system specified in the current
+ Returns an initialized height answer format using the measurement system specified in the current
  locale.
  
  @return An initialized height answer format.
@@ -1357,23 +1357,21 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init;
 
 /**
- Returns an initialized height answer format using the specified meauring system.
+ Returns an initialized height answer format using the specified measurement system.
  
  This method is the designated initializer.
  
- @param useMetricSystem     The measuring system to use. Set it to `YES` to use the metric system,
- set it to `NO` to use the imperial system.
+ @param measurementSystem   The measurement system to use. See `ORKMeasurementSystem` for the
+                                accepted values.
  
  @return An initialized height answer format.
  */
-- (instancetype)initWithMetricSystem:(BOOL)useMetricSystem NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)easurementSystem NS_DESIGNATED_INITIALIZER;
 
 /**
- Indicates the measuring system used by the answer format.
- 
- A value of `NO` indicates that the imperial system is used.
+ Indicates the measurement system used by the answer format.
  */
-@property (readonly) BOOL useMetricSystem;
+@property (readonly) ORKMeasurementSystem measurementSystem;
 
 @end
 

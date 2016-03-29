@@ -1690,14 +1690,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_001" text:@"Height"
-                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMetricSystem:YES]];
-            item.placeholder = @"Pick a height (metric system)";
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormat]];
+            item.placeholder = @"Pick a height (local system)";
             [items addObject:item];
         }
 
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_002" text:@"Height"
-                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMetricSystem:NO]];
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric]];
+            item.placeholder = @"Pick a height (metric system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_003" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC]];
             item.placeholder = @"Pick a height (imperial system)";
             [items addObject:item];
         }
