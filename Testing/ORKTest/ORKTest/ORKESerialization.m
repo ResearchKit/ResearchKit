@@ -1230,6 +1230,7 @@ ret =
    ENTRY(ORKStepResult,
          nil,
          (@{
+            PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];

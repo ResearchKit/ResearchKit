@@ -373,7 +373,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKToneAudiometrySample : NSObject <NSCopying, NSSecureCoding>
 
 /**
- 
  The frequency value in hertz for the tone associated with the sample.
  */
 @property (nonatomic, assign) double frequency;
@@ -1246,6 +1245,23 @@ ORK_CLASS_AVAILABLE
  @return An initialized step result.
  */
 - (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray<ORKResult *> *)results;
+
+/**
+ This property indicates whether the Voice Over or Switch Control assistive technologies were active
+ while performing the corresponding step.
+ 
+ This information can be used, for example, to take into consideration the extra time needed by
+ handicapped participants to complete some tasks, such as the Tower of Hanoi activity.
+ 
+ The property can have the following values:
+ - `UIAccessibilityNotificationVoiceOverIdentifier` if Voice Over was active
+ - `UIAccessibilityNotificationSwitchControlIdentifier` if Switch Control was active
+ 
+ Note that the Voice Over and Switch Control assistive technologies are mutually exclusive.
+ 
+ If the property is `nil`, none of these assistive technologies was used.
+ */
+@property (nonatomic, copy, readonly, nullable) NSString *enabledAssistiveTechnology;
 
 @end
 
