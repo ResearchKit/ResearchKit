@@ -35,6 +35,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ The `ORKSignatureStep` class is a concrete subclass of `ORKStep` that represents
+ a step in which a user is asked to provide a signature.
+ 
+ To use a signature step, instantiate an `ORKSignatureStep` object and include it in a task. Next, 
+ create a task view controller for the task and present it.
+ 
+ When a task view controller presents an `ORKSignatureStep` object, it instantiates an
+ `ORKSignatureStepViewController` to present the step. 
+ 
+ The step view controller saves the resulting signature in an `ORKConsentSignatureResult` and 
+ attaches this object as a child result of an `ORKStepResult`.
+ */
 @interface ORKSignatureStep : ORKStep
 
 @end
