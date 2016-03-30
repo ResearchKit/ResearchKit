@@ -246,6 +246,38 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                                    restDuration:(NSTimeInterval)restDuration
                                         options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that consists of a short walk back and forth.
+ 
+ In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+ Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+ of the participant's gait.
+ 
+ The presentation of the back and forth walk task differs from the short walk in that the participant
+ is asked to walk back and forth rather than walking in a straight line for a certain number of steps.
+ 
+ The participant is then asked to turn in a full circle and then stand still.
+ 
+ The data collected by this task can include accelerometer, device motion, and pedometer data.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param walkDuration            The duration of the walking period.
+ @param restDuration            The duration of the rest period. When the value of this parameter is
+ nonzero, the user is asked to stand still for the specified rest
+ period after the turn sequence has been completed, and baseline
+ data is collected.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active short walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
+                                intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                          walkDuration:(NSTimeInterval)walkDuration
+                                          restDuration:(NSTimeInterval)restDuration
+                                               options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that enables an audio recording.

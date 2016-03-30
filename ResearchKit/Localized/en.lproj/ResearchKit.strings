@@ -225,6 +225,11 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH" = "\u2022 Please wear a comfortable pair of walking shoes and find a flat, smooth surface for walking.\n\n\u2022 Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\n\u2022 Importantly, walk at your normal pace. You do not need to walk faster than usual.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth for %@.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn around 360 degrees, then stand still, with your feet about shoulder-width apart. Rest your arms at your side and try to avoid moving for %@.";
+
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tapping Speed";
