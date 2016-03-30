@@ -226,6 +226,12 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Walk up to %ld steps in a straight line.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your phone in a pocket or bag and follow the audio instructions.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tapping Speed";
