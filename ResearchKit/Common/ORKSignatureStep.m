@@ -35,6 +35,10 @@
 
 @implementation ORKSignatureStep
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 + (Class)stepViewControllerClass {
     return [ORKSignatureStepViewController class];
 }

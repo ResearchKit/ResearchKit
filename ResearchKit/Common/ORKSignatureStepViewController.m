@@ -35,6 +35,8 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStep_Private.h"
+#import "ORKResult.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKSignatureStepViewController () <ORKSignatureViewDelegate>
@@ -44,9 +46,24 @@
 @end
 
 @implementation ORKSignatureStepViewController {
+    ORKConsentSignature* signature;
 }
 
-//TODO: add init
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
+    self = [super initWithStep:step];
+    if (step && [self signatureStep]) {
+        signature = [[ORKConsentSignature alloc] init];
+        signature.requiresName = NO;
+        if (result && [result isKindOfClass:[ORKStepResult class]]) {
+            ORKStepResult* stepResult = (ORKStepResult *)result;
+            if (stepResult.results && stepResult.results.count > 0 && [stepResult.results.firstObject isKindOfClass: [ORKConsentSignatureResult class]]) {
+                ORKConsentSignatureResult* consentSignatureResult = (ORKConsentSignatureResult *)stepResult.results.firstObject;
+                signature = [consentSignatureResult.signature copy];
+            }
+        }
+    }
+    return self;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -77,7 +94,10 @@
     if ([self signatureStep]) {
         _signingView = [[ORKConsentSigningView alloc] initWithFrame:self.view.bounds];
         _signingView.wrapperView.signatureView.delegate = self;
-        _signingView.continueSkipContainer.continueEnabled = NO;
+        if (signature.signatureImage) {
+            _signingView.wrapperView.signatureView.existingSignatureImage = signature.signatureImage;
+        }
+        _signingView.continueSkipContainer.continueEnabled = _signingView.wrapperView.signatureView.signatureExists;
         _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [_signingView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_signingView];
@@ -108,7 +128,29 @@
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
     _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
+    signature.signatureImage = signatureView.signatureExists ? _signingView.wrapperView.signatureView.signatureImage : nil;
+    signature.signatureDate = signatureView.signatureExists ? ORKSignatureStringFromDate([NSDate date]) : nil;
     [_signingView.wrapperView setClearButtonEnabled:YES];
+}
+
+- (ORKStepResult *)result {
+    ORKStepResult* parentResult = [super result];
+    ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] init];
+    result.signature = signature;
+    result.identifier = signature.identifier;
+    result.consented = YES;
+    if (signature.signatureDate) {
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        NSDate* date = [dateFormatter dateFromString:signature.signatureDate];
+        if (date) {
+            result.startDate = date;
+            result.endDate = date;
+        }
+    }
+    parentResult.results = @[result];
+    return parentResult;
 }
 
 @end

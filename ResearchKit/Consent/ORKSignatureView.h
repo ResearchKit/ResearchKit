@@ -50,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat lineWidth;
 @property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
 @property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
+@property (nonatomic, weak, nullable) UIImage *existingSignatureImage;
 
 - (UIImage *)signatureImage;
 

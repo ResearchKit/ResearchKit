@@ -330,6 +330,11 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         [path stroke];
     }
     
+    if (_existingSignatureImage) {
+        [_existingSignatureImage drawInRect:rect];
+        [self.delegate signatureViewDidEditImage:self];
+    }
+    
     if (![self signatureExists] && (!self.currentPath || [self.currentPath isEmpty])) {
         [ORKLocalizedString(@"CONSENT_SIGNATURE_PLACEHOLDER", nil) drawAtPoint:[self placeholderPoint]
                                            withAttributes:@{ NSFontAttributeName : [ORKSelectionTitleLabel defaultFont],
@@ -348,6 +353,10 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 - (UIImage *)signatureImage {
     UIGraphicsBeginImageContext(self.bounds.size);
     
+    if (_existingSignatureImage) {
+        [_existingSignatureImage drawAtPoint:CGPointZero];
+    }
+    
     for (UIBezierPath *path in self.pathArray) {
         [self.lineColor setStroke];
         [path stroke];
@@ -360,7 +369,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (BOOL)signatureExists {
-    return self.pathArray.count > 0;
+    return self.pathArray.count > 0 || _existingSignatureImage;
 }
 
 - (void)clear {
@@ -370,6 +379,10 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         }
         
         [self.pathArray removeAllObjects];
+        _existingSignatureImage = nil;
+        [self setNeedsDisplayInRect:self.bounds];
+    } else if (_existingSignatureImage) {
+        _existingSignatureImage = nil;
         [self setNeedsDisplayInRect:self.bounds];
     }
 }
