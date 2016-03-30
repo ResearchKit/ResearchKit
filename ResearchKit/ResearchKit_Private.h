@@ -59,14 +59,12 @@
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
-#import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKPSATStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
-#import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKReactionTimeStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 
