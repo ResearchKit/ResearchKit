@@ -97,6 +97,9 @@
         if (signature.signatureImage) {
             _signingView.wrapperView.signatureView.existingSignatureImage = signature.signatureImage;
         }
+        if (self.readOnlyMode) {
+            _signingView.userInteractionEnabled = NO;
+        }
         _signingView.continueSkipContainer.continueEnabled = _signingView.wrapperView.signatureView.signatureExists;
         _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [_signingView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
