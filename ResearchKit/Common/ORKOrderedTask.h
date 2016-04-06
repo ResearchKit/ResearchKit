@@ -88,6 +88,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
+/**
+ Modify the array by removing the step at the given index
+ @param index       The index of the step to remove
+ @return            The step that was removed
+ */
+- (ORKStep *)removeStepAtIndex:(NSUInteger)index;
+
 @end
 
 
