@@ -57,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
  The exact amount of the variation is determined by the amount
  of force applied on 3D touch capable devices or by the speed
  of the stroke if 3D touch is not available.
+ 
+ If the user is signing with an Apple Pencil, its force will be used.
  */
 @property (nonatomic) CGFloat lineWidthVariation;
 
