@@ -110,6 +110,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 - (void)layoutPointLayers;
 
 - (UIColor *)colorForplotIndex:(NSInteger)plotIndex;
+- (UIColor *)fillColorForPlotIndex:(NSInteger)plotIndex;
 
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 
