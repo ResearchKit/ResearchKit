@@ -241,6 +241,16 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return color;
 }
 
+- (UIColor *)fillColorForPlotIndex:(NSInteger)plotIndex {
+    UIColor *color = nil;
+    if ([_dataSource respondsToSelector:@selector(graphChartView:fillColorForPlotIndex:)]) {
+        color = [_dataSource graphChartView:self fillColorForPlotIndex:plotIndex];
+    } else {
+        color = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4];
+    }
+    return color;
+}
+
 - (void)updatePlotColors {
     for (NSUInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
         UIColor *color = [self colorForplotIndex:plotIndex];
