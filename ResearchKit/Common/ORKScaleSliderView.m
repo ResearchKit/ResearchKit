@@ -446,6 +446,7 @@
                                                  metrics:@{@"kMargin": @(kMargin)}
                                                    views:views]];
     }
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -482,6 +483,7 @@
     } else {
         _valueLabel.text = @"";
     }
+    _valueLabel.text = @"";
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
