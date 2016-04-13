@@ -146,6 +146,19 @@ ORK_AVAILABLE_DECL
 - (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
 
 /**
+ Asks the data source for the fill color of the specified plot.
+ 
+ If this method is not implemented, the plot applies 60% transparency to the graph chart view `colorForPlotIndex`.
+ 
+ @param graphChartView      The graph chart view asking for the color of the segment.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return The color of the fill layer at the specified index in a line chart view.
+ */
+- (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView fillColorForPlotIndex:(NSInteger)plotIndex;
+
+/**
  Asks the data source which plot the scrubber should snap to in multigraph chart views.
  
  If this method is not implemented, the scrubber snaps over the first plot.

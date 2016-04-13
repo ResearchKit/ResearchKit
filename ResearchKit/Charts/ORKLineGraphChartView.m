@@ -102,7 +102,7 @@ const CGFloat FillColorAlpha = 0.4;
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
+    fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
     _fillLayers[@(plotIndex)] = fillLayer;
