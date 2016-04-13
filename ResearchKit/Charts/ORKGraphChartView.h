@@ -148,7 +148,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the fill color of the specified plot.
  
- If this method is not implemented, the plot applies 60% transparency to the graph chart view `colorForPlotIndex`.
+ The fill color is only used by `ORKLineGraphChartView`. If this method is not implemented, the
+ chart uses the main color of the specified plot with a 0.4 opacity value.
  
  @param graphChartView      The graph chart view asking for the color of the segment.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
