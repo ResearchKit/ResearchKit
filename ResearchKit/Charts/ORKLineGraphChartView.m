@@ -56,23 +56,40 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Drawing
 
+- (UIColor *)fillColorForPlotIndex:(NSInteger)plotIndex {
+    UIColor *color = nil;
+    if ([self.dataSource respondsToSelector:@selector(graphChartView:fillColorForPlotIndex:)]) {
+        color = [self.dataSource graphChartView:self fillColorForPlotIndex:plotIndex];
+    } else {
+        color = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
+    }
+    return color;
+}
+
 - (void)updatePlotColors {
     [super updatePlotColors];
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSUInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        UIColor *fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
         CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
-        fillLayer.fillColor = fillColor.CGColor;
+        fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
     }
 }
 
-- (void)updateLineLayers {
+- (void)updateLineAndPointLayers {
     [_fillLayers.allValues makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_fillLayers removeAllObjects];
-    [super updateLineLayers];
+    [super updateLineAndPointLayers];
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
+    // Fill
+    CAShapeLayer *fillLayer = [CAShapeLayer layer];
+    fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
+    
+    [self.plotView.layer addSublayer:fillLayer];
+    _fillLayers[@(plotIndex)] = fillLayer;
+
+    // Lines
     BOOL previousPointExists = NO;
     BOOL emptyDataPresent = NO;
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
@@ -100,12 +117,6 @@ const CGFloat FillColorAlpha = 0.4;
         [self.plotView.layer addSublayer:lineLayer];
         [self.lineLayers[plotIndex] addObject:lineLayer];
     }
-    
-    CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
-    
-    [self.plotView.layer addSublayer:fillLayer];
-    _fillLayers[@(plotIndex)] = fillLayer;
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
