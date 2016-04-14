@@ -227,7 +227,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH" = "\u2022 Please wear a comfortable pair of walking shoes and find a flat, smooth surface for walking.\n\n\u2022 Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\n\u2022 Importantly, walk at your normal pace. You do not need to walk faster than usual.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth for %@.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn around 360 degrees, then stand still, with your feet about shoulder-width apart. Rest your arms at your side and try to avoid moving for %@.";
 
 
@@ -236,13 +236,13 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
 "TAPPING_TASK_TITLE_LEFT" = "Left Hand";
 "TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Rest your phone on a flat surface.";
-"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Then use two fingers on the same hand to alternately tap the buttons that appear.";
-"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Then use two fingers on your right hand to alternately tap the buttons that appear.";
-"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Then use two fingers on your left hand to alternately tap the buttons that appear.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your phone on a flat surface.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
 "TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Now repeat the same test using your right hand.";
 "TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Now repeat the same test using your left hand.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Keep tapping for %@ and time your taps to be as consistent as possible.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for %@.";
 "TAPPING_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "TAPPING_CALL_TO_ACTION_NEXT" = "Tap Next to begin.";
 "TAP_BUTTON_TITLE" = "Tap";
@@ -250,7 +250,6 @@
 "TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
 "TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
 "TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
-
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";
