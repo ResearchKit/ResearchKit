@@ -36,6 +36,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKActiveStep.h"
 #import "ORKActiveStep_Internal.h"
+#import "ORKAudioLevelNavigationRule.h"
 #import "ORKAudioStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
 #import "ORKTappingIntervalStep.h"
@@ -288,6 +289,7 @@ NSString * const ORKInstruction0StepIdentifier = @"instruction";
 NSString * const ORKInstruction1StepIdentifier = @"instruction1";
 NSString * const ORKCountdownStepIdentifier = @"countdown";
 NSString * const ORKAudioStepIdentifier = @"audio";
+NSString * const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
 NSString * const ORKTappingStepIdentifier = @"tapping";
 NSString * const ORKConclusionStepIdentifier = @"conclusion";
 NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
@@ -396,6 +398,51 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
++ (ORKOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(NSString *)intendedUseDescription
+                                        speechInstruction:(NSString *)speechInstruction
+                                   shortSpeechInstruction:(NSString *)shortSpeechInstruction
+                                                 duration:(NSTimeInterval)duration
+                                        recordingSettings:(NSDictionary *)recordingSettings
+                                                  options:(ORKPredefinedTaskOption)options {
+    
+    recordingSettings = recordingSettings ? : [self defaultRecordingSettings];
+    ORKOrderedTask *audioTask = [self audioTaskWithIdentifier:identifier
+                                  intendedUseDescription:intendedUseDescription
+                                       speechInstruction:speechInstruction
+                                  shortSpeechInstruction:shortSpeechInstruction
+                                                duration:duration
+                                       recordingSettings:recordingSettings
+                                                 options:options];
+    
+    ORKStep *audioStep = [audioTask stepWithIdentifier:ORKCountdownStepIdentifier];
+    NSMutableArray *steps = [[audioTask steps] mutableCopy];
+    NSUInteger idx = [steps indexOfObject:audioStep];
+    
+    audioStep.text = ORKLocalizedString(@"AUDIO_LEVEL_CHECK_LABEL", nil);
+    
+    ORKInstructionStep *tooLoudStep = [[ORKInstructionStep alloc] initWithIdentifier:ORKAudioTooLoudStepIdentifier];
+    tooLoudStep.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_MESSAGE", nil);
+    tooLoudStep.detailText = ORKLocalizedString(@"AUDIO_TOO_LOUD_ACTION_NEXT", nil);
+    [steps insertObject:tooLoudStep atIndex:idx+1];
+    
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:audioStep.identifier defaultStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
+    ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:audioStep.identifier];
+    
+    [task setNavigationRule:audioRule forTriggerStepIdentifier:audioStep.identifier];
+    [task setNavigationRule:loopRule forTriggerStepIdentifier:tooLoudStep.identifier];
+    
+    return task;
+}
+
++ (NSDictionary *)defaultRecordingSettings {
+    return @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
+              AVNumberOfChannelsKey : @(2),
+              AVSampleRateKey: @(44100.0) };
+}
+
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(NSString *)intendedUseDescription
                           speechInstruction:(NSString *)speechInstruction
@@ -404,10 +451,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                           recordingSettings:(NSDictionary *)recordingSettings
                                     options:(ORKPredefinedTaskOption)options {
     
-    NSDictionary *defaultRecordingSettings = @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                                AVNumberOfChannelsKey : @(2),
-                                                AVSampleRateKey: @(44100.0) };
-    recordingSettings = recordingSettings ? : defaultRecordingSettings;
+    recordingSettings = recordingSettings ? : [self defaultRecordingSettings];
     
     if (options & ORKPredefinedTaskOptionExcludeAudio) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Audio collection cannot be excluded from audio task" userInfo:nil];
