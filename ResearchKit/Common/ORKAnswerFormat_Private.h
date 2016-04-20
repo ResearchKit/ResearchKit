@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ResearchKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
 - (instancetype)init NS_UNAVAILABLE;

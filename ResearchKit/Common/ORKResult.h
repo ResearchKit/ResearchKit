@@ -1253,6 +1253,7 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKLocation` class represents the location addess obtained from a locaton question.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKLocation : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
