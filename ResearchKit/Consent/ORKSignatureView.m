@@ -379,12 +379,9 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         }
         
         [self.pathArray removeAllObjects];
-        _existingSignatureImage = nil;
-        [self setNeedsDisplayInRect:self.bounds];
-    } else if (_existingSignatureImage) {
-        _existingSignatureImage = nil;
-        [self setNeedsDisplayInRect:self.bounds];
     }
+    _existingSignatureImage = nil;
+    [self setNeedsDisplayInRect:self.bounds];
 }
 
 #pragma mark - Accessibility
