@@ -227,7 +227,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKSignatureRenderingDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3041,6 +3041,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - Signature rendering delegate
+
+- (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController willRenderPath:(NSArray<UIBezierPath *> *)path {
+    NSLog(@"Signature step view Controller will render path %lu", path.count);
+}
+
+- (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController didRenderPath:(NSArray<UIBezierPath *> *)path {
+    NSLog(@"Signature step view Controller did render path %lu", path.count);
+}
+
 #pragma mark - Review task
 
 - (NSArray<ORKStep *> *)stepsForReviewTasks {
@@ -3130,7 +3140,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 #pragma mark - Signature task
 
 - (id<ORKTask>)makeSignatureTask {
-    ORKSignatureStep *signatureStep = [[ORKSignatureStep alloc] initWithIdentifier:@"signatureStep"];
+    ORKSignatureStep *signatureStep = [[ORKSignatureStep alloc] initWithIdentifier:@"signatureTask.signatureStep"];
     signatureStep.title = @"Signature step";
     signatureStep.text = @"Please sign";
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SignatureTaskIdentifier steps:@[signatureStep]];
@@ -3473,6 +3483,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
+    } else if ([stepViewController.step.identifier isEqualToString:@"signatureTask.signatureStep"]) {
+        ((ORKSignatureStepViewController *) stepViewController).renderingDelegate = self;
     }
 
 }

@@ -131,8 +131,14 @@
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
     _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
+    if (_renderingDelegate && [_renderingDelegate respondsToSelector:@selector(signatureStepViewController:willRenderPath:)]) {
+        [_renderingDelegate signatureStepViewController:self willRenderPath:[signatureView.pathArray copy]];
+    }
     signature.signatureImage = signatureView.signatureExists ? _signingView.wrapperView.signatureView.signatureImage : nil;
     signature.signatureDate = signatureView.signatureExists ? ORKSignatureStringFromDate([NSDate date]) : nil;
+    if (_renderingDelegate && [_renderingDelegate respondsToSelector:@selector(signatureStepViewController:didRenderPath:)]) {
+        [_renderingDelegate signatureStepViewController:self didRenderPath:[signatureView.pathArray copy]];
+    }
     [_signingView.wrapperView setClearButtonEnabled:YES];
 }
 

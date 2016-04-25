@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *)signatureImage;
 
+- (NSMutableArray *)pathArray;
+
 @property (nonatomic, readonly) BOOL signatureExists;
 
 - (void)clear;

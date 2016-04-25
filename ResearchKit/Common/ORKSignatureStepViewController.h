@@ -36,7 +36,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKSignatureStepViewController;
+
+@protocol ORKSignatureRenderingDelegate <NSObject>
+
+@optional
+- (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController willRenderPath:(NSArray<UIBezierPath *> *)path;
+
+@optional
+- (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController didRenderPath:(NSArray<UIBezierPath *> *)path;
+
+@end
+
+
+
+ORK_CLASS_AVAILABLE
 @interface ORKSignatureStepViewController: ORKStepViewController
+
+@property (nonatomic, weak, nullable) id<ORKSignatureRenderingDelegate> renderingDelegate;
 
 @end
 
