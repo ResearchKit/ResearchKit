@@ -44,11 +44,15 @@ Finally, present the task view controller:
 
 The user is instructed to type in a passcode twice—once for the initial passcode, and again to confirm it. Here is the initial view:
 
-![](Passcode.png)
+<center>
+<img src="passcode.png" style="width: 375px;border: solid black 1px;" \>
+</center>
 
 If the confirmation fails, an alert appears indicating a mismatch. The user can then type the passcode again:
 
-![](Passcode_retry.png)
+<center>
+<img src="passcode_retry.png" style="width: 375px;border: solid black 1px;" \>
+</center>
 
 Upon a successful match, the user is alerted that the passcode is saved. Passcodes are stored in the keychain of the device.
 
@@ -70,7 +74,10 @@ Your class must adhere to the `ORKPasscodeDelegate` protocol in order to know wh
 
 When the view is presented, the user is prompted to enter their 4 or 6 digit passcode:
 
-![](Passcode_ask.png)
+<center>
+<img src="passcode_ask.png" style="width: 375px;border: solid black 1px;" \>
+</center>
+
 
 The following method is called if the passcode was successfully entered:
 
@@ -103,7 +110,9 @@ Provide users the ability to conveniently edit their passcode by using the follo
 
 When the editing view controller appears, the user is prompted to enter their old passcode:
 
-![](Passcode_edit.png)
+<center>
+<img src="passcode_edit.png" style="width: 375px;border: solid black 1px;" \>
+</center>
 
 If it is entered correctly, the user has the opportunity to enter a new passcode of the specified type and should enter it again to verify it.
 
