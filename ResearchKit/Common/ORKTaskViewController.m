@@ -1107,6 +1107,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
+        ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
+        });
+        return;
+    }
+    
     BOOL supportSaving = NO;
     if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
         supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
