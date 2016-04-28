@@ -868,6 +868,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                options:(ORKPredefinedTaskOption)options {
     
     NSDateComponentsFormatter *formatter = [self textTimeFormatter];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
     
     NSMutableArray *steps = [NSMutableArray array];
     if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
