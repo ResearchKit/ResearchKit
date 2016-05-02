@@ -201,8 +201,25 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 + (void)initialize {
     if (self == [ORKTaskViewController class]) {
+
+
+        // If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+        // This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
         
+        [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[ORKTaskViewController class]]] setTranslucent:NO];
+        
+        if ([[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[ORKTaskViewController class]]] barTintColor] == nil) {
+            [[UINavigationBar appearanceWhenContainedInInstancesOfClasses:@[[ORKTaskViewController class]]] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
+        }
+        
+        if ([[UIToolbar appearanceWhenContainedInInstancesOfClasses:@[[ORKTaskViewController class]]] barTintColor] == nil) {
+            [[UIToolbar appearanceWhenContainedInInstancesOfClasses:@[[ORKTaskViewController class]]] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
+        }
+#else
+
         [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setTranslucent:NO];
+        
         if ([[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] barTintColor] == nil) {
             [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
         }
@@ -210,6 +227,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
         if ([[UIToolbar appearanceWhenContainedIn:[ORKTaskViewController class], nil] barTintColor] == nil) {
             [[UIToolbar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
         }
+#endif
     }
 }
 

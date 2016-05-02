@@ -89,7 +89,13 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     }
     
     if (options & ORKSampleIncludeSource) {
-        HKSource *source = [self source];
+        // If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+        // This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+        HKSource *source = [[self sourceRevision] source];
+#else
+        HKSource *source = [source];
+#endif
         if (source.name) {
             mutableDictionary[HKSourceKey] = source.name;
         }
