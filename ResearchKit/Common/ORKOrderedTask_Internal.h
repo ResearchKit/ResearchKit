@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKOrderedTask ()
 
-- (NSUInteger)indexOfStep:(ORKStep *)step;
-
 @end
 
 NS_ASSUME_NONNULL_END
