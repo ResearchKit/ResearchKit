@@ -42,6 +42,8 @@
 
 @property (nonatomic, copy) NSDictionary *recorderSettings;
 
+@property (nonatomic, strong) NSString *savedSessionCategory;
+
 @end
 
 
@@ -79,6 +81,13 @@
     return self;
 }
 
+- (void)restoreSavedAudioSessionCategory {
+    if (_savedSessionCategory) {
+        [[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:nil];
+        _savedSessionCategory = nil;
+    }
+}
+
 - (void)start {
     if (self.outputDirectory == nil) {
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
@@ -95,6 +104,7 @@
         
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        _savedSessionCategory = audioSession.category;
         if (![audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
             [self finishRecordingWithError:error];
             return;
@@ -191,6 +201,7 @@
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
 #endif
+        [self restoreSavedAudioSessionCategory];
     }
 }
 
