@@ -1288,6 +1288,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return [description copy];
 }
 
+- (BOOL)isAnswerEmpty {
+    return ORKIsAnswerEmpty(self.answer);
+}
+
 @end
 
 

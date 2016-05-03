@@ -135,9 +135,8 @@
         //TODO: add implementation
     } else if ([answerFormat isKindOfClass:[ORKLocationAnswerFormat class]]) {
         //TODO: add implementation
-    } else {
-        NSString *answerString = [answerFormat stringForAnswer:result.answer];
-        answerHTML = result.answer && answerString ? [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, answerString] : @"";
+    } else if (!result.isAnswerEmpty) {
+        answerHTML = [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, [answerFormat stringForAnswer:result.answer]];
     }
     return answerHTML;
 }
@@ -148,11 +147,11 @@
     if (self.options & ORKPrintFormatterOptionIncludeChoices) {
         for (NSUInteger choiceIndex = 0; choiceIndex < [helper choiceCount]; choiceIndex++) {
             id answer = [helper answerForSelectedIndex:choiceIndex];
-            if (answer != ORKNullAnswerValue()) {
+            if (!ORKIsAnswerEmpty(answer)) {
                 answerHTML = [@[answerHTML, [self HTMLfromTemplate:([result.answer isEqual:answer] ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER") , nil, [helper stringForChoiceAnswer:answer]]] componentsJoinedByString:@"\n"];
             }
         }
-    } else if (result.answer && ![[helper stringForChoiceAnswer:result.answer] isEqualToString:@""]) {
+    } else if (!result.isAnswerEmpty) {
         answerHTML = [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, [helper stringForChoiceAnswer:result.answer]];
     }
     return answerHTML;
