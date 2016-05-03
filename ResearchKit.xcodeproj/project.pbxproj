@@ -482,6 +482,9 @@
 		BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */; };
 		BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */; };
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
+		BF04090E1CD8F5FE009BBF0A /* ORKPrintFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF0409101CD8F62B009BBF0A /* ORKPrintFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */; };
+		BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */; };
 		BF5161501BE9C53D00174DDD /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A11BDE8DA9007FA459 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */; };
 		BF91559C1BDE8D7D007FA459 /* ORKReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1038,6 +1041,9 @@
 		BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartView_Internal.h; path = Charts/ORKPieChartView_Internal.h; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
 		BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultPredicate.m; sourceTree = "<group>"; };
+		BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPrintFormatter.h; path = Printing/ORKPrintFormatter.h; sourceTree = "<group>"; };
+		BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPrintFormatter.m; path = Printing/ORKPrintFormatter.m; sourceTree = "<group>"; };
+		BF0409141CD8F669009BBF0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HTMLTemplates.strings; sourceTree = "<group>"; };
 		BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep_Internal.h; sourceTree = "<group>"; };
 		BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep.h; sourceTree = "<group>"; };
 		BF9155971BDE8D7D007FA459 /* ORKReviewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStep.m; sourceTree = "<group>"; };
@@ -1386,6 +1392,7 @@
 			children = (
 				B1C1DE4F196F541F00F75544 /* ResearchKit.h */,
 				B1B894391A00345200C5CF2D /* ResearchKit_Private.h */,
+				BF0409041CD8F506009BBF0A /* Printing */,
 				86C40B511A8D7C5B00081FAC /* Common */,
 				86C40AF91A8D7C5B00081FAC /* ActiveTasks */,
 				259E76FB1AFFAEAC0070F786 /* Charts */,
@@ -2188,6 +2195,16 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		BF0409041CD8F506009BBF0A /* Printing */ = {
+			isa = PBXGroup;
+			children = (
+				BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */,
+				BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */,
+				BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */,
+			);
+			name = Printing;
+			sourceTree = "<group>";
+		};
 		BF690AD61BAD3DC0009C5ADA /* Review Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2258,6 +2275,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF04090E1CD8F5FE009BBF0A /* ORKPrintFormatter.h in Headers */,
 				BF5161501BE9C53D00174DDD /* ORKWaitStep.h in Headers */,
 				244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
@@ -2664,6 +2682,7 @@
 				B1C0F4E41A9BA65F0022C153 /* ResearchKit.strings in Resources */,
 				86C40DFC1A8D7C5C00081FAC /* MovieTintShader.vsh in Resources */,
 				B1A860F51A9693C400EA57B7 /* consent_05@3x.m4v in Resources */,
+				BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2883,6 +2902,7 @@
 				86C40C941A8D7C5C00081FAC /* ORKAudioRecorder.m in Sources */,
 				86C40C581A8D7C5C00081FAC /* ORKTappingIntervalStepViewController.m in Sources */,
 				86C40E0E1A8D7C5C00081FAC /* ORKConsentReviewStepViewController.m in Sources */,
+				BF0409101CD8F62B009BBF0A /* ORKPrintFormatter.m in Sources */,
 				BF9155A01BDE8D7E007FA459 /* ORKReviewStepViewController.m in Sources */,
 				86C40E261A8D7C5C00081FAC /* ORKEAGLMoviePlayerView.m in Sources */,
 				86C40CC21A8D7C5C00081FAC /* ORKCompletionStep.m in Sources */,
@@ -2998,6 +3018,15 @@
 				B1B34A061AABBCCDDEEFFAAA /* no */,
 			);
 			name = ResearchKit.strings;
+			sourceTree = "<group>";
+		};
+		BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF0409141CD8F669009BBF0A /* Base */,
+			);
+			name = HTMLTemplates.strings;
+			path = Printing;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

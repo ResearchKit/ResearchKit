@@ -82,3 +82,5 @@
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
 
+
+#import <ResearchKit/ORKPrintFormatter.h>

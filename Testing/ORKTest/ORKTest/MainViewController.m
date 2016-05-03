@@ -3295,7 +3295,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     _currentDocument = nil;
     
     NSURL *outputDirectoryURL = taskViewController.outputDirectory;
-    [self dismissViewControllerAnimated:YES completion:^{
+    [taskViewController dismissViewControllerAnimated:YES completion:^{
         if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
@@ -3324,8 +3324,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     NSString *task_identifier = taskViewController.task.identifier;
 
-    return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
+    return (/*[step isKindOfClass:[ORKInstructionStep class]]
+            &&*/ NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
@@ -3334,6 +3334,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
+    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithOptions:ORKPrintFormatterOptionIncludeChoices| ORKPrintFormatterOptionIncludeTimestamp];
+    ORKConsentDocument *document = [[ORKConsentDocument alloc] init];
+    document.htmlReviewContent = [printFormatter formatStep:stepViewController.step withResult:stepViewController.result];
+    ORKConsentReviewStep *consentReviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReviewStep" signature:nil inDocument:document];
+    ORKOrderedTask *consentReviewTask = [[ORKOrderedTask alloc] initWithIdentifier:@"consentReviewTask" steps:@[consentReviewStep]];
+    ORKTaskViewController *consentReviewTaskViewController = [[ORKTaskViewController alloc] initWithTask:consentReviewTask taskRunUUID:nil];
+    consentReviewTaskViewController.delegate = self;
+    consentReviewTaskViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    [taskViewController presentViewController:consentReviewTaskViewController animated:true completion:nil];
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
@@ -3556,7 +3565,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }
     
     NSURL *dir = taskViewController.outputDirectory;
-    [self dismissViewControllerAnimated:YES completion:^{
+    [taskViewController dismissViewControllerAnimated:YES completion:^{
         if (dir)
         {
             NSError *err = nil;
