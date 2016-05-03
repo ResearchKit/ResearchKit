@@ -3335,14 +3335,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithOptions:ORKPrintFormatterOptionIncludeChoices| ORKPrintFormatterOptionIncludeTimestamp];
-    ORKConsentDocument *document = [[ORKConsentDocument alloc] init];
-    document.htmlReviewContent = [printFormatter formatStep:stepViewController.step withResult:stepViewController.result];
-    ORKConsentReviewStep *consentReviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReviewStep" signature:nil inDocument:document];
-    ORKOrderedTask *consentReviewTask = [[ORKOrderedTask alloc] initWithIdentifier:@"consentReviewTask" steps:@[consentReviewStep]];
-    ORKTaskViewController *consentReviewTaskViewController = [[ORKTaskViewController alloc] initWithTask:consentReviewTask taskRunUUID:nil];
-    consentReviewTaskViewController.delegate = self;
-    consentReviewTaskViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [taskViewController presentViewController:consentReviewTaskViewController animated:true completion:nil];
+    NSString *html = [printFormatter formatStep:stepViewController.step withResult:stepViewController.result];
+    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+    UIMarkupTextPrintFormatter *formatter = [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:html];
+    const CGFloat POINTS_PER_INCH = 72;
+    formatter.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f);
+    controller.printFormatter = formatter;
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    printInfo.outputType = UIPrintInfoOutputGeneral;
+    printInfo.jobName = @"ResearchKit printing test";
+    controller.printInfo = printInfo;
+    [controller presentAnimated:YES completionHandler:nil];
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
