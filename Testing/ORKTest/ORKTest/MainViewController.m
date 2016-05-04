@@ -225,7 +225,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKPrintFormatterDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3335,6 +3335,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
+    printFormatter.delegate = self;
     const CGFloat POINTS_PER_INCH = 72;
     printFormatter.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f);
     [printFormatter prepare];
@@ -3345,6 +3346,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     printInfo.jobName = @"ResearchKit printing test";
     controller.printInfo = printInfo;
     [controller presentAnimated:YES completionHandler:nil];
+}
+
+- (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
+    return YES;
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {

@@ -37,19 +37,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKPrintFormatter;
-
 typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
     ORKPrintFormatterOptionIncludeChoices = 1 << 0,
     ORKPrintFormatterOptionIncludeTimestamp = 1 << 1
 };
 
+@protocol ORKPrintFormatter;
+
 ORK_AVAILABLE_DECL
 @protocol ORKPrintFormatterDelegate <NSObject>
 
-- (ORKPrintFormatterOptions)printFormatter:(ORKPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (ORKPrintFormatterOptions)printFormatter:(id<ORKPrintFormatter>)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
-- (BOOL)printFormatter:(ORKPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
 @end
 

@@ -57,7 +57,6 @@
         _stepResults = [[NSMutableDictionary alloc] init];
     }
     return self;
-
 }
 
 - (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result {
@@ -91,15 +90,13 @@
             }
         }
     }
-    for (ORKStep *step in discardedSteps) {
-        [_stepResults removeObjectForKey:step.identifier];
-        [_steps removeObject:step];
-    }
     if (_task) {
         //TODO: add implementation
     } else {
         ORKStep *step = _steps.firstObject;
-        [self setMarkupText:[self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:YES]];
+        if (![discardedSteps containsObject:step]) {
+            [self setMarkupText:[self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:YES]];
+        }
     }
 }
 
