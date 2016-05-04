@@ -48,8 +48,6 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
 
 - (ORKPrintFormatterOptions)printFormatter:(ORKPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
-- (BOOL)printFormatter:(ORKPrintFormatter *)printFormatter shouldFormatTask:(id<ORKTask>)task withResult:(ORKTaskResult *)result;
-
 - (BOOL)printFormatter:(ORKPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
 @end
@@ -63,7 +61,7 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithOptions:(ORKPrintFormatterOptions)options;
 
-- (NSString *)formatTask:(id<ORKTask>)task withResult:(nullable ORKTaskResult *)result;
+- (NSString *)formatTask:(id<ORKTask>)task includingSteps:(NSArray<ORKStep *> *)steps withResult:(nullable ORKTaskResult *)result;
 
 - (NSString *)formatStep:(ORKStep *)step withResult:(nullable ORKStepResult *)result;
 

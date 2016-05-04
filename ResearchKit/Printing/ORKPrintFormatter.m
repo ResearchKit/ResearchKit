@@ -53,7 +53,7 @@
     return self;
 }
 
-- (NSString *)formatTask:(id<ORKTask>)task withResult:(ORKTaskResult *)result {
+- (NSString *)formatTask:(id<ORKTask>)task includingSteps:(NSArray<ORKStep *> *)steps withResult:(ORKTaskResult *)result {
     return @"";
 }
 
@@ -66,11 +66,6 @@
 
 @implementation ORKHTMLPrintFormatter {
     
-}
-
-- (NSString *)formatTask:(id<ORKTask>)task withResult:(ORKTaskResult *)result {
-    //TODO: add implementation
-    return [super formatTask:task withResult:result];
 }
 
 - (NSString *)formatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
@@ -152,7 +147,9 @@
             }
         }
     } else if (!result.isAnswerEmpty) {
-        answerHTML = [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, [helper stringForChoiceAnswer:result.answer]];
+        for (NSString *answerString in [helper stringsForChoiceAnswer:result.answer]) {
+            answerHTML = [@[answerHTML, [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, answerString]] componentsJoinedByString:@"\n"];
+        }
     }
     return answerHTML;
 }
@@ -173,6 +170,7 @@
     return formStepHTML;
 }
 
+//TODO: revise date to string conversion
 - (NSString *)stringFromDate:(NSDate *)date {
     if (!date) {
         return @"";
