@@ -69,9 +69,9 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKFloatRange *> *> *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic) UIView *plotView; // Holds the plots
 
@@ -91,13 +91,15 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition;
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (BOOL)isXPositionSnapped:(CGFloat)xPosition;
+- (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
+
+- (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (void)updatePlotColors;
 
@@ -109,7 +111,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 - (void)layoutPointLayers;
 
-- (UIColor *)colorForplotIndex:(NSInteger)plotIndex;
+- (UIColor *)colorForPlotIndex:(NSInteger)plotIndex;
 
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 

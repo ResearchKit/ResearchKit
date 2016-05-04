@@ -34,7 +34,7 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKRangedPoint.h"
+#import "ORKFloatRange.h"
 
 
 const CGFloat FillColorAlpha = 0.4;
@@ -60,7 +60,7 @@ const CGFloat FillColorAlpha = 0.4;
     [super updatePlotColors];
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSUInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        UIColor *fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
+        UIColor *fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
         CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
         fillLayer.fillColor = fillColor.CGColor;
     }
@@ -89,7 +89,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         CAShapeLayer *lineLayer = graphLineLayer();
-        lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
+        lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
         lineLayer.lineWidth = 2.0;
         
         if (emptyDataPresent) {
@@ -102,7 +102,7 @@ const CGFloat FillColorAlpha = 0.4;
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
+    fillLayer.fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
     _fillLayers[@(plotIndex)] = fillLayer;
@@ -119,7 +119,7 @@ const CGFloat FillColorAlpha = 0.4;
     NSUInteger lineLayerIndex = 0;
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangedPoint *positionOnYAxis = nil;
+    ORKFloatRange *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
     NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
@@ -163,10 +163,9 @@ const CGFloat FillColorAlpha = 0.4;
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     CGFloat value = [super valueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
     if (value == ORKCGFloatInvalidValue) {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         NSInteger pointIndex = 0;
         for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, viewWidth);
@@ -197,24 +196,28 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+    NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
     NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
-    CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
-    CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
-    
-    CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
-    CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+    CGFloat canvasYPosition = 0;
+    if (nextValidIndex == previousValidIndex) {
+        canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+    } else {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         
-    CGFloat slope = (y2 - y1)/(x2 - x1);
-    
-    //  (y2 - y3)/(x2 - x3) = m
-    CGFloat canvasYPosition = y2 - (slope * (x2 - xPosition));
-    
+        CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+        CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
+        
+        CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+        CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+        
+        CGFloat slope = (y2 - y1)/(x2 - x1);
+        
+        //  (y2 - y3)/(x2 - x3) = m
+        canvasYPosition = y2 - (slope * (x2 - xPosition));
+    }
     return canvasYPosition;
 }
 
@@ -223,7 +226,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     NSUInteger pointCountMinusOne = (self.dataPoints[plotIndex].count - 1);
     while (validPosition < pointCountMinusOne) {
-        if (self.dataPoints[plotIndex][validPosition].maximumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition++;
@@ -234,6 +237,9 @@ const CGFloat FillColorAlpha = 0.4;
 
 - (NSInteger)previousValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     NSInteger validPosition = pointIndex - 1;
+    if (validPosition < 0) {
+        validPosition = 0;
+    }
     while (validPosition > 0) {
         if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
             break;

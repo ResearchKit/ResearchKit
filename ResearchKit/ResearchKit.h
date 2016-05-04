@@ -77,7 +77,7 @@
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
 
-#import <ResearchKit/ORKRangedPoint.h>
+#import <ResearchKit/ORKFloatRange.h>
 #import <ResearchKit/ORKLineGraphChartView.h>
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
