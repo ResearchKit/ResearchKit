@@ -3334,13 +3334,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
-    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithOptions:ORKPrintFormatterOptionIncludeChoices| ORKPrintFormatterOptionIncludeTimestamp];
-    NSString *html = [printFormatter formatStep:stepViewController.step withResult:stepViewController.result];
-    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
-    UIMarkupTextPrintFormatter *formatter = [[UIMarkupTextPrintFormatter alloc] initWithMarkupText:html];
+    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
     const CGFloat POINTS_PER_INCH = 72;
-    formatter.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f);
-    controller.printFormatter = formatter;
+    printFormatter.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f);
+    [printFormatter prepare];
+    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+    controller.printFormatter = printFormatter;
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
     printInfo.outputType = UIPrintInfoOutputGeneral;
     printInfo.jobName = @"ResearchKit printing test";

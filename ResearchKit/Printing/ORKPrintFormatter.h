@@ -44,6 +44,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
     ORKPrintFormatterOptionIncludeTimestamp = 1 << 1
 };
 
+ORK_AVAILABLE_DECL
 @protocol ORKPrintFormatterDelegate <NSObject>
 
 - (ORKPrintFormatterOptions)printFormatter:(ORKPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
@@ -52,25 +53,35 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
 
 @end
 
-ORK_CLASS_AVAILABLE
-@interface ORKPrintFormatter: NSObject
+ORK_AVAILABLE_DECL
+@protocol ORKPrintFormatter <NSObject>
 
 @property ORKPrintFormatterOptions options;
 
 @property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
 
-- (instancetype)initWithOptions:(ORKPrintFormatterOptions)options;
+- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
 
-- (NSString *)formatTask:(id<ORKTask>)task includingSteps:(NSArray<ORKStep *> *)steps withResult:(nullable ORKTaskResult *)result;
+- (instancetype)initWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
 
-- (NSString *)formatStep:(ORKStep *)step withResult:(nullable ORKStepResult *)result;
+- (void)prepare;
 
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLPrintFormatter: ORKPrintFormatter
+@interface ORKHTMLPrintFormatter: UIMarkupTextPrintFormatter <ORKPrintFormatter>
+
+@property ORKPrintFormatterOptions options;
+
+@property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
 
 @property (nonatomic, copy, nullable) NSString* styleSheetContent;
+
+- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
+
+- (instancetype)initWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
+
+- (void)prepare;
 
 @end
 

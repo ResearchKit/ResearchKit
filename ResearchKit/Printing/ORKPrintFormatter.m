@@ -41,48 +41,71 @@
 
 
 
-@implementation ORKPrintFormatter {
-    
+@implementation ORKHTMLPrintFormatter {
+    id<ORKTask> _task;
+    ORKTaskResult *_taskResult;
+    NSMutableArray<ORKStep *> *_steps;
+    NSMutableDictionary<NSString *, ORKStepResult *> *_stepResults;
 }
 
-- (instancetype)initWithOptions:(ORKPrintFormatterOptions)options {
-    self = [super init];
+- (instancetype)initWithMarkupText:(NSString *)markupText {
+    self = [super initWithMarkupText:markupText];
     if (self) {
-        self.options = options;
+        _task = nil;
+        _taskResult = nil;
+        _steps = [[NSMutableArray alloc] initWithArray:@[]];
+        _stepResults = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+
+}
+
+- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result {
+    self = [self initWithMarkupText:@""];
+    if (self) {
+        _task = task;
+        _taskResult = result;
+        [_steps addObjectsFromArray:steps];
+        for (ORKStep *step in _steps) {
+            _stepResults[step.identifier] = [result stepResultForStepIdentifier:step.identifier];
+        }
     }
     return self;
 }
 
-- (NSString *)formatTask:(id<ORKTask>)task includingSteps:(NSArray<ORKStep *> *)steps withResult:(ORKTaskResult *)result {
-    return @"";
+- (instancetype)initWithStep:(ORKStep *)step andResult:(ORKStepResult *)result {
+    self = [self initWithMarkupText:@""];
+    if (self) {
+        [_steps addObject:step];
+        _stepResults[step.identifier] = result;
+    }
+    return self;
 }
 
-- (NSString *)formatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
-    return @"";
-}
-
-@end
-
-
-@implementation ORKHTMLPrintFormatter {
-    
-}
-
-- (NSString *)formatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
-    return [self formatStep:step withResult:result addHTMLTags:YES];
+- (void)prepare {
+    NSMutableArray *discardedSteps = [[NSMutableArray alloc] init];
+    for (ORKStep *step in _steps) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
+            if (![self.delegate printFormatter:self shouldFormatStep:step withResult:_stepResults[step.identifier]]) {
+                [discardedSteps addObject:step];
+            }
+        }
+    }
+    for (ORKStep *step in discardedSteps) {
+        [_stepResults removeObjectForKey:step.identifier];
+        [_steps removeObject:step];
+    }
+    if (_task) {
+        //TODO: add implementation
+    } else {
+        ORKStep *step = _steps.firstObject;
+        [self setMarkupText:[self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:YES]];
+    }
 }
 
 #pragma mark - internal
 
-- (NSString *)formatStep:(ORKStep *)step withResult:(ORKStepResult *)result addHTMLTags:(BOOL)addHTMLTags {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
-        if (![self.delegate printFormatter:self shouldFormatStep:step withResult:result]) {
-            return @"";
-        }
-    }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:optionsForStep:withResult:)]) {
-        self.options = [self.delegate printFormatter:self optionsForStep:step withResult:result];
-    }
+- (NSString *)HTMLFromStep:(ORKStep *)step withResult:(ORKStepResult *)result addSurroundingHTMLTags:(BOOL)addSurroundingHTMLTags {
     NSString *stepHeader = [self HTMLfromTemplate:@"STEP_HEADER", step.title, step.text];
     NSString *stepBody = @"";
     if ([step isKindOfClass:[ORKQuestionStep class]]) {
@@ -96,7 +119,7 @@
         stepFooter = [self HTMLfromTemplate:@"STEP_FOOTER", @"Start Date", [self stringFromDate:result.startDate], @"End Date", [self stringFromDate:result.endDate]];
     }
     NSString *stepHTML = [self HTMLfromTemplate:@"STEP", stepHeader, stepBody, stepFooter];
-    return addHTMLTags ? [self HTMLfromTemplate:@"HTML", _styleSheetContent, stepHTML] : stepHTML;
+    return addSurroundingHTMLTags ? [self HTMLfromTemplate:@"HTML", _styleSheetContent, stepHTML] : stepHTML;
 }
 
 - (NSString *)HTMLfromTemplate:(NSString *)name, ... {
