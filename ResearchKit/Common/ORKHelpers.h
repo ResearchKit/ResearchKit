@@ -291,7 +291,7 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
 
-NSNumberFormatter *ORKNumberFormatter();
+NSNumberFormatter *ORKDecimalNumberFormatter();
 
 ORK_INLINE double ORKFeetAndInchesToInches(double feet, double inches) {
     return (feet * 12) + inches;

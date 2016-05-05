@@ -669,7 +669,7 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.unit = answerFormat.unit;
     self.textField.placeholder = self.formItem.placeholder;
     
-    _numberFormatter = ORKNumberFormatter();
+    _numberFormatter = ORKDecimalNumberFormatter();
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
     
     [self answerDidChange];

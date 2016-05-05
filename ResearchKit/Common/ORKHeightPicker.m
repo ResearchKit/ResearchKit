@@ -138,7 +138,7 @@
         return nil;
     }
 
-    NSNumberFormatter *formatter = ORKNumberFormatter();
+    NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
     NSString *selectedLabelText = nil;
     if (_answerFormat.useMetricSystem) {
         selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber: [self selectedAnswerValue]], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];

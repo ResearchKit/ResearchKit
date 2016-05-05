@@ -546,7 +546,7 @@ NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
     return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
 }
 
-NSNumberFormatter *ORKNumberFormatter() {
+NSNumberFormatter *ORKDecimalNumberFormatter() {
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.maximumFractionDigits = NSDecimalNoScale;

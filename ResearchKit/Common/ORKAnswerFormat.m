@@ -1305,7 +1305,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
     NSString *string = nil;
-    NSNumberFormatter *formatter = ORKNumberFormatter();
+    NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
     if (self.minimum && (self.minimum.doubleValue > num.doubleValue)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
     } else if (self.maximum && (self.maximum.doubleValue < num.doubleValue)) {
@@ -1319,7 +1319,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;
     if ([self isAnswerValid:answer]) {
-        NSNumberFormatter *formatter = ORKNumberFormatter();
+        NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
         answerString = [formatter stringFromNumber:answer];
         if (self.unit && self.unit.length > 0) {
             answerString = [NSString stringWithFormat:@"%@ %@", answerString, self.unit];
@@ -2400,7 +2400,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
     NSString *answerString = nil;
     
     if (!ORKIsAnswerEmpty(answer)) {
-        NSNumberFormatter *formatter = ORKNumberFormatter();
+        NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
         if (self.useMetricSystem) {
             answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
         } else {
