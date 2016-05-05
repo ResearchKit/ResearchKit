@@ -222,16 +222,16 @@
 }
 
 - (NSArray *)centimeterValues {
-    static NSArray *inchesValues = nil;
+    static NSArray *centimeterValues = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSMutableArray *mutableInchesValues = [[NSMutableArray alloc] init];
+        NSMutableArray *mutableCentimeterValues = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i <= 299; i++) {
-            [mutableInchesValues addObject:[NSNumber numberWithInteger:i]];
+            [mutableCentimeterValues addObject:[NSNumber numberWithInteger:i]];
         }
-        inchesValues = [mutableInchesValues copy];
+        centimeterValues = [mutableCentimeterValues copy];
     });
-    return inchesValues;
+    return centimeterValues;
 }
 
 - (NSArray *)feetValues {
