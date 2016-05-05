@@ -2373,14 +2373,14 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_INTEGER(aDecoder, measurementSystem);
+        ORK_DECODE_ENUM(aDecoder, measurementSystem);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_INTEGER(aCoder, measurementSystem);
+    ORK_ENCODE_ENUM(aCoder, measurementSystem);
 }
 
 - (ORKQuestionType)questionType {
