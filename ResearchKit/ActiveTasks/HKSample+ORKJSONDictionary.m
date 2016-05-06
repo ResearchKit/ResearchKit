@@ -94,7 +94,7 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
         HKSource *source = [[self sourceRevision] source];
 #else
-        HKSource *source = [source];
+        HKSource *source = [self source];
 #endif
         if (source.name) {
             mutableDictionary[HKSourceKey] = source.name;

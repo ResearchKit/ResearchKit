@@ -160,25 +160,15 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                             anchor:_anchor
                                             limit:_HealthAnchoredQueryLimit
                                             resultsHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSArray *deletedResults, HKQueryAnchor* newAnchor, NSError *error)
-                                            {
-                                                if (error) {
-                                                    // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-                                                    ORK_Log_Warning(@"Anchored query error: %@", error);
-                                                    return;
-                                                }
-                                                
-                                                __typeof(self) strongSelf = weakSelf;
-                                                [strongSelf query_logResults:results withAnchor:newAnchor];
-                                                
-                                            }];
+                                            
 #else
-    
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
                                             initWithType:_quantityType
                                             predicate:_samplePredicate
                                             anchor:_anchor
                                             limit:_HealthAnchoredQueryLimit
                                             completionHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSUInteger newAnchor, NSError *error)
+#endif
                                             {
                                                 if (error) {
                                                     // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
@@ -190,7 +180,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                 [strongSelf query_logResults:results withAnchor:newAnchor];
                                                 
                                             }];
-#endif
     
     [_healthStore executeQuery:anchoredQuery];
 }
