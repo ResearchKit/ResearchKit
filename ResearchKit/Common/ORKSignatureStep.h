@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Oliver Schaefer.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  The step view controller saves the resulting signature in an `ORKConsentSignatureResult` and 
  attaches this object as a child result of an `ORKStepResult`.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKSignatureStep : ORKStep
 
 @end

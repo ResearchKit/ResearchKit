@@ -30,12 +30,12 @@
 
 
 #import "ORKConsentSignatureController.h"
-#import "ORKConsentSigningView.h"
+#import "ORKConsentSignatureView.h"
 
 
 @interface ORKConsentSignatureController ()
 
-@property (nonatomic, strong) ORKConsentSigningView *signingView;
+@property (nonatomic, strong) ORKConsentSignatureView *consentSignatureView;
 
 @end
 
@@ -53,21 +53,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _signingView = [ORKConsentSigningView new];
-    _signingView.wrapperView.signatureView.delegate = self;
-    _signingView.continueSkipContainer.continueEnabled = NO;
-    _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    _signingView.frame = self.view.bounds;
+    _consentSignatureView = [ORKConsentSignatureView new];
+    _consentSignatureView.wrapperView.signatureView.delegate = self;
+    _consentSignatureView.continueSkipContainer.continueEnabled = NO;
+    _consentSignatureView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    _consentSignatureView.frame = self.view.bounds;
     
-    [_signingView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_consentSignatureView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self updateContinueButtonItem];
     
-    [self.view addSubview:_signingView];
+    [self.view addSubview:_consentSignatureView];
 }
 
 - (void)updateContinueButtonItem {
-    _signingView.continueSkipContainer.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:self.localizedContinueButtonTitle style:UIBarButtonItemStylePlain target:self action:@selector(done)];
+    _consentSignatureView.continueSkipContainer.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:self.localizedContinueButtonTitle style:UIBarButtonItemStylePlain target:self action:@selector(done)];
 }
 
 - (void)setLocalizedContinueButtonTitle:(NSString *)localizedContinueButtonTitle {
@@ -76,7 +76,7 @@
 }
 
 - (ORKSignatureView *)signatureView {
-    return _signingView.wrapperView.signatureView;
+    return _consentSignatureView.wrapperView.signatureView;
 }
 
 - (IBAction)done {
@@ -86,14 +86,14 @@
 }
 
 - (void)clearAction:(id)sender {
-    [_signingView.wrapperView.signatureView clear];
-    _signingView.continueSkipContainer.continueEnabled = NO;
-    [_signingView.wrapperView setClearButtonEnabled:NO];
+    [_consentSignatureView.wrapperView.signatureView clear];
+    _consentSignatureView.continueSkipContainer.continueEnabled = NO;
+    [_consentSignatureView.wrapperView setClearButtonEnabled:NO];
 }
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
-    _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
-    [_signingView.wrapperView setClearButtonEnabled:YES];
+    _consentSignatureView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
+    [_consentSignatureView.wrapperView setClearButtonEnabled:YES];
 }
 
 @end

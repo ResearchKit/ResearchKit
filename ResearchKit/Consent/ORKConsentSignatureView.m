@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Oliver Schaefer.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,14 +29,13 @@
  */
 
 
-#import "ORKConsentSigningView.h"
+#import "ORKConsentSignatureView.h"
 #import "ORKTextButton.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 
 
-@implementation ORKConsentSignatureWrapperView {
-}
+@implementation ORKConsentSignatureWrapperView
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
@@ -164,7 +163,7 @@
 @end
 
 
-@implementation ORKConsentSigningView
+@implementation ORKConsentSignatureView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

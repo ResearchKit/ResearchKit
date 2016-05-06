@@ -30,7 +30,7 @@
 
 
 #import "ORKSignatureStepViewController.h"
-#import "ORKConsentSigningView.h"
+#import "ORKConsentSignatureView.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
@@ -41,9 +41,10 @@
 
 @interface ORKSignatureStepViewController () <ORKSignatureViewDelegate>
 
-@property (nonatomic, strong) ORKConsentSigningView *signingView;
+@property (nonatomic, strong) ORKConsentSignatureView *signatureView;
 
 @end
+
 
 @implementation ORKSignatureStepViewController {
     ORKConsentSignature* signature;
@@ -67,55 +68,53 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.taskViewController setRegisteredScrollView: _signingView];
+    [self.taskViewController setRegisteredScrollView: _signatureView];
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    _signingView.continueSkipContainer.continueButtonItem = continueButtonItem;
+    _signatureView.continueSkipContainer.continueButtonItem = continueButtonItem;
 }
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
-    _signingView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+    _signatureView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
-    _signingView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
+    _signatureView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
     
-    [_signingView removeFromSuperview];
-    _signingView = nil;
+    [_signatureView removeFromSuperview];
+    _signatureView = nil;
     
     if ([self signatureStep]) {
-        _signingView = [[ORKConsentSigningView alloc] initWithFrame:self.view.bounds];
-        _signingView.wrapperView.signatureView.delegate = self;
+        _signatureView = [[ORKConsentSignatureView alloc] initWithFrame:self.view.bounds];
+        _signatureView.wrapperView.signatureView.delegate = self;
         if (signature.signatureImage) {
-            _signingView.wrapperView.signatureView.existingSignatureImage = signature.signatureImage;
+            _signatureView.wrapperView.signatureView.existingSignatureImage = signature.signatureImage;
         }
-        if (self.readOnlyMode) {
-            _signingView.userInteractionEnabled = NO;
-        }
-        _signingView.continueSkipContainer.continueEnabled = _signingView.wrapperView.signatureView.signatureExists;
-        _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        [_signingView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_signingView];
+        _signatureView.userInteractionEnabled = !self.readOnlyMode;
+        _signatureView.continueSkipContainer.continueEnabled = _signatureView.wrapperView.signatureView.signatureExists;
+        _signatureView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        [_signatureView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_signatureView];
         
-        _signingView.headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-        _signingView.headerView.captionLabel.text = [self signatureStep].title;
-        _signingView.headerView.instructionLabel.text = [self signatureStep].text;
-        _signingView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+        _signatureView.headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
+        _signatureView.headerView.captionLabel.text = [self signatureStep].title;
+        _signatureView.headerView.instructionLabel.text = [self signatureStep].text;
+        _signatureView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
-        _signingView.continueSkipContainer.optional = [self signatureStep].optional;
-        _signingView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
-        _signingView.continueSkipContainer.continueEnabled = NO;
-        _signingView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
+        _signatureView.continueSkipContainer.optional = [self signatureStep].optional;
+        _signatureView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
+        _signatureView.continueSkipContainer.continueEnabled = NO;
+        _signatureView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
         
-        [_signingView setNeedsLayout];
+        [_signatureView setNeedsLayout];
     }
 }
 
@@ -124,22 +123,22 @@
 }
 
 - (void)clearAction:(id)sender {
-    [_signingView.wrapperView.signatureView clear];
-    _signingView.continueSkipContainer.continueEnabled = NO;
-    [_signingView.wrapperView setClearButtonEnabled:NO];
+    [_signatureView.wrapperView.signatureView clear];
+    _signatureView.continueSkipContainer.continueEnabled = NO;
+    [_signatureView.wrapperView setClearButtonEnabled:NO];
 }
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
-    _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
+    _signatureView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
     if (_renderingDelegate && [_renderingDelegate respondsToSelector:@selector(signatureStepViewController:willRenderPath:)]) {
         [_renderingDelegate signatureStepViewController:self willRenderPath:[signatureView.pathArray copy]];
     }
-    signature.signatureImage = signatureView.signatureExists ? _signingView.wrapperView.signatureView.signatureImage : nil;
+    signature.signatureImage = signatureView.signatureExists ? _signatureView.wrapperView.signatureView.signatureImage : nil;
     signature.signatureDate = signatureView.signatureExists ? ORKSignatureStringFromDate([NSDate date]) : nil;
     if (_renderingDelegate && [_renderingDelegate respondsToSelector:@selector(signatureStepViewController:didRenderPath:)]) {
         [_renderingDelegate signatureStepViewController:self didRenderPath:[signatureView.pathArray copy]];
     }
-    [_signingView.wrapperView setClearButtonEnabled:YES];
+    [_signatureView.wrapperView setClearButtonEnabled:YES];
 }
 
 - (ORKStepResult *)result {

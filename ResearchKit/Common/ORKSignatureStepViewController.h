@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Oliver Schaefer.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -43,14 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController willRenderPath:(NSArray<UIBezierPath *> *)path;
 
-@optional
 - (void)signatureStepViewController:(ORKSignatureStepViewController *)signatureStepViewController didRenderPath:(NSArray<UIBezierPath *> *)path;
 
 @end
 
 
 
-ORK_CLASS_AVAILABLE
 @interface ORKSignatureStepViewController: ORKStepViewController
 
 @property (nonatomic, weak, nullable) id<ORKSignatureRenderingDelegate> renderingDelegate;
