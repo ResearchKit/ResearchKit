@@ -1017,7 +1017,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)stringForAnswer:(id)answer {
-    return ORKTimeOfDayStringFromComponents(answer);
+    return answer ? ORKTimeOfDayStringFromComponents(answer) : nil;
 }
 
 @end

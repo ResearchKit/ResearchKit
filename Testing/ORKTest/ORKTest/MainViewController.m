@@ -225,7 +225,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKPrintFormatterDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKPrintFormatterDelegate, ORKHTMLPrintPageRendererDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3336,14 +3336,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
     printFormatter.delegate = self;
-    [printFormatter prepare];
-    ORKPrintPageRenderer *renderer = [[ORKPrintPageRenderer alloc] init];
+    ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
     renderer.headerHeight = 72;
-    renderer.footerHeight = 72;
-    renderer.headerContent = @"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Header Example</body></html>";
-    renderer.footerContent = @"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Footer Example</body></html>";
     [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
-    
+    renderer.delegate = self;
     UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
     controller.printPageRenderer = renderer;
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
@@ -3355,6 +3351,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     return YES;
+}
+
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
+    NSString *headerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Page %lu of %lu</body></html>", range.location, range.location];
+    return headerContent;
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {

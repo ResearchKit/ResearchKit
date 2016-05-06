@@ -85,25 +85,38 @@ static const CGFloat POINTS_PER_INCH = 72;
 }
 
 - (void)prepare {
-    NSMutableArray *discardedSteps = [[NSMutableArray alloc] init];
+    NSMutableArray *formatableSteps = [[NSMutableArray alloc] init];
     for (ORKStep *step in _steps) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
-            if (![self.delegate printFormatter:self shouldFormatStep:step withResult:_stepResults[step.identifier]]) {
-                [discardedSteps addObject:step];
+            if ([self.delegate printFormatter:self shouldFormatStep:step withResult:_stepResults[step.identifier]]) {
+                [formatableSteps addObject:step];
             }
         }
     }
     if (_task) {
-        //TODO: add implementation
+        [self setMarkupText:[self HTMLFromTask:_task containingSteps:formatableSteps withResult:_taskResult]];
     } else {
-        ORKStep *step = _steps.firstObject;
-        if (![discardedSteps containsObject:step]) {
+        ORKStep *step = formatableSteps.firstObject;
+        if (step) {
             [self setMarkupText:[self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:YES]];
         }
     }
 }
 
 #pragma mark - internal
+
+- (NSString *)HTMLFromTask:(id<ORKTask>)task containingSteps:(NSArray<ORKStep *> *)steps withResult:(ORKTaskResult *)result {
+    NSString *taskTitle = @"";
+    if (_delegate && [_delegate respondsToSelector:@selector(printFormatter:titleForTask:)]) {
+        taskTitle = [_delegate printFormatter:self titleForTask:task];
+    }
+    NSString *taskBody = @"";
+    for (ORKStep *step in steps) {
+        taskBody = [@[taskBody, [self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:NO]] componentsJoinedByString:@" "];
+    }
+    NSString *taskHTML = [self HTMLfromTemplate:@"TASK", taskTitle, taskBody];
+    return [self HTMLfromTemplate:@"HTML", _styleSheetContent, taskHTML];
+}
 
 - (NSString *)HTMLFromStep:(ORKStep *)step withResult:(ORKStepResult *)result addSurroundingHTMLTags:(BOOL)addSurroundingHTMLTags {
     NSString *stepHeader = [self HTMLfromTemplate:@"STEP_HEADER", step.title, step.text];
@@ -166,12 +179,12 @@ static const CGFloat POINTS_PER_INCH = 72;
         for (NSUInteger choiceIndex = 0; choiceIndex < [helper choiceCount]; choiceIndex++) {
             id answer = [helper answerForSelectedIndex:choiceIndex];
             if (!ORKIsAnswerEmpty(answer)) {
-                answerHTML = [@[answerHTML, [self HTMLfromTemplate:([result.answer isEqual:answer] ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER") , nil, [helper stringForChoiceAnswer:answer]]] componentsJoinedByString:@"\n"];
+                answerHTML = [@[answerHTML, [self HTMLfromTemplate:([result.answer isEqual:answer] ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER") , nil, [helper stringForChoiceAnswer:answer]]] componentsJoinedByString:@" "];
             }
         }
     } else if (!result.isAnswerEmpty) {
         for (NSString *answerString in [helper stringsForChoiceAnswer:result.answer]) {
-            answerHTML = [@[answerHTML, [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, answerString]] componentsJoinedByString:@"\n"];
+            answerHTML = [@[answerHTML, [self HTMLfromTemplate:@"STEP_SELECTED_ANSWER", nil, answerString]] componentsJoinedByString:@" "];
         }
     }
     return answerHTML;
@@ -185,9 +198,9 @@ static const CGFloat POINTS_PER_INCH = 72;
                 return [result.identifier isEqualToString:item.identifier];
             }];
             ORKQuestionResult *questionResult = index != NSNotFound ? (ORKQuestionResult *)result.results[index] : nil;
-            formStepHTML = [@[formStepHTML, [self HTMLfromTemplate:@"FORM_STEP_ANSWER", item.text, [self HTMLfromAnswerFormat:item.impliedAnswerFormat andResult:questionResult]]] componentsJoinedByString:@"\n<br/>\n"];
+            formStepHTML = [@[formStepHTML, [self HTMLfromTemplate:@"FORM_STEP_ANSWER", item.text, [self HTMLfromAnswerFormat:item.impliedAnswerFormat andResult:questionResult]]] componentsJoinedByString:@"<br/>"];
         } else {
-            formStepHTML = [@[formStepHTML, [self HTMLfromTemplate:@"FORM_STEP", item.text]] componentsJoinedByString:@"\n"];
+            formStepHTML = [@[formStepHTML, [self HTMLfromTemplate:@"FORM_STEP", item.text]] componentsJoinedByString:@" "];
         }
     }
     return formStepHTML;
@@ -211,23 +224,35 @@ static const CGFloat POINTS_PER_INCH = 72;
 @end
 
 
-@implementation ORKPrintPageRenderer
+@implementation ORKHTMLPrintPageRenderer
 
 - (void)drawHeaderForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)headerRect {
-    if (_headerContent) {
-        [self drawHTML:_headerContent inRect:CGRectInset(headerRect, 20, 20)];
+    if (_delegate && [_delegate respondsToSelector:@selector(printPageRenderer:headerContentForPageInRange:)]) {
+        NSString *headerContent = [_delegate printPageRenderer:self headerContentForPageInRange:NSMakeRange(pageIndex+1, [self numberOfPages])];
+        [self drawHTML:headerContent inRect:CGRectInset(headerRect, 20, 20)];
     }
 }
 
 - (void)drawFooterForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)footerRect {
-    if (_footerContent) {
-        [self drawHTML:_footerContent inRect:CGRectInset(footerRect, 20, 20)];
+    if (_delegate && [_delegate respondsToSelector:@selector(printPageRenderer:footerContentForPageInRange:)]) {
+        NSString *footerContent = [_delegate printPageRenderer:self footerContentForPageInRange:NSMakeRange(pageIndex+1, [self numberOfPages])];
+        [self drawHTML:footerContent inRect:CGRectInset(footerRect, 20, 20)];
     }
 }
 
 - (void)drawHTML:(NSString*)html inRect:(CGRect)rect {
     NSAttributedString *htmlString = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
     [htmlString drawInRect:rect];
+}
+
+- (void)prepareForDrawingPages:(NSRange)range {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (UIPrintFormatter *printFormatter in self.printFormatters) {
+            if ([printFormatter conformsToProtocol:@protocol(ORKPrintFormatter)]) {
+                [((id<ORKPrintFormatter>)printFormatter) prepare];
+            }
+        }
+    });
 }
 
 @end

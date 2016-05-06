@@ -47,9 +47,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
 ORK_AVAILABLE_DECL
 @protocol ORKPrintFormatterDelegate <NSObject>
 
+@optional
 - (ORKPrintFormatterOptions)printFormatter:(id<ORKPrintFormatter>)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
 - (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+
+- (NSString *)printFormatter:(id<ORKPrintFormatter>)printFormatter titleForTask:(id<ORKTask>)task;
 
 @end
 
@@ -75,7 +78,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
 
-@property (nonatomic, copy, nullable) NSString *styleSheetContent;
+@property (nonatomic, nullable) NSString *styleSheetContent;
 
 - (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
 
@@ -85,12 +88,22 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+@class ORKHTMLPrintPageRenderer;
+
+ORK_AVAILABLE_DECL
+@protocol ORKHTMLPrintPageRendererDelegate <NSObject>
+
+@optional
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
+
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
+
+@end
+
 ORK_CLASS_AVAILABLE
-@interface ORKPrintPageRenderer : UIPrintPageRenderer
+@interface ORKHTMLPrintPageRenderer : UIPrintPageRenderer
 
-@property (nonatomic, copy, nullable) NSString* headerContent;
-
-@property (nonatomic, copy, nullable) NSString* footerContent;
+@property (nonatomic, weak, nullable) id<ORKHTMLPrintPageRendererDelegate> delegate;
 
 @end
 
