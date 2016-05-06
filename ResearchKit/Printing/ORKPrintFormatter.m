@@ -94,7 +94,7 @@ static const CGFloat POINTS_PER_INCH = 72;
         }
     }
     if (_task) {
-        [self setMarkupText:[self HTMLFromTask:_task containingSteps:formatableSteps withResult:_taskResult]];
+        [self setMarkupText:[self HTMLFromTask:_task containingSteps:[formatableSteps copy] withResult:_taskResult]];
     } else {
         ORKStep *step = formatableSteps.firstObject;
         if (step) {
@@ -133,23 +133,6 @@ static const CGFloat POINTS_PER_INCH = 72;
     }
     NSString *stepHTML = [self HTMLfromTemplate:@"STEP", stepHeader, stepBody, stepFooter];
     return addSurroundingHTMLTags ? [self HTMLfromTemplate:@"HTML", _styleSheetContent, stepHTML] : stepHTML;
-}
-
-- (NSString *)HTMLfromTemplate:(NSString *)name, ... {
-    NSString *format = [ORKBundle() localizedStringForKey:name value:@"" table:@"HTMLTemplates"];
-    NSMutableArray<NSString *> *arguments = [[NSMutableArray alloc] init];
-    va_list args;
-    va_start(args, name);
-    for (NSUInteger count = 0; count < [format componentsSeparatedByString:@"%@"].count-1; count++) {
-        NSString *stringArgument = va_arg(args, NSString *);
-        [arguments addObject:stringArgument != nil ? stringArgument : @""];
-    }
-    va_end(args);
-    for (NSString * stringArgument in arguments) {
-        NSRange location = [format rangeOfString:@"%@"];
-        format = [format stringByReplacingCharactersInRange:location withString:stringArgument];
-    }
-    return format;
 }
 
 - (NSString *)HTMLfromQuestionStep:(ORKQuestionStep *)questionStep andResult:(ORKStepResult *)result {
@@ -204,6 +187,23 @@ static const CGFloat POINTS_PER_INCH = 72;
         }
     }
     return formStepHTML;
+}
+
+- (NSString *)HTMLfromTemplate:(NSString *)name, ... {
+    NSString *format = [ORKBundle() localizedStringForKey:name value:@"" table:@"HTMLTemplates"];
+    NSMutableArray<NSString *> *arguments = [[NSMutableArray alloc] init];
+    va_list args;
+    va_start(args, name);
+    for (NSUInteger count = 0; count < [format componentsSeparatedByString:@"%@"].count-1; count++) {
+        NSString *stringArgument = va_arg(args, NSString *);
+        [arguments addObject:stringArgument != nil ? stringArgument : @""];
+    }
+    va_end(args);
+    for (NSString * stringArgument in arguments) {
+        NSRange location = [format rangeOfString:@"%@"];
+        format = [format stringByReplacingCharactersInRange:location withString:stringArgument];
+    }
+    return format;
 }
 
 //TODO: revise date to string conversion
