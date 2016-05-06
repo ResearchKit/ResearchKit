@@ -41,6 +41,8 @@
 
 
 
+static const CGFloat POINTS_PER_INCH = 72;
+
 @implementation ORKHTMLPrintFormatter {
     id<ORKTask> _task;
     ORKTaskResult *_taskResult;
@@ -55,6 +57,7 @@
         _taskResult = nil;
         _steps = [[NSMutableArray alloc] initWithArray:@[]];
         _stepResults = [[NSMutableDictionary alloc] init];
+        self.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f, POINTS_PER_INCH * 0.75f);
     }
     return self;
 }
@@ -203,6 +206,28 @@
         formatter.timeStyle = NSDateFormatterMediumStyle;
     });
     return [formatter stringFromDate:date];
+}
+
+@end
+
+
+@implementation ORKPrintPageRenderer
+
+- (void)drawHeaderForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)headerRect {
+    if (_headerContent) {
+        [self drawHTML:_headerContent inRect:CGRectInset(headerRect, 20, 20)];
+    }
+}
+
+- (void)drawFooterForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)footerRect {
+    if (_footerContent) {
+        [self drawHTML:_footerContent inRect:CGRectInset(footerRect, 20, 20)];
+    }
+}
+
+- (void)drawHTML:(NSString*)html inRect:(CGRect)rect {
+    NSAttributedString *htmlString = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
+    [htmlString drawInRect:rect];
 }
 
 @end

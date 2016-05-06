@@ -75,13 +75,22 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
 
-@property (nonatomic, copy, nullable) NSString* styleSheetContent;
+@property (nonatomic, copy, nullable) NSString *styleSheetContent;
 
 - (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
 
 - (instancetype)initWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
 
 - (void)prepare;
+
+@end
+
+ORK_CLASS_AVAILABLE
+@interface ORKPrintPageRenderer : UIPrintPageRenderer
+
+@property (nonatomic, copy, nullable) NSString* headerContent;
+
+@property (nonatomic, copy, nullable) NSString* footerContent;
 
 @end
 
