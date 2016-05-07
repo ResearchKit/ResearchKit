@@ -211,13 +211,13 @@ static const CGFloat POINTS_PER_INCH = 72;
         answerHTML = [_ORK_HTMLfromTemplate(isSelected ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER"), @"", textChoiceText];
     } else if ([answerOption isKindOfClass:[ORKImageChoice class]]) {
         ORKImageChoice *imageChoice = (ORKImageChoice *)answerOption;
-        answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoice.text]] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoice.text]];
+        answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoice.text]] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoice.text ? imageChoice.text : @""]];
     }
     return answerHTML;
 }
 
 - (NSString *)HTMLFromImage:(UIImage *)image withTitle:(NSString *)title {
-    CGSize maxSize = CGSizeMake(200, 200);
+    CGSize maxSize = CGSizeMake(100, 100);
      NSData *imageData = UIImagePNGRepresentation(image);
     if (maxSize.width < image.size.width || maxSize.height < image.size.height) {
         imageData = UIImagePNGRepresentation([self scaledImageFromImage:image withTargetSize: maxSize]);
