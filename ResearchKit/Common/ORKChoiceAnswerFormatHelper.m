@@ -168,7 +168,7 @@
     
 }
 
-- (NSArray<NSString *> *)stringsForChoiceAnswer:(id)answer {
+- (NSString *)stringForChoiceAnswer:(id)answer {
     NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
     NSArray *indexes = [self selectedIndexesForAnswer:answer];
     for (NSNumber *index in indexes) {
@@ -177,11 +177,7 @@
             [answerStrings addObject:text];
         }
     }
-    return [answerStrings copy];
-}
-
-- (NSString *)stringForChoiceAnswer:(id)answer {
-    return [[self stringsForChoiceAnswer:answer] componentsJoinedByString:@"\n"];
+    return [answerStrings componentsJoinedByString:@"\n"];
 }
 
 @end

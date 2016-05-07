@@ -52,3 +52,6 @@ ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) 
 ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+
+#define _ORK_HTMLfromTemplate(name) \
+NSString stringWithFormat:[ORKBundle() localizedStringForKey:(name) value:@"" table:@"HTMLTemplates"]

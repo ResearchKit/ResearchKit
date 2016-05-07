@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Oliver Schaefer
+ Copyright (c) 2016, Oliver Schaefer
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,7 +30,7 @@
 
 "HTML" = "<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
 "TASK" = "<div class=\"taskSeparator\">%@%@</div>";
-"STEP" = "<div class=\"stepSeparator\">%@%@<br/>%@</div>";
+"STEP" = "<div class=\"stepSeparator\">%@%@%@</div>";
 /* STEP HEADER */
 "STEP_HEADER" = "<p id=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
 /* STEP BODY */
@@ -41,3 +41,5 @@
 "STEP_UNSELECTED_ANSWER" = "<tr class=\"unselectedAnswerRow\"><td><div class=\"unselectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"unselectedAnswerSecondaryColumn\">%@</div></td>";
 /* STEP FOOTER */
 "STEP_FOOTER" = "<table id=\"stepFooter\"><tr><td>%@</td><td>%@</td></tr><tr><td>%@</td><td>%@</td></tr></table>";
+/* IMAGE */
+"IMAGE" = "<figure><img height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
