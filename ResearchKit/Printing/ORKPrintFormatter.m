@@ -46,9 +46,9 @@
 
 static const CGFloat POINTS_PER_INCH = 72;
 
-#pragma mark - ORKHTMLPrintFormatter
+#pragma mark - ORKHTMLTaskStepFormatter
 
-@implementation ORKHTMLPrintFormatter {
+@implementation ORKHTMLTaskStepFormatter {
     id<ORKTask> _task;
     ORKTaskResult *_taskResult;
     NSMutableArray<ORKStep *> *_steps;
@@ -279,9 +279,9 @@ static const CGFloat POINTS_PER_INCH = 72;
 
 @end
 
-#pragma mark - ORKHTMLPrintPageRenderer
+#pragma mark - ORKHTMLHeaderFooterRenderer
 
-@implementation ORKHTMLPrintPageRenderer
+@implementation ORKHTMLHeaderFooterRenderer
 
 - (void)drawHeaderForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)headerRect {
     if (_delegate && [_delegate respondsToSelector:@selector(printPageRenderer:headerContentForPageInRange:)]) {

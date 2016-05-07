@@ -42,41 +42,26 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
     ORKPrintFormatterOptionIncludeTimestamp = 1 << 1
 };
 
-@protocol ORKPrintFormatter;
+@class ORKHTMLTaskStepFormatter;
 
 ORK_AVAILABLE_DECL
-@protocol ORKPrintFormatterDelegate <NSObject>
+@protocol ORKHTMLTaskStepFormatterDelegate <NSObject>
 
 @optional
-- (ORKPrintFormatterOptions)printFormatter:(id<ORKPrintFormatter>)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (ORKPrintFormatterOptions)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
-- (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (BOOL)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
-- (NSString *)printFormatter:(id<ORKPrintFormatter>)printFormatter titleForTask:(id<ORKTask>)task;
-
-@end
-
-ORK_AVAILABLE_DECL
-@protocol ORKPrintFormatter <NSObject>
-
-@property ORKPrintFormatterOptions options;
-
-@property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
-
-- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
-
-- (instancetype)initWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
-
-- (void)prepare;
+- (NSString *)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter titleForTask:(id<ORKTask>)task;
 
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLPrintFormatter: UIMarkupTextPrintFormatter <ORKPrintFormatter>
+@interface ORKHTMLTaskStepFormatter: UIMarkupTextPrintFormatter
 
 @property ORKPrintFormatterOptions options;
 
-@property (nonatomic, weak, nullable) id<ORKPrintFormatterDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKHTMLTaskStepFormatterDelegate> delegate;
 
 @property (nonatomic, nullable) NSString *styleSheetContent;
 
@@ -88,22 +73,22 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-@class ORKHTMLPrintPageRenderer;
+@class ORKHTMLHeaderFooterRenderer;
 
 ORK_AVAILABLE_DECL
-@protocol ORKHTMLPrintPageRendererDelegate <NSObject>
+@protocol ORKHTMLHeaderFooterRendererDelegate <NSObject>
 
 @optional
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
+- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
 
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
+- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
 
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLPrintPageRenderer : UIPrintPageRenderer
+@interface ORKHTMLHeaderFooterRenderer : UIPrintPageRenderer
 
-@property (nonatomic, weak, nullable) id<ORKHTMLPrintPageRendererDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKHTMLHeaderFooterRendererDelegate> delegate;
 
 @end
 

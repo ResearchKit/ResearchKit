@@ -225,7 +225,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKPrintFormatterDelegate, ORKHTMLPrintPageRendererDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLTaskStepFormatterDelegate, ORKHTMLHeaderFooterRendererDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3334,12 +3334,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
-    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
+    ORKHTMLTaskStepFormatter *printFormatter = [[ORKHTMLTaskStepFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
     printFormatter.delegate = self;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices;
     printFormatter.styleSheetContent = @".selectedAnswerPrimaryColumn{font-weight: bold;} .figure{margin: 0;}";
     [printFormatter prepare];
-    ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
+    ORKHTMLHeaderFooterRenderer *renderer = [[ORKHTMLHeaderFooterRenderer alloc] init];
     renderer.headerHeight = 72;
     renderer.footerHeight = 72;
     [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
@@ -3353,11 +3353,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [controller presentAnimated:YES completionHandler:nil];
 }
 
-- (BOOL)printFormatter:(id<ORKPrintFormatter>)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
+- (BOOL)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     return YES;
 }
 
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
+- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
     NSString *headerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Page %lu of %lu</body></html>", range.location, range.location];
     return headerContent;
 }
