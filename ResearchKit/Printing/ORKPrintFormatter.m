@@ -40,6 +40,7 @@
 #import "ORKResult_Private.h"
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKDefines_Private.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 
@@ -210,9 +211,21 @@ static const CGFloat POINTS_PER_INCH = 72;
 }
 
 - (NSString *)HTMLFromImage:(UIImage *)image withTitle:(NSString *)title {
-    //TODO: scale images
-    NSData *imageData = UIImagePNGRepresentation(image);
-    return imageData ? [_ORK_HTMLfromTemplate(@"IMAGE"), @(image.size.height), @(image.size.width), [imageData base64EncodedStringWithOptions:0], title] : @"";
+    CGSize maxSize = CGSizeMake(200, 200);
+     NSData *imageData = UIImagePNGRepresentation(image);
+    if (maxSize.width < image.size.width || maxSize.height < image.size.height) {
+        imageData = UIImagePNGRepresentation([self scaledImageFromImage:image withTargetSize: maxSize]);
+    }
+    return imageData ? [_ORK_HTMLfromTemplate(@"IMAGE"), @(maxSize.height), @(maxSize.width), [imageData base64EncodedStringWithOptions:0], title] : @"";
+}
+
+- (UIImage *)scaledImageFromImage:(UIImage *)image withTargetSize:(CGSize)size {
+    CGRect targetRect = AVMakeRectWithAspectRatioInsideRect(image.size, CGRectMake(0, 0, size.width, size.height));
+    UIGraphicsBeginImageContextWithOptions(targetRect.size, YES, 0.0);
+    [image drawInRect:targetRect];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
 }
 
 - (NSString *)HTMLfromFormStep:(ORKFormStep *)formStep andResult:(ORKStepResult *)result {
