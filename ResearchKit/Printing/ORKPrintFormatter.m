@@ -169,11 +169,17 @@ static const CGFloat POINTS_PER_INCH = 72;
             }];
             dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2));
         }
-        NSString *answerString = image ? [self HTMLFromImage:image withTitle:[answerFormat stringForAnswer:result.answer]] : @"&nbsp;";
-        answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", answerString];
+        if (image) {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [self HTMLFromImage:image withTitle:[answerFormat stringForAnswer:result.answer]]];
+        } else {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"];
+        }
     } else {
-        NSString *answerString = !result.isAnswerEmpty ? [answerFormat stringForAnswer:result.answer] : @"&nbsp;";
-        answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", answerString];
+        if (!result.isAnswerEmpty) {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [answerFormat stringForAnswer:result.answer]];
+        } else {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"];
+        }
     }
     return answerHTML;
 }
@@ -183,7 +189,7 @@ static const CGFloat POINTS_PER_INCH = 72;
     ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
     if (self.options & ORKPrintFormatterOptionIncludeChoices) {
         for (NSUInteger choiceIndex = 0; choiceIndex < [helper choiceCount]; choiceIndex++) {
-            BOOL isSelected = [result.answer isEqual:[helper answerForSelectedIndex:choiceIndex]];
+            BOOL isSelected = [[helper selectedIndexesForAnswer:result.answer] containsObject:[NSNumber numberWithInt:choiceIndex]];
             answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex] isSelected:isSelected]] componentsJoinedByString:@""];
         }
     } else {
@@ -191,7 +197,7 @@ static const CGFloat POINTS_PER_INCH = 72;
              answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex.unsignedIntegerValue] isSelected:YES]] componentsJoinedByString:@""];
         }
     }
-    return [answerHTML isEqualToString:@""] ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", @"&nbsp;"] : answerHTML;
+    return [answerHTML isEqualToString:@""] ? [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"] : answerHTML;
 }
 
 - (NSString *)HTMLfromAnswerOption:(id<ORKAnswerOption>)answerOption isSelected:(BOOL)isSelected {
