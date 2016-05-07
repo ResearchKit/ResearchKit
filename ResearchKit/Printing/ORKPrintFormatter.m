@@ -220,7 +220,7 @@ static const CGFloat POINTS_PER_INCH = 72;
 }
 
 - (NSString *)HTMLFromImage:(UIImage *)image withTitle:(NSString *)title {
-    CGSize maxSize = CGSizeMake(100, 100);
+    CGSize maxSize = CGSizeMake(200, 200);
      NSData *imageData = UIImagePNGRepresentation(image);
     if (maxSize.width < image.size.width || maxSize.height < image.size.height) {
         imageData = UIImagePNGRepresentation([self scaledImageFromImage:image withTargetSize: maxSize]);
