@@ -42,4 +42,4 @@
 /* STEP FOOTER */
 "STEP_FOOTER" = "<table id=\"stepFooter\"><tr><td>%@</td><td>%@</td></tr><tr><td>%@</td><td>%@</td></tr></table>";
 /* IMAGE */
-"IMAGE" = "<figure><img height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
+"IMAGE" = "<figure id=\"image\"><img height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";

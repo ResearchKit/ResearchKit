@@ -3337,7 +3337,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
     printFormatter.delegate = self;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices;
-    printFormatter.styleSheetContent = @".selectedAnswerSecondaryColumn{font-weight: bold;}";
+    printFormatter.styleSheetContent = @".selectedAnswerPrimaryColumn{font-weight: bold;} #image{margin: 0;}";
     [printFormatter prepare];
     ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
     renderer.headerHeight = 72;

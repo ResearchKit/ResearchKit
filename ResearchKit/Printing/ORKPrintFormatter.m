@@ -170,15 +170,15 @@ static const CGFloat POINTS_PER_INCH = 72;
             dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2));
         }
         if (image) {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [self HTMLFromImage:image withTitle:[answerFormat stringForAnswer:result.answer]]];
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [self HTMLFromImage:image withTitle:[[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"]], @""];
         } else {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"];
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""];
         }
     } else {
-        if (!result.isAnswerEmpty) {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [answerFormat stringForAnswer:result.answer]];
+        if (result && !result.isAnswerEmpty) {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"], @""];
         } else {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"];
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""];
         }
     }
     return answerHTML;
@@ -197,7 +197,7 @@ static const CGFloat POINTS_PER_INCH = 72;
              answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex.unsignedIntegerValue] isSelected:YES]] componentsJoinedByString:@""];
         }
     }
-    return [answerHTML isEqualToString:@""] ? [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", @"&nbsp;"] : answerHTML;
+    return [answerHTML isEqualToString:@""] ? [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""] : answerHTML;
 }
 
 - (NSString *)HTMLfromAnswerOption:(id<ORKAnswerOption>)answerOption isSelected:(BOOL)isSelected {
@@ -208,10 +208,13 @@ static const CGFloat POINTS_PER_INCH = 72;
         if (textChoice.detailText) {
             textChoiceText = [@[textChoiceText, textChoice.detailText] componentsJoinedByString:@"<br/>"];
         }
-        answerHTML = [_ORK_HTMLfromTemplate(isSelected ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER"), @"", textChoiceText];
+        textChoiceText = [textChoiceText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+        answerHTML = [_ORK_HTMLfromTemplate(isSelected ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER"), textChoiceText, @""];
     } else if ([answerOption isKindOfClass:[ORKImageChoice class]]) {
         ORKImageChoice *imageChoice = (ORKImageChoice *)answerOption;
-        answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoice.text]] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"", [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoice.text ? imageChoice.text : @""]];
+        NSString *imageChoiceText = imageChoice.text ? imageChoice.text : @"";
+        imageChoiceText = [imageChoiceText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+        answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoiceText], @""] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoiceText], @""];
     }
     return answerHTML;
 }
