@@ -112,7 +112,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
         if (minimumValue == maximumValue) {
             yAxisLabelFactors = @[@0.5f];
         } else {
-            yAxisLabelFactors = @[@0.2f, @1.0f];
+            yAxisLabelFactors = @[@0.0f, @0.2f, @0.4f, @0.6f, @0.8f, @1.0f];
         }
         
         for (NSNumber *factorNumber in yAxisLabelFactors) {
