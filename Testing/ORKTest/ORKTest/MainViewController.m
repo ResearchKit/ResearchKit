@@ -3339,11 +3339,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices;
     printFormatter.styleSheetContent = @".selectedAnswerPrimaryColumn{font-weight: bold;} .figure{margin: 0;}";
     [printFormatter prepare];
-    ORKHTMLHeaderFooterRenderer *renderer = [[ORKHTMLHeaderFooterRenderer alloc] init];
-    renderer.headerHeight = 72;
-    renderer.footerHeight = 72;
+    ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
+    renderer.headerHeight = 25;
+    renderer.footerHeight = 25;
     [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
-    renderer.delegate = self;
+    renderer.headerFooterDelegate = self;
     UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
     controller.printPageRenderer = renderer;
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
@@ -3357,7 +3357,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return YES;
 }
 
-- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
     NSString *headerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Page %lu of %lu</body></html>", range.location, range.location];
     return headerContent;
 }

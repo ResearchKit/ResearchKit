@@ -43,7 +43,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-
 static const CGFloat POINTS_PER_INCH = 72;
 
 #pragma mark - ORKHTMLTaskStepFormatter
@@ -279,27 +278,118 @@ static const CGFloat POINTS_PER_INCH = 72;
 
 @end
 
-#pragma mark - ORKHTMLHeaderFooterRenderer
+#pragma mark - ORKHTMLHeaderPrintFormatter
 
-@implementation ORKHTMLHeaderFooterRenderer
+@interface ORKHTMLHeaderPrintFormatter : UIMarkupTextPrintFormatter
 
-- (void)drawHeaderForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)headerRect {
-    if (_delegate && [_delegate respondsToSelector:@selector(printPageRenderer:headerContentForPageInRange:)]) {
-        NSString *headerContent = [_delegate printPageRenderer:self headerContentForPageInRange:NSMakeRange(pageIndex+1, [self numberOfPages])];
-        [self drawHTML:headerContent inRect:headerRect];
+@end
+
+
+@implementation ORKHTMLHeaderPrintFormatter
+
+- (CGRect)rectForPageAtIndex:(NSInteger)pageIndex {
+    CGRect pageRect = [super rectForPageAtIndex:pageIndex];
+    if (self.printPageRenderer && self.printPageRenderer.headerHeight) {
+        pageRect.size.height = self.printPageRenderer.headerHeight;
+        CGFloat topMargin = (self.printPageRenderer.paperRect.size.height-
+                             self.printPageRenderer.printableRect.size.height)/2;
+        pageRect.origin.y = topMargin;
+    } else {
+        pageRect = CGRectZero;
     }
+    return pageRect;
 }
 
-- (void)drawFooterForPageAtIndex:(NSInteger)pageIndex inRect:(CGRect)footerRect {
-    if (_delegate && [_delegate respondsToSelector:@selector(printPageRenderer:footerContentForPageInRange:)]) {
-        NSString *footerContent = [_delegate printPageRenderer:self footerContentForPageInRange:NSMakeRange(pageIndex+1, [self numberOfPages])];
-        [self drawHTML:footerContent inRect:footerRect];
+- (NSInteger)pageCount {
+    return 1;
+}
+
+@end
+
+#pragma mark - ORKHTMLFooterPrintFormatter
+
+@interface ORKHTMLFooterPrintFormatter : UIMarkupTextPrintFormatter
+
+@end
+
+
+@implementation ORKHTMLFooterPrintFormatter
+
+- (CGRect)rectForPageAtIndex:(NSInteger)pageIndex {
+    CGRect pageRect = [super rectForPageAtIndex:pageIndex];
+    if (self.printPageRenderer && self.printPageRenderer.footerHeight) {
+        pageRect.size.height = self.printPageRenderer.footerHeight;
+        CGFloat bottomMargin = (self.printPageRenderer.paperRect.size.height-
+                                self.printPageRenderer.printableRect.size.height)/2;
+        pageRect.origin.y = self.printPageRenderer.paperRect.size.height-bottomMargin-
+        pageRect.size.height;
+    } else {
+        pageRect = CGRectZero;
     }
+    return pageRect;
 }
 
-- (void)drawHTML:(NSString*)html inRect:(CGRect)rect {
-    NSAttributedString *htmlString = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
-    [htmlString drawInRect:rect];
+- (NSInteger)pageCount {
+    return 1;
 }
- 
+
+@end
+
+#pragma mark - ORKHTMLPrintPageRenderer
+
+@implementation ORKHTMLPrintPageRenderer
+
+
+- (NSInteger)numberOfPages {
+    NSInteger numberOfPages = [super numberOfPages];
+    if (_headerFooterDelegate && [_headerFooterDelegate respondsToSelector:
+                                  @selector(printPageRenderer:headerContentForPageInRange:)]) {
+        for (NSInteger pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
+            NSString *headerContent = [_headerFooterDelegate printPageRenderer:self
+                                                   headerContentForPageInRange:
+                                       NSMakeRange(pageIndex+1, numberOfPages)];
+            __block ORKHTMLHeaderPrintFormatter *headerFormatter;
+            if ([NSThread isMainThread]) {
+                headerFormatter = [[ORKHTMLHeaderPrintFormatter alloc]
+                                   initWithMarkupText:headerContent];
+            } else {
+                dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    headerFormatter = [[ORKHTMLHeaderPrintFormatter alloc]
+                                       initWithMarkupText:headerContent];
+                    dispatch_semaphore_signal(semaphore);
+                });
+                dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW,
+                                                                 NSEC_PER_SEC*2));
+            }
+            [self addPrintFormatter:headerFormatter startingAtPageAtIndex:pageIndex];
+        }
+    }
+    if (_headerFooterDelegate && [_headerFooterDelegate respondsToSelector:
+                                  @selector(printPageRenderer:footerContentForPageInRange:)]) {
+        for (NSInteger pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
+            NSString *footerContent = [_headerFooterDelegate printPageRenderer:self
+                                                   footerContentForPageInRange:
+                                       NSMakeRange(pageIndex+1, numberOfPages)];
+            __block ORKHTMLFooterPrintFormatter *footerFormatter;
+            if ([NSThread isMainThread]) {
+                footerFormatter = [[ORKHTMLFooterPrintFormatter alloc]
+                                   initWithMarkupText:footerContent];
+
+            } else {
+                dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    footerFormatter = [[ORKHTMLFooterPrintFormatter alloc]
+                                       initWithMarkupText:footerContent];
+                    dispatch_semaphore_signal(semaphore);
+                });
+                dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW,
+                                                                 NSEC_PER_SEC*2));
+            }
+            [self addPrintFormatter:footerFormatter startingAtPageAtIndex:pageIndex];
+        }
+    }
+    return numberOfPages;
+}
+
 @end

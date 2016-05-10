@@ -35,6 +35,7 @@
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKResult.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
@@ -57,7 +58,7 @@ ORK_AVAILABLE_DECL
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLTaskStepFormatter: UIMarkupTextPrintFormatter
+@interface ORKHTMLTaskStepFormatter : UIMarkupTextPrintFormatter
 
 @property ORKPrintFormatterOptions options;
 
@@ -73,22 +74,22 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-@class ORKHTMLHeaderFooterRenderer;
+@class ORKHTMLPrintPageRenderer;
 
 ORK_AVAILABLE_DECL
 @protocol ORKHTMLHeaderFooterRendererDelegate <NSObject>
 
 @optional
-- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
 
-- (NSString *)printPageRenderer:(ORKHTMLHeaderFooterRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
 
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLHeaderFooterRenderer : UIPrintPageRenderer
+@interface ORKHTMLPrintPageRenderer : UIPrintPageRenderer
 
-@property (nonatomic, weak, nullable) id<ORKHTMLHeaderFooterRendererDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKHTMLHeaderFooterRendererDelegate> headerFooterDelegate;
 
 @end
 
