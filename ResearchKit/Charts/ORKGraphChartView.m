@@ -34,7 +34,6 @@
 #import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKXAxisView.h"
-#import "ORKYAxisView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
 #import "ORKAccessibility.h"
@@ -47,7 +46,6 @@ const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 static const CGFloat VerticalPadding = 30.0;
 static const CGFloat HorizontalPadding = 30.0;
 //static const CGFloat XAxisViewHeight = 30.0;
-//static const CGFloat YAxisViewWidth = 45.0;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
@@ -66,7 +64,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     UIView *_referenceLinesView;
     UILabel *_noDataLabel;
     //    ORKXAxisView *_xAxisView;
-    //    ORKYAxisView *_yAxisView;
+    ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
     NSMutableArray<CALayer *> *_verticalReferenceLineLayers;
     NSMutableArray<CALayer *> *_horizontalReferenceLineLayers;
@@ -98,7 +96,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self obtainDataPoints];
     [self calculateMinAndMaxValues];
     //    [_xAxisView updateTitles];
-    //    [_yAxisView updateTicksAndLabels];
+    [_yAxisView updateTicksAndLabels];
     [self updateLineLayers];
     [self updatePointLayers];
     [self updateNoDataLabel];
@@ -112,7 +110,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     }
     _axisColor = axisColor;
     //    _xAxisView.axisColor = _axisColor;
-    //    _yAxisView.axisColor = _axisColor;
+    _yAxisView.axisColor = _axisColor;
 }
 
 - (void)setVerticalAxisTitleColor:(UIColor *)verticalAxisTitleColor {
@@ -120,7 +118,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
     }
     _verticalAxisTitleColor = verticalAxisTitleColor;
-    //    _yAxisView.titleColor = _verticalAxisTitleColor;
+    _yAxisView.titleColor = _verticalAxisTitleColor;
 }
 
 - (void)setReferenceLineColor:(UIColor *)referenceLineColor {
@@ -196,6 +194,10 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     
+    _horizontalReferenceLineFactors = @[@0.0f, @0.2f, @0.4f, @0.6f, @0.8f, @1.0f];
+    _graphContentVerticalInset = VerticalPadding;
+    _graphContentHorizontalInset = HorizontalPadding;
+    
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
@@ -260,9 +262,9 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     
     //    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
     //    [self addSubview:_xAxisView];
-    //
-    //    _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
-    //    [self addSubview:_yAxisView];
+    
+    _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
+//    [self addSubview:_yAxisView];
     
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
@@ -389,11 +391,6 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     //                                  CGRectGetMaxY(_plotView.frame),
     //                                  CGRectGetWidth(_plotView.frame),
     //                                  XAxisViewHeight);
-    //
-    //    _yAxisView.frame = CGRectMake(CGRectGetWidth(self.frame) - YAxisViewWidth,
-    //                                  TopPadding,
-    //                                  YAxisViewWidth,
-    //                                  CGRectGetHeight(_plotView.frame));
     
     [self updateAndLayoutHorizontalReferenceLineLayers];
     [self updateAndLayoutVerticalReferenceLineLayers];
@@ -430,9 +427,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     if (_showsHorizontalReferenceLines) {
         _horizontalReferenceLineLayers = [NSMutableArray new];
         
-        NSArray *yAxisLabelFactors = @[@0.0f, @0.2f, @0.4f, @0.6f, @0.8f, @1.0f];
-        
-        for (NSNumber *factorNumber in yAxisLabelFactors) {
+        for (NSNumber *factorNumber in _horizontalReferenceLineFactors) {
             
             CAShapeLayer *layer = [CAShapeLayer layer];
             layer.strokeColor = _referenceLineColor.CGColor;

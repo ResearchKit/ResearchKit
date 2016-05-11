@@ -478,7 +478,7 @@
 		BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */; };
 		BCB96C131B19C0EC002A0B96 /* ORKStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */; };
-		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; };
+		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */; };
 		BCD192DF1B81240400FCC08A /* ORKPieChartPieView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */; };
 		BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */; };
@@ -2259,6 +2259,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */,
 				244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
 				BC13CE391B0660220044153C /* ORKNavigableOrderedTask.h in Headers */,
@@ -2446,7 +2447,6 @@
 				861D2AF01B8409D9008C4CD0 /* ORKTimedWalkContentView.h in Headers */,
 				86C40E0C1A8D7C5C00081FAC /* ORKConsentReviewStepViewController.h in Headers */,
 				86C40C321A8D7C5C00081FAC /* ORKFitnessStepViewController.h in Headers */,
-				BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */,
 				86C40DBE1A8D7C5C00081FAC /* ORKTableViewCell.h in Headers */,
 				BCB6E64A1B7D531C000D5B34 /* ORKPieChartView.h in Headers */,
 				86C40C2E1A8D7C5C00081FAC /* ORKFitnessStep.h in Headers */,
