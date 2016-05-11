@@ -45,7 +45,7 @@ const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 
 static const CGFloat VerticalPadding = 30.0;
 static const CGFloat HorizontalPadding = 30.0;
-//static const CGFloat XAxisViewHeight = 30.0;
+static const CGFloat XAxisViewHeight = 30.0;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
@@ -63,7 +63,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 @implementation ORKGraphChartView {
     UIView *_referenceLinesView;
     UILabel *_noDataLabel;
-    //    ORKXAxisView *_xAxisView;
+    ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
     NSMutableArray<CALayer *> *_verticalReferenceLineLayers;
@@ -95,7 +95,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateAndLayoutVerticalReferenceLineLayers];
     [self obtainDataPoints];
     [self calculateMinAndMaxValues];
-    //    [_xAxisView updateTitles];
+    [_xAxisView updateTitles];
     [_yAxisView updateTicksAndLabels];
     [self updateLineLayers];
     [self updatePointLayers];
@@ -260,11 +260,10 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _referenceLinesView = [UIView new];
     [self addSubview:_referenceLinesView];
     
-    //    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
-    //    [self addSubview:_xAxisView];
+    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
+    [self addSubview:_xAxisView];
     
     _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
-//    [self addSubview:_yAxisView];
     
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
@@ -387,10 +386,10 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     _referenceLinesView.frame = plotViewFrame;
     _plotView.frame = plotViewFrame;
     
-    //    _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
-    //                                  CGRectGetMaxY(_plotView.frame),
-    //                                  CGRectGetWidth(_plotView.frame),
-    //                                  XAxisViewHeight);
+    _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
+                                  CGRectGetMaxY(_plotView.frame),
+                                  CGRectGetWidth(_plotView.frame),
+                                  XAxisViewHeight);
     
     [self updateAndLayoutHorizontalReferenceLineLayers];
     [self updateAndLayoutVerticalReferenceLineLayers];

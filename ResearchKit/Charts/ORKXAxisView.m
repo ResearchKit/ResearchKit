@@ -41,7 +41,6 @@ static const CGFloat LastLabelHeight = 20.0;
     __weak ORKGraphChartView *_parentGraphChartView;
     CALayer *_lineLayer;
     NSMutableArray<UILabel *> *_titleLabels;
-    NSMutableArray<CALayer *> *_titleTickLayers;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -64,20 +63,6 @@ static const CGFloat LastLabelHeight = 20.0;
         [self.layer addSublayer:_lineLayer];
     }
     return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGFloat width = self.bounds.size.width;
-    _lineLayer.frame = CGRectMake(0, -0.5, width, 1);
-    NSUInteger index = 0;
-    NSUInteger numberOfTitleLabels = _titleTickLayers.count;
-    for (CALayer *titleTickLayer in _titleTickLayers) {
-        CGFloat positionOnXAxis = xAxisPoint(index, numberOfTitleLabels, width);
-        titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
-        index++;
-    }
-    _titleLabels.lastObject.layer.cornerRadius = LastLabelHeight * 0.5;
 }
 
 - (void)setUpConstraints {
@@ -144,13 +129,10 @@ static const CGFloat LastLabelHeight = 20.0;
 
 - (void)updateTitles {
     [_titleLabels makeObjectsPerformSelector:@selector(removeFromSuperview)]; // Old constraints automatically removed when removing the views
-    [_titleTickLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     _titleLabels = nil;
-    _titleTickLayers = nil;
     
     if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
         _titleLabels = [NSMutableArray new];
-        _titleTickLayers = [NSMutableArray new];
 
         NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
         for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
@@ -163,31 +145,10 @@ static const CGFloat LastLabelHeight = 20.0;
             label.adjustsFontSizeToFitWidth = YES;
             label.minimumScaleFactor = 0.7;
             label.translatesAutoresizingMaskIntoConstraints = NO;
-            
-            if (i < (numberOfTitleLabels - 1)) {
-                label.textColor = self.tintColor;
-            } else {
-                label.textColor = [UIColor whiteColor];
-                label.backgroundColor = self.tintColor;
-                label.layer.cornerRadius = LastLabelHeight * 0.5;
-                label.layer.masksToBounds = YES;
-            }
-            
+            label.textColor = self.tintColor;
             [self addSubview:label];
             [_titleLabels addObject:label];
         }
-        
-        // Add vertical tick layers above labels
-        for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
-            CALayer *titleTickLayer = [CALayer layer];
-            CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
-            titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
-            titleTickLayer.backgroundColor = _axisColor.CGColor;
-
-            [self.layer addSublayer:titleTickLayer];
-            [_titleTickLayers addObject:titleTickLayer];
-        }
-
         [self setUpConstraints];
     }
 }
@@ -212,14 +173,6 @@ static const CGFloat LastLabelHeight = 20.0;
         [label sizeToFit];
     }
     [self setNeedsLayout];
-}
-
-- (void)setAxisColor:(UIColor *)axisColor {
-    _axisColor = axisColor;
-    _lineLayer.backgroundColor = _axisColor.CGColor;
-    for (CALayer *titleTickLayer in _titleTickLayers) {
-        titleTickLayer.backgroundColor = _axisColor.CGColor;
-    }
 }
 
 @end
