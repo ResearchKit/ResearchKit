@@ -30,7 +30,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
@@ -442,12 +441,12 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
             [_referenceLinesView.layer insertSublayer:layer atIndex:0];
             [_horizontalReferenceLineLayers addObject:layer];
             
-            CGSize plotViewSize = _plotView.bounds.size;
+            CGSize plotViewSize = self.bounds.size;
             UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
             CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - [factorNumber floatValue]);
             [horizontalReferenceLinePath moveToPoint:CGPointMake(0 - HorizontalPadding,
                                                                  tickYPosition - VerticalPadding)];
-            [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width + self.bounds.size.width,
+            [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width - HorizontalPadding,
                                                                     tickYPosition - VerticalPadding)];
             layer.path = horizontalReferenceLinePath.CGPath;
         }
