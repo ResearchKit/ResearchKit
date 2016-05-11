@@ -430,7 +430,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     if (_showsHorizontalReferenceLines) {
         _horizontalReferenceLineLayers = [NSMutableArray new];
         
-        NSArray *yAxisLabelFactors = @[@0.2f, @0.4f, @0.6f, @0.8f];
+        NSArray *yAxisLabelFactors = @[@0.0f, @0.2f, @0.4f, @0.6f, @0.8f, @1.0f];
         
         for (NSNumber *factorNumber in yAxisLabelFactors) {
             
@@ -441,12 +441,11 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
             [_referenceLinesView.layer insertSublayer:layer atIndex:0];
             [_horizontalReferenceLineLayers addObject:layer];
             
-            CGSize plotViewSize = self.bounds.size;
             UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
-            CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - [factorNumber floatValue]);
+            CGFloat tickYPosition = CGRectGetHeight(_plotView.frame) * (1 - [factorNumber floatValue]) + VerticalPadding;
             [horizontalReferenceLinePath moveToPoint:CGPointMake(0 - HorizontalPadding,
                                                                  tickYPosition - VerticalPadding)];
-            [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width - HorizontalPadding,
+            [horizontalReferenceLinePath addLineToPoint:CGPointMake(_plotView.bounds.size.width + HorizontalPadding,
                                                                     tickYPosition - VerticalPadding)];
             layer.path = horizontalReferenceLinePath.CGPath;
         }
