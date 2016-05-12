@@ -486,6 +486,7 @@
 		BF0409101CD8F62B009BBF0A /* ORKPrintFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */; };
 		BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */; };
 		BF5161501BE9C53D00174DDD /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A11BDE8DA9007FA459 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF6C837C1CE3D875002632DB /* Stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = BF6C837B1CE3D874002632DB /* Stylesheet.css */; };
 		BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */; };
 		BF91559C1BDE8D7D007FA459 /* ORKReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF91559D1BDE8D7D007FA459 /* ORKReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9155971BDE8D7D007FA459 /* ORKReviewStep.m */; };
@@ -1044,6 +1045,7 @@
 		BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPrintFormatter.h; path = Printing/ORKPrintFormatter.h; sourceTree = "<group>"; };
 		BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPrintFormatter.m; path = Printing/ORKPrintFormatter.m; sourceTree = "<group>"; };
 		BF0409141CD8F669009BBF0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HTMLTemplates.strings; sourceTree = "<group>"; };
+		BF6C837B1CE3D874002632DB /* Stylesheet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = Stylesheet.css; sourceTree = "<group>"; };
 		BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep_Internal.h; sourceTree = "<group>"; };
 		BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep.h; sourceTree = "<group>"; };
 		BF9155971BDE8D7D007FA459 /* ORKReviewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStep.m; sourceTree = "<group>"; };
@@ -2201,6 +2203,7 @@
 				BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */,
 				BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */,
 				BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */,
+				BF6C837B1CE3D874002632DB /* Stylesheet.css */,
 			);
 			name = Printing;
 			sourceTree = "<group>";
@@ -2680,6 +2683,7 @@
 				B1A860ED1A9693C400EA57B7 /* consent_04@2x.m4v in Resources */,
 				B17FE7FD1A8DBE7C00BF9C28 /* Artwork.xcassets in Resources */,
 				B1C0F4E41A9BA65F0022C153 /* ResearchKit.strings in Resources */,
+				BF6C837C1CE3D875002632DB /* Stylesheet.css in Resources */,
 				86C40DFC1A8D7C5C00081FAC /* MovieTintShader.vsh in Resources */,
 				B1A860F51A9693C400EA57B7 /* consent_05@3x.m4v in Resources */,
 				BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */,

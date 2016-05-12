@@ -52,9 +52,6 @@ ORK_AVAILABLE_DECL
 - (ORKPrintFormatterOptions)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
 - (BOOL)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
-
-- (NSString *)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter titleForTask:(id<ORKTask>)task;
-
 @end
 
 ORK_CLASS_AVAILABLE
@@ -65,6 +62,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, weak, nullable) id<ORKHTMLTaskStepFormatterDelegate> delegate;
 
 @property (nonatomic, nullable) NSString *styleSheetContent;
+
+@property (nonatomic, nullable) NSURL *styleSheetURL;
 
 - (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
 

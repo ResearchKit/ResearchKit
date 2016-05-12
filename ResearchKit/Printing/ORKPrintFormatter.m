@@ -62,6 +62,7 @@ static const CGFloat POINTS_PER_INCH = 72;
         _steps = [[NSMutableArray alloc] initWithArray:@[]];
         _stepResults = [[NSMutableDictionary alloc] init];
         _styleSheetContent = @"";
+        _styleSheetURL = nil;
         self.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f);
     }
     return self;
@@ -111,15 +112,14 @@ static const CGFloat POINTS_PER_INCH = 72;
 #pragma mark - internal
 
 - (NSString *)HTMLFromTask:(id<ORKTask>)task containingSteps:(NSArray<ORKStep *> *)steps withResult:(ORKTaskResult *)result {
-    NSString *taskTitle = @"";
-    if (_delegate && [_delegate respondsToSelector:@selector(printFormatter:titleForTask:)]) {
-        taskTitle = [_delegate printFormatter:self titleForTask:task];
-    }
     NSString *taskBody = @"";
     for (ORKStep *step in steps) {
         taskBody = [@[taskBody, [self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:NO]] componentsJoinedByString:@""];
     }
-    NSString *taskHTML = [_ORK_HTMLfromTemplate(@"TASK"), taskTitle, taskBody];
+    NSString *taskHTML = [_ORK_HTMLfromTemplate(@"TASK"), taskBody];
+    if ([_styleSheetContent isEqualToString:@""] && _styleSheetURL) {
+        _styleSheetContent = [NSString stringWithContentsOfURL:_styleSheetURL encoding:NSUTF8StringEncoding error:nil];
+    }
     return [_ORK_HTMLfromTemplate(@"HTML"), _styleSheetContent, taskHTML];
 }
 
@@ -136,15 +136,20 @@ static const CGFloat POINTS_PER_INCH = 72;
     NSString *stepFooter = @"";
     if (self.options & ORKPrintFormatterOptionIncludeTimestamp) {
         //TODO: use ORKLocalizedString
-        stepFooter = [_ORK_HTMLfromTemplate(@"STEP_FOOTER"), @"Start Date", [self stringFromDate:result.startDate], @"End Date", [self stringFromDate:result.endDate]];
+        NSString *footerString = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:result.startDate], [self stringFromDate:result.endDate]];
+        stepFooter = [_ORK_HTMLfromTemplate(@"STEP_FOOTER"), footerString];
     }
     NSString *stepHTML = [_ORK_HTMLfromTemplate(@"STEP"), stepHeader, stepBody, stepFooter];
+    if ([_styleSheetContent isEqualToString:@""] && _styleSheetURL) {
+        _styleSheetContent = [NSString stringWithContentsOfURL:_styleSheetURL encoding:NSUTF8StringEncoding error:nil];
+    }
     return addSurroundingHTMLTags ? [_ORK_HTMLfromTemplate(@"HTML"), _styleSheetContent, stepHTML] : stepHTML;
 }
 
 - (NSString *)HTMLfromQuestionStep:(ORKQuestionStep *)questionStep andResult:(ORKStepResult *)result {
     ORKQuestionResult *questionResult = (ORKQuestionResult *)result.results.firstObject;
-    return [_ORK_HTMLfromTemplate(@"QUESTION_STEP_ANSWER"), [self HTMLfromAnswerFormat:questionStep.impliedAnswerFormat andResult:questionResult]];
+    NSString *answerHTML = [self HTMLfromAnswerFormat:questionStep.impliedAnswerFormat andResult:questionResult];
+    return [answerHTML isEqualToString:@""] ? @"" : [_ORK_HTMLfromTemplate(@"QUESTION_STEP_ANSWER"), answerHTML];
 }
 
 - (NSString *)HTMLfromAnswerFormat:(ORKAnswerFormat *)answerFormat andResult:(ORKQuestionResult *)result {
@@ -169,15 +174,11 @@ static const CGFloat POINTS_PER_INCH = 72;
             dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2));
         }
         if (image) {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [self HTMLFromImage:image withTitle:[[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"]], @""];
-        } else {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""];
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_ANSWER"), [self HTMLFromImage:image withTitle:[[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"]], @""];
         }
     } else {
         if (result && !result.isAnswerEmpty) {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"], @""];
-        } else {
-            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""];
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_ANSWER"), [[answerFormat stringForAnswer:result.answer] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"], @""];
         }
     }
     return answerHTML;
@@ -193,27 +194,37 @@ static const CGFloat POINTS_PER_INCH = 72;
         }
     } else {
         for (NSNumber *choiceIndex in [helper selectedIndexesForAnswer:result.answer]) {
-             answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex.unsignedIntegerValue] isSelected:YES]] componentsJoinedByString:@""];
+            answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex.unsignedIntegerValue] isSelected:YES]] componentsJoinedByString:@""];
         }
     }
-    return [answerHTML isEqualToString:@""] ? [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), @"&nbsp;", @""] : answerHTML;
+    return answerHTML;
 }
 
 - (NSString *)HTMLfromAnswerOption:(id<ORKAnswerOption>)answerOption isSelected:(BOOL)isSelected {
     NSString *answerHTML = @"";
     if ([answerOption isKindOfClass:[ORKTextChoice class]]) {
         ORKTextChoice *textChoice = (ORKTextChoice *)answerOption;
-        NSString *textChoiceText = textChoice.text;
-        if (textChoice.detailText) {
-            textChoiceText = [@[textChoiceText, textChoice.detailText] componentsJoinedByString:@"<br/>"];
+        if (textChoice.value != ORKNullAnswerValue()) {
+            NSString *textChoiceText = textChoice.text;
+            if (textChoice.detailText) {
+                textChoiceText = [@[textChoiceText, textChoice.detailText] componentsJoinedByString:@"<br/>"];
+            }
+            textChoiceText = [textChoiceText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
+            if (self.options & ORKPrintFormatterOptionIncludeChoices) {
+                answerHTML = [_ORK_HTMLfromTemplate(isSelected ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER"), textChoiceText, @""];
+            } else {
+                answerHTML = [_ORK_HTMLfromTemplate(@"STEP_ANSWER"), textChoiceText, @""];
+            }
         }
-        textChoiceText = [textChoiceText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
-        answerHTML = [_ORK_HTMLfromTemplate(isSelected ? @"STEP_SELECTED_ANSWER" : @"STEP_UNSELECTED_ANSWER"), textChoiceText, @""];
     } else if ([answerOption isKindOfClass:[ORKImageChoice class]]) {
         ORKImageChoice *imageChoice = (ORKImageChoice *)answerOption;
         NSString *imageChoiceText = imageChoice.text ? imageChoice.text : @"";
         imageChoiceText = [imageChoiceText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
-        answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoiceText], @""] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoiceText], @""];
+        if (self.options & ORKPrintFormatterOptionIncludeChoices) {
+            answerHTML = isSelected ? [_ORK_HTMLfromTemplate(@"STEP_SELECTED_ANSWER"), [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoiceText], @""] : [_ORK_HTMLfromTemplate(@"STEP_UNSELECTED_ANSWER"), [self HTMLFromImage:imageChoice.normalStateImage withTitle:imageChoiceText], @""];
+        } else {
+            answerHTML = [_ORK_HTMLfromTemplate(@"STEP_ANSWER"), [self HTMLFromImage:imageChoice.selectedStateImage withTitle:imageChoiceText], @""];
+        }
     }
     return answerHTML;
 }
@@ -244,7 +255,7 @@ static const CGFloat POINTS_PER_INCH = 72;
                 return [result.identifier isEqualToString:item.identifier];
             }];
             ORKQuestionResult *questionResult = index != NSNotFound ? (ORKQuestionResult *)result.results[index] : @"";
-            formStepHTML = [@[formStepHTML, [_ORK_HTMLfromTemplate(@"FORM_STEP_ANSWER"), item.text, [self HTMLfromAnswerFormat:item.impliedAnswerFormat andResult:questionResult]]] componentsJoinedByString:@"<br/>"];
+            formStepHTML = [@[formStepHTML, [_ORK_HTMLfromTemplate(@"FORM_STEP_ANSWER"), item.text, [self HTMLfromAnswerFormat:item.impliedAnswerFormat andResult:questionResult]]] componentsJoinedByString:@""];
         } else {
             formStepHTML = [@[formStepHTML, [_ORK_HTMLfromTemplate(@"FORM_STEP"), item.text]] componentsJoinedByString:@""];
         }

@@ -3336,12 +3336,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
     ORKHTMLTaskStepFormatter *printFormatter = [[ORKHTMLTaskStepFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
     printFormatter.delegate = self;
-    printFormatter.options = ORKPrintFormatterOptionIncludeChoices;
-    printFormatter.styleSheetContent = @".selectedAnswerPrimaryColumn{font-weight: bold;} .figure{margin: 0;}";
+    printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
+    printFormatter.styleSheetURL = [ORKBundle() URLForResource:@"Stylesheet" withExtension:@"css"];
     [printFormatter prepare];
     ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
     renderer.headerHeight = 25;
-    renderer.footerHeight = 25;
+    renderer.footerHeight = 30;
     [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
     renderer.headerFooterDelegate = self;
     UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
@@ -3357,9 +3357,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return YES;
 }
 
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range {
-    NSString *headerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body>Page %lu of %lu</body></html>", range.location, range.location];
-    return headerContent;
+- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range {
+    NSString *footerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body><p style=\"text-align: center\">Page %lu of %lu</p></body></html>", range.location, range.location];
+    return footerContent;
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
