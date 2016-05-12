@@ -113,20 +113,8 @@ static const CGFloat ImageVerticalPadding = 3.0;
             
             CGFloat factor = factorNumber.floatValue;
             
-            CALayer *tickLayer = [CALayer layer];
-            CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-            CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphChartViewAxisTickLength;
-            tickLayer.frame = CGRectMake(tickXOrigin,
-                                         tickYPosition - 0.5,
-                                         ORKGraphChartViewAxisTickLength,
-                                         1);
-            tickLayer.backgroundColor = _parentGraphChartView.axisColor.CGColor;
-
-            [self.layer addSublayer:tickLayer];
-//            _tickLayersByFactor[factorNumber] = tickLayer;
-            
             CGFloat labelHeight = 20;
-            CGFloat labelYPosition = tickYPosition - labelHeight / 2;
+            CGFloat labelYPosition = (CGRectGetHeight(self.bounds) * (1 - factor)) - labelHeight / 2;
             UILabel *tickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,
                                                                            labelYPosition,
                                                                            width - (ORKGraphChartViewAxisTickLength + ORKGraphChartViewYAxisTickPadding),

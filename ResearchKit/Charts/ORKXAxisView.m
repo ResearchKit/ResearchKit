@@ -2,7 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -34,12 +34,8 @@
 #import "ORKXAxisView.h"
 #import "ORKGraphChartView_Internal.h"
 
-
-static const CGFloat LastLabelHeight = 20.0;
-
 @implementation ORKXAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
-    CALayer *_lineLayer;
     NSMutableArray<UILabel *> *_titleLabels;
 }
 
@@ -57,10 +53,6 @@ static const CGFloat LastLabelHeight = 20.0;
     if (self) {
         _parentGraphChartView = parentGraphChartView;
         _axisColor = _parentGraphChartView.axisColor;
-        
-        _lineLayer = [CALayer layer];
-        _lineLayer.backgroundColor = _axisColor.CGColor;
-        [self.layer addSublayer:_lineLayer];
     }
     return self;
 }
@@ -99,30 +91,6 @@ static const CGFloat LastLabelHeight = 20.0;
                                                                multiplier:multiplier
                                                                  constant:0.0]];
         }
-        
-        if (i == _titleLabels.count - 1) {
-            NSLayoutConstraint *constraint = nil;
-            
-            constraint = [NSLayoutConstraint constraintWithItem:label
-                                                      attribute:NSLayoutAttributeHeight
-                                                      relatedBy:NSLayoutRelationEqual
-                                                         toItem:nil
-                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                     multiplier:1.0
-                                                       constant:LastLabelHeight];
-            constraint.priority = UILayoutPriorityRequired - 1;
-            [constraints addObject:constraint];
-            
-            constraint = [NSLayoutConstraint constraintWithItem:label
-                                                      attribute:NSLayoutAttributeWidth
-                                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                         toItem:nil
-                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                     multiplier:1.0
-                                                       constant:LastLabelHeight];
-            constraint.priority = UILayoutPriorityRequired - 1;
-            [constraints addObject:constraint];
-        }
     }
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -133,7 +101,7 @@ static const CGFloat LastLabelHeight = 20.0;
     
     if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
         _titleLabels = [NSMutableArray new];
-
+        
         NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
         for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
             NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtPointIndex:i];

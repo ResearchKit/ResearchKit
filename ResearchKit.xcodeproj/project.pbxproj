@@ -473,7 +473,7 @@
 		BCB6E65F1B7D534C000D5B34 /* ORKGraphChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6581B7D534C000D5B34 /* ORKGraphChartView.m */; };
 		BCB6E6601B7D534C000D5B34 /* ORKLineGraphChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6591B7D534C000D5B34 /* ORKLineGraphChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E6611B7D534C000D5B34 /* ORKLineGraphChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E65A1B7D534C000D5B34 /* ORKLineGraphChartView.m */; };
-		BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */; };
+		BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E6671B7D535F000D5B34 /* ORKXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */; };
 		BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */; };
@@ -2259,6 +2259,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */,
 				BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */,
 				244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
@@ -2338,7 +2339,6 @@
 				106FF29E1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h in Headers */,
 				86C40D021A8D7C5C00081FAC /* ORKContinueButton.h in Headers */,
 				86C40D681A8D7C5C00081FAC /* ORKQuestionStepViewController_Private.h in Headers */,
-				BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */,
 				86C40D121A8D7C5C00081FAC /* ORKDefines.h in Headers */,
 				86C40D401A8D7C5C00081FAC /* ORKInstructionStep.h in Headers */,
 				1C17C9F41CDA734600620E5E /* PrefixHeader.pch in Headers */,

@@ -33,7 +33,6 @@
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
-#import "ORKXAxisView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
 #import "ORKAccessibility.h"
@@ -45,6 +44,7 @@ const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 
 static const CGFloat VerticalPadding = 30.0;
 static const CGFloat HorizontalPadding = 30.0;
+static const CGFloat YAxisViewWidth = 45.0;
 static const CGFloat XAxisViewHeight = 30.0;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
@@ -261,8 +261,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self addSubview:_referenceLinesView];
     
     _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
-    [self addSubview:_xAxisView];
-    
     _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
     
     _plotView = [UIView new];
@@ -386,10 +384,16 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     _referenceLinesView.frame = plotViewFrame;
     _plotView.frame = plotViewFrame;
     
-    _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
-                                  CGRectGetMaxY(_plotView.frame),
-                                  CGRectGetWidth(_plotView.frame),
-                                  XAxisViewHeight);
+    
+    CGRect yAxisFrame = [_yAxisView frame];
+    yAxisFrame.size.width = YAxisViewWidth;
+    yAxisFrame.size.height = CGRectGetHeight([self frame]) - (VerticalPadding * 2);
+    [_yAxisView setFrame:yAxisFrame];
+    
+    CGRect xAxisFrame = [_xAxisView frame];
+    xAxisFrame.size.width =  CGRectGetWidth([self frame]) - (VerticalPadding * 2);
+    xAxisFrame.size.height = XAxisViewHeight;
+    [_xAxisView setFrame:xAxisFrame];
     
     [self updateAndLayoutHorizontalReferenceLineLayers];
     [self updateAndLayoutVerticalReferenceLineLayers];

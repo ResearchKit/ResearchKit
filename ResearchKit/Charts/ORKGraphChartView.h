@@ -33,6 +33,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ORKDefines.h"
+#import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -279,13 +280,21 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong) NSArray <NSNumber *> *horizontalReferenceLineFactors;
 
+/**
+ The x-axis for the graph. The labels on the axis correspond to the values found at each horizontal reference
+ point.
+ 
+ The view will be created for you along with it's proper size but you are responsible for adding it as a subview
+ to the view of your choice and setting the origin.
+ */
+@property(nonatomic, strong) ORKXAxisView *xAxisView;
 
 /**
  The y-axis for the graph. The labels on the axis correspond to the values found at each horizontal reference
  point.
  
- The view will be created for you along with it's proper bounds but you are responsible for adding it as a subview
- to the view of your choice.
+ The view will be created for you along with it's proper size but you are responsible for adding it as a subview
+ to the view of your choice and setting the origin.
  */
 @property(nonatomic, strong) ORKYAxisView *yAxisView;
 
