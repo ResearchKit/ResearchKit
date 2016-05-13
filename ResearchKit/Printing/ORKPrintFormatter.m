@@ -91,11 +91,11 @@ static const CGFloat POINTS_PER_INCH = 72;
 }
 
 - (void)prepare {
-    NSMutableArray *formatableSteps = [[NSMutableArray alloc] init];
+    NSMutableArray *formatableSteps = [[NSMutableArray alloc] initWithArray:_steps];
     for (ORKStep *step in _steps) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
+        if (!self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
             if ([self.delegate printFormatter:self shouldFormatStep:step withResult:_stepResults[step.identifier]]) {
-                [formatableSteps addObject:step];
+                [formatableSteps removeObject:step];
             }
         }
     }
@@ -189,7 +189,7 @@ static const CGFloat POINTS_PER_INCH = 72;
     ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
     if (self.options & ORKPrintFormatterOptionIncludeChoices) {
         for (NSUInteger choiceIndex = 0; choiceIndex < [helper choiceCount]; choiceIndex++) {
-            BOOL isSelected = [[helper selectedIndexesForAnswer:result.answer] containsObject:[NSNumber numberWithInt:choiceIndex]];
+            BOOL isSelected = [[helper selectedIndexesForAnswer:result.answer] containsObject:[NSNumber numberWithUnsignedInteger:choiceIndex]];
             answerHTML = [@[answerHTML, [self HTMLfromAnswerOption:[helper answerOptionAtIndex:choiceIndex] isSelected:isSelected]] componentsJoinedByString:@""];
         }
     } else {
@@ -254,7 +254,7 @@ static const CGFloat POINTS_PER_INCH = 72;
             NSUInteger index = [result.results indexOfObjectPassingTest:^BOOL(ORKResult *result, NSUInteger index, BOOL *stop) {
                 return [result.identifier isEqualToString:item.identifier];
             }];
-            ORKQuestionResult *questionResult = index != NSNotFound ? (ORKQuestionResult *)result.results[index] : @"";
+            ORKQuestionResult *questionResult = index != NSNotFound ? (ORKQuestionResult *)result.results[index] : nil;
             formStepHTML = [@[formStepHTML, [_ORK_HTMLfromTemplate(@"FORM_STEP_ANSWER"), item.text, [self HTMLfromAnswerFormat:item.impliedAnswerFormat andResult:questionResult]]] componentsJoinedByString:@""];
         } else {
             formStepHTML = [@[formStepHTML, [_ORK_HTMLfromTemplate(@"FORM_STEP"), item.text]] componentsJoinedByString:@""];
