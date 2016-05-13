@@ -2,7 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -30,26 +30,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
-#import "ORKXAxisView.h"
-#import "ORKYAxisView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
 #import "ORKAccessibility.h"
 
-
-const CGFloat ORKGraphChartViewLeftPadding = 10.0;
 const CGFloat ORKGraphChartViewPointAndLineSize = 8.0;
 const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration = 0.1;
 const CGFloat ORKGraphChartViewAxisTickLength = 12.0;
 const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 
-static const CGFloat TopPadding = 7.0;
-static const CGFloat XAxisViewHeight = 30.0;
+static const CGFloat VerticalPadding = 30.0;
+static const CGFloat HorizontalPadding = 30.0;
 static const CGFloat YAxisViewWidth = 45.0;
+static const CGFloat XAxisViewHeight = 30.0;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
@@ -70,8 +66,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
-    CAShapeLayer *_horizontalReferenceLineLayer;
     NSMutableArray<CALayer *> *_verticalReferenceLineLayers;
+    NSMutableArray<CALayer *> *_horizontalReferenceLineLayers;
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
@@ -113,7 +109,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         axisColor = ORKColor(ORKGraphAxisColorKey);
     }
     _axisColor = axisColor;
-    _xAxisView.axisColor = _axisColor;
+    //    _xAxisView.axisColor = _axisColor;
     _yAxisView.axisColor = _axisColor;
 }
 
@@ -130,7 +126,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
     }
     _referenceLineColor = referenceLineColor;
-    _horizontalReferenceLineLayer.strokeColor = referenceLineColor.CGColor;
     [self updateAndLayoutVerticalReferenceLineLayers];
     [self updatePlotColors];
 }
@@ -161,20 +156,19 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _noDataLabel.text = _noDataText;
 }
 
-- (void)setMaximumValueImage:(UIImage *)maximumValueImage {
-    _maximumValueImage = maximumValueImage;
-    [_yAxisView updateTicksAndLabels];
-}
-
-- (void)setMinimumValueImage:(UIImage *)minimumValueImage {
-    _minimumValueImage = minimumValueImage;
-    [_yAxisView updateTicksAndLabels];
-}
+//- (void)setMaximumValueImage:(UIImage *)maximumValueImage {
+//    _maximumValueImage = maximumValueImage;
+//    [_yAxisView updateTicksAndLabels];
+//}
+//
+//- (void)setMinimumValueImage:(UIImage *)minimumValueImage {
+//    _minimumValueImage = minimumValueImage;
+//    [_yAxisView updateTicksAndLabels];
+//}
 
 - (void)setShowsHorizontalReferenceLines:(BOOL)showsHorizontalReferenceLines {
     _showsHorizontalReferenceLines = showsHorizontalReferenceLines;
-    [self updateHorizontalReferenceLines];
-    [self layoutHorizontalReferenceLineLayers];
+    [self updateAndLayoutHorizontalReferenceLineLayers];
 }
 
 - (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
@@ -200,6 +194,10 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     
+    _horizontalReferenceLineFactors = @[@0.0f, @0.2f, @0.4f, @0.6f, @0.8f, @1.0f];
+    _graphContentVerticalInset = VerticalPadding;
+    _graphContentHorizontalInset = HorizontalPadding;
+    
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
@@ -207,11 +205,11 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     
     [self setUpViews];
     
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+    //    [self updateContentSizeCategoryFonts];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self
+    //                                             selector:@selector(updateContentSizeCategoryFonts)
+    //                                                 name:UIContentSizeCategoryDidChangeNotification
+    //                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(_axVoiceOverStatusChanged:)
@@ -251,28 +249,25 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     }
 }
 
-- (void)updateContentSizeCategoryFonts {
-    _xAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    _yAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _scrubberLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-}
+//- (void)updateContentSizeCategoryFonts {
+//    _xAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+//    _yAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+//    _scrubberLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+//    _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+//}
 
 - (void)setUpViews {
     _referenceLinesView = [UIView new];
     [self addSubview:_referenceLinesView];
     
     _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
-    [self addSubview:_xAxisView];
-
     _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
-    [self addSubview:_yAxisView];
     
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
     
-    [self updateHorizontalReferenceLines];
+    [self updateAndLayoutHorizontalReferenceLineLayers];
     
     _scrubberLine = [UIView new];
     _scrubberLine.backgroundColor = _scrubberLineColor;
@@ -301,18 +296,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self addSubview:_scrubberThumbView];
 }
 
-- (void)updateHorizontalReferenceLines {
-    [_horizontalReferenceLineLayer removeFromSuperlayer];
-    _horizontalReferenceLineLayer = nil;
-    if (_showsHorizontalReferenceLines) {
-        _horizontalReferenceLineLayer = [CAShapeLayer layer];
-        _horizontalReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
-        _horizontalReferenceLineLayer.lineDashPattern = @[@6, @4];
-        
-        [_referenceLinesView.layer insertSublayer:_horizontalReferenceLineLayer atIndex:0];
-    }
-}
-
 inline static UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color, CGFloat height) {
     static UIImage *lineImage = nil;
     static UIColor *lineImageColor = nil;
@@ -323,7 +306,7 @@ inline static UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *co
         UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
         [referenceLinePath moveToPoint:CGPointMake(0, 0)];
         [referenceLinePath addLineToPoint:CGPointMake(0, height)];
-
+        
         CAShapeLayer *referenceLineLayer = [CAShapeLayer new];
         referenceLineLayer.path = referenceLinePath.CGPath;
         referenceLineLayer.strokeColor = color.CGColor;
@@ -362,7 +345,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
                 _hasDataPoints = YES;
             }
         }
-
+        
         // Add dummy points for empty data points
         NSInteger emptyPointsCount = self.numberOfXAxisPoints - _dataPoints[plotIndex].count;
         for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
@@ -393,25 +376,26 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect plotViewFrame = CGRectMake(ORKGraphChartViewLeftPadding,
-                                      TopPadding,
-                                      CGRectGetWidth(self.frame) - YAxisViewWidth - ORKGraphChartViewLeftPadding,
-                                      CGRectGetHeight(self.frame) - XAxisViewHeight - TopPadding);
-
+    CGRect plotViewFrame = CGRectMake(HorizontalPadding,
+                                      VerticalPadding,
+                                      CGRectGetWidth(self.frame) - (HorizontalPadding * 2.0f),
+                                      CGRectGetHeight(self.frame) - (VerticalPadding * 2.0f));
+    
     _referenceLinesView.frame = plotViewFrame;
     _plotView.frame = plotViewFrame;
     
-    _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
-                                  CGRectGetMaxY(_plotView.frame),
-                                  CGRectGetWidth(_plotView.frame),
-                                  XAxisViewHeight);
-
-    _yAxisView.frame = CGRectMake(CGRectGetWidth(self.frame) - YAxisViewWidth,
-                                  TopPadding,
-                                  YAxisViewWidth,
-                                  CGRectGetHeight(_plotView.frame));
     
-    [self layoutHorizontalReferenceLineLayers];
+    CGRect yAxisFrame = [_yAxisView frame];
+    yAxisFrame.size.width = YAxisViewWidth;
+    yAxisFrame.size.height = CGRectGetHeight([self frame]) - (VerticalPadding * 2);
+    [_yAxisView setFrame:yAxisFrame];
+    
+    CGRect xAxisFrame = [_xAxisView frame];
+    xAxisFrame.size.width =  CGRectGetWidth([self frame]) - (VerticalPadding * 2);
+    xAxisFrame.size.height = XAxisViewHeight;
+    [_xAxisView setFrame:xAxisFrame];
+    
+    [self updateAndLayoutHorizontalReferenceLineLayers];
     [self updateAndLayoutVerticalReferenceLineLayers];
     
     if (_noDataLabel) {
@@ -423,9 +407,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     
     // Scrubber Views
     _scrubberLine.frame = CGRectMake(CGRectGetMinX(_scrubberLine.frame),
-                                     TopPadding,
+                                     0,
                                      1,
-                                     CGRectGetHeight(_plotView.frame));
+                                     CGRectGetHeight(self.frame));
     
     [self updateYAxisPoints];
     [self layoutLineLayers];
@@ -440,15 +424,29 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
     }
 }
 
-- (void)layoutHorizontalReferenceLineLayers {
+- (void)updateAndLayoutHorizontalReferenceLineLayers {
+    [_horizontalReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    _horizontalReferenceLineLayers = nil;
     if (_showsHorizontalReferenceLines) {
-        CGSize plotViewSize = _plotView.bounds.size;
-        UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
-        [horizontalReferenceLinePath moveToPoint:CGPointMake(0,
-                                                             plotViewSize.height / 2)];
-        [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width + _yAxisView.bounds.size.width,
-                                                                plotViewSize.height / 2)];
-        _horizontalReferenceLineLayer.path = horizontalReferenceLinePath.CGPath;
+        _horizontalReferenceLineLayers = [NSMutableArray new];
+        
+        for (NSNumber *factorNumber in _horizontalReferenceLineFactors) {
+            
+            CAShapeLayer *layer = [CAShapeLayer layer];
+            layer.strokeColor = _referenceLineColor.CGColor;
+            layer.lineDashPattern = @[@6, @4];
+            
+            [_referenceLinesView.layer insertSublayer:layer atIndex:0];
+            [_horizontalReferenceLineLayers addObject:layer];
+            
+            UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
+            CGFloat tickYPosition = CGRectGetHeight(_plotView.frame) * (1 - [factorNumber floatValue]) + VerticalPadding;
+            [horizontalReferenceLinePath moveToPoint:CGPointMake(0 - HorizontalPadding,
+                                                                 tickYPosition - VerticalPadding)];
+            [horizontalReferenceLinePath addLineToPoint:CGPointMake(_plotView.bounds.size.width + HorizontalPadding,
+                                                                    tickYPosition - VerticalPadding)];
+            layer.path = horizontalReferenceLinePath.CGPath;
+        }
     }
 }
 
@@ -553,7 +551,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         // avoid layout if points have not been normalized yet
         return;
     }
-
+    
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
     }
@@ -715,7 +713,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     void (^updateScrubberLinePosition)() = ^{
-        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
+        self.scrubberLine.center = CGPointMake(xPosition + HorizontalPadding, self.scrubberLine.center.y);
     };
     BOOL scrubberlineAnimated = (self.scrubberLine.alpha > 0);
     BOOL scrubberlineAccessoriesAnimated = !self.scrubberAccessoryViewsHidden;
@@ -749,8 +747,8 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition plotIndex:plotIndex];
     CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition plotIndex:plotIndex];
-
-    _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
+    
+    _scrubberThumbView.center = CGPointMake(xPosition + HorizontalPadding, scrubberYPosition + VerticalPadding);
     _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue == ORKCGFloatInvalidValue ? 0.0 : scrubbingValue ];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
                                                                            _plotView.bounds.size.height)
@@ -761,7 +759,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                       CGRectGetMinY(_scrubberLine.frame),
                                       textSize.width + ScrubberLabelHorizontalPadding,
                                       textSize.height + ScrubberLabelVerticalPadding);
-
+    
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberAccessoryViewsHidden:YES];
     } else {
@@ -792,7 +790,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat value = ORKCGFloatInvalidValue;
     if (snapped) {
-
+        
         NSInteger positionIndex = 0;
         NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
@@ -857,7 +855,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
-      
+        
         NSUInteger numberOfPoints = _pointLayers[plotIndex].count;
         if (numberOfPoints > 0) {
             CGFloat pointFadeDuration = duration / numberOfPoints;
@@ -868,7 +866,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                 pointDelay += pointFadeDuration;
             }
         }
-
+        
         NSUInteger numberOfLines = _lineLayers[plotIndex].count;
         if (numberOfLines > 0) {
             CGFloat lineFadeDuration = duration / numberOfLines;

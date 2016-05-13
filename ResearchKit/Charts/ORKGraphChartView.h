@@ -33,7 +33,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ORKDefines.h"
-
+#import "ORKXAxisView.h"
+#import "ORKYAxisView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -260,12 +261,42 @@ ORK_CLASS_AVAILABLE
 */
 @property (nonatomic, readonly) CGFloat maximumValue;
 
+@property (nonatomic, readonly) CGFloat graphContentVerticalInset;
+@property (nonatomic, readonly) CGFloat graphContentHorizontalInset;
+
 /**
  A Boolean value indicating whether the graph chart view should draw horizontal reference lines.
 
  The default value of this property is NO.
  */
 @property (nonatomic) BOOL showsHorizontalReferenceLines;
+
+/**
+ The values in the array are percentages used to draw reference lines based on your maximum and
+ minimum values
+ 
+ The default value of this property will draw reference lines starting at the minimum adding 20 percent
+ up to the maximum .
+ */
+@property (nonatomic, strong) NSArray <NSNumber *> *horizontalReferenceLineFactors;
+
+/**
+ The x-axis for the graph. The labels on the axis correspond to the values found at each horizontal reference
+ point.
+ 
+ The view will be created for you along with it's proper size but you are responsible for adding it as a subview
+ to the view of your choice and setting the origin.
+ */
+@property(nonatomic, strong) ORKXAxisView *xAxisView;
+
+/**
+ The y-axis for the graph. The labels on the axis correspond to the values found at each horizontal reference
+ point.
+ 
+ The view will be created for you along with it's proper size but you are responsible for adding it as a subview
+ to the view of your choice and setting the origin.
+ */
+@property(nonatomic, strong) ORKYAxisView *yAxisView;
 
 /**
  A Boolean value indicating whether the graph chart view should draw vertical reference lines.
