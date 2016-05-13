@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKQuestionStep *questionStep = self.questionStep;
     
     if (self.answer) {
-        ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
+        ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer text:questionStep.text];
         ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
         
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {

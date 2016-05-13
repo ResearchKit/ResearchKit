@@ -1211,12 +1211,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, questionType);
+    ORK_ENCODE_OBJ(aCoder, questionText);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_ENUM(aDecoder, questionType);
+        ORK_DECODE_OBJ(aDecoder, questionText);
     }
     return self;
 }
@@ -1240,6 +1242,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKQuestionResult *result = [super copyWithZone:zone];
     result.questionType = self.questionType;
+    result.questionText = self.questionText;
     return result;
 }
 

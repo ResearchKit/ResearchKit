@@ -704,7 +704,7 @@
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemTimeZone!=nil, @"systemTimeZone NOT saved");
         }
         
-        ORKQuestionResult *result = [item.answerFormat resultWithIdentifier:item.identifier answer:answer];
+        ORKQuestionResult *result = [item.answerFormat resultWithIdentifier:item.identifier answer:answer text:item.text];
         ORKAnswerFormat *impliedAnswerFormat = [item impliedAnswerFormat];
         
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {

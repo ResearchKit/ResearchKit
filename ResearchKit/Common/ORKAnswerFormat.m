@@ -439,9 +439,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
+    return [self resultWithIdentifier:identifier answer:answer text:nil];
+}
+
+- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer text:(nullable NSString *)text {
     ORKQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
     questionResult.answer = answer;
     questionResult.questionType = self.questionType;
+    questionResult.questionText = text;
     return questionResult;
 }
 
