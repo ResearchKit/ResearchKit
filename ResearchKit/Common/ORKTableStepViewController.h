@@ -30,6 +30,7 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+ORK_CLASS_AVAILABLE
 @interface ORKTableStepViewController : ORKStepViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, readonly) UITableView *tableView;
