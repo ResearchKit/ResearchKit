@@ -104,6 +104,17 @@ automatically navigates forward when the timer expires.
 @property (nonatomic) BOOL shouldSpeakCountDown;
 
 /**
+ A Boolean value indicating whether to speak the halfway point in the count down of the
+ duration of a timed step.
+ 
+ When the value of this property is `YES`, `AVSpeechSynthesizer` is used to synthesize the countdown. Note that this property is ignored if VoiceOver is enabled.
+ 
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL shouldSpeakHalfwayCount;
+
+
+/**
  A Boolean value indicating whether to start the count down timer automatically when the step starts, or
  require the user to take some explicit action to start the step, such as tapping a button.
  
