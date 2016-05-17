@@ -197,6 +197,7 @@
 "COUNTDOWN_LABEL" = "Starting activity in";
 "TASK_COMPLETE_TITLE" = "Activity Complete";
 "TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ seconds remaining.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";

@@ -88,6 +88,7 @@
     step.stepDuration = self.stepDuration;
     step.shouldStartTimerAutomatically = self.shouldStartTimerAutomatically;
     step.shouldSpeakCountDown = self.shouldSpeakCountDown;
+    step.shouldSpeakHalfwayCount = self.shouldSpeakHalfwayCount;
     step.shouldShowDefaultTimer = self.shouldShowDefaultTimer;
     step.shouldPlaySoundOnStart = self.shouldPlaySoundOnStart;
     step.shouldPlaySoundOnFinish = self.shouldPlaySoundOnFinish;
@@ -108,6 +109,7 @@
         ORK_DECODE_DOUBLE(aDecoder, stepDuration);
         ORK_DECODE_BOOL(aDecoder, shouldStartTimerAutomatically);
         ORK_DECODE_BOOL(aDecoder, shouldSpeakCountDown);
+        ORK_DECODE_BOOL(aDecoder, shouldSpeakHalfwayCount);
         ORK_DECODE_BOOL(aDecoder, shouldShowDefaultTimer);
         ORK_DECODE_BOOL(aDecoder, shouldPlaySoundOnStart);
         ORK_DECODE_BOOL(aDecoder, shouldPlaySoundOnFinish);
@@ -128,6 +130,7 @@
     ORK_ENCODE_DOUBLE(aCoder, stepDuration);
     ORK_ENCODE_BOOL(aCoder, shouldStartTimerAutomatically);
     ORK_ENCODE_BOOL(aCoder, shouldSpeakCountDown);
+    ORK_ENCODE_BOOL(aCoder, shouldSpeakHalfwayCount);
     ORK_ENCODE_BOOL(aCoder, shouldShowDefaultTimer);
     ORK_ENCODE_BOOL(aCoder, shouldPlaySoundOnStart);
     ORK_ENCODE_BOOL(aCoder, shouldPlaySoundOnFinish);
@@ -154,6 +157,7 @@
             (self.shouldShowDefaultTimer == castObject.shouldShowDefaultTimer) &&
             (self.shouldStartTimerAutomatically == castObject.shouldStartTimerAutomatically) &&
             (self.shouldSpeakCountDown == castObject.shouldSpeakCountDown) &&
+            (self.shouldSpeakHalfwayCount == castObject.shouldSpeakHalfwayCount) &&
             (self.shouldPlaySoundOnStart == castObject.shouldPlaySoundOnStart) &&
             (self.shouldPlaySoundOnFinish == castObject.shouldPlaySoundOnFinish) &&
             (self.shouldVibrateOnStart == castObject.shouldVibrateOnStart) &&
