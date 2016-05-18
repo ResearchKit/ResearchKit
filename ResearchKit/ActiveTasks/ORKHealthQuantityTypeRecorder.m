@@ -43,8 +43,16 @@
     HKHealthStore *_healthStore;
     NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
-    NSInteger _anchor;
     HKQuantitySample *_lastSample;
+    
+    // If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+    // This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+    HKQueryAnchor *_anchor;
+#else
+    NSUInteger _anchor;
+#endif
+    
 }
 
 @end
@@ -67,7 +75,15 @@
         _quantityType = quantityType;
         _unit = unit;
         self.continuesInBackground = YES;
+        
+        // If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+        // This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+        _anchor = [HKQueryAnchor anchorFromValue:HKAnchoredObjectQueryNoAnchor];
+#else
         _anchor = HKAnchoredObjectQueryNoAnchor;
+#endif
+        
     }
     return self;
 }
@@ -89,7 +105,13 @@
 
 static const NSInteger _HealthAnchoredQueryLimit = 100;
 
+// If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+// This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+- (void)query_logResults:(NSArray *)results withAnchor:(HKQueryAnchor*)newAnchor {
+#else
 - (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
+#endif
     
     NSUInteger resultCount = results.count;
     if (resultCount == 0) {
@@ -128,12 +150,25 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
     __weak typeof(self) weakSelf = self;
+
+    // If the Base SDK >= then iOS 9.0, then use the new methods as opposed to the depricated methods.
+    // This should allow you to build without compiler warnings in both cases.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+    HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
+                                            initWithType:_quantityType
+                                            predicate:_samplePredicate
+                                            anchor:_anchor
+                                            limit:_HealthAnchoredQueryLimit
+                                            resultsHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSArray *deletedResults, HKQueryAnchor* newAnchor, NSError *error)
+                                            
+#else
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
                                             initWithType:_quantityType
                                             predicate:_samplePredicate
                                             anchor:_anchor
                                             limit:_HealthAnchoredQueryLimit
                                             completionHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSUInteger newAnchor, NSError *error)
+#endif
                                             {
                                                 if (error) {
                                                     // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
@@ -145,6 +180,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                 [strongSelf query_logResults:results withAnchor:newAnchor];
                                                 
                                             }];
+    
     [_healthStore executeQuery:anchoredQuery];
 }
 
