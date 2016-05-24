@@ -81,6 +81,21 @@ ORK_CLASS_AVAILABLE
                                       text:(nullable NSString *)text
                                     answer:(nullable ORKAnswerFormat *)answerFormat;
 
+
+
+/**
+ Returns a new question step that includes the specified identifier, title, text, and answer format.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param title         A localized string that represents the primary text of the question.
+ @param text          A attribute string that represents the additional text of the question.
+ @param answerFormat  The format in which the answer is expected.
+ */
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                            attributedText:(nullable NSAttributedString *)text
+                                    answer:(nullable ORKAnswerFormat *)answerFormat;
+
 /**
  The format of the answer.
  
@@ -104,6 +119,17 @@ ORK_CLASS_AVAILABLE
  text field or text area when an answer has not yet been entered.
   */
 @property (nonatomic, copy, nullable) NSString *placeholder;
+
+
+
+ /**
+ Additional text to display for the step in attibuted String. So that the additional text can be displayed with formtted way. For example, highlight the key word of the question
+ 
+ The additional text is displayed in a smaller font below `title`. If you need to display a
+ long question, it can work well to keep the title short and put the additional content in
+ the `text` property.
+ */
+@property (nonatomic, copy, nullable) NSAttributedString *attributedText;
 
 @end
 
