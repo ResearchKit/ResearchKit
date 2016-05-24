@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'ResearchKit'
-  s.version      = '1.3.0'
+  s.version      = '1.3.1'
   s.summary      = 'ResearchKit is an open source software framework that makes it easy to create apps for medical research or for other research projects.'
   s.homepage     = 'https://www.github.com/ResearchKit/ResearchKit'
   s.documentation_url = 'http://researchkit.github.io/docs/'
