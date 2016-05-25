@@ -331,7 +331,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     }
     
     if (_existingSignatureImage) {
-        [_existingSignatureImage drawInRect:rect];
+        [_existingSignatureImage drawAtPoint:CGPointZero];
         [self.delegate signatureViewDidEditImage:self];
     }
     
