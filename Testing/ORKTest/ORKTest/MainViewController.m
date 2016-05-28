@@ -225,7 +225,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLTaskStepFormatterDelegate, ORKHTMLHeaderFooterRendererDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLPrintFormatterDelegate, ORKHTMLHeaderFooterRendererDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3334,11 +3334,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
-    ORKHTMLTaskStepFormatter *printFormatter = [[ORKHTMLTaskStepFormatter alloc] initWithStep:stepViewController.step andResult:stepViewController.result];
+    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
     printFormatter.delegate = self;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
     printFormatter.styleSheetURL = [ORKBundle() URLForResource:@"Stylesheet" withExtension:@"css"];
-    [printFormatter prepare];
+    [printFormatter prepareWithStep:stepViewController.step andResult:stepViewController.result];
     ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
     renderer.headerHeight = 25;
     renderer.footerHeight = 30;
@@ -3353,7 +3353,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [controller presentAnimated:YES completionHandler:nil];
 }
 
-- (BOOL)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
+- (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     return YES;
 }
 

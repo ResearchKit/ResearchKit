@@ -43,33 +43,33 @@ typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
     ORKPrintFormatterOptionIncludeTimestamp = 1 << 1
 };
 
-@class ORKHTMLTaskStepFormatter;
+@class ORKHTMLPrintFormatter;
 
 ORK_AVAILABLE_DECL
-@protocol ORKHTMLTaskStepFormatterDelegate <NSObject>
+@protocol ORKHTMLPrintFormatterDelegate <NSObject>
 
 @optional
-- (ORKPrintFormatterOptions)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (ORKPrintFormatterOptions)printFormatter:(ORKHTMLPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
-- (BOOL)printFormatter:(ORKHTMLTaskStepFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+- (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKHTMLTaskStepFormatter : UIMarkupTextPrintFormatter
+@interface ORKHTMLPrintFormatter : UIMarkupTextPrintFormatter
 
 @property ORKPrintFormatterOptions options;
 
-@property (nonatomic, weak, nullable) id<ORKHTMLTaskStepFormatterDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKHTMLPrintFormatterDelegate> delegate;
 
 @property (nonatomic, nullable) NSString *styleSheetContent;
 
 @property (nonatomic, nullable) NSURL *styleSheetURL;
 
-- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result;
+- (instancetype)init;
 
-- (instancetype)initWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
+- (void)prepareWithSteps:(NSArray<ORKStep *> *)step andResult:(nullable id<ORKTaskResultSource>)result;
 
-- (void)prepare;
+- (void)prepareWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
 
 @end
 

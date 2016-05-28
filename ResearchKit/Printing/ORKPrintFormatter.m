@@ -45,83 +45,53 @@
 
 static const CGFloat POINTS_PER_INCH = 72;
 
-#pragma mark - ORKHTMLTaskStepFormatter
+#pragma mark - ORKHTMLPrintFormatter
 
-@implementation ORKHTMLTaskStepFormatter {
-    id<ORKTask> _task;
-    ORKTaskResult *_taskResult;
-    NSMutableArray<ORKStep *> *_steps;
-    NSMutableDictionary<NSString *, ORKStepResult *> *_stepResults;
-}
+@implementation ORKHTMLPrintFormatter
 
-- (instancetype)initWithMarkupText:(NSString *)markupText {
-    self = [super initWithMarkupText:markupText];
+- (instancetype)init {
+    self = [super initWithMarkupText:@""];
     if (self) {
-        _task = nil;
-        _taskResult = nil;
-        _steps = [[NSMutableArray alloc] initWithArray:@[]];
-        _stepResults = [[NSMutableDictionary alloc] init];
         _styleSheetContent = @"";
-        _styleSheetURL = nil;
+        _styleSheetURL = [ORKBundle() URLForResource:@"Stylesheet" withExtension:@"css"];
         self.perPageContentInsets = UIEdgeInsetsMake(POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f, POINTS_PER_INCH * 0.5f);
     }
     return self;
 }
 
-- (instancetype)initWithTask:(id<ORKTask>)task steps:(NSArray<ORKStep *> *)steps andResult:(nullable ORKTaskResult *)result {
-    self = [self initWithMarkupText:@""];
-    if (self) {
-        _task = task;
-        _taskResult = result;
-        [_steps addObjectsFromArray:steps];
-        for (ORKStep *step in _steps) {
-            _stepResults[step.identifier] = [result stepResultForStepIdentifier:step.identifier];
-        }
-    }
-    return self;
-}
-
-- (instancetype)initWithStep:(ORKStep *)step andResult:(ORKStepResult *)result {
-    self = [self initWithMarkupText:@""];
-    if (self) {
-        [_steps addObject:step];
-        _stepResults[step.identifier] = result;
-    }
-    return self;
-}
-
-- (void)prepare {
-    NSMutableArray *formatableSteps = [[NSMutableArray alloc] initWithArray:_steps];
-    for (ORKStep *step in _steps) {
-        if (!self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
-            if ([self.delegate printFormatter:self shouldFormatStep:step withResult:_stepResults[step.identifier]]) {
+- (void)prepareWithSteps:(NSArray<ORKStep *> *)steps andResult:(id<ORKTaskResultSource>)result {
+    NSMutableArray *formatableSteps = [[NSMutableArray alloc] initWithArray:steps];
+    for (ORKStep *step in steps) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
+            if (![self.delegate printFormatter:self shouldFormatStep:step withResult:[result stepResultForStepIdentifier:step.identifier]]) {
                 [formatableSteps removeObject:step];
             }
         }
     }
-    if (_task) {
-        [self setMarkupText:[self HTMLFromTask:_task containingSteps:[formatableSteps copy] withResult:_taskResult]];
-    } else {
-        ORKStep *step = formatableSteps.firstObject;
-        if (step) {
-            [self setMarkupText:[self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:YES]];
-        }
+    NSString *body = @"";
+    for (ORKStep *step in formatableSteps) {
+        body = [@[body, [self HTMLFromStep:step withResult:[result stepResultForStepIdentifier:step.identifier] addSurroundingHTMLTags:NO]] componentsJoinedByString:@""];
     }
-}
-
-#pragma mark - internal
-
-- (NSString *)HTMLFromTask:(id<ORKTask>)task containingSteps:(NSArray<ORKStep *> *)steps withResult:(ORKTaskResult *)result {
-    NSString *taskBody = @"";
-    for (ORKStep *step in steps) {
-        taskBody = [@[taskBody, [self HTMLFromStep:step withResult:_stepResults[step.identifier] addSurroundingHTMLTags:NO]] componentsJoinedByString:@""];
-    }
-    NSString *taskHTML = [_ORK_HTMLfromTemplate(@"TASK"), taskBody];
     if ([_styleSheetContent isEqualToString:@""] && _styleSheetURL) {
         _styleSheetContent = [NSString stringWithContentsOfURL:_styleSheetURL encoding:NSUTF8StringEncoding error:nil];
     }
-    return [_ORK_HTMLfromTemplate(@"HTML"), _styleSheetContent, taskHTML];
+    [self setMarkupText:[_ORK_HTMLfromTemplate(@"HTML"), _styleSheetContent, body]];
 }
+
+- (void)prepareWithStep:(ORKStep *)step andResult:(ORKStepResult *)result {
+    NSMutableArray *formatableSteps = [[NSMutableArray alloc] initWithArray:@[step]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:shouldFormatStep:withResult:)]) {
+        if (![self.delegate printFormatter:self shouldFormatStep:step withResult:result]) {
+            [formatableSteps removeObject:step];
+        }
+    }
+    if ([_styleSheetContent isEqualToString:@""] && _styleSheetURL) {
+        _styleSheetContent = [NSString stringWithContentsOfURL:_styleSheetURL encoding:NSUTF8StringEncoding error:nil];
+    }
+    [self setMarkupText:[_ORK_HTMLfromTemplate(@"HTML"), _styleSheetContent, [self HTMLFromStep:step withResult:result addSurroundingHTMLTags:YES]]];
+}
+
+#pragma mark - internal
 
 - (NSString *)HTMLFromStep:(ORKStep *)step withResult:(ORKStepResult *)result addSurroundingHTMLTags:(BOOL)addSurroundingHTMLTags {
     NSString *stepHeader = [_ORK_HTMLfromTemplate(@"STEP_HEADER"), step.title ? step.title : @"", step.text ? step.text : @""];
@@ -134,7 +104,7 @@ static const CGFloat POINTS_PER_INCH = 72;
         stepBody = [self HTMLfromReviewStep:(ORKReviewStep *)step andResult:result];
     }
     NSString *stepFooter = @"";
-    if (self.options & ORKPrintFormatterOptionIncludeTimestamp) {
+    if (![stepBody isEqualToString:@""] && (self.options & ORKPrintFormatterOptionIncludeTimestamp)) {
         //TODO: use ORKLocalizedString
         NSString *footerString = [NSString stringWithFormat:@"%@ - %@", [self stringFromDate:result.startDate], [self stringFromDate:result.endDate]];
         stepFooter = [_ORK_HTMLfromTemplate(@"STEP_FOOTER"), footerString];
@@ -231,7 +201,7 @@ static const CGFloat POINTS_PER_INCH = 72;
 
 - (NSString *)HTMLFromImage:(UIImage *)image withTitle:(NSString *)title {
     CGSize maxSize = CGSizeMake(200, 200);
-     NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImagePNGRepresentation(image);
     if (maxSize.width < image.size.width || maxSize.height < image.size.height) {
         imageData = UIImagePNGRepresentation([self scaledImageFromImage:image withTargetSize: maxSize]);
     }
@@ -386,7 +356,7 @@ static const CGFloat POINTS_PER_INCH = 72;
             if ([NSThread isMainThread]) {
                 footerFormatter = [[ORKHTMLFooterPrintFormatter alloc]
                                    initWithMarkupText:footerContent];
-
+                
             } else {
                 dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
                 dispatch_async(dispatch_get_main_queue(), ^{
