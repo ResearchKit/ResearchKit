@@ -67,7 +67,7 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)init;
 
-- (void)prepareWithSteps:(NSArray<ORKStep *> *)step andResult:(nullable id<ORKTaskResultSource>)result;
+- (void)prepareWithSteps:(NSArray<ORKStep *> *)steps andResult:(nullable id<ORKTaskResultSource>)result;
 
 - (void)prepareWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
 

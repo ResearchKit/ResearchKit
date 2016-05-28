@@ -29,7 +29,6 @@
  */
 
 "HTML" = "<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
-"TASK" = "<div class=\"taskSeparator\">%@</div>";
 "STEP" = "<div class=\"stepSeparator\">%@%@%@</div>";
 /* STEP HEADER */
 "STEP_HEADER" = "<p id=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
