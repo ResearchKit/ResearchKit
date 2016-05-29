@@ -100,8 +100,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self calculateMinAndMaxValues];
     [_xAxisView updateTitles];
     [_yAxisView updateTicksAndLabels];
-    [self updateLineLayers];
-    [self updatePointLayers];
+    [self updateLineAndPointLayers];
     [self updateNoDataLabel];
     
     [self setNeedsLayout];
@@ -512,21 +511,32 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     return pointLayer;
 }
 
-- (void)updatePointLayers {
-    for (NSInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
+- (void)updateLineAndPointLayers {
+    for (NSInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
+        [_lineLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
         [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     }
+    [_lineLayers removeAllObjects];
     [_pointLayers removeAllObjects];
-    
+
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
+        // Line layers
+        // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
+        NSMutableArray<CAShapeLayer *> *currentPlotLineLayers = [NSMutableArray new];
+        [_lineLayers addObject:currentPlotLineLayers];
+        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
+            [self updateLineLayersForPlotIndex:plotIndex];
+        }
+        
+        // Point layers
         NSMutableArray<CALayer *> *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
     }
     
-    // We perform the same double-looping when creating the elements and there is no need to do that if Voice Over is not running.
-    if (!UIAccessibilityIsVoiceOverRunning()) {
+    // Calculate accessibility elements only if Voice Over is running
+    if (UIAccessibilityIsVoiceOverRunning()) {
         [self _axCreateAccessibilityElements];
     }
 }
@@ -584,23 +594,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                     pointLayerIndex++;
                 }
             }
-        }
-    }
-}
-
-- (void)updateLineLayers {
-    for (NSInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
-        [_lineLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    }
-    [_lineLayers removeAllObjects];
-    
-    NSInteger numberOfPlots = [self numberOfPlots];
-    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
-        NSMutableArray<CAShapeLayer *> *currentPlotLineLayers = [NSMutableArray new];
-        [self.lineLayers addObject:currentPlotLineLayers];
-        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
-            [self updateLineLayersForPlotIndex:plotIndex];
         }
     }
 }
