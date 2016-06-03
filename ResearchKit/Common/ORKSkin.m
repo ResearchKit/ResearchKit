@@ -107,6 +107,7 @@ const CGSize ORKiPhone5ScreenSize = (CGSize){320, 568};
 const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
 const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
+const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
 
 ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
@@ -119,8 +120,10 @@ ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhone6;
     } else if (maximumDimension < ORKiPhone6PlusScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone6Plus;
-    } else {
+    } else if (maximumDimension < ORKiPadScreenSize.height + 1) {
         screenType = ORKScreenTypeiPad;
+    } else {
+        screenType = ORKScreenTypeiPad12_9;
     }
     return screenType;
 }
@@ -136,8 +139,10 @@ ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhone6;
     } else if (minimumDimension < ORKiPhone6PlusScreenSize.width + 1) {
         screenType = ORKScreenTypeiPhone6Plus;
-    } else {
+    } else if (minimumDimension < ORKiPadScreenSize.width + 1) {
         screenType = ORKScreenTypeiPad;
+    } else {
+        screenType = ORKScreenTypeiPad12_9;
     }
     return screenType;
 }
@@ -174,46 +179,46 @@ const CGFloat ORKScreenMetricMaxDimension = 10000.0;
 
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
-        // iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad
-        {        128,       128,       100,       100,       218},      // ORKScreenMetricTopToCaptionBaseline
-        {         35,        35,        32,        24,        35},      // ORKScreenMetricFontSizeHeadline
-        {         38,        38,        32,        28,        38},      // ORKScreenMetricMaxFontSizeHeadline
-        {         30,        30,        30,        24,        30},      // ORKScreenMetricFontSizeSurveyHeadline
-        {         32,        32,        32,        28,        32},      // ORKScreenMetricMaxFontSizeSurveyHeadline
-        {         17,        17,        17,        16,        17},      // ORKScreenMetricFontSizeSubheadline
-        {         62,        62,        51,        51,        62},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
-        {         62,        62,        43,        43,        62},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
-        {         36,        36,        32,        32,        36},      // ORKScreenMetricCaptionBaselineToInstructionBaseline
-        {         30,        30,        28,        24,        30},      // ORKScreenMetricInstructionBaselineToLearnMoreBaseline
-        {         44,        44,        20,        14,        44},      // ORKScreenMetricLearnMoreBaselineToStepViewTop
-        {         40,        40,        30,        14,        40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
-        {         36,        36,        20,        12,        36},      // ORKScreenMetricContinueButtonTopMargin
-        {         40,        40,        20,        12,        40},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
-        {          0,         0,         0,         0,        80},      // ORKScreenMetricTopToIllustration
-        {         44,        44,        40,        40,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
-        {        198,       198,       194,       152,       297},      // ORKScreenMetricIllustrationHeight
-        {        300,       300,       176,       152,       300},      // ORKScreenMetricInstructionImageHeight
-        {         44,        44,        44,        44,        44},      // ORKScreenMetricContinueButtonHeightRegular
-        {         44,        32,        32,        32,        44},      // ORKScreenMetricContinueButtonHeightCompact
-        {        150,       150,       146,       146,       150},      // ORKScreenMetricContinueButtonWidth
-        {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
-        {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle
-        {         60,        60,        60,        44,        60},      // ORKScreenMetricTableCellDefaultHeight
-        {         55,        55,        55,        44,        55},      // ORKScreenMetricTextFieldCellHeight
-        {         36,        36,        36,        26,        36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
-        {         24,        24,        24,        18,        24},      // ORKScreenMetricChoiceCellLastBaselineToBottom,
-        {         24,        24,        24,        24,        24},      // ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline,
-        {         30,        30,        20,        20,        30},      // ORKScreenMetricLearnMoreButtonSideMargin
-        {         10,        10,         0,         0,        10},      // ORKScreenMetricHeadlineSideMargin
-        {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
-        {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
-        {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
-        {        384,       324,       304,       304,       384},      // ORKScreenMetricPSATKeyboardViewWidth
-        {        197,       167,       157,       157,       197},      // ORKScreenMetricPSATKeyboardViewHeight
-        {        238,       238,       150,        90,       238},      // ORKScreenMetricLocationQuestionMapHeight
-        {         40,        40,        20,        14,        40},      // ORKScreenMetricTopToIconImageViewTop
-        {         44,        44,        40,        40,        80},      // ORKScreenMetricIconImageViewToCaptionBaseline
-        {         30,        30,        26,        22,        30},      // ORKScreenMetricVerificationTextBaselineToResendButtonBaseline
+        // iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad  iPad 12.9
+        {        128,       128,       100,       100,       218,       218},      // ORKScreenMetricTopToCaptionBaseline
+        {         35,        35,        32,        24,        35,        35},      // ORKScreenMetricFontSizeHeadline
+        {         38,        38,        32,        28,        38,        38},      // ORKScreenMetricMaxFontSizeHeadline
+        {         30,        30,        30,        24,        30,        30},      // ORKScreenMetricFontSizeSurveyHeadline
+        {         32,        32,        32,        28,        32,        32},      // ORKScreenMetricMaxFontSizeSurveyHeadline
+        {         17,        17,        17,        16,        17,        17},      // ORKScreenMetricFontSizeSubheadline
+        {         62,        62,        51,        51,        62,        62},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
+        {         62,        62,        43,        43,        62,        62},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
+        {         36,        36,        32,        32,        36,        36},      // ORKScreenMetricCaptionBaselineToInstructionBaseline
+        {         30,        30,        28,        24,        30,        30},      // ORKScreenMetricInstructionBaselineToLearnMoreBaseline
+        {         44,        44,        20,        14,        44,        44},      // ORKScreenMetricLearnMoreBaselineToStepViewTop
+        {         40,        40,        30,        14,        40,        40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
+        {         36,        36,        20,        12,        36,        36},      // ORKScreenMetricContinueButtonTopMargin
+        {         40,        40,        20,        12,        40,        20},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
+        {          0,         0,         0,         0,        80,       170},      // ORKScreenMetricTopToIllustration
+        {         44,        44,        40,        40,        44,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
+        {        198,       198,       194,       152,       297,       297},      // ORKScreenMetricIllustrationHeight
+        {        300,       300,       176,       152,       300,       300},      // ORKScreenMetricInstructionImageHeight
+        {         44,        44,        44,        44,        44,        44},      // ORKScreenMetricContinueButtonHeightRegular
+        {         44,        32,        32,        32,        44,        44},      // ORKScreenMetricContinueButtonHeightCompact
+        {        150,       150,       146,       146,       150,       150},      // ORKScreenMetricContinueButtonWidth
+        {        162,       162,       120,       116,       240,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
+        {        162,       162,       120,       116,       240,       240},      // ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle
+        {         60,        60,        60,        44,        60,        60},      // ORKScreenMetricTableCellDefaultHeight
+        {         55,        55,        55,        44,        55,        55},      // ORKScreenMetricTextFieldCellHeight
+        {         36,        36,        36,        26,        36,        36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
+        {         24,        24,        24,        18,        24,        24},      // ORKScreenMetricChoiceCellLastBaselineToBottom,
+        {         24,        24,        24,        24,        24,        24},      // ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline,
+        {         30,        30,        20,        20,        30,        30},      // ORKScreenMetricLearnMoreButtonSideMargin
+        {         10,        10,         0,         0,        10,        10},      // ORKScreenMetricHeadlineSideMargin
+        {         44,        44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
+        {        322,       274,       217,       217,       446,       446},      // ORKScreenMetricVerticalScaleHeight
+        {        156,       156,       156,       156,       256,       256},      // ORKScreenMetricSignatureViewHeight
+        {        384,       324,       304,       304,       384,       384},      // ORKScreenMetricPSATKeyboardViewWidth
+        {        197,       167,       157,       157,       197,       197},      // ORKScreenMetricPSATKeyboardViewHeight
+        {        238,       238,       150,        90,       238,       238},      // ORKScreenMetricLocationQuestionMapHeight
+        {         40,        40,        20,        14,        40,        40},      // ORKScreenMetricTopToIconImageViewTop
+        {         44,        44,        40,        40,        80,        80},      // ORKScreenMetricIconImageViewToCaptionBaseline
+        {         30,        30,        26,        22,        30,        30},      // ORKScreenMetricVerificationTextBaselineToResendButtonBaseline
     };
     return metrics[metric][screenType];
 }
@@ -249,6 +254,7 @@ CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
             break;
         case ORKScreenTypeiPhone6Plus:
         case ORKScreenTypeiPad:
+        case ORKScreenTypeiPad12_9:
         default:
             margin = ORKLayoutMarginWidthThinBezelRegular;
             break;
@@ -271,7 +277,8 @@ CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
         default:
             margin = ORKStandardLeftTableViewCellMarginForWindow(window);
             break;
-        case ORKScreenTypeiPad:{
+        case ORKScreenTypeiPad:
+        case ORKScreenTypeiPad12_9:{
             // Use adaptive side margin, if window is wider than iPhone6 Plus.
             // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad
             CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (ORKiPadScreenSize.width - ORKiPhone6PlusScreenSize.width);
@@ -299,7 +306,7 @@ UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UITableViewCell *cell) {
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
     UIEdgeInsets layoutMargins = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
-    if (screenType == ORKScreenTypeiPad) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
         CGFloat margin = ORKStandardHorizontalMarginForView(view);
         layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
     }
@@ -309,7 +316,7 @@ UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view) {
     UIEdgeInsets scrollIndicatorInsets = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
-    if (screenType == ORKScreenTypeiPad) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
         CGFloat margin = ORKStandardHorizontalMarginForView(view);
         scrollIndicatorInsets = (UIEdgeInsets){.left = -margin, .right = -margin };
     }
