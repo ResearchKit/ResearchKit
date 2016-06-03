@@ -269,7 +269,7 @@ id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
-const CGFloat ORKScrollToTopAnimationDuration;
+extern const CGFloat ORKScrollToTopAnimationDuration;
 
 ORK_INLINE CGFloat
 ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
@@ -285,7 +285,7 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
 
 void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews);
 
-const CGFloat ORKCGFloatInvalidValue;
+extern const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 

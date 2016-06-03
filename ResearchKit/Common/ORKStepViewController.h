@@ -32,7 +32,7 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKRecorder.h>
-#import <ResearchKIt/ORKReviewStep.h>
+#import <ResearchKit/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
