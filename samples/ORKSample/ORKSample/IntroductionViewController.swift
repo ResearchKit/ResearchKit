@@ -34,9 +34,9 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
     // MARK: Properties
     
     let pageViewControllers: [UIViewController] = {
-        let introOne = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("introOneViewController")
-        let introTwo = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("introTwoViewController")
-        let introThree = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("introThreeViewController")
+        let introOne = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introOneViewController")
+        let introTwo = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introTwoViewController")
+        let introThree = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introThreeViewController")
         
         return [introOne, introTwo, introThree]
     }()
@@ -49,13 +49,13 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
         // Do any additional setup after loading the view.
         dataSource = self
         
-        setViewControllers([pageViewControllers[0]], direction: .Forward, animated: false, completion: nil)
+        setViewControllers([pageViewControllers[0]], direction: .forward, animated: false, completion: nil)
     }
     
     // MARK: UIPageViewControllerDataSource
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let index = pageViewControllers.indexOf(viewController)!
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let index = pageViewControllers.index(of: viewController)!
         
         if index - 1 >= 0 {
             return pageViewControllers[index - 1]
@@ -64,8 +64,8 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
         return nil
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let index = pageViewControllers.indexOf(viewController)!
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let index = pageViewControllers.index(of: viewController)!
         
         if index + 1 < pageViewControllers.count {
             return pageViewControllers[index + 1]
@@ -74,11 +74,11 @@ class IntroductionViewController: UIPageViewController, UIPageViewControllerData
         return nil
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return pageViewControllers.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
 }

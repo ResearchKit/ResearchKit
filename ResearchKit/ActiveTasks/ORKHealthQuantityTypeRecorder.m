@@ -43,7 +43,7 @@
     HKHealthStore *_healthStore;
     NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
-    NSInteger _anchor;
+    HKQueryAnchor *_anchor;
     HKQuantitySample *_lastSample;
 }
 
@@ -89,7 +89,7 @@
 
 static const NSInteger _HealthAnchoredQueryLimit = 100;
 
-- (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
+- (void)query_logResults:(NSArray *)results withAnchor:(HKQueryAnchor *)newAnchor {
     
     NSUInteger resultCount = results.count;
     if (resultCount == 0) {
@@ -128,6 +128,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
     __weak typeof(self) weakSelf = self;
+    /*
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
                                             initWithType:_quantityType
                                             predicate:_samplePredicate
@@ -145,6 +146,24 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                 [strongSelf query_logResults:results withAnchor:newAnchor];
                                                 
                                             }];
+    */
+    
+    HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
+                                            initWithType:_quantityType
+                                            predicate:_samplePredicate
+                                            anchor:_anchor
+                                            limit:_HealthAnchoredQueryLimit
+                                            resultsHandler:^(HKAnchoredObjectQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable sampleObjects, NSArray<HKDeletedObject *> * _Nullable deletedObjects, HKQueryAnchor * _Nullable newAnchor, NSError * _Nullable error) {
+                                                if (error) {
+                                                    // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
+                                                    ORK_Log_Warning(@"Anchored query error: %@", error);
+                                                    return;
+                                                }
+                                                
+                                                __typeof(self) strongSelf = weakSelf;
+                                                [strongSelf query_logResults:sampleObjects withAnchor:newAnchor];
+                                            }];
+    
     [_healthStore executeQuery:anchoredQuery];
 }
 

@@ -44,7 +44,7 @@ class HealthDataStepViewController: ORKInstructionStepViewController {
         healthDataStep?.getHealthAuthorization() { succeeded, _ in
             guard succeeded else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main().addOperation {
                 super.goForward()
             }
         }

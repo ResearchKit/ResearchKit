@@ -37,13 +37,13 @@ struct StudyTasks {
         let speechInstruction = "After the countdown, say Aaaaaaaaaaah for as long as you can. You'll have 10 seconds."
         let shortSpeechInstruction = "Say Aaaaaaaaaaah for as long as you can."
         
-        return ORKOrderedTask.audioTaskWithIdentifier("AudioTask", intendedUseDescription: intendedUseDescription, speechInstruction: speechInstruction, shortSpeechInstruction: shortSpeechInstruction, duration: 10, recordingSettings: nil, options: ORKPredefinedTaskOption.ExcludeAccelerometer)
+        return ORKOrderedTask.audioTask(withIdentifier: "AudioTask", intendedUseDescription: intendedUseDescription, speechInstruction: speechInstruction, shortSpeechInstruction: shortSpeechInstruction, duration: 10, recordingSettings: nil, options: ORKPredefinedTaskOption.excludeAccelerometer)
     }()
     
     static let tappingTask: ORKOrderedTask = {
         let intendedUseDescription = "Finger tapping is a universal way to communicate."
         
-        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier("TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, options: ORKPredefinedTaskOption.None)
+        return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, options: ORKPredefinedTaskOption())
     }()
     
     static let surveyTask: ORKOrderedTask = {
@@ -64,7 +64,7 @@ struct StudyTasks {
             ORKTextChoice(text: "Pluto", value: 2),
             ORKTextChoice(text: "Mars", value: 3)
         ]
-        let questAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormatWithStyle(.SingleChoice, textChoices: textChoices)
+        let questAnswerFormat: ORKTextChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
         let questQuestionStep = ORKQuestionStep(identifier: "TextChoiceQuestionStep", title: questQuestionStepTitle, answer: questAnswerFormat)
         
         steps += [questQuestionStep]
@@ -87,14 +87,14 @@ struct StudyTasks {
         let imageChoices : [ORKImageChoice] = shapeTuples.map {
             return ORKImageChoice(normalImage: $0.0, selectedImage: nil, text: $0.1, value: $0.1)
         }
-        let shapeAnswerFormat: ORKImageChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormatWithImageChoices(imageChoices)
+        let shapeAnswerFormat: ORKImageChoiceAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoices)
         let shapeQuestionStep = ORKQuestionStep(identifier: "ImageChoiceQuestionStep", title: shapeQuestionStepTitle, answer: shapeAnswerFormat)
         
         steps += [shapeQuestionStep]
         
         // Date question
         let today = NSDate()
-        let dateAnswerFormat =  ORKAnswerFormat.dateAnswerFormatWithDefaultDate(nil, minimumDate: today, maximumDate: nil, calendar: nil)
+        let dateAnswerFormat =  ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: today as Date, maximumDate: nil, calendar: nil)
         let dateQuestionStepTitle = "When is the next solar eclipse?"
         let dateQuestionStep = ORKQuestionStep(identifier: "DateQuestionStep", title: dateQuestionStepTitle, answer: dateAnswerFormat)
         
@@ -108,7 +108,7 @@ struct StudyTasks {
         steps += [booleanQuestionStep]
         
         // Continuous question
-        let continuousAnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(150, minimumValue: 30, defaultValue: 20, step: 10, vertical: false, maximumValueDescription: "Objects", minimumValueDescription: " ")
+        let continuousAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 150, minimumValue: 30, defaultValue: 20, step: 10, vertical: false, maximumValueDescription: "Objects", minimumValueDescription: " ")
         let continuousQuestionStepTitle = "How many objects are in Messier's catalog?"
         let continuousQuestionStep = ORKQuestionStep(identifier: "ContinuousQuestionStep", title: continuousQuestionStepTitle, answer: continuousAnswerFormat)
         

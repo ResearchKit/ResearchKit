@@ -47,7 +47,7 @@ class ChartListViewController: UITableViewController {
     
     override func viewDidLoad() {
         // ORKPieChartView
-        pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
+        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
         pieChartView.dataSource = pieChartDataSource
         // Optional custom configuration
@@ -56,7 +56,7 @@ class ChartListViewController: UITableViewController {
         pieChartView.lineWidth = 14
         
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
         lineGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
@@ -65,7 +65,7 @@ class ChartListViewController: UITableViewController {
         lineGraphChartView.showsVerticalReferenceLines = true
         
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
         discreteGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
@@ -75,22 +75,22 @@ class ChartListViewController: UITableViewController {
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chartTableViewCells.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = chartTableViewCells[indexPath.row];
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = chartTableViewCells[(indexPath as NSIndexPath).row];
         return cell
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
-        lineGraphChartTableViewCell.graphView.animateWithDuration(0.5)
-        discreteGraphChartTableViewCell.graphView.animateWithDuration(0.5)
+        pieChartTableViewCell.pieChartView.animate(withDuration: 0.5)
+        lineGraphChartTableViewCell.graphView.animate(withDuration: 0.5)
+        discreteGraphChartTableViewCell.graphView.animate(withDuration: 0.5)
     }    
 }
