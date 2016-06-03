@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; settings = {ASSET_TAGS = (); }; };
+		24D002781BA2268D001BF82F /* ORKKeychainWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D002771BA2268D001BF82F /* ORKKeychainWrapperTests.m */; };
 		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
 		86717A901AC0C0FE00AC2A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A8F1AC0C0FE00AC2A23 /* main.m */; };
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
@@ -27,8 +27,8 @@
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
-		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; };
 		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
+		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,9 +152,9 @@
 		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
 		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
 		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
-		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
+		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +342,8 @@
 				TargetAttributes = {
 					86717A891AC0C0FE00AC2A23 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 7JYUG8QGJ3;
+						DevelopmentTeamName = "Apple Inc. - SPG-NGS";
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -651,6 +653,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -670,6 +673,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";

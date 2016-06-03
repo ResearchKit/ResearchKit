@@ -2538,6 +2538,8 @@
 						CreatedOnToolsVersion = 6.2;
 					};
 					B183A4731A8535D100C76870 = {
+						DevelopmentTeam = 7JYUG8QGJ3;
+						DevelopmentTeamName = "Apple Inc. - SPG-NGS";
 						LastSwiftMigration = 0800;
 					};
 					B18FF3A41A9FE25700C0C3B0 = {
@@ -3121,7 +3123,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/ResearchKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -3153,7 +3155,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "$(SRCROOT)/ResearchKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
