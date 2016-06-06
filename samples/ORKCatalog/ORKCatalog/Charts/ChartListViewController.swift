@@ -49,11 +49,11 @@ class ChartListViewController: UITableViewController {
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
-        pieChartView.dataSource = pieChartDataSource
+        pieChartView?.dataSource = pieChartDataSource
         // Optional custom configuration
-        pieChartView.title = "TITLE"
-        pieChartView.text = "TEXT"
-        pieChartView.lineWidth = 14
+        pieChartView?.title = "TITLE"
+        pieChartView?.text = "TEXT"
+        pieChartView?.lineWidth = 14
         
         // ORKLineGraphChartView
         lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell

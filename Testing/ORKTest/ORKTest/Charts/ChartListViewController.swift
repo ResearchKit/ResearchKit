@@ -69,33 +69,33 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
-        pieChartView.dataSource = randomColorPieChartDataSource
+        pieChartView?.dataSource = randomColorPieChartDataSource
         // Optional custom configuration
-        pieChartView.title = "TITLE"
-        pieChartView.text = "TEXT"
-        pieChartView.lineWidth = 1000
-        pieChartView.showsTitleAboveChart = true
-        pieChartView.showsPercentageLabels = false
-        pieChartView.drawsClockwise = false
+        pieChartView?.title = "TITLE"
+        pieChartView?.text = "TEXT"
+        pieChartView?.lineWidth = 1000
+        pieChartView?.showsTitleAboveChart = true
+        pieChartView?.showsPercentageLabels = false
+        pieChartView?.drawsClockwise = false
         executeAfterDelay(1.5) {
-            pieChartView.showsTitleAboveChart = false
-            pieChartView.lineWidth = 12
-            pieChartView.title = "UPDATED"
-            pieChartView.text = "UPDATED TEXT"
-            pieChartView.titleColor = UIColor.red()
-            pieChartView.textColor = UIColor.orange()
+            pieChartView?.showsTitleAboveChart = false
+            pieChartView?.lineWidth = 12
+            pieChartView?.title = "UPDATED"
+            pieChartView?.text = "UPDATED TEXT"
+            pieChartView?.titleColor = UIColor.red()
+            pieChartView?.textColor = UIColor.orange()
         }
         executeAfterDelay(2.5) {
-            pieChartView.drawsClockwise = true
-            pieChartView.dataSource = self.colorlessPieChartDataSource
+            pieChartView?.drawsClockwise = true
+            pieChartView?.dataSource = self.colorlessPieChartDataSource
         }
         executeAfterDelay(3.5) {
-            pieChartView.showsPercentageLabels = true
-            pieChartView.tintColor = UIColor.purple()
+            pieChartView?.showsPercentageLabels = true
+            pieChartView?.tintColor = UIColor.purple()
         }
         executeAfterDelay(4.5) {
-            pieChartView.titleColor = nil
-            pieChartView.textColor = nil
+            pieChartView?.titleColor = nil
+            pieChartView?.textColor = nil
         }
 
         // ORKLineGraphChartView
