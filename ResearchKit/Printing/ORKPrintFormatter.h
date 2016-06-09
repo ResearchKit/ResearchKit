@@ -73,23 +73,4 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-@class ORKHTMLPrintPageRenderer;
-
-ORK_AVAILABLE_DECL
-@protocol ORKHTMLHeaderFooterRendererDelegate <NSObject>
-
-@optional
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer headerContentForPageInRange:(NSRange)range;
-
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range;
-
-@end
-
-ORK_CLASS_AVAILABLE
-@interface ORKHTMLPrintPageRenderer : UIPrintPageRenderer
-
-@property (nonatomic, weak, nullable) id<ORKHTMLHeaderFooterRendererDelegate> headerFooterDelegate;
-
-@end
-
 NS_ASSUME_NONNULL_END

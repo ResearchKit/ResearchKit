@@ -32,7 +32,6 @@
 #import "ORKHTMLPDFWriter.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
-#import "ORKPrintFormatter.h"
 
 
 #define PPI 72
@@ -45,7 +44,7 @@ static const CGFloat LetterHeight = 11.0f;
 
 #pragma mark - ORKHTMLPDFWriter Interface
 
-@interface ORKHTMLPDFPageRenderer : ORKHTMLPrintPageRenderer
+@interface ORKHTMLPDFPageRenderer : UIPrintPageRenderer
 
 @property (nonatomic) UIEdgeInsets pageMargins;
 
@@ -57,23 +56,39 @@ static const CGFloat LetterHeight = 11.0f;
 @implementation ORKHTMLPDFPageRenderer
 
 - (CGRect)paperRect {
-    NSLocale *locale = [NSLocale currentLocale];
-    BOOL useMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
-    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(A4Width, A4Height) : ORKSizeMakeWithPPI(LetterWidth, LetterHeight));
-    return CGRectMake(0, 0, pageSize.width, pageSize.height);
+    return UIGraphicsGetPDFContextBounds();
 }
 
 - (CGRect)printableRect {
     return UIEdgeInsetsInsetRect([self paperRect], _pageMargins);
 }
 
+- (void)drawFooterForPageAtIndex:(NSInteger)pageIndex
+                          inRect:(CGRect)footerRect {
+    NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex + 1), (long)[self numberOfPages]];
+    
+    if (footer) {
+        UIFont *font = [UIFont fontWithName:@"Helvetica" size:12];
+        CGSize size = [footer sizeWithAttributes:@{ NSFontAttributeName: font}];
+        
+        // Center Text
+        CGFloat drawX = (CGRectGetWidth(footerRect) / 2) + footerRect.origin.x - (size.width / 2);
+        CGFloat drawY = footerRect.origin.y + (footerRect.size.height / 2) - (size.height / 2);
+        CGPoint drawPoint = CGPointMake(drawX, drawY);
+        
+        [footer drawAtPoint:drawPoint withAttributes:@{ NSFontAttributeName: font}];
+    }
+}
+
 @end
 
 
-@interface ORKHTMLPDFWriter () <UIWebViewDelegate, ORKHTMLHeaderFooterRendererDelegate> {
+@interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
     id _selfRetain;
 }
 
+@property (nonatomic) CGSize pageSize;
+@property (nonatomic) UIEdgeInsets pageMargins;
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, copy) NSError *error;
@@ -85,10 +100,14 @@ static const CGFloat LetterHeight = 11.0f;
 @implementation ORKHTMLPDFWriter
 
 static const CGFloat HeaderHeight = 25.0;
-static const CGFloat FooterHeight = 30.0;
+static const CGFloat FooterHeight = 25.0;
 static const CGFloat PageEdge = 72.0 / 4;
 
 - (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock {
+    
+    _pageMargins = UIEdgeInsetsMake(PageEdge, PageEdge, PageEdge, PageEdge);
+    _pageSize = [ORKHTMLPDFWriter defaultPageSize];
+    
     _data = nil;
     _error = nil;
     
@@ -114,16 +133,18 @@ static const CGFloat PageEdge = 72.0 / 4;
     UIPrintFormatter *formatter = self.webView.viewPrintFormatter;
     
     ORKHTMLPDFPageRenderer *renderer = [[ORKHTMLPDFPageRenderer alloc] init];
-    renderer.pageMargins = UIEdgeInsetsMake(PageEdge, PageEdge, PageEdge, PageEdge);
+    renderer.pageMargins = self.pageMargins;
     renderer.footerHeight = FooterHeight;
     renderer.headerHeight = HeaderHeight;
-    renderer.headerFooterDelegate = self;
     
     [renderer addPrintFormatter:formatter startingAtPageAtIndex:0];
     
     NSMutableData *currentReportData = [NSMutableData data];
     
-    UIGraphicsBeginPDFContextToData(currentReportData, renderer.paperRect, @{});
+    CGSize pageSize = [self pageSize];
+    CGRect pageRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
+    
+    UIGraphicsBeginPDFContextToData(currentReportData, pageRect, @{});
     
     [renderer prepareForDrawingPages:NSMakeRange(0, 1)];
     
@@ -142,6 +163,14 @@ static const CGFloat PageEdge = 72.0 / 4;
     
     self.completionBlock(_data, nil);
     _selfRetain = nil;
+}
+
++ (CGSize)defaultPageSize {
+    NSLocale *locale = [NSLocale currentLocale];
+    BOOL useMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
+    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(A4Width, A4Height) : ORKSizeMakeWithPPI(LetterWidth, LetterHeight)); // A4 and Letter
+    
+    return pageSize;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -167,15 +196,6 @@ static const CGFloat PageEdge = 72.0 / 4;
     
     self.completionBlock(nil, error);
     _selfRetain = nil;
-}
-
-#pragma mark - ORKHTMLHeaderFooterRendererDelegate
-
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer
-    footerContentForPageInRange:(NSRange)range {
-    NSString *footerContent = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), range.location, range.length];
-    NSString *footerHTML = [NSString stringWithFormat:@"<!doctype html><html><head><meta charset=\"utf-8\"></head><body><p style=\"text-align: center;font-family: Helvetica\">%@</p></body></html>", footerContent];
-    return footerHTML;
 }
 
 @end

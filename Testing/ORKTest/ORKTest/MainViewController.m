@@ -225,7 +225,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLPrintFormatterDelegate, ORKHTMLHeaderFooterRendererDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLPrintFormatterDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3339,11 +3339,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
     printFormatter.styleSheetURL = [ORKBundle() URLForResource:@"Stylesheet" withExtension:@"css"];
     [printFormatter prepareWithStep:stepViewController.step andResult:stepViewController.result];
-    ORKHTMLPrintPageRenderer *renderer = [[ORKHTMLPrintPageRenderer alloc] init];
+    UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
     renderer.headerHeight = 25;
-    renderer.footerHeight = 30;
+    renderer.footerHeight = 25;
     [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
-    renderer.headerFooterDelegate = self;
     UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
     controller.printPageRenderer = renderer;
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
@@ -3355,11 +3354,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     return YES;
-}
-
-- (NSString *)printPageRenderer:(ORKHTMLPrintPageRenderer *)printPageRenderer footerContentForPageInRange:(NSRange)range {
-    NSString *footerContent = [NSString stringWithFormat:@"<!doctype html><html><head><title>header</title><meta charset=\"utf-8\"></head><body><p style=\"text-align: center\">Page %lu of %lu</p></body></html>", range.location, range.location];
-    return footerContent;
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
