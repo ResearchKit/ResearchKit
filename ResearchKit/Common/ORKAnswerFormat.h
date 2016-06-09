@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2016, ICON plc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -160,6 +161,7 @@ typedef NS_ENUM(NSInteger, ORKVASMarkerStyle) {
      Lower traingle style.
      */
     ORKVASMerkerStyleLowerOnly,
+    
     /**
      Both traingles style.
      */
@@ -664,11 +666,22 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKVASScaleAnswerFormat` class represents an answer format that lets participants
- select a value on a continuous predefined scale without numbers, just "feeling".
- 
- The continuous scale answer format produces an `ORKScaleQuestionResult` object that has a
- real-number value.
+ The `ORKVASScaleAnswerFormat` class represents a visual analogue scale (VAS) answer format.
+ Using this, participants select a position on a continuous linear scale that represents 
+ how they rate their health condition by marking a point on a horizontal line between two endpoints.
+ The health conditions represented by the endpoints of the line are described by the left and right
+ anchor text: @param minimumValueDescription and @param maximumValueDescription respectively.  
+ This scale is an electronic version of the standard 100cm visual analogue scale (VAS) used
+ in many paper questionnaires and validated health instruments, particularly in the area of 
+ pain measurement.
+ The VAS automatically scales to the optimal length for the device display, and the scientific
+ literature contains strong validation evidence that the display length of the VAS does not influence
+ the psychometric properties of the scale.  In common with the 100cm paper visual analogue scale,
+ the scale answer format produces an `ORKScaleQuestionResult` object that returns an integer result
+ from 0 to 100 with all possible integers between 0 to 100 measurable.
+ The style of marker used to indicate the point on the VAS that the participant has selected 
+ is controlled by @param markerStyle.  The presence or absence of arrows to associate the anchor 
+ text with the ends of the VAS line is controlled by @arrows.
  */
 
 ORK_CLASS_AVAILABLE

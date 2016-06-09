@@ -2,8 +2,8 @@
 //  ORKSurveyAnswerCellForVAS.h
 //  ResearchKit
 //
-//  Created by Janusz Bień on 16.03.2016.
-//  Copyright © 2016 researchkit.org. All rights reserved.
+//  Created by Bill Byrom and Willie Muehlhausen, ICON Clinical Research.
+//  Copyright (c) 2016 ICON Clinical Research.  All rights reserved.
 //
 
 #import "ORKSurveyAnswerCell.h"
