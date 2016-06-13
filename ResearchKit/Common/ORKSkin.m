@@ -193,7 +193,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        20,        14,        44,        44},      // ORKScreenMetricLearnMoreBaselineToStepViewTop
         {         40,        40,        30,        14,        40,        40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
         {         36,        36,        20,        12,        36,        36},      // ORKScreenMetricContinueButtonTopMargin
-        {         40,        40,        20,        12,        40,        20},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
+        {         40,        40,        20,        12,        40,        40},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
         {          0,         0,         0,         0,        80,       170},      // ORKScreenMetricTopToIllustration
         {         44,        44,        40,        40,        44,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
         {        198,       198,       194,       152,       297,       297},      // ORKScreenMetricIllustrationHeight
@@ -266,6 +266,16 @@ CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
     return ORKStandardLeftTableViewCellMarginForWindow(cell.window);
 }
 
+CGFloat ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(CGFloat screenSizeWidth, UIWindow *window) {
+    // Use adaptive side margin, if window is wider than iPhone6 Plus.
+    // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad or iPad12_9
+    
+    CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (screenSizeWidth - ORKiPhone6PlusScreenSize.width);
+    ratio = MIN(1.0, ratio);
+    ratio = MAX(0.0, ratio);
+    return ORKLayoutMarginWidthThinBezelRegular + (ORKLayoutMarginWidthiPad - ORKLayoutMarginWidthThinBezelRegular)*ratio;
+}
+
 CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     CGFloat margin = 0;
@@ -277,14 +287,12 @@ CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
         default:
             margin = ORKStandardLeftTableViewCellMarginForWindow(window);
             break;
-        case ORKScreenTypeiPad:
+        case ORKScreenTypeiPad:{
+            margin = ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(ORKiPadScreenSize.width, window);
+            break;
+        }
         case ORKScreenTypeiPad12_9:{
-            // Use adaptive side margin, if window is wider than iPhone6 Plus.
-            // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad
-            CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (ORKiPadScreenSize.width - ORKiPhone6PlusScreenSize.width);
-            ratio = MIN(1.0, ratio);
-            ratio = MAX(0.0, ratio);
-            margin = ORKLayoutMarginWidthThinBezelRegular + (ORKLayoutMarginWidthiPad - ORKLayoutMarginWidthThinBezelRegular)*ratio;
+            margin = ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(ORKiPad12_9ScreenSize.width, window);
             break;
         }
     }
