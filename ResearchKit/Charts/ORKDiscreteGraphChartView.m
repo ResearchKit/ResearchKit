@@ -48,8 +48,7 @@
 
 - (void)setDrawsConnectedRanges:(BOOL)drawsConnectedRanges {
     _drawsConnectedRanges = drawsConnectedRanges;
-    [super updateLineLayers];
-    [super updatePointLayers];
+    [super updateLineAndPointLayers];
     [super layoutLineLayers];
     [super layoutPointLayers];
 }
