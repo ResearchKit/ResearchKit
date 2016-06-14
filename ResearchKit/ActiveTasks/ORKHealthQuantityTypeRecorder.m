@@ -60,7 +60,7 @@
            completionHandler:(void (^)(HKAnchoredObjectQuery *query,
                                        NSArray<__kindof HKSample *> *results,
                                        NSUInteger newAnchor,
-                                       NSError *error))handler;
+                                       NSError *error))handler NS_DEPRECATED_IOS(8_0, 9_0);
 @end
 
 @implementation ORKHealthQuantityTypeRecorder
