@@ -43,7 +43,8 @@
     HKHealthStore *_healthStore;
     NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
-    NSInteger _anchor;
+    HKQueryAnchor *_anchor;
+    NSUInteger _anchorValue;
     HKQuantitySample *_lastSample;
 }
 
@@ -79,7 +80,8 @@
         _quantityType = quantityType;
         _unit = unit;
         self.continuesInBackground = YES;
-        _anchor = HKAnchoredObjectQueryNoAnchor;
+        _anchorValue = HKAnchoredObjectQueryNoAnchor;
+        _anchor = [HKQueryAnchor anchorFromValue:_anchorValue];
     }
     return self;
 }
@@ -101,7 +103,7 @@
 
 static const NSInteger _HealthAnchoredQueryLimit = 100;
 
-- (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
+- (void)query_logResults:(NSArray *)results withAnchor:(HKQueryAnchor*)newAnchor anchorValue:(NSUInteger)anchorValue {
     
     NSUInteger resultCount = results.count;
     if (resultCount == 0) {
@@ -125,6 +127,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
         }
         
         _anchor = newAnchor;
+        _anchorValue = anchorValue;
         
         if (resultCount == _HealthAnchoredQueryLimit) {
             // Do another fetch immediately rather than wait for an observation
@@ -139,45 +142,43 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
-    
     __weak typeof(self) weakSelf = self;
+    void (^handleResults)(NSArray <__kindof HKSample *> *, HKQueryAnchor *, NSUInteger, NSError *) = ^ (NSArray *results, HKQueryAnchor *newAnchor, NSUInteger newAnchorValue, NSError *error) {
+        if (error) {
+            // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
+            ORK_Log_Warning(@"Anchored query error: %@", error);
+            return;
+        }
+        
+        __typeof(self) strongSelf = weakSelf;
+        [strongSelf query_logResults:results withAnchor:newAnchor anchorValue:newAnchorValue];
+    };
+    
     
     HKAnchoredObjectQuery *anchoredQuery;
-    if ([HKAnchoredObjectQuery.self respondsToSelector:@selector(initWithType:predicate:anchor:limit:resultsHandler:)]) {
+    if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:resultsHandler:)]) {
         
-        HKQueryAnchor *anchor = [HKQueryAnchor anchorFromValue:_anchor];
         anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
                                                           predicate:_samplePredicate
-                                                             anchor:anchor
+                                                             anchor:_anchor
                                                               limit:_HealthAnchoredQueryLimit
-                                                     resultsHandler:^(HKAnchoredObjectQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable sampleObjects, NSArray<HKDeletedObject *> * _Nullable deletedObjects, HKQueryAnchor * _Nullable newAnchor, NSError * _Nullable error) {
-                                                         
-                                                        if (error) {
-                                                            // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-                                                            ORK_Log_Warning(@"Anchored query error: %@", error);
-                                                            return;
-                                                        }
-
-                                                        __typeof(self) strongSelf = weakSelf;
-                                                        [strongSelf query_logResults:sampleObjects withAnchor:newAnchor];
-                                                     }];
+                                                     resultsHandler:
+                         ^(HKAnchoredObjectQuery *query, NSArray *sampleObjects, NSArray *deletedObjects, HKQueryAnchor *newAnchor, NSError *error) {
+                             handleResults(sampleObjects, newAnchor, 0, error);
+                         }];
     }
-    else {
+    else if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:completionHandler:)]) {
+        
         anchoredQuery = [(id <HKAnchoredObjectQuery_8>)[HKAnchoredObjectQuery alloc] initWithType:_quantityType
                                                                                         predicate:_samplePredicate
-                                                                                           anchor:_anchor
-                                                                                            limit:_HealthAnchoredQueryLimit
-                                                                                completionHandler:^(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> *results, NSUInteger newAnchor, NSError *error) {
-                                                                                    
-                                                                                    if (error) {
-                                                                                        // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-                                                                                        ORK_Log_Warning(@"Anchored query error: %@", error);
-                                                                                        return;
-                                                                                    }
-                                                                                    
-                                                                                    __typeof(self) strongSelf = weakSelf;
-                                                                                    [strongSelf query_logResults:results withAnchor:newAnchor];
-                                                                                }];
+                                                                                           anchor:_anchorValue
+                                                                                            limit:_HealthAnchoredQueryLimit completionHandler:
+                         ^(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> *results, NSUInteger newAnchor, NSError *error) {
+                             handleResults(results, nil, newAnchor, error);
+                         }];
+    }
+    else {
+        NSAssert(NO, @"Could not instantiate an HKAnchoredObjectQuery.");
     }
     [_healthStore executeQuery:anchoredQuery];
 }
