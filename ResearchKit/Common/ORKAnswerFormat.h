@@ -1214,6 +1214,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *validationRegex;
 
 /**
+ The options flag used with NSRegularExpression and the validationRegex to validate user's input.
+
+ The default value is NSRegularExpressionCaseInsensitive. Has no effect if validationRegex is not set.
+ */
+@property (nonatomic, assign) NSRegularExpressionOptions validationRegexOptions;
+
+/**
  The text presented to the user when invalid input is received.
  
  The default value is nil.

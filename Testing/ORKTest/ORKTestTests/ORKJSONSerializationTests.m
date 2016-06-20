@@ -379,6 +379,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegex",
+                                              @"ORKRegistrationStep.passcodeValidationRegexOptions",
                                               @"ORKRegistrationStep.passcodeInvalidMessage"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
