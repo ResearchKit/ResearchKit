@@ -47,13 +47,13 @@ public extension ORKPredicateStepNavigationRule {
     #else
     
     convenience init(resultPredicatesAndDestinationStepIdentifiers tuples: [ (resultPredicate: NSPredicate, destinationStepIdentifier: String) ], defaultStepIdentifierOrNil: String? = nil ) {
-    var resultPredicates: [NSPredicate] = []
-    var destinationStepIdentifiers: [String] = []
-    for tuple in tuples {
-    resultPredicates.append(tuple.resultPredicate)
-    destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
-    }
-    self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true);
+        var resultPredicates: [NSPredicate] = []
+        var destinationStepIdentifiers: [String] = []
+        for tuple in tuples {
+            resultPredicates.append(tuple.resultPredicate)
+            destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
+        }
+        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true);
     }
 
     #endif
