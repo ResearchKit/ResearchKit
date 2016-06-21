@@ -68,7 +68,9 @@
 
 - (void)setAlertThreshold:(CGFloat)alertThreshold {
     _alertThreshold = alertThreshold;
-    _audioContentView.alertThreshold = alertThreshold;
+    if (alertThreshold > 0) {
+        _audioContentView.alertThreshold = alertThreshold;
+    }
 }
 
 - (void)viewDidLoad {
