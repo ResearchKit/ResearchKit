@@ -517,6 +517,7 @@
 		FF36A48D1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h in Headers */ = {isa = PBXBuildFile; fileRef = FF36A48B1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FF36A48E1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m in Sources */ = {isa = PBXBuildFile; fileRef = FF36A48C1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m */; };
 		FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */; };
+		FFDF60DE1D19F0B90004156F /* ORKContinueButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FFDF60DD1D19F0B90004156F /* ORKContinueButtonTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1077,6 +1078,7 @@
 		FF36A48B1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAudioLevelNavigationRule.h; sourceTree = "<group>"; };
 		FF36A48C1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAudioLevelNavigationRule.m; sourceTree = "<group>"; };
 		FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ORKTextButton_Internal.h; path = ../../../ResearchKit/ResearchKit/Common/ORKTextButton_Internal.h; sourceTree = "<group>"; };
+		FFDF60DD1D19F0B90004156F /* ORKContinueButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKContinueButtonTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1467,6 +1469,7 @@
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
 				248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
+				FFDF60DD1D19F0B90004156F /* ORKContinueButtonTests.m */,
 				86CC8EAB1AC09383001CCD89 /* ORKDataLoggerManagerTests.m */,
 				86CC8EAC1AC09383001CCD89 /* ORKDataLoggerTests.m */,
 				86CC8EAD1AC09383001CCD89 /* ORKHKSampleTests.m */,
@@ -2730,6 +2733,7 @@
 				86CC8EB41AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m in Sources */,
 				2EBFE1201AE1B74100CB8254 /* ORKVoiceEngineTests.m in Sources */,
 				BCAD50E81B0201EE0034806A /* ORKTaskTests.m in Sources */,
+				FFDF60DE1D19F0B90004156F /* ORKContinueButtonTests.m in Sources */,
 				86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */,
 				FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */,
 				FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */,
