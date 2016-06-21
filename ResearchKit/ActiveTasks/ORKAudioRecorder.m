@@ -81,9 +81,12 @@
     return self;
 }
 
-- (void)restoreSavedAudioSessionCategory:(NSError **)error {
+- (void)restoreSavedAudioSessionCategory {
     if (_savedSessionCategory) {
-        [[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:error];
+        NSError *error;
+        if (![[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:&error]) {
+            ORK_Log_Error(@"Failed to restore the audio session category: %@", [error localizedDescription]);
+        }
         _savedSessionCategory = nil;
     }
 }
@@ -201,18 +204,14 @@
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
 #endif
-        
+        [self restoreSavedAudioSessionCategory];
     }
 }
 
 - (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
-    
-    NSError *resetError;
-    [self restoreSavedAudioSessionCategory:&resetError];
-    
-    [super finishRecordingWithError:(error ?: resetError)];
-    
+
+    [super finishRecordingWithError:error];
 }
 
 - (NSString *)extension {
