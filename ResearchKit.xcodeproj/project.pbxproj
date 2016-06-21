@@ -516,6 +516,7 @@
 		FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */; };
 		FF36A48D1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h in Headers */ = {isa = PBXBuildFile; fileRef = FF36A48B1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FF36A48E1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m in Sources */ = {isa = PBXBuildFile; fileRef = FF36A48C1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m */; };
+		FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2416,6 +2417,7 @@
 				86C40DA61A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.h in Headers */,
 				86C40D5E1A8D7C5C00081FAC /* ORKQuestionStep.h in Headers */,
 				6146D0A31B84A91E0068491D /* ORKLineGraphAccessibilityElement.h in Headers */,
+				FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */,
 				86C40C841A8D7C5C00081FAC /* ORKActiveStepTimer.h in Headers */,
 				86B781BD1AA668ED00688151 /* ORKValuePicker.h in Headers */,
 				86C40DE21A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h in Headers */,
