@@ -1176,7 +1176,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertEqual(instructions.count, 1);
     ORKStep *instructionStep = [instructions firstObject];
     XCTAssertEqualObjects(instructionStep.title, @"Left Hand");
-    XCTAssertEqualObjects(instructionStep.text, @"Rest your phone on a flat surface. Then use two fingers on your left hand to alternately tap the buttons that appear. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
     
     // Look for the activity step
     NSArray *tappings = filteredSteps(@"tapping", @"left");
@@ -1214,7 +1214,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertEqual(instructions.count, 1);
     ORKStep *instructionStep = [instructions firstObject];
     XCTAssertEqualObjects(instructionStep.title, @"Right Hand");
-    XCTAssertEqualObjects(instructionStep.text, @"Rest your phone on a flat surface. Then use two fingers on your right hand to alternately tap the buttons that appear. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
     
     // Look for the activity step
     NSArray *tappings = filteredSteps(@"tapping", @"right");
@@ -1271,12 +1271,12 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
             // Depending upon the seed (clock time) this will be either the right or left hand
             // Without using OCMock, cannot easily verify that both will display.
             if (isRightFirst) {
-                XCTAssertEqualObjects(rightInstructionStep.text, @"Rest your phone on a flat surface. Then use two fingers on your right hand to alternately tap the buttons that appear. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
-                XCTAssertEqualObjects(leftInstructionStep.text, @"Rest your phone on a flat surface. Now repeat the same test using your left hand. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your left hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
             }
             else {
-                XCTAssertEqualObjects(leftInstructionStep.text, @"Rest your phone on a flat surface. Then use two fingers on your left hand to alternately tap the buttons that appear. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
-                XCTAssertEqualObjects(rightInstructionStep.text, @"Rest your phone on a flat surface. Now repeat the same test using your right hand. Keep tapping for 10 seconds and time your taps to be as consistent as possible.");
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your right hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
             }
             
             // Look for tapping steps
