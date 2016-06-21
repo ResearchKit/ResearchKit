@@ -81,9 +81,9 @@
     return self;
 }
 
-- (void)restoreSavedAudioSessionCategory {
+- (void)restoreSavedAudioSessionCategory:(NSError **)error {
     if (_savedSessionCategory) {
-        [[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:nil];
+        [[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:error];
         _savedSessionCategory = nil;
     }
 }
@@ -201,14 +201,18 @@
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
 #endif
-        [self restoreSavedAudioSessionCategory];
+        
     }
 }
 
 - (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     
-    [super finishRecordingWithError:error];
+    NSError *resetError;
+    [self restoreSavedAudioSessionCategory:&resetError];
+    
+    [super finishRecordingWithError:(error ?: resetError)];
+    
 }
 
 - (NSString *)extension {
