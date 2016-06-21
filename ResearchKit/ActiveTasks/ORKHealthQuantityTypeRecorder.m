@@ -43,7 +43,7 @@
     HKHealthStore *_healthStore;
     NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
-    NSInteger _anchor;
+    HKQueryAnchor *_anchor;
     HKQuantitySample *_lastSample;
 }
 
@@ -89,7 +89,7 @@
 
 static const NSInteger _HealthAnchoredQueryLimit = 100;
 
-- (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
+- (void)query_logResults:(NSArray *)results withAnchor:(HKQueryAnchor *)newAnchor {
     
     NSUInteger resultCount = results.count;
     if (resultCount == 0) {
@@ -133,7 +133,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                             predicate:_samplePredicate
                                             anchor:_anchor
                                             limit:_HealthAnchoredQueryLimit
-                                            completionHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSUInteger newAnchor, NSError *error)
+                                            resultsHandler:^(HKAnchoredObjectQuery *query, NSArray *results, NSArray *deletedObjects, HKQueryAnchor *newAnchor, NSError *error)
                                             {
                                                 if (error) {
                                                     // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
