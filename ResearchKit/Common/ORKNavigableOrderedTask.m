@@ -78,7 +78,7 @@
 
 - (NSDictionary<NSString *, ORKStepNavigationRule *> *)stepNavigationRules {
     if (!_stepNavigationRules) {
-        return (NSDictionary<NSString *, ORKStepNavigationRule *> *)@[];
+        return @{};
     }
     return [_stepNavigationRules copy];
 }
@@ -107,7 +107,7 @@
 
 - (NSDictionary<NSString *, ORKSkipStepNavigationRule *> *)skipStepNavigationRules {
     if (!_skipStepNavigationRules) {
-        return (NSDictionary<NSString *, ORKSkipStepNavigationRule *> *)@[];
+        return @{};
     }
     return [_skipStepNavigationRules copy];
 }
