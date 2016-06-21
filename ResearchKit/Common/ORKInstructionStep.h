@@ -63,6 +63,14 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) UIImage *image;
 
+@property (nonatomic, copy, nullable) UIImage *auxiliaryImage;
+
+@end
+
+@interface ORKInstructionStep (ORKPredefinedSteps)
+
++ (ORKInstructionStep*)completionStep;
+
 @end
 
 NS_ASSUME_NONNULL_END
