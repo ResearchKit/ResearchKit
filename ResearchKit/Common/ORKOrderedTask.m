@@ -107,6 +107,15 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     return [_identifier hash] ^ [_steps hash];
 }
 
+- (ORKStep *)removeStepAtIndex:(NSUInteger)index {
+    NSParameterAssert(index < _steps.count);
+    NSMutableArray *mutableSteps = [_steps mutableCopy];
+    ORKStep *ret = [mutableSteps objectAtIndex:index];
+    [mutableSteps removeObjectAtIndex:index];
+    _steps = [mutableSteps copy];
+    return ret;
+}
+
 #pragma mark - ORKTask
 
 - (void)validateParameters {
