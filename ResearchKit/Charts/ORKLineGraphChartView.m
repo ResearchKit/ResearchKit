@@ -37,6 +37,12 @@
 #import "ORKRangedPoint.h"
 
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKLineGraphChartView ()
+@property (nonatomic, strong, nullable) ORKIBSampleLineGraphDataSource *sampleDataSource;
+@end
+#endif
+
 const CGFloat FillColorAlpha = 0.4;
 
 @implementation ORKLineGraphChartView {
@@ -275,6 +281,15 @@ const CGFloat FillColorAlpha = 0.4;
                 startDelay:duration * (2.0 / 3.0)
             timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
     }];
+}
+
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+#if TARGET_INTERFACE_BUILDER
+    self.sampleDataSource = [ORKIBSampleLineGraphDataSource new];
+    self.dataSource = self.sampleDataSource;
+#endif
 }
 
 @end

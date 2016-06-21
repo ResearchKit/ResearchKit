@@ -36,6 +36,12 @@
 #import "ORKHelpers.h"
 #import "ORKRangedPoint.h"
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKDiscreteGraphChartView ()
+@property (nonatomic, strong, nullable) ORKIBSampleDiscreteGraphDataSource *sampleDataSource;
+@end
+#endif
+
 
 @implementation ORKDiscreteGraphChartView
 
@@ -129,6 +135,15 @@
         canvasYPosition = self.yAxisPoints[plotIndex][pointIndex - 1].maximumValue;
     }
     return canvasYPosition;
+}
+
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+#if TARGET_INTERFACE_BUILDER
+    self.sampleDataSource = [ORKIBSampleDiscreteGraphDataSource new];
+    self.dataSource = self.sampleDataSource;
+#endif
 }
 
 @end
