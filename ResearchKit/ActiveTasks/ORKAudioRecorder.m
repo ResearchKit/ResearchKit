@@ -42,7 +42,7 @@
 
 @property (nonatomic, copy) NSDictionary *recorderSettings;
 
-@property (nonatomic, strong) NSString *savedSessionCategory;
+@property (nonatomic, copy) NSString *savedSessionCategory;
 
 @end
 
