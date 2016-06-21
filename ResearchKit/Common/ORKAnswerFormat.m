@@ -2069,6 +2069,26 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return string;
 }
 
+
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage {
+    
+    ORKTextAnswerFormat *fmt = [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:originalItemIdentifier errorMessage:errorMessage];
+    
+    // Copy from ORKTextAnswerFormat being confirmed
+    fmt->_maximumLength = _maximumLength;
+    fmt->_keyboardType = _keyboardType;
+    fmt->_multipleLines = _multipleLines;
+    fmt->_secureTextEntry = _secureTextEntry;
+    
+    // Always set to no autocorrection
+    fmt->_autocapitalizationType = UITextAutocapitalizationTypeNone;
+    fmt->_autocorrectionType = UITextAutocorrectionTypeNo;
+    fmt->_spellCheckingType = UITextSpellCheckingTypeNo;
+    
+    return fmt;
+}
+
 #pragma mark NSSecureCoding
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

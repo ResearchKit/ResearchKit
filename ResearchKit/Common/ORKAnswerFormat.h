@@ -1269,6 +1269,18 @@ ORK_CLASS_AVAILABLE
  */
 @property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
+/**
+ Returns an answer format that can be used for confirming a text entry.
+ 
+ This answer format is intended to be used with an `ORKFormStep` in order to confirm a previous 
+ formItem input. Example usage includes a password or participant identifier that is used to 
+ anonymously identify a study participant.
+ 
+ This answer format produces an `ORKBooleanQuestionResult` object.
+ */
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage;
+
 @end
 
 

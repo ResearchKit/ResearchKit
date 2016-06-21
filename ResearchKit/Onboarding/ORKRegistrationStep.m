@@ -62,6 +62,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         [formItems addObject:item];
     }
     
+    ORKTextAnswerFormat *passwordAnswerFormat;
     {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
@@ -69,6 +70,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        passwordAnswerFormat = answerFormat;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
@@ -80,14 +82,9 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     }
     
     {
-        ORKConfirmTextAnswerFormat *answerFormat = [[ORKConfirmTextAnswerFormat alloc]
-                                                    initWithOriginalItemIdentifier:ORKRegistrationFormItemIdentifierPassword
-                                                    errorMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
-        answerFormat.multipleLines = NO;
-        answerFormat.secureTextEntry = YES;
-        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        ORKAnswerFormat *answerFormat = [passwordAnswerFormat
+                                         confirmationAnswerFormatWithOriginalItemIdentifier:ORKRegistrationFormItemIdentifierPassword
+                                         errorMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierConfirmPassword
                                                                text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)

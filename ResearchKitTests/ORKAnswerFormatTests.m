@@ -59,4 +59,49 @@
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"12345"]);
 }
 
+- (void)testConfirmAnswerFormat {
+    
+    // Setup an answer format
+    ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+    answerFormat.multipleLines = NO;
+    answerFormat.secureTextEntry = YES;
+    answerFormat.keyboardType = UIKeyboardTypeASCIICapable;
+    answerFormat.maximumLength = 12;
+    answerFormat.validationRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{10,}";
+    answerFormat.invalidMessage = @"Invalid password";
+    
+    // Note: setting these up incorrectly for a password to test that the values are *not* copied.
+    // DO NOT setup a real password field with these options.
+    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    answerFormat.autocorrectionType = UITextAutocorrectionTypeDefault;
+    answerFormat.spellCheckingType = UITextSpellCheckingTypeDefault;
+    
+    // -- method under test
+    ORKAnswerFormat *confirmFormat = [answerFormat confirmationAnswerFormatWithOriginalItemIdentifier:@"password" errorMessage:@"Passwords do not match"];
+    
+    // ORKAnswerFormat that is returned should be a subclass of ORKTextAnswerFormat.
+    // The actual subclass that is returned is private to the API and should not be accessed directly.
+    XCTAssertNotNil(confirmFormat);
+    XCTAssertTrue([confirmFormat isKindOfClass:[ORKTextAnswerFormat class]]);
+    if (![confirmFormat isKindOfClass:[ORKTextAnswerFormat class]]) { return; }
+    
+    ORKTextAnswerFormat *confirmAnswer = (ORKTextAnswerFormat*)confirmFormat;
+    
+    // These properties should match the original format
+    XCTAssertFalse(confirmAnswer.multipleLines);
+    XCTAssertTrue(confirmAnswer.secureTextEntry);
+    XCTAssertEqual(confirmAnswer.keyboardType, UIKeyboardTypeASCIICapable);
+    XCTAssertEqual(confirmAnswer.maximumLength, 12);
+    
+    // These properties should always be set to not autocorrect
+    XCTAssertEqual(confirmAnswer.autocapitalizationType, UITextAutocapitalizationTypeNone);
+    XCTAssertEqual(confirmAnswer.autocorrectionType, UITextAutocorrectionTypeNo);
+    XCTAssertEqual(confirmAnswer.spellCheckingType, UITextSpellCheckingTypeNo);
+    
+    // These properties should be nil
+    XCTAssertNil(confirmAnswer.validationRegex);
+    XCTAssertNil(confirmAnswer.invalidMessage);
+    
+}
+
 @end
