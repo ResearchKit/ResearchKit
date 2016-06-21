@@ -62,7 +62,6 @@
     if (self) {
         // Continue audio recording in the background
         self.suspendIfInactive = NO;
-        _alertThreshold = -1.f;
     }
     return self;
 }
