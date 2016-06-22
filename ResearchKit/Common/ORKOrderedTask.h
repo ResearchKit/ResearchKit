@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKNavigableOrderedTask;
+
 /**
  The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a 
  task that assumes a fixed order for its steps.
@@ -288,7 +290,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
  */
-+ (ORKOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
++ (ORKNavigableOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
                                         speechInstruction:(nullable NSString *)speechInstruction
                                    shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction

@@ -398,7 +398,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
+/// Copyright (c) 2016, Sage Bionetworks
++ (ORKNavigableOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
                                    intendedUseDescription:(NSString *)intendedUseDescription
                                         speechInstruction:(NSString *)speechInstruction
                                    shortSpeechInstruction:(NSString *)shortSpeechInstruction
