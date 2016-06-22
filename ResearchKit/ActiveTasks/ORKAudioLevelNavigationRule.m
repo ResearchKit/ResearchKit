@@ -59,6 +59,7 @@ Float32 const kVolumeClamp = 60.0;
 {
     ORKThrowInvalidArgumentExceptionIfNil(audioLevelStepIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(defaultStepIdentifier);
+    ORKThrowInvalidArgumentExceptionIfNil(recordingSettings);
     self = [super init_ork];
     if (self) {
         _audioLevelStepIdentifier = [audioLevelStepIdentifier copy];
