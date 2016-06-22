@@ -29,7 +29,6 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
 #import <ResearchKit/ORKActiveStep.h>
 
 

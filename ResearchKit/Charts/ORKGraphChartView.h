@@ -135,6 +135,20 @@ ORK_AVAILABLE_DECL
 - (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
 
 /**
+ Asks the data source for the fill color of the specified plot.
+ 
+ The fill color is only used by `ORKLineGraphChartView`. If this method is not implemented, the
+ chart uses the main color of the specified plot with a 0.4 opacity value.
+ 
+ @param graphChartView      The graph chart view asking for the color of the segment.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return The color of the fill layer at the specified index in a line chart view.
+ */
+- (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView fillColorForPlotIndex:(NSInteger)plotIndex;
+
+/**
  Asks the data source which plot the scrubber should snap to in multigraph chart views.
  
  If this method is not implemented, the scrubber snaps over the first plot.
@@ -280,6 +294,7 @@ ORK_AVAILABLE_DECL
  subclasses are `ORKLineGraphChartView`, `ORKDiscreteGraphChartView`, and `ORKBarGraphChartView`.
 */
 ORK_CLASS_AVAILABLE
+IB_DESIGNABLE
 @interface ORKGraphChartView : UIView
 
 /**
@@ -311,14 +326,14 @@ ORK_CLASS_AVAILABLE
 
  The default value of this property is NO.
  */
-@property (nonatomic) BOOL showsHorizontalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsHorizontalReferenceLines;
 
 /**
  A Boolean value indicating whether the graph chart view should draw vertical reference lines.
 
  The default value of this property is NO.
 */
-@property (nonatomic) BOOL showsVerticalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsVerticalReferenceLines;
 
 /**
  The delegate is notified of pan gesture events occuring within the bounds of the graph chart
@@ -341,7 +356,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil`
  resets it to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *axisColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *axisColor;
 
 /**
  The color of the vertical axis titles.
@@ -351,7 +366,7 @@ ORK_CLASS_AVAILABLE
 
  @note The horizontal axis titles use the current `tintColor`.
 */
-@property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.
@@ -359,7 +374,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
@@ -367,7 +382,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a white color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
@@ -375,7 +390,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a gray color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberLineColor;
 
 /**
  The string that is displayed if no data points are provided by the data source.
@@ -383,21 +398,21 @@ ORK_CLASS_AVAILABLE
  The default value for this property is an appropriate message string. Setting this property to
  `nil` resets it to its default value.
 */
-@property (nonatomic, copy, null_resettable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
  An image to be optionally displayed in place of the maximum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *maximumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *maximumValueImage;
 
 /**
  An image to be optionally displayed in place of the minimum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *minimumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *minimumValueImage;
 
 /**
  The long press gesture recognizer that is used for scrubbing by the graph chart view. You can use

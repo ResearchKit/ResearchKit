@@ -36,6 +36,12 @@
 #import "ORKHelpers.h"
 #import "ORKChartTypes.h"
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKDiscreteGraphChartView ()
+@property (nonatomic, strong, nullable) ORKIBSampleDiscreteGraphDataSource *sampleDataSource;
+@end
+#endif
+
 
 @implementation ORKDiscreteGraphChartView
 
@@ -116,6 +122,15 @@
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     return [super isXPositionSnapped:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
+}
+
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+#if TARGET_INTERFACE_BUILDER
+    self.sampleDataSource = [ORKIBSampleDiscreteGraphDataSource new];
+    self.dataSource = self.sampleDataSource;
+#endif
 }
 
 @end

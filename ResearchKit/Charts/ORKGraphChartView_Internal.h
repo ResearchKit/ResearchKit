@@ -98,6 +98,15 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
     return offset;
 }
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKIBSampleDiscreteGraphDataSource : NSObject <ORKGraphChartViewDataSource>
+@property (nonatomic, strong, nullable) NSArray <NSArray *> *plotPoints;
+@end
+
+@interface ORKIBSampleLineGraphDataSource : NSObject <ORKGraphChartViewDataSource>
+@property (nonatomic, strong, nullable) NSArray <NSArray *> *plotPoints;
+@end
+#endif
 
 @interface ORKGraphChartView ()
 

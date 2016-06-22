@@ -1047,7 +1047,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORKStepResult *result = nil;
         result = _managedResults[step.identifier];
         if (!result ) {
-            result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
         }
         
         if (!result) {

@@ -182,6 +182,21 @@ class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
         }
         return color
     }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, fillColorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.blueColor().colorWithAlphaComponent(0.6)
+        case 1:
+            color = UIColor.redColor().colorWithAlphaComponent(0.6)
+        case 2:
+            color = UIColor.greenColor().colorWithAlphaComponent(0.6)
+        default:
+            color = UIColor.cyanColor().colorWithAlphaComponent(0.6)
+        }
+        return color
+    }
 }
 
 class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {

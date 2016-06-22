@@ -55,7 +55,7 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is `YES`.
  */
-@property (nonatomic) BOOL drawsConnectedRanges;
+@property (nonatomic) IBInspectable BOOL drawsConnectedRanges;
 
 @end
 

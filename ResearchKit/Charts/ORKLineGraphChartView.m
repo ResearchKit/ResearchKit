@@ -37,6 +37,12 @@
 #import "ORKChartTypes.h"
 
 
+#if TARGET_INTERFACE_BUILDER
+@interface ORKLineGraphChartView ()
+@property (nonatomic, strong, nullable) ORKIBSampleLineGraphDataSource *sampleDataSource;
+@end
+#endif
+
 const CGFloat FillColorAlpha = 0.4;
 
 @implementation ORKLineGraphChartView {
@@ -56,13 +62,22 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Drawing
 
+- (UIColor *)fillColorForPlotIndex:(NSInteger)plotIndex {
+    UIColor *color = nil;
+    if ([self.dataSource respondsToSelector:@selector(graphChartView:fillColorForPlotIndex:)]) {
+        color = [self.dataSource graphChartView:self fillColorForPlotIndex:plotIndex];
+    } else {
+        color = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
+    }
+    return color;
+}
+
 - (void)updatePlotColors {
     [super updatePlotColors];
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSUInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        UIColor *fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
         CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
-        fillLayer.fillColor = fillColor.CGColor;
+        fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
     }
 }
 
@@ -73,6 +88,14 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
+    // Fill
+    CAShapeLayer *fillLayer = [CAShapeLayer layer];
+    fillLayer.fillColor = [self fillColorForPlotIndex:plotIndex].CGColor;
+    
+    [self.plotView.layer addSublayer:fillLayer];
+    _fillLayers[@(plotIndex)] = fillLayer;
+
+    // Lines
     BOOL previousPointExists = NO;
     BOOL emptyDataPresent = NO;
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
@@ -101,12 +124,6 @@ const CGFloat FillColorAlpha = 0.4;
         [self.plotView.layer addSublayer:lineLayer];
         [self.lineLayers[plotIndex][pointIndex - 1] addObject:lineLayer];
     }
-    
-    CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
-    
-    [self.plotView.layer addSublayer:fillLayer];
-    _fillLayers[@(plotIndex)] = fillLayer;
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
@@ -282,6 +299,15 @@ const CGFloat FillColorAlpha = 0.4;
                 timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         }];
     }
+}
+
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+#if TARGET_INTERFACE_BUILDER
+    self.sampleDataSource = [ORKIBSampleLineGraphDataSource new];
+    self.dataSource = self.sampleDataSource;
+#endif
 }
 
 @end
