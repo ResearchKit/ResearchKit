@@ -50,9 +50,10 @@
 
 @end
 
+#ifdef __IPHONE_10_0
 /// Add a protocol defining the initializer for iOS 8 apps. This signature was deprecated in iOS 9
 /// and deleted in iOS 10.
-@protocol HKAnchoredObjectQuery_8 <NSObject>
+@interface HKAnchoredObjectQuery (iOS8)
 - (instancetype)initWithType:(HKSampleType *)type
                    predicate:(NSPredicate *)predicate
                       anchor:(NSUInteger)anchor
@@ -62,6 +63,7 @@
                                        NSUInteger newAnchor,
                                        NSError *error))handler NS_DEPRECATED_IOS(8_0, 9_0);
 @end
+#endif
 
 @implementation ORKHealthQuantityTypeRecorder
 
@@ -169,10 +171,11 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     else if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:completionHandler:)]) {
         
-        anchoredQuery = [(id <HKAnchoredObjectQuery_8>)[HKAnchoredObjectQuery alloc] initWithType:_quantityType
-                                                                                        predicate:_samplePredicate
-                                                                                           anchor:_anchorValue
-                                                                                            limit:_HealthAnchoredQueryLimit completionHandler:
+        anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
+                                                          predicate:_samplePredicate
+                                                             anchor:_anchorValue
+                                                              limit:_HealthAnchoredQueryLimit
+                                                  completionHandler:
                          ^(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> *results, NSUInteger newAnchor, NSError *error) {
                              handleResults(results, nil, newAnchor, error);
                          }];
