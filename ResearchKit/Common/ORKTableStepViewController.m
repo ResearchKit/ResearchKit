@@ -1,5 +1,6 @@
 
 /*
+ Copyright (c) 2016, Sage Bionetworks
  Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -127,11 +128,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSAssert(NO, @"Abstract method");
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    NSAssert(NO, @"Abstract method");
+    return [tableView dequeueReusableCellWithIdentifier:@"NULL" forIndexPath:indexPath];
 }
 
 @end

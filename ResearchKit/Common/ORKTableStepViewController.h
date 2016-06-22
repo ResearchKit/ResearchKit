@@ -1,4 +1,5 @@
 /*
+ Copyright (c) 2016, Sage Bionetworks
  Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -41,9 +42,34 @@ ORK_CLASS_AVAILABLE
  */
 - (BOOL)continueButtonEnabled;
 
-// Required implementations for a data source. By default there are 0 rows in the table.
+/**
+ Required implementations for a data source. By default there is 1 section in the table.
+ 
+ @param  tableView      The tableview used to display rows
+ @return                The number of sections in the tableview
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+
+/**
+ Required implementations for a data source. By default there are 0 rows in the table.
+ 
+ Subclasses should override to return the number of rows in the table.
+ 
+ @param  tableView      The tableview used to display rows
+ @param  section        The section of the table
+ @return                The number of rows in the tableview section
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+
+/**
+ Required implementations for a data source. By default this will return nil.
+ 
+ Subclasses should override to return a cell appropriate to this implementation.
+ 
+ @param  tableView      The tableview used to display rows
+ @param  indexPath      The indexpath of the section/row for the cell
+ @return                The cell for this section/row
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
