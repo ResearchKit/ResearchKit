@@ -34,24 +34,19 @@
 ORK_CLASS_AVAILABLE
 @interface ORKTableStepViewController : ORKStepViewController <UITableViewDataSource, UITableViewDelegate>
 
+/**
+ @return    The table view managed by the controller object.
+ */
 @property (nonatomic, readonly) UITableView *tableView;
 
 /**
- * Whether or not the continue button should be enabled for this step. Default = YES
- * @return state of continue button
+ Whether or not the continue button should be enabled for this step. Default = YES
+ @return    State of continue button
  */
 - (BOOL)continueButtonEnabled;
 
 /**
- Required implementations for a data source. By default there is 1 section in the table.
- 
- @param  tableView      The tableview used to display rows
- @return                The number of sections in the tableview
- */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-
-/**
- Required implementations for a data source. By default there are 0 rows in the table.
+ Required implementations for a data source. Will assert if not overridden.
  
  Subclasses should override to return the number of rows in the table.
  
@@ -62,7 +57,7 @@ ORK_CLASS_AVAILABLE
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
 /**
- Required implementations for a data source. By default this will return nil.
+ Required implementations for a data source. Will assert if not overridden.
  
  Subclasses should override to return a cell appropriate to this implementation.
  
