@@ -31,7 +31,6 @@
 
 #import <ResearchKit/ResearchKit.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKConsentDocument;
@@ -59,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  present the task in a task view controller.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKConsentReviewStep : ORKStep
+@interface ORKConsentReviewStep : ORKFormStep
 
 /// @name Initialization.
 
