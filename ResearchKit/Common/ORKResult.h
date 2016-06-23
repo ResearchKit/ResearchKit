@@ -112,7 +112,7 @@ ORK_CLASS_AVAILABLE
  Note that for instantaneous items, `startDate` and `endDate` can have the same value, and should
  generally correspond to the end of the instantaneous data collection period.
  */
-@property (nonatomic, copy, nullable) NSDate *startDate;
+@property (nonatomic, copy) NSDate *startDate;
 
 /**
  The time when the task, step, or data collection stopped.
@@ -123,7 +123,7 @@ ORK_CLASS_AVAILABLE
  Note that for instantaneous items, `startDate` and `endDate` can have the same value, and should
  generally correspond to the end of the instantaneous data collection period. 
  */
-@property (nonatomic, copy, nullable) NSDate *endDate;
+@property (nonatomic, copy) NSDate *endDate;
 
 /**
  Metadata that describes the conditions under which the result was acquired.
