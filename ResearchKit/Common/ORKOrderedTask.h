@@ -88,6 +88,24 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
+
+/**
+ Return a mutated copy of self with the steps included in the given array.
+ 
+ This method is intended to allow for mutating an ordered task (or subclass) while retaining
+ the original class and properties that may not be publicly exposed, but with a mutated set
+ of steps. An example of where this might be useful is if before performing an `ORKPredefinedActiveTask`, 
+ the app needed to query the participant about medications, diet or sleep. The app
+ would need to mutate the steps in order to insert their own steps. While an ORKOrderedTask could
+ then be created with the same identifier and the new steps, subclass information such rules on an
+ `ORKNavigableOrderedTask` would be lost.
+ 
+ @param steps       An array of `ORKStep` objects in the order in which they should be presented.
+ 
+ @return            An initialized ordered task.
+ */
+- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps;
+
 @end
 
 
