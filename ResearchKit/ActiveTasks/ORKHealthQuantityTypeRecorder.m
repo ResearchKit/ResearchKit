@@ -43,6 +43,8 @@
     HKHealthStore *_healthStore;
     NSPredicate *_samplePredicate;
     HKObserverQuery *_observerQuery;
+    /// Either the HKQueryAnchor object *or* NSUInteger value are tracked since the initializer for
+    /// iOS 8 and iOS 9 use different objects. Only one will actually be referenced in the initalizer.
     HKQueryAnchor *_anchor;
     NSUInteger _anchorValue;
     HKQuantitySample *_lastSample;
