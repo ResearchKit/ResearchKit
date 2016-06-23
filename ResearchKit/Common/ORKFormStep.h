@@ -185,6 +185,19 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly, nullable) ORKAnswerFormat *answerFormat;
 
+/**
+ Returns an form item that can be used for confirming a text entry.
+ 
+ This form item is intended to be used with an `ORKFormStep` in order to confirm a previous
+ formItem input. Example usage includes a password or participant identifier that is used to
+ anonymously identify a study participant.
+ 
+ The answer format for this item produces an `ORKBooleanQuestionResult` object.
+ */
+- (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
+                                                     text:(nullable NSString *)text
+                                             errorMessage:(NSString *)errorMessage;
+
 @end
 
 NS_ASSUME_NONNULL_END

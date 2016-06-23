@@ -76,8 +76,20 @@
     answerFormat.autocorrectionType = UITextAutocorrectionTypeDefault;
     answerFormat.spellCheckingType = UITextSpellCheckingTypeDefault;
     
+    
+    ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"foo" text:@"enter value" answerFormat:answerFormat optional:NO];
+    
     // -- method under test
-    ORKAnswerFormat *confirmFormat = [answerFormat confirmationAnswerFormatWithOriginalItemIdentifier:@"password" errorMessage:@"Passwords do not match"];
+    ORKFormItem *confirmItem = [item confirmationAnswerFormItemWithIdentifier:@"bar"
+                                                                         text:@"enter again"
+                                                                 errorMessage:@"doesn't match"];
+    
+    XCTAssertEqualObjects(confirmItem.identifier, @"bar");
+    XCTAssertEqualObjects(confirmItem.text, @"enter again");
+    XCTAssertFalse(confirmItem.optional);
+    
+    // Inspect the answer format
+    ORKAnswerFormat *confirmFormat = confirmItem.answerFormat;
     
     // ORKAnswerFormat that is returned should be a subclass of ORKTextAnswerFormat.
     // The actual subclass that is returned is private to the API and should not be accessed directly.
