@@ -87,6 +87,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     return self;
 }
 
+- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps {
+    ORKOrderedTask *task = [self copyWithZone:nil];
+    task->_steps = ORKArrayCopyObjects(steps);
+    return task;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKOrderedTask *task = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]
                                                                            steps:ORKArrayCopyObjects(_steps)];
