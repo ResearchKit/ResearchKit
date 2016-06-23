@@ -212,6 +212,16 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
 
 /**
+ Tells the delegate that a step has finished.
+ 
+ The task view controller calls this method after a stepViewController has finished.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The `ORKStepViewController` that has just finished.
+ */
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController;
+
+/**
  Tells the delegate that the result has substantively changed.
  
  The task view controller calls this method when steps start or finish, or if an answer has
