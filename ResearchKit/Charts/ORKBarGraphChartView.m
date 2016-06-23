@@ -55,8 +55,8 @@ static const CGFloat BarWidth = 10.0;
 
 #pragma mark - Draw
 
-- (ORKValueStack *)pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return [self.dataSource graphChartView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+- (ORKValueStack *)dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return [self.dataSource graphChartView:self dataPointForPointIndex:pointIndex plotIndex:plotIndex];
 }
 
 - (ORKValueStack *)dummyPoint {
@@ -67,8 +67,8 @@ static const CGFloat BarWidth = 10.0;
     return YES;
 }
 
-- (NSMutableArray<ORKValueStack *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
-    NSMutableArray<ORKValueStack *> *normalizedPoints = [NSMutableArray new];
+- (NSMutableArray<ORKValueStack *> *)normalizedCanvasDataPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
+    NSMutableArray<ORKValueStack *> *normalizedDataPoints = [NSMutableArray new];
     
     if (plotIndex < self.dataPoints.count) {
         NSUInteger pointCount = self.dataPoints[plotIndex].count;
@@ -94,11 +94,11 @@ static const CGFloat BarWidth = 10.0;
                     [normalizedDoubleStackValues addObject:@(normalizedValue)];
                 }
             }
-            [normalizedPoints addObject:[[ORKValueStack alloc] initWithStackedValues:normalizedDoubleStackValues]];
+            [normalizedDataPoints addObject:[[ORKValueStack alloc] initWithStackedValues:normalizedDoubleStackValues]];
         }
     }
     
-    return normalizedPoints;
+    return normalizedDataPoints;
 }
 
 - (void)calculateMinAndMaxValues {

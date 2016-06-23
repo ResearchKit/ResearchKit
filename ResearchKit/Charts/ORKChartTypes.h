@@ -38,7 +38,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKGraphChartType
+@protocol ORKValueCollectionType
 
 /**
  A Boolean value indicating that the value is unset. (read-only)
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  in graph chart plots to draw value ranges.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKValueRange : NSObject <ORKGraphChartType>
+@interface ORKValueRange : NSObject <ORKValueCollectionType>
 
 /**
  Returns a value range initialized using the specified `minimumValue` and `maximumValue`.
@@ -117,7 +117,7 @@ ORK_CLASS_AVAILABLE
  in graph chart plots to draw stacked values.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKValueStack : NSObject <ORKGraphChartType>
+@interface ORKValueStack : NSObject <ORKValueCollectionType>
 
 /**
  Returns an empty value stack.

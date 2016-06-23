@@ -114,9 +114,9 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
 
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKGraphChartType> *> *> *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKValueCollectionType> *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKGraphChartType> *> *> *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<NSObject<ORKValueCollectionType> *> *> *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic) UIView *plotView; // Holds the plots
 
@@ -134,7 +134,7 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
 
 - (void)calculateMinAndMaxValues;
 
-- (NSMutableArray<NSObject<ORKGraphChartType> *> *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight;
+- (NSMutableArray<NSObject<ORKValueCollectionType> *> *)normalizedCanvasDataPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight;
 
 - (NSInteger)numberOfPlots;
 

@@ -106,7 +106,7 @@ ORK_AVAILABLE_DECL
 
  @return The number of range points in the plot at `plotIndex`.
 */
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex;
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex;
 
 
 @optional
@@ -254,7 +254,7 @@ ORK_AVAILABLE_DECL
  @return The value range specified by `pointIndex` in the plot specified by `plotIndex` for the
  specified graph chart view`.
  */
-- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @end
 
@@ -281,7 +281,7 @@ ORK_AVAILABLE_DECL
  @return The value stack specified by `pointIndex` in the plot specified by `plotIndex` for the
  specified graph chart view`.
  */
-- (ORKValueStack *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKValueStack *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @end
 
