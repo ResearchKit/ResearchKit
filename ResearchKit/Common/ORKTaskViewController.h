@@ -212,7 +212,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
 
 /**
- Tells the delegate that a step has finished.
+ Tells the delegate that a step has finished and will disappear.
  
  The task view controller calls this method after a stepViewController has finished.
  
