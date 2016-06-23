@@ -69,10 +69,10 @@
     answerFormat.maximumLength = 12;
     answerFormat.validationRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{10,}";
     answerFormat.invalidMessage = @"Invalid password";
+    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     
     // Note: setting these up incorrectly for a password to test that the values are *not* copied.
     // DO NOT setup a real password field with these options.
-    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     answerFormat.autocorrectionType = UITextAutocorrectionTypeDefault;
     answerFormat.spellCheckingType = UITextSpellCheckingTypeDefault;
     
@@ -93,8 +93,11 @@
     XCTAssertEqual(confirmAnswer.keyboardType, UIKeyboardTypeASCIICapable);
     XCTAssertEqual(confirmAnswer.maximumLength, 12);
     
+    // This property should match the input answer format so that cases that
+    // require all-upper or all-lower (for whatever reason) can be met.
+    XCTAssertEqual(confirmAnswer.autocapitalizationType, UITextAutocapitalizationTypeAllCharacters);
+    
     // These properties should always be set to not autocorrect
-    XCTAssertEqual(confirmAnswer.autocapitalizationType, UITextAutocapitalizationTypeNone);
     XCTAssertEqual(confirmAnswer.autocorrectionType, UITextAutocorrectionTypeNo);
     XCTAssertEqual(confirmAnswer.spellCheckingType, UITextSpellCheckingTypeNo);
     

@@ -2080,9 +2080,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
     fmt->_secureTextEntry = _secureTextEntry;
+    fmt->_autocapitalizationType = _autocapitalizationType;
     
-    // Always set to no autocorrection
-    fmt->_autocapitalizationType = UITextAutocapitalizationTypeNone;
+    // Always set to no autocorrection or spell checking
     fmt->_autocorrectionType = UITextAutocorrectionTypeNo;
     fmt->_spellCheckingType = UITextSpellCheckingTypeNo;
     
