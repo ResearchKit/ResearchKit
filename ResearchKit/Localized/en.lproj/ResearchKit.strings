@@ -364,6 +364,25 @@
 "HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
 "HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Tremor Test";
+"TREMOR_TEST_INTENDED_USE" = "This activity measures the tremor of your hands in various positions. Perform this test with your more affected hand.";
+"TREMOR_TEST_INTRO_2_TEXT" = "Hold the phone as shown in the image below and find a place where you can sit comfortably for the duration of this task.";
+"TREMOR_TEST_INTRO_2_DETAIL" = "You will be asked to perform four tasks while in this position.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Keep holding your phone in your lap for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Now hold phone with hand extended out at shoulder height";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Keep holding phone with hand extended for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Now hold phone at shoulder height with elbow bent";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Keep holding phone with elbow bent for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Now keeping your elbow bent, touch phone to nose repeatedly";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Keep touching phone to nose for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Prepare to do a queen wave (wave by turning your wrist)";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Keep performing a queen wave for %ld seconds";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to next task";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
