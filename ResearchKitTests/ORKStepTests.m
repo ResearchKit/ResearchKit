@@ -38,10 +38,12 @@
 
 @end
 
-@interface TestStep : ORKStep
+@interface DragonPokerStep : ORKStep
+@property (nonatomic) NSDate *playDate;
 @end
 
-@interface TestStepViewController : ORKStepViewController
+@interface DragonPokerStepViewController : ORKStepViewController
+@property (nonatomic) BOOL shouldShowCancelButton;
 @end
 
 
@@ -117,7 +119,8 @@
 }
 
 - (void)testInstantiateStepViewControllerWithResult {
-    TestStep *step = [[TestStep alloc] initWithIdentifier:@"test"];
+    DragonPokerStep *step = [[DragonPokerStep alloc] initWithIdentifier:@"test"];
+    step.playDate = [NSDate date];
     ORKStepResult *result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
     ORKStepViewController *stepViewController = [step instantiateStepViewControllerWithResult:result];
     XCTAssertNotNil(stepViewController);
@@ -125,14 +128,28 @@
 
 @end
 
-@implementation TestStep
+@implementation DragonPokerStep
 
+/// Example implementation of an override of the class method
+/// In this example, only show the cancel button on Tuesdays
 - (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
-    // Example implementation of an override of the class method
-    return [[TestStepViewController alloc] initWithStep:self];
+    DragonPokerStepViewController *viewController = [[DragonPokerStepViewController alloc] initWithStep:self result:result];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self.playDate];
+    viewController.shouldShowCancelButton = components.weekday == 2;
+    return viewController;
 }
 
 @end
 
-@implementation TestStepViewController
+@implementation DragonPokerStepViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Hide the cancel button if it should not be shown.
+    if (!self.shouldShowCancelButton) {
+        self.cancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] initWithFrame:CGRectZero]];
+    }
+}
+
 @end
