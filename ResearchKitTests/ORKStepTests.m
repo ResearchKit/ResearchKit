@@ -38,6 +38,12 @@
 
 @end
 
+@interface TestStep : ORKStep
+@end
+
+@interface TestStepViewController : ORKStepViewController
+@end
+
 
 @implementation ORKStepTests
 
@@ -110,4 +116,23 @@
     XCTAssertThrows([validReactionTimeStep validateParameters]);
 }
 
+- (void)testInstantiateStepViewControllerWithResult {
+    TestStep *step = [[TestStep alloc] initWithIdentifier:@"test"];
+    ORKStepResult *result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
+    ORKStepViewController *stepViewController = [step instantiateStepViewControllerWithResult:result];
+    XCTAssertNotNil(stepViewController);
+}
+
+@end
+
+@implementation TestStep
+
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
+    // Example implementation of an override of the class method
+    return [[TestStepViewController alloc] initWithStep:self];
+}
+
+@end
+
+@implementation TestStepViewController
 @end

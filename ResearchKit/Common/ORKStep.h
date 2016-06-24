@@ -183,6 +183,12 @@ ORK_CLASS_AVAILABLE
 - (void)validateParameters;
 
 /**
+ Returns the class that the task view controller should instantiate to display
+ this step.
+ */
+- (Class)stepViewControllerClass;
+
+/**
  Instantiates a step view controller for this class.
  
  This method is called when a step is about to be presented. The default implementation returns
