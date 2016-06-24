@@ -1387,6 +1387,10 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertNotNil(stepLast);
     XCTAssertEqual([task indexOfStep:stepLast], task.steps.count - 1);
     
+    // Look for not found
+    ORKStep *stepNF = [[ORKStep alloc] initWithIdentifier:@"foo"];
+    XCTAssertEqual([task indexOfStep:stepNF], NSNotFound);
+    
 }
 
 @end
