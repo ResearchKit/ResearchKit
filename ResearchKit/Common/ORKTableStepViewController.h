@@ -31,6 +31,19 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+/**
+ The `ORKTableStepViewController` class is an abstract base class that inherits from 
+ `ORKStepViewController` and provides a UITableView.
+ 
+ `ORKTableStepViewController` is designed to take advantage of the internal class methods 
+ used by `ORKFormStepViewController`, `ORKQuestionStepViewController` and `ORKReviewStepViewController` 
+ to allow for a consistent UI in a custom implementation of a main view that is a UITableView.
+ 
+ This will class will setup a consistent look for the title, text, learn more, skip and next UI elements
+ that are used by these classes as well as most of the other view controllers within this framework by 
+ automatically adding them as the header and footer of the tableview.
+ 
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKTableStepViewController : ORKStepViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -41,6 +54,11 @@ ORK_CLASS_AVAILABLE
 
 /**
  Whether or not the continue button should be enabled for this step. Default = YES
+ 
+ Set to `NO` if there is a validation that needs to be handled before the step
+ can progress. Your implementation is responsible for overriding selection as needed
+ to trigger validation and state changes.
+ 
  @return    State of continue button
  */
 - (BOOL)continueButtonEnabled;
