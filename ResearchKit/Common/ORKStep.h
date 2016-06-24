@@ -192,7 +192,12 @@ ORK_CLASS_AVAILABLE
  Instantiates a step view controller for this class.
  
  This method is called when a step is about to be presented. The default implementation returns
- a view controller that is appropriate to this step. 
+ a view controller that is appropriate to this step by allocating an instance of `ORKStepViewController`
+ using the `-stepViewControllerClass` method and initializing that instance by calling `initWithIdentifier:result:`
+ on the provided `ORKStepViewController` class instance.
+ 
+ Override this method if you need to customize the behavior before presenting the step or if 
+ the view controller is presented using a nib or storyboard.
  
  @param result    The result associated with this step
  
