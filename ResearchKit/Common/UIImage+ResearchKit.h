@@ -28,24 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <UIKit/UIKit.h>
-#import "ORKInstructionStepViewController.h"
-#import "ORKVerticalContainerView.h"
 
+@interface UIImage (ResearchKit)
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKInstructionStep;
-
-@interface ORKInstructionStepView : ORKVerticalContainerView
-
-@property (nonatomic, strong, nullable) ORKInstructionStep *instructionStep;
-
-@property (nonatomic, strong, nullable) UIImageView *instructionImageView;
-
-@property (nonatomic, strong, nullable) UIImageView *auxiliaryInstructionImageView;
+- (UIImage *)ork_flippedImage:(UIImageOrientation)orientation;
 
 @end
-
-NS_ASSUME_NONNULL_END

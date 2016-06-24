@@ -148,6 +148,53 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
     ORKPredefinedTaskOptionExcludeAudio = (1 << 7)
 } ORK_ENUM_AVAILABLE;
 
+/**
+ Values that identify the hand(s) to be used in an active task.
+ 
+ By default, the participant will be asked to use their most affected hand.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
+    /// Which hand to use is undefined
+    ORKPredefinedTaskHandOptionUndefined = 0,
+    
+    /// Task should test the left hand
+    ORKPredefinedTaskHandOptionLeft = 1 << 1,
+    
+    /// Task should test the right hand
+    ORKPredefinedTaskHandOptionRight = 1 << 2,
+    
+    /// Task should test both hands (random order)
+    ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+/**
+ The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
+ tasks in the predefined Tremor `ORKOrderedTask`.
+ 
+ By default, all predefined active tasks will be included. The tremor active task option flags can
+ be used to explicitly specify that an active task is not to be included.
+ */
+
+typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
+    /// Default behavior.
+    ORKTremorActiveTaskOptionNone = 0,
+    
+    /// Exclude the hand-in-lap steps.
+    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
+    
+    /// Exclude the hand-extended-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
+    
+    /// Exclude the elbow-bent-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
+    
+    /// Exclude the elbow-bent-touch-nose steps.
+    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
+    
+    /// Exclude the queen-wave steps.
+    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
+} ORK_ENUM_AVAILABLE;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -217,6 +264,38 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                    restDuration:(NSTimeInterval)restDuration
                                         options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that consists of a short walk back and forth.
+ 
+ In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+ Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+ of the participant's gait.
+ 
+ The presentation of the back and forth walk task differs from the short walk in that the participant
+ is asked to walk back and forth rather than walking in a straight line for a certain number of steps.
+ 
+ The participant is then asked to turn in a full circle and then stand still.
+ 
+ The data collected by this task can include accelerometer, device motion, and pedometer data.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param walkDuration            The duration of the walking period.
+ @param restDuration            The duration of the rest period. When the value of this parameter is
+ nonzero, the user is asked to stand still for the specified rest
+ period after the turn sequence has been completed, and baseline
+ data is collected.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active short walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
+                                intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                          walkDuration:(NSTimeInterval)walkDuration
+                                          restDuration:(NSTimeInterval)restDuration
+                                               options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that enables an audio recording.
@@ -278,6 +357,33 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                         intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
                                                        options:(ORKPredefinedTaskOption)options;
+/**
+ Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
+ 
+ In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
+ targets on the device screen.
+ 
+ A two finger tapping task can be used to assess basic motor capabilities including speed, accuracy,
+ and rhythm.
+ 
+ Data collected in this task includes touch activity and accelerometer information.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text will be displayed.
+ @param duration                The length of the count down timer that runs while touch data is
+ collected.
+ @param options                 Options that affect the features of the predefined task.
+ @param handOptions             Options for determining which hand(s) to test.
+ 
+ @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(ORKPredefinedTaskOption)options
+                                                   handOptions:(ORKPredefinedTaskHandOption)handOptions;
 
 /**
  Returns a predefined task that tests spatial span memory.
@@ -520,6 +626,30 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures hand tremor.
+ 
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                          intendedUseDescription:(nullable NSString *)intendedUseDescription
+                              activeStepDuration:(NSTimeInterval)activeStepDuration
+                               activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                         options:(ORKPredefinedTaskOption)options;
 
 @end
 
