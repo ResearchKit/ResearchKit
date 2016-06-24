@@ -1252,8 +1252,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     // Alert the delegate that the step is finished 
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
-    if ([strongDelegate respondsToSelector:@selector(taskViewController:stepViewControllerWillDisappear:)]) {
-        [strongDelegate taskViewController:self stepViewControllerWillDisappear: stepViewController];
+    if ([strongDelegate respondsToSelector:@selector(taskViewController:stepViewControllerWillDisappear:navigationDirection:)]) {
+        [strongDelegate taskViewController:self stepViewControllerWillDisappear:stepViewController navigationDirection:direction];
     }
     
     if (direction == ORKStepViewControllerNavigationDirectionForward) {
