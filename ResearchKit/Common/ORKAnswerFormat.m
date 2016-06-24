@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Scott Guelich.
+ Copyright (c) 2016, ICON plc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -69,6 +70,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
             SQT_CASE(Location);
+            default: return @"";
     }
 #undef SQT_CASE
 }
@@ -281,6 +283,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
                                                     defaultIndex:defaultIndex
                                                         vertical:vertical];
+}
+
++ (ORKVASScaleAnswerFormat *)VASScaleAnswerFormatWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                                                            minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                                                        markerStyle:(ORKVASMarkerStyle)markerStyle {
+    return [[ORKVASScaleAnswerFormat alloc] initWithMaximumValueDescription:maximumValueDescription
+                                                    minimumValueDescription:minimumValueDescription
+                                                                markerStyle:markerStyle];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -1574,8 +1584,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
-#pragma mark - ORKContinuousScaleAnswerFormat
-
 @implementation ORKContinuousScaleAnswerFormat {
     NSNumberFormatter *_numberFormatter;
 }
@@ -2383,6 +2391,127 @@ static NSString * const formattedAddressLinesKey = @"FormattedAddressLines";
         MKStringFromMapPoint(MKMapPointForCoordinate(location.coordinate));
     }
     return answerString;
+}
+
+@end
+
+#pragma mark - ORKVASScaleAnswerFormat
+
+@implementation ORKVASScaleAnswerFormat {
+    NSNumberFormatter *_numberFormatter;
+}
+
+- (Class)questionResultClass {
+    return [ORKScaleQuestionResult class];
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)initWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                        minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                    markerStyle:(ORKVASMarkerStyle) markerStyle {
+    self = [super init];
+    if (self) {
+        _minimum = 0;
+        _maximum = 100;
+        _defaultValue = -1;
+        _maximumValueDescription = maximumValueDescription;
+        _minimumValueDescription = minimumValueDescription;
+        _markerStyle = markerStyle;
+        [self validateParameters];
+    }
+    return self;
+}
+
+- (instancetype)initWithMaximumValueDescription:(nullable NSString *)maximumValueDescription
+                        minimumValueDescription:(nullable NSString *)minimumValueDescription {
+    return [self initWithMaximumValueDescription:maximumValueDescription
+                         minimumValueDescription:minimumValueDescription
+                                     markerStyle:ORKVASMerkerStyleDefault];
+}
+
+- (NSNumber *)minimumNumber {
+    return @(_minimum);
+}
+- (NSNumber *)maximumNumber {
+    return @(_maximum);
+}
+- (NSNumber *)defaultAnswer {
+    if ( _defaultValue > _maximum || _defaultValue < _minimum) {
+        return nil;
+    }
+    return @(_defaultValue);
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    if (!_numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
+        _numberFormatter.maximumFractionDigits = 0;
+    }
+    return _numberFormatter;
+}
+
+- (NSInteger)numberOfSteps {
+    return 0;
+}
+
+- (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
+    return @(number.integerValue);
+}
+
+- (NSString *)localizedStringForNumber:(NSNumber *)number {
+    return [self.numberFormatter stringFromNumber:number];
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, maximum);
+        ORK_DECODE_DOUBLE(aDecoder, minimum);
+        ORK_DECODE_DOUBLE(aDecoder, defaultValue);
+        ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
+        ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_ENUM(aDecoder, markerStyle);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, maximum);
+    ORK_ENCODE_DOUBLE(aCoder, minimum);
+    ORK_ENCODE_DOUBLE(aCoder, defaultValue);
+    ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
+    ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+    ORK_ENCODE_ENUM(aCoder, markerStyle);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (_maximum == castObject.maximum) &&
+            (_minimum == castObject.minimum) &&
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(_minimumValueDescription, castObject.minimumValueDescription) &&
+            (_markerStyle == castObject.markerStyle));
+}
+
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeVAS;
 }
 
 @end

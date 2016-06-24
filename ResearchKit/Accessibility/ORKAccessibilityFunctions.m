@@ -34,11 +34,22 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKScaleSlider.h"
 #import "ORKScaleSliderView.h"
+#import "ORKVASSliderView.h"
+#import "ORKVASSlider.h"
 #import "UIView+ORKAccessibility.h"
-
 
 NSString *ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *slider) {
     ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[slider ork_superviewOfType:[ORKScaleSliderView class]];
+    if (!slider || !sliderView) {
+        return nil;
+    }
+    
+    NSNumber *normalizedValue = [sliderView.formatProvider normalizedValueForNumber:@(value)];
+    return [sliderView.formatProvider localizedStringForNumber:normalizedValue];
+}
+
+NSString *ORKAccessibilityFormatVASSliderValue(CGFloat value, ORKVASSlider *slider) {
+    ORKVASSliderView *sliderView = (ORKVASSliderView *)[slider ork_superviewOfType:[ORKVASSliderView class]];
     if (!slider || !sliderView) {
         return nil;
     }
@@ -88,3 +99,4 @@ NSString *_ORKAccessibilityStringForVariables(NSInteger numParameters, NSString 
     
     return [variables componentsJoinedByString:@", "];
 }
+

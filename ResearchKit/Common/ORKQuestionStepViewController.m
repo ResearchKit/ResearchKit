@@ -57,7 +57,7 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKQuestionStepView.h"
-
+#import "ORKSurveyAnswerCellForVAS.h"
 
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKQuestionSectionAnswer = 0,
@@ -572,7 +572,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
-                               @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
+                               @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class],
+                               @(ORKQuestionTypeVAS) : [ORKSurveyAnswerCellForVAS class]
+                               };
     });
     
     // SingleSelectionPicker Cell && Other Cells
