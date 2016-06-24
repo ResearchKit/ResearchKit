@@ -192,7 +192,18 @@ ORK_CLASS_AVAILABLE
  formItem input. Example usage includes a password or participant identifier that is used to
  anonymously identify a study participant.
  
+ Currently, only `ORKTextAnswerFormat` is supported. Unsupported `ORKAnswerFormat` types will
+ throw an exception.
+ 
  The answer format for this item produces an `ORKBooleanQuestionResult` object.
+ 
+ @param identifier      The identifier for the `ORKFormItem` that is returned.
+ @param text            The text for the `ORKFormItem` that is returned.
+ @param errorMessage    The error message to display if the fields do not match
+ 
+ @return                An `ORKFormItem` with the indicated identifier and text and an ORKAnswerFormat 
+                        that is appropriate for confirming the input form item.
+ 
  */
 - (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
                                                      text:(nullable NSString *)text

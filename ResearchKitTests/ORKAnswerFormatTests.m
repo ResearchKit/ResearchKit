@@ -38,6 +38,13 @@
 
 @end
 
+@protocol ORKComfirmAnswerFormat_Private <NSObject>
+
+@property (nonatomic, copy, readonly) NSString *originalItemIdentifier;
+@property (nonatomic, copy, readonly) NSString *errorMessage;
+
+@end
+
 @implementation ORKAnswerFormatTests
 
 - (void)testValidEmailAnswerFormat {
@@ -116,6 +123,37 @@
     // These properties should be nil
     XCTAssertNil(confirmAnswer.validationRegex);
     XCTAssertNil(confirmAnswer.invalidMessage);
+    
+    // Check that the confirmation answer format responds to the internal methods
+    XCTAssertTrue([confirmFormat respondsToSelector:@selector(originalItemIdentifier)]);
+    XCTAssertTrue([confirmFormat respondsToSelector:@selector(errorMessage)]);
+    if (![confirmFormat respondsToSelector:@selector(originalItemIdentifier)] ||
+        ![confirmFormat respondsToSelector:@selector(errorMessage)]) {
+        return;
+    }
+    
+    NSString *originalItemIdentifier = [(id)confirmFormat originalItemIdentifier];
+    XCTAssertEqualObjects(originalItemIdentifier, @"foo");
+    
+    NSString *errorMessage = [(id)confirmFormat errorMessage];
+    XCTAssertEqualObjects(errorMessage, @"doesn't match");
+    
+}
+
+- (void)testConfirmAnswerFormat_Optional_YES {
+    
+    // Setup an answer format
+    ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+    
+    ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"foo" text:@"enter value" answerFormat:answerFormat optional:YES];
+    
+    // -- method under test
+    ORKFormItem *confirmItem = [item confirmationAnswerFormItemWithIdentifier:@"bar"
+                                                                         text:@"enter again"
+                                                                 errorMessage:@"doesn't match"];
+    
+    // Check that the confirm item optional value matches the input item
+    XCTAssertTrue(confirmItem.optional);
     
 }
 
