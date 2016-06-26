@@ -1,7 +1,6 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ Copyright (c) 2015, Oliver Schaefer.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -30,50 +29,18 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import "ORKSignatureStep.h"
+#import "ORKSignatureStepViewController.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKSignatureStep
 
-@class ORKSignatureView;
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@end
-
-
-@interface ORKSignatureView : UIView
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
-
-/**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
- 
- If the user is signing with an Apple Pencil, its force will be used.
- */
-@property (nonatomic) CGFloat lineWidthVariation;
-
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-@property (nonatomic, weak, nullable) UIImage *existingSignatureImage;
-
-- (UIImage *)signatureImage;
-
-- (NSMutableArray *)pathArray;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
++ (Class)stepViewControllerClass {
+    return [ORKSignatureStepViewController class];
+}
 
 @end
-
-NS_ASSUME_NONNULL_END
