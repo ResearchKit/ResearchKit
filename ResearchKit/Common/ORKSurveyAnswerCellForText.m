@@ -87,6 +87,8 @@
         
         self.textView.delegate = self;
         self.textView.editable = YES;
+
+        self.textView.textColor = [UIColor colorWithRed: 255.0/255.0 green: 255.0/255.0 blue: 255.0/255.0 alpha: 1.0];
         
         [self addSubview:self.textView];
         
