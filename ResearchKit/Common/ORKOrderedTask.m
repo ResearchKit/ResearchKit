@@ -429,7 +429,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
-    ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:audioStep.identifier defaultStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
+    ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:audioStep.identifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
     ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:audioStep.identifier];
     
     [task setNavigationRule:audioRule forTriggerStepIdentifier:audioStep.identifier];

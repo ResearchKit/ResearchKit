@@ -39,12 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
  Returns an initialized direct-step navigation rule using the specified destination step identifier.
  
  @param audioLevelStepIdentifier   The identifier of the step with the audio file to check.
- @param defaultStepIdentifier   The identifier of the destination step if audio test passes.
+ @param destinationStepIdentifier  The identifier of the destination step if audio test passes.
  
  @return A audio level step navigation rule.
  */
 - (instancetype)initWithAudioLevelStepIdentifier:(NSString *)audioLevelStepIdentifier
-                           defaultStepIdentifier:(NSString *)defaultStepIdentifier
+                       destinationStepIdentifier:(NSString *)destinationStepIdentifier
                                recordingSettings:(NSDictionary *)recordingSettings NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, copy, readonly) NSString *audioLevelStepIdentifier;
-@property (nonatomic, copy, readonly) NSString *defaultStepIdentifier;
+@property (nonatomic, copy, readonly) NSString *destinationStepIdentifier;
 @property (nonatomic, copy, readonly) NSDictionary *recordingSettings;
 
 @end

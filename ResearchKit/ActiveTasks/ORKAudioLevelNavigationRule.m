@@ -47,7 +47,7 @@ Float32 const kVolumeClamp = 60.0;
 @interface ORKAudioLevelNavigationRule ()
 
 @property (nonatomic, copy, readwrite) NSString *audioLevelStepIdentifier;
-@property (nonatomic, copy, readwrite) NSString *defaultStepIdentifier;
+@property (nonatomic, copy, readwrite) NSString *destinationStepIdentifier;
 @property (nonatomic, copy, readwrite) NSDictionary *recordingSettings;
 
 @end
@@ -55,16 +55,16 @@ Float32 const kVolumeClamp = 60.0;
 @implementation ORKAudioLevelNavigationRule
 
 - (instancetype)initWithAudioLevelStepIdentifier:(NSString *)audioLevelStepIdentifier
-                           defaultStepIdentifier:(NSString *)defaultStepIdentifier
+                       destinationStepIdentifier:(NSString *)destinationStepIdentifier
                                recordingSettings:(NSDictionary *)recordingSettings
 {
     ORKThrowInvalidArgumentExceptionIfNil(audioLevelStepIdentifier);
-    ORKThrowInvalidArgumentExceptionIfNil(defaultStepIdentifier);
+    ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(recordingSettings);
     self = [super init_ork];
     if (self) {
         _audioLevelStepIdentifier = [audioLevelStepIdentifier copy];
-        _defaultStepIdentifier = [defaultStepIdentifier copy];
+        _destinationStepIdentifier = [destinationStepIdentifier copy];
         _recordingSettings = [recordingSettings copy];
     }
     return self;
@@ -80,7 +80,7 @@ Float32 const kVolumeClamp = 60.0;
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, audioLevelStepIdentifier, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, defaultStepIdentifier, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, destinationStepIdentifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, recordingSettings, NSDictionary);
     }
     return self;
@@ -89,14 +89,14 @@ Float32 const kVolumeClamp = 60.0;
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, audioLevelStepIdentifier);
-    ORK_ENCODE_OBJ(aCoder, defaultStepIdentifier);
+    ORK_ENCODE_OBJ(aCoder, destinationStepIdentifier);
     ORK_ENCODE_OBJ(aCoder, recordingSettings);
 }
 
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] initWithAudioLevelStepIdentifier:self.audioLevelStepIdentifier defaultStepIdentifier:self.defaultStepIdentifier recordingSettings:self.recordingSettings];
+    typeof(self) rule = [[[self class] allocWithZone:zone] initWithAudioLevelStepIdentifier:self.audioLevelStepIdentifier destinationStepIdentifier:self.destinationStepIdentifier recordingSettings:self.recordingSettings];
     return rule;
 }
 
@@ -105,12 +105,12 @@ Float32 const kVolumeClamp = 60.0;
     __typeof(self) castObject = object;
     return (isParentSame
             && ORKEqualObjects(self.audioLevelStepIdentifier, castObject.audioLevelStepIdentifier)
-            && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier)
+            && ORKEqualObjects(self.destinationStepIdentifier, castObject.destinationStepIdentifier)
             && ORKEqualObjects(self.recordingSettings, castObject.recordingSettings));
 }
 
 - (NSUInteger)hash {
-    return [_audioLevelStepIdentifier hash] ^ [_defaultStepIdentifier hash] ^ [_recordingSettings hash];
+    return [_audioLevelStepIdentifier hash] ^ [_destinationStepIdentifier hash] ^ [_recordingSettings hash];
 }
 
 #pragma mark - Required overrides
@@ -128,7 +128,7 @@ Float32 const kVolumeClamp = 60.0;
         return nil;
     }
     
-    return self.defaultStepIdentifier;
+    return self.destinationStepIdentifier;
 }
 
 - (BOOL)checkAudioLevelFromSoundFile:(NSURL *)fileURL
