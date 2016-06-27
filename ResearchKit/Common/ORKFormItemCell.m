@@ -769,6 +769,7 @@ static const CGFloat HorizontalMargin = 15.0;
     _textView.textAlignment = NSTextAlignmentNatural;
     _textView.scrollEnabled = NO;
     _textView.placeholder = self.formItem.placeholder;
+    _textView.textColor = [UIColor colorWithRed: 56.0/255.0 green: 228.0/255.0 blue: 255.0/255.0 alpha: 1.0];
     self.backgroundColor = [UIColor clearColor];
     
     [self applyAnswerFormat];
