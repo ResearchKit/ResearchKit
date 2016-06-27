@@ -534,6 +534,8 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *r
     }
 }
 
+const double ORKDoubleInvalidValue = DBL_MAX;
+
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {

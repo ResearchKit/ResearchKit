@@ -34,7 +34,7 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKRangedPoint.h"
+#import "ORKChartTypes.h"
 
 
 #if TARGET_INTERFACE_BUILDER
@@ -67,7 +67,7 @@ const CGFloat FillColorAlpha = 0.4;
     if ([self.dataSource respondsToSelector:@selector(graphChartView:fillColorForPlotIndex:)]) {
         color = [self.dataSource graphChartView:self fillColorForPlotIndex:plotIndex];
     } else {
-        color = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
+        color = [[self colorForPlotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
     }
     return color;
 }
@@ -81,10 +81,10 @@ const CGFloat FillColorAlpha = 0.4;
     }
 }
 
-- (void)updateLineAndPointLayers {
+- (void)updateLineLayers {
     [_fillLayers.allValues makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_fillLayers removeAllObjects];
-    [super updateLineAndPointLayers];
+    [super updateLineLayers];
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
@@ -100,6 +100,7 @@ const CGFloat FillColorAlpha = 0.4;
     BOOL emptyDataPresent = NO;
     NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+        [self.lineLayers[plotIndex] addObject:[NSMutableArray new]];
         if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             emptyDataPresent = YES;
             continue;
@@ -112,7 +113,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         CAShapeLayer *lineLayer = graphLineLayer();
-        lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
+        lineLayer.strokeColor = [self colorForPlotIndex:plotIndex].CGColor;
         lineLayer.lineWidth = 2.0;
         
         if (emptyDataPresent) {
@@ -121,7 +122,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         [self.plotView.layer addSublayer:lineLayer];
-        [self.lineLayers[plotIndex] addObject:lineLayer];
+        [self.lineLayers[plotIndex][pointIndex - 1] addObject:lineLayer];
     }
 }
 
@@ -133,57 +134,63 @@ const CGFloat FillColorAlpha = 0.4;
         return;
     }
     
-    NSUInteger lineLayerIndex = 0;
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangedPoint *positionOnYAxis = nil;
+    ORKValueRange *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
-    NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
-    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+    NSUInteger numberOfPoints = self.lineLayers[plotIndex].count;
+    for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
         if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             continue;
         }
-        
         UIBezierPath *linePath = [UIBezierPath bezierPath];
         
         if (positionOnXAxis != ORKCGFloatInvalidValue) {
-            previousPointExists = YES;
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
-                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+                // Substract scalePixelAdjustment() to the first horizontal position of the fillPath so if fully covers the start of the x axis
+                [fillPath moveToPoint:CGPointMake(positionOnXAxis - scalePixelAdjustment(),
+                                                  CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment())];
+                [fillPath addLineToPoint:CGPointMake(positionOnXAxis - scalePixelAdjustment(),
+                                                     positionOnYAxis.minimumValue)];
+            } else {
+                [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             }
-            [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         }
         
         positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
         positionOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
         
         if (!previousPointExists) {
+            if (positionOnXAxis != ORKCGFloatInvalidValue) {
+                previousPointExists = YES;
+            }
             continue;
         }
         
         [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-        [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+        // Add scalePixelAdjustment() to the last vertical position of the fillPath so if fully covers the end of the x axis
+        [fillPath addLineToPoint:CGPointMake(positionOnXAxis + ( (pointIndex == (numberOfPoints - 1)) ? scalePixelAdjustment() : 0 ),
+                                             positionOnYAxis.minimumValue)];
         
-        CAShapeLayer *lineLayer = self.lineLayers[plotIndex][lineLayerIndex];
+        CAShapeLayer *lineLayer = self.lineLayers[plotIndex][pointIndex - 1][0];
         lineLayer.path = linePath.CGPath;
-        lineLayerIndex++;
     }
     
-    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+    [fillPath addLineToPoint:CGPointMake(positionOnXAxis + scalePixelAdjustment(),
+                                         CGRectGetHeight(self.plotView.frame) + scalePixelAdjustment())];
         
     fillLayer.path = fillPath.CGPath;
 }
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat value = [super valueForCanvasXPosition:xPosition plotIndex:plotIndex];
+- (double)scrubbingLabelValueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    double value = [super scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
-    if (value == ORKCGFloatInvalidValue) {
+    if (value == ORKDoubleInvalidValue) {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         NSInteger pointIndex = 0;
         for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, viewWidth);
@@ -198,14 +205,14 @@ const CGFloat FillColorAlpha = 0.4;
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = self.dataPoints[plotIndex][previousValidIndex].minimumValue;
-        CGFloat y2 = self.dataPoints[plotIndex][nextValidIndex].minimumValue;
+        double y1 = self.dataPoints[plotIndex][previousValidIndex].minimumValue;
+        double y2 = self.dataPoints[plotIndex][nextValidIndex].minimumValue;
         
-        if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
-            return ORKCGFloatInvalidValue;
+        if (y1 == ORKDoubleInvalidValue || y2 == ORKDoubleInvalidValue) {
+            return ORKDoubleInvalidValue;
         }
 
-        CGFloat slope = (y2 - y1)/(x2 - x1);
+        double slope = (y2 - y1)/(x2 - x1);
         
         //  (y2 - y3)/(x2 - x3) = m
         value = y2 - (slope * (x2 - xPosition));
@@ -213,25 +220,29 @@ const CGFloat FillColorAlpha = 0.4;
     return value;
 }
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+- (double)canvasYPositionForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    NSInteger pointIndex = [self pointIndexForXPosition:xPosition plotIndex:plotIndex];
     NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     
-    CGFloat viewWidth = self.plotView.bounds.size.width;
-    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-
-    CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
-    CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
-    
-    CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
-    CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+    double canvasYPosition = 0;
+    if (nextValidIndex == previousValidIndex) {
+        canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+    } else {
+        CGFloat viewWidth = self.plotView.bounds.size.width;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         
-    CGFloat slope = (y2 - y1)/(x2 - x1);
-    
-    //  (y2 - y3)/(x2 - x3) = m
-    CGFloat canvasYPosition = y2 - (slope * (x2 - xPosition));
-    
+        CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+        CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
+        
+        double y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+        double y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
+        
+        double slope = (y2 - y1)/(x2 - x1);
+        
+        //  (y2 - y3)/(x2 - x3) = m
+        canvasYPosition = y2 - (slope * (x2 - xPosition));
+    }
     return canvasYPosition;
 }
 
@@ -240,7 +251,7 @@ const CGFloat FillColorAlpha = 0.4;
     
     NSUInteger pointCountMinusOne = (self.dataPoints[plotIndex].count - 1);
     while (validPosition < pointCountMinusOne) {
-        if (self.dataPoints[plotIndex][validPosition].maximumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKDoubleInvalidValue) {
             break;
         }
         validPosition++;
@@ -251,8 +262,11 @@ const CGFloat FillColorAlpha = 0.4;
 
 - (NSInteger)previousValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     NSInteger validPosition = pointIndex - 1;
+    if (validPosition < 0) {
+        validPosition = 0;
+    }
     while (validPosition > 0) {
-        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKDoubleInvalidValue) {
             break;
         }
         validPosition--;
@@ -262,25 +276,29 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Animations
 
-- (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
-        [fillLayer removeAllAnimations];
-        fillLayer.opacity = 0;
-    }];
-    
-    [super animateWithDuration:animationDuration];
+- (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex {
+    [super prepareAnimationsForPlotIndex:plotIndex];
+    // animate all fill layers at once at the beginning
+    if (plotIndex == 0) {
+        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
+            [fillLayer removeAllAnimations];
+            fillLayer.opacity = 0;
+        }];
+    }
 }
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
-    [super animateLayersSequentiallyWithDuration:duration];
-    
-    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
-        [self animateLayer:layer
-                   keyPath:@"opacity"
-                  duration:duration * (1.0 / 3.0)
-                startDelay:duration * (2.0 / 3.0)
-            timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    }];
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex {
+    [super animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
+    // animate all fill layers at once at the beginning
+    if (plotIndex == 0) {
+        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
+            [self animateLayer:layer
+                       keyPath:@"opacity"
+                      duration:duration * (1.0 / 3.0)
+                    startDelay:duration * (2.0 / 3.0)
+                timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+        }];
+    }
 }
 
 #pragma mark - Interface Builder designable

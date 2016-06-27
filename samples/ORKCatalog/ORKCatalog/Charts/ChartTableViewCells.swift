@@ -42,3 +42,5 @@ class GraphChartTableViewCell: UITableViewCell {
 class LineGraphChartTableViewCell: GraphChartTableViewCell { }
 
 class DiscreteGraphChartTableViewCell: GraphChartTableViewCell { }
+
+class BarGraphChartTableViewCell: GraphChartTableViewCell { }
