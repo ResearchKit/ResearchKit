@@ -69,6 +69,11 @@
     _placeholderTextView.textColor = [UIColor ork_midGrayTintColor];
     _placeholderTextView.userInteractionEnabled = NO;
     _placeholderTextView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    _placeholderTextView.textColor = [UIColor colorWithRed: 56.0/255.0 green: 228.0/255.0 blue: 255.0/255.0 alpha: 1.0];
+    _placeholderTextView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 20.0f];
+    _placeholderTextView.backgroundColor = [UIColor clearColor];
+
     [self insertSubview:_placeholderTextView atIndex:0];
     
     [self setUpConstraints];

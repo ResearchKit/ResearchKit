@@ -60,7 +60,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ORKReviewStep.h"
 #import "ORKReviewStep_Internal.h"
-
+#import "ORKBorderedButton.h"
 
 typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 
@@ -203,14 +203,24 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     if (self == [ORKTaskViewController class]) {
         
         [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setTranslucent:NO];
+        [[UIBarButtonItem appearanceWhenContainedIn: [ORKTaskViewController class], nil] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState: UIControlStateNormal];
+        [[UIBarButtonItem appearanceWhenContainedIn: [ORKTaskViewController class], nil] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor, nil] forState: UIControlStateNormal];
+
+        [[UINavigationBar appearanceWhenContainedIn: [ORKTaskViewController class], nil] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+
         if ([[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] barTintColor] == nil) {
-            [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
+            [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setBarTintColor:[UIColor colorWithRed:26.0/255.0 green:127.0/255.0 blue:195.0/255.0 alpha:1.0]];
         }
         
         if ([[UIToolbar appearanceWhenContainedIn:[ORKTaskViewController class], nil] barTintColor] == nil) {
             [[UIToolbar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setBarTintColor:ORKColor(ORKToolBarTintColorKey)];
         }
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 static NSString *const _PageViewControllerRestorationKey = @"pageViewController";

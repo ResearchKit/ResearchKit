@@ -49,6 +49,8 @@ static const CGFloat LabelRightMargin = 44.0;
         self.clipsToBounds = YES;
         _checkView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         self.accessoryView = _checkView;
+        self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -130,8 +132,9 @@ static const CGFloat LabelRightMargin = 44.0;
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
         self.accessoryView.hidden = _selectedItem ? NO : YES;
-        self.shortLabel.textColor = _selectedItem ? [self tintColor] : [UIColor blackColor];
-        self.longLabel.textColor = _selectedItem ? [[self tintColor] colorWithAlphaComponent:192.0 / 255.0] : [UIColor ork_darkGrayColor];
+        self.accessoryView.tintColor = [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:1.0];
+        self.shortLabel.textColor = _selectedItem ? [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:1.0] : [UIColor whiteColor];
+        self.longLabel.textColor = _selectedItem ? [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:1.0] : [UIColor ork_darkGrayColor];
     }
 }
 

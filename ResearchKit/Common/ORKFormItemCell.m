@@ -118,10 +118,15 @@ static const CGFloat HorizontalMargin = 15.0;
         _labelLabel = [[ORKCaption1Label alloc] init];
         _labelLabel.text = formItem.text;
         _labelLabel.numberOfLines = 0;
+
+        self.tintColor = [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:1.0];
+
         [self.contentView addSubview:_labelLabel];
-        
+
+        self.contentView.backgroundColor = [UIColor clearColor];
         [self cellInit];
         [self setAnswer:_answer];
+
     }
     return self;
 }
@@ -264,6 +269,7 @@ static const CGFloat HorizontalMargin = 15.0;
         UITextField *textField = self.textFieldView.textField;
         textField.isAccessibilityElement = YES;
         textField.accessibilityLabel = label.text;
+        
     }
     return self;
 }
@@ -399,8 +405,9 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {
     _editingHighlight = editingHighlight;
-    self.labelLabel.textColor = _editingHighlight ? [self tintColor] : [UIColor blackColor];
-    [self textField].textColor = _editingHighlight ? [self tintColor] : [UIColor blackColor];
+    // this is the important stuff
+    self.labelLabel.textColor = _editingHighlight ? [self tintColor] : [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:0.8];
+    [self textField].textColor = _editingHighlight ? [self tintColor] : [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:0.8];
 }
 
 - (void)dealloc {
@@ -588,7 +595,12 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
-    
+
+    self.contentView.backgroundColor = [UIColor clearColor];
+    self.textField.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.textField.textColor = [UIColor whiteColor];
+
     [self answerDidChange];
 }
 
@@ -842,6 +854,9 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (UIColor *)placeholderColor {
+
+    return [UIColor orangeColor];
+    return [UIColor colorWithRed:56.0/255.0 green:227.0/255.0 blue:255.0/255.0 alpha:0.9];
     return [UIColor ork_midGrayTintColor];
 }
 
@@ -870,7 +885,8 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textView.textColor == [self placeholderColor]) {
         textView.text = nil;
-        textView.textColor = [UIColor blackColor];
+
+        textView.textColor = [UIColor whiteColor];
     }
     // Ask table view to adjust scrollview's position
     [self.delegate formItemCellDidBecomeFirstResponder:self];
@@ -1215,7 +1231,7 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {
     _editingHighlight = editingHighlight;
-    [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor blackColor])];
+    [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor colorWithRed: 26.0/255.0 green: 127.0/255.0 blue: 195.0/255.0 alpha: 1.0])];
 }
 
 - (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {

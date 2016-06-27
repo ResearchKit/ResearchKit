@@ -61,6 +61,11 @@
 
 - (void)updateAppearance {
     self.font = [[self class] defaultFont];
+
+    self.textColor = [UIColor colorWithRed: 56.0/255.0 green: 228.0/255.0 blue: 255.0/255.0 alpha: 1.0];
+    self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 20.0f];
+    self.backgroundColor = [UIColor clearColor];
+
     [self invalidateIntrinsicContentSize];
 }
 
