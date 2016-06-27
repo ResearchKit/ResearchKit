@@ -1250,6 +1250,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [self setManagedResult:[stepViewController result] forKey:stepViewController.step.identifier];
     }
     
+    // Alert the delegate that the step is finished 
+    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(taskViewController:stepViewControllerWillDisappear:navigationDirection:)]) {
+        [strongDelegate taskViewController:self stepViewControllerWillDisappear:stepViewController navigationDirection:direction];
+    }
+    
     if (direction == ORKStepViewControllerNavigationDirectionForward) {
         [self flipToNextPageFrom:stepViewController];
     } else {

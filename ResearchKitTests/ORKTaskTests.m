@@ -41,6 +41,19 @@
 
 @end
 
+@interface MethodObject : NSObject
+@property (nonatomic) NSString *selectorName;
+@property (nonatomic) NSArray *arguments;
+@end
+
+@interface TestTaskViewControllerDelegate : NSObject <ORKTaskViewControllerDelegate>
+@property (nonatomic) NSMutableArray <MethodObject *> *methodCalled;
+@end
+
+@interface MockTaskViewController : ORKTaskViewController
+@property (nonatomic) NSMutableArray <MethodObject *> *methodCalled;
+@end
+
 
 @implementation ORKTaskTests {
     NSArray *_orderedTaskStepIdentifiers;
@@ -1336,6 +1349,81 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     [self testResultPredicatesWithTaskIdentifier:nil
                            substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
                                      taskResults:taskResults];
+}
+
+- (void)testStepViewControllerWillDisappear {
+    TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 options:0];
+    ORKTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
+    taskViewController.delegate = delegate;
+    ORKInstructionStepViewController *stepViewController = [[ORKInstructionStepViewController alloc] initWithStep:task.steps.firstObject];
+    
+    //-- call method under test
+    [taskViewController stepViewController:stepViewController didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
+    
+    // Check that the expected methods were called
+    XCTAssertEqual(delegate.methodCalled.count, 1);
+    XCTAssertEqualObjects(delegate.methodCalled.firstObject.selectorName, @"taskViewController:stepViewControllerWillDisappear:navigationDirection:");
+    NSArray *expectedArgs = @[taskViewController, stepViewController, @(ORKStepViewControllerNavigationDirectionForward)];
+    XCTAssertEqualObjects(delegate.methodCalled.firstObject.arguments, expectedArgs);
+    
+}
+
+@end
+
+@implementation MethodObject
+@end
+
+@implementation TestTaskViewControllerDelegate
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _methodCalled = [NSMutableArray new];
+    }
+    return self;
+}
+
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
+    
+    // Add results of method call
+    MethodObject *obj = [[MethodObject alloc] init];
+    obj.selectorName = NSStringFromSelector(@selector(taskViewController:didFinishWithReason:error:));
+    obj.arguments = @[taskViewController ?: [NSNull null],
+                      @(reason),
+                      error ?: [NSNull null]];
+    [self.methodCalled addObject:obj];
+}
+
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    // Add results of method call
+    MethodObject *obj = [[MethodObject alloc] init];
+    obj.selectorName = NSStringFromSelector(@selector(taskViewController:stepViewControllerWillDisappear:navigationDirection:));
+    obj.arguments = @[taskViewController ?: [NSNull null],
+                      stepViewController ?: [NSNull null],
+                      @(direction)];
+    [self.methodCalled addObject:obj];
+}
+
+@end
+
+@implementation MockTaskViewController
+
+- (void)flipToNextPageFrom:(ORKStepViewController *)fromController {
+    // Add results of method call
+    MethodObject *obj = [[MethodObject alloc] init];
+    obj.selectorName = NSStringFromSelector(@selector(flipToNextPageFrom:));
+    obj.arguments = @[fromController ?: [NSNull null]];
+    [self.methodCalled addObject:obj];
+}
+
+- (void)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
+    // Add results of method call
+    MethodObject *obj = [[MethodObject alloc] init];
+    obj.selectorName = NSStringFromSelector(@selector(flipToPreviousPageFrom:));
+    obj.arguments = @[fromController ?: [NSNull null]];
+    [self.methodCalled addObject:obj];
 }
 
 @end
