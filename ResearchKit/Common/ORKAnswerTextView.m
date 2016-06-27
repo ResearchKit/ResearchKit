@@ -72,8 +72,9 @@
 
     _placeholderTextView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 20.0f];
     _placeholderTextView.textColor = [UIColor colorWithRed: 56.0/255.0 green: 227.0/255.0 blue: 255.0/255.0 alpha: 0.5];
-    _placeholderTextView.backgroundColor = [UIColor colorWithRed: 255.0/255.0 green: 255.0/255.0 blue: 255.0/255.0 alpha: 0.2];
-    self.backgroundColor = [UIColor clearColor];
+    _placeholderTextView.backgroundColor = [UIColor clearColor];
+
+    self.backgroundColor = [UIColor colorWithRed: 255.0/255.0 green: 255.0/255.0 blue: 255.0/255.0 alpha: 0.2];
     
 
     [self insertSubview:_placeholderTextView atIndex:0];
