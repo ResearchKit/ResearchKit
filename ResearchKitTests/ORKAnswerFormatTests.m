@@ -144,6 +144,7 @@
     
     // Setup an answer format
     ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+    answerFormat.multipleLines = NO;
     
     ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"foo" text:@"enter value" answerFormat:answerFormat optional:YES];
     
@@ -154,6 +155,21 @@
     
     // Check that the confirm item optional value matches the input item
     XCTAssertTrue(confirmItem.optional);
+    
+}
+
+- (void)testConfirmAnswerFormat_MultipleLines_YES {
+    
+    // Setup an answer format
+    ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+    answerFormat.multipleLines = YES;
+    
+    ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"foo" text:@"enter value" answerFormat:answerFormat optional:YES];
+    
+    // -- method under test
+    XCTAssertThrows([item confirmationAnswerFormItemWithIdentifier:@"bar"
+                                                              text:@"enter again"
+                                                      errorMessage:@"doesn't match"]);
     
 }
 
