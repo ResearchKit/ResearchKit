@@ -86,6 +86,9 @@ DefineStringKey(CollectionViewCellReuseIdentifier);
 DefineStringKey(EmbeddedReviewTaskIdentifier);
 DefineStringKey(StandaloneReviewTaskIdentifier);
 
+DefineStringKey(StepWillDisappearTaskIdentifier);
+DefineStringKey(StepWillDisappearFirstStepIdentifier);
+
 @interface SectionHeader: UICollectionReusableView
 
 - (void)configureHeaderWithTitle:(NSString *)title;
@@ -365,6 +368,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
+                           @"Step Will Disappear",
                            ],
                        ];
 }
@@ -567,6 +571,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeWaitingTask];
     }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
+    } else if ([identifier isEqualToString:StepWillDisappearTaskIdentifier]) {
+        return [self makeStepWillDisappearTask];
     }
 
     return nil;
@@ -3586,6 +3592,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
+        [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
+        taskViewController.view.tintColor = [UIColor magentaColor];
+    }
+}
+
 #pragma mark - UI state restoration
 
 /*
@@ -3729,6 +3742,25 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [steps addObject:step4];
     
     ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:LocationTaskIdentifier steps:steps];
+    return locationTask;
+}
+
+#pragma mark - Step Will Disappear Task Delegate example
+
+- (IBAction)stepWillDisappearButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StepWillDisappearTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeStepWillDisappearTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:StepWillDisappearFirstStepIdentifier];
+    step1.title = @"Step Will Disappear Delegate Example";
+    step1.text = @"The tint color of the task view controller is changed to magenta in the `stepViewControllerWillDisappear:` method.";
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
+    stepLast.title = @"Survey Complete";
+    
+    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:StepWillDisappearTaskIdentifier steps:@[step1, stepLast]];
     return locationTask;
 }
 
