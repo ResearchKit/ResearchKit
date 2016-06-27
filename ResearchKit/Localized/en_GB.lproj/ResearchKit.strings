@@ -309,7 +309,8 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Zimmer/Rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
-"TIMED_WALK_INSTRUCTION_2" = "Turn round and walk back to where you started.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Turn round.";
+"TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
 /* PSAT active task. */
