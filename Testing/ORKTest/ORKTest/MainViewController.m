@@ -371,6 +371,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Wait Task",
                            @"Step Will Disappear",
                            @"Confirmation Form Item"
+                           @"Continue Button"
                            ],
                        ];
 }
@@ -3837,6 +3838,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [steps addObject:step4];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormTaskIdentifier steps:steps];
+}
+
+#pragma mark - Continue button
+
+- (IBAction)continueButtonButtonTapped:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
+    UIViewController *vc = [storyboard instantiateInitialViewController];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end
