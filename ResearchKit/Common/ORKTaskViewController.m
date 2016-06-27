@@ -203,6 +203,9 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     if (self == [ORKTaskViewController class]) {
         
         [[UINavigationBar appearanceWhenContainedIn:[ORKTaskViewController class], nil] setTranslucent:NO];
+
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
         [[UIBarButtonItem appearanceWhenContainedIn: [ORKTaskViewController class], nil] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil] forState: UIControlStateNormal];
         [[UIBarButtonItem appearanceWhenContainedIn: [ORKTaskViewController class], nil] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor whiteColor], UITextAttributeTextColor, nil] forState: UIControlStateNormal];
 
