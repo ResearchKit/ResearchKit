@@ -106,6 +106,14 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps;
 
+/**
+ Find the index of a given step.
+ 
+ @param step        The step to look for
+ @return            The index position of the step (or NSNotFound if not found)
+ */
+- (NSUInteger)indexOfStep:(ORKStep *)step;
+
 @end
 
 

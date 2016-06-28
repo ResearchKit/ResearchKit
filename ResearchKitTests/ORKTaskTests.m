@@ -1369,6 +1369,30 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
 }
 
+- (void)testIndexOfStep {
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"tapping" intendedUseDescription:nil duration:30 options:0];
+    
+    // get the first step
+    ORKStep *step0 = [task.steps firstObject];
+    XCTAssertNotNil(step0);
+    XCTAssertEqual([task indexOfStep:step0], 0);
+    
+    // get the second step
+    ORKStep *step1 = [task stepWithIdentifier:ORKInstruction1StepIdentifier];
+    XCTAssertNotNil(step1);
+    XCTAssertEqual([task indexOfStep:step1], 1);
+    
+    // get the last step
+    ORKStep *stepLast = [task.steps lastObject];
+    XCTAssertNotNil(stepLast);
+    XCTAssertEqual([task indexOfStep:stepLast], task.steps.count - 1);
+    
+    // Look for not found
+    ORKStep *stepNF = [[ORKStep alloc] initWithIdentifier:@"foo"];
+    XCTAssertEqual([task indexOfStep:stepNF], NSNotFound);
+    
+}
+
 @end
 
 @implementation MethodObject
