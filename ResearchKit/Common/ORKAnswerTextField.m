@@ -61,6 +61,11 @@
 
 - (void)updateAppearance {
     self.font = [[self class] defaultFont];
+
+    self.textColor = [UIColor whiteColor];
+    self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 20.0f];
+    self.backgroundColor = [UIColor clearColor];
+
     [self invalidateIntrinsicContentSize];
 }
 

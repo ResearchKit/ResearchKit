@@ -69,6 +69,14 @@
     _placeholderTextView.textColor = [UIColor ork_midGrayTintColor];
     _placeholderTextView.userInteractionEnabled = NO;
     _placeholderTextView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    _placeholderTextView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 20.0f];
+    _placeholderTextView.textColor = [UIColor colorWithRed: 56.0/255.0 green: 227.0/255.0 blue: 255.0/255.0 alpha: 0.5];
+    _placeholderTextView.backgroundColor = [UIColor clearColor];
+
+    self.backgroundColor = [UIColor colorWithRed: 255.0/255.0 green: 255.0/255.0 blue: 255.0/255.0 alpha: 0.2];
+    
+
     [self insertSubview:_placeholderTextView atIndex:0];
     
     [self setUpConstraints];
@@ -145,7 +153,7 @@
 
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
-    return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
+    return [UIFont fontWithName:@"HelveticaNeue-Light" size: [[descriptor objectForKey:UIFontDescriptorSizeAttribute] doubleValue] + 2.0];
 }
 
 @end

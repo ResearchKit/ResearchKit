@@ -101,7 +101,9 @@ static const CGFloat ContinueButtonTouchMargin = 10;
 
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+//    return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+    double size = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue];
+    return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {

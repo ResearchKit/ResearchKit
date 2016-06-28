@@ -204,7 +204,7 @@
     if (self) {
         _tableView = tableView;
         _firstSection = firstSection;
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
         _label = [ORKFormSectionTitleLabel new];
         _label.text = title;

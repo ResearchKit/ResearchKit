@@ -41,10 +41,13 @@
 - (void)init_ORKTextButton {
     [super init_ORKTextButton];
     
-    self.layer.borderWidth = 1.0f;
+    self.layer.borderWidth = 0.0f;
     self.layer.cornerRadius = 5.0f;
     self.fadeDelay = 0.0;
-    
+
+    self.backgroundColor = [UIColor colorWithRed: 27.0/255.0 green: 228.0/255.0 blue: 180.0/255.0 alpha: 1.0];
+//    self.con.backgroundColor = [UIColor colorWithRed: 27.0/255.0 green: 228.0/255.0 blue: 180.0/255.0 alpha: 1.0];
+
     [self setEnabled:YES];
 }
 
@@ -54,6 +57,8 @@
     _normalTintColor = [[self tintColor] colorWithAlphaComponent:1.0f];
     _normalHighlightOrSelectTintColor = _normalTintColor;
     _disableTintColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+
+    _normalTintColor = [UIColor whiteColor];
     
     [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -84,7 +89,7 @@
 - (void)fadeHighlightOrSelectColor {
     // Ignore if it's a race condition
     if (self.enabled && !(self.highlighted || self.selected)) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed: 27.0/255.0 green: 228.0/255.0 blue: 180.0/255.0 alpha: 1.0];
         self.layer.borderColor = [_normalTintColor CGColor];
     }
 }
@@ -92,7 +97,7 @@
 - (void)updateBorderColor {
 
     if (self.enabled && (self.highlighted || self.selected)) {
-        self.backgroundColor = _normalHighlightOrSelectTintColor;
+        self.backgroundColor = [UIColor colorWithRed: 27.0/255.0 green: 228.0/255.0 blue: 180.0/255.0 alpha: 1.0];
         self.layer.borderColor = [_normalHighlightOrSelectTintColor CGColor]; // move
     } else if(self.enabled && !(self.highlighted || self.selected)) {
         if (self.fadeDelay > 0) {
@@ -101,7 +106,7 @@
             [self fadeHighlightOrSelectColor];
         }
     } else {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed: 27.0/255.0 green: 228.0/255.0 blue: 180.0/255.0 alpha: 1.0];
         self.layer.borderColor = [_disableTintColor CGColor];
     }
 }

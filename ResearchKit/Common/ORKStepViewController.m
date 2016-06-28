@@ -37,6 +37,7 @@
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 #import "ORKReviewStep_Internal.h"
+#import "BuddyBackgroundView.h"
 
 
 @interface ORKStepViewController () {
@@ -99,7 +100,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-    
+    [self.view addSubview: [[BuddyBackgroundView alloc] initWithFrame: self.view.frame]];
 }
 
 - (void)setupButtons {

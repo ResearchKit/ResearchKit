@@ -382,6 +382,8 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
+    return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
+
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
@@ -395,6 +397,8 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
+    return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
+
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
@@ -408,6 +412,8 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
+    return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
+    
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {

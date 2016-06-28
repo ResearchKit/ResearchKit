@@ -102,6 +102,7 @@
         _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
         _tapOffGestureRecognizer.delegate = self;
         [_tableView addGestureRecognizer:_tapOffGestureRecognizer];
+        _tableView.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

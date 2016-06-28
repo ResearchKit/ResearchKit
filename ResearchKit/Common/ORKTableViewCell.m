@@ -189,6 +189,7 @@
 
 - (void)updateAppearance {
     self.textLabel.font = [ORKSelectionTitleLabel defaultFont];
+    self.backgroundColor = [UIColor clearColor];
     [self invalidateIntrinsicContentSize];
 
 }
