@@ -85,7 +85,6 @@ enum TaskListRow: Int, CustomStringConvertible {
     case Passcode
     
     case Audio
-    case AudioWithSoundCheck
     case Fitness
     case HolePegTest
     case PSAT
@@ -144,7 +143,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Active Tasks", rows:
                 [
                     .Audio,
-                    .AudioWithSoundCheck,
                     .Fitness,
                     .HolePegTest,
                     .PSAT,
@@ -230,9 +228,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
-            
-        case .AudioWithSoundCheck:
-            return NSLocalizedString("Audio With Sound Check", comment: "")
             
         case .Fitness:
             return NSLocalizedString("Fitness Check", comment: "")
@@ -483,9 +478,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .Audio:
             return audioTask
             
-        case .AudioWithSoundCheck:
-            return audioWithSoundCheckTask
-
         case .Fitness:
             return fitnessTask
             
@@ -1123,14 +1115,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
-        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
+        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, checkAudioLevel: true, options: [])
     }
-    
-    /// This task presents the Audio pre-defined active task.
-    private var audioWithSoundCheckTask: ORKTask {
-        return ORKOrderedTask.audioLevelNavigableTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
-    }
-
 
     /**
         This task presents the Fitness pre-defined active task. For this example,

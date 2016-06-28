@@ -398,52 +398,6 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-/// Copyright (c) 2016, Sage Bionetworks
-+ (ORKNavigableOrderedTask *)audioLevelNavigableTaskWithIdentifier:(NSString *)identifier
-                                   intendedUseDescription:(NSString *)intendedUseDescription
-                                        speechInstruction:(NSString *)speechInstruction
-                                   shortSpeechInstruction:(NSString *)shortSpeechInstruction
-                                                 duration:(NSTimeInterval)duration
-                                        recordingSettings:(NSDictionary *)recordingSettings
-                                                  options:(ORKPredefinedTaskOption)options {
-    
-    recordingSettings = recordingSettings ? : [self defaultRecordingSettings];
-    ORKOrderedTask *audioTask = [self audioTaskWithIdentifier:identifier
-                                  intendedUseDescription:intendedUseDescription
-                                       speechInstruction:speechInstruction
-                                  shortSpeechInstruction:shortSpeechInstruction
-                                                duration:duration
-                                       recordingSettings:recordingSettings
-                                                 options:options];
-    
-    ORKStep *audioStep = [audioTask stepWithIdentifier:ORKCountdownStepIdentifier];
-    NSMutableArray *steps = [[audioTask steps] mutableCopy];
-    NSUInteger idx = [steps indexOfObject:audioStep];
-    
-    audioStep.text = ORKLocalizedString(@"AUDIO_LEVEL_CHECK_LABEL", nil);
-    
-    ORKInstructionStep *tooLoudStep = [[ORKInstructionStep alloc] initWithIdentifier:ORKAudioTooLoudStepIdentifier];
-    tooLoudStep.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_MESSAGE", nil);
-    tooLoudStep.detailText = ORKLocalizedString(@"AUDIO_TOO_LOUD_ACTION_NEXT", nil);
-    [steps insertObject:tooLoudStep atIndex:idx+1];
-    
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    
-    ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:audioStep.identifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
-    ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:audioStep.identifier];
-    
-    [task setNavigationRule:audioRule forTriggerStepIdentifier:audioStep.identifier];
-    [task setNavigationRule:loopRule forTriggerStepIdentifier:tooLoudStep.identifier];
-    
-    return task;
-}
-
-+ (NSDictionary *)defaultRecordingSettings {
-    return @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
-              AVNumberOfChannelsKey : @(2),
-              AVSampleRateKey: @(44100.0) };
-}
-
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(NSString *)intendedUseDescription
                           speechInstruction:(NSString *)speechInstruction
@@ -452,7 +406,28 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                           recordingSettings:(NSDictionary *)recordingSettings
                                     options:(ORKPredefinedTaskOption)options {
     
-    recordingSettings = recordingSettings ? : [self defaultRecordingSettings];
+    return [self audioTaskWithIdentifier:identifier
+                  intendedUseDescription:intendedUseDescription
+                       speechInstruction:speechInstruction
+                  shortSpeechInstruction:shortSpeechInstruction
+                                duration:duration
+                       recordingSettings:recordingSettings
+                         checkAudioLevel:NO
+                                 options:options];
+}
+
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options {
+
+    recordingSettings = recordingSettings ? : @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
+                                                 AVNumberOfChannelsKey : @(2),
+                                                 AVSampleRateKey: @(44100.0) };
     
     if (options & ORKPredefinedTaskOptionExcludeAudio) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Audio collection cannot be excluded from audio task" userInfo:nil];
@@ -491,6 +466,19 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:ORKAudioRecorderIdentifier
                                                                                  recorderSettings:recordingSettings]];
         
+        // If checking the sound level then add text indicating that's what is happening
+        if (checkAudioLevel) {
+            step.text = ORKLocalizedString(@"AUDIO_LEVEL_CHECK_LABEL", nil);
+        }
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (checkAudioLevel) {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKAudioTooLoudStepIdentifier];
+        step.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_MESSAGE", nil);
+        step.detailText = ORKLocalizedString(@"AUDIO_TOO_LOUD_ACTION_NEXT", nil);
+        
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -510,9 +498,19 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         ORKStepArrayAddStep(steps, step);
     }
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    
+    if (checkAudioLevel) {
+
+        // Add rules to check for audio and fail, looping back to the countdown step if required
+        ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:ORKCountdownStepIdentifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
+        ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKCountdownStepIdentifier];
+
+        [task setNavigationRule:audioRule forTriggerStepIdentifier:ORKCountdownStepIdentifier];
+        [task setNavigationRule:loopRule forTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier];
+    }
+
     return task;
 }
 
