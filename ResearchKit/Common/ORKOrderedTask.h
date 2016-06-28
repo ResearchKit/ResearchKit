@@ -339,31 +339,6 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                                     options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
- Returns a predefined task that consists of two finger tapping.
- 
- In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
- targets on the device screen.
- 
- A two finger tapping task can be used to assess basic motor capabilities including speed, accuracy,
- and rhythm.
- 
- Data collected in this task includes touch activity and accelerometer information.
- 
- @param identifier              The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription  A localized string describing the intended use of the data
-                                    collected. If the value of this parameter is `nil`, the default
-                                    localized text will be displayed.
- @param duration                The length of the count down timer that runs while touch data is
-                                    collected.
- @param options                 Options that affect the features of the predefined task.
- 
- @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
- */
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                                      duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options;
-/**
  Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
  
  In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
@@ -390,6 +365,13 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                                                       duration:(NSTimeInterval)duration
                                                        options:(ORKPredefinedTaskOption)options
                                                    handOptions:(ORKPredefinedTaskHandOption)handOptions;
+/**
+ @Deprecated
+ */
++ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
  Returns a predefined task that tests spatial span memory.
