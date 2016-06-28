@@ -1481,19 +1481,17 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
                                                                              duration:10
                                                                               options:0
                                                                           handOptions:0];
-    XCTAssertEqual(task.steps.count, 4);
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                              ORKInstruction1StepIdentifier,
+                                              ORKTappingStepIdentifier,
+                                              ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
     
-    for (ORKStep *step in task.steps) {
-        XCTAssertFalse([step.identifier.lowercaseString containsString:@"left"]);
-        XCTAssertFalse([step.identifier.lowercaseString containsString:@"right"]);
-        XCTAssertFalse([step.title.lowercaseString containsString:@"right"]);
-        XCTAssertFalse([step.title.lowercaseString containsString:@"left"]);
-        XCTAssertFalse([step.text.lowercaseString containsString:@"right"]);
-        XCTAssertFalse([step.text.lowercaseString containsString:@"left"]);
-        if ([step isKindOfClass:[ORKActiveStep class]]) {
-            XCTAssertFalse(step.optional);
-        }
-    }
+    ORKStep *tappingStep = [task stepWithIdentifier:ORKTappingStepIdentifier];
+    XCTAssertFalse(tappingStep.optional);
+
 }
 
 - (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionLeft {
