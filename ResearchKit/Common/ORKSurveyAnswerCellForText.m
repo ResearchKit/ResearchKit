@@ -88,8 +88,12 @@
         self.textView.delegate = self;
         self.textView.editable = YES;
 
-        self.textView.textColor = [UIColor colorWithRed: 255.0/255.0 green: 255.0/255.0 blue: 255.0/255.0 alpha: 1.0];
-        
+        self.textView.textColor = [UIColor whiteColor];
+        self.textView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 16.0f];
+
+        self.textView.clipsToBounds = YES;
+        self.textView.layer.cornerRadius = 10.0f;
+
         [self addSubview:self.textView];
         
         self.textView.placeholder = self.step.placeholder;

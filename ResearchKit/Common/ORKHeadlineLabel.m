@@ -62,7 +62,7 @@
 // Nasty override (hack)
 - (void)updateAppearance {
     self.font = [self defaultFont];
-    self.textColor = [UIColor colorWithRed:56.0/255.0 green:228.0/255.0 blue:255.0/255.0 alpha:1.0];
+    self.textColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
     [self invalidateIntrinsicContentSize];
 }
 
