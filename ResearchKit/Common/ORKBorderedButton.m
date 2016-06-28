@@ -41,7 +41,7 @@
 - (void)init_ORKTextButton {
     [super init_ORKTextButton];
     
-    self.layer.borderWidth = 1.0f;
+    self.layer.borderWidth = 0.0f;
     self.layer.cornerRadius = 5.0f;
     self.fadeDelay = 0.0;
 

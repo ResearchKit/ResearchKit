@@ -92,7 +92,7 @@
         self.textView.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 16.0f];
 
         self.textView.clipsToBounds = YES;
-        self.textView.layer.cornerRadius = 10.0f;
+        self.textView.layer.cornerRadius = 6.5f;
 
         [self addSubview:self.textView];
         
