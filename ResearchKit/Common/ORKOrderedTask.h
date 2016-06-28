@@ -257,7 +257,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param duration                The length of the count down timer that runs while audio data is
  collected.
  @param recordingSettings       See "AV Foundation Audio Settings Constants" for possible values.
- @param checkAudioLevel         If `YES` the add navigational rules to check the background noise level.
+ @param checkAudioLevel         If `YES` then add navigational rules to check the background noise level.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
