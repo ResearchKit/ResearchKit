@@ -544,6 +544,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                     intendedUseDescription:nil
                                           distanceInMeters:100
                                                  timeLimit:180
+                                       turnAroundTimeLimit:60
                                 includeAssistiveDeviceForm:YES
                                                    options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {

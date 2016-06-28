@@ -475,6 +475,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                       localized text is displayed.
  @param distanceInMeters            The timed walk distance in meters.
  @param timeLimit                   The time limit to complete the trials.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step.
  @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
                                       about the usage of an assistive device.
  @param options                     Options that affect the features of the predefined task.
@@ -485,6 +486,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
+                            turnAroundTimeLimit:(NSTimeInterval)turnAroundTimeLimit
                      includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options;
 

@@ -999,6 +999,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
+                            turnAroundTimeLimit:(NSTimeInterval)turnAroundTimeLimit
                      includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options {
     
@@ -1111,7 +1112,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.distanceInMeters = 1;
             step.shouldTintImages = YES;
             step.image = [UIImage imageNamed:@"turnaround" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
+            step.stepDuration = turnAroundTimeLimit == 0 ? CGFLOAT_MAX : turnAroundTimeLimit;
             
             ORKStepArrayAddStep(steps, step);
         }
