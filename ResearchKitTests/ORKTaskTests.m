@@ -1425,6 +1425,53 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertEqual(task.stepNavigationRules.count, 0);
 }
 
+- (void)testWalkBackAndForthTask_30SecondDuration {
+    
+    // Create the task
+    ORKOrderedTask *task = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:@"walking" intendedUseDescription:nil walkDuration:30 restDuration:30 options:0];
+    
+    // Check that the steps match the expected - If these change, it will affect the results and
+    // could adversely impact existing studies that are expecting this step order.
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKShortWalkOutboundStepIdentifier,
+                                         ORKShortWalkRestStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    XCTAssertEqual(task.steps.count, expectedStepIdentifiers.count);
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    // Check that the active steps include speaking the halfway point
+    ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
+    XCTAssertTrue(walkingStep.shouldSpeakHalfwayCount);
+    ORKActiveStep *restStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkRestStepIdentifier];
+    XCTAssertTrue(restStep.shouldSpeakHalfwayCount);
+    
+}
+
+- (void)testWalkBackAndForthTask_15SecondDuration_NoRest {
+    
+    // Create the task
+    ORKOrderedTask *task = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:@"walking" intendedUseDescription:nil walkDuration:15 restDuration:0 options:0];
+    
+    // Check that the steps match the expected - If these change, it will affect the results and
+    // could adversely impact existing studies that are expecting this step order.
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKShortWalkOutboundStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    XCTAssertEqual(task.steps.count, expectedStepIdentifiers.count);
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    // Check that the active steps include speaking the halfway point
+    ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
+    XCTAssertFalse(walkingStep.shouldSpeakHalfwayCount);
+    
+}
+
 @end
 
 @implementation MethodObject
