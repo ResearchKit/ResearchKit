@@ -239,6 +239,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  An audio task can be used to measure properties of the user's voice, such as
  frequency range, or the ability to pronounce certain sounds.
  
+ If `checkAudioLevel == YES` then a navigation rule is added to do a simple check of the background
+ noise level. If the background noise is too loud, then the participant is instructed to move to a 
+ quieter location before trying again.
+ 
  Data collected in this task consists of audio information.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
@@ -253,6 +257,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param duration                The length of the count down timer that runs while audio data is
  collected.
  @param recordingSettings       See "AV Foundation Audio Settings Constants" for possible values.
+ @param checkAudioLevel         If `YES` the add navigational rules to check the background noise level.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
