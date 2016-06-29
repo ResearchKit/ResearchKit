@@ -273,7 +273,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
+ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
 
 /**
