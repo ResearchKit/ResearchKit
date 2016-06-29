@@ -740,6 +740,18 @@ ret =
           PROPERTY(characteristicType, HKCharacteristicType, NSObject, NO,
                    ^id(id type) { return [(HKCharacteristicType *)type identifier]; },
                    ^id(id string) { return [HKCharacteristicType characteristicTypeForIdentifier:string]; }),
+          PROPERTY(defaultDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(minimumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(maximumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(calendar, NSCalendar, NSObject, YES,
+                   ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
+                   ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
           })),
   ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -830,7 +842,6 @@ ret =
           PROPERTY(defaultDate, NSDate, NSObject, NO,
                    ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
                    ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

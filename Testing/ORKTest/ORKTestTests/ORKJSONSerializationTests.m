@@ -355,7 +355,6 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKConsentDocument.signatures",
                                               @"ORKContinuousScaleAnswerFormat.numberFormatter",
                                               @"ORKFormItem.step",
-                                              @"ORKHealthKitCharacteristicTypeAnswerFormat.characteristicType",
                                               @"ORKTimeIntervalAnswerFormat.maximumInterval",
                                               @"ORKTimeIntervalAnswerFormat.defaultInterval",
                                               @"ORKTimeIntervalAnswerFormat.step",
@@ -427,7 +426,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                         } else if (p.propertyClass == [HKQuantityType class]) {
                             [instance setValue:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass] forKey:p.propertyName];
                         } else if (p.propertyClass == [HKCharacteristicType class]) {
-                            //[instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
+                            [instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
                         } else if (p.propertyClass == [ORKLocation class]) {
@@ -482,8 +481,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             if (mockDictionary[pName] == nil) {
                 NSString *notSerializedProperty = dottedPropertyNames[pName];
                 BOOL success = [knownNotSerializedProperties containsObject:notSerializedProperty];
-                if (! success)
-                {
+                if (!success) {
                     XCTAssertTrue(success, "Unexpected notSerializedProperty = %@ (%@)", notSerializedProperty, NSStringFromClass(aClass));
                 }
             }
@@ -505,8 +503,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         // Serialize again, the output ought to be equal
         NSDictionary *dictionary2 = [ORKESerializer JSONObjectForObject:instance2 error:NULL];
         BOOL isMatch = [mockDictionary isEqualToDictionary:dictionary2];
-        if (!isMatch)
-        {
+        if (!isMatch) {
             XCTAssertTrue(isMatch, @"Should be equal for class: %@", NSStringFromClass(aClass));
         }
     }
@@ -644,15 +641,14 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             if (newValue == nil) {
                 NSString *notSerializedProperty = [NSString stringWithFormat:@"%@.%@", NSStringFromClass(aClass), pName];
                 BOOL success = [knownNotSerializedProperties containsObject:notSerializedProperty];
-                if (!success)
-                {
+                if (!success) {
                     XCTAssertTrue(success, "Unexpected notSerializedProperty = %@", notSerializedProperty);
                 }
             }
             for (Class c in checkableClasses) {
                 if ([oldValue isKindOfClass:c]) {
                     if ([newValue isKindOfClass:[NSURL class]] || [oldValue isKindOfClass:[NSURL class]]) {
-                        if (! [[newValue absoluteString] isEqualToString:[oldValue absoluteString]]) {
+                        if (![[newValue absoluteString] isEqualToString:[oldValue absoluteString]]) {
                             XCTAssertTrue([[newValue absoluteString] isEqualToString:[oldValue absoluteString]]);
                         }
                     } else {
@@ -701,14 +697,14 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
         ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
         ([c isSubclassOfClass:[ORKStep class]]) ||
-        ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
-        (c == [ORKTextChoice class]) ||
-        (c == [ORKImageChoice class]) ||
-        ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
-        ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-        (c == [ORKLocation class]))
+         ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
+         (c == [ORKTextChoice class]) ||
+         (c == [ORKImageChoice class]) ||
+         ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
+         ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
+         (c == [ORKLocation class]))
     {
-            return [[c alloc] orktest_init];
+        return [[c alloc] orktest_init];
     }
     
     return [[c alloc] init];
