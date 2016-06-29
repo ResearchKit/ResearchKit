@@ -42,6 +42,7 @@
  using the `referenceLineColor` property. You can customize the plot colors by implementing the
  `-graphChartView:colorForPlotIndex:` method in the data source.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKBarGraphChartView : ORKGraphChartView
 
 /**
