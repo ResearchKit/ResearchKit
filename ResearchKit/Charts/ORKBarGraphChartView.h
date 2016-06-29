@@ -1,5 +1,6 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2015, Ramsundar Shandilya.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,28 +29,27 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKCenteredCollectionViewLayout.h"
 
-@implementation ORKCenteredCollectionViewLayout
+#import <UIKit/UIKit.h>
+#import "ORKGraphChartView.h"
 
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray<UICollectionViewLayoutAttributes *> *attributesArray = [super layoutAttributesForElementsInRect:rect];
-    for (UICollectionViewLayoutAttributes *attributes in attributesArray) {
-        attributes.frame = [self layoutAttributesForItemAtIndexPath:attributes.indexPath].frame;
-    }
-    return attributesArray;
-}
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    NSInteger count = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:indexPath.section];
-    NSIndexPath *lastItemIndexPath = [NSIndexPath indexPathForItem:count - 1 inSection:indexPath.section];
-    UICollectionViewLayoutAttributes *lastItemAttributes = [super layoutAttributesForItemAtIndexPath:lastItemIndexPath];
-    if (attributes.frame.origin.y == lastItemAttributes.frame.origin.y) {
-        CGFloat trailing = self.collectionView.bounds.size.width - CGRectGetMaxX(lastItemAttributes.frame);
-        attributes.frame = CGRectOffset(attributes.frame, trailing * 0.5, 0);
-    }
-    return attributes;
-}
+/**
+ The `ORKBarGraphChartView` class presents the data provided by an object conforming to the
+ `ORKValueStackGraphChartViewDataSource` protocol as a bar graph.
+ 
+ By default, the primary plot is colored by the `tintColor`, and any additional plots are colored
+ using the `referenceLineColor` property. You can customize the plot colors by implementing the
+ `-graphChartView:colorForPlotIndex:` method in the data source.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKBarGraphChartView : ORKGraphChartView
+
+/**
+ The data source responsible for providing the data required to populate the graph chart view.
+ 
+ See the `ORKValueStackGraphChartViewDataSource` protocol.
+ */
+@property (nonatomic, weak) id <ORKValueStackGraphChartViewDataSource> dataSource;
 
 @end

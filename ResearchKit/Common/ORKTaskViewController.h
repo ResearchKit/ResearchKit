@@ -212,6 +212,18 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
 
 /**
+ Tells the delegate that a step will disappear.
+ 
+ This is called in the `ORKStepViewControllerDelegate` method for `stepViewController:didFinishWithNavigationDirection:`
+ after saving the result of the step to the task view controller and before navigating to the next/previous step.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The `ORKStepViewController` that has just finished.
+ @param direction           The `ORKStepViewControllerNavigationDirection` of navigation.
+ */
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
+
+/**
  Tells the delegate that the result has substantively changed.
  
  The task view controller calls this method when steps start or finish, or if an answer has

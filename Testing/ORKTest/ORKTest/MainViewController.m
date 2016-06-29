@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -85,6 +85,10 @@ DefineStringKey(CollectionViewCellReuseIdentifier);
 
 DefineStringKey(EmbeddedReviewTaskIdentifier);
 DefineStringKey(StandaloneReviewTaskIdentifier);
+DefineStringKey(ConfirmationFormTaskIdentifier);
+
+DefineStringKey(StepWillDisappearTaskIdentifier);
+DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -365,6 +369,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
+                           @"Step Will Disappear",
+                           @"Confirmation Form Item"
                            ],
                        ];
 }
@@ -567,6 +573,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeWaitingTask];
     }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
+    } else if ([identifier isEqualToString:StepWillDisappearTaskIdentifier]) {
+        return [self makeStepWillDisappearTask];
+    } else if ([identifier isEqualToString:ConfirmationFormTaskIdentifier]) {
+        return [self makeConfirmationFormTask];
     }
 
     return nil;
@@ -2855,9 +2865,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     // Intro step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
-    step.title = @"This task demonstrates an optional loop within a navigable ordered task";
+    step.title = @"This task demonstrates an skippable step and an optional loop within a navigable ordered task";
     [steps addObject:step];
 
+    // Skippable step
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"skipNextStep" title:@"Do you want to skip the next step?" answer:answerFormat];
+    questionStep.optional = NO;
+    [steps addObject:questionStep];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
+    step.title = @"You'll optionally skip this step";
+    [steps addObject:step];
+    
     // Loop target step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"loopAStep"];
     step.title = @"You'll optionally return to this step";
@@ -2921,12 +2941,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // Build navigation rules
     ORKResultSelector *resultSelector = nil;
     ORKPredicateStepNavigationRule *predicateRule = nil;
-    ORKDirectStepNavigationRule *directRule;
+    ORKDirectStepNavigationRule *directRule = nil;
+    ORKPredicateSkipStepNavigationRule *predicateSkipRule = nil;
     
+    // skippable step
+    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"skipNextStep"];
+    NSPredicate *predicateSkipStep = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                                                                              expectedAnswer:YES];
+    predicateSkipRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicateSkipStep];
+    [task setSkipNavigationRule:predicateSkipRule forStepIdentifier:@"skippableStep"];
+
     // From the branching step, go to either scaleStep or textChoiceStep
     resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"branchingStep"];
-    NSPredicate *predicateAnswerType = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"scale"];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerType ]
+    NSPredicate *predicateAnswerTypeScale = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
+                                                                                               expectedAnswerValue:@"scale"];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerTypeScale ]
                                                           destinationStepIdentifiers:@[ @"scaleStep" ]
                                                                defaultStepIdentifier:@"textChoiceStep"];
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"branchingStep"];
@@ -3567,6 +3596,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
+        [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
+        taskViewController.view.tintColor = [UIColor magentaColor];
+    }
+}
+
 #pragma mark - UI state restoration
 
 /*
@@ -3711,6 +3747,96 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:LocationTaskIdentifier steps:steps];
     return locationTask;
+}
+
+#pragma mark - Step Will Disappear Task Delegate example
+
+- (IBAction)stepWillDisappearButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StepWillDisappearTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeStepWillDisappearTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:StepWillDisappearFirstStepIdentifier];
+    step1.title = @"Step Will Disappear Delegate Example";
+    step1.text = @"The tint color of the task view controller is changed to magenta in the `stepViewControllerWillDisappear:` method.";
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
+    stepLast.title = @"Survey Complete";
+    
+    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:StepWillDisappearTaskIdentifier steps:@[step1, stepLast]];
+    return locationTask;
+}
+
+#pragma mark - Confirmation Form Item
+
+- (IBAction)confirmationFormItemButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ConfirmationFormTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeConfirmationFormTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"confirmationForm.step1"];
+    step1.title = @"Confirmation Form Items Survey";
+    [steps addObject:step1];
+    
+    // Create a step for entering password with confirmation
+    ORKFormStep *step2 = [[ORKFormStep alloc] initWithIdentifier:@"confirmationForm.step2" title:@"Password" text:nil];
+    [steps addObject:step2];
+    
+    {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        answerFormat.secureTextEntry = YES;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
+                                                               text:@"Password"
+                                                       answerFormat:answerFormat
+                                                           optional:NO];
+        item.placeholder = @"Enter password";
+
+        ORKFormItem *confirmationItem = [item confirmationAnswerFormItemWithIdentifier:@"password.confirmation"
+                                                                                  text:@"Confirm"
+                                                                          errorMessage:@"Passwords do not match"];
+        confirmationItem.placeholder = @"Enter password again";
+        
+        step2.formItems = @[item, confirmationItem];
+    }
+    
+    // Create a step for entering participant id
+    ORKFormStep *step3 = [[ORKFormStep alloc] initWithIdentifier:@"confirmationForm.step3" title:@"Participant ID" text:nil];
+    [steps addObject:step3];
+    
+    {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"participantID"
+                                                               text:@"Participant ID"
+                                                       answerFormat:answerFormat
+                                                           optional:YES];
+        item.placeholder = @"Enter Participant ID";
+        
+        ORKFormItem *confirmationItem = [item confirmationAnswerFormItemWithIdentifier:@"participantID.confirmation"
+                                                                                  text:@"Confirm"
+                                                                          errorMessage:@"IDs do not match"];
+        confirmationItem.placeholder = @"Enter ID again";
+        
+        step3.formItems = @[item, confirmationItem];
+    }
+    
+    ORKCompletionStep *step4 = [[ORKCompletionStep alloc] initWithIdentifier:@"confirmationForm.lastStep"];
+    step4.title = @"Survey Complete";
+    [steps addObject:step4];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormTaskIdentifier steps:steps];
 }
 
 @end

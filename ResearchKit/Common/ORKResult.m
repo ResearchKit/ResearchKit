@@ -675,7 +675,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @implementation ORKFileResult
 
 - (BOOL)isSaveable {
-    return (_fileURL!=nil);
+    return (_fileURL != nil);
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -1759,9 +1759,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-
     ORK_ENCODE_OBJ(aCoder, results);
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1839,7 +1837,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     NSMutableString *description = [NSMutableString stringWithFormat:@"%@; results: (", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
     
     NSUInteger numberOfResults = self.results.count;
-    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
         if (idx == 0) {
             [description appendString:@"\n"];
         }
@@ -2058,8 +2056,56 @@ static NSString * const RegionIdentifierKey = @"region.identifier";
     self = [super initWithIdentifier:stepIdentifier];
     if (self) {
         [self setResultsCopyObjects:results];
+        [self updateEnabledAssistiveTechnology];
     }
     return self;
+}
+
+- (void)updateEnabledAssistiveTechnology {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
+    } else if (UIAccessibilityIsSwitchControlRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
+    }
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, enabledAssistiveTechnology);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, enabledAssistiveTechnology, NSString);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.enabledAssistiveTechnology, castObject.enabledAssistiveTechnology));
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _enabledAssistiveTechnology.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKStepResult *result = [super copyWithZone:zone];
+    result->_enabledAssistiveTechnology = [_enabledAssistiveTechnology copy];
+    return result;
+}
+
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; enabledAssistiveTechnology: %@", [super descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], _enabledAssistiveTechnology ? : @"None"];
 }
 
 @end

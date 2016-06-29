@@ -1047,7 +1047,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORKStepResult *result = nil;
         result = _managedResults[step.identifier];
         if (!result ) {
-            result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
         }
         
         if (!result) {
@@ -1248,6 +1248,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!stepViewController.readOnlyMode) {
         // Add step result object
         [self setManagedResult:[stepViewController result] forKey:stepViewController.step.identifier];
+    }
+    
+    // Alert the delegate that the step is finished 
+    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(taskViewController:stepViewControllerWillDisappear:navigationDirection:)]) {
+        [strongDelegate taskViewController:self stepViewControllerWillDisappear:stepViewController navigationDirection:direction];
     }
     
     if (direction == ORKStepViewControllerNavigationDirectionForward) {

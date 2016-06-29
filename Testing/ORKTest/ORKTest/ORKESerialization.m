@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -350,6 +351,16 @@ ret =
          },(@{
               PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
               })),
+   ENTRY(ORKAudioLevelNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKAudioLevelNavigationRule *rule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:GETPROP(dict, audioLevelStepIdentifier)                                                                                             destinationStepIdentifier:GETPROP(dict, destinationStepIdentifier)
+                                                                                                     recordingSettings:GETPROP(dict, recordingSettings)];
+             return rule;
+         },(@{
+              PROPERTY(audioLevelStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(recordingSettings, NSDictionary, NSObject, NO, nil, nil),
+              })),
    ENTRY(ORKOrderedTask,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
@@ -366,6 +377,7 @@ ret =
              return task;
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
               PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
@@ -1241,6 +1253,7 @@ ret =
    ENTRY(ORKStepResult,
          nil,
          (@{
+            PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];
@@ -1397,7 +1410,7 @@ static id jsonObjectForObject(id object) {
             encodedDictionary[key] = jsonObjectForObject(inputDict[key]);
         }
         jsonOutput = encodedDictionary;
-    } else {
+    } else if (![c isSubclassOfClass:[NSPredicate class]]) {  // Ignore NSPredicate which cannot be easily serialized for now
         NSCAssert(isValid(object), @"Expected valid JSON object");
         
         // Leaf: native JSON object

@@ -187,6 +187,7 @@
  allows us to write very short code to instantiate valid objects during these tests.
  */
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString];});
 ORK_MAKE_TEST_INIT(ORKReviewStep, ^{return [[self class] standaloneReviewStepWithIdentifier:[NSUUID UUID].UUIDString steps:@[] resultSource:[ORKTaskResult new]];});
@@ -313,6 +314,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     
     NSArray *classesExcludedForORKESerialization = @[
                                                      [ORKStepNavigationRule class],     // abstract base class
+                                                     [ORKSkipStepNavigationRule class],     // abstract base class
+                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation 
                                                      ];
     
     if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {
@@ -323,7 +326,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     }
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass",
+    NSArray *propertyExclusionList = @[
+                                       @"superclass",
                                        @"description",
                                        @"descriptionSuffix",
                                        @"debugDescription",
@@ -332,8 +336,10 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                        @"requestedHealthKitTypesForWriting",
                                        @"healthKitUnit",
                                        @"answer",
-                                       @"firstResult"];
-    NSArray *knownNotSerializedProperties = @[@"ORKStep.task",
+                                       @"firstResult",
+                                       ];
+    NSArray *knownNotSerializedProperties = @[
+                                              @"ORKStep.task",
                                               @"ORKStep.restorable",
                                               @"ORKReviewStep.isStandalone",
                                               @"ORKAnswerFormat.questionType",
@@ -378,7 +384,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegex",
-                                              @"ORKRegistrationStep.passcodeInvalidMessage"];
+                                              @"ORKRegistrationStep.passcodeInvalidMessage",
+                                              ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class
@@ -532,6 +539,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
     } else if (p.propertyClass == [CLCircularRegion class]) {
         [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
+    } else if (p.propertyClass == [NSPredicate class]) {
+        [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
@@ -686,14 +695,15 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
 
 - (id)instanceForClass:(Class)c {
     if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
-        ([c isSubclassOfClass:[ORKStep class]] ||
+        ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
+        ([c isSubclassOfClass:[ORKStep class]]) ||
          ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
          (c == [ORKTextChoice class]) ||
          (c == [ORKImageChoice class]) ||
          ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
          ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
          (c == [ORKLocation class]))
-    ) {
+    {
         return [[c alloc] orktest_init];
     }
     

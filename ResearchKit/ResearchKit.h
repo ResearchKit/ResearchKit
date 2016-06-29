@@ -37,6 +37,7 @@
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKQuestionStep.h>
 #import <ResearchKit/ORKInstructionStep.h>
+#import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKFormStep.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 #import <ResearchKit/ORKImageCaptureStep.h>
@@ -73,10 +74,12 @@
 
 #import <ResearchKit/ORKRecorder.h>
 #import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
 
-#import <ResearchKit/ORKRangedPoint.h>
+#import <ResearchKit/ORKChartTypes.h>
 #import <ResearchKit/ORKLineGraphChartView.h>
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
+#import <ResearchKit/ORKBarGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
 

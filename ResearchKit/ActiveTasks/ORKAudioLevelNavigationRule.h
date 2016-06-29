@@ -1,5 +1,6 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2016, Sage Bionetworks
+ Copyright (c) 2016, Apple Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,15 +29,37 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import "ORKOrderedTask.h"
-
+#import <ResearchKit/ORKStepNavigationRule.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKOrderedTask ()
+ORK_CLASS_AVAILABLE
+@interface ORKAudioLevelNavigationRule : ORKStepNavigationRule
 
-- (NSUInteger)indexOfStep:(ORKStep *)step;
+/**
+ Returns an initialized direct-step navigation rule using the specified destination step identifier.
+ 
+ @param audioLevelStepIdentifier   The identifier of the step with the audio file to check.
+ @param destinationStepIdentifier  The identifier of the destination step if audio test passes.
+ 
+ @return A audio level step navigation rule.
+ */
+- (instancetype)initWithAudioLevelStepIdentifier:(NSString *)audioLevelStepIdentifier
+                       destinationStepIdentifier:(NSString *)destinationStepIdentifier
+                               recordingSettings:(NSDictionary *)recordingSettings NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new direct-step navigation rule initialized from data in a given unarchiver.
+ 
+ @param aDecoder    The coder from which to initialize the step navigation rule.
+ 
+ @return A new direct-step navigation rule.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, copy, readonly) NSString *audioLevelStepIdentifier;
+@property (nonatomic, copy, readonly) NSString *destinationStepIdentifier;
+@property (nonatomic, copy, readonly) NSDictionary *recordingSettings;
 
 @end
 
