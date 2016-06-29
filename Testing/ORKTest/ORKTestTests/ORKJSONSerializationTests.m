@@ -485,7 +485,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         id instance2 = [ORKESerializer objectFromJSONObject:mockDictionary error:NULL];
        
         NSArray *unTouchedKeys = [mockDictionary unTouchedKeys];
-                
+        
         // Make sure all keys are touched by initializer
         for (NSString *key in unTouchedKeys) {
             XCTAssertTrue([allowedUnTouchedKeys containsObject:key], @"untouched %@", key);
