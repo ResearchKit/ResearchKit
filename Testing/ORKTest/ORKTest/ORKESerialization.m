@@ -351,6 +351,16 @@ ret =
          },(@{
               PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
               })),
+   ENTRY(ORKAudioLevelNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKAudioLevelNavigationRule *rule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:GETPROP(dict, audioLevelStepIdentifier)                                                                                             destinationStepIdentifier:GETPROP(dict, destinationStepIdentifier)
+                                                                                                     recordingSettings:GETPROP(dict, recordingSettings)];
+             return rule;
+         },(@{
+              PROPERTY(audioLevelStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(recordingSettings, NSDictionary, NSObject, NO, nil, nil),
+              })),
    ENTRY(ORKOrderedTask,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
