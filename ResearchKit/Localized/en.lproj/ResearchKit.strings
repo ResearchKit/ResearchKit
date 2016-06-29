@@ -244,6 +244,9 @@
 "AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
 "AUDIO_TOO_LOUD_LABEL" = "Too Loud";
 "AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
+"AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
+"AUDIO_TOO_LOUD_MESSAGE" = "The ambient noise level is too loud to record your voice. Please move somewhere quieter and try again.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tap Next when ready.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";

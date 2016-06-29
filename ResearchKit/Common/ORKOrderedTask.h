@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKNavigableOrderedTask;
+
 /**
  The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a 
  task that assumes a fixed order for its steps.
@@ -226,8 +228,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                         options:(ORKPredefinedTaskOption)options;
 
 
+
+
 /**
- Returns a predefined task that enables an audio recording.
+ Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
  In an audio recording task, the participant is asked to make some kind of sound
  with their voice, and the audio data is collected.
@@ -235,23 +239,40 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  An audio task can be used to measure properties of the user's voice, such as
  frequency range, or the ability to pronounce certain sounds.
  
+ If `checkAudioLevel == YES` then a navigation rule is added to do a simple check of the background
+ noise level. If the background noise is too loud, then the participant is instructed to move to a 
+ quieter location before trying again.
+ 
  Data collected in this task consists of audio information.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
-                                    collected. If the value of this parameter is `nil`, default
-                                    localized text is used.
+ collected. If the value of this parameter is `nil`, default
+ localized text is used.
  @param speechInstruction       Instructional content describing what the user needs to do when
-                                    recording begins. If the value of this parameter is `nil`,
-                                    default localized text is used.
+ recording begins. If the value of this parameter is `nil`,
+ default localized text is used.
  @param shortSpeechInstruction  Instructional content shown during audio recording. If the value of
-                                    this parameter is `nil`, default localized text is used.
+ this parameter is `nil`, default localized text is used.
  @param duration                The length of the count down timer that runs while audio data is
-                                    collected.
+ collected.
  @param recordingSettings       See "AV Foundation Audio Settings Constants" for possible values.
+ @param checkAudioLevel         If `YES` then add navigational rules to check the background noise level.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options;
+
+/**
+ @Deprecated
  */
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -259,7 +280,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                      shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
                                    duration:(NSTimeInterval)duration
                           recordingSettings:(nullable NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options;
+                                    options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
  Returns a predefined task that consists of two finger tapping.

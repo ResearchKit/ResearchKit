@@ -1393,6 +1393,38 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
 }
 
+- (void)testAudioTask_WithSoundCheck {
+    ORKNavigableOrderedTask *task = [ORKOrderedTask audioTaskWithIdentifier:@"audio" intendedUseDescription:nil speechInstruction:nil shortSpeechInstruction:nil duration:20 recordingSettings:nil checkAudioLevel:YES options:0];
+    
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKAudioTooLoudStepIdentifier,
+                                         ORKAudioStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    XCTAssertNotNil([task navigationRuleForTriggerStepIdentifier:ORKCountdownStepIdentifier]);
+    XCTAssertNotNil([task navigationRuleForTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier]);
+}
+
+- (void)testAudioTask_NoSoundCheck {
+    
+    ORKNavigableOrderedTask *task = [ORKOrderedTask audioTaskWithIdentifier:@"audio" intendedUseDescription:nil speechInstruction:nil shortSpeechInstruction:nil duration:20 recordingSettings:nil checkAudioLevel:NO options:0];
+    
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKAudioStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    XCTAssertEqual(task.stepNavigationRules.count, 0);
+}
+
 @end
 
 @implementation MethodObject

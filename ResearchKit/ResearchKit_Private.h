@@ -68,6 +68,7 @@
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
+#import <ResearchKit/ORKAudioLevelNavigationRule.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
