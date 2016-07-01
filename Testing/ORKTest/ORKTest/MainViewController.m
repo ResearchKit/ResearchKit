@@ -370,8 +370,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Toggle Tint Color",
                            @"Wait Task",
                            @"Step Will Disappear",
-                           @"Confirmation Form Item"
-                           @"Continue Button"
+                           @"Confirmation Form Item",
+                           @"Continue Button",
                            ],
                        ];
 }
