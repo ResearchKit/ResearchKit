@@ -32,6 +32,7 @@
 		FFF010721D21F1EA0054B430 /* ContinueButtonExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */; };
 		FFF010731D21F1EA0054B430 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF010711D21F1EA0054B430 /* FooterView.m */; };
 		FFF010751D21F2030054B430 /* ContinueButtonExample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */; };
+		FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,8 @@
 		FFF010701D21F1EA0054B430 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		FFF010711D21F1EA0054B430 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ContinueButtonExample.storyboard; path = "ORKTest/Supporting Files/ContinueButtonExample.storyboard"; sourceTree = SOURCE_ROOT; };
+		FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonPokerStep.h; sourceTree = "<group>"; };
+		FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonPokerStep.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,8 @@
 				FFF010711D21F1EA0054B430 /* FooterView.m */,
 				86717ADC1AC0C53800AC2A23 /* DynamicTask.h */,
 				86717ADD1AC0C53800AC2A23 /* DynamicTask.m */,
+				FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */,
+				FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */,
 			);
 			name = CustomizationExamples;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
 				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
 				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
+				FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */,
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */,
 				FFF010731D21F1EA0054B430 /* FooterView.m in Sources */,

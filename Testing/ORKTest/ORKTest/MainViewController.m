@@ -37,6 +37,7 @@
 #import "DynamicTask.h"
 #import "AppDelegate.h"
 #import "ORKTest-Swift.h"
+#import "DragonPokerStep.h"
 
 
 #define DefineStringKey(x) static NSString *const x = @#x
@@ -52,6 +53,7 @@ DefineStringKey(VerificationTaskIdentifier);
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(ImageChoicesTaskIdentifier);
+DefineStringKey(InstantiateCustomVCTaskIdentifier);
 DefineStringKey(LocationTaskIdentifier);
 DefineStringKey(ScalesTaskIdentifier);
 DefineStringKey(MiniFormTaskIdentifier);
@@ -372,6 +374,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Step Will Disappear",
                            @"Confirmation Form Item",
                            @"Continue Button",
+                           @"Instantiate Custom VC",
                            ],
                        ];
 }
@@ -570,14 +573,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeEmbeddedReviewTask];
     } else if ([identifier isEqualToString:StandaloneReviewTaskIdentifier]) {
         return [self makeStandaloneReviewTask];
-    } if ([identifier isEqualToString:WaitTaskIdentifier]) {
+    } else if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
-    }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
+    } else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
     } else if ([identifier isEqualToString:StepWillDisappearTaskIdentifier]) {
         return [self makeStepWillDisappearTask];
     } else if ([identifier isEqualToString:ConfirmationFormTaskIdentifier]) {
         return [self makeConfirmationFormTask];
+    } else if ([identifier isEqualToString:InstantiateCustomVCTaskIdentifier]) {
+        return [self makeInstantiateCustomVCTask];
     }
 
     return nil;
@@ -3855,6 +3860,25 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
     UIViewController *vc = [storyboard instantiateInitialViewController];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - Instantiate Custom Step View Controller Example
+
+- (IBAction)instantiateCustomVcButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:InstantiateCustomVCTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeInstantiateCustomVCTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"locationTask.step1"];
+    step1.title = @"Instantiate Custom View Controller";
+    step1.text = @"The next step uses a custom subclass of an ORKFormStepViewController.";
+    
+    DragonPokerStep *dragonStep = [[DragonPokerStep alloc] initWithIdentifier:@"dragonStep"];
+    
+    ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"done"];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:InstantiateCustomVCTaskIdentifier steps:@[step1, dragonStep, lastStep]];
 }
 
 @end
