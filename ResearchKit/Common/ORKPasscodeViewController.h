@@ -68,16 +68,10 @@ ORK_AVAILABLE_DECL
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
 /*
- * Defaults to Localized "Forgot Password?" text
+ * Defaults to Localized "Forgot Passcode?" text
  * @return the text of the forgot passcode button
  */
 - (NSString*)passcodeViewControllerTextForForgotPasscode:(UIViewController *)viewController;
-
-/*
- * Defaults to Localized standard Apple blue tint color
- * @return the tint color of the forgot passcode button
- */
-- (UIColor*)passcodeViewControllerTintColorForForgotPasscode:(UIViewController *)viewController;
 
 /*
  * Called when forgot passcode button is tapped
