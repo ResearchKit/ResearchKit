@@ -466,6 +466,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                             shortSpeechInstruction:nil
                                                           duration:10
                                                  recordingSettings:nil
+                                                   checkAudioLevel:YES
                                                            options:(ORKPredefinedTaskOption)0];
         return task;
     } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
