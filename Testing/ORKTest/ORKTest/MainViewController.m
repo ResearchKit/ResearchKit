@@ -3065,6 +3065,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)passcodeViewControllerForgotPasscodeTapped:(UIViewController *)viewController {
+    NSLog(@"Forgot Passcode tapped.");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Forgot Passcode"
+                                                                   message:@"Forgot Passcode tapped."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [viewController presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - Review step
 
 - (NSArray<ORKStep *> *)stepsForReviewTasks {
