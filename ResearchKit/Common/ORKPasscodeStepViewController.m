@@ -100,22 +100,20 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         _useTouchId = YES;
         
         // If this has text, we should add the forgot passcode button with this title
-        if ([self hasForgotPasscode])
-        {
+        if ([self hasForgotPasscode]) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
             
             CGFloat x = kForgotPasscodeHorizontalPadding;
             _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
-            CGFloat width = self.view.bounds.size.width - 2*kForgotPasscodeHorizontalPadding;
+            CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
 
-            UIButton* forgotPasscodeButton = [ORKTextButton new];
-            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12,10,8,10};
+            UIButton *forgotPasscodeButton = [ORKTextButton new];
+            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12, 10, 8, 10};
             forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
             
-            NSString* buttonTitle = [self forgotPasscodeButtonText];
+            NSString *buttonTitle = [self forgotPasscodeButtonText];
             [forgotPasscodeButton setTitle:buttonTitle forState:UIControlStateNormal];
-            
             [forgotPasscodeButton addTarget:self
                                      action:@selector(forgotPasscodeTapped)
                            forControlEvents:UIControlEventTouchUpInside];
@@ -689,7 +687,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     }
 }
 
-- (BOOL) hasForgotPasscode {
+- (BOOL)hasForgotPasscode {
     if ((self.passcodeFlow == ORKPasscodeFlowAuthenticate) &&
         [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
         return YES;
@@ -697,7 +695,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     return NO;
 }
 
-- (NSString*) forgotPasscodeButtonText {
+- (NSString *)forgotPasscodeButtonText {
     if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTextForForgotPasscode:)]) {
         return [self.passcodeDelegate passcodeViewControllerTextForForgotPasscode: self];
     }
@@ -712,8 +710,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    [UIView animateWithDuration:animationDuration animations:^
-    {
+    [UIView animateWithDuration:animationDuration animations:^{
         [_forgotPasscodeButton setFrame:CGRectMake(_forgotPasscodeButton.frame.origin.x, _originalForgotPasscodeY - keyboardHeight, _forgotPasscodeButton.frame.size.width, _forgotPasscodeButton.frame.size.height)];
     }];
 }
@@ -722,8 +719,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
 
-    [UIView animateWithDuration:animationDuration animations:^
-     {
+    [UIView animateWithDuration:animationDuration animations:^{
          [_forgotPasscodeButton setFrame:CGRectMake(_forgotPasscodeButton.frame.origin.x, _originalForgotPasscodeY, _forgotPasscodeButton.frame.size.width, _forgotPasscodeButton.frame.size.height)];
      }];
 }

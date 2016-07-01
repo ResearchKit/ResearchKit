@@ -67,15 +67,18 @@ ORK_AVAILABLE_DECL
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
-/*
- * Defaults to Localized "Forgot Passcode?" text
- * @return the text of the forgot passcode button
+/** 
+ Defaults to Localized "Forgot Passcode?" text
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ @return                    Text to display for the forgot passcode button
  */
-- (NSString*)passcodeViewControllerTextForForgotPasscode:(UIViewController *)viewController;
+- (NSString *)passcodeViewControllerTextForForgotPasscode:(UIViewController *)viewController;
 
-/*
- * Called when forgot passcode button is tapped
- * @param ORKPasscodeStepViewController
+/**
+ Notifies the delegate that forgot passcode button has been tapped.
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
 - (void)passcodeViewControllerForgotPasscodeTapped:(UIViewController *)viewController;
 
