@@ -82,4 +82,5 @@
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKBarGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
+#import <ResearchKit/ORKContinueButton.h>
 

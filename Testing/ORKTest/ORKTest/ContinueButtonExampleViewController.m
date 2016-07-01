@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,34 +28,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTextButton_Internal.h"
-#import "ORKRoundTappingButton.h"
+#import "ContinueButtonExampleViewController.h"
+#import "FooterView.h"
 
+@interface ContinueButtonExampleViewController ()
 
-@implementation ORKRoundTappingButton
+@property (weak, nonatomic) IBOutlet FooterView *footerView;
 
-static const CGFloat RoundTappingButtonDiameter = 104;
+@end
 
-- (void)init_ORKTextButton {
-    [super init_ORKTextButton];
-    self.fadeDelay = 0.2;
-    self.layer.cornerRadius = RoundTappingButtonDiameter * 0.5;
+@implementation ContinueButtonExampleViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    [self.footerView.continueButton addTarget:self action:@selector(continueButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (CGSize)intrinsicContentSize {
-    return CGSizeMake(RoundTappingButtonDiameter, RoundTappingButtonDiameter);
-}
-
-+ (UIFont *)defaultFont {
-    // regular, 20
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 3.0];
-}
-
-#pragma mark Accessibility
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    return [super accessibilityTraits] | UIAccessibilityTraitAllowsDirectInteraction;
+- (IBAction)continueButtonTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
