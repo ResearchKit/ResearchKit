@@ -118,6 +118,22 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 - (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)taskViewController;
 
 /**
+ Asks the delegate if the cancel action should be confirmed
+ 
+ The task view controller calls this method to determine whether or not to confirm
+ result save or discard when user attempts to cancel a task that is in progress.
+ 
+ If this method is not implemented, the task view controller assumes that cancel should be confirmed.
+ If this method returns `YES`, then cancel action will be confirmed.
+ If this method returns `NO`, then the results will immediately be discarded.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ 
+ @return `YES` to confirm cancel action; `NO` to immediately discard the results.
+ */
+- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController *)taskViewController;
+
+/**
  Asks the delegate if there is Learn More content for this step.
  
  The task view controller calls this method to determine whether a
