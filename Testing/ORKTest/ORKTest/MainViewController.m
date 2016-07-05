@@ -93,6 +93,8 @@ DefineStringKey(ConfirmationFormTaskIdentifier);
 DefineStringKey(StepWillDisappearTaskIdentifier);
 DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
+DefineStringKey(TableStepTaskIdentifier);
+
 @interface SectionHeader: UICollectionReusableView
 
 - (void)configureHeaderWithTitle:(NSString *)title;
@@ -377,6 +379,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Confirmation Form Item",
                            @"Continue Button",
                            @"Instantiate Custom VC",
+                           @"Table Step",
                            ],
                        ];
 }
@@ -592,6 +595,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                      walkDuration:30
                                                      restDuration:30
                                                           options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TableStepTaskIdentifier]) {
+        return [self makeTableStepTask];
     }
 
     return nil;
@@ -3893,5 +3898,30 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     return [[ORKOrderedTask alloc] initWithIdentifier:InstantiateCustomVCTaskIdentifier steps:@[step1, dragonStep, lastStep]];
 }
+
+#pragma mark - Step Table
+
+- (IBAction)tableStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TableStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeTableStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.text = @"Example of an ORKTableStepViewController";
+    [steps addObject:step1];
+    
+    ORKTableStep *tableStep = [[ORKTableStep alloc] initWithIdentifier:@"tableStep"];
+    tableStep.items = @[@"Item 1", @"Item 2", @"Item 3"];
+    [steps addObject:tableStep];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Task Complete";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:TableStepTaskIdentifier steps:steps];
+}
+
 
 @end

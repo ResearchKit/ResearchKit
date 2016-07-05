@@ -31,9 +31,11 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
- The `ORKTableStepViewController` class is an abstract base class that inherits from 
- `ORKStepViewController` and provides a UITableView.
+ The `ORKTableStepViewController` class is an base class that inherits from `ORKStepViewController` 
+ and provides a UITableView.
  
  `ORKTableStepViewController` is designed to take advantage of the internal class methods 
  used by `ORKFormStepViewController`, `ORKQuestionStepViewController` and `ORKReviewStepViewController` 
@@ -43,9 +45,16 @@
  that are used by these classes as well as most of the other view controllers within this framework by 
  automatically adding them as the header and footer of the tableview.
  
+ The base class implementation REQUIRES using an `ORKTableStep` as its data source.
+ 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTableStepViewController : ORKStepViewController <UITableViewDataSource, UITableViewDelegate>
+
+/**
+ @return    The step associated with this view controller if it can be cast to ORKTableStep.
+ */
+@property (nonatomic, readonly, nullable) ORKTableStep *tableStep;
 
 /**
  @return    The table view managed by the controller object.
@@ -63,26 +72,6 @@ ORK_CLASS_AVAILABLE
  */
 - (BOOL)continueButtonEnabled;
 
-/**
- Required implementations for a data source. Will assert if not overridden.
- 
- Subclasses should override to return the number of rows in the table.
- 
- @param  tableView      The tableview used to display rows
- @param  section        The section of the table
- @return                The number of rows in the tableview section
- */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-
-/**
- Required implementations for a data source. Will assert if not overridden.
- 
- Subclasses should override to return a cell appropriate to this implementation.
- 
- @param  tableView      The tableview used to display rows
- @param  indexPath      The indexpath of the section/row for the cell
- @return                The cell for this section/row
- */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 @end
+
+NS_ASSUME_NONNULL_END

@@ -40,11 +40,20 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKSkin.h"
 
-@implementation ORKTableStepViewController
+@implementation ORKTableStepViewController {
+    BOOL _hasRegisteredCells;
+}
+
+- (ORKTableStep *)tableStep {
+    if ([self.step isKindOfClass:[ORKTableStep class]]) {
+        return (ORKTableStep *)self.step;
+    }
+    return nil;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [self.taskViewController setRegisteredScrollView:_tableView];
 }
 
@@ -110,6 +119,8 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
+        
+        [self registerCellsForTableView:_tableView];
     }
 }
 
@@ -123,14 +134,35 @@
 
 #pragma mark UITableViewDataSource
 
+- (void)registerCellsForTableView:(UITableView *)tableView {
+    if (_hasRegisteredCells) {
+        return;
+    }
+    
+    if (self.isViewLoaded && self.tableStep != nil) {
+        [self.tableStep registerCellsForTableView:_tableView];
+        _hasRegisteredCells = YES;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.tableStep.numberOfSections ?: 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSAssert(NO, @"Abstract method");
-    return 0;
+    return [self.tableStep numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(NO, @"Abstract method");
-    return [tableView dequeueReusableCellWithIdentifier:@"NULL" forIndexPath:indexPath];
+    ORKThrowInvalidArgumentExceptionIfNil(self.tableStep);
+    
+    NSString *reuseIdentifier = [self.tableStep reuseIdentifierForRowAtIndexPath:indexPath];
+    ORKThrowInvalidArgumentExceptionIfNil(reuseIdentifier);
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    [self.tableStep configureCell:cell indexPath:indexPath tableView:tableView];
+    
+    return cell;
 }
 
 @end
