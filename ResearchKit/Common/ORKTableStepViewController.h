@@ -45,7 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
  that are used by these classes as well as most of the other view controllers within this framework by 
  automatically adding them as the header and footer of the tableview.
  
- The base class implementation REQUIRES using an `ORKTableStep` as its data source.
+ The base class implementation REQUIRES using an `ORKTableStep` as its data source. If you do not inherit 
+ the step from ORKTableStep, then subclasses MUST override `-cellForRowAtIndexPath`.
  
  */
 ORK_CLASS_AVAILABLE
