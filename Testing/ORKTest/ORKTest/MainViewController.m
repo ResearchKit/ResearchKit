@@ -72,6 +72,7 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
@@ -350,6 +351,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Walk And Turn Task"
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -584,6 +586,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeConfirmationFormTask];
     } else if ([identifier isEqualToString:InstantiateCustomVCTaskIdentifier]) {
         return [self makeInstantiateCustomVCTask];
+    } else if ([identifier isEqualToString:WalkBackAndForthTaskIdentifier]) {
+        return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkBackAndForthTaskIdentifier
+                                           intendedUseDescription:nil
+                                                     walkDuration:30
+                                                     restDuration:30
+                                                          options:ORKPredefinedTaskOptionNone];
     }
 
     return nil;
@@ -2272,6 +2280,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)holePegTestTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
+}
+
+- (void)walkAndTurnTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
