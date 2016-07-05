@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks - Added walk back and forth module
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -787,7 +788,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-/// Module Added: Copyright (c) 2016, Sage Bionetworks
+
 + (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
                                 intendedUseDescription:(NSString *)intendedUseDescription
                                           walkDuration:(NSTimeInterval)walkDuration
@@ -853,7 +854,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             walkingStep.stepDuration = walkDuration; // Set the walking duration to the step duration
             walkingStep.shouldVibrateOnStart = YES;
             walkingStep.shouldPlaySoundOnStart = YES;
-            walkingStep.shouldSpeakHalfwayCount = (walkDuration > 20);
+            walkingStep.shouldSpeakRemainingTimeAtHalfway = (walkDuration > 20);
             
             ORKStepArrayAddStep(steps, walkingStep);
         }
@@ -883,7 +884,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             activeStep.shouldVibrateOnFinish = YES;
             activeStep.shouldPlaySoundOnFinish = YES;
             activeStep.finishedSpokenInstruction = ORKLocalizedString(@"WALK_BACK_AND_FORTH_FINISHED_VOICE", nil);
-            activeStep.shouldSpeakHalfwayCount = (restDuration > 20);
+            activeStep.shouldSpeakRemainingTimeAtHalfway = (restDuration > 20);
             
             ORKStepArrayAddStep(steps, activeStep);
         }

@@ -1444,9 +1444,9 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     // Check that the active steps include speaking the halfway point
     ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
-    XCTAssertTrue(walkingStep.shouldSpeakHalfwayCount);
+    XCTAssertTrue(walkingStep.shouldSpeakRemainingTimeAtHalfway);
     ORKActiveStep *restStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkRestStepIdentifier];
-    XCTAssertTrue(restStep.shouldSpeakHalfwayCount);
+    XCTAssertTrue(restStep.shouldSpeakRemainingTimeAtHalfway);
     
 }
 
@@ -1468,7 +1468,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     // Check that the active steps include speaking the halfway point
     ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
-    XCTAssertFalse(walkingStep.shouldSpeakHalfwayCount);
+    XCTAssertFalse(walkingStep.shouldSpeakRemainingTimeAtHalfway);
     
 }
 

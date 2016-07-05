@@ -111,7 +111,7 @@ automatically navigates forward when the timer expires.
  
  The default value of this property is `NO`.
  */
-@property (nonatomic) BOOL shouldSpeakHalfwayCount;
+@property (nonatomic) BOOL shouldSpeakRemainingTimeAtHalfway;
 
 
 /**

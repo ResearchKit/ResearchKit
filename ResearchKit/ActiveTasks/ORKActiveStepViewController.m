@@ -430,7 +430,7 @@
     }
     
     BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
-    if (!finished && self.activeStep.shouldSpeakHalfwayCount && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
+    if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
         _hasSpokenHalfwayCountdown = YES;
         NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
         [voice speakText:text];
