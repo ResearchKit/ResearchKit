@@ -565,7 +565,13 @@ ret =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
-
+   ENTRY(ORKTableStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTableStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(items, NSObject, NSArray, YES, nil, nil),
+            })),
    ENTRY(ORKTimedWalkStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTimedWalkStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
