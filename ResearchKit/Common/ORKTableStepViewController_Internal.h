@@ -42,6 +42,4 @@
 @property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipView;
 @property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
 
-- (void)registerCellsForTableView:(UITableView *)tableView;
-
 @end

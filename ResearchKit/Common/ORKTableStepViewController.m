@@ -40,9 +40,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKSkin.h"
 
-@implementation ORKTableStepViewController {
-    BOOL _hasRegisteredCells;
-}
+@implementation ORKTableStepViewController 
 
 - (ORKTableStep *)tableStep {
     if ([self.step isKindOfClass:[ORKTableStep class]]) {
@@ -108,6 +106,7 @@
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = 30.0;
+        _tableView.allowsSelection = NO;
         
         _headerView = _tableContainer.stepHeaderView;
         _headerView.captionLabel.text = [[self step] title];
@@ -120,7 +119,8 @@
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
         
-        [self registerCellsForTableView:_tableView];
+        // Register the cells for the table view
+        [self.tableStep registerCellsForTableView:_tableView];
     }
 }
 
@@ -133,17 +133,6 @@
 }
 
 #pragma mark UITableViewDataSource
-
-- (void)registerCellsForTableView:(UITableView *)tableView {
-    if (_hasRegisteredCells) {
-        return;
-    }
-    
-    if (self.isViewLoaded && self.tableStep != nil) {
-        [self.tableStep registerCellsForTableView:_tableView];
-        _hasRegisteredCells = YES;
-    }
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.tableStep.numberOfSections ?: 1;
