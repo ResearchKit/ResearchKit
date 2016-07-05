@@ -371,8 +371,8 @@
 		86C40DF01A8D7C5C00081FAC /* UIResponder+ResearchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BEA1A8D7C5C00081FAC /* UIResponder+ResearchKit.m */; };
 		86C40DF21A8D7C5C00081FAC /* ORKConsentReviewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BEC1A8D7C5C00081FAC /* ORKConsentReviewController.h */; };
 		86C40DF41A8D7C5C00081FAC /* ORKConsentReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BED1A8D7C5C00081FAC /* ORKConsentReviewController.m */; };
-		86C40DF61A8D7C5C00081FAC /* ORKConsentSignatureController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BEE1A8D7C5C00081FAC /* ORKConsentSignatureController.h */; };
-		86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BEF1A8D7C5C00081FAC /* ORKConsentSignatureController.m */; };
+		86C40DF61A8D7C5C00081FAC /* ORKSignatureStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BEE1A8D7C5C00081FAC /* ORKSignatureStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		86C40DF81A8D7C5C00081FAC /* ORKSignatureStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BEF1A8D7C5C00081FAC /* ORKSignatureStepViewController.m */; };
 		86C40DFA1A8D7C5C00081FAC /* MovieTintShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 86C40BF01A8D7C5C00081FAC /* MovieTintShader.fsh */; };
 		86C40DFC1A8D7C5C00081FAC /* MovieTintShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 86C40BF11A8D7C5C00081FAC /* MovieTintShader.vsh */; };
 		86C40DFE1A8D7C5C00081FAC /* ORKConsentDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BF21A8D7C5C00081FAC /* ORKConsentDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -521,6 +521,8 @@
 		FF36A49E1D1A15FC00DE8470 /* ORKTableStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF36A49B1D1A15FC00DE8470 /* ORKTableStepViewController.m */; };
 		FF5CA6121D2C2670001660A3 /* ORKTableStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FF5CA6101D2C2670001660A3 /* ORKTableStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF5CA6131D2C2670001660A3 /* ORKTableStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA6111D2C2670001660A3 /* ORKTableStep.m */; };
+		FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */; };
 		FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */; };
 /* End PBXBuildFile section */
 
@@ -893,8 +895,8 @@
 		86C40BEA1A8D7C5C00081FAC /* UIResponder+ResearchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIResponder+ResearchKit.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86C40BEC1A8D7C5C00081FAC /* ORKConsentReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentReviewController.h; sourceTree = "<group>"; };
 		86C40BED1A8D7C5C00081FAC /* ORKConsentReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentReviewController.m; sourceTree = "<group>"; };
-		86C40BEE1A8D7C5C00081FAC /* ORKConsentSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureController.h; sourceTree = "<group>"; };
-		86C40BEF1A8D7C5C00081FAC /* ORKConsentSignatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKConsentSignatureController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		86C40BEE1A8D7C5C00081FAC /* ORKSignatureStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSignatureStepViewController.h; sourceTree = "<group>"; };
+		86C40BEF1A8D7C5C00081FAC /* ORKSignatureStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKSignatureStepViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86C40BF01A8D7C5C00081FAC /* MovieTintShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MovieTintShader.fsh; sourceTree = "<group>"; };
 		86C40BF11A8D7C5C00081FAC /* MovieTintShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MovieTintShader.vsh; sourceTree = "<group>"; };
 		86C40BF21A8D7C5C00081FAC /* ORKConsentDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentDocument.h; sourceTree = "<group>"; };
@@ -1087,6 +1089,8 @@
 		FF36A49B1D1A15FC00DE8470 /* ORKTableStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTableStepViewController.m; sourceTree = "<group>"; };
 		FF5CA6101D2C2670001660A3 /* ORKTableStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTableStep.h; sourceTree = "<group>"; };
 		FF5CA6111D2C2670001660A3 /* ORKTableStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTableStep.m; sourceTree = "<group>"; };
+		FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSignatureStep.h; sourceTree = "<group>"; };
+		FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSignatureStep.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1880,10 +1884,12 @@
 		B12EFF491AB2155700A80147 /* Signature */ = {
 			isa = PBXGroup;
 			children = (
-				86C40BEE1A8D7C5C00081FAC /* ORKConsentSignatureController.h */,
-				86C40BEF1A8D7C5C00081FAC /* ORKConsentSignatureController.m */,
+				86C40BEE1A8D7C5C00081FAC /* ORKSignatureStepViewController.h */,
+				86C40BEF1A8D7C5C00081FAC /* ORKSignatureStepViewController.m */,
 				86C40C071A8D7C5C00081FAC /* ORKSignatureView.h */,
 				86C40C081A8D7C5C00081FAC /* ORKSignatureView.m */,
+				FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */,
+				FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */,
 			);
 			name = Signature;
 			sourceTree = "<group>";
@@ -2340,6 +2346,7 @@
 				BF91559F1BDE8D7E007FA459 /* ORKReviewStepViewController.h in Headers */,
 				BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */,
 				BF91559E1BDE8D7E007FA459 /* ORKReviewStepViewController_Internal.h in Headers */,
+				FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */,
 				25ECC0A31AFBDD2700F3D63B /* ORKReactionTimeStimulusView.h in Headers */,
 				106FF2AA1B690FD7004EACF2 /* ORKHolePegTestPlacePegView.h in Headers */,
 				86C40D701A8D7C5C00081FAC /* ORKRoundTappingButton.h in Headers */,
@@ -2471,7 +2478,7 @@
 				24C296771BD055B800B42EF1 /* ORKLoginStep_Internal.h in Headers */,
 				257FCE231B4D37A80001EF06 /* ORKTowerOfHanoiTower.h in Headers */,
 				86C40CC01A8D7C5C00081FAC /* ORKCompletionStep.h in Headers */,
-				86C40DF61A8D7C5C00081FAC /* ORKConsentSignatureController.h in Headers */,
+				86C40DF61A8D7C5C00081FAC /* ORKSignatureStepViewController.h in Headers */,
 				86C40CDC1A8D7C5C00081FAC /* ORKTintedImageView.h in Headers */,
 				86C40D281A8D7C5C00081FAC /* ORKFormTextView.h in Headers */,
 				86C40DEE1A8D7C5C00081FAC /* UIResponder+ResearchKit.h in Headers */,
@@ -2783,7 +2790,7 @@
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
-				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
+				86C40DF81A8D7C5C00081FAC /* ORKSignatureStepViewController.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
 				86C40D221A8D7C5C00081FAC /* ORKFormStep.m in Sources */,
@@ -2972,6 +2979,7 @@
 				86C40DD41A8D7C5C00081FAC /* ORKTextButton.m in Sources */,
 				86C40C981A8D7C5C00081FAC /* ORKDataLogger.m in Sources */,
 				86C40D0C1A8D7C5C00081FAC /* ORKCustomStepView.m in Sources */,
+				FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */,
 				86C40D581A8D7C5C00081FAC /* ORKOrderedTask.m in Sources */,

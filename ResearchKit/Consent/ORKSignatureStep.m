@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,30 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKSignatureStep.h"
+#import "ORKSignatureStepViewController.h"
 
-#import <UIKit/UIKit.h>
-#import "ORKSignatureView.h"
+@implementation ORKSignatureStep
 
++ (Class)stepViewControllerClass {
+    return [ORKSignatureStepViewController class];
+}
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKConsentSignatureController;
-
-@protocol ORKConsentSignatureControllerDelegate <NSObject>
-
-- (void)consentSignatureControllerDidSign:(ORKConsentSignatureController *)consentSignatureController;
-
-@end
-
-
-@interface ORKConsentSignatureController : UIViewController<ORKSignatureViewDelegate>
-
-@property (nonatomic, weak, nullable) id<ORKConsentSignatureControllerDelegate> delegate;
-
-@property (nonatomic, strong, readonly, nullable) ORKSignatureView *signatureView;
-
-@property (nonatomic, strong, nullable) NSString *localizedContinueButtonTitle;
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

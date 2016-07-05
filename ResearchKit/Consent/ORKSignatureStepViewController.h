@@ -1,7 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,48 +28,19 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
-
+#import <ResearchKit/ORKStepViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@end
-
-
-@interface ORKSignatureView : UIView
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
-
 /**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
+ The `ORKSignatureStepViewController` class is a step view controller subclass
+ used to manage a signature step (`ORKSignatureStep`).
  
- If the user is signing with an Apple Pencil, its force will be used.
+ You should not need to instantiate a signature step view controller directly. Instead, include
+ a signature step in a task, and present a task view controller for that stask.
  */
-@property (nonatomic) CGFloat lineWidthVariation;
-
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-
-- (UIImage *)signatureImage;
-- (NSArray <UIBezierPath *> *)signaturePath;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
+ORK_CLASS_AVAILABLE
+@interface ORKSignatureStepViewController : ORKStepViewController
 
 @end
 

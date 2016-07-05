@@ -28,14 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import "ORKConsentSignatureController.h"
+#import "ORKSignatureStepViewController.h"
+#import "ORKSignatureView.h"
 #import "ORKTextButton_Internal.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 
 
 @interface ORKConsentSignatureWrapperView : UIView
@@ -208,67 +210,85 @@
 @end
 
 
-@interface ORKConsentSignatureController ()
+@interface ORKSignatureStepViewController () <ORKSignatureViewDelegate>
 
+@property (nonatomic, strong, readonly, nullable) ORKSignatureView *signatureView;
 @property (nonatomic, strong) ORKConsentSigningView *signingView;
+@property (nonatomic, strong) ORKNavigationContainerView *continueSkipView;
+@property (nonatomic) BOOL continueButtonEnabled;
 
 @end
 
 
-@implementation ORKConsentSignatureController
+@implementation ORKSignatureStepViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.localizedContinueButtonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
+- (ORKStepResult *)result {
+    ORKStepResult *parentResult = [super result];
+    
+    if (self.signatureView.signatureExists) {
+        ORKSignatureResult *sigResult = [[ORKSignatureResult alloc] initWithSignatureImage:self.signatureView.signatureImage
+                                                                             signaturePath:self.signatureView.signaturePath];
+        parentResult.results = @[sigResult];
     }
-    return self;
+    
+    return parentResult;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    [super setContinueButtonItem:continueButtonItem];
+    self.continueSkipView.continueButtonItem = continueButtonItem;
+    [self updateButtonStates];
+}
+
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    [super setSkipButtonItem:skipButtonItem];
+    self.continueSkipView.skipButtonItem = skipButtonItem;
+    [self updateButtonStates];
+}
+
+- (void)updateButtonStates {
+    self.continueSkipView.continueEnabled = [self continueButtonEnabled];
+    self.continueSkipView.optional = self.step.optional;
+}
+
+- (void)stepDidChange {
+    [super stepDidChange];
+    
+    [_signingView removeFromSuperview];
+    _signingView.wrapperView.signatureView.delegate = nil;
     
     _signingView = [ORKConsentSigningView new];
     _signingView.wrapperView.signatureView.delegate = self;
-    _signingView.continueSkipContainer.continueEnabled = NO;
     _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _signingView.frame = self.view.bounds;
     
+    self.continueButtonEnabled = NO;
+    _continueSkipView = _signingView.continueSkipContainer;
+    _continueSkipView.skipButtonItem = self.skipButtonItem;
+    _continueSkipView.continueButtonItem = self.continueButtonItem;
+    [self updateButtonStates];
+    
     [_signingView.wrapperView.clearButton addTarget:self action:@selector(clearAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self updateContinueButtonItem];
-    
     [self.view addSubview:_signingView];
-}
-
-- (void)updateContinueButtonItem {
-    _signingView.continueSkipContainer.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:self.localizedContinueButtonTitle style:UIBarButtonItemStylePlain target:self action:@selector(done)];
-}
-
-- (void)setLocalizedContinueButtonTitle:(NSString *)localizedContinueButtonTitle {
-    _localizedContinueButtonTitle = localizedContinueButtonTitle;
-    [self updateContinueButtonItem];
 }
 
 - (ORKSignatureView *)signatureView {
     return _signingView.wrapperView.signatureView;
 }
 
-- (IBAction)done {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(consentSignatureControllerDidSign:)]) {
-        [self.delegate consentSignatureControllerDidSign:self];
-    }
-}
-
 - (void)clearAction:(id)sender {
     [_signingView.wrapperView.signatureView clear];
-    _signingView.continueSkipContainer.continueEnabled = NO;
-    [_signingView.wrapperView setClearButtonEnabled:NO];
+    self.continueButtonEnabled = NO;
+    [self updateButtonStates];
+    [self notifyDelegateOnResultChange];
 }
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
-    _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
+    self.continueButtonEnabled = signatureView.signatureExists;
     [_signingView.wrapperView setClearButtonEnabled:YES];
+    [self updateButtonStates];
+    [self notifyDelegateOnResultChange];
 }
 
 @end

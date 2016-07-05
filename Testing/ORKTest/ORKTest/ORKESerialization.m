@@ -544,6 +544,12 @@ ret =
             PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
             PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
             })),
+  ENTRY(ORKSignatureStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSignatureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1240,6 +1246,11 @@ ret =
          (@{
             PROPERTY(signature, ORKConsentSignature, NSObject, YES, nil, nil),
             PROPERTY(consented, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKSignatureResult,
+         nil,
+         (@{
+            PROPERTY(signaturePath, UIBezierPath, NSArray, YES, nil, nil),
             })),
    ENTRY(ORKCollectionResult,
          nil,

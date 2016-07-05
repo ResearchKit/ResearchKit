@@ -1,7 +1,6 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ Copyright (c) 2016, Sage Bionetworks
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,48 +28,25 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
-
+#import <ResearchKit/ORKStep.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@end
-
-
-@interface ORKSignatureView : UIView
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
-
 /**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
+ The `ORKSignatureStep` class is used to represent collecting a signature.
+ Typically, the consent signature is collected as a part of the consent review process.
  
- If the user is signing with an Apple Pencil, its force will be used.
+ However, since in some cases the signature is collected after displaying custom 
+ consent review steps, it is exposed to allow showing this as it's own step.
+ 
+ To use a consent signature step, configure it and include it in a task. Then
+ present the task in a task view controller.
+ 
+ The result of this step is an `ORKSignatureResult` which will include both the `UIImage` and 
+ the path used to draw the image.
  */
-@property (nonatomic) CGFloat lineWidthVariation;
-
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-
-- (UIImage *)signatureImage;
-- (NSArray <UIBezierPath *> *)signaturePath;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
+ORK_CLASS_AVAILABLE
+@interface ORKSignatureStep : ORKStep
 
 @end
 

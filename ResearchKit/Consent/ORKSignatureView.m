@@ -449,6 +449,10 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     [self.currentPath stroke];
 }
 
+- (NSArray <UIBezierPath *> *)signaturePath {
+    return [self.pathArray copy];
+}
+
 - (UIImage *)signatureImage {
     UIGraphicsBeginImageContext(self.bounds.size);
     

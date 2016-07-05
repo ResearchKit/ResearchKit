@@ -2109,3 +2109,54 @@ static NSString * const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
+@implementation ORKSignatureResult
+
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath {
+    self = [super init];
+    if (self) {
+        _signatureImage = [signatureImage copy];
+        _signaturePath = ORKArrayCopyObjects(signaturePath);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_IMAGE(aCoder, signatureImage);
+    ORK_ENCODE_OBJ(aCoder, signaturePath);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_IMAGE(aDecoder, signatureImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, signaturePath, UIBezierPath);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.signatureImage hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame && ORKEqualObjects(self.signatureImage, castObject.signatureImage));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKSignatureResult *result = [super copyWithZone:zone];
+    result->_signatureImage = [_signatureImage copy];
+    result->_signaturePath = ORKArrayCopyObjects(_signaturePath);
+    return result;
+}
+
+@end
