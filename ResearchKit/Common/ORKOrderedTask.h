@@ -363,8 +363,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options
-                                                   handOptions:(ORKPredefinedTaskHandOption)handOptions;
+                                                   handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                       options:(ORKPredefinedTaskOption)options;
 /**
  @Deprecated
  */

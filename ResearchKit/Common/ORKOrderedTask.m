@@ -2,6 +2,8 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2016, Sage Bionetworks - Added walk back and forth module
  
+ Copyright (c) 2016, Sage Bionetworks - Modified two finger tapping to track tapping speed for both hands
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -339,17 +341,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return [self twoFingerTappingIntervalTaskWithIdentifier:identifier
                                      intendedUseDescription:intendedUseDescription
                                                    duration:duration
-                                                    options:options
-                                                handOptions:ORKPredefinedTaskHandOptionUndefined];
+                                                handOptions:ORKPredefinedTaskHandOptionUndefined
+                                                    options:options];
 }
 
-/// Copyright (c) 2016, Sage Bionetworks - Modified to track tapping speed for both hands
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options
                                                    handOptions:(ORKPredefinedTaskHandOption)handOptions
-{
+                                                       options:(ORKPredefinedTaskOption)options {
+    
     NSString *durationString = [ORKDurationStringFormatter() stringFromTimeInterval:duration];
     
     NSMutableArray *steps = [NSMutableArray array];

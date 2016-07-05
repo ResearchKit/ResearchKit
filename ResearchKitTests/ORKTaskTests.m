@@ -1353,7 +1353,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
 
 - (void)testStepViewControllerWillDisappear {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
-    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 options:0 handOptions:0];
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 handOptions:0 options:0];
     ORKTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
     taskViewController.delegate = delegate;
     ORKInstructionStepViewController *stepViewController = [[ORKInstructionStepViewController alloc] initWithStep:task.steps.firstObject];
@@ -1370,7 +1370,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
 }
 
 - (void)testIndexOfStep {
-    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"tapping" intendedUseDescription:nil duration:30 options:0 handOptions:0];
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"tapping" intendedUseDescription:nil duration:30 handOptions:0 options:0];
     
     // get the first step
     ORKStep *step0 = [task.steps firstObject];
@@ -1479,8 +1479,8 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
                                                                intendedUseDescription:nil
                                                                              duration:10
-                                                                              options:0
-                                                                          handOptions:0];
+                                                                          handOptions:0
+                                                                              options:0];
     NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
                                               ORKInstruction1StepIdentifier,
                                               ORKTappingStepIdentifier,
@@ -1499,8 +1499,8 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
                                                                intendedUseDescription:nil
                                                                              duration:10
-                                                                              options:0
-                                                                          handOptions:ORKPredefinedTaskHandOptionLeft];
+                                                                          handOptions:ORKPredefinedTaskHandOptionLeft
+                                                                              options:0];
     // Check assumption around how many steps
     XCTAssertEqual(task.steps.count, 4);
     
@@ -1538,8 +1538,8 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
                                                                intendedUseDescription:nil
                                                                              duration:10
-                                                                              options:0
-                                                                          handOptions:ORKPredefinedTaskHandOptionRight];
+                                                                          handOptions:ORKPredefinedTaskHandOptionRight
+                                                                              options:0];
     // Check assumption around how many steps
     XCTAssertEqual(task.steps.count, 4);
     
@@ -1586,8 +1586,8 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
         ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
                                                                    intendedUseDescription:nil
                                                                                  duration:10
-                                                                                  options:0
-                                                                              handOptions:ORKPredefinedTaskHandOptionBoth];
+                                                                              handOptions:ORKPredefinedTaskHandOptionBoth
+                                                                                  options:0];
         ORKStep * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
             NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
