@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,16 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTextButton.h"
+#import "ORKDefaultFont.h"
+#import "ORKDefines_Private.h"
 
-#import "ORKOrderedTask.h"
 
+@interface ORKTextButton ()  <ORKDefaultFont>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKOrderedTask ()
-
-- (NSUInteger)indexOfStep:(ORKStep *)step;
+- (void)init_ORKTextButton;
 
 @end
-
-NS_ASSUME_NONNULL_END

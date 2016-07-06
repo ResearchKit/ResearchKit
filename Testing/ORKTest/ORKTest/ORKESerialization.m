@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -365,6 +366,16 @@ ret =
          },(@{
               PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
               })),
+   ENTRY(ORKAudioLevelNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKAudioLevelNavigationRule *rule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:GETPROP(dict, audioLevelStepIdentifier)                                                                                             destinationStepIdentifier:GETPROP(dict, destinationStepIdentifier)
+                                                                                                     recordingSettings:GETPROP(dict, recordingSettings)];
+             return rule;
+         },(@{
+              PROPERTY(audioLevelStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(recordingSettings, NSDictionary, NSObject, NO, nil, nil),
+              })),
    ENTRY(ORKOrderedTask,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
@@ -381,6 +392,8 @@ ret =
              return task;
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -394,6 +407,18 @@ ret =
             PROPERTY(text, NSString, NSObject, YES, nil, nil),
             PROPERTY(shouldTintImages, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(useSurveyMode, NSNumber, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKReviewStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:GETPROP(dict, identifier)
+                                                                                     steps:GETPROP(dict, steps)
+                                                                              resultSource:GETPROP(dict, resultSource)];
+             return reviewStep;
+         },
+         (@{
+            PROPERTY(steps, ORKStep, NSArray, NO, nil, nil),
+            PROPERTY(resultSource, ORKTaskResult, NSObject, NO, nil, nil),
+            PROPERTY(excludeInstructionSteps, NSNumber, NSObject, YES, nil, nil)
             })),
    ENTRY(ORKVisualConsentStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -472,6 +497,7 @@ ret =
             PROPERTY(stepDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldShowDefaultTimer, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldSpeakCountDown, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldSpeakRemainingTimeAtHalfway, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldStartTimerAutomatically, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldPlaySoundOnStart, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldPlaySoundOnFinish, NSNumber, NSObject, YES, nil, nil),
@@ -480,6 +506,7 @@ ret =
             PROPERTY(shouldUseNextAsSkipButton, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldContinueOnFinish, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(spokenInstruction, NSString, NSObject, YES, nil, nil),
+            PROPERTY(finishedSpokenInstruction, NSString, NSObject, YES, nil, nil),
             PROPERTY(recorderConfigurations, ORKRecorderConfiguration, NSArray, YES, nil, nil),
             })),
    ENTRY(ORKAudioStep,
@@ -553,7 +580,13 @@ ret =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
-
+   ENTRY(ORKTableStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTableStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(items, NSObject, NSArray, YES, nil, nil),
+            })),
    ENTRY(ORKTimedWalkStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTimedWalkStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -730,6 +763,18 @@ ret =
           PROPERTY(characteristicType, HKCharacteristicType, NSObject, NO,
                    ^id(id type) { return [(HKCharacteristicType *)type identifier]; },
                    ^id(id string) { return [HKCharacteristicType characteristicTypeForIdentifier:string]; }),
+          PROPERTY(defaultDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(minimumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(maximumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(calendar, NSCalendar, NSObject, YES,
+                   ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
+                   ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
           })),
   ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -820,7 +865,6 @@ ret =
           PROPERTY(defaultDate, NSDate, NSObject, NO,
                    ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
                    ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1234,6 +1278,7 @@ ret =
    ENTRY(ORKStepResult,
          nil,
          (@{
+            PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];
@@ -1390,7 +1435,7 @@ static id jsonObjectForObject(id object) {
             encodedDictionary[key] = jsonObjectForObject(inputDict[key]);
         }
         jsonOutput = encodedDictionary;
-    } else {
+    } else if (![c isSubclassOfClass:[NSPredicate class]]) {  // Ignore NSPredicate which cannot be easily serialized for now
         NSCAssert(isValid(object), @"Expected valid JSON object");
         
         // Leaf: native JSON object

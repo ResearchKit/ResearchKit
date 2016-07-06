@@ -112,7 +112,7 @@ ORK_CLASS_AVAILABLE
  Note that for instantaneous items, `startDate` and `endDate` can have the same value, and should
  generally correspond to the end of the instantaneous data collection period.
  */
-@property (nonatomic, copy, nullable) NSDate *startDate;
+@property (nonatomic, copy) NSDate *startDate;
 
 /**
  The time when the task, step, or data collection stopped.
@@ -123,7 +123,7 @@ ORK_CLASS_AVAILABLE
  Note that for instantaneous items, `startDate` and `endDate` can have the same value, and should
  generally correspond to the end of the instantaneous data collection period. 
  */
-@property (nonatomic, copy, nullable) NSDate *endDate;
+@property (nonatomic, copy) NSDate *endDate;
 
 /**
  Metadata that describes the conditions under which the result was acquired.
@@ -373,7 +373,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKToneAudiometrySample : NSObject <NSCopying, NSSecureCoding>
 
 /**
- 
  The frequency value in hertz for the tone associated with the sample.
  */
 @property (nonatomic, assign) double frequency;
@@ -1247,12 +1246,30 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray<ORKResult *> *)results;
 
+/**
+ This property indicates whether the Voice Over or Switch Control assistive technologies were active
+ while performing the corresponding step.
+ 
+ This information can be used, for example, to take into consideration the extra time needed by
+ handicapped participants to complete some tasks, such as the Tower of Hanoi activity.
+ 
+ The property can have the following values:
+ - `UIAccessibilityNotificationVoiceOverIdentifier` if Voice Over was active
+ - `UIAccessibilityNotificationSwitchControlIdentifier` if Switch Control was active
+ 
+ Note that the Voice Over and Switch Control assistive technologies are mutually exclusive.
+ 
+ If the property is `nil`, none of these assistive technologies was used.
+ */
+@property (nonatomic, copy, readonly, nullable) NSString *enabledAssistiveTechnology;
+
 @end
 
 
 /**
  The `ORKLocation` class represents the location addess obtained from a locaton question.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKLocation : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

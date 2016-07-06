@@ -2052,6 +2052,28 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return string;
 }
 
+
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage {
+    
+    NSAssert(!self.multipleLines, @"Confirmation Answer Format is not currently defined for ORKTextAnswerFormat with multiple lines.");
+    
+    ORKTextAnswerFormat *fmt = [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:originalItemIdentifier errorMessage:errorMessage];
+    
+    // Copy from ORKTextAnswerFormat being confirmed
+    fmt->_maximumLength = _maximumLength;
+    fmt->_keyboardType = _keyboardType;
+    fmt->_multipleLines = _multipleLines;
+    fmt->_secureTextEntry = _secureTextEntry;
+    fmt->_autocapitalizationType = _autocapitalizationType;
+    
+    // Always set to no autocorrection or spell checking
+    fmt->_autocorrectionType = UITextAutocorrectionTypeNo;
+    fmt->_spellCheckingType = UITextSpellCheckingTypeNo;
+    
+    return fmt;
+}
+
 #pragma mark NSSecureCoding
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -2121,6 +2143,10 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 
 @implementation ORKEmailAnswerFormat {
     ORKTextAnswerFormat *_impliedAnswerFormat;
+}
+
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeText;
 }
 
 - (Class)questionResultClass {

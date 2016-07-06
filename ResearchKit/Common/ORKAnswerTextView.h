@@ -49,7 +49,7 @@ ORK_CLASS_AVAILABLE
 
 @interface ORKAnswerTextView ()
 
-@property (nonatomic, strong, nullable) UILabel *placeHolder;
+@property (nonatomic, copy, nullable) NSString *placeholder;
 
 @end
 

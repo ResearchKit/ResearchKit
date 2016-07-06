@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks - Added walk back and forth module
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,6 +37,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKActiveStep.h"
 #import "ORKActiveStep_Internal.h"
+#import "ORKAudioLevelNavigationRule.h"
 #import "ORKAudioStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
 #import "ORKTappingIntervalStep.h"
@@ -85,6 +87,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         [self validateParameters];
     }
     return self;
+}
+
+- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps {
+    ORKOrderedTask *task = [self copyWithZone:nil];
+    task->_steps = ORKArrayCopyObjects(steps);
+    return task;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -282,6 +290,7 @@ NSString * const ORKInstruction0StepIdentifier = @"instruction";
 NSString * const ORKInstruction1StepIdentifier = @"instruction1";
 NSString * const ORKCountdownStepIdentifier = @"countdown";
 NSString * const ORKAudioStepIdentifier = @"audio";
+NSString * const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
 NSString * const ORKTappingStepIdentifier = @"tapping";
 NSString * const ORKConclusionStepIdentifier = @"conclusion";
 NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
@@ -398,10 +407,28 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                           recordingSettings:(NSDictionary *)recordingSettings
                                     options:(ORKPredefinedTaskOption)options {
     
-    NSDictionary *defaultRecordingSettings = @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                                AVNumberOfChannelsKey : @(2),
-                                                AVSampleRateKey: @(44100.0) };
-    recordingSettings = recordingSettings ? : defaultRecordingSettings;
+    return [self audioTaskWithIdentifier:identifier
+                  intendedUseDescription:intendedUseDescription
+                       speechInstruction:speechInstruction
+                  shortSpeechInstruction:shortSpeechInstruction
+                                duration:duration
+                       recordingSettings:recordingSettings
+                         checkAudioLevel:NO
+                                 options:options];
+}
+
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options {
+
+    recordingSettings = recordingSettings ? : @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
+                                                 AVNumberOfChannelsKey : @(2),
+                                                 AVSampleRateKey: @(44100.0) };
     
     if (options & ORKPredefinedTaskOptionExcludeAudio) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Audio collection cannot be excluded from audio task" userInfo:nil];
@@ -440,6 +467,19 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:ORKAudioRecorderIdentifier
                                                                                  recorderSettings:recordingSettings]];
         
+        // If checking the sound level then add text indicating that's what is happening
+        if (checkAudioLevel) {
+            step.text = ORKLocalizedString(@"AUDIO_LEVEL_CHECK_LABEL", nil);
+        }
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (checkAudioLevel) {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKAudioTooLoudStepIdentifier];
+        step.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_MESSAGE", nil);
+        step.detailText = ORKLocalizedString(@"AUDIO_TOO_LOUD_ACTION_NEXT", nil);
+        
         ORKStepArrayAddStep(steps, step);
     }
     
@@ -459,9 +499,19 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         ORKStepArrayAddStep(steps, step);
     }
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    
+    if (checkAudioLevel) {
+
+        // Add rules to check for audio and fail, looping back to the countdown step if required
+        ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:ORKCountdownStepIdentifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
+        ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKCountdownStepIdentifier];
+
+        [task setNavigationRule:audioRule forTriggerStepIdentifier:ORKCountdownStepIdentifier];
+        [task setNavigationRule:loopRule forTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier];
+    }
+
     return task;
 }
 
@@ -723,6 +773,118 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             activeStep.shouldPlaySoundOnStart = YES;
             activeStep.shouldVibrateOnFinish = YES;
             activeStep.shouldPlaySoundOnFinish = YES;
+            
+            ORKStepArrayAddStep(steps, activeStep);
+        }
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    return task;
+}
+
+
++ (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
+                                intendedUseDescription:(NSString *)intendedUseDescription
+                                          walkDuration:(NSTimeInterval)walkDuration
+                                          restDuration:(NSTimeInterval)restDuration
+                                               options:(ORKPredefinedTaskOption)options {
+    
+    NSDateComponentsFormatter *formatter = [self textTimeFormatter];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"WALK_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"WALK_INTRO_TEXT", nil);
+            step.shouldTintImages = YES;
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"WALK_TASK_TITLE", nil);
+            step.text = ORKLocalizedString(@"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION", nil);
+            step.detailText = ORKLocalizedString(@"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION", nil);
+            step.image = [UIImage imageNamed:@"pocket" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 5.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {
+        {
+            NSMutableArray *recorderConfigurations = [NSMutableArray array];
+            if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
+                [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
+            }
+            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+                [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
+                                                                                                          frequency:100]];
+            }
+            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+                [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
+                                                                                                         frequency:100]];
+            }
+            
+            ORKWalkingTaskStep *walkingStep = [[ORKWalkingTaskStep alloc] initWithIdentifier:ORKShortWalkOutboundStepIdentifier];
+            walkingStep.numberOfStepsPerLeg = 1000; // Set the number of steps very high so it is ignored
+            NSString *walkingDurationString = [formatter stringFromTimeInterval:walkDuration];
+            walkingStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT", nil), walkingDurationString];
+            walkingStep.spokenInstruction = walkingStep.title;
+            walkingStep.recorderConfigurations = recorderConfigurations;
+            walkingStep.shouldContinueOnFinish = YES;
+            walkingStep.optional = NO;
+            walkingStep.shouldStartTimerAutomatically = YES;
+            walkingStep.stepDuration = walkDuration; // Set the walking duration to the step duration
+            walkingStep.shouldVibrateOnStart = YES;
+            walkingStep.shouldPlaySoundOnStart = YES;
+            walkingStep.shouldSpeakRemainingTimeAtHalfway = (walkDuration > 20);
+            
+            ORKStepArrayAddStep(steps, walkingStep);
+        }
+        
+        if (restDuration > 0) {
+            NSMutableArray *recorderConfigurations = [NSMutableArray array];
+            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+                [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
+                                                                                                          frequency:100]];
+            }
+            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+                [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
+                                                                                                         frequency:100]];
+            }
+            
+            ORKFitnessStep *activeStep = [[ORKFitnessStep alloc] initWithIdentifier:ORKShortWalkRestStepIdentifier];
+            activeStep.recorderConfigurations = recorderConfigurations;
+            NSString *durationString = [formatter stringFromTimeInterval:restDuration];
+            activeStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT", nil), durationString];
+            activeStep.spokenInstruction = activeStep.title;
+            activeStep.shouldStartTimerAutomatically = YES;
+            activeStep.stepDuration = restDuration;
+            activeStep.shouldContinueOnFinish = YES;
+            activeStep.optional = NO;
+            activeStep.shouldVibrateOnStart = YES;
+            activeStep.shouldPlaySoundOnStart = YES;
+            activeStep.shouldVibrateOnFinish = YES;
+            activeStep.shouldPlaySoundOnFinish = YES;
+            activeStep.finishedSpokenInstruction = ORKLocalizedString(@"WALK_BACK_AND_FORTH_FINISHED_VOICE", nil);
+            activeStep.shouldSpeakRemainingTimeAtHalfway = (restDuration > 20);
             
             ORKStepArrayAddStep(steps, activeStep);
         }
