@@ -1250,7 +1250,6 @@ ret =
    ENTRY(ORKSignatureResult,
          nil,
          (@{
-            PROPERTY(signaturePath, UIBezierPath, NSArray, YES, nil, nil),
             })),
    ENTRY(ORKCollectionResult,
          nil,

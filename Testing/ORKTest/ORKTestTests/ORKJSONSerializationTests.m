@@ -385,7 +385,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegex",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
-                                              @"ORKSignatureResult.signatureImage"
+                                              @"ORKSignatureResult.signatureImage",
+                                              @"ORKSignatureResult.signaturePath",
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -603,6 +604,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKSignatureResult.signatureImage",
+                                              @"ORKSignatureResult.signaturePath",
                                               ];
     
     // Test Each class
