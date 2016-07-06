@@ -73,6 +73,7 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(TremorTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
@@ -355,7 +356,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
-                           @"Walk And Turn Task"
+                           @"Walk And Turn Task",
+                           @"Hand Tremor Task",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -601,9 +603,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                           options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:TableStepTaskIdentifier]) {
         return [self makeTableStepTask];
-    }
-    else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
+    } else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
         return [self makeSignatureStepTask];
+    } else if ([identifier isEqualToString:TremorTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:0
+                                                handOptions:ORKPredefinedTaskHandOptionBoth
+                                                    options:ORKPredefinedTaskOptionNone];
     }
 
     return nil;
@@ -2296,6 +2304,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)walkAndTurnTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
+}
+
+- (void)handTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
