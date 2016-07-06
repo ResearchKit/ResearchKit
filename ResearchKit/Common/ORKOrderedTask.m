@@ -339,7 +339,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return [self twoFingerTappingIntervalTaskWithIdentifier:identifier
                                      intendedUseDescription:intendedUseDescription
                                                    duration:duration
-                                                handOptions:ORKPredefinedTaskHandOptionUndefined
+                                                handOptions:0
                                                     options:options];
 }
 
@@ -374,13 +374,13 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     // Setup which hand to start with and how many hands to add based on the handOptions parameter
     // Hand order is randomly determined.
     NSUInteger handCount = ((handOptions & ORKPredefinedTaskHandOptionBoth) == ORKPredefinedTaskHandOptionBoth) ? 2 : 1;
-    BOOL undefinedHand = (handOptions == ORKPredefinedTaskHandOptionUndefined);
+    BOOL undefinedHand = (handOptions == 0);
     BOOL rightHand;
     switch (handOptions) {
         case ORKPredefinedTaskHandOptionLeft:
             rightHand = NO; break;
         case ORKPredefinedTaskHandOptionRight:
-        case ORKPredefinedTaskHandOptionUndefined:
+        case ORKPredefinedTaskHandOptionUnspecified:
             rightHand = YES; break;
         default:
             rightHand = (arc4random()%2 == 0); break;

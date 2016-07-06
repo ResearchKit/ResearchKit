@@ -165,7 +165,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  */
 typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
     /// Which hand to use is undefined
-    ORKPredefinedTaskHandOptionUndefined = 0,
+    ORKPredefinedTaskHandOptionUnspecified = 0,
     
     /// Task should test the left hand
     ORKPredefinedTaskHandOptionLeft = 1 << 1,
