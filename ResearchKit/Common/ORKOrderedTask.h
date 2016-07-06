@@ -351,12 +351,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
- collected. If the value of this parameter is `nil`, the default
- localized text will be displayed.
+                                collected. If the value of this parameter is `nil`, the default
+                                localized text will be displayed.
  @param duration                The length of the count down timer that runs while touch data is
- collected.
- @param options                 Options that affect the features of the predefined task.
+                                collected.
  @param handOptions             Options for determining which hand(s) to test.
+ @param options                 Options that affect the features of the predefined task.
  
  @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
  */

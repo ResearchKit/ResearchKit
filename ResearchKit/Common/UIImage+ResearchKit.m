@@ -32,8 +32,8 @@
 
 @implementation UIImage (ResearchKit)
 
-- (UIImage *)ork_flippedImage:(UIImageOrientation)orientation
-{
+- (UIImage *)ork_flippedImage:(UIImageOrientation)orientation {
+    
     if (self.images.count > 0) {
         NSMutableArray <UIImage *> *images = [self.images mutableCopy];
         [images enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger idx, BOOL * _Nonnull stop __unused) {
@@ -46,76 +46,58 @@
         // to work with images that are vector PDF rather than PNG, so...
         CGRect bounds = CGRectMake(0., 0., self.size.width, self.size.height);
         CGAffineTransform transform = CGAffineTransformIdentity;
-        switch(orientation)
-        {
-            case UIImageOrientationUp:
-            {
+        switch(orientation) {
+            case UIImageOrientationUp: {
                 transform = CGAffineTransformIdentity;
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationUpMirrored:
-            {
+            case UIImageOrientationUpMirrored: {
                 transform = CGAffineTransformMakeTranslation(self.size.width, 0.);
                 transform = CGAffineTransformScale(transform, -1.0f, 1.0f);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationDown:
-            {
+            case UIImageOrientationDown: {
                 transform = CGAffineTransformMakeTranslation(self.size.width, self.size.height);
                 transform = CGAffineTransformRotate(transform, M_PI);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationDownMirrored:
-            {
+            case UIImageOrientationDownMirrored: {
                 transform = CGAffineTransformMakeTranslation (0., self.size.height);
                 transform = CGAffineTransformScale(transform, 1.0f, -1.0f);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationLeftMirrored:
-            {
+            case UIImageOrientationLeftMirrored: {
                 CGFloat boundHeight = bounds.size.height;
                 bounds.size.height = bounds.size.width;
                 bounds.size.width = boundHeight;
                 transform = CGAffineTransformMakeTranslation (self.size.height, self.size.width);
                 transform = CGAffineTransformScale(transform, -1.0f, 1.0f);
                 transform = CGAffineTransformRotate(transform, 3.0f * M_PI/ 2.0f);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationLeft:
-            {
+            case UIImageOrientationLeft: {
                 CGFloat boundHeight = bounds.size.height;
                 bounds.size.height = bounds.size.width;
                 bounds.size.width = boundHeight;
                 transform = CGAffineTransformMakeTranslation (0.0f, self.size.width);
                 transform = CGAffineTransformRotate(transform, 3.0f * M_PI / 2.0f);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationRightMirrored:
-            {
+            case UIImageOrientationRightMirrored: {
                 CGFloat boundHeight = bounds.size.height;
                 bounds.size.height = bounds.size.width;
                 bounds.size.width = boundHeight;
                 transform = CGAffineTransformMakeScale(-1.0f, 1.0f);
                 transform = CGAffineTransformRotate(transform, M_PI / 2.0f);
-            }
-                break;
+            } break;
                 
-            case UIImageOrientationRight:
-            {
+            case UIImageOrientationRight: {
                 CGFloat boundHeight = bounds.size.height;
                 bounds.size.height = bounds.size.width;
                 bounds.size.width = boundHeight;
                 transform = CGAffineTransformMakeTranslation(self.size.height, 0.0f);
                 transform = CGAffineTransformRotate(transform, M_PI  / 2.0f);
-            }
-                break;
-                
+            } break;
         }
 
         UIGraphicsBeginImageContext(self.size);
