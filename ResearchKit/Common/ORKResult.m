@@ -2142,14 +2142,16 @@ static NSString * const RegionIdentifierKey = @"region.identifier";
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.signatureImage hash];
+    return [super hash] ^ [self.signatureImage hash] ^ [self.signaturePath hash];
 }
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && ORKEqualObjects(self.signatureImage, castObject.signatureImage));
+    return (isParentSame &&
+            ORKEqualObjects(self.signatureImage, castObject.signatureImage) &&
+            ORKEqualObjects(self.signaturePath, castObject.signaturePath));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

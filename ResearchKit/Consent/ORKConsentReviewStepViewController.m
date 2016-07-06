@@ -389,14 +389,16 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
 
 - (void)stepViewControllerResultDidChange:(ORKStepViewController *)stepViewController {
     if ([stepViewController.step.identifier isEqualToString:_NameFormIdentifier]) {
+        // If this is the form step then update the values from the form
         ORKStepResult *result = [stepViewController result];
         ORKTextQuestionResult *fnr = (ORKTextQuestionResult *)[result resultForIdentifier:_GivenNameIdentifier];
         _signatureFirst = (NSString *)fnr.textAnswer;
         ORKTextQuestionResult *lnr = (ORKTextQuestionResult *)[result resultForIdentifier:_FamilyNameIdentifier];
         _signatureLast = (NSString *)lnr.textAnswer;
         [self notifyDelegateOnResultChange];
-    }
-    else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
+        
+    } else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
+        // If this is the signature step then update the image from the signature
         ORKStepResult *result = [stepViewController result];
         ORKSignatureResult *signatureResult = [result.results firstObject];
         _signatureImage = signatureResult.signatureImage;
