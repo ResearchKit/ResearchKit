@@ -253,6 +253,7 @@
 "TAPPING_INSTRUCTION" = "Tap the buttons as consistently as you can using two fingers.";
 "TAPPING_INSTRUCTION_RIGHT" = "Tap the buttons using your RIGHT hand.";
 "TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
+"TAPPING_SKIP_TITLE" = "Skip this hand";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";

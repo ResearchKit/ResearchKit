@@ -75,6 +75,7 @@
     // Don't show next button
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
+    self.internalSkipButtonItem.title = ORKLocalizedString(@"TAPPING_SKIP_TITLE", nil);
 }
 
 - (void)viewDidLoad {
@@ -179,6 +180,7 @@
 
 - (void)start {
     [super start];
+    self.skipButtonItem = nil;
     [_tappingContentView setProgress:0.001 animated:NO];
 }
 
