@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,29 +28,25 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <UIKit/UIKit.h>
-#import "ORKSignatureView.h"
-
+#import <ResearchKit/ORKStep.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKConsentSignatureController;
-
-@protocol ORKConsentSignatureControllerDelegate <NSObject>
-
-- (void)consentSignatureControllerDidSign:(ORKConsentSignatureController *)consentSignatureController;
-
-@end
-
-
-@interface ORKConsentSignatureController : UIViewController<ORKSignatureViewDelegate>
-
-@property (nonatomic, weak, nullable) id<ORKConsentSignatureControllerDelegate> delegate;
-
-@property (nonatomic, strong, readonly, nullable) ORKSignatureView *signatureView;
-
-@property (nonatomic, strong, nullable) NSString *localizedContinueButtonTitle;
+/**
+ The `ORKSignatureStep` class is used to represent collecting a signature.
+ Typically, the consent signature is collected as a part of the consent review process.
+ 
+ However, since in some cases the signature is collected after displaying custom 
+ consent review steps, it is exposed to allow showing this as it's own step.
+ 
+ To use a consent signature step, configure it and include it in a task. Then
+ present the task in a task view controller.
+ 
+ The result of this step is an `ORKSignatureResult` which will include both the `UIImage` and 
+ the path used to draw the image.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSignatureStep : ORKStep
 
 @end
 
