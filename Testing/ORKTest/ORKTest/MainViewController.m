@@ -525,6 +525,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
                                                                  duration:20.0
+                                                              handOptions:ORKPredefinedTaskHandOptionBoth
                                                                   options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier

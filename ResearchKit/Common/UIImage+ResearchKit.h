@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,24 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
 
-#import "ORKCustomStepView_Internal.h"
-#import "ORKRoundTappingButton.h"
+@interface UIImage (ResearchKit)
 
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKTappingContentView : ORKActiveStepCustomView
-
-- (void)setTapCount:(NSUInteger)tapCount;
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-
-@property (nonatomic, assign) BOOL hasSkipButton;
-
-@property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton1;
-
-@property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton2;
+- (UIImage *)ork_flippedImage:(UIImageOrientation)orientation;
 
 @end
-
-NS_ASSUME_NONNULL_END
