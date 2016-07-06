@@ -198,10 +198,7 @@
         
         self.stepView = _wrapperView;
         
-        self.headerView.captionLabel.text = ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil);
-        self.headerView.instructionLabel.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
         self.continueSkipContainer.optional = NO;
-        
         [self.continueSkipContainer updateContinueAndSkipEnabled];
     }
     return self;
@@ -261,6 +258,8 @@
     _signingView.wrapperView.signatureView.delegate = self;
     _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _signingView.frame = self.view.bounds;
+    _signingView.headerView.captionLabel.text = self.step.title;
+    _signingView.headerView.instructionLabel.text = self.step.text;
     
     self.continueButtonEnabled = NO;
     _continueSkipView = _signingView.continueSkipContainer;

@@ -30,8 +30,19 @@
 
 #import "ORKSignatureStep.h"
 #import "ORKSignatureStepViewController.h"
+#import "ORKDefines_Private.h"
 
 @implementation ORKSignatureStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        // Set default values for the title and text
+        self.title = ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil);
+        self.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
+    }
+    return self;
+}
 
 + (Class)stepViewControllerClass {
     return [ORKSignatureStepViewController class];
