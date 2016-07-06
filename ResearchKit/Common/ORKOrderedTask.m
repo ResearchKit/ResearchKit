@@ -391,8 +391,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         NSString * (^appendIdentifier) (NSString *) = ^ (NSString * identifier) {
             if (undefinedHand) {
                 return identifier;
-            }
-            else {
+            } else {
                 NSString *handIdentifier = rightHand ? ORKActiveTaskRightHandIdentifier : ORKActiveTaskLeftHandIdentifier;
                 return [NSString stringWithFormat:@"%@.%@", identifier, handIdentifier];
             }
@@ -404,11 +403,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             // Set the title based on the hand
             if (undefinedHand) {
                 step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE", nil);
-            }
-            else if (rightHand) {
+            } else if (rightHand) {
                 step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE_RIGHT", nil);
-            }
-            else {
+            } else {
                 step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE_LEFT", nil);
             }
             
@@ -421,19 +418,15 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             if (hand == 1) {
                 if (undefinedHand) {
                     handText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_MOST_AFFECTED", nil);
-                }
-                else if (rightHand) {
+                } else if (rightHand) {
                     handText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_RIGHT_FIRST", nil);
-                }
-                else {
+                } else {
                     handText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_LEFT_FIRST", nil);
                 }
-            }
-            else {
+            } else {
                 if (rightHand) {
                     handText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_RIGHT_SECOND", nil);
-                }
-                else {
+                } else {
                     handText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_LEFT_SECOND", nil);
                 }
             }
@@ -443,8 +436,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             // Continue button will be different from first hand and second hand
             if (hand == 1) {
                 step.detailText = ORKLocalizedString(@"TAPPING_CALL_TO_ACTION", nil);
-            }
-            else {
+            } else {
                 step.detailText = ORKLocalizedString(@"TAPPING_CALL_TO_ACTION_NEXT", nil);
             }
             
@@ -455,8 +447,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
             if (rightHand || undefinedHand) {
                 step.image = imageAnimation;
-            }
-            else {
+            } else {
                 step.image = [imageAnimation ork_flippedImage:UIImageOrientationUpMirrored];
             }
             step.shouldTintImages = YES;
@@ -475,11 +466,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             ORKTappingIntervalStep *step = [[ORKTappingIntervalStep alloc] initWithIdentifier:appendIdentifier(ORKTappingStepIdentifier)];
             if (undefinedHand) {
                 step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION", nil);
-            }
-            else if (rightHand) {
+            } else if (rightHand) {
                 step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION_RIGHT", nil);
-            }
-            else {
+            } else {
                 step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION_LEFT", nil);
             }
             step.stepDuration = duration;
