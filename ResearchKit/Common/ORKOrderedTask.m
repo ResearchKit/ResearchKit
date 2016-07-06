@@ -1,8 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sage Bionetworks - Added walk back and forth module
- 
- Copyright (c) 2016, Sage Bionetworks - Modified two finger tapping to track tapping speed for both hands
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -388,8 +386,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             rightHand = (arc4random()%2 == 0); break;
     }
     
-    for (NSUInteger hand=1; hand <= handCount; hand++)
-    {
+    for (NSUInteger hand = 1; hand <= handCount; hand++) {
+        
         NSString * (^appendIdentifier) (NSString *) = ^ (NSString * identifier) {
             if (undefinedHand) {
                 return identifier;
@@ -417,7 +415,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             // Set the instructions for the tapping test screen that is displayed prior to each hand test
             NSString *restText = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_REST_PHONE", nil);
             NSString *tappingTextFormat = ORKLocalizedString(@"TAPPING_INTRO_TEXT_2_FORMAT", nil);
-            NSString *tappingText = [NSString stringWithFormat:tappingTextFormat, durationString];
+            NSString *tappingText = [NSString localizedStringWithFormat:tappingTextFormat, durationString];
             NSString *handText = nil;
             
             if (hand == 1) {
@@ -440,7 +438,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                 }
             }
             
-            step.text = [NSString stringWithFormat:@"%@ %@ %@", restText, handText, tappingText];
+            step.text = [NSString localizedStringWithFormat:@"%@ %@ %@", restText, handText, tappingText];
             
             // Continue button will be different from first hand and second hand
             if (hand == 1) {
