@@ -1578,7 +1578,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     NSUInteger totalCount = 100;
     NSUInteger threshold = 30;
     
-    for (int ii=0; ii<totalCount; ii++) {
+    for (int ii = 0; ii < totalCount; ii++) {
         ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
                                                                    intendedUseDescription:nil
                                                                                  duration:10
