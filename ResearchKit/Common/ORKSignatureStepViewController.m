@@ -212,12 +212,36 @@
 @property (nonatomic, strong, readonly, nullable) ORKSignatureView *signatureView;
 @property (nonatomic, strong) ORKConsentSigningView *signingView;
 @property (nonatomic, strong) ORKNavigationContainerView *continueSkipView;
-@property (nonatomic) BOOL continueButtonEnabled;
+@property (nonatomic, strong) NSArray <UIBezierPath *> *originalPath;
 
 @end
 
 
 @implementation ORKSignatureStepViewController
+
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
+    self = [super initWithStep:step result:result];
+    if (self && step) {
+        if ([result isKindOfClass:[ORKStepResult class]]) {
+            [[(ORKStepResult *)result results] enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[ORKSignatureResult class]]) {
+                    _originalPath = [(ORKSignatureResult*)obj signaturePath];
+                    *stop = YES;
+                }
+            }];
+            
+        }
+    }
+    return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // set the original path and update state
+    self.signatureView.signaturePath = self.originalPath;
+    [self updateButtonStates];
+}
 
 - (ORKStepResult *)result {
     ORKStepResult *parentResult = [super result];
@@ -244,8 +268,10 @@
 }
 
 - (void)updateButtonStates {
-    self.continueSkipView.continueEnabled = [self continueButtonEnabled];
+    BOOL hasSigned = self.signatureView.signatureExists;
+    self.continueSkipView.continueEnabled = hasSigned;
     self.continueSkipView.optional = self.step.optional;
+    [_signingView.wrapperView setClearButtonEnabled:hasSigned];
 }
 
 - (void)stepDidChange {
@@ -261,7 +287,6 @@
     _signingView.headerView.captionLabel.text = self.step.title;
     _signingView.headerView.instructionLabel.text = self.step.text;
     
-    self.continueButtonEnabled = NO;
     _continueSkipView = _signingView.continueSkipContainer;
     _continueSkipView.skipButtonItem = self.skipButtonItem;
     _continueSkipView.continueButtonItem = self.continueButtonItem;
@@ -278,14 +303,11 @@
 
 - (void)clearAction:(id)sender {
     [_signingView.wrapperView.signatureView clear];
-    self.continueButtonEnabled = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }
 
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView {
-    self.continueButtonEnabled = signatureView.signatureExists;
-    [_signingView.wrapperView setClearButtonEnabled:YES];
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }

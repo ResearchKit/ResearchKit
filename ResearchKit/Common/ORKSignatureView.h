@@ -64,9 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
 @property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
+@property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *signaturePath;
 
 - (UIImage *)signatureImage;
-- (NSArray <UIBezierPath *> *)signaturePath;
 
 @property (nonatomic, readonly) BOOL signatureExists;
 
