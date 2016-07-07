@@ -308,7 +308,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         // Task with an example of height entry.
         case HeightQuestionTask
-        case HeightQuestionStep
+        case HeightQuestionStep1
+        case HeightQuestionStep2
+        case HeightQuestionStep3
 
         // Task with an image choice question.
         case ImageChoiceQuestionTask
@@ -626,13 +628,25 @@ enum TaskListRow: Int, CustomStringConvertible {
 
     /// This task demonstrates a question asking for the user height.
     private var heightQuestionTask: ORKTask {
-        let answerFormat = ORKAnswerFormat.heightAnswerFormat()
+        let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let step1 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep1), title: "Height (local system)", answer: answerFormat1)
         
-        step.text = exampleDetailText
+        step1.text = exampleDetailText
+
+        let answerFormat2 = ORKAnswerFormat.heightAnswerFormatWithMeasurementSystem(ORKMeasurementSystem.Metric)
         
-        return ORKOrderedTask(identifier: String(Identifier.HeightQuestionTask), steps: [step])
+        let step2 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep2), title: "Height (metric system)", answer: answerFormat2)
+        
+        step2.text = exampleDetailText
+
+        let answerFormat3 = ORKAnswerFormat.heightAnswerFormatWithMeasurementSystem(ORKMeasurementSystem.USC)
+        
+        let step3 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep3), title: "Height (USC system)", answer: answerFormat3)
+        
+        step2.text = exampleDetailText
+
+        return ORKOrderedTask(identifier: String(Identifier.HeightQuestionTask), steps: [step1, step2, step3])
     }
 
     /**
