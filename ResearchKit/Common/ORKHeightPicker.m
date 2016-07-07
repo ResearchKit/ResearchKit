@@ -59,9 +59,9 @@
                                                  selector:@selector(currentLocaleDidChange:)
                                                      name:NSCurrentLocaleDidChangeNotification object:nil];
 
-        self.answer = answer;
         _answerFormat = answerFormat;
         _pickerDelegate = delegate;
+        self.answer = answer;
     }
     return self;
 }
