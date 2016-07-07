@@ -659,12 +659,12 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
  
  @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
  */
-+ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
-                          intendedUseDescription:(nullable NSString *)intendedUseDescription
-                              activeStepDuration:(NSTimeInterval)activeStepDuration
-                               activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
-                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
-                                         options:(ORKPredefinedTaskOption)options;
++ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       activeStepDuration:(NSTimeInterval)activeStepDuration
+                                        activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                              handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options;
 
 @end
 

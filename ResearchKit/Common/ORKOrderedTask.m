@@ -307,6 +307,7 @@ NSString * const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
 NSString * const ORKTappingStepIdentifier = @"tapping";
 NSString * const ORKActiveTaskLeftHandIdentifier = @"left";
 NSString * const ORKActiveTaskRightHandIdentifier = @"right";
+NSString * const ORKActiveTaskSkipHandStepIdentifier = @"skipHand";
 NSString * const ORKConclusionStepIdentifier = @"conclusion";
 NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
 NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
@@ -1495,10 +1496,36 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                        lastHand:(BOOL)lastHand
                                                        leftHand:(BOOL)leftHand
                                                  handIdentifier:(NSString *)handIdentifier
+                                                introDetailText:(NSString *)detailText
                                                         options:(ORKPredefinedTaskOption)options {
     NSMutableArray<ORKActiveStep *> *steps = [NSMutableArray array];
     NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
     BOOL rightHand = !leftHand && ![handIdentifier isEqualToString:ORKActiveTaskMostAffectedHandIdentifier];
+    
+    {
+        NSString *stepIdentifier = [self stepIdentifier:ORKInstruction1StepIdentifier withHandIdentifier:handIdentifier];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
+        step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
+        
+        if ([identifier isEqualToString:ORKActiveTaskMostAffectedHandIdentifier]) {
+            step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DEFAULT_TEXT", nil);
+            step.detailText = detailText;
+        } else {
+            if (leftHand) {
+                step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT", nil);
+            } else {
+                step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT", nil);
+            }
+        }
+        
+        step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        if (leftHand) {
+            step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
+        }
+        step.shouldTintImages = YES;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
 
     if (! (activeTaskOptions & ORKTremorActiveTaskOptionExcludeHandInLap)) {
         if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
@@ -1532,7 +1559,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             NSString *stepIdentifier = [self stepIdentifier:ORKTremorTestInLapStepIdentifier withHandIdentifier:handIdentifier];
             ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:stepIdentifier];
             step.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"ac1_acc" frequency:100.0], [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"ac1_motion" frequency:100.0]];
-            step.title = [NSString stringWithFormat:titleFormat, (long)activeStepDuration];
+            step.title = [NSString localizedStringWithFormat:titleFormat, (long)activeStepDuration];
             step.spokenInstruction = step.title;
             step.finishedSpokenInstruction = stepFinishedInstruction;
             step.stepDuration = activeStepDuration;
@@ -1750,12 +1777,12 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return steps;
 }
 
-+ (ORKOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
-                          intendedUseDescription:(NSString *)intendedUseDescription
-                              activeStepDuration:(NSTimeInterval)activeStepDuration
-                               activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
-                                     handOptions:(ORKPredefinedTaskHandOption)handOptions
-                                         options:(ORKPredefinedTaskOption)options {
++ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       activeStepDuration:(NSTimeInterval)activeStepDuration
+                                        activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                              handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
     // coin toss for which hand first (in case we're doing both)
@@ -1776,48 +1803,47 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
-            
-            if (handOptions == ORKPredefinedTaskHandOptionUnspecified) {
-                step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DEFAULT_TEXT", nil);
-            } else {
-                if (firstIsLeft) {
-                    step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT", nil);
-                } else {
-                    step.text = ORKLocalizedString(@"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT", nil);
-                }
-            }
-            
-            NSArray<NSString *>*detailStringForNumberOfTasks = @[
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_1_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_2_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_3_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_4_TASK", nil),
-                                                                 ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_5_TASK", nil)
-                                                                 ];
-
-            // start with the count for all the tasks, then subtract one for each excluded task flag
-            static const NSInteger allTasks = 5; // hold in lap, outstretched arm, elbow bent, repeatedly touching nose, queen wave
-            NSInteger actualTasksIndex = allTasks - 1;
-            NSInteger bits = sizeof(activeTaskOptions) * CHAR_BIT; // don't assume exclude flags are sequential--check all positions
-            for (NSInteger i = 0; i < bits ; ++i) {
-                if (activeTaskOptions & (1 << i)) {
-                    actualTasksIndex--;
-                }
-            }
-            
-            NSString *detailFormat = doingBoth ? ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_BOTH_HANDS_%@", nil) : ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@", nil);
-            step.detailText = [NSString stringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
-            step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            if (firstIsLeft) {
-                step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
-            }
-            step.shouldTintImages = YES;
-            
-            ORKStepArrayAddStep(steps, step);
+    }
+    
+    // Build the string for the detail texts
+    NSArray<NSString *>*detailStringForNumberOfTasks = @[
+                                                         ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_1_TASK", nil),
+                                                         ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_2_TASK", nil),
+                                                         ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_3_TASK", nil),
+                                                         ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_4_TASK", nil),
+                                                         ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_5_TASK", nil)
+                                                         ];
+    
+    // start with the count for all the tasks, then subtract one for each excluded task flag
+    static const NSInteger allTasks = 5; // hold in lap, outstretched arm, elbow bent, repeatedly touching nose, queen wave
+    NSInteger actualTasksIndex = allTasks - 1;
+    for (NSInteger i = 0; i < allTasks; ++i) {
+        if (activeTaskOptions & (1 << i)) {
+            actualTasksIndex--;
         }
+    }
+    
+    NSString *detailFormat = doingBoth ? ORKLocalizedString(@"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@", nil) : ORKLocalizedString(@"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@", nil);
+    NSString *detailText = [NSString localizedStringWithFormat:detailFormat, detailStringForNumberOfTasks[actualTasksIndex]];
+    
+    if (doingBoth) {
+        // If doing both hands then ask the user if they need to skip one of the hands
+        ORKTextChoice *skipRight = [ORKTextChoice choiceWithText:ORKLocalizedString(@"TREMOR_SKIP_RIGHT_HAND", nil)
+                                                          value:ORKActiveTaskRightHandIdentifier];
+        ORKTextChoice *skipLeft = [ORKTextChoice choiceWithText:ORKLocalizedString(@"TREMOR_SKIP_LEFT_HAND", nil)
+                                                          value:ORKActiveTaskLeftHandIdentifier];
+        ORKTextChoice *skipNeither = [ORKTextChoice choiceWithText:ORKLocalizedString(@"TREMOR_SKIP_NEITHER", nil)
+                                                             value:@""];
+
+        ORKAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                                         textChoices:@[skipRight, skipLeft, skipNeither]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKActiveTaskSkipHandStepIdentifier
+                                                                      title:ORKLocalizedString(@"TREMOR_TEST_TITLE", nil)
+                                                                       text:detailText
+                                                                     answer:answerFormat];
+        step.optional = NO;
+        
+        ORKStepArrayAddStep(steps, step);
     }
     
     // right or most-affected hand
@@ -1829,6 +1855,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                               lastHand:YES
                                                               leftHand:NO
                                                         handIdentifier:ORKActiveTaskMostAffectedHandIdentifier
+                                                       introDetailText:detailText
                                                                options:options];
     } else if (handOptions & ORKPredefinedTaskHandOptionRight) {
         rightSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
@@ -1837,6 +1864,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                               lastHand:firstIsLeft
                                                               leftHand:NO
                                                         handIdentifier:ORKActiveTaskRightHandIdentifier
+                                                       introDetailText:nil
                                                                options:options];
     }
     
@@ -1849,6 +1877,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                              lastHand:!firstIsLeft || !(handOptions & ORKPredefinedTaskHandOptionRight)
                                                              leftHand:YES
                                                        handIdentifier:ORKActiveTaskLeftHandIdentifier
+                                                      introDetailText:nil
                                                               options:options];
     }
     
@@ -1864,14 +1893,36 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [steps addObjectsFromArray:leftSteps];
     }
     
-    
     if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKCompletionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
     }
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    if (doingBoth) {
+        // Setup rules for skipping all the steps in either the left or right hand if called upon to do so.
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithStepIdentifier:ORKActiveTaskSkipHandStepIdentifier
+                                                                         resultIdentifier:ORKActiveTaskSkipHandStepIdentifier];
+        NSPredicate *predicateRight = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:ORKActiveTaskRightHandIdentifier];
+        NSPredicate *predicateLeft = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:ORKActiveTaskLeftHandIdentifier];
+        
+        // Setup rule for skipping first hand
+        NSString *secondHandIdentifier = firstIsLeft ? [[rightSteps firstObject] identifier] : [[leftSteps firstObject] identifier];
+        NSPredicate *firstPredicate = firstIsLeft ? predicateLeft : predicateRight;
+        ORKStepNavigationRule *skipFirst = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[firstPredicate]
+                                                                                 destinationStepIdentifiers:@[secondHandIdentifier]];
+        [task setNavigationRule:skipFirst forTriggerStepIdentifier:ORKActiveTaskSkipHandStepIdentifier];
+        
+        // Setup rule for skipping the second hand
+        NSString *triggerIdentifier = firstIsLeft ? [[leftSteps lastObject] identifier] : [[rightSteps lastObject] identifier];
+        NSString *conclusionIdentifier = [[steps lastObject] identifier];
+        NSPredicate *secondPredicate = firstIsLeft ? predicateRight : predicateLeft;
+        ORKStepNavigationRule *skipSecond = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[secondPredicate]
+                                                                                  destinationStepIdentifiers:@[conclusionIdentifier]];
+        [task setNavigationRule:skipSecond forTriggerStepIdentifier:triggerIdentifier];
+    }
     
     return task;
 }

@@ -371,7 +371,6 @@
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold the phone in your RIGHT hand as shown in the image below.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold the phone in your LEFT hand as shown in the image below.";
 "TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "You will be asked to perform %@ while sitting with the phone in your hand.";
-"TREMOR_TEST_INTRO_2_DETAIL_BOTH_HANDS_%@" = "You will be asked to perform %@ while sitting with the phone first in one hand, then again in the other. If you are unable to use one hand, just rest the phone on a flat surface for that part of the activity.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "a task";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "two tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
@@ -402,6 +401,10 @@
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Now switch the phone to your RIGHT hand and continue to the next task.";
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continue to the next task.";
 "TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activity completed.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "You will be asked to perform %@ while sitting with the phone first in one hand, then again with the phone in the other hand.";
+"TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
+"TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
+"TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

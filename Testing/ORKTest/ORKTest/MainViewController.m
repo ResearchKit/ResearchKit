@@ -74,6 +74,7 @@ DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TremorTaskIdentifier);
+DefineStringKey(TremorRightHandTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
@@ -358,6 +359,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Two Finger Tapping Task",
                            @"Walk And Turn Task",
                            @"Hand Tremor Task",
+                           @"Right Hand Tremor Task",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -609,8 +611,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorTaskIdentifier
                                      intendedUseDescription:nil
                                          activeStepDuration:10
-                                          activeTaskOptions:0
+                                          activeTaskOptions:
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight |
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent |
+                ORKTremorActiveTaskOptionExcludeHandToNose
                                                 handOptions:ORKPredefinedTaskHandOptionBoth
+                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TremorRightHandTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorRightHandTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:0
+                                                handOptions:ORKPredefinedTaskHandOptionRight
                                                     options:ORKPredefinedTaskOptionNone];
     }
 
@@ -2308,6 +2320,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)handTremorTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TremorTaskIdentifier];
+}
+
+- (void)rightHandTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
