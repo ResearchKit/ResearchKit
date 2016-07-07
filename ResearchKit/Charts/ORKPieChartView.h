@@ -111,6 +111,7 @@ ORK_AVAILABLE_DECL
  `ORKPieChartViewDataSource` protocol as a pie chart.
 */
 ORK_CLASS_AVAILABLE
+IB_DESIGNABLE
 @interface ORKPieChartView : UIView
 
 /**
@@ -125,14 +126,14 @@ ORK_CLASS_AVAILABLE
  you set a number higher than the radius of the pie chart, the pie chart draws a completely
  filled pie.
 */
-@property (nonatomic) CGFloat lineWidth;
+@property (nonatomic) IBInspectable CGFloat lineWidth;
 
 /**
  The text to display as a title in the pie chart view.
  
  If you do not set a value for this property, the pie chart does not display a title.
 */
-@property (nonatomic, copy, nullable) NSString *title;
+@property (nonatomic, copy, nullable) IBInspectable NSString *title;
 
 /**
  The text to display beneath the title in the pie chart view.
@@ -140,7 +141,7 @@ ORK_CLASS_AVAILABLE
  If you do not set a value for this property, the pie chart does not display any text beneath the
  title.
 */
-@property (nonatomic, copy, nullable) NSString *text;
+@property (nonatomic, copy, nullable) IBInspectable NSString *text;
 
 /**
  The color used for the text of the title label.
@@ -148,7 +149,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
  */
-@property (nonatomic, strong, null_resettable) UIColor *titleColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *titleColor;
 
 /**
  The color used for the text of the text label.
@@ -156,7 +157,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
  */
-@property (nonatomic, strong, null_resettable) UIColor *textColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *textColor;
 
 /**
  A Boolean value indicating whether the title and text labels should be drawn above the chart.
@@ -164,7 +165,7 @@ ORK_CLASS_AVAILABLE
  If this value of this property is `NO`, the title and text are drawn at the center of the chart.
  The default value for this property is `NO`.
  */
-@property (nonatomic) BOOL showsTitleAboveChart;
+@property (nonatomic) IBInspectable BOOL showsTitleAboveChart;
 
 /**
  A Boolean value indicating whether the pie chart should draw percentage labels next to each
@@ -172,7 +173,7 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is YES.
 */
-@property (nonatomic) BOOL showsPercentageLabels;
+@property (nonatomic) IBInspectable BOOL showsPercentageLabels;
 
 /**
  A Boolean value indicating whether the pie chart drawing animation draws clockwise or
@@ -180,7 +181,7 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is YES.
 */
-@property (nonatomic) BOOL drawsClockwise;
+@property (nonatomic) IBInspectable BOOL drawsClockwise;
 
 /**
  The string that will be displayed if the sum of the values of all segments is zero.
@@ -188,7 +189,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is an appropriate message string. Setting this property to
  `nil` resets it to its default value.
 */
-@property (nonatomic, copy, null_resettable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
  Animates the pie chart when it is first displayed on the screen.

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ovC-iU-005">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Continue Button Example View Controller-->
+        <scene sceneID="TXE-OT-Bmq">
+            <objects>
+                <viewController id="ovC-iU-005" customClass="ContinueButtonExampleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6hw-w9-0sX"/>
+                        <viewControllerLayoutGuide type="bottom" id="842-J8-k4w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R6M-Mz-IfF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show information in a view controller that has a continue button." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts3-EO-1WD">
+                                <rect key="frame" x="55" y="44" width="491" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPI-Pm-8MG" customClass="FooterView">
+                                <rect key="frame" x="20" y="500" width="560" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Lrr-rM-Ped"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ts3-EO-1WD" firstAttribute="centerX" secondItem="R6M-Mz-IfF" secondAttribute="centerX" id="0hG-2U-QcW"/>
+                            <constraint firstItem="oPI-Pm-8MG" firstAttribute="trailing" secondItem="R6M-Mz-IfF" secondAttribute="trailingMargin" id="LDC-C5-WkT"/>
+                            <constraint firstItem="Ts3-EO-1WD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R6M-Mz-IfF" secondAttribute="leadingMargin" constant="20" id="Z3h-R5-xc2"/>
+                            <constraint firstItem="oPI-Pm-8MG" firstAttribute="leading" secondItem="R6M-Mz-IfF" secondAttribute="leadingMargin" id="kjf-Bu-Gnt"/>
+                            <constraint firstItem="842-J8-k4w" firstAttribute="top" secondItem="oPI-Pm-8MG" secondAttribute="bottom" constant="20" id="kkl-IQ-Zwm"/>
+                            <constraint firstItem="Ts3-EO-1WD" firstAttribute="top" secondItem="6hw-w9-0sX" secondAttribute="bottom" constant="24" id="o6n-Bz-Uka"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Ts3-EO-1WD" secondAttribute="trailing" constant="20" id="zSE-0X-pNj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="footerView" destination="oPI-Pm-8MG" id="G0N-kk-hVY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KM4-3M-Zji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="347" y="367"/>
+        </scene>
+    </scenes>
+</document>
