@@ -2357,10 +2357,6 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 }
 
 - (ORKNumericQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(NSNumber *)answer {
-    if (!self.useMetricSystem && !ORKIsAnswerEmpty(answer)) {
-        // Convert to cm
-        answer = @(ORKInchesToCentimeters(answer.doubleValue));
-    }
     ORKNumericQuestionResult *questionResult = [super resultWithIdentifier:identifier answer:answer];
     // Use canonical unit because we expect results to be consistent regardless of the user locale
     questionResult.unit = [self canonicalUnitString];
@@ -2427,7 +2423,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
             answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
         } else {
             double feet, inches;
-            ORKInchesToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
+            ORKCentimetersToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
             NSString *feetString = [formatter stringFromNumber:@(feet)];
             NSString *inchesString = [formatter stringFromNumber:@(inches)];
             answerString = [NSString stringWithFormat:@"%@ %@, %@ %@",

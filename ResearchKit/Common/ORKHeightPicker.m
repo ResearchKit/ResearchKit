@@ -92,7 +92,7 @@
         [_pickerView selectRow:index inComponent:0 animated:NO];
     } else {
         double feet, inches;
-        ORKInchesToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
+        ORKCentimetersToFeetAndInches(((NSNumber *)answer).doubleValue, &feet, &inches);
         NSUInteger feetIndex = [[self feetValues] indexOfObject:@((NSInteger)feet)];
         NSUInteger inchesIndex = [[self inchesValues] indexOfObject:@((NSInteger)inches)];
         if (feetIndex == NSNotFound || inchesIndex == NSNotFound) {
@@ -111,9 +111,9 @@
 - (NSNumber *)defaultAnswerValue {
     NSNumber *defaultAnswerValue = nil;
     if (_answerFormat.useMetricSystem) {
-        defaultAnswerValue = @(162);
+        defaultAnswerValue = @(162); // Default metric height: 162 cm
     } else {
-        defaultAnswerValue = @(64); // 5ft 4in
+        defaultAnswerValue = @(162.56); // Default USC height: 5ft 4in (162.56 cm)
     }
     return defaultAnswerValue;
 }
@@ -128,7 +128,7 @@
         NSInteger inchesRow = [_pickerView selectedRowInComponent:1];
         NSNumber *feet = [self feetValues][feetRow];
         NSNumber *inches = [self inchesValues][inchesRow];
-        answer = @( ORKFeetAndInchesToInches(feet.doubleValue, inches.doubleValue) );
+        answer = @( ORKFeetAndInchesToCentimeters(feet.doubleValue, inches.doubleValue) );
     }
     return answer;
 }
