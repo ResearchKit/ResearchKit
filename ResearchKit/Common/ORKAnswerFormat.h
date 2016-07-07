@@ -1342,7 +1342,7 @@ ORK_CLASS_AVAILABLE
  The `ORKHeightAnswerFormat` class represents the answer format for questions that require users
  to enter a height.
  
- A date answer format produces an `ORKNumericQuestionResult` object. The result is always reported
+ A height answer format produces an `ORKNumericQuestionResult` object. The result is always reported
  in the metric system using the `cm` unit.
  */
 ORK_CLASS_AVAILABLE
