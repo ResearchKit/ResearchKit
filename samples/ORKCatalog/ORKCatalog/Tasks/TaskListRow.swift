@@ -1199,7 +1199,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Tremor Test pre-defined active task.
     private var tremorTestTask: ORKTask {
-        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask), intendedUseDescription: exampleDescription, activeStepDuration: 10, options: [])
+        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask),
+                                                           intendedUseDescription: exampleDescription,
+                                                           activeStepDuration: 10,
+                                                           activeTaskOptions: [],
+                                                           handOptions: [.Both],
+                                                           options: [])
     }
 
     // MARK: Consent Document Creation Convenience
