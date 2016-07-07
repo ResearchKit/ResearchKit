@@ -149,6 +149,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat);
 
 @end
 
+@protocol ORKConfirmAnswerFormatProvider <NSObject>
+
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage;
+
+@end
+
 
 @interface ORKScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
 
@@ -200,7 +207,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat);
 @end
 
 
-@interface ORKTextAnswerFormat ()
+@interface ORKTextAnswerFormat () <ORKConfirmAnswerFormatProvider>
 
 @end
 

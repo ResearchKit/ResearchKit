@@ -58,28 +58,28 @@
     return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
 }
 
-+ (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
-                                          delegate:(id<ORKPasscodeDelegate>)delegate {
++ (instancetype)passcodeAuthenticationViewControllerWithText:(NSString *)text
+                                                    delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
                                    passcodeFlow:ORKPasscodeFlowAuthenticate
                                    passcodeType:0];
 }
 
-+ (id)passcodeEditingViewControllerWithText:(NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                               passcodeType:(ORKPasscodeType)passcodeType {
++ (instancetype)passcodeEditingViewControllerWithText:(NSString *)text
+                                             delegate:(id<ORKPasscodeDelegate>)delegate
+                                         passcodeType:(ORKPasscodeType)passcodeType {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
                                    passcodeFlow:ORKPasscodeFlowEdit
                                    passcodeType:passcodeType];
 }
 
-+ (id)passcodeViewControllerWithText:(NSString *)text
-                            delegate:(id<ORKPasscodeDelegate>)delegate
-                        passcodeFlow:(ORKPasscodeFlow)passcodeFlow
-                        passcodeType:(ORKPasscodeType)passcodeType {
-
++ (instancetype)passcodeViewControllerWithText:(NSString *)text
+                                      delegate:(id<ORKPasscodeDelegate>)delegate
+                                  passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                                  passcodeType:(ORKPasscodeType)passcodeType {
+    
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;
     step.text = text;
@@ -100,6 +100,11 @@
 
 + (BOOL)removePasscodeFromKeychain {
     return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
+}
+
++ (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
+    ORKThrowInvalidArgumentExceptionIfNil(passcode)
+    [ORKPasscodeStepViewController savePasscode:passcode withTouchIdEnabled:touchIdEnabled];
 }
 
 @end

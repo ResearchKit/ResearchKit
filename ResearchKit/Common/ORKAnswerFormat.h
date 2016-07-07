@@ -1127,9 +1127,9 @@ ORK_CLASS_AVAILABLE
  @param style           The style of date answer, such as date, or date and time.
  @param defaultDate     The default date to display. When the value of this parameter is `nil`, the
                             picker displays the current time.
- @param minimumDate     The minimum date that is accessible in the picker. If the value of this 
+ @param minimumDate     The minimum date that is accessible in the picker. If the value of this
                             parameter is `nil`, there is no minimum.
- @param maximumDate     The maximum date that is accessible in the picker. If the value of this 
+ @param maximumDate     The maximum date that is accessible in the picker. If the value of this
                             parameter is `nil`, there is no maximum.
  @param calendar        The calendar to use. If the value of this parameter is `nil`, the picker
                             uses the default calendar for the current locale.

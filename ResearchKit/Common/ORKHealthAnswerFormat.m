@@ -116,11 +116,15 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.characteristicType, castObject.characteristicType));
+            ORKEqualObjects(self.characteristicType, castObject.characteristicType) &&
+            ORKEqualObjects(self.defaultDate, castObject.defaultDate) &&
+            ORKEqualObjects(self.minimumDate, castObject.minimumDate) &&
+            ORKEqualObjects(self.maximumDate, castObject.maximumDate) &&
+            ORKEqualObjects(self.calendar, castObject.calendar));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.characteristicType hash];
+    return [super hash] ^ [self.characteristicType hash] ^ [self.defaultDate hash] ^ [self.minimumDate hash] ^ [self.maximumDate hash] ^ [self.calendar hash];
 }
 
 // The bare answer format implied by the quantityType or characteristicType.
@@ -154,16 +158,16 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             _impliedAnswerFormat = format;
             
         } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
-            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSCalendar *calendar = _calendar ? : [NSCalendar currentCalendar];
             NSDate *now = [NSDate date];
-            NSDate *thirtyFiveYearsAgo = [calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:now options:0];
-            NSDate *minDate = [calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:now options:0];
-            NSDate *maxDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:now options:0];
+            NSDate *defaultDate = _defaultDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-35 toDate:now options:0];
+            NSDate *minimumDate = _minimumDate ? : [calendar dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:now options:0];
+            NSDate *maximumDate = _maximumDate ? : [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:now options:0];
             
-            ORKDateAnswerFormat *format = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:thirtyFiveYearsAgo
-                                                                           minimumDate:minDate
-                                                                           maximumDate:maxDate
-                                                                              calendar:nil];
+            ORKDateAnswerFormat *format = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
+                                                                                   minimumDate:minimumDate
+                                                                                   maximumDate:maximumDate
+                                                                                      calendar:calendar];
             _impliedAnswerFormat = format;
         }
     }
@@ -174,6 +178,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, characteristicType, HKCharacteristicType);
+        ORK_DECODE_OBJ_CLASS(aDecoder, defaultDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, minimumDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, maximumDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, calendar, NSCalendar);
     }
     return self;
 }
@@ -181,6 +189,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, characteristicType);
+    ORK_ENCODE_OBJ(aCoder, defaultDate);
+    ORK_ENCODE_OBJ(aCoder, minimumDate);
+    ORK_ENCODE_OBJ(aCoder, maximumDate);
+    ORK_ENCODE_OBJ(aCoder, calendar);
 }
 
 + (BOOL)supportsSecureCoding {
