@@ -1794,7 +1794,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TREMOR_TEST_TITLE", nil);
-            step.text = intendedUseDescription ? : ORKLocalizedString(@"TREMOR_TEST_INTENDED_USE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"TREMOR_TEST_INTRO_1_DETAIL", nil);
             step.image = [UIImage imageNamed:@"tremortest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             if (firstIsLeft) {
                 step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
