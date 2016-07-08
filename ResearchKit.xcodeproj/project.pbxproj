@@ -449,6 +449,8 @@
 		BC13CE3C1B0662990044153C /* ORKStepNavigationRule_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BC13CE3B1B0662990044153C /* ORKStepNavigationRule_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BC13CE401B0666FD0044153C /* ORKResultPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = BC13CE3F1B0666FD0044153C /* ORKResultPredicate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC13CE421B066A990044153C /* ORKStepNavigationRule_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BC13CE411B066A990044153C /* ORKStepNavigationRule_Internal.h */; };
+		BC1C032C1CA301E300869355 /* ORKHeightPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1C032A1CA301E300869355 /* ORKHeightPicker.h */; };
+		BC1C032D1CA301E300869355 /* ORKHeightPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1C032B1CA301E300869355 /* ORKHeightPicker.m */; };
 		BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4194271AE8453A00073D6B /* ORKObserver.h */; };
 		BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4194281AE8453A00073D6B /* ORKObserver.m */; };
 		BC4A213F1C85FC0000BFC271 /* ORKBarGraphChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4A213D1C85FC0000BFC271 /* ORKBarGraphChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1017,6 +1019,8 @@
 		BC13CE3B1B0662990044153C /* ORKStepNavigationRule_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKStepNavigationRule_Private.h; sourceTree = "<group>"; };
 		BC13CE3F1B0666FD0044153C /* ORKResultPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKResultPredicate.h; sourceTree = "<group>"; };
 		BC13CE411B066A990044153C /* ORKStepNavigationRule_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKStepNavigationRule_Internal.h; sourceTree = "<group>"; };
+		BC1C032A1CA301E300869355 /* ORKHeightPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHeightPicker.h; sourceTree = "<group>"; };
+		BC1C032B1CA301E300869355 /* ORKHeightPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHeightPicker.m; sourceTree = "<group>"; };
 		BC4194271AE8453A00073D6B /* ORKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKObserver.h; sourceTree = "<group>"; };
 		BC4194281AE8453A00073D6B /* ORKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKObserver.m; sourceTree = "<group>"; };
 		BC4A213D1C85FC0000BFC271 /* ORKBarGraphChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKBarGraphChartView.h; path = Charts/ORKBarGraphChartView.h; sourceTree = "<group>"; };
@@ -1780,6 +1784,8 @@
 		B12EFF411AB212E100A80147 /* Control Views */ = {
 			isa = PBXGroup;
 			children = (
+				BC1C032A1CA301E300869355 /* ORKHeightPicker.h */,
+				BC1C032B1CA301E300869355 /* ORKHeightPicker.m */,
 				86B781B71AA668ED00688151 /* ORKTimeIntervalPicker.h */,
 				86B781B81AA668ED00688151 /* ORKTimeIntervalPicker.m */,
 				86B781B91AA668ED00688151 /* ORKValuePicker.h */,
@@ -2443,6 +2449,7 @@
 				BCB6E6521B7D533B000D5B34 /* ORKPieChartLegendCell.h in Headers */,
 				FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */,
 				86C40C5A1A8D7C5C00081FAC /* ORKWalkingTaskStep.h in Headers */,
+				BC1C032C1CA301E300869355 /* ORKHeightPicker.h in Headers */,
 				86C40E361A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.h in Headers */,
 				86AD910D1AB7AE4100361FEB /* ORKNavigationContainerView_Internal.h in Headers */,
 				2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */,
@@ -2839,6 +2846,7 @@
 				BCD192E81B81243900FCC08A /* ORKPieChartLegendView.m in Sources */,
 				86C40D1E1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.m in Sources */,
 				250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m in Sources */,
+				BC1C032D1CA301E300869355 /* ORKHeightPicker.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
