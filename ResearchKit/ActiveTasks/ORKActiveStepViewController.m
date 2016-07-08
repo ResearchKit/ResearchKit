@@ -57,6 +57,7 @@
     
     SystemSoundID _alertSound;
     NSURL *_alertSoundURL;
+    BOOL _hasSpokenHalfwayCountdown;
 }
 
 @property (nonatomic, strong) NSArray *recorders;
@@ -362,6 +363,9 @@
     if (self.activeStep.shouldVibrateOnFinish) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
+    if (self.activeStep.hasVoice && self.activeStep.finishedSpokenInstruction) {
+        [[ORKVoiceEngine sharedVoiceEngine] speakText:self.activeStep.finishedSpokenInstruction];
+    }
     if (!self.activeStep.startsFinished) {
         if (self.activeStep.shouldContinueOnFinish) {
             [self goForward];
@@ -410,6 +414,7 @@
     ORKActiveStepCustomView *customView = _activeStepView.activeCustomView;
     [customView updateDisplay:self];
     
+    
     ORKVoiceEngine *voice = [ORKVoiceEngine sharedVoiceEngine];
     
     if (!finished && self.activeStep.shouldSpeakCountDown) {
@@ -422,6 +427,13 @@
         if (0 < countDownValue && countDownValue <= 3) {
             [voice speakInt:countDownValue];
         }
+    }
+    
+    BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
+    if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
+        _hasSpokenHalfwayCountdown = YES;
+        NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
+        [voice speakText:text];
     }
 }
 

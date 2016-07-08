@@ -272,7 +272,7 @@
     XCTAssertNil(error);
     XCTAssertEqualObjects(jsonOut[@"items"][0], jsonObject);
     
-#if ! TARGET_IPHONE_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
     {
         NSDictionary *attribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:&error];
         XCTAssertNil(error);

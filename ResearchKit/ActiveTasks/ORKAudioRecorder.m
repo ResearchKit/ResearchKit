@@ -41,6 +41,8 @@
 
 @property (nonatomic, copy) NSDictionary *recorderSettings;
 
+@property (nonatomic, copy) NSString *savedSessionCategory;
+
 @end
 
 
@@ -78,6 +80,16 @@
     return self;
 }
 
+- (void)restoreSavedAudioSessionCategory {
+    if (_savedSessionCategory) {
+        NSError *error;
+        if (![[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:&error]) {
+            ORK_Log_Error(@"Failed to restore the audio session category: %@", [error localizedDescription]);
+        }
+        _savedSessionCategory = nil;
+    }
+}
+
 - (void)start {
     if (self.outputDirectory == nil) {
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
@@ -94,6 +106,7 @@
         
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        _savedSessionCategory = audioSession.category;
         if (![audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
             [self finishRecordingWithError:error];
             return;
@@ -190,12 +203,13 @@
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
 #endif
+        [self restoreSavedAudioSessionCategory];
     }
 }
 
 - (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
-    
+
     [super finishRecordingWithError:error];
 }
 

@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -79,19 +80,19 @@ static NSInteger tableMapReverse(id value, NSArray *table) {
 }
 
 static NSDictionary *dictionaryFromCGPoint(CGPoint p) {
-    return @{ @"x" : @(p.x), @"y" : @(p.y) };
+    return @{ @"x": @(p.x), @"y": @(p.y) };
 }
 
 static NSDictionary *dictionaryFromCGSize(CGSize s) {
-    return @{ @"h" : @(s.height), @"w" : @(s.width) };
+    return @{ @"h": @(s.height), @"w": @(s.width) };
 }
 
 static NSDictionary *dictionaryFromCGRect(CGRect r) {
-    return @{ @"origin" : dictionaryFromCGPoint(r.origin), @"size" : dictionaryFromCGSize(r.size) };
+    return @{ @"origin": dictionaryFromCGPoint(r.origin), @"size": dictionaryFromCGSize(r.size) };
 }
 
 static NSDictionary *dictionaryFromUIEdgeInsets(UIEdgeInsets i) {
-    return @{ @"top" : @(i.top), @"left" : @(i.left), @"bottom" : @(i.bottom), @"right" : @(i.right) };
+    return @{ @"top": @(i.top), @"left": @(i.left), @"bottom": @(i.bottom), @"right": @(i.right) };
 }
 
 static CGSize sizeFromDictionary(NSDictionary *dict) {
@@ -111,7 +112,7 @@ static UIEdgeInsets edgeInsetsFromDictionary(NSDictionary *dict) {
 }
 
 static NSDictionary *dictionaryFromCoordinate (CLLocationCoordinate2D coordinate) {
-    return @{ @"latitude" : @(coordinate.latitude), @"longitude" : @(coordinate.longitude) };
+    return @{ @"latitude": @(coordinate.latitude), @"longitude": @(coordinate.longitude) };
 }
 
 static CLLocationCoordinate2D coordinateFromDictionary(NSDictionary *dict) {
@@ -354,6 +355,16 @@ encondingTable =
          },(@{
               PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
               })),
+   ENTRY(ORKAudioLevelNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKAudioLevelNavigationRule *rule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:GETPROP(dict, audioLevelStepIdentifier)                                                                                             destinationStepIdentifier:GETPROP(dict, destinationStepIdentifier)
+                                                                                                     recordingSettings:GETPROP(dict, recordingSettings)];
+             return rule;
+         },(@{
+              PROPERTY(audioLevelStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(recordingSettings, NSDictionary, NSObject, NO, nil, nil),
+              })),
    ENTRY(ORKOrderedTask,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
@@ -370,6 +381,7 @@ encondingTable =
              return task;
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
               PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
@@ -474,6 +486,7 @@ encondingTable =
             PROPERTY(stepDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldShowDefaultTimer, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldSpeakCountDown, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldSpeakRemainingTimeAtHalfway, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldStartTimerAutomatically, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldPlaySoundOnStart, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldPlaySoundOnFinish, NSNumber, NSObject, YES, nil, nil),
@@ -482,6 +495,7 @@ encondingTable =
             PROPERTY(shouldUseNextAsSkipButton, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(shouldContinueOnFinish, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(spokenInstruction, NSString, NSObject, YES, nil, nil),
+            PROPERTY(finishedSpokenInstruction, NSString, NSObject, YES, nil, nil),
             PROPERTY(recorderConfigurations, ORKRecorderConfiguration, NSArray, YES, nil, nil),
             })),
    ENTRY(ORKAudioStep,
@@ -534,6 +548,12 @@ encondingTable =
             PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
             PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
             })),
+  ENTRY(ORKSignatureStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSignatureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -555,7 +575,13 @@ encondingTable =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
-
+   ENTRY(ORKTableStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTableStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(items, NSObject, NSArray, YES, nil, nil),
+            })),
    ENTRY(ORKTimedWalkStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTimedWalkStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -732,6 +758,18 @@ encondingTable =
           PROPERTY(characteristicType, HKCharacteristicType, NSObject, NO,
                    ^id(id type) { return [(HKCharacteristicType *)type identifier]; },
                    ^id(id string) { return [HKCharacteristicType characteristicTypeForIdentifier:string]; }),
+          PROPERTY(defaultDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(minimumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(maximumDate, NSDate, NSObject, YES,
+                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+          PROPERTY(calendar, NSCalendar, NSObject, YES,
+                   ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
+                   ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
           })),
   ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -822,7 +860,6 @@ encondingTable =
           PROPERTY(defaultDate, NSDate, NSObject, NO,
                    ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
                    ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1186,7 +1223,7 @@ encondingTable =
                              return nil;
                          }
                          CLCircularRegion *region = value;
-                         NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
                          dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
                          dict[@"radius"] = @(region.radius);
                          dict[@"identifier"] = region.identifier;
@@ -1214,6 +1251,10 @@ encondingTable =
             PROPERTY(signature, ORKConsentSignature, NSObject, YES, nil, nil),
             PROPERTY(consented, NSNumber, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKSignatureResult,
+         nil,
+         (@{
+            })),
    ENTRY(ORKCollectionResult,
          nil,
          (@{
@@ -1234,6 +1275,7 @@ encondingTable =
    ENTRY(ORKStepResult,
          nil,
          (@{
+            PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];
@@ -1390,7 +1432,7 @@ static id jsonObjectForObject(id object) {
             encodedDictionary[key] = jsonObjectForObject(inputDict[key]);
         }
         jsonOutput = encodedDictionary;
-    } else {
+    } else if (![c isSubclassOfClass:[NSPredicate class]]) {  // Ignore NSPredicate which cannot be easily serialized for now
         NSCAssert(isValid(object), @"Expected valid JSON object");
         
         // Leaf: native JSON object
@@ -1400,21 +1442,21 @@ static id jsonObjectForObject(id object) {
     return jsonOutput;
 }
 
-+ (NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error {
++ (NSDictionary *)JSONObjectForObject:(id)object error:(NSError **)error {
     id json = jsonObjectForObject(object);
     return json;
 }
 
-+ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError * __autoreleasing *)error {
++ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError **)error {
     return objectForJsonObject(object, nil, nil);
 }
 
-+ (NSData *)JSONDataForObject:(id)object error:(NSError * __autoreleasing *)error {
++ (NSData *)JSONDataForObject:(id)object error:(NSError **)error {
     id json = jsonObjectForObject(object);
     return [NSJSONSerialization dataWithJSONObject:json options:(NSJSONWritingOptions)0 error:error];
 }
 
-+ (id)objectFromJSONData:(NSData *)data error:(NSError * __autoreleasing *)error {
++ (id)objectFromJSONData:(NSData *)data error:(NSError **)error {
     id json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:error];
     id ret = nil;
     if (json != nil) {
@@ -1461,7 +1503,7 @@ static id jsonObjectForObject(id object) {
     NSMutableDictionary *encodingTable = ORKESerializationEncodingTable();
     
     ORKESerializableTableEntry *entry = encodingTable[NSStringFromClass(serializableClass)];
-    if (! entry) {
+    if (!entry) {
         entry = [[ORKESerializableTableEntry alloc] initWithClass:serializableClass initBlock:nil properties:@{}];
         encodingTable[NSStringFromClass(serializableClass)] = entry;
     }

@@ -1231,11 +1231,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKNumericAnswerFormat *fmt = [[[self class] allocWithZone:zone] initWithStyle:_style
+    ORKNumericAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithStyle:_style
                                                                               unit:[_unit copy]
                                                                            minimum:[_minimum copy]
                                                                            maximum:[_maximum copy]];
-    return fmt;
+    return answerFormat;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -2034,17 +2034,17 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
-    fmt->_maximumLength = _maximumLength;
-    fmt->_validationRegex = [_validationRegex copy];
-    fmt->_invalidMessage = [_invalidMessage copy];
-    fmt->_autocapitalizationType = _autocapitalizationType;
-    fmt->_autocorrectionType = _autocorrectionType;
-    fmt->_spellCheckingType = _spellCheckingType;
-    fmt->_keyboardType = _keyboardType;
-    fmt->_multipleLines = _multipleLines;
-    fmt->_secureTextEntry = _secureTextEntry;
-    return fmt;
+    ORKTextAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] init];
+    answerFormat->_maximumLength = _maximumLength;
+    answerFormat->_validationRegex = [_validationRegex copy];
+    answerFormat->_invalidMessage = [_invalidMessage copy];
+    answerFormat->_autocapitalizationType = _autocapitalizationType;
+    answerFormat->_autocorrectionType = _autocorrectionType;
+    answerFormat->_spellCheckingType = _spellCheckingType;
+    answerFormat->_keyboardType = _keyboardType;
+    answerFormat->_multipleLines = _multipleLines;
+    answerFormat->_secureTextEntry = _secureTextEntry;
+    return answerFormat;
 }
 
 - (BOOL)isAnswerValid:(id)answer {
@@ -2093,6 +2093,28 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         [string appendString:[NSString stringWithFormat:ORKLocalizedString(_invalidMessage, nil), text]];
     }
     return string;
+}
+
+
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage {
+    
+    NSAssert(!self.multipleLines, @"Confirmation Answer Format is not currently defined for ORKTextAnswerFormat with multiple lines.");
+    
+    ORKTextAnswerFormat *answerFormat = [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:originalItemIdentifier errorMessage:errorMessage];
+    
+    // Copy from ORKTextAnswerFormat being confirmed
+    answerFormat->_maximumLength = _maximumLength;
+    answerFormat->_keyboardType = _keyboardType;
+    answerFormat->_multipleLines = _multipleLines;
+    answerFormat->_secureTextEntry = _secureTextEntry;
+    answerFormat->_autocapitalizationType = _autocapitalizationType;
+    
+    // Always set to no autocorrection or spell checking
+    answerFormat->_autocorrectionType = UITextAutocorrectionTypeNo;
+    answerFormat->_spellCheckingType = UITextSpellCheckingTypeNo;
+    
+    return answerFormat;
 }
 
 #pragma mark NSSecureCoding
@@ -2236,10 +2258,10 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKConfirmTextAnswerFormat *fmt = [super copyWithZone:zone];
-    fmt->_originalItemIdentifier = [_originalItemIdentifier copy];
-    fmt->_errorMessage = [_errorMessage copy];
-    return fmt;
+    ORKConfirmTextAnswerFormat *answerFormat = [super copyWithZone:zone];
+    answerFormat->_originalItemIdentifier = [_originalItemIdentifier copy];
+    answerFormat->_errorMessage = [_errorMessage copy];
+    return answerFormat;
 }
 
 + (BOOL)supportsSecureCoding {

@@ -43,6 +43,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.shouldShowDefaultTimer = NO;
+        self.optional = NO; // default to *not* optional
     }
     return self;
 }

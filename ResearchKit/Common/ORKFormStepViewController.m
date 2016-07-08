@@ -533,10 +533,10 @@
     _sections = [NSMutableArray new];
     ORKTableSection *section = nil;
     
-    NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
-                                     @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice),
-                                     @(ORKQuestionTypeLocation)];
+    NSArray *singleSectionTypes = @[@(ORKQuestionTypeBoolean),
+                                    @(ORKQuestionTypeSingleChoice),
+                                    @(ORKQuestionTypeMultipleChoice),
+                                    @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header

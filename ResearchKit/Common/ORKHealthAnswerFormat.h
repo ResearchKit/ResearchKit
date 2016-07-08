@@ -76,6 +76,42 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly) HKCharacteristicType *characteristicType;
 
+/**
+ The default date shown by the date picker.
+ 
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. The date is
+ displayed in the user's time zone. If you set this property to `nil`, the date picker will default
+ to the date representing 35 years before the current date.
+ */
+@property (nonatomic, strong, nullable) NSDate *defaultDate;
+
+/**
+ The minimum date that is allowed by the date picker.
+ 
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the date representing 150 years before the curent date
+ as its minimum date.
+ */
+@property (nonatomic, strong, nullable) NSDate *minimumDate;
+
+/**
+ The maximum date that is allowed by the date picker.
+ 
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the date representing 1 day after curent date as its
+ maximum date
+ */
+
+@property (nonatomic, strong, nullable) NSDate *maximumDate;
+
+/**
+ The calendar used by the date picker.
+ 
+ Only used for the `HKCharacteristicTypeIdentifierDateOfBirth` characteristic type. If you set this
+ property to `nil`, the date picker will use the default calendar for the current locale.
+ */
+@property (nonatomic, strong, nullable) NSCalendar *calendar;
+
 @end
 
 

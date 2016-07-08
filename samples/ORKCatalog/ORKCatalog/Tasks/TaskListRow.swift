@@ -95,6 +95,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ToneAudiometry
     case TowerOfHanoi
     case TwoFingerTappingInterval
+    case WalkBackAndForth
     
     class TaskListRowSection {
         var title: String
@@ -153,6 +154,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ToneAudiometry,
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
+                    .WalkBackAndForth,
                 ]),
         ]}
     
@@ -258,6 +260,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .TwoFingerTappingInterval:
             return NSLocalizedString("Two Finger Tapping Interval", comment: "")
+            
+        case .WalkBackAndForth:
+            return NSLocalizedString("Walk Back and Forth", comment: "")
         }
     }
     
@@ -402,6 +407,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ToneAudiometryTask
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
+        case WalkBackAndForthTask
     }
     
     // MARK: Properties
@@ -477,7 +483,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Audio:
             return audioTask
-
+            
         case .Fitness:
             return fitnessTask
             
@@ -507,6 +513,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .TwoFingerTappingInterval:
             return twoFingerTappingIntervalTask
+            
+        case .WalkBackAndForth:
+            return walkBackAndForthTask
+            
         }
     }
 
@@ -1115,7 +1125,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
-        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
+        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, checkAudioLevel: true, options: [])
     }
 
     /**
@@ -1171,7 +1181,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Two Finger Tapping pre-defined active task.
     private var twoFingerTappingIntervalTask: ORKTask {
-        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(String(Identifier.TwoFingerTappingIntervalTask), intendedUseDescription: exampleDescription, duration: 20, options: [])
+        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(String(Identifier.TwoFingerTappingIntervalTask), intendedUseDescription: exampleDescription, duration: 10, handOptions: [.Both], options: [])
+    }
+    
+    /// This task presents a walk back-and-forth task
+    private var walkBackAndForthTask: ORKTask {
+        return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
     }
 
     // MARK: Consent Document Creation Convenience

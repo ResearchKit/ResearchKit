@@ -472,7 +472,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (textField.text.length > 0 && ![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
@@ -490,7 +490,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
@@ -756,6 +756,7 @@ static const CGFloat HorizontalMargin = 15.0;
     _textView.contentInset = UIEdgeInsetsMake(-5.0, -4.0, -5.0, 0.0);
     _textView.textAlignment = NSTextAlignmentNatural;
     _textView.scrollEnabled = NO;
+    _textView.placeholder = self.formItem.placeholder;
     
     [self applyAnswerFormat];
     [self answerDidChange];
@@ -823,17 +824,6 @@ static const CGFloat HorizontalMargin = 15.0;
         answer = nil;
     }
     _textView.text = (NSString *)answer;
-    _textView.textColor = [UIColor blackColor];
-    
-    if (_textView.text.length == 0) {
-        if ([_textView isFirstResponder]) {
-            _textView.text = nil;
-            _textView.textColor = [UIColor blackColor];
-        } else {
-            _textView.text = self.formItem.placeholder;
-            _textView.textColor = [self placeholderColor];
-        }
-    }
 }
 
 - (BOOL)becomeFirstResponder {

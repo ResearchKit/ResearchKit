@@ -755,7 +755,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ self.fileResult.hash;
+    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.fileResult.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1759,9 +1759,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-
     ORK_ENCODE_OBJ(aCoder, results);
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1839,7 +1837,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     NSMutableString *description = [NSMutableString stringWithFormat:@"%@; results: (", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
     
     NSUInteger numberOfResults = self.results.count;
-    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
         if (idx == 0) {
             [description appendString:@"\n"];
         }
@@ -2066,8 +2064,109 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     self = [super initWithIdentifier:stepIdentifier];
     if (self) {
         [self setResultsCopyObjects:results];
+        [self updateEnabledAssistiveTechnology];
     }
     return self;
+}
+
+- (void)updateEnabledAssistiveTechnology {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
+    } else if (UIAccessibilityIsSwitchControlRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
+    }
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, enabledAssistiveTechnology);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, enabledAssistiveTechnology, NSString);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.enabledAssistiveTechnology, castObject.enabledAssistiveTechnology));
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _enabledAssistiveTechnology.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKStepResult *result = [super copyWithZone:zone];
+    result->_enabledAssistiveTechnology = [_enabledAssistiveTechnology copy];
+    return result;
+}
+
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; enabledAssistiveTechnology: %@", [super descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], _enabledAssistiveTechnology ? : @"None"];
+}
+
+@end
+
+@implementation ORKSignatureResult
+
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath {
+    self = [super init];
+    if (self) {
+        _signatureImage = [signatureImage copy];
+        _signaturePath = ORKArrayCopyObjects(signaturePath);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_IMAGE(aCoder, signatureImage);
+    ORK_ENCODE_OBJ(aCoder, signaturePath);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_IMAGE(aDecoder, signatureImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, signaturePath, UIBezierPath);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.signatureImage.hash ^ self.signaturePath.hash;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.signatureImage, castObject.signatureImage) &&
+            ORKEqualObjects(self.signaturePath, castObject.signaturePath));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKSignatureResult *result = [super copyWithZone:zone];
+    result->_signatureImage = [_signatureImage copy];
+    result->_signaturePath = ORKArrayCopyObjects(_signaturePath);
+    return result;
 }
 
 @end

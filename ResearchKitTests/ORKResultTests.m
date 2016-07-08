@@ -99,7 +99,7 @@
                 ORKQuestionResult *q2 = (ORKQuestionResult *)result2;
                 
                 XCTAssert(q1.questionType == q2.questionType, @"");
-                if (! [q1.answer isEqual:q2.answer]) {
+                if (![q1.answer isEqual:q2.answer]) {
                     XCTAssert([q1.answer isEqual:q2.answer], @"");
                 }
                 XCTAssert([q1.identifier isEqualToString:q2.identifier], @"%@ and %@", q1.identifier, q2.identifier);
