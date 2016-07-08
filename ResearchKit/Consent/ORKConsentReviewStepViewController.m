@@ -400,8 +400,12 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     } else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
         // If this is the signature step then update the image from the signature
         ORKStepResult *result = [stepViewController result];
-        ORKSignatureResult *signatureResult = (ORKSignatureResult *)[result.results firstObject];
-        _signatureImage = signatureResult.signatureImage;
+        [result.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[ORKSignatureResult class]]) {
+                _signatureImage = ((ORKSignatureResult *)obj).signatureImage;
+                *stop = YES;
+            }
+        }];
         [self notifyDelegateOnResultChange];
     }
 }
