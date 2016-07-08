@@ -68,8 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)notifyDelegateOnResultChange;
 
-- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result;
-
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 - (void)showValidityAlertWithMessage:(NSString *)text;

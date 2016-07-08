@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2015, James Cox. All rights reserved.
-Copyright (c) 2015, Ricardo Sánchez-Sáez.
+Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -44,7 +44,7 @@ func randomColorArray(number: Int) -> [UIColor] {
         return colors
     }
 
-let NumberOfPieChartSegments = 8
+let NumberOfPieChartSegments = 13
 
 class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
@@ -72,65 +72,81 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     }
 }
 
-class BaseGraphChartDataSource:  NSObject, ORKGraphChartViewDataSource {
-    var plotPoints: [[ORKRangedPoint]] = [[]]
+class BaseFloatRangeGraphChartDataSource:  NSObject, ORKValueRangeGraphChartViewDataSource {
+    var plotPoints: [[ORKValueRange]] = [[]]
     
     func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
 }
 
-class LineGraphChartDataSource: BaseGraphChartDataSource {
+class BaseFloatStackGraphChartDataSource:  NSObject, ORKValueStackGraphChartViewDataSource {
+    var plotPoints: [[ORKValueStack]] = [[]]
+    
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return plotPoints.count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueStack {
+        return plotPoints[plotIndex][pointIndex]
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+        return plotPoints[plotIndex].count
+    }
+}
+
+class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
     
     override init() {
         super.init()
         plotPoints =
             [
                 [
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
                 ],
                 [
-                    ORKRangedPoint(value: 2),
-                    ORKRangedPoint(value: 4),
-                    ORKRangedPoint(value: 8),
-                    ORKRangedPoint(value: 16),
-                    ORKRangedPoint(value: 32),
-                    ORKRangedPoint(value: 50),
-                    ORKRangedPoint(value: 64),
+                    ORKValueRange(value: 2),
+                    ORKValueRange(value: 4),
+                    ORKValueRange(value: 8),
+                    ORKValueRange(value: 16),
+                    ORKValueRange(value: 32),
+                    ORKValueRange(value: 50),
+                    ORKValueRange(value: 64),
                 ],
                 [
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
                 ],
         ]
     }
     
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 70
     }
     
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     
@@ -183,28 +199,35 @@ class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
     }
 }
 
-class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
+class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
     
     override init() {
         super.init()
         plotPoints =
             [
                 [
-                    ORKRangedPoint(),
-                    ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-                    ORKRangedPoint(minimumValue: 1, maximumValue: 3),
-                    ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-                    ORKRangedPoint(minimumValue: 3, maximumValue: 9),
-                    ORKRangedPoint(minimumValue: 4, maximumValue: 13),
+                    ORKValueRange(),
+                    ORKValueRange(minimumValue: 0, maximumValue: 2),
+                    ORKValueRange(minimumValue: 1, maximumValue: 3),
+                    ORKValueRange(minimumValue: 2, maximumValue: 6),
+                    ORKValueRange(minimumValue: 3, maximumValue: 9),
+                    ORKValueRange(minimumValue: 4, maximumValue: 13),
                 ],
                 [
-                    ORKRangedPoint(value: 1),
-                    ORKRangedPoint(minimumValue: 2, maximumValue: 4),
-                    ORKRangedPoint(minimumValue: 3, maximumValue: 8),
-                    ORKRangedPoint(minimumValue: 5, maximumValue: 11),
-                    ORKRangedPoint(minimumValue: 7, maximumValue: 13),
-                    ORKRangedPoint(minimumValue: 10, maximumValue: 13),
-                    ORKRangedPoint(minimumValue: 12, maximumValue: 15),
+                    ORKValueRange(value: 1),
+                    ORKValueRange(minimumValue: 2, maximumValue: 4),
+                    ORKValueRange(minimumValue: 3, maximumValue: 8),
+                    ORKValueRange(minimumValue: 5, maximumValue: 11),
+                    ORKValueRange(minimumValue: 7, maximumValue: 13),
+                    ORKValueRange(minimumValue: 10, maximumValue: 13),
+                    ORKValueRange(minimumValue: 12, maximumValue: 15),
+                ],
+                [
+                    ORKValueRange(),
+                    ORKValueRange(minimumValue: 5, maximumValue: 6),
+                    ORKValueRange(),
+                    ORKValueRange(minimumValue: 2, maximumValue: 15),
+                    ORKValueRange(minimumValue: 4, maximumValue: 11),
                 ],
         ]
     }
@@ -218,122 +241,203 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
     }
 
     func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
-        return 1
+        return 2
     }
 }
 
-class PerformanceLineGraphChartDataSource: BaseGraphChartDataSource {
+class ColoredDiscreteGraphChartDataSource: DiscreteGraphChartDataSource {
+    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.cyanColor()
+        case 1:
+            color = UIColor.magentaColor()
+        case 2:
+            color = UIColor.yellowColor()
+        default:
+            color = UIColor.redColor()
+        }
+        return color
+    }
+}
+
+class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
     
     override init() {
         super.init()
         plotPoints =
             [
                 [
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
+                    ORKValueStack(),
+                    ORKValueStack(stackedValues: [0, 2, 5]),
+                    ORKValueStack(stackedValues: [1, 3, 2]),
+                    ORKValueStack(stackedValues: [2, 6, 1]),
+                    ORKValueStack(stackedValues: [3, 9, 4]),
+                    ORKValueStack(stackedValues: [4, 13, 2]),
                 ],
                 [
-                    ORKRangedPoint(value: 2),
-                    ORKRangedPoint(value: 4),
-                    ORKRangedPoint(value: 8),
-                    ORKRangedPoint(value: 16),
-                    ORKRangedPoint(value: 32),
-                    ORKRangedPoint(value: 50),
-                    ORKRangedPoint(value: 64),
-                    ORKRangedPoint(value: 2),
-                    ORKRangedPoint(value: 4),
-                    ORKRangedPoint(value: 8),
-                    ORKRangedPoint(value: 16),
-                    ORKRangedPoint(value: 32),
-                    ORKRangedPoint(value: 50),
-                    ORKRangedPoint(value: 64),
-                    ORKRangedPoint(value: 2),
-                    ORKRangedPoint(value: 4),
-                    ORKRangedPoint(value: 8),
-                    ORKRangedPoint(value: 16),
-                    ORKRangedPoint(value: 32),
-                    ORKRangedPoint(value: 50),
-                    ORKRangedPoint(value: 64),
-                    ORKRangedPoint(value: 2),
-                    ORKRangedPoint(value: 4),
-                    ORKRangedPoint(value: 8),
-                    ORKRangedPoint(value: 16),
-                    ORKRangedPoint(value: 32),
-                    ORKRangedPoint(value: 50),
-                    ORKRangedPoint(value: 64),
+                    ORKValueStack(stackedValues: [1]),
+                    ORKValueStack(stackedValues: [2, 4]),
+                    ORKValueStack(stackedValues: [3, 8]),
+                    ORKValueStack(stackedValues: [5, 11]),
+                    ORKValueStack(stackedValues: [7, 13]),
+                    ORKValueStack(stackedValues: [10, 13]),
+                    ORKValueStack(stackedValues: [12, 15]),
                 ],
                 [
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 20),
-                    ORKRangedPoint(value: 25),
-                    ORKRangedPoint(),
-                    ORKRangedPoint(value: 30),
-                    ORKRangedPoint(value: 40),
-                    ORKRangedPoint(),
+                    ORKValueStack(),
+                    ORKValueStack(stackedValues: [5, 6]),
+                    ORKValueStack(stackedValues: [2, 15]),
+                    ORKValueStack(stackedValues: [4, 11]),
+                    ORKValueStack(),
+                    ORKValueStack(stackedValues: [6, 16]),
                 ],
         ]
     }
     
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 8
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
+        return "\(pointIndex + 1)"
+    }
+    
+    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 2
+    }
+}
+
+class ColoredBarGraphChartDataSource: BarGraphChartDataSource {
+    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.cyanColor()
+        case 1:
+            color = UIColor.magentaColor()
+        case 2:
+            color = UIColor.yellowColor()
+        default:
+            color = UIColor.redColor()
+        }
+        return color
+    }
+}
+
+class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
+    
+    override init() {
+        super.init()
+        plotPoints =
+            [
+                [
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                ],
+                [
+                    ORKValueRange(value: 2),
+                    ORKValueRange(value: 4),
+                    ORKValueRange(value: 8),
+                    ORKValueRange(value: 16),
+                    ORKValueRange(value: 32),
+                    ORKValueRange(value: 50),
+                    ORKValueRange(value: 64),
+                    ORKValueRange(value: 2),
+                    ORKValueRange(value: 4),
+                    ORKValueRange(value: 8),
+                    ORKValueRange(value: 16),
+                    ORKValueRange(value: 32),
+                    ORKValueRange(value: 50),
+                    ORKValueRange(value: 64),
+                    ORKValueRange(value: 2),
+                    ORKValueRange(value: 4),
+                    ORKValueRange(value: 8),
+                    ORKValueRange(value: 16),
+                    ORKValueRange(value: 32),
+                    ORKValueRange(value: 50),
+                    ORKValueRange(value: 64),
+                    ORKValueRange(value: 2),
+                    ORKValueRange(value: 4),
+                    ORKValueRange(value: 8),
+                    ORKValueRange(value: 16),
+                    ORKValueRange(value: 32),
+                    ORKValueRange(value: 50),
+                    ORKValueRange(value: 64),
+                ],
+                [
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(),
+                    ORKValueRange(value: 20),
+                    ORKValueRange(value: 25),
+                    ORKValueRange(),
+                    ORKValueRange(value: 30),
+                    ORKValueRange(value: 40),
+                    ORKValueRange(),
+                ],
+        ]
+    }
+    
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 70
     }
     
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     

@@ -285,6 +285,8 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
 
 void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews);
 
+extern const double ORKDoubleInvalidValue;
+
 extern const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);

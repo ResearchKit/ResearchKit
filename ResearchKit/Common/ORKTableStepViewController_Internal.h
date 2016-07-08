@@ -1,5 +1,6 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
+ Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,8 +29,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
 
-@interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
+#import "ORKTableStepViewController.h"
+
+#import "ORKTableContainerView.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKNavigationContainerView_Internal.h"
+
+@interface ORKTableStepViewController ()
+
+@property (nonatomic, strong, readonly) ORKTableContainerView *tableContainer;
+@property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipView;
+@property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
 
 @end

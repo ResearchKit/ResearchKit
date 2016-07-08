@@ -46,6 +46,7 @@
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
+#import <ResearchKit/ORKSignatureStepViewController.h>
 
 // Custom steps
 #import <ResearchKit/ORKCustomStepView.h>
@@ -68,6 +69,7 @@
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
+#import <ResearchKit/ORKAudioLevelNavigationRule.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>

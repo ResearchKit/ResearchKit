@@ -36,13 +36,17 @@ class ChartListViewController: UITableViewController {
     let pieChartDataSource = PieChartDataSource()
     let lineGraphChartDataSource = LineGraphDataSource()
     let discreteGraphChartDataSource = DiscreteGraphDataSource()
+    let barGraphChartDataSource = BarGraphDataSource()
+
     let pieChartIdentifier = "PieChartCell"
     let lineGraphChartIdentifier = "LineGraphChartCell"
     let discreteGraphChartIdentifier = "DiscreteGraphChartCell"
+    let barGraphChartIdentifier = "BarGraphChartCell"
     
     var pieChartTableViewCell: PieChartTableViewCell!
     var lineGraphChartTableViewCell: LineGraphChartTableViewCell!
     var discreteGraphChartTableViewCell: DiscreteGraphChartTableViewCell!
+    var barGraphChartTableViewCell: BarGraphChartTableViewCell!
     var chartTableViewCells: [UITableViewCell]!
     
     override func viewDidLoad() {
@@ -73,7 +77,16 @@ class ChartListViewController: UITableViewController {
         discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
 
-        chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
+        // ORKBarGraphChartView
+        barGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        let barGraphChartView = barGraphChartTableViewCell.graphView as! ORKBarGraphChartView
+        barGraphChartView.dataSource = barGraphChartDataSource
+        barGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
+        // Optional custom configuration
+        barGraphChartView.showsHorizontalReferenceLines = true
+        barGraphChartView.showsVerticalReferenceLines = true
+
+        chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, barGraphChartTableViewCell]
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
     }
@@ -92,5 +105,6 @@ class ChartListViewController: UITableViewController {
         pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
         lineGraphChartTableViewCell.graphView.animateWithDuration(0.5)
         discreteGraphChartTableViewCell.graphView.animateWithDuration(0.5)
-    }    
+        barGraphChartTableViewCell.graphView.animateWithDuration(0.5)
+    }
 }
