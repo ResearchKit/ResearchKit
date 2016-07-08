@@ -141,14 +141,12 @@
     NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
     NSString *selectedLabelText = nil;
     if (_answerFormat.useMetricSystem) {
-        selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber: [self selectedAnswerValue]], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
+        selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:_answer], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
     } else {
-        NSInteger feetRow = [_pickerView selectedRowInComponent:0];
-        NSInteger inchesRow = [_pickerView selectedRowInComponent:1];
-        NSNumber *feet = [self feetValues][feetRow];
-        NSNumber *inches = [self inchesValues][inchesRow];
-        NSString *feetString = [formatter stringFromNumber:feet];
-        NSString *inchesString = [formatter stringFromNumber:inches];
+        double feet, inches;
+        ORKCentimetersToFeetAndInches(((NSNumber *)_answer).doubleValue, &feet, &inches);
+        NSString *feetString = [formatter stringFromNumber:@(feet)];
+        NSString *inchesString = [formatter stringFromNumber:@(inches)];
 
         selectedLabelText = [NSString stringWithFormat:@"%@ %@, %@ %@",
          feetString, ORKLocalizedString(@"MEASURING_UNIT_FT", nil), inchesString, ORKLocalizedString(@"MEASURING_UNIT_IN", nil)];
