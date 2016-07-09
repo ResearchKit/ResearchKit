@@ -571,6 +571,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDate) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeHeight) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
                                @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
     });
