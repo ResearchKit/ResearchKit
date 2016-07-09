@@ -64,9 +64,11 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKContinuousScaleAnswerForm
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 
 @interface ORKAnswerFormat ()
+
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 - (ORKAnswerFormat *)impliedAnswerFormat;
@@ -76,6 +78,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (nullable HKObjectType *)healthKitObjectType;
 
 @property (nonatomic, strong, readonly, nullable) HKUnit *healthKitUnit;
+
 @property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
 
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text;
@@ -95,7 +98,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @interface ORKNumericAnswerFormat ()
 
-- (NSNumberFormatter *)makeNumberFormatter;
 - (nullable NSString *)sanitizedTextFieldText:(nullable NSString *)text decimalSeparator:(nullable NSString *)separator;
 
 @end
@@ -206,6 +208,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 
 @interface ORKTextAnswerFormat () <ORKConfirmAnswerFormatProvider>
+
+@end
+
+
+@interface ORKHeightAnswerFormat ()
+
+@property (nonatomic, readonly) BOOL useMetricSystem;
 
 @end
 

@@ -104,6 +104,7 @@ typedef NS_ENUM(NSInteger, ORKBodySagittal) {
     ORKBodySagittalRight
 } ORK_ENUM_AVAILABLE;
 
+
 /**
  Values that identify the presentation mode of paced serial addition tests that are auditory and/or visual (PSAT).
  */
@@ -137,4 +138,21 @@ typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
     
     /// Progressbar animation.
     ORKProgressIndicatorTypeProgressBar,
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ System of measurements.
+ 
+ Used mainly by ORKHeightAnswerFormat.
+ */
+typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
+    /// Measurement system in use by the current locale.
+    ORKMeasurementSystemLocal = 0,
+    
+    /// Metric measurement system.
+    ORKMeasurementSystemMetric,
+    
+    /// United States customary system.
+    ORKMeasurementSystemUSC,
 } ORK_ENUM_AVAILABLE;

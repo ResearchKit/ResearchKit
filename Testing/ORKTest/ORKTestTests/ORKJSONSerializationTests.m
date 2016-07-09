@@ -384,6 +384,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKScaleAnswerFormat.maximumImage",
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
+                                              @"ORKHeightAnswerFormat.useMetricSystem",
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",

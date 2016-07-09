@@ -776,10 +776,8 @@
             [section.textChoiceCellGroup setAnswer:answer];
             cell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
         } else {
-            
             ORKAnswerFormat *answerFormat = [cellItem.formItem impliedAnswerFormat];
             ORKQuestionType type = answerFormat.questionType;
-            
             
             Class class = nil;
             switch (type) {
@@ -796,7 +794,8 @@
                 case ORKQuestionTypeDateAndTime:
                 case ORKQuestionTypeDate:
                 case ORKQuestionTypeTimeOfDay:
-                case ORKQuestionTypeTimeInterval: {
+                case ORKQuestionTypeTimeInterval:
+                case ORKQuestionTypeHeight: {
                     class = [ORKFormItemPickerCell class];
                     break;
                 }
