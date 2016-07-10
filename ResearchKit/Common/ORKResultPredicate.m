@@ -233,7 +233,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ ]];
 }
 
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                     expectedAnswer:(NSInteger)expectedAnswer {
     return [self initWithNumericQuestionResultWithResultSelector:resultSelector
                                                       expectedAnswer:expectedAnswer];
@@ -312,13 +312,6 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                         usePatterns:YES];
 }
 
-- (instancetype)initWithBooleanQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                      expectedAnswer:(BOOL)expectedAnswer {
-    return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:@[ @"answer == %@" ]
-                 subPredicateFormatArgumentArray:@[ @(expectedAnswer) ]];
-}
-
 - (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                    expectedString:(NSString *)expectedString {
     ORKThrowInvalidArgumentExceptionIfNil(expectedString);
@@ -374,7 +367,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     return [self initWithNumericQuestionResultWithResultSelector:resultSelector
                                           minimumExpectedAnswerValue:ORKIgnoreDoubleValue
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}
+}*/
 
 - (instancetype)initWithTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                    minimumExpectedHour:(NSInteger)minimumExpectedHour
@@ -392,7 +385,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                     @(maximumExpectedMinute) ]];
 }
 
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
     return [self initWithNumericQuestionResultWithResultSelector:resultSelector
@@ -430,7 +423,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     return [self predicateMatchingResultSelector:resultSelector
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
-}
+}*/
 
 @end
 

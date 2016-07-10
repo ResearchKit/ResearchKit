@@ -223,8 +223,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                    expectedAnswer:(NSInteger)expectedAnswer;
+/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                    expectedAnswer:(NSInteger)expectedAnswer;*/
 
 /**
  Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
@@ -241,9 +241,9 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                         minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
@@ -255,8 +255,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
+/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
@@ -268,8 +268,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
@@ -281,9 +281,9 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                         expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)
-                                                    expectedAnswerValue;
+                                                    expectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
@@ -295,8 +295,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues;
+/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues;*/
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
@@ -309,8 +309,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                    matchingPattern:(NSString *)pattern;
+/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                    matchingPattern:(NSString *)pattern;*/
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
@@ -322,21 +322,9 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   matchingPatterns:(NSArray<NSString *> *)patterns;
+/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                   matchingPatterns:(NSArray<NSString *> *)patterns;*/
 
-/**
- Creates a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
- specified Boolean value.
- 
- @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
- @param expectedAnswer      The expected boolean value.
- 
- @return A result predicate.
- */
-- (instancetype)initWithBooleanQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                      expectedAnswer:(BOOL)expectedAnswer;
 
 /**
 
@@ -349,8 +337,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   expectedString:(NSString *)expectedString;
+/*- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                   expectedString:(NSString *)expectedString;*/
 
 /**
  Creates a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
@@ -362,8 +350,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                  matchingPattern:(NSString *)pattern;
+/*- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                  matchingPattern:(NSString *)pattern;*/
 
 /**
  Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
@@ -375,8 +363,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                      expectedAnswer:(NSInteger)expectedAnswer;
+/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                      expectedAnswer:(NSInteger)expectedAnswer;*/
 
 /**
  Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
@@ -393,9 +381,9 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
@@ -407,8 +395,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
+/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
@@ -420,8 +408,8 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
@@ -460,9 +448,9 @@ within the specified `NSTimeInterval` values.
  
  @return A result predicate.
  */
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
+                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
@@ -474,8 +462,8 @@ within the specified `NSTimeInterval` values.
  
  @return A result predicate.
  */
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue;
+/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
@@ -487,8 +475,8 @@ within the specified `NSTimeInterval` values.
  
  @return A result predicate.
  */
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
+/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;*/
 
 /**
  Creates a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
@@ -503,9 +491,9 @@ within the specified `NSTimeInterval` values.
  
  @return A result predicate.
  */
-- (instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+/*- (instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                         minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
-                                        maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
+                                        maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;*/
 
 @end
 

@@ -32,7 +32,7 @@ import Foundation
 
 /**
  The CanSupportMinMaxORKResultPredicate is a marker for ResearchKit's extensions to NSPredicate that
- this particular class can be compared with minimum and maximum values. At present the only classes
+ this particular class can be compared with minimum and maximum values. At present the classes
  suitable are NSDates and derivatives of doubles.
  
  ResearchKit authors creating ORKResults with class-specific returns can make their return value
@@ -47,6 +47,27 @@ extension NSDate: CanSupportMinMaxORKResultPredicate {
 }
 
 extension Double: CanSupportMinMaxORKResultPredicate {
+    
+}
+
+
+/**
+ The CanSupportExpectedORKResultPredicate is a marker for ResearchKit's extensions to NSPredicate that
+ this particular class can be compared with being given an expected value. At present the classes
+ suitable are Bools and Strings.
+ 
+ ResearchKit authors creating ORKResults with class-specific returns can make their return value
+ conform to this protocol and can thereby gain the predicate functionality 'for free'.
+ */
+public protocol CanSupportExpectedORKResultPredicate {
+    
+}
+
+extension Bool: CanSupportExpectedORKResultPredicate {
+    
+}
+
+extension String: CanSupportExpectedORKResultPredicate {
     
 }
 
@@ -104,39 +125,36 @@ func processORKResultSubpredicates(resultSelector: ORKResultSelector,
         }
         formatArgumentArray += subPredicateFormatArgumentArray
         
-        format += ").@count > 0"
-        format += ").@count > 0"
-        
-        format += ").@count > 0"
+        format += ").@count > 0).@count > 0).@count > 0"
         return (format, formatArgumentArray)
 }
 
 
 public extension NSPredicate {
-
+    
     /**
      Creates a predicate matching a result which is comparable using minimums and maximums. Suitable
      result types include Dates, numerical values, and time intervals.
      
-     @param resultSelector              The result selector object which specifies the question result
+     @param resultSelector         The result selector object which specifies the question result
      you are interested in.
-     @param minimumValue                The minimum value. Omit this parameter if you don't want to
+     @param minimum                The minimum value. Omit this parameter if you don't want to
      compare the answer against a minimum value.
-     @param maximumValue                The maximum value. Omit this parameter if you don't want to
+     @param maximum                The maximum value. Omit this parameter if you don't want to
      compare the answer against a maximum value.
      
      */
 
-    convenience init <T where T: CanSupportMinMaxORKResultPredicate>(resultSelector: ORKResultSelector, minimumValue: T? = nil, maximumValue: T? = nil) {
+    convenience init <T where T: CanSupportMinMaxORKResultPredicate>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) {
         
         var subPredicateFormatArray: [String] = []
         var subPredicateFormatArgumentArray: [String] = []
         
-        if let minimum = minimumValue {
+        if let minimum = minimum {
             subPredicateFormatArray.append("answer >= %@")
             subPredicateFormatArgumentArray.append("\(minimum)")
         }
-        if let maximum = maximumValue {
+        if let maximum = maximum {
             subPredicateFormatArray.append("answer <= %@")
             subPredicateFormatArgumentArray.append("\(maximum)")
         }
@@ -145,9 +163,138 @@ public extension NSPredicate {
         
         self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
     }
- 
-/*(instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-    minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
-    maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;*/
     
+    /**
+     Creates a predicate matching a result which has an expected value. Suitable
+     result types include Booleans and Strings.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param expected                    The result that you are expecting.
+     
+     */
+    
+    convenience init <T where T: CanSupportExpectedORKResultPredicate>(resultSelector: ORKResultSelector, expected: T) {
+        
+        var subPredicateFormatArray: [String] = ["answer == %@"]
+        var subPredicateFormatArgumentArray: [String] = ["\(expected)"]
+        
+        let predicateParameters = processORKResultSubpredicates(resultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: subPredicateFormatArgumentArray, areSubPredicateFormatsSubquery: false)
+        
+        self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
+    }
+
+    /**
+     This is the internal function of choiceResultSelector - the public functions are expressed below
+     
+     */
+    
+    private convenience init (choiceResultSelector: ORKResultSelector, expected: [String], usePatterns: Bool) {
+        
+        var subPredicateFormatArray: [String] = []
+        let repeatingSubPredicateFormat = (usePatterns == true) ?
+            "answer, $w, $w matches %@" :
+            "answer, $w, $w == %@"
+        
+        for expectedAnswer in expected {
+            subPredicateFormatArray.append(repeatingSubPredicateFormat)
+        }
+        
+        let predicateParameters = processORKResultSubpredicates(choiceResultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: expected, areSubPredicateFormatsSubquery: true)
+        
+        self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
+    }
+    
+    /**
+     Creates a predicate for a choice result to match against several results.
+     
+     @param choiceResultSelector    The result selector object which specifies the question result
+     you are interested in.
+     @param matches                 An array of string results to match exactly against.
+     
+     */
+    
+    convenience init (choiceResultSelector: ORKResultSelector, matches: [String])
+    {
+        self.init(choiceResultSelector: choiceResultSelector, expected: matches, usePatterns: false)
+    }
+    
+    /**
+     Creates a predicate for a choice result to match against a single result.
+     
+     @param choiceResultSelector    The result selector object which specifies the question result
+     you are interested in.
+     @param match                   A string result to match exactly against.
+     
+     */
+    
+    convenience init (choiceResultSelector: ORKResultSelector, match: String)
+    {
+        self.init(choiceResultSelector: choiceResultSelector, expected: [match], usePatterns: false)
+    }
+    
+    /**
+     Creates a predicate for a choice result to match against several patterns.
+     
+     @param choiceResultSelector    The result selector object which specifies the question result
+     you are interested in.
+     @param patterns                An array of string patterns to match against.
+     
+     */
+    
+    convenience init (choiceResultSelector: ORKResultSelector, patterns: [String])
+    {
+        self.init(choiceResultSelector: choiceResultSelector, expected: patterns, usePatterns: true)
+    }
+    
+    /**
+     Creates a predicate for a choice result to match against a single pattern.
+     
+     @param choiceResultSelector    The result selector object which specifies the question result
+     you are interested in.
+     @param pattern                A string pattern to match against
+     
+     */
+    
+    convenience init (choiceResultSelector: ORKResultSelector, pattern: String)
+    {
+        self.init(choiceResultSelector: choiceResultSelector, expected: [pattern], usePatterns: true)
+    }
+
+    
+    // The functions below here are for interoperability with Objective C only; ideally they should be unavailable
+    // for Swift projects.
+    
+    
+    /**
+     Creates a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
+     specified Boolean value. This function is deprecated in Swift, use resultSelector: expected: instead.
+     
+     @param resultSelector      The result selector object which specifies the question result you are
+     interested in.
+     @param expectedAnswer      The expected boolean value.
+     
+     @return A result predicate.
+     */
+    
+    @objc convenience init (booleanQuestionResultWithResultSelector: ORKResultSelector, expectedAnswer: Bool) {
+        self.init(resultSelector: booleanQuestionResultWithResultSelector, expected: expectedAnswer)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
+     the specified object. This function is deprecated in Swift, use choiceResultSelector: match: instead.
+     
+     @param resultSelector          The result selector object which specifies the question result you
+     are interested in.
+     @param expectedAnswerValue     The expected answer object.
+     
+     @return A result predicate.
+     */
+    
+    @objc convenience init (choiceQuestionResultWithResultSelector: ORKResultSelector, expectedAnswerValue: String) {
+        self.init(choiceResultSelector: choiceQuestionResultWithResultSelector, expected: [expectedAnswerValue], usePatterns: false)
+    }
+
+
 }
