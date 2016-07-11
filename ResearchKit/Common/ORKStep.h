@@ -30,12 +30,15 @@
 
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
+
+@class ORKStepViewController;
+@class ORKResult;
 
 @protocol ORKTask;
 
@@ -60,8 +63,8 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
-- (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns a new step initialized with the specified identifier.
@@ -178,6 +181,29 @@ ORK_CLASS_AVAILABLE
  properties, and must call super.
  */
 - (void)validateParameters;
+
+/**
+ Returns the class that the task view controller should instantiate to display
+ this step.
+ */
+- (Class)stepViewControllerClass;
+
+/**
+ Instantiates a step view controller for this class.
+ 
+ This method is called when a step is about to be presented. The default implementation returns
+ a view controller that is appropriate to this step by allocating an instance of `ORKStepViewController`
+ using the `-stepViewControllerClass` method and initializing that instance by calling `initWithIdentifier:result:`
+ on the provided `ORKStepViewController` class instance.
+ 
+ Override this method if you need to customize the behavior before presenting the step or if 
+ the view controller is presented using a nib or storyboard.
+ 
+ @param result    The result associated with this step
+ 
+ @return A newly initialized step view controller.
+ */
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result;
 
 @end
 

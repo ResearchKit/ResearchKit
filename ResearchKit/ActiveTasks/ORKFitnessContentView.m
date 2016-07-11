@@ -325,19 +325,18 @@
 }
 
 - (void)updateTimerLabel {
-    static NSDateComponentsFormatter *_formatter = nil;
+    static NSDateComponentsFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDateComponentsFormatter *fmt = [NSDateComponentsFormatter new];
-        fmt.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
-        fmt.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-        fmt.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-        _formatter = fmt;
+        NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
+        formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+        formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+        formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
     });
     
-    NSString *s = [_formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
-    _timerLabel.text = s;
-    _timerLabel.hidden = (s == nil);
+    NSString *labelString = [formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
+    _timerLabel.text = labelString;
+    _timerLabel.hidden = (labelString == nil);
 }
 
 @end

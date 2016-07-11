@@ -127,7 +127,7 @@
 }
 
 - (NSUInteger)hash {
-    return [_identifier hash] ^ [_title hash] ^ [_givenName hash] ^ [_familyName hash] ^ [_signatureDate hash];
+    return _identifier.hash ^ _title.hash ^ _givenName.hash ^ _familyName.hash ^ _signatureDate.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

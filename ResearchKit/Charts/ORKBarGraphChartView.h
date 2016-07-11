@@ -1,7 +1,7 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ Copyright (c) 2015, Ramsundar Shandilya.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -31,46 +31,25 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import "ORKGraphChartView.h"
 
-
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@end
-
-
-@interface ORKSignatureView : UIView
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
 
 /**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
+ The `ORKBarGraphChartView` class presents the data provided by an object conforming to the
+ `ORKValueStackGraphChartViewDataSource` protocol as a bar graph.
  
- If the user is signing with an Apple Pencil, its force will be used.
+ By default, the primary plot is colored by the `tintColor`, and any additional plots are colored
+ using the `referenceLineColor` property. You can customize the plot colors by implementing the
+ `-graphChartView:colorForPlotIndex:` method in the data source.
  */
-@property (nonatomic) CGFloat lineWidthVariation;
+ORK_CLASS_AVAILABLE
+@interface ORKBarGraphChartView : ORKGraphChartView
 
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-
-- (UIImage *)signatureImage;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
+/**
+ The data source responsible for providing the data required to populate the graph chart view.
+ 
+ See the `ORKValueStackGraphChartViewDataSource` protocol.
+ */
+@property (nonatomic, weak) id <ORKValueStackGraphChartViewDataSource> dataSource;
 
 @end
-
-NS_ASSUME_NONNULL_END

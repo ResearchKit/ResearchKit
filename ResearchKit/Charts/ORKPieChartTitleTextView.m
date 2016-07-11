@@ -33,9 +33,9 @@
 
 #import "ORKPieChartTitleTextView.h"
 #import "ORKPieChartView_Internal.h"
-#import "ORKDefines_Private.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
+
 
 @implementation ORKPieChartTitleTextView  {
     __weak ORKPieChartView *_parentPieChartView;

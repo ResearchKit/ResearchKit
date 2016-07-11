@@ -35,6 +35,10 @@
 
 @implementation ORKObserver
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }

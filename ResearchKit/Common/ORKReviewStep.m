@@ -86,7 +86,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_steps hash] ^ [_resultSource hash] ^ (_excludeInstructionSteps ? 0xf : 0x0);
+    return super.hash ^ _steps.hash ^ _resultSource.hash ^ (_excludeInstructionSteps ? 0xf : 0x0);
 }
 
 
