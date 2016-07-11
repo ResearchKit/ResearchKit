@@ -214,64 +214,6 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithNilQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector;
 
 /**
- Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
- specified integer value.
- 
- @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
- @param expectedAnswer      The expected integer value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                    expectedAnswer:(NSInteger)expectedAnswer;*/
-
-/**
- Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
- specified double values.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
-                                        if you don't want to compare the answer against a maximum
-                                        double value.
- @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
-                                        if you don't want to compare the answer against a maximum
-                                        double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
- or equal to the specified double value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
- equal to the specified double value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param maximumExpectedAnswerValue  The maximum expected double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
-
-/**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
  the specified object.
  
@@ -354,64 +296,6 @@ ORK_CLASS_AVAILABLE
                                                   matchingPattern:(NSString *)pattern;*/
 
 /**
- Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
- specified integer value.
- 
- @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
- @param expectedAnswer      The expected integer value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                      expectedAnswer:(NSInteger)expectedAnswer;*/
-
-/**
- Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
- specified double values.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
-                                        if you don't want to compare the answer against a maximum
-                                        double value.
- @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
-                                        if you don't want to compare the answer against a minimum
-                                        double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
- than or equal to the specified double value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
- or equal to the specified double value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param maximumExpectedAnswerValue  The maximum expected double value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;*/
-
-/**
  Creates a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
  the specified hour and minute values.
  
@@ -432,68 +316,6 @@ ORK_CLASS_AVAILABLE
                                                  minimumExpectedMinute:(NSInteger)minimumExpectedMinute
                                                    maximumExpectedHour:(NSInteger)maximumExpectedHour
                                                  maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
-
-/**
- Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
-within the specified `NSTimeInterval` values.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
-                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
-                                        answer against a maximum `NSTimeInterval` value.
- @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value. Pass
-                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
-                                        answer against a minimum `NSTimeInterval` value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
- specified integer value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
- specified integer value.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;*/
-
-/**
- Creates a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
- the specified dates.
- 
- @param resultSelector              The result selector object which specifies the question result
-                                        you are interested in.
- @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
-                                        compare the answer against a minimum date.
- @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to
-                                        compare the answer against a maximum date.
- 
- @return A result predicate.
- */
-/*- (instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
-                                        maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;*/
 
 @end
 

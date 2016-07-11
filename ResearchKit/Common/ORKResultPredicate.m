@@ -233,32 +233,6 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ ]];
 }
 
-/*- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                    expectedAnswer:(NSInteger)expectedAnswer {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                                      expectedAnswer:expectedAnswer];
-}
-
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}
-
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue];
-}
-
-- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}
-
 - (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                     expectedAnswers:(NSArray *)expectedAnswers
                                                         usePatterns:(BOOL)usePatterns {
@@ -328,47 +302,6 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ pattern ]];
 }
 
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                      expectedAnswer:(NSInteger)expectedAnswer {
-    return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:@[ @"answer == %@" ]
-                 subPredicateFormatArgumentArray:@[ @(expectedAnswer) ]];
-}
-
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    NSMutableArray *subPredicateFormatArray = [NSMutableArray new];
-    NSMutableArray *subPredicateFormatArgumentArray = [NSMutableArray new];
-    
-    if (!isnan(minimumExpectedAnswerValue)) {
-        [subPredicateFormatArray addObject:@"answer >= %@"];
-        [subPredicateFormatArgumentArray addObject:@(minimumExpectedAnswerValue)];
-    }
-    if (!isnan(maximumExpectedAnswerValue)) {
-        [subPredicateFormatArray addObject:@"answer <= %@"];
-        [subPredicateFormatArgumentArray addObject:@(maximumExpectedAnswerValue)];
-    }
-    
-    return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:subPredicateFormatArray
-                 subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
-}
-
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:ORKIgnoreDoubleValue];
-}
-
-- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:ORKIgnoreDoubleValue
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}*/
-
 - (instancetype)initWithTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                    minimumExpectedHour:(NSInteger)minimumExpectedHour
                                                  minimumExpectedMinute:(NSInteger)minimumExpectedMinute
@@ -384,46 +317,6 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                     @(maximumExpectedHour),
                                                     @(maximumExpectedMinute) ]];
 }
-
-/*- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}
-
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue];
-}
-
-- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
-    return [self initWithNumericQuestionResultWithResultSelector:resultSelector
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
-}
-
-- (instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
-                                        maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate {
-    NSMutableArray *subPredicateFormatArray = [NSMutableArray new];
-    NSMutableArray *subPredicateFormatArgumentArray = [NSMutableArray new];
-    
-    if (minimumExpectedAnswerDate) {
-        [subPredicateFormatArray addObject:@"answer >= %@"];
-        [subPredicateFormatArgumentArray addObject:minimumExpectedAnswerDate];
-    }
-    if (maximumExpectedAnswerDate) {
-        [subPredicateFormatArray addObject:@"answer <= %@"];
-        [subPredicateFormatArgumentArray addObject:maximumExpectedAnswerDate];
-    }
-    
-    return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:subPredicateFormatArray
-                 subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
-}*/
 
 @end
 

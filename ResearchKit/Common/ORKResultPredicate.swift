@@ -71,6 +71,13 @@ extension String: CanSupportExpectedORKResultPredicate {
     
 }
 
+extension Double: CanSupportExpectedORKResultPredicate {
+    
+}
+
+extension NSDate: CanSupportExpectedORKResultPredicate {
+    
+}
 
 /**
  This standalone function takes a set of subpredicates, and formats them into a single predicate and
@@ -296,5 +303,209 @@ public extension NSPredicate {
         self.init(choiceResultSelector: choiceQuestionResultWithResultSelector, expected: [expectedAnswerValue], usePatterns: false)
     }
 
+    /**
+     Creates a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
+     the specified dates. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
+     compare the answer against a minimum date.
+     @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to
+     compare the answer against a maximum date.
+     
+     @return A result predicate.
+     */
+    
+    @objc convenience init (dateQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerDate: NSDate, maximumExpectedAnswerDate: NSDate) {
+        self.init(resultSelector: dateQuestionResultWithResultSelector, minimum: minimumExpectedAnswerDate, maximum: maximumExpectedAnswerDate)
+    }
+
+    /**
+     Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+     specified integer value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (timeIntervalQuestionResultWithResultSelector: ORKResultSelector,
+                            maximumExpectedAnswerValue: NSTimeInterval) {
+        self.init(resultSelector: timeIntervalQuestionResultWithResultSelector, maximum: maximumExpectedAnswerValue)
+    }
+
+    /**
+     Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+     specified integer value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (timeIntervalQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: NSTimeInterval) {
+        self.init(resultSelector: timeIntervalQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
+     within the specified `NSTimeInterval` values. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
+     `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+     answer against a maximum `NSTimeInterval` value.
+     @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value. Pass
+     `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+     answer against a minimum `NSTimeInterval` value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (timeIntervalQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: NSTimeInterval,
+                            maximumExpectedAnswerValue: NSTimeInterval) {
+        self.init(resultSelector: timeIntervalQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue,
+                  maximum: maximumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
+     specified double values. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+     if you don't want to compare the answer against a maximum
+     double value.
+     @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+     if you don't want to compare the answer against a minimum
+     double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (numericQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: Double,
+                            maximumExpectedAnswerValue: Double) {
+        self.init(resultSelector: numericQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue,
+                  maximum: maximumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
+     than or equal to the specified double value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (numericQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: Double) {
+        self.init(resultSelector: numericQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
+     or equal to the specified double value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param maximumExpectedAnswerValue  The maximum expected double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (numericQuestionResultWithResultSelector: ORKResultSelector,
+                            maximumExpectedAnswerValue: Double) {
+        self.init(resultSelector: numericQuestionResultWithResultSelector, maximum: maximumExpectedAnswerValue)
+    }
+
+    /**
+     Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
+     specified integer value. This function is deprecated in Swift, use resultSelector: expected: instead.
+     
+     @param resultSelector      The result selector object which specifies the question result you are
+     interested in.
+     @param expectedAnswer      The expected integer value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (numericQuestionResultWithResultSelector: ORKResultSelector,
+                            expectedAnswer: Double) {
+        self.init(resultSelector: numericQuestionResultWithResultSelector, expected: expectedAnswer)
+    }
+
+    /**
+     Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
+     specified integer value. This function is deprecated in Swift, use resultSelector: expected: instead.
+     
+     @param resultSelector      The result selector object which specifies the question result you are
+     interested in.
+     @param expectedAnswer      The expected integer value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (scaleQuestionResultWithResultSelector: ORKResultSelector,
+                            expectedAnswer: Double) {
+        self.init(resultSelector: scaleQuestionResultWithResultSelector, expected: expectedAnswer)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
+     specified double values. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+     if you don't want to compare the answer against a maximum
+     double value.
+     @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+     if you don't want to compare the answer against a maximum
+     double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (scaleQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: Double,
+                            maximumExpectedAnswerValue: Double) {
+        self.init(resultSelector: scaleQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue,
+                  maximum: maximumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
+     or equal to the specified double value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param minimumExpectedAnswerValue  The minimum expected double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (scaleQuestionResultWithResultSelector: ORKResultSelector,
+                            minimumExpectedAnswerValue: Double) {
+        self.init(resultSelector: scaleQuestionResultWithResultSelector, minimum: minimumExpectedAnswerValue)
+    }
+    
+    /**
+     Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
+     equal to the specified double value. This function is deprecated in Swift, use resultSelector: minimum: maximum: instead.
+     
+     @param resultSelector              The result selector object which specifies the question result
+     you are interested in.
+     @param maximumExpectedAnswerValue  The maximum expected double value.
+     
+     @return A result predicate.
+     */
+    @objc convenience init (scaleQuestionResultWithResultSelector: ORKResultSelector,
+                            maximumExpectedAnswerValue: Double) {
+        self.init(resultSelector: scaleQuestionResultWithResultSelector, maximum: maximumExpectedAnswerValue)
+    }
 
 }
