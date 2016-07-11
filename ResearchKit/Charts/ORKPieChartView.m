@@ -38,7 +38,6 @@
 #import "ORKPieChartTitleTextView.h"
 #import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
-#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 
 

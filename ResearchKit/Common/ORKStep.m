@@ -39,6 +39,10 @@
 
 @implementation ORKStep
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }
@@ -106,7 +110,7 @@
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step.
-    return [_identifier hash] ^ [_title hash] ^ [_text hash] ^ (_optional ? 0xf : 0x0);
+    return _identifier.hash ^ _title.hash ^ _text.hash ^ (_optional ? 0xf : 0x0);
 }
 
 + (BOOL)supportsSecureCoding {

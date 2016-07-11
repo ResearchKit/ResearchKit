@@ -36,6 +36,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKActiveStepView.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKTimedWalkStepViewController ()

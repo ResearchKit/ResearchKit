@@ -29,7 +29,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+#import "ORKDefines.h"
 
 /**
  "Skip" button or "Learn More" button.

@@ -114,10 +114,10 @@
 
 - (void)start {
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }
@@ -193,10 +193,10 @@
         [self.touchArray addObject:touch];
     }
     
-    NSError *err = nil;
-    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&err]) {
-        assert(err != nil);
-        [self finishRecordingWithError:err];
+    NSError *error = nil;
+    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&error]) {
+        assert(error != nil);
+        [self finishRecordingWithError:error];
     }
 }
 

@@ -191,9 +191,9 @@
     XCTAssertEqual(_totalBytesReachedCounter, 1);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
     
-    NSError *err = nil;
-    XCTAssertTrue([_manager removeOldAndUploadedLogsToThreshold:9 error:&err]);
-    XCTAssertNil(err);
+    NSError *error = nil;
+    XCTAssertTrue([_manager removeOldAndUploadedLogsToThreshold:9 error:&error]);
+    XCTAssertNil(error);
     [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:filesystemSettleTime]];
     XCTAssertTrue(_manager.totalBytes <= 10);
     

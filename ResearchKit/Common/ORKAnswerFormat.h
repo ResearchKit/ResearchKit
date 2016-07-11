@@ -34,6 +34,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -301,6 +302,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -443,6 +445,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKContinuousScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -582,6 +585,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -658,6 +662,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKValuePickerAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -696,6 +701,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoiceAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -731,6 +737,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextChoiceAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -784,6 +791,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -877,6 +885,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoice : NSObject <NSSecureCoding, NSCopying>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -980,6 +989,7 @@ typedef NS_ENUM(NSInteger, ORKNumericAnswerStyle) {
 ORK_CLASS_AVAILABLE
 @interface ORKNumericAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -1108,6 +1118,7 @@ typedef NS_ENUM(NSInteger, ORKDateAnswerStyle) {
 ORK_CLASS_AVAILABLE
 @interface ORKDateAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

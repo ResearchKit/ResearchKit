@@ -39,6 +39,10 @@
     ORKSpatialSpanTargetState *_states;
 }
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }

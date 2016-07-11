@@ -47,7 +47,6 @@
 #import "ORKFitnessStepViewController.h"
 #import "ORKCompletionStep.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKAudioStep.h"
 #import "ORKCountdownStep.h"
 #import "ORKFitnessStep.h"
@@ -72,9 +71,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     NSString *_identifier;
 }
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
-    return nil;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
@@ -113,7 +115,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 }
 
 - (NSUInteger)hash {
-    return [_identifier hash] ^ [_steps hash];
+    return _identifier.hash ^ _steps.hash;
 }
 
 #pragma mark - ORKTask
@@ -287,37 +289,37 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - Predefined
 
-NSString * const ORKInstruction0StepIdentifier = @"instruction";
-NSString * const ORKInstruction1StepIdentifier = @"instruction1";
-NSString * const ORKCountdownStepIdentifier = @"countdown";
-NSString * const ORKAudioStepIdentifier = @"audio";
-NSString * const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
-NSString * const ORKTappingStepIdentifier = @"tapping";
-NSString * const ORKActiveTaskLeftHandIdentifier = @"left";
-NSString * const ORKActiveTaskRightHandIdentifier = @"right";
-NSString * const ORKConclusionStepIdentifier = @"conclusion";
-NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
-NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
-NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
-NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
-NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
-NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
-NSString * const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
-NSString * const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
-NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
-NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
-NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
-NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
-NSString * const ORKPSATStepIdentifier = @"psat";
-NSString * const ORKAudioRecorderIdentifier = @"audio";
-NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
-NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
-NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
-NSString * const ORKLocationRecorderIdentifier = @"location";
-NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
+NSString *const ORKInstruction0StepIdentifier = @"instruction";
+NSString *const ORKInstruction1StepIdentifier = @"instruction1";
+NSString *const ORKCountdownStepIdentifier = @"countdown";
+NSString *const ORKAudioStepIdentifier = @"audio";
+NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
+NSString *const ORKTappingStepIdentifier = @"tapping";
+NSString *const ORKActiveTaskLeftHandIdentifier = @"left";
+NSString *const ORKActiveTaskRightHandIdentifier = @"right";
+NSString *const ORKConclusionStepIdentifier = @"conclusion";
+NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
+NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
+NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
+NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+NSString *const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
+NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
+NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
+NSString *const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
+NSString *const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
+NSString *const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
+NSString *const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
+NSString *const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
+NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
+NSString *const ORKPSATStepIdentifier = @"psat";
+NSString *const ORKAudioRecorderIdentifier = @"audio";
+NSString *const ORKAccelerometerRecorderIdentifier = @"accelerometer";
+NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
+NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
+NSString *const ORKLocationRecorderIdentifier = @"location";
+NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -342,7 +344,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                                 handOptions:0
                                                     options:options];
 }
-
+    
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
@@ -353,7 +355,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     NSMutableArray *steps = [NSMutableArray array];
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE", nil);
@@ -394,15 +396,15 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             } else {
                 NSString *handIdentifier = rightHand ? ORKActiveTaskRightHandIdentifier : ORKActiveTaskLeftHandIdentifier;
                 return [NSString stringWithFormat:@"%@.%@", identifier, handIdentifier];
-            }
+        }
         };
         
-        if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction1StepIdentifier)];
             
             // Set the title based on the hand
             if (undefinedHand) {
-                step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE", nil);
+            step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE", nil);
             } else if (rightHand) {
                 step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE_RIGHT", nil);
             } else {
@@ -435,7 +437,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             // Continue button will be different from first hand and second hand
             if (hand == 1) {
-                step.detailText = ORKLocalizedString(@"TAPPING_CALL_TO_ACTION", nil);
+            step.detailText = ORKLocalizedString(@"TAPPING_CALL_TO_ACTION", nil);
             } else {
                 step.detailText = ORKLocalizedString(@"TAPPING_CALL_TO_ACTION_NEXT", nil);
             }
@@ -444,7 +446,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             UIImage *im1 = [UIImage imageNamed:@"handtapping01" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             UIImage *im2 = [UIImage imageNamed:@"handtapping02" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             UIImage *imageAnimation = [UIImage animatedImageWithImages:@[im1, im2] duration:1];
-
+            
             if (rightHand || undefinedHand) {
                 step.image = imageAnimation;
             } else {
@@ -453,37 +455,37 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
-        }
-
+    }
+    
         // TAPPING STEP
-        {
-            NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
-                [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
-                                                                                                          frequency:100]];
-            }
-            
+    {
+        NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
+        if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
+                                                                                                      frequency:100]];
+        }
+        
             ORKTappingIntervalStep *step = [[ORKTappingIntervalStep alloc] initWithIdentifier:appendIdentifier(ORKTappingStepIdentifier)];
             if (undefinedHand) {
-                step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION", nil);
+        step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION", nil);
             } else if (rightHand) {
                 step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION_RIGHT", nil);
             } else {
                 step.title = ORKLocalizedString(@"TAPPING_INSTRUCTION_LEFT", nil);
             }
-            step.stepDuration = duration;
-            step.shouldContinueOnFinish = YES;
-            step.recorderConfigurations = recorderConfigurations;
+        step.stepDuration = duration;
+        step.shouldContinueOnFinish = YES;
+        step.recorderConfigurations = recorderConfigurations;
             step.optional = (handCount == 2);
-            
-            ORKStepArrayAddStep(steps, step);
-        }
         
+        ORKStepArrayAddStep(steps, step);
+    }
+    
         // Flip to the other hand (ignored if handCount == 1)
         rightHand = !rightHand;
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -523,14 +525,14 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
     recordingSettings = recordingSettings ? : @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
                                                  AVNumberOfChannelsKey : @(2),
-                                                 AVSampleRateKey: @(44100.0) };
+                                                AVSampleRateKey: @(44100.0) };
     
     if (options & ORKPredefinedTaskOptionExcludeAudio) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Audio collection cannot be excluded from audio task" userInfo:nil];
     }
     
     NSMutableArray *steps = [NSMutableArray array];
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"AUDIO_TASK_TITLE", nil);
@@ -545,7 +547,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"AUDIO_TASK_TITLE", nil);
-            step.text = speechInstruction?:ORKLocalizedString(@"AUDIO_INTRO_TEXT",nil);
+            step.text = speechInstruction ? : ORKLocalizedString(@"AUDIO_INTRO_TEXT",nil);
             step.detailText = ORKLocalizedString(@"AUDIO_CALL_TO_ACTION", nil);
             step.image = [UIImage imageNamed:@"phonesoundwaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -589,7 +591,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKStepArrayAddStep(steps, step);
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -598,7 +600,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     if (checkAudioLevel) {
-
+    
         // Add rules to check for audio and fail, looping back to the countdown step if required
         ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:ORKCountdownStepIdentifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
         ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKCountdownStepIdentifier];
@@ -606,7 +608,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [task setNavigationRule:audioRule forTriggerStepIdentifier:ORKCountdownStepIdentifier];
         [task setNavigationRule:loopRule forTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier];
     }
-
+    
     return task;
 }
 
@@ -659,7 +661,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
-        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
         
         ORKStepArrayAddStep(steps, step);
@@ -670,21 +672,21 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         if (walkDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
-            if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
                 [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeLocation & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeLocation & options)) {
                 [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeHeartRate & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
                 [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                                       healthQuantityType:heartRateType unit:bpmUnit]];
             }
@@ -706,15 +708,15 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         if (restDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeHeartRate & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeHeartRate & options)) {
                 [recorderConfigurations addObject:[[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:ORKHeartRateRecorderIdentifier
                                                                                                       healthQuantityType:heartRateType unit:bpmUnit]];
             }
@@ -738,7 +740,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
@@ -779,7 +781,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
-        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
         
         ORKStepArrayAddStep(steps, step);
@@ -788,14 +790,14 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
                 [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
@@ -817,14 +819,14 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
                 [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
@@ -846,11 +848,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         if (restDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
@@ -873,7 +875,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -916,7 +918,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
-        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
         
         ORKStepArrayAddStep(steps, step);
@@ -925,14 +927,14 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludePedometer & options)) {
                 [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
@@ -956,11 +958,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         if (restDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray array];
-            if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
                 [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
                                                                                                           frequency:100]];
             }
-            if (! (ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
+            if (!(ORKPredefinedTaskOptionExcludeDeviceMotion & options)) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
@@ -985,7 +987,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -1001,8 +1003,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                             minimumSpan:(NSInteger)minimumSpan
                                             maximumSpan:(NSInteger)maximumSpan
                                               playSpeed:(NSTimeInterval)playSpeed
-                                               maxTests:(NSInteger)maxTests
-                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                               maximumTests:(NSInteger)maximumTests
+                                 maximumConsecutiveFailures:(NSInteger)maximumConsecutiveFailures
                                       customTargetImage:(UIImage *)customTargetImage
                                  customTargetPluralName:(NSString *)customTargetPluralName
                                         requireReversal:(BOOL)requireReversal
@@ -1011,7 +1013,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSString *targetPluralName = customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil);
     
     NSMutableArray *steps = [NSMutableArray array];
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TITLE", nil);
@@ -1050,8 +1052,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.minimumSpan = minimumSpan;
         step.maximumSpan = maximumSpan;
         step.playSpeed = playSpeed;
-        step.maxTests = maxTests;
-        step.maxConsecutiveFailures = maxConsecutiveFailures;
+        step.maximumTests = maximumTests;
+        step.maximumConsecutiveFailures = maximumConsecutiveFailures;
         step.customTargetImage = customTargetImage;
         step.customTargetPluralName = customTargetPluralName;
         step.requireReversal = requireReversal;
@@ -1059,7 +1061,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKStepArrayAddStep(steps, step);
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
@@ -1095,7 +1097,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-            step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
+            step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_CALL_TO_ACTION", nil);
             step.image = [UIImage imageNamed:@"phonefrequencywaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -1107,13 +1109,13 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         ORKToneAudiometryPracticeStep *step = [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-        step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
         ORKStepArrayAddStep(steps, step);
         
     }
     
     {
-        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
 
         ORKStepArrayAddStep(steps, step);
@@ -1127,7 +1129,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKStepArrayAddStep(steps, step);
     }
 
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
 
         ORKStepArrayAddStep(steps, step);
@@ -1173,7 +1175,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     towerOfHanoiStep.numberOfDisks = numberOfDisks;
     ORKStepArrayAddStep(steps, towerOfHanoiStep);
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -1259,7 +1261,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     lengthFormatter.numberFormatter.maximumSignificantDigits = 3;
     NSString *formattedLength = [lengthFormatter stringFromMeters:distanceInMeters];
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TIMED_WALK_TITLE", nil);
@@ -1301,7 +1303,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKStepArrayAddStep(steps, step);
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TIMED_WALK_TITLE", nil);
@@ -1315,7 +1317,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
-        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
         
         ORKStepArrayAddStep(steps, step);
@@ -1335,7 +1337,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
-            if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
+            if (!(options & ORKPredefinedTaskOptionExcludeLocation)) {
                 [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
             }
             
@@ -1365,7 +1367,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                 [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
                                                                                                          frequency:100]];
             }
-            if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
+            if (!(options & ORKPredefinedTaskOptionExcludeLocation)) {
                 [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
             }
             
@@ -1383,7 +1385,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -1416,7 +1418,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         versionDetailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = versionTitle;
@@ -1456,7 +1458,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKStepArrayAddStep(steps, step);
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);

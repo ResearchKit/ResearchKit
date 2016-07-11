@@ -146,22 +146,22 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     void (^handleResults)(NSArray <__kindof HKSample *> *, HKQueryAnchor *, NSUInteger, NSError *) = ^ (NSArray *results, HKQueryAnchor *newAnchor, NSUInteger newAnchorValue, NSError *error) {
-        if (error) {
-            // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-            ORK_Log_Warning(@"Anchored query error: %@", error);
-            return;
-        }
+                                                if (error) {
+                                                    // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
+                                                    ORK_Log_Warning(@"Anchored query error: %@", error);
+                                                    return;
+                                                }
         
-        __typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [strongSelf query_logResults:results withAnchor:newAnchor anchorValue:newAnchorValue];
     };
     
     
     HKAnchoredObjectQuery *anchoredQuery;
     if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:resultsHandler:)]) {
-        
+                                                
         anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
                                                           predicate:_samplePredicate
                                                              anchor:_anchor
@@ -172,7 +172,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                          }];
     }
     else if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:completionHandler:)]) {
-        
+                                                
         anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
                                                           predicate:_samplePredicate
                                                              anchor:_anchorValue
@@ -180,7 +180,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                   completionHandler:
                          ^(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> *results, NSUInteger newAnchor, NSError *error) {
                              handleResults(results, nil, newAnchor, error);
-                         }];
+                                            }];
     }
     else {
         NSAssert(NO, @"Could not instantiate an HKAnchoredObjectQuery.");
@@ -192,10 +192,10 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [super start];
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }
@@ -203,7 +203,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     if (![HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
-                                                       userInfo:@{@"recorder" : self}]];
+                                                       userInfo:@{@"recorder": self}]];
         return;
     }
     
@@ -223,12 +223,12 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     
     NSAssert(!_observerQuery, @"observer query should not exist if not recording");
     
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     _observerQuery = [[HKObserverQuery alloc]
                       initWithSampleType:_quantityType
                       predicate:_samplePredicate
                       updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
-                          __typeof(self) strongSelf = weakSelf;
+                          ORKStrongTypeOf(self) strongSelf = weakSelf;
                           
                           dispatch_async(dispatch_get_main_queue(), ^{
                               if (error) {

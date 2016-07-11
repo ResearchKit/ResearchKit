@@ -508,8 +508,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                        minimumSpan:2
                                                        maximumSpan:15
                                                          playSpeed:1
-                                                          maxTests:5
-                                            maxConsecutiveFailures:3
+                                                      maximumTests:5
+                                        maximumConsecutiveFailures:3
                                                  customTargetImage:nil
                                             customTargetPluralName:nil
                                                    requireReversal:NO
@@ -3371,7 +3371,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
     return image;
@@ -3397,7 +3397,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+            if (![[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
                 NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
@@ -3634,7 +3634,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
             NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)pdfData.length, error);
             
-            if (! error) {
+            if (!error) {
                 NSURL *documents = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject];
                 NSURL *outputUrl = [documents URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", taskViewController.taskRunUUID.UUIDString]];
                 
@@ -3651,7 +3651,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         if (dir)
         {
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
+            if (![[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
                 NSLog(@"Error removing %@: %@", dir, err);
             }
         }
@@ -3798,7 +3798,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     // Location question with current location observing off
     ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"locationTask.step3"];
     step3.title = @"Where is your home?";
-    ORKLocationAnswerFormat* locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
+    ORKLocationAnswerFormat *locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
     locationAnswerFormat.useCurrentLocation= NO;
     step3.answerFormat = locationAnswerFormat;
     [steps addObject:step3];

@@ -35,6 +35,7 @@
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKCompletionStepView : ORKActiveStepCustomView

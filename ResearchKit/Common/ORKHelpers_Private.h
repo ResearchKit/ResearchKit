@@ -32,20 +32,6 @@
 #import <ResearchKit/ORKDefines.h>
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
-
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
-
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
-
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
-
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
 ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
 

@@ -33,7 +33,6 @@
 #import <UIKit/UIKit.h>
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 
 
 #pragma mark - ORKHealthAnswerFormat
@@ -74,7 +73,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 
 @implementation ORKHealthKitCharacteristicTypeAnswerFormat {
     ORKAnswerFormat *_impliedAnswerFormat;
-    
+}
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {
@@ -124,7 +126,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.characteristicType hash] ^ [self.defaultDate hash] ^ [self.minimumDate hash] ^ [self.maximumDate hash] ^ [self.calendar hash];
+    return super.hash ^ self.characteristicType.hash ^ self.defaultDate.hash ^ self.minimumDate.hash ^ self.maximumDate.hash ^ self.calendar.hash;
 }
 
 // The bare answer format implied by the quantityType or characteristicType.
@@ -212,7 +214,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 @implementation ORKHealthKitQuantityTypeAnswerFormat {
     ORKAnswerFormat *_impliedAnswerFormat;
     HKUnit *_userUnit;
-    
+}
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {
@@ -262,7 +267,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.quantityType hash] ^ [self.unit hash] ^ _numericAnswerStyle;
+    return super.hash ^ self.quantityType.hash ^ self.unit.hash ^ _numericAnswerStyle;
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
@@ -275,12 +280,12 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             ORKHeightAnswerFormat *format = [ORKDateAnswerFormat heightAnswerFormat];
             _impliedAnswerFormat = format;
         } else {
-            ORKNumericAnswerFormat *format = nil;
+        ORKNumericAnswerFormat *format = nil;
             HKUnit *unit = [self healthKitUserUnit];
-            if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
-                format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit unitString]];
-            } else {
-                format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit unitString]];
+        if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
+            format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit unitString]];
+        } else {
+            format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit unitString]];
             }
             _impliedAnswerFormat = format;
         }
