@@ -37,9 +37,9 @@
 
 @end
 
-static NSString * const inObject = @"RK object";
-static NSString * const key = @"RK key";
-static NSString * const invalidKey = @"RK invalid key";
+static NSString *const inObject = @"RK object";
+static NSString *const key = @"RK key";
+static NSString *const invalidKey = @"RK invalid key";
 
 @implementation ORKKeychainWrapperTests
 

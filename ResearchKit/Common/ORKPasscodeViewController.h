@@ -94,6 +94,7 @@ ORK_AVAILABLE_DECL
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

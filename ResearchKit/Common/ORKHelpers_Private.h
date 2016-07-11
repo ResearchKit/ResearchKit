@@ -29,15 +29,12 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKDefaultFont.h"
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
-/**
- Answer's text field.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKAnswerTextField : UITextField <ORKDefaultFont>
+ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
+ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
 
-@end
+ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
+ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
+ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;

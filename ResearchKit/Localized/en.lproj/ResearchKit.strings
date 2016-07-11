@@ -168,6 +168,11 @@
 "BOOL_NO" = "No";
 "BOOL_YES" = "Yes";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
 "NULL_ANSWER" = "Select an answer";

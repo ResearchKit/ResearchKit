@@ -78,7 +78,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.detailText hash];
+    return super.hash ^ self.detailText.hash;
 }
 
 @end

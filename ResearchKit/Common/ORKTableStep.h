@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKStep.h>
 #import <UIKit/UIKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,8 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
  Customization can be handled by overriding the base class implementations in either `ORKTableStep`
  or `ORKTableStepViewController`.
  */
-
-FOUNDATION_EXPORT NSString *const ORKBasicCellReuseIdentifier;
 
 ORK_CLASS_AVAILABLE
 @interface ORKTableStep : ORKStep

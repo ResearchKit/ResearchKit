@@ -30,7 +30,7 @@
 
 
 #import "UIBarButtonItem+ORKBarButtonItem.h"
-#import "ORKDefines_Private.h"
+#import "ORKHelpers.h"
 
 
 @implementation UIBarButtonItem (ORKBarButtonItem)

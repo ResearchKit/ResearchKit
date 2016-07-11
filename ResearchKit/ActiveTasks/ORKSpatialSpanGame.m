@@ -36,6 +36,10 @@
     NSInteger *_sequence;
 }
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }

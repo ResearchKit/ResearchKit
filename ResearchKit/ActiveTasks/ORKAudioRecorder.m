@@ -33,7 +33,6 @@
 #import "ORKHelpers.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
-#import "ORKDefines_Private.h"
 
 
 @interface ORKAudioRecorder ()
@@ -245,7 +244,7 @@
     return [[self recordingDirectoryURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [self logName], [self extension]]];
 }
 
-- (BOOL)recreateFileWithError:(NSError * __autoreleasing *)error {
+- (BOOL)recreateFileWithError:(NSError **)error {
     NSURL *url = [self recordingFileURL];
     if (!url) {
         if (error) {
@@ -267,7 +266,7 @@
     }
     
     [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
-    [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+    [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
     return YES;
 }
 

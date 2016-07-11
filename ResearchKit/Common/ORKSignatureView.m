@@ -33,7 +33,7 @@
 #import "ORKSignatureView.h"
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
-
+#import "ORKHelpers.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 
@@ -436,8 +436,8 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     
     if (![self signatureExists] && (!self.currentPath || [self.currentPath isEmpty])) {
         [ORKLocalizedString(@"CONSENT_SIGNATURE_PLACEHOLDER", nil) drawAtPoint:[self placeholderPoint]
-                                           withAttributes:@{ NSFontAttributeName : [ORKSelectionTitleLabel defaultFont],
-                                                             NSForegroundColorAttributeName : [[UIColor blackColor] colorWithAlphaComponent:0.2]}];
+                                           withAttributes:@{ NSFontAttributeName: [ORKSelectionTitleLabel defaultFont],
+                                                             NSForegroundColorAttributeName: [[UIColor blackColor] colorWithAlphaComponent:0.2]}];
     }
     
     for (UIBezierPath *path in self.pathArray) {

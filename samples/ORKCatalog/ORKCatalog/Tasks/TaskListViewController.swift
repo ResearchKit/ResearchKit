@@ -147,7 +147,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
                     self.waitStepViewController = stepViewController;
                     self.waitStepProgress = 0.0
-                    self.waitStepUpdateTimer = NSTimer(timeInterval: 0.1, target: self, selector: "updateProgressOfWaitStepViewController", userInfo: nil, repeats: true)
+                    self.waitStepUpdateTimer = NSTimer(timeInterval: 0.1, target: self, selector: #selector(TaskListViewController.updateProgressOfWaitStepViewController), userInfo: nil, repeats: true)
                     NSRunLoop.mainRunLoop().addTimer(self.waitStepUpdateTimer!, forMode: NSRunLoopCommonModes)
                 }
             })

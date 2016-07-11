@@ -30,7 +30,6 @@
 
 #import "ORKTextButton.h"
 #import "ORKDefaultFont.h"
-#import "ORKDefines_Private.h"
 
 
 @interface ORKTextButton ()  <ORKDefaultFont>

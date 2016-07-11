@@ -31,7 +31,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 #import <CoreLocation/CoreLocation.h>
 
 
@@ -1272,6 +1272,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKLocation : NSObject <NSCopying, NSSecureCoding>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

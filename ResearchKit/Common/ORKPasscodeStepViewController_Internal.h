@@ -34,10 +34,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const KeychainDictionaryPasscodeKey = @"passcode";
-static NSString * const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
-static NSString * const PasscodeStepIdentifier = @"passcode_step";
-static NSString * const PasscodeKey = @"ORKPasscode";
+static NSString *const KeychainDictionaryPasscodeKey = @"passcode";
+static NSString *const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
+static NSString *const PasscodeStepIdentifier = @"passcode_step";
+static NSString *const PasscodeKey = @"ORKPasscode";
 
 typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
     ORKPasscodeFlowCreate,
