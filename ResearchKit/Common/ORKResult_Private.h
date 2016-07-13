@@ -115,13 +115,15 @@ ORK_CLASS_AVAILABLE
  to track the result set.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKPageResult : ORKCollectionResult <ORKTaskResultSource>
+@interface ORKPageResult : ORKTaskResult
 
 - (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result;
 
 - (void)addStepResult:(nullable ORKStepResult *)stepResult;
 
 - (NSArray <ORKResult *> *)flattenResults;
+
+- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory;
 
 @end
 

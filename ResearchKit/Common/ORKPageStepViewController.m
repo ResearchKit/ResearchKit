@@ -73,6 +73,9 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     if (_pageResult == nil) {
         _pageResult = [[ORKPageResult alloc] initWithIdentifier:self.step.identifier];
     }
+    if (!ORKEqualObjects(_pageResult.outputDirectory, self.outputDirectory)) {
+        _pageResult = [_pageResult copyWithOutputDirectory:self.outputDirectory];
+    }
     return _pageResult;
 }
 
@@ -215,8 +218,9 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
         return;
     }
     
-    // Set self as the delegate
+    // Setup view controller
     stepViewController.delegate = self;
+    stepViewController.outputDirectory = self.outputDirectory;
     
     // Setup page direction
     UIPageViewControllerNavigationDirection direction = (!animated || delta >= 0) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;

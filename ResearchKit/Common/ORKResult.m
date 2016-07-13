@@ -2178,7 +2178,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 @implementation ORKPageResult
 
 - (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result {
-    self = [super initWithIdentifier:result.identifier];
+    self = [super initWithTaskIdentifier:step.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     if (self) {
         NSArray <NSString *> *stepIdentifiers = [step.steps valueForKey:@"identifier"];
         NSMutableArray *results = [NSMutableArray new];
@@ -2247,6 +2247,12 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
         }
     }
     return [results copy];
+}
+
+- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory {
+    typeof(self) copy = [[[self class] alloc] initWithTaskIdentifier:self.identifier taskRunUUID:self.taskRunUUID outputDirectory:outputDirectory];
+    copy.results = self.results;
+    return copy;
 }
 
 @end

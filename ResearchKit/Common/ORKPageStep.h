@@ -29,9 +29,34 @@
  */
 
 #import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKTask.h>
+#import <ResearchKit/ORKOrderedTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol ORKPageTask <ORKTask, NSSecureCoding, NSCopying>
+
+/**
+ Returns the step that matches the specified identifier.
+ 
+ @param identifier  The identifier of the step to restore.
+ 
+ @return The step that matches the specified identifier.
+ */
+- (nullable ORKStep *)stepWithIdentifier:(NSString *)identifier;
+
+/**
+ The array of steps in the task. (read-only)
+ 
+ Each element in the array must be a subclass of `ORKStep`.
+ The associated task view controller presents the steps in
+ array order.
+ */
+@property (nonatomic, copy, readonly) NSArray <ORKStep *> *steps;
+
+@end
+
+@interface ORKOrderedTask (ORKPageTask) <ORKPageTask>
+@end
 
 /**
  The `ORKPageStep` class is a concrete subclass of `ORKStep`, used for presenting a subgrouping of
@@ -63,6 +88,15 @@ ORK_CLASS_AVAILABLE
                              steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
 
 /**
+ Returns an initialized page step using the specified identifier and array of steps.
+ 
+ @param task    The task used to run the subtask.
+ 
+ @return An initialized page step.
+ */
+- (instancetype)initWithPageTask:(id <ORKPageTask>)task NS_DESIGNATED_INITIALIZER;
+
+/**
  Returns a page step initialized from data in the given unarchiver.
  
  A page step can be serialized and deserialized with `NSKeyedArchiver`. Note
@@ -75,12 +109,14 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
- The array of steps in the subgroup.
- 
- Each element in the array must be a subclass of `ORKStep`.
- By default, the associated view controller presents the steps in array order.
+ The list of steps that are included in this grouping.
  */
-@property (nonatomic, copy, readonly) NSArray <ORKStep *> *steps;
+@property (nonatomic, readonly) NSArray <ORKStep *> *steps;
+
+/**
+ The subtask used to determine the next/previous steps that are in this grouping
+ */
+@property (nonatomic, copy, readonly) id <ORKPageTask> pageTask;
 
 /**
  Returns the step after the specified step, if there is one.
@@ -94,7 +130,7 @@ ORK_CLASS_AVAILABLE
  
  @return The step that comes after the specified step, or `nil` if there isn't one.
  */
-- (nullable ORKStep *)stepAfterStepWithIdentifier:(nullable NSString *)identifier withResult:(id <ORKTaskResultSource>)result;
+- (nullable ORKStep *)stepAfterStepWithIdentifier:(nullable NSString *)identifier withResult:(ORKTaskResult *)result;
 
 /**
  Returns the step that precedes the specified step, if there is one.
@@ -103,12 +139,12 @@ ORK_CLASS_AVAILABLE
  The page view controller can also call this method every time the result changes, to determine if the 
  new result changes which steps are available.
  
- @param identifier      The reference step identifier. Pass `nil` to specify the last step.
+ @param identifier      The reference step identifier. 
  @param result          A snapshot of the current set of results.
  
  @return The step that precedes the reference step, or `nil` if there isn't one.
  */
-- (nullable ORKStep *)stepBeforeStepWithIdentifier:(nullable NSString *)identifier withResult:(id <ORKTaskResultSource>)result;
+- (nullable ORKStep *)stepBeforeStepWithIdentifier:(NSString *)identifier withResult:(ORKTaskResult *)result;
 
 
 /**

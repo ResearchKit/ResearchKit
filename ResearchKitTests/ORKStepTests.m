@@ -148,9 +148,6 @@
     XCTAssertNil(step4);
     
     // Check steps going backward
-    ORKStep *backStep3 = [pageStep stepBeforeStepWithIdentifier:nil withResult:pageResult];
-    XCTAssertEqualObjects(backStep3, step3);
-    
     ORKStep *backStep2 = [pageStep stepBeforeStepWithIdentifier:@"step3" withResult:pageResult];
     XCTAssertEqualObjects(backStep2, step2);
     

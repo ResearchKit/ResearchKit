@@ -31,6 +31,7 @@
 #import "ORKPageStep.h"
 #import "ORKHelpers.h"
 #import "ORKPageStepViewController.h"
+#import "ORKResult.h"
 
 @implementation ORKPageStep
 
@@ -41,10 +42,22 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _steps = [steps copy] ?: @[];
+        _pageTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
         [self validateParameters];
     }
     return self;
+}
+
+- (instancetype)initWithPageTask:(id<ORKPageTask>)task {
+    self = [super initWithIdentifier:[task identifier]];
+    if (self) {
+        _pageTask = [task copyWithZone:nil];
+    }
+    return self;
+}
+
+- (NSArray<ORKStep *> *)steps {
+    return self.pageTask.steps;
 }
 
 #pragma mark - view controller instantiation
@@ -56,18 +69,17 @@
 #pragma mark - permissions
 
 - (ORKPermissionMask)requestedPermissions {
-    ORKPermissionMask permissions = 0;
-    for (ORKStep *step in _steps) {
-        permissions |= step.requestedPermissions;
+    if ([self.pageTask respondsToSelector:@selector(requestedPermissions)]) {
+        return [self.pageTask requestedPermissions];
     }
-    return permissions;
+    return ORKPermissionNone;
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPageStep *copy = [super copyWithZone:zone];
-    copy->_steps = ORKArrayCopyObjects(_steps);
+    copy->_pageTask = [_pageTask copyWithZone:zone];
     return copy;
 }
 
@@ -80,75 +92,33 @@
     
     __typeof(self) castObject = object;
     return ([super isEqual:object]
-            && ORKEqualObjects(self.steps, castObject.steps));
+            && ORKEqualObjects(self.pageTask, castObject.pageTask));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_steps hash];
+    return [super hash] ^ [_pageTask hash];
 }
 
 #pragma mark - step handling
 
 - (void)validateParameters {
-    NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( self.steps.count != uniqueIdentifiers.count );
-    
-    if (itemsHaveNonUniqueIdentifiers) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Each step should have a unique identifier" userInfo:nil];
+    if ([self.pageTask respondsToSelector:@selector(validateParameters)]) {
+        [self.pageTask validateParameters];
     }
 }
 
-- (ORKStep *)stepAfterStepWithIdentifier:(NSString *)identifier withResult:(id <ORKTaskResultSource>)result {
-    NSArray *steps = _steps;
-    
-    if (steps.count <= 0) {
-        return nil;
-    }
-    
-    if (identifier == nil) {
-        return [steps firstObject];
-    }
-    
-    NSUInteger index = [self indexOfStepWithIdentifier:identifier];
-    if (NSNotFound != index && index != (steps.count - 1)) {
-        return steps[index + 1];
-    } else {
-        return nil;
-    }
+- (ORKStep *)stepAfterStepWithIdentifier:(NSString *)identifier withResult:(ORKTaskResult *)result {
+    ORKStep *step = (identifier != nil) ? [self stepWithIdentifier:identifier] : nil;
+    return [self.pageTask stepAfterStep:step withResult:result];
 }
 
-- (ORKStep *)stepBeforeStepWithIdentifier:(NSString *)identifier withResult:(id <ORKTaskResultSource>)result {
-    NSArray *steps = _steps;
-    
-    if (steps.count <= 0)  {
-        return nil;
-    }
-    if (identifier == nil) {
-        return [steps lastObject];
-    }
-    
-    NSUInteger index = [self indexOfStepWithIdentifier:identifier];
-    if (NSNotFound != index && index != 0) {
-        return steps[index - 1];
-    } else {
-        return nil;
-    }
-}
-
-- (NSUInteger)indexOfStepWithIdentifier:(NSString *)identifier {
-    NSArray *identifiers = [_steps valueForKey:@"identifier"];
-    return [identifiers indexOfObject:identifier];
+- (ORKStep *)stepBeforeStepWithIdentifier:(NSString *)identifier withResult:(ORKTaskResult *)result {
+    ORKStep *step = (identifier != nil) ? [self stepWithIdentifier:identifier] : nil;
+    return [self.pageTask stepBeforeStep:step withResult:result];
 }
 
 - (ORKStep *)stepWithIdentifier:(NSString *)identifier {
-    __block ORKStep *step = nil;
-    [_steps enumerateObjectsUsingBlock:^(ORKStep *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.identifier isEqualToString:identifier]) {
-            step = obj;
-            *stop = YES;
-        }
-    }];
-    return step;
+    return [self.pageTask stepWithIdentifier:identifier];
 }
 
 #pragma mark - NSSecureCoding
@@ -159,13 +129,13 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, steps);
+    ORK_ENCODE_OBJ(aCoder, pageTask);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_ARRAY(aDecoder, steps, ORKStep);
+        ORK_DECODE_OBJ(aDecoder, pageTask);
     }
     return self;
 }
