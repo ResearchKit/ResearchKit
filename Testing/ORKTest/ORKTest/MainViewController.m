@@ -4011,6 +4011,19 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3]];
     [steps addObject:pageStep];
     
+    ORKOrderedTask *audioTask = [ORKOrderedTask audioTaskWithIdentifier:@"audioTaskStep"
+                                                 intendedUseDescription:nil
+                                                      speechInstruction:nil
+                                                 shortSpeechInstruction:nil
+                                                               duration:10
+                                                      recordingSettings:nil
+                                                        checkAudioLevel:YES
+                                                                options:
+                                 ORKPredefinedTaskOptionExcludeInstructions |
+                                 ORKPredefinedTaskOptionExcludeConclusion];
+    ORKPageStep *audioStep = [[ORKPageStep alloc] initWithPageTask:audioTask];
+    [steps addObject:audioStep];
+    
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
     stepLast.title = @"Task Complete";
     [steps addObject:stepLast];
