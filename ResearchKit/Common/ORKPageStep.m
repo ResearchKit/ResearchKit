@@ -40,18 +40,14 @@
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        _pageTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-        [self validateParameters];
-    }
-    return self;
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
 }
 
-- (instancetype)initWithPageTask:(id<ORKPageTask>)task {
-    self = [super initWithIdentifier:[task identifier]];
+- (instancetype)initWithIdentifier:(NSString *)identifier pageTask:(ORKOrderedTask *)task {
+    self = [super initWithIdentifier:identifier];
     if (self) {
-        _pageTask = [task copyWithZone:nil];
+        _pageTask = [task copy];
+        [self validateParameters];
     }
     return self;
 }
@@ -96,7 +92,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_pageTask hash];
+    return [super hash] ^ [self.pageTask hash];
 }
 
 #pragma mark - step handling
@@ -135,7 +131,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, pageTask);
+        ORK_DECODE_OBJ_CLASS(aDecoder, pageTask, ORKOrderedTask);
     }
     return self;
 }

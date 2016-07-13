@@ -33,31 +33,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKPageTask <ORKTask, NSSecureCoding, NSCopying>
-
-/**
- Returns the step that matches the specified identifier.
- 
- @param identifier  The identifier of the step to restore.
- 
- @return The step that matches the specified identifier.
- */
-- (nullable ORKStep *)stepWithIdentifier:(NSString *)identifier;
-
-/**
- The array of steps in the task. (read-only)
- 
- Each element in the array must be a subclass of `ORKStep`.
- The associated task view controller presents the steps in
- array order.
- */
-@property (nonatomic, copy, readonly) NSArray <ORKStep *> *steps;
-
-@end
-
-@interface ORKOrderedTask (ORKPageTask) <ORKPageTask>
-@end
-
 /**
  The `ORKPageStep` class is a concrete subclass of `ORKStep`, used for presenting a subgrouping of
  `ORKStepViewController` views using a `UIPageViewController`.
@@ -79,7 +54,7 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized page step using the specified identifier and array of steps.
  
- @param identifier  The unique identifier for the task.
+ @param identifier  The unique identifier for the step.
  @param steps       An array of `ORKStep` objects in the order in which they should be presented.
  
  @return An initialized page step.
@@ -90,11 +65,13 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized page step using the specified identifier and array of steps.
  
- @param task    The task used to run the subtask.
+ @param identifier  The unique identifier for the step.
+ @param task        The task used to run the subtask.
  
  @return An initialized page step.
  */
-- (instancetype)initWithPageTask:(id <ORKPageTask>)task NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a page step initialized from data in the given unarchiver.
@@ -109,14 +86,9 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
- The list of steps that are included in this grouping.
- */
-@property (nonatomic, readonly) NSArray <ORKStep *> *steps;
-
-/**
  The subtask used to determine the next/previous steps that are in this grouping
  */
-@property (nonatomic, copy, readonly) id <ORKPageTask> pageTask;
+@property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
 
 /**
  Returns the step after the specified step, if there is one.

@@ -752,12 +752,11 @@ encondingTable =
           })),
    ENTRY(ORKPageStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier)
-                                                                   steps:GETPROP(dict, steps)];
+             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
              return step;
          },
          (@{
-            PROPERTY(steps, ORKStep, NSArray, NO, nil, nil),
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
             })),
   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
