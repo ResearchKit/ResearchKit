@@ -79,10 +79,6 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     return _pageResult;
 }
 
-- (id<ORKTaskResultSource>)taskResultSource {
-    return self.pageResult;
-}
-
 - (void)stepDidChange {
     if (![self isViewLoaded]) {
         return;
@@ -182,10 +178,11 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 - (ORKStep *)stepInDirection:(ORKPageNavigationDirection)delta {
     if ((delta == ORKPageNavigationDirectionNone) && (self.currentStepIdentifier != nil)) {
         return [self.pageStep stepWithIdentifier:self.currentStepIdentifier];
-    } else if (delta >= 0) {
-        return [self.pageStep stepAfterStepWithIdentifier:self.currentStepIdentifier withResult:self.taskResultSource];
+    } else if ((delta >= 0) || (self.currentStepIdentifier == nil)) {
+        return [self.pageStep stepAfterStepWithIdentifier:self.currentStepIdentifier withResult:self.pageResult];
     } else {
-        return [self.pageStep stepBeforeStepWithIdentifier:self.currentStepIdentifier withResult:self.taskResultSource];
+        [self.pageResult removeStepResultWithIdentifier:self.currentStepIdentifier];
+        return [self.pageStep stepBeforeStepWithIdentifier:self.currentStepIdentifier withResult:self.pageResult];
     }
 }
 
@@ -204,7 +201,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 }
 
 - (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step {
-    ORKStepResult *stepResult = [self.taskResultSource stepResultForStepIdentifier:step.identifier];
+    ORKStepResult *stepResult = [self.pageResult stepResultForStepIdentifier:step.identifier];
     ORKStepViewController *viewController = [step instantiateStepViewControllerWithResult:stepResult];
     return viewController;
 }

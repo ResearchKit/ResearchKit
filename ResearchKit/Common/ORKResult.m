@@ -2216,6 +2216,15 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     self.results = results;
 }
 
+- (void)removeStepResultWithIdentifier:(NSString *)identifier {
+    ORKResult *result = [self resultForIdentifier:identifier];
+    if (result != nil) {
+        NSMutableArray *results = [self.results mutableCopy];
+        [results removeObject:result];
+        self.results = results;
+    }
+}
+
 - (NSArray <ORKResult *> *)flattenResults {
     NSMutableArray *results = [NSMutableArray new];
     for (ORKResult *result in self.results) {

@@ -41,14 +41,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly, nullable) ORKPageStep *pageStep;
 
 /**
- The `ORKTaskResultSource` for the subgroup of steps displayed by this view controller.
- */
-@property (nonatomic, readonly) id <ORKTaskResultSource> taskResultSource;
-
-/**
  Returns the step view controller to associate with this step. By default, this will
- return the step view controller instantiated by the given step with the result from 
- the taskResultSource.
+ return the step view controller instantiated by the given step.
  
  @returns `ORKStepViewController` subclass for this step.
  */

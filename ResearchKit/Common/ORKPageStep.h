@@ -60,7 +60,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized page step.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
+                             steps:(nullable NSArray<ORKStep *> *)steps;
 
 /**
  Returns an initialized page step using the specified identifier and array of steps.
