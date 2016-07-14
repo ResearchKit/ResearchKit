@@ -44,7 +44,6 @@
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
 @property (nonatomic, strong) ORKAnswerTextView *textView;
-@property (nonatomic, strong) UILabel *placeHolder;
 
 @end
 
@@ -94,14 +93,9 @@
         
         [self addSubview:self.textView];
         
-        self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width, 36)];
-        self.textView.placeHolder = self.placeHolder;
-        self.placeHolder.text = self.step.placeholder ? :ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
-        self.placeHolder.textColor = [UIColor lightGrayColor];
-        self.placeHolder.userInteractionEnabled = NO;
-        [self addSubview:self.placeHolder];
+        self.textView.placeholder = self.step.placeholder;
         
-        ORKEnableAutoLayoutForViews(@[_placeHolder, _textView]);
+        ORKEnableAutoLayoutForViews(@[_textView]);
         
         [self setUpConstraints];
         
@@ -115,14 +109,12 @@
 - (void)answerDidChange {
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
-    self.placeHolder.hidden = (self.textView.text.length > 0) && ![self.textView isFirstResponder];
-    
 }
 
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_textView, _placeHolder);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_textView);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textView]-|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -132,35 +124,6 @@
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
-                                                        attribute:NSLayoutAttributeLeading
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_textView
-                                                        attribute:NSLayoutAttributeLeading
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationLessThanOrEqual
-                                                           toItem:_textView
-                                                        attribute:NSLayoutAttributeWidth
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
-                                                        attribute:NSLayoutAttributeHeight
-                                                        relatedBy:NSLayoutRelationLessThanOrEqual
-                                                           toItem:_textView
-                                                        attribute:NSLayoutAttributeHeight
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
-                                                        attribute:NSLayoutAttributeTopMargin
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_textView
-                                                        attribute:NSLayoutAttributeTopMargin
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -184,14 +147,7 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    
     [self textDidChange];
-    self.placeHolder.hidden = (self.textView.text.length > 0);
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-
-    self.placeHolder.hidden = YES;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
