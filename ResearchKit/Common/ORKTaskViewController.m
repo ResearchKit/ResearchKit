@@ -166,7 +166,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     NSMutableArray *_managedStepIdentifiers;
     ORKViewControllerToolbarObserver *_stepViewControllerObserver;
     ORKScrollViewObserver *_scrollViewObserver;
-    BOOL _hasSetProgressLabel;
+    
     BOOL _hasBeenPresented;
     BOOL _hasRequestedHealthData;
     ORKPermissionMask _grantedPermissions;
@@ -191,6 +191,9 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 @property (nonatomic, strong) UINavigationController *childNavigationController;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) ORKStepViewController *currentStepViewController;
+
+// This used to be an iVar, but it needs to be a property because we access it from weak typeof(self)
+@property (nonatomic) BOOL hasSetProgressLabel;
 
 @end
 
@@ -946,19 +949,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
         
-        ORK_Log_Debug(@"%@ %@", strongSelf, viewController);
+        ORK_Log_Debug(@"%@ %@", weakSelf, viewController);
         
         // Set the progress label only if non-nil or if it is nil having previously set a progress label.
-        if (progressLabel || strongSelf->_hasSetProgressLabel) {
-            strongSelf.pageViewController.navigationItem.title = progressLabel;
+        if (progressLabel || weakSelf.hasSetProgressLabel) {
+            weakSelf.pageViewController.navigationItem.title = progressLabel;
         }
         
-        strongSelf->_hasSetProgressLabel = (progressLabel != nil);
+        weakSelf.hasSetProgressLabel = (progressLabel != nil);
         
         // Collect toolbarItems
-        [strongSelf collectToolbarItemsFromViewController:viewController];
+        [weakSelf collectToolbarItemsFromViewController:viewController];
     }];
 }
 
@@ -1391,7 +1393,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeBool:self.showsProgressInNavigationBar forKey:_ORKShowsProgressInNavigationBarRestoreKey];
     [coder encodeObject:_managedResults forKey:_ORKManagedResultsRestoreKey];
     [coder encodeObject:_managedStepIdentifiers forKey:_ORKManagedStepIdentifiersRestoreKey];
-    [coder encodeBool:_hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
+    [coder encodeBool:self.hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
     [coder encodeObject:_requestedHealthTypesForRead forKey:_ORKRequestedHealthTypesForReadRestoreKey];
     [coder encodeObject:_requestedHealthTypesForWrite forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
@@ -1435,7 +1437,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         }
         
         if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
-            _hasSetProgressLabel = [coder decodeBoolForKey:_ORKHasSetProgressLabelRestoreKey];
+            self.hasSetProgressLabel = [coder decodeBoolForKey:_ORKHasSetProgressLabelRestoreKey];
             _requestedHealthTypesForRead = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
             _requestedHealthTypesForWrite = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
