@@ -40,16 +40,24 @@
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
-    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        [self ork_initializePageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
+    }
+    return self;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier pageTask:(ORKOrderedTask *)task {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _pageTask = [task copy];
-        [self validateParameters];
+        [self ork_initializePageTask:task];
     }
     return self;
+}
+
+- (void)ork_initializePageTask:(ORKOrderedTask *)task {
+    _pageTask = [task copy];
+    [self validateParameters];
 }
 
 - (NSArray<ORKStep *> *)steps {
