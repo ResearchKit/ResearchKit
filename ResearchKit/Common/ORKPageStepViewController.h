@@ -48,6 +48,14 @@ ORK_CLASS_AVAILABLE
  */
 - (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step;
 
+/**
+ Returns an `ORKTaskResultSource` for the steps that are included as substeps for this
+ page view controller.
+ 
+ @returns `ORKTaskResultSource` for the step results
+ */
+- (id <ORKTaskResultSource>)resultSource;
+
 @end
 
 NS_ASSUME_NONNULL_END

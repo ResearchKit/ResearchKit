@@ -132,6 +132,10 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 #pragma mark - result handling
 
+- (id <ORKTaskResultSource>)resultSource {
+    return self.pageResult;
+}
+
 - (ORKStepResult *)result {
     ORKStepResult *result = [super result];
     result.results = [self.pageResult flattenResults];
