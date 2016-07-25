@@ -130,6 +130,20 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
+- (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction {
+    // update the current step based on the direction of navigation
+    if (direction == ORKStepViewControllerNavigationDirectionForward) {
+        _currentStepIdentifier = nil;
+    }
+    else {
+        NSString *lastStepIdentifier = [[self.pageResult.results lastObject] identifier];
+        if ([self.pageStep stepWithIdentifier:lastStepIdentifier] != nil) {
+            _currentStepIdentifier = lastStepIdentifier;
+        }
+    }
+    [super willNavigateDirection:direction];
+}
+
 #pragma mark - result handling
 
 - (id <ORKTaskResultSource>)resultSource {
