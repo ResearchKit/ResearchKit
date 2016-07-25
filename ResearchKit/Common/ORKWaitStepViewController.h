@@ -39,7 +39,6 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStepViewController.h>
 
 

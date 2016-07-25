@@ -30,8 +30,8 @@
 
 
 @import UIKit;
-#import "ORKStepViewController.h"
-#import "ORKRecorder.h"
+#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

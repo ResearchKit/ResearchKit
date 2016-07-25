@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -103,6 +103,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
      */
     ORKQuestionTypeTimeInterval,
     
+    /**
+     In a height question, the participant can enter a height by using a height picker.
+     */
+    ORKQuestionTypeHeight,
+
     /**
      In a location question, the participant can enter a location using a map view.
      */
@@ -246,6 +251,23 @@ typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
     
     /// Progressbar animation.
     ORKProgressIndicatorTypeProgressBar,
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ System of measurements.
+ 
+ Used mainly by ORKHeightAnswerFormat.
+ */
+typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
+    /// Measurement system in use by the current locale.
+    ORKMeasurementSystemLocal = 0,
+    
+    /// Metric measurement system.
+    ORKMeasurementSystemMetric,
+
+    /// United States customary system.
+    ORKMeasurementSystemUSC,
 } ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_END

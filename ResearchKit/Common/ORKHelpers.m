@@ -532,6 +532,8 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *r
     }
 }
 
+const double ORKDoubleInvalidValue = DBL_MAX;
+
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
@@ -542,4 +544,12 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
     return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
+}
+
+NSNumberFormatter *ORKDecimalNumberFormatter() {
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.maximumFractionDigits = NSDecimalNoScale;
+    numberFormatter.usesGroupingSeparator = NO;
+    return numberFormatter;
 }

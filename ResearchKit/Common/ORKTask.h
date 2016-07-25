@@ -30,9 +30,8 @@
 
 
 @import Foundation;
-#import "ORKDefines.h"
-#import "ORKTypes.h"
 @import HealthKit;
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

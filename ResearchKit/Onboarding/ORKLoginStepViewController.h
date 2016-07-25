@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKFormStepViewController.h"
+#import <ResearchKit/ORKFormStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

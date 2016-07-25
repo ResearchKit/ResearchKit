@@ -62,6 +62,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKContinuousScaleAnswerForm
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 
 @class ORKQuestionResult;
@@ -94,8 +95,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 
 @interface ORKNumericAnswerFormat ()
-
-- (NSNumberFormatter *)makeNumberFormatter;
 
 - (nullable NSString *)sanitizedTextFieldText:(nullable NSString *)text decimalSeparator:(nullable NSString *)separator;
 
@@ -145,6 +144,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (NSArray<ORKTextChoice *> *)textChoices;
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
 - (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value;
+
+@end
+
+@protocol ORKConfirmAnswerFormatProvider <NSObject>
+
+- (ORKAnswerFormat *)confirmationAnswerFormatWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                                           errorMessage:(NSString *)errorMessage;
 
 @end
 
@@ -199,7 +205,14 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @end
 
 
-@interface ORKTextAnswerFormat ()
+@interface ORKTextAnswerFormat () <ORKConfirmAnswerFormatProvider>
+
+@end
+
+
+@interface ORKHeightAnswerFormat ()
+
+@property (nonatomic, readonly) BOOL useMetricSystem;
 
 @end
 

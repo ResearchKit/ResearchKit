@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -191,6 +191,16 @@ ORK_CLASS_AVAILABLE
  @return A newly initialized step view controller.
  */
 - (instancetype)initWithStep:(nullable ORKStep *)step;
+
+/**
+ Returns a new step view controller for the specified step.
+ 
+ @param step    The step to be presented.
+ @param result  The current step result for this step.
+ 
+ @return A newly initialized step view controller.
+ */
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result;
 
 /**
  The step presented by the step view controller.

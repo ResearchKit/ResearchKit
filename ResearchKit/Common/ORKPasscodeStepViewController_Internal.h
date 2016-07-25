@@ -61,6 +61,16 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;
 
+/**
+ Stores the given passcode as the user's unlock passcode to the keychain.
+ 
+ This method will raise an exception if `passcode` is nil.
+ 
+ @param passcode          The passcode to store
+ @param touchIdEnabled    Whether TouchId will be available during passcode entry
+ */
++ (void)savePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

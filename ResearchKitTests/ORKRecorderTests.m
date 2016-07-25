@@ -382,7 +382,7 @@ static const NSInteger kNumberOfSamples = 5;
     XCTAssertNil(error, @"");
     XCTAssertNotNil(dict, @"");
     
-    NSArray* items = dict[@"items"];
+    NSArray *items = dict[@"items"];
     XCTAssertEqual(items.count, kNumberOfSamples, @"");
     
     _items = items;

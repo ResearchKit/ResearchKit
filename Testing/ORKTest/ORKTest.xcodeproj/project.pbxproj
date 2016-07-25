@@ -29,6 +29,10 @@
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
 		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
 		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FFF010721D21F1EA0054B430 /* ContinueButtonExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */; };
+		FFF010731D21F1EA0054B430 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF010711D21F1EA0054B430 /* FooterView.m */; };
+		FFF010751D21F2030054B430 /* ContinueButtonExample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */; };
+		FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +130,13 @@
 		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
 		BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
 		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FFF0106E1D21F1EA0054B430 /* ContinueButtonExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueButtonExampleViewController.h; sourceTree = "<group>"; };
+		FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueButtonExampleViewController.m; sourceTree = "<group>"; };
+		FFF010701D21F1EA0054B430 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
+		FFF010711D21F1EA0054B430 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
+		FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ContinueButtonExample.storyboard; path = "ORKTest/Supporting Files/ContinueButtonExample.storyboard"; sourceTree = SOURCE_ROOT; };
+		FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonPokerStep.h; sourceTree = "<group>"; };
+		FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonPokerStep.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,8 +229,14 @@
 		86717B001AC0C9B100AC2A23 /* CustomizationExamples */ = {
 			isa = PBXGroup;
 			children = (
+				FFF0106E1D21F1EA0054B430 /* ContinueButtonExampleViewController.h */,
+				FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */,
+				FFF010701D21F1EA0054B430 /* FooterView.h */,
+				FFF010711D21F1EA0054B430 /* FooterView.m */,
 				86717ADC1AC0C53800AC2A23 /* DynamicTask.h */,
 				86717ADD1AC0C53800AC2A23 /* DynamicTask.m */,
+				FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */,
+				FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */,
 			);
 			name = CustomizationExamples;
 			sourceTree = "<group>";
@@ -227,6 +244,7 @@
 		86717B011AC0C9D400AC2A23 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */,
 				335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */,
 				86717AE01AC0C53800AC2A23 /* image_example.png */,
 				86717AE31AC0C53800AC2A23 /* signature.png */,
@@ -393,6 +411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF010751D21F2030054B430 /* ContinueButtonExample.storyboard in Resources */,
 				86717A9E1AC0C0FE00AC2A23 /* LaunchScreen.xib in Resources */,
 				335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */,
 				86717AED1AC0C53800AC2A23 /* signature.png in Resources */,
@@ -420,11 +439,14 @@
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
 				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
 				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
+				FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */,
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */,
+				FFF010731D21F1EA0054B430 /* FooterView.m in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
+				FFF010721D21F1EA0054B430 /* ContinueButtonExampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

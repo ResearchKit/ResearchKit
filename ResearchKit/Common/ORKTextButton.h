@@ -28,9 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 @import UIKit;
-#import "ORKDefaultFont.h"
 #import "ORKDefines.h"
 
 
@@ -40,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  "Skip" button or "Learn More" button.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTextButton : UIButton <ORKDefaultFont>
+@interface ORKTextButton : UIButton
 
 @end
 

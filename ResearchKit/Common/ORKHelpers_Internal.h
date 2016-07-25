@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -246,7 +246,7 @@ id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
-const CGFloat ORKScrollToTopAnimationDuration;
+extern const CGFloat ORKScrollToTopAnimationDuration;
 
 ORK_INLINE CGFloat
 ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
@@ -261,11 +261,63 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
 
 void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews);
 
-const CGFloat ORKCGFloatInvalidValue;
+extern const double ORKDoubleInvalidValue;
+
+extern const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
+
+NSNumberFormatter *ORKDecimalNumberFormatter();
+
+ORK_INLINE double ORKFeetAndInchesToInches(double feet, double inches) {
+    return (feet * 12) + inches;
+}
+
+ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double *outInches) {
+    if (outFeet == NULL || outInches == NULL) {
+        return;
+    }
+    *outFeet = floor(inches / 12);
+    *outInches = fmod(inches, 12);
+}
+
+ORK_INLINE double ORKInchesToCentimeters(double inches) {
+    return inches * 2.54;
+}
+
+ORK_INLINE double ORKCentimetersToInches(double centimeters) {
+    return centimeters / 2.54;
+}
+
+ORK_INLINE void ORKCentimetersToFeetAndInches(double centimeters, double *outFeet, double *outInches) {
+    double inches = ORKCentimetersToInches(centimeters);
+    ORKInchesToFeetAndInches(inches, outFeet, outInches);
+}
+
+ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
+    return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
+}
+
+ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
+    UIColor *color = baseColor;
+    if (totalColors > 1) {
+        CGFloat red = 0.0;
+        CGFloat green = 0.0;
+        CGFloat blue = 0.0;
+        CGFloat alpha = 0.0;
+        if ([baseColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
+            // Avoid a pure transparent color (alpha = 0)
+            CGFloat targetAlphaFactor = ((1.0 / totalColors) * colorIndex);
+            return [UIColor colorWithRed:red + ((1.0 - red) * targetAlphaFactor)
+                                   green:green + ((1.0 - green) * targetAlphaFactor)
+                                    blue:blue + ((1.0 - blue) * targetAlphaFactor)
+                                   alpha:alpha];
+        }
+    }
+    return color;
+}
 
 // Localization
 ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;

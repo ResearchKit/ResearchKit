@@ -32,8 +32,8 @@
 #import "ORKConsentReviewStepViewController.h"
 
 #import "ORKConsentReviewController.h"
-#import "ORKConsentSignatureController.h"
 #import "ORKFormStepViewController.h"
+#import "ORKSignatureStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
 
@@ -43,6 +43,7 @@
 #import "ORKConsentSignature.h"
 #import "ORKFormStep.h"
 #import "ORKResult.h"
+#import "ORKSignatureStep.h"
 #import "ORKStep_Private.h"
 
 #import "ORKHelpers_Internal.h"
@@ -55,7 +56,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     ORKConsentReviewPhaseSignature
 };
 
-@interface ORKConsentReviewStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate, ORKConsentReviewControllerDelegate, ORKConsentSignatureControllerDelegate> {
+@interface ORKConsentReviewStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate, ORKConsentReviewControllerDelegate> {
     ORKConsentSignature *_currentSignature;
     UIPageViewController *_pageViewController;
 
@@ -231,8 +232,12 @@ static NSString *const _FamilyNameIdentifier = @"family";
     return reviewViewController;
 }
 
-- (ORKConsentSignatureController *)makeSignatureViewController {
-    ORKConsentSignatureController *signatureController = [[ORKConsentSignatureController alloc] init];
+static NSString *const _SignatureStepIdentifier = @"signatureStep";
+
+- (ORKSignatureStepViewController *)makeSignatureViewController {
+    ORKSignatureStep *step = [[ORKSignatureStep alloc] initWithIdentifier:_SignatureStepIdentifier];
+    step.optional = NO;
+    ORKSignatureStepViewController *signatureController = [[ORKSignatureStepViewController alloc] initWithStep:step];
     signatureController.delegate = self;
     return signatureController;
 }
@@ -265,8 +270,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
         }
         case ORKConsentReviewPhaseSignature: {
             // Signature VC
-            ORKConsentSignatureController *signatureViewController = [self makeSignatureViewController];
-            signatureViewController.localizedContinueButtonTitle = self.continueButtonItem.title;
+            ORKSignatureStepViewController *signatureViewController = [self makeSignatureViewController];
             viewController = signatureViewController;
             break;
         }
@@ -385,11 +389,23 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (void)stepViewControllerResultDidChange:(ORKStepViewController *)stepViewController {
     if ([stepViewController.step.identifier isEqualToString:_NameFormIdentifier]) {
+        // If this is the form step then update the values from the form
         ORKStepResult *result = [stepViewController result];
         ORKTextQuestionResult *fnr = (ORKTextQuestionResult *)[result resultForIdentifier:_GivenNameIdentifier];
         _signatureFirst = (NSString *)fnr.textAnswer;
         ORKTextQuestionResult *lnr = (ORKTextQuestionResult *)[result resultForIdentifier:_FamilyNameIdentifier];
         _signatureLast = (NSString *)lnr.textAnswer;
+        [self notifyDelegateOnResultChange];
+        
+    } else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
+        // If this is the signature step then update the image from the signature
+        ORKStepResult *result = [stepViewController result];
+        [result.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[ORKSignatureResult class]]) {
+                _signatureImage = ((ORKSignatureResult *)obj).signatureImage;
+                *stop = YES;
+    }
+        }];
         [self notifyDelegateOnResultChange];
     }
 }
@@ -435,19 +451,6 @@ static NSString *const _FamilyNameIdentifier = @"family";
     [self notifyDelegateOnResultChange];
     
     [self goForward];
-}
-
-#pragma mark ORKConsentSignatureControllerDelegate
-
-- (void)consentSignatureControllerDidSign:(ORKConsentSignatureController *)consentSignatureController {
-    _signatureImage = consentSignatureController.signatureView.signatureImage;
-    [self notifyDelegateOnResultChange];
-    [self navigateDelta:1];
-}
-- (void)consentSignatureControllerDidCancel:(ORKConsentSignatureController *)consentSignatureController {
-    _signatureImage = nil;
-    [self notifyDelegateOnResultChange];
-    [self navigateDelta:-1];
 }
 
 static NSString *const _ORKCurrentSignatureRestoreKey = @"currentSignature";

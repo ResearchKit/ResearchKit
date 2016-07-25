@@ -35,37 +35,37 @@
                                 <rect key="frame" x="0.0" y="50" width="600" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="KFi-ZJ-545" customClass="DiscreteGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BarGraphChartCell" rowHeight="250" id="bCZ-1e-tYw" customClass="BarGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="600" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KFi-ZJ-545" id="e5L-1y-jED">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bCZ-1e-tYw" id="M3k-e7-PgB">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrete Graph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sip-g6-ysz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBC-xV-8qb">
                                                     <rect key="frame" x="8" y="8" width="584" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-di-t1R" customClass="ORKDiscreteGraphChartView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fh3-yd-bFF" customClass="ORKBarGraphChartView">
                                                     <rect key="frame" x="8" y="39" width="584" height="202"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="sip-g6-ysz" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="3BL-pm-TlY"/>
-                                                <constraint firstItem="lT7-di-t1R" firstAttribute="bottom" secondItem="e5L-1y-jED" secondAttribute="bottomMargin" id="FCe-et-6qT"/>
-                                                <constraint firstItem="lT7-di-t1R" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="G6N-qn-0tu"/>
-                                                <constraint firstItem="lT7-di-t1R" firstAttribute="top" secondItem="sip-g6-ysz" secondAttribute="bottom" constant="8" id="HxY-Hd-oJl"/>
-                                                <constraint firstItem="lT7-di-t1R" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="d80-gI-Dq8"/>
-                                                <constraint firstItem="sip-g6-ysz" firstAttribute="top" secondItem="e5L-1y-jED" secondAttribute="topMargin" id="hPi-36-sDw"/>
-                                                <constraint firstItem="sip-g6-ysz" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="yaq-Oo-xbC"/>
+                                                <constraint firstItem="PBC-xV-8qb" firstAttribute="top" secondItem="M3k-e7-PgB" secondAttribute="topMargin" id="4rH-2g-2Tt"/>
+                                                <constraint firstItem="Fh3-yd-bFF" firstAttribute="trailing" secondItem="M3k-e7-PgB" secondAttribute="trailingMargin" id="CXG-NQ-mU6"/>
+                                                <constraint firstItem="PBC-xV-8qb" firstAttribute="leading" secondItem="M3k-e7-PgB" secondAttribute="leadingMargin" id="Jb9-EE-diL"/>
+                                                <constraint firstItem="Fh3-yd-bFF" firstAttribute="leading" secondItem="M3k-e7-PgB" secondAttribute="leadingMargin" id="Uup-CT-YBM"/>
+                                                <constraint firstItem="PBC-xV-8qb" firstAttribute="trailing" secondItem="M3k-e7-PgB" secondAttribute="trailingMargin" id="bF5-Bg-Qwu"/>
+                                                <constraint firstItem="Fh3-yd-bFF" firstAttribute="top" secondItem="PBC-xV-8qb" secondAttribute="bottom" constant="8" id="piG-O7-meI"/>
+                                                <constraint firstItem="Fh3-yd-bFF" firstAttribute="bottom" secondItem="M3k-e7-PgB" secondAttribute="bottomMargin" id="zMC-IL-Blg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="graphChartView" destination="lT7-di-t1R" id="w75-Ly-1tP"/>
+                                            <outlet property="graphChartView" destination="Fh3-yd-bFF" id="yuf-6y-BIx"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LineGraphChartCell" rowHeight="250" id="2i1-4y-xyD" customClass="LineGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
@@ -75,7 +75,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Graph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-cR-Okz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-cR-Okz">
                                                     <rect key="frame" x="8" y="8" width="584" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,8 +101,41 @@
                                             <outlet property="graphChartView" destination="KVp-LO-PWd" id="xfV-gc-IdN"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="KFi-ZJ-545" customClass="DiscreteGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="522" width="600" height="250"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KFi-ZJ-545" id="e5L-1y-jED">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrete Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sip-g6-ysz">
+                                                    <rect key="frame" x="8" y="8" width="584" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-di-t1R" customClass="ORKDiscreteGraphChartView">
+                                                    <rect key="frame" x="8" y="39" width="584" height="202"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="sip-g6-ysz" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="3BL-pm-TlY"/>
+                                                <constraint firstItem="lT7-di-t1R" firstAttribute="bottom" secondItem="e5L-1y-jED" secondAttribute="bottomMargin" id="FCe-et-6qT"/>
+                                                <constraint firstItem="lT7-di-t1R" firstAttribute="trailing" secondItem="e5L-1y-jED" secondAttribute="trailingMargin" id="G6N-qn-0tu"/>
+                                                <constraint firstItem="lT7-di-t1R" firstAttribute="top" secondItem="sip-g6-ysz" secondAttribute="bottom" constant="8" id="HxY-Hd-oJl"/>
+                                                <constraint firstItem="lT7-di-t1R" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="d80-gI-Dq8"/>
+                                                <constraint firstItem="sip-g6-ysz" firstAttribute="top" secondItem="e5L-1y-jED" secondAttribute="topMargin" id="hPi-36-sDw"/>
+                                                <constraint firstItem="sip-g6-ysz" firstAttribute="leading" secondItem="e5L-1y-jED" secondAttribute="leadingMargin" id="yaq-Oo-xbC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="graphChartView" destination="lT7-di-t1R" id="w75-Ly-1tP"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PieChartCell" rowHeight="400" id="0oB-ve-dS5" customClass="PieChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="522" width="600" height="400"/>
+                                        <rect key="frame" x="0.0" y="772" width="600" height="400"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0oB-ve-dS5" id="r38-NH-vJN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="399"/>
@@ -137,7 +170,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="WZ6-mC-IEj" firstAttribute="top" secondItem="igJ-g1-C2g" secondAttribute="bottom" id="3si-iV-C5I"/>
                             <constraint firstItem="igJ-g1-C2g" firstAttribute="leading" secondItem="n8g-W7-H6f" secondAttribute="leading" id="Cvx-rr-Ohn"/>
@@ -190,20 +223,20 @@
                                 <rect key="frame" x="0.0" y="50" width="600" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="LFI-dW-bSz" customClass="DiscreteGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BarGraphChartCell" rowHeight="250" id="LFI-dW-bSz" customClass="BarGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="600" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LFI-dW-bSz" id="PHG-DV-yH1">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrete Graph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH8-rf-L09">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bar Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zH8-rf-L09">
                                                     <rect key="frame" x="8" y="8" width="584" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAU-HS-4gj" customClass="ORKDiscreteGraphChartView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAU-HS-4gj" customClass="ORKBarGraphChartView">
                                                     <rect key="frame" x="8" y="39" width="584" height="202"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -230,7 +263,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Graph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhF-UX-vuT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Line Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhF-UX-vuT">
                                                     <rect key="frame" x="8" y="8" width="584" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -256,8 +289,41 @@
                                             <outlet property="graphChartView" destination="C6v-PW-Pax" id="Ebx-V8-gpp"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="Ddn-1U-aei" customClass="DiscreteGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="522" width="600" height="250"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ddn-1U-aei" id="mjY-OC-DBl">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="249"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrete Graph Chart" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epv-1y-axS">
+                                                    <rect key="frame" x="8" y="8" width="584" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RYC-Yd-fnt" customClass="ORKDiscreteGraphChartView">
+                                                    <rect key="frame" x="8" y="39" width="584" height="202"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="epv-1y-axS" firstAttribute="trailing" secondItem="mjY-OC-DBl" secondAttribute="trailingMargin" id="4hg-T6-Nue"/>
+                                                <constraint firstItem="RYC-Yd-fnt" firstAttribute="leading" secondItem="mjY-OC-DBl" secondAttribute="leadingMargin" id="8wJ-Pq-nmW"/>
+                                                <constraint firstItem="RYC-Yd-fnt" firstAttribute="top" secondItem="epv-1y-axS" secondAttribute="bottom" constant="8" id="CMi-SS-2zZ"/>
+                                                <constraint firstItem="RYC-Yd-fnt" firstAttribute="bottom" secondItem="mjY-OC-DBl" secondAttribute="bottomMargin" id="S5C-dW-xJr"/>
+                                                <constraint firstItem="epv-1y-axS" firstAttribute="leading" secondItem="mjY-OC-DBl" secondAttribute="leadingMargin" id="bXz-Fl-A6C"/>
+                                                <constraint firstItem="RYC-Yd-fnt" firstAttribute="trailing" secondItem="mjY-OC-DBl" secondAttribute="trailingMargin" id="dGn-PG-Yxu"/>
+                                                <constraint firstItem="epv-1y-axS" firstAttribute="top" secondItem="mjY-OC-DBl" secondAttribute="topMargin" id="wc7-9r-Fya"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="graphChartView" destination="RYC-Yd-fnt" id="aPB-lW-QvL"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PieChartCell" rowHeight="400" id="HUN-ei-9hu" customClass="PieChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="522" width="600" height="400"/>
+                                        <rect key="frame" x="0.0" y="772" width="600" height="400"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUN-ei-9hu" id="KuS-pu-BMv">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="399"/>
@@ -292,7 +358,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="KRs-VW-ttd" firstAttribute="leading" secondItem="I6G-lW-PXk" secondAttribute="leading" id="Ro7-JS-DXV"/>
                             <constraint firstItem="KRs-VW-ttd" firstAttribute="top" secondItem="I6G-lW-PXk" secondAttribute="top" constant="44" id="W9J-m5-01R"/>

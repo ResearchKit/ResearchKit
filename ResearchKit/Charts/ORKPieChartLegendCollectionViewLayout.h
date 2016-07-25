@@ -1,6 +1,7 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
- 
+ Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,15 +30,13 @@
  */
 
 
-#import "ORKOrderedTask_Private.h"
+#import <UIKit/UIKit.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKOrderedTask ()
-
-- (NSUInteger)indexOfStep:(ORKStep *)step;
+// This class implements a centered collection view layout,
+// in which the cells are distributed as equally as possible between rows
+// and each row is laid out as compactly as possible within its center
+// (rather than spreading to take all available space like in the UICollectionViewFlowLayout)
+@interface ORKPieChartLegendCollectionViewLayout : UICollectionViewFlowLayout
 
 @end
-
-NS_ASSUME_NONNULL_END

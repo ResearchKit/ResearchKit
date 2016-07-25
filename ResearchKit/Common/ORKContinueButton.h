@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKBorderedButton.h"
+#import <ResearchKit/ORKBorderedButton.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

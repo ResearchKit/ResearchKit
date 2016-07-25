@@ -31,7 +31,7 @@
 
 #import "ORKNavigationContainerView.h"
 #import "ORKContinueButton.h"
-#import "ORKTextButton.h"
+#import "ORKTextButton_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

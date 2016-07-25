@@ -165,6 +165,26 @@
     return self;
 }
 
+- (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
+                                                     text:(nullable NSString *)text
+                                             errorMessage:(NSString *)errorMessage {
+    
+    if (![self.answerFormat conformsToProtocol:@protocol(ORKConfirmAnswerFormatProvider)]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:[NSString stringWithFormat:@"Answer format %@ does not conform to confirmation protocol", self.answerFormat]
+                                     userInfo:nil];
+    }
+    
+    ORKAnswerFormat *answerFormat = [(id <ORKConfirmAnswerFormatProvider>)self.answerFormat
+                                     confirmationAnswerFormatWithOriginalItemIdentifier:self.identifier
+                                     errorMessage:errorMessage];
+    ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:identifier
+                                                           text:text
+                                                   answerFormat:answerFormat
+                                                       optional:self.optional];
+    return item;
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
 }

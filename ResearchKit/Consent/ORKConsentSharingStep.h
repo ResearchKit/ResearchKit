@@ -30,8 +30,7 @@
 
 
 @import Foundation;
-#import "ORKDefines.h"
-#import "ORKQuestionStep.h"
+#import <ResearchKit/ORKQuestionStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

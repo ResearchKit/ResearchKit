@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,13 +29,31 @@
  */
 
 
-@import UIKit;
+#import "ORKSignatureStep.h"
+
+#import "ORKSignatureStepViewController.h"
+
+#import "ORKHelpers_Internal.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKSignatureStep
 
-@interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        // Set default values for the title and text
+        self.title = ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil);
+        self.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
+    }
+    return self;
+}
+
++ (Class)stepViewControllerClass {
+    return [ORKSignatureStepViewController class];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

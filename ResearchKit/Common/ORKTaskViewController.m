@@ -842,7 +842,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         // the next time we look.
     }
     
-    ORKStep * nextStep = [self.task stepAfterStep:step withResult:[self result]];
+    ORKStep *nextStep = [self.task stepAfterStep:step withResult:[self result]];
     BOOL isNextStepInstructionStep = [nextStep isKindOfClass:[ORKInstructionStep class]];
     
     if (_lastBeginningInstructionStepIdentifier == nil &&
@@ -1037,22 +1037,16 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = nil;
     
     if ([self.delegate respondsToSelector:@selector(taskViewController:viewControllerForStep:)]) {
+        // NOTE: While the delegate does not have direct access to the defaultResultSource,
+        // it is assumed that it can set results as needed on the custom implementation of an
+        // ORKStepViewController that it returns.
         stepViewController = [self.delegate taskViewController:self viewControllerForStep:step];
     }
     
+    // If the delegate did not return a step view controller then instantiate one
     if (!stepViewController) {
-        Class stepViewControllerClass = step.stepViewControllerClass;
         
-        ORKStepResult *result = nil;
-        result = _managedResults[step.identifier];
-        if (!result ) {
-            result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
-        }
-        
-        if (!result) {
-            result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
-        }
-        
+        // Special-case the ORKReviewStep
         if ([step isKindOfClass:[ORKReviewStep class]]) {
             ORKReviewStep *reviewStep = (ORKReviewStep *)step;
             NSArray *steps = [self stepsForReviewStep:reviewStep];
@@ -1060,15 +1054,44 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             stepViewController = [[ORKReviewStepViewController alloc] initWithReviewStep:(ORKReviewStep *) step steps:steps resultSource:resultSource];
             ORKReviewStepViewController *reviewStepViewController = (ORKReviewStepViewController *) stepViewController;
             reviewStepViewController.reviewDelegate = self;
-        } else {
-            stepViewController = [[stepViewControllerClass alloc] initWithStep:step result:result];
         }
-        
-        stepViewController.restorationIdentifier = step.identifier;
-        stepViewController.restorationClass = stepViewControllerClass;
-        
-    } else if (![stepViewController isKindOfClass:[ORKStepViewController class]]) {
+        else {
+            
+            // Get the step result associated with this step
+            ORKStepResult *result = nil;
+            result = _managedResults[step.identifier];
+            if (!result ) {
+                result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            }
+            
+            if (!result) {
+                result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
+            }
+            
+            // Allow the step to instantiate the view controller. This will allow either the default
+            // implementation using an override of the internal method `-stepViewControllerClass` or
+            // allow for storyboard implementations.
+            stepViewController = [step instantiateStepViewControllerWithResult:result];
+        }
+    }
+    
+    // Throw an exception if the created step view controller is not a subclass of ORKStepViewController
+    ORKThrowInvalidArgumentExceptionIfNil(stepViewController);
+    if (![stepViewController isKindOfClass:[ORKStepViewController class]]) {
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"View controller should be of class %@", [ORKStepViewController class]] userInfo:@{@"viewController": stepViewController}];
+    }
+    
+    // If this is a restorable task view controller, check that the restoration identifier and class
+    // are set on the step result. If not, do so here. This gives the instantiator the opportunity to
+    // set this value, but ensures that it is set to the default if the instantiator does not do so.
+    if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)] &&
+        [self.delegate taskViewControllerSupportsSaveAndRestore:self]){
+        if (stepViewController.restorationIdentifier == nil) {
+            stepViewController.restorationIdentifier = step.identifier;
+        }
+        if (stepViewController.restorationClass == nil) {
+            stepViewController.restorationClass = [stepViewController class];
+        }
     }
     
     stepViewController.outputDirectory = self.outputDirectory;
@@ -1105,6 +1128,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
+    
+    if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
+        ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
+        });
+        return;
+    }
+    
     BOOL supportSaving = NO;
     if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
         supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
@@ -1246,6 +1278,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!stepViewController.readOnlyMode) {
         // Add step result object
         [self setManagedResult:[stepViewController result] forKey:stepViewController.step.identifier];
+    }
+    
+    // Alert the delegate that the step is finished 
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(taskViewController:stepViewControllerWillDisappear:navigationDirection:)]) {
+        [strongDelegate taskViewController:self stepViewControllerWillDisappear:stepViewController navigationDirection:direction];
     }
     
     if (direction == ORKStepViewControllerNavigationDirectionForward) {

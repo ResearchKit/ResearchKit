@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setTapCount:(NSUInteger)tapCount;
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
+@property (nonatomic, assign) BOOL hasSkipButton;
+
 @property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton1;
 
 @property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton2;

@@ -214,12 +214,12 @@
     NSArray *inputs = _previewLayer.session.inputs;
     if (!inputs || inputs.count == 0)
         return UIEdgeInsetsZero;
-    AVCaptureDeviceInput* input = (AVCaptureDeviceInput*)inputs[0];
-    CMVideoDimensions cmd = CMVideoFormatDescriptionGetDimensions(input.device.activeFormat.formatDescription);
-    AVCaptureVideoOrientation avcvo = _previewLayer.connection.videoOrientation;
-    BOOL landscape = avcvo == AVCaptureVideoOrientationLandscapeLeft || avcvo == AVCaptureVideoOrientationLandscapeRight;
+    AVCaptureDeviceInput *input = (AVCaptureDeviceInput*)inputs[0];
+    CMVideoDimensions videoDimensions = CMVideoFormatDescriptionGetDimensions(input.device.activeFormat.formatDescription);
+    AVCaptureVideoOrientation orientation = _previewLayer.connection.videoOrientation;
+    BOOL landscape = (orientation == AVCaptureVideoOrientationLandscapeLeft || orientation == AVCaptureVideoOrientationLandscapeRight);
     
-    CGRect contentFrame = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(landscape ? cmd.width : cmd.height, landscape ? cmd.height : cmd.width), _previewLayer.frame);
+    CGRect contentFrame = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(landscape ? videoDimensions.width : videoDimensions.height, landscape ? videoDimensions.height : videoDimensions.width), _previewLayer.frame);
     CGRect overallFrame = _previewLayer.frame;
     return UIEdgeInsetsMake(contentFrame.origin.y - overallFrame.origin.y,
                             contentFrame.origin.x - overallFrame.origin.x,

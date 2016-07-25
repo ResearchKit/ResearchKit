@@ -48,9 +48,14 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
+static CGFloat const kForgotPasscodeVerticalPadding     = 50.0f;
+static CGFloat const kForgotPasscodeHorizontalPadding   = 30.0f;
+static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
+    CGFloat _originalForgotPasscodeY;
+    UIButton* _forgotPasscodeButton;
     UITextField *_accessibilityPasscodeField;
     NSMutableString *_passcode;
     NSMutableString *_confirmPasscode;
@@ -101,6 +106,29 @@
         _isTouchIdAuthenticated = NO;
         _isPasscodeSaved = NO;
         _useTouchId = YES;
+        
+        // If this has text, we should add the forgot passcode button with this title
+        if ([self hasForgotPasscode]) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+        
+            CGFloat x = kForgotPasscodeHorizontalPadding;
+            _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
+            CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
+
+            UIButton *forgotPasscodeButton = [ORKTextButton new];
+            forgotPasscodeButton.contentEdgeInsets = (UIEdgeInsets){12, 10, 8, 10};
+            forgotPasscodeButton.frame = CGRectMake(x, _originalForgotPasscodeY, width, kForgotPasscodeHeight);
+            
+            NSString *buttonTitle = [self forgotPasscodeButtonText];
+            [forgotPasscodeButton setTitle:buttonTitle forState:UIControlStateNormal];
+            [forgotPasscodeButton addTarget:self
+                                     action:@selector(forgotPasscodeTapped)
+                           forControlEvents:UIControlEventTouchUpInside];
+            
+            [self.view addSubview:forgotPasscodeButton];            
+            _forgotPasscodeButton = forgotPasscodeButton;
+        }
         
         // Set the starting passcode state and textfield based on flow.
         switch (_passcodeFlow) {
@@ -380,13 +408,18 @@
 }
 
 - (void)savePasscodeToKeychain {
+    [[self class] savePasscode:_passcode withTouchIdEnabled:_isTouchIdAuthenticated];
+    _isPasscodeSaved = YES;     // otherwise an exception would have been thrown
+}
+
++ (void)savePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
+    ORKThrowInvalidArgumentExceptionIfNil(passcode)
     NSDictionary *dictionary = @{
-                                 KeychainDictionaryPasscodeKey: [_passcode copy],
-                                 KeychainDictionaryTouchIdKey: @(_isTouchIdAuthenticated)
+                                 KeychainDictionaryPasscodeKey: [passcode copy],
+                                 KeychainDictionaryTouchIdKey: @(touchIdEnabled)
                                  };
     NSError *error;
-    _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
-    
+    [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
     }
@@ -601,7 +634,7 @@
         }
     } else if (_numberOfFilledBullets < passcodeTextField.numberOfDigits) {
         // Only allow numeric characters besides backspace (covered by the previous if statement).
-        if (! [[NSScanner scannerWithString:string] scanFloat:NULL]) {
+        if (![[NSScanner scannerWithString:string] scanFloat:NULL]) {
             [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE", nil)];
             return NO;
         }
@@ -654,6 +687,49 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     return _shouldResignFirstResponder;
+}
+
+- (void)forgotPasscodeTapped {
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
+        [self.passcodeDelegate passcodeViewControllerForgotPasscodeTapped:self ];
+    }
+}
+
+- (BOOL)hasForgotPasscode {
+    if ((self.passcodeFlow == ORKPasscodeFlowAuthenticate) &&
+        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerForgotPasscodeTapped:)]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSString *)forgotPasscodeButtonText {
+    if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerTextForForgotPasscode:)]) {
+        return [self.passcodeDelegate passcodeViewControllerTextForForgotPasscode: self];
+    }
+    return ORKLocalizedString(@"PASSCODE_FORGOT_BUTTON_TITLE", @"Prompt for user forgetting their passcode");
+}
+
+#pragma mark - Keyboard Notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+    CGFloat keyboardHeight = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        [_forgotPasscodeButton setFrame:CGRectMake(_forgotPasscodeButton.frame.origin.x, _originalForgotPasscodeY - keyboardHeight, _forgotPasscodeButton.frame.size.width, _forgotPasscodeButton.frame.size.height)];
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    
+    double animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+    [UIView animateWithDuration:animationDuration animations:^{
+         [_forgotPasscodeButton setFrame:CGRectMake(_forgotPasscodeButton.frame.origin.x, _originalForgotPasscodeY, _forgotPasscodeButton.frame.size.width, _forgotPasscodeButton.frame.size.height)];
+     }];
 }
 
 @end

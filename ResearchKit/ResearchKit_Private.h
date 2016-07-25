@@ -36,22 +36,14 @@
 // Active step support
 #import "ORKDataLogger.h"
 #import "ORKErrors.h"
-#import "ORKTaskViewController_Private.h"
 
-// Step view controllers (useful for appearance, customization by subclassing)
-#import "ORKConsentReviewStepViewController.h"
-#import "ORKImageCaptureStepViewController.h"
-#import "ORKInstructionStepViewController.h"
-#import "ORKQuestionStepViewController.h"
-#import "ORKReviewStepViewController.h"
-#import "ORKVisualConsentStepViewController.h"
-#import "ORKWaitStepViewController.h"
-
-// Custom steps
-#import "ORKCustomStepView.h"
-
-// Specific active task modules
+#import "ORKAnswerFormat_Private.h"
+#import "ORKConsentSection_Private.h"
 #import "ORKOrderedTask_Private.h"
+#import "ORKRecorder_Private.h"
+#import "ORKResult_Private.h"
+#import "ORKStepNavigationRule_Private.h"
+#import "ORKAudioLevelNavigationRule.h"
 
 #import "ORKAudioStep.h"
 #import "ORKCompletionStep.h"
@@ -69,19 +61,27 @@
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKWalkingTaskStep.h"
 
+#import "ORKTaskViewController_Private.h"
+#import "ORKQuestionStepViewController_Private.h"
+
 #import "ORKAudioStepViewController.h"
 #import "ORKCompletionStepViewController.h"
+#import "ORKConsentReviewStepViewController.h"
 #import "ORKCountdownStepViewController.h"
 #import "ORKFitnessStepViewController.h"
 #import "ORKHolePegTestPlaceStepViewController.h"
 #import "ORKHolePegTestRemoveStepViewController.h"
+#import "ORKImageCaptureStepViewController.h"
+#import "ORKInstructionStepViewController.h"
 #import "ORKPSATStepViewController.h"
+#import "ORKQuestionStepViewController.h"
+#import "ORKReviewStepViewController.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
 #import "ORKTappingIntervalStepViewController.h"
 #import "ORKToneAudiometryPracticeStepViewController.h"
 #import "ORKToneAudiometryStepViewController.h"
 #import "ORKTimedWalkStepViewController.h"
-#import "ORKWaitStepViewController.h"
+#import "ORKVisualConsentStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
 
 #import "ORKAccelerometerRecorder.h"
@@ -92,10 +92,5 @@
 #import "ORKPedometerRecorder.h"
 #import "ORKTouchRecorder.h"
 
-// More internal stuff
-#import "ORKAnswerFormat_Private.h"
-#import "ORKConsentSection_Private.h"
-#import "ORKQuestionStepViewController_Private.h"
-#import "ORKRecorder_Private.h"
-#import "ORKResult_Private.h"
-#import "ORKStepNavigationRule_Private.h"
+// For custom steps
+#import "ORKCustomStepView.h"

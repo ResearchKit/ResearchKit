@@ -92,7 +92,7 @@
         self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
         indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        NSMutableArray* constraints = [NSMutableArray new];
+        NSMutableArray *constraints = [NSMutableArray new];
         
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[indicatorView]-horizontalMargin-|"
                                                                                  options:NSLayoutFormatDirectionLeadingToTrailing

@@ -103,6 +103,13 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+@interface ORKSignatureResult ()
+
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

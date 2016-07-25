@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

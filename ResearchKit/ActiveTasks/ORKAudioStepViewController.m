@@ -71,11 +71,23 @@
     return self;
 }
 
+- (void)setAlertThreshold:(CGFloat)alertThreshold {
+    _alertThreshold = alertThreshold;
+    if (self.isViewLoaded && alertThreshold > 0) {
+        _audioContentView.alertThreshold = alertThreshold;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.stepDuration;
+
+    if (self.alertThreshold > 0) {
+        _audioContentView.alertThreshold = self.alertThreshold;
+    }
+
     self.activeStepView.activeCustomView = _audioContentView;
 }
 

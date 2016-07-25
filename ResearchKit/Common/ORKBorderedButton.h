@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKTextButton.h"
+#import <ResearchKit/ORKTextButton.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

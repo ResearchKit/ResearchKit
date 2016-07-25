@@ -536,10 +536,10 @@
     _sections = [NSMutableArray new];
     ORKTableSection *section = nil;
     
-    NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
-                                     @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice),
-                                     @(ORKQuestionTypeLocation)];
+    NSArray *singleSectionTypes = @[@(ORKQuestionTypeBoolean),
+                                    @(ORKQuestionTypeSingleChoice),
+                                    @(ORKQuestionTypeMultipleChoice),
+                                    @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header
@@ -779,10 +779,8 @@
             [section.textChoiceCellGroup setAnswer:answer];
             cell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
         } else {
-            
             ORKAnswerFormat *answerFormat = [cellItem.formItem impliedAnswerFormat];
             ORKQuestionType type = answerFormat.questionType;
-            
             
             Class class = nil;
             switch (type) {
@@ -799,7 +797,8 @@
                 case ORKQuestionTypeDateAndTime:
                 case ORKQuestionTypeDate:
                 case ORKQuestionTypeTimeOfDay:
-                case ORKQuestionTypeTimeInterval: {
+                case ORKQuestionTypeTimeInterval:
+                case ORKQuestionTypeHeight: {
                     class = [ORKFormItemPickerCell class];
                     break;
                 }

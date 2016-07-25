@@ -213,7 +213,15 @@
                                                                 attribute:NSLayoutAttributeCenterY
                                                                multiplier:1.0
                                                                  constant:0.0]];
-            
+
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:0.25
+                                                                 constant:0.0]];
+
             [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
@@ -234,13 +242,6 @@
                 if (i == 0) {
                     // First label
                     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0]];
-                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeCenterY
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:_slider
@@ -252,8 +253,17 @@
                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                                            toItem:self
                                                                         attribute:NSLayoutAttributeWidth
-                                                                       multiplier:0.5
-                                                                         constant:0.0]];
+                                                                       multiplier:0.75
+                                                                         constant:0]];
+                    
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.0
+                                                                         constant:-SideLabelMargin]];
+
                 } else {
                     // Middle labels
                     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]

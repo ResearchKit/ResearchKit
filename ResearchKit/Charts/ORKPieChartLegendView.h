@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKPieChartLegendView : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic) UIFont *labelFont;
+@property (nonatomic, readonly) NSMutableArray<NSValue *> *cellSizes;
+@property (nonatomic, readonly) CGFloat totalCellWidth;
 
 - (instancetype)initWithFrame:(CGRect)frame
          collectionViewLayout:(UICollectionViewLayout *)collectionViewLayout NS_UNAVAILABLE;
