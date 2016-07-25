@@ -228,6 +228,21 @@ ORK_AVAILABLE_DECL
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsVerticalReferenceLineAtPointIndex:(NSInteger)pointIndex;
 
+
+/**
+ Asks the data source if the plot at specified index should display circular indicators on its data points.
+ 
+ This only applys to `ORKLineGrapthChartView`.
+ If this method is not implemented, point indicators will be drawn for all plots.
+ 
+ @param graphChartView  The graph view asking whether point indicators should be drawn.
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return Whether the graph chart view should draw point indicators for its points.
+ */
+- (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
+
 @end
 
 
