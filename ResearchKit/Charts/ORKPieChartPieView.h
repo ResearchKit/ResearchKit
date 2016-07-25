@@ -40,6 +40,8 @@
 
 @property (nonatomic) UIFont *percentageLabelFont;
 
+@property (nonatomic) CGFloat radiusScaleFactor;
+
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
