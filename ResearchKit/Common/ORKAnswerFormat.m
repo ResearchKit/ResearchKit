@@ -1549,6 +1549,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
         ORK_DECODE_IMAGE(aDecoder, minimumImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
     }
     return self;
 }
@@ -1564,6 +1566,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
     ORK_ENCODE_IMAGE(aCoder, maximumImage);
     ORK_ENCODE_IMAGE(aCoder, minimumImage);
+    ORK_ENCODE_OBJ(aCoder, gradientColors);
+    ORK_ENCODE_OBJ(aCoder, gradientLocations);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1582,7 +1586,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             ORKEqualObjects(self.maximumValueDescription, castObject.maximumValueDescription) &&
             ORKEqualObjects(self.minimumValueDescription, castObject.minimumValueDescription) &&
             ORKEqualObjects(self.maximumImage, castObject.maximumImage) &&
-            ORKEqualObjects(self.minimumImage, castObject.minimumImage));
+            ORKEqualObjects(self.minimumImage, castObject.minimumImage) &&
+            ORKEqualObjects(self.gradientColors, castObject.gradientColors) &&
+            ORKEqualObjects(self.gradientLocations, castObject.gradientLocations));
 }
 
 - (ORKQuestionType)questionType {
@@ -1744,6 +1750,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
         ORK_DECODE_IMAGE(aDecoder, minimumImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
     }
     return self;
 }
@@ -1760,6 +1768,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
     ORK_ENCODE_IMAGE(aCoder, maximumImage);
     ORK_ENCODE_IMAGE(aCoder, minimumImage);
+    ORK_ENCODE_OBJ(aCoder, gradientColors);
+    ORK_ENCODE_OBJ(aCoder, gradientLocations);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1779,7 +1789,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             ORKEqualObjects(self.maximumValueDescription, castObject.maximumValueDescription) &&
             ORKEqualObjects(self.minimumValueDescription, castObject.minimumValueDescription) &&
             ORKEqualObjects(self.maximumImage, castObject.maximumImage) &&
-            ORKEqualObjects(self.minimumImage, castObject.minimumImage));
+            ORKEqualObjects(self.minimumImage, castObject.minimumImage) &&
+            ORKEqualObjects(self.gradientColors, castObject.gradientColors) &&
+            ORKEqualObjects(self.gradientLocations, castObject.gradientLocations));
 }
 
 - (ORKQuestionType)questionType {
@@ -1930,6 +1942,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, textChoices, ORKTextChoice);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
         ORK_DECODE_INTEGER(aDecoder, defaultIndex);
         ORK_DECODE_BOOL(aDecoder, vertical);
     }
@@ -1939,6 +1953,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, textChoices);
+    ORK_ENCODE_OBJ(aCoder, gradientColors);
+    ORK_ENCODE_OBJ(aCoder, gradientLocations);
     ORK_ENCODE_INTEGER(aCoder, defaultIndex);
     ORK_ENCODE_BOOL(aCoder, vertical);
 }
@@ -1954,7 +1970,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             ORKEqualObjects(self.textChoices, castObject.textChoices) &&
             (_defaultIndex == castObject.defaultIndex) &&
-            (_vertical == castObject.vertical));
+            (_vertical == castObject.vertical) &&
+            ORKEqualObjects(self.gradientColors, castObject.gradientColors) &&
+            ORKEqualObjects(self.gradientLocations, castObject.gradientLocations));
 }
 
 - (ORKQuestionType)questionType {

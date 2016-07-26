@@ -42,4 +42,8 @@
 
 @property (nonatomic, copy, nullable) NSArray *textChoices;
 
+@property (nonatomic, copy, nullable) NSArray<UIColor *> *gradientColors;
+
+@property (nonatomic, copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end

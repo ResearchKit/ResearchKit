@@ -80,6 +80,9 @@
         NSArray<ORKTextChoice *> *textChoices = [[self textScaleFormatProvider] textChoices];
         _slider.textChoices = textChoices;
         
+        _slider.gradientColors = [formatProvider gradientColors];
+        _slider.gradientLocations = [formatProvider gradientLocations];
+        
         if (isVertical && textChoices) {
             // Generate an array of labels for all the text choices
             _textChoiceLabels = [NSMutableArray new];
