@@ -123,6 +123,8 @@ ORK_CLASS_AVAILABLE
 
 - (void)removeStepResultWithIdentifier:(NSString *)identifier;
 
+- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier;
+
 - (NSArray <ORKResult *> *)flattenResults;
 
 - (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory;

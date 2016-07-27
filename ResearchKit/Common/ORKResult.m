@@ -2225,6 +2225,16 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     }
 }
 
+- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier {
+    ORKResult *result = [self resultForIdentifier:identifier];
+    if (result != nil) {
+        NSUInteger idx = [self.results indexOfObject:result];
+        if (idx != NSNotFound) {
+            self.results = [self.results subarrayWithRange:NSMakeRange(0, idx)];
+        }
+    }
+}
+
 - (NSArray <ORKResult *> *)flattenResults {
     NSMutableArray *results = [NSMutableArray new];
     for (ORKResult *result in self.results) {

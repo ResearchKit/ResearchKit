@@ -56,6 +56,15 @@ ORK_CLASS_AVAILABLE
  */
 - (id <ORKTaskResultSource>)resultSource;
 
+/**
+ Go to the given step.
+ 
+ @param step        The step to go to
+ @param direction   The direction in which navigate
+ @param animated    Should the change of view controllers be animated.
+ */
+- (void)goToStep:(ORKStep *)step direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated;
+
 @end
 
 NS_ASSUME_NONNULL_END

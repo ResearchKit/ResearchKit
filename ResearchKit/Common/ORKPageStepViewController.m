@@ -36,6 +36,7 @@
 #import "ORKHelpers.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKResult_Private.h"
+#import "ORKStep_Private.h"
 
 typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     ORKPageNavigationDirectionNone = 0,
@@ -48,6 +49,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 @property (nonatomic, readonly) ORKPageResult *pageResult;
 @property (nonatomic, readonly) UIPageViewController *pageViewController;
 @property (nonatomic, copy, readonly, nullable) NSString *currentStepIdentifier;
+@property (nonatomic, readonly) ORKStepViewController *currentStepViewController;
 
 @end
 
@@ -64,6 +66,14 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 - (ORKPageStep *)pageStep {
     if ([self.step isKindOfClass:[ORKPageStep class]]) {
         return (ORKPageStep *)self.step;
+    }
+    return nil;
+}
+
+- (ORKStepViewController *)currentStepViewController {
+    UIViewController *viewController = [self.pageViewController.viewControllers firstObject];
+    if ([viewController isKindOfClass:[ORKStepViewController class]]) {
+        return (ORKStepViewController *)viewController;
     }
     return nil;
 }
@@ -120,6 +130,10 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 }
 
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
+    // Hide the back navigation item if not allowed
+    if (!self.currentStepViewController.step.allowsBackNavigation) {
+        return nil;
+    }
     UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
@@ -204,16 +218,17 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     }
 }
 
-- (void)navigateInDirection:(ORKPageNavigationDirection)direction animated:(BOOL)animated {
-    ORKStep *step = [self stepInDirection:direction];
+- (void)navigateInDirection:(ORKPageNavigationDirection)delta animated:(BOOL)animated {
+    ORKStep *step = [self stepInDirection:delta];
     if (step == nil) {
-        if (direction < 0) {
+        if (delta < 0) {
             [self goBackward];
         }
         else {
             [self goForward];
         }
     } else {
+        UIPageViewControllerNavigationDirection direction = (!animated || delta >= 0) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
         [self goToStep:step direction:direction animated:animated];
     }
 }
@@ -224,7 +239,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     return viewController;
 }
 
-- (void)goToStep:(ORKStep *)step direction:(ORKPageNavigationDirection)delta animated:(BOOL)animated {
+- (void)goToStep:(ORKStep *)step direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated {
     ORKStepViewController *stepViewController = [self stepViewControllerForStep:step];
     
     if (!stepViewController) {
@@ -233,12 +248,14 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
         return;
     }
     
+    // Flush the page result
+    [self.pageResult removeStepResultsAfterStepWithIdentifier: step.identifier];
+    
     // Setup view controller
     stepViewController.delegate = self;
     stepViewController.outputDirectory = self.outputDirectory;
     
     // Setup page direction
-    UIPageViewControllerNavigationDirection direction = (!animated || delta >= 0) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
     
     _currentStepIdentifier = step.identifier;
