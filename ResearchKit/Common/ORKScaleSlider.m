@@ -33,7 +33,6 @@
 
 #import "ORKScaleSlider.h"
 #import "ORKAccessibility.h"
-#import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKSkin.h"
 #import "ORKScaleSliderView.h"

@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKDefines_Private.h"
+#import <ResearchKit/ORKTypes.h>
 
 
 ORK_CLASS_AVAILABLE

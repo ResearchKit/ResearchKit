@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,8 +28,58 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+#import "DragonPokerStep.h"
 
-@interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
+@interface DragonPokerStep ()
+
+@property (nonatomic) NSDate *playDate;
+
+@end
+
+@interface DragonPokerStepViewController : ORKFormStepViewController
+
+@property (nonatomic) BOOL shouldShowCancelButton;
+
+@end
+
+@implementation DragonPokerStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        ORKFormItem *formItem = [[ORKFormItem alloc] initWithIdentifier:@"question1" text:@"Are you tall?" answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
+        self.formItems = @[formItem];
+    }
+    return self;
+}
+
+- (NSDate *)playDate {
+    if (_playDate == nil) {
+        _playDate = [NSDate date];
+    }
+    return _playDate;
+}
+
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
+    
+    DragonPokerStepViewController *viewController = [[DragonPokerStepViewController alloc] initWithStep:self result:result];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self.playDate];
+    viewController.shouldShowCancelButton = components.weekday == 2;
+    
+    return viewController;
+}
+
+@end
+
+@implementation DragonPokerStepViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Hide the cancel button if it should not be shown.
+    if (!self.shouldShowCancelButton) {
+        self.cancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] initWithFrame:CGRectZero]];
+    }
+}
 
 @end

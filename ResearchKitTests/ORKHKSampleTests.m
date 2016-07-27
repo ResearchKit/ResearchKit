@@ -65,7 +65,7 @@
     NSDate *d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     NSDate *d2 = [NSDate dateWithTimeInterval:10 sinceDate:d1];
     
-    NSDictionary *testMeta = @{@"k1" : @"v1"};
+    NSDictionary *testMeta = @{@"k1": @"v1"};
     
     NSString *identifier = HKQuantityTypeIdentifierStepCount;
     HKQuantitySample *quantitySample = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:identifier] quantity:[HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:5] startDate:d1 endDate:d2 metadata:testMeta ];

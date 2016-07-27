@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2016, Sam Falconer.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,26 +30,48 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ResearchKit.h>
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+NS_ASSUME_NONNULL_BEGIN
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+@class ORKSignatureView;
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
+@protocol ORKSignatureViewDelegate <NSObject>
 
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
 
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+@end
 
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
 
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+@interface ORKSignatureView : UIView
+
+@property (nonatomic, strong, nullable) UIColor *lineColor;
+@property (nonatomic) CGFloat lineWidth;
+
+/**
+ lineWidthVariation defines the max amount by which the line
+ width can vary (default 3pts).
+
+ The exact amount of the variation is determined by the amount
+ of force applied on 3D touch capable devices or by the speed
+ of the stroke if 3D touch is not available.
+ 
+ If the user is signing with an Apple Pencil, its force will be used.
+ */
+@property (nonatomic) CGFloat lineWidthVariation;
+
+@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
+@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
+@property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *signaturePath;
+
+- (UIImage *)signatureImage;
+
+@property (nonatomic, readonly) BOOL signatureExists;
+
+- (void)clear;
+
+@end
+
+NS_ASSUME_NONNULL_END

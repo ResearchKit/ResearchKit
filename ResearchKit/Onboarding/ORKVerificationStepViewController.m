@@ -33,6 +33,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStepView.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKVerificationStepViewController {

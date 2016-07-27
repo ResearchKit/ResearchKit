@@ -56,25 +56,25 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     }
 }
 
-class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     
     var plotPoints =
     [
         [
-            ORKRangedPoint(value: 10),
-            ORKRangedPoint(value: 20),
-            ORKRangedPoint(value: 25),
-            ORKRangedPoint(),
-            ORKRangedPoint(value: 30),
-            ORKRangedPoint(value: 40),
+            ORKValueRange(value: 10),
+            ORKValueRange(value: 20),
+            ORKValueRange(value: 25),
+            ORKValueRange(),
+            ORKValueRange(value: 30),
+            ORKValueRange(value: 40),
         ],
         [
-            ORKRangedPoint(value: 2),
-            ORKRangedPoint(value: 4),
-            ORKRangedPoint(value: 8),
-            ORKRangedPoint(value: 16),
-            ORKRangedPoint(value: 32),
-            ORKRangedPoint(value: 64),
+            ORKValueRange(value: 2),
+            ORKValueRange(value: 4),
+            ORKValueRange(value: 8),
+            ORKValueRange(value: 16),
+            ORKValueRange(value: 32),
+            ORKValueRange(value: 64),
         ]
     ]
     
@@ -82,19 +82,19 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints.count
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
        return plotPoints[plotIndex].count
     }
     
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 70
     }
     
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     
@@ -103,25 +103,25 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     }
 }
 
-class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     
     var plotPoints =
     [
         [
-            ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-            ORKRangedPoint(minimumValue: 1, maximumValue: 4),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 8, maximumValue: 13),
+            ORKValueRange(minimumValue: 0, maximumValue: 2),
+            ORKValueRange(minimumValue: 1, maximumValue: 4),
+            ORKValueRange(minimumValue: 2, maximumValue: 6),
+            ORKValueRange(minimumValue: 3, maximumValue: 8),
+            ORKValueRange(minimumValue: 5, maximumValue: 10),
+            ORKValueRange(minimumValue: 8, maximumValue: 13),
         ],
         [
-            ORKRangedPoint(value: 1),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 10),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 11),
-            ORKRangedPoint(minimumValue: 7, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 10, maximumValue: 13),
+            ORKValueRange(value: 1),
+            ORKValueRange(minimumValue: 2, maximumValue: 6),
+            ORKValueRange(minimumValue: 3, maximumValue: 10),
+            ORKValueRange(minimumValue: 5, maximumValue: 11),
+            ORKValueRange(minimumValue: 7, maximumValue: 13),
+            ORKValueRange(minimumValue: 10, maximumValue: 13),
         ]
     ]
     
@@ -129,11 +129,11 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints.count
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
     
@@ -141,4 +141,44 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return "\(pointIndex + 1)"
     }
 
+}
+
+class BarGraphDataSource: NSObject, ORKValueStackGraphChartViewDataSource {
+    
+    var plotPoints =
+    [
+        [
+            ORKValueStack(stackedValues: [4, 6]),
+            ORKValueStack(stackedValues: [2, 4, 4]),
+            ORKValueStack(stackedValues: [2, 6, 3, 6]),
+            ORKValueStack(stackedValues: [3, 8, 10, 12]),
+            ORKValueStack(stackedValues: [5, 10, 12, 8]),
+            ORKValueStack(stackedValues: [8, 13, 18]),
+        ],
+        [
+            ORKValueStack(stackedValues: [14]),
+            ORKValueStack(stackedValues: [6, 6]),
+            ORKValueStack(stackedValues: [3, 10, 12]),
+            ORKValueStack(stackedValues: [5, 11, 14]),
+            ORKValueStack(stackedValues: [7, 13, 20]),
+            ORKValueStack(stackedValues: [10, 13, 25]),
+        ]
+    ]
+    
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return plotPoints.count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueStack {
+        return plotPoints[plotIndex][pointIndex]
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+        return plotPoints[plotIndex].count
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+        return "\(pointIndex + 1)"
+    }
+    
 }

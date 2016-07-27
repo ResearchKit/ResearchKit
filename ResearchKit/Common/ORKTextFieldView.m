@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -35,8 +35,8 @@
 #import "ORKAccessibility.h"
 
 
-static NSString *const EmptyBulletString = @"\u25CB";
-static NSString *const FilledBulletString = @"\u25CF";
+static NSString *const EmptyBullet = @"\u25CB";
+static NSString *const FilledBullet = @"\u25CF";
 
 @implementation ORKCaretOptionalTextField
 
@@ -97,8 +97,8 @@ static NSString *const FilledBulletString = @"\u25CF";
     
     // Append the string with the correct number of filled and empty bullets.
     NSString *text = [NSString new];
-    text = [text stringByPaddingToLength:filledBullets withString:FilledBulletString startingAtIndex:0];
-    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBulletString startingAtIndex:0];
+    text = [text stringByPaddingToLength:filledBullets withString:FilledBullet startingAtIndex:0];
+    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBullet startingAtIndex:0];
     
     // Apply spacing attribute to string.
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
@@ -122,7 +122,7 @@ static NSString *const FilledBulletString = @"\u25CF";
 }
 
 - (NSString *)accessibilityValue {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBulletString options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
     NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
     return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), ORKLocalizedStringFromNumber(@(numberOfFilledBullets)), ORKLocalizedStringFromNumber(@([self.text length]))];
 }
@@ -184,7 +184,7 @@ static NSString *const FilledBulletString = @"\u25CF";
     if (suffix.length == 0) {
         return;
     }
-    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ?: [UIColor ork_midGrayTintColor])];
+    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ? : [UIColor ork_midGrayTintColor])];
     _suffixLabel.text = suffix;
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
@@ -254,15 +254,15 @@ static NSString *const FilledBulletString = @"\u25CF";
         BOOL isEditing = self.isEditing;
         
         UIColor *suffixColor = isEditing ? _unitActiveColor : _unitRegularColor;
-        if (_managedPlaceholder.length > 0) {
+            if (_managedPlaceholder.length > 0) {
             [self ork_setPlaceholder: (isEditing && _unit.length > 0) ? nil : _managedPlaceholder];
             [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
-        } else {
-            if (self.text.length > 0 || isEditing) {
-                [self ork_setPlaceholder:nil];
-                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
             } else {
-                [self ork_setPlaceholder: _unit];
+            if (self.text.length > 0 || isEditing) {
+                    [self ork_setPlaceholder:nil];
+                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
+                } else {
+                    [self ork_setPlaceholder: _unit];
                 [self ork_updateSuffix:nil withColor:suffixColor];
             }
         }

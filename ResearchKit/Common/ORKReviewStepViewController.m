@@ -42,6 +42,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKChoiceViewCell.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -61,9 +62,9 @@
     if (self && [self reviewStep]) {
         NSArray<ORKStep *> *stepsToFilter = [self reviewStep].isStandalone ? [self reviewStep].steps : steps;
         NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || (![[strongSelf reviewStep] excludeInstructionSteps] && [obj isKindOfClass:[ORKInstructionStep class]]);
             if (includeStep) {
                 [filteredSteps addObject:obj];

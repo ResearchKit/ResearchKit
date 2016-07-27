@@ -66,11 +66,23 @@
     return self;
 }
 
+- (void)setAlertThreshold:(CGFloat)alertThreshold {
+    _alertThreshold = alertThreshold;
+    if (self.isViewLoaded && alertThreshold > 0) {
+        _audioContentView.alertThreshold = alertThreshold;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.stepDuration;
+
+    if (self.alertThreshold > 0) {
+        _audioContentView.alertThreshold = self.alertThreshold;
+    }
+
     self.activeStepView.activeCustomView = _audioContentView;
 }
 
@@ -115,9 +127,9 @@
 - (void)startNewTimerIfNeeded {
     if (!_timer) {
         NSTimeInterval duration = self.audioStep.stepDuration;
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration / 100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             [strongSelf doSample];
             if (finished) {
                 [strongSelf finish];

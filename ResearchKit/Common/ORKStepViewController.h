@@ -193,6 +193,16 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithStep:(nullable ORKStep *)step;
 
 /**
+ Returns a new step view controller for the specified step.
+ 
+ @param step    The step to be presented.
+ @param result  The current step result for this step.
+ 
+ @return A newly initialized step view controller.
+ */
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result;
+
+/**
  The step presented by the step view controller.
  
  If you use a storyboard to initialize the step view controller, `initWithStep:` isn't called,

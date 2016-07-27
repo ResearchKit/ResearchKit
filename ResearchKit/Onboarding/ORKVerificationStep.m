@@ -32,7 +32,6 @@
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStep_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 #import "ORKStep_Private.h"
 
 
@@ -41,6 +40,8 @@
 - (Class)stepViewControllerClass {
     return self.verificationViewControllerClass;
 }
+
+// Don't throw on -initWithIdentifier: because it's  internally used by -copyWithZone:
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               text:(NSString *)text

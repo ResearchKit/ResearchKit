@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,28 +28,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKCenteredCollectionViewLayout.h"
+#import "ContinueButtonExampleViewController.h"
+#import "FooterView.h"
 
-@implementation ORKCenteredCollectionViewLayout
+@interface ContinueButtonExampleViewController ()
 
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray<UICollectionViewLayoutAttributes *> *attributesArray = [super layoutAttributesForElementsInRect:rect];
-    for (UICollectionViewLayoutAttributes *attributes in attributesArray) {
-        attributes.frame = [self layoutAttributesForItemAtIndexPath:attributes.indexPath].frame;
-    }
-    return attributesArray;
+@property (weak, nonatomic) IBOutlet FooterView *footerView;
+
+@end
+
+@implementation ContinueButtonExampleViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    [self.footerView.continueButton addTarget:self action:@selector(continueButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
-    NSInteger count = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:indexPath.section];
-    NSIndexPath *lastItemIndexPath = [NSIndexPath indexPathForItem:count - 1 inSection:indexPath.section];
-    UICollectionViewLayoutAttributes *lastItemAttributes = [super layoutAttributesForItemAtIndexPath:lastItemIndexPath];
-    if (attributes.frame.origin.y == lastItemAttributes.frame.origin.y) {
-        CGFloat trailing = self.collectionView.bounds.size.width - CGRectGetMaxX(lastItemAttributes.frame);
-        attributes.frame = CGRectOffset(attributes.frame, trailing * 0.5, 0);
-    }
-    return attributes;
+- (IBAction)continueButtonTapped:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

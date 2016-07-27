@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sam Falconer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,7 +33,7 @@
 #import "ORKSignatureView.h"
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
-
+#import "ORKHelpers.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 
@@ -92,11 +93,20 @@
 
 static const CGFloat PointMinDistance = 5;
 static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistance;
+static const CGFloat DefaultLineWidth = 1;
+static const CGFloat DefaultLineWidthVariation = 3;
+static const CGFloat MaxPressureForStrokeVelocity = 9;
+static const CGFloat LineWidthStepValue = 0.25f;
 
 @interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate> {
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
+    // Pressure scale based on if using force or speed of stroke.
+    CGFloat minPressure;
+    CGFloat maxPressure;
+    // Time used only to calculate speed when force isn't available on the device.
+    NSTimeInterval previousTouchTime;
 }
 
 @property (nonatomic, strong) UIBezierPath *currentPath;
@@ -122,6 +132,8 @@ static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistan
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _lineWidth = DefaultLineWidth;
+        _lineWidthVariation = DefaultLineWidthVariation;
         [self makeSignatureGestureRecognizer];
         [self setUpConstraints];
     }
@@ -202,13 +214,6 @@ static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistan
     return _lineColor;
 }
 
-- (CGFloat)lineWidth {
-    if (_lineWidth == 0) {
-        _lineWidth = 1;
-    }
-    return _lineWidth;
-}
-
 - (NSMutableArray *)pathArray {
     if (_pathArray == nil) {
         _pathArray = [NSMutableArray new];
@@ -254,6 +259,32 @@ static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistan
 
 #pragma mark Touch Event Handlers
 
+- (BOOL)_isForceTouchAvailable {
+    static BOOL isAvailable;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        
+        isAvailable = NO;
+        if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] && 
+             self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            isAvailable = YES;
+        }
+    });
+    
+    return isAvailable;
+}
+
+- (BOOL)_isTouchTypeStylus:(UITouch*)touch {
+    BOOL isStylus = NO;
+    
+    if ([touch respondsToSelector:@selector(type)] && touch.type == UITouchTypeStylus) {
+        isStylus = YES;
+    }
+    
+    return isStylus;
+}
+
 - (void)gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     
@@ -265,6 +296,20 @@ static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistan
     previousPoint1 = [touch previousLocationInView:self];
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
+    
+    if ([self _isForceTouchAvailable] || [self _isTouchTypeStylus:touch]) {
+        // This is a scale based on true force on the screen.
+        minPressure = 0.f;
+        maxPressure = [touch maximumPossibleForce] / 2.f;
+    }
+    else {
+        // This is a scale based on the speed of the stroke
+        // (scaled down logarithmically).
+        minPressure = 0.f;
+        maxPressure = MaxPressureForStrokeVelocity;
+        previousTouchTime = touch.timestamp;
+    }
+    
     [self.currentPath moveToPoint:currentPoint];
     [self.currentPath addArcWithCenter:currentPoint radius:0.1 startAngle:0.0 endAngle:2.0 * M_PI clockwise:YES];
     [self gestureTouchesMoved:touches withEvent:event];
@@ -283,8 +328,63 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     CGFloat dx = point.x - currentPoint.x;
     CGFloat dy = point.y - currentPoint.y;
     
-    if ((dx * dx + dy * dy) < PointMinDistanceSquared) {
+    CGFloat distanceSquared = (dx * dx + dy * dy);
+    
+    if (distanceSquared < PointMinDistanceSquared) {
         return;
+    }
+    
+    // Default to the minimum. Will be assigned a real
+    // value on all devices.
+    CGFloat pressure = minPressure;
+    
+    if ([self _isForceTouchAvailable] || [self _isTouchTypeStylus:touch]) {
+        // If the device supports Force Touch, or is using a stylus, use it.
+        pressure = [touch force];
+    }
+    else {
+        // If not, use a heuristic based on the speed of
+        // the stroke. Scale this speed logarithmically to
+        // require very slow touches to max out the line width.
+        
+        // This value can become negative because of how it is
+        // inverted. It will be clamped right below.
+        pressure = maxPressure - logf((sqrt(distanceSquared) /
+                                            MAX(0.0001, event.timestamp - previousTouchTime)));
+        previousTouchTime = event.timestamp;
+    }
+    
+    // Clamp the pressure value to between the allowed min and max.
+    pressure = MAX(minPressure, pressure);
+    pressure = MIN(maxPressure, pressure);
+    
+    CGFloat previousLineWidth = self.currentPath.lineWidth;
+    CGFloat proposedLineWidth = ((pressure - minPressure) *
+                                 self.lineWidthVariation /
+                                 (maxPressure - minPressure))
+                                + self.lineWidth;
+    
+    // Only step the line width up and down by a set value.
+    // This prevents the line looking jagged, and adding excessive
+    // separate line segments.
+    if (ABS(previousLineWidth - proposedLineWidth) >= LineWidthStepValue) {
+        
+        CGFloat lineWidth = previousLineWidth;
+        
+        if (proposedLineWidth > previousLineWidth) {
+            lineWidth = previousLineWidth + LineWidthStepValue;
+        }
+        else if (proposedLineWidth < previousLineWidth) {
+            lineWidth = previousLineWidth - LineWidthStepValue;
+        }
+        
+        [self commitCurrentPath];
+        
+        self.currentPath = [self pathWithRoundedStyle];
+        self.currentPath.lineWidth = lineWidth;
+        
+        CGPoint previousMid2 = mmid_Point(currentPoint, previousPoint1);
+        [self.currentPath moveToPoint:previousMid2];
     }
     
     previousPoint2 = previousPoint1;
@@ -302,15 +402,19 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     [self.currentPath addQuadCurveToPoint:mid2 controlPoint:previousPoint1];
     
     CGRect drawBox = bounds;
-    drawBox.origin.x -= self.lineWidth * 2.0;
-    drawBox.origin.y -= self.lineWidth * 2.0;
-    drawBox.size.width += self.lineWidth * 4.0;
-    drawBox.size.height += self.lineWidth * 4.0;
+    drawBox.origin.x -= self.currentPath.lineWidth * 2.0;
+    drawBox.origin.y -= self.currentPath.lineWidth * 2.0;
+    drawBox.size.width += self.currentPath.lineWidth * 4.0;
+    drawBox.size.height += self.currentPath.lineWidth * 4.0;
     
     [self setNeedsDisplayInRect:drawBox];
 }
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self commitCurrentPath];
+}
+
+- (void)commitCurrentPath {
     CGRect rect = self.currentPath.bounds;
     if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
@@ -332,8 +436,8 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     
     if (![self signatureExists] && (!self.currentPath || [self.currentPath isEmpty])) {
         [ORKLocalizedString(@"CONSENT_SIGNATURE_PLACEHOLDER", nil) drawAtPoint:[self placeholderPoint]
-                                           withAttributes:@{ NSFontAttributeName : [ORKSelectionTitleLabel defaultFont],
-                                                             NSForegroundColorAttributeName : [[UIColor blackColor] colorWithAlphaComponent:0.2]}];
+                                           withAttributes:@{ NSFontAttributeName: [ORKSelectionTitleLabel defaultFont],
+                                                             NSForegroundColorAttributeName: [[UIColor blackColor] colorWithAlphaComponent:0.2]}];
     }
     
     for (UIBezierPath *path in self.pathArray) {
@@ -343,6 +447,17 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     
     [self.lineColor setStroke];
     [self.currentPath stroke];
+}
+
+- (NSArray <UIBezierPath *> *)signaturePath {
+    return [self.pathArray copy];
+}
+
+- (void)setSignaturePath:(NSArray<UIBezierPath *> *)signaturePath {
+    if (signaturePath) {
+        _pathArray = [signaturePath mutableCopy];
+        [self setNeedsDisplay];
+    }
 }
 
 - (UIImage *)signatureImage {
