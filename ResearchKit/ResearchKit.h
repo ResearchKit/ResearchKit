@@ -44,6 +44,7 @@
 #import <ResearchKit/ORKReviewStep.h>
 #import <ResearchKit/ORKTableStep.h>
 #import <ResearchKit/ORKWaitStep.h>
+#import <ResearchKit/ORKVideoInstructionStep.h>
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
