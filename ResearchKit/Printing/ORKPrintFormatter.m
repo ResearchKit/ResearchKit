@@ -39,7 +39,6 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKChoiceAnswerFormatHelper.h"
-#import "ORKDefines_Private.h"
 #import <AVFoundation/AVFoundation.h>
 
 

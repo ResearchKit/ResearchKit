@@ -3428,7 +3428,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
     printFormatter.delegate = self;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
-    printFormatter.styleSheetURL = [ORKBundle() URLForResource:@"Stylesheet" withExtension:@"css"];
     [printFormatter prepareWithStep:stepViewController.step andResult:stepViewController.result];
     UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
     renderer.headerHeight = 25;
