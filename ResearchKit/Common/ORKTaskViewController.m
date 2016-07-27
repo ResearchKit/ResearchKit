@@ -920,8 +920,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
     
-    ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
-
+    ORKStepViewControllerNavigationDirection stepDirection = goForward ? ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
+    
     [viewController willNavigateDirection:stepDirection];
     
     ORK_Log_Debug(@"%@ %@", self, viewController);
