@@ -35,6 +35,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKAccessibilityFunctions.h"
 
+
 @interface ORKValuePicker () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) ORKChoiceAnswerFormatHelper *helper;

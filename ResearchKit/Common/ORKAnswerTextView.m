@@ -31,7 +31,7 @@
 
 
 #import "ORKAnswerTextView.h"
-#import "ORKDefines_Private.h"
+#import "ORKHelpers.h"
 #import "ORKSkin.h"
 
 
@@ -130,7 +130,7 @@
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-    _placeholder = placeholder ?: ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
+    _placeholder = placeholder ? : ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
     _placeholderTextView.text = _placeholder;
 }
 

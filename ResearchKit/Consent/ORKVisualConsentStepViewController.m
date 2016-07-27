@@ -363,9 +363,9 @@
         return;
     }
     
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        __strong typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         pageViewControllerView.userInteractionEnabled = YES;
         [strongSelf updatePageIndex];
 
@@ -386,9 +386,9 @@
     NSAssert(url, @"url cannot be nil");
     NSAssert(!(animateBeforeTransition && transitionBeforeAnimate), @"Both flags cannot be set");
 
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     void (^finishAndNilAnimator)(ORKVisualConsentTransitionAnimator *animator) = ^(ORKVisualConsentTransitionAnimator *animator) {
-        __strong typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [animator finish];
         if (strongSelf && strongSelf->_animator == animator) {
             // Do not show images and hide animationPlayerView if it's not the current animator
@@ -438,7 +438,7 @@
                                           fromViewController.imageHidden = YES;
                                           toViewController.imageHidden = YES;
                                           
-                                          __strong typeof(self) strongSelf = weakSelf;
+                                          ORKStrongTypeOf(self) strongSelf = weakSelf;
                                           [strongSelf doShowViewController:toViewController
                                                                  direction:direction
                                                                   animated:YES
@@ -466,7 +466,7 @@
                                     animatorFinished = YES;
                                     finishAndNilAnimator(animator);
                                     
-                                    __strong typeof(self) strongSelf = weakSelf;
+                                    ORKStrongTypeOf(self) strongSelf = weakSelf;
                                     [strongSelf doShowViewController:toViewController
                                                            direction:direction
                                                             animated:YES

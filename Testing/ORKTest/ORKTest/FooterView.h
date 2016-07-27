@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,35 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
 
+@interface FooterView : UIView
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
+@property (nonatomic, readonly) UIButton *continueButton;
 
 @end
-
-
-@interface ORKSignatureView : UIView
-
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
-
-- (UIImage *)signatureImage;
-
-@property (nonatomic, readonly) BOOL signatureExists;
-
-- (void)clear;
-
-@end
-
-NS_ASSUME_NONNULL_END

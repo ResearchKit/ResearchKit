@@ -104,6 +104,7 @@ static const CGFloat ArrowLineWidth = 4;
     
     CGContextAddPath(context, path);
     CGContextStrokePath(context);
+    CGPathRelease(path);
     
     CGContextRestoreGState(context);
 }

@@ -35,6 +35,7 @@
 #import "ORKActiveStepViewController_internal.h"
 #import "ORKStepViewController_internal.h"
 #import "ORKActiveStepView.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKHolePegTestPlaceStepViewController () <ORKHolePegTestPlaceContentViewDelegate>

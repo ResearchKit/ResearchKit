@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSURL (ORKDataLogger)
 
 - (BOOL)ork_isUploaded;
-- (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * __autoreleasing *)error;
+- (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * _Nullable *)error;
 
 @end
 

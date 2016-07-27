@@ -36,6 +36,7 @@
 #import "ORKTowerOfHanoiTower.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKSkin.h"
+#import "ORKHelpers.h"
 
 
 static const NSUInteger NumberOfTowers = 3;
@@ -268,7 +269,7 @@ static const NSUInteger NumberOfTowers = 3;
 
 - (NSArray *)compactConstraints {
     CGFloat compactWidth = ([[UIScreen mainScreen]bounds].size.height - (3 * 8)) / 3;
-    NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
+    NSDictionary *views = @{ @"A": _towerViews[0], @"B": _towerViews[1], @"C": _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
 
     [newConstraints addObjectsFromArray:
@@ -312,7 +313,7 @@ static const NSUInteger NumberOfTowers = 3;
 }
 
 - (NSArray *)regularConstraints {
-    NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
+    NSDictionary *views = @{ @"A": _towerViews[0], @"B": _towerViews[1], @"C": _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
     
     [newConstraints addObjectsFromArray:
