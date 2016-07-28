@@ -29,12 +29,13 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 /**
+ 
  */
 ORK_CLASS_AVAILABLE
-@interface ORKVideoInstructionStepViewController : ORKStepViewController
+@interface ORKVideoInstructionStepViewController : ORKInstructionStepViewController
 
 @end

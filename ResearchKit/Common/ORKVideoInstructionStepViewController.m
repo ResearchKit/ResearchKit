@@ -30,16 +30,54 @@
 
 
 #import "ORKVideoInstructionStepViewController.h"
+#import "ORKInstructionStepViewController_Internal.h"
+#import "AVFoundation/AVFoundation.h"
+#import "AVKit/AVKit.h"
+#import "ORKHelpers.h"
 
-
-@interface ORKVideoInstructionStepViewController ()
-
-@end
 
 @implementation ORKVideoInstructionStepViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (ORKVideoInstructionStep *)videoInstructionStep {
+    return (ORKVideoInstructionStep *)self.step;
+}
+
+- (void)stepDidChange {
+    [super stepDidChange];
+    if (self.step && [self isViewLoaded] && [self videoInstructionStep].videoURL) {
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
+        [tapRecognizer addTarget:self action:@selector(play)];
+        [self.stepView.instructionImageView addGestureRecognizer:tapRecognizer];
+        
+        if (self.stepView.instructionImageView.image) {
+            UIImageView *playImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play" inBundle:ORKBundle() compatibleWithTraitCollection:nil]];
+            self.stepView.instructionImageView.userInteractionEnabled = YES;
+            [self.stepView.instructionImageView addSubview:playImageView];
+            
+            playImageView.translatesAutoresizingMaskIntoConstraints = NO;
+            
+            NSLayoutConstraint* xConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+            NSLayoutConstraint* yConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+            
+            [self.stepView.instructionImageView addConstraints:@[xConstraint, yConstraint]];
+        }
+    }
+}
+
+- (void)play {
+    AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    AVPlayer* player = [AVPlayer playerWithPlayerItem:playerItem];
+    player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
+    AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
+    playerViewController.player = player;
+    
+    [self presentViewController:playerViewController animated:true completion:^{
+        if (playerViewController.player.status == AVPlayerStatusReadyToPlay) {
+            [playerViewController.player play];
+        }
+    }];
 }
 
 @end

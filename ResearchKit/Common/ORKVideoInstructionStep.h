@@ -31,11 +31,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+#import <CoreMedia/CoreMedia.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKVideoInstructionStep : ORKInstructionStep
+
+/**
+ 
+ */
+@property (nonatomic, copy, nullable) NSURL *videoURL;
+
+/**
+ 
+ */
+@property (nonatomic) NSInteger thumbnailTime;
 
 @end
 

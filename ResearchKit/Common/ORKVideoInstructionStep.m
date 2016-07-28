@@ -30,7 +30,81 @@
 
 
 #import "ORKVideoInstructionStep.h"
+#import "ORKVideoInstructionStepViewController.h"
+#import "ORKHelpers.h"
+#import "AVFoundation/AVFoundation.h"
+
 
 @implementation ORKVideoInstructionStep
+
++ (Class)stepViewControllerClass {
+    return [ORKVideoInstructionStepViewController class];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_URL(aDecoder, videoURL);
+        ORK_DECODE_INTEGER(aDecoder, thumbnailTime);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_URL(aCoder, videoURL);
+    ORK_ENCODE_INTEGER(aCoder, thumbnailTime);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKVideoInstructionStep *step = [super copyWithZone:zone];
+    step.videoURL = self.videoURL;
+    step.thumbnailTime = self.thumbnailTime;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+        castObject.thumbnailTime == self.thumbnailTime;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.videoURL.hash;
+}
+
+- (void)setVideoURL:(NSURL *)videoURL {
+    _videoURL = videoURL;
+    if (_thumbnailTime) {
+        [self setThumbnailImageFromAsset];
+    } else {
+        [self setThumbnailTime:1];
+    }
+}
+
+- (void)setThumbnailTime:(NSInteger)thumbnailTime {
+    _thumbnailTime = thumbnailTime;
+    [self setThumbnailImageFromAsset];
+}
+
+- (void)setThumbnailImageFromAsset {
+    if (!self.videoURL) {
+        self.image = nil;
+        return;
+    }
+    AVAsset* asset = [AVAsset assetWithURL:self.videoURL];
+    CMTime duration = [asset duration];
+    duration.value = MIN(self.thumbnailTime, duration.value / duration.timescale) * duration.timescale;
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    CGImageRef thumbnailImageRef = [imageGenerator copyCGImageAtTime:duration actualTime:NULL error:NULL];
+    UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
+    CGImageRelease(thumbnailImageRef);
+    self.image = thumbnailImage;
+}
 
 @end
