@@ -41,6 +41,14 @@
     return [ORKVideoInstructionStepViewController class];
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        _thumbnailTime = 1;
+    }
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -78,33 +86,8 @@
     return super.hash ^ self.videoURL.hash;
 }
 
-- (void)setVideoURL:(NSURL *)videoURL {
-    _videoURL = videoURL;
-    if (_thumbnailTime) {
-        [self setThumbnailImageFromAsset];
-    } else {
-        [self setThumbnailTime:1];
-    }
-}
-
 - (void)setThumbnailTime:(NSInteger)thumbnailTime {
-    _thumbnailTime = thumbnailTime;
-    [self setThumbnailImageFromAsset];
-}
-
-- (void)setThumbnailImageFromAsset {
-    if (!self.videoURL) {
-        self.image = nil;
-        return;
-    }
-    AVAsset* asset = [AVAsset assetWithURL:self.videoURL];
-    CMTime duration = [asset duration];
-    duration.value = MIN(self.thumbnailTime, duration.value / duration.timescale) * duration.timescale;
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    CGImageRef thumbnailImageRef = [imageGenerator copyCGImageAtTime:duration actualTime:NULL error:NULL];
-    UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
-    CGImageRelease(thumbnailImageRef);
-    self.image = thumbnailImage;
+    _thumbnailTime = thumbnailTime > 0 ? thumbnailTime : 1;
 }
 
 @end

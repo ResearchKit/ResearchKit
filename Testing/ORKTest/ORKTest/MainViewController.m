@@ -3994,8 +3994,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     ORKVideoInstructionStep *videoInstructionStep = [[ORKVideoInstructionStep alloc] initWithIdentifier:@"videoInstructionStep"];
     videoInstructionStep.text = @"Test";
-    //videoInstructionStep.thumbnailTime = 5;
     videoInstructionStep.videoURL = [[NSURL alloc] initWithString:@"https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov"];
+    //videoInstructionStep.thumbnailTime = 5;
     
     [steps addObject:videoInstructionStep];
     
