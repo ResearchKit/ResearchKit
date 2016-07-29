@@ -179,8 +179,12 @@ public extension NSPredicate {
     }
 
     /**
-     This is the internal function of choiceResultSelector - the public functions are expressed below
+     This is the internal function of choiceResultSelector - the public functions are expressed below and are more syntax-friendly.
      
+     @param choiceResultSelector    The result selector object which specifies the question result
+     you are interested in.
+     @param expected                An array of string results for either matching or exact results.
+     @param usePatterns             True if we are pattern-matching, false if it's an exact match
      */
     
     private convenience init (choiceResultSelector: ORKResultSelector, expected: [String], usePatterns: Bool) {
