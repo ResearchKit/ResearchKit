@@ -1377,7 +1377,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKResultSelector *resultSelector = nil;
     
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_1"];
-<<<<<<< HEAD
     NSPredicate *predicateFormItem1 = [[NSPredicate alloc] initWithBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
     
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_2"];
@@ -1389,19 +1388,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_4"];
     NSPredicate *predicateFormItem4a = [[NSPredicate alloc] initWithChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@0];
     NSPredicate *predicateFormItem4b = [[NSPredicate alloc] initWithChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@2];
-=======
-    NSPredicate *predicateFormItem1 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
-
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_2"];
-    NSPredicate *predicateFormItem2 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
-    
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_3"];
-    NSPredicate *predicateFormItem3 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
-    
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_4"];
-    NSPredicate *predicateFormItem4a = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@0];
-    NSPredicate *predicateFormItem4b = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@2];
->>>>>>> ResearchKit/master
     
     NSPredicate *predicateEligible1 = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4a]];
     NSPredicate *predicateEligible2 = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4b]];
@@ -1459,17 +1445,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     // Build navigation rules.
     ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
-<<<<<<< HEAD
     NSPredicate *predicateQuestion = [[NSPredicate alloc] initWithBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
     ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc]
                                                      initWithResultPredicates:@[predicateQuestion]
                                                      destinationStepIdentifiers:@[@"eligible_step"]];
-=======
-    NSPredicate *predicateQuestion = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
-
-    ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                          destinationStepIdentifiers:@[@"eligible_step"]];
->>>>>>> ResearchKit/master
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
     
     // Add end direct rules to skip unneeded steps
@@ -3018,20 +2997,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     // skippable step
     resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"skipNextStep"];
-    NSPredicate *predicateSkipStep = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+    NSPredicate *predicateSkipStep = [[NSPredicate alloc] initWithBooleanQuestionResultWithResultSelector:resultSelector
                                                                                               expectedAnswer:YES];
     predicateSkipRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicateSkipStep];
     [task setSkipNavigationRule:predicateSkipRule forStepIdentifier:@"skippableStep"];
 
     // From the branching step, go to either scaleStep or textChoiceStep
     resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"branchingStep"];
-<<<<<<< HEAD
     NSPredicate *predicateAnswerTypeScale = [[NSPredicate alloc] initWithChoiceQuestionResultWithResultSelector:resultSelector
                                                                                             expectedAnswerValue:@"scale"];
-=======
-    NSPredicate *predicateAnswerTypeScale = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
-                                                                                               expectedAnswerValue:@"scale"];
->>>>>>> ResearchKit/master
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerTypeScale ]
                                                           destinationStepIdentifiers:@[ @"scaleStep" ]
                                                                defaultStepIdentifier:@"textChoiceStep"];

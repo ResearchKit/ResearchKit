@@ -173,19 +173,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 @implementation NSPredicate (ORKResultPredicate)
 
-<<<<<<< HEAD
 - (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
-=======
-+ (instancetype)new {
-    ORKThrowMethodUnavailableException();
-}
-
-- (instancetype)init {
-    ORKThrowMethodUnavailableException();
-}
-
-+ (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
->>>>>>> ResearchKit/master
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray
                  subPredicateFormatArgumentArray:(NSArray *)subPredicateFormatArgumentArray
                   areSubPredicateFormatsSubquery:(BOOL)areSubPredicateFormatsSubquery {
