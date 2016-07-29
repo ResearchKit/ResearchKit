@@ -579,7 +579,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 #pragma mark - Plotting Points
 
 - (NSInteger)numberOfPlots {
-    NSInteger numberOfPlots = 1;
+    NSInteger numberOfPlots = 0;
     
     if ([_dataSource respondsToSelector:@selector(numberOfPlotsInGraphChartView:)]) {
         numberOfPlots = [_dataSource numberOfPlotsInGraphChartView:self];
