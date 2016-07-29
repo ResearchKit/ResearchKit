@@ -36,7 +36,7 @@ import Foundation
  @param hour    an integer which must be less than 24.
  @param minute  an integer which must be less than 60.
 */
-struct TimeOfDay: Comparable {
+public struct TimeOfDay: Comparable {
     let hour: Int
     let minute: Int
 }
@@ -46,7 +46,7 @@ extension NSDate: Comparable { }
 
 // MARK: Equatable
 
-func ==(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
+public func ==(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     return ((lhs.hour == rhs.hour) && (lhs.minute == rhs.minute))
 }
 
@@ -56,7 +56,7 @@ public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
 
 // MARK: Comparable
 
-func <(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
+public func <(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     let lhsTotalTime = (lhs.hour * 60) + lhs.minute
     let rhsTotalTime = (rhs.hour * 60) + rhs.minute
     return (lhsTotalTime < rhsTotalTime)
