@@ -30,6 +30,7 @@
 
 
 #import "ORKLabel.h"
+#import "ORKDefines.h"
 
 
 /**

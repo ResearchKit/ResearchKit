@@ -75,6 +75,7 @@
     // Don't show next button
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
+    self.internalSkipButtonItem.title = ORKLocalizedString(@"TAPPING_SKIP_TITLE", nil);
 }
 
 - (void)viewDidLoad {
@@ -93,6 +94,7 @@
     _expired = NO;
     
     _tappingContentView = [[ORKTappingContentView alloc] init];
+    _tappingContentView.hasSkipButton = self.step.optional;
     self.activeStepView.activeCustomView = _tappingContentView;
     
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
@@ -178,6 +180,7 @@
 
 - (void)start {
     [super start];
+    self.skipButtonItem = nil;
     [_tappingContentView setProgress:0.001 animated:NO];
 }
 

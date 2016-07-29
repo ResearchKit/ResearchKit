@@ -57,6 +57,7 @@
     
     SystemSoundID _alertSound;
     NSURL *_alertSoundURL;
+    BOOL _hasSpokenHalfwayCountdown;
 }
 
 @property (nonatomic, strong) NSArray *recorders;
@@ -163,7 +164,10 @@
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([[self activeStep] shouldStartTimerAutomatically]) {
+        if(self.started){
+            // Should call resume instead of start when the task has been started.
+            [self resume];
+        } else if ([[self activeStep] shouldStartTimerAutomatically]) {
             [self start];
         }
     });
@@ -359,6 +363,9 @@
     if (self.activeStep.shouldVibrateOnFinish) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
+    if (self.activeStep.hasVoice && self.activeStep.finishedSpokenInstruction) {
+        [[ORKVoiceEngine sharedVoiceEngine] speakText:self.activeStep.finishedSpokenInstruction];
+    }
     if (!self.activeStep.startsFinished) {
         if (self.activeStep.shouldContinueOnFinish) {
             [self goForward];
@@ -387,12 +394,12 @@
     NSTimeInterval stepDuration = self.activeStep.stepDuration;
     
     if (stepDuration > 0) {
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         _activeStepTimer = [[ORKActiveStepTimer alloc] initWithDuration:stepDuration
                                                         interval:_timerUpdateInterval
                                                          runtime:0
                                                          handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                             typeof(self) strongSelf = weakSelf;
+                                                             ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                              [strongSelf countDownTimerFired:timer finished:finished];
                                                          }];
         [_activeStepTimer resume];
@@ -407,6 +414,7 @@
     ORKActiveStepCustomView *customView = _activeStepView.activeCustomView;
     [customView updateDisplay:self];
     
+    
     ORKVoiceEngine *voice = [ORKVoiceEngine sharedVoiceEngine];
     
     if (!finished && self.activeStep.shouldSpeakCountDown) {
@@ -419,6 +427,13 @@
         if (0 < countDownValue && countDownValue <= 3) {
             [voice speakInt:countDownValue];
         }
+    }
+    
+    BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
+    if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
+        _hasSpokenHalfwayCountdown = YES;
+        NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
+        [voice speakText:text];
     }
 }
 
@@ -447,7 +462,7 @@
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     if (error) {
-        STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+        ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
         if ([strongDelegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
             [strongDelegate stepViewController:self recorder:recorder didFailWithError:error];
         }

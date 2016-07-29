@@ -58,7 +58,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return [ORKLocationSelectionView.class textFieldHeight] + (LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
+    return [ORKLocationSelectionView.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
 }
 
 - (void)prepareView {
@@ -102,7 +102,7 @@
 
 - (void)answerDidChange {
     _selectionView.answer = self.answer;
-    NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     [_selectionView setPlaceholderText:placeholder];
 }
 

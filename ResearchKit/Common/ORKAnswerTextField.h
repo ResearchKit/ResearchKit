@@ -31,7 +31,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ORKDefaultFont.h"
-#import "ORKDefines_Private.h"
+#import "ORKDefines.h"
 
 
 /**

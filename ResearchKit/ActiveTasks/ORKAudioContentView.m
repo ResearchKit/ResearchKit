@@ -328,17 +328,16 @@ static const CGFloat ValueLineMargin = 1.5;
 }
 
 - (void)updateTimerLabel {
-    static NSDateComponentsFormatter *_formatter = nil;
+    static NSDateComponentsFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
         formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
         formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-        _formatter = formatter;
     });
     
-    NSString *string = [_formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
+    NSString *string = [formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
     _timerLabel.text = string;
     _timerLabel.hidden = (string == nil);    
 }

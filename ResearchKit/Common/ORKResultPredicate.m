@@ -45,6 +45,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 @implementation ORKResultSelector
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 + (instancetype)selectorWithTaskIdentifier:(NSString *)taskIdentifier
                             stepIdentifier:(NSString *)stepIdentifier
                           resultIdentifier:(NSString *)resultIdentifier {
@@ -124,13 +132,13 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     __typeof(self) castObject = object;
-    return (ORKEqualObjects(_taskIdentifier, castObject.taskIdentifier)
-            && ORKEqualObjects(_stepIdentifier, castObject.stepIdentifier)
-            && ORKEqualObjects(_resultIdentifier, castObject.resultIdentifier));
+    return (ORKEqualObjects(self.taskIdentifier, castObject.taskIdentifier)
+            && ORKEqualObjects(self.stepIdentifier, castObject.stepIdentifier)
+            && ORKEqualObjects(self.resultIdentifier, castObject.resultIdentifier));
 }
 
 - (NSUInteger)hash {
-    return [_taskIdentifier hash] ^ [_stepIdentifier hash] ^ [_resultIdentifier hash];
+    return _taskIdentifier.hash ^ _stepIdentifier.hash ^ _resultIdentifier.hash;
 }
 
 + (BOOL)supportsSecureCoding {
@@ -165,7 +173,19 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 @implementation NSPredicate (ORKResultPredicate)
 
+<<<<<<< HEAD
 - (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
+=======
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
++ (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
+>>>>>>> ResearchKit/master
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray
                  subPredicateFormatArgumentArray:(NSArray *)subPredicateFormatArgumentArray
                   areSubPredicateFormatsSubquery:(BOOL)areSubPredicateFormatsSubquery {

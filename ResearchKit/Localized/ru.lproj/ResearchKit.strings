@@ -84,13 +84,69 @@
 "RANGE_ALERT_MESSAGE_OTHER" = "Недопустимое значение: %@.";
 
 /* Alert for invalid email address value */
-"INVALID_EMAIL_ALERT_MESSAGE" = "Недействительный адрес электронной почты: %@";
+"INVALID_EMAIL_ALERT_MESSAGE" = "Недействительный адрес e-mail: %@";
+
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Введите адрес";
+"LOCATION_ERROR_TITLE" = "Указанный адрес не найден";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не удается устранить проблему с текущей геопозицией. Введите адрес или переместитесь в геопозицию с лучшим GPS‑сигналом, если возможно.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "В доступе к службам геолокации отказано. Разрешите этой программе использовать службы геолокации в Настройках.";
+"LOCATION_ERROR_GEOCODE" = "Не удается найти результат по введенному адресу. Убедитесь, что адрес действителен.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Вы не подключены к Интернету или превысили максимальное количество запросов на поиск адресов. Если Вы не подключены к Интернету, включите Wi‑Fi, чтобы ответить на это вопрос; пропустите этот вопрос, если кнопка «Пропустить» доступна; или вернитесь к опросу после подключения к Интернету. В противном случае, повторите попытку через несколько минут.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Превышены максимальная длина текста: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Камера недоступна в разделенном экране.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Е‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Пароль";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введите пароль";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Подтверждение";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введите пароль снова";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Пароли не совпадают.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Дополнительная информация";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Иван";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Арсентьев";
+"GENDER_FORM_ITEM_TITLE" = "Пол";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Выберите пол";
+"DOB_FORM_ITEM_TITLE" = "Дата рождения";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Выберите дату";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Проверка";
+"VERIFICATION_STEP_TITLE" = "Проверка e‑mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Нажмите ссылку ниже, если Вы не получили e‑mail с подтверждением и хотите, чтобы он был отправлен повторно.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить e‑mail";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Вход";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Забыли пароль?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Введите код‑пароль";
+"PASSCODE_CONFIRM_MESSAGE" = "Подтвердите код‑пароль";
+"PASSCODE_SAVED_MESSAGE" = "Код‑пароль сохранен";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Код‑пароль аутентифицирован";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Введите старый код‑пароль";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Введите новый код‑пароль";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Подтвердите новый код-пароль";
+"PASSCODE_INVALID_ALERT_TITLE" = "Неверный код‑пароль";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Код‑пароли не совпали. Повторите попытку.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Выполните аутентификацию с Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Ошибка Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Можно использовать только цифры.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Индикатор хода ввода код‑пароля";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено цифр: %@ из %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Не удалось добавить объект связки ключей.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Не удалось обновить объект связки ключей.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Не удалось удалить объект связки ключей.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Не удалось найти объект связки ключей.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A(II)Rh+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Принимаю";
 "BUTTON_CANCEL" = "Отменить";
+"BUTTON_OK" = "ОК";
 "BUTTON_CLEAR" = "Очистить";
 "BUTTON_DISAGREE" = "Не принимаю";
 "BUTTON_DONE" = "Готово";
@@ -175,6 +232,7 @@
 "TOTAL_TAPS_LABEL" = "Всего касаний";
 "TAPPING_INSTRUCTION" = "Касайтесь кнопок двумя пальцами как можно быстрее.";
 
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Голос";
 "AUDIO_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
@@ -199,8 +257,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Во время этого упражнения оцениваются возможности Вашей кратковременной пространственной памяти. Программа попросит Вас повторить последовательность, в которой подсвечиваются %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "цветы";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "цветы";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Некоторые изображения (%@) будут подсвечиваться поочередно в определенном порядке. Коснитесь этих изображений в том же порядке.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые изображения (%@) будут подсвечиваться поочередно в определенном порядке. Коснитесь этих изображений в обратном порядке.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в том же порядке.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в обратном порядке.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать» и внимательно смотрите на экран.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Счет";
@@ -236,7 +294,7 @@
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Ходьба на время";
-"TIMED_WALK_INTRO_DETAIL" = "В этом упражнении проверяется работоспособность ног.";
+"TIMED_WALK_INTRO_DETAIL" = "В этом упражнении проверяется работоспособность нижних конечностей.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Найдите место, предпочтительно снаружи, где Вы смогли бы безопасно идти %@ по прямой линии с максимальной скоростью. Не замедляйте шаг, пока не дойдете до финиша.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Чтобы начать, коснитесь «Далее».";
 "TIMED_WALK_FORM_TITLE" = "Вспомогательные приспособления";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Развернитесь и пройдите до исходного местоположения.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Коснитесь «Готово» после завершения.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Нет данных";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Прибавьте это новое число к предыдущему.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Тест «Вставляем %@ колышков»";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "В этом упражнении проверяется работоспособность верхних конечностей. Вам предложат поместить колышек в лунку %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Проверены будут обе руки: левая и правая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Проверены будут обе руки: правая и левая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Поместите колышек в лунку левой рукой.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Поместите колышек в лунку правой рукой.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Поместите колышек за линию левой рукой.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Поместите колышек за линию правой рукой.";
+"HOLE_PEG_TEST_TEXT" = "Поднимите колышек двумя пальцами.";
+"HOLE_PEG_TEST_TEXT_2" = "Приподнимите пальцы, чтобы бросить колышек.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не удалось создать файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не удалось удалить файлы журналов, чтобы освободить достаточно места";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Несколько ошибок при удалении журналов";
 "ERROR_RECORDER_NO_DATA" = "Собранные данные не найдены.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не указан каталог для выходных данных";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Нет данных";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Назад";
@@ -307,13 +378,14 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Просмотр изображения";
 "AX_IMAGE_CAPTURED_LABEL" = "Отснятое изображение";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Нельзя положить диск размера %@ на диск размера %@";
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Нельзя положить кольцо размера %@ на кольцо размера %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Цель";
 "AX_TOWER_OF_HANOI_TOWER" = "Башня";
-"AX_TOWER_OF_HANOI_PLACE_DISK" = "Коснитесь дважды, чтобы положить диск";
-"AX_TOWER_OF_HANOI_SELECT_DISK" = "Коснитесь дважды, чтобы выбрать самый верхний диск";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Содержит диск размера %@";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Коснитесь дважды, чтобы положить кольцо";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Коснитесь дважды, чтобы выбрать самое верхнее кольцо";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Содержит кольцо размеров: %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
 
 "AX_GRAPH_RANGE_FORMAT" = "Диапазон от %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " и ";
+"AX_GRAPH_POINT_%@" = "Точка: %d";

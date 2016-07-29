@@ -32,6 +32,7 @@
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStep_Internal.h"
 #import "ORKHelpers.h"
+#import "ORKStep_Private.h"
 
 
 @implementation ORKVerificationStep
@@ -40,8 +41,9 @@
     return self.verificationViewControllerClass;
 }
 
+// Don't throw on -initWithIdentifier: because it's  internally used by -copyWithZone:
+
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
                               text:(NSString *)text
    verificationViewControllerClass:(Class)verificationViewControllerClass {
     
@@ -49,7 +51,7 @@
     
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.title = title;
+        self.title = ORKLocalizedString(@"VERIFICATION_STEP_TITLE", nil);
         self.text = text;
         _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
         
@@ -73,6 +75,10 @@
 }
 
 - (BOOL)allowsBackNavigation {
+    return NO;
+}
+
+- (BOOL)showsProgress {
     return NO;
 }
 

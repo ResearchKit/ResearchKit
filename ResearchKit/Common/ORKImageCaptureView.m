@@ -301,7 +301,7 @@
 - (void)sessionWasInterrupted:(NSNotification *)notification {
     AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey] integerValue];
     if (reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps) {
-        [self setError:[[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil)}]];
+        [self setError:[[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil)}]];
     }
 }
 

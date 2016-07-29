@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "無效的電郵地址：%@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "輸入地址";
+"LOCATION_ERROR_TITLE" = "找不到指定的地址";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法找出現時位置，請輸入地址或移動至 GPS 訊號較佳的位置（如適用）。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "定位服務存取遭拒，請前往「設定」以授權此 App 使用定位服務。";
+"LOCATION_ERROR_GEOCODE" = "找不到輸入的地址，請確定地址是否正確。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "你可能未連接互聯網，或地址查詢請求的次數已超出上限。如果你未連接互聯網，請開啟 Wi-Fi 以回答此問題（如果顯示「略過」按鈕，則可略過此問題），或在連接互聯網後返回此問卷。否則，請在幾分鐘後再試一次。";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超出長度上限：%@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "分割螢幕無法使用相機。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "電郵";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "密碼";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "輸入密碼";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "請再次輸入密碼";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密碼不符。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "其他資料";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "大明";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "王";
+"GENDER_FORM_ITEM_TITLE" = "性別";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "選擇性別";
+"DOB_FORM_ITEM_TITLE" = "出生日期";
+"DOB_FORM_ITEM_PLACEHOLDER" = "選擇日期";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "驗證";
+"VERIFICATION_STEP_TITLE" = "驗證你的電郵";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果你未收到驗證電郵，並希望系統再傳送一次，請點一下下方的連結。";
+"RESEND_EMAIL_BUTTON_TITLE" = "重新傳送驗證電郵";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "登入";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘記密碼？";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "輸入密碼";
+"PASSCODE_CONFIRM_MESSAGE" = "確認密碼";
+"PASSCODE_SAVED_MESSAGE" = "密碼已儲存";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "已認證密碼";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "輸入舊密碼";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "輸入新密碼";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "確認新密碼";
+"PASSCODE_INVALID_ALERT_TITLE" = "密碼不正確";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "密碼不符，請再試一次。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "請使用 Touch ID 認證";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 錯誤";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "只允許輸入數字。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入 %@ 個數字（共 %@ 個）";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "無法加入「鑰匙圈」項目。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "無法更新「鑰匙圈」項目。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "無法刪除「鑰匙圈」項目。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "找不到「鑰匙圈」項目。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "同意";
 "BUTTON_CANCEL" = "取消";
+"BUTTON_OK" = "好";
 "BUTTON_CLEAR" = "清除";
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "點按";
 "TOTAL_TAPS_LABEL" = "點按總次數";
 "TAPPING_INSTRUCTION" = "用兩指以最快的速度點按這些按鈕。";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "語音";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "掉頭，然後步行回到起點。";
 "TIMED_WALK_INSTRUCTION_TEXT" = "完成後，請點一下「完成」。";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "沒有數據";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "將這個新的數字與前一個數字相加。";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ 孔柱測試";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此測試活動需要你將圓柱放進洞內，以測量你的上肢功能。你將需要執行此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "測試活動將會測試你的左手及右手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "測試活動將會測試你的右手及左手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進洞中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進洞中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進線後。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進線後。";
+"HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
+"HOLE_PEG_TEST_TEXT_2" = "放開手指以放下圓柱。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "無法移除足夠的記錄檔案以達到臨界值";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "移除記錄檔時發生多個錯誤";
 "ERROR_RECORDER_NO_DATA" = "找不到已收集的數據。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定輸出目錄";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "沒有數據";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
+"AX_GRAPH_POINT_%@" = "點數：%@";

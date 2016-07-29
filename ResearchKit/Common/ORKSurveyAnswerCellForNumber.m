@@ -55,7 +55,7 @@
 
 - (void)numberCell_initialize {
     ORKQuestionType questionType = self.step.questionType;
-    _numberFormatter = [(ORKNumericAnswerFormat *)[[self.step answerFormat] impliedAnswerFormat] makeNumberFormatter];
+    _numberFormatter = ORKDecimalNumberFormatter();
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
     
     _textFieldView = [[ORKTextFieldView alloc] init];
@@ -63,7 +63,6 @@
     
     textField.delegate = self;
     textField.allowsSelection = YES;
-    
     
     if (questionType == ORKQuestionTypeDecimal) {
         textField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -167,7 +166,7 @@
         displayValue = [_numberFormatter stringFromNumber:answer];
     }
    
-    NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
 
     self.textField.manageUnitAndPlaceholder = YES;
     self.textField.unit = numericFormat.unit;

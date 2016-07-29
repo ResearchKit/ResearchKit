@@ -61,7 +61,7 @@
             [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = (UIEdgeInsets){};
+        self.layoutMargins = (UIEdgeInsets){0, 0, 0, 0};
         
         [self setUpConstraints];
         [self updateContinueAndSkipEnabled];
@@ -114,7 +114,7 @@
 
 - (void)skipAction:(id)sender {
     ORKSuppressPerformSelectorWarning(
-                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:self];
+                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:_skipButton];
                                       );
 }
 
@@ -140,7 +140,7 @@
 }
 
 - (void)updateContinueAndSkipEnabled {
-    [_skipButton setTitle:_skipButtonItem.title?:ORKLocalizedString(@"BUTTON_SKIP_QUESTION", nil) forState:UIControlStateNormal];
+    [_skipButton setTitle:_skipButtonItem.title ? : ORKLocalizedString(@"BUTTON_SKIP_QUESTION", nil) forState:UIControlStateNormal];
     if ([self neverHasSkipButton]) {
         [_skipButton setFrame:(CGRect){{0,0},{0,0}}];
     }
@@ -176,6 +176,11 @@
 - (void)setContinueEnabled:(BOOL)continueEnabled {
     _continueEnabled = continueEnabled;
     [self updateContinueAndSkipEnabled];
+}
+
+- (void)setSkipEnabled:(BOOL)skipEnabled {
+    _skipEnabled = skipEnabled;
+    self.skipButton.enabled = _skipEnabled;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {

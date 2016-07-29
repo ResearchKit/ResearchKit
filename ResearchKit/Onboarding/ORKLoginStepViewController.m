@@ -30,9 +30,9 @@
 
 
 #import "ORKLoginStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKFormStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKLoginStepViewController
@@ -57,7 +57,7 @@
 }
 
 - (void)cancelButtonHandler:(id)sender {
-    STRONGTYPE(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
+    ORKStrongTypeOf(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
         [strongDelegate taskViewController:self.taskViewController didFinishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     }
