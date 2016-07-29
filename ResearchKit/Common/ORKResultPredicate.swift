@@ -30,44 +30,28 @@
 
 import Foundation
 
-
 /**
- The CanSupportExpectedORKResultPredicate is a marker for ResearchKit's extensions to NSPredicate that
- this particular class can be compared with being given an expected value. At present the classes
- suitable are Bools and Strings.
+ The TimeOfDay struct is a comparable structure for storing time of day values.
  
- ResearchKit authors creating ORKResults with class-specific returns can make their return value
- conform to this protocol and can thereby gain the predicate functionality 'for free'.
- */
-public protocol CanSupportExpectedORKResultPredicate {
-    
-}
-
-extension Bool: CanSupportExpectedORKResultPredicate {
-    
-}
-
-extension String: CanSupportExpectedORKResultPredicate {
-    
-}
-
-extension Double: CanSupportExpectedORKResultPredicate {
-    
-}
-
-extension NSDate: CanSupportExpectedORKResultPredicate {
-    
-}
-
+ @param hour    an integer which must be less than 24.
+ @param minute  an integer which must be less than 60.
+*/
 struct TimeOfDay: Comparable {
     let hour: Int
     let minute: Int
 }
 
+// We also make NSDate comparable and equatable to allow us to use it in NSPredicate
+extension NSDate: Comparable { }
+
 // MARK: Equatable
 
 func ==(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     return ((lhs.hour == rhs.hour) && (lhs.minute == rhs.minute))
+}
+
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
 }
 
 // MARK: Comparable
@@ -76,6 +60,10 @@ func <(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     let lhsTotalTime = (lhs.hour * 60) + lhs.minute
     let rhsTotalTime = (rhs.hour * 60) + rhs.minute
     return (lhsTotalTime < rhsTotalTime)
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedAscending
 }
 
 /**
@@ -180,7 +168,7 @@ public extension NSPredicate {
      
      */
     
-    convenience init <T where T: CanSupportExpectedORKResultPredicate>(resultSelector: ORKResultSelector, expected: T) {
+    convenience init <T where T: Equatable>(resultSelector: ORKResultSelector, expected: T) {
         
         var subPredicateFormatArray: [String] = ["answer == %@"]
         var subPredicateFormatArgumentArray: [String] = ["\(expected)"]
@@ -523,9 +511,11 @@ public extension NSPredicate {
      
      @return A result predicate.
      */
-    @obj convenience init (timeOfDayQuestionResultWithResultSelector: ORKResultSelector,
-    minimumExpectedHour:(NSInteger)minimumExpectedHour
-    minimumExpectedMinute:(NSInteger)minimumExpectedMinute
-    maximumExpectedHour:(NSInteger)maximumExpectedHour
-    maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
+    @objc convenience init (timeOfDayQuestionResultWithResultSelector: ORKResultSelector,
+                           minimumExpectedHour: Int,
+                           minimumExpectedMinute: Int,
+                           maximumExpectedHour: Int,
+                           maximumExpectedMinute: Int) {
+        self.init(resultSelector: timeOfDayQuestionResultWithResultSelector, minimum: TimeOfDay(hour: minimumExpectedHour, minute: minimumExpectedMinute), maximum: TimeOfDay(hour: maximumExpectedHour, minute: maximumExpectedMinute))
+    }
 }

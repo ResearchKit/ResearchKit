@@ -302,21 +302,5 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ pattern ]];
 }
 
-- (instancetype)initWithTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   minimumExpectedHour:(NSInteger)minimumExpectedHour
-                                                 minimumExpectedMinute:(NSInteger)minimumExpectedMinute
-                                                   maximumExpectedHour:(NSInteger)maximumExpectedHour
-                                                 maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
-    return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:@[ @"answer.hour >= %@",
-                                                    @"answer.minute >= %@",
-                                                    @"answer.hour <= %@",
-                                                    @"answer.minute <= %@" ]
-                 subPredicateFormatArgumentArray:@[ @(minimumExpectedHour),
-                                                    @(minimumExpectedMinute),
-                                                    @(maximumExpectedHour),
-                                                    @(maximumExpectedMinute) ]];
-}
-
 @end
 

@@ -295,28 +295,6 @@ ORK_CLASS_AVAILABLE
 /*- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                                   matchingPattern:(NSString *)pattern;*/
 
-/**
- Creates a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
- the specified hour and minute values.
- 
- Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
- If you are interested in additional components, you must build the predicate manually.
- 
- @param resultSelector          The result selector object which specifies the question result you
-                                    are interested in.
- @param minimumExpectedHour     The minimum expected hour component value.
- @param minimumExpectedMinute   The minimum expected minute component value.
- @param maximumExpectedHour     The maximum integer hour component value.
- @param maximumExpectedMinute   The maximum expected minute component value.
- 
- @return A result predicate.
- */
-- (instancetype)initWithTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   minimumExpectedHour:(NSInteger)minimumExpectedHour
-                                                 minimumExpectedMinute:(NSInteger)minimumExpectedMinute
-                                                   maximumExpectedHour:(NSInteger)maximumExpectedHour
-                                                 maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
-
 @end
 
 NS_ASSUME_NONNULL_END
