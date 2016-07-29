@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKVideoInstructionStep : ORKInstructionStep
 
 /**
- 
+ The URL of the video to play (local or remote)
  */
 @property (nonatomic, copy, nullable) NSURL *videoURL;
 
