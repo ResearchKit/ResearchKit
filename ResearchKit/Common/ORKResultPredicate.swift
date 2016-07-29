@@ -30,26 +30,6 @@
 
 import Foundation
 
-/**
- The CanSupportMinMaxORKResultPredicate is a marker for ResearchKit's extensions to NSPredicate that
- this particular class can be compared with minimum and maximum values. At present the classes
- suitable are NSDates and derivatives of doubles.
- 
- ResearchKit authors creating ORKResults with class-specific returns can make their return value
- conform to this protocol and can thereby gain the predicate functionality 'for free'.
-*/
-public protocol CanSupportMinMaxORKResultPredicate {
-    
-}
-
-extension NSDate: CanSupportMinMaxORKResultPredicate {
-    
-}
-
-extension Double: CanSupportMinMaxORKResultPredicate {
-    
-}
-
 
 /**
  The CanSupportExpectedORKResultPredicate is a marker for ResearchKit's extensions to NSPredicate that
@@ -77,6 +57,25 @@ extension Double: CanSupportExpectedORKResultPredicate {
 
 extension NSDate: CanSupportExpectedORKResultPredicate {
     
+}
+
+struct TimeOfDay: Comparable {
+    let hour: Int
+    let minute: Int
+}
+
+// MARK: Equatable
+
+func ==(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
+    return ((lhs.hour == rhs.hour) && (lhs.minute == rhs.minute))
+}
+
+// MARK: Comparable
+
+func <(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
+    let lhsTotalTime = (lhs.hour * 60) + lhs.minute
+    let rhsTotalTime = (rhs.hour * 60) + rhs.minute
+    return (lhsTotalTime < rhsTotalTime)
 }
 
 /**
@@ -152,7 +151,7 @@ public extension NSPredicate {
      
      */
 
-    convenience init <T where T: CanSupportMinMaxORKResultPredicate>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) {
+    convenience init <T where T: Comparable>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) {
         
         var subPredicateFormatArray: [String] = []
         var subPredicateFormatArgumentArray: [String] = []
@@ -508,4 +507,25 @@ public extension NSPredicate {
         self.init(resultSelector: scaleQuestionResultWithResultSelector, maximum: maximumExpectedAnswerValue)
     }
 
+    /**
+     Creates a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
+     the specified hour and minute values.
+     
+     Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
+     If you are interested in additional components, you must build the predicate manually.
+     
+     @param resultSelector          The result selector object which specifies the question result you
+     are interested in.
+     @param minimumExpectedHour     The minimum expected hour component value.
+     @param minimumExpectedMinute   The minimum expected minute component value.
+     @param maximumExpectedHour     The maximum integer hour component value.
+     @param maximumExpectedMinute   The maximum expected minute component value.
+     
+     @return A result predicate.
+     */
+    @obj convenience init (timeOfDayQuestionResultWithResultSelector: ORKResultSelector,
+    minimumExpectedHour:(NSInteger)minimumExpectedHour
+    minimumExpectedMinute:(NSInteger)minimumExpectedMinute
+    maximumExpectedHour:(NSInteger)maximumExpectedHour
+    maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
 }
