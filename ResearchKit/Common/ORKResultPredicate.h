@@ -197,7 +197,7 @@ ORK_CLASS_AVAILABLE
  
  For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
- 
+
  */
 @interface NSPredicate (ORKResultPredicate)
 
