@@ -184,11 +184,7 @@ ORK_CLASS_AVAILABLE
  
  Note that each `ORKStep` object produces one `ORKStepResult` collection object. A step
  result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object which has
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> ResearchKit/master
  the same identifier as the step that generated it. A step result produced by an `ORKFormStep`
  object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
@@ -201,11 +197,7 @@ ORK_CLASS_AVAILABLE
  
  For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
-<<<<<<< HEAD
  
-=======
-
->>>>>>> ResearchKit/master
  */
 @interface NSPredicate (ORKResultPredicate)
 
@@ -350,11 +342,7 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 /**
-<<<<<<< HEAD
  Creates a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
-=======
- Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
->>>>>>> ResearchKit/master
  specified Boolean value.
  
  @param resultSelector      The result selector object which specifies the question result you are
@@ -369,13 +357,7 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
-<<<<<<< HEAD
- 
  Creates a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
-=======
-
- Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
->>>>>>> ResearchKit/master
  specified string.
  
  @param resultSelector      The result selector object which specifies the question result you are
@@ -494,13 +476,8 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
-<<<<<<< HEAD
  Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
  within the specified `NSTimeInterval` values.
-=======
- Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
-within the specified `NSTimeInterval` values.
->>>>>>> ResearchKit/master
  
  @param resultSelector              The result selector object which specifies the question result
  you are interested in.
