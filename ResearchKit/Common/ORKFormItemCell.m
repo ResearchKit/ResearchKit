@@ -490,7 +490,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
@@ -659,7 +659,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     [super cellInit];
     ORKQuestionType questionType = [self.formItem questionType];
-    self.textField.keyboardType = (questionType == ORKQuestionTypeInteger)?UIKeyboardTypeNumberPad:UIKeyboardTypeDecimalPad;
+    self.textField.keyboardType = (questionType == ORKQuestionTypeInteger) ? UIKeyboardTypeNumberPad : UIKeyboardTypeDecimalPad;
     [self.textField addTarget:self action:@selector(valueFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.textField.allowsSelection = YES;
     
@@ -669,7 +669,7 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.unit = answerFormat.unit;
     self.textField.placeholder = self.formItem.placeholder;
     
-    _numberFormatter = [(ORKNumericAnswerFormat *)answerFormat makeNumberFormatter];
+    _numberFormatter = ORKDecimalNumberFormatter();
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
     
     [self answerDidChange];
@@ -1067,8 +1067,9 @@ static const CGFloat HorizontalMargin = 15.0;
           [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-          [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
+          [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKHeightAnswerFormat class]])) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat, ORKTimeOfDayAnswerFormat, ORKTimeIntervalAnswerFormat, ORKValuePicker, or ORKHeightAnswerFormat instance" userInfo:nil];
     }
     [super setFormItem:formItem];
 }
@@ -1085,7 +1086,7 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (id<ORKPicker>)picker {
     if (_picker == nil) {
-        ORKAnswerFormat *answerFormat = (ORKDateAnswerFormat *)[self.formItem impliedAnswerFormat];
+        ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
         _picker = [ORKPicker pickerWithAnswerFormat:answerFormat answer:self.answer delegate:self];
     }
     
@@ -1109,7 +1110,6 @@ static const CGFloat HorizontalMargin = 15.0;
 #pragma mark ORKPickerDelegate
 
 - (void)picker:(id)picker answerDidChangeTo:(id)answer {
-    
     [self inputValueDidChange];
 }
 

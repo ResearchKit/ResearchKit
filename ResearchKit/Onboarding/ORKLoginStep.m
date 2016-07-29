@@ -31,7 +31,6 @@
 
 #import "ORKLoginStep.h"
 #import "ORKLoginStep_Internal.h"
-#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
 
@@ -43,6 +42,14 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 
 - (Class)stepViewControllerClass {
     return self.loginViewControllerClass;
+}
+
+// Don't throw on -initWithIdentifier: because it's internally used by -copyWithZone:
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier

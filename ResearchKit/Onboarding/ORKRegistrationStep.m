@@ -31,7 +31,6 @@
 
 #import "ORKRegistrationStep.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Private.h"
 
 

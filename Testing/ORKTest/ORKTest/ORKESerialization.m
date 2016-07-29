@@ -36,25 +36,25 @@
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter stringFromDate:date];
+    return [formatter stringFromDate:date];
 }
 
 static NSDate *ORKEDateFromStringISO8601(NSString *string) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter dateFromString:string];
+    return [formatter dateFromString:string];
 }
 
 static NSArray *ORKNumericAnswerStyleTable() {
@@ -80,19 +80,19 @@ static NSInteger tableMapReverse(id value, NSArray *table) {
 }
 
 static NSDictionary *dictionaryFromCGPoint(CGPoint p) {
-    return @{ @"x" : @(p.x), @"y" : @(p.y) };
+    return @{ @"x": @(p.x), @"y": @(p.y) };
 }
 
 static NSDictionary *dictionaryFromCGSize(CGSize s) {
-    return @{ @"h" : @(s.height), @"w" : @(s.width) };
+    return @{ @"h": @(s.height), @"w": @(s.width) };
 }
 
 static NSDictionary *dictionaryFromCGRect(CGRect r) {
-    return @{ @"origin" : dictionaryFromCGPoint(r.origin), @"size" : dictionaryFromCGSize(r.size) };
+    return @{ @"origin": dictionaryFromCGPoint(r.origin), @"size": dictionaryFromCGSize(r.size) };
 }
 
 static NSDictionary *dictionaryFromUIEdgeInsets(UIEdgeInsets i) {
-    return @{ @"top" : @(i.top), @"left" : @(i.left), @"bottom" : @(i.bottom), @"right" : @(i.right) };
+    return @{ @"top": @(i.top), @"left": @(i.left), @"bottom": @(i.bottom), @"right": @(i.right) };
 }
 
 static CGSize sizeFromDictionary(NSDictionary *dict) {
@@ -112,7 +112,7 @@ static UIEdgeInsets edgeInsetsFromDictionary(NSDictionary *dict) {
 }
 
 static NSDictionary *dictionaryFromCoordinate (CLLocationCoordinate2D coordinate) {
-    return @{ @"latitude" : @(coordinate.latitude), @"longitude" : @(coordinate.longitude) };
+    return @{ @"latitude": @(coordinate.latitude), @"longitude": @(coordinate.longitude) };
 }
 
 static CLLocationCoordinate2D coordinateFromDictionary(NSDictionary *dict) {
@@ -320,13 +320,17 @@ static NSArray *numberFormattingStyleTable() {
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
-    static NSMutableDictionary *ret = nil;
+    static NSMutableDictionary *encondingTable = nil;
     dispatch_once(&onceToken, ^{
-ret =
+encondingTable =
 [@{
    ENTRY(ORKResultSelector,
-         nil,
-         (@{
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKResultSelector *selector = [[ORKResultSelector alloc] initWithTaskIdentifier:GETPROP(dict, taskIdentifier)
+                                                                          stepIdentifier:GETPROP(dict, stepIdentifier)
+                                                                        resultIdentifier:GETPROP(dict, resultIdentifier)];
+             return selector;
+         },(@{
             PROPERTY(taskIdentifier, NSString, NSObject, YES, nil, nil),
             PROPERTY(stepIdentifier, NSString, NSObject, YES, nil, nil),
             PROPERTY(resultIdentifier, NSString, NSObject, YES, nil, nil),
@@ -559,8 +563,8 @@ ret =
           PROPERTY(minimumSpan, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(maximumSpan, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(playSpeed, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(maxTests, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(maxConsecutiveFailures, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(maximumTests, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(maximumConsecutiveFailures, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(requireReversal, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(customTargetPluralName, NSString, NSObject, YES, nil, nil),
           })),
@@ -949,6 +953,13 @@ ret =
         },
         (@{
           })),
+   ENTRY(ORKHeightAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHeightAnswerFormat alloc] initWithMeasurementSystem:((NSNumber *)GETPROP(dict, measurementSystem)).integerValue];
+         },
+         (@{
+            PROPERTY(measurementSystem, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKLocationAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKLocationAnswerFormat alloc] init];
@@ -1219,7 +1230,7 @@ ret =
                              return nil;
                          }
                          CLCircularRegion *region = value;
-                         NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
                          dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
                          dict[@"radius"] = @(region.radius);
                          dict[@"identifier"] = region.identifier;
@@ -1276,7 +1287,7 @@ ret =
    
    } mutableCopy];
     });
-    return ret;
+    return encondingTable;
 }
 #undef GETPROP
 
@@ -1438,21 +1449,21 @@ static id jsonObjectForObject(id object) {
     return jsonOutput;
 }
 
-+ (NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error {
++ (NSDictionary *)JSONObjectForObject:(id)object error:(NSError **)error {
     id json = jsonObjectForObject(object);
     return json;
 }
 
-+ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError *__autoreleasing *)error {
++ (id)objectFromJSONObject:(NSDictionary *)object error:(NSError **)error {
     return objectForJsonObject(object, nil, nil);
 }
 
-+ (NSData *)JSONDataForObject:(id)object error:(NSError *__autoreleasing *)error {
++ (NSData *)JSONDataForObject:(id)object error:(NSError **)error {
     id json = jsonObjectForObject(object);
     return [NSJSONSerialization dataWithJSONObject:json options:(NSJSONWritingOptions)0 error:error];
 }
 
-+ (id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error {
++ (id)objectFromJSONData:(NSData *)data error:(NSError **)error {
     id json = [NSJSONSerialization JSONObjectWithData:data options:(NSJSONReadingOptions)0 error:error];
     id ret = nil;
     if (json != nil) {
@@ -1499,7 +1510,7 @@ static id jsonObjectForObject(id object) {
     NSMutableDictionary *encodingTable = ORKESerializationEncodingTable();
     
     ORKESerializableTableEntry *entry = encodingTable[NSStringFromClass(serializableClass)];
-    if (! entry) {
+    if (!entry) {
         entry = [[ORKESerializableTableEntry alloc] initWithClass:serializableClass initBlock:nil properties:@{}];
         encodingTable[NSStringFromClass(serializableClass)] = entry;
     }

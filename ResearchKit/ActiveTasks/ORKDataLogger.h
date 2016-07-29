@@ -30,7 +30,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -101,6 +101,7 @@ ORK_CLASS_AVAILABLE
  */
 + (ORKDataLogger *)JSONDataLoggerWithDirectory:(NSURL *)url logName:(NSString *)logName delegate:(nullable id<ORKDataLoggerDelegate>)delegate;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -166,7 +167,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the enumeration was successful; otherwise, `NO`.
  */
-- (BOOL)enumerateLogs:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * __autoreleasing *)error;
+- (BOOL)enumerateLogs:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * _Nullable *)error;
 
 /**
  Enumerates the URLs of completed log files not yet marked uploaded,
@@ -181,7 +182,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the enumeration was successful; otherwise, `NO`.
  */
-- (BOOL)enumerateLogsNeedingUpload:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * __autoreleasing *)error;
+- (BOOL)enumerateLogsNeedingUpload:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * _Nullable *)error;
 
 /**
  Enumerates the URLs of completed log files not already marked uploaded,
@@ -196,7 +197,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the enumeration was successful; otherwise, `NO`.
  */
-- (BOOL)enumerateLogsAlreadyUploaded:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * __autoreleasing *)error;
+- (BOOL)enumerateLogsAlreadyUploaded:(void (^)(NSURL *logFileUrl, BOOL *stop))block error:(NSError * _Nullable *)error;
 
 /**
  Appends an object to the log file, which is formatted with `logFormatter`.
@@ -207,12 +208,12 @@ ORK_CLASS_AVAILABLE
  log data is made. If an attempt is made to log data and there is no access due
  to file protection, the log is immediately rolled over and a new file created.
  
- @param object Should be an object of a class that is accepted by the logFormatter.
- @param error  Error output, if the append fails.
+ @param object  Should be an object of a class that is accepted by the logFormatter.
+ @param error   Error output, if the append fails.
  
  @return `YES` if appending succeeds; otherwise, `NO`.
  */
-- (BOOL)append:(id)object error:(NSError * __autoreleasing *)error;
+- (BOOL)append:(id)object error:(NSError * _Nullable *)error;
 
 /**
  Appends multiple objects to the log file.
@@ -220,12 +221,12 @@ ORK_CLASS_AVAILABLE
  This method formats and appends all the objects at once. Using this method may have efficiency
  and atomicity gains for error handling, compared to making multiple calls to `append:error`.
  
- @param objects An array of objects of a class that is accepted by the logFormatter.
- @param error  Error output, if the append fails.
+ @param objects     An array of objects of a class that is accepted by the logFormatter.
+ @param error       Error output, if the append fails.
  
  @return `YES` if appending succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObjects:(NSArray *)objects error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)appendObjects:(NSArray *)objects error:(NSError * _Nullable *)error;
 
 /**
  Checks whether a file has been marked as uploaded.
@@ -251,7 +252,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if adding or removing the attribute succeeded; otherwise, `NO`.
  */
-- (BOOL)markFileUploaded:(BOOL)uploaded atURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)markFileUploaded:(BOOL)uploaded atURL:(NSURL *)url error:(NSError * _Nullable *)error;
 
 /**
  Removes files if they are marked uploaded.
@@ -265,7 +266,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if removing the files succeeded; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * _Nullable *)error;
 
 /**
  Removes all files managed by this logger (files that have the `logName` prefix).
@@ -274,7 +275,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if removing the files succeeded.; otherwise, `NO`.
  */
-- (BOOL)removeAllFilesWithError:(NSError *_Nullable __autoreleasing *)error;
+- (BOOL)removeAllFilesWithError:(NSError * _Nullable *)error;
 
 @end
 
@@ -320,7 +321,7 @@ ORK_CLASS_AVAILABLE
  
  @return  `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)beginLogWithFileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)beginLogWithFileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable *)error;
 
 /**
  Appends the specified object to the log file.
@@ -331,7 +332,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable *)error;
 
 /**
  Appends the specified objects to the log file.
@@ -342,7 +343,7 @@ ORK_CLASS_AVAILABLE
  
  @return  `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable *)error;
 
 @end
 
@@ -425,6 +426,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKDataLoggerManager : NSObject <ORKDataLoggerDelegate>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -505,7 +507,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the enumeration succeeds; otherwise, `NO`.
  */
-- (BOOL)enumerateLogsNeedingUpload:(void (^)(ORKDataLogger *dataLogger, NSURL *logFileUrl, BOOL *stop))block error:(NSError * __autoreleasing *)error;
+- (BOOL)enumerateLogsNeedingUpload:(void (^)(ORKDataLogger *dataLogger, NSURL *logFileUrl, BOOL *stop))block error:(NSError * _Nullable *)error;
 
 /**
  Unmarks the set of uploaded files.
@@ -518,7 +520,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable *)error;
 
 /**
  Removes a set of uploaded files.
@@ -532,7 +534,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable *)error;
 
 /**
  Removes old and uploaded logs to bring total bytes down to a threshold.
@@ -545,7 +547,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * _Nullable *)error;
 
 @end
 

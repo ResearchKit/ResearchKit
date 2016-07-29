@@ -31,7 +31,7 @@
 
 #import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKDefines_Private.h>
+#import <ResearchKit/ORKHelpers_Private.h>
 
 // Active step support
 #import <ResearchKit/ORKTaskViewController_Private.h>

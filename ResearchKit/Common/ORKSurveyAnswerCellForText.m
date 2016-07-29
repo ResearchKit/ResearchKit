@@ -129,7 +129,7 @@
 }
 
 - (void)textDidChange {
-    [self ork_setAnswer:(self.textView.text.length > 0)? self.textView.text : ORKNullAnswerValue()];
+    [self ork_setAnswer:(self.textView.text.length > 0) ? self.textView.text : ORKNullAnswerValue()];
 }
 
 - (BOOL)shouldContinue {
@@ -194,7 +194,7 @@
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
-    _textField.placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    _textField.placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     _textField.textAlignment = NSTextAlignmentNatural;
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;

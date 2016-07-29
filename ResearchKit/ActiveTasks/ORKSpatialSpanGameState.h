@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, ORKSpatialSpanResult) {
 
 @interface ORKSpatialSpanGameState : NSObject
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithGame:(ORKSpatialSpanGame *)game NS_DESIGNATED_INITIALIZER;

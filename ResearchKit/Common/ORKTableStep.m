@@ -28,11 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTableStep.h"
 #import "ORKHelpers.h"
 #import "ORKTableStepViewController.h"
 
-NSString *const ORKBasicCellReuseIdentifier = @"BasicCell";
+
+ORKDefineStringKey(ORKBasicCellReuseIdentifier);
+
 
 @implementation ORKTableStep
 
@@ -101,7 +104,7 @@ NSString *const ORKBasicCellReuseIdentifier = @"BasicCell";
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.items hash];
+    return super.hash ^ self.items.hash;
 }
 
 @end

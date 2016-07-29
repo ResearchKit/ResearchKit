@@ -366,14 +366,14 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
     
     _currentPageIndex = page;
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     
     //unregister ScrollView to clear hairline
     [self.taskViewController setRegisteredScrollView:nil];
     
     [_pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
         if (finished) {
-            STRONGTYPE(weakSelf) strongSelf = weakSelf;
+            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
             [strongSelf updateBackButton];
             
             //register ScrollView to update hairline
@@ -411,9 +411,9 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
 }
 
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(NSError *)error {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if ([delegate respondsToSelector:@selector(stepViewControllerDidFail:withError:)]) {
-        [delegate stepViewControllerDidFail:self withError:error];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(stepViewControllerDidFail:withError:)]) {
+        [strongDelegate stepViewControllerDidFail:self withError:error];
     }
 }
 
@@ -429,9 +429,9 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
 }
 
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if ([delegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
-        [delegate stepViewController:self recorder:recorder didFailWithError:error];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(stepViewController:recorder:didFailWithError:)]) {
+        [strongDelegate stepViewController:self recorder:recorder didFailWithError:error];
     }
 }
 
