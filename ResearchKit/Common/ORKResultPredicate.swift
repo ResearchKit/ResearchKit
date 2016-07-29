@@ -136,7 +136,6 @@ public extension NSPredicate {
      compare the answer against a minimum value.
      @param maximum                The maximum value. Omit this parameter if you don't want to
      compare the answer against a maximum value.
-     
      */
 
     convenience init <T where T: Comparable>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) {
@@ -165,7 +164,6 @@ public extension NSPredicate {
      @param resultSelector              The result selector object which specifies the question result
      you are interested in.
      @param expected                    The result that you are expecting.
-     
      */
     
     convenience init <T where T: Equatable>(resultSelector: ORKResultSelector, expected: T) {
@@ -209,7 +207,6 @@ public extension NSPredicate {
      @param choiceResultSelector    The result selector object which specifies the question result
      you are interested in.
      @param matches                 An array of string results to match exactly against.
-     
      */
     
     convenience init (choiceResultSelector: ORKResultSelector, matches: [String])
@@ -223,7 +220,6 @@ public extension NSPredicate {
      @param choiceResultSelector    The result selector object which specifies the question result
      you are interested in.
      @param match                   A string result to match exactly against.
-     
      */
     
     convenience init (choiceResultSelector: ORKResultSelector, match: String)
@@ -237,7 +233,6 @@ public extension NSPredicate {
      @param choiceResultSelector    The result selector object which specifies the question result
      you are interested in.
      @param patterns                An array of string patterns to match against.
-     
      */
     
     convenience init (choiceResultSelector: ORKResultSelector, patterns: [String])
@@ -251,7 +246,6 @@ public extension NSPredicate {
      @param choiceResultSelector    The result selector object which specifies the question result
      you are interested in.
      @param pattern                A string pattern to match against
-     
      */
     
     convenience init (choiceResultSelector: ORKResultSelector, pattern: String)
