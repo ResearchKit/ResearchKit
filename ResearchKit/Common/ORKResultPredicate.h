@@ -172,7 +172,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKResultPredicate` NSPredicate category provides convenience class methods to build 
+ The `ORKResultPredicate` NSPredicate category provides convenience class methods to build
  predicates for most of the `ORKQuestionResult` subtypes.
  
  You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
@@ -181,14 +181,14 @@ ORK_CLASS_AVAILABLE
  completed tasks.
  
  You chose which question result to match by using an `ORKResultSelector` object.
-
+ 
  Note that each `ORKStep` object produces one `ORKStepResult` collection object. A step
  result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object which has
-
+ 
  the same identifier as the step that generated it. A step result produced by an `ORKFormStep`
  object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
-
+ 
  For matching a single-question step result, you only need to set the `resultIdentifer` when
  building the result selector object. The `stepIdentifier` will take the same value.
  
@@ -197,7 +197,7 @@ ORK_CLASS_AVAILABLE
  
  For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
-
+ 
  */
 @interface NSPredicate (ORKResultPredicate)
 
@@ -211,34 +211,105 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-- (instancetype)initWithNilQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector;
+- (instancetype)initWithNilQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                    NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultSelector      The result selector object which specifies the question result you are
+ interested in.
+ @param expectedAnswer      The expected integer value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                               expectedAnswer:(NSInteger)expectedAnswer
+                                    NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
+ specified double values.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+ if you don't want to compare the answer against a maximum
+ double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+ if you don't want to compare the answer against a maximum
+ double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                   minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                   maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
+ or equal to the specified double value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                   minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                        NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
+ equal to the specified double value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                   maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue
+                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
  the specified object.
  
  @param resultSelector          The result selector object which specifies the question result you
-                                    are interested in.
+ are interested in.
  @param expectedAnswerValue     The expected answer object.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                        expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)
-                                                    expectedAnswerValue;*/
+- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                           expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>) expectedAnswerValue
+                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
  the specified objects.
  
  @param resultSelector          The result selector object which specifies the question result you
-                                    are interested in.
+ are interested in.
  @param expectedAnswerValues    An array with a some or of all of the expected answer objects.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues;*/
+- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues
+                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
@@ -246,54 +317,232 @@ ORK_CLASS_AVAILABLE
  which only contain string answers.
  
  @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
+ interested in.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                    matchingPattern:(NSString *)pattern;*/
+- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                               matchingPattern:(NSString *)pattern
+                                      NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
 
 /**
  Creates a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
  specified regular expression patterns.
  
  @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
+ interested in.
  @param patterns            An array of ICU-compliant regular expression patterns that match the answer strings.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   matchingPatterns:(NSArray<NSString *> *)patterns;*/
+- (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                              matchingPatterns:(NSArray<NSString *> *)patterns
+                                      NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+/**
+ Creates a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
+ specified Boolean value.
+ 
+ @param resultSelector      The result selector object which specifies the question result you are
+ interested in.
+ @param expectedAnswer      The expected boolean value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithBooleanQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                 expectedAnswer:(BOOL)expectedAnswer
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
-
+ 
  Creates a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
  specified string.
  
  @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
+ interested in.
  @param expectedString      The expected result string.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                   expectedString:(NSString *)expectedString;*/
+- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                              expectedString:(NSString *)expectedString
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
 
 /**
  Creates a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
  specified regular expression pattern.
  
  @param resultSelector      The result selector object which specifies the question result you are
-                                interested in.
+ interested in.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
  
  @return A result predicate.
  */
-/*- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                                  matchingPattern:(NSString *)pattern;*/
+- (instancetype)initWithTextQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                             matchingPattern:(NSString *)pattern
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultSelector      The result selector object which specifies the question result you are
+ interested in.
+ @param expectedAnswer      The expected integer value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                     expectedAnswer:(NSInteger)expectedAnswer
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
+ specified double values.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+ if you don't want to compare the answer against a maximum
+ double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+ if you don't want to compare the answer against a minimum
+ double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                     minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                     maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
+ than or equal to the specified double value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                     minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
+ or equal to the specified double value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected double value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithNumericQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                     maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue
+                                     NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+/**
+ Creates a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
+ the specified hour and minute values.
+ 
+ Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
+ If you are interested in additional components, you must build the predicate manually.
+ 
+ @param resultSelector          The result selector object which specifies the question result you
+ are interested in.
+ @param minimumExpectedHour     The minimum expected hour component value.
+ @param minimumExpectedMinute   The minimum expected minute component value.
+ @param maximumExpectedHour     The maximum integer hour component value.
+ @param maximumExpectedMinute   The maximum expected minute component value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                              minimumExpectedHour:(NSInteger)minimumExpectedHour
+                                            minimumExpectedMinute:(NSInteger)minimumExpectedMinute
+                                              maximumExpectedHour:(NSInteger)maximumExpectedHour
+                                            maximumExpectedMinute:(NSInteger)maximumExpectedMinute
+                                            NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
+ within the specified `NSTimeInterval` values.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
+ `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+ answer against a maximum `NSTimeInterval` value.
+ @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value. Pass
+ `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+ answer against a minimum `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
+                                          maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue
+                                          NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
+                                          NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+
+/**
+ Creates a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                          maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue
+                                          NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+/**
+ Creates a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
+ the specified dates.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
+ compare the answer against a minimum date.
+ @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to
+ compare the answer against a maximum date.
+ 
+ @return A result predicate.
+ */
+- (instancetype)initWithDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                   minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
+                                   maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 @end
 
