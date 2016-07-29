@@ -45,7 +45,7 @@
 - (void)stepDidChange {
     [self setThumbnailImageFromAsset];
     [super stepDidChange];
-    if (self.step && [self isViewLoaded] && self.videoInstructionStep.image) {
+    if (self.step && [self isViewLoaded] && [self videoInstructionStep].image) {
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
         [tapRecognizer addTarget:self action:@selector(play)];
         [self.stepView.instructionImageView addGestureRecognizer:tapRecognizer];
@@ -66,18 +66,21 @@
 }
 
 - (void)setThumbnailImageFromAsset {
-    if (!self.videoInstructionStep.videoURL) {
+    if ([self videoInstructionStep].image) {
+        return;
+    }
+    if (![self videoInstructionStep].videoURL) {
         self.videoInstructionStep.image = nil;
         return;
     }
-    AVAsset* asset = [AVAsset assetWithURL:self.videoInstructionStep.videoURL];
+    AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
     CMTime duration = [asset duration];
-    duration.value = MIN(self.videoInstructionStep.thumbnailTime, duration.value / duration.timescale) * duration.timescale;
+    duration.value = MIN([self videoInstructionStep].thumbnailTime, duration.value / duration.timescale) * duration.timescale;
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     CGImageRef thumbnailImageRef = [imageGenerator copyCGImageAtTime:duration actualTime:NULL error:NULL];
     UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
     CGImageRelease(thumbnailImageRef);
-    self.videoInstructionStep.image = thumbnailImage;
+    [self videoInstructionStep].image = thumbnailImage;
 }
 
 - (void)play {
