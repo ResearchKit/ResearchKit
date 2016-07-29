@@ -263,7 +263,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                    minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
-                                        NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
@@ -278,7 +278,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithScaleQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                    maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue
-                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
@@ -292,8 +292,8 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 - (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                           expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>) expectedAnswerValue
-                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+                                   expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>) expectedAnswerValue
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
@@ -307,8 +307,8 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 - (instancetype)initWithChoiceQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
-                                          expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues
-                                       NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+                                   expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues
+                                   NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 
 /**
