@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Ogiltig e-postadress: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Ange en adress";
+"LOCATION_ERROR_TITLE" = "Kunde inte hitta den angivna adressen";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Kunde inte bestämma din aktuella plats. Ange en adress eller flytta dig till en plats med bättre GPS-signal om det är tillämpligt.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Åtkomst till platstjänster har nekats. Tillåt att den här appen använder platstjänster via Inställningar.";
+"LOCATION_ERROR_GEOCODE" = "Det gick inte att hitta något resultat för den angivna adressen. Kontrollera att adressen är giltig.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Antingen är du inte ansluten till internet eller så har du överskridit det maximala antalet addressökbegäranden. Om du inte är ansluten till internet aktiverar du Wi-Fi så att du kan svara på frågan, hoppa över frågan om en sådan knapp är tillgänglig eller gå tillbaka till enkäten när du är ansluten till internet. I annat fall försöker du igen om några minuter.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinnehållet överskrider maximal längd: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera inte tillgänglig i delad skärm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-post";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Lösenord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenord";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekräfta";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ange lösenordet igen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lösenorden stämmer inte överens.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ytterligare information";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Kön";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Välj ett kön";
+"DOB_FORM_ITEM_TITLE" = "Födelsedatum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Välj ett datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifiering";
+"VERIFICATION_STEP_TITLE" = "Bekräfta ditt e-brev";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryck på länken nedan om du inte fick något bekräftelsebrev och vill att det skickas på nytt.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Skicka bekräftelsebrev igen";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggning";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Har du glömt lösenordet?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Ange lösenkod";
+"PASSCODE_CONFIRM_MESSAGE" = "Bekräfta lösenkod";
+"PASSCODE_SAVED_MESSAGE" = "Lösenkoden sparad";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Autentiserad med lösenkod";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ange din gamla lösenkod";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Ange din nya lösenkod";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekräfta den nya lösenkoden";
+"PASSCODE_INVALID_ALERT_TITLE" = "Felaktig lösenkod";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Lösenkoderna stämde inte överens. Försök igen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentisera med Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fel";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Endast numeriska tecken tillåts.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Förloppsindikator för angivande av lösenkod";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ siffror angivna";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunde inte lägga till nyckelringsobjekt.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Kunde inte uppdatera nyckelringsobjekt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Kunde inte radera nyckelringsobjekt.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Kunde inte hitta nyckelringsobjekt.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Godkänn";
 "BUTTON_CANCEL" = "Avbryt";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Rensa";
 "BUTTON_DISAGREE" = "Avböj";
 "BUTTON_DONE" = "Klar";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Tryck";
 "TOTAL_TAPS_LABEL" = "Totalt antal tryckningar";
 "TAPPING_INSTRUCTION" = "Tryck på knapparna så fort du kan med två fingrar.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Röst";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Vänd om och gå tillbaka till utgångsplatsen.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tryck på Klar när du är färdig.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Inga data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Addera det nya talet till det föregående.";
 "PSAT_NO_DIGIT" = "–";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-håls pegtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Den här aktiviteten mäter funktionen för dina övre extremiteter genom att be dig placera en pinne i ett hål. Du uppmanas att göra detta %@ gånger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din vänstra och högra hand kommer att testas.\nDu måste plocka upp pinnen så snabbt som möjligt och stoppa in den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din högra och vänstra hand kommer att testas.\nDu måste plocka upp pinnen så snabbt som möjligt och stoppa in den i hålet. När du har gjort det %@ gånger tar du bort den igen %@ gånger.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placera pinnen i hålet med hjälp av vänster hand.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Placera pinnen i hålet med hjälp av höger hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Placera pinnen bakom strecket med hjälp av vänster hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Placera pinnen bakom strecket med hjälp av höger hand.";
+"HOLE_PEG_TEST_TEXT" = "Lyft upp pinnen med två fingrar.";
+"HOLE_PEG_TEST_TEXT_2" = "Släpp pinnen genom att lyfta på fingrarna.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunde inte skapa fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunde inte ta bort tillräckligt många loggfiler för att nå tröskelvärdet";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Flera fel vid borttagning av loggar";
 "ERROR_RECORDER_NO_DATA" = "Inga insamlade data hittades.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen utmatningskatalog har angetts";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Inga data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tillbaka";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Intervall från %@ till %@";
 "AX_GRAPH_AND_SEPARATOR" = " och ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

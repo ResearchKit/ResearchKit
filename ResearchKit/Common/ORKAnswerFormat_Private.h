@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ResearchKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,8 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
  
  An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
@@ -52,7 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns an initialized text answer format using the original item identifier.
  
- @param originalItemIdentifier    The form item identifier against which this answer item is validated.
+ @param originalItemIdentifier  The form item identifier against which this answer item is validated.
+ @param errorMessage            The error message displayed if validation fails.
  
  @return An initialized confirm text answer format.
  */

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Adresse e-mail non valide : %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Saisir une adresse";
+"LOCATION_ERROR_TITLE" = "Impossible de localiser l’adresse";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Impossible de vous localiser. Saisissez une adresse ou rendez-vous si possible dans un endroit avec un meilleur signal GPS.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Accès au service de localisation refusé. Permettez à cette app d’utiliser le service de localisation dans Réglages.";
+"LOCATION_ERROR_GEOCODE" = "Impossible de trouver un résultat pour l’adresse saisie. Assurez-vous qu’elle est valide.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Vous n’êtes pas connecté à Internet ou vous avez atteint la limite de requêtes d’adresse. Si vous n’êtes pas connecté à Internet, activez votre Wi-Fi pour répondre à cette question, ignorez cette question si le bouton est disponible, ou reprenez l’enquête lorsque vous serez connecté à Internet. Sinon, veuillez attendre quelques minutes.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "La longueur du texte dépasse la limite : %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Appareil photo non disponible en plein écran.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Adresse e-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gallain@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Mot de passe";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Saisir le mot de passe";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmer";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Saisir à nouveau le mot de passe";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Les mots de passe sont différents.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informations supplémentaires";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Gilles";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Allain";
+"GENDER_FORM_ITEM_TITLE" = "Sexe";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Choisir";
+"DOB_FORM_ITEM_TITLE" = "Date de naissance";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Définir la date";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Vérification";
+"VERIFICATION_STEP_TITLE" = "Vérifier votre adresse e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Touchez le lien ci-dessous si vous n’avez pas reçu d’e-mail de vérification et aimeriez le renvoyer.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Renvoyer l’e-mail de vérification";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Connexion";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Mot de passe oublié ?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Saisir le code";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmer le code";
+"PASSCODE_SAVED_MESSAGE" = "Code enregistré";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Authentification par code";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Saisir votre ancien code";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Saisir votre nouveau code";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirmer votre nouveau code";
+"PASSCODE_INVALID_ALERT_TITLE" = "Code incorrect";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Les codes sont différents. Réessayez.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Authentification avec Touch ID requise";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erreur Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Caractères numériques uniquement.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicateur de progression de la saisie du code";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ sur %@ chiffres saisis";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Impossible d’ajouter l’élément du trousseau.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Impossible de mettre à jour l’élément du trousseau.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Impossible de supprimer l’élément du trousseau.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Impossible de localiser l’élément du trousseau.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Accepter";
 "BUTTON_CANCEL" = "Annuler";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Effacer";
 "BUTTON_DISAGREE" = "Refuser";
 "BUTTON_DONE" = "Terminé";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Toucher";
 "TOTAL_TAPS_LABEL" = "Total de touchers";
 "TAPPING_INSTRUCTION" = "Touchez les boutons le plus rapidement possible avec deux doigts.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voix";
@@ -268,19 +326,18 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité mesure le fonctionnement de vos membres supérieurs en vous demandant de placer un rond dans un trou. Il vous sera demandé de le faire %@ fois.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Vos main %@ et %@ seront testées toutes les deux.\nVous devez prendre un cercle aussi vite que possible, le mettre dans le trou et, après l'avoir fait %@ fois, le retirer %@ fois encore.";
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
-"HOLE_PEG_TEST_RIGHT" = "droite";
-"HOLE_PEG_TEST_LEFT" = "gauche";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Mettez la pièce dans le trou en utilisant votre main %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Mettez la pièce derrière la ligne en utilisant votre main %@.";
-"HOLE_PEG_TEST_TEXT" = "Prenez la pièce en utilisant deux doigts.";
-"HOLE_PEG_TEST_TEXT_2" = "Soulevez vos doigts pour laisser tomber la pièce.";
+"HOLE_PEG_TEST_TITLE_%@" = "Test des %@ chevilles";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité évalue le fonctionnement de vos extrémités supérieures. Vous devez placer un rond dans un trou et répéter cette opération %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et, après avoir fait cela %@ fois, retirez le rond %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et, après avoir fait cela %@ fois, retirez le rond %@ fois.";
 
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Aucune donnée";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placez le rond dans le trou avec votre main gauche.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Placez le rond dans le trou avec votre main droite.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Placez le rond derrière la ligne avec votre main gauche.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Placez le rond derrière la ligne avec votre main droite.";
+"HOLE_PEG_TEST_TEXT" = "Ramassez le rond avec deux doigts.";
+"HOLE_PEG_TEST_TEXT_2" = "Levez les doigts pour faire tomber le rond.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";
@@ -290,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Plusieurs erreurs lors de la suppression des journaux";
 "ERROR_RECORDER_NO_DATA" = "Aucune donnée collectée n’a été détectée.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Aucun répertoire de sortie spécifié";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Aucune donnée";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Retour";
@@ -328,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
 "AX_GRAPH_AND_SEPARATOR" = " et ";
+"AX_GRAPH_POINT_%@" = "Point : %@";

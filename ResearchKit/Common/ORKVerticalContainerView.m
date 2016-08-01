@@ -41,6 +41,17 @@ static const CGFloat AssumedStatusBarHeight = 20;
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
+/*
+ view hierachy in ORKVerticalContainerView (from top to bottom):
+ 
+ scrollContainer
+    - container
+        - customViewContainer
+        - headerView
+        - stepViewContainer
+    - continueSkipContainer
+ */
+
 @implementation ORKVerticalContainerView {
     UIView *_scrollContainer;
     UIView *_container;

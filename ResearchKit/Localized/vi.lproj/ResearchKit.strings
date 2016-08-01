@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Địa chỉ email không hợp lệ: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Nhập một địa chỉ";
+"LOCATION_ERROR_TITLE" = "Không thể Tìm thấy Địa chỉ Được chỉ định";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Không thể xử lý vị trí hiện tại của bạn. Vui lòng nhập địa chỉ hoặc di chuyển đến một vị trí có tín hiệu GPS tốt hơn nếu có thể.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Truy cập vào dịch vụ định vị này đã bị từ chối. Vui lòng cấp quyền cho ứng dụng này sử dụng dịch vụ định vị qua phần Cài đặt.";
+"LOCATION_ERROR_GEOCODE" = "Không thể tìm thấy kết quả cho địa chỉ đã nhập. Vui lòng đảm bảo địa chỉ này hợp lệ.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Bạn không được kết nối vào internet hoặc bạn đã vượt quá số lượng yêu cầu tra cứu địa chỉ tối đa. Nếu bạn không được kết nối vào internet, vui lòng bật Wi-Fi để trả lời câu hỏi này, bỏ qua câu hỏi này nếu có nút bỏ qua hoặc quay trở lại bản khảo sát khi bạn được kết nối vào internet. Nếu không, vui lòng thử lại sau một vài phút nữa.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Nội dung văn bản vượt quá độ dài tối đa: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera không có sẵn trong chế độ màn hình tách rời.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Mật khẩu";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Nhập mật khẩu";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Xác nhận";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Nhập lại mật khẩu";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Các mật khẩu không khớp.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Thông tin Bổ sung";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Giới tính";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Chọn giới tính";
+"DOB_FORM_ITEM_TITLE" = "Ngày sinh";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Chọn một ngày";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Xác minh";
+"VERIFICATION_STEP_TITLE" = "Xác minh Email của bạn";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Chạm vào liên kết bên dưới nếu bạn không nhận được email xác minh và muốn được gửi lại.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Gửi lại Email Xác minh";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Đăng nhập";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Quên mật khẩu?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Nhập mã khóa";
+"PASSCODE_CONFIRM_MESSAGE" = "Xác nhận mã khóa";
+"PASSCODE_SAVED_MESSAGE" = "Đã lưu mã khóa";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Đã xác thực mã khóa";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Nhập mã khóa cũ của bạn";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Nhập mã khóa mới của bạn";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Xác nhận mã khóa mới của bạn";
+"PASSCODE_INVALID_ALERT_TITLE" = "Mã khóa Không đúng";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Các mã khóa không khớp. Thử lại.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Vui lòng xác thực bằng Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Lỗi Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Chỉ cho phép các ký tự số.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình nhập mã khóa";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Đã nhập %@ / %@ số";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Không thể thêm mục Chuỗi khóa.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Không thể cập nhật mục Chuỗi khóa.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Không thể xóa mục Chuỗi khóa.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Không thể tìm mục Chuỗi khóa.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Đồng ý";
 "BUTTON_CANCEL" = "Hủy";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Xóa";
 "BUTTON_DISAGREE" = "Không đồng ý";
 "BUTTON_DONE" = "Xong";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Chạm";
 "TOTAL_TAPS_LABEL" = "Tổng Lần chạm";
 "TAPPING_INSTRUCTION" = "Chạm vào các nút bằng hai ngón tay với tốc độ nhanh hết mức có thể.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Giọng nói";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Quay đầu lại và đi bộ về nơi bạn bắt đầu.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Chạm Xong khi hoàn tất.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Không có Dữ liệu";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Cộng số mới này với số trước đó.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Kiểm tra Bảng %@ Lỗ";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một miếng gỗ vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Cả tay trái và phải của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Cả tay phải và trái của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay phải của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay phải của bạn.";
+"HOLE_PEG_TEST_TEXT" = "Nhặt miếng gỗ bằng hai ngón tay.";
+"HOLE_PEG_TEST_TEXT_2" = "Nhấc các ngón tay để thả rơi miếng gỗ.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Không thể xóa đủ số tệp bản ghi để đạt tới ngưỡng";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Nhiều lỗi trong khi xóa bản ghi";
 "ERROR_RECORDER_NO_DATA" = "Không tìm thấy dữ liệu được thu thập.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Không có thư mục đầu ra nào được chỉ định";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Không có Dữ liệu";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Quay lại";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
+"AX_GRAPH_POINT_%@" = "Điểm: %@";

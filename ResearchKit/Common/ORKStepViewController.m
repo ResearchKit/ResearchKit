@@ -30,12 +30,12 @@
 
 
 #import "ORKStepViewController.h"
-#import "ORKDefines_Private.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKSkin.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+#import "ORKReviewStep_Internal.h"
 
 
 @interface ORKStepViewController () {
@@ -57,7 +57,7 @@
     _internalBackButtonItem.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     _internalContinueButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
     _internalDoneButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(goForward)];
-    _internalSkipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil) style:UIBarButtonItemStylePlain target:self action:@selector(skipForward)];
+    _internalSkipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil) style:UIBarButtonItemStylePlain target:self action:@selector(skip:)];
     _backButtonItem = _internalBackButtonItem;
 }
 
@@ -246,18 +246,18 @@
 }
 
 - (BOOL)hasPreviousStep {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
-        return [delegate stepViewControllerHasPreviousStep:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
+        return [strongDelegate stepViewControllerHasPreviousStep:self];
     }
     
     return NO;
 }
 
 - (BOOL)hasNextStep {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasNextStep:)]) {
-        return [delegate stepViewControllerHasNextStep:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(stepViewControllerHasNextStep:)]) {
+        return [strongDelegate stepViewControllerHasNextStep:self];
     }
     
     return NO;
@@ -267,16 +267,16 @@
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
     stepResult.startDate = self.presentedDate;
-    stepResult.endDate = self.dismissedDate? :[NSDate date];
+    stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
 }
 
 - (void)notifyDelegateOnResultChange {
     
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if ([delegate respondsToSelector:@selector(stepViewControllerResultDidChange:)]) {
-        [delegate stepViewControllerResultDidChange:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(stepViewControllerResultDidChange:)]) {
+        [strongDelegate stepViewControllerResultDidChange:self];
     }
 }
 
@@ -284,25 +284,68 @@
     return _hasBeenPresented;
 }
 
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    // The default values for a view controller's supported interface orientations is set to
+    // UIInterfaceOrientationMaskAll for the iPad idiom and UIInterfaceOrientationMaskAllButUpsideDown for the iPhone idiom.
+    UIInterfaceOrientationMask supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        supportedOrientations = UIInterfaceOrientationMaskAll;
+    }
+    return supportedOrientations;
+}
+
+- (BOOL)isBeingReviewed {
+    return _parentReviewStep != nil;
+}
+
+- (BOOL)readOnlyMode {
+    return self.isBeingReviewed && _parentReviewStep.isStandalone;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
-    
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
-    [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
+    ORKStepViewControllerNavigationDirection direction = self.isBeingReviewed ? ORKStepViewControllerNavigationDirectionReverse : ORKStepViewControllerNavigationDirectionForward;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    [strongDelegate stepViewController:self didFinishWithNavigationDirection:direction];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void)goBackward {
     
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionReverse];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+}
+
+- (void)skip:(UIView *)sender {
+    if (self.isBeingReviewed && !self.readOnlyMode) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil)
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction *action) {
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self skipForward];
+                                                    });
+                                                }]];
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+                                                  style:UIAlertActionStyleCancel
+                                                handler:nil
+                          ]];
+        alert.popoverPresentationController.sourceView = sender;
+        alert.popoverPresentationController.sourceRect = sender.bounds;
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self skipForward];
+    }
 }
 
 - (void)skipForward {
     [self goForward];
 }
+
 
 - (ORKTaskViewController *)taskViewController {
     UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];
@@ -354,6 +397,7 @@
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
+static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -361,6 +405,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     [coder encodeObject:_step.identifier forKey:_ORKStepIdentifierRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDateRestoreKey];
     [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryKey];
+    [coder encodeObject:_parentReviewStep forKey:_ORKParentReviewStepKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -382,6 +427,8 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
     }
+    
+    self.parentReviewStep = [coder decodeObjectOfClass:[ORKReviewStep class] forKey:_ORKParentReviewStepKey];
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {

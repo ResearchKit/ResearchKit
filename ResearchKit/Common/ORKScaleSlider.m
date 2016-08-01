@@ -33,7 +33,6 @@
 
 #import "ORKScaleSlider.h"
 #import "ORKAccessibility.h"
-#import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKSkin.h"
 #import "ORKScaleSliderView.h"
@@ -284,6 +283,8 @@ static const CGFloat Padding = 2.0;
 }
 
 - (void)axBumpValue:(BOOL)increment {
+    self.showThumb = YES;
+    
     // If there's no fixed number of steps, we rely on the default implementation.
     if (_numberOfSteps == 0) {
         (increment ? [super accessibilityIncrement] : [super accessibilityDecrement]);

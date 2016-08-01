@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "メールアドレスが無効です: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "住所を入力";
+"LOCATION_ERROR_TITLE" = "指定した住所が見つかりませんでした";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "現在地を確認できません。住所を入力するか、GPS信号の受信状況が良好な場所に移動してください。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "位置情報サービスへのアクセスが拒否されました。“設定”でこのAppに位置情報サービスの使用を許可してください。";
+"LOCATION_ERROR_GEOCODE" = "入力した住所の結果が見つかりません。住所が正しいことを確認してください。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "インターネットに接続されていないか、住所検索要求の最大数に達しました。インターネットに接続されていない場合は、Wi-Fiをオンにしてこの質問に回答するか、この質問をスキップするか（スキップボタンが表示されている場合）、またはインターネットに接続されているときにアンケートをやり直してください。インターネットに接続されている場合は、数分待ってからやり直してください。";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字数が最大許容数を超えています: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "分割画面ではカメラを使用できません。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "メール";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "パスワード";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "パスワードを入力";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "パスワードを再入力";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "パスワードが一致しません。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "追加情報";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "性別";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "性別を選択";
+"DOB_FORM_ITEM_TITLE" = "生年月日";
+"DOB_FORM_ITEM_PLACEHOLDER" = "日付を選択";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "確認";
+"VERIFICATION_STEP_TITLE" = "メールを確認";
+"RESEND_EMAIL_LABEL_MESSAGE" = "確認メールが届いておらず、送信し直したい場合は、下のリンクをタップしてください。";
+"RESEND_EMAIL_BUTTON_TITLE" = "確認メールを再送信";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "ログイン";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "パスワードをお忘れですか?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "パスコードを入力してください";
+"PASSCODE_CONFIRM_MESSAGE" = "パスコードを確認してください";
+"PASSCODE_SAVED_MESSAGE" = "パスコードが保存されました";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "パスコードが認証されました";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "古いパスコードを入力してください";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "新しいパスコードを入力してください";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "新しいパスコードを確認してください";
+"PASSCODE_INVALID_ALERT_TITLE" = "パスコードが正しくありません";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "パスコードが一致しません。もう一度入力してください。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Touch IDで認証してください";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch IDエラー";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "入力できるのは数字のみです。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコード入力の進行状況インジケータ";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@桁を入力しました";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "キーチェーン項目を追加できませんでした。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "キーチェーン項目をアップデートできませんでした。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "キーチェーン項目を削除できませんでした。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "キーチェーン項目が見つかりませんでした。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "同意する";
 "BUTTON_CANCEL" = "キャンセル";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "消去";
 "BUTTON_DISAGREE" = "同意しない";
 "BUTTON_DONE" = "完了";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "タップ";
 "TOTAL_TAPS_LABEL" = "合計タップ回数";
 "TAPPING_INSTRUCTION" = "2本の指を使ってできるだけ速くボタンをタップしてください。";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "声";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "後ろを向いて、元の場所まで歩いて戻ってください。";
 "TIMED_WALK_INSTRUCTION_TEXT" = "完了したら、“完了”をタップしてください。";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "データなし";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "この数字を直前の数字と足してください。";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "左手で円を穴に置いてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "右手で円を穴に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "左手で円を線の向こう側に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "右手で円を線の向こう側に置いてください。";
+"HOLE_PEG_TEST_TEXT" = "2本の指で円をつまんでください。";
+"HOLE_PEG_TEST_TEXT_2" = "指で円を持ち上げて移動させ落としてください。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "しきい値に達するのに十分なログファイルを削除できませんでした";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "ログ削除時に複数のエラー";
 "ERROR_RECORDER_NO_DATA" = "収集したデータが見つかりませんでした。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "出力ディレクトリが指定されていません";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "データなし";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "戻る";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
 "AX_GRAPH_AND_SEPARATOR" = "と";
+"AX_GRAPH_POINT_%@" = "ポイント: %@";

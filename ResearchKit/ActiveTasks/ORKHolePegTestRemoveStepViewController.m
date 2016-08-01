@@ -35,6 +35,7 @@
 #import "ORKActiveStepViewController_internal.h"
 #import "ORKStepViewController_internal.h"
 #import "ORKActiveStepView.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKHolePegTestRemoveStepViewController () <ORKHolePegTestRemoveContentViewDelegate>
@@ -140,8 +141,8 @@
 #pragma mark - hole peg test content view delegate
 
 - (NSString *)stepTitle {
-    NSString *hand = ([self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil);
-    return [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), hand];
+    NSString *title = ([self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil);
+    return title;
 }
 
 - (void)holePegTestRemoveDidProgress:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView {

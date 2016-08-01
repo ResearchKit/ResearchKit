@@ -34,6 +34,7 @@
 #import "ORKActiveStepView.h"
 #import "ORKReactionTimeContentView.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKHelpers.h"
 #import <CoreMotion/CMDeviceMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
@@ -183,7 +184,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (void)resetAfterDelay:(NSTimeInterval)delay {
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     [_reactionTimeContentView resetAfterDelay:delay completion:^{
         [weakSelf configureTitle];
         [weakSelf start];
