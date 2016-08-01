@@ -48,7 +48,7 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
  
  A result selector object contains a result identifier and, optionally, a task identifier and a step
  identifier. If the task identifier is `nil`, the selector refers to a result in the ongoing task.
- If you set the step identifier to `nil`, its value will be the same os the result identifier.
+ If you set the step identifier to `nil`, its value will be the same as the result identifier.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultSelector : NSObject <NSSecureCoding, NSCopying>
