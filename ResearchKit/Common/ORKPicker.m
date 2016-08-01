@@ -63,7 +63,6 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
 
 @implementation ORKPicker : NSObject
 
-<<<<<<< HEAD
 /**
  Creates a picker appropriate to the type required by answerformat
  
@@ -73,11 +72,7 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
  
  @return The picker object
  */
-+ (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer delegate:(id<ORKPickerDelegate>) delegate {
-    
-=======
 + (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer delegate:(id<ORKPickerDelegate>) delegate {
->>>>>>> ResearchKit/master
     id<ORKPicker> picker;
     
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
