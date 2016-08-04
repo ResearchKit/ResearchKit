@@ -72,6 +72,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         _normalizedValues = [NSMutableArray new];
         _segmentLayers = [NSMutableArray new];
         _pieSections = [NSMutableArray new];
+        _radiusScaleFactor = 0.5;
     }
     return self;
 }
@@ -114,7 +115,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGRect bounds = self.bounds;
     CGFloat startAngle = OriginAngle;
     CGFloat endAngle = startAngle + (2 * M_PI);
-    CGFloat outerRadius = bounds.size.height * 0.5;
+    CGFloat outerRadius = bounds.size.height * _radiusScaleFactor;
     CGFloat labelHeight = [@"100%" boundingRectWithSize:CGRectInfinite.size
                                                 options:(NSStringDrawingOptions)0
                                              attributes:@{NSFontAttributeName : _percentageLabelFont}
@@ -397,6 +398,10 @@ static const CGFloat InterAnimationDelay = 0.05;
         
         cumulativeValue += value;
     }
+}
+
+- (void)setRadiusScaleFactor:(CGFloat)radiusScaleFactor {
+    _radiusScaleFactor = radiusScaleFactor;
 }
 
 #pragma mark - Accessibility
