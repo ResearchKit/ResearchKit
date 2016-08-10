@@ -490,9 +490,10 @@
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
 		BF04090E1CD8F5FE009BBF0A /* ORKPrintFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF0409101CD8F62B009BBF0A /* ORKPrintFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */; };
-		BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */; };
+		BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = BF37D2971D5BAFA100155671 /* ORKHTMLPrintingTemplate.h */; };
+		BF37D29A1D5BAFA100155671 /* ORKHTMLPrintingTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF37D2981D5BAFA100155671 /* ORKHTMLPrintingTemplate.m */; };
 		BF5161501BE9C53D00174DDD /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A11BDE8DA9007FA459 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF6C837C1CE3D875002632DB /* Stylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = BF6C837B1CE3D874002632DB /* Stylesheet.css */; };
+		BF6C837C1CE3D875002632DB /* HTMLPrintingStylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = BF6C837B1CE3D874002632DB /* HTMLPrintingStylesheet.css */; };
 		BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */; };
 		BF91559C1BDE8D7D007FA459 /* ORKReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF91559D1BDE8D7D007FA459 /* ORKReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9155971BDE8D7D007FA459 /* ORKReviewStep.m */; };
@@ -1066,8 +1067,9 @@
 		BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultPredicate.m; sourceTree = "<group>"; };
 		BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPrintFormatter.h; path = Printing/ORKPrintFormatter.h; sourceTree = "<group>"; };
 		BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPrintFormatter.m; path = Printing/ORKPrintFormatter.m; sourceTree = "<group>"; };
-		BF0409141CD8F669009BBF0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/HTMLTemplates.strings; sourceTree = "<group>"; };
-		BF6C837B1CE3D874002632DB /* Stylesheet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = Stylesheet.css; sourceTree = "<group>"; };
+		BF37D2971D5BAFA100155671 /* ORKHTMLPrintingTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHTMLPrintingTemplate.h; sourceTree = "<group>"; };
+		BF37D2981D5BAFA100155671 /* ORKHTMLPrintingTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHTMLPrintingTemplate.m; sourceTree = "<group>"; };
+		BF6C837B1CE3D874002632DB /* HTMLPrintingStylesheet.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = HTMLPrintingStylesheet.css; sourceTree = "<group>"; };
 		BF9155951BDE8D7D007FA459 /* ORKReviewStep_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep_Internal.h; sourceTree = "<group>"; };
 		BF9155961BDE8D7D007FA459 /* ORKReviewStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep.h; sourceTree = "<group>"; };
 		BF9155971BDE8D7D007FA459 /* ORKReviewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStep.m; sourceTree = "<group>"; };
@@ -2246,8 +2248,9 @@
 			children = (
 				BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */,
 				BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */,
-				BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */,
-				BF6C837B1CE3D874002632DB /* Stylesheet.css */,
+				BF37D2971D5BAFA100155671 /* ORKHTMLPrintingTemplate.h */,
+				BF37D2981D5BAFA100155671 /* ORKHTMLPrintingTemplate.m */,
+				BF6C837B1CE3D874002632DB /* HTMLPrintingStylesheet.css */,
 			);
 			name = Printing;
 			sourceTree = "<group>";
@@ -2436,6 +2439,7 @@
 				86C40D141A8D7C5C00081FAC /* ORKHelpers_Private.h in Headers */,
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
 				86C40CD01A8D7C5C00081FAC /* ORKInstructionStepView.h in Headers */,
+				BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */,
 				86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */,
 				86C40E181A8D7C5C00081FAC /* ORKConsentSection.h in Headers */,
 				86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */,
@@ -2748,10 +2752,9 @@
 				B1A860ED1A9693C400EA57B7 /* consent_04@2x.m4v in Resources */,
 				B17FE7FD1A8DBE7C00BF9C28 /* Artwork.xcassets in Resources */,
 				B1C0F4E41A9BA65F0022C153 /* ResearchKit.strings in Resources */,
-				BF6C837C1CE3D875002632DB /* Stylesheet.css in Resources */,
+				BF6C837C1CE3D875002632DB /* HTMLPrintingStylesheet.css in Resources */,
 				86C40DFC1A8D7C5C00081FAC /* MovieTintShader.vsh in Resources */,
 				B1A860F51A9693C400EA57B7 /* consent_05@3x.m4v in Resources */,
-				BF0409131CD8F669009BBF0A /* HTMLTemplates.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2953,6 +2956,7 @@
 				86C40D6C1A8D7C5C00081FAC /* ORKResult.m in Sources */,
 				86C40CD21A8D7C5C00081FAC /* ORKInstructionStepView.m in Sources */,
 				10FF9AD81B7A045E00ECB5B4 /* ORKSeparatorView.m in Sources */,
+				BF37D29A1D5BAFA100155671 /* ORKHTMLPrintingTemplate.m in Sources */,
 				86C40D181A8D7C5C00081FAC /* ORKErrors.m in Sources */,
 				24850E1A1BCDA9C7006E91FB /* ORKLoginStepViewController.m in Sources */,
 				25ECC09C1AFBD8B300F3D63B /* ORKReactionTimeViewController.m in Sources */,
@@ -3094,15 +3098,6 @@
 				B1B34A061AABBCCDDEEFFAAA /* no */,
 			);
 			name = ResearchKit.strings;
-			sourceTree = "<group>";
-		};
-		BF0409151CD8F669009BBF0A /* HTMLTemplates.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF0409141CD8F669009BBF0A /* Base */,
-			);
-			name = HTMLTemplates.strings;
-			path = Printing;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

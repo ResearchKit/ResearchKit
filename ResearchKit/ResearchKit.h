@@ -87,5 +87,4 @@
 #import <ResearchKit/ORKPieChartView.h>
 #import <ResearchKit/ORKContinueButton.h>
 
-
 #import <ResearchKit/ORKPrintFormatter.h>

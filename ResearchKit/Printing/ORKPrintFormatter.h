@@ -63,13 +63,9 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) NSString *styleSheetContent;
 
-@property (nonatomic, nullable) NSURL *styleSheetURL;
-
 - (instancetype)init;
 
-- (void)prepareWithSteps:(NSArray<ORKStep *> *)steps andResult:(nullable id<ORKTaskResultSource>)result;
-
-- (void)prepareWithStep:(ORKStep *)step andResult:(nullable ORKStepResult *)result;
+- (void)setSteps:(NSArray<ORKStep *> *)steps withResult:(nullable id<ORKTaskResultSource>)result;
 
 @end
 

@@ -28,18 +28,36 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-"HTML" = "<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
-"STEP" = "<div class=\"stepSeparator\">%@%@%@</div>";
-/* STEP HEADER */
-"STEP_HEADER" = "<p id=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
-/* STEP BODY */
-"FORM_STEP" = "<p id=\"formStepTitle\">%@</p>";
-"FORM_STEP_ANSWER" = "<p id=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
-"QUESTION_STEP_ANSWER" = "<table id=\"answerTable\">%@</table>";
-"STEP_ANSWER" = "<tr class=\"answerRow\"><td><div class=\"answerColumn\"/>%@<td/></tr>";
-"STEP_SELECTED_ANSWER" = "<tr class=\"selectedAnswerRow\"><td><div class=\"selectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"selectedAnswerSecondaryColumn\">%@</div></td></tr>";
-"STEP_UNSELECTED_ANSWER" = "<tr class=\"unselectedAnswerRow\"><td><div class=\"unselectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"unselectedAnswerSecondaryColumn\">%@</div></td></tr>";
-/* STEP FOOTER */
-"STEP_FOOTER" = "<p class=\"stepFooter\">%@</p>";
-/* IMAGE */
-"IMAGE" = "<figure class=\"figure\"><img class=\"image\" height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
+
+#import <Foundation/Foundation.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface ORKHTMLPrintingTemplate : NSObject
+
++ (NSString *)html;
+
++ (NSString *)step;
+
++ (NSString *)stepHeader;
+
++ (NSString *)formStep;
+
++ (NSString *)formStepAnswer;
+
++ (NSString *)questionStepAnswer;
+
++ (NSString *)stepAnswer;
+
++ (NSString *)stepSelectedAnswer;
+
++ (NSString *)stepUnselectedAnswer;
+
++ (NSString *)stepFooter;
+
++ (NSString *)image;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Oliver Schaefer
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,12 +29,53 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import "ORKHTMLPrintingTemplate.h"
 
 
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
+@implementation ORKHTMLPrintingTemplate
 
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
++ (NSString *)html {
+    return @"<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
+}
+
++ (NSString *)step {
+    return @"<div class=\"stepSeparator\">%@%@%@</div>";
+}
+
++ (NSString *)stepHeader {
+    return @"<p id=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
+}
+
++ (NSString *)formStep {
+    return @"<p id=\"formStepTitle\">%@</p>";
+}
+
++ (NSString *)formStepAnswer {
+    return @"<p id=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
+}
+
++ (NSString *)questionStepAnswer {
+    return @"<table id=\"answerTable\">%@</table>";
+}
+
++ (NSString *)stepAnswer {
+    return @"<tr class=\"answerRow\"><td><div class=\"answerColumn\"/>%@<td/></tr>";
+}
+
++ (NSString *)stepSelectedAnswer {
+    return @"<tr class=\"selectedAnswerRow\"><td><div class=\"selectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"selectedAnswerSecondaryColumn\">%@</div></td></tr>";
+}
+
++ (NSString *)stepUnselectedAnswer {
+    return @"<tr class=\"unselectedAnswerRow\"><td><div class=\"unselectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"unselectedAnswerSecondaryColumn\">%@</div></td></tr>";
+}
+
++ (NSString *)stepFooter {
+    return @"<p class=\"stepFooter\">%@</p>";
+}
+
++ (NSString *)image {
+    return @"<figure class=\"figure\"><img class=\"image\" height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
+}
+
+@end
