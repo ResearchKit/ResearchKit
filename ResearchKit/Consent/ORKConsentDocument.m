@@ -101,6 +101,21 @@
     }];
 }
 
+- (void) makeCustomPDFWithCompletionHandler:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
+    _writer.printRenderer = renderer;
+    return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
+        if (error) {
+            // Pass the webview error straight through. This is a pretty exceptional
+            // condition (can only happen if they pass us really invalid content).
+            completionBlock(nil, error);
+        } else {
+            completionBlock(data, nil);
+        }
+        _writer.printRenderer = nil;
+    }];
+
+}
+
 #pragma mark - Private
 
 - (NSString *)mobileHTMLWithTitle:(NSString *)title detail:(NSString *)detail {
