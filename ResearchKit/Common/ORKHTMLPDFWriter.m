@@ -99,11 +99,11 @@ static const CGFloat PageEdge = 72.0 / 4;
     ORKHTMLPDFPageRenderer *renderer = self.printRenderer;
     if(renderer == nil) {
         renderer = [[ORKHTMLPDFPageRenderer alloc] init];
+        renderer.pageMargins = self.pageMargins;
+        renderer.footerHeight = FooterHeight;
+        renderer.headerHeight = HeaderHeight;
         
     }
-    renderer.pageMargins = self.pageMargins;
-    renderer.footerHeight = FooterHeight;
-    renderer.headerHeight = HeaderHeight;
     
     [renderer addPrintFormatter:formatter startingAtPageAtIndex:0];
     
