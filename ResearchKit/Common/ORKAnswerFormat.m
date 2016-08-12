@@ -2412,7 +2412,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 - (ORKNumericQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(NSNumber *)answer {
-    ORKNumericQuestionResult *questionResult = [super resultWithIdentifier:identifier answer:answer];
+    ORKNumericQuestionResult *questionResult = (ORKNumericQuestionResult *)[super resultWithIdentifier:identifier answer:answer];
     // Use canonical unit because we expect results to be consistent regardless of the user locale
     questionResult.unit = [self canonicalUnitString];
     return questionResult;
