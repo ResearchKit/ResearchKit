@@ -208,6 +208,14 @@ IB_DESIGNABLE
  */
 - (void)reloadData;
 
+/**
+ A scaling facor for the radius of the pie chart.
+ Increase it to increase the radius of the pie chart and vice versa.
+ 
+ Defaults to 0.5.
+ */
+@property (nonatomic) CGFloat radiusScaleFactor;
+
 @end
 
 NS_ASSUME_NONNULL_END

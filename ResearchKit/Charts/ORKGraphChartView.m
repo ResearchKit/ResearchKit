@@ -35,6 +35,7 @@
 #import "ORKGraphChartView_Internal.h"
 
 #import "ORKChartTypes.h"
+#import "ORKLineGraphChartView.h"
 #import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
 
@@ -516,15 +517,32 @@ ORK_INLINE UIImage *graphPointLayerImageWithColor(UIColor *color) {
     return pointImage;
 }
 
-ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
+ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndicator) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineWidth;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
+    if (drawPointIndicator) {
     pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+    }
     
     return pointLayer;
     }
     
+- (BOOL)shouldDrawPointIndicatorForPointWithIndex:(NSInteger)pointIndex inPlotWithIndex:(NSInteger)plotIndex {
+    ORKValueRange *dataPoint = (ORKValueRange *)_dataPoints[plotIndex][pointIndex];
+    if (dataPoint.isUnset) {
+        return NO;
+    }
+    if (!dataPoint.isEmptyRange) {
+        return YES;
+    }
+    if ([self isKindOfClass:[ORKLineGraphChartView class]]
+        && [_dataSource respondsToSelector:@selector(graphChartView:drawsPointIndicatorsForPlotIndex:)]) {
+        return [_dataSource graphChartView:self drawsPointIndicatorsForPlotIndex:plotIndex];
+    }
+    return YES;
+}
+
 - (void)updateLineLayers {
     for (NSInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
         for (NSMutableArray <CAShapeLayer *> *sublineLayers in self.lineLayers[plotIndex]) {
@@ -1106,12 +1124,13 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
         for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             ORKValueRange *dataPoint = self.dataPoints[plotIndex][pointIndex];
             if (!dataPoint.isUnset) {
-                CALayer *pointLayer = graphPointLayerWithColor(color);
+                BOOL drawPointIndicator = [self shouldDrawPointIndicatorForPointWithIndex:pointIndex inPlotWithIndex:plotIndex];
+                CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                 [self.plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *pointLayer = graphPointLayerWithColor(color);
+                    CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                     [self.plotView.layer addSublayer:pointLayer];
                     [_pointLayers[plotIndex] addObject:pointLayer];
                 }
@@ -1125,7 +1144,9 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     UIColor *color = [self colorForPlotIndex:plotIndex];
     for (NSUInteger pointIndex = 0; pointIndex < _pointLayers[plotIndex].count; pointIndex++) {
         CALayer *pointLayer = _pointLayers[plotIndex][pointIndex];
+        if (pointLayer.contents) {
         pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+        }
         }
     }
     

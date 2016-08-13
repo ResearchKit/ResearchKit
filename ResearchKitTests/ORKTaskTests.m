@@ -580,6 +580,9 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertTrue(testStepAfterStep(skipTask, taskResult, severityStep, nil));
 }
 
+ORKDefineStringKey(SignConsentStepIdentifier);
+ORKDefineStringKey(SignatureIdentifier);
+
 ORKDefineStringKey(ScaleStepIdentifier);
 ORKDefineStringKey(ContinuousScaleStepIdentifier);
 static const NSInteger IntegerValue = 6;
@@ -649,6 +652,12 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     return stepResult;
 };
 
+static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^ORKStepResult *(NSString *stepIdentifier, NSString *signatureIdentifier, BOOL consented) {
+    ORKConsentSignatureResult *consentSignatureResult = [[ORKConsentSignatureResult alloc] initWithIdentifier:signatureIdentifier];
+    consentSignatureResult.consented = consented;
+    return [[ORKStepResult alloc] initWithStepIdentifier:stepIdentifier results:@[consentSignatureResult]];
+};
+
 - (ORKTaskResult *)getGeneralTaskResultTree {
     NSMutableArray *stepResults = [NSMutableArray new];
     
@@ -674,6 +683,19 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     // Nil result (simulate skipped step)
     [stepResults addObject:getStepResult(NilTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, nil)];
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
+                                                                  taskRunUUID:[NSUUID UUID]
+                                                              outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    taskResult.results = stepResults;
+    
+    return taskResult;
+}
+
+- (ORKTaskResult *)getTaskResultTreeWithConsent:(BOOL)consented {
+    NSMutableArray *stepResults = [NSMutableArray new];
+    
+    [stepResults addObject:getConsentStepResult(SignConsentStepIdentifier, SignatureIdentifier, consented)];
     
     ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
                                                                   taskRunUUID:[NSUUID UUID]
@@ -1328,6 +1350,28 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     resultSelector.resultIdentifier = TextStepIdentifier;
     XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithResultSelector:resultSelector] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+}
+
+- (void)testConsentPredicate {
+    ORKResultSelector *resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           stepIdentifier:SignConsentStepIdentifier
+                                                                         resultIdentifier:SignatureIdentifier];
+    {
+        ORKTaskResult *consentedTaskResult = [self getTaskResultTreeWithConsent:YES];
+        XCTAssertTrue([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                      didConsent:YES] evaluateWithObject:@[consentedTaskResult] substitutionVariables:nil]);
+        XCTAssertFalse([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                       didConsent:NO] evaluateWithObject:@[consentedTaskResult] substitutionVariables:nil]);
+    }
+    
+    {
+        ORKTaskResult *didNotConsentTaskResult = [self getTaskResultTreeWithConsent:NO];
+        
+        XCTAssertTrue([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                      didConsent:NO] evaluateWithObject:@[didNotConsentTaskResult] substitutionVariables:nil]);
+        XCTAssertFalse([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                       didConsent:YES] evaluateWithObject:@[didNotConsentTaskResult] substitutionVariables:nil]);
+    }
 }
 
 - (void)testResultPredicates {

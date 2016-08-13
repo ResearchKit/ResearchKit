@@ -44,6 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSArray *textChoices;
 
+@property (nonatomic, copy, nullable) NSArray<UIColor *> *gradientColors;
+
+@property (nonatomic, copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 NS_ASSUME_NONNULL_END

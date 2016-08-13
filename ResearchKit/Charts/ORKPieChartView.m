@@ -117,6 +117,11 @@ static const CGFloat PieToLegendPadding = 8.0;
     [self reloadData];
 }
 
+- (void)setRadiusScaleFactor:(CGFloat)radiusScaleFactor {
+    _pieView.radiusScaleFactor = radiusScaleFactor;
+    [_pieView setNeedsLayout];
+}
+
 - (void)setLineWidth:(CGFloat)lineWidth {
     _lineWidth = lineWidth;
     [_pieView setNeedsLayout];

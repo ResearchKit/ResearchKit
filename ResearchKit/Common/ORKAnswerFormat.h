@@ -320,6 +320,26 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale. 
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing. 
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 
@@ -461,6 +481,26 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale.
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing.
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 
@@ -531,6 +571,26 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
 @property (readonly, getter=isVertical) BOOL vertical;
+
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale.
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing.
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
 
 @end
 
