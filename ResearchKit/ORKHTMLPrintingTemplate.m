@@ -34,47 +34,47 @@
 
 @implementation ORKHTMLPrintingTemplate
 
-+ (NSString *)html {
+- (NSString *)html {
     return @"<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
 }
 
-+ (NSString *)step {
+- (NSString *)step {
     return @"<div class=\"stepSeparator\">%@%@%@</div>";
 }
 
-+ (NSString *)stepHeader {
-    return @"<p id=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
+- (NSString *)stepHeader {
+    return @"<p class=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
 }
 
-+ (NSString *)formStep {
+- (NSString *)formStep {
     return @"<p id=\"formStepTitle\">%@</p>";
 }
 
-+ (NSString *)formStepAnswer {
+- (NSString *)formStepAnswer {
     return @"<p id=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
 }
 
-+ (NSString *)questionStepAnswer {
+- (NSString *)questionStepAnswer {
     return @"<table id=\"answerTable\">%@</table>";
 }
 
-+ (NSString *)stepAnswer {
+- (NSString *)stepAnswer {
     return @"<tr class=\"answerRow\"><td><div class=\"answerColumn\"/>%@<td/></tr>";
 }
 
-+ (NSString *)stepSelectedAnswer {
+- (NSString *)stepSelectedAnswer {
     return @"<tr class=\"selectedAnswerRow\"><td><div class=\"selectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"selectedAnswerSecondaryColumn\">%@</div></td></tr>";
 }
 
-+ (NSString *)stepUnselectedAnswer {
+- (NSString *)stepUnselectedAnswer {
     return @"<tr class=\"unselectedAnswerRow\"><td><div class=\"unselectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"unselectedAnswerSecondaryColumn\">%@</div></td></tr>";
 }
 
-+ (NSString *)stepFooter {
+- (NSString *)stepFooter {
     return @"<p class=\"stepFooter\">%@</p>";
 }
 
-+ (NSString *)image {
+- (NSString *)image {
     return @"<figure class=\"figure\"><img class=\"image\" height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
 }
 

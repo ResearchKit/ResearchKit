@@ -34,7 +34,7 @@
 body {
     font-family: Helvetica;
 }
-#stepTitle {
+.stepTitle {
     font-weight: bold;
     font-size: larger;
 }

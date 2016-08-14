@@ -3386,7 +3386,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     _currentDocument = nil;
     
     NSURL *outputDirectoryURL = taskViewController.outputDirectory;
-    [taskViewController dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
@@ -3414,7 +3414,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     NSString *task_identifier = taskViewController.task.identifier;
-
+    //TODO: remove before merging PR
     return (/*[step isKindOfClass:[ORKInstructionStep class]]
             &&*/ NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
@@ -3425,6 +3425,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
+    //TODO: remove before merging PR
     ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
     printFormatter.delegate = self;
     printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
@@ -3666,7 +3667,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }
     
     NSURL *dir = taskViewController.outputDirectory;
-    [taskViewController dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         if (dir)
         {
             NSError *err = nil;

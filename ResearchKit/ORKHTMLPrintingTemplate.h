@@ -36,27 +36,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKHTMLPrintingTemplate : NSObject
 
-+ (NSString *)html;
+- (NSString *)html;
 
-+ (NSString *)step;
+- (NSString *)step;
 
-+ (NSString *)stepHeader;
+- (NSString *)stepHeader;
 
-+ (NSString *)formStep;
+- (NSString *)formStep;
 
-+ (NSString *)formStepAnswer;
+- (NSString *)formStepAnswer;
 
-+ (NSString *)questionStepAnswer;
+- (NSString *)questionStepAnswer;
 
-+ (NSString *)stepAnswer;
+- (NSString *)stepAnswer;
 
-+ (NSString *)stepSelectedAnswer;
+- (NSString *)stepSelectedAnswer;
 
-+ (NSString *)stepUnselectedAnswer;
+- (NSString *)stepUnselectedAnswer;
 
-+ (NSString *)stepFooter;
+- (NSString *)stepFooter;
 
-+ (NSString *)image;
+- (NSString *)image;
 
 @end
 

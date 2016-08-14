@@ -490,7 +490,7 @@
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
 		BF04090E1CD8F5FE009BBF0A /* ORKPrintFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = BF04090D1CD8F5FE009BBF0A /* ORKPrintFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF0409101CD8F62B009BBF0A /* ORKPrintFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF04090F1CD8F62B009BBF0A /* ORKPrintFormatter.m */; };
-		BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = BF37D2971D5BAFA100155671 /* ORKHTMLPrintingTemplate.h */; };
+		BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = BF37D2971D5BAFA100155671 /* ORKHTMLPrintingTemplate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BF37D29A1D5BAFA100155671 /* ORKHTMLPrintingTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF37D2981D5BAFA100155671 /* ORKHTMLPrintingTemplate.m */; };
 		BF5161501BE9C53D00174DDD /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9155A11BDE8DA9007FA459 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF6C837C1CE3D875002632DB /* HTMLPrintingStylesheet.css in Resources */ = {isa = PBXBuildFile; fileRef = BF6C837B1CE3D874002632DB /* HTMLPrintingStylesheet.css */; };
@@ -2391,6 +2391,7 @@
 				106FF2AA1B690FD7004EACF2 /* ORKHolePegTestPlacePegView.h in Headers */,
 				86C40D701A8D7C5C00081FAC /* ORKRoundTappingButton.h in Headers */,
 				BCB6E6501B7D533B000D5B34 /* ORKPieChartLegendCollectionViewLayout.h in Headers */,
+				BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */,
 				CBD34A561BB1FB9000F204EA /* ORKLocationSelectionView.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
@@ -2439,7 +2440,6 @@
 				86C40D141A8D7C5C00081FAC /* ORKHelpers_Private.h in Headers */,
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
 				86C40CD01A8D7C5C00081FAC /* ORKInstructionStepView.h in Headers */,
-				BF37D2991D5BAFA100155671 /* ORKHTMLPrintingTemplate.h in Headers */,
 				86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */,
 				86C40E181A8D7C5C00081FAC /* ORKConsentSection.h in Headers */,
 				86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */,

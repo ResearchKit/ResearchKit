@@ -34,6 +34,7 @@
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKHTMLPrintingTemplate.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -62,6 +63,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, weak, nullable) id<ORKHTMLPrintFormatterDelegate> delegate;
 
 @property (nonatomic, nullable) NSString *styleSheetContent;
+
+@property (nonatomic, nullable) ORKHTMLPrintingTemplate *template;
 
 - (instancetype)init;
 
