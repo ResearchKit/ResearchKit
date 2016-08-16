@@ -262,6 +262,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
     passcodeResult.passcodeSaved = _isPasscodeSaved;
+    passcodeResult.touchIdEnabled = _isTouchIdAuthenticated;
     passcodeResult.startDate = stepResult.startDate;
     passcodeResult.endDate = now;
     
@@ -364,6 +365,11 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                 }
                 
                 [strongSelf finishTouchId];
+                //Report back to the delegate the result of the passcode result
+                if (self.taskViewController.delegate && [self.taskViewController.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
+                    [self.taskViewController.delegate taskViewController:self.taskViewController didChangeResult:[self result]];
+                }
+
             });
         }];
         
