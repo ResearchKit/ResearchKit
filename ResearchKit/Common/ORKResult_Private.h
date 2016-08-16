@@ -32,6 +32,7 @@
 #import <ResearchKit/ORKResult.h>
 @import MapKit;
 
+@class ORKPageStep;
 
 NS_ASSUME_NONNULL_BEGIN
 

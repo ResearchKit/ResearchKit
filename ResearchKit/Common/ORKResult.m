@@ -38,6 +38,7 @@
 #import "ORKConsentSignature.h"
 #import "ORKFormStep.h"
 #import "ORKQuestionStep.h"
+#import "ORKPageStep.h"
 #import "ORKResult_Private.h"
 #import "ORKStep.h"
 #import "ORKTask.h"

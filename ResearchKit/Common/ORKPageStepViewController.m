@@ -33,7 +33,7 @@
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKStepViewController_Internal.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"

@@ -29,7 +29,7 @@
  */
 
 #import "ORKPageStep.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKPageStepViewController.h"
 #import "ORKResult.h"
 
