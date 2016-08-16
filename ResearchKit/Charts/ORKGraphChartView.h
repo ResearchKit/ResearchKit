@@ -109,10 +109,8 @@ ORK_AVAILABLE_DECL
 - (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex;
 
 
-@optional
 /**
- Asks the data source for the number of plots to be plotted by the graph chart view. If this method
- is not implemented, the graph chart view assumes that it has a single plot.
+ Asks the data source for the number of plots to be plotted by the graph chart view.
 
  @param graphChartView      The graph chart view asking for the number of plots.
 
@@ -120,6 +118,7 @@ ORK_AVAILABLE_DECL
 */
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
 
+@optional
 /**
  Asks the data source for the color of the specified plot.
  
