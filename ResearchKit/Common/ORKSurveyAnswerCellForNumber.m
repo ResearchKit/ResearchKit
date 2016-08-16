@@ -30,11 +30,14 @@
 
 
 #import "ORKSurveyAnswerCellForNumber.h"
-#import "ORKSkin.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKTextFieldView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForNumber ()

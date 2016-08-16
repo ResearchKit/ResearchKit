@@ -29,9 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <AVFoundation/AVFoundation.h>
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+@import AVFoundation;
 
 
 NS_ASSUME_NONNULL_BEGIN

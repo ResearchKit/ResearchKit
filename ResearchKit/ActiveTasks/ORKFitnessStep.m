@@ -30,6 +30,7 @@
 
 
 #import "ORKFitnessStep.h"
+
 #import "ORKFitnessStepViewController.h"
 
 

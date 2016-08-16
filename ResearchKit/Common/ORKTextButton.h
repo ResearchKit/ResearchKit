@@ -28,8 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKDefines.h"
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  "Skip" button or "Learn More" button.
@@ -38,3 +41,12 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextButton : UIButton
 
 @end
+
+
+@interface ORKTextButton ()
+
+- (void)init_ORKTextButton;
+
+@end
+
+NS_ASSUME_NONNULL_END

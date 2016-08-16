@@ -30,10 +30,12 @@
 
 
 #import "ORKActiveStepTimer.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import UIKit;
 #include <mach/mach.h>
 #include <mach/mach_time.h>
-#import <UIKit/UIKit.h>
 
 
 static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {

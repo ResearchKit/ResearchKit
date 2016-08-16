@@ -29,8 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
+#import "ORKTintedImageView.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTintedImageCache : NSCache
 
@@ -39,3 +41,5 @@
 - (void)cacheImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
 
 @end
+
+NS_ASSUME_NONNULL_END

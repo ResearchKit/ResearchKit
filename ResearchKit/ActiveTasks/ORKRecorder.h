@@ -30,15 +30,16 @@
  */
 
 
+@import UIKit;
+@import HealthKit;
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKStep.h>
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKResult.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKRecorder;
+@class ORKResult;
+@class ORKStep;
 
 /**
  The `ORKRecorderConfiguration` class is the abstract base class for recorder configurations

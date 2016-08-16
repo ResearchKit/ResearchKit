@@ -30,14 +30,19 @@
 
 
 #import "ORKPSATStepViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKPSATContentView.h"
-#import "ORKPSATStep.h"
-#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
+#import "ORKPSATContentView.h"
 #import "ORKPSATKeyboardView.h"
-#import "ORKHelpers.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKPSATStep.h"
+#import "ORKResult.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKPSATStepViewController () <ORKPSATKeyboardViewDelegate>

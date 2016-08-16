@@ -30,8 +30,10 @@
 
 
 #import "ORKConsentSection.h"
-#import "ORKHelpers.h"
+
 #import "ORKConsentDocument_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {

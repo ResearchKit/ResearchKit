@@ -30,10 +30,12 @@
 
 
 #import "ORKHealthQuantityTypeRecorder.h"
-#import "ORKHelpers.h"
+
 #import "ORKDataLogger.h"
-#import "ORKRecorder_Private.h"
+
 #import "ORKRecorder_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 #import "HKSample+ORKJSONDictionary.h"
 
 

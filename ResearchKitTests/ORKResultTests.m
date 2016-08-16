@@ -29,9 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKResult_Private.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKResultTests : XCTestCase

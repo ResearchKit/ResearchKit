@@ -29,8 +29,12 @@
  */
 
 
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKWalkingTaskStep` class implements a step that's used in the predefined
@@ -53,3 +57,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSInteger numberOfStepsPerLeg;
 
 @end
+
+NS_ASSUME_NONNULL_END

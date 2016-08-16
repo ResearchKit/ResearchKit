@@ -30,27 +30,30 @@
 
 
 #import "ORKVisualConsentStepViewController.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKResult.h"
-#import "ORKSignatureView.h"
-#import "ORKHelpers.h"
-#import "ORKObserver.h"
-#import <MessageUI/MessageUI.h>
-#import "ORKSkin.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKConsentSceneViewController.h"
-#import "ORKConsentSceneViewController_Internal.h"
-#import "ORKConsentSection_Internal.h"
-#import "ORKConsentDocument.h"
-#import <QuartzCore/QuartzCore.h>
-#import "ORKVisualConsentTransitionAnimator.h"
-#import "ORKEAGLMoviePlayerView.h"
-#import "UIBarButtonItem+ORKBarButtonItem.h"
+
 #import "ORKContinueButton.h"
-#import "ORKAccessibility.h"
-#import "ORKTintedImageView.h"
+#import "ORKEAGLMoviePlayerView.h"
+#import "ORKSignatureView.h"
 #import "ORKTintedImageView_Internal.h"
+
+#import "ORKConsentSceneViewController_Internal.h"
+#import "ORKVisualConsentTransitionAnimator.h"
+
+#import "ORKConsentDocument.h"
+#import "ORKConsentSection_Private.h"
+#import "ORKResult.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+#import "ORKVisualConsentStep.h"
+
+#import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKObserver.h"
+#import "ORKSkin.h"
+#import "UIBarButtonItem+ORKBarButtonItem.h"
+
+#import <MessageUI/MessageUI.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {

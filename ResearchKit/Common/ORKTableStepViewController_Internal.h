@@ -32,10 +32,10 @@
 
 #import "ORKTableStepViewController.h"
 
-#import "ORKTableContainerView.h"
-#import "ORKStepHeaderView_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
 
+@class ORKTableContainerView;
+@class ORKNavigationContainerView;
+@class ORKStepHeaderView;
 
 @interface ORKTableStepViewController ()
 

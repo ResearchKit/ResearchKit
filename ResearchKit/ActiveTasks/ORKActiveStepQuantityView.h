@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import UIKit;
 #import "ORKLabel.h"
 
 

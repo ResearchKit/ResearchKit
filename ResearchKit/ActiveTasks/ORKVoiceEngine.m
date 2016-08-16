@@ -31,7 +31,8 @@
 
 #import "ORKVoiceEngine.h"
 #import "ORKVoiceEngine_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKVoiceEngine

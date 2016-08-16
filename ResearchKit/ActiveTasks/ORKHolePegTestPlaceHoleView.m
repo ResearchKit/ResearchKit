@@ -30,7 +30,8 @@
 
 
 #import "ORKHolePegTestPlaceHoleView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat ORKPlaceHoleViewRotation = 45.0f;

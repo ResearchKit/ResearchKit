@@ -29,8 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale);
 
@@ -41,3 +43,5 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 @property (nonatomic, assign) BOOL enableTintedImageCaching;
 
 @end
+
+NS_ASSUME_NONNULL_END

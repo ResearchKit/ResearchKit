@@ -29,8 +29,9 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
-#import <MapKit/MapKit.h>
+#import <ResearchKit/ORKResult.h>
+@import MapKit;
+
 
 NS_ASSUME_NONNULL_BEGIN
 

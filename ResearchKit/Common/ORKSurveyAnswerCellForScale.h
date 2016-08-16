@@ -29,6 +29,7 @@
  */
 
 
+@import UIKit;
 #import "ORKSurveyAnswerCell.h"
 
 

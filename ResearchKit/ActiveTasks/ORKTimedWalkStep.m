@@ -30,6 +30,7 @@
 
 
 #import "ORKTimedWalkStep.h"
+
 #import "ORKTimedWalkStepViewController.h"
 
 

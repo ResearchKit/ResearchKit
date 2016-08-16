@@ -32,8 +32,10 @@
 
 
 #import "ORKPieChartPieView.h"
+
 #import "ORKPieChartView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat OriginAngle = -M_PI_2;
@@ -53,10 +55,12 @@ static const CGFloat InterAnimationDelay = 0.05;
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentPieChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
     self = [super initWithFrame:CGRectZero];
@@ -72,6 +76,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         _normalizedValues = [NSMutableArray new];
         _segmentLayers = [NSMutableArray new];
         _pieSections = [NSMutableArray new];
+        _radiusScaleFactor = 0.5;
     }
     return self;
 }
@@ -114,7 +119,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGRect bounds = self.bounds;
     CGFloat startAngle = OriginAngle;
     CGFloat endAngle = startAngle + (2 * M_PI);
-    CGFloat outerRadius = bounds.size.height * 0.5;
+    CGFloat outerRadius = bounds.size.height * _radiusScaleFactor;
     CGFloat labelHeight = [@"100%" boundingRectWithSize:CGRectInfinite.size
                                                 options:(NSStringDrawingOptions)0
                                              attributes:@{NSFontAttributeName : _percentageLabelFont}
@@ -160,18 +165,11 @@ static const CGFloat InterAnimationDelay = 0.05;
         segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
         CGFloat value = _normalizedValues[idx].floatValue;
         
-        if (value != 0) {
-            if (idx == 0) {
-                segmentLayer.strokeStart = 0.0;
-            } else {
-                segmentLayer.strokeStart = cumulativeValue;
-            }
-            
-            segmentLayer.strokeEnd = cumulativeValue;
-            [_circleLayer addSublayer:segmentLayer];
-            [_segmentLayers addObject:segmentLayer];
-            segmentLayer.strokeEnd = cumulativeValue + value;
-        }
+        segmentLayer.strokeStart = cumulativeValue;
+        [_circleLayer addSublayer:segmentLayer];
+        [_segmentLayers addObject:segmentLayer];
+        segmentLayer.strokeEnd = cumulativeValue + value;
+
         cumulativeValue += value;
     }
 }
@@ -188,31 +186,28 @@ static const CGFloat InterAnimationDelay = 0.05;
         for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
             CGFloat value = _normalizedValues[idx].floatValue;
             
-            if (value != 0) {
-                
-                // Create a label
-                UILabel *label = [UILabel new];
-                label.text = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 :value * 100];
-                label.font = _percentageLabelFont;
-                label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
-                [label sizeToFit];
-                
-                // Only if there are no legends
-                label.isAccessibilityElement = ![_parentPieChartView.dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)];
-                
-                // Calculate the angle to the centre of this segment in radians
-                CGFloat angle = 0;
-                if (_parentPieChartView.drawsClockwise) {
-                    angle = (value / 2 + cumulativeValue) * M_PI * 2;
-                } else {
-                    angle = (value / 2 + cumulativeValue) * - M_PI * 2;
-                }
-                
-                cumulativeValue += value;
-                ORKPieChartSection *pieSection = [[ORKPieChartSection alloc] initWithLabel:label angle:angle];
-                [_pieSections addObject:pieSection];
-                [self addSubview:label];
+            // Create a label
+            UILabel *label = [UILabel new];
+            label.text = [NSString stringWithFormat:@"%0.0f%%", value * 100];
+            label.font = _percentageLabelFont;
+            label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
+            [label sizeToFit];
+            
+            // Only if there are no legends
+            label.isAccessibilityElement = ![_parentPieChartView.dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)];
+            
+            // Calculate the angle to the centre of this segment in radians
+            CGFloat angle = 0;
+            if (_parentPieChartView.drawsClockwise) {
+                angle = (value / 2 + cumulativeValue) * M_PI * 2;
+            } else {
+                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
             }
+            
+            cumulativeValue += value;
+            ORKPieChartSection *pieSection = [[ORKPieChartSection alloc] initWithLabel:label angle:angle];
+            [_pieSections addObject:pieSection];
+            [self addSubview:label];
         }
     }
 }
@@ -247,20 +242,19 @@ static const CGFloat InterAnimationDelay = 0.05;
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
         CGFloat value = _normalizedValues[idx].floatValue;
-        if (value != 0) {
-            // Create a label
-            ORKPieChartSection *pieSection = _pieSections[idx];
-            UILabel *label = pieSection.label;
-            
-            // Calculate the angle to the centre of this segment in radians
-            CGFloat angle = (value / 2 + cumulativeValue) * M_PI * 2;
-            if (!_parentPieChartView.drawsClockwise) {
-                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
-            }
-            
-            label.center = [self percentageLabel:label calculateCenterForAngle:angle pieRadius:pieRadius];
-            cumulativeValue += value;
+
+        // Get a label
+        ORKPieChartSection *pieSection = _pieSections[idx];
+        UILabel *label = pieSection.label;
+        
+        // Calculate the angle to the centre of this segment in radians
+        CGFloat angle = (value / 2 + cumulativeValue) * M_PI * 2;
+        if (!_parentPieChartView.drawsClockwise) {
+            angle = (value / 2 + cumulativeValue) * - M_PI * 2;
         }
+        
+        label.center = [self percentageLabel:label calculateCenterForAngle:angle pieRadius:pieRadius];
+        cumulativeValue += value;
     }
     [self adjustIntersectionsOfPercentageLabels:_pieSections pieRadius:pieRadius];
 }
@@ -397,6 +391,10 @@ static const CGFloat InterAnimationDelay = 0.05;
         
         cumulativeValue += value;
     }
+}
+
+- (void)setRadiusScaleFactor:(CGFloat)radiusScaleFactor {
+    _radiusScaleFactor = radiusScaleFactor;
 }
 
 #pragma mark - Accessibility
