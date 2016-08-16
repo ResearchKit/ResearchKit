@@ -29,8 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import "ORKSpatialSpanTargetView.h"
+@import Foundation;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,6 +40,13 @@ typedef NS_ENUM(NSInteger, ORKSpatialSpanResult) {
     ORKSpatialSpanResultIgnore,
     ORKSpatialSpanResultCorrect,
     ORKSpatialSpanResultIncorrect
+};
+
+typedef NS_ENUM(NSInteger, ORKSpatialSpanTargetState) {
+    ORKSpatialSpanTargetStateQuiescent,
+    ORKSpatialSpanTargetStateActive,
+    ORKSpatialSpanTargetStateCorrect,
+    ORKSpatialSpanTargetStateIncorrect
 };
 
 @interface ORKSpatialSpanGameState : NSObject

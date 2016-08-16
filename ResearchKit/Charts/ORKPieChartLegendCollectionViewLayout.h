@@ -32,6 +32,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 // This class implements a centered collection view layout,
 // in which the cells are distributed as equally as possible between rows
 // and each row is laid out as compactly as possible within its center

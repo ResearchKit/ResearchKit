@@ -32,7 +32,8 @@
 
 #import "ORKTintedImageView.h"
 #import "ORKTintedImageView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 #define ORKTintedImageLog(...)

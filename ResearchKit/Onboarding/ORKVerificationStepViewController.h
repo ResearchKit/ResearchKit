@@ -29,8 +29,11 @@
  */
 
 
-#import "ORKStepViewController.h"
+@import UIKit;
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKVerificationStepViewController` class is the concrete `ORKStepViewController`
@@ -50,3 +53,5 @@ ORK_CLASS_AVAILABLE
 - (void)resendEmailButtonTapped;
 
 @end
+
+NS_ASSUME_NONNULL_END

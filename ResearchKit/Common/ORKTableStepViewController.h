@@ -30,10 +30,13 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKTableStep;
 
 /**
  The `ORKTableStepViewController` class is an base class that inherits from `ORKStepViewController` 

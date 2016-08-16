@@ -30,8 +30,10 @@
 
 
 #import "ORKTableStep.h"
-#import "ORKHelpers.h"
+
 #import "ORKTableStepViewController.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 ORKDefineStringKey(ORKBasicCellReuseIdentifier);

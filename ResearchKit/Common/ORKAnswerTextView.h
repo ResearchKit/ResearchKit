@@ -29,8 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import "ORKDefines.h"
 #import "ORKDefaultFont.h"
 
 

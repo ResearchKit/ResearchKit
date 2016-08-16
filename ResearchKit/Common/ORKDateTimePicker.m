@@ -30,8 +30,10 @@
 
 
 #import "ORKDateTimePicker.h"
+
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKDateTimePicker ()

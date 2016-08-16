@@ -31,8 +31,12 @@
 
 #import "ORKReviewStep.h"
 #import "ORKReviewStep_Internal.h"
-#import "ORKHelpers.h"
+
 #import "ORKReviewStepViewController.h"
+
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKReviewStep
@@ -107,7 +111,7 @@
 }
 
 - (BOOL)isStandalone {
-    return _steps;
+    return _steps != nil;
 }
 
 @end

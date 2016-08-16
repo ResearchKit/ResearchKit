@@ -28,7 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+@import UIKit;
 #import <ResearchKit/ORKRecorder.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 

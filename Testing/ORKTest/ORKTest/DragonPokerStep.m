@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "DragonPokerStep.h"
+
 
 @interface DragonPokerStep ()
 
@@ -36,11 +38,13 @@
 
 @end
 
+
 @interface DragonPokerStepViewController : ORKFormStepViewController
 
 @property (nonatomic) BOOL shouldShowCancelButton;
 
 @end
+
 
 @implementation DragonPokerStep
 
@@ -58,7 +62,7 @@
         _playDate = [NSDate date];
     }
     return _playDate;
-}
+    }
 
 - (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
     

@@ -29,8 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import "ORKDefines.h"
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

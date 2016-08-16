@@ -28,8 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "FooterView.h"
-#import <ResearchKit/ResearchKit.h>
+
+@import ResearchKit;
+
 
 @implementation FooterView
 

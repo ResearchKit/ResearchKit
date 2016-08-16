@@ -29,7 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <ResearchKit/ORKTypes.h>
 
 
@@ -61,6 +61,17 @@ NS_ASSUME_NONNULL_BEGIN
  @param dataLogger  The data logger providing the notification.
  */
 - (void)dataLoggerByteCountsDidChange:(ORKDataLogger *)dataLogger;
+
+@end
+
+
+@protocol ORKDataLoggerExtendedDelegate <ORKDataLoggerDelegate>
+
+@optional
+/**
+ Tells the delegate that the maximum current log file lifetime changed.
+ */
+- (void)dataLoggerThresholdsDidChange:(ORKDataLogger *)dataLogger;
 
 @end
 
@@ -548,6 +559,22 @@ ORK_CLASS_AVAILABLE
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
 - (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * _Nullable *)error;
+
+@end
+
+
+@interface ORKDataLogger (Tests)
+
+/// The file handle to which to write
+- (nullable NSFileHandle *)fileHandle;
+
+@end
+
+
+@interface NSURL (ORKDataLogger)
+
+- (BOOL)ork_isUploaded;
+- (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * _Nullable *)error;
 
 @end
 

@@ -49,15 +49,15 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 
+
 #import "ORKAudioGenerator.h"
+
 
 @import AudioToolbox;
 
 @interface ORKAudioGenerator () {
-    @public
+  @public
     AudioComponentInstance _toneUnit;
-
-@public
     double _frequency;
     double _theta;
     ORKAudioChannel _activeChannel;

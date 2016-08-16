@@ -30,10 +30,14 @@
 
 #import "ORKLineGraphAccessibilityElement.h"
 
+
 @interface ORKLineGraphAccessibilityElement()
+
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) NSInteger maxIndex;
+
 @end
+
 
 @implementation ORKLineGraphAccessibilityElement
 

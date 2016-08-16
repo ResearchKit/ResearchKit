@@ -30,17 +30,22 @@
 
 
 #import "ORKAudioStepViewController.h"
-#import "ORKAudioContentView.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKVerticalContainerView.h"
-#import <AVFoundation/AVFoundation.h>
+
 #import "ORKActiveStepTimer.h"
-#import "ORKHelpers.h"
-#import "ORKStep_Private.h"
-#import "ORKAudioStep.h"
-#import "ORKAudioRecorder.h"
 #import "ORKActiveStepView.h"
+#import "ORKAudioContentView.h"
 #import "ORKCustomStepView_Internal.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKAudioRecorder.h"
+
+#import "ORKAudioStep.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import AVFoundation;
 
 
 @interface ORKAudioStepViewController ()

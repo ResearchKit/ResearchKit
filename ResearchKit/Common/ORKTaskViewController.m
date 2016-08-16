@@ -30,36 +30,35 @@
 
 
 #import "ORKTaskViewController.h"
-#import <ResearchKit/ResearchKit_Private.h>
 
-#import "ORKSkin.h"
-
-#import "ORKStepViewController.h"
 #import "ORKActiveStepViewController.h"
-#import "ORKQuestionStepViewController.h"
-#import "ORKVisualConsentStepViewController.h"
 #import "ORKInstructionStepViewController_Internal.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
+#import "ORKQuestionStepViewController.h"
 #import "ORKReviewStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTappingIntervalStepViewController.h"
+#import "ORKTaskViewController_Internal.h"
+#import "ORKVisualConsentStepViewController.h"
 
 #import "ORKActiveStep.h"
-#import "ORKQuestionStep.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKInstructionStep.h"
 #import "ORKFormStep.h"
-#import "ORKStep_Private.h"
-#import "ORKHelpers.h"
-#import "ORKObserver.h"
-#import "ORKTaskViewController_Private.h"
-#import "ORKTappingIntervalStep.h"
-#import "ORKTappingIntervalStepViewController.h"
-#import <CoreMotion/CoreMotion.h>
-#import <AVFoundation/AVFoundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import "ORKReviewStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKOrderedTask.h"
+#import "ORKQuestionStep.h"
+#import "ORKResult_Private.h"
 #import "ORKReviewStep_Internal.h"
+#import "ORKStep_Private.h"
+#import "ORKTappingIntervalStep.h"
+#import "ORKVisualConsentStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKObserver.h"
+#import "ORKSkin.h"
+
+@import AVFoundation;
+@import CoreMotion;
+#import <CoreLocation/CoreLocation.h>
 
 
 typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
@@ -946,6 +945,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
+        
+        if (weakSelf == nil) {
+            ORK_Log_Debug(@"Task VC has been dismissed, skipping block code");
+            return;
+        }
+        
         ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
         
         ORK_Log_Debug(@"%@ %@", strongSelf, viewController);

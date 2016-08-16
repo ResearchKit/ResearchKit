@@ -30,7 +30,8 @@
 
 
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKSignatureColorKey = @"ORKSignatureColorKey";

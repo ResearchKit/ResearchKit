@@ -29,7 +29,9 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import "ORKDefines.h"
+#import "ORKActiveStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

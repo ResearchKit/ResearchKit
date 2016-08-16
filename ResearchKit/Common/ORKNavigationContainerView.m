@@ -30,7 +30,8 @@
 
 
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKNavigationContainerView {

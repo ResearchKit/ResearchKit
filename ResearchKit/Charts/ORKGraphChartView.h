@@ -31,7 +31,7 @@
 */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKDefines.h"
 
 
@@ -109,10 +109,8 @@ ORK_AVAILABLE_DECL
 - (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex;
 
 
-@optional
 /**
- Asks the data source for the number of plots to be plotted by the graph chart view. If this method
- is not implemented, the graph chart view assumes that it has a single plot.
+ Asks the data source for the number of plots to be plotted by the graph chart view.
 
  @param graphChartView      The graph chart view asking for the number of plots.
 
@@ -120,6 +118,7 @@ ORK_AVAILABLE_DECL
 */
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
 
+@optional
 /**
  Asks the data source for the color of the specified plot.
  
@@ -227,6 +226,21 @@ ORK_AVAILABLE_DECL
  @return Whether the graph chart view should draw the vertical reference line.
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsVerticalReferenceLineAtPointIndex:(NSInteger)pointIndex;
+
+
+/**
+ Asks the data source if the plot at specified index should display circular indicators on its data points.
+ 
+ This only applys to `ORKLineGrapthChartView`.
+ If this method is not implemented, point indicators will be drawn for all plots.
+ 
+ @param graphChartView  The graph view asking whether point indicators should be drawn.
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return Whether the graph chart view should draw point indicators for its points.
+ */
+- (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
 
 @end
 

@@ -31,7 +31,8 @@
 
 
 #import "ORKAnswerTextView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

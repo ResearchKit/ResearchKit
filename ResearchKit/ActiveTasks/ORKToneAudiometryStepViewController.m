@@ -30,13 +30,19 @@
 
 
 #import "ORKToneAudiometryStepViewController.h"
+
+#import "ORKActiveStepView.h"
+#import "ORKAudioGenerator.h"
+#import "ORKRoundTappingButton.h"
+#import "ORKToneAudiometryContentView.h"
+
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKToneAudiometryContentView.h"
-#import "ORKAudioGenerator.h"
-#import "ORKActiveStepView.h"
+
+#import "ORKResult.h"
 #import "ORKToneAudiometryStep.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKToneAudiometryStepViewController ()

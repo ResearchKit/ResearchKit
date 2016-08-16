@@ -29,8 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKScaleSlider : UISlider
 
@@ -42,4 +44,10 @@
 
 @property (nonatomic, copy, nullable) NSArray *textChoices;
 
+@property (nonatomic, copy, nullable) NSArray<UIColor *> *gradientColors;
+
+@property (nonatomic, copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
+
+NS_ASSUME_NONNULL_END

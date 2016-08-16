@@ -30,10 +30,14 @@
 
 
 #import "ORKSurveyAnswerCellForImageSelection.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import "ORKAnswerFormat_Internal.h"
+
 #import "ORKImageSelectionView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForImageSelection () <ORKImageSelectionViewDelegate>

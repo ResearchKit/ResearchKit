@@ -30,8 +30,14 @@
 
 
 #import "ORKTextChoiceCellGroup.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+
+#import "ORKSelectionTitleLabel.h"
+#import "ORKSelectionSubTitleLabel.h"
+
+#import "ORKChoiceViewCell.h"
+
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKChoiceAnswerFormatHelper.h"
 
 
 @implementation ORKTextChoiceCellGroup {

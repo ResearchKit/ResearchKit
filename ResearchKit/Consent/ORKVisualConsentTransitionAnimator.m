@@ -29,22 +29,25 @@
  */
 
 
-#import <AVFoundation/AVFoundation.h>
-
-#import "ORKVisualConsentTransitionAnimator.h"
-#import "ORKVisualConsentStepViewController.h"
-#import "ORKHelpers.h"
+@import AVFoundation;
 
 #import "ORKEAGLMoviePlayerView.h"
+
 #import "ORKVisualConsentStepViewController_Internal.h"
+#import "ORKVisualConsentTransitionAnimator.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 // Internal object to hold the direction we're animating, the phase of the animation, and the animation completion handler.
 @interface ORKVisualConsentAnimationContext : NSObject
 
 @property (nonatomic, assign) UIPageViewControllerNavigationDirection direction;
+
 @property (nonatomic, assign) BOOL hasCalledLoadHandler;
+
 @property (nonatomic, copy) ORKVisualConsentAnimationCompletionHandler handler;
+
 @property (nonatomic, copy) ORKVisualConsentAnimationCompletionHandler loadHandler;
 
 @property (nonatomic, strong) NSValue *startTime;
