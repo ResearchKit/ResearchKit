@@ -1353,5 +1353,15 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ The `ORKMoodScaleAnswerFormat` class represents an image choice that can be converted to a scale value.
+ 
+ An `ORKMoodScaleAnswerFormat` class produces an `ORKMoodScaleQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMoodScaleAnswerFormat : ORKImageChoiceAnswerFormat
+
+@end
+
 
 NS_ASSUME_NONNULL_END

@@ -1501,7 +1501,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [answerChoices addObject:answerOption];
     }
     
-    ORKImageChoiceAnswerFormat *format = [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:answerChoices];
+    ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithImageChoices:answerChoices];
     ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:identifier
                                                                           title:questionText
                                                                          answer:format];

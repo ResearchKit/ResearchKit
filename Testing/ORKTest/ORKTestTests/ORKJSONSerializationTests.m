@@ -385,6 +385,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
+                                              @"ORKMoodScaleQuestionResult.scaleAnswer",
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
