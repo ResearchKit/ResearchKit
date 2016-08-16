@@ -98,6 +98,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TwoFingerTappingInterval
     case WalkBackAndForth
     
+    case MoodSurvey
+    
     class TaskListRowSection {
         var title: String
         var rows: [TaskListRow]
@@ -115,6 +117,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .Form,
                     .Survey,
+                    .MoodSurvey,
                 ]),
             TaskListRowSection(title: "Survey Questions", rows:
                 [
@@ -268,6 +271,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return NSLocalizedString("Walk Back and Forth", comment: "")
+            
+        case .MoodSurvey:
+            return NSLocalizedString("Mood Survey", comment: "")
         }
     }
     
@@ -419,6 +425,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
         case WalkBackAndForthTask
+
+        // Surveys
+        case MoodSurvey
     }
     
     // MARK: Properties
@@ -531,6 +540,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .WalkBackAndForth:
             return walkBackAndForthTask
             
+        case .MoodSurvey:
+            return moodSurveyTask
         }
     }
 
@@ -1224,6 +1235,15 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a walk back-and-forth task
     private var walkBackAndForthTask: ORKTask {
         return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
+    }
+    
+    /// This task presents the Mood Survey
+    private var moodSurveyTask: ORKTask {
+        return ORKOrderedTask.moodSurveyWithIdentifier(String(Identifier.MoodSurvey),
+                                                       intendedUseDescription: exampleDescription,
+                                                       frequency: .Daily,
+                                                       customQuestionText: "How do you feel about jumping jacks?",
+                                                       options: [])
     }
 
     // MARK: Consent Document Creation Convenience

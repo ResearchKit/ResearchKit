@@ -78,6 +78,7 @@ DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
+DefineStringKey(MoodSurveyTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
@@ -360,7 +361,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
-                           @"Walk And Turn Task"
+                           @"Walk And Turn Task",
+                           @"Mood Survey",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -608,9 +610,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                           options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:TableStepTaskIdentifier]) {
         return [self makeTableStepTask];
-    }
-    else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
+    } else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
         return [self makeSignatureStepTask];
+    } else if ([identifier isEqualToString:MoodSurveyTaskIdentifier]) {
+        return [ORKOrderedTask moodSurveyWithIdentifier:MoodSurveyTaskIdentifier
+                                 intendedUseDescription:nil
+                                              frequency:ORKMoodSurveyFrequencyWeekly
+                                     customQuestionText:nil
+                                                options:ORKPredefinedTaskOptionNone];
     }
 
     return nil;
@@ -2323,6 +2330,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)walkAndTurnTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
+}
+
+- (void)moodSurveyButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:MoodSurveyTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
