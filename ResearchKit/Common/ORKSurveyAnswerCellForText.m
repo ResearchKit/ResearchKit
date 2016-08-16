@@ -199,6 +199,8 @@
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;
 
+    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
     [self.contentView addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
     
@@ -262,6 +264,11 @@
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     
     self.textField.text = displayValue;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    NSString *text = self.textField.text;
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
 }
 
 #pragma mark - UITextFieldDelegate
