@@ -365,11 +365,6 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                 }
                 
                 [strongSelf finishTouchId];
-                //Report back to the delegate the result of the passcode result
-                if (self.taskViewController.delegate && [self.taskViewController.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
-                    [self.taskViewController.delegate taskViewController:self.taskViewController didChangeResult:[self result]];
-                }
-
             });
         }];
         
