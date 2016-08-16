@@ -63,6 +63,7 @@
 #import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
 #import "ORKWalkingTaskStep.h"
+#import "ORKResultPredicate.h"
 
 #import "ORKHelpers_Internal.h"
 #import "UIImage+ResearchKit.h"
