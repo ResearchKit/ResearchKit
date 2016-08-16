@@ -38,23 +38,23 @@ body {
     font-weight: bold;
     font-size: larger;
 }
-#formStepTitle {
+.formStepTitle {
     text-transform: uppercase;
 }
-#sectionTitle {
+.sectionTitle {
     color: gray;
     font-weight: bold;
 }
-#answerTable {
+.answerTable {
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     border-collapse: collapse;
     width: 30%;
 }
-#answerTable td {
+.answerTable td {
     padding: 8px;
 }
-#answerTable tr {
+.answerTable tr {
     /*border-bottom: 1px solid gray;*/
 }
 .answerColumn {

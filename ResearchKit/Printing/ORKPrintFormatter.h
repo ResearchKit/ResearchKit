@@ -53,6 +53,8 @@ ORK_AVAILABLE_DECL
 - (ORKPrintFormatterOptions)printFormatter:(ORKHTMLPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 
 - (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
+
+- (NSString *)printFormatter:(ORKHTMLPrintFormatter *)printFormatter htmlContentForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
 @end
 
 ORK_CLASS_AVAILABLE

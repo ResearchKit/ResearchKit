@@ -72,7 +72,11 @@ ORKHTMLPrintingTemplate *printingTemplate;
     printingTemplate = (self.template) ? self.template : [[ORKHTMLPrintingTemplate alloc] init];
     NSString *body = @"";
     for (ORKStep *step in formatableSteps) {
-        body = [@[body, [self HTMLFromStep:step withResult:[result stepResultForStepIdentifier:step.identifier] addSurroundingHTMLTags:NO]] componentsJoinedByString:@""];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(printFormatter:htmlContentForStep:withResult:)]) {
+            body = [@[body, [self.delegate printFormatter:self htmlContentForStep:step withResult:[result stepResultForStepIdentifier:step.identifier]]] componentsJoinedByString:@""];
+        } else {
+            body = [@[body, [self HTMLFromStep:step withResult:[result stepResultForStepIdentifier:step.identifier]]] componentsJoinedByString:@""];
+        }
     }
     if ([_styleSheetContent isEqualToString:@""]) {
         _styleSheetContent = [NSString stringWithContentsOfURL:[ORKBundle() URLForResource:@"HTMLPrintingStylesheet" withExtension:@"css"] encoding:NSUTF8StringEncoding error:nil];
@@ -82,7 +86,7 @@ ORKHTMLPrintingTemplate *printingTemplate;
 
 #pragma mark - internal
 
-- (NSString *)HTMLFromStep:(ORKStep *)step withResult:(ORKStepResult *)result addSurroundingHTMLTags:(BOOL)addSurroundingHTMLTags {
+- (NSString *)HTMLFromStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     NSString *stepHeader = [NSString stringWithFormat:[printingTemplate stepHeader], step.title ? step.title : @"", step.text ? step.text : @""];
     NSString *stepBody = @"";
     if ([step isKindOfClass:[ORKQuestionStep class]]) {
@@ -102,7 +106,7 @@ ORKHTMLPrintingTemplate *printingTemplate;
     if ([_styleSheetContent isEqualToString:@""]) {
         _styleSheetContent = [NSString stringWithContentsOfURL:[ORKBundle() URLForResource:@"HTMLPrintingStylesheet" withExtension:@"css"] encoding:NSUTF8StringEncoding error:nil];
     }
-    return addSurroundingHTMLTags ? [NSString stringWithFormat:[printingTemplate html], _styleSheetContent, stepHTML] : stepHTML;
+    return stepHTML;
 }
 
 - (NSString *)HTMLfromQuestionStep:(ORKQuestionStep *)questionStep andResult:(ORKStepResult *)result {
@@ -226,7 +230,7 @@ ORKHTMLPrintingTemplate *printingTemplate;
     NSString *reviewStepHTML = @"";
     for (ORKStep *step in reviewStep.steps) {
         ORKStepResult *stepResult = [reviewStep.resultSource stepResultForStepIdentifier:step.identifier];
-        reviewStepHTML = [@[reviewStepHTML, [self HTMLFromStep:step withResult:stepResult addSurroundingHTMLTags:NO]] componentsJoinedByString:@""];
+        reviewStepHTML = [@[reviewStepHTML, [self HTMLFromStep:step withResult:stepResult]] componentsJoinedByString:@""];
     }
     return reviewStepHTML;
 }

@@ -47,15 +47,15 @@
 }
 
 - (NSString *)formStep {
-    return @"<p id=\"formStepTitle\">%@</p>";
+    return @"<p class=\"formStepTitle\">%@</p>";
 }
 
 - (NSString *)formStepAnswer {
-    return @"<p id=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
+    return @"<p class=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
 }
 
 - (NSString *)questionStepAnswer {
-    return @"<table id=\"answerTable\">%@</table>";
+    return @"<table class=\"answerTable\">%@</table>";
 }
 
 - (NSString *)stepAnswer {
