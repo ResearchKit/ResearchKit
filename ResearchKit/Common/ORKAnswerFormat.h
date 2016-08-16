@@ -2,7 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -31,122 +31,11 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+@import UIKit;
 #import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- An enumeration of values that identify the different types of questions that the ResearchKit
- framework supports.
- */
-typedef NS_ENUM(NSInteger, ORKQuestionType) {
-    /**
-     No question.
-     */
-     ORKQuestionTypeNone,
-    
-    /**
-     The scale question type asks participants to place a mark at an appropriate position on a
-     continuous or discrete line.
-     */
-    ORKQuestionTypeScale,
-
-    /**
-     In a single choice question, the participant can pick only one predefined option.
-     */
-    ORKQuestionTypeSingleChoice,
-    
-    /**
-     In a multiple choice question, the participant can pick one or more predefined options.
-     */
-    ORKQuestionTypeMultipleChoice,
-    
-    /**
-     The decimal question type asks the participant to enter a decimal number.
-     */
-    ORKQuestionTypeDecimal,
-    
-    /**
-     The integer question type asks the participant to enter an integer number.
-     */
-    ORKQuestionTypeInteger,
-    
-    /**
-     The Boolean question type asks the participant to enter Yes or No (or the appropriate
-     equivalents).
-     */
-    ORKQuestionTypeBoolean,
-    
-    /**
-     In a text question, the participant can enter multiple lines of text.
-     */
-    ORKQuestionTypeText,
-    
-    /**
-     In a time of day question, the participant can enter a time of day by using a picker.
-     */
-    ORKQuestionTypeTimeOfDay,
-    
-    /**
-     In a date and time question, the participant can enter a combination of date and time by using
-     a picker.
-     */
-    ORKQuestionTypeDateAndTime,
-    
-    /**
-     In a date question, the participant can enter a date by using a picker.
-     */
-    ORKQuestionTypeDate,
-    
-    /**
-     In a time interval question, the participant can enter a time span by using a picker.
-     */
-    ORKQuestionTypeTimeInterval,
-
-    /**
-     In a height question, the participant can enter a height by using a height picker.
-     */
-    ORKQuestionTypeHeight,
-
-    /**
-     In a location question, the participant can enter a location using a map view.
-     */
-    ORKQuestionTypeLocation
-} ORK_ENUM_AVAILABLE;
-
-/**
- An enumeration of the types of answer choices available.
- */
-typedef NS_ENUM(NSInteger, ORKChoiceAnswerStyle) {
-    /**
-     A single choice question lets the participant pick a single predefined answer option.
-     */
-    ORKChoiceAnswerStyleSingleChoice,
-    
-    /**
-     A multiple choice question lets the participant pick one or more predefined answer options.
-     */
-    ORKChoiceAnswerStyleMultipleChoice
-} ORK_ENUM_AVAILABLE;
-
-/**
- An enumeration of the format styles available for scale answers.
- */
-typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
-    /**
-     The default decimal style.
-     */
-    ORKNumberFormattingStyleDefault,
-    
-    /** 
-     Percent style.
-     */
-    ORKNumberFormattingStylePercent
-} ORK_ENUM_AVAILABLE;
 
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
@@ -166,7 +55,6 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 
 @class ORKTextChoice;
 @class ORKImageChoice;
-
 
 /**
  The `ORKAnswerFormat` class is the abstract base class for classes that describe the
@@ -1003,7 +891,7 @@ ORK_CLASS_AVAILABLE
  The text to display when the image is selected, in a localized string. (read-only)
  
  Note that the text you supply may be spoken by VoiceOver even when the item is not selected.
-*/
+  */
 @property (copy, readonly, nullable) NSString *text;
 
 /**
@@ -1198,9 +1086,9 @@ ORK_CLASS_AVAILABLE
  @param style           The style of date answer, such as date, or date and time.
  @param defaultDate     The default date to display. When the value of this parameter is `nil`, the
                             picker displays the current time.
- @param minimumDate     The minimum date that is accessible in the picker. If the value of this
+ @param minimumDate     The minimum date that is accessible in the picker. If the value of this 
                             parameter is `nil`, there is no minimum.
- @param maximumDate     The maximum date that is accessible in the picker. If the value of this
+ @param maximumDate     The maximum date that is accessible in the picker. If the value of this 
                             parameter is `nil`, there is no maximum.
  @param calendar        The calendar to use. If the value of this parameter is `nil`, the picker
                             uses the default calendar for the current locale.

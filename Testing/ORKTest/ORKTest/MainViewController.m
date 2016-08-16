@@ -33,12 +33,15 @@
 
 
 #import "MainViewController.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import <AVFoundation/AVFoundation.h>
-#import "DynamicTask.h"
+
 #import "AppDelegate.h"
+#import "DynamicTask.h"
 #import "ORKTest-Swift.h"
 #import "DragonPokerStep.h"
+
+@import ResearchKit;
+
+@import AVFoundation;
 
 
 #define DefineStringKey(x) static NSString *const x = @#x

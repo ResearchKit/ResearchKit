@@ -30,12 +30,17 @@
 
 
 #import "ORKStepViewController.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKSkin.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKHelpers.h"
+
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
+#import "ORKResult.h"
 #import "ORKReviewStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKStepViewController () {

@@ -28,9 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKToneAudiometryStep.h"
+
 #import "ORKToneAudiometryStepViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+
 
 @implementation ORKToneAudiometryStep
 

@@ -30,7 +30,8 @@
 
 
 #import "CMMotionActivity+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *const ActivityUnknown = @"unknown";

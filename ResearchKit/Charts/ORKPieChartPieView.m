@@ -32,8 +32,10 @@
 
 
 #import "ORKPieChartPieView.h"
+
 #import "ORKPieChartView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat OriginAngle = -M_PI_2;
@@ -53,10 +55,12 @@ static const CGFloat InterAnimationDelay = 0.05;
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentPieChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
     self = [super initWithFrame:CGRectZero];

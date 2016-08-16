@@ -29,7 +29,9 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -28,14 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ContinueButtonExampleViewController.h"
 #import "FooterView.h"
+
 
 @interface ContinueButtonExampleViewController ()
 
 @property (weak, nonatomic) IBOutlet FooterView *footerView;
 
 @end
+
 
 @implementation ContinueButtonExampleViewController
 

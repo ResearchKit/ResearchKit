@@ -29,8 +29,9 @@
  */
 
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKReviewStepViewController.h>
+#import "ORKTaskViewController_Private.h"
+#import "ORKReviewStepViewController.h"
+@import HealthKit;
 
 
 NS_ASSUME_NONNULL_BEGIN

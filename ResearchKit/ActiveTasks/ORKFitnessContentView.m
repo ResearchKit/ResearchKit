@@ -30,11 +30,15 @@
 
 
 #import "ORKFitnessContentView.h"
-#import "ORKHelpers.h"
-#import <CoreMotion/CoreMotion.h>
-#import "ORKSkin.h"
+
 #import "ORKActiveStepQuantityView.h"
 #import "ORKTintedImageView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
+@import CoreMotion;
+@import HealthKit;
 
 
 // #define LAYOUT_TEST 1

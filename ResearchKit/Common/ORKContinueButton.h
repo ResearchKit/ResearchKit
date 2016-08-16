@@ -29,8 +29,11 @@
  */
 
 
-#import "ORKBorderedButton.h"
+@import UIKit;
+#import <ResearchKit/ORKBorderedButton.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKContinueButton : ORKBorderedButton
@@ -40,3 +43,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL isDoneButton;
 
 @end
+
+NS_ASSUME_NONNULL_END

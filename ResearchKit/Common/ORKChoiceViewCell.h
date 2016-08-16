@@ -29,13 +29,13 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKSelectionTitleLabel.h"
-#import "ORKSelectionSubTitleLabel.h"
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKSelectionTitleLabel;
+@class ORKSelectionSubTitleLabel;
 
 @interface ORKChoiceViewCell : UITableViewCell
 

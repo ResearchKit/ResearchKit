@@ -30,8 +30,10 @@
 
 
 #import "ORKSignatureStep.h"
+
 #import "ORKSignatureStepViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSignatureStep

@@ -29,8 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import UIKit;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKInstructionStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  An `ORKCompletionStepViewController` object is the step view controller for an
@@ -45,3 +49,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKCompletionStepViewController : ORKInstructionStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

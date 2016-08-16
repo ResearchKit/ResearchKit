@@ -29,8 +29,14 @@
  */
 
 
-#import <ResearchKit/ORKVerticalContainerView.h>
+@import Foundation;
+#import "ORKVerticalContainerView.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKActiveStep;
+@class ORKActiveStepCustomView;
 
 @interface ORKActiveStepView : ORKVerticalContainerView
 
@@ -40,3 +46,5 @@
 - (void)updateTitle:(nullable NSString *)title text:(nullable NSString *)text;
 
 @end
+
+NS_ASSUME_NONNULL_END

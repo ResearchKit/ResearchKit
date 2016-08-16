@@ -29,11 +29,15 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import "ORKFormStepViewController.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKFormStepViewController ()
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem;
 
 @end
+
+NS_ASSUME_NONNULL_END

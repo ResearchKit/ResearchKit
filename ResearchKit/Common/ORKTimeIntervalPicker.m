@@ -30,8 +30,10 @@
 
 
 #import "ORKTimeIntervalPicker.h"
+
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKDatePicker : UIDatePicker

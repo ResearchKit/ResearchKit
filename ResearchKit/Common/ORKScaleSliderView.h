@@ -29,10 +29,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKScaleSlider.h"
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -42,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKScaleRangeDescriptionLabel;
 @class ORKScaleRangeImageView;
 @class ORKScaleSliderView;
+@protocol ORKScaleAnswerFormatProvider;
 
 @protocol ORKScaleSliderViewDelegate <NSObject>
 

@@ -32,12 +32,15 @@
 
 
 #import "ORKScaleSlider.h"
-#import "ORKAccessibility.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKSkin.h"
-#import "ORKScaleSliderView.h"
+
 #import "ORKScaleRangeDescriptionLabel.h"
 #import "ORKScaleRangeImageView.h"
+#import "ORKScaleSliderView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+
+#import "ORKAccessibility.h"
+#import "ORKSkin.h"
 
 @interface ORKScaleSlider ()
 

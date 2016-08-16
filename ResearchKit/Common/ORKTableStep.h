@@ -29,8 +29,8 @@
  */
 
 
+@import UIKit;
 #import <ResearchKit/ORKStep.h>
-#import <UIKit/UIKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

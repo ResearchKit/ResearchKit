@@ -31,8 +31,12 @@
 
 #import "ORKVerificationStep.h"
 #import "ORKVerificationStep_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKVerificationStepViewController.h"
+
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKVerificationStep

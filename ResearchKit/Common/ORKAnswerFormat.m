@@ -32,14 +32,16 @@
 
 
 #import "ORKAnswerFormat.h"
-#import "ORKHelpers.h"
-#import <HealthKit/HealthKit.h>
-#import <MapKit/MapKit.h>
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKAnswerFormat_Private.h"
+
+#import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import HealthKit;
+@import MapKit;
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";

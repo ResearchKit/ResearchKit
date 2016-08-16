@@ -29,10 +29,20 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKAnswerFormat.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+ORK_EXTERN id ORKNullAnswerValue() ORK_AVAILABLE_DECL;
+
+
+@interface ORKAnswerFormat ()
+
+- (BOOL)isAnswerValidWithString:(nullable NSString *)text;
+
+@end
+
 
 /**
  The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text

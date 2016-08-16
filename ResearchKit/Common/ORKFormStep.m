@@ -30,13 +30,14 @@
 
 
 #import "ORKFormStep.h"
-#import "ORKFormItem_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKStep_Private.h"
+
 #import "ORKFormStepViewController.h"
-#import "ORKHelpers_Private.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKFormStep

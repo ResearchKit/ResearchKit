@@ -33,12 +33,13 @@
 
 #import "ORKPieChartView.h"
 #import "ORKPieChartView_Internal.h"
-#import "ORKPieChartPieView.h"
+
 #import "ORKPieChartLegendView.h"
+#import "ORKPieChartPieView.h"
 #import "ORKPieChartTitleTextView.h"
-#import "ORKGraphChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;
@@ -349,8 +350,8 @@ static const CGFloat PieToLegendPadding = 8.0;
     } else {
         // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
-        color = opaqueColorWithReducedAlphaFromBaseColor(self.tintColor, index, numberOfSegments);
-    }
+        color = ORKOpaqueColorWithReducedAlphaFromBaseColor(self.tintColor, index, numberOfSegments);
+        }
     return color;
 }
 
@@ -422,14 +423,14 @@ static const CGFloat PieToLegendPadding = 8.0;
         segment3.color = [UIColor colorWithRed:244.0/225 green:190.0/255 blue:74.0/225 alpha:1];
 
         _segments = @[segment1, segment2, segment3];
-    }
+}
     return self;
 }
 - (NSInteger)numberOfSegmentsInPieChartView:(ORKPieChartView *)pieChartView {
     return self.segments.count;
 }
-
 - (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index {
+
     return self.segments[index].value;
 }
 
