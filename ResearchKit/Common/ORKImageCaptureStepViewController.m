@@ -30,10 +30,17 @@
 
 
 #import "ORKStepViewController_Internal.h"
-#import "ORKImageCaptureStepViewController.h"
+
 #import "ORKImageCaptureView.h"
-#import "ORKHelpers.h"
-#import <AVFoundation/AVFoundation.h>
+
+#import "ORKImageCaptureStepViewController.h"
+
+#import "ORKResult.h"
+#import "ORKStep.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import AVFoundation;
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>

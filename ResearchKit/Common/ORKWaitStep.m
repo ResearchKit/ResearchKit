@@ -39,8 +39,10 @@
 
 
 #import "ORKWaitStep.h"
+
 #import "ORKWaitStepViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKWaitStep

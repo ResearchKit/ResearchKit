@@ -30,12 +30,12 @@
 
 
 #import "ORKEAGLMoviePlayerView.h"
-#import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVUtilities.h>
-#import <mach/mach_time.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import AVFoundation;
+@import OpenGLES;
+@import QuartzCore;
 
 
 // Uniform index.

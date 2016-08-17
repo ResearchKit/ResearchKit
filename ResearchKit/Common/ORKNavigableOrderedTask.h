@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKTask.h>
+@import Foundation;
 #import <ResearchKit/ORKOrderedTask.h>
 
 

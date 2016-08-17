@@ -30,12 +30,15 @@
 
 
 #import "ORKAccelerometerRecorder.h"
+
 #import "ORKDataLogger.h"
-#import "CMAccelerometerData+ORKJSONDictionary.h"
-#import <CoreMotion/CoreMotion.h>
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "CMAccelerometerData+ORKJSONDictionary.h"
+
+@import CoreMotion;
 
 
 @interface ORKAccelerometerRecorder () {

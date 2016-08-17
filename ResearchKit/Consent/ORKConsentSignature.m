@@ -29,8 +29,9 @@
  */
 
 
-#import <ResearchKit/ORKConsentSignature.h>
-#import "ORKHelpers.h"
+#import "ORKConsentSignature.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKConsentSignature

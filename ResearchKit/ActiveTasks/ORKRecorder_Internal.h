@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKRecorder.h>
+#import "ORKRecorder_Private.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

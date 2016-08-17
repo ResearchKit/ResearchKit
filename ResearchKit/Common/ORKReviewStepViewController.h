@@ -29,9 +29,9 @@
  */
 
 
-#import <ResearchKit/ORKStep.h>
+@import UIKit;
+#import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@protocol ORKTaskResultSource;
 
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStepViewController : ORKStepViewController

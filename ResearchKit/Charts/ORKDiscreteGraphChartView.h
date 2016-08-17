@@ -30,8 +30,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKGraphChartView.h"
+@import UIKit;
+#import <ResearchKit/ORKGraphChartView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

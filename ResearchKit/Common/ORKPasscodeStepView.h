@@ -30,11 +30,16 @@
 
 
 #import "ORKVerticalContainerView.h"
-#import "ORKTextFieldView.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKPasscodeTextField;
 
 @interface ORKPasscodeStepView : ORKVerticalContainerView
 
 @property (nonatomic, strong, readonly) ORKPasscodeTextField *textField;
 
 @end
+
+NS_ASSUME_NONNULL_END

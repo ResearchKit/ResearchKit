@@ -29,11 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKConsentTests : XCTestCase

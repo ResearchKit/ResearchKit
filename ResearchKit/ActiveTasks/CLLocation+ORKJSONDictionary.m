@@ -30,7 +30,8 @@
 
 
 #import "CLLocation+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation CLLocation (ORKJSONDictionary)

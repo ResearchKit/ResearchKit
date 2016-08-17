@@ -30,21 +30,25 @@
 
 
 #import "ORKSpatialSpanMemoryStepViewController.h"
-#import "ORKHelpers.h"
-#import "ORKActiveStep_Internal.h"
-#import "ORKStep_Private.h"
-#import "ORKActiveStepViewController_Internal.h"
+
+#import "ORKActiveStepView.h"
 #import "ORKSpatialSpanMemoryContentView.h"
-#import "ORKVerticalContainerView.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+
+#import "ORKActiveStep_Internal.h"
+#import "ORKResult.h"
+#import "ORKStep_Private.h"
 #import "ORKSpatialSpanGame.h"
 #import "ORKSpatialSpanGameState.h"
-#import "ORKVerticalContainerView_Internal.h"
-#import "ORKSkin.h"
-#import "ORKResult.h"
-#import <QuartzCore/CABase.h>
 #import "ORKSpatialSpanMemoryStep.h"
-#import "ORKActiveStepView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
+#import <QuartzCore/CABase.h>
 
 
 static const NSTimeInterval MemoryGameActivityTimeout = 20;

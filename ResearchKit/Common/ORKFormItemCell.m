@@ -31,22 +31,25 @@
 
 
 #import "ORKFormItemCell.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKFormItem_Internal.h"
-#import "ORKImageSelectionView.h"
-#import "ORKResult_Private.h"
-#import "ORKTextFieldView.h"
-#import "ORKSkin.h"
-#import "ORKTableContainerView.h"
+
 #import "ORKCaption1Label.h"
 #import "ORKFormTextView.h"
-#import "ORKAccessibility.h"
+#import "ORKImageSelectionView.h"
+#import "ORKLocationSelectionView.h"
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
-#import "ORKSubheadlineLabel.h"
-#import "ORKLocationSelectionView.h"
-#import <MapKit/MapKit.h>
+#import "ORKTableContainerView.h"
+#import "ORKTextFieldView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKResult_Private.h"
+
+#import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
+@import MapKit;
 
 
 static const CGFloat VerticalMargin = 10.0;

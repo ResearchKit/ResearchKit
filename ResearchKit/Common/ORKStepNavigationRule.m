@@ -32,9 +32,10 @@
 #import "ORKStepNavigationRule.h"
 #import "ORKStepNavigationRule_Private.h"
 
-#import "ORKHelpers.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";

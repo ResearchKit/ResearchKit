@@ -28,13 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKToneAudiometryPracticeStepViewController.h"
-#import "ORKToneAudiometryPracticeStep.h"
-#import "ORKToneAudiometryContentView.h"
+
 #import "ORKAudioGenerator.h"
 #import "ORKActiveStepView.h"
+#import "ORKRoundTappingButton.h"
+#import "ORKToneAudiometryContentView.h"
+
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+
+#import "ORKToneAudiometryPracticeStep.h"
 
 
 @interface ORKToneAudiometryPracticeStepViewController ()

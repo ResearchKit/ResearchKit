@@ -28,8 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKStep ()
 
@@ -60,3 +63,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

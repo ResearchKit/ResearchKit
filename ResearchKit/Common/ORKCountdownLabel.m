@@ -30,7 +30,8 @@
 
 
 #import "ORKCountdownLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKCountdownLabel ()

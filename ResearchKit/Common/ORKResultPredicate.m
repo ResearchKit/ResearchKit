@@ -30,7 +30,8 @@
 
 
 #import "ORKResultPredicate.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTIFIER";
@@ -446,6 +447,12 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     return [self predicateMatchingResultSelector:resultSelector
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
+}
+
++ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector didConsent:(BOOL)didConsent {
+    return [self predicateMatchingResultSelector:resultSelector
+                         subPredicateFormatArray:@[ @"consented == %@" ]
+                 subPredicateFormatArgumentArray:@[ @(didConsent) ]];
 }
 
 @end

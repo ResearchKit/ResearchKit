@@ -29,9 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKAnswerFormat_Internal.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKAnswerFormatTests : XCTestCase

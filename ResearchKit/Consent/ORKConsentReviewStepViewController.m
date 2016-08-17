@@ -30,22 +30,24 @@
 
 
 #import "ORKConsentReviewStepViewController.h"
-#import "ORKConsentReviewStep.h"
+
 #import "ORKConsentReviewController.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKStepViewController_Internal.h"
-#import "ORKFormStep.h"
 #import "ORKFormStepViewController.h"
-#import "ORKAnswerFormat.h"
-#import "ORKResult.h"
-#import "ORKHelpers.h"
-#import "ORKConsentDocument_Internal.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKTaskViewController_Internal.h"
-#import "UIBarButtonItem+ORKBarButtonItem.h"
 #import "ORKSignatureStepViewController.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKConsentDocument_Internal.h"
+#import "ORKConsentReviewStep.h"
 #import "ORKConsentSignature.h"
+#import "ORKFormStep.h"
+#import "ORKResult.h"
+#import "ORKSignatureStep.h"
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "UIBarButtonItem+ORKBarButtonItem.h"
 
 
 typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
@@ -233,10 +235,8 @@ static NSString *const _FamilyNameIdentifier = @"family";
 static NSString *const _SignatureStepIdentifier = @"signatureStep";
 
 - (ORKSignatureStepViewController *)makeSignatureViewController {
-    
     ORKSignatureStep *step = [[ORKSignatureStep alloc] initWithIdentifier:_SignatureStepIdentifier];
     step.optional = NO;
-    
     ORKSignatureStepViewController *signatureController = [[ORKSignatureStepViewController alloc] initWithStep:step];
     signatureController.delegate = self;
     return signatureController;
@@ -404,7 +404,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
             if ([obj isKindOfClass:[ORKSignatureResult class]]) {
                 _signatureImage = ((ORKSignatureResult *)obj).signatureImage;
                 *stop = YES;
-            }
+    }
         }];
         [self notifyDelegateOnResultChange];
     }

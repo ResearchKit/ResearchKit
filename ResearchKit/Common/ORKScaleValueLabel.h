@@ -29,8 +29,11 @@
  */
 
 
+@import UIKit;
 #import "ORKLabel.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Large label shown separately from the scale slider to indicate the current value.
@@ -39,3 +42,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKScaleValueLabel : ORKLabel
 
 @end
+
+NS_ASSUME_NONNULL_END

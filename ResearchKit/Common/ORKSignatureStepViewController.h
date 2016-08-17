@@ -28,14 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKStepViewController.h>
+
+@import UIKit;
+#import "ORKStepViewController.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKSignatureStepViewController` class is a step view controller subclass
  used to manage a signature step (`ORKSignatureStep`).
- 
+
  You should not need to instantiate a signature step view controller directly. Instead, include
  a signature step in a task, and present a task view controller for that stask.
  */

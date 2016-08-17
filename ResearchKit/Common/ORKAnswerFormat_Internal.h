@@ -29,14 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ORKAnswerFormat.h>
+@import HealthKit;
+#import "ORKAnswerFormat_Private.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-id ORKNullAnswerValue();
 BOOL ORKIsAnswerEmpty(_Nullable id answer);
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
@@ -67,6 +65,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 
+@class ORKQuestionResult;
+
 @interface ORKAnswerFormat ()
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -80,8 +80,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 @property (nonatomic, strong, readonly, nullable) HKUnit *healthKitUnit;
 
 @property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
-
-- (BOOL)isAnswerValidWithString:(nullable NSString *)text;
 
 - (BOOL)isAnswerValid:(id)answer;
 
@@ -137,6 +135,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 - (NSString *)minimumValueDescription;
 - (UIImage *)maximumImage;
 - (UIImage *)minimumImage;
+- (nullable NSArray<UIColor *> *)gradientColors;
+- (nullable NSArray<NSNumber *> *)gradientLocations;
 
 @end
 

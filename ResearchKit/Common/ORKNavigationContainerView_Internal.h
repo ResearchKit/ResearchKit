@@ -30,9 +30,11 @@
 
 
 #import "ORKNavigationContainerView.h"
-#import "ORKTextButton.h"
 #import "ORKContinueButton.h"
+#import "ORKTextButton_Internal.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKNavigationContainerView ()
 
@@ -45,3 +47,5 @@
 - (void)updateContinueAndSkipEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END

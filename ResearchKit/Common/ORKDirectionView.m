@@ -30,7 +30,8 @@
 
 
 #import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat ArrowWidth = 8;

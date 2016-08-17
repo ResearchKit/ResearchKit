@@ -101,6 +101,13 @@ class LineGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, drawsPointIndicatorsForPlotIndex plotIndex: Int) -> Bool {
+        if plotIndex == 1 {
+            return false
+        }
+        return true
+    }
 }
 
 class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {

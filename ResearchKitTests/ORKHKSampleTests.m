@@ -29,10 +29,10 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <HealthKit/HealthKit.h>
+@import XCTest;
+@import ResearchKit.Private;
+
 #import "HKSample+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
 
 
 @interface ORKHKSampleTests : XCTestCase

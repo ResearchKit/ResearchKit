@@ -31,8 +31,10 @@
 
 
 #import "ORKBarGraphChartView.h"
+
 #import "ORKGraphChartView_Internal.h"
-#import "ORKChartTypes.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat BarWidth = 10.0;
@@ -139,7 +141,7 @@ static const CGFloat BarWidth = 10.0;
 }
 
 - (UIColor *)colorForPlotIndex:(NSInteger)plotIndex subpointIndex:(NSInteger)subpointIndex totalSubpoints:(NSInteger)totalSubpoints {
-    return opaqueColorWithReducedAlphaFromBaseColor([super colorForPlotIndex:plotIndex subpointIndex:subpointIndex totalSubpoints:(NSInteger)totalSubpoints], subpointIndex, totalSubpoints);
+    return ORKOpaqueColorWithReducedAlphaFromBaseColor([super colorForPlotIndex:plotIndex subpointIndex:subpointIndex totalSubpoints:(NSInteger)totalSubpoints], subpointIndex, totalSubpoints);
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
