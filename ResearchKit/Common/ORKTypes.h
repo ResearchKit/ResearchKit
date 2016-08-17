@@ -29,8 +29,122 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import "ORKDefines.h"
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ An enumeration of values that identify the different types of questions that the ResearchKit
+ framework supports.
+ */
+typedef NS_ENUM(NSInteger, ORKQuestionType) {
+    /**
+     No question.
+     */
+    ORKQuestionTypeNone,
+    
+    /**
+     The scale question type asks participants to place a mark at an appropriate position on a
+     continuous or discrete line.
+     */
+    ORKQuestionTypeScale,
+    
+    /**
+     In a single choice question, the participant can pick only one predefined option.
+     */
+    ORKQuestionTypeSingleChoice,
+    
+    /**
+     In a multiple choice question, the participant can pick one or more predefined options.
+     */
+    ORKQuestionTypeMultipleChoice,
+    
+    /**
+     The decimal question type asks the participant to enter a decimal number.
+     */
+    ORKQuestionTypeDecimal,
+    
+    /**
+     The integer question type asks the participant to enter an integer number.
+     */
+    ORKQuestionTypeInteger,
+    
+    /**
+     The Boolean question type asks the participant to enter Yes or No (or the appropriate
+     equivalents).
+     */
+    ORKQuestionTypeBoolean,
+    
+    /**
+     In a text question, the participant can enter multiple lines of text.
+     */
+    ORKQuestionTypeText,
+    
+    /**
+     In a time of day question, the participant can enter a time of day by using a picker.
+     */
+    ORKQuestionTypeTimeOfDay,
+    
+    /**
+     In a date and time question, the participant can enter a combination of date and time by using
+     a picker.
+     */
+    ORKQuestionTypeDateAndTime,
+    
+    /**
+     In a date question, the participant can enter a date by using a picker.
+     */
+    ORKQuestionTypeDate,
+    
+    /**
+     In a time interval question, the participant can enter a time span by using a picker.
+     */
+    ORKQuestionTypeTimeInterval,
+    
+    /**
+     In a height question, the participant can enter a height by using a height picker.
+     */
+    ORKQuestionTypeHeight,
+
+    /**
+     In a location question, the participant can enter a location using a map view.
+     */
+    ORKQuestionTypeLocation
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ An enumeration of the types of answer choices available.
+ */
+typedef NS_ENUM(NSInteger, ORKChoiceAnswerStyle) {
+    /**
+     A single choice question lets the participant pick a single predefined answer option.
+     */
+    ORKChoiceAnswerStyleSingleChoice,
+    
+    /**
+     A multiple choice question lets the participant pick one or more predefined answer options.
+     */
+    ORKChoiceAnswerStyleMultipleChoice
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ An enumeration of the format styles available for scale answers.
+ */
+typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
+    /**
+     The default decimal style.
+     */
+    ORKNumberFormattingStyleDefault,
+    
+    /**
+     Percent style.
+     */
+    ORKNumberFormattingStylePercent
+} ORK_ENUM_AVAILABLE;
 
 
 /**
@@ -104,7 +218,6 @@ typedef NS_ENUM(NSInteger, ORKBodySagittal) {
     ORKBodySagittalRight
 } ORK_ENUM_AVAILABLE;
 
-
 /**
  Values that identify the presentation mode of paced serial addition tests that are auditory and/or visual (PSAT).
  */
@@ -152,7 +265,9 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
     
     /// Metric measurement system.
     ORKMeasurementSystemMetric,
-    
+
     /// United States customary system.
     ORKMeasurementSystemUSC,
 } ORK_ENUM_AVAILABLE;
+
+NS_ASSUME_NONNULL_END

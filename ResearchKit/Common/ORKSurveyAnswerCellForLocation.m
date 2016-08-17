@@ -31,13 +31,17 @@
 
 
 #import "ORKSurveyAnswerCellForLocation.h"
-#import <MapKit/MapKit.h>
+
 #import "ORKAnswerTextField.h"
-#import "ORKHelpers.h"
+#import "ORKLocationSelectionView.h"
+
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
-#import "ORKLocationSelectionView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+
+@import MapKit;
 
 
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>

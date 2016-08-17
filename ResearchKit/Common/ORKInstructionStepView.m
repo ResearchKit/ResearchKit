@@ -30,15 +30,19 @@
 
 
 #import "ORKInstructionStepView.h"
-#import "ORKInstructionStep.h"
-#import "ORKHelpers.h"
+
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKTintedImageView.h"
 #import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKNavigationContainerView_Internal.h"
+
+#import "ORKInstructionStep.h"
 #import "ORKCompletionStep.h"
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKTintedImageView.h"
-#import "ORKStepHeaderView_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
 
 
 @implementation ORKInstructionStepView {

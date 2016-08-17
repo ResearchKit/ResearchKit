@@ -30,7 +30,8 @@
 
 
 #import "ORKKeychainWrapper.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *ORKKeychainWrapperDefaultService() {

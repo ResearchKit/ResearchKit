@@ -30,11 +30,15 @@
 
 
 #import "ORKFitnessContentView.h"
-#import "ORKHelpers.h"
-#import <CoreMotion/CoreMotion.h>
-#import "ORKSkin.h"
+
 #import "ORKActiveStepQuantityView.h"
 #import "ORKTintedImageView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
+@import CoreMotion;
+@import HealthKit;
 
 
 // #define LAYOUT_TEST 1
@@ -328,7 +332,7 @@
     static NSDateComponentsFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
+        formatter = [NSDateComponentsFormatter new];
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
         formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
         formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;

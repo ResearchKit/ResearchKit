@@ -30,9 +30,12 @@
 
 
 #import "ORKLoginStepViewController.h"
+
 #import "ORKFormStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKHelpers.h"
+#import "ORKTaskViewController.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKLoginStepViewController

@@ -32,7 +32,11 @@
 #import "ORKLabel.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 ORK_CLASS_AVAILABLE
 @interface ORKFormSectionTitleLabel : ORKLabel
 
 @end
+
+NS_ASSUME_NONNULL_END

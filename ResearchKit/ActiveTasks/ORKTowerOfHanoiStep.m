@@ -30,8 +30,10 @@
 
 
 #import "ORKTowerOfHanoiStep.h"
+
 #import "ORKTowerOfHanoiStepViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const NSUInteger MaximumNumberOfDisks = 8;

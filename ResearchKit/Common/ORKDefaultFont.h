@@ -29,8 +29,12 @@
  */
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ORKDefaultFont <NSObject>
 
 + (UIFont *)defaultFont;
 
 @end
+
+NS_ASSUME_NONNULL_END

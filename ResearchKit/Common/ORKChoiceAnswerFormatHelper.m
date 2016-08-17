@@ -30,9 +30,11 @@
 
 
 #import "ORKChoiceAnswerFormatHelper.h"
+
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKResult_Private.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKChoiceAnswerFormatHelper {

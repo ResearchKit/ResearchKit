@@ -31,14 +31,14 @@
 
 
 #import "ORKAudioLevelNavigationRule.h"
-#import "ORKStepNavigationRule_Private.h"
-#import "ORKStepNavigationRule_Internal.h"
 
-#import <AVFoundation/AVFoundation.h>
-
-#import "ORKHelpers.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
+#import "ORKStepNavigationRule_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+
+#import <AVFoundation/AVFoundation.h>
 
 
 Float32 const VolumeThreshold = 0.45;

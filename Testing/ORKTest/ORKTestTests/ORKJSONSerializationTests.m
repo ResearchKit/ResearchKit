@@ -29,19 +29,12 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ResearchKit_Private.h>
-#import <CoreMotion/CoreMotion.h>
-#import <objc/runtime.h>
-#import <stdio.h>
-#import <stdlib.h>
-#import <HealthKit/HealthKit.h>
-#import <MapKit/MapKit.h>
+@import XCTest;
+@import ResearchKit.Private;
 
-#import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
+
+#import <objc/runtime.h>
 
 
 @interface ClassProperty : NSObject

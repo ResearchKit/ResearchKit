@@ -30,7 +30,8 @@
 
 
 #import "ORKSurveyAnswerCell.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

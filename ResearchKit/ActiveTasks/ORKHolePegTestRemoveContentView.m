@@ -30,10 +30,12 @@
 
 
 #import "ORKHolePegTestRemoveContentView.h"
+
+#import "ORKDirectionView.h"
 #import "ORKHolePegTestRemovePegView.h"
 #import "ORKSeparatorView.h"
-#import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

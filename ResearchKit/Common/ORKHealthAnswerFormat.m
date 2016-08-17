@@ -30,9 +30,10 @@
 
 
 #import "ORKHealthAnswerFormat.h"
-#import <UIKit/UIKit.h>
+
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 #pragma mark - ORKHealthAnswerFormat

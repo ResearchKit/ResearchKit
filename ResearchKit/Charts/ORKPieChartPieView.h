@@ -31,14 +31,18 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class ORKPieChartView;
 
 @interface ORKPieChartPieView : UIView
 
 @property (nonatomic) UIFont *percentageLabelFont;
+
+@property (nonatomic) CGFloat radiusScaleFactor;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
@@ -55,3 +59,5 @@
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
 @end
+
+NS_ASSUME_NONNULL_END

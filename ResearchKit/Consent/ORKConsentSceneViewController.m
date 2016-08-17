@@ -32,17 +32,19 @@
 
 #import "ORKConsentSceneViewController.h"
 #import "ORKConsentSceneViewController_Internal.h"
-#import "ORKConsentLearnMoreViewController.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKVerticalContainerView.h"
-#import "ORKVerticalContainerView_Internal.h"
-#import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
-#import "ORKStepHeaderView_Internal.h"
+
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKTintedImageView.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKConsentLearnMoreViewController.h"
+
+#import "ORKConsentDocument_Internal.h"
+#import "ORKConsentSection_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKConsentSceneView ()

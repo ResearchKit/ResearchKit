@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -26,13 +27,15 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 
 #import "ORKGraphChartView.h"
-#import "ORKHelpers.h"
 #import "ORKChartTypes.h"
+#import "ORKHelpers_Private.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class ORKXAxisView;
 
@@ -49,7 +52,6 @@ extern const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphChartViewAxisTickLength;
 extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
-
 ORK_INLINE CGFloat scalePixelAdjustment() {
     return (1.0 / [UIScreen mainScreen].scale);
 }
@@ -65,25 +67,6 @@ ORK_INLINE CAShapeLayer *graphLineLayer() {
 
 ORK_INLINE CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
     return floor((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
-}
-
-ORK_INLINE UIColor *opaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
-    UIColor *color = baseColor;
-    if (totalColors > 1) {
-        CGFloat red = 0.0;
-        CGFloat green = 0.0;
-        CGFloat blue = 0.0;
-        CGFloat alpha = 0.0;
-        if ([baseColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
-            // Avoid a pure transparent color (alpha = 0)
-            CGFloat targetAlphaFactor = ((1.0 / totalColors) * colorIndex);
-            return [UIColor colorWithRed:red + ((1.0 - red) * targetAlphaFactor)
-                                   green:green + ((1.0 - green) * targetAlphaFactor)
-                                    blue:blue + ((1.0 - blue) * targetAlphaFactor)
-                                   alpha:alpha];
-        }
-    }
-    return color;
 }
 
 ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPlots, CGFloat plotWidth) {
@@ -194,3 +177,4 @@ ORK_INLINE CGFloat xOffsetForPlotIndex(NSInteger plotIndex, NSInteger numberOfPl
 
 @end
 
+NS_ASSUME_NONNULL_END

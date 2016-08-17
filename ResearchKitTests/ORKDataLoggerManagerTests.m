@@ -29,9 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <XCTest/XCTest.h>
-#import "ORKDataLogger.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKDataLoggerManagerTests : XCTestCase <ORKDataLoggerManagerDelegate> {

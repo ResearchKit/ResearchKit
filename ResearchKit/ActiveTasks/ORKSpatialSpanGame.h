@@ -29,8 +29,10 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKSpatialSpanGame` class represents a model object that represents one game-like experience in a spatial span memory task.
@@ -81,3 +83,5 @@
 - (NSInteger)tileIndexForStep:(NSInteger)step;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -30,13 +30,19 @@
 
 
 #import "ORKReactionTimeViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
+
 #import "ORKActiveStepView.h"
 #import "ORKReactionTimeContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+
 #import "ORKReactionTimeStep.h"
-#import "ORKHelpers.h"
-#import <CoreMotion/CMDeviceMotion.h>
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import <AudioToolbox/AudioServices.h>
+#import <CoreMotion/CMDeviceMotion.h>
 
 
 @implementation ORKReactionTimeViewController {

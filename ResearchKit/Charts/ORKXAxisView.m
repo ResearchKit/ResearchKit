@@ -32,7 +32,10 @@
 
 
 #import "ORKXAxisView.h"
+
 #import "ORKGraphChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat LastLabelHeight = 20.0;
@@ -48,10 +51,12 @@ static const CGFloat LastLabelHeight = 20.0;
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentGraphChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
