@@ -48,7 +48,6 @@
 #import "ORKVerificationStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
-#import "ORKVideoInstructionStep.h"
 
 #import "ORKTask.h"
 #import "ORKOrderedTask.h"
