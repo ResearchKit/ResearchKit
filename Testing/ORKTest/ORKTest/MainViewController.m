@@ -383,6 +383,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Instantiate Custom VC",
                            @"Table Step",
                            @"Signature Step",
+                           @"Toggle Learn More"
                            ],
                        ];
 }
@@ -2904,6 +2905,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [superview addSubview:self.view];
 }
 
+BOOL toggleLearnMore = false;
+
+- (void)toggleLearnMoreButtonTapped:(id)sender {
+    toggleLearnMore = !toggleLearnMore;
+}
+
 #pragma mark - Navigable Loop Task
 
 - (id<ORKTask>)makeNavigableLoopTask {
@@ -3414,9 +3421,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     NSString *task_identifier = taskViewController.task.identifier;
-    //TODO: remove before merging PR
-    return (/*[step isKindOfClass:[ORKInstructionStep class]]
-            &&*/ NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
+    return toggleLearnMore ? YES : ([step isKindOfClass:[ORKInstructionStep class]]
+            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
@@ -3425,22 +3431,23 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
-    //TODO: remove before merging PR
-    ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
-    printFormatter.delegate = self;
-    printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
-    [printFormatter setSteps:@[stepViewController.step] withResult:taskViewController.result];
-    UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
-    renderer.headerHeight = 25;
-    renderer.footerHeight = 25;
-    [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
-    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
-    controller.printPageRenderer = renderer;
-    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
-    printInfo.outputType = UIPrintInfoOutputGeneral;
-    printInfo.jobName = @"ResearchKit printing test";
-    controller.printInfo = printInfo;
-    [controller presentAnimated:YES completionHandler:nil];
+    if (toggleLearnMore) {
+        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
+        printFormatter.delegate = self;
+        printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
+        [printFormatter setSteps:@[stepViewController.step] withResult:taskViewController.result];
+        UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
+        renderer.headerHeight = 25;
+        renderer.footerHeight = 25;
+        [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
+        UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+        controller.printPageRenderer = renderer;
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = @"ResearchKit printing test";
+        controller.printInfo = printInfo;
+        [controller presentAnimated:YES completionHandler:nil];
+    }
 }
 
 - (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
@@ -3565,7 +3572,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
     }
-
+    if (toggleLearnMore) {
+        stepViewController.learnMoreButtonTitle = @"Print step";
+    }
 }
 
 /*
