@@ -98,8 +98,7 @@ ORKHTMLPrintingTemplate *printingTemplate;
     }
     NSString *stepFooter = @"";
     if (![stepBody isEqualToString:@""] && (self.options & ORKPrintFormatterOptionIncludeTimestamp)) {
-        //TODO: use ORKLocalizedString
-        NSString *footerString = [NSString stringWithFormat:@"%@ - %@", ORKLocalizedStringFromDate(result.startDate), ORKLocalizedStringFromDate(result.endDate)];
+        NSString *footerString = [NSString stringWithFormat:ORKLocalizedString(@"PRINT_TIMESTAMP", nil), ORKLocalizedStringFromDate(result.startDate), ORKLocalizedStringFromDate(result.endDate)];
         stepFooter = [NSString stringWithFormat:[printingTemplate stepFooter], footerString];
     }
     NSString *stepHTML = [NSString stringWithFormat:[printingTemplate step], stepHeader, stepBody, stepFooter];
