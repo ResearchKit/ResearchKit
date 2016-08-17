@@ -37,16 +37,13 @@
 #import "ORKDataLogger.h"
 #import "ORKErrors.h"
 
-// Step view controllers (useful for appearance, customization by subclassing)
-#import <ResearchKit/ORKQuestionStepViewController.h>
-#import <ResearchKit/ORKInstructionStepViewController.h>
-#import <ResearchKit/ORKVisualConsentStepViewController.h>
-#import <ResearchKit/ORKConsentReviewStepViewController.h>
-#import <ResearchKit/ORKImageCaptureStepViewController.h>
-#import <ResearchKit/ORKReviewStepViewController.h>
-#import <ResearchKit/ORKWaitStepViewController.h>
-#import <ResearchKit/ORKSignatureStepViewController.h>
-#import <ResearchKit/ORKVideoInstructionStepViewController.h>
+#import "ORKAnswerFormat_Private.h"
+#import "ORKConsentSection_Private.h"
+#import "ORKOrderedTask_Private.h"
+#import "ORKRecorder_Private.h"
+#import "ORKResult_Private.h"
+#import "ORKStepNavigationRule_Private.h"
+#import "ORKAudioLevelNavigationRule.h"
 
 #import "ORKAudioStep.h"
 #import "ORKCompletionStep.h"
@@ -86,6 +83,7 @@
 #import "ORKTimedWalkStepViewController.h"
 #import "ORKVisualConsentStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
+#import "ORKVideoInstructionStepViewController.h"
 
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"

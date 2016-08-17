@@ -31,7 +31,7 @@
 
 #import "ORKVideoInstructionStep.h"
 #import "ORKVideoInstructionStepViewController.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 #import "AVFoundation/AVFoundation.h"
 
 

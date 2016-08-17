@@ -31,20 +31,24 @@
 
 #import "ORKTypes.h"
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKCompletionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKReviewStep.h>
-#import <ResearchKit/ORKTableStep.h>
-#import <ResearchKit/ORKWaitStep.h>
-#import <ResearchKit/ORKVideoInstructionStep.h>
+#import "ORKStep.h"
+#import "ORKActiveStep.h"
+#import "ORKConsentReviewStep.h"
+#import "ORKConsentSharingStep.h"
+#import "ORKFormStep.h"
+#import "ORKImageCaptureStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKLoginStep.h"
+#import "ORKPasscodeStep.h"
+#import "ORKQuestionStep.h"
+#import "ORKRegistrationStep.h"
+#import "ORKReviewStep.h"
+#import "ORKSignatureStep.h"
+#import "ORKTableStep.h"
+#import "ORKVerificationStep.h"
+#import "ORKVisualConsentStep.h"
+#import "ORKWaitStep.h"
+#import "ORKVideoInstructionStep.h"
 
 #import "ORKTask.h"
 #import "ORKOrderedTask.h"
