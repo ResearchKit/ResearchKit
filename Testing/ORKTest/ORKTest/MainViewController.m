@@ -101,6 +101,8 @@ DefineStringKey(StepWillDisappearFirstStepIdentifier);
 DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
 
+DefineStringKey(VideoInstructionStepTaskIdentifier);
+
 @interface SectionHeader: UICollectionReusableView
 
 - (void)configureHeaderWithTitle:(NSString *)title;
@@ -613,7 +615,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
         return [self makeSignatureStepTask];
     }
-
+    else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
+        return [self makeVideoInstructionStepTask];
+    }
+    
     return nil;
 }
 
@@ -4035,5 +4040,29 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
 }
 
+- (IBAction)videoInstructionStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:VideoInstructionStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeVideoInstructionStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *firstStep = [[ORKInstructionStep alloc] initWithIdentifier:@"firstStep"];
+    firstStep.text = @"Example of an ORKVideoInstructionStep";
+    [steps addObject:firstStep];
+    
+    ORKVideoInstructionStep *videoInstructionStep = [[ORKVideoInstructionStep alloc] initWithIdentifier:@"videoInstructionStep"];
+    videoInstructionStep.text = @"Video Instruction";
+    videoInstructionStep.videoURL = [[NSURL alloc] initWithString:@"https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov"];
+    //videoInstructionStep.thumbnailTime = 5;
+    
+    [steps addObject:videoInstructionStep];
+    
+    ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Task Complete";
+    [steps addObject:lastStep];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+}
 
 @end

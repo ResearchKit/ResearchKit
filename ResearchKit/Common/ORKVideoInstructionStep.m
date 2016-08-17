@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,64 +29,65 @@
  */
 
 
-#import "ORKTypes.h"
-
-#import "ORKStep.h"
-#import "ORKActiveStep.h"
-#import "ORKConsentReviewStep.h"
-#import "ORKConsentSharingStep.h"
-#import "ORKFormStep.h"
-#import "ORKImageCaptureStep.h"
-#import "ORKInstructionStep.h"
-#import "ORKLoginStep.h"
-#import "ORKPasscodeStep.h"
-#import "ORKQuestionStep.h"
-#import "ORKRegistrationStep.h"
-#import "ORKReviewStep.h"
-#import "ORKSignatureStep.h"
-#import "ORKTableStep.h"
-#import "ORKVerificationStep.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKWaitStep.h"
 #import "ORKVideoInstructionStep.h"
+#import "ORKVideoInstructionStepViewController.h"
+#import "ORKHelpers_Internal.h"
+#import "AVFoundation/AVFoundation.h"
 
-#import "ORKTask.h"
-#import "ORKOrderedTask.h"
-#import "ORKNavigableOrderedTask.h"
-#import "ORKStepNavigationRule.h"
 
-#import "ORKAnswerFormat.h"
-#import "ORKHealthAnswerFormat.h"
+@implementation ORKVideoInstructionStep
 
-#import "ORKResult.h"
-#import "ORKResultPredicate.h"
++ (Class)stepViewControllerClass {
+    return [ORKVideoInstructionStepViewController class];
+}
 
-#import "ORKTextButton.h"
-#import "ORKBorderedButton.h"
-#import "ORKContinueButton.h"
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        _thumbnailTime = 1;
+    }
+    return self;
+}
 
-#import "ORKStepViewController.h"
-#import "ORKActiveStepViewController.h"
-#import "ORKFormStepViewController.h"
-#import "ORKLoginStepViewController.h"
-#import "ORKPasscodeViewController.h"
-#import "ORKTableStepViewController.h"
-#import "ORKTaskViewController.h"
-#import "ORKVerificationStepViewController.h"
-#import "ORKWaitStepViewController.h"
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_URL(aDecoder, videoURL);
+        ORK_DECODE_INTEGER(aDecoder, thumbnailTime);
+    }
+    return self;
+}
 
-#import "ORKRecorder.h"
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_URL(aCoder, videoURL);
+    ORK_ENCODE_INTEGER(aCoder, thumbnailTime);
+}
 
-#import "ORKConsentDocument.h"
-#import "ORKConsentSection.h"
-#import "ORKConsentSignature.h"
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
-#import "ORKKeychainWrapper.h"
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKVideoInstructionStep *step = [super copyWithZone:zone];
+    step.videoURL = self.videoURL;
+    step.thumbnailTime = self.thumbnailTime;
+    return step;
+}
 
-#import "ORKChartTypes.h"
-#import "ORKBarGraphChartView.h"
-#import "ORKDiscreteGraphChartView.h"
-#import "ORKLineGraphChartView.h"
-#import "ORKPieChartView.h"
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+        castObject.thumbnailTime == self.thumbnailTime;
+}
 
-#import "ORKPrintFormatter.h"
+- (NSUInteger)hash {
+    return super.hash ^ self.videoURL.hash;
+}
+
+- (void)setThumbnailTime:(NSInteger)thumbnailTime {
+    _thumbnailTime = thumbnailTime > 0 ? thumbnailTime : 1;
+}
+
+@end

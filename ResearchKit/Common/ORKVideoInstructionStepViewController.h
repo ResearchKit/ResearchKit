@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,22 +29,13 @@
  */
 
 
-#import "ORKInstructionStepViewController.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKInstructionStepView;
-
-@interface ORKInstructionStepViewController ()
-
-@property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
-
-// Use button title "Get started" instead of "Next".
-- (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
-
-- (void)stepDidChange;
+/**
+ 
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKVideoInstructionStepViewController : ORKInstructionStepViewController
 
 @end
-
-NS_ASSUME_NONNULL_END

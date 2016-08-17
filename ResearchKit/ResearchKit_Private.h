@@ -83,6 +83,7 @@
 #import "ORKTimedWalkStepViewController.h"
 #import "ORKVisualConsentStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
+#import "ORKVideoInstructionStepViewController.h"
 
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"

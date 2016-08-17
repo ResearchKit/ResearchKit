@@ -1670,6 +1670,7 @@
 				86C40B5A1A8D7C5B00081FAC /* ORKInstructionStepView.h */,
 				86C40B5B1A8D7C5B00081FAC /* ORKInstructionStepView.m */,
 				B12EFF301AB20E7500A80147 /* Completion Step */,
+				BF1D43821D490482007EE90B /* Video Instruction Step */,
 			);
 			name = "Instruction Step";
 			sourceTree = "<group>";
@@ -2877,6 +2878,7 @@
 				BC1C032D1CA301E300869355 /* ORKHeightPicker.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
+				BF1D43861D4904C6007EE90B /* ORKVideoInstructionStep.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
 				BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
@@ -2965,6 +2967,7 @@
 				24A4DA151B8D1115009C797A /* ORKPasscodeStep.m in Sources */,
 				86C40DEC1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m in Sources */,
 				106FF2AF1B6FACA8004EACF2 /* ORKDirectionView.m in Sources */,
+				BF1D438A1D4905FC007EE90B /* ORKVideoInstructionStepViewController.m in Sources */,
 				86C40CAA1A8D7C5C00081FAC /* ORKPedometerRecorder.m in Sources */,
 				BCA5C0361AEC05F20092AC8D /* ORKStepNavigationRule.m in Sources */,
 				106FF2A71B665CF5004EACF2 /* ORKHolePegTestPlaceContentView.m in Sources */,
