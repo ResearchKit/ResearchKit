@@ -31,12 +31,11 @@
 
 #import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKHelpers_Private.h>
+#import "ORKHelpers_Private.h"
 
 // Active step support
-#import <ResearchKit/ORKTaskViewController_Private.h>
-#import <ResearchKit/ORKDataLogger.h>
-#import <ResearchKit/ORKErrors.h>
+#import "ORKDataLogger.h"
+#import "ORKErrors.h"
 
 // Step view controllers (useful for appearance, customization by subclassing)
 #import <ResearchKit/ORKQuestionStepViewController.h>
@@ -49,44 +48,52 @@
 #import <ResearchKit/ORKSignatureStepViewController.h>
 #import <ResearchKit/ORKVideoInstructionStepViewController.h>
 
-// Custom steps
-#import <ResearchKit/ORKCustomStepView.h>
+#import "ORKAudioStep.h"
+#import "ORKCompletionStep.h"
+#import "ORKCountdownStep.h"
+#import "ORKFitnessStep.h"
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestRemoveStep.h"
+#import "ORKPSATStep.h"
+#import "ORKReactionTimeStep.h"
+#import "ORKSpatialSpanMemoryStep.h"
+#import "ORKTappingIntervalStep.h"
+#import "ORKTimedWalkStep.h"
+#import "ORKToneAudiometryPracticeStep.h"
+#import "ORKToneAudiometryStep.h"
+#import "ORKTowerOfHanoiStep.h"
+#import "ORKWalkingTaskStep.h"
 
-// Specific active task modules
-#import <ResearchKit/ORKOrderedTask_Private.h>
+#import "ORKTaskViewController_Private.h"
+#import "ORKQuestionStepViewController_Private.h"
 
-#import <ResearchKit/ORKAudioStep.h>
-#import <ResearchKit/ORKToneAudiometryStep.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStep.h>
-#import <ResearchKit/ORKSpatialSpanMemoryStep.h>
-#import <ResearchKit/ORKWalkingTaskStep.h>
-#import <ResearchKit/ORKFitnessStep.h>
-#import <ResearchKit/ORKTappingIntervalStep.h>
-#import <ResearchKit/ORKTimedWalkStep.h>
-#import <ResearchKit/ORKPSATStep.h>
-#import <ResearchKit/ORKHolePegTestPlaceStep.h>
-#import <ResearchKit/ORKHolePegTestRemoveStep.h>
-#import <ResearchKit/ORKReactionTimeStep.h>
-#import <ResearchKit/ORKTowerOfHanoiStep.h>
+#import "ORKAudioStepViewController.h"
+#import "ORKCompletionStepViewController.h"
+#import "ORKConsentReviewStepViewController.h"
+#import "ORKCountdownStepViewController.h"
+#import "ORKFitnessStepViewController.h"
+#import "ORKHolePegTestPlaceStepViewController.h"
+#import "ORKHolePegTestRemoveStepViewController.h"
+#import "ORKImageCaptureStepViewController.h"
+#import "ORKInstructionStepViewController.h"
+#import "ORKPSATStepViewController.h"
+#import "ORKQuestionStepViewController.h"
+#import "ORKReviewStepViewController.h"
+#import "ORKSpatialSpanMemoryStepViewController.h"
+#import "ORKTappingIntervalStepViewController.h"
+#import "ORKToneAudiometryPracticeStepViewController.h"
+#import "ORKToneAudiometryStepViewController.h"
+#import "ORKTimedWalkStepViewController.h"
+#import "ORKVisualConsentStepViewController.h"
+#import "ORKWalkingTaskStepViewController.h"
 
-#import <ResearchKit/ORKAudioStepViewController.h>
-#import <ResearchKit/ORKAudioLevelNavigationRule.h>
-#import <ResearchKit/ORKToneAudiometryStepViewController.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
-#import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
-#import <ResearchKit/ORKWalkingTaskStepViewController.h>
-#import <ResearchKit/ORKCountdownStepViewController.h>
-#import <ResearchKit/ORKFitnessStepViewController.h>
-#import <ResearchKit/ORKTappingIntervalStepViewController.h>
-#import <ResearchKit/ORKTimedWalkStepViewController.h>
-#import <ResearchKit/ORKPSATStepViewController.h>
-#import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
-#import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
-#import <ResearchKit/ORKCompletionStepViewController.h>
+#import "ORKAccelerometerRecorder.h"
+#import "ORKAudioRecorder.h"
+#import "ORKDeviceMotionRecorder.h"
+#import "ORKHealthQuantityTypeRecorder.h"
+#import "ORKLocationRecorder.h"
+#import "ORKPedometerRecorder.h"
+#import "ORKTouchRecorder.h"
 
-// More internal stuff
-#import <ResearchKit/ORKResult_Private.h>
-#import <ResearchKit/ORKQuestionStepViewController_Private.h>
-#import <ResearchKit/ORKRecorder_Private.h>
-#import <ResearchKit/ORKStepNavigationRule_Private.h>
-#import <ResearchKit/ORKAnswerFormat_Private.h>
+// For custom steps
+#import "ORKCustomStepView.h"

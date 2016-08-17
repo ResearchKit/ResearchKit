@@ -31,35 +31,40 @@
 
 
 #import "ORKOrderedTask.h"
-#import "ORKHelpers.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKStep_Private.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKActiveStep.h"
-#import "ORKActiveStep_Internal.h"
-#import "ORKAudioLevelNavigationRule.h"
+
 #import "ORKAudioStepViewController.h"
-#import "ORKWalkingTaskStepViewController.h"
-#import "ORKTappingIntervalStep.h"
 #import "ORKCountdownStepViewController.h"
-#import "ORKToneAudiometryStepViewController.h"
-#import "ORKHelpers.h"
 #import "ORKFitnessStepViewController.h"
-#import "ORKCompletionStep.h"
+#import "ORKToneAudiometryStepViewController.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
+#import "ORKWalkingTaskStepViewController.h"
+
+#import "ORKAccelerometerRecorder.h"
+#import "ORKActiveStep_Internal.h"
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKAudioLevelNavigationRule.h"
+#import "ORKAudioRecorder.h"
 #import "ORKAudioStep.h"
+#import "ORKCompletionStep.h"
 #import "ORKCountdownStep.h"
 #import "ORKFitnessStep.h"
-#import "ORKWalkingTaskStep.h"
-#import "ORKSpatialSpanMemoryStep.h"
-#import "ORKToneAudiometryStep.h"
-#import "ORKReactionTimeStep.h"
-#import "ORKTowerOfHanoiStep.h"
-#import "ORKTimedWalkStep.h"
+#import "ORKFormStep.h"
+#import "ORKNavigableOrderedTask.h"
 #import "ORKPSATStep.h"
-#import "ORKAccelerometerRecorder.h"
-#import "ORKAudioRecorder.h"
+#import "ORKQuestionStep.h"
+#import "ORKReactionTimeStep.h"
+#import "ORKSpatialSpanMemoryStep.h"
+#import "ORKStep_Private.h"
+#import "ORKTappingIntervalStep.h"
+#import "ORKTimedWalkStep.h"
+#import "ORKToneAudiometryStep.h"
+#import "ORKToneAudiometryPracticeStep.h"
+#import "ORKTowerOfHanoiStep.h"
+#import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
+#import "ORKWalkingTaskStep.h"
+
+#import "ORKHelpers_Internal.h"
 #import "UIImage+ResearchKit.h"
 
 
@@ -386,8 +391,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             rightHand = YES; break;
         default:
             rightHand = (arc4random()%2 == 0); break;
-    }
-    
+        }
+        
     for (NSUInteger hand = 1; hand <= handCount; hand++) {
         
         NSString * (^appendIdentifier) (NSString *) = ^ (NSString * identifier) {
@@ -455,7 +460,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
-    }
+        }
     
         // TAPPING STEP
     {
@@ -604,7 +609,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         // Add rules to check for audio and fail, looping back to the countdown step if required
         ORKAudioLevelNavigationRule *audioRule = [[ORKAudioLevelNavigationRule alloc] initWithAudioLevelStepIdentifier:ORKCountdownStepIdentifier destinationStepIdentifier:ORKAudioStepIdentifier recordingSettings:recordingSettings];
         ORKDirectStepNavigationRule *loopRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKCountdownStepIdentifier];
-
+    
         [task setNavigationRule:audioRule forTriggerStepIdentifier:ORKCountdownStepIdentifier];
         [task setNavigationRule:loopRule forTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier];
     }

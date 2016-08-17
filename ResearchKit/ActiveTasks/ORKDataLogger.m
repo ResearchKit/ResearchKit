@@ -30,12 +30,12 @@
 
 
 #import "ORKDataLogger.h"
-#import <ResearchKit/ResearchKit.h>
-#import "ORKHelpers.h"
-#include <sys/xattr.h>
-#import "ORKDataLogger_Private.h"
-#import "HKSample+ORKJSONDictionary.h"
+
+#import "ORKHelpers_Internal.h"
 #import "CMMotionActivity+ORKJSONDictionary.h"
+#import "HKSample+ORKJSONDictionary.h"
+
+#include <sys/xattr.h>
 
 
 static const char *ORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";

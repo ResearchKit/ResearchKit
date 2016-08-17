@@ -30,10 +30,12 @@
 
 
 #import "ORKTimedWalkContentView.h"
-#import "ORKSkin.h"
-#import "ORKProgressView.h"
+
 #import "ORKActiveStepQuantityView.h"
+#import "ORKProgressView.h"
 #import "ORKTintedImageView.h"
+
+#import "ORKSkin.h"
 
 
 @interface ORKTimedWalkContentView ()

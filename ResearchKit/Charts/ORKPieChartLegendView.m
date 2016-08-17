@@ -32,10 +32,12 @@
 
 
 #import "ORKPieChartLegendView.h"
-#import "ORKPieChartView_Internal.h"
+
 #import "ORKPieChartLegendCell.h"
 #import "ORKPieChartLegendCollectionViewLayout.h"
-#import "ORKHelpers.h"
+#import "ORKPieChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat MinimumInteritemSpacing = 10.0;
@@ -53,10 +55,12 @@ static const CGFloat MinimumLineSpacing = 6.0;
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentPieChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
     ORKPieChartLegendCollectionViewLayout *pieChartLegendCollectionViewLayout = [[ORKPieChartLegendCollectionViewLayout alloc] init];

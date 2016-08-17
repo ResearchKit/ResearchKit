@@ -28,11 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKToneAudiometryPracticeStep.h"
+
 #import "ORKToneAudiometryPracticeStepViewController.h"
 
-@implementation ORKToneAudiometryPracticeStep
 
+@implementation ORKToneAudiometryPracticeStep
 
 + (Class)stepViewControllerClass {
     return [ORKToneAudiometryPracticeStepViewController class];

@@ -29,9 +29,11 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKFormStepViewController` class is the concrete `ORKStepViewController`
@@ -47,3 +49,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKFormStepViewController : ORKStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

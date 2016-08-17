@@ -30,11 +30,13 @@
 
 
 #import "ORKAudioContentView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import "ORKLabel.h"
+
 #import "ORKHeadlineLabel.h"
+#import "ORKLabel.h"
+
 #import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // The central blue region.

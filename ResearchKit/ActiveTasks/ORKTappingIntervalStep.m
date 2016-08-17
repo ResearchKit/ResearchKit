@@ -30,6 +30,7 @@
 
 
 #import "ORKTappingIntervalStep.h"
+
 #import "ORKTappingIntervalStepViewController.h"
 
 

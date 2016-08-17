@@ -29,33 +29,18 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKConsentSection.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*
- Exposing a minimal set of extra facilities to permit unit testing.
- */
-@interface ORKDataLogger ()
+NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
 
-- (nullable NSFileHandle *)fileHandle;
+@interface ORKConsentSection ()
 
-@end
+@property (nonatomic, readonly, nullable) NSString *escapedContent;
 
-
-@protocol ORKDataLoggerExtendedDelegate <ORKDataLoggerDelegate>
-
-@optional
-- (void)dataLoggerThresholdsDidChange:(ORKDataLogger *)dataLogger;
-
-@end
-
-
-@interface NSURL (ORKDataLogger)
-
-- (BOOL)ork_isUploaded;
-- (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * _Nullable *)error;
+@property (nonatomic, readonly, nullable) UIImage *image;
 
 @end
 

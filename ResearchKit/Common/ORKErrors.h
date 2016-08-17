@@ -29,9 +29,11 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <ResearchKit/ORKDefines.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /// Error domain for errors with codes in `ORKErrorCode`.
 ORK_EXTERN NSString *const ORKErrorDomain ORK_AVAILABLE_DECL;
@@ -53,3 +55,5 @@ typedef NS_ENUM(NSInteger, ORKErrorCode) {
     /// Multiple errors were encountered during an operation.
     ORKErrorMultipleErrors
 } ORK_ENUM_AVAILABLE;
+
+NS_ASSUME_NONNULL_END

@@ -29,16 +29,21 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import "ORKConsentDocument.h"
-#import "ORKHTMLPDFWriter.h"
+@import XCTest;
+@import ResearchKit.Private;
+
 #import "ORKConsentSectionFormatter.h"
 #import "ORKConsentSignatureFormatter.h"
+#import "ORKHTMLPDFWriter.h"
+
 
 @interface ORKMockHTMLPDFWriter : ORKHTMLPDFWriter
+
 @property (nonatomic, copy) NSString *html;
 @property (nonatomic, copy) void (^completionBlock)(NSData *, NSError *);
+
 @end
+
 
 @implementation ORKMockHTMLPDFWriter
 
@@ -49,8 +54,11 @@
 
 @end
 
+
 @interface ORKMockConsentSectionFormatter : ORKConsentSectionFormatter
+
 @end
+
 
 @implementation ORKMockConsentSectionFormatter
 
@@ -60,9 +68,11 @@
 
 @end
 
+
 @interface ORKMockConsentSignatureFormatter : ORKConsentSignatureFormatter
 
 @end
+
 
 @implementation ORKMockConsentSignatureFormatter
 
@@ -74,9 +84,12 @@
 
 
 @interface ORKConsentDocumentTests : XCTestCase
+
 @property (nonatomic, strong) ORKConsentDocument *document;
 @property (nonatomic, strong) ORKMockHTMLPDFWriter *mockWriter;
+
 @end
+
 
 @implementation ORKConsentDocumentTests
 

@@ -30,7 +30,8 @@
 
 
 #import "HKSample+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *const HKSampleIdentifierKey = @"type"; // For compatibility with Health XML export

@@ -30,13 +30,15 @@
 
 
 #import "ORKConsentReviewStep.h"
-#import "ORKStep_Private.h"
-#import "ORKHelpers.h"
-#import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
-#import "ORKConsentSignature.h"
+
 #import "ORKConsentReviewStepViewController.h"
+
+#import "ORKConsentDocument_Internal.h"
+#import "ORKConsentSection_Private.h"
 #import "ORKConsentSignature.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKConsentReviewStep

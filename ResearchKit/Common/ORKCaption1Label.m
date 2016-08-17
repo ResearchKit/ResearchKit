@@ -30,7 +30,8 @@
 
 
 #import "ORKCaption1Label.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKCaption1Label

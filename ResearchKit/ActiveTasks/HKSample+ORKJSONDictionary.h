@@ -29,8 +29,7 @@
  */
 
 
-#import <HealthKit/HealthKit.h>
-#import <ResearchKit/ResearchKit.h>
+@import HealthKit;
 
 
 NS_ASSUME_NONNULL_BEGIN

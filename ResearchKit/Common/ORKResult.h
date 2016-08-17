@@ -29,10 +29,9 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKAnswerFormat.h>
+@import UIKit;
+@import CoreLocation;
 #import <ResearchKit/ORKTypes.h>
-#import <CoreLocation/CoreLocation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

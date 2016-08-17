@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ORKTypes.h>
+#import "ORKTypes.h"
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
@@ -46,45 +46,41 @@
 #import <ResearchKit/ORKWaitStep.h>
 #import <ResearchKit/ORKVideoInstructionStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+#import "ORKTask.h"
+#import "ORKOrderedTask.h"
+#import "ORKNavigableOrderedTask.h"
+#import "ORKStepNavigationRule.h"
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+#import "ORKAnswerFormat.h"
+#import "ORKHealthAnswerFormat.h"
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKFormStepViewController.h>
-#import <ResearchKit/ORKWaitStepViewController.h>
-#import <ResearchKit/ORKTableStepViewController.h>
+#import "ORKResult.h"
+#import "ORKResultPredicate.h"
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
-#import <ResearchKit/ORKSignatureStep.h>
+#import "ORKTextButton.h"
+#import "ORKBorderedButton.h"
+#import "ORKContinueButton.h"
 
-#import <ResearchKit/ORKRegistrationStep.h>
-#import <ResearchKit/ORKVerificationStep.h>
-#import <ResearchKit/ORKVerificationStepViewController.h>
-#import <ResearchKit/ORKLoginStep.h>
-#import <ResearchKit/ORKLoginStepViewController.h>
+#import "ORKStepViewController.h"
+#import "ORKActiveStepViewController.h"
+#import "ORKFormStepViewController.h"
+#import "ORKLoginStepViewController.h"
+#import "ORKPasscodeViewController.h"
+#import "ORKTableStepViewController.h"
+#import "ORKTaskViewController.h"
+#import "ORKVerificationStepViewController.h"
+#import "ORKWaitStepViewController.h"
 
-#import <ResearchKit/ORKKeychainWrapper.h>
-#import <ResearchKit/ORKPasscodeStep.h>
-#import <ResearchKit/ORKPasscodeViewController.h>
+#import "ORKRecorder.h"
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKCountdownStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+#import "ORKConsentDocument.h"
+#import "ORKConsentSection.h"
+#import "ORKConsentSignature.h"
 
-#import <ResearchKit/ORKChartTypes.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKBarGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
-#import <ResearchKit/ORKContinueButton.h>
+#import "ORKKeychainWrapper.h"
 
+#import "ORKChartTypes.h"
+#import "ORKBarGraphChartView.h"
+#import "ORKDiscreteGraphChartView.h"
+#import "ORKLineGraphChartView.h"
+#import "ORKPieChartView.h"

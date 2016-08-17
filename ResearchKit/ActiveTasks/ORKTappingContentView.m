@@ -30,12 +30,16 @@
 
 
 #import "ORKTappingContentView.h"
+
 #import "ORKActiveStepTimer.h"
-#import "ORKResult.h"
-#import "ORKSkin.h"
+#import "ORKRoundTappingButton.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // #define LAYOUT_DEBUG 1

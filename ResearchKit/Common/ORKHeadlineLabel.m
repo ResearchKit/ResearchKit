@@ -30,7 +30,8 @@
 
 
 #import "ORKHeadlineLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

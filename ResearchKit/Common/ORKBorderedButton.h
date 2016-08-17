@@ -29,8 +29,11 @@
  */
 
 
-#import "ORKTextButton.h"
+@import UIKit;
+#import <ResearchKit/ORKTextButton.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKBorderedButton : ORKTextButton
@@ -38,3 +41,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSTimeInterval fadeDelay;
 
 @end
+
+NS_ASSUME_NONNULL_END

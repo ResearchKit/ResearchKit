@@ -29,12 +29,15 @@
  */
 
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIKit.h>
+@import UIKit;
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKHTMLPDFWriter : NSObject
 
 - (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

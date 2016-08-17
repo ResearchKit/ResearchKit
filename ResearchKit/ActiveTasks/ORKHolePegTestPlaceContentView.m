@@ -30,10 +30,12 @@
 
 
 #import "ORKHolePegTestPlaceContentView.h"
-#import "ORKHolePegTestPlacePegView.h"
-#import "ORKHolePegTestPlaceHoleView.h"
+
 #import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+#import "ORKHolePegTestPlaceHoleView.h"
+#import "ORKHolePegTestPlacePegView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

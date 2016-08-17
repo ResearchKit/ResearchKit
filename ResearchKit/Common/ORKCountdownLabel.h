@@ -29,8 +29,11 @@
  */
 
 
+@import UIKit;
 #import "ORKLabel.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Coundown label in active steps
@@ -46,3 +49,5 @@ ORK_CLASS_AVAILABLE
 - (void)setCountDownValue:(NSInteger)value;
 
 @end
+
+NS_ASSUME_NONNULL_END

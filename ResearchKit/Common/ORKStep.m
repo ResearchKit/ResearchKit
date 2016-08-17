@@ -30,11 +30,14 @@
 
 
 #import "ORKStep.h"
-#import "ORKHelpers.h"
 #import "ORKStep_Private.h"
+
 #import "ORKStepViewController.h"
+
 #import "ORKOrderedTask.h"
 #import "ORKStepViewController_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKStep

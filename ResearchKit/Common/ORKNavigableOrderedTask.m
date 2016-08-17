@@ -30,11 +30,19 @@
 
 
 #import "ORKNavigableOrderedTask.h"
-#import "ORKHelpers.h"
-#import "ORKStepNavigationRule.h"
+
+#import "ORKOrderedTask_Private.h"
+#import "ORKResult.h"
 #import "ORKStep_Private.h"
+#import "ORKStepNavigationRule.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import "ORKHolePegTestPlaceStep.h"
 #import "ORKHolePegTestRemoveStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKOrderedTask_Private.h"
+#import "ORKCompletionStep.h"
 
 
 @implementation ORKNavigableOrderedTask {
@@ -332,8 +340,7 @@ NSString *const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.
     }
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        
+        ORKCompletionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
     

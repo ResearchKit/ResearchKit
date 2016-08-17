@@ -28,10 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+
+@import UIKit;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKLineGraphAccessibilityElement : UIAccessibilityElement
 
 - (nonnull instancetype)initWithAccessibilityContainer:(nonnull UIView *)container index:(NSInteger)index maxIndex:(NSInteger)maxIndex;
 
 @end
+
+NS_ASSUME_NONNULL_END
