@@ -3456,6 +3456,7 @@ BOOL toggleLearnMore = false;
             && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
 
+
 /*
  When the user taps on "Learn More" on a step, respond on this delegate callback.
  In this test app, we just print to the console.
