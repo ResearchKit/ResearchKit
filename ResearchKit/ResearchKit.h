@@ -88,4 +88,4 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKPieChartView.h"
 
-#import <ResearchKit/ORKPrintFormatter.h>
+#import "ORKPrintFormatter.h"
