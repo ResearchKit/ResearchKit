@@ -82,4 +82,10 @@
 
 #import "ORKKeychainWrapper.h"
 
+#import "ORKChartTypes.h"
+#import "ORKBarGraphChartView.h"
+#import "ORKDiscreteGraphChartView.h"
+#import "ORKLineGraphChartView.h"
+#import "ORKPieChartView.h"
+
 #import <ResearchKit/ORKPrintFormatter.h>

@@ -72,3 +72,5 @@ ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) 
 ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+
+NS_ASSUME_NONNULL_END
