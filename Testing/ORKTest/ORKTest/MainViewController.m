@@ -3686,6 +3686,23 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
+/**
+  When a task has completed it calls this method to post the result of the task to the delegate.
+*/
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result {
+    /*
+     Upon creation of a Passcode by a user, the results of their creation
+     are returned by getting it from ORKPasscodeResult in this delegate call.
+     This is triggered upon completion/failure/or cancel
+     */
+    ORKStepResult *stepResult = (ORKStepResult *)[[result results] firstObject];
+    if ([[[stepResult results] firstObject] isKindOfClass:[ORKPasscodeResult class]]) {
+        ORKPasscodeResult *passcodeResult = (ORKPasscodeResult *)[[stepResult results] firstObject];
+        NSLog(@"passcode saved: %d , Touch ID Enabled: %d", passcodeResult.passcodeSaved, passcodeResult.touchIdEnabled);
+
+    }
+}
+
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
     if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
         [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
