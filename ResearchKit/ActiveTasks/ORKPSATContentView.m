@@ -30,12 +30,14 @@
 
 
 #import "ORKPSATContentView.h"
-#import "ORKSkin.h"
+
+#import "ORKBorderedButton.h"
 #import "ORKPSATKeyboardView.h"
 #import "ORKTapCountLabel.h"
-#import "ORKBorderedButton.h"
 #import "ORKVoiceEngine.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKPSATContentView ()

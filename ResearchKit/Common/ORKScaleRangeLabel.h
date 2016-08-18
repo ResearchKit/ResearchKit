@@ -29,8 +29,11 @@
  */
 
 
+@import UIKit;
 #import "ORKLabel.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Start/End of the range in scale slider.
@@ -39,3 +42,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKScaleRangeLabel : ORKLabel
 
 @end
+
+NS_ASSUME_NONNULL_END

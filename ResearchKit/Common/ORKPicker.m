@@ -30,12 +30,23 @@
 
 
 #import "ORKPicker.h"
+
 #import "ORKDateTimePicker.h"
+#import "ORKHeightPicker.h"
 #import "ORKTimeIntervalPicker.h"
 #import "ORKValuePicker.h"
+
 #import "ORKAnswerFormat.h"
 
-
+/**
+ Creates a picker appropriate to the type required by answerformat
+ 
+ @param answerFormat   An ORKAnswerFormat object which specified the format of the result
+ @param answer         The current answer (to set as the picker's current result)
+ @param delegate       A delegate who conforms to ORKPickerDelegate
+ 
+ @return The picker object
+ */
 id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPickerDelegate> delegate) {
     id<ORKPicker> picker;
     
@@ -45,6 +56,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKTimeIntervalPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]]) {
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
+        picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
     
     return picker;
@@ -52,8 +65,16 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
 
 @implementation ORKPicker : NSObject
 
-+ (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer delegate:(id<ORKPickerDelegate>) delegate {
-    
+/**
+ Creates a picker appropriate to the type required by answerformat
+ 
+ @param answerFormat   An ORKAnswerFormat object which specified the format of the result
+ @param answer         A default answer (to set as the picker's current result), or nil if no answer specified.
+ @param delegate       A delegate who conforms to ORKPickerDelegate
+ 
+ @return The picker object
+ */
++ (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer delegate:(id<ORKPickerDelegate>) delegate {
     id<ORKPicker> picker;
     
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
@@ -62,6 +83,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKTimeIntervalPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]]) {
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
+        picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
     
     return picker;

@@ -29,10 +29,15 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKConsentReviewStep;
+@class ORKConsentSignatureResult;
 
 /**
  The `ORKConsentReviewStepViewController` class is a step view controller subclass

@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -65,6 +65,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case BooleanQuestion
     case DateQuestion
     case DateTimeQuestion
+    case HeightQuestion
     case ImageChoiceQuestion
     case LocationQuestion
     case NumericQuestion
@@ -95,6 +96,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ToneAudiometry
     case TowerOfHanoi
     case TwoFingerTappingInterval
+    case WalkBackAndForth
     
     class TaskListRowSection {
         var title: String
@@ -119,6 +121,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .BooleanQuestion,
                     .DateQuestion,
                     .DateTimeQuestion,
+                    .HeightQuestion,
                     .ImageChoiceQuestion,
                     .LocationQuestion,
                     .NumericQuestion,
@@ -153,6 +156,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ToneAudiometry,
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
+                    .WalkBackAndForth,
                 ]),
         ]}
     
@@ -174,7 +178,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return NSLocalizedString("Date and Time Question", comment: "")
-            
+
+        case .HeightQuestion:
+            return NSLocalizedString("Height Question", comment: "")
+
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -258,6 +265,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .TwoFingerTappingInterval:
             return NSLocalizedString("Two Finger Tapping Interval", comment: "")
+            
+        case .WalkBackAndForth:
+            return NSLocalizedString("Walk Back and Forth", comment: "")
         }
     }
     
@@ -300,6 +310,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Task with an example of date and time entry.
         case DateTimeQuestionTask
         case DateTimeQuestionStep
+
+        // Task with an example of height entry.
+        case HeightQuestionTask
+        case HeightQuestionStep1
+        case HeightQuestionStep2
+        case HeightQuestionStep3
 
         // Task with an image choice question.
         case ImageChoiceQuestionTask
@@ -402,6 +418,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ToneAudiometryTask
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
+        case WalkBackAndForthTask
     }
     
     // MARK: Properties
@@ -423,6 +440,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return dateTimeQuestionTask
+
+        case .HeightQuestion:
+            return heightQuestionTask
 
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -477,7 +497,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Audio:
             return audioTask
-
+            
         case .Fitness:
             return fitnessTask
             
@@ -507,6 +527,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .TwoFingerTappingInterval:
             return twoFingerTappingIntervalTask
+            
+        case .WalkBackAndForth:
+            return walkBackAndForthTask
+            
         }
     }
 
@@ -610,6 +634,29 @@ enum TaskListRow: Int, CustomStringConvertible {
         step.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.DateTimeQuestionTask), steps: [step])
+    }
+
+    /// This task demonstrates a question asking for the user height.
+    private var heightQuestionTask: ORKTask {
+        let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
+        
+        let step1 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep1), title: "Height (local system)", answer: answerFormat1)
+        
+        step1.text = exampleDetailText
+
+        let answerFormat2 = ORKAnswerFormat.heightAnswerFormatWithMeasurementSystem(ORKMeasurementSystem.Metric)
+        
+        let step2 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep2), title: "Height (metric system)", answer: answerFormat2)
+        
+        step2.text = exampleDetailText
+
+        let answerFormat3 = ORKAnswerFormat.heightAnswerFormatWithMeasurementSystem(ORKMeasurementSystem.USC)
+        
+        let step3 = ORKQuestionStep(identifier: String(Identifier.HeightQuestionStep3), title: "Height (USC system)", answer: answerFormat3)
+        
+        step2.text = exampleDetailText
+
+        return ORKOrderedTask(identifier: String(Identifier.HeightQuestionTask), steps: [step1, step2, step3])
     }
 
     /**
@@ -1115,7 +1162,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
-        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
+        return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, checkAudioLevel: true, options: [])
     }
 
     /**
@@ -1152,7 +1199,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Spatial Span Memory pre-defined active task.
     private var spatialSpanMemoryTask: ORKTask {
-        return ORKOrderedTask.spatialSpanMemoryTaskWithIdentifier(String(Identifier.SpatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maxTests: 5, maxConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
+        return ORKOrderedTask.spatialSpanMemoryTaskWithIdentifier(String(Identifier.SpatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
     }
 
     /// This task presents the Timed Walk pre-defined active task.
@@ -1171,7 +1218,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents the Two Finger Tapping pre-defined active task.
     private var twoFingerTappingIntervalTask: ORKTask {
-        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(String(Identifier.TwoFingerTappingIntervalTask), intendedUseDescription: exampleDescription, duration: 20, options: [])
+        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(String(Identifier.TwoFingerTappingIntervalTask), intendedUseDescription: exampleDescription, duration: 10, handOptions: [.Both], options: [])
+    }
+    
+    /// This task presents a walk back-and-forth task
+    private var walkBackAndForthTask: ORKTask {
+        return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
     }
 
     // MARK: Consent Document Creation Convenience

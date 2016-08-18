@@ -30,9 +30,12 @@
 
 
 #import "ORKInstructionStep.h"
-#import "ORKHelpers.h"
-#import "ORKStep_Private.h"
+
 #import "ORKInstructionStepViewController.h"
+
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKInstructionStep
@@ -75,7 +78,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.detailText hash];
+    return super.hash ^ self.detailText.hash;
 }
 
 @end

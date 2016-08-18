@@ -30,9 +30,12 @@
 
 
 #import "ORKAudioStep.h"
+
 #import "ORKAudioStepViewController.h"
-#import "ORKHelpers.h"
+
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKAudioStep

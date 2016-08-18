@@ -30,12 +30,14 @@
 
 
 #import "ORKFormStep.h"
-#import "ORKFormItem_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKStep_Private.h"
+
 #import "ORKFormStepViewController.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKFormStep
@@ -101,7 +103,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.formItems hash];
+    return super.hash ^ self.formItems.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -163,6 +165,26 @@
     return self;
 }
 
+- (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
+                                                     text:(nullable NSString *)text
+                                             errorMessage:(NSString *)errorMessage {
+    
+    if (![self.answerFormat conformsToProtocol:@protocol(ORKConfirmAnswerFormatProvider)]) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:[NSString stringWithFormat:@"Answer format %@ does not conform to confirmation protocol", self.answerFormat]
+                                     userInfo:nil];
+    }
+    
+    ORKAnswerFormat *answerFormat = [(id <ORKConfirmAnswerFormatProvider>)self.answerFormat
+                                     confirmationAnswerFormatWithOriginalItemIdentifier:self.identifier
+                                     errorMessage:errorMessage];
+    ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:identifier
+                                                           text:text
+                                                   answerFormat:answerFormat
+                                                       optional:self.optional];
+    return item;
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
 }
@@ -213,7 +235,7 @@
 
 - (NSUInteger)hash {
      // Ignore the step reference - it's not part of the content of this item
-    return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash] ^ (_optional ? 0xf : 0x0);
+    return _identifier.hash ^ _text.hash ^ _placeholder.hash ^ _answerFormat.hash ^ (_optional ? 0xf : 0x0);
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {

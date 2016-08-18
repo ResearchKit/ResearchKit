@@ -30,9 +30,12 @@
 
 
 #import "ORKSpatialSpanMemoryStep.h"
+
 #import "ORKSpatialSpanMemoryStepViewController.h"
-#import "ORKHelpers.h"
+
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSpatialSpanMemoryStep
@@ -56,8 +59,8 @@
     step.minimumSpan = self.minimumSpan;
     step.maximumSpan = self.maximumSpan;
     step.playSpeed = self.playSpeed;
-    step.maxTests = self.maxTests;
-    step.maxConsecutiveFailures = self.maxConsecutiveFailures;
+    step.maximumTests = self.maximumTests;
+    step.maximumConsecutiveFailures = self.maximumConsecutiveFailures;
     step.requireReversal = self.requireReversal;
     step.customTargetImage = self.customTargetImage;
     step.customTargetPluralName = self.customTargetPluralName;
@@ -106,15 +109,15 @@
                                      userInfo:nil];
     }
     
-    if  (self.maxTests < ORKSpatialSpanMemoryTaskMinimumMaxTests) {
+    if  (self.maximumTests < ORKSpatialSpanMemoryTaskMinimumMaxTests) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"maxTests cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxTests)]
+                                       reason:[NSString stringWithFormat:@"maximumTests cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxTests)]
                                      userInfo:nil];
     }
     
-    if  (self.maxConsecutiveFailures < ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures) {
+    if  (self.maximumConsecutiveFailures < ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"maxConsecutiveFailures cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)]
+                                       reason:[NSString stringWithFormat:@"maximumConsecutiveFailures cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)]
                                      userInfo:nil];
     }
 }
@@ -130,8 +133,8 @@
         ORK_DECODE_INTEGER(aDecoder, minimumSpan);
         ORK_DECODE_INTEGER(aDecoder, maximumSpan);
         ORK_DECODE_INTEGER(aDecoder, playSpeed);
-        ORK_DECODE_INTEGER(aDecoder, maxTests);
-        ORK_DECODE_INTEGER(aDecoder, maxConsecutiveFailures);
+        ORK_DECODE_INTEGER(aDecoder, maximumTests);
+        ORK_DECODE_INTEGER(aDecoder, maximumConsecutiveFailures);
         ORK_DECODE_BOOL(aDecoder, requireReversal);
         ORK_DECODE_IMAGE(aDecoder, customTargetImage);
         ORK_DECODE_OBJ_CLASS(aDecoder, customTargetPluralName, NSString);
@@ -145,8 +148,8 @@
     ORK_ENCODE_INTEGER(aCoder, minimumSpan);
     ORK_ENCODE_INTEGER(aCoder, maximumSpan);
     ORK_ENCODE_INTEGER(aCoder, playSpeed);
-    ORK_ENCODE_INTEGER(aCoder, maxTests);
-    ORK_ENCODE_INTEGER(aCoder, maxConsecutiveFailures);
+    ORK_ENCODE_INTEGER(aCoder, maximumTests);
+    ORK_ENCODE_INTEGER(aCoder, maximumConsecutiveFailures);
     ORK_ENCODE_BOOL(aCoder, requireReversal);
     ORK_ENCODE_IMAGE(aCoder, customTargetImage);
     ORK_ENCODE_OBJ(aCoder, customTargetPluralName);
@@ -165,8 +168,8 @@
             (self.minimumSpan == castObject.minimumSpan) &&
             (self.maximumSpan == castObject.maximumSpan) &&
             (self.playSpeed == castObject.playSpeed) &&
-            (self.maxTests == castObject.maxTests) &&
-            (self.maxConsecutiveFailures == castObject.maxConsecutiveFailures) &&
+            (self.maximumTests == castObject.maximumTests) &&
+            (self.maximumConsecutiveFailures == castObject.maximumConsecutiveFailures) &&
             (ORKEqualObjects(self.customTargetPluralName, castObject.customTargetPluralName)) &&
             (self.requireReversal == castObject.requireReversal));
 }

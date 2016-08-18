@@ -32,11 +32,15 @@
 
 
 #import "ORKScaleSliderView.h"
-#import "ORKScaleSlider.h"
-#import "ORKScaleRangeLabel.h"
+
 #import "ORKScaleRangeDescriptionLabel.h"
-#import "ORKScaleValueLabel.h"
 #import "ORKScaleRangeImageView.h"
+#import "ORKScaleRangeLabel.h"
+#import "ORKScaleSlider.h"
+#import "ORKScaleValueLabel.h"
+
+#import "ORKAnswerFormat_Internal.h"
+
 #import "ORKSkin.h"
 
 
@@ -79,6 +83,9 @@
 
         NSArray<ORKTextChoice *> *textChoices = [[self textScaleFormatProvider] textChoices];
         _slider.textChoices = textChoices;
+        
+        _slider.gradientColors = [formatProvider gradientColors];
+        _slider.gradientLocations = [formatProvider gradientLocations];
         
         if (isVertical && textChoices) {
             // Generate an array of labels for all the text choices
@@ -545,7 +552,7 @@
             [self setCurrentTextChoiceValue:[currentAnswerValue firstObject]];
         }
     } else {
-        return [self setCurrentNumberValue:currentAnswerValue];
+        [self setCurrentNumberValue:currentAnswerValue];
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,19 +29,61 @@
  */
 
 
-#import "ORKConsentSection.h"
+#import "DragonPokerStep.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface DragonPokerStep ()
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
-
-@interface ORKConsentSection ()
-
-@property (nonatomic, readonly, nullable) NSString *escapedContent;
-
-@property (nonatomic, readonly, nullable) UIImage *image;
+@property (nonatomic) NSDate *playDate;
 
 @end
 
-NS_ASSUME_NONNULL_END
+
+@interface DragonPokerStepViewController : ORKFormStepViewController
+
+@property (nonatomic) BOOL shouldShowCancelButton;
+
+@end
+
+
+@implementation DragonPokerStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        ORKFormItem *formItem = [[ORKFormItem alloc] initWithIdentifier:@"question1" text:@"Are you tall?" answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
+        self.formItems = @[formItem];
+    }
+    return self;
+}
+
+- (NSDate *)playDate {
+    if (_playDate == nil) {
+        _playDate = [NSDate date];
+    }
+    return _playDate;
+    }
+
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result {
+    
+    DragonPokerStepViewController *viewController = [[DragonPokerStepViewController alloc] initWithStep:self result:result];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self.playDate];
+    viewController.shouldShowCancelButton = components.weekday == 2;
+    
+    return viewController;
+}
+
+@end
+
+@implementation DragonPokerStepViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Hide the cancel button if it should not be shown.
+    if (!self.shouldShowCancelButton) {
+        self.cancelButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] initWithFrame:CGRectZero]];
+    }
+}
+
+@end

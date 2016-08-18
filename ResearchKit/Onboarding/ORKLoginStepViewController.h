@@ -29,8 +29,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKFormStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKLoginStepViewController` class is the concrete `ORKStepViewController`
@@ -51,3 +54,5 @@ ORK_CLASS_AVAILABLE
 - (void)forgotPasswordButtonTapped;
 
 @end
+
+NS_ASSUME_NONNULL_END

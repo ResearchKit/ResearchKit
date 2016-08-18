@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, James Cox. All rights reserved.
- 
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -28,8 +29,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 
-@interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
+
+// This class implements a centered collection view layout,
+// in which the cells are distributed as equally as possible between rows
+// and each row is laid out as compactly as possible within its center
+// (rather than spreading to take all available space like in the UICollectionViewFlowLayout)
+@interface ORKPieChartLegendCollectionViewLayout : UICollectionViewFlowLayout
 
 @end

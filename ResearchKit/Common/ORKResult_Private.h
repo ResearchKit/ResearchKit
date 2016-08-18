@@ -29,8 +29,9 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
-#import <MapKit/MapKit.h>
+#import <ResearchKit/ORKResult.h>
+@import MapKit;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -99,6 +100,13 @@ ORK_CLASS_AVAILABLE
                  addressDictionary:(NSDictionary *)addressDictionary;
 
 - (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
+
+@end
+
+@interface ORKSignatureResult ()
+
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath;
 
 @end
 

@@ -29,9 +29,12 @@
  */
 
 
-#import <ResearchKit/ORKStepViewController.h>
+@import UIKit;
 #import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKQuestionStepViewController` class is the concrete `ORKStepViewController`
@@ -52,3 +55,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKQuestionStepViewController : ORKStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

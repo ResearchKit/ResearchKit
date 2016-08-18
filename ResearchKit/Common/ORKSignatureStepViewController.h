@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,14 +29,21 @@
  */
 
 
-#import "ORKOrderedTask.h"
+@import UIKit;
+#import "ORKStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKOrderedTask ()
+/**
+ The `ORKSignatureStepViewController` class is a step view controller subclass
+ used to manage a signature step (`ORKSignatureStep`).
 
-- (NSUInteger)indexOfStep:(ORKStep *)step;
+ You should not need to instantiate a signature step view controller directly. Instead, include
+ a signature step in a task, and present a task view controller for that stask.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSignatureStepViewController : ORKStepViewController
 
 @end
 

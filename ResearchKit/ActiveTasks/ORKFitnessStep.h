@@ -29,9 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Fitness step.
@@ -45,3 +48,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKFitnessStep : ORKActiveStep
 
 @end
+
+NS_ASSUME_NONNULL_END

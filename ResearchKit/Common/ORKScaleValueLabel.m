@@ -30,7 +30,8 @@
 
 
 #import "ORKScaleValueLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKScaleValueLabel

@@ -30,7 +30,8 @@
 
 
 #import "ORKSelectionTitleLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSelectionTitleLabel

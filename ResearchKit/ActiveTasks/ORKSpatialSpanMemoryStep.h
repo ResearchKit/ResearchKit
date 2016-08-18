@@ -29,11 +29,20 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Spatian span memory step.
+ 
+ This step type is used to present the interactive spatial span memory activity. You are not
+ supposed to use this step on its own. Use `ORKOrderedTask`'s `+spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:` method to get a complete spatial
+ span memory activity task instead.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKSpatialSpanMemoryStep : ORKActiveStep
 
@@ -41,8 +50,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSInteger minimumSpan;
 @property (nonatomic, assign) NSInteger maximumSpan;
 @property (nonatomic, assign) NSTimeInterval playSpeed;
-@property (nonatomic, assign) NSInteger maxTests;
-@property (nonatomic, assign) NSInteger maxConsecutiveFailures;
+@property (nonatomic, assign) NSInteger maximumTests;
+@property (nonatomic, assign) NSInteger maximumConsecutiveFailures;
 @property (nonatomic, assign) BOOL requireReversal;
 @property (nonatomic, strong, nullable) UIImage *customTargetImage;
 @property (nonatomic, copy, nullable) NSString *customTargetPluralName;

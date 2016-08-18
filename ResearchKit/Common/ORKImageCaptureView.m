@@ -30,11 +30,15 @@
 
 
 #import "ORKImageCaptureView.h"
+
 #import "ORKImageCaptureCameraPreviewView.h"
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
 #import "ORKStepHeaderView_Internal.h"
+
+#import "ORKImageCaptureStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKImageCaptureView {
@@ -301,7 +305,7 @@
 - (void)sessionWasInterrupted:(NSNotification *)notification {
     AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey] integerValue];
     if (reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps) {
-        [self setError:[[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil)}]];
+        [self setError:[[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil)}]];
     }
 }
 

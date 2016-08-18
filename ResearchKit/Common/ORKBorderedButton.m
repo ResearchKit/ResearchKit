@@ -30,7 +30,7 @@
 
 
 #import "ORKBorderedButton.h"
-
+#import "ORKTextButton_Internal.h"
 
 @implementation ORKBorderedButton {
     UIColor *_normalTintColor;

@@ -30,8 +30,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -64,6 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
 @property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
+@property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *signaturePath;
 
 - (UIImage *)signatureImage;
 

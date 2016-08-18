@@ -29,7 +29,8 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import UIKit;
+#import "ORKTypes.h"
 #import "ORKCustomStepView_Internal.h"
 
 

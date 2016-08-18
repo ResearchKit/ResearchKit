@@ -29,17 +29,18 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKKeychainWrapperTests : XCTestCase
 
 @end
 
-static NSString * const inObject = @"RK object";
-static NSString * const key = @"RK key";
-static NSString * const invalidKey = @"RK invalid key";
+
+static NSString *const inObject = @"RK object";
+static NSString *const key = @"RK key";
+static NSString *const invalidKey = @"RK invalid key";
 
 @implementation ORKKeychainWrapperTests
 

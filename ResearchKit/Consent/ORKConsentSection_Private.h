@@ -29,26 +29,19 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKConsentSection.h>
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+NS_ASSUME_NONNULL_BEGIN
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
+@interface ORKConsentSection ()
 
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+@property (nonatomic, readonly, nullable) NSString *escapedContent;
 
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+@property (nonatomic, readonly, nullable) UIImage *image;
 
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
+@end
 
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+NS_ASSUME_NONNULL_END

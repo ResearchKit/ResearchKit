@@ -30,7 +30,8 @@
 
 
 #import "ORKResultPredicate.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTIFIER";
@@ -44,6 +45,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 
 @implementation ORKResultSelector
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
 
 + (instancetype)selectorWithTaskIdentifier:(NSString *)taskIdentifier
                             stepIdentifier:(NSString *)stepIdentifier
@@ -124,13 +133,13 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     __typeof(self) castObject = object;
-    return (ORKEqualObjects(_taskIdentifier, castObject.taskIdentifier)
-            && ORKEqualObjects(_stepIdentifier, castObject.stepIdentifier)
-            && ORKEqualObjects(_resultIdentifier, castObject.resultIdentifier));
+    return (ORKEqualObjects(self.taskIdentifier, castObject.taskIdentifier)
+            && ORKEqualObjects(self.stepIdentifier, castObject.stepIdentifier)
+            && ORKEqualObjects(self.resultIdentifier, castObject.resultIdentifier));
 }
 
 - (NSUInteger)hash {
-    return [_taskIdentifier hash] ^ [_stepIdentifier hash] ^ [_resultIdentifier hash];
+    return _taskIdentifier.hash ^ _stepIdentifier.hash ^ _resultIdentifier.hash;
 }
 
 + (BOOL)supportsSecureCoding {
@@ -164,6 +173,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 
 @implementation ORKResultPredicate
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
 
 + (NSPredicate *)predicateMatchingResultSelector:(ORKResultSelector *)resultSelector
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray
@@ -430,6 +447,12 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     return [self predicateMatchingResultSelector:resultSelector
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
+}
+
++ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector didConsent:(BOOL)didConsent {
+    return [self predicateMatchingResultSelector:resultSelector
+                         subPredicateFormatArray:@[ @"consented == %@" ]
+                 subPredicateFormatArgumentArray:@[ @(didConsent) ]];
 }
 
 @end

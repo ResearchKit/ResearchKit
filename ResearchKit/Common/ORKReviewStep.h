@@ -29,11 +29,13 @@
  */
 
 
+@import Foundation;
 #import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKResult.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@protocol ORKTaskResultSource;
 
 /**
  The `ORKReviewStep` class is a concrete subclass of `ORKStep` that represents
