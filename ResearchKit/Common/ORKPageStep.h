@@ -70,9 +70,18 @@ ORK_CLASS_AVAILABLE
  
  @param aDecoder    The coder from which to initialize the ordered task.
  
- @return An initialized ordered task.
+ @return An initialized page step.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ The array of steps in the page step. (read-only)
+ 
+ Each element in the array must be a subclass of `ORKStep`.
+ The associated page step view controller presents the steps in
+ array order.
+ */
+@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
 /**
  Returns the step after the specified step, if there is one.

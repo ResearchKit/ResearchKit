@@ -42,7 +42,6 @@
 #import "ORKResult_Private.h"
 #import "ORKStep.h"
 #import "ORKTask.h"
-#import "ORKPageStep_Private.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -2183,9 +2182,9 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 @implementation ORKPageResult
 
 - (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result {
-    self = [super initWithTaskIdentifier:step.pageTask.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
+    self = [super initWithTaskIdentifier:step.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
     if (self) {
-        NSArray <NSString *> *stepIdentifiers = [step.pageTask.steps valueForKey:@"identifier"];
+        NSArray <NSString *> *stepIdentifiers = [step.steps valueForKey:@"identifier"];
         NSMutableArray *results = [NSMutableArray new];
         for (NSString *identifier in stepIdentifiers) {
             NSString *prefix = [NSString stringWithFormat:@"%@.", identifier];

@@ -36,6 +36,6 @@
 @property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                          pageTask:(ORKOrderedTask *)task;
+                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
 
 @end

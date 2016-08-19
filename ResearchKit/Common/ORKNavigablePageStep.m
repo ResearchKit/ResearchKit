@@ -28,47 +28,32 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKPageStep.h>
-#import <ResearchKit/ORKOrderedTask.h>
+#import "ORKNavigablePageStep.h"
+#import "ORKPageStep_Private.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKNavigablePageStep
 
-/**
- The `ORKPageTaskStep` class is a concrete subclass of `ORKPageStep`, used for presenting a subgrouping of
- `ORKStepViewController` views using a `UIPageViewController`. It allows for using an `ORKOrderedTask` as
- the model object used to define navigation, and has been added specifically to allow developers to use 
- `ORKNavigableOrderedTask` with the `ORKPageStep`.
- 
- To use `ORKPageTaskStep`, instantiate the object, fill in its properties, and include it in a task.
- Next, create a task view controller for the task and present it.
- 
- The base class implementation will instatiate a read-only `ORKPageStepViewController` to display
- a series of substeps. For each substep, the `ORKStepViewController` will be instantiated and added
- as a child of the `UIPageViewController` contained by the parent `ORKPageStepViewController`..
- 
- Customization can be handled by overriding the base class implementations in either `ORKPageTaskStep`
- or `ORKPageStepViewController`.
- */
+@dynamic pageTask;
 
-ORK_CLASS_AVAILABLE
-@interface ORKPageTaskStep : ORKPageStep
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:nil]];
+}
 
-/**
- The subtask used to determine the next/previous steps that are in this grouping
- */
-@property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
+}
 
-/**
- Returns an initialized page step using the specified identifier and array of steps.
- 
- @param identifier  The unique identifier for the step.
- @param task        The task used to run the subtask.
- 
- @return An initialized page step.
- */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
+                          pageTask:(ORKOrderedTask *)task {
+    return [super initWithIdentifier:identifier pageTask:task];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super initWithCoder:aDecoder];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

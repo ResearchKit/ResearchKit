@@ -760,9 +760,9 @@ encondingTable =
          (@{
             PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
             })),
-   ENTRY(ORKPageTaskStep,
+   ENTRY(ORKNavigablePageStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             ORKPageTaskStep *step = [[ORKPageTaskStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             ORKNavigablePageStep *step = [[ORKNavigablePageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
              return step;
          },
          (@{
