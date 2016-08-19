@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 }
 
 - (void)updateNavLeftBarButtonItem {
-    if (self.currentStepIdentifier == nil) {
+    if ((self.currentStepIdentifier == nil) || ([self stepInDirection:ORKPageNavigationDirectionReverse] == nil)) {
         [super updateNavLeftBarButtonItem];
     } else {
         self.navigationItem.leftBarButtonItem = [self goToPreviousPageButtonItem];
