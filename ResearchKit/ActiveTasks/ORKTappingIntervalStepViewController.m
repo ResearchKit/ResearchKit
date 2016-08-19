@@ -244,7 +244,7 @@
 }
 
 - (IBAction)buttonReleased:(id)button forEvent:(UIEvent *)event {
-    NSInteger index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
+    ORKTappingButtonIdentifier index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
     
     [self releaseTouch:[[event touchesForView:button] anyObject] onButton:index];
 }
