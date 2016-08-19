@@ -179,6 +179,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) NSTimeInterval timestamp;
 
+/**
+ A duration of the tap event.
+ 
+ The duration store time interval between touch down and touch release events.
+ */
+@property (nonatomic, assign) NSTimeInterval duration;
+
 /** 
  An enumerated value that indicates which button was tapped, if any.
  
