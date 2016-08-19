@@ -39,6 +39,7 @@
 
 #import "ORKAnswerFormat_Private.h"
 #import "ORKConsentSection_Private.h"
+#import "ORKPageStep_Private.h"
 #import "ORKOrderedTask_Private.h"
 #import "ORKRecorder_Private.h"
 #import "ORKResult_Private.h"

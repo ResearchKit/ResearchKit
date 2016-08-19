@@ -63,17 +63,6 @@ ORK_CLASS_AVAILABLE
                              steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns an initialized page step using the specified identifier and array of steps.
- 
- @param identifier  The unique identifier for the step.
- @param task        The task used to run the subtask.
- 
- @return An initialized page step.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
-
-/**
  Returns a page step initialized from data in the given unarchiver.
  
  A page step can be serialized and deserialized with `NSKeyedArchiver`. Note
@@ -84,11 +73,6 @@ ORK_CLASS_AVAILABLE
  @return An initialized ordered task.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-/**
- The subtask used to determine the next/previous steps that are in this grouping
- */
-@property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
 
 /**
  Returns the step after the specified step, if there is one.

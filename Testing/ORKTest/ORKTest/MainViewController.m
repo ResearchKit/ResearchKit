@@ -4052,7 +4052,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                                                                 options:
                                  ORKPredefinedTaskOptionExcludeInstructions |
                                  ORKPredefinedTaskOptionExcludeConclusion];
-    ORKPageStep *audioStep = [[ORKPageStep alloc] initWithIdentifier:@"audioStep" pageTask:audioTask];
+    ORKPageStep *audioStep = [[ORKPageTaskStep alloc] initWithIdentifier:@"audioStep" pageTask:audioTask];
     [steps addObject:audioStep];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];

@@ -42,6 +42,7 @@
 #import "ORKResult_Private.h"
 #import "ORKStep.h"
 #import "ORKTask.h"
+#import "ORKPageStep_Private.h"
 
 #import "ORKHelpers_Internal.h"
 

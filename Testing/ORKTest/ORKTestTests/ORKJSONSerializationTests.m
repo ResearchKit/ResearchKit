@@ -312,7 +312,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     NSArray *classesExcludedForORKESerialization = @[
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
-                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation 
+                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
                                                      ];
     
     if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {

@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKPageStep.h"
+#import "ORKPageStep_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKPageStepViewController.h"
 #import "ORKResult.h"
