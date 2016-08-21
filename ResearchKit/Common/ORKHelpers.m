@@ -89,20 +89,6 @@ id findInArrayByKey(NSArray * array, NSString *key, id value) {
     return nil;
 }
 
-NSString *ORKLocalizedStringFromDate(NSDate *date) {
-    if (!date) {
-        return @"";
-    }
-    static NSDateFormatter *formatter = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        formatter = [NSDateFormatter new];
-        formatter.dateStyle = NSDateFormatterShortStyle;
-        formatter.timeStyle = NSDateFormatterMediumStyle;
-    });
-    return [formatter stringFromDate:date];
-}
-
 NSString *ORKStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;

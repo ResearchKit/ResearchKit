@@ -158,10 +158,6 @@ UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
 id findInArrayByKey(NSArray * array, NSString *key, id value);
 
-NSString *ORKLocalizedStringFromDate(NSDate *date);
-NSString *ORKStringFromDateISO8601(NSDate *date);
-NSDate *ORKDateFromStringISO8601(NSString *string);
-
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL();
