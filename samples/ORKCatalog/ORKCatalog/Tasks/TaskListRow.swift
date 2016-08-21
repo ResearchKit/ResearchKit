@@ -98,6 +98,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TwoFingerTappingInterval
     case WalkBackAndForth
     
+    case VideoInstruction
+    
     class TaskListRowSection {
         var title: String
         var rows: [TaskListRow]
@@ -157,6 +159,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
                     .WalkBackAndForth,
+                ]),
+            TaskListRowSection(title: "Video Instruction", rows:
+                [
+                    .VideoInstruction,
                 ]),
         ]}
     
@@ -268,6 +274,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return NSLocalizedString("Walk Back and Forth", comment: "")
+        
+        case .VideoInstruction:
+            return NSLocalizedString("Video Instruction Task", comment: "")
         }
     }
     
@@ -419,6 +428,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
         case WalkBackAndForthTask
+        
+        // Video Instruction task.
+        case VideoInstructionTask
+        case VideoInstructionStep
     }
     
     // MARK: Properties
@@ -530,7 +543,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return walkBackAndForthTask
-            
+         
+        case .VideoInstruction:
+            return videoInstruction
         }
     }
 
@@ -1226,6 +1241,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
     }
 
+    /// This task presents a video instruction step
+    private var videoInstruction: ORKTask {
+        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(Identifier.VideoInstructionStep))
+        videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
+        videoInstructionStep.videoURL = NSURL(string: NSLocalizedString("Video Instruction Step URL", comment: ""))
+        return ORKOrderedTask(identifier: String(Identifier.VideoInstructionTask), steps: [videoInstructionStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**

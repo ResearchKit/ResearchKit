@@ -33,7 +33,7 @@
 #import "ORKInstructionStepViewController_Internal.h"
 #import "ORKInstructionStepView.h"
 #import "AVFoundation/AVFoundation.h"
-#import "AVKit/AVKit.h"
+#import <AVKit/AVKit.h>
 #import "ORKHelpers_Internal.h"
 
 

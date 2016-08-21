@@ -35,6 +35,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ An `ORKVideoInstructionStep` object gives the participant video-based instructions for a task.
+ 
+ You can use video instruction steps to present video content during a task.
+ 
+ */
 @interface ORKVideoInstructionStep : ORKInstructionStep
 
 /**
@@ -43,7 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSURL *videoURL;
 
 /**
+ The time (in seconds) at which the thumbnail image is created.
  
+ When presented, the step view controller will display a preview image of the video to play.
+ This property tells the step view controller at what time of the video this thumbnail image 
+ should be created.
+ 
+ Default is 0, negative values will be ignored.
  */
 @property (nonatomic) NSInteger thumbnailTime;
 
