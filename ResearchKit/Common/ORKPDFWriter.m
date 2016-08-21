@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKHTMLPDFWriter.h"
+#import "ORKPDFWriter.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -83,7 +83,7 @@ static const CGFloat LetterHeight = 11.0f;
 @end
 
 
-@interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
+@interface ORKPDFWriter () <UIWebViewDelegate> {
     id _selfRetain;
 }
 
@@ -97,7 +97,7 @@ static const CGFloat LetterHeight = 11.0f;
 @end
 
 
-@implementation ORKHTMLPDFWriter
+@implementation ORKPDFWriter
 
 static const CGFloat HeaderHeight = 25.0;
 static const CGFloat FooterHeight = 25.0;
@@ -106,7 +106,7 @@ static const CGFloat PageEdge = 72.0 / 4;
 - (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock {
     
     _pageMargins = UIEdgeInsetsMake(PageEdge, PageEdge, PageEdge, PageEdge);
-    _pageSize = [ORKHTMLPDFWriter defaultPageSize];
+    _pageSize = [ORKPDFWriter defaultPageSize];
     
     _data = nil;
     _error = nil;

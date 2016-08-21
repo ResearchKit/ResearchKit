@@ -240,7 +240,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLPrintFormatterDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLWriterDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -3464,10 +3464,10 @@ BOOL toggleLearnMore = false;
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
     if (toggleLearnMore) {
-        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] init];
-        printFormatter.delegate = self;
-        printFormatter.options = ORKPrintFormatterOptionIncludeChoices | ORKPrintFormatterOptionIncludeTimestamp;
-        [printFormatter setSteps:@[stepViewController.step] withResult:taskViewController.result];
+        ORKHTMLWriter *writer = [[ORKHTMLWriter alloc] init];
+        writer.delegate = self;
+        writer.options = ORKHTMLWriterOptionIncludeChoices | ORKHTMLWriterOptionIncludeTimestamp;
+        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithMarkupText:[writer writeHTMLFromSteps:@[stepViewController.step] andResult:taskViewController.result]];
         UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
         renderer.headerHeight = 25;
         renderer.footerHeight = 25;
@@ -3482,7 +3482,7 @@ BOOL toggleLearnMore = false;
     }
 }
 
-- (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
+- (BOOL)htmlWriter:(ORKHTMLWriter *)htmlWriter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
     return YES;
 }
 

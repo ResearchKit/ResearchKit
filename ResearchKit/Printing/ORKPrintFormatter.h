@@ -29,48 +29,14 @@
  */
 
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKHTMLPrintingTemplate.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_OPTIONS(NSUInteger, ORKPrintFormatterOptions) {
-    ORKPrintFormatterOptionIncludeChoices = 1 << 0,
-    ORKPrintFormatterOptionIncludeTimestamp = 1 << 1
-};
-
-@class ORKHTMLPrintFormatter;
-
-ORK_AVAILABLE_DECL
-@protocol ORKHTMLPrintFormatterDelegate <NSObject>
-
-@optional
-- (ORKPrintFormatterOptions)printFormatter:(ORKHTMLPrintFormatter *)printFormatter optionsForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
-
-- (BOOL)printFormatter:(ORKHTMLPrintFormatter *)printFormatter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result;
-
-- (NSString *)printFormatter:(ORKHTMLPrintFormatter *)printFormatter htmlContentForStep:(ORKStep *)step withResult:(ORKStepResult *)result;
-@end
-
 ORK_CLASS_AVAILABLE
 @interface ORKHTMLPrintFormatter : UIMarkupTextPrintFormatter
-
-@property ORKPrintFormatterOptions options;
-
-@property (nonatomic, weak, nullable) id<ORKHTMLPrintFormatterDelegate> delegate;
-
-@property (nonatomic, nullable) NSString *styleSheetContent;
-
-@property (nonatomic, nullable) ORKHTMLPrintingTemplate *template;
-
-- (instancetype)init;
-
-- (void)setSteps:(NSArray<ORKStep *> *)steps withResult:(nullable id<ORKTaskResultSource>)result;
 
 @end
 

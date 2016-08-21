@@ -88,4 +88,7 @@
 #import "ORKLineGraphChartView.h"
 #import "ORKPieChartView.h"
 
+#import "ORKHTMLPrintingTemplate.h"
 #import "ORKPrintFormatter.h"
+#import "ORKPDFWriter.h"
+#import "ORKHTMLWriter.h"
