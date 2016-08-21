@@ -160,6 +160,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
     ORK_ENCODE_CGPOINT(aCoder, location);
     ORK_ENCODE_ENUM(aCoder, buttonIdentifier);
 
@@ -168,6 +169,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, duration);
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_CGPOINT(aDecoder, location);
         ORK_DECODE_ENUM(aDecoder, buttonIdentifier);
@@ -183,6 +185,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     __typeof(self) castObject = object;
     
     return ((self.timestamp == castObject.timestamp) &&
+            (self.duration == castObject.duration) &&
             CGPointEqualToPoint(self.location, castObject.location) &&
             (self.buttonIdentifier == castObject.buttonIdentifier));
 }
@@ -190,13 +193,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTappingSample *sample = [[[self class] allocWithZone:zone] init];
     sample.timestamp = self.timestamp;
+    sample.duration = self.duration;
     sample.location = self.location;
     sample.buttonIdentifier = self.buttonIdentifier;
     return sample;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, self.duration, NSStringFromCGPoint(self.location)];
 }
 
 @end
