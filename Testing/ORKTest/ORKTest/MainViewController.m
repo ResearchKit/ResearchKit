@@ -3476,7 +3476,7 @@ BOOL toggleLearnMore = false;
         controller.printPageRenderer = renderer;
         UIPrintInfo *printInfo = [UIPrintInfo printInfo];
         printInfo.outputType = UIPrintInfoOutputGeneral;
-        printInfo.jobName = @"ResearchKit printing test 2";
+        printInfo.jobName = @"ResearchKit printing test";
         controller.printInfo = printInfo;
         [controller presentAnimated:YES completionHandler:nil];
     }
