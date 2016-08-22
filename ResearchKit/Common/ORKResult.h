@@ -256,6 +256,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign, getter=isPasscodeSaved) BOOL passcodeSaved;
 
+/**
+ A boolean that indicates if the user has enabled/disabled TouchID
+ */
+@property (nonatomic, assign, getter=isTouchIdEnabled) BOOL touchIdEnabled;
+
 @end
 
 
