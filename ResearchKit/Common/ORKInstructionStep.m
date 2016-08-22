@@ -40,6 +40,13 @@
 
 @implementation ORKInstructionStep
 
+- (void)setAuxiliaryImage:(UIImage *)auxiliaryImage {
+    _auxiliaryImage = auxiliaryImage;
+    if (auxiliaryImage) {
+        self.shouldTintImages = YES;
+    }
+}
+
 + (Class)stepViewControllerClass {
     return [ORKInstructionStepViewController class];
 }

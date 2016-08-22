@@ -67,6 +67,7 @@ DefineStringKey(SelectionSurveyTaskIdentifier);
 
 DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
+DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
@@ -392,6 +393,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Instantiate Custom VC",
                            @"Table Step",
                            @"Signature Step",
+                           @"Auxillary Image",
                            ],
                        ];
 }
@@ -631,6 +633,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                           activeTaskOptions:0
                                                 handOptions:ORKPredefinedTaskHandOptionRight
                                                     options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
+        return [self makeAuxillaryImageTask];
     }
 
     return nil;
@@ -4032,6 +4036,24 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [steps addObject:stepLast];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+}
+
+#pragma mark - Auxillary Image
+
+- (IBAction)auxillaryImageButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:AuxillaryImageTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeAuxillaryImageTask {
+
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxillaryImageTaskIdentifier];
+    step.title = @"Title";
+    step.text = @"This is description text.";
+    step.detailText = @"This is detail text.";
+    step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
 }
 
 
