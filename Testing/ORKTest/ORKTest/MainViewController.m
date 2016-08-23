@@ -100,7 +100,6 @@ DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
 DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
-
 DefineStringKey(VideoInstructionStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView

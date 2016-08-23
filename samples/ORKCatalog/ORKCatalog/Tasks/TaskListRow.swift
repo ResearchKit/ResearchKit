@@ -160,7 +160,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TwoFingerTappingInterval,
                     .WalkBackAndForth,
                 ]),
-            TaskListRowSection(title: "Video Instruction", rows:
+            TaskListRowSection(title: "Miscellaneous", rows:
                 [
                     .VideoInstruction,
                 ]),
