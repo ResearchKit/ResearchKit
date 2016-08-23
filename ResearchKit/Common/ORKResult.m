@@ -2177,3 +2177,47 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
+@implementation ORKVideoInstructionStepResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFloat:self.playbackStoppedTime forKey:@"playbackStoppedTime"];
+    ORK_ENCODE_BOOL(aCoder, playbackCompleted);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.playbackStoppedTime = [aDecoder decodeFloatForKey:@"playbackStoppedTime"];
+        ORK_DECODE_BOOL(aDecoder, playbackStoppedTime);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSNumber *playbackStoppedTime = [NSNumber numberWithFloat:self.playbackStoppedTime];
+    return super.hash ^ [playbackStoppedTime hash] ^ self.playbackCompleted;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.playbackStoppedTime == castObject.playbackStoppedTime &&
+            self.playbackCompleted == castObject.playbackCompleted);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKVideoInstructionStepResult *result = [super copyWithZone:zone];
+    result->_playbackStoppedTime = self.playbackStoppedTime;
+    result->_playbackCompleted = self.playbackCompleted;
+    return result;
+}
+
+@end

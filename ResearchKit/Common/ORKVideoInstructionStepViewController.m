@@ -36,8 +36,33 @@
 #import <AVKit/AVKit.h>
 #import "ORKHelpers_Internal.h"
 
+@interface ORKRateObservedPlayer : AVPlayer
 
-@implementation ORKVideoInstructionStepViewController
+@end
+
+@implementation ORKRateObservedPlayer {
+    id _observer;
+}
+
+- (instancetype)initWithPlayerItem:(AVPlayerItem *)item andObserver:(id)observer {
+    self = [super initWithPlayerItem:item];
+    if (self) {
+        _observer = observer;
+        [self addObserver:_observer forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [self removeObserver:_observer forKeyPath:@"rate"];
+}
+
+@end
+
+@implementation ORKVideoInstructionStepViewController {
+    Float64 _playbackStoppedTime;
+    BOOL _playbackCompleted;
+}
 
 - (ORKVideoInstructionStep *)videoInstructionStep {
     return (ORKVideoInstructionStep *)self.step;
@@ -46,6 +71,8 @@
 - (void)stepDidChange {
     [self setThumbnailImageFromAsset];
     [super stepDidChange];
+    _playbackStoppedTime = NAN;
+    _playbackCompleted = NO;
     if (self.step && [self isViewLoaded] && [self videoInstructionStep].image) {
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
         [tapRecognizer addTarget:self action:@selector(play)];
@@ -87,7 +114,7 @@
 - (void)play {
     AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
     AVPlayerItem* playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    AVPlayer* player = [AVPlayer playerWithPlayerItem:playerItem];
+    ORKRateObservedPlayer* player = [[ORKRateObservedPlayer alloc] initWithPlayerItem:playerItem andObserver:self];
     player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
     AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
     playerViewController.player = player;
@@ -97,6 +124,30 @@
             [playerViewController.player play];
         }
     }];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (keyPath == @"rate") {
+        AVPlayer *player = (AVPlayer*)object;
+        if (player.rate == 0) {
+            _playbackStoppedTime = CMTimeGetSeconds([player.currentItem currentTime]);
+            if (CMTimeGetSeconds(player.currentItem.duration) == _playbackStoppedTime) {
+                _playbackCompleted = YES;
+            }
+        }
+    }
+}
+
+- (ORKStepResult *)result {
+    ORKStepResult *parentResult = [super result];
+    if (parentResult) {
+        ORKVideoInstructionStepResult *childResult = [[ORKVideoInstructionStepResult alloc]
+                                                      initWithIdentifier:self.step.identifier];
+        childResult.playbackStoppedTime = _playbackStoppedTime;
+        childResult.playbackCompleted = _playbackCompleted;
+        parentResult.results = @[childResult];
+    }
+    return parentResult;
 }
 
 @end
