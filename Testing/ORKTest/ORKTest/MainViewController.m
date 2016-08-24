@@ -371,6 +371,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        @[ // Review Step
                            @"Embedded Review Task",
                            @"Standalone Review Task",
+                           @"Print Review Task Results"
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -3246,6 +3247,28 @@ BOOL toggleLearnMore = false;
 - (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
     if (_embeddedReviewTaskResult != nil) {
         [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
+    } else {
+        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
+    }
+}
+
+- (IBAction)printReviewTaskResultsButtonTapped:(id)sender {
+    if (_embeddedReviewTaskResult != nil) {
+        ORKHTMLWriter *writer = [[ORKHTMLWriter alloc] init];
+        writer.delegate = self;
+        writer.options = ORKHTMLWriterOptionIncludeChoices | ORKHTMLWriterOptionIncludeTimestamp;
+        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithMarkupText:[writer writeHTMLFromSteps:[self stepsForReviewTasks] andResult:_embeddedReviewTaskResult]];
+        UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
+        renderer.headerHeight = 25;
+        renderer.footerHeight = 25;
+        [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
+        UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+        controller.printPageRenderer = renderer;
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = @"ResearchKit printing test";
+        controller.printInfo = printInfo;
+        [controller presentAnimated:YES completionHandler:nil];
     } else {
         [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
     }
