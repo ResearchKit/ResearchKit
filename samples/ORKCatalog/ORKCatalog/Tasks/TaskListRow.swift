@@ -97,6 +97,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TowerOfHanoi
     case TwoFingerTappingInterval
     case WalkBackAndForth
+    case TremorTest
     
     class TaskListRowSection {
         var title: String
@@ -157,6 +158,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
                     .WalkBackAndForth,
+                    .TremorTest
                 ]),
         ]}
     
@@ -268,6 +270,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return NSLocalizedString("Walk Back and Forth", comment: "")
+            
+        case .TremorTest:
+            return NSLocalizedString("Tremor Test", comment: "")
         }
     }
     
@@ -419,6 +424,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
         case WalkBackAndForthTask
+        case TremorTestTask
     }
     
     // MARK: Properties
@@ -531,6 +537,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .WalkBackAndForth:
             return walkBackAndForthTask
             
+        case .TremorTest:
+            return tremorTestTask
         }
     }
 
@@ -1224,6 +1232,16 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a walk back-and-forth task
     private var walkBackAndForthTask: ORKTask {
         return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
+    }
+    
+    /// This task presents the Tremor Test pre-defined active task.
+    private var tremorTestTask: ORKTask {
+        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask),
+                                                           intendedUseDescription: exampleDescription,
+                                                           activeStepDuration: 10,
+                                                           activeTaskOptions: [],
+                                                           handOptions: [.Both],
+                                                           options: [])
     }
 
     // MARK: Consent Document Creation Convenience
