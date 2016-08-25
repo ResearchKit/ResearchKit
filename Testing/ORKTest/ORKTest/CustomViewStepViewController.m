@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,63 +28,38 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "CustomViewStepViewController.h"
 
-#import "ORKTypes.h"
+@implementation CustomViewStep
 
-#import "ORKStep.h"
-#import "ORKActiveStep.h"
-#import "ORKConsentReviewStep.h"
-#import "ORKConsentSharingStep.h"
-#import "ORKFormStep.h"
-#import "ORKImageCaptureStep.h"
-#import "ORKInstructionStep.h"
-#import "ORKLoginStep.h"
-#import "ORKPasscodeStep.h"
-#import "ORKQuestionStep.h"
-#import "ORKRegistrationStep.h"
-#import "ORKReviewStep.h"
-#import "ORKSignatureStep.h"
-#import "ORKTableStep.h"
-#import "ORKVerificationStep.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKWaitStep.h"
+- (Class)stepViewControllerClass {
+    return [CustomViewStepViewController class];
+}
 
-#import "ORKTask.h"
-#import "ORKOrderedTask.h"
-#import "ORKNavigableOrderedTask.h"
-#import "ORKStepNavigationRule.h"
+@end
 
-#import "ORKAnswerFormat.h"
-#import "ORKHealthAnswerFormat.h"
+@interface CustomViewStepViewController ()
 
-#import "ORKResult.h"
-#import "ORKResultPredicate.h"
+@property (nonatomic) UIActivityIndicatorView *activityView;
 
-#import "ORKTextButton.h"
-#import "ORKBorderedButton.h"
-#import "ORKContinueButton.h"
+@end
 
-#import "ORKStepViewController.h"
-#import "ORKActiveStepViewController.h"
-#import "ORKFormStepViewController.h"
-#import "ORKInstructionStepViewController.h"
-#import "ORKLoginStepViewController.h"
-#import "ORKPasscodeViewController.h"
-#import "ORKTableStepViewController.h"
-#import "ORKTaskViewController.h"
-#import "ORKVerificationStepViewController.h"
-#import "ORKWaitStepViewController.h"
+@implementation CustomViewStepViewController
 
-#import "ORKRecorder.h"
+- (UIView *)buildCustomView {
+    _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityView.hidesWhenStopped = NO;
+    return _activityView;
+}
 
-#import "ORKConsentDocument.h"
-#import "ORKConsentSection.h"
-#import "ORKConsentSignature.h"
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.activityView startAnimating];
+}
 
-#import "ORKKeychainWrapper.h"
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.activityView stopAnimating];
+}
 
-#import "ORKChartTypes.h"
-#import "ORKBarGraphChartView.h"
-#import "ORKDiscreteGraphChartView.h"
-#import "ORKLineGraphChartView.h"
-#import "ORKPieChartView.h"
+@end

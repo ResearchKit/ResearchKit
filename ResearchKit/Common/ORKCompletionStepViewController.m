@@ -145,11 +145,12 @@ static const CGFloat TickViewSize = 122;
 - (void)stepDidChange {
     [super stepDidChange];
     
-    _completionStepView = [ORKCompletionStepView new];
-    
-    self.stepView.stepView = _completionStepView;
-    
     self.stepView.continueSkipContainer.continueButtonItem = nil;
+}
+
+- (nullable UIView *)buildCustomView {
+    _completionStepView = [ORKCompletionStepView new];
+    return _completionStepView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

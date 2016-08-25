@@ -47,6 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKInstructionStepViewController : ORKStepViewController
 
+/**
+ The Custom View is a view that can optionally replace the `UIImageView` used in the `ORKInstructionStepViewController` 
+ by default, if non-nil.
+ */
+- (nullable UIView *)buildCustomView;
+
 @end
 
 NS_ASSUME_NONNULL_END

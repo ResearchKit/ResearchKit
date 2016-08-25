@@ -303,7 +303,7 @@
 		86C40D3E1A8D7C5C00081FAC /* ORKImageChoiceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B911A8D7C5C00081FAC /* ORKImageChoiceLabel.m */; };
 		86C40D401A8D7C5C00081FAC /* ORKInstructionStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B921A8D7C5C00081FAC /* ORKInstructionStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40D421A8D7C5C00081FAC /* ORKInstructionStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B931A8D7C5C00081FAC /* ORKInstructionStep.m */; };
-		86C40D441A8D7C5C00081FAC /* ORKInstructionStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B941A8D7C5C00081FAC /* ORKInstructionStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		86C40D441A8D7C5C00081FAC /* ORKInstructionStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B941A8D7C5C00081FAC /* ORKInstructionStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40D461A8D7C5C00081FAC /* ORKInstructionStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B951A8D7C5C00081FAC /* ORKInstructionStepViewController.m */; };
 		86C40D481A8D7C5C00081FAC /* ORKInstructionStepViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B961A8D7C5C00081FAC /* ORKInstructionStepViewController_Internal.h */; };
 		86C40D4A1A8D7C5C00081FAC /* ORKLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B971A8D7C5C00081FAC /* ORKLabel.h */; };

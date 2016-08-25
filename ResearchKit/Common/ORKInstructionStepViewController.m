@@ -68,7 +68,17 @@
         self.stepView.continueSkipContainer.hidden = self.isBeingReviewed;
         
         self.stepView.instructionStep = [self instructionStep];
+        
+        // Replace the standard image view with a custom view if there is one
+        UIView *customView = [self buildCustomView];
+        if (customView != nil) {
+            self.stepView.stepView = customView;
+        }
     }
+}
+
+- (nullable UIView *)buildCustomView {
+    return nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

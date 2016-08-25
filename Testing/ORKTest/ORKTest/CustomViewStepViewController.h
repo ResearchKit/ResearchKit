@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,63 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit.h>
 
-#import "ORKTypes.h"
+@interface CustomViewStep : ORKInstructionStep
 
-#import "ORKStep.h"
-#import "ORKActiveStep.h"
-#import "ORKConsentReviewStep.h"
-#import "ORKConsentSharingStep.h"
-#import "ORKFormStep.h"
-#import "ORKImageCaptureStep.h"
-#import "ORKInstructionStep.h"
-#import "ORKLoginStep.h"
-#import "ORKPasscodeStep.h"
-#import "ORKQuestionStep.h"
-#import "ORKRegistrationStep.h"
-#import "ORKReviewStep.h"
-#import "ORKSignatureStep.h"
-#import "ORKTableStep.h"
-#import "ORKVerificationStep.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKWaitStep.h"
+@end
 
-#import "ORKTask.h"
-#import "ORKOrderedTask.h"
-#import "ORKNavigableOrderedTask.h"
-#import "ORKStepNavigationRule.h"
+@interface CustomViewStepViewController : ORKInstructionStepViewController
 
-#import "ORKAnswerFormat.h"
-#import "ORKHealthAnswerFormat.h"
-
-#import "ORKResult.h"
-#import "ORKResultPredicate.h"
-
-#import "ORKTextButton.h"
-#import "ORKBorderedButton.h"
-#import "ORKContinueButton.h"
-
-#import "ORKStepViewController.h"
-#import "ORKActiveStepViewController.h"
-#import "ORKFormStepViewController.h"
-#import "ORKInstructionStepViewController.h"
-#import "ORKLoginStepViewController.h"
-#import "ORKPasscodeViewController.h"
-#import "ORKTableStepViewController.h"
-#import "ORKTaskViewController.h"
-#import "ORKVerificationStepViewController.h"
-#import "ORKWaitStepViewController.h"
-
-#import "ORKRecorder.h"
-
-#import "ORKConsentDocument.h"
-#import "ORKConsentSection.h"
-#import "ORKConsentSignature.h"
-
-#import "ORKKeychainWrapper.h"
-
-#import "ORKChartTypes.h"
-#import "ORKBarGraphChartView.h"
-#import "ORKDiscreteGraphChartView.h"
-#import "ORKLineGraphChartView.h"
-#import "ORKPieChartView.h"
+@end
