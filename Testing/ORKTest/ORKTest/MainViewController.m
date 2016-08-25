@@ -38,6 +38,7 @@
 #import "DynamicTask.h"
 #import "ORKTest-Swift.h"
 #import "DragonPokerStep.h"
+#import "CustomViewStepViewController.h"
 
 @import ResearchKit;
 
@@ -68,6 +69,7 @@ DefineStringKey(SelectionSurveyTaskIdentifier);
 DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(AuxillaryImageTaskIdentifier);
+DefineStringKey(CustomViewTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
@@ -394,6 +396,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Table Step",
                            @"Signature Step",
                            @"Auxillary Image",
+                           @"Custom View",
                            ],
                        ];
 }
@@ -635,6 +638,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                     options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
         return [self makeAuxillaryImageTask];
+    } else if ([identifier isEqualToString:CustomViewTaskIdentifier]) {
+        return [self makeCustomViewTask];
     }
 
     return nil;
@@ -3608,7 +3613,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
     }
-
 }
 
 /*
@@ -4070,7 +4074,23 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
     step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:AuxillaryImageTaskIdentifier steps:@[step]];
+}
+
+#pragma mark - Custom View
+
+- (IBAction)customViewButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CustomViewTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeCustomViewTask {
+    
+    CustomViewStep *step = [[CustomViewStep alloc] initWithIdentifier:CustomViewTaskIdentifier];
+    step.title = @"Example Custom View";
+    step.text = @"This is description text.";
+    step.detailText = @"This is detail text.";
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:CustomViewTaskIdentifier steps:@[step]];
 }
 
 

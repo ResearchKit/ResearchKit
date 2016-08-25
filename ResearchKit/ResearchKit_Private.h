@@ -72,7 +72,6 @@
 #import "ORKHolePegTestPlaceStepViewController.h"
 #import "ORKHolePegTestRemoveStepViewController.h"
 #import "ORKImageCaptureStepViewController.h"
-#import "ORKInstructionStepViewController.h"
 #import "ORKPSATStepViewController.h"
 #import "ORKQuestionStepViewController.h"
 #import "ORKReviewStepViewController.h"
