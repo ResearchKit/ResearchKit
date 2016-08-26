@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIImageView *instructionImageView;
 
+@property (nonatomic, strong, nullable) UIImageView *auxiliaryInstructionImageView;
+
 @end
 
 NS_ASSUME_NONNULL_END

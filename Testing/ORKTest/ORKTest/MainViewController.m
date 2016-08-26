@@ -67,6 +67,7 @@ DefineStringKey(SelectionSurveyTaskIdentifier);
 
 DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
+DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
@@ -77,6 +78,8 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(TremorTaskIdentifier);
+DefineStringKey(TremorRightHandTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
@@ -361,7 +364,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
-                           @"Walk And Turn Task"
+                           @"Walk And Turn Task",
+                           @"Hand Tremor Task",
+                           @"Right Hand Tremor Task",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -389,6 +394,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Instantiate Custom VC",
                            @"Table Step",
                            @"Signature Step",
+                           @"Auxillary Image",
                            @"Page Step",
                            ],
                        ];
@@ -612,6 +618,25 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeTableStepTask];
     } else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
         return [self makeSignatureStepTask];
+    } else if ([identifier isEqualToString:TremorTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight |
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent |
+                ORKTremorActiveTaskOptionExcludeHandToNose
+                                                handOptions:ORKPredefinedTaskHandOptionBoth
+                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TremorRightHandTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorRightHandTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:0
+                                                handOptions:ORKPredefinedTaskHandOptionRight
+                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
+        return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
     }
@@ -2328,6 +2353,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
 }
 
+- (void)handTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorTaskIdentifier];
+}
+
+- (void)rightHandTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
+}
+
 #pragma mark - Dynamic task
 
 /*
@@ -3692,6 +3725,23 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
+/**
+  When a task has completed it calls this method to post the result of the task to the delegate.
+*/
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result {
+    /*
+     Upon creation of a Passcode by a user, the results of their creation
+     are returned by getting it from ORKPasscodeResult in this delegate call.
+     This is triggered upon completion/failure/or cancel
+     */
+    ORKStepResult *stepResult = (ORKStepResult *)[[result results] firstObject];
+    if ([[[stepResult results] firstObject] isKindOfClass:[ORKPasscodeResult class]]) {
+        ORKPasscodeResult *passcodeResult = (ORKPasscodeResult *)[[stepResult results] firstObject];
+        NSLog(@"passcode saved: %d , Touch ID Enabled: %d", passcodeResult.passcodeSaved, passcodeResult.touchIdEnabled);
+
+    }
+}
+
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
     if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
         [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
@@ -4007,6 +4057,24 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [steps addObject:stepLast];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+}
+
+#pragma mark - Auxillary Image
+
+- (IBAction)auxillaryImageButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:AuxillaryImageTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeAuxillaryImageTask {
+
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxillaryImageTaskIdentifier];
+    step.title = @"Title";
+    step.text = @"This is description text.";
+    step.detailText = @"This is detail text.";
+    step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
 }
 
 #pragma mark - Page Step

@@ -161,6 +161,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
     ORK_ENCODE_CGPOINT(aCoder, location);
     ORK_ENCODE_ENUM(aCoder, buttonIdentifier);
 
@@ -169,6 +170,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, duration);
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_CGPOINT(aDecoder, location);
         ORK_DECODE_ENUM(aDecoder, buttonIdentifier);
@@ -184,6 +186,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     __typeof(self) castObject = object;
     
     return ((self.timestamp == castObject.timestamp) &&
+            (self.duration == castObject.duration) &&
             CGPointEqualToPoint(self.location, castObject.location) &&
             (self.buttonIdentifier == castObject.buttonIdentifier));
 }
@@ -191,13 +194,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTappingSample *sample = [[[self class] allocWithZone:zone] init];
     sample.timestamp = self.timestamp;
+    sample.duration = self.duration;
     sample.location = self.location;
     sample.buttonIdentifier = self.buttonIdentifier;
     return sample;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, self.duration, NSStringFromCGPoint(self.location)];
 }
 
 @end
@@ -212,12 +216,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, passcodeSaved);
+    ORK_ENCODE_BOOL(aCoder, touchIdEnabled);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_BOOL(aDecoder, passcodeSaved);
+        ORK_DECODE_BOOL(aDecoder, touchIdEnabled);
     }
     return self;
 }
@@ -227,17 +233,19 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
     __typeof(self) castObject = object;
     return (isParentSame &&
-            self.isPasscodeSaved == castObject.isPasscodeSaved);
+            self.isPasscodeSaved == castObject.isPasscodeSaved &&
+            self.isTouchIdEnabled == castObject.isTouchIdEnabled);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPasscodeResult *result = [super copyWithZone:zone];
     result.passcodeSaved = self.isPasscodeSaved;
+    result.touchIdEnabled = self.isTouchIdEnabled;
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; passcodeSaved: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; passcodeSaved: %d touchIDEnabled: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.isTouchIdEnabled, self.descriptionSuffix];
 }
 
 @end
