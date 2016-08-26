@@ -270,6 +270,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
     passcodeResult.passcodeSaved = _isPasscodeSaved;
+    passcodeResult.touchIdEnabled = _isTouchIdAuthenticated;
     passcodeResult.startDate = stepResult.startDate;
     passcodeResult.endDate = now;
     

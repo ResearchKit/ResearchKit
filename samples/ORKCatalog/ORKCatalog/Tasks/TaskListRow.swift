@@ -97,6 +97,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TowerOfHanoi
     case TwoFingerTappingInterval
     case WalkBackAndForth
+    case TremorTest
     
     case MoodSurvey
     
@@ -160,6 +161,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
                     .WalkBackAndForth,
+                    .TremorTest
                 ]),
         ]}
     
@@ -271,6 +273,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return NSLocalizedString("Walk Back and Forth", comment: "")
+            
+        case .TremorTest:
+            return NSLocalizedString("Tremor Test", comment: "")
             
         case .MoodSurvey:
             return NSLocalizedString("Mood Survey", comment: "")
@@ -425,6 +430,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
         case WalkBackAndForthTask
+        case TremorTestTask
 
         // Surveys
         case MoodSurvey
@@ -540,6 +546,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .WalkBackAndForth:
             return walkBackAndForthTask
             
+        case .TremorTest:
+            return tremorTestTask
+
         case .MoodSurvey:
             return moodSurveyTask
         }
@@ -1237,13 +1246,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
     }
     
-    /// This task presents the Mood Survey
-    private var moodSurveyTask: ORKTask {
-        return ORKOrderedTask.moodSurveyWithIdentifier(String(Identifier.MoodSurvey),
-                                                       intendedUseDescription: exampleDescription,
-                                                       frequency: .Daily,
-                                                       customQuestionText: "How do you feel about jumping jacks?",
-                                                       options: [])
+    /// This task presents the Tremor Test pre-defined active task.
+    private var tremorTestTask: ORKTask {
+        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask),
+                                                           intendedUseDescription: exampleDescription,
+                                                           activeStepDuration: 10,
+                                                           activeTaskOptions: [],
+                                                           handOptions: [.Both],
+                                                           options: [])
     }
 
     // MARK: Consent Document Creation Convenience

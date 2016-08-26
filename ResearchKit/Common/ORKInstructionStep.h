@@ -63,6 +63,16 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) UIImage *image;
 
+/**
+ An image that provides visual context for the instruction that will allow for showing
+ a two-part composite image where the `image` is tinted and the `auxiliaryImage` is 
+ shown with light grey.
+ 
+ The image is displayed with the same frame as the `image` so both the `auxiliaryImage`
+ and `image` should have transparently to allow for overlay.
+ */
+@property (nonatomic, copy, nullable) UIImage *auxiliaryImage;
+
 @end
 
 NS_ASSUME_NONNULL_END
