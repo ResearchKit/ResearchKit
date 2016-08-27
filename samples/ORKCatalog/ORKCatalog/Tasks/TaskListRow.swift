@@ -97,6 +97,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TowerOfHanoi
     case TwoFingerTappingInterval
     case WalkBackAndForth
+    case TremorTest
     
     case VideoInstruction
     
@@ -159,6 +160,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
                     .WalkBackAndForth,
+                    .TremorTest
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
@@ -1239,6 +1241,16 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a walk back-and-forth task
     private var walkBackAndForthTask: ORKTask {
         return ORKOrderedTask.walkBackAndForthTaskWithIdentifier(String(Identifier.WalkBackAndForthTask), intendedUseDescription: exampleDescription, walkDuration: 30, restDuration: 30, options: [])
+    }
+    
+    /// This task presents the Tremor Test pre-defined active task.
+    private var tremorTestTask: ORKTask {
+        return ORKOrderedTask.tremorTestTaskWithIdentifier(String(Identifier.TremorTestTask),
+                                                           intendedUseDescription: exampleDescription,
+                                                           activeStepDuration: 10,
+                                                           activeTaskOptions: [],
+                                                           handOptions: [.Both],
+                                                           options: [])
     }
 
     /// This task presents a video instruction step

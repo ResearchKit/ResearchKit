@@ -137,7 +137,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
         guard let healthStore = healthStore, quantityType = HKQuantityType.quantityTypeForIdentifier(identifier) else { return }
         
         // Get the most recent entry from the health store.
-        healthStore.mostRecentQauntitySampleOfType(quantityType) { quantity, _ in
+        healthStore.mostRecentQuantitySampleOfType(quantityType) { quantity, _ in
             guard let quantity = quantity else { return }
             
             // Update the cell on the main thread.
