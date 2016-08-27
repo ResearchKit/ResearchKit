@@ -2190,7 +2190,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.playbackStoppedTime = [aDecoder decodeFloatForKey:@"playbackStoppedTime"];
-        ORK_DECODE_BOOL(aDecoder, playbackStoppedTime);
+        ORK_DECODE_BOOL(aDecoder, playbackCompleted);
     }
     return self;
 }
