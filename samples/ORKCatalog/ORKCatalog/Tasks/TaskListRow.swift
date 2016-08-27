@@ -276,6 +276,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return NSLocalizedString("Walk Back and Forth", comment: "")
+            
+        case .TremorTest:
+            return NSLocalizedString("Tremor Test", comment: "")
         
         case .VideoInstruction:
             return NSLocalizedString("Video Instruction Task", comment: "")
@@ -430,6 +433,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
         case WalkBackAndForthTask
+        case TremorTestTask
         
         // Video Instruction task.
         case VideoInstructionTask
@@ -545,6 +549,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .WalkBackAndForth:
             return walkBackAndForthTask
+         
+            
+        case .TremorTest:
+            return tremorTestTask
          
         case .VideoInstruction:
             return videoInstruction
