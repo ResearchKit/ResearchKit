@@ -243,7 +243,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKHTMLWriterDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -376,6 +376,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        @[ // Review Step
                            @"Embedded Review Task",
                            @"Standalone Review Task",
+                           @"Print Review Task Results"
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -394,6 +395,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Table Step",
                            @"Signature Step",
                            @"Auxillary Image",
+                           @"Toggle Learn More"
                            ],
                        ];
 }
@@ -636,7 +638,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
         return [self makeAuxillaryImageTask];
     }
-
+    
     return nil;
 }
 
@@ -2967,6 +2969,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [superview addSubview:self.view];
 }
 
+BOOL toggleLearnMore = false;
+
+- (void)toggleLearnMoreButtonTapped:(id)sender {
+    toggleLearnMore = !toggleLearnMore;
+}
+
 #pragma mark - Navigable Loop Task
 
 - (id<ORKTask>)makeNavigableLoopTask {
@@ -3276,6 +3284,28 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 }
 
+- (IBAction)printReviewTaskResultsButtonTapped:(id)sender {
+    if (_embeddedReviewTaskResult != nil) {
+        ORKHTMLWriter *writer = [[ORKHTMLWriter alloc] init];
+        writer.delegate = self;
+        writer.options = ORKHTMLWriterOptionIncludeChoices | ORKHTMLWriterOptionIncludeTimestamp;
+        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithMarkupText:[writer writeHTMLFromSteps:[self stepsForReviewTasks] andResult:_embeddedReviewTaskResult]];
+        UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
+        renderer.headerHeight = 25;
+        renderer.footerHeight = 25;
+        [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
+        UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+        controller.printPageRenderer = renderer;
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = @"ResearchKit printing test";
+        controller.printInfo = printInfo;
+        [controller presentAnimated:YES completionHandler:nil];
+    } else {
+        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
+    }
+}
+
 #pragma mark - Helpers
 
 /*
@@ -3477,10 +3507,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     NSString *task_identifier = taskViewController.task.identifier;
-
-    return ([step isKindOfClass:[ORKInstructionStep class]]
+    return toggleLearnMore ? YES : ([step isKindOfClass:[ORKInstructionStep class]]
             && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
+
 
 /*
  When the user taps on "Learn More" on a step, respond on this delegate callback.
@@ -3488,6 +3518,27 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
+    if (toggleLearnMore) {
+        ORKHTMLWriter *writer = [[ORKHTMLWriter alloc] init];
+        writer.delegate = self;
+        writer.options = ORKHTMLWriterOptionIncludeChoices | ORKHTMLWriterOptionIncludeTimestamp;
+        ORKHTMLPrintFormatter *printFormatter = [[ORKHTMLPrintFormatter alloc] initWithMarkupText:[writer writeHTMLFromSteps:@[stepViewController.step] andResult:taskViewController.result]];
+        UIPrintPageRenderer *renderer = [[UIPrintPageRenderer alloc] init];
+        renderer.headerHeight = 25;
+        renderer.footerHeight = 25;
+        [renderer addPrintFormatter:printFormatter startingAtPageAtIndex:0];
+        UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+        controller.printPageRenderer = renderer;
+        UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+        printInfo.outputType = UIPrintInfoOutputGeneral;
+        printInfo.jobName = @"ResearchKit printing test";
+        controller.printInfo = printInfo;
+        [controller presentAnimated:YES completionHandler:nil];
+    }
+}
+
+- (BOOL)htmlWriter:(ORKHTMLWriter *)htmlWriter shouldFormatStep:(ORKStep *)step withResult:(ORKStepResult *)result {
+    return YES;
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
@@ -3608,7 +3659,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
     }
-
+    if (toggleLearnMore) {
+        stepViewController.learnMoreButtonTitle = @"Print step";
+    }
 }
 
 /*

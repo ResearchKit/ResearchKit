@@ -856,6 +856,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) ORKQuestionType questionType;
 
+/**
+ A Boolean value indicating whether the result of a question step is empty.
+ 
+ @return YES if no answer has been given, otherwise NO.
+ */
+- (BOOL) isAnswerEmpty;
+
 @end
 
 

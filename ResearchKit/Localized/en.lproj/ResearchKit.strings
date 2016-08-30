@@ -423,6 +423,9 @@
 /* Charts */
 "CHART_NO_DATA_TEXT" = "No Data";
 
+/* Printing */
+"PRINT_TIMESTAMP" = "Started: %1$@, Completed: %2$@";
+
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
 

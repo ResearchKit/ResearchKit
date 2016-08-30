@@ -1,7 +1,6 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Alex Basson. All rights reserved.
-
+ Copyright (c) 2016, Oliver Schaefer
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -30,25 +29,53 @@
  */
 
 
-#import "ORKConsentDocument.h"
+#import "ORKHTMLPrintingTemplate.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKHTMLPrintingTemplate
 
-@class ORKPDFWriter;
-@class ORKConsentSectionFormatter;
-@class ORKConsentSignatureFormatter;
+- (NSString *)html {
+    return @"<!doctype html><html><head><title>html</title><meta charset=\"utf-8\"></head><style>%@</style><body>%@</body></html>";
+}
 
-@interface ORKConsentDocument ()
+- (NSString *)step {
+    return @"<div class=\"stepSeparator\">%@%@%@</div>";
+}
 
-@property (nonatomic, strong, nullable) ORKPDFWriter *writer;
-@property (nonatomic, strong, nullable) ORKConsentSectionFormatter *sectionFormatter;
-@property (nonatomic, strong, nullable) ORKConsentSignatureFormatter *signatureFormatter;
+- (NSString *)stepHeader {
+    return @"<p class=\"stepTitle\">%@</p><p id=\"stepText\">%@</p>";
+}
 
-+ (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile;
+- (NSString *)formStep {
+    return @"<p class=\"formStepTitle\">%@</p>";
+}
 
-- (NSString *)mobileHTMLWithTitle:(nullable NSString *)title detail:(nullable NSString *)detail;
+- (NSString *)formStepAnswer {
+    return @"<p class=\"sectionTitle\">%@</p><table id=\"answerTable\">%@</table>";
+}
+
+- (NSString *)questionStepAnswer {
+    return @"<table class=\"answerTable\">%@</table>";
+}
+
+- (NSString *)stepAnswer {
+    return @"<tr class=\"answerRow\"><td><div class=\"answerColumn\"/>%@<td/></tr>";
+}
+
+- (NSString *)stepSelectedAnswer {
+    return @"<tr class=\"selectedAnswerRow\"><td><div class=\"selectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"selectedAnswerSecondaryColumn\">%@</div></td></tr>";
+}
+
+- (NSString *)stepUnselectedAnswer {
+    return @"<tr class=\"unselectedAnswerRow\"><td><div class=\"unselectedAnswerPrimaryColumn\"/>%@<td/><td><div class=\"unselectedAnswerSecondaryColumn\">%@</div></td></tr>";
+}
+
+- (NSString *)stepFooter {
+    return @"<p class=\"stepFooter\">%@</p>";
+}
+
+- (NSString *)image {
+    return @"<figure class=\"figure\"><img class=\"image\" height=\"%@\" width=\"%@\" src=\"data:image/png;base64,%@\"/><figcaption>%@</figcaption></figure>";
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

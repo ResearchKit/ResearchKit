@@ -40,7 +40,7 @@
 #import "ORKConsentSectionFormatter.h"
 #import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
-#import "ORKHTMLPDFWriter.h"
+#import "ORKPDFWriter.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKErrors.h"
@@ -53,12 +53,12 @@
 #pragma mark - Initializers
 
 - (instancetype)init {
-    return [self initWithHTMLPDFWriter:[[ORKHTMLPDFWriter alloc] init]
+    return [self initWithPDFWriter:[[ORKPDFWriter alloc] init]
             consentSectionFormatter:[[ORKConsentSectionFormatter alloc] init]
             consentSignatureFormatter:[[ORKConsentSignatureFormatter alloc] init]];
 }
 
-- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
+- (instancetype)initWithPDFWriter:(ORKPDFWriter *)writer
               consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
             consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter{
     if (self = [super init]) {
