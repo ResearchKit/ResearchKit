@@ -938,7 +938,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     NSString *progressLabel = nil;
     if ([self shouldDisplayProgressLabel]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
-        
         if (progress.total > 0) {
             progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
