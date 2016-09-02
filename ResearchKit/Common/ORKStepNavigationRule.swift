@@ -31,8 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 public extension ORKPredicateStepNavigationRule {
-    convenience init(resultPredicatesAndDestinationStepIdentifiers tuples: [ (resultPredicate: Predicate, destinationStepIdentifier: String) ], defaultStepIdentifierOrNil: String? = nil ) {
-        var resultPredicates: [Predicate] = []
+    convenience init(resultPredicatesAndDestinationStepIdentifiers tuples: [ (resultPredicate: NSPredicate, destinationStepIdentifier: String) ], defaultStepIdentifierOrNil: String? = nil ) {
+        var resultPredicates: [NSPredicate] = []
         var destinationStepIdentifiers: [String] = []
         for tuple in tuples {
             resultPredicates.append(tuple.resultPredicate)
