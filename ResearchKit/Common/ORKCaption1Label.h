@@ -29,8 +29,11 @@
  */
 
 
+@import UIKit;
 #import "ORKLabel.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Intro step's first piece details text.
@@ -42,3 +45,4 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -30,11 +30,14 @@
 
 
 #import "ORKLocationRecorder.h"
-#import <CoreLocation/CoreLocation.h>
-#import "CLLocation+ORKJSONDictionary.h"
+
 #import "ORKDataLogger.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
+
+#import "CLLocation+ORKJSONDictionary.h"
+
+#import <CoreLocation/CoreLocation.h>
 
 
 @interface ORKLocationRecorder () <CLLocationManagerDelegate> {
@@ -76,10 +79,10 @@
     [super start];
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }
@@ -94,7 +97,7 @@
     if (!self.locationManager) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
-                                         userInfo:@{@"recorder" : self}];
+                                         userInfo:@{@"recorder": self}];
         [self finishRecordingWithError:error];
         return;
     }

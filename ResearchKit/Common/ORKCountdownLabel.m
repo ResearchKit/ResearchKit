@@ -30,7 +30,8 @@
 
 
 #import "ORKCountdownLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKCountdownLabel ()
@@ -43,6 +44,10 @@
 
 @implementation ORKCountdownLabel {
     NSInteger _currentCountDownValue;
+}
+
++ (UIFont *)defaultFont {
+    return [UIFont systemFontOfSize:65.f weight:UIFontWeightUltraLight];
 }
 
 - (instancetype)init {

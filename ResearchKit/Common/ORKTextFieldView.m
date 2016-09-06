@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -31,8 +31,9 @@
 
 
 #import "ORKTextFieldView.h"
-#import "ORKSkin.h"
+
 #import "ORKAccessibility.h"
+#import "ORKSkin.h"
 
 
 static NSString *const EmptyBulletString = @"\u25CB";
@@ -184,7 +185,7 @@ static NSString *const FilledBulletString = @"\u25CF";
     if (suffix.length == 0) {
         return;
     }
-    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ?: [UIColor ork_midGrayTintColor])];
+    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ? : [UIColor ork_midGrayTintColor])];
     _suffixLabel.text = suffix;
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
@@ -254,15 +255,15 @@ static NSString *const FilledBulletString = @"\u25CF";
         BOOL isEditing = self.isEditing;
         
         UIColor *suffixColor = isEditing ? _unitActiveColor : _unitRegularColor;
-        if (_managedPlaceholder.length > 0) {
-            [self ork_setPlaceholder: (isEditing && _unit.length > 0) ? nil : _managedPlaceholder];
+            if (_managedPlaceholder.length > 0) {
+            [self ork_setPlaceholder:((isEditing && _unit.length > 0) ? nil : _managedPlaceholder)];
             [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
-        } else {
-            if (self.text.length > 0 || isEditing) {
-                [self ork_setPlaceholder:nil];
-                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
             } else {
-                [self ork_setPlaceholder: _unit];
+            if (self.text.length > 0 || isEditing) {
+                    [self ork_setPlaceholder:nil];
+                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
+                } else {
+                    [self ork_setPlaceholder: _unit];
                 [self ork_updateSuffix:nil withColor:suffixColor];
             }
         }

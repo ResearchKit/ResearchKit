@@ -30,15 +30,17 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ORKConsentSignature.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
 
-@class ORKHTMLPDFWriter;
-@class ORKConsentSectionFormatter;
-@class ORKConsentSignatureFormatter;
-@class ORKConsentSection;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKConsentSection;
+@class ORKConsentSectionFormatter;
+@class ORKConsentSignature;
+@class ORKConsentSignatureFormatter;
+@class ORKHTMLPDFWriter;
 
 /**
  The `ORKConsentDocument` class represents the content of an informed consent

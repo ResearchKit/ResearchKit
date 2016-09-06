@@ -30,12 +30,13 @@
 
 
 #import "ORKTableContainerView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKVerticalContainerView.h"
-#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKNavigationContainerView.h"
 #import "ORKStepHeaderView.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // Enable this define to see outlines and colors of all the views laid out at this level.

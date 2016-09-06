@@ -30,8 +30,10 @@
 
 
 #import "ORKPasscodeStep.h"
+
 #import "ORKPasscodeStepViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKPasscodeStep

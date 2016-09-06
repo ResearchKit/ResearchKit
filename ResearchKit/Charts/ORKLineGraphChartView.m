@@ -30,11 +30,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
- 
+
 #import "ORKLineGraphChartView.h"
-#import "ORKGraphChartView_Internal.h"
-#import "ORKHelpers.h"
+
 #import "ORKChartTypes.h"
+#import "ORKGraphChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 #if TARGET_INTERFACE_BUILDER
@@ -189,8 +191,8 @@ const CGFloat FillColorAlpha = 0.4;
     double value = [super scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
     
     if (value == ORKDoubleInvalidValue) {
-        CGFloat viewWidth = self.plotView.bounds.size.width;
-        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+    CGFloat viewWidth = self.plotView.bounds.size.width;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         NSInteger pointIndex = 0;
         for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, viewWidth);
@@ -229,18 +231,18 @@ const CGFloat FillColorAlpha = 0.4;
     if (nextValidIndex == previousValidIndex) {
         canvasYPosition = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
     } else {
-        CGFloat viewWidth = self.plotView.bounds.size.width;
-        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-        
-        CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
-        CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
-        
+    CGFloat viewWidth = self.plotView.bounds.size.width;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+
+    CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+    CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
+    
         double y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
         double y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
         
         double slope = (y2 - y1)/(x2 - x1);
-        
-        //  (y2 - y3)/(x2 - x3) = m
+    
+    //  (y2 - y3)/(x2 - x3) = m
         canvasYPosition = y2 - (slope * (x2 - xPosition));
     }
     return canvasYPosition;
@@ -280,10 +282,10 @@ const CGFloat FillColorAlpha = 0.4;
     [super prepareAnimationsForPlotIndex:plotIndex];
     // animate all fill layers at once at the beginning
     if (plotIndex == 0) {
-        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
-            [fillLayer removeAllAnimations];
-            fillLayer.opacity = 0;
-        }];
+    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
+        [fillLayer removeAllAnimations];
+        fillLayer.opacity = 0;
+    }];
     }
 }
 
@@ -291,13 +293,13 @@ const CGFloat FillColorAlpha = 0.4;
     [super animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
     // animate all fill layers at once at the beginning
     if (plotIndex == 0) {
-        [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
-            [self animateLayer:layer
-                       keyPath:@"opacity"
-                      duration:duration * (1.0 / 3.0)
-                    startDelay:duration * (2.0 / 3.0)
-                timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-        }];
+    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
+        [self animateLayer:layer
+                   keyPath:@"opacity"
+                  duration:duration * (1.0 / 3.0)
+                startDelay:duration * (2.0 / 3.0)
+            timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+    }];
     }
 }
 

@@ -31,18 +31,19 @@
 
 #import "ORKVoiceEngine.h"
 #import "ORKVoiceEngine_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKVoiceEngine
 
 + (ORKVoiceEngine *)sharedVoiceEngine {
-    static ORKVoiceEngine *shared;
+    static ORKVoiceEngine *sharedVoiceEngine;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        shared = [ORKVoiceEngine new];
+        sharedVoiceEngine = [ORKVoiceEngine new];
     });
-    return shared;
+    return sharedVoiceEngine;
 }
 
 - (instancetype)init {

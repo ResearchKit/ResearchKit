@@ -30,12 +30,13 @@
 
 
 #import "ORKQuestionStep.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKAnswerFormat_Private.h"
-#import "ORKStep_Private.h"
+
 #import "ORKQuestionStepViewController.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKQuestionStep
@@ -114,7 +115,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.answerFormat hash];
+    return super.hash ^ self.answerFormat.hash;
 }
 
 - (ORKQuestionType)questionType {

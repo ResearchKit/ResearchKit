@@ -30,12 +30,15 @@
 
 
 #import "ORKSurveyAnswerCellForText.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
@@ -129,7 +132,7 @@
 }
 
 - (void)textDidChange {
-    [self ork_setAnswer:(self.textView.text.length > 0)? self.textView.text : ORKNullAnswerValue()];
+    [self ork_setAnswer:(self.textView.text.length > 0) ? self.textView.text : ORKNullAnswerValue()];
 }
 
 - (BOOL)shouldContinue {
@@ -194,11 +197,13 @@
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
-    _textField.placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    _textField.placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     _textField.textAlignment = NSTextAlignmentNatural;
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;
 
+    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
     [self.contentView addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
     
@@ -262,6 +267,11 @@
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     
     self.textField.text = displayValue;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    NSString *text = self.textField.text;
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
 }
 
 #pragma mark - UITextFieldDelegate

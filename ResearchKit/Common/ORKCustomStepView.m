@@ -31,7 +31,11 @@
 
 #import "ORKCustomStepView.h"
 #import "ORKCustomStepView_Internal.h"
+
 #import "ORKSurveyAnswerCell.h"
+
+#import "ORKStepViewController.h"
+
 #import "ORKSkin.h"
 
 

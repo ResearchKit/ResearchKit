@@ -31,6 +31,8 @@
 
 #import "ORKHolePegTestPlaceHoleView.h"
 
+#import "ORKHelpers_Internal.h"
+
 
 static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
 
@@ -161,9 +163,9 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         strongSelf.success = NO;
     });
 }

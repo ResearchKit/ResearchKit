@@ -30,13 +30,19 @@
 
 
 #import "ORKNavigableOrderedTask.h"
-#import "ORKOrderedTask_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKStepNavigationRule.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKOrderedTask_Private.h"
+#import "ORKResult.h"
 #import "ORKStep_Private.h"
+#import "ORKStepNavigationRule.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import "ORKHolePegTestPlaceStep.h"
 #import "ORKHolePegTestRemoveStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKOrderedTask_Private.h"
+#import "ORKCompletionStep.h"
 
 
 @implementation ORKNavigableOrderedTask {
@@ -197,7 +203,7 @@
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) task = [super copyWithZone:zone];
+    __typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
     task->_skipStepNavigationRules = ORKMutableDictionaryCopyObjects(_skipStepNavigationRules);
     task->_shouldReportProgress = _shouldReportProgress;
@@ -209,21 +215,21 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(_stepNavigationRules, castObject->_stepNavigationRules)
-    && ORKEqualObjects(_skipStepNavigationRules, castObject->_skipStepNavigationRules)
-    && _shouldReportProgress == castObject.shouldReportProgress;
+    && ORKEqualObjects(self.stepNavigationRules, castObject.stepNavigationRules)
+    && ORKEqualObjects(self.skipStepNavigationRules, castObject.skipStepNavigationRules)
+    && self.shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash] ^ [_skipStepNavigationRules hash] ^ (_shouldReportProgress ? 0xf : 0x0);
+    return super.hash ^ _stepNavigationRules.hash ^ _skipStepNavigationRules.hash ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined
 
-NSString * const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
-NSString * const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
-NSString * const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
-NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
+NSString *const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
+NSString *const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
+NSString *const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
+NSString *const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
 
 + (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -238,7 +244,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
     BOOL dominantHandLeft = (dominantHand == ORKBodySagittalLeft);
     NSTimeInterval stepDuration = (timeLimit == 0) ? CGFLOAT_MAX : timeLimit;
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         NSString *pegs = [NSNumberFormatter localizedStringFromNumber:@(numberOfPegs) numberStyle:NSNumberFormatterNoStyle];
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
@@ -333,9 +339,8 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKCompletionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
     

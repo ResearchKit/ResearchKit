@@ -33,12 +33,14 @@
 
 #import "ORKGraphChartView.h"
 #import "ORKGraphChartView_Internal.h"
-#import "ORKSkin.h"
+
+#import "ORKChartTypes.h"
+#import "ORKLineGraphChartView.h"
 #import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
-#import "ORKChartTypes.h"
-#import "ORKDefines_Private.h"
+
 #import "ORKAccessibility.h"
+#import "ORKSkin.h"
 
 
 const CGFloat ORKGraphChartViewLeftPadding = 10.0;
@@ -58,7 +60,6 @@ static const CGFloat ScrubberLabelCornerRadius = 4.0;
 static const CGFloat ScrubberLabelHorizontalPadding = 12.0;
 static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 #define ScrubberLabelColor ([UIColor colorWithWhite:0.98 alpha:0.8])
-
 
 @interface ORKGraphChartView () <UIGestureRecognizerDelegate>
 
@@ -103,7 +104,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateNoDataLabel];
     
     [self _axCreateAccessibilityElementsIfNeeded];
-
+    
     [self setNeedsLayout];
 }
 
@@ -202,17 +203,17 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
-
+    
     _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
     _longPressGestureRecognizer.delaysTouchesBegan = YES;
     _longPressGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_longPressGestureRecognizer];
-
+    
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
-
+    
     [self setUpViews];
     
     [self updateContentSizeCategoryFonts];
@@ -374,20 +375,20 @@ ORK_INLINE CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGF
         [self obtainDataPointsForPlotIndex:plotIndex];
     }
 }
-
+        
 - (void)obtainDataPointsForPlotIndex:(NSInteger)plotIndex {
     [self.dataPoints addObject:[NSMutableArray new]];
     NSInteger numberOfPoints = [self.dataSource graphChartView:self numberOfDataPointsForPlotIndex:plotIndex];
-    for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+        for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
         NSObject<ORKValueCollectionType> *value = [self dataPointForPointIndex:pointIndex plotIndex:plotIndex];
         [self.dataPoints[plotIndex] addObject:value];
-        if (!value.isUnset) {
+            if (!value.isUnset) {
             self.hasDataPoints = YES;
+            }
         }
-    }
-    // Add dummy points for empty data points
+        // Add dummy points for empty data points
     NSInteger emptyPointsCount = self.numberOfXAxisPoints - self.dataPoints[plotIndex].count;
-    for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
+        for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
         [self.dataPoints[plotIndex] addObject:[self dummyPoint]];
     }
 }
@@ -516,13 +517,30 @@ ORK_INLINE UIImage *graphPointLayerImageWithColor(UIColor *color) {
     return pointImage;
 }
 
-ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
+ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndicator) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineWidth;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
+    if (drawPointIndicator) {
     pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+    }
     
     return pointLayer;
+    }
+    
+- (BOOL)shouldDrawPointIndicatorForPointWithIndex:(NSInteger)pointIndex inPlotWithIndex:(NSInteger)plotIndex {
+    ORKValueRange *dataPoint = (ORKValueRange *)_dataPoints[plotIndex][pointIndex];
+    if (dataPoint.isUnset) {
+        return NO;
+    }
+    if (!dataPoint.isEmptyRange) {
+        return YES;
+    }
+    if ([self isKindOfClass:[ORKLineGraphChartView class]]
+        && [_dataSource respondsToSelector:@selector(graphChartView:drawsPointIndicatorsForPlotIndex:)]) {
+        return [_dataSource graphChartView:self drawsPointIndicatorsForPlotIndex:plotIndex];
+    }
+    return YES;
 }
 
 - (void)updateLineLayers {
@@ -580,7 +598,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 #pragma mark - Plotting Points
 
 - (NSInteger)numberOfPlots {
-    NSInteger numberOfPlots = 1;
+    NSInteger numberOfPlots = 0;
     
     if ([_dataSource respondsToSelector:@selector(numberOfPlotsInGraphChartView:)]) {
         numberOfPlots = [_dataSource numberOfPlotsInGraphChartView:self];
@@ -627,7 +645,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     BOOL shouldBegin = NO;
     if (gestureRecognizer == _panGestureRecognizer) {
         CGPoint translation = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:self];
-        if (fabs(translation.x) > fabs(translation.y)) {
+    if (fabs(translation.x) > fabs(translation.y)) {
             shouldBegin = YES;
         }
     } else if (gestureRecognizer == _longPressGestureRecognizer) {
@@ -824,24 +842,24 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     for (NSUInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         [self prepareAnimationsForPlotIndex:plotIndex];
         [self animateLayersSequentiallyWithDuration:duration plotIndex:plotIndex];
-    }
-}
+        }
+        }
 
 - (void)prepareAnimationsForPlotIndex:(NSInteger)plotIndex {
     for (NSMutableArray <CAShapeLayer *> *sublineLayers in self.lineLayers[plotIndex]) {
         [sublineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
         for (CAShapeLayer *lineLayer in sublineLayers) {
             lineLayer.strokeEnd = 0;
-        }
     }
 }
+            }
 
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration plotIndex:(NSInteger)plotIndex {
     NSUInteger numberOfLines = self.lineLayers[plotIndex].count;
-    if (numberOfLines > 0) {
-        CGFloat lineFadeDuration = duration / numberOfLines;
-        CGFloat lineDelay = 0.0;
-        for (NSUInteger lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+        if (numberOfLines > 0) {
+            CGFloat lineFadeDuration = duration / numberOfLines;
+            CGFloat lineDelay = 0.0;
+            for (NSUInteger lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
             NSUInteger numberOfSublines = self.lineLayers[plotIndex][lineIndex].count;
             if (numberOfSublines > 0) {
                 CGFloat sublineFadeDuration = lineFadeDuration / numberOfSublines;
@@ -995,29 +1013,29 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 
 @end
 
-
+    
 @implementation ORKValueRangeGraphChartView {
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
-}
+            }
 
 @dynamic dataSource;
 @dynamic dataPoints;
 @dynamic yAxisPoints;
-
+    
 - (void)sharedInit {
     [super sharedInit];
     _pointLayers = [NSMutableArray new];
-}
+            }
 
 - (void)reloadData {
     [super reloadData];
     [self updatePointLayers];
     [self setNeedsLayout];
-}
+        }
 
 - (ORKValueRange *)dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     return [self.dataSource graphChartView:self dataPointForPointIndex:pointIndex plotIndex:plotIndex];
-}
+    }
 
 - (ORKValueRange *)dummyPoint {
     return [ORKValueRange new];
@@ -1106,29 +1124,32 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
         for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
             ORKValueRange *dataPoint = self.dataPoints[plotIndex][pointIndex];
             if (!dataPoint.isUnset) {
-                CALayer *pointLayer = graphPointLayerWithColor(color);
+                BOOL drawPointIndicator = [self shouldDrawPointIndicatorForPointWithIndex:pointIndex inPlotWithIndex:plotIndex];
+                CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                 [self.plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *pointLayer = graphPointLayerWithColor(color);
+                    CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
                     [self.plotView.layer addSublayer:pointLayer];
                     [_pointLayers[plotIndex] addObject:pointLayer];
                 }
+                }
             }
-        }
-    }
-}
-
+                }
+            }
+    
 - (void)updatePlotColorsForPlotIndex:(NSInteger)plotIndex {
     [super updatePlotColorsForPlotIndex:plotIndex];
     UIColor *color = [self colorForPlotIndex:plotIndex];
     for (NSUInteger pointIndex = 0; pointIndex < _pointLayers[plotIndex].count; pointIndex++) {
         CALayer *pointLayer = _pointLayers[plotIndex][pointIndex];
+        if (pointLayer.contents) {
         pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
+        }
+        }
     }
-}
-
+    
 - (void)updatePointLayers {
     for (NSInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
         [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
@@ -1141,7 +1162,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
     }
-}
+    }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -1150,11 +1171,11 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 
 - (void)layoutPointLayers {
     NSInteger numberOfPlots = [self numberOfPlots];
-    
+
     if (self.yAxisPoints.count != numberOfPlots) {
         // avoid layout if points have not been normalized yet
         return;
-    }
+        }
     
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
@@ -1173,7 +1194,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
                 CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
                 pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.minimumValue);
                 pointLayerIndex++;
-                
+
                 if (!yAxisValueRange.isEmptyRange) {
                     CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
                     pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
@@ -1261,7 +1282,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 
 - (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     return self.plotPoints[plotIndex][pointIndex];
-}
+    }
 
 - (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
     return [@(pointIndex + 1) stringValue];
@@ -1271,7 +1292,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
 
 
 @implementation ORKIBSampleLineGraphDataSource
-
+    
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -1291,27 +1312,27 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color) {
     }
     return self;
 }
-
+        
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
     return self.plotPoints.count;
 }
-
+            
 - (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
     return self.plotPoints[plotIndex].count;
-}
+            }
 
 - (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     return self.plotPoints[plotIndex][pointIndex];
-}
-
+        }
+        
 - (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
     return [@(pointIndex + 1) stringValue];
-}
+        }
 
 - (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
     return 0;
-}
-
+    }
+    
 - (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
     return 70;
 }

@@ -29,19 +29,12 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ResearchKit_Private.h>
-#import <CoreMotion/CoreMotion.h>
-#import <objc/runtime.h>
-#import <stdio.h>
-#import <stdlib.h>
-#import <HealthKit/HealthKit.h>
-#import <MapKit/MapKit.h>
+@import XCTest;
+@import ResearchKit.Private;
 
-#import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
+
+#import <objc/runtime.h>
 
 
 @interface ClassProperty : NSObject
@@ -61,20 +54,20 @@
     
     self = [super init];
     if (self) {
-        const char * name = property_getName(property);
+        const char *name = property_getName(property);
         self.propertyName = [NSString stringWithCString:name encoding:NSUTF8StringEncoding];
         
-        const char * type = property_getAttributes(property);
-        NSString * typeString = [NSString stringWithUTF8String:type];
-        NSArray * attributes = [typeString componentsSeparatedByString:@","];
-        NSString * typeAttribute = attributes[0];
+        const char *type = property_getAttributes(property);
+        NSString *typeString = [NSString stringWithUTF8String:type];
+        NSArray *attributes = [typeString componentsSeparatedByString:@","];
+        NSString *typeAttribute = attributes[0];
         
         _isPrimitiveType = YES;
         if ([typeAttribute hasPrefix:@"T@"]) {
              _isPrimitiveType = NO;
             Class typeClass = nil;
             if (typeAttribute.length > 4) {
-                NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, typeAttribute.length-4)];  //turns @"NSDate" into NSDate
+                NSString *typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, typeAttribute.length-4)];  //turns @"NSDate" into NSDate
                 typeClass = NSClassFromString(typeClassName);
             } else {
                 typeClass = [NSObject class];
@@ -189,12 +182,15 @@
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
+ORK_MAKE_TEST_INIT(ORKVerificationStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString text:@"text" verificationViewControllerClass:NSClassFromString(@"ORKVerificationStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString];});
 ORK_MAKE_TEST_INIT(ORKReviewStep, ^{return [[self class] standaloneReviewStepWithIdentifier:[NSUUID UUID].UUIDString steps:@[] resultSource:[ORKTaskResult new]];});
 ORK_MAKE_TEST_INIT(ORKOrderedTask, ^{return [self initWithIdentifier:@"test1" steps:nil];});
 ORK_MAKE_TEST_INIT(ORKImageChoice, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKTextChoice, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKPredicateStepNavigationRule, ^{return [self initWithResultPredicates:@[[ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:[ORKResultSelector selectorWithResultIdentifier:@"test"] expectedAnswer:YES]] destinationStepIdentifiers:@[@"test2"]];});
+ORK_MAKE_TEST_INIT(ORKResultSelector, ^{return [self initWithResultIdentifier:@"resultIdentifier"];});
 ORK_MAKE_TEST_INIT(ORKRecorderConfiguration, ^{return [self initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKAccelerometerRecorderConfiguration, ^{return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKHealthQuantityTypeRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
@@ -205,6 +201,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     return location;
 }));
 
+                                                
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
 @end
@@ -355,7 +352,6 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKConsentDocument.signatures",
                                               @"ORKContinuousScaleAnswerFormat.numberFormatter",
                                               @"ORKFormItem.step",
-                                              @"ORKHealthKitCharacteristicTypeAnswerFormat.characteristicType",
                                               @"ORKTimeIntervalAnswerFormat.maximumInterval",
                                               @"ORKTimeIntervalAnswerFormat.defaultInterval",
                                               @"ORKTimeIntervalAnswerFormat.step",
@@ -364,6 +360,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKTextAnswerFormat.autocorrectionType",
                                               @"ORKTextAnswerFormat.spellCheckingType",
                                               @"ORKInstructionStep.image",
+                                              @"ORKInstructionStep.auxiliaryImage",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
@@ -381,11 +378,14 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKScaleAnswerFormat.maximumImage",
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
+                                              @"ORKHeightAnswerFormat.useMetricSystem",
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegex",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
+                                              @"ORKSignatureResult.signatureImage",
+                                              @"ORKSignatureResult.signaturePath",
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -427,7 +427,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                         } else if (p.propertyClass == [HKQuantityType class]) {
                             [instance setValue:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass] forKey:p.propertyName];
                         } else if (p.propertyClass == [HKCharacteristicType class]) {
-                            //[instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
+                            [instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
                         } else if (p.propertyClass == [ORKLocation class]) {
@@ -482,8 +482,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             if (mockDictionary[pName] == nil) {
                 NSString *notSerializedProperty = dottedPropertyNames[pName];
                 BOOL success = [knownNotSerializedProperties containsObject:notSerializedProperty];
-                if (! success)
-                {
+                if (!success) {
                     XCTAssertTrue(success, "Unexpected notSerializedProperty = %@ (%@)", notSerializedProperty, NSStringFromClass(aClass));
                 }
             }
@@ -505,8 +504,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         // Serialize again, the output ought to be equal
         NSDictionary *dictionary2 = [ORKESerializer JSONObjectForObject:instance2 error:NULL];
         BOOL isMatch = [mockDictionary isEqualToDictionary:dictionary2];
-        if (!isMatch)
-        {
+        if (!isMatch) {
             XCTAssertTrue(isMatch, @"Should be equal for class: %@", NSStringFromClass(aClass));
         }
     }
@@ -598,12 +596,15 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
+                                              @"ORKInstructionStep.auxiliaryImage",
                                               @"ORKActiveStep.image",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKScaleAnswerFormat.minimumImage",
                                               @"ORKScaleAnswerFormat.maximumImage",
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
-                                              @"ORKContinuousScaleAnswerFormat.maximumImage"
+                                              @"ORKContinuousScaleAnswerFormat.maximumImage",
+                                              @"ORKSignatureResult.signatureImage",
+                                              @"ORKSignatureResult.signaturePath",
                                               ];
     
     // Test Each class
@@ -644,15 +645,14 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             if (newValue == nil) {
                 NSString *notSerializedProperty = [NSString stringWithFormat:@"%@.%@", NSStringFromClass(aClass), pName];
                 BOOL success = [knownNotSerializedProperties containsObject:notSerializedProperty];
-                if (!success)
-                {
+                if (!success) {
                     XCTAssertTrue(success, "Unexpected notSerializedProperty = %@", notSerializedProperty);
                 }
             }
             for (Class c in checkableClasses) {
                 if ([oldValue isKindOfClass:c]) {
                     if ([newValue isKindOfClass:[NSURL class]] || [oldValue isKindOfClass:[NSURL class]]) {
-                        if (! [[newValue absoluteString] isEqualToString:[oldValue absoluteString]]) {
+                        if (![[newValue absoluteString] isEqualToString:[oldValue absoluteString]]) {
                             XCTAssertTrue([[newValue absoluteString] isEqualToString:[oldValue absoluteString]]);
                         }
                     } else {
@@ -701,14 +701,15 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
         ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
         ([c isSubclassOfClass:[ORKStep class]]) ||
-        ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
-        (c == [ORKTextChoice class]) ||
-        (c == [ORKImageChoice class]) ||
-        ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
-        ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-        (c == [ORKLocation class]))
+         ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
+         (c == [ORKTextChoice class]) ||
+         (c == [ORKImageChoice class]) ||
+         ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
+         ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
+         (c == [ORKLocation class]) ||
+         (c == [ORKResultSelector class]))
     {
-            return [[c alloc] orktest_init];
+        return [[c alloc] orktest_init];
     }
     
     return [[c alloc] init];

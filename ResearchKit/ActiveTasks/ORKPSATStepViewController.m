@@ -30,13 +30,19 @@
 
 
 #import "ORKPSATStepViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKPSATContentView.h"
-#import "ORKPSATStep.h"
-#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
+#import "ORKPSATContentView.h"
 #import "ORKPSATKeyboardView.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKPSATStep.h"
+#import "ORKResult.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKPSATStepViewController () <ORKPSATKeyboardViewDelegate>
@@ -155,12 +161,12 @@
         ([self psatStep].interStimulusInterval - [self psatStep].stimulusDuration) > 0.05 ) {
         
         // Don't show `-` if the difference between stimulusDuration and interStimulusInterval is less than timer's resolution.
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         self.clearDigitsTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self psatStep].stepDuration
                                                                     interval:[self psatStep].interStimulusInterval
                                                                      runtime:-[self psatStep].stimulusDuration
                                                                      handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                                         typeof(self) strongSelf = weakSelf;
+                                                                         ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                                          [strongSelf clearDigitsTimerFired];
                                                                      }];
         [self.clearDigitsTimer resume];

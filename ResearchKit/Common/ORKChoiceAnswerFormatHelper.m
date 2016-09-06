@@ -30,9 +30,11 @@
 
 
 #import "ORKChoiceAnswerFormatHelper.h"
+
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKDefines_Private.h"
 #import "ORKResult_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKChoiceAnswerFormatHelper {
@@ -106,7 +108,7 @@
         id value = choice.value;
         
         if (value == nil) {
-            value = _isValuePicker? @(index - 1) : @(index);
+            value = _isValuePicker ? @(index - 1) : @(index);
         }
         
         if (_isValuePicker && index == 0) {
@@ -133,7 +135,7 @@
     
     if (answer != nil && answer != ORKNullAnswerValue() ) {
         
-        NSAssert([answer isKindOfClass: [ORKChoiceQuestionResult answerClass] ], @"Wrong answer type");
+        NSAssert([answer isKindOfClass:[ORKChoiceQuestionResult answerClass] ], @"Wrong answer type");
         
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;

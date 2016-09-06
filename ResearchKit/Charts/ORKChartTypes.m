@@ -33,8 +33,8 @@
 
 
 #import "ORKChartTypes.h"
-#import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKValueRange

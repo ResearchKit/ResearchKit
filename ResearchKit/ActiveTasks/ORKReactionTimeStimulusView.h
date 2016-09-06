@@ -29,8 +29,11 @@
  */
 
 
+@import UIKit;
 #import "ORKCustomStepView_Internal.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKReactionTimeStimulusView : UIView
 
@@ -41,3 +44,5 @@
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

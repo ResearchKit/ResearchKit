@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,11 +30,15 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKErrors.h>
+@import UIKit;
+#import "ORKHelpers_Private.h"
+#import "ORKTypes.h"
+#import "ORKErrors.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
+// Logging
 #if ( defined(ORK_LOG_LEVEL_NONE) && ORK_LOG_LEVEL_NONE )
 #  undef ORK_LOG_LEVEL_DEBUG
 #  undef ORK_LOG_LEVEL_WARNING
@@ -66,81 +70,66 @@
 #endif
 
 
-#if !defined(ORK_INLINE)
-#  if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-#    define ORK_INLINE static inline
-#  elif defined(__cplusplus)
-#    define ORK_INLINE static inline
-#  elif defined(__GNUC__)
-#    define ORK_INLINE static __inline__
-#  else
-#    define ORK_INLINE static
-#  endif
-#endif
-
 #define ORK_NARG(...) ORK_NARG_(__VA_ARGS__,ORK_RSEQ_N())
 #define ORK_NARG_(...)  ORK_ARG_N(__VA_ARGS__)
 #define ORK_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10, N, ...) N
 #define ORK_RSEQ_N()   10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 
-#define STRINGIFY2( x) #x
-#define STRINGIFY(x) STRINGIFY2(x)
+#define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_URL(c,x)  [c encodeObject:ORKRelativePathForURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_URL(c,x)  [c encodeObject:ORKRelativePathForURL(_ ## x) forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
 
-#define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
-#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
+#define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * orkTemp_ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:orkTemp_ ## x forKey:@ORK_STRINGIFY(x)]; } }
 
-#define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
+#define ORK_DECODE_URL(d,x)  _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@ORK_STRINGIFY(x)])
+#define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@ORK_STRINGIFY(x)])
 
-#define ORK_DECODE_URL(d,x) _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@STRINGIFY(x)])
-#define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@STRINGIFY(x)])
+#define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_DOUBLE(d,x)  _ ## x = [d decodeDoubleForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_DOUBLE(c,x)  [c encodeDouble:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_DOUBLE(d,x)  _ ## x = [d decodeDoubleForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_DOUBLE(c,x)  [c encodeDouble:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_INTEGER(d,x)  _ ## x = [d decodeIntegerForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_INTEGER(c,x)  [c encodeInteger:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_INTEGER(d,x)  _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_INTEGER(c,x)  [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@ORK_STRINGIFY(x)] unsignedLongValue]
 
-#define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@STRINGIFY(x)] unsignedLongValue]
+#define ORK_DECODE_ENUM(d,x)  _ ## x = [d decodeIntegerForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_ENUM(d,x)  _ ## x = (__typeof(_ ## x))[d decodeIntegerForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_CGRECT(d,x)  _ ## x = [d decodeCGRectForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_CGRECT(c,x)  [c encodeCGRect:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGRECT(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGRectForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_CGRECT(c,x)  [c encodeCGRect:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_CGSIZE(d,x)  _ ## x = [d decodeCGSizeForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_CGSIZE(c,x)  [c encodeCGSize:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGSIZE(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGSizeForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_CGSIZE(c,x)  [c encodeCGSize:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_CGPOINT(d,x)  _ ## x = [d decodeCGPointForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_CGPOINT(c,x)  [c encodeCGPoint:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_CGPOINT(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGPointForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_CGPOINT(c,x)  [c encodeCGPoint:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = [d decodeUIEdgeInsetsForKey:@ORK_STRINGIFY(x)]
+#define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@ORK_STRINGIFY(x)]
 
-#define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@STRINGIFY(x)]
-
-#define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@STRINGIFY(x.latitude)],[d decodeDoubleForKey:@STRINGIFY(x.longitude)])
-#define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@STRINGIFY(x.longitude)];
+#define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@ORK_STRINGIFY(x.latitude)],[d decodeDoubleForKey:@ORK_STRINGIFY(x.longitude)])
+#define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@ORK_STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@ORK_STRINGIFY(x.longitude)];
 
 /*
  * Helpers for completions which call the block only if non-nil
  *
  */
-#define BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
+#define ORK_BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
 
-#define DISPATCH_EXEC(queue, block, ...) if (block) { dispatch_async(queue, ^{ block(__VA_ARGS__); } ); }
+#define ORK_DISPATCH_EXEC(queue, block, ...) if (block) { dispatch_async(queue, ^{ block(__VA_ARGS__); } ); }
 
 /*
  * For testing background delivery
@@ -155,6 +144,9 @@
 // Find the first object of the specified class, using method as the iterator
 #define ORKFirstObjectOfClass(C,p,method) ({ id v = p; while (v != nil) { if ([v isKindOfClass:[C class]]) { break; } else { v = [v method]; } }; v; })
 
+#define ORKStrongTypeOf(x) __strong __typeof(x)
+#define ORKWeakTypeOf(x) __weak __typeof(x)
+
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle();
@@ -165,9 +157,6 @@ UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
 id findInArrayByKey(NSArray * array, NSString *key, id value);
-
-NSString *ORKStringFromDateISO8601(NSDate *date);
-NSDate *ORKDateFromStringISO8601(NSString *string);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
@@ -208,18 +197,6 @@ ORKEqualObjects(id o1, id o2) {
 ORK_INLINE BOOL
 ORKEqualFileURLs(NSURL *url1, NSURL *url2) {
     return ORKEqualObjects(url1, url2) || ([url1 isFileURL] && [url2 isFileURL] && [[url1 absoluteString] isEqualToString:[url2 absoluteString]]);
-}
-
-ORK_INLINE NSArray *
-ORKArrayCopyObjects(NSArray *a) {
-    if (!a) {
-        return nil;
-    }
-    NSMutableArray *b = [NSMutableArray arrayWithCapacity:a.count];
-    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [b addObject:[obj copy]];
-    }];
-    return [b copy];
 }
 
 ORK_INLINE NSMutableOrderedSet *
@@ -276,7 +253,6 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
-#define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }
@@ -292,3 +268,68 @@ extern const CGFloat ORKCGFloatInvalidValue;
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
+
+NSNumberFormatter *ORKDecimalNumberFormatter();
+
+ORK_INLINE double ORKFeetAndInchesToInches(double feet, double inches) {
+    return (feet * 12) + inches;
+}
+
+ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double *outInches) {
+    if (outFeet == NULL || outInches == NULL) {
+        return;
+    }
+    *outFeet = floor(inches / 12);
+    *outInches = fmod(inches, 12);
+}
+
+ORK_INLINE double ORKInchesToCentimeters(double inches) {
+    return inches * 2.54;
+}
+
+ORK_INLINE double ORKCentimetersToInches(double centimeters) {
+    return centimeters / 2.54;
+}
+
+ORK_INLINE void ORKCentimetersToFeetAndInches(double centimeters, double *outFeet, double *outInches) {
+    double inches = ORKCentimetersToInches(centimeters);
+    ORKInchesToFeetAndInches(inches, outFeet, outInches);
+}
+
+ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
+    return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
+}
+
+ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
+    UIColor *color = baseColor;
+    if (totalColors > 1) {
+        CGFloat red = 0.0;
+        CGFloat green = 0.0;
+        CGFloat blue = 0.0;
+        CGFloat alpha = 0.0;
+        if ([baseColor getRed:&red green:&green blue:&blue alpha:&alpha]) {
+            // Avoid a pure transparent color (alpha = 0)
+            CGFloat targetAlphaFactor = ((1.0 / totalColors) * colorIndex);
+            return [UIColor colorWithRed:red + ((1.0 - red) * targetAlphaFactor)
+                                   green:green + ((1.0 - green) * targetAlphaFactor)
+                                    blue:blue + ((1.0 - blue) * targetAlphaFactor)
+                                   alpha:alpha];
+        }
+    }
+    return color;
+}
+
+// Localization
+ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
+ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+
+#define ORKDefaultLocalizedValue(key) \
+[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
+
+#define ORKLocalizedString(key, comment) \
+[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+
+#define ORKLocalizedStringFromNumber(number) \
+[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+
+NS_ASSUME_NONNULL_END

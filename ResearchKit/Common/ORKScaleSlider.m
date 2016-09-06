@@ -32,14 +32,21 @@
 
 
 #import "ORKScaleSlider.h"
-#import "ORKAccessibility.h"
-#import "ORKDefines_Private.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKSkin.h"
-#import "ORKScaleSliderView.h"
+
 #import "ORKScaleRangeDescriptionLabel.h"
 #import "ORKScaleRangeImageView.h"
+#import "ORKScaleSliderView.h"
 
+#import "ORKAnswerFormat_Internal.h"
+
+#import "ORKAccessibility.h"
+#import "ORKSkin.h"
+
+@interface ORKScaleSlider ()
+
+@property (nonatomic, strong, nullable) CAGradientLayer *gradientLayer;
+
+@end
 
 @implementation ORKScaleSlider {
     CFAbsoluteTime _axLastOutputTime;
@@ -57,6 +64,8 @@
         
         self.minimumTrackTintColor = [UIColor clearColor];
         self.maximumTrackTintColor = [UIColor clearColor];
+        
+        self.gradientLayer = [CAGradientLayer layer];
         
         _numberOfSteps = 2;
         
@@ -80,6 +89,25 @@
         _thumbImageNeedsTransformUpdate = YES;
         [self invalidateIntrinsicContentSize];
     }
+}
+
+- (void)setGradientColors:(nullable NSArray<UIColor *> *)gradientColors {
+    _gradientColors = [gradientColors copy];
+    if (gradientColors) {
+        NSMutableArray *cgGolors = [[NSMutableArray alloc] init];
+        for (UIColor *uiColor in gradientColors) {
+            [cgGolors addObject:(id)uiColor.CGColor];
+        }
+        _gradientLayer.colors = cgGolors;
+        [self.layer insertSublayer:_gradientLayer atIndex:0];
+    } else {
+        [_gradientLayer removeFromSuperlayer];
+    }
+}
+
+- (void)setGradientLocations:(nullable NSArray<NSNumber *> *)gradientLocations {
+    _gradientLocations = [gradientLocations copy];
+    _gradientLayer.locations = gradientLocations;
 }
 
 // Error prone: needs to be replaced by a custom thumb asset
@@ -212,6 +240,30 @@ static const CGFloat Padding = 2.0;
     rect.origin.x = centerX - rect.size.width / 2.0;
     
     return rect;
+}
+
+- (void)layoutSublayersOfLayer:(CALayer *)layer {
+    [super layoutSublayersOfLayer:layer];
+    if (_gradientColors) {
+        const CGFloat maxGradientHeight = 5;
+        CGRect trackRect = [self trackRectForBounds:self.bounds];
+        CGFloat gradientHeight = MIN(maxGradientHeight, CGRectGetMinY(trackRect) - CGRectGetMinY(self.bounds));
+        
+        if (_vertical) {
+            _gradientLayer.frame = CGRectMake(CGRectGetMinX(trackRect),
+                                              CGRectGetMidY(self.bounds) + 2 * gradientHeight,
+                                              CGRectGetWidth(trackRect),
+                                              gradientHeight);
+        } else {
+            _gradientLayer.frame = CGRectMake(CGRectGetMinX(trackRect),
+                                              CGRectGetMinY(self.bounds),
+                                              CGRectGetWidth(trackRect),
+                                              gradientHeight);
+        }
+       
+        _gradientLayer.startPoint = CGPointMake(0, 0.5);
+        _gradientLayer.endPoint = CGPointMake(1, 0.5);
+    }
 }
 
 #pragma mark - Accessibility

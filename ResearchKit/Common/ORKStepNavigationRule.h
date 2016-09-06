@@ -29,7 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -273,7 +273,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
+ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
 
 /**

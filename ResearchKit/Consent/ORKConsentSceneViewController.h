@@ -29,12 +29,12 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSection.h>
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKConsentSection;
 
 @interface ORKConsentSceneViewController : UIViewController
 

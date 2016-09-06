@@ -29,18 +29,21 @@
  */
 
 
-#import "ORKConsentSection.h"
+@import UIKit;
+#import "ORKStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
+/**
+ The `ORKSignatureStepViewController` class is a step view controller subclass
+ used to manage a signature step (`ORKSignatureStep`).
 
-@interface ORKConsentSection ()
-
-@property (nonatomic, readonly, nullable) NSString *escapedContent;
-
-@property (nonatomic, readonly, nullable) UIImage *image;
+ You should not need to instantiate a signature step view controller directly. Instead, include
+ a signature step in a task, and present a task view controller for that stask.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSignatureStepViewController : ORKStepViewController
 
 @end
 

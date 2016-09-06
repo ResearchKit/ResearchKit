@@ -29,6 +29,7 @@
  */
 
 
+@import UIKit;
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
 

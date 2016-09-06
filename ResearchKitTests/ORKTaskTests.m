@@ -29,12 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKHelpers.h"
-#import "ORKResult_Private.h"
-#import "ORKStepNavigationRule_Private.h"
-#import "ORKStepNavigationRule_Internal.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKTaskTests : XCTestCase
@@ -584,6 +580,9 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertTrue(testStepAfterStep(skipTask, taskResult, severityStep, nil));
 }
 
+ORKDefineStringKey(SignConsentStepIdentifier);
+ORKDefineStringKey(SignatureIdentifier);
+
 ORKDefineStringKey(ScaleStepIdentifier);
 ORKDefineStringKey(ContinuousScaleStepIdentifier);
 static const NSInteger IntegerValue = 6;
@@ -653,6 +652,12 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     return stepResult;
 };
 
+static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^ORKStepResult *(NSString *stepIdentifier, NSString *signatureIdentifier, BOOL consented) {
+    ORKConsentSignatureResult *consentSignatureResult = [[ORKConsentSignatureResult alloc] initWithIdentifier:signatureIdentifier];
+    consentSignatureResult.consented = consented;
+    return [[ORKStepResult alloc] initWithStepIdentifier:stepIdentifier results:@[consentSignatureResult]];
+};
+
 - (ORKTaskResult *)getGeneralTaskResultTree {
     NSMutableArray *stepResults = [NSMutableArray new];
     
@@ -678,6 +683,19 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     // Nil result (simulate skipped step)
     [stepResults addObject:getStepResult(NilTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, nil)];
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
+                                                                  taskRunUUID:[NSUUID UUID]
+                                                              outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    taskResult.results = stepResults;
+    
+    return taskResult;
+}
+
+- (ORKTaskResult *)getTaskResultTreeWithConsent:(BOOL)consented {
+    NSMutableArray *stepResults = [NSMutableArray new];
+    
+    [stepResults addObject:getConsentStepResult(SignConsentStepIdentifier, SignatureIdentifier, consented)];
     
     ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
                                                                   taskRunUUID:[NSUUID UUID]
@@ -1334,6 +1352,28 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithResultSelector:resultSelector] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
 }
 
+- (void)testConsentPredicate {
+    ORKResultSelector *resultSelector = [[ORKResultSelector alloc] initWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           stepIdentifier:SignConsentStepIdentifier
+                                                                         resultIdentifier:SignatureIdentifier];
+    {
+        ORKTaskResult *consentedTaskResult = [self getTaskResultTreeWithConsent:YES];
+        XCTAssertTrue([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                      didConsent:YES] evaluateWithObject:@[consentedTaskResult] substitutionVariables:nil]);
+        XCTAssertFalse([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                       didConsent:NO] evaluateWithObject:@[consentedTaskResult] substitutionVariables:nil]);
+    }
+    
+    {
+        ORKTaskResult *didNotConsentTaskResult = [self getTaskResultTreeWithConsent:NO];
+        
+        XCTAssertTrue([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                      didConsent:NO] evaluateWithObject:@[didNotConsentTaskResult] substitutionVariables:nil]);
+        XCTAssertFalse([[ORKResultPredicate predicateForConsentWithResultSelector:resultSelector
+                                                                       didConsent:YES] evaluateWithObject:@[didNotConsentTaskResult] substitutionVariables:nil]);
+    }
+}
+
 - (void)testResultPredicates {
     ORKTaskResult *taskResult = [self getGeneralTaskResultTree];
     NSArray *taskResults = @[ taskResult ];
@@ -1353,7 +1393,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
 
 - (void)testStepViewControllerWillDisappear {
     TestTaskViewControllerDelegate *delegate = [[TestTaskViewControllerDelegate alloc] init];
-    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 options:0];
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test" intendedUseDescription:nil duration:30 handOptions:0 options:0];
     ORKTaskViewController *taskViewController = [[MockTaskViewController alloc] initWithTask:task taskRunUUID:nil];
     taskViewController.delegate = delegate;
     ORKInstructionStepViewController *stepViewController = [[ORKInstructionStepViewController alloc] initWithStep:task.steps.firstObject];
@@ -1368,6 +1408,276 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertEqualObjects(delegate.methodCalled.firstObject.arguments, expectedArgs);
     
 }
+
+- (void)testIndexOfStep {
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"tapping" intendedUseDescription:nil duration:30 handOptions:0 options:0];
+    
+    // get the first step
+    ORKStep *step0 = [task.steps firstObject];
+    XCTAssertNotNil(step0);
+    XCTAssertEqual([task indexOfStep:step0], 0);
+    
+    // get the second step
+    ORKStep *step1 = [task stepWithIdentifier:ORKInstruction1StepIdentifier];
+    XCTAssertNotNil(step1);
+    XCTAssertEqual([task indexOfStep:step1], 1);
+    
+    // get the last step
+    ORKStep *stepLast = [task.steps lastObject];
+    XCTAssertNotNil(stepLast);
+    XCTAssertEqual([task indexOfStep:stepLast], task.steps.count - 1);
+    
+    // Look for not found
+    ORKStep *stepNF = [[ORKStep alloc] initWithIdentifier:@"foo"];
+    XCTAssertEqual([task indexOfStep:stepNF], NSNotFound);
+    
+}
+
+- (void)testAudioTask_WithSoundCheck {
+    ORKNavigableOrderedTask *task = [ORKOrderedTask audioTaskWithIdentifier:@"audio" intendedUseDescription:nil speechInstruction:nil shortSpeechInstruction:nil duration:20 recordingSettings:nil checkAudioLevel:YES options:0];
+    
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKAudioTooLoudStepIdentifier,
+                                         ORKAudioStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    XCTAssertNotNil([task navigationRuleForTriggerStepIdentifier:ORKCountdownStepIdentifier]);
+    XCTAssertNotNil([task navigationRuleForTriggerStepIdentifier:ORKAudioTooLoudStepIdentifier]);
+}
+
+- (void)testAudioTask_NoSoundCheck {
+    
+    ORKNavigableOrderedTask *task = [ORKOrderedTask audioTaskWithIdentifier:@"audio" intendedUseDescription:nil speechInstruction:nil shortSpeechInstruction:nil duration:20 recordingSettings:nil checkAudioLevel:NO options:0];
+    
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKAudioStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    XCTAssertEqual(task.stepNavigationRules.count, 0);
+}
+
+- (void)testWalkBackAndForthTask_30SecondDuration {
+    
+    // Create the task
+    ORKOrderedTask *task = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:@"walking" intendedUseDescription:nil walkDuration:30 restDuration:30 options:0];
+    
+    // Check that the steps match the expected - If these change, it will affect the results and
+    // could adversely impact existing studies that are expecting this step order.
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKShortWalkOutboundStepIdentifier,
+                                         ORKShortWalkRestStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    XCTAssertEqual(task.steps.count, expectedStepIdentifiers.count);
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    // Check that the active steps include speaking the halfway point
+    ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
+    XCTAssertTrue(walkingStep.shouldSpeakRemainingTimeAtHalfway);
+    ORKActiveStep *restStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkRestStepIdentifier];
+    XCTAssertTrue(restStep.shouldSpeakRemainingTimeAtHalfway);
+    
+}
+
+- (void)testWalkBackAndForthTask_15SecondDuration_NoRest {
+    
+    // Create the task
+    ORKOrderedTask *task = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:@"walking" intendedUseDescription:nil walkDuration:15 restDuration:0 options:0];
+    
+    // Check that the steps match the expected - If these change, it will affect the results and
+    // could adversely impact existing studies that are expecting this step order.
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                         ORKInstruction1StepIdentifier,
+                                         ORKCountdownStepIdentifier,
+                                         ORKShortWalkOutboundStepIdentifier,
+                                         ORKConclusionStepIdentifier];
+    XCTAssertEqual(task.steps.count, expectedStepIdentifiers.count);
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    // Check that the active steps include speaking the halfway point
+    ORKActiveStep *walkingStep = (ORKActiveStep *)[task stepWithIdentifier:ORKShortWalkOutboundStepIdentifier];
+    XCTAssertFalse(walkingStep.shouldSpeakRemainingTimeAtHalfway);
+    
+}
+
+#pragma mark - two-finger tapping with both hands
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionUndefined {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                          handOptions:0
+                                                                              options:0];
+    NSArray *expectedStepIdentifiers = @[ORKInstruction0StepIdentifier,
+                                              ORKInstruction1StepIdentifier,
+                                              ORKTappingStepIdentifier,
+                                              ORKConclusionStepIdentifier];
+    NSArray *stepIdentifiers = [task.steps valueForKey:@"identifier"];
+    XCTAssertEqual(stepIdentifiers.count, expectedStepIdentifiers.count);
+    XCTAssertEqualObjects(stepIdentifiers, expectedStepIdentifiers);
+    
+    ORKStep *tappingStep = [task stepWithIdentifier:ORKTappingStepIdentifier];
+    XCTAssertFalse(tappingStep.optional);
+
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionLeft {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                          handOptions:ORKPredefinedTaskHandOptionLeft
+                                                                              options:0];
+    // Check assumption around how many steps
+    XCTAssertEqual(task.steps.count, 4);
+    
+    // Check that none of the language or identifiers contain the word "right"
+    for (ORKStep *step in task.steps) {
+        XCTAssertFalse([step.identifier.lowercaseString hasSuffix:@"right"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"right"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"right"]);
+    }
+    
+    NSArray * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+        NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+        return [task.steps filteredArrayUsingPredicate:predicate];
+    };
+    
+    // Look for instruction step
+    NSArray *instructions = filteredSteps(@"instruction1", @"left");
+    XCTAssertEqual(instructions.count, 1);
+    ORKStep *instructionStep = [instructions firstObject];
+    XCTAssertEqualObjects(instructionStep.title, @"Left Hand");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+    
+    // Look for the activity step
+    NSArray *tappings = filteredSteps(@"tapping", @"left");
+    XCTAssertEqual(tappings.count, 1);
+    ORKStep *tappingStep = [tappings firstObject];
+    XCTAssertEqualObjects(tappingStep.title, @"Tap the buttons using your LEFT hand.");
+    XCTAssertFalse(tappingStep.optional);
+    
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionRight {
+    
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                               intendedUseDescription:nil
+                                                                             duration:10
+                                                                          handOptions:ORKPredefinedTaskHandOptionRight
+                                                                              options:0];
+    // Check assumption around how many steps
+    XCTAssertEqual(task.steps.count, 4);
+    
+    // Check that none of the language or identifiers contain the word "right"
+    for (ORKStep *step in task.steps) {
+        XCTAssertFalse([step.identifier.lowercaseString hasSuffix:@"left"]);
+        XCTAssertFalse([step.title.lowercaseString containsString:@"left"]);
+        XCTAssertFalse([step.text.lowercaseString containsString:@"left"]);
+    }
+    
+    NSArray * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+        NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+        return [task.steps filteredArrayUsingPredicate:predicate];
+    };
+    
+    // Look for instruction step
+    NSArray *instructions = filteredSteps(@"instruction1", @"right");
+    XCTAssertEqual(instructions.count, 1);
+    ORKStep *instructionStep = [instructions firstObject];
+    XCTAssertEqualObjects(instructionStep.title, @"Right Hand");
+    XCTAssertEqualObjects(instructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+    
+    // Look for the activity step
+    NSArray *tappings = filteredSteps(@"tapping", @"right");
+    XCTAssertEqual(tappings.count, 1);
+    ORKStep *tappingStep = [tappings firstObject];
+    XCTAssertEqualObjects(tappingStep.title, @"Tap the buttons using your RIGHT hand.");
+    XCTAssertFalse(tappingStep.optional);
+    
+}
+
+- (void)testTwoFingerTappingIntervalTaskWithIdentifier_TapHandOptionBoth {
+    NSUInteger leftCount = 0;
+    NSUInteger rightCount = 0;
+    NSUInteger totalCount = 100;
+    NSUInteger threshold = 30;
+    
+    for (int ii = 0; ii < totalCount; ii++) {
+        ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"test"
+                                                                   intendedUseDescription:nil
+                                                                                 duration:10
+                                                                              handOptions:ORKPredefinedTaskHandOptionBoth
+                                                                                  options:0];
+        ORKStep * (^filteredSteps)(NSString*, NSString*) = ^(NSString *part1, NSString *part2) {
+            NSString *keyValue = [NSString stringWithFormat:@"%@.%@", part1, part2];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", NSStringFromSelector(@selector(identifier)), keyValue];
+            return [[task.steps filteredArrayUsingPredicate:predicate] firstObject];
+        };
+        
+        // Look for instruction steps
+        ORKStep *rightInstructionStep = filteredSteps(@"instruction1", @"right");
+        XCTAssertNotNil(rightInstructionStep);
+        ORKStep *leftInstructionStep = filteredSteps(@"instruction1", @"left");
+        XCTAssertNotNil(leftInstructionStep);
+        
+        // Depending upon the seed (clock time) this will be either the right or left hand
+        // Without using OCMock, cannot easily verify that both will display.
+        BOOL isRightFirst = [task.steps indexOfObject:rightInstructionStep] < [task.steps indexOfObject:leftInstructionStep];
+        if (isRightFirst) {
+            rightCount++;
+        } else {
+            leftCount++;
+        }
+        
+        if ((isRightFirst && rightCount == 1) || (!isRightFirst && leftCount == 1)) {
+            
+            // Look for instruction steps
+            XCTAssertEqualObjects(rightInstructionStep.title, @"Right Hand");
+            XCTAssertEqualObjects(leftInstructionStep.title, @"Left Hand");
+            
+            // Depending upon the seed (clock time) this will be either the right or left hand
+            // Without using OCMock, cannot easily verify that both will display.
+            if (isRightFirst) {
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your right hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your left hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+            } else {
+                XCTAssertEqualObjects(leftInstructionStep.text, @"Put your phone on a flat surface. Use two fingers on your left hand to alternately tap the buttons on the screen. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+                XCTAssertEqualObjects(rightInstructionStep.text, @"Put your phone on a flat surface. Now repeat the same test using your right hand. Tap one finger, then the other. Try to time your taps to be as even as possible. Keep tapping for 10 seconds.");
+            }
+            
+            // Look for tapping steps
+            ORKStep *rightTapStep = filteredSteps(@"tapping", @"right");
+            XCTAssertNotNil(rightTapStep);
+            XCTAssertEqualObjects(rightTapStep.title, @"Tap the buttons using your RIGHT hand.");
+            XCTAssertTrue(rightTapStep.optional);
+            
+            ORKStep *leftTapStep = filteredSteps(@"tapping", @"left");
+            XCTAssertNotNil(leftTapStep);
+            XCTAssertEqualObjects(leftTapStep.title, @"Tap the buttons using your LEFT hand.");
+            XCTAssertTrue(leftTapStep.optional);
+        }
+    }
+    
+    XCTAssertGreaterThan(leftCount, threshold);
+    XCTAssertGreaterThan(rightCount, threshold);
+}
+
 
 @end
 

@@ -30,6 +30,7 @@
 
 
 #import "ORKHolePegTestRemoveStep.h"
+
 #import "ORKHolePegTestRemoveStepViewController.h"
 
 
@@ -73,7 +74,7 @@
     }
     
     if (self.stepDuration < ORKHolePegTestMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKHolePegTestMinimumDuration)] userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKHolePegTestMinimumDuration)] userInfo:nil];
     }
 }
 

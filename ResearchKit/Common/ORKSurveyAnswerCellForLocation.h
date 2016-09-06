@@ -31,9 +31,14 @@
  */
 
 
+@import UIKit;
 #import "ORKSurveyAnswerCell.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKSurveyAnswerCellForLocation : ORKSurveyAnswerCell
 
 @end
+
+NS_ASSUME_NONNULL_END

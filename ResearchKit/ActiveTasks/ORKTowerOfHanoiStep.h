@@ -29,7 +29,9 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,6 +46,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  The number of disks in the puzzle.
+ 
  It is not recommended that you use a large number of disks. As this provides a poor user experience.
  The default value of this property is 3.
  */

@@ -30,7 +30,8 @@
 
 
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKNavigationContainerView {
@@ -61,7 +62,7 @@
             [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = (UIEdgeInsets){};
+        self.layoutMargins = (UIEdgeInsets){0, 0, 0, 0};
         
         [self setUpConstraints];
         [self updateContinueAndSkipEnabled];
@@ -140,7 +141,7 @@
 }
 
 - (void)updateContinueAndSkipEnabled {
-    [_skipButton setTitle:_skipButtonItem.title?:ORKLocalizedString(@"BUTTON_SKIP_QUESTION", nil) forState:UIControlStateNormal];
+    [_skipButton setTitle:_skipButtonItem.title ? : ORKLocalizedString(@"BUTTON_SKIP_QUESTION", nil) forState:UIControlStateNormal];
     if ([self neverHasSkipButton]) {
         [_skipButton setFrame:(CGRect){{0,0},{0,0}}];
     }

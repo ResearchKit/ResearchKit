@@ -29,6 +29,7 @@
  */
 
 
+@import Foundation;
 #import <ResearchKit/ORKStep.h>
 
 
@@ -123,7 +124,7 @@ ORK_CLASS_AVAILABLE
  @param identifier    The string that identifies the form item, which should be unique within the form step.
  @param text          The text displayed as a prompt for the form item's question.
  @param answerFormat  The answer format for the form item.
- @param optional      Is this item optional?
+ @param optional      A Boolean that determines whether the item is optional
  
  @return An initialized form item.
  */
@@ -184,6 +185,30 @@ ORK_CLASS_AVAILABLE
  header is always `nil`, because no answer is expected.
  */
 @property (nonatomic, copy, readonly, nullable) ORKAnswerFormat *answerFormat;
+
+/**
+ Returns an form item that can be used for confirming a text entry.
+ 
+ This form item is intended to be used with an `ORKFormStep` in order to confirm a previous
+ formItem input. Example usage includes a password or participant identifier that is used to
+ anonymously identify a study participant.
+ 
+ Currently, only `ORKTextAnswerFormat` is supported. Unsupported `ORKAnswerFormat` types will
+ throw an exception.
+ 
+ The answer format for this item produces an `ORKBooleanQuestionResult` object.
+ 
+ @param identifier      The identifier for the `ORKFormItem` that is returned.
+ @param text            The text for the `ORKFormItem` that is returned.
+ @param errorMessage    The error message to display if the fields do not match
+ 
+ @return                An `ORKFormItem` with the indicated identifier and text and an ORKAnswerFormat 
+                        that is appropriate for confirming the input form item.
+ 
+ */
+- (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
+                                                     text:(nullable NSString *)text
+                                             errorMessage:(NSString *)errorMessage;
 
 @end
 

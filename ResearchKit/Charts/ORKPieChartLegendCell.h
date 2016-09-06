@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, James Cox. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -28,7 +29,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+
+@import UIKit;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKPieChartLegendCell : UICollectionViewCell
 
@@ -37,3 +42,5 @@
 @property (nonatomic, strong) UIView *dotView;
 
 @end
+
+NS_ASSUME_NONNULL_END

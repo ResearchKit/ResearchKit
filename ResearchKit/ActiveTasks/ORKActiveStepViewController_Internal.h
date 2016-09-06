@@ -30,11 +30,11 @@
 
 
 #import "ORKActiveStepViewController.h"
-#import "ORKActiveStepTimer.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKActiveStepTimer;
 @class ORKActiveStepView;
 
 @interface ORKActiveStepViewController ()
