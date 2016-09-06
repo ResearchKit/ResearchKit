@@ -598,11 +598,47 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                                       localized text is displayed.
  @param distanceInMeters            The timed walk distance in meters.
  @param timeLimit                   The time limit to complete the trials.
- @param turnAroundTimeLimit         The time limit to complete the turn around step.
  @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
                                       about the usage of an assistive device.
  @param options                     Options that affect the features of the predefined task.
  
+ @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of a timed walk, with a distinct turn around step.
+
+ In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+ possible, but safely. Then the participant is asked to turn around. The task is immediately
+ administered again by having the patient walk back the same distance.
+ A timed walk task can be used to measure lower extremity function.
+
+ The presentation of the timed walk task differs from both the fitness check task and the short
+ walk task in that the distance is fixed. After a first walk, the user is asked to turn, then reverse
+ direction.
+
+ The data collected by this task can include accelerometer, device motion, pedometer data,
+ and location where available.
+
+ Data collected by the task is in the form of an `ORKTimedWalkResult` object.
+
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+ about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
+
  @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier

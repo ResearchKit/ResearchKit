@@ -93,6 +93,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ShortWalk
     case SpatialSpanMemory
     case TimedWalk
+    case TimedWalkWithTurnAround
     case ToneAudiometry
     case TowerOfHanoi
     case TwoFingerTappingInterval
@@ -154,6 +155,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ShortWalk,
                     .SpatialSpanMemory,
                     .TimedWalk,
+                    .TimedWalkWithTurnAround,
                     .ToneAudiometry,
                     .TowerOfHanoi,
                     .TwoFingerTappingInterval,
@@ -255,10 +257,13 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .SpatialSpanMemory:
             return NSLocalizedString("Spatial Span Memory", comment: "")
-            
+
         case .TimedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
-            
+
+        case .TimedWalkWithTurnAround:
+            return NSLocalizedString("Timed Walk with Turn Around", comment: "")
+
         case .ToneAudiometry:
             return NSLocalizedString("Tone Audiometry", comment: "")
             
@@ -420,6 +425,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ShortWalkTask
         case SpatialSpanMemoryTask
         case TimedWalkTask
+        case TimedWalkWithTurnAroundTask
         case ToneAudiometryTask
         case TowerOfHanoi
         case TwoFingerTappingIntervalTask
@@ -524,7 +530,10 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .TimedWalk:
             return timedWalkTask
-            
+
+        case .TimedWalkWithTurnAround:
+            return timedWalkWithTurnAroundTask
+
         case .ToneAudiometry:
             return toneAudiometryTask
             
@@ -1212,9 +1221,14 @@ enum TaskListRow: Int, CustomStringConvertible {
 
     /// This task presents the Timed Walk pre-defined active task.
     private var timedWalkTask: ORKTask {
-        return ORKOrderedTask.timedWalkTaskWithIdentifier(String(Identifier.TimedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, turnAroundTimeLimit: 60.0, includeAssistiveDeviceForm: true, options: [])
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(String(Identifier.TimedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, includeAssistiveDeviceForm: true, options: [])
     }
-    
+
+    /// This task presents the Timed Walk with turn around pre-defined active task.
+    private var timedWalkWithTurnAroundTask: ORKTask {
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(String(Identifier.TimedWalkWithTurnAroundTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, turnAroundTimeLimit: 60.0, includeAssistiveDeviceForm: true, options: [])
+    }
+
     /// This task presents the Tone Audiometry pre-defined active task.
     private var toneAudiometryTask: ORKTask {
         return ORKOrderedTask.toneAudiometryTaskWithIdentifier(String(Identifier.ToneAudiometryTask), intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: [])
