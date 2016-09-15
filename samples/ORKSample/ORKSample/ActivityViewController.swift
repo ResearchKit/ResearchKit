@@ -96,13 +96,13 @@ class ActivityViewController: UITableViewController {
                 taskViewController = ORKTaskViewController(task: StudyTasks.microphoneTask, taskRun: NSUUID() as UUID)
                 
                 do {
-                    let defaultFileManager = FileManager.default()
+                    let defaultFileManager = FileManager.default
                     
                     // Identify the documents directory.
-                    let documentsDirectory = try defaultFileManager.urlForDirectory(.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                    let documentsDirectory = try defaultFileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
                     
                     // Create a directory based on the `taskRunUUID` to store output from the task.
-                    let outputDirectory = try documentsDirectory.appendingPathComponent(taskViewController.taskRunUUID.uuidString)
+                    let outputDirectory = documentsDirectory.appendingPathComponent(taskViewController.taskRunUUID.uuidString)
                     try defaultFileManager.createDirectory(at: outputDirectory, withIntermediateDirectories: true, attributes: nil)
                     
                     taskViewController.outputDirectory = outputDirectory
@@ -122,7 +122,7 @@ class ActivityViewController: UITableViewController {
 
 extension ActivityViewController : ORKTaskViewControllerDelegate {
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Handle results using taskViewController.result
         taskViewController.dismiss(animated: true, completion: nil)
     }

@@ -86,7 +86,7 @@ class DashboardTableViewController: UITableViewController {
     
     func animatableChartInCell(_ cell: UITableViewCell) -> AnimatableChart? {
         for chart in allCharts {
-            guard let animatableChart = chart as? AnimatableChart where chart.isDescendant(of: cell) else { continue }
+            guard let animatableChart = chart as? AnimatableChart, chart.isDescendant(of: cell) else { continue }
             return animatableChart
         }
         

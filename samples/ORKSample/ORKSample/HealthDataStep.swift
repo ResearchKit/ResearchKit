@@ -60,18 +60,18 @@ class HealthDataStep: ORKInstructionStep {
     
     // MARK: Convenience
     
-    func getHealthAuthorization(_ completion: (success: Bool, error: NSError?) -> Void) {
+    func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
             let error = NSError(domain: "com.example.apple-samplecode.ORKSample", code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
             
-            completion(success: false, error:error)
+            completion(false, error)
             
             return
         }
         
         // Get authorization to access the data
         HKHealthStore().requestAuthorization(toShare: healthDataItemsToWrite, read: healthDataItemsToRead) { (success, error) -> Void in
-            completion(success:success, error:error)
+            completion(success, error)
         }
     }
 }

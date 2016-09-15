@@ -42,8 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return window?.rootViewController as? ResearchContainerViewController
     }
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        let standardDefaults = UserDefaults.standard()
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+        let standardDefaults = UserDefaults.standard
         if standardDefaults.object(forKey: "ORKSampleFirstRun") == nil {
             ORKPasscodeViewController.removePasscodeFromKeychain()
             standardDefaults.setValue("ORKSampleFirstRun", forKey: "ORKSampleFirstRun")
@@ -51,15 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Appearance customization
         let pageControlAppearance = UIPageControl.appearance()
-        pageControlAppearance.pageIndicatorTintColor = UIColor.lightGray()
-        pageControlAppearance.currentPageIndicatorTintColor = UIColor.black()
+        pageControlAppearance.pageIndicatorTintColor = UIColor.lightGray
+        pageControlAppearance.currentPageIndicatorTintColor = UIColor.black
         
         // Dependency injection.
         containerViewController?.injectHealthStore(healthStore)
         return true
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         lockApp()
         return true
     }

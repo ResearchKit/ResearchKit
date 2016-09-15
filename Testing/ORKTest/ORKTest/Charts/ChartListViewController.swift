@@ -32,10 +32,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 
-func executeAfterDelay(_ delay:Double, closure:()->()) {
+func executeAfterDelay(_ delay:Double, closure: @escaping ()->()) {
     let delayTime = DispatchTime.now() + delay
-    DispatchQueue.main.after(
-        when: delayTime, execute: closure)
+    DispatchQueue.main.asyncAfter(
+        deadline: delayTime, execute: closure)
 }
 
 class ChartListViewController: UIViewController, UITableViewDataSource {
@@ -82,8 +82,8 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             pieChartView?.lineWidth = 12
             pieChartView?.title = "UPDATED"
             pieChartView?.text = "UPDATED TEXT"
-            pieChartView?.titleColor = UIColor.red()
-            pieChartView?.textColor = UIColor.orange()
+            pieChartView?.titleColor = UIColor.red
+            pieChartView?.textColor = UIColor.orange
         }
         executeAfterDelay(2.5) {
             pieChartView?.drawsClockwise = true
@@ -91,7 +91,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
         executeAfterDelay(3.5) {
             pieChartView?.showsPercentageLabels = true
-            pieChartView?.tintColor = UIColor.purple()
+            pieChartView?.tintColor = UIColor.purple
         }
         executeAfterDelay(4.5) {
             pieChartView?.titleColor = nil
@@ -104,16 +104,16 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         lineGraphChartView.dataSource = lineGraphChartDataSource
         // Optional custom configuration
         executeAfterDelay(1.5) {
-            lineGraphChartView.tintColor = UIColor.purple()
+            lineGraphChartView.tintColor = UIColor.purple
             lineGraphChartView.showsHorizontalReferenceLines = true
             lineGraphChartView.showsVerticalReferenceLines = true
         }
         executeAfterDelay(2.5) {
-            lineGraphChartView.axisColor = UIColor.red()
-            lineGraphChartView.verticalAxisTitleColor = UIColor.red()
-            lineGraphChartView.referenceLineColor = UIColor.orange()
-            lineGraphChartView.scrubberLineColor = UIColor.blue()
-            lineGraphChartView.scrubberThumbColor = UIColor.green()
+            lineGraphChartView.axisColor = UIColor.red
+            lineGraphChartView.verticalAxisTitleColor = UIColor.red
+            lineGraphChartView.referenceLineColor = UIColor.orange
+            lineGraphChartView.scrubberLineColor = UIColor.blue
+            lineGraphChartView.scrubberThumbColor = UIColor.green
         }
         executeAfterDelay(3.5) {
             lineGraphChartView.axisColor = nil

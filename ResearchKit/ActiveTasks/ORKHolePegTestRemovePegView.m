@@ -32,7 +32,7 @@
 #import "ORKHolePegTestRemovePegView.h"
 
 
-@interface ORKHolePegTestRemovePegView ()
+@interface ORKHolePegTestRemovePegView () <CAAnimationDelegate>
 
 @property (nonatomic, strong) CAShapeLayer *checkLayer;
 

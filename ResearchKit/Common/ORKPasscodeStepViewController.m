@@ -39,6 +39,9 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
+@interface ORKPasscodeStepViewController () <CAAnimationDelegate>
+
+@end
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;

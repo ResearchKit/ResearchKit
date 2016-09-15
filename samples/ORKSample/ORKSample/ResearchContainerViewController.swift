@@ -40,7 +40,7 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
     
     var contentHidden = false {
         didSet {
-            guard contentHidden != oldValue && isViewLoaded() else { return }
+            guard contentHidden != oldValue && isViewLoaded else { return }
             childViewControllers.first?.view.isHidden = contentHidden
         }
     }
@@ -58,11 +58,11 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
         if let healthStore = healthStore {
-            segue.destinationViewController.injectHealthStore(healthStore)
+            segue.destination.injectHealthStore(healthStore)
         }
     }
     
@@ -96,7 +96,7 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
 
 
 extension ResearchContainerViewController: ORKTaskViewControllerDelegate {
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Check if the user has finished the `WithdrawViewController`.
         if taskViewController is WithdrawViewController {
             /*

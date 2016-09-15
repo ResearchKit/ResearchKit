@@ -36,7 +36,7 @@ class ProfileHeaderView: UIView {
     
     var seperatorHeight = CGFloat(0.5)
 
-    var seperatorColor = UIColor.lightGray()
+    var seperatorColor = UIColor.lightGray
 
     // MARK: UIView
     

@@ -62,7 +62,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
             guard authorized else { return }
             
             // Reload the table view cells on the main thread.
-            OperationQueue.main().addOperation() {
+            OperationQueue.main.addOperation() {
                 let allRowIndexPaths = self.healthObjectTypes.enumerated().map { (index, element) in return IndexPath(row: index, section: 0) }
                 self.tableView.reloadRows(at: allRowIndexPaths, with: .automatic)
             }
@@ -116,8 +116,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
             let dateOfBirth = try healthStore.dateOfBirth()
             let now = Date()
 
-            let ageComponents = Calendar.current().components(.year, from: dateOfBirth, to: now, options: .wrapComponents)
-            let age = ageComponents.year
+            let age = Calendar.current.component(.year, from: now) - Calendar.current.component(.year, from: dateOfBirth)
 
             cell.valueLabel.text = "\(age)"
         }
@@ -134,14 +133,14 @@ class ProfileViewController: UITableViewController, HealthClientType {
             Check a health store has been set and a `HKQuantityType` can be
             created with the identifier provided.
         */
-        guard let healthStore = healthStore, quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: identifier)) else { return }
+        guard let healthStore = healthStore, let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: identifier)) else { return }
         
         // Get the most recent entry from the health store.
         healthStore.mostRecentQauntitySampleOfType(quantityType) { quantity, _ in
             guard let quantity = quantity else { return }
             
             // Update the cell on the main thread.
-            OperationQueue.main().addOperation() {
+            OperationQueue.main.addOperation() {
                 guard let indexPath = self.indexPathForObjectTypeIdentifier(identifier) else { return }
                 guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileStaticTableViewCell else { return }
                 

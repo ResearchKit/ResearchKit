@@ -48,7 +48,7 @@ import MapKit
     and are not user visible (see description in `ResultViewController`), none
     of the properties / content are localized.
 */
-func resultTableViewProviderForResult(_ result: ORKResult?) -> protocol<UITableViewDataSource, UITableViewDelegate> {
+func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSource & UITableViewDelegate {
     guard let result = result else {
         /*
             Use a table view provider that shows that there hasn't been a recently
@@ -144,7 +144,7 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> protocol<UITableV
         providerType = CollectionResultTableViewProvider.self
         
     default:
-        fatalError("No ResultTableViewProvider defined for \(result.dynamicType).")
+        fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
     }
     
     // Return a new instance of the specific `ResultTableViewProvider`.
@@ -185,7 +185,7 @@ enum ResultRow {
             it's "nil". Use Optional's map method to map the value to a string
             if the detail is not `nil`.
         */
-        let detailText = detail.map { String($0) } ?? "nil"
+        let detailText = detail.map { String(describing: $0) } ?? "nil"
         
         self = .text(text, detail: detailText, selectable: selectable)
     }
@@ -300,7 +300,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         
         return [
             // The class name of the result object.
-            ResultRow(text: "type", detail: result.dynamicType),
+            ResultRow(text: "type", detail: type(of: result)),
 
             /*
                 The identifier of the result, which corresponds to the task,
@@ -376,7 +376,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
         let location = questionResult.locationAnswer
-        let address = location?.addressDictionary["FormattedAddressLines"]?.componentsJoined(by:)(by: " ")
+        let address = (location?.addressDictionary["FormattedAddressLines"] as? NSArray)?.componentsJoined(by: " ")
         let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
             ResultRow(text: "latitude", detail: location?.coordinate.latitude),
@@ -519,7 +519,7 @@ class PasscodeResultTableViewProvider: ResultTableViewProvider   {
         let passcodeResult = result as! ORKPasscodeResult
         
         var passcodeResultDetailText: String?
-        passcodeResultDetailText = passcodeResult.isPasscodeSaved.boolValue ? "true" : "false"
+        passcodeResultDetailText = passcodeResult.isPasscodeSaved ? "true" : "false"
         
         return super.resultRowsForSection(section) + [
             ResultRow(text: "passcodeSaved", detail: passcodeResultDetailText)
@@ -542,9 +542,9 @@ class FileResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
         
-        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType, contentType.hasPrefix("image/") {
             
-            if let image = UIImage.init(contentsOfFile: fileURL.path!) {
+            if let image = UIImage.init(contentsOfFile: fileURL.path) {
                 return rows + [
                     // The image of the generated file on disk.
                     .image(image)
@@ -1037,7 +1037,7 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
         // Show the child results in section 1.
         if section == 1 {
             return rows + collectionResult.results!.map { childResult in
-                let childResultClassName = "\(childResult.dynamicType)"
+                let childResultClassName = "\(type(of: childResult))"
 
                 return ResultRow(text: childResultClassName, detail: childResult.identifier, selectable: true)
             }

@@ -156,13 +156,13 @@ class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
         let color: UIColor
         switch plotIndex {
         case 0:
-            color = UIColor.cyan()
+            color = UIColor.cyan
         case 1:
-            color = UIColor.magenta()
+            color = UIColor.magenta
         case 2:
-            color = UIColor.yellow()
+            color = UIColor.yellow
         default:
-            color = UIColor.red()
+            color = UIColor.red
         }
         return color
     }

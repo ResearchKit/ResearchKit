@@ -43,11 +43,11 @@
 #import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
 
-
 @interface ClassProperty : NSObject
 
 @property (nonatomic, copy) NSString *propertyName;
 @property (nonatomic, strong) Class propertyClass;
+@property (nonatomic, strong) Protocol* propertyProtocol;
 @property (nonatomic) BOOL isPrimitiveType;
 
 - (instancetype)initWithObjcProperty:(objc_property_t)property;
@@ -75,7 +75,12 @@
             Class typeClass = nil;
             if (typeAttribute.length > 4) {
                 NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, typeAttribute.length-4)];  //turns @"NSDate" into NSDate
-                typeClass = NSClassFromString(typeClassName);
+                if ([typeClassName hasPrefix:@"<"] && [typeClassName hasSuffix:@">"]) {
+                    typeClassName = [typeClassName substringWithRange:NSMakeRange(1, typeClassName.length-2)];
+                    self.propertyProtocol = NSProtocolFromString(typeClassName);
+                } else {
+                    typeClass = NSClassFromString(typeClassName);
+                }
             } else {
                 typeClass = [NSObject class];
             }
@@ -424,8 +429,13 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                         } else if (p.propertyClass == [ORKLocation class]) {
                             [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
                         } else {
-                            id itemInstance = [self instanceForClass:p.propertyClass];
-                            [instance setValue:itemInstance forKey:p.propertyName];
+                            if (p.propertyClass) {
+                                id itemInstance = [self instanceForClass:p.propertyClass];
+                                [instance setValue:itemInstance forKey:p.propertyName];
+                            } else if (p.propertyProtocol) {
+                                id itemInstance = [self instanceForProtocol:p.propertyProtocol];
+                                [instance setValue:itemInstance forKey:p.propertyName];
+                            }
                         }
                     }
                     [propertyNames addObject:p.propertyName];
@@ -695,6 +705,13 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     }
     
     return [[c alloc] init];
+}
+
+- (id)instanceForProtocol:(Protocol*)p {
+    if (strcmp(protocol_getName(p), "ORKTask") == 0) {
+        return [[ORKOrderedTask alloc] initWithIdentifier:@"OrderedTaskIdentifier" steps:@[[self instanceForClass:[ORKStep class]]]];
+    }
+    return nil;
 }
 
 - (void)testEquality {

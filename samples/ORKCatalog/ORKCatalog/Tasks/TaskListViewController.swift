@@ -106,7 +106,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         taskViewController.delegate = self
         
         // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+        taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
         /*
             We present the task directly, but it is also possible to use segues.
@@ -118,7 +118,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     
     // MARK: ORKTaskViewControllerDelegate
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         /*
             The `reason` passed to this method indicates why the task view
             controller finished: Did the user cancel, save, or actually complete
@@ -148,15 +148,15 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
                     self.waitStepViewController = stepViewController;
                     self.waitStepProgress = 0.0
                     self.waitStepUpdateTimer = Timer(timeInterval: 0.1, target: self, selector: #selector(TaskListViewController.updateProgressOfWaitStepViewController), userInfo: nil, repeats: true)
-                    RunLoop.main().add(self.waitStepUpdateTimer!, forMode: RunLoopMode.commonModes)
+                    RunLoop.main.add(self.waitStepUpdateTimer!, forMode: RunLoopMode.commonModes)
                 }
             })
         }
     }
     
-    func delay(_ delay:Double, closure:()->()) {
+    func delay(_ delay:Double, closure: @escaping ()->()) {
         let delayTime = DispatchTime.now() + delay
-        DispatchQueue.main.after(when: delayTime, execute: closure)
+        DispatchQueue.main.asyncAfter(deadline: delayTime, execute: closure)
     }
     
     func updateProgressOfWaitStepViewController() {

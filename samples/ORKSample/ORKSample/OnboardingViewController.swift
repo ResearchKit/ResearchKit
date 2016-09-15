@@ -64,7 +64,7 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController : ORKTaskViewControllerDelegate {
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
             case .completed:
                 performSegue(withIdentifier: "unwindToStudy", sender: nil)
