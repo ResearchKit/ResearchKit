@@ -29,9 +29,12 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKDefines_Private.h"
+@import UIKit;
+#import "ORKDefines.h"
+#import "ORKTypes.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKDirectionView : UIView
@@ -41,3 +44,5 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithOrientation:(ORKBodySagittal)orientation NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

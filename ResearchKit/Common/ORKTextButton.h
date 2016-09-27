@@ -28,18 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+@import UIKit;
+#import "ORKDefines.h"
 
-#import <UIKit/UIKit.h>
-#import "ORKDefaultFont.h"
-#import "ORKDefines_Private.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  "Skip" button or "Learn More" button.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTextButton : UIButton <ORKDefaultFont>
-
+@interface ORKTextButton : UIButton
+@property (nonatomic) BOOL isInTransition;
 @end
 
 
@@ -48,3 +48,5 @@ ORK_CLASS_AVAILABLE
 - (void)init_ORKTextButton;
 
 @end
+
+NS_ASSUME_NONNULL_END

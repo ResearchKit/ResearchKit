@@ -30,7 +30,8 @@
 
 
 #import "ORKTapCountLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKTapCountLabel

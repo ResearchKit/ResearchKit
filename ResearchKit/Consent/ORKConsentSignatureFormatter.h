@@ -29,11 +29,18 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ORKConsentSignature.h>
+@import Foundation;
+#import "ORKDefines.h"
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class ORKConsentSignature;
 
 @interface ORKConsentSignatureFormatter : NSObject
 
 - (NSString *)HTMLForSignature:(ORKConsentSignature *)signature;
 
 @end
+
+NS_ASSUME_NONNULL_END

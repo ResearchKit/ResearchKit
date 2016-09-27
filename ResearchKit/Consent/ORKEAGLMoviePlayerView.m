@@ -30,12 +30,12 @@
 
 
 #import "ORKEAGLMoviePlayerView.h"
-#import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVUtilities.h>
-#import <mach/mach_time.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import AVFoundation;
+@import OpenGLES;
+@import QuartzCore;
 
 
 // Uniform index.
@@ -75,10 +75,10 @@ static const GLfloat ColorConversion709[] = {
 #if defined(DEBUG)
     void ORKCheckForGLError()
     {
-        GLenum err = glGetError();
-        if (err != GL_NO_ERROR)
+        GLenum error = glGetError();
+        if (error != GL_NO_ERROR)
         {
-            ORK_Log_Error(@"glError: 0x%04X", err);
+            ORK_Log_Error(@"glError: 0x%04X", error);
         }
     }
 #else
@@ -181,9 +181,9 @@ const GLfloat DefaultPreferredRotation = 0;
     
     // Create CVOpenGLESTextureCacheRef for optimal CVPixelBufferRef to GLES texture conversion.
     if (!_videoTextureCache) {
-        CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
-        if (err != noErr) {
-            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreate %d", err);
+        CVReturn error = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
+        if (error != noErr) {
+            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreate %d", error);
             return;
         }
     }
@@ -353,7 +353,7 @@ const GLfloat DefaultPreferredRotation = 0;
         return NO;
     }
 
-    CVReturn err;
+    CVReturn error;
     if (pixelBuffer != NULL) {
         ORKEAGLLog(@"Have buffer");
 
@@ -384,7 +384,7 @@ const GLfloat DefaultPreferredRotation = 0;
         /*
          Create Y and UV textures from the pixel buffer. These textures will be drawn on the frame buffer Y-plane.
          */
-        err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
+        error = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                            _videoTextureCache,
                                                            pixelBuffer,
                                                            NULL,
@@ -396,7 +396,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            GL_UNSIGNED_BYTE,
                                                            0,
                                                            &_lumaTexture);
-        if (0 == err) {
+        if (0 == error) {
             
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(CVOpenGLESTextureGetTarget(_lumaTexture), CVOpenGLESTextureGetName(_lumaTexture));
@@ -406,7 +406,7 @@ const GLfloat DefaultPreferredRotation = 0;
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
             
             // UV-plane.
-            err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
+            error = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
                                                                _videoTextureCache,
                                                                pixelBuffer,
                                                                NULL,
@@ -419,7 +419,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                                1,
                                                                &_chromaTexture);
             
-             if (0 == err) {
+             if (0 == error) {
                  glActiveTexture(GL_TEXTURE1);
                  glBindTexture(CVOpenGLESTextureGetTarget(_chromaTexture), CVOpenGLESTextureGetName(_chromaTexture));
                  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -431,8 +431,8 @@ const GLfloat DefaultPreferredRotation = 0;
         
         [self restoreGLContext];
         
-        if (err) {
-            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+        if (error) {
+            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", error);
             return NO;
         }
         

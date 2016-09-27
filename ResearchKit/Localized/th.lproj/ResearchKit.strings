@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "ป้อนที่อยู่";
-"LOCATION_ERROR_TITLE" = "ไม่สามารถหาที่อยู่ที่กำหนดได้";
+"LOCATION_ERROR_TITLE" = "ไม่สามารถหาที่อยู่ที่ระบุได้";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "ไม่สามารถหาตำแหน่งที่ตั้งปัจจุบันของคุณ กรุณาป้อนที่อยู่หรือไปอยู่ในที่ที่มีสัญญาณ GPS ที่ดีกว่านี้หากเป็นไปได้";
 "LOCATION_ERROR_MESSAGE_DENIED" = "การเข้าถึงบริการหาตำแหน่งที่ตั้งถูกปฏิเสธ กรุณาอนุญาตให้แอพนี้ใช้บริการหาตำแหน่งที่ตั้งได้ผ่านทางการตั้งค่า";
 "LOCATION_ERROR_GEOCODE" = "ไม่มีผลการค้นหาสำหรับที่อยู่ที่ป้อน กรุณาตรวจสอบให้แน่ใจว่าที่อยู่ถูกต้อง";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "เฉพาะตัวเลขเท่านั้น";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "สัญลักษณ์แสดงว่ากำลังป้อนรหัสผ่านตัวเลขอยู่";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "ตัวเลขที่ป้อนหลักที่ %@ จาก %@ หลัก";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "ลืมรหัสหรือไม่";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "ไม่สามารถเพิ่มรายการในพวงกุญแจ";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "ไม่";
 "BOOL_YES" = "ใช่";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "ซม.";
+"MEASURING_UNIT_FT" = "ฟุต";
+"MEASURING_UNIT_IN" = "นิ้ว";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "แตะเพื่อตอบ";
 "NULL_ANSWER" = "เลือกคำตอบ";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "บันทึกไว้ใช้ภายหลัง";
 "BUTTON_OPTION_DISCARD" = "ละทิ้งผลลัพธ์";
 "BUTTON_OPTION_STOP_TASK" = "สิ้นสุดงาน";
+"BUTTON_SAVE" = "บันทึก";
+"BUTTON_CLEAR_ANSWER" = "ล้างคำตอบ";
+"BUTTON_READ_ONLY_MODE" = "ไม่สามารถแก้ไขคำตอบนี้ได้";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "กำลังจะเริ่มกิจกรรมใน";
 "TASK_COMPLETE_TITLE" = "กิจกรรมเสร็จสมบูรณ์";
 "TASK_COMPLETE_TEXT" = "ข้อมูลของคุณจะได้รับการวินิจฉัยและคุณจะได้รับแจ้งเมื่อได้ผลลัพธ์ของคุณแล้ว";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "เหลืออีก %@ วินาที";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "จับภาพ";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "อนุญาตให้แอพนี้เข้าถึงกล้องได้ในการตั้งค่าเพื่อทำขั้นตอนนี้ให้เสร็จสมบูรณ์";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "ไม่ได้ระบุสารบบผลลัพธ์ไว้สำหรับรูปภาพที่จับภาพ";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "รูปภาพที่จับภาพไว้บันทึกไม่ได้";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "เริ่มอัด";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "หยุดอัด";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "ถ่ายวิดีโออีกครั้ง";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "ฟิตเนส";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "หันหลัง แล้วเดินกลับไปจุดเริ่มต้น";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "เดินตรงขึ้นไป %ld ก้าว";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "หาสถานที่ที่คุณสามารถเดินไปมาเป็นเส้นตรงได้อย่างปลอดภัย ให้ลองเดินไปเรื่อยๆ จนสุดทางแล้วเดินกลับ เสมือนคุณเดินวนรอบกรวย\n\nจากนั้นระบบจะแนะนำให้คุณกลับหลังหัน แล้วยืนนิ่งๆ โดยแนบแขนไว้ข้างลำตัวและวางเท้าให้ห่างกันเท่ากับความกว้างของหัวไหล่";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "แตะเริ่มต้น เมื่อคุณพร้อมที่จะเริ่มใช้งาน\nจากนั้นใส่โทรศัพท์ของคุณไว้ในกระเป๋ากางเกงหรือกระเป๋าถือ แล้วทำตามคำแนะนำด้วยเสียง";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "เดินไปมาเป็นเส้นตรงนาน %@ โดยให้คุณเดินตามปกติ";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "กลับหลังหันแล้วยืนนิ่งๆ นาน %@";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "คุณทำกิจกรรมเสร็จสมบูรณ์แล้ว";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "ความเร็วของการแตะ";
+"TAPPING_TASK_TITLE_RIGHT" = "มือขวา";
+"TAPPING_TASK_TITLE_LEFT" = "มือซ้าย";
 "TAPPING_INTRO_TEXT" = "กิจกรรมนี้จะวัดความเร็วในการแตะของคุณ";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "วางโทรศัพท์ของคุณไว้บนพื้นผิวที่ราบเรียบ ปุ่มสองปุ่มจะปรากฏบนหน้าจอของคุณเป็นเวลา %@ ใช้สองนิ้วจากมือข้างเดียวกันแตะสลับกันที่ปุ่มที่ปรากฏขึ้นให้เร็วที่สุดเท่าที่จะทำได้";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "วางโทรศัพท์ของคุณไว้บนพื้นผิวที่ราบเรียบ";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "ใช้นิ้วมือข้างเดียวกันสองนิ้วแตะสลับกันที่ปุ่มบนหน้าจอ";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "ใช้นิ้วมือข้างขวาสองนิ้วแตะสลับกันที่ปุ่มบนหน้าจอ";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "ใช้นิ้วมือข้างซ้ายสองนิ้วแตะสลับกันที่ปุ่มบนหน้าจอ";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "ตอนนี้ให้ทดสอบแบบเดียวกันซ้ำอีกครั้งโดยใช้มือขวา";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "ตอนนี้ให้ทดสอบแบบเดียวกันซ้ำอีกครั้งโดยใช้มือซ้าย";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "แตะหนึ่งนิ้ว แล้วตามด้วยอีกนิ้ว ลองจับเวลาการแตะของคุณโดยให้มีจังหวะเท่ากันมากที่สุด แตะต่อไปเรื่อยๆ เป็นเวลา %@";
 "TAPPING_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
+"TAPPING_CALL_TO_ACTION_NEXT" = "แตะถัดไปเพื่อเริ่ม";
 "TAP_BUTTON_TITLE" = "แตะ";
 "TOTAL_TAPS_LABEL" = "การแตะทั้งหมด";
-"TAPPING_INSTRUCTION" = "แตะปุ่มโดยใช้สองนิ้วให้เร็วที่สุดเท่าที่จะทำได้";
-
+"TAPPING_INSTRUCTION" = "ใช้สองนิ้วแตะปุ่มโดยลงน้ำหนักให้สม่ำเสมอที่สุดเท่าที่จะทำได้";
+"TAPPING_INSTRUCTION_RIGHT" = "ใช้มือขวาแตะปุ่ม";
+"TAPPING_INSTRUCTION_LEFT" = "ใช้มือซ้ายแตะปุ่ม";
+"TAPPING_SKIP_TITLE" = "ข้ามมือข้างนี้";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "เสียง";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "กิจกรรมนี้จะประเมินเสียงของคุณโดยใช้ไมโครโฟนที่อยู่ด้านล่างสุดของโทรศัพท์ของคุณบันทึกเสียงคุณไว้";
 "AUDIO_TOO_LOUD_LABEL" = "ดังเกินไป";
 "AUDIO_GENERIC_ERROR_LABEL" = "ไม่สามารถบันทึกเสียง";
+"AUDIO_LEVEL_CHECK_LABEL" = "โปรดรอในระหว่างที่เราตรวจสอบระดับเสียงรบกวนรอบข้าง";
+"AUDIO_TOO_LOUD_MESSAGE" = "ระดับเสียงแวดล้อมดังเกินกว่าที่จะอัดเสียงของคุณได้ โปรดย้ายไปอยู่บริเวณที่มีเสียงเบากว่านี้แล้วลองอีกครั้ง";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "แตะถัดไปเมื่อพร้อม";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "การตรวจวัดการได้ยินเสียง";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "ใช้นิ้วสองนิ้วหยิบหมุด";
 "HOLE_PEG_TEST_TEXT_2" = "ปล่อยนิ้วเพื่อปล่อยหมุด";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "กิจกรรมวัดอาการสั่น";
+"TREMOR_TEST_INTRO_1_DETAIL" = "กิจกรรมนี้เป็นตัววัดอาการสั่นของมือคุณในอิริยาบทต่างๆ โปรดหาสถานที่ที่คุณสามารถนั่งได้อย่างสบายๆ ในระหว่างที่ทำกิจกรรมนี้";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "ถือโทรศัพท์ไว้ในมือข้างที่มีอาการสั่นมากกว่าตามที่แสดงในรูปภาพด้านล่าง";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "ถือโทรศัพท์ไว้ในมือขวาตามที่แสดงในรูปภาพด้านล่าง";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "ถือโทรศัพท์ไว้ในมือซ้ายตามที่แสดงในรูปภาพด้านล่าง";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "ระบบจะขอให้คุณทำ%@ในระหว่างที่นั่งถือโทรศัพท์ไว้ในมือ";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "หนึ่งบททดสอบ";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "สองบททดสอบ";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "สามบททดสอบ";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "สี่บททดสอบ";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "ห้าบททดสอบ";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "แตะถัดไปเพื่อทำต่อ";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "เตรียมถือโทรศัพท์ของคุณไว้บนตัก";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "เตรียมถือโทรศัพท์ของคุณไว้บนตักโดยใช้มือซ้าย";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "เตรียมถือโทรศัพท์ของคุณไว้บนตักโดยใช้มือขวา";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "ถือโทรศัพท์ของคุณไว้นิ่งๆ บนตักนาน %ld วินาที";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "ตอนนี้ให้วางโทรศัพท์ของคุณบนฝ่ามือแล้วถือไว้นิ่งๆ ที่ความสูงระดับไหล่";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "ตอนนี้ให้วางโทรศัพท์ของคุณบนฝ่ามือข้างซ้ายแล้วถือไว้นิ่งๆ ที่ความสูงระดับไหล่";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "ตอนนี้ให้วางโทรศัพท์ของคุณบนฝ่ามือข้างขวาแล้วถือไว้นิ่งๆ ที่ความสูงระดับไหล่";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "วางโทรศัพท์ของคุณบนฝ่ามือแล้วถือไว้นิ่งๆ นาน %ld วินาที";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "ตอนนี้ให้ถือโทรศัพท์ที่ความสูงระดับไหล่โดยงอข้อศอกของคุณไว้";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "ตอนนี้ให้ใช้มือซ้ายถือโทรศัพท์ที่ความสูงระดับไหล่โดยงอข้อศอกของคุณไว้";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "ตอนนี้ให้ใช้มือขวาถือโทรศัพท์ที่ความสูงระดับไหล่โดยงอข้อศอกของคุณไว้";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "ถือโทรศัพท์ของคุณไว้นิ่งๆ โดยงอข้อศอกนาน %ld วินาที";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "ตอนนี้ให้งอข้อศอกของคุณไว้นิ่งๆ แล้วเอาโทรศัพท์มาแตะที่จมูกแบบสลับไปมาซ้ำๆ";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "ตอนนี้ให้ใช้มือซ้ายถือโทรศัพท์และงอข้อศอกของคุณไว้นิ่งๆ แล้วเอาโทรศัพท์มาแตะที่จมูกแบบสลับไปมาซ้ำๆ";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "ตอนนี้ให้ใช้มือขวาถือโทรศัพท์และงอข้อศอกของคุณไว้นิ่งๆ แล้วเอาโทรศัพท์มาแตะที่จมูกแบบสลับไปมาซ้ำๆ";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "เอาโทรศัพท์ของคุณมาแตะที่จมูกแบบสลับไปมานาน %ld วินาที";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "เตรียมทำท่าโบกมือเบาๆ (โบกมือโดยขยับแค่ข้อมือ)";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "เตรียมทำท่าโบกมือเบาๆ โดยใช้มือซ้ายที่ถือโทรศัพท์ไว้ (โบกมือโดยขยับแค่ข้อมือ)";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "เตรียมทำท่าโบกมือเบาๆ โดยใช้มือขวาที่ถือโทรศัพท์ไว้ (โบกมือโดยขยับแค่ข้อมือ)";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "ทำท่าโบกมือเบาๆ นาน %ld วินาที";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "ตอนนี้ให้สลับไปใช้มือซ้ายถือโทรศัพท์แล้วทำบททดสอบถัดไปต่อ";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "ตอนนี้ให้สลับไปใช้มือขวาถือโทรศัพท์แล้วทำบททดสอบถัดไปต่อ";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "ทำบททดสอบถัดไปต่อ";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "กิจกรรมเสร็จสมบูรณ์แล้ว";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "ระบบจะขอให้คุณทำ%@ในระหว่างที่นั่งถือโทรศัพท์ไว้ในมือข้างหนึ่ง แล้วเปลี่ยนไปถือในมืออีกข้างหนึ่ง";
+"TREMOR_SKIP_LEFT_HAND" = "ฉันไม่สามารถทำกิจกรรมนี้ได้โดยใช้มือซ้าย";
+"TREMOR_SKIP_RIGHT_HAND" = "ฉันไม่สามารถทำกิจกรรมนี้ได้โดยใช้มือขวา";
+"TREMOR_SKIP_NEITHER" = "ฉันสามารถทำกิจกรรมนี้ได้โดยใช้มือทั้งสองข้าง";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "สร้างไฟล์ไม่ได้";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "ไม่สามารถเอาไฟล์บันทึกออกให้เพียงพอกับค่าที่กำหนด";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "แสดงตัวอย่างการเก็บภาพ";
 "AX_IMAGE_CAPTURED_LABEL" = "รูปภาพที่จับภาพ";
 
+"AX_VIDEO_CAPTURE_LABEL" = "แสดงตัวอย่างภาพถ่ายวิดีโอ";
+"AX_VIDEO_CAPTURED_LABEL" = "วิดีโอที่ถ่ายไว้";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "ไม่สามารถวางจานที่มีขนาด %@ บนจานที่มีขนาด %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "เป้าหมาย";
 "AX_TOWER_OF_HANOI_TOWER" = "หอคอย";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "มีจานที่มีขนาด %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ว่างเปล่า";
 
-"AX_GRAPH_RANGE_FORMAT" = "ช่วงตั้งแต่ %@ ถึง %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "ช่วงตั้งแต่ %@ ถึง %@";
+"AX_GRAPH_STACK_PREFIX" = "สแต็คประกอบด้วย";
 "AX_GRAPH_AND_SEPARATOR" = " และ ";
 "AX_GRAPH_POINT_%@" = "จุด: %@";

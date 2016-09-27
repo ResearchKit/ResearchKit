@@ -30,9 +30,13 @@
 
 
 #import "ORKConsentSharingStepViewController.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKConsentLearnMoreViewController.h"
+
 #import "ORKConsentSharingStep.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKConsentSharingStepViewController

@@ -56,7 +56,7 @@
 "LEARN_MORE_DATA_GATHERING" = "Læs mere om, hvordan data indsamles";
 "LEARN_MORE_DATA_USE" = "Læs mere om, hvordan data bruges";
 "LEARN_MORE_PRIVACY" = "Læs mere om, hvordan din anonymitet og identitet er beskyttet";
-"LEARN_MORE_WELCOME" = "Læs mere om opgaverne først";
+"LEARN_MORE_WELCOME" = "Læs mere om undersøgelsen først";
 "LEARN_MORE_STUDY_SURVEY" = "Læs mere om undersøgelsen";
 "LEARN_MORE_TIME_COMMITMENT" = "Læs mere om undersøgelsens indflydelse på din tid";
 "LEARN_MORE_TASKS" = "Læs mere om de involverede opgaver";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tilladt.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusindikator for indtastning af adgangskode";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ af %@ cifre indtastet";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Glemt adgangskoden?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nøgleringsemne kunne ikke tilføjes.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Ingen";
 "BOOL_YES" = "Ja";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "fod";
+"MEASURING_UNIT_IN" = "\"";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tryk for at svare";
 "NULL_ANSWER" = "Vælg et svar";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Arkiver til senere";
 "BUTTON_OPTION_DISCARD" = "Slet resultater";
 "BUTTON_OPTION_STOP_TASK" = "Slut opgave";
+"BUTTON_SAVE" = "Arkiver";
+"BUTTON_CLEAR_ANSWER" = "Ryd svar";
+"BUTTON_READ_ONLY_MODE" = "Dette svar kan ikke ændres.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starter aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktivitet færdig";
 "TASK_COMPLETE_TEXT" = "Dine data vil blive analyseret, og du får besked, når resultaterne er klar.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder tilbage.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tag billede";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "For at kunne gennemføre dette trin skal du give denne app adgang til kameraet i Indstillinger.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Der blev ikke anført noget resultatbibliotek til billederne.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Billedet kunne ikke arkiveres.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start optagelse";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop optagelse";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Optag video igen";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Vend om, og gå tilbage til det sted, hvor du startede.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå op til %ld trin i en lige linje.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find et sted, hvor du kan gå sikkert frem og tilbage i en lige linje. Forsøg at gå uden stop ved at vende i slutningen af din rute, som om du går omkring en kegle.\n\nDu vil derefter blive bedt om at dreje 360 grader omkring og derefter stå stille med dine arme ned langs siderne og med en skulderbreddes afstand mellem fødderne.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tryk på Gå i gang, når du er klar til at begynde.\nAnbring derefter telefonen i en lomme eller taske, og følg lydinstruktionerne.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gå frem og tilbage i en lige linje i %@. Gå, som du plejer.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Drej 360 grader rundt, og stå derefter stille i %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Du har færdiggjort aktiviteten.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Hastighed på tryk";
+"TAPPING_TASK_TITLE_RIGHT" = "Højre hånd";
+"TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
 "TAPPING_INTRO_TEXT" = "Denne aktivitet måler din trykhastighed.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Anbring telefonen på en plan overflade. Der vil vises to knapper på skærmen i %@. Brug derefter to fingre på samme hånd til skiftevis at trykke på knapperne så hurtigt, du kan.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Anbring din telefon på en plan overflade.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Tryk skiftevis på knapperne på skærmen med to fingre på den samme hånd.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Tryk skiftevis på knapperne på skærmen med to fingre på den højre hånd.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Tryk skiftevis på knapperne på skærmen med to fingre på den venstre hånd.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Gentag nu den samme test med din højre hånd.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Gentag nu den samme test med din venstre hånd.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Tryk med en finger og derefter med den anden. Forsøg at holde tiden mellem tryk så ensartet som muligt. Fortsæt med at trykke i %@.";
 "TAPPING_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Tryk på Næste for at starte.";
 "TAP_BUTTON_TITLE" = "Tryk";
 "TOTAL_TAPS_LABEL" = "Tryk i alt";
-"TAPPING_INSTRUCTION" = "Tryk på knapperne så hurtigt, som du kan med to fingre.";
-
+"TAPPING_INSTRUCTION" = "Tryk på knapperne så ensartet, som du kan vha. to fingre.";
+"TAPPING_INSTRUCTION_RIGHT" = "Tryk på knapperne med din HØJRE hånd.";
+"TAPPING_INSTRUCTION_LEFT" = "Tryk på knapperne med din VENSTRE hånd.";
+"TAPPING_SKIP_TITLE" = "Spring denne hånd over";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Denne aktivitet vurderer din stemme ved at optage den med mikrofonen nederst i telefonen.";
 "AUDIO_TOO_LOUD_LABEL" = "For højt";
 "AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke optage lyd";
+"AUDIO_LEVEL_CHECK_LABEL" = "Vent, mens støjniveauet i baggrunden kontrolles.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Det omgivende støjniveau er for højt til at optage din stemme. Gå et sted hen, hvor der er mere stille, og prøv igen.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Tryk på Næste, når du er klar.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
@@ -295,18 +330,18 @@
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
 "TIMED_WALK_INTRO_DETAIL" = "Denne aktivitet måler funktionen i dine nedre ekstremiteter.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Find et sted, helst udenfor, hvor du trygt kan gå omkring i %@ på en lige linje så hurtigt som muligt. Sænk ikke farten, før du har passeret mållinjen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find et sted, helst udenfor, hvor du trygt kan gå omkring i %@ i en lige linje så hurtigt som muligt. Sænk ikke farten, før du har passeret mållinjen.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tryk på Næste for at starte.";
 "TIMED_WALK_FORM_TITLE" = "Hjælpemiddelenhed";
-"TIMED_WALK_FORM_TEXT" = "Brug det samme hjælpemiddelenhed til hver test.";
+"TIMED_WALK_FORM_TEXT" = "Brug den samme hjælpemiddelenhed til hver test.";
 "TIMED_WALK_QUESTION_TEXT" = "Bruger du en ankel-fodortose?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Bruger du hjælpemiddelenheder?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tryk her for at vælge et svar.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
-"TIMED_WALK_QUESTION_2_CHOICE_2" = "En stok";
-"TIMED_WALK_QUESTION_2_CHOICE_3" = "En krykke";
-"TIMED_WALK_QUESTION_2_CHOICE_4" = "To stokke";
-"TIMED_WALK_QUESTION_2_CHOICE_5" = "To krykker";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Enkeltsidig stok";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Enkeltsidig krykke";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Tosidig stok";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Tosidig krykke";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Gangstativ/rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Gå op til %@ i en lige linje.";
 "TIMED_WALK_INSTRUCTION_2" = "Vend om, og gå tilbage til det sted, hvor du startede.";
@@ -327,7 +362,7 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-huls Pegtest";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler dine fingerfærdigheder ved at bede dig om at anbringe en cirkel i et hul. Du bliver bedt om at gøre dette %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler funktionen i dine øvre ekstremiteter ved at bede dig om at anbringe en pind i et hul. Du bliver bedt om at gøre dette %@ gange.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 
@@ -338,6 +373,48 @@
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Anbring cirklen bag ved stregen vha. din højre hånd.";
 "HOLE_PEG_TEST_TEXT" = "Saml cirklen op vha. to fingre.";
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for at slippe cirklen.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Aktivitet med rysten";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Denne aktivitet måler dine hænders rysten i forskellige positioner. Find et sted, hvor du kan sidde behageligt under hele aktiviteten.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i den hånd, der er mest påvirket, som vist på billedet nedenfor.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i din HØJRE hånd som vist på billedet nedenfor.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold telefonen i din VENSTRE hånd som vist på billedet nedenfor.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Du vil blive bedt om at udføre %@, mens du sidder med telefonen i hånden.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "en opgave";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "to opgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre opgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "fire opgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fem opgaver";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tryk på næste for at fortsætte.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Gør dig klar til at holde telefonen i skødet.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Gør dig klar til at holde telefonen i skødet med din VENSTRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Gør dig klar til at holde telefonen i skødet med din HØJRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Bliv ved med at holde din telefon i skødet i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Hold nu din telefon i skulderhøjde med udstrakt arm.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Hold nu din telefon i skulderhøjde med VENSTRE arm udstrakt.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Hold nu din telefon i skulderhøjde med HØJRE arm udstrakt.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Bliv ved med at holde din telefon med udstrakt hånd i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Hold nu din telefon i skulderhøjde med bøjet albue.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Hold nu din telefon med din VENSTRE hånd i skulderhøjde med bøjet albue.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Hold nu din telefon med din HØJRE hånd i skulderhøjde med bøjet albue.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Bliv ved med at holde din telefon med bøjet albue i %ld sekunder";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Hold nu din telefon med bøjet albue, mens du bliver ved med at røre din næse med telefonen.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Hold nu din telefon med bøjet albue i VENSTRE hånd, mens du bliver ved med at røre din næse med telefonen.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Hold nu din telefon med bøjet albue i HØJRE hånd, mens du bliver ved med at røre din næse med telefonen.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Bliv ved med at røre din næse med telefonen i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Gør dig klar til at udføre et dronningevink (vink ved at dreje dit håndled).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Gør dig klar til at udføre et dronningevink (vink ved at dreje dit håndled) med telefonen i VENSTRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Gør dig klar til at udføre et dronningevink (vink ved at dreje dit håndled) med telefonen i HØJRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Bliv ved med at udføre et dronningevink i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Flyt nu telefonen til din VENSTRE hånd, og fortsæt til næste opgave.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Flyt nu telefonen til din HØJRE hånd, og fortsæt til næste opgave.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Fortsæt til den næste opgave.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivitet færdig.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Du vil blive bedt om at udføre %@, mens du sidder med telefonen først i den ene hånd og derefter igen med telefonen i den anden hånd.";
+"TREMOR_SKIP_LEFT_HAND" = "Jeg kan ikke udføre denne aktivitet med min VENSTRE hånd.";
+"TREMOR_SKIP_RIGHT_HAND" = "Jeg kan ikke udføre denne aktivitet med min HØJRE hånd.";
+"TREMOR_SKIP_NEITHER" = "Jeg kan udføre denne aktivitet med begge hænder.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Tag billede af eksempel";
 "AX_IMAGE_CAPTURED_LABEL" = "Taget billede";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Eksempel på videooptagelse";
+"AX_VIDEO_CAPTURED_LABEL" = "Optaget video";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke anbringe ring i størrelse %@ på ring i størrelse %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
 "AX_TOWER_OF_HANOI_TOWER" = "Tårn";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har ringe med størrelserne %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
-"AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Udsnit fra %@ til %@";
+"AX_GRAPH_STACK_PREFIX" = "Stak består af";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";

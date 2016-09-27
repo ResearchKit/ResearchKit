@@ -30,10 +30,13 @@
 
 
 #import "ORKPedometerRecorder.h"
+
 #import "ORKDataLogger.h"
-#import "CMPedometerData+ORKJSONDictionary.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "CMPedometerData+ORKJSONDictionary.h"
 
 
 @interface ORKPedometerRecorder () {
@@ -91,10 +94,10 @@
     _totalDistance = -1;
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }
@@ -104,25 +107,25 @@
     if (![[self.pedometer class] isStepCountingAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
-                                                       userInfo:@{@"recorder" : self}]];
+                                                       userInfo:@{@"recorder": self}]];
         return;
     }
 
     _isRecording = YES;
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     [self.pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData *pedometerData, NSError *error) {
         
         BOOL success = NO;
         if (pedometerData) {
             success = [_logger append:[pedometerData ork_JSONDictionary] error:&error];
             dispatch_async(dispatch_get_main_queue(), ^{
-                __typeof(self) strongSelf = weakSelf;
+                ORKStrongTypeOf(self) strongSelf = weakSelf;
                 [strongSelf updateStatisticsWithData:pedometerData];
             });
         }
         if (!success || error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                __typeof(self) strongSelf = weakSelf;
+                ORKStrongTypeOf(self) strongSelf = weakSelf;
                 [strongSelf finishRecordingWithError:error];
             });
         }

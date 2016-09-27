@@ -29,10 +29,20 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKAnswerFormat.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+ORK_EXTERN id ORKNullAnswerValue() ORK_AVAILABLE_DECL;
+
+
+@interface ORKAnswerFormat ()
+
+- (BOOL)isAnswerValidWithString:(nullable NSString *)text;
+
+@end
+
 
 /**
  The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text
@@ -43,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
@@ -53,8 +64,8 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized text answer format using the original item identifier.
  
- @param originalItemIdentifier    The form item identifier against which this answer item is validated.
- @param errorMessage              The error message displayed if validation fails.
+ @param originalItemIdentifier  The form item identifier against which this answer item is validated.
+ @param errorMessage            The error message displayed if validation fails.
  
  @return An initialized confirm text answer format.
  */

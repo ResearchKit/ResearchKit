@@ -28,13 +28,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKToneAudiometryStepViewController.h"
+
+#import "ORKActiveStepView.h"
+#import "ORKAudioGenerator.h"
+#import "ORKRoundTappingButton.h"
+#import "ORKToneAudiometryContentView.h"
+
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKToneAudiometryContentView.h"
-#import "ORKAudioGenerator.h"
-#import "ORKActiveStepView.h"
+
+#import "ORKResult.h"
 #import "ORKToneAudiometryStep.h"
+
+#import "ORKHelpers_Internal.h"
+
 
 @interface ORKToneAudiometryStepViewController ()
 
@@ -208,9 +217,9 @@
                                     onChannel:channel
                                fadeInDuration:SoundDuration];
 
-    __weak typeof(self)weakSelf = self;
+    ORKWeakTypeOf(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SoundDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        typeof(self)strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
 
         if (strongSelf.currentTestIndex == testIndex) {
             [strongSelf testExpired];

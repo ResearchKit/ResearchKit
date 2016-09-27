@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,21 +32,26 @@
 #import "ORKStepNavigationRule.h"
 #import "ORKStepNavigationRule_Private.h"
 
-#import "ORKHelpers.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 @implementation ORKStepNavigationRule
 
-- (instancetype)init_ork {
-    return [super init];
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init_ork {
+    return [super init];
 }
 
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
@@ -66,18 +71,18 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 }
 
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    __typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    return rule;
+}
+
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
     }
     return YES;
-}
-
-#pragma mark NSCopying
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
-    return rule;
 }
 
 @end
@@ -119,9 +124,9 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
     }
     self = [super init_ork];
     if (self) {
-        self.resultPredicates = resultPredicates;
-        self.destinationStepIdentifiers = destinationStepIdentifiers;
-        self.defaultStepIdentifier = defaultStepIdentifier;
+        _resultPredicates = [resultPredicates copy];
+        _destinationStepIdentifiers = [destinationStepIdentifiers copy];
+        _defaultStepIdentifier = [defaultStepIdentifier copy];
     }
     
     return self;
@@ -226,7 +231,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicates:ORKArrayCopyObjects(_resultPredicates)
+    __typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicates:ORKArrayCopyObjects(_resultPredicates)
                                                          destinationStepIdentifiers:ORKArrayCopyObjects(_destinationStepIdentifiers)
                                                               defaultStepIdentifier:[_defaultStepIdentifier copy]
                                                                      validateArrays:YES];
@@ -245,7 +250,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 }
 
 - (NSUInteger)hash {
-    return [_resultPredicates hash] ^ [_destinationStepIdentifiers hash] ^ [_defaultStepIdentifier hash] ^ [_additionalTaskResults hash];
+    return _resultPredicates.hash ^ _destinationStepIdentifiers.hash ^ _defaultStepIdentifier.hash ^ _additionalTaskResults.hash;
 }
 
 @end
@@ -264,14 +269,14 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
     self = [super init_ork];
     if (self) {
-        self.destinationStepIdentifier = destinationStepIdentifier;
+        _destinationStepIdentifier = destinationStepIdentifier;
     }
     
     return self;
 }
 
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)ORKTaskResult {
-    return self.destinationStepIdentifier;
+    return _destinationStepIdentifier;
 }
 
 #pragma mark NSSecureCoding
@@ -296,7 +301,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] initWithDestinationStepIdentifier:[_destinationStepIdentifier copy]];
+    __typeof(self) rule = [[[self class] allocWithZone:zone] initWithDestinationStepIdentifier:[_destinationStepIdentifier copy]];
     return rule;
 }
 
@@ -308,7 +313,140 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 }
 
 - (NSUInteger)hash {
-    return [_destinationStepIdentifier hash];
+    return _destinationStepIdentifier.hash;
+}
+
+@end
+
+
+@implementation ORKSkipStepNavigationRule
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init_ork {
+    return [super init];
+}
+
+- (BOOL)stepShouldSkipWithTaskResult:(ORKTaskResult *)taskResult {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super init];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    return rule;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    return YES;
+}
+
+@end
+
+
+@interface ORKPredicateSkipStepNavigationRule()
+
+@property (nonatomic) NSPredicate *resultPredicate;
+
+@end
+
+
+@implementation ORKPredicateSkipStepNavigationRule
+
+- (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate {
+    ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
+    self = [super init_ork];
+    if (self) {
+        _resultPredicate = resultPredicate;
+    }
+    
+    return self;
+}
+
+- (void)setAdditionalTaskResults:(NSArray *)additionalTaskResults {
+    for (ORKTaskResult *taskResult in additionalTaskResults) {
+        ORKValidateIdentifiersUnique(ORKLeafQuestionResultsFromTaskResult(taskResult), @"All question results should have unique identifiers");
+    }
+    _additionalTaskResults = additionalTaskResults;
+}
+
+- (BOOL)stepShouldSkipWithTaskResult:(ORKTaskResult *)taskResult {
+    NSMutableArray *allTaskResults = [[NSMutableArray alloc] initWithObjects:taskResult, nil];
+    if (_additionalTaskResults) {
+        [allTaskResults addObjectsFromArray:_additionalTaskResults];
+    }
+    ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
+    
+    // The predicate can either have:
+    // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoign task identifier;
+    // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+    BOOL predicateDidMatch = [_resultPredicate evaluateWithObject:allTaskResults
+                                           substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
+    return predicateDidMatch;
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, resultPredicate, NSPredicate);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, additionalTaskResults, ORKTaskResult);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, resultPredicate);
+    ORK_ENCODE_OBJ(aCoder, additionalTaskResults);
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicate:_resultPredicate];
+    rule->_additionalTaskResults = ORKArrayCopyObjects(_additionalTaskResults);
+    return rule;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return (isParentSame
+            && ORKEqualObjects(self.resultPredicate, castObject.resultPredicate)
+            && ORKEqualObjects(self.additionalTaskResults, castObject.additionalTaskResults));
+}
+
+- (NSUInteger)hash {
+    return _resultPredicate.hash ^ _additionalTaskResults.hash;
 }
 
 @end

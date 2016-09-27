@@ -30,21 +30,21 @@
  */
 
  
-#import <UIKit/UIKit.h>
-#import "ORKGraphChartView.h"
+@import UIKit;
+#import <ResearchKit/ORKGraphChartView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKLineGraphChartView` class presents the data provided by an object conforming to the
- `ORKGraphChartViewDataSource` protocol as a line graph.
+ `ORKValueRangeGraphChartViewDataSource` protocol as a line graph.
  
  The primary plot is colored by the `tintColor`, and any additional plots are colored using the
  `referenceLineColor` property.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKLineGraphChartView : ORKGraphChartView
+@interface ORKLineGraphChartView : ORKValueRangeGraphChartView
 
 @end
 

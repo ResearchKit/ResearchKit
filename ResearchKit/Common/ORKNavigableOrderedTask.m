@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,23 +30,32 @@
 
 
 #import "ORKNavigableOrderedTask.h"
-#import "ORKOrderedTask_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKStepNavigationRule.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKOrderedTask_Private.h"
+#import "ORKResult.h"
 #import "ORKStep_Private.h"
+#import "ORKStepNavigationRule.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import "ORKHolePegTestPlaceStep.h"
 #import "ORKHolePegTestRemoveStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKOrderedTask_Private.h"
+#import "ORKCompletionStep.h"
 
 
 @implementation ORKNavigableOrderedTask {
-    NSMutableDictionary *_stepNavigationRules;
+    NSMutableDictionary<NSString *, ORKStepNavigationRule *> *_stepNavigationRules;
+    NSMutableDictionary<NSString *, ORKSkipStepNavigationRule *> *_skipStepNavigationRules;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;
+        _skipStepNavigationRules = nil;
+        _shouldReportProgress = NO;
     }
     return self;
 }
@@ -73,6 +82,42 @@
     [_stepNavigationRules removeObjectForKey:triggerStepIdentifier];
 }
 
+- (NSDictionary<NSString *, ORKStepNavigationRule *> *)stepNavigationRules {
+    if (!_stepNavigationRules) {
+        return @{};
+    }
+    return [_stepNavigationRules copy];
+}
+
+- (void)setSkipNavigationRule:(ORKSkipStepNavigationRule *)skipStepNavigationRule forStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(skipStepNavigationRule);
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    if (!_skipStepNavigationRules) {
+        _skipStepNavigationRules = [NSMutableDictionary new];
+    }
+    _skipStepNavigationRules[stepIdentifier] = skipStepNavigationRule;
+}
+
+- (ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    return _skipStepNavigationRules[stepIdentifier];
+}
+
+- (void)removeSkipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    [_skipStepNavigationRules removeObjectForKey:stepIdentifier];
+}
+
+- (NSDictionary<NSString *, ORKSkipStepNavigationRule *> *)skipStepNavigationRules {
+    if (!_skipStepNavigationRules) {
+        return @{};
+    }
+    return [_skipStepNavigationRules copy];
+}
+
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *nextStep = nil;
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
@@ -86,6 +131,11 @@
             }
         } else {
             nextStep = [super stepAfterStep:step withResult:result];
+        }
+        
+        ORKSkipStepNavigationRule *skipNavigationRule = _skipStepNavigationRules[nextStep.identifier];
+        if ([skipNavigationRule stepShouldSkipWithTaskResult:result]) {
+            return [self stepAfterStep:nextStep withResult:result];
         }
     }
     return nextStep;
@@ -106,14 +156,24 @@
     return previousStep;
 }
 
-// ORKNavigableOrderedTask doesn't have a linear order
+// Assume ORKNavigableOrderedTask doesn't have a linear order unless user specifically overrides
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    if (_shouldReportProgress) {
+        return [super progressOfCurrentStep:step withResult:result];
+    }
+
     return ORKTaskProgressMake(0, 0);
 }
 
-// This method should only be used by serialization (the stepNavigationRules property is published as readonly)
+#pragma mark Serialization private methods
+
+// These methods should only be used by serialization tests (the stepNavigationRules and skipStepNavigationRules properties are published as readonly)
 - (void)setStepNavigationRules:(NSDictionary *)stepNavigationRules {
     _stepNavigationRules = [stepNavigationRules mutableCopy];
+}
+
+- (void)setSkipStepNavigationRules:(NSDictionary *)skipStepNavigationRules {
+    _skipStepNavigationRules = [skipStepNavigationRules mutableCopy];
 }
 
 #pragma mark NSSecureCoding
@@ -126,6 +186,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, skipStepNavigationRules, NSString, ORKSkipStepNavigationRule);
+        ORK_DECODE_BOOL(aDecoder, shouldReportProgress);
     }
     return self;
 }
@@ -134,13 +196,17 @@
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
+    ORK_ENCODE_OBJ(aCoder, skipStepNavigationRules);
+    ORK_ENCODE_BOOL(aCoder, shouldReportProgress);
 }
 
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) task = [super copyWithZone:zone];
+    __typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
+    task->_skipStepNavigationRules = ORKMutableDictionaryCopyObjects(_skipStepNavigationRules);
+    task->_shouldReportProgress = _shouldReportProgress;
     return task;
 }
 
@@ -149,19 +215,21 @@
     
     __typeof(self) castObject = object;
     return isParentSame
-    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules);
+    && ORKEqualObjects(self.stepNavigationRules, castObject.stepNavigationRules)
+    && ORKEqualObjects(self.skipStepNavigationRules, castObject.skipStepNavigationRules)
+    && self.shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [_stepNavigationRules hash];
+    return super.hash ^ _stepNavigationRules.hash ^ _skipStepNavigationRules.hash ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined
 
-NSString * const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
-NSString * const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
-NSString * const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
-NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
+NSString *const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
+NSString *const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
+NSString *const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
+NSString *const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
 
 + (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -176,7 +244,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
     BOOL dominantHandLeft = (dominantHand == ORKBodySagittalLeft);
     NSTimeInterval stepDuration = (timeLimit == 0) ? CGFLOAT_MAX : timeLimit;
     
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         NSString *pegs = [NSNumberFormatter localizedStringFromNumber:@(numberOfPegs) numberStyle:NSNumberFormatterNoStyle];
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
@@ -271,9 +339,8 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         }
     }
     
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKCompletionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
     

@@ -38,12 +38,16 @@
 
 
 #import "ORKLocationSelectionView.h"
-#import <MapKit/MapKit.h>
+
 #import "ORKAnswerTextField.h"
-#import "ORKHelpers.h"
+
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKSkin.h"
 #import "ORKResult_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
+@import MapKit;
 
 
 static const NSString *FormattedAddressLines = @"FormattedAddressLines";
@@ -94,7 +98,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     static CGFloat textFieldBottomMargin = 0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        textFieldBottomMargin = 1.0/[UIScreen mainScreen].scale;
+        textFieldBottomMargin = 1.0 / [UIScreen mainScreen].scale;
     });
     return textFieldBottomMargin;
 }
@@ -271,9 +275,9 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     }
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    __weak __typeof__(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
         if (error) {
             [self notifyDelegateOfError:error];
             [strongSelf setAnswer:ORKNullAnswerValue()];
@@ -292,10 +296,10 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     }
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    __weak __typeof__(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     CLLocation *cllocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
     [geocoder reverseGeocodeLocation:cllocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
+        ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
         if (error) {
             [self notifyDelegateOfError:error];
             [strongSelf setAnswer:ORKNullAnswerValue()];

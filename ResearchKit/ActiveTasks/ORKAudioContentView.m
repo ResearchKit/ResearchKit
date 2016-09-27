@@ -30,11 +30,13 @@
 
 
 #import "ORKAudioContentView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import "ORKLabel.h"
+
 #import "ORKHeadlineLabel.h"
+#import "ORKLabel.h"
+
 #import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // The central blue region.
@@ -328,17 +330,16 @@ static const CGFloat ValueLineMargin = 1.5;
 }
 
 - (void)updateTimerLabel {
-    static NSDateComponentsFormatter *_formatter = nil;
+    static NSDateComponentsFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
         formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
         formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-        _formatter = formatter;
     });
     
-    NSString *string = [_formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
+    NSString *string = [formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
     _timerLabel.text = string;
     _timerLabel.hidden = (string == nil);    
 }
@@ -351,6 +352,10 @@ static const CGFloat ValueLineMargin = 1.5;
 - (void)updateAlertLabelHidden {
     NSNumber *sample = _samples.lastObject;
     BOOL show = (!_finished && (sample.doubleValue > _alertThreshold)) || _failed;
+    
+    if (_alertLabel.hidden && show) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, _alertLabel.text);
+    }
     _alertLabel.hidden = !show;
 }
 
@@ -384,11 +389,9 @@ static const CGFloat ValueLineMargin = 1.5;
 }
 
 - (NSString *)accessibilityLabel {
-    if (_alertLabel.isHidden) {
-        return _timerLabel.accessibilityLabel;
-    }
-    
-    return ORKAccessibilityStringForVariables(_timerLabel.accessibilityLabel, _alertLabel.accessibilityLabel);
+    NSString *timerAxString = _timerLabel.isHidden ? nil : _timerLabel.accessibilityLabel;
+    NSString *alertAxString = _alertLabel.isHidden ? nil : _alertLabel.accessibilityLabel;
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", nil), timerAxString, alertAxString);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

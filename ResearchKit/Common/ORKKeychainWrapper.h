@@ -29,8 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import "ORKDefines.h"
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -53,7 +53,7 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the object was saved; otherwise `NO'.
  */
-+ (BOOL)setObject:(id<NSSecureCoding>)object forKey:(NSString *)key error:(NSError * __nullable *)error;
++ (BOOL)setObject:(id<NSSecureCoding>)object forKey:(NSString *)key error:(NSError * _Nullable *)error;
 
 
 /**
@@ -66,7 +66,7 @@ ORK_CLASS_AVAILABLE
  
  @return An object or `nil` if key is not valid.
  */
-+ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError * __nullable *)error;
++ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError * _Nullable *)error;
 
 /**
  Removes the object in the keychain for the provided key.
@@ -78,7 +78,7 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the object was removed; otherwise `NO'.
 */
-+ (BOOL)removeObjectForKey:(NSString *)key error:(NSError * __nullable *)error;
++ (BOOL)removeObjectForKey:(NSString *)key error:(NSError * _Nullable *)error;
 
 /**
  Removes all values stored in the keychain for the app.
@@ -89,7 +89,7 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the keychain was reset; otherwise `NO'.
 */
-+ (BOOL)resetKeychainWithError:(NSError * __nullable *)error;
++ (BOOL)resetKeychainWithError:(NSError * _Nullable *)error;
 
 @end
 

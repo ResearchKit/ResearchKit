@@ -29,19 +29,19 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKTask.h>
+@import UIKit;
 #import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKResult;
 @class ORKStep;
 @class ORKStepViewController;
-@class ORKResult;
 @class ORKTaskResult;
 @class ORKTaskViewController;
+@protocol ORKStepViewControllerDelegate;
+@protocol ORKTask;
 @protocol ORKTaskResultSource;
 
 /**
@@ -116,6 +116,22 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  @return `YES` if save and restore should be supported; otherwise, `NO`.
  */
 - (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)taskViewController;
+
+/**
+ Asks the delegate if the cancel action should be confirmed
+ 
+ The task view controller calls this method to determine whether or not to confirm
+ result save or discard when user attempts to cancel a task that is in progress.
+ 
+ If this method is not implemented, the task view controller assumes that cancel should be confirmed.
+ If this method returns `YES`, then cancel action will be confirmed.
+ If this method returns `NO`, then the results will immediately be discarded.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ 
+ @return `YES` to confirm cancel action; `NO` to immediately discard the results.
+ */
+- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController *)taskViewController;
 
 /**
  Asks the delegate if there is Learn More content for this step.
@@ -210,6 +226,18 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  @param stepViewController  The `ORKStepViewController` that is about to be displayed.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
+
+/**
+ Tells the delegate that a step will disappear.
+ 
+ This is called in the `ORKStepViewControllerDelegate` method for `stepViewController:didFinishWithNavigationDirection:`
+ after saving the result of the step to the task view controller and before navigating to the next/previous step.
+ 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The `ORKStepViewController` that has just finished.
+ @param direction           The `ORKStepViewControllerNavigationDirection` of navigation.
+ */
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
 
 /**
  Tells the delegate that the result has substantively changed.

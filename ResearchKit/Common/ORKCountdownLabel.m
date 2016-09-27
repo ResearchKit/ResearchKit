@@ -30,19 +30,16 @@
 
 
 #import "ORKCountdownLabel.h"
-#import "ORKHelpers.h"
 
-
-@interface ORKCountdownLabel ()
-
-@property (nonatomic, copy) NSString *minutesString;
-@property (nonatomic, copy) NSString *secondsString;
-
-@end
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKCountdownLabel {
     NSInteger _currentCountDownValue;
+}
+
++ (UIFont *)defaultFont {
+    return [UIFont systemFontOfSize:65.f weight:UIFontWeightUltraLight];
 }
 
 - (instancetype)init {
@@ -59,18 +56,20 @@
 
 - (void)setCountDownValue:(NSInteger)value {
     _currentCountDownValue = value;
-    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value / 60)];
-    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value % 60)];
-    
     [self renderText];
 }
 
 - (void)renderText {
-    if (_minutesString.length == 0 || _secondsString.length == 0) {
-        return;
-    }
-    [self setText:[NSString stringWithFormat:@"%@:%@", _minutesString, _secondsString]];
-    
+    static dispatch_once_t onceToken;
+    static NSDateComponentsFormatter *durationFormatter = nil;
+    dispatch_once(&onceToken, ^{
+        durationFormatter = [NSDateComponentsFormatter new];
+        [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStylePositional];
+        durationFormatter.allowedUnits = NSCalendarUnitMinute|NSCalendarUnitSecond;
+        durationFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+   
+    [self setText:[durationFormatter stringFromTimeInterval:_currentCountDownValue]];
     [self invalidateIntrinsicContentSize];
 }
 

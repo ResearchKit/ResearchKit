@@ -53,21 +53,21 @@
 "CONSENT_LEARN_MORE_TITLE" = "Ketahui Lebih Lanjut";
 
 /* Consent section learn more */
-"LEARN_MORE_DATA_GATHERING" = "Ketahui lebih lanjut mengenai cara data dikumpulkan";
-"LEARN_MORE_DATA_USE" = "Ketahui lebih lanjut mengenai cara data digunakan";
-"LEARN_MORE_PRIVACY" = "Ketahui lebih lanjut mengenai cara privasi dan identiti anda dilindungi";
-"LEARN_MORE_WELCOME" = "Ketahui lebih lanjut mengenai kajian terlebih dahulu";
-"LEARN_MORE_STUDY_SURVEY" = "Ketahui lebih lanjut mengenai tinjauan kajian";
-"LEARN_MORE_TIME_COMMITMENT" = "Ketahui lebih lanjut mengenai impak kajian pada masa anda";
-"LEARN_MORE_TASKS" = "Ketahui lebih lanjut mengenai tugas yang terlibat";
-"LEARN_MORE_WITHDRAWING" = "Ketahui lebih lanjut mengenai menarik diri";
+"LEARN_MORE_DATA_GATHERING" = "Ketahui lebih lanjut tentang cara data dikumpulkan";
+"LEARN_MORE_DATA_USE" = "Ketahui lebih lanjut tentang cara data digunakan";
+"LEARN_MORE_PRIVACY" = "Ketahui lebih lanjut tentang cara privasi dan identiti anda dilindungi";
+"LEARN_MORE_WELCOME" = "Ketahui lebih lanjut tentang kajian terlebih dahulu";
+"LEARN_MORE_STUDY_SURVEY" = "Ketahui lebih lanjut tentang tinjauan kajian";
+"LEARN_MORE_TIME_COMMITMENT" = "Ketahui lebih lanjut tentang impak kajian pada masa anda";
+"LEARN_MORE_TASKS" = "Ketahui lebih lanjut tentang tugas yang terlibat";
+"LEARN_MORE_WITHDRAWING" = "Ketahui lebih lanjut tentang menarik diri";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Pilihan Perkongsian";
 "CONSENT_SHARE_WIDELY_%@" = "Kongsi data saya dengan %@ dan penyelidik yang layak di seluruh dunia";
 "CONSENT_SHARE_ONLY_%@" = "Kongsi data saya dengan %@ sahaja";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data kajian anda daripada penyertaan anda dalam kajian ini.\n\nBerkongsi data kajian berkod anda dengan lebih luas (tanpa maklumat seperti nama anda) mungkin memberi manfaat kepada penyelidikan ini dan penyelidikan masa hadapan.";
-"LEARN_MORE_CONSENT_SHARING" = "Ketahui lebih lanjut mengenai perkongsian data";
+"LEARN_MORE_CONSENT_SHARING" = "Ketahui lebih lanjut tentang perkongsian data";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
 "CONSENT_DOC_LINE_PRINTED_NAME" = "Nama %@ (bertulis)";
@@ -89,9 +89,9 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
 "LOCATION_ERROR_TITLE" = "Tidak Menemui Alamat yang Ditentukan";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menyelesaikan lokasi semasa anda. Sila taipkan alamat atau pergi ke lokasi dengan isyarat GPS yang lebih baik jika berkenaan.";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Gagal menyelesaikan lokasi semasa anda. Sila taipkan alamat atau pergi ke lokasi dengan isyarat GPS yang lebih baik jika berkenaan.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Akses kepada perkhidmatan lokasi telah ditolak. Sila berikan aplikasi ini kebenaran untuk menggunakan perkhidmatan lokasi menerusi Seting.";
-"LOCATION_ERROR_GEOCODE" = "Tidak dapat mencari hasil untuk alamat yang dimasukkan. Sila pastikan alamat adalah sah.";
+"LOCATION_ERROR_GEOCODE" = "Gagal mencari hasil untuk alamat yang dimasukkan. Sila pastikan alamat adalah sah.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Sama ada anda tidak disambungkan ke internet atau anda telah melebihi bilangan maksimum permintaan carian alamat. Jika anda tidak disambungkan ke internet, sila aktifkan Wi-Fi anda untuk menjawab soalan ini, langkau soalan ini jika butang langkau tersedia, atau kembali ke tinjauan apabila anda disambungkan ke internet. Sebaliknya, sila cuba lagi dalam masa beberapa minit.";
 
 /* Alert for exceeding length limit in text answer */
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya aksara angka dibenarkan.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Penunjuk kemajuan entri kod laluan";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ daripada %@ digit dimasukkan";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Terlupa Kod Laluan?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Tidak dapat menambah item Rantai Kunci.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Tidak";
 "BOOL_YES" = "Ya";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ka";
+"MEASURING_UNIT_IN" = "inci";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Ketik untuk jawab";
 "NULL_ANSWER" = "Pilih jawapan";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Simpan untuk Kemudian";
 "BUTTON_OPTION_DISCARD" = "Buang Hasil";
 "BUTTON_OPTION_STOP_TASK" = "Tamatkan Tugas";
+"BUTTON_SAVE" = "Simpan";
+"BUTTON_CLEAR_ANSWER" = "Kosongkan jawapan";
+"BUTTON_READ_ONLY_MODE" = "Jawapan ini tidak boleh diubah suai.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Memulakan aktiviti dalam";
 "TASK_COMPLETE_TITLE" = "Aktiviti Selesai";
 "TASK_COMPLETE_TEXT" = "Data anda akan dianalisis dan anda akan dimaklumkan apabila keputusan anda tersedia.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Tinggal %@ saat.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tangkap Imej";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan aplikasi ini mengakses kamera dalam Seting.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan untuk imej yang ditangkap.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak dapat disimpan.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Mula Merakam";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Henti Merakam";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Rakam Semula Video";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kecergasan";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Pusing dan berjalan balik ke tempat anda bermula.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Jalan sehingga %ld langkah dalam garis lurus.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Cari tempat di mana anda boleh berjalan mundar mandir dalam garis lurus. Cuba berjalan berterusan dengan berpusing di kedua penghujung laluan anda, seperti anda berjalan mengelilingi kon.\n\nSeterusnya anda akan diarahkan untuk berpusing dalam bulatan penuh, kemudian berdiri tegak dengan tangan anda di sisi anda dan kaki anda dibuka selebar bahu.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Ketik Mulakan apabila anda bersedia untuk bermula.\nKemudian letakkan telefon anda di dalam saku atau beg dan ikuti arahan audio.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Berjalan mundar mandir dalam garis lurus selama %@. Jalan seperti biasa anda lakukan.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Buat pusingan penuh dan kemudian berdiri tegak selama %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Anda telah melengkapkan aktiviti.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Kelajuan Ketikan";
+"TAPPING_TASK_TITLE_RIGHT" = "Tangan Kanan";
+"TAPPING_TASK_TITLE_LEFT" = "Tangan Kiri";
 "TAPPING_INTRO_TEXT" = "Aktiviti ini mengukur kelajuan mengetik anda.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Letakkan telefon anda pada permukaan rata. Dua butang akan muncul pada skrin anda selama %@. Menggunakan dua jari pada tangan yang sama, ketik butang berselang seli dengan kedua-dua jari secepat yang anda boleh.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Letakkan telefon anda di atas permukaan rata.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Gunakan dua jari pada tangan yang sama untuk mengetik butang pada skrin secara berselang-seli.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Gunakan dua jari pada tangan kanan anda untuk mengetik butang pada skrin secara berselang-seli.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Gunakan dua jari pada tangan kiri anda untuk mengetik butang pada skrin secara berselang-seli.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Sekarang ulang ujian yang sama menggunakan tangan kanan anda.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Sekarang ulang ujian yang sama menggunakan tangan kiri anda.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Ketik satu jari, kemudian ketik yang lain. Cuba mengetik dengan kadar yang sekata mungkin. Teruskan mengetik selama %@.";
 "TAPPING_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Ketik Seterusnya untuk bermula.";
 "TAP_BUTTON_TITLE" = "Ketik";
 "TOTAL_TAPS_LABEL" = "Jumlah Ketikan";
-"TAPPING_INSTRUCTION" = "Ketik butang secepat yang anda boleh menggunakan dua jari.";
-
+"TAPPING_INSTRUCTION" = "Ketik butang sekonsisten yang anda boleh menggunakan dua jari.";
+"TAPPING_INSTRUCTION_RIGHT" = "Ketik butang menggunakan tangan KANAN anda.";
+"TAPPING_INSTRUCTION_LEFT" = "Ketik butang menggunakan tangan KIRI anda.";
+"TAPPING_SKIP_TITLE" = "Langkau tangan ini";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Suara";
@@ -240,7 +272,10 @@
 "AUDIO_INTRO_TEXT" = "Tarik nafas panjang dan sebut “Aaaaah” ke dalam mikrofon selama yang anda boleh. Kekalkan kelantangan suara yang tetap agar bar audio kekal biru.";
 "AUDIO_INTENDED_USE" = "Aktiviti ini menilai suara anda dengan merakamnya menggunakan mikrofon di bahagian bawah telefon anda.";
 "AUDIO_TOO_LOUD_LABEL" = "Terlalu Kuat";
-"AUDIO_GENERIC_ERROR_LABEL" = "Tidak dapat merakam audio";
+"AUDIO_GENERIC_ERROR_LABEL" = "Gagal merakam audio";
+"AUDIO_LEVEL_CHECK_LABEL" = "Sila tunggu sementara kami memeriksa aras hingar latar belakang.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Aras hingar ambien terlalu bising untuk merakamkan suara anda. Sila pergi ke tempat yang lebih senyap dan cuba lagi.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Ketik Seterusnya apabila bersedia.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Kutip pancang menggunakan dua jari.";
 "HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan pancang.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Aktiviti Getaran";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Aktiviti ini mengukur getaran tangan anda dalam pelbagai posisi. Cari tempat di mana anda boleh duduk dengan selesa sepanjang tempoh aktiviti ini.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Pegang telefon di tangan anda yang lebih terjejas seperti yang ditunjukkan dalam imej di bawah.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Pegang telefon di tangan KANAN anda seperti yang ditunjukkan dalam imej di bawah.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Pegang telefon di tangan KIRI anda seperti yang ditunjukkan dalam imej di bawah.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Anda akan diminta untuk melakukan %@ sementara duduk dengan telefon di tangan anda.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "satu tugas";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dua tugas";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tiga tugas";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "empat tugas";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "lima tugas";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Ketik seterusnya untuk teruskan.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Bersedia untuk memegang telefon anda di riba anda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Bersedia untuk memegang telefon anda di riba anda dengan tangan KIRI anda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Bersedia untuk memegang telefon anda di riba anda dengan tangan KANAN anda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Teruskan memegang telefon anda di riba anda selama %ld saat.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Sekarang pegang telefon anda dengan tangan anda diluruskan pada ketinggian bahu.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Sekarang pegang telefon anda dengan tangan KIRI anda diluruskan pada ketinggian bahu.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Sekarang pegang telefon anda dengan tangan KANAN anda diluruskan pada ketinggian bahu.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Teruskan memegang telefon anda dengan tangan anda diluruskan selama %ld saat.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Sekarang pegang telefon anda pada ketinggian bahu dengan siku anda dibengkokkan.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Sekarang pegang telefon anda dengan tangan KIRI anda pada ketinggian bahu dengan siku anda dibengkokkan.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Sekarang pegang telefon anda dengan tangan KANAN anda pada ketinggian bahu dengan siku anda dibengkokkan.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Teruskan memegang telefon anda dengan siku anda dibengkokkan selama %ld saat";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Terus bengkokkan siku anda, sentuh telefon anda ke hidung anda berulang kali.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Terus bengkokkan siku anda dengan telefon anda di tangan KIRI anda, sentuh telefon anda ke hidung anda berulang kali.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Terus bengkokkan siku anda dengan telefon anda di tangan KANAN anda, sentuh telefon anda ke hidung anda berulang kali.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Teruskan menyentuh telefon anda ke hidung anda selama %ld saat";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Bersedia untuk melakukan lambaian ratu (lambai dengan memusingkan pergelangan tangan anda).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Bersedia untuk melakukan lambaian ratu dengan telefon anda di tangan KIRI anda (lambai dengan memusingkan pergelangan tangan anda).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Bersedia untuk melakukan lambaian ratu dengan telefon anda di tangan KANAN anda (lambai dengan memusingkan pergelangan tangan anda).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Terus melakukan lambaian ratu untuk %ld saat.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Sekarang tukar telefon ke tangan KIRI anda dan teruskan ke tugas seterusnya.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Sekarang tukar telefon ke tangan KANAN anda dan teruskan ke tugas seterusnya.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Teruskan ke tugas seterusnya.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktiviti selesai.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Anda akan diminta untuk melakukan %@ sementara duduk dengan telefon di sebelah tangan dahulu, kemudian sekali lagi dengan tangan yang lain.";
+"TREMOR_SKIP_LEFT_HAND" = "Saya tidak boleh laksanakan aktiviti ini menggunakan tangan KIRI saya.";
+"TREMOR_SKIP_RIGHT_HAND" = "Saya tidak boleh laksanakan aktiviti ini menggunakan tangan KANAN saya.";
+"TREMOR_SKIP_NEITHER" = "Saya boleh laksanakan aktiviti ini menggunakan kedua belah tangan.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat mencipta fail";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat mengeluarkan fail log yang mencukupi untuk mencapai nilai ambang";
@@ -378,7 +455,10 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Pratonton tangkapan";
 "AX_IMAGE_CAPTURED_LABEL" = "Imej ditangkap";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat menempatkan cakera bersaiz %@ pada cakera bersaiz %@";
+"AX_VIDEO_CAPTURE_LABEL" = "Pratonton rakaman video";
+"AX_VIDEO_CAPTURED_LABEL" = "Video dirakam";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Gagal menempatkan cakera bersaiz %@ pada cakera bersaiz %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Sasaran";
 "AX_TOWER_OF_HANOI_TOWER" = "Menara";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dwiketik untuk menempatkan cakera";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mempunyai cakera bersaiz %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
 
-"AX_GRAPH_RANGE_FORMAT" = "Julat daripada %@ hingga %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Julat daripada %@ hingga %@";
+"AX_GRAPH_STACK_PREFIX" = "Tindanan terdiri daripada";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Titik: %@";

@@ -29,18 +29,24 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
 /**
+ Tower of Hanoi step.
  
+ This step is used to present the interactive Tower of Hanoi activity.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTowerOfHanoiStep : ORKActiveStep
 
 /**
  The number of disks in the puzzle.
+ 
  It is not recommended that you use a large number of disks. As this provides a poor user experience.
  The default value of this property is 3.
  */

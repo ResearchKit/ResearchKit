@@ -30,8 +30,10 @@
 
 
 #import "ORKVerificationStepView.h"
-#import "ORKDefines_Private.h"
-#import "ORKHelpers.h"
+
+#import "ORKStepHeaderView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 

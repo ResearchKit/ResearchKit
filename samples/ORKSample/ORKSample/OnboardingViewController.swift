@@ -34,7 +34,7 @@ import ResearchKit
 class OnboardingViewController: UIViewController {
     // MARK: IB actions
     
-    @IBAction func joinButtonTapped(sender: UIButton) {
+    @IBAction func joinButtonTapped(_ sender: UIButton) {
         let consentDocument = ConsentDocument()
         let consentStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: consentDocument)
         
@@ -42,7 +42,7 @@ class OnboardingViewController: UIViewController {
         
         let signature = consentDocument.signatures!.first!
         
-        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, inDocument: consentDocument)
+        let reviewConsentStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: signature, in: consentDocument)
         
         reviewConsentStep.text = "Review the consent form."
         reviewConsentStep.reasonForConsent = "Consent to join the Developer Health Research Study."
@@ -55,26 +55,26 @@ class OnboardingViewController: UIViewController {
         completionStep.text = "Thank you for joining this study."
         
         let orderedTask = ORKOrderedTask(identifier: "Join", steps: [consentStep, reviewConsentStep, healthDataStep, passcodeStep, completionStep])
-        let taskViewController = ORKTaskViewController(task: orderedTask, taskRunUUID: nil)
+        let taskViewController = ORKTaskViewController(task: orderedTask, taskRun: nil)
         taskViewController.delegate = self
         
-        presentViewController(taskViewController, animated: true, completion: nil)
+        present(taskViewController, animated: true, completion: nil)
     }
 }
 
 extension OnboardingViewController : ORKTaskViewControllerDelegate {
     
-    func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         switch reason {
-            case .Completed:
-                performSegueWithIdentifier("unwindToStudy", sender: nil)
+            case .completed:
+                performSegue(withIdentifier: "unwindToStudy", sender: nil)
             
-            case .Discarded, .Failed, .Saved:
-                dismissViewControllerAnimated(true, completion: nil)
+            case .discarded, .failed, .saved:
+                dismiss(animated: true, completion: nil)
         }
     }
     
-    func taskViewController(taskViewController: ORKTaskViewController, viewControllerForStep step: ORKStep) -> ORKStepViewController? {
+    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         if step is HealthDataStep {
             let healthStepViewController = HealthDataStepViewController(step: step)
             return healthStepViewController

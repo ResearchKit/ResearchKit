@@ -37,7 +37,7 @@ protocol HealthClientType {
 
 extension UIViewController {
     
-    func injectHealthStore(healthStore: HKHealthStore) {
+    func injectHealthStore(_ healthStore: HKHealthStore) {
         if var client = self as? HealthClientType {
             client.healthStore = healthStore
         }

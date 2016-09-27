@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,116 +31,11 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+@import UIKit;
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- An enumeration of values that identify the different types of questions that the ResearchKit
- framework supports.
- */
-typedef NS_ENUM(NSInteger, ORKQuestionType) {
-    /**
-     No question.
-     */
-     ORKQuestionTypeNone,
-    
-    /**
-     The scale question type asks participants to place a mark at an appropriate position on a
-     continuous or discrete line.
-     */
-    ORKQuestionTypeScale,
-
-    /**
-     In a single choice question, the participant can pick only one predefined option.
-     */
-    ORKQuestionTypeSingleChoice,
-    
-    /**
-     In a multiple choice question, the participant can pick one or more predefined options.
-     */
-    ORKQuestionTypeMultipleChoice,
-    
-    /**
-     The decimal question type asks the participant to enter a decimal number.
-     */
-    ORKQuestionTypeDecimal,
-    
-    /**
-     The integer question type asks the participant to enter an integer number.
-     */
-    ORKQuestionTypeInteger,
-    
-    /**
-     The Boolean question type asks the participant to enter Yes or No (or the appropriate
-     equivalents).
-     */
-    ORKQuestionTypeBoolean,
-    
-    /**
-     In a text question, the participant can enter multiple lines of text.
-     */
-    ORKQuestionTypeText,
-    
-    /**
-     In a time of day question, the participant can enter a time of day by using a picker.
-     */
-    ORKQuestionTypeTimeOfDay,
-    
-    /**
-     In a date and time question, the participant can enter a combination of date and time by using
-     a picker.
-     */
-    ORKQuestionTypeDateAndTime,
-    
-    /**
-     In a date question, the participant can enter a date by using a picker.
-     */
-    ORKQuestionTypeDate,
-    
-    /**
-     In a time interval question, the participant can enter a time span by using a picker.
-     */
-    ORKQuestionTypeTimeInterval,
-    
-    /**
-     In a location question, the participant can enter a location using a map view.
-     */
-    ORKQuestionTypeLocation
-} ORK_ENUM_AVAILABLE;
-
-/**
- An enumeration of the types of answer choices available.
- */
-typedef NS_ENUM(NSInteger, ORKChoiceAnswerStyle) {
-    /**
-     A single choice question lets the participant pick a single predefined answer option.
-     */
-    ORKChoiceAnswerStyleSingleChoice,
-    
-    /**
-     A multiple choice question lets the participant pick one or more predefined answer options.
-     */
-    ORKChoiceAnswerStyleMultipleChoice
-} ORK_ENUM_AVAILABLE;
-
-/**
- An enumeration of the format styles available for scale answers.
- */
-typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
-    /**
-     The default decimal style.
-     */
-    ORKNumberFormattingStyleDefault,
-    
-    /** 
-     Percent style.
-     */
-    ORKNumberFormattingStylePercent
-} ORK_ENUM_AVAILABLE;
 
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
@@ -154,11 +50,11 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTextAnswerFormat;
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
+@class ORKHeightAnswerFormat;
 @class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
 @class ORKImageChoice;
-
 
 /**
  The `ORKAnswerFormat` class is the abstract base class for classes that describe the
@@ -256,6 +152,9 @@ ORK_CLASS_AVAILABLE
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                                         step:(NSInteger)step;
 
++ (ORKHeightAnswerFormat *)heightAnswerFormat;
++ (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
+
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
 /// @name Validation
@@ -291,6 +190,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -420,6 +320,26 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale. 
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing. 
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 
@@ -433,6 +353,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKContinuousScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -560,6 +481,26 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale.
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing.
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 
@@ -572,6 +513,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -630,6 +572,26 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly, getter=isVertical) BOOL vertical;
 
+/**
+ The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+ lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+ the array corresond to the maximum side of the scale.
+ 
+ Setting this value to nil results in no gradient being drawn. Defaults to nil.
+ 
+ An example usage would set an array of red and green to visually indicate a scale from bad to good.
+ */
+@property (copy, nullable) NSArray<UIColor *> *gradientColors;
+
+/**
+ Indicates the position of gradient stops for the colors specified in `gradientColors`.
+ Gradient stops are specified as values between 0 and 1. The values must be monotonically
+ increasing.
+ 
+ If nil, the stops are spread uniformly across the range. Defaults to nil.
+ */
+@property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
 @end
 
 
@@ -648,6 +610,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKValuePickerAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -686,6 +649,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoiceAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -721,6 +685,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextChoiceAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -774,6 +739,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -867,6 +833,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoice : NSObject <NSSecureCoding, NSCopying>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -970,6 +937,7 @@ typedef NS_ENUM(NSInteger, ORKNumericAnswerStyle) {
 ORK_CLASS_AVAILABLE
 @interface ORKNumericAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -1098,6 +1066,7 @@ typedef NS_ENUM(NSInteger, ORKDateAnswerStyle) {
 ORK_CLASS_AVAILABLE
 @interface ORKDateAnswerFormat : ORKAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -1111,7 +1080,6 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized date answer format using the specified answer style and default date values.
- 
  
  This method is the designated initializer.
  
@@ -1325,6 +1293,44 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is 1. The minimum value is 1, and the maximum value is 30.
  */
 @property (readonly) NSInteger step;
+
+@end
+
+
+/**
+ The `ORKHeightAnswerFormat` class represents the answer format for questions that require users
+ to enter a height.
+ 
+ A height answer format produces an `ORKNumericQuestionResult` object. The result is always reported
+ in the metric system using the `cm` unit.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHeightAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized height answer format using the measurement system specified in the current
+ locale.
+ 
+ @return An initialized height answer format.
+ */
+- (instancetype)init;
+
+/**
+ Returns an initialized height answer format using the specified measurement system.
+ 
+ This method is the designated initializer.
+ 
+ @param measurementSystem   The measurement system to use. See `ORKMeasurementSystem` for the
+                                accepted values.
+ 
+ @return An initialized height answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
+
+/**
+ Indicates the measurement system used by the answer format.
+ */
+@property (readonly) ORKMeasurementSystem measurementSystem;
 
 @end
 

@@ -31,14 +31,15 @@
 */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKValueRange;
+@class ORKValueStack;
 @class ORKGraphChartView;
-@class ORKRangedPoint;
 
 /**
  The graph chart view delegate protocol forwards pan gesture events occuring
@@ -77,53 +78,39 @@ ORK_AVAILABLE_DECL
 
 
 /**
- An object that adopts the `ORKGraphChartViewDataSource` protocol is responsible for providing the
- data required to populate an `ORKGraphChartView` object.
+ The abstract `ORKGraphChartViewDataSource` protocol is the base protocol which conforms the basis
+ for the `ORKValueRangeGraphChartViewDataSource` and `ORKValueStackGraphChartViewDataSource`
+ protocols, required to populate the concrete `ORKGraphChartView` subclass.
 
  At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
  `graphChartView:plot:valueForPointAtIndex:` methods. These methods return
- the number of points in a plot and the points themselves. Each point in a plot is represented by an
- object of the `ORKRangedPoint` class. A data source object may provide additional information to
- the graph chart view by implementing the optional methods.
+ the number of points in a plot and the points themselves. Each point in a plot is represented by
+ an object of the `ORKValueRange` or `ORKValueStack` class, depending on the concrete subprotocol.
+ 
+ A data source object may provide additional information to the graph chart view by implementing the
+ optional methods.
 
  When configuring an `ORKGraphChartView` object, assign your data source to its `dataSource`
  property.
 */
-ORK_AVAILABLE_DECL
 @protocol ORKGraphChartViewDataSource <NSObject>
 
 @required
 /**
- Asks the data source for the number of range points to be plotted by the graph chart view at the
+ Asks the data source for the number of value points to be plotted by the graph chart view at the
  specified plot index.
 
- @param graphChartView      The graph chart view asking for the number of range points.
+ @param graphChartView      The graph chart view asking for the number of value points.
  @param plotIndex           An index number identifying the plot in the graph chart view. This index
                                 is 0 in a single-plot graph chart view.
 
  @return The number of range points in the plot at `plotIndex`.
 */
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex;
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex;
 
 
 /**
- Asks the data source for the range point to be plotted at the specified point index for the
- specified plot.
-
- @param graphChartView      The graph chart view that is asking for the range point.
- @param pointIndex          An index number identifying the range point in the graph chart view.
- @param plotIndex           An index number identifying the plot in the graph chart view. This index
-                                is 0 in a single-plot graph chart view.
-
- @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
- specified graph chart view`.
-*/
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
-
-@optional
-/**
- Asks the data source for the number of plots to be plotted by the graph chart view. If this method
- is not implemented, the graph chart view assumes that it has a single plot.
+ Asks the data source for the number of plots to be plotted by the graph chart view.
 
  @param graphChartView      The graph chart view asking for the number of plots.
 
@@ -131,6 +118,7 @@ ORK_AVAILABLE_DECL
 */
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
 
+@optional
 /**
  Asks the data source for the color of the specified plot.
  
@@ -146,6 +134,20 @@ ORK_AVAILABLE_DECL
 - (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
 
 /**
+ Asks the data source for the fill color of the specified plot.
+ 
+ The fill color is only used by `ORKLineGraphChartView`. If this method is not implemented, the
+ chart uses the main color of the specified plot with a 0.4 opacity value.
+ 
+ @param graphChartView      The graph chart view asking for the color of the segment.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return The color of the fill layer at the specified index in a line chart view.
+ */
+- (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView fillColorForPlotIndex:(NSInteger)plotIndex;
+
+/**
  Asks the data source which plot the scrubber should snap to in multigraph chart views.
  
  If this method is not implemented, the scrubber snaps over the first plot.
@@ -159,7 +161,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
+ If this method is not implemented, the greatest `maximumValue` of all `ORKValueRange` instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -168,12 +170,12 @@ ORK_AVAILABLE_DECL
 
  @return The maximum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
+- (double)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph chart view.
 
- If this method is not implemented, the smallest `minimumValue` of all ORKRangedPoint instances
+ If this method is not implemented, the smallest `minimumValue` of all ORKValueRange instances
  returned in `graphChartView:plot:valueForPointAtIndex:` is used.
 
  See also: `graphChartView:plot:valueForPointAtIndex:`.
@@ -182,7 +184,7 @@ ORK_AVAILABLE_DECL
 
  @return The minimum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
+- (double)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
@@ -225,15 +227,88 @@ ORK_AVAILABLE_DECL
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsVerticalReferenceLineAtPointIndex:(NSInteger)pointIndex;
 
+
+/**
+ Asks the data source if the plot at specified index should display circular indicators on its data points.
+ 
+ This only applys to `ORKLineGrapthChartView`.
+ If this method is not implemented, point indicators will be drawn for all plots.
+ 
+ @param graphChartView  The graph view asking whether point indicators should be drawn.
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return Whether the graph chart view should draw point indicators for its points.
+ */
+- (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
+
 @end
 
 
 /**
- The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to
- subclasses such as `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate
- this class directly; use one of the subclasses instead.
+ An object that adopts the `ORKValueRangeGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKValueRange` values required to populate an
+ `ORKValueRangeGraphChartView` concrete subclass, such as `ORKLineGraphChartView` and
+ `ORKDiscreteGraphChartView`.
+ */
+ORK_AVAILABLE_DECL
+@protocol ORKValueRangeGraphChartViewDataSource <ORKGraphChartViewDataSource>
+
+@required
+
+/**
+ Asks the data source for the value range to be plotted at the specified point index for the
+ specified plot.
+ 
+ @param graphChartView      The graph chart view that is asking for the value range.
+ @param pointIndex          An index number identifying the value range in the graph chart view.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+                                is 0 in a single-plot graph chart view.
+ 
+ @return The value range specified by `pointIndex` in the plot specified by `plotIndex` for the
+ specified graph chart view`.
+ */
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+
+@end
+
+
+/**
+ An object that adopts the `ORKValueStackGraphChartViewDataSource` protocol is responsible for
+ providing data in the form of `ORKValueStack` values required to populate an `ORKBarGraphChartView`
+ object.
+ */
+ORK_AVAILABLE_DECL
+@protocol ORKValueStackGraphChartViewDataSource <ORKGraphChartViewDataSource>
+
+@required
+
+/**
+ Asks the data source for the value stack to be plotted at the specified point index for the
+ specified plot.
+ 
+ @param graphChartView      The graph chart view that is asking for the value stack.
+ @param pointIndex          An index number identifying the value stack in the graph chart view.
+ @param plotIndex           An index number identifying the plot in the graph chart view. This index
+ is 0 in a single-plot graph chart view.
+ 
+ @return The value stack specified by `pointIndex` in the plot specified by `plotIndex` for the
+ specified graph chart view`.
+ */
+- (ORKValueStack *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+
+@end
+
+
+/**
+ The `ORKGraphChartView` class is an abstract class which holds properties and methods common to
+ concrete subclasseses.
+ 
+ You should not instantiate this class directly; use one of the subclasses instead. The concrete
+ subclasses are `ORKLineGraphChartView`, `ORKDiscreteGraphChartView`, and `ORKBarGraphChartView`.
 */
 ORK_CLASS_AVAILABLE
+IB_DESIGNABLE
 @interface ORKGraphChartView : UIView
 
 /**
@@ -243,10 +318,10 @@ ORK_CLASS_AVAILABLE
  `minimumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `minimumValueForGraphChartView:` is not implemented, the minimum value is assigned to the
- smallest value of the `minimumValue` property of all `ORKRangedPoint` instances returned by the
+ smallest value of the `minimumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat minimumValue;
+@property (nonatomic, readonly) double minimumValue;
 
 /**
  The maximum value of the y-axis.
@@ -255,24 +330,24 @@ ORK_CLASS_AVAILABLE
  optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
  If `maximumValueForGraphChartView:` is not implemented, the maximum value is assigned to the
- largest value of the `maximumValue` property of all `ORKRangedPoint` instances returned by the
+ largest value of the `maximumValue` property of all `ORKValueRange` instances returned by the
  graph chart view data source.
 */
-@property (nonatomic, readonly) CGFloat maximumValue;
+@property (nonatomic, readonly) double maximumValue;
 
 /**
  A Boolean value indicating whether the graph chart view should draw horizontal reference lines.
 
  The default value of this property is NO.
  */
-@property (nonatomic) BOOL showsHorizontalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsHorizontalReferenceLines;
 
 /**
  A Boolean value indicating whether the graph chart view should draw vertical reference lines.
 
  The default value of this property is NO.
 */
-@property (nonatomic) BOOL showsVerticalReferenceLines;
+@property (nonatomic) IBInspectable BOOL showsVerticalReferenceLines;
 
 /**
  The delegate is notified of pan gesture events occuring within the bounds of the graph chart
@@ -295,7 +370,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil`
  resets it to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *axisColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *axisColor;
 
 /**
  The color of the vertical axis titles.
@@ -305,7 +380,7 @@ ORK_CLASS_AVAILABLE
 
  @note The horizontal axis titles use the current `tintColor`.
 */
-@property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.
@@ -313,7 +388,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a light gray color. Setting this property to `nil` resets it
  to its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
@@ -321,7 +396,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a white color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
@@ -329,7 +404,7 @@ ORK_CLASS_AVAILABLE
  The default value for this property is a gray color. Setting this property to `nil` resets it to
  its default value.
 */
-@property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
+@property (nonatomic, strong, null_resettable) IBInspectable UIColor *scrubberLineColor;
 
 /**
  The string that is displayed if no data points are provided by the data source.
@@ -337,21 +412,29 @@ ORK_CLASS_AVAILABLE
  The default value for this property is an appropriate message string. Setting this property to
  `nil` resets it to its default value.
 */
-@property (nonatomic, copy, null_resettable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
  An image to be optionally displayed in place of the maximum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *maximumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *maximumValueImage;
 
 /**
  An image to be optionally displayed in place of the minimum value label on the y-axis.
  
  The default value for this property is `nil`.
 */
-@property (nonatomic, strong, nullable) UIImage *minimumValueImage;
+@property (nonatomic, strong, nullable) IBInspectable UIImage *minimumValueImage;
+
+/**
+ The long press gesture recognizer that is used for scrubbing by the graph chart view. You can use
+ this property to prioritize your own gesture recognizers.
+ 
+ This object is instatiated and added to the view when it is created.
+ */
+@property (nonatomic, strong, readonly) UILongPressGestureRecognizer *longPressGestureRecognizer;
 
 /**
  The gesture recognizer that is used for scrubbing by the graph chart view.
@@ -369,6 +452,33 @@ ORK_CLASS_AVAILABLE
  @param animationDuration       The duration of the appearing animation.
  */
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
+
+/**
+ Reloads the plotted data.
+ 
+ Call this method to reload the data and re-plot the graph. You should call it if the data provided by the dataSource changes.
+*/
+- (void)reloadData;
+
+@end
+
+
+/**
+ The `ORKValueRangeGraphChartView` class is an abstract class which holds a data source comforming
+ to the `ORKValueRangeGraphChartViewDataSource` protocol, common to concrete subclasseses.
+ 
+ You should not instantiate this class directly; use one of the subclasses instead. The concrete
+ subclasses are `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKValueRangeGraphChartView : ORKGraphChartView
+
+/**
+ The data source responsible for providing the data required to populate the graph chart view.
+ 
+ See the `ORKValueRangeGraphChartViewDataSource` protocol.
+ */
+@property (nonatomic, weak) id <ORKValueRangeGraphChartViewDataSource> dataSource;
 
 @end
 

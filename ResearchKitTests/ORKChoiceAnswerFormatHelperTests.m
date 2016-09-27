@@ -29,10 +29,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
+
 #import "ORKChoiceAnswerFormatHelper.h"
-#import "ORKAnswerFormat_internal.h"
 
 
 @interface ORKChoiceAnswerFormatHelperTests : XCTestCase
@@ -105,8 +105,8 @@
         ORKChoiceAnswerFormatHelper *formatHelper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            ORKTextChoice * tc = obj;
-            ORKTextChoice * tc2 = [formatHelper textChoiceAtIndex:idx];
+            ORKTextChoice *tc = obj;
+            ORKTextChoice *tc2 = [formatHelper textChoiceAtIndex:idx];
             XCTAssertEqual(tc, tc2, @"");
             XCTAssertNil([formatHelper imageChoiceAtIndex:idx],@"");
         }];
@@ -121,8 +121,8 @@
         ORKChoiceAnswerFormatHelper *formatHelper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            ORKTextChoice * tc = obj;
-            ORKTextChoice * tc2 = [formatHelper textChoiceAtIndex:idx+1];
+            ORKTextChoice *tc = obj;
+            ORKTextChoice *tc2 = [formatHelper textChoiceAtIndex:idx+1];
             XCTAssertEqual(tc, tc2, @"");
             XCTAssertNil([formatHelper imageChoiceAtIndex:idx],@"");
         }];
@@ -139,8 +139,8 @@
         ORKChoiceAnswerFormatHelper *formatHelper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
         [imageChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            ORKImageChoice * tc = obj;
-            ORKImageChoice * tc2 = [formatHelper imageChoiceAtIndex:idx];
+            ORKImageChoice *tc = obj;
+            ORKImageChoice *tc2 = [formatHelper imageChoiceAtIndex:idx];
             XCTAssertEqual(tc, tc2, @"");
             XCTAssertNil([formatHelper textChoiceAtIndex:idx],@"");
         }];
@@ -192,11 +192,11 @@
         
         id answer = [formatHelper answerForSelectedIndexes:@[@(0)]];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
+        XCTAssert(answer == ORKNullAnswerValue(), @"%@", answer);
         
         answer = [formatHelper answerForSelectedIndex:0];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
+        XCTAssert(answer == ORKNullAnswerValue(), @"%@", answer);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             

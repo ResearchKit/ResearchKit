@@ -33,16 +33,18 @@
 
 #import "ORKPieChartView.h"
 #import "ORKPieChartView_Internal.h"
-#import "ORKPieChartPieView.h"
+
 #import "ORKPieChartLegendView.h"
+#import "ORKPieChartPieView.h"
 #import "ORKPieChartTitleTextView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKDefines_Private.h"
-#import "ORKHelpers.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;
 static const CGFloat PieToLegendPadding = 8.0;
+
 
 @implementation ORKPieChartSection
 
@@ -102,13 +104,22 @@ static const CGFloat PieToLegendPadding = 8.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
-    _dataSource = dataSource;
+- (void)reloadData {
     CGFloat sumOfValues = [_pieView normalizeValues];
     [_pieView updatePieLayers];
     [_pieView updatePercentageLabels];
     [_titleTextView showNoDataLabel:(sumOfValues == 0)];
     [self updateLegendView];
+}
+
+- (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    [self reloadData];
+}
+
+- (void)setRadiusScaleFactor:(CGFloat)radiusScaleFactor {
+    _pieView.radiusScaleFactor = radiusScaleFactor;
+    [_pieView setNeedsLayout];
 }
 
 - (void)setLineWidth:(CGFloat)lineWidth {
@@ -339,15 +350,8 @@ static const CGFloat PieToLegendPadding = 8.0;
     } else {
         // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
-        if (numberOfSegments > 1) {
-            // Avoid pure white and pure black
-            CGFloat divisionFactor = (1.0 / numberOfSegments);
-            CGFloat alphaComponent = 1 - (divisionFactor * index);
-            color = [self.tintColor colorWithAlphaComponent:alphaComponent];
-        } else {
-            color = self.tintColor;
+        color = ORKOpaqueColorWithReducedAlphaFromBaseColor(self.tintColor, index, numberOfSegments);
         }
-    }
     return color;
 }
 
@@ -355,7 +359,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     if (animationDuration < 0) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
     }
-    [self layoutIfNeeded]; // layout pass needed so _pieView (a UICollectionView subclass) dequees and displays the cells
+    [self layoutIfNeeded]; // layout pass needed so _legendView (a UICollectionView subclass) dequees and displays the cells
     [_pieView animateWithDuration:animationDuration];
     [_legendView animateWithDuration:animationDuration];
     [_titleTextView animateWithDuration:animationDuration];
@@ -381,4 +385,63 @@ static const CGFloat PieToLegendPadding = 8.0;
     return accessibilityElements;
 }
 
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+#if TARGET_INTERFACE_BUILDER
+    self.sampleDataSource = [ORKIBSamplePieChartDataSource new];
+    self.dataSource = self.sampleDataSource;
+#endif
+}
+
 @end
+
+
+#if TARGET_INTERFACE_BUILDER
+
+@implementation ORKIBSamplePieChartDataSourceSegment
+@end
+
+@implementation ORKIBSamplePieChartDataSource
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        ORKIBSamplePieChartDataSourceSegment *segment1 = [ORKIBSamplePieChartDataSourceSegment new];
+        segment1.title = @"Title 1";
+        segment1.value = 10.0;
+        segment1.color = [UIColor colorWithRed:217.0/225 green:217.0/255 blue:217.0/225 alpha:1];
+
+        ORKIBSamplePieChartDataSourceSegment *segment2 = [ORKIBSamplePieChartDataSourceSegment new];
+        segment2.title = @"Title 2";
+        segment2.value = 25.0;
+        segment2.color = [UIColor colorWithRed:142.0/255 green:142.0/255 blue:147.0/255 alpha:1];
+
+        ORKIBSamplePieChartDataSourceSegment *segment3 = [ORKIBSamplePieChartDataSourceSegment new];
+        segment3.title = @"Title 3";
+        segment3.value = 45.0;
+        segment3.color = [UIColor colorWithRed:244.0/225 green:190.0/255 blue:74.0/225 alpha:1];
+
+        _segments = @[segment1, segment2, segment3];
+}
+    return self;
+}
+- (NSInteger)numberOfSegmentsInPieChartView:(ORKPieChartView *)pieChartView {
+    return self.segments.count;
+}
+- (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index {
+
+    return self.segments[index].value;
+}
+
+- (UIColor *)pieChartView:(ORKPieChartView *)pieChartView colorForSegmentAtIndex:(NSInteger)index {
+    return self.segments[index].color;
+}
+
+- (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index {
+    return self.segments[index].title;
+}
+
+@end
+
+#endif

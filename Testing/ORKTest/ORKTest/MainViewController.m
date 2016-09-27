@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2016, Sage Bionetworks
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,11 +33,15 @@
 
 
 #import "MainViewController.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import <AVFoundation/AVFoundation.h>
-#import "DynamicTask.h"
+
 #import "AppDelegate.h"
+#import "DynamicTask.h"
 #import "ORKTest-Swift.h"
+#import "DragonPokerStep.h"
+
+@import ResearchKit;
+
+@import AVFoundation;
 
 
 #define DefineStringKey(x) static NSString *const x = @#x
@@ -51,15 +56,19 @@ DefineStringKey(VerificationTaskIdentifier);
 
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
+DefineStringKey(VideoCaptureTaskIdentifier);
 DefineStringKey(ImageChoicesTaskIdentifier);
+DefineStringKey(InstantiateCustomVCTaskIdentifier);
 DefineStringKey(LocationTaskIdentifier);
 DefineStringKey(ScalesTaskIdentifier);
+DefineStringKey(ColorScalesTaskIdentifier);
 DefineStringKey(MiniFormTaskIdentifier);
 DefineStringKey(OptionalFormTaskIdentifier);
 DefineStringKey(SelectionSurveyTaskIdentifier);
 
 DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
+DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
@@ -70,6 +79,9 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(TremorTaskIdentifier);
+DefineStringKey(TremorRightHandTaskIdentifier);
+DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
@@ -83,6 +95,15 @@ DefineStringKey(WaitTaskIdentifier);
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
 
+DefineStringKey(EmbeddedReviewTaskIdentifier);
+DefineStringKey(StandaloneReviewTaskIdentifier);
+DefineStringKey(ConfirmationFormTaskIdentifier);
+
+DefineStringKey(StepWillDisappearTaskIdentifier);
+DefineStringKey(StepWillDisappearFirstStepIdentifier);
+
+DefineStringKey(TableStepTaskIdentifier);
+DefineStringKey(SignatureStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -232,6 +253,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UICollectionView *_collectionView;
     NSArray<NSString *> *_buttonSectionNames;
     NSArray<NSArray<NSString *> *> *_buttonTitles;
+    
+    ORKTaskResult *_embeddedReviewTaskResult;
 }
 
 @property (nonatomic, strong) ORKTaskViewController *taskViewController;
@@ -305,6 +328,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Question Steps",
                             @"Active Tasks",
                             @"Passcode",
+                            @"Review Step",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Onboarding
@@ -319,9 +343,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        @[ // Question Steps
                            @"Date Pickers",
                            @"Image Capture",
+                           @"Video Capture",
                            @"Image Choices",
                            @"Location",
                            @"Scale",
+                           @"Scale Color Gradient",
                            @"Mini Form",
                            @"Optional Form",
                            @"Selection Survey",
@@ -339,12 +365,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Walk And Turn Task",
+                           @"Hand Tremor Task",
+                           @"Right Hand Tremor Task",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
                            @"Create Passcode",
                            @"Edit Passcode",
                            @"Remove Passcode",
+                           ],
+                       @[ // Review Step
+                           @"Embedded Review Task",
+                           @"Standalone Review Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -356,6 +389,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
+                           @"Step Will Disappear",
+                           @"Confirmation Form Item",
+                           @"Continue Button",
+                           @"Instantiate Custom VC",
+                           @"Table Step",
+                           @"Signature Step",
+                           @"Auxillary Image",
                            ],
                        ];
 }
@@ -447,6 +487,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                             shortSpeechInstruction:nil
                                                           duration:10
                                                  recordingSettings:nil
+                                                   checkAudioLevel:YES
                                                            options:(ORKPredefinedTaskOption)0];
         return task;
     } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
@@ -480,8 +521,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                        minimumSpan:2
                                                        maximumSpan:15
                                                          playSpeed:1
-                                                          maxTests:5
-                                            maxConsecutiveFailures:3
+                                                      maximumTests:5
+                                        maximumConsecutiveFailures:3
                                                  customTargetImage:nil
                                             customTargetPluralName:nil
                                                    requireReversal:NO
@@ -492,14 +533,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeInterruptibleTask];
     } else if ([identifier isEqualToString:ScalesTaskIdentifier]) {
         return [self makeScalesTask];
+    } else if ([identifier isEqualToString:ColorScalesTaskIdentifier]) {
+        return [self makeColorScalesTask];
     } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
         return [self makeImageChoicesTask];
     } else if ([identifier isEqualToString:ImageCaptureTaskIdentifier]) {
         return [self makeImageCaptureTask];
+    } else if ([identifier isEqualToString:VideoCaptureTaskIdentifier]) {
+        return [self makeVideoCaptureTask];
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
                                                                  duration:20.0
+                                                              handOptions:ORKPredefinedTaskHandOptionBoth
                                                                   options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
@@ -531,6 +577,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                     intendedUseDescription:nil
                                           distanceInMeters:100
                                                  timeLimit:180
+                                includeAssistiveDeviceForm:YES
                                                    options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
         return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
@@ -549,10 +596,49 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
+    } else if ([identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+        return [self makeEmbeddedReviewTask];
+    } else if ([identifier isEqualToString:StandaloneReviewTaskIdentifier]) {
+        return [self makeStandaloneReviewTask];
     } else if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
-    }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
+    } else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
+    } else if ([identifier isEqualToString:StepWillDisappearTaskIdentifier]) {
+        return [self makeStepWillDisappearTask];
+    } else if ([identifier isEqualToString:ConfirmationFormTaskIdentifier]) {
+        return [self makeConfirmationFormTask];
+    } else if ([identifier isEqualToString:InstantiateCustomVCTaskIdentifier]) {
+        return [self makeInstantiateCustomVCTask];
+    } else if ([identifier isEqualToString:WalkBackAndForthTaskIdentifier]) {
+        return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkBackAndForthTaskIdentifier
+                                           intendedUseDescription:nil
+                                                     walkDuration:30
+                                                     restDuration:30
+                                                          options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TableStepTaskIdentifier]) {
+        return [self makeTableStepTask];
+    } else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
+        return [self makeSignatureStepTask];
+    } else if ([identifier isEqualToString:TremorTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight |
+                ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent |
+                ORKTremorActiveTaskOptionExcludeHandToNose
+                                                handOptions:ORKPredefinedTaskHandOptionBoth
+                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TremorRightHandTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorRightHandTaskIdentifier
+                                     intendedUseDescription:nil
+                                         activeStepDuration:10
+                                          activeTaskOptions:0
+                                                handOptions:ORKPredefinedTaskHandOptionRight
+                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
+        return [self makeAuxillaryImageTask];
     }
 
     return nil;
@@ -1545,7 +1631,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_weight4"
                                                                    text:@"Weight"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-            item.placeholder = @"Input your body weight here.";
+            item.placeholder = @"Input your body weight here";
             [items addObject:item];
         }
         
@@ -1673,7 +1759,28 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             item.placeholder = @"Enter Passcode";
             [items addObject:item];
         }
-        
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_001" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormat]];
+            item.placeholder = @"Pick a height (local system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_002" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric]];
+            item.placeholder = @"Pick a height (metric system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_height_003" text:@"Height"
+                                                           answerFormat:[ORKAnswerFormat heightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC]];
+            item.placeholder = @"Pick a height (imperial system)";
+            [items addObject:item];
+        }
+
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
@@ -1682,7 +1789,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            
             NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear value:-30 toDate:[NSDate date] options:(NSCalendarOptions)0];
             NSDate *minDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear value:-150 toDate:[NSDate date] options:(NSCalendarOptions)0];
 
@@ -2243,6 +2349,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
 }
 
+- (void)walkAndTurnTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
+}
+
+- (void)handTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorTaskIdentifier];
+}
+
+- (void)rightHandTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
+}
+
 #pragma mark - Dynamic task
 
 /*
@@ -2599,6 +2717,30 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:ScalesTaskIdentifier];
 }
 
+- (id<ORKTask>)makeColorScalesTask {
+    ORKOrderedTask *task = (ORKOrderedTask *)[self makeScalesTask];
+    
+    for (ORKQuestionStep *step in task.steps) {
+        if ([step isKindOfClass:[ORKQuestionStep class]]) {
+            ORKAnswerFormat *answerFormat  = step.answerFormat;
+            if ([answerFormat respondsToSelector:@selector(setGradientColors:)]) {
+                [answerFormat performSelector:@selector(setGradientColors:) withObject:@[[UIColor redColor],
+                                                                                         [UIColor greenColor],
+                                                                                         [UIColor greenColor],
+                                                                                         [UIColor yellowColor],
+                                                                                         [UIColor yellowColor]]];
+                [answerFormat performSelector:@selector(setGradientLocations:) withObject:@[@0.2, @0.2, @0.7, @0.7, @0.8]];
+            }
+        }
+    }
+    
+    return task;
+}
+
+- (void)scaleColorGradientButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ColorScalesTaskIdentifier];
+}
+
 #pragma mark - Image choice task
 
 /*
@@ -2805,6 +2947,91 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
 }
 
+#pragma mark - Video Capture
+- (id<ORKTask>)makeVideoCaptureTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    /*
+     If implementing an video capture task like this one, remember that people will
+     take your instructions literally. So, be cautious. Make sure your template image
+     is high contrast and very visible against a variety of backgrounds.
+     */
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
+        step.title = @"Hands";
+        step.image = [[UIImage imageNamed:@"hands_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"In this step we will capture 5 second videos of both of your hands";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Let's start by capturing a video of your right hand";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your right hand with the on-screen outline and record the video.  Be sure to place your hand over a contrasting background.  You can re-capture the video as many times as you need.";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKVideoCaptureStep *step = [[ORKVideoCaptureStep alloc] initWithIdentifier:@"right3"];
+        step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
+        step.duration = @5.0;
+        step.accessibilityInstructions = @"Extend your right hand, palm side down, one foot in front of your device. Tap the Start Recording button, or two-finger double tap the preview to capture the video";
+        step.accessibilityHint = @"Records the video visible in the preview";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Now let's capture a video of your left hand";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your left hand with the on-screen outline and record the video.  Be sure to place your hand over a contrasting background.  You can re-capture the video as many times as you need.";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKVideoCaptureStep *step = [[ORKVideoCaptureStep alloc] initWithIdentifier:@"left3"];
+        step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
+        step.duration = @5.0;
+        step.accessibilityInstructions = @"Extend your left hand, palm side down, one foot in front of your device. Tap the Start Recording button, or two-finger double tap the preview to capture the video";
+        step.accessibilityHint = @"Records the video visible in the preview";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+        step.title = @"Complete";
+        step.detailText = @"Hand video capture complete";
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:VideoCaptureTaskIdentifier steps:steps];
+    return task;
+}
+
+- (void)videoCaptureButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:VideoCaptureTaskIdentifier];
+}
+
+
 - (void)navigableOrderedTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:NavigableOrderedTaskIdentifier];
 }
@@ -2841,9 +3068,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     // Intro step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
-    step.title = @"This task demonstrates an optional loop within a navigable ordered task";
+    step.title = @"This task demonstrates an skippable step and an optional loop within a navigable ordered task";
     [steps addObject:step];
 
+    // Skippable step
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"skipNextStep" title:@"Do you want to skip the next step?" answer:answerFormat];
+    questionStep.optional = NO;
+    [steps addObject:questionStep];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
+    step.title = @"You'll optionally skip this step";
+    [steps addObject:step];
+    
     // Loop target step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"loopAStep"];
     step.title = @"You'll optionally return to this step";
@@ -2907,12 +3144,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // Build navigation rules
     ORKResultSelector *resultSelector = nil;
     ORKPredicateStepNavigationRule *predicateRule = nil;
-    ORKDirectStepNavigationRule *directRule;
+    ORKDirectStepNavigationRule *directRule = nil;
+    ORKPredicateSkipStepNavigationRule *predicateSkipRule = nil;
     
+    // skippable step
+    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"skipNextStep"];
+    NSPredicate *predicateSkipStep = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                                                                              expectedAnswer:YES];
+    predicateSkipRule = [[ORKPredicateSkipStepNavigationRule alloc] initWithResultPredicate:predicateSkipStep];
+    [task setSkipNavigationRule:predicateSkipRule forStepIdentifier:@"skippableStep"];
+
     // From the branching step, go to either scaleStep or textChoiceStep
     resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"branchingStep"];
-    NSPredicate *predicateAnswerType = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"scale"];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerType ]
+    NSPredicate *predicateAnswerTypeScale = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
+                                                                                               expectedAnswerValue:@"scale"];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerTypeScale ]
                                                           destinationStepIdentifiers:@[ @"scaleStep" ]
                                                                defaultStepIdentifier:@"textChoiceStep"];
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"branchingStep"];
@@ -3020,6 +3266,103 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController {
     NSLog(@"User tapped the cancel button.");
     [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)passcodeViewControllerForgotPasscodeTapped:(UIViewController *)viewController {
+    NSLog(@"Forgot Passcode tapped.");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Forgot Passcode"
+                                                                   message:@"Forgot Passcode tapped."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [viewController presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Review step
+
+- (NSArray<ORKStep *> *)stepsForReviewTasks {
+    // ORKInstructionStep
+    ORKInstructionStep *instructionStep = [[ORKInstructionStep alloc] initWithIdentifier:@"instructionStep"];
+    instructionStep.title = @"Review Task";
+    instructionStep.text = @"The task demonstrates the usage of ORKReviewStep within a task";
+    NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Good" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Average" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Poor" detailText:@"" value:[NSNumber numberWithInt:2] exclusive:NO]];
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"How do you feel today?" answer:[ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices]];
+    // ORKImageChoiceAnswerFormat
+    NSMutableArray<ORKImageChoice *> *imageChoices = [[NSMutableArray alloc] init];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"left_hand_outline"] selectedImage:[UIImage imageNamed:@"left_hand_solid"] text:@"Left hand" value:[NSNumber numberWithInt:1]]];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"right_hand_outline"] selectedImage:[UIImage imageNamed:@"right_hand_solid"] text:@"Right hand" value:[NSNumber numberWithInt:0]]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
+    // ORKTextChoiceAnswerFormat
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"How do you feel today?" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices]];
+    // ORKBooleanAnswerFormat
+    ORKQuestionStep *step4 = [ORKQuestionStep questionStepWithIdentifier:@"step4" title:@"Are you at least 18 years old?" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    // ORKTimeOfDayAnswerFormat
+    ORKQuestionStep *step5 = [ORKQuestionStep questionStepWithIdentifier:@"step5" title:@"When did you wake up today?" answer:[ORKAnswerFormat timeOfDayAnswerFormat]];
+    // ORKDateAnswerFormat
+    ORKQuestionStep *step6 = [ORKQuestionStep questionStepWithIdentifier:@"step6" title:@"When is your birthday?" answer:[ORKAnswerFormat dateAnswerFormat]];
+    // ORKFormStep
+    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"formStep" title:@"Survey" text:@"Please answer the following set of questions"];
+    ORKFormItem *formItem1 = [[ORKFormItem alloc] initWithIdentifier:@"formItem1" text:@"How do you feel today?" answerFormat:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices]];
+    ORKFormItem *formItem2 = [[ORKFormItem alloc] initWithIdentifier:@"formItem2" text:@"Are you pregnant?" answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
+    formStep.formItems = @[formItem1, formItem2];
+    // ORKReviewStep
+    ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"embeddedReviewStep"];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers";
+    // ORKNumericAnswerFormat
+    ORKQuestionStep *step7 = [ORKQuestionStep questionStepWithIdentifier:@"step7" title:@"How many children do you have?" answer:[ORKAnswerFormat integerAnswerFormatWithUnit:@"children"]];
+    // ORKScaleAnswerFormat
+    ORKQuestionStep *step8 = [ORKQuestionStep questionStepWithIdentifier:@"step8" title:@"On a scale from 1 to 10: How do you feel today?" answer:[ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:6 step:1 vertical:NO maximumValueDescription:@"Excellent" minimumValueDescription:@"Poor"]];
+    // ORKContinousScaleAnswerFormat
+    ORKQuestionStep *step9 = [ORKQuestionStep questionStepWithIdentifier:@"step9" title:@"On a scale from 1 to 10: How do you feel today?" answer:[ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:6 maximumFractionDigits:2 vertical:NO maximumValueDescription:@"Excellent" minimumValueDescription:@"Poor"]];
+    // ORKTextScaleAnswerFormat
+    ORKQuestionStep *step10 = [ORKQuestionStep questionStepWithIdentifier:@"step10" title:@"How do you feel today?" answer:[ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices defaultIndex:0 vertical:NO]];
+    // ORKTextAnswerFormat
+    ORKQuestionStep *step11 = [ORKQuestionStep questionStepWithIdentifier:@"step11" title:@"What books do you like best?" answer:[ORKAnswerFormat textAnswerFormat]];
+    // ORKEmailAnswerFormat
+    ORKQuestionStep *step12 = [ORKQuestionStep questionStepWithIdentifier:@"step12" title:@"What is your e-mail address?" answer:[ORKAnswerFormat emailAnswerFormat]];
+    // ORKTimeIntervalAnswerFormat
+    ORKQuestionStep *step13 = [ORKQuestionStep questionStepWithIdentifier:@"step13" title:@"How many hours did you sleep last night?" answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
+    // ORKHeightAnswerFormat
+    ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"What is your height?" answer:[ORKAnswerFormat heightAnswerFormat]];
+    // ORKLocationAnswerFormat
+    ORKQuestionStep *step15 = [ORKQuestionStep questionStepWithIdentifier:@"step15" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
+
+    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14, step15];
+}
+
+- (id<ORKTask>)makeEmbeddedReviewTask {
+    // ORKValuePickerAnswerFormat
+    NSMutableArray<ORKStep *> *steps = [[NSMutableArray alloc] initWithArray:[self stepsForReviewTasks]];
+    ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"reviewStep"];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers";
+    [steps addObject:reviewStep];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewTaskIdentifier steps:steps];
+    return task;
+}
+
+- (IBAction)embeddedReviewTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EmbeddedReviewTaskIdentifier];
+}
+
+- (id<ORKTask>)makeStandaloneReviewTask {
+    NSMutableArray<ORKStep *> *steps = [[NSMutableArray alloc] initWithArray:[self stepsForReviewTasks]];
+    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:steps resultSource:_embeddedReviewTaskResult];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers from your last survey";
+    reviewStep.excludeInstructionSteps = YES;
+    return [[ORKOrderedTask alloc] initWithIdentifier:StandaloneReviewTaskIdentifier steps:@[reviewStep]];
+}
+
+- (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
+    if (_embeddedReviewTaskResult != nil) {
+        [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
+    } else {
+        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
+    }
 }
 
 #pragma mark - Helpers
@@ -3180,7 +3523,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
     return image;
@@ -3206,7 +3549,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+            if (![[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
                 NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
@@ -3376,16 +3719,25 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = taskViewController.result;
+            }
             [self taskViewControllerDidComplete:taskViewController];
             break;
         case ORKTaskViewControllerFinishReasonFailed:
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = nil;
+            }
             [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = taskViewController.result;
+            }
             /*
              Save the restoration data, dismiss the task VC, and do an early return
              so we don't clear the restoration data.
@@ -3416,8 +3768,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     NSLog(@"[ORKTest] task results: %@", taskViewController.result);
     
-    if (_currentDocument)
-    {
+    if (_currentDocument) {
         /*
          This demonstrates how to take a signature result, apply it to a document,
          and then generate a PDF From the document that includes the signature.
@@ -3434,7 +3785,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
             NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)pdfData.length, error);
             
-            if (! error) {
+            if (!error) {
                 NSURL *documents = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject];
                 NSURL *outputUrl = [documents URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", taskViewController.taskRunUUID.UUIDString]];
                 
@@ -3451,11 +3802,35 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         if (dir)
         {
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
+            if (![[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
                 NSLog(@"Error removing %@: %@", dir, err);
             }
         }
     }];
+}
+
+/**
+  When a task has completed it calls this method to post the result of the task to the delegate.
+*/
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result {
+    /*
+     Upon creation of a Passcode by a user, the results of their creation
+     are returned by getting it from ORKPasscodeResult in this delegate call.
+     This is triggered upon completion/failure/or cancel
+     */
+    ORKStepResult *stepResult = (ORKStepResult *)[[result results] firstObject];
+    if ([[[stepResult results] firstObject] isKindOfClass:[ORKPasscodeResult class]]) {
+        ORKPasscodeResult *passcodeResult = (ORKPasscodeResult *)[[stepResult results] firstObject];
+        NSLog(@"passcode saved: %d , Touch ID Enabled: %d", passcodeResult.passcodeSaved, passcodeResult.touchIdEnabled);
+
+    }
+}
+
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
+        [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
+        taskViewController.view.tintColor = [UIColor magentaColor];
+    }
 }
 
 #pragma mark - UI state restoration
@@ -3475,6 +3850,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     [coder encodeObject:_taskViewController forKey:@"taskVC"];
     [coder encodeObject:_lastRouteResult forKey:@"lastRouteResult"];
+    [coder encodeObject:_embeddedReviewTaskResult forKey:@"embeddedReviewTaskResult"];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -3590,7 +3966,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     // Location question with current location observing off
     ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"locationTask.step3"];
     step3.title = @"Where is your home?";
-    ORKLocationAnswerFormat* locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
+    ORKLocationAnswerFormat *locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
     locationAnswerFormat.useCurrentLocation= NO;
     step3.answerFormat = locationAnswerFormat;
     [steps addObject:step3];
@@ -3602,5 +3978,188 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:LocationTaskIdentifier steps:steps];
     return locationTask;
 }
+
+#pragma mark - Step Will Disappear Task Delegate example
+
+- (IBAction)stepWillDisappearButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StepWillDisappearTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeStepWillDisappearTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:StepWillDisappearFirstStepIdentifier];
+    step1.title = @"Step Will Disappear Delegate Example";
+    step1.text = @"The tint color of the task view controller is changed to magenta in the `stepViewControllerWillDisappear:` method.";
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
+    stepLast.title = @"Survey Complete";
+    
+    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:StepWillDisappearTaskIdentifier steps:@[step1, stepLast]];
+    return locationTask;
+}
+
+#pragma mark - Confirmation Form Item
+
+- (IBAction)confirmationFormItemButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ConfirmationFormTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeConfirmationFormTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"confirmationForm.step1"];
+    step1.title = @"Confirmation Form Items Survey";
+    [steps addObject:step1];
+    
+    // Create a step for entering password with confirmation
+    ORKFormStep *step2 = [[ORKFormStep alloc] initWithIdentifier:@"confirmationForm.step2" title:@"Password" text:nil];
+    [steps addObject:step2];
+    
+    {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        answerFormat.secureTextEntry = YES;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
+                                                               text:@"Password"
+                                                       answerFormat:answerFormat
+                                                           optional:NO];
+        item.placeholder = @"Enter password";
+
+        ORKFormItem *confirmationItem = [item confirmationAnswerFormItemWithIdentifier:@"password.confirmation"
+                                                                                  text:@"Confirm"
+                                                                          errorMessage:@"Passwords do not match"];
+        confirmationItem.placeholder = @"Enter password again";
+        
+        step2.formItems = @[item, confirmationItem];
+    }
+    
+    // Create a step for entering participant id
+    ORKFormStep *step3 = [[ORKFormStep alloc] initWithIdentifier:@"confirmationForm.step3" title:@"Participant ID" text:nil];
+    [steps addObject:step3];
+    
+    {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"participantID"
+                                                               text:@"Participant ID"
+                                                       answerFormat:answerFormat
+                                                           optional:YES];
+        item.placeholder = @"Enter Participant ID";
+        
+        ORKFormItem *confirmationItem = [item confirmationAnswerFormItemWithIdentifier:@"participantID.confirmation"
+                                                                                  text:@"Confirm"
+                                                                          errorMessage:@"IDs do not match"];
+        confirmationItem.placeholder = @"Enter ID again";
+        
+        step3.formItems = @[item, confirmationItem];
+    }
+    
+    ORKCompletionStep *step4 = [[ORKCompletionStep alloc] initWithIdentifier:@"confirmationForm.lastStep"];
+    step4.title = @"Survey Complete";
+    [steps addObject:step4];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormTaskIdentifier steps:steps];
+}
+
+#pragma mark - Continue button
+
+- (IBAction)continueButtonButtonTapped:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
+    UIViewController *vc = [storyboard instantiateInitialViewController];
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+#pragma mark - Instantiate Custom Step View Controller Example
+
+- (IBAction)instantiateCustomVcButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:InstantiateCustomVCTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeInstantiateCustomVCTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"locationTask.step1"];
+    step1.title = @"Instantiate Custom View Controller";
+    step1.text = @"The next step uses a custom subclass of an ORKFormStepViewController.";
+    
+    DragonPokerStep *dragonStep = [[DragonPokerStep alloc] initWithIdentifier:@"dragonStep"];
+    
+    ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"done"];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:InstantiateCustomVCTaskIdentifier steps:@[step1, dragonStep, lastStep]];
+}
+
+#pragma mark - Step Table
+
+- (IBAction)tableStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TableStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeTableStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.text = @"Example of an ORKTableStepViewController";
+    [steps addObject:step1];
+    
+    ORKTableStep *tableStep = [[ORKTableStep alloc] initWithIdentifier:@"tableStep"];
+    tableStep.items = @[@"Item 1", @"Item 2", @"Item 3"];
+    [steps addObject:tableStep];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Task Complete";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:TableStepTaskIdentifier steps:steps];
+}
+
+#pragma mark - Signature Table
+
+- (IBAction)signatureStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:SignatureStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeSignatureStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.text = @"Example of an ORKSignatureStep";
+    [steps addObject:step1];
+    
+    ORKSignatureStep *signatureStep = [[ORKSignatureStep alloc] initWithIdentifier:@"signatureStep"];
+    [steps addObject:signatureStep];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Task Complete";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+}
+
+#pragma mark - Auxillary Image
+
+- (IBAction)auxillaryImageButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:AuxillaryImageTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeAuxillaryImageTask {
+
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxillaryImageTaskIdentifier];
+    step.title = @"Title";
+    step.text = @"This is description text.";
+    step.detailText = @"This is detail text.";
+    step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
+}
+
 
 @end

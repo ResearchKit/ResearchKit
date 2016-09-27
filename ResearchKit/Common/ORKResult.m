@@ -30,18 +30,21 @@
 
 
 #import "ORKResult.h"
-#import "ORKTask.h"
-#import "ORKResult_Private.h"
-#import "ORKRecorder.h"
-#import "ORKStep.h"
-#import "ORKHelpers.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKQuestionStep.h"
-#import "ORKFormStep.h"
+
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
-#import <CoreMotion/CoreMotion.h>
+#import "ORKFormStep.h"
+#import "ORKQuestionStep.h"
+#import "ORKResult_Private.h"
+#import "ORKStep.h"
+#import "ORKTask.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import CoreMotion;
 #import <CoreLocation/CoreLocation.h>
 
 
@@ -109,7 +112,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [_identifier hash] ^ [_startDate hash] ^ [_endDate hash] ^ [_userInfo hash];
+    return _identifier.hash ^ _startDate.hash ^ _endDate.hash ^ _userInfo.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -157,6 +160,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
     ORK_ENCODE_CGPOINT(aCoder, location);
     ORK_ENCODE_ENUM(aCoder, buttonIdentifier);
 
@@ -165,6 +169,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, duration);
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_CGPOINT(aDecoder, location);
         ORK_DECODE_ENUM(aDecoder, buttonIdentifier);
@@ -180,6 +185,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     __typeof(self) castObject = object;
     
     return ((self.timestamp == castObject.timestamp) &&
+            (self.duration == castObject.duration) &&
             CGPointEqualToPoint(self.location, castObject.location) &&
             (self.buttonIdentifier == castObject.buttonIdentifier));
 }
@@ -187,13 +193,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTappingSample *sample = [[[self class] allocWithZone:zone] init];
     sample.timestamp = self.timestamp;
+    sample.duration = self.duration;
     sample.location = self.location;
     sample.buttonIdentifier = self.buttonIdentifier;
     return sample;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, self.duration, NSStringFromCGPoint(self.location)];
 }
 
 @end
@@ -208,12 +215,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, passcodeSaved);
+    ORK_ENCODE_BOOL(aCoder, touchIdEnabled);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_BOOL(aDecoder, passcodeSaved);
+        ORK_DECODE_BOOL(aDecoder, touchIdEnabled);
     }
     return self;
 }
@@ -223,17 +232,19 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
     __typeof(self) castObject = object;
     return (isParentSame &&
-            self.isPasscodeSaved == castObject.isPasscodeSaved);
+            self.isPasscodeSaved == castObject.isPasscodeSaved &&
+            self.isTouchIdEnabled == castObject.isTouchIdEnabled);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPasscodeResult *result = [super copyWithZone:zone];
     result.passcodeSaved = self.isPasscodeSaved;
+    result.touchIdEnabled = self.isTouchIdEnabled;
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; passcodeSaved: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; passcodeSaved: %d touchIDEnabled: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.isTouchIdEnabled, self.descriptionSuffix];
 }
 
 @end
@@ -269,7 +280,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ self.puzzleWasSolved ^ self.moves.hash;
+    return super.hash ^ self.puzzleWasSolved ^ self.moves.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -367,7 +378,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -470,7 +481,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self targetIndex] ^ [self isCorrect];
+    return super.hash ^ [self targetIndex] ^ [self isCorrect];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -536,7 +547,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self seed] ^ [self gameSize] ^ [self score] ^ [self gameStatus];
+    return super.hash ^ [self seed] ^ [self gameSize] ^ [self score] ^ [self gameStatus];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -597,7 +608,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -653,7 +664,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -675,7 +686,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @implementation ORKFileResult
 
 - (BOOL)isSaveable {
-    return (_fileURL!=nil);
+    return (_fileURL != nil);
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -707,7 +718,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.fileURL hash];
+    return super.hash ^ self.fileURL.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -755,7 +766,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ [self.fileResult hash];
+    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.fileResult.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -807,7 +818,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -931,7 +942,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1010,7 +1021,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.samples hash];
+    return super.hash ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1118,7 +1129,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.filename hash] ^ [self.contentType hash];
+    return super.hash ^ self.filename.hash ^ self.contentType.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1175,7 +1186,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.signature hash];
+    return super.hash ^ self.signature.hash;
 }
 
 - (void)applyToDocument:(ORKConsentDocument *)document {
@@ -1234,7 +1245,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.answer hash] ^ _questionType;
+    return super.hash ^ ((id<NSObject>)self.answer).hash ^ _questionType;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1243,7 +1254,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return result;
 }
 
-- (id)validateAnswer:(id)answer {
+- (NSObject *)validateAnswer:(id)answer {
     if (answer == ORKNullAnswerValue()) {
         answer = nil;
     }
@@ -1314,11 +1325,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_scaleAnswer, castObject.scaleAnswer));
+            ORKEqualObjects(self.scaleAnswer, castObject.scaleAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1367,11 +1378,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_choiceAnswers, castObject.choiceAnswers));
+            ORKEqualObjects(self.choiceAnswers, castObject.choiceAnswers));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1420,11 +1431,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_booleanAnswer, castObject.booleanAnswer));
+            ORKEqualObjects(self.booleanAnswer, castObject.booleanAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1479,11 +1490,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textAnswer, castObject.textAnswer));
+            ORKEqualObjects(self.textAnswer, castObject.textAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1534,12 +1545,12 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_numericAnswer, castObject.numericAnswer) &&
-            ORKEqualObjects(_unit, castObject.unit));
+            ORKEqualObjects(self.numericAnswer, castObject.numericAnswer) &&
+            ORKEqualObjects(self.unit, castObject.unit));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1563,6 +1574,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (id)answer {
     return self.numericAnswer;
+}
+
+- (NSString *)descriptionSuffix {
+    return [NSString stringWithFormat:@" %@>", _unit];
 }
 
 @end
@@ -1592,11 +1607,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_dateComponentsAnswer, castObject.dateComponentsAnswer));
+            ORKEqualObjects(self.dateComponentsAnswer, castObject.dateComponentsAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1645,11 +1660,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_intervalAnswer, castObject.intervalAnswer));
+            ORKEqualObjects(self.intervalAnswer, castObject.intervalAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1703,13 +1718,13 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_timeZone, castObject.timeZone) &&
-            ORKEqualObjects(_calendar, castObject.calendar) &&
-            ORKEqualObjects(_dateAnswer, castObject.dateAnswer));
+            ORKEqualObjects(self.timeZone, castObject.timeZone) &&
+            ORKEqualObjects(self.calendar, castObject.calendar) &&
+            ORKEqualObjects(self.dateAnswer, castObject.dateAnswer));
 }
 
 - (NSUInteger)hash {
-    return [super hash];
+    return super.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1759,9 +1774,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-
     ORK_ENCODE_OBJ(aCoder, results);
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1785,7 +1798,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.results hash];
+    return super.hash ^ self.results.hash;
 }
 
 - (void)setResultsCopyObjects:(NSArray *)results {
@@ -1839,7 +1852,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     NSMutableString *description = [NSMutableString stringWithFormat:@"%@; results: (", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
     
     NSUInteger numberOfResults = self.results.count;
-    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
         if (idx == 0) {
             [description appendString:@"\n"];
         }
@@ -1900,7 +1913,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.taskRunUUID hash] ^ [self.outputDirectory hash];
+    return super.hash ^ self.taskRunUUID.hash ^ self.outputDirectory.hash;
 }
 
 
@@ -1919,6 +1932,14 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 
 @implementation ORKLocation
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                             region:(CLCircularRegion *)region
@@ -1954,10 +1975,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return YES;
 }
 
-static NSString * const RegionCenterLatitudeKey = @"region.center.latitude";
-static NSString * const RegionCenterLongitudeKey = @"region.center.longitude";
-static NSString * const RegionRadiusKey = @"region.radius";
-static NSString * const RegionIdentifierKey = @"region.identifier";
+static NSString *const RegionCenterLatitudeKey = @"region.center.latitude";
+static NSString *const RegionCenterLongitudeKey = @"region.center.longitude";
+static NSString *const RegionRadiusKey = @"region.radius";
+static NSString *const RegionIdentifierKey = @"region.identifier";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, userInput);
@@ -2058,8 +2079,109 @@ static NSString * const RegionIdentifierKey = @"region.identifier";
     self = [super initWithIdentifier:stepIdentifier];
     if (self) {
         [self setResultsCopyObjects:results];
+        [self updateEnabledAssistiveTechnology];
     }
     return self;
+}
+
+- (void)updateEnabledAssistiveTechnology {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationVoiceOverIdentifier copy];
+    } else if (UIAccessibilityIsSwitchControlRunning()) {
+        _enabledAssistiveTechnology = [UIAccessibilityNotificationSwitchControlIdentifier copy];
+    }
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, enabledAssistiveTechnology);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, enabledAssistiveTechnology, NSString);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.enabledAssistiveTechnology, castObject.enabledAssistiveTechnology));
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _enabledAssistiveTechnology.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKStepResult *result = [super copyWithZone:zone];
+    result->_enabledAssistiveTechnology = [_enabledAssistiveTechnology copy];
+    return result;
+}
+
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; enabledAssistiveTechnology: %@", [super descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], _enabledAssistiveTechnology ? : @"None"];
+}
+
+@end
+
+@implementation ORKSignatureResult
+
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath {
+    self = [super init];
+    if (self) {
+        _signatureImage = [signatureImage copy];
+        _signaturePath = ORKArrayCopyObjects(signaturePath);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_IMAGE(aCoder, signatureImage);
+    ORK_ENCODE_OBJ(aCoder, signaturePath);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_IMAGE(aDecoder, signatureImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, signaturePath, UIBezierPath);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.signatureImage.hash ^ self.signaturePath.hash;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.signatureImage, castObject.signatureImage) &&
+            ORKEqualObjects(self.signaturePath, castObject.signaturePath));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKSignatureResult *result = [super copyWithZone:zone];
+    result->_signatureImage = [_signatureImage copy];
+    result->_signaturePath = ORKArrayCopyObjects(_signaturePath);
+    return result;
 }
 
 @end

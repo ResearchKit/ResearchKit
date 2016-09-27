@@ -35,15 +35,15 @@ class DashboardTableViewController: UITableViewController {
     // MARK: Properties
     
     @IBOutlet var pieChart: ORKPieChartView!
-    @IBOutlet var descreteGraph: ORKDiscreteGraphChartView!
+    @IBOutlet var discreteGraph: ORKDiscreteGraphChartView!
     @IBOutlet var lineGraph: ORKLineGraphChartView!
     
     var allCharts: [UIView] {
-        return [pieChart, descreteGraph, lineGraph]
+        return [pieChart, discreteGraph, lineGraph]
     }
     
     let pieChartDataSource = PieChartDataSource()
-    let descreteGraphDataSource = DiscreteGraphDataSource()
+    let discreteGraphDataSource = DiscreteGraphDataSource()
     let lineGraphDataSource = LineGraphDataSource()    
     
     // MARK: UIViewController
@@ -53,7 +53,7 @@ class DashboardTableViewController: UITableViewController {
         
         // Set the data source for each graph
         pieChart.dataSource = pieChartDataSource
-        descreteGraph.dataSource = descreteGraphDataSource
+        discreteGraph.dataSource = discreteGraphDataSource
         lineGraph.dataSource = lineGraphDataSource
         
         // Set the table view to automatically calculate the height of cells.
@@ -61,7 +61,7 @@ class DashboardTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Animate any visible charts
@@ -75,7 +75,7 @@ class DashboardTableViewController: UITableViewController {
     
     // MARK: UITableViewDelegate
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // Animate charts as they're scrolled into view.
         if let animatableChart = animatableChartInCell(cell) {
             animatableChart.animateWithDuration(0.5)
@@ -84,9 +84,9 @@ class DashboardTableViewController: UITableViewController {
     
     // MARK: Convenience
     
-    func animatableChartInCell(cell: UITableViewCell) -> AnimatableChart? {
+    func animatableChartInCell(_ cell: UITableViewCell) -> AnimatableChart? {
         for chart in allCharts {
-            guard let animatableChart = chart as? AnimatableChart where chart.isDescendantOfView(cell) else { continue }
+            guard let animatableChart = chart as? AnimatableChart , chart.isDescendant(of: cell) else { continue }
             return animatableChart
         }
         

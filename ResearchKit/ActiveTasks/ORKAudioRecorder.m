@@ -30,10 +30,10 @@
 
 
 #import "ORKAudioRecorder.h"
-#import "ORKHelpers.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKAudioRecorder ()
@@ -41,6 +41,8 @@
 @property (nonatomic, strong) AVAudioRecorder *audioRecorder;
 
 @property (nonatomic, copy) NSDictionary *recorderSettings;
+
+@property (nonatomic, copy) NSString *savedSessionCategory;
 
 @end
 
@@ -79,6 +81,16 @@
     return self;
 }
 
+- (void)restoreSavedAudioSessionCategory {
+    if (_savedSessionCategory) {
+        NSError *error;
+        if (![[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:&error]) {
+            ORK_Log_Error(@"Failed to restore the audio session category: %@", [error localizedDescription]);
+        }
+        _savedSessionCategory = nil;
+    }
+}
+
 - (void)start {
     if (self.outputDirectory == nil) {
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
@@ -95,6 +107,7 @@
         
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        _savedSessionCategory = audioSession.category;
         if (![audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
             [self finishRecordingWithError:error];
             return;
@@ -191,12 +204,13 @@
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
 #endif
+        [self restoreSavedAudioSessionCategory];
     }
 }
 
 - (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
-    
+
     [super finishRecordingWithError:error];
 }
 
@@ -231,7 +245,7 @@
     return [[self recordingDirectoryURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [self logName], [self extension]]];
 }
 
-- (BOOL)recreateFileWithError:(NSError * __autoreleasing *)error {
+- (BOOL)recreateFileWithError:(NSError **)error {
     NSURL *url = [self recordingFileURL];
     if (!url) {
         if (error) {
@@ -253,7 +267,7 @@
     }
     
     [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
-    [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+    [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
     return YES;
 }
 

@@ -30,12 +30,16 @@
 
 
 #import "ORKTappingContentView.h"
+
 #import "ORKActiveStepTimer.h"
-#import "ORKResult.h"
-#import "ORKSkin.h"
+#import "ORKRoundTappingButton.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // #define LAYOUT_DEBUG 1
@@ -74,6 +78,7 @@
         _progressView = [UIProgressView new];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
         _progressView.progressTintColor = [self tintColor];
+        [_progressView setIsAccessibilityElement:YES];
         [_progressView setAlpha:0];
         
         _tapButton1 = [[ORKRoundTappingButton alloc] init];
@@ -83,6 +88,8 @@
         _tapButton2 = [[ORKRoundTappingButton alloc] init];
         _tapButton2.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton2 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        
+        _lastTappedButton = -1;
         
         [self addSubview:_tapCaptionLabel];
         [self addSubview:_tapCountLabel];
@@ -128,9 +135,15 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [_progressView setProgress:progress animated:animated];
+    
+    CGFloat previousAlpha = _progressView.alpha;
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
         [_progressView setAlpha:(progress == 0) ? 0 : 1];
     }];
+    
+    if (UIAccessibilityIsVoiceOverRunning() && previousAlpha != _progressView.alpha) {
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+    }
 }
 
 - (void)resetStep:(ORKActiveStepViewController *)viewController {
@@ -276,14 +289,14 @@
     self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
     
     static const CGFloat CaptionBaselineToTapCountBaseline = 56;
-    static const CGFloat TapButtonBottomToBottom = 36;
+    CGFloat tapButtonBottomToBottom = self.hasSkipButton ? 0 : 36;
     
     // On the iPhone, _progressView is positioned outside the bounds of this view, to be in-between the header and this view.
     // On the iPad, we want to stretch this out a bit so it feels less compressed.
     CGFloat topToProgressViewOffset = 0.0;
     CGFloat topToCaptionLabelOffset = 0.0;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    if (screenType == ORKScreenTypeiPad) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
         topToProgressViewOffset = 0;
         topToCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {
@@ -294,7 +307,7 @@
     _topToProgressViewConstraint.constant = topToProgressViewOffset;
     _topToCaptionLabelConstraint.constant = topToCaptionLabelOffset;
     _captionLabelToTapCountLabelConstraint.constant = CaptionBaselineToTapCountBaseline;
-    _tapButtonToBottomConstraint.constant = TapButtonBottomToBottom;
+    _tapButtonToBottomConstraint.constant = tapButtonBottomToBottom;
 }
 
 - (void)updateConstraints {

@@ -29,12 +29,14 @@
  */
 
 
-#import <ResearchKit/ORKTaskViewController.h>
+#import "ORKTaskViewController_Private.h"
+#import "ORKReviewStepViewController.h"
+@import HealthKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKTaskViewController () <UIViewControllerRestoration>
+@interface ORKTaskViewController () <ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
 
 - (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
 - (nullable NSSet<HKObjectType *> *)requestedHealthTypesForWrite;

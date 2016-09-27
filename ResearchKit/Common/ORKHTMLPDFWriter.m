@@ -30,12 +30,12 @@
 
 
 #import "ORKHTMLPDFWriter.h"
-#import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
-#define PPI 72
-#define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
+#define ORKPPI 72
+#define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * ORKPPI, height * ORKPPI)
 
 static const CGFloat A4Width = 8.27;
 static const CGFloat A4Height = 11.69;

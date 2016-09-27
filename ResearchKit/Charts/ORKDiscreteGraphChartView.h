@@ -30,19 +30,24 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKGraphChartView.h"
+@import UIKit;
+#import <ResearchKit/ORKGraphChartView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKDiscreteGraphChartView` class presents data provided by an object conforming to the
- `ORKGraphChartViewDataSource` protocol as a discrete graph of ranged points. You can optionally
- display a line connecting each ranged point pair.
+ `ORKValueRangeGraphChartViewDataSource` protocol as a discrete graph of ranged points.
+ 
+ You can optionally display a line connecting each ranged point pair.
+ 
+ By default, the primary plot is colored by the `tintColor`, and any additional plots are colored
+ using the `referenceLineColor` property. You can customize the plot colors by implementing the
+ `-graphChartView:colorForPlotIndex:` method in the data source.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKDiscreteGraphChartView : ORKGraphChartView
+@interface ORKDiscreteGraphChartView : ORKValueRangeGraphChartView
 
 /**
  A Boolean value indicating whether to draw a line connecting the minimum value and maximum value of
@@ -50,7 +55,7 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is `YES`.
  */
-@property (nonatomic) BOOL drawsConnectedRanges;
+@property (nonatomic) IBInspectable BOOL drawsConnectedRanges;
 
 @end
 

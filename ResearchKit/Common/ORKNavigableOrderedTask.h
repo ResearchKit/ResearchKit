@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,25 +29,31 @@
  */
 
 
-#import <ResearchKit/ORKTask.h>
+@import Foundation;
 #import <ResearchKit/ORKOrderedTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKStepNavigationRule;
+@class ORKSkipStepNavigationRule;
 
 /**
- The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from the
- `ORKOrderedTask` class.
+ The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from
+ the `ORKOrderedTask` class.
  
  For implementing conditional task navigation, you must instantiate concrete subclasses of
- `ORKStepNavigationRule` and attach them to trigger steps by using the
- `setNavigationRule:forTriggerStepIdentifier:` method.
+ `ORKStepNavigationRule` and `ORKSkipStepNavigationRule` and attach them to trigger steps by using
+ the `setNavigationRule:forTriggerStepIdentifier:` and `setSkipNavigationRule:forStepIdentifier:`
+ methods.
  
  For example, if you want to display a survey question only when the user answered Yes to a previous
  question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump
- between two steps you can use `ORKDirectStepNavigationRule`.
+ between two steps you can use `ORKDirectStepNavigationRule`. You can also optionally omit steps by
+ using `ORKPredicateSkipStepNavigationRule` objects.
+ 
+ Note that each step in the task can have at most one attached navigation rule and one attached skip
+ navigation rule.
  
  Navigable ordered tasks support looping over previously visited steps. Note, however, that results
  for steps that are visited more than once will be ovewritten when you revisit the step on the loop.
@@ -69,23 +75,24 @@ ORK_CLASS_AVAILABLE
  only the most recently added rule is kept.
  
  @param stepNavigationRule      The step navigation rule to be used when navigating forward from the
-                                    trigger step. A strong reference to the rule is maintained by
-                                    the task.
+                                    trigger step. A strong reference to the rule is kept by the
+                                    task.
  @param triggerStepIdentifier   The identifier of the step that triggers the rule.
  */
 - (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
- Returns the step navigation rule (if any) associated with a trigger step identifier.
+ Returns the step navigation rule associated with a trigger step identifier, or `nil` if there is
+ no rule associated with that step identifier.
  
  @param triggerStepIdentifier   The identifier of the step whose rule you want to retrieve.
 
  @return A step navigation rule, or `nil` if the trigger step identifier has none.
  */
-- (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+- (nullable ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
- Removes the navigation rule (if any) associated with the specified trigger step identifier.
+ Removes the navigation rule, if any, associated with the specified trigger step identifier.
  
  @param triggerStepIdentifier   The identifier of the step whose rule is to be removed.
  */
@@ -97,6 +104,51 @@ ORK_CLASS_AVAILABLE
  Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+
+/**
+ Adds a skip step navigation rule for a step identifier.
+ 
+ The rule will be used to decide if the identified step needs to be skipped. You cannot add two
+ different skip navigation rules to the same step identifier; only the most recently added rule is
+ kept.
+ 
+ @param skipStepNavigationRule      The skip step navigation rule to be used to determine if the
+                                        step should be skipped. A strong reference to the rule is
+                                        kept by the task.
+ @param stepIdentifier              The identifier of the step that is checked against the skip
+                                        rule.
+ */
+- (void)setSkipNavigationRule:(ORKSkipStepNavigationRule *)skipStepNavigationRule forStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ Returns the skip step navigation rule associated with a step identifier,  or `nil` if there is no
+ skip rule associated with that step identifier.
+ 
+ @param stepIdentifier      The identifier of the step whose skip rule you want to retrieve.
+ 
+ @return A skip step navigation rule, or `nil` if the step identifier has none.
+ */
+- (nullable ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ Removes the skip step navigation rule, if any, associated with the specified step identifier.
+ 
+ @param stepIdentifier   The identifier of the step whose rule is to be removed.
+ */
+- (void)removeSkipNavigationRuleForStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ A dictionary of step navigation rules in the task, keyed by trigger step identifier.
+ 
+ Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
+ */
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKSkipStepNavigationRule *> *skipStepNavigationRules;
+
+/**
+ Determines whether the task should report its progress as a linear ordered task or not.
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL shouldReportProgress;
 
 @end
 

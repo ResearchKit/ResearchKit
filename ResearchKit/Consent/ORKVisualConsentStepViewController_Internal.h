@@ -29,12 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
 #import "ORKVisualConsentStepViewController.h"
-#import "ORKEAGLMoviePlayerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKEAGLMoviePlayerView;
 
 @interface ORKVisualConsentStepViewController ()
 

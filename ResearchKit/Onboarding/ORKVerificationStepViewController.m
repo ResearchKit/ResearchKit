@@ -30,9 +30,15 @@
 
 
 #import "ORKVerificationStepViewController.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKVerificationStep.h"
+
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKVerificationStepView.h"
+
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKVerificationStep.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKVerificationStepViewController {

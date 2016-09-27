@@ -29,12 +29,14 @@
  */
 
 
-#import "ORKHelpers.h"
-#import <ResearchKit/ORKStep.h>
-#import <CoreText/CoreText.h>
-#import <UIKit/UIKit.h>
+#import "ORKHelpers_Internal.h"
+
+#import "ORKStep.h"
+
 #import "ORKSkin.h"
-#import "ORKDefines_Private.h"
+#import "ORKTypes.h"
+
+#import <CoreText/CoreText.h>
 
 
 NSURL *ORKCreateRandomBaseURL() {
@@ -42,17 +44,15 @@ NSURL *ORKCreateRandomBaseURL() {
 }
 
 NSBundle *ORKAssetsBundle(void) {
-    static NSBundle *__bundle;
-    
+    static NSBundle *bundle;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+        bundle = [NSBundle bundleForClass:[ORKStep class]];
     });
-    
-    return __bundle;
+    return bundle;
 }
 
-static inline CGFloat ORKCGFloor(CGFloat value) {
+ORK_INLINE CGFloat ORKCGFloor(CGFloat value) {
     if (sizeof(value) == sizeof(float)) {
         return (CGFloat)floorf((float)value);
     } else {
@@ -60,22 +60,24 @@ static inline CGFloat ORKCGFloor(CGFloat value) {
     }
 }
 
-static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFloat s) {
-    if (s == 0) {
-        static CGFloat __s = 1.0;
+ORK_INLINE CGFloat ORKAdjustToScale(CGFloat (adjustFunction)(CGFloat), CGFloat value, CGFloat scale) {
+    if (scale == 0) {
+        static CGFloat screenScale = 1.0;
         static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{ __s = [UIScreen mainScreen].scale; });
-        s = __s;
+        dispatch_once(&onceToken, ^{
+            screenScale = [UIScreen mainScreen].scale;
+        });
+        scale = screenScale;
     }
-    if (s == 1.0) {
-        return adjustFn(v);
+    if (scale == 1.0) {
+        return adjustFunction(value);
     } else {
-        return adjustFn(v * s) / s;
+        return adjustFunction(value * scale) / scale;
     }
 }
 
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
-    return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
+    return ORKAdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
 id findInArrayByKey(NSArray * array, NSString *key, id value) {
@@ -88,36 +90,36 @@ id findInArrayByKey(NSArray * array, NSString *key, id value) {
 }
 
 NSString *ORKStringFromDateISO8601(NSDate *date) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter stringFromDate:date];
+    return [formatter stringFromDate:date];
 }
 
 NSDate *ORKDateFromStringISO8601(NSString *string) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [[NSDateFormatter alloc] init];
-        [__formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-        [__formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+        [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
     });
-    return [__formatter dateFromString:string];
+    return [formatter dateFromString:string];
 }
 
 NSString *ORKSignatureStringFromDate(NSDate *date) {
-    static NSDateFormatter *__formatter = nil;
+    static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __formatter = [NSDateFormatter new];
-        __formatter.dateStyle = NSDateFormatterShortStyle;
-        __formatter.timeStyle = NSDateFormatterNoStyle;
+        formatter = [NSDateFormatter new];
+        formatter.dateStyle = NSDateFormatterShortStyle;
+        formatter.timeStyle = NSDateFormatterNoStyle;
     });
-    return [__formatter stringFromDate:date];
+    return [formatter stringFromDate:date];
 }
 
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
@@ -243,26 +245,22 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 }
 
 NSBundle *ORKBundle() {
-    static NSBundle *__bundle;
-    
+    static NSBundle *bundle;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+        bundle = [NSBundle bundleForClass:[ORKStep class]];
     });
-    
-    return __bundle;
+    return bundle;
 }
 
 NSBundle *ORKDefaultLocaleBundle() {
-    static NSBundle *__bundle;
-    
+    static NSBundle *bundle;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *path = [ORKBundle() pathForResource:[ORKBundle() objectForInfoDictionaryKey:@"CFBundleDevelopmentRegion"] ofType:@"lproj"];
-        __bundle = [NSBundle bundleWithPath:path];
+        bundle = [NSBundle bundleWithPath:path];
     });
-    
-    return __bundle;
+    return bundle;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
@@ -534,6 +532,8 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *r
     }
 }
 
+const double ORKDoubleInvalidValue = DBL_MAX;
+
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
@@ -544,4 +544,12 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
     return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
+}
+
+NSNumberFormatter *ORKDecimalNumberFormatter() {
+    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.maximumFractionDigits = NSDecimalNoScale;
+    numberFormatter.usesGroupingSeparator = NO;
+    return numberFormatter;
 }

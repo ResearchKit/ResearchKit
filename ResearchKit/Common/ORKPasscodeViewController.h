@@ -29,8 +29,10 @@
  */
 
 
+@import UIKit;
 #import "ORKStepViewController.h"
 #import "ORKDefines.h"
+#import "ORKTypes.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -58,6 +60,7 @@ ORK_AVAILABLE_DECL
 - (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController;
 
 @optional
+
 /**
  Notifies the delegate that the user hit the cancel button item. The cancel button is only visible if this method
  is implemented.
@@ -65,6 +68,21 @@ ORK_AVAILABLE_DECL
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
+
+/** 
+ Defaults to Localized "Forgot Passcode?" text
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ @return                    Text to display for the forgot passcode button
+ */
+- (NSString *)passcodeViewControllerTextForForgotPasscode:(UIViewController *)viewController;
+
+/**
+ Notifies the delegate that forgot passcode button has been tapped.
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ */
+- (void)passcodeViewControllerForgotPasscodeTapped:(UIViewController *)viewController;
 
 @end
 
@@ -78,6 +96,7 @@ ORK_AVAILABLE_DECL
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -96,8 +115,8 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode authentication view controller.
  */
-+ (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
-                                          delegate:(id<ORKPasscodeDelegate>)delegate;
++ (instancetype)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
+                                                    delegate:(id<ORKPasscodeDelegate>)delegate;
 
 /**
  An editing passcode view controller allows a user to be authenticated using
@@ -116,9 +135,9 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode editing view controller.
  */
-+ (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                               passcodeType:(ORKPasscodeType)passcodeType;
++ (instancetype)passcodeEditingViewControllerWithText:(nullable NSString *)text
+                                             delegate:(id<ORKPasscodeDelegate>)delegate
+                                         passcodeType:(ORKPasscodeType)passcodeType;
 /**
  Returns 'YES' if a passcode is stored in the keychain, otherwise 'NO'.
  */
@@ -128,6 +147,17 @@ ORK_CLASS_AVAILABLE
  Returns 'YES' if passcode was successfully removed from the keychain, otherwise 'NO'.
  */
 + (BOOL)removePasscodeFromKeychain;
+
+/**
+ This method allows to force the passcode to be a certain value. You only want to use this capability when you're moving your existing users
+ from a custom passcode entry mechanism to the one provided by ResearchKit.
+ 
+ This method will raise an exception if `passcode` is nil.
+ 
+ @param passcode          The passcode to store
+ @param touchIdEnabled    Whether TouchId will be available during passcode entry
+ */
++ (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled;
 
 @end
 

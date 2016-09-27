@@ -30,8 +30,10 @@
 
 
 #import "ORKTableViewCell.h"
-#import "ORKSkin.h"
+
 #import "ORKSelectionTitleLabel.h"
+
+#import "ORKSkin.h"
 
 
 @implementation ORKTableViewCell {
