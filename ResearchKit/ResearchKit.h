@@ -46,6 +46,7 @@
 #import "ORKSignatureStep.h"
 #import "ORKTableStep.h"
 #import "ORKVerificationStep.h"
+#import "ORKVideoCaptureStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
 
@@ -89,3 +90,7 @@
 #import "ORKDiscreteGraphChartView.h"
 #import "ORKLineGraphChartView.h"
 #import "ORKPieChartView.h"
+
+#import "ORKDataCollectionManager.h"
+#import "ORKCollector.h"
+

@@ -213,6 +213,11 @@
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
 
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start Recording";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stop Recording";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapture Video";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
@@ -450,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
 "AX_IMAGE_CAPTURED_LABEL" = "Captured image";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Video capture preview";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete"; 
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
 "AX_TOWER_OF_HANOI_TOWER" = "Tower";
@@ -462,3 +470,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Stack composed of";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";

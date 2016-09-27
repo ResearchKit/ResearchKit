@@ -120,7 +120,7 @@
 "VERIFICATION_NAV_TITLE" = "Verificare";
 "VERIFICATION_STEP_TITLE" = "Verificați-vă e‑mailul";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Apăsați pe linkul de mai jos dacă nu ați primit un e‑mail de verificare și ați dori retrimiterea acestuia.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Retrimite e‑mailul de verificare";
+"RESEND_EMAIL_BUTTON_TITLE" = "Retrimiteți e‑mailul de verificare";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sunt permise doar caractere numerice.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicator de progres pentru introducerea codului";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ din %@ cifre introduse";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Ați uitat codul de acces?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Imposibil de adăugat articolul din portchei.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Nu";
 "BOOL_YES" = "Da";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Apăsați pentru a răspunde";
 "NULL_ANSWER" = "Selectați un răspuns";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Salvați pentru mai târziu";
 "BUTTON_OPTION_DISCARD" = "Abandonați rezultatele";
 "BUTTON_OPTION_STOP_TASK" = "Încheiați sarcina";
+"BUTTON_SAVE" = "Salvați";
+"BUTTON_CLEAR_ANSWER" = "Degajați răspunsul";
+"BUTTON_READ_ONLY_MODE" = "Acest răspuns nu poate fi modificat.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Activitatea începe peste";
 "TASK_COMPLETE_TITLE" = "Activitate finalizată";
 "TASK_COMPLETE_TEXT" = "Datele dvs. vor fi analizate și veți primi o notificare atunci când rezultatele vor fi disponibile.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "timp rămas: %@ secunde.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturați imaginea";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Pentru a finaliza această etapă, acordați acestei aplicații acces la cameră în Configurări.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire pentru imaginile capturate.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imaginea capturată nu a putut fi salvată.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Porniți înregistrarea";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Opriți înregistrarea";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Recapturați clipul video";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Întorceți-vă și mergeți înapoi la locul de pornire.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Mergeți până la %ld pași în linie dreaptă.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Găsiți un loc unde să puteți merge în siguranță pe un traseu, înainte și înapoi, în linie dreaptă. Încercați să mergeți continuu, întorcându‑vă la capătul traseului ca și cum ați ocoli un jalon.\n\nÎn continuare, vi se va solicita să vă întoarceți descriind un cerc complet, apoi să stați în repaus cu brațele întinse și picioarele depărtate la o distanță aproximativ egală cu lățimea umerilor.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Apăsați “Start” când sunteți gata să începeți.\nPuneți apoi telefonul în buzunar sau în geantă și urmați instrucțiunile audio.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Mergeți înainte și înapoi în linie dreaptă timp de %@. Mergeți așa cum o ați face‑o în mod normal.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Întoarceți‑vă descriind un cerc complet, apoi stați în repaus timp de %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ați finalizat activitatea.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Viteză de apăsare";
+"TAPPING_TASK_TITLE_RIGHT" = "Mâna dreaptă";
+"TAPPING_TASK_TITLE_LEFT" = "Mâna stângă";
 "TAPPING_INTRO_TEXT" = "Această activitate vă măsoară viteza de apăsare cu degetele.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Așezați-vă telefonul pe o suprafață plată. Pe ecran vor apărea două butoane timp de %@. Folosind două degete de la aceeași mână, apăsați pe rând butoanele cât de repede puteți.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Puneți‑vă telefonul pe o suprafață plată.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Folosiți două degete de la aceeași mână pentru a apăsa alternativ butoanele de pe ecran.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Folosiți două degete de la mâna dreaptă pentru a apăsa alternativ butoanele de pe ecran.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Folosiți două degete de la mâna stângă pentru a apăsa alternativ butoanele de pe ecran.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Acum, repetați același test folosind mâna dreaptă.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Acum, repetați același test folosind mâna stângă.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Apăsați cu un deget, apoi cu celălalt. Încercați ca apăsările să se succeadă cât regulat cu putință. Continuați să apăsați timp de %@.";
 "TAPPING_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Apăsați “Înainte” pentru a începe.";
 "TAP_BUTTON_TITLE" = "Apăsați";
 "TOTAL_TAPS_LABEL" = "Total apăsări";
-"TAPPING_INSTRUCTION" = "Apăsați butoanele cât de repede puteți folosind două degete.";
-
+"TAPPING_INSTRUCTION" = "Apăsați butoanele cât de consecvent puteți folosind două degete.";
+"TAPPING_INSTRUCTION_RIGHT" = "Apăsați butoanele folosind mâna DREAPTĂ.";
+"TAPPING_INSTRUCTION_LEFT" = "Apăsați butoanele folosind mâna STÂNGĂ.";
+"TAPPING_SKIP_TITLE" = "Omiteți această mână";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voce";
@@ -241,11 +273,14 @@
 "AUDIO_INTENDED_USE" = "Această activitate vă evaluează vocea prin înregistrarea acesteia cu microfonul din partea de jos a telefonului dvs.";
 "AUDIO_TOO_LOUD_LABEL" = "Prea tare";
 "AUDIO_GENERIC_ERROR_LABEL" = "Imposibil de înregistrat audio";
+"AUDIO_LEVEL_CHECK_LABEL" = "Așteptați să se verifice nivel zgomotului de fundal.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Nivelul zgomotului ambiental este prea puternic pentru a vă înregistra vocea. Mutați‑vă într‑un loc mai liniștit și reîncercați.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Apăsați “Înainte” când sunteți gata.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometrie tonală";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Această activitate vă măsoară capacitatea de a auzi diferite sunete.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Înainte de a începe, conectați căștile și puneți-le pe cap.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Înainte de a începe, conectați și puneți‑vă căștile.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Ar trebui să auziți un ton acum. Reglați volumul folosind comenzile de pe partea laterală a dispozitivului.\n\nApăsați butonul când sunteți gata să începeți.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Apăsați butonul de fiecare dată când începeți să auziți un sunet.";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Ridicați cercul folosind două degete.";
 "HOLE_PEG_TEST_TEXT_2" = "Ridicați degetele pentru a elibera cercul.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Activitate referitoare la tremor";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Această activitate vă măsoară tremorul mâinilor în diverse poziții. Găsiți un loc unde să puteți sta confortabil pe durata activității.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Țineți telefonul în mâna mai afectată, ca în imaginea de mai jos.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Țineți telefonul în mâna DREAPTĂ, ca în imaginea de mai jos.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Țineți telefonul în mâna STÂNGĂ, ca în imaginea de mai jos.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Vi se va solicita să efectuați %@ stând cu telefonul în mână.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "o sarcină";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "două sarcini";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "trei sarcini";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "patru sarcini";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "cinci sarcini";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Apăsați “Înainte” pentru a continua.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pregătiți‑vă să țineți telefonul pe genunchi.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pregătiți‑vă să țineți telefonul pe genunchi cu mâna STÂNGĂ.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pregătiți‑vă să țineți telefonul pe genunchi cu mâna DREAPTĂ.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Continuați să țineți telefonul pe genunchi timp de %ld secunde.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Acum, țineți telefonul cu mâna întinsă la înălțimea umărului.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Acum, țineți telefonul cu mâna STÂNGĂ întinsă la înălțimea umărului.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Acum, țineți telefonul cu mâna DREAPTĂ întinsă la înălțimea umărului.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Continuați să țineți telefonul cu mâna întinsă timp de %ld secunde.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Acum, țineți telefonul la înălțimea umărului, cu cotul îndoit.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Acum, țineți telefonul cu mâna STÂNGĂ la înălțimea umărului, cu cotul îndoit.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Acum, țineți telefonul cu mâna DREAPTĂ la înălțimea umărului, cu cotul îndoit.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Continuați să țineți telefonul cu cotul îndoit timp de %ld secunde.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Acum, ținându‑vă cotul îndoit, atingeți‑vă nasul cu telefonul în mod repetat.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Acum, ținându‑vă telefonul în mâna STÂNGĂ cu cotul îndoit, atingeți‑vă nasul cu telefonul în mod repetat.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Acum, ținându‑vă telefonul în mâna DREAPTĂ cu cotul îndoit, atingeți‑vă nasul cu telefonul în mod repetat.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Continuați să vă atingeți nasul cu telefonul timp de %ld secunde.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Pregătiți‑vă să fluturați mâna, răsucind din încheietură.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Pregătiți‑vă să fluturați mâna STÂNGĂ, ținând telefonul în aceasta și răsucind din încheietură.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Pregătiți‑vă să fluturați mâna DREAPTĂ, ținând telefonul în aceasta și răsucind din încheietură.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Continuați să fluturați mâna timp de %ld secunde.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Acum, treceți telefonul în mâna STÂNGĂ și continuați cu sarcina următoare.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Acum, treceți telefonul în mâna DREAPTĂ și continuați cu sarcina următoare.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Continuați cu sarcina următoare.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activitate finalizată.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Vi se va solicita să efectuați %@ stând mai întâi cu telefonul într‑o mână, apoi în cealaltă.";
+"TREMOR_SKIP_LEFT_HAND" = "Nu pot efectua această activitate cu mâna STÂNGĂ.";
+"TREMOR_SKIP_RIGHT_HAND" = "Nu pot efectua această activitate cu mâna DREAPTĂ.";
+"TREMOR_SKIP_NEITHER" = "Pot efectua această activitate cu ambele mâini.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Fișierul nu a putut fi creat";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nu au putut fi eliminate suficiente fișiere jurnal pentru atingerea pragului admis";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Previzualizare captură";
 "AX_IMAGE_CAPTURED_LABEL" = "Imagine capturată";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Previzualizare captură video";
+"AX_VIDEO_CAPTURED_LABEL" = "Clip video capturat";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nu se poate plasa un disc de mărimea %@ pe un disc de mărimea %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Țintă";
 "AX_TOWER_OF_HANOI_TOWER" = "Turn";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Are disc de mărime %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Gol";
 
-"AX_GRAPH_RANGE_FORMAT" = "Interval de la %@ la %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Interval de la %@ la %@";
+"AX_GRAPH_STACK_PREFIX" = "Stiva compusă din";
 "AX_GRAPH_AND_SEPARATOR" = " și ";
 "AX_GRAPH_POINT_%@" = "Punctul: %@";

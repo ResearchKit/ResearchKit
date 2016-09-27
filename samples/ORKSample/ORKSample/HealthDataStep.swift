@@ -35,13 +35,13 @@ class HealthDataStep: ORKInstructionStep {
     // MARK: Properties
     
     let healthDataItemsToRead: Set<HKObjectType> = [
-        HKObjectType.characteristicTypeForIdentifier(HKCharacteristicTypeIdentifierDateOfBirth)!,
-        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
-        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!
+        HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!,
+        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!,
+        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
     ]
     
     let healthDataItemsToWrite: Set<HKSampleType> = [
-        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!,
+        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!,
         HKObjectType.workoutType()
     ]
     
@@ -60,18 +60,18 @@ class HealthDataStep: ORKInstructionStep {
     
     // MARK: Convenience
     
-    func getHealthAuthorization(completion: (success: Bool, error: NSError?) -> Void) {
+    func getHealthAuthorization(_ completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
         guard HKHealthStore.isHealthDataAvailable() else {
             let error = NSError(domain: "com.example.apple-samplecode.ORKSample", code: 2, userInfo: [NSLocalizedDescriptionKey: "Health data is not available on this device."])
             
-            completion(success: false, error:error)
+            completion(false, error)
             
             return
         }
         
         // Get authorization to access the data
-        HKHealthStore().requestAuthorizationToShareTypes(healthDataItemsToWrite, readTypes: healthDataItemsToRead) { (success, error) -> Void in
-            completion(success:success, error:error)
+        HKHealthStore().requestAuthorization(toShare: healthDataItemsToWrite, read: healthDataItemsToRead) { (success, error) -> Void in
+            completion(success, error as NSError?)
         }
     }
 }

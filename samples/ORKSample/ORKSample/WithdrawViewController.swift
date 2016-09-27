@@ -45,7 +45,7 @@ class WithdrawViewController: ORKTaskViewController {
         
         let withdrawTask = ORKOrderedTask(identifier: "Withdraw", steps: [instructionStep, completionStep])
         
-        super.init(task: withdrawTask, taskRunUUID: nil)
+        super.init(task: withdrawTask, taskRun: nil)
     }
 
     required init(coder aDecoder: NSCoder) {
