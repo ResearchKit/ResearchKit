@@ -134,5 +134,11 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+@interface ORKStepResult ()
+
+@property (nonatomic) BOOL isPreviousResult;
+
+@end
+
 NS_ASSUME_NONNULL_END
 

@@ -3083,6 +3083,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
     step.title = @"You'll optionally skip this step";
+    step.text = @"You should only see this step if you answered the previous question with 'No'";
     [steps addObject:step];
     
     // Loop target step
@@ -3771,6 +3772,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     
     NSLog(@"[ORKTest] task results: %@", taskViewController.result);
+    
+    // Validate the results
+    NSArray *results = taskViewController.result.results;
+    if (results) {
+        NSSet *uniqueResults = [NSSet setWithArray:results];
+        BOOL allResultsUnique = (results.count == uniqueResults.count);
+        NSAssert(allResultsUnique, @"The returns results have duplicates of the same object.");
+    }
     
     if (_currentDocument) {
         /*
