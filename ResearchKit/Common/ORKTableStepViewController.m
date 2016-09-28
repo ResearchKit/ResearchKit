@@ -64,7 +64,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem);
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 // Override to monitor button title change

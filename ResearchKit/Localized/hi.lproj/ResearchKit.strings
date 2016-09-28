@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "नीचे दिए गए फ़ॉर्म को देखें और जारी रखने के लिए “सहमत” पर टैप करें।";
 "CONSENT_REVIEW_ALERT_TITLE" = "समीक्षा";
 "CONSENT_SIGNATURE_TITLE" = "हस्ताक्षर";
-"CONSENT_SIGNATURE_INSTRUCTION" = "कृपया अपनी ऊँगली का उपयोग करके नीचे दी गई रेखा पर हस्ताक्षर करें।";
+"CONSENT_SIGNATURE_INSTRUCTION" = "कृपया अपनी उँगली का उपयोग करके नीचे दी गई रेखा पर हस्ताक्षर करें।";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "यहाँ हस्ताक्षर करें";
 "CONSENT_PAGE_NUMBER_FORMAT" = "पृष्ठ %1$ld/%2$ld";
 
@@ -119,7 +119,7 @@
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "सत्यापन";
 "VERIFICATION_STEP_TITLE" = "अपना ईमेल सत्यापित करें";
-"RESEND_EMAIL_LABEL_MESSAGE" = "यदि आपको सत्यापन ईमेल प्राप्त नहीं होता है और आप इसे पुनः प्राप्त करना चाहते हैं तो नीचे दिये गए लिंक पर टैप करें।";
+"RESEND_EMAIL_LABEL_MESSAGE" = "यदि आपको सत्यापन ईमेल प्राप्त नहीं हुआ है और आप चाहते हैं कि उसे पुनः प्रेषित किया जाए, तो नीचे दिए गए लिंक पर टैप करें।";
 "RESEND_EMAIL_BUTTON_TITLE" = "सत्यापन ईमेल फिर से भेजें";
 
 /* Login step */
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "केवल न्यूमैरिक वर्णों की अनुमति है।";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "पासकोड दर्ज करने की प्रक्रिया का संकेतक";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%1$@/%2$@ मान दर्ज किए गए";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "पासकोड भूल गए?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "कीचेन आइटम को जोड़ा नहीं जा सका।";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "नहीं";
 "BOOL_YES" = "हाँ";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "सें॰मी॰";
+"MEASURING_UNIT_FT" = "फ़ीट";
+"MEASURING_UNIT_IN" = "इंच";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "उत्तर देने के लिए टैप करें";
 "NULL_ANSWER" = "उत्तर का चयन करें";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "बाद के लिए सहेजें";
 "BUTTON_OPTION_DISCARD" = "परिणाम ख़ारिज करें";
 "BUTTON_OPTION_STOP_TASK" = "कार्य समाप्त करें";
+"BUTTON_SAVE" = "सहेजें";
+"BUTTON_CLEAR_ANSWER" = "उत्तर साफ़ करें";
+"BUTTON_READ_ONLY_MODE" = "इस उत्तर को संशोधित नहीं किया जा सकता है।";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "गतिविधि शुरू होने में शेष समय";
 "TASK_COMPLETE_TITLE" = "गतिविधि पूर्ण";
 "TASK_COMPLETE_TEXT" = "आपके डेटा का विश्लेषण किया जाएगा और परिणाम के तैयार होते ही आपको सूचित किया जाएगा।";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ सेकंड शेष।";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "छवि कैप्चर करें";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "इस चरण को पूरा करने के लिए “सेटिंग्ज़” में इस ऐप को कैमरे तक पहुँच प्रदान करें।";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "कैप्चर की गई छवियों के लिए कोई आउटपुट निर्देशिका निर्दिष्ट नहीं की गई थी।";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "कैप्चर की गई छवि सहेजी नहीं जा सकी।";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "रिकॉर्डिंग शुरू करें";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "रिकॉर्डिंग रोकें";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "वीडियो पुनः कैप्चर करें";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "तंदुरुस्ती";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "लगभग %ld कदम सीधे चलें।";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ऐसी जगह ढूँढें, जहाँ आप एक ओर व दूसरी ओर सुरक्षित रूप से सीधे चल सकें। मार्ग की समाप्ति पर मुड़ें और लगातार चलते रहने का प्रयास करें, जैसे कि आप किसी शंकु के इर्द-गिर्द चल रहे हों।\n\nइसके बाद आपको पूर्ण वृत्त में मुड़ने के लिए, फिर अपनी भुजाओं को फैलाकर और अपने पैरों को लगभग कंधे की चौड़ाई तक फैलाकर स्थिर खड़े रहने के लिए कहा जाएगा।";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "जब आप शुरू करने के लिए तैयार हों, “आरंभ करें” पर टैप करें।\nफिर अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का पालन करें।";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ तक पीछे और आगे सीधे चलें। अपनी सामान्य चाल से चलें।";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "पूर्ण वृत्त में मुड़ें फिर %@ तक स्थिर खड़े रहें।";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "आपने गतिविधि को पूर्ण कर लिया है।";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "टैप करने की गति";
+"TAPPING_TASK_TITLE_RIGHT" = "दायॉं हाथ";
+"TAPPING_TASK_TITLE_LEFT" = "बायाँ हाथ";
 "TAPPING_INTRO_TEXT" = "इस गतिविधि द्वारा आपकी टैप करने की गति का मापन किया जाता है।";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "अपने फ़ोन को किसी समतल सतह पर रखें। %@ के लिए आपकी स्क्रीन पर दो बटन दिखाई देंगे। एक ही हाथ की दो ऊँगलियों से दोनों बटनों को जितना संभव हो सके उतनी तेज़ी से एक के बाद एक दबाएँ।";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "अपना फ़ोन समतल सतह पर रखें।";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए एक ही हाथ की दो उँगलियों का उपयोग करें।";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए दाएँ हाथ की दो उँगलियों का उपयोग करें।";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए बाएँ हाथ की दो उँगलियों का उपयोग करें।";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "अब अपने दाएँ हाथ का उपयोग करके यही परीक्षण दोहराएँ।";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "अब अपने बाएँ हाथ का उपयोग करके यही परीक्षण दोहराएँ।";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "एक उँगली से फिर दूसरी उँगली से टैप करें। अपने टैप का समय जितना संभव हो, एक समान रखने का प्रयास करें। %@ तक टैप करते रहें।";
 "TAPPING_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"TAPPING_CALL_TO_ACTION_NEXT" = "आरंभ करने के लिए “अगला” पर टैप करें।";
 "TAP_BUTTON_TITLE" = "टैप करें";
 "TOTAL_TAPS_LABEL" = "कुल टैप";
-"TAPPING_INSTRUCTION" = "दो ऊँगलियों से बटनों को जितना संभव हो सके उतनी तेज़ी से एक के बाद एक दबाएँ।";
-
+"TAPPING_INSTRUCTION" = "बटनों को दो उँगलियों से जितना हो सके, उतने समान समयांतराल पर टैप करें।";
+"TAPPING_INSTRUCTION_RIGHT" = "अपने दाएँ हाथ से बटनों पर टैप करें।";
+"TAPPING_INSTRUCTION_LEFT" = "अपने बाएँ हाथ से बटनों पर टैप करें।";
+"TAPPING_SKIP_TITLE" = "इस हाथ को स्किप करें";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "वॉइस";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "इस गतिविधि द्वारा आपके फ़ोन के नीचे लगे माइक्रोफ़ोन से आपकी आवाज़ को रिकॉर्ड करके उसका मूल्यांकन किया जाता है।";
 "AUDIO_TOO_LOUD_LABEL" = "बहुत तेज़";
 "AUDIO_GENERIC_ERROR_LABEL" = "ऑडियो रिकॉर्ड करने में असमर्थ";
+"AUDIO_LEVEL_CHECK_LABEL" = "पृष्ठभूमि नॉइज़ स्तर की जाँच होने तक कृपया प्रतीक्षा करें।";
+"AUDIO_TOO_LOUD_MESSAGE" = "आस-पास नॉइज़ का स्तर बहुत अधिक होने के कारण आपकी आवाज़ रिकॉर्ड नहीं की जा सकती। कृपया किसी शांत जगह पर जाएँ और पुनः प्रयास करें।";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "तैयार होने पर “अगला” पर टैप करें।";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "टोन ऑडियोमेट्री";
@@ -336,8 +371,50 @@
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "अपने दाएँ हाथ से पेग को छिद्र में डालें।";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "अपने बाएँ हाथ से पेग को रेखा के पीछे करें।";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "अपने दाएँ हाथ से पेग को रेखा के पीछे करें।";
-"HOLE_PEG_TEST_TEXT" = "दो ऊँगलियों से पेग को उठाएँ।";
-"HOLE_PEG_TEST_TEXT_2" = "पेग को डालने के लिए ऊँगलियों को उठाएँ।";
+"HOLE_PEG_TEST_TEXT" = "दो उँगलियों से पेग को उठाएँ।";
+"HOLE_PEG_TEST_TEXT_2" = "पेग को डालने के लिए उँगलियों को उठाएँ।";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "कंपन गतिविधि";
+"TREMOR_TEST_INTRO_1_DETAIL" = "इस गतिविधि से विभिन्न स्थितियों में आपके हाथों के कंपन को मापा जाता है। ऐसी जगह ढूँढें जहाँ आप इस गतिविधि की अवधि के दौरान आराम से बैठ सकें।";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "नीचे दी गई छवि में दिखाए अनुसार फ़ोन को अपने अधिक प्रभावित हाथ में पकड़ें।";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "नीचे दी गई छवि में दिखाए अनुसार फ़ोन को अपने दाएँ हाथ में पकड़ें।";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "नीचे दी गई छवि में दिखाए अनुसार फ़ोन को अपने बाएँ हाथ में पकड़ें।";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "बैठे रहकर फ़ोन को अपने हाथ में पकड़कर आपसे %@ करने के लिए कहा जाएगा।";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "कार्य";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "दो कार्य";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "तीन कार्य";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "चार कार्य";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "पाँच कार्य";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "अागे बढ़ने के लिए “अगला” पर टैप करें।";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "अपने फ़ोन को अपनी गोद में पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "बाएँ हाथ से अपने फ़ोन को अपनी गोद में पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "दाएँ हाथ से अपने फ़ोन को अपनी गोद में पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "अपने फ़ोन को अपनी गोद में %ld सेकंड तक पकड़े रखें।";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "अब अपने हाथ को कंधे की ऊँचाई तक फैलाकर अपने फ़ोन को पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "अब अपने बाएँ हाथ को कंधे की ऊँचाई तक फैलाकर अपने फ़ोन को पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "अब अपने दाएँ हाथ को कंधे की ऊँचाई तक फैलाकर अपने फ़ोन को पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "हाथ फैलाकर अपने फ़ोन को %ld सेकंड तक पकड़े रखें।";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "अब अपनी कोहनी मोड़कर अपने फ़ोन को कंधे की ऊंचाई पर पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "अब अपने बाएँ हाथ की कोहनी मोड़कर कंधे की ऊँचाई पर अपने फ़ोन को पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "अब अपने दाएँ हाथ की कोहनी मोड़कर कंधे की ऊँचाई पर अपने फ़ोन को पकड़ें।";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "अपनी कोहनी मोड़कर अपने फ़ोन को %ld सेकंड तक पकड़े रखें";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "अब अपनी कोहनी मुड़ी हुई रखकर अपने फ़ोन को बार-बार अपनी नाक से स्पर्श करें।";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "अब अपने बाएँ हाथ में फ़ोन पकड़कर और कोहनी मुड़ी हुई रखकर अपने फ़ोन को बार-बार अपनी नाक से स्पर्श करें।";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "अब अपने दाएँ हाथ में फ़ोन पकड़कर और कोहनी मुड़ी हुई रखकर अपने फ़ोन को बार-बार अपनी नाक से स्पर्श करें।";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "अपने फ़ोन को अपनी नाक से %ld सेकंड तक स्पर्श करते रहें";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "रानी की तरह हाथ हिलाने (अपनी कलाई को मोड़कर हाथ हिलाना) की तैयारी करें।";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "अपने फ़ोन को अपने बाएँ हाथ में रखकर रानी की तरह हाथ हिलाने (अपनी कलाई को मोड़कर हाथ हिलाना) की तैयारी करें।";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "अपने फ़ोन को अपने दाएँ हाथ में रखकर रानी की तरह हाथ हिलाने (अपनी कलाई को मोड़कर हाथ हिलाना) की तैयारी करें।";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "%ld सेकंड तक रानी की तरह हाथ हिलाते रहें।";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "अब अपने फ़ोन को अपने बाएँ हाथ में लें और अगला कार्य जारी रखें।";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "अब अपने फ़ोन को अपने दाएँ हाथ में लें और अगला कार्य जारी रखें।";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "अगला कार्य जारी रखें।";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "गतिविधि पूर्ण।";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "बैठे रहकर फ़ोन को पहले एक हाथ में फिर दूसरे हाथ में पकड़कर आपसे %@ करने के लिए कहा जाएगा।";
+"TREMOR_SKIP_LEFT_HAND" = "इस गतिविधि को मेरे बाएँ हाथ से नहीं किया जा सकता है।";
+"TREMOR_SKIP_RIGHT_HAND" = "इस गतिविधि को मेरे दाएँ हाथ से नहीं किया जा सकता है।";
+"TREMOR_SKIP_NEITHER" = "इस गतिविधि को मेरे दोनों हाथों से किया जा सकता है।";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
@@ -357,7 +434,7 @@
 "AX_IMAGE_ILLUSTRATION" = "%@ का चित्रांकन";
 
 "AX_SIGNVIEW_LABEL" = "निर्दिष्ट हस्ताक्षर फ़ील्ड";
-"AX_SIGNVIEW_HINT" = "हस्ताक्षर करने के लिए स्क्रीन को स्पर्श करें और अपनी ऊँगली हिलाएँ";
+"AX_SIGNVIEW_HINT" = "हस्ताक्षर करने के लिए स्क्रीन को स्पर्श करें और अपनी उँगली हिलाएँ";
 "AX_SIGNVIEW_SIGNED" = "हस्ताक्षरित";
 "AX_SIGNVIEW_UNSIGNED" = "अहस्ताक्षरित";
 
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "पूर्वावलोकन को कैप्चर करें";
 "AX_IMAGE_CAPTURED_LABEL" = "कैप्चर की हुई छवि";
 
+"AX_VIDEO_CAPTURE_LABEL" = "वीडियो कैप्चर पूर्वावलोकन";
+"AX_VIDEO_CAPTURED_LABEL" = "कैप्चर किया गया वीडियो";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%2$@ आकार के डिस्क पर %1$@ आकार के डिस्क को रखने में असमर्थ";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "लक्ष्य";
 "AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं  ";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
 
-"AX_GRAPH_RANGE_FORMAT" = "%1$@ से %2$@ तक श्रेणी";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "%1$@ से %2$@ तक श्रेणी";
+"AX_GRAPH_STACK_PREFIX" = "निम्नलिखित का संग्रह";
 "AX_GRAPH_AND_SEPARATOR" = " और ";
 "AX_GRAPH_POINT_%@" = "पॉइंट : %@";

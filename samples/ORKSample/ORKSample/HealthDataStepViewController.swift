@@ -45,7 +45,7 @@ class HealthDataStepViewController: ORKInstructionStepViewController {
             // The second part of the guard condition allows the app to proceed on the Simulator (where health data is not available)
             guard succeeded || (TARGET_OS_SIMULATOR != 0) else { return }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 super.goForward()
             }
         }

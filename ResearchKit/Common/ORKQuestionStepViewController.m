@@ -342,7 +342,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     _visible = YES;
     
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem);
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

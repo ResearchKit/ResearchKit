@@ -1097,7 +1097,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item.
-    return super.hash ^ self.defaultDate.hash ^ _style;
+    return ([super hash] & [self.defaultDate hash]) ^ _style;
 }
 
 - (NSCalendar *)currentCalendar {
@@ -1263,7 +1263,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item
-    return super.hash ^ self.unit.hash & _style;
+    return [super hash] ^ ([self.unit hash] & _style);
 }
 
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style unit:(NSString *)unit {

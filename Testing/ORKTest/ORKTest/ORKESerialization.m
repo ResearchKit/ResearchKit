@@ -550,6 +550,21 @@ encondingTable =
             PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
             PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKVideoCaptureStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVideoCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(templateImageInsets, NSValue, NSObject, YES,
+                     ^id(id value) { return value?dictionaryFromUIEdgeInsets(((NSValue *)value).UIEdgeInsetsValue):nil; },
+                     ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
+            PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(audioMute, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(flashMode, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(devicePosition, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
+            PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
+            })),
   ENTRY(ORKSignatureStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKSignatureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];

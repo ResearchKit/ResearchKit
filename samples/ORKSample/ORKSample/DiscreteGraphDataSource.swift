@@ -55,19 +55,19 @@ class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
     
     // MARK: ORKGraphChartViewDataSource
     
-    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
+    func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+    func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
 }

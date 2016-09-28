@@ -78,6 +78,7 @@
         _progressView = [UIProgressView new];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
         _progressView.progressTintColor = [self tintColor];
+        [_progressView setIsAccessibilityElement:YES];
         [_progressView setAlpha:0];
         
         _tapButton1 = [[ORKRoundTappingButton alloc] init];
@@ -87,6 +88,8 @@
         _tapButton2 = [[ORKRoundTappingButton alloc] init];
         _tapButton2.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton2 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        
+        _lastTappedButton = -1;
         
         [self addSubview:_tapCaptionLabel];
         [self addSubview:_tapCountLabel];
@@ -132,9 +135,15 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [_progressView setProgress:progress animated:animated];
+    
+    CGFloat previousAlpha = _progressView.alpha;
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
         [_progressView setAlpha:(progress == 0) ? 0 : 1];
     }];
+    
+    if (UIAccessibilityIsVoiceOverRunning() && previousAlpha != _progressView.alpha) {
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+    }
 }
 
 - (void)resetStep:(ORKActiveStepViewController *)viewController {

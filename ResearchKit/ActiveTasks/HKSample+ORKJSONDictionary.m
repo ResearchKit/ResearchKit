@@ -90,7 +90,7 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     }
     
     if (options & ORKSampleIncludeSource) {
-        HKSource *source = [self source];
+        HKSource *source = [[self sourceRevision] source];
         if (source.name) {
             mutableDictionary[HKSourceKey] = source.name;
         }
