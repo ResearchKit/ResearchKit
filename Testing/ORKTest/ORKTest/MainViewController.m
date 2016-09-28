@@ -82,6 +82,7 @@ DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TremorTaskIdentifier);
 DefineStringKey(TremorRightHandTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
+DefineStringKey(MoodSurveyTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
@@ -369,6 +370,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Walk And Turn Task",
                            @"Hand Tremor Task",
                            @"Right Hand Tremor Task",
+                           @"Mood Survey",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -643,6 +645,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
+    } else if ([identifier isEqualToString:MoodSurveyTaskIdentifier]) {
+        return [ORKOrderedTask moodSurveyWithIdentifier:MoodSurveyTaskIdentifier
+                                 intendedUseDescription:nil
+                                              frequency:ORKMoodSurveyFrequencyWeekly
+                                     customQuestionText:nil
+                                                options:ORKPredefinedTaskOptionNone];
     }
 
     return nil;
@@ -2363,6 +2371,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)rightHandTremorTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
+}
+
+- (void)moodSurveyButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:MoodSurveyTaskIdentifier];
 }
 
 #pragma mark - Dynamic task

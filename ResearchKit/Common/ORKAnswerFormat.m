@@ -2559,3 +2559,15 @@ static NSString *const formattedAddressLinesKey = @"FormattedAddressLines";
 }
 
 @end
+
+@implementation ORKMoodScaleAnswerFormat
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (Class)questionResultClass {
+    return [ORKMoodScaleQuestionResult class];
+}
+
+@end

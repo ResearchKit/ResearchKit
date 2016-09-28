@@ -1350,4 +1350,15 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ The `ORKMoodScaleQuestionResult` class represents the result of an ORKMoodScaleAnswerFormat`
+ question.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMoodScaleQuestionResult : ORKChoiceQuestionResult
+
+@property (nonatomic, copy, nullable) NSNumber *scaleAnswer;
+
+@end
+
 NS_ASSUME_NONNULL_END
