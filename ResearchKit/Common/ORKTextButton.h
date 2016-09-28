@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextButton : UIButton
-
+@property (nonatomic) BOOL isInTransition;
 @end
 
 

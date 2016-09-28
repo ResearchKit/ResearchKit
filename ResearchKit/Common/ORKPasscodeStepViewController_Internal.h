@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeStateConfirmNewEntry
 };
 
-@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate, CAAnimationDelegate>
 
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;

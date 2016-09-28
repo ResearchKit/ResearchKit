@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dopušteni su samo numerički znakovi.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka unošenja šifre";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ od %@ unesenih znamenki";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Zaboravili ste šifru?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nije moguće dodati stavku privjeska ključeva.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Ne";
 "BOOL_YES" = "Da";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "u";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Dodirnite za odgovaranje";
 "NULL_ANSWER" = "Odaberite odgovor";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Spremi za kasnije";
 "BUTTON_OPTION_DISCARD" = "Odbaci rezultate";
 "BUTTON_OPTION_STOP_TASK" = "Završi zadatak";
+"BUTTON_SAVE" = "Spremi";
+"BUTTON_CLEAR_ANSWER" = "Očisti odgovor";
+"BUTTON_READ_ONLY_MODE" = "Ovaj odgovor se ne može promijeniti.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Započinjanje aktivnosti za";
 "TASK_COMPLETE_TITLE" = "Aktivnost je dovršena";
 "TASK_COMPLETE_TEXT" = "Vaši podaci će se analizirati i bit ćete obaviješteni kad rezultati budu spremni.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ s preostalo.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Snimi sliku";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Za dovršetak ovog koraka, u Postavkama dopustite aplikaciji pristup kameri.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nije naveden izlazni direktorij za snimljene slike.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Snimljena slika ne može se spremiti.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Započni snimati";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Zaustavi snimanje";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Ponovno snimi video";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondicija";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Okrenite se i hodajte natrag do mjesta od kojeg ste krenuli.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Hodajte najviše %ld koraka u ravnoj liniji.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Pronađite mjesto na kojem možete sigurno hodati naprijed-natrag u ravnoj liniji. Pokušajte kontinuirano hodati tako da se okrenete na kraju putanje, kao da hodate oko čunja.\n\nZatim će se od vas zatražiti da hodate punim krugom, zatim da stojite nepomično s rukama položenim uz tijelo i stopalima razmaknutima u širini ramena.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Dodirnite Pokreni kad budete spremni započeti.\nZatim stavite vaš telefon u džep ili torbu i slijedite audio upute.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Hodajte naprijed-natrag u ravnoj liniji tijekom %@. Hodajte kao i inače.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Okrenite se punim krugom i zatim budite mirni %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Dovršili ste aktivnost.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Brzina dodirivanja";
+"TAPPING_TASK_TITLE_RIGHT" = "Desna ruka";
+"TAPPING_TASK_TITLE_LEFT" = "Lijeva ruka";
 "TAPPING_INTRO_TEXT" = "Ova aktivnost mjeri vašu brzinu dodirivanja.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Stavite telefon na ravnu podlogu. Na zaslonu će se prikazati dvije tipke za %@. Koristeći dva prsta iste ruke, naizmjence dodirujte tipke što brže možete.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Stavite telefon na ravnu podlogu.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Koristeći dva prsta iste ruke, naizmjence dodirujte tipke na zaslonu.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Koristeći dva prsta desne ruke, naizmjence dodirujte tipke na zaslonu.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Koristeći dva prsta lijeve ruke, naizmjence dodirujte tipke na zaslonu.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Sad ponovite isti test desnom rukom.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Sad ponovite isti test lijevom rukom.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Dodirnite jednim prstom, zatim drugim. Pokušajte tempirati dodire kako bi bili ujednačeni. Nastavite dodirivati tijekom %@.";
 "TAPPING_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Dodirnite Sljedeće za početak.";
 "TAP_BUTTON_TITLE" = "Dodirnite";
 "TOTAL_TAPS_LABEL" = "Ukupan broj dodira";
-"TAPPING_INSTRUCTION" = "Dodirujte tipke što brže možete koristeći dva prsta.";
-
+"TAPPING_INSTRUCTION" = "Dodirujte tipke što ujednačenije možete koristeći dva prsta.";
+"TAPPING_INSTRUCTION_RIGHT" = "Dodirujte tipke koristeći DESNU ruku.";
+"TAPPING_INSTRUCTION_LEFT" = "Dodirujte tipke koristeći LIJEVU ruku.";
+"TAPPING_SKIP_TITLE" = "Preskoči ovu ruku";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Glas";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Ova aktivnost evaluira vaš glas tako što ga snima pomoću mikrofona na dnu vašeg telefona.";
 "AUDIO_TOO_LOUD_LABEL" = "Preglasno";
 "AUDIO_GENERIC_ERROR_LABEL" = "Zvuk se ne može snimati";
+"AUDIO_LEVEL_CHECK_LABEL" = "Molimo, pričekajte da provjerimo razinu pozadinske buke.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Razina buke u okruženju je previsoka za snimanje vašeg glasa. Molimo, premjestite se negdje gdje je tiše i pokušajte ponovno.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Dodirnite Sljedeće kad budete spremni.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiometrija";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Podignite klin s dva prsta.";
 "HOLE_PEG_TEST_TEXT_2" = "Podignite prste da biste ispustili klin.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Aktivnost podrhtavanja";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Ova aktivnost mjeri podrhtavanje vaših ruku u različitim položajima. Pronađite mjesto na kojem možete udobno sjediti tijekom trajanja ove aktivnosti.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Držite telefon u ruci koja vam je više zahvaćena, kako je prikazano na slici ispod.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Držite telefon u DESNOJ ruci kako je prikazano na slici ispod.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Držite telefon u LIJEVOJ ruci kako je prikazano na slici ispod.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Od vas će se zatražiti da napravite %@ dok sjedite s telefonom u ruci.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "zadatak";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dva zadatka";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tri zadatka";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "četiri zadatka";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "pet zadataka";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Dodirnite Sljedeće za nastavak.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Pripremite se na držanje telefona u krilu.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Pripremite se na držanje telefona u krilu LIJEVOM rukom.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Pripremite se na držanje telefona u krilu DESNOM rukom.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Nastavite držati telefon u krilu tijekom %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Sad držite telefon s ispruženom rukom u visini ramena.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Sad držite telefon u LIJEVOJ šaci s rukom ispruženom u visini ramena.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Sad držite telefon u DESNOJ šaci s rukom ispruženom u visini ramena.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Nastavite držati telefon s ispruženom rukom tijekom %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Sad držite telefon u visini ramena sa savijenim laktom.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Sad držite telefon LIJEVOM rukom u visini ramena sa savijenim laktom.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Sad držite telefon DESNOM rukom u visini ramena sa savijenim laktom.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Nastavite držati telefon sa savijenim laktom tijekom %ld s";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Sad držite lakat savijen i neprekidno dodirujte nos telefonom.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Sad držite lakat savijen s telefonom u LIJEVOJ ruci i neprekidno dodirujte nos telefonom.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Sad držite lakat savijen s telefonom u DESNOJ ruci i neprekidno dodirujte nos telefonom.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Nastavite dodirivati nos telefonom tijekom %ld s";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Pripremite se za mahanje rotiranjem šake u zapešću (kao što maše engleska kraljica).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Pripremite se za mahanje rotiranjem šake, s telefonom u LIJEVOJ ruci (kao što maše engleska kraljica).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Pripremite se za mahanje rotiranjem šake, s telefonom u DESNOJ ruci (kao što maše engleska kraljica).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Nastavite mahati rotiranjem šake tijekom %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Sad uzmite telefon u LIJEVU ruku i nastavite na sljedeći zadatak.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Sad uzmite telefon u DESNU ruku i nastavite na sljedeći zadatak.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Nastavite na sljedeći zadatak.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivnost je dovršena.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Od vas će se zatražiti da napravite %@ dok sjedite s telefonom prvo u jednoj ruci, zatim ponovno u drugoj ruci.";
+"TREMOR_SKIP_LEFT_HAND" = "Ne mogu obaviti ovaj zadatak LIJEVOM rukom.";
+"TREMOR_SKIP_RIGHT_HAND" = "Ne mogu obaviti ovaj zadatak DESNOM rukom.";
+"TREMOR_SKIP_NEITHER" = "Mogu obaviti ovaj zadatak s obje ruke.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Datoteka se ne može izraditi";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nije se moglo ukloniti dovoljno log datoteka za dosezanje praga";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Snimi pregled";
 "AX_IMAGE_CAPTURED_LABEL" = "Snimljena slika";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Pregled snimanja videa";
+"AX_VIDEO_CAPTURED_LABEL" = "Snimljeni video";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Pločica veličine %@ ne može se staviti na pločicu veličine %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Cilj";
 "AX_TOWER_OF_HANOI_TOWER" = "Toranj";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima pločicu veličine %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Isprazni";
 
-"AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Raspon od %@ do %@.";
+"AX_GRAPH_STACK_PREFIX" = "Stog sastavljen od";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Točka: %@";

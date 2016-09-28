@@ -42,7 +42,7 @@
 "CONSENT_PAGE_NUMBER_FORMAT" = "Сторінка %1$ld із %2$ld";
 
 /* Consent section titles. */
-"CONSENT_SECTION_WELCOME" = "Ласкаво просимо!";
+"CONSENT_SECTION_WELCOME" = "Ласкаво просимо";
 "CONSENT_SECTION_DATA_GATHERING" = "Збір даних";
 "CONSENT_SECTION_PRIVACY" = "Приватність";
 "CONSENT_SECTION_DATA_USE" = "Використання даних";
@@ -133,7 +133,7 @@
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Код допуску прийнято";
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Введіть старий код допуску";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Введіть новий код допуску";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Підтвердіть свій новий код";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Підтвердьте свій новий код";
 "PASSCODE_INVALID_ALERT_TITLE" = "Неправильний код допуску";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Незбіг кодів. Спробуйте ще раз.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Будь ласка, засвідчіть своїм Touch ID";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Дозволено тільки цифри.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор перебігу вводу коду допуску";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено: %@ із %@";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Забули код допуску?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Не вдалося додати елемент до В'язки.";
@@ -155,8 +156,8 @@
 "BLOOD_TYPE_AB-" = "AB(IV)-";
 "BLOOD_TYPE_B+" = "B(III)+";
 "BLOOD_TYPE_B-" = "B(III)-";
-"BLOOD_TYPE_O+" = "0(I)+";
-"BLOOD_TYPE_O-" = "0(I)-";
+"BLOOD_TYPE_O+" = "O(I)+";
+"BLOOD_TYPE_O-" = "O(I)-";
 
 /* Gender values. */
 "GENDER_FEMALE" = "Жіноча";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Ні";
 "BOOL_YES" = "Так";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "см";
+"MEASURING_UNIT_FT" = "фт";
+"MEASURING_UNIT_IN" = "дм";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Торкніть, щоб відповісти";
 "NULL_ANSWER" = "Вибрати відповідь";
@@ -176,7 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Погоджуюсь";
 "BUTTON_CANCEL" = "Скасувати";
-"BUTTON_OK" = "ОК";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Очистити";
 "BUTTON_DISAGREE" = "Не погоджуюсь";
 "BUTTON_DONE" = "Готово";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Пізніше";
 "BUTTON_OPTION_DISCARD" = "Відхилити результати";
 "BUTTON_OPTION_STOP_TASK" = "Завершити завдання";
+"BUTTON_SAVE" = "Зберегти";
+"BUTTON_CLEAR_ANSWER" = "Стерти відповідь";
+"BUTTON_READ_ONLY_MODE" = "Цю відповідь неможливо змінити.";
 
 /* General active tasks. */
-"COUNTDOWN_LABEL" = "Початок операції через";
-"TASK_COMPLETE_TITLE" = "Операцію завершено";
+"COUNTDOWN_LABEL" = "Початок тесту через";
+"TASK_COMPLETE_TITLE" = "Тест завершено";
 "TASK_COMPLETE_TEXT" = "Ваші дані буде проаналізовано, і ви отримаєте сповіщення, коли будуть готові результати.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Лишлось %@ секунд.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Зробити знімок";
@@ -203,49 +213,74 @@
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Для зроблених знімків не вказано вихідного каталогу.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не вдається зберегти зроблений знімок.";
 
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Почати запис";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Зупинити запис";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Зняти відео ще раз";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Фітнес";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Відстань (%@)";
 "FITNESS_HEARTRATE_TITLE" = "Пульс (уд./хв)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Сидіть зручно протягом %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Ідіть якомога швидше протягом %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "Ця операція оцінює ваш серцевий ритм і обчислює, скільки ви можете пройти за %1$@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Цей тест оцінює ваш серцевий ритм і обчислює, скільки ви можете пройти за %1$@.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Ідіть надворі своєю найшвидшою ходою протягом %1$@. Завершивши, зручно сядьте і відпочивайте протягом %2$@. Щоб почати, торкніть «Розпочати».";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Хода і рівновага";
-"WALK_INTRO_TEXT" = "Ця операція оцінює вашу ходу і рівновагу під час ходіння і стояння. Не продовжуйте, якщо ви не можете безпечно ходити без допомоги.";
+"WALK_INTRO_TEXT" = "Цей тест оцінює вашу ходу і рівновагу під час ходіння і стояння. Не продовжуйте, якщо ви не можете безпечно ходити без допомоги.";
 "WALK_INTRO_2_TEXT_%ld" = "Знайдіть місце, де ви можете безпечно зробити без допомоги інших %ld кроків по прямій.";
 "WALK_INTRO_2_DETAIL" = "Покладіть свій телефон у кишеню або сумку, і виконуйте аудіоінструкції.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Тепер не рухайтесь %@.";
-"WALK_STAND_INSTRUCTION_FORMAT" = "Стійте, не рухаючись, протягом %@.";
+"WALK_STAND_INSTRUCTION_FORMAT" = "Не рухайтесь протягом %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Розверніться і йдіть туди, де ви почали.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Зробіть до %ld кроків по прямій.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Знайдіть місце, де ви можете безпечно пройти по прямій уперед і назад. Спробуйте не зупинятися, коли розвертаєтесь у кінці прямої, немов обходячи уявний конус.\n\nДалі вам буде запропоновано пройти повну відстань в обидва напрямки, зупинитися і не рухатися, тримаючи руки по боках і ноги на ширині плечей.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Торкніть «Розпочати», коли ви готові.\nПотім покладіть телефон у кишеню або сумку, і виконуйте аудіоінструкції.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Ідіть по прямій уперед і назад протягом %@. Ідіть, як ви ходите зазвичай.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Пройдіть повну відстань по колу, потім зупиніться і не рухайтесь протягом %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ви завершили виконання тесту.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Темп торкання";
-"TAPPING_INTRO_TEXT" = "Ця операція оцінює вашу швидкість торкання.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Покладіть телефон на рівну поверхню. На екрані з’являться дві кнопки для %@. Двома пальцями однієї руки по черзі торкайте кнопки якомога швидше.";
+"TAPPING_TASK_TITLE_RIGHT" = "Права рука";
+"TAPPING_TASK_TITLE_LEFT" = "Ліва рука";
+"TAPPING_INTRO_TEXT" = "Цей тест оцінює вашу швидкість торкання.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Покладіть телефон на рівну поверхню.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Двома пальцями однієї руки по черзі торкайте кнопки на екрані.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Двома пальцями правої руки по черзі торкайте кнопки на екрані.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Двома пальцями лівої руки по черзі торкайте кнопки на екрані.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Тепер повторіть цей самий тест для правої руки.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Тепер повторіть цей самий тест для лівої руки.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Торкніть одним пальцем, потім іншим. Намагайтеся торкатися з якомога рівнішим інтервалом. Продовжуйте торкати протягом %@.";
 "TAPPING_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Торкніть «Далі», щоб почати.";
 "TAP_BUTTON_TITLE" = "Торкнути";
 "TOTAL_TAPS_LABEL" = "Всього дотиків";
-"TAPPING_INSTRUCTION" = "Торкайте кнопки якомога швидше двома пальцями.";
-
+"TAPPING_INSTRUCTION" = "Торкайте кнопки двома пальцями якомога послідовніше.";
+"TAPPING_INSTRUCTION_RIGHT" = "Торкайте кнопки ПРАВОЮ рукою.";
+"TAPPING_INSTRUCTION_LEFT" = "Торкайте кнопки ЛІВОЮ рукою.";
+"TAPPING_SKIP_TITLE" = "Минути цю руку";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Голос";
 "AUDIO_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "AUDIO_INSTRUCTION" = "Вимовляйте «А-а-а-а» у мікрофон якомога довше.";
 "AUDIO_INTRO_TEXT" = "Зробіть глибокий подих і вимовляйте «А-а-а-а» у мікрофон якомога довше. Тримайте однакову гучність голосу, щоб смуги звуку залишалися синіми.";
-"AUDIO_INTENDED_USE" = "Ця операція оцінює ваш голос, записуючи його через мікрофон внизу вашого телефону.";
+"AUDIO_INTENDED_USE" = "Цей тест оцінює ваш голос, записуючи його через мікрофон внизу вашого телефону.";
 "AUDIO_TOO_LOUD_LABEL" = "Надто гучно";
 "AUDIO_GENERIC_ERROR_LABEL" = "Не вдається записати аудіо";
+"AUDIO_LEVEL_CHECK_LABEL" = "Будь ласка, зачекайте, поки ми перевіряємо рівень фонового шуму.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Рівень навколишнього шуму зависокий для записування голосу. Будь ласка, повторіть спробу у тихішому місці.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Торкніть «Далі», коли ви готові.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Аудіометрія";
-"TONE_AUDIOMETRY_INTENDED_USE" = "Ця операція вимірює вашу здатність чути різні звуки.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Перед початком приєднайте і надягніть навушники.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Цей тест вимірює вашу здатність чути різні звуки.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Перед початком приєднайте і надіньте навушники.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Зараз ви почуєте звук. Регулюйте гучність кнопками на боці вашого пристрою.\n\nТоркніть кнопку, коли ви готові починати.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Торкайте кнопку щоразу, коли почуєте звук.";
@@ -254,7 +289,7 @@
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Просторова пам’ять";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ця операція оцінює вашу короткострокову пам’ять, коли вам потрібно повторити порядок загоряння %@.";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Цей тест оцінює вашу короткострокову пам’ять, коли вам потрібно повторити порядок загоряння %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "квітки";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "квітки";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Деякі %@ будуть загорятися по черзі. Торкайте ці %@ у такому самому порядку загоряння.";
@@ -277,7 +312,7 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Час реакції";
-"REACTION_TIME_TASK_INTENDED_USE" = "Ця операція оцінює час, потрібний вам, щоб зреагувати на візуальну команду.";
+"REACTION_TIME_TASK_INTENDED_USE" = "Цей тест оцінює час, потрібний вам, щоб зреагувати на візуальну команду.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Трясніть пристроєм в будь-який бік, щойно на екрані з’явиться синя точка. Вас попросять зробити це кілька разів: %D.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %@ із %@";
@@ -301,7 +336,7 @@
 "TIMED_WALK_FORM_TEXT" = "Вживайте однаковий допоміжний засіб для всіх тестів.";
 "TIMED_WALK_QUESTION_TEXT" = "Ви носите гомілкостопний біопротез?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Ви користуєтесь допоміжними засобами?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут і виберіть відповідь";
+"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут і виберіть відповідь.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Немає";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Однобічна тростина";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Однобічна милиця";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Візьміть кілок двома пальцями.";
 "HOLE_PEG_TEST_TEXT_2" = "Підніміть пальці, щоб опустити кілок.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Тест на тремтіння";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Цей тест вимірює рівень тремтіння рук у різних положеннях. Знайдіть місце, де можна зручно сидіти протягом виконання цього тесту.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Тримайте телефон у найбільш ураженій руці, як це показано на зображенні нижче.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Тримайте телефон у ПРАВІЙ руці, як це показано на зображенні нижче.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Тримайте телефон у ЛІВІЙ руці, як це показано на зображенні нижче.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Вам буде запропоновано виконати %@, сидячи з телефоном у руці.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "завдання";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "два завдання";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "три завдання";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "чотири завдання";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "пʼять завдань";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Торкніть «Далі», щоб продовжити.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Готуйтеся тримати телефон на колінах.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Готуйтеся тримати телефон на колінах ЛІВОЮ рукою.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Готуйтеся тримати телефон на колінах ПРАВОЮ рукою.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Продовжуйте тримати телефон на колінах протягом %ld секунд.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Тепер тримайте телефон рукою, протягнутою на рівні плечей.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Тепер тримайте телефон у ЛІВІЙ руці із зігнутим ліктем, протягнутою на рівні плечей.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Тепер тримайте телефон у ПРАВІЙ руці із зігнутим ліктем, протягнутою на рівні плечей.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Продовжуйте тримати телефон простягнутою рукою протягом %ld секунд.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Тепер тримайте телефон на висоті плечей у руці із зігнутим ліктем.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Тепер тримайте телефон у ЛІВІЙ руці із зігнутим ліктем на рівні плечей.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Тепер тримайте телефон у ПРАВІЙ руці із зігнутим ліктем на рівні плечей.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Продовжуйте тримати телефон у руці із зігнутим ліктем протягом %ld секунд";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Тепер, не розгинаючи ліктя, торкайтеся неодноразово телефоном свого носа.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Тепер, тримаючи телефон у ЛІВІЙ руці із зігнутим ліктем, торкайтеся неодноразово телефоном свого носа.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Тепер, тримаючи телефон у ПРАВІЙ руці із зігнутим ліктем, торкайтеся неодноразово телефоном свого носа.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Продовжуйте торкатися телефоном свого носа протягом %ld секунд";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Готуйтеся махати, як це робить королева (вертячи запʼястком).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Готуйтеся махати телефоном у ЛІВІЙ руці, як це робить королева (вертячи запʼястком).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Готуйтеся махати телефоном у ПРАВІЙ руці, як це робить королева (вертячи запʼястком).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Продовжуйте виконувати махання королеви протягом %ld секунд.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Тепер перекладіть телефон у ЛІВУ руку, і перейдіть до наступного завдання.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Тепер перекладіть телефон у ПРАВУ руку, і перейдіть до наступного завдання.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Перейдіть до наступного завдання.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Тест виконано.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Вам буде запропоновано виконати %@, сидячи з телефоном спочатку в одній руці, потім ще раз в іншій руці.";
+"TREMOR_SKIP_LEFT_HAND" = "Я не можу виконати цю дію ЛІВОЮ рукою.";
+"TREMOR_SKIP_RIGHT_HAND" = "Я не можу виконати цю дію ПРАВОЮ рукою.";
+"TREMOR_SKIP_NEITHER" = "Я можу виконати цю дію обома руками.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не вдалося вилучити достатньо файлів журналів, щоб досягти порогу";
@@ -371,12 +448,15 @@
 
 "AX.MEMORY.TILE.ACTIVE" = "активна";
 "AX.MEMORY.TILE.CORRECT" = "правильно";
-"AX.MEMORY.TILE.INCORRECT" = "неправильноб";
+"AX.MEMORY.TILE.INCORRECT" = "неправильно";
 "AX.MEMORY.TILE.QUIESCENT" = "неактивний";
 "AX.MEMORY.TILE.LABEL" = "Клітинка тесту на пам’ять";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Перегляд знімку";
 "AX_IMAGE_CAPTURED_LABEL" = "Зроблений знімок";
+
+"AX_VIDEO_CAPTURE_LABEL" = "Перегляд знятого відео";
+"AX_VIDEO_CAPTURED_LABEL" = "Зняте відео";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Неможливо розмістити диск розміру %@ на диск розміру %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Ціль";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
 
-"AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Діапазон від %@ до %@";
+"AX_GRAPH_STACK_PREFIX" = "Стос, створений із";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
 "AX_GRAPH_POINT_%@" = "Точка: %@";

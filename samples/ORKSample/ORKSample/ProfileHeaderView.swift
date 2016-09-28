@@ -36,11 +36,11 @@ class ProfileHeaderView: UIView {
     
     var seperatorHeight = CGFloat(0.5)
 
-    var seperatorColor = UIColor.lightGrayColor()
+    var seperatorColor = UIColor.lightGray
 
     // MARK: UIView
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Draw a seperator line at the bottom of the view.
         var fillRect = bounds
         fillRect.origin.y = bounds.size.height - seperatorHeight

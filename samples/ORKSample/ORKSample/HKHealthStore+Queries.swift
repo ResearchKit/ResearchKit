@@ -32,7 +32,7 @@ import HealthKit
 
 extension HKHealthStore {
     /// Asynchronously fetches the most recent quantity sample of a specified type.
-    func mostRecentQuantitySampleOfType(quantityType: HKQuantityType, predicate: NSPredicate? = nil, completion: (HKQuantity?, NSError?) -> Void) {
+    func mostRecentQauntitySampleOfType(_ quantityType: HKQuantityType, predicate: NSPredicate? = nil, completion: @escaping (HKQuantity?, NSError?) -> Void) {
         let timeSortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
         
         let query = HKSampleQuery(sampleType: quantityType, predicate: predicate, limit: 1, sortDescriptors: [timeSortDescriptor]) { _, samples, error in
@@ -40,10 +40,10 @@ extension HKHealthStore {
                 completion(firstSample.quantity, nil)
             }
             else {
-                completion(nil, error)
+                completion(nil, error as NSError?)
             }
         }
         
-        executeQuery(query)
+        execute(query)
     }
 }

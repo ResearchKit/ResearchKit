@@ -440,4 +440,11 @@ static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
     return viewController;
 }
 
+#pragma mark - Accessibility
+
+- (BOOL)accessibilityPerformEscape {
+    [self goBackward];
+    return YES;
+}
+
 @end

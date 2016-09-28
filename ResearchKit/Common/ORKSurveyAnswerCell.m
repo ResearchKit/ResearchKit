@@ -74,10 +74,6 @@
     }
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-}
-
 - (UITextField *)textField {
     return nil;
 }
@@ -202,17 +198,32 @@
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
-    return @[[NSLayoutConstraint constraintWithItem:self
-                                          attribute:NSLayoutAttributeHeight
-                                          relatedBy:NSLayoutRelationEqual
-                                             toItem:nil
-                                          attribute:NSLayoutAttributeHeight
-                                         multiplier:1.0
-                                           constant:[[self class] suggestedCellHeightForView:view]]];
+    NSLayoutConstraint *constaint = [NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                multiplier:1.0
+                                                                  constant:[[self class] suggestedCellHeightForView:view]];
+    constaint.priority = UILayoutPriorityDefaultHigh;
+    return @[constaint];
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
     return ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, view.window);
+}
+
++ (NSLayoutConstraint *)fullWidthLayoutConstraint:(UIView *)view {
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:10000];
+    
+    widthConstraint.priority = UILayoutPriorityDefaultLow + 1;
+    return widthConstraint;
 }
 
 @end
