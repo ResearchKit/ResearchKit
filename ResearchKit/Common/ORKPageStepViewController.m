@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 @interface  ORKPageStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate>
 
+@property (nonatomic, readonly) ORKPageResult *initialResult;
 @property (nonatomic, readonly) ORKPageResult *pageResult;
 @property (nonatomic, readonly) UIPageViewController *pageViewController;
 @property (nonatomic, copy, readonly, nullable) NSString *currentStepIdentifier;
@@ -59,6 +60,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     self = [super initWithStep:step result:result];
     if (self && [step isKindOfClass:[ORKPageStep class]] && [result isKindOfClass:[ORKStepResult class]]) {
         _pageResult = [[ORKPageResult alloc] initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult *)result];
+        _initialResult = [_pageResult copy];
     }
     return self;
 }
@@ -175,6 +177,11 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 - (void)stepViewController:(ORKStepViewController *)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction {
     NSInteger delta = (direction == ORKStepViewControllerNavigationDirectionForward) ? 1 : -1;
+    if (direction == ORKStepViewControllerNavigationDirectionForward) {
+        // If going forward, update the page result with the final stepResult
+        ORKStepResult *stepResult = stepViewController.result;
+        [self.pageResult addStepResult:stepResult];
+    }
     [self navigateInDirection:delta animated:YES];
 }
 
@@ -235,6 +242,10 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 - (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step {
     ORKStepResult *stepResult = [self.pageResult stepResultForStepIdentifier:step.identifier];
+    if (stepResult == nil) {
+        // If the pageResult does not carry a step result, then check the initial result
+        stepResult = [self.initialResult stepResultForStepIdentifier:step.identifier];
+    }
     ORKStepViewController *viewController = [step instantiateStepViewControllerWithResult:stepResult];
     return viewController;
 }
