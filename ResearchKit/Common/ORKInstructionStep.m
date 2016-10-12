@@ -57,6 +57,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
+        ORK_DECODE_IMAGE(aDecoder, iconImage);
     }
     return self;
 }
@@ -66,6 +67,7 @@
     ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
+    ORK_ENCODE_IMAGE(aCoder, iconImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -77,6 +79,7 @@
     step.detailText = self.detailText;
     step.image = self.image;
     step.auxiliaryImage = self.auxiliaryImage;
+    step.iconImage = self.iconImage;
     return step;
 }
 
@@ -84,7 +87,11 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.detailText, castObject.detailText) && ORKEqualObjects(self.image, castObject.image) && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage);
+    return isParentSame &&
+        ORKEqualObjects(self.detailText, castObject.detailText) &&
+        ORKEqualObjects(self.image, castObject.image) &&
+        ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage) &&
+        ORKEqualObjects(self.iconImage, castObject.iconImage);
 }
 
 - (NSUInteger)hash {
