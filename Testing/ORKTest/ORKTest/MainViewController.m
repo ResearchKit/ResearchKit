@@ -72,6 +72,7 @@ DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
+DefineStringKey(IconImageTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
@@ -402,6 +403,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Auxillary Image",
                            @"Page Step",
                            @"Completion Step",
+                           @"Icon Image",
                            ],
                        ];
 }
@@ -655,6 +657,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                 options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:CompletionStepTaskIdentifier]) {
         return [self makeCompletionStepTask];
+    } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
+        return [self makeIconImageTask];
     }
 
     return nil;
@@ -4264,5 +4268,25 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
 }
+
+#pragma mark - Icon Image
+
+- (IBAction)iconImageButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:IconImageTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeIconImageTask {
+    
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:IconImageTaskIdentifier];
+    step.title = @"Title";
+    step.text = @"This is an example of a step with an icon image.";
+
+    NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+    NSString *icon = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
+    step.iconImage = [UIImage imageNamed:icon];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step]];
+}
+
 
 @end
