@@ -169,15 +169,32 @@ static const CGFloat TickViewSize = 122;
     _completionStepView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
+- (void)setShouldShowContinueButton:(BOOL)shouldShowContinueButton {
+    _shouldShowContinueButton = shouldShowContinueButton;
+    
+    // Update button states
+    [self setContinueButtonItem:self.continueButtonItem];
+    if (shouldShowContinueButton) {
+        [self updateNavRightBarButtonItem];
+    }
+}
+
 // Override top right bar button item
 - (void)updateNavRightBarButtonItem {
-    self.navigationItem.rightBarButtonItem = self.continueButtonItem;
+    if (self.shouldShowContinueButton) {
+        [super updateNavRightBarButtonItem];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = self.continueButtonItem;
+    }
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    self.stepView.continueSkipContainer.continueButtonItem = nil;
-    [self updateNavRightBarButtonItem];
+    if (!self.shouldShowContinueButton) {
+        self.stepView.continueSkipContainer.continueButtonItem = nil;
+        [self updateNavRightBarButtonItem];
+    }
 }
 
 @end
