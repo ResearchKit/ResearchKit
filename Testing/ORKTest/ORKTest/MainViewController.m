@@ -4173,15 +4173,19 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 - (ORKOrderedTask *)makeIconImageTask {
     
-    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:IconImageTaskIdentifier];
-    step.title = @"Title";
-    step.text = @"This is an example of a step with an icon image.";
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Title";
+    step1.text = @"This is an example of a step with an icon image.";
 
     NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
     NSString *icon = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
-    step.iconImage = [UIImage imageNamed:icon];
+    step1.iconImage = [UIImage imageNamed:icon];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step]];
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"step2"];
+    step2.text = @"This is an example of a step with an icon image and no title.";
+    step2.iconImage = [UIImage imageNamed:icon];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2]];
 }
 
 
