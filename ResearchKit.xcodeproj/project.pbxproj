@@ -555,6 +555,8 @@
 		FF5E3CCC1D23444400ECE4B7 /* ORKPageStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5E3CCA1D23444400ECE4B7 /* ORKPageStepViewController.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFDDD84A1D3555EA00446806 /* ORKPageStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FFDDD8481D3555EA00446806 /* ORKPageStep.m */; };
+		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
+		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */; };
 /* End PBXBuildFile section */
 
@@ -1154,6 +1156,8 @@
 		FF5E3CCA1D23444400ECE4B7 /* ORKPageStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPageStepViewController.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
 		FFDDD8481D3555EA00446806 /* ORKPageStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPageStep.m; sourceTree = "<group>"; };
+		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
+		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1632,6 +1636,8 @@
 				86C40B7A1A8D7C5C00081FAC /* ORKDefaultFont.h */,
 				106FF2AC1B6FACA8004EACF2 /* ORKDirectionView.h */,
 				106FF2AD1B6FACA8004EACF2 /* ORKDirectionView.m */,
+				FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */,
+				FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */,
 				86C40B881A8D7C5C00081FAC /* ORKHeadlineLabel.h */,
 				86C40B891A8D7C5C00081FAC /* ORKHeadlineLabel.m */,
 				86C40B901A8D7C5C00081FAC /* ORKImageChoiceLabel.h */,
@@ -2466,6 +2472,7 @@
 				BF91559F1BDE8D7E007FA459 /* ORKReviewStepViewController.h in Headers */,
 				BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */,
 				BF91559E1BDE8D7E007FA459 /* ORKReviewStepViewController_Internal.h in Headers */,
+				FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */,
 				FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */,
 				25ECC0A31AFBDD2700F3D63B /* ORKReactionTimeStimulusView.h in Headers */,
 				106FF2AA1B690FD7004EACF2 /* ORKHolePegTestPlacePegView.h in Headers */,
@@ -2679,7 +2686,6 @@
 				147503B91AEE807C004B17F3 /* ORKToneAudiometryStep.h in Headers */,
 				106FF2A21B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h in Headers */,
 				24A4DA101B8D0F21009C797A /* ORKPasscodeStepView.h in Headers */,
-				86C40C9A1A8D7C5C00081FAC /* ORKDataLogger_Private.h in Headers */,
 				2489F7B11D65214D008DEF20 /* ORKVideoCaptureStep.h in Headers */,
 				861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */,
 				86C40C461A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.h in Headers */,
@@ -3079,6 +3085,7 @@
 				86C40C3C1A8D7C5C00081FAC /* ORKSpatialSpanGameState.m in Sources */,
 				86C40CF41A8D7C5C00081FAC /* ORKBodyLabel.m in Sources */,
 				106FF29F1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.m in Sources */,
+				FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */,
 				86C40C941A8D7C5C00081FAC /* ORKAudioRecorder.m in Sources */,
 				FF5E3CCC1D23444400ECE4B7 /* ORKPageStepViewController.m in Sources */,
 				86C40C581A8D7C5C00081FAC /* ORKTappingIntervalStepViewController.m in Sources */,
