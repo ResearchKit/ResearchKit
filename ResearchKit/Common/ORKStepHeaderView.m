@@ -183,7 +183,7 @@
     const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
     const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, window);
     
-    BOOL hasCaptionLabel = _captionLabel.text.length > 0;
+    BOOL hasCaptionLabel = _captionLabel.text.length > 0 || hasIconView;
     BOOL hasInstructionLabel = _instructionLabel.text.length > 0;
     BOOL hasLearnMoreButton = (_learnMoreButton.alpha > 0);
     
