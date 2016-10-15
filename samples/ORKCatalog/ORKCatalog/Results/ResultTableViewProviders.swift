@@ -994,7 +994,7 @@ class TaskResultTableViewProvider: CollectionResultTableViewProvider {
         
         let rows = super.resultRowsForSection(section)
         
-        if section == 0 {
+        if section == 0 && (taskResult.results?.count)! > 0 {
             return rows + [
                 ResultRow(text: "taskRunUUID", detail: taskResult.taskRunUUID.uuidString),
                 ResultRow(text: "outputDirectory", detail: taskResult.outputDirectory)
