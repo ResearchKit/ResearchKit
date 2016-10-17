@@ -125,7 +125,7 @@ public extension NSPredicate {
      compare the answer against a maximum value.
      */
     
-    convenience init <T where T: Comparable>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) {
+    convenience init <T>(resultSelector: ORKResultSelector, minimum: T? = nil, maximum: T? = nil) where T: Comparable {
         
         var subPredicateFormatArray: [String] = []
         var subPredicateFormatArgumentArray: [String] = []
@@ -153,7 +153,7 @@ public extension NSPredicate {
      @param expected                    The result that you are expecting.
      */
     
-    convenience init <T where T: Equatable>(resultSelector: ORKResultSelector, expected: T) {
+    convenience init <T>(resultSelector: ORKResultSelector, expected: T) where T: Equatable {
         
         let subPredicateFormatArray: [String] = ["answer == %@"]
         let subPredicateFormatArgumentArray: [String] = ["\(expected)"]
