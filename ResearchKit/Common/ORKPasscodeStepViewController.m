@@ -31,11 +31,19 @@
 
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStepView.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKTextFieldView.h"
+
+#import "ORKPasscodeViewController.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStep.h"
+#import "ORKResult.h"
+
 #import "ORKKeychainWrapper.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -103,7 +111,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         if ([self hasForgotPasscode]) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-            
+        
             CGFloat x = kForgotPasscodeHorizontalPadding;
             _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
             CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
@@ -262,6 +270,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
     passcodeResult.passcodeSaved = _isPasscodeSaved;
+    passcodeResult.touchIdEnabled = _isTouchIdAuthenticated;
     passcodeResult.startDate = stepResult.startDate;
     passcodeResult.endDate = now;
     

@@ -29,10 +29,9 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKAnswerFormat.h>
+@import UIKit;
+@import CoreLocation;
 #import <ResearchKit/ORKTypes.h>
-#import <CoreLocation/CoreLocation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -180,6 +179,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) NSTimeInterval timestamp;
 
+/**
+ A duration of the tap event.
+ 
+ The duration store time interval between touch down and touch release events.
+ */
+@property (nonatomic, assign) NSTimeInterval duration;
+
 /** 
  An enumerated value that indicates which button was tapped, if any.
  
@@ -249,6 +255,11 @@ ORK_CLASS_AVAILABLE
  A boolean indicating if a passcode was saved or not.
  */
 @property (nonatomic, assign, getter=isPasscodeSaved) BOOL passcodeSaved;
+
+/**
+ A boolean that indicates if the user has enabled/disabled TouchID
+ */
+@property (nonatomic, assign, getter=isTouchIdEnabled) BOOL touchIdEnabled;
 
 @end
 

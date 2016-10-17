@@ -30,10 +30,12 @@
 
 
 #import "ORKSpatialSpanTargetView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
+
 #import "ORKTintedImageView.h"
+
 #import "ORKAccessibility.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 static const UIEdgeInsets ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};

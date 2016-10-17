@@ -29,19 +29,19 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKTask.h>
+@import UIKit;
 #import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKResult;
 @class ORKStep;
 @class ORKStepViewController;
-@class ORKResult;
 @class ORKTaskResult;
 @class ORKTaskViewController;
+@protocol ORKStepViewControllerDelegate;
+@protocol ORKTask;
 @protocol ORKTaskResultSource;
 
 /**

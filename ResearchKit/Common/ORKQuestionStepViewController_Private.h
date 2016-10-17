@@ -29,7 +29,8 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <ResearchKit/ORKQuestionStepViewController.h>
+#import <ResearchKit/ORKCustomStepView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

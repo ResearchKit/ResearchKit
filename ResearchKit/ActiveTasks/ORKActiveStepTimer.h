@@ -29,8 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
 
 
 NS_ASSUME_NONNULL_BEGIN

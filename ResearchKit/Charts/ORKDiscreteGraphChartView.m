@@ -32,9 +32,12 @@
 
  
 #import "ORKDiscreteGraphChartView.h"
-#import "ORKGraphChartView_Internal.h"
-#import "ORKHelpers.h"
+
 #import "ORKChartTypes.h"
+#import "ORKGraphChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+
 
 #if TARGET_INTERFACE_BUILDER
 @interface ORKDiscreteGraphChartView ()
@@ -111,15 +114,15 @@
 - (CGFloat)xOffsetForPlotIndex:(NSInteger)plotIndex {
     return xOffsetForPlotIndex(plotIndex, [self numberOfPlots], ORKGraphChartViewPointAndLineWidth);
 }
-
+    
 - (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     return [super snappedXPosition:xPosition plotIndex:plotIndex] + [self xOffsetForPlotIndex:plotIndex];
 }
-
+    
 - (NSInteger)pointIndexForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     return [super pointIndexForXPosition:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
-}
-
+    }
+    
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     return [super isXPositionSnapped:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }

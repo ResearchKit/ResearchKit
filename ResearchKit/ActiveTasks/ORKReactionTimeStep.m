@@ -30,8 +30,10 @@
 
 
 #import "ORKReactionTimeStep.h"
+
 #import "ORKReactionTimeViewController.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKReactionTimeStep

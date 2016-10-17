@@ -29,6 +29,7 @@
  */
 
 
+@import Foundation;
 #import <ResearchKit/ORKStep.h>
 
 

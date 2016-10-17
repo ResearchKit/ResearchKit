@@ -38,8 +38,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKWaitStep` class represents a step that displays a label and an activity
@@ -64,3 +67,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) ORKProgressIndicatorType indicatorType;
 
 @end
+
+NS_ASSUME_NONNULL_END

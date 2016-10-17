@@ -30,9 +30,12 @@
 
 
 #import "ORKSpatialSpanMemoryStep.h"
+
 #import "ORKSpatialSpanMemoryStepViewController.h"
-#import "ORKHelpers.h"
+
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKSpatialSpanMemoryStep

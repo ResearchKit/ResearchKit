@@ -29,9 +29,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+@import UIKit;
+#import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -74,6 +73,9 @@ ORK_EXTERN NSString *const ORKGraphScrubberThumbColorKey;
 
 /// Default color used for reference line of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphReferenceLineColorKey;
+
+/// Default color used for auxiliary image tint of ORKInstructionStepView
+ORK_EXTERN NSString *const ORKAuxiliaryImageTintColorKey;
 
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);

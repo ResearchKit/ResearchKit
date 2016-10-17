@@ -31,16 +31,19 @@
 
 
 #import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
-#import "ORKConsentSignature.h"
-#import "ORKHTMLPDFWriter.h"
-#import "ORKErrors.h"
-#import "ORKHelpers.h"
+
+#import "ORKBodyLabel.h"
 #import "ORKHeadlineLabel.h"
 #import "ORKSubheadlineLabel.h"
-#import "ORKBodyLabel.h"
+
+#import "ORKConsentSection_Private.h"
 #import "ORKConsentSectionFormatter.h"
+#import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
+#import "ORKHTMLPDFWriter.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKErrors.h"
 
 
 @implementation ORKConsentDocument {

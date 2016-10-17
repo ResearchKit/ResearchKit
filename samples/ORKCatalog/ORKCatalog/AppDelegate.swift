@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: UIApplicationDelegate
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // When a task result has been finished, update the result view controller's task result.
         taskListViewController.taskResultFinishedCompletionHandler = { [unowned self] taskResult in
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 navigation controller is at the root.
             */
             if let navigationController = self.resultViewController?.navigationController {
-                navigationController.popToRootViewControllerAnimated(false)
+                navigationController.popToRootViewController(animated: false)
             }
             
             // Set the result so we can display it.

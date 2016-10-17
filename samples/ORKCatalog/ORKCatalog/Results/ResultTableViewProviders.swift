@@ -48,7 +48,7 @@ import MapKit
     and are not user visible (see description in `ResultViewController`), none
     of the properties / content are localized.
 */
-func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableViewDataSource, UITableViewDelegate> {
+func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSource & UITableViewDelegate {
     guard let result = result else {
         /*
             Use a table view provider that shows that there hasn't been a recently
@@ -144,7 +144,7 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         providerType = CollectionResultTableViewProvider.self
         
     default:
-        fatalError("No ResultTableViewProvider defined for \(result.dynamicType).")
+        fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
     }
     
     // Return a new instance of the specific `ResultTableViewProvider`.
@@ -158,9 +158,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 enum ResultRow {
     // MARK: Cases
 
-    case Text(String, detail: String, selectable: Bool)
-    case TextImage(String, image: UIImage?)
-    case Image(UIImage?)
+    case text(String, detail: String, selectable: Bool)
+    case textImage(String, image: UIImage?)
+    case image(UIImage?)
     
     // MARK: Types
     
@@ -169,11 +169,11 @@ enum ResultRow {
         storyboard.
     */
     enum TableViewCellIdentifier: String {
-        case Default =          "Default"
-        case NoResultSet =      "NoResultSet"
-        case NoChildResults =   "NoChildResults"
-        case TextImage =        "TextImage"
-        case Image =            "Image"
+        case `default` =          "Default"
+        case noResultSet =      "NoResultSet"
+        case noChildResults =   "NoChildResults"
+        case textImage =        "TextImage"
+        case image =            "Image"
     }
     
     // MARK: Initialization
@@ -185,9 +185,9 @@ enum ResultRow {
             it's "nil". Use Optional's map method to map the value to a string
             if the detail is not `nil`.
         */
-        let detailText = detail.map { String($0) } ?? "nil"
+        let detailText = detail.map { String(describing:$0) } ?? "nil"
         
-        self = .Text(text, detail: detailText, selectable: selectable)
+        self = .text(text, detail: detailText, selectable: selectable)
     }
 }
 
@@ -198,12 +198,12 @@ enum ResultRow {
 class NoRecentResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableViewDataSource
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoResultSet.rawValue, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.noResultSet.rawValue, for: indexPath)
     }
 }
 
@@ -227,11 +227,11 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     
     // MARK: UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let resultRows = resultRowsForSection(section)
 
         // Show an empty row if there isn't any metadata in the rows for this section.
@@ -242,20 +242,20 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         return resultRows.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let resultRows = resultRowsForSection(indexPath.section)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let resultRows = resultRowsForSection((indexPath as NSIndexPath).section)
         
         // Show an empty row if there isn't any metadata in the rows for this section.
         if resultRows.isEmpty {
-            return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoChildResults.rawValue, forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.noChildResults.rawValue, for: indexPath)
         }
 
         // Fetch the `ResultRow` that corresponds to `indexPath`.
-        let resultRow = resultRows[indexPath.row]
+        let resultRow = resultRows[(indexPath as NSIndexPath).row]
         
         switch resultRow {
-            case let .Text(text, detail: detailText, selectable):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
+            case let .text(text, detail: detailText, selectable):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.default.rawValue, for: indexPath)
 
                 cell.textLabel!.text = text
                 cell.detailTextLabel!.text = detailText
@@ -264,21 +264,21 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
                     In this sample, the accessory type should be a disclosure
                     indicator if the table view cell is selectable.
                 */
-                cell.selectionStyle = selectable ? .Default : .None
-                cell.accessoryType  = selectable ? .DisclosureIndicator : .None
+                cell.selectionStyle = selectable ? .default : .none
+                cell.accessoryType  = selectable ? .disclosureIndicator : .none
             
                 return cell
 
-            case let .TextImage(text, image):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.TextImage.rawValue, forIndexPath: indexPath) as! TextImageTableViewCell
+            case let .textImage(text, image):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.textImage.rawValue, for: indexPath) as! TextImageTableViewCell
 
                 cell.leftTextLabel.text = text
                 cell.rightImageView.image = image
 
                 return cell
 
-            case let .Image(image):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Image.rawValue, forIndexPath: indexPath) as! ImageTableViewCell
+            case let .image(image):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.image.rawValue, for: indexPath) as! ImageTableViewCell
 
                 cell.fullImageView.image = image
 
@@ -288,19 +288,19 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "Result" : nil
     }
     
     // MARK: Overridable Methods
     
-    func resultRowsForSection(section: Int) -> [ResultRow] {
+    func resultRowsForSection(_ section: Int) -> [ResultRow] {
         // Default to an empty array.
         guard section == 0 else { return [] }
         
         return [
             // The class name of the result object.
-            ResultRow(text: "type", detail: result.dynamicType),
+            ResultRow(text: "type", detail: type(of: result)),
 
             /*
                 The identifier of the result, which corresponds to the task,
@@ -321,7 +321,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
 class BooleanQuestionResultTableViewProvider: ResultTableViewProvider   {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let boolResult = result as! ORKBooleanQuestionResult
         
         var boolResultDetailText: String?
@@ -339,7 +339,7 @@ class BooleanQuestionResultTableViewProvider: ResultTableViewProvider   {
 class ChoiceQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let choiceResult = result as! ORKChoiceQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -353,7 +353,7 @@ class ChoiceQuestionResultTableViewProvider: ResultTableViewProvider {
 class DateQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKDateQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -373,10 +373,10 @@ class DateQuestionResultTableViewProvider: ResultTableViewProvider {
 class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
         let location = questionResult.locationAnswer
-        let address = location?.addressDictionary["FormattedAddressLines"]?.componentsJoinedByString(" ")
+        let address = (location?.addressDictionary["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
         let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
             ResultRow(text: "latitude", detail: location?.coordinate.latitude),
@@ -392,7 +392,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
 class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKNumericQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -409,7 +409,7 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
 class ScaleQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let scaleQuestionResult = result as! ORKScaleQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -423,7 +423,7 @@ class ScaleQuestionResultTableViewProvider: ResultTableViewProvider {
 class TextQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKTextQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -437,7 +437,7 @@ class TextQuestionResultTableViewProvider: ResultTableViewProvider {
 class TimeIntervalQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKTimeIntervalQuestionResult
         
         return super.resultRowsForSection(section) + [
@@ -451,12 +451,12 @@ class TimeIntervalQuestionResultTableViewProvider: ResultTableViewProvider {
 class TimeOfDayQuestionResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKTimeOfDayQuestionResult
         
         // Format the date components received in the result.
-        let dateComponentsFormatter = NSDateComponentsFormatter()
-        let dateComponentsAnswerText = dateComponentsFormatter.stringFromDateComponents(questionResult.dateComponentsAnswer!)
+        let dateComponentsFormatter = DateComponentsFormatter()
+        let dateComponentsAnswerText = dateComponentsFormatter.string(from: questionResult.dateComponentsAnswer!)
 
         return super.resultRowsForSection(section) + [
             // String summarizing the date components the user entered.
@@ -469,7 +469,7 @@ class TimeOfDayQuestionResultTableViewProvider: ResultTableViewProvider {
 class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let signatureResult = result as! ORKConsentSignatureResult
         let signature = signatureResult.signature!
         
@@ -496,14 +496,14 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "date", detail: signature.signatureDate),
             
             // The captured image.
-            .TextImage("signature", image: signature.signatureImage)
+            .textImage("signature", image: signature.signatureImage)
         ]
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let lastRow = self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let lastRow = self.tableView(tableView, numberOfRowsInSection: (indexPath as NSIndexPath).section) - 1
         
-        if indexPath.row == lastRow {
+        if (indexPath as NSIndexPath).row == lastRow {
             return 200
         }
         
@@ -515,11 +515,11 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
 class PasscodeResultTableViewProvider: ResultTableViewProvider   {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let passcodeResult = result as! ORKPasscodeResult
         
         var passcodeResultDetailText: String?
-        passcodeResultDetailText = passcodeResult.passcodeSaved.boolValue ? "true" : "false"
+        passcodeResultDetailText = passcodeResult.isPasscodeSaved ? "true" : "false"
         
         return super.resultRowsForSection(section) + [
             ResultRow(text: "passcodeSaved", detail: passcodeResultDetailText)
@@ -531,7 +531,7 @@ class PasscodeResultTableViewProvider: ResultTableViewProvider   {
 class FileResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKFileResult
         
         let rows = super.resultRowsForSection(section) + [
@@ -542,11 +542,12 @@ class FileResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
         
-        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
-            if let data = NSData(contentsOfURL: fileURL), let image = UIImage(data: data) {
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType , contentType.hasPrefix("image/") {
+            
+            if let image = UIImage.init(contentsOfFile: fileURL.path) {
                 return rows + [
                     // The image of the generated file on disk.
-                    .Image(image)
+                    .image(image)
                 ]
             }
         }
@@ -554,12 +555,12 @@ class FileResultTableViewProvider: ResultTableViewProvider {
         return rows
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let resultRows = resultRowsForSection(indexPath.section)
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let resultRows = resultRowsForSection((indexPath as NSIndexPath).section)
         
         if !resultRows.isEmpty {
-            switch resultRows[indexPath.row] {
-            case .Image(.Some(let image)):
+            switch resultRows[(indexPath as NSIndexPath).row] {
+            case .image(.some(let image)):
                 // Keep the aspect ratio the same.
                 let imageAspectRatio = image.size.width / image.size.height
                 
@@ -578,11 +579,11 @@ class FileResultTableViewProvider: ResultTableViewProvider {
 class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -592,7 +593,7 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKSpatialSpanMemoryResult
         
         let rows = super.resultRowsForSection(section)
@@ -621,11 +622,11 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
 class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -635,7 +636,7 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKTappingIntervalResult
         
         let rows = super.resultRowsForSection(section)
@@ -657,7 +658,7 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
         return rows + questionResult.samples!.map { tappingSample in
             
             // These tap locations are relative to the rectangle defined by `stepViewSize`.
-            let buttonText = tappingSample.buttonIdentifier == .None ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
+            let buttonText = tappingSample.buttonIdentifier == .none ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
             
             let text = String(format: "%.3f", tappingSample.timestamp)
             let detail = "\(buttonText) \(tappingSample.location)"
@@ -671,11 +672,11 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
 class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -685,7 +686,7 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let toneAudiometryResult = result as! ORKToneAudiometryResult
         let rows = super.resultRowsForSection(section)
         
@@ -701,7 +702,7 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
             let text: String
             let detail: String
             
-            let channelName = toneSample.channel == .Left ? "Left" : "Right"
+            let channelName = toneSample.channel == .left ? "Left" : "Right"
             
             text = "\(toneSample.frequency) \(channelName)"
             detail = "\(toneSample.amplitude)"
@@ -715,11 +716,11 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
 class ReactionTimeViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -729,7 +730,7 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let reactionTimeResult = result as! ORKReactionTimeResult
         
         let rows = super.resultRowsForSection(section)
@@ -752,12 +753,12 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
 class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
         return towerOfHanoiResult.moves != nil ? (towerOfHanoiResult.moves!.count + 1) : 1
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -766,7 +767,7 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
     }
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
         let rows = super.resultRowsForSection(section)
         if section == 0 {
@@ -787,11 +788,11 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
 class PSATResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -801,13 +802,13 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let PSATResult = result as! ORKPSATResult
         
         var rows = super.resultRowsForSection(section)
@@ -815,11 +816,11 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
         if section == 0 {
             var presentation = ""
             let presentationMode = PSATResult.presentationMode
-            if (presentationMode == .Auditory) {
+            if (presentationMode == .auditory) {
                 presentation = "PASAT"
-            } else if (presentationMode == .Visual) {
+            } else if (presentationMode == .visual) {
                 presentation = "PVSAT"
-            } else if (presentationMode.contains(.Auditory) && presentationMode.contains(.Visual)) {
+            } else if (presentationMode.contains(.auditory) && presentationMode.contains(.visual)) {
                 presentation = "PAVSAT"
             } else {
                 presentation = "Unknown"
@@ -856,7 +857,7 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
         return rows + PSATResult.samples!.map { sample in
             let PSATSample = sample
             
-            let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
+            let text = String(format: "%@", PSATSample.isCorrect ? "correct" : "error")
             let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"
             
             return ResultRow(text: text, detail: detail)
@@ -868,23 +869,23 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
 class TimedWalkResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return super.tableView(tableView, titleForHeaderInSection: 0)
     }
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let TimedWalkResult = result as! ORKTimedWalkResult
         
         let rows = super.resultRowsForSection(section)
@@ -906,11 +907,11 @@ class TimedWalkResultTableViewProvider: ResultTableViewProvider {
 class HolePegTestResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -920,13 +921,13 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let holePegTestResult = result as! ORKHolePegTestResult
         
         var rows = super.resultRowsForSection(section)
@@ -934,9 +935,9 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
         if section == 0 {
             var side = ""
             let movingDirection = holePegTestResult.movingDirection
-            if (movingDirection == .Left) {
+            if (movingDirection == .left) {
                 side = "left > right"
-            } else if (movingDirection == .Right) {
+            } else if (movingDirection == .right) {
                 side = "right > left"
             }
             
@@ -944,7 +945,7 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
             rows.append(ResultRow(text: "direction", detail: side))
             
             // The step is for the dominant hand.
-            rows.append(ResultRow(text: "dominant hand", detail: holePegTestResult.dominantHandTested))
+            rows.append(ResultRow(text: "dominant hand", detail: holePegTestResult.isDominantHandTested))
             
             // The number of pegs to test.
             rows.append(ResultRow(text: "number of pegs", detail: holePegTestResult.numberOfPegs))
@@ -953,8 +954,8 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
             rows.append(ResultRow(text: "threshold", detail: holePegTestResult.threshold))
             
             // The hole peg test also assesses the rotation capabilities.
-            if result.identifier.rangeOfString("place") != nil {
-                rows.append(ResultRow(text: "rotated", detail: holePegTestResult.rotated))
+            if result.identifier.range(of: "place") != nil {
+                rows.append(ResultRow(text: "rotated", detail: holePegTestResult.isRotated))
             }
             
             // The number of succeeded moves (out of `numberOfPegs` possible).
@@ -988,14 +989,14 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
 class TaskResultTableViewProvider: CollectionResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let taskResult = result as! ORKTaskResult
         
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
             return rows + [
-                ResultRow(text: "taskRunUUID", detail: taskResult.taskRunUUID.UUIDString),
+                ResultRow(text: "taskRunUUID", detail: taskResult.taskRunUUID.uuidString),
                 ResultRow(text: "outputDirectory", detail: taskResult.outputDirectory)
             ]
         }
@@ -1008,11 +1009,11 @@ class TaskResultTableViewProvider: CollectionResultTableViewProvider {
 class CollectionResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
@@ -1022,13 +1023,13 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
     
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.section == 1
+    func tableView(_ tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: IndexPath) -> Bool {
+        return (indexPath as NSIndexPath).section == 1
     }
     
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let collectionResult = result as! ORKCollectionResult
         
         let rows = super.resultRowsForSection(section)
@@ -1036,7 +1037,7 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
         // Show the child results in section 1.
         if section == 1 {
             return rows + collectionResult.results!.map { childResult in
-                let childResultClassName = "\(childResult.dynamicType)"
+                let childResultClassName = "\(type(of: childResult))"
 
                 return ResultRow(text: childResultClassName, detail: childResult.identifier, selectable: true)
             }

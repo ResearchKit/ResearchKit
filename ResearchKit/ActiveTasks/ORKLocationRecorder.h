@@ -29,8 +29,9 @@
  */
 
 
+@import UIKit;
+@import CoreLocation;
 #import <ResearchKit/ORKRecorder.h>
-#import <CoreLocation/CoreLocation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

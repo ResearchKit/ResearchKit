@@ -30,7 +30,8 @@
 
 
 #import "ORKObserver.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKObserver

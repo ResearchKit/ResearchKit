@@ -31,8 +31,13 @@
 
 #import "ORKLoginStep.h"
 #import "ORKLoginStep_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKLoginStepViewController.h"
+
+#import "ORKAnswerFormat.h"
 #import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKLoginFormItemIdentifierEmail = @"ORKLoginFormItemEmail";

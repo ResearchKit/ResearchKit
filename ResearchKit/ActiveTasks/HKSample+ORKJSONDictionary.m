@@ -30,7 +30,8 @@
 
 
 #import "HKSample+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *const HKSampleIdentifierKey = @"type"; // For compatibility with Health XML export
@@ -89,7 +90,7 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     }
     
     if (options & ORKSampleIncludeSource) {
-        HKSource *source = [self source];
+        HKSource *source = [[self sourceRevision] source];
         if (source.name) {
             mutableDictionary[HKSourceKey] = source.name;
         }

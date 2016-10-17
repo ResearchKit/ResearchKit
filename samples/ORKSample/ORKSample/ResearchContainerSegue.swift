@@ -33,20 +33,20 @@ import UIKit
 class ResearchContainerSegue: UIStoryboardSegue {
     
     override func perform() {
-        let controllerToReplace = sourceViewController.childViewControllers.first
-        let destinationControllerView = destinationViewController.view
+        let controllerToReplace = source.childViewControllers.first
+        let destinationControllerView = destination.view
         
-        destinationControllerView.translatesAutoresizingMaskIntoConstraints = true
-        destinationControllerView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        destinationControllerView.frame = sourceViewController.view.bounds
+        destinationControllerView?.translatesAutoresizingMaskIntoConstraints = true
+        destinationControllerView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        destinationControllerView?.frame = source.view.bounds
         
-        controllerToReplace?.willMoveToParentViewController(nil)
-        sourceViewController.addChildViewController(destinationViewController)
+        controllerToReplace?.willMove(toParentViewController: nil)
+        source.addChildViewController(destination)
         
-        sourceViewController.view.addSubview(destinationControllerView)
+        source.view.addSubview(destinationControllerView!)
         controllerToReplace?.view.removeFromSuperview()
         
-        destinationViewController.didMoveToParentViewController(sourceViewController)
+        destination.didMove(toParentViewController: source)
         controllerToReplace?.removeFromParentViewController()
     }
 }

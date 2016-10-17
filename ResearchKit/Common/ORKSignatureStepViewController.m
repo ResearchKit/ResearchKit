@@ -28,16 +28,21 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSignatureStepViewController.h"
+
 #import "ORKSignatureView.h"
-#import "ORKTextButton_Internal.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKVerticalContainerView_Internal.h"
-#import "ORKStepHeaderView_Internal.h"
+
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKTaskViewController_Internal.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKResult_Private.h"
+#import "ORKStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKConsentSignatureWrapperView : UIView
@@ -229,7 +234,7 @@
                     *stop = YES;
                 }
             }];
-            
+
         }
     }
     return self;

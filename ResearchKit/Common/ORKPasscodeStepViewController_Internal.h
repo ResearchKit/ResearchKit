@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ORKPasscodeDelegate;
+
 static NSString *const KeychainDictionaryPasscodeKey = @"passcode";
 static NSString *const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
 static NSString *const PasscodeStepIdentifier = @"passcode_step";
@@ -54,7 +56,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeStateConfirmNewEntry
 };
 
-@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate, CAAnimationDelegate>
 
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;

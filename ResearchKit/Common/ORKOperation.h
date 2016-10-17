@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,19 +29,44 @@
  */
 
 
-#import "ORKConsentSection.h"
+#import <Foundation/Foundation.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, ORKOperationState) {
+    ORKOperationReady,
+    ORKOperationExecuting,
+    ORKOperationFinished
+};
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
 
-@interface ORKConsentSection ()
+@class ORKOperation;
 
-@property (nonatomic, readonly, nullable) NSString *escapedContent;
+typedef void (^ORKOperationBlock)(ORKOperation *operation);
 
-@property (nonatomic, readonly, nullable) UIImage *image;
+
+/**
+ A concurrent operation for collecting data for upload.
+ */
+@interface ORKOperation : NSOperation
+
+@property (nonatomic, strong) NSRecursiveLock *lock;
+@property (readwrite, nonatomic, assign) ORKOperationState state;
+@property (nonatomic, strong) NSError *error;
+
+/**
+ Block that will be called inside the lock during -start,
+ just after transitioning to RKOperationExecuting.
+ */
+@property (nonatomic, strong) ORKOperationBlock startBlock;
+
+/**
+ Finishes the operation cleanly.
+ */
+- (void)safeFinish;
+
+/**
+ Sets the error to indicate a timeout, and finishes.
+ */
+- (void)doTimeout;
 
 @end
-
-NS_ASSUME_NONNULL_END

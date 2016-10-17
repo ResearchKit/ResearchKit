@@ -29,7 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -48,7 +48,7 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
  
  A result selector object contains a result identifier and, optionally, a task identifier and a step
  identifier. If the task identifier is `nil`, the selector refers to a result in the ongoing task.
- If you set the step identifier to `nil`, its value will be the same os the result identifier.
+ If you set the step identifier to `nil`, its value will be the same as the result identifier.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultSelector : NSObject <NSSecureCoding, NSCopying>
@@ -542,6 +542,19 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
                                    minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
                                    maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate
 NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
+
+/**
+ Returns a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
+ matches the specified boolean value.
+ 
+ @param resultSelector              The result selector object which specifies the question result
+ you are interested in.
+ @param didConsent                  Whether the user consented to the `ORKConsentReviewStep`
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector
+                                            didConsent:(BOOL)didConsent;
 
 @end
 

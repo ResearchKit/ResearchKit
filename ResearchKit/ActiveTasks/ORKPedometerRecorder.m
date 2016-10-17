@@ -30,11 +30,13 @@
 
 
 #import "ORKPedometerRecorder.h"
+
 #import "ORKDataLogger.h"
-#import "CMPedometerData+ORKJSONDictionary.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "CMPedometerData+ORKJSONDictionary.h"
 
 
 @interface ORKPedometerRecorder () {

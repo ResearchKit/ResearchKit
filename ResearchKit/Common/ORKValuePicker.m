@@ -30,9 +30,11 @@
 
 
 #import "ORKValuePicker.h"
-#import "ORKResult_Private.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKChoiceAnswerFormatHelper.h"
+#import "ORKResult_Private.h"
+
 #import "ORKAccessibilityFunctions.h"
 
 

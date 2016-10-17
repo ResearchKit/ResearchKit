@@ -30,9 +30,11 @@
 
 
 #import "ORKTouchRecorder.h"
+
 #import "ORKDataLogger.h"
+
 #import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
+
 #import "UITouch+ORKJSONDictionary.h"
 
 

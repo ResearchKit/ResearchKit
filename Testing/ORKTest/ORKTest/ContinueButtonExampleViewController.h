@@ -28,8 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <UIKit/UIKit.h>
+
+@import UIKit;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ContinueButtonExampleViewController : UIViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

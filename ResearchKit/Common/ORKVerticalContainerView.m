@@ -31,8 +31,14 @@
 
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKCustomStepView_Internal.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKTintedImageView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat AssumedNavBarHeight = 44;
@@ -646,7 +652,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                                           multiplier:1.0
                                                                             constant:ORKScreenMetricMaxDimension];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
+        widthConstraint.priority = UILayoutPriorityDefaultHigh;
         [_variableConstraints addObject:widthConstraint];
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_stepView

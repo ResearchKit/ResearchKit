@@ -29,6 +29,7 @@
  */
 
 
+@import UIKit;
 #import <ResearchKit/ORKTask.h>
 
 
@@ -176,6 +177,33 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
     
     /// Task should test both hands (random order)
     ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+/**
+ The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
+ tasks in the predefined Tremor `ORKOrderedTask`.
+ 
+ By default, all predefined active tasks will be included. The tremor active task option flags can
+ be used to explicitly specify that an active task is not to be included.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
+    /// Default behavior.
+    ORKTremorActiveTaskOptionNone = 0,
+    
+    /// Exclude the hand-in-lap steps.
+    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
+    
+    /// Exclude the hand-extended-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
+    
+    /// Exclude the elbow-bent-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
+    
+    /// Exclude the elbow-bent-touch-nose steps.
+    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
+    
+    /// Exclude the queen-wave steps.
+    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
 } ORK_ENUM_AVAILABLE;
 
 
@@ -615,6 +643,30 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures hand tremor.
+ 
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       activeStepDuration:(NSTimeInterval)activeStepDuration
+                                        activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                              handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options;
 
 @end
 

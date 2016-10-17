@@ -29,20 +29,11 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import "ORKLocationRecorder.h"
-#import "ORKAccelerometerRecorder.h"
-#import "ORKDeviceMotionRecorder.h"
-#import "ORKPedometerRecorder.h"
-#import "ORKTouchRecorder.h"
-#import "ORKAudioRecorder.h"
-#import "ORKHealthQuantityTypeRecorder.h"
-#import <CoreMotion/CoreMotion.h>
-#import "ORKHelpers.h"
-#import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
+@import XCTest;
+@import ResearchKit.Private;
+
+@import CoreLocation;
+@import CoreMotion;
 
 
 @interface ORKMockLocationManager : CLLocationManager

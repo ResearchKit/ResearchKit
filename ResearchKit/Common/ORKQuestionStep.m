@@ -30,11 +30,13 @@
 
 
 #import "ORKQuestionStep.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKAnswerFormat_Private.h"
-#import "ORKStep_Private.h"
+
 #import "ORKQuestionStepViewController.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKQuestionStep

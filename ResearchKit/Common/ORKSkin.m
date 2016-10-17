@@ -30,7 +30,8 @@
 
 
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKSignatureColorKey = @"ORKSignatureColorKey";
@@ -46,6 +47,7 @@ NSString *const ORKGraphAxisTitleColorKey = @"ORKGraphAxisTitleColorKey";
 NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey";
 NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
 NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
+NSString *const ORKAuxiliaryImageTintColorKey = @"ORKAuxiliaryImageTintColorKey";
 
 @implementation UIColor (ORKColor)
 
@@ -85,7 +87,8 @@ static NSMutableDictionary *colors() {
                     ORKGraphAxisTitleColorKey: [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
                     ORKGraphReferenceLineColorKey: [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
                     ORKGraphScrubberLineColorKey: [UIColor grayColor],
-                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0]
+                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0],
+                    ORKAuxiliaryImageTintColorKey: [UIColor colorWithRed:228.0 / 255.0 green:233.0 / 255.0 blue:235.0 / 255.0 alpha:1.0],
                     } mutableCopy];
     });
     return colors;

@@ -29,9 +29,14 @@
  */
 
 
+@import UIKit;
 #import "ORKSurveyAnswerCell.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKSurveyAnswerCellForNumber : ORKSurveyAnswerCell <UITextFieldDelegate>
 
 @end
+
+NS_ASSUME_NONNULL_END
