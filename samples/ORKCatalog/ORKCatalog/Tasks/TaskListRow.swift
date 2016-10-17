@@ -1044,7 +1044,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
         
         // Build navigation rules.
-<<<<<<< HEAD
         var resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem01))
         let predicateFormItem01 = NSPredicate(choiceResultSelector:resultSelector, match: "Yes")
         
@@ -1053,16 +1052,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem03))
         let predicateFormItem03 = NSPredicate(choiceResultSelector:resultSelector, match: "No")
-=======
-        var resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem01))
-        let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
-        
-        resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem02))
-        let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
-        
-        resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem03))
-        let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "No" as NSCoding & NSCopying & NSObjectProtocol)
->>>>>>> ResearchKit/master
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
         let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing:Identifier.eligibilityEligibleStep)) ])
