@@ -41,17 +41,8 @@ public struct TimeOfDay: Comparable {
     let minute: Int
 }
 
-// We also make NSDate comparable and equatable to allow us to use it in NSPredicate
-extension NSDate: Comparable { }
-
-// MARK: Equatable
-
 public func ==(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     return ((lhs.hour == rhs.hour) && (lhs.minute == rhs.minute))
-}
-
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
 }
 
 // MARK: Comparable
@@ -60,10 +51,6 @@ public func <(lhs: TimeOfDay, rhs: TimeOfDay) -> Bool {
     let lhsTotalTime = (lhs.hour * 60) + lhs.minute
     let rhsTotalTime = (rhs.hour * 60) + rhs.minute
     return (lhsTotalTime < rhsTotalTime)
-}
-
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.compare(rhs) == .OrderedAscending
 }
 
 /**
@@ -152,7 +139,7 @@ public extension NSPredicate {
             subPredicateFormatArgumentArray.append("\(maximum)")
         }
         
-        let predicateParameters = processORKResultSubpredicates(resultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: subPredicateFormatArgumentArray, areSubPredicateFormatsSubquery: false)
+        let predicateParameters = processORKResultSubpredicates(resultSelector: resultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: subPredicateFormatArgumentArray, areSubPredicateFormatsSubquery: false)
         
         self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
     }
@@ -171,7 +158,7 @@ public extension NSPredicate {
         let subPredicateFormatArray: [String] = ["answer == %@"]
         let subPredicateFormatArgumentArray: [String] = ["\(expected)"]
         
-        let predicateParameters = processORKResultSubpredicates(resultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: subPredicateFormatArgumentArray, areSubPredicateFormatsSubquery: false)
+        let predicateParameters = processORKResultSubpredicates(resultSelector: resultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: subPredicateFormatArgumentArray, areSubPredicateFormatsSubquery: false)
         
         self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
     }
@@ -196,7 +183,7 @@ public extension NSPredicate {
             subPredicateFormatArray.append(repeatingSubPredicateFormat)
         }
         
-        let predicateParameters = processORKResultSubpredicates(choiceResultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: expected, areSubPredicateFormatsSubquery: true)
+        let predicateParameters = processORKResultSubpredicates(resultSelector: choiceResultSelector, subPredicateFormatArray: subPredicateFormatArray, subPredicateFormatArgumentArray: expected, areSubPredicateFormatsSubquery: true)
         
         self.init(format: predicateParameters.format, argumentArray: predicateParameters.formatArgumentArray)
     }

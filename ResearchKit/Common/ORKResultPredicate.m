@@ -441,7 +441,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
 }
 
-+ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector didConsent:(BOOL)didConsent {
+- (instancetype)initWithConsentWithResultSelector:(ORKResultSelector *)resultSelector didConsent:(BOOL)didConsent {
     return [self predicateMatchingResultSelector:resultSelector
                          subPredicateFormatArray:@[ @"consented == %@" ]
                  subPredicateFormatArgumentArray:@[ @(didConsent) ]];

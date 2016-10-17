@@ -1914,9 +1914,12 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         // Setup rules for skipping all the steps in either the left or right hand if called upon to do so.
         ORKResultSelector *resultSelector = [ORKResultSelector selectorWithStepIdentifier:ORKActiveTaskSkipHandStepIdentifier
                                                                          resultIdentifier:ORKActiveTaskSkipHandStepIdentifier];
-        NSPredicate *predicateRight = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:ORKActiveTaskRightHandIdentifier];
-        NSPredicate *predicateLeft = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:ORKActiveTaskLeftHandIdentifier];
         
+        NSPredicate *predicateRight = [[NSPredicate alloc] initWithChoiceQuestionResultWithResultSelector:resultSelector
+                                                                                            expectedAnswerValue:ORKActiveTaskRightHandIdentifier];
+        NSPredicate *predicateLeft = [[NSPredicate alloc] initWithChoiceQuestionResultWithResultSelector:resultSelector
+                                                                                      expectedAnswerValue:ORKActiveTaskLeftHandIdentifier];
+
         // Setup rule for skipping first hand
         NSString *secondHandIdentifier = firstIsLeft ? [[rightSteps firstObject] identifier] : [[leftSteps firstObject] identifier];
         NSPredicate *firstPredicate = firstIsLeft ? predicateLeft : predicateRight;

@@ -544,7 +544,7 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
 
 /**
- Returns a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
+ Creates a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
  matches the specified boolean value.
  
  @param resultSelector              The result selector object which specifies the question result
@@ -553,7 +553,7 @@ NS_SWIFT_UNAVAILABLE("Use the convenience initialisers from Swift");
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector
+- (instancetype)initWithConsentWithResultSelector:(ORKResultSelector *)resultSelector
                                             didConsent:(BOOL)didConsent;
 
 @end

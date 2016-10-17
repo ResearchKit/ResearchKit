@@ -589,7 +589,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                             timeLimit:300.0
                                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NavigableOrderedTaskIdentifier]) {
-        return [TaskFactory makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
+        return [TaskFactory makeNavigableOrderedTaskWithTaskIdentifier:NavigableOrderedTaskIdentifier];
     } else if ([identifier isEqualToString:NavigableLoopTaskIdentifier]) {
         return [self makeNavigableLoopTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
