@@ -46,12 +46,13 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 @implementation ORKTableStepViewController 
 
-- (ORKTableStep *)tableStep {
-    if ([self.step isKindOfClass:[ORKTableStep class]]) {
-        return (ORKTableStep *)self.step;
+- (id <ORKTableStepSource>)tableStep {
+    if ([self.step conformsToProtocol:@protocol(ORKTableStepSource)]) {
+        return (id <ORKTableStepSource>)self.step;
     }
     return nil;
 }
@@ -127,7 +128,11 @@
         _continueSkipView.optional = self.step.optional;
         
         // Register the cells for the table view
-        [self.tableStep registerCellsForTableView:_tableView];
+        if ([self.tableStep respondsToSelector:@selector(registerCellsForTableView:)]) {
+            [self.tableStep registerCellsForTableView:_tableView];
+        } else {
+            [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ORKBasicCellReuseIdentifier];
+        }
     }
 }
 
@@ -142,7 +147,11 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.tableStep.numberOfSections ?: 1;
+    if ([self.tableStep respondsToSelector:@selector(numberOfSections)]) {
+        return [self.tableStep numberOfSections] ?: 1;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -152,7 +161,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ORKThrowInvalidArgumentExceptionIfNil(self.tableStep);
     
-    NSString *reuseIdentifier = [self.tableStep reuseIdentifierForRowAtIndexPath:indexPath];
+    NSString *reuseIdentifier;
+    if ([self.tableStep respondsToSelector:@selector(reuseIdentifierForRowAtIndexPath:)]) {
+        reuseIdentifier = [self.tableStep reuseIdentifierForRowAtIndexPath:indexPath];
+    } else {
+        reuseIdentifier = ORKBasicCellReuseIdentifier;
+    }
     ORKThrowInvalidArgumentExceptionIfNil(reuseIdentifier);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
