@@ -86,6 +86,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     self.continueSkipView.skipButtonItem = skipButtonItem;
     [self updateButtonStates];
 }
+    
+- (UITableViewStyle)tableViewStyle {
+    return [self numSections] > 1 ? UITableViewStyleGrouped : UITableViewStylePlain;
+}
 
 - (void)stepDidChange {
     [super stepDidChange];
@@ -100,7 +104,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _continueSkipView = nil;
     
     if (self.step) {
-        _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
+        _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
         if ([self conformsToProtocol:@protocol(ORKTableContainerViewDelegate)]) {
             _tableContainer.delegate = (id)self;
         }
@@ -113,7 +117,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
-        _tableView.estimatedSectionHeaderHeight = 30.0;
+        _tableView.estimatedSectionHeaderHeight = [self numSections] > 1 ? 30.0 : 0.0;
         _tableView.allowsSelection = NO;
         
         _headerView = _tableContainer.stepHeaderView;
@@ -145,13 +149,17 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 #pragma mark UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+- (NSInteger)numSections {
     if ([self.tableStep respondsToSelector:@selector(numberOfSections)]) {
         return [self.tableStep numberOfSections] ?: 1;
     } else {
         return 1;
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self numSections];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
