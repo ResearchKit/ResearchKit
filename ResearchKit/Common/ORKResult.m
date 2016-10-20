@@ -1827,7 +1827,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __block ORKQuestionResult *result = nil;
     
-    [self.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    // Look through the result set in reverse-order to account for the possibility of
+    // multiple results with the same identifier (due to a navigation loop)
+    NSEnumerator *enumerator = self.results.reverseObjectEnumerator;
+    id obj = enumerator.nextObject;
+    while ((result== nil) && (obj != nil)) {
         
         if (NO == [obj isKindOfClass:[ORKResult class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expected result object to be ORKResult type: %@", obj] userInfo:nil];
@@ -1836,10 +1840,9 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         NSString *anIdentifier = [(ORKResult *)obj identifier];
         if ([anIdentifier isEqual:identifier]) {
             result = obj;
-            *stop = YES;
         }
-    
-    }];
+        obj = enumerator.nextObject;
+    }
     
     return result;
 }
