@@ -77,6 +77,11 @@ ORK_CLASS_AVAILABLE
  @return    State of continue button
  */
 - (BOOL)continueButtonEnabled;
+    
+/**
+ Update the button state for the skip and continue buttons
+ */
+- (void)updateButtonStates;
 
 @end
 
