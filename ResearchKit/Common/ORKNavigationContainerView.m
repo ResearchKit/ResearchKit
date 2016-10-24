@@ -105,8 +105,6 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-#warning TODO: Needed? syoung 10/12/2016 
-    //[self updateConstraintConstantsForWindow:newWindow];
     [self updateFootnoteLabelPreferredWidth];
 }
 
