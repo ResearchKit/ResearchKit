@@ -652,7 +652,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                                           multiplier:1.0
                                                                             constant:ORKScreenMetricMaxDimension];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
+        widthConstraint.priority = UILayoutPriorityDefaultHigh;
         [_variableConstraints addObject:widthConstraint];
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_stepView
