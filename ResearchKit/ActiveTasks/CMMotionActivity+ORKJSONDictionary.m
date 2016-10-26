@@ -30,7 +30,8 @@
 
 
 #import "CMMotionActivity+ORKJSONDictionary.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *const ActivityUnknown = @"unknown";
@@ -42,9 +43,9 @@ static NSString *const StartDateKey = @"startDate";
 static NSString *const EndDateKey = @"endDate";
 
 static NSString *stringFromActivityConfidence(CMMotionActivityConfidence confidence) {
-    NSDictionary *confidences = @{@(CMMotionActivityConfidenceHigh) : @"high",
-                                  @(CMMotionActivityConfidenceMedium) : @"medium",
-                                  @(CMMotionActivityConfidenceLow) : @"low"};
+    NSDictionary *confidences = @{@(CMMotionActivityConfidenceHigh): @"high",
+                                  @(CMMotionActivityConfidenceMedium): @"medium",
+                                  @(CMMotionActivityConfidenceLow): @"low"};
     return confidences[@(confidence)];
 }
 
@@ -74,9 +75,9 @@ static NSString *const ConfidenceKey = @"confidence";
 @implementation CMMotionActivity (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionary {
-    return @{ConfidenceKey : stringFromActivityConfidence(self.confidence),
-             ActivityKey : activityArray(self),
-             StartDateKey : ORKStringFromDateISO8601(self.startDate)};
+    return @{ConfidenceKey: stringFromActivityConfidence(self.confidence),
+             ActivityKey: activityArray(self),
+             StartDateKey: ORKStringFromDateISO8601(self.startDate)};
 }
 
 @end

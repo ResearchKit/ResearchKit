@@ -31,16 +31,19 @@
 
 
 #import "ORKConsentDocument_Internal.h"
-#import "ORKConsentSection_Internal.h"
-#import "ORKConsentSignature.h"
-#import "ORKHTMLPDFWriter.h"
-#import "ORKErrors.h"
-#import "ORKHelpers.h"
+
+#import "ORKBodyLabel.h"
 #import "ORKHeadlineLabel.h"
 #import "ORKSubheadlineLabel.h"
-#import "ORKBodyLabel.h"
+
+#import "ORKConsentSection_Private.h"
 #import "ORKConsentSectionFormatter.h"
+#import "ORKConsentSignature.h"
 #import "ORKConsentSignatureFormatter.h"
+#import "ORKHTMLPDFWriter.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKErrors.h"
 
 
 @implementation ORKConsentDocument {
@@ -86,7 +89,8 @@
 }
 
 - (void)makePDFWithCompletionHandler:(void (^)(NSData *data, NSError *error))completionBlock {
-    return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
+    [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil]
+          withCompletionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
             // condition (can only happen if they pass us really invalid content).
@@ -180,7 +184,7 @@
     } else {
         
         // title
-        [body appendFormat:@"<h3>%@</h3>", _title?:@""];
+        [body appendFormat:@"<h3>%@</h3>", _title ? : @""];
         
         // scenes
         for (ORKConsentSection *section in _sections) {
@@ -191,8 +195,8 @@
         
         if (!mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
-            [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
+            [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
             
             for (ORKConsentSignature *signature in self.signatures) {
                 [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
@@ -266,7 +270,7 @@
 }
 
 - (NSUInteger)hash {
-    return [_title hash] ^ [_sections hash];
+    return _title.hash ^ _sections.hash;
 }
 
 @end

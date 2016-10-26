@@ -30,11 +30,19 @@
 
 
 #import "ORKHolePegTestPlaceStepViewController.h"
-#import "ORKHolePegTestPlaceStep.h"
-#import "ORKHolePegTestPlaceContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKStepViewController_internal.h"
+
 #import "ORKActiveStepView.h"
+#import "ORKHolePegTestPlaceContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController.h"
+
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKNavigableOrderedTask.h"
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKHolePegTestPlaceStepViewController () <ORKHolePegTestPlaceContentViewDelegate>

@@ -30,11 +30,14 @@
 
 
 #import "ORKSurveyAnswerCellForNumber.h"
-#import "ORKSkin.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKTextFieldView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForNumber ()
@@ -55,7 +58,7 @@
 
 - (void)numberCell_initialize {
     ORKQuestionType questionType = self.step.questionType;
-    _numberFormatter = [(ORKNumericAnswerFormat *)[[self.step answerFormat] impliedAnswerFormat] makeNumberFormatter];
+    _numberFormatter = ORKDecimalNumberFormatter();
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
     
     _textFieldView = [[ORKTextFieldView alloc] init];
@@ -63,7 +66,6 @@
     
     textField.delegate = self;
     textField.allowsSelection = YES;
-    
     
     if (questionType == ORKQuestionTypeDecimal) {
         textField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -101,6 +103,9 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
+    
+    // Get a full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_containerView]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -167,7 +172,7 @@
         displayValue = [_numberFormatter stringFromNumber:answer];
     }
    
-    NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
 
     self.textField.manageUnitAndPlaceholder = YES;
     self.textField.unit = numericFormat.unit;

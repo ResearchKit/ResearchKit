@@ -29,8 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKImageCaptureStepViewController` class represents the step view controller that
@@ -44,3 +48,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKImageCaptureStepViewController : ORKStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

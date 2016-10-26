@@ -38,13 +38,13 @@
  */
 
 
-#import <UIKit/UIKit.h>
-
-@class ORKLocationSelectionView;
-@class ORKAnswerTextField;
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKAnswerTextField;
+@class ORKLocationSelectionView;
 
 @protocol ORKLocationSelectionViewDelegate <NSObject>
 

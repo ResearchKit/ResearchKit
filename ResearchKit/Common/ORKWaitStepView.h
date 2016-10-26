@@ -38,8 +38,12 @@
  */
 
 
+@import UIKit;
 #import "ORKVerticalContainerView.h"
+#import "ORKTypes.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKWaitStepView : ORKVerticalContainerView
 
@@ -48,3 +52,5 @@
 @property (nonatomic, readonly) UIProgressView *progressView;
 
 @end
+
+NS_ASSUME_NONNULL_END

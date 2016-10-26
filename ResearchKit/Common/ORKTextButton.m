@@ -119,4 +119,12 @@
     return [super intrinsicContentSize];
 }
 
+- (UIAccessibilityTraits)accessibilityTraits {
+    // prevent VoiceOver from speaking "dimmed" when transitioning between pages
+    if (self.isInTransition) {
+        return [super accessibilityTraits] & ~UIAccessibilityTraitNotEnabled;
+    }
+    return [super accessibilityTraits];
+}
+
 @end

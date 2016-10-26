@@ -1,7 +1,6 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2016, Sam Falconer.
-
+ Copyright (c) 2016, Apple Inc. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -30,47 +29,44 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import <Foundation/Foundation.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKSignatureView;
-
-@protocol ORKSignatureViewDelegate <NSObject>
-
-- (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
-
-@end
+typedef NS_ENUM(NSInteger, ORKOperationState) {
+    ORKOperationReady,
+    ORKOperationExecuting,
+    ORKOperationFinished
+};
 
 
-@interface ORKSignatureView : UIView
+@class ORKOperation;
 
-@property (nonatomic, strong, nullable) UIColor *lineColor;
-@property (nonatomic) CGFloat lineWidth;
+typedef void (^ORKOperationBlock)(ORKOperation *operation);
+
 
 /**
- lineWidthVariation defines the max amount by which the line
- width can vary (default 3pts).
-
- The exact amount of the variation is determined by the amount
- of force applied on 3D touch capable devices or by the speed
- of the stroke if 3D touch is not available.
- 
- If the user is signing with an Apple Pencil, its force will be used.
+ A concurrent operation for collecting data for upload.
  */
-@property (nonatomic) CGFloat lineWidthVariation;
+@interface ORKOperation : NSOperation
 
-@property (nonatomic, weak, nullable) id<ORKSignatureViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UIGestureRecognizer *signatureGestureRecognizer;
+@property (nonatomic, strong) NSRecursiveLock *lock;
+@property (readwrite, nonatomic, assign) ORKOperationState state;
+@property (nonatomic, strong) NSError *error;
 
-- (UIImage *)signatureImage;
+/**
+ Block that will be called inside the lock during -start,
+ just after transitioning to RKOperationExecuting.
+ */
+@property (nonatomic, strong) ORKOperationBlock startBlock;
 
-@property (nonatomic, readonly) BOOL signatureExists;
+/**
+ Finishes the operation cleanly.
+ */
+- (void)safeFinish;
 
-- (void)clear;
+/**
+ Sets the error to indicate a timeout, and finishes.
+ */
+- (void)doTimeout;
 
 @end
-
-NS_ASSUME_NONNULL_END

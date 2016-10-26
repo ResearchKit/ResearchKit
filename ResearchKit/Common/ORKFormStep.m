@@ -30,13 +30,14 @@
 
 
 #import "ORKFormStep.h"
-#import "ORKFormItem_Internal.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKStep_Private.h"
+
 #import "ORKFormStepViewController.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKFormItem_Internal.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKFormStep
@@ -102,7 +103,7 @@
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.formItems hash];
+    return super.hash ^ self.formItems.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -234,7 +235,7 @@
 
 - (NSUInteger)hash {
      // Ignore the step reference - it's not part of the content of this item
-    return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash] ^ (_optional ? 0xf : 0x0);
+    return _identifier.hash ^ _text.hash ^ _placeholder.hash ^ _answerFormat.hash ^ (_optional ? 0xf : 0x0);
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {

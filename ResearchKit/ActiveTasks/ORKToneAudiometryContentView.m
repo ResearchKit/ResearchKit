@@ -28,10 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKToneAudiometryContentView.h"
-#import "ORKSkin.h"
+
+#import "ORKRoundTappingButton.h"
 #import "ORKUnitLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
+
 
 @interface ORKToneAudiometryContentView ()
 

@@ -30,13 +30,17 @@
 
 
 #import "ORKStepViewController.h"
-#import "ORKDefines_Private.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKSkin.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKHelpers.h"
+
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
+#import "ORKResult.h"
 #import "ORKReviewStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKStepViewController () {
@@ -247,18 +251,18 @@
 }
 
 - (BOOL)hasPreviousStep {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
-        return [delegate stepViewControllerHasPreviousStep:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
+        return [strongDelegate stepViewControllerHasPreviousStep:self];
     }
     
     return NO;
 }
 
 - (BOOL)hasNextStep {
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasNextStep:)]) {
-        return [delegate stepViewControllerHasNextStep:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if (strongDelegate && [strongDelegate respondsToSelector:@selector(stepViewControllerHasNextStep:)]) {
+        return [strongDelegate stepViewControllerHasNextStep:self];
     }
     
     return NO;
@@ -268,16 +272,16 @@
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
     stepResult.startDate = self.presentedDate;
-    stepResult.endDate = self.dismissedDate? :[NSDate date];
+    stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
 }
 
 - (void)notifyDelegateOnResultChange {
     
-    STRONGTYPE(self.delegate) delegate = self.delegate;
-    if ([delegate respondsToSelector:@selector(stepViewControllerResultDidChange:)]) {
-        [delegate stepViewControllerResultDidChange:self];
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
+    if ([strongDelegate respondsToSelector:@selector(stepViewControllerResultDidChange:)]) {
+        [strongDelegate stepViewControllerResultDidChange:self];
     }
 }
 
@@ -307,14 +311,14 @@
 
 - (void)goForward {
     ORKStepViewControllerNavigationDirection direction = self.isBeingReviewed ? ORKStepViewControllerNavigationDirectionReverse : ORKStepViewControllerNavigationDirectionForward;
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:direction];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void)goBackward {
     
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionReverse];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
@@ -437,6 +441,13 @@ static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
     viewController.restorationIdentifier = identifierComponents.lastObject;
     viewController.restorationClass = self;
     return viewController;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)accessibilityPerformEscape {
+    [self goBackward];
+    return YES;
 }
 
 @end

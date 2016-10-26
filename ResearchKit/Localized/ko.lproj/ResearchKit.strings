@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "숫자만 허용됩니다.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "암호 입력 진행 과정 표시기";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%2$@개 중 %1$@개의 숫자가 입력됨";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "암호를 잊어버렸습니까?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "키체인 항목을 추가할 수 없습니다.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "아니요";
 "BOOL_YES" = "예";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "탭하여 대답하기";
 "NULL_ANSWER" = "대답 선택하기";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "나중을 위해 저장";
 "BUTTON_OPTION_DISCARD" = "결과 삭제";
 "BUTTON_OPTION_STOP_TASK" = "과제 종료";
+"BUTTON_SAVE" = "저장";
+"BUTTON_CLEAR_ANSWER" = "대답 지우기";
+"BUTTON_READ_ONLY_MODE" = "이 대답을 수정할 수 없습니다.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "실험 시작까지";
 "TASK_COMPLETE_TITLE" = "실험 완료";
 "TASK_COMPLETE_TEXT" = "데이터를 분석하여 결과가 준비되면 통보합니다.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@초 남았습니다.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "이미지 캡처";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "이 단계를 완료하려면 설정에서 이 App이 카메라에 접근할 수 있도록 허용하십시오.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "캡처한 이미지를 위한 출력 디렉토리가 지정되지 않았습니다.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "캡처한 이미지를 저장할 수 없습니다.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "녹화 시작";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "녹화 중단";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "비디오 다시 캡처";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "피트니스";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "뒤로 돌아서 시작한 지점으로 되돌아가십시오.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "일직선으로 최대 %ld보를 걸으십시오.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "일직선으로 안전하게 왔다 갔다 할 수 있는 공간을 찾으십시오. 계속 걷다가 반환점에서 마치 원뿔형 도로 표지가 있는 것처럼 주변을 돌아서 되돌아갑니다.\n\n그런 다음, 원을 그리며 돌아서서 양팔을 옆구리에 대고 발은 어깨너비만큼 벌린 채 서 있으십시오.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "시작할 준비가 되면 시작하기를 탭하십시오.\n그런 다음 전화기를 주머니나 가방에 넣고 오디오 지침을 따르십시오.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ 동안 일직선으로 왔다 갔다 걸으십시오. 평상시 걷는 것처럼 걸으면 됩니다.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "원을 그리며 돌아선 다음 %@ 동안 가만히 서 있으십시오.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "이 실험을 완료했습니다.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "탭하기 속도";
+"TAPPING_TASK_TITLE_RIGHT" = "오른손";
+"TAPPING_TASK_TITLE_LEFT" = "왼손";
 "TAPPING_INTRO_TEXT" = "이 실험은 사용자의 탭하기 속도를 측정합니다.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "전화를 평편한 바닥에 놓으십시오. 화면에 두 개의 버튼이 %@ 동안 나타납니다. 이 버튼을 같은 쪽 손의 두 손가락을 사용하여 최대한 빨리 교대로 탭하십시오.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "전화기를 평평한 표면에 두십시오.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "동일한 손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "오른손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "왼손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "이제 오른손으로 동일한 테스트를 반복하십시오.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "이제 왼손으로 동일한 테스트를 반복하십시오.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "한 손가락을 탭하고 다른 손가락을 탭하십시오. 탭 간격이 거의 없도록 연속으로 탭하십시오. %@를 계속 탭하십시오.";
 "TAPPING_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "시작하려면 다음을 탭하십시오.";
 "TAP_BUTTON_TITLE" = "탭";
 "TOTAL_TAPS_LABEL" = "탭한 총 횟수";
-"TAPPING_INSTRUCTION" = "두 손가락으로 최대한 빨리 버튼을 탭하십시오.";
-
+"TAPPING_INSTRUCTION" = "두 손가락으로 버튼을 빠르게 연속으로 탭하십시오.";
+"TAPPING_INSTRUCTION_RIGHT" = "오른손으로 버튼을 탭하십시오.";
+"TAPPING_INSTRUCTION_LEFT" = "왼손으로 버튼을 탭하십시오.";
+"TAPPING_SKIP_TITLE" = "이 손 건너뛰기";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "음성";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "이 실험은 전화 하단에 있는 마이크로 목소리를 녹음하여 사용자의 음성을 평가합니다.";
 "AUDIO_TOO_LOUD_LABEL" = "소리가 너무 큼";
 "AUDIO_GENERIC_ERROR_LABEL" = "오디오를 녹음할 수 없습니다.";
+"AUDIO_LEVEL_CHECK_LABEL" = "주변 소음 단계를 측정하는 동안 기다리십시오.";
+"AUDIO_TOO_LOUD_MESSAGE" = "음성을 녹음하기에 주변 소음이 너무 큽니다. 좀 더 조용한 장소로 이동한 다음 다시 시도하십시오.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "준비되면 다음을 탭하십시오.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "순음 청력 검사";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "두 손가락을 사용하여 페그를 집으십시오.";
 "HOLE_PEG_TEST_TEXT_2" = "손가락을 떼어서 페그를 내려놓으십시오.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "손떨림 실험";
+"TREMOR_TEST_INTRO_1_DETAIL" = "이 실험은 여러 가지 상황에서 손떨림 정도를 측정합니다. 이 실험을 위해 편안하게 앉아있을 수 있는 장소로 이동하십시오.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "아래 그림처럼 전화기를 더 자주 사용하는 손에 들고 있으십시오.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "아래 그림처럼 전화기를 오른손에 들고 있으십시오.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "아래 그림처럼 전화기를 왼손에 들고 있으십시오.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "전화를 손에 든 채로 앉아있는 동안 %@를 수행해야 합니다.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "한 건의 과제";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "두 건의 과제";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "세 건의 과제";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "네 건의 과제";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "다섯 건의 과제";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "다음을 탭하여 계속합니다.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "전화기를 무릎에 두는 동작을 준비하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "왼손으로 전화기를 쥐고 무릎에 두는 동작을 준비하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "오른손으로 전화기를 쥐고 무릎에 두는 동작을 준비하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "전화기를 %ld초 동안 무릎에 두십시오.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "이제 전화기를 어깨 높이로 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "이제 전화기를 왼손에 어깨 높이로 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "이제 전화기를 오른손에 어깨 높이로 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "%ld초 동안 손을 내민 채로 전화기를 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "이제 팔꿈치를 굽히고 전화기를 어깨 높이에 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "이제 왼쪽 팔꿈치를 굽히고 왼손으로 전화기를 어깨 높이에 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "이제 오른쪽 팔꿈치를 굽히고 오른손으로 전화기를 어깨 높이에 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "%ld초 동안 팔꿈치를 굽힌 채로 전화기를 들고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "이제 팔꿈치를 굽히고 전화기를 코에 반복적으로 대십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "이제 왼쪽 팔꿈치를 굽히고 왼손으로 전화기를 든 다음 전화기를 코에 반복적으로 대십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "이제 오른쪽 팔꿈치를 굽히고 오른손으로 전화기를 든 다음 전화기를 코에 반복적으로 대십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "전화기를 %ld초 동안 코에 대고 있으십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "반짝반짝 율동을 취할 준비를 하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "왼손으로 전화기를 들고 반짝반짝 율동을 취할 준비를 하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "오른손으로 전화기를 들고 반짝반짝 율동을 취할 준비를 하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "%ld초 동안 반짝반짝 율동을 수행하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "이제 전화기를 왼손으로 바꿔 들고 다음 과제를 진행하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "이제 전화기를 오른손으로 바꿔 들고 다음 과제를 진행하십시오.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "다음 과제를 진행합니다.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "실험이 완료되었습니다.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "전화를 한 손에 먼저 들었다가 다른 손으로 들면서 %@를 수행해야 합니다.";
+"TREMOR_SKIP_LEFT_HAND" = "저는 이 과제를 왼손으로 수행할 수 없습니다.";
+"TREMOR_SKIP_RIGHT_HAND" = "저는 이 과제를 오른손으로 수행할 수 없습니다.";
+"TREMOR_SKIP_NEITHER" = "저는 이 과제를 양손으로 수행할 수 있습니다.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "파일을 생성할 수 없습니다.";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "임계값에 이르기 위한 충분한 수의 로그 파일을 제거하는 데 실패했습니다.";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "캡처 미리보기";
 "AX_IMAGE_CAPTURED_LABEL" = "캡처된 이미지";
 
+"AX_VIDEO_CAPTURE_LABEL" = "비디오 캡처 미리보기";
+"AX_VIDEO_CAPTURED_LABEL" = "캡처된 비디오";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "크기가 %@인 디스크를 크기가 %@인 디스크 위에 놓을 수 없습니다.";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "대상";
 "AX_TOWER_OF_HANOI_TOWER" = "탑";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ 크기의 디스크가 있음";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "비어 있음";
 
-"AX_GRAPH_RANGE_FORMAT" = "%@에서 %@까지의 범위";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@에서 %@까지의 범위";
+"AX_GRAPH_STACK_PREFIX" = "다음으로 구성된 스택";
 "AX_GRAPH_AND_SEPARATOR" = " 및 ";
 "AX_GRAPH_POINT_%@" = "포인트: %@";

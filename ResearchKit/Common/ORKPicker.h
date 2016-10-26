@@ -29,8 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@class ORKAnswerFormat;
 
 @protocol ORKPicker <NSObject>
 

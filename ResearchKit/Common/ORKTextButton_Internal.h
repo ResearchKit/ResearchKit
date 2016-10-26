@@ -28,9 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTextButton.h"
 #import "ORKDefaultFont.h"
-#import "ORKDefines_Private.h"
 
 
 @interface ORKTextButton ()  <ORKDefaultFont>

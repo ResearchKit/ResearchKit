@@ -31,11 +31,19 @@
 
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStepView.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKTextFieldView.h"
+
+#import "ORKPasscodeViewController.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStep.h"
+#import "ORKResult.h"
+
 #import "ORKKeychainWrapper.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -103,7 +111,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         if ([self hasForgotPasscode]) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-            
+        
             CGFloat x = kForgotPasscodeHorizontalPadding;
             _originalForgotPasscodeY = self.view.bounds.size.height - kForgotPasscodeVerticalPadding - kForgotPasscodeHeight;
             CGFloat width = self.view.bounds.size.width - 2 * kForgotPasscodeHorizontalPadding;
@@ -262,6 +270,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
     passcodeResult.passcodeSaved = _isPasscodeSaved;
+    passcodeResult.touchIdEnabled = _isTouchIdAuthenticated;
     passcodeResult.startDate = stepResult.startDate;
     passcodeResult.endDate = now;
     
@@ -331,13 +340,13 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         [self makePasscodeViewResignFirstResponder];
         
         NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
                                 reply:^(BOOL success, NSError *error) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
-                typeof(self) strongSelf = weakSelf;
+                ORKStrongTypeOf(self) strongSelf = weakSelf;
                 
                 if (success) {
                     // Store that user passed authentication.
@@ -355,7 +364,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
-                                                                typeof(self) strongSelf = weakSelf;
+                                                                ORKStrongTypeOf(self) strongSelf = weakSelf;
                                                                 [strongSelf makePasscodeViewBecomeFirstResponder];
                                                             }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
@@ -377,16 +386,16 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [strongSelf promptTouchId];
     });
 }
 
 - (void)finishTouchId {
     // Only save to keychain if it is not in authenticate flow.
-    if (! (self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
+    if (!(self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
         [self savePasscodeToKeychain];
         
         if (self.passcodeFlow == ORKPasscodeFlowCreate) {
@@ -407,8 +416,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 + (void)savePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
     ORKThrowInvalidArgumentExceptionIfNil(passcode)
     NSDictionary *dictionary = @{
-                                 KeychainDictionaryPasscodeKey : [passcode copy],
-                                 KeychainDictionaryTouchIdKey : @(touchIdEnabled)
+                                 KeychainDictionaryPasscodeKey: [passcode copy],
+                                 KeychainDictionaryTouchIdKey: @(touchIdEnabled)
                                  };
     NSError *error;
     [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
@@ -475,9 +484,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     // Update the passcode view after the shake animation has ended.
     double delayInSeconds = 0.27;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    __weak typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        typeof(self) strongSelf = weakSelf;
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         [strongSelf updatePasscodeView];
     });
 }
@@ -626,7 +635,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         }
     } else if (_numberOfFilledBullets < passcodeTextField.numberOfDigits) {
         // Only allow numeric characters besides backspace (covered by the previous if statement).
-        if (! [[NSScanner scannerWithString:string] scanFloat:NULL]) {
+        if (![[NSScanner scannerWithString:string] scanFloat:NULL]) {
             [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE", nil)];
             return NO;
         }
@@ -654,9 +663,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         // Show the user the last digit was entered before continuing.
         double delayInSeconds = 0.25;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             
             switch (_passcodeFlow) {
                 case ORKPasscodeFlowCreate:

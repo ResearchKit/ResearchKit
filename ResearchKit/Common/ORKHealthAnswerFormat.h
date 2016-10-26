@@ -29,9 +29,8 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+@import HealthKit;
 #import <ResearchKit/ORKAnswerFormat.h>
-#import <HealthKit/HealthKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -57,6 +56,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)answerFormatWithCharacteristicType:(HKCharacteristicType *)characteristicType;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -139,6 +139,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)answerFormatWithQuantityType:(HKQuantityType *)quantityType unit:(nullable HKUnit *)unit style:(ORKNumericAnswerStyle)style;
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**

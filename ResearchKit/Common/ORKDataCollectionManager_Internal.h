@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,29 +29,23 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKSignatureView.h"
+#import "ORKDataCollectionManager.h"
+#import <CoreMotion/CoreMotion.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKDataCollectionManager ()
 
-@class ORKConsentSignatureController;
+@property (nonatomic, strong, readonly) HKHealthStore *healthStore;
 
-@protocol ORKConsentSignatureControllerDelegate <NSObject>
+@property (nonatomic, strong, readonly) CMMotionActivityManager *activityManager;
 
-- (void)consentSignatureControllerDidSign:(ORKConsentSignatureController *)consentSignatureController;
+- (void)onWorkQueueSync:(BOOL (^)(ORKDataCollectionManager *manager))block;
 
-@end
+- (void)onWorkQueueAsync:(BOOL (^)(ORKDataCollectionManager *manager))block;
 
-
-@interface ORKConsentSignatureController : UIViewController<ORKSignatureViewDelegate>
-
-@property (nonatomic, weak, nullable) id<ORKConsentSignatureControllerDelegate> delegate;
-
-@property (nonatomic, strong, readonly, nullable) ORKSignatureView *signatureView;
-
-@property (nonatomic, strong, nullable) NSString *localizedContinueButtonTitle;
+/**
+ Last collection date.
+ */
+@property (nonatomic, strong) NSDate *lastCollectionDate;
 
 @end
-
-NS_ASSUME_NONNULL_END

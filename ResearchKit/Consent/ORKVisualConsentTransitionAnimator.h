@@ -29,14 +29,14 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKVisualConsentStepViewController;
-@protocol ORKVisualConsentTransitionAnimatorDelegate;
 @class ORKVisualConsentTransitionAnimator;
+@protocol ORKVisualConsentTransitionAnimatorDelegate;
 
 typedef void (^ORKVisualConsentAnimationCompletionHandler)(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction);
 

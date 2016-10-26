@@ -29,10 +29,20 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKAnswerFormat.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+ORK_EXTERN id ORKNullAnswerValue() ORK_AVAILABLE_DECL;
+
+
+@interface ORKAnswerFormat ()
+
+- (BOOL)isAnswerValidWithString:(nullable NSString *)text;
+
+@end
+
 
 /**
  The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text
@@ -43,11 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-- (instancetype)initWithValidationRegex:(NSRegularExpression *)validationRegex
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
                          invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
 /**

@@ -29,7 +29,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKStepNavigationRule.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,7 +43,7 @@ ORK_CLASS_AVAILABLE
  
  @param audioLevelStepIdentifier   The identifier of the step with the audio file to check.
  @param destinationStepIdentifier  The identifier of the destination step if audio test passes.
- 
+ @param recordingSettings          Use key AVNumberOfChannelsKey to sepcify the number of recording channels.
  @return A audio level step navigation rule.
  */
 - (instancetype)initWithAudioLevelStepIdentifier:(NSString *)audioLevelStepIdentifier

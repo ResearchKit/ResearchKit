@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import "ORKQuestionStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

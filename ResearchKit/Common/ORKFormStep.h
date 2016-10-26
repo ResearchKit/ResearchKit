@@ -29,6 +29,7 @@
  */
 
 
+@import Foundation;
 #import <ResearchKit/ORKStep.h>
 
 
@@ -123,7 +124,7 @@ ORK_CLASS_AVAILABLE
  @param identifier    The string that identifies the form item, which should be unique within the form step.
  @param text          The text displayed as a prompt for the form item's question.
  @param answerFormat  The answer format for the form item.
- @param optional      Is this item optional?
+ @param optional      A Boolean that determines whether the item is optional
  
  @return An initialized form item.
  */

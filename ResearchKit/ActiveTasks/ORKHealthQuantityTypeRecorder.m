@@ -30,7 +30,7 @@
 
 
 #import "ORKHealthQuantityTypeRecorder.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKDataLogger.h"
 #import "ORKRecorder_Private.h"
 #import "ORKRecorder_Internal.h"
@@ -170,9 +170,9 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                          ^(HKAnchoredObjectQuery *query, NSArray *sampleObjects, NSArray *deletedObjects, HKQueryAnchor *newAnchor, NSError *error) {
                              handleResults(sampleObjects, newAnchor, 0, error);
                          }];
-    }
-    else if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:completionHandler:)]) {
-        
+    } else if ([HKAnchoredObjectQuery instancesRespondToSelector:@selector(initWithType:predicate:anchor:limit:completionHandler:)]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         anchoredQuery = [[HKAnchoredObjectQuery alloc] initWithType:_quantityType
                                                           predicate:_samplePredicate
                                                              anchor:_anchorValue
@@ -181,6 +181,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                          ^(HKAnchoredObjectQuery *query, NSArray<__kindof HKSample *> *results, NSUInteger newAnchor, NSError *error) {
                              handleResults(results, nil, newAnchor, error);
                          }];
+#pragma clang diagnostic pop
     }
     else {
         NSAssert(NO, @"Could not instantiate an HKAnchoredObjectQuery.");

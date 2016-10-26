@@ -30,9 +30,10 @@
 
 
 #import "ORKRegistrationStep.h"
-#import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
+
 #import "ORKAnswerFormat_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 NSString *const ORKRegistrationFormItemIdentifierEmail = @"ORKRegistrationFormItemEmail";
@@ -176,7 +177,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-           passcodeValidationRegex:(NSRegularExpression *)passcodeValidationRegex
+           passcodeValidationRegex:(NSString *)passcodeValidationRegex
             passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options {
     self = [super initWithIdentifier:identifier title:title text:text];
@@ -243,7 +244,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     return [super formItems];
 }
 
-- (NSRegularExpression *)passcodeValidationRegex {
+- (NSString *)passcodeValidationRegex {
     return [self passwordAnswerFormat].validationRegex;
 }
 
@@ -251,7 +252,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     return [self passwordAnswerFormat].invalidMessage;
 }
 
-- (void)setPasscodeValidationRegex:(NSRegularExpression *)passcodeValidationRegex {
+- (void)setPasscodeValidationRegex:(NSString *)passcodeValidationRegex {
     [self passwordAnswerFormat].validationRegex = passcodeValidationRegex;
 }
 

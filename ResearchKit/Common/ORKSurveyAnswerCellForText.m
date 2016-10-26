@@ -30,12 +30,15 @@
 
 
 #import "ORKSurveyAnswerCellForText.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
@@ -121,6 +124,9 @@
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
+    // Get full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_textView]];
+    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -129,7 +135,7 @@
 }
 
 - (void)textDidChange {
-    [self ork_setAnswer:(self.textView.text.length > 0)? self.textView.text : ORKNullAnswerValue()];
+    [self ork_setAnswer:(self.textView.text.length > 0) ? self.textView.text : ORKNullAnswerValue()];
 }
 
 - (BOOL)shouldContinue {
@@ -194,12 +200,14 @@
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
-    _textField.placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    _textField.placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     _textField.textAlignment = NSTextAlignmentNatural;
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;
 
-    [self.contentView addSubview:_textField];
+    [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    [self addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
     
     [self setUpConstraints];
@@ -213,14 +221,16 @@
     NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|"
-                                                                             options:(NSLayoutFormatOptions)0
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
 
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|"
-                                                                             options:(NSLayoutFormatOptions)0
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
+    // Get a full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_textField]];
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -262,6 +272,11 @@
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     
     self.textField.text = displayValue;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    NSString *text = self.textField.text;
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
 }
 
 #pragma mark - UITextFieldDelegate

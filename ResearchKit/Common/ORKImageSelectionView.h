@@ -29,7 +29,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "ORKAnswerFormat_Internal.h"
 
 

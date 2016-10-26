@@ -29,7 +29,9 @@
  */
 
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import ResearchKit.Private;
+
 #import "ORKVoiceEngine_Internal.h"
 
 
@@ -74,7 +76,7 @@
 }
 
 - (AVSpeechSynthesizer *)speechSynthesizer {
-    if (! _speechSynthesizer) {
+    if (!_speechSynthesizer) {
         _speechSynthesizer = [[ORKMockSpeechSynthesizer alloc] init];
     }
     return _speechSynthesizer;

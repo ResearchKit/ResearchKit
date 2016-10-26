@@ -120,7 +120,7 @@
 "VERIFICATION_NAV_TITLE" = "Doğrulama";
 "VERIFICATION_STEP_TITLE" = "E-postanızı doğrulayın";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Doğrulama e-postası almadıysanız ve yeniden gönderilmesini istiyorsanız, lütfen aşağıdaki bağlantıya dokunun.";
-"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulama E-postasını Yeniden Gönder";
+"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulamayı Yeniden E-postala";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Oturum Aç";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Yalnızca sayısal karakterlere izin veriliyor.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Parola giriş ilerleme göstergesi";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ / %@ basamak girildi";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Parolayı mı Unuttunuz?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Anahtar zinciri öğesi eklenemedi.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Hayır";
 "BOOL_YES" = "Evet";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "fit";
+"MEASURING_UNIT_IN" = "inç";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Yanıtlamak için dokunun";
 "NULL_ANSWER" = "Bir yanıt seçin";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Sonrası İçin Kaydet";
 "BUTTON_OPTION_DISCARD" = "Sonuçları At";
 "BUTTON_OPTION_STOP_TASK" = "Görevi Bitir";
+"BUTTON_SAVE" = "Kaydet";
+"BUTTON_CLEAR_ANSWER" = "Yanıtı sil";
+"BUTTON_READ_ONLY_MODE" = "Bu yanıt değiştirilemiyor.";
 
 /* General active tasks. */
-"COUNTDOWN_LABEL" = "Etkinlik başlatılıyor";
-"TASK_COMPLETE_TITLE" = "Etkinlik Tamamlandı";
+"COUNTDOWN_LABEL" = "Aktivite başlatılıyor";
+"TASK_COMPLETE_TITLE" = "Aktivite Tamamlandı";
 "TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunuzda size haber verilecektir.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ saniye kaldı.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Görüntü Yakala";
@@ -203,18 +213,23 @@
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Yakalanan görüntülerin kaydedileceği bir dizin belirtilmemiş.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Yakalanan görüntü kaydedilemedi.";
 
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Kaydı Başlat";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Kaydı Durdur";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Videoyu Yeniden Yakala";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Mesafe (%@)";
 "FITNESS_HEARTRATE_TITLE" = "Kalp Atış Hızı (vuruş/dk)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Rahat bir şekilde %@ oturun.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Yürüyebildiğiniz kadar hızlı %@ yürüyün.";
-"FITNESS_INTRO_TEXT_FORMAT" = "Bu etkinlik, kalp atış hızınızı izler ve %1$@ içinde ne kadar mesafe yürüyebileceğinizi ölçer.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Bu aktivite, kalp atış hızınızı izler ve %1$@ içinde ne kadar mesafe yürüyebileceğinizi ölçer.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Açık havada yürüyebildiğiniz en yüksek hızda %1$@ yürüyün. Bitirdiğinizde, oturun ve %2$@ rahat bir şekilde dinlenin. Başlamak için Başla’ya dokunun.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Yürüyüş Tarzı ve Denge";
-"WALK_INTRO_TEXT" = "Bu etkinlik, yürürken ve ayakta dururken yürüyüş tarzınızı ve dengenizi ölçer. Yardımsız, güvenli bir şekilde yürüyemiyorsanız devam etmeyin.";
+"WALK_INTRO_TEXT" = "Bu aktivite, yürürken ve ayakta dururken yürüyüş tarzınızı ve dengenizi ölçer. Yardımsız, güvenli bir şekilde yürüyemiyorsanız devam etmeyin.";
 "WALK_INTRO_2_TEXT_%ld" = "Düz bir çizgide yaklaşık %ld adım yardımsız, güvenli bir şekilde yürüyebileceğiniz bir yer bulun.";
 "WALK_INTRO_2_DETAIL" = "Telefonunuzu cebinize veya çantanıza koyun ve sesli yönergeleri izleyin.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Şimdi %@ süresince hareketsiz durun.";
@@ -222,29 +237,49 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Geriye dönün ve başladığınız yere yürüyün.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Düz bir çizgide en fazla %ld adım yürüyün.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Düz bir çizgide ileri geri güvenli bir şekilde yürüyebileceğiniz bir yer bulun. Yolunuzun sonunda geri dönüp devam ederek durmadan yürümeye çalışın.\n\nSonra tam daire etrafında dönmeniz, ardından da kollarınız yanlarda ve ayaklarınız omuz genişliğinde açık olarak hareketsiz durmanız istenecektir.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Başlamaya hazır olduğunuzda Başla’ya dokunun.\nSonra telefonunuzu cebinize veya çantanıza koyun ve sesli yönergeleri izleyin.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Düz bir çizgide ileri geri %@ yürüyün. Normal bir şekilde yürüyün.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Tam daire şeklinde dönün ve sonra %@ süresince hareketsiz durun.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Bu aktiviteyi tamamladınız.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Dokunma Hızı";
-"TAPPING_INTRO_TEXT" = "Bu etkinlik dokunma hızınızı ölçer.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Telefonunuzu düz bir yüzeye koyun. %@ süresince ekranınızda iki düğme görünecektir. Aynı elinizin iki parmağını kullanarak düğmelere dokunabildiğiniz kadar çabuk sırayla dokunun.";
+"TAPPING_TASK_TITLE_RIGHT" = "Sağ El";
+"TAPPING_TASK_TITLE_LEFT" = "Sol El";
+"TAPPING_INTRO_TEXT" = "Bu aktivite dokunma hızınızı ölçer.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Telefonunuzu düz bir yüzeye koyun.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için aynı elinizin iki parmağını kullanın.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için sağ elinizin iki parmağını kullanın.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için sol elinizin iki parmağını kullanın.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Şimdi aynı testi sağ elinizi kullanarak tekrarlayın.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Şimdi aynı testi sol elinizi kullanarak tekrarlayın.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Tek parmağınızla, sonra diğeriyle dokunun. Mümkün olduğunca eşit zaman aralıklarıyla dokunmaya çalışın. %@ süresince dokunmaya devam edin.";
 "TAPPING_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Başlamak için İleri’ye dokunun.";
 "TAP_BUTTON_TITLE" = "Dokun";
 "TOTAL_TAPS_LABEL" = "Toplam Dokunma";
-"TAPPING_INSTRUCTION" = "İki parmağınızı kullanarak düğmelere dokunabildiğiniz kadar çabuk dokunun.";
-
+"TAPPING_INSTRUCTION" = "İki parmağınızı kullanarak düğmelere dokunabildiğiniz kadar tutarlı dokunun.";
+"TAPPING_INSTRUCTION_RIGHT" = "Düğmelere SAĞ elinizi kullanarak dokunun.";
+"TAPPING_INSTRUCTION_LEFT" = "Düğmelere SOL elinizi kullanarak dokunun.";
+"TAPPING_SKIP_TITLE" = "Bu eli atla";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ses";
 "AUDIO_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "AUDIO_INSTRUCTION" = "Mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin.";
 "AUDIO_INTRO_TEXT" = "Derin bir nefes alın ve mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin. Ses çubukları mavi kalacak şekilde ses yüksekliğini sabit tutmaya çalışın.";
-"AUDIO_INTENDED_USE" = "Bu etkinlik, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
+"AUDIO_INTENDED_USE" = "Bu aktivite, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
 "AUDIO_TOO_LOUD_LABEL" = "Çok Yüksek";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ses kaydı yapılamıyor";
+"AUDIO_LEVEL_CHECK_LABEL" = "Arkaplan gürültü düzeyi denetlenirken lütfen bekleyin.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Ortam gürültü düzeyi sesinizi kaydedemeyecek kadar yüksek. Lütfen daha sessiz bir yere gidip yeniden deneyin.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Hazır olduğunuzda İleri’ye dokunun.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
-"TONE_AUDIOMETRY_INTENDED_USE" = "Bu işlem, farklı sesleri duyabilme becerinizi ölçer.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Bu aktivite, farklı sesleri duyabilme becerinizi ölçer.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "\nBaşlamadan önce kulaklığınızı bağlayın ve takın.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda düğmeye dokunun.";
@@ -254,7 +289,7 @@
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu etkinlik, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli konumsal belleğinizi ölçer.";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Bu aktivite, %@ görüntülerinin sırasını yinelemenizi isteyerek kısa süreli konumsal belleğinizi ölçer.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "çiçek";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "çiçek";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Bu %@ görüntülerinin bazıları teker teker yanacaktır. Bu %@ görüntülerine yandıkları sırada dokunun.";
@@ -277,7 +312,7 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Tepki Süresi";
-"REACTION_TIME_TASK_INTENDED_USE" = "Bu işlem, görünen bir ipucuna yanıt verebildiğiniz süreyi hesaplar.";
+"REACTION_TIME_TASK_INTENDED_USE" = "Bu aktivite, görünen bir ipucuna yanıt verebildiğiniz süreyi hesaplar.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ekranda mavi nokta görünür görünmez aygıtı herhangi bir yönde hızlıca sallayın. Bunu %D kez yapmanız istenecek.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ / %@ Girişim";
@@ -285,7 +320,7 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanoi Kulesi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu etkinlik bulmaca çözme becerilerinizi ölçer.";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu aktivite bulmaca çözme becerilerinizi ölçer.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tüm yığını, vurgulanan platforma mümkün olan en az hamlede taşıyın.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Bulmacayı Çöz";
@@ -294,7 +329,7 @@
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Süreli Yürüme";
-"TIMED_WALK_INTRO_DETAIL" = "Bu etkinlik, alt ekstremite fonksiyonlarınızı ölçer.";
+"TIMED_WALK_INTRO_DETAIL" = "Bu aktivite, alt ekstremite fonksiyonlarınızı ölçer.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Düz bir çizgide mümkün olduğunca hızlı ama güvenli bir şekilde %@ yürüyebileceğiniz bir yer (tercihen dışarıda) bulun. Bitirme çizgisini geçene dek yavaşlamayın.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Başlamak için İleri’ye dokunun.";
 "TIMED_WALK_FORM_TITLE" = "Yardımcı aygıt";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "İki parmağınızla daireyi alın.";
 "HOLE_PEG_TEST_TEXT_2" = "Daireyi bırakmak için parmakları kaldırın.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Tremor Aktivitesi";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Bu aktivite, çeşitli pozisyonlarda ellerinizdeki tremor düzeyini ölçer. Bu aktivite süresince rahat bir şekilde oturabileceğiniz bir yer bulun.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Telefonu aşağıdaki görüntüde gösterildiği gibi daha çok etkilenen elinizde tutun.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Telefonu aşağıdaki görüntüde gösterildiği gibi SAĞ elinizde tutun.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Telefonu aşağıdaki görüntüde gösterildiği gibi SOL elinizde tutun.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Telefonunuz elinizde otururken %@ gerçekleştirmeniz istenecektir.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "bir görev";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "iki görev";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "üç görev";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "dört görev";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "beş görev";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Devam etmek için İleri’ye dokunun.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Telefonunuzu kucağınızda tutmaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Telefonunuzu SOL elinizle kucağınızda tutmaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Telefonunuzu SAĞ elinizle kucağınızda tutmaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Telefonunuzu %ld saniye kucağınızda tutmaya devam edin.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Şimdi telefonunuzu eliniz uzatılmış olarak omuz yüksekliğinde tutun.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Şimdi telefonunuzu SOL eliniz uzatılmış olarak omuz yüksekliğinde tutun.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Şimdi telefonunuzu SAĞ eliniz uzatılmış olarak omuz yüksekliğinde tutun.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Telefonunuzu eliniz uzatılmış olarak %ld saniye tutmaya devam edin.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Şimdi telefonunuzu dirseğiniz kıvrık olarak omuz yüksekliğinde tutun.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Şimdi telefonunuzu dirseğiniz kıvrık olarak omuz yüksekliğinde SOL elinizle tutun.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Şimdi telefonunuzu dirseğiniz kıvrık olarak omuz yüksekliğinde SAĞ elinizle tutun.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Telefonunuzu dirseğiniz kıvrık olarak %ld saniye tutmaya devam edin";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Şimdi dirseğinizi kıvrık tutarak telefonunuzu burnunuza tekrar tekrar dokundurun.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Şimdi telefonunuz SOL elinizde olacak şekilde dirseğinizi kıvrık tutarak telefonunuzu burnunuza tekrar tekrar dokundurun.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Şimdi telefonunuz SAĞ elinizde olacak şekilde dirseğinizi kıvrık tutarak telefonunuzu burnunuza tekrar tekrar dokundurun.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Telefonunuzu burnunuza değdirmeye %ld saniye devam edin";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Bileğinizi çevirerek el sallamaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Telefonunuz SOL elinizde olacak şekilde bileğinizi çevirerek el sallamaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Telefonunuz SAĞ elinizde olacak şekilde bileğinizi çevirerek el sallamaya hazırlanın.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Bileğinizi çevirerek el sallamaya %ld saniye devam edin.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Şimdi telefonunuzu SOL elinize alıp bir sonraki göreve geçin.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Şimdi telefonunuzu SAĞ elinize alıp bir sonraki göreve geçin.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Bir sonraki göreve geçin.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivite tamamlandı.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Telefonunuz önce bir elinizde, sonra diğer elinizde otururken %@ gerçekleştirmeniz istenecektir.";
+"TREMOR_SKIP_LEFT_HAND" = "Bu aktiviteyi SOL elimle gerçekleştiremem.";
+"TREMOR_SKIP_RIGHT_HAND" = "Bu aktiviteyi SAĞ elimle gerçekleştiremem.";
+"TREMOR_SKIP_NEITHER" = "Bu aktiviteyi her iki elimle gerçekleştirebilirim.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Yakalanan görüntü önizlemesi";
 "AX_IMAGE_CAPTURED_LABEL" = "Yakalanmış görüntü";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Video yakalama önizlemesi";
+"AX_VIDEO_CAPTURED_LABEL" = "Yakalanmış video";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ büyüklüğündeki disk, %@ büyüklüğündeki diskin üzerine yerleştirilemez";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Hedef";
 "AX_TOWER_OF_HANOI_TOWER" = "Kule";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ büyüklüklerinde disk içeriyor";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Boş";
 
-"AX_GRAPH_RANGE_FORMAT" = "%@ - %@ aralığında";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@ - %@ aralığında";
+"AX_GRAPH_STACK_PREFIX" = "Yığın içeriği:";
 "AX_GRAPH_AND_SEPARATOR" = " ve ";
 "AX_GRAPH_POINT_%@" = "Nokta: %@";

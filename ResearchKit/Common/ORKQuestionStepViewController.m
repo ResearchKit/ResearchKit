@@ -30,33 +30,31 @@
 
 
 #import "ORKQuestionStepViewController.h"
-#import "ORKDefines_Private.h"
-#import "ORKResult.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKSkin.h"
-#import "ORKStepViewController_Internal.h"
 
 #import "ORKChoiceViewCell.h"
+#import "ORKQuestionStepView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKSurveyAnswerCellForScale.h"
 #import "ORKSurveyAnswerCellForNumber.h"
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKSurveyAnswerCellForImageSelection.h"
 #import "ORKSurveyAnswerCellForLocation.h"
-#import "ORKAnswerFormat.h"
-#import "ORKHelpers.h"
-#import "ORKCustomStepView.h"
-#import "ORKVerticalContainerView.h"
-#import "ORKQuestionStep_Internal.h"
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKQuestionStepViewController_Private.h"
-#import "ORKVerticalContainerView_Internal.h"
 #import "ORKTableContainerView.h"
-#import "ORKStep_Private.h"
 #import "ORKTextChoiceCellGroup.h"
-#import "ORKStepHeaderView_Internal.h"
+
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKQuestionStepView.h"
+#import "ORKQuestionStepViewController_Private.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+#import "ORKResult_Private.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
@@ -344,7 +342,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     _visible = YES;
     
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem);
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -427,9 +425,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
             if (dateQuestionResult.dateAnswer) {
-                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? : _savedSystemCalendar;
+                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar] ? : _savedSystemCalendar;
                 dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier ? : [NSCalendar currentCalendar].calendarIdentifier];
-                dateQuestionResult.timeZone = _savedSystemTimeZone? : [NSTimeZone systemTimeZone];
+                dateQuestionResult.timeZone = _savedSystemTimeZone ? : [NSTimeZone systemTimeZone];
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
@@ -565,14 +563,15 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         typeAndCellMapping = @{@(ORKQuestionTypeScale): [ORKSurveyAnswerCellForScale class],
-                               @(ORKQuestionTypeDecimal) : [ORKSurveyAnswerCellForNumber class],
-                               @(ORKQuestionTypeText) : [ORKSurveyAnswerCellForText class],
-                               @(ORKQuestionTypeTimeOfDay) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeDate) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
-                               @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
+                               @(ORKQuestionTypeDecimal): [ORKSurveyAnswerCellForNumber class],
+                               @(ORKQuestionTypeText): [ORKSurveyAnswerCellForText class],
+                               @(ORKQuestionTypeTimeOfDay): [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeDate): [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeDateAndTime): [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeTimeInterval): [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeHeight) : [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeInteger): [ORKSurveyAnswerCellForNumber class],
+                               @(ORKQuestionTypeLocation): [ORKSurveyAnswerCellForLocation class]};
     });
     
     // SingleSelectionPicker Cell && Other Cells

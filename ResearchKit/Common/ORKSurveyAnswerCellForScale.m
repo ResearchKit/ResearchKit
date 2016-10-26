@@ -30,11 +30,14 @@
 
 
 #import "ORKSurveyAnswerCellForScale.h"
+
 #import "ORKScaleSlider.h"
-#import "ORKSkin.h"
-#import "ORKQuestionStep_Internal.h"
-#import "ORKAnswerFormat_Internal.h"
 #import "ORKScaleSliderView.h"
+
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionStep_Internal.h"
+
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForScale () <ORKScaleSliderViewDelegate>
@@ -74,6 +77,10 @@
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                                      metrics:nil
                                                                        views:views]];
+        
+        // Get a full width layout
+        NSLayoutConstraint *widthConstraint = [self.class fullWidthLayoutConstraint:_sliderView];
+        [self addConstraints:@[widthConstraint]];
     }
     
     [self answerDidChange];

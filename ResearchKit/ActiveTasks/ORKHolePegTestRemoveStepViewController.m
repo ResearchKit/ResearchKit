@@ -30,11 +30,18 @@
 
 
 #import "ORKHolePegTestRemoveStepViewController.h"
-#import "ORKHolePegTestRemoveStep.h"
-#import "ORKHolePegTestRemoveContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKStepViewController_internal.h"
+
 #import "ORKActiveStepView.h"
+#import "ORKHolePegTestRemoveContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController.h"
+
+#import "ORKHolePegTestRemoveStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKResult.h"
 
 
 @interface ORKHolePegTestRemoveStepViewController () <ORKHolePegTestRemoveContentViewDelegate>

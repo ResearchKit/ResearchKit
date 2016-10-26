@@ -29,8 +29,11 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKDefines_Private.h"
+@import UIKit;
+#import "ORKDefines.h"
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKProgressView : UIView
@@ -38,3 +41,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSInteger count;
 
 @end
+
+NS_ASSUME_NONNULL_END

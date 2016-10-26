@@ -29,8 +29,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKInstructionStepViewController.h"
+@import UIKit;
 #import "ORKVerticalContainerView.h"
 
 
@@ -43,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) ORKInstructionStep *instructionStep;
 
 @property (nonatomic, strong, nullable) UIImageView *instructionImageView;
+
+@property (nonatomic, strong, nullable) UIImageView *auxiliaryInstructionImageView;
 
 @end
 

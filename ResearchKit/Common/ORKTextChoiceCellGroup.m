@@ -30,8 +30,14 @@
 
 
 #import "ORKTextChoiceCellGroup.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+
+#import "ORKSelectionTitleLabel.h"
+#import "ORKSelectionSubTitleLabel.h"
+
+#import "ORKChoiceViewCell.h"
+
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKChoiceAnswerFormatHelper.h"
 
 
 @implementation ORKTextChoiceCellGroup {
@@ -126,7 +132,7 @@
     if ([self containsIndexPath:indexPath]== NO) {
         return;
     }
-    return [self didSelectCellAtIndex:indexPath.row-_beginningIndexPath.row];
+    [self didSelectCellAtIndex:indexPath.row - _beginningIndexPath.row];
 }
 
 - (BOOL)containsIndexPath:(NSIndexPath *)indexPath {
@@ -170,7 +176,7 @@
     // Boolean type uses a different format
     if ([_answer isKindOfClass:[NSArray class]] ) {
         NSArray *answerArray = _answer;
-        return (answerArray.count > 0)? answerArray.firstObject : nil;
+        return (answerArray.count > 0) ? answerArray.firstObject : nil;
     }
     return _answer;
 }

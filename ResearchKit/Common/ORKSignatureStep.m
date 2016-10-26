@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,26 +29,31 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import "ORKSignatureStep.h"
+
+#import "ORKSignatureStepViewController.h"
+
+#import "ORKHelpers_Internal.h"
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+@implementation ORKSignatureStep
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        // Set default values for the title and text
+        self.title = ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil);
+        self.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
+    }
+    return self;
+}
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
++ (Class)stepViewControllerClass {
+    return [ORKSignatureStepViewController class];
+}
 
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
-
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+@end

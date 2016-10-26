@@ -29,12 +29,15 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKAnswerFormat_Internal.h"
+@import Foundation;
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKAnswerFormat;
+@class ORKImageChoice;
+@class ORKTextChoice;
+@protocol ORKAnswerOption;
 
 @interface ORKChoiceAnswerFormatHelper : NSObject
 

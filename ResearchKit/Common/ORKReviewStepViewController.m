@@ -31,17 +31,27 @@
 
 #import "ORKReviewStepViewController.h"
 #import "ORKReviewStepViewController_Internal.h"
-#import "ORKReviewStep.h"
-#import "ORKReviewStep_Internal.h"
-#import "ORKStep_Private.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKSkin.h"
-#import "ORKTableContainerView.h"
-#import "ORKStepHeaderView_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
+
 #import "ORKChoiceViewCell.h"
+#import "ORKNavigationContainerView_Internal.h"
+#import "ORKSelectionTitleLabel.h"
+#import "ORKSelectionSubTitleLabel.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKTableContainerView.h"
+
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKFormStep.h"
+#import "ORKInstructionStep.h"
+#import "ORKQuestionStep.h"
+#import "ORKReviewStep_Internal.h"
+#import "ORKResult_Private.h"
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -61,9 +71,9 @@
     if (self && [self reviewStep]) {
         NSArray<ORKStep *> *stepsToFilter = [self reviewStep].isStandalone ? [self reviewStep].steps : steps;
         NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
-        __weak typeof(self) weakSelf = self;
+        ORKWeakTypeOf(self) weakSelf = self;
         [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongTypeOf(self) strongSelf = weakSelf;
             BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || (![[strongSelf reviewStep] excludeInstructionSteps] && [obj isKindOfClass:[ORKInstructionStep class]]);
             if (includeStep) {
                 [filteredSteps addObject:obj];
@@ -82,7 +92,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem);
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {

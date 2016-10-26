@@ -29,9 +29,11 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKDefines_Private.h"
+@import UIKit;
+#import "ORKDefines.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Start/End image of the range in scale slider.
@@ -40,3 +42,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKScaleRangeImageView : UIImageView
 
 @end
+
+NS_ASSUME_NONNULL_END

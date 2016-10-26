@@ -29,8 +29,10 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKTaskViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTaskViewController (ORKActiveTaskSupport)
 
@@ -61,3 +63,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

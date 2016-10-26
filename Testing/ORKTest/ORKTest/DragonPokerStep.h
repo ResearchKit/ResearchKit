@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ResearchKit.h>
+
+@import Foundation;
+@import ResearchKit;
 
 /// Example implementation of an override of the class method -instantiateStepViewControllerWithResult:
 /// In this example, only show the cancel button on Tuesdays

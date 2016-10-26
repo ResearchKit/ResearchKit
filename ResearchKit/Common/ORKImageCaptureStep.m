@@ -30,9 +30,12 @@
 
 
 #import "ORKImageCaptureStep.h"
-#import "ORKHelpers.h"
-#import "ORKStep_Private.h"
+
 #import "ORKImageCaptureStepViewController.h"
+
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @implementation ORKImageCaptureStep
