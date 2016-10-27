@@ -1065,9 +1065,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             // Get the step result associated with this step
             ORKStepResult *result = nil;
-            result = _managedResults[step.identifier];
-            if (!result ) {
-                result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            ORKStepResult *previousResult = _managedResults[step.identifier];
+            
+            // Check the default source first
+            BOOL alwaysCheckForDefaultResult = ([self.defaultResultSource respondsToSelector:@selector(alwaysCheckForDefaultResult)] &&
+                                                [self.defaultResultSource alwaysCheckForDefaultResult]);
+            if ((previousResult == nil) || alwaysCheckForDefaultResult) {
+                result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
+            }
+            
+            // If nil, assign to the previous result
+            if (!result) {
+                result = previousResult;
             }
             
             if (!result) {
