@@ -54,6 +54,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) BOOL shouldShowContinueButton;
 
+/**
+ Optional property to set the color of the checkmark. This allows the checkmark to use a different
+ color from the tintColor of the parent view.
+ */
+@property (nonatomic, copy, nullable) UIColor *checkmarkColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

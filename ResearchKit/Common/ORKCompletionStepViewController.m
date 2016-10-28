@@ -146,6 +146,9 @@ static const CGFloat TickViewSize = 122;
     [super stepDidChange];
     
     _completionStepView = [ORKCompletionStepView new];
+    if (self.checkmarkColor) {
+        _completionStepView.tintColor = self.checkmarkColor;
+    }
     
     UIView *viewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TickViewSize, TickViewSize)];
     [viewContainer addSubview:_completionStepView];
@@ -205,20 +208,23 @@ static const CGFloat TickViewSize = 122;
     _completionStepView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
+- (void)setCheckmarkColor:(UIColor *)checkmarkColor {
+    _checkmarkColor = [checkmarkColor copy];
+    _completionStepView.tintColor = checkmarkColor;
+}
+
 - (void)setShouldShowContinueButton:(BOOL)shouldShowContinueButton {
     _shouldShowContinueButton = shouldShowContinueButton;
     
     // Update button states
     [self setContinueButtonItem:self.continueButtonItem];
-    if (shouldShowContinueButton) {
-        [self updateNavRightBarButtonItem];
-    }
+    [self updateNavRightBarButtonItem];
 }
 
 // Override top right bar button item
 - (void)updateNavRightBarButtonItem {
     if (self.shouldShowContinueButton) {
-        [super updateNavRightBarButtonItem];
+        self.navigationItem.rightBarButtonItem = nil;
     }
     else {
         self.navigationItem.rightBarButtonItem = self.continueButtonItem;
@@ -229,8 +235,8 @@ static const CGFloat TickViewSize = 122;
     [super setContinueButtonItem:continueButtonItem];
     if (!self.shouldShowContinueButton) {
         self.stepView.continueSkipContainer.continueButtonItem = nil;
-        [self updateNavRightBarButtonItem];
     }
+    [self updateNavRightBarButtonItem];
 }
 
 @end
