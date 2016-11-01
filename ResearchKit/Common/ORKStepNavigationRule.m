@@ -455,6 +455,10 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 @implementation ORKStepModifier
 
+- (instancetype)init {
+    return [super init];
+}
+
 - (void)modifyStep:(ORKStep *)step withTaskResult:(ORKTaskResult *)taskResult {
     @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
 }
@@ -489,6 +493,14 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 
 @implementation ORKKeyValueStepModifier
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate
                            keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap {
