@@ -494,6 +494,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                            keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap {
     ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
     ORKThrowInvalidArgumentExceptionIfNil(keyValueMap);
+    self = [super init];
     if (self) {
         _resultPredicate = resultPredicate;
         _keyValueMap = keyValueMap;
