@@ -194,7 +194,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
         NSPredicate *predicate = _resultPredicates[i];
         // The predicate can either have:
         // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
-        // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+        // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
         if ([predicate evaluateWithObject:allTaskResults
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
             destinationStepIdentifier = _destinationStepIdentifiers[i];
@@ -403,7 +403,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     
     // The predicate can either have:
     // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
-    // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+    // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
     BOOL predicateDidMatch = [_resultPredicate evaluateWithObject:allTaskResults
                                            substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
     return predicateDidMatch;
@@ -494,6 +494,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                            keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap {
     ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
     ORKThrowInvalidArgumentExceptionIfNil(keyValueMap);
+    self = [super init];
     if (self) {
         _resultPredicate = resultPredicate;
         _keyValueMap = keyValueMap;
@@ -505,7 +506,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     
     // The predicate can either have:
     // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
-    // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+    // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
     BOOL predicateDidMatch = [_resultPredicate evaluateWithObject:@[taskResult]
                                             substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
     if (predicateDidMatch) {
