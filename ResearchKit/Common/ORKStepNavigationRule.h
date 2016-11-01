@@ -333,6 +333,9 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKStepModifier: NSObject <NSCopying, NSSecureCoding>
 
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 /**
  Modify the steps for a task.
  
@@ -353,6 +356,15 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKKeyValueStepModifier: ORKStepModifier
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  The result predicate to match.
