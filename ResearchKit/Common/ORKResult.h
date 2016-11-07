@@ -277,7 +277,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) double flexed;
 
-
 /**
  The degrees when extended.
   */

@@ -1030,9 +1030,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
-                                       limbOption:(ORKPredefinedTaskLimbOption)limbOption
-                            intendedUseDescription:(NSString *)intendedUseDescription
-                                           options:(ORKPredefinedTaskOption)options {
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
     NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
     UIImage *kneeFlexedImage = [UIImage imageNamed:@"knee_flexed_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1088,7 +1088,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKStepArrayAddStep(steps, kneeRangeOfMotionStep);
 
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *completionStep = [self makeCompletionStep];
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, completionStep);
     }
     
@@ -1097,9 +1097,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
-                                        limbOption:(ORKPredefinedTaskLimbOption)limbOption
-                            intendedUseDescription:(NSString *)intendedUseDescription
-                                           options:(ORKPredefinedTaskOption)options {
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options {
     NSMutableArray *steps = [NSMutableArray array];
     NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
     UIImage *shoulderFlexedImage = [UIImage imageNamed:@"shoulder_flexed_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -1154,7 +1154,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKStepArrayAddStep(steps, shoulderRangeOfMotionStep);
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *completionStep = [self makeCompletionStep];
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, completionStep);
     }
     

@@ -331,15 +331,15 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                                options:(ORKPredefinedTaskOption)options;
 
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
-                                        limbOption:(ORKPredefinedTaskLimbOption)limbOption
-                                intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                               options:(ORKPredefinedTaskOption)options;
-
-
-+ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                  intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                 options:(ORKPredefinedTaskOption)options;
+
+
++ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options;
 /**
  Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
