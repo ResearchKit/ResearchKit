@@ -41,7 +41,7 @@
 @implementation ORKDataCollectionTests {
     XCTestExpectation *_completionExpectation;
     XCTestExpectation *_healthCollectionExpectation;
-    XCTestExpectation *_corrolationCollectionExpectation;
+    XCTestExpectation *_correlationCollectionExpectation;
     HKHealthStore *_healthStore;
     BOOL _acceptDelivery;
     NSInteger _errorCount;
@@ -86,11 +86,11 @@
     return storePath;
 }
 
-static ORKDataCollectionManager *createManagerWithCollecters (NSURL *url,
-                                                              ORKMotionActivityCollector **motionCollector,
-                                                              ORKHealthCollector **healthCollector,
-                                                              ORKHealthCorrelationCollector **healthCorrelationCollector,
-                                                              NSError **error) {
+static ORKDataCollectionManager *createManagerWithCollectors(NSURL *url,
+                                                             ORKMotionActivityCollector **motionCollector,
+                                                             ORKHealthCollector **healthCollector,
+                                                             ORKHealthCorrelationCollector **healthCorrelationCollector,
+                                                             NSError **error) {
     
     ORKDataCollectionManager *manager = [[ORKDataCollectionManager alloc] initWithPersistenceDirectoryURL:url];
     
@@ -168,7 +168,7 @@ static ORKDataCollectionManager *createManagerWithCollecters (NSURL *url,
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     NSError *error;
     // Create
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -267,7 +267,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -282,7 +282,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 #if TARGET_OS_SIMULATOR
     if ([self insertSampleDataWithType:SampleDataTypeALL]) {
         _healthCollectionExpectation = [self expectationWithDescription:@"Expectation for health sample collection completion"];
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
     }
 #endif
     
@@ -313,7 +313,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     if ([self insertSampleDataWithType:SampleDataTypeBP]) {
         // Health Collector was removed
         _healthCollectionExpectation = nil;
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
     }
 #endif
     
@@ -331,7 +331,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -359,7 +359,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 #if TARGET_OS_SIMULATOR
     if ([self insertSampleDataWithType:SampleDataTypeALL]) {
         _healthCollectionExpectation = [self expectationWithDescription:@"Expectation for health sample collection completion"];
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
     }
 #endif
     
@@ -367,7 +367,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -398,7 +398,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
             didCollectCorrelations:(NSArray<HKCorrelation *> *)correlations {
     
     XCTAssertEqual(correlations.count, 1);
-    [_corrolationCollectionExpectation fulfill];
+    [_correlationCollectionExpectation fulfill];
     NSLog(@"Did collect correlation samples");
     return _acceptDelivery;
 }
