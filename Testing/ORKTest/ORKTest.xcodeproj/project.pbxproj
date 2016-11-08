@@ -30,10 +30,10 @@
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
 		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
 		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */; };
 		FFF010721D21F1EA0054B430 /* ContinueButtonExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */; };
 		FFF010731D21F1EA0054B430 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF010711D21F1EA0054B430 /* FooterView.m */; };
 		FFF010751D21F2030054B430 /* ContinueButtonExample.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */; };
-		FF5CA60E1D272CF4001660A3 /* DragonPokerStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,14 +132,13 @@
 		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
 		BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
 		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonPokerStep.h; sourceTree = "<group>"; };
+		FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonPokerStep.m; sourceTree = "<group>"; };
 		FFF0106E1D21F1EA0054B430 /* ContinueButtonExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueButtonExampleViewController.h; sourceTree = "<group>"; };
 		FFF0106F1D21F1EA0054B430 /* ContinueButtonExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueButtonExampleViewController.m; sourceTree = "<group>"; };
 		FFF010701D21F1EA0054B430 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		FFF010711D21F1EA0054B430 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		FFF010741D21F2030054B430 /* ContinueButtonExample.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ContinueButtonExample.storyboard; path = "ORKTest/Supporting Files/ContinueButtonExample.storyboard"; sourceTree = SOURCE_ROOT; };
-		FF5CA60C1D272CF4001660A3 /* DragonPokerStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonPokerStep.h; sourceTree = "<group>"; };
-		FF5CA60D1D272CF4001660A3 /* DragonPokerStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonPokerStep.m; sourceTree = "<group>"; };
-		BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,7 +325,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ResearchKit;
 				TargetAttributes = {
 					86717A891AC0C0FE00AC2A23 = {
@@ -551,8 +550,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -589,8 +590,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -606,6 +609,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
