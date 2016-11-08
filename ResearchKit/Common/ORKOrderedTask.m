@@ -1932,7 +1932,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                   options:(ORKPredefinedTaskOption)options {
     
-    NSMutableArray *steps = [NSMutableArray array];
+    NSMutableArray<__kindof ORKStep *> *steps = [NSMutableArray array];
     // coin toss for which hand first (in case we're doing both)
     BOOL leftFirstIfDoingBoth = arc4random_uniform(2) == 1;
     BOOL doingBoth = ((handOptions & ORKPredefinedTaskHandOptionLeft) && (handOptions & ORKPredefinedTaskHandOptionRight));
@@ -1996,7 +1996,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     // right or most-affected hand
-    NSArray *rightSteps = nil;
+    NSArray<__kindof ORKStep *> *rightSteps = nil;
     if (handOptions == ORKPredefinedTaskHandOptionUnspecified) {
         rightSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
                                                     activeStepDuration:activeStepDuration
@@ -2018,7 +2018,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     // left hand
-    NSArray *leftSteps = nil;
+    NSArray<__kindof ORKStep *> *leftSteps = nil;
     if (handOptions & ORKPredefinedTaskHandOptionLeft) {
         leftSteps = [self stepsForOneHandTremorTestTaskWithIdentifier:identifier
                                                    activeStepDuration:activeStepDuration
