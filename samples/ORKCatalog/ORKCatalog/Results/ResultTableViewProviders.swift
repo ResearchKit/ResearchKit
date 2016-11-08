@@ -120,6 +120,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKReactionTimeResult:
         providerType = ReactionTimeViewProvider.self
         
+    case is ORKRangeOfMotionResult:
+        providerType = RangeOfMotionResultTableViewProvider.self
+
     case is ORKTowerOfHanoiResult:
         providerType = TowerOfHanoiResultTableViewProvider.self
         
@@ -745,6 +748,26 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
         
         return rows + [
             ResultRow(text: "File Result", detail: fileResultDetail)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKRangeOfMotionResult` instance.
+class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rangeOfMotionResult = result as! ORKRangeOfMotionResult
+        let rows = super.resultRowsForSection(section)
+        return rows + [
+            ResultRow(text: "flexed", detail: rangeOfMotionResult.flexed),
+            ResultRow(text: "extended", detail: rangeOfMotionResult.extended)
         ]
     }
 }

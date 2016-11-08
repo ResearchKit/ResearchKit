@@ -34,6 +34,7 @@
 
 #import "ORKAudioStepViewController.h"
 #import "ORKCountdownStepViewController.h"
+#import "ORKTouchAnywhereStepViewController.h"
 #import "ORKFitnessStepViewController.h"
 #import "ORKToneAudiometryStepViewController.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
@@ -47,6 +48,7 @@
 #import "ORKAudioStep.h"
 #import "ORKCompletionStep.h"
 #import "ORKCountdownStep.h"
+#import "ORKTouchAnywhereStep.h"
 #import "ORKFitnessStep.h"
 #import "ORKFormStep.h"
 #import "ORKNavigableOrderedTask.h"
@@ -61,6 +63,8 @@
 #import "ORKToneAudiometryPracticeStep.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKVisualConsentStep.h"
+#import "ORKRangeOfMotionStep.h"
+#import "ORKShoulderRangeOfMotionStep.h"
 #import "ORKWaitStep.h"
 #import "ORKWalkingTaskStep.h"
 #import "ORKResultPredicate.h"
@@ -310,6 +314,7 @@ NSString *const ORKCountdown2StepIdentifier = @"countdown2";
 NSString *const ORKCountdown3StepIdentifier = @"countdown3";
 NSString *const ORKCountdown4StepIdentifier = @"countdown4";
 NSString *const ORKCountdown5StepIdentifier = @"countdown5";
+NSString *const ORKTouchAnywhereStepIdentifier = @"touch.anywhere";
 NSString *const ORKAudioStepIdentifier = @"audio";
 NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
 NSString *const ORKTappingStepIdentifier = @"tapping";
@@ -319,6 +324,8 @@ NSString *const ORKActiveTaskSkipHandStepIdentifier = @"skipHand";
 NSString *const ORKConclusionStepIdentifier = @"conclusion";
 NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
 NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
+NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
+NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.motion";
 NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
 NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
 NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
@@ -1016,6 +1023,139 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKInstructionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    return task;
+}
+
++ (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options {
+    NSMutableArray *steps = [NSMutableArray array];
+    NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
+    UIImage *kneeFlexedImage = [UIImage imageNamed:@"knee_flexed_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+    UIImage *kneeExtendedImage = [UIImage imageNamed:@"knee_extended_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+
+    if (limbOption == ORKPredefinedTaskLimbOptionLeft) {
+        limbType = ORKLocalizedString(@"LIMB_LEFT", nil);
+    
+        kneeFlexedImage = [UIImage imageNamed:@"knee_flexed_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        kneeExtendedImage = [UIImage imageNamed:@"knee_extended_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+        instructionStep0.title = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep0.text = intendedUseDescription;
+        instructionStep0.detailText = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@", nil), limbType];
+        instructionStep0.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep0);
+ 
+        ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+        instructionStep1.title = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep1.detailText = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@", nil), limbType];
+        ORKStepArrayAddStep(steps, instructionStep1);
+        
+        ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
+        instructionStep2.title = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep2.detailText = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@", nil), limbType];
+        instructionStep2.image = kneeFlexedImage;
+        instructionStep2.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep2);
+        
+        ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
+        instructionStep3.title = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep3.detailText = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@", nil), limbType];
+        instructionStep3.image = kneeExtendedImage;
+        instructionStep3.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep3);
+    }
+
+    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:[NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@", nil), limbType]];
+    ORKStepArrayAddStep(steps, touchAnywhereStep);
+    
+    ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
+    
+    ORKRangeOfMotionStep *kneeRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:ORKKneeRangeOfMotionStepIdentifier limbOption:limbOption];
+    kneeRangeOfMotionStep.title = [NSString stringWithFormat:ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@", nil), limbType];
+    kneeRangeOfMotionStep.spokenInstruction = kneeRangeOfMotionStep.title;
+
+    kneeRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
+    kneeRangeOfMotionStep.optional = NO;
+
+    ORKStepArrayAddStep(steps, kneeRangeOfMotionStep);
+
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    return task;
+}
+
++ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options {
+    NSMutableArray *steps = [NSMutableArray array];
+    NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
+    UIImage *shoulderFlexedImage = [UIImage imageNamed:@"shoulder_flexed_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+    UIImage *shoulderExtendedImage = [UIImage imageNamed:@"shoulder_extended_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+
+    if (limbOption == ORKPredefinedTaskLimbOptionLeft) {
+        limbType = ORKLocalizedString(@"LIMB_LEFT", nil);
+        shoulderFlexedImage = [UIImage imageNamed:@"shoulder_flexed_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        shoulderExtendedImage = [UIImage imageNamed:@"shoulder_extended_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+        instructionStep0.title = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep0.text = intendedUseDescription;
+        instructionStep0.detailText = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@", nil), limbType];
+        instructionStep0.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep0);
+        
+        ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+        instructionStep1.title = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep1.detailText = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@", nil), limbType];
+        ORKStepArrayAddStep(steps, instructionStep1);
+        
+        ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
+        instructionStep2.title = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep2.detailText = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@", nil), limbType];
+        instructionStep2.image = shoulderFlexedImage;
+        instructionStep2.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep2);
+        
+        ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
+        instructionStep3.title = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_%@", nil), [limbType capitalizedString]];
+        instructionStep3.detailText = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@", nil), limbType];
+        instructionStep3.image = shoulderExtendedImage;
+        instructionStep3.shouldTintImages = YES;
+        ORKStepArrayAddStep(steps, instructionStep3);
+    }
+    
+    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:[NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@", nil), limbType]];
+    ORKStepArrayAddStep(steps, touchAnywhereStep);
+    
+    ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
+    
+    ORKShoulderRangeOfMotionStep *shoulderRangeOfMotionStep = [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:ORKShoulderRangeOfMotionStepIdentifier limbOption:limbOption];
+    shoulderRangeOfMotionStep.title = [NSString stringWithFormat:ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@", nil), limbType];
+    shoulderRangeOfMotionStep.spokenInstruction = shoulderRangeOfMotionStep.title;
+    
+    shoulderRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
+    shoulderRangeOfMotionStep.optional = NO;
+    
+    ORKStepArrayAddStep(steps, shoulderRangeOfMotionStep);
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];

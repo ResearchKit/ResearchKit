@@ -97,6 +97,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     case twoFingerTappingInterval
     case walkBackAndForth
     case heightQuestion
+    case kneeRangeOfMotion
+    case shoulderRangeOfMotion
     
     class TaskListRowSection {
         var title: String
@@ -157,7 +159,9 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .towerOfHanoi,
                     .tremorTest,
                     .twoFingerTappingInterval,
-                    .walkBackAndForth
+                    .walkBackAndForth,
+                    .kneeRangeOfMotion,
+                    .shoulderRangeOfMotion,
                 ]),
         ]}
     
@@ -275,6 +279,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
+        
+        case .kneeRangeOfMotion:
+            return NSLocalizedString("Knee Range of Motion", comment: "")
+            
+        case .shoulderRangeOfMotion:
+            return NSLocalizedString("Shoulder Range of Motion", comment: "")
         }
     }
     
@@ -431,6 +441,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case tremorTestTask
         case twoFingerTappingIntervalTask
         case walkBackAndForthTask
+        case kneeRangeOfMotion
+        case shoulderRangeOfMotion
     }
     
     // MARK: Properties
@@ -547,6 +559,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return tremorTestTask
+        
+        case .kneeRangeOfMotion:
+            return kneeRangeOfMotion
+        
+        case .shoulderRangeOfMotion:
+            return shoulderRangeOfMotion
         }
     }
 
@@ -1277,6 +1295,16 @@ enum TaskListRow: Int, CustomStringConvertible {
                                                            activeTaskOptions: [],
                                                            handOptions: [.both],
                                                            options: [])
+    }
+    
+    /// This task presents a knee range of motion task
+    private var kneeRangeOfMotion: ORKTask {
+        return ORKOrderedTask.kneeRangeOfMotionTask(withIdentifier: String(describing: Identifier.kneeRangeOfMotion), limbOption: .right, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a shoulder range of motion task
+    private var shoulderRangeOfMotion: ORKTask {
+        return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
     }
 
     // MARK: Consent Document Creation Convenience
