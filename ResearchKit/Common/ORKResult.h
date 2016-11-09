@@ -263,6 +263,27 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+/**
+ The `ORKRangeOfMotionResult` class records the results of a range of motion active task.
+ 
+ An `ORKRangeOfMotionResult` object records the flexion and extension values in degrees.
+ */
+
+ORK_CLASS_AVAILABLE
+@interface ORKRangeOfMotionResult : ORKResult
+
+/**
+ The degrees when bent.
+ */
+@property (nonatomic, assign) double flexed;
+
+/**
+ The degrees when extended.
+  */
+@property (nonatomic, assign) double extended;
+
+@end
+
 
 /**
  The `ORKTowerOfHanoiResult` class records the results of a Tower of Hanoi active task.
