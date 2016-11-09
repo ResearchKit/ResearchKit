@@ -49,6 +49,7 @@
 #import "ORKVideoCaptureStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
+#import "ORKTouchAnywhereStep.h"
 
 #import "ORKTask.h"
 #import "ORKOrderedTask.h"
@@ -76,6 +77,7 @@
 #import "ORKTaskViewController.h"
 #import "ORKVerificationStepViewController.h"
 #import "ORKWaitStepViewController.h"
+#import "ORKTouchAnywhereStepViewController.h"
 
 #import "ORKRecorder.h"
 
