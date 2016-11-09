@@ -135,8 +135,7 @@ Float32 const VolumeClamp = 60.0;
     return self.destinationStepIdentifier;
 }
 
-- (BOOL)checkAudioLevelFromSoundFile:(NSURL *)fileURL
-{
+- (BOOL)checkAudioLevelFromSoundFile:(NSURL *)fileURL {
     // Setup reader
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
     if (urlAsset.tracks.count == 0) {

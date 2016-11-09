@@ -200,6 +200,13 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}];
     return location;
 }));
+ORK_MAKE_TEST_INIT(HKObjectType, (^{
+    if (self.class == [HKQuantityType class]) {
+        return (HKObjectType *)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
+    } else {
+        return (HKObjectType *)[HKObjectType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
+    }
+}))
 
                                                 
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
@@ -301,6 +308,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     return [classesWithSecureCoding copy];
 }
 
+// JSON Serialization
 - (void)testORKSerialization {
     
     // Find all classes that are serializable this way
@@ -312,7 +320,11 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     NSArray *classesExcludedForORKESerialization = @[
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
-                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation 
+                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
+                                                     [ORKCollector class], // ORKCollector doesn't support JSON serialzation
+                                                     [ORKHealthCollector class],
+                                                     [ORKHealthCorrelationCollector class],
+                                                     [ORKMotionActivityCollector class]
                                                      ];
     
     if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {
@@ -364,6 +376,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
+                                              @"ORKVideoCaptureStep.templateImage",
                                               @"ORKStep.requestedPermissions",
                                               @"ORKOrderedTask.providesBackgroundAudioPrompts",
                                               @"ORKScaleAnswerFormat.numberFormatter",
@@ -459,7 +472,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
             [instance setValue:@"blah" forKey:@"value"];
         } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
             [instance setValue:[NSURL URLWithString:@"http://www.apple.com/"] forKey:@"customAnimationURL"];
-        } else if ([aClass isSubclassOfClass:[ORKImageCaptureStep class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKImageCaptureStep class]] || [aClass isSubclassOfClass:[ORKVideoCaptureStep class]]) {
             [instance setValue:[NSValue valueWithUIEdgeInsets:(UIEdgeInsets){1,1,1,1}] forKey:@"templateImageInsets"];
         } else if ([aClass isSubclassOfClass:[ORKTimeIntervalAnswerFormat class]]) {
             [instance setValue:@(1) forKey:@"step"];
@@ -556,7 +569,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     return YES;
 }
 
-- (void)testORKSecureCoding {
+- (void)testSecureCoding {
     
     NSArray<Class> *classesWithSecureCoding = [self classesWithSecureCoding];
     
@@ -570,6 +583,9 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                        @"requestedHealthKitTypesForWriting",
                                        @"healthKitUnit",
                                        @"firstResult",
+                                       @"correlationType",
+                                       @"sampleType",
+                                       @"unit"
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -593,6 +609,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
+                                              @"ORKVideoCaptureStep.templateImage",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
@@ -633,7 +650,11 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         unarchiver.requiresSecureCoding = YES;
         unarchiver.delegate = self;
-        id newInstance = [unarchiver decodeObjectOfClasses:[NSSet setWithArray:classesWithSecureCoding] forKey:NSKeyedArchiveRootObjectKey];
+        NSMutableSet<Class> *decodingClasses = [NSMutableSet setWithArray:classesWithSecureCoding];
+        [decodingClasses addObject:[NSDate class]];
+        [decodingClasses addObject:[HKQueryAnchor class]];
+        
+        id newInstance = [unarchiver decodeObjectOfClasses:decodingClasses forKey:NSKeyedArchiveRootObjectKey];
         
         // Set of classes we can check for equality. Would like to get rid of this once we implement
         NSSet *checkableClasses = [NSSet setWithObjects:[NSNumber class], [NSString class], [NSDictionary class], [NSURL class], nil];
@@ -674,7 +695,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         NSKeyedUnarchiver *unarchiver2 = [[NSKeyedUnarchiver alloc] initForReadingWithData:data2];
         unarchiver2.requiresSecureCoding = YES;
         unarchiver2.delegate = self;
-        id newInstance2 = [unarchiver2 decodeObjectOfClasses:[NSSet setWithArray:classesWithSecureCoding] forKey:NSKeyedArchiveRootObjectKey];
+        id newInstance2 = [unarchiver2 decodeObjectOfClasses:decodingClasses forKey:NSKeyedArchiveRootObjectKey];
         NSData *data3 = [NSKeyedArchiver archivedDataWithRootObject:newInstance2];
         
         if (![data isEqualToData:data2]) { // allow breakpointing
@@ -707,7 +728,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
          ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
          ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
          (c == [ORKLocation class]) ||
-         (c == [ORKResultSelector class]))
+         (c == [ORKResultSelector class]) ||
+         [c isSubclassOfClass:[HKObjectType class]])
     {
         return [[c alloc] orktest_init];
     }

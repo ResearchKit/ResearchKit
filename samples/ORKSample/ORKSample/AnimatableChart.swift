@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import ResearchKit
 
 protocol AnimatableChart {
-    func animateWithDuration(animationDuration: NSTimeInterval)
+    func animateWithDuration(_ animationDuration: TimeInterval)
 }
 
 extension ORKPieChartView: AnimatableChart {}

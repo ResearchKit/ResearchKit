@@ -249,6 +249,11 @@
     
     NSInteger index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
     
+    if ( _tappingContentView.lastTappedButton == index ) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"TAP_BUTTON_TITLE", nil));
+    }
+    _tappingContentView.lastTappedButton = index;
+    
     [self receiveTouch:[[event touchesForView:button] anyObject] onButton:index];
 }
 

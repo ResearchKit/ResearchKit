@@ -77,6 +77,10 @@
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                                      metrics:nil
                                                                        views:views]];
+        
+        // Get a full width layout
+        NSLayoutConstraint *widthConstraint = [self.class fullWidthLayoutConstraint:_sliderView];
+        [self addConstraints:@[widthConstraint]];
     }
     
     [self answerDidChange];

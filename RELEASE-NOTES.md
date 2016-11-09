@@ -1,5 +1,73 @@
 # ResearchKit Release Notes
 
+## ResearchKit 1.4 Release Notes
+
+*ResearchKit 1.4* supports *iOS* and requires *Xcode 8.0* or newer. The minimum supported *Base SDK* is *8.0*.
+
+In addition to general stabiltiy and performance improvements, *ResearchKit 1.4* includes the following new features and enhancements.
+
+- **New Active Task**
+
+ - **Hand Tremor Task**
+
+    *Contributed by [Shannon Young](https://github.com/syoung-smallwisdom).*
+
+    The *Hand Tremor Task* asks the participant to hold the device with their most affected hand in various positions while accelerometer and motion data is captured.
+
+ - **Walk Back and Forth Task**
+
+    *Contributed by [Shannon Young](https://github.com/syoung-smallwisdom).*
+
+    The *Walk Back and Forth Task* addresses the concern of researchers/participants who have difficulty locating an unobstructed path for 20 steps.
+
+    Instructs users to walk and turn in a full circle, allowing the tests to be conducted in a smaller space.
+
+- **New Steps**
+
+ - **Video Capture Step**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *Video Capture Step* provides a step to be used to record video.
+
+    The step can be used as part of a survey to capture video respones as well.
+
+ - **Review Step**
+    
+    *Contributed by [Oliver Schäfer](https://github.com/oliverschaefer).*
+
+    The *Review Step* allows a participant to review and modify their answers to a survey.
+
+    The step can be used in the middle of a survey, at the end of a survey, or a standalone module.
+
+ - **Signature Step**
+
+    *Contributed by [Oliver Schäfer](https://github.com/oliverschaefer).*
+
+    The *Signature Step* provides an interface for a participant to sign their name.
+
+    The step can be used for handwriting detection or simply to sign a document.
+
+ - **Table Step**
+
+    *Contributed by [Shannon Young](https://github.com/syoung-smallwisdom).*
+
+    The *Table Step* provides a way to neatly display data in a table.
+
+- **Other Improvements**
+ 
+ - **Data Collection Module**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *Data Collection Module* makes it even easier to aggregate data from HealthKit and device sensors.
+
+ - **Tapping Test**
+
+    *Contributed by [Michał Zaborowski](https://github.com/m1entus).*
+
+    The *Tapping Test* is updated to include tap duration as part of the result.
+
 
 ## ResearchKit 1.3 Release Notes
 

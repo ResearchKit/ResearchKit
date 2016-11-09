@@ -36,9 +36,9 @@ class ProfileViewController: UITableViewController, HealthClientType {
     // MARK: Properties
 
     let healthObjectTypes = [
-        HKObjectType.characteristicTypeForIdentifier(HKCharacteristicTypeIdentifierDateOfBirth)!,
-        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeight)!,
-        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBodyMass)!
+        HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!,
+        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!,
+        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
     ]
     
     var healthStore: HKHealthStore?
@@ -58,36 +58,36 @@ class ProfileViewController: UITableViewController, HealthClientType {
 
         // Request authrization to query the health objects that need to be shown.
         let typesToRequest = Set<HKObjectType>(healthObjectTypes)
-        healthStore.requestAuthorizationToShareTypes(nil, readTypes: typesToRequest) { authorized, error in
+        healthStore.requestAuthorization(toShare: nil, read: typesToRequest) { authorized, error in
             guard authorized else { return }
             
             // Reload the table view cells on the main thread.
-            NSOperationQueue.mainQueue().addOperationWithBlock() {
-                let allRowIndexPaths = self.healthObjectTypes.enumerate().map { NSIndexPath(forRow: $0.index, inSection: 0) }
-                self.tableView.reloadRowsAtIndexPaths(allRowIndexPaths, withRowAnimation: .Automatic)
+            OperationQueue.main.addOperation() {
+                let allRowIndexPaths = self.healthObjectTypes.enumerated().map { (index, element) in return IndexPath(row: index, section: 0) }
+                self.tableView.reloadRows(at: allRowIndexPaths, with: .automatic)
             }
         }
     }
     
     // MARK: UITableViewDataSource
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return healthObjectTypes.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier(ProfileStaticTableViewCell.reuseIdentifier, forIndexPath: indexPath) as? ProfileStaticTableViewCell else { fatalError("Unable to dequeue a ProfileStaticTableViewCell") }
-        let objectType = healthObjectTypes[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileStaticTableViewCell.reuseIdentifier, for: indexPath) as? ProfileStaticTableViewCell else { fatalError("Unable to dequeue a ProfileStaticTableViewCell") }
+        let objectType = healthObjectTypes[(indexPath as NSIndexPath).row]
         
         switch(objectType.identifier) {
-            case HKCharacteristicTypeIdentifierDateOfBirth:
+            case HKCharacteristicTypeIdentifier.dateOfBirth.rawValue:
                 configureCellWithDateOfBirth(cell)
             
-            case HKQuantityTypeIdentifierHeight:
+            case HKQuantityTypeIdentifier.height.rawValue:
                 let title = NSLocalizedString("Height", comment: "")
                 configureCell(cell, withTitleText: title, valueForQuantityTypeIdentifier: objectType.identifier)
                 
-            case HKQuantityTypeIdentifierBodyMass:
+            case HKQuantityTypeIdentifier.bodyMass.rawValue:
                 let title = NSLocalizedString("Weight", comment: "")
                 configureCell(cell, withTitleText: title, valueForQuantityTypeIdentifier: objectType.identifier)
             
@@ -98,13 +98,13 @@ class ProfileViewController: UITableViewController, HealthClientType {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: Cell configuration
     
-    func configureCellWithDateOfBirth(cell: ProfileStaticTableViewCell) {
+    func configureCellWithDateOfBirth(_ cell: ProfileStaticTableViewCell) {
         // Set the default cell content.
         cell.titleLabel.text = NSLocalizedString("Date of Birth", comment: "")
         cell.valueLabel.text = NSLocalizedString("-", comment: "")
@@ -114,9 +114,9 @@ class ProfileViewController: UITableViewController, HealthClientType {
 
         do {
             let dateOfBirth = try healthStore.dateOfBirth()
-            let now = NSDate()
+            let now = Date()
 
-            let ageComponents = NSCalendar.currentCalendar().components(.Year, fromDate: dateOfBirth, toDate: now, options: .WrapComponents)
+            let ageComponents = Calendar.current.dateComponents([.year], from: dateOfBirth, to: now)
             let age = ageComponents.year
 
             cell.valueLabel.text = "\(age)"
@@ -125,7 +125,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
         }
     }
     
-    func configureCell(cell: ProfileStaticTableViewCell, withTitleText titleText: String, valueForQuantityTypeIdentifier identifier: String) {
+    func configureCell(_ cell: ProfileStaticTableViewCell, withTitleText titleText: String, valueForQuantityTypeIdentifier identifier: String) {
         // Set the default cell content.
         cell.titleLabel.text = titleText
         cell.valueLabel.text = NSLocalizedString("-", comment: "")
@@ -134,16 +134,16 @@ class ProfileViewController: UITableViewController, HealthClientType {
             Check a health store has been set and a `HKQuantityType` can be
             created with the identifier provided.
         */
-        guard let healthStore = healthStore, quantityType = HKQuantityType.quantityTypeForIdentifier(identifier) else { return }
+        guard let healthStore = healthStore, let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: identifier)) else { return }
         
         // Get the most recent entry from the health store.
-        healthStore.mostRecentQuantitySampleOfType(quantityType) { quantity, _ in
+        healthStore.mostRecentQauntitySampleOfType(quantityType) { quantity, _ in
             guard let quantity = quantity else { return }
             
             // Update the cell on the main thread.
-            NSOperationQueue.mainQueue().addOperationWithBlock() {
+            OperationQueue.main.addOperation() {
                 guard let indexPath = self.indexPathForObjectTypeIdentifier(identifier) else { return }
-                guard let cell = self.tableView.cellForRowAtIndexPath(indexPath) as? ProfileStaticTableViewCell else { return }
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileStaticTableViewCell else { return }
                 
                 cell.valueLabel.text = "\(quantity)"
             }
@@ -152,9 +152,9 @@ class ProfileViewController: UITableViewController, HealthClientType {
     
     // MARK: Convenience
     
-    func indexPathForObjectTypeIdentifier(identifier: String) -> NSIndexPath? {
-        for (index, objectType) in healthObjectTypes.enumerate() where objectType.identifier == identifier {
-            return NSIndexPath(forRow: index, inSection: 0)
+    func indexPathForObjectTypeIdentifier(_ identifier: String) -> IndexPath? {
+        for (index, objectType) in healthObjectTypes.enumerated() where objectType.identifier == identifier {
+            return IndexPath(row: index, section: 0)
         }
         
         return nil

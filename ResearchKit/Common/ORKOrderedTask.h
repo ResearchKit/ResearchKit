@@ -206,6 +206,23 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
     ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
 } ORK_ENUM_AVAILABLE;
 
+/**
+ Values that identify the left or right limb to be used in an active task.
+*/
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
+    /// Which limb to use is undefined
+    ORKPredefinedTaskLimbOptionUnspecified = 0,
+    
+    /// Task should test the left limb
+    ORKPredefinedTaskLimbOptionLeft = 1 << 1,
+    
+    /// Task should test the right limb
+    ORKPredefinedTaskLimbOptionRight = 1 << 2,
+    
+    /// Task should test the both limbs (random order)
+    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
+} ORK_ENUM_AVAILABLE;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -313,8 +330,16 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
                                           restDuration:(NSTimeInterval)restDuration
                                                options:(ORKPredefinedTaskOption)options;
 
++ (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options;
 
 
++ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options;
 /**
  Returns a predefined task that enables an audio recording WITH a check of the audio level.
  

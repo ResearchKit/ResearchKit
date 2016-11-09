@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-func randomColorArray(number: Int) -> [UIColor] {
+func randomColorArray(_ number: Int) -> [UIColor] {
         
         func random() -> CGFloat {
             return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
@@ -48,15 +48,15 @@ let NumberOfPieChartSegments = 13
 
 class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
-    func numberOfSegmentsInPieChartView(pieChartView: ORKPieChartView ) -> Int {
+    func numberOfSegments(in pieChartView: ORKPieChartView ) -> Int {
         return NumberOfPieChartSegments
     }
     
-    func pieChartView(pieChartView: ORKPieChartView, valueForSegmentAtIndex index: Int) -> CGFloat {
+    func pieChartView(_ pieChartView: ORKPieChartView, valueForSegmentAt index: Int) -> CGFloat {
         return CGFloat(index + 1)
     }
     
-    func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
+    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
         return "Title \(index + 1)"
     }
 }
@@ -67,7 +67,7 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
         return randomColorArray(NumberOfPieChartSegments)
         }()
 
-    func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
+    func pieChartView(_ pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
         return backingStore[index]
     }
 }
@@ -75,31 +75,32 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
 class BaseFloatRangeGraphChartDataSource:  NSObject, ORKValueRangeGraphChartViewDataSource {
     var plotPoints: [[ORKValueRange]] = [[]]
     
-    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    internal func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
+    func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
 }
 
 class BaseFloatStackGraphChartDataSource:  NSObject, ORKValueStackGraphChartViewDataSource {
+    
     var plotPoints: [[ORKValueStack]] = [[]]
     
-    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    public func numberOfPlots(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueStack {
+    func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueStack {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
 }
@@ -142,43 +143,43 @@ class LineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
         ]
     }
     
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
+    func maximumValueForGraphChartView(_ graphChartView: ORKGraphChartView) -> Double {
         return 70
     }
     
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
+    func minimumValueForGraphChartView(_ graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     
-    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfDivisionsInXAxisForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 10
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+    func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return (pointIndex % 2 == 0) ? nil : "\(pointIndex + 1)"
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
+    func graphChartView(_ graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
         return (pointIndex % 2 == 1) ? false : true
     }
 
-    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func scrubbingPlotIndexForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 2
     }
 }
 
 class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
-    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+    func graphChartView(_ graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
         let color: UIColor
         switch plotIndex {
         case 0:
-            color = UIColor.cyanColor()
+            color = UIColor.cyan
         case 1:
-            color = UIColor.magentaColor()
+            color = UIColor.magenta
         case 2:
-            color = UIColor.yellowColor()
+            color = UIColor.yellow
         default:
-            color = UIColor.redColor()
+            color = UIColor.red
         }
         return color
     }
@@ -187,13 +188,13 @@ class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
         let color: UIColor
         switch plotIndex {
         case 0:
-            color = UIColor.blueColor().colorWithAlphaComponent(0.6)
+            color = UIColor.blue.withAlphaComponent(0.6)
         case 1:
-            color = UIColor.redColor().colorWithAlphaComponent(0.6)
+            color = UIColor.red.withAlphaComponent(0.6)
         case 2:
-            color = UIColor.greenColor().colorWithAlphaComponent(0.6)
+            color = UIColor.green.withAlphaComponent(0.6)
         default:
-            color = UIColor.cyanColor().colorWithAlphaComponent(0.6)
+            color = UIColor.cyan.withAlphaComponent(0.6)
         }
         return color
     }
@@ -232,15 +233,15 @@ class DiscreteGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
         ]
     }
     
-    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfDivisionsInXAxisForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 8
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
+    func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
 
-    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func scrubbingPlotIndexForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 2
     }
 }
@@ -250,13 +251,13 @@ class ColoredDiscreteGraphChartDataSource: DiscreteGraphChartDataSource {
         let color: UIColor
         switch plotIndex {
         case 0:
-            color = UIColor.cyanColor()
+            color = UIColor.cyan
         case 1:
-            color = UIColor.magentaColor()
+            color = UIColor.magenta
         case 2:
-            color = UIColor.yellowColor()
+            color = UIColor.yellow
         default:
-            color = UIColor.redColor()
+            color = UIColor.red
         }
         return color
     }
@@ -304,25 +305,30 @@ class BarGraphChartDataSource: BaseFloatStackGraphChartDataSource {
         return "\(pointIndex + 1)"
     }
     
-    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func scrubbingPlotIndexForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 2
     }
 }
 
 class ColoredBarGraphChartDataSource: BarGraphChartDataSource {
+    
     func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
         let color: UIColor
         switch plotIndex {
         case 0:
-            color = UIColor.cyanColor()
+            color = UIColor.cyan
         case 1:
-            color = UIColor.magentaColor()
+            color = UIColor.magenta
         case 2:
-            color = UIColor.yellowColor()
+            color = UIColor.yellow
         default:
-            color = UIColor.redColor()
+            color = UIColor.red
         }
         return color
+    }
+    
+    override func scrubbingPlotIndexForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
+        return 1
     }
 }
 
@@ -433,27 +439,27 @@ class PerformanceLineGraphChartDataSource: BaseFloatRangeGraphChartDataSource {
         ]
     }
     
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
+    func maximumValueForGraphChartView(_ graphChartView: ORKGraphChartView) -> Double {
         return 70
     }
     
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> Double {
+    func minimumValueForGraphChartView(_ graphChartView: ORKGraphChartView) -> Double {
         return 0
     }
     
-    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfDivisionsInXAxisForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 10
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+    func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return (pointIndex % 2 == 0) ? nil : "\(pointIndex + 1)"
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
+    func graphChartView(_ graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
         return (pointIndex % 2 == 1) ? false : true
     }
     
-    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func scrubbingPlotIndexForGraphChartView(_ graphChartView: ORKGraphChartView) -> Int {
         return 2
     }
 }
