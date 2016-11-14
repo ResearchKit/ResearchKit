@@ -2266,7 +2266,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Choose Yes to pass this question, or No to Fail it"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2288,7 +2287,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_02"
                                                                       title:@"This is a single-choice question."
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2310,7 +2308,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_03"
                                                                       title:@"Choose the animals"
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2332,7 +2329,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_04"
                                                                       title:@"Choose any word containing the word 'Cat'"
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2354,7 +2350,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_05"
                                                                       title:@"Write the word 'Dog'"
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2376,7 +2371,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_06"
                                                                       title:@"Write a word matching '*og'"
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2398,7 +2392,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_07"
                                                                       title:@"Enter a number over 10"
                                                                      answer:answer];
-        step.optional = YES;
         [steps addObject:step];
     }
     
