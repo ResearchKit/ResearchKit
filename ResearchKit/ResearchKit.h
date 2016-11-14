@@ -59,6 +59,7 @@
 #import "ORKAnswerFormat.h"
 #import "ORKHealthAnswerFormat.h"
 
+#import "ORKHL7CDA.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
 

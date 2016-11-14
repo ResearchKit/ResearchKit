@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKConsentSignatureResult;
 @class ORKStepResult;
 @class ORKToneAudiometrySample;
+@class ORKHL7CDATextFragment;
 
 
 /**
@@ -123,6 +124,15 @@ ORK_CLASS_AVAILABLE
  generally correspond to the end of the instantaneous data collection period. 
  */
 @property (nonatomic, copy) NSDate *endDate;
+
+/**
+ Takes the ORKResult value and produces a default HL7CCDTextFragment, which is used if the application
+ has not set a delegate to produce the results. This function ensures that all results are reported
+ back in a way which is human-readable for printing or for import to an EHR.
+ 
+ By default the result objects should be placed in the Results section of the CCD.
+ */
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step;
 
 /**
  Metadata that describes the conditions under which the result was acquired.
@@ -1368,6 +1378,56 @@ ORK_CLASS_AVAILABLE
  The bezier path components used to create the signature image.
  */
 @property (nonatomic, copy, nullable) NSArray <UIBezierPath *> *signaturePath;
+
+@end
+
+/**
+ The `ORKHL7CDAFragmentResult` class represents a fragment of a HL7CDA document returned by a step.
+ 
+ HL7CDAFragmentResults can be produced by task steps and ultimately merged by the task controller to
+ produce an HL7CDA which can be shared with the patient or EHRs.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHL7CDAFragmentResult : ORKResult
+
+/** The type of section within the CDA */
+@property (nonatomic) NSInteger sectionType;
+
+@end
+
+
+/**
+ The `ORKHL7CDATextFragmentResult` class represents a fragment of a HL7CDD document returned by a step,
+ to be inserted as readable text in the CDA. This forms the printable and human-readable component of
+ the record.
+ 
+ This fragment must comply with the HL7 CDA specification, and includes all text and tags that will go
+ within a <text> tag in the CDD document. The section type must be specified for it to be included, but
+ allows you to use tables and other tags to structure your report.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHL7CDATextFragmentResult : ORKHL7CDAFragmentResult
+
+/** A fragment of  */
+@property (nonatomic, copy, nullable) NSString *xmlFragment;
+
+@end
+
+
+/**
+ The `ORKHL7CDASNOMEDFragmentResult` class represents a fragment of a HL7CDA document returned by a step,
+ to be inserted as SNOMED codes within the CDA. This forms the portion of queryable clinical coding data
+ within the record. It is strongly recommended that all HL7 CDA records are coded as comprehensively and
+ accurately as possible as this will allow for the best retrieval and interoperability between your
+ ResearchKit application's output and electronic record systems.
+ 
+ This is a placeholder for future developments to support SNOMED encoding within HL7CDA
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKHL7CDASNOMEDFragmentResult : ORKHL7CDAFragmentResult
+
+/** A fragment of  */
+@property (nonatomic, copy, nullable) NSString *xmlFragment;
 
 @end
 

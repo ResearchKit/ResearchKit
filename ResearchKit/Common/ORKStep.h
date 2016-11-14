@@ -41,6 +41,8 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 @class ORKResult;
 
 @protocol ORKTask;
+@protocol ORKStepHL7CDATextDelegate;
+
 
 /**
  `ORKStep` is the base class for the steps that can compose a task for presentation
@@ -156,6 +158,11 @@ ORK_CLASS_AVAILABLE
  upon within the ResearchKit framework.
  */
 @property (nonatomic, weak, nullable) id<ORKTask> task;
+
+/**
+ The delegate for handling hl7CDA for the step. This allows the step to configure the output that will be sent to our CDA document.
+ */
+@property (nonatomic, weak, nullable) id hl7CDATextDelegate;
 
 /**
  The set of access permissions required for the step. (read-only)
