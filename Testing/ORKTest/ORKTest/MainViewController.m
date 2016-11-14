@@ -342,7 +342,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Mini Form",
                            @"Optional Form",
                            @"Selection Survey",
-                           @"Predicate Tests",
                            ],
                        @[ // Active Tasks
                            @"Active Step Task",
@@ -375,6 +374,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
                            @"Navigable Loop Task",
+                           @"Predicate Tests",
                            @"Test Charts",
                            @"Test Charts Performance",
                            @"Toggle Tint Color",
@@ -2266,7 +2266,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Choose Yes to pass this question, or No to Fail it"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2284,11 +2284,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     // Test expected Single Choice
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Choose Yes",@"Choose No", nil]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Choose Yes", @"Choose No", nil]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_02"
                                                                       title:@"This is a single-choice question."
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2306,11 +2306,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     //  Test expected multiple choices
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[NSArray arrayWithObjects:@"Cat",@"Dog", @"Rock", nil]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Dog", @"Rock", nil]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_03"
-                                                                      title:@"Choose the animals?"
+                                                                      title:@"Choose the animals"
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2328,23 +2328,23 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     //  Test expected multiple choices
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Cat",@"Catheter", @"Cathedral",@"Dog", nil]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Catheter", @"Cathedral", @"Dog", nil]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_04"
-                                                                      title:@"Which words contain the word 'Cat'?"
+                                                                      title:@"Choose any word containing the word 'Cat'"
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_04_fail"];
-        step.title = @"You failed the pattern match cat question.";
+        step.title = @"You failed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_04_pass"];
-        step.title = @"You passed the pattern match cat question.";
+        step.title = @"You passed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
 
@@ -2354,7 +2354,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_05"
                                                                       title:@"Write the word 'Dog'"
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2366,18 +2366,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_05_pass"];
-        step.title = @"You wrote Dog.";
+        step.title = @"You wrote 'Dog'.";
         [steps addObject:step];
     }
     
     //  Test matching text
-    //  NB This test appears to cause a SigAbt - can't see why.
-/*    {
+    {
         ORKAnswerFormat *answer = [ORKAnswerFormat textAnswerFormat];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_06"
                                                                       title:@"Write a word matching '*og'"
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2391,8 +2390,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_06_pass"];
         step.title = @"You wrote a word matching '*og'.";
         [steps addObject:step];
-    }*/
-
+    }
     
     //  Numeric test - any number over 10
     {
@@ -2400,7 +2398,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_07"
                                                                       title:@"Enter a number over 10"
                                                                      answer:answer];
-        step.optional = NO;
+        step.optional = YES;
         [steps addObject:step];
     }
     
@@ -2456,7 +2454,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilitySurveyTaskIdentifier steps:steps];
     
     // Build navigation rules.
-    
     {
         // If we answer 'Yes' to Question 1, then proceed to the pass screen
         ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
@@ -2491,7 +2488,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_02_fail"];
     }
     
-    
     {
         // If we answer 'Yes' to Question 3, then proceed to the pass screen
         ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_03"];
@@ -2509,11 +2505,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_03_fail"];
     }
     
-    
     {
         // If we answer 'Yes' to Question 4, then proceed to the pass screen
         ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_04"];
-        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector matchingPattern:@"Cat*"];
+        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector matchingPattern:@"Cat.*"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
                                                                                               destinationStepIdentifiers:@[@"question_04_pass"]];
@@ -2526,7 +2521,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_05"];
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_04_fail"];
     }
-
     
     {
         // If we answer 'Dog' to Question 5, then proceed to the pass screen
@@ -2541,15 +2535,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         // If we arrived at question_05_fail then fall through to question 6
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_07"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_06"];
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_05_fail"];
     }
     
     
-/*    {
+    {
         // If we answer '*og' to Question 6, then proceed to the pass screen
         ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_06"];
-        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector matchingPattern:@"*og"];
+        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector matchingPattern:@".*og"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
                                                                                               destinationStepIdentifiers:@[@"question_06_pass"]];
@@ -2561,8 +2555,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKDirectStepNavigationRule *directRule = nil;
         directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_07"];
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_06_fail"];
-    }*/
-    
+    }
     
     {
         // If we answer '*og' to Question 7, then proceed to the pass screen
@@ -2580,7 +2573,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_08"];
         [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_07_fail"];
     }
-    
     
     {
         // If we answer '*og' to Question 7, then proceed to the pass screen
@@ -2605,8 +2597,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)predicateTestsButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PredicateTestsTaskIdentifier];
 }
-
-
 
 #pragma mark - Active tasks
 
