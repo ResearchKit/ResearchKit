@@ -711,12 +711,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     if (result == nil || NO == [result isKindOfClass:[ORKStepResult class]]) {
-        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be ORKResult type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
+        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be `ORKStepResult` type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
         return;
     }
     
     // Manage last result tracking (used in predicate navigation)
-    // If the previous result and the replacement result result are the same result then `isPreviousResult`
+    // If the previous result and the replacement result are the same result then `isPreviousResult`
     // will be set to `NO` otherwise it will be marked with `YES`.
     ORKStepResult *previousResult = _managedResults[aKey];
     previousResult.isPreviousResult = YES;

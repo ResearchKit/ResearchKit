@@ -3774,7 +3774,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     if (results) {
         NSSet *uniqueResults = [NSSet setWithArray:results];
         BOOL allResultsUnique = (results.count == uniqueResults.count);
-        NSAssert(allResultsUnique, @"The returns results have duplicates of the same object.");
+        NSAssert(allResultsUnique, @"The returned results have duplicates of the same object.");
     }
     
     if (_currentDocument) {
