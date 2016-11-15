@@ -268,7 +268,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     NSMutableSet *types = [NSMutableSet set];
     ORKAnswerFormat *format = [[self questionStep] answerFormat];
-    HKObjectType *objType = [format healthKitObjectType];
+    HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
     if (objType) {
         [types addObject:objType];
     }
