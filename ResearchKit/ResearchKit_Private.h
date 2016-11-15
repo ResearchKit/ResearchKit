@@ -61,6 +61,8 @@
 #import "ORKToneAudiometryStep.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKWalkingTaskStep.h"
+#import "ORKRangeOfMotionStep.h"
+#import "ORKShoulderRangeOfMotionStep.h"
 
 #import "ORKTaskViewController_Private.h"
 #import "ORKQuestionStepViewController_Private.h"

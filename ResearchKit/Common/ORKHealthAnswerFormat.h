@@ -32,15 +32,33 @@
 @import HealthKit;
 #import <ResearchKit/ORKAnswerFormat.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * ORKBiologicalSexIdentifier NS_STRING_ENUM;
+
+FOUNDATION_EXPORT ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierFemale;
+FOUNDATION_EXPORT ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale;
+FOUNDATION_EXPORT ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther;
+
+typedef NSString * ORKBloodTypeIdentifier NS_STRING_ENUM;
+
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierAPositive;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierANegative;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierBPositive;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierBNegative;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierABPositive;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierABNegative;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierOPositive;
+FOUNDATION_EXPORT ORKBloodTypeIdentifier const ORKBloodTypeIdentifierONegative;
+
 
 /**
  The `ORKHealthKitCharacteristicTypeAnswerFormat` class represents an answer format that lets participants enter values that correspond to a HealthKit characteristic type.
  
  The actual UI used for collecting data with this answer format depends on the HealthKit type being collected.
  The default value displayed in the UI is the most recent value received from HealthKit, if such a value exists.
- When a step or item is presented using this answer format, authorization is requested.
+ When a step or item is presented using this answer format, authorization is requested unless the property
+ `shouldRequestAuthorization` is set to `NO`.
  
  You can use the HealthKit characteristic answer format to let users autofill information, such as their blood type or date of birth.
  */
@@ -69,6 +87,11 @@ ORK_CLASS_AVAILABLE
  @return An initialized HealthKit characteristic type answer format.
  */
 - (instancetype)initWithCharacteristicType:(HKCharacteristicType *)characteristicType NS_DESIGNATED_INITIALIZER;
+
+/**
+ Should authorization be requested for the associated HealthKit data type. Default = `YES`.
+ */
+@property (nonatomic) BOOL shouldRequestAuthorization;
 
 /**
  The HealthKit characteristic type to be collected by this answer format. (read-only)
@@ -119,7 +142,8 @@ ORK_CLASS_AVAILABLE
  
  The actual UI used for collecting data with this answer format depends on the HealthKit type being collected.
  The default value in the UI is the most recent value received from HealthKit, if such a value exists.
- When a step or item is presented using this answer format, authorization is requested.
+ When a step or item is presented using this answer format, authorization is requested unless the property
+ `shouldRequestAuthorization` is set to `NO`.
  
  You can use the HealthKit quantity type answer format to let users autofill values such as their weight with the most
  recent data from HealthKit.
@@ -154,6 +178,11 @@ ORK_CLASS_AVAILABLE
  @return An initialized HealthKit quantity answer format.
  */
 - (instancetype)initWithQuantityType:(HKQuantityType *)quantityType unit:(nullable HKUnit *)unit style:(ORKNumericAnswerStyle)style NS_DESIGNATED_INITIALIZER;
+
+/**
+ Should authorization be requested for the associated HealthKit data type. Default = `YES`.
+ */
+@property (nonatomic) BOOL shouldRequestAuthorization;
 
 /**
  The HealthKit quantity type to collect. (read-only)

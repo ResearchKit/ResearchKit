@@ -334,7 +334,7 @@
     NSMutableSet *types = [NSMutableSet set];
     for (ORKFormItem *item in [self formItems]) {
         ORKAnswerFormat *format = [item answerFormat];
-        HKObjectType *objType = [format healthKitObjectType];
+        HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
         if (objType) {
             [types addObject:objType];
         }

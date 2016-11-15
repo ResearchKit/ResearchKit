@@ -98,10 +98,13 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _imageView);
     
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressView]|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_progressView]-(>=10)-[_imageView]-|"

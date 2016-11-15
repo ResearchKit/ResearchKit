@@ -468,6 +468,12 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKTouchAnywhereStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTouchAnywhereStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
    ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
@@ -615,6 +621,20 @@ encondingTable =
             PROPERTY(interStimulusInterval, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(stimulusDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKRangeOfMotionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKShoulderRangeOfMotionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKReactionTimeStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1156,6 +1176,12 @@ encondingTable =
             PROPERTY(totalTime, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(initialDigit, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(samples, ORKPSATSample, NSArray, NO, nil, nil),
+            })),
+   ENTRY(ORKRangeOfMotionResult,
+         nil,
+         (@{
+            PROPERTY(flexed, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(extended, NSNumber, NSObject, NO, nil, nil),
             })),
    ENTRY(ORKTowerOfHanoiResult,
          nil,
