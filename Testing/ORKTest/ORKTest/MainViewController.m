@@ -2264,7 +2264,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // Test Expected Boolean value
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
-                                                                      title:@"Choose Yes to pass this question, or No to Fail it"
+                                                                      title:@"Pass the Boolean question?"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
         [steps addObject:step];
     }
@@ -2285,7 +2285,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Choose Yes", @"Choose No", nil]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_02"
-                                                                      title:@"This is a single-choice question."
+                                                                      title:@"Pass the single choice question?"
                                                                      answer:answer];
         [steps addObject:step];
     }
