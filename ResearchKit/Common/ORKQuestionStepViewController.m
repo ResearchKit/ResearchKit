@@ -450,13 +450,14 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             ORKHL7CDATextFragment *hl7Fragment = [delegate hl7CDAtextForStep:questionStep withResult:result];
             ORKHL7CDATextFragmentResult *hl7FragmentResult = [[ORKHL7CDATextFragmentResult alloc] initWithIdentifier:hl7TextIdentifier];
             
-            hl7FragmentResult.xmlFragment = hl7Fragment.xmlFragment;
-            hl7FragmentResult.sectionType = hl7Fragment.sectionType;
+            if (hl7Fragment.xmlFragment != nil) {
+                hl7FragmentResult.xmlFragment = hl7Fragment.xmlFragment;
+                hl7FragmentResult.sectionType = hl7Fragment.sectionType;
+                hl7FragmentResult.startDate = parentResult.startDate;
+                hl7FragmentResult.endDate = parentResult.endDate;
             
-            hl7FragmentResult.startDate = parentResult.startDate;
-            hl7FragmentResult.endDate = parentResult.endDate;
-            
-            [results addObject:hl7FragmentResult];
+                [results addObject:hl7FragmentResult];
+            }
         }
         else {
             ORKHL7CDATextFragment *hl7Fragment = [result HL7CDATextFragmentForStep:questionStep];

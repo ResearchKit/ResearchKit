@@ -1493,9 +1493,6 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
     
-//    NSAssert(([questionStep.answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]] ||
-//              [questionStep.answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) , @"Answer format must be an ORKTextChoiceAnswerFormat or ORKImageChoiceAnswerFormat");
-    
     ORKHL7CDATextFragment *textFragment = nil;
     
     if (self.choiceAnswers.count >0) {

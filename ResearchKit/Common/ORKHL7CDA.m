@@ -35,7 +35,7 @@
         }
         if ([result isKindOfClass:[ORKHL7CDATextFragmentResult class]]) {
             ORKHL7CDATextFragmentResult *textFragment = (ORKHL7CDATextFragmentResult *) result;
-            if (textFragment.sectionType == sectionType) {
+            if ((textFragment.sectionType == sectionType) && (textFragment.xmlFragment != nil)) {
                 [outputString appendString:@"    <text>"];
                 [outputString appendString:textFragment.xmlFragment];
                 [outputString appendString:@"</text>\n"];
