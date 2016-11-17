@@ -2306,7 +2306,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Dog", @"Rock", nil]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_03"
-                                                                      title:@"Choose the animals"
+                                                                      title:@"Select all the animals"
                                                                      answer:answer];
         [steps addObject:step];
     }
