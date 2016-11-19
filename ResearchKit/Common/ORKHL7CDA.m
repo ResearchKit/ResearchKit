@@ -36,27 +36,35 @@
         if ([result isKindOfClass:[ORKHL7CDATextFragmentResult class]]) {
             ORKHL7CDATextFragmentResult *textFragment = (ORKHL7CDATextFragmentResult *) result;
             if ((textFragment.sectionType == sectionType) && (textFragment.xmlFragment != nil)) {
-                [outputString appendString:@"    <text>"];
                 [outputString appendString:textFragment.xmlFragment];
-                [outputString appendString:@"</text>\n"];
+                [outputString appendString:@"\n"];
             }
         }
     }
     return outputString;
 }
 
-+(NSString *)makeHL7CDA:(ORKTaskResult *)taskResult forPatient:(ORKHL7CDAPerson *)patient {
++(NSString *)makeHL7CDA:(ORKTaskResult *)taskResult forPatient:(ORKHL7CDAPerson *)patient
+                                                 effectiveFrom:(NSDate *)effectiveFrom
+                                                   effectiveTo:(NSDate *)effectiveTo
+                                                assignedPerson:(ORKHL7CDAPerson *)assignedPerson {
     NSLog(@"HL7CCD Debug output\n\n");
     
     NSArray *frameworks = [self setupFrameworks];
     NSMutableString *hl7CCDOutput = [[NSMutableString alloc] init];
     
-    [hl7CCDOutput appendString:[self documentHeader]];
+    [hl7CCDOutput appendString:[self cdaHeader:patient effectiveFrom:effectiveFrom effectiveTo:effectiveTo
+                                assignedPerson:assignedPerson]];
     
     for (ORKHL7CDASectionContent *section in frameworks) {
         [hl7CCDOutput appendString:[self sectionTemplateHeader:section]];
         
-        [hl7CCDOutput appendString:[self iterateResultsArray:taskResult forSectionType:section.sectionType]];
+        NSString *sectionText = [self iterateResultsArray:taskResult forSectionType:section.sectionType];
+        if (sectionText.length > 0) {
+            [hl7CCDOutput appendString:@"    <text>"];
+            [hl7CCDOutput appendString:sectionText];
+            [hl7CCDOutput appendString:@"</text>\n"];
+        }
         [hl7CCDOutput appendString:[self sectionTemplateFooter]];
     }
     
@@ -66,25 +74,87 @@
     return hl7CCDOutput;
 }
 
-+(NSString *)documentHeader {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMddHHmmssZZZ"];
++(NSString *)cdaHeader:(ORKHL7CDAPerson *)patient
+         effectiveFrom:(NSDate *)effectiveFrom
+           effectiveTo:(NSDate *)effectiveTo
+        assignedPerson:(ORKHL7CDAPerson *)assignedPerson {
+
+    NSDateFormatter *dateToSecondsFormatter = [[NSDateFormatter alloc] init];
+    [dateToSecondsFormatter setDateFormat:@"yyyyMMddHHmmssZZZ"];
     
-    NSString *todayString = [dateFormatter stringFromDate:[NSDate date]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    
+    NSString *todayString = [dateToSecondsFormatter stringFromDate:[NSDate date]];
+    
+    UIDevice *uniqueDevice = [UIDevice currentDevice];
+    NSString *uuid = uniqueDevice.identifierForVendor.UUIDString;
+    
+    NSString *effectiveFromString = [dateFormatter stringFromDate:effectiveFrom];
+    NSString *effectiveToString = [dateFormatter stringFromDate:effectiveTo];
     
     NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:1024];
     
     [contentResult appendFormat: @"<?xml version=\"1.0\"?>\n"
      "<?xml-stylesheet type=\"text/xsl\" href=\"CDASchemas\cda\Schemas\CCD.xsl\"?>\n"
-     "<ClinicalDocument xmlns=\"urn:hl7-org:v3\" xmlns:voc=\"urn:hl7-org:v3/voc\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\">\n"
+     "<ClinicalDocument xmlns=\"urn:hl7-org:v3\" xmlns:voc=\"urn:hl7-org:v3/voc\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\">\n\n"
+
+     "<!--\n"
+     "********************************************************\n"
+     "CDA Header\n"
+     "********************************************************\n"
+     "-->\n\n"
+
      "<typeId root=\"2.16.840.1.113883.1.3\" extension=\"POCD_HD000040\"/>\n"
      "<templateId root=\"2.16.840.1.113883.10.20.1\"/> <!-- CCD v1.0 Templates Root -->\n"
-     //    "<id root=\"db734647-fc99-424c-a864-7e3cda82e703\"/>"
+     "<id root=\"2.16.840.1.113883.5.3.1.100.2\" extension=\"%@-%@\" />\n"
      "<code code=\"34133-9\" codeSystem=\"2.16.840.1.113883.6.1\" displayName=\"Summarization of episode note\"/>\n"
      "<title>Good Health Clinic Continuity of Care Document</title>\n"
      "<effectiveTime value=\"%@\"/>\n"
      "<confidentialityCode code=\"N\" codeSystem=\"2.16.840.1.113883.5.25\"/>\n"
-     "<languageCode code=\"en-US\"/>\n\n",todayString];
+     "<languageCode code=\"en-US\"/>\n\n"
+
+     "<recordTarget>\n"
+     "  <patientRole>\n"
+     "    <id extension=\"996-756-495\" root=\"2.16.840.1.113883.19.5\"/>\n"
+     "    <patient>\n"
+     "%@" // Patient
+     "    </patient>\n"
+     "  </patientRole>\n"
+     "</recordTarget>\n\n"
+
+     "<documentationOf>\n"
+     "  <serviceEvent classCode=\"PCPR\">\n"
+     "    <effectiveTime><low value=\"%@\"/><high value=\"%@\"/></effectiveTime>\n"
+     "    <performer typeCode=\"PRF\">\n"
+     "      <functionCode code=\"PCP\" codeSystem=\"2.16.840.1.113883.5.88\"/>\n"
+     "      <assignedEntity>\n"
+//					<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
+	 "				<assignedPerson>\n"
+     "%@" // AssignedPerson
+	 "				</assignedPerson>\n"
+//					<representedOrganization>
+//     <id root="2.16.840.1.113883.19.5"/>
+//     <name>Good Health Clinic</name>
+//					</representedOrganization>*/
+     "      </assignedEntity>\n"
+     "    </performer>\n"
+     "  </serviceEvent>\n"
+     "</documentationOf>\n"
+     
+     // PatientRole, Author
+     "<!--\n"
+     "********************************************************\n"
+     "CDA Body\n"
+     "********************************************************\n"
+     "-->\n\n"
+     
+     "<component>\n"
+     "  <structuredBody>\n",uuid,todayString,todayString,
+     [self cdaHeaderPerson:patient],
+     effectiveFromString,
+     effectiveToString,
+     [self cdaHeaderPerson:assignedPerson]];
     
     return contentResult;
 }
@@ -97,38 +167,49 @@
     return contentResult;
 }
 
-+(NSString *)patient:(ORKHL7CDAPerson *)patient {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd"];
-    
-    NSString *birthdayString = [dateFormatter stringFromDate:patient.birthdate];
++(NSString *)cdaHeaderPerson:(ORKHL7CDAPerson *)person {
+    NSString *birthdayString;
+    if (person.birthdate != nil) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
+        birthdayString = [dateFormatter stringFromDate:person.birthdate];
+    }
     
     NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
-    [contentResult appendFormat: @"<recordTarget>\n"
-     "  <name>\n"
-     "    <given>%@</given>\n"
-     "    <family>%@</family>\n"
-     "    <administrativeGenderCode code=\"%@\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n"
-     "    <birthtime value =\"%@\"/>\n"
-     "  </name>\n"
-     "</recordTarget>\n\n",
-     patient.givenName,
-     patient.familyName,
-     patient.gender,
-     birthdayString
-     ];
+    [contentResult appendFormat:@"      <name>\n"];
+    if (person.prefix.length > 0) {
+        [contentResult appendFormat:@"        <prefix>%@</prefix>\n", person.prefix];
+    }
+    if (person.givenName.length > 0) {
+        [contentResult appendFormat:@"        <given>%@</given>\n", person.givenName];
+    }
+    if (person.familyName.length > 0) {
+        [contentResult appendFormat:@"        <family>%@</family>\n", person.familyName];
+    }
+    if (person.suffix.length > 0) {
+        [contentResult appendFormat:@"        <suffix>%@</suffix>\n", person.suffix];
+    }
+    [contentResult appendFormat:@"      </name>\n"];
+    // FIXME - administrativeGenderCodes need handling
+    if (person.gender.length > 0) {
+        [contentResult appendFormat:@"      <administrativeGenderCode code=\"M\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n"];
+    }
+    if (person.birthdate != nil) {
+        [contentResult appendFormat:@"      <birthTime value=\"%@\"/>\n", birthdayString];
+    }
     return contentResult;
 }
 
 +(NSString *)sectionTemplateHeader:(ORKHL7CDASectionContent *)content {
     NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
-    [contentResult appendFormat: @"<component>\n"
-     "  <section>\n"
-     "    <templateId root='%@'/> <!-- %@ section template -->\n"
-     "    <code code=\"%@\" codeSystem=\"2.16.840.1.113883.6.1\"/>\n"
-     "    <title>%@</title>\n",
-     content.templateIDroot,
+    [contentResult appendFormat: @"<!-- %@ section template -->\n"
+     "    <component>\n"
+     "      <section>\n"
+     "        <templateId root='%@'/>\n"
+     "        <code code=\"%@\" codeSystem=\"2.16.840.1.113883.6.1\"/>\n"
+     "        <title>%@</title>\n",
      content.title,
+     content.templateIDroot,
      content.sectionCode,
      content.title
      ];
@@ -136,8 +217,8 @@
 }
 
 +(NSString *)sectionTemplateFooter {
-    return @"  </section>\n"
-    "</component>\n\n";
+    return @"      </section>\n"
+    "    </component>\n\n";
 }
 
 

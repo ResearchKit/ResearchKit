@@ -70,6 +70,8 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
 
 @interface ORKHL7CDAPerson : NSObject
 
+@property (nonatomic, nullable, copy) NSString *prefix;
+
 @property (nonatomic, nonnull, copy) NSString *givenName;
 
 @property (nonatomic, nonnull, copy) NSString *familyName;
@@ -114,6 +116,10 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
 
 @interface ORKHL7CDA : NSObject
 
-+(nonnull NSString *)makeHL7CDA:(nonnull ORKTaskResult *)taskResult forPatient:(nonnull ORKHL7CDAPerson *)patient;
++(nonnull NSString *)makeHL7CDA:(nonnull ORKTaskResult *)taskResult
+                     forPatient:(nonnull ORKHL7CDAPerson *)patient
+                  effectiveFrom:(nonnull NSDate *)effectiveFrom
+                    effectiveTo:(nonnull NSDate *)effectiveTo
+                 assignedPerson:(nonnull ORKHL7CDAPerson *)assignedPerson;
 
 @end

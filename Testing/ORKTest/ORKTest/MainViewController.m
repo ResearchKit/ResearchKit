@@ -3728,13 +3728,26 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 }
                 [self taskViewControllerDidComplete:taskViewController];
             
-                // Produce an HL7CDA file as test output
+                // Create John Appleseed as our patient
                 ORKHL7CDAPerson *patient = [[ORKHL7CDAPerson alloc] init];
                 patient.givenName = @"John";
                 patient.familyName = @"Appleseed";
                 patient.birthdate = [NSDate date];
                 patient.gender = @"M";
-                [ORKHL7CDA makeHL7CDA:taskViewController.result forPatient:patient];
+                
+                // Create Hippocrates of Kos as the 'assigned person' (usually the Study PI)
+                ORKHL7CDAPerson *assignedPerson = [[ORKHL7CDAPerson alloc] init];
+                assignedPerson.prefix = @"Dr.";
+                assignedPerson.givenName = @"Hippocrates";
+                assignedPerson.familyName = @"Hippocrates";
+                assignedPerson.suffix = @"II of Kos";
+                
+                // Produce an HL7CDA file as test output
+                [ORKHL7CDA makeHL7CDA:taskViewController.result
+                           forPatient:patient
+                        effectiveFrom:[NSDate date]
+                          effectiveTo:[NSDate date]
+                       assignedPerson:assignedPerson];
             }
             break;
         case ORKTaskViewControllerFinishReasonFailed:
