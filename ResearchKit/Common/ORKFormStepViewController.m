@@ -719,7 +719,9 @@
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-            nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            if (nqr.unit == nil) {
+                nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            }
         }
         
         result.startDate = answerDate;

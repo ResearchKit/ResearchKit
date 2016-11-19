@@ -35,6 +35,8 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ORKResult.h"
+
 
 #pragma mark - ORKHealthAnswerFormat
 
@@ -333,9 +335,9 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         ORKNumericAnswerFormat *format = nil;
             HKUnit *unit = [self healthKitUserUnit];
         if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
-            format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit unitString]];
+            format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
         } else {
-            format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit unitString]];
+            format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
             }
             _impliedAnswerFormat = format;
         }
@@ -360,6 +362,18 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     }
 }
 
+- (id)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
+    id result = [super resultWithIdentifier:identifier answer:answer];
+    if ([result isKindOfClass:[ORKNumericQuestionResult class]]) {
+        ORKNumericQuestionResult *questionResult = (ORKNumericQuestionResult *)result;
+        if (questionResult.unit == nil) {
+            // The unit should *not* be localized.
+            questionResult.unit = [self healthKitUserUnit].unitString;
+        }
+    }
+    return result;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -381,6 +395,20 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+@end
+
+@implementation HKUnit (ORKLocalized)
+
+- (NSString *)localizedUnitString {
+    NSUnit *unit = [[NSUnit alloc] initWithSymbol:self.unitString];
+    if (unit != nil) {
+        NSMeasurementFormatter *formatter = [[NSMeasurementFormatter alloc] init];
+        formatter.unitOptions = NSMeasurementFormatterUnitOptionsProvidedUnit;
+        return [formatter stringFromUnit:unit];
+    }
+    return self.unitString;
 }
 
 @end
