@@ -1670,8 +1670,12 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (void)setAnswer:(id)answer {
-    answer = [self validateAnswer:answer];
-    self.dateComponentsAnswer = answer;
+    NSDateComponents *dateComponents = (NSDateComponents *)[self validateAnswer:answer];
+    // For time of day, the day, month and year should be zero
+    dateComponents.day = 0;
+    dateComponents.month = 0;
+    dateComponents.year = 0;
+    self.dateComponentsAnswer = dateComponents;
 }
 
 - (id)answer {
