@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Motus Design Group Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,19 +29,69 @@
  */
 
 
-@import UIKit;
-#import "ORKBorderedButton.h"
+#import "ORKTrailmakingStep.h"
+
+#import "ORKTrailmakingStepViewController.h"
+
+#import "ORKStep_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKTrailmakingStep
 
-ORK_CLASS_AVAILABLE
-@interface ORKRoundTappingButton : ORKBorderedButton {
-    CGFloat diameter;
++ (Class)stepViewControllerClass {
+    return [ORKTrailmakingStepViewController class];
 }
 
-- (void)setDiameter:(CGFloat)diameter;
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+        self.shouldContinueOnFinish = YES;
+        self.optional = NO; // default to *not* optional
+    }
+    return self;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (![self.trailType isEqual:@"A"] && ![self.trailType isEqual:@"B"]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"trailType must be A or B"
+                                     userInfo:nil];
+    }
+}
+
+- (BOOL)startsFinished {
+    return NO;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, trailType);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, trailType);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            [self.trailType isEqual:castObject.trailType]);
+}
+
 
 @end
-
-NS_ASSUME_NONNULL_END

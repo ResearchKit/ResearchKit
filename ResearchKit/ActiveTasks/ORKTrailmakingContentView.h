@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Motus Design Group Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,17 +30,20 @@
 
 
 @import UIKit;
-#import "ORKBorderedButton.h"
+#import "ORKCustomStepView_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKRoundTappingButton : ORKBorderedButton {
-    CGFloat diameter;
-}
+@class ORKRoundTappingButton;
 
-- (void)setDiameter:(CGFloat)diameter;
+@interface ORKTrailmakingContentView : ORKActiveStepCustomView
+
+@property (nonatomic, copy) NSArray<ORKRoundTappingButton*> *tapButtons;
+
+- (instancetype)initWithType:(NSString*)trailType;
+- (void)setLinesToDraw:(int)numLines;
+- (CGRect)testArea;
 
 @end
 

@@ -62,6 +62,7 @@
 #import "ORKToneAudiometryStep.h"
 #import "ORKToneAudiometryPracticeStep.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKTrailmakingStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKRangeOfMotionStep.h"
 #import "ORKShoulderRangeOfMotionStep.h"
@@ -345,6 +346,7 @@ NSString *const ORKTremorTestExtendArmStepIdentifier = @"tremor.handAtShoulderLe
 NSString *const ORKTremorTestBendArmStepIdentifier = @"tremor.handAtShoulderLengthWithElbowBent";
 NSString *const ORKTremorTestTouchNoseStepIdentifier = @"tremor.handToNose";
 NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
+NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
 NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
 NSString *const ORKPSATStepIdentifier = @"psat";
 NSString *const ORKAudioRecorderIdentifier = @"audio";
@@ -2208,6 +2210,61 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
++ (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                                 trailType:(NSString*)trailType
+                                                   options:(ORKPredefinedTaskOption)options {
+    NSMutableArray<__kindof ORKStep *> *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
+            step.text = trailmakingInstruction ? : ORKLocalizedString(@"TRAILMAKING_INTRO_TEXT",nil);
+            step.detailText = ORKLocalizedString(@"TRAILMAKING_CALL_TO_ACTION", nil);
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 3.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {
+        ORKTrailmakingStep *step = [[ORKTrailmakingStep alloc] initWithIdentifier:ORKTrailmakingStepIdentifier];
+        step.trailType = trailType;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
 
+    
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
 
 @end

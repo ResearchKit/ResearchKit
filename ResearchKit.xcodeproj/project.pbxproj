@@ -126,6 +126,12 @@
 		618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */; };
 		618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */; };
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
+		781D54101DF886AB00223305 /* ORKTrailmakingContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540A1DF886AB00223305 /* ORKTrailmakingContentView.h */; };
+		781D54111DF886AB00223305 /* ORKTrailmakingContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540B1DF886AB00223305 /* ORKTrailmakingContentView.m */; };
+		781D54121DF886AB00223305 /* ORKTrailmakingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540C1DF886AB00223305 /* ORKTrailmakingStep.h */; };
+		781D54131DF886AB00223305 /* ORKTrailmakingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540D1DF886AB00223305 /* ORKTrailmakingStep.m */; };
+		781D54141DF886AB00223305 /* ORKTrailmakingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540E1DF886AB00223305 /* ORKTrailmakingStepViewController.h */; };
+		781D54151DF886AB00223305 /* ORKTrailmakingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540F1DF886AB00223305 /* ORKTrailmakingStepViewController.m */; };
 		805685791C90C19500BF437A /* UIImage+ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 805685771C90C19500BF437A /* UIImage+ResearchKit.h */; };
 		8056857A1C90C19500BF437A /* UIImage+ResearchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 805685781C90C19500BF437A /* UIImage+ResearchKit.m */; };
 		861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */; };
@@ -686,6 +692,12 @@
 		618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAccessibilityFunctions.m; sourceTree = "<group>"; };
 		618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIView+ORKAccessibility.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIView+ORKAccessibility.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		781D540A1DF886AB00223305 /* ORKTrailmakingContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTrailmakingContentView.h; sourceTree = "<group>"; };
+		781D540B1DF886AB00223305 /* ORKTrailmakingContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTrailmakingContentView.m; sourceTree = "<group>"; };
+		781D540C1DF886AB00223305 /* ORKTrailmakingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTrailmakingStep.h; sourceTree = "<group>"; };
+		781D540D1DF886AB00223305 /* ORKTrailmakingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTrailmakingStep.m; sourceTree = "<group>"; };
+		781D540E1DF886AB00223305 /* ORKTrailmakingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTrailmakingStepViewController.h; sourceTree = "<group>"; };
+		781D540F1DF886AB00223305 /* ORKTrailmakingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTrailmakingStepViewController.m; sourceTree = "<group>"; };
 		805685771C90C19500BF437A /* UIImage+ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResearchKit.h"; sourceTree = "<group>"; };
 		805685781C90C19500BF437A /* UIImage+ResearchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResearchKit.m"; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
@@ -1494,6 +1506,19 @@
 			path = Accessibility;
 			sourceTree = "<group>";
 		};
+		781D54091DF884C400223305 /* Trailmaking */ = {
+			isa = PBXGroup;
+			children = (
+				781D540A1DF886AB00223305 /* ORKTrailmakingContentView.h */,
+				781D540B1DF886AB00223305 /* ORKTrailmakingContentView.m */,
+				781D540C1DF886AB00223305 /* ORKTrailmakingStep.h */,
+				781D540D1DF886AB00223305 /* ORKTrailmakingStep.m */,
+				781D540E1DF886AB00223305 /* ORKTrailmakingStepViewController.h */,
+				781D540F1DF886AB00223305 /* ORKTrailmakingStepViewController.m */,
+			);
+			name = Trailmaking;
+			sourceTree = "<group>";
+		};
 		866DA5121D63D01C00C9AF3F /* DataCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1548,6 +1573,7 @@
 				25ECC0921AFBD64800F3D63B /* Reaction Time */,
 				10864C951B271456000F4158 /* PSAT */,
 				95E25CF71D39FB240089C0B8 /* Range of Motion */,
+				781D54091DF884C400223305 /* Trailmaking */,
 			);
 			name = "Active Tasks";
 			path = ActiveTasks;
@@ -2281,12 +2307,12 @@
 		B12EFF5F1AB2178500A80147 /* Tapping */ = {
 			isa = PBXGroup;
 			children = (
+				86C40B181A8D7C5B00081FAC /* ORKTappingContentView.h */,
+				86C40B191A8D7C5B00081FAC /* ORKTappingContentView.m */,
 				86C40B1A1A8D7C5B00081FAC /* ORKTappingIntervalStep.h */,
 				86C40B1B1A8D7C5B00081FAC /* ORKTappingIntervalStep.m */,
 				86C40B1C1A8D7C5B00081FAC /* ORKTappingIntervalStepViewController.h */,
 				86C40B1D1A8D7C5B00081FAC /* ORKTappingIntervalStepViewController.m */,
-				86C40B181A8D7C5B00081FAC /* ORKTappingContentView.h */,
-				86C40B191A8D7C5B00081FAC /* ORKTappingContentView.m */,
 			);
 			name = Tapping;
 			sourceTree = "<group>";
@@ -2524,6 +2550,7 @@
 				86C40D201A8D7C5C00081FAC /* ORKFormStep.h in Headers */,
 				BCD192EB1B81245500FCC08A /* ORKPieChartTitleTextView.h in Headers */,
 				249F44E51BCD9EAC0000D57E /* ORKFormStepViewController_Internal.h in Headers */,
+				781D54101DF886AB00223305 /* ORKTrailmakingContentView.h in Headers */,
 				86C40C761A8D7C5C00081FAC /* HKSample+ORKJSONDictionary.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
@@ -2652,6 +2679,7 @@
 				86C40C2A1A8D7C5C00081FAC /* ORKFitnessContentView.h in Headers */,
 				86C40DC21A8D7C5C00081FAC /* ORKTapCountLabel.h in Headers */,
 				86C40D301A8D7C5C00081FAC /* ORKHealthAnswerFormat.h in Headers */,
+				781D54141DF886AB00223305 /* ORKTrailmakingStepViewController.h in Headers */,
 				86C40C261A8D7C5C00081FAC /* ORKCountdownStepViewController.h in Headers */,
 				861D2AF01B8409D9008C4CD0 /* ORKTimedWalkContentView.h in Headers */,
 				2489F7B31D65214D008DEF20 /* ORKVideoCaptureStepViewController.h in Headers */,
@@ -2705,6 +2733,7 @@
 				86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */,
 				10864C9E1B27146B000F4158 /* ORKPSATStep.h in Headers */,
 				86C40D6E1A8D7C5C00081FAC /* ORKResult_Private.h in Headers */,
+				781D54121DF886AB00223305 /* ORKTrailmakingStep.h in Headers */,
 				86C40D161A8D7C5C00081FAC /* ORKErrors.h in Headers */,
 				866DA5291D63D04700C9AF3F /* ORKOperation.h in Headers */,
 				861D11B51AA7D073003C98A7 /* ORKTextChoiceCellGroup.h in Headers */,
@@ -3092,6 +3121,7 @@
 				86C40DAC1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.m in Sources */,
 				86C40C541A8D7C5C00081FAC /* ORKTappingIntervalStep.m in Sources */,
 				86C40D6C1A8D7C5C00081FAC /* ORKResult.m in Sources */,
+				781D54151DF886AB00223305 /* ORKTrailmakingStepViewController.m in Sources */,
 				86C40CD21A8D7C5C00081FAC /* ORKInstructionStepView.m in Sources */,
 				10FF9AD81B7A045E00ECB5B4 /* ORKSeparatorView.m in Sources */,
 				86C40D181A8D7C5C00081FAC /* ORKErrors.m in Sources */,
@@ -3144,6 +3174,7 @@
 				86C40D461A8D7C5C00081FAC /* ORKInstructionStepViewController.m in Sources */,
 				BCB6E6611B7D534C000D5B34 /* ORKLineGraphChartView.m in Sources */,
 				86C40C7C1A8D7C5C00081FAC /* ORKAccelerometerRecorder.m in Sources */,
+				781D54111DF886AB00223305 /* ORKTrailmakingContentView.m in Sources */,
 				86C40C861A8D7C5C00081FAC /* ORKActiveStepTimer.m in Sources */,
 				242C9E061BBDFDAC0088B7F4 /* ORKVerificationStep.m in Sources */,
 				B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */,
@@ -3159,6 +3190,7 @@
 				242C9E121BBE06DE0088B7F4 /* ORKVerificationStepView.m in Sources */,
 				2489F7B01D65214D008DEF20 /* ORKVideoCaptureCameraPreviewView.m in Sources */,
 				147503BA1AEE807C004B17F3 /* ORKToneAudiometryStep.m in Sources */,
+				781D54131DF886AB00223305 /* ORKTrailmakingStep.m in Sources */,
 				FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */,
 				86C40D2A1A8D7C5C00081FAC /* ORKFormTextView.m in Sources */,
 				242C9E0E1BBE03F90088B7F4 /* ORKVerificationStepViewController.m in Sources */,

@@ -2230,3 +2230,102 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
+@implementation ORKTrailmakingResult
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfErrors);
+    ORK_ENCODE_OBJ(aCoder, taps);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfErrors);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, taps, ORKTrailmakingTap);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.numberOfErrors ^ self.taps.hash;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.numberOfErrors == castObject.numberOfErrors &&
+            ORKEqualObjects(self.taps, castObject.taps));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTrailmakingResult *result = [super copyWithZone:zone];
+    result.numberOfErrors = self.numberOfErrors;
+    result.taps = [self.taps copy];
+    return result;
+}
+
+@end
+
+@implementation ORKTrailmakingTap
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_INTEGER(aCoder, index);
+    ORK_ENCODE_BOOL(aCoder, error);
+    
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_INTEGER(aDecoder, index);
+        ORK_DECODE_BOOL(aDecoder, error);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return self.timestamp == castObject.timestamp &&
+           self.index == castObject.index &&
+           self.error == castObject.error;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTrailmakingTap *tap = [[[self class] allocWithZone:zone] init];
+    tap.timestamp = self.timestamp;
+    tap.index = self.index;
+    tap.error = self.error;
+    return tap;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; index: %@; error: %@>", self.class.description, self, @(self.timestamp), @(self.index), @(self.error)];
+}
+
+@end
