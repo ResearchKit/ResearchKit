@@ -133,7 +133,6 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         // Set the starting passcode state and textfield based on flow.
         switch (_passcodeFlow) {
             case ORKPasscodeFlowCreate:
-                [self removePasscodeFromKeychain];
                 _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:[self passcodeStep].passcodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
                 break;
@@ -175,6 +174,12 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    // Destructive: Only clear the passcode when the step starts in creation mode
+    if (_passcodeFlow == ORKPasscodeFlowCreate) {
+        [self removePasscodeFromKeychain];
+    }
+    
     if (!_shouldResignFirstResponder) {
         [self makePasscodeViewBecomeFirstResponder];
     }
@@ -397,14 +402,17 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     // Only save to keychain if it is not in authenticate flow.
     if (!(self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
         [self savePasscodeToKeychain];
-        
-        if (self.passcodeFlow == ORKPasscodeFlowCreate) {
-            // If it is in creation flow (consent step), go to the next step.
-            [self goForward];
-        } else if (self.passcodeFlow == ORKPasscodeFlowEdit) {
-            // If it is in editing flow, send a delegate callback.
-            [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
-        }
+    }
+    
+    if (self.passcodeFlow == ORKPasscodeFlowCreate) {
+        // If it is in creation flow (consent step), go to the next step.
+        [self goForward];
+    } else if (self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
+        // If it is in authentication flow (any task), go to the next step.
+        [self goForward];
+    } else if (self.passcodeFlow == ORKPasscodeFlowEdit) {
+        // If it is in editing flow, send a delegate callback.
+        [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
     }
 }
 
@@ -593,6 +601,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         if ([self passcodeMatchesKeychain]) {
             // Passed authentication, send delegate callback.
             [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
+            
+            // If we're in a task with many steps, time to go to the next one.
+            [self goForward];
         } else {
             // Failed authentication, send delegate callback.
             [self.passcodeDelegate passcodeViewControllerDidFailAuthentication:self];
