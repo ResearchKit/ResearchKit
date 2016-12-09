@@ -4186,7 +4186,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step2.text = @"This is an example of a step with an icon image and no title.";
     step2.iconImage = [UIImage imageNamed:icon];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2]];
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
+    step3.title = @"Title";
+    step3.text = @"This is an example of a step with an icon image that is very big.";
+    step3.iconImage = [UIImage imageNamed:@"Poppies"];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
 
 
