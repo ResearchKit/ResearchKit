@@ -56,7 +56,7 @@
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
     NSArray *testPoints;
-    NSArray *trailType;
+    NSString *trailType;
     int nextIndex;
     int errors;
     NSMutableArray* taps;
@@ -101,8 +101,6 @@
 {
     [super viewWillLayoutSubviews];
     
-    srand(time(NULL));
-    
     const int cx = 50;
     const int cy = 50;
     
@@ -137,7 +135,7 @@
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
-    int buttonIndex = [_trailmakingContentView.tapButtons indexOfObject:button];
+    NSUInteger buttonIndex = [_trailmakingContentView.tapButtons indexOfObject:button];
     if (buttonIndex >= 0) {
         
         ORKTrailmakingTap* tap = [[ORKTrailmakingTap alloc] init];
@@ -186,7 +184,7 @@
 
 - (NSArray*)fetchRandomTest
 {
-    const int testNum = arc4random_uniform([[self testData] count]);
+    const int testNum = arc4random_uniform((uint32_t)[[self testData] count]);
     const bool invertX = arc4random_uniform(2) == 1;
     const bool invertY = arc4random_uniform(2) == 1;
     const bool reverse = arc4random_uniform(2) == 1;

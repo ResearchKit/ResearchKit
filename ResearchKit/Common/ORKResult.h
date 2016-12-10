@@ -1423,7 +1423,7 @@ ORK_CLASS_AVAILABLE
 /** 
  The number of errors generated during the test
  */
-@property (nonatomic) int numberOfErrors;
+@property (nonatomic) NSUInteger numberOfErrors;
 
 @end
 
