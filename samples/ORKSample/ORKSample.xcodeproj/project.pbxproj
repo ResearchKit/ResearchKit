@@ -251,7 +251,6 @@
 				TargetAttributes = {
 					161479BF1BD6CE8F0099A068 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7JYUG8QGJ3;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
