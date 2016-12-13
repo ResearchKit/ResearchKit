@@ -54,7 +54,7 @@ enum Activity: Int {
             case .tapping:
                 return "Tapping"
             case .trailmaking:
-                return "Trail Making"
+                return "Trail Making Test"
         }
     }
     

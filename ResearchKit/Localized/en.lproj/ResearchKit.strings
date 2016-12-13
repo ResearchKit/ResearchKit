@@ -444,9 +444,10 @@
 "TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Trail Making Activity";
-"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention by recording the time required to connect a series of dots.";
-"TRAILMAKING_INTRO_TEXT" = "After the countdown, tap each dot in order";
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to connect a series of dots.";
+"TRAILMAKING_INTENDED_USE2" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then 2 – B – 3 – C… until you reach the end.";
+"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
 
 /* Potentially user visible error messages. */

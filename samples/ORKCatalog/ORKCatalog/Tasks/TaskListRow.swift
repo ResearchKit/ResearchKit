@@ -293,7 +293,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
             
         case .trailMaking:
-            return NSLocalizedString("Trail Making", comment: "")
+            return NSLocalizedString("Trail Making Test", comment: "")
         }
     }
     
