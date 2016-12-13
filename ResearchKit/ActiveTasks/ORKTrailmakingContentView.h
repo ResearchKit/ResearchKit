@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setLinesToDraw:(int)numLines;
 - (CGRect)testArea;
 
+- (void)setError:(int)buttonIdex;
+- (void)clearErrors;
+
 @end
 
 NS_ASSUME_NONNULL_END

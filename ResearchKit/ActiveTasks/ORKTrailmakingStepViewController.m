@@ -151,9 +151,13 @@
             }
             tap.error = NO;
             
+            [_trailmakingContentView clearErrors];
         } else {
             errors++;
             tap.error = YES;
+            
+            [_trailmakingContentView clearErrors];
+            [_trailmakingContentView setError:buttonIndex];
         }
         [taps addObject:tap];
     }
