@@ -207,7 +207,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     
     {
         // Match question result identifier
-        [format appendString:@" AND SUBQUERY($x.results, $y, $y.identifier == %@ AND SUBQUERY($y.results, $z, $z.identifier == %@"];
+        [format appendString:@" AND SUBQUERY($x.results, $y, $y.identifier == %@ AND $y.isPreviousResult == NO AND SUBQUERY($y.results, $z, $z.identifier == %@"];
         [formatArgumentArray addObject:stepIdentifier];
         [formatArgumentArray addObject:resultIdentifier];
         {

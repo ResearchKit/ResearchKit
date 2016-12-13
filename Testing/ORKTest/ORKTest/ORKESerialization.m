@@ -794,6 +794,22 @@ encondingTable =
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKPageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKNavigablePageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKNavigablePageStep *step = [[ORKNavigablePageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
@@ -849,6 +865,13 @@ encondingTable =
         (@{
           PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
           })),
+   ENTRY(ORKMoodScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKMoodScaleAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
+         },
+         (@{
+            PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
+            })),
   ENTRY(ORKTextChoiceAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue textChoices:GETPROP(dict, textChoices)];
@@ -1240,6 +1263,11 @@ encondingTable =
          (@{
             PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
             })),
+   ENTRY(ORKMoodScaleQuestionResult,
+         nil,
+         (@{
+            PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
+            })),
    ENTRY(ORKBooleanQuestionResult,
          nil,
          (@{
@@ -1354,6 +1382,10 @@ encondingTable =
          nil,
          (@{
             PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKPageResult,
+         nil,
+         (@{
             })),
    
    } mutableCopy];

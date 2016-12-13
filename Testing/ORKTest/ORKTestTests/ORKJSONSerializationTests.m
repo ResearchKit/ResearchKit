@@ -346,6 +346,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"healthKitUnit",
                                        @"answer",
                                        @"firstResult",
+                                       @"ORKPageStep.steps",
+                                       @"ORKNavigablePageStep.steps",
                                        ];
     NSArray *knownNotSerializedProperties = @[
                                               @"ORKStep.task",
@@ -373,6 +375,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKTextAnswerFormat.spellCheckingType",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
@@ -399,6 +402,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
+                                              @"ORKPageStep.steps",
+                                              @"ORKNavigablePageStep.steps",
+                                              @"ORKMoodScaleQuestionResult.scaleAnswer",
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -422,7 +428,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                 objc_property_t property = props[i];
                 ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
                 
-                if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+                NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(currentClass),p.propertyName];
+                if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                    [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                     if (p.isPrimitiveType == NO) {
                         // Assign value to object type property
                         if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class]|| aClass == [ORKImageChoice class]))
@@ -451,7 +459,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                         }
                     }
                     [propertyNames addObject:p.propertyName];
-                    dottedPropertyNames[p.propertyName] = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(currentClass),p.propertyName];
+                    dottedPropertyNames[p.propertyName] = dottedPropertyName;
                 }
             }
             currentClass = [currentClass superclass];
@@ -586,6 +594,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"correlationType",
                                        @"sampleType",
                                        @"unit"
+                                       @"ORKPageStep.steps",
+                                       @"ORKNavigablePageStep.steps",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -614,6 +624,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKActiveStep.image",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKScaleAnswerFormat.minimumImage",
@@ -622,6 +633,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
+                                              @"ORKPageStep.steps",
+                                              @"ORKNavigablePageStep.steps",
                                               ];
     
     // Test Each class
@@ -636,7 +649,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                 if (p.isPrimitiveType == NO) {
                     [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
                 }
@@ -775,6 +790,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"requestedHealthKitTypesForWriting",
                                        @"answer",
                                        @"firstResult",
+                                       @"ORKPageStep.steps",
+                                       @"ORKNavigablePageStep.steps",
                                        ];
     
     // Test Each class
@@ -789,7 +806,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                 if (p.isPrimitiveType == NO) {
                     if ([instance valueForKey:p.propertyName] == nil) {
                         [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
@@ -808,7 +827,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                 if (p.isPrimitiveType == NO) {
                     copiedInstance = [instance copy];
                     if (instance == copiedInstance) {

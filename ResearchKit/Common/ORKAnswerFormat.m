@@ -149,6 +149,24 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             result = @[result];
         }
     }
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierFitzpatrickSkinType]) {
+        HKFitzpatrickSkinTypeObject *skinType = [_healthStore fitzpatrickSkinTypeWithError:error];
+        if (skinType && skinType.skinType != HKFitzpatrickSkinTypeNotSet) {
+            result = @(skinType.skinType);
+        }
+        if (result) {
+            result = @[result];
+        }
+    }
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
+        HKWheelchairUseObject *wheelchairUse = [_healthStore wheelchairUseWithError:error];
+        if (wheelchairUse && wheelchairUse.wheelchairUse != HKWheelchairUseNotSet) {
+            result = (wheelchairUse.wheelchairUse == HKWheelchairUseYes) ? @YES : @NO;
+        }
+        if (result) {
+            result = @[result];
+        }
+    }
     return result;
 }
 
@@ -424,6 +442,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (HKObjectType *)healthKitObjectType {
+    return nil;
+}
+
+- (HKObjectType *)healthKitObjectTypeForAuthorization {
     return nil;
 }
 
@@ -2556,6 +2578,18 @@ static NSString *const formattedAddressLinesKey = @"FormattedAddressLines";
         MKStringFromMapPoint(MKMapPointForCoordinate(location.coordinate));
     }
     return answerString;
+}
+
+@end
+
+@implementation ORKMoodScaleAnswerFormat
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (Class)questionResultClass {
+    return [ORKMoodScaleQuestionResult class];
 }
 
 @end

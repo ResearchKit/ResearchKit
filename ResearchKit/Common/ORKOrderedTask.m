@@ -232,13 +232,13 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             
             for (ORKFormItem *formItem in formStep.formItems) {
                 ORKAnswerFormat *answerFormat = [formItem answerFormat];
-                HKObjectType *objType = [answerFormat healthKitObjectType];
+                HKObjectType *objType = [answerFormat healthKitObjectTypeForAuthorization];
                 if (objType) {
                     [healthTypes addObject:objType];
                 }
             }
         } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
-            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
+            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectTypeForAuthorization];
             if (objType) {
                 [healthTypes addObject:objType];
             }
@@ -358,6 +358,12 @@ NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
 NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
 NSString *const ORKLocationRecorderIdentifier = @"location";
 NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
+NSString *const ORKMoodSurveyCustomQuestionStepIdentifier = @"mood.custom";
+NSString *const ORKMoodSurveyClarityQuestionStepIdentifier = @"mood.clarity";
+NSString *const ORKMoodSurveyOverallQuestionStepIdentifier = @"mood.overall";
+NSString *const ORKMoodSurveySleepQuestionStepIdentifier = @"mood.sleep";
+NSString *const ORKMoodSurveyExerciseQuestionStepIdentifier = @"mood.exercise";
+NSString *const ORKMoodSurveyPainQuestionStepIdentifier = @"mood.pain";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -2179,7 +2185,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [steps addObjectsFromArray:leftSteps];
     }
     
+    BOOL hasCompletionStep = NO;
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        hasCompletionStep = YES;
         ORKCompletionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -2203,11 +2211,18 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         // Setup rule for skipping the second hand
         NSString *triggerIdentifier = firstIsLeft ? [[leftSteps lastObject] identifier] : [[rightSteps lastObject] identifier];
-        NSString *conclusionIdentifier = [[steps lastObject] identifier];
+        NSString *conclusionIdentifier = hasCompletionStep ? [[steps lastObject] identifier] : ORKNullStepIdentifier;
         NSPredicate *secondPredicate = firstIsLeft ? predicateRight : predicateLeft;
         ORKStepNavigationRule *skipSecond = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[secondPredicate]
                                                                                   destinationStepIdentifiers:@[conclusionIdentifier]];
         [task setNavigationRule:skipSecond forTriggerStepIdentifier:triggerIdentifier];
+        
+        // Setup step modifier to change the finished spoken step if skipping the second hand
+        NSString *key = NSStringFromSelector(@selector(finishedSpokenInstruction));
+        NSString *value = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
+        ORKStepModifier *stepModifier = [[ORKKeyValueStepModifier alloc] initWithResultPredicate:secondPredicate
+                                                                                     keyValueMap:@{key: value}];
+        [task setStepModifier:stepModifier forStepIdentifier:triggerIdentifier];
     }
     
     return task;
@@ -2282,6 +2297,169 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
     
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
+
++ (ORKQuestionStep *)moodQuestionStepWithIdentifier:(NSString *)identifier
+                                       questionText:(NSString *)questionText
+                                          imageName:(NSString *)imageName
+                                        textChoices:(NSArray *)textChoices {
+    
+    NSMutableArray *answerChoices = [NSMutableArray new];
+    
+    NSUInteger count = [textChoices count];
+    for (NSUInteger i = 0; i < count; i++) {
+        NSString *unselectedName = [NSString stringWithFormat:@"%@-%lug", imageName, (i + 1)];
+        UIImage *unselectedImage = [UIImage imageNamed:unselectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        NSString *selectedName = [NSString stringWithFormat:@"%@-%lup", imageName, (i + 1)];
+        UIImage *selectedImage = [UIImage imageNamed:selectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        ORKImageChoice *answerOption = [ORKImageChoice choiceWithNormalImage:unselectedImage
+                                                               selectedImage:selectedImage
+                                                                        text:textChoices[i]
+                                                                       value:@(count - i)];
+        [answerChoices addObject:answerOption];
+    }
+    
+    ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithImageChoices:answerChoices];
+    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:identifier
+                                                                          title:questionText
+                                                                         answer:format];
+    return questionStep;
+}
+
++ (ORKOrderedTask *)moodSurveyWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   frequency:(ORKMoodSurveyFrequency)frequency
+                          customQuestionText:(nullable NSString*)customQuestionText
+                                     options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+        step.title = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_DAILY_TITLE", nil) :
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_WEEKLY_TITLE", nil);
+        NSString *defaultDescription = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_DAILY_TEXT", nil) :
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_WEEKLY_TEXT", nil);
+        step.text = intendedUseDescription ?: defaultDescription;
+        step.detailText = ORKLocalizedString(@"MOOD_SURVEY_INTRO_DETAIL", nil);
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (customQuestionText != nil) {
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_CUSTOM_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_TERRIBLE", nil)];
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveyCustomQuestionStepIdentifier
+                                                        questionText:customQuestionText
+                                                           imageName:@"MoodSurveyCustom"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Clarity
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_CLARITY_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_CLARITY_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_CLARITY_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_CLARITY_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_CLARITY_TERRIBLE", nil)];
+        
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_CLARITY_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_CLARITY_WEEKLY_PROMPT", nil);
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveyClarityQuestionStepIdentifier
+                                                        questionText:prompt
+                                                           imageName:@"MoodSurveyClarity"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Overall
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_OVERALL_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_TERRIBLE", nil)];
+        
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_OVERALL_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_OVERALL_WEEKLY_PROMPT", nil);
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveyOverallQuestionStepIdentifier
+                                                        questionText:prompt
+                                                           imageName:@"MoodSurveyMood"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Pain
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_PAIN_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_TERRIBLE", nil)];
+        
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_PAIN_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_PAIN_WEEKLY_PROMPT", nil);
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveyPainQuestionStepIdentifier
+                                                        questionText:prompt
+                                                           imageName:@"MoodSurveyPain"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Sleep
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_SLEEP_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_TERRIBLE", nil)];
+        
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_SLEEP_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_SLEEP_WEEKLY_PROMPT", nil);
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveySleepQuestionStepIdentifier
+                                                        questionText:prompt
+                                                           imageName:@"MoodSurveySleep"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Excercise
+        NSArray *textChoices = @[ORKLocalizedString(@"MOOD_EXERCISE_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_TERRIBLE", nil)];
+        
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_EXERCISE_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_EXERCISE_WEEKLY_PROMPT", nil);
+        
+        ORKQuestionStep *step = [self moodQuestionStepWithIdentifier:ORKMoodSurveyExerciseQuestionStepIdentifier
+                                                        questionText:prompt
+                                                           imageName:@"MoodSurveyExercise"
+                                                         textChoices:textChoices];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:[steps copy]];
     
     return task;
 }

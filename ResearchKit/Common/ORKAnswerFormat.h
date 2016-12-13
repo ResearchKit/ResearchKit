@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  An answer format is validated when its owning step is validated.
  
  Some answer formats are constructed of other answer formats. When this is the
- case, the answer format can implement the internal method `_impliedAnswerFormat` to return
+ case, the answer format can override the method `impliedAnswerFormat` to return
  the answer format that is implied. For example, a Boolean answer format
  is presented in the same way as a single-choice answer format with the
  choices Yes and No mapping to `@(YES)` and `@(NO)`, respectively.
@@ -167,6 +167,16 @@ ORK_CLASS_AVAILABLE
  about to be displayed.
  */
 - (void)validateParameters;
+
+/**
+ Some answer formats are constructed of other answer formats. This method allows
+ a subclass to return a different answer format for use in defining the UI/UX for
+ the answer format type. For example, a Boolean answer format is presented in the 
+ same way as a single-choice answer format with the choices Yes and No mapping to 
+ `@(YES)` and `@(NO)`, respectively, so it's `impliedAnswerFormat` is an 
+ `ORKTextChoiceAnswerFormat` with those options.
+*/
+- (ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
 
@@ -1350,6 +1360,16 @@ ORK_CLASS_AVAILABLE
  By default, this value is YES.
  */
 @property (nonatomic, assign) BOOL useCurrentLocation;
+
+@end
+
+/**
+ The `ORKMoodScaleAnswerFormat` class represents an image choice that can be converted to a scale value.
+ 
+ An `ORKMoodScaleAnswerFormat` class produces an `ORKMoodScaleQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMoodScaleAnswerFormat : ORKImageChoiceAnswerFormat
 
 @end
 
