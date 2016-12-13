@@ -6,27 +6,12 @@
     },
     {
       "idiom" : "iphone",
-      "subtype" : "retina4",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "iphone",
-      "filename" : "timer@2x.png",
+      "filename" : "trailmaking@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
-      "subtype" : "retina4",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "filename" : "timer@3x.png",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
-      "subtype" : "retina4",
+      "filename" : "trailmaking@3x.png",
       "scale" : "3x"
     },
     {
@@ -35,7 +20,7 @@
     },
     {
       "idiom" : "ipad",
-      "filename" : "timer@2x~ipad.png",
+      "filename" : "trailmaking@2x~ipad.png",
       "scale" : "2x"
     }
   ],

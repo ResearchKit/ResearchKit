@@ -60,6 +60,7 @@
 #import "ORKToneAudiometryPracticeStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKTrailmakingStep.h"
 #import "ORKWalkingTaskStep.h"
 #import "ORKRangeOfMotionStep.h"
 #import "ORKShoulderRangeOfMotionStep.h"

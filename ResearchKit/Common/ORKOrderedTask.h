@@ -230,6 +230,11 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
     ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
 } ORK_ENUM_AVAILABLE;
 
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -736,6 +741,29 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                        activeStepDuration:(NSTimeInterval)activeStepDuration
                                         activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures visual attention and task switching.
+ 
+ In a trail making test, the participant is asked to connect a series of cicles labelled 1,2,3... or
+ 1,A,2,B,3,C... and time to complete the test is recorded
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param trailmakingInstruction  Instructional content describing what the user needs to do when
+                                  the task begins. If the value of this parameter is `nil`,
+ @param trailType               Type of trail to display. Either @"A" or @"B"
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active trail making test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                                 trailType:(ORKTrailMakingTypeIdentifier)trailType
                                                   options:(ORKPredefinedTaskOption)options;
 
 /**

@@ -100,6 +100,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case trailMaking
     
     class TaskListRowSection {
         var title: String
@@ -165,6 +166,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                    .trailMaking
                 ]),
         ]}
     
@@ -291,6 +293,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .shoulderRangeOfMotion:
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
+            
+        case .trailMaking:
+            return NSLocalizedString("Trail Making Test", comment: "")
             
         case .moodSurvey:
             return NSLocalizedString("Mood Survey", comment: "")
@@ -454,6 +459,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        case trailMaking
     }
     
     // MARK: Properties
@@ -579,6 +585,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
+            
+        case .trailMaking:
+            return trailMaking;
 
         case .moodSurvey:
             return moodSurveyTask
@@ -1331,6 +1340,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a trail making task
+    private var trailMaking: ORKTask {
+        let intendedUseDescription = "Tests visual attention and task switching"
+        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
     }
 
     // MARK: Consent Document Creation Convenience
