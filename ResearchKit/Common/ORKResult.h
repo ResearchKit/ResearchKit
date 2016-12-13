@@ -1402,7 +1402,7 @@ ORK_CLASS_AVAILABLE
 /**
  If the button was tapped in error.
  */
-@property (nonatomic,assign) BOOL error;
+@property (nonatomic, assign) BOOL incorrect;
 
 @end
 

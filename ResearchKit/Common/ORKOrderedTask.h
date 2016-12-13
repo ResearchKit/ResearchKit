@@ -223,6 +223,11 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
     ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
 } ORK_ENUM_AVAILABLE;
 
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -751,7 +756,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
 + (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
                                     trailmakingInstruction:(nullable NSString *)trailmakingInstruction
-                                                 trailType:(NSString*)trailType
+                                                 trailType:(ORKTrailMakingTypeIdentifier)trailType
                                                   options:(ORKPredefinedTaskOption)options;
 
 @end

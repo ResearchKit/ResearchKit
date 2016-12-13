@@ -1331,7 +1331,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a trail making task
     private var trailMaking: ORKTask {
         let intendedUseDescription = "Tests visual attention and task switching"
-        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:"B", options: [])
+        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
     }
 
     // MARK: Consent Document Creation Convenience

@@ -128,7 +128,7 @@
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
 		781D54101DF886AB00223305 /* ORKTrailmakingContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540A1DF886AB00223305 /* ORKTrailmakingContentView.h */; };
 		781D54111DF886AB00223305 /* ORKTrailmakingContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540B1DF886AB00223305 /* ORKTrailmakingContentView.m */; };
-		781D54121DF886AB00223305 /* ORKTrailmakingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540C1DF886AB00223305 /* ORKTrailmakingStep.h */; };
+		781D54121DF886AB00223305 /* ORKTrailmakingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540C1DF886AB00223305 /* ORKTrailmakingStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		781D54131DF886AB00223305 /* ORKTrailmakingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540D1DF886AB00223305 /* ORKTrailmakingStep.m */; };
 		781D54141DF886AB00223305 /* ORKTrailmakingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 781D540E1DF886AB00223305 /* ORKTrailmakingStepViewController.h */; };
 		781D54151DF886AB00223305 /* ORKTrailmakingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 781D540F1DF886AB00223305 /* ORKTrailmakingStepViewController.m */; };

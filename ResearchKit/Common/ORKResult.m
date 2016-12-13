@@ -2236,6 +2236,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
+        _taps = @[];
     }
     return self;
 }
@@ -2275,7 +2276,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTrailmakingResult *result = [super copyWithZone:zone];
     result.numberOfErrors = self.numberOfErrors;
-    result.taps = [self.taps copy];
+    result.taps = ORKArrayCopyObjects(self.taps);
     return result;
 }
 
@@ -2286,7 +2287,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
     ORK_ENCODE_INTEGER(aCoder, index);
-    ORK_ENCODE_BOOL(aCoder, error);
+    ORK_ENCODE_BOOL(aCoder, incorrect);
     
 }
 
@@ -2295,13 +2296,17 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_INTEGER(aDecoder, index);
-        ORK_DECODE_BOOL(aDecoder, error);
+        ORK_DECODE_BOOL(aDecoder, incorrect);
     }
     return self;
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ (NSUInteger)self.timestamp*100 ^ self.index;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -2313,19 +2318,19 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     
     return self.timestamp == castObject.timestamp &&
            self.index == castObject.index &&
-           self.error == castObject.error;
+           self.incorrect == castObject.incorrect;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTrailmakingTap *tap = [[[self class] allocWithZone:zone] init];
     tap.timestamp = self.timestamp;
     tap.index = self.index;
-    tap.error = self.error;
+    tap.incorrect = self.incorrect;
     return tap;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; index: %@; error: %@>", self.class.description, self, @(self.timestamp), @(self.index), @(self.error)];
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; index: %@; error: %@>", self.class.description, self, @(self.timestamp), @(self.index), @(self.incorrect)];
 }
 
 @end

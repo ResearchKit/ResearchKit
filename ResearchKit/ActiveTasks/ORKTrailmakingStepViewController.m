@@ -149,12 +149,12 @@
             if (nextIndex == _trailmakingContentView.tapButtons.count) {
                 [self finish];
             }
-            tap.error = NO;
+            tap.incorrect = NO;
             
             [_trailmakingContentView clearErrors];
         } else {
             errors++;
-            tap.error = YES;
+            tap.incorrect = YES;
             
             [_trailmakingContentView clearErrors];
             [_trailmakingContentView setError:buttonIndex];

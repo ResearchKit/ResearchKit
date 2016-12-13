@@ -656,6 +656,13 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKTrailmakingStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTrailmakingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(trailType, NSString, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKTowerOfHanoiStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTowerOfHanoiStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1066,6 +1073,19 @@ encondingTable =
                     ^id(id value) { return value?dictionaryFromCGRect(((NSValue *)value).CGRectValue):nil; },
                     ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
            })),
+   ENTRY(ORKTrailmakingTap,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(index, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(incorrect, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKTrailmakingResult,
+         nil,
+         (@{
+            PROPERTY(taps, ORKTrailmakingTap, NSArray, NO, nil, nil),
+            PROPERTY(numberOfErrors, NSNumber, NSObject, NO, nil, nil)
+            })),
   ENTRY(ORKSpatialSpanMemoryGameTouchSample,
         nil,
         (@{

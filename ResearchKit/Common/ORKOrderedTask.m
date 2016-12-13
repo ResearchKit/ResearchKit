@@ -74,6 +74,9 @@
 #import "UIImage+ResearchKit.h"
 #import <limits.h>
 
+ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA = @"A";
+ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB = @"B";
+
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     return (ORKTaskProgress){.current=current, .total=total};
@@ -2213,8 +2216,12 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 + (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
                                     trailmakingInstruction:(nullable NSString *)trailmakingInstruction
-                                                 trailType:(NSString*)trailType
+                                                 trailType:(ORKTrailMakingTypeIdentifier)trailType
                                                    options:(ORKPredefinedTaskOption)options {
+    
+    NSArray *supportedTypes = @[ORKTrailMakingTypeIdentifierA, ORKTrailMakingTypeIdentifierB];
+    NSAssert1([supportedTypes containsObject:trailType], @"Trail type %@ is not supported.", trailType);
+    
     NSMutableArray<__kindof ORKStep *> *steps = [NSMutableArray array];
     
     if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
