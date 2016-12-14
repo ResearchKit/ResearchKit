@@ -482,6 +482,10 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     return [[[self class] allocWithZone:zone] init];
 }
 
+- (NSUInteger)hash {
+    return [[self class] hash];
+}
+
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
@@ -508,8 +512,8 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKThrowInvalidArgumentExceptionIfNil(keyValueMap);
     self = [super init];
     if (self) {
-        _resultPredicate = resultPredicate;
-        _keyValueMap = keyValueMap;
+        _resultPredicate = [resultPredicate copy];
+        _keyValueMap = ORKMutableDictionaryCopyObjects(keyValueMap);
     }
     return self;
 }
@@ -552,10 +556,8 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    __typeof(self) modifier = [super copyWithZone:zone];
-    modifier->_resultPredicate = [self.resultPredicate copy];
-    modifier->_keyValueMap = ORKMutableDictionaryCopyObjects(self.keyValueMap);
-    return modifier;
+    return [[[self class] allocWithZone:zone] initWithResultPredicate:self.resultPredicate
+                                                          keyValueMap:self.keyValueMap];
 }
 
 - (BOOL)isEqual:(id)object {

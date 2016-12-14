@@ -181,6 +181,7 @@
  */
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKVerificationStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString text:@"text" verificationViewControllerClass:NSClassFromString(@"ORKVerificationStepViewController") ];});
@@ -323,7 +324,9 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     NSArray *classesExcludedForORKESerialization = @[
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
+                                                     [ORKStepModifier class],     // abstract base class
                                                      [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
+                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialzation
                                                      [ORKCollector class], // ORKCollector doesn't support JSON serialzation
                                                      [ORKHealthCollector class],
                                                      [ORKHealthCorrelationCollector class],
@@ -704,9 +707,16 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
         NSData *data3 = [NSKeyedArchiver archivedDataWithRootObject:newInstance2];
         
         if (![data isEqualToData:data2]) { // allow breakpointing
-            if (![aClass isSubclassOfClass:[ORKConsentSection class]]) {
+            if (![aClass isSubclassOfClass:[ORKConsentSection class]]
                 // ORKConsentSection mis-matches, but it is still "equal" because
                 // the net custom animation URL is a match.
+                && ![aClass isSubclassOfClass:[ORKNavigableOrderedTask class]]
+                // ORKNavigableOrderedTask contains ORKStepModifiers which is an abstract class
+                // with no encoded properties, but encoded/decoded objects are still equal.
+                && ![aClass isSubclassOfClass:[ORKKeyValueStepModifier class]]
+                // ORKKeyValueStepModifier si a subclass of ORKStepModifier which is an abstract class
+                // with no encoded properties, but encoded/decoded objects are still equal.
+                ) {
                 XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
             }
         }
@@ -724,23 +734,30 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
 }
 
 - (id)instanceForClass:(Class)c {
-    if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
-        ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
-        ([c isSubclassOfClass:[ORKStep class]]) ||
-         ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
-         (c == [ORKTextChoice class]) ||
-         (c == [ORKImageChoice class]) ||
-         ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
-         ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-         (c == [ORKLocation class]) ||
-         (c == [ORKResultSelector class]) ||
-         [c isSubclassOfClass:[HKObjectType class]] ||
-        (c == [CLCircularRegion class]))
-    {
-        return [[c alloc] orktest_init];
+    id result = nil;
+    @try {
+        if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
+            ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
+            ([c isSubclassOfClass:[ORKStep class]]) ||
+            (c == [ORKKeyValueStepModifier class]) ||
+             ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
+             (c == [ORKTextChoice class]) ||
+             (c == [ORKImageChoice class]) ||
+             ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
+             ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
+             (c == [ORKLocation class]) ||
+             (c == [ORKResultSelector class]) ||
+             [c isSubclassOfClass:[HKObjectType class]] ||
+            (c == [CLCircularRegion class]))
+        {
+            result = [[c alloc] orktest_init];
+        } else {
+            result = [[c alloc] init];
+        }
+    } @catch (NSException *exception) {
+        XCTAssert(NO, @"Exception throw in init for %@. Exception: %@", NSStringFromClass(c), exception);
     }
-    
-    return [[c alloc] init];
+    return result;
 }
 
 - (void)testEquality {
