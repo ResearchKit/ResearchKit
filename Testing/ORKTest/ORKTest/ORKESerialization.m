@@ -129,6 +129,20 @@ static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
 }
 
+static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
+    return @{
+             @"coordinate": dictionaryFromCoordinate(region.center),
+             @"radius": @(region.radius),
+             @"identifier": region.identifier
+             };
+}
+
+static CLCircularRegion *CircularRegionFromDictionary(NSDictionary *dict) {
+    return [[CLCircularRegion alloc] initWithCenter:coordinateFromDictionary(dict[@"coordinate"])
+                                             radius:((NSNumber *)dict[@"radius"]).doubleValue
+                                         identifier:dict[@"identifier"]];
+}
+
 static NSMutableDictionary *ORKESerializationEncodingTable();
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
@@ -468,6 +482,12 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKTouchAnywhereStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTouchAnywhereStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
    ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
@@ -615,6 +635,20 @@ encondingTable =
             PROPERTY(interStimulusInterval, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(stimulusDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKRangeOfMotionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKShoulderRangeOfMotionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKReactionTimeStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1134,6 +1168,12 @@ encondingTable =
             PROPERTY(initialDigit, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(samples, ORKPSATSample, NSArray, NO, nil, nil),
             })),
+   ENTRY(ORKRangeOfMotionResult,
+         nil,
+         (@{
+            PROPERTY(flexed, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(extended, NSNumber, NSObject, NO, nil, nil),
+            })),
    ENTRY(ORKTowerOfHanoiResult,
          nil,
          (@{
@@ -1251,25 +1291,12 @@ encondingTable =
                      ^id(id dict) { return [NSValue valueWithMKCoordinate:coordinateFromDictionary(dict)]; }),
             PROPERTY(region, CLCircularRegion, NSObject, NO,
                      ^id(id value) {
-                         if ( nil == value ) {
-                             return nil;
-                         }
-                         CLCircularRegion *region = value;
-                         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                         dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
-                         dict[@"radius"] = @(region.radius);
-                         dict[@"identifier"] = region.identifier;
-                         return dict;
+                         return value ?
+                         dictionaryFromCircularRegion((CLCircularRegion *)value)
+                         : nil;
                      },
                      ^id(id dict) {
-                         NSDictionary *regionDict = dict;
-                         if (nil == regionDict) {
-                             return nil;
-                         }
-                         CLLocationCoordinate2D coordinate = coordinateFromDictionary(regionDict[@"coordinate"]);
-                         NSNumber *radius = regionDict[@"radius"];
-                         NSString *identifier = regionDict[@"identifier"];
-                         return [[CLCircularRegion alloc] initWithCenter:coordinate radius:radius.doubleValue identifier:identifier];
+                         return dict ? CircularRegionFromDictionary(dict) : nil;
                      }),
             })),
    ENTRY(ORKLocationQuestionResult,
