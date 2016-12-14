@@ -595,7 +595,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                        @"firstResult",
                                        @"correlationType",
                                        @"sampleType",
-                                       @"unit"
+                                       @"unit",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
                                        ];
