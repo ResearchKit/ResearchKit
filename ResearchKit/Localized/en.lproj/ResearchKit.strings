@@ -173,6 +173,10 @@
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
 
+/* Limb values. */
+"LIMB_LEFT" = "left";
+"LIMB_RIGHT" = "right";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
 "NULL_ANSWER" = "Select an answer";
@@ -204,6 +208,7 @@
 "TASK_COMPLETE_TITLE" = "Activity Complete";
 "TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ seconds remaining.";
+"TOUCH_ANYWHERE_LABEL" = "Touch anywhere to continue";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
@@ -327,6 +332,27 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_%@" = "%@ Knee Range of Motion";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@" = "This activity measures how far you can extend your %@ knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@" = "Sit down on the edge of a chair. When you begin you will put your device on your %@ knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@" = "Place your device on your %@ knee with the screen facing out, as pictured.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@" = "When ready, tap the screen to begin and extend your %@ knee as far as you can. Tap again when you are done.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@" = "Place your device on your %@ knee";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@" = "Extend your %@ knee. Then tap anywhere.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_%@" = "%@ Shoulder Range of Motion";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@" = "This activity measures how far you can extend your %@ shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@" = "When you begin you will put your device on your %@ shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@" = "Place your device on your %@ shoulder with the screen facing out, as pictured.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@" = "When ready, tap the screen to begin and raise your %@ arm as far as you can. Tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@" = "Place your device on your %@ shoulder";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@" = "Lift your %@ arm up. Then tap anywhere.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Timed Walk";
 "TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
@@ -344,7 +370,8 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
-"TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Turn around.";
+"TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
 /* PSAT active task. */
