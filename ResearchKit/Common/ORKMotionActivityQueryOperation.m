@@ -177,7 +177,7 @@
         dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
         
         if (!handoutSuccess) {
-            self.error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedFailureReasonErrorKey: @"Results are not devlivered properly."}];
+            self.error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedFailureReasonErrorKey: @"Results were not properly delivered to the data collection manager delegate."}];
         }
         
         // If successfully reported to delegate, and we observed at

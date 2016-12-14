@@ -129,6 +129,20 @@ static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
 }
 
+static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
+    return @{
+             @"coordinate": dictionaryFromCoordinate(region.center),
+             @"radius": @(region.radius),
+             @"identifier": region.identifier
+             };
+}
+
+static CLCircularRegion *CircularRegionFromDictionary(NSDictionary *dict) {
+    return [[CLCircularRegion alloc] initWithCenter:coordinateFromDictionary(dict[@"coordinate"])
+                                             radius:((NSNumber *)dict[@"radius"]).doubleValue
+                                         identifier:dict[@"identifier"]];
+}
+
 static NSMutableDictionary *ORKESerializationEncodingTable();
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
@@ -1325,25 +1339,12 @@ encondingTable =
                      ^id(id dict) { return [NSValue valueWithMKCoordinate:coordinateFromDictionary(dict)]; }),
             PROPERTY(region, CLCircularRegion, NSObject, NO,
                      ^id(id value) {
-                         if ( nil == value ) {
-                             return nil;
-                         }
-                         CLCircularRegion *region = value;
-                         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                         dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
-                         dict[@"radius"] = @(region.radius);
-                         dict[@"identifier"] = region.identifier;
-                         return dict;
+                         return value ?
+                         dictionaryFromCircularRegion((CLCircularRegion *)value)
+                         : nil;
                      },
                      ^id(id dict) {
-                         NSDictionary *regionDict = dict;
-                         if (nil == regionDict) {
-                             return nil;
-                         }
-                         CLLocationCoordinate2D coordinate = coordinateFromDictionary(regionDict[@"coordinate"]);
-                         NSNumber *radius = regionDict[@"radius"];
-                         NSString *identifier = regionDict[@"identifier"];
-                         return [[CLCircularRegion alloc] initWithCenter:coordinate radius:radius.doubleValue identifier:identifier];
+                         return dict ? CircularRegionFromDictionary(dict) : nil;
                      }),
             })),
    ENTRY(ORKLocationQuestionResult,
