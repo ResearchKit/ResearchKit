@@ -229,7 +229,7 @@ static NSUInteger const QueryLimitSize = 1000;
         
         if (!handoutSuccess) {
             doContinue = NO;
-            self.error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedFailureReasonErrorKey: @"Results are not devlivered to delegate properly."}];
+            self.error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedFailureReasonErrorKey: @"Results were not properly delivered to the data collection manager delegate."}];
         }
     }
     
