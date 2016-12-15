@@ -760,11 +760,11 @@ FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifie
  
  @return An active trail making test task that can be presented with an `ORKTaskViewController` object.
  */
-+ (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
-                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                    trailmakingInstruction:(nullable NSString *)trailmakingInstruction
-                                                 trailType:(ORKTrailMakingTypeIdentifier)trailType
-                                                  options:(ORKPredefinedTaskOption)options;
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined survey that asks the user questions about their mood and general health.

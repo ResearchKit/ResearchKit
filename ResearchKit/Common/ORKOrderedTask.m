@@ -2228,11 +2228,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKNavigableOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
-                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                    trailmakingInstruction:(nullable NSString *)trailmakingInstruction
-                                                 trailType:(ORKTrailMakingTypeIdentifier)trailType
-                                                   options:(ORKPredefinedTaskOption)options {
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options {
     
     NSArray *supportedTypes = @[ORKTrailMakingTypeIdentifierA, ORKTrailMakingTypeIdentifierB];
     NSAssert1([supportedTypes containsObject:trailType], @"Trail type %@ is not supported.", trailType);
@@ -2254,7 +2254,6 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
-            step.text = intendedUseDescription;
             step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2", nil);
             step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -2296,7 +2295,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
 
     
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     return task;
 }
