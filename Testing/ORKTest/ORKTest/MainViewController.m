@@ -652,6 +652,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                     options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
         return [self makeAuxillaryImageTask];
+    } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
+        return [self makeIconImageTask];
     } else if ([identifier isEqualToString:TrailMakingTaskIdentifier]) {
         return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
                                       intendedUseDescription:nil
@@ -4208,6 +4210,34 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
+}
+
+#pragma mark - Icon Image
+
+- (IBAction)iconImageButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:IconImageTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeIconImageTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Title";
+    step1.text = @"This is an example of a step with an icon image.";
+
+    NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+    NSString *icon = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
+    step1.iconImage = [UIImage imageNamed:icon];
+    
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"step2"];
+    step2.text = @"This is an example of a step with an icon image and no title.";
+    step2.iconImage = [UIImage imageNamed:icon];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
+    step3.title = @"Title";
+    step3.text = @"This is an example of a step with an icon image that is very big.";
+    step3.iconImage = [UIImage imageNamed:@"Poppies"];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
 
 #pragma mark - Trail Making Task
