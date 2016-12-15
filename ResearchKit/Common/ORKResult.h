@@ -1418,7 +1418,7 @@ ORK_CLASS_AVAILABLE
 /** 
  An array of all taps completed during the test
  */
-@property (nonatomic, copy) NSArray* taps;
+@property (nonatomic, copy) NSArray <ORKTrailmakingTap *> *taps;
 
 /** 
  The number of errors generated during the test
