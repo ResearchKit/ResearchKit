@@ -271,7 +271,7 @@
 - (ORKStepResult *)result {
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    stepResult.startDate = self.presentedDate;
+    stepResult.startDate = self.presentedDate ? : [NSDate date];
     stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
