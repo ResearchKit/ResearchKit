@@ -58,6 +58,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
         ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
+        ORK_DECODE_IMAGE(aDecoder, iconImage);
     }
     return self;
 }
@@ -68,6 +69,7 @@
     ORK_ENCODE_OBJ(aCoder, footnote);
     ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_IMAGE(aCoder, auxiliaryImage);
+    ORK_ENCODE_IMAGE(aCoder, iconImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -80,6 +82,7 @@
     step.footnote = self.footnote;
     step.image = self.image;
     step.auxiliaryImage = self.auxiliaryImage;
+    step.iconImage = self.iconImage;
     return step;
 }
 
@@ -91,7 +94,8 @@
         ORKEqualObjects(self.detailText, castObject.detailText) &&
         ORKEqualObjects(self.footnote, castObject.footnote) &&
         ORKEqualObjects(self.image, castObject.image) &&
-        ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage);
+        ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage) &&
+        ORKEqualObjects(self.iconImage, castObject.iconImage);
 }
 
 - (NSUInteger)hash {

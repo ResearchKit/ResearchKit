@@ -141,6 +141,7 @@
         _instructionImageView.isAccessibilityElement = NO;
     }
     
+    self.headerView.iconImageView.image = _instructionStep.iconImage;
     self.headerView.captionLabel.text = _instructionStep.title;
     
     

@@ -189,7 +189,7 @@ ORK_CLASS_AVAILABLE
  object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
 
- For matching a single-question step result, you only need to set the `resultIdentifer` when
+ For matching a single-question step result, you only need to set the `resultIdentifier` when
  building the result selector object. The `stepIdentifier` will take the same value.
  
  For matching a form item result, you need to build a result selector with a `stepIdentifier` (the
