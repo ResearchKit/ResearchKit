@@ -225,8 +225,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
 
 typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
 
-FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
-FOUNDATION_EXPORT ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
 
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
