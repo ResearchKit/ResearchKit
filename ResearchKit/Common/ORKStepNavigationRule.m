@@ -527,7 +527,11 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
                                             substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
     if (predicateDidMatch) {
         for (NSString *key in self.keyValueMap.allKeys) {
-            [step setValue:self.keyValueMap[key] forKey:key];
+            @try {
+                [step setValue:self.keyValueMap[key] forKey:key];
+            } @catch (NSException *exception) {
+                NSAssert1(NO, @"You are attempting to set a key-value that is not key-value compliant. %@", exception);
+            }
         }
     }
 }
