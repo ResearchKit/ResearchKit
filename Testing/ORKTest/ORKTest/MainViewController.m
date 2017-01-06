@@ -646,6 +646,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
+        return [self makePageStepTask];
     }
 
     return nil;
@@ -665,6 +667,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      */
 
     id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
+    NSParameterAssert(task);
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
@@ -4226,7 +4229,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     ORKSignatureStep *groupStep3 = [[ORKSignatureStep alloc] initWithIdentifier:@"step3"];
     
-    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3]];
+    ORKStep *groupStep4 = [[ORKConsentReviewStep alloc] initWithIdentifier:@"groupStep4" signature:nil inDocument:[self buildConsentDocument]];
+    
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3, groupStep4]];
     [steps addObject:pageStep];
     
     ORKOrderedTask *audioTask = [ORKOrderedTask audioTaskWithIdentifier:@"audioTask"
