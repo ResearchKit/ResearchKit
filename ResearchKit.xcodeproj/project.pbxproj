@@ -1823,8 +1823,8 @@
 				86C40BA91A8D7C5C00081FAC /* ORKResult_Private.h */,
 				BC13CE3F1B0666FD0044153C /* ORKResultPredicate.h */,
 				BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */,
-				A2A847591DD872240084C096 /* ORKHL7CDA.m */,
 				A2A8475B1DD8723C0084C096 /* ORKHL7CDA.h */,
+				A2A847591DD872240084C096 /* ORKHL7CDA.m */,
 			);
 			name = Result;
 			sourceTree = "<group>";

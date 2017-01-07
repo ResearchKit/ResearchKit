@@ -3744,6 +3744,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 
                 // Produce an HL7CDA file as test output
                 [ORKHL7CDA makeHL7CDA:taskViewController.result
+                         withTemplate:ORKHL7CDADocumentTypeCCD
                            forPatient:patient
                         effectiveFrom:[NSDate date]
                           effectiveTo:[NSDate date]
@@ -4030,7 +4031,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     ORKHL7CDATextFragment *fragment = [[ORKHL7CDATextFragment alloc] init];
     
-    fragment.sectionType = ORKHL7CCDSectionTypePurpose;
+    fragment.sectionType = ORKHL7CDASectionTypePurpose;
     fragment.xmlFragment = @"Hello";
     
     return fragment;

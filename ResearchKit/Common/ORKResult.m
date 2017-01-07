@@ -1358,7 +1358,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     if (self.answer != nil) {
         textFragment = [[ORKHL7CDATextFragment alloc] init];
-        textFragment.sectionType = ORKHL7CCDSectionTypeResults;
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
         
         NSString *textDescription = nil;
         
@@ -1497,7 +1497,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     if (self.choiceAnswers.count >0) {
         textFragment = [[ORKHL7CDATextFragment alloc] init];
-        textFragment.sectionType = ORKHL7CCDSectionTypeResults;
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
         
         NSString *textDescription = nil;
         
@@ -1589,7 +1589,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     if (self.answer) {
         textFragment = [[ORKHL7CDATextFragment alloc] init];
-        textFragment.sectionType = ORKHL7CCDSectionTypeResults;
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
         
         NSString *textDescription = nil;
         
@@ -1682,7 +1682,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     if (self.answer) {
         textFragment = [[ORKHL7CDATextFragment alloc] init];
-        textFragment.sectionType = ORKHL7CCDSectionTypeResults;
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
         
         NSString *textDescription = nil;
         
@@ -1780,7 +1780,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     if (self.answer) {
         textFragment = [[ORKHL7CDATextFragment alloc] init];
-        textFragment.sectionType = ORKHL7CCDSectionTypeResults;
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
         
         NSString *textDescription = nil;
         
