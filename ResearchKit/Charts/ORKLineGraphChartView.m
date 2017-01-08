@@ -40,10 +40,46 @@
 
 
 #if TARGET_INTERFACE_BUILDER
-@interface ORKLineGraphChartView ()
-@property (nonatomic, strong, nullable) ORKIBSampleLineGraphDataSource *sampleDataSource;
+
+@interface ORKIBLineGraphChartViewDataSource : ORKIBGraphChartViewDataSource
+
 @end
+
+
+@implementation ORKIBLineGraphChartViewDataSource
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.plotPoints = @[@[[[ORKValueRange alloc] initWithValue: 10],
+                              [[ORKValueRange alloc] initWithValue: 20],
+                              [[ORKValueRange alloc] initWithValue: 25],
+                              [[ORKValueRange alloc] init],
+                              [[ORKValueRange alloc] initWithValue: 30],
+                              [[ORKValueRange alloc] initWithValue: 40]],
+                            @[[[ORKValueRange alloc] initWithValue: 2],
+                              [[ORKValueRange alloc] initWithValue: 4],
+                              [[ORKValueRange alloc] initWithValue: 8],
+                              [[ORKValueRange alloc] initWithValue: 16],
+                              [[ORKValueRange alloc] initWithValue: 32],
+                              [[ORKValueRange alloc] initWithValue: 64]
+                              ]];
+    }
+    return self;
+}
+
+- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
+    return 0;
+}
+
+- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
+    return 70;
+}
+
+@end
+
 #endif
+
 
 const CGFloat FillColorAlpha = 0.4;
 
@@ -306,9 +342,9 @@ const CGFloat FillColorAlpha = 0.4;
 #pragma mark - Interface Builder designable
 
 - (void)prepareForInterfaceBuilder {
+    [super prepareForInterfaceBuilder];
 #if TARGET_INTERFACE_BUILDER
-    self.sampleDataSource = [ORKIBSampleLineGraphDataSource new];
-    self.dataSource = self.sampleDataSource;
+    self.dataSource = [ORKIBLineGraphChartViewDataSource sharedInstance];
 #endif
 }
 

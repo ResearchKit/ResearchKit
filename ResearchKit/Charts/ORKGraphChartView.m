@@ -43,6 +43,40 @@
 #import "ORKSkin.h"
 
 
+#if TARGET_INTERFACE_BUILDER
+
+@implementation ORKIBGraphChartViewDataSource
+
++ (instancetype)sharedInstance {
+    static ORKIBGraphChartViewDataSource *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self class] new];
+    });
+    return sharedInstance;
+}
+
+- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
+    return self.plotPoints.count;
+}
+
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex].count;
+}
+
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
+}
+
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
+    return [@(pointIndex + 1) stringValue];
+}
+
+@end
+
+#endif
+
+
 const CGFloat ORKGraphChartViewLeftPadding = 10.0;
 const CGFloat ORKGraphChartViewPointAndLineWidth = 8.0;
 const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration = 0.1;
@@ -1239,103 +1273,4 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     }
 }
 
-#pragma mark - Interface Builder designable
-
-- (void)prepareForInterfaceBuilder {
-    [self reloadData];
-}
-
 @end
-
-
-#if TARGET_INTERFACE_BUILDER
-
-@implementation ORKIBSampleDiscreteGraphDataSource
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithMinimumValue: 0 maximumValue: 2],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 1 maximumValue: 4],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 8],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 10],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 8 maximumValue: 13]],
-                            @[[[ORKRangedPoint alloc] initWithValue: 1],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 10],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 11],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 7 maximumValue: 13],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 10 maximumValue: 13]
-                              ]];
-    }
-    return self;
-}
-
-- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
-    return self.plotPoints.count;
-}
-
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex].count;
-}
-
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex][pointIndex];
-    }
-
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
-    return [@(pointIndex + 1) stringValue];
-}
-
-@end
-
-
-@implementation ORKIBSampleLineGraphDataSource
-    
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithValue: 10],
-                              [[ORKRangedPoint alloc] initWithValue: 20],
-                              [[ORKRangedPoint alloc] initWithValue: 25],
-                              [[ORKRangedPoint alloc] init],
-                              [[ORKRangedPoint alloc] initWithValue: 30],
-                              [[ORKRangedPoint alloc] initWithValue: 40]],
-                            @[[[ORKRangedPoint alloc] initWithValue: 2],
-                              [[ORKRangedPoint alloc] initWithValue: 4],
-                              [[ORKRangedPoint alloc] initWithValue: 8],
-                              [[ORKRangedPoint alloc] initWithValue: 16],
-                              [[ORKRangedPoint alloc] initWithValue: 32],
-                              [[ORKRangedPoint alloc] initWithValue: 64]
-                              ]];
-    }
-    return self;
-}
-        
-- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
-    return self.plotPoints.count;
-}
-            
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex].count;
-            }
-
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex][pointIndex];
-        }
-        
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
-    return [@(pointIndex + 1) stringValue];
-        }
-
-- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
-    return 0;
-    }
-    
-- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
-    return 70;
-}
-
-@end
-#endif
