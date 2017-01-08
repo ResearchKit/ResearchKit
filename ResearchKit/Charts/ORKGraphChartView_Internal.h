@@ -41,9 +41,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKIBGraphChartViewDataSource : NSObject <ORKGraphChartViewDataSource>
 
-+ (nullable instancetype)sharedInstance;
-
 @property (nonatomic, strong, nullable) NSArray <NSArray *> *plotPoints;
+
+@end
+
+
+@interface ORKIBValueRangeGraphChartViewDataSource : ORKIBGraphChartViewDataSource <ORKValueRangeGraphChartViewDataSource>
 
 @end
 

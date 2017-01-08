@@ -41,29 +41,45 @@
 
 #if TARGET_INTERFACE_BUILDER
 
-@interface ORKIBDiscreteGraphChartViewDataSource : ORKIBGraphChartViewDataSource
+@interface ORKIBDiscreteGraphChartViewDataSource : ORKIBValueRangeGraphChartViewDataSource
+
++ (instancetype)sharedInstance;
 
 @end
 
 
 @implementation ORKIBDiscreteGraphChartViewDataSource
 
++ (instancetype)sharedInstance {
+    static id sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self class] new];
+    });
+    return sharedInstance;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.plotPoints = @[@[[[ORKValueRange alloc] initWithMinimumValue: 0 maximumValue: 2],
-                              [[ORKValueRange alloc] initWithMinimumValue: 1 maximumValue: 4],
-                              [[ORKValueRange alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKValueRange alloc] initWithMinimumValue: 3 maximumValue: 8],
-                              [[ORKValueRange alloc] initWithMinimumValue: 5 maximumValue: 10],
-                              [[ORKValueRange alloc] initWithMinimumValue: 8 maximumValue: 13]],
-                            @[[[ORKValueRange alloc] initWithValue: 1],
-                              [[ORKValueRange alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKValueRange alloc] initWithMinimumValue: 3 maximumValue: 10],
-                              [[ORKValueRange alloc] initWithMinimumValue: 5 maximumValue: 11],
-                              [[ORKValueRange alloc] initWithMinimumValue: 7 maximumValue: 13],
-                              [[ORKValueRange alloc] initWithMinimumValue: 10 maximumValue: 13]
-                              ]];
+        self.plotPoints = @[
+                            @[
+                                [[ORKValueRange alloc] initWithMinimumValue:0 maximumValue: 2],
+                                [[ORKValueRange alloc] initWithMinimumValue:1 maximumValue: 4],
+                                [[ORKValueRange alloc] initWithMinimumValue:2 maximumValue: 6],
+                                [[ORKValueRange alloc] initWithMinimumValue:3 maximumValue: 8],
+                                [[ORKValueRange alloc] initWithMinimumValue:5 maximumValue:10],
+                                [[ORKValueRange alloc] initWithMinimumValue:8 maximumValue:13]
+                              ],
+                            @[
+                                [[ORKValueRange alloc] initWithValue:1],
+                                [[ORKValueRange alloc] initWithMinimumValue:2 maximumValue:6],
+                                [[ORKValueRange alloc] initWithMinimumValue:3 maximumValue:10],
+                                [[ORKValueRange alloc] initWithMinimumValue:5 maximumValue:11],
+                                [[ORKValueRange alloc] initWithMinimumValue:7 maximumValue:13],
+                                [[ORKValueRange alloc] initWithMinimumValue:10 maximumValue:13]
+                              ]
+                            ];
     }
     return self;
 }

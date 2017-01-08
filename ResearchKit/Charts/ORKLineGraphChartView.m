@@ -41,29 +41,45 @@
 
 #if TARGET_INTERFACE_BUILDER
 
-@interface ORKIBLineGraphChartViewDataSource : ORKIBGraphChartViewDataSource
+@interface ORKIBLineGraphChartViewDataSource : ORKIBValueRangeGraphChartViewDataSource
+
++ (instancetype)sharedInstance;
 
 @end
 
 
 @implementation ORKIBLineGraphChartViewDataSource
 
++ (instancetype)sharedInstance {
+    static id sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self class] new];
+    });
+    return sharedInstance;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.plotPoints = @[@[[[ORKValueRange alloc] initWithValue: 10],
-                              [[ORKValueRange alloc] initWithValue: 20],
-                              [[ORKValueRange alloc] initWithValue: 25],
-                              [[ORKValueRange alloc] init],
-                              [[ORKValueRange alloc] initWithValue: 30],
-                              [[ORKValueRange alloc] initWithValue: 40]],
-                            @[[[ORKValueRange alloc] initWithValue: 2],
-                              [[ORKValueRange alloc] initWithValue: 4],
-                              [[ORKValueRange alloc] initWithValue: 8],
-                              [[ORKValueRange alloc] initWithValue: 16],
-                              [[ORKValueRange alloc] initWithValue: 32],
-                              [[ORKValueRange alloc] initWithValue: 64]
-                              ]];
+        self.plotPoints = @[
+                            @[
+                                [[ORKValueRange alloc] initWithValue:10],
+                                [[ORKValueRange alloc] initWithValue:20],
+                                [[ORKValueRange alloc] initWithValue:25],
+                                [[ORKValueRange alloc] init],
+                                [[ORKValueRange alloc] initWithValue:30],
+                                [[ORKValueRange alloc] initWithValue:40]
+                              ],
+                            @[
+                                [[ORKValueRange alloc] initWithValue:2],
+                                [[ORKValueRange alloc] initWithValue:4],
+                                [[ORKValueRange alloc] initWithValue:8],
+                                [[ORKValueRange alloc] initWithValue:16],
+                                [[ORKValueRange alloc] initWithValue:32],
+                                [[ORKValueRange alloc] initWithValue:64]
+                                ]
+                            ];
     }
     return self;
 }

@@ -47,15 +47,6 @@
 
 @implementation ORKIBGraphChartViewDataSource
 
-+ (instancetype)sharedInstance {
-    static ORKIBGraphChartViewDataSource *sharedInstance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[self class] new];
-    });
-    return sharedInstance;
-}
-
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
     return self.plotPoints.count;
 }
@@ -64,12 +55,16 @@
     return self.plotPoints[plotIndex].count;
 }
 
-- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex][pointIndex];
-}
-
 - (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
     return [@(pointIndex + 1) stringValue];
+}
+
+@end
+
+@implementation ORKIBValueRangeGraphChartViewDataSource
+
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
 }
 
 @end
