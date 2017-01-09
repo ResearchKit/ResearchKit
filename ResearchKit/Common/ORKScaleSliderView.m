@@ -93,7 +93,7 @@
             for (int i = 0; i <= numberOfSteps; i++) {
                 ORKTextChoice *textChoice = textChoices[i];
                 ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-                stepLabel.text = textChoice.text;
+                stepLabel.attributedText = textChoice.text;
                 stepLabel.textAlignment = NSTextAlignmentLeft;
                 stepLabel.numberOfLines = 0;
                 stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -491,7 +491,7 @@
     if (_currentNumberValue) {
         if ([self textScaleFormatProvider]) {
             ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
-            self.valueLabel.text = textChoice.text;
+            self.valueLabel.attributedText = textChoice.text;
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];

@@ -495,9 +495,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     NSMutableArray *choices = [[NSMutableArray alloc] init];
     for (id object in textChoices) {
         // TODO: Remove these first two cases, which we don't really support anymore.
-        if ([object isKindOfClass:[NSString class]]) {
+        if ([object isKindOfClass:[NSAttributedString class]]) {
+            NSAttributedString *string = (NSAttributedString*)object;
+            [choices addObject:[ORKTextChoice choiceWithText:string value:[string string]]];
+        } else if ([object isKindOfClass:[NSString class]]) {
             NSString *string = (NSString *)object;
-            [choices addObject:[ORKTextChoice choiceWithText:string value:string]];
+            [choices addObject:[ORKTextChoice choiceWithText:ORKAttributedString(string) value:string]];
         } else if ([object isKindOfClass:[ORKTextChoice class]]) {
             [choices addObject:object];
             
@@ -511,7 +514,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                 [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
             } else if (array.count == 1 &&
                        [array[0] isKindOfClass:[NSString class]]) {
-                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
+                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:ORKAttributedString(@"") value:array[0] exclusive:NO]];
             } else {
                 @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice": object }];
             }
@@ -779,7 +782,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 #pragma mark - ORKTextChoice
 
 @implementation ORKTextChoice {
-    NSString *_text;
+    NSAttributedString *_text;
     id<NSCopying, NSCoding, NSObject> _value;
 }
 
@@ -791,16 +794,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORKThrowMethodUnavailableException();
 }
 
-+ (instancetype)choiceWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive {
++ (instancetype)choiceWithText:(NSAttributedString *)text detailText:(NSAttributedString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive {
     ORKTextChoice *option = [[ORKTextChoice alloc] initWithText:text detailText:detailText value:value exclusive:exclusive];
     return option;
 }
 
-+ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value {
++ (instancetype)choiceWithText:(NSAttributedString *)text value:(id<NSCopying, NSCoding, NSObject>)value {
     return [ORKTextChoice choiceWithText:text detailText:nil value:value exclusive:NO];
 }
 
-- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
+- (instancetype)initWithText:(NSAttributedString *)text detailText:(NSAttributedString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
     self = [super init];
     if (self) {
         _text = [text copy];
@@ -840,8 +843,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSAttributedString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSAttributedString);
         ORK_DECODE_OBJ(aDecoder, value);
         ORK_DECODE_BOOL(aDecoder, exclusive);
     }
@@ -954,8 +957,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                            textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
-                                                          [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO)]]];
+                                            textChoices:@[[ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BOOL_YES",nil)) value:@(YES)],
+                                                          [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BOOL_NO",nil)) value:@(NO)]]];
 }
 
 - (Class)questionResultClass {
@@ -1872,10 +1875,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    return _textChoices.firstObject.text;
+    return [_textChoices.firstObject.text string];
 }
 - (NSString *)maximumValueDescription {
-    return _textChoices.lastObject.text;
+    return [_textChoices.lastObject.text string];
 }
 - (UIImage *)minimumImage {
     return nil;

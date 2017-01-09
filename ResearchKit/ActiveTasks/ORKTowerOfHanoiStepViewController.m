@@ -78,8 +78,8 @@ static const NSUInteger NumberOfTowers = 3;
     [self setUpTowers];
     [self setUpTowerViews];
     [self reloadData];
-    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
-    NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil);
+    NSAttributedString *title = ORKAttributedString(ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil));
+    NSAttributedString *text = ORKAttributedString(ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil));
     NSString *skip = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE", nil);
     [self.activeStepView updateTitle:title text:text];
     [self setSkipButtonTitle:skip];
@@ -187,8 +187,9 @@ static const NSUInteger NumberOfTowers = 3;
 - (void)updateTitleText {
     NSString *moves = ORKLocalizedStringFromNumber(@(self.moves.count));
     NSString *time = [self.dateComponentsFormatter stringFromTimeInterval:_secondsElapsed];
-    NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
-    NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
+    NSAttributedString *title = ORKAttributedString(ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil));
+    NSString *textPlain = [NSString stringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
+    NSAttributedString *text = ORKAttributedString(textPlain);
     [self.activeStepView updateTitle:title text:text];
 }
 

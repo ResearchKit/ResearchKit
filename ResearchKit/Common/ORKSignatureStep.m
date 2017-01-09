@@ -42,8 +42,8 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         // Set default values for the title and text
-        self.title = ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil);
-        self.text = ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil);
+        self.title = ORKAttributedString(ORKLocalizedString(@"CONSENT_SIGNATURE_TITLE", nil));
+        self.text = ORKAttributedString(ORKLocalizedString(@"CONSENT_SIGNATURE_INSTRUCTION", nil));
     }
     return self;
 }

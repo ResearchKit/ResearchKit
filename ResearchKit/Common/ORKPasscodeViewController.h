@@ -115,7 +115,7 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode authentication view controller.
  */
-+ (instancetype)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
++ (instancetype)passcodeAuthenticationViewControllerWithText:(nullable NSAttributedString *)text
                                                     delegate:(id<ORKPasscodeDelegate>)delegate;
 
 /**
@@ -135,7 +135,7 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode editing view controller.
  */
-+ (instancetype)passcodeEditingViewControllerWithText:(nullable NSString *)text
++ (instancetype)passcodeEditingViewControllerWithText:(nullable NSAttributedString *)text
                                              delegate:(id<ORKPasscodeDelegate>)delegate
                                          passcodeType:(ORKPasscodeType)passcodeType;
 /**

@@ -140,22 +140,22 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     if (_characteristicType) {
         NSString *identifier = [_characteristicType identifier];
         if ([identifier isEqualToString:HKCharacteristicTypeIdentifierBiologicalSex]) {
-            NSArray *options = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value: ORKHKBiologicalSexString(HKBiologicalSexFemale)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:ORKHKBiologicalSexString(HKBiologicalSexMale)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:ORKHKBiologicalSexString(HKBiologicalSexOther)]
+            NSArray *options = @[[ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_FEMALE", nil)) value: ORKHKBiologicalSexString(HKBiologicalSexFemale)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_MALE", nil)) value:ORKHKBiologicalSexString(HKBiologicalSexMale)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_OTHER", nil)) value:ORKHKBiologicalSexString(HKBiologicalSexOther)]
                                  ];
             ORKTextChoiceAnswerFormat *format = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:options];
             _impliedAnswerFormat = format;
             
         } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierBloodType]) {
-            NSArray *options = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_A+", nil) value:ORKHKBloodTypeString(HKBloodTypeAPositive)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_A-", nil) value:ORKHKBloodTypeString(HKBloodTypeANegative)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_B+", nil) value:ORKHKBloodTypeString(HKBloodTypeBPositive)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_B-", nil) value:ORKHKBloodTypeString(HKBloodTypeBNegative)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_AB+", nil) value:ORKHKBloodTypeString(HKBloodTypeABPositive)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_AB-", nil) value:ORKHKBloodTypeString(HKBloodTypeABNegative)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_O+", nil) value:ORKHKBloodTypeString(HKBloodTypeOPositive)],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BLOOD_TYPE_O-", nil) value:ORKHKBloodTypeString(HKBloodTypeONegative)]
+            NSArray *options = @[[ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_A+", nil)) value:ORKHKBloodTypeString(HKBloodTypeAPositive)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_A-", nil)) value:ORKHKBloodTypeString(HKBloodTypeANegative)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_B+", nil)) value:ORKHKBloodTypeString(HKBloodTypeBPositive)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_B-", nil)) value:ORKHKBloodTypeString(HKBloodTypeBNegative)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_AB+", nil)) value:ORKHKBloodTypeString(HKBloodTypeABPositive)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_AB-", nil)) value:ORKHKBloodTypeString(HKBloodTypeABNegative)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_O+", nil)) value:ORKHKBloodTypeString(HKBloodTypeOPositive)],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"BLOOD_TYPE_O-", nil)) value:ORKHKBloodTypeString(HKBloodTypeONegative)]
                                  ];
             ORKValuePickerAnswerFormat *format = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:options];
             _impliedAnswerFormat = format;

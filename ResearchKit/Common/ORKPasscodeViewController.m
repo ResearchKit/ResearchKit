@@ -64,7 +64,7 @@
     return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
 }
 
-+ (instancetype)passcodeAuthenticationViewControllerWithText:(NSString *)text
++ (instancetype)passcodeAuthenticationViewControllerWithText:(NSAttributedString *)text
                                                     delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
@@ -72,7 +72,7 @@
                                    passcodeType:0];
 }
 
-+ (instancetype)passcodeEditingViewControllerWithText:(NSString *)text
++ (instancetype)passcodeEditingViewControllerWithText:(NSAttributedString *)text
                                              delegate:(id<ORKPasscodeDelegate>)delegate
                                          passcodeType:(ORKPasscodeType)passcodeType {
     return [self passcodeViewControllerWithText:text
@@ -81,7 +81,7 @@
                                    passcodeType:passcodeType];
 }
 
-+ (instancetype)passcodeViewControllerWithText:(NSString *)text
++ (instancetype)passcodeViewControllerWithText:(NSAttributedString *)text
                                       delegate:(id<ORKPasscodeDelegate>)delegate
                                   passcodeFlow:(ORKPasscodeFlow)passcodeFlow
                                   passcodeType:(ORKPasscodeType)passcodeType {

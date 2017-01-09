@@ -442,7 +442,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
     NSString *title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_PLAYBACK_TITLE_%@", nil), step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil)];
     
-    [self.activeStepView updateTitle:title text:nil];
+    [self.activeStepView updateTitle:ORKAttributedString(title) text:nil];
     
     [_contentView.gameView resetTilesAnimated:NO];
     
@@ -492,7 +492,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.capitalizedPluralItemDescription = [standaloneItemName capitalizedStringWithLocale:[NSLocale currentLocale]];
     NSString *titleFormat = step.requireReversal ?  ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@", nil) : ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_TITLE_%@", nil);
     NSString *title = [NSString stringWithFormat:titleFormat, pluralItemName];
-    [self.activeStepView updateTitle:title text:nil];
+    [self.activeStepView updateTitle:ORKAttributedString(title) text:nil];
     
     [self resetActivityTimer];
     
@@ -578,7 +578,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
         return;
     }
     
-    [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_MESSAGE", nil)];
+    [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil)) text:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_COMPLETE_MESSAGE", nil))];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(continueAction)];
@@ -609,7 +609,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     if ([self finishIfCompletedGames]) {
         return;
     }
-    [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_FAILED_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_FAILED_MESSAGE", nil)];
+    [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_FAILED_TITLE", nil)) text:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_FAILED_MESSAGE", nil))];
     
     _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(tryAgainAction)];
 }
@@ -624,7 +624,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
         return;
     }
     
-    [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_TIMEOUT_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_TIMEOUT_MESSAGE", nil)];
+    [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_TIMEOUT_TITLE", nil)) text:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_TIMEOUT_MESSAGE", nil))];
     
     _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(tryAgainAction)];
 }
@@ -632,7 +632,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 #pragma mark ORKSpatialSpanStepStateComplete
 
 - (void)showComplete {
-    [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil) text:nil];
+    [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil)) text:nil];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(continueAction)];
@@ -660,7 +660,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     [_playbackTimer invalidate]; _playbackTimer = nil;
     
     [self resetForNewGame];
-    [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_PAUSED_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_PAUSED_MESSAGE", nil)];
+    [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_PAUSED_TITLE", nil)) text:ORKAttributedString(ORKLocalizedString(@"MEMORY_GAME_PAUSED_MESSAGE", nil))];
     _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(continueAction)];
 }
 

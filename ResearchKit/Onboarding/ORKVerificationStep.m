@@ -55,8 +55,8 @@
     
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.title = ORKLocalizedString(@"VERIFICATION_STEP_TITLE", nil);
-        self.text = text;
+        self.title = ORKAttributedString(ORKLocalizedString(@"VERIFICATION_STEP_TITLE", nil));
+        self.text = ORKAttributedString(text);
         _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
         
         [self validateParameters];

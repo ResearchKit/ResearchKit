@@ -130,8 +130,8 @@
         _tableContainer.tapOffView = self.view;
         
         _tableContainer.stepHeaderView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-        _tableContainer.stepHeaderView.captionLabel.text = [self reviewStep].title;
-        _tableContainer.stepHeaderView.instructionLabel.text = [self reviewStep].text;
+        _tableContainer.stepHeaderView.captionLabel.attributedText = [self reviewStep].title;
+        _tableContainer.stepHeaderView.instructionLabel.attributedText = [self reviewStep].text;
         _tableContainer.stepHeaderView.learnMoreButtonItem = self.learnMoreButtonItem;
         
         _continueSkipView = _tableContainer.continueSkipContainerView;
@@ -168,7 +168,7 @@
     cell.immediateNavigation = YES;
     ORKStep *step = _steps[indexPath.row];
     ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
-    cell.shortLabel.text = step.title != nil ? step.title : step.text;
+    cell.shortLabel.attributedText = step.title != nil ? step.title : step.text;
     cell.longLabel.text = [self answerStringForStep:step withStepResult:stepResult];
     return cell;
 }
@@ -208,7 +208,7 @@
             if (formItemResult && [formItemResult isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
                 if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
-                    NSString *formItemTextString = formItem.text;
+                    NSString *formItemTextString = [formItem.text string];
                     NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
                     if (formItemTextString && formItemAnswerString) {
                         [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
@@ -233,7 +233,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ORKStep *step = _steps[indexPath.row];
     ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
-    NSString *shortText = step.title != nil ? step.title : step.text;
+    NSString *shortText = step.title != nil ? [step.title string] : [step.text string];
     NSString *longText = [self answerStringForStep:step withStepResult:stepResult];
     CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:shortText LongText:longText inTableView:_tableContainer.tableView];
     return height;

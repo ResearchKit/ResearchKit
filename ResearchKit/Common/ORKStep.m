@@ -124,8 +124,8 @@
     self = [super init];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
-        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, title, NSAttributedString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSAttributedString);
         ORK_DECODE_BOOL(aDecoder, optional);
         ORK_DECODE_OBJ_CLASS(aDecoder, task, ORKOrderedTask);
         ORK_DECODE_BOOL(aDecoder, shouldTintImages);

@@ -66,7 +66,7 @@ ORK_CLASS_AVAILABLE
  @param answerFormat  The format in which the answer is expected.
  */
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                     title:(nullable NSString *)title
+                                     title:(nullable NSAttributedString *)title
                                     answer:(nullable ORKAnswerFormat *)answerFormat;
 
 /**
@@ -78,8 +78,8 @@ ORK_CLASS_AVAILABLE
  @param answerFormat  The format in which the answer is expected.
  */
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                     title:(nullable NSString *)title
-                                      text:(nullable NSString *)text
+                                     title:(nullable NSAttributedString *)title
+                                      text:(nullable NSAttributedString *)text
                                     answer:(nullable ORKAnswerFormat *)answerFormat;
 
 /**

@@ -74,8 +74,8 @@ ORK_CLASS_AVAILABLE
  @return As initialized form step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text;
+                             title:(nullable NSAttributedString *)title
+                              text:(nullable NSAttributedString *)text;
 
 /**
  The array of items in the form.
@@ -115,7 +115,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized form item.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                              text:(nullable NSString *)text
+                              text:(nullable NSAttributedString *)text
                       answerFormat:(nullable ORKAnswerFormat *)answerFormat;
 
 /**
@@ -129,7 +129,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized form item.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                              text:(nullable NSString *)text
+                              text:(nullable NSAttributedString *)text
                       answerFormat:(nullable ORKAnswerFormat *)answerFormat
                           optional:(BOOL) optional;
 
@@ -165,7 +165,7 @@ ORK_CLASS_AVAILABLE
  If the descriptive text is sufficiently short, you can display it as a prompt next to the item.
  If it is too long to display next to the item, you can display it above the item.
  */
-@property (nonatomic, copy, readonly, nullable) NSString *text;
+@property (nonatomic, copy, readonly, nullable) NSAttributedString *text;
 
 /**
  A localized string that displays placeholder information for the form item.
@@ -207,7 +207,7 @@ ORK_CLASS_AVAILABLE
  
  */
 - (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
-                                                     text:(nullable NSString *)text
+                                                     text:(nullable NSAttributedString *)text
                                              errorMessage:(NSString *)errorMessage;
 
 @end

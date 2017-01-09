@@ -71,8 +71,8 @@
     _activeStep = step;
     self.headerView.instructionLabel.hidden = !(_activeStep.hasText);
     
-    self.headerView.captionLabel.text = _activeStep.title;
-    self.headerView.instructionLabel.text = _activeStep.text;
+    self.headerView.captionLabel.attributedText = _activeStep.title;
+    self.headerView.instructionLabel.attributedText = _activeStep.text;
     self.continueSkipContainer.optional = _activeStep.optional;
     self.stepViewFillsAvailableSpace = YES;
     
@@ -86,10 +86,10 @@
     [self.continueSkipContainer updateContinueAndSkipEnabled];
 }
 
-- (void)updateTitle:(NSString *)title text:(NSString *)text {
+- (void)updateTitle:(NSAttributedString *)title text:(NSAttributedString *)text {
     ORKStepHeaderView *headerView = [self headerView];
-    [headerView.captionLabel setText:title];
-    [headerView.instructionLabel setText:text];
+    [headerView.captionLabel setAttributedText:title];
+    [headerView.instructionLabel setAttributedText:text];
     headerView.instructionLabel.hidden = (text == nil);
     [headerView updateCaptionLabelPreferredWidth];
 }

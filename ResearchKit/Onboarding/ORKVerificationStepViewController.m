@@ -57,8 +57,14 @@
         
         _verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
         _verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
-        _verificationStepView.headerView.instructionLabel.text = [[self verificationStep].text stringByAppendingString:[NSString stringWithFormat:@"\n\n%@", ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil)]];
+        _verificationStepView.headerView.captionLabel.attributedText = [self verificationStep].title;
+        
+        NSMutableAttributedString *instructionLabelText = [[NSMutableAttributedString alloc] init];
+        [instructionLabelText appendAttributedString:[self verificationStep].text];
+        [instructionLabelText appendAttributedString:[[NSAttributedString alloc]
+                                                      initWithString:[NSString stringWithFormat:@"\n\n%@", ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil)]]];
+        
+        _verificationStepView.headerView.instructionLabel.attributedText = instructionLabelText;
         
         [self.view addSubview:_verificationStepView];
         

@@ -53,7 +53,7 @@
 @implementation ORKWaitStepViewController {
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
-    NSString *_updatedText;
+    NSAttributedString *_updatedText;
 }
 
 - (ORKWaitStep *)waitStep {
@@ -76,8 +76,8 @@
         _waitStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_waitStepView];
         
-        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
-        _waitStepView.headerView.instructionLabel.text = _updatedText;
+        _waitStepView.headerView.captionLabel.attributedText = [self waitStep].title;
+        _waitStepView.headerView.instructionLabel.attributedText = _updatedText;
     }
 }
 
@@ -90,7 +90,7 @@
     [_waitStepView.progressView setProgress:progress animated:animated];
 }
 
-- (void)updateText:(NSString *)text {
+- (void)updateText:(NSAttributedString *)text {
     _updatedText = text;
     [self stepDidChange];
 }

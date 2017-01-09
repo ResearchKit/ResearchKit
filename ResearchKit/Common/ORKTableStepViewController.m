@@ -116,8 +116,8 @@
         _tableView.allowsSelection = NO;
         
         _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.text = [[self step] title];
-        _headerView.instructionLabel.text = [[self step] text];
+        _headerView.captionLabel.attributedText = [[self step] title];
+        _headerView.instructionLabel.attributedText = [[self step] text];
         _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
         _continueSkipView = _tableContainer.continueSkipContainerView;

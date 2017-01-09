@@ -55,12 +55,12 @@
 }
 
 - (BOOL)hasTitle {
-    NSString *title = self.title;
+    NSAttributedString *title = self.title;
     return  (title != nil && title.length > 0);
 }
 
 - (BOOL)hasText {
-    NSString *text = self.text;
+    NSAttributedString *text = self.text;
     return  (text != nil && text.length > 0);
 }
 

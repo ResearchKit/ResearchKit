@@ -332,4 +332,7 @@ ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
 
+#define ORKAttributedString(string) \
+[[NSAttributedString alloc] initWithString:string]
+
 NS_ASSUME_NONNULL_END
