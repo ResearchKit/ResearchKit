@@ -129,7 +129,7 @@
 		782ADC531E2D36F9000F43DC /* ORKGoNoGoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 782ADC4B1E2D36F9000F43DC /* ORKGoNoGoViewController.m */; };
 		782ADC551E2D36F9000F43DC /* ORKGoNoGoContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 782ADC4C1E2D36F9000F43DC /* ORKGoNoGoContentView.h */; };
 		782ADC561E2D36F9000F43DC /* ORKGoNoGoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 782ADC4D1E2D36F9000F43DC /* ORKGoNoGoContentView.m */; };
-		782ADC581E2D36F9000F43DC /* ORKGoNoGoStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 782ADC4E1E2D36F9000F43DC /* ORKGoNoGoStep.h */; };
+		782ADC581E2D36F9000F43DC /* ORKGoNoGoStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 782ADC4E1E2D36F9000F43DC /* ORKGoNoGoStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		782ADC591E2D36F9000F43DC /* ORKGoNoGoStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 782ADC4F1E2D36F9000F43DC /* ORKGoNoGoStep.m */; };
 		782ADC5B1E2D36F9000F43DC /* ORKGoNoGoStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 782ADC501E2D36F9000F43DC /* ORKGoNoGoStimulusView.h */; };
 		782ADC5C1E2D36F9000F43DC /* ORKGoNoGoStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 782ADC511E2D36F9000F43DC /* ORKGoNoGoStimulusView.m */; };
@@ -2510,7 +2510,6 @@
 				861D2AE81B840991008C4CD0 /* ORKTimedWalkStep.h in Headers */,
 				86C40D241A8D7C5C00081FAC /* ORKFormStepViewController.h in Headers */,
 				959A2C001D68B9DA00841B04 /* ORKRangeOfMotionStepViewController.h in Headers */,
-				782ADC581E2D36F9000F43DC /* ORKGoNoGoStep.h in Headers */,
 				86C40D6A1A8D7C5C00081FAC /* ORKResult.h in Headers */,
 				86C40DD61A8D7C5C00081FAC /* ORKUnitLabel.h in Headers */,
 				10FF9AD71B7A045E00ECB5B4 /* ORKSeparatorView.h in Headers */,
@@ -2539,6 +2538,7 @@
 				CBD34A561BB1FB9000F204EA /* ORKLocationSelectionView.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
+				782ADC581E2D36F9000F43DC /* ORKGoNoGoStep.h in Headers */,
 				86C40D941A8D7C5C00081FAC /* ORKStepViewController.h in Headers */,
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,

@@ -50,10 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)changeColor:(UIColor*)color;
 
-- (BOOL) go;
-
-- (UIColor*)currentColor;
-
 @end
 
 NS_ASSUME_NONNULL_END

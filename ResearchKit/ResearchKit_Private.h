@@ -53,6 +53,7 @@
 #import "ORKHolePegTestRemoveStep.h"
 #import "ORKPSATStep.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKGoNoGoStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKTappingIntervalStep.h"
 #import "ORKTimedWalkStep.h"

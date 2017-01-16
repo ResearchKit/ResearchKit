@@ -155,11 +155,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
     for (ORKGoNoGoResult* res in _results)
     {
-        if (res.error == NO)
+        if (res.incorrect == NO)
             successCount++;
         else
             errorCount++;
-        if (res.go && !res.error)
+        if (res.go && !res.incorrect)
             lastReactionTime = res.timeToThreshold;
     }
     
@@ -186,7 +186,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     void (^completion)(void) = ^{
         int successCount = 0;
         for (ORKGoNoGoResult* res in _results)
-            if (res.error == NO)
+            if (res.incorrect == NO)
                 successCount++;
         
         if (successCount == [self gonogoTimeStep].numberOfAttempts) {
@@ -223,7 +223,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     if (result)
         gonogoResult.fileResult = (ORKFileResult *)result;
     gonogoResult.go = go;
-    gonogoResult.error = NO;
+    gonogoResult.incorrect = NO;
     [_results addObject:gonogoResult];
     
     [_gonogoContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
@@ -240,7 +240,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     if (result)
         gonogoResult.fileResult = (ORKFileResult *)result;
     gonogoResult.go = go;
-    gonogoResult.error = YES;
+    gonogoResult.incorrect = YES;
     [_results addObject:gonogoResult];
 
     
@@ -254,9 +254,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
     go = ((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667;
     
-    for (int i = 0; i < 1000; i++)
-        printf("%f\n", (float)arc4random_uniform(RAND_MAX) / RAND_MAX);
-
     [_gonogoContentView changeColor:go ? self.view.tintColor : UIColor.greenColor];
     [_gonogoContentView resetAfterDelay:delay completion:^{
         [weakSelf configureTitle];
