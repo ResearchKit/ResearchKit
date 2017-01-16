@@ -99,6 +99,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case gonogoTest
     
     class TaskListRowSection {
         var title: String
@@ -163,6 +164,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                    .gonogoTest,
                 ]),
         ]}
     
@@ -289,6 +291,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .shoulderRangeOfMotion:
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
+            
+        case .gonogoTest:
+            return NSLocalizedString("Go No Go Test", comment: "")
         }
     }
     
@@ -448,6 +453,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        case gonogoTest
     }
     
     // MARK: Properties
@@ -573,6 +579,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
+            
+        case .gonogoTest:
+            return gonogoTask
         }
     }
 
@@ -1317,6 +1326,14 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a go no go task
+    private var gonogoTask: ORKTask {
+        /// An example of a custom sound.
+        let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
+        let successSound = SystemSound(soundURL: successSoundURL)!
+        return ORKOrderedTask.gonogoTask(withIdentifier: String(describing:Identifier.reactionTime), intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 6, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }
 
     // MARK: Consent Document Creation Convenience
