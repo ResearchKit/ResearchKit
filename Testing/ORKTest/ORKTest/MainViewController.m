@@ -78,6 +78,7 @@ DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(GoNoGoTasIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
@@ -366,6 +367,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
+                           @"Go No Go Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
@@ -571,6 +573,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                  timeoutSound:0
                                                  failureSound:0
                                                       options:0];
+    } else if ([identifier isEqualToString:GoNoGoTasIdentifier]) {
+        return [ORKOrderedTask gonogoTaskWithIdentifier:GoNoGoTasIdentifier
+                                 intendedUseDescription:nil
+                                maximumStimulusInterval:8
+                                minimumStimulusInterval:4
+                                  thresholdAcceleration:0.5
+                                       numberOfAttempts:9
+                                                timeout:10
+                                           successSound:0
+                                           timeoutSound:0
+                                           failureSound:0
+                                                options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
@@ -2695,6 +2709,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)reactionTimeTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
+}
+
+- (void)goNoGoTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:GoNoGoTasIdentifier];
 }
 
 - (void)towerOfHanoiTaskButtonTapped:(id)sender {

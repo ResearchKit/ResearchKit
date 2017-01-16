@@ -50,6 +50,7 @@
 #import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
+#import <ResearchKit/ORKGoNoGoStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKPSATStep.h>

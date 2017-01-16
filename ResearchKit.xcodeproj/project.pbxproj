@@ -126,6 +126,14 @@
 		618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */; };
 		618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */; };
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
+		789FA3F51E37BD9900A5F2F8 /* ORKGoNoGoContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3ED1E37BD9900A5F2F8 /* ORKGoNoGoContentView.h */; };
+		789FA3F61E37BD9900A5F2F8 /* ORKGoNoGoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3EE1E37BD9900A5F2F8 /* ORKGoNoGoContentView.m */; };
+		789FA3F71E37BD9900A5F2F8 /* ORKGoNoGoStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3EF1E37BD9900A5F2F8 /* ORKGoNoGoStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		789FA3F81E37BD9900A5F2F8 /* ORKGoNoGoStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F01E37BD9900A5F2F8 /* ORKGoNoGoStep.m */; };
+		789FA3F91E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3F11E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h */; };
+		789FA3FA1E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F21E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m */; };
+		789FA3FB1E37BD9900A5F2F8 /* ORKGoNoGoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3F31E37BD9900A5F2F8 /* ORKGoNoGoViewController.h */; };
+		789FA3FC1E37BD9900A5F2F8 /* ORKGoNoGoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F41E37BD9900A5F2F8 /* ORKGoNoGoViewController.m */; };
 		805685791C90C19500BF437A /* UIImage+ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 805685771C90C19500BF437A /* UIImage+ResearchKit.h */; };
 		8056857A1C90C19500BF437A /* UIImage+ResearchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 805685781C90C19500BF437A /* UIImage+ResearchKit.m */; };
 		861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */; };
@@ -697,6 +705,14 @@
 		618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAccessibilityFunctions.m; sourceTree = "<group>"; };
 		618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIView+ORKAccessibility.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIView+ORKAccessibility.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		789FA3ED1E37BD9900A5F2F8 /* ORKGoNoGoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKGoNoGoContentView.h; sourceTree = "<group>"; };
+		789FA3EE1E37BD9900A5F2F8 /* ORKGoNoGoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKGoNoGoContentView.m; sourceTree = "<group>"; };
+		789FA3EF1E37BD9900A5F2F8 /* ORKGoNoGoStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKGoNoGoStep.h; sourceTree = "<group>"; };
+		789FA3F01E37BD9900A5F2F8 /* ORKGoNoGoStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKGoNoGoStep.m; sourceTree = "<group>"; };
+		789FA3F11E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKGoNoGoStimulusView.h; sourceTree = "<group>"; };
+		789FA3F21E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKGoNoGoStimulusView.m; sourceTree = "<group>"; };
+		789FA3F31E37BD9900A5F2F8 /* ORKGoNoGoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKGoNoGoViewController.h; sourceTree = "<group>"; };
+		789FA3F41E37BD9900A5F2F8 /* ORKGoNoGoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKGoNoGoViewController.m; sourceTree = "<group>"; };
 		805685771C90C19500BF437A /* UIImage+ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResearchKit.h"; sourceTree = "<group>"; };
 		805685781C90C19500BF437A /* UIImage+ResearchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResearchKit.m"; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
@@ -1516,6 +1532,21 @@
 			path = Accessibility;
 			sourceTree = "<group>";
 		};
+		789FA3EC1E37BD7400A5F2F8 /* Go No Go Test */ = {
+			isa = PBXGroup;
+			children = (
+				789FA3ED1E37BD9900A5F2F8 /* ORKGoNoGoContentView.h */,
+				789FA3EE1E37BD9900A5F2F8 /* ORKGoNoGoContentView.m */,
+				789FA3EF1E37BD9900A5F2F8 /* ORKGoNoGoStep.h */,
+				789FA3F01E37BD9900A5F2F8 /* ORKGoNoGoStep.m */,
+				789FA3F11E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h */,
+				789FA3F21E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m */,
+				789FA3F31E37BD9900A5F2F8 /* ORKGoNoGoViewController.h */,
+				789FA3F41E37BD9900A5F2F8 /* ORKGoNoGoViewController.m */,
+			);
+			name = "Go No Go Test";
+			sourceTree = "<group>";
+		};
 		866DA5121D63D01C00C9AF3F /* DataCollection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,6 +1598,7 @@
 				10BAA2CC1B5FCDB1004FE478 /* Walking */,
 				147503AC1AEE8058004B17F3 /* Tone Audiometry */,
 				106FF29B1B663F5C004EACF2 /* Hole Peg Test */,
+				789FA3EC1E37BD7400A5F2F8 /* Go No Go Test */,
 				25ECC0921AFBD64800F3D63B /* Reaction Time */,
 				10864C951B271456000F4158 /* PSAT */,
 				95E25CF71D39FB240089C0B8 /* Range of Motion */,
@@ -2528,6 +2560,7 @@
 				861D2AE81B840991008C4CD0 /* ORKTimedWalkStep.h in Headers */,
 				86C40D241A8D7C5C00081FAC /* ORKFormStepViewController.h in Headers */,
 				959A2C001D68B9DA00841B04 /* ORKRangeOfMotionStepViewController.h in Headers */,
+				789FA3F71E37BD9900A5F2F8 /* ORKGoNoGoStep.h in Headers */,
 				86C40D6A1A8D7C5C00081FAC /* ORKResult.h in Headers */,
 				86C40DD61A8D7C5C00081FAC /* ORKUnitLabel.h in Headers */,
 				10FF9AD71B7A045E00ECB5B4 /* ORKSeparatorView.h in Headers */,
@@ -2561,6 +2594,7 @@
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,
 				86C40DB61A8D7C5C00081FAC /* ORKSurveyAnswerCellForText.h in Headers */,
+				789FA3FB1E37BD9900A5F2F8 /* ORKGoNoGoViewController.h in Headers */,
 				86C40E281A8D7C5C00081FAC /* ORKSignatureView.h in Headers */,
 				2489F7AF1D65214D008DEF20 /* ORKVideoCaptureCameraPreviewView.h in Headers */,
 				BCB6E65D1B7D534C000D5B34 /* ORKGraphChartView_Internal.h in Headers */,
@@ -2600,6 +2634,7 @@
 				86C40D1A1A8D7C5C00081FAC /* ORKFormItem_Internal.h in Headers */,
 				BC5FAF841C6901A200057CF1 /* ORKChartTypes.h in Headers */,
 				86C40E1C1A8D7C5C00081FAC /* ORKConsentSection_Private.h in Headers */,
+				789FA3F91E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h in Headers */,
 				861D2AEC1B8409B2008C4CD0 /* ORKTimedWalkStepViewController.h in Headers */,
 				86C40C7A1A8D7C5C00081FAC /* ORKAccelerometerRecorder.h in Headers */,
 				242C9E051BBDFDAC0088B7F4 /* ORKVerificationStep.h in Headers */,
@@ -2685,6 +2720,7 @@
 				86C40CB41A8D7C5C00081FAC /* ORKTouchRecorder.h in Headers */,
 				86C40DEA1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h in Headers */,
 				9550E6731D58DBCF00C691B8 /* ORKTouchAnywhereStep.h in Headers */,
+				789FA3F51E37BD9900A5F2F8 /* ORKGoNoGoContentView.h in Headers */,
 				86C40CF61A8D7C5C00081FAC /* ORKBorderedButton.h in Headers */,
 				86C40D4A1A8D7C5C00081FAC /* ORKLabel.h in Headers */,
 				250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */,
@@ -3015,6 +3051,7 @@
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
+				789FA3FA1E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m in Sources */,
 				2489F7B21D65214D008DEF20 /* ORKVideoCaptureStep.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKSignatureStepViewController.m in Sources */,
 				959A2BFD1D68B98700841B04 /* ORKRangeOfMotionStep.m in Sources */,
@@ -3121,7 +3158,9 @@
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
 				FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */,
+				789FA3FC1E37BD9900A5F2F8 /* ORKGoNoGoViewController.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
+				789FA3F61E37BD9900A5F2F8 /* ORKGoNoGoContentView.m in Sources */,
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,
 				D442397A1AF17F5100559D96 /* ORKImageCaptureStep.m in Sources */,
 				FF36A48E1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.m in Sources */,
@@ -3211,6 +3250,7 @@
 				BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */,
 				2489F7B41D65214D008DEF20 /* ORKVideoCaptureStepViewController.m in Sources */,
 				861D2AF71B843968008C4CD0 /* ORKCompletionStepViewController.m in Sources */,
+				789FA3F81E37BD9900A5F2F8 /* ORKGoNoGoStep.m in Sources */,
 				BCB6E65F1B7D534C000D5B34 /* ORKGraphChartView.m in Sources */,
 				24BC5CEF1BC345D900846B43 /* ORKLoginStep.m in Sources */,
 				861D2AE91B840991008C4CD0 /* ORKTimedWalkStep.m in Sources */,
