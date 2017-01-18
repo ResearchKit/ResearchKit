@@ -55,6 +55,7 @@
     BOOL _validResult;
     BOOL _timedOut;
     BOOL _shouldIndicateFailure;
+    NSMutableArray<NSNumber*>* tests;
     BOOL go;
 }
 
@@ -69,8 +70,24 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     _results = [NSMutableArray new];
     go = true;
     UIColor* color = self.view.tintColor;
-    //NSArray<UIColor*>* colors = @[self.view.tintColor, UIColor.greenColor];
     _gonogoContentView = [[ORKGoNoGoContentView alloc] initWithColor:color];
+    
+    // Generate the type of tests we are going to display
+    // Always do go first, and make sure there is at least 1 no-go
+    tests = [NSMutableArray array];
+    [tests addObject:[NSNumber numberWithBool:YES]];
+    while (tests.count < [self gonogoTimeStep].numberOfAttempts)
+        [tests addObject:[NSNumber numberWithBool:((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667]];
+    
+    // Check to make sure we have a no go
+    BOOL hasNoGo = NO;
+    for (NSNumber* go in tests)
+        if ([go boolValue] == NO)
+            hasNoGo = YES;
+    
+    // If not, put one in
+    if (!hasNoGo && tests.count > 1)
+        [tests setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:arc4random_uniform(tests.count - 1) + 1];
     
     self.activeStepView.activeCustomView = _gonogoContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
@@ -249,10 +266,21 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     AudioServicesPlayAlertSound(sound);
 }
 
+- (BOOL)getNextTestType {
+    if (tests.count > 0) {
+        BOOL res = [[tests firstObject] boolValue];
+        [tests removeObjectAtIndex:0];
+        return res;
+    }
+    else {
+        return ((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667;
+    }
+}
+
 - (void)resetAfterDelay:(NSTimeInterval)delay {
     ORKWeakTypeOf(self) weakSelf = self;
     
-    go = ((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667;
+    go = [self getNextTestType];
     
     [_gonogoContentView changeColor:go ? self.view.tintColor : UIColor.greenColor];
     [_gonogoContentView resetAfterDelay:delay completion:^{
