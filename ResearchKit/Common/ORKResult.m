@@ -1451,6 +1451,62 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 @end
 
+@implementation ORKMultipleComponentQuestionResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, componentsAnswer);
+    ORK_ENCODE_OBJ(aCoder, separator);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_ARRAY(aDecoder, componentsAnswer, NSObject);
+        ORK_DECODE_OBJ(aDecoder, separator);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.componentsAnswer, castObject.componentsAnswer) &&
+            ORKEqualObjects(self.separator, castObject.separator));
+}
+
+- (NSUInteger)hash {
+    return super.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    __typeof(self) copy = [super copyWithZone:zone];
+    copy.componentsAnswer = self.componentsAnswer;
+    copy.separator = self.separator;
+    return copy;
+}
+
++ (Class)answerClass {
+    return [NSArray class];
+}
+
+- (void)setAnswer:(id)answer {
+    answer = [self validateAnswer:answer];
+    self.componentsAnswer = answer;
+}
+
+- (id)answer {
+    return self.componentsAnswer;
+}
+
+@end
+
 
 @implementation ORKBooleanQuestionResult
 
