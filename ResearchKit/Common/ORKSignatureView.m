@@ -464,8 +464,11 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (UIImage *)signatureImage {
-    UIGraphicsBeginImageContext(self.bounds.size);
-    
+    CGSize imageContextSize;
+    imageContextSize = (self.bounds.size.width == 0 || self.bounds.size.height == 0) ? CGSizeMake(200, 200) :
+                        self.bounds.size;
+    UIGraphicsBeginImageContext(imageContextSize);
+
     for (UIBezierPath *path in self.pathArray) {
         [self.lineColor setStroke];
         [path stroke];
