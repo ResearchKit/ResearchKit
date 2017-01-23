@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2017, Roland Rabien. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -37,7 +37,6 @@
 
 @implementation ORKGoNoGoContentView {
     ORKGoNoGoStimulusView *_stimulusView;
-    //NSUInteger _colorIndex;
     UIColor* _stimulusColor;
 }
 
@@ -45,8 +44,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        _stimulusView = self.tintColor;
         
-        //[self addStimulusView];
+        [self addStimulusView];
     }
     return self;
 }
@@ -56,7 +56,6 @@
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         _stimulusColor = color;
-        //[self changeColor];
         
         [self addStimulusView];
     }
@@ -92,10 +91,14 @@
     }
 }
 
+
+- (BOOL)stimulusHidden {
+    return _stimulusView.hidden;
+}
+
 - (void)setStimulusHidden:(BOOL)hidden {
     _stimulusView.hidden = hidden;
 }
-
 
 - (void)setUpStimulusViewConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
@@ -128,9 +131,5 @@
 - (void)changeColor:(UIColor*)color {
     self->_stimulusColor = color;
 }
-//
-//- (UIColor*)currentColor {
-//    return _stimulusColors[_colorIndex];
-//}
 
 @end

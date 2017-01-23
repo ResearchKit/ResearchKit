@@ -1422,9 +1422,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                        thresholdAcceleration:(double)thresholdAcceleration
                             numberOfAttempts:(int)numberOfAttempts
                                      timeout:(NSTimeInterval)timeout
-                                successSound:(UInt32)successSoundID
-                                timeoutSound:(UInt32)timeoutSoundID
-                                failureSound:(UInt32)failureSoundID
+                                successSound:(SystemSoundID)successSoundID
+                                timeoutSound:(SystemSoundID)timeoutSoundID
+                                failureSound:(SystemSoundID)failureSoundID
                                      options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];

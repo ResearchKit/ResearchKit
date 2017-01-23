@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2017, Roland Rabien. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -63,6 +63,10 @@ static const CGFloat RoundGoNoGoViewDiameter = 122;
     _tickLayer = nil;
     _crossLayer = nil;
     self.layer.backgroundColor = _backgroundColor.CGColor;
+}
+
+- (UIColor*)color {
+    return _backgroundColor;
 }
 
 - (void)setColor:(UIColor *)color {

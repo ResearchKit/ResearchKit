@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2017, Roland Rabien. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,9 +36,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKGoNoGoStimulusView : UIView
+
+@property (nonatomic, assign) UIColor* color;
+
 - (instancetype)initWithBackgroundColor:(UIColor*)color;
-//- (void)reset;
-- (void)setColor:(UIColor *)color;
 
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
 

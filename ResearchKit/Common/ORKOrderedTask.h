@@ -30,8 +30,9 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKTask.h>
+@import AudioToolbox;
 
+#import <ResearchKit/ORKTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -625,9 +626,9 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                        thresholdAcceleration:(double)thresholdAcceleration
                             numberOfAttempts:(int)numberOfAttempts
                                      timeout:(NSTimeInterval)timeout
-                                successSound:(UInt32)successSoundID
-                                timeoutSound:(UInt32)timeoutSoundID
-                                failureSound:(UInt32)failureSoundID
+                                successSound:(SystemSoundID)successSoundID
+                                timeoutSound:(SystemSoundID)timeoutSoundID
+                                failureSound:(SystemSoundID)failureSoundID
                                      options:(ORKPredefinedTaskOption)options;
 
 /**
