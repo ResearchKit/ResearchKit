@@ -47,6 +47,7 @@
     UIPickerView *_pickerView;
     id _answer;
     NSString *_separator;
+    BOOL _shouldShowSeparator;
     __weak id<ORKPickerDelegate> _pickerDelegate;
 }
 
@@ -65,6 +66,7 @@
         _helpers = [helpers copy];
 
         _separator = answerFormat.separator ?: @" ";
+        _shouldShowSeparator = [[_separator stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] > 0;
         _answer = answer;
         _pickerDelegate = delegate;
     }
@@ -87,11 +89,16 @@
     NSArray *indexNumbers = [self indexNumbersForAnswer:answer];
     if (indexNumbers) {
         [indexNumbers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop __unused) {
-            [_pickerView selectRow:[obj integerValue] inComponent:idx animated:NO];
+            NSUInteger pickerIdx = [self convertToPickerViewComponent:idx];
+            [_pickerView selectRow:[obj integerValue] inComponent:pickerIdx animated:NO];
+            if (_shouldShowSeparator && idx > 0) {
+                [_pickerView selectRow:0 inComponent:pickerIdx - 1 animated:NO];
+            }
         }];
     }
     else {
-        for (NSInteger ii=0; ii < self.helpers.count; ii++) {
+        NSUInteger count = [self numberOfComponentsInPickerView:_pickerView];
+        for (NSInteger ii=0; ii < count; ii++) {
             [_pickerView selectRow:0 inComponent:ii animated:NO];
         }
     }
@@ -99,6 +106,26 @@
 
 - (id)answer {
     return _answer;
+}
+
+- (NSUInteger)convertToPickerViewComponent:(NSUInteger)idx {
+    if (_shouldShowSeparator) {
+        return idx * 2;
+    } else {
+        return idx;
+    }
+}
+
+- (NSUInteger)convertFromPickerViewComponent:(NSUInteger)component {
+    if (_shouldShowSeparator) {
+        if (component%2 == 0) {
+            return component / 2;
+        } else {
+            return NSNotFound;
+        }
+    } else {
+        return component;
+    }
 }
          
 - (NSArray <NSNumber *> *)indexNumbersForAnswer:(id)answer {
@@ -133,7 +160,7 @@
     
     __block NSMutableArray *strings = [NSMutableArray new];
     [indexNumbers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *title = [self pickerView:_pickerView titleForRow:[obj integerValue] forComponent:idx];
+        NSString *title = [[self.helpers[idx] textChoiceAtIndex:[obj integerValue]] text];
         if (title) {
             [strings addObject:title];
         }
@@ -159,7 +186,8 @@
     
     __block NSMutableArray *answers = [NSMutableArray new];
     [self.helpers enumerateObjectsUsingBlock:^(ORKChoiceAnswerFormatHelper * _Nonnull helper, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSInteger row = [_pickerView selectedRowInComponent:idx];
+        NSUInteger pickerIdx = [self convertToPickerViewComponent:idx];
+        NSInteger row = [_pickerView selectedRowInComponent:pickerIdx];
         id answer = [helper answerForSelectedIndex:row];
         if ([answer isKindOfClass:[NSArray class]]) {
             id obj = [(NSArray*)answer firstObject];
@@ -193,16 +221,30 @@
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return self.helpers.count;
+    if (_shouldShowSeparator) {
+        return self.helpers.count*2 - 1;
+    } else {
+        return self.helpers.count;
+    }
 }
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.helpers[component].choiceCount;
+    NSUInteger idx = [self convertFromPickerViewComponent:component];
+    if (idx == NSNotFound) {
+        return 1;
+    } else {
+        return self.helpers[idx].choiceCount;
+    }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [[self.helpers[component] textChoiceAtIndex:row] text] ?: @"";
+    NSUInteger idx = [self convertFromPickerViewComponent:component];
+    if (idx == NSNotFound) {
+        return _separator;
+    } else {
+        return [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
+    }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
