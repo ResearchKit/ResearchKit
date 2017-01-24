@@ -54,6 +54,7 @@ DefineStringKey(LoginTaskIdentifier);
 DefineStringKey(RegistrationTaskIdentifier);
 DefineStringKey(VerificationTaskIdentifier);
 
+DefineStringKey(CompletionStepTaskIdentifier);
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(VideoCaptureTaskIdentifier);
@@ -401,6 +402,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Signature Step",
                            @"Auxillary Image",
                            @"Icon Image",
+                           @"Completion Step",
                            @"Footnote",
                            ],
                        ];
@@ -3435,6 +3437,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
     step.title = @"You'll optionally skip this step";
+    step.text = @"You should only see this step if you answered the previous question with 'No'";
     [steps addObject:step];
     
     // Loop target step
@@ -4052,6 +4055,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
+    } else if ([stepViewController.step.identifier isEqualToString:@"completionStepWithDoneButton"] &&
+               [stepViewController isKindOfClass:[ORKCompletionStepViewController class]]) {
+        ((ORKCompletionStepViewController*)stepViewController).shouldShowContinueButton = YES;
     }
 
 }
@@ -4123,6 +4129,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     
     NSLog(@"[ORKTest] task results: %@", taskViewController.result);
+    
+    // Validate the results
+    NSArray *results = taskViewController.result.results;
+    if (results) {
+        NSSet *uniqueResults = [NSSet setWithArray:results];
+        BOOL allResultsUnique = (results.count == uniqueResults.count);
+        NSAssert(allResultsUnique, @"The returned results have duplicates of the same object.");
+    }
     
     if (_currentDocument) {
         /*
@@ -4543,6 +4557,26 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step3.iconImage = [UIImage imageNamed:@"Poppies"];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
+}
+
+#pragma mark - Completion Step Continue Button
+
+- (IBAction)completionStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CompletionStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeCompletionStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKCompletionStep *step1 = [[ORKCompletionStep alloc] initWithIdentifier:@"completionStepWithDoneButton"];
+    step1.text = @"Example of a step view controller with the continue button in the standard location below the checkmark.";
+    [steps addObject:step1];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Example of an step view controller with the continue button in the upper right.";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
 }
 
 #pragma mark - Footnote
