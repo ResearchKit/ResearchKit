@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKGoNoGoContentView : ORKActiveStepCustomView
 
 @property (nonatomic, assign) BOOL stimulusHidden;
+@property (nonatomic, assign) UIColor* stimulusColor;
 
 - (instancetype)initWithColor:(UIColor*)color;
 
@@ -46,9 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
 
 - (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion;
-
-
-- (void)changeColor:(UIColor*)color;
 
 @end
 

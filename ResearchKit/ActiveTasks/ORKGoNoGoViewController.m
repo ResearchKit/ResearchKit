@@ -81,13 +81,16 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
     // Check to make sure we have a no go
     BOOL hasNoGo = NO;
-    for (NSNumber* go in tests)
-        if ([go boolValue] == NO)
+    for (NSNumber* go in tests) {
+        if ([go boolValue] == NO) {
             hasNoGo = YES;
+        }
+    }
     
     // If not, put one in
-    if (!hasNoGo && tests.count > 1)
+    if (!hasNoGo && tests.count > 1) {
         [tests setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:arc4random_uniform(tests.count - 1) + 1];
+    }
     
     self.activeStepView.activeCustomView = _gonogoContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
@@ -144,8 +147,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKRecorderDelegate
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-    if (_validResult) {
-    }
     [self attemptDidFinish:result];
 }
 
@@ -170,14 +171,15 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     int errorCount = 0;
     NSTimeInterval lastReactionTime = 0;
     
-    for (ORKGoNoGoResult* res in _results)
-    {
-        if (res.incorrect == NO)
+    for (ORKGoNoGoResult* res in _results) {
+        if (res.incorrect == NO) {
             successCount++;
-        else
+        } else {
             errorCount++;
-        if (res.go && !res.incorrect)
+        }
+        if (res.go && !res.incorrect) {
             lastReactionTime = res.timeToThreshold;
+        }
     }
     
     NSString *format = ORKLocalizedString(@"GONOGO_TASK_ATTEMPTS_FORMAT", nil);
@@ -202,9 +204,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)attemptDidFinish:(ORKResult *)result {
     void (^completion)(void) = ^{
         int successCount = 0;
-        for (ORKGoNoGoResult* res in _results)
-            if (res.incorrect == NO)
+        for (ORKGoNoGoResult* res in _results) {
+            if (res.incorrect == NO) {
                 successCount++;
+            }
+        }
         
         if (successCount == [self gonogoTimeStep].numberOfAttempts) {
             [self finish];
@@ -237,8 +241,9 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     ORKGoNoGoResult *gonogoResult = [[ORKGoNoGoResult alloc] initWithIdentifier:self.step.identifier];
     gonogoResult.timestamp = _stimulusTimestamp;
     gonogoResult.timeToThreshold = [NSProcessInfo processInfo].systemUptime - _stimulusTimestamp;
-    if (result)
+    if (result) {
         gonogoResult.fileResult = (ORKFileResult *)result;
+    }
     gonogoResult.go = go;
     gonogoResult.incorrect = NO;
     [_results addObject:gonogoResult];
@@ -254,8 +259,9 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     ORKGoNoGoResult *gonogoResult = [[ORKGoNoGoResult alloc] initWithIdentifier:self.step.identifier];
     gonogoResult.timestamp = _stimulusTimestamp;
     gonogoResult.timeToThreshold = [NSProcessInfo processInfo].systemUptime - _stimulusTimestamp;
-    if (result)
+    if (result) {
         gonogoResult.fileResult = (ORKFileResult *)result;
+    }
     gonogoResult.go = go;
     gonogoResult.incorrect = YES;
     [_results addObject:gonogoResult];
@@ -282,7 +288,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
     go = [self getNextTestType];
     
-    [_gonogoContentView changeColor:go ? self.view.tintColor : UIColor.greenColor];
+    _gonogoContentView.stimulusColor = go ? self.view.tintColor : UIColor.greenColor;
     [_gonogoContentView resetAfterDelay:delay completion:^{
         [weakSelf configureTitle];
         [weakSelf start];

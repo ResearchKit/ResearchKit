@@ -37,7 +37,6 @@
 
 @implementation ORKGoNoGoContentView {
     ORKGoNoGoStimulusView *_stimulusView;
-    UIColor* _stimulusColor;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -55,7 +54,7 @@
     self = [super init];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        _stimulusColor = color;
+        self.stimulusColor = color;
         
         [self addStimulusView];
     }
@@ -71,9 +70,10 @@
 }
 
 - (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion {
+    __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _stimulusView.hidden = YES;
-        [_stimulusView setColor:self->_stimulusColor];
+        [_stimulusView setColor:weakSelf.stimulusColor];
         
         if (completion) {
             completion();
@@ -83,9 +83,9 @@
 
 - (void)addStimulusView {
     if (!_stimulusView) {
-        _stimulusView = [[ORKGoNoGoStimulusView alloc] initWithBackgroundColor:self->_stimulusColor];
+        _stimulusView = [[ORKGoNoGoStimulusView alloc] initWithBackgroundColor:self.stimulusColor];
         _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
-        _stimulusView.backgroundColor = self->_stimulusColor;
+        _stimulusView.backgroundColor = self.stimulusColor;
         [self addSubview:_stimulusView];
         [self setUpStimulusViewConstraints];
     }
@@ -125,11 +125,6 @@
                                                                                views:NSDictionaryOfVariableBindings(_stimulusView)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
-}
-
-
-- (void)changeColor:(UIColor*)color {
-    self->_stimulusColor = color;
 }
 
 @end

@@ -573,7 +573,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                 maximumStimulusInterval:8
                                 minimumStimulusInterval:4
                                   thresholdAcceleration:0.5
-                                       numberOfAttempts:3
+                                       numberOfAttempts:9
                                                 timeout:10
                                            successSound:0
                                            timeoutSound:0
