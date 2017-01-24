@@ -145,6 +145,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
             [self addSubview:_seperator3];
         }
         
+        [self setUpGestureRecognizer];
         [self setUpConstraints];
 
         if (NO == formMode) {
@@ -155,6 +156,28 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     }
     
     return self;
+}
+
+- (void)setUpGestureRecognizer {
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(addPlacemarkToMap:)];
+    lpgr.minimumPressDuration = 1.0; // press for 1 second
+    [_mapView addGestureRecognizer:lpgr];
+}
+
+- (void)addPlacemarkToMap:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    
+    CGPoint touchPoint = [gestureRecognizer locationInView:_mapView];
+    CLLocationCoordinate2D touchMapCoordinate = [_mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
+    
+    MKPointAnnotation *annotation = [MKPointAnnotation new];
+    annotation.coordinate = touchMapCoordinate;
+    [_mapView addAnnotation:annotation];
+    
+    ORKLocation *pinLocation = [[ORKLocation alloc] initWithCoordinate:touchMapCoordinate region:nil userInput:nil addressDictionary:nil];
+    [self setAnswer:pinLocation];
 }
 
 - (void)setUpConstraints {
