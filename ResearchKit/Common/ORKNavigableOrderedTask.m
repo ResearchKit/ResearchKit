@@ -129,7 +129,7 @@
     _stepModifiers[stepIdentifier] = stepModifier;
 }
 
-- (nullable ORKStepModifier *)stepModifierForStepIdentifier:(NSString *)stepIdentifier {
+- (ORKStepModifier *)stepModifierForStepIdentifier:(NSString *)stepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
     return _stepModifiers[stepIdentifier];
 }
