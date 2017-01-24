@@ -48,6 +48,18 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKCompletionStepViewController : ORKInstructionStepViewController
 
+/**
+ Optional property to allow showing the "Done/Next" button rather than moving this button 
+ to the `rightBarButtonItem`.
+ */
+@property (nonatomic) BOOL shouldShowContinueButton;
+
+/**
+ Optional property to set the color of the checkmark. This allows the checkmark to use a different
+ color from the tintColor of the parent view.
+ */
+@property (nonatomic, copy, nullable) UIColor *checkmarkColor;
+
 @end
 
 NS_ASSUME_NONNULL_END
