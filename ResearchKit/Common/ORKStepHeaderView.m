@@ -292,7 +292,7 @@ const CGFloat IconHeight = 60;
                                                             attribute:NSLayoutAttributeWidth
                                                             relatedBy:NSLayoutRelationLessThanOrEqual
                                                                toItem:nil
-                                                            attribute:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                            multiplier:1.0
                                                              constant:IconHeight]];
     }

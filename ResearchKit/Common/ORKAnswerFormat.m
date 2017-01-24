@@ -2116,7 +2116,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self.validationRegex) {
         if (!_cachedRegEx) {
             NSString *regExPattern = self.validationRegex;
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:0 error:nil];
         }
 
         NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];

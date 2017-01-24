@@ -54,6 +54,7 @@ DefineStringKey(LoginTaskIdentifier);
 DefineStringKey(RegistrationTaskIdentifier);
 DefineStringKey(VerificationTaskIdentifier);
 
+DefineStringKey(CompletionStepTaskIdentifier);
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(VideoCaptureTaskIdentifier);
@@ -106,6 +107,7 @@ DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
 DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
+DefineStringKey(PageStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -400,6 +402,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Signature Step",
                            @"Auxillary Image",
                            @"Icon Image",
+                           @"Completion Step",
+                           @"Page Step",
                            ],
                        ];
 }
@@ -648,6 +652,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
+        return [self makePageStepTask];
     }
 
     return nil;
@@ -667,6 +673,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      */
 
     id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
+    NSParameterAssert(task);
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
@@ -3431,6 +3438,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
     step.title = @"You'll optionally skip this step";
+    step.text = @"You should only see this step if you answered the previous question with 'No'";
     [steps addObject:step];
     
     // Loop target step
@@ -4048,6 +4056,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
         [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
+    } else if ([stepViewController.step.identifier isEqualToString:@"completionStepWithDoneButton"] &&
+               [stepViewController isKindOfClass:[ORKCompletionStepViewController class]]) {
+        ((ORKCompletionStepViewController*)stepViewController).shouldShowContinueButton = YES;
     }
 
 }
@@ -4119,6 +4130,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     
     NSLog(@"[ORKTest] task results: %@", taskViewController.result);
+    
+    // Validate the results
+    NSArray *results = taskViewController.result.results;
+    if (results) {
+        NSSet *uniqueResults = [NSSet setWithArray:results];
+        BOOL allResultsUnique = (results.count == uniqueResults.count);
+        NSAssert(allResultsUnique, @"The returned results have duplicates of the same object.");
+    }
     
     if (_currentDocument) {
         /*
@@ -4539,6 +4558,82 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step3.iconImage = [UIImage imageNamed:@"Poppies"];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
+}
+
+#pragma mark - Completion Step Continue Button
+
+- (IBAction)completionStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CompletionStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeCompletionStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKCompletionStep *step1 = [[ORKCompletionStep alloc] initWithIdentifier:@"completionStepWithDoneButton"];
+    step1.text = @"Example of a step view controller with the continue button in the standard location below the checkmark.";
+    [steps addObject:step1];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Example of an step view controller with the continue button in the upper right.";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
+}
+
+- (IBAction)pageStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:PageStepTaskIdentifier];
+}
+
+#pragma mark - Page Step
+
+- (ORKOrderedTask *)makePageStepTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.text = @"Example of an ORKPageStep";
+    [steps addObject:step1];
+    
+    NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Good" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Average" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Poor" detailText:@"" value:[NSNumber numberWithInt:2] exclusive:NO]];
+    ORKAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices];
+    ORKFormItem *formItem = [[ORKFormItem alloc] initWithIdentifier:@"choice" text:nil answerFormat:answerFormat];
+    ORKFormStep *groupStep1 = [[ORKFormStep alloc] initWithIdentifier:@"step1" title:nil text:@"How do you feel today?"];
+    groupStep1.formItems = @[formItem];
+    
+    NSMutableArray<ORKImageChoice *> *imageChoices = [[NSMutableArray alloc] init];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"left_hand_outline"] selectedImage:[UIImage imageNamed:@"left_hand_solid"] text:@"Left hand" value:[NSNumber numberWithInt:1]]];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"right_hand_outline"] selectedImage:[UIImage imageNamed:@"right_hand_solid"] text:@"Right hand" value:[NSNumber numberWithInt:0]]];
+    ORKQuestionStep *groupStep2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
+    
+    ORKSignatureStep *groupStep3 = [[ORKSignatureStep alloc] initWithIdentifier:@"step3"];
+    
+    ORKStep *groupStep4 = [[ORKConsentReviewStep alloc] initWithIdentifier:@"groupStep4" signature:nil inDocument:[self buildConsentDocument]];
+    
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3, groupStep4]];
+    [steps addObject:pageStep];
+    
+    ORKOrderedTask *audioTask = [ORKOrderedTask audioTaskWithIdentifier:@"audioTask"
+                                                 intendedUseDescription:nil
+                                                      speechInstruction:nil
+                                                 shortSpeechInstruction:nil
+                                                               duration:10
+                                                      recordingSettings:nil
+                                                        checkAudioLevel:YES
+                                                                options:
+                                 ORKPredefinedTaskOptionExcludeInstructions |
+                                 ORKPredefinedTaskOptionExcludeConclusion];
+    ORKPageStep *audioStep = [[ORKNavigablePageStep alloc] initWithIdentifier:@"audioStep" pageTask:audioTask];
+    [steps addObject:audioStep];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Task Complete";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:PageStepTaskIdentifier steps:steps];
+    
 }
 
 
