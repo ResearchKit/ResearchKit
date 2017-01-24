@@ -180,6 +180,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 @interface ORKValuePickerAnswerFormat ()
 
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice NS_DESIGNATED_INITIALIZER;
+
 - (ORKTextChoice *)nullTextChoice;
 
 @end

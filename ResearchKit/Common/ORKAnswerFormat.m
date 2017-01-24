@@ -543,18 +543,27 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
-    return [self initWithTextChoices:textChoices nullChoice:nil];
+    self = [super init];
+    if (self) {
+        [self commonInitWithTextChoices:textChoices nullChoice:nil];
+    }
+    return self;
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice {
     self = [super init];
     if (self) {
-        _textChoices = ork_processTextChoices(textChoices);
-        _nullTextChoice = nullChoice;
-        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+        [self commonInitWithTextChoices:textChoices nullChoice:nullChoice];
     }
     return self;
 }
+
+- (void)commonInitWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice {
+    _textChoices = ork_processTextChoices(textChoices);
+    _nullTextChoice = nullChoice;
+    _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+}
+
 
 - (void)validateParameters {
     [super validateParameters];
