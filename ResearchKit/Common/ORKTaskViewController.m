@@ -695,30 +695,49 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 - (NSArray *)managedResults {
     NSMutableArray *results = [NSMutableArray new];
     
-    [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *identifier = obj;
-        ORKResult *result = _managedResults[identifier];
-        NSAssert(result, @"Result should not be nil for identifier %@", identifier);
+    [_managedStepIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop) {
+        id <NSCopying> key = [self uniqueManagedKey:identifier index:idx];
+        ORKResult *result = _managedResults[key];
+        NSAssert2(result, @"Result should not be nil for identifier %@ with key %@", identifier, key);
         [results addObject:result];
     }];
     
     return [results copy];
 }
 
-- (void)setManagedResult:(id)result forKey:(id <NSCopying>)aKey {
+- (void)setManagedResult:(ORKStepResult *)result forKey:(NSString *)aKey {
     if (aKey == nil) {
         return;
     }
     
-    if (result == nil || NO == [result isKindOfClass:[ORKResult class]]) {
-        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be ORKResult type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
+    if (result == nil || NO == [result isKindOfClass:[ORKStepResult class]]) {
+        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be `ORKStepResult` type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
         return;
     }
+    
+    // Manage last result tracking (used in predicate navigation)
+    // If the previous result and the replacement result are the same result then `isPreviousResult`
+    // will be set to `NO` otherwise it will be marked with `YES`.
+    ORKStepResult *previousResult = _managedResults[aKey];
+    previousResult.isPreviousResult = YES;
+    result.isPreviousResult = NO;
     
     if (_managedResults == nil) {
         _managedResults = [NSMutableDictionary new];
     }
     _managedResults[aKey] = result;
+    
+    // Also point to the object using a unique key
+    NSUInteger idx = _managedStepIdentifiers.count;
+    if ([_managedStepIdentifiers.lastObject isEqualToString:aKey]) {
+        idx--;
+    }
+    id <NSCopying> uniqueKey = [self uniqueManagedKey:aKey index:idx];
+    _managedResults[uniqueKey] = result;
+}
+
+- (id <NSCopying>)uniqueManagedKey:(NSString*)stepIdentifier index:(NSUInteger)index {
+    return [NSString stringWithFormat:@"%@:%@", stepIdentifier, @(index)];
 }
 
 - (NSUUID *)taskRunUUID {
