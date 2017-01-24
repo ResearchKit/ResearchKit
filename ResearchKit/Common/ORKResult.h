@@ -1384,6 +1384,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKTrailmakingTap` class represents a single tap in a trail making test.
  
@@ -1419,8 +1420,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKTrailmakingResult` class represents the result of a signature step (`ORKTrailmakingStep`).
+ 
  
  A trail making result is produced by the task view controller when it presents a trail making step.
  

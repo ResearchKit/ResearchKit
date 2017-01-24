@@ -2234,6 +2234,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 
 @end
 
+
 @implementation ORKTrailmakingResult
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -2284,6 +2285,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
 
 @implementation ORKTrailmakingTap
 

@@ -46,6 +46,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
+
 #define BOUND(lo, hi, v) (((v) < (lo)) ? (lo) : (((v) > (hi)) ? (hi) : (v)))
 
 @interface ORKTrailmakingStepViewController ()
@@ -97,8 +98,7 @@
     }
 }
 
-- (void)viewWillLayoutSubviews
-{
+- (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
     const int cx = 50;
@@ -186,8 +186,7 @@
   return testData;
 }
 
-- (NSArray*)fetchRandomTest
-{
+- (NSArray*)fetchRandomTest {
     const int testNum = arc4random_uniform((uint32_t)[[self testData] count]);
     const bool invertX = arc4random_uniform(2) == 1;
     const bool invertY = arc4random_uniform(2) == 1;
