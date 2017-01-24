@@ -119,7 +119,7 @@
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "التحقق";
 "VERIFICATION_STEP_TITLE" = "التحقق من البريد الإلكتروني";
-"RESEND_EMAIL_LABEL_MESSAGE" = "اضغط على الرابط أدناه إذا كنت لم تتلق بريد التحقق، وترغب بإرساله لك مرة أخرى.";
+"RESEND_EMAIL_LABEL_MESSAGE" = "اضغط على الرابط أدناه إذا كنت لم تستلم بريد التحقق، وترغب بإرساله لك مرة أخرى.";
 "RESEND_EMAIL_BUTTON_TITLE" = "إعادة إرسال بريد التحقق";
 
 /* Login step */
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "فقط الأرقام مسموح بها.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم إدخال رمز الدخول";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "تم إدخال %1$@ من %2$@ من الأرقام";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "هل نسيت رمز الدخول؟";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "تعذر إضافة عنصر سلسلة المفاتيح.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "لا";
 "BOOL_YES" = "نعم";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "سم";
+"MEASURING_UNIT_FT" = "قدم";
+"MEASURING_UNIT_IN" = "بوصة";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "اضغط للإجابة";
 "NULL_ANSWER" = "قم بتحديد إجابة";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "حفظ لما بعد";
 "BUTTON_OPTION_DISCARD" = "تجاهل النتائج";
 "BUTTON_OPTION_STOP_TASK" = "إنهاء المهمة";
+"BUTTON_SAVE" = "حفظ";
+"BUTTON_CLEAR_ANSWER" = "مسح الإجابة";
+"BUTTON_READ_ONLY_MODE" = "لا يمكن تعديل هذه الإجابة.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "بدء النشاط خلال";
 "TASK_COMPLETE_TITLE" = "اكتمل النشاط";
 "TASK_COMPLETE_TEXT" = "سيتم تحليل بياناتك وسيتم إعلامك عندما تصبح النتائج جاهزة.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "متبقٍ %@ من الثواني.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "التقاط صورة";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "لإكمال هذه الخطوة، اسمح لهذا التطبيق بالوصول إلى الكاميرا في الإعدادات.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "لم يتم تحديد دليل إخراج للصور الملتقطة.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "لا يمكن حفظ الصورة الملتقطة.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "بدء التسجيل";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "إيقاف التسجيل";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "إعادة التقاط الفيديو";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "اللياقة";
@@ -213,7 +228,7 @@
 "FITNESS_INTRO_2_TEXT_FORMAT" = "قم بالمشي في الخارج بأقصى سرعة ممكنة لديك لمدة %1$@. عندما تنتهي، اجلس وخذ استراحة لمدة %2$@. للبدء، اضغط على البدء.";
 
 /* Short walk active task. */
-"WALK_TASK_TITLE" = "سرعة المشية والتوازن";
+"WALK_TASK_TITLE" = "سرعة المشي والتوازن";
 "WALK_INTRO_TEXT" = "يقيس هذا النشاط سرعة مشيتك وتوازنك أثناء المشي والوقوف ثابتًا. لا تقم بالمتابعة إذا لم تكن قادرًا على المشي دون مساعدة.";
 "WALK_INTRO_2_TEXT_%ld" = "اعثر على مكان يمكنك المشي فيه بصورة آمنة دون مساعدة لمسافة %ld من الخطوات تقريبًا في خط مستقيم.";
 "WALK_INTRO_2_DETAIL" = "ضع هاتفك في جيبك أو في حقيبة واتبع التعليمات الصوتية.";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "قم بالدوران والمشي رجوعًا إلى نقطة بدايتك.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "قم بمشي حوالي %ld خطوة في خط مستقيم.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ابحث عن مكان يمكنك المشي فيه ذهابًا وإيابًا في خط مستقيم بشكل آمن. حاول أن تسير بشكل مستمر عن طريق الدوران في نهايات مسارك، كما لو كنت تسير حول مخروط.\n\nبعد ذلك، سيتم إرشادك لتقوم بالدوران في دائرة كاملة، ثم الوقوف ثابتًا مع وضع ذراعيك إلى جانبيك وقدميك متباعدتين بمقدار عرض الكتف تقريبًا.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "اضغط على البدء عندما تكون مستعدًا للبدء.\nثم ضع هاتفك في جيبك أو في حقيبة واتبع التعليمات الصوتية.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "قم بالمشي ذهابًا وإيابًا في خط مستقيم %@. قم بالمشي كما تفعل عادة.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "استدر بمقدار دائرة كاملة ثم قف ثابتًا لمدة %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "لقد أكملت النشاط.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "سرعة الضغط";
+"TAPPING_TASK_TITLE_RIGHT" = "اليد اليمنى";
+"TAPPING_TASK_TITLE_LEFT" = "اليد اليسرى";
 "TAPPING_INTRO_TEXT" = "يقيس هذا النشاط سرعتك في الضغط.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "ضع هاتفك على سطح مستوٍ. سيظهر زران على الشاشة لمدة %@. باستخدام إصبعين من نفس اليد، اضغط على الزرين بالتناوب بأقصى سرعة ممكنة لديك.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "ضع هاتفك على سطح مستوٍ.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "استخدم إصبعين من نفس اليد للضغط بالتبادل على الزرين على الشاشة.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "استخدم إصبعين من يدك اليمنى للضغط بالتبادل على الزرين على الشاشة.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "استخدم إصبعين من يدك اليسرى للضغط بالتبادل على الزرين على الشاشة.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "الآن، كرر نفس الاختبار باستخدام يدك اليمنى.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "الآن، كرر نفس الاختبار باستخدام يدك اليسرى.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "اضغط بإصبع، ثم بالإصبع الآخر. حاول ضبط وقت ضغطاتك ليكون متساويًا قدر الإمكان. واستمر في الضغط لمدة %@.";
 "TAPPING_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "اضغط على التالي للبدء.";
 "TAP_BUTTON_TITLE" = "الضغط";
 "TOTAL_TAPS_LABEL" = "إجمالي الضغطات";
-"TAPPING_INSTRUCTION" = "اضغط على الزرين بأقصى سرعة ممكنة لديك باستخدام إصبعين.";
-
+"TAPPING_INSTRUCTION" = "اضغط على الزرين بتوافق قدر الإمكان باستخدام إصبعين.";
+"TAPPING_INSTRUCTION_RIGHT" = "اضغط على الزرين باستخدام يدك اليمنى.";
+"TAPPING_INSTRUCTION_LEFT" = "اضغط على الزرين باستخدام يدك اليسرى.";
+"TAPPING_SKIP_TITLE" = "تخطي هذه اليد";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "الصوت";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "يعمل هذا النشاط على تقييم صوتك من خلال تسجيله بالميكروفون الموجود في أسفل هاتفك.";
 "AUDIO_TOO_LOUD_LABEL" = "عالٍ جدًا";
 "AUDIO_GENERIC_ERROR_LABEL" = "غير قادر على تسجيل الصوت";
+"AUDIO_LEVEL_CHECK_LABEL" = "الرجاء الانتظار حتى يتم التحقق من مستوى الضوضاء في الخلفية.";
+"AUDIO_TOO_LOUD_MESSAGE" = "مستوى الضوضاء المحيطة عالٍ جدًا بحيث لا يمكن تسجيل صوتك. الرجاء الانتقال إلى مكان أكثر هدوءًا والمحاولة مرة أخرى.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "اضغط على التالي عندما تكون مستعدًا.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "قياس سمع النغمة";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "رفع العقدة باستخدام اصبعين.";
 "HOLE_PEG_TEST_TEXT_2" = "ارفع الأصابع لإسقاط العقدة.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "نشاط الرُعاش";
+"TREMOR_TEST_INTRO_1_DETAIL" = "يقيس هذا النشاط مقدار رُعاش يديك بمختلف الأوضاع. ابحث عن مكان يمكنك الجلوس فيه بشكل مريح أثناء مدة هذا النشاط.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "أمسك الهاتف في يدك الأكثر تأثرًا كما يظهر في الصورة أدناه.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "أمسك الهاتف في يدك اليمنى كما يظهر في الصورة أدناه.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "أمسك الهاتف في يدك اليسرى كما يظهر في الصورة أدناه.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "سيُطلب منك تنفيذ %@ أثناء الجلوس مع الإمساك بالهاتف في يديك.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "مهمة واحدة";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "مهمتان";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "ثلاث مهام";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "أربع مهام";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "خمس مهام";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "اضغط على التالي للمتابعة.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "استعد لإمساك هاتفك في حِجرك.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "استعد لإمساك هاتفك في حِجرك بيدك اليسرى.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "استعد لإمساك هاتفك في حِجرك بيدك اليمنى.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "استمر في إمساك هاتفك في حِجرك لمدة %ld من الثواني.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "الآن، أمسك هاتفك ويدك ممدودة في مستوى الكتف.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "الآن، أمسك هاتفك ويدك اليسرى ممدودة في مستوى الكتف.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "الآن، أمسك هاتفك ويدك اليمنى ممدودة في مستوى الكتف.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "استمر في إمساك هاتفك ويدك ممدودة لمدة %ld من الثواني.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "الآن، أمسك هاتفك في مستوى الكتف مع ثني مرفقك.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "الآن، أمسك هاتفك ويدك اليسرى في مستوى الكتف مع ثني مرفقك.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "الآن، أمسك هاتفك ويدك اليمنى في مستوى الكتف مع ثني مرفقك.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "استمر في إمساك هاتفك مع ثني مرفقك لمدة %ld من الثواني";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "الآن، مع الاستمرار في ثني مرفقك، المس الهاتف بأنفك بشكل متكرر.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "الآن، مع الاستمرار في ثني مرفقك والإمساك بالهاتف في يدك اليسرى، المس الهاتف بأنفك بشكل متكرر.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "الآن، مع الاستمرار في ثني مرفقك والإمساك بالهاتف في يدك اليمنى، المس الهاتف بأنفك بشكل متكرر.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "استمر في لمس الهاتف بأنفك لمدة %ld من الثواني";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "استعد للتلويح كالملوك (التلويح عن طريق تدوير معصمك).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "استعد للتلويح كالملوك مع إمساك هاتفك في يدك اليسرى (التلويح عن طريق تدوير معصمك).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "استعد للتلويح كالملوك مع إمساك هاتفك في يدك اليمنى (التلويح عن طريق تدوير معصمك).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "استمر في التلويح كالملوك لمدة %ld من الثواني.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "الآن، انقل الهاتف إلى يدك اليسرى وتابع إلى المهمة التالية.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "الآن، انقل الهاتف إلى يدك اليمنى وتابع إلى المهمة التالية.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "تابع إلى المهمة التالية.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "اكتمل النشاط.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "سيُطلب منك تنفيذ %@ أثناء الجلوس مع الإمساك بالهاتف في إحدى يديك، ثم تكرار ذلك باليد الأخرى.";
+"TREMOR_SKIP_LEFT_HAND" = "لا يمكنني القيام بهذا النشاط بيدي اليسرى.";
+"TREMOR_SKIP_RIGHT_HAND" = "لا يمكنني القيام بهذا النشاط بيدي اليمنى.";
+"TREMOR_SKIP_NEITHER" = "يمكنني القيام بهذا النشاط بكلتا يدي.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "تعذر إنشاء الملف";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "تعذر إزالة ملفات السجل الكافية للوصول إلى الحد";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "معاينة الالتقاط";
 "AX_IMAGE_CAPTURED_LABEL" = "تم التقاط الصورة";
 
+"AX_VIDEO_CAPTURE_LABEL" = "معاينة التقاط الفيديو";
+"AX_VIDEO_CAPTURED_LABEL" = "الفيديو الملتقط";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "غير قادر على وضع القرص بحجم %@ على القرص بحجم %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "الهدف";
 "AX_TOWER_OF_HANOI_TOWER" = "برج";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "يحتوي على أقراص بأحجام %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "فارغ";
 
-"AX_GRAPH_RANGE_FORMAT" = "يتراوح من %@ إلى %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "يتراوح من %@ إلى %@";
+"AX_GRAPH_STACK_PREFIX" = "مجموعة تتكون من";
 "AX_GRAPH_AND_SEPARATOR" = " و ";
 "AX_GRAPH_POINT_%@" = "النقطة: %@";

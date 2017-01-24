@@ -46,9 +46,11 @@
 #import "ORKSignatureStep.h"
 #import "ORKTableStep.h"
 #import "ORKVerificationStep.h"
+#import "ORKVideoCaptureStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKWaitStep.h"
 #import "ORKVideoInstructionStep.h"
+#import "ORKTouchAnywhereStep.h"
 
 #import "ORKTask.h"
 #import "ORKOrderedTask.h"
@@ -67,13 +69,16 @@
 
 #import "ORKStepViewController.h"
 #import "ORKActiveStepViewController.h"
+#import "ORKCompletionStepViewController.h"
 #import "ORKFormStepViewController.h"
+#import "ORKInstructionStepViewController.h"
 #import "ORKLoginStepViewController.h"
 #import "ORKPasscodeViewController.h"
 #import "ORKTableStepViewController.h"
 #import "ORKTaskViewController.h"
 #import "ORKVerificationStepViewController.h"
 #import "ORKWaitStepViewController.h"
+#import "ORKTouchAnywhereStepViewController.h"
 
 #import "ORKRecorder.h"
 
@@ -88,3 +93,7 @@
 #import "ORKDiscreteGraphChartView.h"
 #import "ORKLineGraphChartView.h"
 #import "ORKPieChartView.h"
+
+#import "ORKDataCollectionManager.h"
+#import "ORKCollector.h"
+

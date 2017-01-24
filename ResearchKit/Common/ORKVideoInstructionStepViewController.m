@@ -127,7 +127,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (keyPath == @"rate") {
+    if ([keyPath  isEqual: @"rate"]) {
         AVPlayer *player = (AVPlayer*)object;
         if (player.rate == 0) {
             _playbackStoppedTime = CMTimeGetSeconds([player.currentItem currentTime]);

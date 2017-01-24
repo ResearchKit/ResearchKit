@@ -90,6 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
 
+// Get full width layout for some subclass cells 
++ (NSLayoutConstraint *)fullWidthLayoutConstraint:(UIView *)view;
+
 @end
 
 NS_ASSUME_NONNULL_END

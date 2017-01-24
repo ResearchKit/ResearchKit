@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "僅允許數字字元。";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入 %1$@ 個數字（共 %2$@ 個）";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "忘記密碼？";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "無法加入鑰匙圈項目。";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "否";
 "BOOL_YES" = "是";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "公分";
+"MEASURING_UNIT_FT" = "英尺";
+"MEASURING_UNIT_IN" = "英吋";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "點一下來回答";
 "NULL_ANSWER" = "選取答案";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "稍後再試";
 "BUTTON_OPTION_DISCARD" = "捨棄結果";
 "BUTTON_OPTION_STOP_TASK" = "結束任務";
+"BUTTON_SAVE" = "儲存";
+"BUTTON_CLEAR_ANSWER" = "清除答案";
+"BUTTON_READ_ONLY_MODE" = "這個答案無法修改。";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "準備開始活動：";
 "TASK_COMPLETE_TITLE" = "活動完成";
 "TASK_COMPLETE_TEXT" = "您的資料會經過分析，收到結果時會通知您。";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "剩餘 %@ 秒。";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "擷取影像";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "為了完成此步驟，請在「設定」中允許此 App 取用相機。";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "尚未指定擷取影像的輸出目錄。";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "無法儲存擷取的影像。";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "開始錄音";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止錄影";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "重新擷取影像";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "健身";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "請掉頭並走回您的起點。";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "直線步行到最多 %ld 步。";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找一個您可以安全地以直線來回步行的地點。請試著持續走到盡頭再折返，如同繞過交通錐折返。\n\n接著會指示您轉一圈，然後站著不動，雙手自然放鬆，並且雙腳張開與肩同寬。";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "當您準備好時，請點一下「開始測試」。\n然後將電話放在口袋或包包裡面，並依照語音指示執行。";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "直線來回步行到 %@。請以您一般的步調行走。";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "旋轉一整圈，然後站著不動 %@。";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "您已完成活動。";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "點按速度";
+"TAPPING_TASK_TITLE_RIGHT" = "右手";
+"TAPPING_TASK_TITLE_LEFT" = "左手";
 "TAPPING_INTRO_TEXT" = "此活動會測量您的點按速度。";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "將電話放在平面上。螢幕上會出現兩個按鈕，顯示時間為 %@。用同一隻手的兩根手指輪流點一下按鈕，速度越快越好。";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "將您的電話置於平坦的表面上。";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "用同一隻手的兩指來交互點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "用右手的兩指來交互點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "用左手的兩指來交互點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "現在請用右手重複執行相同的測試。";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "現在請用左手重複執行相同的測試。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "先用一隻手指點按，再用另一隻手指。請試著讓兩指以平均的速率點按。持續點按 %@。";
 "TAPPING_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
+"TAPPING_CALL_TO_ACTION_NEXT" = "點「下一步」來開始。";
 "TAP_BUTTON_TITLE" = "點一下";
 "TOTAL_TAPS_LABEL" = "總計點按數量";
-"TAPPING_INSTRUCTION" = "用兩根手指來點一下按鈕，速度越快越好。";
-
+"TAPPING_INSTRUCTION" = "用兩指儘可能地以相同的節奏點按按鈕。";
+"TAPPING_INSTRUCTION_RIGHT" = "用「右手」點按按鈕。";
+"TAPPING_INSTRUCTION_LEFT" = "用「左手」點按按鈕。";
+"TAPPING_SKIP_TITLE" = "略過這隻手";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "聲音";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "此活動會用電話底部的麥克風錄下您的聲音以進行評估。";
 "AUDIO_TOO_LOUD_LABEL" = "太大聲了";
 "AUDIO_GENERIC_ERROR_LABEL" = "無法錄音";
+"AUDIO_LEVEL_CHECK_LABEL" = "我們檢查背景噪音量，請稍候。";
+"AUDIO_TOO_LOUD_MESSAGE" = "周圍的噪音量過高，無法錄下您的聲音。請到較為安靜的位置，並再試一次。";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "準備好時，請點「下一步」。";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
@@ -266,14 +301,14 @@
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "以圖片亮起來的順序點一下%@";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "以相反的順序點一下%@";
 "MEMORY_GAME_COMPLETE_TITLE" = "完成順序";
-"MEMORY_GAME_COMPLETE_MESSAGE" = "若要繼續，請點一下「下一步」";
+"MEMORY_GAME_COMPLETE_MESSAGE" = "若要繼續，請點「下一步」";
 "MEMORY_GAME_FAILED_TITLE" = "再試一次";
-"MEMORY_GAME_FAILED_MESSAGE" = "您這次未成功。點一下「下一步」來繼續。";
+"MEMORY_GAME_FAILED_MESSAGE" = "您這次未成功。點「下一步」來繼續。";
 "MEMORY_GAME_TIMEOUT_TITLE" = "時間到了";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "您的時間用完了。\n點一下「下一步」來繼續。";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "您的時間用完了。\n點「下一步」來繼續。";
 "MEMORY_GAME_COMPLETE" = "遊戲完成";
 "MEMORY_GAME_PAUSED_TITLE" = "已暫停";
-"MEMORY_GAME_PAUSED_MESSAGE" = "若要繼續，請點一下「下一步」";
+"MEMORY_GAME_PAUSED_MESSAGE" = "若要繼續，請點「下一步」";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反應時間";
@@ -296,7 +331,7 @@
 "TIMED_WALK_TITLE" = "定時步行";
 "TIMED_WALK_INTRO_DETAIL" = "此活動會測量您的下肢功能。";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "請找到一個地方（最好在室外）可讓您快速安全地直線步行約 %@。通過終點線前請勿放慢速度。";
-"TIMED_WALK_INTRO_2_DETAIL" = "點一下「下一步」來開始。";
+"TIMED_WALK_INTRO_2_DETAIL" = "點「下一步」來開始。";
 "TIMED_WALK_FORM_TITLE" = "輔具";
 "TIMED_WALK_FORM_TEXT" = "每次測試時請使用相同的輔具。";
 "TIMED_WALK_QUESTION_TEXT" = "您是否穿戴踝足副木？";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
 "HOLE_PEG_TEST_TEXT_2" = "抬起手指來放下圓柱。";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "顫抖測試活動";
+"TREMOR_TEST_INTRO_1_DETAIL" = "這項活動是測量在不同的姿勢下，您雙手顫抖的情況。請找一個可以讓您舒適坐下的位置，來完成這個活動。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "將電話拿在較受影響的那隻手上，如下方影像所示。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "將電話拿在「右手」，如下方影像所示。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "將電話拿在「左手」，如下方影像所示。";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "將會要求您在坐下時用手拿著電話執行 %@。";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "一項任務";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "兩項任務";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "三項任務";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "四項任務";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "五項任務";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "點「下一步」來繼續。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "請準備將手放在大腿上並拿著電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "請準備將「左手」放在大腿上並拿著電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "請準備將「右手」放在大腿上並拿著電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "請拿著電話並放在大腿上持續 %ld 秒鐘。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "現在請用手拿著電話，手伸直至與肩同高。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "現在請用「左手」拿著電話，手伸直至與肩同高。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "現在請用「右手」拿著電話，手伸直至與肩同高。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "將手伸直，並拿著電話持續 %ld 秒鐘。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "現在請用手拿著電話，舉至與肩同高時手肘彎曲。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "現在請用「左手」拿著電話，舉至與肩同高時手肘彎曲。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "現在請用「右手」拿著電話，舉至與肩同高時手肘彎曲。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "繼續用手拿著電話，手肘彎曲，持續 %ld 秒鐘";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "現在請將手肘保持彎曲，並重複用電話碰觸鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "現在請用「左手」拿著電話，手肘保持彎曲，並重複用電話碰觸鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "現在請用「右手」拿著電話，手肘保持彎曲，並重複用電話碰觸鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "重複用電話碰觸鼻子持續 %ld 秒鐘";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "準備執行手腕轉動。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "準備用「左手」拿著電話執行手腕轉動。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "準備用「右手」拿著電話執行手腕轉動。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "繼續執行手腕轉動 %ld 秒鐘。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "現在請將電話換到「左手」來繼續下一項任務。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "現在請將電話換到「右手」來繼續下一項任務。";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "繼續下一項任務。";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "活動已完成。";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "將會要求您在坐下時先用一隻手拿著電話執行 %@，然後再用另一隻手執行。";
+"TREMOR_SKIP_LEFT_HAND" = "我無法用「左手」執行這項活動。";
+"TREMOR_SKIP_RIGHT_HAND" = "我無法用「右手」執行這項活動。";
+"TREMOR_SKIP_NEITHER" = "我可以用兩隻手執行這項活動。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "無法移除足夠的記錄檔來達到臨界值";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "擷取預覽";
 "AX_IMAGE_CAPTURED_LABEL" = "擷取的影像";
 
+"AX_VIDEO_CAPTURE_LABEL" = "擷取影像預覽";
+"AX_VIDEO_CAPTURED_LABEL" = "擷取的影像";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "無法將 %@ 號的圓盤放在 %@ 號的圓盤上";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "目標";
 "AX_TOWER_OF_HANOI_TOWER" = "塔座";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "圓盤大小是 %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
 
-"AX_GRAPH_RANGE_FORMAT" = "範圍在 %@ 到 %@ 之間";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "範圍在 %@ 到 %@ 之間";
+"AX_GRAPH_STACK_PREFIX" = "圓盤組成：";
 "AX_GRAPH_AND_SEPARATOR" = " 和 ";
 "AX_GRAPH_POINT_%@" = "點：%@";

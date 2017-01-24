@@ -3,10 +3,25 @@
 
 #Creating Surveys
 
-A survey task is a collection of step objects (`ORKStep`) representing
-a sequence of questions, such as "What medications are you taking?" or
-"How many hours did you sleep last night?" You can collect results
-for the individual steps or for the entire task.
+A survey is composed of a sequence of questions that you use to collect data from your users. To start a survey, you create a <i>survey task</i>, which is a collection of step objects (`ORKStep`). Each step object handles a specific question in the survey, such as "What medications are you taking?" or
+"How many hours did you sleep last night?"
+
+You can collect results for the individual steps or for the entire task. There are two types of survey tasks that you can create: an ordered task (`ORKOrderedTask`) and a navigable ordered task (`ORKNavigableOrderedTask`).
+
+In an ordered task, the order that the steps appear are always the same. 
+<center>
+<figure>
+<img src="SurveyImages/OrderedTasks.png" style="width: 100%;"><figcaption><center>An example of a survey that uses ordered tasks.</center></figcaption>
+</figure>
+</center>
+
+In a navigable ordered task, the order of the tasks can change, or branch out, depending on how the user answered a question in a previous task.
+
+<center>
+<figure>
+<img src="SurveyImages/NavigableOrderedTasks.png" style="width: 100%;"><figcaption><center>An example of a survey that uses navigable ordered tasks.</center></figcaption>
+</figure>
+</center>
 
 The steps for creating a task to present a survey are:
 
@@ -139,7 +154,7 @@ For example, the following code shows how to create a form that requests some ba
     [items addObject:
       [[ORKFormItem alloc] initWithIdentifier:kBloodTypeItemIdentifier
                                          text:@"Blood Type"
-                                 answerFormat:bloodTypeFormat];
+                                 answerFormat:bloodTypeFormat]];
 
     ORKAnswerFormat *dateOfBirthFormat =
       [ORKHealthKitCharacteristicTypeAnswerFormat
@@ -148,8 +163,9 @@ For example, the following code shows how to create a form that requests some ba
     ORKFormItem *dateOfBirthItem =
       [[ORKFormItem alloc] initWithIdentifier:kDateOfBirthItemIdentifier
                                          text:@"DOB"
-                                 answerFormat:dateOfBirthFormat];
+                                 answerFormat:dateOfBirthFormat]];
     dateOfBirthItem.placeholder = @"DOB";
+    dateOfBirthItem.optional = YES;
     [items addObject:dateOfBirthItem];
 
     // ... And so on, adding additional items
@@ -163,6 +179,8 @@ The code above gives you something like this:
   <figcaption> <center>Example of a form step.</center></figcaption>
 </figure>
 </center>
+
+The [ORKFormItem](#) has an boolean property named `optional` which affects navigation to subsequent steps. It is set to NO by default, which requires the user to set that item before they can continue. If the property is set to YES, then the user can continue to the next step without setting the item. In the above code snippet, the `optional` property is for the `dateOfBirth` object is set to YES. This lets the user continue to the next step without putting in their date of birth.
 
 ### Answer Format
 
@@ -182,8 +200,12 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Scale answer format (vertical)</p>
-<p style="clear: both;"><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/EmailAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Email answer format</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/ValidatedTextAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Validated text answer format</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Scale answer format (vertical)</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/EmailAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Email answer format</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/LocationAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Location answer format</p>
 <p style="clear: both;">
 
 In addition to the preceding answer formats, the ResearchKit framework provides

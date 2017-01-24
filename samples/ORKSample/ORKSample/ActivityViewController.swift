@@ -32,12 +32,12 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case Survey, Microphone, Tapping
+    case survey, microphone, tapping
     
     static var allValues: [Activity] {
         var index = 0
         return Array (
-            AnyGenerator {
+            AnyIterator {
                 let returnedElement = self.init(rawValue: index)
                 index = index + 1
                 return returnedElement
@@ -47,22 +47,22 @@ enum Activity: Int {
     
     var title: String {
         switch self {
-            case .Survey:
+            case .survey:
                 return "Survey"
-            case .Microphone:
+            case .microphone:
                 return "Microphone"
-            case .Tapping:
+            case .tapping:
                 return "Tapping"
         }
     }
     
     var subtitle: String {
         switch self {
-            case .Survey:
+            case .survey:
                 return "Answer 6 short questions"
-            case .Microphone:
+            case .microphone:
                 return "Voice evaluation"
-            case .Tapping:
+            case .tapping:
                 return "Test tapping speed"
         }
     }
@@ -71,16 +71,16 @@ enum Activity: Int {
 class ActivityViewController: UITableViewController {
     // MARK: UITableViewDataSource
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section == 0 else { return 0 }
         
         return Activity.allValues.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("activityCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
         
-        if let activity = Activity(rawValue: indexPath.row) {
+        if let activity = Activity(rawValue: (indexPath as NSIndexPath).row) {
             cell.textLabel?.text = activity.title
             cell.detailTextLabel?.text = activity.subtitle
         }
@@ -90,46 +90,46 @@ class ActivityViewController: UITableViewController {
     
     // MARK: UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard let activity = Activity(rawValue: indexPath.row) else { return }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let activity = Activity(rawValue: (indexPath as NSIndexPath).row) else { return }
         
         let taskViewController: ORKTaskViewController
         switch activity {
-            case .Survey:
-                taskViewController = ORKTaskViewController(task: StudyTasks.surveyTask, taskRunUUID: NSUUID())
+            case .survey:
+                taskViewController = ORKTaskViewController(task: StudyTasks.surveyTask, taskRun: NSUUID() as UUID)
             
-            case .Microphone:
-                taskViewController = ORKTaskViewController(task: StudyTasks.microphoneTask, taskRunUUID: NSUUID())
+            case .microphone:
+                taskViewController = ORKTaskViewController(task: StudyTasks.microphoneTask, taskRun: NSUUID() as UUID)
                 
                 do {
-                    let defaultFileManager = NSFileManager.defaultManager()
+                    let defaultFileManager = FileManager.default
                     
                     // Identify the documents directory.
-                    let documentsDirectory = try defaultFileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+                    let documentsDirectory = try defaultFileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
                     
                     // Create a directory based on the `taskRunUUID` to store output from the task.
-                    let outputDirectory = documentsDirectory.URLByAppendingPathComponent(taskViewController.taskRunUUID.UUIDString)
-                    try defaultFileManager.createDirectoryAtURL(outputDirectory, withIntermediateDirectories: true, attributes: nil)
+                    let outputDirectory = documentsDirectory.appendingPathComponent(taskViewController.taskRunUUID.uuidString)
+                    try defaultFileManager.createDirectory(at: outputDirectory, withIntermediateDirectories: true, attributes: nil)
                     
                     taskViewController.outputDirectory = outputDirectory
                 }
                 catch let error as NSError {
-                    fatalError("The output directory for the task with UUID: \(taskViewController.taskRunUUID.UUIDString) could not be created. Error: \(error.localizedDescription)")
+                    fatalError("The output directory for the task with UUID: \(taskViewController.taskRunUUID.uuidString) could not be created. Error: \(error.localizedDescription)")
                 }
                 
-            case .Tapping:
-                taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRunUUID: NSUUID())
+            case .tapping:
+                taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRun: NSUUID() as UUID)
         }
 
         taskViewController.delegate = self
-        navigationController?.presentViewController(taskViewController, animated: true, completion: nil)
+        navigationController?.present(taskViewController, animated: true, completion: nil)
     }
 }
 
 extension ActivityViewController : ORKTaskViewControllerDelegate {
     
-    func taskViewController(taskViewController: ORKTaskViewController, didFinishWithReason reason: ORKTaskViewControllerFinishReason, error: NSError?) {
+    func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Handle results using taskViewController.result
-        taskViewController.dismissViewControllerAnimated(true, completion: nil)
+        taskViewController.dismiss(animated: true, completion: nil)
     }
 }
