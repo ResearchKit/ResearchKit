@@ -73,6 +73,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) UIImage *auxiliaryImage;
 
+/**
+ Optional icon image to show above the title and text.
+ */
+@property (nonatomic, copy, nullable) UIImage *iconImage;
+
 @end
 
 NS_ASSUME_NONNULL_END

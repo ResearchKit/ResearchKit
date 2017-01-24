@@ -43,8 +43,8 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
 /**
  The `ORKResultSelector` class unequivocally identifies a result within a set of task results.
  
- You must use an instances of this object to specify the question result you are interested in when
- building result predicates. See `ORKResultPredicate` for more information.
+ You must use an instance of this object to specify the question result you are interested in when
+ building a result predicate. See `ORKResultPredicate` for more information.
  
  A result selector object contains a result identifier and, optionally, a task identifier and a step
  identifier. If the task identifier is `nil`, the selector refers to a result in the ongoing task.
@@ -189,7 +189,7 @@ ORK_CLASS_AVAILABLE
  object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
 
- For matching a single-question step result, you only need to set the `resultIdentifer` when
+ For matching a single-question step result, you only need to set the `resultIdentifier` when
  building the result selector object. The `stepIdentifier` will take the same value.
  
  For matching a form item result, you need to build a result selector with a `stepIdentifier` (the
@@ -518,10 +518,16 @@ within the specified `NSTimeInterval` values.
  Returns a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
  matches the specified boolean value.
  
- @param resultSelector              The result selector object which specifies the question result
- you are interested in.
- @param didConsent                  Whether the user consented to the `ORKConsentReviewStep`
- 
+ @param resultSelector              The result selector object which specifies the question result 
+                                        you are interested in. Note that when creating this result
+                                        selector you must provide the desired step identifier as the
+                                        `stepIdentifier` argument and the corresponding signature
+                                        identifier as the `resultIdentifier` argument). The step
+                                        identifier will normally refer to the result of a
+                                        `ORKConsentReviewStep` and the signature identifier will
+                                        refer to the contained `ORKConsentSignatureResult`
+                                        corresponding to the signature collected by the consent
+                                        review step.
  @return A result predicate.
  */
 + (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector

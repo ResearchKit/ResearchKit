@@ -124,6 +124,9 @@
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
+    // Get full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_textView]];
+    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -204,7 +207,7 @@
 
     [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    [self.contentView addSubview:_textField];
+    [self addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
     
     [self setUpConstraints];
@@ -218,14 +221,16 @@
     NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|"
-                                                                             options:(NSLayoutFormatOptions)0
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
 
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|"
-                                                                             options:(NSLayoutFormatOptions)0
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
+    // Get a full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_textField]];
     [NSLayoutConstraint activateConstraints:constraints];
 }
 

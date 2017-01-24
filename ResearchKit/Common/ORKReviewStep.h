@@ -60,7 +60,8 @@ ORK_CLASS_AVAILABLE
  Returns a new standalone review step that includes the specified identifier, steps, and result source.
  
  @param identifier    The identifier of the step (a step identifier should be unique within the task).
- @param steps         The steps that should be reviewed.
+ @param steps         The steps that should be reviewed. Currently, only question, instruction and
+                      form steps can be reviewed. Any other step type will be ignored.
  @param resultSource  The source that should be consulted to obtain the corresponding step results.
  */
 + (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier

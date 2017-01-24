@@ -1325,7 +1325,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized height answer format.
  */
-- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)easurementSystem NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 
 /**
  Indicates the measurement system used by the answer format.

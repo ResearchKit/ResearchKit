@@ -271,7 +271,7 @@
 - (ORKStepResult *)result {
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    stepResult.startDate = self.presentedDate;
+    stepResult.startDate = self.presentedDate ? : [NSDate date];
     stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
@@ -441,6 +441,13 @@ static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
     viewController.restorationIdentifier = identifierComponents.lastObject;
     viewController.restorationClass = self;
     return viewController;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)accessibilityPerformEscape {
+    [self goBackward];
+    return YES;
 }
 
 @end

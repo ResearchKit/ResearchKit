@@ -382,7 +382,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
                 [strongSelf.taskViewController setRegisteredScrollView:reviewViewController.webView.scrollView];
             }
             
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, strongSelf.navigationItem.leftBarButtonItem);
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
         }
     }];
 }

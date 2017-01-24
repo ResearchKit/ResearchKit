@@ -352,6 +352,10 @@ static const CGFloat ValueLineMargin = 1.5;
 - (void)updateAlertLabelHidden {
     NSNumber *sample = _samples.lastObject;
     BOOL show = (!_finished && (sample.doubleValue > _alertThreshold)) || _failed;
+    
+    if (_alertLabel.hidden && show) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, _alertLabel.text);
+    }
     _alertLabel.hidden = !show;
 }
 
@@ -385,11 +389,9 @@ static const CGFloat ValueLineMargin = 1.5;
 }
 
 - (NSString *)accessibilityLabel {
-    if (_alertLabel.isHidden) {
-        return _timerLabel.accessibilityLabel;
-    }
-    
-    return ORKAccessibilityStringForVariables(_timerLabel.accessibilityLabel, _alertLabel.accessibilityLabel);
+    NSString *timerAxString = _timerLabel.isHidden ? nil : _timerLabel.accessibilityLabel;
+    NSString *alertAxString = _alertLabel.isHidden ? nil : _alertLabel.accessibilityLabel;
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", nil), timerAxString, alertAxString);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

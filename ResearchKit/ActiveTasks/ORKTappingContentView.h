@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton2;
 
+@property (nonatomic, assign) NSInteger lastTappedButton;
+
 @end
 
 NS_ASSUME_NONNULL_END

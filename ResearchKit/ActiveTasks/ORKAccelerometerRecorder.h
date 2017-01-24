@@ -59,7 +59,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized accelerometer recorder.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifer
+- (instancetype)initWithIdentifier:(NSString *)identifier
                          frequency:(double)frequency
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory;
