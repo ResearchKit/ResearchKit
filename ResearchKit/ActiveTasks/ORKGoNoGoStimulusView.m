@@ -64,7 +64,7 @@ static const CGFloat RoundGoNoGoViewDiameter = 122;
     self.layer.backgroundColor = self.backgroundColor.CGColor;
 }
 
-- (void)setColor:(UIColor *)color {
+- (void)setBackgroundColor:(UIColor *)color {
     _backgroundColor = color;
     [self reset];
 }

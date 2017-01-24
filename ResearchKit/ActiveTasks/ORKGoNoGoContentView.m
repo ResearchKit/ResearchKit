@@ -43,7 +43,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        _stimulusView.backgroundColor = self.tintColor;
+        self.stimulusColor = self.tintColor;
         
         [self addStimulusView];
     }
@@ -82,13 +82,15 @@
 }
 
 - (void)addStimulusView {
-    if (!_stimulusView) {
-        _stimulusView = [[ORKGoNoGoStimulusView alloc] initWithBackgroundColor:self.stimulusColor];
-        _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
-        _stimulusView.backgroundColor = self.stimulusColor;
-        [self addSubview:_stimulusView];
-        [self setUpStimulusViewConstraints];
+    if (_stimulusView) {
+        [_stimulusView removeFromSuperview];
+        _stimulusView = nil;
     }
+    _stimulusView = [[ORKGoNoGoStimulusView alloc] initWithBackgroundColor:self.stimulusColor];
+    _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
+    _stimulusView.backgroundColor = self.stimulusColor;
+    [self addSubview:_stimulusView];
+    [self setUpStimulusViewConstraints];
 }
 
 
