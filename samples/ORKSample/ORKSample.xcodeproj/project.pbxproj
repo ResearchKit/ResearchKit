@@ -17,7 +17,6 @@
 		16BF5B691BE2974A007C79C6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B681BE2974A007C79C6 /* ProfileViewController.swift */; };
 		16BF5B6F1BE2BE77007C79C6 /* HealthClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B6E1BE2BE77007C79C6 /* HealthClientType.swift */; };
 		16BF5B711BE2C989007C79C6 /* ProfileStaticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B701BE2C989007C79C6 /* ProfileStaticTableViewCell.swift */; };
-		782ADC601E2D407E000F43DC /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = 782ADC5F1E2D407E000F43DC /* tap.aif */; };
 		86CCDFF61C1B50970042AA39 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCDFF51C1B50970042AA39 /* ResearchContainerViewController.swift */; };
 		B5BC85FA1BF1405900B0CFA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161479C51BD6CE8F0099A068 /* OnboardingViewController.swift */; };
 		B5BC85FD1BF1408500B0CFA5 /* HealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F25711BE052AD001D2D65 /* HealthDataStepViewController.swift */; };
@@ -67,7 +66,6 @@
 		16BF5B681BE2974A007C79C6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ORKSample/ProfileViewController.swift; sourceTree = "<group>"; };
 		16BF5B6E1BE2BE77007C79C6 /* HealthClientType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthClientType.swift; path = ORKSample/HealthClientType.swift; sourceTree = "<group>"; };
 		16BF5B701BE2C989007C79C6 /* ProfileStaticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStaticTableViewCell.swift; path = ORKSample/ProfileStaticTableViewCell.swift; sourceTree = "<group>"; };
-		782ADC5F1E2D407E000F43DC /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = tap.aif; path = ../ORKCatalog/ORKCatalog/Resources/tap.aif; sourceTree = "<group>"; };
 		86CCDFF51C1B50970042AA39 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResearchContainerViewController.swift; path = ORKSample/ResearchContainerViewController.swift; sourceTree = SOURCE_ROOT; };
 		B5C2073E1BEC16F00051D9D8 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResearchContainerSegue.swift; path = ORKSample/ResearchContainerSegue.swift; sourceTree = "<group>"; };
 		B5C207411BECBA8B0051D9D8 /* WithdrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WithdrawViewController.swift; path = ORKSample/WithdrawViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			children = (
 				161479CA1BD6CE8F0099A068 /* Assets.xcassets */,
 				161479CF1BD6CE8F0099A068 /* Info.plist */,
-				782ADC5F1E2D407E000F43DC /* tap.aif */,
 				168F256F1BE03541001D2D65 /* ORKSample.entitlements */,
 			);
 			name = "Supporting Files";
@@ -254,7 +251,6 @@
 				TargetAttributes = {
 					161479BF1BD6CE8F0099A068 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7JYUG8QGJ3;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
@@ -289,7 +285,6 @@
 			files = (
 				161479CE1BD6CE8F0099A068 /* LaunchScreen.storyboard in Resources */,
 				161479CB1BD6CE8F0099A068 /* Assets.xcassets in Resources */,
-				782ADC601E2D407E000F43DC /* tap.aif in Resources */,
 				161479C91BD6CE8F0099A068 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,7 +434,6 @@
 				CODE_SIGN_ENTITLEMENTS = ORKSample/ORKSample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7JYUG8QGJ3;
 				INFOPLIST_FILE = "$(SRCROOT)/ORKSample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Sample";
@@ -456,7 +450,6 @@
 				CODE_SIGN_ENTITLEMENTS = ORKSample/ORKSample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7JYUG8QGJ3;
 				INFOPLIST_FILE = "$(SRCROOT)/ORKSample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Sample";
