@@ -39,6 +39,7 @@
 #import <ResearchKit/ORKImageCaptureStep.h>
 #import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKLoginStep.h>
+#import <ResearchKit/ORKNavigablePageStep.h>
 #import <ResearchKit/ORKPageStep.h>
 #import <ResearchKit/ORKPasscodeStep.h>
 #import <ResearchKit/ORKQuestionStep.h>
