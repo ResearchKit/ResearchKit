@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKGoNoGoStimulusView : UIView
 
-@property (nonatomic, assign) UIColor* color;
+@property (nonatomic, assign) UIColor* backgroundColor;
 
 - (instancetype)initWithBackgroundColor:(UIColor*)color;
 
