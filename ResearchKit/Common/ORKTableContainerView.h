@@ -62,6 +62,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) UIView *tapOffView;
 
 - (void)scrollCellVisible:(UITableViewCell *)cell animated:(BOOL)animated;
+    
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style;
 
 @end
 
