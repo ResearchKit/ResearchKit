@@ -39,6 +39,8 @@
 #import <ResearchKit/ORKImageCaptureStep.h>
 #import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKLoginStep.h>
+#import <ResearchKit/ORKNavigablePageStep.h>
+#import <ResearchKit/ORKPageStep.h>
 #import <ResearchKit/ORKPasscodeStep.h>
 #import <ResearchKit/ORKQuestionStep.h>
 #import <ResearchKit/ORKRegistrationStep.h>
@@ -72,6 +74,7 @@
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKInstructionStepViewController.h>
 #import <ResearchKit/ORKLoginStepViewController.h>
+#import <ResearchKit/ORKPageStepViewController.h>
 #import <ResearchKit/ORKPasscodeViewController.h>
 #import <ResearchKit/ORKTableStepViewController.h>
 #import <ResearchKit/ORKTaskViewController.h>
