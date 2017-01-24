@@ -1065,13 +1065,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             // Get the step result associated with this step
             ORKStepResult *result = nil;
-            result = _managedResults[step.identifier];
-            if (!result ) {
-                result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            ORKStepResult *previousResult = _managedResults[step.identifier];
+            
+            // Check the default source first
+            BOOL alwaysCheckForDefaultResult = ([self.defaultResultSource respondsToSelector:@selector(alwaysCheckForDefaultResult)] &&
+                                                [self.defaultResultSource alwaysCheckForDefaultResult]);
+            if ((previousResult == nil) || alwaysCheckForDefaultResult) {
+                result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
             }
             
+            // If nil, assign to the previous result (if available) otherwise create new instance
             if (!result) {
-                result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
+                result = previousResult ? : [[ORKStepResult alloc] initWithIdentifier:step.identifier];
             }
             
             // Allow the step to instantiate the view controller. This will allow either the default
