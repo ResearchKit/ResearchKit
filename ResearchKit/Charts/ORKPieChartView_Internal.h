@@ -44,26 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-#if TARGET_INTERFACE_BUILDER
-@interface ORKIBSamplePieChartDataSourceSegment : NSObject
-@property (nonatomic, strong, nullable) NSString *title;
-@property (nonatomic, assign) CGFloat value;
-@property (nonatomic, strong, nullable) UIColor *color;
-@end
-
-@interface ORKIBSamplePieChartDataSource : NSObject <ORKPieChartViewDataSource>
-@property (nonatomic, strong, nullable) NSArray <ORKIBSamplePieChartDataSourceSegment *> *segments;
-@end
-#endif
-
-
 @interface ORKPieChartView ()
 
 - (UIColor *)colorForSegmentAtIndex:(NSInteger)index;
-
-#if TARGET_INTERFACE_BUILDER
-@property (nonatomic, strong, nullable) ORKIBSamplePieChartDataSource *sampleDataSource;
-#endif
 
 @end
 

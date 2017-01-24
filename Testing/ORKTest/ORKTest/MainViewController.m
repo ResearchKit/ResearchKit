@@ -108,6 +108,7 @@ DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
 DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
+DefineStringKey(PageStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -403,6 +404,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Auxillary Image",
                            @"Icon Image",
                            @"Completion Step",
+                           @"Page Step",
                            @"Footnote",
                            ],
                        ];
@@ -652,6 +654,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
+        return [self makePageStepTask];
     } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
         return [self makeFootnoteTask];
     }
@@ -673,6 +677,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      */
 
     id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
+    NSParameterAssert(task);
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
@@ -4578,6 +4583,63 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
 }
+
+#pragma mark - Page Step
+
+- (IBAction)pageStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:PageStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makePageStepTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.text = @"Example of an ORKPageStep";
+    [steps addObject:step1];
+    
+    NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Good" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Average" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
+    [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Poor" detailText:@"" value:[NSNumber numberWithInt:2] exclusive:NO]];
+    ORKAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices];
+    ORKFormItem *formItem = [[ORKFormItem alloc] initWithIdentifier:@"choice" text:nil answerFormat:answerFormat];
+    ORKFormStep *groupStep1 = [[ORKFormStep alloc] initWithIdentifier:@"step1" title:nil text:@"How do you feel today?"];
+    groupStep1.formItems = @[formItem];
+    
+    NSMutableArray<ORKImageChoice *> *imageChoices = [[NSMutableArray alloc] init];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"left_hand_outline"] selectedImage:[UIImage imageNamed:@"left_hand_solid"] text:@"Left hand" value:[NSNumber numberWithInt:1]]];
+    [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"right_hand_outline"] selectedImage:[UIImage imageNamed:@"right_hand_solid"] text:@"Right hand" value:[NSNumber numberWithInt:0]]];
+    ORKQuestionStep *groupStep2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
+    
+    ORKSignatureStep *groupStep3 = [[ORKSignatureStep alloc] initWithIdentifier:@"step3"];
+    
+    ORKStep *groupStep4 = [[ORKConsentReviewStep alloc] initWithIdentifier:@"groupStep4" signature:nil inDocument:[self buildConsentDocument]];
+    
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3, groupStep4]];
+    [steps addObject:pageStep];
+    
+    ORKOrderedTask *audioTask = [ORKOrderedTask audioTaskWithIdentifier:@"audioTask"
+                                                 intendedUseDescription:nil
+                                                      speechInstruction:nil
+                                                 shortSpeechInstruction:nil
+                                                               duration:10
+                                                      recordingSettings:nil
+                                                        checkAudioLevel:YES
+                                                                options:
+                                 ORKPredefinedTaskOptionExcludeInstructions |
+                                 ORKPredefinedTaskOptionExcludeConclusion];
+    ORKPageStep *audioStep = [[ORKNavigablePageStep alloc] initWithIdentifier:@"audioStep" pageTask:audioTask];
+    [steps addObject:audioStep];
+    
+    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    stepLast.title = @"Task Complete";
+    [steps addObject:stepLast];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:PageStepTaskIdentifier steps:steps];
+    
+}
+
 
 #pragma mark - Footnote
 

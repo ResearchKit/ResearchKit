@@ -1,6 +1,5 @@
 /*
  Copyright (c) 2016, Sage Bionetworks
- Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,24 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ORKPageStep.h>
+#import <ResearchKit/ORKOrderedTask.h>
 
-#import "ORKTableStepViewController.h"
+@interface ORKPageStep ()
 
+@property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
 
-@class ORKTableContainerView;
-@class ORKNavigationContainerView;
-@class ORKStepHeaderView;
-
-@interface ORKTableStepViewController ()
-
-@property (nonatomic, strong, readonly) ORKTableContainerView *tableContainer;
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipView;
-@property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
-    
-/**
- @return   The style to use for the tableView. default = `UITableViewStyleGrouped` if more than one section
- and `UITableViewStylePlain` if there is only 1 section.
- */
-@property (nonatomic, readonly) UITableViewStyle tableViewStyle;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
 
 @end

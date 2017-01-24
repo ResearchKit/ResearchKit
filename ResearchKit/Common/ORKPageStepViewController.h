@@ -1,6 +1,5 @@
 /*
  Copyright (c) 2016, Sage Bionetworks
- Copyright (c) 2016, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,24 +28,43 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit.h>
 
-#import "ORKTableStepViewController.h"
+NS_ASSUME_NONNULL_BEGIN
 
+ORK_CLASS_AVAILABLE
+@interface ORKPageStepViewController : ORKStepViewController
 
-@class ORKTableContainerView;
-@class ORKNavigationContainerView;
-@class ORKStepHeaderView;
-
-@interface ORKTableStepViewController ()
-
-@property (nonatomic, strong, readonly) ORKTableContainerView *tableContainer;
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipView;
-@property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
-    
 /**
- @return   The style to use for the tableView. default = `UITableViewStyleGrouped` if more than one section
- and `UITableViewStylePlain` if there is only 1 section.
+ The `ORKPageStep` associated with this view controller.
  */
-@property (nonatomic, readonly) UITableViewStyle tableViewStyle;
+@property (nonatomic, readonly, nullable) ORKPageStep *pageStep;
+
+/**
+ Returns the step view controller to associate with this step. By default, this will
+ return the step view controller instantiated by the given step.
+ 
+ @returns `ORKStepViewController` subclass for this step.
+ */
+- (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step;
+
+/**
+ Returns an `ORKTaskResultSource` for the steps that are included as substeps for this
+ page view controller.
+ 
+ @returns `ORKTaskResultSource` for the step results
+ */
+- (id <ORKTaskResultSource>)resultSource;
+
+/**
+ Go to the given step.
+ 
+ @param step        The step to go to
+ @param direction   The direction in which navigate
+ @param animated    Should the change of view controllers be animated.
+ */
+- (void)goToStep:(ORKStep *)step direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated;
 
 @end
+
+NS_ASSUME_NONNULL_END
