@@ -43,7 +43,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        _stimulusView = self.tintColor;
+        _stimulusView.backgroundColor = self.tintColor;
         
         [self addStimulusView];
     }
