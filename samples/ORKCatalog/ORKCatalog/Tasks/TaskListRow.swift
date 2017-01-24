@@ -1338,7 +1338,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var videoInstruction: ORKTask {
         let videoInstructionStep = ORKVideoInstructionStep(identifier: String(describing: Identifier.videoInstructionStep))
         videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
-        videoInstructionStep.videoURL = URL(string: NSLocalizedString("Video Instruction Step URL", comment: ""))
+        videoInstructionStep.videoURL = URL(string: "https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov")
+        videoInstructionStep.thumbnailTime = 2 // Customizable thumbnail timestamp
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
