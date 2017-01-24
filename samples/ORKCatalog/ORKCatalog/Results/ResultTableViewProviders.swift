@@ -1077,7 +1077,7 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
 class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let videoInstructionStepResult = result as! ORKVideoInstructionStepResult
         
         let rows = super.resultRowsForSection(section)

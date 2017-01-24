@@ -99,8 +99,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
-    
-    case VideoInstruction
+    case videoInstruction
     
     class TaskListRowSection {
         var title: String
@@ -168,7 +167,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
-                    .VideoInstruction,
+                    .videoInstruction,
                 ]),
         ]}
     
@@ -290,7 +289,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
             
-        case .VideoInstruction:
+        case .videoInstruction:
             return NSLocalizedString("Video Instruction Task", comment: "")
             
         case .kneeRangeOfMotion:
@@ -441,25 +440,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case passcodeStep
 
         // Active tasks.
-<<<<<<< HEAD
-        case AudioTask
-        case FitnessTask
-        case HolePegTestTask
-        case PSATTask
-        case ReactionTime
-        case ShortWalkTask
-        case SpatialSpanMemoryTask
-        case TimedWalkTask
-        case ToneAudiometryTask
-        case TowerOfHanoi
-        case TwoFingerTappingIntervalTask
-        case WalkBackAndForthTask
-        case TremorTestTask
-        
-        // Video Instruction task.
-        case VideoInstructionTask
-        case VideoInstructionStep
-=======
         case audioTask
         case fitnessTask
         case holePegTestTask
@@ -476,7 +456,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
->>>>>>> master
+        
+        // Video instruction tasks.
+        case videoInstructionTask
+        case videoInstructionStep
     }
     
     // MARK: Properties
@@ -593,22 +576,18 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .walkBackAndForth:
             return walkBackAndForthTask
-         
             
         case .tremorTest:
             return tremorTestTask
-<<<<<<< HEAD
-         
-        case .VideoInstruction:
-            return videoInstruction
-=======
-        
+
         case .kneeRangeOfMotion:
             return kneeRangeOfMotion
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
->>>>>>> master
+        
+        case .videoInstruction:
+            return videoInstruction
         }
     }
 
@@ -1357,10 +1336,10 @@ enum TaskListRow: Int, CustomStringConvertible {
 
     /// This task presents a video instruction step
     private var videoInstruction: ORKTask {
-        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(Identifier.VideoInstructionStep))
+        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(describing: Identifier.videoInstructionStep))
         videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
-        videoInstructionStep.videoURL = NSURL(string: NSLocalizedString("Video Instruction Step URL", comment: ""))
-        return ORKOrderedTask(identifier: String(Identifier.VideoInstructionTask), steps: [videoInstructionStep])
+        videoInstructionStep.videoURL = URL(string: NSLocalizedString("Video Instruction Step URL", comment: ""))
+        return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
     // MARK: Consent Document Creation Convenience

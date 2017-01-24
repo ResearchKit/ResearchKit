@@ -4518,7 +4518,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
 }
 
-<<<<<<< HEAD
 #pragma mark - Video Instruction Task
 
 - (IBAction)videoInstructionStepButtonTapped:(id)sender {
@@ -4544,7 +4543,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
 }
-=======
+
 #pragma mark - Icon Image
 
 - (IBAction)iconImageButtonTapped:(id)sender {
@@ -4572,7 +4571,5 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
-
->>>>>>> master
 
 @end
