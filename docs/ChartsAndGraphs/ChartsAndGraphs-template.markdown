@@ -169,7 +169,7 @@ The screenshot below shows the pie chart created by the code in this section.
 
 <center>
 <figure>
-<img src="ChartsImages/PieChart/Chart1.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
+<img src="ChartsImages/PieChart/chart1.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
   <figcaption> <center>Pie chart.</center></figcaption>
 </figure>
 </center>
