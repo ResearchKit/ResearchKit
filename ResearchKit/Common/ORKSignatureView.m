@@ -56,6 +56,9 @@
 @end
 
 
+static const CGFloat TopToSigningLineRatio = 0.7;
+
+
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -226,12 +229,8 @@ static const CGFloat LineWidthStepValue = 0.25f;
 
 - (CGPoint)placeholderPoint {
     CGFloat height = self.bounds.size.height;
-    
-    CGFloat bottom = 0.90;
-    
     CGFloat x1 = 0;
-        
-    CGFloat y1 = height*bottom;
+    CGFloat y1 = height * TopToSigningLineRatio;
     UIFont *font = [ORKSelectionTitleLabel defaultFont];
     return (CGPoint){x1, y1 - 5 - font.pointSize + font.descender};
 }
@@ -242,14 +241,12 @@ static const CGFloat LineWidthStepValue = 0.25f;
         CGFloat height = self.bounds.size.height;
         
         UIBezierPath *path = [UIBezierPath bezierPath];
-        
-        CGFloat bottom = 0.90;
         {
             CGFloat x1 = 0;
             CGFloat x2 = width;
             
-            CGFloat y1 = height*bottom;
-            CGFloat y2 = height*bottom;
+            CGFloat y1 = height * TopToSigningLineRatio;
+            CGFloat y2 = height * TopToSigningLineRatio;
             
             [path moveToPoint:CGPointMake(x1, y1)];
             [path addLineToPoint:CGPointMake(x2, y2)];
@@ -464,8 +461,11 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (UIImage *)signatureImage {
-    UIGraphicsBeginImageContext(self.bounds.size);
-    
+    CGSize imageContextSize;
+    imageContextSize = (self.bounds.size.width == 0 || self.bounds.size.height == 0) ? CGSizeMake(200, 200) :
+                        self.bounds.size;
+    UIGraphicsBeginImageContext(imageContextSize);
+
     for (UIBezierPath *path in self.pathArray) {
         [self.lineColor setStroke];
         [path stroke];

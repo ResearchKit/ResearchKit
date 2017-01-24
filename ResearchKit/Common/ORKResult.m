@@ -38,6 +38,7 @@
 #import "ORKConsentSignature.h"
 #import "ORKFormStep.h"
 #import "ORKQuestionStep.h"
+#import "ORKPageStep.h"
 #import "ORKResult_Private.h"
 #import "ORKStep.h"
 #import "ORKTask.h"
@@ -1927,7 +1928,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __block ORKQuestionResult *result = nil;
     
-    [self.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    // Look through the result set in reverse-order to account for the possibility of
+    // multiple results with the same identifier (due to a navigation loop)
+    NSEnumerator *enumerator = self.results.reverseObjectEnumerator;
+    id obj = enumerator.nextObject;
+    while ((result== nil) && (obj != nil)) {
         
         if (NO == [obj isKindOfClass:[ORKResult class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expected result object to be ORKResult type: %@", obj] userInfo:nil];
@@ -1936,10 +1941,9 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         NSString *anIdentifier = [(ORKResult *)obj identifier];
         if ([anIdentifier isEqual:identifier]) {
             result = obj;
-            *stop = YES;
         }
-    
-    }];
+        obj = enumerator.nextObject;
+    }
     
     return result;
 }
@@ -2283,6 +2287,99 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     result->_signatureImage = [_signatureImage copy];
     result->_signaturePath = ORKArrayCopyObjects(_signaturePath);
     return result;
+}
+
+@end
+
+@implementation ORKPageResult
+
+- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result {
+    self = [super initWithTaskIdentifier:step.identifier taskRunUUID:[NSUUID UUID] outputDirectory:nil];
+    if (self) {
+        NSArray <NSString *> *stepIdentifiers = [step.steps valueForKey:@"identifier"];
+        NSMutableArray *results = [NSMutableArray new];
+        for (NSString *identifier in stepIdentifiers) {
+            NSString *prefix = [NSString stringWithFormat:@"%@.", identifier];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier BEGINSWITH %@", prefix];
+            NSArray *filteredResults = [result.results filteredArrayUsingPredicate:predicate];
+            if (filteredResults.count > 0) {
+                NSMutableArray *subresults = [NSMutableArray new];
+                for (ORKResult *subresult in filteredResults) {
+                    ORKResult *copy = [subresult copy];
+                    copy.identifier = [subresult.identifier substringFromIndex:prefix.length];
+                    [subresults addObject:copy];
+                }
+                [results addObject:[[ORKStepResult alloc] initWithStepIdentifier:identifier results:subresults]];
+            }
+        }
+        self.results = results;
+    }
+    return self;
+}
+
+- (void)addStepResult:(ORKStepResult *)stepResult {
+    if (stepResult == nil) {
+        return;
+    }
+    
+    // Remove previous step result and add the new one
+    NSMutableArray *results = [self.results mutableCopy] ?: [NSMutableArray new];
+    ORKResult *previousResult = [self resultForIdentifier:stepResult.identifier];
+    if (previousResult) {
+        [results removeObject:previousResult];
+    }
+    [results addObject:stepResult];
+    self.results = results;
+}
+
+- (void)removeStepResultWithIdentifier:(NSString *)identifier {
+    ORKResult *result = [self resultForIdentifier:identifier];
+    if (result != nil) {
+        NSMutableArray *results = [self.results mutableCopy];
+        [results removeObject:result];
+        self.results = results;
+    }
+}
+
+- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier {
+    ORKResult *result = [self resultForIdentifier:identifier];
+    if (result != nil) {
+        NSUInteger idx = [self.results indexOfObject:result];
+        if (idx != NSNotFound) {
+            self.results = [self.results subarrayWithRange:NSMakeRange(0, idx)];
+        }
+    }
+}
+
+- (NSArray <ORKResult *> *)flattenResults {
+    NSMutableArray *results = [NSMutableArray new];
+    for (ORKResult *result in self.results) {
+        if ([result isKindOfClass:[ORKStepResult class]]) {
+            ORKStepResult *stepResult = (ORKStepResult *)result;
+            if (stepResult.results.count > 0) {
+                // For each subresult in this step, append the step identifier onto the result
+                for (ORKResult *result in stepResult.results) {
+                    ORKResult *copy = [result copy];
+                    NSString *subIdentifier = result.identifier ?: [NSString stringWithFormat:@"%@", @(result.hash)];
+                    copy.identifier = [NSString stringWithFormat:@"%@.%@", stepResult.identifier, subIdentifier];
+                    [results addObject:copy];
+                }
+            } else {
+                // If this is an empty step result then add a base class instance with this identifier
+                [results addObject:[[ORKResult alloc] initWithIdentifier:stepResult.identifier]];
+            }
+        } else {
+            // If this is *not* a step result then just add it as-is
+            [results addObject:result];
+        }
+    }
+    return [results copy];
+}
+
+- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory {
+    typeof(self) copy = [[[self class] alloc] initWithTaskIdentifier:self.identifier taskRunUUID:self.taskRunUUID outputDirectory:outputDirectory];
+    copy.results = self.results;
+    return copy;
 }
 
 @end

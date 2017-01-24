@@ -1222,6 +1222,19 @@ ORK_CLASS_AVAILABLE
  */
 - (nullable ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier;
 
+/**
+ Should the default result store be used even if there is a previous result? (due to 
+ reverse navigation or looping)
+ 
+ By default, the `[ORKTaskViewController defaultResultSource]` is only queried for a 
+ result if the previous result is nil. This allows the result source to override that
+ default behavior.
+ 
+ @return `YES` if the default result should be given priority over the previous result.
+ */
+@optional
+- (BOOL)alwaysCheckForDefaultResult;
+
 @end
 
 
