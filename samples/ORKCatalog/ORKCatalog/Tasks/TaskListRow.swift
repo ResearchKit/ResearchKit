@@ -59,7 +59,6 @@ class SystemSound {
     types of functionality supported by the ResearchKit framework.
 */
 enum TaskListRow: Int, CustomStringConvertible {
-
     case form = 0
     case survey
     case booleanQuestion
@@ -91,12 +90,15 @@ enum TaskListRow: Int, CustomStringConvertible {
     case shortWalk
     case spatialSpanMemory
     case timedWalk
+    case timedWalkWithTurnAround
     case toneAudiometry
     case towerOfHanoi
     case tremorTest
     case twoFingerTappingInterval
     case walkBackAndForth
     case heightQuestion
+    case kneeRangeOfMotion
+    case shoulderRangeOfMotion
     
     class TaskListRowSection {
         var title: String
@@ -153,11 +155,14 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .shortWalk,
                     .spatialSpanMemory,
                     .timedWalk,
+                    .timedWalkWithTurnAround,
                     .toneAudiometry,
                     .towerOfHanoi,
                     .tremorTest,
                     .twoFingerTappingInterval,
-                    .walkBackAndForth
+                    .walkBackAndForth,
+                    .kneeRangeOfMotion,
+                    .shoulderRangeOfMotion,
                 ]),
         ]}
     
@@ -261,6 +266,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .timedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
             
+        case .timedWalkWithTurnAround:
+            return NSLocalizedString("Timed Walk with Turn Around", comment: "")
+            
         case .toneAudiometry:
             return NSLocalizedString("Tone Audiometry", comment: "")
             
@@ -275,6 +283,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
+        
+        case .kneeRangeOfMotion:
+            return NSLocalizedString("Knee Range of Motion", comment: "")
+            
+        case .shoulderRangeOfMotion:
+            return NSLocalizedString("Shoulder Range of Motion", comment: "")
         }
     }
     
@@ -426,11 +440,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         case shortWalkTask
         case spatialSpanMemoryTask
         case timedWalkTask
+        case timedWalkWithTurnAroundTask
         case toneAudiometryTask
         case towerOfHanoi
         case tremorTestTask
         case twoFingerTappingIntervalTask
         case walkBackAndForthTask
+        case kneeRangeOfMotion
+        case shoulderRangeOfMotion
     }
     
     // MARK: Properties
@@ -532,6 +549,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .timedWalk:
             return timedWalkTask
+
+        case .timedWalkWithTurnAround:
+            return timedWalkWithTurnAroundTask
             
         case .toneAudiometry:
             return toneAudiometryTask
@@ -547,6 +567,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return tremorTestTask
+        
+        case .kneeRangeOfMotion:
+            return kneeRangeOfMotion
+        
+        case .shoulderRangeOfMotion:
+            return shoulderRangeOfMotion
         }
     }
 
@@ -1245,10 +1271,14 @@ enum TaskListRow: Int, CustomStringConvertible {
 
     /// This task presents the Timed Walk pre-defined active task.
     private var timedWalkTask: ORKTask {
-        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0,
-            includeAssistiveDeviceForm: true, options: [])
+        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, includeAssistiveDeviceForm: true, options: [])
     }
-    
+
+    /// This task presents the Timed Walk with turn around pre-defined active task.
+    private var timedWalkWithTurnAroundTask: ORKTask {
+        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkWithTurnAroundTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, turnAroundTimeLimit: 60.0, includeAssistiveDeviceForm: true, options: [])
+    }
+
     /// This task presents the Tone Audiometry pre-defined active task.
     private var toneAudiometryTask: ORKTask {
         return ORKOrderedTask.toneAudiometryTask(withIdentifier: String(describing:Identifier.toneAudiometryTask), intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: [])
@@ -1277,6 +1307,16 @@ enum TaskListRow: Int, CustomStringConvertible {
                                                            activeTaskOptions: [],
                                                            handOptions: [.both],
                                                            options: [])
+    }
+    
+    /// This task presents a knee range of motion task
+    private var kneeRangeOfMotion: ORKTask {
+        return ORKOrderedTask.kneeRangeOfMotionTask(withIdentifier: String(describing: Identifier.kneeRangeOfMotion), limbOption: .right, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a shoulder range of motion task
+    private var shoulderRangeOfMotion: ORKTask {
+        return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
     }
 
     // MARK: Consent Document Creation Convenience

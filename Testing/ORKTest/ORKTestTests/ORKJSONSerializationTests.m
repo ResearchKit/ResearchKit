@@ -207,6 +207,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
         return (HKObjectType *)[HKObjectType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
     }
 }))
+ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
+    return [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
+}));
 
                                                 
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
@@ -373,6 +376,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKTextAnswerFormat.spellCheckingType",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
@@ -614,6 +618,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKActiveStep.image",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKScaleAnswerFormat.minimumImage",
@@ -729,7 +734,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
          ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
          (c == [ORKLocation class]) ||
          (c == [ORKResultSelector class]) ||
-         [c isSubclassOfClass:[HKObjectType class]])
+         [c isSubclassOfClass:[HKObjectType class]] ||
+        (c == [CLCircularRegion class]))
     {
         return [[c alloc] orktest_init];
     }

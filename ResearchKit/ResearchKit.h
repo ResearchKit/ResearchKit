@@ -45,6 +45,7 @@
 #import <ResearchKit/ORKReviewStep.h>
 #import <ResearchKit/ORKSignatureStep.h>
 #import <ResearchKit/ORKTableStep.h>
+#import <ResearchKit/ORKTouchAnywhereStep.h>
 #import <ResearchKit/ORKVerificationStep.h>
 #import <ResearchKit/ORKVideoCaptureStep.h>
 #import <ResearchKit/ORKVisualConsentStep.h>
@@ -74,6 +75,7 @@
 #import <ResearchKit/ORKPasscodeViewController.h>
 #import <ResearchKit/ORKTableStepViewController.h>
 #import <ResearchKit/ORKTaskViewController.h>
+#import <ResearchKit/ORKTouchAnywhereStepViewController.h>
 #import <ResearchKit/ORKVerificationStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
 

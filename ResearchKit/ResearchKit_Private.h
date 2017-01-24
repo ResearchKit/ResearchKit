@@ -52,7 +52,9 @@
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKPSATStep.h>
+#import <ResearchKit/ORKRangeOfMotionStep.h>
 #import <ResearchKit/ORKReactionTimeStep.h>
+#import <ResearchKit/ORKShoulderRangeOfMotionStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
