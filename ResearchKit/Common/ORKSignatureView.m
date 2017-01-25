@@ -259,7 +259,7 @@ static const CGFloat LineWidthStepValue = 0.25f;
 
 #pragma mark Touch Event Handlers
 
-- (BOOL)_isForceTouchAvailable {
+- (BOOL)isForceTouchAvailable {
     static BOOL isAvailable;
     static dispatch_once_t onceToken;
     
@@ -275,7 +275,7 @@ static const CGFloat LineWidthStepValue = 0.25f;
     return isAvailable;
 }
 
-- (BOOL)_isTouchTypeStylus:(UITouch*)touch {
+- (BOOL)isTouchTypeStylus:(UITouch*)touch {
     BOOL isStylus = NO;
     
     if ([touch respondsToSelector:@selector(type)] && touch.type == UITouchTypeStylus) {
@@ -297,7 +297,7 @@ static const CGFloat LineWidthStepValue = 0.25f;
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     
-    if ([self _isForceTouchAvailable] || [self _isTouchTypeStylus:touch]) {
+    if ([self isForceTouchAvailable] || [self isTouchTypeStylus:touch]) {
         // This is a scale based on true force on the screen.
         minPressure = 0.f;
         maxPressure = [touch maximumPossibleForce] / 2.f;
@@ -338,7 +338,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     // value on all devices.
     CGFloat pressure = minPressure;
     
-    if ([self _isForceTouchAvailable] || [self _isTouchTypeStylus:touch]) {
+    if ([self isForceTouchAvailable] || [self isTouchTypeStylus:touch]) {
         // If the device supports Force Touch, or is using a stylus, use it.
         pressure = [touch force];
     }
