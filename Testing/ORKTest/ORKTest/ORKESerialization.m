@@ -473,6 +473,16 @@ encondingTable =
             PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
             PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKVideoInstructionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVideoInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(videoURL, NSURL, NSObject, YES,
+                     ^id(id url) { return [(NSURL *)url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; }),
+            PROPERTY(thumbnailTime, NSNumber, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKCompletionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKCompletionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1360,6 +1370,12 @@ encondingTable =
    ENTRY(ORKPageResult,
          nil,
          (@{
+            })),
+   ENTRY(ORKVideoInstructionStepResult,
+         nil,
+         (@{
+            PROPERTY(playbackStoppedTime, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(playbackCompleted, NSNumber, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];
