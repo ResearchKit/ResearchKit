@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,37 +28,42 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKInstructionStepViewController.h>
-
+#import <ResearchKit/ResearchKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- An `ORKCompletionStepViewController` object is the step view controller for an
-`ORKCompletionStep` object.
- 
- Typically, you don't need to instantiate a completion step view controller directly.
- Instead, add a completion step to a task, and present the task with a
- task view controller. The task view controller instantiates the step
- view controller for the completion step.
- */
 ORK_CLASS_AVAILABLE
-@interface ORKCompletionStepViewController : ORKInstructionStepViewController
+@interface ORKPageStepViewController : ORKStepViewController
 
 /**
- Optional property to allow showing the "Done/Next" button rather than moving this button 
- to the `rightBarButtonItem`.
+ The `ORKPageStep` associated with this view controller.
  */
-@property (nonatomic) BOOL shouldShowContinueButton;
+@property (nonatomic, readonly, nullable) ORKPageStep *pageStep;
 
 /**
- Optional property to set the color of the checkmark. This allows the checkmark to use a different
- color from the tintColor of the parent view.
+ Returns the step view controller to associate with this step. By default, this will
+ return the step view controller instantiated by the given step.
+ 
+ @returns `ORKStepViewController` subclass for this step.
  */
-@property (nonatomic, copy, nullable) UIColor *checkmarkColor;
+- (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step;
+
+/**
+ Returns an `ORKTaskResultSource` for the steps that are included as substeps for this
+ page view controller.
+ 
+ @returns `ORKTaskResultSource` for the step results
+ */
+- (id <ORKTaskResultSource>)resultSource;
+
+/**
+ Go to the given step.
+ 
+ @param step        The step to go to
+ @param direction   The direction in which navigate
+ @param animated    Should the change of view controllers be animated.
+ */
+- (void)goToStep:(ORKStep *)step direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated;
 
 @end
 

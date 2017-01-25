@@ -32,6 +32,7 @@
 
 #import "ORKESerialization.h"
 
+@import ResearchKit;
 @import ResearchKit.Private;
 
 @import MapKit;
@@ -398,6 +399,7 @@ encondingTable =
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
               PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(stepModifiers, ORKStepModifier, NSMutableDictionary, YES, nil, nil),
               PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
@@ -469,6 +471,16 @@ encondingTable =
          },
          (@{
             PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKVideoInstructionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVideoInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(videoURL, NSURL, NSObject, YES,
+                     ^id(id url) { return [(NSURL *)url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; }),
+            PROPERTY(thumbnailTime, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKCompletionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -801,6 +813,22 @@ encondingTable =
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKPageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKNavigablePageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKNavigablePageStep *step = [[ORKNavigablePageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
@@ -1335,6 +1363,17 @@ encondingTable =
          nil,
          (@{
             PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
+            PROPERTY(isPreviousResult, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKPageResult,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKVideoInstructionStepResult,
+         nil,
+         (@{
+            PROPERTY(playbackStoppedTime, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(playbackCompleted, NSNumber, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];

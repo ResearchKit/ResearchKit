@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,38 +28,32 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKNavigablePageStep.h"
+#import "ORKPageStep_Private.h"
 
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKInstructionStepViewController.h>
+@implementation ORKNavigablePageStep
 
+@dynamic pageTask;
 
-NS_ASSUME_NONNULL_BEGIN
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:nil]];
+}
 
-/**
- An `ORKCompletionStepViewController` object is the step view controller for an
-`ORKCompletionStep` object.
- 
- Typically, you don't need to instantiate a completion step view controller directly.
- Instead, add a completion step to a task, and present the task with a
- task view controller. The task view controller instantiates the step
- view controller for the completion step.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKCompletionStepViewController : ORKInstructionStepViewController
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
+}
 
-/**
- Optional property to allow showing the "Done/Next" button rather than moving this button 
- to the `rightBarButtonItem`.
- */
-@property (nonatomic) BOOL shouldShowContinueButton;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                          pageTask:(ORKOrderedTask *)task {
+    return [super initWithIdentifier:identifier pageTask:task];
+}
 
-/**
- Optional property to set the color of the checkmark. This allows the checkmark to use a different
- color from the tintColor of the parent view.
- */
-@property (nonatomic, copy, nullable) UIColor *checkmarkColor;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super initWithCoder:aDecoder];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

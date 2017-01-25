@@ -44,7 +44,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _thumbnailTime = 1;
+        _thumbnailTime = 0;
     }
     return self;
 }
@@ -86,8 +86,8 @@
     return super.hash ^ self.videoURL.hash;
 }
 
-- (void)setThumbnailTime:(NSInteger)thumbnailTime {
-    _thumbnailTime = thumbnailTime > 0 ? thumbnailTime : 1;
+- (void)setThumbnailTime:(NSUInteger)thumbnailTime {
+    _thumbnailTime = thumbnailTime;
 }
 
 @end

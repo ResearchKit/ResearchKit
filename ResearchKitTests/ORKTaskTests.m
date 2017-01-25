@@ -1679,6 +1679,52 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 }
 
 
+#pragma mark - Test Tremor Task navigation
+
+- (void)testKeyValueStepModifier {
+    
+    // Setup the task
+    ORKStep *boolStep = [ORKQuestionStep  questionStepWithIdentifier:@"question"
+                                                               title:@"Yes or No"
+                                                              answer:[ORKAnswerFormat booleanAnswerFormat]];
+    
+    ORKStep *nextStep = [[ORKInstructionStep alloc] initWithIdentifier:@"nextStep"];
+    nextStep.title = @"Yes";
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedTaskIdentifier
+                                                                                  steps:@[boolStep, nextStep]];
+    
+    ORKResultSelector *resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"question"
+                                                                     resultIdentifier:@"question"];
+    NSPredicate *predicate = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                                                                      expectedAnswer:NO];
+    ORKStepModifier *stepModifier = [[ORKKeyValueStepModifier alloc] initWithResultPredicate:predicate
+                                                                               keyValueMap:@{ @"title" : @"No" }];
+    
+    [task setStepModifier:stepModifier forStepIdentifier:@"nextStep"];
+    
+    // -- Check the title if the answer is YES
+    ORKBooleanQuestionResult *result = [[ORKBooleanQuestionResult alloc] initWithIdentifier:@"question"];
+    result.booleanAnswer = @(YES);
+    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"question" results:@[result]];
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithIdentifier:NavigableOrderedTaskIdentifier];
+    taskResult.results = @[stepResult];
+    
+    // For the case where the answer is YES, then the title should be "Yes" (unmodified)
+    ORKStep *yesStep = [task stepAfterStep:boolStep withResult:taskResult];
+    XCTAssertEqualObjects(yesStep.title, @"Yes");
+    
+    // -- Check the title if the answer is NO
+    result.booleanAnswer = @(NO);
+    stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"question" results:@[result]];
+    taskResult.results = @[stepResult];
+    
+    // For the case where the answer is NO, then the title should be modified to be "No"
+    ORKStep *noStep = [task stepAfterStep:boolStep withResult:taskResult];
+    XCTAssertEqualObjects(noStep.title, @"No");
+}
+
+
 @end
 
 @implementation MethodObject

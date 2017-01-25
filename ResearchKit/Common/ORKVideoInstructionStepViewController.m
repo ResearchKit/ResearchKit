@@ -36,9 +36,11 @@
 #import <AVKit/AVKit.h>
 #import "ORKHelpers_Internal.h"
 
+
 @interface ORKRateObservedPlayer : AVPlayer
 
 @end
+
 
 @implementation ORKRateObservedPlayer {
     id _observer;
@@ -58,6 +60,7 @@
 }
 
 @end
+
 
 @implementation ORKVideoInstructionStepViewController {
     Float64 _playbackStoppedTime;

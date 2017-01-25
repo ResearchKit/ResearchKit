@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  Default is 0, negative values will be ignored.
  */
-@property (nonatomic) NSInteger thumbnailTime;
+@property (nonatomic) NSUInteger thumbnailTime;
 
 @end
 
