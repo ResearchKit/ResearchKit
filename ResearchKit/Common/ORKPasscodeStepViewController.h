@@ -36,16 +36,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- An enumeration of values used in `ORKPasscodeStepViewController` to indicate the type of flow used
- by the view controller.
- */
-typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
-    ORKPasscodeFlowCreate,
-    ORKPasscodeFlowAuthenticate,
-    ORKPasscodeFlowEdit
-};
-
-/**
  An `ORKPasscodeStepViewController` object is the view controller for an `ORKPasscodeStep` object.
  
  A passcode view controller can be instantiated indirectly by adding a passcode step to a consent task 
@@ -53,13 +43,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
  view controller for the step.
  */
 @interface ORKPasscodeStepViewController : ORKStepViewController
-
-/**
- The passcode flow to be used for the step.
- 
- The default value of this property is `ORKPasscodeFlowCreate`.
- */
-@property (nonatomic) ORKPasscodeFlow passcodeFlow;
 
 @end
 
