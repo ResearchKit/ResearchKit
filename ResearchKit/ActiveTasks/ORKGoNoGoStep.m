@@ -145,4 +145,12 @@
     return NO;
 }
 
+- (NSUInteger)hash {
+    return super.hash ^ @(self.maximumStimulusInterval).hash ^
+    @(self.minimumStimulusInterval).hash ^ @(self.timeout).hash ^
+    @(self.numberOfAttempts).hash ^ @(self.thresholdAcceleration).hash ^
+    @(self.successSound).hash ^ @(self.timeoutSound).hash ^
+    @(self.timeoutSound).hash ^ @(self.failureSound).hash;
+}
+
 @end
