@@ -54,7 +54,7 @@ enum Activity: Int {
             case .tapping:
                 return "Tapping"
             case .gonogo:
-                return "Go No Go"
+                return "Go/No-Go Visual Reaction Time Task"
         }
     }
     

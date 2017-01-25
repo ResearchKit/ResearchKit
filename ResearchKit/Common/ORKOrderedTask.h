@@ -580,12 +580,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
 /**
  Returns a predefined task that tests the participant's reaction time and impulsiveness.
  
- In a go no go task, the participant is asked to move the device sharply in any
+ In a Go/No-Go task, the participant is asked to move the device sharply in any
  direction in response to a visual cue. You can use this task to accurately assess the participant's
  simple reaction time. Randomly they will be given a cue to not shake the device, this tests 
  impulsiveness
  
- A go no go time task finishes when the participant has completed the required
+ A Go/No-Go time task finishes when the participant has completed the required
  number of attempts successfully. For a go, an attempt is successful when the participant exerts acceleration
  greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
  `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than

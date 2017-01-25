@@ -293,7 +293,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
             
         case .gonogoTest:
-            return NSLocalizedString("Go No Go Test", comment: "")
+            return NSLocalizedString("Go/No-Go Visual Reaction Time", comment: "")
         }
     }
     
@@ -1328,7 +1328,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
     }
     
-    /// This task presents a go no go task
+    /// This task presents a Go/No-Go task
     private var gonogoTask: ORKTask {
         /// An example of a custom sound.
         let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
