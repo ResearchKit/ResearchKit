@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,23 +28,32 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKNavigablePageStep.h"
+#import "ORKPageStep_Private.h"
 
-#import "ORKInstructionStepViewController.h"
+@implementation ORKNavigablePageStep
 
+@dynamic pageTask;
 
-NS_ASSUME_NONNULL_BEGIN
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:nil]];
+}
 
-@class ORKInstructionStepView;
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
+    return [self initWithIdentifier:identifier pageTask:[[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps]];
+}
 
-@interface ORKInstructionStepViewController ()
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                          pageTask:(ORKOrderedTask *)task {
+    return [super initWithIdentifier:identifier pageTask:task];
+}
 
-@property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super initWithCoder:aDecoder];
+}
 
-// Use button title "Get started" instead of "Next".
-- (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
-
-- (void)stepDidChange;
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

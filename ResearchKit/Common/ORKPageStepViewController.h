@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,22 +28,42 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import "ORKInstructionStepViewController.h"
-
+#import <ResearchKit/ResearchKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKInstructionStepView;
+ORK_CLASS_AVAILABLE
+@interface ORKPageStepViewController : ORKStepViewController
 
-@interface ORKInstructionStepViewController ()
+/**
+ The `ORKPageStep` associated with this view controller.
+ */
+@property (nonatomic, readonly, nullable) ORKPageStep *pageStep;
 
-@property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
+/**
+ Returns the step view controller to associate with this step. By default, this will
+ return the step view controller instantiated by the given step.
+ 
+ @returns `ORKStepViewController` subclass for this step.
+ */
+- (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)step;
 
-// Use button title "Get started" instead of "Next".
-- (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
+/**
+ Returns an `ORKTaskResultSource` for the steps that are included as substeps for this
+ page view controller.
+ 
+ @returns `ORKTaskResultSource` for the step results
+ */
+- (id <ORKTaskResultSource>)resultSource;
 
-- (void)stepDidChange;
+/**
+ Go to the given step.
+ 
+ @param step        The step to go to
+ @param direction   The direction in which navigate
+ @param animated    Should the change of view controllers be animated.
+ */
+- (void)goToStep:(ORKStep *)step direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated;
 
 @end
 

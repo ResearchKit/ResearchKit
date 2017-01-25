@@ -1,6 +1,5 @@
 /*
- Copyright (c) 2016, Sage Bionetworks
- Copyright (c) 2016, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,23 +29,65 @@
  */
 
 
-#import "ORKTableStepViewController.h"
+#import "ORKVideoInstructionStep.h"
+#import "ORKVideoInstructionStepViewController.h"
+#import "ORKHelpers_Internal.h"
+#import <AVFoundation/AVFoundation.h>
 
 
-@class ORKTableContainerView;
-@class ORKNavigationContainerView;
-@class ORKStepHeaderView;
+@implementation ORKVideoInstructionStep
 
-@interface ORKTableStepViewController ()
++ (Class)stepViewControllerClass {
+    return [ORKVideoInstructionStepViewController class];
+}
 
-@property (nonatomic, strong, readonly) ORKTableContainerView *tableContainer;
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipView;
-@property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
-    
-/**
- @return   The style to use for the tableView. default = `UITableViewStyleGrouped` if more than one section
- and `UITableViewStylePlain` if there is only 1 section.
- */
-@property (nonatomic, readonly) UITableViewStyle tableViewStyle;
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        _thumbnailTime = 0;
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_URL(aDecoder, videoURL);
+        ORK_DECODE_INTEGER(aDecoder, thumbnailTime);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_URL(aCoder, videoURL);
+    ORK_ENCODE_INTEGER(aCoder, thumbnailTime);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKVideoInstructionStep *step = [super copyWithZone:zone];
+    step.videoURL = self.videoURL;
+    step.thumbnailTime = self.thumbnailTime;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(castObject.videoURL, self.videoURL) &&
+        castObject.thumbnailTime == self.thumbnailTime;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.videoURL.hash;
+}
+
+- (void)setThumbnailTime:(NSUInteger)thumbnailTime {
+    _thumbnailTime = thumbnailTime;
+}
 
 @end

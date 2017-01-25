@@ -100,6 +100,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case trailMaking
+    case videoInstruction
     
     class TaskListRowSection {
         var title: String
@@ -165,6 +166,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
                     .trailMaking
+                ]),
+            TaskListRowSection(title: "Miscellaneous", rows:
+                [
+                    .videoInstruction,
                 ]),
         ]}
     
@@ -285,7 +290,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
-        
+            
+        case .videoInstruction:
+            return NSLocalizedString("Video Instruction Task", comment: "")
+            
         case .kneeRangeOfMotion:
             return NSLocalizedString("Knee Range of Motion", comment: "")
             
@@ -454,6 +462,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
         case trailMaking
+        
+        // Video instruction tasks.
+        case videoInstructionTask
+        case videoInstructionStep
     }
     
     // MARK: Properties
@@ -573,7 +585,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return tremorTestTask
-        
+
         case .kneeRangeOfMotion:
             return kneeRangeOfMotion
         
@@ -582,6 +594,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .trailMaking:
             return trailMaking;
+        
+        case .videoInstruction:
+            return videoInstruction
         }
     }
 
@@ -1334,6 +1349,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
     }
 
+    /// This task presents a video instruction step
+    private var videoInstruction: ORKTask {
+        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(describing: Identifier.videoInstructionStep))
+        videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
+        videoInstructionStep.videoURL = URL(string: "https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov")
+        videoInstructionStep.thumbnailTime = 2 // Customizable thumbnail timestamp
+        return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**

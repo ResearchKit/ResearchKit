@@ -2179,7 +2179,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         [steps addObjectsFromArray:leftSteps];
     }
     
+    BOOL hasCompletionStep = NO;
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        hasCompletionStep = YES;
         ORKCompletionStep *step = [self makeCompletionStep];
         
         ORKStepArrayAddStep(steps, step);
@@ -2203,11 +2205,18 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         // Setup rule for skipping the second hand
         NSString *triggerIdentifier = firstIsLeft ? [[leftSteps lastObject] identifier] : [[rightSteps lastObject] identifier];
-        NSString *conclusionIdentifier = [[steps lastObject] identifier];
+        NSString *conclusionIdentifier = hasCompletionStep ? [[steps lastObject] identifier] : ORKNullStepIdentifier;
         NSPredicate *secondPredicate = firstIsLeft ? predicateRight : predicateLeft;
         ORKStepNavigationRule *skipSecond = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[secondPredicate]
                                                                                   destinationStepIdentifiers:@[conclusionIdentifier]];
         [task setNavigationRule:skipSecond forTriggerStepIdentifier:triggerIdentifier];
+        
+        // Setup step modifier to change the finished spoken step if skipping the second hand
+        NSString *key = NSStringFromSelector(@selector(finishedSpokenInstruction));
+        NSString *value = ORKLocalizedString(@"TREMOR_TEST_COMPLETED_INSTRUCTION", nil);
+        ORKStepModifier *stepModifier = [[ORKKeyValueStepModifier alloc] initWithResultPredicate:secondPredicate
+                                                                                     keyValueMap:@{key: value}];
+        [task setStepModifier:stepModifier forStepIdentifier:triggerIdentifier];
     }
     
     return task;

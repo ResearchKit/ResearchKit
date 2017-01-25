@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,23 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ORKPageStep.h>
+#import <ResearchKit/ORKOrderedTask.h>
 
-#import "ORKInstructionStepViewController.h"
+@interface ORKPageStep ()
 
+@property (nonatomic, copy, readonly) ORKOrderedTask *pageTask;
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKInstructionStepView;
-
-@interface ORKInstructionStepViewController ()
-
-@property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
-
-// Use button title "Get started" instead of "Next".
-- (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
-
-- (void)stepDidChange;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                          pageTask:(ORKOrderedTask *)task NS_DESIGNATED_INITIALIZER;
 
 @end
-
-NS_ASSUME_NONNULL_END
