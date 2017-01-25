@@ -44,7 +44,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _thumbnailTime = 1;
+        _thumbnailTime = 0;
     }
     return self;
 }
@@ -87,7 +87,7 @@
 }
 
 - (void)setThumbnailTime:(NSInteger)thumbnailTime {
-    _thumbnailTime = thumbnailTime > 0 ? thumbnailTime : 1;
+    _thumbnailTime = thumbnailTime >= 0 ? thumbnailTime : 0;
 }
 
 @end
