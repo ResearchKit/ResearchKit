@@ -45,7 +45,7 @@
 #import "ORKSkin.h"
 
 
-@interface ORKConsentSignatureWrapperView : UIView
+@interface ORKSignatureWrapperView : UIView
 
 @property (nonatomic, strong) ORKSignatureView *signatureView;
 
@@ -56,7 +56,7 @@
 @end
 
 
-@implementation ORKConsentSignatureWrapperView {
+@implementation ORKSignatureWrapperView {
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -177,7 +177,7 @@
 
 @interface ORKConsentSigningView : ORKVerticalContainerView
 
-@property (nonatomic, strong) ORKConsentSignatureWrapperView *wrapperView;
+@property (nonatomic, strong) ORKSignatureWrapperView *wrapperView;
 
 @end
 
@@ -188,7 +188,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        _wrapperView = [ORKConsentSignatureWrapperView new];
+        _wrapperView = [ORKSignatureWrapperView new];
         _wrapperView.translatesAutoresizingMaskIntoConstraints = NO;
         
         self.stepView = _wrapperView;
