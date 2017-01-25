@@ -61,7 +61,6 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _signatureView.layoutMargins = (UIEdgeInsets){.top = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, newWindow) - ABS([ORKTextButton defaultFont].descender) - 1};
     [self setNeedsLayout];
 }
 
@@ -81,10 +80,6 @@
         {
             _signatureView = [ORKSignatureView new];
             [_signatureView setClipsToBounds:YES];
-            
-            // This allows us to layout the signature view sticking up a bit past the top of the superview,
-            // so drawing can extend higher
-            _signatureView.layoutMargins = (UIEdgeInsets){.top=36};
             
             _signatureView.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_signatureView];
@@ -150,13 +145,8 @@
                                                                              metrics:nil
                                                                                views:views]];
     
-    /*
-     Using top margin here is a hack to get the drawable area of the signature view to poke up
-     a bit past the top of this view. Doing anything else would be a layering violation, so...
-     we do this.
-     */
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_signatureView
-                                                        attribute:NSLayoutAttributeTopMargin
+                                                        attribute:NSLayoutAttributeTop
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeTop
