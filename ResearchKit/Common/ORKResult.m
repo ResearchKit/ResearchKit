@@ -2182,6 +2182,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 
 @end
 
+
 @implementation ORKSignatureResult
 
 - (instancetype)initWithSignatureImage:(UIImage *)signatureImage
@@ -2235,6 +2236,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 
 @end
 
+
 @implementation ORKVideoInstructionStepResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -2278,6 +2280,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
 
 @implementation ORKPageResult
 

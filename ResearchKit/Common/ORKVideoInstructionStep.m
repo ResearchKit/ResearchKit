@@ -86,8 +86,8 @@
     return super.hash ^ self.videoURL.hash;
 }
 
-- (void)setThumbnailTime:(NSInteger)thumbnailTime {
-    _thumbnailTime = thumbnailTime >= 0 ? thumbnailTime : 0;
+- (void)setThumbnailTime:(NSUInteger)thumbnailTime {
+    _thumbnailTime = thumbnailTime;
 }
 
 @end

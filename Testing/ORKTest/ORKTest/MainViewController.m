@@ -107,11 +107,8 @@ DefineStringKey(StepWillDisappearFirstStepIdentifier);
 
 DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
-<<<<<<< HEAD
 DefineStringKey(VideoInstructionStepTaskIdentifier);
-=======
 DefineStringKey(PageStepTaskIdentifier);
->>>>>>> master
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -4594,8 +4591,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
 
-<<<<<<< HEAD
-=======
 #pragma mark - Completion Step Continue Button
 
 - (IBAction)completionStepButtonTapped:(id)sender {
@@ -4672,6 +4667,4 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
 }
 
-
->>>>>>> master
 @end
