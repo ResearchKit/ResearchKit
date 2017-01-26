@@ -38,6 +38,15 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKAudioLevelNavigationRule : ORKStepNavigationRule
 
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized direct-step navigation rule using the specified destination step identifier.
  
