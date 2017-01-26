@@ -202,6 +202,7 @@
 "BUTTON_SAVE" = "Save";
 "BUTTON_CLEAR_ANSWER" = "Clear answer";
 "BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";
@@ -314,6 +315,7 @@
 "MEMORY_GAME_COMPLETE" = "Game Complete";
 "MEMORY_GAME_PAUSED_TITLE" = "Paused";
 "MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
