@@ -58,6 +58,14 @@ Float32 const VolumeClamp = 60.0;
 
 @implementation ORKAudioLevelNavigationRule
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithAudioLevelStepIdentifier:(NSString *)audioLevelStepIdentifier
                        destinationStepIdentifier:(NSString *)destinationStepIdentifier
                                recordingSettings:(NSDictionary *)recordingSettings

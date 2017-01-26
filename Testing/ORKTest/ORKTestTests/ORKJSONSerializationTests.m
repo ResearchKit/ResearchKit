@@ -181,6 +181,7 @@
  */
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
@@ -750,6 +751,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     @try {
         if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
             ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
+            ([c isSubclassOfClass:[ORKStepModifier class]]) ||
             ([c isSubclassOfClass:[ORKStep class]]) ||
             (c == [ORKKeyValueStepModifier class]) ||
              ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
