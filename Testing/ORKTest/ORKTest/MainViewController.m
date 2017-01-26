@@ -1068,6 +1068,72 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         /*
+         A multiple component value-picker question. 
+         */
+        ORKValuePickerAnswerFormat *colorFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"Red"
+                                                                              value:@"red"],
+                                                      [ORKTextChoice choiceWithText:@"Blue"
+                                                                              value:@"blue"],
+                                                      [ORKTextChoice choiceWithText:@"Green"
+                                                                              value:@"green"]
+                                                      ]];
+        
+        ORKValuePickerAnswerFormat *animalFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cat"
+                                                                             value:@"cat"],
+                                                     [ORKTextChoice choiceWithText:@"Dog"
+                                                                             value:@"dog"],
+                                                     [ORKTextChoice choiceWithText:@"Turtle"
+                                                                             value:@"turtle"]
+                                                     ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat multipleValuePickerAnswerFormatWithValuePickers:
+                                                            @[colorFormat, animalFormat]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick"
+                                                                      title:@"Select a pet:"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    
+    {
+        /*
+         A multiple component value-picker question.
+         */
+        ORKValuePickerAnswerFormat *f1 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"A"
+                                                                             value:@"A"],
+                                                     [ORKTextChoice choiceWithText:@"B"
+                                                                             value:@"B"],
+                                                     [ORKTextChoice choiceWithText:@"C"
+                                                                             value:@"C"]
+                                                     ]];
+        
+        ORKValuePickerAnswerFormat *f2 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"0"
+                                                                              value:@0],
+                                                      [ORKTextChoice choiceWithText:@"1"
+                                                                              value:@1],
+                                                      [ORKTextChoice choiceWithText:@"2"
+                                                                              value:@2]
+                                                      ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [[ORKMultipleValuePickerAnswerFormat alloc] initWithValuePickers:@[f1, f2] separator:@"-"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick_dash"
+                                                                      title:@"Select a letter and number code:"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
          A continuous slider question.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_010"
