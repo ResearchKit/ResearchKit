@@ -471,6 +471,7 @@ encondingTable =
          },
          (@{
             PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
+            PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKVideoInstructionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -800,7 +801,8 @@ encondingTable =
             return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
-          PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil)
+          PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil),
+          PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKFormItem,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

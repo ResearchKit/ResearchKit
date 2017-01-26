@@ -520,6 +520,7 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
+        _continueSkipView.footnoteLabel.text = [self formStep].footnote;
         if (self.readOnlyMode) {
             _continueSkipView.optional = YES;
             [_continueSkipView setNeverHasContinueButton:YES];
