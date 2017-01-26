@@ -79,6 +79,7 @@ DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TrailMakingTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
@@ -368,6 +369,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
+                           @"Trail Making Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
@@ -658,6 +660,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:TrailMakingTaskIdentifier]) {
+        return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
+                                      intendedUseDescription:nil
+                                      trailmakingInstruction:nil
+                                                   trailType:ORKTrailMakingTypeIdentifierA
+                                                     options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
     } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
@@ -4671,6 +4679,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     step3.iconImage = [UIImage imageNamed:@"Poppies"];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
+}
+
+#pragma mark - Trail Making Task
+
+- (IBAction)trailMakingTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TrailMakingTaskIdentifier];
 }
 
 #pragma mark - Completion Step Continue Button
