@@ -268,7 +268,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     NSMutableSet *types = [NSMutableSet set];
     ORKAnswerFormat *format = [[self questionStep] answerFormat];
-    HKObjectType *objType = [format healthKitObjectType];
+    HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
     if (objType) {
         [types addObject:objType];
     }
@@ -431,7 +431,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-            nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            if (nqr.unit == nil) {
+                nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            }
         }
         
         result.startDate = parentResult.startDate;

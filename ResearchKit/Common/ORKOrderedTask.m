@@ -228,13 +228,13 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             
             for (ORKFormItem *formItem in formStep.formItems) {
                 ORKAnswerFormat *answerFormat = [formItem answerFormat];
-                HKObjectType *objType = [answerFormat healthKitObjectType];
+                HKObjectType *objType = [answerFormat healthKitObjectTypeForAuthorization];
                 if (objType) {
                     [healthTypes addObject:objType];
                 }
             }
         } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
-            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
+            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectTypeForAuthorization];
             if (objType) {
                 [healthTypes addObject:objType];
             }
