@@ -47,10 +47,6 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
     if ([self isMemberOfClass:[ORKStepNavigationRule class]]) {
         ORKThrowMethodUnavailableException();
     }
-    return [self init_ork];
-}
-
-- (instancetype)init_ork {
     return [super init];
 }
 
@@ -74,7 +70,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    __typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    __typeof(self) rule = [[[self class] allocWithZone:zone] init];
     return rule;
 }
 
@@ -130,7 +126,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"defaultStepIdentifier must be of a NSString class kind or nil" userInfo:nil];
         }
     }
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _resultPredicates = [resultPredicates copy];
         _destinationStepIdentifiers = [destinationStepIdentifiers copy];
@@ -283,7 +279,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 - (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _destinationStepIdentifier = destinationStepIdentifier;
     }
@@ -341,10 +337,6 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     if ([self isMemberOfClass:[ORKSkipStepNavigationRule class]]) {
         ORKThrowMethodUnavailableException();
     }
-    return [self init_ork];
-}
-
-- (instancetype)init_ork {
     return [super init];
 }
 
@@ -368,7 +360,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    typeof(self) rule = [[[self class] allocWithZone:zone] init];
     return rule;
 }
 
@@ -401,7 +393,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 - (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate {
     ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _resultPredicate = resultPredicate;
     }
@@ -481,10 +473,6 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     if ([self isMemberOfClass:[ORKStepModifier class]]) {
         ORKThrowMethodUnavailableException();
     }
-    return [self init_ork];
-}
-
-- (instancetype)init_ork {
     return [super init];
 }
 
@@ -508,7 +496,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [[[self class] allocWithZone:zone] init_ork];
+    return [[[self class] alloc] init];
 }
 
 - (NSUInteger)hash {

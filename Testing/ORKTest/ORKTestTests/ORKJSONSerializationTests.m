@@ -775,7 +775,13 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
 }
 
 - (void)testEquality {
-    NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
+    NSArray *classesExcluded = @[
+                                 [ORKStepNavigationRule class],     // abstract base class
+                                 [ORKSkipStepNavigationRule class],     // abstract base class
+                                 [ORKStepModifier class],     // abstract base class
+                                 ];
+    
+    
     // Each time ORKRegistrationStep returns a new date in its answer fromat, cannot be tested.
     NSMutableArray *stringsForClassesExcluded = [NSMutableArray arrayWithObjects:NSStringFromClass([ORKRegistrationStep class]), nil];
     for (Class c in classesExcluded) {

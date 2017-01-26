@@ -73,7 +73,7 @@ Float32 const VolumeClamp = 60.0;
     ORKThrowInvalidArgumentExceptionIfNil(audioLevelStepIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(recordingSettings);
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _audioLevelStepIdentifier = [audioLevelStepIdentifier copy];
         _destinationStepIdentifier = [destinationStepIdentifier copy];
