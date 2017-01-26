@@ -53,6 +53,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.contentMode = UIViewContentModeRedraw;
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
