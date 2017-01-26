@@ -55,6 +55,7 @@
 #import "ORKPSATStep.h"
 #import "ORKQuestionStep.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKGoNoGoStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKStep_Private.h"
 #import "ORKTappingIntervalStep.h"
@@ -337,6 +338,7 @@ NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatials
 NSString *const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
+NSString *const ORKGoNoGoStepIdentifier = @"gonogo";
 NSString *const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
 NSString *const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
 NSString *const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
@@ -1402,6 +1404,67 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     ORKReactionTimeStep *step = [[ORKReactionTimeStep alloc] initWithIdentifier:ORKReactionTimeStepIdentifier];
+    step.maximumStimulusInterval = maximumStimulusInterval;
+    step.minimumStimulusInterval = minimumStimulusInterval;
+    step.thresholdAcceleration = thresholdAcceleration;
+    step.numberOfAttempts = numberOfAttempts;
+    step.timeout = timeout;
+    step.successSound = successSoundID;
+    step.timeoutSound = timeoutSoundID;
+    step.failureSound = failureSoundID;
+    step.recorderConfigurations = @[ [[ORKDeviceMotionRecorderConfiguration  alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency: 100]];
+
+    ORKStepArrayAddStep(steps, step);
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
+
++ (ORKOrderedTask *)gonogoTaskWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                     maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                     minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                       thresholdAcceleration:(double)thresholdAcceleration
+                            numberOfAttempts:(int)numberOfAttempts
+                                     timeout:(NSTimeInterval)timeout
+                                successSound:(SystemSoundID)successSoundID
+                                timeoutSound:(SystemSoundID)timeoutSoundID
+                                failureSound:(SystemSoundID)failureSoundID
+                                     options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"GONOGO_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"GONOGO_TASK_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"phoneshake" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"GONOGO_TASK_TITLE", nil);
+            step.text = [NSString stringWithFormat: ORKLocalizedString(@"GONOGO_TASK_INTRO_TEXT_FORMAT", nil), numberOfAttempts];
+            step.detailText = ORKLocalizedString(@"GONOGO_TASK_CALL_TO_ACTION", nil);
+            step.image = [UIImage imageNamed:@"phoneshakecircle" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    ORKGoNoGoStep *step = [[ORKGoNoGoStep alloc] initWithIdentifier:ORKGoNoGoStepIdentifier];
     step.maximumStimulusInterval = maximumStimulusInterval;
     step.minimumStimulusInterval = minimumStimulusInterval;
     step.thresholdAcceleration = thresholdAcceleration;

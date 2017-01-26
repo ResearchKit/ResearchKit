@@ -30,6 +30,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
+/**
+ Wraps a SystemSoundID.
+ 
+ A class is used in order to provide appropriate cleanup when the sound is
+ no longer needed.
+ */
+class SystemSound {
+    var soundID: SystemSoundID = 0
+    
+    init?(soundURL: URL) {
+        if AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID) != noErr {
+            return nil
+        }
+    }
+    
+    deinit {
+        AudioServicesDisposeSystemSoundID(soundID)
+    }
+}
+
 struct StudyTasks {
     
     static let microphoneTask: ORKOrderedTask = {
@@ -50,6 +70,15 @@ struct StudyTasks {
         let intendedUseDescription = "Tests visual attention and task switching"
         
         return ORKOrderedTask.trailmakingTask(withIdentifier: "TrailmakingTask", intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType: .B, options: ORKPredefinedTaskOption())
+    }()
+    
+    static let gonogoTask: ORKOrderedTask = {
+        let intendedUseDescription = "Reaction time is a measure of quickess."
+        
+        /// An example of a custom sound.
+        let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
+        let successSound = SystemSound(soundURL: successSoundURL)!
+        return ORKOrderedTask.gonogoTask(withIdentifier: "GoNoGo", intendedUseDescription: intendedUseDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 9, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }()
     
     static let surveyTask: ORKOrderedTask = {

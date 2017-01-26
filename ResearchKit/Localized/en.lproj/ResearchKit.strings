@@ -333,6 +333,16 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 
+/* Go/No-Go active task. */
+"GONOGO_TASK_TITLE" = "Go/No-Go Test";
+"GONOGO_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to correctly respond to visual cues.";
+"GONOGO_TASK_INTRO_TEXT_FORMAT" = "Hold the phone with your dominant hand and shake the device in any direction as soon as a blue dot appears on screen, but DO NOT shake if the dot is green. You will be asked to do this %D times. \n \n Your goal is to respond as fast as you can while minimizing the number of mistakes.";
+"GONOGO_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"GONOGO_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
+"GONOGO_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device only when a blue dot, but not a green one, appears.";
+"GONOGO_TASK_ERRORS_FORMAT" = "\nErrors: %d";
+"GONOGO_TASK_REACTION_FORMAT" = "\nLast reaction time: %.2f seconds";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";

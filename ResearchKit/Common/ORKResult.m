@@ -829,6 +829,66 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @end
 
 
+@implementation ORKGoNoGoResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_DOUBLE(aCoder, timeToThreshold);
+    ORK_ENCODE_OBJ(aCoder, fileResult);
+    ORK_ENCODE_BOOL(aCoder, go);
+    ORK_ENCODE_BOOL(aCoder, incorrect);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_DOUBLE(aDecoder, timeToThreshold);
+        ORK_DECODE_OBJ_CLASS(aDecoder, fileResult, ORKFileResult);
+        ORK_DECODE_BOOL(aDecoder, go);
+        ORK_DECODE_BOOL(aDecoder, incorrect);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.timestamp == castObject.timestamp) &&
+            (self.timeToThreshold == castObject.timeToThreshold) &&
+            (self.go == castObject.go) &&
+            (self.incorrect == castObject.incorrect) &&
+            ORKEqualObjects(self.fileResult, castObject.fileResult)) ;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.go ^ self.incorrect ^ self.fileResult.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKGoNoGoResult *result = [super copyWithZone:zone];
+    result.fileResult = [self.fileResult copy];
+    result.timestamp = self.timestamp;
+    result.timeToThreshold = self.timeToThreshold;
+    result.go = self.go;
+    result.incorrect = self.incorrect;
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; go: %@; error: %@; timestamp: %f; timeToThreshold: %f; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.go ? @"YES" : @"NO", self.incorrect ? @"YES" : @"NO", self.timestamp, self.timeToThreshold, self.fileResult.description, self.descriptionSuffix];
+}
+
+@end
+
+
 @implementation ORKTimedWalkResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

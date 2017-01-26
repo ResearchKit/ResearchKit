@@ -32,7 +32,7 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case survey, microphone, tapping, trailmaking
+    case survey, microphone, tapping, gonogo, trailmaking
     
     static var allValues: [Activity] {
         var index = 0
@@ -53,6 +53,8 @@ enum Activity: Int {
                 return "Microphone"
             case .tapping:
                 return "Tapping"
+            case .gonogo:
+                return "Go/No-Go Visual Reaction Time Task"
             case .trailmaking:
                 return "Trail Making Test"
         }
@@ -66,6 +68,8 @@ enum Activity: Int {
                 return "Voice evaluation"
             case .tapping:
                 return "Test tapping speed"
+            case .gonogo:
+                return "Test reaction time and impulsiveness"
             case .trailmaking:
                 return "Test visual attention"
         }
@@ -123,6 +127,10 @@ class ActivityViewController: UITableViewController {
                 
             case .tapping:
                 taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRun: NSUUID() as UUID)
+            
+            case .gonogo:
+                taskViewController = ORKTaskViewController(task: StudyTasks.gonogoTask, taskRun: NSUUID() as UUID)
+                taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             
             case .trailmaking:
                 taskViewController = ORKTaskViewController(task: StudyTasks.trailmakingTask, taskRun: NSUUID() as UUID)

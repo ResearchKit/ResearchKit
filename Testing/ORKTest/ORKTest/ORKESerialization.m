@@ -677,6 +677,20 @@ encondingTable =
             PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKGoNoGoStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKGoNoGoStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(maximumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(minimumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeout, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(numberOfAttempts, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(thresholdAcceleration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(successSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKTappingIntervalStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTappingIntervalStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1205,6 +1219,15 @@ encondingTable =
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKGoNoGoResult,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(timeToThreshold, NSNumber, NSObject, NO, nil, nil)
+            PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            PROPERTY(go, NSNumber, NSObject, NO, nil, nil)
+            PROPERTY(incorrect, NSNumber, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKTimedWalkResult,
          nil,
