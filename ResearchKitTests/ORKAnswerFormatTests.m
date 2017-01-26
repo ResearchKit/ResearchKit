@@ -54,6 +54,7 @@
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some_one@researchkit.org"]);
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some-one@researchkit.org"]);
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone1@researchkit.org"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"Someone1@ResearchKit.org"]);
 }
 
 - (void)testInvalidEmailAnswerFormat {
@@ -63,6 +64,20 @@
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@researchkit"]);
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@.org"]);
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"12345"]);
+}
+
+- (void)testInvalidRegexAnswerFormat {
+    
+    // Setup an answer format
+    ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+    answerFormat.multipleLines = NO;
+    answerFormat.keyboardType = UIKeyboardTypeASCIICapable;
+    answerFormat.validationRegex = @"^[A-F,0-9]+$";
+    answerFormat.invalidMessage = @"Only hexidecimal values in uppercase letters are accepted.";
+    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    XCTAssertFalse([answerFormat isAnswerValidWithString:@"Q2"]);
+    XCTAssertFalse([answerFormat isAnswerValidWithString:@"abcd"]);
+    XCTAssertTrue([answerFormat isAnswerValidWithString:@"ABCD1234FFED0987654321"]);
 }
 
 - (void)testConfirmAnswerFormat {

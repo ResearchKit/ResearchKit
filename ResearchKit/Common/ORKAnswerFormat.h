@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Sage Bionetworks.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKContinuousScaleAnswerFormat;
 @class ORKTextScaleAnswerFormat;
 @class ORKValuePickerAnswerFormat;
+@class ORKMultipleValuePickerAnswerFormat;
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
@@ -69,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  An answer format is validated when its owning step is validated.
  
  Some answer formats are constructed of other answer formats. When this is the
- case, the answer format can implement the internal method `_impliedAnswerFormat` to return
+ case, the answer format can override the method `impliedAnswerFormat` to return
  the answer format that is implied. For example, a Boolean answer format
  is presented in the same way as a single-choice answer format with the
  choices Yes and No mapping to `@(YES)` and `@(NO)`, respectively.
@@ -115,6 +117,8 @@ ORK_CLASS_AVAILABLE
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
+
++ (ORKMultipleValuePickerAnswerFormat *)multipleValuePickerAnswerFormatWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
 
@@ -167,6 +171,16 @@ ORK_CLASS_AVAILABLE
  about to be displayed.
  */
 - (void)validateParameters;
+
+/**
+ Some answer formats are constructed of other answer formats. This method allows
+ a subclass to return a different answer format for use in defining the UI/UX for
+ the answer format type. For example, a Boolean answer format is presented in the 
+ same way as a single-choice answer format with the choices Yes and No mapping to 
+ `@(YES)` and `@(NO)`, respectively, so it's `impliedAnswerFormat` is an 
+ `ORKTextChoiceAnswerFormat` with those options.
+*/
+- (ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
 
@@ -632,6 +646,94 @@ ORK_CLASS_AVAILABLE
  each choice that is short enough to fit in a `UIPickerView` object.
  */
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
+
+@end
+
+/**
+ The `ORKNumberPickerAnswerFormat` class represents an answer format that lets participants use a
+ value picker to choose from a fixed set of number choices.
+ 
+ When the number of choices is relatively large and the text that describes each choice
+ is short, you might want to use the value picker answer format instead of the text choice answer
+ format (`ORKTextChoiceAnswerFormat`). When the text that describes each choice is long, or there
+ are only a very small number of choices, it's usually better to use the text choice answer format.
+ 
+ Note that the value picker answer format reports itself as being of the single choice question
+ type. The value picker answer format produces an `ORKNumberQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKNumberPickerAnswerFormat : ORKAnswerFormat
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a value picker answer format using the specified array of text choices.
+ 
+ Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
+ each choice that is short enough to fit in a `UIPickerView` object.
+ 
+ @param textChoices     Array of `ORKTextChoice` objects.
+ 
+ @return An initialized value picker answer format.
+ */
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
+
+/**
+ An array of text choices that represent the options to display in the picker. (read-only)
+ 
+ Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
+ each choice that is short enough to fit in a `UIPickerView` object.
+ */
+@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
+
+@end
+
+/**
+ The `ORKMultipleValuePickerAnswerFormat` class represents an answer format that lets participants use a
+ multiple-component value picker to choose from a fixed set of text choices.
+ 
+ Note that the multiple value picker answer format reports itself as being of the multiple picker question
+ type. The multiple-component value picker answer format produces an `ORKMultipleComponentQuestionResult` 
+ object where the index into the array matches the array of `ORKValuePickerAnswerFormat` objects.
+ 
+ For example, if the picker shows two columns with choices of `[[A, B, C], [1, 2, 3, 4]]` and the user picked
+ `B` and `3` then this would result in `componentsAnswer = [B, 3]`.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMultipleValuePickerAnswerFormat : ORKAnswerFormat
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a multiple value picker answer format using the specified array of value pickers.
+ 
+ @param valuePickers     Array of `ORKValuePickerAnswerFormat` objects.
+ 
+ @return An initialized multiple value picker answer format.
+ */
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
+
+/**
+ Returns a multiple value picker answer format using the specified array of value pickers.
+ 
+ @param valuePickers     Array of `ORKValuePickerAnswerFormat` objects.
+ @param separator        String used to separate the components
+ 
+ @return An initialized multiple value picker answer format.
+ */
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers separator:(NSString *)separator NS_DESIGNATED_INITIALIZER;
+
+/**
+ An array of value pickers that represent the options to display in the picker. (read-only)
+ */
+@property (copy, readonly) NSArray<ORKValuePickerAnswerFormat *> *valuePickers;
+
+/**
+ A string used to define the seperator for the format of the string. Default = " ".
+ */
+@property (copy, readonly) NSString *separator;
 
 @end
 
@@ -1350,6 +1452,16 @@ ORK_CLASS_AVAILABLE
  By default, this value is YES.
  */
 @property (nonatomic, assign) BOOL useCurrentLocation;
+
+@end
+
+/**
+ The `ORKMoodScaleAnswerFormat` class represents an image choice that can be converted to a scale value.
+ 
+ An `ORKMoodScaleAnswerFormat` class produces an `ORKMoodScaleQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMoodScaleAnswerFormat : ORKImageChoiceAnswerFormat
 
 @end
 

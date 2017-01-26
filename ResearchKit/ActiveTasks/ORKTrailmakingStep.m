@@ -50,6 +50,7 @@
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
         self.optional = NO; // default to *not* optional
+        _trailType = ORKTrailMakingTypeIdentifierA;
     }
     return self;
 }
@@ -57,7 +58,8 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    if (![self.trailType isEqual:@"A"] && ![self.trailType isEqual:@"B"]) {
+    NSArray *supportedTypes = @[ORKTrailMakingTypeIdentifierA, ORKTrailMakingTypeIdentifierB];
+    if (self.trailType == nil || ![supportedTypes containsObject:self.trailType]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"trailType must be A or B"
                                      userInfo:nil];
@@ -66,6 +68,12 @@
 
 - (BOOL)startsFinished {
     return NO;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTrailmakingStep *step = [super copyWithZone:zone];
+    step.trailType = self.trailType;
+    return step;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -83,6 +91,10 @@
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ self.trailType.hash;
 }
 
 - (BOOL)isEqual:(id)object {

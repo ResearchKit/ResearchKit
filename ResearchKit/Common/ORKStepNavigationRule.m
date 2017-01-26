@@ -32,6 +32,7 @@
 #import "ORKStepNavigationRule.h"
 #import "ORKStepNavigationRule_Private.h"
 
+#import "ORKStep.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
 
@@ -42,15 +43,10 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 @implementation ORKStepNavigationRule
 
-+ (instancetype)new {
-    ORKThrowMethodUnavailableException();
-}
-
 - (instancetype)init {
-    ORKThrowMethodUnavailableException();
-}
-
-- (instancetype)init_ork {
+    if ([self isMemberOfClass:[ORKStepNavigationRule class]]) {
+        ORKThrowMethodUnavailableException();
+    }
     return [super init];
 }
 
@@ -74,7 +70,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    __typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    __typeof(self) rule = [[[self class] allocWithZone:zone] init];
     return rule;
 }
 
@@ -99,6 +95,14 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 @implementation ORKPredicateStepNavigationRule
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 // Internal init without array validation, for serialization support
 - (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
               destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
@@ -122,7 +126,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"defaultStepIdentifier must be of a NSString class kind or nil" userInfo:nil];
         }
     }
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _resultPredicates = [resultPredicates copy];
         _destinationStepIdentifiers = [destinationStepIdentifiers copy];
@@ -192,8 +196,8 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     for (NSInteger i = 0; i < _resultPredicates.count; i++) {
         NSPredicate *predicate = _resultPredicates[i];
         // The predicate can either have:
-        // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoign task identifier;
-        // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+        // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
+        // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
         if ([predicate evaluateWithObject:allTaskResults
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
             destinationStepIdentifier = _destinationStepIdentifiers[i];
@@ -265,9 +269,17 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 @implementation ORKDirectStepNavigationRule
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _destinationStepIdentifier = destinationStepIdentifier;
     }
@@ -321,15 +333,10 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 @implementation ORKSkipStepNavigationRule
 
-+ (instancetype)new {
-    ORKThrowMethodUnavailableException();
-}
-
 - (instancetype)init {
-    ORKThrowMethodUnavailableException();
-}
-
-- (instancetype)init_ork {
+    if ([self isMemberOfClass:[ORKSkipStepNavigationRule class]]) {
+        ORKThrowMethodUnavailableException();
+    }
     return [super init];
 }
 
@@ -353,7 +360,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
+    typeof(self) rule = [[[self class] allocWithZone:zone] init];
     return rule;
 }
 
@@ -376,9 +383,17 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 @implementation ORKPredicateSkipStepNavigationRule
 
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate {
     ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
-    self = [super init_ork];
+    self = [super init];
     if (self) {
         _resultPredicate = resultPredicate;
     }
@@ -401,8 +416,8 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
     
     // The predicate can either have:
-    // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoign task identifier;
-    // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
+    // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
+    // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
     BOOL predicateDidMatch = [_resultPredicate evaluateWithObject:allTaskResults
                                            substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
     return predicateDidMatch;
@@ -447,6 +462,135 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 
 - (NSUInteger)hash {
     return _resultPredicate.hash ^ _additionalTaskResults.hash;
+}
+
+@end
+
+
+@implementation ORKStepModifier
+
+- (instancetype)init {
+    if ([self isMemberOfClass:[ORKStepModifier class]]) {
+        ORKThrowMethodUnavailableException();
+    }
+    return [super init];
+}
+
+- (void)modifyStep:(ORKStep *)step withTaskResult:(ORKTaskResult *)taskResult {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super init];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[[self class] allocWithZone:zone] init];
+}
+
+- (NSUInteger)hash {
+    return [[self class] hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    return YES;
+}
+
+@end
+
+
+@implementation ORKKeyValueStepModifier
+
++ (instancetype)new {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate
+                           keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap {
+    ORKThrowInvalidArgumentExceptionIfNil(resultPredicate);
+    ORKThrowInvalidArgumentExceptionIfNil(keyValueMap);
+    self = [super init];
+    if (self) {
+        _resultPredicate = [resultPredicate copy];
+        _keyValueMap = ORKMutableDictionaryCopyObjects(keyValueMap);
+    }
+    return self;
+}
+
+- (void)modifyStep:(ORKStep *)step withTaskResult:(ORKTaskResult *)taskResult {
+    
+    // The predicate can either have:
+    // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
+    // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
+    BOOL predicateDidMatch = [_resultPredicate evaluateWithObject:@[taskResult]
+                                            substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}];
+    if (predicateDidMatch) {
+        for (NSString *key in self.keyValueMap.allKeys) {
+            @try {
+                [step setValue:self.keyValueMap[key] forKey:key];
+            } @catch (NSException *exception) {
+                NSAssert1(NO, @"You are attempting to set a key-value that is not key-value compliant. %@", exception);
+            }
+        }
+    }
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, resultPredicate, NSPredicate);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, keyValueMap, NSString, NSObject);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, resultPredicate);
+    ORK_ENCODE_OBJ(aCoder, keyValueMap);
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return [[[self class] allocWithZone:zone] initWithResultPredicate:self.resultPredicate
+                                                          keyValueMap:self.keyValueMap];
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return (isParentSame
+            && ORKEqualObjects(self.resultPredicate, castObject.resultPredicate)
+            && ORKEqualObjects(self.keyValueMap, castObject.keyValueMap));
+}
+
+- (NSUInteger)hash {
+    return _resultPredicate.hash ^ _keyValueMap.hash;
 }
 
 @end

@@ -31,6 +31,7 @@
 
 @import Foundation;
 #import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKOrderedTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,7 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTrailmakingStep : ORKActiveStep
 
-@property (nonatomic, copy) NSString* trailType;
+/**
+ The type of trail to show. Default = "B"
+ */
+@property (nonatomic, copy) ORKTrailMakingTypeIdentifier trailType;
 
 @end
 
