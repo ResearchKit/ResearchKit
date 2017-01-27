@@ -136,7 +136,7 @@
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
     NSUInteger buttonIndex = [_trailmakingContentView.tapButtons indexOfObject:button];
-    if (buttonIndex >= 0) {
+    if (buttonIndex != NSNotFound) {
         
         ORKTrailmakingTap* tap = [[ORKTrailmakingTap alloc] init];
         tap.timestamp = [[NSDate date] timeIntervalSinceDate: self.presentedDate];
@@ -157,7 +157,7 @@
             tap.incorrect = YES;
             
             [_trailmakingContentView clearErrors];
-            [_trailmakingContentView setError:buttonIndex];
+            [_trailmakingContentView setError:(int)buttonIndex];
         }
         [taps addObject:tap];
     }
