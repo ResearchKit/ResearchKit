@@ -62,14 +62,11 @@
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
 
-<<<<<<< HEAD
 #import "ORKHL7CDA.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
-=======
 #import <ResearchKit/ORKResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
->>>>>>> ResearchKit/master
 
 #import <ResearchKit/ORKTextButton.h>
 #import <ResearchKit/ORKBorderedButton.h>
