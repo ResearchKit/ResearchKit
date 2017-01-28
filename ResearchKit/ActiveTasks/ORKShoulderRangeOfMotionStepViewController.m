@@ -30,6 +30,7 @@
 
 
 #import "ORKShoulderRangeOfMotionStepViewController.h"
+#import "ORKStepViewController_Internal.h"
 
 
 @implementation ORKShoulderRangeOfMotionStepViewController
@@ -37,10 +38,15 @@
 #pragma mark - ORKActiveTaskViewController
 
 - (ORKResult *)result {
+    ORKStepResult *stepResult = [super result];
+    
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
     result.flexed = 90.0 - _flexedAngle;
     result.extended = result.flexed + _rangeOfMotionAngle;
-    return result;
+    
+    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
+    
+    return stepResult;
 }
 
 @end

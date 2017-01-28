@@ -71,6 +71,7 @@
 }
 
 - (ORKPSATStep *)psatStep {
+    NSAssert(self.step == nil || [self.step isKindOfClass:[ORKPSATStep class]], @"Step class must be subclass of ORKPSATStep.");
     return (ORKPSATStep *)self.step;
 }
 
