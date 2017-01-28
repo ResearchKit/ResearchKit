@@ -1375,7 +1375,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         }
         
         if ([questionStep.answerFormat isKindOfClass:[ORKScaleAnswerFormat class]]) {
-            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"%@ %@",textDescription,self.answer];
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.answer];
         }
     }
     
@@ -1514,7 +1514,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         }
         
         for (NSString *answer in self.choiceAnswers) {
-            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"%@ %@",textDescription,self.answer];
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.answer];
         }
     }
     
@@ -1613,7 +1613,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
             textAnswer = @"False";
         }
         if (textAnswer != nil) {
-            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"%@ %@",textDescription,textAnswer];
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,textAnswer];
         }
     }
     
@@ -1699,7 +1699,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         }
         
         if (self.textAnswer != nil) {
-            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"%@ %@",textDescription,self.textAnswer];
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.textAnswer];
         }
     }
     
@@ -1797,7 +1797,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         }
         
         if (self.numericAnswer != nil) {
-            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"%@ %@",textDescription,[self.numericAnswer stringValue]];
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,[self.numericAnswer stringValue]];
         }
     }
     

@@ -25,6 +25,22 @@
 
 @end
 
+@implementation ORKHL7CDAAddress
+
+@end
+
+@implementation ORKHL7CDATelecom
+
+@end
+
+@implementation ORKHL7CDADeviceAuthor
+
+@end
+
+@implementation ORKHL7CDACustodian
+
+@end
+
 @implementation ORKHL7CDASectionDescription
 
 - (id)initWithSectionType:(ORKHL7CDASectionType)sectionType isRequired:(bool)isRequired {
@@ -65,6 +81,8 @@
                                                       forPatient:(ORKHL7CDAPerson *)patient
                                                    effectiveFrom:(NSDate *)effectiveFrom
                                                      effectiveTo:(NSDate *)effectiveTo
+                                                    deviceAuthor:(nonnull ORKHL7CDADeviceAuthor *)deviceAuthor
+                                                       custodian:(ORKHL7CDACustodian *)custodian
                                                   assignedPerson:(ORKHL7CDAPerson *)assignedPerson {
     NSLog(@"HL7CDA Debug output\n\n");
     
@@ -74,7 +92,7 @@
     
     ORKHL7CDADocumentTemplate *documentTemplate = [documentTemplates objectForKey:[NSNumber numberWithInteger:documentType]];
     
-    [hl7CDAOutput appendString:[self cdaDocumentHeaderWithTemplate:documentTemplate forPatient:patient effectiveFrom:effectiveFrom effectiveTo:effectiveTo assignedPerson:assignedPerson]];
+    [hl7CDAOutput appendString:[self cdaDocumentHeaderWithTemplate:documentTemplate forPatient:patient effectiveFrom:effectiveFrom effectiveTo:effectiveTo deviceAuthor:deviceAuthor custodian:custodian assignedPerson:assignedPerson]];
     
     for (ORKHL7CDASectionDescription *sectionDescription in documentTemplate.sections) {
         ORKHL7CDASectionTemplate *section = [sectionTemplates objectForKey:[NSNumber numberWithInteger:sectionDescription.sectionType]];
@@ -82,8 +100,30 @@
         
         NSString *sectionText = [self iterateResultsArray:taskResult forSectionType:sectionDescription.sectionType];
         if (sectionText.length > 0) {
-            [hl7CDAOutput appendString:@"    <text>"];
+            [hl7CDAOutput appendString:@"    <text>\n"];
+            switch (section.textType) {
+                case ORKHL7CDAEntryTextTypeInList:
+                    [hl7CDAOutput appendString:@"      <list>\n"];
+                    break;
+                case ORKHL7CDAEntryTextTypeInTable:
+                    [hl7CDAOutput appendString:@"      <table border=\"1\" width=\"100%\">\n"
+                                                "         <tbody>\n"];
+                    break;
+                default:
+                    break;
+            }
             [hl7CDAOutput appendString:sectionText];
+            switch (section.textType) {
+                case ORKHL7CDAEntryTextTypeInList:
+                    [hl7CDAOutput appendString:@"</list>\n    "];
+                    break;
+                case ORKHL7CDAEntryTextTypeInTable:
+                    [hl7CDAOutput appendString:@"</tbody>\n"
+                                                "         </table>\n    "];
+                    break;
+                default:
+                    break;
+            }
             [hl7CDAOutput appendString:@"</text>\n"];
         }
         [hl7CDAOutput appendString:[self sectionTemplateFooter]];
@@ -99,6 +139,8 @@
                                 forPatient:(ORKHL7CDAPerson *)patient
                              effectiveFrom:(NSDate *)effectiveFrom
                                effectiveTo:(NSDate *)effectiveTo
+                              deviceAuthor:(ORKHL7CDADeviceAuthor *)deviceAuthor
+                                 custodian:(ORKHL7CDACustodian *)custodian
                             assignedPerson:(ORKHL7CDAPerson *)assignedPerson {
 
     NSDateFormatter *dateToSecondsFormatter = [[NSDateFormatter alloc] init];
@@ -145,13 +187,20 @@
      "  </patientRole>\n"
      "</recordTarget>\n\n"
 
+     "<author>\n"
+     "<time value=\"%@\"/>\n"
+     "%@" // DeviceAuthor
+     "</author>\n\n"
+     
+     "%@\n" // Custodian
+
      "<documentationOf>\n"
      "  <serviceEvent classCode=\"PCPR\">\n"
      "    <effectiveTime><low value=\"%@\"/><high value=\"%@\"/></effectiveTime>\n"
      "    <performer typeCode=\"PRF\">\n"
      "      <functionCode code=\"PCP\" codeSystem=\"2.16.840.1.113883.5.88\"/>\n"
      "      <assignedEntity>\n"
-//					<id root="20cf14fb-b65c-4c8c-a54d-b0cca834c18c"/>
+     "			<id root=\"20cf14fb-b65c-4c8c-a54d-b0cca834c18c\"/>"
 	 "				<assignedPerson>\n"
      "%@" // AssignedPerson
 	 "				</assignedPerson>\n"
@@ -173,8 +222,9 @@
      
      "<component>\n"
      "  <structuredBody>\n",
-     template.templateID, uuid, todayString, template.loinc, template.title, todayString,
-     [self cdaHeaderPerson:patient], effectiveFromString, effectiveToString, [self cdaHeaderPerson:assignedPerson]];
+     template.templateID, uuid, todayString, template.loinc, template.title, todayString, [self cdaHeaderPerson:patient], todayString,
+     [self cdaHeaderDeviceAuthor:deviceAuthor], [self cdaHeaderCustodian:custodian],  effectiveFromString, effectiveToString,
+     [self cdaHeaderPerson:assignedPerson]];
     
     return contentResult;
 }
@@ -210,12 +260,133 @@
         [contentResult appendFormat:@"        <suffix>%@</suffix>\n", person.suffix];
     }
     [contentResult appendFormat:@"      </name>\n"];
-    // FIXME - administrativeGenderCodes need handling
-    if (person.gender.length > 0) {
-        [contentResult appendFormat:@"      <administrativeGenderCode code=\"M\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n"];
-    }
+    [contentResult appendFormat:[self cdaHeaderAdministrativeGender:person.gender]];
     if (person.birthdate != nil) {
         [contentResult appendFormat:@"      <birthTime value=\"%@\"/>\n", birthdayString];
+    }
+    if (person.address != nil) {
+        [contentResult appendString:[self cdaHeaderAddress:person.address]];
+    }
+    if (person.telecoms != nil) {
+        [contentResult appendString:[self cdaHeaderTelecoms:person.telecoms]];
+    }
+    return contentResult;
+}
+
+
++(NSString *)cdaHeaderDeviceAuthor:(ORKHL7CDADeviceAuthor *)deviceAuthor {
+    NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
+    [contentResult appendFormat:@"      <assignedAuthor>\n"];
+    [contentResult appendFormat:@"        <id extension=\"KP00017dev\" root=\"2.16.840.1.113883.19.5\"/>\n"];
+    if (deviceAuthor.address != nil) {
+        [contentResult appendString:[self cdaHeaderAddress:deviceAuthor.address]];
+    }
+    if (deviceAuthor.telecoms != nil) {
+        [contentResult appendString:[self cdaHeaderTelecoms:deviceAuthor.telecoms]];
+    }
+    [contentResult appendFormat:@"        <assignedAuthoringDevice>\n"];
+    [contentResult appendFormat:@"          <manufacturerModelName>Apple iOS</manufacturerModelName >\n"];
+    [contentResult appendFormat:@"          <softwareName>%@</softwareName >\n", deviceAuthor.softwareName];
+    [contentResult appendFormat:@"        </assignedAuthoringDevice >\n"];
+    [contentResult appendFormat:@"      </assignedAuthor>\n"];
+    return contentResult;
+}
+
+
++(NSString *)cdaHeaderCustodian:(ORKHL7CDACustodian *)custodian {
+    NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
+    [contentResult appendFormat:@"      <custodian>\n"];
+    [contentResult appendFormat:@"      <assignedCustodian>\n"];
+    [contentResult appendFormat:@"      <representedCustodianOrganization>\n"];
+    [contentResult appendFormat:@"        <id root=\"2.16.840.1.113883.19.5\"/>\n"];
+    [contentResult appendFormat:@"        <name>%@</name >\n", custodian.name];
+    if (custodian.telecom != nil) {
+        [contentResult appendString:[self cdaHeaderTelecom:custodian.telecom]];
+    }
+    if (custodian.address != nil) {
+        [contentResult appendString:[self cdaHeaderAddress:custodian.address]];
+    }
+    [contentResult appendFormat:@"      </representedCustodianOrganization>\n"];
+    [contentResult appendFormat:@"      </assignedCustodian>\n"];
+    [contentResult appendFormat:@"      </custodian>\n"];
+    return contentResult;
+}
+
+
++(NSString *)cdaHeaderAddress:(ORKHL7CDAAddress *)address {
+    
+    NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
+    [contentResult appendFormat:@"      <addr>\n"];
+    if (address.street.length > 0) {
+        [contentResult appendFormat:@"        <streetAddressLine>%@</streetAddressLine>\n", address.street];
+    }
+    if (address.city.length > 0) {
+        [contentResult appendFormat:@"        <city>%@</city>\n", address.city];
+    }
+    if (address.state.length > 0) {
+        [contentResult appendFormat:@"        <state>%@</state>\n", address.state];
+    }
+    if (address.postalCode.length > 0) {
+        [contentResult appendFormat:@"        <postalCode>%@</postalCode>\n", address.postalCode];
+    }
+    if (address.country.length > 0) {
+        [contentResult appendFormat:@"        <country>%@</country>\n", address.country];
+    }
+    [contentResult appendFormat:@"      </addr>\n"];
+    return contentResult;
+}
+
++(NSString *)cdaHeaderTelecom:(ORKHL7CDATelecom *)telecom {
+    NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
+    NSString *telecomUse;
+    switch (telecom.telecomUseType) {
+        case ORKHL7CDATelecomUseTypePrimaryHome:
+            telecomUse = @"use=\"HP\"";
+            break;
+        case ORKHL7CDATelecomUseTypeWorkPlace:
+            telecomUse = @"use=\"WP\"";
+            break;
+        case ORKHL7CDATelecomUseTypeVacationHome:
+            telecomUse = @"use=\"MC\"";
+            break;
+        case ORKHL7CDATelecomUseTypeMobileContact:
+            telecomUse = @"use=\"HV\"";
+            break;
+        default:
+            // The list is exhaustive and we should not fall through; in the event the list is extended
+            // We fall through by just omitting the attribute entirely
+            telecomUse = @"";
+            break;
+    }
+    [contentResult appendFormat:@"      <telecom value=\"%@\" %@ />\n", telecom.value, telecomUse];
+    return contentResult;
+}
+
++(NSString *)cdaHeaderTelecoms:(NSArray <ORKHL7CDATelecom *> *)telecoms {
+    NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:255];
+    for (ORKHL7CDATelecom *telecom in telecoms) {
+        [contentResult appendString:[self cdaHeaderTelecom:telecom]];
+    }
+    return contentResult;
+}
+
++(NSString *)cdaHeaderAdministrativeGender:(ORKHL7CDAAdministrativeGenderType)gender {
+    NSString *contentResult;
+    switch (gender) {
+        case ORKHL7CDAAdministrativeGenderTypeMale:
+            contentResult = @"      <administrativeGenderCode code=\"M\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n";
+            break;
+        case ORKHL7CDAAdministrativeGenderTypeFemale:
+            contentResult = @"      <administrativeGenderCode code=\"F\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n";
+            break;
+        case ORKHL7CDAAdministrativeGenderTypeUndifferentiated:
+            contentResult = @"      <administrativeGenderCode code=\"UN\" codeSystem=\"2.16.840.1.113883.5.1\"/>\n";
+            break;
+        default:
+            // If the gender type is 'not specified' which is the default
+            // We fall through by just omitting the attribute entirely
+            contentResult = @"";
+            break;
     }
     return contentResult;
 }
@@ -295,131 +466,157 @@
     ORKHL7CDASectionTemplate *allergiesCoded = [[ORKHL7CDASectionTemplate alloc] init];
     allergiesCoded.templateID = @"2.16.840.1.113883.10.20.22.2.6.1";
     allergiesCoded.loinc = @"48765-2";
+    allergiesCoded.textType = ORKHL7CDAEntryTextTypeInList;
     allergiesCoded.title = @"Allergies";
     
     ORKHL7CDASectionTemplate *purpose = [[ORKHL7CDASectionTemplate alloc] init];
     purpose.templateID = @"2.16.840.1.113883.10.20.1.13";
     purpose.loinc = @"48764-5";
+    purpose.textType = ORKHL7CDAEntryTextTypePlain;
     purpose.title = @"Summary Purpose";
     
     ORKHL7CDASectionTemplate *payers = [[ORKHL7CDASectionTemplate alloc] init];
     payers.templateID = @"2.16.840.1.113883.10.20.1.9";
     payers.loinc = @"48768-6";
+    payers.textType = ORKHL7CDAEntryTextTypePlain;
     payers.title = @"Payers";
     
     ORKHL7CDASectionTemplate *advanceDirectives = [[ORKHL7CDASectionTemplate alloc] init];
     advanceDirectives.templateID = @"2.16.840.1.113883.10.20.1.1";
     advanceDirectives.loinc = @"42348-3";
+    advanceDirectives.textType = ORKHL7CDAEntryTextTypeInList;
     advanceDirectives.title = @"Advance Directives";
     
     ORKHL7CDASectionTemplate *functionalStatus = [[ORKHL7CDASectionTemplate alloc] init];
     functionalStatus.templateID = @"2.16.840.1.113883.10.20.1.5";
     functionalStatus.loinc = @"47420-5";
+    functionalStatus.textType = ORKHL7CDAEntryTextTypeInList;
     functionalStatus.title = @"Functional Status";
     
     ORKHL7CDASectionTemplate *problemsCoded = [[ORKHL7CDASectionTemplate alloc] init];
     problemsCoded.templateID = @"2.16.840.1.113883.10.20.22.2.5.1";
     problemsCoded.loinc = @"11450-4";
+    problemsCoded.textType = ORKHL7CDAEntryTextTypeInList;
     problemsCoded.title = @"Problems";
     
     ORKHL7CDASectionTemplate *familyHistory = [[ORKHL7CDASectionTemplate alloc] init];
     familyHistory.templateID = @"2.16.840.1.113883.10.20.1.4";
     familyHistory.loinc = @"10157-6";
+    familyHistory.textType = ORKHL7CDAEntryTextTypeInList;
     familyHistory.title = @"Family History";
     
     ORKHL7CDASectionTemplate *socialHistory = [[ORKHL7CDASectionTemplate alloc] init];
     socialHistory.templateID = @"2.16.840.1.113883.10.20.1.15";
     socialHistory.loinc = @"29762-2";
+    socialHistory.textType = ORKHL7CDAEntryTextTypeInList;
     socialHistory.title = @"Social History";
     
     ORKHL7CDASectionTemplate *alerts = [[ORKHL7CDASectionTemplate alloc] init];
     alerts.templateID = @"2.16.840.1.113883.10.20.1.2";
     alerts.loinc = @"48765-2";
+    alerts.textType = ORKHL7CDAEntryTextTypeInList;
     alerts.title = @"Alerts";
     
     ORKHL7CDASectionTemplate *medications = [[ORKHL7CDASectionTemplate alloc] init];
     medications.templateID = @"2.16.840.1.113883.10.20.1.8";
     medications.loinc = @"10160-0";
+    medications.textType = ORKHL7CDAEntryTextTypeInTable;
     medications.title = @"Medications";
     
     ORKHL7CDASectionTemplate *medicalEquipment = [[ORKHL7CDASectionTemplate alloc] init];
     medicalEquipment.templateID = @"2.16.840.1.113883.10.20.1.7";
     medicalEquipment.loinc = @"46264-8";
+    medicalEquipment.textType = ORKHL7CDAEntryTextTypeInList;
     medicalEquipment.title = @"Medical Equipment";
     
     ORKHL7CDASectionTemplate *immunizations = [[ORKHL7CDASectionTemplate alloc] init];
     immunizations.templateID = @"2.16.840.1.113883.10.20.1.6";
     immunizations.loinc = @"11369-6";
+    immunizations.textType = ORKHL7CDAEntryTextTypeInTable;
     immunizations.title = @"Immunizations";
     
     ORKHL7CDASectionTemplate *vitalSigns = [[ORKHL7CDASectionTemplate alloc] init];
     vitalSigns.templateID = @"2.16.840.1.113883.10.20.1.16";
     vitalSigns.loinc = @"8716-3";
+    vitalSigns.textType = ORKHL7CDAEntryTextTypeInTable;
     vitalSigns.title = @"Vital Signs";
     
     ORKHL7CDASectionTemplate *results = [[ORKHL7CDASectionTemplate alloc] init];
     results.templateID = @"2.16.840.1.113883.10.20.1.14";
     results.loinc = @"30954-2";
+    results.textType = ORKHL7CDAEntryTextTypeInTable;
     results.title = @"Results";
     
     ORKHL7CDASectionTemplate *procedures = [[ORKHL7CDASectionTemplate alloc] init];
     procedures.templateID = @"2.16.840.1.113883.10.20.1.12";
     procedures.loinc = @"47519-4";
+    procedures.textType = ORKHL7CDAEntryTextTypeInList;
     procedures.title = @"Procedures";
     
     ORKHL7CDASectionTemplate *encounters = [[ORKHL7CDASectionTemplate alloc] init];
     encounters.templateID = @"2.16.840.1.113883.10.20.1.3";
     encounters.loinc = @"46240-8";
+    encounters.textType = ORKHL7CDAEntryTextTypeInList;
     encounters.title = @"Encounters";
     
     ORKHL7CDASectionTemplate *planOfCare = [[ORKHL7CDASectionTemplate alloc] init];
     planOfCare.templateID = @"2.16.840.1.113883.10.20.1.10";
     planOfCare.loinc = @"18776-5";
+    planOfCare.textType = ORKHL7CDAEntryTextTypeInList;
     planOfCare.title = @"Plan Of Care";
     
     ORKHL7CDASectionTemplate *assessment = [[ORKHL7CDASectionTemplate alloc] init];
     assessment.templateID = @"2.16.840.1.113883.10.20.22.2.8";
     assessment.loinc = @"51848-0";
+    assessment.textType = ORKHL7CDAEntryTextTypeInList;
     assessment.title = @"Assessment";
     
     ORKHL7CDASectionTemplate *historyOfPresentIllness = [[ORKHL7CDASectionTemplate alloc] init];
     historyOfPresentIllness.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.4";
     historyOfPresentIllness.loinc = @"10164-2";
+    historyOfPresentIllness.textType = ORKHL7CDAEntryTextTypeInList;
     historyOfPresentIllness.title = @"History Of Present Illness";
 
     ORKHL7CDASectionTemplate *physicalExam = [[ORKHL7CDASectionTemplate alloc] init];
     physicalExam.templateID = @"2.16.840.1.113883.10.20.2.10";
     physicalExam.loinc = @"29545-1";
+    physicalExam.textType = ORKHL7CDAEntryTextTypeInList;
     physicalExam.title = @"Physical Examination";
     
     ORKHL7CDASectionTemplate *reasonForReferral = [[ORKHL7CDASectionTemplate alloc] init];
     reasonForReferral.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.1";
     reasonForReferral.loinc = @"42349-1";
+    reasonForReferral.textType = ORKHL7CDAEntryTextTypePlain;
     reasonForReferral.title = @"Reason For Referral";
     
     ORKHL7CDASectionTemplate *chiefComplaint = [[ORKHL7CDASectionTemplate alloc] init];
     chiefComplaint.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.1.13.2.1";
     chiefComplaint.loinc = @"10154-3";
+    chiefComplaint.textType = ORKHL7CDAEntryTextTypePlain;
     chiefComplaint.title = @"Chief Complaint";
     
     ORKHL7CDASectionTemplate *generalStatus = [[ORKHL7CDASectionTemplate alloc] init];
     generalStatus.templateID = @"2.16.840.1.113883.10.20.2.5";
     generalStatus.loinc = @"10210-3";
+    generalStatus.textType = ORKHL7CDAEntryTextTypeInList;
     generalStatus.title = @"General Status";
     
     ORKHL7CDASectionTemplate *pastMedicalHistory = [[ORKHL7CDASectionTemplate alloc] init];
     pastMedicalHistory.templateID = @"2.16.840.1.113883.10.20.22.2.20";
     pastMedicalHistory.loinc = @"11348-0";
+    pastMedicalHistory.textType = ORKHL7CDAEntryTextTypeInList;
     pastMedicalHistory.title = @"Past Medical History";
     
     ORKHL7CDASectionTemplate *problemsOptional = [[ORKHL7CDASectionTemplate alloc] init];
     problemsOptional.templateID = @"2.16.840.1.113883.10.20.22.2.5";
     problemsOptional.loinc = @"11450-4";
+    problemsOptional.textType = ORKHL7CDAEntryTextTypeInList;
     problemsOptional.title = @"Problems";
     
     ORKHL7CDASectionTemplate *reviewOfSystems = [[ORKHL7CDASectionTemplate alloc] init];
     reviewOfSystems.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.18";
     reviewOfSystems.loinc = @"10187-3";
+    reviewOfSystems.textType = ORKHL7CDAEntryTextTypeInList;
     reviewOfSystems.title = @"Review Of Systems";
     
     return [NSDictionary dictionaryWithObjectsAndKeys:

@@ -3733,7 +3733,30 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 patient.givenName = @"John";
                 patient.familyName = @"Appleseed";
                 patient.birthdate = [NSDate date];
-                patient.gender = @"M";
+                patient.gender = ORKHL7CDAAdministrativeGenderTypeMale;
+                
+                ORKHL7CDAAddress *deviceAuthorAddress = [[ORKHL7CDAAddress alloc] init];
+                deviceAuthorAddress.street = @"Hope Street";
+                deviceAuthorAddress.city = @"Liverpool";
+                deviceAuthorAddress.state = @"Merseyside";
+                deviceAuthorAddress.country = @"UK";
+                deviceAuthorAddress.postalCode = @"L35 5DR";
+                
+                NSMutableArray *deviceAuthorTelecoms = [[NSMutableArray alloc] init];
+                ORKHL7CDATelecom *deviceAuthorWorkTelecom = [[ORKHL7CDATelecom alloc] init];
+                deviceAuthorWorkTelecom.telecomUseType = ORKHL7CDATelecomUseTypeWorkPlace;
+                deviceAuthorWorkTelecom.value = @"+44 01234 567890";
+                [deviceAuthorTelecoms addObject:deviceAuthorWorkTelecom];
+
+                ORKHL7CDADeviceAuthor *deviceAuthor = [[ORKHL7CDADeviceAuthor alloc] init];
+                deviceAuthor.address = deviceAuthorAddress;
+                deviceAuthor.telecoms = deviceAuthorTelecoms;
+                deviceAuthor.softwareName = @"ORKTest";
+                
+                ORKHL7CDACustodian *custodian = [[ORKHL7CDACustodian alloc] init];
+                custodian.address = deviceAuthorAddress;
+                custodian.telecom = deviceAuthorWorkTelecom;
+                custodian.name = @"ResearchKit Developer Test Team";
                 
                 // Create Hippocrates of Kos as the 'assigned person' (usually the Study PI)
                 ORKHL7CDAPerson *assignedPerson = [[ORKHL7CDAPerson alloc] init];
@@ -3748,6 +3771,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                            forPatient:patient
                         effectiveFrom:[NSDate date]
                           effectiveTo:[NSDate date]
+                         deviceAuthor:deviceAuthor
+                            custodian:custodian
                        assignedPerson:assignedPerson];
             }
             break;

@@ -136,6 +136,87 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
 
 };
 
+/**
+ The `ORKHL7CDADocumentType` value indicates which section HL7CDDFragments should be attributed to
+ the task.
+ */
+typedef NS_ENUM(NSInteger, ORKHL7CDAEntryTextType) {
+    
+    /// The text entries are amalgamated at the root - <text> is the parent entity in the XML.
+    ORKHL7CDAEntryTextTypePlain,
+    
+    /// The text entries are compiled into a list - <list> is the parent entity in the XML. Your text should begin and end with an <item> tag.
+    ORKHL7CDAEntryTextTypeInList,
+    
+    /// The text entries are compiled into a table - <table> is the parent entity in the XML.
+    ORKHL7CDAEntryTextTypeInTable
+    
+};
+
+/**
+ The `ORKHL7CDATelecomUseType` valueset is used to denote the type of telephone number provided in contact details.
+ */
+typedef NS_ENUM(NSInteger, ORKHL7CDATelecomUseType) {
+    
+    /// A primary home telephone number (landline or mobile).
+    ORKHL7CDATelecomUseTypePrimaryHome,
+    
+    /// A work telephone number.
+    ORKHL7CDATelecomUseTypeWorkPlace,
+    
+    /// A secondary mobile telephone number.
+    ORKHL7CDATelecomUseTypeMobileContact,
+    
+    /// A vacation phone number.
+    ORKHL7CDATelecomUseTypeVacationHome
+    
+};
+
+
+/**
+ The `ORKHL7CDAAdministrativeGenderType` valueset is used to define the person's gender for administrative purposes.
+ */
+typedef NS_ENUM(NSInteger, ORKHL7CDAAdministrativeGenderType) {
+    
+    /// Not specified
+    ORKHL7CDAAdministrativeGenderTypeNotSpecified,
+    
+    /// Female
+    ORKHL7CDAAdministrativeGenderTypeFemale,
+    
+    /// Male
+    ORKHL7CDAAdministrativeGenderTypeMale,
+    
+    /// Undifferentiated
+    ORKHL7CDAAdministrativeGenderTypeUndifferentiated
+    
+};
+
+/**
+ The `ORKHL7CDATelecom` class defines the attributes of a telephone number referred to within an HL7 CDA document.
+ These can apply in a number of areas for example as the author, recipient or custodian of the document.
+ */
+@interface ORKHL7CDATelecom : NSObject
+
+@property (nonatomic) ORKHL7CDATelecomUseType telecomUseType;
+@property (nonatomic, nonnull, copy) NSString *value;
+
+@end
+
+
+/**
+ The `ORKHL7CDAAddress` class defines the attributes of an address referred to within an HL7 CDA document.
+ These can apply in a number of areas for example as the author, recipient or custodian of the document.
+ */
+@interface ORKHL7CDAAddress : NSObject
+
+@property (nonatomic, nonnull, copy) NSString *street;
+@property (nonatomic, nonnull, copy) NSString *city;
+@property (nonatomic, nonnull, copy) NSString *state;
+@property (nonatomic, nonnull, copy) NSString *postalCode;
+@property (nonatomic, nonnull, copy) NSString *country;
+
+@end
 
 /**
  The `ORKHL7CDAPerson` class defines the attributes of a person referred to within an HL7 CDA document.
@@ -147,12 +228,34 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
 @property (nonatomic, nonnull, copy) NSString *givenName;
 @property (nonatomic, nonnull, copy) NSString *familyName;
 @property (nonatomic, nullable, copy) NSString *suffix;
-// Need to check how HL7 does GenderCodes before we finalise this type
-@property (nonatomic, nonnull, copy) NSString *gender;
+@property (nonatomic) ORKHL7CDAAdministrativeGenderType gender;
 @property (nonatomic, nonnull, copy) NSDate *birthdate;
+@property (strong, nullable) ORKHL7CDAAddress *address;
+@property (nonatomic, nullable, copy) NSArray <ORKHL7CDATelecom *> *telecoms;
 
 @end
 
+/**
+ The `ORKHL7CDADeviceAuthor` class defines the attributes of the authoring software referred to within an HL7 CDA document.
+ */
+@interface ORKHL7CDADeviceAuthor : NSObject
+
+@property (strong, nullable) ORKHL7CDAAddress *address;
+@property (strong, nullable) NSArray <ORKHL7CDATelecom *> *telecoms;
+@property (nonatomic, nonnull, copy) NSString *softwareName;
+
+@end
+
+/**
+ The `ORKHL7CDACustodian` class defines the attributes of the authoring software referred to within an HL7 CDA document.
+ */
+@interface ORKHL7CDACustodian : NSObject
+
+@property (nonatomic, nonnull, copy) NSString *name;
+@property (strong, nonnull) ORKHL7CDAAddress *address;
+@property (strong, nonnull) ORKHL7CDATelecom *telecom;
+
+@end
 
 /**
  The `ORKHL7CDASectionDescription` class is used internally to describe the attributes of a particular section
@@ -200,6 +303,7 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
 @property (nonatomic, nonnull, copy) NSString *loinc;
 @property (nonatomic, nonnull, copy) NSString *templateID;
 @property (nonatomic, nonnull, copy) NSString *title;
+@property (nonatomic) ORKHL7CDAEntryTextType textType;
 
 @end
 
@@ -241,6 +345,7 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
  @param patient           Patient identifiers for the document.
  @param effectiveFrom     The date/time this care episode or test commenced.
  @param effectiveTo       The date/time this care episode or test was completed.
+ @param deviceAuthor      Contact details for the software author.
  @param assignedPerson    The person clinically responsible for this document (principle investigator or app author).
  
  */
@@ -249,6 +354,8 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
                      forPatient:(nonnull ORKHL7CDAPerson *)patient
                   effectiveFrom:(nonnull NSDate *)effectiveFrom
                     effectiveTo:(nonnull NSDate *)effectiveTo
+                   deviceAuthor:(nonnull ORKHL7CDADeviceAuthor *)deviceAuthor
+                      custodian:(nonnull ORKHL7CDACustodian *)custodian
                  assignedPerson:(nonnull ORKHL7CDAPerson *)assignedPerson;
 
 @end
