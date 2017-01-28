@@ -36,6 +36,58 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ The `ORKTableStepSource` is a protocol that can be used for presenting a list of model
+ objects in a UITableView. Any `ORKStep` subclass that implements this protocol can be used with
+ an `ORKTableStepViewController` to display the list of items.
+ */
+@protocol ORKTableStepSource <NSObject>
+    
+/**
+ Returns the number of rows in the section.
+ 
+ @param  section        The section of the table
+ @return                The number of rows in the tableview section
+ */
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
+
+/**
+ Method for configuring a cell.
+ 
+ @param cell            The `UITableViewCell` to configure.
+ @param indexPath       The indexpath for the cell.
+ @param tableView       The table view for this cell.
+ */
+- (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView;
+
+/**
+ Returns the number of sections in the tableview used to display this step. Default = `1`.
+ 
+ @return                The number of sections in the tableview.
+ */
+@optional
+- (NSInteger)numberOfSections;
+
+/**
+ Returns the reuseIdentifier for the object at this index path. Default = `ORKBasicCellReuseIdentifier`
+ 
+ @param  indexPath      The indexpath of the section/row for the cell
+ @return                The model object for this section/row
+ */
+@optional
+- (NSString *)reuseIdentifierForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+/**
+ Optional override for registering UITableViewCell instances. The default registers a `UITableViewCell` 
+ for `ORKBasicCellReuseIdentifier`.
+ 
+ @param tableView       The table view to register cells
+ */
+@optional
+- (void)registerCellsForTableView:(UITableView *)tableView;
+    
+@end
+
+/**
  The `ORKTableStep` class is a concrete subclass of `ORKStep`, used for presenting a list of model 
  objects in a UITableView.
  
@@ -51,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 ORK_CLASS_AVAILABLE
-@interface ORKTableStep : ORKStep
+@interface ORKTableStep : ORKStep <ORKTableStepSource>
 
 /**
  The array of items in table. These items must conform to NSCopying and NSSecureCoding protocols.
