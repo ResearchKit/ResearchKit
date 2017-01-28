@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stepDidChange;
 
 @property (nonatomic, copy, nullable) NSURL *outputDirectory;
+@property (nonatomic, copy, readonly, nullable) NSArray <ORKResult *> *addedResults;
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *internalContinueButtonItem;
 @property (nonatomic, strong, nullable) UIBarButtonItem *internalBackButtonItem;

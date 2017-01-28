@@ -727,7 +727,7 @@
         [qResults addObject:result];
     }
     
-    parentResult.results = [qResults copy];
+    parentResult.results = [self.addedResults arrayByAddingObjectsFromArray:qResults] ? : qResults;
     
     return parentResult;
 }
