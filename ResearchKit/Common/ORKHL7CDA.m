@@ -96,9 +96,12 @@
     
     for (ORKHL7CDASectionDescription *sectionDescription in documentTemplate.sections) {
         ORKHL7CDASectionTemplate *section = [sectionTemplates objectForKey:[NSNumber numberWithInteger:sectionDescription.sectionType]];
-        [hl7CDAOutput appendString:[self sectionTemplateHeader:section]];
         
         NSString *sectionText = [self iterateResultsArray:taskResult forSectionType:sectionDescription.sectionType];
+
+        if ((sectionText.length > 0) || (sectionDescription.isRequired)) {
+            [hl7CDAOutput appendString:[self sectionTemplateHeader:section]];
+        }
         if (sectionText.length > 0) {
             [hl7CDAOutput appendString:@"    <text>\n"];
             switch (section.textType) {
@@ -126,7 +129,9 @@
             }
             [hl7CDAOutput appendString:@"</text>\n"];
         }
-        [hl7CDAOutput appendString:[self sectionTemplateFooter]];
+        if ((sectionText.length > 0) || (sectionDescription.isRequired)) {
+            [hl7CDAOutput appendString:[self sectionTemplateFooter]];
+        }
     }
     
     [hl7CDAOutput appendString:[self documentFooter]];
@@ -204,10 +209,6 @@
 	 "				<assignedPerson>\n"
      "%@" // AssignedPerson
 	 "				</assignedPerson>\n"
-//					<representedOrganization>
-//     <id root="2.16.840.1.113883.19.5"/>
-//     <name>Good Health Clinic</name>
-//					</representedOrganization>*/
      "      </assignedEntity>\n"
      "    </performer>\n"
      "  </serviceEvent>\n"
