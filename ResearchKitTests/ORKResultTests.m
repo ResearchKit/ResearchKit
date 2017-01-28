@@ -156,4 +156,42 @@
     XCTAssertEqual(childResult.identifier, @"101", @"%@", childResult.identifier);
 }
 
+- (void)testPageResult {
+    
+    NSArray *steps = @[[[ORKStep alloc] initWithIdentifier:@"step1"],
+                       [[ORKStep alloc] initWithIdentifier:@"step2"],
+                       [[ORKStep alloc] initWithIdentifier:@"step3"],
+                       ];
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:steps];
+    
+    ORKChoiceQuestionResult *step1Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result1"];
+    step1Result1.choiceAnswers = @[@(1)];
+    ORKChoiceQuestionResult *step1Result2 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result2"];
+    step1Result2.choiceAnswers = @[@(2)];
+    ORKChoiceQuestionResult *step2Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step2.result1"];
+    step2Result1.choiceAnswers = @[@(3)];
+    
+    ORKStepResult *inputResult = [[ORKStepResult alloc] initWithStepIdentifier:@"pageStep"
+                                                                      results:@[step1Result1, step1Result2, step2Result1]];
+    
+    // Test that the page result creates ORKStepResults for each result that matches the prefix test
+    ORKPageResult *pageResult = [[ORKPageResult alloc] initWithPageStep:pageStep stepResult:inputResult];
+    XCTAssertEqual(pageResult.results.count, 2);
+    
+    ORKStepResult *stepResult1 = [pageResult stepResultForStepIdentifier:@"step1"];
+    XCTAssertNotNil(stepResult1);
+    XCTAssertEqual(stepResult1.results.count, 2);
+    
+    ORKStepResult *stepResult2 = [pageResult stepResultForStepIdentifier:@"step2"];
+    XCTAssertNotNil(stepResult2);
+    XCTAssertEqual(stepResult2.results.count, 1);
+    
+    ORKStepResult *stepResult3 = [pageResult stepResultForStepIdentifier:@"step3"];
+    XCTAssertNil(stepResult3);
+    
+    // Check that the flattened results match the input results
+    NSArray *flattedResults = [pageResult flattenResults];
+    XCTAssertEqualObjects(inputResult.results, flattedResults);
+}
+
 @end

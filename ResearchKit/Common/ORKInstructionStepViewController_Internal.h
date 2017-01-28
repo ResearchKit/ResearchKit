@@ -40,8 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
 
-// Use button title "Get start" instead of "Next".
+// Use button title "Get started" instead of "Next".
 - (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
+
+- (void)stepDidChange;
 
 @end
 

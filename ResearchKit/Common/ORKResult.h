@@ -1203,6 +1203,19 @@ ORK_CLASS_AVAILABLE
  */
 - (nullable ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier;
 
+/**
+ Should the default result store be used even if there is a previous result? (due to 
+ reverse navigation or looping)
+ 
+ By default, the `[ORKTaskViewController defaultResultSource]` is only queried for a 
+ result if the previous result is nil. This allows the result source to override that
+ default behavior.
+ 
+ @return `YES` if the default result should be given priority over the previous result.
+ */
+@optional
+- (BOOL)alwaysCheckForDefaultResult;
+
 @end
 
 
@@ -1382,6 +1395,7 @@ ORK_CLASS_AVAILABLE
 @end
 
 /**
+<<<<<<< HEAD
  The `ORKHL7CDAFragmentResult` class represents a fragment of a HL7CDA document returned by a step.
  
  HL7CDAFragmentResults can be produced by task steps and ultimately merged by the task controller to
@@ -1428,6 +1442,27 @@ ORK_CLASS_AVAILABLE
 
 /** A fragment of  */
 @property (nonatomic, copy, nullable) NSString *xmlFragment;
+
+@end
+
+/**
+ The `ORKVideoInstructionStepResult` class represents the result of a video insruction step (`ORKVideoInstructionStep`).
+ 
+ A video instruction result is produced by the task view controller when it presents a video instruction step.
+ 
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKVideoInstructionStepResult : ORKResult
+
+/**
+ The time (in seconds) after video playback stopped, or NaN if the video was never played.
+ */
+@property (nonatomic) Float64 playbackStoppedTime;
+
+/**
+ Returns 'YES' if the video was watched until the end, or 'NO' if video playback was stopped half way.
+ */
+@property (nonatomic) BOOL playbackCompleted;
 
 @end
 

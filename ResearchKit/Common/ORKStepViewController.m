@@ -271,7 +271,7 @@
 - (ORKStepResult *)result {
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    stepResult.startDate = self.presentedDate;
+    stepResult.startDate = self.presentedDate ? : [NSDate date];
     stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
@@ -353,15 +353,12 @@
 
 
 - (ORKTaskViewController *)taskViewController {
-    UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];
-    if (pageViewController && [pageViewController isKindOfClass:[UIPageViewController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)[pageViewController parentViewController];
-        ORKTaskViewController *taskViewController = (ORKTaskViewController *)[navigationController parentViewController];
-        if (taskViewController && [taskViewController isKindOfClass:[ORKTaskViewController class]]) {
-            return taskViewController;
-        }
+    // look to parent view controller for a task view controller
+    UIViewController *parentViewController = [self parentViewController];
+    while (parentViewController && ![parentViewController isKindOfClass:[ORKTaskViewController class]]) {
+        parentViewController = [parentViewController parentViewController];
     }
-    return nil;
+    return (ORKTaskViewController *)parentViewController;
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
