@@ -46,7 +46,10 @@ typedef NS_ENUM(NSInteger, ORKHL7CDADocumentType) {
     ORKHL7CDADocumentTypeCCD,
     
     /// A consultation note describes a patient review episode by a clinician.
-    ORKHL7CDADocumentTypeConsultationNote
+    ORKHL7CDADocumentTypeConsultationNote,
+    
+    /// A diagnostic imaging report contains findings from an imaging investigation.
+    ORKHL7CDADocumentTypeDiagnosticImagingReport
 };
 
 
@@ -132,7 +135,52 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
     ORKHL7CDASectionTypeProblemsOptional,
     
     /// The Review of Systems section contains a relevant collection of symptoms and functions systematically gathered by a clinician. It includes symptoms the patient is currently experiencing, some of which were not elicited during the history of present illness, as well as a potentially large number of pertinent negatives, for example, symptoms that the patient denied experiencing.
-    ORKHL7CDASectionTypeReviewOfSystems
+    ORKHL7CDASectionTypeReviewOfSystems,
+    
+    /// The DICOM Object Catalog lists all referenced objects and their parent Series and Studies, plus other DICOM attributes required for retrieving the objects. DICOM Object Catalog sections are not intended for viewing and contain empty section text.
+    ORKHL7CDASectionTypeDICOMObjectCatalog,
+    
+    /// The Diagnostic Imaging Findings contains the main narrative body of a diagnostic imaging report.
+    ORKHL7CDASectionTypeDiagnosticImagingFindings,
+    
+    /// The Diagnostic Imaging Addendum section records any addendums made to a report after its initial release.
+    ORKHL7CDASectionTypeDiagnosticImagingAddendum,
+    
+    /// The Complications section records any complications following a procedure or imaging event.
+    ORKHL7CDASectionTypeComplications,
+    
+    /// The Conclusions section records any conclusions to a dianostic imaging report.
+    ORKHL7CDASectionTypeConclusions,
+    
+    /// The Current Imaging Procedure Descriptions describes the imaging procedures being undertaken.
+    ORKHL7CDASectionTypeCurrentImagingProcedureDescriptions,
+    
+    /// The Diagnostic Imaging Document Summary summarises the report.
+    ORKHL7CDASectionTypeDiagnosticImagingDocumentSummary,
+    
+    /// The Diagnostic Imaging Key Images identifies which key images highlight the findings recorded in the summary.
+    ORKHL7CDASectionTypeDiagnosticImagingKeyImages,
+    
+    /// The Medical General History records any pertinent history for the diagnostic report. It is not intended as a full summary of a patient's medical history.
+    ORKHL7CDASectionTypeMedicalGeneralHistory,
+    
+    /// The Prior Imaging Procedure Descriptions describe any pertinent previous imaging to be aware of.
+    ORKHL7CDASectionTypePriorImagingProcedureDescriptions,
+    
+    /// The Radiology Impression gives the likely differential diagnosis based upon the imaging.
+    ORKHL7CDASectionTypeRadiologyImpression,
+    
+    /// The Radiology Comparison Study Observation section summarises any observations from comparison studies to other image sets.
+    ORKHL7CDASectionTypeRadiologyComparisonStudyObservation,
+    
+    /// The Radiology Reason For Study section summarises the reason the diagnostic imaging was requested.
+    ORKHL7CDASectionTypeRadiologyReasonForStudy,
+    
+    /// The Radiology Study Recommendations section records any recommendations from the reporter to the clinicians looking after the patient of further action to be taken.
+    ORKHL7CDASectionTypeRadiologyStudyRecommendations,
+    
+    /// The Requested Image Studies Information section records any information on the requested studies.
+    ORKHL7CDASectionTypeRequestedImageStudiesInformation    
 
 };
 
@@ -141,6 +189,9 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
  the task.
  */
 typedef NS_ENUM(NSInteger, ORKHL7CDAEntryTextType) {
+    
+    /// No text is accepted for this section.
+    ORKHL7CDAEntryTextTypeNone,
     
     /// The text entries are amalgamated at the root - <text> is the parent entity in the XML.
     ORKHL7CDAEntryTextTypePlain,

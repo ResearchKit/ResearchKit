@@ -424,6 +424,10 @@
     consultationNote.loinc = @"11488-4";
     consultationNote.title = @"Consultation note";
     
+    ORKHL7CDADocumentTemplate *diagnosticImagingReport = [[ORKHL7CDADocumentTemplate alloc] init];
+    ccd.templateID = @"2.16.840.1.113883.10.20.22.1.5";
+    ccd.loinc = @"18748-4";
+    ccd.title = @"Diagnostic Imaging Report";
     
     ORKHL7CDASectionDescription *purpose = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePurpose isRequired: true];
     ORKHL7CDASectionDescription *allergies = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAllergiesCoded isRequired: true];
@@ -450,16 +454,33 @@
     ORKHL7CDASectionDescription *pastMedicalHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePastMedicalHistory isRequired: false];
     ORKHL7CDASectionDescription *problemsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProblemsOptional isRequired: false];
     ORKHL7CDASectionDescription *reviewOfSystems = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReviewOfSystems isRequired: false];
-
+    ORKHL7CDASectionDescription *dicomObjectCatalog = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDICOMObjectCatalog isRequired: true];
+    ORKHL7CDASectionDescription *diagnosticImagingFindings = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingFindings isRequired: true];
+    ORKHL7CDASectionDescription *addendum = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingAddendum isRequired:false];
+    ORKHL7CDASectionDescription *complications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeComplications isRequired:false];
+    ORKHL7CDASectionDescription *conclusions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeConclusions isRequired:false];
+    ORKHL7CDASectionDescription *currentImagingProcedureDescriptions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeCurrentImagingProcedureDescriptions isRequired:false];
+    ORKHL7CDASectionDescription *diagnosticImagingDocumentSummary = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingDocumentSummary isRequired:false];
+    ORKHL7CDASectionDescription *diagnosticImagingKeyImages = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingKeyImages isRequired:false];
+    ORKHL7CDASectionDescription *medicalGeneralHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedicalGeneralHistory isRequired:false];
+    ORKHL7CDASectionDescription *priorImagingProcedureDescription = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePriorImagingProcedureDescriptions isRequired:false];
+    ORKHL7CDASectionDescription *radiologyImpression = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyImpression isRequired:false];
+    ORKHL7CDASectionDescription *radiologyComparisonStudyObservation = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyComparisonStudyObservation isRequired:false];
+    ORKHL7CDASectionDescription *radiologyReasonForStudy = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyReasonForStudy isRequired:false];
+    ORKHL7CDASectionDescription *radiologyStudyRecommendations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyStudyRecommendations isRequired:false];
+    ORKHL7CDASectionDescription *requestedImageStudiesInformation = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRequestedImageStudiesInformation isRequired:false];
     
     ccd.sections = [NSArray arrayWithObjects: purpose, allergies, problems, procedures, familyHistory, socialHistory, payers,
                     advanceDirectives, immunizations, medications, medicalEquipment, vitalSigns, functionalStatus, results,
                     encounters, planOfCare, nil];
     consultationNote.sections = [NSArray arrayWithObjects: assessment, planOfCare, historyOfPresentIllness, physicalExam, reasonForReferral, chiefComplaint, familyHistory, generalStatus, pastMedicalHistory, immunizations, medications, problemsOptional, procedures, results, reviewOfSystems, socialHistory, vitalSigns, nil];
     
+    diagnosticImagingReport.sections = [NSArray arrayWithObjects: dicomObjectCatalog, diagnosticImagingFindings, addendum, complications, conclusions, currentImagingProcedureDescriptions, diagnosticImagingDocumentSummary, diagnosticImagingKeyImages, medicalGeneralHistory, priorImagingProcedureDescription, radiologyImpression, radiologyComparisonStudyObservation, radiologyReasonForStudy, radiologyStudyRecommendations, requestedImageStudiesInformation, nil];
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             ccd, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeCCD],
             consultationNote, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeConsultationNote],
+            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDICOMObjectCatalog],
             nil];
 }
 
@@ -620,6 +641,96 @@
     reviewOfSystems.textType = ORKHL7CDAEntryTextTypeInList;
     reviewOfSystems.title = @"Review Of Systems";
     
+    ORKHL7CDASectionTemplate *dicomObjectCatalog = [[ORKHL7CDASectionTemplate alloc] init];
+    dicomObjectCatalog.templateID = @"2.16.840.1.113883.10.20.6.1.1";
+    dicomObjectCatalog.loinc = @"121181";
+    dicomObjectCatalog.textType = ORKHL7CDAEntryTextTypeNone;
+    dicomObjectCatalog.title = @"DICOM Object Catalog";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingFindings = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingFindings.templateID = @"2.16.840.1.113883.10.20.6.1.2";
+    diagnosticImagingFindings.loinc = @"18782-3";
+    diagnosticImagingFindings.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingFindings.title = @"DICOM Object Catalog";
+
+    ORKHL7CDASectionTemplate *addendum = [[ORKHL7CDASectionTemplate alloc] init];
+    addendum.templateID = @"";
+    addendum.loinc = @"55107-7";
+    addendum.textType = ORKHL7CDAEntryTextTypePlain;
+    addendum.title = @"Addendum";
+    
+    ORKHL7CDASectionTemplate *complications = [[ORKHL7CDASectionTemplate alloc] init];
+    complications.templateID = @"2.16.840.1.113883.10.20.22.2.37";
+    complications.loinc = @"55109-3";
+    complications.textType = ORKHL7CDAEntryTextTypePlain;
+    complications.title = @"Complications";
+
+    ORKHL7CDASectionTemplate *conclusions = [[ORKHL7CDASectionTemplate alloc] init];
+    conclusions.templateID = @"";
+    conclusions.loinc = @"55110-1";
+    conclusions.textType = ORKHL7CDAEntryTextTypePlain;
+    conclusions.title = @"Conclusions";
+    
+    ORKHL7CDASectionTemplate *currentImagingProcedureDescriptions = [[ORKHL7CDASectionTemplate alloc] init];
+    currentImagingProcedureDescriptions.templateID = @"";
+    currentImagingProcedureDescriptions.loinc = @"55111-9";
+    currentImagingProcedureDescriptions.textType = ORKHL7CDAEntryTextTypePlain;
+    currentImagingProcedureDescriptions.title = @"Current Imaging Procedure Descriptions";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingDocumentSummary = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingDocumentSummary.templateID = @"";
+    diagnosticImagingDocumentSummary.loinc = @"55112-7";
+    diagnosticImagingDocumentSummary.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingDocumentSummary.title = @"Document Summary";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingKeyImages = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingKeyImages.templateID = @"";
+    diagnosticImagingKeyImages.loinc = @"53113-5";
+    diagnosticImagingKeyImages.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingKeyImages.title = @"Key Images";
+    
+    ORKHL7CDASectionTemplate *medicalGeneralHistory = [[ORKHL7CDASectionTemplate alloc] init];
+    medicalGeneralHistory.templateID = @"2.16.840.1.113883.10.20.22.2.39";
+    medicalGeneralHistory.loinc = @"11329-0";
+    medicalGeneralHistory.textType = ORKHL7CDAEntryTextTypePlain;
+    medicalGeneralHistory.title = @"Medical (General) History";
+    
+    ORKHL7CDASectionTemplate *priorImagingProcedureDescription = [[ORKHL7CDASectionTemplate alloc] init];
+    priorImagingProcedureDescription.templateID = @"";
+    priorImagingProcedureDescription.loinc = @"55114-3";
+    priorImagingProcedureDescription.textType = ORKHL7CDAEntryTextTypePlain;
+    priorImagingProcedureDescription.title = @"Prior Imaging Procedure Descriptions";
+    
+    ORKHL7CDASectionTemplate *radiologyImpression = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyImpression.templateID = @"";
+    radiologyImpression.loinc = @"19005-8";
+    radiologyImpression.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyImpression.title = @"Radiology - Impression";
+
+    ORKHL7CDASectionTemplate *radiologyComparisonStudyObservation = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyComparisonStudyObservation.templateID = @"";
+    radiologyComparisonStudyObservation.loinc = @"19005-8";
+    radiologyComparisonStudyObservation.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyComparisonStudyObservation.title = @"Radiology Comparison Study - Observation";
+    
+    ORKHL7CDASectionTemplate *radiologyReasonForStudy = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyReasonForStudy.templateID = @"";
+    radiologyReasonForStudy.loinc = @"18785-6";
+    radiologyReasonForStudy.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyReasonForStudy.title = @"Radiology Reason For Study";
+    
+    ORKHL7CDASectionTemplate *radiologyStudyRecommendations = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyStudyRecommendations.templateID = @"";
+    radiologyStudyRecommendations.loinc = @"18783-1";
+    radiologyStudyRecommendations.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyStudyRecommendations.title = @"Radiology Study - Recommendations";
+    
+    ORKHL7CDASectionTemplate *requestedImageStudiesInformation = [[ORKHL7CDASectionTemplate alloc] init];
+    requestedImageStudiesInformation.templateID = @"";
+    requestedImageStudiesInformation.loinc = @"55115-0";
+    requestedImageStudiesInformation.textType = ORKHL7CDAEntryTextTypePlain;
+    requestedImageStudiesInformation.title = @"Requested Imaging Studies Information";
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             purpose, [NSNumber numberWithInteger:ORKHL7CDASectionTypePurpose],
             allergiesCoded, [NSNumber numberWithInteger:ORKHL7CDASectionTypeAllergiesCoded],
@@ -647,6 +758,21 @@
             pastMedicalHistory, [NSNumber numberWithInteger:ORKHL7CDASectionTypePastMedicalHistory],
             problemsOptional, [NSNumber numberWithInteger:ORKHL7CDASectionTypeProblemsOptional],
             reviewOfSystems, [NSNumber numberWithInteger:ORKHL7CDASectionTypeReviewOfSystems],
+            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDICOMObjectCatalog],
+            diagnosticImagingFindings, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingFindings],
+            addendum, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingAddendum],
+            complications, [NSNumber numberWithInteger:ORKHL7CDASectionTypeComplications],
+            conclusions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeConclusions],
+            currentImagingProcedureDescriptions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeCurrentImagingProcedureDescriptions],
+            diagnosticImagingDocumentSummary, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingDocumentSummary],
+            diagnosticImagingKeyImages, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingKeyImages],
+            medicalGeneralHistory, [NSNumber numberWithInteger:ORKHL7CDASectionTypeMedicalGeneralHistory],
+            priorImagingProcedureDescription, [NSNumber numberWithInteger:ORKHL7CDASectionTypePriorImagingProcedureDescriptions],
+            radiologyImpression, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyImpression],
+            radiologyComparisonStudyObservation, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyComparisonStudyObservation],
+            radiologyReasonForStudy, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyReasonForStudy],
+            radiologyStudyRecommendations, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyStudyRecommendations],
+            requestedImageStudiesInformation, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRequestedImageStudiesInformation],
             nil];
 }
 
