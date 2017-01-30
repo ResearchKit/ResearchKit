@@ -918,8 +918,8 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.duration == castObject.distanceInMeters) &&
-            (self.duration == castObject.timeLimit) &&
+            (self.distanceInMeters == castObject.distanceInMeters) &&
+            (self.timeLimit == castObject.timeLimit) &&
             (self.duration == castObject.duration));
 }
 
@@ -929,8 +929,8 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTimedWalkResult *result = [super copyWithZone:zone];
-    result.duration = self.distanceInMeters;
-    result.duration = self.timeLimit;
+    result.distanceInMeters = self.distanceInMeters;
+    result.timeLimit = self.timeLimit;
     result.duration = self.duration;
     return result;
 }

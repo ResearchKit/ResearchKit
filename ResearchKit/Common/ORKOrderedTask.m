@@ -1872,10 +1872,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             }
         }
         
-        step.image = [UIImage imageNamed:@"tremortest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-        if (leftHand) {
-            step.image = [step.image ork_flippedImage:UIImageOrientationUpMirrored];
-        }
+        NSString *imageName = leftHand ? @"tremortestLeft" : @"tremortestRight";
+        step.image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         step.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, step);
