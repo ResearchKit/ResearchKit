@@ -449,6 +449,9 @@
 "TRAILMAKING_INTENDED_USE2" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
 "TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
