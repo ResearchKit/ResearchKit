@@ -205,13 +205,6 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
     /// Exclude the queen-wave steps.
     ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
 } ORK_ENUM_AVAILABLE;
-/**
- Frequency with which the mood survey is asked.
- */
-typedef NS_ENUM(NSUInteger, ORKMoodSurveyFrequency) {
-    ORKMoodSurveyFrequencyDaily,
-    ORKMoodSurveyFrequencyWeekly,
-} ORK_ENUM_AVAILABLE;
 
 /**
  Values that identify the left or right limb to be used in an active task.
