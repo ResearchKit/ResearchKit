@@ -223,24 +223,9 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
     for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKFormStep class]]) {
-            ORKFormStep *formStep = (ORKFormStep *)step;
-            
-            for (ORKFormItem *formItem in formStep.formItems) {
-                ORKAnswerFormat *answerFormat = [formItem answerFormat];
-                HKObjectType *objType = [answerFormat healthKitObjectTypeForAuthorization];
-                if (objType) {
-                    [healthTypes addObject:objType];
-                }
-            }
-        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
-            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectTypeForAuthorization];
-            if (objType) {
-                [healthTypes addObject:objType];
-            }
-        } else if ([step isKindOfClass:[ORKActiveStep class]]) {
-            ORKActiveStep *activeStep = (ORKActiveStep *)step;
-            [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
+        NSSet *stepSet = [step requestedHealthKitTypesForReading];
+        if (stepSet) {
+            [healthTypes unionSet:stepSet];
         }
     }
     return healthTypes.count ? healthTypes : nil;
