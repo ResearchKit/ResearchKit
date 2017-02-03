@@ -208,14 +208,6 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
 } ORK_ENUM_AVAILABLE;
 
 /**
- Frequency with which the mood survey is asked.
- */
-typedef NS_ENUM(NSUInteger, ORKMoodSurveyFrequency) {
-    ORKMoodSurveyFrequencyDaily,
-    ORKMoodSurveyFrequencyWeekly,
-} ORK_ENUM_AVAILABLE;
-
-/**
  Values that identify the left or right limb to be used in an active task.
 */
 typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {

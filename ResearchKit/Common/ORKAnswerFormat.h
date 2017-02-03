@@ -1463,6 +1463,8 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKMoodScaleAnswerFormat : ORKImageChoiceAnswerFormat
 
+- (instancetype)initWithMoodQuestionType:(ORKMoodQuestionType)questionType;
+
 @end
 
 
