@@ -130,7 +130,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
-    stepResult.results = _results;
+    [stepResult.results arrayByAddingObjectsFromArray: _results];
     return stepResult;
 }
 
