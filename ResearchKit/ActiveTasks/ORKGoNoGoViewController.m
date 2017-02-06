@@ -254,8 +254,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     for (ORKGoNoGoSample *sample in _samples) {
         NSTimeInterval newTimestamp = sample.timestamp - _stimulusTimestamp;
         
-        if (newTimestamp >= 0)
-        {
+        if (newTimestamp >= 0) {
             sample.timestamp = newTimestamp;
             [samples addObject:sample];
         }
