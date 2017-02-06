@@ -157,14 +157,16 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion {
     CMAcceleration v = motion.userAcceleration;
     double vectorMagnitude = sqrt(((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
-    if (vectorMagnitude > [self gonogoTimeStep].thresholdAcceleration) {
-        [self stopRecorders];
-    }
+    
     if (self.started && _samples != nil) {
         ORKGoNoGoSample *sample = [ORKGoNoGoSample new];
         sample.timestamp = [NSProcessInfo processInfo].systemUptime;
         sample.vectorMagnitude = vectorMagnitude;
         [_samples addObject:sample];
+    }
+    
+    if (vectorMagnitude > [self gonogoTimeStep].thresholdAcceleration) {
+        [self stopRecorders];
     }
 }
 
@@ -223,7 +225,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
         }
     };
     
-    if ((go && _validResult) || (!go && !_validResult)) {
+    if ((go && _validResult) || (!go && _timedOut)) {
         [self indicateResult:result incorrect: NO completion:completion];
     } else {
         [self indicateResult:result incorrect: YES completion:completion];
@@ -272,12 +274,12 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
     // Start the animation and play the sound
     if (incorrect) {
-        [_gonogoContentView startFailureAnimationWithDuration:OutcomeAnimationDuration completion:completion];
         SystemSoundID sound = _timedOut ? [self gonogoTimeStep].timeoutSound : [self gonogoTimeStep].failureSound;
         AudioServicesPlayAlertSound(sound);
+        [_gonogoContentView startFailureAnimationWithDuration:OutcomeAnimationDuration completion:completion];
     } else {
-        [_gonogoContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
         AudioServicesPlaySystemSound([self gonogoTimeStep].successSound);
+        [_gonogoContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
     }
 }
 
