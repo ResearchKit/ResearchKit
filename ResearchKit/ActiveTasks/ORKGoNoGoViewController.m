@@ -49,6 +49,7 @@
     ORKGoNoGoContentView *_gonogoContentView;
     
     NSMutableArray *_results;
+    NSMutableArray *_samples;
     NSTimer *_stimulusTimer;
     NSTimer *_timeoutTimer;
     NSTimeInterval _stimulusTimestamp;
@@ -68,6 +69,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Do any additional setup after loading the view.
     [self configureTitle];
     _results = [NSMutableArray new];
+    _samples = [NSMutableArray new];
     go = true;
     UIColor* color = self.view.tintColor;
     
@@ -111,6 +113,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKActiveStepViewController
 
 - (void)start {
+    [_samples removeAllObjects];
     [super start];
     [self startStimulusTimer];
 }
@@ -156,6 +159,12 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     double vectorMagnitude = sqrt(((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
     if (vectorMagnitude > [self gonogoTimeStep].thresholdAcceleration) {
         [self stopRecorders];
+    }
+    if (self.started && _samples != nil) {
+        ORKGoNoGoSample *sample = [ORKGoNoGoSample new];
+        sample.timestamp = [NSProcessInfo processInfo].systemUptime;
+        sample.vectorMagnitude = vectorMagnitude;
+        [_samples addObject:sample];
     }
 }
 
@@ -234,9 +243,26 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     }
     
     // Create a result
+    NSTimeInterval now = [NSProcessInfo processInfo].systemUptime;
+    
+    NSMutableArray *samples = [[NSMutableArray alloc] init];
+    
+    // Copy all samples which happen after stimulus is displayed and until threshold is reached
+    // Convert timestamp relative to the time the stimulus was displayed
+    for (ORKGoNoGoSample *sample in _samples) {
+        NSTimeInterval newTimestamp = sample.timestamp - _stimulusTimestamp;
+        
+        if (newTimestamp >= 0)
+        {
+            sample.timestamp = newTimestamp;
+            [samples addObject:sample];
+        }
+    }
+    
     ORKGoNoGoResult *gonogoResult = [[ORKGoNoGoResult alloc] initWithIdentifier:self.step.identifier];
     gonogoResult.timestamp = _stimulusTimestamp;
-    gonogoResult.timeToThreshold = [NSProcessInfo processInfo].systemUptime - _stimulusTimestamp;
+    gonogoResult.samples = [samples copy];
+    gonogoResult.timeToThreshold = now - _stimulusTimestamp;
     if ([result isKindOfClass:[ORKFileResult class]]) {
         gonogoResult.fileResult = (ORKFileResult *)result;
     }
