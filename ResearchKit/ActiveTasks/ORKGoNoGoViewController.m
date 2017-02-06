@@ -70,7 +70,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     _results = [NSMutableArray new];
     go = true;
     UIColor* color = self.view.tintColor;
-    _gonogoContentView = [[ORKGoNoGoContentView alloc] initWithColor:color];
     
     // Generate the type of tests we are going to display
     // Always do go first, and make sure there is at least 1 no-go
@@ -89,9 +88,13 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
         [tests setObject:@NO atIndexedSubscript:arc4random_uniform(tests.count - 1) + 1];
     }
     
+    go = [self getNextTestType];
+    
+    _gonogoContentView = [[ORKGoNoGoContentView alloc] initWithColor:go ? self.view.tintColor : UIColor.greenColor];
+    [_gonogoContentView setStimulusHidden:YES];
+    
     self.activeStepView.activeCustomView = _gonogoContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
-    [_gonogoContentView setStimulusHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
