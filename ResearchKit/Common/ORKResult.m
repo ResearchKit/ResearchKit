@@ -881,7 +881,6 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
     ORK_ENCODE_DOUBLE(aCoder, timeToThreshold);
-    ORK_ENCODE_OBJ(aCoder, fileResult);
     ORK_ENCODE_BOOL(aCoder, go);
     ORK_ENCODE_BOOL(aCoder, incorrect);
     ORK_ENCODE_OBJ(aCoder, samples);
@@ -892,7 +891,6 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, timestamp);
         ORK_DECODE_DOUBLE(aDecoder, timeToThreshold);
-        ORK_DECODE_OBJ_CLASS(aDecoder, fileResult, ORKFileResult);
         ORK_DECODE_BOOL(aDecoder, go);
         ORK_DECODE_BOOL(aDecoder, incorrect);
         ORK_DECODE_OBJ(aDecoder, samples);
@@ -913,17 +911,15 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
             (self.timeToThreshold == castObject.timeToThreshold) &&
             (self.go == castObject.go) &&
             (self.incorrect == castObject.incorrect) &&
-            ORKEqualObjects(self.samples, castObject.samples) &&
-            ORKEqualObjects(self.fileResult, castObject.fileResult));
+            ORKEqualObjects(self.samples, castObject.samples));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.go ^ self.incorrect ^ self.fileResult.hash ^ self.samples.hash;
+    return super.hash ^ [NSNumber numberWithDouble:self.timestamp].hash ^ self.go ^ self.incorrect ^ self.samples.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKGoNoGoResult *result = [super copyWithZone:zone];
-    result.fileResult = [self.fileResult copy];
     result.timestamp = self.timestamp;
     result.timeToThreshold = self.timeToThreshold;
     result.go = self.go;
@@ -933,7 +929,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; go: %@; error: %@; timestamp: %f; timeToThreshold: %f; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.go ? @"YES" : @"NO", self.incorrect ? @"YES" : @"NO", self.timestamp, self.timeToThreshold, self.fileResult.description, self.descriptionSuffix];
+    return [NSString stringWithFormat:@"%@; go: %@; error: %@; timestamp: %f; timeToThreshold: %f; %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.go ? @"YES" : @"NO", self.incorrect ? @"YES" : @"NO", self.timestamp, self.timeToThreshold, self.descriptionSuffix];
 }
 
 @end

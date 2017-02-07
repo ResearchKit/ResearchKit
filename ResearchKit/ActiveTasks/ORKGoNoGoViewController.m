@@ -121,7 +121,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #if TARGET_IPHONE_SIMULATOR
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.type == UIEventSubtypeMotionShake) {
-        [self attemptDidFinish:nil];
+        [self attemptDidFinish];
     }
 }
 
@@ -149,7 +149,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKRecorderDelegate
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-    [self attemptDidFinish:result];
+    [self attemptDidFinish];
 }
 
 #pragma mark - ORKDeviceMotionRecorderDelegate
@@ -209,7 +209,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     [self.activeStepView updateTitle:ORKLocalizedString(@"GONOGO_TASK_ACTIVE_STEP_TITLE", nil) text:text];
 }
 
-- (void)attemptDidFinish:(ORKResult *)result {
+- (void)attemptDidFinish {
     void (^completion)(void) = ^{
         int successCount = 0;
         for (ORKGoNoGoResult* res in _results) {
@@ -226,9 +226,9 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     };
     
     if ((go && _validResult) || (!go && _timedOut)) {
-        [self indicateResult:result incorrect: NO completion:completion];
+        [self indicateResultIncorrect: NO completion:completion];
     } else {
-        [self indicateResult:result incorrect: YES completion:completion];
+        [self indicateResultIncorrect: YES completion:completion];
     }
     
     _validResult = NO;
@@ -237,7 +237,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     [_timeoutTimer invalidate];
 }
 
-- (void)indicateResult:(ORKResult *)result incorrect:(BOOL)incorrect completion:(void(^)(void))completion {
+- (void)indicateResultIncorrect:(BOOL)incorrect completion:(void(^)(void))completion {
     
     // Exit early if not recording the failure
     if (incorrect && !_shouldIndicateFailure) {
@@ -264,9 +264,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     gonogoResult.timestamp = _stimulusTimestamp;
     gonogoResult.samples = [samples copy];
     gonogoResult.timeToThreshold = now - _stimulusTimestamp;
-    if ([result isKindOfClass:[ORKFileResult class]]) {
-        gonogoResult.fileResult = (ORKFileResult *)result;
-    }
     gonogoResult.go = go;
     gonogoResult.incorrect = incorrect;
     [_results addObject:gonogoResult];
@@ -330,7 +327,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
 #if TARGET_IPHONE_SIMULATOR
     // Device motion recorder won't work, so manually trigger didfinish
-    [self attemptDidFinish:nil];
+    [self attemptDidFinish];
 #endif
 }
 

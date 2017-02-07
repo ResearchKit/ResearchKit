@@ -707,11 +707,6 @@ ORK_CLASS_AVAILABLE
   */
 @property (nonatomic, assign) NSTimeInterval timeToThreshold;
 
-/** 
-  Motion data recorded from beginning of attempt to threshold reached
-  */
-@property (nonatomic, strong) ORKFileResult *fileResult;
-
 /**
   YES if a go test and NO if a no go test
   */
