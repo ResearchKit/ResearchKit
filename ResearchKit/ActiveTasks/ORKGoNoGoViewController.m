@@ -49,6 +49,7 @@
     ORKGoNoGoContentView *_gonogoContentView;
     
     NSMutableArray *_results;
+    NSMutableArray *_samples;
     NSTimer *_stimulusTimer;
     NSTimer *_timeoutTimer;
     NSTimeInterval _stimulusTimestamp;
@@ -68,9 +69,9 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Do any additional setup after loading the view.
     [self configureTitle];
     _results = [NSMutableArray new];
+    _samples = [NSMutableArray new];
     go = true;
     UIColor* color = self.view.tintColor;
-    _gonogoContentView = [[ORKGoNoGoContentView alloc] initWithColor:color];
     
     // Generate the type of tests we are going to display
     // Always do go first, and make sure there is at least 1 no-go
@@ -89,9 +90,13 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
         [tests setObject:@NO atIndexedSubscript:arc4random_uniform(tests.count - 1) + 1];
     }
     
+    go = [self getNextTestType];
+    
+    _gonogoContentView = [[ORKGoNoGoContentView alloc] initWithColor:go ? self.view.tintColor : UIColor.greenColor];
+    [_gonogoContentView setStimulusHidden:YES];
+    
     self.activeStepView.activeCustomView = _gonogoContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
-    [_gonogoContentView setStimulusHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -108,6 +113,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKActiveStepViewController
 
 - (void)start {
+    [_samples removeAllObjects];
     [super start];
     [self startStimulusTimer];
 }
@@ -115,7 +121,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #if TARGET_IPHONE_SIMULATOR
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.type == UIEventSubtypeMotionShake) {
-        [self attemptDidFinish:nil];
+        [self attemptDidFinish];
     }
 }
 
@@ -124,7 +130,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
-    stepResult.results = _results;
+    [stepResult.results arrayByAddingObjectsFromArray: _results];
     return stepResult;
 }
 
@@ -143,7 +149,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKRecorderDelegate
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-    [self attemptDidFinish:result];
+    [self attemptDidFinish];
 }
 
 #pragma mark - ORKDeviceMotionRecorderDelegate
@@ -151,6 +157,14 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion {
     CMAcceleration v = motion.userAcceleration;
     double vectorMagnitude = sqrt(((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
+    
+    if (self.started && _samples != nil) {
+        ORKGoNoGoSample *sample = [ORKGoNoGoSample new];
+        sample.timestamp = [NSProcessInfo processInfo].systemUptime;
+        sample.vectorMagnitude = vectorMagnitude;
+        [_samples addObject:sample];
+    }
+    
     if (vectorMagnitude > [self gonogoTimeStep].thresholdAcceleration) {
         [self stopRecorders];
     }
@@ -195,7 +209,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     [self.activeStepView updateTitle:ORKLocalizedString(@"GONOGO_TASK_ACTIVE_STEP_TITLE", nil) text:text];
 }
 
-- (void)attemptDidFinish:(ORKResult *)result {
+- (void)attemptDidFinish {
     void (^completion)(void) = ^{
         int successCount = 0;
         for (ORKGoNoGoResult* res in _results) {
@@ -211,10 +225,10 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
         }
     };
     
-    if ((go && _validResult) || (!go && !_validResult)) {
-        [self indicateResult:result incorrect: NO completion:completion];
+    if ((go && _validResult) || (!go && _timedOut)) {
+        [self indicateResultIncorrect: NO completion:completion];
     } else {
-        [self indicateResult:result incorrect: YES completion:completion];
+        [self indicateResultIncorrect: YES completion:completion];
     }
     
     _validResult = NO;
@@ -223,7 +237,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     [_timeoutTimer invalidate];
 }
 
-- (void)indicateResult:(ORKResult *)result incorrect:(BOOL)incorrect completion:(void(^)(void))completion {
+- (void)indicateResultIncorrect:(BOOL)incorrect completion:(void(^)(void))completion {
     
     // Exit early if not recording the failure
     if (incorrect && !_shouldIndicateFailure) {
@@ -231,24 +245,37 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     }
     
     // Create a result
+    NSTimeInterval now = [NSProcessInfo processInfo].systemUptime;
+    
+    NSMutableArray *samples = [[NSMutableArray alloc] init];
+    
+    // Copy all samples which happen after stimulus is displayed and until threshold is reached
+    // Convert timestamp relative to the time the stimulus was displayed
+    for (ORKGoNoGoSample *sample in _samples) {
+        NSTimeInterval newTimestamp = sample.timestamp - _stimulusTimestamp;
+        
+        if (newTimestamp >= 0) {
+            sample.timestamp = newTimestamp;
+            [samples addObject:sample];
+        }
+    }
+    
     ORKGoNoGoResult *gonogoResult = [[ORKGoNoGoResult alloc] initWithIdentifier:self.step.identifier];
     gonogoResult.timestamp = _stimulusTimestamp;
-    gonogoResult.timeToThreshold = [NSProcessInfo processInfo].systemUptime - _stimulusTimestamp;
-    if ([result isKindOfClass:[ORKFileResult class]]) {
-        gonogoResult.fileResult = (ORKFileResult *)result;
-    }
+    gonogoResult.samples = [samples copy];
+    gonogoResult.timeToThreshold = now - _stimulusTimestamp;
     gonogoResult.go = go;
     gonogoResult.incorrect = incorrect;
     [_results addObject:gonogoResult];
     
     // Start the animation and play the sound
     if (incorrect) {
-        [_gonogoContentView startFailureAnimationWithDuration:OutcomeAnimationDuration completion:completion];
         SystemSoundID sound = _timedOut ? [self gonogoTimeStep].timeoutSound : [self gonogoTimeStep].failureSound;
         AudioServicesPlayAlertSound(sound);
+        [_gonogoContentView startFailureAnimationWithDuration:OutcomeAnimationDuration completion:completion];
     } else {
-        [_gonogoContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
         AudioServicesPlaySystemSound([self gonogoTimeStep].successSound);
+        [_gonogoContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
     }
 }
 
@@ -300,7 +327,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     
 #if TARGET_IPHONE_SIMULATOR
     // Device motion recorder won't work, so manually trigger didfinish
-    [self attemptDidFinish:nil];
+    [self attemptDidFinish];
 #endif
 }
 
