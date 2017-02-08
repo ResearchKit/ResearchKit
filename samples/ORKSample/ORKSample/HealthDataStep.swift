@@ -36,12 +36,14 @@ class HealthDataStep: ORKInstructionStep {
     
     let healthDataItemsToRead: Set<HKObjectType> = [
         HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.dateOfBirth)!,
+        HKObjectType.characteristicType(forIdentifier: HKCharacteristicTypeIdentifier.biologicalSex)!,
         HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!,
         HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!
     ]
     
     let healthDataItemsToWrite: Set<HKSampleType> = [
         HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!,
+        HKObjectType.documentType(forIdentifier: HKDocumentTypeIdentifier.CDA)!,
         HKObjectType.workoutType()
     ]
     

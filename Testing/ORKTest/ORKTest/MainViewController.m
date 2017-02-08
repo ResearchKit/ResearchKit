@@ -4425,7 +4425,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return locationTask;
 }
 
-#pragma mark - ORKStepHL7CDDTextDelegate
+#pragma mark - ORKStepHL7CDATextDelegate
 
 -(ORKHL7CDATextFragment *)hl7CDAtextForStep:(ORKStep *)step withResult:(ORKResult *)result {
     
