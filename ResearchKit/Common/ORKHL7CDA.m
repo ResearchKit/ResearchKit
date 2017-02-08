@@ -425,9 +425,15 @@
     consultationNote.title = @"Consultation note";
     
     ORKHL7CDADocumentTemplate *diagnosticImagingReport = [[ORKHL7CDADocumentTemplate alloc] init];
-    ccd.templateID = @"2.16.840.1.113883.10.20.22.1.5";
-    ccd.loinc = @"18748-4";
-    ccd.title = @"Diagnostic Imaging Report";
+    diagnosticImagingReport.templateID = @"2.16.840.1.113883.10.20.22.1.5";
+    diagnosticImagingReport.loinc = @"18748-4";
+    diagnosticImagingReport.title = @"Diagnostic Imaging Report";
+    
+    ORKHL7CDADocumentTemplate *dischargeSummary = [[ORKHL7CDADocumentTemplate alloc] init];
+    dischargeSummary.templateID = @"2.16.840.1.113883.10.20.22.1.8";
+    dischargeSummary.loinc = @"18842-5";
+    dischargeSummary.title = @"Discharge Summary";
+    
     
     ORKHL7CDASectionDescription *purpose = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePurpose isRequired: true];
     ORKHL7CDASectionDescription *allergies = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAllergiesCoded isRequired: true];
@@ -469,6 +475,15 @@
     ORKHL7CDASectionDescription *radiologyReasonForStudy = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyReasonForStudy isRequired:false];
     ORKHL7CDASectionDescription *radiologyStudyRecommendations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyStudyRecommendations isRequired:false];
     ORKHL7CDASectionDescription *requestedImageStudiesInformation = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRequestedImageStudiesInformation isRequired:false];
+    ORKHL7CDASectionDescription *hospitalCourse = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalCourse isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeDiagnosis = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeDiagnosis isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeMedications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeMedications isRequired:false];
+    ORKHL7CDASectionDescription *dischargeDiet = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDischargeDiet isRequired:false];
+    ORKHL7CDASectionDescription *hospitalAdmissionsDiagnosis = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalAdmissionsDiagnosis isRequired:false];
+    ORKHL7CDASectionDescription *hospitalConsultations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalConsultations isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeInstructions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeInstructions isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargePhysical = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargePhysical isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeStudiesSummary = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeStudiesSummary isRequired:false];
     
     ccd.sections = [NSArray arrayWithObjects: purpose, allergies, problems, procedures, familyHistory, socialHistory, payers,
                     advanceDirectives, immunizations, medications, medicalEquipment, vitalSigns, functionalStatus, results,
@@ -477,10 +492,13 @@
     
     diagnosticImagingReport.sections = [NSArray arrayWithObjects: dicomObjectCatalog, diagnosticImagingFindings, addendum, complications, conclusions, currentImagingProcedureDescriptions, diagnosticImagingDocumentSummary, diagnosticImagingKeyImages, medicalGeneralHistory, priorImagingProcedureDescription, radiologyImpression, radiologyComparisonStudyObservation, radiologyReasonForStudy, radiologyStudyRecommendations, requestedImageStudiesInformation, nil];
     
+    dischargeSummary.sections = [NSArray arrayWithObjects: allergies, hospitalCourse, hospitalDischargeMedications, planOfCare, chiefComplaint, dischargeDiet, familyHistory, functionalStatus, pastMedicalHistory, historyOfPresentIllness, hospitalAdmissionsDiagnosis, hospitalConsultations, hospitalDischargePhysical, hospitalDischargeStudiesSummary, immunizations, problemsOptional, procedures, reasonForReferral, reviewOfSystems, socialHistory, vitalSigns, nil];
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             ccd, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeCCD],
             consultationNote, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeConsultationNote],
-            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDICOMObjectCatalog],
+            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeDiagnosticImagingReport],
+            dischargeSummary, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeDischargeSummary]
             nil];
 }
 
@@ -731,6 +749,60 @@
     requestedImageStudiesInformation.textType = ORKHL7CDAEntryTextTypePlain;
     requestedImageStudiesInformation.title = @"Requested Imaging Studies Information";
     
+    ORKHL7CDASectionTemplate *hospitalCourse = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalCourse.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.5";
+    hospitalCourse.loinc = @"8648-8";
+    hospitalCourse.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalCourse.title = @"Hospital Course";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeDiagnosis = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeDiagnosis.templateID = @"2.16.840.1.113883.10.20.22.2.24";
+    hospitalDischargeDiagnosis.loinc = @"11535-2";
+    hospitalDischargeDiagnosis.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeDiagnosis.title = @"Hospital Discharge Diagnosis";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeMedications = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeMedications.templateID = @"2.16.840.1.113883.10.20.22.2.11";
+    hospitalDischargeMedications.loinc = @"10183-2";
+    hospitalDischargeMedications.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeMedications.title = @"Hospital Discharge Medications";
+    
+    ORKHL7CDASectionTemplate *dischargeDiet = [[ORKHL7CDASectionTemplate alloc] init];
+    dischargeDiet.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.33";
+    dischargeDiet.loinc = @"42344-2";
+    dischargeDiet.textType = ORKHL7CDAEntryTextTypePlain;
+    dischargeDiet.title = @"Discharge Diet";
+    
+    ORKHL7CDASectionTemplate *hospitalAdmissionsDiagnosis = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalAdmissionsDiagnosis.templateID = @"2.16.840.1.113883.10.20.22.2.43";
+    hospitalAdmissionsDiagnosis.loinc = @"46241-6";
+    hospitalAdmissionsDiagnosis.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalAdmissionsDiagnosis.title = @"Hospital Admissions Diagnosis";
+    
+    ORKHL7CDASectionTemplate *hospitalConsultations = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalConsultations.templateID = @"2.16.840.1.113883.10.20.22.2.42";
+    hospitalConsultations.loinc = @"18841-7";
+    hospitalConsultations.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalConsultations.title = @"Hospital Consultations";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeInstructions = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeInstructions.templateID = @"2.16.840.1.113883.10.20.22.2.41";
+    hospitalDischargeInstructions.loinc = @"55115-0";
+    hospitalDischargeInstructions.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeInstructions.title = @"Hospital Discharge Instructions";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargePhysical = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargePhysical.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.26";
+    hospitalDischargePhysical.loinc = @"10184-0";
+    hospitalDischargePhysical.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargePhysical.title = @"Hospital Discharge Physical";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeStudiesSummary = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeStudiesSummary.templateID = @"2.16.840.1.113883.10.20.22.2.16";
+    hospitalDischargeStudiesSummary.loinc = @"11493-4";
+    hospitalDischargeStudiesSummary.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeStudiesSummary.title = @"Hospital Discharge Studies Summary";
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             purpose, [NSNumber numberWithInteger:ORKHL7CDASectionTypePurpose],
             allergiesCoded, [NSNumber numberWithInteger:ORKHL7CDASectionTypeAllergiesCoded],
@@ -773,6 +845,15 @@
             radiologyReasonForStudy, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyReasonForStudy],
             radiologyStudyRecommendations, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyStudyRecommendations],
             requestedImageStudiesInformation, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRequestedImageStudiesInformation],
+            hospitalCourse, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalCourse],
+            hospitalDischargeDiagnosis, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeDiagnosis],
+            hospitalDischargeMedications, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeMedications],
+            dischargeDiet, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDischargeDiet],
+            hospitalAdmissionsDiagnosis, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalAdmissionsDiagnosis],
+            hospitalConsultations, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalConsultations],
+            hospitalDischargeInstructions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeInstructions],
+            hospitalDischargePhysical, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargePhysical],
+            hospitalDischargeStudiesSummary, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeStudiesSummary],
             nil];
 }
 

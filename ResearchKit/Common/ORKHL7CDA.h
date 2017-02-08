@@ -49,7 +49,10 @@ typedef NS_ENUM(NSInteger, ORKHL7CDADocumentType) {
     ORKHL7CDADocumentTypeConsultationNote,
     
     /// A diagnostic imaging report contains findings from an imaging investigation.
-    ORKHL7CDADocumentTypeDiagnosticImagingReport
+    ORKHL7CDADocumentTypeDiagnosticImagingReport,
+    
+    /// A discharge summary (usually from a hospital or healthcare institution)
+    ORKHL7CDADocumentTypeDischargeSummary
 };
 
 
@@ -180,7 +183,25 @@ typedef NS_ENUM(NSInteger, ORKHL7CDASectionType) {
     ORKHL7CDASectionTypeRadiologyStudyRecommendations,
     
     /// The Requested Image Studies Information section records any information on the requested studies.
-    ORKHL7CDASectionTypeRequestedImageStudiesInformation    
+    ORKHL7CDASectionTypeRequestedImageStudiesInformation,
+    
+    ORKHL7CDASectionTypeHospitalCourse,
+    
+    ORKHL7CDASectionTypeHospitalDischargeDiagnosis,
+    
+    ORKHL7CDASectionTypeHospitalDischargeMedications,
+    
+    ORKHL7CDASectionTypeDischargeDiet,
+    
+    ORKHL7CDASectionTypeHospitalAdmissionsDiagnosis,
+    
+    ORKHL7CDASectionTypeHospitalConsultations,
+    
+    ORKHL7CDASectionTypeHospitalDischargeInstructions,
+    
+    ORKHL7CDASectionTypeHospitalDischargePhysical,
+    
+    ORKHL7CDASectionTypeHospitalDischargeStudiesSummary
 
 };
 
