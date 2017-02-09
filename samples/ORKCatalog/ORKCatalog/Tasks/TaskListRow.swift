@@ -127,6 +127,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .booleanQuestion,
                     .dateQuestion,
                     .dateTimeQuestion,
+                    .heightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
