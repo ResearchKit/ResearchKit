@@ -52,7 +52,10 @@ typedef NS_ENUM(NSInteger, ORKHL7CDADocumentType) {
     ORKHL7CDADocumentTypeDiagnosticImagingReport,
     
     /// A discharge summary (usually from a hospital or healthcare institution)
-    ORKHL7CDADocumentTypeDischargeSummary
+    ORKHL7CDADocumentTypeDischargeSummary,
+    
+    /// A document describing the initial assessment of a patient by a clinician.
+    ORKHL7CDADocumentTypeHistoryAndPhysicalNote
 };
 
 
