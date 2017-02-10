@@ -172,6 +172,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
     nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
     nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+    nameAnswerFormat.disallowBlankString = YES;
     ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                       answerFormat:nameAnswerFormat];

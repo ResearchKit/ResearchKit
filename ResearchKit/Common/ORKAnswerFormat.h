@@ -1237,6 +1237,13 @@ ORK_CLASS_AVAILABLE
  */
 @property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
+/**
+ Identifies whether the text object should be allowed to be blank strings, aka all whitespace, like "   ".
+ 
+ By default, the value of this property is NO.
+ */
+@property (nonatomic) BOOL disallowBlankString;
+
 @end
 
 

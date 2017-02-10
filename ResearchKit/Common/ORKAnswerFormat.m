@@ -2066,6 +2066,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_keyboardType = _keyboardType;
     answerFormat->_multipleLines = _multipleLines;
     answerFormat->_secureTextEntry = _secureTextEntry;
+    answerFormat->_disallowBlankString = _disallowBlankString;
+
     return answerFormat;
 }
 
@@ -2082,6 +2084,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (text && text.length > 0) {
         isValid = ([self isTextLengthValidWithString:text] && [self isTextRegexValidWithString:text]);
     }
+    
+    // Disallow any string that is blank, like "     ".
+    if (self.disallowBlankString && text.length > 0) {
+        if([text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length == 0) {
+            isValid = NO;
+        }
+    }
+
     return isValid;
 }
 
@@ -2135,6 +2145,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     // Always set to no autocorrection or spell checking
     answerFormat->_autocorrectionType = UITextAutocorrectionTypeNo;
     answerFormat->_spellCheckingType = UITextSpellCheckingTypeNo;
+    answerFormat->_disallowBlankString = _disallowBlankString;
     
     return answerFormat;
 }
@@ -2154,6 +2165,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
         ORK_DECODE_BOOL(aDecoder, secureTextEntry);
+        ORK_DECODE_BOOL(aDecoder, disallowBlankString);
+
     }
     return self;
 }
@@ -2169,6 +2182,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
     ORK_ENCODE_BOOL(aCoder, secureTextEntry);
+    ORK_ENCODE_BOOL(aCoder, disallowBlankString);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -2188,7 +2202,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines) &&
-             self.secureTextEntry == castObject.secureTextEntry);
+             self.secureTextEntry == castObject.secureTextEntry) &&
+             self.disallowBlankString == castObject.disallowBlankString;
 }
 
 static NSString *const kSecureTextEntryEscapeString = @"*";
@@ -2199,6 +2214,20 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         answerString = _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
     }
     return answerString;
+}
+
+- (NSUInteger)hash {
+    return  [super hash]                        ^
+            [_validationRegex           hash]   ^
+            [_invalidMessage            hash]   ^
+            [@(_maximumLength)          hash]   ^
+            [@(_autocapitalizationType) hash]   ^
+            [@(_autocorrectionType)     hash]   ^
+            [@(_spellCheckingType)      hash]   ^
+            [@(_keyboardType)           hash]   ^
+            [@(_multipleLines)          hash]   ^
+            [@(_secureTextEntry)        hash]   ^
+            [@(_disallowBlankString)    hash];
 }
 
 @end
