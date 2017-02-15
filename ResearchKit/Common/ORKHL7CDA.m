@@ -62,7 +62,7 @@
     NSMutableString *outputString = [[NSMutableString alloc] init];
     
     for (ORKResult *result in resultsArray) {
-        NSLog(result.identifier);
+        NSLog(@"%@", result.identifier);
         if ([result isKindOfClass:[ORKCollectionResult class]]) {
             [outputString appendString:[self iterateResultsArray:result forSectionType:sectionType]];
         }
@@ -136,7 +136,7 @@
     
     [hl7CDAOutput appendString:[self documentFooter]];
     
-    NSLog(hl7CDAOutput);
+    NSLog(@"%@", hl7CDAOutput);
     return hl7CDAOutput;
 }
 
@@ -165,7 +165,7 @@
     NSMutableString *contentResult = [[NSMutableString alloc] initWithCapacity:1024];
     
     [contentResult appendFormat: @"<?xml version=\"1.0\"?>\n"
-     "<?xml-stylesheet type=\"text/xsl\" href=\"CDASchemas\cda\Schemas\CCD.xsl\"?>\n"
+     "<?xml-stylesheet type=\"text/xsl\" href=\"CDASchemas\\cda\\Schemas\\CCD.xsl\"?>\n"
      "<ClinicalDocument xmlns=\"urn:hl7-org:v3\" xmlns:voc=\"urn:hl7-org:v3/voc\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"urn:hl7-org:v3 CDA.xsd\">\n\n"
 
      "<!--\n"
@@ -261,7 +261,7 @@
         [contentResult appendFormat:@"        <suffix>%@</suffix>\n", person.suffix];
     }
     [contentResult appendFormat:@"      </name>\n"];
-    [contentResult appendFormat:[self cdaHeaderAdministrativeGender:person.gender]];
+    [contentResult appendFormat:@"%@", [self cdaHeaderAdministrativeGender:person.gender]];
     if (person.birthdate != nil) {
         [contentResult appendFormat:@"      <birthTime value=\"%@\"/>\n", birthdayString];
     }
@@ -424,42 +424,101 @@
     consultationNote.loinc = @"11488-4";
     consultationNote.title = @"Consultation note";
     
+    ORKHL7CDADocumentTemplate *diagnosticImagingReport = [[ORKHL7CDADocumentTemplate alloc] init];
+    diagnosticImagingReport.templateID = @"2.16.840.1.113883.10.20.22.1.5";
+    diagnosticImagingReport.loinc = @"18748-4";
+    diagnosticImagingReport.title = @"Diagnostic Imaging Report";
     
-    ORKHL7CDASectionDescription *purpose = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePurpose isRequired: true];
-    ORKHL7CDASectionDescription *allergies = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAllergiesCoded isRequired: true];
-    ORKHL7CDASectionDescription *medications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedications isRequired: true];
-    ORKHL7CDASectionDescription *problems = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProblems isRequired: true];
-    ORKHL7CDASectionDescription *procedures = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProcedures isRequired: true];
-    ORKHL7CDASectionDescription *results = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeResults isRequired: true];
+    ORKHL7CDADocumentTemplate *dischargeSummary = [[ORKHL7CDADocumentTemplate alloc] init];
+    dischargeSummary.templateID = @"2.16.840.1.113883.10.20.22.1.8";
+    dischargeSummary.loinc = @"18842-5";
+    dischargeSummary.title = @"Discharge Summary";
+    
+    ORKHL7CDADocumentTemplate *historyPhysicalNote = [[ORKHL7CDADocumentTemplate alloc] init];
+    historyPhysicalNote.templateID = @"2.16.840.1.113883.10.20.22.1.3";
+    historyPhysicalNote.loinc = @"34117-2";
+    historyPhysicalNote.title = @"History & Physical Note";
+    
+    ORKHL7CDASectionDescription *addendum = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingAddendum isRequired:false];
     ORKHL7CDASectionDescription *advanceDirectives = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAdvanceDirectives isRequired: false];
+    ORKHL7CDASectionDescription *allergies = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAllergiesCoded isRequired: true];
+    ORKHL7CDASectionDescription *allergiesOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAllergiesCoded isRequired: false];
+    ORKHL7CDASectionDescription *assessment = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAssessment isRequired: true];
+    ORKHL7CDASectionDescription *chiefComplaint = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeChiefComplaint isRequired: true];
+    ORKHL7CDASectionDescription *chiefComplaintOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeChiefComplaint isRequired: false];
+    ORKHL7CDASectionDescription *complications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeComplications isRequired:false];
+    ORKHL7CDASectionDescription *conclusions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeConclusions isRequired:false];
+    ORKHL7CDASectionDescription *currentImagingProcedureDescriptions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeCurrentImagingProcedureDescriptions isRequired:false];
+    ORKHL7CDASectionDescription *diagnosticImagingDocumentSummary = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingDocumentSummary isRequired:false];
+    ORKHL7CDASectionDescription *diagnosticImagingFindings = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingFindings isRequired: true];
+    ORKHL7CDASectionDescription *diagnosticImagingKeyImages = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDiagnosticImagingKeyImages isRequired:false];
+    ORKHL7CDASectionDescription *dicomObjectCatalog = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDICOMObjectCatalog isRequired: true];
+    ORKHL7CDASectionDescription *dischargeDiet = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeDischargeDiet isRequired:false];
     ORKHL7CDASectionDescription *encounters = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeEncounters isRequired: false];
-    ORKHL7CDASectionDescription *familyHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeFamilyHistory isRequired: false];
-    ORKHL7CDASectionDescription *functionalStatus = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeFunctionalStatus isRequired: false];
+    ORKHL7CDASectionDescription *familyHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeFamilyHistory isRequired: true];
+    ORKHL7CDASectionDescription *familyHistoryOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeFamilyHistory isRequired: false];
+    ORKHL7CDASectionDescription *functionalStatusOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeFunctionalStatus isRequired: false];
+    ORKHL7CDASectionDescription *generalStatus = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeGeneralStatus isRequired: true];
+    ORKHL7CDASectionDescription *generalStatusOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeGeneralStatus isRequired: false];
+    ORKHL7CDASectionDescription *historyOfPresentIllness = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHistoryOfPresentIllness isRequired: true];
+    ORKHL7CDASectionDescription *historyOfPresentIllnessOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHistoryOfPresentIllness isRequired: false];
+    ORKHL7CDASectionDescription *hospitalAdmissionsDiagnosis = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalAdmissionsDiagnosis isRequired:false];
+    ORKHL7CDASectionDescription *hospitalConsultations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalConsultations isRequired:false];
+    ORKHL7CDASectionDescription *hospitalCourse = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalCourse isRequired:true];
+    ORKHL7CDASectionDescription *hospitalDischargeDiagnosis = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeDiagnosis isRequired:true];
+    ORKHL7CDASectionDescription *hospitalDischargeInstructions = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeInstructions isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeMedications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeMedications isRequired:true];
+    ORKHL7CDASectionDescription *hospitalDischargePhysical = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargePhysical isRequired:false];
+    ORKHL7CDASectionDescription *hospitalDischargeStudiesSummary = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHospitalDischargeStudiesSummary isRequired:false];
     ORKHL7CDASectionDescription *immunizations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeImmunizations isRequired: false];
     ORKHL7CDASectionDescription *medicalEquipment = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedicalEquipment isRequired: false];
+    ORKHL7CDASectionDescription *medicalGeneralHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedicalGeneralHistory isRequired:false];
+    ORKHL7CDASectionDescription *medications = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedications isRequired: true];
+    ORKHL7CDASectionDescription *medicationsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeMedications isRequired: false];
+    ORKHL7CDASectionDescription *pastMedicalHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePastMedicalHistory isRequired: true];
+    ORKHL7CDASectionDescription *pastMedicalHistoryOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePastMedicalHistory isRequired: false];
     ORKHL7CDASectionDescription *payers = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePayers isRequired: false];
-    ORKHL7CDASectionDescription *planOfCare = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePlanOfCare isRequired: false];
-    ORKHL7CDASectionDescription *socialHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeSocialHistory isRequired: false];
-    ORKHL7CDASectionDescription *vitalSigns = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeVitalSigns isRequired: false];
-    ORKHL7CDASectionDescription *assessment = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeAssessment isRequired: true];
-    ORKHL7CDASectionDescription *historyOfPresentIllness = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeHistoryOfPresentIllness isRequired: true];
     ORKHL7CDASectionDescription *physicalExam = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePhysicalExam isRequired: true];
-    ORKHL7CDASectionDescription *reasonForReferral = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReasonForReferral isRequired: true];
-    ORKHL7CDASectionDescription *chiefComplaint = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeChiefComplaint isRequired: false];
-    ORKHL7CDASectionDescription *generalStatus = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeGeneralStatus isRequired: false];
-    ORKHL7CDASectionDescription *pastMedicalHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePastMedicalHistory isRequired: false];
+    ORKHL7CDASectionDescription *planOfCare = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePlanOfCare isRequired: true];
+    ORKHL7CDASectionDescription *planOfCareOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePlanOfCare isRequired: false];
+    ORKHL7CDASectionDescription *priorImagingProcedureDescription = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePriorImagingProcedureDescriptions isRequired:false];
     ORKHL7CDASectionDescription *problemsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProblemsOptional isRequired: false];
-    ORKHL7CDASectionDescription *reviewOfSystems = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReviewOfSystems isRequired: false];
-
+    ORKHL7CDASectionDescription *problems = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProblems isRequired: true];
+    ORKHL7CDASectionDescription *procedures = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProcedures isRequired: true];
+    ORKHL7CDASectionDescription *proceduresOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeProcedures isRequired: false];
+    ORKHL7CDASectionDescription *purpose = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypePurpose isRequired: true];
+    ORKHL7CDASectionDescription *radiologyComparisonStudyObservation = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyComparisonStudyObservation isRequired:false];
+    ORKHL7CDASectionDescription *radiologyImpression = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyImpression isRequired:false];
+    ORKHL7CDASectionDescription *radiologyReasonForStudy = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyReasonForStudy isRequired:false];
+    ORKHL7CDASectionDescription *radiologyStudyRecommendations = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRadiologyStudyRecommendations isRequired:false];
+    ORKHL7CDASectionDescription *reasonForReferral = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReasonForReferral isRequired: true];
+    ORKHL7CDASectionDescription *reasonForReferralOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReasonForReferral isRequired: false];
+    ORKHL7CDASectionDescription *requestedImageStudiesInformation = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeRequestedImageStudiesInformation isRequired:false];
+    ORKHL7CDASectionDescription *results = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeResults isRequired: true];
+    ORKHL7CDASectionDescription *resultsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeResults isRequired: false];
+    ORKHL7CDASectionDescription *reviewOfSystems = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReviewOfSystems isRequired: true];
+    ORKHL7CDASectionDescription *reviewOfSystemsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeReviewOfSystems isRequired: false];
+    ORKHL7CDASectionDescription *socialHistory = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeSocialHistory isRequired: true];
+    ORKHL7CDASectionDescription *socialHistoryOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeSocialHistory isRequired: false];
+    ORKHL7CDASectionDescription *vitalSigns = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeVitalSigns isRequired: true];
+    ORKHL7CDASectionDescription *vitalSignsOptional = [[ORKHL7CDASectionDescription alloc] initWithSectionType:ORKHL7CDASectionTypeVitalSigns isRequired: false];
     
-    ccd.sections = [NSArray arrayWithObjects: purpose, allergies, problems, procedures, familyHistory, socialHistory, payers,
-                    advanceDirectives, immunizations, medications, medicalEquipment, vitalSigns, functionalStatus, results,
-                    encounters, planOfCare, nil];
-    consultationNote.sections = [NSArray arrayWithObjects: assessment, planOfCare, historyOfPresentIllness, physicalExam, reasonForReferral, chiefComplaint, familyHistory, generalStatus, pastMedicalHistory, immunizations, medications, problemsOptional, procedures, results, reviewOfSystems, socialHistory, vitalSigns, nil];
+    ccd.sections = [NSArray arrayWithObjects: purpose, allergies, problems, procedures, encounters, results, familyHistoryOptional, socialHistoryOptional, payers,
+                    advanceDirectives, immunizations, medications, medicalEquipment, vitalSignsOptional, functionalStatusOptional, results, planOfCareOptional, nil];
+    consultationNote.sections = [NSArray arrayWithObjects: assessment, planOfCare, historyOfPresentIllness, physicalExam, reasonForReferral, allergiesOptional, chiefComplaintOptional, familyHistoryOptional, generalStatusOptional, pastMedicalHistoryOptional, immunizations, medicationsOptional, problemsOptional, proceduresOptional, resultsOptional, reviewOfSystemsOptional, socialHistoryOptional, vitalSignsOptional, nil];
+    
+    diagnosticImagingReport.sections = [NSArray arrayWithObjects: dicomObjectCatalog, diagnosticImagingFindings, addendum, complications, conclusions, currentImagingProcedureDescriptions, diagnosticImagingDocumentSummary, diagnosticImagingKeyImages, medicalGeneralHistory, priorImagingProcedureDescription, radiologyImpression, radiologyComparisonStudyObservation, radiologyReasonForStudy, radiologyStudyRecommendations, requestedImageStudiesInformation, nil];
+    
+    dischargeSummary.sections = [NSArray arrayWithObjects: allergies, hospitalCourse, hospitalDischargeDiagnosis, hospitalDischargeMedications, planOfCare, chiefComplaintOptional, dischargeDiet, familyHistoryOptional, functionalStatusOptional, pastMedicalHistoryOptional, historyOfPresentIllnessOptional, hospitalAdmissionsDiagnosis, hospitalConsultations, hospitalDischargeInstructions, hospitalDischargePhysical, hospitalDischargeStudiesSummary, immunizations, problemsOptional, proceduresOptional, reasonForReferralOptional, reviewOfSystemsOptional, socialHistoryOptional, vitalSignsOptional, nil];
+    
+    historyPhysicalNote.sections = [NSArray arrayWithObjects: allergies, assessment, planOfCare, chiefComplaint, familyHistory, generalStatus, pastMedicalHistory, medications, physicalExam, reasonForReferral, results, reviewOfSystems, socialHistory, vitalSigns, historyOfPresentIllnessOptional, immunizations, problemsOptional, proceduresOptional, nil];
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
             ccd, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeCCD],
             consultationNote, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeConsultationNote],
+            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeDiagnosticImagingReport],
+            dischargeSummary, [NSNumber numberWithInteger:ORKHL7CDADocumentTypeDischargeSummary],
+            historyPhysicalNote, [NSNumber numberWithInt:ORKHL7CDADocumentTypeHistoryAndPhysicalNote],
             nil];
 }
 
@@ -620,6 +679,150 @@
     reviewOfSystems.textType = ORKHL7CDAEntryTextTypeInList;
     reviewOfSystems.title = @"Review Of Systems";
     
+    ORKHL7CDASectionTemplate *dicomObjectCatalog = [[ORKHL7CDASectionTemplate alloc] init];
+    dicomObjectCatalog.templateID = @"2.16.840.1.113883.10.20.6.1.1";
+    dicomObjectCatalog.loinc = @"121181";
+    dicomObjectCatalog.textType = ORKHL7CDAEntryTextTypeNone;
+    dicomObjectCatalog.title = @"DICOM Object Catalog";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingFindings = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingFindings.templateID = @"2.16.840.1.113883.10.20.6.1.2";
+    diagnosticImagingFindings.loinc = @"18782-3";
+    diagnosticImagingFindings.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingFindings.title = @"DICOM Object Catalog";
+
+    ORKHL7CDASectionTemplate *addendum = [[ORKHL7CDASectionTemplate alloc] init];
+    addendum.templateID = @"";
+    addendum.loinc = @"55107-7";
+    addendum.textType = ORKHL7CDAEntryTextTypePlain;
+    addendum.title = @"Addendum";
+    
+    ORKHL7CDASectionTemplate *complications = [[ORKHL7CDASectionTemplate alloc] init];
+    complications.templateID = @"2.16.840.1.113883.10.20.22.2.37";
+    complications.loinc = @"55109-3";
+    complications.textType = ORKHL7CDAEntryTextTypePlain;
+    complications.title = @"Complications";
+
+    ORKHL7CDASectionTemplate *conclusions = [[ORKHL7CDASectionTemplate alloc] init];
+    conclusions.templateID = @"";
+    conclusions.loinc = @"55110-1";
+    conclusions.textType = ORKHL7CDAEntryTextTypePlain;
+    conclusions.title = @"Conclusions";
+    
+    ORKHL7CDASectionTemplate *currentImagingProcedureDescriptions = [[ORKHL7CDASectionTemplate alloc] init];
+    currentImagingProcedureDescriptions.templateID = @"";
+    currentImagingProcedureDescriptions.loinc = @"55111-9";
+    currentImagingProcedureDescriptions.textType = ORKHL7CDAEntryTextTypePlain;
+    currentImagingProcedureDescriptions.title = @"Current Imaging Procedure Descriptions";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingDocumentSummary = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingDocumentSummary.templateID = @"";
+    diagnosticImagingDocumentSummary.loinc = @"55112-7";
+    diagnosticImagingDocumentSummary.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingDocumentSummary.title = @"Document Summary";
+    
+    ORKHL7CDASectionTemplate *diagnosticImagingKeyImages = [[ORKHL7CDASectionTemplate alloc] init];
+    diagnosticImagingKeyImages.templateID = @"";
+    diagnosticImagingKeyImages.loinc = @"53113-5";
+    diagnosticImagingKeyImages.textType = ORKHL7CDAEntryTextTypePlain;
+    diagnosticImagingKeyImages.title = @"Key Images";
+    
+    ORKHL7CDASectionTemplate *medicalGeneralHistory = [[ORKHL7CDASectionTemplate alloc] init];
+    medicalGeneralHistory.templateID = @"2.16.840.1.113883.10.20.22.2.39";
+    medicalGeneralHistory.loinc = @"11329-0";
+    medicalGeneralHistory.textType = ORKHL7CDAEntryTextTypePlain;
+    medicalGeneralHistory.title = @"Medical (General) History";
+    
+    ORKHL7CDASectionTemplate *priorImagingProcedureDescription = [[ORKHL7CDASectionTemplate alloc] init];
+    priorImagingProcedureDescription.templateID = @"";
+    priorImagingProcedureDescription.loinc = @"55114-3";
+    priorImagingProcedureDescription.textType = ORKHL7CDAEntryTextTypePlain;
+    priorImagingProcedureDescription.title = @"Prior Imaging Procedure Descriptions";
+    
+    ORKHL7CDASectionTemplate *radiologyImpression = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyImpression.templateID = @"";
+    radiologyImpression.loinc = @"19005-8";
+    radiologyImpression.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyImpression.title = @"Radiology - Impression";
+
+    ORKHL7CDASectionTemplate *radiologyComparisonStudyObservation = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyComparisonStudyObservation.templateID = @"";
+    radiologyComparisonStudyObservation.loinc = @"19005-8";
+    radiologyComparisonStudyObservation.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyComparisonStudyObservation.title = @"Radiology Comparison Study - Observation";
+    
+    ORKHL7CDASectionTemplate *radiologyReasonForStudy = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyReasonForStudy.templateID = @"";
+    radiologyReasonForStudy.loinc = @"18785-6";
+    radiologyReasonForStudy.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyReasonForStudy.title = @"Radiology Reason For Study";
+    
+    ORKHL7CDASectionTemplate *radiologyStudyRecommendations = [[ORKHL7CDASectionTemplate alloc] init];
+    radiologyStudyRecommendations.templateID = @"";
+    radiologyStudyRecommendations.loinc = @"18783-1";
+    radiologyStudyRecommendations.textType = ORKHL7CDAEntryTextTypePlain;
+    radiologyStudyRecommendations.title = @"Radiology Study - Recommendations";
+    
+    ORKHL7CDASectionTemplate *requestedImageStudiesInformation = [[ORKHL7CDASectionTemplate alloc] init];
+    requestedImageStudiesInformation.templateID = @"";
+    requestedImageStudiesInformation.loinc = @"55115-0";
+    requestedImageStudiesInformation.textType = ORKHL7CDAEntryTextTypePlain;
+    requestedImageStudiesInformation.title = @"Requested Imaging Studies Information";
+    
+    ORKHL7CDASectionTemplate *hospitalCourse = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalCourse.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.5";
+    hospitalCourse.loinc = @"8648-8";
+    hospitalCourse.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalCourse.title = @"Hospital Course";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeDiagnosis = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeDiagnosis.templateID = @"2.16.840.1.113883.10.20.22.2.24";
+    hospitalDischargeDiagnosis.loinc = @"11535-2";
+    hospitalDischargeDiagnosis.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeDiagnosis.title = @"Hospital Discharge Diagnosis";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeMedications = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeMedications.templateID = @"2.16.840.1.113883.10.20.22.2.11";
+    hospitalDischargeMedications.loinc = @"10183-2";
+    hospitalDischargeMedications.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeMedications.title = @"Hospital Discharge Medications";
+    
+    ORKHL7CDASectionTemplate *dischargeDiet = [[ORKHL7CDASectionTemplate alloc] init];
+    dischargeDiet.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.33";
+    dischargeDiet.loinc = @"42344-2";
+    dischargeDiet.textType = ORKHL7CDAEntryTextTypePlain;
+    dischargeDiet.title = @"Discharge Diet";
+    
+    ORKHL7CDASectionTemplate *hospitalAdmissionsDiagnosis = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalAdmissionsDiagnosis.templateID = @"2.16.840.1.113883.10.20.22.2.43";
+    hospitalAdmissionsDiagnosis.loinc = @"46241-6";
+    hospitalAdmissionsDiagnosis.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalAdmissionsDiagnosis.title = @"Hospital Admissions Diagnosis";
+    
+    ORKHL7CDASectionTemplate *hospitalConsultations = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalConsultations.templateID = @"2.16.840.1.113883.10.20.22.2.42";
+    hospitalConsultations.loinc = @"18841-7";
+    hospitalConsultations.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalConsultations.title = @"Hospital Consultations";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeInstructions = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeInstructions.templateID = @"2.16.840.1.113883.10.20.22.2.41";
+    hospitalDischargeInstructions.loinc = @"55115-0";
+    hospitalDischargeInstructions.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeInstructions.title = @"Hospital Discharge Instructions";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargePhysical = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargePhysical.templateID = @"1.3.6.1.4.1.19376.1.5.3.1.3.26";
+    hospitalDischargePhysical.loinc = @"10184-0";
+    hospitalDischargePhysical.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargePhysical.title = @"Hospital Discharge Physical";
+    
+    ORKHL7CDASectionTemplate *hospitalDischargeStudiesSummary = [[ORKHL7CDASectionTemplate alloc] init];
+    hospitalDischargeStudiesSummary.templateID = @"2.16.840.1.113883.10.20.22.2.16";
+    hospitalDischargeStudiesSummary.loinc = @"11493-4";
+    hospitalDischargeStudiesSummary.textType = ORKHL7CDAEntryTextTypePlain;
+    hospitalDischargeStudiesSummary.title = @"Hospital Discharge Studies Summary";
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
             purpose, [NSNumber numberWithInteger:ORKHL7CDASectionTypePurpose],
             allergiesCoded, [NSNumber numberWithInteger:ORKHL7CDASectionTypeAllergiesCoded],
@@ -647,6 +850,30 @@
             pastMedicalHistory, [NSNumber numberWithInteger:ORKHL7CDASectionTypePastMedicalHistory],
             problemsOptional, [NSNumber numberWithInteger:ORKHL7CDASectionTypeProblemsOptional],
             reviewOfSystems, [NSNumber numberWithInteger:ORKHL7CDASectionTypeReviewOfSystems],
+            dicomObjectCatalog, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDICOMObjectCatalog],
+            diagnosticImagingFindings, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingFindings],
+            addendum, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingAddendum],
+            complications, [NSNumber numberWithInteger:ORKHL7CDASectionTypeComplications],
+            conclusions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeConclusions],
+            currentImagingProcedureDescriptions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeCurrentImagingProcedureDescriptions],
+            diagnosticImagingDocumentSummary, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingDocumentSummary],
+            diagnosticImagingKeyImages, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDiagnosticImagingKeyImages],
+            medicalGeneralHistory, [NSNumber numberWithInteger:ORKHL7CDASectionTypeMedicalGeneralHistory],
+            priorImagingProcedureDescription, [NSNumber numberWithInteger:ORKHL7CDASectionTypePriorImagingProcedureDescriptions],
+            radiologyImpression, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyImpression],
+            radiologyComparisonStudyObservation, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyComparisonStudyObservation],
+            radiologyReasonForStudy, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyReasonForStudy],
+            radiologyStudyRecommendations, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRadiologyStudyRecommendations],
+            requestedImageStudiesInformation, [NSNumber numberWithInteger:ORKHL7CDASectionTypeRequestedImageStudiesInformation],
+            hospitalCourse, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalCourse],
+            hospitalDischargeDiagnosis, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeDiagnosis],
+            hospitalDischargeMedications, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeMedications],
+            dischargeDiet, [NSNumber numberWithInteger:ORKHL7CDASectionTypeDischargeDiet],
+            hospitalAdmissionsDiagnosis, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalAdmissionsDiagnosis],
+            hospitalConsultations, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalConsultations],
+            hospitalDischargeInstructions, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeInstructions],
+            hospitalDischargePhysical, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargePhysical],
+            hospitalDischargeStudiesSummary, [NSNumber numberWithInteger:ORKHL7CDASectionTypeHospitalDischargeStudiesSummary],
             nil];
 }
 
