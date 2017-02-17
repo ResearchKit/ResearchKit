@@ -657,6 +657,30 @@ ORK_CLASS_AVAILABLE
 @end
 
 /**
+ The `ORKGoNoGoSample` class represents a single reading from the accelerometer.
+ 
+ The gonogo sample object records the time and magnitude of the acceleration. 
+ A gonogo sample is included in an `ORKGoNoGoResult` object, and is recorded by the
+ step view controller for the corresponding task.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKGoNoGoSample : NSObject <NSCopying, NSSecureCoding>
+
+/**
+ A relative timestamp indicating the time of the accelerometer event.
+ 
+ The timestamp is relative to the time the stimulus was displayed
+ */
+@property (nonatomic, assign) NSTimeInterval timestamp;
+
+/**
+ Magnitude of the acceleration event.
+ */
+@property (nonatomic, assign) double vectorMagnitude;
+
+@end
+
+/**
  The `ORKGoNoGoResult` class represents the result of a single successful attempt within an ORKGoNoGoStep.
  
  The `timestamp` property is equal to the value of systemUptime (in NSProcessInfo) when the stimulus occurred.
@@ -683,11 +707,6 @@ ORK_CLASS_AVAILABLE
   */
 @property (nonatomic, assign) NSTimeInterval timeToThreshold;
 
-/** 
-  Motion data recorded from beginning of attempt to threshold reached
-  */
-@property (nonatomic, strong) ORKFileResult *fileResult;
-
 /**
   YES if a go test and NO if a no go test
   */
@@ -697,6 +716,12 @@ ORK_CLASS_AVAILABLE
   Set to YES if the incorrect response is given i.e shaken for no go test or not shaken for a go test
   */
 @property (nonatomic, assign) BOOL incorrect;
+
+/**
+  An array of collected samples, in which each item is an `ORKGoNoGoSample`
+  object that represents an addition sample.
+  */
+@property (nonatomic, copy, nullable) NSArray<ORKGoNoGoSample*> *samples;
 
 @end
 
