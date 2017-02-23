@@ -80,7 +80,7 @@ You can run *ORKCatalog* on an *iOS device* or in the *iOS Simulator*.
 
 Tasks are subdivided into four categories: *Surveys*, *Survey Questions*, *Consent*,
 and *Active Tasks*. Each category mostly presents the examples in an alphabetically-ordered
-fahsion.
+fashion.
 
 Note that for the most part, the *ORKCatalog* source code uses a consistent ordering
 for the boilerplate code throughout the project. Within the `TaskListRow` enum potion

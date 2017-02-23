@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type I";
+"FITZPATRICK_SKIN_TYPE_II" = "Type II";
+"FITZPATRICK_SKIN_TYPE_III" = "Type III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Type V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Female";
 "GENDER_MALE" = "Male";
@@ -202,6 +210,7 @@
 "BUTTON_SAVE" = "Save";
 "BUTTON_CLEAR_ANSWER" = "Clear answer";
 "BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";
@@ -314,6 +323,7 @@
 "MEMORY_GAME_COMPLETE" = "Game Complete";
 "MEMORY_GAME_PAUSED_TITLE" = "Paused";
 "MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
@@ -452,6 +462,63 @@
 "TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
 "TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
 "TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
+
+/* Mood survey. */
+"MOOD_SURVEY_INTRO_DAILY_TITLE" = "Daily Check-In";
+"MOOD_SURVEY_INTRO_WEEKLY_TITLE" = "Weekly Check-In";
+"MOOD_SURVEY_INTRO_DAILY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, and pain level today as well as how well you slept and how much exercise you have done in the last day.";
+"MOOD_SURVEY_INTRO_WEEKLY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, pain level, how well you slept and how much exercise you have done in the past week.";
+"MOOD_SURVEY_INTRO_DETAIL" = "This activity should take less than two minutes to complete.";
+"MOOD_CUSTOM_GREAT" = "Great";
+"MOOD_CUSTOM_GOOD" = "Good";
+"MOOD_CUSTOM_AVERAGE" = "Average";
+"MOOD_CUSTOM_BAD" = "Bad";
+"MOOD_CUSTOM_TERRIBLE" = "Terrible";
+"MOOD_CLARITY_DAILY_PROMPT" = "Today, my thinking is:";
+"MOOD_CLARITY_WEEKLY_PROMPT" = "This week, my thinking has been:";
+"MOOD_CLARITY_GREAT" = "perfectly crisp!";
+"MOOD_CLARITY_GOOD" = "crisp";
+"MOOD_CLARITY_AVERAGE" = "\"not great, but not too bad\"";
+"MOOD_CLARITY_BAD" = "foggy";
+"MOOD_CLARITY_TERRIBLE" = "poor";
+"MOOD_OVERALL_DAILY_PROMPT" = "Today, my mood is:";
+"MOOD_OVERALL_WEEKLY_PROMPT" = "This week, my mood has been:";
+"MOOD_OVERALL_GREAT" = "fantastic!";
+"MOOD_OVERALL_GOOD" = "better than usual";
+"MOOD_OVERALL_AVERAGE" = "normal";
+"MOOD_OVERALL_BAD" = "down";
+"MOOD_OVERALL_TERRIBLE" = "at my lowest";
+"MOOD_PAIN_DAILY_PROMPT" = "Today, my pain level is:";
+"MOOD_PAIN_WEEKLY_PROMPT" = "This week, my pain level has been:";
+"MOOD_PAIN_GREAT" = "no hurt";
+"MOOD_PAIN_GOOD" = "hurts a little bit";
+"MOOD_PAIN_AVERAGE" = "hurts even more";
+"MOOD_PAIN_BAD" = "hurts a whole lot";
+"MOOD_PAIN_TERRIBLE" = "hurts worst";
+"MOOD_SLEEP_DAILY_PROMPT" = "The quality of my sleep last night was:";
+"MOOD_SLEEP_WEEKLY_PROMPT" = "The quality of my sleep this week was:";
+"MOOD_SLEEP_GREAT" = "best sleep ever";
+"MOOD_SLEEP_GOOD" = "better sleep than usual";
+"MOOD_SLEEP_AVERAGE" = "OK sleep";
+"MOOD_SLEEP_BAD" = "I wish I slept more";
+"MOOD_SLEEP_TERRIBLE" = "no sleep";
+"MOOD_EXERCISE_DAILY_PROMPT" = "The most I exercised in the last day was:";
+"MOOD_EXERCISE_WEEKLY_PROMPT" = "The most I exercised in the last week was:";
+"MOOD_EXERCISE_GREAT" = "strenuous exercise (heart beats rapidly)";
+"MOOD_EXERCISE_GOOD" = "moderate exercise (tiring but not exhausting)";
+"MOOD_EXERCISE_AVERAGE" = "mild exercise (some effort)";
+"MOOD_EXERCISE_BAD" = "minimal exercise (no effort)";
+"MOOD_EXERCISE_TERRIBLE" = "no exercise";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
+"TRAILMAKING_INTENDED_USE2" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
+"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

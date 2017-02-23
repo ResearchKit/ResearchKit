@@ -85,6 +85,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case audio
     case fitness
     case holePegTest
+	case moodSurvey
     case psat
     case reactionTime
     case shortWalk
@@ -100,6 +101,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case gonogoTest
+    case trailMaking
+    case videoInstruction
     
     class TaskListRowSection {
         var title: String
@@ -124,6 +127,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .booleanQuestion,
                     .dateQuestion,
                     .dateTimeQuestion,
+                    .heightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -152,6 +156,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .fitness,
                     .holePegTest,
                     .psat,
+                    .moodSurvey,
                     .reactionTime,
                     .shortWalk,
                     .spatialSpanMemory,
@@ -165,6 +170,11 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
                     .gonogoTest,
+                    .trailMaking
+                ]),
+            TaskListRowSection(title: "Miscellaneous", rows:
+                [
+                    .videoInstruction,
                 ]),
         ]}
     
@@ -285,7 +295,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
-        
+            
+        case .videoInstruction:
+            return NSLocalizedString("Video Instruction Task", comment: "")
+            
         case .kneeRangeOfMotion:
             return NSLocalizedString("Knee Range of Motion", comment: "")
             
@@ -294,6 +307,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .gonogoTest:
             return NSLocalizedString("Go/No-Go Visual Reaction Time", comment: "")
+            
+        case .moodSurvey:
+            return NSLocalizedString("Mood Survey", comment: "")
+            
+        case .trailMaking:
+            return NSLocalizedString("Trail Making Test", comment: "")
         }
     }
     
@@ -441,6 +460,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case fitnessTask
         case holePegTestTask
         case psatTask
+		case moodSurveyTask
         case reactionTime
         case shortWalkTask
         case spatialSpanMemoryTask
@@ -454,6 +474,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
         case gonogoTest
+        case trailMaking
+        
+        // Video instruction tasks.
+        case videoInstructionTask
+        case videoInstructionStep
     }
     
     // MARK: Properties
@@ -540,6 +565,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .holePegTest:
             return holePegTestTask
+
+        case .moodSurvey:
+            return moodSurveyTask
             
         case .psat:
             return PSATTask
@@ -573,7 +601,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return tremorTestTask
-        
+
         case .kneeRangeOfMotion:
             return kneeRangeOfMotion
         
@@ -582,6 +610,12 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .gonogoTest:
             return gonogoTask
+            
+        case .trailMaking:
+            return trailMaking;
+        
+        case .videoInstruction:
+            return videoInstruction
         }
     }
 
@@ -1255,6 +1289,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKNavigableOrderedTask.holePegTest(withIdentifier: String(describing:Identifier.holePegTestTask), intendedUseDescription: exampleDescription, dominantHand: .right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: [])
     }
     
+    /// This task presents the Hole Peg Test pre-defined active task.
+    private var moodSurveyTask: ORKTask {
+        return ORKOrderedTask.moodSurvey(withIdentifier: String(describing:Identifier.moodSurveyTask), intendedUseDescription: exampleDescription, frequency: .daily, customQuestionText: nil, options: [])
+    }
+    
     /// This task presents the PSAT pre-defined active task.
     private var PSATTask: ORKTask {
         return ORKOrderedTask.psatTask(withIdentifier: String(describing:Identifier.psatTask), intendedUseDescription: exampleDescription, presentationMode: ORKPSATPresentationMode.auditory.union(.visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: [])
@@ -1335,7 +1374,22 @@ enum TaskListRow: Int, CustomStringConvertible {
         let successSound = SystemSound(soundURL: successSoundURL)!
         return ORKOrderedTask.gonogoTask(withIdentifier: String(describing:Identifier.reactionTime), intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 9, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }
+    
+    /// This task presents a trail making task
+    private var trailMaking: ORKTask {
+        let intendedUseDescription = "Tests visual attention and task switching"
+        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
+    }
 
+    /// This task presents a video instruction step
+    private var videoInstruction: ORKTask {
+        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(describing: Identifier.videoInstructionStep))
+        videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
+        videoInstructionStep.videoURL = URL(string: "https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov")
+        videoInstructionStep.thumbnailTime = 2 // Customizable thumbnail timestamp
+        return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**

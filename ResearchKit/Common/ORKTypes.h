@@ -62,6 +62,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeMultipleChoice,
     
     /**
+     In a multiple component choice picker, the participant can pick one choice from each component.
+     */
+    ORKQuestionTypeMultiplePicker,
+    
+    /**
      The decimal question type asks the participant to enter a decimal number.
      */
     ORKQuestionTypeDecimal,
@@ -268,6 +273,31 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
 
     /// United States customary system.
     ORKMeasurementSystemUSC,
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ Frequency with which the mood question is asked.
+ 
+ Used by `ORKMoodQuestionStep` to setup the question.
+ */
+typedef NS_ENUM(NSUInteger, ORKMoodSurveyFrequency) {
+    ORKMoodSurveyFrequencyDaily,
+    ORKMoodSurveyFrequencyWeekly,
+} ORK_ENUM_AVAILABLE;
+
+/**
+ Type of mood survey question.
+ 
+ Used by `ORKMoodScaleAnswerFormat` to setup the choices
+ */
+typedef NS_ENUM(NSUInteger, ORKMoodQuestionType) {
+    ORKMoodQuestionTypeCustom,
+    ORKMoodQuestionTypeClarity,
+    ORKMoodQuestionTypeOverall,
+    ORKMoodQuestionTypePain,
+    ORKMoodQuestionTypeSleep,
+    ORKMoodQuestionTypeExcercise
 } ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_END

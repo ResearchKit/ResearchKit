@@ -32,6 +32,7 @@
 
 #import "ORKESerialization.h"
 
+@import ResearchKit;
 @import ResearchKit.Private;
 
 @import MapKit;
@@ -398,6 +399,7 @@ encondingTable =
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
               PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(stepModifiers, ORKStepModifier, NSMutableDictionary, YES, nil, nil),
               PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
@@ -469,6 +471,17 @@ encondingTable =
          },
          (@{
             PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
+            PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKVideoInstructionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVideoInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(videoURL, NSURL, NSObject, YES,
+                     ^id(id url) { return [(NSURL *)url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; }),
+            PROPERTY(thumbnailTime, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKCompletionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -684,6 +697,13 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKTrailmakingStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTrailmakingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(trailType, NSString, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKTowerOfHanoiStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTowerOfHanoiStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -802,7 +822,8 @@ encondingTable =
             return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
-          PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil)
+          PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil),
+          PROPERTY(footnote, NSString, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKFormItem,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -815,6 +836,22 @@ encondingTable =
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKPageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKNavigablePageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKNavigablePageStep *step = [[ORKNavigablePageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
@@ -835,6 +872,7 @@ encondingTable =
           PROPERTY(calendar, NSCalendar, NSObject, YES,
                    ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
                    ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
+          PROPERTY(shouldRequestAuthorization, NSNumber, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -850,6 +888,7 @@ encondingTable =
           PROPERTY(numericAnswerStyle, NSNumber, NSObject, NO,
                    ^id(id num) { return ORKNumericAnswerStyleToString(((NSNumber *)num).integerValue); },
                    ^id(id string) { return @(ORKNumericAnswerStyleFromString(string)); }),
+          PROPERTY(shouldRequestAuthorization, NSNumber, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKAnswerFormat,
         nil,
@@ -861,8 +900,15 @@ encondingTable =
         },
         (@{
           PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
-          
           })),
+   ENTRY(ORKMultipleValuePickerAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKMultipleValuePickerAnswerFormat alloc] initWithValuePickers:GETPROP(dict, valuePickers) separator:GETPROP(dict, separator)];
+         },
+         (@{
+            PROPERTY(valuePickers, ORKValuePickerAnswerFormat, NSArray, NO, nil, nil),
+            PROPERTY(separator, NSString, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKImageChoiceAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
@@ -870,6 +916,13 @@ encondingTable =
         (@{
           PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
           })),
+   ENTRY(ORKMoodScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKMoodScaleAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
+         },
+         (@{
+            PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
+            })),
   ENTRY(ORKTextChoiceAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue textChoices:GETPROP(dict, textChoices)];
@@ -1094,6 +1147,19 @@ encondingTable =
                     ^id(id value) { return value?dictionaryFromCGRect(((NSValue *)value).CGRectValue):nil; },
                     ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
            })),
+   ENTRY(ORKTrailmakingTap,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(index, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(incorrect, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKTrailmakingResult,
+         nil,
+         (@{
+            PROPERTY(taps, ORKTrailmakingTap, NSArray, NO, nil, nil),
+            PROPERTY(numberOfErrors, NSNumber, NSObject, NO, nil, nil)
+            })),
   ENTRY(ORKSpatialSpanMemoryGameTouchSample,
         nil,
         (@{
@@ -1257,6 +1323,17 @@ encondingTable =
          (@{
             PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
             })),
+   ENTRY(ORKMoodScaleQuestionResult,
+         nil,
+         (@{
+            PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKMultipleComponentQuestionResult,
+         nil,
+         (@{
+            PROPERTY(componentsAnswer, NSObject, NSObject, NO, nil, nil),
+            PROPERTY(separator, NSString, NSObject, NO, nil, nil)
+            })),
    ENTRY(ORKBooleanQuestionResult,
          nil,
          (@{
@@ -1358,6 +1435,17 @@ encondingTable =
          nil,
          (@{
             PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
+            PROPERTY(isPreviousResult, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKPageResult,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKVideoInstructionStepResult,
+         nil,
+         (@{
+            PROPERTY(playbackStoppedTime, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(playbackCompleted, NSNumber, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];
