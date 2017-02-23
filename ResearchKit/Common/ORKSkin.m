@@ -187,6 +187,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         30,        30,        30,        24,        30,        30},      // ORKScreenMetricFontSizeSurveyHeadline
         {         32,        32,        32,        28,        32,        32},      // ORKScreenMetricMaxFontSizeSurveyHeadline
         {         17,        17,        17,        16,        17,        17},      // ORKScreenMetricFontSizeSubheadline
+        {         12,        12,        12,        11,        12,        12},      // ORKScreenMetricFontSizeFootnote
         {         62,        62,        51,        51,        62,        62},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
         {         62,        62,        43,        43,        62,        62},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
         {         36,        36,        32,        32,        36,        36},      // ORKScreenMetricCaptionBaselineToInstructionBaseline
@@ -213,7 +214,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         10,        10,         0,         0,        10,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {        322,       274,       217,       217,       446,       446},      // ORKScreenMetricVerticalScaleHeight
-        {        156,       156,       156,       156,       256,       256},      // ORKScreenMetricSignatureViewHeight
+        {        208,       208,       208,       198,       256,       256},      // ORKScreenMetricSignatureViewHeight
         {        384,       324,       304,       304,       384,       384},      // ORKScreenMetricPSATKeyboardViewWidth
         {        197,       167,       157,       157,       197,       197},      // ORKScreenMetricPSATKeyboardViewHeight
         {        238,       238,       150,        90,       238,       238},      // ORKScreenMetricLocationQuestionMapHeight

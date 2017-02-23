@@ -66,6 +66,12 @@ struct StudyTasks {
         return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
     }()
     
+    static let trailmakingTask: ORKOrderedTask = {
+        let intendedUseDescription = "Tests visual attention and task switching"
+        
+        return ORKOrderedTask.trailmakingTask(withIdentifier: "TrailmakingTask", intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType: .B, options: ORKPredefinedTaskOption())
+    }()
+    
     static let gonogoTask: ORKOrderedTask = {
         let intendedUseDescription = "Reaction time is a measure of quickess."
         
