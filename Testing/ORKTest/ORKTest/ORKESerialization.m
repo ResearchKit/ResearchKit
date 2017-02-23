@@ -32,6 +32,7 @@
 
 #import "ORKESerialization.h"
 
+@import ResearchKit;
 @import ResearchKit.Private;
 
 @import MapKit;
@@ -127,6 +128,20 @@ static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
 
 static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
+}
+
+static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
+    return @{
+             @"coordinate": dictionaryFromCoordinate(region.center),
+             @"radius": @(region.radius),
+             @"identifier": region.identifier
+             };
+}
+
+static CLCircularRegion *CircularRegionFromDictionary(NSDictionary *dict) {
+    return [[CLCircularRegion alloc] initWithCenter:coordinateFromDictionary(dict[@"coordinate"])
+                                             radius:((NSNumber *)dict[@"radius"]).doubleValue
+                                         identifier:dict[@"identifier"]];
 }
 
 static NSMutableDictionary *ORKESerializationEncodingTable();
@@ -384,6 +399,7 @@ encondingTable =
          },(@{
               PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
               PROPERTY(skipStepNavigationRules, ORKSkipStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(stepModifiers, ORKStepModifier, NSMutableDictionary, YES, nil, nil),
               PROPERTY(shouldReportProgress, NSNumber, NSObject, YES, nil, nil),
               })),
    ENTRY(ORKStep,
@@ -455,6 +471,16 @@ encondingTable =
          },
          (@{
             PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKVideoInstructionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVideoInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(videoURL, NSURL, NSObject, YES,
+                     ^id(id url) { return [(NSURL *)url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; }),
+            PROPERTY(thumbnailTime, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKCompletionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -787,6 +813,22 @@ encondingTable =
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKPageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKPageStep *step = [[ORKPageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKNavigablePageStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKNavigablePageStep *step = [[ORKNavigablePageStep alloc] initWithIdentifier:GETPROP(dict, identifier) pageTask:GETPROP(dict, pageTask)];
+             return step;
+         },
+         (@{
+            PROPERTY(pageTask, ORKOrderedTask, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
@@ -1277,25 +1319,12 @@ encondingTable =
                      ^id(id dict) { return [NSValue valueWithMKCoordinate:coordinateFromDictionary(dict)]; }),
             PROPERTY(region, CLCircularRegion, NSObject, NO,
                      ^id(id value) {
-                         if ( nil == value ) {
-                             return nil;
-                         }
-                         CLCircularRegion *region = value;
-                         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                         dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
-                         dict[@"radius"] = @(region.radius);
-                         dict[@"identifier"] = region.identifier;
-                         return dict;
+                         return value ?
+                         dictionaryFromCircularRegion((CLCircularRegion *)value)
+                         : nil;
                      },
                      ^id(id dict) {
-                         NSDictionary *regionDict = dict;
-                         if (nil == regionDict) {
-                             return nil;
-                         }
-                         CLLocationCoordinate2D coordinate = coordinateFromDictionary(regionDict[@"coordinate"]);
-                         NSNumber *radius = regionDict[@"radius"];
-                         NSString *identifier = regionDict[@"identifier"];
-                         return [[CLCircularRegion alloc] initWithCenter:coordinate radius:radius.doubleValue identifier:identifier];
+                         return dict ? CircularRegionFromDictionary(dict) : nil;
                      }),
             })),
    ENTRY(ORKLocationQuestionResult,
@@ -1334,6 +1363,17 @@ encondingTable =
          nil,
          (@{
             PROPERTY(enabledAssistiveTechnology, NSString, NSObject, YES, nil, nil),
+            PROPERTY(isPreviousResult, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKPageResult,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKVideoInstructionStepResult,
+         nil,
+         (@{
+            PROPERTY(playbackStoppedTime, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(playbackCompleted, NSNumber, NSObject, YES, nil, nil),
             })),
    
    } mutableCopy];

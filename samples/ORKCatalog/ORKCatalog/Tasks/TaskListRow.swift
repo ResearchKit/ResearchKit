@@ -59,7 +59,6 @@ class SystemSound {
     types of functionality supported by the ResearchKit framework.
 */
 enum TaskListRow: Int, CustomStringConvertible {
-
     case form = 0
     case survey
     case booleanQuestion
@@ -91,6 +90,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case shortWalk
     case spatialSpanMemory
     case timedWalk
+    case timedWalkWithTurnAround
     case toneAudiometry
     case towerOfHanoi
     case tremorTest
@@ -99,6 +99,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case videoInstruction
     
     class TaskListRowSection {
         var title: String
@@ -123,6 +124,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .booleanQuestion,
                     .dateQuestion,
                     .dateTimeQuestion,
+                    .heightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -155,6 +157,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .shortWalk,
                     .spatialSpanMemory,
                     .timedWalk,
+                    .timedWalkWithTurnAround,
                     .toneAudiometry,
                     .towerOfHanoi,
                     .tremorTest,
@@ -162,6 +165,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                ]),
+            TaskListRowSection(title: "Miscellaneous", rows:
+                [
+                    .videoInstruction,
                 ]),
         ]}
     
@@ -265,6 +272,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .timedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
             
+        case .timedWalkWithTurnAround:
+            return NSLocalizedString("Timed Walk with Turn Around", comment: "")
+            
         case .toneAudiometry:
             return NSLocalizedString("Tone Audiometry", comment: "")
             
@@ -279,7 +289,10 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return NSLocalizedString("Tremor Test", comment: "")
-        
+            
+        case .videoInstruction:
+            return NSLocalizedString("Video Instruction Task", comment: "")
+            
         case .kneeRangeOfMotion:
             return NSLocalizedString("Knee Range of Motion", comment: "")
             
@@ -436,6 +449,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case shortWalkTask
         case spatialSpanMemoryTask
         case timedWalkTask
+        case timedWalkWithTurnAroundTask
         case toneAudiometryTask
         case towerOfHanoi
         case tremorTestTask
@@ -443,6 +457,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        
+        // Video instruction tasks.
+        case videoInstructionTask
+        case videoInstructionStep
     }
     
     // MARK: Properties
@@ -544,6 +562,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .timedWalk:
             return timedWalkTask
+
+        case .timedWalkWithTurnAround:
+            return timedWalkWithTurnAroundTask
             
         case .toneAudiometry:
             return toneAudiometryTask
@@ -559,12 +580,15 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .tremorTest:
             return tremorTestTask
-        
+
         case .kneeRangeOfMotion:
             return kneeRangeOfMotion
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
+        
+        case .videoInstruction:
+            return videoInstruction
         }
     }
 
@@ -1263,10 +1287,14 @@ enum TaskListRow: Int, CustomStringConvertible {
 
     /// This task presents the Timed Walk pre-defined active task.
     private var timedWalkTask: ORKTask {
-        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0,
-            includeAssistiveDeviceForm: true, options: [])
+        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, includeAssistiveDeviceForm: true, options: [])
     }
-    
+
+    /// This task presents the Timed Walk with turn around pre-defined active task.
+    private var timedWalkWithTurnAroundTask: ORKTask {
+        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkWithTurnAroundTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, turnAroundTimeLimit: 60.0, includeAssistiveDeviceForm: true, options: [])
+    }
+
     /// This task presents the Tone Audiometry pre-defined active task.
     private var toneAudiometryTask: ORKTask {
         return ORKOrderedTask.toneAudiometryTask(withIdentifier: String(describing:Identifier.toneAudiometryTask), intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: [])
@@ -1307,6 +1335,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
     }
 
+    /// This task presents a video instruction step
+    private var videoInstruction: ORKTask {
+        let videoInstructionStep = ORKVideoInstructionStep(identifier: String(describing: Identifier.videoInstructionStep))
+        videoInstructionStep.title = NSLocalizedString("Video Instruction Step", comment: "")
+        videoInstructionStep.videoURL = URL(string: "https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov")
+        videoInstructionStep.thumbnailTime = 2 // Customizable thumbnail timestamp
+        return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**

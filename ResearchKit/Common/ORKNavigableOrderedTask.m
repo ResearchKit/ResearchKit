@@ -48,6 +48,7 @@
 @implementation ORKNavigableOrderedTask {
     NSMutableDictionary<NSString *, ORKStepNavigationRule *> *_stepNavigationRules;
     NSMutableDictionary<NSString *, ORKSkipStepNavigationRule *> *_skipStepNavigationRules;
+    NSMutableDictionary<NSString *, ORKStepModifier *> *_stepModifiers;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
@@ -118,6 +119,34 @@
     return [_skipStepNavigationRules copy];
 }
 
+- (void)setStepModifier:(ORKStepModifier *)stepModifier forStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepModifier);
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    if (!_stepModifiers) {
+        _stepModifiers = [NSMutableDictionary new];
+    }
+    _stepModifiers[stepIdentifier] = stepModifier;
+}
+
+- (ORKStepModifier *)stepModifierForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    return _stepModifiers[stepIdentifier];
+}
+
+- (void)removeStepModifierForStepIdentifier:(NSString *)stepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepIdentifier);
+    
+    [_stepModifiers removeObjectForKey:stepIdentifier];
+}
+
+- (NSDictionary<NSString *, ORKStepModifier *> *)stepModifiers {
+    if (!_stepModifiers) {
+        return @{};
+    }
+    return [_stepModifiers copy];
+}
+
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *nextStep = nil;
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
@@ -138,6 +167,12 @@
             return [self stepAfterStep:nextStep withResult:result];
         }
     }
+    
+    if (nextStep != nil) {
+        ORKStepModifier *stepModifier = [self stepModifierForStepIdentifier:nextStep.identifier];
+        [stepModifier modifyStep:nextStep withTaskResult:result];
+    }
+    
     return nextStep;
 }
 
@@ -187,6 +222,7 @@
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, skipStepNavigationRules, NSString, ORKSkipStepNavigationRule);
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepModifiers, NSString, ORKStepModifier);
         ORK_DECODE_BOOL(aDecoder, shouldReportProgress);
     }
     return self;
@@ -197,6 +233,7 @@
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
     ORK_ENCODE_OBJ(aCoder, skipStepNavigationRules);
+    ORK_ENCODE_OBJ(aCoder, stepModifiers);
     ORK_ENCODE_BOOL(aCoder, shouldReportProgress);
 }
 
@@ -206,6 +243,7 @@
     __typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
     task->_skipStepNavigationRules = ORKMutableDictionaryCopyObjects(_skipStepNavigationRules);
+    task->_stepModifiers = ORKMutableDictionaryCopyObjects(_stepModifiers);
     task->_shouldReportProgress = _shouldReportProgress;
     return task;
 }
@@ -217,11 +255,12 @@
     return isParentSame
     && ORKEqualObjects(self.stepNavigationRules, castObject.stepNavigationRules)
     && ORKEqualObjects(self.skipStepNavigationRules, castObject.skipStepNavigationRules)
+    && ORKEqualObjects(self.stepModifiers, castObject.stepModifiers)
     && self.shouldReportProgress == castObject.shouldReportProgress;
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ _stepNavigationRules.hash ^ _skipStepNavigationRules.hash ^ (_shouldReportProgress ? 0xf : 0x0);
+    return super.hash ^ _stepNavigationRules.hash ^ _skipStepNavigationRules.hash ^ _stepModifiers.hash ^ (_shouldReportProgress ? 0xf : 0x0);
 }
 
 #pragma mark - Predefined
