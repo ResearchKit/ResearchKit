@@ -76,8 +76,19 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Generate the type of tests we are going to display
     // Always do go first, and make sure there is at least 1 no-go
     tests = [NSMutableArray array];
-    [tests addObject:@YES];
-    [tests addObjectsFromArray:[self createRandomArray:[self gonogoTimeStep].numberOfAttempts - 1]];
+    [tests addObject:[NSNumber numberWithBool:YES]];
+    while (tests.count < [self gonogoTimeStep].numberOfAttempts) {
+        [tests addObject:[NSNumber numberWithBool:((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667]];
+    }
+    
+    // Check to make sure we have a no go
+    BOOL hasNoGo = [tests containsObject:@NO];
+    
+    // If none of the test are a 'no go', put a 'no go' in the array in a random position
+    // unless the array is size 1 since we always want the first test to be a 'go'
+    if (!hasNoGo && tests.count > 1) {
+        [tests setObject:@NO atIndexedSubscript:arc4random_uniform(tests.count - 1) + 1];
+    }
     
     go = [self getNextTestType];
     
@@ -97,31 +108,6 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     _shouldIndicateFailure = NO;
-}
-
-- (NSArray<NSNumber*>*)createRandomArray:(int)size {
-    NSMutableArray *res = [NSMutableArray array];
-    
-    int numNo = arc4random_uniform(ceil(size / 3.0)) + 1;
-    for (int i = 0; i < numNo; i++) {
-        [res addObject:@NO];
-    }
-    
-    while (res.count < size) {
-        [res addObject:@YES];
-    }
-    
-    // Fisher Yates shuffle
-    NSUInteger count = res.count;
-    if (count > 1) {
-        for (NSUInteger i = 0; i < count - 1; ++i) {
-            NSInteger remainingCount = count - i;
-            NSInteger exchangeIndex = i + arc4random_uniform((u_int32_t)remainingCount);
-            [res exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
-        }
-    }
-    
-    return res;
 }
 
 #pragma mark - ORKActiveStepViewController
@@ -295,16 +281,13 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (BOOL)getNextTestType {
-    
-    // If we have run out of random values since the user has been making mistakes
-    // then generate another full set
-    if (tests.count == 0) {
-        tests = [self createRandomArray: [self gonogoTimeStep].numberOfAttempts];
+    if (tests.count > 0) {
+        BOOL res = [[tests firstObject] boolValue];
+        [tests removeObjectAtIndex:0];
+        return res;
+    } else {
+        return ((float)arc4random_uniform(RAND_MAX) / RAND_MAX) < 0.667;
     }
-    
-    BOOL res = [[tests firstObject] boolValue];
-    [tests removeObjectAtIndex:0];
-    return res;
 }
 
 - (void)resetAfterDelay:(NSTimeInterval)delay {
