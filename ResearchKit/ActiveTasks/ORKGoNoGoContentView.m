@@ -37,6 +37,8 @@
 
 @implementation ORKGoNoGoContentView {
     ORKGoNoGoStimulusView *_stimulusView;
+    NSTimer *_timer;
+    void (^_completion)(void);
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -70,15 +72,24 @@
 }
 
 - (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion {
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _stimulusView.hidden = YES;
-        _stimulusView.backgroundColor = weakSelf.stimulusColor;
-        
-        if (completion) {
-            completion();
-        }
-    });
+    _completion = completion;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(timerDidFire) userInfo:nil repeats:NO];
+}
+
+- (void)timerDidFire {
+    _timer = nil;
+    _stimulusView.hidden = YES;
+    _stimulusView.backgroundColor = self.stimulusColor;
+    
+    if (_completion) {
+        _completion();
+        _completion = nil;
+    }
+}
+
+- (void)cancelReset {
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)addStimulusView {
