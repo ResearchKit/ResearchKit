@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion;
 
+- (void)cancelReset;
+
 @end
 
 NS_ASSUME_NONNULL_END
