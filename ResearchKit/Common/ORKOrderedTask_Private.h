@@ -53,6 +53,7 @@ FOUNDATION_EXPORT NSString *const ORKSpatialSpanMemoryStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKToneAudiometryPracticeStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKToneAudiometryStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKReactionTimeStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKGoNoGoStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKHolePegTestDominantPlaceStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKHolePegTestDominantRemoveStepIdentifier;
 FOUNDATION_EXPORT NSString *const ORKHolePegTestNonDominantPlaceStepIdentifier;
@@ -63,6 +64,12 @@ FOUNDATION_EXPORT NSString *const ORKPedometerRecorderIdentifier;
 FOUNDATION_EXPORT NSString *const ORKDeviceMotionRecorderIdentifier;
 FOUNDATION_EXPORT NSString *const ORKLocationRecorderIdentifier;
 FOUNDATION_EXPORT NSString *const ORKHeartRateRecorderIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveyCustomQuestionStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveyClarityQuestionStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveyOverallQuestionStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveySleepQuestionStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveyExerciseQuestionStepIdentifier;
+FOUNDATION_EXPORT NSString *const ORKMoodSurveyPainQuestionStepIdentifier;
 
 FOUNDATION_EXPORT void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step);
 

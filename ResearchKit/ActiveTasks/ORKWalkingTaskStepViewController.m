@@ -142,6 +142,7 @@
 }
 
 - (ORKWalkingTaskStep *)walkingTaskStep {
+    NSAssert(self.step == nil || [self.step isKindOfClass:[ORKWalkingTaskStep class]], @"Expected step subclass of ORKWalkingTaskStep");
     return (ORKWalkingTaskStep *)self.step;
 }
 

@@ -50,6 +50,7 @@
 #import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
+#import <ResearchKit/ORKGoNoGoStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKPSATStep.h>
@@ -62,6 +63,7 @@
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
+#import <ResearchKit/ORKTrailmakingStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
 
 #import <ResearchKit/ORKTaskViewController_Private.h>

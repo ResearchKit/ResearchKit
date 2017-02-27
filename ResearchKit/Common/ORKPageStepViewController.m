@@ -168,7 +168,8 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 - (ORKStepResult *)result {
     ORKStepResult *result = [super result];
-    result.results = [self.pageResult flattenResults];
+    NSArray *pageResults = [self.pageResult flattenResults];
+    result.results = self.addedResults ? [self.addedResults arrayByAddingObjectsFromArray:pageResults] : pageResults;
     return result;
 }
 

@@ -187,6 +187,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         30,        30,        30,        24,        30,        30},      // ORKScreenMetricFontSizeSurveyHeadline
         {         32,        32,        32,        28,        32,        32},      // ORKScreenMetricMaxFontSizeSurveyHeadline
         {         17,        17,        17,        16,        17,        17},      // ORKScreenMetricFontSizeSubheadline
+        {         12,        12,        12,        11,        12,        12},      // ORKScreenMetricFontSizeFootnote
         {         62,        62,        51,        51,        62,        62},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
         {         62,        62,        43,        43,        62,        62},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
         {         36,        36,        32,        32,        36,        36},      // ORKScreenMetricCaptionBaselineToInstructionBaseline

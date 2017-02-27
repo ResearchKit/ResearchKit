@@ -30,8 +30,9 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKTask.h>
+@import AudioToolbox;
 
+#import <ResearchKit/ORKTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -222,6 +223,11 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
     /// Task should test the both limbs (random order)
     ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
 } ORK_ENUM_AVAILABLE;
+
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
 
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
@@ -577,6 +583,60 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                            options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined task that tests the participant's reaction time and impulsiveness.
+ 
+ In a Go/No-Go task, the participant is asked to move the device sharply in any
+ direction in response to a visual cue. You can use this task to accurately assess the participant's
+ simple reaction time. Randomly they will be given a cue to not shake the device, this tests 
+ impulsiveness
+ 
+ A Go/No-Go time task finishes when the participant has completed the required
+ number of attempts successfully. For a go, an attempt is successful when the participant exerts acceleration
+ greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
+ `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
+ `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
+ before `timeout` has elapsed. If unsuccessful, the result is not reported and the participant must
+ try again to proceed with the task. For a no go, the sucess condition is reversed
+ 
+ Data collected by the task is in the form of ORKGoNoGOTimeResult objects. These
+ objects contain if it was a go or no go if it was a success, and a timestamp representing the delivery,
+ of the stimulus and an ORKFileResult, which references the motion data collected during an attempt. 
+ The researcher can use these to evaluate the response to the stimulus and calculate the reaction time.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the
+                                    study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the
+                                    default localized text is displayed.
+ @param maximumStimulusInterval     The maximum interval before the stimulus is delivered.
+ @param minimumStimulusInterval     The minimum interval before the stimulus is delivered.
+ @param thresholdAcceleration       The acceleration required to end a reaction time test.
+ @param numberOfAttempts            The number of successful attempts required before the task is
+                                    complete. The active step result will contain this many
+                                    child results if the task is completed.
+ @param timeout                     The interval permitted after the stimulus until the test fails,
+                                    if the threshold is not reached.
+ @param successSoundID              The sound to play after a successful attempt.
+ @param timeoutSoundID              The sound to play after an attempt that times out.
+ @param failureSoundID              The sound to play after an unsuccessful attempt.
+ @param options                     Options that affect the features of the predefined task.
+ 
+ @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
+ */
+
++ (ORKOrderedTask *)gonogoTaskWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                     maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                     minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                       thresholdAcceleration:(double)thresholdAcceleration
+                            numberOfAttempts:(int)numberOfAttempts
+                                     timeout:(NSTimeInterval)timeout
+                                successSound:(SystemSoundID)successSoundID
+                                timeoutSound:(SystemSoundID)timeoutSoundID
+                                failureSound:(SystemSoundID)failureSoundID
+                                     options:(ORKPredefinedTaskOption)options;
+
+/**
  Returns a predefined task that consists of a Tower of Hanoi puzzle.
  
  In a Tower of Hanoi task, the participant is asked to solve the classic puzzle in as few moves as possible.
@@ -730,6 +790,54 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                         activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                   options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined survey that asks the user questions about their mood and general health.
+ 
+ The mood survey includes questions about the daily or weekly mental and physical health status and
+ includes asking about clarity of thinking, overall mood, pain, sleep and exercise. Additionally, 
+ the survey is setup to allow for an optional custom question that uses a similar-looking set of images
+ as the other questions.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                collected. If the value of this parameter is `nil`, the default
+                                localized text is displayed.
+ @param frequency               How frequently the survey is asked (daily or weekly)
+ @param customQuestionText      A localized string to use for a custom question. If `nil`, this step
+                                is not included.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An mood survey that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)moodSurveyWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   frequency:(ORKMoodSurveyFrequency)frequency
+                          customQuestionText:(nullable NSString*)customQuestionText
+                                     options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures visual attention and task switching.
+ 
+ In a trail making test, the participant is asked to connect a series of cicles labelled 1,2,3... or
+ 1,A,2,B,3,C... and time to complete the test is recorded
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param trailmakingInstruction  Instructional content describing what the user needs to do when
+                                  the task begins. If the value of this parameter is `nil`,
+ @param trailType               Type of trail to display. Either @"A" or @"B"
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active trail making test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options;
 
 @end
 
