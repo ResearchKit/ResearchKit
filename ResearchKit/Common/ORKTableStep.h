@@ -84,7 +84,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @optional
 - (void)registerCellsForTableView:(UITableView *)tableView;
-    
+
+/**
+ Optional override to return custom header title for section. The default return `nil`.
+ 
+ @param tableView       The table view for custom section header title
+ @param section         The section for this custom header title
+ @return                The custom header title for this section
+ */
+@optional
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;
+
+/**
+ Optional override to return custom header view for section. The default return `nil`.
+ 
+ @param tableView       The table view for custom section header view
+ @param section         The section for this custom header view
+ @return                The custom header view for this section
+ */
+@optional
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+
 @end
 
 /**
