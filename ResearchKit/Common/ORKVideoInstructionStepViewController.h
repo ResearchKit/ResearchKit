@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,22 +29,18 @@
  */
 
 
-#import "ORKInstructionStepViewController.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKInstructionStepView;
-
-@interface ORKInstructionStepViewController ()
-
-@property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
-
-// Use button title "Get started" instead of "Next".
-- (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;
-
-- (void)stepDidChange;
+/**
+ An `ORKVideoInstructionStepViewController` object is the view controller for an `ORKVideoInstructionStep` object.
+ 
+ In general, you don't need to instantiate an video instruction step view controller directly.
+ Instead, add an video instruction step to a task and present the task using a
+ task view controller. When appropriate, the task view controller instantiates the step
+ view controller for the step.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKVideoInstructionStepViewController : ORKInstructionStepViewController
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -858,8 +858,8 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.duration == castObject.distanceInMeters) &&
-            (self.duration == castObject.timeLimit) &&
+            (self.distanceInMeters == castObject.distanceInMeters) &&
+            (self.timeLimit == castObject.timeLimit) &&
             (self.duration == castObject.duration));
 }
 
@@ -869,8 +869,8 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTimedWalkResult *result = [super copyWithZone:zone];
-    result.duration = self.distanceInMeters;
-    result.duration = self.timeLimit;
+    result.distanceInMeters = self.distanceInMeters;
+    result.timeLimit = self.timeLimit;
     result.duration = self.duration;
     return result;
 }
@@ -2238,6 +2238,7 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 
 @end
 
+
 @implementation ORKSignatureResult
 
 - (instancetype)initWithSignatureImage:(UIImage *)signatureImage
@@ -2290,6 +2291,52 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
+
+@implementation ORKVideoInstructionStepResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFloat:self.playbackStoppedTime forKey:@"playbackStoppedTime"];
+    ORK_ENCODE_BOOL(aCoder, playbackCompleted);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.playbackStoppedTime = [aDecoder decodeFloatForKey:@"playbackStoppedTime"];
+        ORK_DECODE_BOOL(aDecoder, playbackCompleted);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSNumber *playbackStoppedTime = [NSNumber numberWithFloat:self.playbackStoppedTime];
+    return super.hash ^ [playbackStoppedTime hash] ^ self.playbackCompleted;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.playbackStoppedTime == castObject.playbackStoppedTime &&
+            self.playbackCompleted == castObject.playbackCompleted);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKVideoInstructionStepResult *result = [super copyWithZone:zone];
+    result->_playbackStoppedTime = self.playbackStoppedTime;
+    result->_playbackCompleted = self.playbackCompleted;
+    return result;
+}
+
+@end
+
 
 @implementation ORKPageResult
 
