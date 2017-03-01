@@ -113,7 +113,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
-        ORK_DECODE_OBJ(aDecoder, footnote);
+        ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
     }
     return self;
 }
