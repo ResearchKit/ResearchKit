@@ -308,7 +308,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     result.endDate = parentResult.endDate;
     
     // Add the result
-    parentResult.results = self.addedResults ? [self.addedResults arrayByAddingObject:result] : @[result];
+    parentResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return parentResult;
 }

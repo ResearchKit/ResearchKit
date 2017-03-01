@@ -211,7 +211,9 @@
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
-    sResult.results = [self.addedResults arrayByAddingObjectsFromArray:_recorderResults] ? : _recorderResults;
+    if (_recorderResults) {
+        sResult.results = [sResult.results arrayByAddingObjectsFromArray:_recorderResults] ? : _recorderResults;
+    }
     return sResult;
 }
 
