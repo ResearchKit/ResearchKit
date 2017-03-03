@@ -208,10 +208,13 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
                                  ];
             ORKValuePickerAnswerFormat *format = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:options];
             _impliedAnswerFormat = format;
-        } else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
+        }
+#ifdef __IPHONE_10_0
+        else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
             ORKBooleanAnswerFormat *boolAnswerFormat = [ORKAnswerFormat booleanAnswerFormat];
             _impliedAnswerFormat = boolAnswerFormat.impliedAnswerFormat;
         }
+#endif
     }
     return _impliedAnswerFormat;
 }
