@@ -845,6 +845,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                        @"ORKStep.restorable",
                                        @"ORKStep.showsProgress",
                                        @"ORKStepResult.isPreviousResult",
+                                       @"ORKVideoCaptureStep.duration",
                                        ];
     
     NSArray *hashExclusionList = @[
@@ -855,7 +856,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                    @"ORKConsentSection.customAnimationURL",
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
-                                   @"ORKVideoCaptureStep.duration"
+                                   @"ORKVideoCaptureStep.duration",
                                    ];
     
     // Test Each class
