@@ -158,6 +158,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             result = @[result];
         }
     }
+#ifdef __IPHONE_10_0
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
         HKWheelchairUseObject *wheelchairUse = [_healthStore wheelchairUseWithError:error];
         if (wheelchairUse && wheelchairUse.wheelchairUse != HKWheelchairUseNotSet) {
@@ -167,6 +168,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             result = @[result];
         }
     }
+#endif
     return result;
 }
 
