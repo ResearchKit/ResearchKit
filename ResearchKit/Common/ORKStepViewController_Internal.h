@@ -74,8 +74,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
 
-- (void)skipForward;
-
 - (void)initializeInternalButtonItems;
 
 // internal use version to set backButton, without override "_internalBackButtonItem"

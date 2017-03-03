@@ -209,12 +209,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             ORKValuePickerAnswerFormat *format = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:options];
             _impliedAnswerFormat = format;
         }
-#ifdef __IPHONE_10_0
-        else if ([identifier isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
+        else if (ORK_IOS_10_WATCHOS_3_AVAILABLE && [identifier isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
             ORKBooleanAnswerFormat *boolAnswerFormat = [ORKAnswerFormat booleanAnswerFormat];
             _impliedAnswerFormat = boolAnswerFormat.impliedAnswerFormat;
         }
-#endif
     }
     return _impliedAnswerFormat;
 }
