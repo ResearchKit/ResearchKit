@@ -42,6 +42,14 @@
     return [ORKPasscodeStepViewController class];
 }
 
++ (instancetype)passcodeStepWithIdentifier:(NSString *)identifier
+                              passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
+    
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:identifier];
+    step.passcodeFlow = passcodeFlow;
+    return step;
+}
+
 - (BOOL)showsProgress {
     return NO;
 }
