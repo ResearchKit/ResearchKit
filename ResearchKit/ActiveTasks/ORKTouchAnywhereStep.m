@@ -43,8 +43,8 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier instructionText:(NSString *)instructionText {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.text = ORKLocalizedString(@"TOUCH_ANYWHERE_LABEL", nil);
-        self.title = instructionText;
+        self.text = ORKAttributedString(ORKLocalizedString(@"TOUCH_ANYWHERE_LABEL", nil));
+        self.title = ORKAttributedString(instructionText);
     }
     return self;
 }

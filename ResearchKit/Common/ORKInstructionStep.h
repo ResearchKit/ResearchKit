@@ -52,7 +52,7 @@ ORK_CLASS_AVAILABLE
  
  The detail text is displayed below the content of the `text` property.
  */
-@property (nonatomic, copy, nullable) NSString *detailText;
+@property (nonatomic, copy, nullable) NSAttributedString *detailText;
 
 /**
  An image that provides visual context for the instruction.

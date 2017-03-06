@@ -163,7 +163,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (ORKFormStepViewController *)makeNameFormViewController {
     ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:_NameFormIdentifier
-                                                            title:self.step.title ? : ORKLocalizedString(@"CONSENT_NAME_TITLE", nil)
+                                                            title:self.step.title ? : ORKAttributedString(ORKLocalizedString(@"CONSENT_NAME_TITLE", nil))
                                                              text:self.step.text];
     formStep.useSurveyMode = NO;
     
@@ -173,12 +173,12 @@ static NSString *const _FamilyNameIdentifier = @"family";
     nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
     nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
     ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
-                                                              text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
+                                                              text:ORKAttributedString(ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil))
                                                       answerFormat:nameAnswerFormat];
     givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
     ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
-                                                             text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
+                                                             text:ORKAttributedString(ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil))
                                                      answerFormat:nameAnswerFormat];
     familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     

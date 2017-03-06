@@ -33,7 +33,7 @@
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-
+#import "NSAttributedString+FontSize.h"
 
 @implementation ORKHeadlineLabel
 
@@ -62,7 +62,8 @@
 
 // Nasty override (hack)
 - (void)updateAppearance {
-    self.font = [self defaultFont];
+    //self.font = [self defaultFont];
+    self.attributedText = [self.attributedText attributedStringWithFontSize: [self defaultFont].pointSize];
     [self invalidateIntrinsicContentSize];
 }
 

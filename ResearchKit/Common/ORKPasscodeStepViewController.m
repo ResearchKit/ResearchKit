@@ -94,7 +94,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
+        _passcodeStepView.headerView.instructionLabel.attributedText = [self passcodeStep].text;
         _passcodeStepView.textField.delegate = self;
         [self.view addSubview:_passcodeStepView];
         

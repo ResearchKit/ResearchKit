@@ -141,11 +141,11 @@
     }
     
     self.headerView.iconImageView.image = _instructionStep.iconImage;
-    self.headerView.captionLabel.text = _instructionStep.title;
+    self.headerView.captionLabel.attributedText = _instructionStep.title;
     
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
-    NSString *detail = _instructionStep.detailText;
-    NSString *text = _instructionStep.text;
+    NSString *detail = [_instructionStep.detailText string];
+    NSString *text = [_instructionStep.text string];
     detail = detail.length ? detail : nil;
     text = text.length ? text : nil;
     

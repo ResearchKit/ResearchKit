@@ -136,7 +136,7 @@ ORK_CLASS_AVAILABLE
 /**
  The primary text to display for the step in a localized string.
  */
-@property (nonatomic, copy, nullable) NSString *title;
+@property (nonatomic, copy, nullable) NSAttributedString *title;
 
 /**
  Additional text to display for the step in a localized string.
@@ -145,7 +145,7 @@ ORK_CLASS_AVAILABLE
  long question, it can work well to keep the title short and put the additional content in
  the `text` property.
  */
-@property (nonatomic, copy, nullable) NSString *text;
+@property (nonatomic, copy, nullable) NSAttributedString *text;
 
 /**
  The task that contains the step.

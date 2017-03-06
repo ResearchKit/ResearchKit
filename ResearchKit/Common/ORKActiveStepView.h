@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) ORKActiveStep *activeStep;
 @property (nonatomic, strong, nullable) ORKActiveStepCustomView *activeCustomView;
 
-- (void)updateTitle:(nullable NSString *)title text:(nullable NSString *)text;
+- (void)updateTitle:(nullable NSAttributedString *)title text:(nullable NSAttributedString *)text;
 
 @end
 

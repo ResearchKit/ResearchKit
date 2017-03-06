@@ -32,6 +32,7 @@
 #import "ORKLabel.h"
 
 #import "ORKHelpers_Internal.h"
+#import "NSAttributedString+FontSize.h"
 
 
 @implementation ORKLabel
@@ -66,7 +67,8 @@
 }
 
 - (void)updateAppearance {
-    self.font = [[self class] defaultFont];
+//    self.font = [[self class] defaultFont];
+    self.attributedText = [self.attributedText attributedStringWithFontSize:[[self class] defaultFont].pointSize];
     [self invalidateIntrinsicContentSize];
 }
 

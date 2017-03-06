@@ -194,7 +194,7 @@
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
     if (self.currentDigitIndex == 0) {
         [self.psatContentView setEnabled:YES];
-        [self.activeStepView updateTitle:ORKLocalizedString(@"PSAT_INSTRUCTION", nil) text:nil];
+        [self.activeStepView updateTitle:ORKAttributedString(ORKLocalizedString(@"PSAT_INSTRUCTION", nil)) text:nil];
     } else {
         [self saveSample];
     }

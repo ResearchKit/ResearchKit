@@ -46,7 +46,7 @@
 }
 
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                  title:(NSString *)title
+                                     title:(NSAttributedString *)title
                                     answer:(ORKAnswerFormat *)answer {
     
     ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
@@ -56,8 +56,8 @@
 }
 
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                     title:(nullable NSString *)title
-                                      text:(nullable NSString *)text
+                                     title:(nullable NSAttributedString *)title
+                                      text:(nullable NSAttributedString *)text
                                     answer:(nullable ORKAnswerFormat *)answerFormat {
 
     ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];

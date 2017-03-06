@@ -64,7 +64,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     
     NSParameterAssert([loginViewControllerClass isSubclassOfClass:[ORKLoginStepViewController class]]);
     
-    self = [super initWithIdentifier:identifier title:title text:text];
+    self = [super initWithIdentifier:identifier title:ORKAttributedString(title) text:ORKAttributedString(text)];
     if (self) {
         _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
         self.formItems = [self loginFormItems];
@@ -81,7 +81,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierEmail
-                                                               text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
@@ -98,7 +98,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierPassword
-                                                               text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);

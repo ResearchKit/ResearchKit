@@ -141,9 +141,9 @@
 
 #pragma mark - hole peg test content view delegate
 
-- (NSString *)stepTitle {
+- (NSAttributedString *)stepTitle {
     NSString *title = ([self holePegTestPlaceStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil);
-    return title;
+    return ORKAttributedString(title);
 }
 
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
@@ -153,7 +153,7 @@
     }
     
     [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
+                                text:ORKAttributedString(ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil))];
 }
 
 - (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView withDistance:(CGFloat)distance {
@@ -163,7 +163,7 @@
     
     [holePegTestPlaceContentView setProgress:((CGFloat)self.successes / [self holePegTestPlaceStep].numberOfPegs) animated:YES];
     [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+                                text:ORKAttributedString(ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil))];
     
     if (self.successes >= [self holePegTestPlaceStep].numberOfPegs) {
         [((ORKNavigableOrderedTask *)self.taskViewController.task) removeNavigationRuleForTriggerStepIdentifier:[self holePegTestPlaceStep].identifier];
@@ -175,7 +175,7 @@
     self.failures++;
     
     [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+                                text:ORKAttributedString(ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil))];
 }
 
 @end

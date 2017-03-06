@@ -93,8 +93,8 @@ ORK_CLASS_AVAILABLE
  @return An initialized registration step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
+                             title:(nullable NSAttributedString *)title
+                              text:(nullable NSAttributedString *)text
            passcodeValidationRegex:(nullable NSString *)passcodeValidationRegex
             passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options;
@@ -111,8 +111,8 @@ ORK_CLASS_AVAILABLE
  @return An initialized registration step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
+                             title:(nullable NSAttributedString *)title
+                              text:(nullable NSAttributedString *)text
                            options:(ORKRegistrationStepOption)options;
 
 /**

@@ -67,7 +67,7 @@ ORK_CLASS_AVAILABLE
  
  @param text     The description of the process that is occuring.
  */
-- (void)updateText:(NSString *)text;
+- (void)updateText:(NSAttributedString *)text;
 
 @end
 

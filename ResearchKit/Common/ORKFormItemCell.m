@@ -119,7 +119,7 @@ static const CGFloat HorizontalMargin = 15.0;
         _answer = [answer copy];
         self.formItem = formItem;
         _labelLabel = [[ORKCaption1Label alloc] init];
-        _labelLabel.text = formItem.text;
+        _labelLabel.attributedText = formItem.text;
         _labelLabel.numberOfLines = 0;
         [self.contentView addSubview:_labelLabel];
         

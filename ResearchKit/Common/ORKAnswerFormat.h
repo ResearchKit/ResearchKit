@@ -753,7 +753,7 @@ ORK_CLASS_AVAILABLE
  
  @return A text choice instance.
  */
-+ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
++ (instancetype)choiceWithText:(NSAttributedString *)text detailText:(nullable NSAttributedString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
 
 /**
  Returns a choice object that includes the specified primary text.
@@ -763,7 +763,7 @@ ORK_CLASS_AVAILABLE
  
  @return A text choice instance.
  */
-+ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
++ (instancetype)choiceWithText:(NSAttributedString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
  Returns an initialized text choice object using the specified primary text, detail text,
@@ -778,8 +778,8 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized text choice.
  */
-- (instancetype)initWithText:(NSString *)text
-                  detailText:(nullable NSString *)detailText
+- (instancetype)initWithText:(NSAttributedString *)text
+                  detailText:(nullable NSAttributedString *)detailText
                        value:(id<NSCopying, NSCoding, NSObject>)value
                     exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
 
@@ -788,7 +788,7 @@ ORK_CLASS_AVAILABLE
  
  In general, it's best when the text can fit on one line.
   */
-@property (copy, readonly) NSString *text;
+@property (copy, readonly) NSAttributedString *text;
 
 /**
  The value to return when this choice is selected.
@@ -805,7 +805,7 @@ ORK_CLASS_AVAILABLE
  The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
  text.
   */
-@property (copy, readonly, nullable) NSString *detailText;
+@property (copy, readonly, nullable) NSAttributedString *detailText;
 
 /**
  In a multiple choice format, this indicates whether this choice requires all other choices to be

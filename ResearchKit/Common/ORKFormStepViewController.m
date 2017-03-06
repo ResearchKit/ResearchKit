@@ -107,7 +107,7 @@
         sharedLabel = [ORKCaption1Label new];
     }
     
-    sharedLabel.text = _formItem.text;
+    sharedLabel.attributedText = _formItem.text;
     
     return [sharedLabel textRectForBounds:CGRectInfinite limitedToNumberOfLines:1].size.width;
 }
@@ -510,9 +510,9 @@
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
         _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.text = [[self formStep] title];
+        _headerView.captionLabel.attributedText = [[self formStep] title];
         _headerView.captionLabel.useSurveyMode = [[self formStep] useSurveyMode];
-        _headerView.instructionLabel.text = [[self formStep] text];
+        _headerView.instructionLabel.attributedText = [[self formStep] text];
         _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
         _continueSkipView = _tableContainer.continueSkipContainerView;
@@ -549,7 +549,7 @@
             [_sections addObject:section];
             
             // Save title
-            section.title = item.text;
+            section.title = [item.text string];
         // Actual item
         } else {
             ORKAnswerFormat *answerFormat = [item impliedAnswerFormat];
@@ -568,7 +568,7 @@
                 [_sections addObject:section];
                 
                 // Save title
-                section.title = item.text;
+                section.title = [item.text string];
     
                 [section addFormItem:item];
 
@@ -919,7 +919,7 @@
 
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row]);
-        return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
+        return [ORKChoiceViewCell suggestedCellHeightForShortText:[cellItem.choice.text string] LongText:[cellItem.choice.detailText string] inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
 }

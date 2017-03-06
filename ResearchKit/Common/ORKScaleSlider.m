@@ -310,7 +310,7 @@ static const CGFloat Padding = 2.0;
         return nil;
     } else if (self.textChoices) {
         ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value - 1];
-        return textChoice.text;
+        return [textChoice.text string];
     }
     return [self _axFormattedValue:self.value];
 }

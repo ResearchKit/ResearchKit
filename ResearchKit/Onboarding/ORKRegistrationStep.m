@@ -54,10 +54,11 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierEmail
-                                                               text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
-                                                       answerFormat:answerFormat
-                                                           optional:NO];
+        ORKFormItem *item = [[ORKFormItem alloc]
+                             initWithIdentifier:ORKRegistrationFormItemIdentifierEmail
+                             text:ORKAttributedString(ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil))
+                             answerFormat:answerFormat
+                             optional:NO];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
         
         [formItems addObject:item];
@@ -72,10 +73,11 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
-                                                               text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
-                                                       answerFormat:answerFormat
-                                                           optional:NO];
+        ORKFormItem *item = [[ORKFormItem alloc]
+                             initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
+                             text:ORKAttributedString(ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil))
+                             answerFormat:answerFormat
+                             optional:NO];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         passwordFormItem = item;
         
@@ -84,7 +86,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     
     {
         ORKFormItem *item = [passwordFormItem confirmationAnswerFormItemWithIdentifier:ORKRegistrationFormItemIdentifierConfirmPassword
-                                                text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
+                                                text:ORKAttributedString(ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil))
                                                 errorMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
         item.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         
@@ -102,7 +104,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         answerFormat.multipleLines = NO;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierGivenName
-                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"GIVEN_NAME_ITEM_PLACEHOLDER", nil);
@@ -115,7 +117,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
         answerFormat.multipleLines = NO;
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierFamilyName
-                                                               text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"FAMILY_NAME_ITEM_PLACEHOLDER", nil);
@@ -134,13 +136,13 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     }
     
     if (options & ORKRegistrationStepIncludeGender) {
-        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@"female"],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@"male"],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@"other"]];
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_FEMALE", nil)) value:@"female"],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_MALE", nil)) value:@"male"],
+                                 [ORKTextChoice choiceWithText:ORKAttributedString(ORKLocalizedString(@"GENDER_OTHER", nil)) value:@"other"]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierGender
-                                                               text:ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
@@ -161,7 +163,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
                                                                                     calendar:[NSCalendar currentCalendar]];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
-                                                               text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
+                                                               text:ORKAttributedString(ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil))
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
@@ -180,7 +182,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
            passcodeValidationRegex:(NSString *)passcodeValidationRegex
             passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options {
-    self = [super initWithIdentifier:identifier title:title text:text];
+    self = [super initWithIdentifier:identifier title:ORKAttributedString(title) text:ORKAttributedString(text)];
     if (self) {
         _options = options;
         self.passcodeValidationRegex = passcodeValidationRegex;
@@ -195,8 +197,8 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
                               text:(NSString *)text
                            options:(ORKRegistrationStepOption)options {
     return [self initWithIdentifier:identifier
-                              title:title
-                               text:text
+                              title:ORKAttributedString(title)
+                               text:ORKAttributedString(text)
             passcodeValidationRegex:nil
              passcodeInvalidMessage:nil
                             options:options];
@@ -206,8 +208,8 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
                              title:(NSString *)title
                               text:(NSString *)text {
     return [self initWithIdentifier:identifier
-                              title:title
-                               text:text
+                              title:ORKAttributedString(title)
+                               text:ORKAttributedString(text)
                             options:ORKRegistrationStepDefault];
 }
 
@@ -236,7 +238,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
                                                                                         calendar:originalAnswerFormat.calendar];
 
     dobFormItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
-                                                     text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
+                                                     text:ORKAttributedString(ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil))
                                              answerFormat:modifiedAnswerFormat
                                                  optional:NO];
     dobFormItem.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);

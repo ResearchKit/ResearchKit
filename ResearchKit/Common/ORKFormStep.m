@@ -47,8 +47,8 @@
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
-                              text:(NSString *)text {
+                             title:(NSAttributedString *)title
+                              text:(NSAttributedString *)text {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
@@ -141,11 +141,11 @@
 
 @implementation ORKFormItem
 
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSAttributedString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSAttributedString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
     self = [super init];
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
@@ -166,7 +166,7 @@
 }
 
 - (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)identifier
-                                                     text:(nullable NSString *)text
+                                                     text:(nullable NSAttributedString *)text
                                              errorMessage:(NSString *)errorMessage {
     
     if (![self.answerFormat conformsToProtocol:@protocol(ORKConfirmAnswerFormatProvider)]) {
@@ -201,7 +201,7 @@
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_BOOL(aDecoder, optional);
-        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSAttributedString);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
         ORK_DECODE_OBJ_CLASS(aDecoder, step, ORKFormStep);

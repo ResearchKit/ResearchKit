@@ -279,8 +279,8 @@
     _signingView.wrapperView.signatureView.delegate = self;
     _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _signingView.frame = self.view.bounds;
-    _signingView.headerView.captionLabel.text = self.step.title;
-    _signingView.headerView.instructionLabel.text = self.step.text;
+    _signingView.headerView.captionLabel.attributedText = self.step.title;
+    _signingView.headerView.instructionLabel.attributedText = self.step.text;
     
     _continueSkipView = _signingView.continueSkipContainer;
     _continueSkipView.skipButtonItem = self.skipButtonItem;

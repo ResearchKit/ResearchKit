@@ -1392,7 +1392,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
     stepViewController.skipButtonTitle = stepViewController.readOnlyMode ? ORKLocalizedString(@"BUTTON_READ_ONLY_MODE", nil) : ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil);
     if (stepViewController.parentReviewStep.isStandalone) {
-        stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
+        UILabel *titleLabel = [[UILabel alloc] init];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.attributedText = stepViewController.parentReviewStep.title;
+        stepViewController.navigationItem.titleView = titleLabel;
     }
     [self showViewController:stepViewController goForward:YES animated:YES];
 }
