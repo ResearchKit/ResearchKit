@@ -721,7 +721,7 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) NSArray<ORKValuePickerAnswerFormat *> *valuePickers;
 
 /**
- A string used to define the seperator for the format of the string. Default = " ".
+ A string used to define the separator for the format of the string. Default = " ".
  */
 @property (copy, readonly) NSString *separator;
 

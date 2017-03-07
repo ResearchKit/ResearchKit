@@ -118,7 +118,7 @@
 
 - (NSUInteger)convertFromPickerViewComponent:(NSUInteger)component {
     if (_shouldShowSeparator) {
-        if (component%2 == 0) {
+        if (component % 2 == 0) {
             return component / 2;
         } else {
             return NSNotFound;
