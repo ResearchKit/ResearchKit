@@ -1395,7 +1395,7 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKReactionTimeStep *step = [[ORKReactionTimeStep alloc] initWithIdentifier:ORKReactionTimeStepIdentifier];
     step.maximumStimulusInterval = maximumStimulusInterval;
     step.minimumStimulusInterval = minimumStimulusInterval;
-    step.thresholdAcceleration = thresholdAcceleration;
+    step.thresholdAcceleration = (thresholdAcceleration > 0) ? thresholdAcceleration : 0.5;
     step.numberOfAttempts = numberOfAttempts;
     step.timeout = timeout;
     step.successSound = successSoundID;

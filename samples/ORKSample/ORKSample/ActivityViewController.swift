@@ -67,7 +67,7 @@ enum Activity: Int {
             case .tapping:
                 return "Test tapping speed"
             case .gonogo:
-                return "Teset reaction and impulsiveness"
+                return "Test reaction and impulsiveness"
         }
     }
 }

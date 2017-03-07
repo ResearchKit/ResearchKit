@@ -580,23 +580,21 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
 /**
  Returns a predefined task that tests the participant's reaction time and impulsiveness.
  
- In a go no go task, the participant is asked to move the device sharply in any
+ In a go-no-go task, the participant is asked to move the device sharply in any
  direction in response to a visual cue. You can use this task to accurately assess the participant's
- simple reaction time. Randomly they will be given a cue to not shake the device, this tests 
- impulsiveness
+ simple reaction time. Randomly they will be given a cue to not shake the device; this tests
+ impulsiveness.
  
- A go no go time task finishes when the participant has completed the required
- number of attempts successfully. For a go, an attempt is successful when the participant exerts acceleration
+ A go-no-go time task finishes when the participant has completed the required
+ number of attempts successfully. For a "go", an attempt is successful when the participant exerts acceleration
  greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
  `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
  `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
  before `timeout` has elapsed. If unsuccessful, the result is not reported and the participant must
- try again to proceed with the task. For a no go, the sucess condition is reversed
+ try again to proceed with the task. For a "no go", the sucess condition is reversed.
  
- Data collected by the task is in the form of ORKGoNoGOTimeResult objects. These
- objects contain if it was a go or no go if it was a success, and a timestamp representing the delivery,
- of the stimulus and an ORKFileResult, which references the motion data collected during an attempt. 
- The researcher can use these to evaluate the response to the stimulus and calculate the reaction time.
+ Data collected by the task is in the form of `ORKGoNoGoResult` objects. The researcher can use these 
+ results to evaluate the response to the stimulus, and calculate the reaction time.
  
  @param identifier                  The task identifier to use for this task, appropriate to the
                                     study.
@@ -605,7 +603,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                     default localized text is displayed.
  @param maximumStimulusInterval     The maximum interval before the stimulus is delivered.
  @param minimumStimulusInterval     The minimum interval before the stimulus is delivered.
- @param thresholdAcceleration       The acceleration required to end a reaction time test.
+ @param thresholdAcceleration       The acceleration required to end a reaction time test. Default = `0.5`.
  @param numberOfAttempts            The number of successful attempts required before the task is
                                     complete. The active step result will contain this many
                                     child results if the task is completed.

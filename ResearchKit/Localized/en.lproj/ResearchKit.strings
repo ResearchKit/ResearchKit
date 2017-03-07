@@ -321,7 +321,7 @@
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue dot appears";
 
 /* Go no go active task. */
 "GONOGO_TASK_TITLE" = "Go No Go Test";
@@ -329,7 +329,7 @@
 "GONOGO_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. Do not shake for a green dot. You will be asked to do this %D times.";
 "GONOGO_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "GONOGO_TASK_ATTEMPTS_FORMAT" = "Attempt %1$@ of %2$@";
-"GONOGO_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears. Do not shake for a green dot.";
+"GONOGO_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue dot appears. Do not shake for a green dot.";
 "GONOGO_TASK_ERRORS_FORMAT" = "\nErrors: %d";
 "GONOGO_TASK_REACTION_FORMAT" = "\nLast reaction time: %.2f seconds";
 
