@@ -318,7 +318,7 @@ ORK_CLASS_AVAILABLE
 /**
  Add a result to the step view controller's `ORKStepResult`. By default, the property for
  the step view controller's result will instantiate a copy of the result each time it is 
- called. Therefore, the result cannot be mutated by adding a result to it's result array.
+ called. Therefore, the result cannot be mutated by adding a result to its result array.
  
  This method can be called by a delegate to add a result to a given step in a way that will
  be retained by the step.
