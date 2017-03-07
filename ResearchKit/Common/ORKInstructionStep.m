@@ -99,7 +99,7 @@
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.detailText.hash ^ _footnote.hash;
+    return super.hash ^ self.detailText.hash ^ self.footnote.hash;
 }
 
 @end
