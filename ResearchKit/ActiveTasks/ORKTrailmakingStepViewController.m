@@ -57,7 +57,7 @@
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
     NSArray *testPoints;
-    NSString *trailType;
+    ORKTrailMakingTypeIdentifier trailType;
     int nextIndex;
     int errors;
     NSMutableArray *taps;
@@ -74,7 +74,7 @@
         if ([step isKindOfClass:[ORKTrailmakingStep class]]) {
             trailType = [((ORKTrailmakingStep*)step) trailType];
         } else {
-            trailType = @"A";
+            trailType = ORKTrailMakingTypeIdentifierA;
         }
     }
     return self;

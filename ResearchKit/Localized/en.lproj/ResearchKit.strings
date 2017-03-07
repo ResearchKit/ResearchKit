@@ -446,7 +446,8 @@
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Trail Making Test";
 "TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
-"TRAILMAKING_INTENDED_USE2" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
+"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
+"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
 "TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "TRAILMAKING_TIMER" = "%.1f s";

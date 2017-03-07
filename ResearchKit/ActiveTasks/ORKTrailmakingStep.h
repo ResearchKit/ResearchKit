@@ -40,7 +40,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTrailmakingStep : ORKActiveStep
 
 /**
- The type of trail to show. Default = "B"
+ The type of trail to show. Default = `ORKTrailMakingTypeIdentifierA`
  */
 @property (nonatomic, copy) ORKTrailMakingTypeIdentifier trailType;
 

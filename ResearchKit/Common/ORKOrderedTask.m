@@ -2248,7 +2248,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
-            step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2", nil);
+            if ([trailType isEqualToString:ORKTrailMakingTypeIdentifierA]) {
+                step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2_A", nil);
+            } else {
+                step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2_B", nil);
+            }
             step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             

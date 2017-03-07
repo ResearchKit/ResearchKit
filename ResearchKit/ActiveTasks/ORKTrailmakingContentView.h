@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray<ORKRoundTappingButton*> *tapButtons;
 
-- (instancetype)initWithType:(NSString*)trailType;
+- (instancetype)initWithType:(NSString *)trailType;
 - (void)setLinesToDraw:(int)numLines;
 - (CGRect)testArea;
 
