@@ -58,6 +58,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_INTEGER(aDecoder, passcodeType);
+        ORK_DECODE_UINT32(aDecoder, passcodeFlow);
     }
     return self;
 }
@@ -65,6 +66,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, passcodeType);
+    ORK_ENCODE_UINT32(aCoder, passcodeFlow);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -74,6 +76,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPasscodeStep *step = [super copyWithZone:zone];
     step.passcodeType = self.passcodeType;
+    step.passcodeFlow = self.passcodeFlow;
     return step;
 }
 
@@ -82,6 +85,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
+            self.passcodeFlow == castObject.passcodeFlow &&
             self.passcodeType == castObject.passcodeType);
 }
 

@@ -440,7 +440,8 @@ encondingTable =
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-           PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil)
+           PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil),
+           PROPERTY(passcodeFlow, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKWaitStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
