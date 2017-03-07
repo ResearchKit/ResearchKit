@@ -173,7 +173,7 @@ ORK_CLASS_AVAILABLE
  a subclass to return a different answer format for use in defining the UI/UX for
  the answer format type. For example, a Boolean answer format is presented in the 
  same way as a single-choice answer format with the choices Yes and No mapping to 
- `@(YES)` and `@(NO)`, respectively, so it's `impliedAnswerFormat` is an 
+ `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
  `ORKTextChoiceAnswerFormat` with those options.
 */
 - (ORKAnswerFormat *)impliedAnswerFormat;
