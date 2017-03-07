@@ -2627,9 +2627,9 @@ static NSString *const formattedAddressLinesKey = @"FormattedAddressLines";
     
     NSUInteger count = [textChoices count];
     for (NSUInteger i = 0; i < count; i++) {
-        NSString *unselectedName = [NSString stringWithFormat:@"%@-%lug", imageName, (i + 1)];
+        NSString *unselectedName = [NSString stringWithFormat:@"%@-%@g", imageName, @(i + 1)];
         UIImage *unselectedImage = [UIImage imageNamed:unselectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-        NSString *selectedName = [NSString stringWithFormat:@"%@-%lup", imageName, (i + 1)];
+        NSString *selectedName = [NSString stringWithFormat:@"%@-%@p", imageName, @(i + 1)];
         UIImage *selectedImage = [UIImage imageNamed:selectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         ORKImageChoice *answerOption = [ORKImageChoice choiceWithNormalImage:unselectedImage
                                                                selectedImage:selectedImage
