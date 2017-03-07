@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     NSString *_signatureLast;
     UIImage *_signatureImage;
     BOOL _documentReviewed;
+    NSArray *_formResults;
     
     NSUInteger _currentPageIndex;
 }
@@ -101,7 +102,8 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     if (step.consentDocument) {
         [indices addObject:@(ORKConsentReviewPhaseReviewDocument)];
     }
-    if (step.signature.requiresName) {
+    if (step.signature.requiresName || (step.formItems.count > 0)) {
+        // Add the form if either the name is required OR there are custom form items be be included
         [indices addObject:@(ORKConsentReviewPhaseName)];
     }
     if (step.signature.requiresSignatureImage) {
@@ -167,27 +169,41 @@ static NSString *const _FamilyNameIdentifier = @"family";
                                                              text:self.step.text];
     formStep.useSurveyMode = NO;
     
-    ORKTextAnswerFormat *nameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];
-    nameAnswerFormat.multipleLines = NO;
-    nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-    nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-    ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
-                                                              text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
-                                                      answerFormat:nameAnswerFormat];
-    givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    ORKConsentReviewStep *step = [self consentReviewStep];
+    NSMutableArray *formItems = [NSMutableArray new];
     
-    ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
-                                                             text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
-                                                     answerFormat:nameAnswerFormat];
-    familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    // If the signature requires adding the name, then create form items for given and family name
+    if (step.signature.requiresName) {
+        
+        ORKTextAnswerFormat *nameAnswerFormat = [ORKTextAnswerFormat textAnswerFormat];
+        nameAnswerFormat.multipleLines = NO;
+        nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
+                                                                  text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
+                                                          answerFormat:nameAnswerFormat];
+        givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+        
+        ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
+                                                                 text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
+                                                         answerFormat:nameAnswerFormat];
+        familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+        
+        givenNameFormItem.optional = NO;
+        familyNameFormItem.optional = NO;
     
-    givenNameFormItem.optional = NO;
-    familyNameFormItem.optional = NO;
+        if (ORKCurrentLocalePresentsFamilyNameFirst()) {
+            [formItems addObjectsFromArray:@[familyNameFormItem, givenNameFormItem]];
+        }
+        else {
+            [formItems addObjectsFromArray:@[givenNameFormItem, familyNameFormItem]];
+        }
+    }
     
-    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
-    if (ORKCurrentLocalePresentsFamilyNameFirst()) {
-        formItems = @[familyNameFormItem, givenNameFormItem];
+    // If the step has any form items defined on it, then show them in addition to or in replacement of the name form items
+    if (step.formItems.count > 0) {
+        [formItems addObjectsFromArray:step.formItems];
     }
     
     [formStep setFormItems:formItems];
@@ -306,7 +322,13 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     result.consented = _documentReviewed;
     result.startDate = parentResult.startDate;
     result.endDate = parentResult.endDate;
-    parentResult.results = @[result];
+    
+    NSArray *results = @[result];
+    if (_formResults.count > 0) {
+        results = [results arrayByAddingObjectsFromArray:_formResults];
+    }
+    
+    parentResult.results = results;
     
     return parentResult;
 }
@@ -395,6 +417,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         _signatureFirst = (NSString *)fnr.textAnswer;
         ORKTextQuestionResult *lnr = (ORKTextQuestionResult *)[result resultForIdentifier:_FamilyNameIdentifier];
         _signatureLast = (NSString *)lnr.textAnswer;
+        _formResults = [result.results copy];
         [self notifyDelegateOnResultChange];
         
     } else if ([stepViewController.step.identifier isEqualToString:_SignatureStepIdentifier]) {
@@ -448,6 +471,7 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     _signatureLast = nil;
     _signatureImage = nil;
     _documentReviewed = NO;
+    _formResults = nil;
     [self notifyDelegateOnResultChange];
     
     [self goForward];
@@ -459,6 +483,8 @@ static NSString *const _ORKSignatureLastRestoreKey = @"signatureLast";
 static NSString *const _ORKSignatureImageRestoreKey = @"signatureImage";
 static NSString *const _ORKDocumentReviewedRestoreKey = @"documentReviewed";
 static NSString *const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
+static NSString *const _ORKFormResultsKey = @"formResults";
+static NSString *const _ORKPageIndicesKey = @"pageIndices";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -469,6 +495,8 @@ static NSString *const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
     [coder encodeObject:_signatureImage forKey:_ORKSignatureImageRestoreKey];
     [coder encodeBool:_documentReviewed forKey:_ORKDocumentReviewedRestoreKey];
     [coder encodeInteger:_currentPageIndex forKey:_ORKCurrentPageIndexRestoreKey];
+    [coder encodeObject:_formResults forKey:_ORKFormResultsKey];
+    [coder encodeObject:_pageIndices forKey:_ORKPageIndicesKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -482,6 +510,8 @@ static NSString *const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
     _signatureImage = [coder decodeObjectOfClass:[NSString class] forKey:_ORKSignatureImageRestoreKey];
     _documentReviewed = [coder decodeBoolForKey:_ORKDocumentReviewedRestoreKey];
     _currentPageIndex = [coder decodeIntegerForKey:_ORKCurrentPageIndexRestoreKey];
+    _pageIndices = [[coder decodeObjectOfClass:[NSArray class] forKey:_ORKPageIndicesKey] mutableCopy];
+    _formResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKFormResultsKey];
     
     [self goToPage:_currentPageIndex animated:NO];
 }
