@@ -375,7 +375,17 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                                                             }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
                 } else if (error.code == LAErrorUserCancel) {
-                    [strongSelf makePasscodeViewBecomeFirstResponder];
+
+                    // call becomeFirstResponder here to show the keyboard. dispatch to main queue with
+                    // delay because without it, the transition from the touch ID context back to the app
+                    // inexplicably causes the keyboard to be invisble. It's not hidden, as user can still
+                    // tap keys, but cannot see them
+                    
+                    double delayInSeconds = 0.3;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        [strongSelf makePasscodeViewBecomeFirstResponder];
+                    });
                 }
                 
                 [strongSelf finishTouchId];
