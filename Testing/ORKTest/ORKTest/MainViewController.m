@@ -502,6 +502,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                    checkAudioLevel:YES
                                                            options:(ORKPredefinedTaskOption)0];
         return task;
+    } else if ([identifier isEqualToString:MoodSurveyTaskIdentifier]) {
+        return [ORKOrderedTask moodSurveyWithIdentifier:MoodSurveyTaskIdentifier
+                                 intendedUseDescription:nil
+                                              frequency:ORKMoodSurveyFrequencyWeekly
+                                     customQuestionText:nil
+                                                options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
         id<ORKTask> task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:ToneAudiometryTaskIdentifier
                                                      intendedUseDescription:nil
@@ -658,14 +664,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeIconImageTask];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
-    } else if ([identifier isEqualToString:MoodSurveyTaskIdentifier]) {
-        return [ORKOrderedTask moodSurveyWithIdentifier:MoodSurveyTaskIdentifier
-                                 intendedUseDescription:nil
-                                              frequency:ORKMoodSurveyFrequencyWeekly
-                                     customQuestionText:nil
-                                                options:ORKPredefinedTaskOptionNone];
-    }
-    else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
+    } else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
     }
     
