@@ -132,7 +132,7 @@
 		789FA3F81E37BD9900A5F2F8 /* ORKGoNoGoStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F01E37BD9900A5F2F8 /* ORKGoNoGoStep.m */; };
 		789FA3F91E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3F11E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.h */; };
 		789FA3FA1E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F21E37BD9900A5F2F8 /* ORKGoNoGoStimulusView.m */; };
-		789FA3FB1E37BD9900A5F2F8 /* ORKGoNoGoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3F31E37BD9900A5F2F8 /* ORKGoNoGoViewController.h */; };
+		789FA3FB1E37BD9900A5F2F8 /* ORKGoNoGoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 789FA3F31E37BD9900A5F2F8 /* ORKGoNoGoViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		789FA3FC1E37BD9900A5F2F8 /* ORKGoNoGoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 789FA3F41E37BD9900A5F2F8 /* ORKGoNoGoViewController.m */; };
 		805685791C90C19500BF437A /* UIImage+ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 805685771C90C19500BF437A /* UIImage+ResearchKit.h */; };
 		8056857A1C90C19500BF437A /* UIImage+ResearchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 805685781C90C19500BF437A /* UIImage+ResearchKit.m */; };

@@ -72,6 +72,7 @@
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
 #import <ResearchKit/ORKCountdownStepViewController.h>
 #import <ResearchKit/ORKFitnessStepViewController.h>
+#import <ResearchKit/ORKGoNoGoViewController.h>
 #import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
 #import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>

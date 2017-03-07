@@ -894,7 +894,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         ORK_DECODE_DOUBLE(aDecoder, timeToThreshold);
         ORK_DECODE_BOOL(aDecoder, go);
         ORK_DECODE_BOOL(aDecoder, incorrect);
-        ORK_DECODE_OBJ(aDecoder, samples);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKGoNoGoSample);
     }
     return self;
 }

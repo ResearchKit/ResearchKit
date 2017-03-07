@@ -1185,11 +1185,17 @@ encondingTable =
    ENTRY(ORKGoNoGoResult,
          nil,
          (@{
-            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
-            PROPERTY(timeToThreshold, NSNumber, NSObject, NO, nil, nil)
-            PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
-            PROPERTY(go, NSNumber, NSObject, NO, nil, nil)
-            PROPERTY(incorrect, NSNumber, NSObject, NO, nil, nil)
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeToThreshold, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(go, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(incorrect, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(samples, ORKGoNoGoSample, NSArray, YES, nil, nil),
+            })),
+   ENTRY(ORKGoNoGoSample,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(vectorMagnitude, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKTimedWalkResult,
          nil,
