@@ -73,12 +73,12 @@ DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
+DefineStringKey(GoNoGoTaskIdentifier);
 DefineStringKey(IconImageTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(GoNoGoTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
@@ -363,11 +363,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
+                           @"Go No Go Task",
                            @"Hole Peg Test Task",
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
-                           @"Go No Go Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
@@ -528,6 +528,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                        numberOfStepsPerLeg:20
                                               restDuration:30
                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:GoNoGoTaskIdentifier]) {
+        return [ORKOrderedTask gonogoTaskWithIdentifier:GoNoGoTaskIdentifier
+                                 intendedUseDescription:nil
+                                maximumStimulusInterval:8
+                                minimumStimulusInterval:4
+                                  thresholdAcceleration:0.5
+                                       numberOfAttempts:9
+                                                timeout:10
+                                           successSound:0
+                                           timeoutSound:0
+                                           failureSound:0
+                                                options:0];
     } else if ([identifier isEqualToString:MemoryTaskIdentifier]) {
         return [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:MemoryTaskIdentifier
                                             intendedUseDescription:nil
@@ -573,18 +585,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                  timeoutSound:0
                                                  failureSound:0
                                                       options:0];
-    } else if ([identifier isEqualToString:GoNoGoTaskIdentifier]) {
-        return [ORKOrderedTask gonogoTaskWithIdentifier:GoNoGoTaskIdentifier
-                                 intendedUseDescription:nil
-                                maximumStimulusInterval:8
-                                minimumStimulusInterval:4
-                                  thresholdAcceleration:0.5
-                                       numberOfAttempts:9
-                                                timeout:10
-                                           successSound:0
-                                           timeoutSound:0
-                                           failureSound:0
-                                                options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
@@ -2687,6 +2687,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:GaitTaskIdentifier];
 }
 
+- (void)goNoGoTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:GoNoGoTaskIdentifier];
+}
+
 - (void)memoryGameTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
 }
@@ -2709,10 +2713,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)reactionTimeTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
-}
-
-- (void)goNoGoTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:GoNoGoTaskIdentifier];
 }
 
 - (void)towerOfHanoiTaskButtonTapped:(id)sender {

@@ -52,6 +52,15 @@ class SystemSound {
 
 struct StudyTasks {
     
+    static let gonogoTask: ORKOrderedTask = {
+        let intendedUseDescription = "Reaction time is a measure of quickess."
+        
+        /// An example of a custom sound.
+        let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
+        let successSound = SystemSound(soundURL: successSoundURL)!
+        return ORKOrderedTask.gonogoTask(withIdentifier: "GoNoGo", intendedUseDescription: intendedUseDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 9, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
+    }()
+    
     static let microphoneTask: ORKOrderedTask = {
         let intendedUseDescription = "Everyone's voice has unique characteristics."
         let speechInstruction = "After the countdown, say Aaaaaaaaaaah for as long as you can. You'll have 10 seconds."
@@ -64,15 +73,6 @@ struct StudyTasks {
         let intendedUseDescription = "Finger tapping is a universal way to communicate."
         
         return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: "TappingTask", intendedUseDescription: intendedUseDescription, duration: 10, handOptions: .both, options: ORKPredefinedTaskOption())
-    }()
-    
-    static let gonogoTask: ORKOrderedTask = {
-        let intendedUseDescription = "Reaction time is a measure of quickess."
-        
-        /// An example of a custom sound.
-        let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
-        let successSound = SystemSound(soundURL: successSoundURL)!
-        return ORKOrderedTask.gonogoTask(withIdentifier: "GoNoGo", intendedUseDescription: intendedUseDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 9, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }()
     
     static let surveyTask: ORKOrderedTask = {

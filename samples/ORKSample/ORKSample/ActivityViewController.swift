@@ -32,7 +32,7 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case survey, microphone, tapping, gonogo
+    case gonogo, survey, microphone, tapping
     
     static var allValues: [Activity] {
         var index = 0
@@ -47,27 +47,27 @@ enum Activity: Int {
     
     var title: String {
         switch self {
+            case .gonogo:
+                return "Go No Go"
             case .survey:
                 return "Survey"
             case .microphone:
                 return "Microphone"
             case .tapping:
                 return "Tapping"
-            case .gonogo:
-                return "Go No Go"
         }
     }
     
     var subtitle: String {
         switch self {
+            case .gonogo:
+                return "Test reaction and impulsiveness"
             case .survey:
                 return "Answer 6 short questions"
             case .microphone:
                 return "Voice evaluation"
             case .tapping:
                 return "Test tapping speed"
-            case .gonogo:
-                return "Test reaction and impulsiveness"
         }
     }
 }
@@ -99,6 +99,10 @@ class ActivityViewController: UITableViewController {
         
         let taskViewController: ORKTaskViewController
         switch activity {
+            case .gonogo:
+                taskViewController = ORKTaskViewController(task: StudyTasks.gonogoTask, taskRun: NSUUID() as UUID)
+                taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
             case .survey:
                 taskViewController = ORKTaskViewController(task: StudyTasks.surveyTask, taskRun: NSUUID() as UUID)
             
@@ -123,10 +127,6 @@ class ActivityViewController: UITableViewController {
                 
             case .tapping:
                 taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRun: NSUUID() as UUID)
-            
-            case .gonogo:
-                taskViewController = ORKTaskViewController(task: StudyTasks.gonogoTask, taskRun: NSUUID() as UUID)
-                taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         }
 
         taskViewController.delegate = self
