@@ -446,8 +446,8 @@
 /* Mood survey. */
 "MOOD_SURVEY_INTRO_DAILY_TITLE" = "Daily Check-In";
 "MOOD_SURVEY_INTRO_WEEKLY_TITLE" = "Weekly Check-In";
-"MOOD_SURVEY_INTRO_DAILY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, and pain level today as well as how well you slept and how much exercise you have done in the last day.";
-"MOOD_SURVEY_INTRO_WEEKLY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, pain level, how well you slept and how much exercise you have done in the past week.";
+"MOOD_SURVEY_INTRO_DAILY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, and pain level today as well as how well you slept, and how much exercise you have done in the last day.";
+"MOOD_SURVEY_INTRO_WEEKLY_TEXT" = "Tell us how you feel. We'll ask you to rate your mental clarity, mood, pain level, how well you slept, and how much exercise you have done in the past week.";
 "MOOD_SURVEY_INTRO_DETAIL" = "This activity should take less than two minutes to complete.";
 "MOOD_CUSTOM_GREAT" = "Great";
 "MOOD_CUSTOM_GOOD" = "Good";
