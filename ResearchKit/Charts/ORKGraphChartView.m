@@ -207,6 +207,12 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [_yAxisView updateTicksAndLabels];
 }
 
+- (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
+    _decimalPlaces = decimalPlaces;
+    _decimalFormat = [NSString stringWithFormat:@"%%.%df", _decimalPlaces];
+    [_yAxisView setDecimalPlaces:_decimalPlaces];
+}
+
 - (void)setShowsHorizontalReferenceLines:(BOOL)showsHorizontalReferenceLines {
     _showsHorizontalReferenceLines = showsHorizontalReferenceLines;
     [self updateHorizontalReferenceLines];
@@ -216,12 +222,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 - (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
     _showsVerticalReferenceLines = showsVerticalReferenceLines;
     [self updateAndLayoutVerticalReferenceLineLayers];
-}
-
-- (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
-    _decimalPlaces = decimalPlaces;
-    _decimalFormat = [NSString stringWithFormat:@"%%.%df", _decimalPlaces];
-    [_yAxisView setDecimalPlaces:_decimalPlaces];
 }
 
 - (void)sharedInit {
