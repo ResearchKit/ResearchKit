@@ -958,16 +958,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 #pragma mark - ORKBooleanAnswerFormat
 
-@implementation ORKBooleanAnswerFormat {
-    NSString *_yes;
-    NSString *_no;
-}
+@implementation ORKBooleanAnswerFormat
 
 - (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no {
     self = [super init];
     if (self) {
-        _yes = yes;
-        _no = no;
+        _yes = [yes copy];
+        _no = [no copy];
     }
     return self;
 }
@@ -978,11 +975,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_yes.length) {
-        _yes = ORKLocalizedString(@"BOOL_YES",nil);
+        _yes = ORKLocalizedString(@"BOOL_YES", nil);
     }
     if (!_no.length) {
-        _no = ORKLocalizedString(@"BOOL_NO",nil);
+        _no = ORKLocalizedString(@"BOOL_NO", nil);
     }
+    
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                             textChoices:@[[ORKTextChoice choiceWithText:_yes value:@(YES)],
                                                           [ORKTextChoice choiceWithText:_no value:@(NO)]]];
@@ -994,6 +992,30 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString *)stringForAnswer:(id)answer {
     return [self.impliedAnswerFormat stringForAnswer: @[answer]];
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.yes, castObject.yes) &&
+            ORKEqualObjects(self.no, castObject.no));
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, yes, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, no, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, yes);
+    ORK_ENCODE_OBJ(aCoder, no);
 }
 
 @end
