@@ -994,6 +994,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.impliedAnswerFormat stringForAnswer: @[answer]];
 }
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKBooleanAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithYesString:[_yes copy]
+                                                                                       noString:[_no copy]];
+    return answerFormat;
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
