@@ -104,6 +104,9 @@
     NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
     
+    // Get a full width layout
+    [constraints addObject:[self.class fullWidthLayoutConstraint:_containerView]];
+    
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil

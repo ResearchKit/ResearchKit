@@ -234,7 +234,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  after saving the result of the step to the task view controller and before navigating to the next/previous step.
  
  @param taskViewController  The calling `ORKTaskViewController` instance.
- @param step                The `ORKStepViewController` that has just finished.
+ @param stepViewController  The `ORKStepViewController` that has just finished.
  @param direction           The `ORKStepViewControllerNavigationDirection` of navigation.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;

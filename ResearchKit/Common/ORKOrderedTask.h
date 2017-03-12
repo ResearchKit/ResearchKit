@@ -179,6 +179,50 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
     ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
 } ORK_ENUM_AVAILABLE;
 
+/**
+ The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
+ tasks in the predefined Tremor `ORKOrderedTask`.
+ 
+ By default, all predefined active tasks will be included. The tremor active task option flags can
+ be used to explicitly specify that an active task is not to be included.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
+    /// Default behavior.
+    ORKTremorActiveTaskOptionNone = 0,
+    
+    /// Exclude the hand-in-lap steps.
+    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
+    
+    /// Exclude the hand-extended-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
+    
+    /// Exclude the elbow-bent-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
+    
+    /// Exclude the elbow-bent-touch-nose steps.
+    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
+    
+    /// Exclude the queen-wave steps.
+    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
+} ORK_ENUM_AVAILABLE;
+
+/**
+ Values that identify the left or right limb to be used in an active task.
+*/
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
+    /// Which limb to use is undefined
+    ORKPredefinedTaskLimbOptionUnspecified = 0,
+    
+    /// Task should test the left limb
+    ORKPredefinedTaskLimbOptionLeft = 1 << 1,
+    
+    /// Task should test the right limb
+    ORKPredefinedTaskLimbOptionRight = 1 << 2,
+    
+    /// Task should test the both limbs (random order)
+    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
+} ORK_ENUM_AVAILABLE;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -286,8 +330,16 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                                           restDuration:(NSTimeInterval)restDuration
                                                options:(ORKPredefinedTaskOption)options;
 
++ (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options;
 
 
++ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options;
 /**
  Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
@@ -585,6 +637,44 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                                         options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined task that consists of a timed walk, with a distinct turn around step.
+
+ In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+ possible, but safely. Then the participant is asked to turn around. The task is immediately
+ administered again by having the patient walk back the same distance.
+ A timed walk task can be used to measure lower extremity function.
+
+ The presentation of the timed walk task differs from both the fitness check task and the short
+ walk task in that the distance is fixed. After a first walk, the user is asked to turn, then reverse
+ direction.
+
+ The data collected by this task can include accelerometer, device motion, pedometer data,
+ and location where available.
+
+ Data collected by the task is in the form of an `ORKTimedWalkResult` object.
+
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+ about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
+
+ @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                            turnAroundTimeLimit:(NSTimeInterval)turnAroundTimeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options;
+
+/**
  Returns a predefined task that consists of the paced serial addition test (PSAT).
  
  In a PSAT task, the participant is asked to add a new digit to the one immediately before it
@@ -616,6 +706,30 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures hand tremor.
+ 
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       activeStepDuration:(NSTimeInterval)activeStepDuration
+                                        activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                              handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options;
 
 @end
 

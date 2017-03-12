@@ -37,7 +37,9 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-
+/**
+ Defines the common attributes of chart values.
+ */
 @protocol ORKValueCollectionType
 
 /**

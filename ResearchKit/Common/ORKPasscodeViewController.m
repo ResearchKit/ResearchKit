@@ -87,11 +87,11 @@
                                   passcodeType:(ORKPasscodeType)passcodeType {
     
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.passcodeFlow = passcodeFlow;
     step.passcodeType = passcodeType;
     step.text = text;
     
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
     passcodeStepViewController.step = step;
     

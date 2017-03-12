@@ -74,7 +74,7 @@
     [super initializeInternalButtonItems];
     
     self.internalDoneButtonItem = nil;
-    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_DONE", nil);
+    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
 }
 
 - (void)viewDidLoad {

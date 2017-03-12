@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Scott Guelich.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Medable Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -453,6 +454,16 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
     ORKQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
+    
+/*
+    ContinuousScale navigation rules always evaluate to false because the result is different from what is displayed in the UI.
+    The fraction digits have to be taken into account in self.answer as well.
+*/
+    if ([self isKindOfClass:[ORKContinuousScaleAnswerFormat class]]) {
+        NSNumberFormatter* formatter = [(ORKContinuousScaleAnswerFormat*)self numberFormatter];
+        answer = [formatter numberFromString:[formatter stringFromNumber:answer]];
+    }
+    
     questionResult.answer = answer;
     questionResult.questionType = self.questionType;
     return questionResult;
@@ -1097,7 +1108,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item.
-    return super.hash ^ self.defaultDate.hash ^ _style;
+    return ([super hash] & [self.defaultDate hash]) ^ _style;
 }
 
 - (NSCalendar *)currentCalendar {
@@ -1263,7 +1274,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Don't bother including everything - style is the main item
-    return super.hash ^ self.unit.hash & _style;
+    return [super hash] ^ ([self.unit hash] & _style);
 }
 
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style unit:(NSString *)unit {
@@ -2094,7 +2105,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self.validationRegex) {
         if (!_cachedRegEx) {
             NSString *regExPattern = self.validationRegex;
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:0 error:nil];
         }
 
         NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];

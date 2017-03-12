@@ -47,6 +47,7 @@ NSString *const ORKGraphAxisTitleColorKey = @"ORKGraphAxisTitleColorKey";
 NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey";
 NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
 NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
+NSString *const ORKAuxiliaryImageTintColorKey = @"ORKAuxiliaryImageTintColorKey";
 
 @implementation UIColor (ORKColor)
 
@@ -86,7 +87,8 @@ static NSMutableDictionary *colors() {
                     ORKGraphAxisTitleColorKey: [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
                     ORKGraphReferenceLineColorKey: [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
                     ORKGraphScrubberLineColorKey: [UIColor grayColor],
-                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0]
+                    ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0],
+                    ORKAuxiliaryImageTintColorKey: [UIColor colorWithRed:228.0 / 255.0 green:233.0 / 255.0 blue:235.0 / 255.0 alpha:1.0],
                     } mutableCopy];
     });
     return colors;
@@ -211,7 +213,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         10,        10,         0,         0,        10,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {        322,       274,       217,       217,       446,       446},      // ORKScreenMetricVerticalScaleHeight
-        {        156,       156,       156,       156,       256,       256},      // ORKScreenMetricSignatureViewHeight
+        {        208,       208,       208,       198,       256,       256},      // ORKScreenMetricSignatureViewHeight
         {        384,       324,       304,       304,       384,       384},      // ORKScreenMetricPSATKeyboardViewWidth
         {        197,       167,       157,       157,       197,       197},      // ORKScreenMetricPSATKeyboardViewHeight
         {        238,       238,       150,        90,       238,       238},      // ORKScreenMetricLocationQuestionMapHeight

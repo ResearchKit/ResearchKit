@@ -70,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 /**
  Tells the delegate that the maximum current log file lifetime changed.
+ @param dataLogger  Source of this event.
  */
 - (void)dataLoggerThresholdsDidChange:(ORKDataLogger *)dataLogger;
 

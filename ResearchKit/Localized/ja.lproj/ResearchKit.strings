@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "メール";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "hiro_sato@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "パスワード";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "パスワードを入力";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "入力できるのは数字のみです。";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコード入力の進行状況インジケータ";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@桁を入力しました";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "パスコードをお忘れですか?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "キーチェーン項目を追加できませんでした。";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "いいえ";
 "BOOL_YES" = "はい";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "タップで回答";
 "NULL_ANSWER" = "答えを選択してください";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "後で使用するために保存";
 "BUTTON_OPTION_DISCARD" = "結果を破棄";
 "BUTTON_OPTION_STOP_TASK" = "タスクを終了";
+"BUTTON_SAVE" = "保存";
+"BUTTON_CLEAR_ANSWER" = "答えを消去";
+"BUTTON_READ_ONLY_MODE" = "この答えは変更できません。";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "アクティビティ開始まで";
 "TASK_COMPLETE_TITLE" = "アクティビティ完了";
 "TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "残り%@秒です。";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "イメージを取り込む";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "この手順を完了するには、“設定”でこのAppがカメラにアクセスすることを許可してください。";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "取り込んだイメージの出力ディレクトリが指定されていません。";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "取り込んだイメージを保存できませんでした。";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "録画を開始";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "録画を停止";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "再度ビデオを取り込む";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "体力";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "後ろを向いて、元の場所まで歩いて戻ってください。";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "まっすぐに%ld歩まで歩いてください。";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "安全にまっすぐ行ったり来たり歩ける場所を見つけてください。進路の終わりまで来たら、コーンを回るように折り返して歩き続けます。\n\n次に、完全な円を描いて回るように指示されます。その後、両腕を脇につけ、足を肩幅くらいに開いてじっと立ってください。";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "開始の準備ができたら、“開始”をタップしてください。\n次に、電話をポケットまたはバッグに入れて、音声による指示に従ってください。";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "まっすぐ行ったり来たりして%@間歩きます。いつもと同じように歩いてください。";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "完全な円を描いて歩いてから、%@間じっと立ってください。";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "アクティビティが完了しました。";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "タップの速度";
+"TAPPING_TASK_TITLE_RIGHT" = "右手";
+"TAPPING_TASK_TITLE_LEFT" = "左手";
 "TAPPING_INTRO_TEXT" = "このアクティビティでは、タップの速度を測定します。";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "電話を平らな場所に置いてください。画面に2つのボタンが%@間表示されます。同じ手の2本の指を使って、これらのボタンをできるだけ速く、交互にタップしてください。";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "電話を平らな面に置いてください。";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "同じ手の2本の指を使って、画面上のボタンを交互にタップします。";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "右手の2本の指を使って、画面上のボタンを交互にタップしてください。";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "左手の2本の指を使って、画面上のボタンを交互にタップしてください。";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "次に、右手で同じテストを繰り返します。";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "次に、左手で同じテストを繰り返します。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "一方の指でタップしてから、他方の指でタップします。できるだけ一定の時間間隔でタップしてください。%@間タップし続けます。";
 "TAPPING_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"TAPPING_CALL_TO_ACTION_NEXT" = "始めるには、“次へ”をタップしてください。";
 "TAP_BUTTON_TITLE" = "タップ";
 "TOTAL_TAPS_LABEL" = "合計タップ回数";
-"TAPPING_INSTRUCTION" = "2本の指を使ってできるだけ速くボタンをタップしてください。";
-
+"TAPPING_INSTRUCTION" = "2本の指を使って、できるだけ一定の速度でボタンをタップしてください。";
+"TAPPING_INSTRUCTION_RIGHT" = "右手を使ってボタンをタップしてください。";
+"TAPPING_INSTRUCTION_LEFT" = "左手を使ってボタンをタップしてください。";
+"TAPPING_SKIP_TITLE" = "この手をスキップ";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "声";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "このアクティビティでは、電話の下部にあるマイクで録音することで、あなたの声を評価します。";
 "AUDIO_TOO_LOUD_LABEL" = "大きすぎる";
 "AUDIO_GENERIC_ERROR_LABEL" = "声を録音できません";
+"AUDIO_LEVEL_CHECK_LABEL" = "背景ノイズのレベルを確認中です。しばらくお待ちください。";
+"AUDIO_TOO_LOUD_MESSAGE" = "周囲のノイズが大きすぎるため、声を録音できません。静かな場所に移動してやり直してください。";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "準備ができたら“次へ”をタップしてください。";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "2本の指で円をつまんでください。";
 "HOLE_PEG_TEST_TEXT_2" = "指で円を持ち上げて移動させ落としてください。";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "震え測定アクティビティ";
+"TREMOR_TEST_INTRO_1_DETAIL" = "このアクティビティでは、さまざまな位置で手の震えを測定します。このアクティビティが終わるまで楽な姿勢で座っていられる場所を見つけてください。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "下の図のように、震えの大きい方の手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "下の図のように、右手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "下の図のように、左手で電話を持ってください。";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "電話を手に持って座ったまま、%@を行うように求められます。";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "1つのタスク";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "2つのタスク";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "3つのタスク";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "4つのタスク";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "5つのタスク";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "続けるには、“次へ”をタップします。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "電話を膝の上で持つ準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "左手を使って電話を膝の上で持つ準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "右手を使って電話を膝の上で持つ準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "電話を膝の上で%ld秒間持ち続けてください。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "次に、手を伸ばして電話を肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "次に、左手を伸ばして電話を肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "次に、右手を伸ばして電話を肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "手を伸ばして、%ld秒間電話を持ち続けてください。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "肘を曲げて、電話を肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "肘を曲げて、電話を左手で肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "肘を曲げて、電話を右手で肩の高さに持ってください。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "肘を曲げて%ld秒間電話を持ち続けてください。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "次に、肘を曲げて電話で繰り返し鼻に触れてください。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "次に、電話を左手に持って肘を曲げたまま、電話で繰り返し鼻に触れてください。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "次に、電話を右手に持って肘を曲げたまま、電話で繰り返し鼻に触れてください。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "電話で%ld秒間鼻に触れ続けてください。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "手首を回すように手を振る準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "電話を左手に持って手首を回すように手を振る準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "電話を右手に持って手首を回すように手を振る準備をしてください。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "%ld秒間、手を振り続けてください。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "電話を左手に持ち替えて、次のタスクに進んでください。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "電話を右手に持ち替えて、次のタスクに進んでください。";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "次のタスクに進んでください。";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "アクティビティが完了しました。";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "最初に一方の手、次に他方の手で電話を持って座ったまま、%@を行うように求められます。";
+"TREMOR_SKIP_LEFT_HAND" = "左手ではこのアクティビティができません。";
+"TREMOR_SKIP_RIGHT_HAND" = "右手ではこのアクティビティができません。";
+"TREMOR_SKIP_NEITHER" = "どちらの手でもこのアクティビティができます。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "しきい値に達するのに十分なログファイルを削除できませんでした";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "プレビューを取り込む";
 "AX_IMAGE_CAPTURED_LABEL" = "取り込んだイメージ";
 
+"AX_VIDEO_CAPTURE_LABEL" = "ビデオ取り込みのプレビュー";
+"AX_VIDEO_CAPTURED_LABEL" = "取り込んだビデオ";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "サイズ%@の円盤をサイズ%@の円盤の上に置くことはできません";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "ターゲット";
 "AX_TOWER_OF_HANOI_TOWER" = "塔";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@のサイズの円盤があります";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
 
-"AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "範囲%@〜%@";
+"AX_GRAPH_STACK_PREFIX" = "次の内容のスタック:";
 "AX_GRAPH_AND_SEPARATOR" = "と";
 "AX_GRAPH_POINT_%@" = "ポイント: %@";

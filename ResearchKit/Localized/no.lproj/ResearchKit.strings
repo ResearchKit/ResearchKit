@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tillatt.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Framdriftsindikator for inntasting av kode";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ sifre oppgitt";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Glemt koden?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunne ikke legge til nøkkelringobjekt.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Nei";
 "BOOL_YES" = "Ja";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "fot";
+"MEASURING_UNIT_IN" = "to";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Trykk for å svare";
 "NULL_ANSWER" = "Velg et svar";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Spar til senere";
 "BUTTON_OPTION_DISCARD" = "Forkast resultater";
 "BUTTON_OPTION_STOP_TASK" = "Avslutt oppgave";
+"BUTTON_SAVE" = "Arkiver";
+"BUTTON_CLEAR_ANSWER" = "Fjern svar";
+"BUTTON_READ_ONLY_MODE" = "Dette svaret kan ikke endres.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starter aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktivitet fullført";
 "TASK_COMPLETE_TEXT" = "Dataene vil bli analysert, og du blir varslet når resultatene er klare.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder gjenstår.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ta bilde";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "For å fullføre trinnet må du først gi appen tilgang til kameraet i Innstillinger.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Du har ikke angitt en katalog for bildene du tar.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Bildet kunne ikke arkiveres.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Start opptak";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Stopp opptak";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Spill inn video på nytt";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondisjon";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Snu og gå tilbake der du startet.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå opptil %ld skritt i rett linje.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Finn et sted hvor du trygt kan gå fram og tilbake i en rett linje. Prøv å gå kontinuerlig når du skal snu, som om du skal gå rundt en kjegle.\n\nDu vil bli deretter bedt om å snu deg helt rundt og stå helt stille med armene ned langs siden og føttene med en skulderbreddes avstand.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Trykk på Kom i gang når du er klar til å starte.\nPlasser deretter telefonen i en lomme eller veske, og følg lydinstruksjonene.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gå fram og tilbake i en rett linje i %@. Gå så normalt så mulig.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Snu deg helt rundt og stå stille i %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Du har fullført aktiviteten.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Trykkhastighet";
+"TAPPING_TASK_TITLE_RIGHT" = "Høyre hånd";
+"TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
 "TAPPING_INTRO_TEXT" = "Denne aktiviteten måler trykkhastigheten din.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Legg telefonen på et flatt underlag. To knapper vises på skjermen i %@. Bruk to fingre på samme hånd og trykk vekselvis på knappene så fort du kan.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Plasser telefonen på en flat overflate.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Bruk to fingre på samme hånd til å trykke vekselvis på knappene på skjermen.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Bruk to fingre på høyre hånd til å trykke vekselvis på knappene på skjermen.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Bruk to fingre på venstre hånd til å trykke vekselvis på knappene på skjermen.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Gjør den samme testen med høyre hånd.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Gjør den samme testen med venstre hånd.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Trykk med én finger, og deretter den andre. Veksle mellom knappene i jevne intervaller. Fortsett å trykke i %@.";
 "TAPPING_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Trykk på Neste for å begynne.";
 "TAP_BUTTON_TITLE" = "Trykk";
 "TOTAL_TAPS_LABEL" = "Trykk totalt";
-"TAPPING_INSTRUCTION" = "Trykk på knappene så fort du kan med to fingre.";
-
+"TAPPING_INSTRUCTION" = "Trykk på knappene så jevnt som du klarer, med to fingre.";
+"TAPPING_INSTRUCTION_RIGHT" = "Trykk på knappene med din HØYRE hånd.";
+"TAPPING_INSTRUCTION_LEFT" = "Trykk på knappene med din VENSTRE hånd.";
+"TAPPING_SKIP_TITLE" = "Utelat denne hånden";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Aktiviteten vil evaluere stemmen din ved å ta den opp i mikrofonen i nedre kant av telefonen.";
 "AUDIO_TOO_LOUD_LABEL" = "For høyt";
 "AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke ta opp lyd";
+"AUDIO_LEVEL_CHECK_LABEL" = "Vent mens vi kontrollerer støynivået i bakgrunnen.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Støynivået fra omgivelsene er for høyt til å gjøre opptak av stemmen din. Gå til et sted mindre støy, og prøv igjen.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Trykk på Neste når du er klar.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Bruk to fingre til å løfte opp pluggen.";
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for å slippe pluggen.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Skjelving – aktivitet";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Denne aktiviteten måler skjelving i hendene dine i forskjellige posisjoner. Finn et sted hvor du kan sitte i ro i løpet av denne aktiviteten.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i hånden som er hardest rammet, som vist i bildet nedenfor.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i din HØYRE hånd som vist i bildet nedenfor.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Hold telefonen i din VENSTRE hånd som vist i bildet nedenfor.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Du vil bli bedt om å utføre %@ mens du sitter med telefonen i den ene hånden.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "en oppgave";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "to oppgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tre oppgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "fire oppgaver";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "fem oppgaver";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Trykk på Neste for å gå videre.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Forbered deg på å holde telefonen i fanget.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Forbered deg på å holde telefonen i fanget med VENSTRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Forbered deg på å holde telefonen i fanget med HØYRE hånd.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Hold telefonen i fanget i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Hold telefonen med utstrakt hånd i skulderhøyde.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Hold telefonen med VENSTRE hånd utstrakt i skulderhøyde.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Hold telefonen med HØYRE hånd utstrakt i skulderhøyde.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Hold telefonen med utstrakt hånd i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Hold telefonen i skulderhøyde med albuen bøyd.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Hold telefonen med VENSTRE hånd i skulderhøyde med albuen bøyd.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Hold telefonen med HØYRE hånd i skulderhøyde med albuen bøyd.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Hold telefonen med albuen bøyd i %ld sekunder";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Hold albuen bøyd, og trykk telefonen mot nesen gjentatte ganger.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Hold albuen bøyd med telefonen i VENSTRE hånd, og trykk telefonen mot nesen gjentatte ganger.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Hold albuen bøyd med telefonen i HØYRE hånd, og trykk telefonen mot nesen gjentatte ganger.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Hold telefonen mot nesen i %ld sekunder";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Forbered deg på å vinke som en dronning (vink ved å vri på håndleddet).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Forbered deg på å vinke som en dronning med telefonen i VENSTRE hånd (vink ved å vri på håndleddet).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Forbered deg på å vinke som en dronning med telefonen i HØYRE hånd (vink ved å vri på håndleddet).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Vink som en dronning i %ld sekunder.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Flytt telefonen til VENSTRE hånd, og fortsett oppgaven.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Flytt telefonen til HØYRE hånd, og fortsett oppgaven.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Fortsett til neste oppgave.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivitet fullført.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Du vil bli bedt om å utføre %@ mens du sitter med telefonen i den ene hånden, og deretter igjen med den andre hånden.";
+"TREMOR_SKIP_LEFT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min VENSTRE hånd.";
+"TREMOR_SKIP_RIGHT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min HØYRE hånd.";
+"TREMOR_SKIP_NEITHER" = "Jeg kan utføre denne aktiviteten med begge hender.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Forhåndsvisning av bilde";
 "AX_IMAGE_CAPTURED_LABEL" = "Tatt bilde";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Forhåndsvisning av videoopptak";
+"AX_VIDEO_CAPTURED_LABEL" = "Innspilt video";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke plassere skive med størrelse %@ på skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
 "AX_TOWER_OF_HANOI_TOWER" = "Tårn";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
-"AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Område fra %@ til %@";
+"AX_GRAPH_STACK_PREFIX" = "Stabel bestående av";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";

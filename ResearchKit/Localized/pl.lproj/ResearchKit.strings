@@ -141,6 +141,7 @@
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dozwolone są tylko znaki numeryczne.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Wskaźnik postępu podawania kodu";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Liczba wprowadzonych cyfr: %@ z %@";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Nie pamiętasz kodu?";
 
 /* Keychain wrapper */
 "KEYCHAIN_ADD_ERROR_MESSAGE" = "Nie można było dodać rzeczy pęku kluczy.";
@@ -167,6 +168,11 @@
 "BOOL_NO" = "Nie";
 "BOOL_YES" = "Tak";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "cale";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Stuknij, aby odpowiedzieć";
 "NULL_ANSWER" = "Wybierz odpowiedź";
@@ -189,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Zachowaj na później";
 "BUTTON_OPTION_DISCARD" = "Odrzuć wyniki";
 "BUTTON_OPTION_STOP_TASK" = "Zakończ zadanie";
+"BUTTON_SAVE" = "Zachowaj";
+"BUTTON_CLEAR_ANSWER" = "Wymaż odpowiedź";
+"BUTTON_READ_ONLY_MODE" = "Nie można modyfikować tej odpowiedzi.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Początek ćwiczenia za";
 "TASK_COMPLETE_TITLE" = "Ćwiczenie zakończone";
 "TASK_COMPLETE_TEXT" = "Twoje dane zostaną przeanalizowane i otrzymasz powiadomienie o wynikach.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Pozostało: %@ s.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Zarejestruj obraz";
@@ -202,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Aby wykonać ten krok, przejdź do Ustawień i daj temu programowi dostęp do aparatu.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego dla zarejestrowanych obrazów.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nie można było zachować zarejestrowanego obrazu.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Rozpocznij nagrywanie";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Zatrzymaj nagrywanie";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Zarejestruj wideo ponownie";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Sprawność";
@@ -222,16 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Odwróć się i przejdź do miejsca startu.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Idź prosto i zatrzymaj się po maksymalnie %ld krokach.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Znajdź miejsce, w którym możesz bezpiecznie chodzić w tę i z powrotem w linii prostej. Próbuj chodzić w sposób ciągły, zawracając na końcach tak, jak robi się to wokół słupka.\n\nNastępnie wykonasz pełny obrót i staniesz z rękoma ułożonymi wzdłuż ciała i stopami rozstawionymi do szerokości ramion.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Aby rozpocząć, stuknij w Start.\nNastępnie umieść telefon w kieszeni lub torbie i postępuj zgodnie z instrukcjami dźwiękowymi.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Chodź zwykłym krokiem w tę i z powrotem w linii prostej przez %@.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Wykonaj pełny obrót i stój bez ruchu przez %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ćwiczenie zostało ukończone.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Szybkość stukania";
+"TAPPING_TASK_TITLE_RIGHT" = "Prawa ręka";
+"TAPPING_TASK_TITLE_LEFT" = "Lewa ręka";
 "TAPPING_INTRO_TEXT" = "To ćwiczenie ocenia Twoją szybkość stukania.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Połóż telefon na płaskiej powierzchni. Przez %@ na ekranie będą wyświetlane dwa przyciski. Używając dwóch palców tej samej ręki stukaj w nie na przemian jak najszybciej potrafisz.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Połóż telefon na płaskiej powierzchni.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami tej samej ręki.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami prawej ręki.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami lewej ręki.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Teraz wykonaj to ćwiczenie prawą ręką.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Teraz wykonaj to ćwiczenie lewą ręką.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Stukaj na zmianę jednym i drugim palcem. Próbuj stukać możliwie miarowo. Stukaj przez %@.";
 "TAPPING_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Aby rozpocząć, stuknij w Dalej.";
 "TAP_BUTTON_TITLE" = "Stuknij";
 "TOTAL_TAPS_LABEL" = "Liczba stuknięć";
-"TAPPING_INSTRUCTION" = "Stukaj w przyciski dwoma palcami jak najszybciej potrafisz.";
-
+"TAPPING_INSTRUCTION" = "Stukaj w przyciski dwoma palcami możliwie miarowo.";
+"TAPPING_INSTRUCTION_RIGHT" = "Stukaj w przyciski PRAWĄ ręką.";
+"TAPPING_INSTRUCTION_LEFT" = "Stukaj w przyciski LEWĄ ręką.";
+"TAPPING_SKIP_TITLE" = "Pomiń tę rękę";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Głos";
@@ -241,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "To ćwiczenie ocenia Twój głos, nagrywając go przy użyciu mikrofonu znajdującego się u dołu telefonu.";
 "AUDIO_TOO_LOUD_LABEL" = "Zbyt głośno";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nie można nagrać dźwięku";
+"AUDIO_LEVEL_CHECK_LABEL" = "Czekaj, sprawdzamy poziom szumu tła.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Szum otoczenia jest zbyt głośny, aby nagrać Twój głos. Przenieś się w cichsze miejsce i spróbuj ponownie.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Aby rozpocząć, stuknij w Dalej.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
@@ -339,6 +374,48 @@
 "HOLE_PEG_TEST_TEXT" = "Podnieś „kołek” dwoma palcami.";
 "HOLE_PEG_TEST_TEXT_2" = "Unieś palce, aby upuścić „kołek”.";
 
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Ćwiczenie oceniające drżenie rąk";
+"TREMOR_TEST_INTRO_1_DETAIL" = "To ćwiczenie ocenia drżenie rąk w różnych pozycjach. Na czas tego ćwiczenia znajdź miejsce, w którym możesz wygodnie siedzieć.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Trzymaj telefon w bardziej drżącej ręce, tak jak na obrazku poniżej.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Trzymaj telefon w PRAWEJ ręce, tak jak na obrazku poniżej.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Trzymaj telefon w LEWEJ ręce, tak jak na obrazku poniżej.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Wykonasz %@ w pozycji siedzącej, trzymając telefon w ręce.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "zadanie";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dwa zadania";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "trzy zadania";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "cztery zadania";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "pięć zadań";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Aby kontynuować, stuknij w Dalej.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Przygotuj się do trzymania telefonu na kolanach.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Przygotuj się do trzymania telefonu na kolanach LEWĄ ręką.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Przygotuj się do trzymania telefonu na kolanach PRAWĄ ręką.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Trzymaj telefon na kolanach przez %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Teraz trzymaj telefon w wyciągniętej ręce na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Teraz trzymaj telefon w wyciągniętej LEWEJ ręce na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Teraz trzymaj telefon w wyciągniętej PRAWEJ ręce na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Trzymaj telefon w wyciągniętej ręce przez %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Teraz trzymaj telefon w ręce ugiętej w łokciu na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Teraz trzymaj telefon w LEWEJ ręce ugiętej w łokciu na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Teraz trzymaj telefon w PRAWEJ ręce ugiętej w łokciu na wysokości barku.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Trzymaj telefon w ręce zgiętej w łokciu przez %ld s";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Teraz, trzymając telefon w ręce zgiętej w łokciu, dotknij nim nosa i powtarzaj tę czynność.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Teraz, trzymając telefon w LEWEJ ręce zgiętej w łokciu, dotknij nim nosa i powtarzaj tę czynność.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Teraz, trzymając telefon w PRAWEJ ręce zgiętej w łokciu, dotknij nim nosa i powtarzaj tę czynność.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Dotykaj telefonem nosa przez %ld s";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Przygotuj się do machania dłonią, zginając rękę w nadgarstku.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Przygotuj się do machania LEWĄ dłonią, zginając rękę w nadgarstku.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Przygotuj się do machania PRAWĄ dłonią, zginając rękę w nadgarstku.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Unieś rękę i machaj dłonią, zginając rękę w nadgarstku, przez %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Teraz przełóż telefon do LEWEJ ręki i przejdź do następnego zadania.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Teraz przełóż telefon do PRAWEJ ręki i przejdź do następnego zadania.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Przejdź do następnego zadania.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Ćwiczenie ukończone.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Wykonasz %@ w pozycji siedzącej z telefonem w jednej ręce, a następnie w drugiej.";
+"TREMOR_SKIP_LEFT_HAND" = "Nie mogę wykonywać tego ćwiczenia LEWĄ ręką.";
+"TREMOR_SKIP_RIGHT_HAND" = "Nie mogę wykonywać tego ćwiczenia PRAWĄ ręką.";
+"TREMOR_SKIP_NEITHER" = "Mogę wykonywać to ćwiczenie obiema rękami.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nie można było utworzyć pliku";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nie można było usunąć liczby plików dzienników pozwalającej na osiągnięcie progu";
@@ -378,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Zarejestruj podgląd";
 "AX_IMAGE_CAPTURED_LABEL" = "Zarejestrowany obraz";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Podgląd rejestracji wideo";
+"AX_VIDEO_CAPTURED_LABEL" = "Zarejestrowane wideo";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nie można umieścić dysku o rozmiarze %@ na dysku o rozmiarze %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Krążek docelowy";
 "AX_TOWER_OF_HANOI_TOWER" = "Wieża";
@@ -386,6 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Zawiera krążki o rozmiarach %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Pusta";
 
-"AX_GRAPH_RANGE_FORMAT" = "Zakres %@–%@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Zakres %@–%@";
+"AX_GRAPH_STACK_PREFIX" = "Stos złożony z";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";

@@ -210,11 +210,11 @@ static const CGFloat LabelRightMargin = 44.0;
 #pragma mark - Accessibility
 
 - (NSString *)accessibilityLabel {
-    if (self.accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
-        return ORKAccessibilityStringForVariables(self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
-    }
-    NSString *state = (self.selectedItem ? ORKLocalizedString(@"AX_SELECTED", nil) : ORKLocalizedString(@"AX_UNSELECTED", nil));
-    return ORKAccessibilityStringForVariables(state, self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
+    return ORKAccessibilityStringForVariables(self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    return UIAccessibilityTraitButton | (self.selectedItem ? UIAccessibilityTraitSelected : 0);
 }
 
 @end

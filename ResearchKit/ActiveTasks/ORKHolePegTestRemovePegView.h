@@ -36,7 +36,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestRemovePegView : UIView
+@interface ORKHolePegTestRemovePegView : UIView <CAAnimationDelegate>
 
 @property (nonatomic, assign, getter = isSuccess) BOOL success;
 
