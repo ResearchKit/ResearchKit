@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Scott Guelich.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Medable Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -144,6 +145,24 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
         HKBiologicalSexObject *biologicalSex = [_healthStore biologicalSexWithError:error];
         if (biologicalSex && biologicalSex.biologicalSex != HKBiologicalSexNotSet) {
             result = ORKHKBiologicalSexString(biologicalSex.biologicalSex);
+        }
+        if (result) {
+            result = @[result];
+        }
+    }
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierFitzpatrickSkinType]) {
+        HKFitzpatrickSkinTypeObject *skinType = [_healthStore fitzpatrickSkinTypeWithError:error];
+        if (skinType && skinType.skinType != HKFitzpatrickSkinTypeNotSet) {
+            result = @(skinType.skinType);
+        }
+        if (result) {
+            result = @[result];
+        }
+    }
+    if (ORK_IOS_10_WATCHOS_3_AVAILABLE && [[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
+        HKWheelchairUseObject *wheelchairUse = [_healthStore wheelchairUseWithError:error];
+        if (wheelchairUse && wheelchairUse.wheelchairUse != HKWheelchairUseNotSet) {
+            result = (wheelchairUse.wheelchairUse == HKWheelchairUseYes) ? @YES : @NO;
         }
         if (result) {
             result = @[result];
@@ -427,6 +446,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return nil;
 }
 
+- (HKObjectType *)healthKitObjectTypeForAuthorization {
+    return nil;
+}
+
 - (HKUnit *)healthKitUnit {
     return nil;
 }
@@ -453,6 +476,16 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
     ORKQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
+    
+/*
+    ContinuousScale navigation rules always evaluate to false because the result is different from what is displayed in the UI.
+    The fraction digits have to be taken into account in self.answer as well.
+*/
+    if ([self isKindOfClass:[ORKContinuousScaleAnswerFormat class]]) {
+        NSNumberFormatter* formatter = [(ORKContinuousScaleAnswerFormat*)self numberFormatter];
+        answer = [formatter numberFromString:[formatter stringFromNumber:answer]];
+    }
+    
     questionResult.answer = answer;
     questionResult.questionType = self.questionType;
     return questionResult;
@@ -2094,7 +2127,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self.validationRegex) {
         if (!_cachedRegEx) {
             NSString *regExPattern = self.validationRegex;
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:0 error:nil];
         }
 
         NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];

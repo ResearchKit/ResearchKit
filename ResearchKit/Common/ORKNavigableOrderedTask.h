@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKStepNavigationRule;
 @class ORKSkipStepNavigationRule;
+@class ORKStepModifier;
 
 /**
  The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from
@@ -143,6 +144,39 @@ ORK_CLASS_AVAILABLE
  Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKSkipStepNavigationRule *> *skipStepNavigationRules;
+
+/**
+ Adds a step modifier for a step identifier.
+ 
+ @param stepModifier        The step modifier associated with this step
+ @param stepIdentifier      The identifier of the step that is checked against the skip
+ rule.
+ */
+- (void)setStepModifier:(ORKStepModifier *)stepModifier forStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ Returns the step modifier associated with a step identifier,  or `nil` if there is no
+ step modifier associated with that step identifier.
+ 
+ @param stepIdentifier      The identifier of the step to be modified
+ 
+ @return A step modifier, or `nil` if the step identifier has none.
+ */
+- (nullable ORKStepModifier *)stepModifierForStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ Removes the step modifier, if any, associated with the specified step identifier.
+ 
+ @param stepIdentifier   The identifier of the step whose rule is to be removed.
+ */
+- (void)removeStepModifierForStepIdentifier:(NSString *)stepIdentifier;
+
+/**
+ A dictionary of step modifiers in the task, keyed by trigger step identifier.
+ 
+ Each object in the dictionary should be a `ORKStepModifier` subclass.
+ */
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepModifier *> *stepModifiers;
 
 /**
  Determines whether the task should report its progress as a linear ordered task or not.

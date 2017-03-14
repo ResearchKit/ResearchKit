@@ -80,12 +80,13 @@
     UIImage *image = _instructionStep.image;
     UIImage *auxiliaryImage = _instructionStep.auxiliaryImage;
     BOOL hasImage = (image != nil);
+    BOOL hasFootnote = _instructionStep.footnote.length > 0;
     
     _isCompletionStep = [_instructionStep isKindOfClass:[ORKCompletionStep class]];
     
     self.verticalCenteringEnabled = !hasImage;
-    self.continueHugsContent = !hasImage;
-    self.stepViewFillsAvailableSpace = (hasImage && !_isCompletionStep);
+    self.continueHugsContent = !hasImage && !hasFootnote;
+    self.stepViewFillsAvailableSpace = ((hasImage || hasFootnote) && !_isCompletionStep);
     
     _instructionImageView.image = image;
     _instructionImageView.shouldApplyTint = instructionStep.shouldTintImages;
@@ -140,6 +141,7 @@
         _instructionImageView.isAccessibilityElement = NO;
     }
     
+    self.headerView.iconImageView.image = _instructionStep.iconImage;
     self.headerView.captionLabel.text = _instructionStep.title;
     
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
@@ -165,6 +167,7 @@
     
     self.headerView.instructionLabel.attributedText = attributedInstruction;
     
+    self.continueSkipContainer.footnoteLabel.text = _instructionStep.footnote;
     [self.continueSkipContainer updateContinueAndSkipEnabled];
     
     [self tintColorDidChange];

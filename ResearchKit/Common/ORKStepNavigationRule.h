@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 
+@class ORKStep;
 @class ORKResult;
 @class ORKTaskResult;
 @class ORKResultPredicate;
@@ -62,14 +63,8 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
-/*
- The `init` and `new` methods are unavailable.
- 
- `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
- subclass.
- */
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns the target step identifier.
@@ -105,6 +100,15 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates,
@@ -202,6 +206,15 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKDirectStepNavigationRule : ORKStepNavigationRule
 
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized direct-step navigation rule using the specified destination step identifier.
  
@@ -249,14 +262,8 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKSkipStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
-/*
- The `init` and `new` methods are unavailable.
- 
- `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
- subclass.
- */
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns whether the targeted step should skip.
@@ -275,6 +282,15 @@ ORK_CLASS_AVAILABLE
 
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns an initialized predicate skip step navigation rule using the specified result predicate.
@@ -317,6 +333,84 @@ ORK_CLASS_AVAILABLE
  The result predicate to match.
  */
 @property (nonatomic, strong, readonly) NSPredicate *resultPredicate;
+
+@end
+
+
+/**
+ The `ORKStepModifier` class is an abstract base class for an object that can be used to modify a step
+ if a given navigation rule is matched.
+ 
+ Step modifiers can be used within an `ORKNavigableOrderedTask` object. You assign step modifiers 
+ to be triggered after a task step is shown. Each step can have one step modifier at most.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKStepModifier: NSObject <NSCopying, NSSecureCoding>
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ Modify the steps for a task.
+ 
+ @param step            The step that is associated with this modifier
+ @param taskResult      The current task result
+ */
+- (void)modifyStep:(ORKStep *)step withTaskResult:(ORKTaskResult *)taskResult;
+
+@end
+
+
+/**
+ The `ORKKeyValueStepModifier` class is an class for an object that can be used to modify a step
+ if a given navigation rule is matched.
+ 
+ Step modifiers can be used within an `ORKNavigableOrderedTask` object. You assign step modifiers
+ to be triggered after a task step is shown. Each step can have one step modifier at most.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKKeyValueStepModifier: ORKStepModifier
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ The result predicate to match.
+ */
+@property (nonatomic, strong, readonly) NSPredicate *resultPredicate;
+
+/**
+ A key-value mapping to apply to the modified step if the result predicate matches.
+ The keys in this are assumed to map using key-value coding.
+ 
+ See https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/
+ */
+@property (nonatomic, strong, readonly) NSDictionary<NSString *, NSObject *> *keyValueMap;
+
+/**
+ Returns a new step modifier.
+ 
+ @param stepIdentifier    The step identifier for the step to modify
+ @param resultPredicate   The result predicate to use to determine if the step should be modified
+ @param keyValueMap       The mapping dictionary for this object
+ @return                  A new step modifier
+ */
+- (instancetype)initWithResultPredicate:(NSPredicate *)resultPredicate
+                           keyValueMap:(NSDictionary<NSString *, NSObject *> *)keyValueMap NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new step modifier.
+ 
+ @param aDecoder    The coder from which to initialize the step navigation rule.
+ @return            A new step modifier
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 

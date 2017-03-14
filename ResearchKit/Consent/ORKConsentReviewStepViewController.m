@@ -306,7 +306,9 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
     result.consented = _documentReviewed;
     result.startDate = parentResult.startDate;
     result.endDate = parentResult.endDate;
-    parentResult.results = @[result];
+    
+    // Add the result
+    parentResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return parentResult;
 }

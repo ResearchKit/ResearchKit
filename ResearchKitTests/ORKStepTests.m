@@ -109,6 +109,58 @@
     XCTAssertThrows([validReactionTimeStep validateParameters]);
 }
 
+- (void)testPageResult {
+    
+    NSArray *steps = @[[[ORKStep alloc] initWithIdentifier:@"step1"],
+                       [[ORKStep alloc] initWithIdentifier:@"step2"],
+                       [[ORKStep alloc] initWithIdentifier:@"step3"],
+                       ];
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:steps];
+    
+    ORKChoiceQuestionResult *step1Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result1"];
+    step1Result1.choiceAnswers = @[@(1)];
+    ORKChoiceQuestionResult *step1Result2 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result2"];
+    step1Result2.choiceAnswers = @[@(2)];
+    ORKChoiceQuestionResult *step2Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step2.result1"];
+    step2Result1.choiceAnswers = @[@(3)];
+    
+    ORKStepResult *inputResult = [[ORKStepResult alloc] initWithStepIdentifier:@"pageStep"
+                                                                       results:@[step1Result1, step1Result2, step2Result1]];
+    
+    ORKPageResult *pageResult = [[ORKPageResult alloc] initWithPageStep:pageStep stepResult:inputResult];
+    
+    // Check steps going forward
+    ORKStep *step1 = [pageStep stepAfterStepWithIdentifier:nil withResult:pageResult];
+    XCTAssertNotNil(step1);
+    XCTAssertEqualObjects(step1.identifier, @"step1");
+    
+    ORKStep *step2 = [pageStep stepAfterStepWithIdentifier:@"step1" withResult:pageResult];
+    XCTAssertNotNil(step2);
+    XCTAssertEqualObjects(step2.identifier, @"step2");
+    
+    ORKStep *step3 = [pageStep stepAfterStepWithIdentifier:@"step2" withResult:pageResult];
+    XCTAssertNotNil(step3);
+    XCTAssertEqualObjects(step3.identifier, @"step3");
+    
+    ORKStep *step4 = [pageStep stepAfterStepWithIdentifier:@"step3" withResult:pageResult];
+    XCTAssertNil(step4);
+    
+    // Check steps going backward
+    ORKStep *backStep2 = [pageStep stepBeforeStepWithIdentifier:@"step3" withResult:pageResult];
+    XCTAssertEqualObjects(backStep2, step2);
+    
+    ORKStep *backStep1 = [pageStep stepBeforeStepWithIdentifier:@"step2" withResult:pageResult];
+    XCTAssertEqualObjects(backStep1, step1);
+    
+    ORKStep *backStepNil = [pageStep stepBeforeStepWithIdentifier:@"step1" withResult:pageResult];
+    XCTAssertNil(backStepNil);
+    
+    // Check identifier
+    XCTAssertEqualObjects([pageStep stepWithIdentifier:@"step1"], step1);
+    XCTAssertEqualObjects([pageStep stepWithIdentifier:@"step2"], step2);
+    XCTAssertEqualObjects([pageStep stepWithIdentifier:@"step3"], step3);
+}
+
 @end
 
 

@@ -120,6 +120,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKReactionTimeResult:
         providerType = ReactionTimeViewProvider.self
         
+    case is ORKRangeOfMotionResult:
+        providerType = RangeOfMotionResultTableViewProvider.self
+
     case is ORKTowerOfHanoiResult:
         providerType = TowerOfHanoiResultTableViewProvider.self
         
@@ -142,6 +145,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     */
     case is ORKCollectionResult where !(result is ORKTaskResult):
         providerType = CollectionResultTableViewProvider.self
+      
+    case is ORKVideoInstructionStepResult:
+        providerType = VideoInstructionStepResultTableViewProvider.self
         
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
@@ -749,6 +755,26 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKRangeOfMotionResult` instance.
+class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rangeOfMotionResult = result as! ORKRangeOfMotionResult
+        let rows = super.resultRowsForSection(section)
+        return rows + [
+            ResultRow(text: "flexed", detail: rangeOfMotionResult.flexed),
+            ResultRow(text: "extended", detail: rangeOfMotionResult.extended)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
 class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -994,7 +1020,7 @@ class TaskResultTableViewProvider: CollectionResultTableViewProvider {
         
         let rows = super.resultRowsForSection(section)
         
-        if section == 0 {
+        if section == 0 && (taskResult.results?.count)! > 0 {
             return rows + [
                 ResultRow(text: "taskRunUUID", detail: taskResult.taskRunUUID.uuidString),
                 ResultRow(text: "outputDirectory", detail: taskResult.outputDirectory)
@@ -1041,6 +1067,26 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
 
                 return ResultRow(text: childResultClassName, detail: childResult.identifier, selectable: true)
             }
+        }
+        
+        return rows
+    }
+}
+
+/// Table view provider specific to an `ORKVideoInstructionStepResult` instance.
+class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let videoInstructionStepResult = result as! ORKVideoInstructionStepResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "playbackStoppedTime", detail: videoInstructionStepResult.playbackStoppedTime),
+                ResultRow(text: "playbackCompleted", detail: videoInstructionStepResult.playbackCompleted)
+            ]
         }
         
         return rows
