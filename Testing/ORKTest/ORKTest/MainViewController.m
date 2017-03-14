@@ -85,6 +85,7 @@ DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TremorTaskIdentifier);
 DefineStringKey(TremorRightHandTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
+DefineStringKey(MoodSurveyTaskIdentifier);
 
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
@@ -373,6 +374,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Walk And Turn Task",
                            @"Hand Tremor Task",
                            @"Right Hand Tremor Task",
+                           @"Mood Survey",
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -500,6 +502,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                    checkAudioLevel:YES
                                                            options:(ORKPredefinedTaskOption)0];
         return task;
+    } else if ([identifier isEqualToString:MoodSurveyTaskIdentifier]) {
+        return [ORKOrderedTask moodSurveyWithIdentifier:MoodSurveyTaskIdentifier
+                                 intendedUseDescription:nil
+                                              frequency:ORKMoodSurveyFrequencyWeekly
+                                     customQuestionText:nil
+                                                options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
         id<ORKTask> task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:ToneAudiometryTaskIdentifier
                                                      intendedUseDescription:nil
@@ -656,8 +664,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeIconImageTask];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
-    }
-    else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
+    } else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
     }
     
@@ -2723,6 +2730,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)rightHandTremorTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
+}
+
+- (void)moodSurveyButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:MoodSurveyTaskIdentifier];
 }
 
 #pragma mark - Dynamic task

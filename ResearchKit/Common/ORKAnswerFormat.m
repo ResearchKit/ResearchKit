@@ -2570,3 +2570,94 @@ static NSString *const formattedAddressLinesKey = @"FormattedAddressLines";
 }
 
 @end
+
+@implementation ORKMoodScaleAnswerFormat
+
+- (instancetype)initWithMoodQuestionType:(ORKMoodQuestionType)questionType {
+    
+    NSArray *textChoices;
+    NSString *imageName;
+    
+    switch (questionType) {
+        case ORKMoodQuestionTypeClarity: {
+            imageName = @"MoodSurveyClarity";
+            textChoices = @[ORKLocalizedString(@"MOOD_CLARITY_GREAT", nil),
+                                     ORKLocalizedString(@"MOOD_CLARITY_GOOD", nil),
+                                     ORKLocalizedString(@"MOOD_CLARITY_AVERAGE", nil),
+                                     ORKLocalizedString(@"MOOD_CLARITY_BAD", nil),
+                                     ORKLocalizedString(@"MOOD_CLARITY_TERRIBLE", nil)];
+        } break;
+        
+        case ORKMoodQuestionTypeOverall: {
+            imageName = @"MoodSurveyMood";
+            textChoices = @[ORKLocalizedString(@"MOOD_OVERALL_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_OVERALL_TERRIBLE", nil)];
+        } break;
+    
+        case ORKMoodQuestionTypePain: {
+            imageName = @"MoodSurveyPain";
+            textChoices = @[ORKLocalizedString(@"MOOD_PAIN_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_PAIN_TERRIBLE", nil)];
+        } break;
+    
+        case ORKMoodQuestionTypeSleep: {
+            imageName = @"MoodSurveySleep";
+            textChoices = @[ORKLocalizedString(@"MOOD_SLEEP_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_SLEEP_TERRIBLE", nil)];
+        } break;
+    
+        case ORKMoodQuestionTypeExcercise: {
+            imageName = @"MoodSurveyExercise";
+            textChoices = @[ORKLocalizedString(@"MOOD_EXERCISE_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_EXERCISE_TERRIBLE", nil)];
+        } break;
+    
+        default: {
+            imageName = @"MoodSurveyCustom";
+            textChoices = @[ORKLocalizedString(@"MOOD_CUSTOM_GREAT", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_GOOD", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_AVERAGE", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_BAD", nil),
+                                 ORKLocalizedString(@"MOOD_CUSTOM_TERRIBLE", nil)];
+        } break;
+    }
+    
+    NSMutableArray *answerChoices = [NSMutableArray new];
+    
+    NSUInteger count = [textChoices count];
+    for (NSUInteger i = 0; i < count; i++) {
+        NSString *unselectedName = [NSString stringWithFormat:@"%@-%@g", imageName, @(i + 1)];
+        UIImage *unselectedImage = [UIImage imageNamed:unselectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        NSString *selectedName = [NSString stringWithFormat:@"%@-%@p", imageName, @(i + 1)];
+        UIImage *selectedImage = [UIImage imageNamed:selectedName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        ORKImageChoice *answerOption = [ORKImageChoice choiceWithNormalImage:unselectedImage
+                                                               selectedImage:selectedImage
+                                                                        text:textChoices[i]
+                                                                       value:@(count - i)];
+        [answerChoices addObject:answerOption];
+    }
+    
+    return [self initWithImageChoices:answerChoices];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (Class)questionResultClass {
+    return [ORKMoodScaleQuestionResult class];
+}
+
+@end

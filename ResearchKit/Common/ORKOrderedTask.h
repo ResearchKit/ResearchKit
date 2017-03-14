@@ -731,6 +731,31 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                   options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined survey that asks the user questions about their mood and general health.
+ 
+ The mood survey includes questions about the daily or weekly mental and physical health status and
+ includes asking about clarity of thinking, overall mood, pain, sleep, and exercise. Additionally, 
+ the survey is setup to allow for an optional custom question that uses a similar-looking set of images
+ as the other questions.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                collected. If the value of this parameter is `nil`, the default
+                                localized text is displayed.
+ @param frequency               How frequently the survey is asked (daily or weekly).
+ @param customQuestionText      A localized string to use for a custom question. If `nil`, this step
+                                is not included.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return A mood survey that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)moodSurveyWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   frequency:(ORKMoodSurveyFrequency)frequency
+                          customQuestionText:(nullable NSString*)customQuestionText
+                                     options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END

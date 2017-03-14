@@ -1385,6 +1385,17 @@ ORK_CLASS_AVAILABLE
 @end
 
 /**
+ The `ORKMoodScaleQuestionResult` class represents the result of an ORKMoodScaleAnswerFormat`
+ question.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMoodScaleQuestionResult : ORKChoiceQuestionResult
+
+@property (nonatomic, copy, nullable) NSNumber *scaleAnswer;
+
+@end
+
+/**
  The `ORKVideoInstructionStepResult` class represents the result of a video insruction step (`ORKVideoInstructionStep`).
  
  A video instruction result is produced by the task view controller when it presents a video instruction step.

@@ -353,6 +353,12 @@ NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
 NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
 NSString *const ORKLocationRecorderIdentifier = @"location";
 NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
+NSString *const ORKMoodSurveyCustomQuestionStepIdentifier = @"mood.custom";
+NSString *const ORKMoodSurveyClarityQuestionStepIdentifier = @"mood.clarity";
+NSString *const ORKMoodSurveyOverallQuestionStepIdentifier = @"mood.overall";
+NSString *const ORKMoodSurveySleepQuestionStepIdentifier = @"mood.sleep";
+NSString *const ORKMoodSurveyExerciseQuestionStepIdentifier = @"mood.exercise";
+NSString *const ORKMoodSurveyPainQuestionStepIdentifier = @"mood.pain";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -2216,5 +2222,104 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 
++ (ORKOrderedTask *)moodSurveyWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   frequency:(ORKMoodSurveyFrequency)frequency
+                          customQuestionText:(nullable NSString*)customQuestionText
+                                     options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+        step.title = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_DAILY_TITLE", nil) :
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_WEEKLY_TITLE", nil);
+        NSString *defaultDescription = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_DAILY_TEXT", nil) :
+                    ORKLocalizedString(@"MOOD_SURVEY_INTRO_WEEKLY_TEXT", nil);
+        step.text = intendedUseDescription ?: defaultDescription;
+        step.detailText = ORKLocalizedString(@"MOOD_SURVEY_INTRO_DETAIL", nil);
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (customQuestionText != nil) {
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypeCustom];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveyCustomQuestionStepIdentifier
+                                                                      title:customQuestionText
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Clarity
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_CLARITY_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_CLARITY_WEEKLY_PROMPT", nil);
+        
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypeClarity];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveyClarityQuestionStepIdentifier
+                                                                      title:prompt
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Overall
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_OVERALL_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_OVERALL_WEEKLY_PROMPT", nil);
+        
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypeOverall];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveyOverallQuestionStepIdentifier
+                                                                      title:prompt
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Pain
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_PAIN_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_PAIN_WEEKLY_PROMPT", nil);
+        
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypePain];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveyPainQuestionStepIdentifier
+                                                                      title:prompt
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Sleep
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_SLEEP_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_SLEEP_WEEKLY_PROMPT", nil);
+        
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypeSleep];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveySleepQuestionStepIdentifier
+                                                                      title:prompt
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {   // Excercise
+        NSString *prompt = (frequency == ORKMoodSurveyFrequencyDaily) ?
+                            ORKLocalizedString(@"MOOD_EXERCISE_DAILY_PROMPT", nil) :
+                            ORKLocalizedString(@"MOOD_EXERCISE_WEEKLY_PROMPT", nil);
+        
+        ORKAnswerFormat *format = [[ORKMoodScaleAnswerFormat alloc] initWithMoodQuestionType:ORKMoodQuestionTypeExcercise];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKMoodSurveyExerciseQuestionStepIdentifier
+                                                                      title:prompt
+                                                                     answer:format];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:[steps copy]];
+    
+    return task;
+}
 
 @end
