@@ -6,6 +6,11 @@
     },
     {
       "idiom" : "iphone",
+      "subtype" : "retina4",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
       "filename" : "holepegtest4@2x.png",
       "scale" : "2x"
     },
@@ -17,6 +22,11 @@
     {
       "idiom" : "iphone",
       "filename" : "holepegtest4@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "subtype" : "retina4",
       "scale" : "3x"
     },
     {

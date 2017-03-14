@@ -33,6 +33,7 @@
 #import "ORKCustomStepView_Internal.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKDeviceMotionRecorder.h"
 #import "ORKActiveStepView.h"
@@ -201,10 +202,15 @@
 #pragma mark - ORKActiveTaskViewController
 
 - (ORKResult *)result {
+    ORKStepResult *stepResult = [super result];
+    
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
     result.flexed = _flexedAngle;
     result.extended = result.flexed - _rangeOfMotionAngle;
-    return result;
+    
+    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
+    
+    return stepResult;
 }
 
 @end

@@ -101,6 +101,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricFontSizeSurveyHeadline,
     ORKScreenMetricMaxFontSizeSurveyHeadline,
     ORKScreenMetricFontSizeSubheadline,
+    ORKScreenMetricFontSizeFootnote,
     ORKScreenMetricCaptionBaselineToFitnessTimerTop,
     ORKScreenMetricCaptionBaselineToTappingLabelTop,
     ORKScreenMetricCaptionBaselineToInstructionBaseline,

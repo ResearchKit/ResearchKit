@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type I";
+"FITZPATRICK_SKIN_TYPE_II" = "Type II";
+"FITZPATRICK_SKIN_TYPE_III" = "Type III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Type V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Female";
 "GENDER_MALE" = "Male";
@@ -202,6 +210,7 @@
 "BUTTON_SAVE" = "Save";
 "BUTTON_CLEAR_ANSWER" = "Clear answer";
 "BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";
@@ -314,6 +323,7 @@
 "MEMORY_GAME_COMPLETE" = "Game Complete";
 "MEMORY_GAME_PAUSED_TITLE" = "Paused";
 "MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "The memory activity was developed with assistance from Katherine Possin, PhD and Joel Kramer, PhD from University of California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
@@ -442,6 +452,17 @@
 "TREMOR_SKIP_LEFT_HAND" = "I cannot perform this activity with my LEFT hand.";
 "TREMOR_SKIP_RIGHT_HAND" = "I cannot perform this activity with my RIGHT hand.";
 "TREMOR_SKIP_NEITHER" = "I can perform this activity with both hands.";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_INTENDED_USE" = "This activity evaluates your visual attention and task switching by recording the time required to tap a series of dots in order.";
+"TRAILMAKING_INTENDED_USE2_A" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by the numbers '2' – '3' – '4'… until you reach the number '7'.";
+"TRAILMAKING_INTENDED_USE2_B" = "After the countdown, tap dots in alternating order between numbers and letters. Begin by tapping the first number '1' followed by tapping the first letter 'A', and then '2' – 'B' – '3' – 'C'… until you reach the number '7'.";
+"TRAILMAKING_INTRO_TEXT" = "Do this as quickly as you can without making mistakes. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

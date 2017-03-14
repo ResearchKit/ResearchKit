@@ -72,12 +72,14 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
+DefineStringKey(FootnoteTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(IconImageTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TrailMakingTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
@@ -366,6 +368,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
+                           @"Trail Making Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
@@ -406,6 +409,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Icon Image",
                            @"Completion Step",
                            @"Page Step",
+                           @"Footnote",
                            ],
                        ];
 }
@@ -654,8 +658,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:TrailMakingTaskIdentifier]) {
+        return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
+                                      intendedUseDescription:nil
+                                      trailmakingInstruction:nil
+                                                   trailType:ORKTrailMakingTypeIdentifierA
+                                                     options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
+    } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
+        return [self makeFootnoteTask];
     }
     else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
@@ -4657,6 +4669,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
 
+#pragma mark - Trail Making Task
+
+- (IBAction)trailMakingTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TrailMakingTaskIdentifier];
+}
+
 #pragma mark - Completion Step Continue Button
 
 - (IBAction)completionStepButtonTapped:(id)sender {
@@ -4677,11 +4695,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
 }
 
+#pragma mark - Page Step
+
 - (IBAction)pageStepButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PageStepTaskIdentifier];
 }
-
-#pragma mark - Page Step
 
 - (ORKOrderedTask *)makePageStepTask {
     
@@ -4732,5 +4750,52 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:PageStepTaskIdentifier steps:steps];
     
 }
+
+
+#pragma mark - Footnote
+
+- (IBAction)footnoteButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:FootnoteTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeFootnoteTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Footnote example";
+    step1.text = @"This is an instruction step with a footnote.";
+    step1.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+    
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"step2"];
+    step2.title = @"Image and No Footnote";
+    step2.text = @"This is an instruction step with an image and NO footnote.";
+    step2.image = [UIImage imageNamed:@"image_example"];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
+    step3.title = @"Image and Footnote";
+    step3.text = @"This is an instruction step with an image and a footnote.";
+    step3.image = [UIImage imageNamed:@"image_example"];
+    step3.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+    
+    ORKFormStep *step4 = [[ORKFormStep alloc] initWithIdentifier:@"step4" title:@"Form Step with skip" text:@"This is a form step with a skip button."];
+    step4.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+                                                           text:@"Are you over 18 years of age?"
+                                                   answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
+    step4.optional = YES;
+    
+    ORKFormStep *step5 = [[ORKFormStep alloc] initWithIdentifier:@"step5" title:@"Form Step with Footnote" text:@"This is a form step with a skip button and footnote."];
+    step5.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+                                                           text:@"Are you over 18 years of age?"
+                                                   answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
+    step5.optional = YES;
+    step5.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+
+    ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Last step.";
+    lastStep.text = @"This is a completion step with a footnote.";
+    lastStep.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+
+    return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
+}
+
 
 @end
