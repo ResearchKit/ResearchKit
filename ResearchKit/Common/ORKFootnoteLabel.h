@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,24 +29,17 @@
  */
 
 
-#import "ORKNavigationContainerView.h"
-#import "ORKContinueButton.h"
-#import "ORKTextButton_Internal.h"
-#import "ORKFootnoteLabel.h"
+@import UIKit;
+#import "ORKLabel.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKNavigationContainerView ()
-
-@property (nonatomic, strong, readonly) ORKContinueButton *continueButton;
-@property (nonatomic, strong, readonly) ORKTextButton *skipButton;
-@property (nonatomic, strong, readonly) ORKFootnoteLabel *footnoteLabel;
-
-@property (nonatomic) BOOL useNextForSkip;
-@property (nonatomic, getter=isOptional) BOOL optional;
-
-- (void)updateContinueAndSkipEnabled;
+/**
+ Step's details text under title.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKFootnoteLabel : ORKLabel
 
 @end
 
