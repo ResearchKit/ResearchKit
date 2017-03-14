@@ -265,6 +265,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 @end
 
+
 #pragma mark - ORKAnswerFormat
 
 @implementation ORKAnswerFormat
@@ -660,6 +661,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @end
 
+
 #pragma mark - ORKMultipleValuePickerAnswerFormat
 
 @implementation ORKMultipleValuePickerAnswerFormat
@@ -717,7 +719,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, valuePickers, ORKValuePickerAnswerFormat);
-        ORK_DECODE_OBJ(aDecoder, separator);
+        ORK_DECODE_OBJ_CLASS(aDecoder, separator, NSString);
     }
     return self;
 }
@@ -2467,8 +2469,8 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, originalItemIdentifier);
-        ORK_DECODE_OBJ(aDecoder, errorMessage);
+        ORK_DECODE_OBJ_CLASS(aDecoder, originalItemIdentifier, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, errorMessage, NSString);
     }
     return self;
 }

@@ -649,6 +649,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKNumberPickerAnswerFormat` class represents an answer format that lets participants use a
  value picker to choose from a fixed set of number choices.
@@ -688,6 +689,7 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 
 @end
+
 
 /**
  The `ORKMultipleValuePickerAnswerFormat` class represents an answer format that lets participants use a
