@@ -58,7 +58,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_INTEGER(aDecoder, passcodeType);
-        ORK_DECODE_UINT32(aDecoder, passcodeFlow);
+        ORK_DECODE_ENUM(aDecoder, passcodeFlow);
     }
     return self;
 }
@@ -66,7 +66,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, passcodeType);
-    ORK_ENCODE_UINT32(aCoder, passcodeFlow);
+    ORK_ENCODE_ENUM(aCoder, passcodeFlow);
 }
 
 + (BOOL)supportsSecureCoding {
