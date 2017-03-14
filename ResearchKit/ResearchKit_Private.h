@@ -62,6 +62,7 @@
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
+#import <ResearchKit/ORKTrailmakingStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
