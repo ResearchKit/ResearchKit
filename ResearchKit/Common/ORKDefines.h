@@ -28,6 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+@import Foundation;
+@import HealthKit;
 
 #if defined(__cplusplus)
 #  define ORK_EXTERN extern "C" __attribute__((visibility("default")))
@@ -38,3 +40,5 @@
 #define ORK_CLASS_AVAILABLE __attribute__((visibility("default")))
 #define ORK_ENUM_AVAILABLE
 #define ORK_AVAILABLE_DECL
+
+#define ORK_IOS_10_WATCHOS_3_AVAILABLE (NSClassFromString(@"HKWorkoutConfiguration") != nil)

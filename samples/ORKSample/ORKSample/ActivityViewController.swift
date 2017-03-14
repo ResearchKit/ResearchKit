@@ -32,7 +32,7 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case gonogo, survey, microphone, tapping
+    case gonogo, survey, microphone, tapping, trailmaking
     
     static var allValues: [Activity] {
         var index = 0
@@ -55,6 +55,8 @@ enum Activity: Int {
                 return "Microphone"
             case .tapping:
                 return "Tapping"
+            case .trailmaking:
+                return "Trail Making Test"
         }
     }
     
@@ -68,6 +70,8 @@ enum Activity: Int {
                 return "Voice evaluation"
             case .tapping:
                 return "Test tapping speed"
+            case .trailmaking:
+                return "Test visual attention"
         }
     }
 }
@@ -127,6 +131,9 @@ class ActivityViewController: UITableViewController {
                 
             case .tapping:
                 taskViewController = ORKTaskViewController(task: StudyTasks.tappingTask, taskRun: NSUUID() as UUID)
+            
+            case .trailmaking:
+                taskViewController = ORKTaskViewController(task: StudyTasks.trailmakingTask, taskRun: NSUUID() as UUID)
         }
 
         taskViewController.delegate = self

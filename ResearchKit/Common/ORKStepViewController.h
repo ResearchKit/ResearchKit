@@ -316,6 +316,18 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly, nullable) ORKStepResult *result;
 
 /**
+ Add a result to the step view controller's `ORKStepResult`. By default, the property for
+ the step view controller's result will instantiate a copy of the result each time it is 
+ called. Therefore, the result cannot be mutated by adding a result to its result array.
+ 
+ This method can be called by a delegate to add a result to a given step in a way that will
+ be retained by the step.
+ 
+ @param result     The result to add to the step results.
+ */
+- (void)addResult:(ORKResult*)result;
+
+/**
  Returns a Boolean value indicating whether there is a previous step.
  
  This method is a convenience accessor that subclasses can call to make a delegate callback to
@@ -360,6 +372,11 @@ ORK_CLASS_AVAILABLE
  point or a target action for a subclass.
  */
 - (void)goBackward;
+
+/**
+ This method is called when the user taps the skip button. By default, it calls `-goForward`.
+ */
+- (void)skipForward;
 
 /**
  A Boolean value indicating whether the view controller has been presented before.

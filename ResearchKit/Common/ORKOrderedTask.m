@@ -63,6 +63,7 @@
 #import "ORKToneAudiometryStep.h"
 #import "ORKToneAudiometryPracticeStep.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKTrailmakingStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKRangeOfMotionStep.h"
 #import "ORKShoulderRangeOfMotionStep.h"
@@ -73,6 +74,9 @@
 #import "ORKHelpers_Internal.h"
 #import "UIImage+ResearchKit.h"
 #import <limits.h>
+
+ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA = @"A";
+ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB = @"B";
 
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
@@ -224,24 +228,9 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
     for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKFormStep class]]) {
-            ORKFormStep *formStep = (ORKFormStep *)step;
-            
-            for (ORKFormItem *formItem in formStep.formItems) {
-                ORKAnswerFormat *answerFormat = [formItem answerFormat];
-                HKObjectType *objType = [answerFormat healthKitObjectType];
-                if (objType) {
-                    [healthTypes addObject:objType];
-                }
-            }
-        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
-            HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
-            if (objType) {
-                [healthTypes addObject:objType];
-            }
-        } else if ([step isKindOfClass:[ORKActiveStep class]]) {
-            ORKActiveStep *activeStep = (ORKActiveStep *)step;
-            [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
+        NSSet *stepSet = [step requestedHealthKitTypesForReading];
+        if (stepSet) {
+            [healthTypes unionSet:stepSet];
         }
     }
     return healthTypes.count ? healthTypes : nil;
@@ -347,6 +336,7 @@ NSString *const ORKTremorTestExtendArmStepIdentifier = @"tremor.handAtShoulderLe
 NSString *const ORKTremorTestBendArmStepIdentifier = @"tremor.handAtShoulderLengthWithElbowBent";
 NSString *const ORKTremorTestTouchNoseStepIdentifier = @"tremor.handToNose";
 NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
+NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
 NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
 NSString *const ORKPSATStepIdentifier = @"psat";
 NSString *const ORKAudioRecorderIdentifier = @"audio";
@@ -2278,6 +2268,80 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options {
+    
+    NSArray *supportedTypes = @[ORKTrailMakingTypeIdentifierA, ORKTrailMakingTypeIdentifierB];
+    NSAssert1([supportedTypes containsObject:trailType], @"Trail type %@ is not supported.", trailType);
+    
+    NSMutableArray<__kindof ORKStep *> *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
+            if ([trailType isEqualToString:ORKTrailMakingTypeIdentifierA]) {
+                step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2_A", nil);
+            } else {
+                step.detailText = ORKLocalizedString(@"TRAILMAKING_INTENDED_USE2_B", nil);
+            }
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
+            step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
+            step.text = trailmakingInstruction ? : ORKLocalizedString(@"TRAILMAKING_INTRO_TEXT",nil);
+            step.detailText = ORKLocalizedString(@"TRAILMAKING_CALL_TO_ACTION", nil);
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 3.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {
+        ORKTrailmakingStep *step = [[ORKTrailmakingStep alloc] initWithIdentifier:ORKTrailmakingStepIdentifier];
+        step.trailType = trailType;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
 
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
 
 @end

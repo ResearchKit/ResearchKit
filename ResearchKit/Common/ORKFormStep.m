@@ -92,6 +92,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormStep *step = [super copyWithZone:zone];
     step.formItems = ORKArrayCopyObjects(_formItems);
+    step.footnote = self.footnote;
     return step;
 }
 
@@ -99,17 +100,20 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.formItems, castObject.formItems);
+    return isParentSame &&
+        ORKEqualObjects(self.formItems, castObject.formItems) &&
+        ORKEqualObjects(self.footnote, castObject.footnote);
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.formItems.hash;
+    return super.hash ^ self.formItems.hash ^ self.footnote.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
+        ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
     }
     return self;
 }
@@ -117,6 +121,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
+    ORK_ENCODE_OBJ(aCoder, footnote);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -134,6 +139,20 @@
     for (ORKFormItem *item in _formItems) {
         item.step = self;
     }
+}
+
+- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
+    NSMutableSet<HKObjectType *> *healthTypes = [NSMutableSet set];
+    
+    for (ORKFormItem *formItem in self.formItems) {
+        ORKAnswerFormat *answerFormat = [formItem answerFormat];
+        HKObjectType *objType = [answerFormat healthKitObjectTypeForAuthorization];
+        if (objType) {
+            [healthTypes addObject:objType];
+        }
+    }
+    
+    return healthTypes.count ? healthTypes : nil;
 }
 
 @end

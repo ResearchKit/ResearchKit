@@ -100,6 +100,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case trailMaking
     case videoInstruction
     
     class TaskListRowSection {
@@ -167,6 +168,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                    .trailMaking
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
@@ -303,6 +305,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .shoulderRangeOfMotion:
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
+            
+        case .trailMaking:
+            return NSLocalizedString("Trail Making Test", comment: "")
         }
     }
     
@@ -463,6 +468,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        case trailMaking
         
         // Video instruction tasks.
         case videoInstructionTask
@@ -595,6 +601,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
+            
+        case .trailMaking:
+            return trailMaking;
         
         case .videoInstruction:
             return videoInstruction
@@ -1350,6 +1359,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a trail making task
+    private var trailMaking: ORKTask {
+        let intendedUseDescription = "Tests visual attention and task switching"
+        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
     }
 
     /// This task presents a video instruction step

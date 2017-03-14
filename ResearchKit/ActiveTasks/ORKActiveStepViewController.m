@@ -97,6 +97,7 @@
 }
 
 - (ORKActiveStep *)activeStep {
+    NSAssert(self.step == nil || [self.step isKindOfClass:[ORKActiveStep class]], @"Step should be a subclass of an ORKActiveStep");
     return (ORKActiveStep *)self.step;
 }
 
@@ -210,7 +211,9 @@
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
-    sResult.results = _recorderResults;
+    if (_recorderResults) {
+        sResult.results = [sResult.results arrayByAddingObjectsFromArray:_recorderResults] ? : _recorderResults;
+    }
     return sResult;
 }
 
