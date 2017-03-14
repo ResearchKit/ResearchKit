@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -442,6 +443,13 @@ IB_DESIGNABLE
  This object is instatiated and added to the view when it is created.
  */
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+
+/**
+ The number of decimal places that is used on the y-axis and scrubber value labels.
+ 
+ The default value of this property is 0.
+ */
+@property (nonatomic) NSUInteger decimalPlaces;
 
 /**
  Animates the graph when it first displays on the screen.
