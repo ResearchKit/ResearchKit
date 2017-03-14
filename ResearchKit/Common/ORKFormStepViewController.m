@@ -334,7 +334,7 @@
     NSMutableSet *types = [NSMutableSet set];
     for (ORKFormItem *item in [self formItems]) {
         ORKAnswerFormat *format = [item answerFormat];
-        HKObjectType *objType = [format healthKitObjectType];
+        HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
         if (objType) {
             [types addObject:objType];
         }
@@ -719,7 +719,9 @@
             }
         } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-            nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            if (nqr.unit == nil) {
+                nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            }
         }
         
         result.startDate = answerDate;

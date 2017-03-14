@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,17 +28,46 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-@import Foundation;
-@import HealthKit;
+import Foundation
 
-#if defined(__cplusplus)
-#  define ORK_EXTERN extern "C" __attribute__((visibility("default")))
-#else
-#  define ORK_EXTERN extern __attribute__((visibility("default")))
-#endif
+extension ORKBiologicalSexIdentifier {
+    
+    public func healthKitBiologicalSex() -> HKBiologicalSex? {
+        switch (self) {
+        case ORKBiologicalSexIdentifier.female:
+            return HKBiologicalSex.female
+        case ORKBiologicalSexIdentifier.male:
+            return HKBiologicalSex.male
+        case ORKBiologicalSexIdentifier.other:
+            return HKBiologicalSex.other
+        default:
+            return nil
+        }
+    }
+}
 
-#define ORK_CLASS_AVAILABLE __attribute__((visibility("default")))
-#define ORK_ENUM_AVAILABLE
-#define ORK_AVAILABLE_DECL
-
-#define ORK_IOS_10_WATCHOS_3_AVAILABLE (NSClassFromString(@"HKWorkoutConfiguration") != nil)
+extension ORKBloodTypeIdentifier {
+    
+    public func healthKitBloodType() -> HKBloodType? {
+        switch (self) {
+        case ORKBloodTypeIdentifier.abNegative:
+            return HKBloodType.abNegative
+        case ORKBloodTypeIdentifier.abPositive:
+            return HKBloodType.abPositive
+        case ORKBloodTypeIdentifier.aNegative:
+            return HKBloodType.aNegative
+        case ORKBloodTypeIdentifier.aPositive:
+            return HKBloodType.aPositive
+        case ORKBloodTypeIdentifier.bNegative:
+            return HKBloodType.bNegative
+        case ORKBloodTypeIdentifier.bPositive:
+            return HKBloodType.bPositive
+        case ORKBloodTypeIdentifier.oNegative:
+            return HKBloodType.oNegative
+        case ORKBloodTypeIdentifier.oPositive:
+            return HKBloodType.oPositive
+        default:
+            return nil
+        }
+    }
+}

@@ -71,11 +71,10 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
-- (ORKAnswerFormat *)impliedAnswerFormat;
-
 - (BOOL)isHealthKitAnswerFormat;
 
 - (nullable HKObjectType *)healthKitObjectType;
+- (nullable HKObjectType *)healthKitObjectTypeForAuthorization;
 
 @property (nonatomic, strong, readonly, nullable) HKUnit *healthKitUnit;
 

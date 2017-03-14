@@ -374,6 +374,11 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 /**
+ This method is called when the user taps the skip button. By default, it calls `-goForward`.
+ */
+- (void)skipForward;
+
+/**
  A Boolean value indicating whether the view controller has been presented before.
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
