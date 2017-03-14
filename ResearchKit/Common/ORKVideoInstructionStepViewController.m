@@ -31,6 +31,7 @@
 
 #import "ORKVideoInstructionStepViewController.h"
 #import "ORKInstructionStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKInstructionStepView.h"
 #import "AVFoundation/AVFoundation.h"
 #import <AVKit/AVKit.h>
@@ -68,6 +69,7 @@
 }
 
 - (ORKVideoInstructionStep *)videoInstructionStep {
+    NSAssert(self.step == nil || [self.step isKindOfClass:[ORKVideoInstructionStep class]], @"View controller is only valid with a ORKVideoInstructionStep step class.");
     return (ORKVideoInstructionStep *)self.step;
 }
 
@@ -148,7 +150,7 @@
                                                       initWithIdentifier:self.step.identifier];
         childResult.playbackStoppedTime = _playbackStoppedTime;
         childResult.playbackCompleted = _playbackCompleted;
-        parentResult.results = @[childResult];
+        parentResult.results = [self.addedResults arrayByAddingObject:childResult] ? : @[childResult];
     }
     return parentResult;
 }

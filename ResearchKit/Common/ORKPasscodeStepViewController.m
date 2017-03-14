@@ -284,6 +284,10 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     return stepResult;
 }
 
+- (void)addResult:(ORKResult *)result {
+    ORKThrowMethodUnavailableException();
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
