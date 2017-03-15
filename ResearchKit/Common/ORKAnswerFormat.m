@@ -3,6 +3,7 @@
  Copyright (c) 2015, Scott Guelich.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Medable Inc. All rights reserved.
+ Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -312,6 +313,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
+}
+
++ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes noString:(NSString *)no {
+    return [[ORKBooleanAnswerFormat alloc] initWithYesString:yes noString:no];
 }
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
@@ -1124,14 +1129,30 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @implementation ORKBooleanAnswerFormat
 
+- (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no {
+    self = [super init];
+    if (self) {
+        _yes = [yes copy];
+        _no = [no copy];
+    }
+    return self;
+}
+
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeBoolean;
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
+    if (!_yes.length) {
+        _yes = ORKLocalizedString(@"BOOL_YES", nil);
+    }
+    if (!_no.length) {
+        _no = ORKLocalizedString(@"BOOL_NO", nil);
+    }
+    
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                            textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
-                                                          [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO)]]];
+                                            textChoices:@[[ORKTextChoice choiceWithText:_yes value:@(YES)],
+                                                          [ORKTextChoice choiceWithText:_no value:@(NO)]]];
 }
 
 - (Class)questionResultClass {
@@ -1140,6 +1161,45 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString *)stringForAnswer:(id)answer {
     return [self.impliedAnswerFormat stringForAnswer: @[answer]];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKBooleanAnswerFormat *answerFormat = [super copyWithZone:zone];
+    answerFormat->_yes = [_yes copy];
+    answerFormat->_no = [_no copy];
+    return answerFormat;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _yes.hash ^ _no.hash;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.yes, castObject.yes) &&
+            ORKEqualObjects(self.no, castObject.no));
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, yes, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, no, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, yes);
+    ORK_ENCODE_OBJ(aCoder, no);
 }
 
 @end

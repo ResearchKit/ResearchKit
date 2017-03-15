@@ -186,6 +186,7 @@
  */
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
@@ -768,6 +769,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     @try {
         if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
             ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
+            ([c isSubclassOfClass:[ORKStepModifier class]]) ||
             ([c isSubclassOfClass:[ORKStep class]]) ||
             (c == [ORKKeyValueStepModifier class]) ||
              ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
@@ -791,7 +793,13 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
 }
 
 - (void)testEquality {
-    NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
+    NSArray *classesExcluded = @[
+                                 [ORKStepNavigationRule class],     // abstract base class
+                                 [ORKSkipStepNavigationRule class],     // abstract base class
+                                 [ORKStepModifier class],     // abstract base class
+                                 ];
+    
+    
     // Each time ORKRegistrationStep returns a new date in its answer fromat, cannot be tested.
     NSMutableArray *stringsForClassesExcluded = [NSMutableArray arrayWithObjects:NSStringFromClass([ORKRegistrationStep class]), nil];
     for (Class c in classesExcluded) {

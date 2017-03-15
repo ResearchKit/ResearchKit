@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -115,6 +116,9 @@ ORK_CLASS_AVAILABLE
                                                           vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
+
++ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes
+                                                    noString:(NSString *)no;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
@@ -829,6 +833,26 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
+ 
+ @param yes         A string that describes the Yes answer.
+ @param no          A string that describes the No answer.
+ 
+ @return An initialized Boolean answer format.
+ */
+- (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
+
+/**
+ The string to describe the Yes answer. (read-only)
+ */
+@property (copy, readonly) NSString *yes;
+
+/**
+ The string to describe the No answer. (read-only)
+ */
+@property (copy, readonly) NSString *no;
 
 @end
 

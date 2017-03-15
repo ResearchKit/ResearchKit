@@ -63,14 +63,8 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
-/*
- The `init` and `new` methods are unavailable.
- 
- `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
- subclass.
- */
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns the target step identifier.
@@ -106,6 +100,15 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates,
@@ -203,6 +206,15 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKDirectStepNavigationRule : ORKStepNavigationRule
 
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized direct-step navigation rule using the specified destination step identifier.
  
@@ -250,14 +262,8 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKSkipStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
-/*
- The `init` and `new` methods are unavailable.
- 
- `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
- subclass.
- */
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns whether the targeted step should skip.
@@ -276,6 +282,15 @@ ORK_CLASS_AVAILABLE
 
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateSkipStepNavigationRule : ORKSkipStepNavigationRule
+
+/*
+ The `init` and `new` methods are unavailable.
+ 
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each
+ subclass.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns an initialized predicate skip step navigation rule using the specified result predicate.

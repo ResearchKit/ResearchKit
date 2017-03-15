@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -43,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) UIColor *titleColor;
 
 @property (nonatomic) UIColor *axisColor;
+
+@property (nonatomic) NSUInteger decimalPlaces;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 

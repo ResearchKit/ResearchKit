@@ -440,7 +440,8 @@ encondingTable =
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-           PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil)
+           PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil),
+           PROPERTY(passcodeFlow, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKWaitStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1052,9 +1053,11 @@ encondingTable =
           })),
   ENTRY(ORKBooleanAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKBooleanAnswerFormat alloc] init];
+            return [[ORKBooleanAnswerFormat alloc] initWithYesString:((NSString *)GETPROP(dict, yes)) noString:((NSString *)GETPROP(dict, no))];
         },
         (@{
+           PROPERTY(yes, NSString, NSObject, NO, nil, nil),
+           PROPERTY(no, NSString, NSObject, NO, nil, nil)
           })),
    ENTRY(ORKHeightAnswerFormat,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

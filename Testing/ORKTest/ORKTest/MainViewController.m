@@ -2,7 +2,8 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
- Copyright (c) 2016, Sage Bionetworks
+ Copyright (c) 2016, Sage Bionetworks.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -900,6 +901,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKBooleanAnswerFormat *format = [ORKBooleanAnswerFormat new];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001b"
                                                                       title:@"Do you consent to a background check?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A custom boolean question.
+         */
+        ORKBooleanAnswerFormat *format = [ORKAnswerFormat booleanAnswerFormatWithYesString:@"Agree" noString:@"Disagree"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001c"
+                                                                      title:@"Do you agree to proceed to the background check questions?"
                                                                      answer:format];
         [steps addObject:step];
     }
