@@ -62,6 +62,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeMultipleChoice,
     
     /**
+     In a multiple component choice picker, the participant can pick one choice from each component.
+     */
+    ORKQuestionTypeMultiplePicker,
+    
+    /**
      The decimal question type asks the participant to enter a decimal number.
      */
     ORKQuestionTypeDecimal,
