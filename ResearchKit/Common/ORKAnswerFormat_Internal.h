@@ -31,6 +31,7 @@
 
 @import HealthKit;
 #import "ORKAnswerFormat_Private.h"
+#import "ORKChoiceAnswerFormatHelper.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -50,6 +51,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKImageChoiceAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKValuePickerAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKMultipleValuePickerAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoiceAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoice)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKImageChoice)
@@ -172,6 +174,14 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 
 @interface ORKTextChoice () <ORKAnswerOption>
+
+@end
+
+@interface ORKValuePickerAnswerFormat ()
+
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice NS_DESIGNATED_INITIALIZER;
+
+- (ORKTextChoice *)nullTextChoice;
 
 @end
 

@@ -2,7 +2,8 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
- Copyright (c) 2016, Sage Bionetworks
+ Copyright (c) 2016, Sage Bionetworks.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -920,6 +921,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         /*
+         A custom boolean question.
+         */
+        ORKBooleanAnswerFormat *format = [ORKAnswerFormat booleanAnswerFormatWithYesString:@"Agree" noString:@"Disagree"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001c"
+                                                                      title:@"Do you agree to proceed to the background check questions?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
          A single-choice question presented in the tableview format.
          */
         ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
@@ -1079,6 +1091,72 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_081"
                                                                       title:@"Select a symptom"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A multiple component value-picker question. 
+         */
+        ORKValuePickerAnswerFormat *colorFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"Red"
+                                                                              value:@"red"],
+                                                      [ORKTextChoice choiceWithText:@"Blue"
+                                                                              value:@"blue"],
+                                                      [ORKTextChoice choiceWithText:@"Green"
+                                                                              value:@"green"]
+                                                      ]];
+        
+        ORKValuePickerAnswerFormat *animalFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cat"
+                                                                             value:@"cat"],
+                                                     [ORKTextChoice choiceWithText:@"Dog"
+                                                                             value:@"dog"],
+                                                     [ORKTextChoice choiceWithText:@"Turtle"
+                                                                             value:@"turtle"]
+                                                     ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat multipleValuePickerAnswerFormatWithValuePickers:
+                                                            @[colorFormat, animalFormat]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick"
+                                                                      title:@"Select a pet:"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    
+    {
+        /*
+         A multiple component value-picker question.
+         */
+        ORKValuePickerAnswerFormat *f1 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"A"
+                                                                             value:@"A"],
+                                                     [ORKTextChoice choiceWithText:@"B"
+                                                                             value:@"B"],
+                                                     [ORKTextChoice choiceWithText:@"C"
+                                                                             value:@"C"]
+                                                     ]];
+        
+        ORKValuePickerAnswerFormat *f2 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"0"
+                                                                              value:@0],
+                                                      [ORKTextChoice choiceWithText:@"1"
+                                                                              value:@1],
+                                                      [ORKTextChoice choiceWithText:@"2"
+                                                                              value:@2]
+                                                      ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [[ORKMultipleValuePickerAnswerFormat alloc] initWithValuePickers:@[f1, f2] separator:@"-"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick_dash"
+                                                                      title:@"Select a letter and number code:"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
