@@ -730,6 +730,14 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
 
+/**
+ Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
+ 
+ @param yes         A string that designates the Yes answer.
+ @param no          A string that designates the No answer.
+ 
+ @return An initialized Boolean answer format.
+ */
 - (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
 
 @property (copy, readonly) NSString *yes;
