@@ -733,15 +733,21 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
  
- @param yes         A string that designates the Yes answer.
- @param no          A string that designates the No answer.
+ @param yes         A string that describes the Yes answer.
+ @param no          A string that describes the No answer.
  
  @return An initialized Boolean answer format.
  */
 - (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
 
+/**
+ The string to describe the Yes answer. (read-only)
+ */
 @property (copy, readonly) NSString *yes;
 
+/**
+ The string to describe the No answer. (read-only)
+ */
 @property (copy, readonly) NSString *no;
 
 @end
