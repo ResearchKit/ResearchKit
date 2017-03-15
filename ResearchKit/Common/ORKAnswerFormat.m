@@ -999,8 +999,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKBooleanAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithYesString:[_yes copy]
-                                                                                       noString:[_no copy]];
+    ORKBooleanAnswerFormat *answerFormat = [super copyWithZone:zone];
+    answerFormat->_yes = [_yes copy];
+    answerFormat->_no = [_no copy];
     return answerFormat;
 }
 
