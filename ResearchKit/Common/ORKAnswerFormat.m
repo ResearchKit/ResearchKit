@@ -2296,7 +2296,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORKTextAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] init];
     answerFormat->_maximumLength = _maximumLength;
     answerFormat->_validationRegex = [_validationRegex copy];
-    fmt->_validationRegexOptions = _validationRegexOptions;
+    answerFormat->_validationRegexOptions = _validationRegexOptions;
     answerFormat->_invalidMessage = [_invalidMessage copy];
     answerFormat->_autocapitalizationType = _autocapitalizationType;
     answerFormat->_autocorrectionType = _autocorrectionType;
