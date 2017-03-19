@@ -86,11 +86,68 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Μη έγκυρη διεύθυνση email: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Εισαγάγετε διεύθυνση";
+"LOCATION_ERROR_TITLE" = "Δεν βρέθηκε η καθορισμένη διεύθυνση";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Δεν είναι δυνατή η επίλυση της τρέχουσας τοποθεσίας σας. Πληκτρολογήστε μια διεύθυνση ή μετακινηθείτε σε μια τοποθεσία με καλύτερο σήμα GPS, αν είναι δυνατόν.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Δεν επιτράπηκε η πρόσβαση στις υπηρεσίες τοποθεσίας. Παραχωρήστε άδεια σε αυτήν την εφαρμογή για χρήση των υπηρεσιών τοποθεσίας μέσω των Ρυθμίσεων.";
+"LOCATION_ERROR_GEOCODE" = "Δεν είναι δυνατή η εύρεση αποτελέσματος για την εισηγμένη διεύθυνση. Βεβαιωθείτε ότι η διεύθυνση είναι έγκυρη.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Είτε δεν είστε συνδεδεμένοι στο Διαδίκτυο είτε έχετε υπερβεί το μέγιστο πλήθος αιτήσεων αναζήτησης διευθύνσεων. Αν δεν είστε συνδεδεμένοι στο Διαδίκτυο, ενεργοποιήστε το Wi-Fi για να απαντήσετε σε αυτήν την ερώτηση, παραλείψτε την ερώτηση αν είναι διαθέσιμο το κουμπί παράλειψης, ή επιστρέψτε στο ερωτηματολόγιο όταν συνδεθείτε στο Διαδίκτυο. Διαφορετικά, δοκιμάστε ξανά σε λίγα λεπτά.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Το περιεχόμενο κειμένου υπερβαίνει το επιτρεπόμενο όριο χαρακτήρων: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Η κάμερα δεν διατίθεται στην Προβολή διαίρεσης.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmilosporos@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Συνθηματικό";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε συνθηματικό";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Επιβεβαίωση";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε πάλι το συνθηματικό";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Τα συνθηματικά δεν ταιριάζουν.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Πρόσθετες πληροφορίες";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Γιάννης";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Μηλοσπόρος";
+"GENDER_FORM_ITEM_TITLE" = "Φύλο";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε φύλο";
+"DOB_FORM_ITEM_TITLE" = "Ημερομηνία γέννησης";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε ημερομηνία";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Επαλήθευση";
+"VERIFICATION_STEP_TITLE" = "Επαληθεύστε το email σας";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Αν δεν έχετε λάβει email επαλήθευσης, αγγίξτε τον παρακάτω σύνδεσμο για να σταλεί ξανά.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Νέα αποστολή email επιβεβαίωσης";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Είσοδος";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Εισαγάγετε συνθηματικό";
+"PASSCODE_CONFIRM_MESSAGE" = "Επιβεβαίωση συνθηματικού";
+"PASSCODE_SAVED_MESSAGE" = "Το συνθηματικό αποθηκεύτηκε";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Έγινε έλεγχος ταυτότητας συνθηματικού";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Εισαγάγετε το παλιό συνθηματικό";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Εισαγάγετε το νέο συνθηματικό";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Επιβεβαίωση νέου συνθηματικού";
+"PASSCODE_INVALID_ALERT_TITLE" = "Λανθασμένο συνθηματικό";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ασυμφωνία συνθηματικών. Δοκιμάστε ξανά.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Πραγματοποιήστε έλεγχο ταυτότητας με Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Σφάλμα Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Επιτρέπονται μόνο αριθμητικοί χαρακτήρες.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Ένδειξη προόδου εισαγωγής συνθηματικού";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Εισάχθηκαν %@ από %@ ψηφία";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Δεν ήταν δυνατή η προσθήκη στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η ενημέρωση στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η διαγραφή στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Δεν ήταν δυνατή η εύρεση στοιχείου της Κλειδοθήκης.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -111,6 +168,11 @@
 "BOOL_NO" = "Όχι";
 "BOOL_YES" = "Ναι";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "εκ.";
+"MEASURING_UNIT_FT" = "πδ";
+"MEASURING_UNIT_IN" = "ίντσ.";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Αγγίξτε για απάντηση";
 "NULL_ANSWER" = "Επιλέξτε μια απάντηση";
@@ -120,6 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Συμφωνώ";
 "BUTTON_CANCEL" = "Ακύρωση";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Εκκαθάριση";
 "BUTTON_DISAGREE" = "Διαφωνώ";
 "BUTTON_DONE" = "Τέλος";
@@ -131,20 +194,29 @@
 "BUTTON_START_TIMER" = "Έναρξη χρονοδιακόπτη";
 "BUTTON_OPTION_SAVE" = "Αποθήκευση για αργότερα";
 "BUTTON_OPTION_DISCARD" = "Απόρριψη αποτελεσμάτων";
-"BUTTON_OPTION_STOP_TASK" = "Τέλος δοκιμής";
+"BUTTON_OPTION_STOP_TASK" = "Τέλος εργασίας";
+"BUTTON_SAVE" = "Αποθήκευση";
+"BUTTON_CLEAR_ANSWER" = "Εκκαθάριση απάντησης";
+"BUTTON_READ_ONLY_MODE" = "Δεν είναι δυνατή η τροποποίηση αυτής της απάντησης.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Έναρξη δραστηριότητας σε";
 "TASK_COMPLETE_TITLE" = "Η δραστηριότητα ολοκληρώθηκε";
 "TASK_COMPLETE_TEXT" = "Τα δεδομένα σας θα αναλυθούν και θα ειδοποιηθείτε όταν είναι έτοιμα τα αποτελέσματα.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Απομένουν %@ δευτερόλεπτα.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Καταγραφή εικόνας";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Επανάληψη καταγραφής εικόνας";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Δεν βρέθηκε κάμερα. Δεν είναι δυνατή η ολοκλήρωση αυτού του βήματος.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Για να ολοκληρώσετε αυτό το βήμα, επιτρέψτε σε αυτήν την εφαρμογή να προσπελάζει την κάμερα στις Ρυθμίσεις.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Δεν καθορίστηκε κατάλογος εξόδου για καταγεγραμμένες εικόνες.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Δεν ήταν δυνατή η αποθήκευση της καταγεγραμμένης εικόνας.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Δεν καθορίστηκε κατάλογος εξόδου για καταγραμμένες εικόνες.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Δεν ήταν δυνατή η αποθήκευση της καταγραμμένης εικόνας.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Έναρξη εγγραφής";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Διακοπή εγγραφής";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Εκ νέου καταγραφή βίντεο";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Φυσική κατάσταση";
@@ -165,15 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Περπατήστε έως %ld βήματα σε ευθεία γραμμή.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Βρείτε έναν χώρο όπου μπορείτε να περπατήσετε με ασφάλεια μπρος-πίσω σε ευθεία γραμμή. Προσπαθήστε να μη διακόψετε το βάδισμα, στρίβοντας στο τέλος της γραμμής και επιστρέφοντας πάλι εκεί που αρχίσατε και πάλι το ίδιο, σαν να περπατάτε γύρω από έναν κώνο.\n\nΚατόπιν, θα σας ζητηθεί να κάνετε μια πλήρη στροφή γύρω από τον εαυτό σας και μετά να σταθείτε ακίνητοι με τα χέρια ευθεία κάτω στο πλάι του σώματος και τα πόδια σας ανοιχτά σε απόσταση παρόμοια των ώμων σας.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Αγγίξτε «Έναρξη» όταν είστε έτοιμοι να ξεκινήσετε.\nΜετά, τοποθετήστε το τηλέφωνό σας στην τσέπη ή την τσάντα σας και ακολουθήστε τις ηχητικές οδηγίες.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Περπατήστε μπρος-πίσω σε ευθεία γραμμή για %@ στον συνηθισμένο σας ρυθμό.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Κάντε μια πλήρη στροφή γύρω από τον εαυτό σας και μετά μείνετε ακίνητοι για %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ολοκληρώσατε τη δραστηριότητα.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Ταχύτητα αγγίγματος";
+"TAPPING_TASK_TITLE_RIGHT" = "Δεξιό χέρι";
+"TAPPING_TASK_TITLE_LEFT" = "Αριστερό χέρι";
 "TAPPING_INTRO_TEXT" = "Αυτή η δραστηριότητα αξιολογεί την ταχύτητα αγγιγμάτων σας.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Ακουμπήστε το τηλέφωνό σας σε μια επίπεδη επιφάνεια. Θα εμφανιστούν δύο κουμπιά στην οθόνη σας για %@. Χρησιμοποιήστε δύο δάχτυλα του ίδιου χεριού για να αγγίζετε εναλλάξ τα κουμπιά όσο πιο γρήγορα μπορείτε.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Τοποθετήστε το τηλέφωνο σε επίπεδη επιφάνεια.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Χρησιμοποιήστε δύο δάχτυλα του ίδιου χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Χρησιμοποιήστε δύο δάχτυλα του δεξιού χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Χρησιμοποιήστε δύο δάχτυλα του αριστερού χεριού για εναλλάξ άγγιγμα των κουμπιών στην οθόνη.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Τώρα επαναλάβετε την ίδια δοκιμή με το δεξιό σας χέρι.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Τώρα επαναλάβετε την ίδια δοκιμή με το αριστερό σας χέρι.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Αγγίξτε με το ένα δάχτυλο και μετά με το άλλο. Προσπαθήστε ώστε ο χρόνος μεταξύ των αγγιγμάτων να είναι όσο το δυνατόν ίδιος. Συνεχίστε τα αγγίγματα για %@.";
 "TAPPING_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Αγγίξτε «Επόμενο» για να ξεκινήσετε.";
 "TAP_BUTTON_TITLE" = "Αγγίξτε";
 "TOTAL_TAPS_LABEL" = "Συνολικά αγγίγματα";
-"TAPPING_INSTRUCTION" = "Αγγίξτε τα κουμπιά όσο πιο γρήγορα μπορείτε χρησιμοποιώντας δύο δάχτυλα.";
+"TAPPING_INSTRUCTION" = "Αγγίξτε τα κουμπιά χρησιμοποιώντας δύο δάχτυλα και φροντίστε ο χρόνος μεταξύ των αγγιγμάτων να είναι όσο το δυνατόν ίδιος.";
+"TAPPING_INSTRUCTION_RIGHT" = "Αγγίξτε τα κουμπιά χρησιμοποιώντας το ΔΕΞΙΟ σας χέρι.";
+"TAPPING_INSTRUCTION_LEFT" = "Αγγίξτε τα κουμπιά χρησιμοποιώντας το ΑΡΙΣΤΕΡΟ σας χέρι.";
+"TAPPING_SKIP_TITLE" = "Παράλειψη αυτού του χεριού";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Φωνή";
@@ -183,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τη φωνή σας μέσω εγγραφής ενώ μιλάτε στο μικρόφωνο που βρίσκεται στο κάτω μέρος του τηλεφώνου.";
 "AUDIO_TOO_LOUD_LABEL" = "Πολύ δυνατά";
 "AUDIO_GENERIC_ERROR_LABEL" = "Δεν είναι δυνατή η εγγραφή ήχου";
+"AUDIO_LEVEL_CHECK_LABEL" = "Περιμένετε μέχρι να ελεγχθεί το επίπεδο θορύβου υποβάθρου.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Το επίπεδο περιβαλλοντικού θορύβου είναι πολύ υψηλό για εγγραφή της φωνής σας. Πηγαίνετε σε έναν χώρο με λιγότερο θόρυβο και προσπαθήστε πάλι.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Αγγίξτε «Επόμενο» όταν είστε έτοιμοι.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Τονική ακοομετρία";
@@ -254,10 +347,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Αγγίξτε «Τέλος» όταν τελειώσετε.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +360,62 @@
 "PSAT_INSTRUCTION" = "Προσθέστε αυτό το νέο ψηφίο στο προηγούμενο ψηφίο.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Δοκιμή %@-HPT";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Η δραστηριότητα αυτή μετρά την επιδεξιότητα των άνω άκρων σας ζητώντας σας να τοποθετήσετε έναν κύκλο σε μια τρύπα. Αυτό θα σας ζητηθεί να το κάνετε %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το αριστερό και το δεξί χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το δεξί και το αριστερό χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_TEXT" = "Σηκώστε τoν κύκλο με δύο δάχτυλα.";
+"HOLE_PEG_TEST_TEXT_2" = "Σηκώστε τα δάχτυλα για να αφήσετε τον κύκλο.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Δραστηριότητα τρέμουλου";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Αυτή η δραστηριότητα μετρά το τρέμουλο των χεριών σας σε διάφορες θέσεις. Βρείτε ένα σημείο όπου μπορείτε να κάθεστε άνετα καθ' όλη τη διάρκεια της δραστηριότητας.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Κρατήστε το τηλέφωνο στο πιο επηρεαζόμενο χέρι σας όπως φαίνεται στην παρακάτω εικόνα.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Κρατήστε το τηλέφωνο στο ΔΕΞΙΟ χέρι σας όπως φαίνεται στην παρακάτω εικόνα.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Κρατήστε το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας όπως φαίνεται στην παρακάτω εικόνα.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Θα σας ζητηθεί να εκτελέσετε %@ σε θέση καθίσματος με το τηλέφωνο στο χέρι σας.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "μια εργασία";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "δύο εργασίες";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "τρεις εργασίες";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "τέσσερις εργασίες";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "πέντε εργασίες";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Αγγίξτε «Επόμενο» για να συνεχίσετε.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Προετοιμαστείτε να κρατήσετε το τηλέφωνο πάνω στα πόδια σας.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Προετοιμαστείτε να κρατήσετε το τηλέφωνο πάνω στα πόδια σας με το ΑΡΙΣΤΕΡΟ χέρι.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Προετοιμαστείτε να κρατήσετε το τηλέφωνο πάνω στα πόδια σας με το ΔΕΞΙΟ χέρι.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Συνεχίστε να κρατάτε το τηλέφωνο πάνω στα πόδια σας για %ld δευτερόλεπτα.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Τώρα κρατήστε το τηλέφωνο στο χέρι σας τεντωμένο στο ύψος του ώμου.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Τώρα κρατήστε το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι τεντωμένο στο ύψος του ώμου.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Τώρα κρατήστε το τηλέφωνο στο ΔΕΞΙΟ χέρι τεντωμένο στο ύψος του ώμου.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Συνεχίστε να κρατάτε το τηλέφωνο με το τεντωμένο χέρι σας για %ld δευτερόλεπτα.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Τώρα κρατήστε το τηλέφωνο στο ύψος του ώμου με τον αγκώνα λυγισμένο.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Τώρα κρατήστε το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι τεντωμένο στο ύψος του ώμου με τον αγκώνα λυγισμένο.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Τώρα κρατήστε το τηλέφωνο στο ΔΕΞΙΟ χέρι τεντωμένο στο ύψος του ώμου με τον αγκώνα λυγισμένο.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Συνεχίστε να κρατάτε το τηλέφωνο με λυγισμένο τον αγκώνα για %ld δευτερόλεπτα.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Κρατώντας τον αγκώνα σας λυγισμένο, αγγίξτε τη μύτη σας με το τηλέφωνο επανειλημμένα.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Κρατώντας τον αγκώνα σας λυγισμένο με το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας, αγγίξτε τη μύτη σας με το τηλέφωνο επανειλημμένα.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Κρατώντας τον αγκώνα σας λυγισμένο με το τηλέφωνο στο ΔΕΞΙΟ χέρι σας, αγγίξτε τη μύτη σας με το τηλέφωνο επανειλημμένα.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Συνεχίστε να ακουμπάτε τη μύτη σας με το τηλέφωνο για %ld δευτερόλεπτα.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό (κουνώντας τον καρπό).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό με το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας (χαιρετίστε κουνώντας τον καρπό).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Προετοιμαστείτε να κάνετε έναν βασιλικό χαιρετισμό με το τηλέφωνο στο ΔΕΞΙΟ χέρι σας (χαιρετίστε κουνώντας τον καρπό).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Συνεχίστε να χαιρετάτε με αυτόν τον τρόπο για %ld δευτερόλεπτα.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Τώρα κρατήστε το τηλέφωνο στο ΑΡΙΣΤΕΡΟ χέρι σας και συνεχίστε στην επόμενη εργασία.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Τώρα κρατήστε το τηλέφωνο στο ΔΕΞΙΟ χέρι σας και συνεχίστε στην επόμενη εργασία.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Συνεχίστε στην επόμενη εργασία.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Η δραστηριότητα ολοκληρώθηκε.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Θα σας ζητηθεί να εκτελέσετε %@ σε θέση καθίσματος με το τηλέφωνο πρώτα στο ένα χέρι και μετά στο άλλο.";
+"TREMOR_SKIP_LEFT_HAND" = "Δεν μπορώ να εκτελέσω αυτήν τη δραστηριότητα με το ΑΡΙΣΤΕΡΟ χέρι μου.";
+"TREMOR_SKIP_RIGHT_HAND" = "Δεν μπορώ να εκτελέσω αυτήν τη δραστηριότητα με το ΔΕΞΙΟ χέρι μου.";
+"TREMOR_SKIP_NEITHER" = "Μπορώ να εκτελέσω αυτήν τη δραστηριότητα και με τα δύο χέρια.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Δεν ήταν δυνατή η δημιουργία αρχείου";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Δεν ήταν δυνατή η αφαίρεση επαρκών αρχείων καταγραφής για την επίτευξη ορίου";
@@ -279,6 +424,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Πολλαπλά σφάλματα κατά την αφαίρεση αρχείων καταγραφής";
 "ERROR_RECORDER_NO_DATA" = "Δεν βρέθηκαν συλλεγμένα δεδομένα.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Δεν έχει καθοριστεί κατάλογος εξόδου";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Πίσω";
@@ -305,7 +453,10 @@
 "AX.MEMORY.TILE.LABEL" = "Πλακίδιο παιχνιδιού μνήμης";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Προεπισκόπηση καταγραφής";
-"AX_IMAGE_CAPTURED_LABEL" = "Καταγεγραμμένη εικόνα";
+"AX_IMAGE_CAPTURED_LABEL" = "Καταγραμμένη εικόνα";
+
+"AX_VIDEO_CAPTURE_LABEL" = "Προεπισκόπηση καταγραφής βίντεο";
+"AX_VIDEO_CAPTURED_LABEL" = "Καταγραμμένο βίντεο";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Δεν είναι δυνατή η τοποθέτηση δίσκου μεγέθους %@ πάνω σε δίσκο μεγέθους %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Στόχος";
@@ -315,5 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Κενός";
 
-"AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Εύρος από %@ έως %@";
+"AX_GRAPH_STACK_PREFIX" = "Η στοίβα αποτελείται από";
 "AX_GRAPH_AND_SEPARATOR" = " και ";
+"AX_GRAPH_POINT_%@" = "Σημείο: %@";

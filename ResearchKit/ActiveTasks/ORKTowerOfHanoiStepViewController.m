@@ -30,11 +30,19 @@
 
 
 #import "ORKTowerOfHanoiStepViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKTowerOfHanoiTowerView.h"
+
 #import "ORKActiveStepView.h"
-#import "ORKTowerOfHanoiTower.h"
+#import "ORKCustomStepView_Internal.h"
+#import "ORKTowerOfHanoiTowerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKResult.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKTowerOfHanoiTower.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 
@@ -116,7 +124,7 @@ static const NSUInteger NumberOfTowers = 3;
     if (_firstMoveDate != nil) {
         result.startDate = _firstMoveDate;
     }
-    stepResult.results = @[result];
+    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     return stepResult;
 }
 
@@ -268,7 +276,7 @@ static const NSUInteger NumberOfTowers = 3;
 
 - (NSArray *)compactConstraints {
     CGFloat compactWidth = ([[UIScreen mainScreen]bounds].size.height - (3 * 8)) / 3;
-    NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
+    NSDictionary *views = @{ @"A": _towerViews[0], @"B": _towerViews[1], @"C": _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
 
     [newConstraints addObjectsFromArray:
@@ -312,7 +320,7 @@ static const NSUInteger NumberOfTowers = 3;
 }
 
 - (NSArray *)regularConstraints {
-    NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
+    NSDictionary *views = @{ @"A": _towerViews[0], @"B": _towerViews[1], @"C": _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
     
     [newConstraints addObjectsFromArray:

@@ -29,9 +29,11 @@
  */
 
 
+#import "ORKStepHeaderView.h"
 #import "ORKStepHeaderView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-#import "ORKHelpers.h"
 
 
 #define ORKVerticalContainerLog(...)
@@ -45,6 +47,7 @@
     NSLayoutConstraint *_instructionMinBottomSpacingConstraint;
     NSLayoutConstraint *_instructionToLearnMoreConstraint;
     NSLayoutConstraint *_learnMoreToStepViewConstraint;
+    NSLayoutConstraint *_topToIconImageViewConstraint;
 }
 
 - (void)updateCaptionLabelPreferredWidth {
@@ -77,6 +80,13 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        {
+            _iconImageView = [UIImageView new];
+            _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+            [self addSubview:_iconImageView];
+        }
+        
         // Text Label
         {
             _captionLabel = [ORKHeadlineLabel new];
@@ -155,21 +165,30 @@
     _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin * 2;
 }
 
+const CGFloat IconHeight = 60;
+
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
     static const CGFloat AssumedNavBarHeight = 44;
     static const CGFloat AssumedStatusBarHeight = 20;
     
+    const CGFloat IconBottomToCaptionBaseline = ORKGetMetricForWindow(ORKScreenMetricIconImageViewToCaptionBaseline, window);;
+    
+    const CGFloat TopToIconTop = ORKGetMetricForWindow(ORKScreenMetricTopToIconImageViewTop, window);
+    BOOL hasIconView = _iconImageView.image != nil;
+    
     const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForWindow(ORKScreenMetricIllustrationToCaptionBaseline, window);
-    const CGFloat TopToCaptionBaseline = (ORKGetMetricForWindow(ORKScreenMetricTopToCaptionBaseline, window) - AssumedStatusBarHeight - AssumedNavBarHeight);
+    const CGFloat TopToCaptionBaseline = hasIconView ? (IconBottomToCaptionBaseline + IconHeight + TopToIconTop) : (ORKGetMetricForWindow(ORKScreenMetricTopToCaptionBaseline, window) - AssumedStatusBarHeight - AssumedNavBarHeight);
+    
     const CGFloat CaptionBaselineToInstructionBaseline_WithInstruction = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToInstructionBaseline, window);
     const CGFloat CaptionBaselineToInstructionBaseline_NoInstruction = MIN(26, CaptionBaselineToInstructionBaseline_WithInstruction); // Not part of spec
     const CGFloat InstructionBaselineToLearnMoreBaseline = ORKGetMetricForWindow(ORKScreenMetricInstructionBaselineToLearnMoreBaseline, window);
     const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
     const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, window);
     
-    BOOL hasCaptionLabel = _captionLabel.text.length > 0;
+    BOOL hasCaptionLabel = _captionLabel.text.length > 0 || hasIconView;
     BOOL hasInstructionLabel = _instructionLabel.text.length > 0;
     BOOL hasLearnMoreButton = (_learnMoreButton.alpha > 0);
+    
     ORKVerticalContainerLog(@"hasCaption=%@ hasInstruction=%@ hasLearnMore=%@", @(hasCaption), @(hasInstruction), @(hasLearnMore));
     
     // If one label is empty and the other is not, then allow the empty label to shrink to nothing
@@ -180,7 +199,7 @@
     [_instructionLabel setContentHuggingPriority:instructionVerticalHugging forAxis:UILayoutConstraintAxisVertical];
     
     {
-        _headerZeroHeightConstraint.active = !(hasCaptionLabel || hasInstructionLabel || hasLearnMoreButton);
+        _headerZeroHeightConstraint.active = !(hasCaptionLabel || hasInstructionLabel || hasLearnMoreButton || hasIconView);
     }
     
     {
@@ -188,6 +207,11 @@
         _illustrationToCaptionBaselineConstraint.active = hasCaptionLabel;
         _illustrationToCaptionTopConstraint.constant = 0;
         _illustrationToCaptionTopConstraint.active = !hasCaptionLabel;
+    }
+    
+    {
+        _topToIconImageViewConstraint.active = hasIconView;
+        _topToIconImageViewConstraint.constant = TopToIconTop;
     }
     
     {
@@ -232,11 +256,46 @@
     widthConstraint.priority = UILayoutPriorityDefaultLow - 1;
     [constraints addObject:widthConstraint];
     
-    NSArray *views = @[_captionLabel, _instructionLabel, _learnMoreButton];
+    NSArray *views = @[_iconImageView, _captionLabel, _instructionLabel, _learnMoreButton];
+    [_iconImageView setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_captionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_instructionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_learnMoreButton setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     ORKEnableAutoLayoutForViews(views);
+    
+    {
+        _topToIconImageViewConstraint = [NSLayoutConstraint constraintWithItem:_iconImageView
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeTop
+                                                                    multiplier:1.0
+                                                                      constant:40.0];
+        [constraints addObject:_topToIconImageViewConstraint];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_iconImageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_iconImageView
+                                                            attribute:NSLayoutAttributeHeight
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_iconImageView
+                                                            attribute:NSLayoutAttributeCenterX
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeCenterX
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_iconImageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                               toItem:nil
+                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                           multiplier:1.0
+                                                             constant:IconHeight]];
+    }
     
     {
         _captionToInstructionConstraint = [NSLayoutConstraint constraintWithItem:_instructionLabel
@@ -321,20 +380,23 @@
     }
     
     for (UIView *view in views) {
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view
-                                                                 attribute:NSLayoutAttributeLeft
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeLeftMargin
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:view
-                                                                 attribute:NSLayoutAttributeRight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeRightMargin
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
+        
+        if (view != _iconImageView) {
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeLeftMargin
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeRightMargin
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+        }
         
         NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                             attribute:NSLayoutAttributeBottom

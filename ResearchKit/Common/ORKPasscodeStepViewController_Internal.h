@@ -34,16 +34,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const KeychainDictionaryPasscodeKey = @"passcode";
-static NSString * const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
-static NSString * const PasscodeStepIdentifier = @"passcode_step";
-static NSString * const PasscodeKey = @"ORKPasscode";
+@protocol ORKPasscodeDelegate;
 
-typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
-    ORKPasscodeFlowCreate,
-    ORKPasscodeFlowAuthenticate,
-    ORKPasscodeFlowEdit
-};
+static NSString *const KeychainDictionaryPasscodeKey = @"passcode";
+static NSString *const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
+static NSString *const PasscodeStepIdentifier = @"passcode_step";
+static NSString *const PasscodeKey = @"ORKPasscode";
 
 typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeStateEntry,
@@ -54,10 +50,19 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeStateConfirmNewEntry
 };
 
-@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate, CAAnimationDelegate>
 
-@property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;
+
+/**
+ Stores the given passcode as the user's unlock passcode to the keychain.
+ 
+ This method will raise an exception if `passcode` is nil.
+ 
+ @param passcode          The passcode to store
+ @param touchIdEnabled    Whether TouchId will be available during passcode entry
+ */
++ (void)savePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled;
 
 @end
 

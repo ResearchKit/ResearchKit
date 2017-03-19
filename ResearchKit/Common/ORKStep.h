@@ -29,13 +29,17 @@
  */
 
 
-#import <Foundation/Foundation.h>
-#import <ResearchKit/ORKDefines.h>
+@import Foundation;
+@import HealthKit;
+#import <ResearchKit/ORKTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
+
+@class ORKStepViewController;
+@class ORKResult;
 
 @protocol ORKTask;
 
@@ -60,6 +64,7 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
@@ -81,6 +86,15 @@ ORK_CLASS_AVAILABLE
  @return A new step.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a copy of this step initialized with the specified identifier.
+ 
+ @param identifier   The unique identifier for the new step to be returned.
+ 
+ @return A new step.
+ */
+- (instancetype)copyWithIdentifier:(NSString *)identifier;
 
 /**
  A short string that uniquely identifies the step within the task.
@@ -158,6 +172,18 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) ORKPermissionMask requestedPermissions;
 
 /**
+ The set of HealthKit types the step requests for reading. (read-only)
+ 
+ The task view controller uses this set of types when constructing a list of
+ all the HealthKit types required by all the steps in a task, so that it can
+ present the HealthKit access dialog just once during that task.
+ 
+ By default, the property scans the recorders and collates the HealthKit
+ types the recorders require. Subclasses may override this implementation.
+ */
+@property (nonatomic, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
+
+/**
  Checks the parameters of the step and throws exceptions on invalid parameters.
  
  This method is called when there is a need to validate the step's parameters, which is typically
@@ -168,6 +194,29 @@ ORK_CLASS_AVAILABLE
  properties, and must call super.
  */
 - (void)validateParameters;
+
+/**
+ Returns the class that the task view controller should instantiate to display
+ this step.
+ */
+- (Class)stepViewControllerClass;
+
+/**
+ Instantiates a step view controller for this class.
+ 
+ This method is called when a step is about to be presented. The default implementation returns
+ a view controller that is appropriate to this step by allocating an instance of `ORKStepViewController`
+ using the `-stepViewControllerClass` method and initializing that instance by calling `initWithIdentifier:result:`
+ on the provided `ORKStepViewController` class instance.
+ 
+ Override this method if you need to customize the behavior before presenting the step or if 
+ the view controller is presented using a nib or storyboard.
+ 
+ @param result    The result associated with this step
+ 
+ @return A newly initialized step view controller.
+ */
+- (ORKStepViewController *)instantiateStepViewControllerWithResult:(ORKResult *)result;
 
 @end
 

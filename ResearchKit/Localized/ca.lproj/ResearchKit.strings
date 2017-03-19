@@ -86,11 +86,68 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Adreça electrònica no vàlida: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Escriu una adreça";
+"LOCATION_ERROR_TITLE" = "No s’ha trobat l‘adreça especificada";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No s’ha pogut determinar la ubicació actual. Escriu una adreça o vés a un lloc que tingui un senyal de GPS més bo, si pot ser.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’aplicació utilitzi els serveis de localització des de Configuració.";
+"LOCATION_ERROR_GEOCODE" = "No s’ha trobat cap resultat per a l’adreça especificada. Comprova que sigui vàlida.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "O no tens connexió a Internet o has superat el nombre màxim de peticions de cerca d’adreces. Si no tens connexió a Internet, activa la Wi-Fi per contestar aquesta pregunta, passa aquesta pregunta si hi ha disponible un botó d’omissió o recupera l’enquesta quan et puguis connectar a Internet. També pots tornar-ho a provar d’aquí a una mica.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El contingut del text supera la llargada màxima: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "La càmera no està disponible amb la pantalla dividida.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Correu electrònic";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jmartorell@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Contrasenya";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Escriu la contrasenya";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Torna a escriure la contrasenya";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Les contrasenyes no coincideixen.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Més informació";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jordi";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Martorell";
+"GENDER_FORM_ITEM_TITLE" = "Sexe";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona un sexe";
+"DOB_FORM_ITEM_TITLE" = "Data de naixement";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una data";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificació";
+"VERIFICATION_STEP_TITLE" = "Verifica el teu correu electrònic";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Prem l’enllaç de sota si no has rebut cap correu de verificació i vols que se’t torni a enviar.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correu de verificació";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inici de sessió";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Contrasenya oblidada?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Escriu el codi";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirma el codi";
+"PASSCODE_SAVED_MESSAGE" = "Codi desat";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Codi autenticat";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Escriu el codi antic";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Escriu el codi nou";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nou codi";
+"PASSCODE_INVALID_ALERT_TITLE" = "Codi incorrecte";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Els codis no coincideixen. Torna-ho a provar.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Identifica’t amb el Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Només es permeten caràcters numèrics.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés d’ingrés del codi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígits introduïts";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Has oblidat el codi?";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "No s’ha pogut afegir l’ítem del clauer.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "No s’ha pogut actualitzar l’ítem del clauer.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "No s’ha pogut eliminar l’ítem del clauer.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "No s’ha trobat l’ítem del clauer.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -111,6 +168,11 @@
 "BOOL_NO" = "No";
 "BOOL_YES" = "Sí";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Prémer per contestar";
 "NULL_ANSWER" = "Seleccionar una resposta";
@@ -120,6 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Acceptar";
 "BUTTON_CANCEL" = "Cancel·lar";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Esborrar";
 "BUTTON_DISAGREE" = "No acceptar";
 "BUTTON_DONE" = "Fet";
@@ -132,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Desar per després";
 "BUTTON_OPTION_DISCARD" = "Descartar resultats";
 "BUTTON_OPTION_STOP_TASK" = "Finalitzar tasca";
+"BUTTON_SAVE" = "Desar";
+"BUTTON_CLEAR_ANSWER" = "Esborrar la resposta";
+"BUTTON_READ_ONLY_MODE" = "Aquesta resposta no es pot modificar.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Iniciant l’activitat en";
-"TASK_COMPLETE_TITLE" = "Activitat completa";
+"TASK_COMPLETE_TITLE" = "Activitat completada";
 "TASK_COMPLETE_TEXT" = "S’analitzaran les dades i rebràs una notificació quan tinguis els resultats a punt.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Queden %@ segons.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar la imatge";
@@ -145,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Per completar aquest pas, permet que aquesta aplicació tingui accés a la càmera a Configuració.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida per a les imatges capturades.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No s’ha pogut desar la imatge capturada.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Iniciar la gravació";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Aturar la gravació";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Tornar a capturar el vídeo";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Activitat física";
@@ -165,15 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Fes mitja volta i torna allà on has començat.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Camina fins a %ld passos en línia recta.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Busca un lloc on puguis anar i tornar caminant en línia recta de forma segura. Camina sense parar i gira al final del camí com si estiguessis vorejant un con.\n\nA continuació, se’t demanarà que giris fent un cercle complet i que et quedis quiet amb els braços als costats i els peus separats més o menys per la mateixa distància que hi ha entre espatlla i espatlla.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Quan estiguis a punt per començar, prem Començar.\nLlavors, posa’t el mòbil a la butxaca o a la bossa i segueix les instruccions d’àudio.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Vés i torna caminant en línia recta durant %@. Camina naturalment.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Gira fent un cercle complet i llavors queda’t quiet durant %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Has completat l’activitat.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Velocitat de premuda";
+"TAPPING_TASK_TITLE_RIGHT" = "Mà dreta";
+"TAPPING_TASK_TITLE_LEFT" = "Mà esquerra";
 "TAPPING_INTRO_TEXT" = "Aquesta activitat mesura la velocitat de premuda.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Deixa el telèfon sobre una superfície plana. Apareixeran dos botons a la pantalla durant %@. Amb dos dits de la mateixa mà, prem els botons alternadament tan ràpid com puguis.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Deixa el mòbil sobre una superfície plana.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Prem els botons de la pantalla alternant dos dits de la mateixa mà.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Prem els botons de la pantalla alternant dos dits de la mà dreta.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Prem els botons de la pantalla alternant dos dits de la mà esquerra.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Ara repeteix la mateixa operació amb la mà dreta.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Ara repeteix la mateixa operació amb la mà esquerra.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Prem amb un dit, i després amb l’altre. Intenta que el ritme de premuda sigui constant. Prem durant %@.";
 "TAPPING_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Prem Següent per continuar.";
 "TAP_BUTTON_TITLE" = "Prem";
 "TOTAL_TAPS_LABEL" = "Tocs totals";
-"TAPPING_INSTRUCTION" = "Prem els botons tan ràpid com puguis amb dos dits.";
+"TAPPING_INSTRUCTION" = "Prem els botons amb dos dits al ritme més constant que puguis.";
+"TAPPING_INSTRUCTION_RIGHT" = "Prem els botons amb la mà DRETA.";
+"TAPPING_INSTRUCTION_LEFT" = "Prem els botons amb la mà ESQUERRA.";
+"TAPPING_SKIP_TITLE" = "Ometre aquesta mà";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Veu";
@@ -183,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Aquesta activitat avalua la teva veu tot gravant-la amb el micròfon de la part inferior del telèfon.";
 "AUDIO_TOO_LOUD_LABEL" = "Massa alt";
 "AUDIO_GENERIC_ERROR_LABEL" = "No s’ha pogut gravar l’àudio";
+"AUDIO_LEVEL_CHECK_LABEL" = "Espera mentre es calcula el nivell de soroll de fons.";
+"AUDIO_TOO_LOUD_MESSAGE" = "El soroll ambiental és massa fort per gravar la teva veu. Vés a un lloc més silenciós i torna‑ho a provar.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Prem Següent quan estiguis a punt.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
@@ -254,10 +347,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Fes mitja volta i torna allà on has començat.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Prem Fet quan hagis acabat.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Sense dades";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +360,62 @@
 "PSAT_INSTRUCTION" = "Suma aquest número a l’anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla al forat amb la mà esquerra.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla al forat amb la mà dreta.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla darrere de la línia amb la mà esquerra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla darrere de la línia amb la mà dreta.";
+"HOLE_PEG_TEST_TEXT" = "Agafa la clavilla fent servir dos dits.";
+"HOLE_PEG_TEST_TEXT_2" = "Aixeca els dits per deixar caure la clavilla.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Activitat de tremolor";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Aquesta activitat mesura la tremolor de les mans en diferents posicions. Busca un lloc on puguis seure còmodament per fer aquesta activitat.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Agafa el mòbil amb la mà més afectada, tal com es mostra a la imatge de sota.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Agafa el mòbil amb la mà DRETA, tal com es mostra a la imatge de sota.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Agafa el mòbil amb la mà ESQUERRA, tal com es mostra a la imatge de sota.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Quan estiguis assegut i amb el mòbil a la mà, se’t demanarà que completis %@.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "una tasca";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dues tasques";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tres tasques";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "quatre tasques";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "cinc tasques";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Prem Següent per començar.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepara’t per agafar el mòbil i recolzar la mà sobre la falda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepara’t per agafar el mòbil amb la mà ESQUERRA i recolzar aquesta mà sobre la falda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepara’t per agafar el mòbil amb la mà DRETA i recolzar aquesta mà sobre la falda.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Agafa el mòbil i recolza la mà sobre la falda durant %ld segons.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Ara agafa el mòbil i mantén el braç estirat cap enfora a l’altura de l’espatlla.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Ara agafa el mòbil amb la mà ESQUERRA i mantén el braç esquerre estirat cap enfora a l’altura de l’espatlla.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Ara agafa el mòbil amb la mà DRETA i mantén el braç dret estirat cap enfora a l’altura de l’espatlla.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Agafa el mòbil i mantén el braç estirat cap enfora durant %ld segons.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Ara agafa el mòbil i mantén la mà a l’altura de l’espatlla amb el colze doblegat.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Ara agafa el mòbil i mantén la mà ESQUERRA a l’altura de l’espatlla amb el colze doblegat.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Ara agafa el mòbil i mantén la mà DRETA a l’altura de l’espatlla amb el colze doblegat.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Agafa el mòbil i mantén el colze doblegat durant %ld segons.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Ara, amb el colze doblegat, toca el mòbil amb el nas repetidament.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Ara, amb el colze doblegat i el mòbil a la mà ESQUERRA, toca el mòbil amb el nas repetidament.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Ara, amb el colze doblegat i el mòbil a la mà DRETA, toca el mòbil amb el nas repetidament.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Toca el mòbil amb el nas durant %ld segons.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Prepara’t per fer una salutació reial fent girar el canell amb el mòbil a la mà.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Prepara’t per fer una salutació reial fent girar el canell amb el mòbil a la mà ESQUERRA.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Prepara’t per fer una salutació reial fent girar el canell amb el mòbil a la mà DRETA.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Fes una salutació reial durant %ld segons.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Ara agafa el mòbil amb la mà ESQUERRA i avança a la tasca següent.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Ara agafa el mòbil amb la mà DRETA i avança a la tasca següent.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Avança a la tasca següent.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Activitat completada.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Quan estiguis assegut i amb el mòbil a la mà, se’t demanarà que completis %@, primer amb una mà i després amb l’altra.";
+"TREMOR_SKIP_LEFT_HAND" = "No puc completar l’activitat amb la mà ESQUERRA.";
+"TREMOR_SKIP_RIGHT_HAND" = "No puc completar l’activitat amb la mà DRETA.";
+"TREMOR_SKIP_NEITHER" = "Puc completar l’activitat amb les dues mans.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
@@ -279,6 +424,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Diversos errors a l’eliminar registres";
 "ERROR_RECORDER_NO_DATA" = "No s’han trobat dades recollides.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sense dades";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Enrere";
@@ -307,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Previsualització de la captura";
 "AX_IMAGE_CAPTURED_LABEL" = "Imatge capturada";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Previsualització de la captura de vídeo";
+"AX_VIDEO_CAPTURED_LABEL" = "Vídeo capturat";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No s’ha pogut situar el disc de mida %@ sobre el disc de mida %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Objectiu";
 "AX_TOWER_OF_HANOI_TOWER" = "Torre";
@@ -315,5 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Té disc amb mides %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Buidar";
 
-"AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Interval de %@ a %@";
+"AX_GRAPH_STACK_PREFIX" = "Pila composta per";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
+"AX_GRAPH_POINT_%@" = "Punt: %@";

@@ -30,65 +30,87 @@
 
 
 #import "ORKPasscodeViewController.h"
-#import "ORKPasscodeStepViewController.h"
+
 #import "ORKPasscodeStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKPasscodeStep.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKKeychainWrapper.h"
 
 
 @implementation ORKPasscodeViewController
 
-- (instancetype)init {
++ (instancetype)new {
     ORKThrowMethodUnavailableException();
-    return nil;
 }
 
-+ (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
-                                          delegate:(id<ORKPasscodeDelegate>)delegate {
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationBar.shadowImage = [UIImage new];
+        self.navigationBar.translucent = NO;
+    }
+    return self;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
+}
+
++ (instancetype)passcodeAuthenticationViewControllerWithText:(NSString *)text
+                                                    delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
                                    passcodeFlow:ORKPasscodeFlowAuthenticate
                                    passcodeType:0];
 }
 
-+ (id)passcodeEditingViewControllerWithText:(NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                               passcodeType:(ORKPasscodeType)passcodeType {
++ (instancetype)passcodeEditingViewControllerWithText:(NSString *)text
+                                             delegate:(id<ORKPasscodeDelegate>)delegate
+                                         passcodeType:(ORKPasscodeType)passcodeType {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
                                    passcodeFlow:ORKPasscodeFlowEdit
                                    passcodeType:passcodeType];
 }
 
-+ (id)passcodeViewControllerWithText:(NSString *)text
-                            delegate:(id<ORKPasscodeDelegate>)delegate
-                        passcodeFlow:(ORKPasscodeFlow)passcodeFlow
-                        passcodeType:(ORKPasscodeType)passcodeType {
-
++ (instancetype)passcodeViewControllerWithText:(NSString *)text
+                                      delegate:(id<ORKPasscodeDelegate>)delegate
+                                  passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                                  passcodeType:(ORKPasscodeType)passcodeType {
+    
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.passcodeFlow = passcodeFlow;
     step.passcodeType = passcodeType;
     step.text = text;
     
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
     passcodeStepViewController.step = step;
     
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
     return navigationController;
 }
 
 + (BOOL)isPasscodeStoredInKeychain {
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+    NSDictionary *dictionary = (NSDictionary *)[ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
     return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;
 }
 
 + (BOOL)removePasscodeFromKeychain {
     return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
+}
+
++ (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
+    ORKThrowInvalidArgumentExceptionIfNil(passcode)
+    [ORKPasscodeStepViewController savePasscode:passcode withTouchIdEnabled:touchIdEnabled];
 }
 
 @end

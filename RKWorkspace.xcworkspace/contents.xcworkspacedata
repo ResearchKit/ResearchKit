@@ -10,4 +10,7 @@
    <FileRef
       location = "group:samples/ORKCatalog/ORKCatalog.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:samples/ORKSample/ORKSample.xcodeproj">
+   </FileRef>
 </Workspace>

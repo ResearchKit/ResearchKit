@@ -29,7 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -43,12 +43,12 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
 /**
  The `ORKResultSelector` class unequivocally identifies a result within a set of task results.
  
- You must use an instances of this object to specify the question result you are interested in when
- building result predicates. See `ORKResultPredicate` for more information.
+ You must use an instance of this object to specify the question result you are interested in when
+ building a result predicate. See `ORKResultPredicate` for more information.
  
  A result selector object contains a result identifier and, optionally, a task identifier and a step
  identifier. If the task identifier is `nil`, the selector refers to a result in the ongoing task.
- If you set the step identifier to `nil`, its value will be the same os the result identifier.
+ If you set the step identifier to `nil`, its value will be the same as the result identifier.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultSelector : NSObject <NSSecureCoding, NSCopying>
@@ -176,7 +176,7 @@ ORK_CLASS_AVAILABLE
  the `ORKQuestionResult` subtypes.
  
  You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
- are used to match specific `ORKQuestionResult` instances (created in response to the participant's
+ are used to match specific ORKQuestionResult instances (created in response to the participant's
  answers) and navigate accordingly. You can match results both in an ongoing task or in previously
  completed tasks.
  
@@ -184,11 +184,12 @@ ORK_CLASS_AVAILABLE
 
  Note that each `ORKStep` object produces one `ORKStepResult` collection object. A step
  result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object which has
+
  the same identifier as the step that generated it. A step result produced by an `ORKFormStep`
- object can contain one or more `ORKQuestionResult` objects which have the identifiers of the
+ object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
 
- For matching a single-question step result, you only need to set the `resultIdentifer` when
+ For matching a single-question step result, you only need to set the `resultIdentifier` when
  building the result selector object. The `stepIdentifier` will take the same value.
  
  For matching a form item result, you need to build a result selector with a `stepIdentifier` (the
@@ -196,6 +197,7 @@ ORK_CLASS_AVAILABLE
  
  For matching results in the ongoing task, leave the `taskIdentifier` in the the form step identifier
  as `nil`. For matching results in different tasks, set the `taskIdentifier` appropriately.
+
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
@@ -332,7 +334,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
- specified boolean value.
+ specified Boolean value.
  
  @param resultSelector      The result selector object which specifies the question result you are
                                 interested in.
@@ -344,6 +346,7 @@ ORK_CLASS_AVAILABLE
                                                       expectedAnswer:(BOOL)expectedAnswer;
 
 /**
+
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
  specified string.
  
@@ -432,7 +435,7 @@ ORK_CLASS_AVAILABLE
  the specified hour and minute values.
  
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
- If you are interested in additional components, you will have to build the predicate manually.
+ If you are interested in additional components, you must build the predicate manually.
  
  @param resultSelector          The result selector object which specifies the question result you
                                     are interested in.
@@ -450,8 +453,8 @@ ORK_CLASS_AVAILABLE
                                                  maximumExpectedMinute:(NSInteger)maximumExpectedMinute;
 
 /**
- Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
- is within the specified `NSTimeInterval` values.
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
+within the specified `NSTimeInterval` values.
  
  @param resultSelector              The result selector object which specifies the question result
                                         you are interested in.
@@ -510,6 +513,25 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForDateQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
                                         minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
                                         maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
+
+/**
+ Returns a predicate matching a result of type `ORKConsentSignatureResult` whose `consented` value 
+ matches the specified boolean value.
+ 
+ @param resultSelector              The result selector object which specifies the question result 
+                                        you are interested in. Note that when creating this result
+                                        selector you must provide the desired step identifier as the
+                                        `stepIdentifier` argument and the corresponding signature
+                                        identifier as the `resultIdentifier` argument). The step
+                                        identifier will normally refer to the result of a
+                                        `ORKConsentReviewStep` and the signature identifier will
+                                        refer to the contained `ORKConsentSignatureResult`
+                                        corresponding to the signature collected by the consent
+                                        review step.
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)resultSelector
+                                            didConsent:(BOOL)didConsent;
 
 @end
 

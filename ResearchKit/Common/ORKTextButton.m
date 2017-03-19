@@ -79,6 +79,11 @@
 
 }
 
+-(void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    [self.titleLabel setEnabled:enabled];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -112,6 +117,14 @@
                           labelSize.height+verticalPadding);
     }
     return [super intrinsicContentSize];
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    // prevent VoiceOver from speaking "dimmed" when transitioning between pages
+    if (self.isInTransition) {
+        return [super accessibilityTraits] & ~UIAccessibilityTraitNotEnabled;
+    }
+    return [super accessibilityTraits];
 }
 
 @end

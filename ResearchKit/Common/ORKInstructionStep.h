@@ -29,7 +29,8 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,6 +55,15 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *detailText;
 
 /**
+ Additional text to display for the step in a localized string at the bottom of the view.
+ 
+ The footnote is displayed in a smaller font below the continue button. It is intended to be used
+ in order to include disclaimer, copyright, etc. that is important to display in the step but
+ should not distract from the main purpose of the step.
+ */
+@property (nonatomic, copy, nullable) NSString *footnote;
+
+/**
  An image that provides visual context for the instruction.
  
  The image is displayed with aspect fit. Depending on the device, the screen area
@@ -61,6 +71,21 @@ ORK_CLASS_AVAILABLE
  metrics, see `ORKScreenMetricIllustrationHeight`.
  */
 @property (nonatomic, copy, nullable) UIImage *image;
+
+/**
+ An image that provides visual context for the instruction that will allow for showing
+ a two-part composite image where the `image` is tinted and the `auxiliaryImage` is 
+ shown with light grey.
+ 
+ The image is displayed with the same frame as the `image` so both the `auxiliaryImage`
+ and `image` should have transparently to allow for overlay.
+ */
+@property (nonatomic, copy, nullable) UIImage *auxiliaryImage;
+
+/**
+ Optional icon image to show above the title and text.
+ */
+@property (nonatomic, copy, nullable) UIImage *iconImage;
 
 @end
 

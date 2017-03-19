@@ -29,15 +29,16 @@
  */
 
 
+@import UIKit;
 #import "ORKVerticalContainerView.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ORKVerificationStepView : ORKVerticalContainerView
-
-@property (nonatomic, strong, readonly) ORKLabel *emailLabel;
-
-@property (nonatomic, strong, readonly) UIButton *changeEmailButton;
 
 @property (nonatomic, strong, readonly) UIButton *resendEmailButton;
 
 @end
+
+NS_ASSUME_NONNULL_END

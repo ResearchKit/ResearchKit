@@ -29,19 +29,20 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKRecorder.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKStep;
-@class ORKResult;
 @class ORKEditableResult;
+@class ORKRecorder;
+@class ORKResult;
+@class ORKReviewStep;
+@class ORKStep;
+@class ORKStepResult;
 @class ORKStepViewController;
 @class ORKTaskViewController;
-@class ORKStepResult;
 
 /**
  An enumeration of values used in `ORKStepViewControllerDelegate` to indicate the direction of navigation
@@ -192,6 +193,16 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithStep:(nullable ORKStep *)step;
 
 /**
+ Returns a new step view controller for the specified step.
+ 
+ @param step    The step to be presented.
+ @param result  The current step result for this step.
+ 
+ @return A newly initialized step view controller.
+ */
+- (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result;
+
+/**
  The step presented by the step view controller.
  
  If you use a storyboard to initialize the step view controller, `initWithStep:` isn't called,
@@ -305,6 +316,18 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly, nullable) ORKStepResult *result;
 
 /**
+ Add a result to the step view controller's `ORKStepResult`. By default, the property for
+ the step view controller's result will instantiate a copy of the result each time it is 
+ called. Therefore, the result cannot be mutated by adding a result to its result array.
+ 
+ This method can be called by a delegate to add a result to a given step in a way that will
+ be retained by the step.
+ 
+ @param result     The result to add to the step results.
+ */
+- (void)addResult:(ORKResult*)result;
+
+/**
  Returns a Boolean value indicating whether there is a previous step.
  
  This method is a convenience accessor that subclasses can call to make a delegate callback to
@@ -349,6 +372,11 @@ ORK_CLASS_AVAILABLE
  point or a target action for a subclass.
  */
 - (void)goBackward;
+
+/**
+ This method is called when the user taps the skip button. By default, it calls `-goForward`.
+ */
+- (void)skipForward;
 
 /**
  A Boolean value indicating whether the view controller has been presented before.

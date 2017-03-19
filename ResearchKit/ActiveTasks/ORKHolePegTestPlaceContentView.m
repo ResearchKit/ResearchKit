@@ -30,10 +30,12 @@
 
 
 #import "ORKHolePegTestPlaceContentView.h"
-#import "ORKHolePegTestPlacePegView.h"
-#import "ORKHolePegTestPlaceHoleView.h"
+
 #import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+#import "ORKHolePegTestPlaceHoleView.h"
+#import "ORKHolePegTestPlacePegView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 
@@ -163,7 +165,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(ORKHolePegViewDiameter)};
+    NSDictionary *metrics = @{@"diameter": @(ORKHolePegViewDiameter)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"

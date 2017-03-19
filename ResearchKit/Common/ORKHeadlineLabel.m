@@ -30,7 +30,8 @@
 
 
 #import "ORKHeadlineLabel.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 
@@ -41,7 +42,7 @@
     const CGFloat defaultHeadlineSize = 17;
     
     CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForWindow(surveyMode ? ORKScreenMetricFontSizeSurveyHeadline : ORKScreenMetricFontSizeHeadline, nil);
-    CGFloat maxFontSize = ORKGetMetricForWindow(surveyMode?ORKScreenMetricMaxFontSizeSurveyHeadline:ORKScreenMetricMaxFontSizeHeadline, nil);
+    CGFloat maxFontSize = ORKGetMetricForWindow(surveyMode ? ORKScreenMetricMaxFontSizeSurveyHeadline : ORKScreenMetricMaxFontSizeHeadline, nil);
     
     return ORKLightFontWithSize(MIN(maxFontSize, fontSize));
 }

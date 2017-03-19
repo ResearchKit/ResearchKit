@@ -30,9 +30,12 @@
 
 
 #import "ORKValuePicker.h"
-#import "ORKResult_Private.h"
-#import "ORKChoiceAnswerFormatHelper.h"
+
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKChoiceAnswerFormatHelper.h"
+#import "ORKResult_Private.h"
+
+#import "ORKAccessibilityFunctions.h"
 
 
 @interface ORKValuePicker () <UIPickerViewDataSource, UIPickerViewDelegate>
@@ -106,6 +109,7 @@
 - (void)pickerWillAppear {
     [self pickerView];
     [self valueDidChange];
+    [self accessibilityFocusOnPickerElement];
 }
 
 - (void)valueDidChange {
@@ -113,6 +117,19 @@
     _answer = [_helper answerForSelectedIndex:row];
     if ([self.pickerDelegate respondsToSelector:@selector(picker:answerDidChangeTo:)]) {
         [self.pickerDelegate picker:self answerDidChangeTo:_answer];
+    }
+}
+
+#pragma mark - Accessibility
+
+- (void)accessibilityFocusOnPickerElement {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        ORKAccessibilityPerformBlockAfterDelay(0.75, ^{
+            NSArray *axElements = [self.pickerView accessibilityElements];
+            if ([axElements count] > 0) {
+                UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, [axElements objectAtIndex:0]);
+            }
+        });
     }
 }
 

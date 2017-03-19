@@ -30,12 +30,13 @@
 
 
 #import "ORKTableContainerView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKVerticalContainerView.h"
-#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKNavigationContainerView.h"
 #import "ORKStepHeaderView.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 // Enable this define to see outlines and colors of all the views laid out at this level.
@@ -58,13 +59,17 @@
     
     UITapGestureRecognizer *_tapOffGestureRecognizer;
 }
-
+    
 - (instancetype)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame style:UITableViewStyleGrouped];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     self = [super initWithFrame:frame];
     if (self) {
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         
-        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.bounds style:style];
         _tableView.backgroundColor = ORKColor(ORKBackgroundColorKey);
         _tableView.allowsSelection = YES;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;

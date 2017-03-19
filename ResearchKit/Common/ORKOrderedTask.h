@@ -29,10 +29,13 @@
  */
 
 
+@import UIKit;
 #import <ResearchKit/ORKTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKNavigableOrderedTask;
 
 /**
  The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a 
@@ -43,12 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  If you want further custom conditional behaviors in a task, it can be easier to subclass
  `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
- to implement the `ORKTask` protocol directly. Override `stepAfterStep:withResult:` and
- `stepBeforeStep:withResult:` and call super for all other methods.
+ to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:` and
+ `stepBeforeStep:withResult:`, and call super for all other methods.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /// @name Initializers
@@ -87,6 +91,32 @@ ORK_CLASS_AVAILABLE
  array order.
  */
 @property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
+
+
+/**
+ Return a mutated copy of self with the steps included in the given array.
+ 
+ This method is intended to allow for mutating an ordered task (or subclass) while retaining
+ the original class and properties that may not be publicly exposed, but with a mutated set
+ of steps. An example of where this might be useful is if before performing an `ORKPredefinedActiveTask`, 
+ the app needed to query the participant about medications, diet or sleep. The app
+ would need to mutate the steps in order to insert their own steps. While an ORKOrderedTask could
+ then be created with the same identifier and the new steps, subclass information such rules on an
+ `ORKNavigableOrderedTask` would be lost.
+ 
+ @param steps       An array of `ORKStep` objects in the order in which they should be presented.
+ 
+ @return            An initialized ordered task.
+ */
+- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps;
+
+/**
+ Find the index of a given step.
+ 
+ @param step        The step to look for
+ @return            The index position of the step (or NSNotFound if not found)
+ */
+- (NSUInteger)indexOfStep:(ORKStep *)step;
 
 @end
 
@@ -129,6 +159,77 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
     /// Exclude audio data collection.
     ORKPredefinedTaskOptionExcludeAudio = (1 << 7)
 } ORK_ENUM_AVAILABLE;
+
+/**
+ Values that identify the hand(s) to be used in an active task.
+ 
+ By default, the participant will be asked to use their most affected hand.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
+    /// Which hand to use is undefined
+    ORKPredefinedTaskHandOptionUnspecified = 0,
+    
+    /// Task should test the left hand
+    ORKPredefinedTaskHandOptionLeft = 1 << 1,
+    
+    /// Task should test the right hand
+    ORKPredefinedTaskHandOptionRight = 1 << 2,
+    
+    /// Task should test both hands (random order)
+    ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+/**
+ The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
+ tasks in the predefined Tremor `ORKOrderedTask`.
+ 
+ By default, all predefined active tasks will be included. The tremor active task option flags can
+ be used to explicitly specify that an active task is not to be included.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
+    /// Default behavior.
+    ORKTremorActiveTaskOptionNone = 0,
+    
+    /// Exclude the hand-in-lap steps.
+    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
+    
+    /// Exclude the hand-extended-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
+    
+    /// Exclude the elbow-bent-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
+    
+    /// Exclude the elbow-bent-touch-nose steps.
+    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
+    
+    /// Exclude the queen-wave steps.
+    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
+} ORK_ENUM_AVAILABLE;
+
+/**
+ Values that identify the left or right limb to be used in an active task.
+*/
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
+    /// Which limb to use is undefined
+    ORKPredefinedTaskLimbOptionUnspecified = 0,
+    
+    /// Task should test the left limb
+    ORKPredefinedTaskLimbOptionLeft = 1 << 1,
+    
+    /// Task should test the right limb
+    ORKPredefinedTaskLimbOptionRight = 1 << 2,
+    
+    /// Task should test the both limbs (random order)
+    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+/// Trail making for Type-A trail where the pattern is 1-2-3-4-5-6-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+
+/// Trail making for Type-B trail where the pattern is 1-A-2-B-3-C-4-D-5-E-6-F-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
 
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
@@ -199,9 +300,56 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                    restDuration:(NSTimeInterval)restDuration
                                         options:(ORKPredefinedTaskOption)options;
 
-
 /**
- Returns a predefined task that enables an audio recording.
+ Returns a predefined task that consists of a short walk back and forth.
+ 
+ In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+ Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+ of the participant's gait.
+ 
+ The presentation of the back and forth walk task differs from the short walk in that the participant
+ is asked to walk back and forth rather than walking in a straight line for a certain number of steps.
+ 
+ The participant is then asked to turn in a full circle and then stand still.
+ 
+ This task is intended to allow the participant to walk in a confined space where the participant
+ does not have access to a long hallway to walk in a continuous straight line. Additionally, by asking 
+ the participant to turn in a full circle and then stand still, the activity can access balance and 
+ concentration.
+ 
+ The data collected by this task can include accelerometer, device motion, and pedometer data.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param walkDuration            The duration of the walking period.
+ @param restDuration            The duration of the rest period. When the value of this parameter is
+ nonzero, the user is asked to stand still for the specified rest
+ period after the turn sequence has been completed, and baseline
+ data is collected.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active short walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
+                                intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                          walkDuration:(NSTimeInterval)walkDuration
+                                          restDuration:(NSTimeInterval)restDuration
+                                               options:(ORKPredefinedTaskOption)options;
+
++ (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options;
+
+
++ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options;
+/**
+ Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
  In an audio recording task, the participant is asked to make some kind of sound
  with their voice, and the audio data is collected.
@@ -209,23 +357,40 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  An audio task can be used to measure properties of the user's voice, such as
  frequency range, or the ability to pronounce certain sounds.
  
+ If `checkAudioLevel == YES` then a navigation rule is added to do a simple check of the background
+ noise level. If the background noise is too loud, then the participant is instructed to move to a 
+ quieter location before trying again.
+ 
  Data collected in this task consists of audio information.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
-                                    collected. If the value of this parameter is `nil`, default
-                                    localized text is used.
+ collected. If the value of this parameter is `nil`, default
+ localized text is used.
  @param speechInstruction       Instructional content describing what the user needs to do when
-                                    recording begins. If the value of this parameter is `nil`,
-                                    default localized text is used.
+ recording begins. If the value of this parameter is `nil`,
+ default localized text is used.
  @param shortSpeechInstruction  Instructional content shown during audio recording. If the value of
-                                    this parameter is `nil`, default localized text is used.
+ this parameter is `nil`, default localized text is used.
  @param duration                The length of the count down timer that runs while audio data is
-                                    collected.
+ collected.
  @param recordingSettings       See "AV Foundation Audio Settings Constants" for possible values.
+ @param checkAudioLevel         If `YES` then add navigational rules to check the background noise level.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                            duration:(NSTimeInterval)duration
+                                   recordingSettings:(nullable NSDictionary *)recordingSettings
+                                     checkAudioLevel:(BOOL)checkAudioLevel
+                                             options:(ORKPredefinedTaskOption)options;
+
+/**
+ @Deprecated
  */
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -233,10 +398,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                      shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
                                    duration:(NSTimeInterval)duration
                           recordingSettings:(nullable NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options;
+                                    options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
- Returns a predefined task that consists of two finger tapping.
+ Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
  
  In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
  targets on the device screen.
@@ -248,10 +413,11 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
-                                    collected. If the value of this parameter is `nil`, the default
-                                    localized text will be displayed.
+                                collected. If the value of this parameter is `nil`, the default
+                                localized text will be displayed.
  @param duration                The length of the count down timer that runs while touch data is
-                                    collected.
+                                collected.
+ @param handOptions             Options for determining which hand(s) to test.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
@@ -259,7 +425,15 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
+                                                   handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                        options:(ORKPredefinedTaskOption)options;
+/**
+ @Deprecated
+ */
++ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
  Returns a predefined task that tests spatial span memory.
@@ -294,8 +468,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param maximumSpan             The maximum pattern sequence length.
  @param playSpeed               The time per sequence item; a smaller value means faster sequence
                                     play.
- @param maxTests                The maximum number of rounds to conduct.
- @param maxConsecutiveFailures  The maximum number of consecutive failures the user can make before
+ @param maximumTests                The maximum number of rounds to conduct.
+ @param maximumConsecutiveFailures  The maximum number of consecutive failures the user can make before
                                     the task is terminated.
  @param customTargetImage       The image to use for the task. By default, and if the value of this
                                     parameter is `nil`, the image is a flower. To supply a custom
@@ -314,8 +488,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                             minimumSpan:(NSInteger)minimumSpan
                                             maximumSpan:(NSInteger)maximumSpan
                                               playSpeed:(NSTimeInterval)playSpeed
-                                               maxTests:(NSInteger)maxTests
-                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                               maximumTests:(NSInteger)maximumTests
+                                 maximumConsecutiveFailures:(NSInteger)maximumConsecutiveFailures
                                       customTargetImage:(nullable UIImage *)customTargetImage
                                  customTargetPluralName:(nullable NSString *)customTargetPluralName
                                         requireReversal:(BOOL)requireReversal
@@ -328,7 +502,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  frequencies, playing on different channels (left and right), with the volume being progressively
  increased until the participant taps a button.
 
- A tone audiometry task can be used to measure properties of the user's hearing, based on their
+ You can use a tone audiometry task to measure properties of the user's hearing, based on their
  reaction to a wide range of frequencies.
 
  Data collected in this task consists of audio signal amplitude for specific frequencies and
@@ -360,12 +534,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that tests the participant's reaction time.
  
- In a reaction time task the participant is asked to move the device sharply in any
+ In a reaction time task, the participant is asked to move the device sharply in any
  direction in response to a visual cue. You can use this task to accurately assess the participant's
- Simple Reaction Time.
+ simple reaction time.
  
  A reaction time task finishes when the participant has completed the required
- `numberOfAttempts` successfully. An attempt is successful when the participant exerts acceleration
+ number of attempts successfully. An attempt is successful when the participant exerts acceleration
  greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
  `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
  `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
@@ -373,7 +547,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  try again to proceed with the task.
  
  Data collected by the task is in the form of ORKReactionTimeResult objects. These
- objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult which
+ objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult, which
  references the motion data collected during an attempt. The researcher can use these to evaluate
  the response to the stimulus and calculate the reaction time.
  
@@ -411,21 +585,20 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                            options:(ORKPredefinedTaskOption)options;
 
 /**
- Returns a predefined task that consists of a Tower of Hanoi Puzzle.
+ Returns a predefined task that consists of a Tower of Hanoi puzzle.
  
- In a Tower of Hanoi task the participant is asked to solve the classic puzzle in as few moves as possible.
- You can use this task to assess the participant's problem solving skills.
+ In a Tower of Hanoi task, the participant is asked to solve the classic puzzle in as few moves as possible.
+ You can use this task to assess the participant's problem-solving skills.
  
- A Tower of Hanoi task finishes when the participant has completed the puzzle correctly or conceeds that he/she cannot solve the puzzle.
+ A Tower of Hanoi task finishes when the participant has completed the puzzle correctly or concedes that he or she cannot solve it.
  
- Data collected by the task is in the form of an `ORKTowerOfHanoiResult` object. Data collected in this task consists of the number of moves
- taken and whether the puzzle was successfully completed or not.
+ Data collected by the task is in the form of an `ORKTowerOfHanoiResult` object. Data collected in this task consists of how many moves were taken and whether the puzzle was successfully completed or not.
  
  @param identifier                  The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription      A localized string describing the intended use of the data
                                     collected. If the value of this parameter is `nil`, the
                                     default localized text is displayed.
- @param numberOfDisks               The number of disks in the puzzle, the default value for this property is 3.
+ @param numberOfDisks               The number of disks in the puzzle; the default value for this property is 3.
  @param options                     Options that affect the features of the predefined task.
  
  @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
@@ -447,31 +620,72 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  walk task in that the distance is fixed. After a first walk, the user is asked to turn and reverse
  direction.
  
- The data collected by this task can include accelerometer, device motion, pedometer data
+ The data collected by this task can include accelerometer, device motion, pedometer data,
  and location where available.
  
  Data collected by the task is in the form of an `ORKTimedWalkResult` object.
  
- @param identifier              The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription  A localized string describing the intended use of the data
- collected. If the value of this parameter is `nil`, the default
- localized text is displayed.
- @param distanceInMeters        The timed walk distance in meters.
- @param timeLimit               The time limit to complete the trials.
- @param options                 Options that affect the features of the predefined task.
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                      collected. If the value of this parameter is `nil`, the default
+                                      localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+                                      about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
  
- @return An active Timed Walk task that can be presented with an `ORKTaskViewController` object.
+ @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of a timed walk, with a distinct turn around step.
+
+ In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+ possible, but safely. Then the participant is asked to turn around. The task is immediately
+ administered again by having the patient walk back the same distance.
+ A timed walk task can be used to measure lower extremity function.
+
+ The presentation of the timed walk task differs from both the fitness check task and the short
+ walk task in that the distance is fixed. After a first walk, the user is asked to turn, then reverse
+ direction.
+
+ The data collected by this task can include accelerometer, device motion, pedometer data,
+ and location where available.
+
+ Data collected by the task is in the form of an `ORKTimedWalkResult` object.
+
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param distanceInMeters            The timed walk distance in meters.
+ @param timeLimit                   The time limit to complete the trials.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step.
+ @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
+ about the usage of an assistive device.
+ @param options                     Options that affect the features of the predefined task.
+
+ @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                            turnAroundTimeLimit:(NSTimeInterval)turnAroundTimeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that consists of the paced serial addition test (PSAT).
  
- In a PSAT task, the participant is asked to add a new digit to the one immediately prior to it
+ In a PSAT task, the participant is asked to add a new digit to the one immediately before it
  every 2 or 3 seconds.
  
  A PSAT task can be used to measure the cognitive function that assesses auditory and/or
@@ -483,10 +697,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param intendedUseDescription  A localized string describing the intended use of the data
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
- @param presentationMode        The presentation mode of the PSAT test (auditory and/or Visual).
+ @param presentationMode        The presentation mode of the PSAT test (auditory or visual or both).
  @param interStimulusInterval   The time interval between two digits presented.
  @param stimulusDuration        The time duration the digit is shown on screen (only for
-                                    visual PSAT, ie. PVSAT and PAVSAT).
+                                    visual PSAT, that is PVSAT and PAVSAT).
  @param seriesLength            The number of digits that will be presented during the task.
  @param options                 Options that affect the features of the predefined task.
  
@@ -500,6 +714,56 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures hand tremor.
+ 
+ In a tremor assessment task, the participant is asked to hold the device with their most affected 
+ hand in various positions while accelerometer and motion data are captured.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param activeStepDuration      The duration for each active step in the task.
+ @param activeTaskOptions       Options that affect which active steps are presented for this task.
+ @param handOptions             Options for determining which hand(s) to test.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active tremor test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       activeStepDuration:(NSTimeInterval)activeStepDuration
+                                        activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
+                                              handOptions:(ORKPredefinedTaskHandOption)handOptions
+                                                  options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures visual attention and task switching.
+ 
+ In a trail making test, the participant is asked to connect a series of cicles labeled 1,2,3... or
+ 1,A,2,B,3,C... and time to complete the test is recorded.
+ 
+ `ORKTrailMakingTypeIdentifierA` uses the pattern: 1-2-3-4-5-6-7.
+ `ORKTrailMakingTypeIdentifierB` uses the pattern: 1-A-2-B-3-C-4-D-5-E-6-F-7
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param trailmakingInstruction  Instructional content describing what the user needs to do when
+                                  the task begins. If the value of this parameter is `nil`,
+ @param trailType               Type of trail to display. Either `ORKTrailMakingTypeIdentifierA` or `ORKTrailMakingTypeIdentifierB`
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active trail making test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options;
 
 @end
 

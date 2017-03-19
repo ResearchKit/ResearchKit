@@ -86,11 +86,68 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Địa chỉ email không hợp lệ: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Nhập một địa chỉ";
+"LOCATION_ERROR_TITLE" = "Không thể Tìm thấy Địa chỉ Được chỉ định";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Không thể xử lý vị trí hiện tại của bạn. Vui lòng nhập địa chỉ hoặc di chuyển đến một vị trí có tín hiệu GPS tốt hơn nếu có thể.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Truy cập vào dịch vụ định vị này đã bị từ chối. Vui lòng cấp quyền cho ứng dụng này sử dụng dịch vụ định vị qua phần Cài đặt.";
+"LOCATION_ERROR_GEOCODE" = "Không thể tìm thấy kết quả cho địa chỉ đã nhập. Vui lòng đảm bảo địa chỉ này hợp lệ.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Bạn không được kết nối vào internet hoặc bạn đã vượt quá số lượng yêu cầu tra cứu địa chỉ tối đa. Nếu bạn không được kết nối vào internet, vui lòng bật Wi-Fi để trả lời câu hỏi này, bỏ qua câu hỏi này nếu có nút bỏ qua hoặc quay trở lại bản khảo sát khi bạn được kết nối vào internet. Nếu không, vui lòng thử lại sau một vài phút nữa.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Nội dung văn bản vượt quá độ dài tối đa: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera không có sẵn trong chế độ màn hình tách rời.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Mật khẩu";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Nhập mật khẩu";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Xác nhận";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Nhập lại mật khẩu";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Các mật khẩu không khớp.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Thông tin Bổ sung";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Giới tính";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Chọn giới tính";
+"DOB_FORM_ITEM_TITLE" = "Ngày sinh";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Chọn một ngày";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Xác minh";
+"VERIFICATION_STEP_TITLE" = "Xác minh Email của bạn";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Chạm vào liên kết bên dưới nếu bạn không nhận được email xác minh và muốn được gửi lại.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Gửi lại Email Xác minh";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Đăng nhập";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Quên mật khẩu?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Nhập mã khóa";
+"PASSCODE_CONFIRM_MESSAGE" = "Xác nhận mã khóa";
+"PASSCODE_SAVED_MESSAGE" = "Đã lưu mã khóa";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Đã xác thực mã khóa";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Nhập mã khóa cũ của bạn";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Nhập mã khóa mới của bạn";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Xác nhận mã khóa mới của bạn";
+"PASSCODE_INVALID_ALERT_TITLE" = "Mã khóa Không đúng";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Các mã khóa không khớp. Thử lại.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Vui lòng xác thực bằng Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Lỗi Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Chỉ cho phép các ký tự số.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình nhập mã khóa";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Đã nhập %@ / %@ số";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Bạn quên mật mã?";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Không thể thêm mục Chuỗi khóa.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Không thể cập nhật mục Chuỗi khóa.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Không thể xóa mục Chuỗi khóa.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Không thể tìm mục Chuỗi khóa.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -111,6 +168,11 @@
 "BOOL_NO" = "Không";
 "BOOL_YES" = "Có";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Chạm để trả lời";
 "NULL_ANSWER" = "Chọn một câu trả lời";
@@ -120,6 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Đồng ý";
 "BUTTON_CANCEL" = "Hủy";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Xóa";
 "BUTTON_DISAGREE" = "Không đồng ý";
 "BUTTON_DONE" = "Xong";
@@ -132,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Lưu để Sau này";
 "BUTTON_OPTION_DISCARD" = "Hủy bỏ Kết quả";
 "BUTTON_OPTION_STOP_TASK" = "Kết thúc Nhiệm vụ";
+"BUTTON_SAVE" = "Lưu";
+"BUTTON_CLEAR_ANSWER" = "Xóa câu trả lời";
+"BUTTON_READ_ONLY_MODE" = "Không thể sửa đổi câu trả lời này.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Bắt đầu hoạt động sau";
 "TASK_COMPLETE_TITLE" = "Hoạt động Hoàn thành";
 "TASK_COMPLETE_TEXT" = "Dữ liệu của bạn sẽ được phân tích và bạn sẽ được thông báo khi có kết quả.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Còn lại %@ giây.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Chụp Ảnh";
@@ -145,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Để hoàn thành bước này, hãy cho phép ứng dụng này truy cập camera trong Cài đặt.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Không có thư mục đầu ra nào được chỉ định cho hình ảnh được chụp.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Không thể lưu hình ảnh đã chụp.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Bắt đầu Ghi";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Dừng Ghi";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Quay lại Video";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Thể dục";
@@ -159,21 +231,39 @@
 "WALK_TASK_TITLE" = "Dáng đi và Thăng bằng";
 "WALK_INTRO_TEXT" = "Hoạt động này sẽ đo khả năng thăng bằng và dáng đi của bạn khi bạn đi bộ và đứng yên. Không tiếp tục hoạt động nếu bạn không thể đi bộ an toàn mà không có sự hỗ trợ.";
 "WALK_INTRO_2_TEXT_%ld" = "Tìm một nơi mà bạn có thể đi bộ an toàn, không cần có sự hỗ trợ, trong khoảng %ld bước theo đường thẳng.";
-"WALK_INTRO_2_DETAIL" = "Cho điện thoại vào túi hoặc vào bao và làm theo lời hướng dẫn.";
+"WALK_INTRO_2_DETAIL" = "Cho điện thoại vào túi hoặc vào giỏ và làm theo lời hướng dẫn.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Bây giờ, đứng yên trong %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Đứng yên trong %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Quay đầu lại và đi bộ về nơi bạn bắt đầu.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Đi bộ tối đa %ld bước theo đường thẳng.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Tìm một nơi mà bạn có thể đi bộ an toàn về phía sau và phía trước theo đường thẳng. Cố gắng đi bộ liên tục bằng cách rẽ cuối đường, như thể bạn đang đi bộ dọc quanh hình nón.\n\nTiếp theo, bạn sẽ được hướng dẫn đi vòng hình tròn, sau đó đứng yên với hai cánh tay ở bên sườn và hai chân dang rộng tầm chiều rộng của vai.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Chạm Bắt đầu khi bạn đã sẵn sàng bắt đầu.\nSau đó, cho điện thoại vào túi hoặc vào giỏ và làm theo hướng dẫn.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Đi bộ về phía sau và phía trước theo đường thẳng trong %@. Đi bộ bình thường.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Xoay một vòng tròn rồi đứng yên trong %@.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Bạn đã hoàn thành hoạt động.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tốc độ Chạm";
+"TAPPING_TASK_TITLE_RIGHT" = "Tay Phải";
+"TAPPING_TASK_TITLE_LEFT" = "Tay Trái";
 "TAPPING_INTRO_TEXT" = "Hoạt động này sẽ đo tốc độ chạm của bạn.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Đặt điện thoại trên bề mặt phẳng. Hai nút sẽ xuất hiện trên màn hình trong %@. Dùng hai ngón tay trên một bàn tay thay phiên nhau chạm vào các nút đó nhanh hết mức có thể.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Đặt điện thoại trên một bề mặt phẳng.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Sử dụng hai ngón tay trên cùng bàn tay bạn để luân phiên chạm vào các nút trên màn hình.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Sử dụng hai ngón tay trên bàn tay phải bạn để luân phiên chạm vào các nút trên màn hình.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Sử dụng hai ngón tay trên bàn tay trái bạn để luân phiên chạm vào các nút trên màn hình.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Bây giờ, hãy lặp lại bài kiểm tra tương tự bằng tay phải của bạn.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Bây giờ, hãy lặp lại bài kiểm tra tương tự bằng tay trái của bạn.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Chạm một ngón tay, sau đó chạm ngón còn lại. Cố gắng tính thời gian số lần chạm chẵn nhất có thể. Tiếp tục chạm trong %@.";
 "TAPPING_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Chạm Tiếp để bắt đầu.";
 "TAP_BUTTON_TITLE" = "Chạm";
 "TOTAL_TAPS_LABEL" = "Tổng Lần chạm";
-"TAPPING_INSTRUCTION" = "Chạm vào các nút bằng hai ngón tay với tốc độ nhanh hết mức có thể.";
+"TAPPING_INSTRUCTION" = "Chạm vào các nút bằng hai ngón tay liên tục nhất có thể.";
+"TAPPING_INSTRUCTION_RIGHT" = "Chạm nút bằng tay PHẢI của bạn.";
+"TAPPING_INSTRUCTION_LEFT" = "Chạm nút bằng tay TRÁI của bạn.";
+"TAPPING_SKIP_TITLE" = "Bỏ qua tay này";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Giọng nói";
@@ -183,6 +273,9 @@
 "AUDIO_INTENDED_USE" = "Hoạt động này sẽ đánh giá giọng nói của bạn bằng cách ghi âm bằng micrô ở dưới đáy điện thoại.";
 "AUDIO_TOO_LOUD_LABEL" = "Quá To";
 "AUDIO_GENERIC_ERROR_LABEL" = "Không thể ghi âm";
+"AUDIO_LEVEL_CHECK_LABEL" = "Vui lòng đợi trong khi chúng tôi kiểm tra độ ồn trong nền.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Độ ồn xung quanh quá lớn để ghi âm giọng nói của bạn. Vui lòng di chuyển đến nơi nào đó yên tĩnh hơn và thử lại.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Chạm Tiếp khi sẵn sàng.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Trắc thính Âm báo";
@@ -254,10 +347,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Quay đầu lại và đi bộ về nơi bạn bắt đầu.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Chạm Xong khi hoàn tất.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Không có Dữ liệu";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +360,62 @@
 "PSAT_INSTRUCTION" = "Cộng số mới này với số trước đó.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Kiểm tra Bảng %@ Lỗ";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một miếng gỗ vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Cả tay trái và phải của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Cả tay phải và trái của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay phải của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay phải của bạn.";
+"HOLE_PEG_TEST_TEXT" = "Nhặt miếng gỗ bằng hai ngón tay.";
+"HOLE_PEG_TEST_TEXT_2" = "Nhấc các ngón tay để thả rơi miếng gỗ.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Hoạt động Rung";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Hoạt động này sẽ đo độ rung của các tay bạn ở những vị trí khác nhau. Tìm một địa điểm nơi bạn có thể ngồi thoải mái trong suốt hoạt động này.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Cầm điện thoại bằng tay thuận hơn như được hiển thị trong hình bên dưới.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Cầm điện thoại bằng tay PHẢI như được hiển thị trong hình bên dưới.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Cầm điện thoại bằng tay TRÁI như được hiển thị trong hình bên dưới.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Bạn sẽ được yêu cầu thực hiện %@ trong khi ngồi với điện thoại trên tay của mình.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "một nhiệm vụ";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "hai nhiệm vụ";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "ba nhiệm vụ";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "bốn nhiệm vụ";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "năm nhiệm vụ";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Chạm tiếp để tiếp tục.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Chuẩn bị giữ điện thoại trong vạt áo của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Chuẩn bị giữ điện thoại trong vạt áo bằng tay TRÁI của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Chuẩn bị giữ điện thoại trong vạt áo bằng tay PHẢI của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Tiếp tục giữ điện thoại trong vạt áo bạn trong %ld giây.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Bây giờ, hãy cầm điện thoại với tay của bạn duỗi ngang vai.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Bây giờ, hãy cầm điện thoại với tay TRÁI của bạn duỗi ngang vai.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Bây giờ, hãy cầm điện thoại với tay PHẢI của bạn duỗi ngang vai.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Tiếp tục cầm điện thoại với tay của bạn duỗi thẳng trong %ld giây.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Bây giờ, hãy cầm điện thoại cao bằng vai cùng khủy tay bị gập.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Bây giờ, hãy cầm điện thoại với tay TRÁI của bạn cao bằng vai cùng khủy tay bị gập.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Bây giờ, hãy cầm điện thoại với tay PHẢI của bạn cao bằng vai cùng khủy tay bị gập.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Tiếp tục cầm điện thoại với khuỷu tay của bạn bị gập trong %ld giây";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Bây giờ, hãy gập khuỷu tay bạn, chạm điện thoại vào mũi nhiều lần.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Bây giờ, hãy giữ khuỷu tay bạn gập với điện thoại ở tay TRÁI, chạm điện thoại vào mũi nhiều lần.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Bây giờ, hãy gập khuỷu tay bạn với điện thoại ở tay PHẢI, chạm điện thoại vào mũi nhiều lần.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Tiếp tục chạm điện thoại vào mũi bạn trong %ld giây";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Chuẩn bị vẫy tay (vẫy bằng cách xoay cổ tay của bạn).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Chuẩn bị vẫy tay với điện thoại ở tay TRÁI (vẫy bằng cách xoay cổ tay của bạn).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Chuẩn bị vẫy tay với điện thoại ở tay PHẢI (vẫy bằng cách xoay cổ tay của bạn).";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Tiếp tục thực hiện vẫy tay trong %ld giây.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Bây giờ, hãy chuyển điện thoại sang tay TRÁI và tiếp tục nhiệm vụ tiếp theo.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Bây giờ, hãy chuyển điện thoại sang tay PHẢI và tiếp tục nhiệm vụ tiếp theo.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Tiếp tục đến nhiệm vụ tiếp theo.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Hoạt động đã hoàn thành.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Bạn sẽ được yêu cầu thực hiện %@ trong khi ngồi với điện thoại trên một tay trước tiên, sau đó đặt lại lên tay còn lại.";
+"TREMOR_SKIP_LEFT_HAND" = "Tôi không thể thực hiện hoạt động này bằng tay TRÁI.";
+"TREMOR_SKIP_RIGHT_HAND" = "Tôi không thể thực hiện hoạt động này bằng tay PHẢI.";
+"TREMOR_SKIP_NEITHER" = "Tôi có thể thực hiện hoạt động này bằng hai tay.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Không thể xóa đủ số tệp bản ghi để đạt tới ngưỡng";
@@ -279,6 +424,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Nhiều lỗi trong khi xóa bản ghi";
 "ERROR_RECORDER_NO_DATA" = "Không tìm thấy dữ liệu được thu thập.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Không có thư mục đầu ra nào được chỉ định";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Không có Dữ liệu";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Quay lại";
@@ -307,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Chụp bản xem trước";
 "AX_IMAGE_CAPTURED_LABEL" = "Ảnh được chụp";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Xem trước quay video";
+"AX_VIDEO_CAPTURED_LABEL" = "Video được quay";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Không thể đặt đĩa có kích cỡ %@ lên trên đĩa có kích cỡ %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Đích";
 "AX_TOWER_OF_HANOI_TOWER" = "Tháp";
@@ -315,5 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Có đĩa có kích cỡ %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Trống";
 
-"AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Trong khoảng từ %@ đến %@";
+"AX_GRAPH_STACK_PREFIX" = "Ngăn xếp bao gồm";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
+"AX_GRAPH_POINT_%@" = "Điểm: %@";

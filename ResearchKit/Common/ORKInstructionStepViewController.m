@@ -30,14 +30,19 @@
 
 
 #import "ORKInstructionStepViewController.h"
-#import "ORKInstructionStep.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKInstructionStepView.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKInstructionStepViewController_Internal.h"
+#import "ORKNavigationContainerView.h"
 #import "ORKStepHeaderView_Internal.h"
+
+#import "ORKInstructionStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
+
+#import "ORKInstructionStep.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKInstructionStepViewController
@@ -60,6 +65,7 @@
         self.stepView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
         self.stepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         self.stepView.continueSkipContainer.continueEnabled = YES;
+        self.stepView.continueSkipContainer.hidden = self.isBeingReviewed;
         
         self.stepView.instructionStep = [self instructionStep];
     }

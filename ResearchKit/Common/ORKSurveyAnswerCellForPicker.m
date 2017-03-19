@@ -30,8 +30,10 @@
 
 
 #import "ORKSurveyAnswerCellForPicker.h"
-#import "ORKQuestionStep_Internal.h"
+
 #import "ORKPicker.h"
+
+#import "ORKQuestionStep_Internal.h"
 
 
 @interface ORKSurveyAnswerCellForPicker () <ORKPickerDelegate, UIPickerViewDelegate> {

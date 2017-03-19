@@ -30,8 +30,10 @@
 
 
 #import "ORKHolePegTestPlaceStep.h"
+
 #import "ORKHolePegTestPlaceStepViewController.h"
 
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKHolePegTestPlaceStep
 
@@ -73,12 +75,63 @@
     }
     
     if (self.stepDuration < ORKHolePegTestMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKHolePegTestMinimumDuration)] userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration cannot be shorter than %@ seconds.", @(ORKHolePegTestMinimumDuration)] userInfo:nil];
     }
 }
 
 - (BOOL)allowsBackNavigation {
     return NO;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_ENUM(aDecoder, movingDirection);
+        ORK_DECODE_BOOL(aDecoder, dominantHandTested);
+        ORK_DECODE_INTEGER(aDecoder, numberOfPegs);
+        ORK_DECODE_DOUBLE(aDecoder, threshold);
+        ORK_DECODE_BOOL(aDecoder, rotated);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, movingDirection);
+    ORK_ENCODE_BOOL(aCoder, dominantHandTested);
+    ORK_ENCODE_INTEGER(aCoder, numberOfPegs);
+    ORK_ENCODE_DOUBLE(aCoder, threshold);
+    ORK_ENCODE_BOOL(aCoder, rotated);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    __typeof(self) step = [super copyWithZone:zone];
+    step.movingDirection = self.movingDirection;
+    step.dominantHandTested = self.dominantHandTested;
+    step.numberOfPegs = self.numberOfPegs;
+    step.threshold = self.threshold;
+    step.rotated = self.rotated;
+    return step;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ self.movingDirection ^ self.dominantHandTested ^ self.numberOfPegs ^ (NSInteger)(self.threshold * 100) ^ self.rotated;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.movingDirection == castObject.movingDirection) &&
+            (self.dominantHandTested == castObject.dominantHandTested) &&
+            (self.numberOfPegs == castObject.numberOfPegs) &&
+            (self.threshold == castObject.threshold) &&
+            (self.rotated == castObject.rotated));
 }
 
 @end

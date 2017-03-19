@@ -30,7 +30,8 @@
 
 
 #import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat ArrowWidth = 8;
@@ -104,6 +105,7 @@ static const CGFloat ArrowLineWidth = 4;
     
     CGContextAddPath(context, path);
     CGContextStrokePath(context);
+    CGPathRelease(path);
     
     CGContextRestoreGState(context);
 }

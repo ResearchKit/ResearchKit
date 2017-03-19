@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "姓氏";
 "CONSENT_NAME_PLACEHOLDER" = "必填";
 "CONSENT_REVIEW_TITLE" = "同意書檢閱";
-"CONSENT_REVIEW_INSTRUCTION" = "請檢閱以下的文件。若你準備好繼續，請點一下「同意」。";
+"CONSENT_REVIEW_INSTRUCTION" = "請檢閲以下的文件。如果你準備好繼續，請點一下「同意」。";
 "CONSENT_REVIEW_ALERT_TITLE" = "同意書檢閱";
 "CONSENT_SIGNATURE_TITLE" = "簽名";
 "CONSENT_SIGNATURE_INSTRUCTION" = "請用手指在下方的橫線上簽名。";
@@ -86,11 +86,68 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "無效的電郵地址：%@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "輸入地址";
+"LOCATION_ERROR_TITLE" = "找不到指定的地址";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法找出現時位置，請輸入地址或移動至 GPS 訊號較佳的位置（如適用）。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "定位服務存取遭拒，請前往「設定」以授權此 App 使用定位服務。";
+"LOCATION_ERROR_GEOCODE" = "找不到輸入的地址，請確定地址是否正確。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "你可能未連接互聯網，或地址查詢請求的次數已超出上限。如果你未連接互聯網，請開啟 Wi-Fi 以回答此問題（如果顯示「略過」按鈕，則可略過此問題），或在連接互聯網後返回此問卷。否則，請在幾分鐘後再試一次。";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超出長度上限：%@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "分割螢幕無法使用相機。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "電郵";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "密碼";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "輸入密碼";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "確認";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "請再次輸入密碼";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密碼不符。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "其他資料";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "大明";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "王";
+"GENDER_FORM_ITEM_TITLE" = "性別";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "選擇性別";
+"DOB_FORM_ITEM_TITLE" = "出生日期";
+"DOB_FORM_ITEM_PLACEHOLDER" = "選擇日期";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "驗證";
+"VERIFICATION_STEP_TITLE" = "驗證你的電郵";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果你未收到驗證電郵，並希望系統再傳送一次，請點一下下方的連結。";
+"RESEND_EMAIL_BUTTON_TITLE" = "重新傳送驗證電郵";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "登入";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘記密碼？";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "輸入密碼";
+"PASSCODE_CONFIRM_MESSAGE" = "確認密碼";
+"PASSCODE_SAVED_MESSAGE" = "密碼已儲存";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "已認證密碼";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "輸入舊密碼";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "輸入新密碼";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "確認新密碼";
+"PASSCODE_INVALID_ALERT_TITLE" = "密碼不正確";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "密碼不符，請再試一次。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "請使用 Touch ID 認證";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 錯誤";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "只允許輸入數字。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入 %@ 個數字（共 %@ 個）";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "忘記密碼？";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "無法加入「鑰匙圈」項目。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "無法更新「鑰匙圈」項目。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "無法刪除「鑰匙圈」項目。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "找不到「鑰匙圈」項目。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -111,6 +168,11 @@
 "BOOL_NO" = "不是";
 "BOOL_YES" = "是";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "厘米";
+"MEASURING_UNIT_FT" = "呎";
+"MEASURING_UNIT_IN" = "吋";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "點一下回答";
 "NULL_ANSWER" = "選擇答案";
@@ -120,6 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "同意";
 "BUTTON_CANCEL" = "取消";
+"BUTTON_OK" = "好";
 "BUTTON_CLEAR" = "清除";
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
@@ -132,19 +195,28 @@
 "BUTTON_OPTION_SAVE" = "儲存作日後之用";
 "BUTTON_OPTION_DISCARD" = "放棄測試結果";
 "BUTTON_OPTION_STOP_TASK" = "結束測試任務";
+"BUTTON_SAVE" = "儲存";
+"BUTTON_CLEAR_ANSWER" = "清除答案";
+"BUTTON_READ_ONLY_MODE" = "無法修改此答案。";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "測試活動倒數";
 "TASK_COMPLETE_TITLE" = "測試活動已完成";
 "TASK_COMPLETE_TEXT" = "測試活動將會進行分析。當得到結果時，你將會收到通知。";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "剩餘 %@ 秒。";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "截取圖案";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新截取圖案";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "找不到相機，無法完成此步驟。";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "若要完成此步驟，請前往「設定」以允許此 App 使用相機。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "如要完成此步驟，請前往「設定」以允許此 App 使用相機。";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "未指定截取圖案的輸出目錄。";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "無法儲存截取的圖案。";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "開始錄音";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "停止錄影";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "重新截取影片";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "體能";
@@ -157,7 +229,7 @@
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步態及平衡";
-"WALK_INTRO_TEXT" = "此測試活動可測量你步行及站立時的步態及平衡。若你行動不便或行走時需要輔助，請勿繼續進行。";
+"WALK_INTRO_TEXT" = "此測試活動可測量你步行及站立時的步態及平衡。如果你行動不便或行走時需要輔助，請勿繼續進行。";
 "WALK_INTRO_2_TEXT_%ld" = "找一個安全的地方，讓你可以不靠輔助地直線步行大約 %ld 步。";
 "WALK_INTRO_2_DETAIL" = "將電話放進口袋、手袋或背包裏，並跟隨語音指示。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "現在站立 %@。";
@@ -165,15 +237,33 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "掉頭，然後步行回到起點。";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "直線步行最多 %ld 步。";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找一個安全的地方，讓你可以直線來回步行。請嘗試不停步行，遇到盡頭時請有如繞過雪糕筒般掉頭。\n\n下一步，你將需要轉一整個圈，然後站着不動，雙手放在兩旁，而雙腳張開至肩膊的闊度。";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "如果你準備好開始，請點一下「開始」。\n然後將電話放進口袋、手袋或背包裏，並跟隨語音指示。";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "以平常姿態，直線來回步行 %@。";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "轉一個圈，然後站立 %@。";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "你已完成測試活動。";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "點按速度";
+"TAPPING_TASK_TITLE_RIGHT" = "右手";
+"TAPPING_TASK_TITLE_LEFT" = "左手";
 "TAPPING_INTRO_TEXT" = "此測試活動能評估你的點按速度。";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "請先平放電話。螢幕上將顯示兩個按鈕，請用同一隻手的兩指，在 %@內以最快的速度梅花間竹地點按這些按鈕。";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "請先平放電話。";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "請用同一隻手的兩指梅花間竹地點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "請用右手的兩指梅花間竹地點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "請用左手的兩指梅花間竹地點按螢幕上的按鈕。";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "現在用右手進行相同的測試。";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "現在用左手進行相同的測試。";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "先用一指點按，然後用另一指點按。請嘗試以最平穩的速度，持續點按 %@。";
 "TAPPING_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
+"TAPPING_CALL_TO_ACTION_NEXT" = "點一下「下一步」開始。";
 "TAP_BUTTON_TITLE" = "點按";
 "TOTAL_TAPS_LABEL" = "點按總次數";
-"TAPPING_INSTRUCTION" = "用兩指以最快的速度點按這些按鈕。";
+"TAPPING_INSTRUCTION" = "用兩指以最平穩的速度點按這些按鈕。";
+"TAPPING_INSTRUCTION_RIGHT" = "用你的右手點按這些按鈕。";
+"TAPPING_INSTRUCTION_LEFT" = "用你的左手點按這些按鈕。";
+"TAPPING_SKIP_TITLE" = "略過這隻手";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "語音";
@@ -183,13 +273,16 @@
 "AUDIO_INTENDED_USE" = "此測試活動會使用電話底部的咪高風錄音，以評估你的聲音。";
 "AUDIO_TOO_LOUD_LABEL" = "太大聲";
 "AUDIO_GENERIC_ERROR_LABEL" = "無法錄音";
+"AUDIO_LEVEL_CHECK_LABEL" = "正在檢查背景雜音音量，請稍候。";
+"AUDIO_TOO_LOUD_MESSAGE" = "環境雜音太大聲，無法錄取你的聲音。請前往較靜的地方，然後再試一次。";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "準備好後，請點一下「下一步」。";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
 "TONE_AUDIOMETRY_INTENDED_USE" = "此測試活動能評估你聆聽不同聲音的能力。";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請插入並戴上耳筒。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
-"TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n若你準備好開始，請點一下按鈕。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n如果你準備好開始，請點一下按鈕。";
 "TONE_AUDIOMETRY_INSTRUCTION" = "每次當你開始聽到聲音時，請點一下按鈕。";
 "TONE_LABEL_%@_LEFT" = "%@ Hz，左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
@@ -254,10 +347,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "掉頭，然後步行回到起點。";
 "TIMED_WALK_INSTRUCTION_TEXT" = "完成後，請點一下「完成」。";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "沒有數據";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +360,62 @@
 "PSAT_INSTRUCTION" = "將這個新的數字與前一個數字相加。";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ 孔柱測試";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此測試活動需要你將圓柱放進洞內，以測量你的上肢功能。你將需要執行此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "測試活動將會測試你的左手及右手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "測試活動將會測試你的右手及左手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進洞中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進洞中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進線後。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進線後。";
+"HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
+"HOLE_PEG_TEST_TEXT_2" = "放開手指以放下圓柱。";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "顫抖測試活動";
+"TREMOR_TEST_INTRO_1_DETAIL" = "此測試活動可測量你雙手不同位置的顫抖情況。請找一個地方，讓你可以在此測試活動期間舒適坐下。";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "請用較受影響的手拿着電話，如下圖所示。";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "請用右手拿着電話，如下圖所示。";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "請用左手拿着電話，如下圖所示。";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "你將需要坐着，並拿着電話進行%@。";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "一個任務";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "兩個任務";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "三個任務";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "四個任務";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "五個任務";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "點一下「下一步」繼續。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "請準備將手放在大腿上，然後拿着電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "請準備將左手放在大腿上，然後拿着電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "請準備將右手放在大腿上，然後拿着電話。";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "將手放在大腿上，然後拿着電話 %ld 秒。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "現在伸直手臂，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "現在伸直左手手臂，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "現在伸直右手手臂，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "伸直手臂，然後拿着電話 %ld 秒。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "現在彎曲手肘，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "現在彎曲左手手肘，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "現在彎曲右手手肘，並將電話拿到肩膊的高度。";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "彎曲手肘，然後拿着電話 %ld 秒";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "現在繼續彎曲手肘，並用電話重複觸碰鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "現在繼續彎曲左手手肘，並拿着電話重複觸碰鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "現在繼續彎曲右手手肘，並拿着電話重複觸碰鼻子。";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "拿着電話觸碰鼻子 %ld 秒";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "請準備進行揮手動作（只揮動手腕）。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "請準備用左手拿着電話，進行揮手動作（只揮動手腕）。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "請準備用右手拿着電話，進行揮手動作（只揮動手腕）。";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "繼續進行揮手動作 %ld 秒。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "現在用左手拿着電話，並繼續進行下一個任務。";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "現在用右手拿着電話，並繼續進行下一個任務。";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "繼續進行下一個任務。";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "測試活動已完成。";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "你將需要坐着，先用一隻手拿着電話進行%@，然後再用另一隻手進行。";
+"TREMOR_SKIP_LEFT_HAND" = "我無法用左手進行此測試活動。";
+"TREMOR_SKIP_RIGHT_HAND" = "我無法用右手進行此測試活動。";
+"TREMOR_SKIP_NEITHER" = "我可以用雙手進行此測試活動。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "無法移除足夠的記錄檔案以達到臨界值";
@@ -279,6 +424,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "移除記錄檔時發生多個錯誤";
 "ERROR_RECORDER_NO_DATA" = "找不到已收集的數據。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定輸出目錄";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "沒有數據";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
@@ -307,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "截取預覽";
 "AX_IMAGE_CAPTURED_LABEL" = "截取的圖案";
 
+"AX_VIDEO_CAPTURE_LABEL" = "截取影片預覽";
+"AX_VIDEO_CAPTURED_LABEL" = "截取的影片";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "無法將 %@ 號的圓盤放在 %@ 號的圓盤上";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "目標";
 "AX_TOWER_OF_HANOI_TOWER" = "塔座";
@@ -315,5 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "其中的圓盤大小是 %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
 
-"AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "範圍介乎 %@ 至 %@";
+"AX_GRAPH_STACK_PREFIX" = "圓盤柱的組成方式：";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
+"AX_GRAPH_POINT_%@" = "點數：%@";

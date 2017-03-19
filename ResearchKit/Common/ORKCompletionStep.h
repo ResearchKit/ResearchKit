@@ -29,18 +29,20 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import Foundation;
+#import <ResearchKit/ORKInstructionStep.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKCompletionStep` class is a subclass of `ORKInstructionStep` which behaves like
  an instruction step, but includes animated imagery that thanks the user
  for participating in the task.
- 
- This class is presently private as its interface is still considered
- subject to change while support for active tasks matures.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKCompletionStep : ORKInstructionStep
 
 @end
+
+NS_ASSUME_NONNULL_END

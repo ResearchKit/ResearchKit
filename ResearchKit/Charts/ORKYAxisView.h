@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -26,10 +27,13 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
-*/
+ */
 
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class ORKGraphChartView;
 
@@ -41,6 +45,8 @@
 
 @property (nonatomic) UIColor *axisColor;
 
+@property (nonatomic) NSUInteger decimalPlaces;
+
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView NS_DESIGNATED_INITIALIZER;
@@ -48,3 +54,5 @@
 - (void)updateTicksAndLabels;
 
 @end
+
+NS_ASSUME_NONNULL_END

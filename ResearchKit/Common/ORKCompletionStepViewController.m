@@ -30,11 +30,17 @@
 
 
 #import "ORKCompletionStepViewController.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKInstructionStepViewController_Internal.h"
-#import "ORKVerticalContainerView.h"
-#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKCustomStepView_Internal.h"
+#import "ORKInstructionStepView.h"
+#import "ORKNavigationContainerView.h"
 #import "ORKStepHeaderView_Internal.h"
+#import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKInstructionStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKCompletionStepView : ORKActiveStepCustomView
@@ -140,6 +146,9 @@ static const CGFloat TickViewSize = 122;
     [super stepDidChange];
     
     _completionStepView = [ORKCompletionStepView new];
+    if (self.checkmarkColor) {
+        _completionStepView.tintColor = self.checkmarkColor;
+    }
     
     self.stepView.stepView = _completionStepView;
     
@@ -163,14 +172,34 @@ static const CGFloat TickViewSize = 122;
     _completionStepView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
+- (void)setCheckmarkColor:(UIColor *)checkmarkColor {
+    _checkmarkColor = [checkmarkColor copy];
+    _completionStepView.tintColor = checkmarkColor;
+}
+
+- (void)setShouldShowContinueButton:(BOOL)shouldShowContinueButton {
+    _shouldShowContinueButton = shouldShowContinueButton;
+    
+    // Update button states
+    [self setContinueButtonItem:self.continueButtonItem];
+    [self updateNavRightBarButtonItem];
+}
+
 // Override top right bar button item
 - (void)updateNavRightBarButtonItem {
-    self.navigationItem.rightBarButtonItem = self.continueButtonItem;
+    if (self.shouldShowContinueButton) {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = self.continueButtonItem;
+    }
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    self.stepView.continueSkipContainer.continueButtonItem = nil;
+    if (!self.shouldShowContinueButton) {
+        self.stepView.continueSkipContainer.continueButtonItem = nil;
+    }
     [self updateNavRightBarButtonItem];
 }
 

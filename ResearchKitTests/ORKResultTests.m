@@ -29,9 +29,8 @@
  */
 
 
-#import <XCTest/XCTest.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKResult_Private.h"
+@import XCTest;
+@import ResearchKit.Private;
 
 
 @interface ORKResultTests : XCTestCase
@@ -71,7 +70,7 @@
     XCTAssert([taskResult1.outputDirectory.absoluteString isEqual:taskResult2.outputDirectory.absoluteString], @"");
     XCTAssert([taskResult1.identifier isEqualToString:taskResult2.identifier], @"");
     
-    XCTAssert(taskResult1!=taskResult2, @"");
+    XCTAssert(taskResult1 != taskResult2, @"");
 
     [taskResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ORKResult *result1 = obj;
@@ -82,7 +81,7 @@
         ORKStepResult *stepResult1 = (ORKStepResult *)result1;
         ORKStepResult *stepResult2 = (ORKStepResult *)result2;
         
-        XCTAssert(stepResult1!=stepResult2, @"");
+        XCTAssert(stepResult1 != stepResult2, @"");
         
         [stepResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKResult *result1 = obj;
@@ -92,14 +91,14 @@
             XCTAssert([result1.startDate isEqualToDate: result2.startDate], @"");
             XCTAssert([result1.endDate isEqualToDate: result2.endDate], @"");
             
-            XCTAssert(result1!=result2, @"");
+            XCTAssert(result1 != result2, @"");
             
             if ([result1 isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *q1 = (ORKQuestionResult *)result1;
                 ORKQuestionResult *q2 = (ORKQuestionResult *)result2;
                 
                 XCTAssert(q1.questionType == q2.questionType, @"");
-                if (! [q1.answer isEqual:q2.answer]) {
+                if (![q1.answer isEqual:q2.answer]) {
                     XCTAssert([q1.answer isEqual:q2.answer], @"");
                 }
                 XCTAssert([q1.identifier isEqualToString:q2.identifier], @"%@ and %@", q1.identifier, q2.identifier);
@@ -113,10 +112,8 @@
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;
                 ORKConsentSignatureResult *c2 = (ORKConsentSignatureResult *)result2;
                 
-                XCTAssert(c1.signature!=c2.signature, @"");
-                //XCTAssert( [c1.signature isEqual:c2.signature], @"%@ and %@",c1.signature, c2.signature);
+                XCTAssert(c1.signature != c2.signature, @"");
             }
-            
         }];
     }];
 }
@@ -157,6 +154,44 @@
     
     childResult = [result resultForIdentifier: @"101"];
     XCTAssertEqual(childResult.identifier, @"101", @"%@", childResult.identifier);
+}
+
+- (void)testPageResult {
+    
+    NSArray *steps = @[[[ORKStep alloc] initWithIdentifier:@"step1"],
+                       [[ORKStep alloc] initWithIdentifier:@"step2"],
+                       [[ORKStep alloc] initWithIdentifier:@"step3"],
+                       ];
+    ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:steps];
+    
+    ORKChoiceQuestionResult *step1Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result1"];
+    step1Result1.choiceAnswers = @[@(1)];
+    ORKChoiceQuestionResult *step1Result2 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result2"];
+    step1Result2.choiceAnswers = @[@(2)];
+    ORKChoiceQuestionResult *step2Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step2.result1"];
+    step2Result1.choiceAnswers = @[@(3)];
+    
+    ORKStepResult *inputResult = [[ORKStepResult alloc] initWithStepIdentifier:@"pageStep"
+                                                                      results:@[step1Result1, step1Result2, step2Result1]];
+    
+    // Test that the page result creates ORKStepResults for each result that matches the prefix test
+    ORKPageResult *pageResult = [[ORKPageResult alloc] initWithPageStep:pageStep stepResult:inputResult];
+    XCTAssertEqual(pageResult.results.count, 2);
+    
+    ORKStepResult *stepResult1 = [pageResult stepResultForStepIdentifier:@"step1"];
+    XCTAssertNotNil(stepResult1);
+    XCTAssertEqual(stepResult1.results.count, 2);
+    
+    ORKStepResult *stepResult2 = [pageResult stepResultForStepIdentifier:@"step2"];
+    XCTAssertNotNil(stepResult2);
+    XCTAssertEqual(stepResult2.results.count, 1);
+    
+    ORKStepResult *stepResult3 = [pageResult stepResultForStepIdentifier:@"step3"];
+    XCTAssertNil(stepResult3);
+    
+    // Check that the flattened results match the input results
+    NSArray *flattedResults = [pageResult flattenResults];
+    XCTAssertEqualObjects(inputResult.results, flattedResults);
 }
 
 @end

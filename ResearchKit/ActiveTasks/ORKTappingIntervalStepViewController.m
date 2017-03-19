@@ -30,14 +30,20 @@
 
 
 #import "ORKTappingIntervalStepViewController.h"
-#import "ORKTappingContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKVerticalContainerView.h"
-#import "ORKStepViewController_Internal.h"
+
 #import "ORKActiveStepTimer.h"
-#import "ORKResult.h"
-#import "ORKHelpers.h"
+#import "ORKRoundTappingButton.h"
+#import "ORKTappingContentView.h"
+#import "ORKVerticalContainerView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKActiveStepView.h"
+#import "ORKResult.h"
+#import "ORKStep.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKTappingIntervalStepViewController () <UIGestureRecognizerDelegate>
@@ -75,6 +81,7 @@
     // Don't show next button
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
+    self.internalSkipButtonItem.title = ORKLocalizedString(@"TAPPING_SKIP_TITLE", nil);
 }
 
 - (void)viewDidLoad {
@@ -93,10 +100,13 @@
     _expired = NO;
     
     _tappingContentView = [[ORKTappingContentView alloc] init];
+    _tappingContentView.hasSkipButton = self.step.optional;
     self.activeStepView.activeCustomView = _tappingContentView;
     
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [_tappingContentView.tapButton2 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
+    [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonReleased:forEvent:) forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
+    [_tappingContentView.tapButton2 addTarget:self action:@selector(buttonReleased:forEvent:) forControlEvents:(UIControlEventTouchUpInside | UIControlEventTouchUpOutside)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -142,7 +152,6 @@
         _tappingStart = mediaTime;
     }
     
-    
     CGPoint location = [touch locationInView:self.view];
     
     // Add new sample
@@ -151,6 +160,7 @@
     ORKTappingSample *sample = [[ORKTappingSample alloc] init];
     sample.buttonIdentifier = buttonIdentifier;
     sample.location = location;
+    sample.duration = 0;
     sample.timestamp = mediaTime;
 
     [self.samples addObject:sample];
@@ -162,8 +172,52 @@
     [_tappingContentView setTapCount:_hitButtonCount];
 }
 
+- (void)releaseTouch:(UITouch *)touch onButton:(ORKTappingButtonIdentifier)buttonIdentifier {
+    if (self.samples == nil) {
+        return;
+    }
+    NSTimeInterval mediaTime = touch.timestamp;
+    
+    // Take last sample for buttonIdentifier, and fill duration
+    ORKTappingSample *sample = [self lastSampleWithEmptyDurationForButton:buttonIdentifier];
+    sample.duration = mediaTime - sample.timestamp - _tappingStart;
+}
+
+- (ORKTappingSample *)lastSampleWithEmptyDurationForButton:(ORKTappingButtonIdentifier)buttonIdentifier{
+    NSEnumerator *enumerator = [self.samples reverseObjectEnumerator];
+    for (ORKTappingSample *sample in enumerator) {
+        if (sample.buttonIdentifier == buttonIdentifier && sample.duration == 0) {
+            return sample;
+        }
+    }
+    return nil;
+}
+
+- (void)fillSampleDurationIfAnyButtonPressed {
+    /*
+     * Because we will not able to get UITouch from UIButton, we will use systemUptime.
+     * Documentation for -[UITouch timestamp] tells:
+     * The value of this property is the time, in seconds, since system startup the touch either originated or was last changed.
+     * For a definition of the time-since-boot value, see the description of the systemUptime method of the NSProcessInfo class.
+     */
+    NSTimeInterval mediaTime = [[NSProcessInfo processInfo] systemUptime];
+    
+    ORKTappingSample *tapButton1LastSample = [self lastSampleWithEmptyDurationForButton:ORKTappingButtonIdentifierLeft];
+    if (tapButton1LastSample) {
+        tapButton1LastSample.duration = mediaTime - tapButton1LastSample.timestamp - _tappingStart;
+    }
+    
+    ORKTappingSample *tapButton2LastSample = [self lastSampleWithEmptyDurationForButton:ORKTappingButtonIdentifierRight];
+    if (tapButton2LastSample) {
+        tapButton2LastSample.duration = mediaTime - tapButton2LastSample.timestamp - _tappingStart;
+    }
+}
+
 - (void)stepDidFinish {
     [super stepDidFinish];
+    
+    // If user didn't release touch from button, fill manually duration for last sample
+    [self fillSampleDurationIfAnyButtonPressed];
     
     _expired = YES;
     [_tappingContentView finishStep:self];
@@ -178,6 +232,7 @@
 
 - (void)start {
     [super start];
+    self.skipButtonItem = nil;
     [_tappingContentView setProgress:0.001 animated:NO];
 }
 
@@ -194,7 +249,18 @@
     
     NSInteger index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
     
+    if ( _tappingContentView.lastTappedButton == index ) {
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"TAP_BUTTON_TITLE", nil));
+    }
+    _tappingContentView.lastTappedButton = index;
+    
     [self receiveTouch:[[event touchesForView:button] anyObject] onButton:index];
+}
+
+- (IBAction)buttonReleased:(id)button forEvent:(UIEvent *)event {
+    ORKTappingButtonIdentifier index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
+    
+    [self releaseTouch:[[event touchesForView:button] anyObject] onButton:index];
 }
 
 #pragma mark UIGestureRecognizerDelegate

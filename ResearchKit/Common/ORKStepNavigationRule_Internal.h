@@ -29,17 +29,10 @@
  */
 
 
-#import <ResearchKit/ORKStepNavigationRule.h>
+#import "ORKStepNavigationRule_Private.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKStepNavigationRule ()
-
-- (instancetype)init_ork;
-
-@end
-
 
 @interface ORKPredicateStepNavigationRule ()
 

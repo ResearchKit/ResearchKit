@@ -30,12 +30,19 @@
 
 
 #import "ORKTimedWalkStepViewController.h"
-#import "ORKTimedWalkContentView.h"
-#import "ORKTimedWalkStep.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
-#import "ORKStepViewController_Internal.h"
+
+#import "ORKActiveStepTimer.h"
 #import "ORKActiveStepView.h"
+#import "ORKNavigationContainerView_Internal.h"
+#import "ORKTimedWalkContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
+#import "ORKResult.h"
+#import "ORKTimedWalkStep.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKTimedWalkStepViewController ()
@@ -67,7 +74,7 @@
     [super initializeInternalButtonItems];
     
     self.internalDoneButtonItem = nil;
-    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_DONE", nil);
+    self.continueButtonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
 }
 
 - (void)viewDidLoad {

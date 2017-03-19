@@ -31,6 +31,9 @@
 
 #import "ORKPasscodeStepView.h"
 
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKTextFieldView.h"
+
 
 @implementation ORKPasscodeStepView {
     ORKPasscodeTextField *_textField;
@@ -42,8 +45,17 @@
         // Additional configuration for the passcode text field.
         _textField = [ORKPasscodeTextField new];
         _textField.translatesAutoresizingMaskIntoConstraints = NO;
-        
         self.stepView = _textField;
+        
+        // Setting image view with app icon (if available).
+        NSDictionary *infoPlist = [[NSBundle mainBundle] infoDictionary];
+        NSString *icon = [[infoPlist valueForKeyPath:@"CFBundleIcons.CFBundlePrimaryIcon.CFBundleIconFiles"] lastObject];
+        self.headerView.iconImageView.image = [UIImage imageNamed:icon];
+        self.headerView.iconImageView.layer.cornerRadius = 15.0;
+        self.headerView.iconImageView.layer.masksToBounds = YES;
+        self.headerView.iconImageView.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+        self.headerView.iconImageView.layer.borderWidth = 1.0;
+
         
         [self addConstraints:@[
                                [NSLayoutConstraint constraintWithItem:_textField

@@ -30,12 +30,14 @@
 
 
 #import "ORKConsentReviewController.h"
-#import "ORKHelpers.h"
-#import "ORKConsentDocument_Internal.h"
+
 #import "ORKSignatureView.h"
-#import "ORKSkin.h"
-#import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
+
+#import "ORKConsentDocument_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @interface ORKConsentReviewController () <UIWebViewDelegate>

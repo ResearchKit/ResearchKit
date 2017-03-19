@@ -30,12 +30,18 @@
 
 
 #import "ORKStepViewController_Internal.h"
-#import "ORKImageCaptureStepViewController.h"
-#import "ORKImageCaptureView.h"
-#import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 
-#import <AVFoundation/AVFoundation.h>
+#import "ORKImageCaptureView.h"
+#import "ORKImageCaptureStep.h"
+
+#import "ORKImageCaptureStepViewController.h"
+
+#import "ORKResult.h"
+#import "ORKStep.h"
+
+#import "ORKHelpers_Internal.h"
+
+@import AVFoundation;
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>
@@ -73,6 +79,7 @@
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
+        NSParameterAssert([step isKindOfClass:[ORKImageCaptureStep class]]);
         _imageCaptureView = [[ORKImageCaptureView alloc] initWithFrame:CGRectZero];
         _imageCaptureView.imageCaptureStep = (ORKImageCaptureStep *)step;
         _imageCaptureView.delegate = self;
@@ -148,7 +155,7 @@
         // Set this, even if there was an error and we got a nil buffer
         self.capturedImageData = capturedImageData;
         if (handler) {
-            handler(capturedImageData!=nil);
+            handler(capturedImageData != nil);
         }
     });
 }
@@ -198,11 +205,11 @@
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     if (device) {
         // Configure the input and output
-        AVCaptureDeviceInput* input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([_captureSession canAddInput:input] && [_captureSession canAddOutput:stillImageOutput]) {
             [_captureSession addInput:input];
-            [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
+            [stillImageOutput setOutputSettings:@{AVVideoCodecKey: AVVideoCodecJPEG}];
             [_captureSession addOutput:stillImageOutput];
             _stillImageOutput = stillImageOutput;
         } else {
@@ -227,7 +234,7 @@
 - (void)handleError:(NSError *)error {
     // Shut down the session, if running
     if (_captureSession.isRunning) {
-        STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
+        ORKStrongTypeOf(_captureSession) strongCaptureSession = _captureSession;
         dispatch_async(_sessionQueue, ^{
             [strongCaptureSession stopRunning];
         });
@@ -259,7 +266,7 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (NSURL *)writeCapturedDataWithError:(NSError * __autoreleasing *)error {
+- (NSURL *)writeCapturedDataWithError:(NSError **)error {
     NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
     if (!URL) {

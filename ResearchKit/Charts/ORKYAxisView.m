@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,8 +31,10 @@
 
 
 #import "ORKYAxisView.h"
+
 #import "ORKGraphChartView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static const CGFloat ImageVerticalPadding = 3.0;
@@ -43,16 +46,20 @@ static const CGFloat ImageVerticalPadding = 3.0;
     
     NSMutableDictionary *_tickLayersByFactor;
     NSMutableDictionary *_tickLabelsByFactor;
+    
+    NSString *_decimalFormat;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentGraphChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
@@ -60,6 +67,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
         _parentGraphChartView = parentGraphChartView;
         _axisColor = _parentGraphChartView.axisColor;
         _titleColor = _parentGraphChartView.verticalAxisTitleColor;
+        [self setDecimalPlaces:0];
     }
     return self;
 }
@@ -140,7 +148,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
             
             CGFloat yValue = minimumValue + (maximumValue - minimumValue) * factor;
             if (yValue != 0) {
-                tickLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
+                tickLabel.text = [NSString stringWithFormat:_decimalFormat, yValue];
             }
             tickLabel.backgroundColor = [UIColor clearColor];
             tickLabel.textColor = _titleColor;
@@ -202,6 +210,11 @@ static const CGFloat ImageVerticalPadding = 3.0;
     for (CALayer *tickLayer in _tickLayersByFactor.allValues) {
         tickLayer.backgroundColor = _axisColor.CGColor;
     }
+}
+
+- (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
+    _decimalPlaces = decimalPlaces;
+    _decimalFormat = [NSString stringWithFormat:@"%%.%df", _decimalPlaces];
 }
 
 @end

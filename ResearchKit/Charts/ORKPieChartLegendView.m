@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,10 +32,16 @@
 
 
 #import "ORKPieChartLegendView.h"
-#import "ORKPieChartView_Internal.h"
+
 #import "ORKPieChartLegendCell.h"
-#import "ORKCenteredCollectionViewLayout.h"
-#import "ORKHelpers.h"
+#import "ORKPieChartLegendCollectionViewLayout.h"
+#import "ORKPieChartView_Internal.h"
+
+#import "ORKHelpers_Internal.h"
+
+
+static const CGFloat MinimumInteritemSpacing = 10.0;
+static const CGFloat MinimumLineSpacing = 6.0;
 
 
 @implementation ORKPieChartLegendView {
@@ -49,27 +55,32 @@
     ORKThrowMethodUnavailableException();
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [self initWithParentPieChartView:nil];
-    return self;
+    ORKThrowMethodUnavailableException();
 }
+#pragma clang diagnostic pop
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
-    ORKCenteredCollectionViewLayout *centeredCollectionViewLayout = [[ORKCenteredCollectionViewLayout alloc] init];
-    centeredCollectionViewLayout.estimatedItemSize = CGSizeMake(100.0, 30.0);
-    self = [super initWithFrame:CGRectZero collectionViewLayout:centeredCollectionViewLayout];
+    ORKPieChartLegendCollectionViewLayout *pieChartLegendCollectionViewLayout = [[ORKPieChartLegendCollectionViewLayout alloc] init];
+    pieChartLegendCollectionViewLayout.minimumInteritemSpacing = MinimumInteritemSpacing;
+    pieChartLegendCollectionViewLayout.minimumLineSpacing = MinimumLineSpacing;
+    pieChartLegendCollectionViewLayout.estimatedItemSize = CGSizeMake(100.0, 30.0);
+    self = [super initWithFrame:CGRectZero collectionViewLayout:pieChartLegendCollectionViewLayout];
     if (self) {
+        [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:@"cell"];
+        _sizingCell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
+        
         _parentPieChartView = parentPieChartView;
         _sumOfValues = 0;
         NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
-        for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-            CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx];
+        for (NSInteger index = 0; index < numberOfSegments; index++) {
+            // Numerical value
+            CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:index];
             _sumOfValues += value;
         }
-        
-        [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:@"cell"];
-
-        _sizingCell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
+        [self cacheCellSizes];
 
         self.backgroundColor = [UIColor clearColor];
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -83,9 +94,26 @@
     return self;
 }
 
+- (void)cacheCellSizes {
+    _cellSizes = [NSMutableArray new];
+    _totalCellWidth = 0;
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger index = 0; index < numberOfSegments; index++) {
+        // cell size
+        _sizingCell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:index];
+        CGSize size = [_sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        [_cellSizes addObject:[NSValue valueWithCGSize:size]];
+        _totalCellWidth += size.width;
+        if (index != numberOfSegments - 1) {
+            _totalCellWidth += MinimumInteritemSpacing;
+        }
+    }
+}
+
 - (void)setLabelFont:(UIFont *)labelFont {
     _labelFont = labelFont;
     _sizingCell.titleLabel.font = _labelFont;
+    [self cacheCellSizes];
     [self reloadData];
     [self invalidateIntrinsicContentSize];
 }
@@ -106,11 +134,11 @@
         interAnimationDelay = 0;
         singleAnimationDuration = animationDuration;
     }
-    for (NSUInteger idx = 0; idx < cellCount; idx++) {
-        UICollectionViewCell *cell = sortedCells[idx];
+    for (NSUInteger index = 0; index < cellCount; index++) {
+        UICollectionViewCell *cell = sortedCells[index];
         cell.transform = CGAffineTransformMakeScale(0, 0);
         [UIView animateWithDuration:singleAnimationDuration
-                              delay:interAnimationDelay * idx
+                              delay:interAnimationDelay * index
                             options:(UIViewAnimationOptions)0
                          animations:^{
                              cell.transform = CGAffineTransformIdentity;
@@ -143,17 +171,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    _sizingCell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
-    CGSize size = [_sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    CGSize size = _cellSizes[indexPath.row].CGSizeValue;
     return size;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 10.0;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 6.0;
 }
 
 @end

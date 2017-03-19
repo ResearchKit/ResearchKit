@@ -29,12 +29,16 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKImageCaptureStepViewController` class represents the step view controller that
- corresponds to an `ORKImageCaptureStep`.
+ corresponds to an `ORKImageCaptureStep` class.
  
  It is not usually necessary to instantiate this view controller directly.
  Instead, add an image capture step to a task, and present the task in a task
@@ -44,3 +48,5 @@ ORK_CLASS_AVAILABLE
 @interface ORKImageCaptureStepViewController : ORKStepViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

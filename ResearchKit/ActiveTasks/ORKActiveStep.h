@@ -29,10 +29,10 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+@import UIKit;
+@import HealthKit;
 #import <ResearchKit/ORKStep.h>
-#import <UIKit/UIKit.h>
-#import <HealthKit/HealthKit.h>
+
 
 @class ORKRecorderConfiguration;
 
@@ -104,6 +104,17 @@ automatically navigates forward when the timer expires.
 @property (nonatomic) BOOL shouldSpeakCountDown;
 
 /**
+ A Boolean value indicating whether to speak the halfway point in the count down of the
+ duration of a timed step.
+ 
+ When the value of this property is `YES`, `AVSpeechSynthesizer` is used to synthesize the countdown. Note that this property is ignored if VoiceOver is enabled.
+ 
+ The default value of this property is `NO`.
+ */
+@property (nonatomic) BOOL shouldSpeakRemainingTimeAtHalfway;
+
+
+/**
  A Boolean value indicating whether to start the count down timer automatically when the step starts, or
  require the user to take some explicit action to start the step, such as tapping a button.
  
@@ -172,6 +183,14 @@ The default value of this property is `NO`.
 @property (nonatomic, copy, nullable) NSString *spokenInstruction;
 
 /**
+ Localized text that represents an instructional voice prompt for when the step finishes.
+ 
+ Instructional speech begins when the step finishes. If VoiceOver is active,
+ the instruction is spoken by VoiceOver.
+ */
+@property (nonatomic, copy, nullable) NSString *finishedSpokenInstruction;
+
+/**
  An image to be displayed below the instructions for the step.
  
  The image can be stretched to fit the available space. When choosing a size
@@ -194,18 +213,6 @@ The default value of this property is `NO`.
  See also: `ORKRecorderConfiguration` and `ORKRecorder`.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKRecorderConfiguration *> *recorderConfigurations;
-
-/**
- The set of HealthKit types the step requests for reading. (read-only)
- 
- The task view controller uses this set of types when constructing a list of
- all the HealthKit types required by all the steps in a task, so that it can
- present the HealthKit access dialog just once during that task.
- 
- By default, the property scans the recorders and collates the HealthKit
- types the recorders require. Subclasses may override this implementation.
- */
-@property (nonatomic, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
 
 @end
 

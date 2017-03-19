@@ -30,10 +30,12 @@
 
 
 #import "ORKTowerOfHanoiTowerView.h"
+
 #import "ORKActiveStepView.h"
-#import "ORKSkin.h"
+
 #import "ORKAccessibility.h"
-#import "ORKHelpers.h"
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat DiskHeight = 10;

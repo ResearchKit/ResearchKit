@@ -31,8 +31,14 @@
 
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "ORKHelpers.h"
+
+#import "ORKCustomStepView_Internal.h"
+#import "ORKNavigationContainerView.h"
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKTintedImageView.h"
+
+#import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat AssumedNavBarHeight = 44;
@@ -40,6 +46,17 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
+
+/*
+ view hierachy in ORKVerticalContainerView (from top to bottom):
+ 
+ scrollContainer
+    - container
+        - customViewContainer
+        - headerView
+        - stepViewContainer
+    - continueSkipContainer
+ */
 
 @implementation ORKVerticalContainerView {
     UIView *_scrollContainer;
@@ -573,16 +590,19 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                         multiplier:1.0
                                                                           constant:0.0]];
         } else {
+            
+            NSLayoutRelation relation = (view == _continueSkipContainer) ? NSLayoutRelationEqual : NSLayoutRelationGreaterThanOrEqual;
+            
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:view
                                                                          attribute:NSLayoutAttributeLeft
-                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                         relatedBy:relation
                                                                             toItem:_container
                                                                          attribute:NSLayoutAttributeLeftMargin
                                                                         multiplier:1.0
                                                                           constant:0.0]];
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:view
                                                                          attribute:NSLayoutAttributeRight
-                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                         relatedBy:relation
                                                                             toItem:_container
                                                                          attribute:NSLayoutAttributeRightMargin
                                                                         multiplier:1.0

@@ -32,11 +32,15 @@
 
 
 #import "ORKScaleSliderView.h"
-#import "ORKScaleSlider.h"
-#import "ORKScaleRangeLabel.h"
+
 #import "ORKScaleRangeDescriptionLabel.h"
-#import "ORKScaleValueLabel.h"
 #import "ORKScaleRangeImageView.h"
+#import "ORKScaleRangeLabel.h"
+#import "ORKScaleSlider.h"
+#import "ORKScaleValueLabel.h"
+
+#import "ORKAnswerFormat_Internal.h"
+
 #import "ORKSkin.h"
 
 
@@ -80,6 +84,9 @@
         NSArray<ORKTextChoice *> *textChoices = [[self textScaleFormatProvider] textChoices];
         _slider.textChoices = textChoices;
         
+        _slider.gradientColors = [formatProvider gradientColors];
+        _slider.gradientLocations = [formatProvider gradientLocations];
+        
         if (isVertical && textChoices) {
             // Generate an array of labels for all the text choices
             _textChoiceLabels = [NSMutableArray new];
@@ -88,6 +95,7 @@
                 ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
                 stepLabel.text = textChoice.text;
                 stepLabel.textAlignment = NSTextAlignmentLeft;
+                stepLabel.numberOfLines = 0;
                 stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
                 [self addSubview:stepLabel];
                 [_textChoiceLabels addObject:stepLabel];
@@ -208,7 +216,15 @@
                                                                 attribute:NSLayoutAttributeCenterY
                                                                multiplier:1.0
                                                                  constant:0.0]];
-            
+
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:0.25
+                                                                 constant:0.0]];
+
             [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
@@ -229,13 +245,6 @@
                 if (i == 0) {
                     // First label
                     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0]];
-                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeCenterY
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:_slider
@@ -247,8 +256,17 @@
                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                                            toItem:self
                                                                         attribute:NSLayoutAttributeWidth
-                                                                       multiplier:0.5
-                                                                         constant:0.0]];
+                                                                       multiplier:0.75
+                                                                         constant:0]];
+                    
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.0
+                                                                         constant:-SideLabelMargin]];
+
                 } else {
                     // Middle labels
                     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
@@ -534,7 +552,7 @@
             [self setCurrentTextChoiceValue:[currentAnswerValue firstObject]];
         }
     } else {
-        return [self setCurrentNumberValue:currentAnswerValue];
+        [self setCurrentNumberValue:currentAnswerValue];
     }
 }
 

@@ -30,12 +30,20 @@
 
 
 #import "ORKReactionTimeViewController.h"
-#import "ORKActiveStepViewController_Internal.h"
+
 #import "ORKActiveStepView.h"
 #import "ORKReactionTimeContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+
 #import "ORKReactionTimeStep.h"
-#import <CoreMotion/CMDeviceMotion.h>
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
+
 #import <AudioToolbox/AudioServices.h>
+#import <CoreMotion/CMDeviceMotion.h>
 
 
 @implementation ORKReactionTimeViewController {
@@ -99,7 +107,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
-    stepResult.results = _results;
+    stepResult.results = [self.addedResults arrayByAddingObjectsFromArray:_results] ? : _results;
     return stepResult;
 }
 
@@ -183,7 +191,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (void)resetAfterDelay:(NSTimeInterval)delay {
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakTypeOf(self) weakSelf = self;
     [_reactionTimeContentView resetAfterDelay:delay completion:^{
         [weakSelf configureTitle];
         [weakSelf start];

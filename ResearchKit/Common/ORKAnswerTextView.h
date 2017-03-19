@@ -29,8 +29,8 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import "ORKDefines.h"
 #import "ORKDefaultFont.h"
 
 
@@ -49,7 +49,7 @@ ORK_CLASS_AVAILABLE
 
 @interface ORKAnswerTextView ()
 
-@property (nonatomic, strong, nullable) UILabel *placeHolder;
+@property (nonatomic, copy, nullable) NSString *placeholder;
 
 @end
 

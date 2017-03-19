@@ -30,12 +30,15 @@
 
 
 #import "ORKDeviceMotionRecorder.h"
-#import "ORKHelpers.h"
-#import "ORKRecorder_Internal.h"
-#import "ORKRecorder_Private.h"
+
 #import "ORKDataLogger.h"
-#import <CoreMotion/CoreMotion.h>
+
+#import "ORKRecorder_Internal.h"
+
+#import "ORKHelpers_Internal.h"
 #import "CMDeviceMotion+ORKJSONDictionary.h"
+
+@import CoreMotion;
 
 
 @interface ORKDeviceMotionRecorder () {
@@ -85,10 +88,10 @@
     [super start];
     
     if (!_logger) {
-        NSError *err = nil;
-        _logger = [self makeJSONDataLoggerWithError:&err];
+        NSError *error = nil;
+        _logger = [self makeJSONDataLoggerWithError:&error];
         if (!_logger) {
-            [self finishRecordingWithError:err];
+            [self finishRecordingWithError:error];
             return;
         }
     }

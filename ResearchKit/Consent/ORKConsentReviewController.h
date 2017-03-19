@@ -29,10 +29,7 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKConsentDocument.h"
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKSignatureView.h"
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN

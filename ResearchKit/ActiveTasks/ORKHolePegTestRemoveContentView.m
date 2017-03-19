@@ -30,10 +30,12 @@
 
 
 #import "ORKHolePegTestRemoveContentView.h"
+
+#import "ORKDirectionView.h"
 #import "ORKHolePegTestRemovePegView.h"
 #import "ORKSeparatorView.h"
-#import "ORKDirectionView.h"
-#import "ORKHelpers.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 
@@ -156,7 +158,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _container, _pegView, _separatorView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(PegViewDiameter), @"separator" : @(PegViewSeparatorWidth), @"margin" : @((1 + self.threshold) * PegViewDiameter)};
+    NSDictionary *metrics = @{@"diameter": @(PegViewDiameter), @"separator": @(PegViewSeparatorWidth), @"margin": @((1 + self.threshold) * PegViewDiameter)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"

@@ -30,9 +30,10 @@
 
 
 #import "ORKConsentSection.h"
-#import "ORKHelpers.h"
+
 #import "ORKConsentDocument_Internal.h"
-#import "ORKDefines_Private.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
@@ -250,7 +251,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 - (NSUInteger)hash {
-    return [_title hash] ^ _type;
+    return _title.hash ^ _type;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

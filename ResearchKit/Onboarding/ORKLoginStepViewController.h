@@ -29,8 +29,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKFormStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKLoginStepViewController` class is the concrete `ORKStepViewController`
@@ -39,6 +42,7 @@
  You should subclass a login step view controller and override the button action
  methods to provide your navigation logic. All override methods are required.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKLoginStepViewController : ORKFormStepViewController
 
 /**
@@ -50,3 +54,5 @@
 - (void)forgotPasswordButtonTapped;
 
 @end
+
+NS_ASSUME_NONNULL_END

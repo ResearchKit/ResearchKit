@@ -86,11 +86,68 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Neplatná e‑mailová adresa: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Zadejte adresu";
+"LOCATION_ERROR_TITLE" = "Zadanou adresu se nepodařilo najít";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Vaši aktuální polohu nelze zjistit. Zadejte adresu nebo se přesuňte na místo s lepším GPS signálem, je‑li to možné.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Přístup k polohovým službám byl odepřen. Přejděte do Nastavení a udělte této aplikaci oprávnění k používání polohových služeb.";
+"LOCATION_ERROR_GEOCODE" = "Pro zadanou adresu se nepodařilo najít výsledek. Ověřte správnost adresy.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nejste připojeni k internetu nebo jste překročili maximální počet žádostí o vyhledání adresy. Pokud nejste připojeni k internetu a chcete tuto otázku zodpovědět, zapněte Wi-Fi. Je-li k dispozici tlačítko přeskočit, můžete otázku přeskočit nebo se můžete k průzkumu vrátit, až bude internet dostupný. Případně to můžete zkusit za několik minut znovu.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text překračuje maximální délku: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Fotoaparát není na rozdělené obrazovce k dispozici.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jnovak@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Heslo";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrzení";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo ještě jednou";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Hesla se neshodují.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Doplňující informace";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Novák";
+"GENDER_FORM_ITEM_TITLE" = "Pohlaví";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Vyberte pohlaví";
+"DOB_FORM_ITEM_TITLE" = "Datum narození";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Vyberte datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ověření";
+"VERIFICATION_STEP_TITLE" = "Ověřte svůj e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pokud jste neobdrželi ověřovací e‑mail a chcete, abychom vám ho zaslali znovu, klepněte na odkaz níže.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Znovu odeslat ověřovací e‑mail";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Přihlásit se";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Zapomněli jste heslo?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Zadejte kód";
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrďte kód";
+"PASSCODE_SAVED_MESSAGE" = "Kód byl uložen";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kód byl ověřen";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Zadejte starý kód";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Zadejte nový kód";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrďte nový kód";
+"PASSCODE_INVALID_ALERT_TITLE" = "Nesprávný kód";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kódy se neshodují. Zkuste to znovu.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Použijte ověření pomocí Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Chyba Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Jsou povoleny jen číselné znaky.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikátor průběhu zadávání kódu";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Zadané číslice: %@ z %@";
+"PASSCODE_FORGOT_BUTTON_TITLE" = "Zapomněli jste kód?";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nepodařilo se přidat položku do svazku klíčů.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nepodařilo se aktualizovat položku ve svazku klíčů.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nepodařilo se smazat položku ze svazku klíčů.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nepodařilo se najít položku ve svazku klíčů.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -111,6 +168,11 @@
 "BOOL_NO" = "Ne";
 "BOOL_YES" = "Ano";
 
+/* Measuring unit abbreviations */
+"MEASURING_UNIT_CM" = "cm";
+"MEASURING_UNIT_FT" = "ft";
+"MEASURING_UNIT_IN" = "in";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Odpověď";
 "NULL_ANSWER" = "Vyberte odpověď";
@@ -120,6 +182,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Souhlasím";
 "BUTTON_CANCEL" = "Zrušit";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Smazat";
 "BUTTON_DISAGREE" = "Nesouhlasím";
 "BUTTON_DONE" = "Hotovo";
@@ -132,11 +195,15 @@
 "BUTTON_OPTION_SAVE" = "Nechat na později";
 "BUTTON_OPTION_DISCARD" = "Zahodit výsledky";
 "BUTTON_OPTION_STOP_TASK" = "Konec úlohy";
+"BUTTON_SAVE" = "Uložit";
+"BUTTON_CLEAR_ANSWER" = "Smazat odpověď";
+"BUTTON_READ_ONLY_MODE" = "Tuto odpověď nelze změnit.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivita se spustí za";
 "TASK_COMPLETE_TITLE" = "Aktivita byla dokončena";
 "TASK_COMPLETE_TEXT" = "Data budou analyzována a jakmile budou k dispozici výsledky, obdržíte oznámení.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Zbývá %@ s.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Pořídit obrázek";
@@ -145,6 +212,11 @@
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Před dokončením tohoto kroku musíte v Nastavení povolit této aplikaci přístup k fotoaparátu.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nebyl určen žádný výstupní adresář pro pořízené obrázky.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Pořízený obrázek se nepodařilo uložit.";
+
+/* Video capture step. */
+"CAPTURE_BUTTON_CAPTURE_VIDEO" = "Začít nahrávat";
+"CAPTURE_BUTTON_STOP_CAPTURE_VIDEO" = "Zastavit nahrávání";
+"CAPTURE_BUTTON_RECAPTURE_VIDEO" = "Znovu nahrát video";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondice";
@@ -165,24 +237,45 @@
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Obraťte se a jděte zpátky na začátek.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Ujděte až %ld kroků v přímém směru.";
 
+/* Short walk back and forth. */
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Najděte si místo, na kterém můžete bezpečně přecházet sem a tam po přímé linii. Zkuste chodit bez přestávek a na konci se vždy otočte, jako byste obcházeli kužel.\n\nNásledně dostanete pokyn abyste se otočili kolem své osy a zůstali stát s rukama podél těla a nohama rozkročenýma na šířku ramen.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Až budete připraveni, klepněte na Začít.\nPak uložte telefon do kapsy nebo tašky a postupujte podle zvukových pokynů.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Po %@ se procházejte sem a tam po přímé linii. Jděte normálním krokem.";
+"WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Otočte se kolem své osy a pak po %@ klidně stůjte.";
+"WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Dokončili jste aktivitu.";
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Rychlost klepání";
+"TAPPING_TASK_TITLE_RIGHT" = "Pravá ruka";
+"TAPPING_TASK_TITLE_LEFT" = "Levá ruka";
 "TAPPING_INTRO_TEXT" = "Tato aktivita změří vaši rychlost klepání.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Položte telefon na rovný povrch. Na %@ se na obrazovce objeví dvě tlačítka. Dvěma prsty jedné ruky střídavě co nejrychleji na tlačítka klepejte.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Položte telefon na rovný povrch.";
+"TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Dvěma prsty jedné ruky střídavě klepejte na tlačítka na obrazovce.";
+"TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Dvěma prsty pravé ruky střídavě klepejte na tlačítka na obrazovce.";
+"TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Dvěma prsty levé ruky střídavě klepejte na tlačítka na obrazovce.";
+"TAPPING_INTRO_TEXT_2_RIGHT_SECOND" = "Nyní test zopakujte pravou rukou.";
+"TAPPING_INTRO_TEXT_2_LEFT_SECOND" = "Nyní test zopakujte levou rukou.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Klepněte jedním prstem a potom druhým. Zkuste klepat co nejvíc rovnoměrně. Pokračujte v klepání po %@.";
 "TAPPING_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"TAPPING_CALL_TO_ACTION_NEXT" = "Začněte klepnutím na Další.";
 "TAP_BUTTON_TITLE" = "Klepněte";
 "TOTAL_TAPS_LABEL" = "Počet klepnutí";
-"TAPPING_INSTRUCTION" = "Dvěma prsty co nejrychleji klepejte na tlačítka.";
+"TAPPING_INSTRUCTION" = "Dvěma prsty co nejrovnoměrněji klepejte na tlačítka.";
+"TAPPING_INSTRUCTION_RIGHT" = "Klepejte na tlačítka PRAVOU rukou.";
+"TAPPING_INSTRUCTION_LEFT" = "Klepejte na tlačítka LEVOU rukou.";
+"TAPPING_SKIP_TITLE" = "Tuto ruku vynechat";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hlas";
 "AUDIO_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"AUDIO_INSTRUCTION" = "Řekněte \"Ááááá\" do mikrofonu a vydržte při tom co nejdéle.";
+"AUDIO_INSTRUCTION" = "Řekněte \"Ááááá\" do mikrofonu a vydržte co nejdéle.";
 "AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \"Ááááá\". Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
 "AUDIO_INTENDED_USE" = "Tato aktivita vyhodnotí váš hlas, který bude zaznamenán pomocí mikrofonu u dolního okraje telefonu.";
 "AUDIO_TOO_LOUD_LABEL" = "Příliš nahlas";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nelze zaznamenávat zvuk";
+"AUDIO_LEVEL_CHECK_LABEL" = "Počkejte, než otestujeme úroveň okolního hluku.";
+"AUDIO_TOO_LOUD_MESSAGE" = "Úroveň okolního hluku je pro nahrání vašeho hlasu příliš vysoká. Přesuňte se na klidnější místo a zkuste to znovu.";
+"AUDIO_TOO_LOUD_ACTION_NEXT" = "Až budete připraveni, klepněte na Další.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tónová audiometrie";
@@ -254,10 +347,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Obraťte se a jděte zpátky na začátek.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Po dokončení klepněte na Hotovo.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Žádná data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +360,62 @@
 "PSAT_INSTRUCTION" = "Přičtěte toto číslo k předchozímu.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@kolíkový test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tato aktivita otestuje motoriku vašich horních končetin. Požádáme vás o zasunutí kolíku do otvoru. Budete k tomu vyzváni celkem %@×.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Budeme testovat vaši levou i pravou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Budeme testovat vaši pravou i levou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Zasuňte kolík do otvoru levou rukou.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Zasuňte kolík do otvoru pravou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umístěte kolík za čáru levou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umístěte kolík za čáru pravou rukou.";
+"HOLE_PEG_TEST_TEXT" = "Uchopte kolík dvěma prsty.";
+"HOLE_PEG_TEST_TEXT_2" = "Zvednutím prstů kolík pusťte.";
+
+/* Tremor test active task. */
+"TREMOR_TEST_TITLE" = "Třes rukou";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Tato aktivita měří třas rukou v různých polohách. Najděte si místo, na kterém budete moct po celou dobu aktivity pohodlně sedět.";
+"TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Podržte telefon ve více postižené ruce tak, jak vidíte na obrázku.";
+"TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Podržte telefon v PRAVÉ ruce tak, jak vidíte na obrázku.";
+"TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Podržte telefon v LEVÉ ruce tak, jak vidíte na obrázku.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Budete požádáni o %@ při sezení s telefonem v ruce.";
+"TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "úkol";
+"TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dva úkoly";
+"TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tři úkoly";
+"TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "čtyři úkoly";
+"TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "pět úkolů";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Pokračujte klepnutím na Další.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Připravte se držet telefon na klíně.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Připravte se držet telefon LEVOU rukou na klíně.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Připravte se držet telefon PRAVOU rukou na klíně.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Držte telefon na klíně po %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Nyní držte telefon rukou nataženou ve výši ramen.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Nyní držte telefon LEVOU rukou nataženou ve výši ramen.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Nyní držte telefon PRAVOU rukou nataženou ve výši ramen.";
+"TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "S nataženou rukou držte telefon po %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Nyní ohněte ruku v lokti a držte telefon ve výši ramen.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Nyní držte telefon ve výši ramen LEVOU rukou ohnutou v lokti.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Nyní držte telefon ve výši ramen PRAVOU rukou ohnutou v lokti.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "S rukou ohnutou v lokti držte telefon po %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Nyní se s rukou ohnutou v lokti opakovaně dotýkejte telefonem nosu.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Nyní držte telefon ve výši ramen LEVOU rukou ohnutou v lokti a dotýkejte se jím opakovaně nosu.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Nyní držte telefon ve výši ramen PRAVOU rukou ohnutou v lokti a dotýkejte se jím opakovaně nosu.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Dotýkejte se telefonem nosu po %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Připravte se zamávat otáčením zápěstí.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Připravte se zamávat otáčením zápěstí s telefonem v LEVÉ ruce.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Připravte se zamávat otáčením zápěstí s telefonem v PRAVÉ ruce.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Mávejte otáčením zápěstí po %ld s.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Nyní vezměte telefon do LEVÉ ruky a pokračujte dalším úkolem.";
+"TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Nyní vezměte telefon do PRAVÉ ruky a pokračujte dalším úkolem.";
+"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Pokračujte další úlohou.";
+"TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktivita byla dokončena.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Budete požádáni o %@ při sezení s telefonem nejprve v jedné a pak v druhé ruce.";
+"TREMOR_SKIP_LEFT_HAND" = "Tuto aktivitu nemůžu provádět LEVOU rukou.";
+"TREMOR_SKIP_RIGHT_HAND" = "Tuto aktivitu nemůžu provádět PRAVOU rukou.";
+"TREMOR_SKIP_NEITHER" = "Tuto aktivitu můžu provádět oběma rukama.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodařilo se odstranit dostatečné množství protokolů pro dosažení prahové hodnoty";
@@ -279,6 +424,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Při odstraňování protokolů došlo k více chybám";
 "ERROR_RECORDER_NO_DATA" = "Nebyla nalezena žádná shromážděná data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nebyl určen výstupní adresář";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Žádná data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Zpět";
@@ -307,6 +455,9 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Náhled";
 "AX_IMAGE_CAPTURED_LABEL" = "Pořízený obrázek";
 
+"AX_VIDEO_CAPTURE_LABEL" = "Náhled nahraného videa";
+"AX_VIDEO_CAPTURED_LABEL" = "Nahrané video";
+
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Disk o velikosti %@ nelze umístit na disk o velikosti %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Cíl";
 "AX_TOWER_OF_HANOI_TOWER" = "Věž";
@@ -315,5 +466,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje disky o velikosti %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdné";
 
-"AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "Rozmezí od %@ do %@";
+"AX_GRAPH_STACK_PREFIX" = "Sada se skládá z";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
+"AX_GRAPH_POINT_%@" = "Bod: %@";

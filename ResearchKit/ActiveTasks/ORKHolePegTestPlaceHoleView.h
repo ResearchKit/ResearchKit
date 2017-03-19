@@ -29,13 +29,14 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+@import UIKit;
+#import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPlaceHoleView : UIView
+@interface ORKHolePegTestPlaceHoleView : UIView <CAAnimationDelegate>
 
 @property (nonatomic, assign, getter = isRotated) BOOL rotated;
 @property (nonatomic, assign, getter = isSuccess) BOOL success;

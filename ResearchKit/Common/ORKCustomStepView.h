@@ -29,7 +29,8 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+@import UIKit;
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -77,6 +78,7 @@ ORK_CLASS_AVAILABLE
 
 @class ORKSurveyAnswerCell;
 
+ORK_CLASS_AVAILABLE
 @interface ORKQuestionStepCellHolderView : ORKQuestionStepCustomView
 
 @property (nonatomic, strong, nullable) ORKSurveyAnswerCell *cell;

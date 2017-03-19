@@ -30,11 +30,19 @@
 
 
 #import "ORKHolePegTestPlaceStepViewController.h"
-#import "ORKHolePegTestPlaceStep.h"
-#import "ORKHolePegTestPlaceContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKStepViewController_internal.h"
+
 #import "ORKActiveStepView.h"
+#import "ORKHolePegTestPlaceContentView.h"
+
+#import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController.h"
+
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKNavigableOrderedTask.h"
+#import "ORKResult.h"
+
+#import "ORKHelpers_Internal.h"
 
 
 @interface ORKHolePegTestPlaceStepViewController () <ORKHolePegTestPlaceContentViewDelegate>
@@ -134,8 +142,8 @@
 #pragma mark - hole peg test content view delegate
 
 - (NSString *)stepTitle {
-    NSString *hand = ([self holePegTestPlaceStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
-    return [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), hand];
+    NSString *title = ([self holePegTestPlaceStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil);
+    return title;
 }
 
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {

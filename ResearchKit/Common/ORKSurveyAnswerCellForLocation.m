@@ -31,13 +31,17 @@
 
 
 #import "ORKSurveyAnswerCellForLocation.h"
-#import <MapKit/MapKit.h>
+
 #import "ORKAnswerTextField.h"
-#import "ORKHelpers.h"
+#import "ORKLocationSelectionView.h"
+
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
-#import "ORKLocationSelectionView.h"
+
+#import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+
+@import MapKit;
 
 
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>
@@ -58,7 +62,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return [ORKLocationSelectionView.class textFieldHeight] + (LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
+    return [ORKLocationSelectionView.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
 }
 
 - (void)prepareView {
@@ -102,7 +106,7 @@
 
 - (void)answerDidChange {
     _selectionView.answer = self.answer;
-    NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     [_selectionView setPlaceholderText:placeholder];
 }
 

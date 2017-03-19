@@ -29,10 +29,19 @@
  */
 
 
+@import UIKit;
 #import "ORKBorderedButton.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 ORK_CLASS_AVAILABLE
-@interface ORKRoundTappingButton : ORKBorderedButton
+@interface ORKRoundTappingButton : ORKBorderedButton {
+    CGFloat diameter;
+}
+
+- (void)setDiameter:(CGFloat)diameter;
 
 @end
+
+NS_ASSUME_NONNULL_END

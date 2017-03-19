@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		161479C41BD6CE8F0099A068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161479C31BD6CE8F0099A068 /* AppDelegate.swift */; };
+		161479C91BD6CE8F0099A068 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 161479C71BD6CE8F0099A068 /* Main.storyboard */; };
+		161479CB1BD6CE8F0099A068 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 161479CA1BD6CE8F0099A068 /* Assets.xcassets */; };
+		161479CE1BD6CE8F0099A068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 161479CC1BD6CE8F0099A068 /* LaunchScreen.storyboard */; };
+		16147A0F1BD83F700099A068 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16147A0E1BD83F700099A068 /* ActivityViewController.swift */; };
+		165A7E661BD99DBA00B6D223 /* StudyTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165A7E651BD99DBA00B6D223 /* StudyTasks.swift */; };
+		165A7E6E1BD9AEF800B6D223 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165A7E6D1BD9AEF800B6D223 /* IntroductionViewController.swift */; };
+		16BF5B691BE2974A007C79C6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B681BE2974A007C79C6 /* ProfileViewController.swift */; };
+		16BF5B6F1BE2BE77007C79C6 /* HealthClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B6E1BE2BE77007C79C6 /* HealthClientType.swift */; };
+		16BF5B711BE2C989007C79C6 /* ProfileStaticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BF5B701BE2C989007C79C6 /* ProfileStaticTableViewCell.swift */; };
+		86CCDFF61C1B50970042AA39 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CCDFF51C1B50970042AA39 /* ResearchContainerViewController.swift */; };
+		B5BC85FA1BF1405900B0CFA5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161479C51BD6CE8F0099A068 /* OnboardingViewController.swift */; };
+		B5BC85FD1BF1408500B0CFA5 /* HealthDataStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F25711BE052AD001D2D65 /* HealthDataStepViewController.swift */; };
+		B5C2073F1BEC16F00051D9D8 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2073E1BEC16F00051D9D8 /* ResearchContainerSegue.swift */; };
+		B5C207421BECBA8B0051D9D8 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C207411BECBA8B0051D9D8 /* WithdrawViewController.swift */; };
+		B5C207501BECCB1A0051D9D8 /* AnimatableChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2074F1BECCB1A0051D9D8 /* AnimatableChart.swift */; };
+		B5C207561BECED750051D9D8 /* ConsentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C207551BECED750051D9D8 /* ConsentDocument.swift */; };
+		B5C366B41BE7ADBA0036112D /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C366B31BE7ADBA0036112D /* DashboardTableViewController.swift */; };
+		B5D117581BE8D12000D7F153 /* PieChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D117571BE8D12000D7F153 /* PieChartDataSource.swift */; };
+		B5D1175C1BE8D15400D7F153 /* DiscreteGraphDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D1175B1BE8D15400D7F153 /* DiscreteGraphDataSource.swift */; };
+		B5D1175E1BE8D17E00D7F153 /* LineGraphDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D1175D1BE8D17E00D7F153 /* LineGraphDataSource.swift */; };
+		B5D35FC71BEA363F004CBB06 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D35FC61BEA363F004CBB06 /* ProfileHeaderView.swift */; };
+		B5D35FC91BEA48D3004CBB06 /* HKHealthStore+Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D35FC81BEA48D3004CBB06 /* HKHealthStore+Queries.swift */; };
+		B5FA92E91BF13D98001E46C0 /* HealthDataStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA92E81BF13D98001E46C0 /* HealthDataStep.swift */; };
+		BC2A3CA51C58E91E00DA64B7 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CA41C58E91E00DA64B7 /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BC2A3CDD1C58F1DB00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CDC1C58F1DB00DA64B7 /* ResearchKit.framework */; };
+		BC2A3CDE1C58F1DB00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CDC1C58F1DB00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BC2A3CDF1C58F1DB00DA64B7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BC2A3CDE1C58F1DB00DA64B7 /* ResearchKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		161479C01BD6CE8F0099A068 /* ORKSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		161479C31BD6CE8F0099A068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ORKSample/AppDelegate.swift; sourceTree = "<group>"; };
+		161479C51BD6CE8F0099A068 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingViewController.swift; path = ORKSample/OnboardingViewController.swift; sourceTree = "<group>"; };
+		161479C81BD6CE8F0099A068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		161479CA1BD6CE8F0099A068 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ORKSample/Assets.xcassets; sourceTree = "<group>"; };
+		161479CD1BD6CE8F0099A068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		161479CF1BD6CE8F0099A068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ORKSample/Info.plist; sourceTree = "<group>"; };
+		16147A0E1BD83F700099A068 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityViewController.swift; path = ORKSample/ActivityViewController.swift; sourceTree = "<group>"; };
+		165A7E651BD99DBA00B6D223 /* StudyTasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudyTasks.swift; path = ORKSample/StudyTasks.swift; sourceTree = "<group>"; };
+		165A7E6D1BD9AEF800B6D223 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntroductionViewController.swift; path = ORKSample/IntroductionViewController.swift; sourceTree = "<group>"; };
+		168F256F1BE03541001D2D65 /* ORKSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ORKSample.entitlements; path = ORKSample/ORKSample.entitlements; sourceTree = "<group>"; };
+		168F25711BE052AD001D2D65 /* HealthDataStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthDataStepViewController.swift; path = ORKSample/HealthDataStepViewController.swift; sourceTree = "<group>"; };
+		16BF5B681BE2974A007C79C6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = ORKSample/ProfileViewController.swift; sourceTree = "<group>"; };
+		16BF5B6E1BE2BE77007C79C6 /* HealthClientType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthClientType.swift; path = ORKSample/HealthClientType.swift; sourceTree = "<group>"; };
+		16BF5B701BE2C989007C79C6 /* ProfileStaticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileStaticTableViewCell.swift; path = ORKSample/ProfileStaticTableViewCell.swift; sourceTree = "<group>"; };
+		86CCDFF51C1B50970042AA39 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResearchContainerViewController.swift; path = ORKSample/ResearchContainerViewController.swift; sourceTree = SOURCE_ROOT; };
+		B5C2073E1BEC16F00051D9D8 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResearchContainerSegue.swift; path = ORKSample/ResearchContainerSegue.swift; sourceTree = "<group>"; };
+		B5C207411BECBA8B0051D9D8 /* WithdrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WithdrawViewController.swift; path = ORKSample/WithdrawViewController.swift; sourceTree = "<group>"; };
+		B5C2074F1BECCB1A0051D9D8 /* AnimatableChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatableChart.swift; path = ORKSample/AnimatableChart.swift; sourceTree = "<group>"; };
+		B5C207551BECED750051D9D8 /* ConsentDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsentDocument.swift; path = ORKSample/ConsentDocument.swift; sourceTree = "<group>"; };
+		B5C366B31BE7ADBA0036112D /* DashboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardTableViewController.swift; path = ORKSample/DashboardTableViewController.swift; sourceTree = "<group>"; };
+		B5D117571BE8D12000D7F153 /* PieChartDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChartDataSource.swift; path = ORKSample/PieChartDataSource.swift; sourceTree = "<group>"; };
+		B5D1175B1BE8D15400D7F153 /* DiscreteGraphDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscreteGraphDataSource.swift; path = ORKSample/DiscreteGraphDataSource.swift; sourceTree = "<group>"; };
+		B5D1175D1BE8D17E00D7F153 /* LineGraphDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineGraphDataSource.swift; path = ORKSample/LineGraphDataSource.swift; sourceTree = "<group>"; };
+		B5D35FC61BEA363F004CBB06 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = ORKSample/ProfileHeaderView.swift; sourceTree = "<group>"; };
+		B5D35FC81BEA48D3004CBB06 /* HKHealthStore+Queries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HKHealthStore+Queries.swift"; path = "ORKSample/HKHealthStore+Queries.swift"; sourceTree = "<group>"; };
+		B5FA92E81BF13D98001E46C0 /* HealthDataStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HealthDataStep.swift; path = ORKSample/HealthDataStep.swift; sourceTree = "<group>"; };
+		BC2A3CA41C58E91E00DA64B7 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		BC2A3CDC1C58F1DB00DA64B7 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		161479BD1BD6CE8F0099A068 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC2A3CDD1C58F1DB00DA64B7 /* ResearchKit.framework in Frameworks */,
+				BC2A3CA51C58E91E00DA64B7 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		161479B71BD6CE8F0099A068 = {
+			isa = PBXGroup;
+			children = (
+				BC2A3CA81C58E92600DA64B7 /* Frameworks */,
+				161479C21BD6CE8F0099A068 /* ORKSample */,
+				161479C11BD6CE8F0099A068 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		161479C11BD6CE8F0099A068 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				161479C01BD6CE8F0099A068 /* ORKSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		161479C21BD6CE8F0099A068 /* ORKSample */ = {
+			isa = PBXGroup;
+			children = (
+				161479C31BD6CE8F0099A068 /* AppDelegate.swift */,
+				86CCDFF51C1B50970042AA39 /* ResearchContainerViewController.swift */,
+				B5C2073E1BEC16F00051D9D8 /* ResearchContainerSegue.swift */,
+				16BF5B611BE29643007C79C6 /* Onboarding */,
+				16BF5B651BE29658007C79C6 /* Dashboard */,
+				16BF5B671BE29676007C79C6 /* Activities */,
+				16BF5B641BE2964F007C79C6 /* Profile */,
+				B5C207401BECBA710051D9D8 /* Withdrawal */,
+				168F25701BE05281001D2D65 /* Steps */,
+				16BF5B6B1BE2BD1C007C79C6 /* Protocols */,
+				B5D35FC81BEA48D3004CBB06 /* HKHealthStore+Queries.swift */,
+				161479C71BD6CE8F0099A068 /* Main.storyboard */,
+				161479CC1BD6CE8F0099A068 /* LaunchScreen.storyboard */,
+				161479D51BD6CFB00099A068 /* Supporting Files */,
+			);
+			name = ORKSample;
+			sourceTree = "<group>";
+		};
+		161479D51BD6CFB00099A068 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				161479CA1BD6CE8F0099A068 /* Assets.xcassets */,
+				161479CF1BD6CE8F0099A068 /* Info.plist */,
+				168F256F1BE03541001D2D65 /* ORKSample.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		168F25701BE05281001D2D65 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				B5FA92E81BF13D98001E46C0 /* HealthDataStep.swift */,
+				168F25711BE052AD001D2D65 /* HealthDataStepViewController.swift */,
+				B5C207551BECED750051D9D8 /* ConsentDocument.swift */,
+			);
+			name = Steps;
+			sourceTree = "<group>";
+		};
+		16BF5B611BE29643007C79C6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				161479C51BD6CE8F0099A068 /* OnboardingViewController.swift */,
+				165A7E6D1BD9AEF800B6D223 /* IntroductionViewController.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		16BF5B641BE2964F007C79C6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				16BF5B681BE2974A007C79C6 /* ProfileViewController.swift */,
+				16BF5B701BE2C989007C79C6 /* ProfileStaticTableViewCell.swift */,
+				B5D35FC61BEA363F004CBB06 /* ProfileHeaderView.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		16BF5B651BE29658007C79C6 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B5C366B31BE7ADBA0036112D /* DashboardTableViewController.swift */,
+				B5D117571BE8D12000D7F153 /* PieChartDataSource.swift */,
+				B5D1175B1BE8D15400D7F153 /* DiscreteGraphDataSource.swift */,
+				B5D1175D1BE8D17E00D7F153 /* LineGraphDataSource.swift */,
+			);
+			name = Dashboard;
+			sourceTree = "<group>";
+		};
+		16BF5B671BE29676007C79C6 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				16147A0E1BD83F700099A068 /* ActivityViewController.swift */,
+				165A7E651BD99DBA00B6D223 /* StudyTasks.swift */,
+			);
+			name = Activities;
+			sourceTree = "<group>";
+		};
+		16BF5B6B1BE2BD1C007C79C6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				16BF5B6E1BE2BE77007C79C6 /* HealthClientType.swift */,
+				B5C2074F1BECCB1A0051D9D8 /* AnimatableChart.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		B5C207401BECBA710051D9D8 /* Withdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				B5C207411BECBA8B0051D9D8 /* WithdrawViewController.swift */,
+			);
+			name = Withdrawal;
+			sourceTree = "<group>";
+		};
+		BC2A3CA81C58E92600DA64B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC2A3CDC1C58F1DB00DA64B7 /* ResearchKit.framework */,
+				BC2A3CA41C58E91E00DA64B7 /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		161479BF1BD6CE8F0099A068 /* ORKSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 161479D21BD6CE8F0099A068 /* Build configuration list for PBXNativeTarget "ORKSample" */;
+			buildPhases = (
+				161479BC1BD6CE8F0099A068 /* Sources */,
+				161479BD1BD6CE8F0099A068 /* Frameworks */,
+				161479BE1BD6CE8F0099A068 /* Resources */,
+				BC2A3CDF1C58F1DB00DA64B7 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ORKSample;
+			productName = ResearchHealth;
+			productReference = 161479C01BD6CE8F0099A068 /* ORKSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		161479B81BD6CE8F0099A068 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Apple, Inc.";
+				TargetAttributes = {
+					161479BF1BD6CE8F0099A068 = {
+						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 161479BB1BD6CE8F0099A068 /* Build configuration list for PBXProject "ORKSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 161479B71BD6CE8F0099A068;
+			productRefGroup = 161479C11BD6CE8F0099A068 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				161479BF1BD6CE8F0099A068 /* ORKSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		161479BE1BD6CE8F0099A068 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				161479CE1BD6CE8F0099A068 /* LaunchScreen.storyboard in Resources */,
+				161479CB1BD6CE8F0099A068 /* Assets.xcassets in Resources */,
+				161479C91BD6CE8F0099A068 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		161479BC1BD6CE8F0099A068 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5D35FC91BEA48D3004CBB06 /* HKHealthStore+Queries.swift in Sources */,
+				B5BC85FD1BF1408500B0CFA5 /* HealthDataStepViewController.swift in Sources */,
+				B5C366B41BE7ADBA0036112D /* DashboardTableViewController.swift in Sources */,
+				165A7E661BD99DBA00B6D223 /* StudyTasks.swift in Sources */,
+				B5FA92E91BF13D98001E46C0 /* HealthDataStep.swift in Sources */,
+				B5D1175E1BE8D17E00D7F153 /* LineGraphDataSource.swift in Sources */,
+				16BF5B691BE2974A007C79C6 /* ProfileViewController.swift in Sources */,
+				B5C207421BECBA8B0051D9D8 /* WithdrawViewController.swift in Sources */,
+				B5C2073F1BEC16F00051D9D8 /* ResearchContainerSegue.swift in Sources */,
+				B5BC85FA1BF1405900B0CFA5 /* OnboardingViewController.swift in Sources */,
+				B5C207561BECED750051D9D8 /* ConsentDocument.swift in Sources */,
+				16BF5B711BE2C989007C79C6 /* ProfileStaticTableViewCell.swift in Sources */,
+				B5D1175C1BE8D15400D7F153 /* DiscreteGraphDataSource.swift in Sources */,
+				86CCDFF61C1B50970042AA39 /* ResearchContainerViewController.swift in Sources */,
+				B5C207501BECCB1A0051D9D8 /* AnimatableChart.swift in Sources */,
+				16147A0F1BD83F700099A068 /* ActivityViewController.swift in Sources */,
+				16BF5B6F1BE2BE77007C79C6 /* HealthClientType.swift in Sources */,
+				B5D35FC71BEA363F004CBB06 /* ProfileHeaderView.swift in Sources */,
+				161479C41BD6CE8F0099A068 /* AppDelegate.swift in Sources */,
+				165A7E6E1BD9AEF800B6D223 /* IntroductionViewController.swift in Sources */,
+				B5D117581BE8D12000D7F153 /* PieChartDataSource.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		161479C71BD6CE8F0099A068 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				161479C81BD6CE8F0099A068 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ORKSample;
+			sourceTree = "<group>";
+		};
+		161479CC1BD6CE8F0099A068 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				161479CD1BD6CE8F0099A068 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ORKSample;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		161479D01BD6CE8F0099A068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		161479D11BD6CE8F0099A068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		161479D31BD6CE8F0099A068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ORKSample/ORKSample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/ORKSample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		161479D41BD6CE8F0099A068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ORKSample/ORKSample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "$(SRCROOT)/ORKSample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Sample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		161479BB1BD6CE8F0099A068 /* Build configuration list for PBXProject "ORKSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				161479D01BD6CE8F0099A068 /* Debug */,
+				161479D11BD6CE8F0099A068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		161479D21BD6CE8F0099A068 /* Build configuration list for PBXNativeTarget "ORKSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				161479D31BD6CE8F0099A068 /* Debug */,
+				161479D41BD6CE8F0099A068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 161479B81BD6CE8F0099A068 /* Project object */;
+}

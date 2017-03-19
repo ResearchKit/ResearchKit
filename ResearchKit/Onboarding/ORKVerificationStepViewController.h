@@ -29,26 +29,21 @@
  */
 
 
-#import "ORKStepViewController.h"
+@import UIKit;
+#import <ResearchKit/ORKStepViewController.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKVerificationStepViewController` class is the concrete `ORKStepViewController`
  implementation for `ORKVerificationStep`.
  
  You should subclass a verification step view controller and override the button action
- methods to provide your navigation logic, as well as the email address method to populate
- the email address label. All override methods are required.
+ methods to provide your navigation logic. All override methods are required.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStepViewController : ORKStepViewController
-
-/**
- Action method for the continue button.
- 
- Override this method to provide custom logic for the button action.
- */
-- (void)continueButtonTapped;
 
 /**
  Action method for the resend email button.
@@ -57,18 +52,6 @@ ORK_CLASS_AVAILABLE
  */
 - (void)resendEmailButtonTapped;
 
-/**
- Action method for the change email button.
- 
- Override this method to provide custom logic for the button action.
- */
-- (void)changeEmailButtonTapped;
-
-/**
- The email address that is pending verification.
- 
- Override this method to populate the email label's text.
- */
-- (NSString *)emailAddress;
-
 @end
+
+NS_ASSUME_NONNULL_END
