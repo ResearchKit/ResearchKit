@@ -276,10 +276,10 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     self = [super initWithCoder:aDecoder];
     if (self) {
         
-        // The `passcodeValidationRegex`, `passcodeInvalidMessage`, and
-        // `passcodeValidationRegexOptions` properties are transparent properties.
-        // The `initWithCoder:` for these properties is defined in the answer
-        // format (super).
+        // `passcodeValidationRegex`, `passcodeInvalidMessage`, and `passcodeValidationRegexOptions`
+        // are transparent properties. The corresponding decoding for these properties happens
+        // in the answer format `-initWithCode:` method, invoked from super's (ORKFormStep)
+        // implementation.
         ORK_DECODE_INTEGER(aDecoder, options);
     }
     return self;
@@ -288,19 +288,20 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     
-    // The `passcodeValidationRegex`, `passcodeInvalidMessage`, and
-    // `passcodeValidationRegexOptions` properties are transparent properties.
-    // The `encodeWithCoder:` for these properties is defined in the answer
-    // format (super).
+    // `passcodeValidationRegex`, `passcodeInvalidMessage`, and `passcodeValidationRegexOptions`
+    // are transparent properties. The corresponding encoding for these properties happens
+    // in the answer format `-encodeWithCoder:` method, invoked from super's (ORKFormStep)
+    // implementation.
     ORK_ENCODE_INTEGER(aCoder, options);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [super copyWithZone:zone];
     
-    // The `passcodeValidationRegex`, `passcodeInvalidMessage`, and
-    // `passcodeValidationRegexOptions` properties are transparent properties.
-    // The `copyWithZone:` for these properties is defined in the answer format (super).
+    // `passcodeValidationRegex`, `passcodeInvalidMessage`, and `passcodeValidationRegexOptions`
+    // are transparent properties. The corresponding copying of these properties happens
+    // in the answer format `-copyWithZone:` method, invoked from the super's (ORKFormStep)
+    // implementation.
     step->_options = self.options;
     return step;
 }
@@ -308,9 +309,9 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
-    // The `passcodeValidationRegex`, `passcodeInvalidMessage`, and
-    // `passcodeValidationRegexOptions` properties are transparent properties.
-    // The `isEqual:` for these properties is defined in the answer format (super).
+    // `passcodeValidationRegex`, `passcodeInvalidMessage`, and `passcodeValidationRegexOptions`
+    // are transparent properties. The corresponding equality test for these properties happens
+    // in the answer format `-isEqual:` method, invoked from super's (ORKFormStep) implementation.
     __typeof(self) castObject = object;
     return (isParentSame &&
             self.options == castObject.options);
