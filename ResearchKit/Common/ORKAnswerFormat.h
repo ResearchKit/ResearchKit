@@ -1312,7 +1312,8 @@ ORK_CLASS_AVAILABLE
 /**
  The options flag used with NSRegularExpression and the validationRegex to validate user's input.
 
- The default value is NSRegularExpressionCaseInsensitive. Has no effect if validationRegex is not set.
+ You can use this flag to request, for example, case-insensitive validation. The default value is
+ the empty option set. See `NSRegularExpressionOptions` for possible values.
  */
 @property (nonatomic, assign) NSRegularExpressionOptions validationRegexOptions;
 

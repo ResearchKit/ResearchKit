@@ -2240,7 +2240,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     _spellCheckingType = UITextSpellCheckingTypeDefault;
     _keyboardType = UIKeyboardTypeDefault;
     _multipleLines = YES;
-    _validationRegexOptions = NSRegularExpressionCaseInsensitive;
+    _validationRegexOptions = (NSRegularExpressionOptions)0;
 }
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
