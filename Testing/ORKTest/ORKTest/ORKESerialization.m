@@ -142,13 +142,13 @@ static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
 }
 
 static CLCircularRegion *circularRegionFromDictionary(NSDictionary *dict) {
-    CLCircularRegion *circularRegsion;
+    CLCircularRegion *circularRegion;
     if (dict.count == 3) {
-        circularRegsion = [[CLCircularRegion alloc] initWithCenter:coordinateFromDictionary(dict[@"coordinate"])
-                                                            radius:((NSNumber *)dict[@"radius"]).doubleValue
-                                                        identifier:dict[@"identifier"]];
+        circularRegion = [[CLCircularRegion alloc] initWithCenter:coordinateFromDictionary(dict[@"coordinate"])
+                                                           radius:((NSNumber *)dict[@"radius"]).doubleValue
+                                                       identifier:dict[@"identifier"]];
     }
-    return circularRegsion;
+    return circularRegion;
 }
 
 static NSArray *arrayFromRegularExpressionOptions(NSRegularExpressionOptions regularExpressionOptions) {
