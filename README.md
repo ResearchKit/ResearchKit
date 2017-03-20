@@ -1,4 +1,4 @@
-ResearchKit Framework
+ <img src="https://avatars2.githubusercontent.com/u/11183179?v=3&s=45"> ResearchKit Framework
 ===========
 
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps
