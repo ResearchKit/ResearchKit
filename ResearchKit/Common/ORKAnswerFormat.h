@@ -151,8 +151,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
-                                              invalidMessage:(NSString *)invalidMessage;
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                                          invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -1282,13 +1282,13 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param validationRegex           The regular expression used to validate the text.
- @param invalidMessage            The text presented to the user when invalid input is received.
+ @param validationRegularExpression     The regular expression used to validate the text.
+ @param invalidMessage                  The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
@@ -1303,19 +1303,11 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
 /**
- The regex used to validate user's input.
+ The regular expression used to validate user's input.
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (nonatomic, copy, nullable) NSString *validationRegex;
-
-/**
- The options flag used with NSRegularExpression and the validationRegex to validate user's input.
-
- You can use this flag to request, for example, case-insensitive validation. The default value is
- the empty option set. See `NSRegularExpressionOptions` for possible values.
- */
-@property (nonatomic, assign) NSRegularExpressionOptions validationRegexOptions;
+@property (nonatomic, copy, nullable) NSRegularExpression *validationRegularExpression;
 
 /**
  The text presented to the user when invalid input is received.

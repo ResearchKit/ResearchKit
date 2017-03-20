@@ -47,7 +47,7 @@
 @import MapKit;
 
 
-NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+NSString *const EmailValidationRegularExpressionPattern = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
 
 id ORKNullAnswerValue() {
     return [NSNull null];
@@ -386,8 +386,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextAnswerFormat alloc] initWithMaximumLength:maximumLength];
 }
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
-    return [[ORKTextAnswerFormat alloc] initWithValidationRegex:validationRegex invalidMessage:invalidMessage];
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                                          invalidMessage:(NSString *)invalidMessage {
+    return [[ORKTextAnswerFormat alloc] initWithValidationRegularExpression:validationRegularExpression
+                                                             invalidMessage:invalidMessage];
 }
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat {
@@ -2226,9 +2228,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 #pragma mark - ORKTextAnswerFormat
 
-@implementation ORKTextAnswerFormat {
-    NSRegularExpression *_cachedRegEx;
-}
+@implementation ORKTextAnswerFormat
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
@@ -2240,7 +2240,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     _spellCheckingType = UITextSpellCheckingTypeDefault;
     _keyboardType = UIKeyboardTypeDefault;
     _multipleLines = YES;
-    _validationRegexOptions = (NSRegularExpressionOptions)0;
 }
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
@@ -2252,10 +2251,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage {
     self = [super init];
     if (self) {
-        _validationRegex = [validationRegex copy];
+        _validationRegularExpression = [validationRegularExpression copy];
         _invalidMessage = [invalidMessage copy];
         _maximumLength = 0;
         [self commonInit];
@@ -2275,28 +2275,18 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)validateParameters {
     [super validateParameters];
     
-    if ( (!self.validationRegex && self.invalidMessage) || (self.validationRegex && !self.invalidMessage) ){
+    if ( (!self.validationRegularExpression && self.invalidMessage) ||
+         (self.validationRegularExpression && !self.invalidMessage) ) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"Both regex and invalid message properties must be set."
+                                       reason:@"Both regular expression and invalid message properties must be set."
                                      userInfo:nil];
     }
-    
-    NSError *error;
-    if (self.validationRegex && ![[NSRegularExpression alloc] initWithPattern:self.validationRegex
-                                                                      options:self.validationRegexOptions
-                                                                        error:&error]) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"Validation regex is not valid."
-                                     userInfo:error.userInfo];
-    }
-
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] init];
     answerFormat->_maximumLength = _maximumLength;
-    answerFormat->_validationRegex = [_validationRegex copy];
-    answerFormat->_validationRegexOptions = _validationRegexOptions;
+    answerFormat->_validationRegularExpression = [_validationRegularExpression copy];
     answerFormat->_invalidMessage = [_invalidMessage copy];
     answerFormat->_autocapitalizationType = _autocapitalizationType;
     answerFormat->_autocorrectionType = _autocorrectionType;
@@ -2318,7 +2308,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     BOOL isValid = YES;
     if (text && text.length > 0) {
-        isValid = ([self isTextLengthValidWithString:text] && [self isTextRegexValidWithString:text]);
+        isValid = ([self isTextLengthValidWithString:text] && [self isTextRegularExpressionValidWithString:text]);
     }
     return isValid;
 }
@@ -2327,15 +2317,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (_maximumLength == 0 || text.length <= _maximumLength);
 }
 
-- (BOOL)isTextRegexValidWithString:(NSString *)text {
+- (BOOL)isTextRegularExpressionValidWithString:(NSString *)text {
     BOOL isValid = YES;
-    if (self.validationRegex) {
-        if (!_cachedRegEx) {
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern: self.validationRegex options:self.validationRegexOptions error:nil];
-        }
-
-        NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
-        isValid = (regExMatches != 0);
+    if (self.validationRegularExpression) {
+        NSUInteger regularExpressionMatches = [_validationRegularExpression numberOfMatchesInString:text
+                                                                                            options:(NSMatchingOptions)0
+                                                                                              range:NSMakeRange(0, [text length])];
+        isValid = (regularExpressionMatches != 0);
     }
     return isValid;
 }
@@ -2345,7 +2333,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (![self isTextLengthValidWithString:text]) {
         [string appendString:[NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))]];
     }
-    if (![self isTextRegexValidWithString:text]) {
+    if (![self isTextRegularExpressionValidWithString:text]) {
         if (string.length > 0) {
             [string appendString:@"\n"];
         }
@@ -2383,8 +2371,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
-        ORK_DECODE_OBJ_CLASS(aDecoder, validationRegex, NSString);
-        ORK_DECODE_INTEGER(aDecoder, validationRegexOptions);
+        ORK_DECODE_OBJ_CLASS(aDecoder, validationRegularExpression, NSRegularExpression);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
@@ -2399,8 +2386,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
-    ORK_ENCODE_OBJ(aCoder, validationRegex);
-    ORK_ENCODE_INTEGER(aCoder, validationRegexOptions);
+    ORK_ENCODE_OBJ(aCoder, validationRegularExpression);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
@@ -2420,8 +2406,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.maximumLength == castObject.maximumLength &&
-             ORKEqualObjects(self.validationRegex, castObject.validationRegex) &&
-             self.validationRegexOptions == castObject.validationRegexOptions &&
+             ORKEqualObjects(self.validationRegularExpression, castObject.validationRegularExpression) &&
              ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
@@ -2460,7 +2445,13 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_impliedAnswerFormat) {
-        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegex:EmailValidationRegex invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
+        NSRegularExpression *validationRegularExpression =
+        [NSRegularExpression regularExpressionWithPattern:EmailValidationRegularExpressionPattern
+                                                  options:(NSRegularExpressionOptions)0
+                                                    error:nil];
+        NSString *invalidMessage = ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil);
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegularExpression:validationRegularExpression
+                                                                                     invalidMessage:invalidMessage];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -2487,8 +2478,8 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 // Don't throw on -init nor -initWithMaximumLength: because they're internally used by -copyWithZone:
 
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage {
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage {
     ORKThrowMethodUnavailableException();
 }
 
