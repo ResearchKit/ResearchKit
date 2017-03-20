@@ -55,8 +55,8 @@ id ORKNullAnswerValue() {
 
 BOOL ORKIsAnswerEmpty(id answer) {
     return  (answer == nil) ||
-            (answer == ORKNullAnswerValue()) ||
-            ([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0);     // Empty answer of choice or value picker
+    (answer == ORKNullAnswerValue()) ||
+    ([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0);     // Empty answer of choice or value picker
 }
 
 NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
@@ -332,7 +332,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
-                                        textChoices:(NSArray<ORKTextChoice *> *)textChoices {
+                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices {
     return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
 }
 
@@ -354,28 +354,28 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKDateAnswerFormat alloc] initWithStyle:ORKDateAnswerStyleDateAndTime];
 }
 + (ORKDateAnswerFormat *)dateTimeAnswerFormatWithDefaultDate:(NSDate *)defaultDate
-                                          minimumDate:(NSDate *)minimumDate
-                                          maximumDate:(NSDate *)maximumDate
-                                             calendar:(NSCalendar *)calendar {
+                                                 minimumDate:(NSDate *)minimumDate
+                                                 maximumDate:(NSDate *)maximumDate
+                                                    calendar:(NSCalendar *)calendar {
     return [[ORKDateAnswerFormat alloc] initWithStyle:ORKDateAnswerStyleDateAndTime
-                                         defaultDate:defaultDate
-                                         minimumDate:minimumDate
-                                         maximumDate:maximumDate
-                                            calendar:calendar];
+                                          defaultDate:defaultDate
+                                          minimumDate:minimumDate
+                                          maximumDate:maximumDate
+                                             calendar:calendar];
 }
 
 + (ORKDateAnswerFormat *)dateAnswerFormat {
     return [[ORKDateAnswerFormat alloc] initWithStyle:ORKDateAnswerStyleDate];
 }
 + (ORKDateAnswerFormat *)dateAnswerFormatWithDefaultDate:(NSDate *)defaultDate
-                                      minimumDate:(NSDate *)minimumDate
-                                      maximumDate:(NSDate *)maximumDate
-                                         calendar:(NSCalendar *)calendar  {
+                                             minimumDate:(NSDate *)minimumDate
+                                             maximumDate:(NSDate *)maximumDate
+                                                calendar:(NSCalendar *)calendar  {
     return [[ORKDateAnswerFormat alloc] initWithStyle:ORKDateAnswerStyleDate
-                                         defaultDate:defaultDate
-                                         minimumDate:minimumDate
-                                         maximumDate:maximumDate
-                                            calendar:calendar];
+                                          defaultDate:defaultDate
+                                          minimumDate:minimumDate
+                                          maximumDate:maximumDate
+                                             calendar:calendar];
 }
 
 + (ORKTextAnswerFormat *)textAnswerFormat {
@@ -401,7 +401,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
-                                                         step:(NSInteger)step {
+                                                                        step:(NSInteger)step {
     return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:defaultInterval step:step];
 }
 
@@ -491,10 +491,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
     ORKQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
     
-/*
-    ContinuousScale navigation rules always evaluate to false because the result is different from what is displayed in the UI.
-    The fraction digits have to be taken into account in self.answer as well.
-*/
+    /*
+     ContinuousScale navigation rules always evaluate to false because the result is different from what is displayed in the UI.
+     The fraction digits have to be taken into account in self.answer as well.
+     */
     if ([self isKindOfClass:[ORKContinuousScaleAnswerFormat class]]) {
         NSNumberFormatter* formatter = [(ORKContinuousScaleAnswerFormat*)self numberFormatter];
         answer = [formatter numberFromString:[formatter stringFromNumber:answer]];
@@ -508,12 +508,12 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 - (BOOL)isAnswerValid:(id)answer {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
     return impliedFormat == self ? YES : [impliedFormat isAnswerValid:answer];
-    }
+}
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
     return impliedFormat == self ? YES : [impliedFormat isAnswerValidWithString:text];
-    }
+}
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     return nil;
@@ -590,7 +590,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     }
     return self;
 }
-    
+
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice {
     self = [super init];
     if (self) {
@@ -598,12 +598,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     }
     return self;
 }
-        
+
 - (void)commonInitWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices nullChoice:(ORKTextChoice *)nullChoice {
-        _textChoices = ork_processTextChoices(textChoices);
+    _textChoices = ork_processTextChoices(textChoices);
     _nullTextChoice = nullChoice;
     _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    }
+}
 
 
 - (void)validateParameters {
@@ -787,7 +787,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @interface ORKImageChoiceAnswerFormat () {
     ORKChoiceAnswerFormatHelper *_helper;
-
+    
 }
 
 @end
@@ -1182,7 +1182,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
-
+    
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.yes, castObject.yes) &&
@@ -1377,7 +1377,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSDate *)pickerDefaultDate {
     return (self.defaultDate ? : [NSDate date]);
-   
+    
 }
 
 - (NSDate *)pickerMinimumDate {
@@ -1385,7 +1385,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSDate *)pickerMaximumDate {
-   return self.maximumDate;
+    return self.maximumDate;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1482,9 +1482,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKNumericAnswerFormat *answerFormat = [[[self class] allocWithZone:zone] initWithStyle:_style
-                                                                              unit:[_unit copy]
-                                                                           minimum:[_minimum copy]
-                                                                           maximum:[_maximum copy]];
+                                                                                       unit:[_unit copy]
+                                                                                    minimum:[_minimum copy]
+                                                                                    maximum:[_maximum copy]];
     return answerFormat;
 }
 
@@ -2162,8 +2162,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value {
-   ORKTextChoice *choice = [self textChoiceForValue:value];
-   return choice ? [_textChoices indexOfObject:choice] : NSNotFound;
+    ORKTextChoice *choice = [self textChoiceForValue:value];
+    return choice ? [_textChoices indexOfObject:choice] : NSNotFound;
 }
 
 - (void)validateParameters {
@@ -2276,7 +2276,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     [super validateParameters];
     
     if ( (!self.validationRegularExpression && self.invalidMessage) ||
-         (self.validationRegularExpression && !self.invalidMessage) ) {
+        (self.validationRegularExpression && !self.invalidMessage) ) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"Both regular expression and invalid message properties must be set."
                                      userInfo:nil];
@@ -2349,7 +2349,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     NSAssert(!self.multipleLines, @"Confirmation Answer Format is not currently defined for ORKTextAnswerFormat with multiple lines.");
     
     ORKTextAnswerFormat *answerFormat = [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:originalItemIdentifier errorMessage:errorMessage];
-
+    
     // Copy from ORKTextAnswerFormat being confirmed
     answerFormat->_maximumLength = _maximumLength;
     answerFormat->_keyboardType = _keyboardType;
@@ -2413,7 +2413,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines) &&
-             self.secureTextEntry == castObject.secureTextEntry);
+            self.secureTextEntry == castObject.secureTextEntry);
 }
 
 static NSString *const kSecureTextEntryEscapeString = @"*";
@@ -2576,7 +2576,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 - (NSTimeInterval)pickerDefaultDuration {
-
+    
     NSTimeInterval value = MAX([self defaultInterval], 0);
     
     // imitate UIDatePicker's behavior

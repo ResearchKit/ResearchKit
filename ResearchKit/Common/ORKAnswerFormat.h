@@ -183,7 +183,7 @@ ORK_CLASS_AVAILABLE
  same way as a single-choice answer format with the choices Yes and No mapping to 
  `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
  `ORKTextChoiceAnswerFormat` with those options.
-*/
+ */
 - (ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
