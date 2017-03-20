@@ -454,7 +454,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.footerHidden = YES;
     _contentView.buttonItem = nil;
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
-    NSString *title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_PLAYBACK_TITLE_%@", nil), step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil)];
+    NSString *title = [NSString localizedStringWithFormat:ORKLocalizedString(@"MEMORY_GAME_PLAYBACK_TITLE_%@", nil), step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil)];
     
     [self.activeStepView updateTitle:title text:nil];
     

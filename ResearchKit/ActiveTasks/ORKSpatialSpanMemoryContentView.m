@@ -203,7 +203,7 @@
         
         _capitalizedPluralItemDescription = [ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE", nil) capitalizedStringWithLocale:[NSLocale currentLocale]];
         
-        countView.title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
+        countView.title = [NSString localizedStringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
         scoreView.title = ORKLocalizedString(@"MEMORY_GAME_SCORE_TITLE", nil);
         countView.enabled = YES;
         scoreView.enabled = YES;
@@ -229,7 +229,7 @@
 
 - (void)setCapitalizedPluralItemDescription:(NSString *)capitalizedPluralItemDescription {
     _capitalizedPluralItemDescription = capitalizedPluralItemDescription;
-    [self countView].title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
+    [self countView].title = [NSString localizedStringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
 }
 
 - (void)setNumberOfItems:(NSInteger)numberOfItems {
