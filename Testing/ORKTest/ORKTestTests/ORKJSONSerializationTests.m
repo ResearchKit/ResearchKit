@@ -410,8 +410,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
-                                              @"ORKRegistrationStep.passcodeValidationRegex",
-                                              @"ORKRegistrationStep.passcodeValidationRegexOptions",
+                                              @"ORKRegistrationStep.passcodeValidationRegularExpression",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
@@ -445,7 +444,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                     [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                     if (p.isPrimitiveType == NO) {
                         // Assign value to object type property
-                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class]|| aClass == [ORKImageChoice class]))
+                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class] || aClass == [ORKImageChoice class]))
                         {
                             // Map NSObject to string, since it's used where either a string or a number is acceptable
                             [instance setValue:@"test" forKey:p.propertyName];
@@ -463,6 +462,8 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                             [instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
+                        } else if (p.propertyClass == [NSRegularExpression class]) {
+                            [instance setValue:[NSRegularExpression regularExpressionWithPattern:@"." options:0 error:nil] forKey:p.propertyName];
                         } else if (p.propertyClass == [ORKLocation class]) {
                             [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
                         } else {
@@ -588,6 +589,10 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
         [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
     } else if (p.propertyClass == [NSPredicate class]) {
         [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
+    } else if (p.propertyClass == [NSRegularExpression class]) {
+        [instance setValue:[NSRegularExpression regularExpressionWithPattern:index ? @"." : @"[A-Z]"
+                                                                     options:index ? 0 : NSRegularExpressionCaseInsensitive
+                                                                       error:nil] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
@@ -866,6 +871,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
                                    @"ORKVideoCaptureStep.duration",
+                                   @"ORKTextAnswerFormat.validationRegularExpression",
                                    ];
     
     // Test Each class
