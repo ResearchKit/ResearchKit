@@ -24,6 +24,7 @@
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
 		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BC74BD441E7F7003009A98C0 /* TaskFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = BC74BD431E7F7003009A98C0 /* TaskFactory.m */; };
 		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
@@ -126,6 +127,8 @@
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BC2A3CA01C58E85D00DA64B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC74BD421E7F7003009A98C0 /* TaskFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskFactory.h; sourceTree = "<group>"; };
+		BC74BD431E7F7003009A98C0 /* TaskFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskFactory.m; sourceTree = "<group>"; };
 		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
 		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
 		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
@@ -185,14 +188,16 @@
 		86717A8C1AC0C0FE00AC2A23 /* ORKTest */ = {
 			isa = PBXGroup;
 			children = (
-				86717A911AC0C0FE00AC2A23 /* AppDelegate.h */,
-				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
-				86717ADE1AC0C53800AC2A23 /* MainViewController.h */,
-				86717AD71AC0C53800AC2A23 /* MainViewController.m */,
 				BC9A27111B81732200BDA84D /* Charts */,
 				86717B001AC0C9B100AC2A23 /* CustomizationExamples */,
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
+				86717A911AC0C0FE00AC2A23 /* AppDelegate.h */,
+				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
+				86717ADE1AC0C53800AC2A23 /* MainViewController.h */,
+				86717AD71AC0C53800AC2A23 /* MainViewController.m */,
+				BC74BD421E7F7003009A98C0 /* TaskFactory.h */,
+				BC74BD431E7F7003009A98C0 /* TaskFactory.m */,
 				BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */,
 			);
 			path = ORKTest;
@@ -453,6 +458,7 @@
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
 				FFF010721D21F1EA0054B430 /* ContinueButtonExampleViewController.m in Sources */,
+				BC74BD441E7F7003009A98C0 /* TaskFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
