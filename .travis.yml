@@ -1,0 +1,3 @@
+language: objective-c
+script: xcodebuild -project ResearchKit.xcodeproj -scheme ResearchKit test
+
