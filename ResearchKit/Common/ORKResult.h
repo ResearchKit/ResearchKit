@@ -125,25 +125,4 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
-/**
- The `ORKPasscodeResult` class records the results of a passcode step.
- 
- The passcode result object contains a boolean indicating whether the passcode was saved or not.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKPasscodeResult : ORKResult
-
-/**
- A boolean indicating if a passcode was saved or not.
- */
-@property (nonatomic, assign, getter=isPasscodeSaved) BOOL passcodeSaved;
-
-/**
- A boolean that indicates if the user has enabled/disabled TouchID
- */
-@property (nonatomic, assign, getter=isTouchIdEnabled) BOOL touchIdEnabled;
-
-@end
-
 NS_ASSUME_NONNULL_END

@@ -612,6 +612,8 @@
 		FF919A661E81D168005C2A1E /* ORKSignatureResult_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A651E81D164005C2A1E /* ORKSignatureResult_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FF919A691E81D255005C2A1E /* ORKConsentSignatureResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A671E81D255005C2A1E /* ORKConsentSignatureResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF919A6A1E81D255005C2A1E /* ORKConsentSignatureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A681E81D255005C2A1E /* ORKConsentSignatureResult.m */; };
+		FF919A6D1E81D3B0005C2A1E /* ORKPasscodeResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A6B1E81D3B0005C2A1E /* ORKPasscodeResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF919A6E1E81D3B0005C2A1E /* ORKPasscodeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A6C1E81D3B0005C2A1E /* ORKPasscodeResult.m */; };
 		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
 		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1274,6 +1276,8 @@
 		FF919A651E81D164005C2A1E /* ORKSignatureResult_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKSignatureResult_Private.h; sourceTree = "<group>"; };
 		FF919A671E81D255005C2A1E /* ORKConsentSignatureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureResult.h; sourceTree = "<group>"; };
 		FF919A681E81D255005C2A1E /* ORKConsentSignatureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureResult.m; sourceTree = "<group>"; };
+		FF919A6B1E81D3B0005C2A1E /* ORKPasscodeResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeResult.h; sourceTree = "<group>"; };
+		FF919A6C1E81D3B0005C2A1E /* ORKPasscodeResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeResult.m; sourceTree = "<group>"; };
 		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
 		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
@@ -1454,6 +1458,8 @@
 		24A4DA091B8D0CC8009C797A /* Passcode Step */ = {
 			isa = PBXGroup;
 			children = (
+				FF919A6B1E81D3B0005C2A1E /* ORKPasscodeResult.h */,
+				FF919A6C1E81D3B0005C2A1E /* ORKPasscodeResult.m */,
 				24A4DA121B8D1115009C797A /* ORKPasscodeStep.h */,
 				24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */,
 				241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */,
@@ -2862,6 +2868,7 @@
 				86C40DEA1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h in Headers */,
 				9550E6731D58DBCF00C691B8 /* ORKTouchAnywhereStep.h in Headers */,
 				86C40CF61A8D7C5C00081FAC /* ORKBorderedButton.h in Headers */,
+				FF919A6D1E81D3B0005C2A1E /* ORKPasscodeResult.h in Headers */,
 				86C40D4A1A8D7C5C00081FAC /* ORKLabel.h in Headers */,
 				250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */,
 				861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */,
@@ -3257,6 +3264,7 @@
 				9550E67D1D58DD2000C691B8 /* ORKTouchAnywhereStepViewController.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
 				BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */,
+				FF919A6E1E81D3B0005C2A1E /* ORKPasscodeResult.m in Sources */,
 				959A2C0E1D68C91400841B04 /* ORKShoulderRangeOfMotionStep.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
