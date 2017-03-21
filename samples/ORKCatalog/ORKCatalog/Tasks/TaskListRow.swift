@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015-2016, Ricardo Sanchez-Saez.
  Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,

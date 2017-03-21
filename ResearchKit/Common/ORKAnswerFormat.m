@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Scott Guelich.
- Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2016, Ricardo Sanchez-Saez.
  Copyright (c) 2017, Medable Inc. All rights reserved.
  Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
