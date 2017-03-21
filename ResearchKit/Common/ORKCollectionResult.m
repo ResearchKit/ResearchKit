@@ -32,6 +32,7 @@
 
 #import "ORKCollectionResult_Private.h"
 #import "ORKPageStep.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult_Private.h"
 #import "ORKStep.h"
 #import "ORKTask.h"

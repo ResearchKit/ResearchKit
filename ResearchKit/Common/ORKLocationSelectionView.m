@@ -42,6 +42,7 @@
 #import "ORKAnswerTextField.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult_Private.h"
 
 #import "ORKHelpers_Internal.h"

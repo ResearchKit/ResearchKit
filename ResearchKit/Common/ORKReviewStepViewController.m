@@ -46,6 +46,7 @@
 #import "ORKCollectionResult_Private.h"
 #import "ORKFormStep.h"
 #import "ORKInstructionStep.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKQuestionStep.h"
 #import "ORKReviewStep_Internal.h"
 #import "ORKResult_Private.h"

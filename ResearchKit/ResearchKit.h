@@ -65,6 +65,7 @@
 #import <ResearchKit/ORKResult.h>
 #import <ResearchKit/ORKActiveTaskResult.h>
 #import <ResearchKit/ORKCollectionResult.h>
+#import <ResearchKit/ORKQuestionResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
 #import <ResearchKit/ORKTextButton.h>
