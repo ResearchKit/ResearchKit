@@ -605,6 +605,8 @@
 		FF919A591E81C628005C2A1E /* ORKQuestionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A571E81C628005C2A1E /* ORKQuestionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF919A5A1E81C628005C2A1E /* ORKQuestionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A581E81C628005C2A1E /* ORKQuestionResult.m */; };
 		FF919A5C1E81C641005C2A1E /* ORKQuestionResult_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A5B1E81C63B005C2A1E /* ORKQuestionResult_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		FF919A5F1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A5D1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF919A601E81CF07005C2A1E /* ORKVideoInstructionStepResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A5E1E81CF07005C2A1E /* ORKVideoInstructionStepResult.m */; };
 		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
 		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1260,6 +1262,8 @@
 		FF919A571E81C628005C2A1E /* ORKQuestionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKQuestionResult.h; sourceTree = "<group>"; };
 		FF919A581E81C628005C2A1E /* ORKQuestionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKQuestionResult.m; sourceTree = "<group>"; };
 		FF919A5B1E81C63B005C2A1E /* ORKQuestionResult_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKQuestionResult_Private.h; sourceTree = "<group>"; };
+		FF919A5D1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKVideoInstructionStepResult.h; sourceTree = "<group>"; };
+		FF919A5E1E81CF07005C2A1E /* ORKVideoInstructionStepResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVideoInstructionStepResult.m; sourceTree = "<group>"; };
 		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
 		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
@@ -2522,6 +2526,8 @@
 			children = (
 				BF1D43831D4904C6007EE90B /* ORKVideoInstructionStep.h */,
 				BF1D43841D4904C6007EE90B /* ORKVideoInstructionStep.m */,
+				FF919A5D1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h */,
+				FF919A5E1E81CF07005C2A1E /* ORKVideoInstructionStepResult.m */,
 				BF1D43871D4905FC007EE90B /* ORKVideoInstructionStepViewController.h */,
 				BF1D43881D4905FC007EE90B /* ORKVideoInstructionStepViewController.m */,
 			);
@@ -2680,6 +2686,7 @@
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
 				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				10FF9AD31B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.h in Headers */,
+				FF919A5F1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h in Headers */,
 				866DA5201D63D04700C9AF3F /* ORKCollector.h in Headers */,
 				BF9155AB1BDE8DA9007FA459 /* ORKWaitStepViewController.h in Headers */,
 				BF9155A91BDE8DA9007FA459 /* ORKWaitStepView.h in Headers */,
@@ -3176,6 +3183,7 @@
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
 				2489F7B21D65214D008DEF20 /* ORKVideoCaptureStep.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKSignatureStepViewController.m in Sources */,
+				FF919A601E81CF07005C2A1E /* ORKVideoInstructionStepResult.m in Sources */,
 				959A2BFD1D68B98700841B04 /* ORKRangeOfMotionStep.m in Sources */,
 				FF919A2F1E81AAD0005C2A1E /* ORKTowerOfHanoiResult.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
