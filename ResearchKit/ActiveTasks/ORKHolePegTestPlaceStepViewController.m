@@ -39,6 +39,7 @@
 #import "ORKTaskViewController.h"
 
 #import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestResult.h"
 #import "ORKNavigableOrderedTask.h"
 #import "ORKResult.h"
 

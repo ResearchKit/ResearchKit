@@ -80,6 +80,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
 
+// Description formatting
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+- (NSString *)descriptionSuffix;
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+
 @end
 
 

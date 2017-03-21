@@ -29,27 +29,29 @@
  */
 
 
-#import "ORKShoulderRangeOfMotionStepViewController.h"
-
-#import "ORKRangeOfMotionResult.h"
-#import "ORKStepViewController_Internal.h"
+#import <ResearchKit/ORKResult.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation ORKShoulderRangeOfMotionStepViewController
+/**
+ The `ORKRangeOfMotionResult` class records the results of a range of motion active task.
+ 
+ An `ORKRangeOfMotionResult` object records the flexion and extension values in degrees.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKRangeOfMotionResult : ORKResult
 
-#pragma mark - ORKActiveTaskViewController
+/**
+ The degrees when bent.
+ */
+@property (nonatomic, assign) double flexed;
 
-- (ORKResult *)result {
-    ORKStepResult *stepResult = [super result];
-    
-    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = 90.0 - _flexedAngle;
-    result.extended = result.flexed + _rangeOfMotionAngle;
-    
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
-    
-    return stepResult;
-}
+/**
+ The degrees when extended.
+ */
+@property (nonatomic, assign) double extended;
 
 @end
+
+NS_ASSUME_NONNULL_END

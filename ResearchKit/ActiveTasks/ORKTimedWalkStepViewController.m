@@ -40,6 +40,7 @@
 #import "ORKStepViewController_Internal.h"
 
 #import "ORKResult.h"
+#import "ORKTimedWalkResult.h"
 #import "ORKTimedWalkStep.h"
 
 #import "ORKHelpers_Internal.h"

@@ -29,27 +29,54 @@
  */
 
 
-#import "ORKShoulderRangeOfMotionStepViewController.h"
-
 #import "ORKRangeOfMotionResult.h"
-#import "ORKStepViewController_Internal.h"
+
+#import "ORKResult_Private.h"
+#import "ORKHelpers_Internal.h"
 
 
+@implementation ORKRangeOfMotionResult
 
-@implementation ORKShoulderRangeOfMotionStepViewController
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, flexed);
+    ORK_ENCODE_DOUBLE(aCoder, extended);
+}
 
-#pragma mark - ORKActiveTaskViewController
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, flexed);
+        ORK_DECODE_DOUBLE(aDecoder, extended);
+    }
+    return self;
+}
 
-- (ORKResult *)result {
-    ORKStepResult *stepResult = [super result];
-    
-    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = 90.0 - _flexedAngle;
-    result.extended = result.flexed + _rangeOfMotionAngle;
-    
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
-    
-    return stepResult;
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return isParentSame &&
+    self.flexed == castObject.flexed &&
+    self.extended == castObject.extended;
+}
+
+- (NSUInteger)hash {
+    return super.hash;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKRangeOfMotionResult *result = [super copyWithZone:zone];
+    result.flexed = self.flexed;
+    result.extended = self.extended;
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"<%@: flexion: %f; extension: %f>", self.class.description, self.flexed, self.extended];
 }
 
 @end

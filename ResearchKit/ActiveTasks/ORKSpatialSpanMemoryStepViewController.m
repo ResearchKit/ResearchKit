@@ -41,6 +41,7 @@
 
 #import "ORKActiveStep_Internal.h"
 #import "ORKResult.h"
+#import "ORKSpatialSpanMemoryResult.h"
 #import "ORKStep_Private.h"
 #import "ORKSpatialSpanGame.h"
 #import "ORKSpatialSpanGameState.h"

@@ -1,5 +1,6 @@
 /*
- Copyright (c) 2016, Darren Levy. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,27 +30,14 @@
  */
 
 
-#import "ORKShoulderRangeOfMotionStepViewController.h"
-
-#import "ORKRangeOfMotionResult.h"
-#import "ORKStepViewController_Internal.h"
-
-
-
-@implementation ORKShoulderRangeOfMotionStepViewController
-
-#pragma mark - ORKActiveTaskViewController
-
-- (ORKResult *)result {
-    ORKStepResult *stepResult = [super result];
-    
-    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = 90.0 - _flexedAngle;
-    result.extended = result.flexed + _rangeOfMotionAngle;
-    
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
-    
-    return stepResult;
-}
-
-@end
+#import <ResearchKit/ORKFileResult.h>
+#import <ResearchKit/ORKHolePegTestResult.h>
+#import <ResearchKit/ORKPSATResult.h>
+#import <ResearchKit/ORKRangeOfMotionResult.h>
+#import <ResearchKit/ORKReactionTimeResult.h>
+#import <ResearchKit/ORKSpatialSpanMemoryResult.h>
+#import <ResearchKit/ORKTappingIntervalResult.h>
+#import <ResearchKit/ORKTimedWalkResult.h>
+#import <ResearchKit/ORKToneAudiometryResult.h>
+#import <ResearchKit/ORKTowerOfHanoiResult.h>
+#import <ResearchKit/ORKTrailmakingResult.h>

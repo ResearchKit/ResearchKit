@@ -38,7 +38,7 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
-#import "ORKResult.h"
+#import "ORKTowerOfHanoiResult.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKTowerOfHanoiTower.h"
 

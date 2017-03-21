@@ -39,7 +39,7 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
-#import "ORKResult.h"
+#import "ORKToneAudiometryResult.h"
 #import "ORKToneAudiometryStep.h"
 
 #import "ORKHelpers_Internal.h"

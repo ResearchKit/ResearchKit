@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2016, Darren Levy. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,27 +29,35 @@
  */
 
 
-#import "ORKShoulderRangeOfMotionStepViewController.h"
-
-#import "ORKRangeOfMotionResult.h"
-#import "ORKStepViewController_Internal.h"
+@import Foundation;
+#import <ResearchKit/ORKResult.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation ORKShoulderRangeOfMotionStepViewController
+/**
+ The `ORKTimedWalkResult` class records the results of a Timed Walk test.
+ 
+ The timed walk result object records the duration to complete the trial with a specific distance
+ and time limit.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTimedWalkResult : ORKResult
+/**
+ The timed walk distance in meters.
+ */
+@property (nonatomic, assign) double distanceInMeters;
 
-#pragma mark - ORKActiveTaskViewController
+/**
+ The time limit to complete the trials.
+ */
+@property (nonatomic, assign) NSTimeInterval timeLimit;
 
-- (ORKResult *)result {
-    ORKStepResult *stepResult = [super result];
-    
-    ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = 90.0 - _flexedAngle;
-    result.extended = result.flexed + _rangeOfMotionAngle;
-    
-    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
-    
-    return stepResult;
-}
+/**
+ The trial duration (that is, the time taken to do the walk).
+ */
+@property (nonatomic, assign) NSTimeInterval duration;
 
 @end
+
+NS_ASSUME_NONNULL_END

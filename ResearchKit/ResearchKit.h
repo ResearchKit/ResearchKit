@@ -63,6 +63,7 @@
 #import <ResearchKit/ORKHealthAnswerFormat.h>
 
 #import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKActiveTaskResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
 #import <ResearchKit/ORKTextButton.h>

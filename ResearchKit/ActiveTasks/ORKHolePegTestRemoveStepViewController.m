@@ -39,6 +39,7 @@
 #import "ORKTaskViewController.h"
 
 #import "ORKHolePegTestRemoveStep.h"
+#import "ORKHolePegTestResult.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKResult.h"
