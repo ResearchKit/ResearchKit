@@ -496,7 +496,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    return [[[self class] allocWithZone:zone] init];
+    return [[[self class] alloc] init];
 }
 
 - (NSUInteger)hash {
