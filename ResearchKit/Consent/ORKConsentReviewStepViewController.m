@@ -42,9 +42,11 @@
 #import "ORKConsentDocument_Internal.h"
 #import "ORKConsentReviewStep.h"
 #import "ORKConsentSignature.h"
+#import "ORKConsentSignatureResult.h"
 #import "ORKFormStep.h"
 #import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
+#import "ORKSignatureResult_Private.h"
 #import "ORKSignatureStep.h"
 #import "ORKStep_Private.h"
 

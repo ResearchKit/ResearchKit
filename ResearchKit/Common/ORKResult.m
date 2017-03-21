@@ -30,27 +30,12 @@
 
 
 #import "ORKResult.h"
-
-#import "ORKConsentDocument.h"
-#import "ORKConsentSignature.h"
-
 #import "ORKResult_Private.h"
 
 #import "ORKHelpers_Internal.h"
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
-
-@interface ORKResult ()
-
-- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
-
-@property (nonatomic) NSString *descriptionSuffix;
-
-- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
-
-@end
-
 
 @implementation ORKResult
 
@@ -185,130 +170,3 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 @end
-
-
-@implementation ORKConsentSignatureResult
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, signature);
-    ORK_ENCODE_BOOL(aCoder, consented);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, signature, ORKConsentSignature);
-        ORK_DECODE_BOOL(aDecoder, consented);
-    }
-    return self;
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKConsentSignatureResult *result = [super copyWithZone:zone];
-    result.signature = _signature;
-    result.consented = _consented;
-    return result;
-}
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            ORKEqualObjects(self.signature, castObject.signature) &&
-            (self.consented == castObject.consented));
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.signature.hash;
-}
-
-- (void)applyToDocument:(ORKConsentDocument *)document {
-    __block NSUInteger indexToBeReplaced = NSNotFound;
-    [[document signatures] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ORKConsentSignature *signature = obj;
-        if ([signature.identifier isEqualToString:self.signature.identifier]) {
-            indexToBeReplaced = idx;
-            *stop = YES;
-        }
-    }];
-    
-    if (indexToBeReplaced != NSNotFound) {
-        NSMutableArray *signatures = [[document signatures] mutableCopy];
-        signatures[indexToBeReplaced] = [_signature copy];
-        document.signatures = signatures;
-    }
-}
-
-- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; signature: %@; consented: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.signature, self.consented, self.descriptionSuffix];
-}
-
-@end
-
-
-@implementation ORKSignatureResult
-
-- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
-                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath {
-    self = [super init];
-    if (self) {
-        _signatureImage = [signatureImage copy];
-        _signaturePath = ORKArrayCopyObjects(signaturePath);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_IMAGE(aCoder, signatureImage);
-    ORK_ENCODE_OBJ(aCoder, signaturePath);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_IMAGE(aDecoder, signatureImage);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, signaturePath, UIBezierPath);
-    }
-    return self;
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.signatureImage.hash ^ self.signaturePath.hash;
-}
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            ORKEqualObjects(self.signatureImage, castObject.signatureImage) &&
-            ORKEqualObjects(self.signaturePath, castObject.signaturePath));
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKSignatureResult *result = [super copyWithZone:zone];
-    result->_signatureImage = [_signatureImage copy];
-    result->_signaturePath = ORKArrayCopyObjects(_signaturePath);
-    return result;
-}
-
-@end
-
-
-
-
-
-
-
-

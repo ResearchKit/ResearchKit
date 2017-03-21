@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,36 +29,16 @@
  */
 
 
-#import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKSignatureResult.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_EXTERN const NSUInteger NumberOfPaddingSpacesForIndentationLevel;
+@interface ORKSignatureResult ()
 
-@interface ORKResult ()
-
-/**
- A boolean value indicating whether this result can be saved in a save and
- restore procedure.
- 
- This is currently considered a private method, but overriding the getter in a result
- is the correct way to prevent this result being considered as saveable for
- the purpose of deciding whether to offer a "Save" option when the user
- cancels a task in progress.
- 
- `ORKResult` subclasses should return YES if they have data that the user
- might want to be able to restore if the task were interrupted and later
- resumed from the current state.
- */
-@property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
-
-// Description formatting
-- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
-- (NSString *)descriptionSuffix;
-- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
+                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath;
 
 @end
 
 NS_ASSUME_NONNULL_END
-

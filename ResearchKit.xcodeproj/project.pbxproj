@@ -607,6 +607,11 @@
 		FF919A5C1E81C641005C2A1E /* ORKQuestionResult_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A5B1E81C63B005C2A1E /* ORKQuestionResult_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FF919A5F1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A5D1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF919A601E81CF07005C2A1E /* ORKVideoInstructionStepResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A5E1E81CF07005C2A1E /* ORKVideoInstructionStepResult.m */; };
+		FF919A631E81D04D005C2A1E /* ORKSignatureResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A611E81D04D005C2A1E /* ORKSignatureResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF919A641E81D04D005C2A1E /* ORKSignatureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A621E81D04D005C2A1E /* ORKSignatureResult.m */; };
+		FF919A661E81D168005C2A1E /* ORKSignatureResult_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A651E81D164005C2A1E /* ORKSignatureResult_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		FF919A691E81D255005C2A1E /* ORKConsentSignatureResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A671E81D255005C2A1E /* ORKConsentSignatureResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF919A6A1E81D255005C2A1E /* ORKConsentSignatureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A681E81D255005C2A1E /* ORKConsentSignatureResult.m */; };
 		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
 		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1264,6 +1269,11 @@
 		FF919A5B1E81C63B005C2A1E /* ORKQuestionResult_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKQuestionResult_Private.h; sourceTree = "<group>"; };
 		FF919A5D1E81CF07005C2A1E /* ORKVideoInstructionStepResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKVideoInstructionStepResult.h; sourceTree = "<group>"; };
 		FF919A5E1E81CF07005C2A1E /* ORKVideoInstructionStepResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVideoInstructionStepResult.m; sourceTree = "<group>"; };
+		FF919A611E81D04D005C2A1E /* ORKSignatureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSignatureResult.h; sourceTree = "<group>"; };
+		FF919A621E81D04D005C2A1E /* ORKSignatureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSignatureResult.m; sourceTree = "<group>"; };
+		FF919A651E81D164005C2A1E /* ORKSignatureResult_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKSignatureResult_Private.h; sourceTree = "<group>"; };
+		FF919A671E81D255005C2A1E /* ORKConsentSignatureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureResult.h; sourceTree = "<group>"; };
+		FF919A681E81D255005C2A1E /* ORKConsentSignatureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureResult.m; sourceTree = "<group>"; };
 		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
 		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
@@ -2164,6 +2174,8 @@
 				86C40BF81A8D7C5C00081FAC /* ORKConsentReviewStep.m */,
 				86C40BF91A8D7C5C00081FAC /* ORKConsentReviewStepViewController.h */,
 				86C40BFA1A8D7C5C00081FAC /* ORKConsentReviewStepViewController.m */,
+				FF919A671E81D255005C2A1E /* ORKConsentSignatureResult.h */,
+				FF919A681E81D255005C2A1E /* ORKConsentSignatureResult.m */,
 				B12EFF4A1AB2155C00A80147 /* Document Review */,
 			);
 			name = Review;
@@ -2189,6 +2201,9 @@
 				86C40C081A8D7C5C00081FAC /* ORKSignatureView.m */,
 				FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */,
 				FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */,
+				FF919A611E81D04D005C2A1E /* ORKSignatureResult.h */,
+				FF919A621E81D04D005C2A1E /* ORKSignatureResult.m */,
+				FF919A651E81D164005C2A1E /* ORKSignatureResult_Private.h */,
 			);
 			name = "Signature Step";
 			sourceTree = "<group>";
@@ -2696,6 +2711,7 @@
 				BF91559E1BDE8D7E007FA459 /* ORKReviewStepViewController_Internal.h in Headers */,
 				FF919A3B1E81AF1D005C2A1E /* ORKFileResult.h in Headers */,
 				FF919A561E81BEE0005C2A1E /* ORKCollectionResult_Private.h in Headers */,
+				FF919A661E81D168005C2A1E /* ORKSignatureResult_Private.h in Headers */,
 				FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */,
 				FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */,
 				FF919A471E81BA3D005C2A1E /* ORKHolePegTestResult.h in Headers */,
@@ -2788,12 +2804,14 @@
 				86C40D0E1A8D7C5C00081FAC /* ORKCustomStepView_Internal.h in Headers */,
 				866DA51F1D63D04700C9AF3F /* ORKCollector_Internal.h in Headers */,
 				86C40CF21A8D7C5C00081FAC /* ORKBodyLabel.h in Headers */,
+				FF919A691E81D255005C2A1E /* ORKConsentSignatureResult.h in Headers */,
 				866DA5271D63D04700C9AF3F /* ORKMotionActivityQueryOperation.h in Headers */,
 				106FF2B41B71F18E004EACF2 /* ORKHolePegTestPlaceHoleView.h in Headers */,
 				86C40D921A8D7C5C00081FAC /* ORKStep_Private.h in Headers */,
 				86C40CC41A8D7C5C00081FAC /* ORKCompletionStepViewController.h in Headers */,
 				FF919A431E81B904005C2A1E /* ORKPSATResult.h in Headers */,
 				FF36A49C1D1A15FC00DE8470 /* ORKTableStepViewController_Internal.h in Headers */,
+				FF919A631E81D04D005C2A1E /* ORKSignatureResult.h in Headers */,
 				86C40D7C1A8D7C5C00081FAC /* ORKScaleValueLabel.h in Headers */,
 				250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h in Headers */,
 				86C40E2C1A8D7C5C00081FAC /* ORKVisualConsentStep.h in Headers */,
@@ -3242,6 +3260,7 @@
 				959A2C0E1D68C91400841B04 /* ORKShoulderRangeOfMotionStep.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
+				FF919A641E81D04D005C2A1E /* ORKSignatureResult.m in Sources */,
 				10FF9AD01B79F5CE00ECB5B4 /* ORKHolePegTestRemoveContentView.m in Sources */,
 				10FF9AD41B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.m in Sources */,
 				618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */,
@@ -3343,6 +3362,7 @@
 				86C40C741A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.m in Sources */,
 				86AD91151AB7B97E00361FEB /* ORKQuestionStepView.m in Sources */,
 				10864CA11B27146B000F4158 /* ORKPSATStepViewController.m in Sources */,
+				FF919A6A1E81D255005C2A1E /* ORKConsentSignatureResult.m in Sources */,
 				86C40C5C1A8D7C5C00081FAC /* ORKWalkingTaskStep.m in Sources */,
 				257FCE241B4D37A80001EF06 /* ORKTowerOfHanoiTower.m in Sources */,
 				86C40C3C1A8D7C5C00081FAC /* ORKSpatialSpanGameState.m in Sources */,

@@ -47,6 +47,7 @@
 
 #import <ResearchKit/ORKCollectionResult_Private.h>
 #import <ResearchKit/ORKQuestionResult_Private.h>
+#import <ResearchKit/ORKSignatureResult_Private.h>
 #import <ResearchKit/ORKResult_Private.h>
 
 #import <ResearchKit/ORKAudioStep.h>
