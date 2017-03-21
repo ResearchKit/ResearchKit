@@ -599,6 +599,9 @@
 		FF919A4C1E81BB7E005C2A1E /* ORKTimedWalkResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A4A1E81BB7E005C2A1E /* ORKTimedWalkResult.m */; };
 		FF919A4F1E81BD05005C2A1E /* ORKTrailmakingResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A4D1E81BD05005C2A1E /* ORKTrailmakingResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF919A501E81BD05005C2A1E /* ORKTrailmakingResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A4E1E81BD05005C2A1E /* ORKTrailmakingResult.m */; };
+		FF919A531E81BEB5005C2A1E /* ORKCollectionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A511E81BEB5005C2A1E /* ORKCollectionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF919A541E81BEB5005C2A1E /* ORKCollectionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FF919A521E81BEB5005C2A1E /* ORKCollectionResult.m */; };
+		FF919A561E81BEE0005C2A1E /* ORKCollectionResult_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FF919A551E81BEDD005C2A1E /* ORKCollectionResult_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
 		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1248,6 +1251,9 @@
 		FF919A4A1E81BB7E005C2A1E /* ORKTimedWalkResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTimedWalkResult.m; sourceTree = "<group>"; };
 		FF919A4D1E81BD05005C2A1E /* ORKTrailmakingResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTrailmakingResult.h; sourceTree = "<group>"; };
 		FF919A4E1E81BD05005C2A1E /* ORKTrailmakingResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTrailmakingResult.m; sourceTree = "<group>"; };
+		FF919A511E81BEB5005C2A1E /* ORKCollectionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKCollectionResult.h; sourceTree = "<group>"; };
+		FF919A521E81BEB5005C2A1E /* ORKCollectionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKCollectionResult.m; sourceTree = "<group>"; };
+		FF919A551E81BEDD005C2A1E /* ORKCollectionResult_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKCollectionResult_Private.h; sourceTree = "<group>"; };
 		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
 		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
@@ -1944,6 +1950,9 @@
 				BC13CE3F1B0666FD0044153C /* ORKResultPredicate.h */,
 				BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */,
 				FF919A261E81A87B005C2A1E /* ORKActiveTaskResult.h */,
+				FF919A511E81BEB5005C2A1E /* ORKCollectionResult.h */,
+				FF919A521E81BEB5005C2A1E /* ORKCollectionResult.m */,
+				FF919A551E81BEDD005C2A1E /* ORKCollectionResult_Private.h */,
 			);
 			name = Result;
 			sourceTree = "<group>";
@@ -2631,6 +2640,7 @@
 				86C40C6A1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.h in Headers */,
 				86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */,
 				25ECC0951AFBD68300F3D63B /* ORKReactionTimeStep.h in Headers */,
+				FF919A531E81BEB5005C2A1E /* ORKCollectionResult.h in Headers */,
 				86C40D0A1A8D7C5C00081FAC /* ORKCustomStepView.h in Headers */,
 				BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */,
 				86C40DCE1A8D7C5C00081FAC /* ORKTaskViewController_Internal.h in Headers */,
@@ -2669,6 +2679,7 @@
 				BF91559B1BDE8D7D007FA459 /* ORKReviewStep_Internal.h in Headers */,
 				BF91559E1BDE8D7E007FA459 /* ORKReviewStepViewController_Internal.h in Headers */,
 				FF919A3B1E81AF1D005C2A1E /* ORKFileResult.h in Headers */,
+				FF919A561E81BEE0005C2A1E /* ORKCollectionResult_Private.h in Headers */,
 				FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */,
 				FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */,
 				FF919A471E81BA3D005C2A1E /* ORKHolePegTestResult.h in Headers */,
@@ -3380,6 +3391,7 @@
 				FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */,
+				FF919A541E81BEB5005C2A1E /* ORKCollectionResult.m in Sources */,
 				86C40D581A8D7C5C00081FAC /* ORKOrderedTask.m in Sources */,
 				86C40D601A8D7C5C00081FAC /* ORKQuestionStep.m in Sources */,
 				86C40E381A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.m in Sources */,

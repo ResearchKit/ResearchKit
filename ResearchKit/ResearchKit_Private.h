@@ -42,6 +42,7 @@
 #import <ResearchKit/ORKOrderedTask_Private.h>
 #import <ResearchKit/ORKPageStep_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
+#import <ResearchKit/ORKCollectionResult_Private.h>
 #import <ResearchKit/ORKResult_Private.h>
 #import <ResearchKit/ORKStepNavigationRule_Private.h>
 #import <ResearchKit/ORKAudioLevelNavigationRule.h>

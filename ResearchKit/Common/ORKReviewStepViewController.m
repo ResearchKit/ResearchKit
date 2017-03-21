@@ -43,6 +43,7 @@
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKFormStep.h"
 #import "ORKInstructionStep.h"
 #import "ORKQuestionStep.h"

@@ -38,6 +38,7 @@
 #import "ORKVerticalContainerView.h"
 
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKPSATResult.h"
 #import "ORKPSATStep.h"
 #import "ORKResult.h"

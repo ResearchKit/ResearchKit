@@ -39,6 +39,7 @@
 #import "ORKPasscodeViewController.h"
 #import "ORKStepViewController_Internal.h"
 
+#import "ORKCollectionResult_Private.h"
 #import "ORKPasscodeStep.h"
 #import "ORKResult.h"
 

@@ -32,6 +32,7 @@
 
 #import "ORKAudioLevelNavigationRule.h"
 
+#import "ORKCollectionResult_Private.h"
 #import "ORKFileResult.h"
 #import "ORKResultPredicate.h"
 #import "ORKStepNavigationRule_Internal.h"

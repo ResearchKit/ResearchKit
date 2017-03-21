@@ -36,6 +36,7 @@
 
 #import "ORKImageCaptureStepViewController.h"
 
+#import "ORKCollectionResult_Private.h"
 #import "ORKFileResult.h"
 #import "ORKResult.h"
 #import "ORKStep.h"

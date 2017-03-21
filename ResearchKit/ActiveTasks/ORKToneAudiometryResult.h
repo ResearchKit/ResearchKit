@@ -34,6 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKToneAudiometrySample;
+
 /**
  The `ORKToneAudiometryResult` class records the results of a tone audiometry test.
  

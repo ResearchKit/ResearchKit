@@ -42,6 +42,7 @@
 #import "ORKVisualConsentStepViewController.h"
 
 #import "ORKActiveStep.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKFormStep.h"
 #import "ORKInstructionStep.h"
 #import "ORKOrderedTask.h"

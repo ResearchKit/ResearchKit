@@ -40,6 +40,7 @@
 #import "ORKStepViewController_Internal.h"
 
 #import "ORKActiveStepView.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKTappingIntervalResult.h"
 #import "ORKStep.h"
 

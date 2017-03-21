@@ -38,6 +38,7 @@
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKConsentDocument_Internal.h"
 #import "ORKConsentReviewStep.h"
 #import "ORKConsentSignature.h"
