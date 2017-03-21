@@ -36,33 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN const NSUInteger NumberOfPaddingSpacesForIndentationLevel;
 
-/**
- The `ORKDataResult` is an `ORKResult` subclass for returning raw `NSData` from a step.
- 
- This is considered private, and is not currently used by any of the pre-defined
- active tasks.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKDataResult : ORKResult
-
-/**
- The MIME contentType for the result.
- */
-@property (nonatomic, copy, nullable) NSString *contentType;
-
-/**
- A filename that could be used when archiving.
- */
-@property (nonatomic, copy, nullable) NSString *filename;
-
-/**
- The actual data in the result.
- */
-@property (nonatomic, copy, nullable) NSData *data;
-
-@end
-
-
 @interface ORKResult ()
 
 /**

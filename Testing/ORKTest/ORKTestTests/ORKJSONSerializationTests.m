@@ -725,7 +725,9 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     
         // NSData and NSDateComponents in your properties mess up the following test.
         // NSDateComponents - seems to be due to serializing and then deserializing introducing a leap month:no flag.
-        if (aClass == [NSDateComponents class] || aClass == [ORKDateQuestionResult class] || aClass == [ORKDateAnswerFormat class] || aClass == [ORKDataResult class]) {
+        if (aClass == [NSDateComponents class] ||
+            aClass == [ORKDateQuestionResult class] ||
+            aClass == [ORKDateAnswerFormat class]) {
             continue;
         }
         
