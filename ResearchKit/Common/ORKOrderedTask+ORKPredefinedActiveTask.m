@@ -30,7 +30,8 @@
  */
 
 
-#import "ORKOrderedTask.h"
+#import "ORKOrderedTask+ORKPredefinedActiveTask.h"
+#import "ORKOrderedTask_Private.h"
 
 #import "ORKAudioStepViewController.h"
 #import "ORKCountdownStepViewController.h"
@@ -48,6 +49,8 @@
 #import "ORKAudioStep.h"
 #import "ORKCompletionStep.h"
 #import "ORKCountdownStep.h"
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestRemoveStep.h"
 #import "ORKTouchAnywhereStep.h"
 #import "ORKFitnessStep.h"
 #import "ORKFormStep.h"
@@ -74,217 +77,9 @@
 #import "UIImage+ResearchKit.h"
 #import <limits.h>
 
-ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA = @"A";
-ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB = @"B";
-
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     return (ORKTaskProgress){.current=current, .total=total};
-}
-
-@implementation ORKOrderedTask {
-    NSString *_identifier;
-}
-
-+ (instancetype)new {
-    ORKThrowMethodUnavailableException();
-}
-
-- (instancetype)init {
-    ORKThrowMethodUnavailableException();
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
-    self = [super init];
-    if (self) {
-        ORKThrowInvalidArgumentExceptionIfNil(identifier);
-        
-        _identifier = [identifier copy];
-        _steps = steps;
-        
-        [self validateParameters];
-    }
-    return self;
-}
-
-- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps {
-    ORKOrderedTask *task = [self copyWithZone:nil];
-    task->_steps = ORKArrayCopyObjects(steps);
-    return task;
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKOrderedTask *task = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]
-                                                                           steps:ORKArrayCopyObjects(_steps)];
-    return task;
-}
-
-- (BOOL)isEqual:(id)object {
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
-    __typeof(self) castObject = object;
-    return (ORKEqualObjects(self.identifier, castObject.identifier)
-            && ORKEqualObjects(self.steps, castObject.steps));
-}
-
-- (NSUInteger)hash {
-    return _identifier.hash ^ _steps.hash;
-}
-
-#pragma mark - ORKTask
-
-- (void)validateParameters {
-    NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( self.steps.count != uniqueIdentifiers.count );
-    
-    if (itemsHaveNonUniqueIdentifiers) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Each step should have a unique identifier" userInfo:nil];
-    }
-}
-
-- (NSString *)identifier {
-    return _identifier;
-}
-
-- (NSUInteger)indexOfStep:(ORKStep *)step {
-    NSUInteger index = [_steps indexOfObject:step];
-    if (index == NSNotFound) {
-        NSArray *identifiers = [_steps valueForKey:@"identifier"];
-        index = [identifiers indexOfObject:step.identifier];
-    }
-    return index;
-}
-
-- (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    NSArray *steps = _steps;
-    
-    if (steps.count <= 0) {
-        return nil;
-    }
-    
-    ORKStep *currentStep = step;
-    ORKStep *nextStep = nil;
-    
-    if (currentStep == nil) {
-        nextStep = steps[0];
-    } else {
-        NSUInteger index = [self indexOfStep:step];
-        
-        if (NSNotFound != index && index != (steps.count - 1)) {
-            nextStep = steps[index + 1];
-        }
-    }
-    return nextStep;
-}
-
-- (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    NSArray *steps = _steps;
-    
-    if (steps.count <= 0) {
-        return nil;
-    }
-    
-    ORKStep *currentStep = step;
-    ORKStep *nextStep = nil;
-    
-    if (currentStep == nil) {
-        nextStep = nil;
-        
-    } else {
-        NSUInteger index = [self indexOfStep:step];
-        
-        if (NSNotFound != index && index != 0) {
-            nextStep = steps[index - 1];
-        }
-    }
-    return nextStep;
-}
-
-- (ORKStep *)stepWithIdentifier:(NSString *)identifier {
-    __block ORKStep *step = nil;
-    [_steps enumerateObjectsUsingBlock:^(ORKStep *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj.identifier isEqualToString:identifier]) {
-            step = obj;
-            *stop = YES;
-        }
-    }];
-    return step;
-}
-
-- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
-    ORKTaskProgress progress;
-    progress.current = [self indexOfStep:step];
-    progress.total = _steps.count;
-    
-    if (![step showsProgress]) {
-        progress.total = 0;
-    }
-    return progress;
-}
-
-- (NSSet *)requestedHealthKitTypesForReading {
-    NSMutableSet *healthTypes = [NSMutableSet set];
-    for (ORKStep *step in self.steps) {
-        NSSet *stepSet = [step requestedHealthKitTypesForReading];
-        if (stepSet) {
-            [healthTypes unionSet:stepSet];
-        }
-    }
-    return healthTypes.count ? healthTypes : nil;
-}
-
-- (NSSet *)requestedHealthKitTypesForWriting {
-    return nil;
-}
-
-- (ORKPermissionMask)requestedPermissions {
-    ORKPermissionMask mask = ORKPermissionNone;
-    for (ORKStep *step in self.steps) {
-        mask |= [step requestedPermissions];
-    }
-    return mask;
-}
-
-- (BOOL)providesBackgroundAudioPrompts {
-    BOOL providesAudioPrompts = NO;
-    for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKActiveStep class]]) {
-            ORKActiveStep *activeStep = (ORKActiveStep *)step;
-            if ([activeStep hasVoice] || [activeStep hasCountDown]) {
-                providesAudioPrompts = YES;
-                break;
-            }
-        }
-    }
-    return providesAudioPrompts;
-}
-
-#pragma mark - NSSecureCoding
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, identifier);
-    ORK_ENCODE_OBJ(aCoder, steps);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, steps, ORKStep);
-        
-        for (ORKStep *step in _steps) {
-            if ([step isKindOfClass:[ORKStep class]]) {
-                [step setTask:self];
-            }
-        }
-    }
-    return self;
 }
 
 #pragma mark - Predefined
@@ -297,52 +92,36 @@ NSString *const ORKInstruction4StepIdentifier = @"instruction4";
 NSString *const ORKInstruction5StepIdentifier = @"instruction5";
 NSString *const ORKInstruction6StepIdentifier = @"instruction6";
 NSString *const ORKInstruction7StepIdentifier = @"instruction7";
+
 NSString *const ORKCountdownStepIdentifier = @"countdown";
 NSString *const ORKCountdown1StepIdentifier = @"countdown1";
 NSString *const ORKCountdown2StepIdentifier = @"countdown2";
 NSString *const ORKCountdown3StepIdentifier = @"countdown3";
 NSString *const ORKCountdown4StepIdentifier = @"countdown4";
 NSString *const ORKCountdown5StepIdentifier = @"countdown5";
-NSString *const ORKTouchAnywhereStepIdentifier = @"touch.anywhere";
-NSString *const ORKAudioStepIdentifier = @"audio";
-NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
-NSString *const ORKTappingStepIdentifier = @"tapping";
+
+NSString *const ORKConclusionStepIdentifier = @"conclusion";
+
 NSString *const ORKActiveTaskLeftHandIdentifier = @"left";
+NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
 NSString *const ORKActiveTaskRightHandIdentifier = @"right";
 NSString *const ORKActiveTaskSkipHandStepIdentifier = @"skipHand";
-NSString *const ORKConclusionStepIdentifier = @"conclusion";
-NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
-NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
-NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.motion";
-NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
-NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
-NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-NSString *const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
-NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
-NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
-NSString *const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
-NSString *const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
-NSString *const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
-NSString *const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
-NSString *const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
-NSString *const ORKTimedWalkTurnAroundStepIdentifier = @"timed.walk.turn.around";
-NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
-NSString *const ORKTremorTestInLapStepIdentifier = @"tremor.handInLap";
-NSString *const ORKTremorTestExtendArmStepIdentifier = @"tremor.handAtShoulderLength";
-NSString *const ORKTremorTestBendArmStepIdentifier = @"tremor.handAtShoulderLengthWithElbowBent";
-NSString *const ORKTremorTestTouchNoseStepIdentifier = @"tremor.handToNose";
-NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
-NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
-NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
-NSString *const ORKPSATStepIdentifier = @"psat";
+
+NSString *const ORKTouchAnywhereStepIdentifier = @"touch.anywhere";
+
 NSString *const ORKAudioRecorderIdentifier = @"audio";
 NSString *const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
 NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
 NSString *const ORKLocationRecorderIdentifier = @"location";
 NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
+
+void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
+    [step validateParameters];
+    [array addObject:step];
+}
+
+@implementation ORKOrderedTask (ORKMakeTaskUtilities)
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -352,22 +131,168 @@ NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
-    [step validateParameters];
-    [array addObject:step];
++ (NSDateComponentsFormatter *)textTimeFormatter {
+    NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
+    
+    // Exception list: Korean, Chinese (all), Thai, and Vietnamese.
+    NSArray *nonSpelledOutLanguages = @[@"ko", @"zh", @"th", @"vi", @"ja"];
+    NSString *currentLanguage = [[NSBundle mainBundle] preferredLocalizations].firstObject;
+    NSString *currentLanguageCode = [NSLocale componentsFromLocaleIdentifier:currentLanguage][NSLocaleLanguageCode];
+    if ((currentLanguageCode != nil) && [nonSpelledOutLanguages containsObject:currentLanguageCode]) {
+        formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+    }
+    
+    formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
+    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDropAll;
+    return formatter;
 }
 
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                       intendedUseDescription:(NSString *)intendedUseDescription
-                                                     duration:(NSTimeInterval)duration
-                                                      options:(ORKPredefinedTaskOption)options {
-    return [self twoFingerTappingIntervalTaskWithIdentifier:identifier
-                                     intendedUseDescription:intendedUseDescription
-                                                   duration:duration
-                                                handOptions:0
-                                                    options:options];
-}
+@end
+
+
+@implementation ORKOrderedTask (ORKPredefinedActiveTask)
+
+
+#pragma mark - holePegTestTask
+
+NSString *const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
+NSString *const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
+NSString *const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
+NSString *const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
+
++ (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                              dominantHand:(ORKBodySagittal)dominantHand
+                                              numberOfPegs:(int)numberOfPegs
+                                                 threshold:(double)threshold
+                                                   rotated:(BOOL)rotated
+                                                 timeLimit:(NSTimeInterval)timeLimit
+                                                   options:(ORKPredefinedTaskOption)options {
     
+    NSMutableArray *steps = [NSMutableArray array];
+    BOOL dominantHandLeft = (dominantHand == ORKBodySagittalLeft);
+    NSTimeInterval stepDuration = (timeLimit == 0) ? CGFLOAT_MAX : timeLimit;
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        NSString *pegs = [NSNumberFormatter localizedStringFromNumber:@(numberOfPegs) numberStyle:NSNumberFormatterNoStyle];
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), pegs];
+            step.text = intendedUseDescription;
+            step.detailText = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_%@", nil), pegs];
+            step.image = [UIImage imageNamed:@"phoneholepeg" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), pegs];
+            step.text = dominantHandLeft ? [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@", nil), pegs, pegs] : [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@", nil), pegs, pegs];
+            step.detailText = ORKLocalizedString(@"HOLE_PEG_TEST_CALL_TO_ACTION", nil);
+            UIImage *image1 = [UIImage imageNamed:@"holepegtest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            UIImage *image2 = [UIImage imageNamed:@"holepegtest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            UIImage *image3 = [UIImage imageNamed:@"holepegtest3" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            UIImage *image4 = [UIImage imageNamed:@"holepegtest4" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            UIImage *image5 = [UIImage imageNamed:@"holepegtest5" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            UIImage *image6 = [UIImage imageNamed:@"holepegtest6" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.image = [UIImage animatedImageWithImages:@[image1, image2, image3, image4, image5, image6] duration:4];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        {
+            ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestDominantPlaceStepIdentifier];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil);
+            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
+            step.movingDirection = dominantHand;
+            step.dominantHandTested = YES;
+            step.numberOfPegs = numberOfPegs;
+            step.threshold = threshold;
+            step.rotated = rotated;
+            step.shouldTintImages = YES;
+            step.stepDuration = stepDuration;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestDominantRemoveStepIdentifier];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil);
+            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
+            step.movingDirection = (dominantHand == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft;
+            step.dominantHandTested = YES;
+            step.numberOfPegs = numberOfPegs;
+            step.threshold = threshold;
+            step.shouldTintImages = YES;
+            step.stepDuration = stepDuration;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestNonDominantPlaceStepIdentifier];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil);
+            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
+            step.movingDirection = (dominantHand == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft;
+            step.dominantHandTested = NO;
+            step.numberOfPegs = numberOfPegs;
+            step.threshold = threshold;
+            step.rotated = rotated;
+            step.shouldTintImages = YES;
+            step.stepDuration = stepDuration;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestNonDominantRemoveStepIdentifier];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil);
+            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
+            step.movingDirection = dominantHand;
+            step.dominantHandTested = NO;
+            step.numberOfPegs = numberOfPegs;
+            step.threshold = threshold;
+            step.shouldTintImages = YES;
+            step.stepDuration = stepDuration;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKCompletionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    
+    // The task is actually dynamic. The direct navigation rules are used for skipping the peg
+    // removal steps if the user doesn't succeed in placing all the pegs in the allotted time
+    // (the rules are removed from `ORKHolePegTestPlaceStepViewController` if she succeeds).
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    ORKStepNavigationRule *navigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKHolePegTestNonDominantPlaceStepIdentifier];
+    [task setNavigationRule:navigationRule forTriggerStepIdentifier:ORKHolePegTestDominantPlaceStepIdentifier];
+    navigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKConclusionStepIdentifier];
+    [task setNavigationRule:navigationRule forTriggerStepIdentifier:ORKHolePegTestNonDominantPlaceStepIdentifier];
+    
+    return task;
+}
+
+
+#pragma mark - twoFingerTappingInterval
+
+NSString *const ORKTappingStepIdentifier = @"tapping";
+
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(NSString *)intendedUseDescription
                                                       duration:(NSTimeInterval)duration
@@ -519,23 +444,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(NSString *)intendedUseDescription
-                          speechInstruction:(NSString *)speechInstruction
-                     shortSpeechInstruction:(NSString *)shortSpeechInstruction
-                                   duration:(NSTimeInterval)duration
-                          recordingSettings:(NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options {
-    
-    return [self audioTaskWithIdentifier:identifier
-                  intendedUseDescription:intendedUseDescription
-                       speechInstruction:speechInstruction
-                  shortSpeechInstruction:shortSpeechInstruction
-                                duration:duration
-                       recordingSettings:recordingSettings
-                         checkAudioLevel:NO
-                                 options:options];
-}
+
+#pragma mark - audioTask
+
+NSString *const ORKAudioStepIdentifier = @"audio";
+NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
 
 + (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                               intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -635,22 +548,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (NSDateComponentsFormatter *)textTimeFormatter {
-    NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
-    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
-    
-    // Exception list: Korean, Chinese (all), Thai, and Vietnamese.
-    NSArray *nonSpelledOutLanguages = @[@"ko", @"zh", @"th", @"vi", @"ja"];
-    NSString *currentLanguage = [[NSBundle mainBundle] preferredLocalizations].firstObject;
-    NSString *currentLanguageCode = [NSLocale componentsFromLocaleIdentifier:currentLanguage][NSLocaleLanguageCode];
-    if ((currentLanguageCode != nil) && [nonSpelledOutLanguages containsObject:currentLanguageCode]) {
-        formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-    }
-    
-    formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDropAll;
-    return formatter;
-}
+
+#pragma mark - fitnessCheckTask
+
+NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
 
 + (ORKOrderedTask *)fitnessCheckTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(NSString *)intendedUseDescription
@@ -772,6 +674,13 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     return task;
 }
+
+
+#pragma mark - shortWalkTask
+
+NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
+NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
 
 + (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(NSString *)intendedUseDescription
@@ -909,6 +818,8 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 
+#pragma mark - walkBackAndForthTask
+
 + (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)identifier
                                 intendedUseDescription:(NSString *)intendedUseDescription
                                           walkDuration:(NSTimeInterval)walkDuration
@@ -1020,6 +931,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
+
+#pragma mark - kneeRangeOfMotionTask
+
+NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
+
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                  intendedUseDescription:(NSString *)intendedUseDescription
@@ -1087,6 +1003,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
+
+#pragma mark - shoulderRangeOfMotionTask
+
+NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.motion";
+
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                                  limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                      intendedUseDescription:(NSString *)intendedUseDescription
@@ -1152,6 +1073,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
+
+
+#pragma mark - spatialSpanMemoryTask
+
+NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
 
 + (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)identifier
                                  intendedUseDescription:(NSString *)intendedUseDescription
@@ -1226,6 +1152,12 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
+
+#pragma mark - toneAudiometryTask
+
+NSString *const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
+NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
+
 + (ORKOrderedTask *)toneAudiometryTaskWithIdentifier:(NSString *)identifier
                               intendedUseDescription:(nullable NSString *)intendedUseDescription
                                    speechInstruction:(nullable NSString *)speechInstruction
@@ -1296,6 +1228,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
+
+#pragma mark - towerOfHanoiTask
+
+NSString *const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
+
 + (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
                                      numberOfDisks:(NSUInteger)numberOfDisks
@@ -1341,6 +1278,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     return task;
 }
+
+
+#pragma mark - reactionTimeTask
+
+NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
 
 + (ORKOrderedTask *)reactionTimeTaskWithIdentifier:(NSString *)identifier
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -1402,6 +1344,16 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     return task;
 }
+
+
+#pragma mark - timedWalkTask
+
+NSString *const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
+NSString *const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
+NSString *const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
+NSString *const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
+NSString *const ORKTimedWalkTurnAroundStepIdentifier = @"timed.walk.turn.around";
+NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
 
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -1534,6 +1486,9 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
+
+
+#pragma mark - timedWalkTask
 
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -1682,6 +1637,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
+
+#pragma mark - PSATTask
+
+NSString *const ORKPSATStepIdentifier = @"psat";
+
 + (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
                     intendedUseDescription:(nullable NSString *)intendedUseDescription
                           presentationMode:(ORKPSATPresentationMode)presentationMode
@@ -1755,6 +1715,15 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     return task;
 }
+
+
+#pragma mark - tremorTestTask
+
+NSString *const ORKTremorTestInLapStepIdentifier = @"tremor.handInLap";
+NSString *const ORKTremorTestExtendArmStepIdentifier = @"tremor.handAtShoulderLength";
+NSString *const ORKTremorTestBendArmStepIdentifier = @"tremor.handAtShoulderLengthWithElbowBent";
+NSString *const ORKTremorTestTouchNoseStepIdentifier = @"tremor.handToNose";
+NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
 
 + (NSString *)stepIdentifier:(NSString *)stepIdentifier withHandIdentifier:(NSString *)handIdentifier {
     return [NSString stringWithFormat:@"%@.%@", stepIdentifier, handIdentifier];
@@ -2204,6 +2173,11 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     return task;
 }
+
+
+#pragma mark - trailmakingTask
+
+NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
 
 + (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(nullable NSString *)intendedUseDescription

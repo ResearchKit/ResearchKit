@@ -30,209 +30,48 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKTask.h>
+#import <ResearchKit/ORKOrderedTask.h>
+
+
+@class ORKNavigableOrderedTask;
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKNavigableOrderedTask;
-
-/**
- The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a 
- task that assumes a fixed order for its steps.
- 
- In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can
- be represented as an ordered task.
- 
- If you want further custom conditional behaviors in a task, it can be easier to subclass
- `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
- to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:` and
- `stepBeforeStep:withResult:`, and call super for all other methods.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-/// @name Initializers
-
-/**
- Returns an initialized ordered task using the specified identifier and array of steps.
- 
- @param identifier  The unique identifier for the task.
- @param steps       An array of `ORKStep` objects in the order in which they should be presented.
- 
- @return An initialized ordered task.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
-
-/**
- Returns an ordered task initialized from data in the given unarchiver.
- 
- An ordered task can be serialized and deserialized with `NSKeyedArchiver`. Note
- that this serialization includes strings that might need to be
- localized.
- 
- @param aDecoder    The coder from which to initialize the ordered task.
- 
- @return An initialized ordered task.
- */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-/// @name Properties
-
-/**
- The array of steps in the task. (read-only)
- 
- Each element in the array must be a subclass of `ORKStep`.
- The associated task view controller presents the steps in
- array order.
- */
-@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
-
-
-/**
- Return a mutated copy of self with the steps included in the given array.
- 
- This method is intended to allow for mutating an ordered task (or subclass) while retaining
- the original class and properties that may not be publicly exposed, but with a mutated set
- of steps. An example of where this might be useful is if before performing an `ORKPredefinedActiveTask`, 
- the app needed to query the participant about medications, diet or sleep. The app
- would need to mutate the steps in order to insert their own steps. While an ORKOrderedTask could
- then be created with the same identifier and the new steps, subclass information such rules on an
- `ORKNavigableOrderedTask` would be lost.
- 
- @param steps       An array of `ORKStep` objects in the order in which they should be presented.
- 
- @return            An initialized ordered task.
- */
-- (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps;
-
-/**
- Find the index of a given step.
- 
- @param step        The step to look for
- @return            The index position of the step (or NSNotFound if not found)
- */
-- (NSUInteger)indexOfStep:(ORKStep *)step;
-
-@end
-
-
-/**
- The `ORKPredefinedTaskOption` flags let you exclude particular behaviors from the predefined active
- tasks in the predefined category of `ORKOrderedTask`.
- 
- By default, all predefined tasks include instructions and conclusion steps, and may also include
- one or more data collection recorder configurations. Although not all predefined tasks include all
- of these data collection types, the predefined task option flags can be used to explicitly specify
- that a task option not be included.
- */
-
-typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
-    /// Default behavior.
-    ORKPredefinedTaskOptionNone = 0,
-    
-    /// Exclude the initial instruction steps.
-    ORKPredefinedTaskOptionExcludeInstructions = (1 << 0),
-    
-    /// Exclude the conclusion step.
-    ORKPredefinedTaskOptionExcludeConclusion = (1 << 1),
-    
-    /// Exclude accelerometer data collection.
-    ORKPredefinedTaskOptionExcludeAccelerometer = (1 << 2),
-    
-    /// Exclude device motion data collection.
-    ORKPredefinedTaskOptionExcludeDeviceMotion = (1 << 3),
-    
-    /// Exclude pedometer data collection.
-    ORKPredefinedTaskOptionExcludePedometer = (1 << 4),
-    
-    /// Exclude location data collection.
-    ORKPredefinedTaskOptionExcludeLocation = (1 << 5),
-    
-    /// Exclude heart rate data collection.
-    ORKPredefinedTaskOptionExcludeHeartRate = (1 << 6),
-    
-    /// Exclude audio data collection.
-    ORKPredefinedTaskOptionExcludeAudio = (1 << 7)
-} ORK_ENUM_AVAILABLE;
-
-/**
- Values that identify the hand(s) to be used in an active task.
- 
- By default, the participant will be asked to use their most affected hand.
- */
-typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
-    /// Which hand to use is undefined
-    ORKPredefinedTaskHandOptionUnspecified = 0,
-    
-    /// Task should test the left hand
-    ORKPredefinedTaskHandOptionLeft = 1 << 1,
-    
-    /// Task should test the right hand
-    ORKPredefinedTaskHandOptionRight = 1 << 2,
-    
-    /// Task should test both hands (random order)
-    ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
-} ORK_ENUM_AVAILABLE;
-
-/**
- The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
- tasks in the predefined Tremor `ORKOrderedTask`.
- 
- By default, all predefined active tasks will be included. The tremor active task option flags can
- be used to explicitly specify that an active task is not to be included.
- */
-typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
-    /// Default behavior.
-    ORKTremorActiveTaskOptionNone = 0,
-    
-    /// Exclude the hand-in-lap steps.
-    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
-    
-    /// Exclude the hand-extended-at-shoulder-height steps.
-    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
-    
-    /// Exclude the elbow-bent-at-shoulder-height steps.
-    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
-    
-    /// Exclude the elbow-bent-touch-nose steps.
-    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
-    
-    /// Exclude the queen-wave steps.
-    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
-} ORK_ENUM_AVAILABLE;
-
-/**
- Values that identify the left or right limb to be used in an active task.
-*/
-typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
-    /// Which limb to use is undefined
-    ORKPredefinedTaskLimbOptionUnspecified = 0,
-    
-    /// Task should test the left limb
-    ORKPredefinedTaskLimbOptionLeft = 1 << 1,
-    
-    /// Task should test the right limb
-    ORKPredefinedTaskLimbOptionRight = 1 << 2,
-    
-    /// Task should test the both limbs (random order)
-    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
-} ORK_ENUM_AVAILABLE;
-
-typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
-
-/// Trail making for Type-A trail where the pattern is 1-2-3-4-5-6-7
-ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
-
-/// Trail making for Type-B trail where the pattern is 1-A-2-B-3-C-4-D-5-E-6-F-7
-ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
-
-
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
+
+
+/**
+ Returns a predefined task that measures the upper extremity function.
+ 
+ In a hole peg test task, the participant is asked to fill holes with pegs.
+ 
+ A hole peg test task can be used to assess arm and hand function, especially in patients with severe disability.
+ 
+ Data collected in this task is in the form of an `ORKHolePegTestResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text will be displayed.
+ @param dominantHand            The participant dominant hand that will be tested first.
+ @param numberOfPegs            The number of pegs to place in the pegboard.
+ @param threshold               The threshold value used for the detection area.
+ @param rotated                 A test variant that also requires peg rotation.
+ @param timeLimit               The duration allowed to validate the peg position.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                              dominantHand:(ORKBodySagittal)dominantHand
+                                              numberOfPegs:(int)numberOfPegs
+                                                 threshold:(double)threshold
+                                                   rotated:(BOOL)rotated
+                                                 timeLimit:(NSTimeInterval)timeLimit
+                                                   options:(ORKPredefinedTaskOption)options;
+
 
 /**
  Returns a predefined task that consists of a fitness check.
@@ -338,16 +177,35 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                           restDuration:(NSTimeInterval)restDuration
                                                options:(ORKPredefinedTaskOption)options;
 
+
+/**
+ The knee range of motion task returns a task that measures the range of motion for either a left or right knee.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param limbOption              Which knee is being measured.
+ @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ */
 + (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                  intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                 options:(ORKPredefinedTaskOption)options;
 
 
+/**
+ The shoulder range of motion task returns a task that measures the range of motion for either a left or right shoulder.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param limbOption              Which shoulder is being measured.
+ @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ */
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
                                                  limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                      intendedUseDescription:(nullable NSString *)intendedUseDescription
                                                     options:(ORKPredefinedTaskOption)options;
+
+
 /**
  Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
@@ -389,16 +247,6 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                      checkAudioLevel:(BOOL)checkAudioLevel
                                              options:(ORKPredefinedTaskOption)options;
 
-/**
- @Deprecated
- */
-+ (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                          speechInstruction:(nullable NSString *)speechInstruction
-                     shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
-                                   duration:(NSTimeInterval)duration
-                          recordingSettings:(nullable NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
  Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
@@ -427,13 +275,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                                       duration:(NSTimeInterval)duration
                                                    handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                        options:(ORKPredefinedTaskOption)options;
-/**
- @Deprecated
- */
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                                      duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options __deprecated;
+
 
 /**
  Returns a predefined task that tests spatial span memory.
@@ -531,6 +373,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                         toneDuration:(NSTimeInterval)toneDuration
                                              options:(ORKPredefinedTaskOption)options;
 
+
 /**
  Returns a predefined task that tests the participant's reaction time.
  
@@ -584,6 +427,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
 
+
 /**
  Returns a predefined task that consists of a Tower of Hanoi puzzle.
  
@@ -607,6 +451,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
                                      numberOfDisks:(NSUInteger)numberOfDisks
                                            options:(ORKPredefinedTaskOption)options;
+
 
 /**
  Returns a predefined task that consists of a timed walk.
@@ -643,6 +488,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                       timeLimit:(NSTimeInterval)timeLimit
                      includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options;
+
 
 /**
  Returns a predefined task that consists of a timed walk, with a distinct turn around step.
@@ -682,6 +528,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                      includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
                                         options:(ORKPredefinedTaskOption)options;
 
+
 /**
  Returns a predefined task that consists of the paced serial addition test (PSAT).
  
@@ -715,6 +562,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
 
+
 /**
  Returns a predefined task that measures hand tremor.
  
@@ -738,6 +586,7 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                         activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                   options:(ORKPredefinedTaskOption)options;
+
 
 /**
  Returns a predefined task that measures visual attention and task switching.
