@@ -301,6 +301,9 @@
     else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
     }
+    else if ([identifier isEqualToString:CompletionStepTaskIdentifier]) {
+        return [self makeCompletionStepTask];
+    }
     
     return nil;
 }
