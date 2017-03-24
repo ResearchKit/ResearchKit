@@ -37,6 +37,7 @@
 
 #define DefineStringKey(x) static NSString *const x = @#x
 
+// Onboarding Tasks
 DefineStringKey(ConsentTaskIdentifier);
 DefineStringKey(ConsentReviewTaskIdentifier);
 DefineStringKey(EligibilityFormTaskIdentifier);
@@ -46,11 +47,12 @@ DefineStringKey(RegistrationTaskIdentifier);
 DefineStringKey(VerificationTaskIdentifier);
 
 DefineStringKey(CompletionStepTaskIdentifier);
+// Question Step Tasks
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(VideoCaptureTaskIdentifier);
 DefineStringKey(ImageChoicesTaskIdentifier);
-DefineStringKey(InstantiateCustomVCTaskIdentifier);
+DefineStringKey(CustomViewControllerTaskIdentifier);
 DefineStringKey(LocationTaskIdentifier);
 DefineStringKey(ScalesTaskIdentifier);
 DefineStringKey(ColorScalesTaskIdentifier);
@@ -59,13 +61,14 @@ DefineStringKey(OptionalFormTaskIdentifier);
 DefineStringKey(SelectionSurveyTaskIdentifier);
 DefineStringKey(PredicateTestsTaskIdentifier);
 
+// Active Taks
 DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
-DefineStringKey(AuxillaryImageTaskIdentifier);
+DefineStringKey(AuxiliaryImageStepTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
-DefineStringKey(FootnoteTaskIdentifier);
+DefineStringKey(FootnoteStepTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(IconImageTaskIdentifier);
+DefineStringKey(IconImageStepTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
@@ -79,6 +82,7 @@ DefineStringKey(TremorTaskIdentifier);
 DefineStringKey(TremorRightHandTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
 
+// Passcode
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
@@ -86,7 +90,7 @@ DefineStringKey(DynamicTaskIdentifier);
 DefineStringKey(InterruptibleTaskIdentifier);
 DefineStringKey(NavigableOrderedTaskIdentifier);
 DefineStringKey(NavigableLoopTaskIdentifier);
-DefineStringKey(WaitTaskIdentifier);
+DefineStringKey(WaitStepTaskIdentifier);
 
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
@@ -103,6 +107,11 @@ DefineStringKey(SignatureStepTaskIdentifier);
 DefineStringKey(VideoInstructionStepTaskIdentifier);
 DefineStringKey(PageStepTaskIdentifier);
 
+// Misc Tasks
+
+
+
+// Misc Items
 @protocol ORKTask;
 @class ORKConsentDocument;
 @class ORKTaskResult;

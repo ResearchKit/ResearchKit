@@ -220,87 +220,97 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                         views:views]];
     
     _buttonSectionNames = @[
-                            @"Onboarding",
-                            @"Question Steps",
                             @"Active Tasks",
-                            @"Passcode",
-                            @"Review Step",
+                            @"Forms",
+                            @"Onboarding",
+                            @"Passcode Management",
+                            @"Question Steps",
+                            @"Task Customization",
+                            @"Task Review",
+                            @"Utility Steps",
                             @"Miscellaneous",
                             ];
-    _buttonTitles = @[ @[ // Onboarding
-                           @"Consent",
-                           @"Consent Review",
-                           @"Eligibility Form",
-                           @"Eligibility Survey",
-                           @"Login",
-                           @"Registration",
-                           @"Verification",
-                           ],
-                       @[ // Question Steps
-                           @"Date Pickers",
-                           @"Image Capture",
-                           @"Video Capture",
-                           @"Image Choices",
-                           @"Location",
-                           @"Scale",
-                           @"Scale Color Gradient",
-                           @"Mini Form",
-                           @"Optional Form",
-                           @"Selection Survey",
-                           ],
-                       @[ // Active Tasks
-                           @"Active Step Task",
-                           @"Audio Task",
-                           @"Fitness Task",
-                           @"GAIT Task",
-                           @"Hole Peg Test Task",
-                           @"Memory Game Task",
-                           @"PSAT Task",
-                           @"Reaction Time Task",
-                           @"Trail Making Task",
-                           @"Timed Walk Task",
-                           @"Tone Audiometry Task",
-                           @"Tower Of Hanoi Task",
-                           @"Two Finger Tapping Task",
-                           @"Walk And Turn Task",
-                           @"Hand Tremor Task",
-                           @"Right Hand Tremor Task",
-                           ],
-                       @[ // Passcode
-                           @"Authenticate Passcode",
-                           @"Create Passcode",
-                           @"Edit Passcode",
-                           @"Remove Passcode",
-                           ],
-                       @[ // Review Step
-                           @"Embedded Review Task",
-                           @"Standalone Review Task",
-                           ],
-                       @[ // Miscellaneous
-                           @"Custom Navigation Item",
-                           @"Dynamic Task",
-                           @"Interruptible Task",
-                           @"Navigable Ordered Task",
-                           @"Navigable Loop Task",
-                           @"Predicate Tests",
-                           @"Test Charts",
-                           @"Test Charts Performance",
-                           @"Toggle Tint Color",
-                           @"Wait Task",
-                           @"Step Will Disappear",
-                           @"Confirmation Form Item",
-                           @"Continue Button",
-                           @"Instantiate Custom VC",
-                           @"Table Step",
-                           @"Signature Step",
-                           @"Auxillary Image",
-                           @"Video Instruction Step",
-                           @"Icon Image",
-                           @"Completion Step",
-                           @"Page Step",
-                           @"Footnote",
-                           ],
-                       ];
+    _buttonTitles = @[
+                      @[ // Active Tasks
+                          @"Active Step Task",
+                          @"Audio Task",
+                          @"Fitness Task",
+                          @"GAIT Task",
+                          @"Hole Peg Test Task",
+                          @"Memory Game Task",
+                          @"PSAT Task",
+                          @"Reaction Time Task",
+                          @"Trail Making Task",
+                          @"Timed Walk Task",
+                          @"Tone Audiometry Task",
+                          @"Tower Of Hanoi Task",
+                          @"Two Finger Tapping Task",
+                          @"Walk And Turn Task",
+                          @"Hand Tremor Task",
+                          @"Right Hand Tremor Task",
+                          ],
+                      @[ // Forms
+                          @"Mini Form",
+                          @"Optional Form",
+                          @"Confirmation Form Item",
+                          ],
+                      @[ // Onboarding
+                          @"Consent",
+                          @"Consent Review",
+                          @"Eligibility Form",
+                          @"Eligibility Survey",
+                          @"Login",
+                          @"Registration",
+                          @"Verification",
+                          ],
+                      @[ // Passcode Management
+                          @"Authenticate Passcode",
+                          @"Create Passcode",
+                          @"Edit Passcode",
+                          @"Remove Passcode",
+                          ],
+                      @[ // Question Steps
+                          @"Date Pickers",
+                          @"Image Capture",
+                          @"Video Capture",
+                          @"Image Choices",
+                          @"Location",
+                          @"Scale",
+                          @"Scale Color Gradient",
+                          @"Selection Survey",
+                          ],
+                      @[ // Task Customization
+                          @"Custom View Controller",
+                          @"Custom Navigation Item",
+                          @"Dynamic Task",
+                          @"Interruptible Task",
+                          @"Navigable Ordered Task",
+                          @"Navigable Loop Task",
+                          @"Step Will Disappear",
+                          ],
+                      @[ // Task Review
+                          @"Embedded Review Task",
+                          @"Standalone Review Task",
+                          ],
+                      @[ // Utility Steps
+                          @"Auxiliary Image Step",
+                          @"Completion Step",
+                          @"Footnote Step",
+                          @"Icon Image Step",
+                          @"Page Step",
+                          @"Signature Step",
+                          @"Table Step",
+                          @"Video Instruction Step",
+                          @"Wait Step",
+                          ],
+                      @[ // Miscellaneous
+                          @"Continue Button",
+                          @"Predicate Tests",
+                          @"Test Charts",
+                          @"Test Charts Performance",
+                          @"Toggle Tint Color",
+                          ],
+                      ];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -495,8 +505,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
 }
 
-- (IBAction)waitTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:WaitTaskIdentifier];
+- (IBAction)waitStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WaitStepTaskIdentifier];
 }
 
 - (void)audioTaskButtonTapped:(id)sender {
@@ -1101,12 +1111,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 - (IBAction)continueButtonButtonTapped:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
-    UIViewController *vc = [storyboard instantiateInitialViewController];
-    [self presentViewController:vc animated:YES completion:nil];
+    UIViewController *viewcController = [storyboard instantiateInitialViewController];
+    [self presentViewController:viewcController animated:YES completion:nil];
 }
 
-- (IBAction)instantiateCustomVcButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:InstantiateCustomVCTaskIdentifier];
+- (IBAction)customViewControllerButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CustomViewControllerTaskIdentifier];
 }
 
 - (IBAction)tableStepButtonTapped:(id)sender {
@@ -1117,16 +1127,16 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [self beginTaskWithIdentifier:SignatureStepTaskIdentifier];
 }
 
-- (IBAction)auxillaryImageButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:AuxillaryImageTaskIdentifier];
+- (IBAction)auxiliaryImageStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:AuxiliaryImageStepTaskIdentifier];
 }
 
 - (IBAction)videoInstructionStepButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:VideoInstructionStepTaskIdentifier];
 }
 
-- (IBAction)iconImageButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:IconImageTaskIdentifier];
+- (IBAction)iconImageStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:IconImageStepTaskIdentifier];
 }
 
 - (IBAction)trailMakingTaskButtonTapped:(id)sender {
@@ -1141,8 +1151,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [self beginTaskWithIdentifier:PageStepTaskIdentifier];
 }
 
-- (IBAction)footnoteButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:FootnoteTaskIdentifier];
+- (IBAction)footnoteStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:FootnoteStepTaskIdentifier];
 }
 
 @end

@@ -246,7 +246,7 @@
         return [self makeEmbeddedReviewTask];
     } else if ([identifier isEqualToString:StandaloneReviewTaskIdentifier]) {
         return [self makeStandaloneReviewTask];
-    } else if ([identifier isEqualToString:WaitTaskIdentifier]) {
+    } else if ([identifier isEqualToString:WaitStepTaskIdentifier]) {
         return [self makeWaitingTask];
     } else if ([identifier isEqualToString:LocationTaskIdentifier]) {
         return [self makeLocationTask];
@@ -254,7 +254,7 @@
         return [self makeStepWillDisappearTask];
     } else if ([identifier isEqualToString:ConfirmationFormTaskIdentifier]) {
         return [self makeConfirmationFormTask];
-    } else if ([identifier isEqualToString:InstantiateCustomVCTaskIdentifier]) {
+    } else if ([identifier isEqualToString:CustomViewControllerTaskIdentifier]) {
         return [self makeInstantiateCustomVCTask];
     } else if ([identifier isEqualToString:WalkBackAndForthTaskIdentifier]) {
         return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkBackAndForthTaskIdentifier
@@ -283,9 +283,9 @@
                                           activeTaskOptions:0
                                                 handOptions:ORKPredefinedTaskHandOptionRight
                                                     options:ORKPredefinedTaskOptionNone];
-    } else if ([identifier isEqualToString:AuxillaryImageTaskIdentifier]) {
+    } else if ([identifier isEqualToString:AuxiliaryImageStepTaskIdentifier]) {
         return [self makeAuxillaryImageTask];
-    } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
+    } else if ([identifier isEqualToString:IconImageStepTaskIdentifier]) {
         return [self makeIconImageTask];
     } else if ([identifier isEqualToString:TrailMakingTaskIdentifier]) {
         return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
@@ -295,7 +295,7 @@
                                                      options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
-    } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
+    } else if ([identifier isEqualToString:FootnoteStepTaskIdentifier]) {
         return [self makeFootnoteTask];
     }
     else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
@@ -3310,7 +3310,7 @@
     step5.title = @"Setup Complete";
     [steps addObject:step5];
     
-    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitStepTaskIdentifier steps:steps];
     return waitTask;
 }
 
@@ -3437,7 +3437,7 @@
     
     ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"done"];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:InstantiateCustomVCTaskIdentifier steps:@[step1, dragonStep, lastStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:CustomViewControllerTaskIdentifier steps:@[step1, dragonStep, lastStep]];
 }
 
 #pragma mark - Step Table
@@ -3483,7 +3483,7 @@
 
 - (ORKOrderedTask *)makeAuxillaryImageTask {
     
-    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxillaryImageTaskIdentifier];
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxiliaryImageStepTaskIdentifier];
     step.title = @"Title";
     step.text = @"This is description text.";
     step.detailText = @"This is detail text.";
@@ -3536,7 +3536,7 @@
     step3.text = @"This is an example of a step with an icon image that is very big.";
     step3.iconImage = [UIImage imageNamed:@"Poppies"];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageStepTaskIdentifier steps:@[step1, step2, step3]];
 }
 
 #pragma mark - Completion Step Continue Button
@@ -3645,7 +3645,7 @@
     lastStep.text = @"This is a completion step with a footnote.";
     lastStep.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteStepTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
 }
 
 @end
