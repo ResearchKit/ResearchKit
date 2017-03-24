@@ -39,6 +39,11 @@ public extension TaskFactory {
         var step: ORKStep
         var textChoices: [ORKTextChoice]
         
+        // Intro step
+        step = ORKInstructionStep(identifier:"introStep")
+        step.title = "This task demonstrates rule-based navigation within tasks"
+        steps.append(step)
+
         // Form step
         textChoices = [
             ORKTextChoice(text: "Good", value: "good" as NSCoding & NSCopying & NSObjectProtocol),
