@@ -352,23 +352,49 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return sectionHeader;
 }
 
+NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
+    // "THIS (FOO) baR title" is converted to the "This Foo Bar Title"
+    NSMutableString *mutableString = [string mutableCopy];
+    [mutableString replaceOccurrencesOfString:@"(" withString:@"" options:0 range:NSMakeRange(0, mutableString.length)];
+    [mutableString replaceOccurrencesOfString:@")" withString:@"" options:0 range:NSMakeRange(0, mutableString.length)];
+    return mutableString.capitalizedString;
+}
+
 - (SEL)selectorFromButtonTitle:(NSString *)buttonTitle {
     // "THIS (FOO) baR title" is converted to the "thisFooBarTitleButtonTapped:" selector
-    buttonTitle = [buttonTitle stringByReplacingOccurrencesOfString:@"(" withString:@""];
-    buttonTitle = [buttonTitle stringByReplacingOccurrencesOfString:@")" withString:@""];
-    buttonTitle = buttonTitle.capitalizedString;
+    buttonTitle = RemoveParenthesisAndCapitalizeString(buttonTitle);
     NSMutableArray *titleTokens = [[buttonTitle componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] mutableCopy];
     titleTokens[0] = ((NSString *)titleTokens[0]).lowercaseString;
     NSString *selectorString = [NSString stringWithFormat:@"%@ButtonTapped:", [titleTokens componentsJoinedByString:@""]];
     return NSSelectorFromString(selectorString);
 }
 
+- (NSString *)taskIdentifierFromButtonTitle:(NSString *)buttonTitle {
+    // "THIS (FOO) baR title" is converted to the "ThisFooBarTitleTaskIdentifier" selector
+    buttonTitle = RemoveParenthesisAndCapitalizeString(buttonTitle);
+    NSMutableArray *titleTokens = [[buttonTitle componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] mutableCopy];
+    NSString *taskIdentifier = [NSString stringWithFormat:@"%@TaskIdentifier", [titleTokens componentsJoinedByString:@""]];
+    return taskIdentifier;
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ButtonCell *buttonCell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellReuseIdentifier forIndexPath:indexPath];
     NSString *buttonTitle = _buttonSections[indexPath.section].allValues[0][indexPath.row];
-    SEL buttonSelector = [self selectorFromButtonTitle:buttonTitle];
-    [buttonCell configureButtonWithTitle:buttonTitle target:self selector:buttonSelector];
+    [buttonCell configureButtonWithTitle:buttonTitle target:self selector:@selector(buttonTapped:)];
     return buttonCell;
+}
+
+- (void)buttonTapped:(UIButton *)button {
+    NSString *buttonTitle = button.titleLabel.text;
+    SEL buttonSelector = [self selectorFromButtonTitle:buttonTitle];
+    if ([self respondsToSelector:buttonSelector]) {
+        // Equivalent to [self peformSelector:buttonSelector], but ARC safe
+        IMP imp = [self methodForSelector:buttonSelector];
+        void (*func)(id, SEL, UIButton *button) = (void *)imp;
+        func(self, buttonSelector, button);
+    } else {
+        [self beginTaskWithIdentifier:[self taskIdentifierFromButtonTitle:buttonTitle]];
+    }
 }
 
 /*
@@ -440,197 +466,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self presentViewController:_taskViewController animated:YES completion:nil];
 }
 
-- (void)datePickersButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:DatePickingTaskIdentifier];
-}
+#pragma mark - Custom Button Actions
 
-- (void)selectionSurveyButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:SelectionSurveyTaskIdentifier];
-}
-
-- (void)activeStepTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ActiveStepTaskIdentifier];
-}
-
-- (void)consentReviewButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ConsentReviewTaskIdentifier];
-}
-
-- (void)consentButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ConsentTaskIdentifier];
-}
-
-- (void)eligibilityFormButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:EligibilityFormTaskIdentifier];
-}
-
-- (void)eligibilitySurveyButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:EligibilitySurveyTaskIdentifier];
-}
-
-- (IBAction)loginButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:LoginTaskIdentifier];
-}
-
-- (IBAction)registrationButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:RegistrationTaskIdentifier];
-}
-
-- (IBAction)verificationButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:VerificationTaskIdentifier];
-}
-
-- (void)miniFormButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:MiniFormTaskIdentifier];
-}
-
-- (void)optionalFormButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:OptionalFormTaskIdentifier];
-}
-
-- (void)predicateTestsButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:PredicateTestsTaskIdentifier];
-}
-
-#pragma mark - Active tasks
-
-- (void)fitnessTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:FitnessTaskIdentifier];
-}
-
-- (void)gaitTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:GaitTaskIdentifier];
-}
-
-- (void)memoryGameTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:MemoryTaskIdentifier];
-}
-
-- (IBAction)waitStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:WaitStepTaskIdentifier];
-}
-
-- (void)audioTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:AudioTaskIdentifier];
-}
-
-- (void)toneAudiometryTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ToneAudiometryTaskIdentifier];
-}
-
-- (void)twoFingerTappingTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
-}
-
-- (void)reactionTimeTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
-}
-
-- (void)towerOfHanoiTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TowerOfHanoiTaskIdentifier];
-}
-
-- (void)timedWalkTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
-}
-
-- (void)psatTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:PSATTaskIdentifier];
-}
-
-- (void)holePegTestTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
-}
-
-- (void)walkAndTurnTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:WalkBackAndForthTaskIdentifier];
-}
-
-- (void)handTremorTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:HandTremorTaskIdentifier];
-}
-
-- (void)handRightTremorTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:HandRightTremorTaskIdentifier];
-}
-
-#pragma mark - Dynamic task
-
-/*
- See the `DynamicTask` class for a definition of this task.
- */
-- (void)dynamicTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:DynamicTaskIdentifier];
-}
-
-- (void)interruptibleTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:InterruptibleTaskIdentifier];
-}
-
-- (void)scaleButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ScalesTaskIdentifier];
-}
-
-- (void)scaleColorGradientButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ColorScalesTaskIdentifier];
-}
-
-- (void)imageChoiceButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ImageChoiceTaskIdentifier];
-}
-
-- (void)imageCaptureButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
-}
-
-- (void)videoCaptureButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:VideoCaptureTaskIdentifier];
-}
-
-- (void)navigableOrderedTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:NavigableOrderedTaskIdentifier];
-}
-
-- (void)navigableLoopTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:NavigableLoopTaskIdentifier];
-}
-
-- (void)toggleTintColorButtonTapped:(id)sender {
-    static UIColor *defaultTintColor = nil;
-    if (!defaultTintColor) {
-        defaultTintColor = self.view.tintColor;
-    }
-    if ([[UIView appearance].tintColor isEqual:[UIColor redColor]]) {
-        [UIView appearance].tintColor = defaultTintColor;
-    } else {
-        [UIView appearance].tintColor = [UIColor redColor];
-    }
-    // Update appearance
-    UIView *superview = self.view.superview;
-    [self.view removeFromSuperview];
-    [superview addSubview:self.view];
-}
-
-- (void)customNavigationItemButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
-}
-
-- (void)createPasscodeButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:CreatePasscodeTaskIdentifier];
-}
-
-- (void)removePasscodeButtonTapped:(id)sender {
-    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
-        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
-            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
-        } else {
-            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
-        }
-    } else {
-        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
-    }
-}
-
+// Pass code management
 - (void)authenticatePasscodeButtonTapped:(id)sender {
     if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController
@@ -651,6 +489,54 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else {
         [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can edit it."];
     }
+}
+
+- (void)removePasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
+            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
+        } else {
+            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
+    }
+}
+
+// Task Review
+- (IBAction)embeddedReviewTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EmbeddedReviewTaskIdentifier];
+}
+
+- (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
+    if ([TaskFactory sharedInstance].embeddedReviewTaskResult != nil) {
+        [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
+    } else {
+        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
+    }
+}
+
+// Miscellaneous
+- (IBAction)continueButtonButtonTapped:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
+    UIViewController *viewcController = [storyboard instantiateInitialViewController];
+    [self presentViewController:viewcController animated:YES completion:nil];
+}
+
+- (void)toggleTintColorButtonTapped:(id)sender {
+    static UIColor *defaultTintColor = nil;
+    if (!defaultTintColor) {
+        defaultTintColor = self.view.tintColor;
+    }
+    if ([[UIView appearance].tintColor isEqual:[UIColor redColor]]) {
+        [UIView appearance].tintColor = defaultTintColor;
+    } else {
+        [UIView appearance].tintColor = [UIColor redColor];
+    }
+    // Update appearance
+    UIView *superview = self.view.superview;
+    [self.view removeFromSuperview];
+    [superview addSubview:self.view];
 }
 
 #pragma mark - Passcode delegate
@@ -679,16 +565,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [viewController presentViewController:alert animated:YES completion:nil];
 }
 
-- (IBAction)embeddedReviewTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:EmbeddedReviewTaskIdentifier];
+- (void)testChartsButtonTapped:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
-- (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
-    if ([TaskFactory sharedInstance].embeddedReviewTaskResult != nil) {
-        [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
-    } else {
-        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
-    }
+- (void)testChartsPerformanceButtonTapped:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
 #pragma mark - Helpers
@@ -748,7 +634,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSString *task_identifier = taskViewController.task.identifier;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
+            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableOrderedLoopTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
@@ -1064,19 +950,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     _taskViewController.delegate = self;
 }
 
-#pragma mark - Charts
-
-- (void)testChartsButtonTapped:(id)sender {
-    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
-    [self presentViewController:chartListViewController animated:YES completion:nil];
-}
-
-- (void)testChartsPerformanceButtonTapped:(id)sender {
-    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
-    [self presentViewController:chartListViewController animated:YES completion:nil];
-}
+#pragma Mark - Wait Task
 
 // Updates progress on the Wait Task
 - (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)waitStepviewController {
@@ -1094,66 +968,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     } else {
         [waitStepviewController goForward];
     }
-}
-
-- (IBAction)locationButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:LocationTaskIdentifier];
-}
-
-- (IBAction)stepWillDisappearButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:StepWillDisappearTaskIdentifier];
-}
-
-- (IBAction)confirmationFormItemButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ConfirmationFormTaskIdentifier];
-}
-
-#pragma mark - Continue button
-
-- (IBAction)continueButtonButtonTapped:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
-    UIViewController *viewcController = [storyboard instantiateInitialViewController];
-    [self presentViewController:viewcController animated:YES completion:nil];
-}
-
-- (IBAction)customViewControllerButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:CustomViewControllerTaskIdentifier];
-}
-
-- (IBAction)tableStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TableStepTaskIdentifier];
-}
-
-- (IBAction)signatureStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:SignatureStepTaskIdentifier];
-}
-
-- (IBAction)auxiliaryImageStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:AuxiliaryImageStepTaskIdentifier];
-}
-
-- (IBAction)videoInstructionStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:VideoInstructionStepTaskIdentifier];
-}
-
-- (IBAction)iconImageStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:IconImageStepTaskIdentifier];
-}
-
-- (IBAction)trailMakingTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TrailMakingTaskIdentifier];
-}
-
-- (IBAction)completionStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:CompletionStepTaskIdentifier];
-}
-
-- (IBAction)pageStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:PageStepTaskIdentifier];
-}
-
-- (IBAction)footnoteStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:FootnoteStepTaskIdentifier];
 }
 
 @end

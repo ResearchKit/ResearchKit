@@ -34,10 +34,38 @@
 
 #import <Foundation/Foundation.h>
 
+/*  NOTE: The task creation utility funtions are alphabetically sorted within their
+ *        their own sections. Make sure you insert your code in the appropriate place
+ *        so all the sections remain alphabetically sorted
+ */
 
 #define DefineStringKey(x) static NSString *const x = @#x
 
-// Onboarding Tasks
+/// Task Identifiers
+// Active Taks
+DefineStringKey(ActiveStepTaskIdentifier);
+DefineStringKey(AudioTaskIdentifier);
+DefineStringKey(FitnessTaskIdentifier);
+DefineStringKey(GaitTaskIdentifier);
+DefineStringKey(HandTremorTaskIdentifier);
+DefineStringKey(HandRightTremorTaskIdentifier);
+DefineStringKey(HolePegTestTaskIdentifier);
+DefineStringKey(MemoryGameTaskIdentifier);
+DefineStringKey(PsatTaskIdentifier);
+DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TimedWalkTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(TrailMakingTaskIdentifier);
+DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(WalkAndTurnTaskIdentifier);
+
+// Forms
+DefineStringKey(ConfirmationFormItemTaskIdentifier);
+DefineStringKey(MiniFormTaskIdentifier);
+DefineStringKey(OptionalFormTaskIdentifier);
+
+// Onboarding
 DefineStringKey(ConsentTaskIdentifier);
 DefineStringKey(ConsentReviewTaskIdentifier);
 DefineStringKey(EligibilityFormTaskIdentifier);
@@ -46,72 +74,51 @@ DefineStringKey(LoginTaskIdentifier);
 DefineStringKey(RegistrationTaskIdentifier);
 DefineStringKey(VerificationTaskIdentifier);
 
-DefineStringKey(CompletionStepTaskIdentifier);
-// Question Step Tasks
-DefineStringKey(DatePickingTaskIdentifier);
-DefineStringKey(ImageCaptureTaskIdentifier);
-DefineStringKey(VideoCaptureTaskIdentifier);
-DefineStringKey(ImageChoiceTaskIdentifier);
-DefineStringKey(CustomViewControllerTaskIdentifier);
-DefineStringKey(LocationTaskIdentifier);
-DefineStringKey(ScalesTaskIdentifier);
-DefineStringKey(ColorScalesTaskIdentifier);
-DefineStringKey(MiniFormTaskIdentifier);
-DefineStringKey(OptionalFormTaskIdentifier);
-DefineStringKey(SelectionSurveyTaskIdentifier);
-DefineStringKey(PredicateTestsTaskIdentifier);
-
-// Active Taks
-DefineStringKey(ActiveStepTaskIdentifier);
-DefineStringKey(AudioTaskIdentifier);
-DefineStringKey(AuxiliaryImageStepTaskIdentifier);
-DefineStringKey(FitnessTaskIdentifier);
-DefineStringKey(FootnoteStepTaskIdentifier);
-DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(IconImageStepTaskIdentifier);
-DefineStringKey(HolePegTestTaskIdentifier);
-DefineStringKey(MemoryTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(TrailMakingTaskIdentifier);
-DefineStringKey(TwoFingerTapTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
-DefineStringKey(HandTremorTaskIdentifier);
-DefineStringKey(HandRightTremorTaskIdentifier);
-DefineStringKey(WalkBackAndForthTaskIdentifier);
-
-// Passcode
+// Passcode Management
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
+// Question Steps
+DefineStringKey(DatePickersTaskIdentifier);
+DefineStringKey(ImageCaptureTaskIdentifier);
+DefineStringKey(ImageChoiceTaskIdentifier);
+DefineStringKey(LocationTaskIdentifier);
+DefineStringKey(ScaleTaskIdentifier);
+DefineStringKey(ScaleColorGradientTaskIdentifier);
+DefineStringKey(SelectionSurveyTaskIdentifier);
+DefineStringKey(VideoCaptureTaskIdentifier);
+
+// Task Customization
+DefineStringKey(CustomViewControllerTaskIdentifier);
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
 DefineStringKey(InterruptibleTaskIdentifier);
 DefineStringKey(NavigableOrderedTaskIdentifier);
-DefineStringKey(NavigableLoopTaskIdentifier);
+DefineStringKey(NavigableOrderedLoopTaskIdentifier);
+DefineStringKey(StepWillDisappearTaskIdentifier);
+
+// Task Review
+DefineStringKey(EmbeddedReviewTaskIdentifier);
+DefineStringKey(StandaloneReviewTaskIdentifier);
+
+// Utility Steps
+DefineStringKey(AuxiliaryImageStepTaskIdentifier);
+DefineStringKey(CompletionStepTaskIdentifier);
+DefineStringKey(FootnoteStepTaskIdentifier);
+DefineStringKey(IconImageStepTaskIdentifier);
+DefineStringKey(PageStepTaskIdentifier);
+DefineStringKey(PredicateTestsTaskIdentifier);
+DefineStringKey(SignatureStepTaskIdentifier);
+DefineStringKey(TableStepTaskIdentifier);
+DefineStringKey(VideoInstructionStepTaskIdentifier);
 DefineStringKey(WaitStepTaskIdentifier);
 
+/// Non-Task Identifiers 
+// Steps
+DefineStringKey(StepWillDisappearFirstStepIdentifier);
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
 
-DefineStringKey(EmbeddedReviewTaskIdentifier);
-DefineStringKey(StandaloneReviewTaskIdentifier);
-DefineStringKey(ConfirmationFormTaskIdentifier);
 
-DefineStringKey(StepWillDisappearTaskIdentifier);
-DefineStringKey(StepWillDisappearFirstStepIdentifier);
-
-DefineStringKey(TableStepTaskIdentifier);
-DefineStringKey(SignatureStepTaskIdentifier);
-DefineStringKey(VideoInstructionStepTaskIdentifier);
-DefineStringKey(PageStepTaskIdentifier);
-
-// Misc Tasks
-
-
-
-// Misc Items
 @protocol ORKTask;
 @class ORKConsentDocument;
 @class ORKTaskResult;

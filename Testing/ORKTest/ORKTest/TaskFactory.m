@@ -103,7 +103,7 @@
 #pragma mark - Mapping identifiers to tasks
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier {
-    if ([identifier isEqualToString:DatePickingTaskIdentifier]) {
+    if ([identifier isEqualToString:DatePickersTaskIdentifier]) {
         return [self makeDatePickingTask];
     } else if ([identifier isEqualToString:SelectionSurveyTaskIdentifier]) {
         return [self makeSelectionSurveyTask];
@@ -159,8 +159,8 @@
                                        numberOfStepsPerLeg:20
                                               restDuration:30
                                                    options:ORKPredefinedTaskOptionNone];
-    } else if ([identifier isEqualToString:MemoryTaskIdentifier]) {
-        return [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:MemoryTaskIdentifier
+    } else if ([identifier isEqualToString:MemoryGameTaskIdentifier]) {
+        return [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:MemoryGameTaskIdentifier
                                             intendedUseDescription:nil
                                                        initialSpan:3
                                                        minimumSpan:2
@@ -176,9 +176,9 @@
         return [DynamicTask new];
     } else if ([identifier isEqualToString:InterruptibleTaskIdentifier]) {
         return [self makeInterruptibleTask];
-    } else if ([identifier isEqualToString:ScalesTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ScaleTaskIdentifier]) {
         return [self makeScalesTask];
-    } else if ([identifier isEqualToString:ColorScalesTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ScaleColorGradientTaskIdentifier]) {
         return [self makeColorScalesTask];
     } else if ([identifier isEqualToString:ImageChoiceTaskIdentifier]) {
         return [self makeImageChoicesTask];
@@ -209,8 +209,8 @@
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
-    } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
-        return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
+    } else if ([identifier isEqualToString:PsatTaskIdentifier]) {
+        return [ORKOrderedTask PSATTaskWithIdentifier:PsatTaskIdentifier
                                intendedUseDescription:nil
                                      presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
                                 interStimulusInterval:3.0
@@ -236,7 +236,7 @@
                                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NavigableOrderedTaskIdentifier]) {
         return [self makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
-    } else if ([identifier isEqualToString:NavigableLoopTaskIdentifier]) {
+    } else if ([identifier isEqualToString:NavigableOrderedLoopTaskIdentifier]) {
         return [self makeNavigableLoopTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
@@ -252,12 +252,12 @@
         return [self makeLocationTask];
     } else if ([identifier isEqualToString:StepWillDisappearTaskIdentifier]) {
         return [self makeStepWillDisappearTask];
-    } else if ([identifier isEqualToString:ConfirmationFormTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ConfirmationFormItemTaskIdentifier]) {
         return [self makeConfirmationFormTask];
     } else if ([identifier isEqualToString:CustomViewControllerTaskIdentifier]) {
         return [self makeInstantiateCustomVCTask];
-    } else if ([identifier isEqualToString:WalkBackAndForthTaskIdentifier]) {
-        return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkBackAndForthTaskIdentifier
+    } else if ([identifier isEqualToString:WalkAndTurnTaskIdentifier]) {
+        return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkAndTurnTaskIdentifier
                                            intendedUseDescription:nil
                                                      walkDuration:30
                                                      restDuration:30
@@ -421,7 +421,7 @@
         [steps addObject:step];
         
     }
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:DatePickingTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:DatePickersTaskIdentifier steps:steps];
     return task;
 }
 
@@ -2742,7 +2742,7 @@
     }
     
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScalesTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScaleTaskIdentifier steps:steps];
     return task;
     
 }
@@ -3129,7 +3129,7 @@
     step.title = @"You have finished the task";
     [steps addObject:step];
     
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableLoopTaskIdentifier
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedLoopTaskIdentifier
                                                                                   steps:steps];
     
     // Build navigation rules
@@ -3422,7 +3422,7 @@
     step4.title = @"Survey Complete";
     [steps addObject:step4];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormItemTaskIdentifier steps:steps];
 }
 
 #pragma mark - Instantiate Custom Step View Controller Example
