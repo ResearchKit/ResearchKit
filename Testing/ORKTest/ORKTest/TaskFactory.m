@@ -180,7 +180,7 @@
         return [self makeScalesTask];
     } else if ([identifier isEqualToString:ColorScalesTaskIdentifier]) {
         return [self makeColorScalesTask];
-    } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ImageChoiceTaskIdentifier]) {
         return [self makeImageChoicesTask];
     } else if ([identifier isEqualToString:ImageCaptureTaskIdentifier]) {
         return [self makeImageCaptureTask];
@@ -266,8 +266,8 @@
         return [self makeTableStepTask];
     } else if ([identifier isEqualToString:SignatureStepTaskIdentifier]) {
         return [self makeSignatureStepTask];
-    } else if ([identifier isEqualToString:TremorTaskIdentifier]) {
-        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorTaskIdentifier
+    } else if ([identifier isEqualToString:HandTremorTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:HandTremorTaskIdentifier
                                      intendedUseDescription:nil
                                          activeStepDuration:10
                                           activeTaskOptions:
@@ -276,8 +276,8 @@
                 ORKTremorActiveTaskOptionExcludeHandToNose
                                                 handOptions:ORKPredefinedTaskHandOptionBoth
                                                     options:ORKPredefinedTaskOptionNone];
-    } else if ([identifier isEqualToString:TremorRightHandTaskIdentifier]) {
-        return [ORKOrderedTask tremorTestTaskWithIdentifier:TremorRightHandTaskIdentifier
+    } else if ([identifier isEqualToString:HandRightTremorTaskIdentifier]) {
+        return [ORKOrderedTask tremorTestTaskWithIdentifier:HandRightTremorTaskIdentifier
                                      intendedUseDescription:nil
                                          activeStepDuration:10
                                           activeTaskOptions:0
@@ -2811,19 +2811,19 @@
                                                                        text:@"Cyan" value:@"cyanColor"];
             
             
-            ORKFormItem *item1 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_1" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color."
+            ORKFormItem *item1 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_1" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color"
                                                             answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1] ]];
             [items addObject:item1];
             
-            ORKFormItem *item2 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_2" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color."
+            ORKFormItem *item2 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_2" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color"
                                                             answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2] ]];
             [items addObject:item2];
             
-            ORKFormItem *item3 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_3" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color."
+            ORKFormItem *item3 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_3" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color"
                                                             answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3] ]];
             [items addObject:item3];
             
-            ORKFormItem *item6 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_6" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color."
+            ORKFormItem *item6 = [[ORKFormItem alloc] initWithIdentifier:[@"fqid_009_6" stringByAppendingFormat:@"%@",dimension] text:@"Pick a color"
                                                             answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3, option4, option5, option6] ]];
             [items addObject:item6];
         }
@@ -2855,22 +2855,22 @@
                                                                        text:@"Cyan" value:@"cyanColor"];
             
             ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color1_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color."
+                                                                           title:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1] ]];
             [steps addObject:step1];
             
             ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color2_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color."
+                                                                           title:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2] ]];
             [steps addObject:step2];
             
             ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color3_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color."
+                                                                           title:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3] ]];
             [steps addObject:step3];
             
             ORKQuestionStep *step6 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color6_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color."
+                                                                           title:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3, option4, option5, option6]]];
             [steps addObject:step6];
         }
@@ -2882,7 +2882,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageChoicesTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageChoiceTaskIdentifier steps:steps];
     return task;
     
 }

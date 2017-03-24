@@ -51,7 +51,7 @@ DefineStringKey(CompletionStepTaskIdentifier);
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(VideoCaptureTaskIdentifier);
-DefineStringKey(ImageChoicesTaskIdentifier);
+DefineStringKey(ImageChoiceTaskIdentifier);
 DefineStringKey(CustomViewControllerTaskIdentifier);
 DefineStringKey(LocationTaskIdentifier);
 DefineStringKey(ScalesTaskIdentifier);
@@ -78,8 +78,8 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
-DefineStringKey(TremorTaskIdentifier);
-DefineStringKey(TremorRightHandTaskIdentifier);
+DefineStringKey(HandTremorTaskIdentifier);
+DefineStringKey(HandRightTremorTaskIdentifier);
 DefineStringKey(WalkBackAndForthTaskIdentifier);
 
 // Passcode

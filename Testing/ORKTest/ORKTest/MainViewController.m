@@ -118,6 +118,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)setUpButton {
     [_button removeFromSuperview];
     _button = [UIButton buttonWithType:UIButtonTypeSystem];
+    _button.titleLabel.adjustsFontSizeToFitWidth = YES;
     _button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _button.contentEdgeInsets = UIEdgeInsetsMake(0.0, HeaderSideLayoutMargin, 0.0, 0.0);
     [self.contentView addSubview:_button];
@@ -143,22 +144,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate>
+
+@end
+
+
+@implementation MainViewController {
+    ORKTaskViewController *_taskViewController;
     id<ORKTaskResultSource> _lastRouteResult;
     
     NSMutableDictionary<NSString *, NSData *> *_savedViewControllers;     // Maps task identifiers to task view controller restoration data
     
     UICollectionView *_collectionView;
-    NSArray<NSString *> *_buttonSectionNames;
-    NSArray<NSArray<NSString *> *> *_buttonTitles;
+    NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *_buttonSections;
 }
 
-@property (nonatomic, strong) ORKTaskViewController *taskViewController;
-
-@end
-
-
-@implementation MainViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -219,98 +219,96 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                       metrics:nil
                                                                         views:views]];
     
-    _buttonSectionNames = @[
-                            @"Active Tasks",
-                            @"Forms",
-                            @"Onboarding",
-                            @"Passcode Management",
-                            @"Question Steps",
-                            @"Task Customization",
-                            @"Task Review",
-                            @"Utility Steps",
-                            @"Miscellaneous",
-                            ];
-    _buttonTitles = @[
-                      @[ // Active Tasks
-                          @"Active Step Task",
-                          @"Audio Task",
-                          @"Fitness Task",
-                          @"GAIT Task",
-                          @"Hole Peg Test Task",
-                          @"Memory Game Task",
-                          @"PSAT Task",
-                          @"Reaction Time Task",
-                          @"Trail Making Task",
-                          @"Timed Walk Task",
-                          @"Tone Audiometry Task",
-                          @"Tower Of Hanoi Task",
-                          @"Two Finger Tapping Task",
-                          @"Walk And Turn Task",
-                          @"Hand Tremor Task",
-                          @"Right Hand Tremor Task",
-                          ],
-                      @[ // Forms
-                          @"Mini Form",
-                          @"Optional Form",
-                          @"Confirmation Form Item",
-                          ],
-                      @[ // Onboarding
-                          @"Consent",
-                          @"Consent Review",
-                          @"Eligibility Form",
-                          @"Eligibility Survey",
-                          @"Login",
-                          @"Registration",
-                          @"Verification",
-                          ],
-                      @[ // Passcode Management
-                          @"Authenticate Passcode",
-                          @"Create Passcode",
-                          @"Edit Passcode",
-                          @"Remove Passcode",
-                          ],
-                      @[ // Question Steps
-                          @"Date Pickers",
-                          @"Image Capture",
-                          @"Video Capture",
-                          @"Image Choices",
-                          @"Location",
-                          @"Scale",
-                          @"Scale Color Gradient",
-                          @"Selection Survey",
-                          ],
-                      @[ // Task Customization
-                          @"Custom View Controller",
-                          @"Custom Navigation Item",
-                          @"Dynamic Task",
-                          @"Interruptible Task",
-                          @"Navigable Ordered Task",
-                          @"Navigable Loop Task",
-                          @"Step Will Disappear",
-                          ],
-                      @[ // Task Review
-                          @"Embedded Review Task",
-                          @"Standalone Review Task",
-                          ],
-                      @[ // Utility Steps
-                          @"Auxiliary Image Step",
-                          @"Completion Step",
-                          @"Footnote Step",
-                          @"Icon Image Step",
-                          @"Page Step",
-                          @"Signature Step",
-                          @"Table Step",
-                          @"Video Instruction Step",
-                          @"Wait Step",
-                          ],
-                      @[ // Miscellaneous
-                          @"Continue Button",
-                          @"Predicate Tests",
-                          @"Test Charts",
-                          @"Test Charts Performance",
-                          @"Toggle Tint Color",
-                          ],
-                      ];
+    _buttonSections = @[
+                        @{ @"Active Tasks":
+                               @[
+                                   @"Active Step Task",
+                                   @"Audio Task",
+                                   @"Fitness Task",
+                                   @"GAIT Task",
+                                   @"Hand Tremor Task",
+                                   @"Hand (Right) Tremor Task",
+                                   @"Hole Peg Test Task",
+                                   @"Memory Game Task",
+                                   @"PSAT Task",
+                                   @"Reaction Time Task",
+                                   @"Timed Walk Task",
+                                   @"Tone Audiometry Task",
+                                   @"Tower Of Hanoi Task",
+                                   @"Trail Making Task",
+                                   @"Two Finger Tapping Task",
+                                   @"Walk And Turn Task",
+                                   ]},
+                        @{ @"Forms":
+                               @[
+                                   @"Mini Form",
+                                   @"Optional Form",
+                                   @"Confirmation Form Item",
+                                   ]},
+                        @{ @"Onboarding":
+                               @[
+                                   @"Consent",
+                                   @"Consent Review",
+                                   @"Eligibility Form",
+                                   @"Eligibility Survey",
+                                   @"Login",
+                                   @"Registration",
+                                   @"Verification",
+                                   ]},
+                        @{ @"Passcode Management":
+                               @[
+                                   @"Authenticate Passcode",
+                                   @"Create Passcode",
+                                   @"Edit Passcode",
+                                   @"Remove Passcode",
+                                   ]},
+                        @{ @"Question Steps":
+                               @[
+                                   @"Date Pickers",
+                                   @"Image Capture",
+                                   @"Image Choice",
+                                   @"Location",
+                                   @"Scale",
+                                   @"Scale Color Gradient",
+                                   @"Selection Survey",
+                                   @"Video Capture",
+                                   ]},
+                        @{ @"Task Customization":
+                               @[
+                                   @"Custom View Controller",
+                                   @"Custom Navigation Item",
+                                   @"Dynamic Task",
+                                   @"Interruptible Task",
+                                   @"Navigable Loop Task",
+                                   @"Navigable Ordered Task",
+                                   @"Step Will Disappear",
+                                   ]},
+                        @{ @"Task Review":
+                               @[
+                                   @"Embedded Review Task",
+                                   @"Standalone Review Task",
+                                   ]},
+                        @{ @"Utility Steps":
+                               @[
+                                   @"Auxiliary Image Step",
+                                   @"Completion Step",
+                                   @"Footnote Step",
+                                   @"Icon Image Step",
+                                   @"Page Step",
+                                   @"Signature Step",
+                                   @"Table Step",
+                                   @"Video Instruction Step",
+                                   @"Wait Step",
+                                   ]},
+                        @{ @"Miscellaneous":
+                               @[
+                                   @"Continue Button",
+                                   @"Predicate Tests",
+                                   @"Test Charts",
+                                   @"Test Charts Performance",
+                                   @"Toggle Tint Color",
+                                   ]},
+                        ];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -340,21 +338,24 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return _buttonSectionNames.count;
+    return _buttonSections.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return ((NSArray *)_buttonTitles[section]).count;
+    return _buttonSections[section].allValues[0].count;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     SectionHeader *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:CollectionViewHeaderReuseIdentifier forIndexPath:indexPath];
-    [sectionHeader configureHeaderWithTitle:_buttonSectionNames[indexPath.section]];
+    NSString *title = _buttonSections[indexPath.section].allKeys[0];
+    [sectionHeader configureHeaderWithTitle:title];
     return sectionHeader;
 }
 
 - (SEL)selectorFromButtonTitle:(NSString *)buttonTitle {
-    // "THIS FOO baR title" is converted to the "thisFooBarTitleButtonTapped:" selector
+    // "THIS (FOO) baR title" is converted to the "thisFooBarTitleButtonTapped:" selector
+    buttonTitle = [buttonTitle stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    buttonTitle = [buttonTitle stringByReplacingOccurrencesOfString:@")" withString:@""];
     buttonTitle = buttonTitle.capitalizedString;
     NSMutableArray *titleTokens = [[buttonTitle componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] mutableCopy];
     titleTokens[0] = ((NSString *)titleTokens[0]).lowercaseString;
@@ -364,7 +365,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ButtonCell *buttonCell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellReuseIdentifier forIndexPath:indexPath];
-    NSString *buttonTitle = _buttonTitles[indexPath.section][indexPath.row];
+    NSString *buttonTitle = _buttonSections[indexPath.section].allValues[0][indexPath.row];
     SEL buttonSelector = [self selectorFromButtonTitle:buttonTitle];
     [buttonCell configureButtonWithTitle:buttonTitle target:self selector:buttonSelector];
     return buttonCell;
@@ -388,16 +389,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
+        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     } else {
         // No saved data, just create the task and the corresponding task view controller.
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
+        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }
     
     // If we have stored data then data will contain the stored data.
     // If we don't, data will be nil (and the task will be opened up as a 'new' task.
     NSData *data = _savedViewControllers[identifier];
-    self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
+    _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     
     [self beginTask];
 }
@@ -406,15 +407,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  Actually presents the task view controller.
  */
 - (void)beginTask {
-    id<ORKTask> task = self.taskViewController.task;
-    self.taskViewController.delegate = self;
+    id<ORKTask> task = _taskViewController.task;
+    _taskViewController.delegate = self;
     
     if (_taskViewController.outputDirectory == nil) {
         // Sets an output directory in Documents, using the `taskRunUUID` in the path.
         NSURL *documents =  [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSURL *outputDir = [documents URLByAppendingPathComponent:self.taskViewController.taskRunUUID.UUIDString];
+        NSURL *outputDir = [documents URLByAppendingPathComponent:_taskViewController.taskRunUUID.UUIDString];
         [[NSFileManager defaultManager] createDirectoryAtURL:outputDir withIntermediateDirectories:YES attributes:nil error:nil];
-        self.taskViewController.outputDirectory = outputDir;
+        _taskViewController.outputDirectory = outputDir;
     }
     
     /*
@@ -422,7 +423,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      of default values for any optional questions.
      */
     if ([task isKindOfClass:[DynamicTask class]]) {
-        self.taskViewController.defaultResultSource = _lastRouteResult;
+        _taskViewController.defaultResultSource = _lastRouteResult;
     }
     
     /*
@@ -546,11 +547,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (void)handTremorTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TremorTaskIdentifier];
+    [self beginTaskWithIdentifier:HandTremorTaskIdentifier];
 }
 
-- (void)rightHandTremorTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:TremorRightHandTaskIdentifier];
+- (void)handRightTremorTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:HandRightTremorTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
@@ -574,8 +575,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:ColorScalesTaskIdentifier];
 }
 
-- (void)imageChoicesButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
+- (void)imageChoiceButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ImageChoiceTaskIdentifier];
 }
 
 - (void)imageCaptureButtonTapped:(id)sender {
