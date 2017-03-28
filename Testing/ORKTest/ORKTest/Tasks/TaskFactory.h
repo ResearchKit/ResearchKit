@@ -32,7 +32,8 @@
  */
 
 
-#import <Foundation/Foundation.h>
+@import UIKit;
+
 
 /*  NOTE: The task creation utility funtions are alphabetically sorted within their
  *        their own sections. Make sure you insert your code in the appropriate place
@@ -128,6 +129,10 @@ DefineStringKey(CollectionViewCellReuseIdentifier);
 + (instancetype)sharedInstance;
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier;
+
+- (ORKConsentDocument *)buildConsentDocument;
+
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size border:(BOOL)border;
 
 @property (nonatomic, copy) ORKConsentDocument *currentConsentDocument;
 

@@ -74,6 +74,7 @@
 static UIColor *HeaderColor() {
     return [UIColor colorWithWhite:0.97 alpha:1.0];
 }
+
 static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)sharedInit {

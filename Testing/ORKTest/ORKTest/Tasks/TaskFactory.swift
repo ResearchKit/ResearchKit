@@ -33,7 +33,7 @@ import ResearchKit
 
 public extension TaskFactory {
     
-    public func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
+    public func makeNavigableOrderedTask(identifier taskIdentifier : String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep
