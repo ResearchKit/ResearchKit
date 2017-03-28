@@ -36,10 +36,7 @@
 #import "MainViewController.h"
 
 #import "AppDelegate.h"
-
 #import "DynamicTask.h"
-#import "DragonPokerStep.h"
-
 #import "TaskFactory.h"
 
 #import "ORKTest-Swift.h"
@@ -47,6 +44,7 @@
 @import ResearchKit;
 
 @import AVFoundation;
+
 
 @interface SectionHeader: UICollectionReusableView
 
