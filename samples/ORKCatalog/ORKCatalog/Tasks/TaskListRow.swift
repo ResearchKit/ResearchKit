@@ -987,9 +987,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         let stepEmail = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
         stepEmail.text = exampleDetailText
         
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-        
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegex: domainRegex, invalidMessage:"Invalid URL: %@")
+        let domainRegularExpressionPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let domainRegularExpression = try! NSRegularExpression(pattern: domainRegularExpressionPattern)
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: domainRegularExpression, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = .URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
@@ -1188,10 +1188,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
         let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB]
-        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegex: passcodeValidationRegex, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
+        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
