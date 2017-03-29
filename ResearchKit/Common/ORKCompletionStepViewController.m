@@ -169,7 +169,7 @@ static const CGFloat TickViewSize = 122;
     
     UILabel *captionLabel = self.stepView.headerView.captionLabel;
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, captionLabel);
-    _completionStepView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
+    _completionStepView.accessibilityLabel = [NSString localizedStringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
 - (void)setCheckmarkColor:(UIColor *)checkmarkColor {

@@ -207,18 +207,41 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}];
     return location;
 }));
-ORK_MAKE_TEST_INIT(HKObjectType, (^{
-    if (self.class == [HKQuantityType class]) {
-        return (HKObjectType *)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-    } else {
-        return (HKObjectType *)[HKObjectType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
-    }
+ORK_MAKE_TEST_INIT(HKSampleType, (^{
+    return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+}))
+ORK_MAKE_TEST_INIT(HKQuantityType, (^{
+    return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+}))
+ORK_MAKE_TEST_INIT(HKCorrelationType, (^{
+    return [HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
+}))
+ORK_MAKE_TEST_INIT(HKCharacteristicType, (^{
+    return [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
 }))
 ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
-    return [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
-}));
+    return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
+}))
+ORK_MAKE_TEST_INIT(NSNumber, (^{
+    return [self initWithInt:123];
+}))
+ORK_MAKE_TEST_INIT(HKUnit, (^{
+    return [HKUnit unitFromString:@"kg"];
+}))
+ORK_MAKE_TEST_INIT(NSURL, (^{
+    return [self initFileURLWithPath:@"/usr"];
+}))
+ORK_MAKE_TEST_INIT(NSTimeZone, (^{
+    return [NSTimeZone timeZoneForSecondsFromGMT:60*60];
+}))
+ORK_MAKE_TEST_INIT(NSCalendar, (^{
+    return [self initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+}))
+ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
+    return [self initWithPattern:@"." options:0 error:nil];
+}))
 
-                                                
+
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
 @end
@@ -410,7 +433,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
-                                              @"ORKRegistrationStep.passcodeValidationRegex",
+                                              @"ORKRegistrationStep.passcodeValidationRegularExpression",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
@@ -444,26 +467,10 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                     [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                     if (p.isPrimitiveType == NO) {
                         // Assign value to object type property
-                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class]|| aClass == [ORKImageChoice class]))
+                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class] || aClass == [ORKImageChoice class]))
                         {
                             // Map NSObject to string, since it's used where either a string or a number is acceptable
                             [instance setValue:@"test" forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSNumber class]) {
-                            [instance setValue:@(123) forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKUnit class]) {
-                            [instance setValue:[HKUnit unitFromString:@"kg"] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSURL class]) {
-                            [instance setValue:[NSURL fileURLWithPath:@"/usr"] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSTimeZone class]) {
-                            [instance setValue:[NSTimeZone timeZoneForSecondsFromGMT:60*60] forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKQuantityType class]) {
-                            [instance setValue:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass] forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKCharacteristicType class]) {
-                            [instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSCalendar class]) {
-                            [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
-                        } else if (p.propertyClass == [ORKLocation class]) {
-                            [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
                         } else {
                             id itemInstance = [self instanceForClass:p.propertyClass];
                             [instance setValue:itemInstance forKey:p.propertyName];
@@ -587,6 +594,10 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
         [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
     } else if (p.propertyClass == [NSPredicate class]) {
         [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
+    } else if (p.propertyClass == [NSRegularExpression class]) {
+        [instance setValue:[NSRegularExpression regularExpressionWithPattern:index ? @"." : @"[A-Z]"
+                                                                     options:index ? 0 : NSRegularExpressionCaseInsensitive
+                                                                       error:nil] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
@@ -767,20 +778,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
 - (id)instanceForClass:(Class)c {
     id result = nil;
     @try {
-        if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
-            ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
-            ([c isSubclassOfClass:[ORKStepModifier class]]) ||
-            ([c isSubclassOfClass:[ORKStep class]]) ||
-            (c == [ORKKeyValueStepModifier class]) ||
-             ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
-             (c == [ORKTextChoice class]) ||
-             (c == [ORKImageChoice class]) ||
-             ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
-             ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-             (c == [ORKLocation class]) ||
-             (c == [ORKResultSelector class]) ||
-             [c isSubclassOfClass:[HKObjectType class]] ||
-            (c == [CLCircularRegion class]))
+        if ([c instancesRespondToSelector:@selector(orktest_init)])
         {
             result = [[c alloc] orktest_init];
         } else {
@@ -865,6 +863,7 @@ ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
                                    @"ORKVideoCaptureStep.duration",
+                                   @"ORKTextAnswerFormat.validationRegularExpression",
                                    ];
     
     // Test Each class

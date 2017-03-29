@@ -81,21 +81,21 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized registration step using the specified identifier,
- title, text, options, passcodeValidationRegex, and passcodeInvalidMessage.
+ title, text, options, passcodeValidationRegularExpression, and passcodeInvalidMessage.
  
- @param identifier                  The string that identifies the step (see `ORKStep`).
- @param title                       The title of the form (see `ORKStep`).
- @param text                        The text shown immediately below the title (see `ORKStep`).
- @param passcodeValidationRegex     The regex used to validate the passcode form item (see `ORKTextAnswerFormat`).
- @param passcodeInvalidMessage      The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
- @param options                     The options used for the step (see `ORKRegistrationStepOption`).
+ @param identifier                              The string that identifies the step (see `ORKStep`).
+ @param title                                   The title of the form (see `ORKStep`).
+ @param text                                    The text shown immediately below the title (see `ORKStep`).
+ @param passcodeValidationRegularExpression     The regular expression used to validate the passcode form item (see `ORKTextAnswerFormat`).
+ @param passcodeInvalidMessage                  The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
+ @param options                                 The options used for the step (see `ORKRegistrationStepOption`).
  
  @return An initialized registration step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-           passcodeValidationRegex:(nullable NSString *)passcodeValidationRegex
+passcodeValidationRegularExpression:(nullable NSRegularExpression *)passcodeValidationRegularExpression
             passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options;
 
@@ -123,19 +123,19 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) ORKRegistrationStepOption options;
 
 /**
- The regex used to validate the passcode form item.
+ The regular expression used to validate the passcode form item.
  This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
  
  The passcode invalid message property must also be set along with this property.
  By default, there is no validation on the passcode.
  */
-@property (nonatomic, copy, nullable) NSString *passcodeValidationRegex;
+@property (nonatomic, copy, nullable) NSRegularExpression *passcodeValidationRegularExpression;
 
 /**
- The invalid message displayed if the passcode does not match the validation regex.
+ The invalid message displayed if the passcode does not match the validation regular expression.
  This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
  
- The passcode validation regex property must also be set along with this property.
+ The passcode validation regular expression property must also be set along with this property.
  By default, there is no invalid message.
  */
 @property (nonatomic, copy, nullable) NSString *passcodeInvalidMessage;
