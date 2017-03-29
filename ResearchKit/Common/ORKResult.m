@@ -46,7 +46,7 @@
 #import "ORKHelpers_Internal.h"
 
 @import CoreMotion;
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
@@ -2062,7 +2062,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         _coordinate = coordinate;
         _region = region;
         _userInput = [userInput copy];
-        _addressDictionary = [addressDictionary copy];
+        _addressDictionary = addressDictionary;
     }
     return self;
 }
