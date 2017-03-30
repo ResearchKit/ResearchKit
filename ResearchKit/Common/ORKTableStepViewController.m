@@ -186,16 +186,16 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([self.tableStep respondsToSelector:@selector(tableView:titleForHeaderInSection:)]) {
-        return [self.tableStep tableView:tableView titleForHeaderInSection:section];
+    if ([self.tableStep respondsToSelector:@selector(titleForHeaderInSection:tableView:)]) {
+        return [self.tableStep titleForHeaderInSection:section tableView:tableView];
     } else {
         return nil;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if ([self.tableStep respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
-        return [self.tableStep tableView:tableView viewForHeaderInSection:section];
+    if ([self.tableStep respondsToSelector:@selector(viewForHeaderInSection:tableView:)]) {
+        return [self.tableStep viewForHeaderInSection:section tableView:tableView];
     } else {
         return nil;
     }
