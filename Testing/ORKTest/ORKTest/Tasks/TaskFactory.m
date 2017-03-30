@@ -51,34 +51,36 @@
 //
 #define ORKTPasteTokens(A,B) A ## B
 
-#define ORKTTypeExtensionProperty_Implementation(_propertyName,                                     \
-                                                _capitalizedPropertyName,                           \
-                                                _propertyType,                                      \
-                                                _propertyDefaultValue)                              \
-                                                                                                    \
-static const char *_capitalizedPropertyName = #_capitalizedPropertyName;                            \
-                                                                                                    \
-- (void) ORKTPasteTokens(set, _capitalizedPropertyName) :(_propertyType)propertyValue               \
-{                                                                                                   \
-    NSValue *value = [NSValue valueWithBytes:&propertyValue objCType:@encode(_propertyType)];       \
-    objc_setAssociatedObject(self, &_capitalizedPropertyName,                                       \
-                             value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);                             \
-}                                                                                                   \
-                                                                                                    \
-- ( _propertyType ) _propertyName                                                                   \
-{                                                                                                   \
-    NSValue *value = objc_getAssociatedObject(self, &_capitalizedPropertyName );                    \
-    if (value)                                                                                      \
-    {                                                                                               \
-        _propertyType propertyValue; [value getValue:&propertyValue]; return propertyValue;         \
-    }                                                                                               \
-    else                                                                                            \
-    {                                                                                               \
-        return _propertyDefaultValue ;                                                              \
-    }                                                                                               \
-}                                                                                                   \
+#define ORKTTypeExtensionProperty_Implementation(_propertyName,                                         \
+                                                _capitalizedPropertyName,                               \
+                                                _propertyType,                                          \
+                                                _propertyDefaultValue)                                  \
+                                                                                                        \
+- (void) ORKTPasteTokens(set, _capitalizedPropertyName) :(_propertyType)propertyValue                   \
+{                                                                                                       \
+    NSValue *value = [NSValue valueWithBytes:&propertyValue objCType:@encode(_propertyType)];           \
+    objc_setAssociatedObject(self, @selector(_propertyName), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
+}                                                                                                       \
+                                                                                                        \
+- ( _propertyType ) _propertyName                                                                       \
+{                                                                                                       \
+    NSValue *value = objc_getAssociatedObject(self, @selector(_propertyName) );                         \
+    if (value)                                                                                          \
+    {                                                                                                   \
+        _propertyType propertyValue; [value getValue:&propertyValue]; return propertyValue;             \
+    }                                                                                                   \
+    else                                                                                                \
+    {                                                                                                   \
+        return _propertyDefaultValue ;                                                                  \
+    }                                                                                                   \
+}                                                                                                       \
 
 @implementation NSObject (TaskFactory)
+
+ORKTTypeExtensionProperty_Implementation(hidesLearnMoreButtonOnInstructionStep,
+                                         HidesLearnMoreButtonOnInstructionStep,
+                                         BOOL,
+                                         NO);
 
 ORKTTypeExtensionProperty_Implementation(hidesProgressInNavigationBar,
                                          HidesProgressInNavigationBar,
@@ -90,15 +92,21 @@ ORKTTypeExtensionProperty_Implementation(isEmbeddedReviewTask,
                                          BOOL,
                                          NO);
 
-ORKTTypeExtensionProperty_Implementation(hidesLearnMoreButtonOnInstructionStep,
-                                         HidesLearnMoreButtonOnInstructionStep,
-                                         BOOL,
-                                         NO);
-
 ORKTTypeExtensionProperty_Implementation(triggersStepWillDisappearAction,
                                          TriggersStepWillDisappearAction,
                                          BOOL,
                                          NO);
+
+- (void)setStepViewControllerWillAppearBlock:(StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
+{
+    objc_setAssociatedObject(self, @selector(stepViewControllerWillAppearBlock),
+                             stepViewControllerWillAppearBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
+{
+    return objc_getAssociatedObject(self, @selector(stepViewControllerWillAppearBlock));
+}
 
 @end
 

@@ -472,7 +472,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
 
 #pragma mark - Custom Button Actions
 
-// Pass code management
+// Passcode management
 - (void)authenticatePasscodeButtonTapped:(id)sender {
     if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController
@@ -688,44 +688,9 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
 stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
-    
-    if ([stepViewController.step.identifier isEqualToString:@"aid_001c"]) {
-        /*
-         Tests adding a custom view to a view controller for an active step, without
-         subclassing.
-         
-         This is possible, but not recommended. A better choice would be to create
-         a custom active step subclass and a matching active step view controller
-         subclass, so you completely own the view controller and its appearance.
-         */
-        
-        UIView *customView = [UIView new];
-        customView.backgroundColor = [UIColor cyanColor];
-        
-        // Have the custom view request the space it needs.
-        // A little tricky because we need to let it size to fit if there's not enough space.
-        customView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]"
-                                                                               options:(NSLayoutFormatOptions)0
-                                                                               metrics:nil
-                                                                                 views:@{@"c":customView}];
-        for (NSLayoutConstraint *constraint in verticalConstraints)
-        {
-            constraint.priority = UILayoutPriorityFittingSizeLevel;
-        }
-        [NSLayoutConstraint activateConstraints:verticalConstraints];
-        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]"
-                                                                                        options:(NSLayoutFormatOptions)0
-                                                                                        metrics:nil
-                                                                                          views:@{@"c":customView}]];
-        
-        [(ORKActiveStepViewController *)stepViewController setCustomView:customView];
-        
-        // Set custom button on navigation bar
-        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
-                                                                                               style:UIBarButtonItemStylePlain
-                                                                                              target:nil
-                                                                                              action:nil];
+    ORKStep *step = stepViewController.step;
+    if (step.stepViewControllerWillAppearBlock) {
+        step.stepViewControllerWillAppearBlock(taskViewController, stepViewController);
     } else if ([stepViewController.step.identifier hasPrefix:@"question_"]
                && ![stepViewController.step.identifier hasSuffix:@"6"]) {
         /*

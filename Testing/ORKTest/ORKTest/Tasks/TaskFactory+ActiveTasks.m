@@ -127,6 +127,45 @@
         step.text = @"An active test collecting device motion data";
         step.shouldUseNextAsSkipButton = YES;
         step.recorderConfigurations = @[[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"aid_001c.deviceMotion" frequency:100.0]];
+        
+        /*
+         Tests adding a custom view to a view controller for an active step, without
+         subclassing.
+         
+         This is possible, but not recommended. A better choice would be to create
+         a custom active step subclass and a matching active step view controller
+         subclass, so you completely own the view controller and its appearance.
+         */
+        step.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                   ORKStepViewController *stepViewController) {
+            UIView *customView = [UIView new];
+            customView.backgroundColor = [UIColor cyanColor];
+            
+            // Have the custom view request the space it needs.
+            // A little tricky because we need to let it size to fit if there's not enough space.
+            customView.translatesAutoresizingMaskIntoConstraints = NO;
+            NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]"
+                                                                                   options:(NSLayoutFormatOptions)0
+                                                                                   metrics:nil
+                                                                                     views:@{@"c":customView}];
+            for (NSLayoutConstraint *constraint in verticalConstraints) {
+                constraint.priority = UILayoutPriorityFittingSizeLevel;
+            }
+            [NSLayoutConstraint activateConstraints:verticalConstraints];
+            [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]"
+                                                                                            options:(NSLayoutFormatOptions)0
+                                                                                            metrics:nil
+                                                                                              views:@{@"c":customView}]];
+            
+            [(ORKActiveStepViewController *)stepViewController setCustomView:customView];
+            
+            // Set custom button on navigation bar
+            stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
+                                                                                                   style:UIBarButtonItemStylePlain
+                                                                                                  target:nil
+                                                                                                  action:nil];
+        };
+        
         [steps addObject:step];
     }
     

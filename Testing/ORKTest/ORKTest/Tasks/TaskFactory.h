@@ -42,16 +42,24 @@
 
 @protocol ORKTask;
 @class ORKConsentDocument;
+@class ORKStepViewController;
 @class ORKTaskResult;
+@class ORKTaskViewController;
 
-
-// Helper properties to communicate task intent to MainViewController
+// Helper properties to communicate task and step intent to MainViewController
 @interface NSObject (TaskFactory)
 
+// ORKTask associated properties
+@property (nonatomic, assign) BOOL hidesLearnMoreButtonOnInstructionStep;
 @property (nonatomic, assign) BOOL hidesProgressInNavigationBar;
 @property (nonatomic, assign) BOOL isEmbeddedReviewTask;
-@property (nonatomic, assign) BOOL hidesLearnMoreButtonOnInstructionStep;
 @property (nonatomic, assign) BOOL triggersStepWillDisappearAction;
+
+// ORKStep associated properties
+typedef void (^StepViewControllerWillAppearBlockType)(ORKTaskViewController *taskViewController,
+                                                      ORKStepViewController *stepViewController);
+
+@property (nonatomic, copy) StepViewControllerWillAppearBlockType stepViewControllerWillAppearBlock;
 
 @end
 
