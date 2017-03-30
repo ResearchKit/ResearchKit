@@ -52,7 +52,7 @@
     ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
     passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
     [steps addObject: passcodeStep];
-    return [[ORKOrderedTask alloc] initWithIdentifier:CreatePasscodeTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 @end

@@ -149,7 +149,7 @@
         [steps addObject:step];
         
     }
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:DatePickersTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 
@@ -226,7 +226,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageCaptureTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 
@@ -343,7 +343,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageChoiceTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 
@@ -372,7 +372,7 @@
     step4.title = @"Survey Complete";
     [steps addObject:step4];
     
-    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:LocationTaskIdentifier steps:steps];
+    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return locationTask;
 }
 
@@ -668,7 +668,7 @@
     }
     
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScaleTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
     
 }
@@ -1080,7 +1080,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SelectionSurveyTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 
@@ -1159,7 +1159,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:VideoCaptureTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 

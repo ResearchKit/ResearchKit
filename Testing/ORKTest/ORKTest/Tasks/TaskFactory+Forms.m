@@ -101,7 +101,7 @@
     step4.title = @"Survey Complete";
     [steps addObject:step4];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:ConfirmationFormItemTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 /*
@@ -517,7 +517,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     return task;
 }
@@ -821,7 +821,7 @@
         step.optional = NO;
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     return task;
 }

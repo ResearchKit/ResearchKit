@@ -100,7 +100,8 @@
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers";
     [steps addObject:reviewStep];
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    task.isEmbeddedReviewTask = YES;
     return task;
 }
 
@@ -110,7 +111,7 @@
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers from your last survey";
     reviewStep.excludeInstructionSteps = YES;
-    return [[ORKOrderedTask alloc] initWithIdentifier:StandaloneReviewTaskIdentifier steps:@[reviewStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[reviewStep]];
 }
 
 @end

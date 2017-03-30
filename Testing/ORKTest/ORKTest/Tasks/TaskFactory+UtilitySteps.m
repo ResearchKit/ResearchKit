@@ -41,14 +41,14 @@
 
 - (id<ORKTask>)makeAuxiliaryImageStepTaskWithIdentifier:(NSString *)identifier {
     
-    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:AuxiliaryImageStepTaskIdentifier];
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:identifier];
     step.title = @"Title";
     step.text = @"This is description text.";
     step.detailText = @"This is detail text.";
     step.image = [UIImage imageNamed:@"tremortest3a" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
     step.auxiliaryImage = [UIImage imageNamed:@"tremortest3b" inBundle:[NSBundle bundleForClass:[ORKOrderedTask class]] compatibleWithTraitCollection:nil];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:@[step]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step]];
 }
 
 - (id<ORKTask>)makeCompletionStepTaskWithIdentifier:(NSString *)identifier {
@@ -62,7 +62,7 @@
     stepLast.title = @"Example of an step view controller with the continue button in the upper right.";
     [steps addObject:stepLast];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 - (id<ORKTask>)makeFootnoteStepTaskWithIdentifier:(NSString *)identifier {
@@ -100,7 +100,7 @@
     lastStep.text = @"This is a completion step with a footnote.";
     lastStep.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteStepTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, step2, step3, step4, step5, lastStep]];
 }
 
 - (id<ORKTask>)makeIconImageStepTaskWithIdentifier:(NSString *)identifier {
@@ -122,7 +122,7 @@
     step3.text = @"This is an example of a step with an icon image that is very big.";
     step3.iconImage = [UIImage imageNamed:@"Poppies"];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:IconImageStepTaskIdentifier steps:@[step1, step2, step3]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, step2, step3]];
 }
 
 
@@ -172,7 +172,7 @@
     stepLast.title = @"Task Complete";
     [steps addObject:stepLast];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:PageStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 /*
@@ -370,7 +370,7 @@
         [steps addObject:step];
     }
     
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilitySurveyTaskIdentifier steps:steps];
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     // Build navigation rules.
     {
@@ -527,7 +527,7 @@
     stepLast.title = @"Task Complete";
     [steps addObject:stepLast];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 - (id<ORKTask>)makeTableStepTaskWithIdentifier:(NSString *)identifier {
@@ -545,7 +545,7 @@
     stepLast.title = @"Task Complete";
     [steps addObject:stepLast];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:TableStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 - (id<ORKTask>)makeVideoInstructionStepTaskWithIdentifier:(NSString *)identifier {
@@ -565,7 +565,7 @@
     lastStep.title = @"Task Complete";
     [steps addObject:lastStep];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
 }
 
 - (id<ORKTask>)makeWaitStepTaskWithIdentifier:(NSString *)identifier {
@@ -602,7 +602,7 @@
     step5.title = @"Setup Complete";
     [steps addObject:step5];
     
-    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitStepTaskIdentifier steps:steps];
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return waitTask;
 }
 

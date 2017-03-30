@@ -36,8 +36,71 @@
 
 #import "ORKTest-Swift.h"
 
-
+#import <objc/runtime.h>
 @import ResearchKit;
+
+
+// This macro generates a default implementation for CType properties declared inside a class extension.
+//
+//  Example:
+//
+//  ORKTypeExtensionProperty_Implementation(myBoolProperty,
+//                                          MyBoolProperty,
+//                                          BOOL,
+//                                          NO);
+//
+#define ORKTPasteTokens(A,B) A ## B
+
+#define ORKTTypeExtensionProperty_Implementation(_propertyName,                                     \
+                                                _capitalizedPropertyName,                           \
+                                                _propertyType,                                      \
+                                                _propertyDefaultValue)                              \
+                                                                                                    \
+static const char *_capitalizedPropertyName = #_capitalizedPropertyName;                            \
+                                                                                                    \
+- (void) ORKTPasteTokens(set, _capitalizedPropertyName) :(_propertyType)propertyValue               \
+{                                                                                                   \
+    NSValue *value = [NSValue valueWithBytes:&propertyValue objCType:@encode(_propertyType)];       \
+    objc_setAssociatedObject(self, &_capitalizedPropertyName,                                       \
+                             value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);                             \
+}                                                                                                   \
+                                                                                                    \
+- ( _propertyType ) _propertyName                                                                   \
+{                                                                                                   \
+    NSValue *value = objc_getAssociatedObject(self, &_capitalizedPropertyName );                    \
+    if (value)                                                                                      \
+    {                                                                                               \
+        _propertyType propertyValue; [value getValue:&propertyValue]; return propertyValue;         \
+    }                                                                                               \
+    else                                                                                            \
+    {                                                                                               \
+        return _propertyDefaultValue ;                                                              \
+    }                                                                                               \
+}                                                                                                   \
+
+@implementation NSObject (TaskFactory)
+
+ORKTTypeExtensionProperty_Implementation(hidesProgressInNavigationBar,
+                                         HidesProgressInNavigationBar,
+                                         BOOL,
+                                         NO);
+
+ORKTTypeExtensionProperty_Implementation(isEmbeddedReviewTask,
+                                         IsEmbeddedReviewTask,
+                                         BOOL,
+                                         NO);
+
+ORKTTypeExtensionProperty_Implementation(hidesLearnMoreButtonOnInstructionStep,
+                                         HidesLearnMoreButtonOnInstructionStep,
+                                         BOOL,
+                                         NO);
+
+ORKTTypeExtensionProperty_Implementation(triggersStepWillDisappearAction,
+                                         TriggersStepWillDisappearAction,
+                                         BOOL,
+                                         NO);
+
+@end
 
 
 @implementation TaskFactory

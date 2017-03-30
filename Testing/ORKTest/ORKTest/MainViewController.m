@@ -46,6 +46,11 @@
 @import AVFoundation;
 
 
+#define ORKTDefineStringKey(x) static NSString *const x = @#x
+
+ORKTDefineStringKey(CollectionViewHeaderReuseIdentifier);
+ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
+
 @interface SectionHeader: UICollectionReusableView
 
 - (void)configureHeaderWithTitle:(NSString *)title;
@@ -284,8 +289,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                    ]},
                         @{ @"Task Review":
                                @[
-                                   @"Embedded Review Task",
-                                   @"Standalone Review Task",
+                                   @"Embedded Review",
+                                   @"Standalone Review",
                                    ]},
                         @{ @"Utility Steps":
                                @[
@@ -410,7 +415,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      */
 
     id<ORKTask> task = [[TaskFactory sharedInstance] makeTaskWithIdentifier:identifier];
-    NSParameterAssert(task);
+    NSParameterAssert(task != nil);
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
@@ -432,7 +437,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
  Actually presents the task view controller.
  */
 - (void)beginTask {
-    id<ORKTask> task = _taskViewController.task;
+    NSObject<ORKTask> *task = _taskViewController.task;
     _taskViewController.delegate = self;
     
     if (_taskViewController.outputDirectory == nil) {
@@ -458,7 +463,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      */
     _taskViewController.restorationIdentifier = [task identifier];
     
-    if ([[task identifier] isEqualToString:CustomNavigationItemTaskIdentifier]) {
+    if (task.hidesProgressInNavigationBar) {
         _taskViewController.showsProgressInNavigationBar = NO;
     }
     
@@ -503,26 +508,23 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
 }
 
 // Task Review
-- (IBAction)embeddedReviewTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:EmbeddedReviewTaskIdentifier];
-}
-
-- (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
+- (IBAction)standaloneReviewButtonTapped:(UIButton *)button {
     if ([TaskFactory sharedInstance].embeddedReviewTaskResult != nil) {
-        [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
+        NSString *buttonTitle = button.titleLabel.text;
+        [self beginTaskWithIdentifier:[self taskIdentifierFromButtonTitle:buttonTitle]];
     } else {
         [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
     }
 }
 
 // Miscellaneous
-- (IBAction)continueButtonButtonTapped:(id)sender {
+- (IBAction)continueButtonButtonTapped:(UIButton *)button {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ContinueButtonExample" bundle:nil];
     UIViewController *viewcController = [storyboard instantiateInitialViewController];
     [self presentViewController:viewcController animated:YES completion:nil];
 }
 
-- (void)toggleTintColorButtonTapped:(id)sender {
+- (void)toggleTintColorButtonTapped:(UIButton *)button {
     static UIColor *defaultTintColor = nil;
     if (!defaultTintColor) {
         defaultTintColor = self.view.tintColor;
@@ -630,10 +632,10 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
  tasks.
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
-    NSString *task_identifier = taskViewController.task.identifier;
+    NSObject<ORKTask> *task = taskViewController.task;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableOrderedLoopTaskIdentifier] containsObject:task_identifier]);
+            && !task.hidesLearnMoreButtonOnInstructionStep);
 }
 
 /*
@@ -787,30 +789,38 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
-            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+        {
+            NSObject<ORKTask> *task = taskViewController.task;
+            if (task.isEmbeddedReviewTask) {
                 [TaskFactory sharedInstance].embeddedReviewTaskResult = taskViewController.result;
             }
             [self taskViewControllerDidComplete:taskViewController];
+        }
             break;
         case ORKTaskViewControllerFinishReasonFailed:
+        {
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
+        }
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
-            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+        {
+            NSObject<ORKTask> *task = taskViewController.task;
+            if (task.isEmbeddedReviewTask) {
                 [TaskFactory sharedInstance].embeddedReviewTaskResult = nil;
             }
             [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
+        }
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
-            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+            NSObject<ORKTask> *task = taskViewController.task;
+            if (task.isEmbeddedReviewTask) {
                 [TaskFactory sharedInstance].embeddedReviewTaskResult = taskViewController.result;
             }
             /*
              Save the restoration data, dismiss the task VC, and do an early return
              so we don't clear the restoration data.
              */
-            id<ORKTask> task = taskViewController.task;
             _savedViewControllers[task.identifier] = taskViewController.restorationData;
             [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
@@ -903,8 +913,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 }
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
-    if ([taskViewController.task.identifier isEqualToString:StepWillDisappearTaskIdentifier] &&
-        [stepViewController.step.identifier isEqualToString:StepWillDisappearFirstStepIdentifier]) {
+    NSObject<ORKTask> *task = taskViewController.task;
+    if (task.triggersStepWillDisappearAction) {
         taskViewController.view.tintColor = [UIColor magentaColor];
     }
 }

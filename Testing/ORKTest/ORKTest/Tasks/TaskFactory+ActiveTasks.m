@@ -130,158 +130,189 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ActiveStepTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
     return task;
 }
 
 - (id<ORKTask>)makeAudioTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask audioTaskWithIdentifier:AudioTaskIdentifier
-                            intendedUseDescription:nil
-                                 speechInstruction:nil
-                            shortSpeechInstruction:nil
-                                          duration:10
-                                 recordingSettings:nil
-                                   checkAudioLevel:YES
-                                           options:(ORKPredefinedTaskOption)0];
+    ORKOrderedTask *task = [ORKOrderedTask audioTaskWithIdentifier:identifier
+                                            intendedUseDescription:nil
+                                                 speechInstruction:nil
+                                            shortSpeechInstruction:nil
+                                                          duration:10
+                                                 recordingSettings:nil
+                                                   checkAudioLevel:YES
+                                                           options:(ORKPredefinedTaskOption)0];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeFitnessTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask fitnessCheckTaskWithIdentifier:FitnessTaskIdentifier
-                                   intendedUseDescription:nil
-                                             walkDuration:360
-                                             restDuration:180
-                                                  options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask fitnessCheckTaskWithIdentifier:identifier
+                                                   intendedUseDescription:nil
+                                                             walkDuration:360
+                                                             restDuration:180
+                                                                  options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeGaitTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask shortWalkTaskWithIdentifier:GaitTaskIdentifier
-                                intendedUseDescription:nil
-                                   numberOfStepsPerLeg:20
-                                          restDuration:30
-                                               options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask shortWalkTaskWithIdentifier:identifier
+                                                intendedUseDescription:nil
+                                                   numberOfStepsPerLeg:20
+                                                          restDuration:30
+                                                               options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeHandTremorTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask tremorTestTaskWithIdentifier:HandTremorTaskIdentifier
-                                 intendedUseDescription:nil
-                                     activeStepDuration:10
-                                      activeTaskOptions:
-            ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight |
-            ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent |
-            ORKTremorActiveTaskOptionExcludeHandToNose
-                                            handOptions:ORKPredefinedTaskHandOptionBoth
-                                                options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask tremorTestTaskWithIdentifier:identifier
+                                                 intendedUseDescription:nil
+                                                     activeStepDuration:10
+                                                      activeTaskOptions:
+                            ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight |
+                            ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent |
+                            ORKTremorActiveTaskOptionExcludeHandToNose
+                                                            handOptions:ORKPredefinedTaskHandOptionBoth
+                                                                options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeHandRightTremorTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask tremorTestTaskWithIdentifier:HandRightTremorTaskIdentifier
-                                 intendedUseDescription:nil
-                                     activeStepDuration:10
-                                      activeTaskOptions:0
-                                            handOptions:ORKPredefinedTaskHandOptionRight
-                                                options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask tremorTestTaskWithIdentifier:identifier
+                                                 intendedUseDescription:nil
+                                                     activeStepDuration:10
+                                                      activeTaskOptions:0
+                                                            handOptions:ORKPredefinedTaskHandOptionRight
+                                                                options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeHolePegTestTaskWithIdentifier:(NSString *)identifier {
-    return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
-                                           intendedUseDescription:nil
-                                                     dominantHand:ORKBodySagittalRight
-                                                     numberOfPegs:9
-                                                        threshold:0.2
-                                                          rotated:NO
-                                                        timeLimit:300.0
-                                                          options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:identifier
+                                                           intendedUseDescription:nil
+                                                                     dominantHand:ORKBodySagittalRight
+                                                                     numberOfPegs:9
+                                                                        threshold:0.2
+                                                                          rotated:NO
+                                                                        timeLimit:300.0
+                                                                          options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 
 - (id<ORKTask>)makeMemoryGameTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:MemoryGameTaskIdentifier
-                                        intendedUseDescription:nil
-                                                   initialSpan:3
-                                                   minimumSpan:2
-                                                   maximumSpan:15
-                                                     playSpeed:1
-                                                  maximumTests:5
-                                    maximumConsecutiveFailures:3
-                                             customTargetImage:nil
-                                        customTargetPluralName:nil
-                                               requireReversal:NO
-                                                       options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:identifier
+                                                        intendedUseDescription:nil
+                                                                   initialSpan:3
+                                                                   minimumSpan:2
+                                                                   maximumSpan:15
+                                                                     playSpeed:1
+                                                                  maximumTests:5
+                                                    maximumConsecutiveFailures:3
+                                                             customTargetImage:nil
+                                                        customTargetPluralName:nil
+                                                               requireReversal:NO
+                                                                       options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makePsatTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask PSATTaskWithIdentifier:PsatTaskIdentifier
-                           intendedUseDescription:nil
-                                 presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
-                            interStimulusInterval:3.0
-                                 stimulusDuration:1.0
-                                     seriesLength:60
-                                          options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask PSATTaskWithIdentifier:identifier
+                                           intendedUseDescription:nil
+                                                 presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
+                                            interStimulusInterval:3.0
+                                                 stimulusDuration:1.0
+                                                     seriesLength:60
+                                                          options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeReactionTimeTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                   intendedUseDescription:nil
-                                  maximumStimulusInterval:8
-                                  minimumStimulusInterval:4
-                                    thresholdAcceleration:0.5
-                                         numberOfAttempts:3
-                                                  timeout:10
-                                             successSound:0
-                                             timeoutSound:0
-                                             failureSound:0
-                                                  options:0];
+    ORKOrderedTask *task = [ORKOrderedTask reactionTimeTaskWithIdentifier:identifier
+                                                   intendedUseDescription:nil
+                                                  maximumStimulusInterval:8
+                                                  minimumStimulusInterval:4
+                                                    thresholdAcceleration:0.5
+                                                         numberOfAttempts:3
+                                                                  timeout:10
+                                                             successSound:0
+                                                             timeoutSound:0
+                                                             failureSound:0
+                                                                  options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeTimedWalkTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
-                                intendedUseDescription:nil
-                                      distanceInMeters:100
-                                             timeLimit:180
-                                   turnAroundTimeLimit:60
-                            includeAssistiveDeviceForm:YES
-                                               options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask timedWalkTaskWithIdentifier:identifier
+                                                intendedUseDescription:nil
+                                                      distanceInMeters:100
+                                                             timeLimit:180
+                                                   turnAroundTimeLimit:60
+                                            includeAssistiveDeviceForm:YES
+                                                               options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeToneAudiometryTaskIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask toneAudiometryTaskWithIdentifier:ToneAudiometryTaskIdentifier
-                                     intendedUseDescription:nil
-                                          speechInstruction:nil
-                                     shortSpeechInstruction:nil
-                                               toneDuration:20
-                                                    options:(ORKPredefinedTaskOption)0];
+    ORKOrderedTask *task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:identifier
+                                                     intendedUseDescription:nil
+                                                          speechInstruction:nil
+                                                     shortSpeechInstruction:nil
+                                                               toneDuration:20
+                                                                    options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeTowerOfHanoiTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
-                                   intendedUseDescription:nil
-                                            numberOfDisks:5
-                                                  options:0];
+    ORKOrderedTask *task = [ORKOrderedTask towerOfHanoiTaskWithIdentifier:identifier
+                                                   intendedUseDescription:nil
+                                                            numberOfDisks:5
+                                                                  options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 
 - (id<ORKTask>)makeTrailMakingTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
-                                  intendedUseDescription:nil
-                                  trailmakingInstruction:nil
-                                               trailType:ORKTrailMakingTypeIdentifierA
-                                                 options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask trailmakingTaskWithIdentifier:identifier
+                                                  intendedUseDescription:nil
+                                                  trailmakingInstruction:nil
+                                                               trailType:ORKTrailMakingTypeIdentifierA
+                                                                 options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeTwoFingerTapTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
-                                               intendedUseDescription:nil
-                                                             duration:20.0
-                                                          handOptions:ORKPredefinedTaskHandOptionBoth
-                                                              options:(ORKPredefinedTaskOption)0];
+    ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:identifier
+                                                               intendedUseDescription:nil
+                                                                             duration:20.0
+                                                                          handOptions:ORKPredefinedTaskHandOptionBoth
+                                                                              options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeWalkAndTurnTaskWithIdentifier:(NSString *)identifier {
-    return [ORKOrderedTask walkBackAndForthTaskWithIdentifier:WalkAndTurnTaskIdentifier
-                                       intendedUseDescription:nil
-                                                 walkDuration:30
-                                                 restDuration:30
-                                                      options:ORKPredefinedTaskOptionNone];
+    ORKOrderedTask *task = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:identifier
+                                                       intendedUseDescription:nil
+                                                                 walkDuration:30
+                                                                 restDuration:30
+                                                                      options:ORKPredefinedTaskOptionNone];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
 }
 
 @end

@@ -52,7 +52,7 @@
     
     ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"done"];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:CustomViewControllerTaskIdentifier steps:@[step1, dragonStep, lastStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, dragonStep, lastStep]];
 }
 
 - (id<ORKTask>)makeCustomNavigationItemTaskWithIdentifier:(NSString *)identifier {
@@ -63,7 +63,10 @@
     step2.title = @"Custom Navigation Item Title View";
     [steps addObject: step1];
     [steps addObject: step2];
-    return [[ORKOrderedTask alloc] initWithIdentifier: CustomNavigationItemTaskIdentifier steps:steps];
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    task.hidesProgressInNavigationBar = YES;
+    return task;
 }
 
 - (id<ORKTask>)makeDynamicTaskWithIdentifier:(NSString *)identifier {
@@ -104,7 +107,7 @@
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:InterruptibleTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 
@@ -189,7 +192,7 @@
     step.title = @"You have finished the task";
     [steps addObject:step];
     
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedLoopTaskIdentifier
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier
                                                                                   steps:steps];
     
     // Build navigation rules
@@ -230,16 +233,16 @@
 }
 
 - (id<ORKTask>)makeStepWillDisappearTaskWithIdentifier:(NSString *)identifier {
-    
-    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:StepWillDisappearFirstStepIdentifier];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"StepWillDisappearFirstStepIdentifier"];
     step1.title = @"Step Will Disappear Delegate Example";
     step1.text = @"The tint color of the task view controller is changed to magenta in the `stepViewControllerWillDisappear:` method.";
     
-    ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
-    stepLast.title = @"Survey Complete";
+    ORKCompletionStep *step2 = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
+    step2.title = @"Survey Complete";
     
-    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:StepWillDisappearTaskIdentifier steps:@[step1, stepLast]];
-    return locationTask;
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, step2]];
+    task.triggersStepWillDisappearAction = YES;
+    return task;
 }
 
 @end

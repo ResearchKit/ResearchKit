@@ -35,94 +35,26 @@
 @import UIKit;
 
 
-/*  NOTE: The task creation utility funtions are alphabetically sorted within their
- *        their own sections. Make sure you insert your code in the appropriate place
- *        so all the sections remain alphabetically sorted
+/*  NOTE: The task creation utility methods are alphabetically sorted within their
+ *        their own category file. Make sure you insert your code in the appropriate place
+ *        so all the methods in each categoty files remain alphabetically sorted.
  */
-
-#define DefineStringKey(x) static NSString *const x = @#x
-
-/// Task Identifiers
-// Active Taks
-DefineStringKey(ActiveStepTaskIdentifier);
-DefineStringKey(AudioTaskIdentifier);
-DefineStringKey(FitnessTaskIdentifier);
-DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(HandTremorTaskIdentifier);
-DefineStringKey(HandRightTremorTaskIdentifier);
-DefineStringKey(HolePegTestTaskIdentifier);
-DefineStringKey(MemoryGameTaskIdentifier);
-DefineStringKey(PsatTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
-DefineStringKey(TrailMakingTaskIdentifier);
-DefineStringKey(TwoFingerTapTaskIdentifier);
-DefineStringKey(WalkAndTurnTaskIdentifier);
-
-// Forms
-DefineStringKey(ConfirmationFormItemTaskIdentifier);
-DefineStringKey(MiniFormTaskIdentifier);
-DefineStringKey(OptionalFormTaskIdentifier);
-
-// Onboarding
-DefineStringKey(ConsentTaskIdentifier);
-DefineStringKey(ConsentReviewTaskIdentifier);
-DefineStringKey(EligibilityFormTaskIdentifier);
-DefineStringKey(EligibilitySurveyTaskIdentifier);
-DefineStringKey(LoginTaskIdentifier);
-DefineStringKey(RegistrationTaskIdentifier);
-DefineStringKey(VerificationTaskIdentifier);
-
-// Passcode Management
-DefineStringKey(CreatePasscodeTaskIdentifier);
-
-// Question Steps
-DefineStringKey(DatePickersTaskIdentifier);
-DefineStringKey(ImageCaptureTaskIdentifier);
-DefineStringKey(ImageChoiceTaskIdentifier);
-DefineStringKey(LocationTaskIdentifier);
-DefineStringKey(ScaleTaskIdentifier);
-DefineStringKey(ScaleColorGradientTaskIdentifier);
-DefineStringKey(SelectionSurveyTaskIdentifier);
-DefineStringKey(VideoCaptureTaskIdentifier);
-
-// Task Customization
-DefineStringKey(CustomViewControllerTaskIdentifier);
-DefineStringKey(CustomNavigationItemTaskIdentifier);
-DefineStringKey(DynamicTaskIdentifier);
-DefineStringKey(InterruptibleTaskIdentifier);
-DefineStringKey(NavigableOrderedTaskIdentifier);
-DefineStringKey(NavigableOrderedLoopTaskIdentifier);
-DefineStringKey(StepWillDisappearTaskIdentifier);
-
-// Task Review
-DefineStringKey(EmbeddedReviewTaskIdentifier);
-DefineStringKey(StandaloneReviewTaskIdentifier);
-
-// Utility Steps
-DefineStringKey(AuxiliaryImageStepTaskIdentifier);
-DefineStringKey(CompletionStepTaskIdentifier);
-DefineStringKey(FootnoteStepTaskIdentifier);
-DefineStringKey(IconImageStepTaskIdentifier);
-DefineStringKey(PageStepTaskIdentifier);
-DefineStringKey(PredicateTestsTaskIdentifier);
-DefineStringKey(SignatureStepTaskIdentifier);
-DefineStringKey(TableStepTaskIdentifier);
-DefineStringKey(VideoInstructionStepTaskIdentifier);
-DefineStringKey(WaitStepTaskIdentifier);
-
-/// Non-Task Identifiers 
-// Steps
-DefineStringKey(StepWillDisappearFirstStepIdentifier);
-DefineStringKey(CollectionViewHeaderReuseIdentifier);
-DefineStringKey(CollectionViewCellReuseIdentifier);
-
 
 @protocol ORKTask;
 @class ORKConsentDocument;
 @class ORKTaskResult;
+
+
+// Helper properties to communicate task intent to MainViewController
+@interface NSObject (TaskFactory)
+
+@property (nonatomic, assign) BOOL hidesProgressInNavigationBar;
+@property (nonatomic, assign) BOOL isEmbeddedReviewTask;
+@property (nonatomic, assign) BOOL hidesLearnMoreButtonOnInstructionStep;
+@property (nonatomic, assign) BOOL triggersStepWillDisappearAction;
+
+@end
+
 
 @interface TaskFactory : NSObject
 
