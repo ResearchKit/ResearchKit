@@ -2062,7 +2062,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
         _coordinate = coordinate;
         _region = region;
         _userInput = [userInput copy];
-        _addressDictionary = addressDictionary;
+        _addressDictionary = [addressDictionary copy];
     }
     return self;
 }
