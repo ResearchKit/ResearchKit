@@ -41,7 +41,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) ORKBodySagittal movingDirection;
 @property (nonatomic, assign, getter = isDominantHandTested) BOOL dominantHandTested;
-@property (nonatomic, assign) int numberOfPegs;
+@property (nonatomic, assign) NSInteger numberOfPegs;
 @property (nonatomic, assign) double threshold;
 @property (nonatomic, assign, getter = isRotated) BOOL rotated;
 

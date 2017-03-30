@@ -574,10 +574,10 @@
 		FF5CA6131D2C2670001660A3 /* ORKTableStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA6111D2C2670001660A3 /* ORKTableStep.m */; };
 		FF5CA61B1D2C6453001660A3 /* ORKSignatureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */; };
-		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
-		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FF5E3CCB1D23444400ECE4B7 /* ORKPageStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FF5E3CC91D23444400ECE4B7 /* ORKPageStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FF5E3CCC1D23444400ECE4B7 /* ORKPageStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5E3CCA1D23444400ECE4B7 /* ORKPageStepViewController.m */; };
+		FFAE71401DAEC66200AE82B4 /* ORKFootnoteLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */; };
+		FFAE71411DAEC66200AE82B4 /* ORKFootnoteLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */; };
 		FFDDD8491D3555EA00446806 /* ORKPageStep.h in Headers */ = {isa = PBXBuildFile; fileRef = FFDDD8471D3555EA00446806 /* ORKPageStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFDDD84A1D3555EA00446806 /* ORKPageStep.m in Sources */ = {isa = PBXBuildFile; fileRef = FFDDD8481D3555EA00446806 /* ORKPageStep.m */; };
 		FFDF60D11D19E47D0004156F /* ORKTextButton_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = FB30E8571C7D030F0005AD25 /* ORKTextButton_Internal.h */; };
@@ -1200,10 +1200,10 @@
 		FF5CA6111D2C2670001660A3 /* ORKTableStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTableStep.m; sourceTree = "<group>"; };
 		FF5CA6191D2C6453001660A3 /* ORKSignatureStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSignatureStep.h; sourceTree = "<group>"; };
 		FF5CA61A1D2C6453001660A3 /* ORKSignatureStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSignatureStep.m; sourceTree = "<group>"; };
-		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
-		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FF5E3CC91D23444400ECE4B7 /* ORKPageStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStepViewController.h; sourceTree = "<group>"; };
 		FF5E3CCA1D23444400ECE4B7 /* ORKPageStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPageStepViewController.m; sourceTree = "<group>"; };
+		FFAE713E1DAEC66200AE82B4 /* ORKFootnoteLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKFootnoteLabel.h; sourceTree = "<group>"; };
+		FFAE713F1DAEC66200AE82B4 /* ORKFootnoteLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKFootnoteLabel.m; sourceTree = "<group>"; };
 		FFDDD8471D3555EA00446806 /* ORKPageStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPageStep.h; sourceTree = "<group>"; };
 		FFDDD8481D3555EA00446806 /* ORKPageStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPageStep.m; sourceTree = "<group>"; };
 		FFF65AB61E318F2D0043FB40 /* ORKMultipleValuePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKMultipleValuePicker.h; sourceTree = "<group>"; };
@@ -1585,7 +1585,7 @@
 				861610BF1A8D8EDD00245F7A /* Artwork.xcassets */,
 				B1C0F4E01A9BA65F0022C153 /* Localized */,
 				86C40C101A8D7C5C00081FAC /* Info.plist */,
-				B18AABE01A9F08D9003871B5 /* module.modulemap */,
+				B18AABE01A9F08D9003871B5 /* ResearchKit.modulemap */,
 			);
 			path = ResearchKit;
 			sourceTree = "<group>";
@@ -3502,7 +3502,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = ResearchKit/module.modulemap;
+				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;
@@ -3534,7 +3534,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = ResearchKit/module.modulemap;
+				MODULEMAP_FILE = ResearchKit/ResearchKit.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.researchkit.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;

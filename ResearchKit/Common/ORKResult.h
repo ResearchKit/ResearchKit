@@ -1357,17 +1357,17 @@ ORK_CLASS_AVAILABLE
 /**
  The region describes the size of the placemark of the location.
  */
-@property (nonatomic, copy, readonly) CLCircularRegion *region;
+@property (nonatomic, copy, readonly, nullable) CLCircularRegion *region;
 
 /**
  The human readable address typed in by user.
  */
-@property (nonatomic, copy, readonly) NSString *userInput;
+@property (nonatomic, copy, readonly, nullable) NSString *userInput;
 
 /**
  The address dicitonary for this coordinate from MapKit.
  */
-@property (nonatomic, copy, readonly) NSDictionary *addressDictionary;
+@property (nonatomic, copy, readonly, nullable) NSDictionary *addressDictionary;
 
 @end
 
