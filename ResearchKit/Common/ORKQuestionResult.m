@@ -328,7 +328,7 @@
     self = [super init];
     if (self) {
         _coordinate = coordinate;
-        _region = region;
+        _region = [region copy];
         _userInput = [userInput copy];
         _addressDictionary = [addressDictionary copy];
     }
@@ -340,15 +340,17 @@
     if (self) {
         _coordinate = placemark.location.coordinate;
         _userInput =  [userInput copy];
-        _region = (CLCircularRegion *)placemark.region;
+        _region = [placemark.region copy];
         _addressDictionary = [placemark.addressDictionary copy];
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    // This object is not mutable
-    return self;
+    return [[[self class] alloc] initWithCoordinate:self.coordinate
+                                             region:self.region
+                                          userInput:self.userInput
+                                  addressDictionary:self.addressDictionary];
 }
 
 + (BOOL)supportsSecureCoding {

@@ -30,7 +30,6 @@
 
 
 @import UIKit;
-@import CoreLocation;
 #import <ResearchKit/ORKTypes.h>
 
 

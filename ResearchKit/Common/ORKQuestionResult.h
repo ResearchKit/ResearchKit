@@ -30,7 +30,7 @@
 
 
 #import <ResearchKit/ORKResult.h>
-
+@import CoreLocation;
 
 NS_ASSUME_NONNULL_BEGIN
 
