@@ -119,7 +119,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
             let ageComponents = Calendar.current.dateComponents([.year], from: dateOfBirth, to: now)
             let age = ageComponents.year
 
-            cell.valueLabel.text = "\(age)"
+            cell.valueLabel.text = "\(age ?? 0)"
         }
         catch {
         }

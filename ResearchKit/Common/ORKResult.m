@@ -46,7 +46,7 @@
 #import "ORKHelpers_Internal.h"
 
 @import CoreMotion;
-#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
