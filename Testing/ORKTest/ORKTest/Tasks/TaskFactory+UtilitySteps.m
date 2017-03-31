@@ -56,6 +56,10 @@
     
     ORKCompletionStep *step1 = [[ORKCompletionStep alloc] initWithIdentifier:@"completionStepWithDoneButton"];
     step1.text = @"Example of a step view controller with the continue button in the standard location below the checkmark.";
+    step1.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        ((ORKCompletionStepViewController*)stepViewController).shouldShowContinueButton = YES;
+    };
     [steps addObject:step1];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
@@ -584,8 +588,13 @@
     ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
     step2.title = @"Getting Ready";
     step2.text = @"Please wait while the setup completes.";
+    step2.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(updateText:) withObject:@"Updated text" afterDelay:2.0];
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
+    };
     [steps addObject:step2];
-    
+
     ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
     step3.title = @"Account Setup";
     step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
@@ -596,6 +605,10 @@
     step4.title = @"Syncing Account";
     step4.text = @"Please wait while the data is uploaded.";
     step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
+    step4.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
+    };
     [steps addObject:step4];
     
     ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
@@ -604,6 +617,24 @@
     
     ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return waitTask;
+}
+
+// Update progress on the Wait Task
+- (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)waitStepviewController {
+    if (progress <= 1.0) {
+        [waitStepviewController setProgress:progress animated:true];
+        double delayInSeconds = 0.1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            [self updateProgress:(progress + 0.01) waitStepViewController:waitStepviewController];
+            if (progress > 0.495 && progress < 0.505) {
+                NSString *newText = @"Please wait while the data is downloaded.";
+                [waitStepviewController updateText:newText];
+            }
+        });
+    } else {
+        [waitStepviewController goForward];
+    }
 }
 
 @end

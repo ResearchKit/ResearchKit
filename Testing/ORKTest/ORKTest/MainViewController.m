@@ -693,18 +693,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     ORKStep *step = stepViewController.step;
     if (step.stepViewControllerWillAppearBlock) {
         step.stepViewControllerWillAppearBlock(taskViewController, stepViewController);
-    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
-        // Indeterminate step
-        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(updateText:) withObject:@"Updated text" afterDelay:2.0];
-        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
-    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
-        // Determinate step
-        [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
-    } else if ([stepViewController.step.identifier isEqualToString:@"completionStepWithDoneButton"] &&
-               [stepViewController isKindOfClass:[ORKCompletionStepViewController class]]) {
-        ((ORKCompletionStepViewController*)stepViewController).shouldShowContinueButton = YES;
     }
-
 }
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
@@ -894,26 +883,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         _taskViewController.defaultResultSource = _lastRouteResult;
     }
     _taskViewController.delegate = self;
-}
-
-#pragma Mark - Wait Task
-
-// Updates progress on the Wait Task
-- (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)waitStepviewController {
-    if (progress <= 1.0) {
-        [waitStepviewController setProgress:progress animated:true];
-        double delayInSeconds = 0.1;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            [self updateProgress:(progress + 0.01) waitStepViewController:waitStepviewController];
-            if (progress > 0.495 && progress < 0.505) {
-                NSString *newText = @"Please wait while the data is downloaded.";
-                [waitStepviewController updateText:newText];
-            }
-        });
-    } else {
-        [waitStepviewController goForward];
-    }
 }
 
 @end
