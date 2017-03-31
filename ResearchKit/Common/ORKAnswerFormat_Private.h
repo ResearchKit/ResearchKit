@@ -58,8 +58,8 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
 /**
  Returns an initialized text answer format using the original item identifier.

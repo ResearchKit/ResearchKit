@@ -209,7 +209,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
     _decimalPlaces = decimalPlaces;
-    _decimalFormat = [NSString stringWithFormat:@"%%.%df", _decimalPlaces];
+    _decimalFormat = [NSString stringWithFormat:@"%%.%luf", (unsigned long)_decimalPlaces];
     [_yAxisView setDecimalPlaces:_decimalPlaces];
 }
 
