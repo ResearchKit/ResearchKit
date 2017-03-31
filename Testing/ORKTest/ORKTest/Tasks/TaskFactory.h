@@ -33,6 +33,7 @@
 
 
 @import UIKit;
+@import ResearchKit;
 
 
 /*  NOTE: The task creation utility methods are alphabetically sorted within their
@@ -51,15 +52,17 @@
 
 // ORKTask associated properties
 @property (nonatomic, assign) BOOL hidesLearnMoreButtonOnInstructionStep;
-@property (nonatomic, assign) BOOL hidesProgressInNavigationBar;
 @property (nonatomic, assign) BOOL isEmbeddedReviewTask;
-@property (nonatomic, assign) BOOL triggersStepWillDisappearAction;
 
 // ORKStep associated properties
 typedef void (^StepViewControllerWillAppearBlockType)(ORKTaskViewController *taskViewController,
                                                       ORKStepViewController *stepViewController);
-
 @property (nonatomic, copy) StepViewControllerWillAppearBlockType stepViewControllerWillAppearBlock;
+
+typedef void (^StepViewControllerWillDisappearBlockType)(ORKTaskViewController *taskViewController,
+                                                         ORKStepViewController *stepViewController,
+                                                         ORKStepViewControllerNavigationDirection navigationDirection);
+@property (nonatomic, copy) StepViewControllerWillDisappearBlockType stepViewControllerWillDisappearBlock;
 
 @end
 

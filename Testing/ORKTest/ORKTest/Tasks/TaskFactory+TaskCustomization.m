@@ -55,20 +55,6 @@
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, dragonStep, lastStep]];
 }
 
-- (id<ORKTask>)makeCustomNavigationItemTaskWithIdentifier:(NSString *)identifier {
-    NSMutableArray *steps = [[NSMutableArray alloc] init];
-    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step1"];
-    step1.title = @"Custom Navigation Item Title";
-    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step2"];
-    step2.title = @"Custom Navigation Item Title View";
-    [steps addObject: step1];
-    [steps addObject: step2];
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    task.hidesProgressInNavigationBar = YES;
-    return task;
-}
-
 - (id<ORKTask>)makeDynamicTaskWithIdentifier:(NSString *)identifier {
     return [DynamicTask new];
 }
@@ -232,16 +218,132 @@
     return task;
 }
 
+- (id<ORKTask>)makeStepWillAppearTaskWithIdentifier:(NSString *)identifier {
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Step Will Appear Delegate Example";
+    step1.text = @"This task will test several usages of the delegate's 'taskViewController:stepViewControllerWillAppear:\' method.";
+    
+    /*
+     Test adding a custom view to a view controller for an active step, without
+     subclassing.
+     
+     This is possible, but not recommended. A better choice would be to create
+     a custom active step subclass and a matching active step view controller
+     subclass, so you completely own the view controller and its appearance.
+     */
+    ORKActiveStep *step2 = [[ORKActiveStep alloc] initWithIdentifier:@"step2"];
+    step2.title = @"Custom View On Active Step";
+    step2.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                               ORKStepViewController *stepViewController) {
+        UIView *customView = [UIView new];
+        customView.backgroundColor = [UIColor cyanColor];
+        
+        // Have the custom view request the space it needs.
+        // A little tricky because we need to let it size to fit if there's not enough space.
+        customView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(==160)]"
+                                                                               options:(NSLayoutFormatOptions)0
+                                                                               metrics:nil
+                                                                                 views:@{@"c":customView}];
+        for (NSLayoutConstraint *constraint in verticalConstraints) {
+            constraint.priority = UILayoutPriorityFittingSizeLevel;
+        }
+        [NSLayoutConstraint activateConstraints:verticalConstraints];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(==280)]"
+                                                                                        options:(NSLayoutFormatOptions)0
+                                                                                        metrics:nil
+                                                                                          views:@{@"c":customView}]];
+        
+        [(ORKActiveStepViewController *)stepViewController setCustomView:customView];
+        
+        // Set custom button on navigation bar
+        stepViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Custom button"
+                                                                                               style:UIBarButtonItemStylePlain
+                                                                                              target:nil
+                                                                                              action:nil];
+    };
+    
+    /*
+     Customize the continue and learn more buttons.
+     */
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
+    step3.title = @"Custom Next and Learn More Buttons";
+    step3.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        stepViewController.continueButtonTitle = @"Next Customized Step";
+        stepViewController.learnMoreButtonTitle = @"Learn more about this customized task";
+    };
+
+    /*
+     Customize the back and cancel buttons.
+     */
+    ORKInstructionStep *step4 = [[ORKInstructionStep alloc] initWithIdentifier:@"step4"];
+    step4.title = @"Custom Back and Cancel Buttons";
+    step4.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        stepViewController.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Backwards"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:stepViewController.backButtonItem.target
+                                                                            action:stepViewController.backButtonItem.action];
+        stepViewController.cancelButtonItem.title = @"Abort";
+    };
+
+    /*
+     Customize the navigation item title.
+     */
+    ORKInstructionStep *step5 = [[ORKInstructionStep alloc] initWithIdentifier:@"step5"];
+    step5.title = @"Custom Navigation Item Title";
+    step5.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        taskViewController.showsProgressInNavigationBar = NO;
+        stepViewController.navigationItem.title = @"Custom title";
+    };
+    step5.stepViewControllerWillDisappearBlock = ^(ORKTaskViewController *taskViewController,
+                                                   ORKStepViewController *stepViewController,
+                                                   ORKStepViewControllerNavigationDirection navigationDirection) {
+        taskViewController.showsProgressInNavigationBar = YES;
+    };
+    
+    /*
+     Customize the navigation item title view.
+     */
+    ORKInstructionStep *step6 = [[ORKInstructionStep alloc] initWithIdentifier:@"step6"];
+    step6.title = @"Custom Navigation Item Title View";
+    step6.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
+                                                ORKStepViewController *stepViewController) {
+        taskViewController.showsProgressInNavigationBar = NO;
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        [items addObject:@"Item1"];
+        [items addObject:@"Item2"];
+        [items addObject:@"Item3"];
+        stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
+    };
+    step6.stepViewControllerWillDisappearBlock = ^(ORKTaskViewController *taskViewController,
+                                                   ORKStepViewController *stepViewController,
+                                                   ORKStepViewControllerNavigationDirection navigationDirection) {
+        taskViewController.showsProgressInNavigationBar = YES;
+    };
+
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier
+                                                                steps:@[step1, step2, step3, step4, step5, step6]];
+    return task;
+}
+
 - (id<ORKTask>)makeStepWillDisappearTaskWithIdentifier:(NSString *)identifier {
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"StepWillDisappearFirstStepIdentifier"];
     step1.title = @"Step Will Disappear Delegate Example";
-    step1.text = @"The tint color of the task view controller is changed to magenta in the `stepViewControllerWillDisappear:` method.";
+    step1.text = @"The tint color of the task view controller will be changed to magenta in the delegate's 'taskViewController:stepViewControllerWillDisappear:navigationDirection:' method after this step.";
     
+    step1.stepViewControllerWillDisappearBlock = ^(ORKTaskViewController *taskViewController,
+                                                   ORKStepViewController *stepViewController,
+                                                   ORKStepViewControllerNavigationDirection navigationDirection) {
+        taskViewController.view.tintColor = [UIColor magentaColor];
+    };
+
     ORKCompletionStep *step2 = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
     step2.title = @"Survey Complete";
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, step2]];
-    task.triggersStepWillDisappearAction = YES;
     return task;
 }
 

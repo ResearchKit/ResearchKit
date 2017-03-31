@@ -46,10 +46,100 @@
 @import AVFoundation;
 
 
-#define ORKTDefineStringKey(x) static NSString *const x = @#x
+NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *TestButtonTable()
+{
+    return @[
+             @{ @"Active Tasks":
+                    @[
+                        @"Active Step",
+                        @"Audio",
+                        @"Fitness",
+                        @"GAIT",
+                        @"Hand Tremor",
+                        @"Hand (Right) Tremor",
+                        @"Hole Peg Test",
+                        @"Memory Game",
+                        @"PSAT",
+                        @"Reaction Time",
+                        @"Timed Walk",
+                        @"Tone Audiometry",
+                        @"Tower Of Hanoi",
+                        @"Trail Making",
+                        @"Two Finger Tapping",
+                        @"Walk And Turn",
+                        ]},
+             @{ @"Forms":
+                    @[
+                        @"Confirmation Form Item",
+                        @"Mini Form",
+                        @"Optional Form",
+                        ]},
+             @{ @"Onboarding":
+                    @[
+                        @"Consent",
+                        @"Consent Review",
+                        @"Eligibility Form",
+                        @"Eligibility Survey",
+                        @"Login",
+                        @"Registration",
+                        @"Verification",
+                        ]},
+             @{ @"Passcode Management":
+                    @[
+                        @"Authenticate Passcode",
+                        @"Create Passcode",
+                        @"Edit Passcode",
+                        @"Remove Passcode",
+                        ]},
+             @{ @"Question Steps":
+                    @[
+                        @"Date Pickers",
+                        @"Image Capture",
+                        @"Image Choice",
+                        @"Location",
+                        @"Scale",
+                        @"Scale (Color Gradient)",
+                        @"Selection Survey",
+                        @"Video Capture",
+                        ]},
+             @{ @"Task Customization":
+                    @[
+                        @"Custom View Controller",
+                        @"Dynamic",
+                        @"Interruptible",
+                        @"Navigable Ordered",
+                        @"Navigable Ordered Loop",
+                        @"Step Will Appear",
+                        @"Step Will Disappear",
+                        ]},
+             @{ @"Task Review":
+                    @[
+                        @"Embedded Review",
+                        @"Standalone Review",
+                        ]},
+             @{ @"Utility Steps":
+                    @[
+                        @"Auxiliary Image Step",
+                        @"Completion Step",
+                        @"Footnote Step",
+                        @"Icon Image Step",
+                        @"Page Step",
+                        @"Predicate Tests",
+                        @"Signature Step",
+                        @"Table Step",
+                        @"Video Instruction Step",
+                        @"Wait Step",
+                        ]},
+             @{ @"Miscellaneous":
+                    @[
+                        @"Continue Button",
+                        @"Test Charts",
+                        @"Test Charts Performance",
+                        @"Toggle Tint Color",
+                        ]},
+             ];
+}
 
-ORKTDefineStringKey(CollectionViewHeaderReuseIdentifier);
-ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -148,6 +238,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
+#define ORKTDefineStringKey(x) static NSString *const x = @#x
+
+ORKTDefineStringKey(CollectionViewHeaderReuseIdentifier);
+ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
+
 @interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate>
 
 @end
@@ -223,96 +318,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                       metrics:nil
                                                                         views:views]];
     
-    _buttonSections = @[
-                        @{ @"Active Tasks":
-                               @[
-                                   @"Active Step",
-                                   @"Audio",
-                                   @"Fitness",
-                                   @"GAIT",
-                                   @"Hand Tremor",
-                                   @"Hand (Right) Tremor",
-                                   @"Hole Peg Test",
-                                   @"Memory Game",
-                                   @"PSAT",
-                                   @"Reaction Time",
-                                   @"Timed Walk",
-                                   @"Tone Audiometry",
-                                   @"Tower Of Hanoi",
-                                   @"Trail Making",
-                                   @"Two Finger Tapping",
-                                   @"Walk And Turn",
-                                   ]},
-                        @{ @"Forms":
-                               @[
-                                   @"Confirmation Form Item",
-                                   @"Mini Form",
-                                   @"Optional Form",
-                                   ]},
-                        @{ @"Onboarding":
-                               @[
-                                   @"Consent",
-                                   @"Consent Review",
-                                   @"Eligibility Form",
-                                   @"Eligibility Survey",
-                                   @"Login",
-                                   @"Registration",
-                                   @"Verification",
-                                   ]},
-                        @{ @"Passcode Management":
-                               @[
-                                   @"Authenticate Passcode",
-                                   @"Create Passcode",
-                                   @"Edit Passcode",
-                                   @"Remove Passcode",
-                                   ]},
-                        @{ @"Question Steps":
-                               @[
-                                   @"Date Pickers",
-                                   @"Image Capture",
-                                   @"Image Choice",
-                                   @"Location",
-                                   @"Scale",
-                                   @"Scale (Color Gradient)",
-                                   @"Selection Survey",
-                                   @"Video Capture",
-                                   ]},
-                        @{ @"Task Customization":
-                               @[
-                                   @"Custom View Controller",
-                                   @"Custom Navigation Item",
-                                   @"Dynamic",
-                                   @"Interruptible",
-                                   @"Navigable Ordered",
-                                   @"Navigable Ordered Loop",
-                                   @"Step Will Disappear",
-                                   ]},
-                        @{ @"Task Review":
-                               @[
-                                   @"Embedded Review",
-                                   @"Standalone Review",
-                                   ]},
-                        @{ @"Utility Steps":
-                               @[
-                                   @"Auxiliary Image Step",
-                                   @"Completion Step",
-                                   @"Footnote Step",
-                                   @"Icon Image Step",
-                                   @"Page Step",
-                                   @"Predicate Tests",
-                                   @"Signature Step",
-                                   @"Table Step",
-                                   @"Video Instruction Step",
-                                   @"Wait Step",
-                                   ]},
-                        @{ @"Miscellaneous":
-                               @[
-                                   @"Continue Button",
-                                   @"Test Charts",
-                                   @"Test Charts Performance",
-                                   @"Toggle Tint Color",
-                                   ]},
-                        ];
+    _buttonSections = TestButtonTable();
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -462,10 +468,6 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      for state restoration of a ResearchKit framework task VC.
      */
     _taskViewController.restorationIdentifier = [task identifier];
-    
-    if (task.hidesProgressInNavigationBar) {
-        _taskViewController.showsProgressInNavigationBar = NO;
-    }
     
     [self presentViewController:_taskViewController animated:YES completion:nil];
 }
@@ -691,36 +693,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     ORKStep *step = stepViewController.step;
     if (step.stepViewControllerWillAppearBlock) {
         step.stepViewControllerWillAppearBlock(taskViewController, stepViewController);
-    } else if ([stepViewController.step.identifier hasPrefix:@"question_"]
-               && ![stepViewController.step.identifier hasSuffix:@"6"]) {
-        /*
-         Tests customizing continue button ("some of the time").
-         */
-        stepViewController.continueButtonTitle = @"Next Question";
-    } else if ([stepViewController.step.identifier isEqualToString:@"mini_form_001"]) {
-        /*
-         Tests customizing continue and learn more buttons.
-         */
-        stepViewController.continueButtonTitle = @"Try Mini Form";
-        stepViewController.learnMoreButtonTitle = @"Learn more about this survey";
-    } else if ([stepViewController.step.identifier isEqualToString: @"qid_001"]) {
-        /*
-         Example of customizing the back and cancel buttons in a way that's
-         visibly obvious.
-         */
-        stepViewController.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back1"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:stepViewController.backButtonItem.target
-                                                                            action:stepViewController.backButtonItem.action];
-        stepViewController.cancelButtonItem.title = @"Cancel1";
-    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step1"]) {
-        stepViewController.navigationItem.title = @"Custom title";
-    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step2"]) {
-        NSMutableArray *items = [[NSMutableArray alloc] init];
-        [items addObject:@"Item1"];
-        [items addObject:@"Item2"];
-        [items addObject:@"Item3"];
-        stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
         // Indeterminate step
         [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(updateText:) withObject:@"Updated text" afterDelay:2.0];
@@ -733,6 +705,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         ((ORKCompletionStepViewController*)stepViewController).shouldShowContinueButton = YES;
     }
 
+}
+
+- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
+    ORKStep *step = stepViewController.step;
+    if (step.stepViewControllerWillDisappearBlock) {
+        step.stepViewControllerWillDisappearBlock(taskViewController, stepViewController, direction);
+    }
 }
 
 /*
@@ -874,13 +853,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         ORKPasscodeResult *passcodeResult = (ORKPasscodeResult *)[[stepResult results] firstObject];
         NSLog(@"passcode saved: %d , Touch ID Enabled: %d", passcodeResult.passcodeSaved, passcodeResult.touchIdEnabled);
 
-    }
-}
-
-- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction {
-    NSObject<ORKTask> *task = taskViewController.task;
-    if (task.triggersStepWillDisappearAction) {
-        taskViewController.view.tintColor = [UIColor magentaColor];
     }
 }
 

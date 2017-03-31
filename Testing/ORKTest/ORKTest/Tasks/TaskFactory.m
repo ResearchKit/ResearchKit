@@ -37,7 +37,6 @@
 #import "ORKTest-Swift.h"
 
 #import <objc/runtime.h>
-@import ResearchKit;
 
 
 // This macro generates a default implementation for CType properties declared inside a class extension.
@@ -99,13 +98,28 @@ ORKTTypeExtensionProperty_Implementation(triggersStepWillDisappearAction,
 
 - (void)setStepViewControllerWillAppearBlock:(StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
 {
-    objc_setAssociatedObject(self, @selector(stepViewControllerWillAppearBlock),
-                             stepViewControllerWillAppearBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    objc_setAssociatedObject(self,
+                             @selector(stepViewControllerWillAppearBlock),
+                             stepViewControllerWillAppearBlock,
+                             OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
 {
     return objc_getAssociatedObject(self, @selector(stepViewControllerWillAppearBlock));
+}
+
+- (void)setStepViewControllerWillDisappearBlock:(StepViewControllerWillDisappearBlockType)stepViewControllerWillDisappearBlock
+{
+    objc_setAssociatedObject(self,
+                             @selector(stepViewControllerWillDisappearBlock),
+                             stepViewControllerWillDisappearBlock,
+                             OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (StepViewControllerWillDisappearBlockType)stepViewControllerWillDisappearBlock
+{
+    return objc_getAssociatedObject(self, @selector(stepViewControllerWillDisappearBlock));
 }
 
 @end
