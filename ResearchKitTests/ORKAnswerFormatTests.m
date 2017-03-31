@@ -47,7 +47,7 @@
 @implementation ORKAnswerFormatTests
 
 - (void)testValidEmailAnswerFormat {
-    // Test email regex validation with correct input.
+    // Test email regular expression validation with correct input.
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone@researchkit.org"]);
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some.one@researchkit.org"]);
     XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone@researchkit.org.uk"]);
@@ -58,7 +58,7 @@
 }
 
 - (void)testInvalidEmailAnswerFormat {
-    // Test email regex validation with incorrect input.
+    // Test email regular expression validation with incorrect input.
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest"]);
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@"]);
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@researchkit"]);
@@ -66,13 +66,17 @@
     XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"12345"]);
 }
 
-- (void)testInvalidRegexAnswerFormat {
+- (void)testInvalidRegularExpressionAnswerFormat {
     
     // Setup an answer format
     ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
     answerFormat.multipleLines = NO;
     answerFormat.keyboardType = UIKeyboardTypeASCIICapable;
-    answerFormat.validationRegex = @"^[A-F,0-9]+$";
+    NSRegularExpression *validationRegularExpression =
+    [NSRegularExpression regularExpressionWithPattern:@"^[A-F,0-9]+$"
+                                              options:(NSRegularExpressionOptions)0
+                                                error:nil];
+    answerFormat.validationRegularExpression = validationRegularExpression;
     answerFormat.invalidMessage = @"Only hexidecimal values in uppercase letters are accepted.";
     answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     XCTAssertFalse([answerFormat isAnswerValidWithString:@"Q2"]);
@@ -88,7 +92,11 @@
     answerFormat.secureTextEntry = YES;
     answerFormat.keyboardType = UIKeyboardTypeASCIICapable;
     answerFormat.maximumLength = 12;
-    answerFormat.validationRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{10,}";
+    NSRegularExpression *validationRegularExpression =
+    [NSRegularExpression regularExpressionWithPattern:@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{10,}"
+                                              options:(NSRegularExpressionOptions)0
+                                                error:nil];
+    answerFormat.validationRegularExpression = validationRegularExpression;
     answerFormat.invalidMessage = @"Invalid password";
     answerFormat.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     
@@ -135,7 +143,7 @@
     XCTAssertEqual(confirmAnswer.spellCheckingType, UITextSpellCheckingTypeNo);
     
     // These properties should be nil
-    XCTAssertNil(confirmAnswer.validationRegex);
+    XCTAssertNil(confirmAnswer.validationRegularExpression);
     XCTAssertNil(confirmAnswer.invalidMessage);
     
     // Check that the confirmation answer format responds to the internal methods
