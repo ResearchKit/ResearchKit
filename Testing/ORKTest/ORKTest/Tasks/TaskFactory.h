@@ -64,6 +64,10 @@ typedef void (^StepViewControllerWillDisappearBlockType)(ORKTaskViewController *
                                                          ORKStepViewControllerNavigationDirection navigationDirection);
 @property (nonatomic, copy) StepViewControllerWillDisappearBlockType stepViewControllerWillDisappearBlock;
 
+typedef BOOL (^ShouldPresentStepBlockType)(ORKTaskViewController *taskViewController,
+                                           ORKStep *step);
+@property (nonatomic, copy) ShouldPresentStepBlockType shouldPresentStepBlock;
+
 @end
 
 

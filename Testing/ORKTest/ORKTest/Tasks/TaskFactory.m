@@ -50,10 +50,10 @@
 //
 #define ORKTPasteTokens(A,B) A ## B
 
-#define ORKTTypeExtensionProperty_Implementation(_propertyName,                                         \
-                                                _capitalizedPropertyName,                               \
-                                                _propertyType,                                          \
-                                                _propertyDefaultValue)                                  \
+#define ORKTCTypeExtensionProperty_Implementation(_propertyName,                                        \
+                                                 _capitalizedPropertyName,                              \
+                                                 _propertyType,                                         \
+                                                 _propertyDefaultValue)                                 \
                                                                                                         \
 - (void) ORKTPasteTokens(set, _capitalizedPropertyName) :(_propertyType)propertyValue                   \
 {                                                                                                       \
@@ -74,53 +74,57 @@
     }                                                                                                   \
 }                                                                                                       \
 
+#define ORKTCopyExtensionProperty_Implementation(_propertyName,                                         \
+                                                 _capitalizedPropertyName,                              \
+                                                 _propertyType)                                         \
+                                                                                                        \
+- (void) ORKTPasteTokens(set, _capitalizedPropertyName) :(_propertyType)propertyValue                   \
+{                                                                                                       \
+    objc_setAssociatedObject(self,                                                                      \
+                             @selector(_propertyName),                                                  \
+                             propertyValue,                                                             \
+                             OBJC_ASSOCIATION_COPY_NONATOMIC);                                          \
+}                                                                                                       \
+                                                                                                        \
+- ( _propertyType ) _propertyName                                                                       \
+{                                                                                                       \
+    return objc_getAssociatedObject(self, @selector(_propertyName));                                    \
+}                                                                                                       \
+
+
 @implementation NSObject (TaskFactory)
 
-ORKTTypeExtensionProperty_Implementation(hidesLearnMoreButtonOnInstructionStep,
-                                         HidesLearnMoreButtonOnInstructionStep,
-                                         BOOL,
-                                         NO);
+ORKTCTypeExtensionProperty_Implementation(hidesLearnMoreButtonOnInstructionStep,
+                                          HidesLearnMoreButtonOnInstructionStep,
+                                          BOOL,
+                                          NO);
 
-ORKTTypeExtensionProperty_Implementation(hidesProgressInNavigationBar,
-                                         HidesProgressInNavigationBar,
-                                         BOOL,
-                                         NO);
+ORKTCTypeExtensionProperty_Implementation(hidesProgressInNavigationBar,
+                                          HidesProgressInNavigationBar,
+                                          BOOL,
+                                          NO);
 
-ORKTTypeExtensionProperty_Implementation(isEmbeddedReviewTask,
-                                         IsEmbeddedReviewTask,
-                                         BOOL,
-                                         NO);
+ORKTCTypeExtensionProperty_Implementation(isEmbeddedReviewTask,
+                                          IsEmbeddedReviewTask,
+                                          BOOL,
+                                          NO);
 
-ORKTTypeExtensionProperty_Implementation(triggersStepWillDisappearAction,
-                                         TriggersStepWillDisappearAction,
-                                         BOOL,
-                                         NO);
+ORKTCTypeExtensionProperty_Implementation(triggersStepWillDisappearAction,
+                                          TriggersStepWillDisappearAction,
+                                          BOOL,
+                                          NO);
 
-- (void)setStepViewControllerWillAppearBlock:(StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
-{
-    objc_setAssociatedObject(self,
-                             @selector(stepViewControllerWillAppearBlock),
-                             stepViewControllerWillAppearBlock,
-                             OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
+ORKTCopyExtensionProperty_Implementation(stepViewControllerWillAppearBlock,
+                                         StepViewControllerWillAppearBlock,
+                                         StepViewControllerWillAppearBlockType);
 
-- (StepViewControllerWillAppearBlockType)stepViewControllerWillAppearBlock
-{
-    return objc_getAssociatedObject(self, @selector(stepViewControllerWillAppearBlock));
-}
+ORKTCopyExtensionProperty_Implementation(stepViewControllerWillDisappearBlock,
+                                         StepViewControllerWillDisappearBlock,
+                                         StepViewControllerWillDisappearBlockType);
 
-- (void)setStepViewControllerWillDisappearBlock:(StepViewControllerWillDisappearBlockType)stepViewControllerWillDisappearBlock
-{
-    objc_setAssociatedObject(self,
-                             @selector(stepViewControllerWillDisappearBlock),
-                             stepViewControllerWillDisappearBlock,
-                             OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (StepViewControllerWillDisappearBlockType)stepViewControllerWillDisappearBlock
-{
-    return objc_getAssociatedObject(self, @selector(stepViewControllerWillDisappearBlock));
-}
+ORKTCopyExtensionProperty_Implementation(shouldPresentStepBlock,
+                                         ShouldPresentStepBlock,
+                                         ShouldPresentStepBlockType);
 
 @end
 

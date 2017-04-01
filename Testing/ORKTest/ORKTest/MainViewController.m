@@ -649,38 +649,11 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
 }
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
-    if ([ step.identifier isEqualToString:@"itid_002"]) {
-        /*
-         Tests interrupting navigation from the task view controller delegate.
-         
-         This is an example of preventing a user from proceeding if they don't
-         enter a valid answer.
-         */
-        
-        ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
-        if (questionResult == nil || [(NSNumber *)questionResult.answer integerValue] < 18) {
-            UIAlertController *alertViewController =
-            [UIAlertController alertControllerWithTitle:@"Warning"
-                                                message:@"You can't participate if you are under 18."
-                                         preferredStyle:UIAlertControllerStyleAlert];
-            
-            
-            UIAlertAction *ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [alertViewController dismissViewControllerAnimated:YES completion:nil];
-                                 }];
-            
-            
-            [alertViewController addAction:ok];
-            
-            [taskViewController presentViewController:alertViewController animated:NO completion:nil];
-            return NO;
-        }
+    BOOL shouldPresentStep = YES;
+    if (step.shouldPresentStepBlock) {
+        shouldPresentStep = step.shouldPresentStepBlock(taskViewController, step);
     }
-    return YES;
+    return shouldPresentStep;
 }
 
 /*

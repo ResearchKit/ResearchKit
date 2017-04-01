@@ -84,6 +84,35 @@
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"itid_002"
                                                                       title:@"How much did you pay for your car?"
                                                                      answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"USD"]];
+        /*
+         Test interrupting navigation from the task view controller delegate.
+         
+         This is an example of preventing a user from proceeding if they don't
+         enter a valid answer.
+         */
+        step.shouldPresentStepBlock = ^BOOL(ORKTaskViewController *taskViewController, ORKStep *step) {
+            BOOL shouldPresentStep = YES;
+            ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
+            if (questionResult == nil || [(NSNumber *)questionResult.answer integerValue] < 18) {
+                UIAlertController *alertViewController =
+                [UIAlertController alertControllerWithTitle:@"Warning"
+                                                    message:@"You can't participate if you are under 18."
+                                             preferredStyle:UIAlertControllerStyleAlert];
+                
+                
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action)
+                                     {
+                                         [alertViewController dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+                [alertViewController addAction:okAction];
+                
+                [taskViewController presentViewController:alertViewController animated:NO completion:nil];
+                shouldPresentStep = NO;
+            }
+            return shouldPresentStep;
+        };
         [steps addObject:step];
     }
     
