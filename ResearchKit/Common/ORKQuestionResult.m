@@ -340,7 +340,7 @@
     if (self) {
         _coordinate = placemark.location.coordinate;
         _userInput =  [userInput copy];
-        _region = [placemark.region copy];
+        _region = [placemark.region isKindOfClass:[CLCircularRegion class]] ? [placemark.region copy]  : nil;
         _addressDictionary = [placemark.addressDictionary copy];
     }
     return self;
@@ -392,6 +392,12 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     return self;
 }
 
+- (NSUInteger)hash {
+    NSUInteger regionHash = (NSUInteger)(self.region.center.latitude * 1000) ^ (NSUInteger)(self.region.center.longitude * 1000) ^ (NSUInteger)(self.region.radius * 1000);
+    NSUInteger coordinateHash = (NSUInteger)(self.coordinate.latitude * 1000) ^ (NSUInteger)(self.coordinate.longitude * 1000);
+    return coordinateHash ^ regionHash ^ self.userInput.hash ^ self.addressDictionary.hash;
+}
+
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
@@ -400,8 +406,15 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.userInput, castObject.userInput) &&
             ORKEqualObjects(self.addressDictionary, castObject.addressDictionary) &&
-            ORKEqualObjects(self.region, castObject.region) &&
+            // The region is not checking for equality properly so check the values
+            (self.region.center.latitude == castObject.region.center.latitude) &&
+            (self.region.center.longitude == castObject.region.center.longitude) &&
+            (self.region.radius == castObject.region.radius) &&
             ORKEqualObjects([NSValue valueWithMKCoordinate:self.coordinate], [NSValue valueWithMKCoordinate:castObject.coordinate]));
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ region:%@ userInput:%@ addressDictionary:%@>", [super description], self.region, self.userInput, self.addressDictionary];
 }
 
 @end
