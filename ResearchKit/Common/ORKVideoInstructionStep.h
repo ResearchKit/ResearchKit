@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  You can use video instruction steps to present video content during a task.
  
  */
+ORK_CLASS_AVAILABLE
 @interface ORKVideoInstructionStep : ORKInstructionStep
 
 /**
