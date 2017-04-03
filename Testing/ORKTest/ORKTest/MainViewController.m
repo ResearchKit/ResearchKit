@@ -467,7 +467,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      for the task view controller. We don't need to do anything else to prepare
      for state restoration of a ResearchKit framework task VC.
      */
-    _taskViewController.restorationIdentifier = [task identifier];
+    _taskViewController.restorationIdentifier = task.identifier;
     
     [self presentViewController:_taskViewController animated:YES completion:nil];
 }

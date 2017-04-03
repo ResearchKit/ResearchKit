@@ -44,13 +44,13 @@
 
 - (id<ORKTask>)makeCustomViewControllerTaskWithIdentifier:(NSString *)identifier {
     
-    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"locationTask.step1"];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
     step1.title = @"Instantiate Custom View Controller";
     step1.text = @"The next step uses a custom subclass of an ORKFormStepViewController.";
     
     DragonPokerStep *dragonStep = [[DragonPokerStep alloc] initWithIdentifier:@"dragonStep"];
     
-    ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"done"];
+    ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, dragonStep, lastStep]];
 }
@@ -74,14 +74,14 @@
         ORKNumericAnswerFormat *format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
         format.minimum = @(5);
         format.maximum = @(90);
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"itid_001"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step1"
                                                                       title:@"How old are you?"
                                                                      answer:format];
         [steps addObject:step];
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"itid_002"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step2"
                                                                       title:@"How much did you pay for your car?"
                                                                      answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"USD"]];
         /*
@@ -92,7 +92,7 @@
          */
         step.shouldPresentStepBlock = ^BOOL(ORKTaskViewController *taskViewController, ORKStep *step) {
             BOOL shouldPresentStep = YES;
-            ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
+            ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"step1"] firstResult];
             if (questionResult == nil || [(NSNumber *)questionResult.answer integerValue] < 18) {
                 UIAlertController *alertViewController =
                 [UIAlertController alertControllerWithTitle:@"Warning"
@@ -117,7 +117,7 @@
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"itid_003"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
         step.title = @"Thank you for completing this task.";
         [steps addObject:step];
     }
@@ -359,7 +359,7 @@
 }
 
 - (id<ORKTask>)makeStepWillDisappearTaskWithIdentifier:(NSString *)identifier {
-    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"StepWillDisappearFirstStepIdentifier"];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
     step1.title = @"Step Will Disappear Delegate Example";
     step1.text = @"The tint color of the task view controller will be changed to magenta in the delegate's 'taskViewController:stepViewControllerWillDisappear:navigationDirection:' method after this step.";
     
@@ -369,7 +369,7 @@
         taskViewController.view.tintColor = [UIColor magentaColor];
     };
 
-    ORKCompletionStep *step2 = [[ORKCompletionStep alloc] initWithIdentifier:@"stepLast"];
+    ORKCompletionStep *step2 = [[ORKCompletionStep alloc] initWithIdentifier:@"step2"];
     step2.title = @"Survey Complete";
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, step2]];

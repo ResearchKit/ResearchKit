@@ -49,7 +49,7 @@
 
 - (id<ORKTask>)makeCreatePasscodeTaskWithIdentifier:(NSString *)identifier {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
-    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"createPasscode"];
     passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
     [steps addObject: passcodeStep];
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];

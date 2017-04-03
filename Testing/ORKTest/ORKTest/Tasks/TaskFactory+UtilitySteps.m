@@ -41,7 +41,7 @@
 
 - (id<ORKTask>)makeAuxiliaryImageStepTaskWithIdentifier:(NSString *)identifier {
     
-    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:identifier];
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"step"];
     step.title = @"Title";
     step.text = @"This is description text.";
     step.detailText = @"This is detail text.";
@@ -87,13 +87,13 @@
     step3.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
     
     ORKFormStep *step4 = [[ORKFormStep alloc] initWithIdentifier:@"step4" title:@"Form Step with skip" text:@"This is a form step with a skip button."];
-    step4.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+    step4.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"formItem1"
                                                            text:@"Are you over 18 years of age?"
                                                    answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
     step4.optional = YES;
     
     ORKFormStep *step5 = [[ORKFormStep alloc] initWithIdentifier:@"step5" title:@"Form Step with Footnote" text:@"This is a form step with a skip button and footnote."];
-    step5.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+    step5.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"formItem1"
                                                            text:@"Are you over 18 years of age?"
                                                    answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
     step5.optional = YES;
@@ -186,27 +186,27 @@
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
         step.title = @"Predicate Tests";
         [steps addObject:step];
     }
     
     // Test Expected Boolean value
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question1"
                                                                       title:@"Pass the Boolean question?"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_01_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question1Fail"];
         step.title = @"You failed the Boolean question.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_01_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question1Pass"];
         step.title = @"You passed the Boolean question.";
         [steps addObject:step];
     }
@@ -214,20 +214,20 @@
     // Test expected Single Choice
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Choose Yes", @"Choose No", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_02"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question2"
                                                                       title:@"Pass the single choice question?"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_02_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question2Fail"];
         step.title = @"You failed the single choice question.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_02_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question2Pass"];
         step.title = @"You passed the single choice question.";
         [steps addObject:step];
     }
@@ -235,20 +235,20 @@
     //  Test expected multiple choices
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Dog", @"Rock", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_03"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question3"
                                                                       title:@"Select all the animals"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_03_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question3Fail"];
         step.title = @"You failed the multiple choice animals question.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_03_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question3Pass"];
         step.title = @"You passed the multiple choice animals question.";
         [steps addObject:step];
     }
@@ -256,20 +256,20 @@
     //  Test expected multiple choices
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Catheter", @"Cathedral", @"Dog", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_04"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question4"
                                                                       title:@"Choose any word containing the word 'Cat'"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_04_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question4Fail"];
         step.title = @"You failed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_04_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question4Pass"];
         step.title = @"You passed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
@@ -277,20 +277,20 @@
     //  Test expected text
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat textAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_05"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question5"
                                                                       title:@"Write the word 'Dog'"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_05_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question5Fail"];
         step.title = @"You didn't write 'Dog'.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_05_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question5Pass"];
         step.title = @"You wrote 'Dog'.";
         [steps addObject:step];
     }
@@ -298,20 +298,20 @@
     //  Test matching text
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat textAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_06"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question6"
                                                                       title:@"Write a word matching '*og'"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_06_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question6Fail"];
         step.title = @"You didn't write a word matching '*og'.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_06_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question6Pass"];
         step.title = @"You wrote a word matching '*og'.";
         [steps addObject:step];
     }
@@ -319,20 +319,20 @@
     //  Numeric test - any number over 10
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat integerAnswerFormatWithUnit:nil];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_07"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question7"
                                                                       title:@"Enter a number over 10"
                                                                      answer:answer];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_07_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question7Fail"];
         step.title = @"Your number was less then 10.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_07_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question7Pass"];
         step.title = @"Your number was over 10.";
         [steps addObject:step];
     }
@@ -349,27 +349,27 @@
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_08"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question8"
                                                                       title:@"Choose a value under 5"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_08_fail"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question8Fail"];
         step.title = @"Your number was more than 5.";
         [steps addObject:step];
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question_08_pass"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question8Pass"];
         step.title = @"Your number was less than 5.";
         [steps addObject:step];
     }
     
     
     {
-        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"all_passed"];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"allPassed"];
         step.title = @"All validation tests now completed.";
         [steps addObject:step];
     }
@@ -379,139 +379,139 @@
     // Build navigation rules.
     {
         // If we answer 'Yes' to Question 1, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question1"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_01_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
+                                                                                              destinationStepIdentifiers:@[@"question1Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question1"];
     }
     
     {
         // If we arrived at question_01_fail then fall through to question 2
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_02"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_01_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question2"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question1Fail"];
     }
     
     {
         // If we answer 'Yes' to Question 2, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_02"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question2"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"Choose Yes"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_02_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_02"];
+                                                                                              destinationStepIdentifiers:@[@"question2Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question2"];
     }
     
     {
         // If we arrived at question_02_fail then fall through to question 3
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_03"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_02_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question3"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question2Fail"];
     }
     
     {
         // If we answer 'Yes' to Question 3, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_03"];
-        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValues:[NSArray arrayWithObjects: @"Cat",@"Dog", nil]];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question3"];
+        NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValues:[NSArray arrayWithObjects: @"Cat", @"Dog", nil]];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_03_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_03"];
+                                                                                              destinationStepIdentifiers:@[@"question3Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question3"];
     }
     
     {
         // If we arrived at question_03_fail then fall through to question 4
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_04"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_03_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question4"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question3Fail"];
     }
     
     {
         // If we answer 'Yes' to Question 4, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_04"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question4"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector matchingPattern:@"Cat.*"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_04_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_04"];
+                                                                                              destinationStepIdentifiers:@[@"question4Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question4"];
     }
     
     {
         // If we arrived at question_04_fail then fall through to question 5
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_05"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_04_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question5"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question4Fail"];
     }
     
     {
         // If we answer 'Dog' to Question 5, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_05"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question5"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector expectedString:@"Dog"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_05_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_05"];
+                                                                                              destinationStepIdentifiers:@[@"question5Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question5"];
     }
     
     {
         // If we arrived at question_05_fail then fall through to question 6
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_06"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_05_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question6"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question5Fail"];
     }
     
     
     {
         // If we answer '*og' to Question 6, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_06"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question6"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForTextQuestionResultWithResultSelector:resultSelector matchingPattern:@".*og"];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_06_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_06"];
+                                                                                              destinationStepIdentifiers:@[@"question6Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question6"];
     }
     
     {
         // If we arrived at question_06_fail then fall through to question 7
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_07"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_06_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question7"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question6Fail"];
     }
     
     {
         // If we answer '*og' to Question 7, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_07"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question7"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForNumericQuestionResultWithResultSelector:resultSelector minimumExpectedAnswerValue:10];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_07_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_07"];
+                                                                                              destinationStepIdentifiers:@[@"question7Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question7"];
     }
     
     {
         // If we arrived at question_05_fail then fall through to question 6
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question_08"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_07_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"question8"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question7Fail"];
     }
     
     {
         // If we answer '*og' to Question 7, then proceed to the pass screen
-        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_08"];
+        ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question8"];
         NSPredicate *predicateQuestion = [ORKResultPredicate predicateForScaleQuestionResultWithResultSelector:resultSelector maximumExpectedAnswerValue:5];
         
         ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                              destinationStepIdentifiers:@[@"question_08_pass"]];
-        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_08"];
+                                                                                              destinationStepIdentifiers:@[@"question8Pass"]];
+        [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question8"];
     }
     
     {
         // If we arrived at question_05_fail then fall through to question 6
         ORKDirectStepNavigationRule *directRule = nil;
-        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"all_passed"];
-        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question_08_fail"];
+        directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"allPassed"];
+        [task setNavigationRule:directRule forTriggerStepIdentifier:@"question8Fail"];
     }
     
     return task;
@@ -579,13 +579,13 @@
     /*
      To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
      */
-    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
     step1.title = @"Setup";
     step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
     [steps addObject:step1];
     
     // Interterminate wait step.
-    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
+    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"step2"];
     step2.title = @"Getting Ready";
     step2.text = @"Please wait while the setup completes.";
     step2.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
@@ -595,13 +595,13 @@
     };
     [steps addObject:step2];
 
-    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
     step3.title = @"Account Setup";
     step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
     [steps addObject:step3];
     
     // Determinate wait step.
-    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
+    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"step4"];
     step4.title = @"Syncing Account";
     step4.text = @"Please wait while the data is uploaded.";
     step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
@@ -611,7 +611,7 @@
     };
     [steps addObject:step4];
     
-    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
+    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"step5"];
     step5.title = @"Setup Complete";
     [steps addObject:step5];
     

@@ -102,8 +102,8 @@
     ORKConsentDocument *consentDocument = [self buildConsentDocument];
     self.currentConsentDocument = [consentDocument copy];
     
-    ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visual_consent" document:consentDocument];
-    ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
+    ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visualConsent" document:consentDocument];
+    ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReview" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     
@@ -127,7 +127,7 @@
      collected with other researchers for uses beyond the present study.
      */
     ORKConsentSharingStep *sharingStep =
-    [[ORKConsentSharingStep alloc] initWithIdentifier:@"consent_sharing"
+    [[ORKConsentSharingStep alloc] initWithIdentifier:@"consentSharing"
                          investigatorShortDescription:@"MyInstitution"
                           investigatorLongDescription:@"MyInstitution and its partners"
                         localizedLearnMoreHTMLContent:@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."];
@@ -142,7 +142,7 @@
     ORKConsentSignature *participantSig = consentDocument.signatures[0];
     [participantSig setSignatureDateFormatString:@"yyyy-MM-dd 'at' HH:mm"];
     self.currentConsentDocument = [consentDocument copy];
-    ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:participantSig inDocument:consentDocument];
+    ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReview" signature:participantSig inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[sharingStep,reviewStep]];
@@ -156,13 +156,13 @@
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
         step.title = @"Eligibility Form";
         [steps addObject:step];
     }
     
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"form_step"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"formStep"];
         step.optional = NO;
         step.title = @"Eligibility Form";
         step.text = @"Please answer the questions below.";
@@ -172,7 +172,7 @@
         
         {
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"formItem1"
                                                                    text:@"Are you over 18 years of age?"
                                                            answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
             item.optional = NO;
@@ -180,7 +180,7 @@
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_2"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
                                                                    text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
                                                            answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
             item.optional = NO;
@@ -188,7 +188,7 @@
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_3"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"formItem3"
                                                                    text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
                                                            answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
             item.optional = NO;
@@ -202,7 +202,7 @@
             ORKTextChoiceAnswerFormat *answerFormat = (ORKTextChoiceAnswerFormat *)[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                                                                                     textChoices:textChoices];
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_4"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"formItem4"
                                                                    text:@"Are you pregnant?"
                                                            answerFormat:answerFormat];
             item.optional = NO;
@@ -213,13 +213,13 @@
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligibleStep"];
         step.title = @"You are ineligible to join the study.";
         [steps addObject:step];
     }
     
     {
-        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligibleStep"];
         step.title = @"You are eligible to join the study.";
         [steps addObject:step];
     }
@@ -230,16 +230,16 @@
     ORKPredicateStepNavigationRule *predicateRule = nil;
     ORKResultSelector *resultSelector = nil;
     
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_1"];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"formStep" resultIdentifier:@"formItem1"];
     NSPredicate *predicateFormItem1 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
     
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_2"];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"formStep" resultIdentifier:@"formItem2"];
     NSPredicate *predicateFormItem2 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
     
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_3"];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"formStep" resultIdentifier:@"formItem3"];
     NSPredicate *predicateFormItem3 = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
     
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step" resultIdentifier:@"form_item_4"];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"formStep" resultIdentifier:@"formItem4"];
     NSPredicate *predicateFormItem4a = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@0];
     NSPredicate *predicateFormItem4b = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@2];
     
@@ -247,13 +247,13 @@
     NSPredicate *predicateEligible2 = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4b]];
     
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateEligible1, predicateEligible2]
-                                                          destinationStepIdentifiers:@[@"eligible_step", @"eligible_step"]];
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"form_step"];
+                                                          destinationStepIdentifiers:@[@"eligibleStep", @"eligibleStep"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"formStep"];
     
     // Add end direct rules to skip unneeded steps
     ORKDirectStepNavigationRule *directRule = nil;
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligibleStep"];
     
     return task;
 }
@@ -265,13 +265,13 @@
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
         step.title = @"Eligibility Survey";
         [steps addObject:step];
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question1"
                                                                       title:@"Are you over 18 years of age?"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
         step.optional = NO;
@@ -279,13 +279,13 @@
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligibleStep"];
         step.title = @"You are ineligible to join the study.";
         [steps addObject:step];
     }
     
     {
-        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligibleStep"];
         step.title = @"You are eligible to join the study.";
         [steps addObject:step];
     }
@@ -293,17 +293,17 @@
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     // Build navigation rules.
-    ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
+    ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question1"];
     NSPredicate *predicateQuestion = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
     
     ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
-                                                                                          destinationStepIdentifiers:@[@"eligible_step"]];
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
+                                                                                          destinationStepIdentifiers:@[@"eligibleStep"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question1"];
     
     // Add end direct rules to skip unneeded steps
     ORKDirectStepNavigationRule *directRule = nil;
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligibleStep"];
     
     return task;
 }
@@ -316,7 +316,7 @@
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKLoginStep *step = [[ORKLoginStep alloc] initWithIdentifier:@"login_step"
+        ORKLoginStep *step = [[ORKLoginStep alloc] initWithIdentifier:@"loginStep"
                                                                 title:@"Login"
                                                                  text:@"Enter your credentials"
                                              loginViewControllerClass:[LoginViewController class]];
@@ -338,7 +338,7 @@
                                              ORKRegistrationStepIncludeGivenName |
                                              ORKRegistrationStepIncludeDOB |
                                              ORKRegistrationStepIncludeGender);
-        ORKRegistrationStep *step = [[ORKRegistrationStep alloc] initWithIdentifier:@"registration_step"
+        ORKRegistrationStep *step = [[ORKRegistrationStep alloc] initWithIdentifier:@"registrationStep"
                                                                               title:@"Registration"
                                                                                text:@"Fill out the form below"
                                                                             options:options];
@@ -356,7 +356,7 @@
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step" text:@"Check your email and click on the link to verify your email address and start using the app."
+        ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verificationStep" text:@"Check your email and click on the link to verify your email address and start using the app."
                                                     verificationViewControllerClass:[VerificationViewController class]];
         [steps addObject:step];
     }

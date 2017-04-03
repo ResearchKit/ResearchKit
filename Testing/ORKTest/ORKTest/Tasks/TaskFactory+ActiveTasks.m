@@ -56,7 +56,7 @@
          The text of this step is not appropriate to the rest of the task, but
          is helpful for verifying layout.
          */
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"iid_001"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
         step.title = @"Demo Study";
         step.text = @"This 12-step walkthrough will explain the study and the impact it will have on your life.";
         step.detailText = @"You must complete the walkthough to participate in the study.";
@@ -69,7 +69,7 @@
          
          Not a recommended way of doing audio recording with the ResearchKit framework.
          */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001d"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"step2"];
         step.title = @"Audio";
         step.stepDuration = 10.0;
         step.text = @"An active test recording audio";
@@ -85,7 +85,7 @@
          
          Not a recommended way of doing audio recording with the ResearchKit framework.
          */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001e"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"step3"];
         step.title = @"Audio";
         step.stepDuration = 10.0;
         step.text = @"An active test recording lossless audio";
@@ -105,7 +105,7 @@
          
          Not a recommended way of collecting touch data with the ResearchKit framework.
          */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001a"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"step4"];
         step.title = @"Touch";
         step.text = @"An active test, touch collection";
         step.shouldStartTimerAutomatically = NO;
@@ -122,7 +122,7 @@
          
          Not a recommended way of customizing active steps with the ResearchKit framework.
          */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001c"];
+        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"step5"];
         step.title = @"Motion";
         step.text = @"An active test collecting device motion data";
         step.shouldUseNextAsSkipButton = YES;
@@ -265,7 +265,7 @@
     return task;
 }
 
-- (id<ORKTask>)makeToneAudiometryTaskIdentifier:(NSString *)identifier {
+- (id<ORKTask>)makeToneAudiometryTaskWithIdentifier:(NSString *)identifier {
     ORKOrderedTask *task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:identifier
                                                      intendedUseDescription:nil
                                                           speechInstruction:nil
@@ -296,7 +296,7 @@
     return task;
 }
 
-- (id<ORKTask>)makeTwoFingerTapTaskWithIdentifier:(NSString *)identifier {
+- (id<ORKTask>)makeTwoFingerTappingTaskWithIdentifier:(NSString *)identifier {
     ORKOrderedTask *task = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:identifier
                                                                intendedUseDescription:nil
                                                                              duration:20.0
