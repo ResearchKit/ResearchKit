@@ -390,17 +390,6 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                              options:(ORKPredefinedTaskOption)options;
 
 /**
- @Deprecated
- */
-+ (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                          speechInstruction:(nullable NSString *)speechInstruction
-                     shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
-                                   duration:(NSTimeInterval)duration
-                          recordingSettings:(nullable NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options __deprecated;
-
-/**
  Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)
  
  In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
@@ -427,13 +416,6 @@ ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
                                                       duration:(NSTimeInterval)duration
                                                    handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                        options:(ORKPredefinedTaskOption)options;
-/**
- @Deprecated
- */
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                                      duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options __deprecated;
 
 /**
  Returns a predefined task that tests spatial span memory.

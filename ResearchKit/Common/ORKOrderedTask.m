@@ -356,17 +356,6 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }
-
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                       intendedUseDescription:(NSString *)intendedUseDescription
-                                                     duration:(NSTimeInterval)duration
-                                                      options:(ORKPredefinedTaskOption)options {
-    return [self twoFingerTappingIntervalTaskWithIdentifier:identifier
-                                     intendedUseDescription:intendedUseDescription
-                                                   duration:duration
-                                                handOptions:0
-                                                    options:options];
-}
     
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(NSString *)intendedUseDescription
@@ -517,24 +506,6 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:[steps copy]];
     
     return task;
-}
-
-+ (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(NSString *)intendedUseDescription
-                          speechInstruction:(NSString *)speechInstruction
-                     shortSpeechInstruction:(NSString *)shortSpeechInstruction
-                                   duration:(NSTimeInterval)duration
-                          recordingSettings:(NSDictionary *)recordingSettings
-                                    options:(ORKPredefinedTaskOption)options {
-    
-    return [self audioTaskWithIdentifier:identifier
-                  intendedUseDescription:intendedUseDescription
-                       speechInstruction:speechInstruction
-                  shortSpeechInstruction:shortSpeechInstruction
-                                duration:duration
-                       recordingSettings:recordingSettings
-                         checkAudioLevel:NO
-                                 options:options];
 }
 
 + (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
