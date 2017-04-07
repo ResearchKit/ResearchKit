@@ -34,40 +34,6 @@
 #import "ORKRegistrationStep_Internal.h"
 
 
-@implementation ORKOrderedTask (Deprecated)
-
-+ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                              intendedUseDescription:(NSString *)intendedUseDescription
-                                   speechInstruction:(NSString *)speechInstruction
-                              shortSpeechInstruction:(NSString *)shortSpeechInstruction
-                                            duration:(NSTimeInterval)duration
-                                   recordingSettings:(NSDictionary *)recordingSettings
-                                             options:(ORKPredefinedTaskOption)options {
-    
-    return [self audioTaskWithIdentifier:identifier
-                  intendedUseDescription:intendedUseDescription
-                       speechInstruction:speechInstruction
-                  shortSpeechInstruction:shortSpeechInstruction
-                                duration:duration
-                       recordingSettings:recordingSettings
-                         checkAudioLevel:NO
-                                 options:options];
-}
-
-+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(NSString *)intendedUseDescription
-                                                      duration:(NSTimeInterval)duration
-                                                       options:(ORKPredefinedTaskOption)options {
-    return [self twoFingerTappingIntervalTaskWithIdentifier:identifier
-                                     intendedUseDescription:intendedUseDescription
-                                                   duration:duration
-                                                handOptions:0
-                                                    options:options];
-}
-
-@end
-
-
 @implementation ORKAnswerFormat (Deprecated)
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegularExpressionPattern

@@ -52,6 +52,20 @@
 
 @end
 
+#ifdef __IPHONE_10_0
+/// Add a protocol defining the initializer for iOS 8 apps. This signature was deprecated in iOS 9
+/// and deleted in iOS 10.
+@interface HKAnchoredObjectQuery (iOS8)
+- (instancetype)initWithType:(HKSampleType *)type
+                   predicate:(NSPredicate *)predicate
+                      anchor:(NSUInteger)anchor
+                       limit:(NSUInteger)limit
+           completionHandler:(void (^)(HKAnchoredObjectQuery *query,
+                                       NSArray<__kindof HKSample *> *results,
+                                       NSUInteger newAnchor,
+                                       NSError *error))handler NS_DEPRECATED_IOS(8_0, 9_0);
+@end
+#endif
 
 @implementation ORKHealthQuantityTypeRecorder
 
