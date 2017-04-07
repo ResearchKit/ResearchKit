@@ -383,6 +383,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"firstResult",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[
                                               @"ORKStep.task",
@@ -631,6 +633,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"unit",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -851,6 +855,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKStep.restorable",
                                        @"ORKStep.showsProgress",
                                        @"ORKStepResult.isPreviousResult",
+                                       @"ORKTextAnswerFormat.validationRegex",
                                        @"ORKVideoCaptureStep.duration",
                                        ];
     
