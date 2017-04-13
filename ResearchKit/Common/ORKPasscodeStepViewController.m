@@ -297,7 +297,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 }
 
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskAll;
 }
 
 #pragma mark - Helpers
