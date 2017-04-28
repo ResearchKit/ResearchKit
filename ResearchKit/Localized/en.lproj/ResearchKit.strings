@@ -102,15 +102,15 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Email";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "Enter email";
 "PASSWORD_FORM_ITEM_TITLE" = "Password";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
-"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
-"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Enter first name";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Enter last name";
 "GENDER_FORM_ITEM_TITLE" = "Gender";
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
 "DOB_FORM_ITEM_TITLE" = "Date of Birth";
