@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMotionUsageDescription</key>
-	<string>Use motion sensors</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Test audio recording features.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Test Camera related features.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Test HK releated features.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Test HK releated features.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -32,8 +22,18 @@
 	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Test Camera related features.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Test HK releated features.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Test HK releated features.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app records your location during certian tasks.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Test audio recording features.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Use motion sensors</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

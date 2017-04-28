@@ -2,7 +2,8 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
- Copyright (c) 2016, Sage Bionetworks
+ Copyright (c) 2016, Sage Bionetworks.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -72,12 +73,14 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(AuxillaryImageTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
+DefineStringKey(FootnoteTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
 DefineStringKey(IconImageTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TrailMakingTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
@@ -366,6 +369,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
+                           @"Trail Making Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
@@ -406,6 +410,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Icon Image",
                            @"Completion Step",
                            @"Page Step",
+                           @"Footnote",
                            ],
                        ];
 }
@@ -654,8 +659,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeAuxillaryImageTask];
     } else if ([identifier isEqualToString:IconImageTaskIdentifier]) {
         return [self makeIconImageTask];
+    } else if ([identifier isEqualToString:TrailMakingTaskIdentifier]) {
+        return [ORKOrderedTask trailmakingTaskWithIdentifier:TrailMakingTaskIdentifier
+                                      intendedUseDescription:nil
+                                      trailmakingInstruction:nil
+                                                   trailType:ORKTrailMakingTypeIdentifierA
+                                                     options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PageStepTaskIdentifier]) {
         return [self makePageStepTask];
+    } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
+        return [self makeFootnoteTask];
     }
     else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
@@ -894,6 +907,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         /*
+         A custom boolean question.
+         */
+        ORKBooleanAnswerFormat *format = [ORKAnswerFormat booleanAnswerFormatWithYesString:@"Agree" noString:@"Disagree"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001c"
+                                                                      title:@"Do you agree to proceed to the background check questions?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
          A single-choice question presented in the tableview format.
          */
         ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
@@ -1053,6 +1077,72 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_081"
                                                                       title:@"Select a symptom"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A multiple component value-picker question. 
+         */
+        ORKValuePickerAnswerFormat *colorFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"Red"
+                                                                              value:@"red"],
+                                                      [ORKTextChoice choiceWithText:@"Blue"
+                                                                              value:@"blue"],
+                                                      [ORKTextChoice choiceWithText:@"Green"
+                                                                              value:@"green"]
+                                                      ]];
+        
+        ORKValuePickerAnswerFormat *animalFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cat"
+                                                                             value:@"cat"],
+                                                     [ORKTextChoice choiceWithText:@"Dog"
+                                                                             value:@"dog"],
+                                                     [ORKTextChoice choiceWithText:@"Turtle"
+                                                                             value:@"turtle"]
+                                                     ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat multipleValuePickerAnswerFormatWithValuePickers:
+                                                            @[colorFormat, animalFormat]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick"
+                                                                      title:@"Select a pet:"
+                                                                     answer:answerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    
+    {
+        /*
+         A multiple component value-picker question.
+         */
+        ORKValuePickerAnswerFormat *f1 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"A"
+                                                                             value:@"A"],
+                                                     [ORKTextChoice choiceWithText:@"B"
+                                                                             value:@"B"],
+                                                     [ORKTextChoice choiceWithText:@"C"
+                                                                             value:@"C"]
+                                                     ]];
+        
+        ORKValuePickerAnswerFormat *f2 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
+                                                    @[
+                                                      [ORKTextChoice choiceWithText:@"0"
+                                                                              value:@0],
+                                                      [ORKTextChoice choiceWithText:@"1"
+                                                                              value:@1],
+                                                      [ORKTextChoice choiceWithText:@"2"
+                                                                              value:@2]
+                                                      ]];
+        
+        ORKMultipleValuePickerAnswerFormat *answerFormat = [[ORKMultipleValuePickerAnswerFormat alloc] initWithValuePickers:@[f1, f2] separator:@"-"];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_multipick_dash"
+                                                                      title:@"Select a letter and number code:"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
@@ -1750,7 +1840,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationRegex:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            NSRegularExpression *validationRegularExpression =
+            [NSRegularExpression regularExpressionWithPattern:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+                                                      options:(NSRegularExpressionOptions)0
+                                                        error:nil];
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationRegularExpression:validationRegularExpression
+                                                                                            invalidMessage:@"Invalid URL: %@"];
             format.multipleLines = NO;
             format.keyboardType = UIKeyboardTypeURL;
             format.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -4591,6 +4686,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:IconImageTaskIdentifier steps:@[step1, step2, step3]];
 }
 
+#pragma mark - Trail Making Task
+
+- (IBAction)trailMakingTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:TrailMakingTaskIdentifier];
+}
+
 #pragma mark - Completion Step Continue Button
 
 - (IBAction)completionStepButtonTapped:(id)sender {
@@ -4611,11 +4712,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:CompletionStepTaskIdentifier steps:steps];
 }
 
+#pragma mark - Page Step
+
 - (IBAction)pageStepButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PageStepTaskIdentifier];
 }
-
-#pragma mark - Page Step
 
 - (ORKOrderedTask *)makePageStepTask {
     
@@ -4666,5 +4767,52 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:PageStepTaskIdentifier steps:steps];
     
 }
+
+
+#pragma mark - Footnote
+
+- (IBAction)footnoteButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:FootnoteTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeFootnoteTask {
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Footnote example";
+    step1.text = @"This is an instruction step with a footnote.";
+    step1.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+    
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"step2"];
+    step2.title = @"Image and No Footnote";
+    step2.text = @"This is an instruction step with an image and NO footnote.";
+    step2.image = [UIImage imageNamed:@"image_example"];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
+    step3.title = @"Image and Footnote";
+    step3.text = @"This is an instruction step with an image and a footnote.";
+    step3.image = [UIImage imageNamed:@"image_example"];
+    step3.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+    
+    ORKFormStep *step4 = [[ORKFormStep alloc] initWithIdentifier:@"step4" title:@"Form Step with skip" text:@"This is a form step with a skip button."];
+    step4.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+                                                           text:@"Are you over 18 years of age?"
+                                                   answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
+    step4.optional = YES;
+    
+    ORKFormStep *step5 = [[ORKFormStep alloc] initWithIdentifier:@"step5" title:@"Form Step with Footnote" text:@"This is a form step with a skip button and footnote."];
+    step5.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+                                                           text:@"Are you over 18 years of age?"
+                                                   answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
+    step5.optional = YES;
+    step5.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+
+    ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Last step.";
+    lastStep.text = @"This is a completion step with a footnote.";
+    lastStep.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
+
+    return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
+}
+
 
 @end

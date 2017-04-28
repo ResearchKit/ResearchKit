@@ -131,6 +131,11 @@ static const CGFloat LabelRightMargin = 44.0;
     return _longLabel;
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self updateSelectedItem];
+}
+
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
         self.accessoryView.hidden = _selectedItem ? NO : YES;

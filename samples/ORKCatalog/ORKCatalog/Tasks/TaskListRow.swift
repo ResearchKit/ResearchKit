@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -62,6 +63,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case form = 0
     case survey
     case booleanQuestion
+    case customBooleanQuestion
     case dateQuestion
     case dateTimeQuestion
     case imageChoiceQuestion
@@ -99,6 +101,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case heightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case trailMaking
     case videoInstruction
     
     class TaskListRowSection {
@@ -122,6 +125,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Survey Questions", rows:
                 [
                     .booleanQuestion,
+                    .customBooleanQuestion,
                     .dateQuestion,
                     .dateTimeQuestion,
                     .heightQuestion,
@@ -165,6 +169,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                    .trailMaking
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
@@ -184,6 +189,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .booleanQuestion:
             return NSLocalizedString("Boolean Question", comment: "")
+            
+        case .customBooleanQuestion:
+            return NSLocalizedString("Custom Boolean Question", comment: "")
             
         case .dateQuestion:
             return NSLocalizedString("Date Question", comment: "")
@@ -298,6 +306,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .shoulderRangeOfMotion:
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
+            
+        case .trailMaking:
+            return NSLocalizedString("Trail Making Test", comment: "")
         }
     }
     
@@ -457,6 +468,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        case trailMaking
         
         // Video instruction tasks.
         case videoInstructionTask
@@ -476,6 +488,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .booleanQuestion:
             return booleanQuestionTask
+            
+        case .customBooleanQuestion:
+            return customBooleanQuestionTask
             
         case .dateQuestion:
             return dateQuestionTask
@@ -586,6 +601,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
+            
+        case .trailMaking:
+            return trailMaking;
         
         case .videoInstruction:
             return videoInstruction
@@ -654,6 +672,19 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents just a single "Yes" / "No" question.
     private var booleanQuestionTask: ORKTask {
         let answerFormat = ORKBooleanAnswerFormat()
+        
+        // We attach an answer format to a question step to specify what controls the user sees.
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.booleanQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        // The detail text is shown in a small font below the title.
+        questionStep.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.booleanQuestionTask), steps: [questionStep])
+    }
+    
+    /// This task presents a customized "Yes" / "No" question.
+    private var customBooleanQuestionTask: ORKTask {
+        let answerFormat = ORKBooleanAnswerFormat(yesString: "Agree", noString: "Disagree")
         
         // We attach an answer format to a question step to specify what controls the user sees.
         let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.booleanQuestionStep), title: exampleQuestionText, answer: answerFormat)
@@ -956,9 +987,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         let stepEmail = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
         stepEmail.text = exampleDetailText
         
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-        
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegex: domainRegex, invalidMessage:"Invalid URL: %@")
+        let domainRegularExpressionPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let domainRegularExpression = try! NSRegularExpression(pattern: domainRegularExpressionPattern)
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: domainRegularExpression, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = .URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
@@ -1157,10 +1188,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
         let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB]
-        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegex: passcodeValidationRegex, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
+        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
@@ -1333,6 +1365,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a trail making task
+    private var trailMaking: ORKTask {
+        let intendedUseDescription = "Tests visual attention and task switching"
+        return ORKOrderedTask.trailmakingTask(withIdentifier: String(describing: Identifier.trailMaking), intendedUseDescription: intendedUseDescription, trailmakingInstruction: nil, trailType:.B, options: [])
     }
 
     /// This task presents a video instruction step

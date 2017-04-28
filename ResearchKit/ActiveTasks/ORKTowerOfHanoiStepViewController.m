@@ -36,6 +36,7 @@
 #import "ORKTowerOfHanoiTowerView.h"
 
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 
 #import "ORKResult.h"
 #import "ORKTowerOfHanoiStep.h"
@@ -123,7 +124,7 @@ static const NSUInteger NumberOfTowers = 3;
     if (_firstMoveDate != nil) {
         result.startDate = _firstMoveDate;
     }
-    stepResult.results = @[result];
+    stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     return stepResult;
 }
 
@@ -188,7 +189,7 @@ static const NSUInteger NumberOfTowers = 3;
     NSString *moves = ORKLocalizedStringFromNumber(@(self.moves.count));
     NSString *time = [self.dateComponentsFormatter stringFromTimeInterval:_secondsElapsed];
     NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
-    NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
+    NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
     [self.activeStepView updateTitle:title text:text];
 }
 

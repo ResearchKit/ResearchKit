@@ -223,6 +223,14 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
     ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
 } ORK_ENUM_AVAILABLE;
 
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+/// Trail making for Type-A trail where the pattern is 1-2-3-4-5-6-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+
+/// Trail making for Type-B trail where the pattern is 1-A-2-B-3-C-4-D-5-E-6-F-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
+
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
@@ -730,6 +738,32 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
                                         activeTaskOptions:(ORKTremorActiveTaskOption)activeTaskOptions
                                               handOptions:(ORKPredefinedTaskHandOption)handOptions
                                                   options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures visual attention and task switching.
+ 
+ In a trail making test, the participant is asked to connect a series of cicles labeled 1,2,3... or
+ 1,A,2,B,3,C... and time to complete the test is recorded.
+ 
+ `ORKTrailMakingTypeIdentifierA` uses the pattern: 1-2-3-4-5-6-7.
+ `ORKTrailMakingTypeIdentifierB` uses the pattern: 1-A-2-B-3-C-4-D-5-E-6-F-7
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param trailmakingInstruction  Instructional content describing what the user needs to do when
+                                  the task begins. If the value of this parameter is `nil`,
+ @param trailType               Type of trail to display. Either `ORKTrailMakingTypeIdentifierA` or `ORKTrailMakingTypeIdentifierB`
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active trail making test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           trailmakingInstruction:(nullable NSString *)trailmakingInstruction
+                                        trailType:(ORKTrailMakingTypeIdentifier)trailType
+                                          options:(ORKPredefinedTaskOption)options;
 
 @end
 
