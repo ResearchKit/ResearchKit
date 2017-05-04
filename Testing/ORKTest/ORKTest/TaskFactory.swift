@@ -1,39 +1,34 @@
 /*
-Copyright (c) 2015, Ricardo Sánchez-Sáez.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-1.  Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.
-
-2.  Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation and/or
-other materials provided with the distribution.
-
-3.  Neither the name of the copyright holder(s) nor the names of any contributors
-may be used to endorse or promote products derived from this software without
-specific prior written permission. No license is granted to the trademarks of
-the copyright holders even if such marks are included in this software.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
 import Foundation
 import ResearchKit
 
 @objc class TaskFactory : NSObject {
-
-    class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
+    
+    class func makeNavigableOrderedTask(taskIdentifier : String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep
@@ -104,10 +99,11 @@ import ResearchKit
         
         // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
         var resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formFeeling");
-        let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateGoodFeeling = NSPredicate(choiceResultSelector: resultSelector, match: "good")
+        //        let predicateGoodFeeling = NSPredicate(choiceQuestionResultWithResultSelector:resultSelector, expectedAnswerValue: "good")
         resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formMood");
-        let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
-        let predicateGoodMoodAndFeeling: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
+        let predicateGoodMood = NSPredicate(choiceResultSelector: resultSelector, match: "good")
+        let predicateGoodMoodAndFeeling: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateGoodMoodAndFeeling, "survey_skipped") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "introForm")
@@ -122,11 +118,11 @@ import ResearchKit
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
         //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
         resultSelector = ORKResultSelector.init(resultIdentifier: "symptom");
-        let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "headache" as NSCoding & NSCopying & NSObjectProtocol)
+        let predicateHeadache = NSPredicate(choiceResultSelector: resultSelector, match: "headache")
         
         // User didn't chose headache at the symptom step
-        let predicateNotHeadache: NSCompoundPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
-
+        let predicateNotHeadache: NSPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
+        
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateNotHeadache, "other_symptom") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "symptom")
@@ -138,11 +134,11 @@ import ResearchKit
         //      [NSPredicate predicateWithFormat:
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
         resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
-        let predicateSevereYes: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
+        let predicateSevereYes = NSPredicate(resultSelector: resultSelector, expected: true)
         
         // User chose NO at the severity step
         resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
-        let predicateSevereNo: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: false)
+        let predicateSevereNo = NSPredicate(resultSelector: resultSelector, expected: false)
         
         let predicateSevereHeadache: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereYes])
         let predicateLightHeadache: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereNo])

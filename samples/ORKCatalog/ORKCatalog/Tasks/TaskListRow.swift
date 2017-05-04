@@ -1117,14 +1117,14 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
         
         // Build navigation rules.
-        var resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem01))
-        let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
+        var resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem01))
+        let predicateFormItem01 = NSPredicate(choiceResultSelector:resultSelector, match: "Yes")
         
-        resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem02))
-        let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Yes" as NSCoding & NSCopying & NSObjectProtocol)
+        resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem02))
+        let predicateFormItem02 = NSPredicate(choiceResultSelector:resultSelector, match: "Yes")
         
-        resultSelector = ORKResultSelector(stepIdentifier: String(describing:Identifier.eligibilityFormStep), resultIdentifier: String(describing:Identifier.eligibilityFormItem03))
-        let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "No" as NSCoding & NSCopying & NSObjectProtocol)
+        resultSelector = ORKResultSelector(stepIdentifier: String(describing: Identifier.eligibilityFormStep), resultIdentifier: String(describing: Identifier.eligibilityFormItem03))
+        let predicateFormItem03 = NSPredicate(choiceResultSelector:resultSelector, match: "No")
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
         let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing:Identifier.eligibilityEligibleStep)) ])
