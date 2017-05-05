@@ -150,7 +150,43 @@ static const CGFloat TickViewSize = 122;
         _completionStepView.tintColor = self.checkmarkColor;
     }
     
-    self.stepView.stepView = _completionStepView;
+    UIView *viewContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TickViewSize, TickViewSize)];
+    [viewContainer addSubview:_completionStepView];
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_completionStepView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:viewContainer
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_completionStepView
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:viewContainer
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_completionStepView
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:viewContainer
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_completionStepView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_completionStepView
+                                                        attribute:NSLayoutAttributeHeight
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+
+    self.stepView.stepView = viewContainer;
     
     self.stepView.continueSkipContainer.continueButtonItem = nil;
 }
