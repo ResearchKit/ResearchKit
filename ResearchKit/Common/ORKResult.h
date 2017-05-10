@@ -869,6 +869,8 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKQuestionResult : ORKResult
 
+@property (nonatomic, copy, nullable) NSString *questionText;
+
 /**
  A value that indicates the type of question the result came from.
  
