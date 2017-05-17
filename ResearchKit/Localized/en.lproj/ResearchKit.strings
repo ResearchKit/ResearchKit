@@ -520,3 +520,12 @@
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_HR_CAPTURE_COMPLETE" = "Hear Rate capture complete";
+
+/* HR capture step. */
+"CAPTURE_BUTTON_CAPTURE_HR" = "Start Capturing HR";
+"CAPTURE_BUTTON_STOP_CAPTURE_HR" = "Stop Capturing HR";
+"CAPTURE_BUTTON_RECAPTURE_HR" = "Recapture HR";
+
+"HR_LBL_UNITS" = "BPM";
