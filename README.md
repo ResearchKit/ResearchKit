@@ -87,6 +87,14 @@ Or, for the latest changes, use the `master` branch:
 git clone https://github.com/ResearchKit/ResearchKit.git
 ```
 
+You can also use [Carthage](https://github.com/Carthage/Carthage) by adding the following 
+instructions in your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile) and running `carthage update`:
+
+```
+github "ResearchKit/ResearchKit" "stable"
+```
+
+
 Building
 --------
 
