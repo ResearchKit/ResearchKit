@@ -56,8 +56,7 @@
 @end
 
 
-@implementation ORKSignatureWrapperView {
-}
+@implementation ORKSignatureWrapperView
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];

@@ -146,7 +146,6 @@
 }
 
 - (void)setUpConstraints {
-    
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_testView);

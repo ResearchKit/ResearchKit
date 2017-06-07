@@ -954,6 +954,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     // Classes for which tests are not currently implemented
     NSArray <NSString *> *excludedClassNames = @[
                                                  @"ORKVisualConsentStepViewController",     // Requires step with scenes
+                                                 @"ORKStroopStepViewController",
                                                  ];
     
     // Classes that do not allow adding a result should throw an exception

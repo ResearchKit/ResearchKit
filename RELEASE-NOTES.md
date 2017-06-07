@@ -1,5 +1,64 @@
 # ResearchKit Release Notes
 
+## ResearchKit 1.5 Release Notes
+
+*ResearchKit 1.5* supports *iOS* and requires *Xcode 8.0* or newer. The minimum supported *Base SDK* is *8.0*.
+
+In addition to general stabiltiy and performance improvements, *ResearchKit 1.5* includes the following new features and enhancements.
+
+- **New Active Tasks**
+
+ - **Stroop Test**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    The *Stroop Test* shows the participant different combinations of text and tint colors on the screen.
+    
+    Users must ignore the text and instead select the button that reflects the first letter of the tint color.
+
+ - **Trail Making Test**
+
+    *Contributed by Faraz Hussain.*
+
+    The *Trail Making Test* instructs participants to connect a series of labelled circles and the time to complete the test is recorded.
+
+ - **Range of Motion Test**
+
+    *Contributed by Daren Levy, Dr. Raj Karia, John Guydo.*
+
+    Participants are instructed to follow a series of steps while accelerometer and gyroscope data is captured to measure flexed and extended positions for both the shoulder and knee.
+    
+ - **Touch Anywhere Active Task**
+
+    *Contributed by Daren Levy, Dr. Raj Karia, John Guydo*
+
+    Allows the user to get their device in the proper position and then tap the screen to indicate they are ready to  begin the next step.
+    
+- **New Steps**
+
+ - **Video Instruction Step**
+
+    *Contributed by [Oliver Schäfer](https://github.com/oliverschaefer).*
+
+    The *Video Instruction Step* provides a step to be used to display a video.
+
+    This step can be used to display videos to users from either a local or remote source.
+
+- **Other Improvements**
+ 
+ - **Tone Audiometry Test**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    Updated to include both a left and right button.
+
+ - **Digital Object Identifier**
+
+    *Contributed by [Apple Inc](https://github.com/researchkit).*
+
+    Assigns a Digital Object Identifier to the ResearchKit repository on GitHub to use when referencing the framework.
+
+
 ## ResearchKit 1.4 Release Notes
 
 *ResearchKit 1.4* supports *iOS* and requires *Xcode 8.0* or newer. The minimum supported *Base SDK* is *8.0*.

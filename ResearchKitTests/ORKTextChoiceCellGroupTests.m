@@ -102,7 +102,7 @@
     [self testSingleChoice:answerFormat choices:choices];
 }
 
-- (void)testSingleChoice: (ORKTextChoiceAnswerFormat *)answerFormat choices:(NSArray *)choices {
+- (void)testSingleChoice:(ORKTextChoiceAnswerFormat *)answerFormat choices:(NSArray *)choices {
     
     ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
                                                                                             answer:nil

@@ -237,7 +237,6 @@
     countView.value = [NSString stringWithFormat:@"%ld", (long)numberOfItems];
 }
 
-
 - (void)setScore:(NSInteger)score {
     ORKActiveStepQuantityView *scoreView = [self scoreView];
     scoreView.value = [NSString stringWithFormat:@"%ld", (long)score];

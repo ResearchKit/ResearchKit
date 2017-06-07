@@ -61,6 +61,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 static const CGFloat ValueLineWidth = 4.5;
 static const CGFloat ValueLineMargin = 1.5;
 
+
 @implementation ORKAudioGraphView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -69,7 +70,7 @@ static const CGFloat ValueLineMargin = 1.5;
         [self setUpConstraints];
         
 #if TARGET_IPHONE_SIMULATOR
-        _values = @[@(0.2),@(0.6),@(0.55), @(0.1), @(0.75), @(0.7)];
+        _values = @[ @(0.2), @(0.6), @(0.55), @(0.1), @(0.75), @(0.7) ];
 #endif
     }
     return self;

@@ -66,6 +66,7 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
     return picker;
 }
 
+
 @implementation ORKPicker : NSObject
 
 /**

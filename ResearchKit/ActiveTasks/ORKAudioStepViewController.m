@@ -182,7 +182,7 @@
     _avAudioRecorder = recorder;
 }
 
-- (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
+- (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
     _audioRecorderError = error;
     _audioContentView.failed = YES;
