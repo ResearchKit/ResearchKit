@@ -32,8 +32,8 @@ import Foundation
 import ResearchKit
 
 public extension TaskFactory {
-    
-    public func makeNavigableOrderedTask(identifier taskIdentifier : String) -> ORKNavigableOrderedTask {
+
+   @objc class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep

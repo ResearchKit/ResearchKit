@@ -62,20 +62,20 @@
     if (self) {
         self.plotPoints = @[
                             @[
-                                [[ORKValueStack alloc] initWithStackedValues:@[@4, @6]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@2, @4, @4]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@2, @6, @3, @6]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@3, @8, @10, @12]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@5, @10, @12, @8]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@8, @13, @18]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @4, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @2, @4, @4 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @2, @6, @3, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @3, @8, @10, @12 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @5, @10, @12, @8 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @8, @13, @18 ]],
                                 ],
                             @[
-                                [[ORKValueStack alloc] initWithStackedValues:@[@14]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@6, @6]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@3, @10, @12]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@5, @11, @14]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@7, @13, @20]],
-                                [[ORKValueStack alloc] initWithStackedValues:@[@10, @13, @25]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @14 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @6, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @3, @10, @12 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @5, @11, @14 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @7, @13, @20 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @10, @13, @25 ]],
                                 ]
                             ];
     }

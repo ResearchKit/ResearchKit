@@ -164,7 +164,7 @@
     return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL)optional {
     self = [super init];
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);

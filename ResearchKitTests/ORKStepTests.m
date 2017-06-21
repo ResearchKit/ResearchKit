@@ -118,11 +118,11 @@
     ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:steps];
     
     ORKChoiceQuestionResult *step1Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result1"];
-    step1Result1.choiceAnswers = @[@(1)];
+    step1Result1.choiceAnswers = @[ @(1) ];
     ORKChoiceQuestionResult *step1Result2 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step1.result2"];
-    step1Result2.choiceAnswers = @[@(2)];
+    step1Result2.choiceAnswers = @[ @(2) ];
     ORKChoiceQuestionResult *step2Result1 = [[ORKChoiceQuestionResult alloc] initWithIdentifier:@"step2.result1"];
-    step2Result1.choiceAnswers = @[@(3)];
+    step2Result1.choiceAnswers = @[ @(3) ];
     
     ORKStepResult *inputResult = [[ORKStepResult alloc] initWithStepIdentifier:@"pageStep"
                                                                        results:@[step1Result1, step1Result2, step2Result1]];

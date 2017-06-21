@@ -57,6 +57,7 @@
 #import <ResearchKit/ORKReactionTimeStep.h>
 #import <ResearchKit/ORKShoulderRangeOfMotionStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
+#import <ResearchKit/ORKStroopStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>
@@ -70,15 +71,19 @@
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
+#import <ResearchKit/ORKConsentSharingStepViewController.h>
 #import <ResearchKit/ORKCountdownStepViewController.h>
 #import <ResearchKit/ORKFitnessStepViewController.h>
 #import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
 #import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
+#import <ResearchKit/ORKPasscodeStepViewController.h>
 #import <ResearchKit/ORKPSATStepViewController.h>
 #import <ResearchKit/ORKQuestionStepViewController.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
+#import <ResearchKit/ORKSignatureStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
+#import <ResearchKit/ORKStroopStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>

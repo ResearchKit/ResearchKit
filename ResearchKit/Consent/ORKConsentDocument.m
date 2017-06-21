@@ -115,12 +115,12 @@
         
         
         CGFloat adjustment = [[ORKSubheadlineLabel defaultFont] pointSize] - 17.0;
-        NSArray *hPointSizes = @[@([[ORKHeadlineLabel defaultFont] pointSize]),
+        NSArray *hPointSizes = @[ @([[ORKHeadlineLabel defaultFont] pointSize]),
                                  @(24.0 + adjustment),
                                  @(19.0 + adjustment),
                                  @(17.0 + adjustment),
                                  @(13.0 + adjustment),
-                                 @(11.0 + adjustment)];
+                                 @(11.0 + adjustment) ];
         
         [css appendString:[NSString stringWithFormat:@"h1 { font-family: -apple-system-font ; font-weight: 300; font-size: %.0lf; }\n",
                            ((NSNumber *)hPointSizes[0]).floatValue]];

@@ -44,6 +44,8 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import <MediaPlayer/MediaPlayer.h>
+
 
 @interface ORKToneAudiometryStepViewController ()
 
@@ -51,13 +53,13 @@
 @property (nonatomic, strong) ORKAudioGenerator *audioGenerator;
 @property (nonatomic, assign) BOOL expired;
 
-@property (nonatomic, copy) NSArray *testingFrequencies;
+@property (nonatomic) NSArray *listOfFrequencies;
+@property (nonatomic) NSMutableArray *frequencies;
 @property (nonatomic, assign) NSUInteger currentTestIndex;
-
 @property (nonatomic, strong) NSMutableArray *samples;
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event;
-
+@property (nonatomic) ORKAudioChannel currentTestChannel;
 - (ORKToneAudiometryStep *)toneAudiometryStep;
 
 @end
@@ -67,17 +69,17 @@
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
-
+    
     if (self) {
         self.suspendIfInactive = YES;
     }
-
+    
     return self;
 }
 
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
-
+    
     // Don't show next button
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
@@ -85,55 +87,69 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.expired = NO;
-
+    self.listOfFrequencies = @[ @8000, @4000, @1000, @500, @250 ];
+    
+    [self generateFrequencyCombination];
     self.toneAudiometryContentView = [[ORKToneAudiometryContentView alloc] init];
     self.activeStepView.activeCustomView = self.toneAudiometryContentView;
-
-    [self.toneAudiometryContentView.tapButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
-
+    
+    [self.toneAudiometryContentView.leftButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
+    [self.toneAudiometryContentView.rightButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     self.currentTestIndex = 0;
-    self.testingFrequencies = @[@250, @500, @1000, @2000, @4000, @8000];
     self.audioGenerator = [ORKAudioGenerator new];
+}
+
+- (void)generateFrequencyCombination {
+    int numberOfChannels = 2;
+    self.frequencies = [[NSMutableArray alloc] init];
+    for (int i = 0; i<[self.listOfFrequencies count]; i++) {
+        for (int j = 0; j < numberOfChannels; j++) {
+            [self.frequencies addObject:@[self.listOfFrequencies[i], [NSNumber numberWithInt:j]]];
+        }
+    }
+    for (int k = 0; k<[self.frequencies count]; k++) {
+        [self.frequencies exchangeObjectAtIndex:(arc4random() % [self.frequencies count]) withObjectAtIndex:(arc4random() % [self.frequencies count])];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
     [self start];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    
     [self.audioGenerator stop];
 }
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
-
+    
     // "Now" is the end time of the result, which is either actually now,
     // or the last time we were in the responder chain.
     NSDate *now = sResult.endDate;
-
+    
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
-
+    
     ORKToneAudiometryResult *toneResult = [[ORKToneAudiometryResult alloc] initWithIdentifier:self.step.identifier];
     toneResult.startDate = sResult.startDate;
     toneResult.endDate = now;
     toneResult.samples = [self.samples copy];
     toneResult.outputVolume = @([AVAudioSession sharedInstance].outputVolume);
-
+    
     [results addObject:toneResult];
     sResult.results = [results copy];
-
+    
     return sResult;
 }
 
 - (void)stepDidFinish {
     [super stepDidFinish];
-
+    
     self.expired = YES;
     [self.toneAudiometryContentView finishStep:self];
     [self goForward];
@@ -141,53 +157,52 @@
 
 - (void)start {
     [super start];
-
+    
     [self startCurrentTest];
-}
-
-- (void)suspend {
-    [super suspend];
-    // ...
-}
-
-- (void)resume {
-    [super resume];
-    // ...
-}
-
-- (void)finish {
-    [super finish];
-    // ...
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
     if (self.samples == nil) {
         _samples = [NSMutableArray array];
     }
-
+    
     ORKToneAudiometrySample *sample = [ORKToneAudiometrySample new];
-    NSUInteger frequencyIndex = (self.currentTestIndex / 2);
-    NSNumber *frequency = self.testingFrequencies[frequencyIndex];
+    NSUInteger frequencyIndex = self.currentTestIndex;
+    NSNumber *frequency = self.frequencies[frequencyIndex][0];
     sample.frequency = [frequency doubleValue];
-    sample.channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
+    sample.channel = self.currentTestChannel;
+    sample.channelSelected = (button == self.toneAudiometryContentView.leftButton) ? ORKAudioChannelLeft : ORKAudioChannelRight;
     sample.amplitude = self.audioGenerator.volumeAmplitude;
-
+    
     [self.samples addObject:sample];
-
+    
     [self.audioGenerator stop];
-
+    
     [self startNextTestOrFinish];
 }
 
 - (void)testExpired {
+    if (self.samples == nil) {
+        _samples = [NSMutableArray array];
+    }
+    
+    ORKToneAudiometrySample *sample = [ORKToneAudiometrySample new];
+    NSUInteger frequencyIndex = self.currentTestIndex;
+    NSNumber *frequency = self.frequencies[frequencyIndex][0];
+    sample.frequency = [frequency doubleValue];
+    sample.channel = self.currentTestChannel;
+    sample.channelSelected = -1;
+    sample.amplitude = self.audioGenerator.volumeAmplitude;
+    
+    [self.samples addObject:sample];
     [self.audioGenerator stop];
-
+    
     [self startNextTestOrFinish];
 }
 
 - (void)startNextTestOrFinish {
     self.currentTestIndex ++;
-    if (self.currentTestIndex == (self.testingFrequencies.count * 2)) {
+    if (self.currentTestIndex == (self.frequencies.count)) {
         [self finish];
     } else {
         [self startCurrentTest];
@@ -200,31 +215,35 @@
 
 - (void)startCurrentTest {
     const NSTimeInterval SoundDuration = self.toneAudiometryStep.toneDuration;
-
+    
     NSUInteger testIndex = self.currentTestIndex;
-    NSUInteger frequencyIndex = (testIndex / 2);
-    NSAssert(frequencyIndex < self.testingFrequencies.count, nil);
-
-    NSNumber *frequency = self.testingFrequencies[frequencyIndex];
-    ORKAudioChannel channel = ((testIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
-
-    CGFloat progress = 0.001 + (CGFloat)testIndex / (self.testingFrequencies.count * 2);
+    NSUInteger frequencyIndex = testIndex;
+    NSAssert(frequencyIndex < self.frequencies.count, nil);
+    
+    NSNumber *frequency = self.frequencies[frequencyIndex][0];
+    
+    self.currentTestChannel = ([self.frequencies[frequencyIndex][1] intValue] == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
+    
+    ORKAudioChannel channel = self.currentTestChannel;
+    
+    CGFloat progress = 0.001 + (CGFloat)testIndex / self.frequencies.count;
     [self.toneAudiometryContentView setProgress:progress
                                         caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), ORKLocalizedStringFromNumber(frequency)] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), ORKLocalizedStringFromNumber(frequency)]
                                        animated:YES];
-
+    
     [self.audioGenerator playSoundAtFrequency:frequency.doubleValue
                                     onChannel:channel
                                fadeInDuration:SoundDuration];
-
+    
     ORKWeakTypeOf(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SoundDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ORKStrongTypeOf(self) strongSelf = weakSelf;
-
+        
         if (strongSelf.currentTestIndex == testIndex) {
             [strongSelf testExpired];
         }
     });
 }
+
 
 @end

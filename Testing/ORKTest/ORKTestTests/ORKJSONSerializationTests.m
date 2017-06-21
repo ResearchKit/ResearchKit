@@ -383,6 +383,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"firstResult",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[
                                               @"ORKStep.task",
@@ -631,6 +633,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"unit",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -851,6 +855,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKStep.restorable",
                                        @"ORKStep.showsProgress",
                                        @"ORKStepResult.isPreviousResult",
+                                       @"ORKTextAnswerFormat.validationRegex",
                                        @"ORKVideoCaptureStep.duration",
                                        ];
     
@@ -949,6 +954,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     // Classes for which tests are not currently implemented
     NSArray <NSString *> *excludedClassNames = @[
                                                  @"ORKVisualConsentStepViewController",     // Requires step with scenes
+                                                 @"ORKStroopStepViewController",
                                                  ];
     
     // Classes that do not allow adding a result should throw an exception

@@ -62,6 +62,7 @@
 
 @end
 
+
 @implementation ORKIBValueRangeGraphChartViewDataSource
 
 - (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
@@ -1052,7 +1053,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 @end
 
-    
+
 @implementation ORKValueRangeGraphChartView {
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
             }

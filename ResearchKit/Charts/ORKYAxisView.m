@@ -118,9 +118,9 @@ static const CGFloat ImageVerticalPadding = 3.0;
         CGFloat minimumValue = _parentGraphChartView.minimumValue;
         CGFloat maximumValue = _parentGraphChartView.maximumValue;
         if (minimumValue == maximumValue) {
-            yAxisLabelFactors = @[@0.5f];
+            yAxisLabelFactors = @[ @0.5f ];
         } else {
-            yAxisLabelFactors = @[@0.2f, @1.0f];
+            yAxisLabelFactors = @[ @0.2f, @1.0f ];
         }
         
         for (NSNumber *factorNumber in yAxisLabelFactors) {

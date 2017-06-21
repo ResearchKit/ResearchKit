@@ -243,6 +243,33 @@ ORK_AVAILABLE_DECL
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
 
+
+/**
+ Asks the data source for the unit label for the given plot index so VoiceOver's description of the graph can be read with units.
+ 
+ If this method is not implemented, VoiceOver will speak the graph value without units.
+ 
+ @param graphChartView  The graph view asking for its unit label
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return An appropriate unit label for the given plot.
+ */
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView accessibilityUnitLabelForPlotIndex:(NSInteger)plotIndex;
+
+
+/**
+ Asks the data source for the accessibilityLabel at a given point on the x-axis
+ 
+ This is used in cases where the UI may be displaying a shortened form (e.g. M, T, W, etc. for days of the week), but VoiceOver should be speaking the longer form. If this method isn't implemented, VoiceOver will speak the label displayed in the UI for the given index.
+ 
+ @param graphChartView  The graph view asking for its unit label
+ @param pointIndex      The index corresponding to the number returned by `numberOfDivisionsInXAxisForGraphChartView:`.
+ 
+ @return An appropriate accessibility label for the given index of the graph.
+ */
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView accessibilityLabelForXAxisAtPointIndex:(NSInteger)pointIndex;
+
 @end
 
 

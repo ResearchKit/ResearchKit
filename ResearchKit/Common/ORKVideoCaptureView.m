@@ -400,7 +400,7 @@
     }
 }
 
--(NSString *)formattedTimeFromSeconds:(CGFloat)seconds {
+- (NSString *)formattedTimeFromSeconds:(CGFloat)seconds {
     if (!_dateComponentsFormatter) {
         _dateComponentsFormatter = [NSDateComponentsFormatter new];
         _dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
