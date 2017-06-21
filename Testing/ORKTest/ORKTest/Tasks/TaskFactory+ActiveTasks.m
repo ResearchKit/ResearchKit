@@ -253,6 +253,13 @@
     return task;
 }
 
+- (id<ORKTask>)makeStroopTaskWithIdentifier:(NSString *)identifier {
+    return [ORKOrderedTask stroopTaskWithIdentifier:identifier
+                             intendedUseDescription:nil
+                                   numberOfAttempts:15
+                                            options:0];
+}
+
 - (id<ORKTask>)makeTimedWalkTaskWithIdentifier:(NSString *)identifier {
     ORKOrderedTask *task = [ORKOrderedTask timedWalkTaskWithIdentifier:identifier
                                                 intendedUseDescription:nil

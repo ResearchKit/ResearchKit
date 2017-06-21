@@ -1,7 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
- Copyright (c) 2015-2016, Ricardo Sanchez-Saez.
+ Copyright (c) 2015 - 2016, Ricardo Sanchez-Saez.
  Copyright (c) 2016, Sage Bionetworks.
  Copyright (c) 2017, Macro Yau.
 
@@ -61,6 +61,7 @@ NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *TestButtonTable()
                         @"Memory Game",
                         @"PSAT",
                         @"Reaction Time",
+                        @"Stroop",
                         @"Timed Walk",
                         @"Tone Audiometry",
                         @"Tower Of Hanoi",
