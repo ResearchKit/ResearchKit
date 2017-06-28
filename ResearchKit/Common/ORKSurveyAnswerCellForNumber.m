@@ -72,7 +72,7 @@
     } else if (questionType == ORKQuestionTypeInteger) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
-    
+    [self addPlusMinusAccessoryToField:textField];
     [textField addTarget:self action:@selector(valueFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     _containerView = [[UIView alloc] init];
@@ -85,7 +85,54 @@
     ORKEnableAutoLayoutForViews(@[_containerView, _textFieldView]);
     [self setUpConstraints];
 }
+- (void)addPlusMinusAccessoryToField:(UITextField*) field {
+    UIView *inputAccesoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 42)];
+    // It´s good idea a view under the button in order to change the color...more custom option
+    inputAccesoryView.backgroundColor = [UIColor clearColor];
+    UIImage *minusImage = [UIImage imageNamed:@"numberPadMinus" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
+    UIImage *plusImage = [UIImage imageNamed:@"numberPadPlus" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
 
+    UIButton *minusButton = [[UIButton alloc] initWithFrame:CGRectMake(inputAccesoryView.frame.size.width/2, 0, inputAccesoryView.frame.size.width/2, inputAccesoryView.frame.size.height)];
+    [minusButton setImage:minusImage forState:UIControlStateNormal];
+    [minusButton setBackgroundColor:[UIColor colorWithRed:187.0f/255.0f green:194.0f/255.0f blue:187.0f/255.0f alpha:1]];
+    [minusButton addTarget:self action:@selector(addNegativeSign) forControlEvents:UIControlEventTouchUpInside];
+    [inputAccesoryView addSubview:minusButton];
+    
+    UIButton *plusButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, inputAccesoryView.frame.size.width/2, inputAccesoryView.frame.size.height)];
+    [plusButton setImage:plusImage forState:UIControlStateNormal];
+    [plusButton setBackgroundColor:[UIColor colorWithRed:209.0f/255.0f green:213.0f/255.0f blue:219.0f/255.0f alpha:1]];
+    [plusButton addTarget:self action:@selector(removeNegativeSign) forControlEvents:UIControlEventTouchUpInside];
+    [inputAccesoryView addSubview:plusButton];
+    
+    field.inputAccessoryView = inputAccesoryView;
+}
+    
+    
+- (void)addNegativeSign {
+    ORKUnitTextField *textField =  _textFieldView.textField;
+    
+    if (![textField.text hasPrefix:@"-"])
+    {
+        textField.text = [NSString stringWithFormat:@"-%@",textField.text];
+        if (textField.text.length > 1) {
+            [self valueFieldDidChange:textField];
+        }
+    }
+}
+    
+- (void)removeNegativeSign {
+    ORKUnitTextField *textField =  _textFieldView.textField;
+    
+    if ([textField.text hasPrefix:@"-"])
+    {
+        textField.text = [textField.text substringFromIndex:1];
+        textField.text = [NSString stringWithFormat:@" %@",textField.text];
+        if (textField.text.length > 1) {
+            [self valueFieldDidChange:textField];
+        }
+    }
+}
+    
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
