@@ -85,6 +85,7 @@
     ORKEnableAutoLayoutForViews(@[_containerView, _textFieldView]);
     [self setUpConstraints];
 }
+
 - (void)addPlusMinusAccessoryToField:(UITextField*) field {
     UIView *inputAccesoryView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 42)];
     // It´s good idea a view under the button in order to change the color...more custom option
@@ -106,8 +107,7 @@
     
     field.inputAccessoryView = inputAccesoryView;
 }
-    
-    
+
 - (void)addNegativeSign {
     ORKUnitTextField *textField =  _textFieldView.textField;
     
