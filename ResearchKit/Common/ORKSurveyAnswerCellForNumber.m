@@ -113,7 +113,7 @@
     
     if (![textField.text hasPrefix:@"-"])
     {
-        textField.text = [NSString stringWithFormat:@"-%@",textField.text];
+        [textField setText: [NSString stringWithFormat:@"-%@",textField.text]];
         if (textField.text.length > 1) {
             [self valueFieldDidChange:textField];
         }
@@ -125,11 +125,11 @@
     
     if ([textField.text hasPrefix:@"-"])
     {
-        textField.text = [textField.text substringFromIndex:1];
-        textField.text = [NSString stringWithFormat:@" %@",textField.text];
-        if (textField.text.length > 1) {
-            [self valueFieldDidChange:textField];
-        }
+        NSString * unsignedString = [textField.text substringFromIndex:1];
+        [textField setText:@""]; // set to empty to force answer to change
+        [self valueFieldDidChange:textField];
+        [textField setText:unsignedString]; // answer will now be changed to unsigned value
+        [self valueFieldDidChange:textField];
     }
 }
     
