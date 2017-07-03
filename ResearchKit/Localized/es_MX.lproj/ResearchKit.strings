@@ -138,6 +138,10 @@
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Intenta de nuevo.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentica con Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_RETRY_LIMIT_MESSAGE" = "Se excedió el límite de reintentos de la aplicación.";
+"PASSCODE_TOUCH_ID_ERROR_LOCKED_OUT_MESSAGE" = "La biometría está bloqueada.";
+"PASSCODE_TOUCH_ID_ERROR_USER_CANCELLED_MESSAGE" = "Cancelado por el usuario.";
+"PASSCODE_TOUCH_ID_ERROR_NOT_ENROLLED_MESSAGE" = "No se registraron dedos con la id. táctil.";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se permiten caracteres numéricos.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador del progreso de ingreso de código";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos ingresados";
