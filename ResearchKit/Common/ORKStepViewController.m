@@ -270,11 +270,27 @@
 
 - (ORKStepResult *)result {
     
-    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    stepResult.startDate = self.presentedDate;
+    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:_addedResults ? : @[]];
+    stepResult.startDate = self.presentedDate ? : [NSDate date];
     stepResult.endDate = self.dismissedDate ? : [NSDate date];
     
     return stepResult;
+}
+
+- (void)addResult:(ORKResult *)result {
+    ORKResult *copy = [result copy];
+    if (_addedResults == nil) {
+        _addedResults = @[copy];
+    } else {
+        NSUInteger idx = [_addedResults indexOfObject:copy];
+        if (idx == NSNotFound) {
+            _addedResults = [_addedResults arrayByAddingObject:copy];
+        } else {
+            NSMutableArray *results = [_addedResults mutableCopy];
+            [results insertObject:copy atIndex:idx];
+            _addedResults = [results copy];
+        }
+    }
 }
 
 - (void)notifyDelegateOnResultChange {
@@ -353,15 +369,12 @@
 
 
 - (ORKTaskViewController *)taskViewController {
-    UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];
-    if (pageViewController && [pageViewController isKindOfClass:[UIPageViewController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)[pageViewController parentViewController];
-        ORKTaskViewController *taskViewController = (ORKTaskViewController *)[navigationController parentViewController];
-        if (taskViewController && [taskViewController isKindOfClass:[ORKTaskViewController class]]) {
-            return taskViewController;
-        }
+    // look to parent view controller for a task view controller
+    UIViewController *parentViewController = [self parentViewController];
+    while (parentViewController && ![parentViewController isKindOfClass:[ORKTaskViewController class]]) {
+        parentViewController = [parentViewController parentViewController];
     }
-    return nil;
+    return (ORKTaskViewController *)parentViewController;
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
@@ -403,6 +416,7 @@ static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
 static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
+static NSString *const _ORKAddedResultsKey = @"addedResults";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -411,6 +425,7 @@ static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDateRestoreKey];
     [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryKey];
     [coder encodeObject:_parentReviewStep forKey:_ORKParentReviewStepKey];
+    [coder encodeObject:_addedResults forKey:_ORKAddedResultsKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -434,6 +449,8 @@ static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
     }
     
     self.parentReviewStep = [coder decodeObjectOfClass:[ORKReviewStep class] forKey:_ORKParentReviewStepKey];
+    
+    _addedResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKAddedResultsKey];
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {

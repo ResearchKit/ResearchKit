@@ -111,6 +111,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKSpatialSpanMemoryResult:
         providerType = SpatialSpanMemoryResultTableViewProvider.self
         
+    case is ORKStroopResult:
+        providerType = StroopResultTableViewProvider.self
+        
     case is ORKTappingIntervalResult:
         providerType = TappingIntervalResultTableViewProvider.self
     
@@ -120,6 +123,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKReactionTimeResult:
         providerType = ReactionTimeViewProvider.self
         
+    case is ORKRangeOfMotionResult:
+        providerType = RangeOfMotionResultTableViewProvider.self
+
     case is ORKTowerOfHanoiResult:
         providerType = TowerOfHanoiResultTableViewProvider.self
         
@@ -131,6 +137,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
         
     case is ORKHolePegTestResult:
         providerType = HolePegTestResultTableViewProvider.self
+    
+    case is ORKTrailmakingResult:
+        providerType = TrailmakingResultTableViewProvider.self
         
     // All
     case is ORKTaskResult:
@@ -142,6 +151,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     */
     case is ORKCollectionResult where !(result is ORKTaskResult):
         providerType = CollectionResultTableViewProvider.self
+      
+    case is ORKVideoInstructionStepResult:
+        providerType = VideoInstructionStepResultTableViewProvider.self
         
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
@@ -376,7 +388,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
         let location = questionResult.locationAnswer
-        let address = (location?.addressDictionary["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
+        let address = (location?.addressDictionary?["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
         let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
             ResultRow(text: "latitude", detail: location?.coordinate.latitude),
@@ -618,6 +630,40 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKStroopResult` instance.
+class StroopResultTableViewProvider: ResultTableViewProvider {
+    //MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+    
+        return "Samples"
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let stroopResult = result as! ORKStroopResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if (section == 0){
+            return rows
+        }
+        return [
+            ResultRow(text: "Color", detail: stroopResult.color),
+            ResultRow(text: "Text", detail: stroopResult.text),
+            ResultRow(text: "Color Selected", detail: stroopResult.colorSelected)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKTappingIntervalResult` instance.
 class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -703,9 +749,10 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
             let detail: String
             
             let channelName = toneSample.channel == .left ? "Left" : "Right"
+            let correct = toneSample.channelSelected == toneSample.channel ? "Correct" : "Incorrect"
             
             text = "\(toneSample.frequency) \(channelName)"
-            detail = "\(toneSample.amplitude)"
+            detail = "\(toneSample.amplitude) \(correct)"
             
             return ResultRow(text: text, detail: detail)
         }
@@ -749,6 +796,26 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKRangeOfMotionResult` instance.
+class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rangeOfMotionResult = result as! ORKRangeOfMotionResult
+        let rows = super.resultRowsForSection(section)
+        return rows + [
+            ResultRow(text: "flexed", detail: rangeOfMotionResult.flexed),
+            ResultRow(text: "extended", detail: rangeOfMotionResult.extended)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
 class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -781,6 +848,24 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
             ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
             ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
+    }
+}
+
+/// Table view provider specific to an `ORKTrailmaking` instance.
+class TrailmakingResultTableViewProvider: ResultTableViewProvider {
+//    MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return super.tableView(tableView, titleForHeaderInSection: 0)
+    }
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rows = super.resultRowsForSection(section)
+        return rows
     }
 }
 
@@ -994,7 +1079,7 @@ class TaskResultTableViewProvider: CollectionResultTableViewProvider {
         
         let rows = super.resultRowsForSection(section)
         
-        if section == 0 {
+        if section == 0 && (taskResult.results?.count)! > 0 {
             return rows + [
                 ResultRow(text: "taskRunUUID", detail: taskResult.taskRunUUID.uuidString),
                 ResultRow(text: "outputDirectory", detail: taskResult.outputDirectory)
@@ -1041,6 +1126,26 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
 
                 return ResultRow(text: childResultClassName, detail: childResult.identifier, selectable: true)
             }
+        }
+        
+        return rows
+    }
+}
+
+/// Table view provider specific to an `ORKVideoInstructionStepResult` instance.
+class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let videoInstructionStepResult = result as! ORKVideoInstructionStepResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "playbackStoppedTime", detail: videoInstructionStepResult.playbackStoppedTime),
+                ResultRow(text: "playbackCompleted", detail: videoInstructionStepResult.playbackCompleted)
+            ]
         }
         
         return rows

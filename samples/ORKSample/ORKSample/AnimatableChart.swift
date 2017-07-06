@@ -33,7 +33,3 @@ import ResearchKit
 protocol AnimatableChart {
     func animateWithDuration(_ animationDuration: TimeInterval)
 }
-
-extension ORKPieChartView: AnimatableChart {}
-extension ORKDiscreteGraphChartView: AnimatableChart {}
-extension ORKLineGraphChartView: AnimatableChart {}

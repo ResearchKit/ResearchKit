@@ -35,6 +35,7 @@
 #import "ORKHeightPicker.h"
 #import "ORKTimeIntervalPicker.h"
 #import "ORKValuePicker.h"
+#import "ORKMultipleValuePicker.h"
 
 #import "ORKAnswerFormat.h"
 
@@ -58,10 +59,13 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
         picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
+        picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
-    
+
     return picker;
 }
+
 
 @implementation ORKPicker : NSObject
 
@@ -85,6 +89,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
         picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
+        picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
     
     return picker;

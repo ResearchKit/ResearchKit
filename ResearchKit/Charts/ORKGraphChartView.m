@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -43,6 +44,36 @@
 #import "ORKSkin.h"
 
 
+#if TARGET_INTERFACE_BUILDER
+
+@implementation ORKIBGraphChartViewDataSource
+
+- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
+    return self.plotPoints.count;
+}
+
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex].count;
+}
+
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
+    return [@(pointIndex + 1) stringValue];
+}
+
+@end
+
+
+@implementation ORKIBValueRangeGraphChartViewDataSource
+
+- (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
+}
+
+@end
+
+#endif
+
+
 const CGFloat ORKGraphChartViewLeftPadding = 10.0;
 const CGFloat ORKGraphChartViewPointAndLineWidth = 8.0;
 const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration = 0.1;
@@ -75,6 +106,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     NSMutableArray<CALayer *> *_verticalReferenceLineLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
+    NSString *_decimalFormat;
 }
 
 #pragma mark - Init
@@ -176,6 +208,12 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [_yAxisView updateTicksAndLabels];
 }
 
+- (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
+    _decimalPlaces = decimalPlaces;
+    _decimalFormat = [NSString stringWithFormat:@"%%.%luf", (unsigned long)_decimalPlaces];
+    [_yAxisView setDecimalPlaces:_decimalPlaces];
+}
+
 - (void)setShowsHorizontalReferenceLines:(BOOL)showsHorizontalReferenceLines {
     _showsHorizontalReferenceLines = showsHorizontalReferenceLines;
     [self updateHorizontalReferenceLines];
@@ -203,6 +241,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    
+    [self setDecimalPlaces:0];
     
     _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
     _longPressGestureRecognizer.delaysTouchesBegan = YES;
@@ -721,7 +761,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     double scrubbingValue = [self scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
 
     _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
-    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
+    _scrubberLabel.text = [NSString stringWithFormat:_decimalFormat, scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
                                                                            _plotView.bounds.size.height)
                                                         options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
@@ -1013,7 +1053,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 @end
 
-    
+
 @implementation ORKValueRangeGraphChartView {
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
             }
@@ -1239,103 +1279,4 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     }
 }
 
-#pragma mark - Interface Builder designable
-
-- (void)prepareForInterfaceBuilder {
-    [self reloadData];
-}
-
 @end
-
-
-#if TARGET_INTERFACE_BUILDER
-
-@implementation ORKIBSampleDiscreteGraphDataSource
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithMinimumValue: 0 maximumValue: 2],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 1 maximumValue: 4],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 8],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 10],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 8 maximumValue: 13]],
-                            @[[[ORKRangedPoint alloc] initWithValue: 1],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 2 maximumValue: 6],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 3 maximumValue: 10],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 5 maximumValue: 11],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 7 maximumValue: 13],
-                              [[ORKRangedPoint alloc] initWithMinimumValue: 10 maximumValue: 13]
-                              ]];
-    }
-    return self;
-}
-
-- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
-    return self.plotPoints.count;
-}
-
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex].count;
-}
-
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex][pointIndex];
-    }
-
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
-    return [@(pointIndex + 1) stringValue];
-}
-
-@end
-
-
-@implementation ORKIBSampleLineGraphDataSource
-    
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.plotPoints = @[@[[[ORKRangedPoint alloc] initWithValue: 10],
-                              [[ORKRangedPoint alloc] initWithValue: 20],
-                              [[ORKRangedPoint alloc] initWithValue: 25],
-                              [[ORKRangedPoint alloc] init],
-                              [[ORKRangedPoint alloc] initWithValue: 30],
-                              [[ORKRangedPoint alloc] initWithValue: 40]],
-                            @[[[ORKRangedPoint alloc] initWithValue: 2],
-                              [[ORKRangedPoint alloc] initWithValue: 4],
-                              [[ORKRangedPoint alloc] initWithValue: 8],
-                              [[ORKRangedPoint alloc] initWithValue: 16],
-                              [[ORKRangedPoint alloc] initWithValue: 32],
-                              [[ORKRangedPoint alloc] initWithValue: 64]
-                              ]];
-    }
-    return self;
-}
-        
-- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView {
-    return self.plotPoints.count;
-}
-            
-- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfDataPointsForPlotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex].count;
-            }
-
-- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
-    return self.plotPoints[plotIndex][pointIndex];
-        }
-        
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex {
-    return [@(pointIndex + 1) stringValue];
-        }
-
-- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
-    return 0;
-    }
-    
-- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView {
-    return 70;
-}
-
-@end
-#endif

@@ -210,6 +210,7 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)prepareForReuse {
     self.hasChangedAnswer = NO;
+    [super prepareForReuse];
 }
 
 // Inform delegate of the change
@@ -1071,8 +1072,9 @@ static const CGFloat HorizontalMargin = 15.0;
           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]] ||
           [answerFormat isKindOfClass:[ORKHeightAnswerFormat class]])) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat, ORKTimeOfDayAnswerFormat, ORKTimeIntervalAnswerFormat, ORKValuePicker, or ORKHeightAnswerFormat instance" userInfo:nil];
+        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat, ORKTimeOfDayAnswerFormat, ORKTimeIntervalAnswerFormat, ORKValuePicker, ORKMultipleValuePickerAnswerFormat, or ORKHeightAnswerFormat instance" userInfo:nil];
     }
     [super setFormItem:formItem];
 }

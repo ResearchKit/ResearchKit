@@ -42,6 +42,7 @@
 @property (nonatomic, copy) NSString *propertyName;
 @property (nonatomic, strong) Class propertyClass;
 @property (nonatomic) BOOL isPrimitiveType;
+@property (nonatomic) BOOL isBoolType;
 
 - (instancetype)initWithObjcProperty:(objc_property_t)property;
 
@@ -76,6 +77,10 @@
            
         } else if ([@[@"Ti", @"Tq", @"TI", @"TQ"] containsObject:typeAttribute]) {
             self.propertyClass = [NSNumber class];
+        }
+        else if ([typeAttribute isEqualToString:@"TB"]) {
+            self.propertyClass = [NSNumber class];
+            _isBoolType = YES;
         }
     }
     return self;
@@ -181,6 +186,8 @@
  */
 ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKStepModifier, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKVerificationStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString text:@"text" verificationViewControllerClass:NSClassFromString(@"ORKVerificationStepViewController") ];});
@@ -200,15 +207,41 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}];
     return location;
 }));
-ORK_MAKE_TEST_INIT(HKObjectType, (^{
-    if (self.class == [HKQuantityType class]) {
-        return (HKObjectType *)[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-    } else {
-        return (HKObjectType *)[HKObjectType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
-    }
+ORK_MAKE_TEST_INIT(HKSampleType, (^{
+    return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+}))
+ORK_MAKE_TEST_INIT(HKQuantityType, (^{
+    return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
+}))
+ORK_MAKE_TEST_INIT(HKCorrelationType, (^{
+    return [HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
+}))
+ORK_MAKE_TEST_INIT(HKCharacteristicType, (^{
+    return [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
+}))
+ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
+    return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
+}))
+ORK_MAKE_TEST_INIT(NSNumber, (^{
+    return [self initWithInt:123];
+}))
+ORK_MAKE_TEST_INIT(HKUnit, (^{
+    return [HKUnit unitFromString:@"kg"];
+}))
+ORK_MAKE_TEST_INIT(NSURL, (^{
+    return [self initFileURLWithPath:@"/usr"];
+}))
+ORK_MAKE_TEST_INIT(NSTimeZone, (^{
+    return [NSTimeZone timeZoneForSecondsFromGMT:60*60];
+}))
+ORK_MAKE_TEST_INIT(NSCalendar, (^{
+    return [self initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+}))
+ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
+    return [self initWithPattern:@"." options:0 error:nil];
 }))
 
-                                                
+
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
 @end
@@ -320,7 +353,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
     NSArray *classesExcludedForORKESerialization = @[
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
+                                                     [ORKStepModifier class],     // abstract base class
                                                      [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
+                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialzation
                                                      [ORKCollector class], // ORKCollector doesn't support JSON serialzation
                                                      [ORKHealthCollector class],
                                                      [ORKHealthCorrelationCollector class],
@@ -346,6 +381,10 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"healthKitUnit",
                                        @"answer",
                                        @"firstResult",
+                                       @"ORKPageStep.steps",
+                                       @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[
                                               @"ORKStep.task",
@@ -373,6 +412,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKTextAnswerFormat.spellCheckingType",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKImageCaptureStep.templateImage",
@@ -395,10 +435,12 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
-                                              @"ORKRegistrationStep.passcodeValidationRegex",
+                                              @"ORKRegistrationStep.passcodeValidationRegularExpression",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
+                                              @"ORKPageStep.steps",
+                                              @"ORKNavigablePageStep.steps",
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -422,36 +464,22 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                 objc_property_t property = props[i];
                 ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
                 
-                if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+                NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(currentClass),p.propertyName];
+                if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                    [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                     if (p.isPrimitiveType == NO) {
                         // Assign value to object type property
-                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class]|| aClass == [ORKImageChoice class]))
+                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class] || aClass == [ORKImageChoice class]))
                         {
                             // Map NSObject to string, since it's used where either a string or a number is acceptable
                             [instance setValue:@"test" forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSNumber class]) {
-                            [instance setValue:@(123) forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKUnit class]) {
-                            [instance setValue:[HKUnit unitFromString:@"kg"] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSURL class]) {
-                            [instance setValue:[NSURL fileURLWithPath:@"/usr"] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSTimeZone class]) {
-                            [instance setValue:[NSTimeZone timeZoneForSecondsFromGMT:60*60] forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKQuantityType class]) {
-                            [instance setValue:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass] forKey:p.propertyName];
-                        } else if (p.propertyClass == [HKCharacteristicType class]) {
-                            [instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
-                        } else if (p.propertyClass == [NSCalendar class]) {
-                            [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
-                        } else if (p.propertyClass == [ORKLocation class]) {
-                            [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
                         } else {
                             id itemInstance = [self instanceForClass:p.propertyClass];
                             [instance setValue:itemInstance forKey:p.propertyName];
                         }
                     }
                     [propertyNames addObject:p.propertyName];
-                    dottedPropertyNames[p.propertyName] = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(currentClass),p.propertyName];
+                    dottedPropertyNames[p.propertyName] = dottedPropertyName;
                 }
             }
             currentClass = [currentClass superclass];
@@ -527,6 +555,19 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
 - (BOOL)applySomeValueToClassProperty:(ClassProperty *)p forObject:(id)instance index:(NSInteger)index forEqualityCheck:(BOOL)equality {
     // return YES if the index makes it distinct
     
+    if (p.isPrimitiveType) {
+        if (p.propertyClass == [NSNumber class]) {
+            if (p.isBoolType) {
+                XCTAssertNoThrow([instance setValue:index?@YES:@NO forKey:p.propertyName]);
+            } else {
+                XCTAssertNoThrow([instance setValue:index?@(12):@(123) forKey:p.propertyName]);
+            }
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
     Class aClass = [instance class];
     // Assign value to object type property
     if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class]|| aClass == [ORKImageChoice class] || (aClass == [ORKQuestionResult class])))
@@ -555,6 +596,10 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
         [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
     } else if (p.propertyClass == [NSPredicate class]) {
         [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
+    } else if (p.propertyClass == [NSRegularExpression class]) {
+        [instance setValue:[NSRegularExpression regularExpressionWithPattern:index ? @"." : @"[A-Z]"
+                                                                     options:index ? 0 : NSRegularExpressionCaseInsensitive
+                                                                       error:nil] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
@@ -585,7 +630,11 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"firstResult",
                                        @"correlationType",
                                        @"sampleType",
-                                       @"unit"
+                                       @"unit",
+                                       @"ORKPageStep.steps",
+                                       @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -614,6 +663,7 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
+                                              @"ORKInstructionStep.iconImage",
                                               @"ORKActiveStep.image",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKScaleAnswerFormat.minimumImage",
@@ -622,6 +672,8 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
+                                              @"ORKPageStep.steps",
+                                              @"ORKNavigablePageStep.steps",
                                               ];
     
     // Test Each class
@@ -636,7 +688,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                 if (p.isPrimitiveType == NO) {
                     [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
                 }
@@ -699,9 +753,16 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
         NSData *data3 = [NSKeyedArchiver archivedDataWithRootObject:newInstance2];
         
         if (![data isEqualToData:data2]) { // allow breakpointing
-            if (![aClass isSubclassOfClass:[ORKConsentSection class]]) {
+            if (![aClass isSubclassOfClass:[ORKConsentSection class]]
                 // ORKConsentSection mis-matches, but it is still "equal" because
                 // the net custom animation URL is a match.
+                && ![aClass isSubclassOfClass:[ORKNavigableOrderedTask class]]
+                // ORKNavigableOrderedTask contains ORKStepModifiers which is an abstract class
+                // with no encoded properties, but encoded/decoded objects are still equal.
+                && ![aClass isSubclassOfClass:[ORKKeyValueStepModifier class]]
+                // ORKKeyValueStepModifier si a subclass of ORKStepModifier which is an abstract class
+                // with no encoded properties, but encoded/decoded objects are still equal.
+                ) {
                 XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
             }
         }
@@ -719,26 +780,28 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
 }
 
 - (id)instanceForClass:(Class)c {
-    if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
-        ([c isSubclassOfClass:[ORKSkipStepNavigationRule class]]) ||
-        ([c isSubclassOfClass:[ORKStep class]]) ||
-         ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
-         (c == [ORKTextChoice class]) ||
-         (c == [ORKImageChoice class]) ||
-         ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
-         ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-         (c == [ORKLocation class]) ||
-         (c == [ORKResultSelector class]) ||
-         [c isSubclassOfClass:[HKObjectType class]])
-    {
-        return [[c alloc] orktest_init];
+    id result = nil;
+    @try {
+        if ([c instancesRespondToSelector:@selector(orktest_init)])
+        {
+            result = [[c alloc] orktest_init];
+        } else {
+            result = [[c alloc] init];
+        }
+    } @catch (NSException *exception) {
+        XCTAssert(NO, @"Exception throw in init for %@. Exception: %@", NSStringFromClass(c), exception);
     }
-    
-    return [[c alloc] init];
+    return result;
 }
 
 - (void)testEquality {
-    NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
+    NSArray *classesExcluded = @[
+                                 [ORKStepNavigationRule class],     // abstract base class
+                                 [ORKSkipStepNavigationRule class],     // abstract base class
+                                 [ORKStepModifier class],     // abstract base class
+                                 ];
+    
+    
     // Each time ORKRegistrationStep returns a new date in its answer fromat, cannot be tested.
     NSMutableArray *stringsForClassesExcluded = [NSMutableArray arrayWithObjects:NSStringFromClass([ORKRegistrationStep class]), nil];
     for (Class c in classesExcluded) {
@@ -770,12 +833,43 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                                        @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
-                                       @"requestedHealthKitTypesForReading",
-                                       @"healthKitUnit",
-                                       @"requestedHealthKitTypesForWriting",
+                                       
+                                       // ResearchKit specific
                                        @"answer",
                                        @"firstResult",
+                                       @"healthKitUnit",
+                                       @"providesBackgroundAudioPrompts",
+                                       @"questionType",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"requestedPermissions",
+                                       @"shouldReportProgress",
+                                       
+                                       // For a specific class
+                                       @"ORKHeightAnswerFormat.useMetricSystem",
+                                       @"ORKNavigablePageStep.steps",
+                                       @"ORKPageStep.steps",
+                                       @"ORKResult.saveable",
+                                       @"ORKReviewStep.isStandalone",
+                                       @"ORKStep.allowsBackNavigation",
+                                       @"ORKStep.restorable",
+                                       @"ORKStep.showsProgress",
+                                       @"ORKStepResult.isPreviousResult",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKVideoCaptureStep.duration",
                                        ];
+    
+    NSArray *hashExclusionList = @[
+                                   @"ORKDateQuestionResult.calendar",
+                                   @"ORKDateQuestionResult.timeZone",
+                                   @"ORKToneAudiometryResult.outputVolume",
+                                   @"ORKConsentSection.contentURL",
+                                   @"ORKConsentSection.customAnimationURL",
+                                   @"ORKNumericAnswerFormat.minimum",
+                                   @"ORKNumericAnswerFormat.maximum",
+                                   @"ORKVideoCaptureStep.duration",
+                                   @"ORKTextAnswerFormat.validationRegularExpression",
+                                   ];
     
     // Test Each class
     for (Class aClass in classesWithSecureCodingAndCopying) {
@@ -789,11 +883,11 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
-                if (p.isPrimitiveType == NO) {
-                    if ([instance valueForKey:p.propertyName] == nil) {
-                        [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
-                    }
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
+                if (p.isPrimitiveType || [instance valueForKey:p.propertyName] == nil) {
+                    [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
                 }
                 [propertyNames addObject:p.propertyName];
             }
@@ -808,8 +902,9 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
             objc_property_t property = props[i];
             ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
             
-            if ([propertyExclusionList containsObject: p.propertyName] == NO) {
-                if (p.isPrimitiveType == NO) {
+            NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(aClass),p.propertyName];
+            if ([propertyExclusionList containsObject: p.propertyName] == NO &&
+                [propertyExclusionList containsObject: dottedPropertyName] == NO) {
                     copiedInstance = [instance copy];
                     if (instance == copiedInstance) {
                         // Totally immutable object.
@@ -818,15 +913,24 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
                     if ([self applySomeValueToClassProperty:p forObject:copiedInstance index:1 forEqualityCheck:YES])
                     {
                         if ([copiedInstance isEqual:instance]) {
+                            XCTAssertNotEqualObjects(copiedInstance, instance, @"%@", dottedPropertyName);
+                        }
+                        if (!p.isPrimitiveType &&
+                            ![hashExclusionList containsObject:p.propertyName] &&
+                            ![hashExclusionList containsObject:dottedPropertyName]) {
+                            // Only check the hash for non-primitive type properties because often the
+                            // hash into a table can be referenced using a subset of the properties used to test equality.
+                            XCTAssertNotEqual([instance hash], [copiedInstance hash], @"%@", dottedPropertyName);
+                        }
+                        
+                        [self applySomeValueToClassProperty:p forObject:copiedInstance index:0 forEqualityCheck:YES];
+                        XCTAssertEqualObjects(copiedInstance, instance, @"%@", dottedPropertyName);
+                        
+                        if (p.isPrimitiveType == NO) {
+                            [copiedInstance setValue:nil forKey:p.propertyName];
                             XCTAssertNotEqualObjects(copiedInstance, instance);
                         }
-                        [self applySomeValueToClassProperty:p forObject:copiedInstance index:0 forEqualityCheck:YES];
-                        XCTAssertEqualObjects(copiedInstance, instance);
-                        
-                        [copiedInstance setValue:nil forKey:p.propertyName];
-                        XCTAssertNotEqualObjects(copiedInstance, instance);
                     }
-                }
             }
         }
     }
@@ -843,6 +947,117 @@ ORK_MAKE_TEST_INIT(HKObjectType, (^{
     
     XCTAssertEqualObjects(d1, d2);
     XCTAssertEqualObjects(a, b);
+}
+
+- (void)testAddResult {
+    
+    // Classes for which tests are not currently implemented
+    NSArray <NSString *> *excludedClassNames = @[
+                                                 @"ORKVisualConsentStepViewController",     // Requires step with scenes
+                                                 ];
+    
+    // Classes that do not allow adding a result should throw an exception
+    NSArray <NSString *> *exceptionClassNames = @[
+                                                  @"ORKPasscodeStepViewController",
+                                                 ];
+    
+    NSDictionary <NSString *, NSString *> *mapStepClassForViewController = @{ // classes that require custom step class
+                                                                             @"ORKActiveStepViewController" : @"ORKActiveStep",
+                                                                             @"ORKConsentReviewStepViewController" : @"ORKConsentReviewStep",
+                                                                             @"ORKFormStepViewController" : @"ORKFormStep",
+                                                                             @"ORKHolePegTestPlaceStepViewController" : @"ORKHolePegTestPlaceStep",
+                                                                             @"ORKHolePegTestRemoveStepViewController" : @"ORKHolePegTestRemoveStep",
+                                                                             @"ORKImageCaptureStepViewController" : @"ORKImageCaptureStep",
+                                                                             @"ORKPSATStepViewController" : @"ORKPSATStep",
+                                                                             @"ORKQuestionStepViewController" : @"ORKQuestionStep",
+                                                                             @"ORKSpatialSpanMemoryStepViewController" : @"ORKSpatialSpanMemoryStep",
+                                                                             @"ORKStroopStepViewController" : @"ORKStroopStep",
+                                                                             @"ORKTimedWalkStepViewController" : @"ORKTimedWalkStep",
+                                                                             @"ORKTowerOfHanoiViewController" : @"ORKTowerOfHanoiStep",
+                                                                             @"ORKVideoCaptureStepViewController" : @"ORKVideoCaptureStep",
+                                                                             @"ORKVideoInstructionStepViewController" : @"ORKVideoInstructionStep",
+                                                                             @"ORKVisualConsentStepViewController" : @"ORKVisualConsentStep",
+                                                                             @"ORKWalkingTaskStepViewController" : @"ORKWalkingTaskStep",
+                                                                             };
+    
+    NSDictionary <NSString *, NSDictionary *> *kvMapForStep = @{ // Steps that require modification to validate
+                                                                   @"ORKHolePegTestPlaceStep" : @{@"numberOfPegs" : @2,
+                                                                                                  @"stepDuration" : @2.0f },
+                                                                   @"ORKHolePegTestRemoveStep" : @{@"numberOfPegs" : @2,
+                                                                                                  @"stepDuration" : @2.0f },
+                                                                   @"ORKPSATStep" : @{@"interStimulusInterval" : @1.0,
+                                                                                      @"seriesLength" : @10,
+                                                                                      @"stepDuration" : @11.0f,
+                                                                                      @"presentationMode" : @(ORKPSATPresentationModeAuditory)},
+                                                                   @"ORKSpatialSpanMemoryStep" : @{@"initialSpan" : @2,
+                                                                                                   @"maximumSpan" : @5,
+                                                                                                   @"playSpeed" : @1.0,
+                                                                                                   @"maximumTests" : @3,
+                                                                                                   @"maximumConsecutiveFailures" : @1},
+                                                                   @"ORKStroopStep" : @{@"numberOfAttempts" : @15},
+                                                                   @"ORKTimedWalkStep" : @{@"distanceInMeters" : @30.0,
+                                                                                           @"stepDuration" : @2.0},
+                                                                   @"ORKWalkingTaskStep" : @{@"numberOfStepsPerLeg" : @2},
+    };
+    
+    // Find all classes that subclass from ORKStepViewController
+    NSMutableArray *stepViewControllerClassses = [NSMutableArray new];
+    int numClasses = objc_getClassList(NULL, 0);
+    Class classes[numClasses];
+    numClasses = objc_getClassList(classes, numClasses);
+    for (int index = 0; index < numClasses; index++) {
+        Class aClass = classes[index];
+        if ([excludedClassNames containsObject:NSStringFromClass(aClass)]) {
+            continue;
+        }
+        
+        if ([NSStringFromClass(aClass) hasPrefix:@"ORK"] &&
+            [aClass isSubclassOfClass:[ORKStepViewController class]]) {
+            
+            [stepViewControllerClassses addObject:aClass];
+        }
+    }
+    
+    // Test Each class
+    for (Class aClass in stepViewControllerClassses) {
+        
+        // Instantiate the step view controller
+        NSString *stepClassName = mapStepClassForViewController[NSStringFromClass(aClass)];
+        if (stepClassName == nil) {
+            for (NSString *vcClassName in mapStepClassForViewController.allKeys) {
+                if ([aClass isSubclassOfClass:NSClassFromString(vcClassName)]) {
+                    stepClassName = mapStepClassForViewController[vcClassName];
+                }
+            }
+        }
+        Class stepClass = stepClassName ? NSClassFromString(stepClassName) : [ORKStep class];
+        ORKStep *step = [self instanceForClass:stepClass];
+        NSDictionary *kv = nil;
+        if (stepClassName && (kv = kvMapForStep[stepClassName])) {
+            [step setValuesForKeysWithDictionary:kv];
+        }
+        ORKStepViewController *stepViewController = [[aClass alloc] initWithStep:step];
+        
+        // Create a result
+        ORKBooleanQuestionResult *result = [[ORKBooleanQuestionResult alloc] initWithIdentifier:@"test"];
+        result.booleanAnswer = @YES;
+        
+        // -- Call method under test
+        if ([exceptionClassNames containsObject:NSStringFromClass(aClass)]) {
+            XCTAssertThrows([stepViewController addResult:result]);
+            continue;
+        } else {
+            XCTAssertNoThrow([stepViewController addResult:result]);
+        }
+        
+        ORKStepResult *stepResult = stepViewController.result;
+        XCTAssertNotNil(stepResult, @"Step result is nil for %@", NSStringFromClass([stepViewController class]));
+        XCTAssertTrue([stepResult isKindOfClass:[ORKStepResult class]], @"Step result is not subclass of ORKStepResult for %@", NSStringFromClass([stepViewController class]));
+        if ([stepResult isKindOfClass:[ORKStepResult class]]) {
+            XCTAssertNotNil(stepResult.results, @"Step result.results is nil for %@", NSStringFromClass([stepViewController class]));
+            XCTAssertTrue([stepResult.results containsObject:result], @"Step result does not contain added result for %@", NSStringFromClass([stepViewController class]));
+        }
+    }
 }
 
 @end

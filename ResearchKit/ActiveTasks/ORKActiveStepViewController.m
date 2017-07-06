@@ -97,6 +97,7 @@
 }
 
 - (ORKActiveStep *)activeStep {
+    NSAssert(self.step == nil || [self.step isKindOfClass:[ORKActiveStep class]], @"Step should be a subclass of an ORKActiveStep");
     return (ORKActiveStep *)self.step;
 }
 
@@ -210,7 +211,9 @@
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
-    sResult.results = _recorderResults;
+    if (_recorderResults) {
+        sResult.results = [sResult.results arrayByAddingObjectsFromArray:_recorderResults] ? : _recorderResults;
+    }
     return sResult;
 }
 
@@ -436,7 +439,7 @@
     BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
     if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
         _hasSpokenHalfwayCountdown = YES;
-        NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
+        NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
         [voice speakText:text];
     }
 }

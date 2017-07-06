@@ -214,14 +214,14 @@ This has just one required method, which you must implement in order to handle t
 *Swift*
 
 ```swift
-func taskViewController(taskViewController: ORKTaskViewController,
-                didFinishWithReason reason: ORKTaskViewControllerFinishReason,
-                                     error: NSError?) {
-  let taskResult = taskViewController.result
-  // You could do something with the result here.
+func taskViewController(_ taskViewController: ORKTaskViewController, 
+                didFinishWith reason: ORKTaskViewControllerFinishReason, 
+                                    error: Error?) {
+    let taskResult = taskViewController.result
+    // You could do something with the result here.
 
-  // Then, dismiss the task view controller.
-  dismissViewControllerAnimated(true, completion: nil)
+    // Then, dismiss the task view controller.
+    dismiss(true, completion: nil)
 }
 ```
 
@@ -253,7 +253,7 @@ The source in the *ResearchKit* repository is made available under the following
 another license is explicitly identified:
 
 ```
-Copyright (c) 2015, Apple Inc. All rights reserved.
+Copyright (c) 2015 - 2017, Apple Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:

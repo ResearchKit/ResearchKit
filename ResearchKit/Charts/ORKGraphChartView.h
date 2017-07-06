@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -242,6 +243,33 @@ ORK_AVAILABLE_DECL
  */
 - (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsPointIndicatorsForPlotIndex:(NSInteger)plotIndex;
 
+
+/**
+ Asks the data source for the unit label for the given plot index so VoiceOver's description of the graph can be read with units.
+ 
+ If this method is not implemented, VoiceOver will speak the graph value without units.
+ 
+ @param graphChartView  The graph view asking for its unit label
+ @param plotIndex       An index number identifying the plot in the graph chart view. This index
+ is always 0 in single-plot graph chart views.
+ 
+ @return An appropriate unit label for the given plot.
+ */
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView accessibilityUnitLabelForPlotIndex:(NSInteger)plotIndex;
+
+
+/**
+ Asks the data source for the accessibilityLabel at a given point on the x-axis
+ 
+ This is used in cases where the UI may be displaying a shortened form (e.g. M, T, W, etc. for days of the week), but VoiceOver should be speaking the longer form. If this method isn't implemented, VoiceOver will speak the label displayed in the UI for the given index.
+ 
+ @param graphChartView  The graph view asking for its unit label
+ @param pointIndex      The index corresponding to the number returned by `numberOfDivisionsInXAxisForGraphChartView:`.
+ 
+ @return An appropriate accessibility label for the given index of the graph.
+ */
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView accessibilityLabelForXAxisAtPointIndex:(NSInteger)pointIndex;
+
 @end
 
 
@@ -442,6 +470,13 @@ IB_DESIGNABLE
  This object is instatiated and added to the view when it is created.
  */
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+
+/**
+ The number of decimal places that is used on the y-axis and scrubber value labels.
+ 
+ The default value of this property is 0.
+ */
+@property (nonatomic) NSUInteger decimalPlaces;
 
 /**
  Animates the graph when it first displays on the screen.

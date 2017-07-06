@@ -54,7 +54,7 @@
 }
 
 - (void)setDuration:(NSNumber *)duration {
-    _duration = MIN(MAX(duration, @1), @120);
+    _duration = MIN(MAX(duration, @1), @1200);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -99,6 +99,10 @@
     step.accessibilityHint = self.accessibilityHint;
     step.accessibilityInstructions = self.accessibilityInstructions;
     return step;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.templateImage.hash ^ self.duration.hash ^ self.audioMute ^ self.flashMode ^ self.devicePosition ^ self.accessibilityHint.hash ^ self.accessibilityInstructions.hash;
 }
 
 - (BOOL)isEqual:(id)object {

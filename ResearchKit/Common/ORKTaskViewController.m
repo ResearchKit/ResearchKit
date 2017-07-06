@@ -76,7 +76,6 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     CLLocationManager *_manager;
     _ORKLocationAuthorizationRequestHandler _handler;
     BOOL _started;
-    
 }
 
 - (instancetype)initWithHandler:(_ORKLocationAuthorizationRequestHandler)handler {
@@ -151,7 +150,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
     return [super initWithTarget:target
-                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView"]
+                        keyPaths:@[ @"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView" ]
                         delegate:delegate
                           action:@selector(collectToolbarItemsFromViewController:)
                          context:_ORKViewControllerToolbarObserverContext];
@@ -695,30 +694,49 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 - (NSArray *)managedResults {
     NSMutableArray *results = [NSMutableArray new];
     
-    [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *identifier = obj;
-        ORKResult *result = _managedResults[identifier];
-        NSAssert(result, @"Result should not be nil for identifier %@", identifier);
+    [_managedStepIdentifiers enumerateObjectsUsingBlock:^(NSString *identifier, NSUInteger idx, BOOL *stop) {
+        id <NSCopying> key = [self uniqueManagedKey:identifier index:idx];
+        ORKResult *result = _managedResults[key];
+        NSAssert2(result, @"Result should not be nil for identifier %@ with key %@", identifier, key);
         [results addObject:result];
     }];
     
     return [results copy];
 }
 
-- (void)setManagedResult:(id)result forKey:(id <NSCopying>)aKey {
+- (void)setManagedResult:(ORKStepResult *)result forKey:(NSString *)aKey {
     if (aKey == nil) {
         return;
     }
     
-    if (result == nil || NO == [result isKindOfClass:[ORKResult class]]) {
-        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be ORKResult type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
+    if (result == nil || NO == [result isKindOfClass:[ORKStepResult class]]) {
+        @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat: @"Expect result object to be `ORKStepResult` type and not nil: {%@ : %@}", aKey, result] userInfo:nil];
         return;
     }
+    
+    // Manage last result tracking (used in predicate navigation)
+    // If the previous result and the replacement result are the same result then `isPreviousResult`
+    // will be set to `NO` otherwise it will be marked with `YES`.
+    ORKStepResult *previousResult = _managedResults[aKey];
+    previousResult.isPreviousResult = YES;
+    result.isPreviousResult = NO;
     
     if (_managedResults == nil) {
         _managedResults = [NSMutableDictionary new];
     }
     _managedResults[aKey] = result;
+    
+    // Also point to the object using a unique key
+    NSUInteger idx = _managedStepIdentifiers.count;
+    if ([_managedStepIdentifiers.lastObject isEqualToString:aKey]) {
+        idx--;
+    }
+    id <NSCopying> uniqueKey = [self uniqueManagedKey:aKey index:idx];
+    _managedResults[uniqueKey] = result;
+}
+
+- (id <NSCopying>)uniqueManagedKey:(NSString*)stepIdentifier index:(NSUInteger)index {
+    return [NSString stringWithFormat:@"%@:%@", stepIdentifier, @(index)];
 }
 
 - (NSUUID *)taskRunUUID {
@@ -939,7 +957,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([self shouldDisplayProgressLabel]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
         if (progress.total > 0) {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
+            progressLabel = [NSString localizedStringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
     }
     
@@ -1065,13 +1083,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
             // Get the step result associated with this step
             ORKStepResult *result = nil;
-            result = _managedResults[step.identifier];
-            if (!result ) {
-                result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
+            ORKStepResult *previousResult = _managedResults[step.identifier];
+            
+            // Check the default source first
+            BOOL alwaysCheckForDefaultResult = ([self.defaultResultSource respondsToSelector:@selector(alwaysCheckForDefaultResult)] &&
+                                                [self.defaultResultSource alwaysCheckForDefaultResult]);
+            if ((previousResult == nil) || alwaysCheckForDefaultResult) {
+                result = [self.defaultResultSource stepResultForStepIdentifier:step.identifier];
             }
             
+            // If nil, assign to the previous result (if available) otherwise create new instance
             if (!result) {
-                result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
+                result = previousResult ? : [[ORKStepResult alloc] initWithIdentifier:step.identifier];
             }
             
             // Allow the step to instantiate the view controller. This will allow either the default

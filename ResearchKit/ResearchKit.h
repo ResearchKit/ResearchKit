@@ -29,68 +29,76 @@
  */
 
 
-#import "ORKTypes.h"
+#import <ResearchKit/ORKTypes.h>
 
-#import "ORKStep.h"
-#import "ORKActiveStep.h"
-#import "ORKConsentReviewStep.h"
-#import "ORKConsentSharingStep.h"
-#import "ORKFormStep.h"
-#import "ORKImageCaptureStep.h"
-#import "ORKInstructionStep.h"
-#import "ORKLoginStep.h"
-#import "ORKPasscodeStep.h"
-#import "ORKQuestionStep.h"
-#import "ORKRegistrationStep.h"
-#import "ORKReviewStep.h"
-#import "ORKSignatureStep.h"
-#import "ORKTableStep.h"
-#import "ORKVerificationStep.h"
-#import "ORKVideoCaptureStep.h"
-#import "ORKVisualConsentStep.h"
-#import "ORKWaitStep.h"
+#import <ResearchKit/ORKStep.h>
+#import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKConsentReviewStep.h>
+#import <ResearchKit/ORKConsentSharingStep.h>
+#import <ResearchKit/ORKFormStep.h>
+#import <ResearchKit/ORKImageCaptureStep.h>
+#import <ResearchKit/ORKInstructionStep.h>
+#import <ResearchKit/ORKLoginStep.h>
+#import <ResearchKit/ORKNavigablePageStep.h>
+#import <ResearchKit/ORKPageStep.h>
+#import <ResearchKit/ORKPasscodeStep.h>
+#import <ResearchKit/ORKQuestionStep.h>
+#import <ResearchKit/ORKRegistrationStep.h>
+#import <ResearchKit/ORKReviewStep.h>
+#import <ResearchKit/ORKSignatureStep.h>
+#import <ResearchKit/ORKTableStep.h>
+#import <ResearchKit/ORKTouchAnywhereStep.h>
+#import <ResearchKit/ORKVerificationStep.h>
+#import <ResearchKit/ORKVideoCaptureStep.h>
+#import <ResearchKit/ORKVisualConsentStep.h>
+#import <ResearchKit/ORKWaitStep.h>
+#import <ResearchKit/ORKVideoInstructionStep.h>
 
-#import "ORKTask.h"
-#import "ORKOrderedTask.h"
-#import "ORKNavigableOrderedTask.h"
-#import "ORKStepNavigationRule.h"
+#import <ResearchKit/ORKTask.h>
+#import <ResearchKit/ORKOrderedTask.h>
+#import <ResearchKit/ORKNavigableOrderedTask.h>
+#import <ResearchKit/ORKStepNavigationRule.h>
 
-#import "ORKAnswerFormat.h"
-#import "ORKHealthAnswerFormat.h"
+#import <ResearchKit/ORKAnswerFormat.h>
+#import <ResearchKit/ORKHealthAnswerFormat.h>
 
-#import "ORKResult.h"
-#import "ORKResultPredicate.h"
+#import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKResultPredicate.h>
 
-#import "ORKTextButton.h"
-#import "ORKBorderedButton.h"
-#import "ORKContinueButton.h"
+#import <ResearchKit/ORKTextButton.h>
+#import <ResearchKit/ORKBorderedButton.h>
+#import <ResearchKit/ORKContinueButton.h>
 
-#import "ORKStepViewController.h"
-#import "ORKActiveStepViewController.h"
-#import "ORKCompletionStepViewController.h"
-#import "ORKFormStepViewController.h"
-#import "ORKInstructionStepViewController.h"
-#import "ORKLoginStepViewController.h"
-#import "ORKPasscodeViewController.h"
-#import "ORKTableStepViewController.h"
-#import "ORKTaskViewController.h"
-#import "ORKVerificationStepViewController.h"
-#import "ORKWaitStepViewController.h"
+#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKActiveStepViewController.h>
+#import <ResearchKit/ORKCompletionStepViewController.h>
+#import <ResearchKit/ORKFormStepViewController.h>
+#import <ResearchKit/ORKInstructionStepViewController.h>
+#import <ResearchKit/ORKLoginStepViewController.h>
+#import <ResearchKit/ORKPageStepViewController.h>
+#import <ResearchKit/ORKPasscodeViewController.h>
+#import <ResearchKit/ORKQuestionStepViewController.h>
+#import <ResearchKit/ORKTableStepViewController.h>
+#import <ResearchKit/ORKTaskViewController.h>
+#import <ResearchKit/ORKTouchAnywhereStepViewController.h>
+#import <ResearchKit/ORKVerificationStepViewController.h>
+#import <ResearchKit/ORKWaitStepViewController.h>
 
-#import "ORKRecorder.h"
+#import <ResearchKit/ORKRecorder.h>
 
-#import "ORKConsentDocument.h"
-#import "ORKConsentSection.h"
-#import "ORKConsentSignature.h"
+#import <ResearchKit/ORKConsentDocument.h>
+#import <ResearchKit/ORKConsentSection.h>
+#import <ResearchKit/ORKConsentSignature.h>
 
-#import "ORKKeychainWrapper.h"
+#import <ResearchKit/ORKKeychainWrapper.h>
 
-#import "ORKChartTypes.h"
-#import "ORKBarGraphChartView.h"
-#import "ORKDiscreteGraphChartView.h"
-#import "ORKLineGraphChartView.h"
-#import "ORKPieChartView.h"
+#import <ResearchKit/ORKChartTypes.h>
+#import <ResearchKit/ORKBarGraphChartView.h>
+#import <ResearchKit/ORKDiscreteGraphChartView.h>
+#import <ResearchKit/ORKLineGraphChartView.h>
+#import <ResearchKit/ORKPieChartView.h>
 
-#import "ORKDataCollectionManager.h"
-#import "ORKCollector.h"
+#import <ResearchKit/ORKDataCollectionManager.h>
+#import <ResearchKit/ORKCollector.h>
 
+#import <ResearchKit/ORKDeprecated.h>

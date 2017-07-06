@@ -203,7 +203,7 @@
         
         _capitalizedPluralItemDescription = [ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE", nil) capitalizedStringWithLocale:[NSLocale currentLocale]];
         
-        countView.title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
+        countView.title = [NSString localizedStringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
         scoreView.title = ORKLocalizedString(@"MEMORY_GAME_SCORE_TITLE", nil);
         countView.enabled = YES;
         scoreView.enabled = YES;
@@ -229,18 +229,25 @@
 
 - (void)setCapitalizedPluralItemDescription:(NSString *)capitalizedPluralItemDescription {
     _capitalizedPluralItemDescription = capitalizedPluralItemDescription;
-    [self countView].title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
+    [self countView].title = [NSString localizedStringWithFormat:ORKLocalizedString(@"MEMORY_GAME_ITEM_COUNT_TITLE_%@", nil), _capitalizedPluralItemDescription];
 }
 
 - (void)setNumberOfItems:(NSInteger)numberOfItems {
     ORKActiveStepQuantityView *countView = [self countView];
-    countView.value = [NSString stringWithFormat:@"%ld", (long)numberOfItems];
+    countView.value = [self stringWithNumberFormatter:numberOfItems];
 }
-
 
 - (void)setScore:(NSInteger)score {
     ORKActiveStepQuantityView *scoreView = [self scoreView];
-    scoreView.value = [NSString stringWithFormat:@"%ld", (long)score];
+    scoreView.value = [self stringWithNumberFormatter:score];
+}
+
+- (NSString *)stringWithNumberFormatter: (NSInteger)integer {
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    formatter.numberStyle = NSNumberFormatterNoStyle;
+    formatter.locale = [NSLocale currentLocale];
+    
+    return [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithLong:(long)integer]]];
 }
 
 - (void)updateFooterHidden {

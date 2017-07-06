@@ -36,6 +36,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ An enumeration of values used in `ORKPasscodeStepViewController` to indicate the type of flow used
+ by the view controller.
+ */
+typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
+    ORKPasscodeFlowCreate,
+    ORKPasscodeFlowAuthenticate,
+    ORKPasscodeFlowEdit
+};
+
+/**
  An `ORKPasscodeStep` object provides the participant a passcode creation step.
  
  It is recommended to use a passcode step as part of the consent process to ensure
@@ -44,6 +54,22 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep
+
+/**
+ Returns a new passcode step with the specified identifier and passcode flow.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param passcodeFlow  The passcode flow to be used for the step.
+ */
++ (instancetype)passcodeStepWithIdentifier:(NSString *)identifier
+                              passcodeFlow:(ORKPasscodeFlow)passcodeFlow;
+
+/**
+ The passcode flow to be used for the step.
+ 
+ The default value of this property is `ORKPasscodeFlowCreate`.
+ */
+@property (nonatomic) ORKPasscodeFlow passcodeFlow;
 
 /**
  The passcode type to be used for the step.

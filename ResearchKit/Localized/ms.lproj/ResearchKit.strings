@@ -89,8 +89,8 @@
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
 "LOCATION_ERROR_TITLE" = "Tidak Menemui Alamat yang Ditentukan";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Gagal menyelesaikan lokasi semasa anda. Sila taipkan alamat atau pergi ke lokasi dengan isyarat GPS yang lebih baik jika berkenaan.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Akses kepada perkhidmatan lokasi telah ditolak. Sila berikan aplikasi ini kebenaran untuk menggunakan perkhidmatan lokasi menerusi Seting.";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Gagal menentukan lokasi semasa anda. Sila taipkan alamat atau pergi ke lokasi dengan isyarat GPS yang lebih baik jika berkenaan.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Akses kepada perkhidmatan lokasi telah ditolak. Sila berikan app ini keizinan untuk menggunakan perkhidmatan lokasi menerusi Seting.";
 "LOCATION_ERROR_GEOCODE" = "Gagal mencari hasil untuk alamat yang dimasukkan. Sila pastikan alamat adalah sah.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Sama ada anda tidak disambungkan ke internet atau anda telah melebihi bilangan maksimum permintaan carian alamat. Jika anda tidak disambungkan ke internet, sila aktifkan Wi-Fi anda untuk menjawab soalan ini, langkau soalan ini jika butang langkau tersedia, atau kembali ke tinjauan apabila anda disambungkan ke internet. Sebaliknya, sila cuba lagi dalam masa beberapa minit.";
 
@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Jenis I";
+"FITZPATRICK_SKIN_TYPE_II" = "Jenis II";
+"FITZPATRICK_SKIN_TYPE_III" = "Jenis III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Jenis IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Jenis V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Jenis VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Perempuan";
 "GENDER_MALE" = "Lelaki";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ka";
 "MEASURING_UNIT_IN" = "inci";
+
+/* Limb values. */
+"LIMB_LEFT" = "kiri";
+"LIMB_RIGHT" = "kanan";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Ketik untuk jawab";
@@ -198,18 +210,20 @@
 "BUTTON_SAVE" = "Simpan";
 "BUTTON_CLEAR_ANSWER" = "Kosongkan jawapan";
 "BUTTON_READ_ONLY_MODE" = "Jawapan ini tidak boleh diubah suai.";
+"BUTTON_COPYRIGHT" = "Hak Cipta";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Memulakan aktiviti dalam";
 "TASK_COMPLETE_TITLE" = "Aktiviti Selesai";
 "TASK_COMPLETE_TEXT" = "Data anda akan dianalisis dan anda akan dimaklumkan apabila keputusan anda tersedia.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Tinggal %@ saat.";
+"TOUCH_ANYWHERE_LABEL" = "Sentuh di mana-mana untuk teruskan";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tangkap Imej";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tangkap Semula Imej";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Tiada kamera ditemui.  Langkah ini tidak boleh dilengkapkan.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan aplikasi ini mengakses kamera dalam Seting.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan app ini mengakses kamera dalam Seting.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan untuk imej yang ditangkap.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak dapat disimpan.";
 
@@ -221,10 +235,10 @@
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kecergasan";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Jarak (%@)";
-"FITNESS_HEARTRATE_TITLE" = "Kadar Denyut Jantung (bpm)";
+"FITNESS_HEARTRATE_TITLE" = "Kadar Jantung (bpm)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Duduk dengan selesa selama %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Jalan selaju yang anda boleh selama %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "Aktiviti ini memantau kadar denyut jantung anda dan mengukur jarak anda boleh berjalan dalam %1$@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Aktiviti ini memantau kadar jantung anda dan mengukur jarak anda boleh berjalan dalam masa %1$@.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Jalan di luar bangunan secepat yang anda boleh selama %1$@. Apabila anda selesai, duduk dan berehat dengan selesa selama %2$@. Untuk memulakan, ketik Mulakan.";
 
 /* Short walk active task. */
@@ -238,8 +252,8 @@
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Jalan sehingga %ld langkah dalam garis lurus.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Cari tempat di mana anda boleh berjalan mundar mandir dalam garis lurus. Cuba berjalan berterusan dengan berpusing di kedua penghujung laluan anda, seperti anda berjalan mengelilingi kon.\n\nSeterusnya anda akan diarahkan untuk berpusing dalam bulatan penuh, kemudian berdiri tegak dengan tangan anda di sisi anda dan kaki anda dibuka selebar bahu.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Ketik Mulakan apabila anda bersedia untuk bermula.\nKemudian letakkan telefon anda di dalam saku atau beg dan ikuti arahan audio.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Cari tempat yang anda boleh berjalan mundar mandir dalam garis lurus. Cuba berjalan berterusan dengan berpusing di kedua penghujung laluan anda, seperti anda berjalan mengelilingi kon.\n\nSeterusnya anda akan diarahkan untuk berpusing dalam bulatan penuh, kemudian berdiri tegak dengan tangan anda di sisi anda dan kaki anda dibuka selebar bahu.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Ketik Mulakan apabila anda bersedia untuk bermula.\nKemudian letakkan telefon anda ke dalam saku atau beg dan ikuti arahan audio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Berjalan mundar mandir dalam garis lurus selama %@. Jalan seperti biasa anda lakukan.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Buat pusingan penuh dan kemudian berdiri tegak selama %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Anda telah melengkapkan aktiviti.";
@@ -280,16 +294,18 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviti ini mengukur keupayaan anda untuk mendengar bunyi berlainan.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum anda bermula, pasang dan pakai fon kepala anda.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum anda bermula, pasangkan dan pakai fon kepala anda.\n\nBunyinya sangat tidak ketara dan tidak seperti nada isyarat biasa.  Bunyi akan bermula dengan perlahan kemudian meningkat kelantangannya perlahan-lahan.  Sila beri perhatian dan ketik butang kiri atau kanan untuk menandakan telinga mana anda mendengarnya.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Anda sepatutnya mendengar nada sekarang. Laraskan kelantangan menggunakan kawalan di sisi peranti anda.\n\nKetik butang apabila anda sedia untuk bermula.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Ketik butang setiap kali anda mula mendengar bunyi.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Anda sepatutnya mendengar nada sekarang. Laraskan kelantangan menggunakan kawalan di sisi peranti anda.\n\nKetik sebarang butang apabila anda bersedia untuk bermula.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Setiap kali anda mendengar bunyi, ketik butang kiri atau kanan untuk menandakan telinga yang anda mendengarnya.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Telinga Kiri";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Telinga Kanan";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Ruang";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktiviti ini mengukur memori ruang jangka pendek anda dengan meminta anda mengulangi tertib yang %@ bernyala.";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktiviti ini mengukur memori ruang jangka pendek anda dengan meminta anda mengulangi tertib %@ bernyala.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bunga";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bunga";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Sesetengah %@ akan bernyala satu demi satu. Ketik %@ tersebut dalam urutan yang sama ia menyala.";
@@ -309,28 +325,78 @@
 "MEMORY_GAME_COMPLETE" = "Permainan Selesai";
 "MEMORY_GAME_PAUSED_TITLE" = "Dijedakan";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Untuk meneruskan, ketik Seterusnya";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Aktiviti memori dibangunkan dengan bantuan Katherine Possin, PhD dan Joel Kramer, PhD dari University of California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Masa Reaksi";
 "REACTION_TIME_TASK_INTENDED_USE" = "Aktiviti ini menilai masa yang diambil untuk anda membalas kepada isyarat visual.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goncang peranti dalam sebarang arah sebaik sahaja titik biru muncul pada skrin. Anda akan diminta untuk melakukan ini %D kali.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goncang peranti dalam sebarang arah sebaik sahaja titik biru muncul pada skrin. Anda akan diminta untuk melakukan ini sebanyak %D kali.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percubaan %@ daripada %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goncang peranti dengan cepat apabila bulatan biru muncul";
+
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Setiap kali perkataan muncul, pilih huruf pertama nama WARNA yang ditunjukkan.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Apabila anda bersedia untuk memulakan aktiviti Stroop ketik Mulakan.";
+"STROOP_TASK_STEP_TEXT" = "Pilih huruf pertama nama WARNA yang ditunjukkan.";
+"STROOP_COLOR_RED" = "MERAH";
+"STROOP_COLOR_GREEN" = "HIJAU";
+"STROOP_COLOR_BLUE" = "BIRU";
+"STROOP_COLOR_YELLOW" = "KUNING";
+"STROOP_COLOR_RED_INITIAL" = "M";
+"STROOP_COLOR_GREEN_INITIAL" = "H";
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+"STROOP_COLOR_YELLOW_INITIAL" = "K";
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Menara Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aktiviti ini menilai keupayaan penyelesaian teka-teki anda.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Alihkan keseluruhan tindanan ke platform yang diserlahkan dalam paling kurang pergerakan yang mungkin.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Ketik Mulakan untuk bermula";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Selesaikan Teka-Teki";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Bilangan Pergerakan: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Saya tidak boleh menyelesaikan teka-teki ini";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption mesti kiri atau kanan";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Julat Pergerakan Lutut Kiri";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Julat Pergerakan Lutut Kanan";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aktiviti ini mengukur sejauh mana anda boleh melunjurkan lutut kiri anda.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aktiviti ini mengukur sejauh mana anda boleh melunjurkan lutut kanan anda.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Duduk di pinggir kerusi. Apabila anda bermula anda akan meletakkan peranti anda di atas lutut kiri anda untuk ukuran. Sila aktifkan bunyi pada peranti anda supaya anda boleh mendengar arahan.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Duduk di pinggir kerusi. Apabila anda bermula anda akan meletakkan peranti anda di atas lutut kanan anda untuk ukuran. Sila aktifkan bunyi pada peranti anda supaya anda boleh mendengar arahan.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Letakkan peranti anda di atas lutut kiri anda dengan skrin menghadap ke luar, seperti dalam gambar.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Letakkan peranti anda di atas lutut kanan anda dengan skrin menghadap ke luar, seperti dalam gambar.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Apabila bersedia, ketik skrin untuk bermula dan lunjurkan lutut kiri anda sejauh yang anda boleh. Ketik semula apabila anda selesai.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Apabila bersedia, ketik skrin untuk bermula dan lunjurkan lutut kanan anda sejauh yang anda boleh. Ketik semula apabila anda selesai.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan peranti anda di atas lutut kiri anda";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan peranti anda di atas lutut kanan anda";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lunjurkan lutut kiri anda. Kemudian ketik di mana-mana.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lunjurkan lutut kanan anda. Kemudian ketik di mana-mana.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Julat Pergerakan Bahu Kiri";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Julat Pergerakan Bahu Kanan";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aktiviti ini mengukur sejauh mana anda boleh meregangkan bahu kiri anda.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aktiviti ini mengukur sejauh mana anda boleh meregangkan bahu kanan anda.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Apabila anda bermula anda akan meletakkan peranti anda di atas bahu kiri anda untuk ukuran. Sila aktifkan bunyi pada peranti anda supaya anda boleh dengar arahan.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Apabila anda bermula anda akan meletakkan peranti anda di atas bahu kanan anda untuk ukuran. Sila aktifkan bunyi pada peranti anda supaya anda boleh dengar arahan.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Letakkan peranti anda di atas bahu kiri anda dengan skrin menghadap ke luar, seperti dalam gambar.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Letakkan peranti anda di atas bahu kanan anda dengan skrin menghadap ke luar, seperti dalam gambar.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Apabila bersedia, ketik skrin untuk bermula dan angkat tangan kiri anda setinggi yang anda boleh. Ketik semula apabila anda selesai.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Apabila bersedia, ketik skrin untuk bermula dan angkat tangan kanan anda setinggi yang anda boleh. Ketik semula apabila anda selesai.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan peranti anda di atas bahu kiri anda";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan peranti anda di atas bahu kanan anda";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Angkat tangan kiri anda. Kemudian ketik di mana-mana.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Angkat tangan kanan anda. Kemudian ketik di mana-mana.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Jalan Bermasa";
 "TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi anggota badan bawah anda.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan sejauh lebih kurang %@ dalam garis lurus secepat mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Ketik Seterusnya untuk bermula.";
 "TIMED_WALK_FORM_TITLE" = "Peranti bantuan";
 "TIMED_WALK_FORM_TEXT" = "Gunakan peranti bantuan yang sama untuk setiap ujian.";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Topang Dua Tangan";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Pejalan/Rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Jalan sehingga %@ dalam garis lurus.";
-"TIMED_WALK_INSTRUCTION_2" = "Pusing dan berjalan balik ke tempat anda bermula.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Ketik Selesai apabila selesai.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Pusing.";
+"TIMED_WALK_INSTRUCTION_2" = "Berjalan balik ke tempat anda bermula.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Ketik Seterusnya apabila selesai.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -362,9 +429,9 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Ujian Pancang %@ Lubang";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktiviti ini mengukur fungsi anggota badan atas anda dengan meminta anda meletakkan pancang ke dalam lubang. Anda akan diminta melakukan ini %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan %@ kali, keluarkannya sekali lagi %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan %@ kali, keluarkannya sekali lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktiviti ini mengukur fungsi anggota badan atas anda dengan meminta anda meletakkan pancang ke dalam lubang. Anda akan diminta melakukan ini sebanyak %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan sebanyak %@ kali, keluarkannya lagi sebanyak %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan sebanyak %@ kali, keluarkannya lagi sebanyak %@ kali.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan pancang ke dalam lubang menggunakan tangan kiri anda.";
@@ -376,11 +443,11 @@
 
 /* Tremor test active task. */
 "TREMOR_TEST_TITLE" = "Aktiviti Getaran";
-"TREMOR_TEST_INTRO_1_DETAIL" = "Aktiviti ini mengukur getaran tangan anda dalam pelbagai posisi. Cari tempat di mana anda boleh duduk dengan selesa sepanjang tempoh aktiviti ini.";
+"TREMOR_TEST_INTRO_1_DETAIL" = "Aktiviti ini mengukur getaran tangan anda dalam pelbagai posisi. Cari tempat yang anda boleh duduk dengan selesa sepanjang tempoh aktiviti ini.";
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Pegang telefon di tangan anda yang lebih terjejas seperti yang ditunjukkan dalam imej di bawah.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Pegang telefon di tangan KANAN anda seperti yang ditunjukkan dalam imej di bawah.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Pegang telefon di tangan KIRI anda seperti yang ditunjukkan dalam imej di bawah.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Anda akan diminta untuk melakukan %@ sementara duduk dengan telefon di tangan anda.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "Anda akan diminta untuk melakukan %@ sambil duduk dengan telefon di tangan anda.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "satu tugas";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "dua tugas";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "tiga tugas";
@@ -406,19 +473,36 @@
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Bersedia untuk melakukan lambaian ratu (lambai dengan memusingkan pergelangan tangan anda).";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Bersedia untuk melakukan lambaian ratu dengan telefon anda di tangan KIRI anda (lambai dengan memusingkan pergelangan tangan anda).";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Bersedia untuk melakukan lambaian ratu dengan telefon anda di tangan KANAN anda (lambai dengan memusingkan pergelangan tangan anda).";
-"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Terus melakukan lambaian ratu untuk %ld saat.";
+"TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INSTRUCTION_%ld" = "Terus melakukan lambaian ratu selama %ld saat.";
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_LEFT_INSTRUCTION" = "Sekarang tukar telefon ke tangan KIRI anda dan teruskan ke tugas seterusnya.";
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Sekarang tukar telefon ke tangan KANAN anda dan teruskan ke tugas seterusnya.";
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Teruskan ke tugas seterusnya.";
 "TREMOR_TEST_COMPLETED_INSTRUCTION" = "Aktiviti selesai.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Anda akan diminta untuk melakukan %@ sementara duduk dengan telefon di sebelah tangan dahulu, kemudian sekali lagi dengan tangan yang lain.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "Anda akan diminta untuk melakukan %@ sambil duduk dengan telefon di sebelah tangan dahulu, kemudian sekali lagi dengan tangan yang lain.";
 "TREMOR_SKIP_LEFT_HAND" = "Saya tidak boleh laksanakan aktiviti ini menggunakan tangan KIRI saya.";
 "TREMOR_SKIP_RIGHT_HAND" = "Saya tidak boleh laksanakan aktiviti ini menggunakan tangan KANAN saya.";
 "TREMOR_SKIP_NEITHER" = "Saya boleh laksanakan aktiviti ini menggunakan kedua belah tangan.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Ujian Pembuatan Jejak";
+"TRAILMAKING_INTENDED_USE" = "Aktiviti ini menilai perhatian visual dan penukaran tugas anda dengan merekod masa yang diperlukan untuk mengetik siri bulatan dalam tertib.";
+"TRAILMAKING_INTENDED_USE2_A" = "Selepas kira detik, ketik bulatan dalam tertib berselang-seli antara nombor dan huruf. Mulakan dengan mengetik nombor pertama '1' diikuti dengan nombor '2' – '3' – '4'… sehingga anda mencapai nombor '7'.";
+"TRAILMAKING_INTENDED_USE2_B" = "Selepas kira detik, ketik bulatan dalam tertib berselang-seli antara nombor dan huruf. Mulakan dengan mengetik nombor pertama '1' diikuti dengan mengetik huruf pertama 'A' dan kemudian '2' – 'B' – '3' – 'C'… sehingga anda mencapai nombor '7'.";
+"TRAILMAKING_INTRO_TEXT" = "Lakukan ini secepat mungkin tanpa melakukan kesilapan. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d kesalahan)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d kesalahan)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat mencipta fail";
-"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat mengeluarkan fail log yang mencukupi untuk mencapai nilai ambang";
+"ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat mengeluarkan fail log yang mencukupi untuk mencapai ambang";
 "ERROR_DATALOGGER_SET_ATTRIBUTE" = "Ralat mengeset atribut";
 "ERROR_DATALOGGER_COULD_NOT_MAORK" = "Fail tidak ditandakan sebagai dipadamkan (tidak ditandakan sebagai dimuat naik)";
 "ERROR_DATALOGGER_MULTIPLE" = "Berbilang ralat semasa mengeluarkan log";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Imej ditangkap";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Pratonton rakaman video";
-"AX_VIDEO_CAPTURED_LABEL" = "Video dirakam";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Rakaman video selesai";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Gagal menempatkan cakera bersaiz %@ pada cakera bersaiz %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Sasaran";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Tindanan terdiri daripada";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Titik: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Graf Bar Audio";

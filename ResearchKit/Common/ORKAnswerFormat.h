@@ -2,6 +2,8 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
+ Copyright (c) 2017, Sage Bionetworks.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKContinuousScaleAnswerFormat;
 @class ORKTextScaleAnswerFormat;
 @class ORKValuePickerAnswerFormat;
+@class ORKMultipleValuePickerAnswerFormat;
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
@@ -69,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  An answer format is validated when its owning step is validated.
  
  Some answer formats are constructed of other answer formats. When this is the
- case, the answer format can implement the internal method `_impliedAnswerFormat` to return
+ case, the answer format can override the method `impliedAnswerFormat` to return
  the answer format that is implied. For example, a Boolean answer format
  is presented in the same way as a single-choice answer format with the
  choices Yes and No mapping to `@(YES)` and `@(NO)`, respectively.
@@ -114,7 +117,12 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
++ (ORKBooleanAnswerFormat *)booleanAnswerFormatWithYesString:(NSString *)yes
+                                                    noString:(NSString *)no;
+
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
+
++ (ORKMultipleValuePickerAnswerFormat *)multipleValuePickerAnswerFormatWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
 
@@ -143,8 +151,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
-                                              invalidMessage:(NSString *)invalidMessage;
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                                          invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -167,6 +175,16 @@ ORK_CLASS_AVAILABLE
  about to be displayed.
  */
 - (void)validateParameters;
+
+/**
+ Some answer formats are constructed of other answer formats. This method allows
+ a subclass to return a different answer format for use in defining the UI/UX for
+ the answer format type. For example, a Boolean answer format is presented in the 
+ same way as a single-choice answer format with the choices Yes and No mapping to 
+ `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
+ `ORKTextChoiceAnswerFormat` with those options.
+ */
+- (ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
 
@@ -637,6 +655,55 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKMultipleValuePickerAnswerFormat` class represents an answer format that lets participants use a
+ multiple-component value picker to choose from a fixed set of text choices.
+ 
+ Note that the multiple value picker answer format reports itself as being of the multiple picker question
+ type. The multiple-component value picker answer format produces an `ORKMultipleComponentQuestionResult` 
+ object where the index into the array matches the array of `ORKValuePickerAnswerFormat` objects.
+ 
+ For example, if the picker shows two columns with choices of `[[A, B, C], [1, 2, 3, 4]]` and the user picked
+ `B` and `3` then this would result in `componentsAnswer = [B, 3]`.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKMultipleValuePickerAnswerFormat : ORKAnswerFormat
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a multiple value picker answer format using the specified array of value pickers.
+ 
+ @param valuePickers     Array of `ORKValuePickerAnswerFormat` objects.
+ 
+ @return An initialized multiple value picker answer format.
+ */
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
+
+/**
+ Returns a multiple value picker answer format using the specified array of value pickers.
+ 
+ @param valuePickers     Array of `ORKValuePickerAnswerFormat` objects.
+ @param separator        String used to separate the components
+ 
+ @return An initialized multiple value picker answer format.
+ */
+- (instancetype)initWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers separator:(NSString *)separator NS_DESIGNATED_INITIALIZER;
+
+/**
+ An array of value pickers that represent the options to display in the picker. (read-only)
+ */
+@property (copy, readonly) NSArray<ORKValuePickerAnswerFormat *> *valuePickers;
+
+/**
+ A string used to define the separator for the format of the string. Default = " ".
+ */
+@property (copy, readonly) NSString *separator;
+
+@end
+
+
+/**
  The `ORKImageChoiceAnswerFormat` class represents an answer format that lets participants choose
  one image from a fixed set of images in a single choice question.
  
@@ -725,6 +792,26 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized Boolean answer format using the specified strings for Yes and No answers.
+ 
+ @param yes         A string that describes the Yes answer.
+ @param no          A string that describes the No answer.
+ 
+ @return An initialized Boolean answer format.
+ */
+- (instancetype)initWithYesString:(NSString *)yes noString:(NSString *)no;
+
+/**
+ The string to describe the Yes answer. (read-only)
+ */
+@property (copy, readonly) NSString *yes;
+
+/**
+ The string to describe the No answer. (read-only)
+ */
+@property (copy, readonly) NSString *no;
 
 @end
 
@@ -1154,13 +1241,13 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param validationRegex           The regular expression used to validate the text.
- @param invalidMessage            The text presented to the user when invalid input is received.
+ @param validationRegularExpression     The regular expression used to validate the text.
+ @param invalidMessage                  The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
@@ -1175,11 +1262,11 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
 /**
- The regex used to validate user's input.
+ The regular expression used to validate user's input.
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (nonatomic, copy, nullable) NSString *validationRegex;
+@property (nonatomic, copy, nullable) NSRegularExpression *validationRegularExpression;
 
 /**
  The text presented to the user when invalid input is received.
@@ -1235,7 +1322,7 @@ ORK_CLASS_AVAILABLE
  
  By default, the value of this property is NO.
  */
-@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+@property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end
 

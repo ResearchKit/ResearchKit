@@ -41,7 +41,7 @@
 @implementation ORKDataCollectionTests {
     XCTestExpectation *_completionExpectation;
     XCTestExpectation *_healthCollectionExpectation;
-    XCTestExpectation *_corrolationCollectionExpectation;
+    XCTestExpectation *_correlationCollectionExpectation;
     HKHealthStore *_healthStore;
     BOOL _acceptDelivery;
     NSInteger _errorCount;
@@ -86,15 +86,14 @@
     return storePath;
 }
 
-static ORKDataCollectionManager *createManagerWithCollecters (NSURL *url,
-                                                              ORKMotionActivityCollector **motionCollector,
-                                                              ORKHealthCollector **healthCollector,
-                                                              ORKHealthCorrelationCollector **healthCorrelationCollector,
-                                                              NSError **error) {
+static ORKDataCollectionManager *createManagerWithCollectors(NSURL *url,
+                                                             NSDate *startDate,
+                                                             ORKMotionActivityCollector **motionCollector,
+                                                             ORKHealthCollector **healthCollector,
+                                                             ORKHealthCorrelationCollector **healthCorrelationCollector,
+                                                             NSError **error) {
     
     ORKDataCollectionManager *manager = [[ORKDataCollectionManager alloc] initWithPersistenceDirectoryURL:url];
-    
-    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-5];
     
     ORKMotionActivityCollector *mac = [manager addMotionActivityCollectorWithStartDate:startDate error:error];
     if (motionCollector) {
@@ -168,7 +167,8 @@ static ORKDataCollectionManager *createManagerWithCollecters (NSURL *url,
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     NSError *error;
     // Create
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
+                                                                    [NSDate date],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -204,7 +204,9 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 };
 
 
-- (BOOL)insertSampleDataWithType:(SampleDataType)sampleDataType {
+- (BOOL)insertSampleDataWithType:(SampleDataType)sampleDataType
+                       startDate:(NSDate *)startDate
+                         endDate:(NSDate *)endDate {
     _healthStore = [[HKHealthStore alloc] init];
     
     HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
@@ -223,23 +225,19 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
         
 #if TARGET_OS_SIMULATOR
         
-        // Each time add new data samples to simulator
-        NSDate *d1 = [NSDate dateWithTimeIntervalSinceNow:-2];
-        NSDate *d2 = [NSDate dateWithTimeIntervalSinceNow:-1];
-        
         // Heart Rate
         HKUnit *hrUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
         HKQuantity* quantity = [HKQuantity quantityWithUnit:hrUnit doubleValue:(NSInteger)([NSDate date].timeIntervalSinceReferenceDate)%100];
-        HKQuantitySample *heartRateSample = [HKQuantitySample quantitySampleWithType:heartRateType quantity:quantity startDate:d1 endDate:d2];
+        HKQuantitySample *heartRateSample = [HKQuantitySample quantitySampleWithType:heartRateType quantity:quantity startDate:startDate endDate:endDate];
         
         NSString *identifier = HKCorrelationTypeIdentifierBloodPressure;
         HKUnit *bpUnit = [HKUnit unitFromString:@"mmHg"];
         
         // Blood Presure
-        HKQuantitySample *diastolicPressure = [HKQuantitySample quantitySampleWithType:diastolicType quantity:[HKQuantity quantityWithUnit:bpUnit doubleValue:70] startDate:d1 endDate:d2];
-        HKQuantitySample *systolicPressure = [HKQuantitySample quantitySampleWithType:systolicType quantity:[HKQuantity quantityWithUnit:bpUnit doubleValue:110] startDate:d1 endDate:d2];
+        HKQuantitySample *diastolicPressure = [HKQuantitySample quantitySampleWithType:diastolicType quantity:[HKQuantity quantityWithUnit:bpUnit doubleValue:70] startDate:startDate endDate:endDate];
+        HKQuantitySample *systolicPressure = [HKQuantitySample quantitySampleWithType:systolicType quantity:[HKQuantity quantityWithUnit:bpUnit doubleValue:110] startDate:startDate endDate:endDate];
         
-        HKCorrelation *bloodPressureCorrelation = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:identifier] startDate:d1 endDate:d2 objects:[NSSet setWithObjects:diastolicPressure, systolicPressure, nil]];
+        HKCorrelation *bloodPressureCorrelation = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:identifier] startDate:startDate endDate:endDate objects:[NSSet setWithObjects:diastolicPressure, systolicPressure, nil]];
         
         NSMutableArray *objects = [NSMutableArray new];
         if (sampleDataType & SampleDataTypeHR) {
@@ -255,7 +253,7 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 
 #endif
     } else {
-        NSLog(@"Not authorized!!!! ");
+        NSLog(@"HKHealthStore access has not been authorized.");
     }
 
     return authorized;
@@ -267,7 +265,8 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
+                                                                    [NSDate dateWithTimeIntervalSinceNow:-10],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
@@ -275,14 +274,15 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     
     manager.delegate = self;
     
-    
     // First round collection
     _completionExpectation = [self expectationWithDescription:@"Expectation for collection completion"];
     
 #if TARGET_OS_SIMULATOR
-    if ([self insertSampleDataWithType:SampleDataTypeALL]) {
+    if ([self insertSampleDataWithType:SampleDataTypeALL
+                             startDate:[NSDate dateWithTimeIntervalSinceNow:-9]
+                               endDate:[NSDate dateWithTimeIntervalSinceNow:-8]]) {
         _healthCollectionExpectation = [self expectationWithDescription:@"Expectation for health sample collection completion"];
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
     }
 #endif
     
@@ -294,7 +294,6 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     XCTAssertNotNil(error);
     XCTAssertEqual(manager.collectors.count, 3);
 
-    
     [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
         XCTAssertNil(error);
     }];
@@ -305,15 +304,16 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     XCTAssertNil(error);
     XCTAssertEqual(manager.collectors.count, 2);
     
-    
     // Second round collection
     _completionExpectation = [self expectationWithDescription:@"Expectation for collection completion"];
     
 #if TARGET_OS_SIMULATOR
-    if ([self insertSampleDataWithType:SampleDataTypeBP]) {
+    if ([self insertSampleDataWithType:SampleDataTypeBP
+                             startDate:[NSDate dateWithTimeIntervalSinceNow:-9]
+                               endDate:[NSDate dateWithTimeIntervalSinceNow:-8]]) {
         // Health Collector was removed
         _healthCollectionExpectation = nil;
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
     }
 #endif
     
@@ -325,20 +325,20 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 
 }
 
-- (void)testDataCollectionWithoutCollector {
+- (void)testDataCollectionWithoutCollectors {
     
     ORKMotionActivityCollector *motionCollector;
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
+                                                                    [NSDate date],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
                                                                     &error);
     
     manager.delegate = self;
-    
     
     [manager removeCollector:motionCollector error:&error];
     [manager removeCollector:healthCollector error:&error];
@@ -353,29 +353,38 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
     }];
 }
 
-- (void)testDelegateRejectDelivery {
+- (void)testDataCollectionDelegateDeliveryRejection {
     _acceptDelivery = NO;
     _errorCount = 0;
-#if TARGET_OS_SIMULATOR
-    if ([self insertSampleDataWithType:SampleDataTypeALL]) {
-        _healthCollectionExpectation = [self expectationWithDescription:@"Expectation for health sample collection completion"];
-        _corrolationCollectionExpectation = [self expectationWithDescription:@"Expectation for corrolation collection completion"];
-    }
-#endif
     
     ORKMotionActivityCollector *motionCollector;
     ORKHealthCollector *healthCollector;
     ORKHealthCorrelationCollector *healthCorrelationCollector;
     __block NSError *error;
-    ORKDataCollectionManager *manager = createManagerWithCollecters([NSURL fileURLWithPath:[self cleanStorePath]],
+    
+    // Make sure the startDate isn't earlier that the dates
+    // of the samples added on '-testDataCollection'.
+    // Othersie, you'll get the samples from that test too.
+    ORKDataCollectionManager *manager = createManagerWithCollectors([NSURL fileURLWithPath:[self cleanStorePath]],
+                                                                    [NSDate dateWithTimeIntervalSinceNow:-5],
                                                                     &motionCollector,
                                                                     &healthCollector,
                                                                     &healthCorrelationCollector,
                                                                     &error);
     
     manager.delegate = self;
+    
     _completionExpectation = [self expectationWithDescription:@"Expectation for collection completion"];
     
+#if TARGET_OS_SIMULATOR
+    if ([self insertSampleDataWithType:SampleDataTypeALL
+                             startDate:[NSDate dateWithTimeIntervalSinceNow:-4]
+                               endDate:[NSDate dateWithTimeIntervalSinceNow:-3]]) {
+        _healthCollectionExpectation = [self expectationWithDescription:@"Expectation for health sample collection completion"];
+        _correlationCollectionExpectation = [self expectationWithDescription:@"Expectation for correlation collection completion"];
+    }
+#endif
+
     [manager startCollection];
     [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
         XCTAssertNil(error);
@@ -387,7 +396,6 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 
 - (BOOL)healthCollector:(ORKHealthCollector *)collector
       didCollectSamples:(NSArray<HKSample *> *)samples {
-    
     XCTAssertEqual(samples.count, 1);
     [_healthCollectionExpectation fulfill];
     NSLog(@"Did collect health samples");
@@ -396,28 +404,26 @@ typedef NS_OPTIONS (NSInteger, SampleDataType) {
 
 - (BOOL)healthCorrelationCollector:(ORKHealthCorrelationCollector *)collector
             didCollectCorrelations:(NSArray<HKCorrelation *> *)correlations {
-    
     XCTAssertEqual(correlations.count, 1);
-    [_corrolationCollectionExpectation fulfill];
+    [_correlationCollectionExpectation fulfill];
     NSLog(@"Did collect correlation samples");
     return _acceptDelivery;
 }
 
 - (BOOL)motionActivityCollector:(ORKMotionActivityCollector *)collector
      didCollectMotionActivities:(NSArray<CMMotionActivity *> *)motionActivities {
-    
     XCTAssertGreaterThan(motionActivities.count, 0);
     NSLog(@"Did collect CMMotionActivity samples");
     return _acceptDelivery;
 }
 
 - (void)dataCollectionManagerDidCompleteCollection:(ORKDataCollectionManager *)manager {
-     NSLog(@"dataCollectionManagerDidCompleteCollection %@", @(_acceptDelivery));
+    NSLog(@"dataCollectionManagerDidCompleteCollection %@", @(_acceptDelivery));
     [_completionExpectation fulfill];
 }
 
 - (void)collector:(ORKCollector *)collector didDetectError:(NSError *)error {
-     NSLog(@"didDetectError %@", error);
+    NSLog(@"didDetectError %@", error);
     if (_acceptDelivery) {
         XCTAssertNil(error);
     }

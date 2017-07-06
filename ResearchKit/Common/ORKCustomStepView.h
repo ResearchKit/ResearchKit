@@ -78,6 +78,7 @@ ORK_CLASS_AVAILABLE
 
 @class ORKSurveyAnswerCell;
 
+ORK_CLASS_AVAILABLE
 @interface ORKQuestionStepCellHolderView : ORKQuestionStepCustomView
 
 @property (nonatomic, strong, nullable) ORKSurveyAnswerCell *cell;

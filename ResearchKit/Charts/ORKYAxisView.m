@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -45,6 +46,8 @@ static const CGFloat ImageVerticalPadding = 3.0;
     
     NSMutableDictionary *_tickLayersByFactor;
     NSMutableDictionary *_tickLabelsByFactor;
+    
+    NSString *_decimalFormat;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -64,6 +67,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
         _parentGraphChartView = parentGraphChartView;
         _axisColor = _parentGraphChartView.axisColor;
         _titleColor = _parentGraphChartView.verticalAxisTitleColor;
+        [self setDecimalPlaces:0];
     }
     return self;
 }
@@ -114,9 +118,9 @@ static const CGFloat ImageVerticalPadding = 3.0;
         CGFloat minimumValue = _parentGraphChartView.minimumValue;
         CGFloat maximumValue = _parentGraphChartView.maximumValue;
         if (minimumValue == maximumValue) {
-            yAxisLabelFactors = @[@0.5f];
+            yAxisLabelFactors = @[ @0.5f ];
         } else {
-            yAxisLabelFactors = @[@0.2f, @1.0f];
+            yAxisLabelFactors = @[ @0.2f, @1.0f ];
         }
         
         for (NSNumber *factorNumber in yAxisLabelFactors) {
@@ -144,7 +148,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
             
             CGFloat yValue = minimumValue + (maximumValue - minimumValue) * factor;
             if (yValue != 0) {
-                tickLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
+                tickLabel.text = [NSString stringWithFormat:_decimalFormat, yValue];
             }
             tickLabel.backgroundColor = [UIColor clearColor];
             tickLabel.textColor = _titleColor;
@@ -206,6 +210,11 @@ static const CGFloat ImageVerticalPadding = 3.0;
     for (CALayer *tickLayer in _tickLayersByFactor.allValues) {
         tickLayer.backgroundColor = _axisColor.CGColor;
     }
+}
+
+- (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
+    _decimalPlaces = decimalPlaces;
+    _decimalFormat = [NSString stringWithFormat:@"%%.%luf", (unsigned long)_decimalPlaces];
 }
 
 @end

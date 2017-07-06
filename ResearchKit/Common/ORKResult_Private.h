@@ -32,6 +32,7 @@
 #import <ResearchKit/ORKResult.h>
 @import MapKit;
 
+@class ORKPageStep;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -97,7 +98,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
                             region:(nullable CLCircularRegion *)region
                          userInput:(nullable NSString *)userInput
-                 addressDictionary:(NSDictionary *)addressDictionary;
+                 addressDictionary:(nullable NSDictionary *)addressDictionary;
 
 - (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
 
@@ -107,6 +108,36 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithSignatureImage:(UIImage *)signatureImage
                          signaturePath:(NSArray <UIBezierPath *> *)signaturePath;
+
+@end
+
+
+/**
+ The `ORKPageResult` is an `ORKTaskResult` subclass of a collection of `ORKStepResult`
+ objects. This is considered private, and it is used internally by `ORKPageStepViewController`
+ to track the result set.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKPageResult : ORKTaskResult
+
+- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result;
+
+- (void)addStepResult:(nullable ORKStepResult *)stepResult;
+
+- (void)removeStepResultWithIdentifier:(NSString *)identifier;
+
+- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier;
+
+- (NSArray <ORKResult *> *)flattenResults;
+
+- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory;
+
+@end
+
+
+@interface ORKStepResult ()
+
+@property (nonatomic) BOOL isPreviousResult;
 
 @end
 

@@ -37,6 +37,59 @@
 #import "ORKHelpers_Internal.h"
 
 
+#if TARGET_INTERFACE_BUILDER
+
+@interface ORKIBBarGraphChartViewDataSource : ORKIBGraphChartViewDataSource <ORKValueStackGraphChartViewDataSource>
+
++ (instancetype)sharedInstance;
+
+@end
+
+
+@implementation ORKIBBarGraphChartViewDataSource
+
++ (instancetype)sharedInstance {
+    static id sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self class] new];
+    });
+    return sharedInstance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.plotPoints = @[
+                            @[
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @4, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @2, @4, @4 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @2, @6, @3, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @3, @8, @10, @12 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @5, @10, @12, @8 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @8, @13, @18 ]],
+                                ],
+                            @[
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @14 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @6, @6 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @3, @10, @12 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @5, @11, @14 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @7, @13, @20 ]],
+                                [[ORKValueStack alloc] initWithStackedValues:@[ @10, @13, @25 ]],
+                                ]
+                            ];
+    }
+    return self;
+}
+
+- (ORKValueStack *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    return self.plotPoints[plotIndex][pointIndex];
+}
+
+@end
+
+#endif
+
 static const CGFloat BarWidth = 10.0;
 
 
@@ -223,5 +276,15 @@ static const CGFloat BarWidth = 10.0;
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     return [super isXPositionSnapped:xPosition - [self xOffsetForPlotIndex:plotIndex] plotIndex:plotIndex];
 }
+
+#pragma mark - Interface Builder designable
+
+- (void)prepareForInterfaceBuilder {
+    [super prepareForInterfaceBuilder];
+#if TARGET_INTERFACE_BUILDER
+    self.dataSource = [ORKIBBarGraphChartViewDataSource sharedInstance];
+#endif
+}
+
 
 @end
