@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "प्रकार I";
+"FITZPATRICK_SKIN_TYPE_II" = "प्रकार II";
+"FITZPATRICK_SKIN_TYPE_III" = "प्रकार III";
+"FITZPATRICK_SKIN_TYPE_IV" = "प्रकार IV";
+"FITZPATRICK_SKIN_TYPE_V" = "प्रकार V";
+"FITZPATRICK_SKIN_TYPE_VI" = "प्रकार VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "महिला";
 "GENDER_MALE" = "पुरूष";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "सें॰मी॰";
 "MEASURING_UNIT_FT" = "फ़ीट";
 "MEASURING_UNIT_IN" = "इंच";
+
+/* Limb values. */
+"LIMB_LEFT" = "बायाँ";
+"LIMB_RIGHT" = "दायाँ";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "उत्तर देने के लिए टैप करें";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "सहेजें";
 "BUTTON_CLEAR_ANSWER" = "उत्तर साफ़ करें";
 "BUTTON_READ_ONLY_MODE" = "इस उत्तर को संशोधित नहीं किया जा सकता है।";
+"BUTTON_COPYRIGHT" = "कॉपीराइट";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "गतिविधि शुरू होने में शेष समय";
 "TASK_COMPLETE_TITLE" = "गतिविधि पूर्ण";
 "TASK_COMPLETE_TEXT" = "आपके डेटा का विश्लेषण किया जाएगा और परिणाम के तैयार होते ही आपको सूचित किया जाएगा।";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ सेकंड शेष।";
+"TOUCH_ANYWHERE_LABEL" = "जारी रखने के लिए कहीं भी स्पर्श करें";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "छवि कैप्चर करें";
@@ -230,17 +244,17 @@
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "चाल और संतुलन";
 "WALK_INTRO_TEXT" = "इस गतिविधि द्वारा आपके पैदल चलने या खड़े रहने पर आपकी चाल और संतुलन का मापन किया जाता है। यदि आप बिना किसी सहायता के सुरक्षित पैदल नहीं चल सकते हैं, तो इसे जारी न रखें।";
-"WALK_INTRO_2_TEXT_%ld" = "ऐसी जगह ढूँढें जहाँ आप बिना किसी सहायता के लगभग %ld क़दम सीधे चल सकें।";
+"WALK_INTRO_2_TEXT_%ld" = "ऐसी जगह ढूँढें जहाँ आप बिना किसी सहायता के लगभग %ld क़दम सीधी रेखा में चल सकें।";
 "WALK_INTRO_2_DETAIL" = "अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का अनुसरण करें।";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "अब %@ तक स्थिर खड़े रहें।";
 "WALK_STAND_INSTRUCTION_FORMAT" = "%@ तक स्थिर खड़े रहें।";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "लगभग %ld कदम सीधे चलें।";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "लगभग %ld क़दम सीधी रेखा में चलें।";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ऐसी जगह ढूँढें, जहाँ आप एक ओर व दूसरी ओर सुरक्षित रूप से सीधे चल सकें। मार्ग की समाप्ति पर मुड़ें और लगातार चलते रहने का प्रयास करें, जैसे कि आप किसी शंकु के इर्द-गिर्द चल रहे हों।\n\nइसके बाद आपको पूर्ण वृत्त में मुड़ने के लिए, फिर अपनी भुजाओं को फैलाकर और अपने पैरों को लगभग कंधे की चौड़ाई तक फैलाकर स्थिर खड़े रहने के लिए कहा जाएगा।";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ऐसी जगह ढूँढें, जहाँ आप एक ओर व दूसरी ओर सुरक्षित रूप से सीधी रेखा में चल सकें। मार्ग की समाप्ति पर मुड़ें और लगातार चलते रहने का प्रयास करें, जैसे कि आप किसी शंकु के इर्द-गिर्द चल रहे हों।\n\nइसके बाद आपको पूर्ण वृत्त में मुड़ने के लिए, फिर अपनी भुजाओं को फैलाकर और अपने पैरों को लगभग कंधे की चौड़ाई तक फैलाकर स्थिर खड़े रहने के लिए कहा जाएगा।";
 "WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "जब आप शुरू करने के लिए तैयार हों, “आरंभ करें” पर टैप करें।\nफिर अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का पालन करें।";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ तक पीछे और आगे सीधे चलें। अपनी सामान्य चाल से चलें।";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ तक पीछे और आगे सीधी रेखा में चलें। अपनी सामान्य चाल से चलें।";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "पूर्ण वृत्त में मुड़ें फिर %@ तक स्थिर खड़े रहें।";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "आपने गतिविधि को पूर्ण कर लिया है।";
 
@@ -279,11 +293,13 @@
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "टोन ऑडियोमेट्री";
-"TONE_AUDIOMETRY_INTENDED_USE" = "यह गतिविधि अलग-अलग प्रकार की ध्वनियाँ सुनने की आपकी क्षमता का आकलन करती है।";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "आरंभ करने से पहले अपने हेडफ़ोन को प्लग इन करें और कानों पर लगाएं।";
+"TONE_AUDIOMETRY_INTENDED_USE" = "इस गतिविधि द्वारा अलग-अलग प्रकार की ध्वनियाँ सुनने की आपकी क्षमता का आकलन किया जाता है।";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "आरंभ करने से पहले अपने हेडफ़ोन को प्लग इन करें और कानों पर लगाएँ।\n\nध्वनि बहुत हल्की होगी और वह नियमित अलर्ट टोन से अलग होती है। ध्वनि मंद होना शुरू होगी और धीरे-धीरे वॉल्यूम बढ़ेगा।  कृपया ध्यान दें कि आपको किस कान में ध्वनि सुनाई देती है और उसे दाएँ या बाएँ बटन पर टैप करके बताएँ।";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
-"TONE_AUDIOMETRY_PREP_TEXT" = "अब आपको एक टोन सुनाई देनी चाहिए। अपने उपकरण के किनारे दिए गए नियंत्रणों का उपयोग करके वॉल्यूम समायोजित करें।\n\nजब आप आरंभ करने के लिए तैयार हो जाएँ, तो बटन को टैप करें।";
-"TONE_AUDIOMETRY_INSTRUCTION" = "आपको जितनी बार भी आवाज़ सुनाई दे, उतनी बार बटन को टैप करें।";
+"TONE_AUDIOMETRY_PREP_TEXT" = "अब आपको एक टोन सुनाई देनी चाहिए। अपने उपकरण के किनारे दिए गए नियंत्रणों का उपयोग करके वॉल्यूम समायोजित करें।\n\nजब आप आरंभ करने के लिए तैयार हो जाएँ, तो किसी भी बटन पर टैप करें।";
+"TONE_AUDIOMETRY_INSTRUCTION" = "हर बार ध्वनि सुनाई देना शुरू होने पर बाएँ या दाएँ बटन पर टैप करके यह बताएँ कि आपको किस कान में ध्वनि सुनाई देती है।";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "बायाँ कान";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "दायाँ कान";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, बाएँ";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, दाएँ";
 
@@ -309,28 +325,78 @@
 "MEMORY_GAME_COMPLETE" = "गेम पूर्ण हुआ";
 "MEMORY_GAME_PAUSED_TITLE" = "ठहरा हुआ";
 "MEMORY_GAME_PAUSED_MESSAGE" = "जारी रखने के लिए “अगला” पर टैप करें";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "मेमोरी गतिविधि को कैलिफ़ोर्निया विश्वविद्यालय, सैन फ़्रैंसिस्को से पीएचडी केथरीन पॉसिन और जोल क्रामेर के सहयोग से विकसित किया गया है।";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "प्रतिक्रिया समय";
-"REACTION_TIME_TASK_INTENDED_USE" = "यह गतिविधि किसी दृश्यात्मक संकेत की प्रतिक्रिया देने में आपके द्वारा लिए जाने वाले समय का आकलन करती है।";
+"REACTION_TIME_TASK_INTENDED_USE" = "इस गतिविधि द्वारा किसी दृश्यात्मक संकेत की प्रतिक्रिया देने में आपके द्वारा लिए जाने वाले समय का मूल्यांकन किया जाता है।";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "स्क्रीन पर नीले रंग का बिंदु दिखाई देते ही उपकरण को किसी भी दिशा में हिलाएँ। आपसे %D बार ऐसा करने का अनुरोध किया जाएगा।";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %1$@/%2$@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "नीले रंग का वृत्त दिखाई देने पर शीघ्रता से उपकरण को हिलाएँ";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "स्ट्रूप";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "हर बार जब शब्द दिखाया जाता है, दिखाए गए रंग के नाम के पहले अक्षर का चयन करें।";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "स्ट्रूप गतिविधि आरंभ करने के लिए तैयार होने पर “आरंभ करें” पर टैप करें।";
+"STROOP_TASK_STEP_TEXT" = "दिखाए गए रंग के नाम के पहले अक्षर का चयन करें।";
+"STROOP_COLOR_RED" = "लाल";
+"STROOP_COLOR_GREEN" = "हरा";
+"STROOP_COLOR_BLUE" = "नीला";
+"STROOP_COLOR_YELLOW" = "पीला";
+"STROOP_COLOR_RED_INITIAL" = "ला॰";
+"STROOP_COLOR_GREEN_INITIAL" = "ह॰";
+"STROOP_COLOR_BLUE_INITIAL" = "नी॰";
+"STROOP_COLOR_YELLOW_INITIAL" = "पी॰";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "हनोई का टॉवर";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "इस गतिविधि के द्वारा पहेली को हल करने की आपकी क्षमता का मूल्यांकन किया जाएगा।";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "पूरे स्टैक को चिह्नांकित प्लेटफ़ॉर्म पर कम से कम प्रयासों में स्थानांतरित करें।";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "पहेली हल करें";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %1$@ \n %2$@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "यह पहेली मेरे द्वारा हल नहीं की जा सकती है";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption बाएँ या दाएँ होना चाहिए";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "बाएँ घुटने की गति सीमा";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "दाएँ घुटने की गति सीमा";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "इस गतिविधि द्वारा मापा जाता है कि आप अपना बायाँ घुटना कितना आगे ले जा सकते हैं।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "इस गतिविधि द्वारा मापा जाता है कि आप अपना दायाँ घुटना कितना आगे ले जा सकते हैं।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "कुर्सी के किनारे पर बैठ जाएँ। आरंभ करने पर आपको माप के लिए अपने बाएँ घुटने पर अपना उपकरण रखना होगा। कृपया अपने उपकरण पर ध्वनि चालू करें जिससे आप निर्देश सुन सकें।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "कुर्सी के किनारे पर बैठ जाएँ। आरंभ करने पर आपको माप के लिए अपने दाएँ घुटने पर अपना उपकरण रखना होगा। कृपया अपने उपकरण पर ध्वनि चालू करें जिससे आप निर्देश सुन सकें।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "स्क्रीन को बाहर की ओर करके अपना उपकरण अपने बाएँ घुटने पर रखें, जैसा तस्वीर में दिखाया गया है।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "स्क्रीन को बाहर की ओर करके अपना उपकरण अपने दाएँ घुटने पर रखें, जैसा तस्वीर में दिखाया गया है।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "तैयार होने पर आरंभ करने के लिए स्क्रीन पर टैप करें और जितना संभव हो अपना बायाँ घुटना आगे बढ़ाएँ। पूर्ण करने पर पुनः टैप करें।";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "तैयार होने पर आरंभ करने के लिए स्क्रीन पर टैप करें और जितना संभव हो अपना दायाँ घुटना आगे बढ़ाएँ। पूर्ण करने पर पुनः टैप करें।";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "अपना उपकरण अपने बाएँ घुटने पर रखें";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "अपना उपकरण अपने दाएँ घुटने पर रखें";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "अपना बायाँ घुटना आगे बढ़ाएँ। फिर कहीं भी टैप करें।";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "अपना दायाँ घुटना आगे बढ़ाएँ। फिर कहीं भी टैप करें।";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "बाएँ कंधे की गति सीमा";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "दाएँ कंधे की गति सीमा";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "इस गतिविधि द्वारा मापा जाता है कि आप अपना बायाँ कंधा कितना आगे ले जा सकते हैं।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "इस गतिविधि द्वारा मापा जाता है कि आप अपना दायाँ कंधा कितना आगे ले जा सकते हैं।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "आरंभ करने पर आपको माप के लिए अपने बाएँ कंधे पर अपना उपकरण रखना होगा। कृपया अपने उपकरण पर ध्वनि चालू करें जिससे आप निर्देश सुन सकें।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "आरंभ करने पर आपको माप के लिए अपने दाएँ कंधे पर अपना उपकरण रखना होगा। कृपया अपने उपकरण पर ध्वनि चालू करें जिससे आप निर्देश सुन सकें।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "स्क्रीन को बाहर की ओर करके अपना उपकरण अपने बाएँ कंधे पर रखें, जैसा तस्वीर में दिखाया गया है।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "स्क्रीन को बाहर की ओर करके अपना उपकरण अपने दाएँ कंधे पर रखें, जैसा तस्वीर में दिखाया गया है।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "तैयार होने पर आरंभ करने के लिए स्क्रीन पर टैप करें और जितना संभव हो अपना बायाँ हाथ उठाएँ। पूर्ण करने पर पुनः टैप करें।";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "तैयार होने पर आरंभ करने के लिए स्क्रीन पर टैप करें और जितना संभव हो अपना दायाँ हाथ उठाएँ। पूर्ण करने पर पुनः टैप करें।";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "अपना उपकरण अपने बाएँ कंधे पर रखें";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "अपना उपकरण अपने दाएँ कंधे पर रखें";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "अपना बायाँ हाथ ऊपर उठाएँ। फिर कहीं भी टैप करें।";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "अपना दायाँ हाथ ऊपर उठाएँ। फिर कहीं भी टैप करें।";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "समयबद्ध चाल";
 "TIMED_WALK_INTRO_DETAIL" = "इस गतिविधि के द्वारा शरीर के निचले हिस्से के कार्य करने की क्षमता को मापा जाता है।";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "ऐसी जगह ढूँढें, यदि संभव हो तो घर के बाहर, जहाँ पर आप लगभग %@ तक जितना संभव हो, उतनी तेज़ी से लेकिन सुरक्षित रूप से सीधे चल सकें। समाप्ति रेखा तक पहुँचने तक गति कम न करें।";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "ऐसी जगह ढूँढें, यदि संभव हो तो घर के बाहर, जहाँ पर आप लगभग %@ तक जितना संभव हो, उतनी तेज़ी से लेकिन सुरक्षित रूप से सीधी रेखा में चल सकें। समाप्ति रेखा तक पहुँचने तक गति कम न करें।";
 "TIMED_WALK_INTRO_2_DETAIL" = "आरंभ करने के लिए “अगला” पर टैप करें।";
 "TIMED_WALK_FORM_TITLE" = "सहायक उपकरण";
 "TIMED_WALK_FORM_TEXT" = "प्रत्येक परीक्षण हेतु समान सहायक उपकरण का उपयोग करें।";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "दोनों हाथों के लिए बैसाखी";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "वॉकर/रोलेटर";
 "TIMED_WALK_INSTRUCTION_%@" = "सीधी रेखा में लगभग %@ चलें।";
-"TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
-"TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “पूर्ण” पर टैप करें।";
+"TIMED_WALK_INSTRUCTION_TURN" = "पीछे मुड़ें।";
+"TIMED_WALK_INSTRUCTION_2" = "जहाँ से आपने शुरुआत की थी, वहाँ वापस चलकर जाएँ।";
+"TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “अगला” पर टैप करें।";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "इस गतिविधि को मेरे दाएँ हाथ से नहीं किया जा सकता है।";
 "TREMOR_SKIP_NEITHER" = "इस गतिविधि को मेरे दोनों हाथों से किया जा सकता है।";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "ट्रेल निर्माण परीक्षण";
+"TRAILMAKING_INTENDED_USE" = "इस गतिविधि द्वारा क्रमानुसार बिंदुओं की शृंखला को टैप करने में लगने वाले आवश्यक समय को रिकॉर्ड करके आपकी विज़ुअल एकाग्रता का और कार्य स्विचिंग का मूल्यांकन किया जाता है।";
+"TRAILMAKING_INTENDED_USE2_A" = "उल्टी गिनती के बाद संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद संख्या ‘२’ – ‘३’ – ‘४’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
+"TRAILMAKING_INTENDED_USE2_B" = "उल्टी गिनती के बाद, संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद पहले अक्षर ‘A’ पर टैप करके आरंभ करें फिर ‘२’ – ‘B’ – ‘३’ – ‘C’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
+"TRAILMAKING_INTRO_TEXT" = "जितना जल्दी संभव हो बिना ग़लती किए यह करें। \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"TRAILMAKING_TIMER" = "%.1f से॰";
+"TRAILMAKING_ERROR" = "%@ (%d त्रुटि)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d त्रुटियाँ)";
+"TRAILMAKING_LETTER_A" = "क";
+"TRAILMAKING_LETTER_B" = "ख";
+"TRAILMAKING_LETTER_C" = "ग";
+"TRAILMAKING_LETTER_D" = "घ";
+"TRAILMAKING_LETTER_E" = "ड़";
+"TRAILMAKING_LETTER_F" = "च";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "अधिकतम संग्रहण सीमा तक पहुँचने के लिए आवश्यक लॉग फ़ाइलें नहीं हटाई जा सकीं";
@@ -456,17 +540,19 @@
 "AX_IMAGE_CAPTURED_LABEL" = "कैप्चर की हुई छवि";
 
 "AX_VIDEO_CAPTURE_LABEL" = "वीडियो कैप्चर पूर्वावलोकन";
-"AX_VIDEO_CAPTURED_LABEL" = "कैप्चर किया गया वीडियो";
+"AX_VIDEO_CAPTURE_COMPLETE" = "वीडियो कैप्चर पूर्ण";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%2$@ आकार के डिस्क पर %1$@ आकार के डिस्क को रखने में असमर्थ";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "लक्ष्य";
 "AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "डिस्क रखने के लिए डबल टैप करें";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "सबसे ऊपर के डिस्क का चयन करने के लिए डबल टैप करें";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं  ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "%1$@ से %2$@ तक श्रेणी";
 "AX_GRAPH_STACK_PREFIX" = "निम्नलिखित का संग्रह";
 "AX_GRAPH_AND_SEPARATOR" = " और ";
 "AX_GRAPH_POINT_%@" = "पॉइंट : %@";
+
+"AX_AUDIO_BAR_GRAPH" = "ऑडियो बार ग्राफ़";

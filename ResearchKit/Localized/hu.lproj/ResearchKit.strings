@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "0+";
 "BLOOD_TYPE_O-" = "0-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "I. típus";
+"FITZPATRICK_SKIN_TYPE_II" = "II. típus";
+"FITZPATRICK_SKIN_TYPE_III" = "III. típus";
+"FITZPATRICK_SKIN_TYPE_IV" = "IV. típus";
+"FITZPATRICK_SKIN_TYPE_V" = "V. típus";
+"FITZPATRICK_SKIN_TYPE_VI" = "VI. típus";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Nő";
 "GENDER_MALE" = "Férfi";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "bal";
+"LIMB_RIGHT" = "jobb";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Koppintson a válaszhoz";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Mentés";
 "BUTTON_CLEAR_ANSWER" = "Válasz törlése";
 "BUTTON_READ_ONLY_MODE" = "Ez a válasz nem módosítható.";
+"BUTTON_COPYRIGHT" = "Szerzői jog";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Tevékenység indítása:";
 "TASK_COMPLETE_TITLE" = "Tevékenység befejezve";
 "TASK_COMPLETE_TEXT" = "Az adatok ki lesznek elemezve, és értesítést fog kapni, ha az eredmény elkészült.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ másodperc van hátra.";
+"TOUCH_ANYWHERE_LABEL" = "A folytatáshoz érintse meg a képernyőt";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kép készítése";
@@ -223,7 +237,7 @@
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Távolság (%@)";
 "FITNESS_HEARTRATE_TITLE" = "Pulzusszám (bpm)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Üljön kényelmesen %@ időtartamig.";
-"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gyalogoljon olayn gyorsan, amilyen gyorsan tud %@ időtartam alatt.";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "Gyalogoljon olyan gyorsan, amilyen gyorsan tud %@ időtartam alatt.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Ez a tevékenység a pulzusát figyeli, és megméri, milyen messzire tud gyalogolni %1$@ időtartam alatt.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Kültéren gyalogoljon olyan gyorsan, ahogy csak tud %1$@ időtartamig. Amikor befejezte, üljön le, és pihenjen kényelmesen %2$@ időtartamig. A kezdéshez koppintson a Kezdés elemre.";
 
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység azt méri fel, hogyan hallja Ön a különböző hangokat.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Először is csatlakoztassa és tegye fel a fejhallgatót.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Első lépésként csatlakoztasson egy fejhallgatót, és tegye a fejére.\n\nEgy visszafogott hangot fog hallani, ami egyáltalán nem hasonlít az értesítések megszokott hangjára. Először a hang lágyan hallható, majd fokozatosan egyre hangosabb lesz. Kérjük, figyeljen, és koppintson a bal vagy a jobb gombra attól függően, hogy melyik fülében hallja a hangot.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt a készülék oldalán található vezérlőkkel.\n\nKoppintson a gombra, amikor készen áll a kezdésre.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Koppintson a gombra mindig, amikor egy hangot hall.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt a készülék oldalán található vezérlőkkel.\n\nKoppintson egy tetszőleges gombra, amikor készen áll a kezdésre.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Amikor hangot hall, koppintson a bal vagy a jobb gombra attól függően, hogy melyik fülében hallja a hangot.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Bal fül";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Jobb fül";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, bal";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, jobb";
 
@@ -298,8 +314,8 @@
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Eredmény";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Figyelje, ahogy a(z) %@ felvillannak";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Koppintson a(z) %@ képekre olyan sorrendben, ahogy felvillantak";
-"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Koppintson a(z) %@ képekre fordított sorrendben";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Koppintson a(z) %@ képeire olyan sorrendben, ahogy felvillantak";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Koppintson a(z) %@ képeire fordított sorrendben";
 "MEMORY_GAME_COMPLETE_TITLE" = "A sorozat befejeződött";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "A folytatáshoz koppintson a Következő gombra";
 "MEMORY_GAME_FAILED_TITLE" = "Újrapróbálkozás";
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Játék befejezve";
 "MEMORY_GAME_PAUSED_TITLE" = "Szüneteltetve";
 "MEMORY_GAME_PAUSED_MESSAGE" = "A folytatáshoz koppintson a Következő gombra";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "A memóriát vizsgáló feladat elkészítéséhez Katherine Possin PhD és Joel Kramer PhD, a San Franciscó-i Kaliforniai Egyetem munkatársai nyújtottak segítséget.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reakcióidő";
@@ -318,19 +335,68 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@. kísérlet";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gyorsan rázza meg a készüléket, amikor megjelenik a kék kör";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop-hatás";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Amikor megjelenik egy szó, válassza ki a látott SZÍN nevének első betűjét.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Ha készen áll a Stroop-feladat elkezdésére, koppintson a Kezdés gombra.";
+"STROOP_TASK_STEP_TEXT" = "Válassza ki a látott SZÍN nevének első betűjét.";
+"STROOP_COLOR_RED" = "PIROS";
+"STROOP_COLOR_GREEN" = "ZÖLD";
+"STROOP_COLOR_BLUE" = "KÉK";
+"STROOP_COLOR_YELLOW" = "SÁRGA";
+"STROOP_COLOR_RED_INITIAL" = "P";
+"STROOP_COLOR_GREEN_INITIAL" = "Z";
+"STROOP_COLOR_BLUE_INITIAL" = "K";
+"STROOP_COLOR_YELLOW_INITIAL" = "S";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanoi tornyai";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ez a tevékenység kiértékeli az Ön kirakómegoldási képességeit.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Helyezze át a teljes köteget a kijelölt oszlopra a lehető legkevesebb lépésben.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "A kirakós megoldása";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Lépések száma: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nem tudom megoldani ezt a kirakót";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "A limbOption beállításaként a bal vagy a jobb értéket kell megadni";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Bal térd mozgástartománya";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Jobb térd mozgástartománya";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ez a feladat azt méri, hogy mennyire tudja kinyújtani a bal térdét.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ez a feladat azt méri, hogy mennyire tudja kinyújtani a jobb térdét.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Üljön le egy szék szélére. Első lépésként tegye az eszközét a bal térdére egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Üljön le egy szék szélére. Első lépésként tegye az eszközét a jobb térdére egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Tegye az eszközét a bal térdére úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Tegye az eszközét a jobb térdére úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, először koppintson a képernyőre, majd nyújtsa ki a bal térdét, amennyire csak tudja. Koppintson ismét, ha elkészült.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, először koppintson a képernyőre, majd nyújtsa ki a jobb térdét, amennyire csak tudja. Koppintson ismét, ha elkészült.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye az eszközét a bal térdére";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye az eszközét a jobb térdére";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nyújtsa ki a bal térdét, majd koppintson valahová.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nyújtsa ki a jobb térdét, majd koppintson valahová.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bal váll mozgástartománya";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Jobb váll mozgástartománya";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Ez a feladat azt méri, hogy mennyire tudja kinyújtani a bal vállát.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Ez a feladat azt méri, hogy mennyire tudja kinyújtani a jobb vállát.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Első lépésként tegye az eszközét a bal vállára egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Első lépésként tegye az eszközét a jobb vállára egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Tegye az eszközét a bal vállára úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Tegye az eszközét a jobb vállára úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, először koppintson a képernyőre, majd emelje fel a bal karját, amennyire csak tudja. Koppintson ismét, ha elkészült.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, először koppintson a képernyőre, majd emelje fel a jobb karját, amennyire csak tudja. Koppintson ismét, ha elkészült.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye az eszközét a bal vállára";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye az eszközét a jobb vállára";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Emelje fel a bal karját, majd koppintson valahová.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Emelje fel a jobb karját, majd koppintson valahová.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Időre mért gyaloglás";
 "TIMED_WALK_INTRO_DETAIL" = "Ez a tevékenység az alsó végtagok működését méri.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Keressen olyan helyet, lehetőleg kültéren, ahol %@ ideig egyenesen tud gyalogolni olyan gyorsan, ahogy csak tud, de biztonságosan. Ne lassítson le, amíg el nem hagyta a célvonalat.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Keressen olyan helyet, lehetőleg kültéren, ahol %@ távolságot egyenesen tud gyalogolni olyan gyorsan, ahogy csak tud, de biztonságosan. Ne lassítson le, amíg el nem hagyta a célvonalat.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Koppintson\na Következő elemre\na kezdéshez.";
 "TIMED_WALK_FORM_TITLE" = "Segítőeszköz";
 "TIMED_WALK_FORM_TEXT" = "Ugyanazt a segítőeszközt használja minden teszthez.";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Kétoldali mankó";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Járókeret/rollátor";
 "TIMED_WALK_INSTRUCTION_%@" = "Gyalogoljon legalább %@ távolságra egyenesen.";
-"TIMED_WALK_INSTRUCTION_2" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Koppintson a Kész lehetőségre, ha elkészült.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Forduljon meg.";
+"TIMED_WALK_INSTRUCTION_2" = "Gyalogoljon vissza oda, ahonnan elindult.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Koppintson a Következő lehetőségre, ha elkészült.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -380,7 +447,7 @@
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Tartsa a telefont a gyakrabban használt kezében, a képen látható módon.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Tartsa a telefont a JOBB kezében, a képen látható módon.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Tartsa a telefont a BAL kezében, a képen látható módon.";
-"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "A rendszer fel fogja kérni a(z) %@ végrehajtására, miközben ül a telefonnal a kezében.";
+"TREMOR_TEST_INTRO_2_DETAIL_DEFAULT_%@" = "A rendszer fel fogja kérni %@ végrehajtására, miközben ül a telefonnal a kezében.";
 "TREMOR_TEST_INTRO_2_DETAIL_1_TASK" = "egy feladat";
 "TREMOR_TEST_INTRO_2_DETAIL_2_TASK" = "két feladat";
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "három feladat";
@@ -402,7 +469,7 @@
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Most a könyökét behajlítva érintse többször az orrához a telefont.";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Most tartsa a telefont BAL kézzel, a könyökét behajlítva, és érintse többször az orrához a telefont.";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Most tartsa a telefont JOBB kézzel, a könyökét behajlítva, és érintse többször az orrához a telefont.";
-"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Érintse a telefont az orrához %ld másodpercig.";
+"TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INSTRUCTION_%ld" = "Érintse többször az orrához a telefont %ld másodpercen keresztül";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO" = "Forgassa a felemelt csuklóját (mintha integetne).";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_LEFT" = "Forgassa a felemelt BAL csuklóját a telefonnal a kezében (mintha integetne).";
 "TREMOR_TEST_ACTIVE_STEP_TURN_WRIST_INTRO_RIGHT" = "Forgassa a felemelt JOBB csuklóját a telefonnal a kezében (mintha integetne).";
@@ -411,10 +478,27 @@
 "TREMOR_TEST_ACTIVE_STEP_SWITCH_HANDS_RIGHT_INSTRUCTION" = "Most tegye át a telefont a JOBB kezébe, és folytassa a következő feladattal.";
 "TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION" = "Folytatás a következő feladattal.";
 "TREMOR_TEST_COMPLETED_INSTRUCTION" = "Tevékenység befejezve.";
-"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "A rendszer fel fogja kérni a(z) %@ végrehajtására, miközben ül a telefonnal az egyik kezében, majd a másik kezében.";
+"TREMOR_TEST_SKIP_QUESTION_BOTH_HANDS_%@" = "A rendszer fel fogja kérni %@ végrehajtására, miközben ül a telefonnal az egyik kezében, majd a másik kezében.";
 "TREMOR_SKIP_LEFT_HAND" = "A BAL kezemmel nem tudom elvégezni ezt a feladatot.";
 "TREMOR_SKIP_RIGHT_HAND" = "A JOBB kezemmel nem tudom elvégezni ezt a feladatot.";
 "TREMOR_SKIP_NEITHER" = "Mindkét kézzel el tudom végezni ezt a feladatot.";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Számösszekötési teszt";
+"TRAILMAKING_INTENDED_USE" = "Ez a feladat a vizuális figyelmét és feladatváltási képességét értékeli ki, amelynek során leméri, mennyi időre van szüksége ahhoz, hogy egy pontokból álló sorozatra koppintson a megfelelő sorrendben.";
+"TRAILMAKING_INTENDED_USE2_A" = "A visszaszámlálás után koppintson felváltva a számokat és betűket jelölő pontokra a megfelelő sorrendben. Először koppintson az 1-re, majd a 2-re, a 3-ra, a 4-re stb., amíg eléri a 7-es számot.";
+"TRAILMAKING_INTENDED_USE2_B" = "A visszaszámlálás után koppintson felváltva a számokat és betűket jelölő pontokra a megfelelő sorrendben. Először koppintson az 1-re, majd az A-ra, a 2-re, a B-re, a 3-ra, a C-re és így tovább, amíg eléri a 7-es számot.";
+"TRAILMAKING_INTRO_TEXT" = "Végezze el ezt a feladatot minél gyorsabban, lehetőleg hiba nélkül. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"TRAILMAKING_TIMER" = "%.1f mp";
+"TRAILMAKING_ERROR" = "%@ (%d hiba)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d hiba)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Készített kép";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Videorögzítés előnézete";
-"AX_VIDEO_CAPTURED_LABEL" = "Rögzített videó";
+"AX_VIDEO_CAPTURE_COMPLETE" = "A videó rögzítése befejeződött";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nem helyezhető %@ méretű korong %@ méretű korongra";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Cél";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Halom a következőkből:";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
 "AX_GRAPH_POINT_%@" = "Pont: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Hangsávdiagram";

@@ -45,11 +45,12 @@
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         _colorLabel = [UILabel new];
-        _colorLabel.numberOfLines = 0;
+        _colorLabel.numberOfLines = 1;
         _colorLabel.textAlignment = NSTextAlignmentCenter;
         _colorLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _colorLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [_colorLabel setFont:[UIFont systemFontOfSize:60]];
+        [_colorLabel setAdjustsFontSizeToFitWidth:YES];
+        
         
         self.RButton = [[ORKBorderedButton alloc] init];
         self.RButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -168,6 +169,11 @@
                                        ]];
 
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_colorLabel]-(==300)-|"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=10)-[_colorLabel]-(>=10)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];

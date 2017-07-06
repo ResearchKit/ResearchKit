@@ -171,7 +171,9 @@
 
 - (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
-    stepResult.results = [_results copy];
+    if (_results) {
+         stepResult.results = [_results copy];
+    }
     return stepResult;
 }
 

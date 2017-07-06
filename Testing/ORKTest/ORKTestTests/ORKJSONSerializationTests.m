@@ -954,7 +954,6 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     // Classes for which tests are not currently implemented
     NSArray <NSString *> *excludedClassNames = @[
                                                  @"ORKVisualConsentStepViewController",     // Requires step with scenes
-                                                 @"ORKStroopStepViewController",
                                                  ];
     
     // Classes that do not allow adding a result should throw an exception
@@ -972,6 +971,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKPSATStepViewController" : @"ORKPSATStep",
                                                                              @"ORKQuestionStepViewController" : @"ORKQuestionStep",
                                                                              @"ORKSpatialSpanMemoryStepViewController" : @"ORKSpatialSpanMemoryStep",
+                                                                             @"ORKStroopStepViewController" : @"ORKStroopStep",
                                                                              @"ORKTimedWalkStepViewController" : @"ORKTimedWalkStep",
                                                                              @"ORKTowerOfHanoiViewController" : @"ORKTowerOfHanoiStep",
                                                                              @"ORKVideoCaptureStepViewController" : @"ORKVideoCaptureStep",
@@ -994,6 +994,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                                                    @"playSpeed" : @1.0,
                                                                                                    @"maximumTests" : @3,
                                                                                                    @"maximumConsecutiveFailures" : @1},
+                                                                   @"ORKStroopStep" : @{@"numberOfAttempts" : @15},
                                                                    @"ORKTimedWalkStep" : @{@"distanceInMeters" : @30.0,
                                                                                            @"stepDuration" : @2.0},
                                                                    @"ORKWalkingTaskStep" : @{@"numberOfStepsPerLeg" : @2},
@@ -1020,7 +1021,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     // Test Each class
     for (Class aClass in stepViewControllerClassses) {
         
-        // Instatiate the step view controller
+        // Instantiate the step view controller
         NSString *stepClassName = mapStepClassForViewController[NSStringFromClass(aClass)];
         if (stepClassName == nil) {
             for (NSString *vcClassName in mapStepClassForViewController.allKeys) {

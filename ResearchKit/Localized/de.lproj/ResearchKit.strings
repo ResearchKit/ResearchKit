@@ -64,13 +64,13 @@
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Freigabe-Optionen";
-"CONSENT_SHARE_WIDELY_%@" = "Meine Daten für %@ und qualifizierte Forscher auf der ganzen Welt freigeben";
-"CONSENT_SHARE_ONLY_%@" = "Meine Daten nur freigeben für „%@“";
+"CONSENT_SHARE_WIDELY_%@" = "Meine Daten mit %@ und qualifizierten Forschern auf der ganzen Welt teilen";
+"CONSENT_SHARE_ONLY_%@" = "Meine Daten nur mit „%@“ teilen";
 "CONSENT_SHARING_DESCRIPTION_%@" = "Die Studiendaten von deiner Teilnahme an dieser Studie werden an %@ weitergegeben.\n\nDie Freigabe deiner verschlüsselten Studiendaten (ohne Infos wie z. B. dein Name) können für diese und künftige Studienzwecke von Nutzen sein.";
 "LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Name von%@ (Druckbuchstaben)";
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Name von %@ (Druckbuchstaben)";
 "CONSENT_DOC_LINE_SIGNATURE" = "Unterschrift von %@";
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "0+";
 "BLOOD_TYPE_O-" = "0-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Typ I";
+"FITZPATRICK_SKIN_TYPE_II" = "Typ II";
+"FITZPATRICK_SKIN_TYPE_III" = "Typ III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Typ IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Typ V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Typ VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Weiblich";
 "GENDER_MALE" = "Männlich";
@@ -173,6 +181,10 @@
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
 
+/* Limb values. */
+"LIMB_LEFT" = "links";
+"LIMB_RIGHT" = "rechts";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Zum Antworten tippen";
 "NULL_ANSWER" = "Antwort wählen";
@@ -182,7 +194,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Akzeptieren";
 "BUTTON_CANCEL" = "Abbrechen";
-"BUTTON_OK" = "Ok";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Löschen";
 "BUTTON_DISAGREE" = "Ablehnen";
 "BUTTON_DONE" = "Fertig";
@@ -198,19 +210,21 @@
 "BUTTON_SAVE" = "Sichern";
 "BUTTON_CLEAR_ANSWER" = "Antwort löschen";
 "BUTTON_READ_ONLY_MODE" = "Diese Antwort kann nicht geändert werden.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivität beginnt in";
 "TASK_COMPLETE_TITLE" = "Aktivität abgeschlossen";
 "TASK_COMPLETE_TEXT" = "Deine Daten werden analysiert und du wirst benachrichtigt, wenn deine Ergebnisse bereitstehen.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Noch %@ Sekunden.";
+"TOUCH_ANYWHERE_LABEL" = "Tippe irgendwo auf den Bildschirm, um fortzufahren";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Bild aufnehmen";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Bild erneut aufnehmen";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Keine Kamera gefunden. Dieser Schritt kann nicht abgeschlossen werden.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Erlaube der App in den Einstellungen Zugriff auf die Kamera, um diesen Schritt abzuschließen.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Es wurde keine Ausgabeverzeichnis für aufgenommene Bilder festgelegt.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Es wurde kein Ausgabeverzeichnis für aufgenommene Bilder festgelegt.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Das aufgenommene Bild konnte nicht gesichert werden.";
 
 /* Video capture step. */
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometrie";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Diese Aktivität misst deine Fähigkeit, unterschiedliche Töne zu hören.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Bevor du beginnst, solltest du deine Kopfhörer anschließen und aufsetzen.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Bevor du beginnst, solltest du deine Kopfhörer anschließen und aufsetzen.\n\nDie Töne sind sehr subtil und anders als ein normaler Warnton.  Der Ton beginnt sehr leise und wird dann langsam lauter.  Bitte achte darauf, auf welchem Ohr du den Ton hörst und tippe dementsprechend auf die linke oder rechte Taste.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Du solltest jetzt einen Ton hören. Passe die Lautstärke mithilfe der Steuerungen an der Seite des Geräts an.\n\nTippe auf die Taste, wenn du bereit bist.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Tippe jedes Mal, wenn du einen Ton hörst, auf die Taste.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du solltest jetzt einen Ton hören. Passe die Lautstärke mithilfe der Steuerungen an der Seite des Geräts an.\n\nTippe auf eine Taste, wenn du bereit bist.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tippe jedes Mal, wenn du einen Ton hörst, auf die linke oder rechte Taste, um anzuzeigen, auf welchem Ohr du den Ton hörst.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Linkes Ohr";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Rechtes Ohr";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Links";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Rechts";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Spiel abgeschlossen";
 "MEMORY_GAME_PAUSED_TITLE" = "Angehalten";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Zum Fortfahren tippst du auf „Weiter“";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Die Gedächtnisaktivität wurde in Zusammenarbeit mit Katherine Possin, PhD, und Joel Kramer, PhD, der University of California, San Francisco entwickelt.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaktionszeit";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %@ von %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Wenn der blaue Kreis angezeigt wird, schüttle das Gerät schnell";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Wähle jedes Mal, wenn ein Wort erscheint, den ersten Buchstaben der FARBE aus, die angezeigt wird.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Wenn du bereit bist, mit der Stroop-Aktivität zu beginnen, tippe auf „Los geht’s“.";
+"STROOP_TASK_STEP_TEXT" = "Wähle den ersten Buchstaben der FARBE aus, die angezeigt wird.";
+"STROOP_COLOR_RED" = "ROT";
+"STROOP_COLOR_GREEN" = "GRÜN";
+"STROOP_COLOR_BLUE" = "BLAU";
+"STROOP_COLOR_YELLOW" = "GELB";
+"STROOP_COLOR_RED_INITIAL" = "R";
+"STROOP_COLOR_GREEN_INITIAL" = "Gr";
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+"STROOP_COLOR_YELLOW_INITIAL" = "Ge";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Türme von Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Diese Aktivität misst deine Fähigkeit, Rätsel zu lösen.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Bewege den gesamten Stapel in so wenigen Zügen wie möglich auf den markierten Turm.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Löse das Rätsel";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Anzahl Züge: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ich kann dieses Rätsel nicht lösen";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption muss „links“ oder „rechts“ sein";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Linkes Knie Bewegungsumfang";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Rechtes Knie Bewegungsumfang";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Diese Aktivität misst, wie weit du dein linkes Knie strecken kannst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Diese Aktivität misst, wie weit du dein rechtes Knie strecken kannst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Setze dich an den Rand eines Stuhls. Wenn es losgeht, legst du dein Gerät zur Messung auf dein linkes Knie. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Setze dich an den Rand eines Stuhls. Wenn es losgeht, legst du dein Gerät zur Messung auf dein rechtes Knie. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lege dein Gerät wie abgebildet auf dein linkes Knie mit dem Bildschirm nach außen.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lege dein Gerät wie abgebildet auf dein rechtes Knie mit dem Bildschirm nach außen.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und strecke dein linkes Knie so weit aus, wie du kannst. Tippe erneut, wenn du fertig bist.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und strecke dein rechtes Knie so weit aus, wie du kannst. Tippe erneut, wenn du fertig bist.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf dein linkes Knie";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf dein rechtes Knie";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strecke dein linkes Knie aus und tippe irgendwo auf den Bildschirm.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strecke dein rechtes Knie aus und tippe irgendwo auf den Bildschirm.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Linke Schulter Bewegungsumfang";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Rechte Schulter Bewegungsumfang";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Diese Aktivität misst, wie weit du deine linke Schulter strecken kannst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Diese Aktivität misst, wie weit du deine rechte Schulter strecken kannst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Wenn es losgeht, legst du dein Gerät zur Messung auf deine linke Schulter. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Wenn es losgeht, legst du dein Gerät zur Messung auf deine rechte Schulter. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lege dein Gerät wie abgebildet auf deine linke Schulter mit dem Bildschirm nach außen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lege dein Gerät wie abgebildet auf deine rechte Schulter mit dem Bildschirm nach außen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und hebe deinen linken Arm so weit, wie du kannst. Tippe erneut, wenn du fertig bist.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und hebe deinen rechten Arm so weit, wie du kannst. Tippe erneut, wenn du fertig bist.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf deine linke Schulter";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf deine rechte Schulter";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Hebe deinen linken Arm und tippe irgendwo auf den Bildschirm.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Hebe deinen rechten Arm und tippe irgendwo auf den Bildschirm.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gehen mit Zeitmessung";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Krücken, beide Seiten";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Gehe bis zu %@ in einer geraden Linie.";
-"TIMED_WALK_INSTRUCTION_2" = "Drehe dich um und gehe zum Ausgangspunkt zurück.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tippe danach auf „Fertig“.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Drehe dich um.";
+"TIMED_WALK_INSTRUCTION_2" = "Gehe zum Ausgangspunkt zurück.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tippe danach auf „Weiter“.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "Ich kann diese Aktivität mit meiner RECHTEN Hand nicht durchführen.";
 "TREMOR_SKIP_NEITHER" = "Ich kann diese Aktivität mit beiden Händen durchführen.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_INTENDED_USE" = "Mit dieser Aktivität werden deine visuelle Aufmerksamkeit und der Aufgabenwechsel geprüft, indem die Zeit gemessen wird, die du benötigst, um in der richtigen Reihenfolge auf eine Reihe von Punkten zu tippen.";
+"TRAILMAKING_INTENDED_USE2_A" = "Tippe nach dem Countdown abwechselnd auf Punkt mit Zahlen und Buchstaben. Beginne damit, auf die erste Zahl („1“) zu tippen und dann weiter auf „2“ – „3“ – „4“ … bis du zur Zahl „7“ gelangst.";
+"TRAILMAKING_INTENDED_USE2_B" = "Tippe nach dem Countdown abwechselnd auf Punkt mit Zahlen und Buchstaben. Beginne damit, auf die erste Zahl („1“) zu tippen, danach auf den ersten Buchstaben „A“ und dann weiter auf „2“ – „B“ – „3“ – „C“ bis du zur Zahl „7“ gelangst.";
+"TRAILMAKING_INTRO_TEXT" = "Tippe so schnell du kannst, ohne Fehler zu machen. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d Fehler)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d Fehler)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Fehler beim Erstellen der Datei";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Es konnten nicht genügend Protokolldateien gelöscht werden, um den Schwellenwert zu erreichen.";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Aufgenommenes Bild";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Videoaufnahmenvorschau";
-"AX_VIDEO_CAPTURED_LABEL" = "Aufgenommenes Video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videoaufnahme abgeschlossen";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Die Scheibe der Größe %@ kann nicht auf die Scheibe der Größe %@ gelegt werden";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Ziel";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Stapel besteht aus";
 "AX_GRAPH_AND_SEPARATOR" = " und ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Audio-Balkendiagramm";

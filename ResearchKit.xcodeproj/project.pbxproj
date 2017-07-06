@@ -1097,7 +1097,7 @@
 		B1B349FB1AA10EA8005FAD66 /* fr_CA */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = fr_CA; path = fr_CA.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349FC1AA10EAE005FAD66 /* fi */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = fi; path = fi.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349FD1AA10EB4005FAD66 /* es */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = es; path = es.lproj/ResearchKit.strings; sourceTree = "<group>"; };
-		B1B349FE1AA10EBA005FAD66 /* es_MX */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/ResearchKit.strings; sourceTree = "<group>"; };
+		B1B349FE1AA10EBA005FAD66 /* es_MX */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = es_MX; path = es_419.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349FF1AA10EC1005FAD66 /* en_GB */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = en_GB; path = en_GB.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B34A001AA10EC6005FAD66 /* en_AU */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = en_AU; path = en_AU.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B34A011AA10ECB005FAD66 /* el */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = el; path = el.lproj/ResearchKit.strings; sourceTree = "<group>"; };
@@ -1106,7 +1106,7 @@
 		B1B34A041AA10EDA005FAD66 /* cs */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = cs; path = cs.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B34A051AA10EDF005FAD66 /* ca */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = ca; path = ca.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B34A061AA10EE4005FAD66 /* ar */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = ar; path = ar.lproj/ResearchKit.strings; sourceTree = "<group>"; };
-		B1B34A061AABBCCDDEEFFAAA /* no */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = no; path = no.lproj/ResearchKit.strings; sourceTree = "<group>"; };
+		B1B34A061AABBCCDDEEFFAAA /* no */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = no; path = nb.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B894391A00345200C5CF2D /* ResearchKit_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ResearchKit_Private.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B1C0F4E21A9BA65F0022C153 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1C1DE4F196F541F00F75544 /* ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResearchKit.h; sourceTree = "<group>"; };
@@ -2917,6 +2917,9 @@
 					86CC8E991AC09332001CCD89 = {
 						CreatedOnToolsVersion = 6.2;
 					};
+					B183A4731A8535D100C76870 = {
+						LastSwiftMigration = 0900;
+					};
 					B18FF3A41A9FE25700C0C3B0 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -3552,7 +3555,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3584,7 +3588,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
