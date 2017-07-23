@@ -1093,6 +1093,14 @@ Returns an initialized numeric answer format using the specified style, unit des
  */
 @property (copy, nullable) NSNumber *maximum;
 
+/**
+ The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ numeric answer.
+ 
+ The default value of this property is `nil`, which means that no limit scale value is used.
+ */
+@property (copy, nullable) NSNumber *scale;
+
 @end
 
 
