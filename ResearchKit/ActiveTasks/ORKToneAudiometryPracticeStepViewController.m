@@ -82,12 +82,16 @@
     self.toneAudiometryContentView = [[ORKToneAudiometryContentView alloc] init];
     self.activeStepView.activeCustomView = self.toneAudiometryContentView;
     
-    [self.toneAudiometryContentView.tapButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
+    [self.toneAudiometryContentView.leftButton addTarget:self
+                                                  action:@selector(buttonPressed:forEvent:)
+                                        forControlEvents:UIControlEventTouchDown];
+    [self.toneAudiometryContentView.rightButton addTarget:self
+                                                   action:@selector(buttonPressed:forEvent:)
+                                         forControlEvents:UIControlEventTouchDown];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self start];
 }
 

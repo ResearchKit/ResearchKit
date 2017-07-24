@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "0+";
 "BLOOD_TYPE_O-" = "0-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Typ I";
+"FITZPATRICK_SKIN_TYPE_II" = "Typ II";
+"FITZPATRICK_SKIN_TYPE_III" = "Typ III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Typ IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Typ V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Typ VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Žena";
 "GENDER_MALE" = "Muž";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "vlevo";
+"LIMB_RIGHT" = "vpravo";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Odpověď";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Uložit";
 "BUTTON_CLEAR_ANSWER" = "Smazat odpověď";
 "BUTTON_READ_ONLY_MODE" = "Tuto odpověď nelze změnit.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivita se spustí za";
 "TASK_COMPLETE_TITLE" = "Aktivita byla dokončena";
 "TASK_COMPLETE_TEXT" = "Data budou analyzována a jakmile budou k dispozici výsledky, obdržíte oznámení.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "Zbývá %@ s.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Zbývá %@ sekund.";
+"TOUCH_ANYWHERE_LABEL" = "Pokračujte dotykem kdekoli na displeji.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Pořídit obrázek";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tónová audiometrie";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Tato aktivita měří vaši schopnost slyšet různé zvuky.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Než začnete, zapněte sluchátka a nasaďte si je.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Než začnete, zapojte sluchátka a nasaďte si je.\n\nZvuk bude velmi jemný a nebude se podobat obvyklému zvuku upozornění. Začne znít velmi tiše a pozvolna se bude zesilovat. Dávejte pozor a klepáním na levé nebo pravé tlačítko signalizujte, ve kterém uchu ho slyšíte.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Nyní byste měli slyšet tón. Nastavte hlasitost pomocí ovládacích prvků po straně zařízení.\n\nAž budete připraveni začít, klepněte na tlačítko.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Jakmile uslyšíte zvuk, klepněte na tlačítko.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nyní byste měli slyšet zvuk. Tlačítky na boční straně zařízení upravte hlasitost.\n\nJakmile budete připraveni, klepněte na libovolné tlačítko.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Vždy, když uslyšíte zvuk, signalizujte stisknutím levého nebo pravého tlačítka, ve kterém uchu ho slyšíte.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Levé ucho";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Pravé ucho";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, vlevo";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, vpravo";
 
@@ -298,7 +314,7 @@
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skóre";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Sledujte, jak se %@ rozsvítí";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Klepejte na %@ v pořadí, ve kterém se budou rozsvěcovat";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Klepejte na %@ v pořadí, ve kterém se rozsvítily";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Klepejte na %@ v obráceném pořadí";
 "MEMORY_GAME_COMPLETE_TITLE" = "Sekvence byla dokončena";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Pokračujte klepnutím na Další.";
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Hra byla dokončena";
 "MEMORY_GAME_PAUSED_TITLE" = "Pozastaveno";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Pokračujte klepnutím na Další.";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Paměťovou aktivitu pomohli vyvinout Katherine Possin, PhD a Joel Kramer, PhD z University of California v San Franciscu.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reakční doba";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Jakmile se objeví modrý kroužek, krátce zařízením zatřeste";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroopův test";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Vždy, když se objeví slovo, vyberte první písmeno BARVY, kterou je slovo napsáno.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Jakmile budete připraveni začít se Stroopovým testem, klepněte na Začít.";
+"STROOP_TASK_STEP_TEXT" = "Vyberte první písmeno BARVY, kterou je slovo napsáno.";
+"STROOP_COLOR_RED" = "ČERVENÁ";
+"STROOP_COLOR_GREEN" = "ZELENÁ";
+"STROOP_COLOR_BLUE" = "MODRÁ";
+"STROOP_COLOR_YELLOW" = "ŽLUTÁ";
+"STROOP_COLOR_RED_INITIAL" = "Č";
+"STROOP_COLOR_GREEN_INITIAL" = "Z";
+"STROOP_COLOR_BLUE_INITIAL" = "M";
+"STROOP_COLOR_YELLOW_INITIAL" = "Ž";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanojské věže";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Tato aktivita vyhodnotí vaši schopnost řešit hlavolamy.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Přesuňte celou sadu na zvýrazněnou podložku s využitím co nejmenšího počtu kroků.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Vyřešte hlavolam";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Počet kroků: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tento hlavolam nedokážu vyřešit";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Volba končetiny musí být vlevo nebo vpravo";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Rozsah pohybu levého kolene";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Rozsah pohybu pravého kolene";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Tato aktivita změří schopnost narovnat nohu v levém koleni.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Tato aktivita změří schopnost narovnat nohu v pravém koleni.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sedněte si na kraj židle. V dalším kroku budete vyzváni, abyste svoje zařízení přiložili k levému kolenu kvůli měření. Zapněte na zařízení zvuk, abyste slyšeli pokyny.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sedněte si na kraj židle. V dalším kroku budete vyzváni, abyste svoje zařízení přiložili k pravému kolenu kvůli měření. Zapněte na zařízení zvuk, abyste slyšeli pokyny.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Přiložte zařízení k levému kolenu displejem od sebe, jak vidíte na obrázku.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Přiložte zařízení k pravému kolenu displejem od sebe, jak vidíte na obrázku.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Jakmile budete připraveni, klepněte na obrazovku a začněte narovnávat levou nohu v koleni, až kam budete moct. Až budete hotovi, klepněte ještě jednou.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Jakmile budete připraveni, klepněte na obrazovku a začněte narovnávat pravou nohu v koleni, až kam budete moct. Až budete hotovi, klepněte ještě jednou.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Přiložte zařízení k levému kolenu";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Přiložte zařízení k pravému kolenu";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Narovnejte levou nohu v koleni a potom kamkoli klepněte.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Narovnejte pravou nohu v koleni a potom kamkoli klepněte.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rozsah pohybu levého ramene";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Rozsah pohybu pravého ramene";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Tato aktivita změří schopnost zvednout ruku v levém rameni.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Tato aktivita změří schopnost zvednout ruku v pravém rameni.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "V dalším kroku budete vyzváni, abyste svoje zařízení přiložili k levému rameni kvůli měření. Zapněte na zařízení zvuk, abyste slyšeli pokyny.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "V dalším kroku budete vyzváni, abyste svoje zařízení přiložili k pravému rameni kvůli měření. Zapněte na zařízení zvuk, abyste slyšeli pokyny.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Přiložte zařízení k levému rameni displejem od sebe, jak vidíte na obrázku.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Přiložte zařízení k pravému rameni displejem od sebe, jak vidíte na obrázku.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Jakmile budete připraveni, klepněte na obrazovku a začněte zvedat levou ruku tak vysoko, jak budete moct. Až budete hotovi, klepněte ještě jednou.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Jakmile budete připraveni, klepněte na obrazovku a začněte zvedat pravou ruku tak vysoko, jak budete moct. Až budete hotovi, klepněte ještě jednou.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Přiložte zařízení k levému rameni";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Přiložte zařízení k pravému rameni";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Zvedněte levou ruku a potom kamkoli klepněte.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Zvedněte pravou ruku a potom kamkoli klepněte.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Chůze na čas";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvě berle";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Chodítko";
 "TIMED_WALK_INSTRUCTION_%@" = "Ujděte až %@ v přímém směru.";
-"TIMED_WALK_INSTRUCTION_2" = "Obraťte se a jděte zpátky na začátek.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Po dokončení klepněte na Hotovo.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Obraťte se.";
+"TIMED_WALK_INSTRUCTION_2" = "Jděte zpátky na začátek.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Až budete hotoví, klepněte na Další.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "Tuto aktivitu nemůžu provádět PRAVOU rukou.";
 "TREMOR_SKIP_NEITHER" = "Tuto aktivitu můžu provádět oběma rukama.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Test cesty";
+"TRAILMAKING_INTENDED_USE" = "Tato aktivita vyhodnotí vaši vizuální pozornost a schopnost přecházet mezi úlohami. Zaznamená čas, který budete potřebovat ke klepání na řadu bodů v určeném pořadí.";
+"TRAILMAKING_INTENDED_USE2_A" = "Po skončení odpočtu střídavě klepejte na body u číslic a písmen. Začněte klepnutím na číslo „1“, potom na čísla „2“ – „3“ – „4“… až do čísla „7“.";
+"TRAILMAKING_INTENDED_USE2_B" = "Po skončení odpočtu střídavě klepejte na body u číslic a písmen. Začněte klepnutím na číslo „1“, potom na písmeno „A“ a pak na „2“ – „B“ – „3“ – „C“… až do čísla „7“.";
+"TRAILMAKING_INTRO_TEXT" = "Zkuste to co nejrychleji, aniž byste udělali chybu. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (chyby: %d)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (chyby: %d)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodařilo se odstranit dostatečné množství protokolů pro dosažení prahové hodnoty";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Pořízený obrázek";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Náhled nahraného videa";
-"AX_VIDEO_CAPTURED_LABEL" = "Nahrané video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Video je nahrané";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Disk o velikosti %@ nelze umístit na disk o velikosti %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Cíl";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Sada se skládá z";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
 "AX_GRAPH_POINT_%@" = "Bod: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Pruhový graf zvuku";

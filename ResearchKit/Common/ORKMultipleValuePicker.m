@@ -100,7 +100,7 @@
     }
     else {
         NSUInteger count = [self numberOfComponentsInPickerView:_pickerView];
-        for (NSInteger ii=0; ii < count; ii++) {
+        for (NSInteger ii = 0; ii < count; ii++) {
             [_pickerView selectRow:0 inComponent:ii animated:NO];
         }
     }

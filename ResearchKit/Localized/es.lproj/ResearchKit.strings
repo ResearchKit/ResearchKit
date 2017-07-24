@@ -90,7 +90,7 @@
 "LOCATION_QUESTION_PLACEHOLDER" = "Introduce una dirección";
 "LOCATION_ERROR_TITLE" = "No se ha encontrado la dirección especificada";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No se ha podido determinar tu ubicación actual. Escribe una dirección o dirígete a una ubicación donde la señal GPS sea mejor.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Se ha denegado el acceso a los servicios de localización. Ve a Ajustes para conceder a esta aplicación permiso para utilizar los servicios de localización.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Se ha denegado el acceso a los servicios de localización. Ve a Ajustes para conceder a esta app permiso para utilizar los servicios de localización.";
 "LOCATION_ERROR_GEOCODE" = "No se ha encontrado ningún resultado para la dirección introducida. Asegúrate de que la dirección es válida.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "O bien no estás conectado a Internet o bien has excedido el número máximo de búsquedas de direcciones. Si no estás conectado a Internet, activa la conexión Wi-Fi para responder a esta pregunta, omítela si el botón de omisión está disponible, o vuelve al estudio cuando dispongas de conexión a Internet. Si no es posible, inténtalo de nuevo dentro de unos minutos.";
 
@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Tipo I";
+"FITZPATRICK_SKIN_TYPE_II" = "Tipo II";
+"FITZPATRICK_SKIN_TYPE_III" = "Tipo III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Tipo IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Tipo V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Tipo VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Mujer";
 "GENDER_MALE" = "Hombre";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "izquierda";
+"LIMB_RIGHT" = "la derecha";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Pulsa para contestar";
@@ -198,18 +210,20 @@
 "BUTTON_SAVE" = "Guardar";
 "BUTTON_CLEAR_ANSWER" = "Borrar respuesta";
 "BUTTON_READ_ONLY_MODE" = "Esta respuesta no puede modificarse.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Iniciando actividad en";
 "TASK_COMPLETE_TITLE" = "Actividad completada";
 "TASK_COMPLETE_TEXT" = "Se analizarán tus datos y recibirás los resultados cuando estén listos.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Quedan %@ segundos.";
+"TOUCH_ANYWHERE_LABEL" = "Pulsa cualquier punto de la pantalla para continuar";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar imagen";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Volver a capturar imagen";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No se ha encontrado ninguna cámara. Este paso no se puede completar.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "Para completar este paso, ve a Ajustes para conceder a la aplicación acceso a la cámara.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Para completar este paso, ve a Ajustes para conceder a la app acceso a la cámara.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No se ha especificado ningún directorio de salida para las imágenes capturadas.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No se ha podido guardar la imagen capturada.";
 
@@ -238,9 +252,9 @@
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Da unos %ld pasos en línea recta.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Busca un lugar en el que puedas caminar de un lado a otro en línea recta de forma segura. Camina sin parar y da la vuelta al final del recorrido, como si rodearas un cono.\n\nA continuación, se te indicará que gires sobre ti mismo dando una vuelta completa y que te quedes quieto con los brazos relajados a los lados del cuerpo y los pies separados de forma que estén alineados con los hombros.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Busca un lugar en el que puedas caminar de un lado a otro en línea recta de forma segura. Camina sin parar y da la vuelta al final del recorrido, como si rodearas un cono.\n\nA continuación, se te indicará que gires sobre ti mismo dando una vuelta completa y que te quedes quieto, con los brazos relajados a los lados del cuerpo y los pies separados de forma que estén alineados con los hombros.";
 "WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Pulsa Empezar cuando estés preparado para comenzar.\nA continuación, guarda el teléfono en un bolsillo o en una bolsa y sigue las instrucciones de audio.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Camina de un lado a otro en línea recta durante %@. Camina como lo harías normalmente.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Camina en línea recta de un lado a otro durante %@. Camina como lo harías normalmente.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Gira sobre ti mismo dando una vuelta completa y quédate quieto durante %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Has acabado la actividad.";
 
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometría tonal";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Esta actividad mide tu capacidad para oír diferentes sonidos.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de empezar, conecta los auriculares y póntelos.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de empezar, conecta los auriculares y póntelos.\n\nEl sonido será muy sutil y es diferente al tono de aviso. El sonido empezará a oírse a un volumen muy bajo que irá aumentando de forma gradual. Presta atención y pulsa el botón izquierdo o derecho para indicar por qué oído lo estás oyendo.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Ahora deberías oír un tono. Ajusta el volumen con los controles situados en el lateral del dispositivo.\n\nToca el botón cuando estés listo para empezar.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Toca el botón cada vez que oigas un sonido.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ahora deberías oír un tono. Ajusta el volumen con los controles laterales del dispositivo.\n\nPulsa cualquier botón cuando estés listo para empezar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Cada vez que empieces a oír un sonido, pulsa el botón izquierdo o derecho para indicar por qué oído lo estás oyendo.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Oído izquierdo";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Oído derecho";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, izquierdo";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, derecho";
 
@@ -303,12 +319,13 @@
 "MEMORY_GAME_COMPLETE_TITLE" = "Secuencia completada";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Para continuar, pulsa Siguiente";
 "MEMORY_GAME_FAILED_TITLE" = "Reintentar";
-"MEMORY_GAME_FAILED_MESSAGE" = "No te ha dado tiempo a hacerlo. Pulsa Siguiente para continuar.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Esta vez no lo has conseguido. Pulsa Siguiente para continuar.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Se acabó el tiempo";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Se ha acabado el tiempo.\nPulsa Siguiente para continuar.";
 "MEMORY_GAME_COMPLETE" = "Juego completado";
 "MEMORY_GAME_PAUSED_TITLE" = "En pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Para continuar, pulsa Siguiente";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "El ejercicio de memoria se ha desarrollado con la ayuda de la doctora Katherine Possin y del doctor Joel Kramer, de la Universidad de California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Tiempo de reacción";
@@ -318,23 +335,72 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intento %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Cuando aparezca el círculo azul, agita rápidamente el dispositivo";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Colores y palabras";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Cada vez que aparezca una palabra, selecciona la primera letra del nombre del COLOR que se muestra.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Cuando estés preparado para empezar el ejercicio de colores y palabras, pulsa Empezar.";
+"STROOP_TASK_STEP_TEXT" = "Selecciona la primera letra del nombre del COLOR que se muestra.";
+"STROOP_COLOR_RED" = "ROJO";
+"STROOP_COLOR_GREEN" = "VERDE";
+"STROOP_COLOR_BLUE" = "AZUL";
+"STROOP_COLOR_YELLOW" = "AMARILLO";
+"STROOP_COLOR_RED_INITIAL" = "R";
+"STROOP_COLOR_GREEN_INITIAL" = "V";
+"STROOP_COLOR_BLUE_INITIAL" = "Az";
+"STROOP_COLOR_YELLOW_INITIAL" = "Am";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Esta actividad evalúa tu habilidad para solucionar rompecabezas.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mueve toda la pila a la plataforma resaltada en el mínimo número de movimientos posible.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Pulsa Empezar para comenzar";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Soluciona el rompecabezas";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de movimientos: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No sé resolver este rompecabezas";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Tienes que elegir entre la extremidad izquierda o la derecha";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Rango de movimiento de la rodilla izquierda";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Rango de movimiento de la rodilla derecha";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Este ejercicio mide tu capacidad para estirar la rodilla izquierda.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Este ejercicio mide tu capacidad para estirar la rodilla derecha.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Siéntate en el borde de una silla. Cuando estés preparado, colócate el dispositivo en la rodilla izquierda para empezar a medir. Activa el sonido del dispositivo para oír las instrucciones.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Siéntate en el borde de una silla. Cuando estés preparado, colócate el dispositivo en la rodilla derecha para empezar a medir. Activa el sonido del dispositivo para oír las instrucciones.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Colócate el dispositivo en la rodilla izquierda con la pantalla hacia arriba, tal y como se ve en la imagen.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Colócate el dispositivo en la rodilla derecha con la pantalla hacia arriba, tal y como se ve en la imagen.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Cuando estés preparado, pulsa la pantalla para empezar y estira la rodilla izquierda todo lo que puedas. Vuelve a pulsar cuando hayas terminado.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Cuando estés preparado, pulsa la pantalla para empezar y estira la rodilla derecha todo lo que puedas. Vuelve a pulsar cuando hayas terminado.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Colócate el dispositivo en la rodilla izquierda";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Colócate el dispositivo en la rodilla derecha";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Estira la rodilla izquierda y, a continuación, pulsa cualquier punto de la pantalla.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Estira la rodilla derecha y, a continuación, pulsa cualquier punto de la pantalla.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rango de movimiento del hombro izquierdo";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Rango de movimiento del hombro derecho";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Este ejercicio mide tu capacidad para estirar el hombro izquierdo.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Este ejercicio mide tu capacidad para estirar el hombro derecho.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Siéntate en el borde de una silla. Cuando estés preparado, colócate el dispositivo en el hombro izquierdo para empezar a medir. Activa el sonido del dispositivo para oír las instrucciones.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Siéntate en el borde de una silla. Cuando estés preparado, colócate el dispositivo en el hombro derecho para empezar a medir. Activa el sonido del dispositivo para oír las instrucciones.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Colócate el dispositivo en el hombro izquierdo con la pantalla hacia arriba, tal y como se ve en la imagen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Colócate el dispositivo en el hombro derecho con la pantalla hacia arriba, tal y como se ve en la imagen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Cuando estés preparado, pulsa la pantalla para empezar y sube el brazo izquierdo todo lo que puedas. Vuelve a pulsar cuando hayas terminado.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Cuando estés preparado, pulsa la pantalla para empezar y sube el brazo derecho todo lo que puedas. Vuelve a pulsar cuando hayas terminado.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Colócate el dispositivo en el hombro izquierdo";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Colócate el dispositivo en el hombro derecho";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Levanta el brazo izquierdo y, a continuación, pulsa cualquier punto de la pantalla.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Levanta el brazo derecho y, a continuación, pulsa cualquier punto de la pantalla.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Paseo cronometrado";
-"TIMED_WALK_INTRO_DETAIL" = "Esta actividad mide la funcionalidad de tu extremidad inferior.";
+"TIMED_WALK_INTRO_DETAIL" = "Esta actividad mide la funcionalidad de tus extremidades inferiores.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Busca un lugar, preferiblemente al aire libre, donde puedas caminar unos %@ en línea recta lo más rápido posible, pero de forma segura. No disminuyas la velocidad hasta que hayas llegado al final del recorrido.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Pulsa Siguiente para empezar.";
 "TIMED_WALK_FORM_TITLE" = "Dispositivo de ayuda";
 "TIMED_WALK_FORM_TEXT" = "Utiliza el mismo dispositivo de ayuda en cada prueba.";
-"TIMED_WALK_QUESTION_TEXT" = "¿Utilizas una órtesis de pie y tobillo?";
+"TIMED_WALK_QUESTION_TEXT" = "¿Utilizas una ortesis de pie y tobillo?";
 "TIMED_WALK_QUESTION_2_TITLE" = "¿Utilizas algún dispositivo de ayuda?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Pulsa aquí para responder.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Ninguno";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dos muletas";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Andador (con o sin ruedas)";
 "TIMED_WALK_INSTRUCTION_%@" = "Camina %@ en línea recta.";
-"TIMED_WALK_INSTRUCTION_2" = "Da la vuelta y camina hasta el punto de partida.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Pulsa OK cuando hayas acabado.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Date la vuelta.";
+"TIMED_WALK_INSTRUCTION_2" = "Vuelve al punto de partida.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Pulsa Siguiente cuando hayas acabado.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -353,7 +420,7 @@
 "PAVSAT_TITLE" = "PAVSAT";
 "PASAT_INTRO_TEXT" = "La prueba de suma seriada auditiva por pasos mide tu velocidad de procesamiento de información auditiva y tu capacidad de cálculo.";
 "PVSAT_INTRO_TEXT" = "La prueba de suma seriada visual por pasos mide tu velocidad de procesamiento de información visual y tu capacidad de cálculo.";
-"PAVSAT_INTRO_TEXT" = "La prueba de suma seriada auditiva y visual por pasos mide tu velocidad de procesamiento de información auditiva y visual y tu capacidad de cálculo.";
+"PAVSAT_INTRO_TEXT" = "La prueba de suma seriada auditiva y visual por pasos (PAVSAT) mide tu velocidad de procesamiento de información auditiva y visual y tu capacidad de cálculo.";
 "PSAT_INTRO_TEXT_2_%@" = "Cada %@ segundos se muestra un dígito.\nDebes sumar cada dígito nuevo al anterior.\nAtención: no debes calcular la suma total de todos los dígitos, sino solo la suma de los dos últimos números.";
 "PSAT_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
 "PSAT_INITIAL_INSTRUCTION" = "Recuerda este primer dígito.";
@@ -362,13 +429,13 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Prueba de las %@ clavijas";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la capacidad funcional de tus extremidades superiores, para lo cual se te pedirá que introduzcas una clavija en un orificio %@ veces.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano izquierda como con la derecha.\nHay que introducir la clavija lo más rápido posible en el orificio y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano derecha como con la izquierda.\nHay que introducir la clavija lo más rápido posible en el orificio y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la capacidad funcional de tus extremidades superiores, para lo cual se te pedirá que introduzcas una clavija en un agujero %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano izquierda como con la derecha.\nHay que introducir la clavija lo más rápido posible en el agujero y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano derecha como con la izquierda.\nHay que introducir la clavija lo más rápido posible en el agujero y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Introduce la clavija en el orificio con la mano izquierda.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Introduce la clavija en el orificio con la mano derecha.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Introduce la clavija en el agujero con la mano izquierda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Introduce la clavija en el agujero con la mano derecha.";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Coloca la clavija detrás de la línea con la mano izquierda.";
 "HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Coloca la clavija detrás de la línea con la mano derecha.";
 "HOLE_PEG_TEST_TEXT" = "Coge la clavija con dos dedos.";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "No puedo realizar esta actividad con la mano derecha.";
 "TREMOR_SKIP_NEITHER" = "Puedo realizar esta actividad con las dos manos.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Prueba del trazo";
+"TRAILMAKING_INTENDED_USE" = "Este ejercicio evalúa tu capacidad de atención visual y para cambiar de tarea grabando el tiempo que necesitas para pulsar una serie de puntos por orden.";
+"TRAILMAKING_INTENDED_USE2_A" = "Cuando empiece la cuenta atrás, pulsa los puntos alternando números y letras. Empieza por el primer número “1” seguido de los números “2”, “3”, “4”… hasta llegar al número “7”.";
+"TRAILMAKING_INTENDED_USE2_B" = "Cuando empiece la cuenta atrás, pulsa los puntos alternando números y letras. Empieza por el primer número “1” seguido de la primera letra “A” y, después, “2”, “B”, “3”, “C”… hasta llegar al número “7”.";
+"TRAILMAKING_INTRO_TEXT" = "Realiza este ejercicio lo más rápido posible procurando no cometer errores. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errores)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se ha podido crear el archivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No se han podido eliminar los archivos de registro suficientes para alcanzar el umbral";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Imagen capturada";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Previsualización de la captura de vídeo";
-"AX_VIDEO_CAPTURED_LABEL" = "Vídeo capturado";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Captura de vídeo completada";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No se puede colocar un disco de tamaño %@ en un disco de tamaño %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Objetivo";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Grupo compuesto por";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
 "AX_GRAPH_POINT_%@" = "Punto: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Gráfico de barras de audio";

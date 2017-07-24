@@ -41,6 +41,7 @@
 
 static const CGFloat LabelRightMargin = 44.0;
 
+
 @implementation ORKChoiceViewCell {
     UIImageView *_checkView;
     ORKSelectionTitleLabel *_shortLabel;

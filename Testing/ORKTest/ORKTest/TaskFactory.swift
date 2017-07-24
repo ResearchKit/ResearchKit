@@ -33,7 +33,7 @@ import ResearchKit
 
 @objc class TaskFactory : NSObject {
 
-    class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
+   @objc class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep

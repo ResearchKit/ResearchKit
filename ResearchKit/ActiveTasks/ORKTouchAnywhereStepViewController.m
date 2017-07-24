@@ -66,6 +66,7 @@
 
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
+    
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|"

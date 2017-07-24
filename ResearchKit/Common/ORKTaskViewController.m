@@ -76,7 +76,6 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     CLLocationManager *_manager;
     _ORKLocationAuthorizationRequestHandler _handler;
     BOOL _started;
-    
 }
 
 - (instancetype)initWithHandler:(_ORKLocationAuthorizationRequestHandler)handler {
@@ -151,7 +150,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
     return [super initWithTarget:target
-                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView"]
+                        keyPaths:@[ @"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView" ]
                         delegate:delegate
                           action:@selector(collectToolbarItemsFromViewController:)
                          context:_ORKViewControllerToolbarObserverContext];

@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type 1";
+"FITZPATRICK_SKIN_TYPE_II" = "Type 2";
+"FITZPATRICK_SKIN_TYPE_III" = "Type 3";
+"FITZPATRICK_SKIN_TYPE_IV" = "Type 4";
+"FITZPATRICK_SKIN_TYPE_V" = "Type 5";
+"FITZPATRICK_SKIN_TYPE_VI" = "Type 6";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Kvinne";
 "GENDER_MALE" = "Mann";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fot";
 "MEASURING_UNIT_IN" = "to";
+
+/* Limb values. */
+"LIMB_LEFT" = "venstre";
+"LIMB_RIGHT" = "høyre";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Trykk for å svare";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Arkiver";
 "BUTTON_CLEAR_ANSWER" = "Fjern svar";
 "BUTTON_READ_ONLY_MODE" = "Dette svaret kan ikke endres.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starter aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktivitet fullført";
 "TASK_COMPLETE_TEXT" = "Dataene vil bli analysert, og du blir varslet når resultatene er klare.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder gjenstår.";
+"TOUCH_ANYWHERE_LABEL" = "Berør hvor som helst for å fortsette";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ta bilde";
@@ -225,7 +239,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Sitt komfortabelt i %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Gå så fort du kan i %@.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Denne aktiviteten leser av pulsen din og måler hvor langt du kan gå på %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Gå utendørs så fort du kan i %1$@. Når du er ferdig, setter du deg og hviler komfortabelt i %2$@.Trykk på Start for å begynne.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Gå utendørs så fort du kan i %1$@. Når du er ferdig, setter du deg og hviler komfortabelt i %2$@. Trykk på Start for å begynne.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Balanse og gange";
@@ -280,18 +294,20 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviteten måler hvor godt du hører ulike lyder.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Koble til og ta på deg hodetelefonene før du begynner.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Før du starter, må du plugge i hodetelefonene og ta dem på.\n\nLyden er svært svak og ulik vanlige varseltoner. Lyden begynner svakt og øker gradvis i volum. Konsentrer deg og trykk på venstre eller høyre knapp for å indikere hvilket øre du hører lyden i.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på knappen når du er klar til å begynne.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Trykk på knappen hver gang du hører en lyd.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på en knapp når du er klar til å begynne.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Hver gang du hører en lyd, må du trykke på venstre eller høyre knapp for å indikere hvilket øre du hører lyden i.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Venstre øre";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Høyre øre";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktiviteten måler den visuelle korttidshukommelsen din ved å be deg gjenta i hvilken rekkefølge %@ lyser.";
-"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomstrene";
-"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomstrene";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomstene";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomstene";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i samme rekkefølge som de lyser opp.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i omvendt rekkefølge av hvordan de lyser opp.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Begynn ved å trykke på Start, og følg så nøye med.";
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Spill ferdig";
 "MEMORY_GAME_PAUSED_TITLE" = "Pause";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Trykk på Neste for å fortsette";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Hukommelsesaktiviteten er utviklet i samarbeid med Katherine Possin, PhD og Joel Kramer, PhD fra University of California i San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaksjonstid";
@@ -318,23 +335,72 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %@ av %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten fort når den blå sirkelen vises";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Hver gang et ord vises, må du velge de to første bokstavene i navnet på FARGEN som vises.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Trykk på Start når du er klar til å starte Stroop-aktiviteten.";
+"STROOP_TASK_STEP_TEXT" = "Velg de to første bokstavene i navnet på FARGEN som vises.";
+"STROOP_COLOR_RED" = "RØD";
+"STROOP_COLOR_GREEN" = "GRØNN";
+"STROOP_COLOR_BLUE" = "BLÅ";
+"STROOP_COLOR_YELLOW" = "GUL";
+"STROOP_COLOR_RED_INITIAL" = "Rø";
+"STROOP_COLOR_GREEN_INITIAL" = "Gr";
+"STROOP_COLOR_BLUE_INITIAL" = "Bl";
+"STROOP_COLOR_YELLOW_INITIAL" = "Gu";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktiviteten vurderer evnen din til å løse oppgaver.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytt hele stabelen til den markerte plattformen med så få trekk som mulig.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs oppgaven";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antall trekk: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg klarer ikke å løse oppgaven";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption må være venstre eller høyre";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Bevegelsesområde for venstre kne";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevegelsesområde for høyre kne";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktiviteten måler hvor mye bevegelighet du har i venstre kne.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktiviteten måler hvor mye bevegelighet du har i høyre kne.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sett deg på kanten av stolen. Når du starter, må du legge enheten på venstre kne for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sett deg på kanten av stolen. Når du starter, må du legge enheten på høyre kne for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legg enheten på venstre kne med skjermen vendt utover, som illustrert på bildet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legg enheten på høyre kne med skjermen vendt utover, som illustrert på bildet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å starte og strekker ut venstre bein så langt du klarer. Trykk én gang til når du er ferdig.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, trykker du på skjermen for å starte og strekker ut høyre bein så langt du klarer. Trykk én gang til når du er ferdig.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legg enheten på venstre kne";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legg enheten på høyre kne";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strekk ut venstre bein. Trykk deretter hvor som helst.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strekk ut høyre bein. Trykk deretter hvor som helst.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bevegelsesområde for venstre skulder";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevegelsesområde for høyre skulder";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktiviteten måler hvor mye bevegelighet du har i venstre skulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktiviteten måler hvor mye bevegelighet du har i høyre skulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Når du starter, må du legge enheten på venstre skulder for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Når du starter, må du legge enheten på høyre skulder for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legg enheten på venstre skulder med skjermen vendt utover, som illustrert på bildet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legg enheten på høyre skulder med skjermen vendt utover, som illustrert på bildet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å starte og løfter venstre arm så høyt du klarer. Trykk én gang til når du er ferdig.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, trykker du på skjermen for å starte og løfter høyre arm så høyt du klarer. Trykk én gang til når du er ferdig.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legg enheten på venstre skulder";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legg enheten på høyre skulder";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Løft venstre arm. Trykk deretter hvor som helst.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Løft høyre arm. Trykk deretter hvor som helst.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
 "TIMED_WALK_INTRO_DETAIL" = "Denne aktiviteten måler funksjonen i nedre kroppshalvdel.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %@ i rett linje, så raskt som mulig. Ikke senk farten til etter at du har passert mållinjen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %@ i rett linje, så raskt som mulig. Ikke senk farten før etter at du har passert mållinjen.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Trykk på Neste for å begynne.";
 "TIMED_WALK_FORM_TITLE" = "Hjelpemiddel";
 "TIMED_WALK_FORM_TEXT" = "Bruk samme hjelpemiddel i hver test.";
-"TIMED_WALK_QUESTION_TEXT" = "Bruker du en ankel- eller fotortose?";
+"TIMED_WALK_QUESTION_TEXT" = "Bruker du en ankelortose?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Bruker du et hjelpemiddel?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Trykk her for å velge et svar.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
@@ -342,10 +408,11 @@
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Én krykke";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "To stokker";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "To krykker";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstol/rollator";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstol/rullator";
 "TIMED_WALK_INSTRUCTION_%@" = "Gå opptil %@ i rett linje.";
-"TIMED_WALK_INSTRUCTION_2" = "Snu og gå tilbake der du startet.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Ferdig når du har fullført oppgaven.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Snu.";
+"TIMED_WALK_INSTRUCTION_2" = "Gå tilbake der du startet.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Neste når du har fullført oppgaven.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -375,7 +442,7 @@
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for å slippe pluggen.";
 
 /* Tremor test active task. */
-"TREMOR_TEST_TITLE" = "Skjelving – aktivitet";
+"TREMOR_TEST_TITLE" = "Skjelving";
 "TREMOR_TEST_INTRO_1_DETAIL" = "Denne aktiviteten måler skjelving i hendene dine i forskjellige posisjoner. Finn et sted hvor du kan sitte i ro i løpet av denne aktiviteten.";
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Hold telefonen i hånden som er hardest rammet, som vist i bildet nedenfor.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Hold telefonen i din HØYRE hånd som vist i bildet nedenfor.";
@@ -415,6 +482,23 @@
 "TREMOR_SKIP_LEFT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min VENSTRE hånd.";
 "TREMOR_SKIP_RIGHT_HAND" = "Jeg kan ikke utføre denne aktiviteten med min HØYRE hånd.";
 "TREMOR_SKIP_NEITHER" = "Jeg kan utføre denne aktiviteten med begge hender.";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Oppmerksomhetstest";
+"TRAILMAKING_INTENDED_USE" = "Aktiviteten måler visuell reaksjonsevne og evne til å bytte oppgave ved at den måler tiden det tar å trykke på en rekke prikker i en bestemt rekkefølge.";
+"TRAILMAKING_INTENDED_USE2_A" = "Etter nedtellingen trykker du vekselvis på prikker med tall og bokstaver. Begynn med å trykke på det første tallet, '1', etterfulgt av tallene '2' – '3' – '4'… til du kommer til tallet '7'.";
+"TRAILMAKING_INTENDED_USE2_B" = "Etter nedtellingen trykker du vekselvis på prikker med tall og bokstaver. Begynn med å trykke på det første tallet, '1', og deretter trykke på den første bokstaven, ‘A’. Deretter trykker du på '2' – 'B' – '3' – 'C'… til du kommer til tallet '7'.";
+"TRAILMAKING_INTRO_TEXT" = "Gjør dette så fort du klarer uten å gjøre feil. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d feil)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d feil)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Tatt bilde";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Forhåndsvisning av videoopptak";
-"AX_VIDEO_CAPTURED_LABEL" = "Innspilt video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videoopptak fullført";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke plassere skive med størrelse %@ på skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Stabel bestående av";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Lydgraf";

@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Type I";
+"FITZPATRICK_SKIN_TYPE_II" = "Type II";
+"FITZPATRICK_SKIN_TYPE_III" = "Type III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Type IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Type V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Type VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Kvinde";
 "GENDER_MALE" = "Mand";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fod";
 "MEASURING_UNIT_IN" = "\"";
+
+/* Limb values. */
+"LIMB_LEFT" = "venstre";
+"LIMB_RIGHT" = "højre";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tryk for at svare";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Arkiver";
 "BUTTON_CLEAR_ANSWER" = "Ryd svar";
 "BUTTON_READ_ONLY_MODE" = "Dette svar kan ikke ændres.";
+"BUTTON_COPYRIGHT" = "Ophavsret";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starter aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktivitet færdig";
 "TASK_COMPLETE_TEXT" = "Dine data vil blive analyseret, og du får besked, når resultaterne er klar.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder tilbage.";
+"TOUCH_ANYWHERE_LABEL" = "Rør et tilfældigt sted for at fortsætte";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tag billede";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktivitet måler din evne til at høre forskellige lyde.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Før du starter, skal du tilslutte dine hovedtelefoner og tage dem på.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Før du starter, skal du tilslutte dine hovedtelefoner og tage dem på.\n\nLyden vil være meget diskret og lyder ikke som en almindelig advarselstone. Lyden vil være dæmpet i begyndelsen, men lydstyrken øges langsomt. Lyt opmærksomt, og tryk på den venstre eller højre knap for at angive, hvilket øre du hører den i.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Du skulle nu høre en tone. Juster lydstyrken vha. betjeningsmulighederne på siden af enheden.\n\nTryk på knappen, når du er klar til at starte.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Tryk på knappen, hver gang du begynder at høre en lyd.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du skulle nu høre en tone. Juster lydstyrken med knapperne på siden af din enhed.\n\nTryk på en knap, når du er klar til at starte.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Hver gang du hører en lyd, skal du trykke på den venstre eller højre knap for at vise, hvilket øre du hører lyden i.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Venstre øre";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Højre øre";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, højre";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Spil udført";
 "MEMORY_GAME_PAUSED_TITLE" = "På pause";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Tryk på Næste for at fortsætte";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Hukommelsesaktiviteten er udviklet med hjælp fra Katherine Possin, PhD, og Joel Kramer, PhD, fra University of California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaktionstid";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøg %@ af %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ryst hurtigt enheden, når den blå cirkel vises";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Hver gang der vises et ord, skal du vælge det første bogstav i navnet på den viste FARVE.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Tryk på Gå i gang, når du er klar til at starte Stroop-aktiviteten.";
+"STROOP_TASK_STEP_TEXT" = "Vælg det første bogstav i navnet på den viste FARVE.";
+"STROOP_COLOR_RED" = "RØD";
+"STROOP_COLOR_GREEN" = "GRØN";
+"STROOP_COLOR_BLUE" = "BLÅ";
+"STROOP_COLOR_YELLOW" = "GUL";
+"STROOP_COLOR_RED_INITIAL" = "R";
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+"STROOP_COLOR_YELLOW_INITIAL" = "G";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktivitet vurderer din evne til at løse opgaver.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flyt hele stakken til den markerede platform med så få træk som muligt.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs opgaven";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antal træk: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg kan ikke løse opgaven";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption skal være venstre eller højre";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Bevægelighed af venstre knæ";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevægelighed af højre knæ";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktivitet måler, hvor langt du kan strække dit venstre knæ ud.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktivitet måler, hvor langt du kan strække dit højre knæ ud.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sæt dig på kanten af en stol. Når du starter, anbringer du din enhed på dit venstre knæ for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sæt dig på kanten af en stol. Når du starter, anbringer du din enhed på dit højre knæ for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Anbring din enhed på dit venstre knæ med skærmen udad som vist på billedet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Anbring din enhed på dit højre knæ med skærmen udad som vist på billedet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at starte og strække dit venstre knæ så langt frem, som du kan. Tryk igen, når du er færdig.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at starte og strække dit højre knæ så langt frem, som du kan. Tryk igen, når du er færdig.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring din enhed på dit venstre knæ";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring din enhed på dit højre knæ";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Stræk dit venstre knæ. Tryk derefter et tilfældigt sted.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Stræk dit højre knæ. Tryk derefter et tilfældigt sted.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bevægelighed af venstre skulder";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Bevægelighed af højre skulder";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Denne aktivitet måler, hvor langt du kan strække din venstre skulder ud.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Denne aktivitet måler, hvor langt du kan strække din højre skulder ud.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Når du starter, anbringer du din enhed på din venstre skulder for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Når du starter, anbringer du din enhed på din højre skulder for at tage et mål. Slå lyden til på din enhed, så du kan høre instruktioner.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Anbring din enhed på din venstre skulder med skærmen udad som vist på billedet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Anbring din enhed på din højre skulder med skærmen udad som vist på billedet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, skal du trykke på skærmen for at starte og løfte din venstre arm så højt op, som du kan. Tryk igen, når du er færdig.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, skal du trykke på skærmen for at starte og løfte din højre arm så højt op, som du kan. Tryk igen, når du er færdig.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Anbring din enhed på din venstre skulder";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Anbring din enhed på din højre skulder";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Løft din venstre arm. Tryk derefter et tilfældigt sted.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Løft din højre arm. Tryk derefter et tilfældigt sted.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Tosidig krykke";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Gangstativ/rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Gå op til %@ i en lige linje.";
-"TIMED_WALK_INSTRUCTION_2" = "Vend om, og gå tilbage til det sted, hvor du startede.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tryk på OK, når du er færdig.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Vend om.";
+"TIMED_WALK_INSTRUCTION_2" = "Gå tilbage til det sted, hvor du startede.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tryk på Næste, når du er færdig.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "Jeg kan ikke udføre denne aktivitet med min HØJRE hånd.";
 "TREMOR_SKIP_NEITHER" = "Jeg kan udføre denne aktivitet med begge hænder.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Sportest";
+"TRAILMAKING_INTENDED_USE" = "Denne aktivitet evaluerer din visuelle opmærksom og evne til at skifte mellem opgaver ved at registrere, hvor lang tid det tager at trykke på en række prikker i rækkefølge.";
+"TRAILMAKING_INTENDED_USE2_A" = "Efter nedtællingen skal du trykke på prikker i skiftende rækkefølge mellem tal og bogstaver. Start med at trykke på det første tal “1” efterfulgt af tallene “2” – “3” – “4”…, indtil du når tallet “7”.";
+"TRAILMAKING_INTENDED_USE2_B" = "Efter nedtællingen skal du trykke på prikker i skiftende rækkefølge mellem tal og bogstaver. Start med at trykke på det første tal “1”, derefter på det første bogstav “A”, så “2” – “B” – “3” – “C”…, indtil du når tallet “7”.";
+"TRAILMAKING_INTRO_TEXT" = "Gør det så hurtigt, som du kan, uden at lave fejl. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d fejl)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d fejl)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne tilstrækkeligt med logarkiver til at nå grænsen";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Taget billede";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Eksempel på videooptagelse";
-"AX_VIDEO_CAPTURED_LABEL" = "Optaget video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videooptagelse færdig";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke anbringe ring i størrelse %@ på ring i størrelse %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Stak består af";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Lydsøjlegraf";
