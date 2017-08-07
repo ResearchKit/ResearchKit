@@ -90,3 +90,6 @@ If you do not explicitly set a log level, `ORK_LOG_LEVEL_WARNING=1` is used by d
 You have to set any of these preprocessor macros in your ResearchKit subproject, not in your main project. Within *Xcode*, you can do so by setting any of them in the `Preprocessor Macros` list on the `Build Settings` of your `ResearchKit` framework target.
 
 See these resources if you are using ResearchKit through CocoaPods and need to change the log level: [[1]](http://stackoverflow.com/a/30038120/269753) [[2]](http://www.mokacoding.com/blog/cocoapods-and-custom-build-configurations/).
+
+##Digital Object Identifier for ResearchKit 
+The ResearchKit repository has an assigned digital object identifier (DOI), which is a persistent identifier that can be used to reference ResearchKit in academic papers. The DOI is registered on zenodo.org.  See  https://doi.org/10.5281/zenodo.826964 .

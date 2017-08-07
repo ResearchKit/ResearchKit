@@ -10,7 +10,7 @@ the user to walk a short distance, while collecting accelerometer data on the de
 
 ##Predefined Active Tasks
 
-The ResearchKit™ framework includes a number of predefined tasks, which fall into six categories: motor activities, fitness, cognition, voice, audio, and hole peg. The table below summarizes each task and describes the data it generates.
+The ResearchKit™ framework includes a number of predefined tasks, which fall into six categories: motor activities, fitness, cognition, voice, audio, and hand dexterity. The table below summarizes each task and describes the data it generates.
 
 <table>
 <caption>Active Tasks in ResearchKit</caption>
@@ -64,11 +64,11 @@ Touch activity<br>Correct answer<br> Actual sequences
 
 <tr><td><a href="#stroop">Stroop Test</a></td> 
 <td>Multi-Touch display</td> 
-  <td>Results from user</td> 
+  <td>Actual color<br>Actual text<br>User selection<br>Completion time </td> 
 </tr>
-<tr><td><a href="#trail">Trail Making Test (PSAT)</a></td> 
+<tr><td><a href="#trail">Trail Making Test</a></td> 
 <td>Multi-Touch display</td> 
-  <td>Results from user</td> 
+  <td>Completion time<br>Touch activity</td> 
 </tr>
 
 <tr><td><a href="#paced">Paced Serial Addition Test (PSAT)</a></td> 
@@ -108,12 +108,6 @@ to recognize the sound<br>
 <td>Completion time<br>Move distance
    </td> 
 </tr>
-<tr><td>Other</td>
- <td><a href="#touch">Touch Anywhere</td>
- <td>Multi-Touch display</td>
-<td>None; used to move to the next screen.<br>
-   </td> 
-</tr>
 </tbody>
 </table>
 
@@ -126,7 +120,7 @@ included in the framework by passing appropriate options when you create an acti
 You can use options flags to exclude data collection for data types that are not needed for your study. For example, to perform the fitness task without recording heart rate data, use the `ORKPredefinedTaskOptionExcludeHeartrate` option.
 
 ## Range of Motion Test<a name="range"></a>
-In the range of motion test, participants follow movement instructions while accelerometer and gyroscope data is captured to measure flexed and extended positions for shoulders and knees.The screenshots below show examples of range of motion tasks for knee and shoulder.
+In the range of motion test, participants follow movement instructions while accelerometer and gyroscope data is captured to measure flexed and extended positions for the shoulder or knee.The screenshots below show examples of range of motion tasks for knee and shoulder.
 
 ###Range of motion test for a knee
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/knee_1.png" style="width: 100%;border: solid black 1px; ">Instruction step giving motivation for the task.</p>
@@ -150,14 +144,6 @@ In the range of motion test, participants follow movement instructions while acc
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/shoulder_7.png" style="width: 100%;border: solid black 1px;">Confirms task completion.</p>
 <p style="clear: both;"></p>
 
-## Touch Anywhere Task<a name="touch"></a>
-The touch anywhere task is a simple screen that waits until the participant touches the screen before displaying the next screen. Use this task to allow participants to indicate when they are ready to move on to the next screen. For example, you can use the touch anywhere task after instructing the user to position their device for a test, as the <a href="#range">Range of Motion</a> active task does:
-
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/shoulder_4.png" style="width: 100%;border: solid black 1px; ">Instructions with an illustration.</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/shoulder_5.png" style="width: 100%;border: solid black 1px;">A touch anywhere step.</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/shoulder_6.png" style="width: 100%;border: solid black 1px;">A touch anywhere step with audible instructions.</p>
-<p style="clear: both;"></p>
-
 ## Stroop Test<a name="stroop"></a>
 In the Stroop test, the participant is shown a series of words that are displayed in color, and must select the first letter of the color's name. The screenshots below show an example of a Stroop test active task.
 
@@ -166,7 +152,7 @@ In the Stroop test, the participant is shown a series of words that are displaye
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/stroop_3.png" style="width: 100%;border: solid black 1px;">Further instructions.</p>
 <p style="clear: both;"></p>
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/stroop_4.png" style="width: 100%;border: solid black 1px; ">Count down a specified duration to begin the activity.</p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/stroop_5.png" style="width: 100%;border: solid black 1px;">A typical Stroop test screen.</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/stroop_5.png" style="width: 100%;border: solid black 1px;">A typical Stroop test screen. The correct answer in this example is "B" for blue.</p>
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/stroop_6.png" style="width: 100%;border: solid black 1px;">Confirms task completion.</p>
 <p style="clear: both;"></p>
 
@@ -330,11 +316,6 @@ The screenshots below show an example of a tone audiometry task.
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/tone_4.png" style="width: 100%;border: solid black 1px; ">Count down a specified duration to begin the activity.</p>
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/tone_5.png" style="width: 100%;border: solid black 1px;">The tone test screen with buttons for left and right ears.</p>
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ActiveTaskImages/tone_6.png" style="width: 100%;border: solid black 1px;">Confirms task completion.</p>
-<p style="clear: both;"></p>
-
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep1.png" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep2.png" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep3.png" style="width: 100%;border: solid black 1px;">Preparing user for the task.</p>
-<p style="clear: both;"></p>
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep4.png" style="width: 100%;border: solid black 1px; ">Count down a specified duration to begin the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep5.png" style="width: 100%;border: solid black 1px;">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep6.png" style="width: 100%;border: solid black 1px;">Confirms task completion.</p>
 <p style="clear: both;"></p>
 
 ## Tower Of Hanoi <a name="tower"></a>
