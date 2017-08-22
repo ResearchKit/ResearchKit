@@ -67,23 +67,6 @@ Creating a step as shown in the code above, including it in a task, and presenti
 </figure>
 </center>
 
-### Video Instruction Step
-
-A video instruction step can be used to play a video from a local or remote source. The screen shows a preview image of the video, and begins playback when the user taps the image.
-
-    ORKVideoInstructionStep *videoInstructionStep = [[ORKVideoInstructionStep alloc] initWithIdentifier:@"videoInstructionStep"];
-        videoInstructionStep.text = @"Video Instruction Step";
-        videoInstructionStep.videoURL = [[NSURL alloc] initWithString:@"https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov"];
- 
-The example code above produces a video step as shown below. 
-
-<center>
-<figure>
-<img src="SurveyImages/video_1.png" width="25%" alt="Video Instruction Step"  style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Example of a video instruction step.</center></figcaption>
-</figure>
-</center>
-
 
 ### Question Step
 
