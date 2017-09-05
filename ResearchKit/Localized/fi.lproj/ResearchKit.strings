@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Tyyppi I";
+"FITZPATRICK_SKIN_TYPE_II" = "Tyyppi II";
+"FITZPATRICK_SKIN_TYPE_III" = "Tyyppi III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Tyyppi IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Tyyppi V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Tyyppi VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Nainen";
 "GENDER_MALE" = "Mies";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "vasen";
+"LIMB_RIGHT" = "oikea";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Vastaa napauttamalla";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Tallenna";
 "BUTTON_CLEAR_ANSWER" = "Tyhjennä vastaus";
 "BUTTON_READ_ONLY_MODE" = "Tätä vastausta ei voida muuttaa.";
+"BUTTON_COPYRIGHT" = "Tekijänoikeudet";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktiviteetti alkaa";
 "TASK_COMPLETE_TITLE" = "Aktiviteetti valmis";
 "TASK_COMPLETE_TEXT" = "Datasi analysoidaan ja sinulle ilmoitetaan, kun tuloksesi ovat valmiina.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekuntia jäljellä.";
+"TOUCH_ANYWHERE_LABEL" = "Jatka koskettamalla mihin tahansa";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kaappaa kuva";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti mittaa kykyäsi kuulla erilaisia ääniä.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Ennen aloittamista liitä kuulokkeet ja laita ne korvillesi.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Ennen kuin aloitat, liitä kuulokkeet ja laita ne päälle.\n\nÄäni on hyvin huomaamaton ja erilainen kuin tavalliset merkkiäänet. Ääni alkaa hiljaisena ja vahvistuu sitten. Ole tarkkaavainen ja napauta vasenta tai oikeaa painiketta riippuen siitä, kummalla korvalla kuulet äänen.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Sinun pitäisi nyt kuulla ääni. Säädä voimakkuutta laitteen sivussa olevilla säätimillä.\n\nNapauta painiketta kun olet valmis aloittamaan.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Napauta painiketta heti, kun alat kuulla äänen.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Sinun pitäisi nyt kuulla ääni. Säädä voimakkuutta laitteen sivussa olevilla säätimillä.\n\nNapauta jotakin painiketta kun olet valmis aloittamaan.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Kun kuulet äänen, napauta vasenta tai oikeaa painiketta riippuen siitä, kummalla korvalla kuulet äänen.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Vasen korva";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Oikea korva";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, vasen";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, oikea";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Peli päättyi";
 "MEMORY_GAME_PAUSED_TITLE" = "Keskeytetty";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Jatka napauttamalla Seuraava";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Muisti-aktiviteetti on kehitetty University of California, San Franciscon PhD Katherine Possinin ja PhD Joel Kramerin avustuksella.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaktioaika";
@@ -318,6 +335,20 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Yritys %@ / %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kun sininen ympyrä tulee näkyviin, ravista nopeasti laitetta";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Kun sana tulee näkyviin, valitse näytettävän VÄRIN nimen ensimmäinen kirjain.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Kun olet valmis aloittamaan Stroop-aktiviteetin, napauta Aloita.";
+"STROOP_TASK_STEP_TEXT" = "Valitse näytettävän VÄRIN nimen ensimmäinen kirjain.";
+"STROOP_COLOR_RED" = "PUNAINEN";
+"STROOP_COLOR_GREEN" = "VIHREÄ";
+"STROOP_COLOR_BLUE" = "SININEN";
+"STROOP_COLOR_YELLOW" = "KELTAINEN";
+"STROOP_COLOR_RED_INITIAL" = "P";
+"STROOP_COLOR_GREEN_INITIAL" = "V";
+"STROOP_COLOR_BLUE_INITIAL" = "S";
+"STROOP_COLOR_YELLOW_INITIAL" = "K";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanoin torni";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Tämä aktiviteetti arvioi ongelmanratkaisukykyä.";
@@ -326,6 +357,41 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Ratkaise tehtävä";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Siirtojen määrä: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "En osaa ratkaista tätä tehtävää";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption on oltava vasen tai oikea";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Vasemman polven liikealue";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Oikean polven liikealue";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Tämä aktiviteetti mittaa kuinka pitkälle voit ojentaa vasemman polvesi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Tämä aktiviteetti mittaa kuinka pitkälle voit ojentaa oikean polvesi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Istu tuolin reunalle. Aloitettaessa laite asetetaan mittausta varten vasemmalle polvelle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Istu tuolin reunalle. Aloitettaessa laite asetetaan mittausta varten oikealle polvelle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aseta laite vasemmalle polvelle näyttö ulospäin, kuten kuvassa.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle polvelle näyttö ulospäin, kuten kuvassa.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, napauta näyttöä ja ojenna vasen polvi niin pitkälle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, napauta näyttöä ja ojenna oikea polvi niin pitkälle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle polvelle";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle polvelle";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ojenna vasen polvi suoraksi. Napauta sitten johonkin.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ojenna oikea polvi suoraksi. Napauta sitten johonkin.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Vasemman olkapään liikealue";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Oikean olkapään liikealue";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Tämä aktiviteetti mittaa kuinka pitkälle voit ojentaa vasemman olkapääsi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Tämä aktiviteetti mittaa kuinka pitkälle voit ojentaa oikean olkapääsi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Aloitettaessa laite asetetaan mittausta varten vasemmalle olkapäälle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Aloitettaessa laite asetetaan mittausta varten oikealle olkapäälle. Laita laitteesi ääni päälle, jotta kuulet ohjeet.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aseta laite vasemmalle olkapäälle näyttö ulospäin, kuten kuvassa.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aseta laite oikealle olkapäälle näyttö ulospäin, kuten kuvassa.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Kun olet valmis, napauta näyttöä ja nosta vasen käsi niin korkealle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Kun olet valmis, napauta näyttöä ja nosta oikea käsi niin korkealle kuin pystyt. Kun olet tehnyt tämän, napauta uudelleen.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aseta laite vasemmalle olkapäälle";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aseta laite oikealle olkapäälle";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nosta vasen käsi ylös. Napauta sitten johonkin.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nosta oikea käsi ylös. Napauta sitten johonkin.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Ajoitettu kävely";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Kaksi kainalosauvaa";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Kävelytuki/rollaattori";
 "TIMED_WALK_INSTRUCTION_%@" = "Kävele %@ suoraan.";
-"TIMED_WALK_INSTRUCTION_2" = "Käänny ympäri ja kävele takaisin alkupisteeseen.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Kun se on tehty, napauta Valmis.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Käänny ympäri.";
+"TIMED_WALK_INSTRUCTION_2" = "Kävele takaisin alkupisteeseen.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Kun se on tehty, napauta Seuraava.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "En voi suorittaa tätä aktiviteettia OIKEALLA kädellä.";
 "TREMOR_SKIP_NEITHER" = "Voin suorittaa tämän aktiviteetin molemmilla käsillä.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trail Making Test";
+"TRAILMAKING_INTENDED_USE" = "Tämä aktiviteetti arvioi visuaalista tarkkaavaisuutta ja tehtävänvaihtoa mittaamalla aikaa, joka kuluu pisteiden napautteluun järjestyksessä.";
+"TRAILMAKING_INTENDED_USE2_A" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten 2, 3, 4 jne., kunnes vastaan tulee numero 7.";
+"TRAILMAKING_INTENDED_USE2_B" = "Lähtölaskennan jälkeen napauttele pisteitä numeroiden ja kirjainten vuorottelevassa järjestyksessä. Aloita napauttamalla numeroa 1, napauta sitten kirjainta A. Jatka tätä järjestyksessä 2 ja B, 3 ja C jne., kunnes vastaan tulee numero 7.";
+"TRAILMAKING_INTRO_TEXT" = "Tee tämä niin nopeasti kuin kykenet tekemättä virheitä. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d virhe)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d virhettä)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tiedostoa ei voitu luoda";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Ei voitu poistaa riittävästi lokitiedostoja raja-arvon saavuttamiseksi.";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Kaapattu kuva";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Videokaappauksen esikatselu";
-"AX_VIDEO_CAPTURED_LABEL" = "Kaapattu video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Videon tallennus on valmis";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Koon %@ levyä ei voida laittaa koon %@ levyn päälle";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Kohde";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Pino, joka koostuu arvoista";
 "AX_GRAPH_AND_SEPARATOR" = " ja ";
 "AX_GRAPH_POINT_%@" = "Piste: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Äänipalkin graafi";

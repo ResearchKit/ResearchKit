@@ -48,7 +48,7 @@
     NSLayoutConstraint *_topConstraint;
 }
 
-@property  (nonatomic, strong, readonly) ORKProgressView *progressView;
+@property (nonatomic, strong, readonly) ORKProgressView *progressView;
 
 @end
 

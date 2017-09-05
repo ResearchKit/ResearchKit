@@ -46,7 +46,7 @@
     NSDate *timestamp = self.timestamp;
     CLFloor *floor = self.floor;
     
-    NSMutableDictionary *dictionary = [@{@"timestamp": ORKStringFromDateISO8601(timestamp)} mutableCopy];
+    NSMutableDictionary *dictionary = [@{ @"timestamp": ORKStringFromDateISO8601(timestamp) } mutableCopy];
     
     if (horizAccuracy >= 0) {
         dictionary[@"coordinate"] = @{ @"latitude": [NSDecimalNumber numberWithDouble:coord.latitude],

@@ -111,6 +111,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKSpatialSpanMemoryResult:
         providerType = SpatialSpanMemoryResultTableViewProvider.self
         
+    case is ORKStroopResult:
+        providerType = StroopResultTableViewProvider.self
+        
     case is ORKTappingIntervalResult:
         providerType = TappingIntervalResultTableViewProvider.self
     
@@ -134,6 +137,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
         
     case is ORKHolePegTestResult:
         providerType = HolePegTestResultTableViewProvider.self
+    
+    case is ORKTrailmakingResult:
+        providerType = TrailmakingResultTableViewProvider.self
         
     // All
     case is ORKTaskResult:
@@ -382,7 +388,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
         let location = questionResult.locationAnswer
-        let address = (location?.addressDictionary["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
+        let address = (location?.addressDictionary?["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
         let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
             ResultRow(text: "latitude", detail: location?.coordinate.latitude),
@@ -624,6 +630,40 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKStroopResult` instance.
+class StroopResultTableViewProvider: ResultTableViewProvider {
+    //MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+    
+        return "Samples"
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let stroopResult = result as! ORKStroopResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if (section == 0){
+            return rows
+        }
+        return [
+            ResultRow(text: "Color", detail: stroopResult.color),
+            ResultRow(text: "Text", detail: stroopResult.text),
+            ResultRow(text: "Color Selected", detail: stroopResult.colorSelected)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKTappingIntervalResult` instance.
 class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -709,9 +749,10 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
             let detail: String
             
             let channelName = toneSample.channel == .left ? "Left" : "Right"
+            let correct = toneSample.channelSelected == toneSample.channel ? "Correct" : "Incorrect"
             
             text = "\(toneSample.frequency) \(channelName)"
-            detail = "\(toneSample.amplitude)"
+            detail = "\(toneSample.amplitude) \(correct)"
             
             return ResultRow(text: text, detail: detail)
         }
@@ -807,6 +848,24 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
             ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
             ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
+    }
+}
+
+/// Table view provider specific to an `ORKTrailmaking` instance.
+class TrailmakingResultTableViewProvider: ResultTableViewProvider {
+//    MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return super.tableView(tableView, titleForHeaderInSection: 0)
+    }
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let rows = super.resultRowsForSection(section)
+        return rows
     }
 }
 

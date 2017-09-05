@@ -49,32 +49,28 @@
 
 #define BOUND(lo, hi, v) (((v) < (lo)) ? (lo) : (((v) > (hi)) ? (hi) : (v)))
 
-@interface ORKTrailmakingStepViewController ()
-
-@end
-
 
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
-    NSArray *testPoints;
-    ORKTrailMakingTypeIdentifier trailType;
-    int nextIndex;
-    int errors;
-    NSMutableArray *taps;
-    NSTimer *updateTimer;
-    UILabel *timerLabel;
+    NSArray *_testPoints;
+    ORKTrailMakingTypeIdentifier _trailType;
+    int _nextIndex;
+    int _errors;
+    NSMutableArray *_taps;
+    NSTimer *_updateTimer;
+    UILabel *_timerLabel;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
-        testPoints = [self fetchRandomTest];
-        taps = [NSMutableArray array];
+        _testPoints = [self fetchRandomTest];
+        _taps = [NSMutableArray array];
         
         if ([step isKindOfClass:[ORKTrailmakingStep class]]) {
-            trailType = [((ORKTrailmakingStep*)step) trailType];
+            _trailType = [((ORKTrailmakingStep*)step) trailType];
         } else {
-            trailType = ORKTrailMakingTypeIdentifierA;
+            _trailType = ORKTrailMakingTypeIdentifierA;
         }
     }
     return self;
@@ -91,7 +87,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _trailmakingContentView = [[ORKTrailmakingContentView alloc] initWithType:trailType];
+    _trailmakingContentView = [[ORKTrailmakingContentView alloc] initWithType:_trailType];
     
     self.activeStepView.activeCustomView = _trailmakingContentView;
     
@@ -99,23 +95,23 @@
         [b addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     }
     
-    timerLabel = [[UILabel alloc] init];
-    timerLabel.textAlignment = NSTextAlignmentCenter;
+    _timerLabel = [[UILabel alloc] init];
+    _timerLabel.textAlignment = NSTextAlignmentCenter;
     
-    [self.view addSubview:timerLabel];
+    [self.view addSubview:_timerLabel];
 }
 
 - (void)timerUpdated:(NSTimer*)timer {
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate: self.presentedDate];
     NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_TIMER", nil), elapsed];
     
-    if (errors == 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR", nil), text, errors];
-    } else if (errors > 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_PLURAL", nil), text, errors];
+    if (_errors == 1) {
+        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR", nil), text, _errors];
+    } else if (_errors > 1) {
+        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_PLURAL", nil), text, _errors];
     }
     
-    timerLabel.text = text;
+    _timerLabel.text = text;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -136,14 +132,14 @@
     
     CGRect labelRect = _trailmakingContentView.testArea;
     labelRect.size.height = 20;
-    [timerLabel setFrame:labelRect];
+    [_timerLabel setFrame:labelRect];
     
     CGRect r = _trailmakingContentView.testArea;
         
     int idx = 0;
     
     for (ORKRoundTappingButton* b in _trailmakingContentView.tapButtons) {
-        CGPoint pp = [[testPoints objectAtIndex:idx] CGPointValue];
+        CGPoint pp = [[_testPoints objectAtIndex:idx] CGPointValue];
         
         if (r.size.width > r.size.height)
         {
@@ -165,15 +161,15 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
+    _updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if (updateTimer != nil) {
-        [updateTimer invalidate];
-        updateTimer = nil;
+    if (_updateTimer != nil) {
+        [_updateTimer invalidate];
+        _updateTimer = nil;
     }
 }
 
@@ -185,26 +181,26 @@
         tap.timestamp = [[NSDate date] timeIntervalSinceDate: self.presentedDate];
         tap.index = buttonIndex;
         
-        if (buttonIndex == nextIndex) {
-            nextIndex++;
+        if (buttonIndex == _nextIndex) {
+            _nextIndex++;
             
-            _trailmakingContentView.linesToDraw = nextIndex - 1;
-            if (nextIndex == _trailmakingContentView.tapButtons.count) {
+            _trailmakingContentView.linesToDraw = _nextIndex - 1;
+            if (_nextIndex == _trailmakingContentView.tapButtons.count) {
                 [self performSelector:@selector(finish) withObject:nil afterDelay:1.5];
-                [updateTimer invalidate];
-                updateTimer = nil;
+                [_updateTimer invalidate];
+                _updateTimer = nil;
             }
             tap.incorrect = NO;
             
             [_trailmakingContentView clearErrors];
         } else {
-            errors++;
+            _errors++;
             tap.incorrect = YES;
             
             [_trailmakingContentView clearErrors];
             [_trailmakingContentView setError:(int)buttonIndex];
         }
-        [taps addObject:tap];
+        [_taps addObject:tap];
     }
 }
 
@@ -267,8 +263,8 @@
     ORKTrailmakingResult *trailmakingResult = [[ORKTrailmakingResult alloc] initWithIdentifier:self.step.identifier];
     trailmakingResult.startDate = stepResult.startDate;
     trailmakingResult.endDate = now;
-    trailmakingResult.taps = [taps copy];
-    trailmakingResult.numberOfErrors = errors;
+    trailmakingResult.taps = [_taps copy];
+    trailmakingResult.numberOfErrors = _errors;
     
     [results addObject:trailmakingResult];
     stepResult.results = [results copy];

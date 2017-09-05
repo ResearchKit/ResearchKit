@@ -151,8 +151,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
-                                              invalidMessage:(NSString *)invalidMessage;
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                                          invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -183,7 +183,7 @@ ORK_CLASS_AVAILABLE
  same way as a single-choice answer format with the choices Yes and No mapping to 
  `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
  `ORKTextChoiceAnswerFormat` with those options.
-*/
+ */
 - (ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
@@ -655,47 +655,6 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKNumberPickerAnswerFormat` class represents an answer format that lets participants use a
- value picker to choose from a fixed set of number choices.
- 
- When the number of choices is relatively large and the text that describes each choice
- is short, you might want to use the value picker answer format instead of the text choice answer
- format (`ORKTextChoiceAnswerFormat`). When the text that describes each choice is long, or there
- are only a very small number of choices, it's usually better to use the text choice answer format.
- 
- Note that the value picker answer format reports itself as being of the single choice question
- type. The value picker answer format produces an `ORKNumberQuestionResult` object.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKNumberPickerAnswerFormat : ORKAnswerFormat
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
- Returns a value picker answer format using the specified array of text choices.
- 
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
- each choice that is short enough to fit in a `UIPickerView` object.
- 
- @param textChoices     Array of `ORKTextChoice` objects.
- 
- @return An initialized value picker answer format.
- */
-- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
-
-/**
- An array of text choices that represent the options to display in the picker. (read-only)
- 
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
- each choice that is short enough to fit in a `UIPickerView` object.
- */
-@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
-
-@end
-
-
-/**
  The `ORKMultipleValuePickerAnswerFormat` class represents an answer format that lets participants use a
  multiple-component value picker to choose from a fixed set of text choices.
  
@@ -1134,6 +1093,14 @@ Returns an initialized numeric answer format using the specified style, unit des
  */
 @property (copy, nullable) NSNumber *maximum;
 
+/**
+ The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ numeric answer.
+ 
+ The default value of this property is `nil`, which means that no limit scale value is used.
+ */
+@property (copy, nullable) NSNumber *scale;
+
 @end
 
 
@@ -1282,13 +1249,13 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param validationRegex           The regular expression used to validate the text.
- @param invalidMessage            The text presented to the user when invalid input is received.
+ @param validationRegularExpression     The regular expression used to validate the text.
+ @param invalidMessage                  The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValidationRegularExpression:(NSRegularExpression *)validationRegularExpression
+                                     invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
@@ -1303,11 +1270,11 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
 /**
- The regex used to validate user's input.
+ The regular expression used to validate user's input.
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (nonatomic, copy, nullable) NSString *validationRegex;
+@property (nonatomic, copy, nullable) NSRegularExpression *validationRegularExpression;
 
 /**
  The text presented to the user when invalid input is received.
@@ -1363,7 +1330,7 @@ ORK_CLASS_AVAILABLE
  
  By default, the value of this property is NO.
  */
-@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+@property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end
 

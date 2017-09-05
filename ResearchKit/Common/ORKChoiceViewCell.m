@@ -41,6 +41,7 @@
 
 static const CGFloat LabelRightMargin = 44.0;
 
+
 @implementation ORKChoiceViewCell {
     UIImageView *_checkView;
     ORKSelectionTitleLabel *_shortLabel;
@@ -129,6 +130,11 @@ static const CGFloat LabelRightMargin = 44.0;
         [self.contentView addSubview:_longLabel];
     }
     return _longLabel;
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self updateSelectedItem];
 }
 
 - (void)updateSelectedItem {

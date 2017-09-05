@@ -92,6 +92,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case reactionTime
     case shortWalk
     case spatialSpanMemory
+    case stroop
     case timedWalk
     case timedWalkWithTurnAround
     case toneAudiometry
@@ -162,6 +163,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .reactionTime,
                     .shortWalk,
                     .spatialSpanMemory,
+                    .stroop,
                     .timedWalk,
                     .timedWalkWithTurnAround,
                     .toneAudiometry,
@@ -281,6 +283,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .spatialSpanMemory:
             return NSLocalizedString("Spatial Span Memory", comment: "")
+            
+        case .stroop:
+            return NSLocalizedString("Stroop", comment: "")
             
         case .timedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
@@ -465,6 +470,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case reactionTime
         case shortWalkTask
         case spatialSpanMemoryTask
+        case stroopTask
         case timedWalkTask
         case timedWalkWithTurnAroundTask
         case toneAudiometryTask
@@ -584,6 +590,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return spatialSpanMemoryTask
 
+        case .stroop:
+            return stroopTask
+            
         case .timedWalk:
             return timedWalkTask
 
@@ -996,9 +1005,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         let stepEmail = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
         stepEmail.text = exampleDetailText
         
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-        
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegex: domainRegex, invalidMessage:"Invalid URL: %@")
+        let domainRegularExpressionPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let domainRegularExpression = try! NSRegularExpression(pattern: domainRegularExpressionPattern)
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: domainRegularExpression, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = .URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
@@ -1197,10 +1206,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
         let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB]
-        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegex: passcodeValidationRegex, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
+        let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
@@ -1331,6 +1341,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents the Spatial Span Memory pre-defined active task.
     private var spatialSpanMemoryTask: ORKTask {
         return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing:Identifier.spatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
+    }
+    
+    /// This task presents the Stroop pre-defined active task.
+    private var stroopTask: ORKTask {
+        return ORKOrderedTask.stroopTask(withIdentifier: String(describing:Identifier.stroopTask), intendedUseDescription: exampleDescription, numberOfAttempts: 10, options: [])
     }
 
     /// This task presents the Timed Walk pre-defined active task.

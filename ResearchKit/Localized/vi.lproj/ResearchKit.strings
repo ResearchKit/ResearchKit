@@ -127,19 +127,19 @@
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Quên mật khẩu?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Nhập mã khóa";
-"PASSCODE_CONFIRM_MESSAGE" = "Xác nhận mã khóa";
-"PASSCODE_SAVED_MESSAGE" = "Đã lưu mã khóa";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Đã xác thực mã khóa";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Nhập mã khóa cũ của bạn";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Nhập mã khóa mới của bạn";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Xác nhận mã khóa mới của bạn";
-"PASSCODE_INVALID_ALERT_TITLE" = "Mã khóa Không đúng";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Các mã khóa không khớp. Thử lại.";
+"PASSCODE_PROMPT_MESSAGE" = "Nhập mật mã";
+"PASSCODE_CONFIRM_MESSAGE" = "Xác nhận mật mã";
+"PASSCODE_SAVED_MESSAGE" = "Đã lưu mật mã";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Đã xác thực mật mã";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Nhập mật mã cũ của bạn";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Nhập mật mã mới của bạn";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Xác nhận mật mã mới của bạn";
+"PASSCODE_INVALID_ALERT_TITLE" = "Mật mã không đúng";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Các mật mã không khớp. Thử lại.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Vui lòng xác thực bằng Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Lỗi Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Chỉ cho phép các ký tự số.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình nhập mã khóa";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình nhập mật mã";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Đã nhập %@ / %@ số";
 "PASSCODE_FORGOT_BUTTON_TITLE" = "Bạn quên mật mã?";
 
@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Loại I";
+"FITZPATRICK_SKIN_TYPE_II" = "Loại II";
+"FITZPATRICK_SKIN_TYPE_III" = "Loại III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Loại IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Loại V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Loại VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Nữ";
 "GENDER_MALE" = "Nam";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "trái";
+"LIMB_RIGHT" = "phải";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Chạm để trả lời";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Lưu";
 "BUTTON_CLEAR_ANSWER" = "Xóa câu trả lời";
 "BUTTON_READ_ONLY_MODE" = "Không thể sửa đổi câu trả lời này.";
+"BUTTON_COPYRIGHT" = "Bản quyền";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Bắt đầu hoạt động sau";
 "TASK_COMPLETE_TITLE" = "Hoạt động Hoàn thành";
 "TASK_COMPLETE_TEXT" = "Dữ liệu của bạn sẽ được phân tích và bạn sẽ được thông báo khi có kết quả.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Còn lại %@ giây.";
+"TOUCH_ANYWHERE_LABEL" = "Chạm vào bất kỳ đâu để tiếp tục";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Chụp Ảnh";
@@ -269,7 +283,7 @@
 "AUDIO_TASK_TITLE" = "Giọng nói";
 "AUDIO_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
 "AUDIO_INSTRUCTION" = "Nói “Aaaaah” vào micrô với thời gian dài nhất mà bạn có thể.";
-"AUDIO_INTRO_TEXT" = "Hít một hơi thật sâu và nói “Aaaaah” lâu hết mức có thể vào micrô. Giữ thật đều giọng nói để các thanh tiếng vẫn ở trong vùng màu lam.";
+"AUDIO_INTRO_TEXT" = "Hít một hơi thật sâu và nói “Aaaaah” lâu hết mức có thể vào micrô. Giữ thật đều giọng nói để các thanh tiếng vẫn ở trong vùng màu xanh dương.";
 "AUDIO_INTENDED_USE" = "Hoạt động này sẽ đánh giá giọng nói của bạn bằng cách ghi âm bằng micrô ở dưới đáy điện thoại.";
 "AUDIO_TOO_LOUD_LABEL" = "Quá To";
 "AUDIO_GENERIC_ERROR_LABEL" = "Không thể ghi âm";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Trắc thính Âm báo";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Hoạt động này giúp đánh giá khả năng nghe các âm thanh khác nhau của bạn.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Trước khi bạn bắt đầu, hãy cắm và đeo tai nghe.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Trước khi bạn bắt đầu, hãy cắm và đeo tai nghe của bạn.\n\nÂm thanh sẽ rất nhỏ và khác với âm báo thông thường. Âm thanh sẽ bắt đầu nhỏ và sau đó âm lượng sẽ tăng từ từ. Vui lòng tập trung và chạm vào nút bên trái hoặc phải để cho biết bạn nghe âm thanh ở bên tai nào.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Bây giờ, bạn sẽ nghe thấy âm báo. Điều chỉnh âm lượng bằng các bộ điều khiển ở bên hông thiết bị.\n\nChạm vào nút khi bạn sẵn sàng bắt đầu.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Chạm vào nút mỗi khi bạn bắt đầu nghe thấy âm thanh.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Bây giờ bạn sẽ nghe thấy một âm báo. Điều chỉnh âm lượng bằng cách điều khiển ở sườn của thiết bị.\n\nChạm vào bất kỳ nút nào khi bạn đã sẵn sàng bắt đầu.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Mỗi lần bạn bắt đầu nghe âm thanh, hãy chạm vào nút bên trái hoặc phải để cho biết bạn nghe âm thanh ở bên tai nào.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Tai trái";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Tai phải";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Trái";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Phải";
 
@@ -309,23 +325,73 @@
 "MEMORY_GAME_COMPLETE" = "Hoàn tất Trò chơi";
 "MEMORY_GAME_PAUSED_TITLE" = "Đã tạm dừng";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Để tiếp tục, hãy chạm vào Tiếp";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Hoạt động trí nhớ được phát triển với sự hỗ trợ từ Tiến sĩ Katherine Possin và Tiến sĩ Joel Kramer từ Trường đại học California, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Thời gian Phản ứng";
 "REACTION_TIME_TASK_INTENDED_USE" = "Hoạt động này giúp đánh giá thời gian bạn phản ứng trước gợi ý bằng hình ảnh.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Lắc thiết bị theo bất kỳ hướng nào ngay khi chấm màu lam xuất hiện trên màn hình. Bạn sẽ được yêu cầu làm việc này %D lần.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Lắc thiết bị theo bất kỳ hướng nào ngay khi chấm màu xanh dương xuất hiện trên màn hình. Bạn sẽ được yêu cầu làm việc này %D lần.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %@ / %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Lắc nhanh thiết bị khi vòng tròn màu lam xuất hiện";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Lắc nhanh thiết bị khi vòng tròn màu xanh dương xuất hiện";
+
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Mỗi lần một từ xuất hiện, hãy chọn chữ cái đầu tiên của tên MÀU được hiển thị.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Khi bạn đã sẵn sàng bắt đầu hoạt động Stroop, hãy chạm vào Bắt đầu.";
+"STROOP_TASK_STEP_TEXT" = "Chọn chữ cái đầu tiên của tên MÀU được hiển thị.";
+"STROOP_COLOR_RED" = "ĐỎ";
+"STROOP_COLOR_GREEN" = "XANH LỤC";
+"STROOP_COLOR_BLUE" = "XANH DƯƠNG";
+"STROOP_COLOR_YELLOW" = "VÀNG";
+"STROOP_COLOR_RED_INITIAL" = "Đ";
+"STROOP_COLOR_GREEN_INITIAL" = "L";
+"STROOP_COLOR_BLUE_INITIAL" = "D";
+"STROOP_COLOR_YELLOW_INITIAL" = "V";
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tháp Hà Nội";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Hoạt động này đánh giá các kỹ năng giải đố của bạn.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Di chuyển toàn bộ chồng đĩa đến bục được tô sáng với số lần di chuyển ít nhất có thể.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Giải đố";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Số lần Di chuyển: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tôi không thể giải câu đố này";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption phải là trái hoặc phải";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Phạm vi chuyển động của đầu gối chân trái";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Phạm vi chuyển động của đầu gối chân phải";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Hoạt động này đo khoảng cách mà bạn có thể duỗi đầu gối chân trái.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Hoạt động này đo khoảng cách mà bạn có thể duỗi đầu gối chân phải.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Ngồi xuống trên mép ghế. Khi bạn bắt đầu, bạn sẽ đặt thiết bị trên đầu gối chân trái để lấy số đo. Vui lòng bật âm thanh của thiết bị để bạn có thể nghe thấy các hướng dẫn.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Ngồi xuống trên mép ghế. Khi bạn bắt đầu, bạn sẽ đặt thiết bị trên đầu gối chân phải để lấy số đo. Vui lòng bật âm thanh của thiết bị để bạn có thể nghe thấy các hướng dẫn.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Đặt thiết bị trên đầu gối chân trái của bạn với màn hình hướng ra ngoài, giống như trong hình.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Đặt thiết bị trên đầu gối chân phải của bạn với màn hình hướng ra ngoài, giống như trong hình.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Khi đã sẵn sàng, hãy chạm vào màn hình để bắt đầu và duỗi đầu gối chân trái của bạn xa nhất có thể. Chạm lại khi bạn đã thực hiện xong.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Khi đã sẵn sàng, hãy chạm vào màn hình để bắt đầu và duỗi đầu gối chân phải của bạn xa nhất có thể. Chạm lại khi bạn đã thực hiện xong.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Đặt thiết bị trên đầu gối chân trái của bạn";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Đặt thiết bị trên đầu gối chân phải của bạn";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Duỗi đầu gối chân trái của bạn. Sau đó, chạm vào bất kỳ đâu.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Duỗi đầu gối chân phải của bạn. Sau đó, chạm vào bất kỳ đâu.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Phạm vi chuyển động của vai trái";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Phạm vi chuyển động của vai phải";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Hoạt động này đo khoảng cách mà bạn có thể duỗi vai trái.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Hoạt động này đo khoảng cách mà bạn có thể duỗi vai phải.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Khi bạn bắt đầu, bạn sẽ đặt thiết bị trên vai trái để lấy số đo. Vui lòng bật âm thanh của thiết bị để bạn có thể nghe thấy các hướng dẫn.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Khi bạn bắt đầu, bạn sẽ đặt thiết bị trên vai phải để lấy số đo. Vui lòng bật âm thanh của thiết bị để bạn có thể nghe thấy các hướng dẫn.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Đặt thiết bị trên vai trái của bạn với màn hình hướng ra ngoài, giống như trong hình.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Đặt thiết bị trên vai phải của bạn với màn hình hướng ra ngoài, giống như trong hình.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Khi đã sẵn sàng, hãy chạm vào màn hình để bắt đầu và nâng cánh tay trái của bạn xa nhất có thể. Chạm lại khi bạn đã thực hiện xong.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Khi đã sẵn sàng, hãy chạm vào màn hình để bắt đầu và nâng cánh tay phải của bạn xa nhất có thể. Chạm lại khi bạn đã thực hiện xong.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Đặt thiết bị trên vai trái của bạn";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Đặt thiết bị trên vai phải của bạn";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nâng cánh tay bên trái của bạn lên. Sau đó, chạm vào bất kỳ đâu.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nâng cánh tay bên phải của bạn lên. Sau đó, chạm vào bất kỳ đâu.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Đi bộ Tính giờ";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Nạng Đôi";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Khung tập đi/Xe lăn";
 "TIMED_WALK_INSTRUCTION_%@" = "Đi bộ tối đa %@ theo đường thẳng.";
-"TIMED_WALK_INSTRUCTION_2" = "Quay đầu lại và đi bộ về nơi bạn bắt đầu.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Chạm Xong khi hoàn tất.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Quay lại.";
+"TIMED_WALK_INSTRUCTION_2" = "Đi bộ trở về nơi bạn đã bắt đầu.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Chạm Tiếp khi hoàn tất.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -387,10 +454,10 @@
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "bốn nhiệm vụ";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "năm nhiệm vụ";
 "TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Chạm tiếp để tiếp tục.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Chuẩn bị giữ điện thoại trong vạt áo của bạn.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Chuẩn bị giữ điện thoại trong vạt áo bằng tay TRÁI của bạn.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Chuẩn bị giữ điện thoại trong vạt áo bằng tay PHẢI của bạn.";
-"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Tiếp tục giữ điện thoại trong vạt áo bạn trong %ld giây.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Chuẩn bị giữ điện thoại trên đùi của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Chuẩn bị giữ điện thoại trên đùi bằng tay TRÁI của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Chuẩn bị giữ điện thoại trên đùi bằng tay PHẢI của bạn.";
+"TREMOR_TEST_ACTIVE_STEP_IN_LAP_INSTRUCTION_%ld" = "Tiếp tục giữ điện thoại trên đùi của bạn trong %ld giây.";
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO" = "Bây giờ, hãy cầm điện thoại với tay của bạn duỗi ngang vai.";
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Bây giờ, hãy cầm điện thoại với tay TRÁI của bạn duỗi ngang vai.";
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Bây giờ, hãy cầm điện thoại với tay PHẢI của bạn duỗi ngang vai.";
@@ -415,6 +482,23 @@
 "TREMOR_SKIP_LEFT_HAND" = "Tôi không thể thực hiện hoạt động này bằng tay TRÁI.";
 "TREMOR_SKIP_RIGHT_HAND" = "Tôi không thể thực hiện hoạt động này bằng tay PHẢI.";
 "TREMOR_SKIP_NEITHER" = "Tôi có thể thực hiện hoạt động này bằng hai tay.";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Trắc nghiệm nối chuỗi";
+"TRAILMAKING_INTENDED_USE" = "Hoạt động này đánh giá khả năng tập trung thị giác và chuyển đổi nhiệm vụ bằng cách ghi lại thời gian cần thiết để chạm vào một chuỗi các dấu chấm theo thứ tự.";
+"TRAILMAKING_INTENDED_USE2_A" = "Sau thời gian đếm ngược, chạm vào các dấu chấm theo thứ tự luân phiên giữa các số và chữ cái. Bắt đầu bằng cách chạm vào số đầu tiên '1', tiếp theo là các số '2' – '3' – '4'… cho tới khi bạn đến số '7'.";
+"TRAILMAKING_INTENDED_USE2_B" = "Sau thời gian đếm ngược, chạm vào các dấu chấm theo thứ tự luân phiên giữa các số và chữ cái. Bắt đầu bằng cách chạm vào số đầu tiên '1', tiếp theo là chạm vào chữ cái đầu tiên 'A' và sau đó là '2' – 'B' – '3' – 'C'… cho tới khi bạn đến số '7'.";
+"TRAILMAKING_INTRO_TEXT" = "Thực hiện việc này nhanh nhất có thể mà không mắc lỗi. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"TRAILMAKING_TIMER" = "%.1f giây";
+"TRAILMAKING_ERROR" = "%@ (%d lỗi)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d lỗi)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Ảnh được chụp";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Xem trước quay video";
-"AX_VIDEO_CAPTURED_LABEL" = "Video được quay";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Hoàn tất quay video";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Không thể đặt đĩa có kích cỡ %@ lên trên đĩa có kích cỡ %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Đích";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Ngăn xếp bao gồm";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
 "AX_GRAPH_POINT_%@" = "Điểm: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Biểu đồ thanh âm thanh";

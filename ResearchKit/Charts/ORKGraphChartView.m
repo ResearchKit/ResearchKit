@@ -62,6 +62,7 @@
 
 @end
 
+
 @implementation ORKIBValueRangeGraphChartViewDataSource
 
 - (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
@@ -209,7 +210,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
     _decimalPlaces = decimalPlaces;
-    _decimalFormat = [NSString stringWithFormat:@"%%.%df", _decimalPlaces];
+    _decimalFormat = [NSString stringWithFormat:@"%%.%luf", (unsigned long)_decimalPlaces];
     [_yAxisView setDecimalPlaces:_decimalPlaces];
 }
 
@@ -1052,7 +1053,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 @end
 
-    
+
 @implementation ORKValueRangeGraphChartView {
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
             }
