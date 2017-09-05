@@ -1905,6 +1905,27 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
 
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_001" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormat]];
+            item.placeholder = @"Pick a weight (local system)";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_002" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric]];
+            item.placeholder = @"Pick a weight (metric system)";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_003" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC]];
+            item.placeholder = @"Pick a weight (imperial system)";
+            [items addObject:item];
+        }
+        
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
             item.placeholder = @"Pick a date";
@@ -3798,10 +3819,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKQuestionStep *step13 = [ORKQuestionStep questionStepWithIdentifier:@"step13" title:@"How many hours did you sleep last night?" answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
     // ORKHeightAnswerFormat
     ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"What is your height?" answer:[ORKAnswerFormat heightAnswerFormat]];
+    // ORKWeightAnswerFormat
+    ORKQuestionStep *step15 = [ORKQuestionStep questionStepWithIdentifier:@"step15" title:@"What is your weight?" answer:[ORKAnswerFormat weightAnswerFormat]];
     // ORKLocationAnswerFormat
-    ORKQuestionStep *step15 = [ORKQuestionStep questionStepWithIdentifier:@"step15" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
+    ORKQuestionStep *step16 = [ORKQuestionStep questionStepWithIdentifier:@"step16" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
 
-    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14, step15];
+    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14, step15, step16];
 }
 
 - (id<ORKTask>)makeEmbeddedReviewTask {

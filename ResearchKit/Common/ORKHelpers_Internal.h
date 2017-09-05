@@ -300,6 +300,33 @@ ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
     return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
 }
 
+ORK_INLINE void ORKKilogramsToWholeAndFractions(double kilograms, double *outWhole, double *outFraction) {
+    if (outWhole == NULL || outFraction == NULL) {
+        return;
+    }
+    *outWhole = floor(kilograms);
+    *outFraction = floor((kilograms - floor(kilograms)) * 100);
+}
+
+ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outWhole, double *outFraction) {
+    if (outWhole == NULL || outFraction == NULL) {
+        return;
+    }
+    double lbs = kilograms * 2.2046;
+    *outWhole = floor(lbs);
+    *outFraction = floor((lbs - floor(lbs)) * 100);
+}
+
+ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction) {
+    double kg = (whole + (fraction / 100));
+    return (floor(100*kg)/100);
+}
+
+ORK_INLINE double ORKPoundsAndOuncesToKilograms(double whole, double fraction) {
+    double kg = (whole + (fraction * 0.0625)) * 0.4536;
+    return (floor(100*kg)/100);
+}
+
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {

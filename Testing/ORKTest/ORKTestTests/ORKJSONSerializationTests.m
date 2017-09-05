@@ -432,6 +432,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKHeightAnswerFormat.useMetricSystem",
+                                              @"ORKWeightAnswerFormat.useMetricSystem",
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
@@ -847,6 +848,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        
                                        // For a specific class
                                        @"ORKHeightAnswerFormat.useMetricSystem",
+                                       @"ORKWeightAnswerFormat.useMetricSystem",
                                        @"ORKNavigablePageStep.steps",
                                        @"ORKPageStep.steps",
                                        @"ORKResult.saveable",

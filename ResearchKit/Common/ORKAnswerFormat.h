@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
 @class ORKHeightAnswerFormat;
+@class ORKWeightAnswerFormat;
 @class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
@@ -162,6 +163,9 @@ ORK_CLASS_AVAILABLE
 
 + (ORKHeightAnswerFormat *)heightAnswerFormat;
 + (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormat;
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1419,6 +1423,44 @@ ORK_CLASS_AVAILABLE
                                 accepted values.
  
  @return An initialized height answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
+
+/**
+ Indicates the measurement system used by the answer format.
+ */
+@property (readonly) ORKMeasurementSystem measurementSystem;
+
+@end
+
+
+/**
+ The `ORKWeightAnswerFormat` class represents the answer format for questions that require users
+ to enter a weight.
+ 
+ A weight answer format produces an `ORKNumericQuestionResult` object. The result is always reported
+ in the metric system using the `kg` unit.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWeightAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized weight answer format using the measurement system specified in the current
+ locale.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)init;
+
+/**
+ Returns an initialized weight answer format using the specified measurement system.
+ 
+ This method is the designated initializer.
+ 
+ @param measurementSystem   The measurement system to use. See `ORKMeasurementSystem` for the
+ accepted values.
+ 
+ @return An initialized weight answer format.
  */
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 

@@ -114,6 +114,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeHeight,
 
     /**
+     In a weight question, the participant can enter a weight by using a weight picker.
+     */
+    ORKQuestionTypeWeight,
+    
+    /**
      In a location question, the participant can enter a location using a map view.
      */
     ORKQuestionTypeLocation
@@ -262,7 +267,7 @@ typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
 /**
  System of measurements.
  
- Used mainly by ORKHeightAnswerFormat.
+ Used mainly by ORKHeightAnswerFormat and ORKWeightAnswerFormat.
  */
 typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
     /// Measurement system in use by the current locale.

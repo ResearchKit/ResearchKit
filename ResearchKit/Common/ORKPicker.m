@@ -33,6 +33,7 @@
 
 #import "ORKDateTimePicker.h"
 #import "ORKHeightPicker.h"
+#import "ORKWeightPicker.h"
 #import "ORKTimeIntervalPicker.h"
 #import "ORKValuePicker.h"
 #import "ORKMultipleValuePicker.h"
@@ -59,6 +60,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
         picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKWeightAnswerFormat class]]) {
+        picker = [[ORKWeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
         picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
@@ -89,6 +92,8 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKHeightAnswerFormat class]]) {
         picker = [[ORKHeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
+    } else if ([answerFormat isKindOfClass:[ORKWeightAnswerFormat class]]) {
+        picker = [[ORKWeightPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKMultipleValuePickerAnswerFormat class]]) {
         picker = [[ORKMultipleValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }

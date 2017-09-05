@@ -100,6 +100,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case twoFingerTappingInterval
     case walkBackAndForth
     case heightQuestion
+    case weightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case trailMaking
@@ -130,6 +131,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .dateQuestion,
                     .dateTimeQuestion,
                     .heightQuestion,
+                    .weightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -204,6 +206,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .heightQuestion:
             return NSLocalizedString("Height Question", comment: "")
     
+        case .weightQuestion:
+            return NSLocalizedString("Weight Question", comment: "")
+            
         case .imageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -363,6 +368,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         case heightQuestionStep2
         case heightQuestionStep3
 
+        // Task with an example of weight entry.
+        case weightQuestionTask
+        case weightQuestionStep1
+        case weightQuestionStep2
+        case weightQuestionStep3
+        
         // Task with an image choice question.
         case imageChoiceQuestionTask
         case imageChoiceQuestionStep
@@ -506,6 +517,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .heightQuestion:
             return heightQuestionTask
+            
+        case .weightQuestion:
+            return weightQuestionTask
             
         case .imageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -757,6 +771,29 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3])
     }
 
+    /// This task demonstrates a question asking for the user weight.
+    private var weightQuestionTask: ORKTask {
+        let answerFormat1 = ORKAnswerFormat.weightAnswerFormat()
+        
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight (local system)", answer: answerFormat1)
+        
+        step1.text = exampleDetailText
+        
+        let answerFormat2 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric)
+        
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight (metric system)", answer: answerFormat2)
+        
+        step2.text = exampleDetailText
+        
+        let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
+        
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight (USC system)", answer: answerFormat3)
+        
+        step2.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3])
+    }
+    
     /**
     This task demonstrates a survey question involving picking from a series of
     image choices. A more realistic applciation of this type of question might be to

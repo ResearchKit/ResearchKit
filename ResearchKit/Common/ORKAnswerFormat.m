@@ -76,6 +76,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
             SQT_CASE(Height);
+            SQT_CASE(Weight);
             SQT_CASE(Location);
     }
 #undef SQT_CASE
@@ -411,6 +412,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
     return [[ORKHeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem];
+}
+
++ (ORKWeightAnswerFormat *)weightAnswerFormat {
+    return [[ORKWeightAnswerFormat alloc] init];
+}
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
+    return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem];
 }
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat {
@@ -2723,6 +2732,101 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
             NSString *inchesString = [formatter stringFromNumber:@(inches)];
             answerString = [NSString stringWithFormat:@"%@ %@, %@ %@",
                             feetString, ORKLocalizedString(@"MEASURING_UNIT_FT", nil), inchesString, ORKLocalizedString(@"MEASURING_UNIT_IN", nil)];
+        }
+    }
+    return answerString;
+}
+
+@end
+
+
+#pragma mark - ORKWeightAnswerFormat
+
+@implementation ORKWeightAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKNumericQuestionResult class];
+}
+
+- (NSString *)canonicalUnitString {
+    return @"kg";
+}
+
+- (ORKNumericQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(NSNumber *)answer {
+    ORKNumericQuestionResult *questionResult = (ORKNumericQuestionResult *)[super resultWithIdentifier:identifier answer:answer];
+    // Use canonical unit because we expect results to be consistent regardless of the user locale
+    questionResult.unit = [self canonicalUnitString];
+    return questionResult;
+}
+
+- (instancetype)init {
+    self = [self initWithMeasurementSystem:ORKMeasurementSystemLocal];
+    return self;
+}
+
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
+    self = [super init];
+    if (self) {
+        _measurementSystem = measurementSystem;
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.measurementSystem == castObject.measurementSystem));
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ _measurementSystem;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_ENUM(aDecoder, measurementSystem);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, measurementSystem);
+}
+
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeWeight;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)useMetricSystem {
+    return _measurementSystem == ORKMeasurementSystemMetric
+    || (_measurementSystem == ORKMeasurementSystemLocal && ((NSNumber *)[[NSLocale currentLocale] objectForKey:NSLocaleUsesMetricSystem]).boolValue);
+}
+
+- (NSString *)stringForAnswer:(id)answer {
+    NSString *answerString = nil;
+    
+    if (!ORKIsAnswerEmpty(answer)) {
+        NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
+        if (self.useMetricSystem) {
+            double whole, fraction;
+            ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
+            NSString *wholeString = [formatter stringFromNumber:@(whole)];
+            NSString *fractionString = [formatter stringFromNumber:@(fraction)];
+            answerString = [NSString stringWithFormat:@"%@.%@ %@", wholeString, fractionString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
+        } else {
+            double whole, fraction;
+            ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
+            NSString *wholeString = [formatter stringFromNumber:@(whole)];
+            NSString *fractionString = [formatter stringFromNumber:@(fraction)];
+            answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), fractionString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
         }
     }
     return answerString;
