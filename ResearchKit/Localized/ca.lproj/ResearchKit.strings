@@ -90,7 +90,7 @@
 "LOCATION_QUESTION_PLACEHOLDER" = "Escriu una adreça";
 "LOCATION_ERROR_TITLE" = "No s’ha trobat l‘adreça especificada";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No s’ha pogut determinar la ubicació actual. Escriu una adreça o vés a un lloc que tingui un senyal de GPS més bo, si pot ser.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’aplicació utilitzi els serveis de localització des de Configuració.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’app utilitzi els serveis de localització des de Configuració.";
 "LOCATION_ERROR_GEOCODE" = "No s’ha trobat cap resultat per a l’adreça especificada. Comprova que sigui vàlida.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "O no tens connexió a Internet o has superat el nombre màxim de peticions de cerca d’adreces. Si no tens connexió a Internet, activa la Wi-Fi per contestar aquesta pregunta, passa aquesta pregunta si hi ha disponible un botó d’omissió o recupera l’enquesta quan et puguis connectar a Internet. També pots tornar-ho a provar d’aquí a una mica.";
 
@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Tipus I";
+"FITZPATRICK_SKIN_TYPE_II" = "Tipus II";
+"FITZPATRICK_SKIN_TYPE_III" = "Tipus III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Tipus IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Tipus V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Tipus VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Dona";
 "GENDER_MALE" = "Home";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "esquerra";
+"LIMB_RIGHT" = "dreta";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Prémer per contestar";
@@ -198,18 +210,20 @@
 "BUTTON_SAVE" = "Desar";
 "BUTTON_CLEAR_ANSWER" = "Esborrar la resposta";
 "BUTTON_READ_ONLY_MODE" = "Aquesta resposta no es pot modificar.";
+"BUTTON_COPYRIGHT" = "Copyright";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Iniciant l’activitat en";
 "TASK_COMPLETE_TITLE" = "Activitat completada";
 "TASK_COMPLETE_TEXT" = "S’analitzaran les dades i rebràs una notificació quan tinguis els resultats a punt.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Queden %@ segons.";
+"TOUCH_ANYWHERE_LABEL" = "Toca a qualsevol lloc per continuar";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar la imatge";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tornar a capturar la imatge";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No s’ha trobat cap càmera. Aquest pas no es pot completar.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "Per completar aquest pas, permet que aquesta aplicació tingui accés a la càmera a Configuració.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Per completar aquest pas, permet que aquesta app tingui accés a la càmera a Configuració.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida per a les imatges capturades.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No s’ha pogut desar la imatge capturada.";
 
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aquesta activitat mesura la capacitat de sentir diversos sons.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecta i posa’t els auriculars.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecta els auriculars i posa-te’ls.\n\nEl so serà molt subtil, diferent d’un so d’avís normal. El so començarà baix i anirà pujant de volum. Presta atenció i toca el botó esquerre o el dret per indicar l’orella per on sents el so.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauries d’escoltar un to. Ajusta el volum amb els controls de la part lateral del dispositiu.\n\nPrem el botó quan estiguis a punt per començar.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Prem el botó cada vegada que comencis a escoltar un so.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauries d’escoltar un to. Ajusta el volum amb els controls de la part lateral del dispositiu.\n\nPrem qualsevol botó quan estiguis a punt per començar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Cada cop que comencis a sentir un so, toca el botó esquerre o el dret per indicar per quina orella el sents.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Orella esquerra";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Orella dreta";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, esquerra";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, dreta";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Joc completat";
 "MEMORY_GAME_PAUSED_TITLE" = "En pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Per continuar, prem Següent";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "L’activitat de memòria s’ha desenvolupat amb l’ajuda de la Dra. Katherine Possin i el Dr. Joel Kramer, de la Universitat de Califòrnia, San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Temps de reacció";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agita ràpidament el dispositiu quan aparegui el cercle blau";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Colors i paraules";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Cada cop que aparegui una paraula, selecciona la primera lletra del nom del COLOR que es mostra.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Quan estiguis a punt per començar l’activitat “Colors i paraules”, prem Començar.";
+"STROOP_TASK_STEP_TEXT" = "Selecciona la primera lletra del nom del COLOR que es mostra.";
+"STROOP_COLOR_RED" = "ROIG";
+"STROOP_COLOR_GREEN" = "VERD";
+"STROOP_COLOR_BLUE" = "BLAU";
+"STROOP_COLOR_YELLOW" = "GROC";
+"STROOP_COLOR_RED_INITIAL" = "R";
+"STROOP_COLOR_GREEN_INITIAL" = "V";
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+"STROOP_COLOR_YELLOW_INITIAL" = "G";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aquesta activitat valora la teva capacitat de resoldre trencaclosques.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Trasllada tota la pila a la plataforma ressaltada en el mínim de moviments possibles.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Per iniciar, prem Començar";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resol el joc";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Nombre de moviments: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No puc resoldre aquest joc";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption ha de ser dreta o esquerra";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Rang de moviment del genoll esquerre";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Rang de moviment del genoll dret";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aquesta activitat mesura el grau d’extensió del teu genoll esquerre.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aquesta activitat mesura el grau d’extensió del teu genoll dret.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Seu a la punta d’una cadira. Quan comencis, et posaràs el dispositiu a sobre del genoll esquerre per prendre una mesura. Activa el so del dispositiu per poder sentir les instruccions.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Seu a la punta d’una cadira. Quan comencis, et posaràs el dispositiu a sobre del genoll dret per prendre una mesura. Activa el so del dispositiu per poder sentir les instruccions.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Posa’t el dispositiu a sobre del genoll esquerre amb la pantalla cap enfora, tal com es mostra.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Posa’t el dispositiu a sobre del genoll dret amb la pantalla cap enfora, tal com es mostra.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Quan estiguis a punt, prem la pantalla per començar i estén el genoll esquerre tant com puguis. Torna a prémer quan hagis acabat.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Quan estiguis a punt, prem la pantalla per començar i estén el genoll dret tant com puguis. Torna a prémer quan hagis acabat.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posa’t el dispositiu a sobre del genoll esquerre";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posa’t el dispositiu a sobre del genoll dret";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Estén el genoll esquerre. Tot seguit, prem a qualsevol lloc.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Estén el genoll dret. Tot seguit, prem a qualsevol lloc.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Rang de moviment de l’espatlla esquerra";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Rang de moviment de l’espatlla dreta";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aquesta activitat mesura el grau d’extensió de la teva espatlla esquerra.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aquesta activitat mesura el grau d’extensió de la teva espatlla dreta.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Quan comencis, et posaràs el dispositiu a sobre de l’espatlla esquerra per prendre una mesura. Activa el so del dispositiu per poder sentir les instruccions.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Quan comencis, et posaràs el dispositiu a sobre de l’espatlla dreta per prendre una mesura. Activa el so del dispositiu per poder sentir les instruccions.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Posa’t el dispositiu a sobre de l’espatlla esquerra amb la pantalla cap enfora, tal com es mostra.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Posa’t el dispositiu a sobre de l’espatlla dreta amb la pantalla cap enfora, tal com es mostra.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Quan estiguis a punt, prem la pantalla per començar i alça el braç esquerre tant com puguis. Torna a prémer quan hagis acabat.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Quan estiguis a punt, prem la pantalla per començar i alça el braç dret tant com puguis. Torna a prémer quan hagis acabat.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Posa’t el dispositiu a sobre de l’espatlla esquerra";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Posa’t el dispositiu a sobre de l’espatlla dreta";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Alça el braç esquerre. Tot seguit, prem a qualsevol lloc.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Alça el braç dret. Tot seguit, prem a qualsevol lloc.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Caminada cronometrada";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dues crosses";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Caminador";
 "TIMED_WALK_INSTRUCTION_%@" = "Camina fins a %@ en línia recta.";
-"TIMED_WALK_INSTRUCTION_2" = "Fes mitja volta i torna allà on has començat.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Prem Fet quan hagis acabat.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Canvia de sentit.";
+"TIMED_WALK_INSTRUCTION_2" = "Torna allà on has començat.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Prem Següent quan hagis acabat.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -353,7 +420,7 @@
 "PAVSAT_TITLE" = "PAVSAT";
 "PASAT_INTRO_TEXT" = "El PAST (test auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i la teva habilitat de càlcul.";
 "PVSAT_INTRO_TEXT" = "El PAVT (test visual de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació visual i la teva habilitat de càlcul.";
-"PAVSAT_INTRO_TEXT" = "El PAVST (test visual i auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i visual i la teva habilitat de càlcul.";
+"PAVSAT_INTRO_TEXT" = "El PAVSAT (test visual i auditiu de suma en sèrie per passos) mesura la teva velocitat de processament d’informació auditiva i visual i la teva habilitat de càlcul.";
 "PSAT_INTRO_TEXT_2_%@" = "Es presenten números solts cada %@ segons.\nHas de sumar cada nou número al número immediatament anterior.\nAtenció: no has d’anar calculant la suma total, sinó només la suma dels dos últims números.";
 "PSAT_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
 "PSAT_INITIAL_INSTRUCTION" = "Recorda aquest primer dígit.";
@@ -361,7 +428,7 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
+"HOLE_PEG_TEST_TITLE_%@" = "Test de les %@ clavilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "No puc completar l’activitat amb la mà DRETA.";
 "TREMOR_SKIP_NEITHER" = "Puc completar l’activitat amb les dues mans.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Prova d’unir els punts";
+"TRAILMAKING_INTENDED_USE" = "Aquesta activitat avalua la teva atenció visual i la teva capacitat de canvi de tasques gravant el temps que necessites per prémer una sèrie de punts en ordre.";
+"TRAILMAKING_INTENDED_USE2_A" = "Després del compte enrere, vés prement punts alternant l’ordre entre nombres i lletres. Comença tocant el primer número, 1, i després els números 2, 3, 4…, fins que arribis al número 7.";
+"TRAILMAKING_INTENDED_USE2_B" = "Després del compte enrere, vés prement punts alternant l’ordre entre nombres i lletres. Comença tocant el primer número, 1, i després la primera lletra, A, i tot seguit, 2, B, 3, C, fins que arribis al número 7.";
+"TRAILMAKING_INTRO_TEXT" = "Fes-ho tan ràpid com puguis sense equivocar-te. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d error)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Imatge capturada";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Previsualització de la captura de vídeo";
-"AX_VIDEO_CAPTURED_LABEL" = "Vídeo capturat";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Captura de vídeo completa";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No s’ha pogut situar el disc de mida %@ sobre el disc de mida %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Objectiu";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Pila composta per";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Gràfic de barres d’àudio";

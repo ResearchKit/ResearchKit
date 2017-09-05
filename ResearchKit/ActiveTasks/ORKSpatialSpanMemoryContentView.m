@@ -234,13 +234,20 @@
 
 - (void)setNumberOfItems:(NSInteger)numberOfItems {
     ORKActiveStepQuantityView *countView = [self countView];
-    countView.value = [NSString stringWithFormat:@"%ld", (long)numberOfItems];
+    countView.value = [self stringWithNumberFormatter:numberOfItems];
 }
-
 
 - (void)setScore:(NSInteger)score {
     ORKActiveStepQuantityView *scoreView = [self scoreView];
-    scoreView.value = [NSString stringWithFormat:@"%ld", (long)score];
+    scoreView.value = [self stringWithNumberFormatter:score];
+}
+
+- (NSString *)stringWithNumberFormatter: (NSInteger)integer {
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    formatter.numberStyle = NSNumberFormatterNoStyle;
+    formatter.locale = [NSLocale currentLocale];
+    
+    return [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithLong:(long)integer]]];
 }
 
 - (void)updateFooterHidden {

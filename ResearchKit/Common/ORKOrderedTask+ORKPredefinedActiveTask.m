@@ -39,6 +39,7 @@
 #import "ORKFitnessStepViewController.h"
 #import "ORKToneAudiometryStepViewController.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
+#import "ORKStroopStepViewController.h"
 #import "ORKWalkingTaskStepViewController.h"
 
 #import "ORKAccelerometerRecorder.h"
@@ -60,6 +61,7 @@
 #import "ORKReactionTimeStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKStep_Private.h"
+#import "ORKStroopStep.h"
 #import "ORKTappingIntervalStep.h"
 #import "ORKTimedWalkStep.h"
 #import "ORKToneAudiometryStep.h"
@@ -1145,6 +1147,70 @@ NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatials
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    return task;
+}
+
+
+#pragma mark - stroopTask
+
+NSString *const ORKStroopStepIdentifier = @"stroop";
+
++ (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                            numberOfAttempts:(NSInteger)numberOfAttempts
+                                     options:(ORKPredefinedTaskOption)options {
+    NSMutableArray *steps = [NSMutableArray array];
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.image = [UIImage imageNamed:@"phonestrooplabel" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"STROOP_TASK_INTRO1_DETAIL_TEXT", nil);
+            step.image = [UIImage imageNamed:@"phonestroopbutton" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
+            step.title = ORKLocalizedString(@"STROOP_TASK_TITLE", nil);
+            step.detailText = ORKLocalizedString(@"STROOP_TASK_INTRO2_DETAIL_TEXT", nil);
+            step.image = [UIImage imageNamed:@"phonestroopbutton" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    {
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 5.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    {
+        ORKStroopStep *step = [[ORKStroopStep alloc] initWithIdentifier:ORKStroopStepIdentifier];
+        step.text = ORKLocalizedString(@"STROOP_TASK_STEP_TEXT", nil);
+        step.numberOfAttempts = numberOfAttempts;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
         ORKStepArrayAddStep(steps, step);
     }
     

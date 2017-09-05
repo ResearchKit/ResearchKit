@@ -80,6 +80,7 @@ DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(MemoryTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(StroopTaskIdentifier);
 DefineStringKey(TrailMakingTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
@@ -369,6 +370,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Memory Game Task",
                            @"PSAT Task",
                            @"Reaction Time Task",
+                           @"Stroop Task",
                            @"Trail Making Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
@@ -576,6 +578,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                  timeoutSound:0
                                                  failureSound:0
                                                       options:0];
+    } else if ([identifier isEqualToString:StroopTaskIdentifier]) {
+        return [ORKOrderedTask stroopTaskWithIdentifier:StroopTaskIdentifier
+                                 intendedUseDescription:nil
+                                       numberOfAttempts:15
+                                                options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
@@ -2790,6 +2797,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)reactionTimeTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
+}
+
+- (void)stroopTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StroopTaskIdentifier];
 }
 
 - (void)towerOfHanoiTaskButtonTapped:(id)sender {

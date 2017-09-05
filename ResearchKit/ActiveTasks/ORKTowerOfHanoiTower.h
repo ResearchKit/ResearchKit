@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTowerOfHanoiTower : NSObject
 
-@property(nonatomic, copy, readonly) NSArray *disks;
+@property (nonatomic, copy, readonly) NSArray *disks;
 
 + (instancetype)emptyTower;
 

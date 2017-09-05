@@ -294,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
 "TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.\n\nThe sound will be very subtle and is unlike a regular alert tone.  The sound will begin soft and then slowly increase in volume.  Please pay attention and tap the left or right button to indicate which ear you hear it in.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap the button when you are ready to begin.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time you start hearing a sound.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap any button when you are ready to begin.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Every time you start hearing a sound, tap the left or right button to indicate which ear you hear the sound in.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Left Ear";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Right Ear";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
 
@@ -333,11 +335,25 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Every time a word appears, select the first letter of the name of the COLOR that is shown.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "When you are ready to begin the Stroop activity tap Get Started.";
+"STROOP_TASK_STEP_TEXT" = "Select the first letter of the name of the COLOR that is shown.";
+"STROOP_COLOR_RED" = "RED";
+"STROOP_COLOR_GREEN" = "GREEN";
+"STROOP_COLOR_BLUE" = "BLUE";
+"STROOP_COLOR_YELLOW" = "YELLOW";
+"STROOP_COLOR_RED_INITIAL" = "R";
+"STROOP_COLOR_GREEN_INITIAL" = "G";
+"STROOP_COLOR_BLUE_INITIAL" = "B";
+"STROOP_COLOR_YELLOW_INITIAL" = "Y";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
@@ -346,22 +362,36 @@
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
 
 /* Knee Range of Motion active task */
-"KNEE_RANGE_OF_MOTION_TITLE_%@" = "%@ Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@" = "This activity measures how far you can extend your %@ knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@" = "Sit down on the edge of a chair. When you begin you will put your device on your %@ knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@" = "Place your device on your %@ knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@" = "When ready, tap the screen to begin and extend your %@ knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@" = "Place your device on your %@ knee";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@" = "Extend your %@ knee. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee Range of Motion";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee Range of Motion";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Tap again when you are done.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Tap again when you are done.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Extend your left knee. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Extend your right knee. Then tap anywhere.";
 
 /* Shoulder Range of Motion active task */
-"SHOULDER_RANGE_OF_MOTION_TITLE_%@" = "%@ Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_%@" = "This activity measures how far you can extend your %@ shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_%@" = "When you begin you will put your device on your %@ shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_%@" = "Place your device on your %@ shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_%@" = "When ready, tap the screen to begin and raise your %@ arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_%@" = "Place your device on your %@ shoulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_%@" = "Lift your %@ arm up. Then tap anywhere.";
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder Range of Motion";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will put your device on your left shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lift your left arm up. Then tap anywhere.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lift your right arm up. Then tap anywhere.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Timed Walk";
@@ -382,7 +412,7 @@
 "TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
 "TIMED_WALK_INSTRUCTION_TURN" = "Turn around.";
 "TIMED_WALK_INSTRUCTION_2" = "Walk back to where you started.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Next when complete.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -463,6 +493,12 @@
 "TRAILMAKING_TIMER" = "%.1f s";
 "TRAILMAKING_ERROR" = "%@ (%d error)";
 "TRAILMAKING_ERROR_PLURAL" = "%@ (%d errors)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

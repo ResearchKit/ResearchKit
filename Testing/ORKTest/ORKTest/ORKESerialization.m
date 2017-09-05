@@ -759,6 +759,12 @@ encondingTable =
             PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKStroopStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKStroopStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(numberOfAttempts, NSNumber, NSObject, YES, nil, nil)})),
    ENTRY(ORKTappingIntervalStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKTappingIntervalStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1271,7 +1277,8 @@ encondingTable =
         (@{
            PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(channel, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(amplitude, NSNumber, NSObject, NO, nil, nil)
+           PROPERTY(amplitude, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(channelSelected, NSNumber, NSObject, NO, nil, nil)
            })),
   ENTRY(ORKToneAudiometryResult,
         nil,
@@ -1284,6 +1291,15 @@ encondingTable =
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKStroopResult,
+         nil,
+         (@{
+            PROPERTY(startTime, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(endTime, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(color, NSString, NSObject, NO, nil, nil),
+            PROPERTY(text, NSString, NSObject, NO, nil, nil),
+            PROPERTY(colorSelected, NSString, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKTimedWalkResult,
          nil,

@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Typ I";
+"FITZPATRICK_SKIN_TYPE_II" = "Typ II";
+"FITZPATRICK_SKIN_TYPE_III" = "Typ III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Typ IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Typ V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Typ VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Kobieta";
 "GENDER_MALE" = "Mężczyzna";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "cale";
+
+/* Limb values. */
+"LIMB_LEFT" = "lewa";
+"LIMB_RIGHT" = "prawa";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Stuknij, aby odpowiedzieć";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "Zachowaj";
 "BUTTON_CLEAR_ANSWER" = "Wymaż odpowiedź";
 "BUTTON_READ_ONLY_MODE" = "Nie można modyfikować tej odpowiedzi.";
+"BUTTON_COPYRIGHT" = "Prawa autorskie";
 
 /* General active tasks. */
-"COUNTDOWN_LABEL" = "Początek ćwiczenia za";
+"COUNTDOWN_LABEL" = "Początek ćwiczenia za:";
 "TASK_COMPLETE_TITLE" = "Ćwiczenie zakończone";
 "TASK_COMPLETE_TEXT" = "Twoje dane zostaną przeanalizowane i otrzymasz powiadomienie o wynikach.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Pozostało: %@ s.";
+"TOUCH_ANYWHERE_LABEL" = "Aby kontynuować, dotknij w dowolnym miejscu";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Zarejestruj obraz";
@@ -248,7 +262,7 @@
 "TAPPING_TASK_TITLE" = "Szybkość stukania";
 "TAPPING_TASK_TITLE_RIGHT" = "Prawa ręka";
 "TAPPING_TASK_TITLE_LEFT" = "Lewa ręka";
-"TAPPING_INTRO_TEXT" = "To ćwiczenie ocenia Twoją szybkość stukania.";
+"TAPPING_INTRO_TEXT" = "To ćwiczenie mierzy Twoją szybkość stukania.";
 "TAPPING_INTRO_TEXT_2_REST_PHONE" = "Połóż telefon na płaskiej powierzchni.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami tej samej ręki.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami prawej ręki.";
@@ -279,17 +293,19 @@
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
-"TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność słyszenia różnych dźwięków.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie mierzy Twoją zdolność słyszenia różnych dźwięków.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.\n\nDźwięk będzie bardzo subtelny i nie będzie brzmiał jak zwykły dźwięk alertu.  Na początku dźwięk będzie cichy, a potem jego głośność zacznie się zwiększać.  Skup się i stuknij w lewy lub prawy przycisk, aby wskazać, w którym uchu słyszysz.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Dźwięk powinien być teraz słyszalny. Zmień głośność, używając przycisków z boku urządzenia.\n\nAby rozpocząć, stuknij w przycisk.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Stuknij w przycisk za każdym razem, gdy usłyszysz dźwięk.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Staraj się usłyszeć dźwięk. Nareguluj głośność za pomocą przycisków z boku urządzenia.\n\nGdy możesz już zacząć, stuknij w dowolny przycisk.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Za każdym razem, gdy usłyszysz dźwięk, stuknij w lewy lub prawy przycisk, aby wskazać, w którym uchu go słyszysz.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Lewe ucho";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Prawe ucho";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, lewy";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, prawy";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Pamięć przestrzenna";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "To ćwiczenie ocenia Twoją krótkotrwałą pamięć przestrzenną: podświetla %@ w określonej sekwencji i prosi o jej powtórzenie.";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "To ćwiczenie mierzy Twoją krótkotrwałą pamięć przestrzenną: podświetla %@ w określonej sekwencji i prosi o jej powtórzenie.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kwiaty";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kwiaty";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Widoczne na ekranie %@ będą kolejno podświetlane. Stuknij w te %@ w takie samej kolejności.";
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Gra zakończona";
 "MEMORY_GAME_PAUSED_TITLE" = "Wstrzymana";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Aby kontynuować, stuknij w Dalej";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Ćwiczenie pamięci zostało opracowane przy pomocy dr Katherine Possin, dr Joel Kramer, z Uniwersytetu Kalifornijskiego w San Francisco.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Czas reakcji";
@@ -318,19 +335,68 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Próba %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gdy pojawi się niebieskie kółko, szybko potrząśnij urządzeniem";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Efekt Stroopa";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Za każdym razem, gdy pojawi się słowo, wybierz literę nazwy KOLORU, jaki jest wyświetlony.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "W dogodnym momencie stuknij w Start, aby rozpocząć ćwiczenie Stroopa.";
+"STROOP_TASK_STEP_TEXT" = "Zaznacz pierwszą literę nazwy KOLORU, jaki jest wyświetlony.";
+"STROOP_COLOR_RED" = "CZERWONY";
+"STROOP_COLOR_GREEN" = "ZIELONY";
+"STROOP_COLOR_BLUE" = "NIEBIESKI";
+"STROOP_COLOR_YELLOW" = "ŻÓŁTY";
+"STROOP_COLOR_RED_INITIAL" = "C";
+"STROOP_COLOR_GREEN_INITIAL" = "Z";
+"STROOP_COLOR_BLUE_INITIAL" = "N";
+"STROOP_COLOR_YELLOW_INITIAL" = "Ż";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Wieże Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność rozwiązywania łamigłówek.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Przenieś cały zestaw krążków na wyróżnioną podstawę, wykonując jak najmniej ruchów.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rozwiąż łamigłówkę";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Liczba ruchów: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nie potrafię rozwiązać tej łamigłówki";
 
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Wartość dla limbOption musi być lewa lub prawa";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Zasięg ruchu lewego kolana";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Zasięg ruchu prawego kolana";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "To ćwiczenie mierzy, jak mocno możesz rozciągnąć lewe kolano.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "To ćwiczenie mierzy, jak mocno możesz rozciągnąć prawe kolano.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Usiądź na krawędzi krzesła. Na początek umieścisz urządzenie na lewym kolanie w celu pomiaru. Włącz dźwięk w urządzeniu, aby słyszeć instrukcje.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Usiądź na krawędzi krzesła. Na początek umieścisz urządzenie na prawym kolanie w celu pomiaru. Włącz dźwięk w urządzeniu, aby słyszeć instrukcje.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Umieść urządzenie na lewym kolanie, a ekran skieruj na zewnątrz, tak jak na ilustracji.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Umieść urządzenie na prawym kolanie, a ekran skieruj na zewnątrz, tak jak na ilustracji.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Gdy będziesz gotów, dotknij ekranu i rozpocznij rozciągać lewe kolano tak daleko, jak możesz. Gdy skończysz, stuknij ponownie.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Gdy będziesz gotów, dotknij ekranu i rozpocznij rozciągać prawe kolano tak daleko, jak możesz. Gdy skończysz, stuknij ponownie.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Umieść urządzenie na lewym kolanie";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Umieść urządzenie na prawym kolanie";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Rozciągnij lewe kolano. Stuknij w dowolnym miejscu.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Rozciągnij prawe kolano. Stuknij w dowolnym miejscu.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Zasięg ruchu lewego ramienia";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Zasięg ruchu prawego ramienia";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "To ćwiczenie mierzy, jak mocno możesz rozciągnąć lewe ramię.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "To ćwiczenie mierzy, jak mocno możesz rozciągnąć prawe ramię.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Na początek umieścisz urządzenie na lewym ramieniu w celu pomiaru. Włącz dźwięk w urządzeniu, aby słyszeć instrukcje.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Na początek umieścisz urządzenie na prawym ramieniu w celu pomiaru. Włącz dźwięk w urządzeniu, aby słyszeć instrukcje.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Umieść urządzenie na lewym ramieniu, a ekran skieruj na zewnątrz, tak jak na ilustracji.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Umieść urządzenie na prawym ramieniu, a ekran skieruj na zewnątrz, tak jak na ilustracji.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Gdy będziesz gotów, dotknij ekranu i zacznij unosić lewe ramię tak daleko, jak możesz. Gdy skończysz, stuknij ponownie.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Gdy będziesz gotów, dotknij ekranu i zacznij unosić prawe ramię tak daleko, jak możesz. Gdy skończysz, stuknij ponownie.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Umieść urządzenie na lewym ramieniu";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Umieść urządzenie na prawym ramieniu";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Unieś lewe ramię. Następnie stuknij w dowolnym miejscu.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Unieś prawe ramię. Następnie stuknij w dowolnym miejscu.";
+
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Chód na czas";
-"TIMED_WALK_INTRO_DETAIL" = "To ćwiczenie mierzy sprawność Twoich kończyn dolnych.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Znajdź miejsce, najlepiej na wolnym powietrzu, gdzie możesz iść w linii prostej przez ok. %@ możliwie najszybciej, ale bezpiecznie. Nie zwalniaj, dopóki nie przekroczysz linii końcowej.";
+"TIMED_WALK_INTRO_DETAIL" = "To ćwiczenie mierzy sprawność dolnej partii ciała.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Znajdź miejsce, najlepiej na zewnątrz, gdzie możesz iść w linii prostej przez ok. %@ możliwie najszybciej, ale bezpiecznie. Nie zwalniaj, dopóki nie przekroczysz linii końcowej.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Aby rozpocząć, stuknij w Dalej.";
 "TIMED_WALK_FORM_TITLE" = "Urządzenie wspomagające";
 "TIMED_WALK_FORM_TEXT" = "Użyj tego samego urządzenia wspomagającego w każdym teście.";
@@ -344,39 +410,40 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dwie kule";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Chodzik/balkonik";
 "TIMED_WALK_INSTRUCTION_%@" = "Idź maks. %@ w linii prostej.";
-"TIMED_WALK_INSTRUCTION_2" = "Odwróć się i przejdź do miejsca startu.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Gdy skończysz, stuknij w Gotowe.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Zawróć.";
+"TIMED_WALK_INSTRUCTION_2" = "Wróć do miejsca początkowego.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Gdy skończysz, stuknij w Dalej.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "Test PASAT mierzy szybkość przetwarzania danych audialnych i zdolność obliczeniową.";
-"PVSAT_INTRO_TEXT" = "Test PVSAT mierzy szybkość przetwarzania danych wizualnych i zdolność obliczeniową.";
-"PAVSAT_INTRO_TEXT" = "Test PAVSAT mierzy szybkość przetwarzania danych audiowizualnych i zdolność obliczeniową.";
+"PASAT_INTRO_TEXT" = "Test PASAT mierzy szybkość przetwarzania danych audialnych i umiejętność liczenia.";
+"PVSAT_INTRO_TEXT" = "Test PVSAT mierzy szybkość przetwarzania danych wizualnych i umiejętność liczenia.";
+"PAVSAT_INTRO_TEXT" = "Test PAVSAT mierzy szybkość przetwarzania danych audiowizualnych i umiejętność liczenia.";
 "PSAT_INTRO_TEXT_2_%@" = "Co %@ s prezentowana jest cyfra.\nTwoje zadanie polega na dodaniu jej do poprzedniej.\nUwaga: Nie obliczasz sumy bieżącej wszystkich cyfr, a jedynie ostatnich dwóch.";
 "PSAT_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamiętaj tę pierwszą cyfrę.";
-"PSAT_INSTRUCTION" = "Dodaj tę nową cyfrę do poprzedniej.";
+"PSAT_INSTRUCTION" = "Dodaj tę cyfrę do poprzedniej.";
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-HPT (otwory i kołki)";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność kończyn górnych: umieszczasz „kołek” (pełne kółko) w „otworze” (puste kółko). (Do wykonania %@ razy).";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Test obejmuje zarówno lewą, jak i prawą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Test obejmuje zarówno prawą, jak i lewą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność górnej partii ciała: umieszczasz kołek (pełne kółko) w otworze (puste kółko). Do wykonania %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Test obejmuje zarówno lewą, jak i prawą rękę.\nMusisz jak najszybciej przenieść kołek do otworu. Po przeniesieniu go %@ razy, należy go również wyjąć %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Test obejmuje zarówno prawą, jak i lewą rękę.\nMusisz jak najszybciej przenieść kołek do otworu. Po przeniesieniu go %@ razy, należy go również wyjąć %@ razy.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” w „otworze”, używając lewej ręki.";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” w „otworze”, używając prawej ręki.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” za linią, używając lewej ręki.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” za linią, używając prawej ręki.";
-"HOLE_PEG_TEST_TEXT" = "Podnieś „kołek” dwoma palcami.";
-"HOLE_PEG_TEST_TEXT_2" = "Unieś palce, aby upuścić „kołek”.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Umieść kołek w otworze, używając lewej ręki.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Umieść kołek w otworze, używając prawej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umieść kołek za linią, używając lewej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umieść kołek za linią, używając prawej ręki.";
+"HOLE_PEG_TEST_TEXT" = "Podnieś kołek dwoma palcami.";
+"HOLE_PEG_TEST_TEXT_2" = "Unieś palce, aby upuścić kołek.";
 
 /* Tremor test active task. */
-"TREMOR_TEST_TITLE" = "Ćwiczenie oceniające drżenie rąk";
-"TREMOR_TEST_INTRO_1_DETAIL" = "To ćwiczenie ocenia drżenie rąk w różnych pozycjach. Na czas tego ćwiczenia znajdź miejsce, w którym możesz wygodnie siedzieć.";
+"TREMOR_TEST_TITLE" = "Ćwiczenie mierzące drżenie rąk";
+"TREMOR_TEST_INTRO_1_DETAIL" = "To ćwiczenie mierzy drżenie rąk w różnych pozycjach. Na czas tego ćwiczenia znajdź miejsce, w którym możesz wygodnie siedzieć.";
 "TREMOR_TEST_INTRO_2_DEFAULT_TEXT" = "Trzymaj telefon w bardziej drżącej ręce, tak jak na obrazku poniżej.";
 "TREMOR_TEST_INTRO_2_RIGHT_HAND_TEXT" = "Trzymaj telefon w PRAWEJ ręce, tak jak na obrazku poniżej.";
 "TREMOR_TEST_INTRO_2_LEFT_HAND_TEXT" = "Trzymaj telefon w LEWEJ ręce, tak jak na obrazku poniżej.";
@@ -415,6 +482,23 @@
 "TREMOR_SKIP_LEFT_HAND" = "Nie mogę wykonywać tego ćwiczenia LEWĄ ręką.";
 "TREMOR_SKIP_RIGHT_HAND" = "Nie mogę wykonywać tego ćwiczenia PRAWĄ ręką.";
 "TREMOR_SKIP_NEITHER" = "Mogę wykonywać to ćwiczenie obiema rękami.";
+
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "Test łączenia punktów";
+"TRAILMAKING_INTENDED_USE" = "To ćwiczenie ocenia Twoje zdolności skupienia na obrazie oraz przełączania zadań przez pomiar czasu potrzebnego do stuknięcia w serię kropek w odpowiedniej kolejności.";
+"TRAILMAKING_INTENDED_USE2_A" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w cyfrę ‚1’, a po niej w kolejne cyfry‚2’ – ‚3’ – ‚4’…, aż do cyfry ‚7’.";
+"TRAILMAKING_INTENDED_USE2_B" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w cyfrę ‚1’, a po niej w pierwszą literę ‚A’, następnie ‚2’ – ‚B’ – ‚3’ – ‚C’…, aż do cyfry ‚7’.";
+"TRAILMAKING_INTRO_TEXT" = "Zrób to tak szybko, jak możesz, nie popełniając błędów. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"TRAILMAKING_TIMER" = "%.1f s";
+"TRAILMAKING_ERROR" = "%@ (%d błąd)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (błędów: %d)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nie można było utworzyć pliku";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Zarejestrowany obraz";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Podgląd rejestracji wideo";
-"AX_VIDEO_CAPTURED_LABEL" = "Zarejestrowane wideo";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Przechwytywanie wideo zakończone";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nie można umieścić dysku o rozmiarze %@ na dysku o rozmiarze %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Krążek docelowy";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Stos złożony z";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Wykres paskowy audio";

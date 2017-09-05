@@ -338,6 +338,27 @@ NS_ASSUME_NONNULL_BEGIN
                                                 options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined Stroop task that tests participants selective attention and cognitive flexibility.
+ 
+ In a stroop task, the participant is shown a text. The text is a name of a color, but the text is printed in a color that may or may not be denoted by the name. In each attempt of the task, the participant has to press the button that corresponds to the first letter of the color in which the text is printed. The participant has to ignore the name of the color written in the text, but respond based on the color of the text.
+ 
+ A stroop task finishes when the user has completed all the attempts, irrespective of correct or incorrect answers.
+ 
+ Data collected by the task is in the form of an `ORKStroopResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param numberOfAttempts        Total number of stroop questions to include in the task.
+ @param options                 Options that affect the features of the predefined task.
+ */
++ (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                            numberOfAttempts:(NSInteger)numberOfAttempts
+                                     options:(ORKPredefinedTaskOption)options;
+
+/**
  Returns a predefined task that tests tone audiometry.
 
  In a tone audiometry task, the participant is asked to listen to some tones with different audio

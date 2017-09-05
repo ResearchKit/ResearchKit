@@ -186,6 +186,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     else {
         NSAssert(NO, @"Could not instantiate an HKAnchoredObjectQuery.");
     }
+
     [_healthStore executeQuery:anchoredQuery];
 }
 

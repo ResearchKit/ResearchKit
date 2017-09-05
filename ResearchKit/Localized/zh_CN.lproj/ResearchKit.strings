@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "类型 I";
+"FITZPATRICK_SKIN_TYPE_II" = "类型 II";
+"FITZPATRICK_SKIN_TYPE_III" = "类型 III";
+"FITZPATRICK_SKIN_TYPE_IV" = "类型 IV";
+"FITZPATRICK_SKIN_TYPE_V" = "类型 V";
+"FITZPATRICK_SKIN_TYPE_VI" = "类型 VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "女";
 "GENDER_MALE" = "男";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "厘米";
 "MEASURING_UNIT_FT" = "英尺";
 "MEASURING_UNIT_IN" = "英寸";
+
+/* Limb values. */
+"LIMB_LEFT" = "左";
+"LIMB_RIGHT" = "右";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "轻点来回答";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "存储";
 "BUTTON_CLEAR_ANSWER" = "清除答案";
 "BUTTON_READ_ONLY_MODE" = "此答案无法修改。";
+"BUTTON_COPYRIGHT" = "版权";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "即将开始活动";
 "TASK_COMPLETE_TITLE" = "活动完成";
 "TASK_COMPLETE_TEXT" = "将对您的数据进行分析并在结果可用时通知您。";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "还剩 %@ 秒钟。";
+"TOUCH_ANYWHERE_LABEL" = "触碰任意位置以继续";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "捕捉图像";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
 "TONE_AUDIOMETRY_INTENDED_USE" = "本活动测量您是否可听见不同的声音。";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "请在开始前插入并戴上耳机。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "开始之前，请先插入并戴上耳机。\n\n这种声音十分微弱，与普通的提醒铃声有所不同。起初声音十分柔和，之后音量会慢慢增大。请注意听，然后轻点左边或右边的按钮来表示哪只耳朵听到了声音。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
-"TONE_AUDIOMETRY_PREP_TEXT" = "现在您应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后轻点该按钮来开始测试。";
-"TONE_AUDIOMETRY_INSTRUCTION" = "请在每次开始听到声音时轻点该按钮。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "现在您应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后，轻点任意按钮来开始测试。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "每次一听到声音，就轻点左边或右边的按钮来表示哪只耳朵听到了声音。";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
 "TONE_LABEL_%@_LEFT" = "%@ Hz，左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "游戏完成";
 "MEMORY_GAME_PAUSED_TITLE" = "暂停";
 "MEMORY_GAME_PAUSED_MESSAGE" = "轻点“下一步”来继续";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "本记忆活动的开发得到了旧金山加利福尼亚大学 Katherine Possin 博士和 Joel Kramer 博士的大力协助。";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反应时间";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次尝试";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "蓝色圆圈出现时快速摇动设备";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "斯特鲁普";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "每次颜色名称出现的时候，选择所显示颜色名称的第一个字。";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "准备好进行“斯特鲁普”活动后，轻点“开始”。";
+"STROOP_TASK_STEP_TEXT" = "选择所显示颜色名称的第一个字。";
+"STROOP_COLOR_RED" = "红色";
+"STROOP_COLOR_GREEN" = "绿色";
+"STROOP_COLOR_BLUE" = "蓝色";
+"STROOP_COLOR_YELLOW" = "黄色";
+"STROOP_COLOR_RED_INITIAL" = "红";
+"STROOP_COLOR_GREEN_INITIAL" = "绿";
+"STROOP_COLOR_BLUE_INITIAL" = "蓝";
+"STROOP_COLOR_YELLOW_INITIAL" = "黄";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "汉诺塔";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "本活动评估您的解谜能力。";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "将整个圆盘堆以尽可能少的步数移到高亮显示的平台。";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解谜";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移动次数：%@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我解不开这个谜";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption 必须为左或者右";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝运动范围";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "右膝运动范围";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试您左膝伸展的距离。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试您右膝伸展的距离。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "坐在椅子的边缘上。开始前，将设备放在左膝上进行测试。请打开设备的声音，方便您听到指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "坐在椅子的边缘上。开始前，将设备放在右膝上进行测试。请打开设备的声音，方便您听到指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在您的左膝上，屏幕朝外，如图所示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在您的右膝上，屏幕朝外，如图所示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "准备好后，轻点屏幕以开始，然后尽力伸展左膝。完成后，再轻点一下。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "准备好后，轻点屏幕以开始，然后尽力伸展右膝。完成后，再轻点一下。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在您的左膝上";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在您的右膝上";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "伸展您的左膝。然后轻点任意位置。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "伸展您的右膝。然后轻点任意位置。";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩运动范围";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "右肩运动范围";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "本活动测试您左肩伸展的距离。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "本活动测试您右肩伸展的距离。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "开始前，将设备放在左肩上进行测试。请打开设备的声音，方便您听到指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "开始前，将设备放在右肩上进行测试。请打开设备的声音，方便您听到指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "将设备放在您的左肩上，屏幕朝外，如图所示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "将设备放在您的右肩上，屏幕朝外，如图所示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "准备好后，轻点屏幕以开始，然后尽力抬起左臂。完成后，再轻点一下。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "准备好后，轻点屏幕以开始，然后尽力抬起右臂。完成后，再轻点一下。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "将设备放在您的左肩上";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "将设备放在您的右肩上";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "抬起您的左臂。然后轻点任意位置。";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "抬起您的右臂。然后轻点任意位置。";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "计时步行";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "双拐";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "轮椅/助行车";
 "TIMED_WALK_INSTRUCTION_%@" = "直线步行最多 %@。";
-"TIMED_WALK_INSTRUCTION_2" = "转身并走回起点。";
-"TIMED_WALK_INSTRUCTION_TEXT" = "完成后，轻点“完成”。";
+"TIMED_WALK_INSTRUCTION_TURN" = "转身。";
+"TIMED_WALK_INSTRUCTION_2" = "走回起点。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成后，轻点“下一步”。";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "我不能用右手完成本活动。";
 "TREMOR_SKIP_NEITHER" = "我能用两只手完成本活动。";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "连线测试";
+"TRAILMAKING_INTENDED_USE" = "本活动通过记录按顺序轻点一系列圆点所需的时间，来评估您的视觉注意力和任务切换能力。";
+"TRAILMAKING_INTENDED_USE2_A" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点数字“2”–“3”–“4”…直到数字“7”。";
+"TRAILMAKING_INTENDED_USE2_B" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点第一个字母“A”，以此类推，依次轻点“2”–“B”–“3”–“C”…直到数字“7”。";
+"TRAILMAKING_INTRO_TEXT" = "以最快的速度完成而不出错。\n";
+"TRAILMAKING_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
+"TRAILMAKING_TIMER" = "%.1f 秒";
+"TRAILMAKING_ERROR" = "%@（%d 个错误）";
+"TRAILMAKING_ERROR_PLURAL" = "%@（%d 个错误）";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "无法移除足够的日志文件来达到阈值";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "捕捉的图像";
 
 "AX_VIDEO_CAPTURE_LABEL" = "视频采集预览";
-"AX_VIDEO_CAPTURED_LABEL" = "采集的视频";
+"AX_VIDEO_CAPTURE_COMPLETE" = "视频采集完成";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "无法将大小为“%@”的圆盘放在大小为“%@”的圆盘上";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "目标圆盘";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "圆盘堆组成：";
 "AX_GRAPH_AND_SEPARATOR" = "、";
 "AX_GRAPH_POINT_%@" = "分数：%@";
+
+"AX_AUDIO_BAR_GRAPH" = "音频条图形";

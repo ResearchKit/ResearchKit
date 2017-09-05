@@ -34,7 +34,7 @@
 
 @interface ORKTowerOfHanoiTower ()
 
-@property(nonatomic, copy, readwrite) NSArray *disks;
+@property (nonatomic, copy, readwrite) NSArray *disks;
 
 @end
 

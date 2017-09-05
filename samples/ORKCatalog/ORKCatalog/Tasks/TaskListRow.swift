@@ -91,6 +91,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case reactionTime
     case shortWalk
     case spatialSpanMemory
+    case stroop
     case timedWalk
     case timedWalkWithTurnAround
     case toneAudiometry
@@ -160,6 +161,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .reactionTime,
                     .shortWalk,
                     .spatialSpanMemory,
+                    .stroop,
                     .timedWalk,
                     .timedWalkWithTurnAround,
                     .toneAudiometry,
@@ -276,6 +278,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .spatialSpanMemory:
             return NSLocalizedString("Spatial Span Memory", comment: "")
+            
+        case .stroop:
+            return NSLocalizedString("Stroop", comment: "")
             
         case .timedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
@@ -459,6 +464,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case reactionTime
         case shortWalkTask
         case spatialSpanMemoryTask
+        case stroopTask
         case timedWalkTask
         case timedWalkWithTurnAroundTask
         case toneAudiometryTask
@@ -575,6 +581,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return spatialSpanMemoryTask
 
+        case .stroop:
+            return stroopTask
+            
         case .timedWalk:
             return timedWalkTask
 
@@ -1315,6 +1324,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents the Spatial Span Memory pre-defined active task.
     private var spatialSpanMemoryTask: ORKTask {
         return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing:Identifier.spatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
+    }
+    
+    /// This task presents the Stroop pre-defined active task.
+    private var stroopTask: ORKTask {
+        return ORKOrderedTask.stroopTask(withIdentifier: String(describing:Identifier.stroopTask), intendedUseDescription: exampleDescription, numberOfAttempts: 10, options: [])
     }
 
     /// This task presents the Timed Walk pre-defined active task.
