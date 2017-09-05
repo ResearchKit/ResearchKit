@@ -184,6 +184,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     }
     
     if (!_shouldResignFirstResponder) {
+        [self.view layoutIfNeeded]; // layout pass might be required before showing the keyboard
         [self makePasscodeViewBecomeFirstResponder];
     }
 }
@@ -299,7 +300,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 }
 
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskAll;
 }
 
 #pragma mark - Helpers

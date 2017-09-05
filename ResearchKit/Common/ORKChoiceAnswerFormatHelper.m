@@ -91,7 +91,7 @@
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {
-    return [self answerForSelectedIndexes:@[@(index)]];
+    return [self answerForSelectedIndexes:@[ @(index) ]];
 }
 
 - (id)answerForSelectedIndexes:(NSArray *)indexes {

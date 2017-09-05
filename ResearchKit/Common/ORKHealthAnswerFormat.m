@@ -399,6 +399,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 
 @end
 
+
 @implementation HKUnit (ORKLocalized)
 
 - (NSString *)localizedUnitString {

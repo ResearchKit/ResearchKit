@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "‎O+";
 "BLOOD_TYPE_O-" = "‎O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "النوع ١";
+"FITZPATRICK_SKIN_TYPE_II" = "النوع ٢";
+"FITZPATRICK_SKIN_TYPE_III" = "النوع ٣";
+"FITZPATRICK_SKIN_TYPE_IV" = "النوع ٤";
+"FITZPATRICK_SKIN_TYPE_V" = "النوع ٥";
+"FITZPATRICK_SKIN_TYPE_VI" = "النوع ٦";
+
 /* Gender values. */
 "GENDER_FEMALE" = "أنثى";
 "GENDER_MALE" = "ذكر";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "سم";
 "MEASURING_UNIT_FT" = "قدم";
 "MEASURING_UNIT_IN" = "بوصة";
+
+/* Limb values. */
+"LIMB_LEFT" = "الأيسر";
+"LIMB_RIGHT" = "الأيمن";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "اضغط للإجابة";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "حفظ";
 "BUTTON_CLEAR_ANSWER" = "مسح الإجابة";
 "BUTTON_READ_ONLY_MODE" = "لا يمكن تعديل هذه الإجابة.";
+"BUTTON_COPYRIGHT" = "حقوق النشر";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "بدء النشاط خلال";
 "TASK_COMPLETE_TITLE" = "اكتمل النشاط";
 "TASK_COMPLETE_TEXT" = "سيتم تحليل بياناتك وسيتم إعلامك عندما تصبح النتائج جاهزة.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "متبقٍ %@ من الثواني.";
+"TOUCH_ANYWHERE_LABEL" = "المس أي مكان للمتابعة";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "التقاط صورة";
@@ -240,7 +254,7 @@
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ابحث عن مكان يمكنك المشي فيه ذهابًا وإيابًا في خط مستقيم بشكل آمن. حاول أن تسير بشكل مستمر عن طريق الدوران في نهايات مسارك، كما لو كنت تسير حول مخروط.\n\nبعد ذلك، سيتم إرشادك لتقوم بالدوران في دائرة كاملة، ثم الوقوف ثابتًا مع وضع ذراعيك إلى جانبيك وقدميك متباعدتين بمقدار عرض الكتف تقريبًا.";
 "WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "اضغط على البدء عندما تكون مستعدًا للبدء.\nثم ضع هاتفك في جيبك أو في حقيبة واتبع التعليمات الصوتية.";
-"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "قم بالمشي ذهابًا وإيابًا في خط مستقيم %@. قم بالمشي كما تفعل عادة.";
+"WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "قم بالمشي ذهابًا وإيابًا في خط مستقيم %@. قم بالمشي كما تفعل عادةً.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "استدر بمقدار دائرة كاملة ثم قف ثابتًا لمدة %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "لقد أكملت النشاط.";
 
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "قياس سمع النغمة";
 "TONE_AUDIOMETRY_INTENDED_USE" = "يقيس هذا النشاط قدرتك على سماع الأصوات المختلفة.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "قبل البدء، قم بتوصيل سماعات الرأس وارتدائها.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "قبل البدء، قم بتوصيل سماعات الرأس وارتدائها.\n\nسيكون الصوت دقيق جدًا وليس كنغمة التنبيه العادية.  سيبدأ الصوت خافتًا ثم سيزداد مستوى الصوت ببطء.  الرجاء الانتباه والضغط على الزر الأيمن أو الأيسر للإشارة إلى الأذن التي تسمع الصوت فيها.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "من المفترض أن تسمع نغمة الآن. قم بضبط مستوى الصوت باستخدام عناصر التحكم في جانب الجهاز.\n\nاضغط على الزر عندما تكون مستعدًا للبدء.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "اضغط على الزر في كل مرة تبدأ في سماع صوت فيها.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "من المفترض أن تسمع نغمة الآن. قم بضبط مستوى الصوت باستخدام عناصر التحكم في جانب الجهاز.\n\nاضغط على أي زر عندما تكون مستعدًا للبدء.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "في كل مرة تسمع صوتًا، اضغط على الزر الأيمن أو الأيسر للإشارة إلى الأذن التي تسمع الصوت فيها.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "الأذن اليسرى";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "الأذن اليمنى";
 "TONE_LABEL_%@_LEFT" = "‏%@ هرتز، يسار";
 "TONE_LABEL_%@_RIGHT" = "‏%@ هرتز، يمين";
 
@@ -292,13 +308,13 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "يقيس هذا النشاط ذاكرتك المكانية قصيرة المدى من خلال مطالبتك بتكرار نفس ترتيب إضاءة %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "زهور";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "زهور";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "ستضيء بعض %@ كلٌ على حدة. اضغط على هذه الـ %@ بنفس ترتيب إضاءتها.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "ستضيء بعض %@ كلٌ على حدة. اضغط على هذه الـ %@ بعكس ترتيب إضاءتها.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "ستضيء بعض ال%@ كلٌ على حدة. اضغط على هذه ال%@ بنفس ترتيب إضاءتها.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "ستضيء بعض ال%@ كلٌ على حدة. اضغط على هذه ال%@ بعكس ترتيب إضاءتها.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "للبدء، اضغط على البدء ثم قم بالمشاهدة عن قُرب.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "النتيجة";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "شاهد %@ تتم إضاءتها";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "اضغط على %@ لكي تتم إضاءتها";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "اضغط على ال%@ حسب ترتيب إضاءتها";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "اضغط على %@ بترتيب عكسي";
 "MEMORY_GAME_COMPLETE_TITLE" = "اكتمل التتابع";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "للمتابعة اضغط على التالي.";
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "اكتملت اللعبة";
 "MEMORY_GAME_PAUSED_TITLE" = "تم الإيقاف مؤقتاً";
 "MEMORY_GAME_PAUSED_MESSAGE" = "للمتابعة اضغط على التالي.";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "تم تطوير نشاط الذاكرة بمساعدة من د. كاثرين بوسين ود. جويل كرامر، دكتوراه من جامعة كاليفورنيا، سان فرانسيسكو.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "زمن رد الفعل";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "المحاولة %@ من %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "قم بهز الجهاز سريعًا عندما تظهر الدائرة الزرقاء";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "ستروب";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "في كل مرة تظهر فيها كلمة، حدد الحرف الثاني من اسم اللون الذي يظهر.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "عندما تكون مستعدًا لبدء نشاط ستروب اضغط على البدء.";
+"STROOP_TASK_STEP_TEXT" = "حدد الحرف الثاني من اسم اللون الذي يظهر.";
+"STROOP_COLOR_RED" = "أحمر";
+"STROOP_COLOR_GREEN" = "أخضر";
+"STROOP_COLOR_BLUE" = "أزرق";
+"STROOP_COLOR_YELLOW" = "أصفر";
+"STROOP_COLOR_RED_INITIAL" = "ح";
+"STROOP_COLOR_GREEN_INITIAL" = "خ";
+"STROOP_COLOR_BLUE_INITIAL" = "ز";
+"STROOP_COLOR_YELLOW_INITIAL" = "ص";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "برج هانوي";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "يقيّم هذا النشاط مهاراتك في حل الألغاز.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "انقل الكومة بالكامل إلى المنصة المميزة في أقل عدد ممكن من الحركات.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "حل اللغز";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "عدد الحركات: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "لا أستطيع حل هذا اللغز";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "يجب أن يكون limbOption الأيمن أو الأيسر";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "نطاق حركة الركبة اليسرى";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "نطاق حركة الركبة اليمنى";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "يقيس هذا النشاط إلى أي مدى يمكنك تمديد ركبتك اليسرى.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "يقيس هذا النشاط إلى أي مدى يمكنك تمديد ركبتك اليمنى.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "اجلس على حافة كرسي. عند البدء ستضع جهازك على ركبتك اليسرى لإجراء قياس. الرجاء تشغيل الصوت على جهازك حتى تتمكن من سماع التعليمات.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "اجلس على حافة كرسي. عند البدء ستضع جهازك على ركبتك اليمنى لإجراء قياس. الرجاء تشغيل الصوت على جهازك حتى تتمكن من سماع التعليمات.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "ضع جهازك على ركبتك اليسرى بحيث تكون الشاشة موجهة للخارج، كما هو موضح في الصورة.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "ضع جهازك على ركبتك اليمنى بحيث تكون الشاشة موجهة للخارج، كما هو موضح في الصورة.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "عندما تكون مستعدًا، اضغط على الشاشة للبدء وقم بتمديد ركبتك اليسرى بقدر ما تستطيع. اضغط مرة أخرى عند الانتهاء.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "عندما تكون مستعدًا، اضغط على الشاشة للبدء وقم بتمديد ركبتك اليمنى بقدر ما تستطيع. اضغط مرة أخرى عند الانتهاء.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "ضع جهازك على ركبتك اليسرى";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "ضع جهازك على ركبتك اليمنى";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "قم بتمديد ركبتك اليسرى. ثم اضغط في أي مكان.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "قم بتمديد ركبتك اليمنى. ثم اضغط في أي مكان.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "نطاق حركة الكتف الأيسر";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "نطاق حركة الكتف الأيمن";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "يقيس هذا النشاط إلى أي مدى يمكنك تمديد كتفك الأيسر.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "يقيس هذا النشاط إلى أي مدى يمكنك تمديد كتفك الأيمن.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "عند البدء ستضع جهازك على كتفك الأيسر لإجراء قياس. الرجاء تشغيل الصوت على جهازك حتى تتمكن من سماع التعليمات.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "عند البدء ستضع جهازك على كتفك الأيمن لإجراء قياس. الرجاء تشغيل الصوت على جهازك حتى تتمكن من سماع التعليمات.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "ضع جهازك على كتفك الأيسر بحيث تكون الشاشة موجهة للخارج، كما هو موضح في الصورة.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "ضع جهازك على كتفك الأيمن بحيث تكون الشاشة موجهة للخارج، كما هو موضح في الصورة.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "عندما تكون مستعدًا، اضغط على الشاشة للبدء وارفع ذراعك الأيسر بقدر ما تستطيع. اضغط مرة أخرى عند الانتهاء.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "عندما تكون مستعدًا، اضغط على الشاشة للبدء وارفع ذراعك الأيمن بقدر ما تستطيع. اضغط مرة أخرى عند الانتهاء.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "ضع جهازك على كتفك الأيسر";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "ضع جهازك على كتفك الأيمن";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "ارفع ذراعك الأيسر لأعلى. ثم اضغط في أي مكان.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "ارفع ذراعك الأيمن لأعلى. ثم اضغط في أي مكان.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "المشي المحدد بوقت";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "عكاز ثنائي";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "مشاية";
 "TIMED_WALK_INSTRUCTION_%@" = "قم بالمشي حتى %@ في خط مستقيم.";
-"TIMED_WALK_INSTRUCTION_2" = "قم بالدوران والمشي رجوعًا إلى نقطة بدايتك.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "اضغط على تم عند الانتهاء.";
+"TIMED_WALK_INSTRUCTION_TURN" = "قم بالدوران.";
+"TIMED_WALK_INSTRUCTION_2" = "قم بالمشي رجوعًا إلى المكان الذي بدأت منه.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "اضغط على \"التالي\" عند الانتهاء.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "لا يمكنني القيام بهذا النشاط بيدي اليمنى.";
 "TREMOR_SKIP_NEITHER" = "يمكنني القيام بهذا النشاط بكلتا يدي.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "اختبار إجراء التعقب";
+"TRAILMAKING_INTENDED_USE" = "يعمل هذا النشاط على تقييم انتباهك البصري وتبديل المهام لديك عن طريق تسجيل الوقت اللازم للضغط على سلسلة من النقاط بالترتيب.";
+"TRAILMAKING_INTENDED_USE2_A" = "بعد العد التنازلي، اضغط على النقاط بالتبادل بين الأرقام والحروف. ابدأ بالضغط على أول رقم \"١\" متبوعًا بالأرقام \"٢\"، \"٣\"، \"٤\"… حتى تصل إلى رقم \"٧\".";
+"TRAILMAKING_INTENDED_USE2_B" = "بعد العد التنازلي، اضغط على النقاط بالتبادل بين الأرقام والحروف. ابدأ بالضغط على أول رقم \"١\" ثم اضغط على أول حرف \"ا\"، ثم \"٢\"، \"ب\"، \"٣\"، \"ت\"… حتى تصل إلى رقم \"٧\".";
+"TRAILMAKING_INTRO_TEXT" = "قم بذلك بأقصى سرعة ممكنة لديك دون ارتكاب أخطاء. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"TRAILMAKING_TIMER" = "‏%.1f ث";
+"TRAILMAKING_ERROR" = "‏%@ (%d من الأخطاء)";
+"TRAILMAKING_ERROR_PLURAL" = "‏%@ (%d من الأخطاء)";
+"TRAILMAKING_LETTER_A" = "‎أ";
+"TRAILMAKING_LETTER_B" = "ب";
+"TRAILMAKING_LETTER_C" = "ت";
+"TRAILMAKING_LETTER_D" = "ث";
+"TRAILMAKING_LETTER_E" = "ج";
+"TRAILMAKING_LETTER_F" = "ح";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "تعذر إنشاء الملف";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "تعذر إزالة ملفات السجل الكافية للوصول إلى الحد";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "تم التقاط الصورة";
 
 "AX_VIDEO_CAPTURE_LABEL" = "معاينة التقاط الفيديو";
-"AX_VIDEO_CAPTURED_LABEL" = "الفيديو الملتقط";
+"AX_VIDEO_CAPTURE_COMPLETE" = "اكتمال التقاط الفيديو";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "غير قادر على وضع القرص بحجم %@ على القرص بحجم %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "الهدف";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "مجموعة تتكون من";
 "AX_GRAPH_AND_SEPARATOR" = " و ";
 "AX_GRAPH_POINT_%@" = "النقطة: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "الرسم البياني لشريط الصوت";

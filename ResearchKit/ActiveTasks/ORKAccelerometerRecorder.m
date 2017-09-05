@@ -73,7 +73,7 @@
 }
 
 - (void)setFrequency:(double)frequency {
-    if (frequency <=0) {
+    if (frequency <= 0) {
         _frequency = 1;
     } else {
         _frequency = frequency;

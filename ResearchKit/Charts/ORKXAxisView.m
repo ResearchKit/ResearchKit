@@ -99,7 +99,7 @@ static const CGFloat LastLabelHeight = 20.0;
                                                            multiplier:1.0
                                                              constant:0.0]];
         
-        if (i == 0) {
+        if ((int)i == 0) {
             [constraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                 attribute:NSLayoutAttributeCenterX
                                                                 relatedBy:NSLayoutRelationEqual
@@ -120,7 +120,7 @@ static const CGFloat LastLabelHeight = 20.0;
                                                                  constant:0.0]];
         }
         
-        if (i == _titleLabels.count - 1) {
+        if ((int)i == _titleLabels.count - 1) {
             NSLayoutConstraint *constraint = nil;
             
             constraint = [NSLayoutConstraint constraintWithItem:label

@@ -655,47 +655,6 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKNumberPickerAnswerFormat` class represents an answer format that lets participants use a
- value picker to choose from a fixed set of number choices.
- 
- When the number of choices is relatively large and the text that describes each choice
- is short, you might want to use the value picker answer format instead of the text choice answer
- format (`ORKTextChoiceAnswerFormat`). When the text that describes each choice is long, or there
- are only a very small number of choices, it's usually better to use the text choice answer format.
- 
- Note that the value picker answer format reports itself as being of the single choice question
- type. The value picker answer format produces an `ORKNumberQuestionResult` object.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKNumberPickerAnswerFormat : ORKAnswerFormat
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
- Returns a value picker answer format using the specified array of text choices.
- 
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
- each choice that is short enough to fit in a `UIPickerView` object.
- 
- @param textChoices     Array of `ORKTextChoice` objects.
- 
- @return An initialized value picker answer format.
- */
-- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
-
-/**
- An array of text choices that represent the options to display in the picker. (read-only)
- 
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
- each choice that is short enough to fit in a `UIPickerView` object.
- */
-@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
-
-@end
-
-
-/**
  The `ORKMultipleValuePickerAnswerFormat` class represents an answer format that lets participants use a
  multiple-component value picker to choose from a fixed set of text choices.
  
@@ -1134,6 +1093,14 @@ Returns an initialized numeric answer format using the specified style, unit des
  */
 @property (copy, nullable) NSNumber *maximum;
 
+/**
+ The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ numeric answer.
+ 
+ The default value of this property is `nil`, which means that no limit scale value is used.
+ */
+@property (copy, nullable) NSNumber *scale;
+
 @end
 
 
@@ -1363,7 +1330,7 @@ ORK_CLASS_AVAILABLE
  
  By default, the value of this property is NO.
  */
-@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+@property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
 @end
 

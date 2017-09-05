@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2016, Oliver Schaefer.
+ Copyright (c) 2017, Oliver Schaefer.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:

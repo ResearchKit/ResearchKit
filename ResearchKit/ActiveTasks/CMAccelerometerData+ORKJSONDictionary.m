@@ -35,7 +35,7 @@
 @implementation CMAccelerometerData (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionary {
-    NSDictionary *dictionary = @{@"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+    NSDictionary *dictionary = @{ @"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
                                  @"x": [NSDecimalNumber numberWithDouble:self.acceleration.x],
                                  @"y": [NSDecimalNumber numberWithDouble:self.acceleration.y],
                                  @"z": [NSDecimalNumber numberWithDouble:self.acceleration.z]

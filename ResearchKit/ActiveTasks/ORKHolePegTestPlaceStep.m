@@ -30,10 +30,9 @@
 
 
 #import "ORKHolePegTestPlaceStep.h"
-
 #import "ORKHolePegTestPlaceStepViewController.h"
-
 #import "ORKHelpers_Internal.h"
+
 
 @implementation ORKHolePegTestPlaceStep
 
