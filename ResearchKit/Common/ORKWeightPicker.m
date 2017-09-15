@@ -48,6 +48,8 @@
     NSArray *kilogramValues;
     NSArray *poundValues;
     NSArray *fractionValues;
+    NSNumber *minValue;
+    NSNumber *maxValue;
 }
 
 @synthesize pickerDelegate = _pickerDelegate;
@@ -56,7 +58,7 @@
     self = [super init];
     if (self) {
         NSAssert([answerFormat isKindOfClass:[ORKWeightAnswerFormat class]], @"answerFormat should be ORKWeightAnswerFormat");
-        
+                
         // Take into account locale changes so unit string can be updated
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(currentLocaleDidChange:)
@@ -66,9 +68,15 @@
         _pickerDelegate = delegate;
         self.answer = answer;
         
-        kilogramValues = [self kilogramValues];
-        poundValues = [self poundValues];
-        fractionValues = [self fractionValues];
+        if (_answerFormat.useMetricSystem) {
+            kilogramValues = [self kilogramValues];
+        } else {
+            poundValues = [self poundValues];
+        }
+        
+        if (_answerFormat.additionalPrecision) {
+            fractionValues = [self fractionValues];
+        }
     }
     return self;
 }
@@ -137,6 +145,14 @@
     } else {
         defaultAnswerValue = @(60.33); // Default USC weight: 133 lbs
     }
+    
+    // Ensure default value is within bounds
+    if (minValue && [defaultAnswerValue doubleValue] < [minValue doubleValue]) {
+        defaultAnswerValue = minValue;
+    } else if (maxValue && [defaultAnswerValue doubleValue] > [maxValue doubleValue]) {
+        defaultAnswerValue = maxValue;
+    }
+    
     return defaultAnswerValue;
 }
 
@@ -292,6 +308,8 @@
     if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
         max = [_answerFormat.maximumValue integerValue];
     }
+    minValue = [NSNumber numberWithInteger:min];
+    maxValue = [NSNumber numberWithInteger:max];
     
     for (NSInteger i = min; i <= max; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
@@ -312,6 +330,8 @@
     if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
         max = [_answerFormat.maximumValue integerValue];
     }
+    minValue = [NSNumber numberWithDouble:ORKPoundsAndOuncesToKilograms([[NSNumber numberWithInteger:min] doubleValue], 0.0)]; // Convert to kg
+    maxValue = [NSNumber numberWithDouble:ORKPoundsAndOuncesToKilograms([[NSNumber numberWithInteger:max] doubleValue], 0.0)]; // Convert to kg
     
     for (NSInteger i = min; i <= max; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
