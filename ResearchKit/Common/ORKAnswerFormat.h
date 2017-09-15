@@ -166,6 +166,11 @@ ORK_CLASS_AVAILABLE
 
 + (ORKWeightAnswerFormat *)weightAnswerFormat;
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithDefaultValue:(nullable NSNumber *)defaultValue
+                                                 minimumValue:(nullable NSNumber *)minimumValue
+                                                 maximumValue:(nullable NSNumber *)maximumValue
+                                          additionalPrecision:(BOOL)additionalPrecision
+                                            measurementSystem:(ORKMeasurementSystem)measurementSystem;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1465,9 +1470,59 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 
 /**
+ Returns an initialized weight answer format using the specified default/minimum/maximum values, 
+ additional precision, and measurement system.
+ 
+ @param defaultValue            The default value to display. When the value of this parameter is `nil`, the
+ picker displays 60 kg (or 133 lbs).
+ @param minimumValue            The minimum value that is accessible in the picker. If the value of this
+ parameter is `nil`, 0 kg (or 0 lbs) is the minimum.
+ @param maximumValue            The maximum value that is accessible in the picker. If the value of this
+ parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ @param additionalPrecision     Pass `YES` to allow additional precision; for the default, pass `NO`.
+ @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
+ accepted values.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)initWithDefaultValue:(nullable NSNumber *)defaultValue
+                        minimumValue:(nullable NSNumber *)minimumValue
+                        maximumValue:(nullable NSNumber *)maximumValue
+                 additionalPrecision:(BOOL)additionalPrecision
+                   measurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
+
+/**
  Indicates the measurement system used by the answer format.
  */
 @property (readonly) ORKMeasurementSystem measurementSystem;
+
+/**
+ The value to use as the default in the specified measurement system.
+ 
+ When the value of this property is `nil`, 60 kg (or 133 lbs) is used as the default.
+ */
+@property (copy, readonly, nullable) NSNumber *defaultValue;
+
+/**
+ The minimum allowed value in the specified measurement system.
+ 
+ When the value of this property is `nil`, 0 kg (or 0 lbs) is the minimum.
+ */
+@property (copy, readonly, nullable) NSNumber *minimumValue;
+
+/**
+ The maximum allowed value in the specified measurement system.
+ 
+ When the value of this property is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ */
+@property (copy, readonly, nullable) NSNumber *maximumValue;
+
+/**
+ A Boolean value indicating whether the value picker will display additional precision. (read-only)
+
+ By default, the value of this property is `NO`.
+ */
+@property (readonly, getter=isAdditionalPrecision) BOOL additionalPrecision;
 
 @end
 

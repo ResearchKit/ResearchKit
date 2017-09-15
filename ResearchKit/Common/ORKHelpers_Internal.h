@@ -308,13 +308,14 @@ ORK_INLINE void ORKKilogramsToWholeAndFractions(double kilograms, double *outWho
     *outFraction = floor((kilograms - floor(kilograms)) * 100);
 }
 
-ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outWhole, double *outFraction) {
-    if (outWhole == NULL || outFraction == NULL) {
+ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outPounds, double *outOunces) {
+    if (outPounds == NULL || outOunces == NULL) {
         return;
     }
     double lbs = kilograms * 2.2046;
-    *outWhole = floor(lbs);
-    *outFraction = floor((lbs - floor(lbs)) * 100);
+    *outPounds = floor(lbs);
+    double oz = (lbs - floor(lbs)) * 16;
+    *outOunces = floor(oz);
 }
 
 ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction) {
@@ -322,8 +323,8 @@ ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction)
     return (floor(100*kg)/100);
 }
 
-ORK_INLINE double ORKPoundsAndOuncesToKilograms(double whole, double fraction) {
-    double kg = (whole + (fraction * 0.0625)) * 0.4536;
+ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
+    double kg = (pounds + (ounces / 16)) * 0.4536;
     return (floor(100*kg)/100);
 }
 

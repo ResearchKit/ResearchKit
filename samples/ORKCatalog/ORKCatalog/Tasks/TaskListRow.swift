@@ -373,6 +373,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case weightQuestionStep1
         case weightQuestionStep2
         case weightQuestionStep3
+        case weightQuestionStep4
+        case weightQuestionStep5
         
         // Task with an image choice question.
         case imageChoiceQuestionTask
@@ -789,9 +791,21 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight (USC system)", answer: answerFormat3)
         
-        step2.text = exampleDetailText
+        step3.text = exampleDetailText
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3])
+        let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 45.50, minimumValue: 20.0, maximumValue: 100.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.metric)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight (metric system, additional precision)", answer: answerFormat4)
+        
+        step4.text = exampleDetailText
+        
+        let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 100.0, minimumValue: 50.0, maximumValue: 150.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.USC)
+        
+        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight (USC system, additional precision)", answer: answerFormat5)
+        
+        step5.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5])
     }
     
     /**
