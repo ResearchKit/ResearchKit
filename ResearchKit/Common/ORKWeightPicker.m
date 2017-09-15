@@ -285,11 +285,11 @@
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
 
     NSInteger min = 0;
-    if (_answerFormat.minimumValue) {
+    NSInteger max = 657;
+    if (_answerFormat.minimumValue && [_answerFormat.minimumValue integerValue] <= max) {
         min = [_answerFormat.minimumValue integerValue];
     }
-    NSInteger max = 657;
-    if (_answerFormat.maximumValue) {
+    if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
         max = [_answerFormat.maximumValue integerValue];
     }
     
@@ -305,11 +305,11 @@
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
 
     NSInteger min = 0;
-    if (_answerFormat.minimumValue) {
+    NSInteger max = 1450;
+    if (_answerFormat.minimumValue && [_answerFormat.minimumValue integerValue] <= max) {
         min = [_answerFormat.minimumValue integerValue];
     }
-    NSInteger max = 1450;
-    if (_answerFormat.maximumValue) {
+    if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
         max = [_answerFormat.maximumValue integerValue];
     }
     
