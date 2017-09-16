@@ -2855,12 +2855,14 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
             }
         } else {
             double pounds, ounces;
-            ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
-            NSString *poundsString = [formatter stringFromNumber:@(pounds)];
-            NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
             if (!self.additionalPrecision) {
+                ORKKilogramsToPounds(((NSNumber *)answer).doubleValue, &pounds);
+                NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
             } else {
+                ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
+                NSString *poundsString = [formatter stringFromNumber:@(pounds)];
+                NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
                 answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
             }
         }

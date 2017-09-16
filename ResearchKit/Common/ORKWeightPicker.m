@@ -114,7 +114,12 @@
         }
     } else {
         double pounds, ounces;
-        ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
+        if (!_answerFormat.additionalPrecision) {
+            ORKKilogramsToPounds(((NSNumber *)answer).doubleValue, &pounds);
+            ounces = 0;
+        } else {
+            ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
+        }
         NSUInteger poundsIndex = [poundValues indexOfObject:@((NSInteger)pounds)];
         NSUInteger ouncesIndex = [fractionValues indexOfObject:@((NSInteger)ounces)];
         if (poundsIndex == NSNotFound || ouncesIndex == NSNotFound) {
@@ -137,6 +142,8 @@
     if (_answerFormat.defaultValue) {
         if (_answerFormat.useMetricSystem) {
             defaultAnswerValue = _answerFormat.defaultValue;
+        } else if (!_answerFormat.additionalPrecision) {
+            defaultAnswerValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([_answerFormat.defaultValue doubleValue])]; // Convert to kg
         } else {
             defaultAnswerValue = [NSNumber numberWithDouble:ORKPoundsAndOuncesToKilograms([_answerFormat.defaultValue doubleValue], 0.0)]; // Convert to kg
         }
@@ -172,13 +179,14 @@
         NSInteger poundsRow = [_pickerView selectedRowInComponent:0];
         NSNumber *pounds = poundValues[poundsRow];
         if (!_answerFormat.additionalPrecision) {
-            answer = @( ORKPoundsAndOuncesToKilograms(pounds.doubleValue, 0.0) );
+            answer = @( ORKPoundsToKilograms(pounds.doubleValue) );
         } else {
             NSInteger ouncesRow = [_pickerView selectedRowInComponent:1];
             NSNumber *ounces = fractionValues[ouncesRow];
             answer = @( ORKPoundsAndOuncesToKilograms(pounds.doubleValue, ounces.doubleValue) );
         }
     }
+    
     return answer;
 }
 
@@ -203,11 +211,13 @@
         }
     } else {
         double pounds, ounces;
-        ORKKilogramsToPoundsAndOunces(((NSNumber *)_answer).doubleValue, &pounds, &ounces);
-        NSString *poundsString = [formatter stringFromNumber:@(pounds)];
         if (!_answerFormat.additionalPrecision) {
+            ORKKilogramsToPounds(((NSNumber *)_answer).doubleValue, &pounds);
+            NSString *poundsString = [formatter stringFromNumber:@(pounds)];
             selectedLabelText = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
         } else {
+            ORKKilogramsToPoundsAndOunces(((NSNumber *)_answer).doubleValue, &pounds, &ounces);
+            NSString *poundsString = [formatter stringFromNumber:@(pounds)];
             NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
             selectedLabelText = [NSString stringWithFormat:@"%@ %@, %@ %@",
                                  poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
@@ -330,8 +340,8 @@
     if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
         max = [_answerFormat.maximumValue integerValue];
     }
-    minValue = [NSNumber numberWithDouble:ORKPoundsAndOuncesToKilograms([[NSNumber numberWithInteger:min] doubleValue], 0.0)]; // Convert to kg
-    maxValue = [NSNumber numberWithDouble:ORKPoundsAndOuncesToKilograms([[NSNumber numberWithInteger:max] doubleValue], 0.0)]; // Convert to kg
+    minValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([[NSNumber numberWithInteger:min] doubleValue])]; // Convert to kg
+    maxValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([[NSNumber numberWithInteger:max] doubleValue])]; // Convert to kg
     
     for (NSInteger i = min; i <= max; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
@@ -343,7 +353,12 @@
 - (NSArray *)fractionValues {
     NSArray *wholeValues = nil;
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i <= 99; i++) {
+    
+    NSInteger max = 99;
+    if (!_answerFormat.useMetricSystem) {
+        max = 15;
+    }
+    for (NSInteger i = 0; i <= max; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
     }
     wholeValues = [mutableWholeValues copy];

@@ -305,7 +305,15 @@ ORK_INLINE void ORKKilogramsToWholeAndFractions(double kilograms, double *outWho
         return;
     }
     *outWhole = floor(kilograms);
-    *outFraction = floor((kilograms - floor(kilograms)) * 100);
+    *outFraction = round((kilograms - floor(kilograms)) * 100);
+}
+
+ORK_INLINE void ORKKilogramsToPounds(double kilograms, double *outPounds) {
+    if (outPounds == NULL) {
+        return;
+    }
+    double lbs = kilograms * 2.2046;
+    *outPounds = round(lbs);
 }
 
 ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outPounds, double *outOunces) {
@@ -315,17 +323,27 @@ ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outPound
     double lbs = kilograms * 2.2046;
     *outPounds = floor(lbs);
     double oz = (lbs - floor(lbs)) * 16;
-    *outOunces = floor(oz);
+    *outOunces = round(oz);
+    
+    if (round(oz) == 16) {
+        *outPounds += 1;
+        *outOunces = 0;
+    }
 }
 
 ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction) {
     double kg = (whole + (fraction / 100));
-    return (floor(100*kg)/100);
+    return (round(100*kg)/100);
+}
+
+ORK_INLINE double ORKPoundsToKilograms(double pounds) {
+    double kg = pounds * 0.4536;
+    return (round(100*kg)/100);
 }
 
 ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
     double kg = (pounds + (ounces / 16)) * 0.4536;
-    return (floor(100*kg)/100);
+    return (round(100*kg)/100);
 }
 
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
