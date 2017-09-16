@@ -367,6 +367,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case heightQuestionStep1
         case heightQuestionStep2
         case heightQuestionStep3
+        case heightQuestionStep4
 
         // Task with an example of weight entry.
         case weightQuestionTask
@@ -375,6 +376,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case weightQuestionStep3
         case weightQuestionStep4
         case weightQuestionStep5
+        case weightQuestionStep6
         
         // Task with an image choice question.
         case imageChoiceQuestionTask
@@ -754,58 +756,70 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var heightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height (local system)", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height", answer: answerFormat1)
         
-        step1.text = exampleDetailText
+        step1.text = "local system"
 
         let answerFormat2 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height (metric system)", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height", answer: answerFormat2)
         
-        step2.text = exampleDetailText
+        step2.text = "metric system"
 
         let answerFormat3 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height (USC system)", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height", answer: answerFormat3)
         
-        step2.text = exampleDetailText
+        step3.text = "USC system"
 
-        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3])
+        let answerFormat4 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!, unit: HKUnit.foot(), style: .decimal)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep4), title: "Height", answer: answerFormat4)
+        
+        step4.text = "HealthKit, height"
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3, step4])
     }
 
     /// This task demonstrates a question asking for the user weight.
     private var weightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.weightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight (local system)", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight", answer: answerFormat1)
         
-        step1.text = exampleDetailText
+        step1.text = "local system"
         
         let answerFormat2 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight (metric system)", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight", answer: answerFormat2)
         
-        step2.text = exampleDetailText
+        step2.text = "metric system"
         
         let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight (USC system)", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight", answer: answerFormat3)
         
-        step3.text = exampleDetailText
+        step3.text = "USC system"
         
         let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 45.50, minimumValue: 20.0, maximumValue: 100.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.metric)
         
-        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight (metric system, additional precision)", answer: answerFormat4)
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight", answer: answerFormat4)
         
-        step4.text = exampleDetailText
+        step4.text = "metric system, additional precision"
         
         let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 100.0, minimumValue: 50.0, maximumValue: 150.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.USC)
         
-        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight (USC system, additional precision)", answer: answerFormat5)
+        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight", answer: answerFormat5)
         
-        step5.text = exampleDetailText
+        step5.text = "USC system, additional precision"
+
+        let answerFormat6 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!, unit: HKUnit.gram(), style: .decimal)
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5])
+        let step6 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep6), title: "Weight", answer: answerFormat6)
+        
+        step6.text = "HealthKit, body mass"
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5, step6])
     }
     
     /**
