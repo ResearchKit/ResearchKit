@@ -48,6 +48,7 @@
 
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
+#import <ResearchKit/ORKReviewCompletionStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>

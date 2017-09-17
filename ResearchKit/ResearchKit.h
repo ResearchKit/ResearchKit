@@ -72,6 +72,7 @@
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
+#import <ResearchKit/ORKReviewCompletionStepViewController.h>
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKInstructionStepViewController.h>
 #import <ResearchKit/ORKLoginStepViewController.h>

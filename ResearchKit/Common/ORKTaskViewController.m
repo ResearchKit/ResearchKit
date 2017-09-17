@@ -632,6 +632,20 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.view = view;
 }
 
+- (void)jumpToRoot:(BOOL)animated {
+    ORKStep *step = [self firstStep];
+    if ([self shouldPresentStep:step]) {
+        
+        if (![step isKindOfClass:[ORKInstructionStep class]]) {
+            [self startAudioPromptSessionIfNeeded];
+            [self requestHealthAuthorizationWithCompletion:nil];
+        }
+        
+        ORKStepViewController *firstViewController = [self viewControllerForStep:step];
+        [self showViewController:firstViewController goForward:YES animated:animated];
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -994,6 +1008,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     return shouldPresent;
 }
+
+- (ORKStep *)firstStep {
+    ORKStep *step = nil;
+    
+    if ([self.task respondsToSelector:@selector(stepAfterStep:withResult:)]) {
+        step = [self.task stepAfterStep:nil withResult:[self result]];
+    }
+    
+    return step;
+    
+}
+
 
 - (ORKStep *)nextStep {
     ORKStep *step = nil;

@@ -284,6 +284,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 ORK_CLASS_AVAILABLE
 @interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
 
+- (void)jumpToRoot:(BOOL)animated;
+
 /**
  Returns a newly initialized task view controller.
  
