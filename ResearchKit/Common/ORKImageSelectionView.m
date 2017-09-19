@@ -138,7 +138,8 @@ static const CGFloat SpacerHeight = 5.0;
     NSArray *_buttonViews;
     ORKImageChoiceLabel *_choiceLabel;
     ORKImageChoiceLabel *_placeHolderLabel;
-    BOOL *_isVertical;
+    BOOL _isVertical;
+    BOOL _singleChoice;
 }
 
 - (ORKImageChoiceLabel *)makeLabel {
@@ -157,6 +158,8 @@ static const CGFloat SpacerHeight = 5.0;
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
         _isVertical = answerFormat.isVertical;
+        
+        _singleChoice = answerFormat.style == ORKChoiceAnswerStyleSingleChoice;
         
         _placeHolderLabel = [self makeLabel];
         _placeHolderLabel.text = [ORKLocalizedString(@"PLACEHOLDER_IMAGE_CHOICES", nil) stringByAppendingString:@""];
@@ -366,12 +369,15 @@ static const CGFloat SpacerHeight = 5.0;
 }
 
 - (void)setLabelText:(NSString *)text {
-    _choiceLabel.text = text;
-    _choiceLabel.textColor = [UIColor blackColor];
-    
-    _choiceLabel.hidden = NO;
-    _placeHolderLabel.hidden = !_choiceLabel.hidden;
-    
+    if (_singleChoice || [text length] > 0) {
+        _choiceLabel.text = text;
+        _choiceLabel.textColor = [UIColor blackColor];
+        
+        _choiceLabel.hidden = NO;
+        _placeHolderLabel.hidden = !_choiceLabel.hidden;
+    } else {
+        [self resetLabelText];
+    }
 }
 
 - (IBAction)buttonTapped:(UIButton *)button {
@@ -381,15 +387,25 @@ static const CGFloat SpacerHeight = 5.0;
         [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              ORKChoiceButtonView *buttonView = obj;
              if (buttonView.button != button) {
-                 buttonView.button.selected = NO;
+                 if (_singleChoice) {
+                     buttonView.button.selected = NO;
+                 }
              } else {
-                 [self setLabelText:buttonView.labelText];
+                 if (_singleChoice) {
+                     [self setLabelText:buttonView.labelText];
+                 } else {
+                     [self setLabelText:[_helper labelForChoiceAnswer:[_helper answerForSelectedIndexes:[self selectedIndexes]]]];
+                 }
              }
              
          }];
         
     } else {
-        [self resetLabelText];
+        if (_singleChoice) {
+            [self resetLabelText];
+        } else {
+            [self setLabelText:[_helper labelForChoiceAnswer:[_helper answerForSelectedIndexes:[self selectedIndexes]]]];
+        }
     }
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];
