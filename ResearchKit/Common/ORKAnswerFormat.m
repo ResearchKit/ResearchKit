@@ -425,11 +425,13 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithDefaultValue:(nullable NSNumber *)defaultValue
                                                  minimumValue:(nullable NSNumber *)minimumValue
                                                  maximumValue:(nullable NSNumber *)maximumValue
+                                                valueInterval:(nullable NSNumber *)valueInterval
                                           additionalPrecision:(BOOL)additionalPrecision
                                             measurementSystem:(ORKMeasurementSystem)measurementSystem {
     return [[ORKWeightAnswerFormat alloc] initWithDefaultValue:defaultValue
                                                   minimumValue:minimumValue
                                                   maximumValue:maximumValue
+                                                 valueInterval:valueInterval
                                            additionalPrecision:additionalPrecision
                                              measurementSystem:measurementSystem];
 }
@@ -2788,6 +2790,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (instancetype)initWithDefaultValue:(nullable NSNumber *)defaultValue
                         minimumValue:(nullable NSNumber *)minimumValue
                         maximumValue:(nullable NSNumber *)maximumValue
+                       valueInterval:(nullable NSNumber *)valueInterval
                  additionalPrecision:(BOOL)additionalPrecision
                    measurementSystem:(ORKMeasurementSystem)measurementSystem {
     self = [super init];
@@ -2795,6 +2798,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         _defaultValue = defaultValue;
         _minimumValue = minimumValue;
         _maximumValue = maximumValue;
+        _valueInterval = valueInterval;
         _additionalPrecision = additionalPrecision;
         _measurementSystem = measurementSystem;
     }
@@ -2848,7 +2852,10 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
             ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
             NSString *wholeString = [formatter stringFromNumber:@(whole)];
             NSString *fractionString = [formatter stringFromNumber:@(fraction)];
-            if (!self.additionalPrecision) {
+            if (!self.additionalPrecision && fraction == 0.0) {
+                answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
+            } else if (!self.additionalPrecision && fraction == 50.0) {
+                wholeString = [formatter stringFromNumber:@(whole + 0.5)];
                 answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
             } else {
                 answerString = [NSString stringWithFormat:@"%@.%@ %@", wholeString, fractionString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];

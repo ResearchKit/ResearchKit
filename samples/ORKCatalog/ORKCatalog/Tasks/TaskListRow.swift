@@ -377,6 +377,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case weightQuestionStep4
         case weightQuestionStep5
         case weightQuestionStep6
+        case weightQuestionStep7
         
         // Task with an image choice question.
         case imageChoiceQuestionTask
@@ -793,7 +794,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight", answer: answerFormat2)
         
-        step2.text = "metric system"
+        step2.text = "metric system, default"
         
         let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
         
@@ -801,13 +802,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         step3.text = "USC system"
         
-        let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 45.50, minimumValue: 20.0, maximumValue: 100.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.metric)
+        let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 45.50, minimumValue: 20.0, maximumValue: 100.0, valueInterval: nil, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.metric)
         
         let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight", answer: answerFormat4)
         
         step4.text = "metric system, additional precision"
         
-        let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 100.0, minimumValue: 50.0, maximumValue: 150.0, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.USC)
+        let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: 100.0, minimumValue: 50.0, maximumValue: 150.0, valueInterval: nil, additionalPrecision: true, measurementSystem: ORKMeasurementSystem.USC)
         
         let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight", answer: answerFormat5)
         
@@ -819,7 +820,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         step6.text = "HealthKit, body mass"
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5, step6])
+        let answerFormat7 = ORKAnswerFormat.weightAnswerFormat(withDefaultValue: nil, minimumValue: nil, maximumValue: nil, valueInterval: 0.0, additionalPrecision: false, measurementSystem: ORKMeasurementSystem.metric)
+        
+        let step7 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep7), title: "Weight", answer: answerFormat7)
+        
+        step7.text = "metric system, no decimal places"
+                
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step7, step3, step4, step5, step6])
     }
     
     /**

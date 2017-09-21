@@ -107,7 +107,12 @@
             [self setAnswer:[self defaultAnswerValue]];
             return;
         }
-        [_pickerView selectRow:wholeIndex inComponent:0 animated:NO];
+        if (_answerFormat.additionalPrecision || fraction == 0.0) {
+            [_pickerView selectRow:wholeIndex inComponent:0 animated:NO];
+        } else if (!_answerFormat.additionalPrecision && fraction == 50.0) {
+            wholeIndex = [kilogramValues indexOfObject:@((NSInteger)whole + 0.5)];
+            [_pickerView selectRow:wholeIndex inComponent:0 animated:NO];
+        }
         if (_answerFormat.additionalPrecision) {
             [_pickerView selectRow:fractionIndex inComponent:1 animated:NO];
             [_pickerView selectRow:0 inComponent:2 animated:NO];
@@ -201,7 +206,10 @@
         double whole, fraction;
         ORKKilogramsToWholeAndFractions(((NSNumber *)_answer).doubleValue, &whole, &fraction);
         NSString *wholeString = [formatter stringFromNumber:@(whole)];
-        if (!_answerFormat.additionalPrecision) {
+        if (!_answerFormat.additionalPrecision && fraction == 0.0) {
+            selectedLabelText = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
+        } else if (!_answerFormat.additionalPrecision && fraction == 50.0) {
+            wholeString = [formatter stringFromNumber:@(whole + 0.5)];
             selectedLabelText = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
         } else {
             formatter.minimumIntegerDigits = 2;
@@ -323,6 +331,11 @@
     
     for (NSInteger i = min; i <= max; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
+        if (!_answerFormat.additionalPrecision) {
+            if (!_answerFormat.valueInterval || [_answerFormat.valueInterval integerValue] != 0) {
+                [mutableWholeValues addObject:[NSNumber numberWithDouble:i + 0.5]];
+            }
+        }
     }
     wholeValues = [mutableWholeValues copy];
     return wholeValues;

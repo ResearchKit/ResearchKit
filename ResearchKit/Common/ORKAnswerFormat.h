@@ -169,6 +169,7 @@ ORK_CLASS_AVAILABLE
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithDefaultValue:(nullable NSNumber *)defaultValue
                                                  minimumValue:(nullable NSNumber *)minimumValue
                                                  maximumValue:(nullable NSNumber *)maximumValue
+                                                valueInterval:(nullable NSNumber *)valueInterval
                                           additionalPrecision:(BOOL)additionalPrecision
                                             measurementSystem:(ORKMeasurementSystem)measurementSystem;
 
@@ -1479,6 +1480,8 @@ ORK_CLASS_AVAILABLE
  parameter is `nil`, 0 kg (or 0 lbs) is the minimum.
  @param maximumValue            The maximum value that is accessible in the picker. If the value of this
  parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ @param valueInterval           The interval at which the picker should display kilograms. The default is .5 
+ otherwise zero. If value interval is non-zero or if 'nil' the default is used.
  @param additionalPrecision     Pass `YES` to allow additional precision; for the default, pass `NO`.
  @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
  accepted values.
@@ -1488,6 +1491,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithDefaultValue:(nullable NSNumber *)defaultValue
                         minimumValue:(nullable NSNumber *)minimumValue
                         maximumValue:(nullable NSNumber *)maximumValue
+                       valueInterval:(nullable NSNumber *)valueInterval
                  additionalPrecision:(BOOL)additionalPrecision
                    measurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 
@@ -1516,6 +1520,13 @@ ORK_CLASS_AVAILABLE
  When the value of this property is `nil`, 657 kg (or 1,450 lbs) is the maximum.
  */
 @property (copy, readonly, nullable) NSNumber *maximumValue;
+
+/**
+ The interval at which the picker should display kilograms. (ignored for USC and additionalPrecision=YES)
+ 
+ The default is .5 otherwise zero. If value is non-zero or if 'nil' the default is used.
+ */
+@property (copy, readonly, nullable) NSNumber *valueInterval;
 
 /**
  A Boolean value indicating whether the value picker will display additional precision. (read-only)
