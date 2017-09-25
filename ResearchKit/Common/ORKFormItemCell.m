@@ -285,6 +285,11 @@ static const CGFloat HorizontalMargin = 15.0;
     textField.delegate = self;
     textField.placeholder = self.formItem.placeholder;
     
+    
+    textField.userInteractionEnabled = !self.formItem.isReadOnly;
+    textField.text = self.formItem.initialText;
+    [self inputValueDidChange];
+    
     [self.contentView addSubview:_textFieldView];
     
     self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;

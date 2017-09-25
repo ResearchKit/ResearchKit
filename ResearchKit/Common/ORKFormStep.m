@@ -212,6 +212,8 @@
     ORKFormItem *item = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy] text:[_text copy] answerFormat:[_answerFormat copy]];
     item.optional = _optional;
     item.placeholder = _placeholder;
+    item.initialText = _initialText;
+    item.isReadOnly = _isReadOnly;
     return item;
 }
 
@@ -222,6 +224,8 @@
         ORK_DECODE_BOOL(aDecoder, optional);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, initialText, NSString);
+        ORK_DECODE_BOOL(aDecoder, isReadOnly);
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
         ORK_DECODE_OBJ_CLASS(aDecoder, step, ORKFormStep);
     }
@@ -233,6 +237,8 @@
     ORK_ENCODE_BOOL(aCoder, optional);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, placeholder);
+    ORK_ENCODE_OBJ(aCoder, initialText);
+    ORK_ENCODE_BOOL(aCoder, isReadOnly);
     ORK_ENCODE_OBJ(aCoder, answerFormat);
     ORK_ENCODE_OBJ(aCoder, step);
 
@@ -249,6 +255,8 @@
             && self.optional == castObject.optional
             && ORKEqualObjects(self.text, castObject.text)
             && ORKEqualObjects(self.placeholder, castObject.placeholder)
+            && ORKEqualObjects(self.initialText, castObject.initialText)
+            && self.isReadOnly == castObject.isReadOnly
             && ORKEqualObjects(self.answerFormat, castObject.answerFormat));
 }
 
