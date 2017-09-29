@@ -97,17 +97,9 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     ORKScrollViewObserver *_scrollViewObserver;
     BOOL _hasSetProgressLabel;
     BOOL _hasBeenPresented;
-
-    NSURL *_outputDirectory;
-    
-    NSDate *_presentedDate;
-    NSDate *_dismissedDate;
     
     NSString *_lastBeginningInstructionStepIdentifier;
     NSString *_lastRestorableStepIdentifier;
-    
-    NSString *_restoredTaskIdentifier;
-    NSString *_restoredStepIdentifier;
 }
 
 @property (nonatomic, strong) UIImageView *hairline;
@@ -318,10 +310,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (!_task) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Attempted to present task view controller without a task" userInfo:nil];
-    }
-    
     if (!_hasBeenPresented) {
         // Add first step viewController
         ORKStep *step = [self nextStep];
@@ -331,25 +319,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             
         }
         _hasBeenPresented = YES;
-    }
-    
-    // Record TaskVC's start time.
-    // TaskVC is one time use only, no need to update _startDate later.
-    if (!_presentedDate) {
-        _presentedDate = [NSDate date];
-    }
-    
-    // Clear endDate if current TaskVC got presented again
-    _dismissedDate = nil;
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    // Set endDate on TaskVC is dismissed,
-    // because nextResponder is not nil when current TaskVC is covered by another modal view
-    if (self.nextResponder == nil) {
-        _dismissedDate = [NSDate date];
     }
 }
 
@@ -424,10 +393,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (ORKTaskResult *)result {
-    
     ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:[self.task identifier] taskRunUUID:self.taskRunUUID outputDirectory:self.outputDirectory];
-    result.startDate = _presentedDate;
-    result.endDate = _dismissedDate ? :[NSDate date];
     
     // Update current step result
     [self setManagedResult:[self.currentStepViewController result] forKey:self.currentStepViewController.step.identifier];
@@ -435,15 +401,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     result.results = [self managedResults];
     
     return result;
-}
-
-- (NSData *)restorationData {
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [self encodeRestorableStateWithCoder:archiver];
-    [archiver finishEncoding];
-    
-    return [data copy];
 }
 
 - (void)ensureDirectoryExists:(NSURL *)outputDirectory {
@@ -463,17 +420,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
         }
     }
-}
-
-- (void)setOutputDirectory:(NSURL *)outputDirectory {
-    if (_hasBeenPresented) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];
-    }
-    [self ensureDirectoryExists:outputDirectory];
-    
-    _outputDirectory = [outputDirectory copy];
-    
-    [[self currentStepViewController] setOutputDirectory:_outputDirectory];
 }
 
 - (void)setRegisteredScrollView:(UIScrollView *)registeredScrollView {
@@ -1042,143 +988,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
     }
     [self showViewController:stepViewController goForward:YES animated:YES];
-}
-
-#pragma mark - UIStateRestoring
-
-static NSString *const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
-static NSString *const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
-static NSString *const _ORKManagedResultsRestoreKey = @"managedResults";
-static NSString *const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
-static NSString *const _ORKHasSetProgressLabelRestoreKey = @"hasSetProgressLabel";
-static NSString *const _ORKHasRequestedHealthDataRestoreKey = @"hasRequestedHealthData";
-static NSString *const _ORKRequestedHealthTypesForReadRestoreKey = @"requestedHealthTypesForRead";
-static NSString *const _ORKRequestedHealthTypesForWriteRestoreKey = @"requestedHealthTypesForWrite";
-static NSString *const _ORKOutputDirectoryRestoreKey = @"outputDirectory";
-static NSString *const _ORKLastBeginningInstructionStepIdentifierKey = @"lastBeginningInstructionStepIdentifier";
-static NSString *const _ORKTaskIdentifierRestoreKey = @"taskIdentifier";
-static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
-static NSString *const _ORKPresentedDate = @"presentedDate";
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
-    [super encodeRestorableStateWithCoder:coder];
-    
-    [coder encodeObject:_taskRunUUID forKey:_ORKTaskRunUUIDRestoreKey];
-    [coder encodeBool:self.showsProgressInNavigationBar forKey:_ORKShowsProgressInNavigationBarRestoreKey];
-    [coder encodeObject:_managedResults forKey:_ORKManagedResultsRestoreKey];
-    [coder encodeObject:_managedStepIdentifiers forKey:_ORKManagedStepIdentifiersRestoreKey];
-    [coder encodeBool:_hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
-    [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
-    
-    [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryRestoreKey];
-    [coder encodeObject:_lastBeginningInstructionStepIdentifier forKey:_ORKLastBeginningInstructionStepIdentifierKey];
-    
-    [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
-    
-    ORKStep *step = [_currentStepViewController step];
-    if ([step isRestorable] && !(_currentStepViewController.isBeingReviewed && _currentStepViewController.parentReviewStep.isStandalone)) {
-        [coder encodeObject:step.identifier forKey:_ORKStepIdentifierRestoreKey];
-    } else if (_lastRestorableStepIdentifier) {
-        [coder encodeObject:_lastRestorableStepIdentifier forKey:_ORKStepIdentifierRestoreKey];
-    }
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
-    [super decodeRestorableStateWithCoder:coder];
-    
-    _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
-    self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
-    
-    _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
-    [self ensureDirectoryExists:_outputDirectory];
-    
-    // Must have a task object already provided by this point in the restoration, in order to restore any other state.
-    if (_task) {
-        
-        // Recover partially entered results, even if we may not be able to jump to the desired step.
-        _managedResults = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKManagedResultsRestoreKey];
-        _managedStepIdentifiers = [coder decodeObjectOfClass:[NSMutableArray class] forKey:_ORKManagedStepIdentifiersRestoreKey];
-        
-        _restoredTaskIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKTaskIdentifierRestoreKey];
-        if (_restoredTaskIdentifier) {
-            if (![_task.identifier isEqualToString:_restoredTaskIdentifier]) {
-                @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                               reason:[NSString stringWithFormat:@"Restored task identifier %@ does not match task %@ provided",_restoredTaskIdentifier,_task.identifier]
-                                             userInfo:nil];
-            }
-        }
-        
-        if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
-            _hasSetProgressLabel = [coder decodeBoolForKey:_ORKHasSetProgressLabelRestoreKey];
-            _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
-            _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
-            
-            _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
-        } else {
-            ORK_Log_Warning(@"Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);
-        }
-    }
-}
-
-
-- (void)applicationFinishedRestoringState {
-    [super applicationFinishedRestoringState];
-    
-    _pageViewController = (UIPageViewController *)[self.childNavigationController viewControllers][0];
-    
-    if (!_task) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Task must be provided to restore task view controller"
-                                     userInfo:nil];
-    }
-    
-    if (_restoredStepIdentifier) {
-        ORKStepViewController *stepViewController = _currentStepViewController;
-        if (stepViewController) {
-            stepViewController.delegate = self;
-            
-            if (stepViewController.cancelButtonItem == nil) {
-                stepViewController.cancelButtonItem = [self defaultCancelButtonItem];
-            }
-            
-            if ([self.delegate respondsToSelector:@selector(taskViewController:hasLearnMoreForStep:)] &&
-                [self.delegate taskViewController:self hasLearnMoreForStep:stepViewController.step]) {
-                
-                stepViewController.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
-            }
-            
-            _stepViewControllerObserver = [[BRKViewControllerToolbarObserver alloc] initWithTargetViewController:stepViewController delegate:self];
-            
-        } else if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
-            stepViewController = [self viewControllerForStep:[_task stepWithIdentifier:_restoredStepIdentifier]];
-        } else {
-            stepViewController = [self viewControllerForStep:[_task stepAfterStep:nil withResult:[self result]]];
-        }
-        
-        if (stepViewController != nil) {
-            [self showViewController:stepViewController goForward:YES animated:NO];
-            _hasBeenPresented = YES;
-        }
-    }
-}
-
-+ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
-    if ([identifierComponents.lastObject isEqualToString:_PageViewControllerRestorationKey]) {
-        UIPageViewController *pageViewController = [self pageViewController];
-        pageViewController.restorationIdentifier = identifierComponents.lastObject;
-        pageViewController.restorationClass = self;
-        return pageViewController;
-    } else if ([identifierComponents.lastObject isEqualToString:_ChildNavigationControllerRestorationKey]) {
-        UINavigationController *navigationController = [UINavigationController new];
-        navigationController.restorationIdentifier = identifierComponents.lastObject;
-        navigationController.restorationClass = self;
-        return navigationController;
-    }
-    
-    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
-    taskViewController.restorationIdentifier = identifierComponents.lastObject;
-    taskViewController.restorationClass = self;
-    return taskViewController;
 }
 
 #pragma mark UINavigationController pass-throughs
