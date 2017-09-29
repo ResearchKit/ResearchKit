@@ -284,7 +284,10 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKUnitTextField *textField = _textFieldView.textField;
     textField.delegate = self;
     textField.placeholder = self.formItem.placeholder;
-    
+    if ([self.formItem.identifier isEqual:@"yourPortionOfTheCost"]) {
+        textField.textColor = [UIColor colorWithRed:0/255.0 green:185/255.0 blue:0/255.0 alpha:1];
+        textField.font = [UIFont boldSystemFontOfSize:18.0];
+    }
     
     textField.userInteractionEnabled = !self.formItem.isReadOnly;
     textField.text = self.formItem.initialText;
