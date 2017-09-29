@@ -161,7 +161,7 @@
         _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:textChoiceAnswerFormat
                                                                                        answer:nil
                                                                            beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:_index]
-                                                                          immediateNavigation:NO];
+                                                                          immediateNavigation:YES];
         
         [textChoiceAnswerFormat.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             BRKTableCellItem *cellItem = [[BRKTableCellItem alloc] initWithFormItem:item choiceIndex:idx];
@@ -282,13 +282,11 @@
 @property (nonatomic, strong) NSMutableDictionary *savedSystemTimeZones;
 @property (nonatomic, strong) NSDictionary *originalAnswers;
 
-@property (nonatomic, strong) NSMutableDictionary *savedDefaults;
 
 @end
 
 
 @implementation BRKFormStepViewController {
-    ORKAnswerDefaultSource *_defaultSource;
     ORKNavigationContainerView *_continueSkipView;
     NSMutableSet *_formItemCells;
     NSMutableArray<BRKTableSection *> *_sections;
@@ -297,7 +295,6 @@
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
-    _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
     if (result) {
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
@@ -329,6 +326,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    // HACK!!!!!! TODO BORIS
+    [_continueSkipView removeFromSuperview];
     
     [self.taskViewController setRegisteredScrollView:_tableView];
     
@@ -340,26 +339,6 @@
             [types addObject:objType];
         }
     }
-    
-    BOOL refreshDefaultsPending = NO;
-    if (types.count) {
-        NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (![types isSubsetOfSet:alreadyRequested]) {
-            refreshDefaultsPending = YES;
-            [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
-                if (!success) {
-                    ORK_Log_Debug(@"Authorization: %@",error);
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self refreshDefaults];
-                });
-            }];
-        }
-    }
-    if (!refreshDefaultsPending) {
-        [self refreshDefaults];
-    }
-    
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
 }
@@ -367,65 +346,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
-}
-
-- (void)updateDefaults:(NSMutableDictionary *)defaults {
-    _savedDefaults = defaults;
-    
-    for (ORKFormItemCell *cell in [_tableView visibleCells]) {
-        NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-        
-        BRKTableSection *section = _sections[indexPath.section];
-        BRKTableCellItem *cellItem = [section items][indexPath.row];
-        ORKFormItem *formItem = cellItem.formItem;
-        if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
-            id answer = _savedAnswers[formItem.identifier];
-            answer = answer ? : _savedDefaults[formItem.identifier];
-            
-            [section.textChoiceCellGroup setAnswer:answer];
-            
-            // Answers need to be saved.
-            [self setAnswer:answer forIdentifier:formItem.identifier];
-            
-        } else {
-            cell.defaultAnswer = _savedDefaults[formItem.identifier];
-        }
-    }
-    
-    [self updateButtonStates];
-    [self notifyDelegateOnResultChange];
-}
-
-- (void)refreshDefaults {
-    NSArray *formItems = [self formItems];
-    ORKAnswerDefaultSource *source = _defaultSource;
-    ORKWeakTypeOf(self) weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        __block NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
-        for (ORKFormItem *formItem in formItems) {
-            [source fetchDefaultValueForAnswerFormat:formItem.answerFormat handler:^(id defaultValue, NSError *error) {
-                if (defaultValue != nil) {
-                    defaults[formItem.identifier] = defaultValue;
-                } else if (error != nil) {
-                    ORK_Log_Warning(@"Error fetching default for %@: %@", formItem, error);
-                }
-                dispatch_semaphore_signal(semaphore);
-            }];
-        }
-        for (__unused ORKFormItem *formItem in formItems) {
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        }
-        
-        // All fetches have completed.
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
-            [strongSelf updateDefaults:defaults];
-        });
-        
-    });
-    
-    
 }
 
 - (void)removeAnswerForIdentifier:(NSString *)identifier {
@@ -852,7 +772,6 @@
                     [_formItemCells addObject:formCell];
                     [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                     formCell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    formCell.defaultAnswer = _savedDefaults[formItem.identifier];
                     if (!_savedAnswers) {
                         _savedAnswers = [NSMutableDictionary new];
                     }
@@ -991,33 +910,6 @@
     return _currentFirstResponderCell;
 }
 
-#pragma mark UIStateRestoration
-
-static NSString *const _ORKSavedAnswersRestoreKey = @"savedAnswers";
-static NSString *const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
-static NSString *const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
-static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
-static NSString *const _ORKOriginalAnswersRestoreKey = @"originalAnswers";
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
-    [super encodeRestorableStateWithCoder:coder];
-    
-    [coder encodeObject:_savedAnswers forKey:_ORKSavedAnswersRestoreKey];
-    [coder encodeObject:_savedAnswerDates forKey:_ORKSavedAnswerDatesRestoreKey];
-    [coder encodeObject:_savedSystemCalendars forKey:_ORKSavedSystemCalendarsRestoreKey];
-    [coder encodeObject:_savedSystemTimeZones forKey:_ORKSavedSystemTimeZonesRestoreKey];
-    [coder encodeObject:_originalAnswers forKey:_ORKOriginalAnswersRestoreKey];
-}
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
-    [super decodeRestorableStateWithCoder:coder];
-    
-    _savedAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswersRestoreKey];
-    _savedAnswerDates = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswerDatesRestoreKey];
-    _savedSystemCalendars = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemCalendarsRestoreKey];
-    _savedSystemTimeZones = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemTimeZonesRestoreKey];
-    _originalAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKOriginalAnswersRestoreKey];
-}
 
 #pragma mark Rotate
 
