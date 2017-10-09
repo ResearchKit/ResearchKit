@@ -58,7 +58,7 @@ struct StudyTasks {
         // Instruction step
         let instructionStep = ORKInstructionStep(identifier: "IntroStep")
         instructionStep.title = "Knoweledge of the Universe Survey"
-        instructionStep.text = "Please answer these 6 questions to the best of your ability. It's okay to skip a question if you don't know the answer."
+        instructionStep.text = "Please answer these 6 questions to the best of your ability. It's okay to skip a question if you don't know the answer. When you are done, the results will be stored as a document in the Health app for you to share with other health professionals if you wish."
         
         steps += [instructionStep]
         

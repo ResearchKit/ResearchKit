@@ -137,6 +137,72 @@ extension ActivityViewController : ORKTaskViewControllerDelegate {
     
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Handle results using taskViewController.result
+
+        if reason == ORKTaskViewControllerFinishReason.completed {
+            if taskViewController.task!.identifier == "SurveyTask" {
+                let patient = ORKHL7CDAPerson()
+                patient.givenName = "John"
+                patient.familyName = "Appleseed"
+                do {
+                    let dateOfBirth = try HKHealthStore().dateOfBirthComponents()
+                    patient.birthdate = dateOfBirth.date!
+                }
+                catch {
+                    // As this is just an example we will fudge the results by setting the DOB as today's date
+                    // In a full application we would probably need to prompt for this to be filled in earlier
+                    // in the application
+                    patient.birthdate = Date ()
+                }
+                patient.birthdate = Date()
+                patient.gender = ORKHL7CDAAdministrativeGenderType.male
+            
+                let deviceAuthorAddress = ORKHL7CDAAddress()
+                deviceAuthorAddress.street = "South John Street"
+                deviceAuthorAddress.city = "Liverpool"
+                deviceAuthorAddress.state = "Merseyside"
+                deviceAuthorAddress.country = "UK"
+                deviceAuthorAddress.postalCode = "L1 8BU"
+
+                let deviceAuthorWorkTelecom = ORKHL7CDATelecom()
+                deviceAuthorWorkTelecom.telecomUseType = ORKHL7CDATelecomUseType.workPlace
+                deviceAuthorWorkTelecom.value = "+44 (0) 151 472 7200"
+            
+                let deviceAuthor = ORKHL7CDADeviceAuthor()
+                deviceAuthor.address = deviceAuthorAddress
+                deviceAuthor.telecoms = [deviceAuthorWorkTelecom]
+                deviceAuthor.softwareName = "ORKSample"
+            
+                let custodian = ORKHL7CDACustodian ()
+                custodian.address = deviceAuthorAddress
+                custodian.telecom = deviceAuthorWorkTelecom
+                custodian.name = "ResearchKit Developer"
+            
+                let assignedPerson = ORKHL7CDAPerson()
+                assignedPerson.prefix = "Dr"
+                assignedPerson.givenName = "A"
+                assignedPerson.familyName = "Cula"
+            
+                let hl7CDAOutput = ORKHL7CDA.make(taskViewController.result, withTemplate:ORKHL7CDADocumentType.CCD, forPatient:patient, effectiveFrom:Date(), effectiveTo:Date(), deviceAuthor:deviceAuthor, custodian:custodian, assignedPerson:assignedPerson)
+            
+                let documentData: Data = hl7CDAOutput.data(using: .utf8)!
+            
+                do {
+                    let cdaSample = try HKCDADocumentSample.init(data: documentData, start:Date(), end: Date(), metadata: nil)
+            
+                    HKHealthStore().save(cdaSample, withCompletion: { (success, error) in
+                        if !success {
+                            fatalError("The CDA Document couldn't be saved")
+                        }
+                    })
+                    
+                } catch {
+                    // Handle validation error creating sample here...
+                    fatalError("The CDA Document failed validation - this shouldn't happen")
+                }
+            }
+        }
         taskViewController.dismiss(animated: true, completion: nil)
+
     }
 }
+

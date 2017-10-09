@@ -55,6 +55,7 @@
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import "ORKHL7CDA.h"
 
 
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
@@ -418,6 +419,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKStepResult *parentResult = [super result];
     ORKQuestionStep *questionStep = self.questionStep;
     
+    NSMutableArray<ORKResult *> *results;
+    results = [[NSMutableArray alloc] initWithCapacity:2];
+    
     if (self.answer) {
         ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
         ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
@@ -439,7 +443,43 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         result.startDate = parentResult.startDate;
         result.endDate = parentResult.endDate;
         
-        parentResult.results = @[result];
+        [results addObject:result];
+        
+        if (questionStep.hl7CDATextDelegate != nil) {
+            id <ORKStepHL7CDATextDelegate> delegate = questionStep.hl7CDATextDelegate;
+            NSString *hl7TextIdentifier = [NSString stringWithFormat:@"HL7CDAText%@", questionStep.identifier];
+            
+            ORKHL7CDATextFragment *hl7Fragment = [delegate hl7CDAtextForStep:questionStep withResult:result];
+            ORKHL7CDATextFragmentResult *hl7FragmentResult = [[ORKHL7CDATextFragmentResult alloc] initWithIdentifier:hl7TextIdentifier];
+            
+            if (hl7Fragment.xmlFragment != nil) {
+                hl7FragmentResult.xmlFragment = hl7Fragment.xmlFragment;
+                hl7FragmentResult.sectionType = hl7Fragment.sectionType;
+                hl7FragmentResult.startDate = parentResult.startDate;
+                hl7FragmentResult.endDate = parentResult.endDate;
+            
+                [results addObject:hl7FragmentResult];
+            }
+        }
+        else {
+            ORKHL7CDATextFragment *hl7Fragment = [result HL7CDATextFragmentForStep:questionStep];
+            if (hl7Fragment != nil) {
+                NSString *hl7TextIdentifier = [NSString stringWithFormat:@"HL7CDAText%@", questionStep.identifier];
+                ORKHL7CDATextFragmentResult *hl7FragmentResult = [[ORKHL7CDATextFragmentResult alloc] initWithIdentifier:hl7TextIdentifier];
+                
+                hl7FragmentResult.xmlFragment = hl7Fragment.xmlFragment;
+                hl7FragmentResult.sectionType = hl7Fragment.sectionType;
+                
+                hl7FragmentResult.startDate = parentResult.startDate;
+                hl7FragmentResult.endDate = parentResult.endDate;
+                
+                [results addObject:hl7FragmentResult];
+            }
+            
+        }
+        
+        parentResult.results = results;
+
     }
     
     return parentResult;

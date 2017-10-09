@@ -253,7 +253,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate, ORKStepHL7CDATextDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -2908,6 +2908,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                    answer:scaleAnswerFormat];
+        step.hl7CDATextDelegate = self;
+
         [steps addObject:step];
     }
     
@@ -4193,10 +4195,59 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
-            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
-                _embeddedReviewTaskResult = taskViewController.result;
+            {
+                if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                    _embeddedReviewTaskResult = taskViewController.result;
+                }
+                [self taskViewControllerDidComplete:taskViewController];
+            
+                // Create John Appleseed as our patient
+                ORKHL7CDAPerson *patient = [[ORKHL7CDAPerson alloc] init];
+                patient.givenName = @"John";
+                patient.familyName = @"Appleseed";
+                patient.birthdate = [NSDate date];
+                patient.gender = ORKHL7CDAAdministrativeGenderTypeMale;
+                
+                ORKHL7CDAAddress *deviceAuthorAddress = [[ORKHL7CDAAddress alloc] init];
+                deviceAuthorAddress.street = @"Hope Street";
+                deviceAuthorAddress.city = @"Liverpool";
+                deviceAuthorAddress.state = @"Merseyside";
+                deviceAuthorAddress.country = @"UK";
+                deviceAuthorAddress.postalCode = @"L35 5DR";
+                
+                NSMutableArray *deviceAuthorTelecoms = [[NSMutableArray alloc] init];
+                ORKHL7CDATelecom *deviceAuthorWorkTelecom = [[ORKHL7CDATelecom alloc] init];
+                deviceAuthorWorkTelecom.telecomUseType = ORKHL7CDATelecomUseTypeWorkPlace;
+                deviceAuthorWorkTelecom.value = @"+44 01234 567890";
+                [deviceAuthorTelecoms addObject:deviceAuthorWorkTelecom];
+
+                ORKHL7CDADeviceAuthor *deviceAuthor = [[ORKHL7CDADeviceAuthor alloc] init];
+                deviceAuthor.address = deviceAuthorAddress;
+                deviceAuthor.telecoms = deviceAuthorTelecoms;
+                deviceAuthor.softwareName = @"ORKTest";
+                
+                ORKHL7CDACustodian *custodian = [[ORKHL7CDACustodian alloc] init];
+                custodian.address = deviceAuthorAddress;
+                custodian.telecom = deviceAuthorWorkTelecom;
+                custodian.name = @"ResearchKit Developer Test Team";
+                
+                // Create Hippocrates of Kos as the 'assigned person' (usually the Study PI)
+                ORKHL7CDAPerson *assignedPerson = [[ORKHL7CDAPerson alloc] init];
+                assignedPerson.prefix = @"Dr.";
+                assignedPerson.givenName = @"Hippocrates";
+                assignedPerson.familyName = @"Hippocrates";
+                assignedPerson.suffix = @"II of Kos";
+                
+                // Produce an HL7CDA file as test output
+                [ORKHL7CDA makeHL7CDA:taskViewController.result
+                         withTemplate:ORKHL7CDADocumentTypeCCD
+                           forPatient:patient
+                        effectiveFrom:[NSDate date]
+                          effectiveTo:[NSDate date]
+                         deviceAuthor:deviceAuthor
+                            custodian:custodian
+                       assignedPerson:assignedPerson];
             }
-            [self taskViewControllerDidComplete:taskViewController];
             break;
         case ORKTaskViewControllerFinishReasonFailed:
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
@@ -4478,6 +4529,18 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:StepWillDisappearTaskIdentifier steps:@[step1, stepLast]];
     return locationTask;
+}
+
+#pragma mark - ORKStepHL7CDATextDelegate
+
+-(ORKHL7CDATextFragment *)hl7CDAtextForStep:(ORKStep *)step withResult:(ORKResult *)result {
+    
+    ORKHL7CDATextFragment *fragment = [[ORKHL7CDATextFragment alloc] init];
+    
+    fragment.sectionType = ORKHL7CDASectionTypePurpose;
+    fragment.xmlFragment = @"Hello";
+    
+    return fragment;
 }
 
 #pragma mark - Confirmation Form Item

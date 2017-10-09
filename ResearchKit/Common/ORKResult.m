@@ -30,6 +30,7 @@
 
 
 #import "ORKResult.h"
+#import "ORKHL7CDA.h"
 
 #import "ORKRecorder_Internal.h"
 
@@ -148,6 +149,10 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (NSString *)description {
     return [self descriptionWithNumberOfPaddingSpaces:0];
+}
+
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    return nil;
 }
 
 @end
@@ -1407,6 +1412,40 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return [description copy];
 }
 
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    NSAssert([step isKindOfClass:[ORKQuestionStep class]], @"Step needs to be an ORKQuestionStep");
+    
+    ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+    
+    ORKHL7CDATextFragment *textFragment = nil;
+    
+    if (self.answer != nil) {
+        textFragment = [[ORKHL7CDATextFragment alloc] init];
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
+        
+        NSString *textDescription = nil;
+        
+        if (questionStep.title != nil) {
+            textDescription = questionStep.title;
+        }
+        else {
+            if (questionStep.text != nil) {
+                textDescription = questionStep.text;
+            }
+            else {
+                textDescription = @"";
+            }
+        }
+        
+        if ([questionStep.answerFormat isKindOfClass:[ORKScaleAnswerFormat class]]) {
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.answer];
+        }
+    }
+    
+    return textFragment;
+}
+
+
 @end
 
 
@@ -1510,6 +1549,39 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (id)answer {
     return self.choiceAnswers;
+}
+
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    NSAssert([step isKindOfClass:[ORKQuestionStep class]], @"Step needs to be an ORKQuestionStep");
+    
+    ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+    
+    ORKHL7CDATextFragment *textFragment = nil;
+    
+    if (self.choiceAnswers.count >0) {
+        textFragment = [[ORKHL7CDATextFragment alloc] init];
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
+        
+        NSString *textDescription = nil;
+        
+        if (questionStep.title != nil) {
+            textDescription = questionStep.title;
+        }
+        else {
+            if (questionStep.text != nil) {
+                textDescription = questionStep.text;
+            }
+            else {
+                textDescription = @"";
+            }
+        }
+        
+        for (NSString *answer in self.choiceAnswers) {
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.answer];
+        }
+    }
+    
+    return textFragment;
 }
 
 @end
@@ -1628,6 +1700,46 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return self.booleanAnswer;
 }
 
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    NSAssert([step isKindOfClass:[ORKQuestionStep class]], @"Step needs to be an ORKQuestionStep");
+    
+    ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+    
+    ORKHL7CDATextFragment *textFragment = nil;
+    
+    if (self.answer) {
+        textFragment = [[ORKHL7CDATextFragment alloc] init];
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
+        
+        NSString *textDescription = nil;
+        
+        if (questionStep.title != nil) {
+            textDescription = questionStep.title;
+        }
+        else {
+            if (questionStep.text != nil) {
+                textDescription = questionStep.text;
+            }
+            else {
+                textDescription = @"";
+            }
+        }
+        
+        NSString *textAnswer;
+        if (self.answer == [NSNumber numberWithBool:TRUE]) {
+            textAnswer = @"True";
+        }
+        if (self.answer == [NSNumber numberWithBool:FALSE]) {
+            textAnswer = @"False";
+        }
+        if (textAnswer != nil) {
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,textAnswer];
+        }
+    }
+    
+    return textFragment;
+}
+
 @end
 
 
@@ -1679,6 +1791,39 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (id)answer {
     return self.textAnswer;
+}
+
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    NSAssert([step isKindOfClass:[ORKQuestionStep class]], @"Step needs to be an ORKQuestionStep");
+    
+    ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+    
+    ORKHL7CDATextFragment *textFragment = nil;
+    
+    if (self.answer) {
+        textFragment = [[ORKHL7CDATextFragment alloc] init];
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
+        
+        NSString *textDescription = nil;
+        
+        if (questionStep.title != nil) {
+            textDescription = questionStep.title;
+        }
+        else {
+            if (questionStep.text != nil) {
+                textDescription = questionStep.text;
+            }
+            else {
+                textDescription = @"";
+            }
+        }
+        
+        if (self.textAnswer != nil) {
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,self.textAnswer];
+        }
+    }
+    
+    return textFragment;
 }
 
 @end
@@ -1743,6 +1888,40 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (NSString *)descriptionSuffix {
     return [NSString stringWithFormat:@" %@>", _unit];
+}
+
+
+-(ORKHL7CDATextFragment *)HL7CDATextFragmentForStep:(ORKStep *)step {
+    NSAssert([step isKindOfClass:[ORKQuestionStep class]], @"Step needs to be an ORKQuestionStep");
+    
+    ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+    
+    ORKHL7CDATextFragment *textFragment = nil;
+    
+    if (self.answer) {
+        textFragment = [[ORKHL7CDATextFragment alloc] init];
+        textFragment.sectionType = ORKHL7CDASectionTypeResults;
+        
+        NSString *textDescription = nil;
+        
+        if (questionStep.title != nil) {
+            textDescription = questionStep.title;
+        }
+        else {
+            if (questionStep.text != nil) {
+                textDescription = questionStep.text;
+            }
+            else {
+                textDescription = @"";
+            }
+        }
+        
+        if (self.numericAnswer != nil) {
+            textFragment.xmlFragment = [NSMutableString stringWithFormat:@"<tr><td>%@</td><td>%@</td></tr>",textDescription,[self.numericAnswer stringValue]];
+        }
+    }
+    
+    return textFragment;
 }
 
 @end
@@ -2359,6 +2538,13 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 
 @end
 
+@implementation ORKHL7CDAFragmentResult
+
+@end
+
+@implementation ORKHL7CDATextFragmentResult
+
+@end
 
 @implementation ORKVideoInstructionStepResult
 
