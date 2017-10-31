@@ -52,7 +52,7 @@ ORK_CLASS_AVAILABLE
  
  The detail text is displayed below the content of the `text` property.
  */
-@property (nonatomic, copy, nullable) NSString *detailText;
+@property (nonatomic, copy, nullable) NSAttributedString *detailText;
 
 /**
  Additional text to display for the step in a localized string at the bottom of the view.
