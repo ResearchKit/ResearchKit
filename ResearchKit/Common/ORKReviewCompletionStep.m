@@ -29,17 +29,19 @@
  */
 
 
-@import UIKit;
+#import "ORKReviewCompletionStep.h"
+
+#import "ORKReviewCompletionStepViewController.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKReviewCompletionStep
 
-@interface ORKStepHeaderView : UIView
++ (Class)stepViewControllerClass {
+    return [ORKReviewCompletionStepViewController class];
+}
 
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
-
-- (void)setErrorMessage:(nullable NSString*) message;
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

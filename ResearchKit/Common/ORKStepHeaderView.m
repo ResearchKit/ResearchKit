@@ -40,7 +40,8 @@
 
 @implementation ORKStepHeaderView {
     NSLayoutConstraint *_captionMinBottomSpacingConstraint;
-    NSLayoutConstraint *_captionToInstructionConstraint;
+    NSLayoutConstraint *_errorToInstructionConstraint;
+    NSLayoutConstraint *_captionToErrorConstraint;
     NSLayoutConstraint *_headerZeroHeightConstraint;
     NSLayoutConstraint *_illustrationToCaptionBaselineConstraint;
     NSLayoutConstraint *_illustrationToCaptionTopConstraint;
@@ -93,6 +94,15 @@
             _captionLabel.numberOfLines = 0;
             _captionLabel.textAlignment = NSTextAlignmentCenter;
             [self addSubview:_captionLabel];
+        }
+        
+        // Error Label
+        {
+            _errorLabel = [ORKSubheadlineLabel new];
+            _errorLabel.numberOfLines = 0;
+            _errorLabel.textAlignment = NSTextAlignmentCenter;
+            _errorLabel.textColor = [UIColor redColor];
+            [self addSubview: _errorLabel];
         }
         
         {
@@ -155,6 +165,10 @@
     [self updateConstraintConstantsForWindow:self.window];
 }
 
+- (void)setErrorMessage:(nullable NSString*) message {
+    _errorLabel.text = message;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -215,7 +229,7 @@ const CGFloat IconHeight = 60;
     }
     
     {
-        _captionToInstructionConstraint.constant = hasInstructionLabel ? CaptionBaselineToInstructionBaseline_WithInstruction : CaptionBaselineToInstructionBaseline_NoInstruction;
+        _errorToInstructionConstraint.constant = hasInstructionLabel ? CaptionBaselineToInstructionBaseline_WithInstruction : CaptionBaselineToInstructionBaseline_NoInstruction;
     }
     
     {
@@ -256,9 +270,10 @@ const CGFloat IconHeight = 60;
     widthConstraint.priority = UILayoutPriorityDefaultLow - 1;
     [constraints addObject:widthConstraint];
     
-    NSArray *views = @[_iconImageView, _captionLabel, _instructionLabel, _learnMoreButton];
+    NSArray *views = @[_iconImageView, _captionLabel, _errorLabel, _instructionLabel, _learnMoreButton];
     [_iconImageView setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_captionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+    [_errorLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_instructionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     [_learnMoreButton setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
     ORKEnableAutoLayoutForViews(views);
@@ -298,14 +313,25 @@ const CGFloat IconHeight = 60;
     }
     
     {
-        _captionToInstructionConstraint = [NSLayoutConstraint constraintWithItem:_instructionLabel
+        _captionToErrorConstraint = [NSLayoutConstraint constraintWithItem:_errorLabel
                                                                        attribute:NSLayoutAttributeFirstBaseline
                                                                        relatedBy:NSLayoutRelationEqual
                                                                           toItem:_captionLabel
                                                                        attribute:NSLayoutAttributeLastBaseline
                                                                       multiplier:1.0
                                                                         constant:36.0];
-        [constraints addObject:_captionToInstructionConstraint];
+        [constraints addObject:_captionToErrorConstraint];
+    }
+    
+    {
+        _errorToInstructionConstraint = [NSLayoutConstraint constraintWithItem:_instructionLabel
+                                                                       attribute:NSLayoutAttributeFirstBaseline
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:_errorLabel
+                                                                       attribute:NSLayoutAttributeLastBaseline
+                                                                      multiplier:1.0
+                                                                        constant:36.0];
+        [constraints addObject:_errorToInstructionConstraint];
     }
     
     {

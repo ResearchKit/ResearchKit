@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat expectedLayoutWidth;
 @property (nonatomic) NSDictionary *savedAnswers;
 
+- (void)setErrorMessage:(nullable NSString *)message;
+
 @end
 
 

@@ -132,6 +132,10 @@
     [self prepareStep];
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    return _activeStepView.headerView;
+}
+
 - (void)stepDidChange {
     [super stepDidChange];
     _activeStepView.activeStep = [self activeStep];

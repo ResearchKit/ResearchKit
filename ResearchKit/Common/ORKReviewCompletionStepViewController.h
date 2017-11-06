@@ -30,15 +30,23 @@
 
 
 @import UIKit;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKCompletionStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKStepHeaderView : UIView
-
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
-
-- (void)setErrorMessage:(nullable NSString*) message;
+/**
+ An `ORKCompletionStepViewController` object is the step view controller for an
+ `ORKCompletionStep` object.
+ 
+ Typically, you don't need to instantiate a completion step view controller directly.
+ Instead, add a completion step to a task, and present the task with a
+ task view controller. The task view controller instantiates the step
+ view controller for the completion step.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKReviewCompletionStepViewController : ORKCompletionStepViewController
 
 @end
 

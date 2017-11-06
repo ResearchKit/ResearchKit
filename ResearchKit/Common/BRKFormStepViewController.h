@@ -30,15 +30,23 @@
 
 
 @import UIKit;
+#import <ResearchKit/BRKStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKStepHeaderView : UIView
-
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
-
-- (void)setErrorMessage:(nullable NSString*) message;
+/**
+ The `ORKFormStepViewController` class is the concrete `ORKStepViewController`
+ implementation for `ORKFormStep`.
+ 
+ You should not need to instantiate a form step view controller
+ directly. Instead, create an `ORKFormStep` object and include it in a task for an
+ `ORKTaskViewController` object, and present the task view controller. The task view
+ controller automatically instantiates the form step view controller
+ when it encounters a form step and needs to present it.
+ */
+ORK_CLASS_AVAILABLE
+@interface BRKFormStepViewController : BRKStepViewController
 
 @end
 

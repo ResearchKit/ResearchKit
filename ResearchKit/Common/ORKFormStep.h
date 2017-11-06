@@ -151,6 +151,8 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithSectionTitle:(nullable NSString *)sectionTitle;
 
+
+
 /**
  A string that identifies the form item.
  
@@ -168,6 +170,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, getter=isOptional) BOOL optional;
 
+
+
 /**
  A localized string that describes the form item.
  
@@ -176,6 +180,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly, nullable) NSString *text;
 
+@property (nonatomic) BOOL isReadOnly;
+@property (nonatomic, copy, nullable) NSString *initialText;
 /**
  A localized string that displays placeholder information for the form item.
  

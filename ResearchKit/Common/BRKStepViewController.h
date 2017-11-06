@@ -41,32 +41,25 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKReviewStep;
 @class ORKStep;
 @class ORKStepResult;
-@class ORKStepViewController;
+@class BRKStepViewController;
 @class ORKTaskViewController;
 
 /**
- An enumeration of values used in `ORKStepViewControllerDelegate` to indicate the direction of navigation
+ An enumeration of values used in `BRKStepViewControllerDelegate` to indicate the direction of navigation
  requested by the participant.
  */
-typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
+typedef NS_ENUM(NSInteger, BRKStepViewControllerNavigationDirection) {
     
     /// Forward navigation. Indicates that the user tapped the Continue or Next button.
-    ORKStepViewControllerNavigationDirectionForward,
+    BRKStepViewControllerNavigationDirectionForward,
     
     /// Backward navigation. Indicates that the user tapped the Back button.
-    ORKStepViewControllerNavigationDirectionReverse
+    BRKStepViewControllerNavigationDirectionReverse
 } ORK_ENUM_AVAILABLE;
 
-@protocol BRKStepViewControllerProtocol <NSObject>
-
-@required
-
-- (void)stepViewController:(ORKStepViewController *) stepViewController didNextPressedWithResult:(ORKStepResult *)result success: (void (^)(void)) success failure: (void (^)(NSString * _Nullable titleMessage,NSDictionary <NSString *, NSString *> * _Nullable messages)) failure;
-
-@end
 
 /**
- The primary implementer of the `ORKStepViewControllerDelegate` protocol is the
+ The primary implementer of the `BRKStepViewControllerDelegate` protocol is the
  task view controller (`ORKTaskViewController`). The task view controller observes the messages 
  of the protocol to correctly update its `result` property, and to control navigation
  through the task.
@@ -75,7 +68,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  can be helpful to implement this protocol to facilitate navigation and
  results collection.
  */
-@protocol ORKStepViewControllerDelegate <NSObject>
+@protocol BRKStepViewControllerDelegate <NSObject>
 
 @required
 /**
@@ -86,7 +79,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  @param stepViewController     The step view controller providing the callback.
  @param direction              Direction of navigation requested.
  */
-- (void)stepViewController:(ORKStepViewController *)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction;
+- (void)stepViewController:(BRKStepViewController *)stepViewController didFinishWithNavigationDirection:(BRKStepViewControllerNavigationDirection)direction;
 
 /**
  Tells the delegate when a substantial change has occurred to the result.
@@ -100,19 +93,19 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  
  @param stepViewController     The step view controller providing the callback.
  */
-- (void)stepViewControllerResultDidChange:(ORKStepViewController *)stepViewController;
+- (void)stepViewControllerResultDidChange:(BRKStepViewController *)stepViewController;
 
 /**
  Tells the delegate when a step fails due to an error.
  
  A step view controller can use this method to report its failure to the task view controller.
  The task view controller sends the error to its delegate indicating that the task has failed (using `ORKTaskViewControllerFinishReasonFailed`).
- Note that recorder errors are reported by calling the `ORKStepViewControllerDelegate` method `stepViewController:recorder:didFailWithError:`.
+ Note that recorder errors are reported by calling the `BRKStepViewControllerDelegate` method `stepViewController:recorder:didFailWithError:`.
  
  @param stepViewController     The step view controller providing the callback.
  @param error                  The error detected.
  */
-- (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(nullable NSError *)error;
+- (void)stepViewControllerDidFail:(BRKStepViewController *)stepViewController withError:(nullable NSError *)error;
 
 /**
  Tells the delegate when a recorder error has been detected during the step.
@@ -124,7 +117,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  @param recorder               The recorder that detected the error.
  @param error                  The error detected.
  */
-- (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
+- (void)stepViewController:(BRKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
 @optional
 /**
@@ -136,7 +129,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  
  @param stepViewController          The step view controller providing the callback.
 */
-- (void)stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
+- (void)stepViewControllerWillAppear:(BRKStepViewController *)stepViewController;
 
 /**
  Asks the delegate whether there is a previous step.
@@ -148,7 +141,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  
  @return `YES` if a Back button should be visible; otherwise, `NO`.
  */
-- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController;
+- (BOOL)stepViewControllerHasPreviousStep:(BRKStepViewController *)stepViewController;
 
 /**
  Asks the delegate whether there is a next step.
@@ -160,13 +153,13 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  
  @return `YES` if there is a step following the current one; otherwise, `NO`.
  */
-- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController;
+- (BOOL)stepViewControllerHasNextStep:(BRKStepViewController *)stepViewController;
 
 @end
 
 
 /**
- The `ORKStepViewController` class is a base class for view controllers that are
+ The `BRKStepViewController` class is a base class for view controllers that are
  presented by an `ORKTaskViewController` object for the steps in a task.
  
  In the ResearchKit framework, each step collects some information or data from the user. 
@@ -174,12 +167,12 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  before presenting the next step (`ORKStep`) in the task.
  
  When you create a new type of step, you usually have to subclass
- `ORKStepViewController` to manage the step. For examples of subclasses, see 
+ `BRKStepViewController` to manage the step. For examples of subclasses, see 
  `ORKQuestionStepViewController` and `ORKFormStepViewController`. In contrast, the view
  controller for an active step is typically a subclass of `ORKActiveStepViewController`,
  because active steps include the concept of life cycle.
  
- If you are simply trying to change some of the runtime behaviors of `ORKStepViewController`,
+ If you are simply trying to change some of the runtime behaviors of `BRKStepViewController`,
  it's usually not necessary to subclass it. Instead, implement the
  `[ORKTaskViewControllerDelegate taskViewController:stepViewControllerWillAppear:]` method in
  the `ORKTaskViewControllerDelegate` protocol, and modify the appropriate properties
@@ -188,7 +181,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  properties in your implementation of this delegate method.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKStepViewController : UIViewController
+@interface BRKStepViewController : UIViewController
 
 /**
  Returns a new step view controller for the specified step.
@@ -232,7 +225,7 @@ ORK_CLASS_AVAILABLE
  assign an intermediary object as the delegate and forward the messages
  to the task view controller.
  */
-@property (nonatomic, weak, nullable) id<ORKStepViewControllerDelegate> delegate;
+@property (nonatomic, weak, nullable) id<BRKStepViewControllerDelegate> delegate;
 
 /**
  A localized string that represents the title of the Continue button.
@@ -390,8 +383,57 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
 
-@property (nonatomic, weak, nullable) id<BRKStepViewControllerProtocol> stepDelegate;
+
+// internal
+- (void)stepDidChange;
+
+@property (nonatomic, copy, nullable) NSURL *outputDirectory;
+@property (nonatomic, copy, readonly, nullable) NSArray <ORKResult *> *addedResults;
+
+@property (nonatomic, strong, nullable) UIBarButtonItem *internalContinueButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *internalBackButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *internalDoneButtonItem;
+
+@property (nonatomic, strong, nullable) UIBarButtonItem *internalSkipButtonItem;
+
+@property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *skipButtonItem;
+
+@property (nonatomic, copy, nullable) NSDate *presentedDate;
+@property (nonatomic, copy, nullable) NSDate *dismissedDate;
+
+@property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
+
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations;
+
+// this property is set to `YES` when the step is part of a standalone review step. If set to `YES it will prevent any user input that might change the step result.
+@property (nonatomic, readonly) BOOL readOnlyMode;
+
+@property (nonatomic, readonly) BOOL isBeingReviewed;
+
+@property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
+
+- (void)willNavigateDirection:(BRKStepViewControllerNavigationDirection)direction;
+
+- (void)notifyDelegateOnResultChange;
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
+
+- (void)showValidityAlertWithMessage:(NSString *)text;
+
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
+
+- (void)initializeInternalButtonItems;
+
+// internal use version to set backButton, without override "_internalBackButtonItem"
+- (void)ork_setBackButtonItem:(nullable UIBarButtonItem *)backButton;
+
+// internal method for updating the right bar button item.
+- (void)updateNavRightBarButtonItem;
+- (void)updateNavLeftBarButtonItem;
 
 @end
+
 
 NS_ASSUME_NONNULL_END

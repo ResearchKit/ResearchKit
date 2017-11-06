@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,17 +30,64 @@
  */
 
 
-@import UIKit;
 
+#import "ORKDelegateNavigatableTask.h"
+#import "ORKResult.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKDelegateNavigatableTask
 
-@interface ORKStepHeaderView : UIView
+- (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    NSArray *steps = self.steps;
+    
+    if (steps.count <= 0) {
+        return nil;
+    }
 
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
+    if ([result.identifier  isEqual: @"payment_section"]) {
+        return step;
+    }
 
-- (void)setErrorMessage:(nullable NSString*) message;
+    
+    ORKStep *currentStep = step;
+    ORKStep *nextStep = nil;
+    
+    if (currentStep == nil) {
+        nextStep = steps[0];
+    } else {
+        NSUInteger index = [self indexOfStep:step];
+        
+        if (NSNotFound != index && index != (steps.count - 1)) {
+            nextStep = steps[index + 1];
+        }
+    }
+    
+    
+    return nextStep;
+    
+    return nil;
+}
+
+- (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    NSArray *steps = self.steps;
+    
+    if (steps.count <= 0) {
+        return nil;
+    }
+    
+    ORKStep *currentStep = step;
+    ORKStep *nextStep = nil;
+    
+    if (currentStep == nil) {
+        nextStep = nil;
+        
+    } else {
+        NSUInteger index = [self indexOfStep:step];
+        
+        if (NSNotFound != index && index != 0) {
+            nextStep = steps[index - 1];
+        }
+    }
+    return nextStep;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

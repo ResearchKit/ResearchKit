@@ -29,16 +29,19 @@
  */
 
 
-@import UIKit;
+@import Foundation;
+#import <ResearchKit/ORKInstructionStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKStepHeaderView : UIView
-
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
-
-- (void)setErrorMessage:(nullable NSString*) message;
+/**
+ The `ORKCompletionStep` class is a subclass of `ORKInstructionStep` which behaves like
+ an instruction step, but includes animated imagery that thanks the user
+ for participating in the task.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKReviewCompletionStep : ORKInstructionStep
 
 @end
 

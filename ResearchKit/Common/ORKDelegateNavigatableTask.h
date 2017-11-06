@@ -31,15 +31,31 @@
 
 @import UIKit;
 
+#import "ORKOrderedTask.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKStepHeaderView : UIView
+/**
+ The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a
+ task that assumes a fixed order for its steps.
+ 
+ In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can
+ be represented as an ordered task.
+ 
+ If you want further custom conditional behaviors in a task, it can be easier to subclass
+ `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
+ to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:` and
+ `stepBeforeStep:withResult:`, and call super for all other methods.
+ */
+ORK_CLASS_AVAILABLE
 
-@property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
-
-- (void)setErrorMessage:(nullable NSString*) message;
+@protocol ORKTaskNavigationDelegate
 
 @end
+
+@interface ORKDelegateNavigatableTask: ORKOrderedTask
+@property (nonatomic, weak, nullable) id<ORKTaskNavigationDelegate> delegate;
+@end
+
 
 NS_ASSUME_NONNULL_END

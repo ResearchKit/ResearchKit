@@ -93,6 +93,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly) ORKQuestionType questionType;
 
+@property (nonatomic) NSString *idForSubAnswer;
+
+@property (nonatomic) NSString *textForSubAnswer;
+
 /// @name Factory methods
 
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
@@ -131,6 +135,10 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
                                                textChoices:(NSArray<ORKTextChoice *> *)textChoices;
+
++ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
+                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices
+                                           subAnswerFormat:(ORKAnswerFormat *) subAnswerFormat;
 
 + (ORKNumericAnswerFormat *)decimalAnswerFormatWithUnit:(nullable NSString *)unit;
 + (ORKNumericAnswerFormat *)integerAnswerFormatWithUnit:(nullable NSString *)unit;
@@ -782,6 +790,8 @@ ORK_CLASS_AVAILABLE
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
+@property (nonatomic, readonly) ORKAnswerFormat *subAnswerFormat;
+
 /**
  Returns an initialized text choice answer format using the specified question style and array of
  text choices.
@@ -793,6 +803,10 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
                   textChoices:(NSArray<ORKTextChoice *> *)textChoices NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
+                  textChoices:(NSArray<ORKTextChoice *> *)textChoices
+              subAnswerFormat:(ORKAnswerFormat *) format NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of the question (that is, single or multiple choice).

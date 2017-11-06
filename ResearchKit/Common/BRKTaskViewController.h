@@ -39,28 +39,28 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStep;
 @class ORKStepViewController;
 @class ORKTaskResult;
-@class ORKTaskViewController;
+@class BRKTaskViewController;
 @protocol ORKStepViewControllerDelegate;
 @protocol ORKTask;
 @protocol ORKTaskResultSource;
 
 /**
- The `ORKTaskViewControllerFinishReason` value indicates how the task view controller has finished
+ The `BRKTaskViewControllerFinishReason` value indicates how the task view controller has finished
  the task.
  */
-typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
+typedef NS_ENUM(NSInteger, BRKTaskViewControllerFinishReason) {
     
     /// The task was canceled by the participant or the developer, and the participant asked to save the current result.
-    ORKTaskViewControllerFinishReasonSaved,
+    BRKTaskViewControllerFinishReasonSaved,
     
     /// The task was canceled by the participant or the developer, and the participant asked to discard the current result.
-    ORKTaskViewControllerFinishReasonDiscarded,
+    BRKTaskViewControllerFinishReasonDiscarded,
     
     /// The task has completed successfully, because all steps have been completed.
-    ORKTaskViewControllerFinishReasonCompleted,
+    BRKTaskViewControllerFinishReasonCompleted,
     
     /// An error was detected during the current step.
-    ORKTaskViewControllerFinishReasonFailed
+    BRKTaskViewControllerFinishReasonFailed
 };
 
 /**
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
  of the task, exerting some control over how the controller behaves, and providing
  auxiliary content as needed.
  */
-@protocol ORKTaskViewControllerDelegate <NSObject>
+@protocol BRKTaskViewControllerDelegate <NSObject>
 
 /**
  Tells the delegate that the task has finished.
@@ -81,11 +81,11 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
  in response to this method, and may also need to collect and process the results
  of the task.
 
- @param taskViewController  The `ORKTaskViewController `instance that is returning the result.
- @param reason              An `ORKTaskViewControllerFinishReason` value indicating how the user chose to complete the task.
+ @param taskViewController  The `BRKTaskViewController `instance that is returning the result.
+ @param reason              An `BRKTaskViewControllerFinishReason` value indicating how the user chose to complete the task.
  @param error               If failure occurred, an `NSError` object indicating the reason for the failure. The value of this parameter is `nil` if `result` does not indicate failure.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(nullable NSError *)error;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController didFinishWithReason:(BRKTaskViewControllerFinishReason)reason error:(nullable NSError *)error;
 
 @optional
 /**
@@ -94,11 +94,11 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
  Recorder errors can occur during active steps, typically because sensor data is unavailable or there isn't enough disk space to record the results.
  You can use this method as an opportunity to respond to the error by, for example, logging and ignoring it.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param recorder            The recorder that detected the error. `ORKStep` and `ORKRecorderConfiguration` objects can be found in the recorder instance.
  @param error               The error that was detected.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
 /**
  Asks the delegate if the state of the current uncompleted task should be saved.
@@ -111,11 +111,11 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
 task view controller and pass that data to `initWithTask:restorationData:` when it is time
  to create a new task view controller to continue from the point at which the user stopped.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  
  @return `YES` if save and restore should be supported; otherwise, `NO`.
  */
-- (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)taskViewController;
+- (BOOL)taskViewControllerSupportsSaveAndRestore:(BRKTaskViewController *)taskViewController;
 
 /**
  Asks the delegate if the cancel action should be confirmed
@@ -127,11 +127,11 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  If this method returns `YES`, then cancel action will be confirmed.
  If this method returns `NO`, then the results will immediately be discarded.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  
  @return `YES` to confirm cancel action; `NO` to immediately discard the results.
  */
-- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController *)taskViewController;
+- (BOOL)taskViewControllerShouldConfirmCancel:(BRKTaskViewController *)taskViewController;
 
 /**
  Asks the delegate if there is Learn More content for this step.
@@ -145,12 +145,12 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  the task view controller asks its delegate to determine if Learn More content is available,
  and to request that it be displayed.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param step                The step for which the task view controller needs to know if there is Learn More content.
  
  @return `NO` if there is no Learn More content to display.
  */
-- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step;
+- (BOOL)taskViewController:(BRKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step;
 
 /**
  Tells the delegate that the user has tapped the Learn More button in the step.
@@ -167,10 +167,10 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  When this method is called, the app should respond to the Learn More action by
  presenting a dialog or other view (possibly modal) that contains the Learn More content.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param stepViewController  The `ORKStepViewController` that reported the Learn More event to the task view controller.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController;
 
 /**
  Asks the delegate for a custom view controller for the specified step.
@@ -184,12 +184,12 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  
  The delegate should provide a step view controller implementation for any custom step.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param step                The step for which a view controller is requested.
  
  @return A custom view controller, or `nil` to request the default step controller for this step.
  */
-- (nullable ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step;
+- (nullable ORKStepViewController *)taskViewController:(BRKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step;
 
 /**
  Asks the delegate if the task view controller should proceed to the specified step.
@@ -204,12 +204,12 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  If you return `NO`, it's often appropriate to present a dialog or take
  some other UI action to explain why navigation was denied.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param step                The step for which presentation is requested.
  
  @return `YES` if navigation should proceed to the specified step; `NO` if navigation should not proceed.
  */
-- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step;
+- (BOOL)taskViewController:(BRKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step;
 
 /**
  Tells the delegate that a step view controller is about to be displayed.
@@ -222,10 +222,10 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  properties, or modify other button state. Another possible use case is when a particular
  step view controller requires additional setup before presentation.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param stepViewController  The `ORKStepViewController` that is about to be displayed.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
 
 /**
  Tells the delegate that a step will disappear.
@@ -233,11 +233,11 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  This is called in the `ORKStepViewControllerDelegate` method for `stepViewController:didFinishWithNavigationDirection:`
  after saving the result of the step to the task view controller and before navigating to the next/previous step.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param stepViewController  The `ORKStepViewController` that has just finished.
  @param direction           The `ORKStepViewControllerNavigationDirection` of navigation.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController stepViewControllerWillDisappear:(ORKStepViewController *)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
 
 /**
  Tells the delegate that the result has substantively changed.
@@ -245,16 +245,16 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  The task view controller calls this method when steps start or finish, or if an answer has
  changed in the current step due to editing or other user interaction.
  
- @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `BRKTaskViewController` instance.
  @param result              The current value of the result.
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
+- (void)taskViewController:(BRKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
 
 @end
 
 
 /**
- The `ORKTaskViewController` class is the primary entry point for the presentation of the
+ The `BRKTaskViewController` class is the primary entry point for the presentation of the
  ResearchKit framework UI. Note that a task view controller usually presents an `ORKOrderedTask` instance, but it can present any object that implements `ORKTask`.
  
  The task view controller is intended for modal presentation, which lets the user cancel participation in the task at any time. Typically, the task view
@@ -265,9 +265,9 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  identifier and take the appropriate action to restore the task view controller when your app restarts or resumes.
  
  The task view controller also lets users save their progress in the middle of a task. To support
- this scenario in your app, implement `[ORKTaskViewControllerDelegate taskViewControllerSupportsSaveAndRestore:]` in your
+ this scenario in your app, implement `[BRKTaskViewControllerDelegate taskViewControllerSupportsSaveAndRestore:]` in your
  task view controller delegate, and return `YES`. If the task completes with the
- status `ORKTaskViewControllerFinishReasonSaved`, copy and store the value of the
+ status `BRKTaskViewControllerFinishReasonSaved`, copy and store the value of the
  `restorationData` property. When the user resumes the task, create a
  new task view controller using the `initWithTask:restorationData:` initializer,
  and present it.
@@ -282,7 +282,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  objects in the result hierarchy.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
+@interface BRKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
 
 - (void)jumpToRoot:(BOOL)animated;
 
@@ -337,7 +337,7 @@ ORK_CLASS_AVAILABLE
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<ORKTaskViewControllerDelegate>)delegate;
+- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(nullable id<BRKTaskViewControllerDelegate>)delegate;
 
 /**
  The delegate for the task view controller.
@@ -346,14 +346,14 @@ ORK_CLASS_AVAILABLE
  completion. When the task view controller completes its task, it is the delegate's
  responsibility to dismiss it.
  
- See also: `[ORKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]`.
+ See also: `[BRKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]`.
  */
-@property (nonatomic, weak, nullable) id<ORKTaskViewControllerDelegate> delegate;
+@property (nonatomic, weak, nullable) id<BRKTaskViewControllerDelegate> delegate;
 
 /**
  The task for this task view controller.
  
- The task functions as the data source for an `ORKTaskViewController` object, providing
+ The task functions as the data source for an `BRKTaskViewController` object, providing
  the steps that the user must complete in order to complete the task.
  It is an error to change the task after presenting the task view controller.
  */
@@ -401,8 +401,8 @@ ORK_CLASS_AVAILABLE
  Snapshot data that can be used for future restoration.
  
  When the user taps Cancel during a task and selects the Save option,
- the `[ORKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]`
- method is called with `ORKTaskViewControllerFinishReasonSaved`. When that happens,
+ the `[BRKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]`
+ method is called with `BRKTaskViewControllerFinishReasonSaved`. When that happens,
  use `restorationData` to obtain restoration data that can be used to restore
  the task at a later date.
  
@@ -488,6 +488,42 @@ ORK_CLASS_AVAILABLE
  You can use this method to customize the appearance of the task view controller's navigation bar.
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
+
+// internal
+- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
+- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForWrite;
+
+// Any StepVC contains a vertical scroll view should register here.
+// So taskVC can monitor scroll view's content offset and update hairline's alpha.
+@property (nonatomic, weak, nullable) UIScrollView *registeredScrollView;
+
+
+// private
+/**
+ Suspends the task.
+ 
+ Call this method to suspend an active step. To resume later, call
+ `resume`. Not all active steps will respond to `suspend` / `resume`, so test
+ thoroughly to verify correct behavior in your tasks.
+ 
+ This method will disable any background audio prompt session, and suspend
+ any active step in progress.
+ */
+- (void)suspend;
+
+/**
+ Resumes any current active step.
+ 
+ Call this method to force resuming an active step may call this
+ method. Should be paired with a call to `suspend`.
+ 
+ This method re-enables background audio prompts, if needed, and resumes
+ any active step. If not in an active step, it has no effect.
+ 
+ See also: `suspend`
+ */
+- (void)resume;
+
 
 @end
 
