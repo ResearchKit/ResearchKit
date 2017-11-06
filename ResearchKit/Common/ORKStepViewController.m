@@ -42,6 +42,11 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+#import "ORKStepHeaderView.h"
+
+#import "ORKTableContainerView.h"
+#import "ORKVerticalContainerView.h"
+
 
 @interface ORKStepViewController () {
     BOOL _hasBeenPresented;
@@ -51,6 +56,7 @@
 
 @property (nonatomic, strong,readonly) UIBarButtonItem *flexSpace;
 @property (nonatomic, strong,readonly) UIBarButtonItem *fixedSpace;
+@property (nonatomic, strong,readonly) UIActivityIndicatorView *spinner;
 
 @end
 
@@ -106,6 +112,17 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
+    _spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _spinner.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width , self.view.frame.size.height);
+    _spinner.color = [UIColor whiteColor];
+    _spinner.backgroundColor = [UIColor colorWithWhite: 0.5f alpha: 0.5f];
+    _spinner.center = self.view.center;
+    [self.view addSubview:_spinner];
+}
+
 - (void)setupButtons {
     if (self.hasPreviousStep == YES) {
         [self ork_setBackButtonItem: _internalBackButtonItem];
@@ -126,6 +143,16 @@
     NSLog(@"WARNING: Should never be called. Did you miss to override stepHeaderViewIfAvailable?");
     return nil;
 }
+
+- (void)setErrorMessage:(nullable NSString*) message {
+    [self hideSpinner];
+    [[self stepHeaderViewIfAvailable] setErrorMessage:message];
+}
+
+- (void)clearErrorMessage {
+    [[self stepHeaderViewIfAvailable] setErrorMessage:nil];
+}
+
 - (void)setErrorMessageForCells:(NSDictionary <NSString *, NSString *> *) messages {
     // Subclasses should override this.
 }
@@ -334,6 +361,27 @@
 #pragma mark - Action Handlers
 
 - (void)goForward {
+    [self showSpinner];
+    
+    __weak ORKStepViewController *weakSelf = self;
+    
+    void (^success)(void) = ^{
+        [weakSelf clearErrorMessage];
+        [weakSelf setErrorMessageForCells:nil];
+        [weakSelf goForwardManualy];
+    };
+    
+    void (^failure)(NSString * _Nullable , NSDictionary <NSString *, NSString *> * _Nullable) = ^(NSString * _Nullable titleMessage, NSDictionary * _Nullable messages) {
+        [weakSelf setErrorMessage:titleMessage];
+        [weakSelf setErrorMessageForCells:messages];
+    };
+    
+    [[self stepDelegate] stepViewController:self didNextPressedWithResult:self.result success:success failure:failure];
+}
+
+- (void)goForwardManualy {
+    [self hideSpinner];
+    
     ORKStepViewControllerNavigationDirection direction = self.isBeingReviewed ? ORKStepViewControllerNavigationDirectionReverse : ORKStepViewControllerNavigationDirectionForward;
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:direction];
@@ -345,6 +393,19 @@
     ORKStrongTypeOf(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionReverse];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+}
+
+- (void)showSpinner {
+    self.view.userInteractionEnabled = NO;
+    [_spinner startAnimating];
+    _spinner.hidden = NO;
+    [_spinner bringSubviewToFront:self.view];
+}
+
+- (void)hideSpinner {
+    self.view.userInteractionEnabled = YES;
+    [_spinner stopAnimating];
+    _spinner.hidden = YES;
 }
 
 - (void)skip:(UIView *)sender {
@@ -372,7 +433,7 @@
 }
 
 - (void)skipForward {
-    [self goForward];
+    [self goForwardManualy];
 }
 
 

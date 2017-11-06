@@ -57,6 +57,13 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
     ORKStepViewControllerNavigationDirectionReverse
 } ORK_ENUM_AVAILABLE;
 
+@protocol BRKStepViewControllerProtocol <NSObject>
+
+@required
+
+- (void)stepViewController:(ORKStepViewController *) stepViewController didNextPressedWithResult:(ORKStepResult *)result success: (void (^)(void)) success failure: (void (^)(NSString * _Nullable titleMessage,NSDictionary <NSString *, NSString *> * _Nullable messages)) failure;
+
+@end
 
 /**
  The primary implementer of the `ORKStepViewControllerDelegate` protocol is the
@@ -382,6 +389,8 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the view controller has been presented before.
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
+
+@property (nonatomic, weak, nullable) id<BRKStepViewControllerProtocol> stepDelegate;
 
 @end
 
