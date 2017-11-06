@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *learnMoreButtonItem;
 
+- (void)setErrorMessage:(nullable NSString*) message;
+
 @end
 
 NS_ASSUME_NONNULL_END

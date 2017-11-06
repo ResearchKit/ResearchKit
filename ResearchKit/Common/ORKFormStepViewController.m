@@ -63,6 +63,8 @@
 
 @property (nonatomic, readonly) CGFloat labelWidth;
 
+@property (nonatomic) NSString *errorMessage;
+
 // For choice types only
 @property (nonatomic, copy, readonly) ORKTextChoice *choice;
 
@@ -367,6 +369,19 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+}
+
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    return _headerView;
+}
+
+- (void)setErrorMessageForCells: (nullable NSDictionary <NSString *, NSString *> *) messages {
+    for (ORKTableSection *section in _sections) {
+        for (ORKTableCellItem *cell in section.items) {
+            cell.errorMessage = messages[cell.formItem.identifier];
+        }
+    }
+    [_tableView reloadData];
 }
 
 - (void)updateDefaults:(NSMutableDictionary *)defaults {
@@ -773,10 +788,10 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
+    ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
+    ORKTableCellItem *cellItem = [section items][indexPath.row];
+    ORKFormItem *formItem = cellItem.formItem;
     if (cell == nil) {
-        ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-        ORKTableCellItem *cellItem = [section items][indexPath.row];
-        ORKFormItem *formItem = cellItem.formItem;
         id answer = _savedAnswers[formItem.identifier];
         
         if (section.textChoiceCellGroup) {
@@ -862,6 +877,11 @@
             }
         }
     }
+    
+    if ([cell isKindOfClass:ORKFormItemCell.class]) {
+        [((ORKFormItemCell *) cell) setErrorMessage: cellItem.errorMessage];
+    }
+    
     cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
 }

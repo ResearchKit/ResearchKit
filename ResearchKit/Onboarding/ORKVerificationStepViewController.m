@@ -73,6 +73,10 @@
     [self stepDidChange];
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    return _verificationStepView.headerView;
+}
+
 - (void)resendEmailButtonHandler:(id)sender {
     [self resendEmailButtonTapped];
 }

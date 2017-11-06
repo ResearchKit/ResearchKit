@@ -122,6 +122,14 @@
     self.skipButtonItem = _internalSkipButtonItem;
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    NSLog(@"WARNING: Should never be called. Did you miss to override stepHeaderViewIfAvailable?");
+    return nil;
+}
+- (void)setErrorMessageForCells:(NSDictionary <NSString *, NSString *> *) messages {
+    // Subclasses should override this.
+}
+
 - (void)setStep:(ORKStep *)step {
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot set step after presenting step view controller" userInfo:nil];

@@ -86,6 +86,10 @@
     [self stepDidChange];
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    return _waitStepView.headerView;
+}
+
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [_waitStepView.progressView setProgress:progress animated:animated];
 }

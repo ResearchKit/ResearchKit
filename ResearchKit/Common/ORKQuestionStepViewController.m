@@ -247,6 +247,20 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    if (_headerView != nil && _questionView != nil && _headerView != _questionView) {
+        NSLog(@"WARNIGN: ORKQuestionStepViewController has both headerView and questionView and they are different views");
+        // fallback to headerview
+        return _headerView;
+    } else if (_headerView) {
+        return _headerView;
+    } else if (_questionView) {
+        return _questionView.headerView;
+    }
+    NSLog(@"WARNING: Should never be called. ORKQuestionStepViewController should has at least headerView or questionView");
+    return nil;
+}
+
 - (void)showValidityAlertWithMessage:(NSString *)text {
     // Ignore if our answer is null
     if (self.answer == ORKNullAnswerValue()) {

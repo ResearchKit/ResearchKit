@@ -67,6 +67,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)ork_setAnswer:(id)answer;
 
 @property (nonatomic, strong) ORKCaption1Label *labelLabel;
+@property (nonatomic, strong) ORKCaption1Label *errorLabel;
 @property (nonatomic, weak) UITableView *_parentTableView;
 
 // If hasChangedAnswer, then a new defaultAnswer should not change the answer
@@ -123,6 +124,10 @@ static const CGFloat HorizontalMargin = 15.0;
         _labelLabel.numberOfLines = 0;
         [self.contentView addSubview:_labelLabel];
         
+        _errorLabel = [[ORKCaption1Label alloc] init];
+        _errorLabel.textColor = [UIColor redColor];
+        [self.contentView addSubview:_errorLabel];
+        
         [self cellInit];
         [self setAnswer:_answer];
     }
@@ -134,6 +139,12 @@ static const CGFloat HorizontalMargin = 15.0;
         _expectedLayoutWidth = newWidth;
         [self setNeedsUpdateConstraints];
     }
+}
+
+- (void)setErrorMessage:(nullable NSString *) message {
+    [_errorLabel setText:message];
+    [self setNeedsUpdateConstraints];
+    [self layoutSubviews];
 }
 
 - (UITableView *)parentTableView {
@@ -296,6 +307,7 @@ static const CGFloat HorizontalMargin = 15.0;
     [self.contentView addSubview:_textFieldView];
     
     self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _textFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self setUpContentConstraint];
@@ -329,6 +341,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     CGFloat labelWidth = self.maxLabelWidth;
     CGFloat boundWidth = self.expectedLayoutWidth;
+    CGFloat errorLabelMargin = 0.0f;
     
     NSDictionary *metrics = @{@"vMargin":@(10),
                               @"hMargin":@(self.separatorInset.left),
@@ -337,7 +350,8 @@ static const CGFloat HorizontalMargin = 15.0;
     
     id labelLabel = self.labelLabel;
     id textFieldView = _textFieldView;
-    NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
+    id errorLabel = self.errorLabel;
+    NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView,errorLabel);
     
     CGFloat fieldWidth = _textFieldView.estimatedWidth;
     
@@ -356,7 +370,13 @@ static const CGFloat HorizontalMargin = 15.0;
                                                    views:views]];
         
         [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[labelLabel]-vSpacer-[textFieldView]-vMargin-|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[errorLabel]-vSpacer-[labelLabel]-vSpacer-[textFieldView]-vMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
+        
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[errorLabel]|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                  metrics:metrics
                                                    views:views]];
@@ -368,13 +388,39 @@ static const CGFloat HorizontalMargin = 15.0;
                                                  metrics:metrics
                                                    views:views]];
         
-        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:labelLabel
-                                                                     attribute:NSLayoutAttributeCenterY
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self.contentView
-                                                                     attribute:NSLayoutAttributeCenterY
-                                                                    multiplier:1.0
-                                                                      constant:0]];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[errorLabel]|"
+                                                 options:NSLayoutFormatAlignAllCenterY
+                                                 metrics:metrics
+                                                   views:views]];
+        
+        if (self.errorLabel.text) {
+            errorLabelMargin = 10.0f;
+            
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:errorLabel
+                                                                         attribute:NSLayoutAttributeTopMargin
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.contentView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:errorLabelMargin * 2]];
+            
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:labelLabel
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:errorLabel
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0
+                                                                          constant:errorLabelMargin]];
+        } else {
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:labelLabel
+                                                                         attribute:NSLayoutAttributeCenterY
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.contentView
+                                                                         attribute:NSLayoutAttributeCenterY
+                                                                        multiplier:1.0
+                                                                          constant:0]];
+        }
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
                                                                      attribute:NSLayoutAttributeHeight
@@ -393,7 +439,7 @@ static const CGFloat HorizontalMargin = 15.0;
                                                                       constant:0.0]];
     }
     
-    CGFloat defaultTableCelltHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.window);
+    CGFloat defaultTableCelltHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.window) + errorLabelMargin;
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
@@ -1199,12 +1245,13 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    NSDictionary *dictionary = @{@"_selectionView":_selectionView};
+    NSDictionary *dictionary = @{@"_selectionView":_selectionView,
+                                 @"_errorLabel":self.errorLabel};
     ORKEnableAutoLayoutForViews([dictionary allValues]);
     NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(self.separatorInset.left), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_errorLabel]-[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     _bottomConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
     [constraints addObject:_bottomConstraint];
     _heightConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_selectionView.intrinsicContentSize.height];

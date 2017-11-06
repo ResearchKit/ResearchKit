@@ -70,6 +70,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
+- (ORKStepHeaderView *)stepHeaderViewIfAvailable {
+    return _headerView;
+}
+
 // Override to monitor button title change
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
