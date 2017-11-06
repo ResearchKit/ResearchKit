@@ -42,6 +42,7 @@
 #import "ORKSurveyAnswerCellForLocation.h"
 #import "ORKTableContainerView.h"
 #import "ORKTextChoiceCellGroup.h"
+#import "ORKSelectionSubTitleLabel.h"
 
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKQuestionStepViewController_Private.h"
@@ -839,7 +840,7 @@ static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
 
 -(void)popoverViewController:(BRKPopoverViewController *)popoverViewContoller didChangedResult:(NSString *)result {
     if ([popoverViewContoller.sourceView isKindOfClass:[ORKChoiceViewCell class]]) {
-        UILabel *label = ((ORKChoiceViewCell *)popoverViewContoller.sourceView).longLabel;
+        ORKSelectionSubTitleLabel *label = ((ORKChoiceViewCell *)popoverViewContoller.sourceView).longLabel;
         label.text = result;
         [popoverViewContoller.sourceView setNeedsLayout];
     }

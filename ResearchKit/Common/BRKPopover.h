@@ -7,7 +7,7 @@
 
 @import UIKit;
 #import "ORKTextFieldView.h"
-#import <ResearchKit/ORKContinueButton.h>
+#import "ORKContinueButton.h"
 #import "ORKAnswerFormat.h"
 
 NS_ASSUME_NONNULL_BEGIN
