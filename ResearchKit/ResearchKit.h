@@ -56,7 +56,6 @@
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKDelegateNavigatableTask.h>
 #import <ResearchKit/ORKNavigableOrderedTask.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 
@@ -70,14 +69,13 @@
 #import <ResearchKit/ORKBorderedButton.h>
 #import <ResearchKit/ORKContinueButton.h>
 
-#import <ResearchKit/BRKTaskViewController.h>
 #import <ResearchKit/BRKStepViewController.h>
 #import <ResearchKit/BRKFormStepViewController.h>
+#import <ResearchKit/BRKTaskViewController.h>
 
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
-#import <ResearchKit/ORKReviewCompletionStepViewController.h>
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKInstructionStepViewController.h>
 #import <ResearchKit/ORKLoginStepViewController.h>

@@ -55,7 +55,9 @@
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
+#import "ORKTextFieldView.h"
 
+#import "BRKPopover.h"
 
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKQuestionSectionAnswer = 0,
@@ -63,7 +65,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 };
 
 
-@interface ORKQuestionStepViewController () <UITableViewDataSource,UITableViewDelegate, ORKSurveyAnswerCellDelegate> {
+@interface ORKQuestionStepViewController () <UITableViewDataSource,UITableViewDelegate, ORKSurveyAnswerCellDelegate, UIPopoverPresentationControllerDelegate, BRKPopoverViewControllerDelegate> {
     id _answer;
     
     ORKTableContainerView *_tableContainer;
@@ -714,7 +716,20 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
+    
+    NSString *identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
+    ORKChoiceViewCell *cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+    
+    if (cell.isSelected) {
+        [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
+    } else {
+        ORKAnswerFormat *answerFormat = [[self questionStep] answerFormat];
+        if (answerFormat && [answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
+            ORKTextChoiceAnswerFormat *textAnswerFormat = answerFormat;
+            [self showPopoverFor:cell withFormat:textAnswerFormat.subAnswerFormat];
+        }
+        [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
+    }
     
     // Capture `isStepImmediateNavigation` before saving an answer.
     BOOL immediateNavigation = [self isStepImmediateNavigation];
@@ -812,6 +827,22 @@ static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
     self.originalAnswer = [coder decodeObjectOfClasses:decodeableSet forKey:_ORKOriginalAnswerRestoreKey];
     
     [self answerDidChange];
+}
+
+- (void)showPopoverFor:(UIView *)sourceView withFormat:(ORKAnswerFormat *)format{
+    if ([format isKindOfClass:[ORKTextAnswerFormat class]]) {
+        BRKTextFieldPopoverViewController *popvc = [[BRKTextFieldPopoverViewController alloc]  initWithSourceView:sourceView format:(ORKTextAnswerFormat *)format];
+        popvc.delegate = self;
+        [self presentViewController:popvc animated:YES completion:nil];
+    }
+}
+
+-(void)popoverViewController:(BRKPopoverViewController *)popoverViewContoller didChangedResult:(NSString *)result {
+    if ([popoverViewContoller.sourceView isKindOfClass:[ORKChoiceViewCell class]]) {
+        UILabel *label = ((ORKChoiceViewCell *)popoverViewContoller.sourceView).longLabel;
+        label.text = result;
+        [popoverViewContoller.sourceView setNeedsLayout];
+    }
 }
 
 @end

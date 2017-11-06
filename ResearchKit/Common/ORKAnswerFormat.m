@@ -336,6 +336,12 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
 }
 
++ (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
+                                               textChoices:(NSArray<ORKTextChoice *> *)textChoices
+                                          subAnswerFormat:(ORKAnswerFormat *) subAnswerFormat {
+    return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices subAnswerFormat:(ORKAnswerFormat *) subAnswerFormat];
+}
+
 + (ORKNumericAnswerFormat *)decimalAnswerFormatWithUnit:(NSString *)unit {
     return [[ORKNumericAnswerFormat alloc] initWithStyle:ORKNumericAnswerStyleDecimal unit:unit minimum:nil maximum:nil];
 }
@@ -901,6 +907,19 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _style = style;
         _textChoices = ork_processTextChoices(textChoices);
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    }
+    return self;
+}
+
+- (instancetype)initWithStyle:(ORKChoiceAnswerStyle)style
+                  textChoices:(NSArray<ORKTextChoice *> *)textChoices
+              subAnswerFormat:(ORKAnswerFormat *) format{
+    self = [super init];
+    if (self) {
+        _style = style;
+        _textChoices = ork_processTextChoices(textChoices);
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+        _subAnswerFormat = format;
     }
     return self;
 }
