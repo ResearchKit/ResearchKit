@@ -149,6 +149,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
     case is ORKVideoInstructionStepResult:
         providerType = VideoInstructionStepResultTableViewProvider.self
         
+    case is ORKWebViewStepResult:
+        providerType = WebViewStepResultTableViewProvider.self
+        
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
     }
@@ -1086,6 +1089,25 @@ class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
             return rows + [
                 ResultRow(text: "playbackStoppedTime", detail: videoInstructionStepResult.playbackStoppedTime),
                 ResultRow(text: "playbackCompleted", detail: videoInstructionStepResult.playbackCompleted)
+            ]
+        }
+        
+        return rows
+    }
+}
+
+/// Table view provider specific to an `ORKWebViewStepResult` instance.
+class WebViewStepResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let webViewStepResult = result as! ORKWebViewStepResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "result", detail: webViewStepResult.result)
             ]
         }
         

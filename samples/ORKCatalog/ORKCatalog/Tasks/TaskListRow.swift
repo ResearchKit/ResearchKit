@@ -103,6 +103,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case shoulderRangeOfMotion
     case trailMaking
     case videoInstruction
+    case webView
     
     class TaskListRowSection {
         var title: String
@@ -174,6 +175,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
                     .videoInstruction,
+                    .webView
                 ]),
         ]}
     
@@ -309,6 +311,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .trailMaking:
             return NSLocalizedString("Trail Making Test", comment: "")
+            
+        case .webView:
+            return NSLocalizedString("Web View", comment: "")
         }
     }
     
@@ -473,6 +478,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Video instruction tasks.
         case videoInstructionTask
         case videoInstructionStep
+        
+        // Web view tasks.
+        case webViewTask
+        case webViewStep
     }
     
     // MARK: Properties
@@ -607,6 +616,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .videoInstruction:
             return videoInstruction
+            
+        case .webView:
+            return webView
         }
     }
 
@@ -1380,6 +1392,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         videoInstructionStep.videoURL = URL(string: "https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov")
         videoInstructionStep.thumbnailTime = 2 // Customizable thumbnail timestamp
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
+    }
+    
+    /// This task presents a web view step
+    private var webView: ORKTask {
+        let webViewStep = ORKWebViewStep(identifier: String(describing: Identifier.webViewStep))
+        webViewStep.url = URL(string: "https://rkstudio.careevolution.com/bodysite/instrumenttest.html")
+        return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
     }
     
     // MARK: Consent Document Creation Convenience
