@@ -30,10 +30,11 @@
 
 #import "ORKWebViewStepViewController.h"
 #import "ORKWebViewStep.h"
+#import <ResearchKit/ORKResult.h>
 
 @implementation ORKWebViewStepViewController {
     WKWebView *_webView;
-    NSString *_answer;
+    NSString *_result;
 }
 
 - (ORKWebViewStep *)webViewStep {
@@ -41,7 +42,7 @@
 }
 
 - (void)stepDidChange {
-    _answer = nil;
+    _result = nil;
     [_webView removeFromSuperview];
     _webView = nil;
     
@@ -65,16 +66,16 @@
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    _answer = (NSString *)message.body;
+    _result = (NSString *)message.body;
     [self goForward];
 }
 
 - (ORKStepResult *)result {
     ORKStepResult *parentResult = [super result];
     if (parentResult) {
-//        WebViewStepResult *childResult = [[WebViewStepResult alloc] initWithIdentifier:self.step.identifier];
-//        childResult.answer = _answer;
-//        parentResult.results = @[childResult];
+        ORKWebViewStepResult *childResult = [[ORKWebViewStepResult alloc] initWithIdentifier:self.step.identifier];
+        childResult.result = _result;
+        parentResult.results = @[childResult];
     }
     return parentResult;
 }

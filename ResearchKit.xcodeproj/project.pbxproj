@@ -719,10 +719,10 @@
 		781D540F1DF886AB00223305 /* ORKTrailmakingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTrailmakingStepViewController.m; sourceTree = "<group>"; };
 		805685771C90C19500BF437A /* UIImage+ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResearchKit.h"; sourceTree = "<group>"; };
 		805685781C90C19500BF437A /* UIImage+ResearchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResearchKit.m"; sourceTree = "<group>"; };
-		8419D66C1FB73CC80088D7E5 /* ORKWebViewStep.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKWebViewStep.h; sourceTree = "<group>"; };
-		8419D66D1FB73CC80088D7E5 /* ORKWebViewStep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStep.m; sourceTree = "<group>"; };
-		8419D6701FB73EC60088D7E5 /* ORKWebViewStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKWebViewStepViewController.h; sourceTree = "<group>"; };
-		8419D6711FB73EC60088D7E5 /* ORKWebViewStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStepViewController.m; sourceTree = "<group>"; };
+		8419D66C1FB73CC80088D7E5 /* ORKWebViewStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWebViewStep.h; sourceTree = "<group>"; };
+		8419D66D1FB73CC80088D7E5 /* ORKWebViewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStep.m; sourceTree = "<group>"; };
+		8419D6701FB73EC60088D7E5 /* ORKWebViewStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWebViewStepViewController.h; sourceTree = "<group>"; };
+		8419D6711FB73EC60088D7E5 /* ORKWebViewStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStepViewController.m; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
 		861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleSliderView.h; sourceTree = "<group>"; };
 		861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleSliderView.m; sourceTree = "<group>"; };
@@ -1566,7 +1566,7 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		8419D66B1FB73C800088D7E5 /* WebViewStep */ = {
+		8419D66B1FB73C800088D7E5 /* WebView Step */ = {
 			isa = PBXGroup;
 			children = (
 				8419D66C1FB73CC80088D7E5 /* ORKWebViewStep.h */,
@@ -1574,7 +1574,7 @@
 				8419D6701FB73EC60088D7E5 /* ORKWebViewStepViewController.h */,
 				8419D6711FB73EC60088D7E5 /* ORKWebViewStepViewController.m */,
 			);
-			name = WebViewStep;
+			name = "WebView Step";
 			sourceTree = "<group>";
 		};
 		866DA5121D63D01C00C9AF3F /* DataCollection */ = {
@@ -1866,7 +1866,7 @@
 				BF9D62C41BD244C4000AA6A7 /* Wait Step */,
 				BF690AD61BAD3DC0009C5ADA /* Review Step */,
 				B12EFF491AB2155700A80147 /* Signature Step */,
-				8419D66B1FB73C800088D7E5 /* WebViewStep */,
+				8419D66B1FB73C800088D7E5 /* WebView Step */,
 			);
 			name = Step;
 			sourceTree = "<group>";
