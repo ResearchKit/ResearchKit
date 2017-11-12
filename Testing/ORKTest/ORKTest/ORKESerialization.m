@@ -759,6 +759,20 @@ encondingTable =
             PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
             })),
+   ENTRY(ORKGoNoGoStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKGoNoGoStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(maximumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(minimumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeout, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(numberOfAttempts, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(thresholdAcceleration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(successSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKStroopStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKStroopStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1291,6 +1305,21 @@ encondingTable =
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKGoNoGoResult,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeToThreshold, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(go, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(incorrect, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(samples, ORKGoNoGoSample, NSArray, YES, nil, nil),
+            })),
+   ENTRY(ORKGoNoGoSample,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(vectorMagnitude, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKStroopResult,
          nil,
