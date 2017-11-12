@@ -54,6 +54,7 @@
         
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _webView.navigationDelegate = self;
         [self.view addSubview:_webView];
         
         if ([self webViewStep].url != nil) {
@@ -86,6 +87,14 @@
         parentResult.results = @[childResult];
     }
     return parentResult;
+}
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = true;
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
 }
 
 @end
