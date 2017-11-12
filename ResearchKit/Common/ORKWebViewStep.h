@@ -44,9 +44,32 @@ ORK_CLASS_AVAILABLE
 @interface ORKWebViewStep : ORKStep
 
 /**
- The url to be used for displaying the webview
+ Returns a new web view step that includes the specified identifier and will display the specified url.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param url           A web or file url to be displayed in the webview.
+ */
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                      url:(NSURL *)url;
+
+/**
+ Returns a new web view step that includes the specified identifier and will display the specified html.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param html          The html to be displayed in the webview.
+ */
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                     html:(NSString *)html;
+
+/**
+ The url to be used for displaying the webview.
  */
 @property (nonatomic, copy, nullable) NSURL *url;
+
+/**
+ Embedded html used for displaying the webview.
+ */
+@property (nonatomic, copy, nullable) NSString *html;
 
 @end
 

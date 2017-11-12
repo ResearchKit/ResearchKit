@@ -38,6 +38,30 @@
     return [ORKWebViewStepViewController class];
 }
 
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                      url:(NSURL *)url {
+    ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
+    step.url = url;
+    return step;
+}
+
++ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
+                                     html:(NSString *)html {
+    ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
+    step.html = html;
+    return step;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (self.url == nil && self.html == nil) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"WebViewStep requires a valid url or html."
+                                     userInfo:nil];
+    }
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

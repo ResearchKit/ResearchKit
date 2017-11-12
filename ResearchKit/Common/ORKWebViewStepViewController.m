@@ -47,15 +47,21 @@
     _webView = nil;
     
     if (self.step && [self isViewLoaded]) {
-        WKWebViewConfiguration* config = [[WKWebViewConfiguration alloc] init];
+        WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
         WKUserContentController *controller = [[WKUserContentController alloc] init];
         [controller addScriptMessageHandler:self name:@"webViewStep"];
         config.userContentController = controller;
+        
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
-        [self.view addSubview:_webView];
-        NSURLRequest* request = [NSURLRequest requestWithURL:[self webViewStep].url];
-        [_webView loadRequest:request];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:_webView];
+        
+        if ([self webViewStep].url != nil) {
+            NSURLRequest* request = [NSURLRequest requestWithURL:[self webViewStep].url];
+            [_webView loadRequest:request];
+        } else {
+            [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
+        }
     }
 }
 
