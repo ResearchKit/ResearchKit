@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  The `ORKWebViewStep` class represents a step that displays an embedded webview.
  
  This may be useful in cases where extreme custom styling is necessary, or an instrument
- with specific requirements not yet have a native implementation.
+ with specific requirements does not yet have a native implementation.
  
  The webview can reference either an external url or embedded html.
  
@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  window.webkit.messageHandlers.ResearchKit.postMessage(answer);
  
- Where "answer" is the string answer that will be captured in the WebViewStepResult.  You must
- supply a string answer or the user will be unable to proceed.
+ Where "answer" is the string answer that will be captured in the WebViewStepResult.
+ A string answer is required or the user will be unable to proceed.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKWebViewStep : ORKStep

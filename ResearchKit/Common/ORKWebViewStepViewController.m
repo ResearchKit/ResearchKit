@@ -72,8 +72,10 @@
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-    _result = (NSString *)message.body;
-    [self goForward];
+    if ([message.body isKindOfClass:[NSString class]]){
+        _result = (NSString *)message.body;
+        [self goForward];
+    }
 }
 
 - (ORKStepResult *)result {
