@@ -60,6 +60,12 @@
                                        reason:@"WebViewStep requires a valid url or html."
                                      userInfo:nil];
     }
+    
+    if (self.url != nil && self.html != nil) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"WebViewStep requires a valid url or html, but not both."
+                                     userInfo:nil];
+    }
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

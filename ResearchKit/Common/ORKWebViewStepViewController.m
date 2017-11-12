@@ -49,7 +49,7 @@
     if (self.step && [self isViewLoaded]) {
         WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
         WKUserContentController *controller = [[WKUserContentController alloc] init];
-        [controller addScriptMessageHandler:self name:@"webViewStep"];
+        [controller addScriptMessageHandler:self name:@"ResearchKit"];
         config.userContentController = controller;
         
         _webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];

@@ -36,9 +36,18 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The `ORKWebViewStep` class represents a step that displays an embedded webview.
  
- This task can be used to display custom steps that may not yet have a native representation.
+ This may be useful in cases where extreme custom styling is necessary, or an instrument
+ with specific requirements not yet have a native implementation.
  
- TODO:  Add more documentation
+ The webview can reference either an external url or embedded html.
+ 
+ In order to proceed to the next step from inside the webviewstep, you must execute this
+ line of javascript when the user should proceed:
+ 
+ window.webkit.messageHandlers.ResearchKit.postMessage(answer);
+ 
+ Where "answer" is the string answer that will be captured in the WebViewStepResult.  You must
+ supply a string answer or the user will be unable to proceed.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKWebViewStep : ORKStep

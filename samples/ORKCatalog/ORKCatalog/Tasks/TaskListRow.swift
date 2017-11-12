@@ -1396,8 +1396,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents a web view step
     private var webView: ORKTask {
-        let webViewStep = ORKWebViewStep(identifier: String(describing: Identifier.webViewStep))
-        webViewStep.url = URL(string: "https://rkstudio.careevolution.com/bodysite/instrumenttest.html")
+        let webViewStep = ORKWebViewStep.init(identifier: String(describing: Identifier.webViewStep), html: exampleHtml)
         return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
     }
     
@@ -1563,5 +1562,70 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     private var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
+    }
+    
+    private var exampleHtml: String {
+        return """
+        <!DOCTYPE html>
+
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta name="viewport" content="width=400, user-scalable=no">
+            <meta charset="utf-8" />
+            <style type="text/css">
+            body
+            {
+                background: #FFF;
+                font-family: Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            .container
+            {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .answer-box
+            {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                border: solid 1px #ddd;
+                border-radius: 2px;
+                -webkit-appearance: none;
+            }
+
+            .continue-button
+            {
+                width: 140px;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                font-size: 16px;
+                color: #2e6e9e;
+                border-radius: 2px;
+                border: solid 1px #2e6e9e;
+                background: #FFF;
+                cursor: pointer;
+                margin-top: 40px;
+            }
+            </style>
+            <script type="text/javascript">
+            function completeStep() {
+                var answer = document.getElementById("answer").value;
+                window.webkit.messageHandlers.ResearchKit.postMessage(answer);
+            }
+            </script>
+        </head>
+        <body>
+            <div class="container">
+                <input type="text" id="answer" class="answer-box" placeholder="Answer" />
+                <button onclick="completeStep();" class="continue-button">Continue</button>
+            </div>
+        </body>
+        </html>
+        """
     }
 }
