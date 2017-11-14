@@ -1812,8 +1812,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
+            ORKTextChoice *apple = [ORKTextChoice choiceWithText:@"Apple" value:@"Apple"];
+            ORKTextChoice *orange = [ORKTextChoice choiceWithText:@"Orange" value:@"Orange"];
+            ORKTextChoice *banana = [ORKTextChoice choiceWithText:@"Banana" value:@"Banana"];
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_002" text:@"Which fruit do you like most? Please pick one from below."
-                                                         answerFormat:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[@"Apple", @"Orange", @"Banana"]
+                                                         answerFormat:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[apple, orange, banana]
                                                                                                               ]];
             [items addObject:item];
         }
@@ -2088,9 +2091,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Required form step" text:nil];
+        ORKTextChoice *one = [ORKTextChoice choiceWithText:@"1" value:@"1"];
+        ORKTextChoice *two = [ORKTextChoice choiceWithText:@"2" value:@"2"];
+        ORKTextChoice *three = [ORKTextChoice choiceWithText:@"3" value:@"3"];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_001"
                                                                text:@"Value"
-                                                       answerFormat:[ORKNumericAnswerFormat valuePickerAnswerFormatWithTextChoices:@[@"1", @"2", @"3"]]];
+                                                       answerFormat:[ORKNumericAnswerFormat valuePickerAnswerFormatWithTextChoices:@[one, two, three]]];
         item.placeholder = @"Pick a value";
         [step setFormItems:@[item]];
         step.optional = NO;
