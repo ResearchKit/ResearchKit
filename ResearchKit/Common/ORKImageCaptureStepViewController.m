@@ -115,7 +115,7 @@
     _imageCaptureView.skipButtonItem = skipButtonItem;
 }
 
-- (void)retakePressed:(void (^)())handler {
+- (void)retakePressed:(void (^)(void))handler {
     // Start the capture session, and reset the captured image to nil
     dispatch_async(_sessionQueue, ^{
         [_captureSession startRunning];
