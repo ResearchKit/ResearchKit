@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2015, Ramsundar Shandilya.
- Copyright (c) 2016, Ricardo Sanchez-Saez.
+ Copyright (c) 2016, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:

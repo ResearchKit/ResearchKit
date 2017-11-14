@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sanchez-Saez.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
 
  Redistribution and use in source and binary forms, with or without modification,
