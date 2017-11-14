@@ -112,6 +112,7 @@ DefineStringKey(TableStepTaskIdentifier);
 DefineStringKey(SignatureStepTaskIdentifier);
 DefineStringKey(VideoInstructionStepTaskIdentifier);
 DefineStringKey(PageStepTaskIdentifier);
+DefineStringKey(WebViewStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -411,6 +412,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Completion Step",
                            @"Page Step",
                            @"Footnote",
+                           @"Web View Step"
                            ],
                        ];
 }
@@ -669,9 +671,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makePageStepTask];
     } else if ([identifier isEqualToString:FootnoteTaskIdentifier]) {
         return [self makeFootnoteTask];
-    }
-    else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
+    } else if ([identifier isEqualToString:VideoInstructionStepTaskIdentifier]) {
         return [self makeVideoInstructionStepTask];
+    } else if ([identifier isEqualToString:WebViewStepTaskIdentifier]) {
+        return [self makeWebViewStepTask];
     }
     
     return nil;
@@ -4655,7 +4658,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     lastStep.title = @"Task Complete";
     [steps addObject:lastStep];
     
-    return [[ORKOrderedTask alloc] initWithIdentifier:SignatureStepTaskIdentifier steps:steps];
+    return [[ORKOrderedTask alloc] initWithIdentifier:VideoInstructionStepTaskIdentifier steps:steps];
 }
 
 #pragma mark - Icon Image
@@ -4814,5 +4817,46 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return [[ORKOrderedTask alloc] initWithIdentifier:FootnoteTaskIdentifier steps:@[step1, step2, step3, step4, step5, lastStep]];
 }
 
+#pragma mark - Web View Task
+
+- (IBAction)webViewStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WebViewStepTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeWebViewStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *firstStep = [[ORKInstructionStep alloc] initWithIdentifier:@"firstStep"];
+    firstStep.text = @"Example of an ORKWebViewStep";
+    [steps addObject:firstStep];
+    
+    NSString * html = @"<!DOCTYPE html>"
+    "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+    "<head>"
+    "<meta name=\"viewport\" content=\"width=400, user-scalable=no\">"
+    "<script type=\"text/javascript\">"
+    "function completeStep() {"
+    "    var answer = document.getElementById(\"answer\").value;"
+    "    window.webkit.messageHandlers.ResearchKit.postMessage(answer);"
+    "}"
+    "</script>"
+    "</head>"
+    "<body>"
+    "<div class=\"container\">"
+    "<input type=\"text\" id=\"answer\" class=\"answer-box\" placeholder=\"Answer\" />"
+    "<button onclick=\"completeStep();\" class=\"continue-button\">Continue</button>"
+    "</div>"
+    "</body>"
+    "</html>";
+    
+    ORKWebViewStep *webViewStep = [ORKWebViewStep webViewStepWithIdentifier:@"webViewStep" html:html];
+    [steps addObject:webViewStep];
+    
+    ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Task Complete";
+    [steps addObject:lastStep];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:WebViewStepTaskIdentifier steps:steps];
+}
 
 @end
