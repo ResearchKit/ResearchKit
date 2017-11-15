@@ -265,9 +265,9 @@ typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
 
 
 /**
- System of measurements.
+ Measurement system.
  
- Used mainly by ORKHeightAnswerFormat and ORKWeightAnswerFormat.
+ Used by ORKHeightAnswerFormat and ORKWeightAnswerFormat.
  */
 typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
     /// Measurement system in use by the current locale.
@@ -279,5 +279,23 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
     /// United States customary system.
     ORKMeasurementSystemUSC,
 } ORK_ENUM_AVAILABLE;
+
+
+/**
+ Numeric precision.
+ 
+ Used by ORKWeightAnswerFormat.
+ */
+typedef NS_ENUM(NSInteger, ORKNumericPrecision) {
+    /// Default numeric precision.
+    ORKNumericPrecisionDefault = 0,
+    
+    /// Low numeric precision.
+    ORKNumericPrecisionLow,
+    
+    /// High numeric preicision.
+    ORKNumericPrecisionHigh,
+} ORK_ENUM_AVAILABLE;
+
 
 NS_ASSUME_NONNULL_END
