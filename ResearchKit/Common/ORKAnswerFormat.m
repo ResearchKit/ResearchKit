@@ -2848,18 +2848,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     if (!ORKIsAnswerEmpty(answer)) {
         NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
         if (self.useMetricSystem) {
-            double whole, fraction;
-            ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
-            NSString *wholeString = [formatter stringFromNumber:@(whole)];
-            NSString *fractionString = [formatter stringFromNumber:@(fraction)];
-            if (!self.additionalPrecision && fraction == 0.0) {
-                answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            } else if (!self.additionalPrecision && fraction == 50.0) {
-                wholeString = [formatter stringFromNumber:@(whole + 0.5)];
-                answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            } else {
-                answerString = [NSString stringWithFormat:@"%@.%@ %@", wholeString, fractionString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            }
+            answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
         } else {
             double pounds, ounces;
             if (!self.additionalPrecision) {
