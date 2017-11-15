@@ -134,24 +134,7 @@
 }
 
 - (NSString *)selectedLabelText {
-    if (_answer == nil || _answer == ORKNullAnswerValue()) {
-        return nil;
-    }
-
-    NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
-    NSString *selectedLabelText = nil;
-    if (_answerFormat.useMetricSystem) {
-        selectedLabelText = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:_answer], ORKLocalizedString(@"MEASURING_UNIT_CM", nil)];
-    } else {
-        double feet, inches;
-        ORKCentimetersToFeetAndInches(((NSNumber *)_answer).doubleValue, &feet, &inches);
-        NSString *feetString = [formatter stringFromNumber:@(feet)];
-        NSString *inchesString = [formatter stringFromNumber:@(inches)];
-
-        selectedLabelText = [NSString stringWithFormat:@"%@ %@, %@ %@",
-         feetString, ORKLocalizedString(@"MEASURING_UNIT_FT", nil), inchesString, ORKLocalizedString(@"MEASURING_UNIT_IN", nil)];
-    }
-    return selectedLabelText;
+    return [_answerFormat stringForAnswer:_answer];
 }
 
 - (void)pickerWillAppear {

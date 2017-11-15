@@ -196,42 +196,7 @@
 }
 
 - (NSString *)selectedLabelText {
-    if (_answer == nil || _answer == ORKNullAnswerValue()) {
-        return nil;
-    }
-    
-    NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
-    NSString *selectedLabelText = nil;
-    if (_answerFormat.useMetricSystem) {
-        double whole, fraction;
-        ORKKilogramsToWholeAndFractions(((NSNumber *)_answer).doubleValue, &whole, &fraction);
-        NSString *wholeString = [formatter stringFromNumber:@(whole)];
-        if (!_answerFormat.additionalPrecision && fraction == 0.0) {
-            selectedLabelText = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-        } else if (!_answerFormat.additionalPrecision && fraction == 50.0) {
-            wholeString = [formatter stringFromNumber:@(whole + 0.5)];
-            selectedLabelText = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-        } else {
-            formatter.minimumIntegerDigits = 2;
-            formatter.maximumFractionDigits = 0;
-            NSString *fractionString = [formatter stringFromNumber:@(fraction)];
-            selectedLabelText = [NSString stringWithFormat:@"%@.%@ %@", wholeString, fractionString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-        }
-    } else {
-        double pounds, ounces;
-        if (!_answerFormat.additionalPrecision) {
-            ORKKilogramsToPounds(((NSNumber *)_answer).doubleValue, &pounds);
-            NSString *poundsString = [formatter stringFromNumber:@(pounds)];
-            selectedLabelText = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
-        } else {
-            ORKKilogramsToPoundsAndOunces(((NSNumber *)_answer).doubleValue, &pounds, &ounces);
-            NSString *poundsString = [formatter stringFromNumber:@(pounds)];
-            NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
-            selectedLabelText = [NSString stringWithFormat:@"%@ %@, %@ %@",
-                                 poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
-        }
-    }
-    return selectedLabelText;
+    return [_answerFormat stringForAnswer:_answer];
 }
 
 - (void)pickerWillAppear {
