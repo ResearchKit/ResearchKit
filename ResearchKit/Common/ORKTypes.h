@@ -223,6 +223,25 @@ typedef NS_ENUM(NSInteger, ORKBodySagittal) {
     ORKBodySagittalRight
 } ORK_ENUM_AVAILABLE;
 
+
+/**
+ Values that identify the left or right limb to be used in an active task.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskLimbOption) {
+    /// Which limb to use is undefined
+    ORKPredefinedTaskLimbOptionUnspecified = 0,
+    
+    /// Task should test the left limb
+    ORKPredefinedTaskLimbOptionLeft = 1 << 1,
+    
+    /// Task should test the right limb
+    ORKPredefinedTaskLimbOptionRight = 1 << 2,
+    
+    /// Task should test the both limbs (random order)
+    ORKPredefinedTaskLimbOptionBoth = ORKPredefinedTaskLimbOptionLeft | ORKPredefinedTaskLimbOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+
 /**
  Values that identify the presentation mode of paced serial addition tests that are auditory and/or visual (PSAT).
  */
@@ -244,6 +263,65 @@ typedef NS_ENUM(NSInteger, ORKPasscodeType) {
     
     /// 6 digit pin entry
     ORKPasscodeType6Digit
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ Values that identify the hand(s) to be used in an active task.
+ 
+ By default, the participant will be asked to use their most affected hand.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskHandOption) {
+    /// Which hand to use is undefined
+    ORKPredefinedTaskHandOptionUnspecified = 0,
+    
+    /// Task should test the left hand
+    ORKPredefinedTaskHandOptionLeft = 1 << 1,
+    
+    /// Task should test the right hand
+    ORKPredefinedTaskHandOptionRight = 1 << 2,
+    
+    /// Task should test both hands (random order)
+    ORKPredefinedTaskHandOptionBoth = ORKPredefinedTaskHandOptionLeft | ORKPredefinedTaskHandOptionRight,
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ The `ORKPredefinedTaskOption` flags let you exclude particular behaviors from the predefined active
+ tasks in the predefined category of `ORKOrderedTask`.
+ 
+ By default, all predefined tasks include instructions and conclusion steps, and may also include
+ one or more data collection recorder configurations. Although not all predefined tasks include all
+ of these data collection types, the predefined task option flags can be used to explicitly specify
+ that a task option not be included.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
+    /// Default behavior.
+    ORKPredefinedTaskOptionNone = 0,
+    
+    /// Exclude the initial instruction steps.
+    ORKPredefinedTaskOptionExcludeInstructions = (1 << 0),
+    
+    /// Exclude the conclusion step.
+    ORKPredefinedTaskOptionExcludeConclusion = (1 << 1),
+    
+    /// Exclude accelerometer data collection.
+    ORKPredefinedTaskOptionExcludeAccelerometer = (1 << 2),
+    
+    /// Exclude device motion data collection.
+    ORKPredefinedTaskOptionExcludeDeviceMotion = (1 << 3),
+    
+    /// Exclude pedometer data collection.
+    ORKPredefinedTaskOptionExcludePedometer = (1 << 4),
+    
+    /// Exclude location data collection.
+    ORKPredefinedTaskOptionExcludeLocation = (1 << 5),
+    
+    /// Exclude heart rate data collection.
+    ORKPredefinedTaskOptionExcludeHeartRate = (1 << 6),
+    
+    /// Exclude audio data collection.
+    ORKPredefinedTaskOptionExcludeAudio = (1 << 7)
 } ORK_ENUM_AVAILABLE;
 
 
@@ -273,6 +351,46 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
 
     /// United States customary system.
     ORKMeasurementSystemUSC,
+} ORK_ENUM_AVAILABLE;
+
+
+/**
+ Trailmaking Type Identifiers for supported trailmaking types.
+ */
+typedef NSString * ORKTrailMakingTypeIdentifier NS_STRING_ENUM;
+
+/// Trail making for Type-A trail where the pattern is 1-2-3-4-5-6-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA;
+
+/// Trail making for Type-B trail where the pattern is 1-A-2-B-3-C-4-D-5-E-6-F-7
+ORK_EXTERN ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB;
+
+
+/**
+ The `ORKTremorActiveTaskOption` flags let you exclude particular steps from the predefined active
+ tasks in the predefined Tremor `ORKOrderedTask`.
+ 
+ By default, all predefined active tasks will be included. The tremor active task option flags can
+ be used to explicitly specify that an active task is not to be included.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
+    /// Default behavior.
+    ORKTremorActiveTaskOptionNone = 0,
+    
+    /// Exclude the hand-in-lap steps.
+    ORKTremorActiveTaskOptionExcludeHandInLap = (1 << 0),
+    
+    /// Exclude the hand-extended-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight = (1 << 1),
+    
+    /// Exclude the elbow-bent-at-shoulder-height steps.
+    ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent = (1 << 2),
+    
+    /// Exclude the elbow-bent-touch-nose steps.
+    ORKTremorActiveTaskOptionExcludeHandToNose = (1 << 3),
+    
+    /// Exclude the queen-wave steps.
+    ORKTremorActiveTaskOptionExcludeQueenWave = (1 << 4)
 } ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_END
