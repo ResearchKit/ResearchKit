@@ -158,20 +158,26 @@ ORK_CLASS_AVAILABLE
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
+
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                                         step:(NSInteger)step;
 
 + (ORKHeightAnswerFormat *)heightAnswerFormat;
+
 + (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
 
 + (ORKWeightAnswerFormat *)weightAnswerFormat;
+
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
-+ (ORKWeightAnswerFormat *)weightAnswerFormatWithDefaultValue:(nullable NSNumber *)defaultValue
-                                                 minimumValue:(nullable NSNumber *)minimumValue
-                                                 maximumValue:(nullable NSNumber *)maximumValue
-                                                valueInterval:(nullable NSNumber *)valueInterval
-                                          additionalPrecision:(BOOL)additionalPrecision
-                                            measurementSystem:(ORKMeasurementSystem)measurementSystem;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision
+                                                      minimumValue:(double)minimumValue
+                                                      maximumValue:(double)maximumValue
+                                                      defaultValue:(double)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1433,7 +1439,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 
 /**
- Indicates the measurement system used by the answer format.
+ The measurement system used by the answer format.
  */
 @property (readonly) ORKMeasurementSystem measurementSystem;
 
@@ -1468,32 +1474,67 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized weight answer format.
  */
-- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
 
 /**
- Returns an initialized weight answer format using the specified default/minimum/maximum values, 
- additional precision, and measurement system.
+ Returns an initialized weight answer format using the specified measurement system and numeric
+ precision.
  
- @param defaultValue            The default value to display. When the value of this parameter is `nil`, the
- picker displays 60 kg (or 133 lbs).
- @param minimumValue            The minimum value that is accessible in the picker. If the value of this
- parameter is `nil`, 0 kg (or 0 lbs) is the minimum.
- @param maximumValue            The maximum value that is accessible in the picker. If the value of this
- parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
- @param valueInterval           The interval at which the picker should display kilograms. The default is .5 
- otherwise zero. If value interval is non-zero or if 'nil' the default is used.
- @param additionalPrecision     Pass `YES` to allow additional precision; for the default, pass `NO`.
  @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
- accepted values.
+                                    accepted values.
+ @param numericPrecision        The numeric precision used by the picker. If you pass
+                                    `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
+                                    increments for the metric measurement system and whole pound
+                                    increments for the USC measurement system, which mimics the
+                                    default iOS behavior. If you pass `ORKNumericPrecissionLow`, the
+                                    picker will use 1 kg increments for the metric measurement
+                                    system and whole pound increments for the USC measurement
+                                    system. If you pass `ORKNumericPrecissionHigher`, the picker
+                                    use 0.01 gr increments for the metric measurement system,
+                                    and ounce increments for the USC measurement system.
  
  @return An initialized weight answer format.
  */
-- (instancetype)initWithDefaultValue:(nullable NSNumber *)defaultValue
-                        minimumValue:(nullable NSNumber *)minimumValue
-                        maximumValue:(nullable NSNumber *)maximumValue
-                       valueInterval:(nullable NSNumber *)valueInterval
-                 additionalPrecision:(BOOL)additionalPrecision
-                   measurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision;
+
+/**
+ Returns an initialized weight answer format using the specified measurement system, numeric
+ precision, and default, minimum and maximum values.
+ 
+ @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
+                                    accepted values.
+ @param numericPrecision        The numeric precision used by the picker. If you pass
+                                    `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
+                                    increments for the metric measurement system and whole pound
+                                    increments for the USC measurement system, which mimics the
+                                    default iOS behavior. If you pass `ORKNumericPrecissionLow`, the
+                                    picker will use 1 kg increments for the metric measurement
+                                    system and whole pound increments for the USC measurement
+                                    system. If you pass `ORKNumericPrecissionHigher`, the picker
+                                    use 0.01 gr increments for the metric measurement system,
+                                    and ounce increments for the USC measurement system.
+ @param minimumValue            The minimum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the minimum values are 0 kg when using the
+                                    metric measurement system and 0 lbs when using the USC
+                                    measurement system.
+ @param maximumValue            The maximum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the maximum values are 657 kg when using the
+                                    metric measurement system and 1,450 lbs when using the USC
+                                    measurement system.
+ @param defaultValue            The default value to be initially selected in the picker. If you
+                                    specify `ORKDefaultValue`, the initally selected values are
+                                    60 kg when using the metric measurement system and 133 lbs when
+                                    using the USC measurement system. This value must be between
+                                    `minimumValue` and `maximumValue`.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision
+                             minimumValue:(double)minimumValue
+                             maximumValue:(double)maximumValue
+                             defaultValue:(double)defaultValue NS_DESIGNATED_INITIALIZER;
 
 /**
  Indicates the measurement system used by the answer format.
@@ -1501,39 +1542,44 @@ ORK_CLASS_AVAILABLE
 @property (readonly) ORKMeasurementSystem measurementSystem;
 
 /**
- The value to use as the default in the specified measurement system.
+ The numeric precision used by the picker.
  
- When the value of this property is `nil`, 60 kg (or 133 lbs) is used as the default.
+ An `ORKNumericPrecisionDefault` value indicates that the picker will use 0.5 kg increments for the
+ metric measurement system and whole pound increments for the USC measurement system, which mimics
+ the default iOS behavior. An `ORKNumericPrecissionLow` value indicates that the picker will use
+ 1 kg increments for the metric measurement system and whole pound increments for the USC
+ measurement system. An `ORKNumericPrecissionHigher` value indicates that the picker will use
+ 0.01 gr increments for the metric measurement system and ounce increments for the USC measurement
+ system.
+ 
+ The default value of this property is `ORKNumericPrecisionDefault`.
  */
-@property (copy, readonly, nullable) NSNumber *defaultValue;
+@property (readonly, getter=isAdditionalPrecision) ORKNumericPrecision numericPrecission;
 
 /**
- The minimum allowed value in the specified measurement system.
+ The minimum value that is displayed in the picker.
  
- When the value of this property is `nil`, 0 kg (or 0 lbs) is the minimum.
+ When this property has a value equal to `ORKDefaultValue`, the minimum values are 0 kg when using
+ the metric measurement system and 0 lbs when using the USC measurement system.
  */
-@property (copy, readonly, nullable) NSNumber *minimumValue;
+@property (readonly) double minimumValue;
 
 /**
- The maximum allowed value in the specified measurement system.
+ The maximum value that is displayed in the picker.
  
- When the value of this property is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ When this property has a value equal to `ORKDefaultValue`, the maximum values are 657 kg when using
+ the metric measurement system and 1,450 lbs when using the USC measurement system.
  */
-@property (copy, readonly, nullable) NSNumber *maximumValue;
+@property (readonly) double maximumValue;
 
 /**
- The interval at which the picker should display kilograms. (ignored for USC and additionalPrecision=YES)
+ The default value to initially selected in the picker.
  
- The default is .5 otherwise zero. If value is non-zero or if 'nil' the default is used.
+ When this property has a value equal to `ORKDefaultValue`, the initally selected values are 60 kg
+ when using the metric measurement system and 133 lbs when using the USC measurement system. This
+ value must be between `minimumValue` and `maximumValue`.
  */
-@property (copy, readonly, nullable) NSNumber *valueInterval;
-
-/**
- A Boolean value indicating whether the value picker will display additional precision. (read-only)
-
- By default, the value of this property is `NO`.
- */
-@property (readonly, getter=isAdditionalPrecision) BOOL additionalPrecision;
+@property (readonly) double defaultValue;
 
 @end
 

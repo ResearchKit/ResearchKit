@@ -407,7 +407,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKHeightAnswerFormat *)heightAnswerFormat {
-    return [[ORKHeightAnswerFormat alloc] init];
+    return [ORKHeightAnswerFormat new];
 }
 
 + (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
@@ -415,25 +415,29 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKWeightAnswerFormat *)weightAnswerFormat {
-    return [[ORKWeightAnswerFormat alloc] init];
+    return [ORKWeightAnswerFormat new];
 }
 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
     return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem];
 }
 
-+ (ORKWeightAnswerFormat *)weightAnswerFormatWithDefaultValue:(nullable NSNumber *)defaultValue
-                                                 minimumValue:(nullable NSNumber *)minimumValue
-                                                 maximumValue:(nullable NSNumber *)maximumValue
-                                                valueInterval:(nullable NSNumber *)valueInterval
-                                          additionalPrecision:(BOOL)additionalPrecision
-                                            measurementSystem:(ORKMeasurementSystem)measurementSystem {
-    return [[ORKWeightAnswerFormat alloc] initWithDefaultValue:defaultValue
-                                                  minimumValue:minimumValue
-                                                  maximumValue:maximumValue
-                                                 valueInterval:valueInterval
-                                           additionalPrecision:additionalPrecision
-                                             measurementSystem:measurementSystem];
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision {
+    return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem
+                                                   numericPrecision:numericPrecision];
+}
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision
+                                                      minimumValue:(double)minimumValue
+                                                      maximumValue:(double)maximumValue
+                                                    defaultValue:(double)defaultValue {
+    return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem
+                                                   numericPrecision:numericPrecision
+                                                       minimumValue:minimumValue
+                                                       maximumValue:maximumValue
+                                                       defaultValue:defaultValue];
 }
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat {
@@ -2774,33 +2778,48 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 }
 
 - (instancetype)init {
-    self = [self initWithMeasurementSystem:ORKMeasurementSystemLocal];
-    return self;
+    return [self initWithMeasurementSystem:ORKMeasurementSystemLocal
+                          numericPrecision:ORKNumericPrecisionDefault
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
-    self = [super init];
-    if (self) {
-        _additionalPrecision = NO;
-        _measurementSystem = measurementSystem;
-    }
-    return self;
+    return [self initWithMeasurementSystem:measurementSystem
+                          numericPrecision:ORKNumericPrecisionDefault
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
 }
 
-- (instancetype)initWithDefaultValue:(nullable NSNumber *)defaultValue
-                        minimumValue:(nullable NSNumber *)minimumValue
-                        maximumValue:(nullable NSNumber *)maximumValue
-                       valueInterval:(nullable NSNumber *)valueInterval
-                 additionalPrecision:(BOOL)additionalPrecision
-                   measurementSystem:(ORKMeasurementSystem)measurementSystem {
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision {
+    return [self initWithMeasurementSystem:measurementSystem
+                          numericPrecision:numericPrecision
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
+}
+
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision
+                             minimumValue:(double)minimumValue
+                             maximumValue:(double)maximumValue
+                             defaultValue:(double)defaultValue {
+    if ((defaultValue != ORKDoubleDefaultValue) && ((defaultValue < minimumValue) || (defaultValue > maximumValue))) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"defaultValue must be between minimumValue and maximumValue."
+                                     userInfo:nil];
+    }
+
     self = [super init];
     if (self) {
-        _defaultValue = defaultValue;
+        _measurementSystem = measurementSystem;
+        _numericPrecission = numericPrecision;
         _minimumValue = minimumValue;
         _maximumValue = maximumValue;
-        _valueInterval = valueInterval;
-        _additionalPrecision = additionalPrecision;
-        _measurementSystem = measurementSystem;
+        _defaultValue = defaultValue;
     }
     return self;
 }
@@ -2810,17 +2829,26 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.measurementSystem == castObject.measurementSystem));
+            (self.measurementSystem == castObject.measurementSystem) &&
+            (self.numericPrecission == castObject.numericPrecission) &&
+            (self.minimumValue == castObject.minimumValue) &&
+            (self.maximumValue == castObject.maximumValue) &&
+            (self.defaultValue == castObject.defaultValue));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ _measurementSystem;
+    // Ignore minimumValue, maximumValue and defaultValue as they're unimportant
+    return super.hash ^ _measurementSystem ^ _numericPrecission;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_ENUM(aDecoder, measurementSystem);
+        ORK_DECODE_ENUM(aDecoder, numericPrecission);
+        ORK_DECODE_DOUBLE(aDecoder, minimumValue);
+        ORK_DECODE_DOUBLE(aDecoder, maximumValue);
+        ORK_DECODE_DOUBLE(aDecoder, defaultValue);
     }
     return self;
 }
@@ -2828,6 +2856,10 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, measurementSystem);
+    ORK_ENCODE_ENUM(aCoder, numericPrecission);
+    ORK_ENCODE_DOUBLE(aCoder, minimumValue);
+    ORK_ENCODE_DOUBLE(aCoder, maximumValue);
+    ORK_ENCODE_DOUBLE(aCoder, defaultValue);
 }
 
 - (ORKQuestionType)questionType {
@@ -2848,29 +2880,18 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     if (!ORKIsAnswerEmpty(answer)) {
         NSNumberFormatter *formatter = ORKDecimalNumberFormatter();
         if (self.useMetricSystem) {
-            double whole, fraction;
-            ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
-            NSString *wholeString = [formatter stringFromNumber:@(whole)];
-            NSString *fractionString = [formatter stringFromNumber:@(fraction)];
-            if (!self.additionalPrecision && fraction == 0.0) {
-                answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            } else if (!self.additionalPrecision && fraction == 50.0) {
-                wholeString = [formatter stringFromNumber:@(whole + 0.5)];
-                answerString = [NSString stringWithFormat:@"%@ %@", wholeString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            } else {
-                answerString = [NSString stringWithFormat:@"%@.%@ %@", wholeString, fractionString, ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
-            }
+            answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
         } else {
-            double pounds, ounces;
-            if (!self.additionalPrecision) {
-                ORKKilogramsToPounds(((NSNumber *)answer).doubleValue, &pounds);
+            if (self.numericPrecission != ORKNumericPrecisionHigh) {
+                double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
-                answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
+                answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
             } else {
+                double pounds, ounces;
                 ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
-                answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
+                answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LB", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
             }
         }
     }
