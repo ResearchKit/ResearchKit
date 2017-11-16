@@ -729,7 +729,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized image choice answer format.
  */
-- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
 
 /**
  Returns an initialized image choice answer format using the specified array of images.
