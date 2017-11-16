@@ -1048,7 +1048,7 @@ encondingTable =
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum)];
+            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum) maximumFractionDigits:GETPROP(dict, maximumFractionDigits)];
         },
         (@{
           PROPERTY(style, NSNumber, NSObject, NO,
@@ -1057,6 +1057,7 @@ encondingTable =
           PROPERTY(unit, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
