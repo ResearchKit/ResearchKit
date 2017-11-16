@@ -175,9 +175,9 @@ ORK_CLASS_AVAILABLE
 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                                                   numericPrecision:(ORKNumericPrecision)numericPrecision
-                                                      defaultValue:(nullable NSNumber *)defaultValue
+                                                      minimumValue:(nullable NSNumber *)minimumValue
                                                       maximumValue:(nullable NSNumber *)maximumValue
-                                                      minimumValue:(nullable NSNumber *)minimumValue;
+                                                      defaultValue:(nullable NSNumber *)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1514,20 +1514,20 @@ ORK_CLASS_AVAILABLE
                                     system. If you pass `ORKNumericPrecissionHigher`, the picker
                                     use 0.01 gr increments for the metric measurement system,
                                     and ounce increments for the USC measurement system.
- @param defaultValue            The default value to display. When the value of this parameter is
-                                    `nil`, the picker displays 60 kg (or 133 lbs).
- @param maximumValue            The maximum value that is accessible in the picker. If the value of
-                                    this parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
  @param minimumValue            The minimum value that is accessible in the picker. If the value of
                                     this parameter is `nil`, 0 kg (or 0 lbs) is the minimum.
+ @param maximumValue            The maximum value that is accessible in the picker. If the value of
+                                    this parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ @param defaultValue            The default value to display. When the value of this parameter is
+                                    `nil`, the picker displays 60 kg (or 133 lbs).
  
  @return An initialized weight answer format.
  */
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision
-                             defaultValue:(nullable NSNumber *)defaultValue
+                             minimumValue:(nullable NSNumber *)minimumValue
                              maximumValue:(nullable NSNumber *)maximumValue
-                             minimumValue:(nullable NSNumber *)minimumValue NS_DESIGNATED_INITIALIZER;
+                             defaultValue:(nullable NSNumber *)defaultValue NS_DESIGNATED_INITIALIZER;
 
 /**
  Indicates the measurement system used by the answer format.

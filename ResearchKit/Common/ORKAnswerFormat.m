@@ -430,14 +430,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                                                   numericPrecision:(ORKNumericPrecision)numericPrecision
-                                                      defaultValue:(nullable NSNumber *)defaultValue
+                                                      minimumValue:(nullable NSNumber *)minimumValue
                                                       maximumValue:(nullable NSNumber *)maximumValue
-                                                      minimumValue:(nullable NSNumber *)minimumValue {
+                                                    defaultValue:(nullable NSNumber *)defaultValue {
     return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem
                                                    numericPrecision:numericPrecision
-                                                       defaultValue:defaultValue
+                                                       minimumValue:minimumValue
                                                        maximumValue:maximumValue
-                                                       minimumValue:minimumValue];
+                                                       defaultValue:defaultValue];
 }
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat {
@@ -2780,40 +2780,40 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (instancetype)init {
     return [self initWithMeasurementSystem:ORKMeasurementSystemLocal
                           numericPrecision:ORKNumericPrecisionDefault
-                              defaultValue:nil
+                              minimumValue:nil
                               maximumValue:nil
-                              minimumValue:nil];
+                              defaultValue:nil];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
     return [self initWithMeasurementSystem:measurementSystem
                           numericPrecision:ORKNumericPrecisionDefault
-                              defaultValue:nil
+                              minimumValue:nil
                               maximumValue:nil
-                              minimumValue:nil];
+                              defaultValue:nil];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision {
     return [self initWithMeasurementSystem:measurementSystem
                           numericPrecision:numericPrecision
-                              defaultValue:nil
+                              minimumValue:nil
                               maximumValue:nil
-                              minimumValue:nil];
+                              defaultValue:nil];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision
-                             defaultValue:(nullable NSNumber *)defaultValue
+                             minimumValue:(nullable NSNumber *)minimumValue
                              maximumValue:(nullable NSNumber *)maximumValue
-                             minimumValue:(nullable NSNumber *)minimumValue {
+                             defaultValue:(nullable NSNumber *)defaultValue {
     self = [super init];
     if (self) {
         _measurementSystem = measurementSystem;
         _numericPrecission = numericPrecision;
-        _defaultValue = defaultValue;
-        _maximumValue = maximumValue;
         _minimumValue = minimumValue;
+        _maximumValue = maximumValue;
+        _defaultValue = defaultValue;
     }
     return self;
 }
