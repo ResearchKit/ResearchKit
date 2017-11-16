@@ -381,7 +381,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // Task with an image choice question.
         case imageChoiceQuestionTask
-        case imageChoiceQuestionStep
+        case imageChoiceQuestionStep1
+        case imageChoiceQuestionStep2
         
         // Task with a location entry.
         case locationQuestionTask
@@ -846,13 +847,19 @@ enum TaskListRow: Int, CustomStringConvertible {
             ORKImageChoice(normalImage: squareShapeImage, selectedImage: nil, text: squareShapeText, value: squareShapeText as NSCoding & NSCopying & NSObjectProtocol)
         ]
         
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
+        let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep1), title: exampleQuestionText, answer: answerFormat1)
+
+        questionStep1.text = exampleDetailText
+
+        let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
         
-        questionStep.text = exampleDetailText
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep2), title: exampleQuestionText, answer: answerFormat2)
+
+        questionStep2.text = exampleDetailText
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep1, questionStep2])
     }
     
     /// This task presents just a single location question.

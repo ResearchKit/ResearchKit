@@ -1,5 +1,8 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015-2017, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
+ Copyright (c) 2016-2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,35 +32,27 @@
  */
 
 
-@import Foundation;
+#import "TaskFactory+PasscodeManagement.h"
+
+@import ResearchKit;
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation TaskFactory (PasscodeManagement)
 
-@class ORKAnswerFormat;
-@class ORKImageChoice;
-@class ORKTextChoice;
-@protocol ORKAnswerOption;
+/*
+ Tests various uses of passcode step and view controllers.
+ 
+ Passcode authentication and passcode editing are presented in
+ the examples. Passcode creation would ideally be as part of
+ the consent process.
+ */
 
-@interface ORKChoiceAnswerFormatHelper : NSObject
-
-- (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat;
-
-- (NSUInteger)choiceCount;
-
-- (nullable id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
-- (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
-- (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
-
-- (nullable id)answerForSelectedIndex:(NSUInteger)index;
-- (nullable id)answerForSelectedIndexes:(NSArray *)indexes;
-
-- (nullable NSNumber *)selectedIndexForAnswer:(nullable id)answer;
-- (NSArray *)selectedIndexesForAnswer:(nullable id)answer;
-
-- (nullable NSString *)stringForChoiceAnswer:(id)answer;
-- (nullable NSString *)labelForChoiceAnswer:(id)answer;
+- (id<ORKTask>)makeCreatePasscodeTaskWithIdentifier:(NSString *)identifier {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"createPasscode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    [steps addObject: passcodeStep];
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

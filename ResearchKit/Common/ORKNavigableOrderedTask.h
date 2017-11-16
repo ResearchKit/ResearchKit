@@ -186,40 +186,4 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
-@interface ORKNavigableOrderedTask (ORKPredefinedActiveTask)
-
-/**
- Returns a predefined task that measures the upper extremity function.
- 
- In a hole peg test task, the participant is asked to fill holes with pegs.
- 
- A hole peg test task can be used to assess arm and hand function, especially in patients with severe disability.
- 
- Data collected in this task is in the form of an `ORKHolePegTestResult` object.
- 
- @param identifier              The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription  A localized string describing the intended use of the data
-                                  collected. If the value of this parameter is `nil`, the default
-                                  localized text will be displayed.
- @param dominantHand            The participant dominant hand that will be tested first.
- @param numberOfPegs            The number of pegs to place in the pegboard.
- @param threshold               The threshold value used for the detection area.
- @param rotated                 A test variant that also requires peg rotation.
- @param timeLimit               The duration allowed to validate the peg position.
- @param options                 Options that affect the features of the predefined task.
- 
- @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
- */
-+ (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
-                                    intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                              dominantHand:(ORKBodySagittal)dominantHand
-                                              numberOfPegs:(int)numberOfPegs
-                                                 threshold:(double)threshold
-                                                   rotated:(BOOL)rotated
-                                                 timeLimit:(NSTimeInterval)timeLimit
-                                                   options:(ORKPredefinedTaskOption)options;
-
-@end
-
  NS_ASSUME_NONNULL_END
