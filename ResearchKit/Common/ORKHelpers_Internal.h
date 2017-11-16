@@ -300,7 +300,7 @@ ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
     return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
 }
 
-ORK_INLINE void ORKKilogramsToWholeAndFractions(double kilograms, double *outWhole, double *outFraction) {
+ORK_INLINE void ORKKilogramsToWholeAndFraction(double kilograms, double *outWhole, double *outFraction) {
     if (outWhole == NULL || outFraction == NULL) {
         return;
     }
@@ -331,7 +331,7 @@ ORK_INLINE double ORKKilogramsToPounds(double kilograms) {
     return pounds;
 }
 
-ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction) {
+ORK_INLINE double ORKWholeAndFractionToKilograms(double whole, double fraction) {
     double kg = (whole + (fraction / 100));
     return (round(100 * kg) / 100);
 }

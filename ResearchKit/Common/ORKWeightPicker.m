@@ -110,7 +110,7 @@
             [_pickerView selectRow:index inComponent:0 animated:NO];
         } else {
             double whole, fraction;
-            ORKKilogramsToWholeAndFractions(((NSNumber *)answer).doubleValue, &whole, &fraction);
+            ORKKilogramsToWholeAndFraction(((NSNumber *)answer).doubleValue, &whole, &fraction);
             NSUInteger wholeIndex = [_majorValues indexOfObject:@((NSInteger)whole)];
             NSUInteger fractionIndex = [_minorValues indexOfObject:@((NSInteger)fraction)];
             if (wholeIndex == NSNotFound || fractionIndex == NSNotFound) {
@@ -184,7 +184,7 @@
         } else {
             NSInteger fractionRow = [_pickerView selectedRowInComponent:1];
             NSNumber *fraction = _minorValues[fractionRow];
-            answer = @( ORKWholeAndFractionsToKilograms(whole.doubleValue, fraction.doubleValue) );
+            answer = @( ORKWholeAndFractionToKilograms(whole.doubleValue, fraction.doubleValue) );
         }
     } else {
         NSInteger poundsRow = [_pickerView selectedRowInComponent:0];
