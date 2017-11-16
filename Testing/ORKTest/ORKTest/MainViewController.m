@@ -1921,7 +1921,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_003" text:@"Weight"
                                                            answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC]];
-            item.placeholder = @"Pick a weight (imperial system)";
+            item.placeholder = @"Pick a weight (USC system)";
             [items addObject:item];
         }
 
@@ -1932,7 +1932,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                                                     minimumValue:10
                                                                                                                     maximumValue:20
                                                                                                                     defaultValue:11.5]];
-            item.placeholder = @"Pick a weight (metric system)";
+            item.placeholder = @"Pick a weight (metric system, low precision)";
             [items addObject:item];
         }
 
@@ -1943,7 +1943,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                                                     minimumValue:10
                                                                                                                     maximumValue:20
                                                                                                                     defaultValue:11.5]];
-            item.placeholder = @"Pick a weight (metric system)";
+            item.placeholder = @"Pick a weight (USC system, low precision)";
             [items addObject:item];
         }
 
@@ -1954,7 +1954,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                                                     minimumValue:10
                                                                                                                     maximumValue:20
                                                                                                                     defaultValue:11.5]];
-            item.placeholder = @"Pick a weight (metric system)";
+            item.placeholder = @"Pick a weight (metric system, high precision)";
             [items addObject:item];
         }
         
@@ -1965,7 +1965,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                                                     minimumValue:10
                                                                                                                     maximumValue:20
                                                                                                                     defaultValue:11.5]];
-            item.placeholder = @"Pick a weight (metric system)";
+            item.placeholder = @"Pick a weight (USC system, high precision)";
             [items addObject:item];
         }
 

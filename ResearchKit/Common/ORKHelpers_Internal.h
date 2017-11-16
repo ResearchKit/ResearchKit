@@ -336,15 +336,14 @@ ORK_INLINE double ORKWholeAndFractionToKilograms(double whole, double fraction) 
     return (round(100 * kg) / 100);
 }
 
-ORK_INLINE double ORKPoundsToKilograms(double pounds) {
+ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
     const double ORKKilogramsPerPound = 0.45359237;
-    double kg = pounds * ORKKilogramsPerPound;
+    double kg = (pounds + (ounces / 16)) * ORKKilogramsPerPound;
     return (round(100 * kg) / 100);
 }
 
-ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
-    double kg = (pounds + (ounces / 16)) * 0.4536;
-    return (round(100 * kg) / 100);
+ORK_INLINE double ORKPoundsToKilograms(double pounds) {
+    return ORKPoundsAndOuncesToKilograms(pounds, 0);
 }
 
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
