@@ -269,7 +269,7 @@
         }
     } else {
         if (component == 0) {
-            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
+            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
         } else {
             title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
         }

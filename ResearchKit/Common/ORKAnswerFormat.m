@@ -2885,13 +2885,13 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
             if (self.numericPrecission != ORKNumericPrecisionHigh) {
                 double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
-                answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
+                answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
             } else {
                 double pounds, ounces;
                 ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 NSString *ouncesString = [formatter stringFromNumber:@(ounces)];
-                answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
+                answerString = [NSString stringWithFormat:@"%@ %@, %@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LB", nil), ouncesString, ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
             }
         }
     }
