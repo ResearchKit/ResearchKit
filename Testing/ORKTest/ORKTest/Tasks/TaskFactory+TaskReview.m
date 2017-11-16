@@ -100,12 +100,17 @@
     
     // ORKTimeIntervalAnswerFormat
     ORKQuestionStep *step13 = [ORKQuestionStep questionStepWithIdentifier:@"step13" title:@"How many hours did you sleep last night?" answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
+    
     // ORKHeightAnswerFormat
     ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"What is your height?" answer:[ORKAnswerFormat heightAnswerFormat]];
-    // ORKLocationAnswerFormat
-    ORKQuestionStep *step15 = [ORKQuestionStep questionStepWithIdentifier:@"step15" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
     
-    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14, step15];
+    // ORKWeightAnswerFormat
+    ORKQuestionStep *step15 = [ORKQuestionStep questionStepWithIdentifier:@"step15" title:@"What is your weight?" answer:[ORKAnswerFormat weightAnswerFormat]];
+
+    // ORKLocationAnswerFormat
+    ORKQuestionStep *step16 = [ORKQuestionStep questionStepWithIdentifier:@"step16" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
+    
+    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14, step15, step16];
 }
 
 - (id<ORKTask>)makeEmbeddedReviewTaskWithIdentifier:(NSString *)identifier {
