@@ -2869,12 +2869,12 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         if (self.useMetricSystem) {
             answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
         } else {
-            double pounds, ounces;
             if (self.numericPrecission != ORKNumericPrecisionHigh) {
-                ORKKilogramsToPounds(((NSNumber *)answer).doubleValue, &pounds);
+                double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LBS", nil)];
             } else {
+                double pounds, ounces;
                 ORKKilogramsToPoundsAndOunces(((NSNumber *)answer).doubleValue, &pounds, &ounces);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 NSString *ouncesString = [formatter stringFromNumber:@(ounces)];

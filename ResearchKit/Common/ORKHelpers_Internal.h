@@ -308,42 +308,43 @@ ORK_INLINE void ORKKilogramsToWholeAndFractions(double kilograms, double *outWho
     *outFraction = round((kilograms - floor(kilograms)) * 100);
 }
 
-ORK_INLINE void ORKKilogramsToPounds(double kilograms, double *outPounds) {
-    if (outPounds == NULL) {
-        return;
+ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double * _Nullable outPounds, double * _Nullable outOunces) {
+    const double ORKPoundsPerKilogram = 2.20462262;
+    double fractionalPounds = kilograms * ORKPoundsPerKilogram;
+    double pounds = floor(fractionalPounds);
+    double ounces = round((fractionalPounds - pounds) * 16);
+    if (ounces == 16) {
+        pounds += 1;
+        ounces = 0;
     }
-    double lbs = kilograms * 2.2046;
-    *outPounds = round(lbs);
+    if (outPounds != NULL) {
+        *outPounds = pounds;
+    }
+    if (outOunces != NULL) {
+        *outOunces = ounces;
+    }
 }
 
-ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double *outPounds, double *outOunces) {
-    if (outPounds == NULL || outOunces == NULL) {
-        return;
-    }
-    double lbs = kilograms * 2.2046;
-    *outPounds = floor(lbs);
-    double oz = (lbs - floor(lbs)) * 16;
-    *outOunces = round(oz);
-    
-    if (round(oz) == 16) {
-        *outPounds += 1;
-        *outOunces = 0;
-    }
+ORK_INLINE double ORKKilogramsToPounds(double kilograms) {
+    double pounds;
+    ORKKilogramsToPoundsAndOunces(kilograms, &pounds, NULL);
+    return pounds;
 }
 
 ORK_INLINE double ORKWholeAndFractionsToKilograms(double whole, double fraction) {
     double kg = (whole + (fraction / 100));
-    return (round(100*kg)/100);
+    return (round(100 * kg) / 100);
 }
 
 ORK_INLINE double ORKPoundsToKilograms(double pounds) {
-    double kg = pounds * 0.4536;
-    return (round(100*kg)/100);
+    const double ORKKilogramsPerPound = 0.45359237;
+    double kg = pounds * ORKKilogramsPerPound;
+    return (round(100 * kg) / 100);
 }
 
 ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
     double kg = (pounds + (ounces / 16)) * 0.4536;
-    return (round(100*kg)/100);
+    return (round(100 * kg) / 100);
 }
 
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {

@@ -123,8 +123,7 @@
         }
     } else {
         if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
-            double pounds;
-            ORKKilogramsToPounds(((NSNumber *)answer).doubleValue, &pounds);
+            double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
             NSUInteger poundsIndex = [_majorValues indexOfObject:@((NSInteger)pounds)];
             if (poundsIndex == NSNotFound) {
                 [self setAnswer:[self defaultAnswerValue]];
