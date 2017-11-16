@@ -430,9 +430,9 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                                                   numericPrecision:(ORKNumericPrecision)numericPrecision
-                                                      minimumValue:(nullable NSNumber *)minimumValue
-                                                      maximumValue:(nullable NSNumber *)maximumValue
-                                                    defaultValue:(nullable NSNumber *)defaultValue {
+                                                      minimumValue:(double)minimumValue
+                                                      maximumValue:(double)maximumValue
+                                                    defaultValue:(double)defaultValue {
     return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem
                                                    numericPrecision:numericPrecision
                                                        minimumValue:minimumValue
@@ -2780,33 +2780,39 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (instancetype)init {
     return [self initWithMeasurementSystem:ORKMeasurementSystemLocal
                           numericPrecision:ORKNumericPrecisionDefault
-                              minimumValue:nil
-                              maximumValue:nil
-                              defaultValue:nil];
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem {
     return [self initWithMeasurementSystem:measurementSystem
                           numericPrecision:ORKNumericPrecisionDefault
-                              minimumValue:nil
-                              maximumValue:nil
-                              defaultValue:nil];
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision {
     return [self initWithMeasurementSystem:measurementSystem
                           numericPrecision:numericPrecision
-                              minimumValue:nil
-                              maximumValue:nil
-                              defaultValue:nil];
+                              minimumValue:ORKDoubleDefaultValue
+                              maximumValue:ORKDoubleDefaultValue
+                              defaultValue:ORKDoubleDefaultValue];
 }
 
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision
-                             minimumValue:(nullable NSNumber *)minimumValue
-                             maximumValue:(nullable NSNumber *)maximumValue
-                             defaultValue:(nullable NSNumber *)defaultValue {
+                             minimumValue:(double)minimumValue
+                             maximumValue:(double)maximumValue
+                             defaultValue:(double)defaultValue {
+    if ((defaultValue != ORKDoubleDefaultValue) && ((defaultValue < minimumValue) || (defaultValue > maximumValue))) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"defaultValue must be between minimumValue and maximumValue."
+                                     userInfo:nil];
+    }
+
     self = [super init];
     if (self) {
         _measurementSystem = measurementSystem;

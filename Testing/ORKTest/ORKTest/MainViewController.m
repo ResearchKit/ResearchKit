@@ -1917,14 +1917,58 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             item.placeholder = @"Pick a weight (metric system)";
             [items addObject:item];
         }
-        
+
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_003" text:@"Weight"
                                                            answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC]];
             item.placeholder = @"Pick a weight (imperial system)";
             [items addObject:item];
         }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_004" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric
+                                                                                                                numericPrecision:ORKNumericPrecisionLow
+                                                                                                                    minimumValue:10
+                                                                                                                    maximumValue:20
+                                                                                                                    defaultValue:11.5]];
+            item.placeholder = @"Pick a weight (metric system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_005" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC
+                                                                                                                numericPrecision:ORKNumericPrecisionLow
+                                                                                                                    minimumValue:10
+                                                                                                                    maximumValue:20
+                                                                                                                    defaultValue:11.5]];
+            item.placeholder = @"Pick a weight (metric system)";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_006" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemMetric
+                                                                                                                numericPrecision:ORKNumericPrecisionHigh
+                                                                                                                    minimumValue:10
+                                                                                                                    maximumValue:20
+                                                                                                                    defaultValue:11.5]];
+            item.placeholder = @"Pick a weight (metric system)";
+            [items addObject:item];
+        }
         
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_weight_007" text:@"Weight"
+                                                           answerFormat:[ORKAnswerFormat weightAnswerFormatWithMeasurementSystem:ORKMeasurementSystemUSC
+                                                                                                                numericPrecision:ORKNumericPrecisionHigh
+                                                                                                                    minimumValue:10
+                                                                                                                    maximumValue:20
+                                                                                                                    defaultValue:11.5]];
+            item.placeholder = @"Pick a weight (metric system)";
+            [items addObject:item];
+        }
+
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];

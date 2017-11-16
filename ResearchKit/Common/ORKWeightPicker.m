@@ -47,8 +47,8 @@
     __weak id<ORKPickerDelegate> _pickerDelegate;
     NSArray *_majorValues;
     NSArray *_minorValues;
-    NSNumber *_canonicalMaximumValue;
-    NSNumber *_canonicalMinimumValue;
+    double _canonicalMaximumValue;
+    double _canonicalMinimumValue;
 }
 
 @synthesize pickerDelegate = _pickerDelegate;
@@ -67,6 +67,9 @@
         _pickerDelegate = delegate;
         self.answer = answer;
         
+        _canonicalMaximumValue = ORKDoubleDefaultValue;
+        _canonicalMinimumValue = ORKDoubleDefaultValue;
+
         if (_answerFormat.useMetricSystem) {
             _majorValues = [self kilogramValues];
         } else {
@@ -148,28 +151,28 @@
 }
 
 - (NSNumber *)defaultAnswerValue {
-    NSNumber *defaultAnswerValue = nil;
-    if (!_answerFormat.defaultValue) {
+    double defaultValue = ORKDoubleDefaultValue;
+    if (_answerFormat.defaultValue == ORKDoubleDefaultValue) {
         if (_answerFormat.useMetricSystem) {
-            defaultAnswerValue = @(60.00); // Default metric weight: 60 kg
+            defaultValue = 60.00; // Default metric weight: 60 kg
         } else {
-            defaultAnswerValue = @(60.33); // Default USC weight: 133 lbs
+            defaultValue = 60.33; // Default USC weight: 133 lbs
         }
     } else {
         if (_answerFormat.useMetricSystem) {
-            defaultAnswerValue = _answerFormat.defaultValue;
+            defaultValue = _answerFormat.defaultValue;
         } else {
-            defaultAnswerValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([_answerFormat.defaultValue doubleValue])]; // Convert to kg
+            defaultValue = ORKPoundsToKilograms(_answerFormat.defaultValue); // Convert to kg
         }
     }
     // Ensure default value is within bounds
-    if (_canonicalMinimumValue && [defaultAnswerValue doubleValue] < [_canonicalMinimumValue doubleValue]) {
-        defaultAnswerValue = _canonicalMinimumValue;
-    } else if (_canonicalMaximumValue && [defaultAnswerValue doubleValue] > [_canonicalMaximumValue doubleValue]) {
-        defaultAnswerValue = _canonicalMaximumValue;
+    if ((_canonicalMinimumValue != ORKDoubleDefaultValue) && (defaultValue < _canonicalMinimumValue)) {
+        defaultValue = _canonicalMinimumValue;
+    } else if ((_canonicalMaximumValue  != ORKDoubleDefaultValue) && (defaultValue > _canonicalMaximumValue)) {
+        defaultValue = _canonicalMaximumValue;
     }
     
-    return defaultAnswerValue;
+    return @(defaultValue);
 }
 
 - (NSNumber *)selectedAnswerValue {
@@ -283,21 +286,21 @@
     NSArray *wholeValues = nil;
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
 
-    NSInteger min = 0;
-    NSInteger max = 657;
-    if (_answerFormat.minimumValue && [_answerFormat.minimumValue integerValue] <= max) {
-        min = [_answerFormat.minimumValue integerValue];
+    double minimumValue = 0;
+    double maximumValue = 657;
+    if ((_answerFormat.minimumValue != ORKDoubleDefaultValue) && (_answerFormat.minimumValue <= maximumValue)) {
+        minimumValue = _answerFormat.minimumValue;
     }
-    if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
-        max = [_answerFormat.maximumValue integerValue];
+    if ((_answerFormat.maximumValue != ORKDoubleDefaultValue) && (_answerFormat.maximumValue >= minimumValue)) {
+        maximumValue = _answerFormat.maximumValue;
     }
-    _canonicalMinimumValue = [NSNumber numberWithInteger:min];
-    _canonicalMaximumValue = [NSNumber numberWithInteger:max];
+    _canonicalMinimumValue = minimumValue;
+    _canonicalMaximumValue = maximumValue;
     
-    for (NSInteger i = min; i <= max; i++) {
-        [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
+    for (double i = minimumValue; i <= maximumValue; i++) {
+        [mutableWholeValues addObject:@(i)];
         if (_answerFormat.numericPrecission == ORKNumericPrecisionDefault) {
-            [mutableWholeValues addObject:[NSNumber numberWithDouble:i + 0.5]];
+            [mutableWholeValues addObject:@(i + 0.5)];
         }
     }
     wholeValues = [mutableWholeValues copy];
@@ -308,18 +311,18 @@
     NSArray *wholeValues = nil;
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
 
-    NSInteger min = 0;
-    NSInteger max = 1450;
-    if (_answerFormat.minimumValue && [_answerFormat.minimumValue integerValue] <= max) {
-        min = [_answerFormat.minimumValue integerValue];
+    double minimumValue = 0;
+    double maximumValue = 1450;
+    if ((_answerFormat.minimumValue != ORKDoubleDefaultValue) && (_answerFormat.minimumValue <= maximumValue)) {
+        minimumValue = _answerFormat.minimumValue;
     }
-    if (_answerFormat.maximumValue && [_answerFormat.maximumValue integerValue] >= min) {
-        max = [_answerFormat.maximumValue integerValue];
+    if ((_answerFormat.maximumValue != ORKDoubleDefaultValue) && (_answerFormat.maximumValue >= minimumValue)) {
+        maximumValue = _answerFormat.maximumValue;
     }
-    _canonicalMinimumValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([[NSNumber numberWithInteger:min] doubleValue])]; // Convert to kg
-    _canonicalMaximumValue = [NSNumber numberWithDouble:ORKPoundsToKilograms([[NSNumber numberWithInteger:max] doubleValue])]; // Convert to kg
+    _canonicalMinimumValue = ORKPoundsToKilograms(minimumValue); // Convert to kg
+    _canonicalMaximumValue = ORKPoundsToKilograms(maximumValue); // Convert to kg
     
-    for (NSInteger i = min; i <= max; i++) {
+    for (NSInteger i = minimumValue; i <= maximumValue; i++) {
         [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
     }
     wholeValues = [mutableWholeValues copy];
@@ -330,12 +333,12 @@
     NSArray *wholeValues = nil;
     NSMutableArray *mutableWholeValues = [[NSMutableArray alloc] init];
     
-    NSInteger max = 99;
+    NSInteger maximumValue = 99;
     if (!_answerFormat.useMetricSystem) {
-        max = 15;
+        maximumValue = 15;
     }
-    for (NSInteger i = 0; i <= max; i++) {
-        [mutableWholeValues addObject:[NSNumber numberWithInteger:i]];
+    for (NSInteger i = 0; i <= maximumValue; i++) {
+        [mutableWholeValues addObject:@(i)];
     }
     wholeValues = [mutableWholeValues copy];
     return wholeValues;

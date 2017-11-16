@@ -175,9 +175,9 @@ ORK_CLASS_AVAILABLE
 
 + (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                                                   numericPrecision:(ORKNumericPrecision)numericPrecision
-                                                      minimumValue:(nullable NSNumber *)minimumValue
-                                                      maximumValue:(nullable NSNumber *)maximumValue
-                                                      defaultValue:(nullable NSNumber *)defaultValue;
+                                                      minimumValue:(double)minimumValue
+                                                      maximumValue:(double)maximumValue
+                                                      defaultValue:(double)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -1514,20 +1514,27 @@ ORK_CLASS_AVAILABLE
                                     system. If you pass `ORKNumericPrecissionHigher`, the picker
                                     use 0.01 gr increments for the metric measurement system,
                                     and ounce increments for the USC measurement system.
- @param minimumValue            The minimum value that is accessible in the picker. If the value of
-                                    this parameter is `nil`, 0 kg (or 0 lbs) is the minimum.
- @param maximumValue            The maximum value that is accessible in the picker. If the value of
-                                    this parameter is `nil`, 657 kg (or 1,450 lbs) is the maximum.
- @param defaultValue            The default value to display. When the value of this parameter is
-                                    `nil`, the picker displays 60 kg (or 133 lbs).
+ @param minimumValue            The minimum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the minimum values are 0 kg when using the
+                                    metric measurement system and 0 lbs when using the USC
+                                    measurement system.
+ @param maximumValue            The maximum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the maximum values are 657 kg when using the
+                                    metric measurement system and 1,450 lbs when using the USC
+                                    measurement system.
+ @param defaultValue            The default value to be initially selected in the picker. If you
+                                    specify `ORKDefaultValue`, the initally selected values are
+                                    60 kg when using the metric measurement system and 133 lbs when
+                                    using the USC measurement system. This value must be between
+                                    `minimumValue` and `maximumValue`.
  
  @return An initialized weight answer format.
  */
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
                          numericPrecision:(ORKNumericPrecision)numericPrecision
-                             minimumValue:(nullable NSNumber *)minimumValue
-                             maximumValue:(nullable NSNumber *)maximumValue
-                             defaultValue:(nullable NSNumber *)defaultValue NS_DESIGNATED_INITIALIZER;
+                             minimumValue:(double)minimumValue
+                             maximumValue:(double)maximumValue
+                             defaultValue:(double)defaultValue NS_DESIGNATED_INITIALIZER;
 
 /**
  Indicates the measurement system used by the answer format.
@@ -1550,25 +1557,29 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isAdditionalPrecision) ORKNumericPrecision numericPrecission;
 
 /**
- The value to use as the default in the specified measurement system.
+ The minimum value that is displayed in the picker.
  
- When the value of this property is `nil`, 60 kg (or 133 lbs) is used as the default.
+ When this property has a value equal to `ORKDefaultValue`, the minimum values are 0 kg when using
+ the metric measurement system and 0 lbs when using the USC measurement system.
  */
-@property (copy, readonly, nullable) NSNumber *defaultValue;
+@property (readonly) double minimumValue;
 
 /**
- The minimum allowed value in the specified measurement system.
+ The maximum value that is displayed in the picker.
  
- When the value of this property is `nil`, 0 kg (or 0 lbs) is the minimum.
+ When this property has a value equal to `ORKDefaultValue`, the maximum values are 657 kg when using
+ the metric measurement system and 1,450 lbs when using the USC measurement system.
  */
-@property (copy, readonly, nullable) NSNumber *minimumValue;
+@property (readonly) double maximumValue;
 
 /**
- The maximum allowed value in the specified measurement system.
+ The default value to initially selected in the picker.
  
- When the value of this property is `nil`, 657 kg (or 1,450 lbs) is the maximum.
+ When this property has a value equal to `ORKDefaultValue`, the initally selected values are 60 kg
+ when using the metric measurement system and 133 lbs when using the USC measurement system. This
+ value must be between `minimumValue` and `maximumValue`.
  */
-@property (copy, readonly, nullable) NSNumber *maximumValue;
+@property (readonly) double defaultValue;
 
 @end
 

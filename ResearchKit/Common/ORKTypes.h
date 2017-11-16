@@ -298,4 +298,7 @@ typedef NS_ENUM(NSInteger, ORKNumericPrecision) {
 } ORK_ENUM_AVAILABLE;
 
 
+extern const double ORKDoubleDefaultValue ORK_AVAILABLE_DECL;
+
+
 NS_ASSUME_NONNULL_END
