@@ -1,5 +1,8 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015-2017, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
+ Copyright (c) 2016-2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,35 +32,9 @@
  */
 
 
-@import Foundation;
+#import "TaskFactory.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKAnswerFormat;
-@class ORKImageChoice;
-@class ORKTextChoice;
-@protocol ORKAnswerOption;
-
-@interface ORKChoiceAnswerFormatHelper : NSObject
-
-- (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat;
-
-- (NSUInteger)choiceCount;
-
-- (nullable id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
-- (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
-- (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
-
-- (nullable id)answerForSelectedIndex:(NSUInteger)index;
-- (nullable id)answerForSelectedIndexes:(NSArray *)indexes;
-
-- (nullable NSNumber *)selectedIndexForAnswer:(nullable id)answer;
-- (NSArray *)selectedIndexesForAnswer:(nullable id)answer;
-
-- (nullable NSString *)stringForChoiceAnswer:(id)answer;
-- (nullable NSString *)labelForChoiceAnswer:(id)answer;
+@interface TaskFactory (UtilitySteps)
 
 @end
-
-NS_ASSUME_NONNULL_END

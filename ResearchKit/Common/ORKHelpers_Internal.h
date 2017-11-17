@@ -280,7 +280,7 @@ ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double 
         return;
     }
     *outFeet = floor(inches / 12);
-    *outInches = fmod(inches, 12);
+    *outInches = round(fmod(inches, 12));
 }
 
 ORK_INLINE double ORKInchesToCentimeters(double inches) {
