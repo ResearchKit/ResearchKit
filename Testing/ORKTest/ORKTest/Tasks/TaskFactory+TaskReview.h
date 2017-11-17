@@ -1,5 +1,8 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015-2017, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
+ Copyright (c) 2016-2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,32 +32,9 @@
  */
 
 
-@import UIKit;
-@import AVFoundation;
+#import "TaskFactory.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@protocol ORKImageCaptureViewDelegate <NSObject>
-
-- (void)capturePressed:(void (^ _Nullable)(BOOL captureSuccess))handler;
-- (void)retakePressed:(void (^ _Nullable)(void))handler;
-- (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation;
+@interface TaskFactory (TaskReview)
 
 @end
-
-@class ORKImageCaptureStep;
-
-@interface ORKImageCaptureView : UIView
-
-@property (nonatomic, strong, nullable) ORKImageCaptureStep *imageCaptureStep;
-@property (nonatomic, weak, nullable) id<ORKImageCaptureViewDelegate> delegate;
-@property (nonatomic, weak, nullable) AVCaptureSession *session;
-@property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
-@property (nonatomic, strong, nullable) UIBarButtonItem *skipButtonItem;
-@property (nonatomic, strong, nullable) UIImage *capturedImage;
-@property (nonatomic, strong, nullable) NSError *error;
-
-@end
-
-NS_ASSUME_NONNULL_END

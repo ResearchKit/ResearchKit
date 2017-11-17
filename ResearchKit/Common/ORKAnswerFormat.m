@@ -332,6 +332,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:imageChoices];
 }
 
++ (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices
+                                                             style:(ORKChoiceAnswerStyle)style
+                                                          vertical:(BOOL)vertical {
+    return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:imageChoices
+                                                              style:style
+                                                           vertical:vertical];
+}
+
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
                                                textChoices:(NSArray<ORKTextChoice *> *)textChoices {
     return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
@@ -540,32 +548,12 @@ static void ork_validateChoices(NSArray *choices) {
 }
 
 static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
-    NSMutableArray *choices = [[NSMutableArray alloc] init];
-    for (id object in textChoices) {
-        // TODO: Remove these first two cases, which we don't really support anymore.
-        if ([object isKindOfClass:[NSString class]]) {
-            NSString *string = (NSString *)object;
-            [choices addObject:[ORKTextChoice choiceWithText:string value:string]];
-        } else if ([object isKindOfClass:[ORKTextChoice class]]) {
-            [choices addObject:object];
-            
-        } else if ([object isKindOfClass:[NSArray class]]) {
-            
-            NSArray *array = (NSArray *)object;
-            if (array.count > 1 &&
-                [array[0] isKindOfClass:[NSString class]] &&
-                [array[1] isKindOfClass:[NSString class]]) {
-                
-                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
-            } else if (array.count == 1 &&
-                       [array[0] isKindOfClass:[NSString class]]) {
-                [choices addObject:[ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
-            } else {
-                @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice": object }];
-            }
-        } else {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible choice item's type are ORKTextChoice, NSString, and NSArray" userInfo:@{@"choice": object }];
+    NSMutableArray<ORKTextChoice *> *choices = [[NSMutableArray alloc] init];
+    for (ORKTextChoice *textObject in textChoices) {
+        if (![textObject isKindOfClass:[ORKTextChoice class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"The textChoices array should only containt objects of the ORKTextChoice kind." userInfo:@{@"nonConformingObject": textObject}];
         }
+        [choices addObject:textObject];
     }
     return choices;
 }
@@ -805,6 +793,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices {
+    self = [self initWithImageChoices:imageChoices style:ORKChoiceAnswerStyleSingleChoice vertical:NO];
+    return self;
+}
+
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices
+                               style:(ORKChoiceAnswerStyle)style
+                            vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
         NSMutableArray *choices = [[NSMutableArray alloc] init];
@@ -819,6 +814,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             }
         }
         _imageChoices = choices;
+        _style = style;
+        _vertical = vertical;
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     }
     return self;
@@ -835,17 +832,21 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.imageChoices, castObject.imageChoices));
+            ORKEqualObjects(self.imageChoices, castObject.imageChoices) &&
+            (_style == castObject.style) &&
+            (_vertical == castObject.vertical));
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.imageChoices.hash;
+    return super.hash ^ self.imageChoices.hash ^ _style ^ _vertical;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, imageChoices, ORKImageChoice);
+        ORK_DECODE_ENUM(aDecoder, style);
+        ORK_DECODE_BOOL(aDecoder, vertical);
     }
     return self;
 }
@@ -853,7 +854,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, imageChoices);
-    
+    ORK_ENCODE_ENUM(aCoder, style);
+    ORK_ENCODE_BOOL(aCoder, vertical);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -861,7 +863,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (ORKQuestionType)questionType {
-    return ORKQuestionTypeSingleChoice;
+    return (_style == ORKChoiceAnswerStyleSingleChoice) ? ORKQuestionTypeSingleChoice : ORKQuestionTypeMultipleChoice;
 }
 
 - (Class)questionResultClass {
