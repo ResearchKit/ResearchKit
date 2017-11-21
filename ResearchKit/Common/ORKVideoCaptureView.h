@@ -39,9 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKVideoCaptureViewDelegate <NSObject>
 
-- (void)capturePressed:(void (^ _Nullable)())handler;
-- (void)stopCapturePressed:(void (^ _Nullable)())handler;
-- (void)retakePressed:(void (^ _Nullable)())handler;
+- (void)capturePressed:(void (^ _Nullable)(void))handler;
+- (void)stopCapturePressed:(void (^ _Nullable)(void))handler;
+- (void)retakePressed:(void (^ _Nullable)(void))handler;
 - (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation;
 
 @end

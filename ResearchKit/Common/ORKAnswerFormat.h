@@ -745,7 +745,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized image choice answer format.
  */
-- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
 
 /**
  Returns an initialized image choice answer format using the specified array of images.
@@ -1096,17 +1096,37 @@ Returns an initialized numeric answer format using the specified style, unit des
  
  This method is the designated initializer.
  
- @param style       The style of the numeric answer (decimal or integer).
- @param unit        A string that displays a localized version of the unit designation.
- @param minimum     The minimum value to apply, or `nil` if none is specified.
- @param maximum     The maximum value to apply, or `nil` if none is specified.
- 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+
  @return An initialized numeric answer format.
  */
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
-                      maximum:(nullable NSNumber *)maximum NS_DESIGNATED_INITIALIZER;
+                      maximum:(nullable NSNumber *)maximum;
+
+/**
+Returns an initialized numeric answer format using the specified style, unit designation, and range
+ values.
+ 
+ This method is the designated initializer.
+ 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+ @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
+
+ @return An initialized numeric answer format.
+ */
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(nullable NSString *)unit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of numeric entry (decimal or integer). (read-only)
@@ -1137,12 +1157,13 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (copy, nullable) NSNumber *maximum;
 
 /**
- The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ The maximum number of fraction digits to the right of the decimal point for the
  numeric answer.
  
- The default value of this property is `nil`, which means that no limit scale value is used.
+ The default value of this property is `nil`, which means that there's no maximum number of fraction
+ digits.
  */
-@property (copy, nullable) NSNumber *scale;
+@property (copy, nullable) NSNumber *maximumFractionDigits;
 
 @end
 
