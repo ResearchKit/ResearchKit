@@ -57,12 +57,7 @@
         _webView.navigationDelegate = self;
         [self.view addSubview:_webView];
         
-        if ([self webViewStep].url != nil) {
-            NSURLRequest* request = [NSURLRequest requestWithURL:[self webViewStep].url];
-            [_webView loadRequest:request];
-        } else {
-            [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
-        }
+        [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
     }
 }
 

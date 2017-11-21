@@ -39,8 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
  This may be useful in cases where extreme custom styling is necessary, or an instrument
  with specific requirements does not yet have a native implementation.
  
- The webview can reference either an external url or embedded html.
- 
  In order to proceed to the next step from inside the webviewstep, you must execute this
  line of javascript when the user should proceed:
  
@@ -53,15 +51,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKWebViewStep : ORKStep
 
 /**
- Returns a new web view step that includes the specified identifier and will display the specified url.
- 
- @param identifier    The identifier of the step (a step identifier should be unique within the task).
- @param url           A web or file url to be displayed in the webview.
- */
-+ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
-                                      url:(NSURL *)url;
-
-/**
  Returns a new web view step that includes the specified identifier and will display the specified html.
  
  @param identifier    The identifier of the step (a step identifier should be unique within the task).
@@ -69,11 +58,6 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)webViewStepWithIdentifier:(NSString *)identifier
                                      html:(NSString *)html;
-
-/**
- The url to be used for displaying the webview.
- */
-@property (nonatomic, copy, nullable) NSURL *url;
 
 /**
  Embedded html used for displaying the webview.

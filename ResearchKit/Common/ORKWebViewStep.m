@@ -39,13 +39,6 @@
 }
 
 + (instancetype)webViewStepWithIdentifier:(NSString *)identifier
-                                      url:(NSURL *)url {
-    ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
-    step.url = url;
-    return step;
-}
-
-+ (instancetype)webViewStepWithIdentifier:(NSString *)identifier
                                      html:(NSString *)html {
     ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:identifier];
     step.html = html;
@@ -55,15 +48,9 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.url == nil && self.html == nil) {
+    if (self.html == nil) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"WebViewStep requires a valid url or html."
-                                     userInfo:nil];
-    }
-    
-    if (self.url != nil && self.html != nil) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"WebViewStep requires a valid url or html, but not both."
+                                       reason:@"WebViewStep requires html property."
                                      userInfo:nil];
     }
 }
@@ -71,14 +58,14 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_URL(aDecoder, url);
+        ORK_DECODE_OBJ_CLASS(aDecoder, html, NSString);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_URL(aCoder, url);
+    ORK_ENCODE_OBJ(aCoder, html);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -87,7 +74,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKWebViewStep *step = [super copyWithZone:zone];
-    step.url = self.url;
+    step.html = self.html;
     return step;
 }
 
@@ -96,7 +83,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            [self.url isEqual:castObject.url]);
+            [self.html isEqual:castObject.html]);
 }
 
 @end
