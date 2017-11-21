@@ -140,11 +140,11 @@ static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
 }
 
 static ORKNumericAnswerStyle ORKImageChoiceAnswerStyleFromString(NSString *s) {
-    return tableMapReverse(s, ORKNumericAnswerStyleTable());
+    return tableMapReverse(s, ORKImageChoiceAnswerStyleTable());
 }
 
 static NSString *ORKImageChoiceAnswerStyleToString(ORKNumericAnswerStyle style) {
-    return tableMapForward(style, ORKNumericAnswerStyleTable());
+    return tableMapForward(style, ORKImageChoiceAnswerStyleTable());
 }
 
 static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
@@ -242,7 +242,7 @@ static NSRegularExpression *regularExpressionsFromDictionary(NSDictionary *dict)
     return regularExpression;
 }
 
-static NSMutableDictionary *ORKESerializationEncodingTable();
+static NSMutableDictionary *ORKESerializationEncodingTable(void);
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
 static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJSONToObjectBlock converterBlock) ;
