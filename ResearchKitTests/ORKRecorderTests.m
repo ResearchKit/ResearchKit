@@ -304,7 +304,7 @@
 
 
 static BOOL ork_doubleEqual(double x, double y) {
-    static double K = 1;
+    static double K = 2;
     return (fabs(x-y) < K * DBL_EPSILON * fabs(x+y) || fabs(x-y) < DBL_MIN);
 }
 

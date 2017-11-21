@@ -135,7 +135,9 @@
         _step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"step2"];
         _step2.title = @"Which route do you prefer?";
         _step2.text = @"Please choose from the options below:";
-        _step2.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[@"route1", @"route2"]];
+        ORKTextChoice *route1 = [ORKTextChoice choiceWithText:@"route1" value:@"route1"];
+        ORKTextChoice *route2 = [ORKTextChoice choiceWithText:@"route2" value:@"route2"];
+        _step2.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[route1, route2]];
         _step2.optional = NO;
     }
     return _step2;

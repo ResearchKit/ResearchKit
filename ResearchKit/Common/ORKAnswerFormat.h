@@ -745,7 +745,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized image choice answer format.
  */
-- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
 
 /**
  Returns an initialized image choice answer format using the specified array of images.
@@ -1096,17 +1096,37 @@ Returns an initialized numeric answer format using the specified style, unit des
  
  This method is the designated initializer.
  
- @param style       The style of the numeric answer (decimal or integer).
- @param unit        A string that displays a localized version of the unit designation.
- @param minimum     The minimum value to apply, or `nil` if none is specified.
- @param maximum     The maximum value to apply, or `nil` if none is specified.
- 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+
  @return An initialized numeric answer format.
  */
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
-                      maximum:(nullable NSNumber *)maximum NS_DESIGNATED_INITIALIZER;
+                      maximum:(nullable NSNumber *)maximum;
+
+/**
+Returns an initialized numeric answer format using the specified style, unit designation, and range
+ values.
+ 
+ This method is the designated initializer.
+ 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+ @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
+
+ @return An initialized numeric answer format.
+ */
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(nullable NSString *)unit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of numeric entry (decimal or integer). (read-only)
@@ -1137,12 +1157,13 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (copy, nullable) NSNumber *maximum;
 
 /**
- The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ The maximum number of fraction digits to the right of the decimal point for the
  numeric answer.
  
- The default value of this property is `nil`, which means that no limit scale value is used.
+ The default value of this property is `nil`, which means that there's no maximum number of fraction
+ digits.
  */
-@property (copy, nullable) NSNumber *scale;
+@property (copy, nullable) NSNumber *maximumFractionDigits;
 
 @end
 
@@ -1513,10 +1534,10 @@ ORK_CLASS_AVAILABLE
                                     `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
                                     increments for the metric measurement system and whole pound
                                     increments for the USC measurement system, which mimics the
-                                    default iOS behavior. If you pass `ORKNumericPrecissionLow`, the
+                                    default iOS behavior. If you pass `ORKNumericPrecisionLow`, the
                                     picker will use 1 kg increments for the metric measurement
                                     system and whole pound increments for the USC measurement
-                                    system. If you pass `ORKNumericPrecissionHigher`, the picker
+                                    system. If you pass `ORKNumericPrecisionHigher`, the picker
                                     use 0.01 gr increments for the metric measurement system,
                                     and ounce increments for the USC measurement system.
  
@@ -1535,10 +1556,10 @@ ORK_CLASS_AVAILABLE
                                     `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
                                     increments for the metric measurement system and whole pound
                                     increments for the USC measurement system, which mimics the
-                                    default iOS behavior. If you pass `ORKNumericPrecissionLow`, the
+                                    default iOS behavior. If you pass `ORKNumericPrecisionLow`, the
                                     picker will use 1 kg increments for the metric measurement
                                     system and whole pound increments for the USC measurement
-                                    system. If you pass `ORKNumericPrecissionHigher`, the picker
+                                    system. If you pass `ORKNumericPrecisionHigher`, the picker
                                     use 0.01 gr increments for the metric measurement system,
                                     and ounce increments for the USC measurement system.
  @param minimumValue            The minimum value that is displayed in the picker. If you specify
@@ -1573,15 +1594,15 @@ ORK_CLASS_AVAILABLE
  
  An `ORKNumericPrecisionDefault` value indicates that the picker will use 0.5 kg increments for the
  metric measurement system and whole pound increments for the USC measurement system, which mimics
- the default iOS behavior. An `ORKNumericPrecissionLow` value indicates that the picker will use
+ the default iOS behavior. An `ORKNumericPrecisionLow` value indicates that the picker will use
  1 kg increments for the metric measurement system and whole pound increments for the USC
- measurement system. An `ORKNumericPrecissionHigher` value indicates that the picker will use
+ measurement system. An `ORKNumericPrecisionHigher` value indicates that the picker will use
  0.01 gr increments for the metric measurement system and ounce increments for the USC measurement
  system.
  
  The default value of this property is `ORKNumericPrecisionDefault`.
  */
-@property (readonly, getter=isAdditionalPrecision) ORKNumericPrecision numericPrecission;
+@property (readonly, getter=isAdditionalPrecision) ORKNumericPrecision numericPrecision;
 
 /**
  The minimum value that is displayed in the picker.
