@@ -4,7 +4,7 @@
  Copyright (c) 2015 - 2016, Ricardo Sanchez-Saez.
  Copyright (c) 2016, Sage Bionetworks.
  Copyright (c) 2017, Macro Yau.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -289,7 +289,7 @@ ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
     UIView *statusBarBackground = [UIView new];
     statusBarBackground.backgroundColor = HeaderColor();
     [self.view addSubview:statusBarBackground];
-    
+
     _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     statusBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
     NSDictionary *views = @{@"collectionView": _collectionView,
@@ -420,7 +420,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      Since unarchiving can throw an exception, in a real application we would
      need to attempt to catch that exception here.
      */
-    
+
     id<ORKTask> task = [[TaskFactory sharedInstance] makeTaskWithIdentifier:identifier];
     NSParameterAssert(task != nil);
     
@@ -636,7 +636,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
     NSObject<ORKTask> *task = taskViewController.task;
-    
+
     return ([step isKindOfClass:[ORKInstructionStep class]]
             && !task.hidesLearnMoreButtonOnInstructionStep);
 }
@@ -803,8 +803,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 }
 
 /**
- When a task has completed it calls this method to post the result of the task to the delegate.
- */
+  When a task has completed it calls this method to post the result of the task to the delegate.
+*/
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result {
     /*
      Upon creation of a Passcode by a user, the results of their creation
@@ -815,7 +815,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     if ([[[stepResult results] firstObject] isKindOfClass:[ORKPasscodeResult class]]) {
         ORKPasscodeResult *passcodeResult = (ORKPasscodeResult *)[[stepResult results] firstObject];
         NSLog(@"passcode saved: %d , Touch ID Enabled: %d", passcodeResult.passcodeSaved, passcodeResult.touchIdEnabled);
-        
+
     }
 }
 
