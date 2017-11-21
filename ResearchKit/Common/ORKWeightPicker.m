@@ -76,7 +76,7 @@
             _majorValues = [self poundValues];
         }
         
-        if (_answerFormat.numericPrecission == ORKNumericPrecisionHigh) {
+        if (_answerFormat.numericPrecision == ORKNumericPrecisionHigh) {
             _minorValues = [self _minorValues];
         }
     }
@@ -101,7 +101,7 @@
     }
     
     if (_answerFormat.useMetricSystem) {
-        if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
+        if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             NSUInteger index = [_majorValues indexOfObject:@((NSInteger)((NSNumber *)answer).doubleValue)];
             if (index == NSNotFound) {
                 [self setAnswer:[self defaultAnswerValue]];
@@ -122,7 +122,7 @@
             [_pickerView selectRow:0 inComponent:2 animated:NO];
         }
     } else {
-        if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
+        if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
             NSUInteger poundsIndex = [_majorValues indexOfObject:@((NSInteger)pounds)];
             if (poundsIndex == NSNotFound) {
@@ -179,7 +179,7 @@
     if (_answerFormat.useMetricSystem) {
         NSInteger wholeRow = [_pickerView selectedRowInComponent:0];
         NSNumber *whole = _majorValues[wholeRow];
-        if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
+        if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             answer = @( whole.doubleValue );
         } else {
             NSInteger fractionRow = [_pickerView selectedRowInComponent:1];
@@ -189,7 +189,7 @@
     } else {
         NSInteger poundsRow = [_pickerView selectedRowInComponent:0];
         NSNumber *pounds = _majorValues[poundsRow];
-        if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
+        if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
             answer = @( ORKPoundsToKilograms(pounds.doubleValue) );
         } else {
             NSInteger ouncesRow = [_pickerView selectedRowInComponent:1];
@@ -235,7 +235,7 @@
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) ? 1 : (_answerFormat.useMetricSystem ? 3 : 2);
+    return (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) ? 1 : (_answerFormat.useMetricSystem ? 3 : 2);
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -254,7 +254,7 @@
     NSString *title = nil;
     if (_answerFormat.useMetricSystem) {
         if (component == 0) {
-            if (_answerFormat.numericPrecission != ORKNumericPrecisionHigh) {
+            if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
                 title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
             } else {
                 title = [NSString stringWithFormat:@"%@", _majorValues[row]];
@@ -298,7 +298,7 @@
     
     for (double i = minimumValue; i <= maximumValue; i++) {
         [mutableWholeValues addObject:@(i)];
-        if (_answerFormat.numericPrecission == ORKNumericPrecisionDefault) {
+        if (_answerFormat.numericPrecision == ORKNumericPrecisionDefault) {
             [mutableWholeValues addObject:@(i + 0.5)];
         }
     }

@@ -2834,7 +2834,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     self = [super init];
     if (self) {
         _measurementSystem = measurementSystem;
-        _numericPrecission = numericPrecision;
+        _numericPrecision = numericPrecision;
         _minimumValue = minimumValue;
         _maximumValue = maximumValue;
         _defaultValue = defaultValue;
@@ -2848,7 +2848,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.measurementSystem == castObject.measurementSystem) &&
-            (self.numericPrecission == castObject.numericPrecission) &&
+            (self.numericPrecision == castObject.numericPrecision) &&
             (self.minimumValue == castObject.minimumValue) &&
             (self.maximumValue == castObject.maximumValue) &&
             (self.defaultValue == castObject.defaultValue));
@@ -2856,14 +2856,14 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 
 - (NSUInteger)hash {
     // Ignore minimumValue, maximumValue and defaultValue as they're unimportant
-    return super.hash ^ _measurementSystem ^ _numericPrecission;
+    return super.hash ^ _measurementSystem ^ _numericPrecision;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_ENUM(aDecoder, measurementSystem);
-        ORK_DECODE_ENUM(aDecoder, numericPrecission);
+        ORK_DECODE_ENUM(aDecoder, numericPrecision);
         ORK_DECODE_DOUBLE(aDecoder, minimumValue);
         ORK_DECODE_DOUBLE(aDecoder, maximumValue);
         ORK_DECODE_DOUBLE(aDecoder, defaultValue);
@@ -2874,7 +2874,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, measurementSystem);
-    ORK_ENCODE_ENUM(aCoder, numericPrecission);
+    ORK_ENCODE_ENUM(aCoder, numericPrecision);
     ORK_ENCODE_DOUBLE(aCoder, minimumValue);
     ORK_ENCODE_DOUBLE(aCoder, maximumValue);
     ORK_ENCODE_DOUBLE(aCoder, defaultValue);
@@ -2900,7 +2900,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         if (self.useMetricSystem) {
             answerString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromNumber:answer], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
         } else {
-            if (self.numericPrecission != ORKNumericPrecisionHigh) {
+            if (self.numericPrecision != ORKNumericPrecisionHigh) {
                 double pounds = ORKKilogramsToPounds(((NSNumber *)answer).doubleValue);
                 NSString *poundsString = [formatter stringFromNumber:@(pounds)];
                 answerString = [NSString stringWithFormat:@"%@ %@", poundsString, ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
