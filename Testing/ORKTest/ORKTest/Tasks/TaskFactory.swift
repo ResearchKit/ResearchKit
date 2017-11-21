@@ -31,14 +31,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 import ResearchKit
 
-@objc class TaskFactory : NSObject {
+public extension TaskFactory {
 
-    class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
+   @objc class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep
         var textChoices: [ORKTextChoice]
         
+        // Intro step
+        step = ORKInstructionStep(identifier:"introStep")
+        step.title = "This task demonstrates rule-based navigation within tasks"
+        steps.append(step)
+
         // Form step
         textChoices = [
             ORKTextChoice(text: "Good", value: "good" as NSCoding & NSCopying & NSObjectProtocol),
@@ -73,19 +78,19 @@ import ResearchKit
         step.title = "This step is intentionally left blank (you should not see it)"
         steps.append(step)
         
-        step = ORKInstructionStep(identifier: "severe_headache")
+        step = ORKInstructionStep(identifier: "severeHeadache")
         step.title = "You have a severe headache"
         steps.append(step)
         
-        step = ORKInstructionStep(identifier: "light_headache")
+        step = ORKInstructionStep(identifier: "lightHeadache")
         step.title = "You have a light headache"
         steps.append(step)
         
-        step = ORKInstructionStep(identifier: "other_symptom")
+        step = ORKInstructionStep(identifier: "otherSymptom")
         step.title = "Your symptom is not a headache"
         steps.append(step)
         
-        step = ORKInstructionStep(identifier: "survey_skipped")
+        step = ORKInstructionStep(identifier: "surveySkipped")
         step.title = "Please come back to this survey when you don't feel good or your mood is low."
         steps.append(step)
         
@@ -109,10 +114,10 @@ import ResearchKit
         let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
         let predicateGoodMoodAndFeeling: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
-            [ (predicateGoodMoodAndFeeling, "survey_skipped") ])
+            [ (predicateGoodMoodAndFeeling, "surveySkipped") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "introForm")
         
-        // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
+        // From the "symptom" step, go to "otherSymptom" is user didn't chose headache.
         // Otherwise, default to going to next step (the regular ORKOrderedTask order applies
         //  when the defaultStepIdentifier argument is omitted).
         
@@ -128,10 +133,10 @@ import ResearchKit
         let predicateNotHeadache: NSCompoundPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
 
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
-            [ (predicateNotHeadache, "other_symptom") ])
+            [ (predicateNotHeadache, "otherSymptom") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "symptom")
         
-        // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
+        // From the "severity" step, go to "severeHeadache" or "lightHeadache" depending on the user answer
         
         // User chose YES at the severity step
         // Equivalent to:
@@ -148,17 +153,17 @@ import ResearchKit
         let predicateLightHeadache: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereNo])
         
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
-            [ (predicateSevereHeadache, "severe_headache"), (predicateLightHeadache, "light_headache") ])
+            [ (predicateSevereHeadache, "severeHeadache"), (predicateLightHeadache, "lightHeadache") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "severity")
         
         // Direct rules to skip unneeded steps
         var directRule: ORKDirectStepNavigationRule
         
         directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "end")
-        task.setNavigationRule(directRule, forTriggerStepIdentifier: "severe_headache")
-        task.setNavigationRule(directRule, forTriggerStepIdentifier: "light_headache")
-        task.setNavigationRule(directRule, forTriggerStepIdentifier: "other_symptom")
-        task.setNavigationRule(directRule, forTriggerStepIdentifier: "survey_skipped")
+        task.setNavigationRule(directRule, forTriggerStepIdentifier: "severeHeadache")
+        task.setNavigationRule(directRule, forTriggerStepIdentifier: "lightHeadache")
+        task.setNavigationRule(directRule, forTriggerStepIdentifier: "otherSymptom")
+        task.setNavigationRule(directRule, forTriggerStepIdentifier: "surveySkipped")
         
         directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: ORKNullStepIdentifier)
         task.setNavigationRule(directRule, forTriggerStepIdentifier: "end")

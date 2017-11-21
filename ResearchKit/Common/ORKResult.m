@@ -452,6 +452,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, frequency);
     ORK_ENCODE_ENUM(aCoder, channel);
+    ORK_ENCODE_ENUM(aCoder, channelSelected);
     ORK_ENCODE_DOUBLE(aCoder, amplitude);
 }
 
@@ -460,6 +461,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, frequency);
         ORK_DECODE_ENUM(aDecoder, channel);
+        ORK_DECODE_ENUM(aDecoder, channelSelected);
         ORK_DECODE_DOUBLE(aDecoder, amplitude);
     }
     return self;
@@ -473,6 +475,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     __typeof(self) castObject = object;
 
     return ((self.channel == castObject.channel) &&
+            (self.channelSelected == castObject.channelSelected) &&
             (ABS(self.frequency - castObject.frequency) < DBL_EPSILON) &&
             (ABS(self.amplitude - castObject.amplitude) < DBL_EPSILON)) ;
 }
@@ -481,12 +484,13 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     ORKToneAudiometrySample *sample = [[[self class] allocWithZone:zone] init];
     sample.frequency = self.frequency;
     sample.channel = self.channel;
+    sample.channelSelected = self.channelSelected;
     sample.amplitude = self.amplitude;
     return sample;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; amplitude: %.4lf>", self.class.description, self, self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; amplitude: %.4lf; channelSelected: %@;>", self.class.description, self, self.frequency, @(self.channel), self.amplitude, @(self.channelSelected)];
 }
 
 @end
@@ -1009,6 +1013,62 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
     return [NSString stringWithFormat:@"%@; correct: %@/%@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.totalCorrect), @(self.length), self.samples, self.descriptionSuffix];
+}
+
+@end
+
+
+@implementation ORKStroopResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, startTime);
+    ORK_ENCODE_DOUBLE(aCoder, endTime);
+    ORK_ENCODE_OBJ(aCoder, color);
+    ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, colorSelected);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, startTime);
+        ORK_DECODE_DOUBLE(aDecoder, endTime);
+        ORK_DECODE_OBJ_CLASS(aDecoder, color, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, colorSelected, NSString);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.startTime == castObject.startTime) &&
+            (self.endTime == castObject.endTime) &&
+            ORKEqualObjects(self.color, castObject.color) &&
+            ORKEqualObjects(self.text, castObject.text) &&
+            ORKEqualObjects(self.colorSelected, castObject.colorSelected));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKStroopResult *result = [super copyWithZone:zone];
+    result.startTime = self.startTime;
+    result.endTime = self.endTime;
+    result -> _color = [self.color copy];
+    result -> _text = [self.text copy];
+    result -> _colorSelected = [self.colorSelected copy];
+    return result;
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; color: %@; text: %@; colorselected: %@ %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.color, self.text, self.colorSelected, self.descriptionSuffix];
 }
 
 @end

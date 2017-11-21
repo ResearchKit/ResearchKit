@@ -383,6 +383,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"firstResult",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[
                                               @"ORKStep.task",
@@ -631,6 +633,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"unit",
                                        @"ORKPageStep.steps",
                                        @"ORKNavigablePageStep.steps",
+                                       @"ORKTextAnswerFormat.validationRegex",
+                                       @"ORKRegistrationStep.passcodeValidationRegex",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
@@ -851,6 +855,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKStep.restorable",
                                        @"ORKStep.showsProgress",
                                        @"ORKStepResult.isPreviousResult",
+                                       @"ORKTextAnswerFormat.validationRegex",
                                        @"ORKVideoCaptureStep.duration",
                                        ];
     
@@ -862,6 +867,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                    @"ORKConsentSection.customAnimationURL",
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
+                                   @"ORKNumericAnswerFormat.maximumFractionDigits",
                                    @"ORKVideoCaptureStep.duration",
                                    @"ORKTextAnswerFormat.validationRegularExpression",
                                    ];
@@ -966,6 +972,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKPSATStepViewController" : @"ORKPSATStep",
                                                                              @"ORKQuestionStepViewController" : @"ORKQuestionStep",
                                                                              @"ORKSpatialSpanMemoryStepViewController" : @"ORKSpatialSpanMemoryStep",
+                                                                             @"ORKStroopStepViewController" : @"ORKStroopStep",
                                                                              @"ORKTimedWalkStepViewController" : @"ORKTimedWalkStep",
                                                                              @"ORKTowerOfHanoiViewController" : @"ORKTowerOfHanoiStep",
                                                                              @"ORKVideoCaptureStepViewController" : @"ORKVideoCaptureStep",
@@ -988,6 +995,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                                                    @"playSpeed" : @1.0,
                                                                                                    @"maximumTests" : @3,
                                                                                                    @"maximumConsecutiveFailures" : @1},
+                                                                   @"ORKStroopStep" : @{@"numberOfAttempts" : @15},
                                                                    @"ORKTimedWalkStep" : @{@"distanceInMeters" : @30.0,
                                                                                            @"stepDuration" : @2.0},
                                                                    @"ORKWalkingTaskStep" : @{@"numberOfStepsPerLeg" : @2},
@@ -1014,7 +1022,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     // Test Each class
     for (Class aClass in stepViewControllerClassses) {
         
-        // Instatiate the step view controller
+        // Instantiate the step view controller
         NSString *stepClassName = mapStepClassForViewController[NSStringFromClass(aClass)];
         if (stepClassName == nil) {
             for (NSString *vcClassName in mapStepClassForViewController.allKeys) {

@@ -160,7 +160,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         DispatchQueue.main.asyncAfter(deadline: delayTime, execute: dispatchWorkItem)
     }
     
-    func updateProgressOfWaitStepViewController() {
+    @objc func updateProgressOfWaitStepViewController() {
         if let waitStepViewController = waitStepViewController {
             waitStepProgress += 0.01
             DispatchQueue.main.async(execute: { () -> Void in

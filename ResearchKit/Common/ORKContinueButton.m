@@ -46,7 +46,7 @@ static const CGFloat ContinueButtonTouchMargin = 10;
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
-        self.contentEdgeInsets = (UIEdgeInsets){.left=6, .right=6};
+        self.contentEdgeInsets = (UIEdgeInsets){.left = 6, .right = 6};
 
         [self setUpConstraints];
     }

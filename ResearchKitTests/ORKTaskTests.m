@@ -1727,6 +1727,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 @end
 
+
 @implementation MethodObject
 @end
 

@@ -36,6 +36,7 @@
  The `ORKShoulderRangeOfMotionStep` class represents a step that takes a range of motion measurement
  for either a left or right shoulder.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKShoulderRangeOfMotionStep : ORKRangeOfMotionStep
 
 @end

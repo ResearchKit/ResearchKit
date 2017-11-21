@@ -52,6 +52,7 @@
 
 @end
 
+
 @implementation ORKCountDownViewLabel
 + (UIFont *)defaultFont {
     return ORKThinFontWithSize(56);
@@ -178,8 +179,8 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = duration * 2;
     animation.removedOnCompletion = YES;
-    animation.values = @[@(1.0), @(0.0), @(0.0)];
-    animation.keyTimes =  @[@(0.0), @(0.5), @(1.0)];
+    animation.values = @[ @(1.0), @(0.0), @(0.0) ];
+    animation.keyTimes =  @[ @(0.0), @(0.5), @(1.0) ];
     animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     [_circleLayer addAnimation:animation forKey:@"drawCircleAnimation"];
 }

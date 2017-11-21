@@ -261,7 +261,7 @@
 
 #pragma mark - ORKVideoCaptureViewDelegate
 
-- (void)retakePressed:(void (^)())handler {
+- (void)retakePressed:(void (^)(void))handler {
     dispatch_async(_sessionQueue, ^{
         [_captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -273,7 +273,7 @@
     });
 }
 
-- (void)capturePressed:(void (^)())handler {
+- (void)capturePressed:(void (^)(void))handler {
     // Capture the video via the output
     dispatch_async(_sessionQueue, ^{
         _fileURL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",self.step.identifier]];
@@ -296,7 +296,7 @@
     });
 }
 
-- (void)stopCapturePressed:(void (^)())handler {
+- (void)stopCapturePressed:(void (^)(void))handler {
     dispatch_async(_sessionQueue, ^{
         [_movieFileOutput stopRecording];
         

@@ -149,8 +149,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
-NSBundle *ORKBundle();
-NSBundle *ORKDefaultLocaleBundle();
+NSBundle *ORKBundle(void);
+NSBundle *ORKDefaultLocaleBundle(void);
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
@@ -160,7 +160,7 @@ id findInArrayByKey(NSArray * array, NSString *key, id value);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
-NSURL *ORKCreateRandomBaseURL();
+NSURL *ORKCreateRandomBaseURL(void);
 
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
@@ -173,16 +173,16 @@ UIImage *ORKImageWithColor(UIColor *color);
 
 void ORKEnableAutoLayoutForViews(NSArray *views);
 
-NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter();
-NSDateComponentsFormatter *ORKDurationStringFormatter();
+NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(void);
+NSDateComponentsFormatter *ORKDurationStringFormatter(void);
 
-NSDateFormatter *ORKTimeOfDayLabelFormatter();
-NSCalendar *ORKTimeOfDayReferenceCalendar();
+NSDateFormatter *ORKTimeOfDayLabelFormatter(void);
+NSCalendar *ORKTimeOfDayReferenceCalendar(void);
 
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
-BOOL ORKCurrentLocalePresentsFamilyNameFirst();
+BOOL ORKCurrentLocalePresentsFamilyNameFirst(void);
 
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
@@ -269,7 +269,7 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
 
-NSNumberFormatter *ORKDecimalNumberFormatter();
+NSNumberFormatter *ORKDecimalNumberFormatter(void);
 
 ORK_INLINE double ORKFeetAndInchesToInches(double feet, double inches) {
     return (feet * 12) + inches;
@@ -280,7 +280,7 @@ ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double 
         return;
     }
     *outFeet = floor(inches / 12);
-    *outInches = fmod(inches, 12);
+    *outInches = round(fmod(inches, 12));
 }
 
 ORK_INLINE double ORKInchesToCentimeters(double inches) {
@@ -320,8 +320,8 @@ ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseCol
 }
 
 // Localization
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
+ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 
 #define ORKDefaultLocalizedValue(key) \
 [ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]

@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKPicker <NSObject>
 
-- (instancetype) initWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer pickerDelegate:(id<ORKPickerDelegate>)delegate;
+- (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer pickerDelegate:(id<ORKPickerDelegate>)delegate;
 
 @property (nonatomic, weak, nullable) id<ORKPickerDelegate> pickerDelegate;
 

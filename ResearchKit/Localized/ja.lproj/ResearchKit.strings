@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "タイプI";
+"FITZPATRICK_SKIN_TYPE_II" = "タイプII";
+"FITZPATRICK_SKIN_TYPE_III" = "タイプIII";
+"FITZPATRICK_SKIN_TYPE_IV" = "タイプIV";
+"FITZPATRICK_SKIN_TYPE_V" = "タイプV";
+"FITZPATRICK_SKIN_TYPE_VI" = "タイプVI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "女性";
 "GENDER_MALE" = "男性";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+
+/* Limb values. */
+"LIMB_LEFT" = "左";
+"LIMB_RIGHT" = "右";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "タップで回答";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "保存";
 "BUTTON_CLEAR_ANSWER" = "答えを消去";
 "BUTTON_READ_ONLY_MODE" = "この答えは変更できません。";
+"BUTTON_COPYRIGHT" = "著作権";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "アクティビティ開始まで";
 "TASK_COMPLETE_TITLE" = "アクティビティ完了";
 "TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "残り%@秒です。";
+"TOUCH_ANYWHERE_LABEL" = "続けるにはどこかをタッチしてください";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "イメージを取り込む";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
 "TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、さまざまな音がどのように聞こえるかが測定されます。";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "始める前にヘッドフォンを接続し、装着してください。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "始める前に、ヘッドフォンを接続して装着してください。\n\n普通の通知音ではなく、非常にかすかな音が聞こえます。最初は弱い音で、徐々に大きくなっていきます。よく聞いて、どちらの耳で聞こえたかを左ボタンか右ボタンをタップして示してください。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
 "TONE_AUDIOMETRY_PREP_TEXT" = "すると音が聞こえてくるはずです。デバイスの横にあるコントロールで音量を調整してください。\n\n始める準備ができたらボタンをタップしてください。";
-"TONE_AUDIOMETRY_INSTRUCTION" = "音が聞こえるたびにボタンをタップしてください。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "音が聞こえ始めるたびに、どちらの耳で聞こえたかを左ボタンか右ボタンをタップして示してください。";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
 "TONE_LABEL_%@_LEFT" = "%@ Hz、左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz、右";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "ゲーム完了";
 "MEMORY_GAME_PAUSED_TITLE" = "一時停止";
 "MEMORY_GAME_PAUSED_MESSAGE" = "続けるには、“次へ”をタップしてください";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "記憶アクティビティは、カリフォルニア大学サンフランシスコ校のKatherine Possin博士およびJoel Kramer博士の支援を受けて開発されました。";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反応時間";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@回";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "青い円が表示されたら、すぐにデバイスを振ってください";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "ストループ";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "文字が表示されるたびに、表示される色を選択してください。";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "ストループアクティビティを始める準備ができたら、“開始”をタップしてください。";
+"STROOP_TASK_STEP_TEXT" = "表示される色を選択してください。";
+"STROOP_COLOR_RED" = "あか";
+"STROOP_COLOR_GREEN" = "みどり";
+"STROOP_COLOR_BLUE" = "あお";
+"STROOP_COLOR_YELLOW" = "きいろ";
+"STROOP_COLOR_RED_INITIAL" = "あか";
+"STROOP_COLOR_GREEN_INITIAL" = "みどり";
+"STROOP_COLOR_BLUE_INITIAL" = "あお";
+"STROOP_COLOR_YELLOW_INITIAL" = "きいろ";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "ハノイの塔";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "このアクティビティでは、パズルの解決力を評価します。";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "塔全体を色の付いた台にできるだけ少ない回数で移動してください。";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "パズルを解く";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動回数: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "降参";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOptionは左または右にする必要があります";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝の可動域";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "右膝の可動域";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "このアクティビティでは、左膝をどこまで伸ばせるかを測定します。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "このアクティビティでは、右膝をどこまで伸ばせるかを測定します。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "椅子の端に座ってください。始めるときは、測定のためにデバイスを左膝の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "椅子の端に座ってください。始めるときは、測定のためにデバイスを右膝の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "写真のように、画面を外側に向けてデバイスを左膝の上に置きます。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "写真のように、画面を外側に向けてデバイスを右膝の上に置きます。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左膝をできるだけ伸ばしてください。終わったら、もう一度タップしてください。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右膝をできるだけ伸ばしてください。終わったら、もう一度タップしてください。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左膝の上に置いてください";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右膝の上に置いてください";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "左膝を伸ばしてください。次にどこかをタップしてください。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "右膝を伸ばしてください。次にどこかをタップしてください。";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩の可動域";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "右肩の可動域";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "このアクティビティでは、左肩をどこまで伸ばせるかを測定します。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "このアクティビティでは、右肩をどこまで伸ばせるかを測定します。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "始めるときは、測定のためにデバイスを左肩の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "始めるときは、測定のためにデバイスを右肩の上に置きます。指示が聞こえるように、デバイスのサウンドをオンにしてください。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "写真のように、画面を外側に向けてデバイスを左肩の上に置きます。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "写真のように、画面を外側に向けてデバイスを右肩の上に置きます。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備ができたら、画面をタップして開始し、左腕をできるだけ高く上げてください。終わったら、もう一度タップしてください。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備ができたら、画面をタップして開始し、右腕をできるだけ高く上げてください。終わったら、もう一度タップしてください。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "デバイスを左肩の上に置いてください";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "デバイスを右肩の上に置いてください";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "左腕を上げてください。次にどこかをタップしてください。";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "右腕を上げてください。次にどこかをタップしてください。";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "歩行時間";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "両側クラッチ";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "歩行器";
 "TIMED_WALK_INSTRUCTION_%@" = "まっすぐ%@歩いてください。";
-"TIMED_WALK_INSTRUCTION_2" = "後ろを向いて、元の場所まで歩いて戻ってください。";
-"TIMED_WALK_INSTRUCTION_TEXT" = "完了したら、“完了”をタップしてください。";
+"TIMED_WALK_INSTRUCTION_TURN" = "後ろを向いてください。";
+"TIMED_WALK_INSTRUCTION_2" = "元の場所まで歩いて戻ってください。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完了したら、“次へ”をタップしてください。";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "右手ではこのアクティビティができません。";
 "TREMOR_SKIP_NEITHER" = "どちらの手でもこのアクティビティができます。";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "トレイルメイキングテスト";
+"TRAILMAKING_INTENDED_USE" = "このアクティビティでは、一連の円を順番にタップするために必要な時間を記録することで、あなたの視覚的注意力と切り替え能力を評価します。";
+"TRAILMAKING_INTENDED_USE2_A" = "カウントダウンの後、数字と文字を交互にタップしてください。最初に数字“1”をタップしてから、“2”–“3”–“4”の順にタップし、数字“7”まで続けます。";
+"TRAILMAKING_INTENDED_USE2_B" = "カウントダウンの後、数字と文字を交互にタップしてください。最初に数字“1”をタップして、文字“A”をタップしてから、“2”–“B”–“3”–“C”の順にタップし、数字“7”まで続けます。";
+"TRAILMAKING_INTRO_TEXT" = "間違えずにできるだけ速くこれを行ってください。\n ";
+"TRAILMAKING_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"TRAILMAKING_TIMER" = "%.1f秒";
+"TRAILMAKING_ERROR" = "%@（%d個のエラー）";
+"TRAILMAKING_ERROR_PLURAL" = "%@（%d個のエラー）";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "しきい値に達するのに十分なログファイルを削除できませんでした";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "取り込んだイメージ";
 
 "AX_VIDEO_CAPTURE_LABEL" = "ビデオ取り込みのプレビュー";
-"AX_VIDEO_CAPTURED_LABEL" = "取り込んだビデオ";
+"AX_VIDEO_CAPTURE_COMPLETE" = "ビデオの取り込みが完了しました";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "サイズ%@の円盤をサイズ%@の円盤の上に置くことはできません";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "ターゲット";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "次の内容のスタック:";
 "AX_GRAPH_AND_SEPARATOR" = "と";
 "AX_GRAPH_POINT_%@" = "ポイント: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "オーディオバーグラフ";

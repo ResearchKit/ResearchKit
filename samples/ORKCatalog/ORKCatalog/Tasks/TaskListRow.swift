@@ -91,6 +91,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case reactionTime
     case shortWalk
     case spatialSpanMemory
+    case stroop
     case timedWalk
     case timedWalkWithTurnAround
     case toneAudiometry
@@ -161,6 +162,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .reactionTime,
                     .shortWalk,
                     .spatialSpanMemory,
+                    .stroop,
                     .timedWalk,
                     .timedWalkWithTurnAround,
                     .toneAudiometry,
@@ -279,6 +281,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return NSLocalizedString("Spatial Span Memory", comment: "")
             
+        case .stroop:
+            return NSLocalizedString("Stroop", comment: "")
+            
         case .timedWalk:
             return NSLocalizedString("Timed Walk", comment: "")
             
@@ -365,7 +370,8 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         // Task with an image choice question.
         case imageChoiceQuestionTask
-        case imageChoiceQuestionStep
+        case imageChoiceQuestionStep1
+        case imageChoiceQuestionStep2
         
         // Task with a location entry.
         case locationQuestionTask
@@ -464,6 +470,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case reactionTime
         case shortWalkTask
         case spatialSpanMemoryTask
+        case stroopTask
         case timedWalkTask
         case timedWalkWithTurnAroundTask
         case toneAudiometryTask
@@ -584,6 +591,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return spatialSpanMemoryTask
 
+        case .stroop:
+            return stroopTask
+            
         case .timedWalk:
             return timedWalkTask
 
@@ -777,13 +787,19 @@ enum TaskListRow: Int, CustomStringConvertible {
             ORKImageChoice(normalImage: squareShapeImage, selectedImage: nil, text: squareShapeText, value: squareShapeText as NSCoding & NSCopying & NSObjectProtocol)
         ]
         
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
+        let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep1), title: exampleQuestionText, answer: answerFormat1)
+
+        questionStep1.text = exampleDetailText
+
+        let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
         
-        questionStep.text = exampleDetailText
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep2), title: exampleQuestionText, answer: answerFormat2)
+
+        questionStep2.text = exampleDetailText
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep1, questionStep2])
     }
     
     /// This task presents just a single location question.
@@ -1327,6 +1343,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents the Spatial Span Memory pre-defined active task.
     private var spatialSpanMemoryTask: ORKTask {
         return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing:Identifier.spatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
+    }
+    
+    /// This task presents the Stroop pre-defined active task.
+    private var stroopTask: ORKTask {
+        return ORKOrderedTask.stroopTask(withIdentifier: String(describing:Identifier.stroopTask), intendedUseDescription: exampleDescription, numberOfAttempts: 10, options: [])
     }
 
     /// This task presents the Timed Walk pre-defined active task.

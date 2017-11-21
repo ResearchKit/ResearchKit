@@ -125,12 +125,19 @@
             
             NSString* title;
             if ([trailType isEqual:@"A"]) {
-                title = [NSString stringWithFormat:@"%d", i + 1];
+                title = [self stringWithNumberFormatter:i + 1];
             } else {
+                NSArray *letters = [[NSArray alloc] initWithObjects:ORKLocalizedString(@"TRAILMAKING_LETTER_A", nil),
+                                    ORKLocalizedString(@"TRAILMAKING_LETTER_B", nil),
+                                    ORKLocalizedString(@"TRAILMAKING_LETTER_C", nil),
+                                    ORKLocalizedString(@"TRAILMAKING_LETTER_D", nil),
+                                    ORKLocalizedString(@"TRAILMAKING_LETTER_E", nil),
+                                    ORKLocalizedString(@"TRAILMAKING_LETTER_F", nil), nil];
+                
                 if (i % 2 == 0)
-                    title = [NSString stringWithFormat:@"%d", i / 2 + 1];
+                    title = [self stringWithNumberFormatter:i / 2 + 1];
                 else
-                    title = [NSString stringWithFormat:@"%c", i / 2 + 'A'];
+                    title = letters[i/2];
             }
             
             [b setTitle:title forState:UIControlStateNormal];
@@ -145,8 +152,15 @@
     return self;
 }
 
-- (void)setUpConstraints {
+- (NSString *)stringWithNumberFormatter: (double)value {
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    formatter.numberStyle = NSNumberFormatterNoStyle;
+    formatter.locale = [NSLocale currentLocale];
     
+    return [NSString stringWithFormat:@"%@", [formatter stringFromNumber:[NSNumber numberWithDouble:value]]];
+}
+
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_testView);
