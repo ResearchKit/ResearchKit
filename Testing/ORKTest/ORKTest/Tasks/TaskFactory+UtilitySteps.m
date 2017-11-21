@@ -619,6 +619,42 @@
     return waitTask;
 }
 
+- (id<ORKTask>)makeWebViewStepTaskWithIdentifier:(NSString *)identifier {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *firstStep = [[ORKInstructionStep alloc] initWithIdentifier:@"firstStep"];
+    firstStep.text = @"Example of an ORKWebViewStep";
+    [steps addObject:firstStep];
+    
+    NSString * html = @"<!DOCTYPE html>"
+    "<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">"
+    "<head>"
+    "<meta name=\"viewport\" content=\"width=400, user-scalable=no\">"
+    "<script type=\"text/javascript\">"
+    "function completeStep() {"
+    "    var answer = document.getElementById(\"answer\").value;"
+    "    window.webkit.messageHandlers.ResearchKit.postMessage(answer);"
+    "}"
+    "</script>"
+    "</head>"
+    "<body>"
+    "<div class=\"container\">"
+    "<input type=\"text\" id=\"answer\" class=\"answer-box\" placeholder=\"Answer\" />"
+    "<button onclick=\"completeStep();\" class=\"continue-button\">Continue</button>"
+    "</div>"
+    "</body>"
+    "</html>";
+    
+    ORKWebViewStep *webViewStep = [ORKWebViewStep webViewStepWithIdentifier:@"webViewStep" html:html];
+    [steps addObject:webViewStep];
+    
+    ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Task Complete";
+    [steps addObject:lastStep];
+    
+    return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+}
+
 // Update progress on the Wait Task
 - (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)waitStepviewController {
     if (progress <= 1.0) {
