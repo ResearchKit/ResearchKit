@@ -2603,3 +2603,43 @@ static NSString *const RegionIdentifierKey = @"region.identifier";
 }
 
 @end
+
+
+@implementation ORKWebViewStepResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, result);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, result, NSString);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ [self.result hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            [self.result isEqualToString:castObject.result]);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKWebViewStepResult *result = [super copyWithZone:zone];
+    result->_result = self.result;
+    return result;
+}
+
+@end
