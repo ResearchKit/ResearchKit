@@ -392,6 +392,7 @@
         }
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }
@@ -914,6 +915,7 @@
             [self removeAnswerForIdentifier:formItemIdentifier];
         }
         
+        _skipped = NO;
         [self updateButtonStates];
         [self notifyDelegateOnResultChange];
     }
@@ -981,6 +983,7 @@
         [self removeAnswerForIdentifier:cell.formItem.identifier];
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }
