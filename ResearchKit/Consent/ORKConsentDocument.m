@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Alex Basson. All rights reserved.
-
+ Copyright (c) 2017, Medable Inc. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -192,17 +193,18 @@
                 [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
             }
         }
+    }
+    
+    if (!mobile) {
+        // page break
+        [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
+        [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
         
-        if (!mobile) {
-            // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
-            [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
-            
-            for (ORKConsentSignature *signature in self.signatures) {
-                [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
-            }
+        for (ORKConsentSignature *signature in self.signatures) {
+            [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
         }
     }
+    
     return [[self class] wrapHTMLBody:body mobile:mobile];
 }
 
