@@ -53,6 +53,7 @@
 #import <ResearchKit/ORKVisualConsentStep.h>
 #import <ResearchKit/ORKWaitStep.h>
 #import <ResearchKit/ORKVideoInstructionStep.h>
+#import <ResearchKit/ORKWebViewStep.h>
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
@@ -91,6 +92,7 @@
 #import <ResearchKit/ORKTouchAnywhereStepViewController.h>
 #import <ResearchKit/ORKVerificationStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
+#import <ResearchKit/ORKWebViewStepViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 

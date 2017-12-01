@@ -69,6 +69,15 @@ static NSArray *ORKNumericAnswerStyleTable() {
     return table;
 }
 
+static NSArray *ORKImageChoiceAnswerStyleTable() {
+    static NSArray *table = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        table = @[@"singleChoice", @"multipleChoice"];
+    });
+    return table;
+}
+
 static id tableMapForward(NSInteger index, NSArray *table) {
     return table[index];
 }
@@ -128,6 +137,14 @@ static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
 
 static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
+}
+
+static ORKNumericAnswerStyle ORKImageChoiceAnswerStyleFromString(NSString *s) {
+    return tableMapReverse(s, ORKImageChoiceAnswerStyleTable());
+}
+
+static NSString *ORKImageChoiceAnswerStyleToString(ORKNumericAnswerStyle style) {
+    return tableMapForward(style, ORKImageChoiceAnswerStyleTable());
 }
 
 static NSDictionary *dictionaryFromCircularRegion(CLCircularRegion *region) {
@@ -225,7 +242,7 @@ static NSRegularExpression *regularExpressionsFromDictionary(NSDictionary *dict)
     return regularExpression;
 }
 
-static NSMutableDictionary *ORKESerializationEncodingTable();
+static NSMutableDictionary *ORKESerializationEncodingTable(void);
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
 static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJSONToObjectBlock converterBlock) ;
@@ -985,10 +1002,14 @@ encondingTable =
             })),
   ENTRY(ORKImageChoiceAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
+            return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices) style:((NSNumber *)GETPROP(dict, style)).integerValue vertical:((NSNumber *)GETPROP(dict, vertical)).boolValue];
         },
         (@{
           PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
+          PROPERTY(style, NSNumber, NSObject, NO,
+                   ^id(id number) { return ORKImageChoiceAnswerStyleToString(((NSNumber *)number).integerValue); },
+                   ^id(id string) { return @(ORKImageChoiceAnswerStyleFromString(string)); }),
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKTextChoiceAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1048,7 +1069,7 @@ encondingTable =
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum)];
+            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum) maximumFractionDigits:GETPROP(dict, maximumFractionDigits)];
         },
         (@{
           PROPERTY(style, NSNumber, NSObject, NO,
@@ -1057,6 +1078,7 @@ encondingTable =
           PROPERTY(unit, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

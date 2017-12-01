@@ -92,6 +92,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, frequency);
     ORK_ENCODE_ENUM(aCoder, channel);
+    ORK_ENCODE_ENUM(aCoder, channelSelected);
     ORK_ENCODE_DOUBLE(aCoder, amplitude);
 }
 
@@ -100,6 +101,7 @@
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, frequency);
         ORK_DECODE_ENUM(aDecoder, channel);
+        ORK_DECODE_ENUM(aDecoder, channelSelected);
         ORK_DECODE_DOUBLE(aDecoder, amplitude);
     }
     return self;

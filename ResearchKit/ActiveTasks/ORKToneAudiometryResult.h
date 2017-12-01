@@ -85,10 +85,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) double frequency;
 
 /**
- 
  The channel, either left or right, for the tone associated with the sample.
  */
 @property (nonatomic, assign) ORKAudioChannel channel;
+
+/**
+ The channel selected by the user.
+ */
+@property (nonatomic, assign) ORKAudioChannel channelSelected;
 
 /**
  The audio signal amplitude.

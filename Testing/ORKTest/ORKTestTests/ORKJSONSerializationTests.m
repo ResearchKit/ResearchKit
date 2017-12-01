@@ -888,6 +888,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                    @"ORKConsentSection.customAnimationURL",
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
+                                   @"ORKNumericAnswerFormat.maximumFractionDigits",
                                    @"ORKVideoCaptureStep.duration",
                                    @"ORKTextAnswerFormat.validationRegularExpression",
                                    ];

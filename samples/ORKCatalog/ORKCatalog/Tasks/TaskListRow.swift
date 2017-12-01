@@ -104,6 +104,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case shoulderRangeOfMotion
     case trailMaking
     case videoInstruction
+    case webView
     
     class TaskListRowSection {
         var title: String
@@ -176,6 +177,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
                     .videoInstruction,
+                    .webView
                 ]),
         ]}
     
@@ -314,6 +316,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .trailMaking:
             return NSLocalizedString("Trail Making Test", comment: "")
+            
+        case .webView:
+            return NSLocalizedString("Web View", comment: "")
         }
     }
     
@@ -480,6 +485,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Video instruction tasks.
         case videoInstructionTask
         case videoInstructionStep
+        
+        // Web view tasks.
+        case webViewTask
+        case webViewStep
     }
     
     // MARK: Properties
@@ -617,6 +626,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .videoInstruction:
             return videoInstruction
+            
+        case .webView:
+            return webView
         }
     }
 
@@ -1403,6 +1415,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
+    /// This task presents a web view step
+    private var webView: ORKTask {
+        let webViewStep = ORKWebViewStep.init(identifier: String(describing: Identifier.webViewStep), html: exampleHtml)
+        return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**
@@ -1565,5 +1583,70 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     private var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
+    }
+    
+    private var exampleHtml: String {
+        return """
+        <!DOCTYPE html>
+
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta name="viewport" content="width=400, user-scalable=no">
+            <meta charset="utf-8" />
+            <style type="text/css">
+            body
+            {
+                background: #FFF;
+                font-family: Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            .container
+            {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .answer-box
+            {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                border: solid 1px #ddd;
+                border-radius: 2px;
+                -webkit-appearance: none;
+            }
+
+            .continue-button
+            {
+                width: 140px;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                font-size: 16px;
+                color: #2e6e9e;
+                border-radius: 2px;
+                border: solid 1px #2e6e9e;
+                background: #FFF;
+                cursor: pointer;
+                margin-top: 40px;
+            }
+            </style>
+            <script type="text/javascript">
+            function completeStep() {
+                var answer = document.getElementById("answer").value;
+                window.webkit.messageHandlers.ResearchKit.postMessage(answer);
+            }
+            </script>
+        </head>
+        <body>
+            <div class="container">
+                <input type="text" id="answer" class="answer-box" placeholder="Answer" />
+                <button onclick="completeStep();" class="continue-button">Continue</button>
+            </div>
+        </body>
+        </html>
+        """
     }
 }

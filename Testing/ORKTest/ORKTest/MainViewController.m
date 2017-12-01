@@ -130,6 +130,7 @@ NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *TestButtonTable()
                         @"Table Step",
                         @"Video Instruction Step",
                         @"Wait Step",
+                        @"Web View Step"
                         ]},
              @{ @"Miscellaneous":
                     @[
