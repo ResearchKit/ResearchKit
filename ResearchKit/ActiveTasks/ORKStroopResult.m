@@ -29,6 +29,8 @@
  */
 
 #import "ORKStroopResult.h"
+#import "ORKResult_Private.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKStroopResult
 

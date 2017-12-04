@@ -30,7 +30,10 @@
 
 #import "ORKWebViewStepViewController.h"
 #import "ORKWebViewStep.h"
-#import <ResearchKit/ORKResult.h>
+
+#import "ORKResult_Private.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKWebViewStepResult.h"
 
 @implementation ORKWebViewStepViewController {
     WKWebView *_webView;
