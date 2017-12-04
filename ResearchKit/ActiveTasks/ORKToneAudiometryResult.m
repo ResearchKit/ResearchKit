@@ -115,6 +115,7 @@
     __typeof(self) castObject = object;
     
     return ((self.channel == castObject.channel) &&
+            (self.channelSelected == castObject.channelSelected) &&
             (ABS(self.frequency - castObject.frequency) < DBL_EPSILON) &&
             (ABS(self.amplitude - castObject.amplitude) < DBL_EPSILON)) ;
 }
@@ -123,12 +124,13 @@
     ORKToneAudiometrySample *sample = [[[self class] allocWithZone:zone] init];
     sample.frequency = self.frequency;
     sample.channel = self.channel;
+    sample.channelSelected = self.channelSelected;
     sample.amplitude = self.amplitude;
     return sample;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; amplitude: %.4lf>", self.class.description, self, self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; channelSelected %@; amplitude: %.4lf>", self.class.description, self, self.frequency, @(self.channel), @(self.channelSelected), self.amplitude];
 }
 
 @end
