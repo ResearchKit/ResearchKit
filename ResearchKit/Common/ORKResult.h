@@ -1535,4 +1535,21 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
+/**
+ The `ORKWebViewStepResult` class represents the result of a web view step (`ORKWebViewStep`).
+ 
+ A web view result is produced by the task view controller when it presents a web view step.
+ 
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWebViewStepResult : ORKResult
+
+/**
+ The answer produced by the webview.
+ */
+@property (nonatomic, nullable) NSString* result;
+
+@end
+
 NS_ASSUME_NONNULL_END
