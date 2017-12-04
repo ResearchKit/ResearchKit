@@ -884,6 +884,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                    @"ORKDateQuestionResult.calendar",
                                    @"ORKDateQuestionResult.timeZone",
                                    @"ORKToneAudiometryResult.outputVolume",
+                                   @"ORKToneAudiometryResult.channel",
                                    @"ORKConsentSection.contentURL",
                                    @"ORKConsentSection.customAnimationURL",
                                    @"ORKNumericAnswerFormat.minimum",

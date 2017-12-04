@@ -83,7 +83,7 @@
         ORKWebViewStepResult *childResult = [[ORKWebViewStepResult alloc] initWithIdentifier:self.step.identifier];
         childResult.result = _result;
         childResult.endDate = parentResult.endDate;
-        parentResult.results = @[childResult];
+        parentResult.results = [parentResult.results arrayByAddingObject:childResult] ? : @[childResult];
     }
     return parentResult;
 }
