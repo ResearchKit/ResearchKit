@@ -83,7 +83,6 @@
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
 #import <ResearchKit/ORKPasscodeStepViewController.h>
 #import <ResearchKit/ORKPSATStepViewController.h>
-#import <ResearchKit/ORKQuestionStepViewController.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKSignatureStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>

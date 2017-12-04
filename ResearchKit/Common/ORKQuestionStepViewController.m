@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKQuestionStepViewController.h"
+#import "ORKQuestionStepViewController_Private.h"
 
 #import "ORKChoiceViewCell.h"
 #import "ORKQuestionStepView.h"
@@ -44,7 +44,6 @@
 #import "ORKTextChoiceCellGroup.h"
 
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKQuestionStepViewController_Private.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
 
