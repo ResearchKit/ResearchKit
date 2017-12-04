@@ -185,5 +185,21 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([self.tableStep respondsToSelector:@selector(titleForHeaderInSection:tableView:)]) {
+        return [self.tableStep titleForHeaderInSection:section tableView:tableView];
+    } else {
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([self.tableStep respondsToSelector:@selector(viewForHeaderInSection:tableView:)]) {
+        return [self.tableStep viewForHeaderInSection:section tableView:tableView];
+    } else {
+        return nil;
+    }
+}
+
 @end
 

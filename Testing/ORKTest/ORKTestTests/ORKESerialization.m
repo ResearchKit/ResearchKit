@@ -259,7 +259,7 @@ static NSRegularExpression *regularExpressionsFromDictionary(NSDictionary *dict)
     return regularExpression;
 }
 
-static NSMutableDictionary *ORKESerializationEncodingTable();
+static NSMutableDictionary *ORKESerializationEncodingTable(void);
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
 static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJSONToObjectBlock converterBlock) ;
