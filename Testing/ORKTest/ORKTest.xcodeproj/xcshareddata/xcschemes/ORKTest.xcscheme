@@ -52,6 +52,11 @@
                BlueprintName = "ORKTestTests"
                ReferencedContainer = "container:ORKTest.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ORKDataCollectionTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

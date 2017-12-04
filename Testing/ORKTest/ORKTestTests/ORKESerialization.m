@@ -600,6 +600,22 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKWebViewStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKWebViewStep *step = [[ORKWebViewStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return step;
+         },
+         (@{
+            PROPERTY(html, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKWebViewStepResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKWebViewStepResult *result = [[ORKWebViewStepResult alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return result;
+         },
+         (@{
+            PROPERTY(result, NSString, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
@@ -1400,12 +1416,6 @@ encondingTable =
          nil,
          (@{
             PROPERTY(questionType, NSNumber, NSObject, NO, nil, nil)
-            })),
-   ENTRY(ORKDataResult,
-         nil,
-         (@{
-            PROPERTY(contentType, NSString, NSObject, YES, nil, nil),
-            PROPERTY(filename, NSString, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKScaleQuestionResult,
          nil,

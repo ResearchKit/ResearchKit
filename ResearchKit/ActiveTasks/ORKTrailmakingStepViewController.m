@@ -39,6 +39,8 @@
 
 #import "ORKActiveStepViewController_Internal.h"
 
+#import "ORKCollectionResult_Private.h"
+#import "ORKTrailmakingResult.h"
 #import "ORKTrailmakingStep.h"
 #import "ORKStep_Private.h"
 #import "ORKResult.h"

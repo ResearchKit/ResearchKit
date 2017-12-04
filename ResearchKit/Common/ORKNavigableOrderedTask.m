@@ -32,6 +32,7 @@
 #import "ORKNavigableOrderedTask.h"
 
 #import "ORKOrderedTask_Private.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKResult.h"
 #import "ORKStep_Private.h"
 #import "ORKStepNavigationRule.h"

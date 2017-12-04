@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ORKQuestionStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
