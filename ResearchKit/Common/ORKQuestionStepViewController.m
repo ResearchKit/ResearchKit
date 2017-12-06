@@ -548,12 +548,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
     if (section == ORKQuestionSectionAnswer) {
-        if (_choiceCellGroup == nil) {
-            _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
-                                                                                       answer:self.answer
-                                                                           beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
-                                                                          immediateNavigation:[self isStepImmediateNavigation]];
-        }
+        _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
+                                                                                   answer:self.answer
+                                                                       beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
+                                                                      immediateNavigation:[self isStepImmediateNavigation]];
         return _choiceCellGroup.size;
     }
     return 0;
@@ -632,9 +630,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) {
-        cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
-    }
+    cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     
     cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
