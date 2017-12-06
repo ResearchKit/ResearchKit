@@ -100,6 +100,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case twoFingerTappingInterval
     case walkBackAndForth
     case heightQuestion
+    case weightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case trailMaking
@@ -131,6 +132,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .dateQuestion,
                     .dateTimeQuestion,
                     .heightQuestion,
+                    .weightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -206,6 +208,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .heightQuestion:
             return NSLocalizedString("Height Question", comment: "")
     
+        case .weightQuestion:
+            return NSLocalizedString("Weight Question", comment: "")
+            
         case .imageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -367,7 +372,18 @@ enum TaskListRow: Int, CustomStringConvertible {
         case heightQuestionStep1
         case heightQuestionStep2
         case heightQuestionStep3
+        case heightQuestionStep4
 
+        // Task with an example of weight entry.
+        case weightQuestionTask
+        case weightQuestionStep1
+        case weightQuestionStep2
+        case weightQuestionStep3
+        case weightQuestionStep4
+        case weightQuestionStep5
+        case weightQuestionStep6
+        case weightQuestionStep7
+        
         // Task with an image choice question.
         case imageChoiceQuestionTask
         case imageChoiceQuestionStep1
@@ -516,6 +532,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .heightQuestion:
             return heightQuestionTask
+            
+        case .weightQuestion:
+            return weightQuestionTask
             
         case .imageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -751,25 +770,78 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var heightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height (local system)", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height", answer: answerFormat1)
         
-        step1.text = exampleDetailText
+        step1.text = "Local system"
 
         let answerFormat2 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height (metric system)", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height", answer: answerFormat2)
         
-        step2.text = exampleDetailText
+        step2.text = "Metric system"
 
         let answerFormat3 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height (USC system)", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height", answer: answerFormat3)
         
-        step2.text = exampleDetailText
+        step3.text = "USC system"
 
-        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3])
+        let answerFormat4 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!, unit: HKUnit.meterUnit(with: .centi), style: .decimal)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep4), title: "Height", answer: answerFormat4)
+        
+        step4.text = "HealthKit, height"
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3, step4])
     }
 
+    /// This task demonstrates a question asking for the user weight.
+    private var weightQuestionTask: ORKTask {
+        let answerFormat1 = ORKAnswerFormat.weightAnswerFormat()
+        
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight", answer: answerFormat1)
+        
+        step1.text = "Local system, default precision"
+        
+        let answerFormat2 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric)
+        
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight", answer: answerFormat2)
+        
+        step2.text = "Metric system, default precision"
+        
+        let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.low, minimumValue: ORKDoubleDefaultValue, maximumValue: ORKDoubleDefaultValue, defaultValue: ORKDoubleDefaultValue)
+        
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight", answer: answerFormat3)
+        
+        step3.text = "Metric system, low precision"
+
+        let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.high, minimumValue: 20.0, maximumValue: 100.0, defaultValue:  45.50)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight", answer: answerFormat4)
+        
+        step4.text = "Metric system, high precision"
+
+        let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
+        
+        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight", answer: answerFormat5)
+        
+        step5.text = "USC system, default precision"
+        
+        let answerFormat6 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC, numericPrecision: ORKNumericPrecision.high, minimumValue: 50.0, maximumValue: 150.0, defaultValue: 100.0)
+        
+        let step6 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep6), title: "Weight", answer: answerFormat6)
+        
+        step6.text = "USC system, high precision"
+
+        let answerFormat7 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!, unit: HKUnit.gramUnit(with: .kilo), style: .decimal)
+        
+        let step7 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep7), title: "Weight", answer: answerFormat7)
+        
+        step7.text = "HealthKit, body mass"
+
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5, step6, step7])
+    }
+    
     /**
     This task demonstrates a survey question involving picking from a series of
     image choices. A more realistic applciation of this type of question might be to

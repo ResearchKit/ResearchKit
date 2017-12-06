@@ -300,6 +300,52 @@ ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
     return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
 }
 
+ORK_INLINE void ORKKilogramsToWholeAndFraction(double kilograms, double *outWhole, double *outFraction) {
+    if (outWhole == NULL || outFraction == NULL) {
+        return;
+    }
+    *outWhole = floor(kilograms);
+    *outFraction = round((kilograms - floor(kilograms)) * 100);
+}
+
+ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double * _Nullable outPounds, double * _Nullable outOunces) {
+    const double ORKPoundsPerKilogram = 2.20462262;
+    double fractionalPounds = kilograms * ORKPoundsPerKilogram;
+    double pounds = floor(fractionalPounds);
+    double ounces = round((fractionalPounds - pounds) * 16);
+    if (ounces == 16) {
+        pounds += 1;
+        ounces = 0;
+    }
+    if (outPounds != NULL) {
+        *outPounds = pounds;
+    }
+    if (outOunces != NULL) {
+        *outOunces = ounces;
+    }
+}
+
+ORK_INLINE double ORKKilogramsToPounds(double kilograms) {
+    double pounds;
+    ORKKilogramsToPoundsAndOunces(kilograms, &pounds, NULL);
+    return pounds;
+}
+
+ORK_INLINE double ORKWholeAndFractionToKilograms(double whole, double fraction) {
+    double kg = (whole + (fraction / 100));
+    return (round(100 * kg) / 100);
+}
+
+ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
+    const double ORKKilogramsPerPound = 0.45359237;
+    double kg = (pounds + (ounces / 16)) * ORKKilogramsPerPound;
+    return (round(100 * kg) / 100);
+}
+
+ORK_INLINE double ORKPoundsToKilograms(double pounds) {
+    return ORKPoundsAndOuncesToKilograms(pounds, 0);
+}
+
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
     UIColor *color = baseColor;
     if (totalColors > 1) {
