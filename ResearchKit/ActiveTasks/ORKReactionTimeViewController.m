@@ -37,6 +37,8 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
+#import "ORKCollectionResult_Private.h"
+#import "ORKReactionTimeResult.h"
 #import "ORKReactionTimeStep.h"
 #import "ORKResult.h"
 
