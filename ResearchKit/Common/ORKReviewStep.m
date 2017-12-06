@@ -35,6 +35,7 @@
 #import "ORKReviewStepViewController.h"
 
 #import "ORKResult.h"
+#import "ORKCollectionResult_Private.h"
 
 #import "ORKHelpers_Internal.h"
 

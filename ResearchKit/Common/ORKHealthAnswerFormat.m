@@ -35,6 +35,7 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
 
 
