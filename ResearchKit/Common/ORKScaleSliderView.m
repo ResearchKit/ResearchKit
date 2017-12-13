@@ -176,8 +176,6 @@
             _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
             _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
             _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
