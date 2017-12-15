@@ -444,6 +444,8 @@
 		86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */; };
 		86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */; };
 		86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D348001AC16175006DB02B /* ORKRecorderTests.m */; };
+		8DE27B401D5BC0B9009A26E3 /* ORKHTMLPDFPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE27B3F1D5BC0B9009A26E3 /* ORKHTMLPDFPageRenderer.m */; };
+		8DE27B411D5BC9E2009A26E3 /* ORKHTMLPDFPageRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DE27B3E1D5BC072009A26E3 /* ORKHTMLPDFPageRenderer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9550E6731D58DBCF00C691B8 /* ORKTouchAnywhereStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 9550E6711D58DBCF00C691B8 /* ORKTouchAnywhereStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9550E6741D58DBCF00C691B8 /* ORKTouchAnywhereStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 9550E6721D58DBCF00C691B8 /* ORKTouchAnywhereStep.m */; };
 		9550E67C1D58DD2000C691B8 /* ORKTouchAnywhereStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9550E67A1D58DD2000C691B8 /* ORKTouchAnywhereStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1088,6 +1090,8 @@
 		86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultTests.m; sourceTree = "<group>"; };
 		86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTextChoiceCellGroupTests.m; sourceTree = "<group>"; };
 		86D348001AC16175006DB02B /* ORKRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKRecorderTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8DE27B3E1D5BC072009A26E3 /* ORKHTMLPDFPageRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKHTMLPDFPageRenderer.h; sourceTree = "<group>"; };
+		8DE27B3F1D5BC0B9009A26E3 /* ORKHTMLPDFPageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHTMLPDFPageRenderer.m; sourceTree = "<group>"; };
 		9550E6711D58DBCF00C691B8 /* ORKTouchAnywhereStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTouchAnywhereStep.h; sourceTree = "<group>"; };
 		9550E6721D58DBCF00C691B8 /* ORKTouchAnywhereStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAnywhereStep.m; sourceTree = "<group>"; };
 		9550E67A1D58DD2000C691B8 /* ORKTouchAnywhereStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTouchAnywhereStepViewController.h; sourceTree = "<group>"; };
@@ -2202,6 +2206,8 @@
 			children = (
 				86C40B8E1A8D7C5C00081FAC /* ORKHTMLPDFWriter.h */,
 				86C40B8F1A8D7C5C00081FAC /* ORKHTMLPDFWriter.m */,
+				8DE27B3E1D5BC072009A26E3 /* ORKHTMLPDFPageRenderer.h */,
+				8DE27B3F1D5BC0B9009A26E3 /* ORKHTMLPDFPageRenderer.m */,
 			);
 			name = PDF;
 			sourceTree = "<group>";
@@ -2875,6 +2881,7 @@
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
 				86C40CD01A8D7C5C00081FAC /* ORKInstructionStepView.h in Headers */,
 				86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */,
+				8DE27B411D5BC9E2009A26E3 /* ORKHTMLPDFPageRenderer.h in Headers */,
 				86C40E181A8D7C5C00081FAC /* ORKConsentSection.h in Headers */,
 				FF919A4F1E81BD05005C2A1E /* ORKTrailmakingResult.h in Headers */,
 				86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */,
@@ -3473,6 +3480,7 @@
 				BF1D438A1D4905FC007EE90B /* ORKVideoInstructionStepViewController.m in Sources */,
 				86C40CAA1A8D7C5C00081FAC /* ORKPedometerRecorder.m in Sources */,
 				BCA5C0361AEC05F20092AC8D /* ORKStepNavigationRule.m in Sources */,
+				8DE27B401D5BC0B9009A26E3 /* ORKHTMLPDFPageRenderer.m in Sources */,
 				106FF2A71B665CF5004EACF2 /* ORKHolePegTestPlaceContentView.m in Sources */,
 				86C40D761A8D7C5C00081FAC /* ORKScaleRangeLabel.m in Sources */,
 				86C40C741A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.m in Sources */,
