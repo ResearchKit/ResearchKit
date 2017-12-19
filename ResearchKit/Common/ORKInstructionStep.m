@@ -54,7 +54,8 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSAttributedString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, attributedDetailText, NSAttributedString);
         ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
         ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_IMAGE(aDecoder, auxiliaryImage);
