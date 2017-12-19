@@ -31,10 +31,13 @@
 
 @import UIKit;
 
+@class ORKHTMLPDFPageRenderer;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKHTMLPDFWriter : NSObject
+
+@property (nonatomic) ORKHTMLPDFPageRenderer *printRenderer;
 
 - (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock;
 

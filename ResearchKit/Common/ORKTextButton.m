@@ -79,7 +79,7 @@
 
 }
 
--(void)setEnabled:(BOOL)enabled {
+- (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     [self.titleLabel setEnabled:enabled];
 }

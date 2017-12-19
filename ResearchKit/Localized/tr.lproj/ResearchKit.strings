@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "0+";
 "BLOOD_TYPE_O-" = "0-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "Tip I";
+"FITZPATRICK_SKIN_TYPE_II" = "Tip II";
+"FITZPATRICK_SKIN_TYPE_III" = "Tip III";
+"FITZPATRICK_SKIN_TYPE_IV" = "Tip IV";
+"FITZPATRICK_SKIN_TYPE_V" = "Tip V";
+"FITZPATRICK_SKIN_TYPE_VI" = "Tip VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "Kadın";
 "GENDER_MALE" = "Erkek";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fit";
 "MEASURING_UNIT_IN" = "inç";
+
+/* Limb values. */
+"LIMB_LEFT" = "sol";
+"LIMB_RIGHT" = "sağ";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Yanıtlamak için dokunun";
@@ -193,17 +205,19 @@
 "BUTTON_SKIP_QUESTION" = "Bu soruyu atla";
 "BUTTON_START_TIMER" = "Sayacı Başlat";
 "BUTTON_OPTION_SAVE" = "Sonrası İçin Kaydet";
-"BUTTON_OPTION_DISCARD" = "Sonuçları At";
+"BUTTON_OPTION_DISCARD" = "Sonuçları Sil";
 "BUTTON_OPTION_STOP_TASK" = "Görevi Bitir";
 "BUTTON_SAVE" = "Kaydet";
 "BUTTON_CLEAR_ANSWER" = "Yanıtı sil";
 "BUTTON_READ_ONLY_MODE" = "Bu yanıt değiştirilemiyor.";
+"BUTTON_COPYRIGHT" = "Telif Hakkı";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivite başlatılıyor";
 "TASK_COMPLETE_TITLE" = "Aktivite Tamamlandı";
-"TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunuzda size haber verilecektir.";
+"TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunda size haber verilecektir.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ saniye kaldı.";
+"TOUCH_ANYWHERE_LABEL" = "Sürdürmek için herhangi bir yere dokunun";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Görüntü Yakala";
@@ -248,7 +262,7 @@
 "TAPPING_TASK_TITLE" = "Dokunma Hızı";
 "TAPPING_TASK_TITLE_RIGHT" = "Sağ El";
 "TAPPING_TASK_TITLE_LEFT" = "Sol El";
-"TAPPING_INTRO_TEXT" = "Bu aktivite dokunma hızınızı ölçer.";
+"TAPPING_INTRO_TEXT" = "Bu aktivite, dokunma hızınızı ölçer.";
 "TAPPING_INTRO_TEXT_2_REST_PHONE" = "Telefonunuzu düz bir yüzeye koyun.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için aynı elinizin iki parmağını kullanın.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için sağ elinizin iki parmağını kullanın.";
@@ -273,17 +287,19 @@
 "AUDIO_INTENDED_USE" = "Bu aktivite, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
 "AUDIO_TOO_LOUD_LABEL" = "Çok Yüksek";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ses kaydı yapılamıyor";
-"AUDIO_LEVEL_CHECK_LABEL" = "Arkaplan gürültü düzeyi denetlenirken lütfen bekleyin.";
+"AUDIO_LEVEL_CHECK_LABEL" = "Arka plan gürültü düzeyi denetlenirken lütfen bekleyin.";
 "AUDIO_TOO_LOUD_MESSAGE" = "Ortam gürültü düzeyi sesinizi kaydedemeyecek kadar yüksek. Lütfen daha sessiz bir yere gidip yeniden deneyin.";
 "AUDIO_TOO_LOUD_ACTION_NEXT" = "Hazır olduğunuzda İleri’ye dokunun.";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Bu aktivite, farklı sesleri duyabilme becerinizi ölçer.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "\nBaşlamadan önce kulaklığınızı bağlayın ve takın.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Başlamadan önce kulaklığınızı takıp kulağınıza yerleştirin.\n\nSes çok hafif gelecek ve normal uyarı sesinden farklı olacaktır.  Alçak tonda başlayan ses yavaş yavaş yükselecektir.  Lütfen dikkatinizi verip sesi hangi kulağınızdan duyduğunuzu belirtmek üzere sol veya sağ düğmeye dokunun.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda düğmeye dokunun.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Her ses duymaya başladığınızda düğmeye dokunun.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda herhangi bir düğmeye dokunun.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Sesi her duyduğunuzda, sesi hangi kulağınızdan duyduğunuzu belirtmek üzere sol veya sağ düğmeye dokunun.";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Sol Kulak";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Sağ Kulak";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Sol";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Sağ";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "Oyun Tamamlandı";
 "MEMORY_GAME_PAUSED_TITLE" = "Duraklatıldı";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Devam etmek için İleri’ye dokunun";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "Bellek aktivitesi, San Francisco’daki Kaliforniya Üniversitesi’nden Katherine Possin (PhD) ile Joel Kramer’in (PhD) yardımlarıyla geliştirilmiştir.";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Tepki Süresi";
@@ -316,16 +333,65 @@
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ekranda mavi nokta görünür görünmez aygıtı herhangi bir yönde hızlıca sallayın. Bunu %D kez yapmanız istenecek.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ / %@ Girişim";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mavi çember göründüğünde aygıtı hızlıca sallayın";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mavi daire göründüğünde aygıtı hızlıca sallayın";
+
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "Stroop";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Her sözcük göründüğünde, gösterilen RENGİN adının ilk harfini seçin.";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "Stroop aktivitesine başlamaya hazır olduğunuzda Başla’ya dokunun.";
+"STROOP_TASK_STEP_TEXT" = "Gösterilen RENGİN adının ilk harfini seçin.";
+"STROOP_COLOR_RED" = "KIRMIZI";
+"STROOP_COLOR_GREEN" = "YEŞİL";
+"STROOP_COLOR_BLUE" = "MAVİ";
+"STROOP_COLOR_YELLOW" = "SARI";
+"STROOP_COLOR_RED_INITIAL" = "K";
+"STROOP_COLOR_GREEN_INITIAL" = "Y";
+"STROOP_COLOR_BLUE_INITIAL" = "M";
+"STROOP_COLOR_YELLOW_INITIAL" = "S";
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanoi Kulesi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu aktivite bulmaca çözme becerilerinizi ölçer.";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu aktivite, bulmaca çözme becerilerinizi ölçer.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tüm yığını, vurgulanan platforma mümkün olan en az hamlede taşıyın.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Bulmacayı Çöz";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Hamle Sayısı: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Bu bulmacayı çözemedim";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption sol veya sağ olmalı";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Sol Diz Hareket Alanı";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Sağ Diz Hareket Alanı";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Bu aktivite, sol dizinizi ne kadar uzatabileceğinizi ölçer.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Bu aktivite, sağ dizinizi ne kadar uzatabileceğinizi ölçer.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Bir sandalyenin kenarına oturun. Başladığınızda, aygıtınızı ölçüm için sol dizinize koyacaksınız. Yönergeleri duyabilmeniz için lütfen aygıtınızın sesini açın.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Bir sandalyenin kenarına oturun. Başladığınızda, aygıtınızı ölçüm için sağ dizinize koyacaksınız. Yönergeleri duyabilmeniz için lütfen aygıtınızın sesini açın.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aygıtınızı, resimde gösterildiği gibi ekran dışa bakacak şekilde sol dizinize yerleştirin.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aygıtınızı, resimde gösterildiği gibi ekran dışa bakacak şekilde sağ dizinize yerleştirin.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Hazır olduğunuzda, başlamak için ekrana dokunun ve sol dizinizi uzatabildiğiniz kadar uzatın. İşiniz bittiğinde yeniden dokunun.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Hazır olduğunuzda, başlamak için ekrana dokunun ve sağ dizinizi uzatabildiğiniz kadar uzatın. İşiniz bittiğinde yeniden dokunun.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aygıtınızı sol dizinize yerleştirin";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aygıtınızı sağ dizinize yerleştirin";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Sol dizinizi uzatın. Sonra herhangi bir yere dokunun.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Sağ dizinizi uzatın. Sonra herhangi bir yere dokunun.";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Sol Omuz Hareket Alanı";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Sağ Omuz Hareket Alanı";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Bu aktivite, sol omzunuzu ne kadar uzatabileceğinizi ölçer.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Bu aktivite, sağ omzunuzu ne kadar uzatabileceğinizi ölçer.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Başladığınızda, aygıtınızı ölçüm için sol omzunuza koyacaksınız. Yönergeleri duyabilmeniz için lütfen aygıtınızın sesini açın.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Başladığınızda, aygıtınızı ölçüm için sağ omzunuza koyacaksınız. Yönergeleri duyabilmeniz için lütfen aygıtınızın sesini açın.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Aygıtınızı, resimde gösterildiği gibi ekran dışa bakacak şekilde sol omzunuza yerleştirin.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Aygıtınızı, resimde gösterildiği gibi ekran dışa bakacak şekilde sağ omzunuza yerleştirin.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Hazır olduğunuzda, başlamak için ekrana dokunun ve sol kolunuzu kaldırabildiğiniz kadar kaldırın. İşiniz bittiğinde yeniden dokunun.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Hazır olduğunuzda, başlamak için ekrana dokunun ve sağ kolunuzu kaldırabildiğiniz kadar kaldırın. İşiniz bittiğinde yeniden dokunun.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Aygıtınızı sol omzunuza yerleştirin";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Aygıtınızı sağ omzunuza yerleştirin";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Sol kolunuzu yukarı kaldırın. Sonra herhangi bir yere dokunun.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Sağ kolunuzu yukarı kaldırın. Sonra herhangi bir yere dokunun.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Süreli Yürüme";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Çift Taraflı Koltuk Değneği";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Yürüteç/Yürüme Desteği";
 "TIMED_WALK_INSTRUCTION_%@" = "Düz bir çizgide en fazla %@ yürüyün.";
-"TIMED_WALK_INSTRUCTION_2" = "Geriye dönün ve başladığınız yere yürüyün.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tamamladığınızda Bitti’ye dokunun.";
+"TIMED_WALK_INSTRUCTION_TURN" = "Geriye dönün.";
+"TIMED_WALK_INSTRUCTION_2" = "Başladığınız yere yürüyün.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tamamlandığında İleri’ye dokunun.";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -353,7 +420,7 @@
 "PAVSAT_TITLE" = "PAVSAT";
 "PASAT_INTRO_TEXT" = "Tempolu İşitsel Toplama Testi, işitsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
 "PVSAT_INTRO_TEXT" = "Tempolu Görsel Toplama Testi, görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
-"PAVSAT_INTRO_TEXT" = "Tempolu İşitsel-Görsel Toplama Testi, işitsel ve görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PAVSAT_INTRO_TEXT" = "Tempolu İşitsel ve Görsel Toplama Testi, işitsel ve görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
 "PSAT_INTRO_TEXT_2_%@" = "Her %@ saniyede bir tek tek rakamlar sunulur.\nHer yeni rakamı bir önceki rakama eklemeniz gerekir.\nDikkat edin, değişen toplamı değil yalnızca son iki rakamın toplamını hesaplamanız gerekir.";
 "PSAT_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "PSAT_INITIAL_INSTRUCTION" = "Bu ilk rakamı aklınızda tutun.";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "Bu aktiviteyi SAĞ elimle gerçekleştiremem.";
 "TREMOR_SKIP_NEITHER" = "Bu aktiviteyi her iki elimle gerçekleştirebilirim.";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "İz Sürme Testi";
+"TRAILMAKING_INTENDED_USE" = "Bu aktivite, bir dizi noktaya sırayla dokunmanız için gereken süreyi kaydederek görsel dikkatinizi ve görev geçişinizi değerlendirir.";
+"TRAILMAKING_INTENDED_USE2_A" = "Geri sayımdan sonra rakamlar ve harfler arasında dönüşümlü olarak noktalara dokunun. Önce “1” rakamına dokunarak başlayın, ardından “2” – “3” – “4”… rakamlarına dokunarak “7” rakamına ulaşın.";
+"TRAILMAKING_INTENDED_USE2_B" = "Geri sayımdan sonra rakamlar ve harfler arasında dönüşümlü olarak noktalara dokunun. Önce “1” rakamına dokunarak başlayın, ardından ilk harf olan “A”ya sonra “2” – “B” – “3” – “C”… noktalarına dokunarak “7” rakamına ulaşın.";
+"TRAILMAKING_INTRO_TEXT" = "Bu işlemi hata yapmadan olabildiğince çabuk gerçekleştirin. \n ";
+"TRAILMAKING_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"TRAILMAKING_TIMER" = "%.1f sn.";
+"TRAILMAKING_ERROR" = "%@ (%d hata)";
+"TRAILMAKING_ERROR_PLURAL" = "%@ (%d hata)";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Yakalanmış görüntü";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Video yakalama önizlemesi";
-"AX_VIDEO_CAPTURED_LABEL" = "Yakalanmış video";
+"AX_VIDEO_CAPTURE_COMPLETE" = "Video çekimi tamamlandı";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ büyüklüğündeki disk, %@ büyüklüğündeki diskin üzerine yerleştirilemez";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Hedef";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "Yığın içeriği:";
 "AX_GRAPH_AND_SEPARATOR" = " ve ";
 "AX_GRAPH_POINT_%@" = "Nokta: %@";
+
+"AX_AUDIO_BAR_GRAPH" = "Ses Çubuğu Grafiği";

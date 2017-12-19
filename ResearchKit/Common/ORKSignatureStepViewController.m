@@ -39,6 +39,8 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 #import "ORKResult_Private.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKSignatureResult_Private.h"
 #import "ORKStep.h"
 
 #import "ORKHelpers_Internal.h"
@@ -56,8 +58,7 @@
 @end
 
 
-@implementation ORKSignatureWrapperView {
-}
+@implementation ORKSignatureWrapperView
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];

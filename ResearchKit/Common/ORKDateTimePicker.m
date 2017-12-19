@@ -55,7 +55,7 @@
 @synthesize pickerDelegate = _pickerDelegate;
 @synthesize answer = _answer;
 
-- (instancetype) initWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer pickerDelegate:(id<ORKPickerDelegate>)delegate {
+- (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer pickerDelegate:(id<ORKPickerDelegate>)delegate {
     self = [super init];
     if (self) {
         
@@ -135,7 +135,10 @@
     } else {
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)answerFormat;
         [self setDate:[dateAnswerFormat pickerDefaultDate]];
+        
         _pickerView.calendar = [dateAnswerFormat currentCalendar];
+        _pickerView.timeZone = _pickerView.calendar.timeZone;
+        
         _calendar = [dateAnswerFormat currentCalendar];
         
         [_pickerView setMinimumDate:[dateAnswerFormat pickerMinimumDate]];

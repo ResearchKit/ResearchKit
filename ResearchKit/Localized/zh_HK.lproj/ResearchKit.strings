@@ -159,6 +159,14 @@
 "BLOOD_TYPE_O+" = "O+";
 "BLOOD_TYPE_O-" = "O-";
 
+/* Fitzpatrick Skin types */
+"FITZPATRICK_SKIN_TYPE_I" = "類型 I";
+"FITZPATRICK_SKIN_TYPE_II" = "類型 II";
+"FITZPATRICK_SKIN_TYPE_III" = "類型 III";
+"FITZPATRICK_SKIN_TYPE_IV" = "類型 IV";
+"FITZPATRICK_SKIN_TYPE_V" = "類型 V";
+"FITZPATRICK_SKIN_TYPE_VI" = "類型 VI";
+
 /* Gender values. */
 "GENDER_FEMALE" = "女性";
 "GENDER_MALE" = "男性";
@@ -172,6 +180,10 @@
 "MEASURING_UNIT_CM" = "厘米";
 "MEASURING_UNIT_FT" = "呎";
 "MEASURING_UNIT_IN" = "吋";
+
+/* Limb values. */
+"LIMB_LEFT" = "左";
+"LIMB_RIGHT" = "右";
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "點一下回答";
@@ -198,12 +210,14 @@
 "BUTTON_SAVE" = "儲存";
 "BUTTON_CLEAR_ANSWER" = "清除答案";
 "BUTTON_READ_ONLY_MODE" = "無法修改此答案。";
+"BUTTON_COPYRIGHT" = "版權";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "測試活動倒數";
 "TASK_COMPLETE_TITLE" = "測試活動已完成";
 "TASK_COMPLETE_TEXT" = "測試活動將會進行分析。當得到結果時，你將會收到通知。";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "剩餘 %@ 秒。";
+"TOUCH_ANYWHERE_LABEL" = "點一下任何一處以繼續";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "截取圖案";
@@ -225,7 +239,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "安坐 %@。";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "用最快的速度步行 %@。";
 "FITNESS_INTRO_TEXT_FORMAT" = "此測試活動能監測你的心跳率，並量度你在 %1$@內能步行的最遠距離。";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "在室外以盡可能最快的速度步行 %1$@。完成後，安坐並休息 %2$@。點一下「開始」以進行測試。";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "在室外以最快的速度步行 %1$@。完成後，安坐並休息 %2$@。點一下「開始」以進行測試。";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步態及平衡";
@@ -280,10 +294,12 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
 "TONE_AUDIOMETRY_INTENDED_USE" = "此測試活動能評估你聆聽不同聲音的能力。";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請插入並戴上耳筒。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "開始前，請插入並戴上耳機。\n\n聲音將會非常隱約，而非像一般的提示聲。音量將會由開始時的細聲逐漸增加至大聲。請留心，並點一下左或右按鈕以指出哪一邊耳朵聽見聲音。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
-"TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n如果你準備好開始，請點一下按鈕。";
-"TONE_AUDIOMETRY_INSTRUCTION" = "每次當你開始聽到聲音時，請點一下按鈕。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n若你準備好開始，請點一下任何按鈕。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "每次當你開始聽到聲音時，請點一下左或右按鈕以指出哪一邊耳朵聽見聲音。";
+"TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
+"TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
 "TONE_LABEL_%@_LEFT" = "%@ Hz，左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
 
@@ -309,6 +325,7 @@
 "MEMORY_GAME_COMPLETE" = "遊戲結束";
 "MEMORY_GAME_PAUSED_TITLE" = "已暫停";
 "MEMORY_GAME_PAUSED_MESSAGE" = "如要繼續，點一下「下一步」";
+"MEMORY_GAME_COPYRIGHT_TEXT" = "此記憶測試活動由三藩市加利福尼亞大學之 Katherine Possin, PhD 及 Joel Kramer, PhD 輔助開發。";
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反應時間";
@@ -318,14 +335,63 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次嘗試";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "當藍色圓圈出現時，請快速搖動裝置";
 
+/* Stroop active task.*/
+"STROOP_TASK_TITLE" = "斯特魯普";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "每次當字詞出現時，請選擇所顯示之「顏色」的首字。";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "當你準備好開始進行「斯特魯普」測試活動時，請點一下「開始」。";
+"STROOP_TASK_STEP_TEXT" = "請選擇所顯示之「顏色」的首字。";
+"STROOP_COLOR_RED" = "紅色";
+"STROOP_COLOR_GREEN" = "綠色";
+"STROOP_COLOR_BLUE" = "藍色";
+"STROOP_COLOR_YELLOW" = "黃色";
+"STROOP_COLOR_RED_INITIAL" = "紅";
+"STROOP_COLOR_GREEN_INITIAL" = "綠";
+"STROOP_COLOR_BLUE_INITIAL" = "藍";
+"STROOP_COLOR_YELLOW_INITIAL" = "黃";
+
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "河內塔";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "此測試活動會評估你的解題能力。";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "用最少的次數將所有圓盤移到有顏色標示的平台。";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始」以進行測試";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解開謎題";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動次數：%@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我無法解開此謎題";
+
+/* Range of Motion active task */
+"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption 必須為左或右";
+
+/* Knee Range of Motion active task */
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "左膝動作範圍";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "右膝動作範圍";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "此測試活動可測量你左膝的伸展幅度。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "此測試活動可測量你右膝的伸展幅度。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "請坐在椅子的邊緣。當你開始時，你須將裝置放在左膝上以進行測量。請開啟裝置的聲音，讓你可以聽取指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "請坐在椅子的邊緣。當你開始時，你須將裝置放在右膝上以進行測量。請開啟裝置的聲音，讓你可以聽取指示。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "請將裝置放在左膝上，螢幕向外（如圖）。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "請將裝置放在右膝上，螢幕向外（如圖）。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備好後，請點一下螢幕以開始測試，並盡你所能伸直左膝，完成後請再點一次。";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備好後，請點一下螢幕以開始測試，並盡你所能伸直右膝，完成後請再點一次。";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "請將裝置放在左膝上";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "請將裝置放在右膝上";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "伸直左膝，然後點一下任何一處。";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "伸直右膝，然後點一下任何一處。";
+
+/* Shoulder Range of Motion active task */
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "左肩動作範圍";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "右肩動作範圍";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "此測試活動可測量你左肩的伸展幅度。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "此測試活動可測量你右肩的伸展幅度。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "當你開始時，你須將裝置放在左肩上以進行測量。請開啟裝置的聲音，讓你可以聽取指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "當你開始時，你須將裝置放在右肩上以進行測量。請開啟裝置的聲音，讓你可以聽取指示。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "請將裝置放在左肩上，螢幕向外（如圖）。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "請將裝置放在右肩上，螢幕向外（如圖）。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "準備好後，請點一下螢幕以開始測試，並盡你所能提起左肩，完成後請再點一次。";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "準備好後，請點一下螢幕以開始測試，並盡你所能提起右肩，完成後請再點一次。";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "請將裝置放在左肩上";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "請將裝置放在右肩上";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "提起左臂，然後點一下任何一處。";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "提起右臂，然後點一下任何一處。";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "定時步行";
@@ -344,8 +410,9 @@
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "雙邊拐杖";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "助行架或四輪助行架";
 "TIMED_WALK_INSTRUCTION_%@" = "直線步行最多 %@。";
-"TIMED_WALK_INSTRUCTION_2" = "掉頭，然後步行回到起點。";
-"TIMED_WALK_INSTRUCTION_TEXT" = "完成後，請點一下「完成」。";
+"TIMED_WALK_INSTRUCTION_TURN" = "掉頭。";
+"TIMED_WALK_INSTRUCTION_2" = "步行回到起點。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成後，請點一下「下一步」。";
 
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
@@ -416,6 +483,23 @@
 "TREMOR_SKIP_RIGHT_HAND" = "我無法用右手進行此測試活動。";
 "TREMOR_SKIP_NEITHER" = "我可以用雙手進行此測試活動。";
 
+/* Trail making task. */
+"TRAILMAKING_TASK_TITLE" = "連線測試";
+"TRAILMAKING_INTENDED_USE" = "此測試活動會記錄你順序點按一系列圓點所需的時間，以評估你的視覺注意力及工作切換的能力。";
+"TRAILMAKING_INTENDED_USE2_A" = "倒數之後，請梅花間竹地點按數字及字母的圓點。首先點一下第一個數字「1」，然後數字「2」、「3」、「4」⋯直到數字「7」。";
+"TRAILMAKING_INTENDED_USE2_B" = "倒數之後，請梅花間竹地點按數字及字母的圓點。首先點一下第一個數字「1」，然後點一下第一個字母「A」，然後「2」、「B」、「3」、「C」⋯直到數字「7」。";
+"TRAILMAKING_INTRO_TEXT" = "請以最快的速度點按，並盡量不要按錯。\n";
+"TRAILMAKING_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
+"TRAILMAKING_TIMER" = "%.1f 秒";
+"TRAILMAKING_ERROR" = "%@（%d 個錯誤）";
+"TRAILMAKING_ERROR_PLURAL" = "%@（%d 個錯誤）";
+"TRAILMAKING_LETTER_A" = "A";
+"TRAILMAKING_LETTER_B" = "B";
+"TRAILMAKING_LETTER_C" = "C";
+"TRAILMAKING_LETTER_D" = "D";
+"TRAILMAKING_LETTER_E" = "E";
+"TRAILMAKING_LETTER_F" = "F";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "無法移除足夠的記錄檔案以達到臨界值";
@@ -456,7 +540,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "截取的圖案";
 
 "AX_VIDEO_CAPTURE_LABEL" = "截取影片預覽";
-"AX_VIDEO_CAPTURED_LABEL" = "截取的影片";
+"AX_VIDEO_CAPTURE_COMPLETE" = "完成截取影片";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "無法將 %@ 號的圓盤放在 %@ 號的圓盤上";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "目標";
@@ -470,3 +554,5 @@
 "AX_GRAPH_STACK_PREFIX" = "圓盤柱的組成方式：";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
 "AX_GRAPH_POINT_%@" = "點數：%@";
+
+"AX_AUDIO_BAR_GRAPH" = "音量棒圖表";

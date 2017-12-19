@@ -32,6 +32,7 @@
 #import "ORKChoiceAnswerFormatHelper.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult_Private.h"
 
 #import "ORKHelpers_Internal.h"
@@ -90,7 +91,7 @@
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {
-    return [self answerForSelectedIndexes:@[@(index)]];
+    return [self answerForSelectedIndexes:@[ @(index) ]];
 }
 
 - (id)answerForSelectedIndexes:(NSArray *)indexes {
@@ -180,6 +181,18 @@
         }
     }
     return [answerStrings componentsJoinedByString:@"\n"];
+}
+
+- (NSString *)labelForChoiceAnswer:(id)answer {
+    NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    NSArray *indexes = [self selectedIndexesForAnswer:answer];
+    for (NSNumber *index in indexes) {
+        NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
+        }
+    }
+    return [answerStrings componentsJoinedByString:@", "];
 }
 
 @end

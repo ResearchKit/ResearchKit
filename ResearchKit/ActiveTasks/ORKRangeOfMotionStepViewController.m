@@ -30,6 +30,7 @@
 
 
 #import "ORKRangeOfMotionStepViewController.h"
+
 #import "ORKCustomStepView_Internal.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKActiveStepViewController_Internal.h"
@@ -38,6 +39,7 @@
 #import "ORKDeviceMotionRecorder.h"
 #import "ORKActiveStepView.h"
 #import "ORKProgressView.h"
+#import "ORKRangeOfMotionResult.h"
 #import "ORKSkin.h"
 
 
@@ -48,7 +50,7 @@
     NSLayoutConstraint *_topConstraint;
 }
 
-@property  (nonatomic, strong, readonly) ORKProgressView *progressView;
+@property (nonatomic, strong, readonly) ORKProgressView *progressView;
 
 @end
 

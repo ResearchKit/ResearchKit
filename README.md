@@ -187,9 +187,9 @@ taskViewController.delegate = self;
 *Swift*
 
 ```swift
-let taskViewController = ORKTaskViewController(task: task, taskRunUUID: nil)
+let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
 taskViewController.delegate = self
-presentViewController(taskViewController, animated: true, completion: nil)
+present(taskViewController, animated: true, completion: nil)
 ```
 
 The above snippet assumes that your class implements the `ORKTaskViewControllerDelegate` protocol.
@@ -221,7 +221,7 @@ func taskViewController(_ taskViewController: ORKTaskViewController,
     // You could do something with the result here.
 
     // Then, dismiss the task view controller.
-    dismiss(true, completion: nil)
+    dismiss(animated: true, completion: nil)
 }
 ```
 
@@ -253,7 +253,7 @@ The source in the *ResearchKit* repository is made available under the following
 another license is explicitly identified:
 
 ```
-Copyright (c) 2015, Apple Inc. All rights reserved.
+Copyright (c) 2015 - 2017, Apple Inc. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:

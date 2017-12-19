@@ -62,6 +62,7 @@
 
 @end
 
+
 @implementation ORKIBValueRangeGraphChartViewDataSource
 
 - (ORKValueRange *)graphChartView:(ORKGraphChartView *)graphChartView dataPointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
@@ -723,7 +724,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 }
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    void (^updateScrubberLinePosition)() = ^{
+    void (^updateScrubberLinePosition)(void) = ^{
         self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
     };
     BOOL scrubberlineAnimated = (self.scrubberLine.alpha > 0);
@@ -1052,7 +1053,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 @end
 
-    
+
 @implementation ORKValueRangeGraphChartView {
     NSMutableArray<NSMutableArray<CALayer *> *> *_pointLayers;
             }

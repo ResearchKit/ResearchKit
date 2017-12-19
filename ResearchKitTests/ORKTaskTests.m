@@ -630,8 +630,8 @@ ORKDefineStringKey(DefaultDestinationStepIdentifier);
 
 static const NSInteger AdditionalIntegerValue = 42;
 
-static NSDate *(^Date)() = ^NSDate *{ return [NSDate dateWithTimeIntervalSince1970:60*60*24]; };
-static NSDateComponents *(^DateComponents)() = ^NSDateComponents *{
+static NSDate *(^Date)(void) = ^NSDate *{ return [NSDate dateWithTimeIntervalSince1970:60*60*24]; };
+static NSDateComponents *(^DateComponents)(void) = ^NSDateComponents *{
     NSDateComponents *dateComponents = [NSDateComponents new];
     dateComponents.hour = 6;
     dateComponents.minute = 6;
@@ -1726,6 +1726,7 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
 
 
 @end
+
 
 @implementation MethodObject
 @end

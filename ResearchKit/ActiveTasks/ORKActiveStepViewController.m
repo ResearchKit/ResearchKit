@@ -45,6 +45,7 @@
 #import "ORKRecorder_Internal.h"
 
 #import "ORKActiveStep_Internal.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKResult.h"
 #import "ORKTask.h"
 

@@ -120,28 +120,30 @@
 }
 
 - (void)orientationDidChange {
-    AVCaptureVideoOrientation orientation;
-    switch ([[UIApplication sharedApplication] statusBarOrientation]) {
-        case UIInterfaceOrientationLandscapeRight:
-            orientation = AVCaptureVideoOrientationLandscapeRight;
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            orientation = AVCaptureVideoOrientationLandscapeLeft;
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
-            break;
-        case UIInterfaceOrientationPortrait:
-            orientation = AVCaptureVideoOrientationPortrait;
-            break;
-        case UIInterfaceOrientationUnknown:
-            // Do nothing in these cases, since we don't need to change display orientation.
-            return;
-    }
-    
-    [_previewView setVideoOrientation:orientation];
-    [self.delegate videoOrientationDidChange:orientation];
-    [self setNeedsUpdateConstraints];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
+        switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+            case UIInterfaceOrientationLandscapeRight:
+                orientation = AVCaptureVideoOrientationLandscapeRight;
+                break;
+            case UIInterfaceOrientationLandscapeLeft:
+                orientation = AVCaptureVideoOrientationLandscapeLeft;
+                break;
+            case UIInterfaceOrientationPortraitUpsideDown:
+                orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+                break;
+            case UIInterfaceOrientationPortrait:
+                orientation = AVCaptureVideoOrientationPortrait;
+                break;
+            case UIInterfaceOrientationUnknown:
+                // Do nothing in these cases, since we don't need to change display orientation.
+                return;
+        }
+        
+        [_previewView setVideoOrientation:orientation];
+        [self.delegate videoOrientationDidChange:orientation];
+        [self setNeedsUpdateConstraints];
+    });
 }
 
 - (void)setVideoCaptureStep:(ORKVideoCaptureStep *)videoCaptureStep {
@@ -400,7 +402,7 @@
     }
 }
 
--(NSString *)formattedTimeFromSeconds:(CGFloat)seconds {
+- (NSString *)formattedTimeFromSeconds:(CGFloat)seconds {
     if (!_dateComponentsFormatter) {
         _dateComponentsFormatter = [NSDateComponentsFormatter new];
         _dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;

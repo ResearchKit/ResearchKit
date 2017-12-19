@@ -61,19 +61,23 @@ class ConsentDocument: ORKConsentDocument {
             .studyTasks,
             .withdrawing
         ]
+        sections = []
         
-        sections = zip(sectionTypes, ipsum).map { sectionType, ipsum in
+        for sectionType in sectionTypes {
             let section = ORKConsentSection(type: sectionType)
             
-            let localizedIpsum = NSLocalizedString(ipsum, comment: "")
+            let localizedIpsum = NSLocalizedString(ipsum[sectionTypes.index(of: sectionType)!], comment: "")
             let localizedSummary = localizedIpsum.components(separatedBy: ".")[0] + "."
             
             section.summary = localizedSummary
             section.content = localizedIpsum
-            
-            return section
+            if sections == nil {
+                sections = [section]
+            } else {
+            sections!.append(section)
+            }
         }
-
+        
         let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "ConsentDocumentParticipantSignature")
         addSignature(signature)
     }

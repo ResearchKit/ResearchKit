@@ -103,7 +103,7 @@ static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 
 - (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate {
     return [super initWithTarget:scrollView
-                        keyPaths:@[@"contentOffset"]
+                        keyPaths:@[ @"contentOffset" ]
                         delegate:delegate
                           action:@selector(observedScrollViewDidScroll:)
                          context:_ORKScrollViewObserverContext];

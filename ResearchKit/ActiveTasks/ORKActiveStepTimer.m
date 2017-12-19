@@ -47,6 +47,7 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     return elapsedNano * 1.0 / NSEC_PER_SEC;
 }
 
+
 @implementation ORKActiveStepTimer {
     uint64_t _startTime;
     NSTimeInterval _preExistingRuntime;
