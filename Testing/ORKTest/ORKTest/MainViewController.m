@@ -55,6 +55,7 @@ NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *TestButtonTable()
                         @"Audio",
                         @"Fitness",
                         @"GAIT",
+                        @"Go-No-Go",
                         @"Hand Tremor",
                         @"Hand (Right) Tremor",
                         @"Hole Peg Test",
@@ -384,7 +385,9 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
 - (NSString *)taskIdentifierFromButtonTitle:(NSString *)buttonTitle {
     // "THIS (FOO) baR title" is converted to the "ThisFooBarTitleTaskIdentifier" selector
     buttonTitle = RemoveParenthesisAndCapitalizeString(buttonTitle);
-    NSMutableArray *titleTokens = [[buttonTitle componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] mutableCopy];
+    NSMutableCharacterSet *characters = [[NSCharacterSet whitespaceCharacterSet] mutableCopy];
+    [characters addCharactersInString:@"-"];
+    NSArray *titleTokens = [buttonTitle componentsSeparatedByCharactersInSet:characters];
     NSString *taskIdentifier = [NSString stringWithFormat:@"%@TaskIdentifier", [titleTokens componentsJoinedByString:@""]];
     return taskIdentifier;
 }

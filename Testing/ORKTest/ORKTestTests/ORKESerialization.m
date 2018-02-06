@@ -683,6 +683,20 @@ encondingTable =
              return [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{})),
+   ENTRY(ORKGoNoGoStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKGoNoGoStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(maximumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(minimumStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeout, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(numberOfAttempts, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(thresholdAcceleration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(successSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeoutSound, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(failureSound, NSNumber, NSObject, YES, nil, nil),
+            })),
    ENTRY(ORKHolePegTestPlaceStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1266,6 +1280,27 @@ encondingTable =
                     ^id(id string) { return ORKEDateFromStringISO8601(string); }),
            PROPERTY(userInfo, NSDictionary, NSObject, YES, nil, nil)
            })),
+    ENTRY(ORKGoNoGoResult,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(timeToThreshold, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(go, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(incorrect, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(samples, ORKGoNoGoSample, NSArray, YES, nil, nil),
+            })),
+    ENTRY(ORKGoNoGoSample,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(vectorMagnitude, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(accelX, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(accelY, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(accelZ, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(gyroX, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(gyroY, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(gyroZ, NSNumber, NSObject, YES, nil, nil),
+            })),
   ENTRY(ORKTappingSample,
         nil,
         (@{

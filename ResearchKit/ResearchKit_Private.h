@@ -54,6 +54,7 @@
 #import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
+#import <ResearchKit/ORKGoNoGoStep.h>
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKPSATStep.h>
@@ -78,6 +79,7 @@
 #import <ResearchKit/ORKConsentSharingStepViewController.h>
 #import <ResearchKit/ORKCountdownStepViewController.h>
 #import <ResearchKit/ORKFitnessStepViewController.h>
+#import <ResearchKit/ORKGoNoGoViewController.h>
 #import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
 #import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>

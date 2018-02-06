@@ -86,6 +86,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case passcode
     case audio
     case fitness
+    case gonogoTest
     case holePegTest
     case psat
     case reactionTime
@@ -159,6 +160,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .audio,
                     .fitness,
+                    .gonogoTest,
                     .holePegTest,
                     .psat,
                     .reactionTime,
@@ -270,6 +272,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .fitness:
             return NSLocalizedString("Fitness Check", comment: "")
+            
+        case .gonogoTest:
+            return NSLocalizedString("Go No Go Test", comment: "")
         
         case .holePegTest:
             return NSLocalizedString("Hole Peg Test", comment: "")
@@ -481,6 +486,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Active tasks.
         case audioTask
         case fitnessTask
+        case gonogoTest
         case holePegTestTask
         case psatTask
         case reactionTime
@@ -594,6 +600,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .fitness:
             return fitnessTask
+            
+        case .gonogoTest:
+            return gonogoTask
             
         case .holePegTest:
             return holePegTestTask
@@ -1387,6 +1396,14 @@ enum TaskListRow: Int, CustomStringConvertible {
     */
     private var fitnessTask: ORKTask {
         return ORKOrderedTask.fitnessCheck(withIdentifier: String(describing:Identifier.fitnessTask), intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: [])
+    }
+    
+    /// This task presents a go no go task
+    private var gonogoTask: ORKTask {
+        /// An example of a custom sound.
+        let successSoundURL = Bundle.main.url(forResource:"tap", withExtension: "aif")!
+        let successSound = SystemSound(soundURL: successSoundURL)!
+        return ORKOrderedTask.gonogoTask(withIdentifier: String(describing:Identifier.reactionTime), intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 9, timeout: 3, successSound: successSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }
     
     /// This task presents the Hole Peg Test pre-defined active task.
