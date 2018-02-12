@@ -78,8 +78,14 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    [_templateImageView setContentHuggingPriority:1 forAxis:UILayoutConstraintAxisHorizontal];
-    [_templateImageView setContentHuggingPriority:1 forAxis:UILayoutConstraintAxisVertical];
+    [_templateImageView setContentHuggingPriority:0 forAxis:UILayoutConstraintAxisHorizontal];
+    [_templateImageView setContentHuggingPriority:0 forAxis:UILayoutConstraintAxisVertical];
+    [_templateImageView setContentCompressionResistancePriority:0 forAxis:UILayoutConstraintAxisHorizontal];
+    [_templateImageView setContentCompressionResistancePriority:0 forAxis:UILayoutConstraintAxisVertical];
+    [_capturedImageView setContentHuggingPriority:0 forAxis:UILayoutConstraintAxisHorizontal];
+    [_capturedImageView setContentHuggingPriority:0 forAxis:UILayoutConstraintAxisVertical];
+    [_capturedImageView setContentCompressionResistancePriority:0 forAxis:UILayoutConstraintAxisHorizontal];
+    [_capturedImageView setContentCompressionResistancePriority:0 forAxis:UILayoutConstraintAxisVertical];
     
     // Make the insets for the template image view changeable later
     _templateImageViewTopInsetConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
@@ -120,11 +126,11 @@
     
     // Make the captured image view use the available space (taking into account the layout margins)
     NSDictionary *views = @{ @"capturedImageView": _capturedImageView };
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[capturedImageView]-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[capturedImageView]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[capturedImageView]-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[capturedImageView]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:views]];
