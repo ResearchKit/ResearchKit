@@ -50,6 +50,7 @@
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
+    NSString *_defaultTextAnswer;
 }
 
 - (void)applyAnswerFormat {
@@ -58,6 +59,7 @@
     if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
         ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
         _maxLength = [textAnswerFormat maximumLength];
+        _defaultTextAnswer = textAnswerFormat.defaultTextAnswer;
         self.textView.autocorrectionType = textAnswerFormat.autocorrectionType;
         self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
@@ -106,9 +108,19 @@
     [super prepareView];
 }
 
+- (void)assignDefaultAnswer {
+    if (_defaultTextAnswer) {
+        [self ork_setAnswer:_defaultTextAnswer];
+        if (self.textView) {
+            self.textView.text = _defaultTextAnswer;
+        }
+    }
+}
+
 - (void)answerDidChange {
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
+    [self assignDefaultAnswer];
 }
 
 - (void)setUpConstraints {

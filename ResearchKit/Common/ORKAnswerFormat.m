@@ -1505,6 +1505,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, minimum, NSNumber);
         ORK_DECODE_OBJ_CLASS(aDecoder, maximum, NSNumber);
+        ORK_DECODE_OBJ_CLASS(aDecoder, defaultNumericAnswer, NSNumber);
         ORK_DECODE_OBJ_CLASS(aDecoder, maximumFractionDigits, NSNumber);
     }
     return self;
@@ -1516,6 +1517,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, unit);
     ORK_ENCODE_OBJ(aCoder, minimum);
     ORK_ENCODE_OBJ(aCoder, maximum);
+    ORK_ENCODE_OBJ(aCoder, defaultNumericAnswer);
     ORK_ENCODE_OBJ(aCoder, maximumFractionDigits);
 
 }
@@ -1530,6 +1532,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                                                                                     minimum:[_minimum copy]
                                                                                     maximum:[_maximum copy]
                                                                       maximumFractionDigits:[_maximumFractionDigits copy]];
+    answerFormat->_defaultNumericAnswer = [_defaultNumericAnswer copy];
     return answerFormat;
 }
 
@@ -1541,6 +1544,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             ORKEqualObjects(self.unit, castObject.unit) &&
             ORKEqualObjects(self.minimum, castObject.minimum) &&
             ORKEqualObjects(self.maximum, castObject.maximum) &&
+            ORKEqualObjects(self.defaultNumericAnswer, castObject.defaultNumericAnswer) &&
             ORKEqualObjects(self.maximumFractionDigits, castObject.maximumFractionDigits) &&
             (_style == castObject.style));
 }
@@ -2341,6 +2345,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_maximumLength = _maximumLength;
     answerFormat->_validationRegularExpression = [_validationRegularExpression copy];
     answerFormat->_invalidMessage = [_invalidMessage copy];
+    answerFormat->_defaultTextAnswer = [_defaultTextAnswer copy];
     answerFormat->_autocapitalizationType = _autocapitalizationType;
     answerFormat->_autocorrectionType = _autocorrectionType;
     answerFormat->_spellCheckingType = _spellCheckingType;
@@ -2426,6 +2431,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
         ORK_DECODE_OBJ_CLASS(aDecoder, validationRegularExpression, NSRegularExpression);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, defaultTextAnswer, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
@@ -2441,6 +2447,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
     ORK_ENCODE_OBJ(aCoder, validationRegularExpression);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
+    ORK_ENCODE_OBJ(aCoder, defaultTextAnswer);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
@@ -2461,12 +2468,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             (self.maximumLength == castObject.maximumLength &&
              ORKEqualObjects(self.validationRegularExpression, castObject.validationRegularExpression) &&
              ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
+             ORKEqualObjects(self.defaultTextAnswer, castObject.defaultTextAnswer) &&
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines) &&
-            self.secureTextEntry == castObject.secureTextEntry);
+             self.secureTextEntry == castObject.secureTextEntry);
 }
 
 static NSString *const kSecureTextEntryEscapeString = @"*";
