@@ -78,6 +78,9 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
+    [_templateImageView setContentHuggingPriority:1 forAxis:UILayoutConstraintAxisHorizontal];
+    [_templateImageView setContentHuggingPriority:1 forAxis:UILayoutConstraintAxisVertical];
+    
     // Make the insets for the template image view changeable later
     _templateImageViewTopInsetConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
                                                               attribute:NSLayoutAttributeTop

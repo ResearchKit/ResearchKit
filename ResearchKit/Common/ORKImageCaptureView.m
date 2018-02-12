@@ -215,7 +215,7 @@
                                                                                         views:views]];
     
     [_variableConstraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-(>=0)-|"
                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                              metrics:nil
                                                views:views]];
