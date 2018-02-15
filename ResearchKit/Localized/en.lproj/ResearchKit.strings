@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
 "DOB_FORM_ITEM_TITLE" = "Date of Birth";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Phone Number";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verification";
