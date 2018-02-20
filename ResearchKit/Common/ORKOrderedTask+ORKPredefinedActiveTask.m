@@ -1411,7 +1411,6 @@ NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
     return task;
 }
 
-
 #pragma mark - timedWalkTask
 
 NSString *const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
@@ -1420,141 +1419,6 @@ NSString *const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.ass
 NSString *const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
 NSString *const ORKTimedWalkTurnAroundStepIdentifier = @"timed.walk.turn.around";
 NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
-
-+ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
-                         intendedUseDescription:(nullable NSString *)intendedUseDescription
-                               distanceInMeters:(double)distanceInMeters
-                                      timeLimit:(NSTimeInterval)timeLimit
-                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
-                                        options:(ORKPredefinedTaskOption)options {
-
-    NSMutableArray *steps = [NSMutableArray array];
-
-    NSLengthFormatter *lengthFormatter = [NSLengthFormatter new];
-    lengthFormatter.numberFormatter.maximumFractionDigits = 1;
-    lengthFormatter.numberFormatter.maximumSignificantDigits = 3;
-    NSString *formattedLength = [lengthFormatter stringFromMeters:distanceInMeters];
-
-    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            step.title = ORKLocalizedString(@"TIMED_WALK_TITLE", nil);
-            step.text = intendedUseDescription;
-            step.detailText = ORKLocalizedString(@"TIMED_WALK_INTRO_DETAIL", nil);
-            step.shouldTintImages = YES;
-
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-
-    if (includeAssistiveDeviceForm) {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:ORKTimedWalkFormStepIdentifier
-                                                              title:ORKLocalizedString(@"TIMED_WALK_FORM_TITLE", nil)
-                                                               text:ORKLocalizedString(@"TIMED_WALK_FORM_TEXT", nil)];
-
-        ORKAnswerFormat *answerFormat1 = [ORKAnswerFormat booleanAnswerFormat];
-        ORKFormItem *formItem1 = [[ORKFormItem alloc] initWithIdentifier:ORKTimedWalkFormAFOStepIdentifier
-                                                                    text:ORKLocalizedString(@"TIMED_WALK_QUESTION_TEXT", nil)
-                                                            answerFormat:answerFormat1];
-        formItem1.optional = NO;
-
-        NSArray *textChoices = @[ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE", nil),
-                                 ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_2", nil),
-                                 ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_3", nil),
-                                 ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_4", nil),
-                                 ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_5", nil),
-                                 ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_6", nil)];
-        ORKAnswerFormat *answerFormat2 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
-        ORKFormItem *formItem2 = [[ORKFormItem alloc] initWithIdentifier:ORKTimedWalkFormAssistanceStepIdentifier
-                                                                    text:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_TITLE", nil)
-                                                            answerFormat:answerFormat2];
-        formItem2.placeholder = ORKLocalizedString(@"TIMED_WALK_QUESTION_2_TEXT", nil);
-        formItem2.optional = NO;
-
-        step.formItems = @[formItem1, formItem2];
-        step.optional = NO;
-
-        ORKStepArrayAddStep(steps, step);
-    }
-
-    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = ORKLocalizedString(@"TIMED_WALK_TITLE", nil);
-            step.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TIMED_WALK_INTRO_2_TEXT_%@", nil), formattedLength];
-            step.detailText = ORKLocalizedString(@"TIMED_WALK_INTRO_2_DETAIL", nil);
-            step.image = [UIImage imageNamed:@"timer" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.shouldTintImages = YES;
-
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-
-    {
-        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
-        step.stepDuration = 5.0;
-
-        ORKStepArrayAddStep(steps, step);
-    }
-    
-    {
-        NSMutableArray *recorderConfigurations = [NSMutableArray array];
-        if (!(options & ORKPredefinedTaskOptionExcludePedometer)) {
-            [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];
-        }
-        if (!(options & ORKPredefinedTaskOptionExcludeAccelerometer)) {
-            [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
-                                                                                                      frequency:100]];
-        }
-        if (!(options & ORKPredefinedTaskOptionExcludeDeviceMotion)) {
-            [recorderConfigurations addObject:[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier
-                                                                                                     frequency:100]];
-        }
-        if (! (options & ORKPredefinedTaskOptionExcludeLocation)) {
-            [recorderConfigurations addObject:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:ORKLocationRecorderIdentifier]];
-        }
-
-        {
-            ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTrial1StepIdentifier];
-            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_%@", nil), formattedLength];
-            step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.recorderConfigurations = recorderConfigurations;
-            step.distanceInMeters = distanceInMeters;
-            step.shouldTintImages = YES;
-            step.image = [UIImage imageNamed:@"timed-walkingman-outbound" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-
-            ORKStepArrayAddStep(steps, step);
-        }
-
-        {
-            ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTrial2StepIdentifier];
-            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_2", nil), formattedLength];
-            step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.recorderConfigurations = recorderConfigurations;
-            step.distanceInMeters = distanceInMeters;
-            step.shouldTintImages = YES;
-            step.image = [UIImage imageNamed:@"timed-walkingman-return" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-
-    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-
-        ORKStepArrayAddStep(steps, step);
-    }
-
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    return task;
-}
-
-
-#pragma mark - timedWalkTask
 
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -1665,17 +1529,19 @@ NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
         }
 
         {
-            ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
-            step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
-            step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.recorderConfigurations = recorderConfigurations;
-            step.distanceInMeters = 1;
-            step.shouldTintImages = YES;
-            step.image = [UIImage imageNamed:@"turnaround" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.stepDuration = turnAroundTimeLimit == 0 ? CGFLOAT_MAX : turnAroundTimeLimit;
+            if (turnAroundTimeLimit != -1) {
+                ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
+                step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
+                step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
+                step.spokenInstruction = step.title;
+                step.recorderConfigurations = recorderConfigurations;
+                step.distanceInMeters = 1;
+                step.shouldTintImages = YES;
+                step.image = [UIImage imageNamed:@"turnaround" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                step.stepDuration = turnAroundTimeLimit == 0 ? CGFLOAT_MAX : turnAroundTimeLimit;
 
-            ORKStepArrayAddStep(steps, step);
+                ORKStepArrayAddStep(steps, step);
+            }
         }
 
         {

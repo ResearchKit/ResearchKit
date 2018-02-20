@@ -44,6 +44,25 @@
 
 @end
 
+@implementation ORKOrderedTask (Deprecated)
+
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options {
+    return [self timedWalkTaskWithIdentifier:identifier
+                      intendedUseDescription:intendedUseDescription
+                            distanceInMeters:distanceInMeters
+                                   timeLimit:timeLimit
+                         turnAroundTimeLimit:-1
+                  includeAssistiveDeviceForm:includeAssistiveDeviceForm
+                                     options:options];
+}
+
+@end
+
 
 @implementation ORKTextAnswerFormat (Deprecated)
 
