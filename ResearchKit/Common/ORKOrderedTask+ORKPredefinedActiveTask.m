@@ -1458,12 +1458,12 @@ NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
                                                             answerFormat:answerFormat1];
         formItem1.optional = NO;
 
-        NSArray *textChoices = @[ [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE", nil)],
-                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_2", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_2", nil)],
-                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_3", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_3", nil)],
-                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_4", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_4", nil)],
-                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_5", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_5", nil)],
-                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_6", nil) value:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_6", nil)] ];
+        NSArray *textChoices = @[ [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE"],
+                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_2", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE_2"],
+                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_3", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE_3"],
+                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_4", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE_4"],
+                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_5", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE_5"],
+                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_CHOICE_6", nil) value:@"TIMED_WALK_QUESTION_2_CHOICE_6"] ];
         ORKAnswerFormat *answerFormat2 = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
         ORKFormItem *formItem2 = [[ORKFormItem alloc] initWithIdentifier:ORKTimedWalkFormAssistanceStepIdentifier
                                                                     text:ORKLocalizedString(@"TIMED_WALK_QUESTION_2_TITLE", nil)
@@ -1529,7 +1529,7 @@ NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
         }
 
         {
-            if (turnAroundTimeLimit != -1) {
+            if (turnAroundTimeLimit >= 0) {
                 ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
                 step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
                 step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
