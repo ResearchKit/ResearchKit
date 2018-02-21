@@ -111,7 +111,7 @@
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_webView][_toolbar]-|"
                                                                              options:(NSLayoutFormatOptions)0 metrics:nil
                                                                                views:views]];
     
