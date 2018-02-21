@@ -36,10 +36,10 @@
 @class ORKNavigableOrderedTask;
 
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns a predefined task that measures the upper extremity function.
@@ -635,6 +635,11 @@ NS_ASSUME_NONNULL_BEGIN
                                         trailType:(ORKTrailMakingTypeIdentifier)trailType
                                           options:(ORKPredefinedTaskOption)options;
 
+NS_ASSUME_NONNULL_END
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromData:(NSData *)data;
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromDictionary:(NSDictionary *)dictionary;
+
 @end
 
-NS_ASSUME_NONNULL_END
