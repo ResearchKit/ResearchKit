@@ -44,7 +44,13 @@
 
 
 #define radiansToDegrees(radians) ((radians) * 180.0 / M_PI)
+
 #define allOrientationsForPitch(x, w, y, z) (atan2(2.0 * (x*w + y*z), 1.0 - 2.0 * (x*x + z*z)))
+
+#define allOrientationsForRoll(x, w, y, z) (atan2(2.0 * (y*w - x*z), 1.0 - 2.0 * (y*y + z*z)))
+
+#define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y + w*z)))
+
 
 @interface ORKRangeOfMotionContentView : ORKActiveStepCustomView {
     NSLayoutConstraint *_topConstraint;
@@ -189,7 +195,12 @@
     }
     double angle;
     if (UIInterfaceOrientationIsLandscape(_orientation)) {
-        angle = radiansToDegrees(attitude.roll);
+        double x = attitude.quaternion.x;
+        double w = attitude.quaternion.w;
+        double y = attitude.quaternion.y;
+        double z = attitude.quaternion.z;
+        angle = radiansToDegrees(allOrientationsForRoll(x, w, y, z));
+        
     } else {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
@@ -207,12 +218,15 @@
     ORKStepResult *stepResult = [super result];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = _flexedAngle;
-    result.extended = result.flexed - _rangeOfMotionAngle;
     
+    result.flexed = 90.0 - _flexedAngle;
+    result.extended = _rangeOfMotionAngle - result.flexed;
+
+
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return stepResult;
 }
+
 
 @end
