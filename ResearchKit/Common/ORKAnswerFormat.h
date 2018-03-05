@@ -1165,6 +1165,11 @@ Returns an initialized numeric answer format using the specified style, unit des
  */
 @property (copy, nullable) NSNumber *maximumFractionDigits;
 
+/**
+ The default numeric answer.
+ */
+@property (copy, nullable) NSNumber *defaultNumericAnswer;
+
 @end
 
 
@@ -1346,6 +1351,13 @@ ORK_CLASS_AVAILABLE
  The default value is nil.
  */
 @property (nonatomic, copy, nullable) NSString *invalidMessage;
+
+/**
+ The text to be used as an answer if user input is not mandatory.
+ 
+ The default value is nil. If set to nil, user input is mandatory to answer.
+ */
+@property (nonatomic, copy, nullable) NSString *defaultTextAnswer;
 
 /**
  The maximum length of the text users can enter.
