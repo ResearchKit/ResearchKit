@@ -372,6 +372,10 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     
     // Make sure it can't escape out the right of the view
     suffixFrame.origin.x = MIN(xOffset, xMaximum);
+    
+    suffixFrame.size.height = CGRectGetHeight(self.bounds);
+    suffixFrame.origin.y = 0;
+    
     return suffixFrame;
 }
 
