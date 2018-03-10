@@ -638,7 +638,9 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     ORKPasscodeTextField *passcodeTextField = _passcodeStepView.textField;
-    [passcodeTextField insertText:string];
+    if (passcodeTextField.text.length < passcodeTextField.numberOfDigits) {
+        [passcodeTextField insertText:string];
+    }
 
     // Disable input while changing states.
     if (_isChangingState) {
