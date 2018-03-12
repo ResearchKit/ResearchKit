@@ -496,7 +496,7 @@ NS_ASSUME_NONNULL_BEGIN
  localized text is displayed.
  @param distanceInMeters            The timed walk distance in meters.
  @param timeLimit                   The time limit to complete the trials.
- @param turnAroundTimeLimit         The time limit to complete the turn around step, passing a negative value to this parameter will bypass the turnAroundTime step.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step, passing zero or negative value to this parameter will bypass the turnAroundTime step.
  @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
  about the usage of an assistive device.
  @param options                     Options that affect the features of the predefined task.

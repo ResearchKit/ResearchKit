@@ -1529,7 +1529,7 @@ NSString *const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
         }
 
         {
-            if (turnAroundTimeLimit >= 0) {
+            if (turnAroundTimeLimit > 0) {
                 ORKTimedWalkStep *step = [[ORKTimedWalkStep alloc] initWithIdentifier:ORKTimedWalkTurnAroundStepIdentifier];
                 step.title = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TURN", nil);
                 step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
