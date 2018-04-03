@@ -169,6 +169,22 @@
     return task;
 }
 
+- (id<ORKTask>)makeGoNoGoTaskWithIdentifier:(NSString *)identifier {
+    ORKOrderedTask *task = [ORKOrderedTask gonogoTaskWithIdentifier:identifier
+                                                    intendedUseDescription:nil
+                                                   maximumStimulusInterval:8
+                                                   minimumStimulusInterval:4
+                                                     thresholdAcceleration:0.5
+                                                          numberOfAttempts:9
+                                                                   timeout:10
+                                                              successSound:0
+                                                              timeoutSound:0
+                                                              failureSound:0
+                                                                   options:0];
+    task.hidesLearnMoreButtonOnInstructionStep = YES;
+    return task;
+}
+
 - (id<ORKTask>)makeHandTremorTaskWithIdentifier:(NSString *)identifier {
     ORKOrderedTask *task = [ORKOrderedTask tremorTestTaskWithIdentifier:identifier
                                                  intendedUseDescription:nil

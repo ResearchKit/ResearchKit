@@ -1,6 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2017, Sage Bionetworks
+ Copyright (c) 2017, Roland Rabien. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,16 +29,33 @@
  */
 
 
-#import <ResearchKit/ORKFileResult.h>
-#import <ResearchKit/ORKGoNoGoResult.h>
-#import <ResearchKit/ORKHolePegTestResult.h>
-#import <ResearchKit/ORKPSATResult.h>
-#import <ResearchKit/ORKRangeOfMotionResult.h>
-#import <ResearchKit/ORKReactionTimeResult.h>
-#import <ResearchKit/ORKSpatialSpanMemoryResult.h>
-#import <ResearchKit/ORKStroopResult.h>
-#import <ResearchKit/ORKTappingIntervalResult.h>
-#import <ResearchKit/ORKTimedWalkResult.h>
-#import <ResearchKit/ORKToneAudiometryResult.h>
-#import <ResearchKit/ORKTowerOfHanoiResult.h>
-#import <ResearchKit/ORKTrailmakingResult.h>
+@import Foundation;
+@import AudioToolbox;
+#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ORKActiveStep.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
+
+ORK_CLASS_AVAILABLE
+@interface ORKGoNoGoStep : ORKActiveStep
+
+@property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval timeout;
+
+@property (nonatomic, assign) NSInteger numberOfAttempts;
+
+@property (nonatomic, assign) double thresholdAcceleration;
+
+@property (nonatomic, assign) SystemSoundID successSound;
+
+@property (nonatomic, assign) SystemSoundID timeoutSound;
+
+@property (nonatomic, assign) SystemSoundID failureSound;
+
+@end
+
+NS_ASSUME_NONNULL_END

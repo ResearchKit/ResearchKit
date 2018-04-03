@@ -50,6 +50,7 @@
 #import "ORKAudioStep.h"
 #import "ORKCompletionStep.h"
 #import "ORKCountdownStep.h"
+#import "ORKGoNoGoStep.h"
 #import "ORKHolePegTestPlaceStep.h"
 #import "ORKHolePegTestRemoveStep.h"
 #import "ORKTouchAnywhereStep.h"
@@ -154,6 +155,71 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 @implementation ORKOrderedTask (ORKPredefinedActiveTask)
+
+#pragma mark - gonogoTask
+
+NSString *const ORKGoNoGoStepIdentifier = @"gonogo";
+
++ (ORKOrderedTask *)gonogoTaskWithIdentifier:(NSString *)identifier
+                      intendedUseDescription:(nullable NSString *)intendedUseDescription
+                     maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                     minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                       thresholdAcceleration:(double)thresholdAcceleration
+                            numberOfAttempts:(int)numberOfAttempts
+                                     timeout:(NSTimeInterval)timeout
+                                successSound:(SystemSoundID)successSoundID
+                                timeoutSound:(SystemSoundID)timeoutSoundID
+                                failureSound:(SystemSoundID)failureSoundID
+                                     options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"GONOGO_TASK_TITLE", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"GONOGO_TASK_INTENDED_USE", nil);
+            step.image = [UIImage imageNamed:@"phoneshake" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = ORKLocalizedString(@"GONOGO_TASK_TITLE", nil);
+            step.text = [NSString stringWithFormat: ORKLocalizedString(@"GONOGO_TASK_INTRO_TEXT_FORMAT", nil), numberOfAttempts];
+            step.detailText = ORKLocalizedString(@"GONOGO_TASK_CALL_TO_ACTION", nil);
+            step.image = [UIImage imageNamed:@"phoneshakecircle" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    ORKGoNoGoStep *step = [[ORKGoNoGoStep alloc] initWithIdentifier:ORKGoNoGoStepIdentifier];
+    step.maximumStimulusInterval = maximumStimulusInterval;
+    step.minimumStimulusInterval = minimumStimulusInterval;
+    step.thresholdAcceleration = thresholdAcceleration;
+    step.numberOfAttempts = numberOfAttempts;
+    step.timeout = timeout;
+    step.successSound = successSoundID;
+    step.timeoutSound = timeoutSoundID;
+    step.failureSound = failureSoundID;
+    step.recorderConfigurations = @[ [[ORKDeviceMotionRecorderConfiguration  alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency: 100]];
+    
+    ORKStepArrayAddStep(steps, step);
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
 
 
 #pragma mark - holePegTestTask
