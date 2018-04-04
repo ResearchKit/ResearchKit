@@ -678,11 +678,6 @@ encondingTable =
         (@{
            PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
            })),
-   ENTRY(ORKToneAudiometryPracticeStep,
-         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-         },
-         (@{})),
    ENTRY(ORKHolePegTestPlaceStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:GETPROP(dict, identifier)];

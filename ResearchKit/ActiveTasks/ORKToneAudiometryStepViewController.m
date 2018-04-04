@@ -158,11 +158,17 @@
 
 - (void)start {
     [super start];
-    
-    [self startCurrentTest];
+    if (self.toneAudiometryStep.isPracticeStep == YES) {
+        [self.audioGenerator playSoundAtFrequency:1000.0];
+    } else {
+        [self startCurrentTest];
+    }
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
+    if (self.toneAudiometryStep.isPracticeStep == YES) {
+        [self finish];
+    }
     if (self.samples == nil) {
         _samples = [NSMutableArray array];
     }

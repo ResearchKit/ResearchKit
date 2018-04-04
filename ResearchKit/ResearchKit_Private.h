@@ -64,7 +64,6 @@
 #import <ResearchKit/ORKStroopStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 #import <ResearchKit/ORKTrailmakingStep.h>
@@ -88,7 +87,6 @@
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
 #import <ResearchKit/ORKStroopStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>

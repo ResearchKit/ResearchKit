@@ -59,6 +59,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKToneAudiometryStep *step = [super copyWithZone:zone];
     step.toneDuration = self.toneDuration;
+    step.isPracticeStep = self.isPracticeStep;
     return step;
 }
 
@@ -66,6 +67,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_DOUBLE(aDecoder, toneDuration);
+        ORK_DECODE_BOOL(aDecoder, isPracticeStep);
     }
     return self;
 }
@@ -73,6 +75,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, toneDuration);
+    ORK_DECODE_BOOL(aCoder, isPracticeStep);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -83,8 +86,9 @@
     BOOL isParentSame = [super isEqual:object];
 
     __typeof(self) castObject = object;
-    return (isParentSame &&
-            (self.toneDuration == castObject.toneDuration)) ;
+    return (isParentSame
+            && (self.toneDuration == castObject.toneDuration)
+            && (self.isPracticeStep == castObject.isPracticeStep)) ;
 }
 
 @end
