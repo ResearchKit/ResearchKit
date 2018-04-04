@@ -45,6 +45,7 @@
     if (self) {
         self.text = ORKLocalizedString(@"TOUCH_ANYWHERE_LABEL", nil);
         self.title = instructionText;
+        self.shouldStartTimerAutomatically = YES;
     }
     return self;
 }
