@@ -47,7 +47,7 @@
 
 @implementation ORKMockHTMLPDFWriter
 
-- (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *, NSError *))completionBlock {
+- (void)writePDFFromHTML:(NSString *)html completionBlock:(void (^)(NSData *, NSError *))completionBlock {
     self.html = html;
     self.completionBlock = completionBlock;
 }

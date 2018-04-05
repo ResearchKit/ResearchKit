@@ -90,8 +90,8 @@
 }
 
 - (void)makePDFWithCompletionHandler:(void (^)(NSData *data, NSError *error))completionBlock {
-    [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil]
-          withCompletionBlock:^(NSData *data, NSError *error) {
+    [_writer writePDFFromHTML:[self htmlForMobile:NO title:nil detail:nil]
+          completionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
             // condition (can only happen if they pass us really invalid content).
@@ -104,7 +104,7 @@
 
 - (void)makeCustomPDFWithRenderer:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
     _writer.printRenderer = renderer;
-    return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
+    return [_writer writePDFFromHTML:[self htmlForMobile:NO title:nil detail:nil] completionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
             // condition (can only happen if they pass us really invalid content).
@@ -120,7 +120,7 @@
 #pragma mark - Private
 
 - (NSString *)mobileHTMLWithTitle:(NSString *)title detail:(NSString *)detail {
-    return [self htmlForMobile:YES withTitle:title detail:detail];
+    return [self htmlForMobile:YES title:title detail:detail];
 }
 
 + (NSString *)cssStyleSheet:(BOOL)mobile {
@@ -181,7 +181,7 @@
     return [html copy];
 }
 
-- (NSString *)htmlForMobile:(BOOL)mobile withTitle:(NSString *)title detail:(NSString *)detail {
+- (NSString *)htmlForMobile:(BOOL)mobile title:(NSString *)title detail:(NSString *)detail {
     NSMutableString *body = [NSMutableString new];
     
     // header
