@@ -167,12 +167,22 @@ ORK_CLASS_AVAILABLE
  so the PDF data is returned through a completion block.
  
  @param handler     The handler block for generated PDF data. When successful, the returned
-                    data represents a complete PDF document that represents the consent.
+    data represents a complete PDF document that represents the consent.
  */
 - (void)makePDFWithCompletionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
 
-- (void)makeCustomPDFWithCompletionHandler:(ORKHTMLPDFPageRenderer *)renderer
-                         completionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
+/**
+ Writes the document's content into a PDF file using the specified renderer.
+ 
+ The PDF is generated in a form suitable for printing. This is done asynchronously,
+ so the PDF data is returned through a completion block.
+ 
+ @param render      The PDF renderer.
+ @param handler     The handler block for generated PDF data. When successful, the returned
+    data represents a complete PDF document that represents the consent.
+ */
+- (void)makeCustomPDFWithRenderer:(ORKHTMLPDFPageRenderer *)renderer
+                completionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
 @end
 
 NS_ASSUME_NONNULL_END

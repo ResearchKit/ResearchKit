@@ -102,7 +102,7 @@
     }];
 }
 
-- (void) makeCustomPDFWithCompletionHandler:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
+- (void)makeCustomPDFWithRenderer:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
     _writer.printRenderer = renderer;
     return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
         if (error) {
