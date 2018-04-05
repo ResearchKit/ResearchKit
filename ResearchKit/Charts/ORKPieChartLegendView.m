@@ -182,13 +182,7 @@ static NSString *const CellIdentifier = @"ORKPieChartLegendCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger numberOfReportedCells = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
-    NSInteger numberOfValidLengedCells = numberOfReportedCells;
-    for (NSInteger index = 0; index < numberOfReportedCells; index++) {
-        if (![_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:index]) {
-            numberOfValidLengedCells--;
-        }
-    }
-    return numberOfValidLengedCells;
+    return (NSInteger)[self _validIndexesWithReportedSegmentCount:numberOfReportedCells].count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
