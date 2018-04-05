@@ -49,7 +49,7 @@
 
 #define allOrientationsForRoll(x, w, y, z) (atan2(2.0 * (y*w - x*z), 1.0 - 2.0 * (y*y + z*z)))
 
-#define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y + w*z)))
+#define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y - w*z)))
 
 
 @interface ORKRangeOfMotionContentView : ORKActiveStepCustomView {
