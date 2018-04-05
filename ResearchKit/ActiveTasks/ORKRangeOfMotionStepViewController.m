@@ -218,7 +218,6 @@
     ORKStepResult *stepResult = [super result];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    
     result.flexed = 90.0 - _flexedAngle;
     result.extended = _rangeOfMotionAngle - result.flexed;
 
