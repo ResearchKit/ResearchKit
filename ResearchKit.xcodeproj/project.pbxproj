@@ -462,10 +462,6 @@
 		B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */; };
 		B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B11C54A11A9EF4A700265E61 /* ORKConsentSharingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C549D1A9EF4A700265E61 /* ORKConsentSharingStepViewController.m */; };
-		B12EA0151B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B12EA0131B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B12EA0161B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B12EA0141B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m */; };
-		B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B12EA0171B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B12EA01A1B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B12EA0181B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m */; };
 		B17FE7FD1A8DBE7C00BF9C28 /* Artwork.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 861610BF1A8D8EDD00245F7A /* Artwork.xcassets */; };
 		B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B894391A00345200C5CF2D /* ResearchKit_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B183A4DD1A8535D100C76870 /* ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B1C1DE4F196F541F00F75544 /* ResearchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1110,10 +1106,6 @@
 		B11C549D1A9EF4A700265E61 /* ORKConsentSharingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKConsentSharingStepViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B11DF3B31AA109C8009E76D2 /* AppledocSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		B11DF4C21AA10D70009E76D2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ResearchKit.strings; sourceTree = "<group>"; };
-		B12EA0131B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryPracticeStep.h; sourceTree = "<group>"; };
-		B12EA0141B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryPracticeStep.m; sourceTree = "<group>"; };
-		B12EA0171B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryPracticeStepViewController.h; sourceTree = "<group>"; };
-		B12EA0181B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryPracticeStepViewController.m; sourceTree = "<group>"; };
 		B14660481AA10DD7002F95C2 /* zh_TW */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B183A5951A8535D100C76870 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AABE01A9F08D9003871B5 /* ResearchKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = ResearchKit.modulemap; sourceTree = "<group>"; };
@@ -1442,14 +1434,10 @@
 				147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */,
 				147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */,
 				147503B21AEE807C004B17F3 /* ORKToneAudiometryContentView.m */,
-				B12EA0131B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h */,
-				B12EA0141B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m */,
 				FF919A301E81AC26005C2A1E /* ORKToneAudiometryResult.h */,
 				FF919A311E81AC26005C2A1E /* ORKToneAudiometryResult.m */,
 				147503B31AEE807C004B17F3 /* ORKToneAudiometryStep.h */,
 				147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */,
-				B12EA0171B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h */,
-				B12EA0181B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m */,
 				147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */,
 				147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */,
 			);
@@ -2848,7 +2836,6 @@
 				86C40C761A8D7C5C00081FAC /* HKSample+ORKJSONDictionary.h in Headers */,
 				BA0AA6961EAEC0B600671ACE /* ORKStroopStep.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
-				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
 				2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
 				242C9E111BBE06DE0088B7F4 /* ORKVerificationStepView.h in Headers */,
@@ -2936,7 +2923,6 @@
 				2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */,
 				86C40CEE1A8D7C5C00081FAC /* ORKAnswerTextView.h in Headers */,
 				FF919A271E81A87B005C2A1E /* ORKActiveTaskResult.h in Headers */,
-				B12EA0151B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h in Headers */,
 				86C40C421A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.h in Headers */,
 				86C40C6E1A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.h in Headers */,
 				B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */,
@@ -3305,7 +3291,6 @@
 				86C40CA61A8D7C5C00081FAC /* ORKLocationRecorder.m in Sources */,
 				86C40CB61A8D7C5C00081FAC /* ORKTouchRecorder.m in Sources */,
 				BC2908BC1FBD628F0030AB89 /* ORKTypes.m in Sources */,
-				B12EA0161B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m in Sources */,
 				CBD34A5B1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m in Sources */,
 				959A2C011D68B9DA00841B04 /* ORKRangeOfMotionStepViewController.m in Sources */,
 				861D2AF11B8409D9008C4CD0 /* ORKTimedWalkContentView.m in Sources */,
@@ -3429,7 +3414,6 @@
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
 				147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */,
 				86C40D7E1A8D7C5C00081FAC /* ORKScaleValueLabel.m in Sources */,
-				B12EA01A1B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m in Sources */,
 				8056857A1C90C19500BF437A /* UIImage+ResearchKit.m in Sources */,
 				BC94EF321E962F7400143081 /* ORKDeprecated.m in Sources */,
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,

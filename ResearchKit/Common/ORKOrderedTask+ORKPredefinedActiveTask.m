@@ -65,7 +65,6 @@
 #import "ORKTappingIntervalStep.h"
 #import "ORKTimedWalkStep.h"
 #import "ORKToneAudiometryStep.h"
-#import "ORKToneAudiometryPracticeStep.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKTrailmakingStep.h"
 #import "ORKVisualConsentStep.h"
@@ -1271,9 +1270,11 @@ NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
     }
 
     {
-        ORKToneAudiometryPracticeStep *step = [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
+        ORKToneAudiometryStep *step = [[ORKToneAudiometryStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
         step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        step.toneDuration = CGFLOAT_MAX;
+        step.practiceStep = YES;
         ORKStepArrayAddStep(steps, step);
         
     }
