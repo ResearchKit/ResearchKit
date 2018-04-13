@@ -35,7 +35,6 @@
 
 @class ORKNavigableOrderedTask;
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
@@ -596,6 +595,10 @@ NS_ASSUME_NONNULL_BEGIN
                            trailmakingInstruction:(nullable NSString *)trailmakingInstruction
                                         trailType:(ORKTrailMakingTypeIdentifier)trailType
                                           options:(ORKPredefinedTaskOption)options;
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromData:(NSData *)data;
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromDictionary:(NSDictionary *)dictionary;
 
 @end
 

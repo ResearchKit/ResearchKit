@@ -154,6 +154,250 @@ void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 @implementation ORKOrderedTask (ORKPredefinedActiveTask)
 
+#pragma mark - convenience initializers
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromDictionary: (NSDictionary *)dictionary {
+    NSDictionary *config = dictionary;
+    NSArray *optionsArray = config[@"options"]; // this needs to be an array of strings
+    ORKPredefinedTaskOption options = ORKPredefinedTaskOptionNone;
+    for (NSString *optionString in optionsArray) {
+        if ([optionString isEqualToString:@"none"]) {
+            options = options | ORKPredefinedTaskOptionNone;
+        } else if ([optionString isEqualToString:@"excludeInstructions"]) {
+            options = options | ORKPredefinedTaskOptionExcludeInstructions;
+        } else if ([optionString isEqualToString:@"excludeConclusion"]) {
+            options = options | ORKPredefinedTaskOptionExcludeConclusion;
+        } else if ([optionString isEqualToString:@"excludeAccelerometer"]) {
+            options = options | ORKPredefinedTaskOptionExcludeAccelerometer;
+        } else if ([optionString isEqualToString:@"excludeDeviceMotion"]) {
+            options = options | ORKPredefinedTaskOptionExcludeDeviceMotion;
+        } else if ([optionString isEqualToString:@"excludePedometer"]) {
+            options = options | ORKPredefinedTaskOptionExcludePedometer;
+        } else if ([optionString isEqualToString:@"excludeLocation"]) {
+            options = options | ORKPredefinedTaskOptionExcludeLocation;
+        } else if ([optionString isEqualToString:@"excludeHeartRate"]) {
+            options = options | ORKPredefinedTaskOptionExcludeHeartRate;
+        } else if ([optionString isEqualToString:@"excludeAudio"]) {
+            options = options | ORKPredefinedTaskOptionExcludeAudio;
+        } else {
+            ORK_Log_Error("options - %@ did not match any existing entry", config[@"options"]);
+        }
+    }
+    
+    ORKOrderedTask *taskToReturn = nil;
+    NSString *taskType = config[@"taskType"];
+    if ([taskType isEqualToString:@"towerOfHanoi"]) {
+        taskToReturn = [ORKOrderedTask towerOfHanoiTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                               intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                        numberOfDisks:[[config objectForKey:@"numberOfDisks"] integerValue]
+                                                              options:options];
+    } else if ([taskType isEqualToString:@"holePegTest"]) {
+        NSString *dominantHandString = config[@"dominantHand"];
+        ORKBodySagittal dominantHand = ORKBodySagittalLeft;
+        if ([dominantHandString isEqualToString:@"right"]) {
+            dominantHand = ORKBodySagittalRight;
+        }
+        taskToReturn = [ORKOrderedTask holePegTestTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                              intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                        dominantHand:dominantHand
+                                                        numberOfPegs:[[config objectForKey:@"numberOfPegs"] intValue]
+                                                           threshold:[[config objectForKey:@"threshold"] doubleValue]
+                                                             rotated:([[config objectForKey:@"rotated"] intValue] == 1 ? YES : NO)
+                                                           timeLimit:[[config objectForKey:@"timeLimit"] doubleValue]
+                                                             options:options];
+    } else if ([taskType isEqualToString:@"twoFingerTappingInterval"]) {
+        NSString *handOptionsString = config[@"handOptions"];
+        ORKPredefinedTaskHandOption handOptions = ORKPredefinedTaskHandOptionUnspecified;
+        if ([handOptionsString isEqualToString:@"left"]) {
+            handOptions = ORKPredefinedTaskHandOptionLeft;
+        } else if ([handOptionsString isEqualToString:@"right"]) {
+            handOptions = ORKPredefinedTaskHandOptionRight;
+        } else if ([handOptionsString isEqualToString:@"both"]) {
+            handOptions = ORKPredefinedTaskHandOptionBoth;
+        }
+        taskToReturn = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                           intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                                         duration:[[config objectForKey:@"duration"] doubleValue]
+                                                                      handOptions:handOptions
+                                                                          options:options];
+    } else if ([taskType isEqualToString:@"audio"]) {
+        taskToReturn = [ORKOrderedTask audioTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                        intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                             speechInstruction:[config objectForKey:@"speechInstruction"]
+                                        shortSpeechInstruction:[config objectForKey:@"shortSpeechInstruction"]
+                                                      duration:[[config objectForKey:@"duration"] doubleValue]
+                                             recordingSettings:nil // convenience init cannot be used if developer wants to provide custom recording settings
+                                               checkAudioLevel:([[config objectForKey:@"checkAudioLevel"] intValue] == 1 ? YES : NO)
+                                                       options:options];
+    } else if ([taskType isEqualToString:@"fitnessCheck"]) {
+        taskToReturn = [ORKOrderedTask fitnessCheckTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                               intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                         walkDuration:[[config objectForKey:@"walkDuration"] doubleValue]
+                                                         restDuration:[[config objectForKey:@"restDuration"] doubleValue]
+                                                              options:options];
+    } else if ([taskType isEqualToString:@"shortWalk"]) {
+        taskToReturn = [ORKOrderedTask shortWalkTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                            intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                               numberOfStepsPerLeg:[[config objectForKey:@"numberOfStepsPerLeg"] integerValue]
+                                                      restDuration:[[config objectForKey:@"restDuration"] doubleValue]
+                                                           options:options];
+    } else if ([taskType isEqualToString:@"walkBackAndForth"]) {
+        taskToReturn = [ORKOrderedTask walkBackAndForthTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                   intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                             walkDuration:[[config objectForKey:@"walkDuration"] doubleValue]
+                                                             restDuration:[[config objectForKey:@"restDuration"] doubleValue]
+                                                                  options:options];
+    } else if ([taskType isEqualToString:@"kneeRangeOfMotion"]) {
+        NSString *limbOptionString = config[@"limbOption"];
+        ORKPredefinedTaskLimbOption limbOption = ORKPredefinedTaskLimbOptionUnspecified;
+        if ([limbOptionString isEqualToString:@"left"]) {
+            limbOption = ORKPredefinedTaskLimbOptionLeft;
+        } else if ([limbOptionString isEqualToString:@"right"]) {
+            limbOption = ORKPredefinedTaskLimbOptionRight;
+        } else if ([limbOptionString isEqualToString:@"both"]) {
+            limbOption = ORKPredefinedTaskLimbOptionBoth;
+        }
+        taskToReturn = [ORKOrderedTask kneeRangeOfMotionTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                                limbOption:limbOption
+                                                    intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                                   options:options];
+    } else if ([taskType isEqualToString:@"shoulderRangeOfMotion"]) {
+        NSString *limbOptionString = config[@"limbOption"];
+        ORKPredefinedTaskLimbOption limbOption = ORKPredefinedTaskLimbOptionUnspecified;
+        if ([limbOptionString isEqualToString:@"left"]) {
+            limbOption = ORKPredefinedTaskLimbOptionLeft;
+        } else if ([limbOptionString isEqualToString:@"right"]) {
+            limbOption = ORKPredefinedTaskLimbOptionRight;
+        } else if ([limbOptionString isEqualToString:@"both"]) {
+            limbOption = ORKPredefinedTaskLimbOptionBoth;
+        }
+        taskToReturn = [ORKOrderedTask shoulderRangeOfMotionTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                                    limbOption:limbOption
+                                                        intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                                       options:options];
+    } else if ([taskType isEqualToString:@"spatialSpanMemory"]) {
+        taskToReturn = [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                    intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                               initialSpan:[[config objectForKey:@"initialSpan"] integerValue]
+                                                               minimumSpan:[[config objectForKey:@"minimumSpan"] integerValue]
+                                                               maximumSpan:[[config objectForKey:@"maximumSpan"] integerValue]
+                                                                 playSpeed:[[config objectForKey:@"playSpeed"] doubleValue]
+                                                              maximumTests:[[config objectForKey:@"maximumTests"] integerValue]
+                                                maximumConsecutiveFailures:[[config objectForKey:@"maximumConsecutiveFailures"] integerValue]
+                                                         customTargetImage:nil // convenience init cannot be used if developer wants to display custom target image
+                                                    customTargetPluralName:[config objectForKey:@"customTargetPluralName"]
+                                                           requireReversal:([[config objectForKey:@"requireReversal"] intValue] == 1 ? YES : NO)
+                                                                   options:options];
+    } else if ([taskType isEqualToString:@"stroop"]) {
+        taskToReturn = [ORKOrderedTask stroopTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                         intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                               numberOfAttempts:[[config objectForKey:@"numberOfAttempts"] integerValue]
+                                                        options:options];
+    } else if ([taskType isEqualToString:@"toneAudiometry"]) {
+        taskToReturn = [ORKOrderedTask toneAudiometryTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                                 intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                      speechInstruction:[config objectForKey:@"speechInstruction"]
+                                                 shortSpeechInstruction:[config objectForKey:@"shortSpeechInstruction"]
+                                                           toneDuration:[[config objectForKey:@"toneDuration"] doubleValue]
+                                                                options:options];
+    } else if ([taskType isEqualToString:@"reactionTime"]) {
+        taskToReturn = [ORKOrderedTask reactionTimeTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                               intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                              maximumStimulusInterval:[[config objectForKey:@"maximumStimulusInterval"] doubleValue]
+                                              minimumStimulusInterval:[[config objectForKey:@"minimumStimulusInterval"] doubleValue]
+                                                thresholdAcceleration:[[config objectForKey:@"thresholdAcceleration"] doubleValue]
+                                                     numberOfAttempts:[[config objectForKey:@"numberOfAttempts"] intValue]
+                                                              timeout:[[config objectForKey:@"timeout"] doubleValue]
+                                                         successSound:[[config objectForKey:@"successSound"] intValue]
+                                                         timeoutSound:[[config objectForKey:@"timeoutSound"] intValue]
+                                                         failureSound:[[config objectForKey:@"failureSound"] intValue]
+                                                              options:options];
+    } else if ([taskType isEqualToString:@"timedWalk"]) {
+        taskToReturn = [ORKOrderedTask timedWalkTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                            intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                  distanceInMeters:[[config objectForKey:@"distanceInMeters"] doubleValue]
+                                                         timeLimit:[[config objectForKey:@"timeLimit"] doubleValue]
+                                               turnAroundTimeLimit:[[config objectForKey:@"turnAroundTimeLimit"] doubleValue]
+                                        includeAssistiveDeviceForm:([[config objectForKey:@"includeAssistiveDeviceForm"] intValue] == 1 ? YES : NO)
+                                                           options:options];
+    } else if ([taskType isEqualToString:@"PSAT"]) {
+        NSArray *presentionModeArray = config[@"presentationMode"];
+        ORKPSATPresentationMode presentationMode = 0;
+        for (NSString *presentationModeString in presentionModeArray) {
+            if ([presentationModeString isEqualToString:@"visual"]) {
+                presentationMode = presentationMode | ORKPSATPresentationModeVisual;
+            } else {
+                presentationMode = presentationMode | ORKPSATPresentationModeAuditory;
+            }
+        }
+        taskToReturn = [ORKOrderedTask PSATTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                       intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                             presentationMode:presentationMode
+                                        interStimulusInterval:[[config objectForKey:@"interStimulusInterval"] doubleValue]
+                                             stimulusDuration:[[config objectForKey:@"stimulusDuration"] doubleValue]
+                                                 seriesLength:[[config objectForKey:@"seriesLength"] integerValue]
+                                                      options:options];
+    } else if ([taskType isEqualToString:@"tremorTest"]) {
+        NSArray *activeTaskOptionsArray = config[@"activeTaskOptionsArray"];
+        ORKTremorActiveTaskOption activeTaskOptions = ORKTremorActiveTaskOptionNone;
+        for (NSString *activeTaskOptionString in activeTaskOptionsArray) {
+            if ([activeTaskOptionString isEqualToString:@"excludeHandInLap"]) {
+                activeTaskOptions = activeTaskOptions | ORKTremorActiveTaskOptionExcludeHandInLap;
+            } else if ([activeTaskOptionString isEqualToString:@"excludeHandAtShoulderHeight"]) {
+                activeTaskOptions = activeTaskOptions | ORKTremorActiveTaskOptionExcludeHandAtShoulderHeight;
+            } else if ([activeTaskOptionString isEqualToString:@"excludeHandAtShoulderHeightElbowBent"]) {
+                activeTaskOptions = activeTaskOptions | ORKTremorActiveTaskOptionExcludeHandAtShoulderHeightElbowBent;
+            } else if ([activeTaskOptionString isEqualToString:@"excludeHandToNose"]) {
+                activeTaskOptions = activeTaskOptions | ORKTremorActiveTaskOptionExcludeHandToNose;
+            } else if ([activeTaskOptionString isEqualToString:@"excludeQueenWave"]) {
+                activeTaskOptions = activeTaskOptions | ORKTremorActiveTaskOptionExcludeQueenWave;
+            }
+        }
+        
+        NSString *handOptionsString = config[@"handOptions"];
+        ORKPredefinedTaskHandOption handOptions = ORKPredefinedTaskHandOptionUnspecified;
+        if ([handOptionsString isEqualToString:@"left"]) {
+            handOptions = ORKPredefinedTaskHandOptionLeft;
+        } else if ([handOptionsString isEqualToString:@"right"]) {
+            handOptions = ORKPredefinedTaskHandOptionRight;
+        } else if ([handOptionsString isEqualToString:@"both"]) {
+            handOptions = ORKPredefinedTaskHandOptionBoth;
+        }
+        
+        taskToReturn = [ORKOrderedTask tremorTestTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                             intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                                 activeStepDuration:[[config objectForKey:@"activeStepDuration"] doubleValue]
+                                                  activeTaskOptions:activeTaskOptions
+                                                        handOptions:handOptions
+                                                            options:options];
+    } else if ([taskType isEqualToString:@"trailmaking"]) {
+        taskToReturn = [ORKOrderedTask trailmakingTaskWithIdentifier:[config objectForKey:@"identifier"]
+                                              intendedUseDescription:[config objectForKey:@"intendedUseDescription"]
+                                              trailmakingInstruction:[config objectForKey:@"trailmakingInstruction"]
+                                                           trailType:config[@"trailType"] // "A" or "B"
+                                                             options:options];
+    } else {
+        ORK_Log_Error("taskName - %@ did not match any existing entry", config[@"taskName"]);
+    }
+    return taskToReturn;
+}
+
++ (nullable ORKOrderedTask *)initializeActiveTaskFromData: (NSData *)data {
+    NSError *error = nil;
+    id objectFromJSON = [NSJSONSerialization JSONObjectWithData:data
+                                                        options: NSJSONReadingMutableContainers
+                                                          error:&error];
+    if (error) {
+        ORK_Log_Error("error while parsing the json object - %@", [error localizedDescription]);
+        return nil;
+    }
+    if ([objectFromJSON isKindOfClass:[NSDictionary class]]) {
+        return ([self initializeActiveTaskFromDictionary:objectFromJSON]);
+    } else {
+        ORK_Log_Error("the parsed json object could not be represented as a NSDictionary - %@", [error localizedDescription]);
+        return nil;
+    }
+}
 
 #pragma mark - holePegTestTask
 
