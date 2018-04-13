@@ -1274,7 +1274,7 @@ NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
         step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
         step.toneDuration = CGFLOAT_MAX;
-        step.isPracticeStep = YES;
+        step.practiceStep = YES;
         ORKStepArrayAddStep(steps, step);
         
     }
