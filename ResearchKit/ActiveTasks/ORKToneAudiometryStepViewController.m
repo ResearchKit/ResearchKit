@@ -158,7 +158,7 @@
 
 - (void)start {
     [super start];
-    if (self.toneAudiometryStep.isPracticeStep == YES) {
+    if (self.toneAudiometryStep.practiceStep) {
         [self.audioGenerator playSoundAtFrequency:1000.0];
     } else {
         [self startCurrentTest];
@@ -166,7 +166,7 @@
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
-    if (self.toneAudiometryStep.isPracticeStep == YES) {
+    if (self.toneAudiometryStep.practiceStep) {
         [self finish];
     }
     if (self.samples == nil) {
