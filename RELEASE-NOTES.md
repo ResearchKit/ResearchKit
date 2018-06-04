@@ -9,7 +9,7 @@ The minimum supported *Base SDK* is *11.0*.
 
 In addition to general stability and performance improvements, *ResearchKit 2.0* includes the following new features and enhancements.
 
-###Community Updates###
+### Community Updates
  
 - **Repo Privileges**
 We have opened up our access rights and have expanded our GitHub privileges to some of the external members of our community.  This gives these community members direct write access to the ResearchKit repository and merge pull requests.
@@ -17,7 +17,7 @@ We have opened up our access rights and have expanded our GitHub privileges to s
 - **Schedule Changes**
 Previously the ResearchKit framework pushed to our master and stable branches simultaneously.  With this release we want to allow for more participation from the community so to accomplish this, we will push to the stable branch some time after our initial push to master.  This will enable the community to check out the new features, provide suggestions and submit pull requests.  During this time between master and stable, we will complete accessibility, localization and QA sweeps of the code so if you make contributions during this time, they will be reflected in the official stable release branch to follow.
 
-###UI Updates###
+### UI Updates
 
 - **iOS Look and Feel**
 We have updated ResearchKit to support the look and feel of *iOS 11*.  Updates across all of our modules include bold titles and fonts as well as left alignment for all text.
@@ -31,7 +31,7 @@ This new view enhances the look and feel of surveys and forms.  These updates im
 - **PDF Viewer**
 This steps allows users to easily navigate, annotate, search and share any PDF.
 
-###Active Tasks###
+### Active Tasks
 
 - **Speech Recognition**
 The speech recognition task lets developers present participants with either an image for users to describe or a block of text for users to repeat.  The participant will press record while they follow the prompt and when they have completed recording, a transcription will appear for them to edit if they feel anything was transcribed incorrectly.  The task will generate results that include an audio recording of what the participant said, a transcription of the output from the speech to text engine and the transcription which is editable by the participant if they made any changes to the output.
@@ -48,13 +48,13 @@ The Speech in Noise test is another task that can be used to measure the hearing
 - **Amsler Grid**
 The Amsler Grid test is a task that can be used to collect data about a users vision.  During this task participants will hold the phone at a certain distance from their face and close one eye or the other as instructed.  A grid is displayed for users to view and if they see any distortions such as wavy or blurred lines, they can mark those areas on the grid using their finger or a stylus to annotate.
 
-###New Sample App###
+### New Sample App
 
 - **Parkinson's Research Sample App**
 This sample app demonstrates how to leverage the new Movement Disorder API which is available within the CoreMotion framework. 
 
 
-###Please Note###
+### Please Note
 
 *ResearchKit 2.0* is a beta release.  We will be updating our master branch at regular intervals in the coming months to address various issues and expand support for localization and accessibility.
 
