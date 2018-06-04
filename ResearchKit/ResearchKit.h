@@ -53,9 +53,11 @@
 #import <ResearchKit/ORKVisualConsentStep.h>
 #import <ResearchKit/ORKWaitStep.h>
 #import <ResearchKit/ORKVideoInstructionStep.h>
+#import <ResearchKit/ORKWebViewStep.h>
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
+#import <ResearchKit/ORKOrderedTask+ORKPredefinedActiveTask.h>
 #import <ResearchKit/ORKNavigableOrderedTask.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 
@@ -63,6 +65,14 @@
 #import <ResearchKit/ORKHealthAnswerFormat.h>
 
 #import <ResearchKit/ORKResult.h>
+#import <ResearchKit/ORKActiveTaskResult.h>
+#import <ResearchKit/ORKCollectionResult.h>
+#import <ResearchKit/ORKConsentSignatureResult.h>
+#import <ResearchKit/ORKPasscodeResult.h>
+#import <ResearchKit/ORKQuestionResult.h>
+#import <ResearchKit/ORKSignatureResult.h>
+#import <ResearchKit/ORKVideoInstructionStepResult.h>
+#import <ResearchKit/ORKWebViewStepResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
 #import <ResearchKit/ORKTextButton.h>
@@ -83,6 +93,7 @@
 #import <ResearchKit/ORKTouchAnywhereStepViewController.h>
 #import <ResearchKit/ORKVerificationStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
+#import <ResearchKit/ORKWebViewStepViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 

@@ -33,6 +33,7 @@
 #import "ORKStepNavigationRule_Private.h"
 
 #import "ORKStep.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKResult.h"
 #import "ORKResultPredicate.h"
 

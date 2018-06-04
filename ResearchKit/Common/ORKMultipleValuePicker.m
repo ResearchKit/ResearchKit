@@ -44,6 +44,8 @@
 
 @end
 
+static const CGFloat PickerSpacerHeight = 15.0;
+static const CGFloat PickerMinimumHeight = 34.0;
 
 @implementation ORKMultipleValuePicker {
     UIPickerView *_pickerView;
@@ -249,6 +251,30 @@
     } else {
         return [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
     }
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel* valueLabel = (UILabel*)view;
+    if (!valueLabel)
+    {
+        valueLabel = [[UILabel alloc] init];
+        [valueLabel setFont:[self defaultFont]];
+        [valueLabel setTextAlignment:NSTextAlignmentCenter];
+    }
+    valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    return valueLabel;
+}
+
+- (UIFont *)defaultFont {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    UIFont *font = [self defaultFont];
+    CGFloat height =  font.pointSize + PickerSpacerHeight;
+    return (height < PickerMinimumHeight ? PickerMinimumHeight : height);
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {

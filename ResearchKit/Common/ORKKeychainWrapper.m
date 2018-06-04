@@ -233,22 +233,28 @@ static NSString *ORKKeychainWrapperDefaultService() {
                            error:(NSError **)error {
     NSArray *items = [self itemsForService:service accessGroup:accessGroup error:error];
     BOOL returnValue = NO;
-    for (NSDictionary *item in items) {
-        NSMutableDictionary *itemToDelete = [[NSMutableDictionary alloc] initWithDictionary:item];
-        [itemToDelete setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
-        
-        OSStatus status = SecItemDelete((__bridge CFDictionaryRef)itemToDelete);
-        if (status != errSecSuccess) {
-            if (error) {
-                *error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                             code:status
-                                         userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"KEYCHAIN_DELETE_ERROR_MESSAGE", nil)}];
+    
+    if ([items count] > 0) {
+        for (NSDictionary *item in items) {
+            NSMutableDictionary *itemToDelete = [[NSMutableDictionary alloc] initWithDictionary:item];
+            [itemToDelete setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
+            
+            OSStatus status = SecItemDelete((__bridge CFDictionaryRef)itemToDelete);
+            if (status != errSecSuccess) {
+                if (error) {
+                    *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                                 code:status
+                                             userInfo:@{NSLocalizedDescriptionKey: ORKLocalizedString(@"KEYCHAIN_DELETE_ERROR_MESSAGE", nil)}];
+                }
+                returnValue = NO;
+            } else {
+                returnValue = YES;
             }
-            returnValue = NO;
-        } else {
-            returnValue = YES;
         }
+    } else {
+        returnValue = YES;
     }
+    
     return returnValue;
 }
 

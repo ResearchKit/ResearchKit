@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2016-2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,15 +30,39 @@
  */
 
 
-@import Foundation;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStep.h>
+#import <ResearchKit/ORKCollectionResult.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKPageStep;
+
+/**
+ The `ORKPageResult` is an `ORKTaskResult` subclass of a collection of `ORKStepResult`
+ objects. This is considered private, and it is used internally by `ORKPageStepViewController`
+ to track the result set.
+ */
 ORK_CLASS_AVAILABLE
-@interface ORKToneAudiometryPracticeStep : ORKActiveStep
+@interface ORKPageResult : ORKTaskResult
+
+- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result;
+
+- (void)addStepResult:(nullable ORKStepResult *)stepResult;
+
+- (void)removeStepResultWithIdentifier:(NSString *)identifier;
+
+- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier;
+
+- (NSArray <ORKResult *> *)flattenResults;
+
+- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory;
+
+@end
+
+
+@interface ORKStepResult ()
+
+@property (nonatomic) BOOL isPreviousResult;
 
 @end
 

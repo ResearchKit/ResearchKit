@@ -30,6 +30,7 @@
 
 
 #import "ORKHTMLPDFWriter.h"
+#import "ORKHTMLPDFPageRenderer.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -42,45 +43,8 @@ static const CGFloat A4Height = 11.69;
 static const CGFloat LetterWidth = 8.5f;
 static const CGFloat LetterHeight = 11.0f;
 
-#pragma mark - ORKHTMLPDFWriter Interface
-
-@interface ORKHTMLPDFPageRenderer : UIPrintPageRenderer
-
-@property (nonatomic) UIEdgeInsets pageMargins;
-
-@end
 
 
-#pragma mark - ORKHTMLPDFWriter Implementation
-
-@implementation ORKHTMLPDFPageRenderer
-
-- (CGRect)paperRect {
-    return UIGraphicsGetPDFContextBounds();
-}
-
-- (CGRect)printableRect {
-    return UIEdgeInsetsInsetRect([self paperRect], _pageMargins);
-}
-
-- (void)drawFooterForPageAtIndex:(NSInteger)pageIndex
-                          inRect:(CGRect)footerRect {
-    NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex + 1), (long)[self numberOfPages]];
-    
-    if (footer) {
-        UIFont *font = [UIFont fontWithName:@"Helvetica" size:12];
-        CGSize size = [footer sizeWithAttributes:@{ NSFontAttributeName: font}];
-        
-        // Center Text
-        CGFloat drawX = (CGRectGetWidth(footerRect) / 2) + footerRect.origin.x - (size.width / 2);
-        CGFloat drawY = footerRect.origin.y + (footerRect.size.height / 2) - (size.height / 2);
-        CGPoint drawPoint = CGPointMake(drawX, drawY);
-        
-        [footer drawAtPoint:drawPoint withAttributes:@{ NSFontAttributeName: font}];
-    }
-}
-
-@end
 
 
 @interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
@@ -132,10 +96,14 @@ static const CGFloat PageEdge = 72.0 / 4;
     
     UIPrintFormatter *formatter = self.webView.viewPrintFormatter;
     
-    ORKHTMLPDFPageRenderer *renderer = [[ORKHTMLPDFPageRenderer alloc] init];
-    renderer.pageMargins = self.pageMargins;
-    renderer.footerHeight = FooterHeight;
-    renderer.headerHeight = HeaderHeight;
+    ORKHTMLPDFPageRenderer *renderer = self.printRenderer;
+    if(renderer == nil) {
+        renderer = [[ORKHTMLPDFPageRenderer alloc] init];
+        renderer.pageMargins = self.pageMargins;
+        renderer.footerHeight = FooterHeight;
+        renderer.headerHeight = HeaderHeight;
+        
+    }
     
     [renderer addPrintFormatter:formatter startingAtPageAtIndex:0];
     

@@ -145,12 +145,23 @@
     self.headerView.captionLabel.text = _instructionStep.title;
     
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
+    NSAttributedString *attributedDetail = _instructionStep.attributedDetailText;
     NSString *detail = _instructionStep.detailText;
     NSString *text = _instructionStep.text;
+    attributedDetail = attributedDetail.length ? attributedDetail : nil;
     detail = detail.length ? detail : nil;
     text = text.length ? text : nil;
     
-    if (detail && text) {
+    if (attributedDetail && text) {
+        [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
+
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
+        [style setAlignment:NSTextAlignmentCenter];
+        
+        [attributedInstruction appendAttributedString:attributedDetail];
+        
+    } else if (detail && text) {
         [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -161,8 +172,12 @@
                                                                                attributes:@{NSParagraphStyleAttributeName: style}];
         [attributedInstruction appendAttributedString:attString];
         
-    } else if (detail || text) {
-        [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:detail ? : text attributes:nil]];
+    } else if (attributedDetail || detail || text) {
+        if (attributedDetail) {
+            [attributedInstruction appendAttributedString:attributedDetail];
+        } else {
+            [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:detail ? : text attributes:nil]];
+        }
     }
     
     self.headerView.instructionLabel.attributedText = attributedInstruction;

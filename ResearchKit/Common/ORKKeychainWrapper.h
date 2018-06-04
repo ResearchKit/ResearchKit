@@ -66,7 +66,7 @@ ORK_CLASS_AVAILABLE
  
  @return An object or `nil` if key is not valid.
  */
-+ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError * _Nullable *)error;
++ (nullable id<NSSecureCoding>)objectForKey:(nonnull NSString *)key error:(NSError * __autoreleasing _Nullable *)error;
 
 /**
  Removes the object in the keychain for the provided key.

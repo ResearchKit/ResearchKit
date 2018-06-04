@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKQuestionStepViewController.h"
+#import "ORKQuestionStepViewController_Private.h"
 
 #import "ORKChoiceViewCell.h"
 #import "ORKQuestionStepView.h"
@@ -44,11 +44,12 @@
 #import "ORKTextChoiceCellGroup.h"
 
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKQuestionStepViewController_Private.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
@@ -547,12 +548,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
     if (section == ORKQuestionSectionAnswer) {
-        if (_choiceCellGroup == nil) {
-            _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
-                                                                                       answer:self.answer
-                                                                           beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
-                                                                          immediateNavigation:[self isStepImmediateNavigation]];
-        }
+        _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
+                                                                                   answer:self.answer
+                                                                       beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
+                                                                      immediateNavigation:[self isStepImmediateNavigation]];
         return _choiceCellGroup.size;
     }
     return 0;
@@ -572,6 +571,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDateAndTime): [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval): [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeHeight) : [ORKSurveyAnswerCellForPicker class],
+                               @(ORKQuestionTypeWeight) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeMultiplePicker) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger): [ORKSurveyAnswerCellForNumber class],
                                @(ORKQuestionTypeLocation): [ORKSurveyAnswerCellForLocation class]};
@@ -631,9 +631,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) {
-        cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
-    }
+    cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     
     cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;

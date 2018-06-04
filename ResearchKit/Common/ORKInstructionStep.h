@@ -55,6 +55,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *detailText;
 
 /**
+ Additional attributed explanation for the instruction.
+ 
+ The attributed detail text is displayed below the content of the `text` property and overrides `detailText`.
+ */
+@property (nonatomic, copy, nullable) NSAttributedString *attributedDetailText;
+
+/**
  Additional text to display for the step in a localized string at the bottom of the view.
  
  The footnote is displayed in a smaller font below the continue button. It is intended to be used

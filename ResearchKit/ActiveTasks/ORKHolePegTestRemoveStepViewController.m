@@ -39,9 +39,10 @@
 #import "ORKTaskViewController.h"
 
 #import "ORKHolePegTestRemoveStep.h"
+#import "ORKHolePegTestResult.h"
 
 #import "ORKHelpers_Internal.h"
-#import "ORKResult.h"
+#import "ORKCollectionResult_Private.h"
 
 
 @interface ORKHolePegTestRemoveStepViewController () <ORKHolePegTestRemoveContentViewDelegate>

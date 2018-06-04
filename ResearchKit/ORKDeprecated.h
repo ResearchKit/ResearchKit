@@ -32,9 +32,26 @@
 #import "ORKAnswerFormat.h"
 #import "ORKOrderedTask.h"
 #import "ORKRegistrationStep.h"
+#import "ORKOrderedTask+ORKPredefinedActiveTask.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+/**
+ Deprecated to avoid duplicate code paths.
+ */
+@interface ORKOrderedTask (Deprecated)
+
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
+                                        options:(ORKPredefinedTaskOption)options
+__attribute__((deprecated("Use '+timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options' instead.",
+                          "timedWalkTask")));
+
+@end
 
 /**
  Deprecated in v1.5.0 (scheduled for removal in v1.6.0).

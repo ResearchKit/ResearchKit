@@ -65,6 +65,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 
 @class ORKQuestionResult;
@@ -222,6 +223,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 
 @interface ORKHeightAnswerFormat ()
+
+@property (nonatomic, readonly) BOOL useMetricSystem;
+
+@end
+
+
+@interface ORKWeightAnswerFormat ()
 
 @property (nonatomic, readonly) BOOL useMetricSystem;
 

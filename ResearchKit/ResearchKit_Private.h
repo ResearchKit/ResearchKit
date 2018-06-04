@@ -42,9 +42,13 @@
 #import <ResearchKit/ORKOrderedTask_Private.h>
 #import <ResearchKit/ORKPageStep_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
-#import <ResearchKit/ORKResult_Private.h>
 #import <ResearchKit/ORKStepNavigationRule_Private.h>
 #import <ResearchKit/ORKAudioLevelNavigationRule.h>
+
+#import <ResearchKit/ORKCollectionResult_Private.h>
+#import <ResearchKit/ORKQuestionResult_Private.h>
+#import <ResearchKit/ORKSignatureResult_Private.h>
+#import <ResearchKit/ORKResult_Private.h>
 
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
@@ -60,7 +64,6 @@
 #import <ResearchKit/ORKStroopStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 #import <ResearchKit/ORKTrailmakingStep.h>
@@ -79,13 +82,11 @@
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
 #import <ResearchKit/ORKPasscodeStepViewController.h>
 #import <ResearchKit/ORKPSATStepViewController.h>
-#import <ResearchKit/ORKQuestionStepViewController.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKSignatureStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
 #import <ResearchKit/ORKStroopStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
-#import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>

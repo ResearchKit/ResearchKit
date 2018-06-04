@@ -1,5 +1,8 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015-2017, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
+ Copyright (c) 2016-2017, Sage Bionetworks
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,22 +32,9 @@
  */
 
 
-#import "ORKToneAudiometryPracticeStep.h"
-#import "ORKToneAudiometryPracticeStepViewController.h"
+#import "TaskFactory.h"
 
 
-@implementation ORKToneAudiometryPracticeStep
-
-+ (Class)stepViewControllerClass {
-    return [ORKToneAudiometryPracticeStepViewController class];
-}
-
-- (BOOL)startsFinished {
-    return NO;
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
+@interface TaskFactory (QuestionSteps)
 
 @end

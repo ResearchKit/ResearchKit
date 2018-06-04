@@ -44,6 +44,8 @@
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKFormItem_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
@@ -392,6 +394,7 @@
         }
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }
@@ -803,7 +806,8 @@
                 case ORKQuestionTypeTimeOfDay:
                 case ORKQuestionTypeTimeInterval:
                 case ORKQuestionTypeMultiplePicker:
-                case ORKQuestionTypeHeight: {
+                case ORKQuestionTypeHeight:
+                case ORKQuestionTypeWeight: {
                     class = [ORKFormItemPickerCell class];
                     break;
                 }
@@ -914,6 +918,7 @@
             [self removeAnswerForIdentifier:formItemIdentifier];
         }
         
+        _skipped = NO;
         [self updateButtonStates];
         [self notifyDelegateOnResultChange];
     }
@@ -981,6 +986,7 @@
         [self removeAnswerForIdentifier:cell.formItem.identifier];
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }

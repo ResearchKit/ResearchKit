@@ -30,38 +30,11 @@
 
 
 #import <ResearchKit/ORKResult.h>
-@import MapKit;
 
-@class ORKPageStep;
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- The `ORKDataResult` is an `ORKResult` subclass for returning raw `NSData` from a step.
- 
- This is considered private, and is not currently used by any of the pre-defined
- active tasks.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKDataResult : ORKResult
-
-/**
- The MIME contentType for the result.
- */
-@property (nonatomic, copy, nullable) NSString *contentType;
-
-/**
- A filename that could be used when archiving.
- */
-@property (nonatomic, copy, nullable) NSString *filename;
-
-/**
- The actual data in the result.
- */
-@property (nonatomic, copy, nullable) NSData *data;
-
-@end
-
+ORK_EXTERN const NSUInteger NumberOfPaddingSpacesForIndentationLevel;
 
 @interface ORKResult ()
 
@@ -80,67 +53,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
 
-@end
-
-
-@interface ORKQuestionResult ()
-
-// Used internally for unit testing.
-+ (nullable Class)answerClass;
-
-// Used internally for unit testing.
-@property (nonatomic, strong, nullable) id answer;
+// Description formatting
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+- (NSString *)descriptionSuffix;
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
 
 @end
-
-@interface ORKLocation ()
-
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
-                            region:(nullable CLCircularRegion *)region
-                         userInput:(nullable NSString *)userInput
-                 addressDictionary:(nullable NSDictionary *)addressDictionary;
-
-- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
-
-@end
-
-@interface ORKSignatureResult ()
-
-- (instancetype)initWithSignatureImage:(UIImage *)signatureImage
-                         signaturePath:(NSArray <UIBezierPath *> *)signaturePath;
-
-@end
-
-
-/**
- The `ORKPageResult` is an `ORKTaskResult` subclass of a collection of `ORKStepResult`
- objects. This is considered private, and it is used internally by `ORKPageStepViewController`
- to track the result set.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKPageResult : ORKTaskResult
-
-- (instancetype)initWithPageStep:(ORKPageStep *)step stepResult:(ORKStepResult*)result;
-
-- (void)addStepResult:(nullable ORKStepResult *)stepResult;
-
-- (void)removeStepResultWithIdentifier:(NSString *)identifier;
-
-- (void)removeStepResultsAfterStepWithIdentifier:(NSString *)identifier;
-
-- (NSArray <ORKResult *> *)flattenResults;
-
-- (instancetype)copyWithOutputDirectory:(NSURL *)outputDirectory;
-
-@end
-
-
-@interface ORKStepResult ()
-
-@property (nonatomic) BOOL isPreviousResult;
-
-@end
-
 
 NS_ASSUME_NONNULL_END
 

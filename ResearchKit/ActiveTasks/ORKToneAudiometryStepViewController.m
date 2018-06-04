@@ -39,7 +39,8 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
-#import "ORKResult.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKToneAudiometryResult.h"
 #import "ORKToneAudiometryStep.h"
 
 #import "ORKHelpers_Internal.h"
@@ -157,11 +158,17 @@
 
 - (void)start {
     [super start];
-    
-    [self startCurrentTest];
+    if (self.toneAudiometryStep.practiceStep) {
+        [self.audioGenerator playSoundAtFrequency:1000.0];
+    } else {
+        [self startCurrentTest];
+    }
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
+    if (self.toneAudiometryStep.practiceStep) {
+        [self finish];
+    }
     if (self.samples == nil) {
         _samples = [NSMutableArray array];
     }

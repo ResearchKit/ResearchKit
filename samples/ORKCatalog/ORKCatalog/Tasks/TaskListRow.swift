@@ -100,10 +100,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     case twoFingerTappingInterval
     case walkBackAndForth
     case heightQuestion
+    case weightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
     case trailMaking
     case videoInstruction
+    case webView
     
     class TaskListRowSection {
         var title: String
@@ -130,6 +132,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .dateQuestion,
                     .dateTimeQuestion,
                     .heightQuestion,
+                    .weightQuestion,
                     .imageChoiceQuestion,
                     .locationQuestion,
                     .numericQuestion,
@@ -176,6 +179,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Miscellaneous", rows:
                 [
                     .videoInstruction,
+                    .webView
                 ]),
         ]}
     
@@ -204,6 +208,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .heightQuestion:
             return NSLocalizedString("Height Question", comment: "")
     
+        case .weightQuestion:
+            return NSLocalizedString("Weight Question", comment: "")
+            
         case .imageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -314,6 +321,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .trailMaking:
             return NSLocalizedString("Trail Making Test", comment: "")
+            
+        case .webView:
+            return NSLocalizedString("Web View", comment: "")
         }
     }
     
@@ -362,10 +372,22 @@ enum TaskListRow: Int, CustomStringConvertible {
         case heightQuestionStep1
         case heightQuestionStep2
         case heightQuestionStep3
+        case heightQuestionStep4
 
+        // Task with an example of weight entry.
+        case weightQuestionTask
+        case weightQuestionStep1
+        case weightQuestionStep2
+        case weightQuestionStep3
+        case weightQuestionStep4
+        case weightQuestionStep5
+        case weightQuestionStep6
+        case weightQuestionStep7
+        
         // Task with an image choice question.
         case imageChoiceQuestionTask
-        case imageChoiceQuestionStep
+        case imageChoiceQuestionStep1
+        case imageChoiceQuestionStep2
         
         // Task with a location entry.
         case locationQuestionTask
@@ -479,6 +501,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Video instruction tasks.
         case videoInstructionTask
         case videoInstructionStep
+        
+        // Web view tasks.
+        case webViewTask
+        case webViewStep
     }
     
     // MARK: Properties
@@ -506,6 +532,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .heightQuestion:
             return heightQuestionTask
+            
+        case .weightQuestion:
+            return weightQuestionTask
             
         case .imageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -616,6 +645,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .videoInstruction:
             return videoInstruction
+            
+        case .webView:
+            return webView
         }
     }
 
@@ -738,25 +770,78 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var heightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height (local system)", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height", answer: answerFormat1)
         
-        step1.text = exampleDetailText
+        step1.text = "Local system"
 
         let answerFormat2 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height (metric system)", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height", answer: answerFormat2)
         
-        step2.text = exampleDetailText
+        step2.text = "Metric system"
 
         let answerFormat3 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height (USC system)", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height", answer: answerFormat3)
         
-        step2.text = exampleDetailText
+        step3.text = "USC system"
 
-        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3])
+        let answerFormat4 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!, unit: HKUnit.meterUnit(with: .centi), style: .decimal)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep4), title: "Height", answer: answerFormat4)
+        
+        step4.text = "HealthKit, height"
+        
+        return ORKOrderedTask(identifier: String(describing:Identifier.heightQuestionTask), steps: [step1, step2, step3, step4])
     }
 
+    /// This task demonstrates a question asking for the user weight.
+    private var weightQuestionTask: ORKTask {
+        let answerFormat1 = ORKAnswerFormat.weightAnswerFormat()
+        
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight", answer: answerFormat1)
+        
+        step1.text = "Local system, default precision"
+        
+        let answerFormat2 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric)
+        
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight", answer: answerFormat2)
+        
+        step2.text = "Metric system, default precision"
+        
+        let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.low, minimumValue: ORKDoubleDefaultValue, maximumValue: ORKDoubleDefaultValue, defaultValue: ORKDoubleDefaultValue)
+        
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight", answer: answerFormat3)
+        
+        step3.text = "Metric system, low precision"
+
+        let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.high, minimumValue: 20.0, maximumValue: 100.0, defaultValue:  45.50)
+        
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight", answer: answerFormat4)
+        
+        step4.text = "Metric system, high precision"
+
+        let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
+        
+        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight", answer: answerFormat5)
+        
+        step5.text = "USC system, default precision"
+        
+        let answerFormat6 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC, numericPrecision: ORKNumericPrecision.high, minimumValue: 50.0, maximumValue: 150.0, defaultValue: 100.0)
+        
+        let step6 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep6), title: "Weight", answer: answerFormat6)
+        
+        step6.text = "USC system, high precision"
+
+        let answerFormat7 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!, unit: HKUnit.gramUnit(with: .kilo), style: .decimal)
+        
+        let step7 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep7), title: "Weight", answer: answerFormat7)
+        
+        step7.text = "HealthKit, body mass"
+
+        return ORKOrderedTask(identifier: String(describing:Identifier.weightQuestionTask), steps: [step1, step2, step3, step4, step5, step6, step7])
+    }
+    
     /**
     This task demonstrates a survey question involving picking from a series of
     image choices. A more realistic applciation of this type of question might be to
@@ -774,13 +859,19 @@ enum TaskListRow: Int, CustomStringConvertible {
             ORKImageChoice(normalImage: squareShapeImage, selectedImage: nil, text: squareShapeText, value: squareShapeText as NSCoding & NSCopying & NSObjectProtocol)
         ]
         
-        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
+        let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep1), title: exampleQuestionText, answer: answerFormat1)
+
+        questionStep1.text = exampleDetailText
+
+        let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
         
-        questionStep.text = exampleDetailText
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep2), title: exampleQuestionText, answer: answerFormat2)
+
+        questionStep2.text = exampleDetailText
         
-        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.imageChoiceQuestionTask), steps: [questionStep1, questionStep2])
     }
     
     /// This task presents just a single location question.
@@ -1200,8 +1291,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
         let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
         let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
-        let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB]
+        let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB, .includePhoneNumber]
         let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
+        registrationStep.phoneNumberValidationRegularExpression = try! NSRegularExpression(pattern: "^[+]{1,1}[1]{1,1}\\s{1,1}[(]{1,1}[1-9]{3,3}[)]{1,1}\\s{1,1}[1-9]{3,3}\\s{1,1}[1-9]{4,4}$")
+        registrationStep.phoneNumberInvalidMessage = "Invalid phone number"
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
@@ -1396,6 +1489,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
+    /// This task presents a web view step
+    private var webView: ORKTask {
+        let webViewStep = ORKWebViewStep.init(identifier: String(describing: Identifier.webViewStep), html: exampleHtml)
+        return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
+    }
+    
     // MARK: Consent Document Creation Convenience
     
     /**
@@ -1558,5 +1657,70 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     private var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
+    }
+    
+    private var exampleHtml: String {
+        return """
+        <!DOCTYPE html>
+
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta name="viewport" content="width=400, user-scalable=no">
+            <meta charset="utf-8" />
+            <style type="text/css">
+            body
+            {
+                background: #FFF;
+                font-family: Helvetica, sans-serif;
+                text-align: center;
+            }
+
+            .container
+            {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+            .answer-box
+            {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                border: solid 1px #ddd;
+                border-radius: 2px;
+                -webkit-appearance: none;
+            }
+
+            .continue-button
+            {
+                width: 140px;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                font-size: 16px;
+                color: #2e6e9e;
+                border-radius: 2px;
+                border: solid 1px #2e6e9e;
+                background: #FFF;
+                cursor: pointer;
+                margin-top: 40px;
+            }
+            </style>
+            <script type="text/javascript">
+            function completeStep() {
+                var answer = document.getElementById("answer").value;
+                window.webkit.messageHandlers.ResearchKit.postMessage(answer);
+            }
+            </script>
+        </head>
+        <body>
+            <div class="container">
+                <input type="text" id="answer" class="answer-box" placeholder="Answer" />
+                <button onclick="completeStep();" class="continue-button">Continue</button>
+            </div>
+        </body>
+        </html>
+        """
     }
 }

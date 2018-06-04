@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Alex Basson. All rights reserved.
-
+ Copyright (c) 2017, Medable Inc. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -101,6 +102,21 @@
     }];
 }
 
+- (void) makeCustomPDFWithCompletionHandler:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
+    _writer.printRenderer = renderer;
+    return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
+        if (error) {
+            // Pass the webview error straight through. This is a pretty exceptional
+            // condition (can only happen if they pass us really invalid content).
+            completionBlock(nil, error);
+        } else {
+            completionBlock(data, nil);
+        }
+        _writer.printRenderer = nil;
+    }];
+
+}
+
 #pragma mark - Private
 
 - (NSString *)mobileHTMLWithTitle:(NSString *)title detail:(NSString *)detail {
@@ -144,9 +160,9 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n", mobile ? @"66.6%" : @"33.3%"];
-    [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
-    [css appendString:@".inbox { position: relative; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
+    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; margin-top: 100px;}\n", mobile ? @"66.6%" : @"33.3%"];
+    [css appendString:@".sigbox { position: relative; height: 300px; max-height:100px; display: inline-block; bottom: 10px }\n"];
+    [css appendString:@".inbox { position: absolute; bottom: 0; left:0; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];
     [css appendString:@".border { -webkit-box-sizing: border-box; box-sizing: border-box; }\n"];
     
@@ -192,17 +208,18 @@
                 [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
             }
         }
+    }
+    
+    if (!mobile) {
+        // page break
+        [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
+        [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
         
-        if (!mobile) {
-            // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
-            [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
-            
-            for (ORKConsentSignature *signature in self.signatures) {
-                [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
-            }
+        for (ORKConsentSignature *signature in self.signatures) {
+            [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
         }
     }
+    
     return [[self class] wrapHTMLBody:body mobile:mobile];
 }
 

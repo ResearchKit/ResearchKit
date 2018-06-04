@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
 @class ORKHeightAnswerFormat;
+@class ORKWeightAnswerFormat;
 @class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
@@ -125,6 +126,9 @@ ORK_CLASS_AVAILABLE
 + (ORKMultipleValuePickerAnswerFormat *)multipleValuePickerAnswerFormatWithValuePickers:(NSArray<ORKValuePickerAnswerFormat *> *)valuePickers;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
++ (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices
+                                                             style:(ORKChoiceAnswerStyle)style
+                                                          vertical:(BOOL)vertical;
 
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
                                                textChoices:(NSArray<ORKTextChoice *> *)textChoices;
@@ -157,11 +161,26 @@ ORK_CLASS_AVAILABLE
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
+
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                                         step:(NSInteger)step;
 
 + (ORKHeightAnswerFormat *)heightAnswerFormat;
+
 + (ORKHeightAnswerFormat *)heightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormat;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision;
+
++ (ORKWeightAnswerFormat *)weightAnswerFormatWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                                                  numericPrecision:(ORKNumericPrecision)numericPrecision
+                                                      minimumValue:(double)minimumValue
+                                                      maximumValue:(double)maximumValue
+                                                      defaultValue:(double)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
 
@@ -726,7 +745,21 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized image choice answer format.
  */
-- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
+
+/**
+ Returns an initialized image choice answer format using the specified array of images.
+ 
+ @param imageChoices    Array of `ORKImageChoice` objects.
+ @param style           The style of question, such as single or multiple choice.
+ @param vertical        Pass `YES` to stack images vertically; for the default horizontal
+ layout, pass `NO`.
+ 
+ @return An initialized image choice answer format.
+ */
+- (instancetype)initWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices
+                               style:(ORKChoiceAnswerStyle)style
+                            vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
 
 /**
  An array of `ORKImageChoice` objects that represent the available choices. (read-only)
@@ -735,6 +768,16 @@ ORK_CLASS_AVAILABLE
  each choice is spoken by VoiceOver when an image is highlighted.
  */
 @property (copy, readonly) NSArray<ORKImageChoice *> *imageChoices;
+
+/**
+ The style of the question (that is, single or multiple choice).
+ */
+@property (readonly) ORKChoiceAnswerStyle style;
+
+/**
+ A Boolean value indicating whether the choices are stacked vertically. (read-only)
+ */
+@property (readonly, getter=isVertical) BOOL vertical;
 
 @end
 
@@ -1053,17 +1096,37 @@ Returns an initialized numeric answer format using the specified style, unit des
  
  This method is the designated initializer.
  
- @param style       The style of the numeric answer (decimal or integer).
- @param unit        A string that displays a localized version of the unit designation.
- @param minimum     The minimum value to apply, or `nil` if none is specified.
- @param maximum     The maximum value to apply, or `nil` if none is specified.
- 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+
  @return An initialized numeric answer format.
  */
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
-                      maximum:(nullable NSNumber *)maximum NS_DESIGNATED_INITIALIZER;
+                      maximum:(nullable NSNumber *)maximum;
+
+/**
+Returns an initialized numeric answer format using the specified style, unit designation, and range
+ values.
+ 
+ This method is the designated initializer.
+ 
+ @param style                   The style of the numeric answer (decimal or integer).
+ @param unit                    A string that displays a localized version of the unit designation.
+ @param minimum                 The minimum value to apply, or `nil` if none is specified.
+ @param maximum                 The maximum value to apply, or `nil` if none is specified.
+ @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
+
+ @return An initialized numeric answer format.
+ */
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(nullable NSString *)unit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of numeric entry (decimal or integer). (read-only)
@@ -1094,12 +1157,18 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (copy, nullable) NSNumber *maximum;
 
 /**
- The decimal scale (number of digits to the right of the decimal point) allowed value for the
+ The maximum number of fraction digits to the right of the decimal point for the
  numeric answer.
  
- The default value of this property is `nil`, which means that no limit scale value is used.
+ The default value of this property is `nil`, which means that there's no maximum number of fraction
+ digits.
  */
-@property (copy, nullable) NSNumber *scale;
+@property (copy, nullable) NSNumber *maximumFractionDigits;
+
+/**
+ The default numeric answer.
+ */
+@property (copy, nullable) NSNumber *defaultNumericAnswer;
 
 @end
 
@@ -1284,6 +1353,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *invalidMessage;
 
 /**
+ The text to be used as an answer if user input is not mandatory.
+ 
+ The default value is nil. If set to nil, user input is mandatory to answer.
+ */
+@property (nonatomic, copy, nullable) NSString *defaultTextAnswer;
+
+/**
  The maximum length of the text users can enter.
  
  When the value of this property is 0, there is no maximum.
@@ -1423,9 +1499,147 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem NS_DESIGNATED_INITIALIZER;
 
 /**
+ The measurement system used by the answer format.
+ */
+@property (readonly) ORKMeasurementSystem measurementSystem;
+
+@end
+
+
+/**
+ The `ORKWeightAnswerFormat` class represents the answer format for questions that require users
+ to enter a weight.
+ 
+ A weight answer format produces an `ORKNumericQuestionResult` object. The result is always reported
+ in the metric system using the `kg` unit.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWeightAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized weight answer format using the measurement system specified in the current
+ locale.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)init;
+
+/**
+ Returns an initialized weight answer format using the specified measurement system.
+ 
+ This method is the designated initializer.
+ 
+ @param measurementSystem   The measurement system to use. See `ORKMeasurementSystem` for the
+ accepted values.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem;
+
+/**
+ Returns an initialized weight answer format using the specified measurement system and numeric
+ precision.
+ 
+ @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
+                                    accepted values.
+ @param numericPrecision        The numeric precision used by the picker. If you pass
+                                    `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
+                                    increments for the metric measurement system and whole pound
+                                    increments for the USC measurement system, which mimics the
+                                    default iOS behavior. If you pass `ORKNumericPrecisionLow`, the
+                                    picker will use 1 kg increments for the metric measurement
+                                    system and whole pound increments for the USC measurement
+                                    system. If you pass `ORKNumericPrecisionHigher`, the picker
+                                    use 0.01 gr increments for the metric measurement system,
+                                    and ounce increments for the USC measurement system.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision;
+
+/**
+ Returns an initialized weight answer format using the specified measurement system, numeric
+ precision, and default, minimum and maximum values.
+ 
+ @param measurementSystem       The measurement system to use. See `ORKMeasurementSystem` for the
+                                    accepted values.
+ @param numericPrecision        The numeric precision used by the picker. If you pass
+                                    `ORKNumericPrecisionDefault`, the picker will use 0.5 kg
+                                    increments for the metric measurement system and whole pound
+                                    increments for the USC measurement system, which mimics the
+                                    default iOS behavior. If you pass `ORKNumericPrecisionLow`, the
+                                    picker will use 1 kg increments for the metric measurement
+                                    system and whole pound increments for the USC measurement
+                                    system. If you pass `ORKNumericPrecisionHigher`, the picker
+                                    use 0.01 gr increments for the metric measurement system,
+                                    and ounce increments for the USC measurement system.
+ @param minimumValue            The minimum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the minimum values are 0 kg when using the
+                                    metric measurement system and 0 lbs when using the USC
+                                    measurement system.
+ @param maximumValue            The maximum value that is displayed in the picker. If you specify
+                                    `ORKDefaultValue`, the maximum values are 657 kg when using the
+                                    metric measurement system and 1,450 lbs when using the USC
+                                    measurement system.
+ @param defaultValue            The default value to be initially selected in the picker. If you
+                                    specify `ORKDefaultValue`, the initally selected values are
+                                    60 kg when using the metric measurement system and 133 lbs when
+                                    using the USC measurement system. This value must be between
+                                    `minimumValue` and `maximumValue`.
+ 
+ @return An initialized weight answer format.
+ */
+- (instancetype)initWithMeasurementSystem:(ORKMeasurementSystem)measurementSystem
+                         numericPrecision:(ORKNumericPrecision)numericPrecision
+                             minimumValue:(double)minimumValue
+                             maximumValue:(double)maximumValue
+                             defaultValue:(double)defaultValue NS_DESIGNATED_INITIALIZER;
+
+/**
  Indicates the measurement system used by the answer format.
  */
 @property (readonly) ORKMeasurementSystem measurementSystem;
+
+/**
+ The numeric precision used by the picker.
+ 
+ An `ORKNumericPrecisionDefault` value indicates that the picker will use 0.5 kg increments for the
+ metric measurement system and whole pound increments for the USC measurement system, which mimics
+ the default iOS behavior. An `ORKNumericPrecisionLow` value indicates that the picker will use
+ 1 kg increments for the metric measurement system and whole pound increments for the USC
+ measurement system. An `ORKNumericPrecisionHigher` value indicates that the picker will use
+ 0.01 gr increments for the metric measurement system and ounce increments for the USC measurement
+ system.
+ 
+ The default value of this property is `ORKNumericPrecisionDefault`.
+ */
+@property (readonly, getter=isAdditionalPrecision) ORKNumericPrecision numericPrecision;
+
+/**
+ The minimum value that is displayed in the picker.
+ 
+ When this property has a value equal to `ORKDefaultValue`, the minimum values are 0 kg when using
+ the metric measurement system and 0 lbs when using the USC measurement system.
+ */
+@property (readonly) double minimumValue;
+
+/**
+ The maximum value that is displayed in the picker.
+ 
+ When this property has a value equal to `ORKDefaultValue`, the maximum values are 657 kg when using
+ the metric measurement system and 1,450 lbs when using the USC measurement system.
+ */
+@property (readonly) double maximumValue;
+
+/**
+ The default value to initially selected in the picker.
+ 
+ When this property has a value equal to `ORKDefaultValue`, the initally selected values are 60 kg
+ when using the metric measurement system and 133 lbs when using the USC measurement system. This
+ value must be between `minimumValue` and `maximumValue`.
+ */
+@property (readonly) double defaultValue;
 
 @end
 
