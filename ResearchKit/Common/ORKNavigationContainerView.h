@@ -31,13 +31,14 @@
 
 @import UIKit;
 
-
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKBorderedButton;
 @interface ORKNavigationContainerView : UIView
 
-@property (nonatomic, strong, nullable) UIBarButtonItem *skipButtonItem;
 @property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *skipButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *cancelButtonItem;
 
 @property (nonatomic, assign) BOOL continueEnabled;
 @property (nonatomic, assign) BOOL neverHasContinueButton;

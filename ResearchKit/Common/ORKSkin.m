@@ -36,6 +36,7 @@
 
 NSString *const ORKSignatureColorKey = @"ORKSignatureColorKey";
 NSString *const ORKBackgroundColorKey = @"ORKBackgroundColorKey";
+NSString *const ORKConsentBackgroundColorKey = @"ORKConsentBackgroundColorKey";
 NSString *const ORKToolBarTintColorKey = @"ORKToolBarTintColorKey";
 NSString *const ORKLightTintColorKey = @"ORKLightTintColorKey";
 NSString *const ORKDarkTintColorKey = @"ORKDarkTintColorKey";
@@ -48,6 +49,14 @@ NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey"
 NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
 NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
 NSString *const ORKAuxiliaryImageTintColorKey = @"ORKAuxiliaryImageTintColorKey";
+NSString *const ORKNavigationContainerColorKey = @"ORKNavigationContainerColorKey";
+NSString *const ORKProgressLabelColorKey = @"ORKProgressLabelColorKey";
+CGFloat ORKCardDefaultCornerRadii = 10.0;
+CGFloat ORKCardDefaultBorderWidth = 0.5;
+CGFloat ORKCardDefaultFontSize = 25.0;
+CGFloat ORKCardLeftRightMargin = 0.0;
+CGFloat ORKCardTopBottomMargin = 15.0;
+CGFloat ORKSurveyTableContainerLeftRightPadding = 20.0;
 
 @implementation UIColor (ORKColor)
 
@@ -65,6 +74,7 @@ ORKCachedColorMethod(ork_midGrayTintColor, 0.0 / 255.0, 0.0 / 255.0, 25.0 / 255.
 ORKCachedColorMethod(ork_redColor, 255.0 / 255.0,  59.0 / 255.0,  48.0 / 255.0, 1.0)
 ORKCachedColorMethod(ork_grayColor, 142.0 / 255.0, 142.0 / 255.0, 147.0 / 255.0, 1.0)
 ORKCachedColorMethod(ork_darkGrayColor, 102.0 / 255.0, 102.0 / 255.0, 102.0 / 255.0, 1.0)
+ORKCachedColorMethod(ork_borderGrayColor, 239.0 / 255.0, 239.0 / 255.0, 244.0 / 255.0, 1.0)
 
 #undef ORKCachedColorMethod
 
@@ -76,7 +86,8 @@ static NSMutableDictionary *colors() {
     dispatch_once(&onceToken, ^{
         colors = [@{
                     ORKSignatureColorKey: ORKRGB(0x000000),
-                    ORKBackgroundColorKey: ORKRGB(0xffffff),
+                    ORKBackgroundColorKey: [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1.0],
+                    ORKConsentBackgroundColorKey: ORKRGB(0xffffff),
                     ORKToolBarTintColorKey: ORKRGB(0xffffff),
                     ORKLightTintColorKey: ORKRGB(0xeeeeee),
                     ORKDarkTintColorKey: ORKRGB(0x888888),
@@ -89,6 +100,8 @@ static NSMutableDictionary *colors() {
                     ORKGraphScrubberLineColorKey: [UIColor grayColor],
                     ORKGraphScrubberThumbColorKey: [UIColor colorWithWhite:1.0 alpha:1.0],
                     ORKAuxiliaryImageTintColorKey: [UIColor colorWithRed:228.0 / 255.0 green:233.0 / 255.0 blue:235.0 / 255.0 alpha:1.0],
+                    ORKNavigationContainerColorKey: [UIColor colorWithRed:249.0 / 255.0 green:249.0 / 255.0 blue:251.0 / 255.0 alpha:0.0],
+                    ORKProgressLabelColorKey: [UIColor colorWithRed:142.0/255.0 green:142.0/255.0 blue:142.0/255.0 alpha:1.0],
                     } mutableCopy];
     });
     return colors;
@@ -205,8 +218,8 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        44,        40,        40,        44,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
         {        198,       198,       198,       194,       152,       297,       297},      // ORKScreenMetricIllustrationHeight
         {        300,       300,       300,       176,       152,       300,       300},      // ORKScreenMetricInstructionImageHeight
-        {         44,        44,        44,        44,        44,        44,        44},      // ORKScreenMetricContinueButtonHeightRegular
-        {         44,        44,        32,        32,        32,        44,        44},      // ORKScreenMetricContinueButtonHeightCompact
+        {         55,        55,        50,        44,        44,        44,        44},      // ORKScreenMetricContinueButtonHeightRegular
+        {         32,        44,        32,        32,        32,        44,        44},      // ORKScreenMetricContinueButtonHeightCompact
         {        150,       150,       150,       146,       146,       150,       150},      // ORKScreenMetricContinueButtonWidth
         {        162,       162,       162,       120,       116,       240,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
         {        162,       162,       162,       120,       116,       240,       240},      // ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle

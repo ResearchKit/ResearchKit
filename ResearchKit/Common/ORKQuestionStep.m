@@ -46,23 +46,13 @@
 }
 
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                  title:(NSString *)title
-                                    answer:(ORKAnswerFormat *)answer {
+                                     title:(nullable NSString *)title
+                                      question:(nullable NSString *)question
+                                    answer:(nullable ORKAnswerFormat *)answerFormat {
     
     ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
     step.title = title;
-    step.answerFormat = answer;
-    return step;
-}
-
-+ (instancetype)questionStepWithIdentifier:(NSString *)identifier
-                                     title:(nullable NSString *)title
-                                      text:(nullable NSString *)text
-                                    answer:(nullable ORKAnswerFormat *)answerFormat {
-
-    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
-    step.title = title;
-    step.text = text;
+    step.question = question;
     step.answerFormat = answerFormat;
     return step;
 }
@@ -73,6 +63,7 @@
     if (self) {
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }
@@ -82,6 +73,7 @@
     if (self) {
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }
@@ -116,6 +108,10 @@
 
 - (NSUInteger)hash {
     return super.hash ^ self.answerFormat.hash;
+}
+
+- (void)setQuestion:(NSString *)question {
+    _question = question;
 }
 
 - (ORKQuestionType)questionType {

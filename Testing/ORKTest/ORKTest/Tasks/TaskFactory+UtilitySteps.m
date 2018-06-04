@@ -55,6 +55,7 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKCompletionStep *step1 = [[ORKCompletionStep alloc] initWithIdentifier:@"completionStepWithDoneButton"];
+    step1.title = @"Completion Step";
     step1.text = @"Example of a step view controller with the continue button in the standard location below the checkmark.";
     step1.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                 ORKStepViewController *stepViewController) {
@@ -63,7 +64,8 @@
     [steps addObject:step1];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
-    stepLast.title = @"Example of an step view controller with the continue button in the upper right.";
+    stepLast.title = @"Completion Step";
+    stepLast.text = @"Example of an step view controller with the continue button in the upper right.";
     [steps addObject:stepLast];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -76,7 +78,7 @@
     step1.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
     
     ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"step2"];
-    step2.title = @"Image and No Footnote";
+    step2.title = @"No Footnote";
     step2.text = @"This is an instruction step with an image and NO footnote.";
     step2.image = [UIImage imageNamed:@"image_example"];
     
@@ -86,13 +88,13 @@
     step3.image = [UIImage imageNamed:@"image_example"];
     step3.footnote = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dignissim tortor eget orci placerat, eu congue diam tempor. In hac.";
     
-    ORKFormStep *step4 = [[ORKFormStep alloc] initWithIdentifier:@"step4" title:@"Form Step with skip" text:@"This is a form step with a skip button."];
+    ORKFormStep *step4 = [[ORKFormStep alloc] initWithIdentifier:@"step4" title:@"Form Step" text:@"This is a form step with a skip button."];
     step4.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"formItem1"
                                                            text:@"Are you over 18 years of age?"
                                                    answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
     step4.optional = YES;
     
-    ORKFormStep *step5 = [[ORKFormStep alloc] initWithIdentifier:@"step5" title:@"Form Step with Footnote" text:@"This is a form step with a skip button and footnote."];
+    ORKFormStep *step5 = [[ORKFormStep alloc] initWithIdentifier:@"step5" title:@"Footnote example" text:@"This is a form step with a skip button and footnote."];
     step5.formItems = @[[[ORKFormItem alloc] initWithIdentifier:@"formItem1"
                                                            text:@"Are you over 18 years of age?"
                                                    answerFormat:[ORKAnswerFormat booleanAnswerFormat]]];
@@ -135,6 +137,7 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Page Step";
     step1.text = @"Example of an ORKPageStep";
     [steps addObject:step1];
     
@@ -150,13 +153,14 @@
     NSMutableArray<ORKImageChoice *> *imageChoices = [[NSMutableArray alloc] init];
     [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"left_hand_outline"] selectedImage:[UIImage imageNamed:@"left_hand_solid"] text:@"Left hand" value:[NSNumber numberWithInt:1]]];
     [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"right_hand_outline"] selectedImage:[UIImage imageNamed:@"right_hand_solid"] text:@"Right hand" value:[NSNumber numberWithInt:0]]];
-    ORKQuestionStep *groupStep2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
+    ORKQuestionStep *groupStep2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:nil question:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
     
     ORKSignatureStep *groupStep3 = [[ORKSignatureStep alloc] initWithIdentifier:@"step3"];
     
     ORKStep *groupStep4 = [[ORKConsentReviewStep alloc] initWithIdentifier:@"groupStep4" signature:nil inDocument:[self buildConsentDocument]];
     
     ORKPageStep *pageStep = [[ORKPageStep alloc] initWithIdentifier:@"pageStep" steps:@[groupStep1, groupStep2, groupStep3, groupStep4]];
+    pageStep.title = @"Page Step";
     [steps addObject:pageStep];
     
     ORKOrderedTask *audioTask = [ORKOrderedTask audioTaskWithIdentifier:@"audioTask"
@@ -170,6 +174,7 @@
                                  ORKPredefinedTaskOptionExcludeInstructions |
                                  ORKPredefinedTaskOptionExcludeConclusion];
     ORKPageStep *audioStep = [[ORKNavigablePageStep alloc] initWithIdentifier:@"audioStep" pageTask:audioTask];
+    audioStep.title = @"Page Step";
     [steps addObject:audioStep];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
@@ -193,147 +198,160 @@
     
     // Test Expected Boolean value
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question1"
-                                                                      title:@"Pass the Boolean question?"
-                                                                     answer:[ORKAnswerFormat booleanAnswerFormat]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question1" title:@"Predicate Tests" question:@"Pass the Boolean question?" answer:[ORKAnswerFormat booleanAnswerFormat]];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question1Fail"];
-        step.title = @"You failed the Boolean question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You failed the Boolean question.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question1Pass"];
-        step.title = @"You passed the Boolean question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You passed the Boolean question.";
         [steps addObject:step];
     }
     
     // Test expected Single Choice
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Choose Yes", @"Choose No", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question2"
-                                                                      title:@"Pass the single choice question?"
-                                                                     answer:answer];
+        NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Choose Yes" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Choose No" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question2" title:@"Predicate Tests" question:@"Pass the single choice question?" answer:answer];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question2Fail"];
-        step.title = @"You failed the single choice question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You failed the single choice question.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question2Pass"];
-        step.title = @"You passed the single choice question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You passed the single choice question.";
         [steps addObject:step];
     }
     
     //  Test expected multiple choices
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Dog", @"Rock", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question3"
-                                                                      title:@"Select all the animals"
-                                                                     answer:answer];
+        NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Cat" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Dog" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Rock" detailText:@"" value:[NSNumber numberWithInt:2] exclusive:NO]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:textChoices];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question3" title:@"Predicate Tests" question:@"Select all the animals" answer:answer];
+        
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question3Fail"];
-        step.title = @"You failed the multiple choice animals question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You failed the multiple choice animals question.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question3Pass"];
-        step.title = @"You passed the multiple choice animals question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You passed the multiple choice animals question.";
         [steps addObject:step];
     }
     
     //  Test expected multiple choices
     {
-        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[NSArray arrayWithObjects:@"Cat", @"Catheter", @"Cathedral", @"Dog", nil]];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question4"
-                                                                      title:@"Choose any word containing the word 'Cat'"
-                                                                     answer:answer];
+        NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Cat" detailText:@"" value:@"Cat" exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Catheter" detailText:@"" value:@"Catheter" exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Cathedral" detailText:@"" value:@"Cathedral" exclusive:NO]];
+        [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Dog" detailText:@"" value:@"Dog" exclusive:NO]];
+        ORKAnswerFormat *answer = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question4" title:@"Predicate Tests" question:@"Choose any word containing the word 'Cat'" answer:answer];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question4Fail"];
-        step.title = @"You failed the 'Cat' pattern match question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You failed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question4Pass"];
-        step.title = @"You passed the 'Cat' pattern match question.";
+        step.title = @"Predicate Tests";
+        step.text = @"You passed the 'Cat' pattern match question.";
         [steps addObject:step];
     }
     
     //  Test expected text
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat textAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question5"
-                                                                      title:@"Write the word 'Dog'"
-                                                                     answer:answer];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question5" title:@"Predicate Tests" question:@"Write the word 'Dog'" answer:answer];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question5Fail"];
-        step.title = @"You didn't write 'Dog'.";
+        step.title = @"Predicate Tests";
+        step.text = @"You didn't write 'Dog'.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question5Pass"];
-        step.title = @"You wrote 'Dog'.";
+        step.title = @"Predicate Tests";
+        step.text = @"You wrote 'Dog'.";
         [steps addObject:step];
     }
     
     //  Test matching text
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat textAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question6"
-                                                                      title:@"Write a word matching '*og'"
-                                                                     answer:answer];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question6" title:@"Predicate Tests" question:@"Write a word matching '*og'" answer:answer];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question6Fail"];
-        step.title = @"You didn't write a word matching '*og'.";
+        step.title = @"Predicate Tests";
+        step.text = @"You didn't write a word matching '*og'.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question6Pass"];
-        step.title = @"You wrote a word matching '*og'.";
+        step.title = @"Predicate Tests";
+        step.text = @"You wrote a word matching '*og'.";
         [steps addObject:step];
     }
     
     //  Numeric test - any number over 10
     {
         ORKAnswerFormat *answer = [ORKAnswerFormat integerAnswerFormatWithUnit:nil];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question7"
-                                                                      title:@"Enter a number over 10"
-                                                                     answer:answer];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question7" title:@"Predicate Tests" question:@"Enter a number over 10" answer:answer];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question7Fail"];
-        step.title = @"Your number was less then 10.";
+        step.title = @"Predicate Tests";
+        step.text = @"Your number was less then 10.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question7Pass"];
-        step.title = @"Your number was over 10.";
+        step.title = @"Predicate Tests";
+        step.text = @"Your number was over 10.";
         [steps addObject:step];
     }
     
@@ -349,28 +367,29 @@
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question8"
-                                                                      title:@"Choose a value under 5"
-                                                                     answer:scaleAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question8" title:@"Predciate Tests" question:@"Choose a value under 5" answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question8Fail"];
-        step.title = @"Your number was more than 5.";
+        step.title = @"Predicate Tests";
+        step.text = @"Your number was more than 5.";
         [steps addObject:step];
     }
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"question8Pass"];
-        step.title = @"Your number was less than 5.";
+        step.title = @"Predicate Tests";
+        step.text = @"Your number was less than 5.";
         [steps addObject:step];
     }
     
     
     {
         ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"allPassed"];
-        step.title = @"All validation tests now completed.";
+        step.title = @"Predicate Tests";
+        step.text = @"All validation tests now completed.";
         [steps addObject:step];
     }
     
@@ -521,10 +540,12 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Signature Step";
     step1.text = @"Example of an ORKSignatureStep";
     [steps addObject:step1];
     
     ORKSignatureStep *signatureStep = [[ORKSignatureStep alloc] initWithIdentifier:@"signatureStep"];
+    signatureStep.title = @"Signature Step";
     [steps addObject:signatureStep];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
@@ -538,11 +559,14 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
+    step1.title = @"Table Step";
     step1.text = @"Example of an ORKTableStepViewController";
     [steps addObject:step1];
     
     ORKTableStep *tableStep = [[ORKTableStep alloc] initWithIdentifier:@"tableStep"];
+    tableStep.title = @"Table Step";
     tableStep.items = @[@"Item 1", @"Item 2", @"Item 3"];
+    tableStep.isBulleted = YES;
     [steps addObject:tableStep];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
@@ -556,11 +580,12 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *firstStep = [[ORKInstructionStep alloc] initWithIdentifier:@"firstStep"];
+    firstStep.title = @"Video Instruction";
     firstStep.text = @"Example of an ORKVideoInstructionStep";
     [steps addObject:firstStep];
     
     ORKVideoInstructionStep *videoInstructionStep = [[ORKVideoInstructionStep alloc] initWithIdentifier:@"videoInstructionStep"];
-    videoInstructionStep.text = @"Video Instruction";
+    videoInstructionStep.title = @"Video Instruction";
     videoInstructionStep.videoURL = [[NSURL alloc] initWithString:@"https://www.apple.com/media/us/researchkit/2016/a63aa7d4_e6fd_483f_a59d_d962016c8093/films/carekit/researchkit-carekit-cc-us-20160321_r848-9dwc.mov"];
     
     [steps addObject:videoInstructionStep];
@@ -623,6 +648,7 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *firstStep = [[ORKInstructionStep alloc] initWithIdentifier:@"firstStep"];
+    firstStep.title = @"Web View";
     firstStep.text = @"Example of an ORKWebViewStep";
     [steps addObject:firstStep];
     
@@ -646,6 +672,7 @@
     "</html>";
     
     ORKWebViewStep *webViewStep = [ORKWebViewStep webViewStepWithIdentifier:@"webViewStep" html:html];
+    webViewStep.title = @"Web View";
     [steps addObject:webViewStep];
     
     ORKCompletionStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];

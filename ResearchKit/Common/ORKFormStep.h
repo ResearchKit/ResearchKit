@@ -94,6 +94,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSArray<ORKFormItem *> *formItems;
 
+/**
+ The property to present the form with all the items in a card view. Default to YES;
+ */
+@property (nonatomic) BOOL useCardView;
+
 @end
 
 

@@ -678,6 +678,23 @@ encondingTable =
         (@{
            PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
            })),
+   ENTRY(ORKdBHLToneAudiometryStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKdBHLToneAudiometryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(maxRandomPreStimulusDelay, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(postStimulusDelay, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(maxNumberOfTransitionsPerFrequency, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(initialdBHLValue, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(dBHLStepUpSize, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(dBHLStepDownSize, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(presetSystemVolumeLevel, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(headphoneType, NSString, NSObject, YES, nil, nil),
+            PROPERTY(earPreference, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(frequencyList, NSArray, NSObject, YES, nil, nil)
+            })),
    ENTRY(ORKHolePegTestPlaceStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1351,17 +1368,50 @@ encondingTable =
            PROPERTY(amplitude, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(channelSelected, NSNumber, NSObject, NO, nil, nil)
            })),
-  ENTRY(ORKToneAudiometryResult,
+   ENTRY(ORKToneAudiometryResult,
         nil,
         (@{
            PROPERTY(outputVolume, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(samples, ORKToneAudiometrySample, NSArray, NO, nil, nil),
            })),
+   ENTRY(ORKdBHLToneAudiometryUnit,
+         nil,
+         (@{
+            PROPERTY(dBHLValue, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(startOfUnitTimeStamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(preStimulusDelay, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(userTapTimeStamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(timeoutTimeStamp, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKdBHLToneAudiometryFrequencySample,
+         nil,
+         (@{
+            PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(calculatedThreshold, NSNumber, NSObject, NO,
+                     (^id(id threshold) { return [NSString stringWithFormat:@"%@", threshold]; }),
+                     (^id(id string) { return [NSDecimalNumber decimalNumberWithString:string]; })),
+            PROPERTY(channel, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(units, ORKdBHLToneAudiometryUnit, NSArray, NO, nil, nil)
+            })),
+   ENTRY(ORKdBHLToneAudiometryResult,
+         nil,
+         (@{
+            PROPERTY(outputVolume, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(tonePlaybackDuration, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(postStimulusDelay, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(headphoneType, NSString, NSObject, NO, nil, nil),
+            PROPERTY(samples, ORKdBHLToneAudiometryFrequencySample, NSArray, NO, nil, nil),
+            })),
    ENTRY(ORKReactionTimeResult,
          nil,
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKSpeechRecognitonResult,
+         nil,
+         (@{
+            PROPERTY(transcription, SFTranscription, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKStroopResult,
          nil,

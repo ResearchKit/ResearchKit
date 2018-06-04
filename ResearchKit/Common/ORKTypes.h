@@ -400,6 +400,17 @@ typedef NS_OPTIONS(NSUInteger, ORKTremorActiveTaskOption) {
 
 
 /**
+ Enums to exclude options from `ORKPDFViewerStep`.
+ */
+typedef NS_OPTIONS(NSUInteger, ORKPDFViewerActionBarOption) {
+    ORKPDFViewerActionBarOptionExcludeThumbnail = 1 << 0,
+    ORKPDFViewerActionBarOptionExcludeAnnotation = 1 << 1,
+    ORKPDFViewerActionBarOptionExcludeSearch = 1 << 2,
+    ORKPDFViewerActionBarOptionExcludeShare = 1 << 3,
+}ORK_ENUM_AVAILABLE;
+
+
+/**
  Numeric precision.
  
  Used by ORKWeightAnswerFormat.
@@ -415,8 +426,238 @@ typedef NS_ENUM(NSInteger, ORKNumericPrecision) {
     ORKNumericPrecisionHigh,
 } ORK_ENUM_AVAILABLE;
 
+/**
+ Eye side for amsler grid
+ */
+typedef NS_ENUM(NSInteger, ORKAmslerGridEyeSide) {
+    /**
+     Not Specified
+     */
+    ORKAmslerGridEyeSideNotSpecified = 0,
+    
+    /**
+     Left Eye
+     */
+    ORKAmslerGridEyeSideLeft,
+    
+    /**
+     Right Eye
+     */
+    ORKAmslerGridEyeSideRight
+} ORK_ENUM_AVAILABLE;
+
+/**
+ An enumeration of the types of button styles for Navigation Containers.
+ */
+typedef NS_ENUM(NSInteger, ORKNavigationContainerButtonStyle) {
+    /**
+     A standard ORKText button.
+     */
+    ORKNavigationContainerButtonStyleTextStandard = 0,
+    
+    /**
+     A text button with Bold title.
+     */
+    ORKNavigationContainerButtonStyleTextBold,
+    
+    /**
+     A rounded rect button.
+     */
+    ORKNavigationContainerButtonStyleRoundedRect
+} ORK_ENUM_AVAILABLE;
 
 extern const double ORKDoubleDefaultValue ORK_AVAILABLE_DECL;
+
+/**
+ Identifiers for locales that support speech recognition.
+ */
+typedef NSString * ORKSpeechRecognizerLocale NS_STRING_ENUM;
+
+/// Arabic (Saudi Arabia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleArabic;
+
+/// Catalan (Spain)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCatalan;
+
+/// Czech (Czechia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCzech;
+
+/// Danish (Denmark)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDanish;
+
+/// German (Austria)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanAT;
+
+/// German (Switzerland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanCH;
+
+/// German (Germany)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanDE;
+
+/// Greek (Greece)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGreek;
+
+/// English (United Arab Emirates)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishAE;
+
+/// English (Australia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishAU;
+
+/// English (Canada)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishCA;
+
+/// English (United Kingdom)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishGB;
+
+/// English (Indonesia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishID;
+
+/// English (Ireland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishIE;
+
+/// English (India)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishIN;
+
+/// English (New Zealand)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishNZ;
+
+/// English (Philippines)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishPH;
+
+/// English (Saudi Arabia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishSA;
+
+/// English (Singapore)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishSG;
+
+/// English (United States)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishUS;
+
+/// English (South Africa)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishZA;
+
+/// Spanish (Chile)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishCL;
+
+/// Spanish (Colombia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishCO;
+
+/// Spanish (Spain)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishES;
+
+/// Spanish (Mexico)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishMX;
+
+/// Spanish (United States)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishUS;
+
+/// Finnish (Finland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFinnish;
+
+/// French (Belgium)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchBE;
+
+/// French (Canada)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchCA;
+
+/// French (Switzerland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchCH;
+
+/// French (France)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchFR;
+
+/// Hebrew (Israel)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHebrew;
+
+/// Hindi (India)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindi;
+
+/// Hindi (India, TRANSLIT)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindiINTRANSLIT;
+
+/// Hindi (Latin)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindiLATN;
+
+/// Croatian (Croatia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCroatian;
+
+/// Hungarian (Hungary)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHungarian;
+
+/// Indonesian (Indonesia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleIndonesian;
+
+/// Italian (Switzerland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleItalianCH;
+
+/// Italian (Italy)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleItalianIT;
+
+/// Japanese (Japan)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleJapaneseJP;
+
+/// Korean (South Korea)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleKorean;
+
+/// Malay (Malaysia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleMalay;
+
+/// Norwegian Bokmål (Norway)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleNorwegian;
+
+/// Dutch (Belgium)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDutchBE;
+
+/// Dutch (Netherlands)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDutchNL;
+
+/// Polish (Poland)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePolish;
+
+/// Portuguese (Brazil)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePortugeseBR;
+
+/// Portuguese (Portugal)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePortugesePT;
+
+/// Romanian (Romania)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleRomanian;
+
+/// Russian (Russia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleRussian;
+
+/// Slovak (Slovakia)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSlovak;
+
+/// Swedish (Sweden)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSwedish;
+
+/// Thai (Thailand)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleThai;
+
+/// Turkish (Turkey)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleTurkish;
+
+/// Ukrainian (Ukraine)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleUkranian;
+
+/// Vietnamese (Vietnam)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleVietnamese;
+
+/// Shanghainese (China)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleShanghainese;
+
+/// Cantonese (China)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCantonese;
+
+/// Chinese (China)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseCN;
+
+/// Chinese (Hong Kong [China])
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseHK;
+
+/// Chinese (Taiwan)
+ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW;
 
 
 NS_ASSUME_NONNULL_END

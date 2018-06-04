@@ -55,6 +55,7 @@
         self.text = text;
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }
@@ -64,6 +65,7 @@
     if (self) {
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }

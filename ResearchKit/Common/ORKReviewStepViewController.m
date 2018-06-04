@@ -65,7 +65,8 @@
 
 
 @implementation ORKReviewStepViewController {
-    ORKNavigationContainerView *_continueSkipView;
+    ORKNavigationContainerView *_navigationFooterView;
+    NSArray<NSLayoutConstraint *> *_constraints;
 }
  
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(NSArray<ORKStep *>*)steps resultSource:(id<ORKTaskResultSource>)resultSource {
@@ -99,7 +100,7 @@
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    _continueSkipView.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
 }
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
@@ -109,7 +110,12 @@
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
-    _continueSkipView.skipButtonItem = self.skipButtonItem;
+    _navigationFooterView.skipButtonItem = self.skipButtonItem;
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
 }
 
 - (void)stepDidChange {
@@ -120,7 +126,8 @@
     
     _tableContainer.tableView.delegate = nil;
     _tableContainer.tableView.dataSource = nil;
-    _continueSkipView = nil;
+    [_navigationFooterView removeFromSuperview];
+    _navigationFooterView = nil;
     
     if ([self reviewStep]) {
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
@@ -132,17 +139,82 @@
         _tableContainer.tapOffView = self.view;
         
         _tableContainer.stepHeaderView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-        _tableContainer.stepHeaderView.captionLabel.text = [self reviewStep].title;
         _tableContainer.stepHeaderView.instructionLabel.text = [self reviewStep].text;
         _tableContainer.stepHeaderView.learnMoreButtonItem = self.learnMoreButtonItem;
         
-        _continueSkipView = _tableContainer.continueSkipContainerView;
-        _continueSkipView.skipButtonItem = self.skipButtonItem;
-        _continueSkipView.continueEnabled = YES;
-        _continueSkipView.continueButtonItem = self.continueButtonItem;
-        _continueSkipView.optional = self.step.optional;
+        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView.skipButtonItem = self.skipButtonItem;
+        _navigationFooterView.continueEnabled = YES;
+        _navigationFooterView.continueButtonItem = self.continueButtonItem;
+        _navigationFooterView.optional = self.step.optional;
+        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+        [self.view addSubview:_navigationFooterView];
+        [self setupConstraints];
         [_tableContainer setNeedsLayout];
     }
+}
+
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _tableContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    _constraints = nil;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 - (ORKReviewStep *)reviewStep {

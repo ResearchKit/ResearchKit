@@ -103,7 +103,12 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-    
+    [self.taskViewController.navigationBar setBarTintColor:[self.view backgroundColor]];
+    if ([self step].title) {
+        self.title = [self step].title;
+    } else {
+        self.title = @"";
+    }
 }
 
 - (void)setupButtons {
@@ -237,17 +242,12 @@
     [self updateNavLeftBarButtonItem];
 }
 
-- (void)updateNavRightBarButtonItem {
-    self.navigationItem.rightBarButtonItem = _cancelButtonItem;
-}
-
 - (void)updateNavLeftBarButtonItem {
     self.navigationItem.leftBarButtonItem = _backButtonItem;
 }
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButton {
     _cancelButtonItem = cancelButton;
-    [self updateNavRightBarButtonItem];
 }
 
 - (BOOL)hasPreviousStep {

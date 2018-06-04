@@ -43,11 +43,12 @@
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
-    step1.title = @"Confirmation Form Items Survey";
+    step1.title = @"Confirmation Form";
+    step1.text = @"Proceed to register a new account.";
     [steps addObject:step1];
     
     // Create a step for entering password with confirmation
-    ORKFormStep *step2 = [[ORKFormStep alloc] initWithIdentifier:@"step2" title:@"Password" text:nil];
+    ORKFormStep *step2 = [[ORKFormStep alloc] initWithIdentifier:@"step2" title:@"Password" text:@"Register a new password"];
     [steps addObject:step2];
     
     {
@@ -73,7 +74,7 @@
     }
     
     // Create a step for entering participant id
-    ORKFormStep *step3 = [[ORKFormStep alloc] initWithIdentifier:@"step3" title:@"Participant ID" text:nil];
+    ORKFormStep *step3 = [[ORKFormStep alloc] initWithIdentifier:@"step3" title:@"Participant ID" text:@"Register a new participant ID"];
     [steps addObject:step3];
     
     {
@@ -99,6 +100,7 @@
     
     ORKCompletionStep *step4 = [[ORKCompletionStep alloc] initWithIdentifier:@"confirmationForm.lastStep"];
     step4.title = @"Survey Complete";
+    step4.text = @"Thank you for registering.";
     [steps addObject:step4];
     
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -217,7 +219,7 @@
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"headacheQuestion" text:@"Have headache?" answerFormat:[ORKBooleanAnswerFormat new]];
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"headacheQuestion" text:@"Do you have a headache?" answerFormat:[ORKBooleanAnswerFormat new]];
             [items addObject:item];
         }
         

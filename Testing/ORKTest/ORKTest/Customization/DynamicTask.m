@@ -133,8 +133,8 @@
 - (ORKQuestionStep *)step2 {
     if (_step2 == nil) {
         _step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"step2"];
-        _step2.title = @"Which route do you prefer?";
-        _step2.text = @"Please choose from the options below:";
+        _step2.title = @"Dynamic Task";
+        _step2.text = @"Please choose a route from the options below:";
         ORKTextChoice *route1 = [ORKTextChoice choiceWithText:@"route1" value:@"route1"];
         ORKTextChoice *route2 = [ORKTextChoice choiceWithText:@"route2" value:@"route2"];
         _step2.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[route1, route2]];
@@ -146,7 +146,8 @@
 - (ORKQuestionStep *)step3a {
     if (_step3a == nil) {
         _step3a = [[ORKQuestionStep alloc] initWithIdentifier:@"step3a"];
-        _step3a.title = @"You chose route1. Was this correct?";
+        _step3a.title = @"Dynamic Task";
+        _step3a.text = @"You chose route1. Was this correct?";
         _step3a.answerFormat = [ORKBooleanAnswerFormat new];
         _step3a.optional = NO;
     }
@@ -156,7 +157,8 @@
 - (ORKQuestionStep *)step3b {
     if (_step3b == nil) {
         _step3b = [[ORKQuestionStep alloc] initWithIdentifier:@"step3b"];
-        _step3b.title = @"You chose route2. Was this correct?";
+        _step3b.title = @"Dynamic Task";
+        _step3b.text = @"You chose route2. Was this correct?";
         _step3b.answerFormat = [ORKBooleanAnswerFormat new];
         _step3b.optional = NO;
     }

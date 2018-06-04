@@ -253,12 +253,12 @@
                                                views:views]];
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
