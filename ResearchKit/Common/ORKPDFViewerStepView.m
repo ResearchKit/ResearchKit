@@ -780,6 +780,10 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWillAppear:(NSNotification *)aNotification {
     
