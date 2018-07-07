@@ -86,6 +86,10 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)applicationWillResignActive:(NSNotification *)notification {
     if (self.suspendIfInactive) {
         [self suspend];
