@@ -803,6 +803,10 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     }
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)updateShareButton {
     _isShareActive = NO;
     [self updateActionButtonsAppearance];
