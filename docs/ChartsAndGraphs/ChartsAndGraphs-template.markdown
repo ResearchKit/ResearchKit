@@ -204,7 +204,7 @@ Other optional methods allow you to provide titles as well as set minimum and ma
 Here's an example of a data source class for a line graph. This class returns five points for the two plots that will appear on the graph:
     
 ```swift    
-    class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
+class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     
     var plotPoints =
     [
@@ -284,7 +284,7 @@ Here's an example of a data source class for a line graph. This class returns fi
             return UIColor.purpleColor()
         }
     }
-    }
+ }
  ```    
     
 <strong>Note:</strong> A discrete graph uses the same data source protocol as a line graph, so the data source class for a discrete graph tends to look similar to the line graph data source class shown above.
