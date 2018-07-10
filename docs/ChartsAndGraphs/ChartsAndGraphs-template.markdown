@@ -184,7 +184,6 @@ The screenshot below shows the pie chart created by the code in this section.
 <center>
 <figure>
 <img src="ChartsImages/PieChart/chart1.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Pie chart.</center></figcaption>
 </figure>
 </center>
 
@@ -314,7 +313,6 @@ The screenshot below shows the line graph created by the code in this section.
 <center>
 <figure>
 <img src="ChartsImages/CustomizedLineGraph.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Line graph chart</center></figcaption>
 </figure>
 </center>
 
@@ -343,7 +341,6 @@ The screenshot below shows a discrete graph that uses the same data source class
 <center>
 <figure>
 <img src="ChartsImages/DiscreteGraphChart.png" width="25%"  style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Discrete graph chart</center></figcaption>
 </figure>
 </center>
 
@@ -381,7 +378,6 @@ The code above displays the titles you can see in the discrete graph shown here:
 <center>
 <figure>
 <img src="ChartsImages/DiscreteGraphChart2.png" width="25%" style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Discrete graph chart with custom titles</center></figcaption>
 </figure>
 </center>
 
