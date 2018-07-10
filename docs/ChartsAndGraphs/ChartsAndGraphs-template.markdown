@@ -394,4 +394,23 @@ There are three optional methods that can be implemented:
 
 - `graphChartViewTouchesEnded:` alerts the object when the user has stopped touching the graph view.
 
+### Updating the Data Source
+As the examples above, the `plotPoints` are hard-coded. To update the data source, you may add functions that takes in a new set of `plotPoints` to update the data. Note that after updating your data source, the graphView itself should be redrawn by calling `reloadData()`
 
+For Example, if your graph is in a `Table View`:
+```swift
+override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+	let dataSource = lineGraphChartView.dataSource as! yourDataSource
+	dataSource.updatePlotPoints(newPlotPoints: [
+		ORKValueRange(value: 2),
+       		ORKValueRange(value: 4),
+		ORKValueRange(value: 8),
+		ORKValueRange(value: 16),
+		ORKValueRange(value: 32),
+		ORKValueRange(value: 64),
+	]
+	hrLineGraphChartView.reloadData()
+	hrLineGraphChartView.animate(withDuration: 0.5)
+}
+```
