@@ -12,30 +12,43 @@ You can use the ResearchKit classes to create five kinds of charts:
  * <strong>Discrete graph</strong> (`ORKDiscreteGraphChartView`). A discrete graph displays information as a series of data points in which each series is evenly spaced across the axis according to a tier row index. A discrete graph chart is a good choice for displaying data within a range, such as the range of a user's heart rate over the past month.
  * <strong>Discrete graph with multiple points.</strong> A discrete graph with multiple points groups together noncontinuous values, which is useful for showing relationships between different types of discrete values that occur at the same time (for example, viewing a user's blood pressure and heart rate in a single discrete graph).
  
-Each of these charts is shown below. 
+**Each of these charts is shown below:**
 
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ChartsImages/Overview/PieChartOverview.png" style="width: 100%;border: solid black 1px; ">Pie Chart</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ChartsImages/Overview/LineGraphChartOverview.png" style="width: 100%;border: solid black 1px;">Line graph chart</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ChartsImages/Overview/LineGraphChartMultipleLinesOverview.png" style="width: 100%;border: solid black 1px;">Line graph chart with multiple lines</p>
-<p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ChartsImages/Overview/DiscreteGraphChartOverview.png" style="width: 100%;border: solid black 1px; ">Discrete graph chart</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ChartsImages/Overview/DiscereteGraphChartMultipleLinesOverview.png" style="width: 100%;border: solid black 1px;">Discrete graph chart with multiple points</p>
-<p style="clear: both;">
+Pie Chart:
+
+<img src="ChartsImages/Overview/PieChartOverview.png" style="width: 100%">
+
+Line Graph Chart:
+
+<img src="ChartsImages/Overview/LineGraphChartOverview.png" style="width: 100%">
+
+Line graph chart with multiple lines:
+
+<img src="ChartsImages/Overview/LineGraphChartMultipleLinesOverview.png" style="width: 100%">
+
+Discrete graph chart:
+
+<img src="ChartsImages/Overview/DiscreteGraphChartOverview.png" style="width: 100%">
+
+Discrete graph chart with multiple points
+<img src="ChartsImages/Overview/DiscereteGraphChartMultipleLinesOverview.png" style="width: 100%;border: solid black 1px;">
 
 
-
-##Adding a Chart to Your App
+## Adding a Chart to Your App
 Chart objects adhere to the Model-View-Controller (MVC) paradigm, which emphasizes separation between the data (model), the presentation of that data (view), and the class required to coordinate the data and its view (controller). This design pattern is pervasive in iOS programming and is an integral part of the charts feature.
 
 In a research app, the chart object (view) must be connected to a data source object (model), which is responsible for supplying the data. The chart is then presented to a view controller object (controller), which establishes the necessary connections between the data source and the view.
 
 To add a chart or graph to your app, first create a data source class to supply the data. Next, create a chart or graph object (such as an `ORKPieChartView` object), connect it to the data source, customize the chart object as you want, and present it in a view controller.
 
-###Step 1: Implementing the Data Source Protocol
+### Step 1: Implementing the Data Source Protocol
 The data source provides the information that a chart object needs in order to construct a chart. This communication is enforced by a contractual obligation between objects known as a *protocol*. A protocol is composed of a name and a list of methods that the data source promises to implement.
 
 Two types of methods exist in a protocol: *required* and *optional* methods. As you might guess, you must implement the required methods in the data source, and you can choose to implement the optional methods. In the case of ResearchKit charts, one of the required methods of the protocol provides the number of points (or segments) and another required method provides the value of each point to the chart object. The optional methods of the protocol help in further configuring data, such as color of the x-axis or segments.
 
 To provide the data to a chart, the data source must adopt one of two protocols: the `ORKGraphChartViewDataSource` protocol (for a graph chart) or the `ORKPieChartViewDataSource` protocol (for a pie chart). For specific examples of implementing these protocols, see [Adding a Line or Discrete Graph Chart to Your App](http://????) and [Adding a Pie Chart to Your App](http://????).
 
-###Step 2: Creating a Chart Object and Adding it to a View Controller
+### Step 2: Creating a Chart Object and Adding it to a View Controller
 To present data in a chart, create an instance of a ResearchKit chart object, such as `ORKPieChartView` or `ORKLineGraphChartView`. To do this, first create a `UIView` object in a `UIViewController` object and change the custom class of the view to the ResearchKit chart class you want to use. 
 
 Next, use an IBOutlet connection to link the chart view to your code. This connection between your code and the view will allow you to update the contents of the chart on demand, as well as customize its look and feel. 
@@ -45,7 +58,7 @@ Then, connect the chart view with your data source so that the chart has access 
         // Connect the pie chart-view object to a data source
         pieChartView.dataSource = pieChartDataSource
 
-###Step 3 (Optional): Customizing the Chart Object
+### Step 3 (Optional): Customizing the Chart Object
 Although the default ResearchKit charts and graphs are ready to use with your data, it's easy to customize them to suit your app. Each chart object includes several properties that let you customize its look and feel. For example, you can title the segments in a pie chart by implementing the `titleForSegmentAtIndex` method in a pie chart data source class, as shown here:
 
 	  func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
@@ -73,7 +86,7 @@ The code above displays the titles in the pie chart shown here:
 
 To learn about the customizable properties of pie, line graph, and discrete graph chart objects, see `ORKPieChartView`, `ORKGraphChartView`, and `ORKDiscreteGraphChartView`.
 
-##Adding a Pie Chart to Your App
+## Adding a Pie Chart to Your App
 The data source object that provides data to a pie chart adopts the `ORKPieChartViewDataSource` protocol. To construct a pie chart, you need to know the number of segments and the value of each segment.
 
 To specify the number of segments in a pie chart, implement the `numberOfSegmentsInPieChartView` method, returning an integer that indicates the number of segments in the pie chart. For example, the code below specifies a pie chart that has three segments:
@@ -175,7 +188,7 @@ The screenshot below shows the pie chart created by the code in this section.
 </center>
 
 
-##Adding a Line or Discrete Graph Chart to Your App
+## Adding a Line or Discrete Graph Chart to Your App
 You add data to line and discrete graph by implementing methods in the `ORKGraphChartViewDataSource` protocol. There are several methods that you must implement for correct behavior.
 
 Line and discrete graphs can display one or more <i>plots</i>. A plot is a graphical representation of a relationship between two variables.
@@ -334,7 +347,7 @@ The screenshot below shows a discrete graph that uses the same data source class
 </center>
 
 
-###Drawing Multiple Lines in a Graph     
+### Drawing Multiple Lines in a Graph     
 By default, the graph object assumes that it has a single plot to draw. To draw more than one plot on a graph, use the `numberOfPlotsInGraphChartView` method and specify the number of plots in the graph. This optional data source method is useful when you are drawing more than one plot on a graph chart.
 
 For example, the code below shows how a graph object can draw two plots:
@@ -344,7 +357,7 @@ For example, the code below shows how a graph object can draw two plots:
         return 2
     }
 
-###Adding Titles to a Graph Chart
+### Adding Titles to a Graph Chart
 Titles on the x-axis and y-axis provide clarity to the presented data and are strongly encouraged. To add titles along the x-axis in a line or discrete graph, implement the `titleForXAxisAtPointIndex` method in the data source class and return the title to display adjacent to each division on the x-axis. For the y-axis, you can display maximum or minimum values using the `maximumValueForGraphChartView:` or `minimumValueForGraphChartView:` properties (to display images instead of values, use the `maximumValueImage` and  `minimumValueImage` properties).
 
 The following code shows how to display titles on the x-axis of a discrete graph chart:
@@ -371,7 +384,7 @@ The code above displays the titles you can see in the discrete graph shown here:
 </figure>
 </center>
 
-###Supporting the Pan Gesture
+### Supporting the Pan Gesture
 By default, the graph chart object implements the pan gesture for you. When the user drags a finger along the graph in a view, a label appears above the point that's closest to the user's finger, displaying the point's value. 
 
 You can extend the default pan gesture behavior by implementing the `ORKGraphChartViewDelegate` protocol. The graph chart view delegate protocol forwards the pan gesture events occurring within the bounds of an `ORKGraphChartView` object.
