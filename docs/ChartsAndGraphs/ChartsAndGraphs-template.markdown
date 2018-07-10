@@ -241,7 +241,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     
     // Optional methods
     
-	// Returns the number of points to the graph chart view
+    // Returns the number of points to the graph chart view
     func numberOfPlotsInGraphChartView(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
@@ -278,7 +278,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         }
     }
     
-	// Returns the color for the given plot index
+    // Returns the color for the given plot index
     func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
         if plotIndex == 0 {
             return UIColor.purpleColor()
