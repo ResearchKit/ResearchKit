@@ -203,60 +203,61 @@ Other optional methods allow you to provide titles as well as set minimum and ma
 
 Here's an example of a data source class for a line graph. This class returns five points for the two plots that will appear on the graph:
     
+```swift    
     class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
     
     var plotPoints =
     [
         [
-            ORKRangedPoint(value: 200),
-            ORKRangedPoint(value: 450),
-            ORKRangedPoint(value: 500),
-            ORKRangedPoint(value: 250),
-            ORKRangedPoint(value: 300),
-            ORKRangedPoint(value: 600),
-            ORKRangedPoint(value: 300),
+            ORKValueRange(value: 200),
+            ORKValueRange(value: 450),
+            ORKValueRange(value: 500),
+            ORKValueRange(value: 250),
+            ORKValueRange(value: 300),
+            ORKValueRange(value: 600),
+            ORKValueRange(value: 300),
         ],
         [
-            ORKRangedPoint(value: 100),
-            ORKRangedPoint(value: 350),
-            ORKRangedPoint(value: 400),
-            ORKRangedPoint(value: 150),
-            ORKRangedPoint(value: 200),
-            ORKRangedPoint(value: 500),
-            ORKRangedPoint(value: 400),
+            ORKValueRange(value: 100),
+            ORKValueRange(value: 350),
+            ORKValueRange(value: 400),
+            ORKValueRange(value: 150),
+            ORKValueRange(value: 200),
+            ORKValueRange(value: 500),
+            ORKValueRange(value: 400),
         ]
     ]
     
     // Required methods
     
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+       func graphChartView(_ graphChartView: ORKGraphChartView, dataPointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKValueRange {
         
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(_ graphChartView: ORKGraphChartView, numberOfDataPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
     
     // Optional methods
     
 	// Returns the number of points to the graph chart view
-    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlotsInGraphChartView(in graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
     
     // Sets the maximum value on the y-axis
-    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func maximumValueForGraphChartView(for graphChartView: ORKGraphChartView) -> CGFloat {
         return 1000
     }
     
     // Sets the minimum value on the y-axis
-    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(for graphChartView: ORKGraphChartView) -> CGFloat {
         return 0
     }
     
     // Provides titles for x-axis
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+    func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         switch pointIndex {
         case 0:
             return "Mon"
@@ -284,6 +285,7 @@ Here's an example of a data source class for a line graph. This class returns fi
         }
     }
     }
+ ```    
     
 <strong>Note:</strong> A discrete graph uses the same data source protocol as a line graph, so the data source class for a discrete graph tends to look similar to the line graph data source class shown above.
 
