@@ -30,7 +30,8 @@ Discrete graph chart:
 
 <img src="ChartsImages/Overview/DiscreteGraphChartOverview.png" style="width: 100%">
 
-Discrete graph chart with multiple points
+Discrete graph chart with multiple points:
+
 <img src="ChartsImages/Overview/DiscereteGraphChartMultipleLinesOverview.png" style="width: 100%;border: solid black 1px;">
 
 
