@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
  The `ORKHealthClinicalTypeRecorder` class represents a recorder for collecting health records data from HealthKit during
  an active task.
  */
-ORK_CLASS_AVAILABLE
 #if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
+ORK_CLASS_AVAILABLE
 @interface ORKHealthClinicalTypeRecorder : ORKRecorder
 
 @property (nonatomic, copy, readonly) HKClinicalType *healthClinicalType;
