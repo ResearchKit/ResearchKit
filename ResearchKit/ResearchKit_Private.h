@@ -105,9 +105,7 @@
 #import <ResearchKit/ORKStreamingAudioRecorder.h>
 #import <ResearchKit/ORKDeviceMotionRecorder.h>
 #import <ResearchKit/ORKHealthQuantityTypeRecorder.h>
-#if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
 #import <ResearchKit/ORKHealthClinicalTypeRecorder.h>
-#endif
 #import <ResearchKit/ORKLocationRecorder.h>
 #import <ResearchKit/ORKPedometerRecorder.h>
 #import <ResearchKit/ORKTouchRecorder.h>
