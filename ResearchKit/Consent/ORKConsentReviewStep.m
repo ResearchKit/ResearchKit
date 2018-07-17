@@ -57,6 +57,16 @@
     return self;
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier signature:(ORKConsentSignature *)signature inDocument:(ORKConsentDocument *)consentDocument {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        _consentDocument = consentDocument;
+        _signature = signature;
+        _requiresScrollToBottom = NO;
+    }
+    return self;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentReviewStep *step = [super copyWithZone:zone];
     step->_consentDocument = self.consentDocument;
