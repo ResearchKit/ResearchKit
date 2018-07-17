@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKConsentReviewController : UIViewController
 
-- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate;
+- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate requiresScrollToBottom:(BOOL)requiresScrollToBottom;
 
 @property (nonatomic, strong, nullable) UIWebView *webView;
 

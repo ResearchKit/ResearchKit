@@ -40,7 +40,7 @@
 #import "ORKSkin.h"
 
 
-@interface ORKConsentReviewController () <UIWebViewDelegate>
+@interface ORKConsentReviewController () <UIWebViewDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -49,18 +49,22 @@
     UIToolbar *_toolbar;
     NSString *_htmlString;
     NSMutableArray *_variableConstraints;
+    UIBarButtonItem *_agreeButton;
 }
 
-- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate {
+- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate requiresScrollToBottom:(BOOL)requiresScrollToBottom {
     self = [super init];
     if (self) {
         _htmlString = html;
         _delegate = delegate;
         
+        _agreeButton = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_AGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(ack)];
+        _agreeButton.enabled = !requiresScrollToBottom;
+        
         self.toolbarItems = @[
                              [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DISAGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancel)],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_AGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(ack)]];
+                             _agreeButton];
     }
     return self;
 }
@@ -80,6 +84,7 @@
     [_webView loadHTMLString:_htmlString baseURL:ORKCreateRandomBaseURL()];
     _webView.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
     _webView.scrollView.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
+    _webView.scrollView.delegate = self;
     _webView.delegate = self;
     [_webView setClipsToBounds:YES];
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -180,6 +185,18 @@
         return NO;
     }
     return YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!_agreeButton.isEnabled) {
+        CGPoint offset = scrollView.contentOffset;
+        CGRect bounds = scrollView.bounds;
+        UIEdgeInsets inset = scrollView.contentInset;
+        CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
+        if (currentOffset - scrollView.contentSize.height >= 0) {
+            _agreeButton.enabled = YES;
+        }
+    }
 }
 
 @end
