@@ -67,30 +67,12 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized consent review step using the specified identifier, signature, and consent document.
 
- @param identifier             The identifier for the step.
- @param signature              The signature to be collected, if any.
- @param consentDocument        The consent document to be reviewed.
- @param requiresScrollToBottom Pass `YES` to require the user to scroll to the bottom of the consent
-                                   document before enabling the `Agree` button.
- 
- @return An initialized consent review step.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                         signature:(nullable ORKConsentSignature *)signature
-                        inDocument:(ORKConsentDocument *)consentDocument
-            requiresScrollToBottom:(BOOL)requiresScrollToBottom;
-
-/**
-Returns initialized consent review step using the specified identifier, signature, and consent document.
-
-This method is a convenience initializer.
-
  @param identifier      The identifier for the step.
  @param signature       The signature to be collected, if any.
  @param consentDocument The consent document to be reviewed.
-
-@return An initialized consent review step.
-*/
+ 
+ @return An initialized consent review step.
+ */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          signature:(nullable ORKConsentSignature *)signature
                         inDocument:(ORKConsentDocument *)consentDocument;

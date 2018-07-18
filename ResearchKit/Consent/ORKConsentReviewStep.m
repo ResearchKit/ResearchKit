@@ -47,16 +47,6 @@
     return [ORKConsentReviewStepViewController class];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier signature:(ORKConsentSignature *)signature inDocument:(ORKConsentDocument *)consentDocument requiresScrollToBottom:(BOOL)requiresScrollToBottom {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        _consentDocument = consentDocument;
-        _signature = signature;
-        _requiresScrollToBottom = requiresScrollToBottom;
-    }
-    return self;
-}
-
 - (instancetype)initWithIdentifier:(NSString *)identifier signature:(ORKConsentSignature *)signature inDocument:(ORKConsentDocument *)consentDocument {
     self = [super initWithIdentifier:identifier];
     if (self) {
