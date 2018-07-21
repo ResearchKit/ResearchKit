@@ -122,6 +122,7 @@ const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
 const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPhoneXScreenSize = (CGSize){375, 812};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
+const CGSize ORKiPad10_5ScreenSize = (CGSize){834, 1112};
 const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
 
 ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
@@ -139,6 +140,8 @@ ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhoneX;
     } else if (maximumDimension < ORKiPadScreenSize.height + 1) {
         screenType = ORKScreenTypeiPad;
+    } else if (maximumDimension < ORKiPad10_5ScreenSize.height + 1) {
+        screenType = ORKScreenTypeiPad10_5;
     } else {
         screenType = ORKScreenTypeiPad12_9;
     }
@@ -160,6 +163,8 @@ ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhone6Plus;
     } else if (minimumDimension < ORKiPadScreenSize.width + 1) {
         screenType = ORKScreenTypeiPad;
+    } else if (minimumDimension < ORKiPad10_5ScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPad10_5;
     } else {
         screenType = ORKScreenTypeiPad12_9;
     }
@@ -274,6 +279,7 @@ CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
             break;
         case ORKScreenTypeiPhone6Plus:
         case ORKScreenTypeiPad:
+        case ORKScreenTypeiPad10_5:
         case ORKScreenTypeiPad12_9:
         default:
             margin = ORKLayoutMarginWidthThinBezelRegular;
@@ -312,6 +318,10 @@ CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
             margin = ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(ORKiPadScreenSize.width, window);
             break;
         }
+        case ORKScreenTypeiPad10_5:{
+            margin = ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(ORKiPad10_5ScreenSize.width, window);
+            break;
+        }
         case ORKScreenTypeiPad12_9:{
             margin = ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(ORKiPad12_9ScreenSize.width, window);
             break;
@@ -335,7 +345,7 @@ UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UITableViewCell *cell) {
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
     UIEdgeInsets layoutMargins = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
-    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad10_5 || screenType == ORKScreenTypeiPad12_9) {
         CGFloat margin = ORKStandardHorizontalMarginForView(view);
         layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
     }
@@ -345,7 +355,7 @@ UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view) {
     UIEdgeInsets scrollIndicatorInsets = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
-    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad10_5 || screenType == ORKScreenTypeiPad12_9) {
         CGFloat margin = ORKStandardHorizontalMarginForView(view);
         scrollIndicatorInsets = (UIEdgeInsets){.left = -margin, .right = -margin };
     }
