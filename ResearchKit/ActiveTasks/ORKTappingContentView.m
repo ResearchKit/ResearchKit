@@ -296,7 +296,7 @@
     CGFloat topToProgressViewOffset = 0.0;
     CGFloat topToCaptionLabelOffset = 0.0;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad10_5 || screenType == ORKScreenTypeiPad12_9) {
         topToProgressViewOffset = 0;
         topToCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {
