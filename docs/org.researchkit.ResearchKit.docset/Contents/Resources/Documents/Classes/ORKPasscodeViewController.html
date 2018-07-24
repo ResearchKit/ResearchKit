@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKPasscodeViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/forcePasscode:withTouchIdEnabled:">+ forcePasscode:withTouchIdEnabled:</option>
+		
+		<option value="//api/name/isPasscodeStoredInKeychain">+ isPasscodeStoredInKeychain</option>
+		
+		<option value="//api/name/passcodeAuthenticationViewControllerWithText:delegate:">+ passcodeAuthenticationViewControllerWithText:delegate:</option>
+		
+		<option value="//api/name/passcodeEditingViewControllerWithText:delegate:passcodeType:">+ passcodeEditingViewControllerWithText:delegate:passcodeType:</option>
+		
+		<option value="//api/name/removePasscodeFromKeychain">+ removePasscodeFromKeychain</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKPasscodeViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>UINavigationController</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKPasscodeViewController.h<br />ORKPasscodeViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>An <a href="../Classes/ORKPasscodeStepViewController.html"><code>ORKPasscodeStepViewController</code></a> object is the view controller for an <a href="../Classes/ORKPasscodeStep.html"><code>ORKPasscodeStep</code></a> object.</p>
+
+<p>A passcode view controller can also be instantiated directly for authentication and editing by using one
+of the factory methods below. Each factory method requires a delegate to be implemented.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/passcodeAuthenticationViewControllerWithText:delegate:" title="passcodeAuthenticationViewControllerWithText:delegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/passcodeAuthenticationViewControllerWithText:delegate:">+&nbsp;passcodeAuthenticationViewControllerWithText:delegate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An authenticaiton passcode view controller allows a user to be authenticated using
+the passcode stored in the keychain.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)passcodeAuthenticationViewControllerWithText:(NSString *)<em>text</em> delegate:(id&lt;ORKPasscodeDelegate&gt;)<em>delegate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The message displayed to the user.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>The delegate for the passcode view controller.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A passcode authentication view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A passcode must already have been created using a passcode step before presenting
+this view controller (see <a href="../Classes/ORKPasscodeStep.html"><code>ORKPasscodeStep</code></a>).</p>
+
+<p>You must check to see if the passcode is stored in the keychain before presenting
+this view controller. A helper method, <a href="#//api/name/isPasscodeStoredInKeychain"><code>isPasscodeStoredInKeychain</code></a>, is provided as
+part of this class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPasscodeViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/passcodeEditingViewControllerWithText:delegate:passcodeType:" title="passcodeEditingViewControllerWithText:delegate:passcodeType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/passcodeEditingViewControllerWithText:delegate:passcodeType:">+&nbsp;passcodeEditingViewControllerWithText:delegate:passcodeType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An editing passcode view controller allows a user to be authenticated using
+the passcode stored in the keychain and create a new passcode.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)passcodeEditingViewControllerWithText:(NSString *)<em>text</em> delegate:(id&lt;ORKPasscodeDelegate&gt;)<em>delegate</em> passcodeType:(ORKPasscodeType)<em>passcodeType</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The message displayed to the user.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>The delegate for the passcode view controller.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>passcodeType</code></th>
+						<td><p>The passcode type for the new passcode.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A passcode editing view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A passcode must already have been created using a passcode step before presenting
+this view controller (see <a href="../Classes/ORKPasscodeStep.html"><code>ORKPasscodeStep</code></a>).</p>
+
+<p>You must check to see if the passcode is stored in the keychain before presenting
+this view controller. A helper method, <a href="#//api/name/isPasscodeStoredInKeychain"><code>isPasscodeStoredInKeychain</code></a>, is provided as
+part of this class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPasscodeViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isPasscodeStoredInKeychain" title="isPasscodeStoredInKeychain"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isPasscodeStoredInKeychain">+&nbsp;isPasscodeStoredInKeychain</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns &lsquo;YES&rsquo; if a passcode is stored in the keychain, otherwise &lsquo;NO&rsquo;.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (BOOL)isPasscodeStoredInKeychain</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPasscodeViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removePasscodeFromKeychain" title="removePasscodeFromKeychain"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removePasscodeFromKeychain">+&nbsp;removePasscodeFromKeychain</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns &lsquo;YES&rsquo; if passcode was successfully removed from the keychain, otherwise &lsquo;NO&rsquo;.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (BOOL)removePasscodeFromKeychain</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPasscodeViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/forcePasscode:withTouchIdEnabled:" title="forcePasscode:withTouchIdEnabled:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/forcePasscode:withTouchIdEnabled:">+&nbsp;forcePasscode:withTouchIdEnabled:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>This method allows to force the passcode to be a certain value. You only want to use this capability when you&rsquo;re moving your existing users
+from a custom passcode entry mechanism to the one provided by ResearchKit.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)forcePasscode:(NSString *)<em>passcode</em> withTouchIdEnabled:(BOOL)<em>touchIdEnabled</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>passcode</code></th>
+						<td><p>The passcode to store</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>touchIdEnabled</code></th>
+						<td><p>Whether TouchId will be available during passcode entry</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method will raise an exception if <code>passcode</code> is nil.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPasscodeViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKConsentDocument Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/htmlReviewContent">htmlReviewContent</option>
+		
+		<option value="//api/name/sections">sections</option>
+		
+		<option value="//api/name/signaturePageContent">signaturePageContent</option>
+		
+		<option value="//api/name/signaturePageTitle">signaturePageTitle</option>
+		
+		<option value="//api/name/title">title</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addSignature:">- addSignature:</option>
+		
+		<option value="//api/name/initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:">- initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:</option>
+		
+		<option value="//api/name/makePDFWithCompletionHandler:">- makePDFWithCompletionHandler:</option>
+		
+		<option value="//api/name/signatures">- signatures</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKConsentDocument Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKConsentDocument.h<br />ORKConsentDocument.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKConsentDocument</code> class represents the content of an informed consent
+document, which is a document that&rsquo;s used to obtain informed consent from participants
+in a medical or other research study. The ResearchKit framework uses an <code>ORKConsentDocument</code> object
+to provide content for visual consent steps (<a href="../Classes/ORKVisualConsentStep.html"><code>ORKVisualConsentStep</code></a>) and for consent review steps (<a href="../Classes/ORKConsentReviewStep.html"><code>ORKConsentReviewStep</code></a>).</p>
+
+<p>The <a href="#//api/name/sections"><code>sections</code></a> of an <code>ORKConsentDocument</code> object are instances of <a href="../Classes/ORKConsentSection.html"><code>ORKConsentSection</code></a>.
+When an <code>ORKConsentDocument</code> object is attached to an visual consent step, these
+<a href="#//api/name/sections">sections</a> provide the content for the visual consent screens, and for the
+Learn More pages that are accessible from them. When attached to an consent review step,
+the <a href="#//api/name/sections">sections</a> can provide the content for the consent document to
+be reviewed.</p>
+
+<p>If the consent document is simple, each section may be able to map to a visual consent screen. And in some cases, the formatting of the consent document may
+be sufficiently simple that it can be presented using only section headers and
+simple formatting. If your consent document uses simple formatting, you might be able to generate a document to sign by specifying the <a href="#//api/name/sections">sections</a> and the <a href="#//api/name/signatures">signatures</a>.
+In a case like this, you don&rsquo;t need to provide a value for the <a href="#//api/name/htmlReviewContent"><code>htmlReviewContent</code></a> property,
+and when the consent review step is completed, the <a href="#//api/name/signatures">signatures</a> can be
+placed into a copy of the document and a PDF can be generated.</p>
+
+<p>In more complex cases, the visual consent <a href="#//api/name/sections">sections</a> may bear little
+relation to the formal consent document. In a situation like this, place the formal consent
+document content in the <a href="#//api/name/htmlReviewContent"><code>htmlReviewContent</code></a> property. Doing this overrides all content that would otherwise be generated from the consent
+<a href="#//api/name/sections">sections</a>.</p>
+
+<p>The document should be in the user&rsquo;s language, and all the content of
+the document should be appropriately localized.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:" title="initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:">&ndash;&nbsp;initWithHTMLPDFWriter:consentSectionFormatter:consentSignatureFormatter:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
+purposes of isolated unit testing.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)<em>writer</em> consentSectionFormatter:(ORKConsentSectionFormatter *)<em>sectionFormatter</em> consentSignatureFormatter:(ORKConsentSignatureFormatter *)<em>signatureFormatter</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>writer</code></th>
+						<td><p>The instance of the ORKHTMLPDFWriter upon which the class depends.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sectionFormatter</code></th>
+						<td><p>An instance of ORKConsentSectionFormatter</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>signatureFormatter</code></th>
+						<td><p>An instance of ORKConsentSignatureFormatter</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signatures" title="signatures"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatures">&ndash;&nbsp;signatures</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of signatures that are required or prepopulated in the document.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray&lt;ORKConsentSignature*&gt; *)signatures</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>To add a signature to the document after consent review, the <code>signatures</code> array
+needs to be modified to incorporate the new signature content prior to PDF
+generation. For more information, see <a href="../Classes/ORKConsentSignatureResult.html#//api/name/applyToDocument:"><code>[ORKConsentSignatureResult applyToDocument:]</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addSignature:" title="addSignature:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addSignature:">&ndash;&nbsp;addSignature:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a signature to the array of <a href="#//api/name/signatures">signatures</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addSignature:(ORKConsentSignature *)<em>signature</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>signature</code></th>
+						<td><p>The signature object to add to the document.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/makePDFWithCompletionHandler:" title="makePDFWithCompletionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/makePDFWithCompletionHandler:">&ndash;&nbsp;makePDFWithCompletionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Writes the document&rsquo;s content into a PDF file.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)makePDFWithCompletionHandler:(void ( ^ ) ( NSData *data , NSError *error ))<em>handler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handler</code></th>
+						<td><p>The handler block for generated PDF data. When successful, the returned
+                    data represents a complete PDF document that represents the consent.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The PDF is generated in a form suitable for printing. This is done asynchronously,
+so the PDF data is returned through a completion block.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Properties" name="task_Properties"></a>
+						<h2 class="task-title">Properties</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/title" title="title"></a>
+	<h3 class="method-title"><code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The document&rsquo;s title in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *title</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The title appears only in the generated PDF for review; it is not used in the
+visual consent process.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Visual consent sections" name="task_Visual consent sections"></a>
+						<h2 class="task-title">Visual consent sections</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/sections" title="sections"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sections">&nbsp;&nbsp;sections</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The sections to be in printed in the PDF file and or presented in the
+visual consent sequence.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSArray&lt;ORKConsentSection*&gt; *sections</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>All sections appear in the animated process, except for those sections of the
+type <code>ORKConsentSectionTypeOnlyInDocument</code>.</p>
+
+<p>If the <a href="#//api/name/htmlReviewContent"><code>htmlReviewContent</code></a> property is not set, this content is also used to
+populate the document for review in the consent review step.</p>
+
+<p>The PDF file contains all sections.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Signatures for consent review" name="task_Signatures for consent review"></a>
+						<h2 class="task-title">Signatures for consent review</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/signaturePageTitle" title="signaturePageTitle"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signaturePageTitle">&nbsp;&nbsp;signaturePageTitle</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The <a href="#//api/name/title">title</a> to be rendered on the signature page of the generated PDF in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *signaturePageTitle</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <a href="#//api/name/title">title</a> is ignored for visual consent. The <a href="#//api/name/title">title</a> is also ignored if you supply a value for the <a href="#//api/name/htmlReviewContent"><code>htmlReviewContent</code></a> property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signaturePageContent" title="signaturePageContent"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signaturePageContent">&nbsp;&nbsp;signaturePageContent</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The content to be rendered below the <a href="#//api/name/title">title</a> on the signature page of the generated PDF in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *signaturePageContent</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The content is ignored for visual consent. The content is also ignored if you supply a value for the <a href="#//api/name/htmlReviewContent"><code>htmlReviewContent</code></a> property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Alternative content provision" name="task_Alternative content provision"></a>
+						<h2 class="task-title">Alternative content provision</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/htmlReviewContent" title="htmlReviewContent"></a>
+	<h3 class="method-title"><code><a href="#//api/name/htmlReviewContent">&nbsp;&nbsp;htmlReviewContent</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Override HTML content for review.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *htmlReviewContent</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Typically, the review content is generated from the values of the <a href="#//api/name/sections"><code>sections</code></a> and <a href="#//api/name/signatures"><code>signatures</code></a>
+properties.</p>
+
+<p>When this property is set, the review content is reproduced exactly as provided in the property
+in the consent review step, and the <a href="#//api/name/sections"><code>sections</code></a> and <a href="#//api/name/signatures"><code>signatures</code></a> properties
+are ignored.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentDocument.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

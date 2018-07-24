@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKTaskViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/currentStepViewController">currentStepViewController</option>
+		
+		<option value="//api/name/defaultResultSource">defaultResultSource</option>
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/navigationBarHidden">navigationBarHidden</option>
+		
+		<option value="//api/name/outputDirectory">outputDirectory</option>
+		
+		<option value="//api/name/showsProgressInNavigationBar">showsProgressInNavigationBar</option>
+		
+		<option value="//api/name/task">task</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/goBackward">- goBackward</option>
+		
+		<option value="//api/name/goForward">- goForward</option>
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithNibName:bundle:">- initWithNibName:bundle:</option>
+		
+		<option value="//api/name/initWithTask:restorationData:delegate:">- initWithTask:restorationData:delegate:</option>
+		
+		<option value="//api/name/initWithTask:taskRunUUID:">- initWithTask:taskRunUUID:</option>
+		
+		<option value="//api/name/navigationBar">- navigationBar</option>
+		
+		<option value="//api/name/restorationData">- restorationData</option>
+		
+		<option value="//api/name/result">- result</option>
+		
+		<option value="//api/name/resume">- resume</option>
+		
+		<option value="//api/name/setNavigationBarHidden:animated:">- setNavigationBarHidden:animated:</option>
+		
+		<option value="//api/name/stepViewController:didFinishWithNavigationDirection:">- stepViewController:didFinishWithNavigationDirection:</option>
+		
+		<option value="//api/name/stepViewController:recorder:didFailWithError:">- stepViewController:recorder:didFailWithError:</option>
+		
+		<option value="//api/name/stepViewControllerDidFail:withError:">- stepViewControllerDidFail:withError:</option>
+		
+		<option value="//api/name/stepViewControllerHasNextStep:">- stepViewControllerHasNextStep:</option>
+		
+		<option value="//api/name/stepViewControllerHasPreviousStep:">- stepViewControllerHasPreviousStep:</option>
+		
+		<option value="//api/name/stepViewControllerResultDidChange:">- stepViewControllerResultDidChange:</option>
+		
+		<option value="//api/name/stepViewControllerWillAppear:">- stepViewControllerWillAppear:</option>
+		
+		<option value="//api/name/suspend">- suspend</option>
+		
+		<option value="//api/name/taskRunUUID">- taskRunUUID</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKTaskViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>UIViewController</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td><a href="../Protocols/ORKStepViewControllerDelegate.html">ORKStepViewControllerDelegate</a><br />UIViewControllerRestoration</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKTaskViewController.h<br />ORKTaskViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKTaskViewController</code> class is the primary entry point for the presentation of the
+ResearchKit framework UI. Note that a <a href="#//api/name/task">task</a> view controller usually presents an <a href="../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> instance, but it can present any object that implements <a href="../Protocols/ORKTask.html"><code>ORKTask</code></a>.</p>
+
+<p>The <a href="#//api/name/task">task</a> view controller is intended for modal presentation, which lets the user cancel participation in the <a href="#//api/name/task">task</a> at any time. Typically, the <a href="#//api/name/task">task</a> view
+controller displays a navigation bar and conducts right-to-left
+navigation for each step as the user progresses through the <a href="#//api/name/task">task</a>.</p>
+
+<p>The <a href="#//api/name/task">task</a> view controller supports UI state restoration, which allows users to continue a long <a href="#//api/name/task">task</a> when they <a href="#//api/name/resume">resume</a> your app. To enable state restoration, set the restoration
+identifier and take the appropriate action to restore the <a href="#//api/name/task">task</a> view controller when your app restarts or resumes.</p>
+
+<p>The <a href="#//api/name/task">task</a> view controller also lets users save their progress in the middle of a <a href="#//api/name/task">task</a>. To support
+this scenario in your app, implement <a href="../Protocols/ORKTaskViewControllerDelegate.html#//api/name/taskViewControllerSupportsSaveAndRestore:"><code>[ORKTaskViewControllerDelegate taskViewControllerSupportsSaveAndRestore:]</code></a> in your
+<a href="#//api/name/task">task</a> view controller <a href="#//api/name/delegate">delegate</a>, and return <code>YES</code>. If the <a href="#//api/name/task">task</a> completes with the
+status <code>ORKTaskViewControllerFinishReasonSaved</code>, copy and store the value of the
+<a href="#//api/name/restorationData"><code>restorationData</code></a> property. When the user resumes the <a href="#//api/name/task">task</a>, create a
+new <a href="#//api/name/task">task</a> view controller using the <code>initWithTask:restorationData:</code> initializer,
+and present it.</p>
+
+<p>It is possible to configure the <a href="#//api/name/task">task</a> view controller to prefill surveys with
+data from another source, such as a previous run of the same <a href="#//api/name/task">task</a>.
+Set the <a href="#//api/name/defaultResultSource"><code>defaultResultSource</code></a> property to use this feature.</p>
+
+<p>When conducting active tasks which may produce file results, always set the
+<a href="#//api/name/outputDirectory"><code>outputDirectory</code></a> property. Files generated during active steps are written to
+the output directory that you specify, and references to these files are returned by <a href="../Classes/ORKFileResult.html"><code>ORKFileResult</code></a>
+objects in the <a href="#//api/name/result">result</a> hierarchy.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithNibName:bundle:" title="initWithNibName:bundle:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithNibName:bundle:">&ndash;&nbsp;initWithNibName:bundle:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a newly initialized <a href="#//api/name/task">task</a> view controller using the nib file in the specified bundle.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithNibName:(NSString *)<em>nibNameOrNil</em> bundle:(NSBundle *)<em>nibBundleOrNil</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nibNameOrNil</code></th>
+						<td><p>The name of the nib file from which to instantiate the <a href="#//api/name/task">task</a> view controller.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nibBundleOrNil</code></th>
+						<td><p>The name of the bundle in which to search for the nib file.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is a designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new <a href="#//api/name/task">task</a> view controller initialized from data in the given unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>The coder from which to initialize the <a href="#//api/name/task">task</a> view controller.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method lets you instantiate a <a href="#//api/name/task">task</a> view controller from a storyboard, although this is an atypical use case. This method is a designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithTask:taskRunUUID:" title="initWithTask:taskRunUUID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTask:taskRunUUID:">&ndash;&nbsp;initWithTask:taskRunUUID:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a newly initialized <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTask:(id&lt;ORKTask&gt;)<em>task</em> taskRunUUID:(NSUUID *)<em>taskRunUUID</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>task</code></th>
+						<td><p>The <a href="#//api/name/task">task</a> to be presented.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskRunUUID</code></th>
+						<td><p>The UUID of this instance of the <a href="#//api/name/task">task</a>. If <code>nil</code>, a new UUID is generated.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the primary designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithTask:restorationData:delegate:" title="initWithTask:restorationData:delegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTask:restorationData:delegate:">&ndash;&nbsp;initWithTask:restorationData:delegate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Creates a new <a href="#//api/name/task">task</a> view controller from the specified restoration data.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTask:(id&lt;ORKTask&gt;)<em>task</em> restorationData:(NSData *)<em>data</em> delegate:(id&lt;ORKTaskViewControllerDelegate&gt;)<em>delegate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>task</code></th>
+						<td><p>The <a href="#//api/name/task">task</a> to be presented.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>data</code></th>
+						<td><p>Data obtained from the <a href="#//api/name/restorationData"><code>restorationData</code></a> property of a previous
+                    <a href="#//api/name/task">task</a> view controller instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>The <a href="#//api/name/delegate">delegate</a> for the <a href="#//api/name/task">task</a> view controller.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to restart a <a href="#//api/name/task">task</a> when you have restoration data stored for a
+previous run of the <a href="#//api/name/task">task</a>, in which the user canceled their current <a href="#//api/name/task">task</a> and saved their progress.</p>
+
+<p>This method restores the presentation of the <a href="#//api/name/task">task</a> to the point at which the user stopped.
+If the restoration data is not valid, an exception may be thrown.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskRunUUID" title="taskRunUUID"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskRunUUID">&ndash;&nbsp;taskRunUUID</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A unique identifier (UUID) for this presentation of the <a href="#//api/name/task">task</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSUUID *)taskRunUUID</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <a href="#//api/name/task">task</a> run UUID is a unique identifier for this run of the <a href="#//api/name/task">task</a> view controller.
+All results produced by this instance are tagged with this UUID.</p>
+
+<p>The <a href="#//api/name/task">task</a> run UUID is preserved across UI state restoration, or across <a href="#//api/name/task">task</a>
+save and restore.</p><div class="note"><p><strong>Note:</strong> It is an error to set the value of <code>taskRunUUID</code> after the first time the <a href="#//api/name/task">task</a> view controller
+is presented.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/result" title="result"></a>
+	<h3 class="method-title"><code><a href="#//api/name/result">&ndash;&nbsp;result</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The current state of the <a href="#//api/name/task">task</a> result. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKTaskResult *)result</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Use this property to obtain or inspect the results of the <a href="#//api/name/task">task</a>. The results
+are hierarchical; the children of <code>result</code> are <a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a> instances,
+one for each step that the user visited during the <a href="#//api/name/task">task</a>.</p>
+
+<p>If the user uses the Back button to go back through the steps, the
+results of steps that are ahead of the currently visible step are not included
+in the result.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/restorationData" title="restorationData"></a>
+	<h3 class="method-title"><code><a href="#//api/name/restorationData">&ndash;&nbsp;restorationData</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Snapshot data that can be used for future restoration.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSData *)restorationData</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When the user taps Cancel during a <a href="#//api/name/task">task</a> and selects the Save option,
+the <a href="../Protocols/ORKTaskViewControllerDelegate.html#//api/name/taskViewController:didFinishWithReason:error:"><code>[ORKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]</code></a>
+method is called with <code>ORKTaskViewControllerFinishReasonSaved</code>. When that happens,
+use <code>restorationData</code> to obtain restoration data that can be used to restore
+the <a href="#//api/name/task">task</a> at a later date.</p>
+
+<p>Use <code>initWithTask:restorationData:</code> to create a new <a href="#//api/name/task">task</a> view controller that
+restores the current state.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/suspend" title="suspend"></a>
+	<h3 class="method-title"><code><a href="#//api/name/suspend">&ndash;&nbsp;suspend</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Suspends the <a href="#//api/name/task">task</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)suspend</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to suspend an active step. To <a href="#//api/name/resume">resume</a> later, call
+<a href="#//api/name/resume"><code>resume</code></a>. Not all active steps will respond to <code>suspend</code> / <a href="#//api/name/resume"><code>resume</code></a>, so test
+thoroughly to verify correct behavior in your tasks.</p>
+
+<p>This method will disable any background audio prompt session, and suspend
+any active step in progress.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resume" title="resume"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resume">&ndash;&nbsp;resume</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Resumes any current active step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resume</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to force resuming an active step may call this
+method. Should be paired with a call to <a href="#//api/name/suspend"><code>suspend</code></a>.</p>
+
+<p>This method re-enables background audio prompts, if needed, and resumes
+any active step. If not in an active step, it has no effect.</p>
+
+<p>See also: <a href="#//api/name/suspend"><code>suspend</code></a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/goForward" title="goForward"></a>
+	<h3 class="method-title"><code><a href="#//api/name/goForward">&ndash;&nbsp;goForward</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Forces navigation to the next step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)goForward</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to force forward navigation. This method is called by the framework
+if the user takes an action that requires navigation, or if the step is timed
+and the timer completes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/goBackward" title="goBackward"></a>
+	<h3 class="method-title"><code><a href="#//api/name/goBackward">&ndash;&nbsp;goBackward</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Forces navigation to the previous step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)goBackward</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to force backward navigation. This method is called by the framework
+if the user takes an action that requires backward navigation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerWillAppear:" title="stepViewControllerWillAppear:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerWillAppear:">&ndash;&nbsp;stepViewControllerWillAppear:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the step view controller&rsquo;s view is about to appear.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerWillAppear:(ORKStepViewController *)<em>viewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is called from the step view controller&rsquo;s <code>viewWillAppear:</code> method.
+You can use this method to customize the appearance of the step view
+controller without subclassing it.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewController:didFinishWithNavigationDirection:" title="stepViewController:didFinishWithNavigationDirection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewController:didFinishWithNavigationDirection:">&ndash;&nbsp;stepViewController:didFinishWithNavigationDirection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when the user has done something that requires navigation, such as
+tap the Back or a Next button, or enter a response to a nonoptional
+survey question.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewController:(ORKStepViewController *)<em>stepViewController</em> didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)<em>direction</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>direction</code></th>
+						<td><p>Direction of navigation requested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerDidFail:withError:" title="stepViewControllerDidFail:withError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerDidFail:withError:">&ndash;&nbsp;stepViewControllerDidFail:withError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a step fails due to an error.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerDidFail:(ORKStepViewController *)<em>stepViewController</em> withError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error detected.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A step view controller can use this method to report its failure to the task view controller.
+The task view controller sends the error to its delegate indicating that the task has failed (using <code>ORKTaskViewControllerFinishReasonFailed</code>).
+Note that recorder errors are reported by calling the <code>ORKStepViewControllerDelegate</code> method <a href="../Protocols/ORKStepViewControllerDelegate.html#//api/name/stepViewController:recorder:didFailWithError:"><code>stepViewController:recorder:didFailWithError:</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerResultDidChange:" title="stepViewControllerResultDidChange:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerResultDidChange:">&ndash;&nbsp;stepViewControllerResultDidChange:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a substantial change has occurred to the result.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerResultDidChange:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The result is always available in the step view controller. Although the result is continuously changing
+while the step view controller is active (because the time stamp in the result property is different each time it&rsquo;s called), this method is called only when a substantive change
+to the result occurs, such as when the user enters a survey answer or completes
+an active step.</p>
+
+<p>In your implementation of this delegate method, you can collect the value of <code>result</code> from the step view controller.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerHasPreviousStep:" title="stepViewControllerHasPreviousStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerHasPreviousStep:">&ndash;&nbsp;stepViewControllerHasPreviousStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate whether there is a previous step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if a Back button should be visible; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If there is a previous step, the step view controller adds a Back button to its
+navigation item; if not, no Back button is added to the navigation item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerHasNextStep:" title="stepViewControllerHasNextStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerHasNextStep:">&ndash;&nbsp;stepViewControllerHasNextStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate whether there is a next step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if there is a step following the current one; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Depending on the result of the step, the step view controller can adjust the language for the
+Next button.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewController:recorder:didFailWithError:" title="stepViewController:recorder:didFailWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewController:recorder:didFailWithError:">&ndash;&nbsp;stepViewController:recorder:didFailWithError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a recorder error has been detected during the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewController:(ORKStepViewController *)<em>stepViewController</em> recorder:(ORKRecorder *)<em>recorder</em> didFailWithError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>recorder</code></th>
+						<td><p>The recorder that detected the error.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error detected.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Recorder errors can occur during active steps, usually due to the
+unavailability of sensor data or disk space in which to record results.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setNavigationBarHidden:animated:" title="setNavigationBarHidden:animated:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setNavigationBarHidden:animated:">&ndash;&nbsp;setNavigationBarHidden:animated:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Shows or hides the navigation bar, with optional animation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setNavigationBarHidden:(BOOL)<em>hidden</em> animated:(BOOL)<em>animated</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>hidden</code></th>
+						<td><p><code>YES</code> to hide the navigation bar; otherwise, <code>NO</code>.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animated</code></th>
+						<td><p><code>YES</code> to animate the show or hide operation; otherwise, <code>NO</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/navigationBar" title="navigationBar"></a>
+	<h3 class="method-title"><code><a href="#//api/name/navigationBar">&ndash;&nbsp;navigationBar</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The navigation bar for the <a href="#//api/name/task">task</a> view controller. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UINavigationBar *)navigationBar</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>You can use this method to customize the appearance of the <a href="#//api/name/task">task</a> view controller&rsquo;s navigation bar.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The delegate for the <a href="#//api/name/task">task</a> view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak, nullable) id&lt;ORKTaskViewControllerDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>There are many optional methods in the <a href="#//api/name/task">task</a> view controller protocol, but the delegate must support
+completion. When the <a href="#//api/name/task">task</a> view controller completes its <a href="#//api/name/task">task</a>, it is the delegate&rsquo;s
+responsibility to dismiss it.</p>
+
+<p>See also: <a href="../Protocols/ORKTaskViewControllerDelegate.html#//api/name/taskViewController:didFinishWithReason:error:"><code>[ORKTaskViewControllerDelegate taskViewController:didFinishWithReason:error:]</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/task" title="task"></a>
+	<h3 class="method-title"><code><a href="#//api/name/task">&nbsp;&nbsp;task</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The task for this task view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, nullable) id&lt;ORKTask&gt; task</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task functions as the data source for an <code>ORKTaskViewController</code> object, providing
+the steps that the user must complete in order to complete the task.
+It is an error to change the task after presenting the task view controller.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultResultSource" title="defaultResultSource"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultResultSource">&nbsp;&nbsp;defaultResultSource</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A source that the <a href="#//api/name/task">task</a> view controller can consult to obtain default answers
+for questions provided in question steps and form steps.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, nullable) id&lt;ORKTaskResultSource&gt; defaultResultSource</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The source can provide default answers, perhaps based on previous runs of
+the same <a href="#//api/name/task">task</a>, which will be used to prefill question and form items.
+For example, an <a href="../Classes/ORKTaskResult.html"><code>ORKTaskResult</code></a> object from a previous run of the <a href="#//api/name/task">task</a> can function as
+an <a href="../Protocols/ORKTaskResultSource.html"><code>ORKTaskResultSource</code></a> object, because <a href="../Classes/ORKTaskResult.html"><code>ORKTaskResult</code></a> implements the protocol.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/outputDirectory" title="outputDirectory"></a>
+	<h3 class="method-title"><code><a href="#//api/name/outputDirectory">&nbsp;&nbsp;outputDirectory</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>File URL for the directory in which to store generated data files.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSURL *outputDirectory</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Active steps with recorders (and potentially other steps) can save data
+to files during the progress of the <a href="#//api/name/task">task</a>. This property specifies where such
+data should be written. If no output directory is specified, active steps
+that require writing data to disk, such as those with recorders, will typically
+fail at runtime.</p>
+
+<p>In general, set this property after instantiating the <a href="#//api/name/task">task</a> view
+controller and before presenting it.</p>
+
+<p>Before presenting the view controller, set the <code>outputDirectory</code> property to specify a
+path where files should be written when an <a href="../Classes/ORKFileResult.html"><code>ORKFileResult</code></a> object must be returned for
+a step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/showsProgressInNavigationBar" title="showsProgressInNavigationBar"></a>
+	<h3 class="method-title"><code><a href="#//api/name/showsProgressInNavigationBar">&nbsp;&nbsp;showsProgressInNavigationBar</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether progress is shown in the navigation bar.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL showsProgressInNavigationBar</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Setting this property to <code>YES</code> does not display progress if you don&rsquo;t also implement the <code>progress</code>
+method of <a href="../Protocols/ORKTask.html"><code>ORKTask</code></a>.</p>
+
+<p>The default value of this property is <code>YES</code>. To disable the display of progress in the navigation bar, set the value to <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/currentStepViewController" title="currentStepViewController"></a>
+	<h3 class="method-title"><code><a href="#//api/name/currentStepViewController">&nbsp;&nbsp;currentStepViewController</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The current step view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, readonly, nullable) ORKStepViewController *currentStepViewController</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <a href="#//api/name/task">task</a> view controller instantiates and presents a series of step view
+controllers. The current step view controller is the one that is currently
+visible on screen.</p>
+
+<p>The value of this property may be <code>nil</code> if the <a href="#//api/name/task">task</a> view controller has not yet been presented.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/navigationBarHidden" title="navigationBarHidden"></a>
+	<h3 class="method-title"><code><a href="#//api/name/navigationBarHidden">&nbsp;&nbsp;navigationBarHidden</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the navigation bar is hidden.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>By default, the <a href="#//api/name/task">task</a> view controller includes a visible navigation bar. To disable the display of the navigation bar, set this property to <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

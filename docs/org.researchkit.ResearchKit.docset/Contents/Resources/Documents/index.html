@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ResearchKit Reference</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="hierarchy.html">Hierarchy</a></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview-contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ResearchKit Reference</h1>
+
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<p>The ResearchKit™ framework is an open source framework that developers and researchers can use to create apps that let iOS users participate in medical research.</p>
+
+<p>This is the API documentation for the ResearchKit framework. For an overview of framework and a more general guide to using and extending the framework, see the <a href="GuideOverview">Programming Guide</a>.</p>
+
+<h2>Constructing Tasks</h2>
+
+<p>ResearchKit tasks are actions to be performed by participants in a research study. Tasks are the building blocks for ResearchKit modules, which address the most common components of medical studies: surveys, consent documents, and active tasks.</p>
+
+<p>Tasks are constructed using a hierarchy of model objects.
+At the root of the hierarchy is an <a href="Classes/ORKOrderedTask.html">ORKOrderedTask</a> object (or another object that implements the <a href="Protocols/ORKTask.html">ORKTask</a> protocol). The task defines the order in which steps are presented, and how progress through the task is represented.</p>
+
+<p>A task consists of steps, which are subclasses of <a href="Classes/ORKStep.html">ORKStep</a>. Most steps are designed for data presentation or data entry, but the <a href="Classes/ORKActiveStep.html">ORKActiveStep</a> subclasses can also enable data collection.
+The <a href="Classes/ORKQuestionStep.html">ORKQuestionStep</a> and <a href="Classes/ORKFormStep.html">ORKFormStep</a> survey step classes describe a question to be asked. The format of the answer is modeled with subclasses of <a href="Classes/ORKAnswerFormat.html">ORKAnswerFormat</a>.</p>
+
+<h2>Presenting Tasks</h2>
+
+<p>To present a task, you create an <a href="Classes/ORKTaskViewController.html">ORKTaskViewController</a> object and give it the task. The task view controller manages the task and returns the result through delegate methods.</p>
+
+<p>For each step, <a href="Classes/ORKTaskViewController.html">ORKTaskViewController</a> instantiates an appropriate subclass of <a href="Classes/ORKStepViewController.html">ORKStepViewController</a> to display the step.</p>
+
+<h2>Getting Results</h2>
+
+<p>The <code>result</code> property of <a href="Classes/ORKTaskViewController.html">ORKTaskViewController</a> provides the results of the task, both while the task is in progress, and upon completion of the task.</p>
+
+<p>Results are constructed with a hierarchy that’s similar to the task model hierarchy. In the hierarchy for a result, <a href="Classes/ORKTaskResult.html">ORKTaskResult</a> is the root and <a href="Classes/ORKStepResult.html">ORKStepResult</a> objects form the immediate children.</p>
+
+<p>For survey question steps, the answers collected are reported as <a href="Classes/ORKQuestionResult.html">ORKQuestionResult</a> objects, which are children of <a href="Classes/ORKStepResult.html">ORKStepResult</a>. Active steps may include additional result objects as children, depending on the types of data that are recorded. To help you get data from various device features, such as the accelerometer or HealthKit, the ResearchKit framework provides the <a href="Classes/ORKRecorder.html">ORKRecorder</a> and <a href="Classes/ORKRecorderConfiguration.html">ORKRecorderConfiguration</a> classes, which work together to collect and configure data into a serialized format during the duration of an active step.</p>
+
+<h2>Predefined Active Tasks</h2>
+
+<p>An active task invites users to perform activities under semi-controlled conditions, while iPhone sensors actively collect data. A category on <a href="Classes/ORKOrderedTask.html">ORKOrderedTask</a> provides factory methods for generating <a href="Classes/ORKOrderedTask.html">ORKOrderedTask</a> instances that correspond to ResearchKit&rsquo;s predefined active tasks, such as the short walk or fitness task.</p>
+
+<h2>Consent</h2>
+
+<p>The consent features in the ResearchKit framework are implemented using three special steps that can be added to tasks:</p>
+
+<ul>
+<li><p><a href="Classes/ORKVisualConsentStep.html">ORKVisualConsentStep</a>. The visual consent step presents a series of simple graphics to help participants understand the content of an consent document. The default graphics have animated transitions.</p></li>
+<li><p><a href="Classes/ORKConsentSharingStep.html">ORKConsentSharingStep</a>. The consent sharing step has predefined transitions that can be used to establish user preferences regarding how widely personal data can be shared.</p></li>
+<li><p><a href="Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a>. The consent review step makes the consent document available for review, and provides facilities for collecting the user&rsquo;s name and signature.</p></li>
+</ul>
+
+
+<p>Creating the visual consent step and the consent review step requires a consent document model (that is, an <a href="Classes/ORKConsentDocument.html">ORKConsentDocument</a> object).</p>
+						
+						
+					</div>
+					
+
+					<div class="index-container">
+						
+
+						
+						<div class="index-column">
+							<h2 class="index-title">Class References</h2>
+							<ul>
+								
+								<li><a href="Classes/DragonPokerStep.html">DragonPokerStep</a></li>
+								
+								<li><a href="Classes/DynamicTask.html">DynamicTask</a></li>
+								
+								<li><a href="Classes/LoginViewController.html">LoginViewController</a></li>
+								
+								<li><a href="Classes/MainViewController.html">MainViewController</a></li>
+								
+								<li><a href="Classes/ORKAccelerometerRecorder.html">ORKAccelerometerRecorder</a></li>
+								
+								<li><a href="Classes/ORKAccelerometerRecorderConfiguration.html">ORKAccelerometerRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKActiveStep.html">ORKActiveStep</a></li>
+								
+								<li><a href="Classes/ORKActiveStepViewController.html">ORKActiveStepViewController</a></li>
+								
+								<li><a href="Classes/ORKAmslerGridResult.html">ORKAmslerGridResult</a></li>
+								
+								<li><a href="Classes/ORKAmslerGridStep.html">ORKAmslerGridStep</a></li>
+								
+								<li><a href="Classes/ORKAmslerGridStepViewController.html">ORKAmslerGridStepViewController</a></li>
+								
+								<li><a href="Classes/ORKAnswerFormat.html">ORKAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKAnswerTextField.html">ORKAnswerTextField</a></li>
+								
+								<li><a href="Classes/ORKAnswerTextView.html">ORKAnswerTextView</a></li>
+								
+								<li><a href="Classes/ORKAudioGenerator.html">ORKAudioGenerator</a></li>
+								
+								<li><a href="Classes/ORKAudioLevelNavigationRule.html">ORKAudioLevelNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKAudioRecorder.html">ORKAudioRecorder</a></li>
+								
+								<li><a href="Classes/ORKAudioRecorderConfiguration.html">ORKAudioRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKAudioStep.html">ORKAudioStep</a></li>
+								
+								<li><a href="Classes/ORKAudioStepViewController.html">ORKAudioStepViewController</a></li>
+								
+								<li><a href="Classes/ORKBarGraphChartView.html">ORKBarGraphChartView</a></li>
+								
+								<li><a href="Classes/ORKBooleanAnswerFormat.html">ORKBooleanAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKBooleanQuestionResult.html">ORKBooleanQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKBorderedButton.html">ORKBorderedButton</a></li>
+								
+								<li><a href="Classes/ORKCaption1Label.html">ORKCaption1Label</a></li>
+								
+								<li><a href="Classes/ORKChoiceQuestionResult.html">ORKChoiceQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKCollectionResult.html">ORKCollectionResult</a></li>
+								
+								<li><a href="Classes/ORKCollector.html">ORKCollector</a></li>
+								
+								<li><a href="Classes/ORKCompletionStep.html">ORKCompletionStep</a></li>
+								
+								<li><a href="Classes/ORKCompletionStepViewController.html">ORKCompletionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKConfirmTextAnswerFormat.html">ORKConfirmTextAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKConsentDocument.html">ORKConsentDocument</a></li>
+								
+								<li><a href="Classes/ORKConsentReviewStep.html">ORKConsentReviewStep</a></li>
+								
+								<li><a href="Classes/ORKConsentReviewStepViewController.html">ORKConsentReviewStepViewController</a></li>
+								
+								<li><a href="Classes/ORKConsentSection.html">ORKConsentSection</a></li>
+								
+								<li><a href="Classes/ORKConsentSharingStep.html">ORKConsentSharingStep</a></li>
+								
+								<li><a href="Classes/ORKConsentSharingStepViewController.html">ORKConsentSharingStepViewController</a></li>
+								
+								<li><a href="Classes/ORKConsentSignature.html">ORKConsentSignature</a></li>
+								
+								<li><a href="Classes/ORKConsentSignatureResult.html">ORKConsentSignatureResult</a></li>
+								
+								<li><a href="Classes/ORKContinuousScaleAnswerFormat.html">ORKContinuousScaleAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKCountdownLabel.html">ORKCountdownLabel</a></li>
+								
+								<li><a href="Classes/ORKCountdownStep.html">ORKCountdownStep</a></li>
+								
+								<li><a href="Classes/ORKCountdownStepViewController.html">ORKCountdownStepViewController</a></li>
+								
+								<li><a href="Classes/ORKDataCollectionManager.html">ORKDataCollectionManager</a></li>
+								
+								<li><a href="Classes/ORKDataCollectionTests.html">ORKDataCollectionTests</a></li>
+								
+								<li><a href="Classes/ORKDataLogger.html">ORKDataLogger</a></li>
+								
+								<li><a href="Classes/ORKDataLoggerManager.html">ORKDataLoggerManager</a></li>
+								
+								<li><a href="Classes/ORKDataLoggerManagerTests.html">ORKDataLoggerManagerTests</a></li>
+								
+								<li><a href="Classes/ORKDataLoggerTests.html">ORKDataLoggerTests</a></li>
+								
+								<li><a href="Classes/ORKDateAnswerFormat.html">ORKDateAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKDateQuestionResult.html">ORKDateQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKDeviceMotionRecorder.html">ORKDeviceMotionRecorder</a></li>
+								
+								<li><a href="Classes/ORKDeviceMotionRecorderConfiguration.html">ORKDeviceMotionRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKDirectStepNavigationRule.html">ORKDirectStepNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKDiscreteGraphChartView.html">ORKDiscreteGraphChartView</a></li>
+								
+								<li><a href="Classes/ORKEmailAnswerFormat.html">ORKEmailAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKEnvironmentSPLMeterStep.html">ORKEnvironmentSPLMeterStep</a></li>
+								
+								<li><a href="Classes/ORKEnvironmentSPLMeterStepViewController.html">ORKEnvironmentSPLMeterStepViewController</a></li>
+								
+								<li><a href="Classes/ORKFileResult.html">ORKFileResult</a></li>
+								
+								<li><a href="Classes/ORKFitnessStep.html">ORKFitnessStep</a></li>
+								
+								<li><a href="Classes/ORKFitnessStepViewController.html">ORKFitnessStepViewController</a></li>
+								
+								<li><a href="Classes/ORKFootnoteLabel.html">ORKFootnoteLabel</a></li>
+								
+								<li><a href="Classes/ORKFormItem.html">ORKFormItem</a></li>
+								
+								<li><a href="Classes/ORKFormStep.html">ORKFormStep</a></li>
+								
+								<li><a href="Classes/ORKFormStepViewController.html">ORKFormStepViewController</a></li>
+								
+								<li><a href="Classes/ORKFormTextView.html">ORKFormTextView</a></li>
+								
+								<li><a href="Classes/ORKFreehandDrawingView.html">ORKFreehandDrawingView</a></li>
+								
+								<li><a href="Classes/ORKGraphChartView.html">ORKGraphChartView</a></li>
+								
+								<li><a href="Classes/ORKHeadlineLabel.html">ORKHeadlineLabel</a></li>
+								
+								<li><a href="Classes/ORKHealthClinicalTypeRecorder.html">ORKHealthClinicalTypeRecorder</a></li>
+								
+								<li><a href="Classes/ORKHealthClinicalTypeRecorderConfiguration.html">ORKHealthClinicalTypeRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKHealthCollector.html">ORKHealthCollector</a></li>
+								
+								<li><a href="Classes/ORKHealthCorrelationCollector.html">ORKHealthCorrelationCollector</a></li>
+								
+								<li><a href="Classes/ORKHealthKitCharacteristicTypeAnswerFormat.html">ORKHealthKitCharacteristicTypeAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKHealthKitQuantityTypeAnswerFormat.html">ORKHealthKitQuantityTypeAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKHealthQuantityTypeRecorder.html">ORKHealthQuantityTypeRecorder</a></li>
+								
+								<li><a href="Classes/ORKHealthQuantityTypeRecorderConfiguration.html">ORKHealthQuantityTypeRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKHealthSampleQueryOperation.html">ORKHealthSampleQueryOperation</a></li>
+								
+								<li><a href="Classes/ORKHeightAnswerFormat.html">ORKHeightAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestPlaceStep.html">ORKHolePegTestPlaceStep</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestPlaceStepViewController.html">ORKHolePegTestPlaceStepViewController</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestRemoveStep.html">ORKHolePegTestRemoveStep</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestRemoveStepViewController.html">ORKHolePegTestRemoveStepViewController</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestResult.html">ORKHolePegTestResult</a></li>
+								
+								<li><a href="Classes/ORKHolePegTestSample.html">ORKHolePegTestSample</a></li>
+								
+								<li><a href="Classes/ORKIBBarGraphChartViewDataSource.html">ORKIBBarGraphChartViewDataSource</a></li>
+								
+								<li><a href="Classes/ORKIBGraphChartViewDataSource.html">ORKIBGraphChartViewDataSource</a></li>
+								
+								<li><a href="Classes/ORKIBPieChartViewDataSource.html">ORKIBPieChartViewDataSource</a></li>
+								
+								<li><a href="Classes/ORKIBValueRangeGraphChartViewDataSource.html">ORKIBValueRangeGraphChartViewDataSource</a></li>
+								
+								<li><a href="Classes/ORKImageCaptureStep.html">ORKImageCaptureStep</a></li>
+								
+								<li><a href="Classes/ORKImageCaptureStepViewController.html">ORKImageCaptureStepViewController</a></li>
+								
+								<li><a href="Classes/ORKImageChoice.html">ORKImageChoice</a></li>
+								
+								<li><a href="Classes/ORKImageChoiceAnswerFormat.html">ORKImageChoiceAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKImageChoiceLabel.html">ORKImageChoiceLabel</a></li>
+								
+								<li><a href="Classes/ORKInstructionStep.html">ORKInstructionStep</a></li>
+								
+								<li><a href="Classes/ORKInstructionStepViewController.html">ORKInstructionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKJSONLogFormatter.html">ORKJSONLogFormatter</a></li>
+								
+								<li><a href="Classes/ORKKeyValueStepModifier.html">ORKKeyValueStepModifier</a></li>
+								
+								<li><a href="Classes/ORKKeychainWrapper.html">ORKKeychainWrapper</a></li>
+								
+								<li><a href="Classes/ORKLabel.html">ORKLabel</a></li>
+								
+								<li><a href="Classes/ORKLineGraphChartView.html">ORKLineGraphChartView</a></li>
+								
+								<li><a href="Classes/ORKLocation.html">ORKLocation</a></li>
+								
+								<li><a href="Classes/ORKLocationAnswerFormat.html">ORKLocationAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKLocationQuestionResult.html">ORKLocationQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKLocationRecorder.html">ORKLocationRecorder</a></li>
+								
+								<li><a href="Classes/ORKLocationRecorderConfiguration.html">ORKLocationRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKLogFormatter.html">ORKLogFormatter</a></li>
+								
+								<li><a href="Classes/ORKLoginStep.html">ORKLoginStep</a></li>
+								
+								<li><a href="Classes/ORKLoginStepViewController.html">ORKLoginStepViewController</a></li>
+								
+								<li><a href="Classes/ORKMotionActivityCollector.html">ORKMotionActivityCollector</a></li>
+								
+								<li><a href="Classes/ORKMotionActivityQueryOperation.html">ORKMotionActivityQueryOperation</a></li>
+								
+								<li><a href="Classes/ORKMultipleComponentQuestionResult.html">ORKMultipleComponentQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKMultipleValuePickerAnswerFormat.html">ORKMultipleValuePickerAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKNavigableOrderedTask.html">ORKNavigableOrderedTask</a></li>
+								
+								<li><a href="Classes/ORKNavigablePageStep.html">ORKNavigablePageStep</a></li>
+								
+								<li><a href="Classes/ORKNumericAnswerFormat.html">ORKNumericAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKNumericQuestionResult.html">ORKNumericQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKOperation.html">ORKOperation</a></li>
+								
+								<li><a href="Classes/ORKOrderedTask.html">ORKOrderedTask</a></li>
+								
+								<li><a href="Classes/ORKPDFViewerStep.html">ORKPDFViewerStep</a></li>
+								
+								<li><a href="Classes/ORKPDFViewerStepViewController.html">ORKPDFViewerStepViewController</a></li>
+								
+								<li><a href="Classes/ORKPSATResult.html">ORKPSATResult</a></li>
+								
+								<li><a href="Classes/ORKPSATSample.html">ORKPSATSample</a></li>
+								
+								<li><a href="Classes/ORKPSATStep.html">ORKPSATStep</a></li>
+								
+								<li><a href="Classes/ORKPSATStepViewController.html">ORKPSATStepViewController</a></li>
+								
+								<li><a href="Classes/ORKPageResult.html">ORKPageResult</a></li>
+								
+								<li><a href="Classes/ORKPageStep.html">ORKPageStep</a></li>
+								
+								<li><a href="Classes/ORKPageStepViewController.html">ORKPageStepViewController</a></li>
+								
+								<li><a href="Classes/ORKPasscodeResult.html">ORKPasscodeResult</a></li>
+								
+								<li><a href="Classes/ORKPasscodeStep.html">ORKPasscodeStep</a></li>
+								
+								<li><a href="Classes/ORKPasscodeStepViewController.html">ORKPasscodeStepViewController</a></li>
+								
+								<li><a href="Classes/ORKPasscodeViewController.html">ORKPasscodeViewController</a></li>
+								
+								<li><a href="Classes/ORKPedometerRecorder.html">ORKPedometerRecorder</a></li>
+								
+								<li><a href="Classes/ORKPedometerRecorderConfiguration.html">ORKPedometerRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKPicker.html">ORKPicker</a></li>
+								
+								<li><a href="Classes/ORKPieChartView.html">ORKPieChartView</a></li>
+								
+								<li><a href="Classes/ORKPredicateSkipStepNavigationRule.html">ORKPredicateSkipStepNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKPredicateStepNavigationRule.html">ORKPredicateStepNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKQuestionResult.html">ORKQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKQuestionStep.html">ORKQuestionStep</a></li>
+								
+								<li><a href="Classes/ORKQuestionStepCustomView.html">ORKQuestionStepCustomView</a></li>
+								
+								<li><a href="Classes/ORKQuestionStepViewController.html">ORKQuestionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKRangeOfMotionResult.html">ORKRangeOfMotionResult</a></li>
+								
+								<li><a href="Classes/ORKRangeOfMotionStep.html">ORKRangeOfMotionStep</a></li>
+								
+								<li><a href="Classes/ORKRangeOfMotionStepViewController.html">ORKRangeOfMotionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKReactionTimeResult.html">ORKReactionTimeResult</a></li>
+								
+								<li><a href="Classes/ORKReactionTimeStep.html">ORKReactionTimeStep</a></li>
+								
+								<li><a href="Classes/ORKReactionTimeViewController.html">ORKReactionTimeViewController</a></li>
+								
+								<li><a href="Classes/ORKRecorder.html">ORKRecorder</a></li>
+								
+								<li><a href="Classes/ORKRecorderConfiguration.html">ORKRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKRecorderTests.html">ORKRecorderTests</a></li>
+								
+								<li><a href="Classes/ORKRegistrationStep.html">ORKRegistrationStep</a></li>
+								
+								<li><a href="Classes/ORKResult.html">ORKResult</a></li>
+								
+								<li><a href="Classes/ORKResultPredicate.html">ORKResultPredicate</a></li>
+								
+								<li><a href="Classes/ORKResultSelector.html">ORKResultSelector</a></li>
+								
+								<li><a href="Classes/ORKReviewStep.html">ORKReviewStep</a></li>
+								
+								<li><a href="Classes/ORKReviewStepViewController.html">ORKReviewStepViewController</a></li>
+								
+								<li><a href="Classes/ORKScaleAnswerFormat.html">ORKScaleAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKScaleQuestionResult.html">ORKScaleQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKScaleRangeDescriptionLabel.html">ORKScaleRangeDescriptionLabel</a></li>
+								
+								<li><a href="Classes/ORKScaleRangeImageView.html">ORKScaleRangeImageView</a></li>
+								
+								<li><a href="Classes/ORKScaleRangeLabel.html">ORKScaleRangeLabel</a></li>
+								
+								<li><a href="Classes/ORKScaleValueLabel.html">ORKScaleValueLabel</a></li>
+								
+								<li><a href="Classes/ORKSelectionSubTitleLabel.html">ORKSelectionSubTitleLabel</a></li>
+								
+								<li><a href="Classes/ORKSelectionTitleLabel.html">ORKSelectionTitleLabel</a></li>
+								
+								<li><a href="Classes/ORKShoulderRangeOfMotionStep.html">ORKShoulderRangeOfMotionStep</a></li>
+								
+								<li><a href="Classes/ORKShoulderRangeOfMotionStepViewController.html">ORKShoulderRangeOfMotionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKSignatureResult.html">ORKSignatureResult</a></li>
+								
+								<li><a href="Classes/ORKSignatureStep.html">ORKSignatureStep</a></li>
+								
+								<li><a href="Classes/ORKSignatureStepViewController.html">ORKSignatureStepViewController</a></li>
+								
+								<li><a href="Classes/ORKSignatureView.html">ORKSignatureView</a></li>
+								
+								<li><a href="Classes/ORKSkipStepNavigationRule.html">ORKSkipStepNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanGame.html">ORKSpatialSpanGame</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanGameState.html">ORKSpatialSpanGameState</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanMemoryGameRecord.html">ORKSpatialSpanMemoryGameRecord</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanMemoryGameTouchSample.html">ORKSpatialSpanMemoryGameTouchSample</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanMemoryResult.html">ORKSpatialSpanMemoryResult</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanMemoryStep.html">ORKSpatialSpanMemoryStep</a></li>
+								
+								<li><a href="Classes/ORKSpatialSpanMemoryStepViewController.html">ORKSpatialSpanMemoryStepViewController</a></li>
+								
+								<li><a href="Classes/ORKSpeechInNoiseStep.html">ORKSpeechInNoiseStep</a></li>
+								
+								<li><a href="Classes/ORKSpeechRecognitionStep.html">ORKSpeechRecognitionStep</a></li>
+								
+								<li><a href="Classes/ORKSpeechRecognitionStepViewController.html">ORKSpeechRecognitionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKSpeechRecognitonResult.html">ORKSpeechRecognitonResult</a></li>
+								
+								<li><a href="Classes/ORKSpeechRecognizer.html">ORKSpeechRecognizer</a></li>
+								
+								<li><a href="Classes/ORKStep.html">ORKStep</a></li>
+								
+								<li><a href="Classes/ORKStepModifier.html">ORKStepModifier</a></li>
+								
+								<li><a href="Classes/ORKStepNavigationRule.html">ORKStepNavigationRule</a></li>
+								
+								<li><a href="Classes/ORKStepResult.html">ORKStepResult</a></li>
+								
+								<li><a href="Classes/ORKStepViewController.html">ORKStepViewController</a></li>
+								
+								<li><a href="Classes/ORKStreamingAudioRecorder.html">ORKStreamingAudioRecorder</a></li>
+								
+								<li><a href="Classes/ORKStreamingAudioRecorderConfiguration.html">ORKStreamingAudioRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKStroopResult.html">ORKStroopResult</a></li>
+								
+								<li><a href="Classes/ORKStroopStep.html">ORKStroopStep</a></li>
+								
+								<li><a href="Classes/ORKStroopStepViewController.html">ORKStroopStepViewController</a></li>
+								
+								<li><a href="Classes/ORKSubheadlineLabel.html">ORKSubheadlineLabel</a></li>
+								
+								<li><a href="Classes/ORKTableStep.html">ORKTableStep</a></li>
+								
+								<li><a href="Classes/ORKTableStepViewController.html">ORKTableStepViewController</a></li>
+								
+								<li><a href="Classes/ORKTableViewCell.html">ORKTableViewCell</a></li>
+								
+								<li><a href="Classes/ORKTapCountLabel.html">ORKTapCountLabel</a></li>
+								
+								<li><a href="Classes/ORKTappingIntervalResult.html">ORKTappingIntervalResult</a></li>
+								
+								<li><a href="Classes/ORKTappingIntervalStep.html">ORKTappingIntervalStep</a></li>
+								
+								<li><a href="Classes/ORKTappingIntervalStepViewController.html">ORKTappingIntervalStepViewController</a></li>
+								
+								<li><a href="Classes/ORKTappingSample.html">ORKTappingSample</a></li>
+								
+								<li><a href="Classes/ORKTaskResult.html">ORKTaskResult</a></li>
+								
+								<li><a href="Classes/ORKTaskViewController.html">ORKTaskViewController</a></li>
+								
+								<li><a href="Classes/ORKTextAnswerFormat.html">ORKTextAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKTextButton.html">ORKTextButton</a></li>
+								
+								<li><a href="Classes/ORKTextChoice.html">ORKTextChoice</a></li>
+								
+								<li><a href="Classes/ORKTextChoiceAnswerFormat.html">ORKTextChoiceAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKTextFieldView.html">ORKTextFieldView</a></li>
+								
+								<li><a href="Classes/ORKTextQuestionResult.html">ORKTextQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKTextScaleAnswerFormat.html">ORKTextScaleAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKTimeIntervalAnswerFormat.html">ORKTimeIntervalAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKTimeIntervalQuestionResult.html">ORKTimeIntervalQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKTimeOfDayAnswerFormat.html">ORKTimeOfDayAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKTimeOfDayQuestionResult.html">ORKTimeOfDayQuestionResult</a></li>
+								
+								<li><a href="Classes/ORKTimedWalkResult.html">ORKTimedWalkResult</a></li>
+								
+								<li><a href="Classes/ORKTimedWalkStep.html">ORKTimedWalkStep</a></li>
+								
+								<li><a href="Classes/ORKTimedWalkStepViewController.html">ORKTimedWalkStepViewController</a></li>
+								
+								<li><a href="Classes/ORKToneAudiometryResult.html">ORKToneAudiometryResult</a></li>
+								
+								<li><a href="Classes/ORKToneAudiometrySample.html">ORKToneAudiometrySample</a></li>
+								
+								<li><a href="Classes/ORKToneAudiometryStep.html">ORKToneAudiometryStep</a></li>
+								
+								<li><a href="Classes/ORKToneAudiometryStepViewController.html">ORKToneAudiometryStepViewController</a></li>
+								
+								<li><a href="Classes/ORKTouchAnywhereStep.html">ORKTouchAnywhereStep</a></li>
+								
+								<li><a href="Classes/ORKTouchRecorder.html">ORKTouchRecorder</a></li>
+								
+								<li><a href="Classes/ORKTouchRecorderConfiguration.html">ORKTouchRecorderConfiguration</a></li>
+								
+								<li><a href="Classes/ORKTowerOfHanoiMove.html">ORKTowerOfHanoiMove</a></li>
+								
+								<li><a href="Classes/ORKTowerOfHanoiResult.html">ORKTowerOfHanoiResult</a></li>
+								
+								<li><a href="Classes/ORKTowerOfHanoiStep.html">ORKTowerOfHanoiStep</a></li>
+								
+								<li><a href="Classes/ORKTowerOfHanoiViewController.html">ORKTowerOfHanoiViewController</a></li>
+								
+								<li><a href="Classes/ORKTrailmakingResult.html">ORKTrailmakingResult</a></li>
+								
+								<li><a href="Classes/ORKTrailmakingStep.html">ORKTrailmakingStep</a></li>
+								
+								<li><a href="Classes/ORKTrailmakingStepViewController.html">ORKTrailmakingStepViewController</a></li>
+								
+								<li><a href="Classes/ORKTrailmakingTap.html">ORKTrailmakingTap</a></li>
+								
+								<li><a href="Classes/ORKUnitLabel.html">ORKUnitLabel</a></li>
+								
+								<li><a href="Classes/ORKValuePickerAnswerFormat.html">ORKValuePickerAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKValueRange.html">ORKValueRange</a></li>
+								
+								<li><a href="Classes/ORKValueRangeGraphChartView.html">ORKValueRangeGraphChartView</a></li>
+								
+								<li><a href="Classes/ORKValueStack.html">ORKValueStack</a></li>
+								
+								<li><a href="Classes/ORKVerificationStep.html">ORKVerificationStep</a></li>
+								
+								<li><a href="Classes/ORKVerificationStepViewController.html">ORKVerificationStepViewController</a></li>
+								
+								<li><a href="Classes/ORKVideoCaptureStep.html">ORKVideoCaptureStep</a></li>
+								
+								<li><a href="Classes/ORKVideoCaptureStepViewController.html">ORKVideoCaptureStepViewController</a></li>
+								
+								<li><a href="Classes/ORKVideoInstructionStep.html">ORKVideoInstructionStep</a></li>
+								
+								<li><a href="Classes/ORKVideoInstructionStepResult.html">ORKVideoInstructionStepResult</a></li>
+								
+								<li><a href="Classes/ORKVideoInstructionStepViewController.html">ORKVideoInstructionStepViewController</a></li>
+								
+								<li><a href="Classes/ORKVisualConsentStep.html">ORKVisualConsentStep</a></li>
+								
+								<li><a href="Classes/ORKVisualConsentStepViewController.html">ORKVisualConsentStepViewController</a></li>
+								
+								<li><a href="Classes/ORKWaitStep.html">ORKWaitStep</a></li>
+								
+								<li><a href="Classes/ORKWaitStepViewController.html">ORKWaitStepViewController</a></li>
+								
+								<li><a href="Classes/ORKWalkingTaskStep.html">ORKWalkingTaskStep</a></li>
+								
+								<li><a href="Classes/ORKWalkingTaskStepViewController.html">ORKWalkingTaskStepViewController</a></li>
+								
+								<li><a href="Classes/ORKWebViewStep.html">ORKWebViewStep</a></li>
+								
+								<li><a href="Classes/ORKWebViewStepResult.html">ORKWebViewStepResult</a></li>
+								
+								<li><a href="Classes/ORKWebViewStepViewController.html">ORKWebViewStepViewController</a></li>
+								
+								<li><a href="Classes/ORKWeightAnswerFormat.html">ORKWeightAnswerFormat</a></li>
+								
+								<li><a href="Classes/ORKdBHLToneAudiometryAudioGenerator.html">ORKdBHLToneAudiometryAudioGenerator</a></li>
+								
+								<li><a href="Classes/ORKdBHLToneAudiometryOnboardingStep.html">ORKdBHLToneAudiometryOnboardingStep</a></li>
+								
+								<li><a href="Classes/ORKdBHLToneAudiometryOnboardingStepViewController.html">ORKdBHLToneAudiometryOnboardingStepViewController</a></li>
+								
+								<li><a href="Classes/ORKdBHLToneAudiometryStep.html">ORKdBHLToneAudiometryStep</a></li>
+								
+								<li><a href="Classes/ORKdBHLToneAudiometryStepViewController.html">ORKdBHLToneAudiometryStepViewController</a></li>
+								
+								<li><a href="Classes/TestTaskViewControllerDelegate.html">TestTaskViewControllerDelegate</a></li>
+								
+								<li><a href="Classes/VerificationViewController.html">VerificationViewController</a></li>
+								
+							</ul>
+						</div>
+						
+
+						
+						<div class="index-column">
+							
+							<h2 class="index-title">Protocol References</h2>
+							<ul>
+								
+								<li><a href="Protocols/ORKAnswerOption.html">ORKAnswerOption</a></li>
+								
+								<li><a href="Protocols/ORKDataCollectionManagerDelegate.html">ORKDataCollectionManagerDelegate</a></li>
+								
+								<li><a href="Protocols/ORKDataLoggerDelegate.html">ORKDataLoggerDelegate</a></li>
+								
+								<li><a href="Protocols/ORKDataLoggerExtendedDelegate.html">ORKDataLoggerExtendedDelegate</a></li>
+								
+								<li><a href="Protocols/ORKDataLoggerManagerDelegate.html">ORKDataLoggerManagerDelegate</a></li>
+								
+								<li><a href="Protocols/ORKGraphChartViewDataSource.html">ORKGraphChartViewDataSource</a></li>
+								
+								<li><a href="Protocols/ORKGraphChartViewDelegate.html">ORKGraphChartViewDelegate</a></li>
+								
+								<li><a href="Protocols/ORKPasscodeDelegate.html">ORKPasscodeDelegate</a></li>
+								
+								<li><a href="Protocols/ORKPieChartViewDataSource.html">ORKPieChartViewDataSource</a></li>
+								
+								<li><a href="Protocols/ORKQuestionStepCustomViewDelegate.html">ORKQuestionStepCustomViewDelegate</a></li>
+								
+								<li><a href="Protocols/ORKRecorderDelegate.html">ORKRecorderDelegate</a></li>
+								
+								<li><a href="Protocols/ORKSpeechRecognitionDelegate.html">ORKSpeechRecognitionDelegate</a></li>
+								
+								<li><a href="Protocols/ORKStepViewControllerDelegate.html">ORKStepViewControllerDelegate</a></li>
+								
+								<li><a href="Protocols/ORKTableStepSource.html">ORKTableStepSource</a></li>
+								
+								<li><a href="Protocols/ORKTask.html">ORKTask</a></li>
+								
+								<li><a href="Protocols/ORKTaskResultSource.html">ORKTaskResultSource</a></li>
+								
+								<li><a href="Protocols/ORKTaskViewControllerDelegate.html">ORKTaskViewControllerDelegate</a></li>
+								
+								<li><a href="Protocols/ORKValueCollectionType.html">ORKValueCollectionType</a></li>
+								
+								<li><a href="Protocols/ORKValueRangeGraphChartViewDataSource.html">ORKValueRangeGraphChartViewDataSource</a></li>
+								
+								<li><a href="Protocols/ORKValueStackGraphChartViewDataSource.html">ORKValueStackGraphChartViewDataSource</a></li>
+								
+							</ul>
+							
+
+							
+							<h2 class="index-title">Constant References</h2>
+							<ul>
+								
+									<li><a href="Constants/ORKAmslerGridEyeSide.html">ORKAmslerGridEyeSide</a></li>
+								
+									<li><a href="Constants/ORKAudioChannel.html">ORKAudioChannel</a></li>
+								
+									<li><a href="Constants/ORKBodySagittal.html">ORKBodySagittal</a></li>
+								
+									<li><a href="Constants/ORKChoiceAnswerStyle.html">ORKChoiceAnswerStyle</a></li>
+								
+									<li><a href="Constants/ORKConsentReviewPhase.html">ORKConsentReviewPhase</a></li>
+								
+									<li><a href="Constants/ORKConsentSectionType.html">ORKConsentSectionType</a></li>
+								
+									<li><a href="Constants/ORKDateAnswerStyle.html">ORKDateAnswerStyle</a></li>
+								
+									<li><a href="Constants/ORKErrorCode.html">ORKErrorCode</a></li>
+								
+									<li><a href="Constants/ORKFileProtectionMode.html">ORKFileProtectionMode</a></li>
+								
+									<li><a href="Constants/ORKGraphAnimationType.html">ORKGraphAnimationType</a></li>
+								
+									<li><a href="Constants/ORKMeasurementSystem.html">ORKMeasurementSystem</a></li>
+								
+									<li><a href="Constants/ORKNavigationContainerButtonStyle.html">ORKNavigationContainerButtonStyle</a></li>
+								
+									<li><a href="Constants/ORKNumberFormattingStyle.html">ORKNumberFormattingStyle</a></li>
+								
+									<li><a href="Constants/ORKNumericAnswerStyle.html">ORKNumericAnswerStyle</a></li>
+								
+									<li><a href="Constants/ORKNumericPrecision.html">ORKNumericPrecision</a></li>
+								
+									<li><a href="Constants/ORKOperationState.html">ORKOperationState</a></li>
+								
+									<li><a href="Constants/ORKPDFViewerActionBarOption.html">ORKPDFViewerActionBarOption</a></li>
+								
+									<li><a href="Constants/ORKPSATPresentationMode.html">ORKPSATPresentationMode</a></li>
+								
+									<li><a href="Constants/ORKPageNavigationDirection.html">ORKPageNavigationDirection</a></li>
+								
+									<li><a href="Constants/ORKPasscodeFlow.html">ORKPasscodeFlow</a></li>
+								
+									<li><a href="Constants/ORKPasscodeState.html">ORKPasscodeState</a></li>
+								
+									<li><a href="Constants/ORKPasscodeType.html">ORKPasscodeType</a></li>
+								
+									<li><a href="Constants/ORKPermissionMask.html">ORKPermissionMask</a></li>
+								
+									<li><a href="Constants/ORKPredefinedTaskHandOption.html">ORKPredefinedTaskHandOption</a></li>
+								
+									<li><a href="Constants/ORKPredefinedTaskLimbOption.html">ORKPredefinedTaskLimbOption</a></li>
+								
+									<li><a href="Constants/ORKPredefinedTaskOption.html">ORKPredefinedTaskOption</a></li>
+								
+									<li><a href="Constants/ORKProgressIndicatorType.html">ORKProgressIndicatorType</a></li>
+								
+									<li><a href="Constants/ORKQuestionSection.html">ORKQuestionSection</a></li>
+								
+									<li><a href="Constants/ORKQuestionType.html">ORKQuestionType</a></li>
+								
+									<li><a href="Constants/ORKRegistrationStepOption.html">ORKRegistrationStepOption</a></li>
+								
+									<li><a href="Constants/ORKSampleJSONOptions.html">ORKSampleJSONOptions</a></li>
+								
+									<li><a href="Constants/ORKScreenMetric.html">ORKScreenMetric</a></li>
+								
+									<li><a href="Constants/ORKScreenType.html">ORKScreenType</a></li>
+								
+									<li><a href="Constants/ORKSpatialSpanMemoryGameStatus.html">ORKSpatialSpanMemoryGameStatus</a></li>
+								
+									<li><a href="Constants/ORKSpatialSpanResult.html">ORKSpatialSpanResult</a></li>
+								
+									<li><a href="Constants/ORKSpatialSpanStepState.html">ORKSpatialSpanStepState</a></li>
+								
+									<li><a href="Constants/ORKSpatialSpanTargetState.html">ORKSpatialSpanTargetState</a></li>
+								
+									<li><a href="Constants/ORKSpeechRecognitionErrorCode.html">ORKSpeechRecognitionErrorCode</a></li>
+								
+									<li><a href="Constants/ORKStepViewControllerNavigationDirection.html">ORKStepViewControllerNavigationDirection</a></li>
+								
+									<li><a href="Constants/ORKTappingButtonIdentifier.html">ORKTappingButtonIdentifier</a></li>
+								
+									<li><a href="Constants/ORKTaskViewControllerFinishReason.html">ORKTaskViewControllerFinishReason</a></li>
+								
+									<li><a href="Constants/ORKTremorActiveTaskOption.html">ORKTremorActiveTaskOption</a></li>
+								
+							</ul>
+							
+
+							
+							<h2 class="index-title">Category References</h2>
+							<ul>
+								
+								<li><a href="Categories/HKAnchoredObjectQuery+iOS8.html">HKAnchoredObjectQuery(iOS8)</a></li>
+								
+								<li><a href="Categories/HKCorrelation+ORKJSONDictionary.html">HKCorrelation(ORKJSONDictionary)</a></li>
+								
+								<li><a href="Categories/HKSample+ORKJSONDictionary.html">HKSample(ORKJSONDictionary)</a></li>
+								
+								<li><a href="Categories/HKUnit+ORKLocalized.html">HKUnit(ORKLocalized)</a></li>
+								
+								<li><a href="Categories/UIColor+ORKColor.html">UIColor(ORKColor)</a></li>
+								
+							</ul>
+							
+						</div>
+						
+					</div>
+
+					<footer>
+						<div class="footer-copyright">
+							
+							<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+							
+							
+							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+							
+						</div>
+					</footer>
+				</main>
+			</div>
+		</div>
+	</article>
+
+	<script src="js/script.js"></script>
+</body>
+</html>

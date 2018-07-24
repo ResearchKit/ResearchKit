@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKFormItem Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/answerFormat">answerFormat</option>
+		
+		<option value="//api/name/identifier">identifier</option>
+		
+		<option value="//api/name/optional">optional</option>
+		
+		<option value="//api/name/placeholder">placeholder</option>
+		
+		<option value="//api/name/text">text</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/confirmationAnswerFormItemWithIdentifier:text:errorMessage:">- confirmationAnswerFormItemWithIdentifier:text:errorMessage:</option>
+		
+		<option value="//api/name/initWithIdentifier:text:answerFormat:">- initWithIdentifier:text:answerFormat:</option>
+		
+		<option value="//api/name/initWithIdentifier:text:answerFormat:optional:">- initWithIdentifier:text:answerFormat:optional:</option>
+		
+		<option value="//api/name/initWithSectionTitle:">- initWithSectionTitle:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKFormItem Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKFormStep.h<br />ORKFormStep.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKFormItem</code> class represents a single item in a form step (<a href="../Classes/ORKFormStep.html"><code>ORKFormStep</code></a>), and typically
+represents a question.</p>
+
+<p>To use <code>ORKFormItem</code>, instantiate the object, fill in its properties, and incorporate
+it in an <a href="../Classes/ORKFormStep.html"><code>ORKFormStep</code></a> object.</p>
+
+<p>Usually, a form item corresponds to either a row or a section header in a form, but
+if the answer format is a choice answer format, it may correspond to an entire
+section.</p>
+
+<p>Each form item generates one question result (<a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a>), which becomes a child of its step&rsquo;s
+result (<a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a>).</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:text:answerFormat:" title="initWithIdentifier:text:answerFormat:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:text:answerFormat:">&ndash;&nbsp;initWithIdentifier:text:answerFormat:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized form item using the specified <a href="#//api/name/identifier">identifier</a>, title, and answer format.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> text:(NSString *)<em>text</em> answerFormat:(ORKAnswerFormat *)<em>answerFormat</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The string that identifies the form item, which should be unique within the form <a href="#//api/name/step">step</a>.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The <a href="#//api/name/text">text</a> displayed as a prompt for the form item&rsquo;s question.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>answerFormat</code></th>
+						<td><p>The answer format for the form item.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized form item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithIdentifier:text:answerFormat:optional:" title="initWithIdentifier:text:answerFormat:optional:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:text:answerFormat:optional:">&ndash;&nbsp;initWithIdentifier:text:answerFormat:optional:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized form item using the specified <a href="#//api/name/identifier">identifier</a>, title, optionality and answer format.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> text:(NSString *)<em>text</em> answerFormat:(ORKAnswerFormat *)<em>answerFormat</em> optional:(BOOL)<em>optional</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The string that identifies the form item, which should be unique within the form <a href="#//api/name/step">step</a>.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The <a href="#//api/name/text">text</a> displayed as a prompt for the form item&rsquo;s question.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>answerFormat</code></th>
+						<td><p>The answer format for the form item.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>optional</code></th>
+						<td><p>A Boolean that determines whether the item is <a href="#//api/name/optional">optional</a></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized form item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithSectionTitle:" title="initWithSectionTitle:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithSectionTitle:">&ndash;&nbsp;initWithSectionTitle:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized form item using the specified section title.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithSectionTitle:(NSString *)<em>sectionTitle</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sectionTitle</code></th>
+						<td><p>The title of the section.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized form item for use as a section header in a form.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/confirmationAnswerFormItemWithIdentifier:text:errorMessage:" title="confirmationAnswerFormItemWithIdentifier:text:errorMessage:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/confirmationAnswerFormItemWithIdentifier:text:errorMessage:">&ndash;&nbsp;confirmationAnswerFormItemWithIdentifier:text:errorMessage:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an form item that can be used for confirming a <a href="#//api/name/text">text</a> entry.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKFormItem *)confirmationAnswerFormItemWithIdentifier:(NSString *)<em>identifier</em> text:(nullable NSString *)<em>text</em> errorMessage:(NSString *)<em>errorMessage</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The <a href="#//api/name/identifier">identifier</a> for the <code>ORKFormItem</code> that is returned.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The <a href="#//api/name/text">text</a> for the <code>ORKFormItem</code> that is returned.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>errorMessage</code></th>
+						<td><p>The error message to display if the fields do not match</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An <code>ORKFormItem</code> with the indicated <a href="#//api/name/identifier">identifier</a> and <a href="#//api/name/text">text</a> and an <a href="../Classes/ORKAnswerFormat.html">ORKAnswerFormat</a>
+                        that is appropriate for confirming the input form item.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This form item is intended to be used with an <a href="../Classes/ORKFormStep.html"><code>ORKFormStep</code></a> in order to confirm a previous
+formItem input. Example usage includes a password or participant <a href="#//api/name/identifier">identifier</a> that is used to
+anonymously identify a study participant.</p>
+
+<p>Currently, only <a href="../Classes/ORKTextAnswerFormat.html"><code>ORKTextAnswerFormat</code></a> is supported. Unsupported <a href="../Classes/ORKAnswerFormat.html"><code>ORKAnswerFormat</code></a> types will
+throw an exception.</p>
+
+<p>The answer format for this item produces an <a href="../Classes/ORKBooleanQuestionResult.html"><code>ORKBooleanQuestionResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A string that identifies the form item.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSString *identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The identifier should be unique within the form <a href="#//api/name/step">step</a> that contains the form
+item. The identifier is reproduced in the question result object (<a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a>)
+generated for the item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/optional" title="optional"></a>
+	<h3 class="method-title"><code><a href="#//api/name/optional">&nbsp;&nbsp;optional</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the form item is optional.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, getter=isOptional) BOOL optional</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>YES</code>. When the value is <code>YES</code>, this form item doesn&rsquo;t need
+to be answered for the Continue button of a <a href="#//api/name/step">step</a> form to be enabled.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/text" title="text"></a>
+	<h3 class="method-title"><code><a href="#//api/name/text">&nbsp;&nbsp;text</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A localized string that describes the form item.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly, nullable) NSString *text</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the descriptive text is sufficiently short, you can display it as a prompt next to the item.
+If it is too long to display next to the item, you can display it above the item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/placeholder" title="placeholder"></a>
+	<h3 class="method-title"><code><a href="#//api/name/placeholder">&nbsp;&nbsp;placeholder</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A localized string that displays placeholder information for the form item.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *placeholder</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>You can display placeholder <a href="#//api/name/text">text</a> in a <a href="#//api/name/text">text</a> field or <a href="#//api/name/text">text</a> area to help users understand how to answer the
+item&rsquo;s question. A placeholder string is not appropriate for choice-based answer formats.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/answerFormat" title="answerFormat"></a>
+	<h3 class="method-title"><code><a href="#//api/name/answerFormat">&nbsp;&nbsp;answerFormat</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The format of the expected answer for the item.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly, nullable) ORKAnswerFormat *answerFormat</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The answer format specifies the type of answer that is expected, in addition to any
+constraints on valid answers.</p>
+
+<p>By default, the answer format is <code>nil</code>. The answer format for a form item that represents a section
+header is always <code>nil</code>, because no answer is expected.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKFormStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

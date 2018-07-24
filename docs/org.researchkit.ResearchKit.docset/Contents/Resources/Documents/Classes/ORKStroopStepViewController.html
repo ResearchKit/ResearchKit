@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKStroopStepViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithStep:">- initWithStep:</option>
+		
+		<option value="//api/name/result">- result</option>
+		
+		<option value="//api/name/start">- start</option>
+		
+		<option value="//api/name/stepDidFinish">- stepDidFinish</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKStroopStepViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKActiveStepViewController.html">ORKActiveStepViewController</a> : <a href="../Classes/ORKStepViewController.html">ORKStepViewController</a> : UIViewController</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKStroopStepViewController.h<br />ORKStroopStepViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithStep:" title="initWithStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStep:">&ndash;&nbsp;initWithStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> view controller for the specified <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> to be presented.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A newly initialized <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepDidFinish" title="stepDidFinish"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepDidFinish">&ndash;&nbsp;stepDidFinish</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the view controller that the active step has <a href="../Classes/ORKActiveStepViewController.html#//api/name/finished">finished</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepDidFinish</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is an override point for subclasses, called by the base class when
+the step has just <a href="../Classes/ORKActiveStepViewController.html#//api/name/finished">finished</a>.</p>
+
+<p>The default implementation does nothing except in the case of steps that have countdown
+enabled. When countdown is enabled in a step, the view controller attempts to navigate automatically to the next step, if so configured.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/result" title="result"></a>
+	<h3 class="method-title"><code><a href="#//api/name/result">&ndash;&nbsp;result</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The current state of the result. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStepResult *)result</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller uses this property to get the results for the
+<a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>, and to collate them into the task result.</p>
+
+<p>The current <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> result and any subsidiary results representing data collected
+so far are available in this property. You can detect significant changes to the result,
+such as when the user enters a new answer, using the
+<code>stepViewControllerResultDidChange:</code> <a href="../Classes/ORKStepViewController.html#//api/name/delegate">delegate</a> callback.</p>
+
+<p>Subclasses <em>must</em> use this property to return the current results.
+Subclasses <em>may</em> call super to obtain
+a clean, empty result object appropriate for the <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>, to which they can
+attach appropriate child results.</p>
+
+<p>The implementations of this method in the ResearchKit framework currently create a new
+result object on every call, so do not call this method unless it is
+actually necessary.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/start" title="start"></a>
+	<h3 class="method-title"><code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Starts the active step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)start</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Call this method to start the timer on the active step, if there is one, and
+to start any data recording.</p>
+
+<p>When you start the step, <a href="../Classes/ORKActiveStepViewController.html#//api/name/recorders">recorders</a> are instantiated based on their configurations and then <a href="../Classes/ORKActiveStepViewController.html#//api/name/started">started</a>. All
+timers should start, and the UI should show users that the step is in progress.</p>
+
+<p>This method does nothing if the step has already <a href="../Classes/ORKActiveStepViewController.html#//api/name/started">started</a>.</p>
+
+<p>Subclasses should super when overriding this method.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

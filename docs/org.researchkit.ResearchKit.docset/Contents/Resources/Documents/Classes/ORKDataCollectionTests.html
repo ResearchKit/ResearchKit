@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKDataCollectionTests Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/collector:didDetectError:">- collector:didDetectError:</option>
+		
+		<option value="//api/name/dataCollectionManagerDidCompleteCollection:">- dataCollectionManagerDidCompleteCollection:</option>
+		
+		<option value="//api/name/healthCollector:didCollectSamples:">- healthCollector:didCollectSamples:</option>
+		
+		<option value="//api/name/healthCorrelationCollector:didCollectCorrelations:">- healthCorrelationCollector:didCollectCorrelations:</option>
+		
+		<option value="//api/name/motionActivityCollector:didCollectMotionActivities:">- motionActivityCollector:didCollectMotionActivities:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKDataCollectionTests Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>XCTestCase</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td><a href="../Protocols/ORKDataCollectionManagerDelegate.html">ORKDataCollectionManagerDelegate</a></td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKDataCollectionTests.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/healthCollector:didCollectSamples:" title="healthCollector:didCollectSamples:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/healthCollector:didCollectSamples:">&ndash;&nbsp;healthCollector:didCollectSamples:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method for delivering the collected health data samples.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)healthCollector:(ORKHealthCollector *)<em>collector</em> didCollectSamples:(NSArray&lt;HKSample*&gt; *)<em>samples</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>collector</code></th>
+						<td><p>The data collector.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>samples</code></th>
+						<td><p>Collected health data samples.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Boolean indicating whether the samples has be accepted.
+If NO is returned or this method is not implemented, the manager will stop the collection for the collector and repeat this same collection next time,
+until the data is accepted.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/healthCorrelationCollector:didCollectCorrelations:" title="healthCorrelationCollector:didCollectCorrelations:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/healthCorrelationCollector:didCollectCorrelations:">&ndash;&nbsp;healthCorrelationCollector:didCollectCorrelations:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method for delivering the collected health correlations.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)healthCorrelationCollector:(ORKHealthCorrelationCollector *)<em>collector</em> didCollectCorrelations:(NSArray&lt;HKCorrelation*&gt; *)<em>correlations</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>collector</code></th>
+						<td><p>The data collector.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>correlations</code></th>
+						<td><p>Collected health correlation samples.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Boolean indicating whether the samples has be accepted.
+If NO is returned or this method is not implemented, the manager will stop the collection for the collector and repeat this same collection next time,
+until the data is accepted.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/motionActivityCollector:didCollectMotionActivities:" title="motionActivityCollector:didCollectMotionActivities:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/motionActivityCollector:didCollectMotionActivities:">&ndash;&nbsp;motionActivityCollector:didCollectMotionActivities:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method for delivering the collected motion activities.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)motionActivityCollector:(ORKMotionActivityCollector *)<em>collector</em> didCollectMotionActivities:(NSArray&lt;CMMotionActivity*&gt; *)<em>motionActivities</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>collector</code></th>
+						<td><p>The data collector.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>motionActivities</code></th>
+						<td><p>Collected motion activities.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Boolean indicating whether the samples has be accepted.
+If NO is returned or this method is not implemented, the manager will stop the collection for the collector and repeat this same collection next time,
+until the data is accepted.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dataCollectionManagerDidCompleteCollection:" title="dataCollectionManagerDidCompleteCollection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dataCollectionManagerDidCompleteCollection:">&ndash;&nbsp;dataCollectionManagerDidCompleteCollection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Indicating the collection is completed for all the collectors.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)dataCollectionManagerDidCompleteCollection:(ORKDataCollectionManager *)<em>manager</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>manager</code></th>
+						<td><p>The data collection manager.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/collector:didDetectError:" title="collector:didDetectError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/collector:didDetectError:">&ndash;&nbsp;collector:didDetectError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method for reporting the deteted error during collection.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)collector:(ORKCollector *)<em>collector</em> didDetectError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>collector</code></th>
+						<td><p>The data collector.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error object.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

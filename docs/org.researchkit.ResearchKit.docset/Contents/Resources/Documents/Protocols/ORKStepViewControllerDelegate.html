@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKStepViewControllerDelegate Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/stepViewController:didFinishWithNavigationDirection:">- stepViewController:didFinishWithNavigationDirection:</option>
+		
+		<option value="//api/name/stepViewController:recorder:didFailWithError:">- stepViewController:recorder:didFailWithError:</option>
+		
+		<option value="//api/name/stepViewControllerDidFail:withError:">- stepViewControllerDidFail:withError:</option>
+		
+		<option value="//api/name/stepViewControllerHasNextStep:">- stepViewControllerHasNextStep:</option>
+		
+		<option value="//api/name/stepViewControllerHasPreviousStep:">- stepViewControllerHasPreviousStep:</option>
+		
+		<option value="//api/name/stepViewControllerResultDidChange:">- stepViewControllerResultDidChange:</option>
+		
+		<option value="//api/name/stepViewControllerWillAppear:">- stepViewControllerWillAppear:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKStepViewControllerDelegate Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKStepViewController.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The primary implementer of the <code>ORKStepViewControllerDelegate</code> protocol is the
+task view controller (<a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a>). The task view controller observes the messages
+of the protocol to correctly update its <code>result</code> property, and to control navigation
+through the task.</p>
+
+<p>If you present step view controllers outside of a task view controller, it
+can be helpful to implement this protocol to facilitate navigation and
+results collection.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/stepViewController:didFinishWithNavigationDirection:" title="stepViewController:didFinishWithNavigationDirection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewController:didFinishWithNavigationDirection:">&ndash;&nbsp;stepViewController:didFinishWithNavigationDirection:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when the user has done something that requires navigation, such as
+tap the Back or a Next button, or enter a response to a nonoptional
+survey question.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewController:(ORKStepViewController *)<em>stepViewController</em> didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)<em>direction</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>direction</code></th>
+						<td><p>Direction of navigation requested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerResultDidChange:" title="stepViewControllerResultDidChange:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerResultDidChange:">&ndash;&nbsp;stepViewControllerResultDidChange:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a substantial change has occurred to the result.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerResultDidChange:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The result is always available in the step view controller. Although the result is continuously changing
+while the step view controller is active (because the time stamp in the result property is different each time it&rsquo;s called), this method is called only when a substantive change
+to the result occurs, such as when the user enters a survey answer or completes
+an active step.</p>
+
+<p>In your implementation of this delegate method, you can collect the value of <code>result</code> from the step view controller.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerDidFail:withError:" title="stepViewControllerDidFail:withError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerDidFail:withError:">&ndash;&nbsp;stepViewControllerDidFail:withError:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a step fails due to an error.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerDidFail:(ORKStepViewController *)<em>stepViewController</em> withError:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error detected.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A step view controller can use this method to report its failure to the task view controller.
+The task view controller sends the error to its delegate indicating that the task has failed (using <code>ORKTaskViewControllerFinishReasonFailed</code>).
+Note that recorder errors are reported by calling the <code>ORKStepViewControllerDelegate</code> method <a href="../Protocols/ORKStepViewControllerDelegate.html#//api/name/stepViewController:recorder:didFailWithError:"><code>stepViewController:recorder:didFailWithError:</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewController:recorder:didFailWithError:" title="stepViewController:recorder:didFailWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewController:recorder:didFailWithError:">&ndash;&nbsp;stepViewController:recorder:didFailWithError:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a recorder error has been detected during the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewController:(ORKStepViewController *)<em>stepViewController</em> recorder:(ORKRecorder *)<em>recorder</em> didFailWithError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>recorder</code></th>
+						<td><p>The recorder that detected the error.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error detected.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Recorder errors can occur during active steps, usually due to the
+unavailability of sensor data or disk space in which to record results.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerWillAppear:" title="stepViewControllerWillAppear:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerWillAppear:">&ndash;&nbsp;stepViewControllerWillAppear:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the step view controller&rsquo;s view is about to appear.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stepViewControllerWillAppear:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is called from the step view controller&rsquo;s <code>viewWillAppear:</code> method.
+You can use this method to customize the appearance of the step view
+controller without subclassing it.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerHasPreviousStep:" title="stepViewControllerHasPreviousStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerHasPreviousStep:">&ndash;&nbsp;stepViewControllerHasPreviousStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate whether there is a previous step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if a Back button should be visible; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If there is a previous step, the step view controller adds a Back button to its
+navigation item; if not, no Back button is added to the navigation item.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerHasNextStep:" title="stepViewControllerHasNextStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerHasNextStep:">&ndash;&nbsp;stepViewControllerHasNextStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate whether there is a next step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The step view controller providing the callback.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if there is a step following the current one; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Depending on the result of the step, the step view controller can adjust the language for the
+Next button.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKResultPredicate Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:">+ predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:</option>
+		
+		<option value="//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:">+ predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:">+ predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:</option>
+		
+		<option value="//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPattern:">+ predicateForChoiceQuestionResultWithResultSelector:matchingPattern:</option>
+		
+		<option value="//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:">+ predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:</option>
+		
+		<option value="//api/name/predicateForConsentWithResultSelector:didConsent:">+ predicateForConsentWithResultSelector:didConsent:</option>
+		
+		<option value="//api/name/predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:">+ predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:</option>
+		
+		<option value="//api/name/predicateForNilQuestionResultWithResultSelector:">+ predicateForNilQuestionResultWithResultSelector:</option>
+		
+		<option value="//api/name/predicateForNumericQuestionResultWithResultSelector:expectedAnswer:">+ predicateForNumericQuestionResultWithResultSelector:expectedAnswer:</option>
+		
+		<option value="//api/name/predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+ predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+ predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+ predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForScaleQuestionResultWithResultSelector:expectedAnswer:">+ predicateForScaleQuestionResultWithResultSelector:expectedAnswer:</option>
+		
+		<option value="//api/name/predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+ predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+ predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+ predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForTextQuestionResultWithResultSelector:expectedString:">+ predicateForTextQuestionResultWithResultSelector:expectedString:</option>
+		
+		<option value="//api/name/predicateForTextQuestionResultWithResultSelector:matchingPattern:">+ predicateForTextQuestionResultWithResultSelector:matchingPattern:</option>
+		
+		<option value="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+ predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+ predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+ predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</option>
+		
+		<option value="//api/name/predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:">+ predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKResultPredicate Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKResultPredicate.h<br />ORKResultPredicate.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKResultPredicate</code> class provides convenience class methods to build predicates for most of
+the <a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a> subtypes.</p>
+
+<p>You use result predicates to create <a href="../Classes/ORKPredicateStepNavigationRule.html"><code>ORKPredicateStepNavigationRule</code></a> objects. The result predicates
+are used to match specific <a href="../Classes/ORKQuestionResult.html">ORKQuestionResult</a> instances (created in response to the participant&rsquo;s
+answers) and navigate accordingly. You can match results both in an ongoing task or in previously
+completed tasks.</p>
+
+<p>You chose which question result to match by using an <a href="../Classes/ORKResultSelector.html"><code>ORKResultSelector</code></a> object.</p>
+
+<p>Note that each <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> object produces one <a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a> collection object. A step
+result produced by an <a href="../Classes/ORKQuestionStep.html"><code>ORKQuestionStep</code></a> object contains one <a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a> object which has</p>
+
+<p>the same identifier as the step that generated it. A step result produced by an <a href="../Classes/ORKFormStep.html"><code>ORKFormStep</code></a>
+object can contain one or more <a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a> objects that have the identifiers of the
+<a href="../Classes/ORKFormItem.html"><code>ORKFormItem</code></a> objects that generated them.</p>
+
+<p>For matching a single-question step result, you only need to set the <code>resultIdentifier</code> when
+building the result selector object. The <code>stepIdentifier</code> will take the same value.</p>
+
+<p>For matching a form item result, you need to build a result selector with a <code>stepIdentifier</code> (the
+form step identifier) and a <code>resultIdentifier</code> (the form item result identifier).</p>
+
+<p>For matching results in the ongoing task, leave the <code>taskIdentifier</code> in the the form step identifier
+as <code>nil</code>. For matching results in different tasks, set the <code>taskIdentifier</code> appropriately.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/predicateForNilQuestionResultWithResultSelector:" title="predicateForNilQuestionResultWithResultSelector:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForNilQuestionResultWithResultSelector:">+&nbsp;predicateForNilQuestionResultWithResultSelector:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of the kind <a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a> whose answer is <code>nil</code>.
+A question result has a <code>nil</code> answer if it was generated by a step that was skipped by
+the user or if it was part of a form step and the question was left unanswered.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForNilQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+interested in.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForScaleQuestionResultWithResultSelector:expectedAnswer:" title="predicateForScaleQuestionResultWithResultSelector:expectedAnswer:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForScaleQuestionResultWithResultSelector:expectedAnswer:">+&nbsp;predicateForScaleQuestionResultWithResultSelector:expectedAnswer:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKScaleQuestionResult.html"><code>ORKScaleQuestionResult</code></a> whose answer is the
+specified integer value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedAnswer:(NSInteger)<em>expectedAnswer</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedAnswer</code></th>
+						<td><p>The expected integer value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:" title="predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+&nbsp;predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKScaleQuestionResult.html"><code>ORKScaleQuestionResult</code></a> whose answer is within the
+specified double values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(double)<em>minimumExpectedAnswerValue</em> maximumExpectedAnswerValue:(double)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected double value. Pass <code>ORKIgnoreDoubleValue</code>
+                                        if you don&rsquo;t want to compare the answer against a maximum
+                                        double value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected double value. Pass <code>ORKIgnoreDoubleValue</code>
+                                        if you don&rsquo;t want to compare the answer against a maximum
+                                        double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:" title="predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+&nbsp;predicateForScaleQuestionResultWithResultSelector:minimumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKScaleQuestionResult.html"><code>ORKScaleQuestionResult</code></a> whose answer is greater than
+or equal to the specified double value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(double)<em>minimumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:" title="predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+&nbsp;predicateForScaleQuestionResultWithResultSelector:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKScaleQuestionResult.html"><code>ORKScaleQuestionResult</code></a> whose answer is less than or
+equal to the specified double value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForScaleQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> maximumExpectedAnswerValue:(double)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:" title="predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:">+&nbsp;predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKChoiceQuestionResult.html"><code>ORKChoiceQuestionResult</code></a> whose answer is equal to
+the specified object.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedAnswerValue:(id&lt;NSCopying,NSCoding,NSObject&gt;)<em>expectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you
+                                    are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedAnswerValue</code></th>
+						<td><p>The expected answer object.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:" title="predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:">+&nbsp;predicateForChoiceQuestionResultWithResultSelector:expectedAnswerValues:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKChoiceQuestionResult.html"><code>ORKChoiceQuestionResult</code></a> whose answers are equal to
+the specified objects.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedAnswerValues:(NSArray&lt;id&lt;NSCopying,NSCoding,NSObject&gt; &gt; *)<em>expectedAnswerValues</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you
+                                    are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedAnswerValues</code></th>
+						<td><p>An array with a some or of all of the expected answer objects.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPattern:" title="predicateForChoiceQuestionResultWithResultSelector:matchingPattern:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPattern:">+&nbsp;predicateForChoiceQuestionResultWithResultSelector:matchingPattern:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKChoiceQuestionResult.html"><code>ORKChoiceQuestionResult</code></a> whose answer matches the
+specified regular expression pattern. This predicate can solely be used to match choice results
+which only contain string answers.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> matchingPattern:(NSString *)<em>pattern</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pattern</code></th>
+						<td><p>An ICU-compliant regular expression pattern that matches the answer string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:" title="predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:">+&nbsp;predicateForChoiceQuestionResultWithResultSelector:matchingPatterns:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKChoiceQuestionResult.html"><code>ORKChoiceQuestionResult</code></a> whose answers match the
+specified regular expression patterns.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForChoiceQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> matchingPatterns:(NSArray&lt;NSString*&gt; *)<em>patterns</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>patterns</code></th>
+						<td><p>An array of ICU-compliant regular expression patterns that match the answer strings.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:" title="predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:">+&nbsp;predicateForBooleanQuestionResultWithResultSelector:expectedAnswer:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKBooleanQuestionResult.html"><code>ORKBooleanQuestionResult</code></a> whose answer is the
+specified Boolean value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForBooleanQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedAnswer:(BOOL)<em>expectedAnswer</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedAnswer</code></th>
+						<td><p>The expected boolean value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTextQuestionResultWithResultSelector:expectedString:" title="predicateForTextQuestionResultWithResultSelector:expectedString:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTextQuestionResultWithResultSelector:expectedString:">+&nbsp;predicateForTextQuestionResultWithResultSelector:expectedString:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTextQuestionResult.html"><code>ORKTextQuestionResult</code></a> whose answer is equal to the
+specified string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTextQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedString:(NSString *)<em>expectedString</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedString</code></th>
+						<td><p>The expected result string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTextQuestionResultWithResultSelector:matchingPattern:" title="predicateForTextQuestionResultWithResultSelector:matchingPattern:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTextQuestionResultWithResultSelector:matchingPattern:">+&nbsp;predicateForTextQuestionResultWithResultSelector:matchingPattern:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTextQuestionResult.html"><code>ORKTextQuestionResult</code></a> whose answer matches the
+specified regular expression pattern.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTextQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> matchingPattern:(NSString *)<em>pattern</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pattern</code></th>
+						<td><p>An ICU-compliant regular expression pattern that matches the answer string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForNumericQuestionResultWithResultSelector:expectedAnswer:" title="predicateForNumericQuestionResultWithResultSelector:expectedAnswer:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForNumericQuestionResultWithResultSelector:expectedAnswer:">+&nbsp;predicateForNumericQuestionResultWithResultSelector:expectedAnswer:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> whose answer is the
+specified integer value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForNumericQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> expectedAnswer:(NSInteger)<em>expectedAnswer</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you are
+                                interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>expectedAnswer</code></th>
+						<td><p>The expected integer value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:" title="predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+&nbsp;predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> whose answer is within the
+specified double values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForNumericQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(double)<em>minimumExpectedAnswerValue</em> maximumExpectedAnswerValue:(double)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected double value. Pass <code>ORKIgnoreDoubleValue</code>
+                                        if you don&rsquo;t want to compare the answer against a maximum
+                                        double value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected double value. Pass <code>ORKIgnoreDoubleValue</code>
+                                        if you don&rsquo;t want to compare the answer against a minimum
+                                        double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:" title="predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+&nbsp;predicateForNumericQuestionResultWithResultSelector:minimumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> whose answer is greater
+than or equal to the specified double value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForNumericQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(double)<em>minimumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:" title="predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+&nbsp;predicateForNumericQuestionResultWithResultSelector:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> whose answer is less than
+or equal to the specified double value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForNumericQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> maximumExpectedAnswerValue:(double)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected double value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:" title="predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:">+&nbsp;predicateForTimeOfDayQuestionResultWithResultSelector:minimumExpectedHour:minimumExpectedMinute:maximumExpectedHour:maximumExpectedMinute:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTimeOfDayQuestionResult.html"><code>ORKTimeOfDayQuestionResult</code></a> whose answer is within
+the specified hour and minute values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTimeOfDayQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedHour:(NSInteger)<em>minimumExpectedHour</em> minimumExpectedMinute:(NSInteger)<em>minimumExpectedMinute</em> maximumExpectedHour:(NSInteger)<em>maximumExpectedHour</em> maximumExpectedMinute:(NSInteger)<em>maximumExpectedMinute</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result you
+                                    are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedHour</code></th>
+						<td><p>The minimum expected hour component value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedMinute</code></th>
+						<td><p>The minimum expected minute component value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedHour</code></th>
+						<td><p>The maximum integer hour component value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedMinute</code></th>
+						<td><p>The maximum expected minute component value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Note that <a href="../Classes/ORKTimeOfDayQuestionResult.html"><code>ORKTimeOfDayQuestionResult</code></a> internally stores its answer as an <code>NSDateComponents</code> object.
+If you are interested in additional components, you must build the predicate manually.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:" title="predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:">+&nbsp;predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTimeIntervalQuestionResult.html"><code>ORKTimeIntervalQuestionResult</code></a> whose answer is
+within the specified <code>NSTimeInterval</code> values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(NSTimeInterval)<em>minimumExpectedAnswerValue</em> maximumExpectedAnswerValue:(NSTimeInterval)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected <code>NSTimeInterval</code> value. Pass
+                                        <code>ORKIgnoreTimeIntervlValue</code> if you don&rsquo;t want to compare the
+                                        answer against a maximum <code>NSTimeInterval</code> value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected <code>NSTimeInterval</code> value. Pass
+                                        <code>ORKIgnoreTimeIntervlValue</code> if you don&rsquo;t want to compare the
+                                        answer against a minimum <code>NSTimeInterval</code> value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:" title="predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:">+&nbsp;predicateForTimeIntervalQuestionResultWithResultSelector:minimumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTimeIntervalQuestionResult.html"><code>ORKTimeIntervalQuestionResult</code></a> whose answer is the
+specified integer value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerValue:(NSTimeInterval)<em>minimumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerValue</code></th>
+						<td><p>The minimum expected <code>NSTimeInterval</code> value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:" title="predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:">+&nbsp;predicateForTimeIntervalQuestionResultWithResultSelector:maximumExpectedAnswerValue:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKTimeIntervalQuestionResult.html"><code>ORKTimeIntervalQuestionResult</code></a> whose answer is the
+specified integer value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> maximumExpectedAnswerValue:(NSTimeInterval)<em>maximumExpectedAnswerValue</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerValue</code></th>
+						<td><p>The maximum expected <code>NSTimeInterval</code> value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:" title="predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:">+&nbsp;predicateForDateQuestionResultWithResultSelector:minimumExpectedAnswerDate:maximumExpectedAnswerDate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKDateQuestionResult.html"><code>ORKDateQuestionResult</code></a> whose answer is a date within
+the specified dates.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForDateQuestionResultWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> minimumExpectedAnswerDate:(nullable NSDate *)<em>minimumExpectedAnswerDate</em> maximumExpectedAnswerDate:(nullable NSDate *)<em>maximumExpectedAnswerDate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumExpectedAnswerDate</code></th>
+						<td><p>The minimum expected date. Pass <code>nil</code> if you don&rsquo;t want to
+                                        compare the answer against a minimum date.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumExpectedAnswerDate</code></th>
+						<td><p>The maximum expected date. Pass <code>nil</code> if you don&rsquo;t want to
+                                        compare the answer against a maximum date.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/predicateForConsentWithResultSelector:didConsent:" title="predicateForConsentWithResultSelector:didConsent:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/predicateForConsentWithResultSelector:didConsent:">+&nbsp;predicateForConsentWithResultSelector:didConsent:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predicate matching a result of type <a href="../Classes/ORKConsentSignatureResult.html"><code>ORKConsentSignatureResult</code></a> whose <code>consented</code> value
+matches the specified boolean value.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSPredicate *)predicateForConsentWithResultSelector:(ORKResultSelector *)<em>resultSelector</em> didConsent:(BOOL)<em>didConsent</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSelector</code></th>
+						<td><p>The result selector object which specifies the question result
+                                        you are interested in. Note that when creating this result
+                                        selector you must provide the desired step identifier as the
+                                        <code>stepIdentifier</code> argument and the corresponding signature
+                                        identifier as the <code>resultIdentifier</code> argument). The step
+                                        identifier will normally refer to the result of a
+                                        <a href="../Classes/ORKConsentReviewStep.html"><code>ORKConsentReviewStep</code></a> and the signature identifier will
+                                        refer to the contained <a href="../Classes/ORKConsentSignatureResult.html"><code>ORKConsentSignatureResult</code></a>
+                                        corresponding to the signature collected by the consent
+                                        review step.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result predicate.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
