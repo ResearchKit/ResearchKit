@@ -46,7 +46,8 @@
 #define radiansToDegrees(radians) ((radians) * 180.0 / M_PI)
 #define allOrientationsForPitch(x, w, y, z) (atan2(2.0 * (x*w + y*z), 1.0 - 2.0 * (x*x + z*z)))
 #define allOrientationsForRoll(x, w, y, z) (atan2(2.0 * (y*w - x*z), 1.0 - 2.0 * (y*y + z*z)))
-#define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y - w*z)))
+#define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y + w*z)))
+
 
 @interface ORKRangeOfMotionContentView : ORKActiveStepCustomView {
     NSLayoutConstraint *_topConstraint;
@@ -143,18 +144,24 @@
 }
 
 - (void)handleTap:(UIGestureRecognizer *)sender {
-    [self calculateAndSetFlexedAndExtendedAngles];
+    [self calculateAndSetAngles];
     [self finish];
 }
 
-- (void)calculateAndSetFlexedAndExtendedAngles {
-    _flexedAngle = fabs([self getDeviceAngleInDegreesFromAttitude:_referenceAttitude]);
+- (void)calculateAndSetAngles {
+    _startAngle = fabs([self getDeviceAngleInDegreesFromAttitude:_referenceAttitude]);
     
-    BOOL rangeOfMotionMoreThan180Degrees = _highestAngle > 175 && _lowestAngle < 175;
+    BOOL rangeOfMotionMoreThan180Degrees = _highestAngle > 180 && _lowestAngle <= 180;
     if (rangeOfMotionMoreThan180Degrees) {
         _rangeOfMotionAngle = 360 - fabs(_lastAngle);
     } else {
         _rangeOfMotionAngle = fabs(_lastAngle);
+    }
+    if (_rangeOfMotionAngle > _maxAngle) {
+        _maxAngle = _rangeOfMotionAngle;
+    }
+    if (_rangeOfMotionAngle < _minAngle) {
+        _minAngle = _rangeOfMotionAngle;
     }
 }
 
@@ -177,6 +184,7 @@
         _lowestAngle = angle;
     }
     _lastAngle = angle;
+    [self calculateAndSetAngles];
 }
 
 /*
@@ -196,6 +204,7 @@
         double y = attitude.quaternion.y;
         double z = attitude.quaternion.z;
         angle = radiansToDegrees(allOrientationsForRoll(x, w, y, z));
+        
     } else {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
@@ -213,9 +222,13 @@
     ORKStepResult *stepResult = [super result];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.flexed = 90.0 - _flexedAngle;
-    result.extended = _rangeOfMotionAngle - result.flexed;
-
+    
+    result.start = 90.0 - _startAngle;
+    result.finish = _rangeOfMotionAngle - result.start;
+    result.minimum = _minAngle;
+    result.maximum = _maxAngle;
+    result.range = result.maximum - result.start;
+    
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return stepResult;
