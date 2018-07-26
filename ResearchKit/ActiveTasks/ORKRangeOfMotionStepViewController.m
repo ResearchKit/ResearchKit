@@ -216,7 +216,6 @@
     result.flexed = 90.0 - _flexedAngle;
     result.extended = _rangeOfMotionAngle - result.flexed;
 
-
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return stepResult;
