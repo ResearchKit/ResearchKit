@@ -813,8 +813,11 @@ class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
         let rangeOfMotionResult = result as! ORKRangeOfMotionResult
         let rows = super.resultRowsForSection(section)
         return rows + [
-            ResultRow(text: "flexed", detail: rangeOfMotionResult.flexed),
-            ResultRow(text: "extended", detail: rangeOfMotionResult.extended)
+            ResultRow(text: "start", detail: rangeOfMotionResult.start),
+            ResultRow(text: "finish", detail: rangeOfMotionResult.finish),
+            ResultRow(text: "minimum", detail: rangeOfMotionResult.minimum),
+            ResultRow(text: "maximum", detail: rangeOfMotionResult.maximum),
+            ResultRow(text: "range", detail: rangeOfMotionResult.range)
         ]
     }
 }
