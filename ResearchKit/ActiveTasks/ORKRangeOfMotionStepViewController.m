@@ -196,7 +196,6 @@
         double y = attitude.quaternion.y;
         double z = attitude.quaternion.z;
         angle = radiansToDegrees(allOrientationsForRoll(x, w, y, z));
-        
     } else {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
