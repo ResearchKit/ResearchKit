@@ -44,11 +44,8 @@
 
 
 #define radiansToDegrees(radians) ((radians) * 180.0 / M_PI)
-
 #define allOrientationsForPitch(x, w, y, z) (atan2(2.0 * (x*w + y*z), 1.0 - 2.0 * (x*x + z*z)))
-
 #define allOrientationsForRoll(x, w, y, z) (atan2(2.0 * (y*w - x*z), 1.0 - 2.0 * (y*y + z*z)))
-
 #define allOrientationsForYaw(x, w, y, z) (asin(2.0 * (x*y - w*z)))
 
 
