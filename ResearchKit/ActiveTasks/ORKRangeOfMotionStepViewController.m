@@ -203,7 +203,6 @@
         double y = attitude.quaternion.y;
         double z = attitude.quaternion.z;
         angle = radiansToDegrees(allOrientationsForRoll(x, w, y, z));
-        
     } else {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
@@ -221,7 +220,6 @@
     ORKStepResult *stepResult = [super result];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    
     result.start = 90.0 - _startAngle;
     result.finish = _rangeOfMotionAngle - result.start;
     result.minimum = _minAngle;
