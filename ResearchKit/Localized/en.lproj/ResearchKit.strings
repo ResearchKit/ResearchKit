@@ -614,3 +614,6 @@
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
