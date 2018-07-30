@@ -572,6 +572,13 @@
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
+"AX_BUTTON_ANNOTATE" = "Annotate";
+"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
+"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
+"AX_BUTTON_SHARE" = "Share";
+
 
 "AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
 
