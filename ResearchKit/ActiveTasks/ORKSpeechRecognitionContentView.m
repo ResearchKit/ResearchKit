@@ -96,6 +96,9 @@
 - (void)setupGraphView {
     self.graphView = [ORKAudioGraphView new];
     _graphView.translatesAutoresizingMaskIntoConstraints = NO;
+    _graphView.isAccessibilityElement = YES;
+    _graphView.accessibilityLabel = ORKLocalizedString(@"AX_SPEECH_RECOGNITION_WAVEFORM", nil);
+    _graphView.accessibilityTraits = UIAccessibilityTraitImage;
     
     [self addSubview:_graphView];
 }

@@ -613,4 +613,6 @@
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
+
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
