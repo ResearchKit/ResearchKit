@@ -580,7 +580,7 @@
 "AX_BUTTON_SHARE" = "Share";
 
 
-"AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
+"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
 
 "AX_SIGNVIEW_LABEL" = "Designated signature field";
 "AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
