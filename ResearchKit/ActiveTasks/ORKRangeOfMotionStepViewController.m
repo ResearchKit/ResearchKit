@@ -159,7 +159,7 @@
     if (_rangeOfMotionAngle > _maxAngle) {
         _maxAngle = _rangeOfMotionAngle;
     }
-    if (_rangeOfMotionAngle < _minAngle) {
+    if (_minAngle == 0.0 || _rangeOfMotionAngle < _minAngle) {
         _minAngle = _rangeOfMotionAngle;
     }
 }
