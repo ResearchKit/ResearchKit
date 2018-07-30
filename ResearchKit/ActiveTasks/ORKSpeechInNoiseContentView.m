@@ -94,6 +94,7 @@
     [self.playButton setTitle:ORKLocalizedString(@"SPEECH_IN_NOISE_START_AUDIO_LABEL", nil)
                        forState:UIControlStateNormal];
     self.playButton.enabled = YES;
+    self.playButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitStartsMediaSession;
     [self addSubview:_playButton];
 }
 
