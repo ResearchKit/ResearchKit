@@ -613,4 +613,6 @@
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
