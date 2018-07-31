@@ -623,3 +623,6 @@
 "AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
 
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";

@@ -94,6 +94,11 @@
     r.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.activeStepView addGestureRecognizer:r];
     
+    self.activeStepView.isAccessibilityElement = YES;
+    self.activeStepView.accessibilityLabel = ORKLocalizedString(@"AX_AMSLER_GRID_LABEL", nil);
+    self.activeStepView.accessibilityHint = ORKLocalizedString(@"AX_AMSLER_GRID_HINT", nil);
+    self.activeStepView.accessibilityTraits = UIAccessibilityTraitImage | UIAccessibilityTraitAllowsDirectInteraction;
+    
     [self setupContraints];
 }
 
