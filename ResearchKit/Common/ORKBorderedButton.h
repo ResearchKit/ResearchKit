@@ -38,6 +38,24 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKBorderedButton : ORKTextButton
 
+/**
+ The tint color of the button for UIControlStateNormal
+ */
+@property (nonatomic) UIColor *normalTintColor;
+
+/**
+ The tint color of the button for UIControlStateSelected or UIControlStateHighlighted
+ */
+@property (nonatomic) UIColor *normalHighlightOrSelectTintColor;
+
+/**
+ The tint color of the button for UIControlStateDisabled
+ */
+@property (nonatomic) UIColor *disableTintColor;
+
+/**
+ The delay in fading animation
+ */
 @property (nonatomic, assign) NSTimeInterval fadeDelay;
 
 @end

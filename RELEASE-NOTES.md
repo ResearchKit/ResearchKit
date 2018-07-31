@@ -1,5 +1,64 @@
 # ResearchKit Release Notes
 
+## ResearchKit 2.0 Release Notes
+
+*ResearchKit 2.0* supports *iOS* and requires *Xcode 9.0* or newer. 
+The minimum supported *Base SDK* is *11.0*.
+
+*ResearchKit 2.0* is a beta release with updates and support for documentation, localization, accessibility and QA coming over the next few months ahead of our stable release.
+
+In addition to general stability and performance improvements, *ResearchKit 2.0* includes the following new features and enhancements.
+
+### Community Updates
+ 
+- **Repo Privileges**
+We have opened up our access rights and have expanded our GitHub privileges to some of the external members of our community.  This gives these community members direct write access to the ResearchKit repository and merge pull requests.
+ 
+- **Schedule Changes**
+Previously the ResearchKit framework pushed to our master and stable branches simultaneously.  With this release we want to allow for more participation from the community so to accomplish this, we will push to the stable branch some time after our initial push to master.  This will enable the community to check out the new features, provide suggestions and submit pull requests.  During this time between master and stable, we will complete accessibility, localization and QA sweeps of the code so if you make contributions during this time, they will be reflected in the official stable release branch to follow.
+
+### UI Updates
+
+- **iOS Look and Feel**
+We have updated ResearchKit to support the look and feel of *iOS 11*.  Updates across all of our modules include bold titles and fonts as well as left alignment for all text.
+
+- **Footers and Buttons**
+The step footers and buttons have been updated across all our modules to enable a better and more intuitive user experience as participants navigate through your apps.  Footers are now sticky to the bottom of all views and support new filled button styles.  The cancel button has also been relocated to the under the continue button and these updates are able to handle ‘cancel’ and ‘skip’ buttons simultaneously.  Progress indicators have also been aligned to the top right to allow for the new scrolling title implementation. 
+
+- **Card View**
+This new view enhances the look and feel of surveys and forms.  These updates improve the user experience for participants completing forms and surveys by more clearly segmenting the various steps and questions a user is asked to complete.
+
+- **PDF Viewer**
+This steps allows users to easily navigate, annotate, search and share any PDF.
+
+### Active Tasks
+
+- **Speech Recognition**
+The speech recognition task lets developers present participants with either an image for users to describe or a block of text for users to repeat.  The participant will press record while they follow the prompt and when they have completed recording, a transcription will appear for them to edit if they feel anything was transcribed incorrectly.  The task will generate results that include an audio recording of what the participant said, a transcription of the output from the speech to text engine and the transcription which is editable by the participant if they made any changes to the output.
+
+- **Environment SPL Meter**
+This task measures the current noise in the participant’s environment. The task can be incorporated as a step into any hearing test or module and used as a gating step to ensure that the participant is in a suitable environment to complete their assessments. 
+
+- **Tone Audiometry**
+The tone audiometry task has been enhanced to include an updated algorithm and implementation to better evaluate a user’s hearing.  Tones will decrease in dBHL until a user’s failed attempt and then again increasing until a successful attempt.  This tasks also utilizes a variety of different calibrations, metrics and tables which are calibrated for AirPods only.  This allows developers to now collect the hearing threshold level of participants who complete this test.
+
+- **Speech in Noise**
+The Speech in Noise test is another task that can be used to measure the hearing health of users.  During this test, users will listen to a recording which includes ambient noises in the background as well as a phrase.  The participant will be asked to repeat back the phrase using the Speech Recognition task.  Throughout the task, the ambient background noise will increase or decrease in levels, allowing developers to measure the Speech Reception Threshold (SRT) of a user.  Stay tuned as more audio files will be added to the repository over the coming months!
+
+- **Amsler Grid**
+The Amsler Grid test is a task that can be used to collect data about a users vision.  During this task participants will hold the phone at a certain distance from their face and close one eye or the other as instructed.  A grid is displayed for users to view and if they see any distortions such as wavy or blurred lines, they can mark those areas on the grid using their finger or a stylus to annotate.
+
+### New Sample App
+
+- **Parkinson's Research Sample App**
+This sample app demonstrates how to leverage the new Movement Disorder API which is available within the CoreMotion framework. 
+
+
+### Please Note
+
+*ResearchKit 2.0* is a beta release.  We will be updating our master branch at regular intervals in the coming months to address various issues and expand support for localization and accessibility.
+
+
 ## ResearchKit 1.5 Release Notes
 
 *ResearchKit 1.5* supports *iOS* and requires *Xcode 8.0* or newer. The minimum supported *Base SDK* is *8.0*.

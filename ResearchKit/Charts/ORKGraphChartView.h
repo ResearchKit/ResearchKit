@@ -479,6 +479,11 @@ IB_DESIGNABLE
 @property (nonatomic) NSUInteger decimalPlaces;
 
 /**
+ An array of factors for adding Y-Axis labels
+ */
+@property (nonatomic)NSArray<NSNumber *> *yAxisLabelFactors;
+
+/**
  Animates the graph when it first displays on the screen.
  
  You can optionally call this method from the `viewWillAppear:` implementation of the view

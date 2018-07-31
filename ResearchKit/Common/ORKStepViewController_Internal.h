@@ -81,7 +81,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ork_setBackButtonItem:(nullable UIBarButtonItem *)backButton;
 
 // internal method for updating the right bar button item.
-- (void)updateNavRightBarButtonItem;
 - (void)updateNavLeftBarButtonItem;
 
 @end

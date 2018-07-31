@@ -114,6 +114,11 @@
     _videoCaptureView.skipButtonItem = skipButtonItem;
 }
 
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _videoCaptureView.cancelButtonItem = cancelButtonItem;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

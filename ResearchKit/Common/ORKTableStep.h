@@ -133,6 +133,19 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSArray <id <NSObject, NSCopying, NSSecureCoding>> *items;
 
 /**
+ Boolean flag representing if the table data should be displayed in a bulleted format.
+ */
+@property (nonatomic) BOOL isBulleted;
+
+/**
+ The array of icon names to display instead of bullets.
+ 
+ Images are only visible if the isBulleted property is set to YES. Images names must reference
+ images in you application project not the ResearchKit framework.
+ */
+@property (nonatomic, copy, nullable) NSArray <NSString *> *bulletIconNames;
+
+/**
  Returns the number of sections in the tableview used to display this step. Default = `1`.
  
  @return                The number of sections in the tableview.

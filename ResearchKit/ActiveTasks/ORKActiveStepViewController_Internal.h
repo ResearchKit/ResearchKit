@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKActiveStepTimer;
 @class ORKActiveStepView;
+@class ORKNavigationContainerView;
 
 @interface ORKActiveStepViewController ()
 
@@ -49,10 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) ORKActiveStepView *activeStepView;
 
 @property (nonatomic, readonly) NSTimeInterval timeRemaining;
+@property (nonatomic, readonly) NSTimeInterval runtime;
 @property (nonatomic, readonly) BOOL timerActive;
 @property (nonatomic, assign) NSTimeInterval timerUpdateInterval;
 
 @property (nonatomic, assign, getter=isStarted) BOOL started;
+
+@property (nonatomic, strong, readonly) ORKNavigationContainerView *navigationFooterView;
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished; // Let subclass receive timer fires
 

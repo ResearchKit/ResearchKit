@@ -214,6 +214,12 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [_yAxisView setDecimalPlaces:_decimalPlaces];
 }
 
+- (void)setYAxisLabelFactors:(NSArray<NSNumber *> *)yAxisLabelFactors {
+    _yAxisLabelFactors = yAxisLabelFactors;
+    _yAxisView.yAxisLabelFactors = yAxisLabelFactors;
+    [_yAxisView updateTicksAndLabels];
+}
+
 - (void)setShowsHorizontalReferenceLines:(BOOL)showsHorizontalReferenceLines {
     _showsHorizontalReferenceLines = showsHorizontalReferenceLines;
     [self updateHorizontalReferenceLines];
@@ -760,22 +766,24 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     double scrubberYPosition = [self canvasYPositionForXPosition:xPosition plotIndex:plotIndex];
     double scrubbingValue = [self scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
 
-    _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
-    _scrubberLabel.text = [NSString stringWithFormat:_decimalFormat, scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
-    CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
-                                                                           _plotView.bounds.size.height)
-                                                        options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
-                                                     attributes:@{NSFontAttributeName: _scrubberLabel.font}
-                                                        context:nil].size;
-    _scrubberLabel.frame = CGRectMake(xPosition + ORKGraphChartViewLeftPadding + ScrubberLineToLabelPadding,
-                                      CGRectGetMinY(_scrubberLine.frame),
-                                      textSize.width + ScrubberLabelHorizontalPadding,
-                                      textSize.height + ScrubberLabelVerticalPadding);
-
-    if (scrubbingValue == ORKDoubleInvalidValue) {
-        [self setScrubberAccessoryViewsHidden:YES];
-    } else {
-        [self setScrubberAccessoryViewsHidden:NO];
+    if (scrubberYPosition == scrubberYPosition) {
+        _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
+        _scrubberLabel.text = [NSString stringWithFormat:_decimalFormat, scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
+        CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
+                                                                               _plotView.bounds.size.height)
+                                                            options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
+                                                         attributes:@{NSFontAttributeName: _scrubberLabel.font}
+                                                            context:nil].size;
+        _scrubberLabel.frame = CGRectMake(xPosition + ORKGraphChartViewLeftPadding + ScrubberLineToLabelPadding,
+                                          CGRectGetMinY(_scrubberLine.frame),
+                                          textSize.width + ScrubberLabelHorizontalPadding,
+                                          textSize.height + ScrubberLabelVerticalPadding);
+        
+        if (scrubbingValue == ORKDoubleInvalidValue) {
+            [self setScrubberAccessoryViewsHidden:YES];
+        } else {
+            [self setScrubberAccessoryViewsHidden:NO];
+        }
     }
 }
 

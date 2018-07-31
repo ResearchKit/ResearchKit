@@ -51,6 +51,11 @@ static const CGFloat RoundTappingButtonDiameter = 104;
     return CGSizeMake(diameter, diameter);
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    self.layer.cornerRadius = diameter * 0.5;
+}
+
 + (UIFont *)defaultFont {
     // regular, 20
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];

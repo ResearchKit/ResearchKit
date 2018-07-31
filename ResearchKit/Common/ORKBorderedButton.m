@@ -34,83 +34,146 @@
 
 
 @implementation ORKBorderedButton {
-    UIColor *_normalTintColor;
-    UIColor *_normalHighlightOrSelectTintColor;
-    UIColor *_disableTintColor;
+
+    BOOL _appearsAsTextButton;
+    BOOL _useBoldFont;
 }
 
 - (void)init_ORKTextButton {
     [super init_ORKTextButton];
-    
-    self.layer.borderWidth = 1.0f;
-    self.layer.cornerRadius = 5.0f;
-    self.fadeDelay = 0.0;
-    
+    [self setLayerAndFadeDelay];
     [self setEnabled:YES];
+    [self setDefaultTintColors];
+}
+
+- (void)setLayerAndFadeDelay {
+    self.layer.borderWidth = 0.0f;
+    self.layer.cornerRadius = 10.0f;
+    self.fadeDelay = 0.0;
 }
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     
-    _normalTintColor = [[self tintColor] colorWithAlphaComponent:1.0f];
-    _normalHighlightOrSelectTintColor = _normalTintColor;
-    _disableTintColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
-    
-    [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
-    
-    [self updateBorderColor];
+    if (!_appearsAsTextButton) {
+        [self setLayerAndFadeDelay];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+        
+    }
+    else {
+        [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
+        [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateHighlighted];
+        [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateSelected];
+        [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
+    }
+    [self updateBackgroundColor];
+
+}
+
+- (void)setDefaultTintColors {
+    _normalTintColor = [[self tintColor] colorWithAlphaComponent:0.7f];
+    _normalHighlightOrSelectTintColor = [_normalTintColor colorWithAlphaComponent:1.0f];
+    _disableTintColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.3f];
+}
+
+- (void)setNormalTintColor:(UIColor *)normalTintColor {
+    _normalTintColor = normalTintColor;
+    _normalHighlightOrSelectTintColor = [normalTintColor colorWithAlphaComponent:1.0f];
+    [self updateBackgroundColor];
+}
+
+- (void)setNormalHighlightOrSelectTintColor:(UIColor *)normalHighlightOrSelectTintColor {
+    _normalHighlightOrSelectTintColor = normalHighlightOrSelectTintColor;
+    [self updateBackgroundColor];
+}
+
+- (void)setDisableTintColor:(UIColor *)disableTintColor {
+    _disableTintColor = disableTintColor;
+    [self updateBackgroundColor];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     
-    [self updateBorderColor];
+    [self updateBackgroundColor];
 }
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
-    [self updateBorderColor];
+    [self updateBackgroundColor];
 }
 
 - (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     
-    [self updateBorderColor];
+    [self updateBackgroundColor];
 }
 
 - (void)fadeHighlightOrSelectColor {
     // Ignore if it's a race condition
     if (self.enabled && !(self.highlighted || self.selected)) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = _normalTintColor;
         self.layer.borderColor = [_normalTintColor CGColor];
     }
 }
 
-- (void)updateBorderColor {
-
-    if (self.enabled && (self.highlighted || self.selected)) {
-        self.backgroundColor = _normalHighlightOrSelectTintColor;
-        self.layer.borderColor = [_normalHighlightOrSelectTintColor CGColor]; // move
-    } else if(self.enabled && !(self.highlighted || self.selected)) {
-        if (self.fadeDelay > 0) {
-            [self performSelector:@selector(fadeHighlightOrSelectColor) withObject:nil afterDelay:self.fadeDelay];
+- (void)updateBackgroundColor {
+    if (!_appearsAsTextButton) {
+        if (self.enabled && (self.highlighted || self.selected)) {
+            self.backgroundColor = _normalHighlightOrSelectTintColor;
+            self.layer.borderColor = [_normalHighlightOrSelectTintColor CGColor]; // move
+        } else if(self.enabled && !(self.highlighted || self.selected)) {
+            if (self.fadeDelay > 0) {
+                [self performSelector:@selector(fadeHighlightOrSelectColor) withObject:nil afterDelay:self.fadeDelay];
+            } else {
+                [self fadeHighlightOrSelectColor];
+            }
         } else {
-            [self fadeHighlightOrSelectColor];
+            self.backgroundColor = _disableTintColor;
+            self.layer.borderColor = [_disableTintColor CGColor];
         }
-    } else {
-        self.backgroundColor = [UIColor whiteColor];
-        self.layer.borderColor = [_disableTintColor CGColor];
+        self.titleLabel.font = [[self class] defaultFont];
+    }
+    else {
+        self.backgroundColor = [UIColor clearColor];
+        self.layer.borderColor = [[UIColor clearColor] CGColor];
+        self.titleLabel.font = _useBoldFont ? [[self class] defaultBoldTextFont] : [ORKTextButton defaultFont];
     }
 }
 
 + (UIFont *)defaultFont {
-    // regular, 17
+    // bold, 17
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+    return [UIFont boldSystemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] + 1.0];
+}
+
++ (UIFont *)defaultBoldTextFont {
+    // bold, 16
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCaption1];
+    return [UIFont boldSystemFontOfSize:((NSNumber *)[descriptor objectForKey: UIFontDescriptorSizeAttribute]).doubleValue + 4.0];
+}
+
+- (void)setAppearanceAsTextButton {
+    _appearsAsTextButton = YES;
+    _useBoldFont = NO;
+    [self tintColorDidChange];
+}
+
+- (void)setAppearanceAsBoldTextButton {
+    _appearsAsTextButton = YES;
+    _useBoldFont = YES;
+    [self tintColorDidChange];
+}
+
+- (void)resetAppearanceAsBorderedButton {
+    _appearsAsTextButton = NO;
+    _useBoldFont = NO;
+    [self setDefaultTintColors];
+    [self tintColorDidChange];
 }
 
 @end

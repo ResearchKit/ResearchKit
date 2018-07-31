@@ -45,12 +45,14 @@
 - (id<ORKTask>)makeCustomViewControllerTaskWithIdentifier:(NSString *)identifier {
     
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
-    step1.title = @"Instantiate Custom View Controller";
+    step1.title = @"Custom VC";
     step1.text = @"The next step uses a custom subclass of an ORKFormStepViewController.";
     
     DragonPokerStep *dragonStep = [[DragonPokerStep alloc] initWithIdentifier:@"dragonStep"];
+    dragonStep.title = @"Custom VC";
     
     ORKStep *lastStep = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];
+    lastStep.title = @"Complete";
     
     return [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:@[step1, dragonStep, lastStep]];
 }
@@ -75,14 +77,16 @@
         format.minimum = @(5);
         format.maximum = @(90);
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step1"
-                                                                      title:@"How old are you?"
+                                                                      title:@"Interruptible"
+                                                                   question:@"How old are you?"
                                                                      answer:format];
         [steps addObject:step];
     }
     
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step2"
-                                                                      title:@"How much did you pay for your car?"
+                                                                      title:@"Interruptible"
+                                                                   question:@"How much did you pay for your car?"
                                                                      answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"USD"]];
         /*
          Test interrupting navigation from the task view controller delegate.
@@ -136,23 +140,25 @@
     
     // Intro step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
-    step.title = @"This task demonstrates an skippable step and an optional loop within a navigable ordered task";
+    step.title = @"Ordered Loop";
+    step.text = @"This task demonstrates an skippable step and an optional loop within a navigable ordered task";
     [steps addObject:step];
     
     // Skippable step
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"skipNextStep" title:@"Do you want to skip the next step?" answer:answerFormat];
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"skipNextStep" title:@"Ordered Loop" question:@"Do you want to skip the next step?" answer:answerFormat];
     questionStep.optional = NO;
     [steps addObject:questionStep];
     
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"skippableStep"];
-    step.title = @"You'll optionally skip this step";
+    step.title = @"Optional Skip";
     step.text = @"You should only see this step if you answered the previous question with 'No'";
     [steps addObject:step];
     
     // Loop target step
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"loopAStep"];
-    step.title = @"You'll optionally return to this step";
+    step.title = @"Optional return";
+    step.text = @"You'll optionally return to this step";
     [steps addObject:step];
     
     // Branching paths
@@ -165,7 +171,7 @@
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
     
-    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"branchingStep" title:@"Which kind of question do you prefer?" answer:answerFormat];
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"branchingStep" title:@"Ordered Loop" question:@"Which kind of question do you prefer?" answer:answerFormat];
     questionStep.optional = NO;
     [steps addObject:questionStep];
     
@@ -179,7 +185,8 @@
                                                                                               minimumValueDescription:nil];
     
     step = [ORKQuestionStep questionStepWithIdentifier:@"scaleStep"
-                                                 title:@"On a scale of 1 to 10, what is your mood?"
+                                                 title:@"Ordered Loop"
+                                              question:@"On a scale of 1 to 10, what is your mood?"
                                                 answer:scaleAnswerFormat];
     [steps addObject:step];
     
@@ -193,18 +200,19 @@
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
     
-    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"textChoiceStep" title:@"How is your mood?" answer:answerFormat];
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"textChoiceStep" title:@"Ordered Loop" question:@"How is your mood?" answer:answerFormat];
     questionStep.optional = NO;
     [steps addObject:questionStep];
     
     // Loop conditional step
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"loopBStep" title:@"Do you want to repeat the survey?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"loopBStep" title:@"Ordered Loop" question:@"Do you want to repeat the survey?" answer:answerFormat];
     step.optional = NO;
     [steps addObject:step];
     
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"endStep"];
-    step.title = @"You have finished the task";
+    step.title = @"Complete";
+    step.text = @"You have finished the task";
     [steps addObject:step];
     
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:identifier
@@ -249,7 +257,7 @@
 
 - (id<ORKTask>)makeStepWillAppearTaskWithIdentifier:(NSString *)identifier {
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
-    step1.title = @"Step Will Appear Delegate Example";
+    step1.title = @"Will Appear";
     step1.text = @"This task will test several usages of the delegate's 'taskViewController:stepViewControllerWillAppear:\' method.";
     
     /*
@@ -261,7 +269,8 @@
      subclass, so you completely own the view controller and its appearance.
      */
     ORKActiveStep *step2 = [[ORKActiveStep alloc] initWithIdentifier:@"step2"];
-    step2.title = @"Custom View On Active Step";
+    step2.title = @"Will Appear";
+    step2.text = @"Custom View On Active Step";
     step2.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                ORKStepViewController *stepViewController) {
         UIView *customView = [UIView new];
@@ -296,7 +305,8 @@
      Customize the continue and learn more buttons.
      */
     ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"step3"];
-    step3.title = @"Custom Next and Learn More Buttons";
+    step3.title = @"Will Appear";
+    step3.text = @"Custom Next and Learn More Buttons";
     step3.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                 ORKStepViewController *stepViewController) {
         stepViewController.continueButtonTitle = @"Next Customized Step";
@@ -307,7 +317,8 @@
      Customize the back and cancel buttons.
      */
     ORKInstructionStep *step4 = [[ORKInstructionStep alloc] initWithIdentifier:@"step4"];
-    step4.title = @"Custom Back and Cancel Buttons";
+    step4.title = @"Will Appear";
+    step4.text = @"Custom Back and Cancel Buttons";
     step4.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                 ORKStepViewController *stepViewController) {
         stepViewController.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Backwards"
@@ -321,7 +332,8 @@
      Customize the navigation item title.
      */
     ORKInstructionStep *step5 = [[ORKInstructionStep alloc] initWithIdentifier:@"step5"];
-    step5.title = @"Custom Navigation Item Title";
+    step5.title = @"Will Appear";
+    step5.text = @"Custom Navigation Item Title";
     step5.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                 ORKStepViewController *stepViewController) {
         taskViewController.showsProgressInNavigationBar = NO;
@@ -337,7 +349,8 @@
      Customize the navigation item title view.
      */
     ORKInstructionStep *step6 = [[ORKInstructionStep alloc] initWithIdentifier:@"step6"];
-    step6.title = @"Custom Navigation Item Title View";
+    step6.title = @"Will Appear";
+    step6.text = @"Custom Navigation Item Title View";
     step6.stepViewControllerWillAppearBlock = ^(ORKTaskViewController *taskViewController,
                                                 ORKStepViewController *stepViewController) {
         taskViewController.showsProgressInNavigationBar = NO;
@@ -360,7 +373,7 @@
 
 - (id<ORKTask>)makeStepWillDisappearTaskWithIdentifier:(NSString *)identifier {
     ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"step1"];
-    step1.title = @"Step Will Disappear Delegate Example";
+    step1.title = @"Will Disappear";
     step1.text = @"The tint color of the task view controller will be changed to magenta in the delegate's 'taskViewController:stepViewControllerWillDisappear:navigationDirection:' method after this step.";
     
     step1.stepViewControllerWillDisappearBlock = ^(ORKTaskViewController *taskViewController,
