@@ -154,7 +154,7 @@
     if (rangeOfMotionMoreThan180Degrees) {
         _rangeOfMotionAngle = 360 - fabs(_lastAngle);
     } else {
-        _rangeOfMotionAngle = fabs(_lastAngle);
+        _rangeOfMotionAngle = _lastAngle;
     }
     if (_rangeOfMotionAngle > _maxAngle) {
         _maxAngle = _rangeOfMotionAngle;
