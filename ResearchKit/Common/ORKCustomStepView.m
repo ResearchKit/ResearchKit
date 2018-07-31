@@ -317,4 +317,11 @@
     }
 }
 
+- (NSArray *)accessibilityElements
+{
+    // Needed to support the "Edit Transcript" view for speech recognition pages
+    // This works around an issue with navigating table view cells outside of a table view using VoiceOver
+    return self.cell.accessibilityElements;
+}
+
 @end
