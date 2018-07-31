@@ -41,6 +41,9 @@ ORK_EXTERN NSString *const ORKToolBarTintColorKey;
 /// Color used for view's backgroud
 ORK_EXTERN NSString *const ORKBackgroundColorKey;
 
+/// Color used for consent view's backgroud
+ORK_EXTERN NSString *const ORKConsentBackgroundColorKey;
+
 /// Color used for signature
 ORK_EXTERN NSString *const ORKSignatureColorKey;
 
@@ -77,8 +80,33 @@ ORK_EXTERN NSString *const ORKGraphReferenceLineColorKey;
 /// Default color used for auxiliary image tint of ORKInstructionStepView
 ORK_EXTERN NSString *const ORKAuxiliaryImageTintColorKey;
 
+/// Default color used for navigation container view
+ORK_EXTERN NSString *const ORKNavigationContainerColorKey;
+
+/// Default color progress label
+ORK_EXTERN NSString *const ORKProgressLabelColorKey;
+
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
+
+/// Default CGFloat used for rounded corner radii for card view
+ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
+
+/// Default CGFloat used for border width for card view
+ORK_EXTERN CGFloat ORKCardDefaultBorderWidth;
+
+/// Default font size for card view
+ORK_EXTERN CGFloat ORKCardDefaultFontSize;
+
+/// Default Left and Right margin for card view
+ORK_EXTERN CGFloat ORKCardLeftRightMargin;
+
+/// Default Top and Bottom margin for card view
+ORK_EXTERN CGFloat ORKCardTopBottomMargin;
+
+/// Padding for Form and Question Step Table Containers
+ORK_EXTERN CGFloat ORKSurveyTableContainerLeftRightPadding;
+
 
 /// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
@@ -89,6 +117,7 @@ void ORKColorSetColorForKey(NSString *key, UIColor *color);
 + (UIColor *)ork_redColor;
 + (UIColor *)ork_grayColor;
 + (UIColor *)ork_darkGrayColor;
++ (UIColor *)ork_borderGrayColor;
 
 @end
 
@@ -145,6 +174,7 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
+    ORKScreenTypeiPad10_5,
     ORKScreenTypeiPad12_9,
     ORKScreenType_COUNT
 };

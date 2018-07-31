@@ -48,6 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, getter=isSelectedItem) BOOL selectedItem;
 
+@property (nonatomic) bool useCardView;
+
+@property (nonatomic) bool isLastItem;
+
+@property (nonatomic) BOOL isFirstItemInSectionWithoutTitle;
+
 @end
 
 NS_ASSUME_NONNULL_END

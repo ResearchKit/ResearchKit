@@ -41,6 +41,7 @@
 #import "ORKSurveyAnswerCellForImageSelection.h"
 #import "ORKSurveyAnswerCellForLocation.h"
 #import "ORKTableContainerView.h"
+#import "ORKSurveyCardHeaderView.h"
 #import "ORKTextChoiceCellGroup.h"
 
 #import "ORKNavigationContainerView_Internal.h"
@@ -69,13 +70,14 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     ORKTableContainerView *_tableContainer;
     ORKStepHeaderView *_headerView;
-    ORKNavigationContainerView *_continueSkipView;
+    ORKNavigationContainerView *_navigationFooterView;
     ORKAnswerDefaultSource *_defaultSource;
     
     NSCalendar *_savedSystemCalendar;
     NSTimeZone *_savedSystemTimeZone;
     
     ORKTextChoiceCellGroup *_choiceCellGroup;
+    ORKQuestionStepCellHolderView *_cellHolderView;
     
     id _defaultAnswer;
     
@@ -103,11 +105,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 @end
 
 
-@implementation ORKQuestionStepViewController
+@implementation ORKQuestionStepViewController {
+    NSArray<NSLayoutConstraint *> *_constraints;
+}
 
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
-    self.internalSkipButtonItem.title = ORKLocalizedString(@"BUTTON_SKIP_QUESTION", nil);
+    self.internalSkipButtonItem.title = ORKLocalizedString(@"BUTTON_SKIP", nil);
 }
 
 - (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
@@ -143,17 +147,25 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     if ([self isViewLoaded]) {
         [_tableContainer removeFromSuperview];
+        [_navigationFooterView removeFromSuperview];
         _tableView.delegate = nil;
         _tableView.dataSource = nil;
         _tableView = nil;
         _headerView = nil;
-        _continueSkipView = nil;
-        
+        _cellHolderView = nil;
+        _navigationFooterView = nil;
         [_questionView removeFromSuperview];
         _questionView = nil;
         
+        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView.skipButtonItem = self.skipButtonItem;
+        _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+        _navigationFooterView.continueButtonItem = self.continueButtonItem;
+        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+
+        [self.view addSubview:_navigationFooterView];
         if ([self.questionStep formatRequiresTableView] && !_customQuestionView) {
-            _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
+            _tableContainer = [ORKTableContainerView new];
             
             // Create a new one (with correct style)
             _tableView = _tableContainer.tableView;
@@ -161,32 +173,44 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _tableView.dataSource = self;
             _tableView.clipsToBounds = YES;
             
-            [self.view addSubview:_tableContainer];
+            [self.view insertSubview:_tableContainer belowSubview:_navigationFooterView];
             _tableContainer.tapOffView = self.view;
             
             _headerView = _tableContainer.stepHeaderView;
             _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-            _headerView.captionLabel.text = self.questionStep.title;
+            if (self.questionStep.useCardView) {
+                _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+                [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+                [self.taskViewController.navigationBar setBarTintColor:[_tableView backgroundColor]];
+                [self.view setBackgroundColor:[_tableView backgroundColor]];
+            }
+            else {
+                _headerView.captionLabel.text = self.questionStep.question;
+            }
             _headerView.instructionLabel.text = self.questionStep.text;
             _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             
-            _continueSkipView = _tableContainer.continueSkipContainerView;
-            _continueSkipView.skipButtonItem = self.skipButtonItem;
-            _continueSkipView.continueEnabled = [self continueButtonEnabled];
-            _continueSkipView.continueButtonItem = self.continueButtonItem;
-            _continueSkipView.optional = self.step.optional;
+
+            _navigationFooterView.optional = self.step.optional;
             if (self.readOnlyMode) {
-                _continueSkipView.optional = YES;
-                [_continueSkipView setNeverHasContinueButton:YES];
-                _continueSkipView.skipEnabled = [self skipButtonEnabled];
-                _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
+                _navigationFooterView.optional = YES;
+                [_navigationFooterView setNeverHasContinueButton:YES];
+                _navigationFooterView.skipEnabled = [self skipButtonEnabled];
+                _navigationFooterView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
+            [self setupConstraints:_tableContainer];
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
             _questionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-            _questionView.questionStep = [self questionStep];
-            [self.view addSubview:_questionView];
+            
+            ORKQuestionStep *step = [self questionStep];
+            _navigationFooterView.useNextForSkip = (step ? NO : YES);
+            _questionView.questionStep = step;
+            _navigationFooterView.optional = step.optional;
+            [_navigationFooterView updateContinueAndSkipEnabled];
+            
+            [self.view insertSubview:_questionView belowSubview:_navigationFooterView];
             
             if (_customQuestionView) {
                 _questionView.questionCustomView = _customQuestionView;
@@ -194,44 +218,32 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _customQuestionView.answer = [self answer];
                 _customQuestionView.userInteractionEnabled = !self.readOnlyMode;
             } else {
-                ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
-                cellHolderView.delegate = self;
-                cellHolderView.cell = [self answerCellForTableView:nil];
+                _cellHolderView = [ORKQuestionStepCellHolderView new];
+                _cellHolderView.delegate = self;
+                _cellHolderView.cell = [self answerCellForTableView:nil];
                 [NSLayoutConstraint activateConstraints:
-                 [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
-                cellHolderView.answer = [self answer];
-                cellHolderView.userInteractionEnabled = !self.readOnlyMode;
-                _questionView.questionCustomView = cellHolderView;
+                 [_cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
+                _cellHolderView.answer = [self answer];
+                _cellHolderView.userInteractionEnabled = !self.readOnlyMode;
+                if (self.questionStep.useCardView) {
+                    [_questionView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+                    [self.taskViewController.navigationBar setBarTintColor:[_questionView backgroundColor]];
+                    [self.view setBackgroundColor:[_questionView backgroundColor]];
+                    [_cellHolderView useCardViewWithTitle:self.questionStep.question];
+                }
+                _questionView.questionCustomView = _cellHolderView;
             }
             
             _questionView.translatesAutoresizingMaskIntoConstraints = NO;
-            _questionView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
-            _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
-            _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-            if (self.readOnlyMode) {
-                _questionView.continueSkipContainer.optional = YES;
-                [_questionView.continueSkipContainer setNeverHasContinueButton:YES];
-                _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
-                _questionView.continueSkipContainer.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
-            }
-
             
-            NSMutableArray *constraints = [NSMutableArray new];
-            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
-                                                                                     options:(NSLayoutFormatOptions)0
-                                                                                     metrics:nil
-                                                                                       views:@{@"questionView": _questionView}]];
-            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][questionView][bottomGuide]"
-                                                                                     options:(NSLayoutFormatOptions)0
-                                                                                     metrics:nil
-                                                                                       views:@{@"questionView": _questionView,
-                                                                                               @"topGuide": self.topLayoutGuide,
-                                                                                               @"bottomGuide": self.bottomLayoutGuide}]];
-            for (NSLayoutConstraint *constraint in constraints) {
-                constraint.priority = UILayoutPriorityRequired;
+            if (self.readOnlyMode) {
+                _navigationFooterView.optional = YES;
+                [_navigationFooterView setNeverHasContinueButton:YES];
+                _navigationFooterView.skipEnabled = [self skipButtonEnabled];
+                _navigationFooterView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
-            [NSLayoutConstraint activateConstraints:constraints];
+            [self setupConstraints:_questionView];
         }
     }
     
@@ -239,6 +251,95 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         self.continueButtonItem  = self.internalContinueButtonItem;
     }
     
+}
+
+- (void)setupConstraints:(UIView *)view {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    _constraints = nil;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:view
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:view
+                                                  attribute:NSLayoutAttributeLeftMargin
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeftMargin
+                                                 multiplier:1.0
+                                                   constant:ORKSurveyTableContainerLeftRightPadding],
+                     [NSLayoutConstraint constraintWithItem:view
+                                                  attribute:NSLayoutAttributeRightMargin
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRightMargin
+                                                 multiplier:1.0
+                                                   constant:-ORKSurveyTableContainerLeftRightPadding],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:view
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+    [self setupCellHolderViewConstraints];
+}
+
+- (void)setupCellHolderViewConstraints {
+    if (_cellHolderView) {
+        NSArray *cellHolderConstraints = @[
+                                           
+                                           [NSLayoutConstraint constraintWithItem:_cellHolderView
+                                                                        attribute:NSLayoutAttributeLeftMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view.safeAreaLayoutGuide
+                                                                        attribute:NSLayoutAttributeLeftMargin
+                                                                       multiplier:1.0
+                                                                         constant:ORKSurveyTableContainerLeftRightPadding],
+                                           [NSLayoutConstraint constraintWithItem:_cellHolderView
+                                                                        attribute:NSLayoutAttributeRightMargin
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view.safeAreaLayoutGuide
+                                                                        attribute:NSLayoutAttributeRightMargin
+                                                                       multiplier:1.0
+                                                                         constant:-ORKSurveyTableContainerLeftRightPadding]
+                                           ];
+        for (NSLayoutConstraint *constraint in cellHolderConstraints) {
+            constraint.priority = UILayoutPriorityRequired;
+        }
+        [NSLayoutConstraint activateConstraints:cellHolderConstraints];
+    }
 }
 
 - (void)viewDidLoad {
@@ -384,20 +485,17 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)updateButtonStates {
     if ([self isStepImmediateNavigation]) {
-        _continueSkipView.neverHasContinueButton = YES;
-        _continueSkipView.continueButtonItem = nil;
+//        _navigationFooterView.neverHasContinueButton = YES;
+//        _navigationFooterView.continueButtonItem = nil;
     }
-    _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-    _continueSkipView.continueEnabled = [self continueButtonEnabled];
-    _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
-    _continueSkipView.skipEnabled = [self skipButtonEnabled];
+    _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+    _navigationFooterView.skipEnabled = [self skipButtonEnabled];
 }
 
 // Override to monitor button title change
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    _questionView.continueSkipContainer.continueButtonItem = continueButtonItem;
-    _continueSkipView.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
 }
 
@@ -407,11 +505,15 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _navigationFooterView.cancelButtonItem = cancelButtonItem;
+}
+
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     
-    _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
-    _continueSkipView.skipButtonItem = self.skipButtonItem;
+    _navigationFooterView.skipButtonItem = self.skipButtonItem;
     [self updateButtonStates];
 }
 
@@ -544,6 +646,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return ORKQuestionSection_COUNT;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([self questionStep].useCardView && [self questionStep].question) {
+        return [[ORKSurveyCardHeaderView alloc] initWithTitle:self.questionStep.question];
+    }
+    return nil;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
@@ -633,7 +742,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     
+    cell.useCardView = self.questionStep.useCardView;
     cell.userInteractionEnabled = !self.readOnlyMode;
+    
+    cell.isLastItem = indexPath.row == _choiceCellGroup.size - 1;
+    cell.isFirstItemInSectionWithoutTitle = (indexPath.row == 0 && ![self questionStep].question);
     return cell;
 }
 
@@ -797,5 +910,14 @@ static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
     
     [self answerDidChange];
 }
+
+//FIXME: Need Accessibility for Continue and skip button. Lost support when moved navigationFooterViewView outside VerticalContainerView.
+
+//    if (_navigationFooterView.continueButton != nil) {
+//        [elements addObject:self.continueSkipContainer.continueButton];
+//    }
+//    if (_navigationFooterView.skipButton != nil) {
+//        [elements addObject:self.continueSkipContainer.skipButton];
+//    }
 
 @end

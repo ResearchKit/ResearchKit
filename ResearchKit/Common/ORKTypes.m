@@ -37,4 +37,128 @@ ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierA = @"A";
 
 ORKTrailMakingTypeIdentifier const ORKTrailMakingTypeIdentifierB = @"B";
 
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleArabic = @"ar-SA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCatalan = @"ca-ES";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCzech = @"cs-CZ";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDanish = @"da-DK";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanAT = @"de-AT";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanCH = @"de-CH";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGermanDE = @"de-DE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleGreek = @"el-GR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishAE = @"en-AE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishAU = @"en-AU";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishCA = @"en-CA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishGB = @"en-GB";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishID = @"en-ID";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishIE = @"en-IE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishIN = @"en-IN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishNZ = @"en-NZ";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishPH = @"en-PH";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishSA = @"en-SA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishSG = @"en-SG";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishUS = @"en-US";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleEnglishZA = @"en-ZA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishCL = @"es-CL";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishCO = @"es-CO";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishES = @"es-ES";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishMX = @"es-MX";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSpanishUS = @"es-US";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFinnish = @"fi-FI";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchBE = @"fr-BE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchCA = @"fr-CA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchCH = @"fr-CH";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleFrenchFR = @"fr-FR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHebrew = @"he-IL";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindi = @"hi-IN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindiINTRANSLIT = @"hi-IN-translit";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHindiLATN = @"hi-Latn";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCroatian = @"hr-HR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleHungarian = @"hu-HU";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleIndonesian = @"id-ID";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleItalianCH = @"it-CH";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleItalianIT = @"it-IT";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleJapanese = @"ja-JP";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleKorean = @"ko-KR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleMalay = @"ms-MY";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleNorwegian = @"nb-NO";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDutchBE = @"nl-BE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleDutchNL = @"nl-NL";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePolish = @"pl-PL";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePortugeseBR = @"pt-BR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocalePortugesePT = @"pt-PT";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleRomanian = @"ro-RO";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleRussian = @"ru-RU";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSlovak = @"sk-SK";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleSwedish = @"sv-SE";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleThai = @"th-TH";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleTurkish = @"tr-TR";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleUkranian = @"uk-UA";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleVietnamese = @"vi-VN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleShanghainese = @"wuu-CN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleCantonese = @"yue-CN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseCN = @"zh-CN";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseHK = @"zh-HK";
+
+ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW = @"zh-TW";
+
 const double ORKDoubleDefaultValue = DBL_MAX;

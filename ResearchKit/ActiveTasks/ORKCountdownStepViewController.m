@@ -234,7 +234,6 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
     _countdownView = [[ORKCountdownView alloc] init];
     _countdownView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _countdownView;
-    
     [self updateCountdownLabel];
 }
 

@@ -103,7 +103,9 @@
     self.currentConsentDocument = [consentDocument copy];
     
     ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visualConsent" document:consentDocument];
+    step.title = @"Consent Document";
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReview" signature:consentDocument.signatures[0] inDocument:consentDocument];
+    reviewStep.title = @"Consent Review";
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     
@@ -136,7 +138,7 @@
      Tests layout of the consent review step.
      
      In the consent review step, the user reviews the consent document and
-     optionally enters their name and/or scribbles a signature.
+     optionally enters their name and/or draws a signature.
      */
     ORKConsentDocument *consentDocument = [self buildConsentDocument];
     ORKConsentSignature *participantSig = consentDocument.signatures[0];
@@ -214,13 +216,15 @@
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligibleStep"];
-        step.title = @"You are ineligible to join the study.";
+        step.title = @"Eligibility Form";
+        step.text = @"You are ineligible to join the study.";
         [steps addObject:step];
     }
     
     {
         ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligibleStep"];
-        step.title = @"You are eligible to join the study.";
+        step.title = @"Eligibility Form";
+        step.text = @"You are eligible to join the study.";
         [steps addObject:step];
     }
     
@@ -272,7 +276,8 @@
     
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question1"
-                                                                      title:@"Are you over 18 years of age?"
+                                                                      title:@"Eligibility Survey"
+                                                                   question:@"Are you over 18 years of age?"
                                                                      answer:[ORKAnswerFormat booleanAnswerFormat]];
         step.optional = NO;
         [steps addObject:step];
@@ -280,13 +285,15 @@
     
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligibleStep"];
-        step.title = @"You are ineligible to join the study.";
+        step.title = @"Eligibility Survey";
+        step.text = @"You are ineligible to join the study.";
         [steps addObject:step];
     }
     
     {
         ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligibleStep"];
-        step.title = @"You are eligible to join the study.";
+        step.title = @"Eligibility Survey";
+        step.text = @"You are eligible to join the study.";
         [steps addObject:step];
     }
     

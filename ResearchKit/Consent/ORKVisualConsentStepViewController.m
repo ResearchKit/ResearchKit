@@ -77,6 +77,8 @@
 
 @property (nonatomic, strong) ORKContinueButton *continueActionButton;
 
+@property (nonatomic, strong) ORKBorderedButton *cancelActionButton;
+
 - (ORKConsentSceneViewController *)viewControllerForIndex:(NSUInteger)index;
 - (NSUInteger)currentIndex;
 - (NSUInteger)indexOfViewController:(UIViewController *)viewController;
@@ -179,8 +181,10 @@
     [super viewDidLoad];
     
     CGRect viewBounds = self.view.bounds;
-    
-    self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
+    self.view.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
+    if (self.taskViewController.navigationBar) {
+        [self.taskViewController.navigationBar setBarTintColor:self.view.backgroundColor];
+    }
    
     // Prepare pageViewController
     _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
@@ -365,6 +369,7 @@
         }
         return;
     }
+    self.title = viewController.title;
     
     ORKWeakTypeOf(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
@@ -659,6 +664,7 @@
         _viewControllers[@(index)] = consentViewController;
     }
     
+    consentViewController.cancelButtonItem = self.cancelButtonItem;
     return consentViewController;
 }
 

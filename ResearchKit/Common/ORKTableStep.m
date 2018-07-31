@@ -39,7 +39,9 @@
 ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 
-@implementation ORKTableStep
+@implementation ORKTableStep {
+    UIImage * _circleBulletImage;
+}
 
 + (Class)stepViewControllerClass {
     return [ORKTableStepViewController class];
@@ -66,7 +68,84 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 - (void)configureCell:(UITableViewCell *)cell indexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
-    cell.textLabel.text = [[self objectForRowAtIndexPath:indexPath] description];
+    for (UIView *view in cell.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    UILabel *textLabel = [[UILabel alloc] init];
+    textLabel.text = [[self objectForRowAtIndexPath:indexPath] description];
+    textLabel.numberOfLines = 0;
+    textLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [cell addSubview:textLabel];
+    
+    [textLabel.topAnchor constraintEqualToAnchor:cell.topAnchor constant:20.0].active = YES;
+    [textLabel.bottomAnchor constraintEqualToAnchor:cell.bottomAnchor constant:-20.0].active = YES;
+    [textLabel.trailingAnchor constraintEqualToAnchor:cell.trailingAnchor constant:-24.0].active = YES;
+    
+    UIImage *bullet = nil;
+    if (self.isBulleted) {
+        if (self.bulletIconNames != nil) {
+            if (indexPath.row < self.bulletIconNames.count) {
+                NSString *iconName = [self.bulletIconNames objectAtIndex:indexPath.row];
+                bullet = [[UIImage imageNamed:iconName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            }
+        } else {
+            if (!_circleBulletImage) {
+                _circleBulletImage = [self circleImage];
+            }
+            bullet = [_circleBulletImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        }
+    }
+    
+    if (bullet != nil) {
+        UIImageView *bulletView = [[UIImageView alloc] initWithImage:bullet];
+        bulletView.translatesAutoresizingMaskIntoConstraints = NO;
+        [cell addSubview:bulletView];
+        
+        CGFloat size = self.bulletIconNames != nil ? 40.0 : 8.0;
+        CGFloat topPadding = self.bulletIconNames != nil ? 20.0 : (20 + (size * .5));
+        CGFloat leadingPadding = self.bulletIconNames != nil ? 24.0 : (24 + (size * .5));
+        
+        [bulletView.topAnchor constraintEqualToAnchor:cell.topAnchor constant:topPadding].active = YES;
+        [bulletView.bottomAnchor constraintLessThanOrEqualToAnchor:cell.bottomAnchor constant:-20.0].active = YES;
+        [bulletView.heightAnchor constraintEqualToConstant:size].active = YES;
+        [bulletView.widthAnchor constraintEqualToConstant:size].active = YES;
+        [bulletView.leadingAnchor constraintEqualToAnchor:cell.leadingAnchor constant:leadingPadding].active = YES;
+        [textLabel.leadingAnchor constraintEqualToAnchor:bulletView.trailingAnchor constant:20.0].active = YES;
+        
+    } else {
+        [textLabel.leadingAnchor constraintEqualToAnchor:cell.leadingAnchor constant:24.0].active = YES;
+    }
+}
+
+- (UIImage*)resizeImage:(UIImage*)image toSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (UIImage *)circleImage {
+    static UIImage *circleImage = nil;
+    static dispatch_once_t once;
+    
+    dispatch_once(&once, ^{
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(8.f, 8.f), NO, 0.0f);
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(ctx);
+        
+        CGRect rect = CGRectMake(0, 0, 8, 8);
+        CGContextSetFillColorWithColor(ctx, [UIColor lightGrayColor].CGColor);
+        CGContextFillEllipseInRect(ctx, rect);
+        
+        CGContextRestoreGState(ctx);
+        circleImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+    });
+    
+    return circleImage;
 }
 
 #pragma mark - NSCopying

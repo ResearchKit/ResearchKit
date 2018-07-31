@@ -83,6 +83,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, strong, nullable) ORKSurveyAnswerCell *cell;
 
+- (void)useCardViewWithTitle:(NSString *)title;
+
 @end
 
 NS_ASSUME_NONNULL_END

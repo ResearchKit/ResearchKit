@@ -253,12 +253,12 @@
                                                views:views]];
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
@@ -296,7 +296,7 @@
     CGFloat topToProgressViewOffset = 0.0;
     CGFloat topToCaptionLabelOffset = 0.0;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad10_5 || screenType == ORKScreenTypeiPad12_9) {
         topToProgressViewOffset = 0;
         topToCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {

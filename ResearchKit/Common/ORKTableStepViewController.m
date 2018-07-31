@@ -50,13 +50,19 @@
 ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 
-@implementation ORKTableStepViewController 
+@implementation ORKTableStepViewController {
+    NSArray<NSLayoutConstraint *> *_constraints;
+}
 
 - (id <ORKTableStepSource>)tableStep {
     if ([self.step conformsToProtocol:@protocol(ORKTableStepSource)]) {
         return (id <ORKTableStepSource>)self.step;
     }
     return nil;
+}
+
+- (ORKTableStep *)tableStepRef {
+    return (ORKTableStep *)self.step;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,7 +79,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 // Override to monitor button title change
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    self.continueSkipView.continueButtonItem = continueButtonItem;
+    self.navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
 }
 
@@ -83,9 +89,14 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     [_tableContainer setNeedsLayout];
 }
 
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    self.navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+}
+
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
-    self.continueSkipView.skipButtonItem = skipButtonItem;
+    self.navigationFooterView.skipButtonItem = skipButtonItem;
     [self updateButtonStates];
 }
     
@@ -103,7 +114,8 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _tableView.dataSource = nil;
     _tableView = nil;
     _headerView = nil;
-    _continueSkipView = nil;
+    [_navigationFooterView removeFromSuperview];
+    _navigationFooterView = nil;
     
     if (self.step) {
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
@@ -122,17 +134,22 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         _tableView.estimatedSectionHeaderHeight = [self numSections] > 1 ? 30.0 : 0.0;
         _tableView.allowsSelection = NO;
         
+        _tableView.separatorColor = self.tableStepRef.isBulleted ? [UIColor clearColor] : nil;
+        [_tableView setBackgroundColor:(ORKColor(ORKBackgroundColorKey))];
+        _tableView.alwaysBounceVertical = NO;
         _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.text = [[self step] title];
         _headerView.instructionLabel.text = [[self step] text];
         _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
-        _continueSkipView = _tableContainer.continueSkipContainerView;
-        _continueSkipView.skipButtonItem = self.skipButtonItem;
-        _continueSkipView.continueEnabled = [self continueButtonEnabled];
-        _continueSkipView.continueButtonItem = self.continueButtonItem;
-        _continueSkipView.optional = self.step.optional;
+        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView.skipButtonItem = self.skipButtonItem;
+        _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+        _navigationFooterView.continueButtonItem = self.continueButtonItem;
+        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+        _navigationFooterView.optional = self.step.optional;
+        [self.view addSubview:_navigationFooterView];
         
+        [self setupConstraints];
         // Register the cells for the table view
         if ([self.tableStep respondsToSelector:@selector(registerCellsForTableView:)]) {
             [self.tableStep registerCellsForTableView:_tableView];
@@ -142,12 +159,74 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     }
 }
 
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _tableContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    _constraints = nil;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+}
+
 - (BOOL)continueButtonEnabled {
     return YES;
 }
 
 - (void)updateButtonStates {
-    self.continueSkipView.continueEnabled = [self continueButtonEnabled];
+    self.navigationFooterView.continueEnabled = [self continueButtonEnabled];
 }
 
 #pragma mark UITableViewDataSource
@@ -182,6 +261,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self.tableStep configureCell:cell indexPath:indexPath tableView:tableView];
     
+    [cell setBackgroundColor:(ORKColor(ORKBackgroundColorKey))];
     return cell;
 }
 

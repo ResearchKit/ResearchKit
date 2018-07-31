@@ -64,6 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) CGFloat expectedLayoutWidth;
 @property (nonatomic) NSDictionary *savedAnswers;
+@property (nonatomic) BOOL useCardView;
+@property (nonatomic) BOOL isLastItem;
+@property (nonatomic) BOOL isFirstItemInSectionWithoutTitle;
 
 @end
 

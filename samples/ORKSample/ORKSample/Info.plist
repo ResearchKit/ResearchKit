@@ -24,6 +24,8 @@
 	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app uses Face ID during passcode step.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>HealthKit</string>
 	<key>NSHealthUpdateUsageDescription</key>

@@ -32,14 +32,14 @@ For additional security, consider using a six digit passcode:
 After the step is created, create an `ORKOrderedTask` object. Pass a string identifier as the first parameter, and the newly created passcode step (along with any additional steps for your app) into an array as the second parameter:
 
 	ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"passcodeTask" steps:@[passcodeStep]];
-        
+
 Pass the newly created task to an `ORKTaskViewController` object and set the view controller's delegate:
-        
+
 	ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:task  taskRunUUID:nil];
 	taskViewController.delegate = self
 
 Finally, present the task view controller:
-        
+
 	[self presentViewController:taskViewController animated:TRUE completion:nil];
 
 The user is instructed to type in a passcode twice—once for the initial passcode, and again to confirm it. Here is the initial view:
@@ -63,7 +63,7 @@ With the passcode set, you can protect sensitive data in your app by enforcing u
 To enforce passcode entry, use the following class method:
 
 	ORKPasscodeViewController * passcodeViewController;
-        
+
 	if ([ORKPasscodeViewController isPasscodeStoredInKeychain] == YES) {
 		self.passcodeViewController = [ORKPasscodeViewController passcodeAuthenticationViewControllerWithText:@"Upon success, you'll go to the next step." delegate:self];
 		// present the view
@@ -86,7 +86,7 @@ The following method is called if the passcode was successfully entered:
 You should perform any steps that would follow a successful authentication at this point.
 
 If the user does not input the passcode correctly, the following method is called:
-	
+
 	- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController;
 
 The `passcodeViewControllerDidFailAuthentication` method gives your app the opportunity to attempt a reauthentication or rejection of additional steps going forward.
@@ -97,11 +97,11 @@ If you want to provide a Cancel button so that the user has the option to back o
 
 The `passcodeViewControllerDidCancel` method is also called if the user taps the Cancel button.
 
-##Editing an Existing Passcode 
+##Editing an Existing Passcode
 Provide users the ability to conveniently edit their passcode by using the following code:
 
 	ORKPasscodeViewController *passcodeViewController;
-        
+
 	if ([ORKPasscodeViewController isPasscodeStoredInKeychain] == YES) {
 		self.passcodeViewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:@"Choose something unique." delegate:self passcodeType:OKPasscodeType4Digit];
 		// present the view
@@ -127,5 +127,5 @@ You can remove the user's passcode from the keychain with the following class me
 
 	+ (BOOL)removePasscodeFromKeychain;
 
-The value YES is returned if the passcode was successfully removed from the keychain.	
+The value YES is returned if the passcode was successfully removed from the keychain.
 

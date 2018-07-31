@@ -79,29 +79,18 @@
     }
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    if (_picker) {
-        CGSize pickerSize = [_picker.pickerView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
-        pickerSize.width = MIN(pickerSize.width, self.bounds.size.width);
-        _picker.pickerView.frame = (CGRect){{0,0}, pickerSize};
-    }
-    
-    if (_tempPicker) {
-        CGSize pickerSize = [_tempPicker sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
-        pickerSize.width = MIN(pickerSize.width, self.bounds.size.width);
-        _tempPicker.frame = (CGRect){{0,0}, pickerSize};
-    }
-}
-
 - (void)addHorizontalHuggingConstraintForView:(UIView *)view {
     if (view) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                       metrics:nil
-                                                                         views:@{ @"view": view }];
+        NSArray *constraints = @[
+                                 [NSLayoutConstraint constraintWithItem:view
+                                                              attribute:NSLayoutAttributeCenterX
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self
+                                                              attribute:NSLayoutAttributeCenterX
+                                                             multiplier:1.0
+                                                               constant:0.0]
+                                 ];
         [NSLayoutConstraint activateConstraints:constraints];
     }
 }

@@ -51,8 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKStepHeaderView *headerView;
 
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipContainer;
-
 @property (nonatomic, assign) BOOL continueHugsContent;
 
 @property (nonatomic, assign) BOOL verticalCenteringEnabled;
