@@ -149,18 +149,6 @@ ORK_CLASS_AVAILABLE
 /// @name PDF generation
 
 /**
- Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
- purposes of isolated unit testing.
-
- @param writer              The instance of the ORKHTMLPDFWriter upon which the class depends.
- @param sectionFormatter    An instance of ORKConsentSectionFormatter
- @param signatureFormatter  An instance of ORKConsentSignatureFormatter
- */
-- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
-              consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
-            consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter;
-
-/**
  Writes the document's content into a PDF file.
  
  The PDF is generated in a form suitable for printing. This is done asynchronously,

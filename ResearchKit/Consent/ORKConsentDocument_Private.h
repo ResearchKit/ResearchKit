@@ -30,7 +30,7 @@
  */
 
 
-#import "ORKConsentDocument_Private.h"
+#import "ORKConsentDocument.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,13 +41,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKConsentDocument ()
 
-@property (nonatomic, strong, nullable) ORKHTMLPDFWriter *writer;
-@property (nonatomic, strong, nullable) ORKConsentSectionFormatter *sectionFormatter;
-@property (nonatomic, strong, nullable) ORKConsentSignatureFormatter *signatureFormatter;
-
-+ (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile;
-
-- (NSString *)mobileHTMLWithTitle:(nullable NSString *)title detail:(nullable NSString *)detail;
+/**
+ Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
+ purposes of isolated unit testing.
+ 
+ @param writer              The instance of the ORKHTMLPDFWriter upon which the class depends.
+ @param sectionFormatter    An instance of ORKConsentSectionFormatter
+ @param signatureFormatter  An instance of ORKConsentSignatureFormatter
+ */
+- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
+              consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
+            consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter;
 
 @end
 
