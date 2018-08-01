@@ -45,7 +45,7 @@
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
     result.start = 90.0 - _startAngle;
-    result.finish = result.start + _rangeOfMotionAngle;
+    result.finish = _rangeOfMotionAngle - result.start;
     result.minimum = _minAngle;
     result.maximum = _maxAngle;
     result.range = result.maximum - result.start;
