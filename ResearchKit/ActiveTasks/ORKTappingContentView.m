@@ -84,10 +84,14 @@
         _tapButton1 = [[ORKRoundTappingButton alloc] init];
         _tapButton1.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton1 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        _tapButton1.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_1_LABEL", nil);
+        _tapButton1.accessibilityHint = ORKLocalizedString(@"AX_TAP_BUTTON_HINT", nil);
         
         _tapButton2 = [[ORKRoundTappingButton alloc] init];
         _tapButton2.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton2 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        _tapButton2.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_2_LABEL", nil);
+        _tapButton2.accessibilityHint = ORKLocalizedString(@"AX_TAP_BUTTON_HINT", nil);
         
         _lastTappedButton = -1;
         

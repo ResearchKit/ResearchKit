@@ -113,6 +113,9 @@
     if (self) {
         self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.isAccessibilityElement = YES;
+        self.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_AREA", nil);
+        self.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
 
         self.testView = [[ORKTrailmakingTestView alloc] init];
         _testView.translatesAutoresizingMaskIntoConstraints = NO;
