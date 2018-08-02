@@ -120,6 +120,8 @@
     [self.recordButton setTitle:ORKLocalizedString(@"SPEECH_RECOGNITION_START_RECORD_LABEL", nil)
                        forState:UIControlStateNormal];
     self.recordButton.enabled = YES;
+    self.recordButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitStartsMediaSession;
+    self.recordButton.accessibilityHint = ORKLocalizedString(@"AX_SPEECH_RECOGNITION_START_RECORDING_HINT", nil);
     [self addSubview:_recordButton];
 }
 

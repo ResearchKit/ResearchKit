@@ -572,8 +572,15 @@
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
+"AX_BUTTON_ANNOTATE" = "Annotate";
+"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
+"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
+"AX_BUTTON_SHARE" = "Share";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
 
 "AX_SIGNVIEW_LABEL" = "Designated signature field";
 "AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
@@ -614,5 +621,9 @@
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
 "AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
 
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
