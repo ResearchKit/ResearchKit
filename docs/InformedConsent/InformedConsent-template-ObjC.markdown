@@ -1,7 +1,7 @@
 # 
 <sub>These materials are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.</sub>
 
-#Obtaining Consent
+# Obtaining Consent
 
 Research studies that involve human subjects typically require some form of ethics review. Depending on the country, this may be review by an institutional review board (IRB), or by an ethics committee (EC). For some studies, consent may be required to conduct a research study, which means that the researcher must ensure that each participant is fully informed about the nature of the study, and must obtain a signed consent from each participant.  Additionally, consent may be required as a condition of app review.
 
@@ -12,7 +12,7 @@ In the consent document model, encode each section of your consent document, and
 
 You can also add other steps into your consent sequence. For example, a consent sharing step (`ORKConsentSharingStep`) can be used to explicitly obtain permission to share the data your study is collecting with other researchers, if allowed by your IRB or EC. Or, add an instruction, form, or question steps to ask comprehension questions to verify that your prospective participants understand the nature of the study.
 
-##1. Create the Consent Document Model
+## 1. Create the Consent Document Model
 
 To create a consent document model, first decide how you want to present your consent document. Categorize your content into sections based on what information you present to users. After you have the structure for your consent document, you can replicate the same structure using the consent document model object (`ORKConsentDocument`).
 
