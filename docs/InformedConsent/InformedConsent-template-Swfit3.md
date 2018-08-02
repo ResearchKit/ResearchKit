@@ -115,19 +115,16 @@ When the user agrees to the content in the consent form, a confirmation dialog i
 
 The name entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresName` property is YES. Similarly, the signature entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresSignature` property is YES.
 
-```objective-c
-    ORKConsentDocument *consent = [[ORKConsentDocument alloc] init];
-    consent.title = @"Demo Consent";
-    consent.signaturePageTitle = @"Consent";
-    
-    ORKConsentReviewStep *reviewStep =
-      [[ORKConsentReviewStep alloc] initWithIdentifier:kConsentReviewIdentifier
-                                             signature:consent.signatures[0]
-                                            inDocument:consent];
-    reviewStep.text = @"Lorem ipsum ..";
-    reviewStep.reasonForConsent = @"Lorem ipsum ...";
-    
-    // Add the content to a task and present it.
+```swift
+let consent = ORKConsentDocument()
+consent.title = "Demo Consent"
+consent.signaturePageTitle = "Consent"
+
+let reviewStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: consent.signatures[0], in: consent)
+reviewStep.text = "Lorem ipsum .."
+reviewStep.reasonForConsent = "Lorem ipsum ..."
+
+// Add the content to a task and present it.
 ```
 
 Review step is presented as:
