@@ -40,9 +40,11 @@ section1.title = "The title of the section goes here ..."
 section1.summary = "The summary about the section goes here ..."
 section1.content = "The content to show in learn more ..."
 
+// Create additional section objects for later sections
 document.sections = [section1, ...]
 
 let step = ORKVisualConsentStep(identifier: "VisualConsentStep", document: document)
+// And then create and present a task including this step.
 ```
 
 If the predefined consent sections do not adequately cover the sections of your consent document, you can create your own custom sections. You can also create your own images and animations and add them to your consent section, to complete the experience. The animations you add should be H.264 videos; for best results, try to match the assets included with the ResearchKit framework.
@@ -54,17 +56,15 @@ It is your responsibility to populate the visual consent step with
 content; the `ORKVisualConsentStep` object doesn't contain any
 default content.
 
-```objective-c
-    // Add consent sections for each page of visual consent; for example:
-    ORKConsentSection *section1 =
-      [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
-    document.sections = @[section1, ...];
-    
-    // Add the document to a visual consent step and/or a review step:
-    ORKVisualConsentStep *visualConsent =
-      [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier document:document];
-    
-    // Create and present a task including this step.
+```swift
+// Add consent sections for each page of visual consent; for example:
+let section1 = ORKConsentSection(type: .dataGathering)
+document.sections = [section1, ...]
+
+// Add the document to a visual consent step and/or a review step:
+let step = ORKVisualConsentStep(identifier: "VisualConsentStep", document: document)
+
+// Create and present a task including this step.
 ```
 
 Visual step is presented as:
