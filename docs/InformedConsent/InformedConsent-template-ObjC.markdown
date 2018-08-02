@@ -73,12 +73,41 @@ default content.
 
 Visual step is presented as:
 
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_1.png" style="width: 100%;border: solid black 1px; ">Consent overview screen (ORKConsentSectionTypeOverview object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_2.png" style="width: 100%;border: solid black 1px;">Data gathering (ORKConsentSectionTypeDataGathering object).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_3.png" style="width: 100%;border: solid black 1px;">Privacy (ORKConsentSectionTypePrivacy object)</p>
-<p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_4.png" style="width: 100%;border: solid black 1px; ">Data use disclosure (ORKConsentSectionTypeDataUse object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_5.png" style="width: 100%;border: solid black 1px;">Time commitment (ORKConsentSectionTypeTimeCommitment object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_6.png" style="width: 100%;border: solid black 1px;">Type of study survey (ORKConsentSectionTypeStudySurvey object)</p>
-<p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_7.png" style="width: 100%;border: solid black 1px; ">Study tasks (ORKConsentSectionTypeStudyTasks object</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_8.png" style="width: 100%;border: solid black 1px;"> Consent withdrawal (ORKConsentSectionTypeWithdrawing object).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_9.png" style="width: 100%;border: solid black 1px;"> Custom consent section (ORKConsentSectionTypeCustom object)</p>
-<p style="clear: both;">
+<kbd><img src="VisualStep_Images/VisualStep_1.png" width="500"></kbd>
+
+> Consent overview screen (ORKConsentSectionTypeOverview object)
+
+<kbd><img src="VisualStep_Images/VisualStep_2.png" width="500"></kbd>
+    
+> Data gathering (ORKConsentSectionTypeDataGathering object)
+
+<kbd><img src="VisualStep_Images/VisualStep_3.png" width="500"><kbd>
+    
+> Privacy (ORKConsentSectionTypePrivacy object)
+
+<kbd><img src="VisualStep_Images/VisualStep_4.png" width="500"></kdb>
+
+> Data use disclosure (ORKConsentSectionTypeDataUse object)
+
+<kbd><img src="VisualStep_Images/VisualStep_5.png" width="500">
+    
+> Time commitment (ORKConsentSectionTypeTimeCommitment object)
+
+<kbd><img src="VisualStep_Images/VisualStep_6.png" width="500"></kbd>
+
+> Type of study survey (ORKConsentSectionTypeStudySurvey object)</p>
+
+<kbd><img src="VisualStep_Images/VisualStep_7.png" width="500"></kbd>
+
+> Study tasks (ORKConsentSectionTypeStudyTasks object)
+
+<kbd><img src="VisualStep_Images/VisualStep_8.png" width="500"></kbd> 
+ 
+> Consent withdrawal (ORKConsentSectionTypeWithdrawing object)
+
+<kbd><img src="VisualStep_Images/VisualStep_9.png" width="500"></kbd>
+
+> Custom consent section (ORKConsentSectionTypeCustom object)</p>
 
 ### Add a Review Step
 
@@ -141,7 +170,7 @@ The consent sharing step looks like this:
 </figure>
 </center>
 
-##2. Create the Consent Task
+## 2. Create the Consent Task
 
 After you create the step(s), create an `ORKOrderedTask` task and add them to it. To present the task, attach your task to a task view controller and present it.
 
@@ -168,7 +197,7 @@ The following code snippet shows how to create a task with a visual consent step
     // And then present the task view controller.
 ```
 
-##3. Optionally, Generate a PDF
+## 3. Optionally, Generate a PDF
 
 The ResearchKit framework can help you generate a PDF of the signed consent form and provide it to the user. For example, your app could generate the PDF locally, write it to disk, email it to the participant, display it in the app, or send it to a server.
 
