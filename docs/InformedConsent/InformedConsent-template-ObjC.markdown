@@ -32,7 +32,7 @@ You use the predefined sections in the expected order, the ResearchKit framework
 
 After you create a section, you create a step to present the section. 
 
-```
+```objective-c
     ORKConsentDocument *document = [ORKConsentDocument new];
     ORKConsentSection *section1 =
       [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
@@ -58,7 +58,7 @@ It is your responsibility to populate the visual consent step with
 content; the `ORKVisualConsentStep` object doesn't contain any
 default content.
 
-```
+```objective-c
     // Add consent sections for each page of visual consent; for example:
     ORKConsentSection *section1 =
       [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
@@ -119,7 +119,7 @@ When the user agrees to the content in the consent form, a confirmation dialog i
 
 The name entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresName` property is YES. Similarly, the signature entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresSignature` property is YES.
 
-```
+```objective-c
     ORKConsentDocument *consent = [[ORKConsentDocument alloc] init];
     consent.title = @"Demo Consent";
     consent.signaturePageTitle = @"Consent";
@@ -136,10 +136,21 @@ The name entry page is included in a consent review step if the step’s `signat
 
 Review step is presented as:
 
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_10.png" style="width: 100%;border: solid black 1px; ">Consent review (ORKConsentReviewStep object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_11.png" style="width: 100%;border: solid black 1px;"> Agreeing to the consent document (reasonForConsent property of ORKConsentReviewStep object).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_12.png" style="width: 100%;border: solid black 1px;"> Consent review name entry (signature property in ORKConsentReviewStep)</p>
-<p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_13.png" style="width: 100%;border: solid black 1px; ">Consent review signature (signature property in ORKConsentReviewStep)</p>
-<p style="clear: both;">
+<kbd><img src="VisualStep_Images/VisualStep_10.png" width="500"></kbd>
+    
+> Consent review (ORKConsentReviewStep object)
+
+<kbd><img src="VisualStep_Images/VisualStep_11.png" width="500"></kbd>
+ 
+> Agreeing to the consent document (reasonForConsent property of ORKConsentReviewStep object)
+
+<kbd><img src="VisualStep_Images/VisualStep_12.png" width="500"></kbd> 
+
+> Consent review name entry (signature property in ORKConsentReviewStep)
+
+<kbd><img src="VisualStep_Images/VisualStep_13.png" width="500"></kbd>
+
+> Consent review signature (signature property in ORKConsentReviewStep)
 
 ### Consent Sharing Step 
 
@@ -152,7 +163,7 @@ to share their data that you collect for your study with other researchers, if a
 your IRB or EC if applicable. To use a consent sharing step, include it in a task, perhaps
 just before a consent review step.
 
-```
+```objective-c
     ORKConsentSharingStep *sharingStep =
       [[ORKConsentSharingStep alloc] initWithIdentifier:kConsentSharingIdentifier
                            investigatorShortDescription:@"MyInstitution"
@@ -163,12 +174,10 @@ just before a consent review step.
 ```
 
 The consent sharing step looks like this:
-<center>
-<figure>
-<img src="VisualStep_Images/SharingConsentStep.png" width="25%" alt="Instruction step"  style="border: solid black 1px;"  align="middle"/>
-  <figcaption> <center>Example of a consent sharing step.</center></figcaption>
-</figure>
-</center>
+
+<kbd><img src="VisualStep_Images/SharingConsentStep.png" width="500"></kbd>
+
+> Example of a consent sharing step.
 
 ## 2. Create the Consent Task
 
@@ -176,7 +185,7 @@ After you create the step(s), create an `ORKOrderedTask` task and add them to it
 
 The following code snippet shows how to create a task with a visual consent step and a consent review step:
 
-```
+```objective-c
     ORKVisualConsentStep *visualStep =
       [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier
                                               document:consent];
@@ -203,7 +212,7 @@ The ResearchKit framework can help you generate a PDF of the signed consent form
 
 To do this, first take any signature results from the completed consent review, and apply the resulting signatures to a copy of your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
 
-```
+```objective-c
     ORKConsentDocument *documentCopy = [document copy];
 
     ORKConsentSignatureResult *signatureResult =
