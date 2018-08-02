@@ -32,21 +32,17 @@ You use the predefined sections in the expected order, the ResearchKit framework
 
 After you create a section, you create a step to present the section. 
 
-```objective-c
-    ORKConsentDocument *document = [ORKConsentDocument new];
-    ORKConsentSection *section1 =
-      [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
-    section1.title = @"The title of the section goes here ...";
-    section1.summary = @"The summary about the section goes here ...";
-    section1.content = @"The content to show in learn more ...";
-    
-    // Create additional section objects for later sections
-    document.sections = @[section1, ...];
-    
-    ORKVisualConsentStep *step =
-      [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsent document:document];
-    
-    // And then create and present a task including this step.
+```swift
+let document = ORKConsentDocument()
+
+let section1 = ORKConsentSection(type: .dataGathering)
+section1.title = "The title of the section goes here ..."
+section1.summary = "The summary about the section goes here ..."
+section1.content = "The content to show in learn more ..."
+
+document.sections = [section1, ...]
+
+let step = ORKVisualConsentStep(identifier: "VisualConsentStep", document: document)
 ```
 
 If the predefined consent sections do not adequately cover the sections of your consent document, you can create your own custom sections. You can also create your own images and animations and add them to your consent section, to complete the experience. The animations you add should be H.264 videos; for best results, try to match the assets included with the ResearchKit framework.
