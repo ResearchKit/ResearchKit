@@ -156,14 +156,15 @@ to share their data that you collect for your study with other researchers, if a
 your IRB or EC if applicable. To use a consent sharing step, include it in a task, perhaps
 just before a consent review step.
 
-```objective-c
-    ORKConsentSharingStep *sharingStep =
-      [[ORKConsentSharingStep alloc] initWithIdentifier:kConsentSharingIdentifier
-                           investigatorShortDescription:@"MyInstitution"
-                            investigatorLongDescription:@"MyInstitution and its partners"
-                          localizedLearnMoreHTMLContent:@"Lorem ipsum..."];
+```swift
+let visualStep = ORKVisualConsentStep(identifier: "VisualConsentStep", document: document)
+let reviewStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature: consent.signatures[0], in: consent)
+// Configure the steps.
 
-    // Then include this step to a task and present with a task view controller.
+// Create a task containing those steps.
+let task = ORKOrderedTask(identifier: "ConsentTask", steps: [visualStep, reviewStep])
+
+let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
 ```
 
 The consent sharing step looks like this:
