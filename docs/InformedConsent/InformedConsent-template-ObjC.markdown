@@ -81,15 +81,15 @@ Visual step is presented as:
     
 > Data gathering (ORKConsentSectionTypeDataGathering object)
 
-<kbd><img src="VisualStep_Images/VisualStep_3.png" width="500"><kbd>
+<kbd><img src="VisualStep_Images/VisualStep_3.png" width="500"></kbd>
     
 > Privacy (ORKConsentSectionTypePrivacy object)
 
-<kbd><img src="VisualStep_Images/VisualStep_4.png" width="500"></kdb>
+<kbd><img src="VisualStep_Images/VisualStep_4.png" width="500"></kbd>
 
 > Data use disclosure (ORKConsentSectionTypeDataUse object)
 
-<kbd><img src="VisualStep_Images/VisualStep_5.png" width="500">
+<kbd><img src="VisualStep_Images/VisualStep_5.png" width="500"></kbd>
     
 > Time commitment (ORKConsentSectionTypeTimeCommitment object)
 
@@ -107,7 +107,7 @@ Visual step is presented as:
 
 <kbd><img src="VisualStep_Images/VisualStep_9.png" width="500"></kbd>
 
-> Custom consent section (ORKConsentSectionTypeCustom object)</p>
+> Custom consent section (ORKConsentSectionTypeCustom object)
 
 ### Add a Review Step
 
