@@ -183,6 +183,8 @@ let reviewStep = ORKConsentReviewStep(identifier: "ConsentReviewStep", signature
 let task = ORKOrderedTask(identifier: "ConsentTask", steps: [visualStep, reviewStep])
 
 let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
+
+// And then present the task view controller.
 ```
 
 ## 3. Optionally, Generate a PDF
@@ -191,16 +193,14 @@ The ResearchKit framework can help you generate a PDF of the signed consent form
 
 To do this, first take any signature results from the completed consent review, and apply the resulting signatures to a copy of your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
 
-```objective-c
-    ORKConsentDocument *documentCopy = [document copy];
+```swift
+let documentCopy = document.copy() as! ORKConsentDocument
 
-    ORKConsentSignatureResult *signatureResult =
-      (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:kConsentReviewIdentifier] firstResult];
-    [signatureResult applyToDocument:documentCopy];
-    
-    [documentCopy makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
-        // Write the PDF data to disk, email it, display it, or send it to a server.
-    }];
+let signatureResult: ORKConsentSignatureResult = taskViewController.result.stepResult(forStepIdentifier: "ConsentReviewStep")?.firstResult as! ORKConsentSignatureResult
+
+documentCopy.makePDF{ (data, error) -> Void in
+    // Write the PDF data to disk, email it, display it, or send it to a server.
+}
 ```
 
 You can only apply a signature result to a new copy of a consent document. 
