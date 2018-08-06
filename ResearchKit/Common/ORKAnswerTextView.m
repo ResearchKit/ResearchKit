@@ -38,6 +38,7 @@
 
 @implementation ORKAnswerTextView {
     UITextView *_placeholderTextView;
+    NSArray<UIAccessibilityCustomAction *> *_accessibilityCustomActions;
 }
 
 - (instancetype)init {
@@ -147,6 +148,26 @@
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
     return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
+}
+
+- (BOOL)accessibilityDismissKeyboardForAction:(UIAccessibilityCustomAction *)customAction
+{
+    [self resignFirstResponder];
+    return YES;
+}
+
+- (NSArray<UIAccessibilityCustomAction *> *)accessibilityCustomActions
+{
+    NSArray<UIAccessibilityCustomAction *> *actions = nil;
+    if (self.isFirstResponder) {
+        if (_accessibilityCustomActions == nil) {
+            // Users of accessibility technologies may not be able to tap outside the view to dismiss the keyboard, so provide an action for it here.
+            UIAccessibilityCustomAction *dismissKeyboardAction = [[UIAccessibilityCustomAction alloc] initWithName:ORKLocalizedString(@"AX_DISMISS_KEYBOARD_CUSTOM_ACTION", nil) target:self selector:@selector(accessibilityDismissKeyboardForAction:)];
+            _accessibilityCustomActions = @[dismissKeyboardAction];
+        }
+        actions = _accessibilityCustomActions;
+    }
+    return actions;
 }
 
 @end
