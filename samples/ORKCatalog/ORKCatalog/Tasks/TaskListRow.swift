@@ -1347,6 +1347,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let signature = consentDocument.signatures!.first
         
         let reviewConsentStep = ORKConsentReviewStep(identifier: String(describing:Identifier.consentReviewStep), signature: signature, in: consentDocument)
+        reviewConsentStep.requiresScrollToBottom = true
         
         // In a real application, you would supply your own localized text.
         reviewConsentStep.title = NSLocalizedString("Consent Document", comment: "")
