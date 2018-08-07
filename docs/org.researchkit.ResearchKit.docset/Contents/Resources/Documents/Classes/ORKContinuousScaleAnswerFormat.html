@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKContinuousScaleAnswerFormat Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/defaultValue">defaultValue</option>
+		
+		<option value="//api/name/gradientColors">gradientColors</option>
+		
+		<option value="//api/name/gradientLocations">gradientLocations</option>
+		
+		<option value="//api/name/maximum">maximum</option>
+		
+		<option value="//api/name/maximumFractionDigits">maximumFractionDigits</option>
+		
+		<option value="//api/name/maximumImage">maximumImage</option>
+		
+		<option value="//api/name/maximumValueDescription">maximumValueDescription</option>
+		
+		<option value="//api/name/minimum">minimum</option>
+		
+		<option value="//api/name/minimumImage">minimumImage</option>
+		
+		<option value="//api/name/minimumValueDescription">minimumValueDescription</option>
+		
+		<option value="//api/name/numberFormatter">numberFormatter</option>
+		
+		<option value="//api/name/numberStyle">numberStyle</option>
+		
+		<option value="//api/name/vertical">vertical</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:">- initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:</option>
+		
+		<option value="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:">- initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:</option>
+		
+		<option value="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:">- initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:</option>
+		
+		<option value="//api/name/questionType">- questionType</option>
+		
+		<option value="//api/name/validateParameters">- validateParameters</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKContinuousScaleAnswerFormat Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKAnswerFormat.html">ORKAnswerFormat</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKAnswerFormat.h<br />ORKAnswerFormat.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKContinuousScaleAnswerFormat</code> class represents an answer format that lets participants
+select a value on a continuous scale.</p>
+
+<p>The continuous scale answer format produces an <a href="../Classes/ORKScaleQuestionResult.html"><code>ORKScaleQuestionResult</code></a> object that has a
+real-number value.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:" title="initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:">&ndash;&nbsp;initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:maximumValueDescription:minimumValueDescription:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized continuous scale answer format using the specified values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithMaximumValue:(double)<em>maximumValue</em> minimumValue:(double)<em>minimumValue</em> defaultValue:(double)<em>defaultValue</em> maximumFractionDigits:(NSInteger)<em>maximumFractionDigits</em> vertical:(BOOL)<em>vertical</em> maximumValueDescription:(nullable NSString *)<em>maximumValueDescription</em> minimumValueDescription:(nullable NSString *)<em>minimumValueDescription</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumValue</code></th>
+						<td><p>The upper bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumValue</code></th>
+						<td><p>The lower bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultValue</code></th>
+						<td><p>The default value of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumFractionDigits</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> number of fractional digits to display.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>vertical</code></th>
+						<td><p>Pass <code>YES</code> to use a <a href="#//api/name/vertical">vertical</a> scale; for the default horizontal
+                                        scale, pass <code>NO</code>.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumValueDescription</code></th>
+						<td><p>A localized label to describe the <a href="#//api/name/maximum">maximum</a> value of the scale.
+                                        For none, pass <code>nil</code>.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumValueDescription</code></th>
+						<td><p>A localized label to describe the <a href="#//api/name/minimum">minimum</a> value of the scale.
+                                        For none, pass <code>nil</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized scale answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:" title="initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:">&ndash;&nbsp;initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:vertical:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized continuous scale answer format using the specified values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithMaximumValue:(double)<em>maximumValue</em> minimumValue:(double)<em>minimumValue</em> defaultValue:(double)<em>defaultValue</em> maximumFractionDigits:(NSInteger)<em>maximumFractionDigits</em> vertical:(BOOL)<em>vertical</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumValue</code></th>
+						<td><p>The upper bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumValue</code></th>
+						<td><p>The lower bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultValue</code></th>
+						<td><p>The default value of the scale. If this value is out of range, the
+                                    slider is displayed without a default value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumFractionDigits</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> number of fractional digits to display.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>vertical</code></th>
+						<td><p>Pass <code>YES</code> to use a <a href="#//api/name/vertical">vertical</a> scale; for the default horizontal scale,
+                                    pass <code>NO</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized scale answer format.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:" title="initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:">&ndash;&nbsp;initWithMaximumValue:minimumValue:defaultValue:maximumFractionDigits:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized horizontal continous scale answer format using the specified values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithMaximumValue:(double)<em>maximumValue</em> minimumValue:(double)<em>minimumValue</em> defaultValue:(double)<em>defaultValue</em> maximumFractionDigits:(NSInteger)<em>maximumFractionDigits</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumValue</code></th>
+						<td><p>The upper bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumValue</code></th>
+						<td><p>The lower bound of the scale.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultValue</code></th>
+						<td><p>The default value of the scale. If this value is out of range, the
+                                    slider is displayed without a default value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumFractionDigits</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> number of fractional digits to display.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized scale answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is a convenience initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximum" title="maximum"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximum">&nbsp;&nbsp;maximum</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The upper bound of the scale. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) double maximum</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/minimum" title="minimum"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minimum">&nbsp;&nbsp;minimum</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The lower bound of the scale. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) double minimum</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultValue" title="defaultValue"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultValue">&nbsp;&nbsp;defaultValue</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The default value for the slider. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) double defaultValue</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the value of this property is less than <a href="#//api/name/minimum"><code>minimum</code></a> or greater than <a href="#//api/name/maximum"><code>maximum</code></a>, the slider has no
+default value.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximumFractionDigits" title="maximumFractionDigits"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximumFractionDigits">&nbsp;&nbsp;maximumFractionDigits</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The <a href="#//api/name/maximum">maximum</a> number of fractional digits to display. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) NSInteger maximumFractionDigits</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/vertical" title="vertical"></a>
+	<h3 class="method-title"><code><a href="#//api/name/vertical">&nbsp;&nbsp;vertical</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the scale is oriented vertically. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, getter=isVertical) BOOL vertical</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/numberStyle" title="numberStyle"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberStyle">&nbsp;&nbsp;numberStyle</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A formatting style applied to the <a href="#//api/name/minimum">minimum</a>, <a href="#//api/name/maximum">maximum</a>, and slider values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property ORKNumberFormattingStyle numberStyle</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/numberFormatter" title="numberFormatter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberFormatter">&nbsp;&nbsp;numberFormatter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A number formatter applied to the <a href="#//api/name/minimum">minimum</a>, <a href="#//api/name/maximum">maximum</a>, and slider values. Can be overridden by
+subclasses.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) NSNumberFormatter *numberFormatter</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximumValueDescription" title="maximumValueDescription"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximumValueDescription">&nbsp;&nbsp;maximumValueDescription</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A localized label to describe the <a href="#//api/name/maximum">maximum</a> value of the scale. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, nullable) NSString *maximumValueDescription</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/minimumValueDescription" title="minimumValueDescription"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minimumValueDescription">&nbsp;&nbsp;minimumValueDescription</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A localized label to describe the <a href="#//api/name/minimum">minimum</a> value of the scale. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, nullable) NSString *minimumValueDescription</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximumImage" title="maximumImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximumImage">&nbsp;&nbsp;maximumImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An image for the upper bound of the slider.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (strong, nullable) UIImage *maximumImage</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The recommended image size is 30 x 30 points. The <a href="#//api/name/maximum">maximum</a> range label will not be visible.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/minimumImage" title="minimumImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minimumImage">&nbsp;&nbsp;minimumImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An image for the lower bound of the slider.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (strong, nullable) UIImage *minimumImage</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The recommended image size is 30 x 30 points. The <a href="#//api/name/minimum">minimum</a> range label will not be visible.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/gradientColors" title="gradientColors"></a>
+	<h3 class="method-title"><code><a href="#//api/name/gradientColors">&nbsp;&nbsp;gradientColors</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+lower indexes correspond to the <a href="#//api/name/minimum">minimum</a> side of the scale, while colors at higher indexes in
+the array corresond to the <a href="#//api/name/maximum">maximum</a> side of the scale.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSArray&lt;UIColor*&gt; *gradientColors</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Setting this value to nil results in no gradient being drawn. Defaults to nil.</p>
+
+<p>An example usage would set an array of red and green to visually indicate a scale from bad to good.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/gradientLocations" title="gradientLocations"></a>
+	<h3 class="method-title"><code><a href="#//api/name/gradientLocations">&nbsp;&nbsp;gradientLocations</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Indicates the position of gradient stops for the colors specified in <a href="#//api/name/gradientColors"><code>gradientColors</code></a>.
+Gradient stops are specified as values between 0 and 1. The values must be monotonically
+increasing.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSArray&lt;NSNumber*&gt; *gradientLocations</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If nil, the stops are spread uniformly across the range. Defaults to nil.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/validateParameters" title="validateParameters"></a>
+	<h3 class="method-title"><code><a href="#//api/name/validateParameters">&ndash;&nbsp;validateParameters</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Validates the parameters of the answer format to ensure that they can be displayed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)validateParameters</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Typically, this method is called by the validation methods of the owning objects, which are
+themselves called when a step view controller that contains this answer format is
+about to be displayed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/questionType" title="questionType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/questionType">&ndash;&nbsp;questionType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The type of question. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKQuestionType)questionType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>You can use this enumerated value in your Objective-C code to switch on
+a rough approximation of the type of question that is being asked.</p>
+
+<p>Note that answer format subclasses override the getter to return the appropriate question
+type.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

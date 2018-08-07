@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKNavigableOrderedTask Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/shouldReportProgress">shouldReportProgress</option>
+		
+		<option value="//api/name/skipStepNavigationRules">skipStepNavigationRules</option>
+		
+		<option value="//api/name/stepModifiers">stepModifiers</option>
+		
+		<option value="//api/name/stepNavigationRules">stepNavigationRules</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:steps:">- initWithIdentifier:steps:</option>
+		
+		<option value="//api/name/navigationRuleForTriggerStepIdentifier:">- navigationRuleForTriggerStepIdentifier:</option>
+		
+		<option value="//api/name/progressOfCurrentStep:withResult:">- progressOfCurrentStep:withResult:</option>
+		
+		<option value="//api/name/removeNavigationRuleForTriggerStepIdentifier:">- removeNavigationRuleForTriggerStepIdentifier:</option>
+		
+		<option value="//api/name/removeSkipNavigationRuleForStepIdentifier:">- removeSkipNavigationRuleForStepIdentifier:</option>
+		
+		<option value="//api/name/removeStepModifierForStepIdentifier:">- removeStepModifierForStepIdentifier:</option>
+		
+		<option value="//api/name/setNavigationRule:forTriggerStepIdentifier:">- setNavigationRule:forTriggerStepIdentifier:</option>
+		
+		<option value="//api/name/setSkipNavigationRule:forStepIdentifier:">- setSkipNavigationRule:forStepIdentifier:</option>
+		
+		<option value="//api/name/setStepModifier:forStepIdentifier:">- setStepModifier:forStepIdentifier:</option>
+		
+		<option value="//api/name/skipNavigationRuleForStepIdentifier:">- skipNavigationRuleForStepIdentifier:</option>
+		
+		<option value="//api/name/stepAfterStep:withResult:">- stepAfterStep:withResult:</option>
+		
+		<option value="//api/name/stepBeforeStep:withResult:">- stepBeforeStep:withResult:</option>
+		
+		<option value="//api/name/stepModifierForStepIdentifier:">- stepModifierForStepIdentifier:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKNavigableOrderedTask Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKOrderedTask.html">ORKOrderedTask</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKNavigableOrderedTask.h<br />ORKNavigableOrderedTask.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKNavigableOrderedTask</code> class adds conditional step navigation to the behavior inherited from
+the <a href="../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> class.</p>
+
+<p>For implementing conditional task navigation, you must instantiate concrete subclasses of
+<a href="../Classes/ORKStepNavigationRule.html"><code>ORKStepNavigationRule</code></a> and <a href="../Classes/ORKSkipStepNavigationRule.html"><code>ORKSkipStepNavigationRule</code></a> and attach them to trigger steps by using
+the <a href="#//api/name/setNavigationRule:forTriggerStepIdentifier:"><code>setNavigationRule:forTriggerStepIdentifier:</code></a> and <a href="#//api/name/setSkipNavigationRule:forStepIdentifier:"><code>setSkipNavigationRule:forStepIdentifier:</code></a>
+methods.</p>
+
+<p>For example, if you want to display a survey question only when the user answered Yes to a previous
+question you can use <a href="../Classes/ORKPredicateStepNavigationRule.html"><code>ORKPredicateStepNavigationRule</code></a>; or if you want to define an arbitrary jump
+between two steps you can use <a href="../Classes/ORKDirectStepNavigationRule.html"><code>ORKDirectStepNavigationRule</code></a>. You can also optionally omit steps by
+using <a href="../Classes/ORKPredicateSkipStepNavigationRule.html"><code>ORKPredicateSkipStepNavigationRule</code></a> objects.</p>
+
+<p>Note that each step in the task can have at most one attached navigation rule and one attached skip
+navigation rule.</p>
+
+<p>Navigable ordered tasks support looping over previously visited steps. Note, however, that results
+for steps that are visited more than once will be ovewritten when you revisit the step on the loop.
+Thus, going over a loop will produce duplicate results within the task results for the steps that
+are seen more than once, but all the duplicate step results will point to the same result instance:
+the one corresponding to the last time you visited the step.</p>
+
+<p>The same applies when navigating backwards over looped steps: only your last valid answer is shown
+every time you encounter a revisited step.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/setNavigationRule:forTriggerStepIdentifier:" title="setNavigationRule:forTriggerStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setNavigationRule:forTriggerStepIdentifier:">&ndash;&nbsp;setNavigationRule:forTriggerStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a navigation rule for a trigger step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setNavigationRule:(ORKStepNavigationRule *)<em>stepNavigationRule</em> forTriggerStepIdentifier:(NSString *)<em>triggerStepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepNavigationRule</code></th>
+						<td><p>The step navigation rule to be used when navigating forward from the
+                                    trigger step. A strong reference to the rule is kept by the
+                                    task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>triggerStepIdentifier</code></th>
+						<td><p>The identifier of the step that triggers the rule.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The rule will be used to obtain a new destination step when the participant goes forward from the
+trigger step. You cannot add two different navigation rules to the same trigger step identifier;
+only the most recently added rule is kept.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/navigationRuleForTriggerStepIdentifier:" title="navigationRuleForTriggerStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/navigationRuleForTriggerStepIdentifier:">&ndash;&nbsp;navigationRuleForTriggerStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step navigation rule associated with a trigger step identifier, or <code>nil</code> if there is
+no rule associated with that step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)<em>triggerStepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>triggerStepIdentifier</code></th>
+						<td><p>The identifier of the step whose rule you want to retrieve.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A step navigation rule, or <code>nil</code> if the trigger step identifier has none.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeNavigationRuleForTriggerStepIdentifier:" title="removeNavigationRuleForTriggerStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeNavigationRuleForTriggerStepIdentifier:">&ndash;&nbsp;removeNavigationRuleForTriggerStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the navigation rule, if any, associated with the specified trigger step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeNavigationRuleForTriggerStepIdentifier:(NSString *)<em>triggerStepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>triggerStepIdentifier</code></th>
+						<td><p>The identifier of the step whose rule is to be removed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepNavigationRules" title="stepNavigationRules"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepNavigationRules">&nbsp;&nbsp;stepNavigationRules</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A dictionary of step navigation rules in the task, keyed by trigger step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSDictionary&lt;NSString*ORKStepNavigationRule*&gt; *stepNavigationRules</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Each object in the dictionary should be a <a href="../Classes/ORKStepNavigationRule.html"><code>ORKStepNavigationRule</code></a> subclass.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setSkipNavigationRule:forStepIdentifier:" title="setSkipNavigationRule:forStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setSkipNavigationRule:forStepIdentifier:">&ndash;&nbsp;setSkipNavigationRule:forStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a skip step navigation rule for a step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setSkipNavigationRule:(ORKSkipStepNavigationRule *)<em>skipStepNavigationRule</em> forStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>skipStepNavigationRule</code></th>
+						<td><p>The skip step navigation rule to be used to determine if the
+                                        step should be skipped. A strong reference to the rule is
+                                        kept by the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step that is checked against the skip
+                                        rule.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The rule will be used to decide if the identified step needs to be skipped. You cannot add two
+different skip navigation rules to the same step identifier; only the most recently added rule is
+kept.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/skipNavigationRuleForStepIdentifier:" title="skipNavigationRuleForStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/skipNavigationRuleForStepIdentifier:">&ndash;&nbsp;skipNavigationRuleForStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the skip step navigation rule associated with a step identifier,  or <code>nil</code> if there is no
+skip rule associated with that step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable ORKSkipStepNavigationRule *)skipNavigationRuleForStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step whose skip rule you want to retrieve.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A skip step navigation rule, or <code>nil</code> if the step identifier has none.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeSkipNavigationRuleForStepIdentifier:" title="removeSkipNavigationRuleForStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeSkipNavigationRuleForStepIdentifier:">&ndash;&nbsp;removeSkipNavigationRuleForStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the skip step navigation rule, if any, associated with the specified step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeSkipNavigationRuleForStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step whose rule is to be removed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/skipStepNavigationRules" title="skipStepNavigationRules"></a>
+	<h3 class="method-title"><code><a href="#//api/name/skipStepNavigationRules">&nbsp;&nbsp;skipStepNavigationRules</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A dictionary of step navigation rules in the task, keyed by trigger step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSDictionary&lt;NSString*ORKSkipStepNavigationRule*&gt; *skipStepNavigationRules</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Each object in the dictionary should be a <a href="../Classes/ORKStepNavigationRule.html"><code>ORKStepNavigationRule</code></a> subclass.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setStepModifier:forStepIdentifier:" title="setStepModifier:forStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setStepModifier:forStepIdentifier:">&ndash;&nbsp;setStepModifier:forStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a step modifier for a step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setStepModifier:(ORKStepModifier *)<em>stepModifier</em> forStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepModifier</code></th>
+						<td><p>The step modifier associated with this step</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step that is checked against the skip
+rule.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepModifierForStepIdentifier:" title="stepModifierForStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepModifierForStepIdentifier:">&ndash;&nbsp;stepModifierForStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step modifier associated with a step identifier,  or <code>nil</code> if there is no
+step modifier associated with that step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable ORKStepModifier *)stepModifierForStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step to be modified</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A step modifier, or <code>nil</code> if the step identifier has none.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeStepModifierForStepIdentifier:" title="removeStepModifierForStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeStepModifierForStepIdentifier:">&ndash;&nbsp;removeStepModifierForStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes the step modifier, if any, associated with the specified step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeStepModifierForStepIdentifier:(NSString *)<em>stepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>The identifier of the step whose rule is to be removed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepModifiers" title="stepModifiers"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepModifiers">&nbsp;&nbsp;stepModifiers</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A dictionary of step modifiers in the task, keyed by trigger step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSDictionary&lt;NSString*ORKStepModifier*&gt; *stepModifiers</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Each object in the dictionary should be a <a href="../Classes/ORKStepModifier.html"><code>ORKStepModifier</code></a> subclass.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldReportProgress" title="shouldReportProgress"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldReportProgress">&nbsp;&nbsp;shouldReportProgress</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Determines whether the task should report its progress as a linear ordered task or not.
+The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldReportProgress</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKNavigableOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:steps:" title="initWithIdentifier:steps:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:steps:">&ndash;&nbsp;initWithIdentifier:steps:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized ordered task using the specified <a href="#//api/name/identifier">identifier</a> and array of <a href="#//api/name/steps">steps</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> steps:(NSArray&lt;ORKStep*&gt; *)<em>steps</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique <a href="#//api/name/identifier">identifier</a> for the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>steps</code></th>
+						<td><p>An array of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> objects in the order in which they should be presented.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized ordered task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepAfterStep:withResult:" title="stepAfterStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepAfterStep:withResult:">&ndash;&nbsp;stepAfterStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepAfterStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepBeforeStep:withResult:" title="stepBeforeStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepBeforeStep:withResult:">&ndash;&nbsp;stepBeforeStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepBeforeStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/progressOfCurrentStep:withResult:" title="progressOfCurrentStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/progressOfCurrentStep:withResult:">&ndash;&nbsp;progressOfCurrentStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an ordered task initialized from data in the given unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>The coder from which to initialize the ordered task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized ordered task.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>An ordered task can be serialized and deserialized with <code>NSKeyedArchiver</code>. Note
+that this serialization includes strings that might need to be
+localized.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

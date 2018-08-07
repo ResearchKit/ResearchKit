@@ -1,0 +1,3084 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKOrderedTask Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/progressLabelColor">progressLabelColor</option>
+		
+		<option value="//api/name/steps">steps</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:">+ PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:</option>
+		
+		<option value="//api/name/amslerGridTaskWithIdentifier:intendedUseDescription:options:">+ amslerGridTaskWithIdentifier:intendedUseDescription:options:</option>
+		
+		<option value="//api/name/audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:">+ audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:</option>
+		
+		<option value="//api/name/dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:">+ dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:</option>
+		
+		<option value="//api/name/fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:">+ fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:</option>
+		
+		<option value="//api/name/holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:">+ holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:</option>
+		
+		<option value="//api/name/kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:">+ kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:</option>
+		
+		<option value="//api/name/reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:">+ reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:</option>
+		
+		<option value="//api/name/shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:">+ shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:</option>
+		
+		<option value="//api/name/shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:">+ shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:</option>
+		
+		<option value="//api/name/spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:">+ spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:</option>
+		
+		<option value="//api/name/speechInNoiseTaskWithIdentifier:intendedUseDescription:options:">+ speechInNoiseTaskWithIdentifier:intendedUseDescription:options:</option>
+		
+		<option value="//api/name/speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:">+ speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:</option>
+		
+		<option value="//api/name/stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:">+ stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:</option>
+		
+		<option value="//api/name/timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:">+ timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:</option>
+		
+		<option value="//api/name/toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:">+ toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:</option>
+		
+		<option value="//api/name/towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:">+ towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:</option>
+		
+		<option value="//api/name/trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:">+ trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:</option>
+		
+		<option value="//api/name/tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:">+ tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:</option>
+		
+		<option value="//api/name/twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:">+ twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:</option>
+		
+		<option value="//api/name/walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:">+ walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/copyWithSteps:">- copyWithSteps:</option>
+		
+		<option value="//api/name/identifier">- identifier</option>
+		
+		<option value="//api/name/indexOfStep:">- indexOfStep:</option>
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:steps:">- initWithIdentifier:steps:</option>
+		
+		<option value="//api/name/progressOfCurrentStep:withResult:">- progressOfCurrentStep:withResult:</option>
+		
+		<option value="//api/name/providesBackgroundAudioPrompts">- providesBackgroundAudioPrompts</option>
+		
+		<option value="//api/name/requestedHealthKitTypesForReading">- requestedHealthKitTypesForReading</option>
+		
+		<option value="//api/name/requestedHealthKitTypesForWriting">- requestedHealthKitTypesForWriting</option>
+		
+		<option value="//api/name/requestedPermissions">- requestedPermissions</option>
+		
+		<option value="//api/name/stepAfterStep:withResult:">- stepAfterStep:withResult:</option>
+		
+		<option value="//api/name/stepBeforeStep:withResult:">- stepBeforeStep:withResult:</option>
+		
+		<option value="//api/name/stepWithIdentifier:">- stepWithIdentifier:</option>
+		
+		<option value="//api/name/validateParameters">- validateParameters</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKOrderedTask Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding<br /><a href="../Protocols/ORKTask.html">ORKTask</a></td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKOrderedTask.h<br />ORKOrderedTask.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKOrderedTask</code> class implements all the methods in the <a href="../Protocols/ORKTask.html"><code>ORKTask</code></a> protocol and represents a
+task that assumes a fixed order for its <a href="#//api/name/steps">steps</a>.</p>
+
+<p>In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can
+be represented as an ordered task.</p>
+
+<p>If you want further custom conditional behaviors in a task, it can be easier to subclass
+<code>ORKOrderedTask</code> or <a href="../Classes/ORKNavigableOrderedTask.html"><code>ORKNavigableOrderedTask</code></a> and override particular <a href="../Protocols/ORKTask.html"><code>ORKTask</code></a> methods than it is
+to implement the <a href="../Protocols/ORKTask.html"><code>ORKTask</code></a> protocol directly. Override the methods <a href="#//api/name/stepAfterStep:withResult:"><code>stepAfterStep:withResult:</code></a> and
+<a href="#//api/name/stepBeforeStep:withResult:"><code>stepBeforeStep:withResult:</code></a>, and call super for all other methods.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:steps:" title="initWithIdentifier:steps:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:steps:">&ndash;&nbsp;initWithIdentifier:steps:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized ordered task using the specified <a href="#//api/name/identifier">identifier</a> and array of <a href="#//api/name/steps">steps</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> steps:(NSArray&lt;ORKStep*&gt; *)<em>steps</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique <a href="#//api/name/identifier">identifier</a> for the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>steps</code></th>
+						<td><p>An array of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> objects in the order in which they should be presented.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized ordered task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/copyWithSteps:" title="copyWithSteps:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/copyWithSteps:">&ndash;&nbsp;copyWithSteps:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Return a mutated copy of self with the <a href="#//api/name/steps">steps</a> included in the given array.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)copyWithSteps:(NSArray&lt;ORKStep*&gt; *)<em>steps</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>steps</code></th>
+						<td><p>An array of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> objects in the order in which they should be presented.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized ordered task.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is intended to allow for mutating an ordered task (or subclass) while retaining
+the original class and properties that may not be publicly exposed, but with a mutated set
+of <a href="#//api/name/steps">steps</a>. An example of where this might be useful is if before performing an <code>ORKPredefinedActiveTask</code>,
+the app needed to query the participant about medications, diet or sleep. The app
+would need to mutate the <a href="#//api/name/steps">steps</a> in order to insert their own <a href="#//api/name/steps">steps</a>. While an ORKOrderedTask could
+then be created with the same <a href="#//api/name/identifier">identifier</a> and the new <a href="#//api/name/steps">steps</a>, subclass information such rules on an
+<a href="../Classes/ORKNavigableOrderedTask.html"><code>ORKNavigableOrderedTask</code></a> would be lost.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/validateParameters" title="validateParameters"></a>
+	<h3 class="method-title"><code><a href="#//api/name/validateParameters">&ndash;&nbsp;validateParameters</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Validates the task parameters.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)validateParameters</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The implementation of this method should check that all the task parameters are correct. An invalid task
+is considered an unrecoverable error: the implementation should throw an exception on parameter validation failure.
+For example, the <a href="../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> implementation makes sure that all its step identifiers are unique, throwing an
+exception otherwise.</p>
+
+<p>This method is usually called by a task view controller when its task is set.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&ndash;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The unique identifier for this task.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The identifier should be a short string that identifies the task. The identifier is copied
+into the <a href="../Classes/ORKTaskResult.html"><code>ORKTaskResult</code></a> objects generated by the task view controller for this
+task. You can use a human-readable string for the task identifier
+or a UUID; the exact string you use depends on your app.</p>
+
+<p>In the case of apps whose tasks come from a server, the unique
+identifier for the task may be in an external database.</p>
+
+<p>The task view controller uses the identifier when constructing the task result.
+The identifier can also be used during UI state restoration to identify the
+task that needs to be restored.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/indexOfStep:" title="indexOfStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/indexOfStep:">&ndash;&nbsp;indexOfStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Find the index of a given step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSUInteger)indexOfStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step to look for</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The index position of the step (or NSNotFound if not found)</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepAfterStep:withResult:" title="stepAfterStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepAfterStep:withResult:">&ndash;&nbsp;stepAfterStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepAfterStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepBeforeStep:withResult:" title="stepBeforeStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepBeforeStep:withResult:">&ndash;&nbsp;stepBeforeStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepBeforeStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepWithIdentifier:" title="stepWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepWithIdentifier:">&ndash;&nbsp;stepWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step that matches the specified <a href="../Protocols/ORKTask.html#//api/name/identifier">identifier</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The <a href="../Protocols/ORKTask.html#//api/name/identifier">identifier</a> of the step to restore.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The step that matches the specified <a href="../Protocols/ORKTask.html#//api/name/identifier">identifier</a>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Implementing this method allows state restoration of a task
+to a particular step. If you don&rsquo;t implement this method, <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> restores the state
+to the first step of the task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/progressOfCurrentStep:withResult:" title="progressOfCurrentStep:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/progressOfCurrentStep:withResult:">&ndash;&nbsp;progressOfCurrentStep:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)<em>step</em> withResult:(ORKTaskResult *)<em>taskResult</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedHealthKitTypesForReading" title="requestedHealthKitTypesForReading"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedHealthKitTypesForReading">&ndash;&nbsp;requestedHealthKitTypesForReading</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of HealthKit types that steps in the task need to be able to
+read. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSSet *)requestedHealthKitTypesForReading</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The value of this property is a set of <code>HKObjectType</code> values to request for reading from HealthKit during this task. After the last of the initial instruction steps, the task view controller
+requests access to these HealthKit types.</p>
+
+<p>To set this property, you can scan the steps in the task
+and collate the HealthKit types that are requested by each active step, question, or
+form step that has a Health answer format, and then include any additional types known
+to be required. (Note that <a href="../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> does something similar for this property.)</p>
+
+<p>See also: <a href="../Protocols/ORKTask.html#//api/name/requestedHealthKitTypesForWriting"><code>requestedHealthKitTypesForWriting</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedHealthKitTypesForWriting" title="requestedHealthKitTypesForWriting"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedHealthKitTypesForWriting">&ndash;&nbsp;requestedHealthKitTypesForWriting</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of HealthKit types for which the task needs to request write access.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSSet *)requestedHealthKitTypesForWriting</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The requested <code>HKObjectType</code> values for writing can be returned by an extended task,
+to request write access to these HealthKit types together with the read access
+requested by the task view controller by calling <a href="../Protocols/ORKTask.html#//api/name/requestedHealthKitTypesForReading"><code>requestedHealthKitTypesForReading</code></a>.</p>
+
+<p>See also: <a href="../Protocols/ORKTask.html#//api/name/requestedHealthKitTypesForReading"><code>requestedHealthKitTypesForReading</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedPermissions" title="requestedPermissions"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedPermissions">&ndash;&nbsp;requestedPermissions</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of permissions requested by the task.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKPermissionMask)requestedPermissions</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>By default in <a href="../Classes/ORKOrderedTask.html"><code>ORKOrderedTask</code></a> object, these permissions are collected from the
+recorder configurations associated with the active steps in the task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/providesBackgroundAudioPrompts" title="providesBackgroundAudioPrompts"></a>
+	<h3 class="method-title"><code><a href="#//api/name/providesBackgroundAudioPrompts">&ndash;&nbsp;providesBackgroundAudioPrompts</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether this task involves spoken audio prompts. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)providesBackgroundAudioPrompts</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the value of this property is <code>YES</code>, the shared <code>AVAudioSession</code> is configured for playback in the background.
+The audio <code>UIBackgroundMode</code> value must be set in the application&rsquo;s <code>Info.plist</code> file
+for this to be effective.</p>
+
+<p>By default, this property looks for active steps that have
+audio prompts or count down enabled, and returns <code>YES</code> if such steps exist in
+the task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an ordered task initialized from data in the given unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>The coder from which to initialize the ordered task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized ordered task.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>An ordered task can be serialized and deserialized with <code>NSKeyedArchiver</code>. Note
+that this serialization includes strings that might need to be
+localized.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Properties" name="task_Properties"></a>
+						<h2 class="task-title">Properties</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/steps" title="steps"></a>
+	<h3 class="method-title"><code><a href="#//api/name/steps">&nbsp;&nbsp;steps</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of steps in the task. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray&lt;ORKStep*&gt; *steps</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Each element in the array must be a subclass of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>.
+The associated task view controller presents the steps in
+array order.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/progressLabelColor" title="progressLabelColor"></a>
+	<h3 class="method-title"><code><a href="#//api/name/progressLabelColor">&nbsp;&nbsp;progressLabelColor</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Color property of the progress label.
+Default is black.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) UIColor *progressLabelColor</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="ORKPredefinedActiveTask Methods" name="task_ORKPredefinedActiveTask Methods"></a>
+						<h2 class="task-title">ORKPredefinedActiveTask Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/amslerGridTaskWithIdentifier:intendedUseDescription:options:" title="amslerGridTaskWithIdentifier:intendedUseDescription:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/amslerGridTaskWithIdentifier:intendedUseDescription:options:">+&nbsp;amslerGridTaskWithIdentifier:intendedUseDescription:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined Amsler Grid task that helps in detecting problems in user&rsquo;s vision.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)amslerGridTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data collected.
+                                    If the value of this parameter is <code>nil</code>, the default localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In an Amsler Grid task, the participant is shown a square grid. The participant is asked to mark the areas where they notice disctortions in the grid.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKAmslerGridResult.html"><code>ORKAmslerGridResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:" title="holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:">+&nbsp;holePegTestTaskWithIdentifier:intendedUseDescription:dominantHand:numberOfPegs:threshold:rotated:timeLimit:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that measures the upper extremity function.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> dominantHand:(ORKBodySagittal)<em>dominantHand</em> numberOfPegs:(int)<em>numberOfPegs</em> threshold:(double)<em>threshold</em> rotated:(BOOL)<em>rotated</em> timeLimit:(NSTimeInterval)<em>timeLimit</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, the default
+localized text will be displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>dominantHand</code></th>
+						<td><p>The participant dominant hand that will be tested first.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>numberOfPegs</code></th>
+						<td><p>The number of pegs to place in the pegboard.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>threshold</code></th>
+						<td><p>The threshold value used for the detection area.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>rotated</code></th>
+						<td><p>A test variant that also requires peg rotation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeLimit</code></th>
+						<td><p>The duration allowed to validate the peg position.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active hole peg test task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a hole peg test task, the participant is asked to fill holes with pegs.</p>
+
+<p>A hole peg test task can be used to assess arm and hand function, especially in patients with severe disability.</p>
+
+<p>Data collected in this task is in the form of an <a href="../Classes/ORKHolePegTestResult.html"><code>ORKHolePegTestResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:" title="twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:">+&nbsp;twoFingerTappingIntervalTaskWithIdentifier:intendedUseDescription:duration:handOptions:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of two finger tapping (Optionally with a hand specified)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> duration:(NSTimeInterval)<em>duration</em> handOptions:(ORKPredefinedTaskHandOption)<em>handOptions</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                collected. If the value of this parameter is <code>nil</code>, the default
+                                localized text will be displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>duration</code></th>
+						<td><p>The length of the count down timer that runs while touch data is
+                                collected.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handOptions</code></th>
+						<td><p>Options for determining which hand(s) to test.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active two finger tapping task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
+targets on the device screen.</p>
+
+<p>A two finger tapping task can be used to assess basic motor capabilities including speed, accuracy,
+and rhythm.</p>
+
+<p>Data collected in this task includes touch activity and accelerometer information.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:" title="audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:">+&nbsp;audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:checkAudioLevel:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that enables an audio recording WITH a check of the audio level.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKNavigableOrderedTask *)audioTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> speechInstruction:(nullable NSString *)<em>speechInstruction</em> shortSpeechInstruction:(nullable NSString *)<em>shortSpeechInstruction</em> duration:(NSTimeInterval)<em>duration</em> recordingSettings:(nullable NSDictionary *)<em>recordingSettings</em> checkAudioLevel:(BOOL)<em>checkAudioLevel</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, default
+localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speechInstruction</code></th>
+						<td><p>Instructional content describing what the user needs to do when
+recording begins. If the value of this parameter is <code>nil</code>,
+default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>shortSpeechInstruction</code></th>
+						<td><p>Instructional content shown during audio recording. If the value of
+this parameter is <code>nil</code>, default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>duration</code></th>
+						<td><p>The length of the count down timer that runs while audio data is
+collected.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>recordingSettings</code></th>
+						<td><p>See &ldquo;AV Foundation Audio Settings Constants&rdquo; for possible values.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>checkAudioLevel</code></th>
+						<td><p>If <code>YES</code> then add navigational rules to check the background noise level.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active audio task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In an audio recording task, the participant is asked to make some kind of sound
+with their voice, and the audio data is collected.</p>
+
+<p>An audio task can be used to measure properties of the user&rsquo;s voice, such as
+frequency range, or the ability to pronounce certain sounds.</p>
+
+<p>If <code>checkAudioLevel == YES</code> then a navigation rule is added to do a simple check of the background
+noise level. If the background noise is too loud, then the participant is instructed to move to a
+quieter location before trying again.</p>
+
+<p>Data collected in this task consists of audio information.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:" title="fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:">+&nbsp;fitnessCheckTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of a fitness check.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)fitnessCheckTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> walkDuration:(NSTimeInterval)<em>walkDuration</em> restDuration:(NSTimeInterval)<em>restDuration</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is <code>nil</code>, the default
+                                    localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>walkDuration</code></th>
+						<td><p>The duration of the walk (the maximum is 10 minutes).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>restDuration</code></th>
+						<td><p>The duration of the post walk rest period.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active fitness check task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a fitness check task, the participant is asked to walk for a specified duration
+(typically several minutes). During this period, various sensor data is collected and returned by
+the task view controller&rsquo;s delegate. Sensor data can include accelerometer, device motion,
+pedometer, location, and heart rate data where available.</p>
+
+<p>At the conclusion of the walk, if heart rate data is available, the participant is asked to sit
+down and rest for a period. Data collection continues during this period.</p>
+
+<p>By default, the task includes an instruction step that explains what the user needs to do during
+the task, but this can be excluded with <code>ORKPredefinedTaskOptionExcludeInstructions</code>.</p>
+
+<p>Data collected from this task can be used to compute measures of general fitness.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:" title="shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:">+&nbsp;shortWalkTaskWithIdentifier:intendedUseDescription:numberOfStepsPerLeg:restDuration:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of a short walk.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> numberOfStepsPerLeg:(NSInteger)<em>numberOfStepsPerLeg</em> restDuration:(NSTimeInterval)<em>restDuration</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is <code>nil</code>, the default
+                                    localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>numberOfStepsPerLeg</code></th>
+						<td><p>The number of <a href="#//api/name/steps">steps</a> the participant is asked to walk. If the
+                                    pedometer is unavailable, a distance is suggested and a suitable
+                                    count down timer is displayed for each leg of the walk.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>restDuration</code></th>
+						<td><p>The duration of the rest period. When the value of this parameter is
+                                    nonzero, the user is asked to stand still for the specified rest
+                                    period after the turn sequence has been completed, and baseline
+                                    data is collected.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active short walk task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+of the participant&rsquo;s gait.</p>
+
+<p>The presentation of the short walk task differs from the fitness check task in that the distance is
+replaced by the number of <a href="#//api/name/steps">steps</a> taken, and the walk is split into a series of legs. After each leg,
+the user is asked to turn and reverse direction.</p>
+
+<p>The data collected by this task can include accelerometer, device motion, and pedometer data.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:" title="walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:">+&nbsp;walkBackAndForthTaskWithIdentifier:intendedUseDescription:walkDuration:restDuration:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of a short walk back and forth.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)walkBackAndForthTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> walkDuration:(NSTimeInterval)<em>walkDuration</em> restDuration:(NSTimeInterval)<em>restDuration</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, the default
+localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>walkDuration</code></th>
+						<td><p>The duration of the walking period.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>restDuration</code></th>
+						<td><p>The duration of the rest period. When the value of this parameter is
+nonzero, the user is asked to stand still for the specified rest
+period after the turn sequence has been completed, and baseline
+data is collected.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active short walk task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+of the participant&rsquo;s gait.</p>
+
+<p>The presentation of the back and forth walk task differs from the short walk in that the participant
+is asked to walk back and forth rather than walking in a straight line for a certain number of <a href="#//api/name/steps">steps</a>.</p>
+
+<p>The participant is then asked to turn in a full circle and then stand still.</p>
+
+<p>This task is intended to allow the participant to walk in a confined space where the participant
+does not have access to a long hallway to walk in a continuous straight line. Additionally, by asking
+the participant to turn in a full circle and then stand still, the activity can access balance and
+concentration.</p>
+
+<p>The data collected by this task can include accelerometer, device motion, and pedometer data.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:" title="kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:">+&nbsp;kneeRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The knee range of motion task returns a task that measures the range of motion for either a left or right knee.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)kneeRangeOfMotionTaskWithIdentifier:(NSString *)<em>identifier</em> limbOption:(ORKPredefinedTaskLimbOption)<em>limbOption</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>limbOption</code></th>
+						<td><p>Which knee is being measured.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data collected. If the value of this parameter is <code>nil</code>, default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:" title="shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:">+&nbsp;shoulderRangeOfMotionTaskWithIdentifier:limbOption:intendedUseDescription:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The shoulder range of motion task returns a task that measures the range of motion for either a left or right shoulder.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)<em>identifier</em> limbOption:(ORKPredefinedTaskLimbOption)<em>limbOption</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>limbOption</code></th>
+						<td><p>Which shoulder is being measured.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data collected. If the value of this parameter is <code>nil</code>, default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:" title="spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:">+&nbsp;spatialSpanMemoryTaskWithIdentifier:intendedUseDescription:initialSpan:minimumSpan:maximumSpan:playSpeed:maximumTests:maximumConsecutiveFailures:customTargetImage:customTargetPluralName:requireReversal:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that tests spatial span memory.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(NSString *)<em>intendedUseDescription</em> initialSpan:(NSInteger)<em>initialSpan</em> minimumSpan:(NSInteger)<em>minimumSpan</em> maximumSpan:(NSInteger)<em>maximumSpan</em> playSpeed:(NSTimeInterval)<em>playSpeed</em> maximumTests:(NSInteger)<em>maximumTests</em> maximumConsecutiveFailures:(NSInteger)<em>maximumConsecutiveFailures</em> customTargetImage:(UIImage *)<em>customTargetImage</em> customTargetPluralName:(NSString *)<em>customTargetPluralName</em> requireReversal:(BOOL)<em>requireReversal</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is <code>nil</code>, the default
+                                    localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>initialSpan</code></th>
+						<td><p>The  sequence length of the initial memory pattern.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumSpan</code></th>
+						<td><p>The minimum pattern sequence length.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumSpan</code></th>
+						<td><p>The maximum pattern sequence length.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>playSpeed</code></th>
+						<td><p>The time per sequence item; a smaller value means faster sequence
+                                    play.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumTests</code></th>
+						<td><p>The maximum number of rounds to conduct.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumConsecutiveFailures</code></th>
+						<td><p>The maximum number of consecutive failures the user can make before
+                                    the task is terminated.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>customTargetImage</code></th>
+						<td><p>The image to use for the task. By default, and if the value of this
+                                    parameter is <code>nil</code>, the image is a flower. To supply a custom
+                                    image, create a template image to which iOS adds the tint color.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>customTargetPluralName</code></th>
+						<td><p>The name associated with <code>customTargetImage</code>; by default, the value
+                                    of this parameter is @&ldquo;flowers&rdquo;.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>requireReversal</code></th>
+						<td><p>A Boolean value that indicates whether to require the user to tap
+                                    the sequence in reverse order.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active spatial span memory task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a spatial span memory task, the participant is asked to repeat pattern sequences of increasing
+length in a game-like environment. You can use this task to assess visuospatial memory and
+executive function.</p>
+
+<p>In each round of the task, an array of
+target images are shown in a grid (by default, the images are flowers). The round consists of a
+demonstration phase and an interactive phase. In the demonstration phase, some of the flowers
+change color in a specific sequence. After the demonstration, the user is asked to tap the flowers
+in the same sequence for the interactive phase.</p>
+
+<p>The span (that is, the length of the pattern sequence) is automatically varied during the task,
+increasing after users succeed and decreasing after they fail, within the range specified by
+minimum and maximum values that you specify. You can also customize the speed of sequence playback
+and the shape of the tap target.</p>
+
+<p>A spatial span memory task finishes when the user has either completed the maximum number of tests
+or made the maximum number of errors.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKSpatialSpanMemoryResult.html"><code>ORKSpatialSpanMemoryResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:" title="speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:">+&nbsp;speechRecognitionTaskWithIdentifier:intendedUseDescription:speechRecognizerLocale:speechRecognitionImage:speechRecognitionText:shouldHideTranscript:allowsEdittingTranscript:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined Speech Recognition task that transcribes participant&rsquo;s speech.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)speechRecognitionTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> speechRecognizerLocale:(ORKSpeechRecognizerLocale)<em>speechRecognizerLocale</em> speechRecognitionImage:(nullable UIImage *)<em>speechRecognitionImage</em> speechRecognitionText:(nullable NSString *)<em>speechRecognitionText</em> shouldHideTranscript:(BOOL)<em>shouldHideTranscript</em> allowsEdittingTranscript:(BOOL)<em>allowsEdittingTranscript</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data collected.
+                                    If the value of this parameter is <code>nil</code>, the default localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speechRecognizerLocale</code></th>
+						<td><p>An enum that represents the locale to be used by speech recognition API.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speechRecognitionImage</code></th>
+						<td><p>The image shown to the participant.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speechRecognitionText</code></th>
+						<td><p>The text shown to the participant.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>shouldHideTranscript</code></th>
+						<td><p>The boolean value used to show or hide the transcription from the user.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>allowsEdittingTranscript</code></th>
+						<td><p>The boolean value used to present step that allows editting transcription.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a Speech Recognition task, the participant is shown a text or image or both. The participant has to read the text aloud, or describe the image.</p>
+
+<p>A Speech Recognition task finishes when the user presses the Stop Recording button.</p>
+
+<p>Data collected by the task is in the form of an <code>ORKSpeechRecognitionResult</code> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/speechInNoiseTaskWithIdentifier:intendedUseDescription:options:" title="speechInNoiseTaskWithIdentifier:intendedUseDescription:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/speechInNoiseTaskWithIdentifier:intendedUseDescription:options:">+&nbsp;speechInNoiseTaskWithIdentifier:intendedUseDescription:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that tests speech audiometry.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)speechInNoiseTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, default
+localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active speech in noise task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a speech in noise task, the participant is asked to listen to some sentences mixed with background noise at varying signal to noise ratio (SNR).</p>
+
+<p>You can use a speech in noise task to measure the speech reception threshold (SRT) of an individual.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:" title="stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:">+&nbsp;stroopTaskWithIdentifier:intendedUseDescription:numberOfAttempts:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined Stroop task that tests participants selective attention and cognitive flexibility.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)stroopTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> numberOfAttempts:(NSInteger)<em>numberOfAttempts</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, the default
+localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>numberOfAttempts</code></th>
+						<td><p>Total number of stroop questions to include in the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a stroop task, the participant is shown a text. The text is a name of a color, but the text is printed in a color that may or may not be denoted by the name. In each attempt of the task, the participant has to press the button that corresponds to the first letter of the color in which the text is printed. The participant has to ignore the name of the color written in the text, but respond based on the color of the text.</p>
+
+<p>A stroop task finishes when the user has completed all the attempts, irrespective of correct or incorrect answers.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKStroopResult.html"><code>ORKStroopResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:" title="toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:">+&nbsp;toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that tests tone audiometry.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)toneAudiometryTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> speechInstruction:(nullable NSString *)<em>speechInstruction</em> shortSpeechInstruction:(nullable NSString *)<em>shortSpeechInstruction</em> toneDuration:(NSTimeInterval)<em>toneDuration</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is <code>nil</code>, default
+                                    localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>speechInstruction</code></th>
+						<td><p>Instructional content describing what the user needs to do when
+                                    recording begins. If the value of this parameter is <code>nil</code>,
+                                    default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>shortSpeechInstruction</code></th>
+						<td><p>Instructional content shown during audio recording. If the value of
+                                    this parameter is <code>nil</code>, default localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>toneDuration</code></th>
+						<td><p>The maximum length of the duration for each tone (each tone can be
+                                    interrupted sooner, after the participant presses the main
+                                    button).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active tone audiometry task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a tone audiometry task, the participant is asked to listen to some tones with different audio
+frequencies, playing on different channels (left and right), with the volume being progressively
+increased until the participant taps a button.</p>
+
+<p>You can use a tone audiometry task to measure properties of the user&rsquo;s hearing, based on their
+reaction to a wide range of frequencies.</p>
+
+<p>Data collected in this task consists of audio signal amplitude for specific frequencies and
+channels.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:" title="dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:">+&nbsp;dBHLToneAudiometryTaskWithIdentifier:intendedUseDescription:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that tests dBHL tone audiometry.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, default
+localized text is used.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active dBHL tone audiometry task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In the dBHL tone audiometry task, the participant is asked to listen to some tones with different audio
+frequencies, playing on different channels (left and right), that vary in dB HL values depending on whether or not the user tapped the button.</p>
+
+<p>You can use a tone audiometry task to measure the hearing threshold of the user.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:" title="towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:">+&nbsp;towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of a Tower of Hanoi puzzle.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> numberOfDisks:(NSUInteger)<em>numberOfDisks</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is <code>nil</code>, the
+                                    default localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>numberOfDisks</code></th>
+						<td><p>The number of disks in the puzzle; the default value for this property is 3.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active device motion reaction time task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a Tower of Hanoi task, the participant is asked to solve the classic puzzle in as few moves as possible.
+You can use this task to assess the participant&rsquo;s problem-solving skills.</p>
+
+<p>A Tower of Hanoi task finishes when the participant has completed the puzzle correctly or concedes that he or she cannot solve it.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKTowerOfHanoiResult.html"><code>ORKTowerOfHanoiResult</code></a> object. Data collected in this task consists of how many moves were taken and whether the puzzle was successfully completed or not.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:" title="reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:">+&nbsp;reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that tests the participant&rsquo;s reaction time.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)reactionTimeTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> maximumStimulusInterval:(NSTimeInterval)<em>maximumStimulusInterval</em> minimumStimulusInterval:(NSTimeInterval)<em>minimumStimulusInterval</em> thresholdAcceleration:(double)<em>thresholdAcceleration</em> numberOfAttempts:(int)<em>numberOfAttempts</em> timeout:(NSTimeInterval)<em>timeout</em> successSound:(UInt32)<em>successSoundID</em> timeoutSound:(UInt32)<em>timeoutSoundID</em> failureSound:(UInt32)<em>failureSoundID</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the
+                                        study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                        collected. If the value of this parameter is <code>nil</code>, the
+                                        default localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumStimulusInterval</code></th>
+						<td><p>The maximum interval before the stimulus is delivered.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimumStimulusInterval</code></th>
+						<td><p>The minimum interval before the stimulus is delivered.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>thresholdAcceleration</code></th>
+						<td><p>The acceleration required to end a reaction time test.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>numberOfAttempts</code></th>
+						<td><p>The number of successful attempts required before the task is
+                                        complete. The active step result will contain this many
+                                        child results if the task is completed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeout</code></th>
+						<td><p>The interval permitted after the stimulus until the test fails,
+                                        if the threshold is not reached.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>successSoundID</code></th>
+						<td><p>The sound to play after a successful attempt.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeoutSoundID</code></th>
+						<td><p>The sound to play after an attempt that times out.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>failureSoundID</code></th>
+						<td><p>The sound to play after an unsuccessful attempt.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active device motion reaction time task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a reaction time task, the participant is asked to move the device sharply in any
+direction in response to a visual cue. You can use this task to accurately assess the participant&rsquo;s
+simple reaction time.</p>
+
+<p>A reaction time task finishes when the participant has completed the required
+number of attempts successfully. An attempt is successful when the participant exerts acceleration
+greater than <code>thresholdAcceleration</code> to the device after the stimulus has been delivered and before
+<code>timeout</code> has elapsed. An attempt is unsuccessful if acceleration greater than
+<code>thresholdAcceleration</code> is applied to the device before the stimulus or if this does not occur
+before <code>timeout</code> has elapsed. If unsuccessful, the result is not reported and the participant must
+try again to proceed with the task.</p>
+
+<p>Data collected by the task is in the form of <a href="../Classes/ORKReactionTimeResult.html">ORKReactionTimeResult</a> objects. These
+objects contain a timestamp representing the delivery of the stimulus and an <a href="../Classes/ORKFileResult.html">ORKFileResult</a>, which
+references the motion data collected during an attempt. The researcher can use these to evaluate
+the response to the stimulus and calculate the reaction time.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:" title="timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:">+&nbsp;timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:turnAroundTimeLimit:includeAssistiveDeviceForm:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of a timed walk, with a distinct turn around step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> distanceInMeters:(double)<em>distanceInMeters</em> timeLimit:(NSTimeInterval)<em>timeLimit</em> turnAroundTimeLimit:(NSTimeInterval)<em>turnAroundTimeLimit</em> includeAssistiveDeviceForm:(BOOL)<em>includeAssistiveDeviceForm</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+collected. If the value of this parameter is <code>nil</code>, the default
+localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>distanceInMeters</code></th>
+						<td><p>The timed walk distance in meters.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeLimit</code></th>
+						<td><p>The time limit to complete the trials.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>turnAroundTimeLimit</code></th>
+						<td><p>The time limit to complete the turn around step, passing zero or negative value to this parameter will bypass the turnAroundTime step.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>includeAssistiveDeviceForm</code></th>
+						<td><p>A Boolean value that indicates whether to inlude the form step
+about the usage of an assistive device.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active timed walk task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+possible, but safely. Then the participant is asked to turn around. The task is immediately
+administered again by having the patient walk back the same distance.
+A timed walk task can be used to measure lower extremity function.</p>
+
+<p>The presentation of the timed walk task differs from both the fitness check task and the short
+walk task in that the distance is fixed. After a first walk, the user is asked to turn, then reverse
+direction.</p>
+
+<p>The data collected by this task can include accelerometer, device motion, pedometer data,
+and location where available.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKTimedWalkResult.html"><code>ORKTimedWalkResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:" title="PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:">+&nbsp;PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that consists of the paced serial addition test (PSAT).</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> presentationMode:(ORKPSATPresentationMode)<em>presentationMode</em> interStimulusInterval:(NSTimeInterval)<em>interStimulusInterval</em> stimulusDuration:(NSTimeInterval)<em>stimulusDuration</em> seriesLength:(NSInteger)<em>seriesLength</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is <code>nil</code>, the default
+                                  localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>presentationMode</code></th>
+						<td><p>The presentation mode of the PSAT test (auditory or visual or both).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>interStimulusInterval</code></th>
+						<td><p>The time interval between two digits presented.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stimulusDuration</code></th>
+						<td><p>The time duration the digit is shown on screen (only for
+                                    visual PSAT, that is PVSAT and PAVSAT).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>seriesLength</code></th>
+						<td><p>The number of digits that will be presented during the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active PSAT task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a PSAT task, the participant is asked to add a new digit to the one immediately before it
+every 2 or 3 seconds.</p>
+
+<p>A PSAT task can be used to measure the cognitive function that assesses auditory and/or
+visual information processing speed and flexibility, as well as calculation ability.</p>
+
+<p>Data collected by the task is in the form of an <a href="../Classes/ORKPSATResult.html"><code>ORKPSATResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:" title="tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:">+&nbsp;tremorTestTaskWithIdentifier:intendedUseDescription:activeStepDuration:activeTaskOptions:handOptions:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that measures hand tremor.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKNavigableOrderedTask *)tremorTestTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> activeStepDuration:(NSTimeInterval)<em>activeStepDuration</em> activeTaskOptions:(ORKTremorActiveTaskOption)<em>activeTaskOptions</em> handOptions:(ORKPredefinedTaskHandOption)<em>handOptions</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is <code>nil</code>, the default
+                                  localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>activeStepDuration</code></th>
+						<td><p>The duration for each active step in the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>activeTaskOptions</code></th>
+						<td><p>Options that affect which active <a href="#//api/name/steps">steps</a> are presented for this task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handOptions</code></th>
+						<td><p>Options for determining which hand(s) to test.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active tremor test task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a tremor assessment task, the participant is asked to hold the device with their most affected
+hand in various positions while accelerometer and motion data are captured.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:" title="trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:">+&nbsp;trailmakingTaskWithIdentifier:intendedUseDescription:trailmakingInstruction:trailType:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a predefined task that measures visual attention and task switching.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKOrderedTask *)trailmakingTaskWithIdentifier:(NSString *)<em>identifier</em> intendedUseDescription:(nullable NSString *)<em>intendedUseDescription</em> trailmakingInstruction:(nullable NSString *)<em>trailmakingInstruction</em> trailType:(ORKTrailMakingTypeIdentifier)<em>trailType</em> options:(ORKPredefinedTaskOption)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The task <a href="#//api/name/identifier">identifier</a> to use for this task, appropriate to the study.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intendedUseDescription</code></th>
+						<td><p>A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is <code>nil</code>, the default
+                                  localized text is displayed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>trailmakingInstruction</code></th>
+						<td><p>Instructional content describing what the user needs to do when
+                                  the task begins. If the value of this parameter is <code>nil</code>,</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>trailType</code></th>
+						<td><p>Type of trail to display. Either <code>ORKTrailMakingTypeIdentifierA</code> or <code>ORKTrailMakingTypeIdentifierB</code></p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>Options that affect the features of the predefined task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An active trail making test task that can be presented with an <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a trail making test, the participant is asked to connect a series of cicles labeled 1,2,3&hellip; or
+1,A,2,B,3,C&hellip; and time to complete the test is recorded.</p>
+
+<p><code>ORKTrailMakingTypeIdentifierA</code> uses the pattern: 1-2-3-4-5-6-7.
+<code>ORKTrailMakingTypeIdentifierB</code> uses the pattern: 1-A-2-B-3-C-4-D-5-E-6-F-7</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKOrderedTask+ORKPredefinedActiveTask.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

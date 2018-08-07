@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>TestTaskViewControllerDelegate Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/taskViewController:didFinishWithReason:error:">- taskViewController:didFinishWithReason:error:</option>
+		
+		<option value="//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:">- taskViewController:stepViewControllerWillDisappear:navigationDirection:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">TestTaskViewControllerDelegate Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td><a href="../Protocols/ORKTaskViewControllerDelegate.html">ORKTaskViewControllerDelegate</a></td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKTaskTests.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/taskViewController:didFinishWithReason:error:" title="taskViewController:didFinishWithReason:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:didFinishWithReason:error:">&ndash;&nbsp;taskViewController:didFinishWithReason:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the task has finished.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> didFinishWithReason:(ORKTaskViewControllerFinishReason)<em>reason</em> error:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The <code></code>ORKTaskViewController<code></code>instance that is returning the result.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>reason</code></th>
+						<td><p>An <a href="../Constants/ORKTaskViewControllerFinishReason.html"><code>ORKTaskViewControllerFinishReason</code></a> value indicating how the user chose to complete the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>If failure occurred, an <code>NSError</code> object indicating the reason for the failure. The value of this parameter is <code>nil</code> if <code>result</code> does not indicate failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method when an unrecoverable error occurs,
+when the user has canceled the task (with or without saving), or when the user
+completes the last step in the task.</p>
+
+<p>In most circumstances, the receiver should dismiss the task view controller
+in response to this method, and may also need to collect and process the results
+of the task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:" title="taskViewController:stepViewControllerWillDisappear:navigationDirection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:">&ndash;&nbsp;taskViewController:stepViewControllerWillDisappear:navigationDirection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that a step will disappear.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> stepViewControllerWillDisappear:(ORKStepViewController *)<em>stepViewController</em> navigationDirection:(ORKStepViewControllerNavigationDirection)<em>direction</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> that has just finished.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>direction</code></th>
+						<td><p>The <a href="../Constants/ORKStepViewControllerNavigationDirection.html"><code>ORKStepViewControllerNavigationDirection</code></a> of navigation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This is called in the <a href="../Protocols/ORKStepViewControllerDelegate.html"><code>ORKStepViewControllerDelegate</code></a> method for <code>stepViewController:didFinishWithNavigationDirection:</code>
+after saving the result of the step to the task view controller and before navigating to the next/previous step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKTaskViewControllerDelegate Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/taskViewController:didChangeResult:">- taskViewController:didChangeResult:</option>
+		
+		<option value="//api/name/taskViewController:didFinishWithReason:error:">- taskViewController:didFinishWithReason:error:</option>
+		
+		<option value="//api/name/taskViewController:hasLearnMoreForStep:">- taskViewController:hasLearnMoreForStep:</option>
+		
+		<option value="//api/name/taskViewController:learnMoreForStep:">- taskViewController:learnMoreForStep:</option>
+		
+		<option value="//api/name/taskViewController:recorder:didFailWithError:">- taskViewController:recorder:didFailWithError:</option>
+		
+		<option value="//api/name/taskViewController:shouldPresentStep:">- taskViewController:shouldPresentStep:</option>
+		
+		<option value="//api/name/taskViewController:stepViewControllerWillAppear:">- taskViewController:stepViewControllerWillAppear:</option>
+		
+		<option value="//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:">- taskViewController:stepViewControllerWillDisappear:navigationDirection:</option>
+		
+		<option value="//api/name/taskViewController:viewControllerForStep:">- taskViewController:viewControllerForStep:</option>
+		
+		<option value="//api/name/taskViewControllerShouldConfirmCancel:">- taskViewControllerShouldConfirmCancel:</option>
+		
+		<option value="//api/name/taskViewControllerSupportsSaveAndRestore:">- taskViewControllerSupportsSaveAndRestore:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKTaskViewControllerDelegate Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKTaskViewController.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The task view controller delegate is responsible for processing the results
+of the task, exerting some control over how the controller behaves, and providing
+auxiliary content as needed.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/taskViewController:didFinishWithReason:error:" title="taskViewController:didFinishWithReason:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:didFinishWithReason:error:">&ndash;&nbsp;taskViewController:didFinishWithReason:error:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the task has finished.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> didFinishWithReason:(ORKTaskViewControllerFinishReason)<em>reason</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The <code></code>ORKTaskViewController<code></code>instance that is returning the result.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>reason</code></th>
+						<td><p>An <a href="../Constants/ORKTaskViewControllerFinishReason.html"><code>ORKTaskViewControllerFinishReason</code></a> value indicating how the user chose to complete the task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>If failure occurred, an <code>NSError</code> object indicating the reason for the failure. The value of this parameter is <code>nil</code> if <code>result</code> does not indicate failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method when an unrecoverable error occurs,
+when the user has canceled the task (with or without saving), or when the user
+completes the last step in the task.</p>
+
+<p>In most circumstances, the receiver should dismiss the task view controller
+in response to this method, and may also need to collect and process the results
+of the task.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:recorder:didFailWithError:" title="taskViewController:recorder:didFailWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:recorder:didFailWithError:">&ndash;&nbsp;taskViewController:recorder:didFailWithError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Signals that an error has been detected by a recorder.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> recorder:(ORKRecorder *)<em>recorder</em> didFailWithError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>recorder</code></th>
+						<td><p>The recorder that detected the error. <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> and <a href="../Classes/ORKRecorderConfiguration.html"><code>ORKRecorderConfiguration</code></a> objects can be found in the recorder instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error that was detected.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Recorder errors can occur during active steps, typically because sensor data is unavailable or there isn&rsquo;t enough disk space to record the results.
+You can use this method as an opportunity to respond to the error by, for example, logging and ignoring it.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewControllerSupportsSaveAndRestore:" title="taskViewControllerSupportsSaveAndRestore:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewControllerSupportsSaveAndRestore:">&ndash;&nbsp;taskViewControllerSupportsSaveAndRestore:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate if the state of the current uncompleted task should be saved.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)<em>taskViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if save and restore should be supported; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method to determine whether to offer
+a save option when the user attempts to cancel a task that is in progress.</p>
+
+<p>If this method is not implemented, the task view controller assumes that save and restore are not supported.
+If this method returns <code>YES</code>, it&rsquo;s recommended that you copy the value of the <code>restorationData</code> property of the
+task view controller and pass that data to <code>initWithTask:restorationData:</code> when it is time
+to create a new task view controller to continue from the point at which the user stopped.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewControllerShouldConfirmCancel:" title="taskViewControllerShouldConfirmCancel:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewControllerShouldConfirmCancel:">&ndash;&nbsp;taskViewControllerShouldConfirmCancel:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate if the cancel action should be confirmed</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController *)<em>taskViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> to confirm cancel action; <code>NO</code> to immediately discard the results.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method to determine whether or not to confirm
+result save or discard when user attempts to cancel a task that is in progress.</p>
+
+<p>If this method is not implemented, the task view controller assumes that cancel should be confirmed.
+If this method returns <code>YES</code>, then cancel action will be confirmed.
+If this method returns <code>NO</code>, then the results will immediately be discarded.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:hasLearnMoreForStep:" title="taskViewController:hasLearnMoreForStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:hasLearnMoreForStep:">&ndash;&nbsp;taskViewController:hasLearnMoreForStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate if there is Learn More content for this step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> hasLearnMoreForStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step for which the task view controller needs to know if there is Learn More content.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>NO</code> if there is no Learn More content to display.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method to determine whether a
+Learn More button should be displayed for the step.</p>
+
+<p>The standard templates in ResearchKit for all types of steps include a button
+labeled Learn More (or a variant). In consent steps, this is internal to
+the implementations of the step and step view controller, but in all other steps,
+the task view controller asks its delegate to determine if Learn More content is available,
+and to request that it be displayed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:learnMoreForStep:" title="taskViewController:learnMoreForStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:learnMoreForStep:">&ndash;&nbsp;taskViewController:learnMoreForStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the user has tapped the Learn More button in the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> learnMoreForStep:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> that reported the Learn More event to the task view controller.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The standard templates in ResearchKit for all types of steps include a button
+labeled Learn More (or a variant). In consent steps this is internal to
+the implementations of the step and step view controller, but in all other steps,
+the task view controller asks its delegate to determine if Learn More content is available.</p>
+
+<p>This method is called only if the delegate returns <code>YES</code> to
+<a href="#//api/name/taskViewController:hasLearnMoreForStep:"><code>taskViewController:hasLearnMoreForStep:</code></a> for the current step, and the user
+subsequently taps on the Learn More button.</p>
+
+<p>When this method is called, the app should respond to the Learn More action by
+presenting a dialog or other view (possibly modal) that contains the Learn More content.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:viewControllerForStep:" title="taskViewController:viewControllerForStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:viewControllerForStep:">&ndash;&nbsp;taskViewController:viewControllerForStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate for a custom view controller for the specified step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable ORKStepViewController *)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> viewControllerForStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step for which a view controller is requested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A custom view controller, or <code>nil</code> to request the default step controller for this step.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is implemented, the task view controller calls it to obtain a
+step view controller for the step.</p>
+
+<p>In most circumstances, the task view controller
+can determine which view controller to instantiate for a step. However, if
+you want to provide a specific view controller instance, you can call this method to do so.</p>
+
+<p>The delegate should provide a step view controller implementation for any custom step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:shouldPresentStep:" title="taskViewController:shouldPresentStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:shouldPresentStep:">&ndash;&nbsp;taskViewController:shouldPresentStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the delegate if the task view controller should proceed to the specified step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> shouldPresentStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step for which presentation is requested.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if navigation should proceed to the specified step; <code>NO</code> if navigation should not proceed.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method before creating a step view
+controller for the next or previous step.</p>
+
+<p>Generally, when a step is available, the task view controller presents it when
+the user taps a forward or backward navigation button, but the results entered or other circumstances can make this action inappropriate. In these
+circumstances, you can implement this delegate method and return <code>NO</code>.</p>
+
+<p>If you return <code>NO</code>, it&rsquo;s often appropriate to present a dialog or take
+some other UI action to explain why navigation was denied.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:stepViewControllerWillAppear:" title="taskViewController:stepViewControllerWillAppear:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:stepViewControllerWillAppear:">&ndash;&nbsp;taskViewController:stepViewControllerWillAppear:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that a step view controller is about to be displayed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> stepViewControllerWillAppear:(ORKStepViewController *)<em>stepViewController</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> that is about to be displayed.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method before presenting the step
+view controller.</p>
+
+<p>This method gives you an opportunity to modify the step view controller before presentation.
+For example, you might want to modify the <code>learnMoreButtonTitle</code> or <code>continueButtonTitle</code>
+properties, or modify other button state. Another possible use case is when a particular
+step view controller requires additional setup before presentation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:" title="taskViewController:stepViewControllerWillDisappear:navigationDirection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:stepViewControllerWillDisappear:navigationDirection:">&ndash;&nbsp;taskViewController:stepViewControllerWillDisappear:navigationDirection:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that a step will disappear.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> stepViewControllerWillDisappear:(ORKStepViewController *)<em>stepViewController</em> navigationDirection:(ORKStepViewControllerNavigationDirection)<em>direction</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepViewController</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> that has just finished.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>direction</code></th>
+						<td><p>The <a href="../Constants/ORKStepViewControllerNavigationDirection.html"><code>ORKStepViewControllerNavigationDirection</code></a> of navigation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This is called in the <a href="../Protocols/ORKStepViewControllerDelegate.html"><code>ORKStepViewControllerDelegate</code></a> method for <code>stepViewController:didFinishWithNavigationDirection:</code>
+after saving the result of the step to the task view controller and before navigating to the next/previous step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/taskViewController:didChangeResult:" title="taskViewController:didChangeResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskViewController:didChangeResult:">&ndash;&nbsp;taskViewController:didChangeResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate that the result has substantively changed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)taskViewController:(ORKTaskViewController *)<em>taskViewController</em> didChangeResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskViewController</code></th>
+						<td><p>The calling <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instance.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>result</code></th>
+						<td><p>The current value of the result.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller calls this method when steps start or finish, or if an answer has
+changed in the current step due to editing or other user interaction.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTaskViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

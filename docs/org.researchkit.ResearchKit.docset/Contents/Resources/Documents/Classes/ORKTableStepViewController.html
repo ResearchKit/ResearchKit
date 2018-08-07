@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKTableStepViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/tableStep">tableStep</option>
+		
+		<option value="//api/name/tableView">tableView</option>
+		
+		<option value="//api/name/tableViewStyle">tableViewStyle</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/continueButtonEnabled">- continueButtonEnabled</option>
+		
+		<option value="//api/name/setCancelButtonItem:">- setCancelButtonItem:</option>
+		
+		<option value="//api/name/updateButtonStates">- updateButtonStates</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKTableStepViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStepViewController.html">ORKStepViewController</a> : UIViewController</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>UITableViewDataSource<br />UITableViewDelegate</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKTableStepViewController.h<br />ORKTableStepViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKTableStepViewController</code> class is an base class that inherits from <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a>
+and provides a UITableView.</p>
+
+<p><code>ORKTableStepViewController</code> is designed to take advantage of the internal class methods
+used by <a href="../Classes/ORKFormStepViewController.html"><code>ORKFormStepViewController</code></a>, <a href="../Classes/ORKQuestionStepViewController.html"><code>ORKQuestionStepViewController</code></a> and <a href="../Classes/ORKReviewStepViewController.html"><code>ORKReviewStepViewController</code></a>
+to allow for a consistent UI in a custom implementation of a main view that is a UITableView.</p>
+
+<p>This will class will setup a consistent look for the title, text, learn more, skip and next UI elements
+that are used by these classes as well as most of the other view controllers within this framework by
+automatically adding them as the header and footer of the tableview.</p>
+
+<p>The base class implementation REQUIRES using an <a href="../Classes/ORKTableStep.html"><code>ORKTableStep</code></a> as its data source. If you do not inherit
+the step from <a href="../Classes/ORKTableStep.html">ORKTableStep</a>, then subclasses MUST override <code>-cellForRowAtIndexPath</code>.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/tableStep" title="tableStep"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tableStep">&nbsp;&nbsp;tableStep</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The step associated with this view controller if it conforms to <a href="../Protocols/ORKTableStepSource.html">ORKTableStepSource</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, nullable) id&lt;ORKTableStepSource&gt; tableStep</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The step associated with this view controller if it conforms to <a href="../Protocols/ORKTableStepSource.html">ORKTableStepSource</a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/tableView" title="tableView"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tableView">&nbsp;&nbsp;tableView</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The table view managed by the controller object.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) UITableView *tableView</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The table view managed by the controller object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/continueButtonEnabled" title="continueButtonEnabled"></a>
+	<h3 class="method-title"><code><a href="#//api/name/continueButtonEnabled">&ndash;&nbsp;continueButtonEnabled</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Whether or not the continue button should be enabled for this step. Default = YES</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)continueButtonEnabled</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>State of continue button</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Set to <code>NO</code> if there is a validation that needs to be handled before the step
+can progress. Your implementation is responsible for overriding selection as needed
+to trigger validation and state changes.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateButtonStates" title="updateButtonStates"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateButtonStates">&ndash;&nbsp;updateButtonStates</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Update the button state for the skip and continue buttons</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)updateButtonStates</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/setCancelButtonItem:" title="setCancelButtonItem:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setCancelButtonItem:">&ndash;&nbsp;setCancelButtonItem:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The cancel button item.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setCancelButtonItem:(UIBarButtonItem *)<em>cancelButtonItem</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The cancel button item controls the Cancel button displayed in the navigation bar
+when the <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> view controller is current.
+This property lets you control the appearance and target of the
+Cancel button at runtime.</p>
+
+<p>When the value of the property is <code>nil</code>, the Cancel button is not displayed; otherwise, the title, target,
+and action associated with the Cancel button item are used (other properties of <code>UIBarButtonItem</code>
+are ignored).</p>
+
+<p>The cancel button item is updated during view loading and when the value of the <a href="../Classes/ORKStepViewController.html#//api/name/step"><code>step</code></a> property
+is changed, but is safe to
+set in the <code>taskViewController:stepViewControllerWillAppear:</code> <a href="../Classes/ORKStepViewController.html#//api/name/delegate">delegate</a> callback.</p>
+
+<p>Subclasses can safely modify this property any time after calling <a href="../Classes/ORKStepViewController.html#//api/name/viewWillAppear:"><code>viewWillAppear:</code></a> on super.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/tableViewStyle" title="tableViewStyle"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tableViewStyle">&nbsp;&nbsp;tableViewStyle</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The style to use for the <a href="#//api/name/tableView">tableView</a>. default = <code>UITableViewStyleGrouped</code> if more than one section
+and <code>UITableViewStylePlain</code> if there is only 1 section.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) UITableViewStyle tableViewStyle</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The style to use for the <a href="#//api/name/tableView">tableView</a>. default = <code>UITableViewStyleGrouped</code> if more than one section
+and <code>UITableViewStylePlain</code> if there is only 1 section.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStepViewController_Internal.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

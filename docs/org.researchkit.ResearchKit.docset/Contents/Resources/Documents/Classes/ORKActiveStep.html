@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKActiveStep Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/finishedSpokenInstruction">finishedSpokenInstruction</option>
+		
+		<option value="//api/name/image">image</option>
+		
+		<option value="//api/name/recorderConfigurations">recorderConfigurations</option>
+		
+		<option value="//api/name/shouldContinueOnFinish">shouldContinueOnFinish</option>
+		
+		<option value="//api/name/shouldPlaySoundOnFinish">shouldPlaySoundOnFinish</option>
+		
+		<option value="//api/name/shouldPlaySoundOnStart">shouldPlaySoundOnStart</option>
+		
+		<option value="//api/name/shouldShowDefaultTimer">shouldShowDefaultTimer</option>
+		
+		<option value="//api/name/shouldSpeakCountDown">shouldSpeakCountDown</option>
+		
+		<option value="//api/name/shouldSpeakRemainingTimeAtHalfway">shouldSpeakRemainingTimeAtHalfway</option>
+		
+		<option value="//api/name/shouldStartTimerAutomatically">shouldStartTimerAutomatically</option>
+		
+		<option value="//api/name/shouldUseNextAsSkipButton">shouldUseNextAsSkipButton</option>
+		
+		<option value="//api/name/shouldVibrateOnFinish">shouldVibrateOnFinish</option>
+		
+		<option value="//api/name/shouldVibrateOnStart">shouldVibrateOnStart</option>
+		
+		<option value="//api/name/spokenInstruction">spokenInstruction</option>
+		
+		<option value="//api/name/stepDuration">stepDuration</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/stepViewControllerClass">+ stepViewControllerClass</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:">- initWithIdentifier:</option>
+		
+		<option value="//api/name/isRestorable">- isRestorable</option>
+		
+		<option value="//api/name/requestedHealthKitTypesForReading">- requestedHealthKitTypesForReading</option>
+		
+		<option value="//api/name/requestedPermissions">- requestedPermissions</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKActiveStep Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStep.html">ORKStep</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKActiveStep.h<br />ORKActiveStep.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKActiveStep</code> class is the base class for steps in active tasks, which
+are steps that collect sensor data in a semi-controlled environment, as opposed
+to the purely passive data collection enabled by HealthKit, or the more subjective data
+collected when users fill in surveys.</p>
+
+<p>In addition to the behaviors of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>, active steps have the concept of
+life cycle, which includes a defined start and finish.</p>
+
+<p>The ResearchKit framework provides built-in behaviors that allow active steps to play voice prompts, speak a count down, and have a
+defined duration.</p>
+
+<p>To present an active step in your app, it&rsquo;s likely that you will subclass <code>ORKActiveStep</code> and
+<a href="../Classes/ORKActiveStepViewController.html"><code>ORKActiveStepViewController</code></a> to present custom UI and custom
+prompts. For example subclasses, see <a href="../Classes/ORKSpatialSpanMemoryStep.html"><code>ORKSpatialSpanMemoryStep</code></a> or <a href="../Classes/ORKFitnessStep.html"><code>ORKFitnessStep</code></a>.
+Active steps may also need <a href="../Classes/ORKResult.html"><code>ORKResult</code></a> subclasses to record their results
+if these don&rsquo;t come purely from recorders.</p>
+
+<p>If you develop a new active step subclass, consider contributing your
+code to the ResearchKit project so that it&rsquo;s available for others to use in
+their studies.</p>
+
+<p>See also: <a href="../Classes/ORKActiveStepViewController.html"><code>ORKActiveStepViewController</code></a></p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/stepDuration" title="stepDuration"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepDuration">&nbsp;&nbsp;stepDuration</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The duration of the step in seconds.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSTimeInterval stepDuration</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the step duration is greater than zero, a built-in timer starts when the
+step starts. If <a href="#//api/name/shouldStartTimerAutomatically"><code>shouldStartTimerAutomatically</code></a> is set, the timer
+starts when the step&rsquo;s view appears. When the timer expires, a sound or
+vibration may be played. If <a href="#//api/name/shouldContinueOnFinish"><code>shouldContinueOnFinish</code></a> is set, the step
+automatically navigates forward when the timer expires.</p>
+
+<p>The default value of this property is <code>0</code>, which disables the built-in timer.</p>
+
+<p>See also: <a href="../Classes/ORKActiveStepViewController.html"><code>ORKActiveStepViewController</code></a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldShowDefaultTimer" title="shouldShowDefaultTimer"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldShowDefaultTimer">&nbsp;&nbsp;shouldShowDefaultTimer</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to show a view with a default timer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldShowDefaultTimer</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default timer UI is not used in any of the current predefined tasks,
+but it can be displayed in a simple active task that does not require custom
+UI and needs only a count down timer on screen during data collection.</p>
+
+<p>Note that this property is ignored if <a href="#//api/name/stepDuration"><code>stepDuration</code></a> is <code>0</code>.</p>
+
+<p>The default value of this property is <code>YES</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldSpeakCountDown" title="shouldSpeakCountDown"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldSpeakCountDown">&nbsp;&nbsp;shouldSpeakCountDown</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to speak the last few seconds in the count down of the
+duration of a timed step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldSpeakCountDown</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When the value of this property is <code>YES</code>, <code>AVSpeechSynthesizer</code> is used to synthesize the countdown. Note that this property is ignored if VoiceOver is enabled.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldSpeakRemainingTimeAtHalfway" title="shouldSpeakRemainingTimeAtHalfway"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldSpeakRemainingTimeAtHalfway">&nbsp;&nbsp;shouldSpeakRemainingTimeAtHalfway</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to speak the halfway point in the count down of the
+duration of a timed step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldSpeakRemainingTimeAtHalfway</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When the value of this property is <code>YES</code>, <code>AVSpeechSynthesizer</code> is used to synthesize the countdown. Note that this property is ignored if VoiceOver is enabled.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldStartTimerAutomatically" title="shouldStartTimerAutomatically"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldStartTimerAutomatically">&nbsp;&nbsp;shouldStartTimerAutomatically</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to start the count down timer automatically when the step starts, or
+require the user to take some explicit action to start the step, such as tapping a button.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldStartTimerAutomatically</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Usually the explicit action needs to come from custom UI in an
+<a href="../Classes/ORKActiveStepViewController.html"><code>ORKActiveStepViewController</code></a> subclass.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldPlaySoundOnStart" title="shouldPlaySoundOnStart"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldPlaySoundOnStart">&nbsp;&nbsp;shouldPlaySoundOnStart</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to play a default sound when the step starts.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldPlaySoundOnStart</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldPlaySoundOnFinish" title="shouldPlaySoundOnFinish"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldPlaySoundOnFinish">&nbsp;&nbsp;shouldPlaySoundOnFinish</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to play a default sound when the step finishes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldPlaySoundOnFinish</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldVibrateOnStart" title="shouldVibrateOnStart"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldVibrateOnStart">&nbsp;&nbsp;shouldVibrateOnStart</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to vibrate when the step starts.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldVibrateOnStart</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldVibrateOnFinish" title="shouldVibrateOnFinish"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldVibrateOnFinish">&nbsp;&nbsp;shouldVibrateOnFinish</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to vibrate when the step finishes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldVibrateOnFinish</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldUseNextAsSkipButton" title="shouldUseNextAsSkipButton"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldUseNextAsSkipButton">&nbsp;&nbsp;shouldUseNextAsSkipButton</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the Next button should double as a skip action before
+the step finishes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldUseNextAsSkipButton</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When the value of this property is <code>YES</code>, the ResearchKit framework hides the skip button and makes the Next button function as a skip button when the step has not yet finished.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/shouldContinueOnFinish" title="shouldContinueOnFinish"></a>
+	<h3 class="method-title"><code><a href="#//api/name/shouldContinueOnFinish">&nbsp;&nbsp;shouldContinueOnFinish</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether to transition automatically when the step finishes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL shouldContinueOnFinish</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When the value of this property is <code>YES</code>, the active step view controller automatically performs the
+continue action when the <a href="../Classes/ORKActiveStepViewController.html#//api/name/finish"><code>[ORKActiveStepViewController finish]</code></a> method
+is called.</p>
+
+<p>The default value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/spokenInstruction" title="spokenInstruction"></a>
+	<h3 class="method-title"><code><a href="#//api/name/spokenInstruction">&nbsp;&nbsp;spokenInstruction</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Localized text that represents an instructional voice prompt.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *spokenInstruction</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Instructional speech begins when the step starts. If VoiceOver is active,
+the instruction is spoken by VoiceOver.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/finishedSpokenInstruction" title="finishedSpokenInstruction"></a>
+	<h3 class="method-title"><code><a href="#//api/name/finishedSpokenInstruction">&nbsp;&nbsp;finishedSpokenInstruction</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Localized text that represents an instructional voice prompt for when the step finishes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *finishedSpokenInstruction</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Instructional speech begins when the step finishes. If VoiceOver is active,
+the instruction is spoken by VoiceOver.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/image" title="image"></a>
+	<h3 class="method-title"><code><a href="#//api/name/image">&nbsp;&nbsp;image</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An image to be displayed below the instructions for the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong, nullable) UIImage *image</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The image can be stretched to fit the available space. When choosing a size
+for this asset, be sure to take into account the variations in device form factors.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/recorderConfigurations" title="recorderConfigurations"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recorderConfigurations">&nbsp;&nbsp;recorderConfigurations</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An array of recorder configurations that define the parameters for recorders to be
+run during a step to collect sensor or other data.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSArray&lt;ORKRecorderConfiguration*&gt; *recorderConfigurations</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If you want to collect data from sensors while the step is in progress,
+add one or more recorder configurations to the array. The active step view
+controller instantiates recorders and collates their results as children
+of the step result.</p>
+
+<p>The set of recorder configurations is scanned when populating the
+<a href="#//api/name/requestedHealthKitTypesForReading"><code>requestedHealthKitTypesForReading</code></a> and <a href="#//api/name/requestedPermissions"><code>requestedPermissions</code></a> properties.</p>
+
+<p>See also: <a href="../Classes/ORKRecorderConfiguration.html"><code>ORKRecorderConfiguration</code></a> and <a href="../Classes/ORKRecorder.html"><code>ORKRecorder</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKActiveStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/stepViewControllerClass" title="stepViewControllerClass"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerClass">+&nbsp;stepViewControllerClass</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (Class)stepViewControllerClass</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isRestorable" title="isRestorable"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isRestorable">&ndash;&nbsp;isRestorable</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether a <a href="../Classes/ORKStep.html#//api/name/task">task</a> can be restored to the step
+during state restoration. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)isRestorable</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>By default, the value of this property is <code>YES</code>, but subclasses of <code>ORKStep</code> might use <code>NO</code>.</p>
+
+<p>If a <a href="../Classes/ORKStep.html#//api/name/task">task</a> cannot be restored to the step, the <a href="../Classes/ORKStep.html#//api/name/task">task</a> is typically restored to the
+last restorable step in the <a href="../Classes/ORKStep.html#//api/name/task">task</a>, or to the first step, if
+no restorable steps are available.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:">&ndash;&nbsp;initWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedHealthKitTypesForReading" title="requestedHealthKitTypesForReading"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedHealthKitTypesForReading">&ndash;&nbsp;requestedHealthKitTypesForReading</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of HealthKit types the step requests for reading. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSSet&lt;HKObjectType*&gt; *)requestedHealthKitTypesForReading</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <a href="../Classes/ORKStep.html#//api/name/task">task</a> view controller uses this set of types when constructing a list of
+all the HealthKit types required by all the steps in a <a href="../Classes/ORKStep.html#//api/name/task">task</a>, so that it can
+present the HealthKit access dialog just once during that <a href="../Classes/ORKStep.html#//api/name/task">task</a>.</p>
+
+<p>By default, the property scans the recorders and collates the HealthKit
+types the recorders require. Subclasses may override this implementation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedPermissions" title="requestedPermissions"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedPermissions">&ndash;&nbsp;requestedPermissions</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of access permissions required for the step. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKPermissionMask)requestedPermissions</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The permission mask is used by the <a href="../Classes/ORKStep.html#//api/name/task">task</a> view controller to determine the types of
+access to request from users when they complete the initial instruction steps
+in a <a href="../Classes/ORKStep.html#//api/name/task">task</a>. If your step requires access to APIs that limit access, include
+the permissions you require in this mask.</p>
+
+<p>By default, the property scans the recorders and collates the permissions
+required by the recorders. Subclasses may override this implementation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

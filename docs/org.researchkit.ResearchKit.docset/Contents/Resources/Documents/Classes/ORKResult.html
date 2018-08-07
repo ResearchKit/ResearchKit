@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKResult Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/endDate">endDate</option>
+		
+		<option value="//api/name/identifier">identifier</option>
+		
+		<option value="//api/name/saveable">saveable</option>
+		
+		<option value="//api/name/startDate">startDate</option>
+		
+		<option value="//api/name/userInfo">userInfo</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithIdentifier:">- initWithIdentifier:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKResult Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKResult.h<br />ORKResult.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKResult</code> class defines the attributes of a result from one step or a group
+of steps. When you use the ResearchKit framework APIs, you typically get a result from the <code>result</code> property
+of either <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> or <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a>.
+Certain types of results can contain other results, which together express a hierarchy; examples of these types of results are <a href="../Classes/ORKCollectionResult.html"><code>ORKCollectionResult</code></a> subclasses, such as <a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a> and <a href="../Classes/ORKTaskResult.html"><code>ORKTaskResult</code></a>.</p>
+
+<p>When you receive a result, you can store it temporarily by archiving it with
+<code>NSKeyedArchiver</code>, because all <code>ORKResult</code> objects implement <code>NSSecureCoding</code>. If you want to serialize the result object to other formats, you&rsquo;re responsible for implementing this.</p>
+
+<p>The result object hierarchy does not necessarily include all the data collected
+during a task. Some result objects, such as <a href="../Classes/ORKFileResult.html"><code>ORKFileResult</code></a>, may refer to files
+in the filesystem that were generated during the task. These files are easy to find, because they are all
+located in the output directory of the task view controller.</p>
+
+<p>It&rsquo;s recommended that you use <code>NSFileProtectionComplete</code> (at a minimum) to protect these files, and that you similarly protect all serialization of <code>ORKResult</code> objects that you write to disk. It is also generally helpful to keep the results together with the referenced files as you submit them to a back-end server. For example, it can be convenient to zip all data corresponding to a particular task result into a single compressed archive.</p>
+
+<p>Every object in the result hierarchy has an <a href="#//api/name/identifier">identifier</a> that should correspond
+to the <a href="#//api/name/identifier">identifier</a> of an object in the original step hierarchy. Similarly, every
+object has a start date and an end date that correspond to the range of
+times during which the result was collected. In an <a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a> object, for example,
+the start and end dates cover the range of time during which the step view controller was visible on
+screen.</p>
+
+<p>When you implement a new type of step, it is usually helpful to create a new
+<code>ORKResult</code> subclass to hold the type of result data the step can generate, unless it makes sense to use an existing subclass. Return your custom result subclass as one of the results attached to the step&rsquo;s <a href="../Classes/ORKStepResult.html"><code>ORKStepResult</code></a> object.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:">&ndash;&nbsp;initWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized result using the specified <a href="../Classes/ORKResult.html#//api/name/identifier">identifier</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique <a href="../Classes/ORKResult.html#//api/name/identifier">identifier</a> of the result.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Typically, objects such as <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> and <a href="../Classes/ORKTaskViewController.html"><code>ORKTaskViewController</code></a> instantiate result (and <code>ORKResult</code> subclass) objects; you seldom need to instantiate a result object in your code.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A meaningful identifier for the result.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The identifier can be used to identify the question
+that was asked or the task that was completed to produce the result. Typically, the identifier is copied from the originating object by the view controller or recorder that produces it.</p>
+
+<p>For example, a task result receives its identifier from a task,
+a step result receives its identifier from a step,
+and a question result receives its identifier from a step or a form item.
+Results that are generated by recorders also receive an identifier that corresponds to
+that recorder.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startDate" title="startDate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startDate">&nbsp;&nbsp;startDate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The time when the task, step, or data collection began.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSDate *startDate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The value of this property is set by the view controller or recorder that produces the result,
+to indicate when data collection started.</p>
+
+<p>Note that for instantaneous items, <code>startDate</code> and <a href="#//api/name/endDate"><code>endDate</code></a> can have the same value, and should
+generally correspond to the end of the instantaneous data collection period.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/endDate" title="endDate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/endDate">&nbsp;&nbsp;endDate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The time when the task, step, or data collection stopped.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSDate *endDate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The value of this property is set by the view controller or recorder that produces the result,
+to indicate when data collection stopped.</p>
+
+<p>Note that for instantaneous items, <a href="#//api/name/startDate"><code>startDate</code></a> and <code>endDate</code> can have the same value, and should
+generally correspond to the end of the instantaneous data collection period.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/userInfo" title="userInfo"></a>
+	<h3 class="method-title"><code><a href="#//api/name/userInfo">&nbsp;&nbsp;userInfo</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Metadata that describes the conditions under which the result was acquired.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSDictionary *userInfo</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <code>userInfo</code> dictionary can be set by the view controller or recorder
+that produces the result. However, it&rsquo;s often a better choice to use a new <code>ORKResult</code> subclass for passing additional information back to code that uses
+the framework, because using
+typed accessors is safer than using a dictionary.</p>
+
+<p>The user info dictionary must contain only keys and values that are suitable for property
+list or JSON serialization.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/saveable" title="saveable"></a>
+	<h3 class="method-title"><code><a href="#//api/name/saveable">&nbsp;&nbsp;saveable</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A boolean value indicating whether this result can be saved in a save and
+restore procedure.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, getter=isSaveable) BOOL saveable</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This is currently considered a private method, but overriding the getter in a result
+is the correct way to prevent this result being considered as saveable for
+the purpose of deciding whether to offer a &ldquo;Save&rdquo; option when the user
+cancels a task in progress.</p>
+
+<p><code>ORKResult</code> subclasses should return YES if they have data that the user
+might want to be able to restore if the task were interrupted and later
+resumed from the current state.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResult_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
