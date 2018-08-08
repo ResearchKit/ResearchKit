@@ -164,6 +164,10 @@
     [super viewDidAppear:animated];
     [self start];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        // Put focus on the direct touch area immediately so that the first touch gets registered
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _trailmakingContentView);
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

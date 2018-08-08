@@ -519,6 +519,9 @@ NSString *const ORKTappingStepIdentifier = @"tapping";
             } else {
                 step.text = ORKLocalizedString(@"TAPPING_INSTRUCTION_LEFT", nil);
             }
+            if (UIAccessibilityIsVoiceOverRunning()) {
+                step.text = [NSString stringWithFormat:ORKLocalizedString(@"AX_TAPPING_INSTRUCTION_VOICEOVER", nil), step.text];
+            }
             step.stepDuration = duration;
             step.shouldContinueOnFinish = YES;
             step.recorderConfigurations = recorderConfigurations;
@@ -1534,10 +1537,15 @@ NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
         }
     }
     
+    NSString *instructionText = shortSpeechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_INSTRUCTION", nil);
     {
         ORKToneAudiometryStep *step = [[ORKToneAudiometryStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-        step.text = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        NSString *prepText = speechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        if (UIAccessibilityIsVoiceOverRunning()) {
+            prepText = [NSString stringWithFormat:ORKLocalizedString(@"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER", nil), prepText, instructionText];
+        }
+        step.text = prepText;
         step.toneDuration = CGFLOAT_MAX;
         step.practiceStep = YES;
         ORKStepArrayAddStep(steps, step);
@@ -1555,7 +1563,7 @@ NSString *const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
     {
         ORKToneAudiometryStep *step = [[ORKToneAudiometryStep alloc] initWithIdentifier:ORKToneAudiometryStepIdentifier];
         step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
-        step.text = shortSpeechInstruction ? : ORKLocalizedString(@"TONE_AUDIOMETRY_INSTRUCTION", nil);
+        step.text = instructionText;
         step.toneDuration = toneDuration;
 
         ORKStepArrayAddStep(steps, step);
@@ -1635,6 +1643,9 @@ NSString *const ORKdBHLToneAudiometryStep2Identifier = @"dBHL2.tone.audiometry";
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_TASK_TITLE", nil);
             step.text = ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_INTRO_TEXT", nil);
+            if (UIAccessibilityIsVoiceOverRunning()) {
+                step.text = [NSString stringWithFormat:ORKLocalizedString(@"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT", nil), step.text];
+            }
             step.image = [UIImage imageNamed:@"audiometry" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             
@@ -2559,6 +2570,9 @@ NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
             step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
             step.text = trailmakingInstruction ? : ORKLocalizedString(@"TRAILMAKING_INTRO_TEXT",nil);
             step.detailText = ORKLocalizedString(@"TRAILMAKING_CALL_TO_ACTION", nil);
+            if (UIAccessibilityIsVoiceOverRunning()) {
+                step.detailText = [NSString stringWithFormat:ORKLocalizedString(@"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER", nil), step.detailText];
+            }
             step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             
