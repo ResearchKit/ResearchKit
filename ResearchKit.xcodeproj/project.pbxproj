@@ -578,6 +578,7 @@
 		BC1C032C1CA301E300869355 /* ORKHeightPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1C032A1CA301E300869355 /* ORKHeightPicker.h */; };
 		BC1C032D1CA301E300869355 /* ORKHeightPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1C032B1CA301E300869355 /* ORKHeightPicker.m */; };
 		BC2908BC1FBD628F0030AB89 /* ORKTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2908BB1FBD628F0030AB89 /* ORKTypes.m */; };
+		BC40696121104DDF00A4100C /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B183A5951A8535D100C76870 /* ResearchKit.framework */; };
 		BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4194271AE8453A00073D6B /* ORKObserver.h */; };
 		BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4194281AE8453A00073D6B /* ORKObserver.m */; };
 		BC4A213F1C85FC0000BFC271 /* ORKBarGraphChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4A213D1C85FC0000BFC271 /* ORKBarGraphChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -611,6 +612,7 @@
 		BCB96C131B19C0EC002A0B96 /* ORKStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */; };
 		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; };
 		BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */; };
+		BCCE9EC121104B2200B809F8 /* ORKConsentDocument_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BCCE9EC021104B2200B809F8 /* ORKConsentDocument_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BCD192DF1B81240400FCC08A /* ORKPieChartPieView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */; };
 		BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */; };
 		BCD192E71B81243900FCC08A /* ORKPieChartLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192E51B81243900FCC08A /* ORKPieChartLegendView.h */; };
@@ -1372,6 +1374,7 @@
 		BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKStepTests.m; sourceTree = "<group>"; };
 		BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKYAxisView.h; path = Charts/ORKYAxisView.h; sourceTree = "<group>"; };
 		BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ORKYAxisView.m; path = Charts/ORKYAxisView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		BCCE9EC021104B2200B809F8 /* ORKConsentDocument_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentDocument_Private.h; sourceTree = "<group>"; };
 		BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartPieView.h; path = Charts/ORKPieChartPieView.h; sourceTree = "<group>"; };
 		BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartPieView.m; path = Charts/ORKPieChartPieView.m; sourceTree = "<group>"; };
 		BCD192E51B81243900FCC08A /* ORKPieChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartLegendView.h; path = Charts/ORKPieChartLegendView.h; sourceTree = "<group>"; };
@@ -1489,6 +1492,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC40696121104DDF00A4100C /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2473,6 +2477,7 @@
 		B12EFF451AB214E000A80147 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BCCE9EC021104B2200B809F8 /* ORKConsentDocument_Private.h */,
 				86C40BF21A8D7C5C00081FAC /* ORKConsentDocument.h */,
 				86C40BF31A8D7C5C00081FAC /* ORKConsentDocument.m */,
 				86C40BF41A8D7C5C00081FAC /* ORKConsentDocument_Internal.h */,
@@ -3144,6 +3149,7 @@
 				10864CA21B27146B000F4158 /* ORKPSATContentView.h in Headers */,
 				618DA0501A93D0D600E63AA8 /* ORKAccessibilityFunctions.h in Headers */,
 				FF5E3CCB1D23444400ECE4B7 /* ORKPageStepViewController.h in Headers */,
+				BCCE9EC121104B2200B809F8 /* ORKConsentDocument_Private.h in Headers */,
 				86C40C721A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.h in Headers */,
 				106FF2A61B665CF5004EACF2 /* ORKHolePegTestPlaceContentView.h in Headers */,
 				86C40CA41A8D7C5C00081FAC /* ORKLocationRecorder.h in Headers */,
@@ -3447,7 +3453,7 @@
 			attributes = {
 				CLASSPREFIX = ORK;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = researchkit.org;
 				TargetAttributes = {
 					86CC8E991AC09332001CCD89 = {
@@ -4013,12 +4019,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -4046,6 +4054,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TOOLCHAINS = default;
 			};
@@ -4063,12 +4072,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -4090,6 +4101,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				TOOLCHAINS = default;
 				VALIDATE_PRODUCT = YES;
@@ -4170,7 +4182,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4203,7 +4214,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
