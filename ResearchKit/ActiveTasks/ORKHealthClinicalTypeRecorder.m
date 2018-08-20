@@ -108,14 +108,11 @@
                                                           [results enumerateObjectsUsingBlock:^(HKClinicalRecord *clinicalRecord, NSUInteger idx, BOOL *stop) {
                                                               
                                                               NSError *error = nil;
-                                                              NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:clinicalRecord.FHIRResource.data options:kNilOptions error:&error];
+                                                              [_logger append:clinicalRecord.FHIRResource.data error:&error];
                                                               if (error) {
-                                                                  ORK_Log_Warning(@"Failed to serialize FHIRResource data with error: %@", error);
+                                                                  ORK_Log_Warning(@"Failed to add health records object to the logger with error: %@", error);
                                                                   return;
                                                               }
-                                                              error = nil;
-                                                              [_logger append:jsonArray error:&error];
-                                                              
                                                           }];
                                                       }];
     
