@@ -224,7 +224,7 @@
     result.finish = result.start - _rangeOfMotionAngle;
     result.minimum = result.start - _maxAngle;
     result.maximum = result.start - _minAngle;
-    result.range = result.maximum - result.start;
+    result.range = fabs(result.minimum - result.maximum);
     
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
