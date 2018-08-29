@@ -48,6 +48,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     NSMutableArray *_cancelButtonConstraints;
     
     UIVisualEffectView *effectView;
+    UIColor *_appTintColor;
     
     BOOL _continueButtonJustTapped;
 }
@@ -60,6 +61,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
         [self setupViews];
         [self setupFootnoteLabel];
         self.preservesSuperviewLayoutMargins = NO;
+        _appTintColor = nil;
         self.skipButtonStyle = ORKNavigationContainerButtonStyleTextBold;
         self.cancelButtonStyle = ORKNavigationContainerButtonStyleTextBold;
         [self setUpConstraints];
@@ -92,6 +94,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _continueButton.exclusiveTouch = YES;
     _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (_appTintColor) {
+        _continueButton.normalTintColor = _appTintColor;
+    }
     
 }
 
@@ -106,6 +111,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _cancelButtonView.translatesAutoresizingMaskIntoConstraints = NO;
 
     [_cancelButtonView addSubview:_cancelButton];
+    if (_appTintColor) {
+        _cancelButton.normalTintColor = _appTintColor;
+    }
     [self setCancelButtonConstraints];
 }
 
@@ -175,7 +183,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
     _skipButtonView.translatesAutoresizingMaskIntoConstraints = NO;
     [_skipButtonView addSubview:_skipButton];
-
+    if (_appTintColor) {
+        _skipButton.normalTintColor = _appTintColor;
+    }
     [self setSkipButtonConstraints];
 }
 
@@ -313,6 +323,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
             [_parentStackView addArrangedSubview:subStack];
         }
     }
+    _appTintColor = [[UIApplication sharedApplication].delegate window].tintColor;
     [self setupContinueButton];
     [self setupCancelButton];
     [self setupSkipButton];
