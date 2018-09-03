@@ -45,10 +45,6 @@ ORK_CLASS_AVAILABLE
     double _newAngle;
     double _minAngle;
     double _maxAngle;
-    //double _rangeOfMotionAngle;
-    //double _highestAngle;
-    //double _lowestAngle;
-    //double _lastAngle;
 }
 
 @end
