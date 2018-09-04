@@ -268,10 +268,20 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_axVoiceOverStatusChanged:)
-                                                 name:UIAccessibilityVoiceOverStatusChanged
-                                               object:nil];
+    if (@available(iOS 11.0, *)) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_axVoiceOverStatusChanged:)
+                                                     name:UIAccessibilityVoiceOverStatusDidChangeNotification
+                                                   object:nil];
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_axVoiceOverStatusChanged:)
+                                                     name:UIAccessibilityVoiceOverStatusChanged
+                                                   object:nil];
+#pragma clang diagnostic pop
+    }
 }
 
 - (void)dealloc {
