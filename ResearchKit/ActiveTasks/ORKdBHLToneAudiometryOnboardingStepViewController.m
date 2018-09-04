@@ -42,15 +42,16 @@
         ORKdBHLToneAudiometryStep *toneAudiometryStep = [self getFutureStep];
         ORKAudioChannel userSelectedChannel = ORKAudioChannelLeft;
         NSString *userSelectedChannelString = ((ORKChoiceQuestionResult *)self.result.results[0]).choiceAnswers[0];
+        NSString *userSelectedHeadphoneTypeString = ((ORKChoiceQuestionResult *)self.result.results[1]).choiceAnswers[0];
         if ([userSelectedChannelString isEqualToString:@"RIGHT"]) {
             userSelectedChannel = ORKAudioChannelRight;
         } else {
             userSelectedChannelString = @"LEFT";
         }
         if (toneAudiometryStep) {
-            toneAudiometryStep.headphoneType = @"AIRPODS";
+            toneAudiometryStep.headphoneType = userSelectedHeadphoneTypeString;
             toneAudiometryStep.earPreference = userSelectedChannel;
-            toneAudiometryStep.text = [NSString stringWithFormat:@"Playback occuring in the %@ channel of your headphones. Tap the button below every time you hear a tone.", userSelectedChannelString];
+            toneAudiometryStep.text = [NSString stringWithFormat:@"Playback occurring in the %@ channel of your headphones. Tap the button below every time you hear a tone.", userSelectedChannelString];
         }
         indexOffset = 5;
         // flip selections
@@ -63,9 +64,9 @@
         }
         toneAudiometryStep = [self getFutureStep];
         if (toneAudiometryStep) {
-            toneAudiometryStep.headphoneType = @"AIRPODS";
+            toneAudiometryStep.headphoneType = userSelectedHeadphoneTypeString;
             toneAudiometryStep.earPreference = userSelectedChannel;
-            toneAudiometryStep.text = [NSString stringWithFormat:@"Playback occuring in the %@ channel of your headphones. Tap the button below every time you hear a tone.", userSelectedChannelString];
+            toneAudiometryStep.text = [NSString stringWithFormat:@"Playback occurring in the %@ channel of your headphones. Tap the button below every time you hear a tone.", userSelectedChannelString];
         }
     }
     [super goForward];

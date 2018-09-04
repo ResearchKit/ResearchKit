@@ -76,8 +76,8 @@
     int _numberOfTransitionsPerFreq;
     NSInteger _maxNumberOfTransitionsPerFreq;
     BOOL _initialDescent;
+    BOOL _ackOnce;
     ORKdBHLToneAudiometryAudioGenerator *_audioGenerator;
-    ORKdBHLToneAudiometryAudioGenerator *_perpetualAudioGenerator;
     NSArray *_freqLoopList;
     NSMutableArray *_arrayOfResultSamples;
     NSMutableArray *_arrayOfResultUnits;
@@ -104,6 +104,7 @@
         self.suspendIfInactive = YES;
         _indexOfFreqLoopList = 0;
         _initialDescent = YES;
+        _ackOnce = NO;
         _prevFreq = 0;
         _currentTestIndex = 0;
         _transitionsDictionary = [NSMutableDictionary dictionary];
@@ -134,9 +135,7 @@
     self.activeStepView.activeCustomView = self.dBHLToneAudiometryContentView;
     
     [self.dBHLToneAudiometryContentView.tapButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
-    
-    _perpetualAudioGenerator = [[ORKdBHLToneAudiometryAudioGenerator alloc] initForHeadphones:[self dBHLToneAudiometryStep].headphoneType];
-    [_perpetualAudioGenerator playSoundAtFrequency:125 onChannel:_audioChannel dBHL:-80];
+
     _audioChannel = [self dBHLToneAudiometryStep].earPreference;
     _audioGenerator = [[ORKdBHLToneAudiometryAudioGenerator alloc] initForHeadphones:[self dBHLToneAudiometryStep].headphoneType];
     _audioGenerator.delegate = self;
@@ -169,7 +168,6 @@
         dispatch_block_cancel(_postStimulusDelayWorkBlock);
     }
     [_audioGenerator stop];
-    [_perpetualAudioGenerator stop];
 }
 
 - (ORKStepResult *)result {
@@ -227,6 +225,7 @@
         _numberOfTransitionsPerFreq = 0;
         _currentdBHL = [self dBHLToneAudiometryStep].initialdBHLValue;
         _initialDescent = YES;
+        _ackOnce = NO;
         _transitionsDictionary = nil;
         _transitionsDictionary = [NSMutableDictionary dictionary];
         if (_resultSample) {
@@ -293,7 +292,7 @@
         ORKStrongTypeOf(self) strongSelf = weakSelf;
         NSUInteger storedTestIndex = _currentTestIndex;
         if (_currentTestIndex == storedTestIndex) {
-            if (_initialDescent) {
+            if (_initialDescent && _ackOnce) {
                 _initialDescent = NO;
                 ORKdBHLToneAudiometryTransitions *newTransition = [[ORKdBHLToneAudiometryTransitions alloc] init];
                 newTransition.userInitiated -= 1;
@@ -316,6 +315,7 @@
 }
 
 - (void)tapButtonPressed {
+    _ackOnce = YES;
     [_hapticFeedback impactOccurred];
     _currentTestIndex += 1;
     _resultUnit.userTapTimeStamp = self.runtime;
@@ -347,14 +347,20 @@
 - (BOOL)validateResultFordBHL:(float)dBHL {
     NSNumber *currentKey = [NSNumber numberWithFloat:_currentdBHL];
     ORKdBHLToneAudiometryTransitions *currentTransitionObject = [_transitionsDictionary objectForKey:currentKey];
-    if ((currentTransitionObject.userInitiated/currentTransitionObject.totalTransitions >= 0.5) && currentTransitionObject.totalTransitions > 1) {
+    if ((currentTransitionObject.userInitiated/currentTransitionObject.totalTransitions >= 0.5) && currentTransitionObject.totalTransitions >= 2) {
         ORKdBHLToneAudiometryTransitions *previousTransitionObject = [_transitionsDictionary objectForKey:[NSNumber numberWithFloat:(dBHL - _dBHLStepUpSize)]];
-        if ((previousTransitionObject.userInitiated/previousTransitionObject.totalTransitions == 0) && (previousTransitionObject.totalTransitions > 1) && (currentTransitionObject.userInitiated/currentTransitionObject.totalTransitions == 1)) {
-            _resultSample.calculatedThreshold = dBHL;
-            return YES;
-        } else if ((previousTransitionObject.userInitiated/previousTransitionObject.totalTransitions <= 0.5) && (previousTransitionObject.totalTransitions > 2) && (currentTransitionObject.totalTransitions > 2)) {
-            _resultSample.calculatedThreshold = dBHL;
-            return YES;
+        if ((previousTransitionObject.userInitiated/previousTransitionObject.totalTransitions <= 0.5) && (previousTransitionObject.totalTransitions >= 2)) {
+            if (currentTransitionObject.totalTransitions == 2) {
+                if (currentTransitionObject.userInitiated/currentTransitionObject.totalTransitions == 1.0) {
+                    _resultSample.calculatedThreshold = dBHL;
+                    return YES;
+                } else {
+                    return NO;
+                }
+            } else {
+                _resultSample.calculatedThreshold = dBHL;
+                return YES;
+            }
         }
     }
     return NO;

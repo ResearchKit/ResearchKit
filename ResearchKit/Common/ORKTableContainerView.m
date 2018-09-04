@@ -77,6 +77,7 @@ static const CGFloat CellBottomPadding = 20.0;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
         _tableView.preservesSuperviewLayoutMargins = YES;
         _tableView.clipsToBounds = NO; // Do not clip scroll indicators on iPad
+        _tableView.layer.masksToBounds = YES;
         _tableView.scrollIndicatorInsets = ORKScrollIndicatorInsetsForScrollView(self);
         [self addSubview:_tableView];
         

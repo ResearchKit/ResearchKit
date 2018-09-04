@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "아래 양식을 검토하고 계속할 준비가 되었으면 동의를 탭하십시오.";
 "CONSENT_REVIEW_ALERT_TITLE" = "검토";
 "CONSENT_SIGNATURE_TITLE" = "서명";
-"CONSENT_SIGNATURE_INSTRUCTION" = "손가락을 사용하여 아래에 표시된 선 위로 서명하십시오.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "손가락을 사용하여 아래에 있는 상자에 서명하십시오.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "여기에 서명하기";
 "CONSENT_PAGE_NUMBER_FORMAT" = "%1$ld/%2$ld페이지";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "날짜";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$@/%2$@단계";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "유효하지 않은 값";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "성별 선택";
 "DOB_FORM_ITEM_TITLE" = "생년월일";
 "DOB_FORM_ITEM_PLACEHOLDER" = "날짜 선택";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "전화번호";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "확인";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "왼쪽";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "취소";
 "BUTTON_OK" = "확인";
 "BUTTON_CLEAR" = "지우기";
+"BUTTON_APPLY" = "적용";
 "BUTTON_DISAGREE" = "동의 안 함";
 "BUTTON_DONE" = "완료";
 "BUTTON_GET_STARTED" = "시작하기";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "보행 및 균형";
 "WALK_INTRO_TEXT" = "이 실험은 사용자가 걸을 때와 가만히 서 있을 때의 보행 및 균형 능력을 측정합니다. 도움 없이 안전하게 걸을 수 있는 상황이 아닌 경우 이 실험을 중단하십시오.";
 "WALK_INTRO_2_TEXT_%ld" = "다른 도움 없이 일직선으로 안전하게 약 %ld보를 걸을 수 있는 장소를 찾으십시오.";
-"WALK_INTRO_2_DETAIL" = "전화를 주머니 또는 가방에 넣고 오디오 지침을 따르십시오.";
+"WALK_INTRO_2_DETAIL" = "기기를 주머니 또는 가방에 넣고 오디오 지침을 따르십시오.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "이제 %@ 동안 가만히 서 있으십시오.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "%@ 동안 가만히 서 있으십시오.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "뒤로 돌아서 시작한 지점으로 되돌아가십시오.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "일직선으로 최대 %ld보를 걸으십시오.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "일직선으로 안전하게 왔다 갔다 할 수 있는 공간을 찾으십시오. 계속 걷다가 반환점에서 마치 원뿔형 도로 표지가 있는 것처럼 주변을 돌아서 되돌아갑니다.\n\n그런 다음, 원을 그리며 돌아서서 양팔을 옆구리에 대고 발은 어깨너비만큼 벌린 채 서 있으십시오.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "시작할 준비가 되면 시작하기를 탭하십시오.\n그런 다음 전화기를 주머니나 가방에 넣고 오디오 지침을 따르십시오.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "일직선으로 안전하게 왔다 갔다 할 수 있는 공간을 찾으십시오. 계속 걷다가 반환점에서 마치 원뿔형 도로 표지가 있는 것처럼 주변을 돌아서 되돌아갑니다.\n\n그런 다음, 제자리에서 한 바퀴 돌고난 후 양팔을 옆구리에 붙이고 발은 어깨너비만큼 벌린 채 서 있으십시오.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "시기할 준비가 되면 시작하기를 탭하십시오.\n그런 다음 기기를 주머니나 가방에 넣고 오디오 지침을 따르십시오.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ 동안 일직선으로 왔다 갔다 걸으십시오. 평상시 걷는 것처럼 걸으면 됩니다.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "원을 그리며 돌아선 다음 %@ 동안 가만히 서 있으십시오.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "이 실험을 완료했습니다.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "오른손";
 "TAPPING_TASK_TITLE_LEFT" = "왼손";
 "TAPPING_INTRO_TEXT" = "이 실험은 사용자의 탭하기 속도를 측정합니다.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "전화기를 평평한 표면에 두십시오.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "기기를 평평한 표면에 두십시오.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "동일한 손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "오른손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "왼손의 두 손가락으로 화면의 버튼을 번갈아 탭하십시오.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "왼손으로 버튼을 탭하십시오.";
 "TAPPING_SKIP_TITLE" = "이 손 건너뛰기";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "암슬러 격자";
+"AMSLER_GRID_INTRO_TEXT" = "이 실험은 사용자의 시각에 문제가 있는지 감지할 수 있습니다.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "실험하는 동안 기기를 얼굴에서 약 30cm 정도 떨어진 거리에서 눈높이에 맞춰 유지하십시오.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@을(를) 감고 정사각형 격자 가운데 있는 점을 응시합니다.\n\n손가락이나 스타일러스를 사용하여 흐릿한 선이나 물결선 같은 왜곡된 부분을 모두 표시하십시오.\n\n모두 완료하면 격자 바깥을 왼쪽으로 쓸어 넘기십시오.";
+"AMSLER_GRID_LEFT_EYE" = "왼쪽 눈";
+"AMSLER_GRID_RIGHT_EYE" = "오른쪽 눈";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "음성";
 "AUDIO_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
 "AUDIO_INSTRUCTION" = "마이크에 대고 최대한 길게 ‘아’하고 말하십시오.";
 "AUDIO_INTRO_TEXT" = "숨을 크게 들이쉰 다음 마이크에 대고 최대한 길게 ‘아’하고 말하십시오. 오디오 막대가 파란색으로 지속되도록 발성 음량을 꾸준하게 유지하십시오.";
-"AUDIO_INTENDED_USE" = "이 실험은 전화 하단에 있는 마이크로 목소리를 녹음하여 사용자의 음성을 평가합니다.";
+"AUDIO_INTENDED_USE" = "이 실험은 기기 하단에 있는 마이크로 목소리를 녹음하여 사용자의 음성을 평가합니다.";
 "AUDIO_TOO_LOUD_LABEL" = "소리가 너무 큼";
 "AUDIO_GENERIC_ERROR_LABEL" = "오디오를 녹음할 수 없습니다.";
 "AUDIO_LEVEL_CHECK_LABEL" = "주변 소음 단계를 측정하는 동안 기다리십시오.";
@@ -294,7 +308,7 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "순음 청력 검사";
 "TONE_AUDIOMETRY_INTENDED_USE" = "이 실험은 소리를 구별할 수 있는 사용자의 능력을 측정합니다.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "시작하기 전에 헤드폰을 연결하고 착용하십시오.\n\n일반적인 알림 소리와 달리 소리가 매우 미묘합니다. 부드러운 소리로 시작해서 점차 볼륨이 커집니다. 주의를 기울이고 소리가 들리는 쪽에 맞춰 왼쪽 또는 오른쪽 버튼을 탭하십시오.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "시작하기 전에 헤드폰을 연결하고 착용하십시오.\n\n일반적인 알림 소리와 달리 소리가 매우 미묘합니다. 부드러운 소리로 시작해서 점차 볼륨이 커집니다. 주의를 기울이고 소리가 들리는 쪽에 맞춰 왼쪽 또는 오른쪽 버튼을 탭하십시오.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "이제 소리가 들립니다. 기기 측면에 있는 제어기를 사용하여 음량을 조절하십시오.\n\n시작할 준비가 되었으면 아무 버튼이나 탭하십시오.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "소리가 들리면, 소리가 들리는 쪽에 맞춰 왼쪽 또는 오른쪽 버튼을 탭하십시오";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "오른쪽 귀";
 "TONE_LABEL_%@_LEFT" = "%@Hz, 왼쪽";
 "TONE_LABEL_%@_RIGHT" = "%@Hz, 오른쪽";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "순음 청력 검사";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "이 실험은 개인의 청각 임계 기준을 dB HL 등급으로 확인합니다.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "기기 음량을 최대로 설정했는지 확인하십시오.\n\n이 실험을 진행하는 동안 감지하기 힘든 소리가 왼쪽 귀나 오른쪽 귀에 각각 재생됩니다.\n\n잘 듣고 소리가 들릴 때마다 버튼을 탭하십시오.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "사전 설문 사항.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "'더 잘 들리는 귀'가 있는 경우 선호하는 귀를 선택하십시오.";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "왼쪽";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "오른쪽";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "선호하는 쪽 없음";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "공간 기억";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "이 퍼즐을 풀 수 없습니다.";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "가동 범위";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption은 왼쪽 또는 오른쪽이어야 합니다.";
 
 /* Knee Range of Motion active task */
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "ㅁ";
 "TRAILMAKING_LETTER_F" = "ㅂ";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "음성 인식";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "이 실험은 기기 하단에 있는 마이크로 사용자의 음성을 녹음하여 텍스트로 변환합니다.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "말하기 전에 녹음 시작을 위해 버튼을 누르십시오.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "녹음 시작";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "녹음 중단";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "음성 기록 편집";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "음성이 제대로 변환되지 않은 텍스트를 올바르게 수정하십시오.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "음성 기록이 여기에 나타납니다.";
+"SPEECH_RECOGNITION_FAILED" = "음성 인식에 실패했습니다.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "음성 인식 초기화에 실패했습니다.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "오디오 재생";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "오디오 중단";
+"SPEECH_IN_NOISE_TITLE" = "시끄러운 환경에서 말하기";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "이 실험은 시끄러운 환경에서 음성의 명확성을 측정합니다.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "이 테스트의 일환으로 다음 단계를 진행하게 됩니다.\n\n문장을 듣습니다.\n\n들은 문장을 분명하게 따라 말하거나 건너 뛰고 키보드로 들은 문장을 입력합니다. \n\n문장을 따라 말한 경우 음성 인식 엔진에 의해 생성된 기록을 수정할 수 있습니다.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "음량 보정";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "'오디오 재생'을 탭하고 편안하게 들릴 때까지 음량을 조절한 다음 '오디오 중단'을 탭하여 진행하십시오.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "듣기";
+"SPEECH_IN_NOISE_STEP_TEXT" = "무작위의 SNR(신호 대 잡음비)로 주변의 소음이 혼합된 문장이 한 번만 재생됩니다.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "말하기";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "들은 대로 따라 말하십시오.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "파일을 생성할 수 없습니다.";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "임계값에 이르기 위한 충분한 수의 로그 파일을 제거하는 데 실패했습니다.";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "수집된 데이터를 찾을 수 없습니다.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "지정된 출력 디렉토리 없음";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL 측정기";
+"ENVIRONMENTSPL_INTRO_TEXT" = "이 실험은 주변 환경의 음압 레벨을 측정합니다. 주변의 소음이 너무 큰 경우 진행할 수 없습니다. 좀 더 조용한 장소로 이동하여 이 실험을 완료하거나 나중에 이 실험을 다시 진행하십시오.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "계산 중";
+"ENVIRONMENTSPL_THRESHOLD" = "임계값: %@dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "데이터 없음";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "뒤로";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDF 축소판 보기";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDF 축소판 가리기";
+"AX_BUTTON_ANNOTATE" = "주석";
+"AX_BUTTON_SHOW_SEARCH" = "검색 막대 보기";
+"AX_BUTTON_HIDE_SEARCH" = "검색 막대 가리기";
+"AX_BUTTON_SHARE" = "공유";
 
-"AX_IMAGE_ILLUSTRATION" = "%@의 그림";
+
+"AX_COMPLETION_ILLUSTRATION" = "전송 성공을 나타내는 파란색 원 안의 체크표시 그림";
 
 "AX_SIGNVIEW_LABEL" = "지정된 서명 필드";
 "AX_SIGNVIEW_HINT" = "화면을 터치하고 손가락을 움직여서 서명하십시오.";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ 크기의 디스크가 있음";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "비어 있음";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@에서 %@까지의 범위";
 "AX_GRAPH_STACK_PREFIX" = "다음으로 구성된 스택";
 "AX_GRAPH_AND_SEPARATOR" = " 및 ";
 "AX_GRAPH_POINT_%@" = "포인트: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "음성 파형";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "녹음을 시작한 후 다시 활성화하면 녹음이 중단됩니다.";
+
 "AX_AUDIO_BAR_GRAPH" = "오디오 막대 그래프";
+
+"AX_AMSLER_GRID_LABEL" = "암슬러 격자";
+"AX_AMSLER_GRID_HINT" = "격자에 직접 표시하려면 손가락이나 스타일러스를 사용하고, 완료하려면 격자 바깥을 왼쪽으로 쓸어 넘기십시오.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

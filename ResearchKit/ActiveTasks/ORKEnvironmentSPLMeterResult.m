@@ -39,12 +39,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, sensitivityOffset);
     ORK_ENCODE_OBJ(aCoder, recordedSPLMeterSamples);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, sensitivityOffset);
         ORK_DECODE_OBJ_ARRAY(aDecoder, recordedSPLMeterSamples, NSNumber);
     }
     return self;
@@ -59,6 +61,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
+            self.sensitivityOffset == castObject.sensitivityOffset &&
             ORKEqualObjects(self.recordedSPLMeterSamples, castObject.recordedSPLMeterSamples)) ;
 }
 
@@ -68,12 +71,13 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKEnvironmentSPLMeterResult *result = [super copyWithZone:zone];
+    result.sensitivityOffset = self.sensitivityOffset;
     result.recordedSPLMeterSamples = [self.recordedSPLMeterSamples copy];
     return result;
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"%@; recordedSPLMeterSamples: %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.recordedSPLMeterSamples];
+    return [NSString stringWithFormat:@"%@; sensitivityOffset: %.1lf; recordedSPLMeterSamples: %@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.sensitivityOffset, self.recordedSPLMeterSamples];
 }
 
 @end

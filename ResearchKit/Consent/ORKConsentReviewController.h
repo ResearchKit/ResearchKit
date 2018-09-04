@@ -50,9 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIWebView *webView;
 
+@property (nonatomic, strong, nullable) UIBarButtonItem *cancelButtonItem;
+
 @property (nonatomic, weak, nullable) id<ORKConsentReviewControllerDelegate> delegate;
 
 @property (nonatomic, strong, nullable) NSString *localizedReasonForConsent;
+
+- (void)setTextForiPadStepTitleLabel:(NSString *)text;
 
 @end
 

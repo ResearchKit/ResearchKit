@@ -34,10 +34,10 @@
 "CONSENT_NAME_FAMILY" = "Nazwisko";
 "CONSENT_NAME_PLACEHOLDER" = "Wymagane";
 "CONSENT_REVIEW_TITLE" = "Przejrzyj";
-"CONSENT_REVIEW_INSTRUCTION" = "Przejrzyj poniższy formularz i stuknij w Akceptuję, jeśli chcesz kontynuować.";
+"CONSENT_REVIEW_INSTRUCTION" = "Przejrzyj poniższy formularz i stuknij w Akceptuję, jeśli możesz kontynuować.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Przejrzyj";
 "CONSENT_SIGNATURE_TITLE" = "Podpis";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Złóż podpis na linii poniżej, używając palca.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Podpisz palcem w polu poniżej.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Podpisz tutaj";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Strona %1$ld z %2$ld";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Opcje udostępniania";
 "CONSENT_SHARE_WIDELY_%@" = "%@ i wykwalifikowani badacze z całego świata mogą uzyskać moje dane";
 "CONSENT_SHARE_ONLY_%@" = "Tylko %@ może uzyskać moje dane";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ otrzyma dane zebrane podczas Twojego udziału w tym badaniu.\n\nSzersze udostępnianie zakodowanych danych (bez informacji takich jak Twoje imię i nazwisko) jest korzystne dla tego i przyszłych badań.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ otrzyma wyniki badań w zakresie wynikającym z Twojego udziału w tym badaniu.\n\nUdostępnianie zakodowanych wyników badań szerszej grupie odbiorców (bez informacji takich jak imię i nazwisko) może przynieść korzyści z tych i przyszłych badań.";
 "LEARN_MORE_CONSENT_SHARING" = "Więcej informacji o udostępnianiu danych";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Krok %1$@ z %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ z %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nieprawidłowa wartość";
@@ -90,7 +90,7 @@
 "LOCATION_QUESTION_PLACEHOLDER" = "Podaj adres";
 "LOCATION_ERROR_TITLE" = "Nie można było znaleźć określonego adresu";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nie można określić Twojego bieżącego położenia. Podaj adres lub przenieś się w miejsce z lepszym sygnałem GPS.";
-"LOCATION_ERROR_MESSAGE_DENIED" = "Nastąpiła odmowa dostępu do usług lokalizacji. Przejdź do Ustawień i pozwól temu programowi używać usług lokalizacji.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Nastąpiła odmowa dostępu do usług lokalizacji. Przejdź do Ustawień i pozwól tej aplikacji używać usług lokalizacji.";
 "LOCATION_ERROR_GEOCODE" = "Nie można znaleźć wyniku dla podanego adresu. Upewnij się, że adres jest prawidłowy.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Nie masz połączenia z Internetem lub przekroczona została maksymalna liczba żądań wyszukiwania adresu. Jeśli nie masz połączenia z Internetem, włącz sieć Wi-Fi, aby odpowiedzieć na to pytanie, pomiń pytanie (jeśli dostępny jest przycisk pomijania) lub powróć do ankiety po nawiązaniu połączenia z Internetem. W przeciwnym przypadku spróbuj ponownie za kilka minut.";
 
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Wybierz płeć";
 "DOB_FORM_ITEM_TITLE" = "Data urodzenia";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Wybierz datę";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Numer telefonu";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Weryfikacja";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "cale";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "lewa";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Anuluj";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Wymaż";
+"BUTTON_APPLY" = "Zastosuj";
 "BUTTON_DISAGREE" = "Nie akceptuję";
 "BUTTON_DONE" = "Gotowe";
 "BUTTON_GET_STARTED" = "Start";
@@ -214,7 +220,7 @@
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Początek ćwiczenia za:";
-"TASK_COMPLETE_TITLE" = "Ćwiczenie zakończone";
+"TASK_COMPLETE_TITLE" = "Koniec ćwiczenia";
 "TASK_COMPLETE_TEXT" = "Twoje dane zostaną przeanalizowane i otrzymasz powiadomienie o wynikach.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Pozostało: %@ s.";
 "TOUCH_ANYWHERE_LABEL" = "Aby kontynuować, dotknij w dowolnym miejscu";
@@ -223,7 +229,7 @@
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Zarejestruj obraz";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Zarejestruj obraz ponownie";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nie znaleziono aparatu. Nie można wykonać kroku.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "Aby wykonać ten krok, przejdź do Ustawień i daj temu programowi dostęp do aparatu.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Aby wykonać ten krok, przejdź do Ustawień i daj tej aplikacji dostęp do aparatu.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego dla zarejestrowanych obrazów.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nie można było zachować zarejestrowanego obrazu.";
 
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Chód i równowaga";
 "WALK_INTRO_TEXT" = "To ćwiczenie mierzy Twój chód i równowagę w ruchu i bezruchu. Jeśli nie możesz bezpiecznie chodzić bez pomocy innych, nie wykonuj go.";
 "WALK_INTRO_2_TEXT_%ld" = "Znajdź miejsce, w którym możesz bezpiecznie i bez pomocy innych iść prosto i zatrzymać się po około %ld krokach.";
-"WALK_INTRO_2_DETAIL" = "Włóż telefon do kieszeni lub torby i postępuj zgodnie z odczytywanymi instrukcjami.";
+"WALK_INTRO_2_DETAIL" = "Włóż urządzenie do kieszeni lub torby i postępuj zgodnie z instrukcjami audio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Teraz stój w bezruchu przez %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stój w bezruchu przez %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Odwróć się i przejdź do miejsca startu.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Idź prosto i zatrzymaj się po maksymalnie %ld krokach.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Znajdź miejsce, w którym możesz bezpiecznie chodzić w tę i z powrotem w linii prostej. Próbuj chodzić w sposób ciągły, zawracając na końcach tak, jak robi się to wokół słupka.\n\nNastępnie wykonasz pełny obrót i staniesz z rękoma ułożonymi wzdłuż ciała i stopami rozstawionymi do szerokości ramion.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Aby rozpocząć, stuknij w Start.\nNastępnie umieść telefon w kieszeni lub torbie i postępuj zgodnie z instrukcjami dźwiękowymi.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Znajdź miejsce, gdzie bez przeszkód możesz chodzić po linii prostej tam i z powrotem. Staraj się iść nieprzerwanie, obracając się na końcach ścieżki, tak jakby chód odbywał się dookoła stożka.\n\nNastępnie poprosimy Cię o obrócenie się, a następnie spokojne stanie z rękami po bokach i stopami rozstawionymi na szerokość ramion.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Gdy już możesz zacząć, stuknij w Start.\nNastępnie umieść urządzenie w kieszeni lub w torbie i postępuj zgodnie z instrukcjami audio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Chodź zwykłym krokiem w tę i z powrotem w linii prostej przez %@.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Wykonaj pełny obrót i stój bez ruchu przez %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ćwiczenie zostało ukończone.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Prawa ręka";
 "TAPPING_TASK_TITLE_LEFT" = "Lewa ręka";
 "TAPPING_INTRO_TEXT" = "To ćwiczenie mierzy Twoją szybkość stukania.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Połóż telefon na płaskiej powierzchni.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Umieść urządzenie na płaskiej powierzchni.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami tej samej ręki.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami prawej ręki.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Naprzemiennie stukaj w przyciski na ekranie dwoma palcami lewej ręki.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Stukaj w przyciski LEWĄ ręką.";
 "TAPPING_SKIP_TITLE" = "Pomiń tę rękę";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Siatka Amsler";
+"AMSLER_GRID_INTRO_TEXT" = "Ta czynność pomaga wykrywać problemy ze wzrokiem użytkownika.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Trzymaj to urządzenie 30 centymetrów od twarzy na poziomie oczu przez cały test.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Zamknij %@ i zacznij wpatrywać się w kropkę na środku kwadratowej siatki.\n\nPalcem lub stylusem zaznacz zniekształcenia, jakie zobaczysz, takie jak nieostre lub faliste linie.\n\nGdy skończysz, przesuń palcem w lewo poza siatkę.";
+"AMSLER_GRID_LEFT_EYE" = "lewe oko";
+"AMSLER_GRID_RIGHT_EYE" = "prawe oko";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Głos";
 "AUDIO_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "AUDIO_INSTRUCTION" = "Mów „Aaaaa” do mikrofonu najdłużej jak potrafisz.";
 "AUDIO_INTRO_TEXT" = "Weź głęboki oddech i mów „Aaaaa” do mikrofonu najdłużej jak potrafisz. Utrzymuj stały poziom głośności, aby paski dźwięku były przez cały czas niebieskie.";
-"AUDIO_INTENDED_USE" = "To ćwiczenie ocenia Twój głos, nagrywając go przy użyciu mikrofonu znajdującego się u dołu telefonu.";
+"AUDIO_INTENDED_USE" = "Ta czynność ocenia Twój głos, nagrywając go za pomocą mikrofonu umieszczonego na dole urządzenia.";
 "AUDIO_TOO_LOUD_LABEL" = "Zbyt głośno";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nie można nagrać dźwięku";
 "AUDIO_LEVEL_CHECK_LABEL" = "Czekaj, sprawdzamy poziom szumu tła.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
 "TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie mierzy Twoją zdolność słyszenia różnych dźwięków.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.\n\nDźwięk będzie bardzo subtelny i nie będzie brzmiał jak zwykły dźwięk alertu.  Na początku dźwięk będzie cichy, a potem jego głośność zacznie się zwiększać.  Skup się i stuknij w lewy lub prawy przycisk, aby wskazać, w którym uchu słyszysz.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.\n\nDźwięk będzie bardzo subtelny i nie będzie przypominał regularnego dźwięku alertu.  Na początku będzie cichy, a potem jego głośność będzie stopniowo zwiększana.  Słuchaj uważnie i stukaj w lewy lub prawy przycisk, aby wskazać, w którym uchu go słyszysz.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Staraj się usłyszeć dźwięk. Nareguluj głośność za pomocą przycisków z boku urządzenia.\n\nGdy możesz już zacząć, stuknij w dowolny przycisk.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Teraz usłyszysz dźwięk. Ustaw głośność urządzenia używając przycisków bocznych.\n\nAby rozpocząć, naciśnij dowolny klawisz.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Za każdym razem, gdy usłyszysz dźwięk, stuknij w lewy lub prawy przycisk, aby wskazać, w którym uchu go słyszysz.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Lewe ucho";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Prawe ucho";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, lewy";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, prawy";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ta czynność identyfikuje poziomy progu słuchu osoby w skali dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Ustaw głośność urządzenia na maksymalny poziom.\n\nPodczas tego zadania w lewym lub prawym uchu będzie odtwarzany delikatny dźwięk.\n\nSłuchaj uważnie i za każdym razem, gdy usłyszysz ten dźwięk, stuknij w przycisk.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Kwestionariusz wprowadzający.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Zaznacz preferencje „sprawniejszego ucha”, jeśli to konieczne";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "lewe";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "prawe";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "bez preferencji";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Pamięć przestrzenna";
@@ -321,7 +345,7 @@
 "MEMORY_GAME_FAILED_TITLE" = "Spróbuj ponownie";
 "MEMORY_GAME_FAILED_MESSAGE" = "Tym razem nie udało Ci się. Stuknij w Dalej, aby kontynuować.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Czas upłynął";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "Czas minął.\nAby kontynuować, stuknij w Dalej.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Skończył Ci się czas.\nAby kontynuować, stuknij w Dalej.";
 "MEMORY_GAME_COMPLETE" = "Gra zakończona";
 "MEMORY_GAME_PAUSED_TITLE" = "Wstrzymana";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Aby kontynuować, stuknij w Dalej";
@@ -337,7 +361,7 @@
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Efekt Stroopa";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Za każdym razem, gdy pojawi się słowo, wybierz literę nazwy KOLORU, jaki jest wyświetlony.";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Za każdym razem, gdy pojawi się słowo, wybierz pierwszą literę nazwy KOLORU, jaki jest wyświetlony.";
 "STROOP_TASK_INTRO2_DETAIL_TEXT" = "W dogodnym momencie stuknij w Start, aby rozpocząć ćwiczenie Stroopa.";
 "STROOP_TASK_STEP_TEXT" = "Zaznacz pierwszą literę nazwy KOLORU, jaki jest wyświetlony.";
 "STROOP_COLOR_RED" = "CZERWONY";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nie potrafię rozwiązać tej łamigłówki";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Zakres ruchu";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Wartość dla limbOption musi być lewa lub prawa";
 
 /* Knee Range of Motion active task */
@@ -421,7 +446,7 @@
 "PASAT_INTRO_TEXT" = "Test PASAT mierzy szybkość przetwarzania danych audialnych i umiejętność liczenia.";
 "PVSAT_INTRO_TEXT" = "Test PVSAT mierzy szybkość przetwarzania danych wizualnych i umiejętność liczenia.";
 "PAVSAT_INTRO_TEXT" = "Test PAVSAT mierzy szybkość przetwarzania danych audiowizualnych i umiejętność liczenia.";
-"PSAT_INTRO_TEXT_2_%@" = "Co %@ s prezentowana jest cyfra.\nTwoje zadanie polega na dodaniu jej do poprzedniej.\nUwaga: Nie obliczasz sumy bieżącej wszystkich cyfr, a jedynie ostatnich dwóch.";
+"PSAT_INTRO_TEXT_2_%@" = "Zaprezentujemy pojedyncze cyfry zmieniające się po %@ sekundach.\nKażdą nową cyfrę musisz dodać do cyfry poprzedniej.\nUwaga, nie obliczaj łącznej sumy, lecz tylko sumę dwóch ostatnich cyfr.";
 "PSAT_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamiętaj tę pierwszą cyfrę.";
 "PSAT_INSTRUCTION" = "Dodaj tę cyfrę do poprzedniej.";
@@ -430,8 +455,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-HPT (otwory i kołki)";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność górnej partii ciała: umieszczasz kołek (pełne kółko) w otworze (puste kółko). Do wykonania %@ razy.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Test obejmuje zarówno lewą, jak i prawą rękę.\nMusisz jak najszybciej przenieść kołek do otworu. Po przeniesieniu go %@ razy, należy go również wyjąć %@ razy.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Test obejmuje zarówno prawą, jak i lewą rękę.\nMusisz jak najszybciej przenieść kołek do otworu. Po przeniesieniu go %@ razy, należy go również wyjąć %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Testowane będą zarówno lewa, jak i prawa ręka.\nMusisz podnieść kołek tak szybko, jak to możliwe, umieścić go w otworze, oraz po %@ razach, wyjąć go %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Testowane będą zarówno prawa, jak i lewa ręka.\nMusisz podnieść kołek tak szybko, jak to możliwe, umieścić go w otworze, oraz po %@ razach, wyjąć go %@ razy.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Umieść kołek w otworze, używając lewej ręki.";
@@ -485,10 +510,10 @@
 
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Test łączenia punktów";
-"TRAILMAKING_INTENDED_USE" = "To ćwiczenie ocenia Twoje zdolności skupienia na obrazie oraz przełączania zadań przez pomiar czasu potrzebnego do stuknięcia w serię kropek w odpowiedniej kolejności.";
-"TRAILMAKING_INTENDED_USE2_A" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w cyfrę ‚1’, a po niej w kolejne cyfry‚2’ – ‚3’ – ‚4’…, aż do cyfry ‚7’.";
-"TRAILMAKING_INTENDED_USE2_B" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w cyfrę ‚1’, a po niej w pierwszą literę ‚A’, następnie ‚2’ – ‚B’ – ‚3’ – ‚C’…, aż do cyfry ‚7’.";
-"TRAILMAKING_INTRO_TEXT" = "Zrób to tak szybko, jak możesz, nie popełniając błędów. \n ";
+"TRAILMAKING_INTENDED_USE" = "To ćwiczenie ocenia Twoje zdolności skupienia się na obrazie oraz przełączania zadań przez pomiar czasu potrzebnego do stuknięcia w serię kropek w odpowiedniej kolejności.";
+"TRAILMAKING_INTENDED_USE2_A" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w pierwszą cyfrę ‚1’, a po niej w kolejne cyfry ‚2’ – ‚3’ – ‚4’…, aż do cyfry ‚7’.";
+"TRAILMAKING_INTENDED_USE2_B" = "Po odliczeniu, stukaj naprzemiennie w kropki oznaczające cyfry i litery. Zacznij stukając w pierwszą cyfrę ‚1’, a po niej w pierwszą literę ‚A’, następnie ‚2’ – ‚B’ – ‚3’ – ‚C’…, aż do cyfry ‚7’.";
+"TRAILMAKING_INTRO_TEXT" = "Rób to tak szybko, jak potrafisz, nie popełniając błędów. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "TRAILMAKING_TIMER" = "%.1f s";
 "TRAILMAKING_ERROR" = "%@ (%d błąd)";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Rozpoznanie mowy";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Ta czynność nagrywa Twoją mowę za pomocą mikrofonu umieszczonego na dole urządzenia i transponuje ją na tekst.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Naciśnij przycisk, aby rozpocząć nagrywanie zanim zaczniesz mówić.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Rozpocznij nagrywanie";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Zatrzymaj nagrywanie";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edycja zapisu";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edytuj tekst zapisu, aby poprawić wszelkie błędne interpretacje mowy.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Twój zapis tekstu pojawi się tutaj.";
+"SPEECH_RECOGNITION_FAILED" = "Rozpoznawanie mowy nie powiodło się.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Nie udało się zainicjować rozpoznawania mowy.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Odtwarzaj dźwięk";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Zatrzymaj dźwięk";
+"SPEECH_IN_NOISE_TITLE" = "Szum podczas mówienia";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Ta czynność mierzy rozpoznawalność mowy, podczas mówienia w hałaśliwym otoczeniu.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Zadaniem tego testu będzie:\n\nOdsłuchanie zdania.\n\nWyraźne powtórzenie usłyszanej treści lub pominięcie i wpisanie tej treści na klawiaturze. \n\nJeśli powtórzysz usłyszaną treść, damy Ci możliwość modyfikowania zapisu treści wygenerowanego przez mechanizm rozpoznawania mowy.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Kalibracja głośności";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Stuknij w Odtwarzaj dźwięk, dostosuj głośność do odpowiedniego poziomu, a potem stuknij w Zatrzymaj dźwięk, aby kontynuować.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Słuchaj";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Zdanie z szumem w tle z losowym stosunkiem sygnału do szumu (SNR) zostanie odczytane tylko raz.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Powiedz";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Powtórz usłyszaną treść.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nie można było utworzyć pliku";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nie można było usunąć liczby plików dzienników pozwalającej na osiągnięcie progu";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Nie znaleziono zgromadzonych danych.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Wskaźnik SPL";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Ta czynność mierzy poziom ciśnienia akustycznego otoczenia. Jeśli poziomy hałasu będą za wysokie, nie możesz kontynuować. Przesuń się do cichszego miejsca, aby zakończyć to zadanie lub powtórz tę czynność później.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Obliczam";
+"ENVIRONMENTSPL_THRESHOLD" = "Próg: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Brak danych";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Wróć";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Pokaż miniaturkę PDF";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Ukryj miniaturkę PDF";
+"AX_BUTTON_ANNOTATE" = "Adnotacja";
+"AX_BUTTON_SHOW_SEARCH" = "Pokaż pasek wyszukiwania";
+"AX_BUTTON_HIDE_SEARCH" = "Ukryj pasek wyszukiwania";
+"AX_BUTTON_SHARE" = "Udostępnij";
 
-"AX_IMAGE_ILLUSTRATION" = "Obrazek: %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Ilustracja znaku zaznaczenia w niebieskim okręgu oznacza sukces";
 
 "AX_SIGNVIEW_LABEL" = "Wyznaczone pole podpisu";
 "AX_SIGNVIEW_HINT" = "Dotknij ekranu i przesuwaj palec, aby podpisać";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Zawiera krążki o rozmiarach %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Pusta";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Zakres %@–%@";
 "AX_GRAPH_STACK_PREFIX" = "Stos złożony z";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Kształt fali mowy";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Po rozpoczęciu nagrywania aktywuj drugi raz, aby zakończyć nagrywanie.";
+
 "AX_AUDIO_BAR_GRAPH" = "Wykres paskowy audio";
+
+"AX_AMSLER_GRID_LABEL" = "Siatka Amsler";
+"AX_AMSLER_GRID_HINT" = "Palcem lub stylusem oznaczaj bezpośrednio na siatce, lub przesuń palcem w lewo poza siatkę, aby zakończyć.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

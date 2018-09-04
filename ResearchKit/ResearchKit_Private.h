@@ -112,6 +112,7 @@
 #import <ResearchKit/ORKLocationRecorder.h>
 #import <ResearchKit/ORKPedometerRecorder.h>
 #import <ResearchKit/ORKTouchRecorder.h>
+#import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 
 // For custom steps
 #import <ResearchKit/ORKCustomStepView.h>

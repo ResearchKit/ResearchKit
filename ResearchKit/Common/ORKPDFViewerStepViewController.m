@@ -103,47 +103,49 @@
     _pdfView.translatesAutoresizingMaskIntoConstraints = NO;
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
-    
+
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_pdfView
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_pdfView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_pdfView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
@@ -214,13 +216,20 @@
 #pragma ORKPDFViewerStepViewDelegate
 
 
-- (void)didSelectShareButton {
+- (void)didSelectShareButton:(id)sender {
     NSData *pdfData = [[_pdfView getDocument] dataRepresentation];
 
     UIActivityViewController * activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[@"sendPDF", pdfData] applicationActivities:nil];
     [activityViewController setCompletionWithItemsHandler:^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
         [_pdfView updateShareButton];
     }];
+    
+    if ( [activityViewController respondsToSelector:@selector(popoverPresentationController)] ) {
+        activityViewController.popoverPresentationController.sourceView = sender;
+        UIView *shareButtonView = (UIView *)sender;
+        activityViewController.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(shareButtonView.bounds), CGRectGetMidY(shareButtonView.bounds),0,0);
+
+    }
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 

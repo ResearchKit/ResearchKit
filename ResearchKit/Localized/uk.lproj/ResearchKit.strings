@@ -34,10 +34,10 @@
 "CONSENT_NAME_FAMILY" = "Прізвище";
 "CONSENT_NAME_PLACEHOLDER" = "Обов’язково";
 "CONSENT_REVIEW_TITLE" = "Огляд";
-"CONSENT_REVIEW_INSTRUCTION" = "Перегляньте наведене нижче і торкніть «Погоджуюсь», якщо ви готові продовжити.";
+"CONSENT_REVIEW_INSTRUCTION" = "Перегляньте форму вище і торкніть «Погоджуюсь», якщо ви готові продовжити.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Огляд";
 "CONSENT_SIGNATURE_TITLE" = "Підпис";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Будь ласка, розпишіться пальцем на лінії нижче.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Будь ласка, підпишіть пальцем у полі нижче.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Розпишіться тут";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Сторінка %1$ld із %2$ld";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Опції доступу";
 "CONSENT_SHARE_WIDELY_%@" = "Оприлюднити мої дані для %@ і кваліфікованих вчених в усьому світі";
 "CONSENT_SHARE_ONLY_%@" = "Оприлюднювати тільки для %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ отримають дані дослідження після вашої участі в цьому дослідженні.\n\nОприлюднення шифрованих даних дослідження для ширшої аудиторії (без таких даних, як ваше ім’я) може бути корисним для цього та майбутніх досліджень.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ отримає ваші дослідні дані завдяки вашій участі в цьому дослідженні.\n\nШирше оприлюднення ваших кодованих дослідних даних (без такої інформації, як ваше імʼя) може сприяти цьому і майбутнім дослідженням.";
 "LEARN_MORE_CONSENT_SHARING" = "Докладніше про оприлюднення даних";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Дата";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Крок %1$@ із %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ із %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Неправильне значення";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Виберіть стать";
 "DOB_FORM_ITEM_TITLE" = "Дата народження";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Виберіть дату";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Номер телефону";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Перевірка";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "см";
 "MEASURING_UNIT_FT" = "фт";
 "MEASURING_UNIT_IN" = "дм";
+"MEASURING_UNIT_KG" = "кг";
+"MEASURING_UNIT_LB" = "фнт";
+"MEASURING_UNIT_OZ" = "унц";
 
 /* Limb values. */
 "LIMB_LEFT" = "ліва";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Скасувати";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Очистити";
+"BUTTON_APPLY" = "Застосувати";
 "BUTTON_DISAGREE" = "Не погоджуюсь";
 "BUTTON_DONE" = "Готово";
 "BUTTON_GET_STARTED" = "Розпочати";
@@ -217,7 +223,7 @@
 "TASK_COMPLETE_TITLE" = "Тест завершено";
 "TASK_COMPLETE_TEXT" = "Ваші дані буде проаналізовано, і ви отримаєте сповіщення, коли будуть готові результати.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "Лишлось %@ секунд.";
-"TOUCH_ANYWHERE_LABEL" = "Торкніться будь-де, щоб продовжити";
+"TOUCH_ANYWHERE_LABEL" = "Торкніть будь-де, щоб продовжити";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Зробити знімок";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Хода і рівновага";
 "WALK_INTRO_TEXT" = "Цей тест оцінює вашу ходу і рівновагу під час ходіння і стояння. Не продовжуйте, якщо ви не можете безпечно ходити без допомоги.";
 "WALK_INTRO_2_TEXT_%ld" = "Знайдіть місце, де ви можете безпечно зробити %ld кроків по прямій без допомоги.";
-"WALK_INTRO_2_DETAIL" = "Покладіть свій телефон у кишеню або сумку, і виконуйте аудіоінструкції.";
+"WALK_INTRO_2_DETAIL" = "Покладіть свій пристрій у кишеню чи сумку і виконуйте аудіовказівки.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Тепер не рухайтесь %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Не рухайтесь %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Розверніться і йдіть туди, де ви почали.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Зробіть до %ld кроків по прямій.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Знайдіть місце, де ви можете безпечно пройти по прямій уперед і назад. Спробуйте не зупинятися, коли розвертаєтесь у кінці прямої, немов обходячи уявний конус.\n\nДалі вам буде запропоновано пройти повну відстань в обидва напрямки, зупинитися і не рухатися, тримаючи руки по боках і ноги на ширині плечей.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Торкніть «Розпочати», коли ви готові.\nПотім покладіть телефон у кишеню або сумку, і виконуйте аудіоінструкції.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Знайдіть місце, де ви можете безпечно пройтися туди й назад по прямій. Намагайтеся не зупинятися, розвертаючись у кінцях шляху, а ніби обходити дорожній конус.\n\nДалі вам накажуть обернутися повним колом і завмерти з руками по боках і ногами на ширині плечей.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Торкніть «Розпочати», коли ви готові починати.\nПотім покладіть свій пристрій у кишеню чи сумку і виконайте аудіовказівки.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Ідіть по прямій уперед і назад %@. Ідіть, як ви ходите зазвичай.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Пройдіть повну відстань по колу, потім зупиніться і не рухайтесь %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Ви завершили виконання тесту.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Права рука";
 "TAPPING_TASK_TITLE_LEFT" = "Ліва рука";
 "TAPPING_INTRO_TEXT" = "Цей тест оцінює вашу швидкість торкання.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Покладіть телефон на рівну поверхню.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Покладіть свій пристрій на пласку поверхню.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Двома пальцями однієї руки по черзі торкайте кнопки на екрані.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Двома пальцями правої руки по черзі торкайте кнопки на екрані.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Двома пальцями лівої руки по черзі торкайте кнопки на екрані.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Торкайте кнопки ЛІВОЮ рукою.";
 "TAPPING_SKIP_TITLE" = "Минути цю руку";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Сітка Амслера";
+"AMSLER_GRID_INTRO_TEXT" = "Ця операція допомагає виявити проблеми з зором користувача.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Тримайте пристрій на рівні очей на відстані 30 см (12 дюймів) від обличчя впродовж тесту.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Закрийте своє %@ і пильно дивіться на крапку в центрі квадратної сітки.\n\nПальцем чи стилусом позначте всі видимі спотворення, як-от розмиті або хвилясті лінії.\n\nКоли завершите, посуньте вліво поза сіткою.";
+"AMSLER_GRID_LEFT_EYE" = "Ліве око";
+"AMSLER_GRID_RIGHT_EYE" = "Праве око";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Голос";
 "AUDIO_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "AUDIO_INSTRUCTION" = "Вимовляйте «А-а-а-а» у мікрофон якомога довше.";
 "AUDIO_INTRO_TEXT" = "Зробіть глибокий подих і вимовляйте «А-а-а-а» у мікрофон якомога довше. Тримайте однакову гучність голосу, щоб смуги звуку залишалися синіми.";
-"AUDIO_INTENDED_USE" = "Цей тест оцінює ваш голос, записуючи його через мікрофон внизу вашого телефону.";
+"AUDIO_INTENDED_USE" = "Цей тест оцінює ваш голос, записуючи його за допомогою мікрофона внизу вашого пристрою.";
 "AUDIO_TOO_LOUD_LABEL" = "Надто гучно";
 "AUDIO_GENERIC_ERROR_LABEL" = "Не вдається записати аудіо";
 "AUDIO_LEVEL_CHECK_LABEL" = "Будь ласка, зачекайте, поки ми перевіряємо рівень фонового шуму.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Аудіометрія";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Цей тест вимірює вашу здатність чути різні звуки.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Перш ніж починати, одягніть навушники.\n\nЗвук лунатиме ледь вловимо і відрізнятиметься від звичайного сигналу оповіщення.  Гучність звуку поступово посилюватиметься.  Будь ласка, будьте пильні й торкайте ліву чи праву кнопку, щоб вказати, яким вухом ви його чуєте.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Переш ніж починати, приєднайте навушники до пристрою й одягніть їх.\n\nЗвук буде ледь чутним, на відміну від звуку звичайних оповіщень.  Гучність звуку поволі наростатиме.  Будь ласка, будьте уважні й вказуйте, в якому вусі ви почули звук, торкаючи ліву чи праву кнопку.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Зараз ви маєте чути сигнал. Регулюйте гучність бічними кнопками свого пристрою.\n\nТоркніть будь-яку кнопку, коли готові починати.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Зараз ви маєте почути тональний сигнал. Регулюйте гучність кнопками на боці свого пристрою.\n\nТоркніть будь-яку кнопку на екрані, щоб розпочати.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Щоразу почувши звук, торкайте ліву чи праву кнопку, щоб вказати, яким вухом ви чули цей звук.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Ліве вухо";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Праве вухо";
 "TONE_LABEL_%@_LEFT" = "%@ Гц, зліва";
 "TONE_LABEL_%@_RIGHT" = "%@ Гц, справа";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Аудіометрія";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Цей тест визначає порогові рівні слуху особи за шкалою dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Упевніться, що задано максимальний рівень гучності.\n\nПід час цього завдання в ліве або праве вухо буде відтворюватися ледь чутний сигнал.\n\nУважно слухайте і торкайте кнопку, щоразу як чуєте сигнал.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Реєстраційна анкета.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Виберіть вухо, яким ви чуєте краще, якщо таке є";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "ліве";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "праве";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "немає";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Просторова пам’ять";
@@ -321,7 +345,7 @@
 "MEMORY_GAME_FAILED_TITLE" = "Повторити спробу";
 "MEMORY_GAME_FAILED_MESSAGE" = "У вас не вийшло вкластися у цей час. Торкніть «Далі», щоб продовжити.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Час вийшов";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "У вас вийшов час.\nТоркніть «Далі», щоб продовжити.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Ваш час минув.\nТоркніть «Далі», щоб продовжити.";
 "MEMORY_GAME_COMPLETE" = "Гру завершено";
 "MEMORY_GAME_PAUSED_TITLE" = "Припинено";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Щоб продовжити, торкніть «Далі»";
@@ -338,7 +362,7 @@
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Тест Струпа";
 "STROOP_TASK_INTRO1_DETAIL_TEXT" = "Щоразу коли зʼявляється слово, вибирайте першу букву назви показаного КОЛЬОРУ.";
-"STROOP_TASK_INTRO2_DETAIL_TEXT" = "За готовності починати тест Струпа торкніть «Почати».";
+"STROOP_TASK_INTRO2_DETAIL_TEXT" = "За готовності починати тест Струпа торкніть «Розпочати».";
 "STROOP_TASK_STEP_TEXT" = "Вибирайте першу букву назви показаного КОЛЬОРУ.";
 "STROOP_COLOR_RED" = "ЧЕРВОНИЙ";
 "STROOP_COLOR_GREEN" = "ЗЕЛЕНИЙ";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Я не можу розв’язати цю головоломку";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Діапазон руху";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "Опція кінцівки має бути «ліва» чи «права»";
 
 /* Knee Range of Motion active task */
@@ -398,7 +423,7 @@
 "TIMED_WALK_INTRO_DETAIL" = "Цей тест оцінює роботу ваших нижніх кінцівок.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Знайдіть місце, краще надворі, де ви можете якомога швидко і безпечно пройти близько %@ по прямій. Не зменшуйте швидкість, доки не перетнете фінішну лінію.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Торкніть «Далі», щоб почати.";
-"TIMED_WALK_FORM_TITLE" = "Допоміжний пристрій";
+"TIMED_WALK_FORM_TITLE" = "Допоміжний засіб";
 "TIMED_WALK_FORM_TEXT" = "Вживайте однаковий допоміжний засіб для всіх тестів.";
 "TIMED_WALK_QUESTION_TEXT" = "Ви носите гомілкостопний біопротез?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Ви користуєтесь допоміжними засобами?";
@@ -421,7 +446,7 @@
 "PASAT_INTRO_TEXT" = "Слуховий тест на складання у заданому темпі вимірює швидкість обробки вами слухової інформації та вашу здібність до обчислення.";
 "PVSAT_INTRO_TEXT" = "Візуальний тест на складання у заданому темпі вимірює швидкість обробки вами візуальної інформації та вашу здібність до обчислення.";
 "PAVSAT_INTRO_TEXT" = "Слуховий і візуальний тест на складання у заданому темпі вимірює швидкість обробки вами слухової і візуальної інформації та вашу здібність до обчислення.";
-"PSAT_INTRO_TEXT_2_%@" = "Кожні %@ сек. відображатимуться однорозрядні числа.\nВи маєте додавати кожне нове число до попереднього.\nЗауважте, що треба обчислювати суму лише двох останніх чисел, а не загальну суму всіх чисел.";
+"PSAT_INTRO_TEXT_2_%@" = "Однорозрядні числа показуються що %@ сек.\nВи маєте додавати кожну нову цифру до цифри, що їй передує.\nЗауважте, що вам треба рахувати не підсумок, що наростає, а лише суму двох останніх чисел.";
 "PSAT_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "PSAT_INITIAL_INSTRUCTION" = "Запам’ятайте цю першу цифру.";
 "PSAT_INSTRUCTION" = "Додайте це нове число до попереднього.";
@@ -430,8 +455,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Кілковий тест на %@ отворів";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Цей тест оцінює функцію ваших верхніх кінцівок, коли вам потрібно покласти кілок в отвір. Вас попросять зробити це %@ разів.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Буде перевірено вашу ліву і праву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Буде перевірено вашу праву і ліву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Тестуванню підлягають ваша ліва і права рука.\nВи маєте взяти кілок якомога швидше, поставити в отвір, і зробивши це %@ разів, вилучити його знов %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Тестуванню підлягають ваша права і ліва рука.\nВи маєте взяти кілок якомога швидше, поставити в отвір, і зробивши це %@ разів, вилучити його знов %@ разів.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок в отвір лівою рукою.";
@@ -484,11 +509,11 @@
 "TREMOR_SKIP_NEITHER" = "Я можу виконати цю дію обома руками.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Зорово-моторний тест";
+"TRAILMAKING_TASK_TITLE" = "Побудова сліду";
 "TRAILMAKING_INTENDED_USE" = "Цей тест оцінює рівень вашої зорової уважності та здатність перемикатися між завданнями, фіксуючи, скільки потрібно часу, щоб торкнути серію крапок по черзі.";
 "TRAILMAKING_INTENDED_USE2_A" = "Після вступного відліку торкайте крапки, змінюючи черговість між цифрами і буквами. Почніть торканням першої цифри «1», потім торкайте цифри «2» – «3» – «4»…, доки не дійдете до цифри «7».";
 "TRAILMAKING_INTENDED_USE2_B" = "Після вступного відліку торкайте крапки, змінюючи черговість між цифрами і буквами. Почніть торканням першої цифри «1», потім торкніть першу букву «А», а після неї «2» – «Б» – «3» − «В»…, доки не дійдете до цифри «7».";
-"TRAILMAKING_INTRO_TEXT" = "Виконуйте це якомога швидше і намагайтесь не помилятися. \n ";
+"TRAILMAKING_INTRO_TEXT" = "Зробіть це якомога швидше, не припускаючись помилок. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
 "TRAILMAKING_TIMER" = "%.1f с";
 "TRAILMAKING_ERROR" = "%@ (помилка %d)";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "Ґ";
 "TRAILMAKING_LETTER_F" = "Д";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Розпізнання мови";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Цей тест записує ваше мовлення за допомогою мікрофона внизу пристрою і перекладає його на текст.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Тисніть кнопку, щоб почати записування перед мовленням.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Почати запис";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Зупинити запис";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Зміна транскрипції";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Редагуйте транскрипцію для усунення всіх хибних тлумачень вашого мовлення.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Ваша транскрипція зʼявлятиметься тут.";
+"SPEECH_RECOGNITION_FAILED" = "Збій розпізнання мовлення.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Збій ініціалізації розпізнання мовлення.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Відтворити аудіо";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Припинити аудіо";
+"SPEECH_IN_NOISE_TITLE" = "Мовлення в шумі";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Цей тест вимірює розбірність мовлення в умовах шумного середовища.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "У рамках цього тесту ви маєте:\n\nПрослухати речення.\n\nЧітко повторити те, що почули, або перейти одразу до введення того, що ви почули, на клавіатурі. \n\nЯкщо ви повторите те, що почули, то матимете можливість редагувати транскрипцію, яку згенерувала система розпізнання мовлення.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Калібрування гучності";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Торкніть «Відтворити аудіо», установіть комфортний рівень гучності і потім торкніть «Зупинити аудіо», щоб продовжити.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Слухати";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Речення, змішане з фоновим шумом при довільному відношенні сигнал/шум (ВСШ), буде відтворено лише раз.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Промовити";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Повторіть, що почули.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не вдалося вилучити достатньо файлів журналів, щоб досягти порогу";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Не знайдено жодних зібраних даних.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не задано вихідний каталог";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Покажчик РЗТ";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Цей тест вимірює рівень звукового тиску. Якщо рівні шуму зависокі, ви не зможете продовжити. Будь ласка, перейдіть у тихіше місце для виконання цього завдання або пройдіть цей тест ще раз згодом.";
+"ENVIRONMENTSPL_UNIT" = "дБ";
+"ENVIRONMENTSPL_CALCULATING" = "Обчислювання";
+"ENVIRONMENTSPL_THRESHOLD" = "Поріг: %@ дБ";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Немає даних";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Назад";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Показати PDF-мініатюри";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Сховати PDF-мініатюри";
+"AX_BUTTON_ANNOTATE" = "Анотувати";
+"AX_BUTTON_SHOW_SEARCH" = "Показати смугу пошуку";
+"AX_BUTTON_HIDE_SEARCH" = "Сховати смугу пошуку";
+"AX_BUTTON_SHARE" = "Оприлюднити";
 
-"AX_IMAGE_ILLUSTRATION" = "Ілюстрація %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Ілюстрація галочки в синьому колі на позначення успіху";
 
 "AX_SIGNVIEW_LABEL" = "Спеціальне поле для підпису";
 "AX_SIGNVIEW_HINT" = "Торкніть екран і рухайте пальцем, щоб поставити підпис";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Діапазон від %@ до %@";
 "AX_GRAPH_STACK_PREFIX" = "Стос, створений із";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
 "AX_GRAPH_POINT_%@" = "Точка: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Форма хвилі мовлення";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Коли почнеться записування, активуйте вдруге, щоб припинити записування.";
+
 "AX_AUDIO_BAR_GRAPH" = "Аудіографік";
+
+"AX_AMSLER_GRID_LABEL" = "Сітка Амслера";
+"AX_AMSLER_GRID_HINT" = "Пальцем або стилусом робіть позначки прямо на сітці або посуньте вліво поза сіткою, щоб завершити.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

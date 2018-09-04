@@ -363,7 +363,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
             CGPoint previousMid2 = mmid_Point(currentPoint, previousPoint1);
             [self.currentPath moveToPoint:previousMid2];
         }
-        CGPoint _= [self getMid2FromDrawBoxWithTouch:touch];
+        CGPoint _ __attribute__((unused)) = [self getMid2FromDrawBoxWithTouch:touch];
     }
 }
 

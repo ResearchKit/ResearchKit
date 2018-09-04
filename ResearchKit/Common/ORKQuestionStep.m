@@ -68,16 +68,6 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.optional = YES;
-        self.useSurveyMode = YES;
-        self.useCardView = YES;
-    }
-    return self;
-}
-
 - (void)validateParameters {
     [super validateParameters];
     

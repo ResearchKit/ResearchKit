@@ -135,7 +135,8 @@
     }
     
     CGRect labelRect = _trailmakingContentView.testArea;
-    labelRect.size.height = [[UIFontMetrics metricsForTextStyle:UIFontTextStyleBody] scaledValueForValue:20];
+    labelRect.size.height = 20;
+    labelRect.origin = self.activeStepView.frame.origin;
     [_timerLabel setFrame:labelRect];
     
     CGRect r = _trailmakingContentView.testArea;

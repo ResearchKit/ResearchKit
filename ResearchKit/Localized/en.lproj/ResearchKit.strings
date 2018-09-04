@@ -251,7 +251,7 @@
 "WALK_TASK_TITLE" = "Gait and Balance";
 "WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
 "WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
-"WALK_INTRO_2_DETAIL" = "Put your phone in a pocket or bag and follow the audio instructions.";
+"WALK_INTRO_2_DETAIL" = "Put your device in a pocket or bag and follow the audio instructions.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
@@ -259,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your phone in a pocket or bag and follow the audio instructions.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your device in a pocket or bag and follow the audio instructions.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
@@ -269,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
 "TAPPING_TASK_TITLE_LEFT" = "Left Hand";
 "TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your phone on a flat surface.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your device on a flat surface.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
@@ -298,7 +298,7 @@
 "AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
 "AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
-"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
+"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your device.";
 "AUDIO_TOO_LOUD_LABEL" = "Too Loud";
 "AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
@@ -527,7 +527,7 @@
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "Speech Recognition";
-"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the phone, and translates it to text.";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the device, and translates it to text.";
 "SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "SPEECH_RECOGNITION_INTRO_2_TEXT" = "Press the button to start recording before speaking.";
 "SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start Recording";

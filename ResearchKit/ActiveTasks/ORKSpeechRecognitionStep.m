@@ -51,6 +51,7 @@
     self = [super initWithIdentifier:identifier];
     _speechRecognitionImage = image;
     _text = text;
+    _speechRecognizerLocale = ORKSpeechRecognizerLocaleEnglishUS;
     return self;
 }
 

@@ -528,8 +528,8 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
         
     }
     else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectShareButton)]) {
-            [self.delegate didSelectShareButton];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectShareButton:)]) {
+            [self.delegate didSelectShareButton:_pdfActionsView.shareActionButton];
         }
     }
     _isShareActive = !_isShareActive;
@@ -790,6 +790,12 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
 }
 
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (_keyboardUnderlapView) {
+        _keyboardUnderlapView.hidden = YES;
+    }
+}
+
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWillAppear:(NSNotification *)aNotification {
     
@@ -797,8 +803,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     CGSize keyboardSize = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue.size;
     //    Offset with assumed view controller's navigation container's height.
     keyboardSize.height = keyboardSize.height - 200.0;
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+
     if (_keyboardUnderlapView && _keyboardUnderlapView.isHidden) {
         [_keyboardUnderlapView removeFromSuperview];
         [NSLayoutConstraint constraintWithItem:_keyboardUnderlapView

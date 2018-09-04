@@ -522,9 +522,17 @@
         
         if ([self formStep].useCardView) {
             _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
-            [self.taskViewController.navigationBar setBarTintColor:[_tableView backgroundColor]];
-            [self.view setBackgroundColor:[_tableView backgroundColor]];
+            
+            if (ORKNeedWideScreenDesign(self.view)) {
+                [_tableView setBackgroundColor:[UIColor clearColor]];
+                [self.taskViewController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+                [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+            }
+            else {
+                [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+                [self.taskViewController.navigationBar setBarTintColor:[_tableView backgroundColor]];
+                [self.view setBackgroundColor:[_tableView backgroundColor]];
+            }
         }
         _headerView = _tableContainer.stepHeaderView;
         _headerView.captionLabel.useSurveyMode = [[self formStep] useSurveyMode];
@@ -557,46 +565,49 @@
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
     
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+    CGFloat margin = ORKNeedWideScreenDesign(self.view) ? 0.0 : ORKSurveyTableContainerLeftRightPadding;
+    
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeLeftMargin
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeLeftMargin
                                                  multiplier:1.0
-                                                   constant:ORKSurveyTableContainerLeftRightPadding],
+                                                   constant:margin],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeRightMargin
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeRightMargin
                                                  multiplier:1.0
-                                                   constant:-ORKSurveyTableContainerLeftRightPadding],
+                                                   constant:-margin],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
