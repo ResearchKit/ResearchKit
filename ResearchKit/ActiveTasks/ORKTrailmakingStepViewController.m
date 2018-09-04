@@ -98,6 +98,8 @@
     }
     
     _timerLabel = [[UILabel alloc] init];
+    _timerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    _timerLabel.adjustsFontForContentSizeCategory = YES;
     _timerLabel.textAlignment = NSTextAlignmentCenter;
     
     [self.view addSubview:_timerLabel];
@@ -133,7 +135,7 @@
     }
     
     CGRect labelRect = _trailmakingContentView.testArea;
-    labelRect.size.height = 20;
+    labelRect.size.height = [[UIFontMetrics metricsForTextStyle:UIFontTextStyleBody] scaledValueForValue:20];
     [_timerLabel setFrame:labelRect];
     
     CGRect r = _trailmakingContentView.testArea;
@@ -164,6 +166,10 @@
     [super viewDidAppear:animated];
     [self start];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerUpdated:) userInfo:nil repeats:YES];
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        // Put focus on the direct touch area immediately so that the first touch gets registered
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _trailmakingContentView);
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

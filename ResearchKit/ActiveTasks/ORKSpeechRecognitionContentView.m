@@ -84,18 +84,22 @@
 
 - (void)setupTextLabel {
     _textLabel = [UILabel new];
-    _textLabel.font = [UIFont systemFontOfSize:25.0 weight:UIFontWeightMedium];
+    _textLabel.font = [[UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2] scaledFontForFont:[UIFont systemFontOfSize:25.0 weight:UIFontWeightMedium]];
     _textLabel.textColor = [self tintColor];
     _textLabel.textAlignment = NSTextAlignmentCenter;
     _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _textLabel.numberOfLines = 0;
+    _textLabel.adjustsFontForContentSizeCategory = YES;
     [self addSubview:_textLabel];
 }
 
 - (void)setupGraphView {
     self.graphView = [ORKAudioGraphView new];
     _graphView.translatesAutoresizingMaskIntoConstraints = NO;
+    _graphView.isAccessibilityElement = YES;
+    _graphView.accessibilityLabel = ORKLocalizedString(@"AX_SPEECH_RECOGNITION_WAVEFORM", nil);
+    _graphView.accessibilityTraits = UIAccessibilityTraitImage;
     
     [self addSubview:_graphView];
 }
@@ -117,6 +121,8 @@
     [self.recordButton setTitle:ORKLocalizedString(@"SPEECH_RECOGNITION_START_RECORD_LABEL", nil)
                        forState:UIControlStateNormal];
     self.recordButton.enabled = YES;
+    self.recordButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitStartsMediaSession;
+    self.recordButton.accessibilityHint = ORKLocalizedString(@"AX_SPEECH_RECOGNITION_START_RECORDING_HINT", nil);
     [self addSubview:_recordButton];
 }
 
@@ -158,7 +164,8 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_imageView, _textLabel, _transcriptLabel, _graphView, _recordButton);
     const CGFloat graphHeight = 150;
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_imageView]-[_textLabel]-(5)-[_graphView(graphHeight)]-[_transcriptLabel]-buttonGap-[_recordButton(50)]-topBottomMargin-|"
+    // In case the text on the button is large, ensure that the button can grow larger than the default height if needed
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_imageView]-[_textLabel]-(5)-[_graphView(graphHeight)]-[_transcriptLabel]-buttonGap-[_recordButton(50@250)]-topBottomMargin-|"
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:@{
                                                                                        @"graphHeight": @(graphHeight),
@@ -194,11 +201,15 @@
                                              metrics: @{@"sideMargin": @(sideMargin)}
                                                views:views]];
     
+    // In case the text on the button is large, ensure that the button can grow larger than the default width if needed
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-twiceSideMargin-[_recordButton(200)]-twiceSideMargin-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-twiceSideMargin@250-[_recordButton(200@250)]-twiceSideMargin@250-|"
                                              options:0
                                              metrics: @{@"twiceSideMargin": @(twiceSideMargin)}
                                                views:views]];
+    [constraints addObject:[_recordButton.centerXAnchor constraintEqualToAnchor:self.centerXAnchor]];
+    [constraints addObject:[_recordButton.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.layoutMarginsGuide.leadingAnchor]];
+    [constraints addObject:[_recordButton.trailingAnchor constraintLessThanOrEqualToAnchor:self.layoutMarginsGuide.trailingAnchor]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }

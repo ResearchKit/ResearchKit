@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKConsentSection Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/content">content</option>
+		
+		<option value="//api/name/contentURL">contentURL</option>
+		
+		<option value="//api/name/customAnimationURL">customAnimationURL</option>
+		
+		<option value="//api/name/customImage">customImage</option>
+		
+		<option value="//api/name/customLearnMoreButtonTitle">customLearnMoreButtonTitle</option>
+		
+		<option value="//api/name/formalTitle">formalTitle</option>
+		
+		<option value="//api/name/htmlContent">htmlContent</option>
+		
+		<option value="//api/name/omitFromDocument">omitFromDocument</option>
+		
+		<option value="//api/name/summary">summary</option>
+		
+		<option value="//api/name/title">title</option>
+		
+		<option value="//api/name/type">type</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithType:">- initWithType:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKConsentSection Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKConsentSection.h<br />ORKConsentSection.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKConsentSection</code> class represents one section in a consent document. Each
+<code>ORKConsentSection</code> object (apart from those of <a href="#//api/name/type">type</a> <code>ORKConsentSectionTypeOnlyInDocument</code>)
+corresponds to a page in a visual consent step, or a section in the document
+reviewed in consent review step.</p>
+
+<p>If you initialize a consent section with one of the defined section types, you get a prepopulated <a href="#//api/name/title">title</a>, a default image, and animation (when appropriate). You can override these properties or you can use the <code>ORKConsentSectionTypeCustom</code> <a href="#//api/name/type">type</a> to
+avoid any prepopulation.</p>
+
+<p>If you provide <a href="#//api/name/content">content</a> for the <code>ORKConsentSection</code> object, be sure to use localized <a href="#//api/name/content">content</a>.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithType:" title="initWithType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithType:">&ndash;&nbsp;initWithType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized consent section using the specified <a href="#//api/name/type">type</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithType:(ORKConsentSectionType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>The consent section <a href="#//api/name/type">type</a>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method populates the <a href="#//api/name/title">title</a> and <a href="#//api/name/summary">summary</a> for all types except for
+<code>ORKConsentSectionTypeCustom</code> and <code>ORKConsentSectionTypeOnlyInDocument</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/type" title="type"></a>
+	<h3 class="method-title"><code><a href="#//api/name/type">&nbsp;&nbsp;type</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The type of section. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) ORKConsentSectionType type</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The value of this property indicates whether a predefined <a href="#//api/name/image">image</a>, <a href="#//api/name/title">title</a>, and animation are present.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/title" title="title"></a>
+	<h3 class="method-title"><code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The title of the consent section in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *title</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The title is displayed as a scene title in the animated consent sequence and is also included in the PDF file, but it can be overridden by setting <a href="#//api/name/formalTitle"><code>formalTitle</code></a>.
+The title is prefilled unless the <a href="#//api/name/type">type</a> is <code>ORKConsentSectionTypeCustom</code> or <code>ORKConsentSectionTypeOnlyInDocument</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/formalTitle" title="formalTitle"></a>
+	<h3 class="method-title"><code><a href="#//api/name/formalTitle">&nbsp;&nbsp;formalTitle</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The formal <a href="#//api/name/title">title</a> of the section in a localized string, for use in the legal document.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *formalTitle</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the value of this property is <code>nil</code>, the value of <a href="#//api/name/title"><code>title</code></a> is used in the legal document instead.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/summary" title="summary"></a>
+	<h3 class="method-title"><code><a href="#//api/name/summary">&nbsp;&nbsp;summary</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A short summary of the <a href="#//api/name/content">content</a> in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *summary</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The summary is displayed as description text in the animated consent sequence.
+The summary should be limited in length, so that the consent can be reliably
+displayed on smaller screens.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/content" title="content"></a>
+	<h3 class="method-title"><code><a href="#//api/name/content">&nbsp;&nbsp;content</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The content of the section in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *content</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In a consent review step or in PDF file generation, the string is printed as the section&rsquo;s
+content. The string is also displayed as Learn More content in a visual consent step.</p>
+
+<p>This property is never prepopulated based on the value of <a href="#//api/name/type"><code>type</code></a>. If both <code>content</code> and <a href="#//api/name/htmlContent"><code>htmlContent</code></a> are non-nil, the value of the <a href="#//api/name/htmlContent"><code>htmlContent</code></a> property is used.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/htmlContent" title="htmlContent"></a>
+	<h3 class="method-title"><code><a href="#//api/name/htmlContent">&nbsp;&nbsp;htmlContent</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The HTML <a href="#//api/name/content">content</a> used to override the <a href="#//api/name/content"><code>content</code></a> property if additional formatting is needed. The <a href="#//api/name/content">content</a> should be localized.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *htmlContent</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>In cases where plain text <a href="#//api/name/content">content</a> is not sufficient to convey important details
+during the consent process, you can provide HTML <a href="#//api/name/content">content</a> in this property. When you do this, the <code>htmlContent</code> property takes precedence over the <a href="#//api/name/content"><code>content</code></a> property.</p>
+
+<p>In a consent review step or in PDF file generation, the value of this property is printed as the section&rsquo;s
+<a href="#//api/name/content">content</a>; in a visual consent step, the <a href="#//api/name/content">content</a> is displayed as Learn More <a href="#//api/name/content">content</a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/contentURL" title="contentURL"></a>
+	<h3 class="method-title"><code><a href="#//api/name/contentURL">&nbsp;&nbsp;contentURL</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The NSURL used to override the &lsquo;htmlContent&rsquo; and &lsquo;consent&rsquo; property if a document should be required.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSURL *contentURL</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This property is used to display a document when required by an authortity.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/omitFromDocument" title="omitFromDocument"></a>
+	<h3 class="method-title"><code><a href="#//api/name/omitFromDocument">&nbsp;&nbsp;omitFromDocument</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>When set to YES, the section is omitted in a consent review step or in PDF file generation. This property is NO by default.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL omitFromDocument</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/customImage" title="customImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/customImage">&nbsp;&nbsp;customImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A custom illustration for the consent.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) UIImage *customImage</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The custom <a href="#//api/name/image">image</a> can override the <a href="#//api/name/image">image</a> associated with any of the predefined
+section types for an <a href="../Classes/ORKVisualConsentStep.html"><code>ORKVisualConsentStep</code></a> object. It is ignored for a consent review step and
+for PDF generation.</p>
+
+<p>The <a href="#//api/name/image">image</a> is used in template rendering mode, and is tinted using the tint color.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/customLearnMoreButtonTitle" title="customLearnMoreButtonTitle"></a>
+	<h3 class="method-title"><code><a href="#//api/name/customLearnMoreButtonTitle">&nbsp;&nbsp;customLearnMoreButtonTitle</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A custom Learn More button <a href="#//api/name/title">title</a> in a localized string.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *customLearnMoreButtonTitle</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The predefined section types have localized descriptive Learn More button
+titles for a visual consent step. When this property is not <code>nil</code>, it overrides that
+default text.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/customAnimationURL" title="customAnimationURL"></a>
+	<h3 class="method-title"><code><a href="#//api/name/customAnimationURL">&nbsp;&nbsp;customAnimationURL</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A file URL that specifies a custom transition animation video.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSURL *customAnimationURL</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Animations of the illustration between one screen and the next are provided
+by default for transitions between consecutive section <a href="#//api/name/type"><code>type</code></a> codes. Custom
+sections and out-of-order transitions may require custom animations.</p>
+
+<p>The animation loaded from the file URL is played aspect fill in the
+illustration area for forward transitions only. The video is rendered in
+template mode, with white treated as if it were transparent.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

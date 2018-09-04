@@ -67,7 +67,7 @@ static const CGFloat HeaderHeight = 25.0;
 static const CGFloat FooterHeight = 25.0;
 static const CGFloat PageEdge = 72.0 / 4;
 
-- (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock {
+- (void)writePDFFromHTML:(NSString *)html completionBlock:(void (^)(NSData *data, NSError *error))completionBlock {
     
     _pageMargins = UIEdgeInsetsMake(PageEdge, PageEdge, PageEdge, PageEdge);
     _pageSize = [ORKHTMLPDFWriter defaultPageSize];
@@ -97,7 +97,7 @@ static const CGFloat PageEdge = 72.0 / 4;
     UIPrintFormatter *formatter = self.webView.viewPrintFormatter;
     
     ORKHTMLPDFPageRenderer *renderer = self.printRenderer;
-    if(renderer == nil) {
+    if (renderer == nil) {
         renderer = [[ORKHTMLPDFPageRenderer alloc] init];
         renderer.pageMargins = self.pageMargins;
         renderer.footerHeight = FooterHeight;

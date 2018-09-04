@@ -36,6 +36,8 @@
 	<string>This app records motion data during certain tasks.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app uses Speech Recognition during certain tasks.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>This app reads your Health Records data during certain tasks.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

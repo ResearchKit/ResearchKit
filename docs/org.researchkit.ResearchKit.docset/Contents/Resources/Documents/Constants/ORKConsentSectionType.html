@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKConsentSectionType Constants Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKConsentSectionType Constants Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Declared in</th>
+	<td>ORKConsentSection.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+
+                    
+                    <h3 class="subsubtitle method-title">ORKConsentSectionType</h3>
+                    
+					
+					<div class="section section-overview">
+                        <p><code>ORKConsentSectionType</code> enumerates the predefined visual consent sections
+available in the ResearchKit framework.</p>
+
+<p>Although the visuals are predefined, and default localized titles and Learn
+More button titles are provided, you need to provide in <a href="../Classes/ORKConsentSection.html"><code>ORKConsentSection</code></a> the summary strapline on each visual consent
+page and the actual Learn More content, because these items are specific to each individual
+study.</p>
+
+<p>Not every section is applicable to every study, and most studies
+are likely to require additional sections.</p>
+					</div>
+					
+					
+                    <div class="section">
+                        <!-- display enum values -->
+                        
+                        <h4 class="method-subtitle">Definition</h4>
+                        <code>typedef NS_ENUM(NSInteger, ORKConsentSectionType ) {<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeOverview</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeDataGathering</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypePrivacy</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeDataUse</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeTimeCommitment</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeStudySurvey</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeStudyTasks</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeWithdrawing</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeCustom</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">ORKConsentSectionTypeOnlyInDocument</a>,<br>
+                            
+                            };</code>
+                    
+                    </div>
+                    
+                    <div class="section section-methods">
+                        <h4 class="method-subtitle">Constants</h4>
+                        <dl class="termdef">
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeOverview"></a><code>ORKConsentSectionTypeOverview</code></dt>
+<dd>
+
+
+<pre><code> Overview of the informed consent process.
+
+ This content can inform the user of what to expect during the process,
+ and provide general background information on the purpose of the study.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeDataGathering"></a><code>ORKConsentSectionTypeDataGathering</code></dt>
+<dd>
+
+
+<pre><code> A section informing the user that sensor data will be collected.
+
+ This content can identify which sensors will be used, for how long,
+ and for what purpose.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypePrivacy"></a><code>ORKConsentSectionTypePrivacy</code></dt>
+<dd>
+
+
+<pre><code> A section describing the privacy policies for the study.
+
+ This content can describe how data is protected, the processes used
+ to sanitize the collected data or make it anonymous, and address the risks
+ involved.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeDataUse"></a><code>ORKConsentSectionTypeDataUse</code></dt>
+<dd>
+
+
+<pre><code> A section describing how the collected data will be used.
+
+ This content can include details about those who will have access to the data, the types of
+ analysis that will be performed, and the degree of control the participant
+ may have over the data after it is collected.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeTimeCommitment"></a><code>ORKConsentSectionTypeTimeCommitment</code></dt>
+<dd>
+
+
+<pre><code>A section describing how much time is required for the study.
+
+ This content can help users understand what to expect as they participate in the study.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeStudySurvey"></a><code>ORKConsentSectionTypeStudySurvey</code></dt>
+<dd>
+
+
+<pre><code> A section describing survey use in the study.
+
+ This content can explain how survey data will be collected, for what purpose,
+ and make it clear to what extent participation is optional.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeStudyTasks"></a><code>ORKConsentSectionTypeStudyTasks</code></dt>
+<dd>
+
+
+<pre><code> A section describing active task use in the study.
+
+ This content can describe what types of tasks need to be performed, how
+ often, and for what purpose. Any risks that are involved can
+ also be communicated in this section.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeWithdrawing"></a><code>ORKConsentSectionTypeWithdrawing</code></dt>
+<dd>
+
+
+<pre><code> A section describing how to withdraw from the study.
+
+ This section can describe the policies
+ that govern the collected data if the user decides to withdraw.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeCustom"></a><code>ORKConsentSectionTypeCustom</code></dt>
+<dd>
+
+
+<pre><code> A custom section.
+
+ Custom sections don't have a predefined title, summary, content, image,
+ or animation. A consent document may have as many or as few custom sections
+ as needed.
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="ORKConsentSectionTypeOnlyInDocument"></a><code>ORKConsentSectionTypeOnlyInDocument</code></dt>
+<dd>
+
+
+<pre><code> Document-only sections.
+
+ Document-only sections are ignored for a visual consent step and are only
+ displayed in a consent review step (assuming no value is provided for the  `htmlReviewContent` property).
+</code></pre>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">ORKConsentSection.h</code>.
+	</p>
+	
+</dd>
+                            
+                        </dl>
+                    </div>
+                    
+
+                    
+                    
+
+                    
+
+                    
+                    <div class="method-subsection declared-in-section">
+                        <h4 class="method-subtitle">Declared In</h4>
+                        <p><code class="declared-in-ref">ORKConsentSection.h</code></p>
+                    </div>
+                    
+                    
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

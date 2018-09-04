@@ -104,6 +104,10 @@
         [self applyAnswerFormat];
         
         [self answerDidChange];
+        
+        // Avoid exposing both this cell and its inner text view as elements to accessibility
+        // See also ORKCustomStepView -accessibilityElements
+        self.accessibilityElements = @[self.textView];
     }
     [super prepareView];
 }

@@ -572,8 +572,15 @@
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
+"AX_BUTTON_ANNOTATE" = "Annotate";
+"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
+"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
+"AX_BUTTON_SHARE" = "Share";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
 
 "AX_SIGNVIEW_LABEL" = "Designated signature field";
 "AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
@@ -608,9 +615,36 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Dismiss keyboard";
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
 "AX_GRAPH_STACK_PREFIX" = "Stack composed of";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your left ear.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tap for Right Ear";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your right ear.";
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons for each ear are located. When the test starts, the buttons will be directly tappable. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Tap for one finger";
+"AX_TAP_BUTTON_2_LABEL" = "Tap for other finger";
+"AX_TAP_BUTTON_HINT" = "Activate to make the buttons directly tappable.";
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons are located. Activate either button to make the buttons directly tappable.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Buttons are now directly tappable.";
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";

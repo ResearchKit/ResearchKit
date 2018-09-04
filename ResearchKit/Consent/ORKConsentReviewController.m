@@ -40,7 +40,7 @@
 #import "ORKSkin.h"
 
 
-@interface ORKConsentReviewController () <UIWebViewDelegate>
+@interface ORKConsentReviewController () <UIWebViewDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -49,18 +49,22 @@
     UIToolbar *_toolbar;
     NSString *_htmlString;
     NSMutableArray *_variableConstraints;
+    UIBarButtonItem *_agreeButton;
 }
 
-- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate {
+- (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate requiresScrollToBottom:(BOOL)requiresScrollToBottom {
     self = [super init];
     if (self) {
         _htmlString = html;
         _delegate = delegate;
         
+        _agreeButton = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_AGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(ack)];
+        _agreeButton.enabled = !requiresScrollToBottom;
+        
         self.toolbarItems = @[
                              [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DISAGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancel)],
                              [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                             [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_AGREE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(ack)]];
+                             _agreeButton];
     }
     return self;
 }
@@ -80,6 +84,9 @@
     [_webView loadHTMLString:_htmlString baseURL:ORKCreateRandomBaseURL()];
     _webView.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
     _webView.scrollView.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
+    if (!_agreeButton.isEnabled) {
+        _webView.scrollView.delegate = self;
+    }
     _webView.delegate = self;
     [_webView setClipsToBounds:YES];
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -180,6 +187,29 @@
         return NO;
     }
     return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    //need a delay here because of a race condition where the webview may not have fully rendered by the time this is called in which case scrolledToBottom returns YES because everything == 0
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (!_agreeButton.isEnabled && [self scrolledToBottom:_webView.scrollView]) {
+            [_agreeButton setEnabled:YES];
+        }
+    });
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!_agreeButton.isEnabled && [self scrolledToBottom:scrollView]) {
+        _agreeButton.enabled = YES;
+    }
+}
+
+- (BOOL)scrolledToBottom:(UIScrollView *)scrollView {
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    UIEdgeInsets inset = scrollView.contentInset;
+    CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
+    return (currentOffset - scrollView.contentSize.height >= 0);
 }
 
 @end

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKTextScaleAnswerFormat Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/defaultIndex">defaultIndex</option>
+		
+		<option value="//api/name/gradientColors">gradientColors</option>
+		
+		<option value="//api/name/gradientLocations">gradientLocations</option>
+		
+		<option value="//api/name/textChoices">textChoices</option>
+		
+		<option value="//api/name/vertical">vertical</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithTextChoices:defaultIndex:">- initWithTextChoices:defaultIndex:</option>
+		
+		<option value="//api/name/initWithTextChoices:defaultIndex:vertical:">- initWithTextChoices:defaultIndex:vertical:</option>
+		
+		<option value="//api/name/questionType">- questionType</option>
+		
+		<option value="//api/name/validateParameters">- validateParameters</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKTextScaleAnswerFormat Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKAnswerFormat.html">ORKAnswerFormat</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKAnswerFormat.h<br />ORKAnswerFormat.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKTextScaleAnswerFormat</code> represents an answer format that includes a discrete slider control
+with a text label next to each step.</p>
+
+<p>The scale answer format produces an <a href="../Classes/ORKChoiceQuestionResult.html"><code>ORKChoiceQuestionResult</code></a> object that contains the selected text
+choice&rsquo;s value.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithTextChoices:defaultIndex:vertical:" title="initWithTextChoices:defaultIndex:vertical:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTextChoices:defaultIndex:vertical:">&ndash;&nbsp;initWithTextChoices:defaultIndex:vertical:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized text scale answer format using the specified values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTextChoices:(NSArray&lt;ORKTextChoice*&gt; *)<em>textChoices</em> defaultIndex:(NSInteger)<em>defaultIndex</em> vertical:(BOOL)<em>vertical</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>textChoices</code></th>
+						<td><p>An array of text choices which will be used to determine the
+                                        number of steps in the slider, and
+                                    to fill the text label next to each of the steps. The array must
+                                        contain between 2 and 8 text choices.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultIndex</code></th>
+						<td><p>The default index of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>vertical</code></th>
+						<td><p>Pass <code>YES</code> to use a <a href="#//api/name/vertical">vertical</a> scale; for the default horizontal
+                                        scale, pass <code>NO</code>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized text scale answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithTextChoices:defaultIndex:" title="initWithTextChoices:defaultIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTextChoices:defaultIndex:">&ndash;&nbsp;initWithTextChoices:defaultIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized text scale answer format using the specified values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTextChoices:(NSArray&lt;ORKTextChoice*&gt; *)<em>textChoices</em> defaultIndex:(NSInteger)<em>defaultIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>textChoices</code></th>
+						<td><p>An array of text choices which will be used to determine the
+                                        number of steps in the slider, and
+                                    to fill the text label next to each of the steps. The array must
+                                        contain between 2 and 8 text choices.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultIndex</code></th>
+						<td><p>The default index of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized text scale answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is a convenience initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/textChoices" title="textChoices"></a>
+	<h3 class="method-title"><code><a href="#//api/name/textChoices">&nbsp;&nbsp;textChoices</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An array of text choices which provides the text to be shown next to each of the slider steps.
+(read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, readonly) NSArray&lt;ORKTextChoice*&gt; *textChoices</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultIndex" title="defaultIndex"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultIndex">&nbsp;&nbsp;defaultIndex</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The default index for the slider. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) NSInteger defaultIndex</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If the value of this property is less than zero or greater than the number of text choices,
+the slider has no default value.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/vertical" title="vertical"></a>
+	<h3 class="method-title"><code><a href="#//api/name/vertical">&nbsp;&nbsp;vertical</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the scale is oriented vertically. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, getter=isVertical) BOOL vertical</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/gradientColors" title="gradientColors"></a>
+	<h3 class="method-title"><code><a href="#//api/name/gradientColors">&nbsp;&nbsp;gradientColors</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The colors to use when drawing a color gradient above the slider. Colors are drawn such that
+lower indexes correspond to the minimum side of the scale, while colors at higher indexes in
+the array corresond to the maximum side of the scale.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSArray&lt;UIColor*&gt; *gradientColors</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Setting this value to nil results in no gradient being drawn. Defaults to nil.</p>
+
+<p>An example usage would set an array of red and green to visually indicate a scale from bad to good.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/gradientLocations" title="gradientLocations"></a>
+	<h3 class="method-title"><code><a href="#//api/name/gradientLocations">&nbsp;&nbsp;gradientLocations</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Indicates the position of gradient stops for the colors specified in <a href="#//api/name/gradientColors"><code>gradientColors</code></a>.
+Gradient stops are specified as values between 0 and 1. The values must be monotonically
+increasing.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSArray&lt;NSNumber*&gt; *gradientLocations</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If nil, the stops are spread uniformly across the range. Defaults to nil.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/validateParameters" title="validateParameters"></a>
+	<h3 class="method-title"><code><a href="#//api/name/validateParameters">&ndash;&nbsp;validateParameters</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Validates the parameters of the answer format to ensure that they can be displayed.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)validateParameters</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Typically, this method is called by the validation methods of the owning objects, which are
+themselves called when a step view controller that contains this answer format is
+about to be displayed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/questionType" title="questionType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/questionType">&ndash;&nbsp;questionType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The type of question. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKQuestionType)questionType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>You can use this enumerated value in your Objective-C code to switch on
+a rough approximation of the type of question that is being asked.</p>
+
+<p>Note that answer format subclasses override the getter to return the appropriate question
+type.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

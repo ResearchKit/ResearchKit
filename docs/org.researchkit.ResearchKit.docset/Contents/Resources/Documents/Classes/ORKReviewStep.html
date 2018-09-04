@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKReviewStep Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/excludeInstructionSteps">excludeInstructionSteps</option>
+		
+		<option value="//api/name/isStandalone">isStandalone</option>
+		
+		<option value="//api/name/resultSource">resultSource</option>
+		
+		<option value="//api/name/steps">steps</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/embeddedReviewStepWithIdentifier:">+ embeddedReviewStepWithIdentifier:</option>
+		
+		<option value="//api/name/standaloneReviewStepWithIdentifier:steps:resultSource:">+ standaloneReviewStepWithIdentifier:steps:resultSource:</option>
+		
+		<option value="//api/name/stepViewControllerClass">+ stepViewControllerClass</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKReviewStep Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStep.html">ORKStep</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKReviewStep.h<br />ORKReviewStep.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKReviewStep</code> class is a concrete subclass of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> that represents
+a step in which existing question results can be reviewed by the user.</p>
+
+<p>There are two separate scenarios for using <code>ORKReviewStep</code>. The first one is to embed a review step within an ongoing
+survey, which means an instance of <code>ORKReviewStep</code> might be placed at the end or in the middle of a task. The second
+scenario is meant to use <code>ORKReviewStep</code> standalone for reviewing an already completed task.</p>
+
+<p>To use a review step, instantiate an <code>ORKReviewStep</code> object, fill in its properties, and include it in a task. Next,
+create a task view controller for the task and present it.</p>
+
+<p>When a task view controller presents an <code>ORKReviewStep</code> object, it instantiates an <a href="../Classes/ORKReviewStepViewController.html"><code>ORKReviewStepViewController</code></a> object
+to present the step. This view controller lists both <a href="#//api/name/steps">steps</a> and step results to provide all entered data at a glance. It
+also allows the user to navigate directly to a certain step. However, results may only be changed from there, if the
+review step is used within an ongoing survey (<code>embedded</code>).</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/standaloneReviewStepWithIdentifier:steps:resultSource:" title="standaloneReviewStepWithIdentifier:steps:resultSource:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/standaloneReviewStepWithIdentifier:steps:resultSource:">+&nbsp;standaloneReviewStepWithIdentifier:steps:resultSource:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new standalone review step that includes the specified identifier, <a href="#//api/name/steps">steps</a>, and result source.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)standaloneReviewStepWithIdentifier:(NSString *)<em>identifier</em> steps:(NSArray *)<em>steps</em> resultSource:(id&lt;ORKTaskResultSource,NSSecureCoding&gt;)<em>resultSource</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The identifier of the step (a step identifier should be unique within the task).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>steps</code></th>
+						<td><p>The <a href="#//api/name/steps">steps</a> that should be reviewed. Currently, only question, instruction and
+                      form <a href="#//api/name/steps">steps</a> can be reviewed. Any other step type will be ignored.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultSource</code></th>
+						<td><p>The source that should be consulted to obtain the corresponding step results.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/embeddedReviewStepWithIdentifier:" title="embeddedReviewStepWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/embeddedReviewStepWithIdentifier:">+&nbsp;embeddedReviewStepWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new embedded review step that includes the specified identifier. Steps and step results are directly taken
+from the current task.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)embeddedReviewStepWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The identifier of the step (a step identifier should be unique within the task).</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerClass" title="stepViewControllerClass"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerClass">+&nbsp;stepViewControllerClass</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (Class)stepViewControllerClass</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/steps" title="steps"></a>
+	<h3 class="method-title"><code><a href="#//api/name/steps">&nbsp;&nbsp;steps</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The steps to be reviewed. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray&lt;ORKStep*&gt; *steps</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This property contains all steps that are included in the review process. Currently, only question, instruction and
+form steps can be reviewed. Any other step type will be ignored.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resultSource" title="resultSource"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resultSource">&nbsp;&nbsp;resultSource</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The result source to obtain step results from. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) id&lt;ORKTaskResultSource,NSSecureCoding&gt; resultSource</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This property contains the source that should be consulted to obtain step results.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/excludeInstructionSteps" title="excludeInstructionSteps"></a>
+	<h3 class="method-title"><code><a href="#//api/name/excludeInstructionSteps">&nbsp;&nbsp;excludeInstructionSteps</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether instruction <a href="#//api/name/steps">steps</a> should be excluded from review.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) BOOL excludeInstructionSteps</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>NO</code>. When the value is <code>YES</code>, any instances of <a href="../Classes/ORKInstructionStep.html"><code>ORKInstructionStep</code></a> are
+excluded from the review step in either embedded or standalone mode.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/isStandalone" title="isStandalone"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isStandalone">&nbsp;&nbsp;isStandalone</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether this review step is used in standalone mode (read-only).</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) BOOL isStandalone</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKReviewStep_Internal.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

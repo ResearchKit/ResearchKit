@@ -135,6 +135,10 @@ static const CGFloat TickViewSize = 122;
     return [super accessibilityTraits] | UIAccessibilityTraitImage;
 }
 
+- (NSString *)accessibilityLabel {
+    return ORKLocalizedString(@"AX_COMPLETION_ILLUSTRATION", nil);
+}
+
 @end
 
 
@@ -164,10 +168,6 @@ static const CGFloat TickViewSize = 122;
     if (animated) {
         [_completionStepView setAnimationPoint:1 animated:YES];
     }
-    
-    UILabel *captionLabel = self.stepView.headerView.captionLabel;
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, captionLabel);
-    _completionStepView.accessibilityLabel = [NSString localizedStringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
 - (void)setCheckmarkColor:(UIColor *)checkmarkColor {
