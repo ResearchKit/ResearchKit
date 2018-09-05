@@ -34,7 +34,6 @@
 static const double VALUE_MIN = 0.0;
 static const double VALUE_MAX = 1.0;
 static const double VIEW_DIMENSION = 200.0;
-static const double LAYER_INSET = 20.0;
 static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
 
 @implementation ORKRingView {

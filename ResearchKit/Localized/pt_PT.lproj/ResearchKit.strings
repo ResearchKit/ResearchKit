@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Leia com atenção o texto abaixo e toque em Concordo se pretende continuar.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Leia com atenção";
 "CONSENT_SIGNATURE_TITLE" = "Assinatura";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Assine com o dedo na linha abaixo.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Assine com o dedo na caixa abaixo.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Assine aqui";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Página %1$ld de %2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Passo %1$@ de %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ de %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valor inválido";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Escolha o sexo";
 "DOB_FORM_ITEM_TITLE" = "Data de nascimento";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Escolha uma data";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Número de telefone";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Confirmação";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "pés";
 "MEASURING_UNIT_IN" = "pol.";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "esquerdo";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Cancelar";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Limpar";
+"BUTTON_APPLY" = "Aplicar";
 "BUTTON_DISAGREE" = "Não concordo";
 "BUTTON_DONE" = "OK";
 "BUTTON_GET_STARTED" = "Começar";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Equilíbrio e modo de andar";
 "WALK_INTRO_TEXT" = "Este exercício mede o seu equilíbrio e modo de andar. Se não tem condições para andar em segurança sem ajuda, não continue.";
 "WALK_INTRO_2_TEXT_%ld" = "Encontre um sítio onde possa andar em linha reta, em segurança e sem ajuda, durante aproximadamente %ld passos.";
-"WALK_INTRO_2_DETAIL" = "Ponha o telefone no bolso ou dentro da mala e siga as instruções pelos auriculares.";
+"WALK_INTRO_2_DETAIL" = "Ponha o dispositivo no bolso ou dentro da mala e siga as instruções via áudio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Agora, pare e mantenha-se de pé durante %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Pare e mantenha-se de pé durante %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Dê meia‑volta e volte ao ponto de partida.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Dê até %ld passos em linha reta.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Escolha um sítio onde possa andar em segurança, para trás e para frente em linha reta. Tente andar sem parar, dando a volta no final do percurso como se estivesse a andar à volta de um cone.\n\nDepois, ser‑lhe‑à pedido que se vire, dando uma volta completa, e que permaneça imóvel, com os braços ao logo do corpo e os pés afastados à largura dos ombros.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Quando estiver pronto(a), toque em Começar.\nDepois, coloque o telefone no bolso ou na carteira e siga as instruções.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Escolha um sítio onde possa andar em segurança, para trás e para frente em linha reta. Tente andar sem parar, dando a volta no final do percurso como se estivesse a andar à volta de um cone.\n\nDepois, ser‑lhe‑á pedido que se vire, dando uma volta completa, e que permaneça imóvel, com os braços ao logo do corpo e os pés afastados à largura dos ombros.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Quando estiver pronto(a), toque em Começar.\nDepois, coloque o dispositivo no bolso ou na carteira e siga as instruções via áudio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Ande em linha reta, para trás e para frente, durante %@. Ande normalmente.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Rode dando uma volta completa e, depois, permaneça imóvel durante %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Concluiu este exercício.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Mão direita";
 "TAPPING_TASK_TITLE_LEFT" = "Mão esquerda";
 "TAPPING_INTRO_TEXT" = "Este exercício mede a sua velocidade de toque.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Coloque o telefone numa superfície plana.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Coloque o dispositivo numa superfície plana.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Com dois dedos da mesma mão, toque alternadamente nos botões no ecrã.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Com dois dedos da mão direita, toque alternadamente nos botões no ecrã.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Com dois dedos da mão esquerda, toque alternadamente nos botões no ecrã.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Com a mão ESQUERDA, toque nos botões.";
 "TAPPING_SKIP_TITLE" = "Não testar esta mão";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Grelha de Amsler";
+"AMSLER_GRID_INTRO_TEXT" = "Este exercício ajuda a detetar problemas na visão do utilizador.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Mantenha o dispositivo a uma distância de 30 centímetros do seu rosto, ao nível dos olhos, durante o teste.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Feche o %@ e olhe atentamente para o ponto no centro da grelha.\n\nCom o dedo ou o estilete, marque as distorções que vê, tais como linhas desfocadas ou onduladas.\n\nQuando terminar, passe o dedo para a esquerda em qualquer local fora da grelha.";
+"AMSLER_GRID_LEFT_EYE" = "olho esquerdo";
+"AMSLER_GRID_RIGHT_EYE" = "olho direito";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
 "AUDIO_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "AUDIO_INSTRUCTION" = "Diga “Aaaaah” ao microfone durante o máximo de tempo possível.";
 "AUDIO_INTRO_TEXT" = "Respire fundo e diga “Aaaaah” ao microfone durante o máximo de tempo possível. Mantenha um nível vocal estável - as barras de áudio devem permanecer azuis.";
-"AUDIO_INTENDED_USE" = "Este exercício avalia a sua voz, gravando‑a através do microfone na parte inferior do telefone.";
+"AUDIO_INTENDED_USE" = "Este exercício avalia a sua voz, gravando‑a através do microfone na parte inferior do dispositivo.";
 "AUDIO_TOO_LOUD_LABEL" = "Demasiado alto";
 "AUDIO_GENERIC_ERROR_LABEL" = "Não é possível gravar áudio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Aguarde enquanto verificamos o nível de ruído de fundo.";
@@ -294,7 +308,7 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria de tom";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Este exercício mede a sua capacidade de ouvir sons diferentes.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de começar, ligue os auscultadores e coloque-os na cabeça.\n\nO som será muito subtil e diferente de um tom de aviso normal. O som começará suavemente e o volume aumentará de forma lenta. Preste atenção e toque no botão direito ou esquerdo para indicar em que ouvido está a ouvir o som.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de começar, ligue os auscultadores e coloque‑os na cabeça.\n\nO som será muito subtil e não é como um som de aviso normal. O som começará suave e, lentamente, aumentará de volume. Preste atenção e toque no botão da esquerda ou da direita para indicar em que ouvido está a escutar o som.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Deve ouvir um som agora. Ajuste o volume usando os controlos na parte lateral do dispositivo.\n\nToque em qualquer botão quando estiver pronto para começar.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Sempre que começar a ouvir um som, toque no botão esquerdo ou direito para indicar o ouvido em que está a ouvir o som.";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Ouvido direito";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, esquerda";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, direita";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria de tom";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Este exercício identifica os limiares de audição de uma pessoa na escala dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Certifique‑se de que o volume do dispositivo está no máximo.\n\nDurante esta tarefa, um som subtil será reproduzido no ouvido esquerdo ou direito.\n\nOuça atentamente e toque no botão sempre que ouvir um som.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Questionário de preparação.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecione a sua preferência de “melhor ouvido”, se for o caso";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "esquerdo";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "direito";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "sem preferência";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memória espacial";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo resolver este puzzle";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Intervalo de movimento";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption tem de ser direito ou esquerdo";
 
 /* Knee Range of Motion active task */
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Reconhecimento da fala";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Este exercício grava a sua fala através do microfone na parte inferior do dispositivo e converte‑a em texto.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Prima o botão para iniciar a gravação antes de falar.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Iniciar gravação";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Parar gravação";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Editar transcrição";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edite o texto transcrito para corrigir qualquer interpretação incorreta da fala.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "A transcrição aparecerá aqui.";
+"SPEECH_RECOGNITION_FAILED" = "Falha no reconhecimento da fala.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Não foi possível inicializar o reconhecimento de fala.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Reproduzir áudio";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Parar áudio";
+"SPEECH_IN_NOISE_TITLE" = "Fala com ruído";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Este exercício mede a inteligibilidade da fala em ambientes ruidosos.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "No âmbito deste teste, irá:\n\nOuvir uma frase.\n\nRepetir claramente o que ouviu ou passar à frente e digitar o que ouviu com o teclado. \n\nSe optar por repetir o que ouviu, poderá modificar a transcrição gerada pelo motor de reconhecimento de fala.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Calibragem de volume";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Toque em “Reproduzir áudio” para ajustar o volume para um nível confortável e, depois, toque em “Parar áudio” para avançar.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Ouvir";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Uma frase misturada com ruído de fundo será reproduzida, apenas uma vez, com um rácio sinal/ruído (SNR) aleatório.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Falar";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repita o que ouviu.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar ficheiro";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Não foi possível remover ficheiros de registo suficientes para atingir o limite.";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Os dados recolhidos não foram encontrados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum diretório de saída.";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Nível de SPL";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Este exercício mede o nível de pressão do som ambiente. Se os níveis de ruído forem demasiado elevados, não poderá continuar. Vá para um local mais tranquilo para completar este exercício ou repita‑o mais tarde.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "A calcular…";
+"ENVIRONMENTSPL_THRESHOLD" = "Limiar: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Sem dados";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Voltar";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Mostrar miniatura do PDF";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Ocultar miniatura do PDF";
+"AX_BUTTON_ANNOTATE" = "Anotar";
+"AX_BUTTON_SHOW_SEARCH" = "Mostrar barra de pesquisa";
+"AX_BUTTON_HIDE_SEARCH" = "Ocultar barra de pesquisa";
+"AX_BUTTON_SHARE" = "Partilhar";
 
-"AX_IMAGE_ILLUSTRATION" = "Ilustração de %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Ilustração de uma marca de seleção dentro de um círculo azul a indicar êxito";
 
 "AX_SIGNVIEW_LABEL" = "Campo de assinatura";
 "AX_SIGNVIEW_HINT" = "Para assinar, toque no ecrã e escreva com o dedo.";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tem disco com tamanhos %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vazio";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Intervalo de %@ a %@";
 "AX_GRAPH_STACK_PREFIX" = "Pilha composta por";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Ponto: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Forma de onda da fala";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Quando a gravação começar, ative uma segunda vez para parar de gravar.";
+
 "AX_AUDIO_BAR_GRAPH" = "Gráfico de barras de áudio";
+
+"AX_AMSLER_GRID_LABEL" = "Grelha de Amsler";
+"AX_AMSLER_GRID_HINT" = "Use o dedo ou o estilete para assinalar diretamente na grelha ou passe o dedo para a esquerda fora da grelha para terminar.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

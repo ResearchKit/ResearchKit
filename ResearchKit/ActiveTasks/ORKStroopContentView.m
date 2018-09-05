@@ -36,8 +36,12 @@
 #import "ORKBorderedButton.h"
 
 
+static const CGFloat minimumButtonHeight = 60;
+static const CGFloat buttonStackViewSpacing = 20.0;
+
 @implementation ORKStroopContentView {
     UILabel *_colorLabel;
+    UIStackView *_buttonStackView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -52,27 +56,31 @@
         [_colorLabel setAdjustsFontSizeToFitWidth:YES];
         
         
-        self.RButton = [[ORKBorderedButton alloc] init];
-        self.RButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.RButton setTitle:ORKLocalizedString(@"STROOP_COLOR_RED_INITIAL", nil) forState:UIControlStateNormal];
+        _RButton = [[ORKBorderedButton alloc] init];
+        _RButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_RButton setTitle:ORKLocalizedString(@"STROOP_COLOR_RED_INITIAL", nil) forState:UIControlStateNormal];
         
-        self.GButton = [[ORKBorderedButton alloc] init];
-        self.GButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.GButton setTitle:ORKLocalizedString(@"STROOP_COLOR_GREEN_INITIAL", nil) forState:UIControlStateNormal];
+        _GButton = [[ORKBorderedButton alloc] init];
+        _GButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_GButton setTitle:ORKLocalizedString(@"STROOP_COLOR_GREEN_INITIAL", nil) forState:UIControlStateNormal];
         
-        self.BButton = [[ORKBorderedButton alloc] init];
-        self.BButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.BButton setTitle:ORKLocalizedString(@"STROOP_COLOR_BLUE_INITIAL", nil) forState:UIControlStateNormal];
+        _BButton = [[ORKBorderedButton alloc] init];
+        _BButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_BButton setTitle:ORKLocalizedString(@"STROOP_COLOR_BLUE_INITIAL", nil) forState:UIControlStateNormal];
         
-        self.YButton = [[ORKBorderedButton alloc] init];
-        self.YButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.YButton setTitle:ORKLocalizedString(@"STROOP_COLOR_YELLOW_INITIAL", nil) forState:UIControlStateNormal];
+        _YButton = [[ORKBorderedButton alloc] init];
+        _YButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_YButton setTitle:ORKLocalizedString(@"STROOP_COLOR_YELLOW_INITIAL", nil) forState:UIControlStateNormal];
+        
+        if (!_buttonStackView) {
+            _buttonStackView = [[UIStackView alloc] initWithArrangedSubviews:@[_RButton, _GButton, _BButton, _YButton]];
+        }
+        _buttonStackView.translatesAutoresizingMaskIntoConstraints = NO;
+        _buttonStackView.spacing = buttonStackViewSpacing;
+        _buttonStackView.axis = UILayoutConstraintAxisHorizontal;
         
         [self addSubview:_colorLabel];
-        [self addSubview:self.RButton];
-        [self addSubview:self.GButton];
-        [self addSubview:self.BButton];
-        [self addSubview:self.YButton];
+        [self addSubview:_buttonStackView];
         
         [self setUpConstraints];
     }
@@ -99,140 +107,39 @@
 
 - (void)setUpConstraints {
     
-    NSMutableArray *constraints = [NSMutableArray array];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _RButton, _GButton, _BButton, _YButton);
-    CGFloat minimumButtonHeight = 60;
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_colorLabel, _buttonStackView);
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(==30)-[_colorLabel]-(>=10)-[_buttonStackView]-(==30)-|"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:views]];
+    
     [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:_colorLabel
+                                       [NSLayoutConstraint constraintWithItem:_buttonStackView
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:nil
+                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                   multiplier:1.0
+                                                                     constant:minimumButtonHeight],
+                                       [NSLayoutConstraint constraintWithItem:_buttonStackView
                                                                     attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
                                                                        toItem:self
                                                                     attribute:NSLayoutAttributeCenterX
                                                                    multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:self.RButton
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.RButton
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.GButton
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.GButton
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.BButton
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.BButton
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.YButton
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight],
-                                       [NSLayoutConstraint constraintWithItem:self.YButton
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1.0
-                                                                     constant:minimumButtonHeight]
+                                                                     constant:0.0]
                                        ]];
-
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_colorLabel]-(==300)-|"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:views]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=10)-[_colorLabel]-(>=10)-|"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:views]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_RButton]-(==100)-|"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:views]];
-    
-    [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:self.GButton
-                                                                    attribute:NSLayoutAttributeTrailing
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:-10.0],
-                                       [NSLayoutConstraint constraintWithItem:self.BButton
-                                                                    attribute:NSLayoutAttributeLeading
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:10.0],
-                                       [NSLayoutConstraint constraintWithItem:self.RButton
-                                                                    attribute:NSLayoutAttributeTrailing
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.GButton
-                                                                    attribute:NSLayoutAttributeLeading
-                                                                   multiplier:1.0
-                                                                     constant:-20.0],
-                                       [NSLayoutConstraint constraintWithItem:self.YButton
-                                                                    attribute:NSLayoutAttributeLeading
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.BButton
-                                                                    attribute:NSLayoutAttributeTrailing
-                                                                   multiplier:1.0
-                                                                     constant:20.0],
-                                       [NSLayoutConstraint constraintWithItem:self.GButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.RButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:self.BButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.RButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:self.YButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.RButton
-                                                                    attribute:NSLayoutAttributeCenterY
-                                                                   multiplier:1.0
-                                                                     constant:0.0]]];
+    for (ORKBorderedButton *button in @[_RButton, _GButton, _BButton, _YButton]) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:button
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:button
+                                                            attribute:NSLayoutAttributeHeight
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+    }
 
     [self addConstraints:constraints];
     [NSLayoutConstraint activateConstraints:constraints];

@@ -91,19 +91,19 @@
         {
             _captionLabel = [ORKHeadlineLabel new];
             _captionLabel.numberOfLines = 0;
-            _captionLabel.textAlignment = NSTextAlignmentLeft;
+            _captionLabel.textAlignment = NSTextAlignmentNatural;
             [self addSubview:_captionLabel];
         }
         
         {
             _learnMoreButton = [ORKTextButton new];
-            _learnMoreButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            _learnMoreButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeading;
             _learnMoreButton.contentEdgeInsets = (UIEdgeInsets){10,0,10,10};
             [_learnMoreButton setTitle:nil forState:UIControlStateNormal];
             [_learnMoreButton addTarget:self action:@selector(learnMoreAction:) forControlEvents:UIControlEventTouchUpInside];
             _learnMoreButton.exclusiveTouch = YES;
             _learnMoreButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-            _learnMoreButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+            _learnMoreButton.titleLabel.textAlignment = NSTextAlignmentNatural;
             [self addSubview:_learnMoreButton];
             self.learnMoreButtonItem = nil;
         }
@@ -111,7 +111,7 @@
         {
             _instructionLabel = [ORKSubheadlineLabel new];
             _instructionLabel.numberOfLines = 0;
-            _instructionLabel.textAlignment = NSTextAlignmentLeft;
+            _instructionLabel.textAlignment = NSTextAlignmentNatural;
             
             [self addSubview:_instructionLabel];
         }

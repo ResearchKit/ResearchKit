@@ -52,6 +52,7 @@
 
 #import "ORKHelpers_Internal.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+#import "ORKSkin.h"
 
 
 typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
@@ -232,7 +233,11 @@ static NSString *const _FamilyNameIdentifier = @"family";
                                              detail:ORKLocalizedString(@"CONSENT_REVIEW_INSTRUCTION", nil)];
 
     ORKConsentReviewController *reviewViewController = [[ORKConsentReviewController alloc] initWithHTML:html delegate:self requiresScrollToBottom:[[self consentReviewStep] requiresScrollToBottom]];
+    if (ORKNeedWideScreenDesign(self.view)) {
+        [reviewViewController setTextForiPadStepTitleLabel:self.title];
+    }
     reviewViewController.localizedReasonForConsent = [[self consentReviewStep] reasonForConsent];
+    reviewViewController.cancelButtonItem = self.cancelButtonItem;
     return reviewViewController;
 }
 

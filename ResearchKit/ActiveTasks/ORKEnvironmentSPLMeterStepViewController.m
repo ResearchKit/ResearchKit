@@ -44,12 +44,7 @@
 
 #import "ORKHelpers_Internal.h"
 #import <AVFoundation/AVFoundation.h>
-
-// iPhone, iPad
-#define ORKEnvironmentSPLMeterSensitivityOffset -23.3
-// device model specific offsets
-#define ORKEnvironmentSPLMeterCalOffset 0.0
-
+#include <sys/sysctl.h>
 
 @interface ORKEnvironmentSPLMeterStepViewController () {
     AVAudioEngine *_audioEngine;
@@ -65,6 +60,7 @@
     float _spl;
     double _samplingInterval;
     double _thresholdValue;
+    double _sensitivityOffset;
     NSInteger _requiredContiguousSamples;
     int _counter;
     NSMutableArray *_recordedSamples;
@@ -87,6 +83,7 @@
         _counter = 0;
         _samplingInterval = 1.0;
         _requiredContiguousSamples = 1;
+        _sensitivityOffset = -23.3;
         _recordedSamples = [NSMutableArray new];
     }
     
@@ -104,6 +101,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    _sensitivityOffset = [self sensitivityOffsetForDevice];
     _environmentSPLMeterContentView = [ORKEnvironmentSPLMeterContentView new];
     [_environmentSPLMeterContentView setProgress:0.01 animated:YES];
     self.activeStepView.activeCustomView = _environmentSPLMeterContentView;
@@ -143,6 +141,17 @@
     [_rmsBuffer removeAllObjects];
 }
 
+- (NSString *)deviceType {
+    return [[UIDevice currentDevice] model];
+}
+
+- (double)sensitivityOffsetForDevice {
+    NSDictionary *lookupTable = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"splMeter_sensitivity_offset"  ofType:@"plist"]];
+    NSString *deviceTypeString = [self deviceType];
+    double sensitivity = [[lookupTable valueForKey:deviceTypeString] doubleValue];
+    return ( sensitivity ? : _sensitivityOffset);
+}
+
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
     // "Now" is the end time of the result, which is either actually now,
@@ -154,6 +163,7 @@
     ORKEnvironmentSPLMeterResult *splResult = [[ORKEnvironmentSPLMeterResult alloc] initWithIdentifier:self.step.identifier];
     splResult.startDate = sResult.startDate;
     splResult.endDate = now;
+    splResult.sensitivityOffset = _sensitivityOffset;
     splResult.recordedSPLMeterSamples = [_recordedSamples copy];
     
     [results addObject:splResult];
@@ -226,43 +236,51 @@
                       bufferSize:_bufferSize
                           format:_inputNodeOutputFormat
                            block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
-                               if (buffer.frameLength != _bufferSize) {
-                                   _bufferSize = buffer.frameLength;
-                               }
-                               int sampleCount = _samplingInterval * _countToFetch;
-                               float rms = 0.0;
-                               for (int i = 0; i < buffer.frameLength; i++) {
-                                   float value = [@(buffer.floatChannelData[0][i]) floatValue];
-                                   rms +=  value * value;
-                               }
-                               dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                   [_rmsBuffer addObject:@(rms)];
-                                   
-                                   // perform averaging based on capture interval
-                                   if (_rmsBuffer.count >= sampleCount + 1) {
-                                       float rmsSum = 0.0;
-                                       int i = sampleCount;
-                                       NSUInteger j = _rmsBuffer.count - 1;
-                                       while (i>0) {
-                                           rmsSum += [_rmsBuffer[j] floatValue];
-                                           i --;
-                                           j --;
-                                       }
-                                       _rmsData = rmsSum/_samplingInterval;
-                                       float calValue = ORKEnvironmentSPLMeterSensitivityOffset - ORKEnvironmentSPLMeterCalOffset;
-                                       _spl = (20 * log10f(sqrtf(_rmsData/(float)_sampleRate))) - calValue + 94;
-                                       [_recordedSamples addObject:[NSNumber numberWithFloat:_spl]];
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self.environmentSPLMeterContentView setProgressCircle:(_spl/_thresholdValue)];
-                                           [self.environmentSPLMeterContentView setDBText:[NSString stringWithFormat:@"%.f", _spl]];
-                                       });
-                                       [self evaluateThreshold:_spl];
-                                       [_rmsBuffer removeAllObjects];
+                               if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionGranted) {
+                                   if (buffer.frameLength != _bufferSize) {
+                                       _bufferSize = buffer.frameLength;
                                    }
-                                   dispatch_semaphore_signal(_semaphoreRms);
-                               });
-                               dispatch_semaphore_wait(_semaphoreRms, DISPATCH_TIME_FOREVER);
-                               
+                                   int sampleCount = _samplingInterval * _countToFetch;
+                                   float rms = 0.0;
+                                   for (int i = 0; i < buffer.frameLength; i++) {
+                                       float value = [@(buffer.floatChannelData[0][i]) floatValue];
+                                       rms +=  value * value;
+                                   }
+                                   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                       [_rmsBuffer addObject:@(rms)];
+                                       
+                                       // perform averaging based on capture interval
+                                       if (_rmsBuffer.count >= sampleCount + 1) {
+                                           float rmsSum = 0.0;
+                                           int i = sampleCount;
+                                           NSUInteger j = _rmsBuffer.count - 1;
+                                           while (i>0) {
+                                               rmsSum += [_rmsBuffer[j] floatValue];
+                                               i --;
+                                               j --;
+                                           }
+                                           _rmsData = rmsSum/_samplingInterval;
+                                           float calValue = _sensitivityOffset;
+                                           _spl = (20 * log10f(sqrtf(_rmsData/(float)_sampleRate))) - calValue + 94;
+                                           [_recordedSamples addObject:[NSNumber numberWithFloat:_spl]];
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self.environmentSPLMeterContentView setProgressCircle:(_spl/_thresholdValue)];
+                                               [self.environmentSPLMeterContentView setDBText:[NSString stringWithFormat:@"%.f", _spl]];
+                                           });
+                                           [self evaluateThreshold:_spl];
+                                           [_rmsBuffer removeAllObjects];
+                                       }
+                                       dispatch_semaphore_signal(_semaphoreRms);
+                                   });
+                                   dispatch_semaphore_wait(_semaphoreRms, DISPATCH_TIME_FOREVER);
+                               } else if ([AVAudioSession sharedInstance].recordPermission == AVAudioSessionRecordPermissionDenied) {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self.environmentSPLMeterContentView setDBText:[NSString stringWithFormat:@"N/A"]];
+                                       [_eqUnit removeTapOnBus:0];
+                                       [_audioEngine stop];
+                                       [_rmsBuffer removeAllObjects];
+                                   });
+                               }
                            }];
         if (!_audioEngine.isRunning && ![[AVAudioSession sharedInstance] isOtherAudioPlaying]) {
             NSError *error = nil;
@@ -291,11 +309,26 @@
     });
 }
 
+- (void) resetAudioSession {
+    NSError *error = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    if (error) {
+        ORK_Log_Error(@"Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
+    }
+    if ([AVAudioSession sharedInstance].isOtherAudioPlaying) {
+        NSError *activationError = nil;
+        [[AVAudioSession sharedInstance] setActive:YES error:&activationError];
+        if (activationError) {
+            ORK_Log_Error(@"Activating AVAudioSession failed with error message: \"%@\"", activationError.localizedDescription);
+        }
+    }
+}
 
 - (void)stepDidFinish {
     [super stepDidFinish];
     
     [self.environmentSPLMeterContentView finishStep:self];
+    [self resetAudioSession];
     [self goForward];
 }
 

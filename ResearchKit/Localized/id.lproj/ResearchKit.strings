@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Tinjau formulir di bawah, dan ketuk Setuju jika Anda siap melanjutkan.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Tinjauan";
 "CONSENT_SIGNATURE_TITLE" = "Tanda Tangan";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Silakan tanda tangan menggunakan jari Anda pada baris di bawah.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Tanda tangani menggunakan jari Anda di kotak di bawah.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan di Sini";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Halaman %1$ld dari %2$ld";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Pilihan Berbagi";
 "CONSENT_SHARE_WIDELY_%@" = "Bagikan data saya dengan %@ dan peneliti berkualifikasi di seluruh dunia";
 "CONSENT_SHARE_ONLY_%@" = "Hanya bagikan data saya dengan %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data penelitian dari partisipasi Anda dalam studi ini.\n\nBerbagi data studi yang dikodekan dengan lebih banyak pihak (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan yang akan datang.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data kajian Anda dari partisipasi Anda dalam kajian ini.\n\nBerbagi data kajian yang dikodekan secara lebih luas (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan mendatang.";
 "LEARN_MORE_CONSENT_SHARING" = "Pelajari berbagi data lebih lanjut";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Tanggal";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Langkah %1$@ dari %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ dari %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nilai tidak sah";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Pilih jenis kelamin";
 "DOB_FORM_ITEM_TITLE" = "Tanggal Lahir";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tanggal";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Nomor Telepon";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verifikasi";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "kaki";
 "MEASURING_UNIT_IN" = "inci";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "kiri";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Batalkan";
 "BUTTON_OK" = "OKE";
 "BUTTON_CLEAR" = "Bersihkan";
+"BUTTON_APPLY" = "Terapkan";
 "BUTTON_DISAGREE" = "Tidak Setuju";
 "BUTTON_DONE" = "Selesai";
 "BUTTON_GET_STARTED" = "Mulai";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Gaya dan Keseimbangan";
 "WALK_INTRO_TEXT" = "Aktivitas ini mengukur gaya dan keseimbangan Anda saat Anda berjalan dan berdiri. Jangan lanjutkan jika Anda tidak dapat berjalan dengan aman tanpa bantuan.";
 "WALK_INTRO_2_TEXT_%ld" = "Temukan tempat yang memungkinkan Anda untuk berjalan kaki dengan aman tanpa bantuan sejauh sekitar %ld langkah dalam garis lurus.";
-"WALK_INTRO_2_DETAIL" = "Masukkan telepon Anda ke saku atau kantong dan ikuti instruksi audio.";
+"WALK_INTRO_2_DETAIL" = "Simpan perangkat Anda di saku atau tas dan ikuti instruksi audio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Sekarang berdiri selama %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Berdiri selama %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Putar balik, dan kembali ke tempat Anda memulai.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Berjalan kaki hingga %ld langkah dalam garis lurus.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Cari tempat untuk dapat berjalan bolak-balik di jalur lurus dengan aman. Coba terus berjalan dengan berbelok di akhir jalur Anda, seolah-olah berjalan mengitari kerucut.\n\nSelanjutnya Anda akan diinstruksikan untuk berputar dalam lingkaran penuh, lalu tetap berdiri dengan lengan berada di samping dan kaki terbuka selebar bahu.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Ketuk Mulai saat Anda siap untuk memulai.\nLalu letakkan telepon Anda di saku atau tas dan ikuti instruksi audio.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Cari tempat yang memungkinkan Anda untuk berjalan maju mundur dalam garis lurus dengan aman. Coba terus berjalan dengan memutar balik di ujung jalur Anda, seakan-akan Anda memutari kerucut lalu lintas.\n\nBerikutnya, Anda akan diinstruksikan untuk memutar dalam lingkaran penuh, kemudian diam berdiri dengan tangan di samping Anda dan kaki Anda direnggangkan selebar bahu.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Ketuk Mulai setelah Anda siap memulai.\nKemudian, letakkan perangkat Anda di saku atau tas dan ikuti instruksi audio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Jalan bolak-balik di jalur lurus selama %@. Jalan dengan normal.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Berputar dalam lingkaran penuh lalu tetap berdiri selama %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Anda telah menyelesaikan aktivitas.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Tangan Kanan";
 "TAPPING_TASK_TITLE_LEFT" = "Tangan Kiri";
 "TAPPING_INTRO_TEXT" = "Aktivitas ini mengukur kecepatan mengetuk Anda.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Letakkan telepon Anda di permukaan datar.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Letakkan perangkat Anda di permukaan datar.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Gunakan dua jari pada tangan yang sama untuk mengetuk tombol di layar secara bergantian.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Gunakan dua jari pada tangan kanan Anda untuk mengetuk tombol di layar secara bergantian.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Gunakan dua jari pada tangan kiri Anda untuk mengetuk tombol di layar secara bergantian.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Ketuk tombol menggunakan tangan KIRI Anda.";
 "TAPPING_SKIP_TITLE" = "Lewati tangan Ini";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Grid Amsler";
+"AMSLER_GRID_INTRO_TEXT" = "Aktivitas ini membantu mendeteksi masalah pada penglihatan pengguna.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Pegang perangkat sejauh 30 cm dari wajah Anda dan sejajar dengan mata selama tes.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Tutup %@ Anda dan lihat ke arah titik di pusat grid persegi.\n\nDengan menggunakan jari atau stylus Anda, tandai semua distorsi yang Anda lihat seperti garis kabur atau bergelombang.\n\nSetelah selesai, gesek ke kiri di mana pun di luar grid.";
+"AMSLER_GRID_LEFT_EYE" = "Mata Kiri";
+"AMSLER_GRID_RIGHT_EYE" = "Mata Kanan";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Suara";
 "AUDIO_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "AUDIO_INSTRUCTION" = "Katakan “Aaaaah” di mikrofon selama mungkin.";
 "AUDIO_INTRO_TEXT" = "Tarik nafas dalam-dalam dan katakan “Aaaaah” ke mikrofon selama Anda bisa. Pertahankan volume suara sehingga bar audio tetap berwarna biru.";
-"AUDIO_INTENDED_USE" = "Tes ini mengevaluasi suara Anda dengan merekamnya saat Anda berbicara melalui mikrofon di bagian bawah telepon Anda.";
+"AUDIO_INTENDED_USE" = "Aktivitas ini mengevaluasi suara Anda dengan merekamnya menggunakan mikrofon di bagian bawah perangkat Anda.";
 "AUDIO_TOO_LOUD_LABEL" = "Terlalu Keras";
 "AUDIO_GENERIC_ERROR_LABEL" = "Tidak dapat merekam audio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Harap tunggu saat kami memeriksa level kebisingan latar belakang.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengukur kemampuan Anda untuk mendengar bunyi yang berbeda.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, colokkan dan kenakan headphone Anda.\n\nBunyi akan terdengar sangat halus dan berbeda dengan nada peringatan.  Bunyi akan mulai terdengar lembut kemudian perlahan semakin mengeras.  Perhatikan dan ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengarnya.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, sambungkan dan kenakan headphone Anda.\n\nBunyi akan terdengar sangat halus dan berbeda dengan nada peringatan biasa.  Bunyi akan terdengar lembut pada awalnya, namun volumenya perlahan-lahan akan bertambah.  Perhatikan dan ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengarnya.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di bagian samping perangkat Anda.\n\nKetuk tombol mana pun setelah Anda siap untuk memulai.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda telah mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di sisi perangkat Anda.\n\nKetuk tombol mana pun setelah Anda siap memulai.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Setiap kali Anda mulai mendegar bunyi, ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengar bunyi tersebut.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Telinga Kiri";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Telinga Kanan";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengidentifikasi level ambang pendengaran seseorang dalam skala dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Pastikan volume perangkat diatur ke level maksimum.\n\nSelama tugas ini, nada halus akan diputar di telinga kiri atau kanan.\n\nDengarkan dengan seksama dan ketuk tombol setiap kali Anda mendengar nada.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Daftar pertanyaan orientasi.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Pilih preferensi Anda untuk 'telinga yang lebih baik', jika ada";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "kiri";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "kanan";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "tidak ada preferensi";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Spasial";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Saya tidak dapat menyelesaikan teka-teki ini";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Cakupan Gerakan";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption harus berupa kiri atau kanan";
 
 /* Knee Range of Motion active task */
@@ -421,7 +446,7 @@
 "PASAT_INTRO_TEXT" = "Pengujian Paced Auditory Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori Anda.";
 "PVSAT_INTRO_TEXT" = "Pengujian Paced Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung visual Anda.";
 "PAVSAT_INTRO_TEXT" = "Pengujian Paced Auditory dan Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori dan visual Anda.";
-"PSAT_INTRO_TEXT_2_%@" = "Satu digit ditampilkan setiap %@ detik.\nAnda harus segera menambahkan tiap digit baru ke digit sebelumnya.\nPerhatian, jangan hitung total keseluruhan, tetapi hanya jumlah dua angka terakhir.";
+"PSAT_INTRO_TEXT_2_%@" = "Digit tunggal dimunculkan setiap %@ detik.\nAnda harus menambahkan setiap digit baru ke digit sebelumnya.\nIngat, jangan menghitung jumlah total, tapi hanya jumlah dua angka terakhir.";
 "PSAT_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "PSAT_INITIAL_INSTRUCTION" = "Ingat digit pertama ini.";
 "PSAT_INSTRUCTION" = "Tambahkan digit baru ini ke digit sebelumnya.";
@@ -430,8 +455,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan diminta untuk melakukan ini %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan dites.\nAnda harus mengambil pasak secepat mungkin, memasukkannya ke lubang, dan, setelah selesai %@ kali, mencabutnya lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan dites.\nAnda harus mengambil pasak secepat mungkin, memasukkannya ke lubang, dan, setelah selesai %@ kali, mencabutnya lagi %@ kali.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kiri Anda.";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Pengenalan Ucapan";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Aktivitas ini merekam ucapan Anda dengan mikrofon di bagian bawah perangkat, dan menerjemahkannya ke teks.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Tekan tombol untuk memulai rekaman sebelum bicara.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Mulai Merekam";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Berhenti Merekam";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edit Transkrip";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit teks transkrip untuk mengoreksi misinterpretasi ucapan.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Transkripsi Anda akan muncul di sini.";
+"SPEECH_RECOGNITION_FAILED" = "Pengenalan ucapan gagal.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Gagal memulai pengenalan ucapan.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Putar Audio";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Hentikan Audio";
+"SPEECH_IN_NOISE_TITLE" = "Ucapan dalam Kebisingan";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Aktivitas ini mengukur seberapa baik ucapan dapat dipahami saat dihadirkan di lingkungan yang bising.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Sebagai bagian dari tes ini, Anda akan:\n\nMendengarkan suatu kalimat.\n\nUlangi dengan jelas apa yang Anda dengar atau lewati untuk mengetik apa yang Anda dengar menggunakan papan ketik.\n\nJika Anda mengulangi apa yang Anda dengar, Anda akan memiliki pilihan untuk memodifikasi transkrip yang dibuat oleh mesin pengenalan ucapan.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Kalibrasi Volume";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Ketuk 'Putar Audio', sesuaikan volume Anda hingga terdengar nyaman, lalu ketuk 'Hentikan Audio' untuk melanjutkan.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Dengarkan";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Kalimat yang dicampur dengan kebisingan latar belakang pada Rasio Sinyal terhadap Kebisingan (SNR) yang acak hanya akan diputar sekali.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Bicara";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Ulangi apa yang Anda dengar.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat menghapus cukup file log untuk mencapai ambang";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Tidak ada data terkumpul yang ditemukan.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Tidak ada direktori output yang ditentukan";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Pengukur SPL";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Aktivitas ini mengukur level tekanan bunyi lingkungan. Jika level kebisingan terlalu tinggi, Anda tidak akan dapat melanjutkan. Pindah ke lokasi yang lebih hening untuk menyelesaikan tugas ini atau mengulangi aktivitas ini di lain waktu.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Menghitung";
+"ENVIRONMENTSPL_THRESHOLD" = "Ambang: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Tidak Ada Data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Kembali";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Tampilkan Gambar Mini PDF";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Sembunyikan Gambar Mini PDF";
+"AX_BUTTON_ANNOTATE" = "Anotasi";
+"AX_BUTTON_SHOW_SEARCH" = "Tampilkan Bar Pencarian";
+"AX_BUTTON_HIDE_SEARCH" = "Sembunyikan Bar Pencarian";
+"AX_BUTTON_SHARE" = "Bagikan";
 
-"AX_IMAGE_ILLUSTRATION" = "Ilustrasi %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Ilustrasi tanda centang dalam lingkaran biru menandakan keberhasilan";
 
 "AX_SIGNVIEW_LABEL" = "Bidang tanda tangan yang ditetapkan";
 "AX_SIGNVIEW_HINT" = "Sentuh layar dan gerakkan jari Anda untuk menandatangani";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Memiliki disk dengan ukuran %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Berkisar dari %@ hingga %@";
 "AX_GRAPH_STACK_PREFIX" = "Tumpukan terdiri dari";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Poin: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Bentuk Gelombang Ucapan";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Setelah perekaman dimulai, aktifkan sekali lagi untuk menghentikan perekaman.";
+
 "AX_AUDIO_BAR_GRAPH" = "Grafik Bar Audio";
+
+"AX_AMSLER_GRID_LABEL" = "Grid Amsler";
+"AX_AMSLER_GRID_HINT" = "Gunakan jari atau stylus Anda untuk menandai grid secara langsung, atau gesek ke kiri di luar grid untuk menyelesaikan.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

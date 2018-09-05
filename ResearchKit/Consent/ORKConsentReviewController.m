@@ -40,6 +40,7 @@
 #import "ORKSkin.h"
 
 
+static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 @interface ORKConsentReviewController () <UIWebViewDelegate, UIScrollViewDelegate>
 
 @end
@@ -49,6 +50,8 @@
     UIToolbar *_toolbar;
     NSString *_htmlString;
     NSMutableArray *_variableConstraints;
+    UILabel *_iPadStepTitleLabel;
+    NSString *_iPadStepTitle;
     UIBarButtonItem *_agreeButton;
 }
 
@@ -69,11 +72,17 @@
     return self;
 }
 
+- (void)setTextForiPadStepTitleLabel:(NSString *)text {
+    _iPadStepTitle = text;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _toolbar = [[UIToolbar alloc] init];
-    _toolbar.items = self.toolbarItems;
+    
+    _toolbar.items = [@[_cancelButtonItem,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]] arrayByAddingObjectsFromArray:self.toolbarItems];
     
     self.view.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
     if (self.navigationController.navigationBar) {
@@ -97,10 +106,30 @@
     _webView.scrollView.clipsToBounds = NO;
     [self updateLayoutMargins];
 
+    [self setupiPadStepTitleLabel];
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
     [self setUpStaticConstraints];
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    if (!_cancelButtonItem) {
+        _cancelButtonItem = cancelButtonItem;
+    }
+}
+
+- (void)setupiPadStepTitleLabel {
+    if (!_iPadStepTitleLabel) {
+        _iPadStepTitleLabel = [UILabel new];
+    }
+    _iPadStepTitleLabel.numberOfLines = 0;
+    _iPadStepTitleLabel.textAlignment = NSTextAlignmentNatural;
+    [_iPadStepTitleLabel setFont:[UIFont systemFontOfSize:iPadStepTitleLabelFontSize weight:UIFontWeightBold]];
+    _iPadStepTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [_iPadStepTitleLabel setAdjustsFontSizeToFitWidth:YES];
+    [_iPadStepTitleLabel setText:_iPadStepTitle];
+    [self.view addSubview:_iPadStepTitleLabel];
 }
 
 - (void)updateLayoutMargins {
@@ -116,13 +145,14 @@
 - (void)setUpStaticConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar, _iPadStepTitleLabel);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_webView][_toolbar]-|"
-                                                                             options:(NSLayoutFormatOptions)0 metrics:nil
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_iPadStepTitleLabel]-[_webView][_toolbar]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
                                                                                views:views]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
@@ -144,12 +174,16 @@
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
-    const CGFloat horizontalMargin = ORKStandardHorizontalMarginForView(self.view);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar, _iPadStepTitleLabel);
+    const CGFloat horizontalMargin = ORKNeedWideScreenDesign(self.view) ? ORKiPadBackgroundViewLeftRightPadding : ORKStandardHorizontalMarginForView(self.view);
     [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
                                                                       options:(NSLayoutFormatOptions)0
                                                                                       metrics:@{ @"horizMargin": @(horizontalMargin) }
                                                                         views:views]];
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_iPadStepTitleLabel]-horizMargin-|"
+                                                                                      options:(NSLayoutFormatOptions)0
+                                                                                      metrics:@{ @"horizMargin": @(horizontalMargin) }
+                                                                                        views:views]];
     [NSLayoutConstraint activateConstraints:_variableConstraints];
 }
 
