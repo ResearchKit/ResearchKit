@@ -1104,6 +1104,8 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
     ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     ORKStepArrayAddStep(steps, touchAnywhereStep);
+
+    touchAnywhereStep.spokenInstruction = touchAnywhereStep.title;
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
@@ -1185,6 +1187,8 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
     ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     ORKStepArrayAddStep(steps, touchAnywhereStep);
+    
+    touchAnywhereStep.spokenInstruction = touchAnywhereStep.title;
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
@@ -1420,10 +1424,13 @@ NSString *const ORKSpeechInNoiseStep2Identifier = @"speech.in.noise2";
         ORKStepArrayAddStep(steps, step);
     }
     {
+        ORKTextAnswerFormat *answerFormat = [ORKTextAnswerFormat new];
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         ORKQuestionStep *editTranscriptStep = [ORKQuestionStep questionStepWithIdentifier:ORKEditSpeechTranscript0StepIdentifier
                                                                                     title:ORKLocalizedString(@"SPEECH_RECOGNITION_QUESTION_TITLE", nil)
                                                                                  question:nil
-                                                                                   answer:[ORKTextAnswerFormat new]];
+                                                                                   answer:answerFormat];
         editTranscriptStep.text = ORKLocalizedString(@"SPEECH_RECOGNITION_QUESTION_TEXT", nil);
         ORKStepArrayAddStep(steps, editTranscriptStep);
     }
@@ -1586,6 +1593,7 @@ NSString *const ORKdBHLToneAudiometryStepIdentifier = @"dBHL.tone.audiometry";
 NSString *const ORKdBHLToneAudiometryStep0Identifier = @"dBHL0.tone.audiometry";
 NSString *const ORKdBHLToneAudiometryStep1Identifier = @"dBHL1.tone.audiometry";
 NSString *const ORKdBHLToneAudiometryStep2Identifier = @"dBHL2.tone.audiometry";
+NSString *const ORKdBHLToneAudiometryStep3Identifier = @"dBHL3.tone.audiometry";
 
 + (ORKOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)identifier
                               intendedUseDescription:(nullable NSString *)intendedUseDescription
@@ -1631,13 +1639,27 @@ NSString *const ORKdBHLToneAudiometryStep2Identifier = @"dBHL2.tone.audiometry";
         ORKFormItem *formItem = [[ORKFormItem alloc] initWithIdentifier:ORKdBHLToneAudiometryStep0Identifier
                                                                    text:ORKLocalizedString(@"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION", nil)
                                                            answerFormat:answerFormat];
-        formItem.optional = NO;
         
-        step.formItems = @[formItem];
+        ORKTextChoice *airpods = [ORKTextChoice choiceWithText:@"AirPods"
+                                                      value:@"AIRPODS"];
+        ORKTextChoice *earpods = [ORKTextChoice choiceWithText:@"EarPods"
+                                                         value:@"EARPODS"];
+        
+        ORKAnswerFormat *answerFormat1 = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                                         textChoices:@[airpods, earpods]];
+        ORKFormItem *formItem1 = [[ORKFormItem alloc] initWithIdentifier:ORKdBHLToneAudiometryStep3Identifier
+                                                                   text:@"Select the headphones that you will be using"
+                                                           answerFormat:answerFormat1];
+
+        
+        formItem.optional = NO;
+        formItem1.optional = NO;
+        
+        step.formItems = @[formItem, formItem1];
     
         ORKStepArrayAddStep(steps, step);
     }
-
+    
     if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
@@ -2425,7 +2447,7 @@ NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
                                                                          textChoices:@[skipRight, skipLeft, skipNeither]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKActiveTaskSkipHandStepIdentifier
                                                                       title:ORKLocalizedString(@"TREMOR_TEST_TITLE", nil)
-                                                                   question:nil
+                                                                   question:detailText
                                                                      answer:answerFormat];
         step.optional = NO;
         
