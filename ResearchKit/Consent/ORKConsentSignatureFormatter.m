@@ -45,6 +45,7 @@
     NSString *hr = @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />";
 
     NSString *signatureElementWrapper = @"<p><br/><div class='sigbox'><div class='inbox'>%@</div></div>%@%@</p>";
+    NSString *signatureImageWrapper = @"<p><br/><div class='sigbox'><div class='inboxImage'>%@</div></div>%@%@</p>";
 
     BOOL addedSig = NO;
 
@@ -87,7 +88,7 @@
             [body appendString:@"<br/>"];
         }
         NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil);
-        [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag ? : @"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
+        [signatureElements addObject:[NSString stringWithFormat:signatureImageWrapper, imageTag ? : @"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
     }
 
     if (addedSig) {

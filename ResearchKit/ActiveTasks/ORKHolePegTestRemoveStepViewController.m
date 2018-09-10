@@ -151,7 +151,7 @@
 
 - (void)holePegTestRemoveDidProgress:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView {
     [self.activeStepView updateTitle:nil
-                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)]]];
+                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)]]];
 }
 
 - (void)holePegTestRemoveDidSucceed:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView withDistance:(CGFloat)distance {
@@ -161,7 +161,7 @@
     
     [holePegTestRemoveContentView setProgress:((CGFloat)self.successes / [self holePegTestRemoveStep].numberOfPegs) animated:YES];
     [self.activeStepView updateTitle:nil
-                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
+                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
     
     if (self.successes >= [self holePegTestRemoveStep].numberOfPegs) {
         [self finish];
@@ -172,7 +172,7 @@
     self.failures++;
     
     [self.activeStepView updateTitle:nil
-                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
+                                text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
 }
 
 @end

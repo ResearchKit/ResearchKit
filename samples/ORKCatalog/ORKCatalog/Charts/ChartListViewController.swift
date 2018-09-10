@@ -51,7 +51,7 @@ class ChartListViewController: UITableViewController {
     
     override func viewDidLoad() {
         // ORKPieChartView
-        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
+        pieChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell)
         let pieChartView = pieChartTableViewCell.pieChartView
         pieChartView?.dataSource = pieChartDataSource
         // Optional custom configuration
@@ -62,7 +62,7 @@ class ChartListViewController: UITableViewController {
         pieChartView?.radiusScaleFactor = 0.6
         
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell)
         let lineGraphChartView = lineGraphChartTableViewCell.graphView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
         lineGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
@@ -71,7 +71,7 @@ class ChartListViewController: UITableViewController {
         lineGraphChartView.showsVerticalReferenceLines = true
         
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell)
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
         discreteGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
@@ -80,7 +80,7 @@ class ChartListViewController: UITableViewController {
         discreteGraphChartView.showsVerticalReferenceLines = true
 
         // ORKBarGraphChartView
-        barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        barGraphChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as! BarGraphChartTableViewCell)
         let barGraphChartView = barGraphChartTableViewCell.graphView as! ORKBarGraphChartView
         barGraphChartView.dataSource = barGraphChartDataSource
         barGraphChartView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)

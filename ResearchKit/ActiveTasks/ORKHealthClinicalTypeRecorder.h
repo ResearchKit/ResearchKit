@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 #if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
 ORK_CLASS_AVAILABLE
+API_AVAILABLE(ios(12.0))
 @interface ORKHealthClinicalTypeRecorder : ORKRecorder
 
 @property (nonatomic, copy, readonly) HKClinicalType *healthClinicalType;
@@ -63,7 +64,7 @@ ORK_CLASS_AVAILABLE
                 healthClinicalType:(HKClinicalType *)healthClinicalType
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType
                               step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
 
 @end
 #endif

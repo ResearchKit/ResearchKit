@@ -56,6 +56,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKObserver.h"
 #import "ORKSkin.h"
+#import "ORKBorderedButton.h"
 
 @import AVFoundation;
 @import CoreMotion;
@@ -1109,8 +1110,22 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_currentStepViewController == viewController) {
         _pageViewController.toolbarItems = viewController.toolbarItems;
         _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
-        _pageViewController.navigationItem.title = viewController.navigationItem.title;
-        _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+        if (!ORKNeedWideScreenDesign(self.view)) {
+            _pageViewController.navigationItem.title = viewController.navigationItem.title;
+            _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+            CGFloat maxWidth = UIScreen.mainScreen.bounds.size.width - 40;
+            CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleLargeTitle].pointSize;
+            CGFloat width = [_pageViewController.navigationItem.title sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]}].width;
+            while (width > maxWidth) {
+                fontSize -= 1;
+                // adhering to iPhone Typography Guidelines
+                if (fontSize <= 17) {
+                    break;
+                }
+                width = [_pageViewController.navigationItem.title sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]}].width;
+            }
+            _pageViewController.navigationController.navigationBar.largeTitleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:fontSize]};
+        }
         if (![self shouldDisplayProgressLabel]) {
             _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
         }
@@ -1246,7 +1261,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
-- (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
+- (void)presentCancelOptions:(BOOL)saveable sender:(id)sender {
     
     if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
         ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
@@ -1264,7 +1279,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    alert.popoverPresentationController.sourceView = (UIView *)sender;
+    
+    if ([sender isKindOfClass:[ORKBorderedButton class]]) {
+        UIView *cancelButtonView = (UIView *)sender;
+        alert.popoverPresentationController.sourceView = cancelButtonView;
+        alert.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(cancelButtonView.bounds), CGRectGetMidY(cancelButtonView.bounds),0,0);
+    }
+    else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        alert.popoverPresentationController.barButtonItem = sender;
+    }
     
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)

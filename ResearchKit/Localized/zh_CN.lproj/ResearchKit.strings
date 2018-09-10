@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "请检查下方的表单，确认后请轻点“同意”。";
 "CONSENT_REVIEW_ALERT_TITLE" = "检查";
 "CONSENT_SIGNATURE_TITLE" = "签名";
-"CONSENT_SIGNATURE_INSTRUCTION" = "请用手指在下方的横线上签名。";
+"CONSENT_SIGNATURE_INSTRUCTION" = "请用手指在下方的方框中签名。";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "在此签名";
 "CONSENT_PAGE_NUMBER_FORMAT" = "第 %1$ld/%2$ld 页";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日期";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "第 %1$@/%2$@ 步";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "无效值";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "选择性别";
 "DOB_FORM_ITEM_TITLE" = "出生日期";
 "DOB_FORM_ITEM_PLACEHOLDER" = "选择日期";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "电话号码";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "验证";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "厘米";
 "MEASURING_UNIT_FT" = "英尺";
 "MEASURING_UNIT_IN" = "英寸";
+"MEASURING_UNIT_KG" = "公斤";
+"MEASURING_UNIT_LB" = "磅";
+"MEASURING_UNIT_OZ" = "盎司";
 
 /* Limb values. */
 "LIMB_LEFT" = "左";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "取消";
 "BUTTON_OK" = "好";
 "BUTTON_CLEAR" = "清除";
+"BUTTON_APPLY" = "应用";
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
 "BUTTON_GET_STARTED" = "开始";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "步态和平衡";
 "WALK_INTRO_TEXT" = "本活动测量您在步行和站立时的步态和平衡。请仅在步行安全区域（无外力辅助条件下）进行。";
 "WALK_INTRO_2_TEXT_%ld" = "请在步行安全区域（无外力辅助条件下）直线行走大约 %ld 步。";
-"WALK_INTRO_2_DETAIL" = "请将手机放入口袋或背包中，然后跟随音频指示操作。";
+"WALK_INTRO_2_DETAIL" = "请将设备放入口袋或背包中，然后跟随音频指示操作。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在请站立 %@。";
 "WALK_STAND_INSTRUCTION_FORMAT" = "请站立 %@。";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "转身并走回起点。";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "请直线步行最多 %ld 步。";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找到一处您可以沿直线安全往返的地方。在路线的尽头转弯，不要停下来，就好像绕着交通锥转圈一样。\n\n接下来会要求您转一圈，然后站立不动，双手放在两侧，双脚张开，与肩同宽。";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "准备就绪后，轻点“开始”。\n将手机放入口袋或背包中，然后跟随音频指示操作。";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "找到一处您可以沿直线安全往返的地方。在路尽头转弯，不要停下来，就好像绕着圆锥体转圈一样。\n\n接下来会要求您转一圈，然后站立不动，双手放在两侧，双脚张开，与肩同宽。";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "准备就绪后，轻点“开始”。\n将设备放入口袋或背包中，然后跟随音频指示操作。";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "沿直线往返 %@。尽可能跟平时一样走动。";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "走完一圈后站立不动，坚持 %@。";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "您已经完成了本活动。";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "右手";
 "TAPPING_TASK_TITLE_LEFT" = "左手";
 "TAPPING_INTRO_TEXT" = "本活动测量您的轻点速度。";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "把手机放在平面上。";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "把设备放在平面上。";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "用同一只手上的两个手指来轮流轻点屏幕上的按钮。";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "用右手上的两个手指来轮流轻点屏幕上的按钮。";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "用左手上的两个手指来轮流轻点屏幕上的按钮。";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "使用左手轻点按钮。";
 "TAPPING_SKIP_TITLE" = "跳过这只手";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "阿姆斯勒方格表";
+"AMSLER_GRID_INTRO_TEXT" = "本活动帮助检测用户视力方面的问题。";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "在整个测试中，将设备置于靠近距您脸部 12 英寸（约 30 厘米）的位置，与眼睛同高。";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "闭上您的%@并盯着正方形网格中间的圆点。\n\n用您的手指或触控笔标记出您所看到的任何变形，如模糊的线或波浪线。\n\n完成后，在网格外的任意位置向左轻扫。";
+"AMSLER_GRID_LEFT_EYE" = "左眼";
+"AMSLER_GRID_RIGHT_EYE" = "右眼";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "嗓音";
 "AUDIO_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "AUDIO_INSTRUCTION" = "请对着麦克风说“啊啊啊”，时间越长越好。";
 "AUDIO_INTRO_TEXT" = "请深呼吸并对着麦克风说“啊啊啊”，时间越长越好。保持平稳的声音大小以使音频条保持蓝色。";
-"AUDIO_INTENDED_USE" = "本活动通过将您的嗓音录制到手机底部的麦克风来对其进行评估。";
+"AUDIO_INTENDED_USE" = "本活动通过设备底部的麦克风来录制嗓音从而对其进行评估。";
 "AUDIO_TOO_LOUD_LABEL" = "太大声";
 "AUDIO_GENERIC_ERROR_LABEL" = "无法录音";
 "AUDIO_LEVEL_CHECK_LABEL" = "请耐心等待，我们正在检查背景噪声级。";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
 "TONE_LABEL_%@_LEFT" = "%@ Hz，左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "本活动识别个人的听力阈值水平，以 dB HL 为度量。";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "确保设备的音量已设为最高。\n\n在本任务过程中，将在左耳或右耳播放柔和的音调。\n\n请仔细听并在每次听到音调时轻点按钮。";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "参与问卷调查。";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "针对“听力较好的耳朵”选择您的偏好（如果有）";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "无偏好";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空间记忆";
@@ -355,10 +379,11 @@
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "将整个圆盘堆以尽可能少的步数移到高亮显示的平台。";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解谜";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移动次数：%@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移动次数：%@\n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我解不开这个谜";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "运动范围";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption 必须为左或者右";
 
 /* Knee Range of Motion active task */
@@ -421,7 +446,7 @@
 "PASAT_INTRO_TEXT" = "“步进式听觉累加实验”测量您的听觉信息处理速度和计算能力。";
 "PVSAT_INTRO_TEXT" = "“步进式视觉累加实验”测量您的视觉信息处理速度和计算能力。";
 "PAVSAT_INTRO_TEXT" = "“步进式听觉和视觉累加实验”测量您的听觉和视觉信息处理速度和计算能力。";
-"PSAT_INTRO_TEXT_2_%@" = "每隔 %@ 秒钟会显示一个一位数。\n您必须将每个新数字与前面相邻的数字相加。\n注意，您不准计算累加值，只能计算最后两个数字之和。";
+"PSAT_INTRO_TEXT_2_%@" = "每隔 %@ 秒钟会显示一个一位数。\n您必须将每个新数字与前面的一个的数字相加。\n注意，您不用计算累加值，只需计算最后两个数字之和。";
 "PSAT_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "PSAT_INITIAL_INSTRUCTION" = "记住这第一个数字。";
 "PSAT_INSTRUCTION" = "将这个新数字与前一个数字相加。";
@@ -488,7 +513,7 @@
 "TRAILMAKING_INTENDED_USE" = "本活动通过记录按顺序轻点一系列圆点所需的时间，来评估您的视觉注意力和任务切换能力。";
 "TRAILMAKING_INTENDED_USE2_A" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点数字“2”–“3”–“4”…直到数字“7”。";
 "TRAILMAKING_INTENDED_USE2_B" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点第一个字母“A”，以此类推，依次轻点“2”–“B”–“3”–“C”…直到数字“7”。";
-"TRAILMAKING_INTRO_TEXT" = "以最快的速度完成而不出错。\n";
+"TRAILMAKING_INTRO_TEXT" = "以最快的速度完成而不出错。\n ";
 "TRAILMAKING_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
 "TRAILMAKING_TIMER" = "%.1f 秒";
 "TRAILMAKING_ERROR" = "%@（%d 个错误）";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "语音识别";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "本活动使用设备底部的麦克风录制您的语音，并将它翻译成文本。";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "按下按钮以在说话前开始录音。";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "开始录制";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "停止录制";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "编辑文本记录";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "编辑文本记录以改正任何错误的语音解析。";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "您的文本记录将显示在此处。";
+"SPEECH_RECOGNITION_FAILED" = "语音识别失败。";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "初始化语音识别失败。";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "播放音频";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "停止播放音频";
+"SPEECH_IN_NOISE_TITLE" = "在噪声中说话";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "本活动测量噪声环境中语音的清晰度。";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "作为本测试的一部分，您将：\n\n听一个句子。\n\n清楚地重复您所听到的内容，或跳过以使用键盘键入您听到的内容。\n\n如果重复听到的内容，您可以选择修改由语音识别引擎生成的文本记录。";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "音量校准";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "轻点“播放音频”，将音量调整至舒适的程度，然后轻点“停止播放音频”以进行下一步。";
+"SPEECH_IN_NOISE_STEP_TITLE" = "听";
+"SPEECH_IN_NOISE_STEP_TEXT" = "混有背景噪声的句子会以随机信噪比 (SNR) 只播放一次。";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "说话";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "重复您所听到的内容。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "无法移除足够的日志文件来达到阈值";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "未找到任何已收集的数据。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定输出目录";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL 指示器";
+"ENVIRONMENTSPL_INTRO_TEXT" = "本活动测量环境声压级。如果噪声级过高，您将无法进行下一步。请转移到更安静的地方以完成本任务或稍后再重新进行本活动。";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "正在计算";
+"ENVIRONMENTSPL_THRESHOLD" = "阈值：%@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "无数据";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "显示 PDF 缩略图";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "隐藏 PDF 缩略图";
+"AX_BUTTON_ANNOTATE" = "注解";
+"AX_BUTTON_SHOW_SEARCH" = "显示搜索栏";
+"AX_BUTTON_HIDE_SEARCH" = "隐藏搜索栏";
+"AX_BUTTON_SHARE" = "共享";
 
-"AX_IMAGE_ILLUSTRATION" = "“%@”插图";
+
+"AX_COMPLETION_ILLUSTRATION" = "蓝色圆圈中带有勾号的图示，表示成功";
 
 "AX_SIGNVIEW_LABEL" = "指定签名栏";
 "AX_SIGNVIEW_HINT" = "触摸屏幕并移动手指来签名";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "包含圆盘，大小为“%@”";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "范围：%@ ~ %@";
 "AX_GRAPH_STACK_PREFIX" = "圆盘堆组成：";
 "AX_GRAPH_AND_SEPARATOR" = "、";
 "AX_GRAPH_POINT_%@" = "分数：%@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "语音波形";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "录音开始后，再次激活以停止录音。";
+
 "AX_AUDIO_BAR_GRAPH" = "音频条图形";
+
+"AX_AMSLER_GRID_LABEL" = "阿姆斯勒方格表";
+"AX_AMSLER_GRID_HINT" = "用手指或触控笔直接标记网格，或在网格外向左轻扫以结束。";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Tekintse át az alábbi űrlapot, majd koppintson az Elfogadom gombra, ha készen áll a folytatásra.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Áttekintés";
 "CONSENT_SIGNATURE_TITLE" = "Aláírás";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Kérjük, írja alá az ujjával az alábbi vonalon.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Kérjük, írja alá az ujjával az alábbi mezőben.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Itt írja alá";
 "CONSENT_PAGE_NUMBER_FORMAT" = "%2$ld/%1$ld oldal";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$@/%2$@. lépés";
+"STEP_PROGRESS_FORMAT" = "%2$@/%1$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Érvénytelen érték";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Nem kiválasztása";
 "DOB_FORM_ITEM_TITLE" = "Születési dátum";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Dátum kiválasztása";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonszám";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Ellenőrzés";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "font";
+"MEASURING_UNIT_OZ" = "uncia";
 
 /* Limb values. */
 "LIMB_LEFT" = "bal";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Mégsem";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Törlés";
+"BUTTON_APPLY" = "Alkalmazás";
 "BUTTON_DISAGREE" = "Nem fogadom el";
 "BUTTON_DONE" = "Kész";
 "BUTTON_GET_STARTED" = "Kezdés";
@@ -206,7 +212,7 @@
 "BUTTON_START_TIMER" = "Időzítő indítása";
 "BUTTON_OPTION_SAVE" = "Mentés későbbre";
 "BUTTON_OPTION_DISCARD" = "Eredmények elvetése";
-"BUTTON_OPTION_STOP_TASK" = "Feladat befejezése";
+"BUTTON_OPTION_STOP_TASK" = "Feladat abbahagyása";
 "BUTTON_SAVE" = "Mentés";
 "BUTTON_CLEAR_ANSWER" = "Válasz törlése";
 "BUTTON_READ_ONLY_MODE" = "Ez a válasz nem módosítható.";
@@ -214,7 +220,7 @@
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Tevékenység indítása:";
-"TASK_COMPLETE_TITLE" = "Tevékenység befejezve";
+"TASK_COMPLETE_TITLE" = "Tevék. befejezve";
 "TASK_COMPLETE_TEXT" = "Az adatok ki lesznek elemezve, és értesítést fog kapni, ha az eredmény elkészült.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ másodperc van hátra.";
 "TOUCH_ANYWHERE_LABEL" = "A folytatáshoz érintse meg a képernyőt";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "Testtartás és egyensúly";
 "WALK_INTRO_TEXT" = "Ez a tevékenység a testtartását és egyensúlyát méri járás és állás közben. Ne folytassa, ha segítség nélkül nem tud biztonságosan gyalogolni.";
 "WALK_INTRO_2_TEXT_%ld" = "Keressen olyan helyet, ahol segítség nélkül gyalogolhat egyenesen körülbelül %ld lépést.";
-"WALK_INTRO_2_DETAIL" = "Tegye a telefont a zsebébe vagy a táskájába, és kövesse a hangutasításokat.";
+"WALK_INTRO_2_DETAIL" = "Tegye az eszközt a zsebébe vagy a táskájába, és kövesse a hangutasításokat.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Most álljon mozdulatlanul %@ időtartamig.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Álljon mozdulatlanul %@ időtartamig.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Keressen egy olyan helyet, ahol egyenes vonalban tud oda-vissza gyalogolni. Próbáljon meg folyamatosan gyalogolni, és a végeken úgy forduljon meg, mintha egy útjelző bóját kerülne meg.\n\nEzután utasítást fog kapni, hogy fogduljon meg egy teljes kört megtéve, majd álljon meg, engedje le a törzse mellett karjait, és álljon vállszélességű terpeszben.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Koppintson a Kezdés elemre, amikor készen áll.\nEzután tegye a telefont a zsebébe vagy a táskájába, és kövesse a hangutasításokat.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Koppintson a Kezdés elemre, amikor készen áll.\n\nEzután tegye az eszközt a zsebébe vagy a táskájába, és kövesse a hangutasításokat.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gyalogoljon oda-vissza egy egyenes vonal mentén ennyi ideig: %@. A szokásos tempójában gyalogoljon.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Forduljon meg egy teljes kör mentén, és álljon mozdulatlanul ennyi ideig: %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Befejezte a tevékenységet.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Jobb kéz";
 "TAPPING_TASK_TITLE_LEFT" = "Bal kéz";
 "TAPPING_INTRO_TEXT" = "Ez a tevékenység megméri a koppintási sebességét.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Tegye a telefont egy vízszintes felületre.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Tegye az eszközt vízszintes felületre.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Ugyanannak a kezének két ujjával felváltva koppintson a gombokra a kijelzőn.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "A jobb kezének két ujjával felváltva koppintson a gombokra a kijelzőn.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "A bal kezének két ujjával felváltva koppintson a gombokra a kijelzőn.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Koppintson a gombokra BAL kézzel.";
 "TAPPING_SKIP_TITLE" = "Kéz kihagyása";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler-rács";
+"AMSLER_GRID_INTRO_TEXT" = "Ez a tevékenység segít észlelni a felhasználó látással kapcsolatos problémáit.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "A vizsgálat alatt tartsa 30 cm-re az eszközt az arcától, szemmagasságban.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Csukja be a %@, és nézze a négyzetrács közepén lévő pontot.\n\nAz ujja vagy egy érintőceruza segítségével jelölje meg az összes torzítva megjelenő elemet, például elmosott vagy hullámos vonalakat.\n\nHa elkészült, legyintsen balra bárhol, a rácson kívül.";
+"AMSLER_GRID_LEFT_EYE" = "bal szemét";
+"AMSLER_GRID_RIGHT_EYE" = "jobb szemét";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hang";
 "AUDIO_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
 "AUDIO_INSTRUCTION" = "Amilyen hosszan csak tudja, mondja, hogy „Áááááá” a mikrofonba.";
 "AUDIO_INTRO_TEXT" = "Vegyen mély levegőt, és amilyen hosszan csak tudja, mondja a mikrofonba, hogy „Áááááá”. Próbáljon egyenletes hangerőt tartani, hogy a hangsávok kékek maradjanak.";
-"AUDIO_INTENDED_USE" = "Ez a tevékenység kiértékeli a hangját, rögzítve, ahogy a telefon alján lévő mikrofonba beszél.";
+"AUDIO_INTENDED_USE" = "Ez a tevékenység kiértékeli a hangját, rögzítve, ahogy az eszköz alján lévő mikrofonba beszél.";
 "AUDIO_TOO_LOUD_LABEL" = "Túl hangos";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nem sikerült hangot felvenni";
 "AUDIO_LEVEL_CHECK_LABEL" = "Kérjük, várjon, amíg ellenőrizzük a háttérzaj szintjét.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység azt méri fel, hogyan hallja Ön a különböző hangokat.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Első lépésként csatlakoztasson egy fejhallgatót, és tegye a fejére.\n\nEgy visszafogott hangot fog hallani, ami egyáltalán nem hasonlít az értesítések megszokott hangjára. Először a hang lágyan hallható, majd fokozatosan egyre hangosabb lesz. Kérjük, figyeljen, és koppintson a bal vagy a jobb gombra attól függően, hogy melyik fülében hallja a hangot.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "A kezdés előtt dugja be, és vegye fel a fejhallgatót.\n\nA hang nagyon halk lesz, és nem fog hasonlítani a szokásos jelzéshangra. A hang halkan kezdődik, majd felerősödik. Kérjük, figyeljen, és koppintson a bal vagy jobb gombra, attól függően, melyik fülében hallja a hangot.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt a készülék oldalán található vezérlőkkel.\n\nKoppintson egy tetszőleges gombra, amikor készen áll a kezdésre.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt az eszköz oldalán található vezérlőkkel.\n\nKoppintson egy gombra, amikor készen áll a kezdésre.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Amikor hangot hall, koppintson a bal vagy a jobb gombra attól függően, hogy melyik fülében hallja a hangot.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Bal fül";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Jobb fül";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, bal";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, jobb";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység megméri egy személy hallási küszöbének szintjét a dB HL skálán.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Győződjön meg róla, hogy az eszköz hangereje a maximális szintre van állítva.\n\nA feladat alatt egy halk hang lesz lejátszva a bal vagy jobb fülében.\n\nHallgasson figyelmesen, és minden alkalommal koppintson a gombra, amikor hangot hall.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Belépési kérdőív.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Ha az egyik fülére jobban hall, válassza ki itt.";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "bal";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "jobb";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "nincs beállítás";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Térbeli memória";
@@ -355,10 +379,11 @@
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Helyezze át a teljes köteget a kijelölt oszlopra a lehető legkevesebb lépésben.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "A kirakós megoldása";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Lépések száma: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Lépések száma: %@\n%@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nem tudom megoldani ezt a kirakót";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Mozgástartomány";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "A limbOption beállításaként a bal vagy a jobb értéket kell megadni";
 
 /* Knee Range of Motion active task */
@@ -484,11 +509,11 @@
 "TREMOR_SKIP_NEITHER" = "Mindkét kézzel el tudom végezni ezt a feladatot.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Számösszekötési teszt";
+"TRAILMAKING_TASK_TITLE" = "Összekötési teszt";
 "TRAILMAKING_INTENDED_USE" = "Ez a feladat a vizuális figyelmét és feladatváltási képességét értékeli ki, amelynek során leméri, mennyi időre van szüksége ahhoz, hogy egy pontokból álló sorozatra koppintson a megfelelő sorrendben.";
 "TRAILMAKING_INTENDED_USE2_A" = "A visszaszámlálás után koppintson felváltva a számokat és betűket jelölő pontokra a megfelelő sorrendben. Először koppintson az 1-re, majd a 2-re, a 3-ra, a 4-re stb., amíg eléri a 7-es számot.";
 "TRAILMAKING_INTENDED_USE2_B" = "A visszaszámlálás után koppintson felváltva a számokat és betűket jelölő pontokra a megfelelő sorrendben. Először koppintson az 1-re, majd az A-ra, a 2-re, a B-re, a 3-ra, a C-re és így tovább, amíg eléri a 7-es számot.";
-"TRAILMAKING_INTRO_TEXT" = "Végezze el ezt a feladatot minél gyorsabban, lehetőleg hiba nélkül. \n ";
+"TRAILMAKING_INTRO_TEXT" = "Olyan gyorsan végezze el hibátlanul, ahogy csak tudja. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
 "TRAILMAKING_TIMER" = "%.1f mp";
 "TRAILMAKING_ERROR" = "%@ (%d hiba)";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Beszédfelismerés";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Ez a tevékenység rögzíti a beszédhangját az eszköz alján található mikrofon használatával, és szöveggé alakítja.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "A beszéd előtt nyomja meg a gombot a felvétel megkezdéséhez.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Felvétel indítása";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Felvétel leállítása";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Átirat szerkesztése";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "A szöveges átirat szerkesztésével korrigálhatja az esetlegesen félreértett beszédet.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Az átírt szöveg itt fog megjelenni.";
+"SPEECH_RECOGNITION_FAILED" = "A beszédfelismerés sikertelen volt.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Nem sikerült elindítani a beszédfelismerést.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Hang lejátszása";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Hang leállítása";
+"SPEECH_IN_NOISE_TITLE" = "Beszéd zajban";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Ez a tevékenység megméri a beszédértést zajos környezetben.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "A vizsgálat részeként:\n\nHallani fog egy mondatot.\n\nIsmételje meg érthetően a hallott szöveget, vagy lépjen tovább, és írja be a billentyűzettel, amit hallott. \n\nHa megismétli, amit hallott, akkor lehetősége lesz módosítani a beszédfelismerési motor által létrehozott szöveges átiratot.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Hangerő kalibrálása";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Koppintson a „Hang lejátszása” gombra, állítsa kellemes szintre a hangerőt, majd koppintson a „Hang leállítása” gombra a folytatáshoz.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Hallgatás";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Egy véletlenszerű jel-zaj arányú (SNR) háttérzajjal kevert mondat lesz egyetlen alkalommal lejátszva.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Beszéd";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Ismételje meg, amit hallott.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nem sikerült elég naplófájlt eltávolítani a küszöb eléréséhez";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Nem található összegyűjtött adat.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nincs megadva kimeneti könyvtár";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL-mérő";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Ez a tevékenység megméri a környezeti hangnyomást. Ha a zaj szintje túl magas, nem fogja tudni folytatni. Kérjük, menjen csendesebb helyre a feladat befejezéséhez, vagy ismételje meg később a tevékenységet.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Számítás";
+"ENVIRONMENTSPL_THRESHOLD" = "Küszöb: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Nincs adat";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Vissza";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDF-bélyegkép megjelenítése";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDF-bélyegképek elrejtése";
+"AX_BUTTON_ANNOTATE" = "Annotáció";
+"AX_BUTTON_SHOW_SEARCH" = "Keresési sáv megjelenítése";
+"AX_BUTTON_HIDE_SEARCH" = "Keresési sáv elrejtése";
+"AX_BUTTON_SHARE" = "Megosztás";
 
-"AX_IMAGE_ILLUSTRATION" = "%@ illusztrációja";
+
+"AX_COMPLETION_ILLUSTRATION" = "Egy kék körben lévő pipa, amelynek jelentése siker";
 
 "AX_SIGNVIEW_LABEL" = "Külön aláírásmező";
 "AX_SIGNVIEW_HINT" = "Érintse meg a képernyőt, és mozgassa az ujját az aláíráshoz";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Üres";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_STACK_PREFIX" = "Halom a következőkből:";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
 "AX_GRAPH_POINT_%@" = "Pont: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Beszéd hullámformája";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Amikor elkezdődik a felvétel, aktiválja másodszor a felvétel leállításához.";
+
 "AX_AUDIO_BAR_GRAPH" = "Hangsávdiagram";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler-rács";
+"AX_AMSLER_GRID_HINT" = "Az ujja vagy egy érintőceruza segítségével jelölje meg közvetlenül a rácsot, vagy legyintsen balra a rácson kívül a befejezéshez.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

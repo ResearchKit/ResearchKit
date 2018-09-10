@@ -93,9 +93,9 @@
         
         _navigationFooterView = [ORKNavigationContainerView new];
         _navigationFooterView.continueEnabled = YES;
-        _navigationFooterView.topMargin = 5;
-        _navigationFooterView.bottomMargin = 15;
         _navigationFooterView.optional = YES;
+        _navigationFooterView.footnoteLabel.textAlignment = NSTextAlignmentCenter;
+        _navigationFooterView.footnoteLabel.text = @" ";
         _navigationFooterView.backgroundColor = ORKColor(ORKNavigationContainerColorKey);
         [_navigationFooterView setAlpha:0.8];
         [self addSubview:_navigationFooterView];
@@ -198,8 +198,7 @@
         _navigationFooterView.continueButtonItem = _stopButtonItem;
     
         // Start a timer to show recording progress.
-        _recordingButtonItem.title = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
-        _navigationFooterView.skipButtonItem = _recordingButtonItem;
+        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
         _navigationFooterView.skipEnabled = NO;
         _recordTime = 0.0;
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
@@ -244,8 +243,6 @@
 }
 
 - (void)updateConstraints {
-    const CGFloat NavigationFooterViewTranslucentAlpha = 0.5;
-    const CGFloat NavigationFooterViewOpaqueAlpha = 0.0;
     
     if (_variableConstraints) {
         [NSLayoutConstraint deactivateConstraints:_variableConstraints];
@@ -257,7 +254,7 @@
     }
     
     UIView *playerView = _playerViewController.view;
-    
+    _headerView.translatesAutoresizingMaskIntoConstraints = NO;
     self.translatesAutoresizingMaskIntoConstraints = NO;
     _previewView.translatesAutoresizingMaskIntoConstraints = NO;
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -317,7 +314,8 @@
                                                                              attribute:NSLayoutAttributeBottom
                                                                              relatedBy:NSLayoutRelationEqual
                                                                                 toItem:self
-                                                                             attribute:NSLayoutAttributeBottom multiplier:1.0
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                            multiplier:1.0
                                                                               constant:0.0],
                                                 [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                                              attribute:NSLayoutAttributeLeft
@@ -454,8 +452,7 @@
         [self updateAppearance];
     } else {
         CGFloat remainingTime = _videoCaptureStep.duration.floatValue - _recordTime;
-        _recordingButtonItem.title = [self formattedTimeFromSeconds:remainingTime];
-        _navigationFooterView.skipButtonItem = _recordingButtonItem;
+        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:remainingTime];
     }
 }
 

@@ -136,7 +136,7 @@
                                                                        toItem:self
                                                                     attribute:NSLayoutAttributeHeight
                                                                    multiplier:1.0
-                                                                     constant:_scrollContainerShouldCollapseNavbar ? 0.2 : 0.0];
+                                                                     constant:_scrollContainerShouldCollapseNavbar ? 0.3 : 0.0]; //anything less than 0.3 does not work for smaller devices.
     [constraints addObject: _scrollContainerHeightConstraint];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_scrollContainer
                                                         attribute:NSLayoutAttributeWidth

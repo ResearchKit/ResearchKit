@@ -308,9 +308,9 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_gameView(>=ORKScreenMetricMinimumGameViewHeightForMemoryGame)][_quantityPairView]|"
                                              options:NSLayoutFormatAlignAllCenterX
-                                             metrics:nil
+                                             metrics:@{@"ORKScreenMetricMinimumGameViewHeightForMemoryGame": @(ORKGetMetricForWindow(ORKScreenMetricMinimumGameViewHeightForMemoryGame, self.window))}
                                                views:views]];
     NSLayoutConstraint *gameViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_gameView
                                                                       attribute:NSLayoutAttributeHeight

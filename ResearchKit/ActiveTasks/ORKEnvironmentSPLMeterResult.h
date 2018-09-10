@@ -33,6 +33,8 @@
 
 @interface ORKEnvironmentSPLMeterResult : ORKResult
 
+@property (nonatomic, assign) double sensitivityOffset;
+
 @property (nonatomic, copy, nullable) NSArray<NSNumber *> *recordedSPLMeterSamples;
 
 @end

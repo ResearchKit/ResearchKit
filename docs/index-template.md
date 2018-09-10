@@ -51,3 +51,5 @@ The consent features in the ResearchKit framework are implemented using three sp
 * ORKConsentReviewStep. The consent review step makes the consent document available for review, and provides facilities for collecting the user's name and signature.
 
 Creating the visual consent step and the consent review step requires a consent document model (that is, an ORKConsentDocument object).
+
+In addition to the consent steps, `ORKPDFViewerStep` displays a PDF document. The user can search, marked up, and share the PDF document from within the step.

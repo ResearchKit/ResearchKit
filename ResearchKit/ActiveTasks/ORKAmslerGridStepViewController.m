@@ -60,6 +60,7 @@
     if (self) {
         self.suspendIfInactive = YES;
     }
+    self.shouldIgnoreiPadDesign = YES;
     return self;
 }
 
@@ -98,7 +99,6 @@
     self.activeStepView.accessibilityLabel = ORKLocalizedString(@"AX_AMSLER_GRID_LABEL", nil);
     self.activeStepView.accessibilityHint = ORKLocalizedString(@"AX_AMSLER_GRID_HINT", nil);
     self.activeStepView.accessibilityTraits = UIAccessibilityTraitImage | UIAccessibilityTraitAllowsDirectInteraction;
-    
     [self setupContraints];
 }
 

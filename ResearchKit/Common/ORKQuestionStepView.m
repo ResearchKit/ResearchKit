@@ -37,7 +37,7 @@
 
 #import "ORKStep_Private.h"
 #import "ORKQuestionStep_Internal.h"
-
+#import "ORKSkin.h"
 
 @implementation ORKQuestionStepView
 
@@ -51,6 +51,7 @@
     _questionStep = step;
     self.headerView.instructionLabel.hidden = ![_questionStep text].length;
     
+    self.minimumStepHeaderHeight = ORKQuestionStepMinimumHeaderHeight;
     self.headerView.captionLabel.useSurveyMode = step.useSurveyMode;
     self.headerView.instructionLabel.text = _questionStep.text;
 }

@@ -52,14 +52,6 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
 - (void)commonInit {
     _willAudioLoop = NO;
     _noiseFileNameWithExtension = @ORKSpeechInNoiseDefaultNoiseFileName;
