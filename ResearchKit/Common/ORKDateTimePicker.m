@@ -136,6 +136,7 @@
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)answerFormat;
         [self setDate:[dateAnswerFormat pickerDefaultDate]];
         
+        //TINCHO
         _pickerView.calendar = [dateAnswerFormat currentCalendar];
         _pickerView.timeZone = _pickerView.calendar.timeZone;
         
@@ -178,6 +179,7 @@
         NSDateFormatter *dfm = [NSDateFormatter new];
         dfm.dateFormat = dateFormat;
         dfm.calendar = self.calendar;
+        //TINCHO
         
         _labelFormatter = dfm;
     }

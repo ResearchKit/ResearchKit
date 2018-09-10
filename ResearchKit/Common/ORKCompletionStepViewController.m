@@ -154,6 +154,7 @@ static const CGFloat TickViewSize = 122;
         _completionStepView.tintColor = self.checkmarkColor;
     }
     
+    //TINCHO
     self.stepView.stepView = _completionStepView;
 }
 

@@ -160,6 +160,7 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
+    //TINCHO
     [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; margin-top: 100px;}\n", mobile ? @"66.6%" : @"33.3%"];
     [css appendString:@".sigbox { position: relative; height: 300px; max-height:100px; display: inline-block; bottom: 10px }\n"];
     [css appendString:@".inbox { position: absolute; bottom: 0; left:0; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
