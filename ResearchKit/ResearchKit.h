@@ -116,3 +116,10 @@
 #import <ResearchKit/ORKCollector.h>
 
 #import <ResearchKit/ORKDeprecated.h>
+
+
+// Medable ---
+// Extra headers
+#import <ResearchKit/MDRTextInputFeedback.h>
+#import <ResearchKit/ORKAutocompleteStep.h>
+// Medable ---
