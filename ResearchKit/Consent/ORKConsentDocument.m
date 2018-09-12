@@ -160,11 +160,13 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    //TINCHO
     [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; margin-top: 100px;}\n", mobile ? @"66.6%" : @"33.3%"];
-    [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
+    // Medable >>>>>
+    // Use flexbox to bottom-align the signature image
+    [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: -webkit-box; display: -ms-flexbox; display: flex; bottom: 10px; -webkit-box-align: end; -ms-flex-align: end; align-items: flex-end; }\n"];
     [css appendString:@".inbox { position: absolute; bottom:10px; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
-    [css appendString:@".inboxImage { position: relative; bottom:60px; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
+    [css appendString:@".inboxImage { position: relative; bottom:0px; }\n"];
+    // Medable <<<<<
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];
     [css appendString:@".border { -webkit-box-sizing: border-box; box-sizing: border-box; }\n"];
     
