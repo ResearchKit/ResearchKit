@@ -286,8 +286,9 @@
                 if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
                     NSString *formItemTextString = formItem.text;
                     NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
-                    //TINCHO
-                    if (formItemTextString && formItemAnswerString) {
+                    if (formItemTextString && formItemAnswerString &&
+                        ![formItemAnswerString isEqualToString:ORKLocalizedString(@"NULL_ANSWER", nil)]
+                    ) {
                         [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
                     }
                 }
