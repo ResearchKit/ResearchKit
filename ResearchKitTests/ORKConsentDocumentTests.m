@@ -110,7 +110,7 @@
 
 - (NSString *)htmlWithContent:(NSString *)content mobile:(BOOL)mobile {
     NSString *boilerplateHeader =
-@"<html><head><style>@media print { .pagebreak { page-break-before: always; } }\n\
+@"<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'><style>@media print { .pagebreak { page-break-before: always; } }\n\
 h1, h2 { text-align: center; }\n\
 h2, h3 { margin-top: 3em; }\n\
 body, p, h1, h2, h3 { font-family: Helvetica; }\n\
