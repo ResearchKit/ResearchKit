@@ -225,6 +225,19 @@
     [super viewWillDisappear:animated];
 }
 
+// Medable --- get the devicePosition from the step. Don't default to the back camera.
+- (AVCaptureDevice *)defaultCaptureDevice {
+    AVCaptureDevicePosition expected = ((ORKImageCaptureStep*)self.step).devicePosition;
+    for (AVCaptureDevice *device in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
+        if (device.position == expected) {
+            return device;
+        }
+    }
+    
+    return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+}
+// Medable --- get the devicePosition from the step. Don't default to the back camera.
+
 - (void)queue_SetupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
@@ -233,7 +246,9 @@
     _captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
     
     // Get the camera
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    // Medable --- get the devicePosition from the step. Don't default to the back camera.
+    AVCaptureDevice *device = [self defaultCaptureDevice];
+    // Medable --- get the devicePosition from the step. Don't default to the back camera.
     if (device) {
         // Configure the input and output
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
