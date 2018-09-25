@@ -59,6 +59,10 @@
 @interface ORKdBHLToneAudiometryAudioGenerator () {
 @public
     AudioComponentInstance _toneUnit;
+    AUGraph _mGraph;
+    AUNode _outputNode;
+    AUNode _mixerNode;
+    AudioUnit _mMixer;
     double _frequency;
     double _theta;
     ORKAudioChannel _activeChannel;
@@ -68,9 +72,10 @@
     double _globaldBHL;
     NSNumber *_amplitudeGain;
     NSTimeInterval _fadeInDuration;
-    NSDictionary *frTable;
-    NSDictionary *volumeCurve;
-    NSDictionary *atZerodbHLFreqTodbSPLmap;
+    NSDictionary *_sensitivityPerFrequency;
+    NSDictionary *_volumeCurve;
+    NSDictionary *_retspl;
+    int _lastNodeInput;
 }
 
 - (NSNumber *)dbHLtoAmplitude: (double)dbHL atFrequency:(double)frequency;
@@ -105,7 +110,7 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
     for (UInt32 frame = 0; frame < inNumberFrames; frame++) {
         double bufferValue;
         
-        bufferValue = sin(theta) * amplitude * pow(10, 2 * fadeInFactor - 2);
+        bufferValue = sin(theta) * amplitude * pow(10, 2.0 * fadeInFactor - 2);
         
         bufferActive[frame] = bufferValue;
         if (audioGenerator->_playsStereo) {
@@ -138,27 +143,59 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
     return noErr;
 }
 
+OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
+                                         AudioUnitRenderActionFlags *ioActionFlags,
+                                         const AudioTimeStamp         *inTimeStamp,
+                                         UInt32                     inBusNumber,
+                                         UInt32                     inNumberFrames,
+                                         AudioBufferList             *ioData) {
+    
+    // Get the tone parameters out of the view controller
+    ORKdBHLToneAudiometryAudioGenerator *audioGenerator = (__bridge ORKdBHLToneAudiometryAudioGenerator *)inRefCon;
+ 
+    // This is a mono tone generator so we only need the first buffer
+    Float32 *bufferActive    = (Float32 *)ioData->mBuffers[audioGenerator->_activeChannel].mData;
+    Float32 *bufferNonActive = (Float32 *)ioData->mBuffers[1 - audioGenerator->_activeChannel].mData;
+    
+    // Generate the samples
+    for (UInt32 frame = 0; frame < inNumberFrames; frame++) {
+        double bufferValue = 0;
+        bufferActive[frame] = bufferValue;
+        bufferNonActive[frame] = bufferValue;
+    }
+
+    return noErr;
+}
 
 @implementation ORKdBHLToneAudiometryAudioGenerator
 
 - (instancetype)initForHeadphones: (NSString *)headphones {
     self = [super init];
     if (self) {
-        frTable = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
+        _lastNodeInput = 0;
+        
+        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
 
-        atZerodbHLFreqTodbSPLmap = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
+        _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
         
         if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
-            volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_AIRPODS" ofType:@"plist"]];
+            _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_AIRPODS" ofType:@"plist"]];
         } else {
-            volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_WIRED" ofType:@"plist"]];
+            _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_WIRED" ofType:@"plist"]];
         }
+        
+        [self setupGraph];
     }
     return self;
 }
 
 - (void)dealloc {
     [self stop];
+    
+    AUGraphStop(_mGraph);
+    AUGraphUninitialize(_mGraph);
+    _mGraph = nil;
+    _mMixer = nil;
 }
 
 - (void)playSoundAtFrequency:(double)playFrequency
@@ -175,94 +212,119 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
     
 }
 
-- (void)play {
-    if (!_toneUnit) {
-        if ([self createToneUnit]) {
+- (void)setupGraph {
+    if (!_mGraph) {
+        OSStatus result = noErr;
+        result = NewAUGraph(&_mGraph);
+        AudioComponentDescription mixer_desc;
+        mixer_desc.componentType = kAudioUnitType_Mixer;
+        mixer_desc.componentSubType = kAudioUnitSubType_MultiChannelMixer;
+        mixer_desc.componentFlags = 0;
+        mixer_desc.componentFlagsMask = 0;
+        mixer_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
         
-        // Stop changing parameters on the unit
-        OSErr error = AudioUnitInitialize(_toneUnit);
-        NSAssert1(error == noErr, @"Error initializing unit: %hd", error);
+        AudioComponentDescription output_desc;
+        output_desc.componentType = kAudioUnitType_Output;
+        output_desc.componentSubType = kAudioUnitSubType_RemoteIO;
+        output_desc.componentFlags = 0;
+        output_desc.componentFlagsMask = 0;
+        output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
         
-        // Start playback
-        error = AudioOutputUnitStart(_toneUnit);
-        NSAssert1(error == noErr, @"Error starting unit: %hd", error);
+        result = AUGraphAddNode(_mGraph, &output_desc, &_outputNode);
+        result = AUGraphAddNode(_mGraph, &mixer_desc, &_mixerNode );
+        
+        result = AUGraphConnectNodeInput(_mGraph, _mixerNode, 0, _outputNode, 0);
+        
+        result = AUGraphOpen(_mGraph);
+        result = AUGraphNodeInfo(_mGraph, _mixerNode, NULL, &_mMixer);
+        UInt32 numbuses = 3;
+        UInt32 size = sizeof(numbuses);
+        result = AudioUnitSetProperty(_mMixer, kAudioUnitProperty_ElementCount, kAudioUnitScope_Input, 0, &numbuses, size);
+        
+        AudioStreamBasicDescription desc;
+        for (int i = 0; i < numbuses; ++i) {
+            AURenderCallbackStruct renderCallbackStruct;
+            renderCallbackStruct.inputProcRefCon = (__bridge void *)(self);
+            
+            if (i == 0) {
+                renderCallbackStruct.inputProc = ORKdBHLAudioGeneratorZeroTone;
+                result = AUGraphSetNodeInputCallback(_mGraph, _mixerNode, 0, &renderCallbackStruct);
+            }
+            size = sizeof(desc);
+            result = AudioUnitGetProperty(  _mMixer,
+                                          kAudioUnitProperty_StreamFormat,
+                                          kAudioUnitScope_Input,
+                                          i,
+                                          &desc,
+                                          &size);
+            memset (&desc, 0, sizeof (desc));
+            const int four_bytes_per_float = 4;
+            const int eight_bits_per_byte = 8;
+            
+            desc.mSampleRate = ORKdBHLSineWaveToneGeneratorSampleRateDefault;
+            desc.mFormatID = kAudioFormatLinearPCM;
+            desc.mFormatFlags = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
+            desc.mBytesPerPacket = four_bytes_per_float;
+            desc.mFramesPerPacket = 1;
+            desc.mBytesPerFrame = four_bytes_per_float;
+            desc.mChannelsPerFrame = 2;
+            desc.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
+            
+            result = AudioUnitSetProperty(  _mMixer,
+                                          kAudioUnitProperty_StreamFormat,
+                                          kAudioUnitScope_Input,
+                                          i,
+                                          &desc,
+                                          sizeof(desc));
         }
+        result = AudioUnitSetProperty(     _mMixer,
+                                      kAudioUnitProperty_StreamFormat,
+                                      kAudioUnitScope_Output,
+                                      0,
+                                      &desc,
+                                      sizeof(desc));
+        result = AUGraphInitialize(_mGraph);
+        
+        result = AUGraphStart(_mGraph);
     }
 }
 
+- (void)play {
+    OSStatus result = noErr;
+    _amplitudeGain = [self dbHLtoAmplitude:_globaldBHL atFrequency:_frequency];
+    AURenderCallbackStruct renderCallbackStruct;
+    renderCallbackStruct.inputProcRefCon = (__bridge void *)(self);
+    renderCallbackStruct.inputProc = ORKdBHLAudioGeneratorRenderTone;
+    _lastNodeInput += 1;
+    int connect = 0;
+    int disconnect = 0;
+    if ((_lastNodeInput % 2) == 0) {
+        connect = 1;
+        disconnect = 2;
+    } else {
+        connect = 2;
+        disconnect = 1;
+    }
+    result = AUGraphDisconnectNodeInput(_mGraph, _mixerNode, disconnect);
+    result = AUGraphSetNodeInputCallback(_mGraph, _mixerNode, connect, &renderCallbackStruct);
+    AUGraphUpdate(_mGraph, NULL);
+}
+
 - (void)stop {
-    if (_toneUnit) {
+    if (_mGraph) {
         _rampUp = NO;
+        int nodeInput = (_lastNodeInput % 2) + 1;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_fadeInDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (_toneUnit) {
-                AudioOutputUnitStop(_toneUnit);
-                AudioUnitUninitialize(_toneUnit);
-                AudioComponentInstanceDispose(_toneUnit);
-                _toneUnit = nil;
+            if (_mGraph) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    OSStatus result = noErr;
+                    result = AUGraphDisconnectNodeInput(_mGraph, _mixerNode, nodeInput);
+                    result = AUGraphUpdate(_mGraph, NULL);
+                }); 
             }
         });
     }
 }
-
-
-
-- (BOOL)createToneUnit {
-    // Configure the search parameters to find the default playback output unit
-    // (called the kAudioUnitSubType_RemoteIO on iOS but
-    // kAudioUnitSubType_DefaultOutput on Mac OS X)
-    AudioComponentDescription defaultOutputDescription;
-    defaultOutputDescription.componentType = kAudioUnitType_Output;
-    defaultOutputDescription.componentSubType = kAudioUnitSubType_RemoteIO;
-    defaultOutputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-    defaultOutputDescription.componentFlags = 0;
-    defaultOutputDescription.componentFlagsMask = 0;
-    
-    // Get the default playback output unit
-    AudioComponent defaultOutput = AudioComponentFindNext(NULL, &defaultOutputDescription);
-    NSAssert(defaultOutput, @"Can't find default output");
-    
-    // Create a new unit based on this that we'll use for output
-    OSErr error = AudioComponentInstanceNew(defaultOutput, &_toneUnit);
-    NSAssert1(_toneUnit, @"Error creating unit: %hd", error);
-    _amplitudeGain = [self dbHLtoAmplitude:_globaldBHL atFrequency:_frequency];
-    if (_amplitudeGain == nil) {
-        return NO;
-    }
-    // Set our tone rendering function on the unit
-    AURenderCallbackStruct input;
-    input.inputProc = ORKdBHLAudioGeneratorRenderTone;
-    input.inputProcRefCon = (__bridge void *)(self);
-    error = AudioUnitSetProperty(_toneUnit,
-                                 kAudioUnitProperty_SetRenderCallback,
-                                 kAudioUnitScope_Input,
-                                 0,
-                                 &input,
-                                 sizeof(input));
-    NSAssert1(error == noErr, @"Error setting callback: %hd", error);
-    
-    // Set the format to 32 bit, single channel, floating point, linear PCM
-    const int four_bytes_per_float = 4;
-    const int eight_bits_per_byte = 8;
-    AudioStreamBasicDescription streamFormat;
-    streamFormat.mSampleRate = ORKdBHLSineWaveToneGeneratorSampleRateDefault;
-    streamFormat.mFormatID = kAudioFormatLinearPCM;
-    streamFormat.mFormatFlags = kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
-    streamFormat.mBytesPerPacket = four_bytes_per_float;
-    streamFormat.mFramesPerPacket = 1;
-    streamFormat.mBytesPerFrame = four_bytes_per_float;
-    streamFormat.mChannelsPerFrame = 2;
-    streamFormat.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
-    error = AudioUnitSetProperty (_toneUnit,
-                                  kAudioUnitProperty_StreamFormat,
-                                  kAudioUnitScope_Input,
-                                  0,
-                                  &streamFormat,
-                                  sizeof(AudioStreamBasicDescription));
-    NSAssert1(error == noErr, @"Error setting stream format: %hd", error);
-    
-    return YES;
-}
-
 
 - (double)dBToAmplitude:(double)dB {
     return (powf(10, 0.05 * dB));
@@ -274,17 +336,15 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
 
 
 - (NSNumber *)dbHLtoAmplitude: (double)dbHL atFrequency:(double)frequency {
-    NSDecimalNumber *dBSPL =  [NSDecimalNumber decimalNumberWithString:frTable[[NSString stringWithFormat:@"%.0f",frequency]]];
+    NSDecimalNumber *dBSPL =  [NSDecimalNumber decimalNumberWithString:_sensitivityPerFrequency[[NSString stringWithFormat:@"%.0f",frequency]]];
     
     // get current volume
     float currentVolume = [self getCurrentSystemVolume];
-    float x = currentVolume * 16;
-    if (x != (int)x) {
-        currentVolume = 1.0;
-    }
+    
+    currentVolume = (int)(currentVolume / 0.0625) * 0.0625;
     
     // check in volume curve table for offset
-    NSDecimalNumber *offsetDueToVolume = [NSDecimalNumber decimalNumberWithString:volumeCurve[[NSString stringWithFormat:@"%.4f",currentVolume]]];
+    NSDecimalNumber *offsetDueToVolume = [NSDecimalNumber decimalNumberWithString:_volumeCurve[[NSString stringWithFormat:@"%.4f",currentVolume]]];
     
     NSDecimalNumber *updated_dBSPLForVolumeCurve = [dBSPL decimalNumberByAdding:offsetDueToVolume];
     
@@ -292,7 +352,7 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
     
     NSDecimalNumber *updated_dBSPLFor_dBFS = [updated_dBSPLForVolumeCurve decimalNumberByAdding:dBFSCalibration];
     
-    NSDecimalNumber *baselinedBSPL = [NSDecimalNumber decimalNumberWithString:atZerodbHLFreqTodbSPLmap[[NSString stringWithFormat:@"%.0f",frequency]]];
+    NSDecimalNumber *baselinedBSPL = [NSDecimalNumber decimalNumberWithString:_retspl[[NSString stringWithFormat:@"%.0f",frequency]]];
     
     NSDecimalNumber *tempdBHL = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", dbHL]];
     NSDecimalNumber *attenuationOffset = [baselinedBSPL decimalNumberByAdding:tempdBHL];

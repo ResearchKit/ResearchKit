@@ -34,7 +34,7 @@
 
 @protocol ORKPDFViewerStepViewDelegate <NSObject>
 
-- (void)didSelectShareButton;
+- (void)didSelectShareButton:(id)sender;
 
 @end
 

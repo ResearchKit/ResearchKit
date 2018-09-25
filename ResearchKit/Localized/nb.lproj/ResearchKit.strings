@@ -269,6 +269,8 @@
 "TAPPING_INSTRUCTION_LEFT" = "Trykk på knappene med din VENSTRE hånd.";
 "TAPPING_SKIP_TITLE" = "Utelat denne hånden";
 
+/* Amsler Grid Task.*/
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
 "AUDIO_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
@@ -290,6 +292,8 @@
 "TONE_AUDIOMETRY_INSTRUCTION" = "Trykk på knappen hver gang du hører en lyd.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
+
+/* dBHL Tone audiometry active task. */
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
@@ -430,6 +434,10 @@
 
 /* Trail making task. */
 
+/* Speech Recognition active task. */
+
+/* Speech In Noise active task. */
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
@@ -439,13 +447,15 @@
 "ERROR_RECORDER_NO_DATA" = "Fant ingen innsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen katalog angitt";
 
+/* Environment SPL*/
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Ingen data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbake";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustrasjon av %@";
+
 
 "AX_SIGNVIEW_LABEL" = "Eget signaturfelt";
 "AX_SIGNVIEW_HINT" = "Berør skjermen og flytt fingeren for å signere";
@@ -479,6 +489,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Område fra %@ til %@";
 "AX_GRAPH_STACK_PREFIX" = "Stabel bestående av";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
@@ -486,5 +497,14 @@
 
 
 
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+
 /* Unsorted */
 "AX_VIDEO_CAPTURED_LABEL" = "Innspilt video";
+"AX_IMAGE_ILLUSTRATION" = "Illustrasjon av %@";

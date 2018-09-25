@@ -270,7 +270,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(_axVoiceOverStatusChanged:)
-                                                 name:UIAccessibilityVoiceOverStatusChanged
+                                                 name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                                object:nil];
 }
 

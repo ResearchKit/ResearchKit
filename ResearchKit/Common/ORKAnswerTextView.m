@@ -74,8 +74,26 @@
     [self insertSubview:_placeholderTextView atIndex:0];
     
     [self setUpConstraints];
-    
+    [self addAccessoryViewWithDoneButton];
     [self updateAppearance];
+}
+
+- (void)addAccessoryViewWithDoneButton {
+    UIToolbar* accessoryViewWithDoneButton = [[UIToolbar alloc] init];
+    [accessoryViewWithDoneButton sizeToFit];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                      target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                   target:self action:@selector(keyboardAccessoryViewDoneButtonPressed)];
+    accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
+    [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+    self.inputAccessoryView = accessoryViewWithDoneButton;
+}
+
+- (void)keyboardAccessoryViewDoneButtonPressed {
+    [self resignFirstResponder];
 }
 
 - (void)layoutSubviews {

@@ -458,17 +458,23 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     CGSize imageContextSize;
     imageContextSize = (self.bounds.size.width == 0 || self.bounds.size.height == 0) ? CGSizeMake(200, 200) :
                         self.bounds.size;
+    
     UIGraphicsBeginImageContext(imageContextSize);
 
+    CGRect rect = CGRectNull;
     for (UIBezierPath *path in self.pathArray) {
+        rect = CGRectUnion(rect, path.bounds);
         [self.lineColor setStroke];
         [path stroke];
     }
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    rect = CGRectInset(rect, -10, -10); // a small margin
+    CGImageRef crop = CGImageCreateWithImageInRect(image.CGImage, rect);
     UIGraphicsEndImageContext();
     
-    return image;
+    return [[UIImage alloc] initWithCGImage:crop];
 }
 
 - (BOOL)signatureExists {

@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Gennemse nedenstående formular, og tryk på Enig, hvis du er klar til at fortsætte.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Gennemse";
 "CONSENT_SIGNATURE_TITLE" = "Underskrift";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Underskriv på linjen nedenfor vha. din finger.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Underskriv i feltet nedenfor vha. din finger.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Skriv under her";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Side %1$ld af %2$ld";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Valg til deling";
 "CONSENT_SHARE_WIDELY_%@" = "Del mine data med %@ og kvalificerede forskere i hele verden";
 "CONSENT_SHARE_ONLY_%@" = "Del kun mine data med %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ modtager dine data fra din deltagelse i undersøgelsen.\n\nHvis du deler dine kodede undersøgelsesdata mere bredt (uden oplysninger som dit navn) kan det gavne denne og fremtidige undersøgelser.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ modtager dine data fra din deltagelse i dette studie.\n\nHvis du deler dine kodede data fra studiet (uden oplysninger som f.eks. dit navn), kan det være til gavn for dette studie og fremtidig forskning.";
 "LEARN_MORE_CONSENT_SHARING" = "Læs mere om deling af data";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Trin %1$@ af %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ af %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig værdi";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Vælg køn";
 "DOB_FORM_ITEM_TITLE" = "Fødselsdato";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Vælg en dato";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Bekræftelse";
@@ -173,13 +175,16 @@
 "GENDER_OTHER" = "Andet";
 
 /* Boolean answer strings */
-"BOOL_NO" = "Ingen";
+"BOOL_NO" = "Nej";
 "BOOL_YES" = "Ja";
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fod";
-"MEASURING_UNIT_IN" = "\"";
+"MEASURING_UNIT_IN" = "\\\"";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "venstre";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Annuller";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Ryd";
+"BUTTON_APPLY" = "Anvend";
 "BUTTON_DISAGREE" = "Uenig";
 "BUTTON_DONE" = "OK";
 "BUTTON_GET_STARTED" = "Gå i gang";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "Gang og balance";
 "WALK_INTRO_TEXT" = "Denne aktivitet måler din gang og balance, mens du går og står stille. Fortsæt ikke, hvis du ikke kan gå sikkert uden hjælp.";
 "WALK_INTRO_2_TEXT_%ld" = "Find et sted, hvor du kan gå omkring %ld trin sikkert uden hjælp i en lige linje.";
-"WALK_INTRO_2_DETAIL" = "Læg din telefon i en lomme eller taske, og følg lydinstruktionerne.";
+"WALK_INTRO_2_DETAIL" = "Læg din enhed i en lomme eller taske, og følg lydinstruktionerne.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå nu stille i %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stå stille i %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Vend om, og gå tilbage til det sted, hvor du startede.";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find et sted, hvor du kan gå sikkert frem og tilbage i en lige linje. Forsøg at gå uden stop ved at vende i slutningen af din rute, som om du går omkring en kegle.\n\nDu vil derefter blive bedt om at dreje 360 grader omkring og derefter stå stille med dine arme ned langs siderne og med en skulderbreddes afstand mellem fødderne.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tryk på Gå i gang, når du er klar til at begynde.\nAnbring derefter telefonen i en lomme eller taske, og følg lydinstruktionerne.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tryk på Gå i gang, når du er klar til at begynde.\nAnbring derefter enheden i en lomme eller taske, og følg lydinstruktionerne.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gå frem og tilbage i en lige linje i %@. Gå, som du plejer.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Drej 360 grader rundt, og stå derefter stille i %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Du har færdiggjort aktiviteten.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Højre hånd";
 "TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
 "TAPPING_INTRO_TEXT" = "Denne aktivitet måler din trykhastighed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Anbring din telefon på en plan overflade.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Anbring din enhed på en plan overflade.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Tryk skiftevis på knapperne på skærmen med to fingre på den samme hånd.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Tryk skiftevis på knapperne på skærmen med to fingre på den højre hånd.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Tryk skiftevis på knapperne på skærmen med to fingre på den venstre hånd.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Tryk på knapperne med din VENSTRE hånd.";
 "TAPPING_SKIP_TITLE" = "Spring denne hånd over";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler-gitter";
+"AMSLER_GRID_INTRO_TEXT" = "Denne aktivitet hjælper med at registrere problemer med brugerens syn.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold enheden i mellem 25-50 cm fra ansigtet og i øjenhøjde under hele testen.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Luk %@, og fokuser på prikken i midten af det firkantede gitter.\n\nBrug en finger eller pen til at markere alle forvrængninger, du ser, f.eks. slørede eller bølgede streger.\n\nSkub til venstre uden for gitteret, når du er færdig.";
+"AMSLER_GRID_LEFT_EYE" = "Venstre øje";
+"AMSLER_GRID_RIGHT_EYE" = "Højre øje";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
 "AUDIO_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
 "AUDIO_INSTRUCTION" = "Sig “Aaaaah” ind i mikrofonen i så lang tid, som du kan.";
 "AUDIO_INTRO_TEXT" = "Tag en dyb indånding, og sig “Aaaaah” ind i mikrofonen i så lang tid, som du kan. Hold den samme styrke, så lydmålerne bliver ved med at være blå.";
-"AUDIO_INTENDED_USE" = "Denne aktivitet vurderer din stemme ved at optage den med mikrofonen nederst i telefonen.";
+"AUDIO_INTENDED_USE" = "Denne aktivitet vurderer din stemme ved at optage den med mikrofonen nederst i enheden.";
 "AUDIO_TOO_LOUD_LABEL" = "For højt";
 "AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke optage lyd";
 "AUDIO_LEVEL_CHECK_LABEL" = "Vent, mens støjniveauet i baggrunden kontrolles.";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Højre øre";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, højre";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktivitet identificerer grænseniveauer for en persons hørelse i skalaen dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Sørg for, at enhedens lydstyrke er skruet helt op.\n\nUnder denne opgave afspilles en diskret tone i enten venstre eller højre øre.\n\nLyt godt efter, og tryk på knappen, hver gang du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Indledende spørgeskema.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Vælg evt. din indstilling for “bedre øre”";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "venstre";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "højre";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ingen præference";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Rumlig hukommelse";
@@ -337,17 +361,17 @@
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop";
-"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Hver gang der vises et ord, skal du vælge det første bogstav i navnet på den viste FARVE.";
+"STROOP_TASK_INTRO1_DETAIL_TEXT" = "Hver gang der vises et ord, skal du vælge de(t) første bogstav(er) i navnet på den viste FARVE.";
 "STROOP_TASK_INTRO2_DETAIL_TEXT" = "Tryk på Gå i gang, når du er klar til at starte Stroop-aktiviteten.";
-"STROOP_TASK_STEP_TEXT" = "Vælg det første bogstav i navnet på den viste FARVE.";
+"STROOP_TASK_STEP_TEXT" = "Vælg de(t) første bogstav(er) i navnet på den viste FARVE.";
 "STROOP_COLOR_RED" = "RØD";
 "STROOP_COLOR_GREEN" = "GRØN";
 "STROOP_COLOR_BLUE" = "BLÅ";
 "STROOP_COLOR_YELLOW" = "GUL";
 "STROOP_COLOR_RED_INITIAL" = "R";
-"STROOP_COLOR_GREEN_INITIAL" = "G";
+"STROOP_COLOR_GREEN_INITIAL" = "GR";
 "STROOP_COLOR_BLUE_INITIAL" = "B";
-"STROOP_COLOR_YELLOW_INITIAL" = "G";
+"STROOP_COLOR_YELLOW_INITIAL" = "GU";
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg kan ikke løse opgaven";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Bevægelsesområde";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption skal være venstre eller højre";
 
 /* Knee Range of Motion active task */
@@ -485,7 +510,7 @@
 
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "Sportest";
-"TRAILMAKING_INTENDED_USE" = "Denne aktivitet evaluerer din visuelle opmærksom og evne til at skifte mellem opgaver ved at registrere, hvor lang tid det tager at trykke på en række prikker i rækkefølge.";
+"TRAILMAKING_INTENDED_USE" = "Denne aktivitet evaluerer din visuelle opmærksomhed og evne til at skifte mellem opgaver ved at registrere, hvor lang tid det tager at trykke på en række prikker i rækkefølge.";
 "TRAILMAKING_INTENDED_USE2_A" = "Efter nedtællingen skal du trykke på prikker i skiftende rækkefølge mellem tal og bogstaver. Start med at trykke på det første tal “1” efterfulgt af tallene “2” – “3” – “4”…, indtil du når tallet “7”.";
 "TRAILMAKING_INTENDED_USE2_B" = "Efter nedtællingen skal du trykke på prikker i skiftende rækkefølge mellem tal og bogstaver. Start med at trykke på det første tal “1”, derefter på det første bogstav “A”, så “2” – “B” – “3” – “C”…, indtil du når tallet “7”.";
 "TRAILMAKING_INTRO_TEXT" = "Gør det så hurtigt, som du kan, uden at lave fejl. \n ";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Talegenkendelse";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Denne aktivitet optager din tale med mikrofonen i bunden af enheden, og oversætter den til tekst.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Tryk på knappen for at starte optagelsen, før du taler.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start optagelse";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop optagelse";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Rediger transskription";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Rediger tekst i transskriptionen for at rette talemisforståelser.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Din transskription vises her.";
+"SPEECH_RECOGNITION_FAILED" = "Talegenkendelse mislykkedes.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Kunne ikke initialisere talegenkendelse.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Afspil lyd";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stop lyd";
+"SPEECH_IN_NOISE_TITLE" = "Tale med støj";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Denne aktivitet måler forståeligheden af talen i omgivelser med meget støj.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Som en del af denne test vil du:\n\nLytte til en sætning.\n\nGentag tydeligt, hvad du hørte, eller spring over for at bruge tastaturet til at skrive, hvad du hørte. \n\nHvis du gentager, hvad du hørte, har du mulighed for at redigere transskriptionen, der genereres af programmet til talegenkendelse.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Lydkalibrering";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tryk på “Afspil lyd” for at justere lydstyrken til et behageligt niveau, og tryk derefter på “Stop lyd” for at fortsætte.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Lyt";
+"SPEECH_IN_NOISE_STEP_TEXT" = "En sætning, der er blandet med baggrundsstøj i et tilfældigt signal-støj-forhold (SNR) afspilles kun en gang.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Tal";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Gentag, hvad du hørte.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne tilstrækkeligt med logarkiver til at nå grænsen";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Der blev ikke fundet nogen indsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Intet resultatbibliotek anført";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Støjniveaumåler";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Denne aktivitet måler omgivelsernes støjniveau. Hvis støjniveauet er for højt, kan du ikke fortsætte. Gå et sted hen, der er mere stille, for at gennemføre opgaven, eller udfør aktiviteten igen senere.";
+"ENVIRONMENTSPL_UNIT" = "dB(A)";
+"ENVIRONMENTSPL_CALCULATING" = "Beregner";
+"ENVIRONMENTSPL_THRESHOLD" = "Grænse: %@ dB(A)";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Ingen data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbage";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Vis PDF-miniature";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Skjul PDF-miniaturer";
+"AX_BUTTON_ANNOTATE" = "Tilføj kommentar";
+"AX_BUTTON_SHOW_SEARCH" = "Vis søgelinje";
+"AX_BUTTON_HIDE_SEARCH" = "Skjul søgelinje";
+"AX_BUTTON_SHARE" = "Del";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustration af %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Illustration af et flueben i en blå cirkel angiver, at det lykkedes";
 
 "AX_SIGNVIEW_LABEL" = "Valgt felt til signatur";
 "AX_SIGNVIEW_HINT" = "Rør ved skærmen, og bevæg din finger for at underskrive";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har ringe med størrelserne %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Udsnit fra %@ til %@";
 "AX_GRAPH_STACK_PREFIX" = "Stak består af";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Talebølgeform";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Når optagelsen starter, skal du aktivere en gang mere for at standse optagelsen.";
+
 "AX_AUDIO_BAR_GRAPH" = "Lydsøjlegraf";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler-gitter";
+"AX_AMSLER_GRID_HINT" = "Brug din finger eller pen til at markere gitteret, eller skub til venstre uden for gitteret for at fortsætte.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
