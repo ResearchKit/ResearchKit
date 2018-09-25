@@ -463,6 +463,18 @@
                                                  metrics:@{@"kMargin": @(kMargin)}
                                                    views:views]];
     }
+	
+	// Hide the value label if necessary
+	// It can't be hidden when it's a vertical text choice slider
+	if ([_formatProvider shouldHideSelectedValueLabel] &&
+		!([_formatProvider isVertical] && ![self textScaleFormatProvider])) {
+		[self addConstraints:
+		 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+												 options:0
+												 metrics:nil
+												   views:views]];
+	}
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 

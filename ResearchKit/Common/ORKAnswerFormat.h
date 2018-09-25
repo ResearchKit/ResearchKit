@@ -330,6 +330,11 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
+
+/**
  Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
  subclasses.
  */
@@ -497,6 +502,11 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSNumberFormatter *numberFormatter;
 
 /**
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
+
+/**
  A localized label to describe the maximum value of the scale. (read-only)
  */
 @property (readonly, nullable) NSString *maximumValueDescription;
@@ -608,6 +618,11 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
 @property (readonly, getter=isVertical) BOOL vertical;
+
+/**
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
 
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that

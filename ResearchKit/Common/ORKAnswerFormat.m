@@ -1715,6 +1715,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _vertical = vertical;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
+        _hideSelectedValue = NO;
         
         [self validateParameters];
     }
@@ -1933,6 +1934,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _vertical = vertical;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
+        _hideSelectedValue = NO;
         
         [self validateParameters];
     }
@@ -2035,38 +2037,40 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, maximum);
-        ORK_DECODE_DOUBLE(aDecoder, minimum);
-        ORK_DECODE_DOUBLE(aDecoder, defaultValue);
-        ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
-        ORK_DECODE_BOOL(aDecoder, vertical);
-        ORK_DECODE_ENUM(aDecoder, numberStyle);
-        ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
-        ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
-        ORK_DECODE_IMAGE(aDecoder, maximumImage);
-        ORK_DECODE_IMAGE(aDecoder, minimumImage);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
-    }
-    return self;
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		ORK_DECODE_DOUBLE(aDecoder, maximum);
+		ORK_DECODE_DOUBLE(aDecoder, minimum);
+		ORK_DECODE_DOUBLE(aDecoder, defaultValue);
+		ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
+		ORK_DECODE_BOOL(aDecoder, vertical);
+		ORK_DECODE_ENUM(aDecoder, numberStyle);
+		ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
+		ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
+		ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+		ORK_DECODE_IMAGE(aDecoder, maximumImage);
+		ORK_DECODE_IMAGE(aDecoder, minimumImage);
+		ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
+		ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
+	}
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_DOUBLE(aCoder, maximum);
-    ORK_ENCODE_DOUBLE(aCoder, minimum);
-    ORK_ENCODE_DOUBLE(aCoder, defaultValue);
-    ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
-    ORK_ENCODE_BOOL(aCoder, vertical);
-    ORK_ENCODE_ENUM(aCoder, numberStyle);
-    ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
-    ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
-    ORK_ENCODE_IMAGE(aCoder, maximumImage);
-    ORK_ENCODE_IMAGE(aCoder, minimumImage);
-    ORK_ENCODE_OBJ(aCoder, gradientColors);
-    ORK_ENCODE_OBJ(aCoder, gradientLocations);
+	[super encodeWithCoder:aCoder];
+	ORK_ENCODE_DOUBLE(aCoder, maximum);
+	ORK_ENCODE_DOUBLE(aCoder, minimum);
+	ORK_ENCODE_DOUBLE(aCoder, defaultValue);
+	ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
+	ORK_ENCODE_BOOL(aCoder, vertical);
+	ORK_ENCODE_BOOL(aCoder, hideSelectedValue);
+	ORK_ENCODE_ENUM(aCoder, numberStyle);
+	ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
+	ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+	ORK_ENCODE_IMAGE(aCoder, maximumImage);
+	ORK_ENCODE_IMAGE(aCoder, minimumImage);
+	ORK_ENCODE_OBJ(aCoder, gradientColors);
+	ORK_ENCODE_OBJ(aCoder, gradientLocations);
 }
 
 + (BOOL)supportsSecureCoding {
