@@ -48,6 +48,7 @@
     NSDateFormatter *_labelFormatter;
     UIDatePicker *_pickerView;
     NSDate *_date;
+    NSInteger _minuteInterval;
     __weak id<ORKPickerDelegate> _pickerDelegate;
     id _answer;
 }
@@ -84,6 +85,7 @@
     
     if ([self isTimeOfDay]) {
         ORKTimeOfDayAnswerFormat *timeOfDayAnswerFormat = (ORKTimeOfDayAnswerFormat *)self.answerFormat;
+        [self setMinuteInterval:timeOfDayAnswerFormat.minuteInterval];
         
         if (answer && answer != ORKNullAnswerValue()) {
             NSDateComponents *timeOfDayComponents = (NSDateComponents *)answer;
@@ -96,6 +98,7 @@
         }
     } else {
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)self.answerFormat;
+        [self setMinuteInterval:dateAnswerFormat.minuteInterval];
         
         if (answer && answer != ORKNullAnswerValue()) {
             NSDate *defaultDate = (NSDate *)answer;
@@ -151,6 +154,11 @@
 - (void)setDate:(NSDate *)date {
     _date = date;
     _pickerView.date = date;
+}
+
+- (void)setMinuteInterval:(NSInteger)minuteInterval {
+    _minuteInterval = minuteInterval;
+    _pickerView.minuteInterval = minuteInterval;
 }
 
 - (NSDateFormatter *)labelFormatter {

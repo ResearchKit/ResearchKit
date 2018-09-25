@@ -357,7 +357,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [ORKTimeOfDayAnswerFormat new];
 }
 + (ORKTimeOfDayAnswerFormat *)timeOfDayAnswerFormatWithDefaultComponents:(NSDateComponents *)defaultComponents {
-    return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:defaultComponents];
+    return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:defaultComponents minuteInterval:1];
 }
 
 + (ORKDateAnswerFormat *)dateTimeAnswerFormat {
@@ -371,7 +371,8 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                           defaultDate:defaultDate
                                           minimumDate:minimumDate
                                           maximumDate:maximumDate
-                                             calendar:calendar];
+                                             calendar:calendar
+                                       minuteInterval:1];
 }
 
 + (ORKDateAnswerFormat *)dateAnswerFormat {
@@ -385,7 +386,8 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                           defaultDate:defaultDate
                                           minimumDate:minimumDate
                                           maximumDate:maximumDate
-                                             calendar:calendar];
+                                             calendar:calendar
+                                       minuteInterval:1];
 }
 
 + (ORKTextAnswerFormat *)textAnswerFormat {
@@ -1242,14 +1244,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @implementation ORKTimeOfDayAnswerFormat
 
 - (instancetype)init {
-    self = [self initWithDefaultComponents:nil];
+    self = [self initWithDefaultComponents:nil minuteInterval:1];
     return self;
 }
 
-- (instancetype)initWithDefaultComponents:(NSDateComponents *)defaultComponents {
+- (instancetype)initWithDefaultComponents:(NSDateComponents *)defaultComponents
+                           minuteInterval:(NSInteger)minuteInterval {
     self = [super init];
     if (self) {
         _defaultComponents = [defaultComponents copy];
+        _minuteInterval = minuteInterval;
     }
     return self;
 }
@@ -1277,12 +1281,17 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKTimeOfDayDateFromComponents(newDateComponents);
 }
 
+- (NSInteger)pickerMinuteInterval {
+    return self.minuteInterval;
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.defaultComponents, castObject.defaultComponents));
+            ORKEqualObjects(self.defaultComponents, castObject.defaultComponents) &&
+            (self.minuteInterval == castObject.minuteInterval));
 }
 
 - (NSUInteger)hash {
@@ -1294,6 +1303,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultComponents, NSDateComponents);
+        ORK_DECODE_INTEGER(aDecoder, minuteInterval);
     }
     return self;
 }
@@ -1301,6 +1311,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, defaultComponents);
+    ORK_ENCODE_INTEGER(aCoder, minuteInterval);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1331,7 +1342,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithStyle:(ORKDateAnswerStyle)style {
-    self = [self initWithStyle:style defaultDate:nil minimumDate:nil maximumDate:nil calendar:nil];
+    self = [self initWithStyle:style defaultDate:nil minimumDate:nil maximumDate:nil calendar:nil minuteInterval:1];
     return self;
 }
 
@@ -1339,7 +1350,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                   defaultDate:(NSDate *)defaultDate
                   minimumDate:(NSDate *)minimum
                   maximumDate:(NSDate *)maximum
-                     calendar:(NSCalendar *)calendar {
+                     calendar:(NSCalendar *)calendar
+               minuteInterval:(NSInteger)minuteInterval {
     self = [super init];
     if (self) {
         _style = style;
@@ -1347,6 +1359,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _minimumDate = [minimum copy];
         _maximumDate = [maximum copy];
         _calendar = [calendar copy];
+        _minuteInterval = minuteInterval;
     }
     return self;
 }
@@ -1360,6 +1373,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             ORKEqualObjects(self.minimumDate, castObject.minimumDate) &&
             ORKEqualObjects(self.maximumDate, castObject.maximumDate) &&
             ORKEqualObjects(self.calendar, castObject.calendar) &&
+            (self.minuteInterval == castObject.minuteInterval) &&
             (_style == castObject.style));
 }
 
@@ -1418,6 +1432,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self.maximumDate;
 }
 
+- (NSInteger)pickerMinuteInterval {
+    return self.minuteInterval;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -1426,6 +1444,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, maximumDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, calendar, NSCalendar);
+        ORK_DECODE_INTEGER(aDecoder, minuteInterval);
     }
     return self;
 }
@@ -1437,6 +1456,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, maximumDate);
     ORK_ENCODE_OBJ(aCoder, defaultDate);
     ORK_ENCODE_OBJ(aCoder, calendar);
+    ORK_ENCODE_INTEGER(aCoder, minuteInterval);
 }
 
 - (ORKQuestionType)questionType {
