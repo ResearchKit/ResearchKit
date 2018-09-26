@@ -464,10 +464,10 @@
                                                    views:views]];
     }
 	
-	// Hide the value label if necessary
-	// It can't be hidden when it's a vertical text choice slider
+	// Hide the selected value label if necessary;
+	// skipped when not present (text choice slider)
 	if ([_formatProvider shouldHideSelectedValueLabel] &&
-		!([_formatProvider isVertical] && ![self textScaleFormatProvider])) {
+		!([_formatProvider isVertical] && [self textScaleFormatProvider])) {
 		[self addConstraints:
 		 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
 												 options:0

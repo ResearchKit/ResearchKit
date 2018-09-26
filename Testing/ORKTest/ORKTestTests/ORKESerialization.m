@@ -1136,6 +1136,7 @@ encondingTable =
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+		  PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil),
           PROPERTY(gradientColors, UIColor, NSArray, YES, nil, nil),
@@ -1151,6 +1152,7 @@ encondingTable =
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+		  PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(numberStyle, NSNumber, NSObject, YES,
                    ^id(id numeric) { return tableMapForward(((NSNumber *)numeric).integerValue, numberFormattingStyleTable()); },
                    ^id(id string) { return @(tableMapReverse(string, numberFormattingStyleTable())); }),
@@ -1167,6 +1169,7 @@ encondingTable =
             PROPERTY(textChoices, ORKTextChoice, NSArray<ORKTextChoice *>, NO, nil, nil),
             PROPERTY(defaultIndex, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+			PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(gradientColors, UIColor, NSArray, YES, nil, nil),
             PROPERTY(gradientLocations, NSNumber, NSArray, YES, nil, nil)
             })),

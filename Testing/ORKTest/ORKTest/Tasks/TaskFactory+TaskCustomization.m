@@ -181,6 +181,7 @@
                                                                                                          defaultValue:8.725
                                                                                                 maximumFractionDigits:3
                                                                                                              vertical:YES
+																									hideSelectedValue:NO
                                                                                               maximumValueDescription:nil
                                                                                               minimumValueDescription:nil];
     
