@@ -463,17 +463,17 @@
                                                  metrics:@{@"kMargin": @(kMargin)}
                                                    views:views]];
     }
-	
-	// Hide the selected value label if necessary;
-	// skipped when not present (text choice slider)
-	if ([_formatProvider shouldHideSelectedValueLabel] &&
-		!([_formatProvider isVertical] && [self textScaleFormatProvider])) {
-		[self addConstraints:
-		 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
-												 options:0
-												 metrics:nil
-												   views:views]];
-	}
+
+    // Hide the selected value label if necessary;
+    // skipped when not present (text choice slider)
+    if ([_formatProvider shouldHideSelectedValueLabel] &&
+        !([_formatProvider isVertical] && [self textScaleFormatProvider])) {
+        [self addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+    }
 
     [NSLayoutConstraint activateConstraints:constraints];
 }

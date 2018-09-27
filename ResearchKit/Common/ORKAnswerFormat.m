@@ -279,15 +279,15 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                defaultValue:(NSInteger)defaultValue
                                                        step:(NSInteger)step
                                                    vertical:(BOOL)vertical
-										  hideSelectedValue:(BOOL)shouldHideValue
+                                          hideSelectedValue:(BOOL)shouldHideValue
                                     maximumValueDescription:(nullable NSString *)maximumValueDescription
                                     minimumValueDescription:(nullable NSString *)minimumValueDescription {
     return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
                                                  minimumValue:scaleMinimum
                                                  defaultValue:defaultValue
                                                          step:step
-													 vertical:vertical
-											hideSelectedValue:shouldHideValue
+                                                     vertical:vertical
+                                            hideSelectedValue:shouldHideValue
                                       maximumValueDescription:maximumValueDescription
                                       minimumValueDescription:minimumValueDescription];
 }
@@ -297,7 +297,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                                    defaultValue:(double)defaultValue
                                                           maximumFractionDigits:(NSInteger)maximumFractionDigits
                                                                        vertical:(BOOL)vertical
-															  hideSelectedValue:(BOOL)shouldHideValue
+                                                              hideSelectedValue:(BOOL)shouldHideValue
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription {
     return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
@@ -305,7 +305,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                            defaultValue:defaultValue
                                                   maximumFractionDigits:maximumFractionDigits
                                                                vertical:vertical
-													  hideSelectedValue:shouldHideValue
+                                                      hideSelectedValue:shouldHideValue
                                                 maximumValueDescription:maximumValueDescription
                                                 minimumValueDescription:minimumValueDescription];
 }
@@ -313,11 +313,11 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical
-												 hideSelectedValue:(BOOL)shouldHideValue {
+                                                 hideSelectedValue:(BOOL)shouldHideValue {
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
                                                     defaultIndex:defaultIndex
                                                         vertical:vertical
-											   hideSelectedValue:shouldHideValue];
+                                               hideSelectedValue:shouldHideValue];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -1710,8 +1710,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                         minimumValue:(NSInteger)minimumValue
                         defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
-							vertical:(BOOL)vertical
-				   hideSelectedValue:(BOOL)shouldHideValue
+                            vertical:(BOOL)vertical
+                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription {
     self = [super init];
@@ -1721,7 +1721,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _defaultValue = defaultValue;
         _step = step;
         _vertical = vertical;
-		_hideSelectedValue = shouldHideValue;
+        _hideSelectedValue = shouldHideValue;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
 
@@ -1740,7 +1740,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                                  step:step
                              vertical:vertical
-					hideSelectedValue:NO
+                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1754,7 +1754,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                                  step:step
                              vertical:NO
-					hideSelectedValue:NO
+                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1853,7 +1853,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_INTEGER(aDecoder, step);
         ORK_DECODE_INTEGER(aDecoder, defaultValue);
         ORK_DECODE_BOOL(aDecoder, vertical);
-		ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
+        ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
         ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
@@ -1871,7 +1871,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_INTEGER(aCoder, step);
     ORK_ENCODE_INTEGER(aCoder, defaultValue);
     ORK_ENCODE_BOOL(aCoder, vertical);
-	ORK_ENCODE_BOOL(aCoder, hideSelectedValue);
+    ORK_ENCODE_BOOL(aCoder, hideSelectedValue);
     ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
     ORK_ENCODE_IMAGE(aCoder, maximumImage);
@@ -1935,7 +1935,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                         defaultValue:(double)defaultValue
                maximumFractionDigits:(NSInteger)maximumFractionDigits
                             vertical:(BOOL)vertical
-				   hideSelectedValue:(BOOL)shouldHideValue
+                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription {
     self = [super init];
@@ -1945,7 +1945,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _defaultValue = defaultValue;
         _maximumFractionDigits = maximumFractionDigits;
         _vertical = vertical;
-		_hideSelectedValue = shouldHideValue;
+        _hideSelectedValue = shouldHideValue;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
         _hideSelectedValue = shouldHideValue;
@@ -1965,7 +1965,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                 maximumFractionDigits:maximumFractionDigits
                              vertical:vertical
-					hideSelectedValue:NO
+                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1978,8 +1978,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          minimumValue:minimumValue
                          defaultValue:defaultValue
                 maximumFractionDigits:maximumFractionDigits
-							 vertical:NO
-					hideSelectedValue:NO
+                             vertical:NO
+                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -2053,40 +2053,40 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		ORK_DECODE_DOUBLE(aDecoder, maximum);
-		ORK_DECODE_DOUBLE(aDecoder, minimum);
-		ORK_DECODE_DOUBLE(aDecoder, defaultValue);
-		ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
-		ORK_DECODE_BOOL(aDecoder, vertical);
-		ORK_DECODE_ENUM(aDecoder, numberStyle);
-		ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
-		ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
-		ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
-		ORK_DECODE_IMAGE(aDecoder, maximumImage);
-		ORK_DECODE_IMAGE(aDecoder, minimumImage);
-		ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
-		ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
-	}
-	return self;
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, maximum);
+        ORK_DECODE_DOUBLE(aDecoder, minimum);
+        ORK_DECODE_DOUBLE(aDecoder, defaultValue);
+        ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
+        ORK_DECODE_BOOL(aDecoder, vertical);
+        ORK_DECODE_ENUM(aDecoder, numberStyle);
+        ORK_DECODE_BOOL(aDecoder, hideSelectedValue);
+        ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
+        ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_IMAGE(aDecoder, maximumImage);
+        ORK_DECODE_IMAGE(aDecoder, minimumImage);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientColors, UIColor);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, gradientLocations, NSNumber);
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-	[super encodeWithCoder:aCoder];
-	ORK_ENCODE_DOUBLE(aCoder, maximum);
-	ORK_ENCODE_DOUBLE(aCoder, minimum);
-	ORK_ENCODE_DOUBLE(aCoder, defaultValue);
-	ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
-	ORK_ENCODE_BOOL(aCoder, vertical);
-	ORK_ENCODE_BOOL(aCoder, hideSelectedValue);
-	ORK_ENCODE_ENUM(aCoder, numberStyle);
-	ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
-	ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
-	ORK_ENCODE_IMAGE(aCoder, maximumImage);
-	ORK_ENCODE_IMAGE(aCoder, minimumImage);
-	ORK_ENCODE_OBJ(aCoder, gradientColors);
-	ORK_ENCODE_OBJ(aCoder, gradientLocations);
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, maximum);
+    ORK_ENCODE_DOUBLE(aCoder, minimum);
+    ORK_ENCODE_DOUBLE(aCoder, defaultValue);
+    ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
+    ORK_ENCODE_BOOL(aCoder, vertical);
+    ORK_ENCODE_BOOL(aCoder, hideSelectedValue);
+    ORK_ENCODE_ENUM(aCoder, numberStyle);
+    ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
+    ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+    ORK_ENCODE_IMAGE(aCoder, maximumImage);
+    ORK_ENCODE_IMAGE(aCoder, minimumImage);
+    ORK_ENCODE_OBJ(aCoder, gradientColors);
+    ORK_ENCODE_OBJ(aCoder, gradientLocations);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -2151,13 +2151,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
                            vertical:(BOOL)vertical
-				  hideSelectedValue:(BOOL)shouldHideValue {
+                  hideSelectedValue:(BOOL)shouldHideValue {
     self = [super init];
     if (self) {
         _textChoices = [textChoices copy];
         _defaultIndex = defaultIndex;
         _vertical = vertical;
-		_hideSelectedValue = shouldHideValue;
+        _hideSelectedValue = shouldHideValue;
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
         
         [self validateParameters];
@@ -2170,7 +2170,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self initWithTextChoices:textChoices
                         defaultIndex:defaultIndex
                             vertical:NO
-				   hideSelectedValue:NO];
+                   hideSelectedValue:NO];
 }
 
 - (NSNumber *)minimumNumber {

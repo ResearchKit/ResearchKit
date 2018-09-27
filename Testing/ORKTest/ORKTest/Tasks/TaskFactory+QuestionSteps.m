@@ -408,7 +408,7 @@
                                                                                                              defaultValue:NSIntegerMax
                                                                                                     maximumFractionDigits:2
                                                                                                                  vertical:NO
-																										hideSelectedValue:NO
+                                                                                                        hideSelectedValue:NO
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
         
@@ -428,7 +428,7 @@
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:50
                                                                                              vertical:NO
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
@@ -448,7 +448,7 @@
                                                                                          defaultValue:5
                                                                                                  step:1
                                                                                              vertical:NO
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
@@ -468,7 +468,7 @@
                                                                                          defaultValue:174
                                                                                                  step:50
                                                                                              vertical:NO
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
@@ -488,7 +488,7 @@
                                                                                                              defaultValue:8.725
                                                                                                     maximumFractionDigits:3
                                                                                                                  vertical:YES
-																										hideSelectedValue:NO
+                                                                                                        hideSelectedValue:NO
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
         
@@ -508,7 +508,7 @@
                                                                                          defaultValue:5
                                                                                                  step:1
                                                                                              vertical:YES
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
@@ -528,7 +528,7 @@
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:1
                                                                                              vertical:YES
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:@"A lot"
                                                                               minimumValueDescription:@"Not at all"];
         
@@ -548,7 +548,7 @@
                                                                                                              defaultValue:99
                                                                                                     maximumFractionDigits:2
                                                                                                                  vertical:YES
-																										hideSelectedValue:NO
+                                                                                                        hideSelectedValue:NO
                                                                                                   maximumValueDescription:@"High value"
                                                                                                   minimumValueDescription:@"Low value"];
         
@@ -568,7 +568,7 @@
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:1
                                                                                              vertical:NO
-																					hideSelectedValue:NO
+                                                                                    hideSelectedValue:NO
                                                                               maximumValueDescription:@"A lot"
                                                                               minimumValueDescription:@"Not at all"];
         
@@ -588,7 +588,7 @@
                                                                                                              defaultValue:99
                                                                                                     maximumFractionDigits:2
                                                                                                                  vertical:NO
-																										hideSelectedValue:NO
+                                                                                                        hideSelectedValue:NO
                                                                                                   maximumValueDescription:@"High value"
                                                                                                   minimumValueDescription:@"Low value"];
         
@@ -608,7 +608,7 @@
                                                                                                              defaultValue:0.8725
                                                                                                     maximumFractionDigits:0
                                                                                                                  vertical:YES
-																										hideSelectedValue:NO
+                                                                                                        hideSelectedValue:NO
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
         
@@ -630,7 +630,7 @@
                                                                                                              defaultValue:NSIntegerMax
                                                                                                     maximumFractionDigits:2
                                                                                                                  vertical:YES
-																										hideSelectedValue:YES
+                                                                                                        hideSelectedValue:YES
                                                                                                   maximumValueDescription:@"Hot"
                                                                                                   minimumValueDescription:@"Warm"];
         
@@ -655,7 +655,7 @@
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:1
                                                                                              vertical:NO
-																					hideSelectedValue:YES
+                                                                                    hideSelectedValue:YES
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
@@ -681,7 +681,7 @@
         ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                defaultIndex:3
                                                                                                    vertical:NO
-																						  hideSelectedValue:YES];
+                                                                                          hideSelectedValue:YES];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale14"
                                                                       title:@"Scale"
@@ -703,7 +703,7 @@
         ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                defaultIndex:NSIntegerMax
                                                                                                    vertical:YES
-																						  hideSelectedValue:YES];
+                                                                                          hideSelectedValue:YES];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
                                                                       title:@"Scale"
@@ -1055,7 +1055,7 @@
                                                                                                                   defaultValue:NSIntegerMax
                                                                                                                           step:1
                                                                                                                       vertical:NO
-																											 hideSelectedValue:NO
+                                                                                                             hideSelectedValue:NO
                                                                                                        maximumValueDescription:@"High value"
                                                                                                        minimumValueDescription:@"Low value"]];
         [steps addObject:step];
