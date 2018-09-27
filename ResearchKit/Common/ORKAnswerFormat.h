@@ -101,7 +101,7 @@ ORK_CLASS_AVAILABLE
                                                defaultValue:(NSInteger)defaultValue
                                                        step:(NSInteger)step
                                                    vertical:(BOOL)vertical
-										  hideSelectedValue:(BOOL)shouldHideValue
+                                          hideSelectedValue:(BOOL)shouldHideValue
                                     maximumValueDescription:(nullable NSString *)maximumValueDescription
                                     minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
@@ -110,14 +110,14 @@ ORK_CLASS_AVAILABLE
                                                                    defaultValue:(double)defaultValue
                                                           maximumFractionDigits:(NSInteger)maximumFractionDigits
                                                                        vertical:(BOOL)vertical
-															  hideSelectedValue:(BOOL)shouldHideValue
+                                                              hideSelectedValue:(BOOL)shouldHideValue
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray <ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical
-												 hideSelectedValue:(BOOL)shouldHideValue;
+                                                 hideSelectedValue:(BOOL)shouldHideValue;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -245,8 +245,8 @@ ORK_CLASS_AVAILABLE
  @param step                        The size of each discrete offset on the scale.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
                                         scale, pass `NO`.
- @param hideSelectedValue			Pass `YES` to hide the text label that displays the selected
- 										value. Defaults to `NO`.
+ @param hideSelectedValue           Pass `YES` to hide the text label that displays the selected
+                                        value. Defaults to `NO`.
  @param maximumValueDescription     A localized label to describe the maximum value of the scale.
                                         For none, pass `nil`.
  @param minimumValueDescription     A localized label to describe the minimum value of the scale.
@@ -259,7 +259,7 @@ ORK_CLASS_AVAILABLE
                         defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
                             vertical:(BOOL)vertical
-				   hideSelectedValue:(BOOL)shouldHideValue
+                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription NS_DESIGNATED_INITIALIZER;
 
@@ -416,8 +416,8 @@ ORK_CLASS_AVAILABLE
  @param maximumFractionDigits       The maximum number of fractional digits to display.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
                                         scale, pass `NO`.
- @param hideSelectedValue			Pass `YES` to hide the text label that displays the selected
- 										value. Defaults to `NO`.
+ @param hideSelectedValue           Pass `YES` to hide the text label that displays the selected
+                                        value. Defaults to `NO`.
  @param maximumValueDescription     A localized label to describe the maximum value of the scale.
                                         For none, pass `nil`.
  @param minimumValueDescription     A localized label to describe the minimum value of the scale.
@@ -430,7 +430,7 @@ ORK_CLASS_AVAILABLE
                         defaultValue:(double)defaultValue
                maximumFractionDigits:(NSInteger)maximumFractionDigits
                             vertical:(BOOL)vertical
-				   hideSelectedValue:(BOOL)shouldHideValue
+                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription NS_DESIGNATED_INITIALIZER;
 
@@ -585,15 +585,15 @@ ORK_CLASS_AVAILABLE
                                         the slider is displayed without a default value.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
                                         scale, pass `NO`.
- @param hideSelectedValue			Pass `YES` to hide the text label that displays the selected
- 										value. Defaults to `NO`.
+ @param hideSelectedValue           Pass `YES` to hide the text label that displays the selected
+                                        value. Defaults to `NO`.
  
  @return An initialized text scale answer format.
  */
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
-						   vertical:(BOOL)vertical
-				  hideSelectedValue:(BOOL)shouldHideValue NS_DESIGNATED_INITIALIZER;
+                           vertical:(BOOL)vertical
+                  hideSelectedValue:(BOOL)shouldHideValue NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text scale answer format using the specified values.
