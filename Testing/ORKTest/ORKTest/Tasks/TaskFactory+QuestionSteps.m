@@ -641,7 +641,7 @@
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale12"
                                                                       title:@"Scale"
-                                                                   question:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -664,12 +664,40 @@
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale13"
                                                                       title:@"Scale"
-                                                                   question:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     
     {
+        /*
+         Horizontal text choice scale with visible selected value.
+         */
+        ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+        ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+        ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+        ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+        ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+        
+        NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+        
+        ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                               defaultIndex:3
+                                                                                                   vertical:NO
+                                                                                          hideSelectedValue:NO];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale14"
+                                                                      title:@"Scale"
+                                                                   question:@"How are you feeling today?"
+                                                                     answer:scaleAnswerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Horizontal text choice scale with visible selected value.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -683,7 +711,7 @@
                                                                                                    vertical:NO
                                                                                           hideSelectedValue:YES];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale14"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
                                                                       title:@"Scale"
                                                                    question:@"How are you feeling today?"
                                                                      answer:scaleAnswerFormat];
@@ -692,6 +720,9 @@
     }
     
     {
+        /*
+         Vertical text choice scale.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -705,7 +736,7 @@
                                                                                                    vertical:YES
                                                                                           hideSelectedValue:YES];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale16"
                                                                       title:@"Scale"
                                                                    question:@"How are you feeling today?"
                                                                      answer:scaleAnswerFormat];
