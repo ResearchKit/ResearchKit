@@ -357,7 +357,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [ORKTimeOfDayAnswerFormat new];
 }
 + (ORKTimeOfDayAnswerFormat *)timeOfDayAnswerFormatWithDefaultComponents:(NSDateComponents *)defaultComponents {
-    return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:defaultComponents minuteInterval:1];
+    return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:defaultComponents];
 }
 
 + (ORKDateAnswerFormat *)dateTimeAnswerFormat {
@@ -371,8 +371,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                           defaultDate:defaultDate
                                           minimumDate:minimumDate
                                           maximumDate:maximumDate
-                                             calendar:calendar
-                                       minuteInterval:1];
+                                             calendar:calendar];
 }
 
 + (ORKDateAnswerFormat *)dateAnswerFormat {
@@ -386,8 +385,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                           defaultDate:defaultDate
                                           minimumDate:minimumDate
                                           maximumDate:maximumDate
-                                             calendar:calendar
-                                       minuteInterval:1];
+                                             calendar:calendar];
 }
 
 + (ORKTextAnswerFormat *)textAnswerFormat {
@@ -1244,16 +1242,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @implementation ORKTimeOfDayAnswerFormat
 
 - (instancetype)init {
-    self = [self initWithDefaultComponents:nil minuteInterval:1];
+    self = [self initWithDefaultComponents:nil];
     return self;
 }
 
-- (instancetype)initWithDefaultComponents:(NSDateComponents *)defaultComponents
-                           minuteInterval:(NSInteger)minuteInterval {
+- (instancetype)initWithDefaultComponents:(NSDateComponents *)defaultComponents {
     self = [super init];
     if (self) {
         _defaultComponents = [defaultComponents copy];
-        _minuteInterval = minuteInterval;
+        _minuteInterval = 1;
     }
     return self;
 }
@@ -1342,7 +1339,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithStyle:(ORKDateAnswerStyle)style {
-    self = [self initWithStyle:style defaultDate:nil minimumDate:nil maximumDate:nil calendar:nil minuteInterval:1];
+    self = [self initWithStyle:style defaultDate:nil minimumDate:nil maximumDate:nil calendar:nil];
     return self;
 }
 
@@ -1350,8 +1347,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                   defaultDate:(NSDate *)defaultDate
                   minimumDate:(NSDate *)minimum
                   maximumDate:(NSDate *)maximum
-                     calendar:(NSCalendar *)calendar
-               minuteInterval:(NSInteger)minuteInterval {
+                     calendar:(NSCalendar *)calendar {
     self = [super init];
     if (self) {
         _style = style;
@@ -1359,7 +1355,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _minimumDate = [minimum copy];
         _maximumDate = [maximum copy];
         _calendar = [calendar copy];
-        _minuteInterval = minuteInterval;
+        _minuteInterval = 1;
     }
     return self;
 }

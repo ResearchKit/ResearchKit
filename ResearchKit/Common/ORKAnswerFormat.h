@@ -1191,8 +1191,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized time of day answer format.
  */
-- (instancetype)initWithDefaultComponents:(nullable NSDateComponents *)defaultComponents
-                           minuteInterval:(NSInteger)minuteInterval NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDefaultComponents:(nullable NSDateComponents *)defaultComponents NS_DESIGNATED_INITIALIZER;
 
 /**
  The default time of day to display in the picker. (read-only)
@@ -1272,8 +1271,7 @@ ORK_CLASS_AVAILABLE
                   defaultDate:(nullable NSDate *)defaultDate
                   minimumDate:(nullable NSDate *)minimumDate
                   maximumDate:(nullable NSDate *)maximumDate
-                     calendar:(nullable NSCalendar *)calendar
-               minuteInterval:(NSInteger)minuteInterval NS_DESIGNATED_INITIALIZER;
+                     calendar:(nullable NSCalendar *)calendar NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of date entry.
