@@ -4,6 +4,7 @@
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
+ Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
