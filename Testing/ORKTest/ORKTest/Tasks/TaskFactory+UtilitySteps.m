@@ -364,8 +364,8 @@
                                                                                                              defaultValue:8.725
                                                                                                     maximumFractionDigits:3
                                                                                                                  vertical:YES
-                                                                                                   minimumValueDescription:nil
-                                                                                                   maximumValueDescription:nil];
+                                                                                                   maximumValueDescription:nil
+                                                                                                   minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question8" title:@"Predciate Tests" question:@"Choose a value under 5" answer:scaleAnswerFormat];
         [steps addObject:step];
