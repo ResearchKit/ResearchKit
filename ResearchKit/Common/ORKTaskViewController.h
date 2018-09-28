@@ -487,6 +487,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
+/**
+ A Boolean value indicating whether the task can be canceled directly, without prompting the "End Task" action sheet.
+ 
+ The default value of this property is `NO`. To allow the task to be canceled directly, set the value to `YES`.
+ */
+@property (nonatomic, assign) BOOL cancelable;
+
 @end
 
 NS_ASSUME_NONNULL_END
