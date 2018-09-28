@@ -529,8 +529,8 @@
             
             ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                    defaultIndex:NSIntegerMax
-                                                                                                       vertical:NO
-                                                                                              hideSelectedValue:YES];
+                                                                                                       vertical:NO];
+            scaleAnswerFormat.hideSelectedValue = YES;
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale7"
                                                                    text:@"How are you feeling today?"
@@ -549,8 +549,8 @@
             
             ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                    defaultIndex:NSIntegerMax
-                                                                                                       vertical:YES
-                                                                                              hideSelectedValue:YES];
+                                                                                                       vertical:YES];
+            scaleAnswerFormat.hideSelectedValue = YES;
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale8"
                                                                    text:@"How are you feeling today?"
@@ -607,7 +607,7 @@
         [steps addObject:step];
             
         {
-            ORKScaleAnswerFormat *format = [ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:4 step:1 vertical:YES hideSelectedValue:NO maximumValueDescription:nil minimumValueDescription:nil];
+            ORKScaleAnswerFormat *format = [ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:4 step:1 vertical:YES maximumValueDescription:nil minimumValueDescription:nil];
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale"
                                                                    text:@"Optional scale"
                                                            answerFormat:format];

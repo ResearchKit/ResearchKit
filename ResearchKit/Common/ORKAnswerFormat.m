@@ -279,7 +279,6 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                defaultValue:(NSInteger)defaultValue
                                                        step:(NSInteger)step
                                                    vertical:(BOOL)vertical
-                                          hideSelectedValue:(BOOL)shouldHideValue
                                     maximumValueDescription:(nullable NSString *)maximumValueDescription
                                     minimumValueDescription:(nullable NSString *)minimumValueDescription {
     return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
@@ -287,7 +286,6 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                  defaultValue:defaultValue
                                                          step:step
                                                      vertical:vertical
-                                            hideSelectedValue:shouldHideValue
                                       maximumValueDescription:maximumValueDescription
                                       minimumValueDescription:minimumValueDescription];
 }
@@ -297,7 +295,6 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                                    defaultValue:(double)defaultValue
                                                           maximumFractionDigits:(NSInteger)maximumFractionDigits
                                                                        vertical:(BOOL)vertical
-                                                              hideSelectedValue:(BOOL)shouldHideValue
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription {
     return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
@@ -305,19 +302,16 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                            defaultValue:defaultValue
                                                   maximumFractionDigits:maximumFractionDigits
                                                                vertical:vertical
-                                                      hideSelectedValue:shouldHideValue
                                                 maximumValueDescription:maximumValueDescription
                                                 minimumValueDescription:minimumValueDescription];
 }
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
-                                                          vertical:(BOOL)vertical
-                                                 hideSelectedValue:(BOOL)shouldHideValue {
+                                                          vertical:(BOOL)vertical {
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
                                                     defaultIndex:defaultIndex
-                                                        vertical:vertical
-                                               hideSelectedValue:shouldHideValue];
+                                                        vertical:vertical];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -1711,7 +1705,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                         defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
                             vertical:(BOOL)vertical
-                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription {
     self = [super init];
@@ -1721,7 +1714,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _defaultValue = defaultValue;
         _step = step;
         _vertical = vertical;
-        _hideSelectedValue = shouldHideValue;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
 
@@ -1740,7 +1732,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                                  step:step
                              vertical:vertical
-                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1754,7 +1745,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                                  step:step
                              vertical:NO
-                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1935,7 +1925,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                         defaultValue:(double)defaultValue
                maximumFractionDigits:(NSInteger)maximumFractionDigits
                             vertical:(BOOL)vertical
-                   hideSelectedValue:(BOOL)shouldHideValue
              maximumValueDescription:(nullable NSString *)maximumValueDescription
              minimumValueDescription:(nullable NSString *)minimumValueDescription {
     self = [super init];
@@ -1945,10 +1934,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _defaultValue = defaultValue;
         _maximumFractionDigits = maximumFractionDigits;
         _vertical = vertical;
-        _hideSelectedValue = shouldHideValue;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
-        _hideSelectedValue = shouldHideValue;
         
         [self validateParameters];
     }
@@ -1965,7 +1952,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                 maximumFractionDigits:maximumFractionDigits
                              vertical:vertical
-                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -1979,7 +1965,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                          defaultValue:defaultValue
                 maximumFractionDigits:maximumFractionDigits
                              vertical:NO
-                    hideSelectedValue:NO
               maximumValueDescription:nil
               minimumValueDescription:nil];
 }
@@ -2150,14 +2135,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
-                           vertical:(BOOL)vertical
-                  hideSelectedValue:(BOOL)shouldHideValue {
+                           vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
         _textChoices = [textChoices copy];
         _defaultIndex = defaultIndex;
         _vertical = vertical;
-        _hideSelectedValue = shouldHideValue;
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
         
         [self validateParameters];
@@ -2169,8 +2152,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                        defaultIndex:(NSInteger)defaultIndex {
     return [self initWithTextChoices:textChoices
                         defaultIndex:defaultIndex
-                            vertical:NO
-                   hideSelectedValue:NO];
+                            vertical:NO];
 }
 
 - (NSNumber *)minimumNumber {
