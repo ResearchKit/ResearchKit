@@ -1278,10 +1278,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKTimeOfDayDateFromComponents(newDateComponents);
 }
 
-- (NSInteger)pickerMinuteInterval {
-    return self.minuteInterval;
-}
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -1426,10 +1422,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSDate *)pickerMaximumDate {
     return self.maximumDate;
-}
-
-- (NSInteger)pickerMinuteInterval {
-    return self.minuteInterval;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
