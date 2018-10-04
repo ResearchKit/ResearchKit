@@ -330,7 +330,7 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
- A Boolean value indicating whether the selected value should be hidden. (read-only)
+ A Boolean value indicating whether the selected value should be hidden.
  */
 @property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
 
@@ -502,7 +502,7 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSNumberFormatter *numberFormatter;
 
 /**
- A Boolean value indicating whether the selected value should be hidden. (read-only)
+ A Boolean value indicating whether the selected value should be hidden.
  */
 @property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
 
@@ -621,7 +621,7 @@ ORK_CLASS_AVAILABLE
 /**
  A Boolean value indicating whether the selected value should be hidden.
  */
-@property (assign, getter=shouldHideSelectedValueLabel,setter=setHideSelectedValue:) BOOL hideSelectedValue;
+@property (assign, getter=shouldHideSelectedValueLabel) BOOL hideSelectedValue;
 
 /**
  The colors to use when drawing a color gradient above the slider. Colors are drawn such that
