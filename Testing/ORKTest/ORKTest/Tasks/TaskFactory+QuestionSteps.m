@@ -684,7 +684,7 @@
     
     {
         /*
-         Horizontal text choice scale with visible selected value.
+         Horizontal text choice scale with hidden selected value.
          */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
