@@ -429,6 +429,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKTextAnswerFormat.autocapitalizationType",
                                               @"ORKTextAnswerFormat.autocorrectionType",
                                               @"ORKTextAnswerFormat.spellCheckingType",
+                                              @"ORKTextAnswerFormat.textContentType",
+                                              @"ORKTextAnswerFormat.passwordRules",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
                                               @"ORKInstructionStep.iconImage",
