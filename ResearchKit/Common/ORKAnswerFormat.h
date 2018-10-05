@@ -1201,6 +1201,14 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly, nullable) NSDateComponents *defaultComponents;
 
+/**
+ The interval at which the date picker should display minutes.
+ 
+ When the value of this property is not explicitly set, the picker defaults to an interval of
+ one minute.
+ */
+@property (nonatomic) NSInteger minuteInterval;
+
 @end
 
 
@@ -1299,6 +1307,14 @@ When the value of this property is `nil`, there is no minimum.
  locale.
  */
 @property (copy, readonly, nullable) NSCalendar *calendar;
+
+/**
+ The interval at which the date picker should display minutes.
+ 
+ When the value of this property is not explicitly set, the picker defaults to an interval of
+ one minute.
+ */
+@property (nonatomic) NSInteger minuteInterval;
 
 @end
 
