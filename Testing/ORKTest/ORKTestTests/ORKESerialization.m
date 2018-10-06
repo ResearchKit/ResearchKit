@@ -550,6 +550,14 @@ encondingTable =
          @{
            PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
            }),
+   ENTRY(ORKPDFViewerStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPDFViewerStep alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                          pdfURL:GETPROP(dict, pdfURL)];
+         },
+         @{
+           PROPERTY(pdfURL, NSURL, NSObject, YES, nil, nil)
+           }),
    ENTRY(ORKPasscodeStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
