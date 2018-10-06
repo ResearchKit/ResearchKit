@@ -861,6 +861,15 @@ encondingTable =
          },
          (@{
             })),
+   ENTRY(ORKEnvironmentSPLMeterStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKEnvironmentSPLMeterStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(thresholdValue, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(samplingInterval, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(requiredContiguousSamples, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];
