@@ -870,6 +870,12 @@ encondingTable =
             PROPERTY(samplingInterval, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(requiredContiguousSamples, NSNumber, NSObject, NO, nil, nil),
             })),
+   ENTRY(ORKStreamingAudioRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKStreamingAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];
