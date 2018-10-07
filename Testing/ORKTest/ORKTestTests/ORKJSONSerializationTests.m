@@ -457,6 +457,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegularExpression",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
+                                              @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
+                                              @"ORKRegistrationStep.phoneNumberInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
@@ -693,8 +695,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
-                                              @"ORKNavigablePageStep.steps",
-                                              ];
+                                              @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
+                                              @"ORKRegistrationStep.phoneNumberInvalidMessage"];
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
