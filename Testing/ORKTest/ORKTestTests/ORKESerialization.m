@@ -453,9 +453,9 @@ static NSArray *numberFormattingStyleTable() {
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
-    static NSMutableDictionary *encondingTable = nil;
+    static NSMutableDictionary *internalEncodingTable = nil;
     dispatch_once(&onceToken, ^{
-encondingTable =
+internalEncodingTable =
 [@{
    ENTRY(ORKResultSelector,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -1681,7 +1681,7 @@ encondingTable =
    } mutableCopy];
         
         if (@available(iOS 12.0, *)) {
-            [encondingTable addEntriesFromDictionary:@{ ENTRY(ORKHealthClinicalTypeRecorderConfiguration,
+            [internalEncodingTable addEntriesFromDictionary:@{ ENTRY(ORKHealthClinicalTypeRecorderConfiguration,
                                                               ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
                                                                   return [[ORKHealthClinicalTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthClinicalType:GETPROP(dict, healthClinicalType) healthFHIRResourceType:GETPROP(dict, healthFHIRResourceType)];
                                                               },
@@ -1691,7 +1691,7 @@ encondingTable =
                                                                  })) }];
         }
     });
-    return encondingTable;
+    return internalEncodingTable;
 }
 #undef GETPROP
 
