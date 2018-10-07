@@ -915,6 +915,15 @@ internalEncodingTable =
          (@{
             PROPERTY(eyeSide, NSNumber, NSObject, NO, nil, nil),
             })),
+   ENTRY(ORKAmslerGridResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAmslerGridResult alloc] initWithIdentifier:GETPROP(dict, identifier)image:GETPROP(dict, image) path:GETPROP(dict, path) eyeSide:(ORKAmslerGridEyeSide)[GETPROP(dict, eyeSide) integerValue]];
+         },
+         (@{
+            PROPERTY(eyeSide, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(image, UIImage, NSObject, NO, nil, nil),
+            PROPERTY(path, UIBezierPath, NSArray, NO, nil, nil),
+            })),
   ENTRY(ORKConsentDocument,
         nil,
         (@{
