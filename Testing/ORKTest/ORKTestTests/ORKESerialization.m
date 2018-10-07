@@ -1016,6 +1016,12 @@ internalEncodingTable =
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKdBHLToneAudiometryOnboardingStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKdBHLToneAudiometryOnboardingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
   ENTRY(ORKFormStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];

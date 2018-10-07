@@ -166,7 +166,7 @@
 		716B126920A7A40400590264 /* ORKdBHLToneAudiometryAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 716B126720A7A40400590264 /* ORKdBHLToneAudiometryAudioGenerator.m */; };
 		71769E2920880C4500A19914 /* ORKdBHLToneAudiometryResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 71769E2720880C4500A19914 /* ORKdBHLToneAudiometryResult.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		71769E2A20880C4500A19914 /* ORKdBHLToneAudiometryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 71769E2820880C4500A19914 /* ORKdBHLToneAudiometryResult.m */; };
-		71769E2D208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 71769E2B208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.h */; };
+		71769E2D208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 71769E2B208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71769E2E208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 71769E2C208824D100A19914 /* ORKdBHLToneAudiometryOnboardingStep.m */; };
 		71769E312088260B00A19914 /* ORKdBHLToneAudiometryOnboardingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 71769E2F2088260B00A19914 /* ORKdBHLToneAudiometryOnboardingStepViewController.h */; };
 		71769E322088260B00A19914 /* ORKdBHLToneAudiometryOnboardingStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71769E302088260B00A19914 /* ORKdBHLToneAudiometryOnboardingStepViewController.m */; };
