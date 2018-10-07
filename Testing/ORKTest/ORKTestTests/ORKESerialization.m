@@ -894,20 +894,27 @@ encondingTable =
          },
          (@{
             })),
-  ENTRY(ORKAccelerometerRecorderConfiguration,
+   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];
         },
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKAudioRecorderConfiguration,
+   ENTRY(ORKAudioRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) recorderSettings:GETPROP(dict, recorderSettings)];
         },
         (@{
           PROPERTY(recorderSettings, NSDictionary, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKAmslerGridStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAmslerGridStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(eyeSide, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKConsentDocument,
         nil,
         (@{
@@ -918,14 +925,14 @@ encondingTable =
           PROPERTY(signatures, ORKConsentSignature, NSArray, NO, nil, nil),
           PROPERTY(htmlReviewContent, NSString, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKConsentSharingStep,
+   ENTRY(ORKConsentSharingStep,
         ^(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentSharingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
            PROPERTY(localizedLearnMoreHTMLContent, NSString, NSObject, YES, nil, nil),
            })),
-  ENTRY(ORKConsentReviewStep,
+   ENTRY(ORKConsentReviewStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentReviewStep alloc] initWithIdentifier:GETPROP(dict, identifier) signature:GETPROP(dict, signature) inDocument:GETPROP(dict,consentDocument)];
         },
@@ -934,13 +941,13 @@ encondingTable =
           PROPERTY(reasonForConsent, NSString, NSObject, YES, nil, nil),
           PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKFitnessStep,
+   ENTRY(ORKFitnessStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKFitnessStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
            })),
-  ENTRY(ORKConsentSection,
+   ENTRY(ORKConsentSection,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentSection alloc] initWithType:((NSNumber *)GETPROP(dict, type)).integerValue];
         },
@@ -960,7 +967,7 @@ encondingTable =
                    ^id(id string) { return [NSURL URLWithString:string]; }),
           PROPERTY(omitFromDocument, NSNumber, NSObject, YES, nil, nil),
           })),
-  ENTRY(ORKConsentSignature,
+   ENTRY(ORKConsentSignature,
         nil,
         (@{
           PROPERTY(identifier, NSString, NSObject, YES, nil, nil),
@@ -972,7 +979,7 @@ encondingTable =
           PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
           })),
-  ENTRY(ORKRegistrationStep,
+   ENTRY(ORKRegistrationStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKRegistrationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) options:((NSNumber *)GETPROP(dict, options)).integerValue];
         },
