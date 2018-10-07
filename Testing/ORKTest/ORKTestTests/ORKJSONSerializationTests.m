@@ -373,9 +373,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
                                                      [ORKStepModifier class],     // abstract base class
-                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
-                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialzation
-                                                     [ORKCollector class], // ORKCollector doesn't support JSON serialzation
+                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialization
+                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialization
+                                                     [ORKCollector class], // ORKCollector doesn't support JSON serialization
                                                      [ORKHealthCollector class],
                                                      [ORKHealthCorrelationCollector class],
                                                      [ORKMotionActivityCollector class]
