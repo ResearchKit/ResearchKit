@@ -866,9 +866,17 @@ encondingTable =
              return [[ORKEnvironmentSPLMeterStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(thresholdValue, NSNumber, NSObject, NO, nil, nil),
-            PROPERTY(samplingInterval, NSNumber, NSObject, NO, nil, nil),
-            PROPERTY(requiredContiguousSamples, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(thresholdValue, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(samplingInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(requiredContiguousSamples, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKEnvironmentSPLMeterResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKEnvironmentSPLMeterResult alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(sensitivityOffset, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(recordedSPLMeterSamples, NSNumber, NSArray, YES, nil, nil)
             })),
    ENTRY(ORKStreamingAudioRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

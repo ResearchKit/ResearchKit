@@ -74,6 +74,7 @@
 #import <ResearchKit/ORKQuestionResult.h>
 #import <ResearchKit/ORKSignatureResult.h>
 #import <ResearchKit/ORKVideoInstructionStepResult.h>
+#import <ResearchKit/ORKEnvironmentSPLMeterResult.h>
 #import <ResearchKit/ORKWebViewStepResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
