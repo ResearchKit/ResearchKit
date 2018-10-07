@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -860,6 +861,15 @@ encondingTable =
              return [[ORKSpeechInNoiseStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
+            })),
+   ENTRY(ORKSpeechRecognitionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSpeechRecognitionStep alloc] initWithIdentifier:GETPROP(dict, identifier) image:nil text:GETPROP(dict, speechRecognitionText)];
+         },
+         (@{
+            PROPERTY(shouldHideTranscript, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(speechRecognitionText, NSString, NSObject, YES, nil, nil),
+            PROPERTY(speechRecognizerLocale, NSString, NSObject, YES, nil, nil)
             })),
    ENTRY(ORKEnvironmentSPLMeterStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
