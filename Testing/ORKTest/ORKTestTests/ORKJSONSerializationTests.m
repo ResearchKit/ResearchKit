@@ -695,8 +695,10 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
+                                              
                                               @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
-                                              @"ORKRegistrationStep.phoneNumberInvalidMessage"];
+                                              @"ORKRegistrationStep.phoneNumberInvalidMessage",
+                                              @"ORKTableStep.bulletIconNames"];
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
@@ -1005,6 +1007,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKVideoInstructionStepViewController" : @"ORKVideoInstructionStep",
                                                                              @"ORKVisualConsentStepViewController" : @"ORKVisualConsentStep",
                                                                              @"ORKWalkingTaskStepViewController" : @"ORKWalkingTaskStep",
+                                                                             @"ORKTableStepViewController" : @"ORKTableStep",
+                                                                             @"ORKdBHLToneAudiometryStepViewController" : @"ORKdBHLToneAudiometryStep"
                                                                              };
     
     NSDictionary <NSString *, NSDictionary *> *kvMapForStep = @{ // Steps that require modification to validate
