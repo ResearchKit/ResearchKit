@@ -884,6 +884,11 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKStepResult.isPreviousResult",
                                        @"ORKTextAnswerFormat.validationRegex",
                                        @"ORKVideoCaptureStep.duration",
+                                       @"ORKQuestionStep.useCardView",
+                                       @"ORKFormStep.useCardView",
+                                       @"ORKSpeechRecognitionStep.shouldHideTranscript",
+                                       @"ORKTableStep.isBulleted",
+                                       @"ORKPDFViewerStep.actionBarOption"
                                        ];
     
     NSArray *hashExclusionList = @[
@@ -896,8 +901,10 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
                                    @"ORKNumericAnswerFormat.maximumFractionDigits",
+                                   @"ORKNumericAnswerFormat.defaultNumericAnswer",
                                    @"ORKVideoCaptureStep.duration",
                                    @"ORKTextAnswerFormat.validationRegularExpression",
+                                   @"ORKPDFViewerStep.pdfURL"
                                    ];
     
     // Test Each class
