@@ -462,7 +462,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
-                                              @"ORKNavigablePageStep.steps",
+                                              @"ORKNavigablePageStep.steps"
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -698,7 +698,13 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               
                                               @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
                                               @"ORKRegistrationStep.phoneNumberInvalidMessage",
-                                              @"ORKTableStep.bulletIconNames"];
+                                              @"ORKTableStep.bulletIconNames",
+                                              @"ORKAmslerGridResult.image",
+                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthClinicalType",
+                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthFHIRResourceType",
+                                              @"ORKInstructionStep.attributedDetailText",
+                                              @"ORKOrderedTask.progressLabelColor"
+                                              ];
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
