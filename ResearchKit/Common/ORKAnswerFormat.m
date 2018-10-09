@@ -1486,6 +1486,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                       minimum:(NSNumber *)minimum
                       maximum:(NSNumber *)maximum
         maximumFractionDigits:(NSNumber *)maximumFractionDigits {
+    return [self initWithStyle:style unit:unit minimum:minimum maximum:minimum maximumFractionDigits:maximumFractionDigits defaultNumericAnswer:nil];
+}
+
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
+                         unit:(NSString *)unit
+                      minimum:(NSNumber *)minimum
+                      maximum:(NSNumber *)maximum
+        maximumFractionDigits:(NSNumber *)maximumFractionDigits
+         defaultNumericAnswer:(NSNumber *)defaultNumericAnswer {
     self = [super init];
     if (self) {
         _style = style;
@@ -1493,7 +1502,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _minimum = [minimum copy];
         _maximum = [maximum copy];
         _maximumFractionDigits = [maximumFractionDigits copy];
-        
+        _defaultNumericAnswer = [defaultNumericAnswer copy];
     }
     return self;
 }
@@ -1519,7 +1528,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, maximum);
     ORK_ENCODE_OBJ(aCoder, defaultNumericAnswer);
     ORK_ENCODE_OBJ(aCoder, maximumFractionDigits);
-
 }
 
 + (BOOL)supportsSecureCoding {

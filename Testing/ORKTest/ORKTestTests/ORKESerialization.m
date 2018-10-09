@@ -1183,7 +1183,7 @@ internalEncodingTable =
           })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum) maximumFractionDigits:GETPROP(dict, maximumFractionDigits)];
+            return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum) maximumFractionDigits:GETPROP(dict, maximumFractionDigits) defaultNumericAnswer:GETPROP(dict, defaultNumericAnswer)];
         },
         (@{
           PROPERTY(style, NSNumber, NSObject, NO,
