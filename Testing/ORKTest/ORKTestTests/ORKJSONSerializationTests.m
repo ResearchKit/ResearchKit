@@ -703,7 +703,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKHealthClinicalTypeRecorderConfiguration.healthClinicalType",
                                               @"ORKHealthClinicalTypeRecorderConfiguration.healthFHIRResourceType",
                                               @"ORKInstructionStep.attributedDetailText",
-                                              @"ORKOrderedTask.progressLabelColor"
+                                              @"ORKOrderedTask.progressLabelColor",
+                                              @"ORKQuestionStep.question"
                                               ];
     
     // Test Each class
