@@ -214,6 +214,7 @@ ORK_MAKE_TEST_INIT(ORKAccelerometerRecorderConfiguration, ^{return [super initWi
 ORK_MAKE_TEST_INIT(ORKHealthQuantityTypeRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKAudioRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKHealthClinicalTypeRecorderConfiguration, ^{return [self initWithIdentifier:@"testRecorder" healthClinicalType:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord] healthFHIRResourceType:nil];});
 ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
 }))
