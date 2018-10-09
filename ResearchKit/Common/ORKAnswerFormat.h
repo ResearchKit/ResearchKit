@@ -1120,10 +1120,10 @@ Returns an initialized numeric answer format using the specified style, unit des
  @return An initialized numeric answer format.
  */
 - (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
-                         unit:(NSString *)unit
-                      minimum:(NSNumber *)minimum
-                      maximum:(NSNumber *)maximum
-        maximumFractionDigits:(NSNumber *)maximumFractionDigits;
+                         unit:(nullable NSString *)unit
+                      minimum:(nullable NSNumber *)minimum
+                      maximum:(nullable NSNumber *)maximum
+        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits;
 
 /**
 Returns an initialized numeric answer format using the specified style, unit designation, range
