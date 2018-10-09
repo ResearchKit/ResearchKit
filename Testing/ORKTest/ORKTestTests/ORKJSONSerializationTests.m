@@ -241,6 +241,9 @@ ORK_MAKE_TEST_INIT(HKCorrelationType, (^{
 ORK_MAKE_TEST_INIT(HKCharacteristicType, (^{
     return [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
 }))
+ORK_MAKE_TEST_INIT(HKClinicalType, (^{
+    return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord];
+}))
 
 ORK_MAKE_TEST_INIT(NSNumber, (^{
     return [self initWithInt:123];
