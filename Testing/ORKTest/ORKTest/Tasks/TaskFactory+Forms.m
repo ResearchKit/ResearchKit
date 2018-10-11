@@ -530,6 +530,7 @@
             ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                    defaultIndex:NSIntegerMax
                                                                                                        vertical:NO];
+            scaleAnswerFormat.hideSelectedValue = YES;
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale7"
                                                                    text:@"How are you feeling today?"
@@ -549,6 +550,7 @@
             ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                    defaultIndex:NSIntegerMax
                                                                                                        vertical:YES];
+            scaleAnswerFormat.hideSelectedValue = YES;
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale8"
                                                                    text:@"How are you feeling today?"
