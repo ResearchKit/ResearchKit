@@ -805,14 +805,7 @@ internalEncodingTable =
             })),
    ENTRY(ORKRangeOfMotionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-         },
-         (@{
-            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
-            })),
-   ENTRY(ORKShoulderRangeOfMotionStep,
-         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier) limbOption:[GETPROP(dict, identifier) integerValue]];
          },
          (@{
             PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),

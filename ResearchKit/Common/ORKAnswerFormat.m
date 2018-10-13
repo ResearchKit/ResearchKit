@@ -1539,8 +1539,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                                                                                        unit:[_unit copy]
                                                                                     minimum:[_minimum copy]
                                                                                     maximum:[_maximum copy]
-                                                                      maximumFractionDigits:[_maximumFractionDigits copy]];
-    answerFormat->_defaultNumericAnswer = [_defaultNumericAnswer copy];
+                                                                      maximumFractionDigits:[_maximumFractionDigits copy]
+                                                                       defaultNumericAnswer:[_defaultNumericAnswer copy]];
     return answerFormat;
 }
 
