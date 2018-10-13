@@ -382,7 +382,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                      [ORKCollector class], // ORKCollector doesn't support JSON serialization
                                                      [ORKHealthCollector class],
                                                      [ORKHealthCorrelationCollector class],
-                                                     [ORKMotionActivityCollector class]
+                                                     [ORKMotionActivityCollector class],
+                                                     [ORKShoulderRangeOfMotionStep class],
                                                      ];
     
     if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {
