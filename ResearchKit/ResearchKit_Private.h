@@ -70,6 +70,7 @@
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKdBHLToneAudiometryStep.h>
+#import <ResearchKit/ORKdBHLToneAudiometryOnboardingStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 #import <ResearchKit/ORKTrailmakingStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
@@ -113,6 +114,8 @@
 #import <ResearchKit/ORKPedometerRecorder.h>
 #import <ResearchKit/ORKTouchRecorder.h>
 #import <ResearchKit/ORKHTMLPDFPageRenderer.h>
+
+#import <ResearchKit/ORKEnvironmentSPLMeterResult.h>
 
 // For custom steps
 #import <ResearchKit/ORKCustomStepView.h>

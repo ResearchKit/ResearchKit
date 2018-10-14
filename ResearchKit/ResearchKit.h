@@ -36,7 +36,6 @@
 #import <ResearchKit/ORKConsentReviewStep.h>
 #import <ResearchKit/ORKConsentSharingStep.h>
 #import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKdBHLToneAudiometryOnboardingStep.h>
 #import <ResearchKit/ORKImageCaptureStep.h>
 #import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKLoginStep.h>
@@ -75,7 +74,6 @@
 #import <ResearchKit/ORKQuestionResult.h>
 #import <ResearchKit/ORKSignatureResult.h>
 #import <ResearchKit/ORKVideoInstructionStepResult.h>
-#import <ResearchKit/ORKEnvironmentSPLMeterResult.h>
 #import <ResearchKit/ORKWebViewStepResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
