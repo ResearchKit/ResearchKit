@@ -90,28 +90,6 @@ ORK_CLASS_AVAILABLE
  @param identifier                              The string that identifies the step (see `ORKStep`).
  @param title                                   The title of the form (see `ORKStep`).
  @param text                                    The text shown immediately below the title (see `ORKStep`).
- @param passcodeRules                           A `UITextInputPasswordRules` object used for generating an automatic secure password that conforms to the `passcodeValidationRegularExpression` if the default generated passwords do not match.
- @param passcodeValidationRegularExpression     The regular expression used to validate the passcode form item (see `ORKTextAnswerFormat`).
- @param passcodeInvalidMessage                  The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
- @param options                                 The options used for the step (see `ORKRegistrationStepOption`).
- 
- @return An initialized registration step object.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
-                     passcodeRules:(nullable UITextInputPasswordRules *)passcodeRules
-passcodeValidationRegularExpression:(nullable NSRegularExpression *)passcodeValidationRegularExpression
-            passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
-                           options:(ORKRegistrationStepOption)options API_AVAILABLE(ios(12.0));
-
-/**
- Returns an initialized registration step using the specified identifier,
- title, text, options, passcodeValidationRegularExpression, and passcodeInvalidMessage.
- 
- @param identifier                              The string that identifies the step (see `ORKStep`).
- @param title                                   The title of the form (see `ORKStep`).
- @param text                                    The text shown immediately below the title (see `ORKStep`).
  @param passcodeValidationRegularExpression     The regular expression used to validate the passcode form item (see `ORKTextAnswerFormat`).
  @param passcodeInvalidMessage                  The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
  @param options                                 The options used for the step (see `ORKRegistrationStepOption`).
@@ -167,11 +145,11 @@ passcodeValidationRegularExpression:(nullable NSRegularExpression *)passcodeVali
 @property (nonatomic, copy, nullable) NSString *passcodeInvalidMessage;
 
 /**
- The invalid message displayed if the passcode does not match the validation regular expression.
- This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
+ The password generation rules to use for Automatic Secure Passwords.
  
- The passcode validation regular expression property must also be set along with this property.
- By default, there is no invalid message.
+ If specified, overrides the default passsword generation rules for fields with secureTextEntry.
+ The `passcodeRules` should match the `passcodeValidationRegularExpression` or else a passcode
+ may be generated that fails validation.
  */
 @property (nonatomic, nullable) UITextInputPasswordRules *passcodeRules API_AVAILABLE(ios(12.0));
 

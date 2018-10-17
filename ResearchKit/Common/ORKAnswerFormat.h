@@ -1437,14 +1437,14 @@ ORK_CLASS_AVAILABLE
  If specified the system can improve keyboard suggestions to help with filling forms and other
  input. By default, the value of this property is `nil` meaning no specific type.
  */
-@property UITextContentType textContentType;
+@property (nonatomic, copy, nullable) UITextContentType textContentType;
 
 /**
  The password generation rules to use for Automatic Secure Passwords.
  
  If specified, overrides the default passsword generation rules for fields with secureTextEntry.
  */
-@property UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12));
+@property (nonatomic, copy, nullable) UITextInputPasswordRules *passwordRules API_AVAILABLE(ios(12));
 
 /**
  Identifies whether the text object should hide the text being entered.

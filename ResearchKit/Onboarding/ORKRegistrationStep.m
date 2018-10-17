@@ -206,25 +206,6 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-                     passcodeRules:(UITextInputPasswordRules *)passcodeRules
-passcodeValidationRegularExpression:(NSRegularExpression *)passcodeValidationRegularExpression
-            passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
-                           options:(ORKRegistrationStepOption)options {
-    self = [self initWithIdentifier:identifier
-                              title:title
-                               text:text
-passcodeValidationRegularExpression:passcodeValidationRegularExpression
-             passcodeInvalidMessage:passcodeInvalidMessage
-                            options:options];
-    if (self) {
-        self.passcodeRules = passcodeRules;
-    }
-    return self;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
-                              text:(NSString *)text
 passcodeValidationRegularExpression:(NSRegularExpression *)passcodeValidationRegularExpression
             passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options {
