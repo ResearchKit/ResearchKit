@@ -468,7 +468,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
-                                              @"ORKNavigablePageStep.steps"
+                                              @"ORKNavigablePageStep.steps",
+                                              @"ORKNumericAnswerFormat.defaultNumericAnswer"
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     

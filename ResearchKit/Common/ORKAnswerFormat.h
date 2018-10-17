@@ -4,7 +4,6 @@
  Copyright (c) 2016, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
- Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -1108,24 +1107,6 @@ Returns an initialized numeric answer format using the specified style, unit des
                       maximum:(nullable NSNumber *)maximum;
 
 /**
- Returns an initialized numeric answer format using the specified style, unit designation, and range
- values. Previous desiginated initializer (backwards compatibility)
- 
- @param style                   The style of the numeric answer (decimal or integer).
- @param unit                    A string that displays a localized version of the unit designation.
- @param minimum                 The minimum value to apply, or `nil` if none is specified.
- @param maximum                 The maximum value to apply, or `nil` if none is specified.
- @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
-
- @return An initialized numeric answer format.
- */
-- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style
-                         unit:(nullable NSString *)unit
-                      minimum:(nullable NSNumber *)minimum
-                      maximum:(nullable NSNumber *)maximum
-        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits;
-
-/**
 Returns an initialized numeric answer format using the specified style, unit designation, range
  values, and optional default.
  
@@ -1136,7 +1117,6 @@ Returns an initialized numeric answer format using the specified style, unit des
  @param minimum                 The minimum value to apply, or `nil` if none is specified.
  @param maximum                 The maximum value to apply, or `nil` if none is specified.
  @param maximumFractionDigits   The maximum fraction digits, or `nil` if no maximum is specified.
- @param defaultNumericAnswer    The default numeric answer, or `nil` if no default is specified.
 
  @return An initialized numeric answer format.
  */
@@ -1144,8 +1124,7 @@ Returns an initialized numeric answer format using the specified style, unit des
                          unit:(nullable NSString *)unit
                       minimum:(nullable NSNumber *)minimum
                       maximum:(nullable NSNumber *)maximum
-        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits
-         defaultNumericAnswer:(nullable NSNumber *)defaultNumericAnswer NS_DESIGNATED_INITIALIZER;
+        maximumFractionDigits:(nullable NSNumber *)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
 
 /**
  The style of numeric entry (decimal or integer). (read-only)
