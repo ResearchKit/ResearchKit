@@ -1107,8 +1107,8 @@ Returns an initialized numeric answer format using the specified style, unit des
                       maximum:(nullable NSNumber *)maximum;
 
 /**
-Returns an initialized numeric answer format using the specified style, unit designation, range
- values, and optional default.
+ Returns an initialized numeric answer format using the specified style, unit designation, range
+ values, and precision.
  
  This method is the designated initializer.
  

@@ -5,7 +5,6 @@
  Copyright (c) 2017, Medable Inc. All rights reserved.
  Copyright (c) 2017, Macro Yau.
  Copyright (c) 2017, Sage Bionetworks.
- Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -1531,7 +1530,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                                                                                     minimum:[_minimum copy]
                                                                                     maximum:[_maximum copy]
                                                                       maximumFractionDigits:[_maximumFractionDigits copy]];
-    answerFormat.defaultNumericAnswer = [_defaultNumericAnswer copy];
+    answerFormat->defaultNumericAnswer = [_defaultNumericAnswer copy];
     return answerFormat;
 }
 
