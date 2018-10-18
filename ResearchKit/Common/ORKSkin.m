@@ -129,7 +129,7 @@ const CGSize ORKiPhone5ScreenSize = (CGSize){320, 568};
 const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
 const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPhoneXScreenSize = (CGSize){375, 812};
-const CGSize ORKiPhoneMaxScreenSize = (CGSize){414, 896};
+const CGSize ORKiPhoneXSMaxScreenSize = (CGSize){414, 896};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 const CGSize ORKiPad10_5ScreenSize = (CGSize){834, 1112};
 const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
@@ -147,8 +147,8 @@ ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhone6Plus;
     } else if (maximumDimension < ORKiPhoneXScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhoneX;
-    } else if (maximumDimension < ORKiPhoneMaxScreenSize.height + 1) {
-        screenType = ORKScreenTypeiPhoneMax;
+    } else if (maximumDimension < ORKiPhoneXSMaxScreenSize.height + 1) {
+        screenType = ORKScreenTypeiPhoneXSMax;
     } else if (maximumDimension < ORKiPadScreenSize.height + 1) {
         screenType = ORKScreenTypeiPad;
     } else if (maximumDimension < ORKiPad10_5ScreenSize.height + 1) {
@@ -170,8 +170,8 @@ ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
         screenType = ORKScreenTypeiPhone6;
     }  else if (minimumDimension < ORKiPhoneXScreenSize.width + 1) {
         screenType = ORKScreenTypeiPhoneX;
-    }  else if (minimumDimension < ORKiPhoneMaxScreenSize.width + 1) {
-        screenType = ORKScreenTypeiPhoneMax;
+    }  else if (minimumDimension < ORKiPhoneXSMaxScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhoneXSMax;
     } else if (minimumDimension < ORKiPhone6PlusScreenSize.width + 1) {
         screenType = ORKScreenTypeiPhone6Plus;
     } else if (minimumDimension < ORKiPadScreenSize.width + 1) {
@@ -324,7 +324,7 @@ CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
         case ORKScreenTypeiPhoneX:
-        case ORKScreenTypeiPhoneMax:
+        case ORKScreenTypeiPhoneXSMax:
         case ORKScreenTypeiPhone6Plus:
         default:
             margin = ORKStandardLeftTableViewCellMarginForWindow(window);
