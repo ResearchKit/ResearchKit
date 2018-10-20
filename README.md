@@ -9,6 +9,7 @@ for medical research or for other research projects.
     * [Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html)
     *  [Framework Reference](http://researchkit.org/docs/index.html)
 * [Best Practices](../../wiki/best-practices)
+* [Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing to ResearchKit](CONTRIBUTING.md)
 * [Website](http://researchkit.org) and [Blog](http://researchkit.org/blog.html)
 * [ResearchKit BSD License](#license)
