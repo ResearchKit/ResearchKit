@@ -1,6 +1,8 @@
 ResearchKit Framework
 ===========
 
+![CocoaPods](https://img.shields.io/cocoapods/v/ResearchKit.svg) ![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat) ![CocoaPods](https://img.shields.io/cocoapods/p/ResearchKit.svg) [![License](https://img.shields.io/badge/license-BSD-green.svg?style=flat)](https://github.com/ResearchKit/ResearchKit#license)
+
 The *ResearchKit™ framework* is an open source software framework that makes it easy to create apps
 for medical research or for other research projects.
 
