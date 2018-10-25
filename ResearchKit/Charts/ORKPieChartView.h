@@ -193,7 +193,7 @@ IB_DESIGNABLE
 @property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
- The font used to for the title text of the header.
+ The font used for the title text of the header.
  
  The default value for this property is the appropriate font. Setting this property to
  `nil` resets it to its default value.
@@ -201,7 +201,7 @@ IB_DESIGNABLE
 @property (nonatomic, strong, null_resettable) IBInspectable UIFont *titleFont;
 
 /**
- The font used to for the subtitle text of the header.
+ The font used for the subtitle text of the header.
  
  The default value for this property is the appropriate font. Setting this property to
  `nil` resets it to its default value.
@@ -209,7 +209,7 @@ IB_DESIGNABLE
 @property (nonatomic, strong, null_resettable) IBInspectable UIFont *subtitleFont;
 
 /**
- The font used to for the "no data" label in the chart.
+ The font used for the "no data" label in the chart.
  
  The default value for this property is the appropriate font. Setting this property to
  `nil` resets it to its default value.
