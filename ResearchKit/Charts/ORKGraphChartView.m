@@ -269,6 +269,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         xAxisFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     }
     _xAxisFont = xAxisFont;
+    _xAxisView.titleFont = _xAxisFont;
 }
 
 - (void)setYAxisFont:(UIFont *)yAxisFont {
@@ -276,6 +277,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         yAxisFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
     }
     _yAxisFont = yAxisFont;
+    _yAxisView.titleFont = _yAxisFont;
 }
 
 - (void)setScrubberFont:(UIFont *)scrubberFont {
@@ -283,6 +285,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         scrubberFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     }
     _scrubberFont = scrubberFont;
+    _scrubberLabel.font = _scrubberFont;
 }
 
 - (void)setNoDataFont:(UIFont *)noDataFont {
@@ -290,6 +293,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
         noDataFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     }
     _noDataFont = noDataFont;
+    _noDataLabel.font = _noDataFont;
 }
 
 - (void)setDecimalPlaces:(NSUInteger)decimalPlaces {

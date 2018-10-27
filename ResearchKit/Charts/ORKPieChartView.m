@@ -291,6 +291,7 @@ static const CGFloat PieToLegendPadding = 8.0;
         titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     }
     _titleFont = titleFont;
+    _titleTextView.titleLabel.font = _titleFont;
 }
 
 - (void)setSubtitleFont:(UIFont *)subtitleFont {
@@ -298,6 +299,7 @@ static const CGFloat PieToLegendPadding = 8.0;
         subtitleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     }
     _subtitleFont = subtitleFont;
+    _titleTextView.textLabel.font = _subtitleFont;
 }
 
 - (void)setNoDataFont:(UIFont *)noDataFont {
@@ -305,6 +307,7 @@ static const CGFloat PieToLegendPadding = 8.0;
         noDataFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     }
     _noDataFont = noDataFont;
+    _titleTextView.noDataLabel.font = _noDataFont;
 }
 
 - (void)setPercentageLabelFont:(UIFont *)percentageLabelFont {
@@ -312,6 +315,7 @@ static const CGFloat PieToLegendPadding = 8.0;
         percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
     }
     _percentageLabelFont = percentageLabelFont;
+    _pieView.percentageLabelFont = _percentageLabelFont;
 }
 
 - (void)setLegendFont:(UIFont *)legendFont {
@@ -319,6 +323,7 @@ static const CGFloat PieToLegendPadding = 8.0;
         legendFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     }
     _legendFont = legendFont;
+    _legendView.labelFont = _legendFont;
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
