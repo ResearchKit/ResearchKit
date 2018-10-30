@@ -115,7 +115,5 @@
 #import <ResearchKit/ORKTouchRecorder.h>
 #import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 
-#import <ResearchKit/ORKEnvironmentSPLMeterResult.h>
-
 // For custom steps
 #import <ResearchKit/ORKCustomStepView.h>
