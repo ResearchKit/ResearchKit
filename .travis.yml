@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode10
-xcode_project: RKWorkspace.xcworkspace
-xcode_scheme: ORKTest
+xcode_project: ResearchKit.xcodeproj
+xcode_scheme: ResearchKit
 xcode_sdk: iphonesimulator12.0
