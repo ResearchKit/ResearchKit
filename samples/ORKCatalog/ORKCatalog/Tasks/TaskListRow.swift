@@ -1454,7 +1454,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing:Identifier.passcodeStep))
         passcodeConsentStep.title = NSLocalizedString("Passcode", comment: "")
-        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeStep), steps: [passcodeConsentStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeTask), steps: [passcodeConsentStep])
     }
     
     /// This task presents the Audio pre-defined active task.
