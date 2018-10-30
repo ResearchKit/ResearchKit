@@ -1108,8 +1108,6 @@ ORK_CLASS_AVAILABLE
 Returns an initialized numeric answer format using the specified style, unit designation, and range
  values.
  
- This method is the designated initializer.
- 
  @param style                   The style of the numeric answer (decimal or integer).
  @param unit                    A string that displays a localized version of the unit designation.
  @param minimum                 The minimum value to apply, or `nil` if none is specified.
@@ -1123,8 +1121,8 @@ Returns an initialized numeric answer format using the specified style, unit des
                       maximum:(nullable NSNumber *)maximum;
 
 /**
-Returns an initialized numeric answer format using the specified style, unit designation, and range
- values.
+ Returns an initialized numeric answer format using the specified style, unit designation, range
+ values, and precision.
  
  This method is the designated initializer.
  

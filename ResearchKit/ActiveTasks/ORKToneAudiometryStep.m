@@ -75,7 +75,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, toneDuration);
-    ORK_DECODE_BOOL(aCoder, practiceStep);
+    ORK_ENCODE_BOOL(aCoder, practiceStep);
 }
 
 + (BOOL)supportsSecureCoding {
