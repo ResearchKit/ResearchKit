@@ -36,6 +36,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKTaskViewController_Internal.h"
 #import "ORKVerticalContainerView_Internal.h"
 
 #import "ORKResult_Private.h"
@@ -232,7 +233,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
+    [self.taskViewController setRegisteredScrollView:_signingView];
     // set the original path and update state
     self.signatureView.signaturePath = self.originalPath;
     [self updateButtonStates];

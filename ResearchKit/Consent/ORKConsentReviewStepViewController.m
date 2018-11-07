@@ -140,6 +140,16 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     [self stepDidChange];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([_pageViewController.viewControllers[0] isKindOfClass:[ORKConsentReviewController class]]) {
+        ORKConsentReviewController *consentReviewController = _pageViewController.viewControllers[0];
+        [self.taskViewController setRegisteredScrollView:consentReviewController.webView.scrollView];
+    } else {
+        NSAssert(NO, @"The first view controller in a consent review step should be of type ORKConsentReviewController");
+    }
+}
+
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
     UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
@@ -388,12 +398,6 @@ static NSString *const _SignatureStepIdentifier = @"signatureStep";
         if (finished) {
             ORKStrongTypeOf(weakSelf) strongSelf = weakSelf;
             [strongSelf updateBackButton];
-            
-            //register ScrollView to update hairline
-            if ([viewController isKindOfClass:[ORKConsentReviewController class]]) {
-                ORKConsentReviewController *reviewViewController =  (ORKConsentReviewController *)viewController;
-                [strongSelf.taskViewController setRegisteredScrollView:reviewViewController.webView.scrollView];
-            }
             
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
         }
