@@ -236,9 +236,11 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (!_agreeButton.isEnabled && [self scrolledToBottom:scrollView]) {
-        _agreeButton.enabled = YES;
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (!_agreeButton.isEnabled && [self scrolledToBottom:scrollView]) {
+            _agreeButton.enabled = YES;
+        }
+    });
 }
 
 - (BOOL)scrolledToBottom:(UIScrollView *)scrollView {
