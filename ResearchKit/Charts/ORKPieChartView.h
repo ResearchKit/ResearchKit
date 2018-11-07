@@ -94,7 +94,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the title to appear in the legend for a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view does not display the legend.
+ If this method is not implemented, the pie chart view does not display the legend. If you return
+ `nil` for a segment index, the label for that segment won't be displayed in the legend.
 
  @param pieChartView     The pie chart view asking for the title.
  @param index            An index number specifying the segment in the pie chart view.
@@ -102,7 +103,7 @@ ORK_AVAILABLE_DECL
  @return The title of the segment at the specified index in the pie chat view's
  legend.
 */
-- (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
+- (nullable NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
 
 @end
 
