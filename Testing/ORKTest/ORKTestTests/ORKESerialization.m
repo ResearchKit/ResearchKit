@@ -260,6 +260,23 @@ static NSRegularExpression *regularExpressionsFromDictionary(NSDictionary *dict)
     return regularExpression;
 }
 
+static NSDictionary *dictionaryFromPasswordRules(UITextInputPasswordRules *passwordRules) {
+    NSDictionary *dictionary = passwordRules ?
+    @{
+      @"rules": passwordRules.passwordRulesDescriptor ?: @""
+      } :
+    @{};
+    return dictionary;
+}
+
+static UITextInputPasswordRules *passwordRulesFromDictionary(NSDictionary *dict) {
+    UITextInputPasswordRules *passwordRules;
+    if (dict.count == 1) {
+        passwordRules = [UITextInputPasswordRules passwordRulesWithDescriptor:dict[@"rules"]];
+    }
+    return passwordRules;
+}
+
 static NSMutableDictionary *ORKESerializationEncodingTable(void);
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
@@ -1248,7 +1265,11 @@ internalEncodingTable =
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
+          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(textContentType, NSString, NSObject, YES, nil, nil),
+          PROPERTY(passwordRules, UITextInputPasswordRules, NSObject, YES,
+                   ^id(id value) { return dictionaryFromPasswordRules((UITextInputPasswordRules *)value); },
+                   ^id(id dict) { return passwordRulesFromDictionary(dict); } )
           })),
    ENTRY(ORKEmailAnswerFormat,
          nil,
