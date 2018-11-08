@@ -37,12 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTouchAbilityTouch;
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTrack: NSObject
+@interface ORKTouchAbilityTrack: NSObject <NSCopying, NSSecureCoding>
 @property(nonatomic, readonly) NSArray<ORKTouchAbilityTouch *> *touches;
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTouch: NSObject
+@interface ORKTouchAbilityTouch: NSObject <NSCopying, NSSecureCoding>
 
 @property(nonatomic, readonly) NSTimeInterval timestamp;
 @property(nonatomic, readonly) UITouchPhase phase;
@@ -68,7 +68,6 @@ ORK_CLASS_AVAILABLE
 @property(nonatomic, readonly) UITouchProperties estimatedProperties;
 @property(nonatomic, readonly) UITouchProperties estimatedPropertiesExpectingUpdates;
 
-- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithTouch:(UITouch *)touch;
 @end
 

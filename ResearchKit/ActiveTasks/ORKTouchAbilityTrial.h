@@ -29,7 +29,7 @@
  */
 
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -43,8 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTouchAbilityPinchGestureRecoginzerEvent;
 @class ORKTouchAbilityRotationGestureRecoginzerEvent;
 
+#pragma mark - ORKTouchAbilityTrial
+
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTrial : NSObject
+@interface ORKTouchAbilityTrial : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly) NSTimeInterval startTime;
 @property (nonatomic, readonly) NSTimeInterval endTime;
@@ -57,6 +59,18 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityPinchGestureRecoginzerEvent *> *pinchEvents;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityRotationGestureRecoginzerEvent *> *rotationEvents;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecoginzerEvents;
+
+@end
+
+
+#pragma mark - ORKTouchAbilityTapTrial
+
+ORK_CLASS_AVAILABLE
+@interface ORKTouchAbilityTapTrial : ORKTouchAbilityTrial
+
+@property (nonatomic, readonly) CGRect targetFrameInWindow;
+
+- (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame;
 
 @end
 

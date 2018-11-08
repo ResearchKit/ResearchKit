@@ -31,12 +31,50 @@
 
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityTrack_Internal.h"
+#import "ORKHelpers_Internal.h"
 
 @interface ORKTouchAbilityTrack ()
 @property(nonatomic, copy) NSMutableArray<ORKTouchAbilityTouch *> *mutableTouches;
 @end
 
 @implementation ORKTouchAbilityTrack
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, mutableTouches);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, mutableTouches);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
+    track.mutableTouches = [self.mutableTouches mutableCopy];
+    return track;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ORKEqualObjects(self.mutableTouches, castObject.mutableTouches);
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.touches.hash;
+}
 
 - (NSMutableArray<ORKTouchAbilityTouch *> *)mutableTouches {
     if (!_mutableTouches) {
@@ -85,6 +123,87 @@
 
 @implementation ORKTouchAbilityTouch
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_ENUM(aCoder, phase);
+    ORK_ENCODE_INTEGER(aCoder, tapCount);
+    ORK_ENCODE_ENUM(aCoder, type);
+    ORK_ENCODE_DOUBLE(aCoder, majorRadius);
+    ORK_ENCODE_DOUBLE(aCoder, majorRadiusTolerance);
+    ORK_ENCODE_CGPOINT(aCoder, locationInWindow);
+    ORK_ENCODE_CGPOINT(aCoder, previousLocationInWindow);
+    ORK_ENCODE_CGPOINT(aCoder, preciseLocationInWindow);
+    ORK_ENCODE_CGPOINT(aCoder, precisePreviousLocationInWindow);
+    ORK_ENCODE_DOUBLE(aCoder, force);
+    ORK_ENCODE_DOUBLE(aCoder, maximumPossibleForce);
+    ORK_ENCODE_DOUBLE(aCoder, azimuthAngleInWindow);
+    
+    [aCoder encodeCGVector:self.azimuthUnitVectorInWindow forKey:@ORK_STRINGIFY(azimuthUnitVectorInWindow)];
+
+    ORK_ENCODE_DOUBLE(aCoder, altitudeAngle);
+
+    if (self.estimationUpdateIndex) {
+        ORK_ENCODE_OBJ(aCoder, estimationUpdateIndex);
+    }
+    
+    ORK_ENCODE_INTEGER(aCoder, estimatedProperties);
+    ORK_ENCODE_INTEGER(aCoder, estimatedPropertiesExpectingUpdates);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_ENUM(aDecoder, phase);
+        ORK_DECODE_INTEGER(aDecoder, tapCount);
+        ORK_DECODE_ENUM(aDecoder, type);
+        ORK_DECODE_DOUBLE(aDecoder, majorRadius);
+        ORK_DECODE_DOUBLE(aDecoder, majorRadiusTolerance);
+        ORK_DECODE_CGPOINT(aDecoder, locationInWindow);
+        ORK_DECODE_CGPOINT(aDecoder, previousLocationInWindow);
+        ORK_DECODE_CGPOINT(aDecoder, preciseLocationInWindow);
+        ORK_DECODE_CGPOINT(aDecoder, precisePreviousLocationInWindow);
+        ORK_DECODE_DOUBLE(aDecoder, force);
+        ORK_DECODE_DOUBLE(aDecoder, maximumPossibleForce);
+        ORK_DECODE_DOUBLE(aDecoder, azimuthAngleInWindow);
+        
+        self.azimuthUnitVectorInWindow = [aDecoder decodeCGVectorForKey:@ORK_STRINGIFY(azimuthUnitVectorInWindow)];
+        
+        ORK_DECODE_DOUBLE(aDecoder, altitudeAngle);
+        ORK_DECODE_OBJ(aDecoder, estimationUpdateIndex);
+        ORK_DECODE_INTEGER(aDecoder, estimatedProperties);
+        ORK_DECODE_INTEGER(aDecoder, estimatedPropertiesExpectingUpdates);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTouch *touch = [[[self class] allocWithZone:zone] init];
+    touch.timestamp = self.timestamp;
+    touch.phase = self.phase;
+    touch.tapCount = self.tapCount;
+    touch.type = self.type;
+    touch.majorRadius = self.majorRadius;
+    touch.majorRadiusTolerance = self.majorRadiusTolerance;
+    touch.locationInWindow = self.locationInWindow;
+    touch.previousLocationInWindow = self.previousLocationInWindow;
+    touch.preciseLocationInWindow = self.preciseLocationInWindow;
+    touch.precisePreviousLocationInWindow = self.precisePreviousLocationInWindow;
+    touch.force = self.force;
+    touch.maximumPossibleForce = self.maximumPossibleForce;
+    touch.azimuthAngleInWindow = self.azimuthAngleInWindow;
+    touch.azimuthUnitVectorInWindow = self.azimuthUnitVectorInWindow;
+    touch.altitudeAngle = self.altitudeAngle;
+    touch.estimationUpdateIndex = [self.estimationUpdateIndex copy];
+    touch.estimatedProperties = self.estimatedProperties;
+    touch.estimatedPropertiesExpectingUpdates = self.estimatedPropertiesExpectingUpdates;
+    return touch;
+}
+
 - (instancetype)initWithTouch:(UITouch *)touch {
     self = [super init];
     if (self) {
@@ -108,6 +227,34 @@
         self.estimatedPropertiesExpectingUpdates = touch.estimatedPropertiesExpectingUpdates;
     }
     return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.timestamp == castObject.timestamp) &&
+            (self.phase == castObject.phase) &&
+            (self.tapCount == castObject.tapCount) &&
+            (self.type == castObject.type) &&
+            (self.majorRadius == castObject.majorRadius) &&
+            (self.majorRadiusTolerance == castObject.majorRadius) &&
+            CGPointEqualToPoint(self.locationInWindow, castObject.locationInWindow) &&
+            CGPointEqualToPoint(self.previousLocationInWindow, castObject.previousLocationInWindow) &&
+            CGPointEqualToPoint(self.preciseLocationInWindow, castObject.preciseLocationInWindow) &&
+            CGPointEqualToPoint(self.precisePreviousLocationInWindow, castObject.precisePreviousLocationInWindow) &
+            (self.force == castObject.force) &&
+            (self.maximumPossibleForce == castObject.maximumPossibleForce) &&
+            (self.azimuthAngleInWindow == castObject.azimuthAngleInWindow) &&
+            (self.azimuthUnitVectorInWindow.dx == castObject.azimuthUnitVectorInWindow.dx) &&
+            (self.azimuthUnitVectorInWindow.dy == castObject.azimuthUnitVectorInWindow.dy) &&
+            (self.altitudeAngle == castObject.altitudeAngle) &&
+            ORKEqualObjects(self.estimationUpdateIndex, castObject.estimationUpdateIndex) &&
+            (self.estimatedProperties == castObject.estimatedProperties) &&
+            (self.estimatedPropertiesExpectingUpdates == castObject.estimatedPropertiesExpectingUpdates));
 }
 
 @end

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - ORKTouchAbilityGestureRecoginzerEvent
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityGestureRecoginzerEvent : NSObject
+@interface ORKTouchAbilityGestureRecoginzerEvent : NSObject <NSCopying, NSSecureCoding>
 
 @property (nonatomic, readonly) NSTimeInterval timestamp;
 @property (nonatomic, readonly) UIGestureRecognizerState state;
@@ -46,7 +46,6 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) NSUInteger numberOfTouches;
 @property (nonatomic, readonly) NSDictionary<NSNumber *, NSValue *> *locationInWindowOfTouchAtIndex;
 
-- (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithGestureRecognizer:(UIGestureRecognizer *)recognizer;
 
 @end

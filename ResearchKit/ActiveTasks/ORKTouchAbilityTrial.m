@@ -34,6 +34,10 @@
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
+#import "ORKHelpers_Internal.h"
+
+#pragma mark - ORKTouchAbilityTrial
+
 @interface ORKTouchAbilityTrial ()
 
 @property (nonatomic, assign) NSTimeInterval startTime;
@@ -50,6 +54,75 @@
 @end
 
 @implementation ORKTouchAbilityTrial
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, startTime);
+    ORK_ENCODE_DOUBLE(aCoder, endTime);
+    ORK_ENCODE_BOOL(aCoder, success);
+    ORK_ENCODE_OBJ(aCoder, mutableTracks);
+    ORK_ENCODE_OBJ(aCoder, mutableTapEvents);
+    ORK_ENCODE_OBJ(aCoder, mutableLongPressEvents);
+    ORK_ENCODE_OBJ(aCoder, mutableSwipeEvents);
+    ORK_ENCODE_OBJ(aCoder, mutablePanEvents);
+    ORK_ENCODE_OBJ(aCoder, mutablePinchEvents);
+    ORK_ENCODE_OBJ(aCoder, mutableRotationEvents);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, startTime);
+        ORK_DECODE_DOUBLE(aDecoder, endTime);
+        ORK_DECODE_BOOL(aDecoder, success);
+        ORK_DECODE_OBJ(aDecoder, mutableTracks);
+        ORK_DECODE_OBJ(aDecoder, mutableTapEvents);
+        ORK_DECODE_OBJ(aDecoder, mutableLongPressEvents);
+        ORK_DECODE_OBJ(aDecoder, mutableSwipeEvents);
+        ORK_DECODE_OBJ(aDecoder, mutablePanEvents);
+        ORK_DECODE_OBJ(aDecoder, mutablePinchEvents);
+        ORK_DECODE_OBJ(aDecoder, mutableRotationEvents);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTrial *trial = [[[self class] allocWithZone:zone] init];
+    trial.startTime = self.startTime;
+    trial.endTime = self.endTime;
+    trial.success = self.success;
+    trial.mutableTracks = [self.mutableTracks mutableCopy];
+    trial.mutableTapEvents = [self.mutableTapEvents mutableCopy];
+    trial.mutableLongPressEvents = [self.mutableLongPressEvents mutableCopy];
+    trial.mutableSwipeEvents = [self.mutableSwipeEvents mutableCopy];
+    trial.mutablePanEvents = [self.mutablePanEvents mutableCopy];
+    trial.mutablePinchEvents = [self.mutablePinchEvents mutableCopy];
+    trial.mutableRotationEvents = [self.mutableRotationEvents mutableCopy];
+    return trial;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.startTime == castObject.startTime) &&
+            (self.endTime == castObject.endTime) &&
+            (self.success == castObject.success) &&
+            [self.mutableTracks isEqual:castObject.mutableTracks] &&
+            [self.mutableTapEvents isEqual:castObject.mutableTapEvents] &&
+            [self.mutableLongPressEvents isEqual:castObject.mutableLongPressEvents] &&
+            [self.mutableSwipeEvents isEqual:castObject.mutableSwipeEvents] &&
+            [self.mutablePanEvents isEqual:castObject.mutablePanEvents] &&
+            [self.mutablePinchEvents isEqual:castObject.mutablePinchEvents] &&
+            [self.mutableRotationEvents isEqual:castObject.mutableRotationEvents]);
+}
 
 - (instancetype)init {
     self = [super init];
@@ -130,6 +203,66 @@
     else if ([gestureEvent isMemberOfClass:[ORKTouchAbilityRotationGestureRecoginzerEvent class]]) {
         [self.mutableRotationEvents addObject:(ORKTouchAbilityRotationGestureRecoginzerEvent *)gestureEvent];
     }
+}
+
+@end
+
+
+#pragma mark - ORKTouchAbilityTapTrial
+
+@interface ORKTouchAbilityTapTrial ()
+
+@property (nonatomic, assign) CGRect targetFrameInWindow;
+
+@end
+
+@implementation ORKTouchAbilityTapTrial
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_CGRECT(aCoder, targetFrameInWindow);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_CGRECT(aDecoder, targetFrameInWindow);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTapTrial *trial = [super copyWithZone:zone];
+    trial.targetFrameInWindow = self.targetFrameInWindow;
+    return trial;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow));
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.targetFrameInWindow = CGRectZero;
+    }
+    return self;
+}
+
+- (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame {
+    self = [super init];
+    if (self) {
+        self.targetFrameInWindow = targetFrame;
+    }
+    return self;
 }
 
 @end

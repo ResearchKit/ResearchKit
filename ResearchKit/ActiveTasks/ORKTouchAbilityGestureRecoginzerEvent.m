@@ -30,7 +30,7 @@
 
 
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
-
+#import "ORKHelpers_Internal.h"
 
 #pragma mark - ORKTouchAbilityGestureRecoginzerEvent
 
@@ -46,6 +46,32 @@
 @end
 
 @implementation ORKTouchAbilityGestureRecoginzerEvent
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_ENUM(aCoder, state);
+    ORK_ENCODE_OBJ(aCoder, allowedTouchTypes);
+    ORK_ENCODE_CGPOINT(aCoder, locationInWindow);
+    ORK_ENCODE_INTEGER(aCoder, numberOfTouches);
+    ORK_ENCODE_OBJ(aCoder, locationInWindowOfTouchAtIndex);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_ENUM(aDecoder, state);
+        ORK_DECODE_OBJ(aDecoder, allowedTouchTypes);
+        ORK_DECODE_CGPOINT(aDecoder, locationInWindow);
+        ORK_DECODE_INTEGER(aDecoder, numberOfTouches);
+        ORK_DECODE_OBJ(aDecoder, locationInWindowOfTouchAtIndex);
+    }
+    return self;
+}
 
 - (instancetype)initWithGestureRecognizer:(UIGestureRecognizer *)recognizer {
     self = [super init];
@@ -70,6 +96,47 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityGestureRecoginzerEvent *event = [[[self class] allocWithZone:zone] init];
+    event.timestamp = self.timestamp;
+    event.state = self.state;
+    event.allowedTouchTypes = [self.allowedTouchTypes copy];
+    event.locationInWindow = self.locationInWindow;
+    event.numberOfTouches = self.numberOfTouches;
+    event.locationInWindowOfTouchAtIndex = [self.locationInWindowOfTouchAtIndex copy];
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.timestamp == castObject.timestamp) &&
+            (self.state == castObject.state) &&
+            ORKEqualObjects(self.allowedTouchTypes, castObject.allowedTouchTypes) &&
+            CGPointEqualToPoint(self.locationInWindow, castObject.locationInWindow) &&
+            self.numberOfTouches == castObject.numberOfTouches &&
+            ORKEqualObjects(self.locationInWindowOfTouchAtIndex, castObject.locationInWindowOfTouchAtIndex));
+}
+
+- (NSArray<NSNumber *> *)allowedTouchTypes {
+    if (!_allowedTouchTypes) {
+        _allowedTouchTypes = @[];
+    }
+    return _allowedTouchTypes;
+}
+
+- (NSDictionary<NSNumber *,NSValue *> *)locationInWindowOfTouchAtIndex {
+    if (!_locationInWindowOfTouchAtIndex) {
+        _locationInWindowOfTouchAtIndex = @{};
+    }
+    return _locationInWindowOfTouchAtIndex;
+}
+
 @end
 
 
@@ -83,6 +150,41 @@
 @end
 
 @implementation ORKTouchAbilityTapGestureRecoginzerEvent
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfTapsRequired);
+    ORK_ENCODE_INTEGER(aCoder, numberOfTouchesRequired);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfTapsRequired);
+        ORK_DECODE_INTEGER(aDecoder, numberOfTouchesRequired);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTapGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.numberOfTapsRequired = self.numberOfTapsRequired;
+    event.numberOfTouchesRequired = self.numberOfTouchesRequired;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.numberOfTapsRequired == castObject.numberOfTapsRequired) &&
+            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired));
+}
 
 - (instancetype)initWithTapGestureRecognizer:(UITapGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
@@ -108,6 +210,50 @@
 @end
 
 @implementation ORKTouchAbilityLongPressGestureRecoginzerEvent
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfTapsRequired);
+    ORK_ENCODE_INTEGER(aCoder, numberOfTouchesRequired);
+    ORK_ENCODE_ENUM(aCoder, minimumPressDuration);
+    ORK_ENCODE_DOUBLE(aCoder, allowableMovement);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfTapsRequired);
+        ORK_DECODE_INTEGER(aDecoder, numberOfTouchesRequired);
+        ORK_DECODE_ENUM(aDecoder, minimumPressDuration);
+        ORK_DECODE_DOUBLE(aDecoder, allowableMovement);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityLongPressGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.numberOfTapsRequired = self.numberOfTapsRequired;
+    event.numberOfTouchesRequired = self.numberOfTouchesRequired;
+    event.minimumPressDuration = self.minimumPressDuration;
+    event.allowableMovement = self.allowableMovement;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.numberOfTapsRequired == castObject.numberOfTapsRequired) &&
+            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired) &&
+            (self.minimumPressDuration == castObject.minimumPressDuration) &&
+            (self.allowableMovement == castObject.allowableMovement));
+}
+
 
 - (instancetype)initWithLongPressGestureRecognizer:(UILongPressGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
@@ -135,6 +281,45 @@
 
 @implementation ORKTouchAbilityPanGestureRecoginzerEvent
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, minimumNumberOfTouches);
+    ORK_ENCODE_INTEGER(aCoder, maximumNumberOfTouches);
+    ORK_ENCODE_CGPOINT(aCoder, velocityInWindow);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, minimumNumberOfTouches);
+        ORK_DECODE_INTEGER(aDecoder, maximumNumberOfTouches);
+        ORK_DECODE_CGPOINT(aDecoder, velocityInWindow);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityPanGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.minimumNumberOfTouches = self.minimumNumberOfTouches;
+    event.maximumNumberOfTouches = self.maximumNumberOfTouches;
+    event.velocityInWindow = self.velocityInWindow;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.minimumNumberOfTouches == castObject.minimumNumberOfTouches) &&
+            (self.maximumNumberOfTouches == castObject.maximumNumberOfTouches) &&
+            CGPointEqualToPoint(self.velocityInWindow, castObject.velocityInWindow));
+}
+
 - (instancetype)initWithPanGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
     if (self) {
@@ -159,6 +344,41 @@
 
 @implementation ORKTouchAbilitySwipeGestureRecoginzerEvent
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfTouchesRequired);
+    ORK_ENCODE_ENUM(aCoder, direction);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfTouchesRequired);
+        ORK_DECODE_ENUM(aDecoder, direction);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilitySwipeGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.numberOfTouchesRequired = self.numberOfTouchesRequired;
+    event.direction = self.direction;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired) &&
+            (self.direction == castObject.direction));
+}
+
 - (instancetype)initWithSwipeGestureRecognizer:(UISwipeGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
     if (self) {
@@ -182,6 +402,41 @@
 
 @implementation ORKTouchAbilityPinchGestureRecoginzerEvent
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, scale);
+    ORK_ENCODE_DOUBLE(aCoder, velocity);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, scale);
+        ORK_DECODE_DOUBLE(aDecoder, velocity);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityPinchGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.scale = self.scale;
+    event.velocity = self.velocity;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.scale == castObject.scale) &&
+            (self.velocity == castObject.velocity));
+}
+
 - (instancetype)initWithPinchGestureRecognizer:(UIPinchGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
     if (self) {
@@ -204,6 +459,41 @@
 @end
 
 @implementation ORKTouchAbilityRotationGestureRecoginzerEvent
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, rotation);
+    ORK_ENCODE_DOUBLE(aCoder, velocity);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, rotation);
+        ORK_DECODE_DOUBLE(aDecoder, velocity);
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityRotationGestureRecoginzerEvent *event = [super copyWithZone:zone];
+    event.rotation = self.rotation;
+    event.velocity = self.velocity;
+    return event;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ([super isEqual:castObject] &&
+            (self.rotation == castObject.rotation) &&
+            (self.velocity == castObject.velocity));
+}
 
 - (instancetype)initWithRotationGestureRecognizer:(UIRotationGestureRecognizer *)recognizer {
     self = [super initWithGestureRecognizer:recognizer];
