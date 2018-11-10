@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -184,6 +185,38 @@ static const CGFloat PieToLegendPadding = 8.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)sharedInit {
+    _lineWidth = 10;
+    _showsTitleAboveChart = NO;
+    _showsPercentageLabels = YES;
+    _drawsClockwise = YES;
+    
+    // nil reset to default fonts
+    self.titleFont = nil;
+    self.subtitleFont = nil;
+    self.noDataFont = nil;
+    self.percentageLabelFont = nil;
+    self.legendFont = nil;
+    
+    _legendView = nil; // legend lazily initialized on demand
+    
+    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
+    [self addSubview:_pieView];
+    
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
+    [self addSubview:_titleTextView];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    [self setUpConstraints];
+    [self setNeedsUpdateConstraints];
+}
+
+#pragma mark - API
+
 - (void)reloadData {
     CGFloat sumOfValues = [_pieView normalizeValues];
     [_pieView updatePieLayers];
@@ -196,6 +229,25 @@ static const CGFloat PieToLegendPadding = 8.0;
     _dataSource = dataSource;
     [self reloadData];
 }
+
+- (void)tintColorDidChange {
+    [_pieView updateColors];
+    [_legendView reloadData];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
+    [self setNeedsLayout];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
+    [self setNeedsLayout];
+}
+
+#pragma mark - Configuration
 
 - (void)setRadiusScaleFactor:(CGFloat)radiusScaleFactor {
     _pieView.radiusScaleFactor = radiusScaleFactor;
@@ -232,6 +284,46 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (NSString *)noDataText {
     return _titleTextView.noDataLabel.text;
+}
+
+- (void)setTitleFont:(UIFont *)titleFont {
+    if (!titleFont) {
+        titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    }
+    _titleFont = titleFont;
+    _titleTextView.titleLabel.font = _titleFont;
+}
+
+- (void)setSubtitleFont:(UIFont *)subtitleFont {
+    if (!subtitleFont) {
+        subtitleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    }
+    _subtitleFont = subtitleFont;
+    _titleTextView.textLabel.font = _subtitleFont;
+}
+
+- (void)setNoDataFont:(UIFont *)noDataFont {
+    if (!noDataFont) {
+        noDataFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    }
+    _noDataFont = noDataFont;
+    _titleTextView.noDataLabel.font = _noDataFont;
+}
+
+- (void)setPercentageLabelFont:(UIFont *)percentageLabelFont {
+    if (!percentageLabelFont) {
+        percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    }
+    _percentageLabelFont = percentageLabelFont;
+    _pieView.percentageLabelFont = _percentageLabelFont;
+}
+
+- (void)setLegendFont:(UIFont *)legendFont {
+    if (!legendFont) {
+        legendFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    }
+    _legendFont = legendFont;
+    _legendView.labelFont = _legendFont;
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
@@ -272,40 +364,14 @@ static const CGFloat PieToLegendPadding = 8.0;
     [_pieView setNeedsLayout];
 }
 
-- (void)tintColorDidChange {
-    [_pieView updateColors];
-    [_legendView reloadData];
-}
+#pragma mark - Presentation
 
 - (void)updateContentSizeCategoryFonts {
-    _titleTextView.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _titleTextView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-    _titleTextView.noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _pieView.percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-}
-
-- (void)sharedInit {
-    _lineWidth = 10;
-    _showsTitleAboveChart = NO;
-    _showsPercentageLabels = YES;
-    _drawsClockwise = YES;
-    
-    _legendView = nil; // legend lazily initialized on demand
-    
-    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
-    [self addSubview:_pieView];
-    
-    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
-    [self addSubview:_titleTextView];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    [self setUpConstraints];
-    [self setNeedsUpdateConstraints];
+    _titleTextView.titleLabel.font = self.titleFont;
+    _titleTextView.textLabel.font = self.subtitleFont;
+    _titleTextView.noDataLabel.font = self.noDataFont;
+    _pieView.percentageLabelFont = self.percentageLabelFont;
+    _legendView.labelFont = self.legendFont;
 }
 
 - (void)setUpConstraints {
@@ -407,18 +473,6 @@ static const CGFloat PieToLegendPadding = 8.0;
         _shouldInvalidateLegendViewIntrinsicContentSize = NO;
         [_legendView invalidateIntrinsicContentSize];
     }
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
-    [self setNeedsLayout];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
-    [self setNeedsLayout];
 }
 
 #pragma mark - DataSource

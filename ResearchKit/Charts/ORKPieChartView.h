@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -193,6 +194,46 @@ IB_DESIGNABLE
 @property (nonatomic, copy, null_resettable) IBInspectable NSString *noDataText;
 
 /**
+ The font used for the title text of the header.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *titleFont;
+
+/**
+ The font used for the subtitle text of the header.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *subtitleFont;
+
+/**
+ The font used for the "no data" label in the chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *noDataFont;
+
+/**
+ The font used for the percentage label of each segment of the pie chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *percentageLabelFont;
+
+/**
+ The font used for the legend that describes each color<->segment pair in the pie chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *legendFont;
+
+/**
  Animates the pie chart when it is first displayed on the screen.
  
  You can optionally call this method from the `viewWillAppear:` implementation of the view
@@ -210,7 +251,7 @@ IB_DESIGNABLE
 - (void)reloadData;
 
 /**
- A scaling facor for the radius of the pie chart.
+ A scaling factor for the radius of the pie chart.
  Increase it to increase the radius of the pie chart and vice versa.
  
  Defaults to 0.5.
