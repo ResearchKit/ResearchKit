@@ -39,7 +39,7 @@
 @property (nonatomic, assign) NSTimeInterval systemUpTime;
 @property (nonatomic, assign, getter=isTracking) BOOL tracking;
 
-@property (nonatomic, strong) NSMutableArray<ORKTouchAbilityTrack *> *mutableTracks;
+@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *mutableTracks;
 
 @end
 

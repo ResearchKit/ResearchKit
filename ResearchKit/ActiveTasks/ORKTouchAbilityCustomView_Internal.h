@@ -34,8 +34,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
+@class ORKTouchAbilityTouchTracker;
+
+@interface ORKTouchAbilityCustomView ()
+
+@property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
 
 @end
 

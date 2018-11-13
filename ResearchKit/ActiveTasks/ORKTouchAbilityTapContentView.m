@@ -30,14 +30,9 @@
 
 #import "ORKTouchAbilityTapContentView.h"
 
-#import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-@interface ORKTouchAbilityTapContentView ()
-@property (nonatomic, copy) ORKTouchAbilityTrack *track;
-@end
 
 @implementation ORKTouchAbilityTapContentView
 
@@ -45,12 +40,7 @@
     return YES;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    ORKThrowMethodUnavailableException();
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
-    // ORKThrowMethodUnavailableException();
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = self.tintColor;
@@ -77,47 +67,6 @@
 - (void)setBounds:(CGRect)bounds {
     [super setBounds:bounds];
     [self updateLayoutMargins];
-}
-
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    
-    for (UITouch *touch in touches) {
-        [self.track addTouch:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
-    }
-}
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
-    
-    for (UITouch *touch in touches) {
-        [self.track addTouch:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
-    }
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    
-    for (UITouch *touch in touches) {
-        [self.track addTouch:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
-    }
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    
-    for (UITouch *touch in touches) {
-       [self.track addTouch:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
-    }
-    
-}
-
-- (ORKTouchAbilityTrack *)track {
-    if (!_track) {
-        _track = [[ORKTouchAbilityTrack alloc] init];
-    }
-    return _track;
 }
 
 @end

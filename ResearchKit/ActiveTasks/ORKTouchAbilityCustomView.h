@@ -30,12 +30,27 @@
 
 
 @import UIKit;
-#import "ORKTouchAbilityCustomView.h"
+#import "ORKCustomStepView_Internal.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
+@class ORKTouchAbilityCustomView;
+@protocol ORKTouchAbilityCustomViewDelegate <NSObject>
+
+@required
+- (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView;
+- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView;
+
+@end
+
+
+@interface ORKTouchAbilityCustomView : ORKActiveStepCustomView
+
+@property (nonatomic, weak) id<ORKTouchAbilityCustomViewDelegate> delegate;
+
+- (void)startTracking;
+- (void)stopTracking;
+- (void)resetTracks;
 
 @end
 

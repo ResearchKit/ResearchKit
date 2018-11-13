@@ -100,6 +100,13 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.touchAbilityTapContentView startTracking];
+
+}
+
 /*
 #pragma mark - Navigation
 
