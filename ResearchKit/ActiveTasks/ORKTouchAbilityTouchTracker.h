@@ -29,16 +29,39 @@
  */
 
 
-@import Foundation;
-#import "ORKTouchAbilityTrial.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKTouchAbilityTrial ()
+#pragma mark - ORKTouchAbilityTouchTrackerDelegate
 
-- (void)addTrack:(ORKTouchAbilityTrack *)track;
-- (void)addGestureEvent:(ORKTouchAbilityGestureRecoginzerEvent *)gestureEvent;
+@class ORKTouchAbilityTouchTracker;
+@protocol ORKTouchAbilityTouchTrackerDelegate <UIGestureRecognizerDelegate>
+
+@required
+- (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker;
+- (void)touchTrackerDidCompleteNewTracks:(ORKTouchAbilityTouchTracker *)touchTracker;
 
 @end
+
+
+#pragma mark - ORKTouchAbilityTouchTracker
+
+@class ORKTouchAbilityTrack;
+@interface ORKTouchAbilityTouchTracker : UIGestureRecognizer
+
+@property (nonatomic, readonly) NSTimeInterval systemUpTime;
+@property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
+@property (nonatomic, readonly, getter=isTracking) BOOL tracking;
+@property (nonatomic, weak) id<ORKTouchAbilityTouchTrackerDelegate> _Nullable delegate;
+
+- (void)startTracking;
+- (void)stopTracking;
+- (void)resetTracks;
+
+@end
+
+
+
 
 NS_ASSUME_NONNULL_END

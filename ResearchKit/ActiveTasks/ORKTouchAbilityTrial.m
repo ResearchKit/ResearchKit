@@ -183,6 +183,10 @@
     return [events copy];
 }
 
+- (void)addTrack:(ORKTouchAbilityTrack *)track {
+    [self.mutableTracks addObject:track];
+}
+
 - (void)addGestureEvent:(ORKTouchAbilityGestureRecoginzerEvent *)gestureEvent {
     
     if ([gestureEvent isMemberOfClass:[ORKTouchAbilityTapGestureRecoginzerEvent class]]) {

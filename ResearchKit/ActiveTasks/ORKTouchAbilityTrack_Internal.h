@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKTouchAbilityTrack ()
 
 - (void)addTouch:(ORKTouchAbilityTouch *)touch;
+- (void)addTouches:(NSArray<ORKTouchAbilityTouch *> *)touches;
 
 @end
 

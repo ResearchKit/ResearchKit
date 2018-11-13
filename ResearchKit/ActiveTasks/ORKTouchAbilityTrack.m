@@ -91,6 +91,10 @@
     [self.mutableTouches addObject:touch];
 }
 
+- (void)addTouches:(NSArray<ORKTouchAbilityTouch *> *)touches {
+    [self.mutableTouches addObjectsFromArray:touches];
+}
+
 @end
 
 @interface ORKTouchAbilityTouch ()
