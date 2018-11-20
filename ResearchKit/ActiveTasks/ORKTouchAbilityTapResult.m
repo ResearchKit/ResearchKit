@@ -28,43 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTouchAbilityTapResult.h"
 
-@import UIKit;
-#import "ORKTouchAbilityCustomView.h"
+#import "ORKTouchAbilityTrial.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKTouchAbilityTapResult
 
-/*
-protocol TapTrialViewDataSource: NSObjectProtocol {
-    func numberOfColumn(_ tapTrialView: TapTrialView) -> Int
-    func numberOfRow(_ tapTrialView: TapTrialView) -> Int
-    func targetColumn(_ tapTrialView: TapTrialView) -> Int
-    func targetRow(_ tapTrialView: TapTrialView) -> Int
-    func targetSize(_ tapTrialView: TapTrialView) -> CGSize
+- (NSMutableArray<ORKTouchAbilityTapTrial *> *)trials {
+    if (!_trials) {
+        _trials = [NSMutableArray new];
+    }
+    return _trials;
 }
- */
-
-@class ORKTouchAbilityTapContentView;
-@protocol ORKTouchAbilityTapContentViewDataSource <NSObject>
-
-@required
-- (NSUInteger)numberOfColumns:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)numberOfRows:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView;
-
-@optional
-- (CGSize)targetSize:(ORKTouchAbilityTapContentView *)tapContentView;
 
 @end
-
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
-
-@property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> dataSource;
-
-- (void)reloadData;
-
-@end
-
-NS_ASSUME_NONNULL_END

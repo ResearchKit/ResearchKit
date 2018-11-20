@@ -33,6 +33,20 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
+CGSize const defaultTargetSize = {76, 76};
+
+@interface ORKTouchAbilityTapContentView ()
+
+@property (nonatomic, assign) NSUInteger numberOfColumns;
+@property (nonatomic, assign) NSUInteger numberOfRows;
+@property (nonatomic, assign) NSUInteger targetColumn;
+@property (nonatomic, assign) NSUInteger targetRow;
+@property (nonatomic, assign) CGSize targetSize;
+
+@property (nonatomic, strong) UIView *targetView;
+@property (nonatomic, copy) NSArray *targetConstraints;
+
+@end
 
 @implementation ORKTouchAbilityTapContentView
 
@@ -43,30 +57,100 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = self.tintColor;
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.targetView.backgroundColor = self.tintColor;
+        [self addSubview:self.targetView];
+        
+        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.layoutMarginsGuide.topAnchor];
+        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.layoutMarginsGuide.bottomAnchor];
+        
+        topConstraint.priority = UILayoutPriorityFittingSizeLevel;
+        bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
+        
+        [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
+        
+        [self reloadData];
     }
     return self;
 }
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    self.backgroundColor = self.tintColor;
-}
-
-- (void)updateLayoutMargins {
-    CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
+    self.targetView.backgroundColor = self.tintColor;
 }
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [self updateLayoutMargins];
+    
+    if (self.superview != nil) {
+        [self reloadData];
+    }
 }
 
 - (void)setBounds:(CGRect)bounds {
     [super setBounds:bounds];
-    [self updateLayoutMargins];
+    
+    if (self.superview != nil) {
+        [self reloadData];
+    }
+}
+
+- (void)reloadData {
+    [self resetTracks];
+    
+    self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
+    self.numberOfRows = [self.dataSource numberOfRows:self] ?: 1;
+    self.targetColumn = [self.dataSource targetColumn:self] ?: 0;
+    self.targetRow = [self.dataSource targetRow:self] ?: 0;
+    
+    NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
+    NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
+    
+    if ([self.dataSource respondsToSelector:@selector(targetSize:)]) {
+        self.targetSize = [self.dataSource targetSize:self];
+    } else {
+        self.targetSize = defaultTargetSize;
+    }
+    
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+
+    if (self.numberOfColumns == 0 || self.numberOfRows == 0 || self.targetView.superview == nil) {
+        return;
+    }
+    
+    CGFloat width = self.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
+    CGFloat height = self.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
+
+    CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
+    CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
+
+    if (self.targetConstraints != nil) {
+        [NSLayoutConstraint deactivateConstraints:self.targetConstraints];
+    }
+
+    NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
+    NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
+    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leftAnchor constant:columnMidX];
+    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor constant:rowMidY];
+
+    NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
+    [NSLayoutConstraint activateConstraints:constraints];
+
+    self.targetConstraints = constraints;
+}
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
 }
 
 @end

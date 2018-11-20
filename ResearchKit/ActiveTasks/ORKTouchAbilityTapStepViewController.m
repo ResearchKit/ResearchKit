@@ -33,6 +33,8 @@
 
 #import "ORKActiveStepView.h"
 #import "ORKTouchAbilityTapContentView.h"
+#import "ORKTouchAbilityTapResult.h"
+#import "ORKTouchAbilityTrial.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -45,12 +47,22 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
-@interface ORKTouchAbilityTapStepViewController ()
+@interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *samples;
 @property (nonatomic, strong) ORKTouchAbilityTapContentView *touchAbilityTapContentView;
 @property (nonatomic, assign) NSUInteger successes;
 @property (nonatomic, assign) NSUInteger failures;
+
+
+@property (nonatomic, assign) NSUInteger numberOfColumns;
+@property (nonatomic, assign) NSUInteger numberOfRows;
+@property (nonatomic, assign) NSUInteger targetColumn;
+@property (nonatomic, assign) NSUInteger targetRow;
+@property (nonatomic, assign) CGSize targetSize;
+
+@property (nonatomic, strong) UIView *targetView;
+@property (nonatomic, copy) NSArray *targetConstraints;
 
 @end
 
@@ -78,43 +90,76 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.numberOfColumns = 5;
+    self.numberOfRows = 5;
+    self.targetColumn = 1;
+    self.targetRow = 0;
+    self.targetSize = CGSizeMake(76, 76);
+    
     self.touchAbilityTapContentView = [[ORKTouchAbilityTapContentView alloc] init];
-    self.touchAbilityTapContentView.backgroundColor = [UIColor redColor];
+    self.touchAbilityTapContentView.dataSource = self;
+    self.touchAbilityTapContentView.delegate = self;
+//    self.touchAbilityTapContentView.backgroundColor = [UIColor redColor];
     self.activeStepView.activeCustomView = self.touchAbilityTapContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
-    UIView *fooView = [UIView new];
-    fooView.backgroundColor = self.view.tintColor;
-    fooView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.touchAbilityTapContentView addSubview:fooView];
-    
-    NSArray *constraints = @[[fooView.topAnchor constraintGreaterThanOrEqualToAnchor:self.touchAbilityTapContentView.topAnchor],
-                             [fooView.bottomAnchor constraintLessThanOrEqualToAnchor:self.touchAbilityTapContentView.bottomAnchor],
-                             [fooView.centerXAnchor constraintEqualToAnchor:self.touchAbilityTapContentView.centerXAnchor],
-                             [fooView.centerYAnchor constraintEqualToAnchor:self.touchAbilityTapContentView.centerYAnchor],
-                             [fooView.heightAnchor constraintEqualToConstant:100],
-                             [fooView.widthAnchor constraintEqualToConstant:100]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [self.touchAbilityTapContentView startTracking];
-
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (ORKStepResult *)result {
+    
+    ORKStepResult *sResult = [super result];
+    
+    NSMutableArray *results = [[NSMutableArray alloc] initWithArray:sResult.results];
+    
+    ORKTouchAbilityTapResult *tapResult = [[ORKTouchAbilityTapResult alloc] initWithIdentifier:self.step.identifier];
+    
+    tapResult.trials = [NSMutableArray new];
+    
+    [results addObject:tapResult];
+    sResult.results = [results copy];
+    
+    return sResult;
 }
-*/
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
+}
+
+
+#pragma mark - ORKTouchAbilityTapContentViewDataSource
+
+- (NSUInteger)numberOfColumns:(ORKTouchAbilityTapContentView *)tapContentView {
+    return 5;
+}
+
+- (NSUInteger)numberOfRows:(ORKTouchAbilityTapContentView *)tapContentView {
+    return 5;
+}
+
+- (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView {
+    return 0; //arc4random_uniform(5);
+}
+
+- (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView {
+    return 0; //arc4random_uniform(5);
+}
+
+
+#pragma mark - ORKTouchAbilityCustomViewDelegate
+
+- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+    [self.touchAbilityTapContentView reloadData];
+    [self.touchAbilityTapContentView startTracking];
+}
 
 @end
