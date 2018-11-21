@@ -1159,6 +1159,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
         answerFormatDomain.autocorrectionType = UITextAutocorrectionType.no
         answerFormatDomain.spellCheckingType = UITextSpellCheckingType.no
+        answerFormatDomain.textContentType = UITextContentType.URL
         let stepDomain = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepDomain), title: NSLocalizedString("Validated Text", comment: ""), question: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
         stepDomain.text = exampleDetailText
         
@@ -1454,7 +1455,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing:Identifier.passcodeStep))
         passcodeConsentStep.title = NSLocalizedString("Passcode", comment: "")
-        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeStep), steps: [passcodeConsentStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeTask), steps: [passcodeConsentStep])
     }
     
     /// This task presents the Audio pre-defined active task.

@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015-2016, Ricardo Sánchez-Sáez.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -259,6 +260,23 @@ static NSRegularExpression *regularExpressionsFromDictionary(NSDictionary *dict)
     return regularExpression;
 }
 
+static NSDictionary *dictionaryFromPasswordRules(UITextInputPasswordRules *passwordRules) {
+    NSDictionary *dictionary = passwordRules ?
+    @{
+      @"rules": passwordRules.passwordRulesDescriptor ?: @""
+      } :
+    @{};
+    return dictionary;
+}
+
+static UITextInputPasswordRules *passwordRulesFromDictionary(NSDictionary *dict) {
+    UITextInputPasswordRules *passwordRules;
+    if (dict.count == 1) {
+        passwordRules = [UITextInputPasswordRules passwordRulesWithDescriptor:dict[@"rules"]];
+    }
+    return passwordRules;
+}
+
 static NSMutableDictionary *ORKESerializationEncodingTable(void);
 static id propFromDict(NSDictionary *dict, NSString *propName);
 static NSArray *classEncodingsForClass(Class c) ;
@@ -452,9 +470,9 @@ static NSArray *numberFormattingStyleTable() {
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
-    static NSMutableDictionary *encondingTable = nil;
+    static NSMutableDictionary *internalEncodingTable = nil;
     dispatch_once(&onceToken, ^{
-encondingTable =
+internalEncodingTable =
 [@{
    ENTRY(ORKResultSelector,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -550,6 +568,14 @@ encondingTable =
          @{
            PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
            }),
+   ENTRY(ORKPDFViewerStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPDFViewerStep alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                          pdfURL:GETPROP(dict, pdfURL)];
+         },
+         @{
+           PROPERTY(pdfURL, NSURL, NSObject, YES, nil, nil)
+           }),
    ENTRY(ORKPasscodeStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -579,7 +605,8 @@ encondingTable =
          },
          (@{
             PROPERTY(answerFormat, ORKAnswerFormat, NSObject, YES, nil, nil),
-            PROPERTY(placeholder, NSString, NSObject, YES, nil, nil)
+            PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
+            PROPERTY(question, NSString, NSObject, YES, nil, nil)
             })),
    ENTRY(ORKInstructionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -795,14 +822,7 @@ encondingTable =
             })),
    ENTRY(ORKRangeOfMotionStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-         },
-         (@{
-            PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
-            })),
-   ENTRY(ORKShoulderRangeOfMotionStep,
-         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return [[ORKRangeOfMotionStep alloc] initWithIdentifier:GETPROP(dict, identifier) limbOption:[GETPROP(dict, identifier) integerValue]];
          },
          (@{
             PROPERTY(limbOption, NSNumber, NSObject, YES, nil, nil),
@@ -847,20 +867,74 @@ encondingTable =
          (@{
             PROPERTY(numberOfDisks, NSNumber, NSObject, YES, nil, nil),
             })),
-  ENTRY(ORKAccelerometerRecorderConfiguration,
+   ENTRY(ORKSpeechInNoiseStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSpeechInNoiseStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
+   ENTRY(ORKSpeechRecognitionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSpeechRecognitionStep alloc] initWithIdentifier:GETPROP(dict, identifier) image:nil text:GETPROP(dict, speechRecognitionText)];
+         },
+         (@{
+            PROPERTY(shouldHideTranscript, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(speechRecognitionText, NSString, NSObject, YES, nil, nil),
+            PROPERTY(speechRecognizerLocale, NSString, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKEnvironmentSPLMeterStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKEnvironmentSPLMeterStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(thresholdValue, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(samplingInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(requiredContiguousSamples, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKEnvironmentSPLMeterResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKEnvironmentSPLMeterResult alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(sensitivityOffset, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(recordedSPLMeterSamples, NSNumber, NSArray, YES, nil, nil)
+            })),
+   ENTRY(ORKStreamingAudioRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKStreamingAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
+   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];
         },
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKAudioRecorderConfiguration,
+   ENTRY(ORKAudioRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) recorderSettings:GETPROP(dict, recorderSettings)];
         },
         (@{
           PROPERTY(recorderSettings, NSDictionary, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKAmslerGridStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAmslerGridStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(eyeSide, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKAmslerGridResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAmslerGridResult alloc] initWithIdentifier:GETPROP(dict, identifier)image:GETPROP(dict, image) path:GETPROP(dict, path) eyeSide:(ORKAmslerGridEyeSide)[GETPROP(dict, eyeSide) integerValue]];
+         },
+         (@{
+            PROPERTY(eyeSide, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(image, UIImage, NSObject, NO, nil, nil),
+            PROPERTY(path, UIBezierPath, NSArray, NO, nil, nil),
+            })),
   ENTRY(ORKConsentDocument,
         nil,
         (@{
@@ -871,14 +945,14 @@ encondingTable =
           PROPERTY(signatures, ORKConsentSignature, NSArray, NO, nil, nil),
           PROPERTY(htmlReviewContent, NSString, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKConsentSharingStep,
+   ENTRY(ORKConsentSharingStep,
         ^(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentSharingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
            PROPERTY(localizedLearnMoreHTMLContent, NSString, NSObject, YES, nil, nil),
            })),
-  ENTRY(ORKConsentReviewStep,
+   ENTRY(ORKConsentReviewStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentReviewStep alloc] initWithIdentifier:GETPROP(dict, identifier) signature:GETPROP(dict, signature) inDocument:GETPROP(dict,consentDocument)];
         },
@@ -887,13 +961,13 @@ encondingTable =
           PROPERTY(reasonForConsent, NSString, NSObject, YES, nil, nil),
           PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKFitnessStep,
+   ENTRY(ORKFitnessStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKFitnessStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
            })),
-  ENTRY(ORKConsentSection,
+   ENTRY(ORKConsentSection,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKConsentSection alloc] initWithType:((NSNumber *)GETPROP(dict, type)).integerValue];
         },
@@ -913,7 +987,7 @@ encondingTable =
                    ^id(id string) { return [NSURL URLWithString:string]; }),
           PROPERTY(omitFromDocument, NSNumber, NSObject, YES, nil, nil),
           })),
-  ENTRY(ORKConsentSignature,
+   ENTRY(ORKConsentSignature,
         nil,
         (@{
           PROPERTY(identifier, NSString, NSObject, YES, nil, nil),
@@ -925,7 +999,7 @@ encondingTable =
           PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
           })),
-  ENTRY(ORKRegistrationStep,
+   ENTRY(ORKRegistrationStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKRegistrationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) options:((NSNumber *)GETPROP(dict, options)).integerValue];
         },
@@ -953,6 +1027,12 @@ encondingTable =
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
           })),
+   ENTRY(ORKdBHLToneAudiometryOnboardingStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKdBHLToneAudiometryOnboardingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            })),
   ENTRY(ORKFormStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -1123,7 +1203,6 @@ encondingTable =
           PROPERTY(unit, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(defaultNumericAnswer, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKScaleAnswerFormat,
@@ -1186,7 +1265,11 @@ encondingTable =
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
+          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(textContentType, NSString, NSObject, YES, nil, nil),
+          PROPERTY(passwordRules, UITextInputPasswordRules, NSObject, YES,
+                   ^id(id value) { return dictionaryFromPasswordRules((UITextInputPasswordRules *)value); },
+                   ^id(id dict) { return passwordRulesFromDictionary(dict); } )
           })),
    ENTRY(ORKEmailAnswerFormat,
          nil,
@@ -1625,8 +1708,19 @@ encondingTable =
             })),
    
    } mutableCopy];
+        
+        if (@available(iOS 12.0, *)) {
+            [internalEncodingTable addEntriesFromDictionary:@{ ENTRY(ORKHealthClinicalTypeRecorderConfiguration,
+                                                              ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+                                                                  return [[ORKHealthClinicalTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthClinicalType:GETPROP(dict, healthClinicalType) healthFHIRResourceType:GETPROP(dict, healthFHIRResourceType)];
+                                                              },
+                                                              (@{
+                                                                 PROPERTY(healthClinicalType, HKClinicalType, NSObject, NO, nil, nil),
+                                                                 PROPERTY(healthFHIRResourceType, NSString, NSObject, NO, nil, nil),
+                                                                 })) }];
+        }
     });
-    return encondingTable;
+    return internalEncodingTable;
 }
 #undef GETPROP
 

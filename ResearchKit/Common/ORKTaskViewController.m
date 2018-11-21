@@ -336,6 +336,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [self setTask: task];
     
     self.showsProgressInNavigationBar = YES;
+    self.discardable = NO;
     
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
@@ -1337,7 +1338,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         isStandaloneReviewStep = reviewStep.isStandalone;
     }
     
-    if ((isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
+    if (self.discardable || (isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];
@@ -1513,6 +1514,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 static NSString *const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
 static NSString *const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
+static NSString *const _ORKDiscardableTaskRestoreKey = @"discardableTask";
 static NSString *const _ORKManagedResultsRestoreKey = @"managedResults";
 static NSString *const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
 static NSString *const _ORKHasSetProgressLabelRestoreKey = @"hasSetProgressLabel";
@@ -1530,6 +1532,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     
     [coder encodeObject:_taskRunUUID forKey:_ORKTaskRunUUIDRestoreKey];
     [coder encodeBool:self.showsProgressInNavigationBar forKey:_ORKShowsProgressInNavigationBarRestoreKey];
+    [coder encodeBool:self.discardable forKey:_ORKDiscardableTaskRestoreKey];
     [coder encodeObject:_managedResults forKey:_ORKManagedResultsRestoreKey];
     [coder encodeObject:_managedStepIdentifiers forKey:_ORKManagedStepIdentifiersRestoreKey];
     [coder encodeBool:_hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
@@ -1555,6 +1558,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     
     _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
+    self.discardable = [coder decodeBoolForKey:_ORKDiscardableTaskRestoreKey];
     
     _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
     [self ensureDirectoryExists:_outputDirectory];

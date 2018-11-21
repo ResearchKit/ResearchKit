@@ -487,6 +487,15 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
+/**
+ A Boolean value indicating whether the task view controller can be dismissed directly, without showing the "End Task" action sheet, when
+ a user taps the "Cancel" button.
+ 
+ The default value of this property is `NO`. To allow the task view controller to be dismissed directly with its results discarded, set
+ the value to `YES`.
+ */
+@property (nonatomic, assign) BOOL discardable;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -65,6 +65,11 @@
         self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         self.textView.keyboardType = textAnswerFormat.keyboardType;
         self.textView.secureTextEntry = textAnswerFormat.secureTextEntry;
+        self.textView.textContentType = textAnswerFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            self.textView.passwordRules = textAnswerFormat.passwordRules;
+        }
     } else {
         _maxLength = 0;
     }
@@ -284,6 +289,11 @@
         self.textField.spellCheckingType = textFormat.spellCheckingType;
         self.textField.keyboardType = textFormat.keyboardType;
         self.textField.secureTextEntry = textFormat.secureTextEntry;
+        self.textField.textContentType = textFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            self.textField.passwordRules = textFormat.passwordRules;
+        }
     }
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     

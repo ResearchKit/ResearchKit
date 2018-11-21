@@ -75,6 +75,7 @@
 #import <ResearchKit/ORKSignatureResult.h>
 #import <ResearchKit/ORKVideoInstructionStepResult.h>
 #import <ResearchKit/ORKWebViewStepResult.h>
+#import <ResearchKit/ORKEnvironmentSPLMeterResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
 
 #import <ResearchKit/ORKTextButton.h>
