@@ -234,7 +234,9 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (BOOL)resignFirstResponder {
-    return [_textField resignFirstResponder];
+    BOOL didResign = [_textField resignFirstResponder];
+    [super resignFirstResponder];
+    return didResign;
 }
 
 - (CGSize)intrinsicContentSize {
