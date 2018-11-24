@@ -2093,7 +2093,7 @@ NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
                                                  handIdentifier:(NSString *)handIdentifier
                                                 introDetailText:(NSString *)detailText
                                                         options:(ORKPredefinedTaskOption)options {
-    NSMutableArray<ORKActiveStep *> *steps = [NSMutableArray array];
+    NSMutableArray<ORKStep*> *steps = [NSMutableArray array];
     NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
     BOOL rightHand = !leftHand && ![handIdentifier isEqualToString:ORKActiveTaskMostAffectedHandIdentifier];
     
