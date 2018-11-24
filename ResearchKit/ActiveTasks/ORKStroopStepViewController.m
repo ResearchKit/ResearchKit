@@ -45,8 +45,8 @@
 @interface ORKStroopStepViewController ()
 
 @property (nonatomic, strong) ORKStroopContentView *stroopContentView;
-@property (nonatomic, copy) NSMutableDictionary *colors;
-@property (nonatomic, copy) NSMutableDictionary *differentColorLabels;
+@property (nonatomic, strong) NSMutableDictionary *colors;
+@property (nonatomic, strong) NSMutableDictionary *differentColorLabels;
 @property (nonatomic) NSUInteger questionNumber;
 
 @end
