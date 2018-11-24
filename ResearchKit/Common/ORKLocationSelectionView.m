@@ -106,10 +106,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 - (instancetype)initWithFormMode:(BOOL)formMode
               useCurrentLocation:(BOOL)useCurrentLocation
-                   leadingMargin:(CGFloat)leadingMargin; {
-    
-    
-    
+                   leadingMargin:(CGFloat)leadingMargin {
     if (NO == formMode) {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {

@@ -645,7 +645,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
-- (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer; {
+- (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer {
     [self saveAnswer:answer];
     self.hasChangedAnswer = YES;
 }
