@@ -85,10 +85,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _results = [NSMutableArray new];
-    _redString = ORKLocalizedString(@"STROOP_COLOR_RED", nil);
-    _greenString = ORKLocalizedString(@"STROOP_COLOR_GREEN", nil);
-    _blueString = ORKLocalizedString(@"STROOP_COLOR_BLUE", nil);
-    _yellowString = ORKLocalizedString(@"STROOP_COLOR_YELLOW", nil);
+    _redString = ORKLocalizedString(@"STROOP_COLOR_RED", @"Stroop test color - red");
+    _greenString = ORKLocalizedString(@"STROOP_COLOR_GREEN", @"Stroop test color - green");
+    _blueString = ORKLocalizedString(@"STROOP_COLOR_BLUE", @"Stroop test color - blue");
+    _yellowString = ORKLocalizedString(@"STROOP_COLOR_YELLOW", @"Stroop test color - yellow");
     _red = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:1.0];
     _green = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
     _blue = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];

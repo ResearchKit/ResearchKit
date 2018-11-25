@@ -119,7 +119,7 @@ static NSString *const FilledBulletString = @"\u25CF";
 #pragma mark - Accessibility
 
 - (NSString *)accessibilityLabel {
-    return ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL", nil);
+    return ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL", @"Passcode text field");
 }
 
 - (NSString *)accessibilityValue {

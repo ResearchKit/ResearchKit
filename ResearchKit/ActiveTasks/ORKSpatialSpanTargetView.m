@@ -359,19 +359,20 @@ static UIBezierPath *ORKErrorBezierPath() {
     NSString *state;
     switch (self.state) {
         case ORKSpatialSpanTargetStateActive:
-            state = ORKLocalizedString(@"AX.MEMORY.TILE.ACTIVE", nil);
+            state = ORKLocalizedString(@"AX.MEMORY.TILE.ACTIVE", @"Memory tile active");
             break;
         case ORKSpatialSpanTargetStateCorrect:
-            state = ORKLocalizedString(@"AX.MEMORY.TILE.CORRECT", nil);
+            state = ORKLocalizedString(@"AX.MEMORY.TILE.CORRECT", @"Memory tile correct");
             break;
         case ORKSpatialSpanTargetStateIncorrect:
-            state = ORKLocalizedString(@"AX.MEMORY.TILE.INCORRECT", nil);
+            state = ORKLocalizedString(@"AX.MEMORY.TILE.INCORRECT", @"Memory tile incorrect");
             break;
         case ORKSpatialSpanTargetStateQuiescent:
-            state = ORKLocalizedString(@"AX.MEMORY.TILE.QUIESCENT", nil);
+            state = ORKLocalizedString(@"AX.MEMORY.TILE.QUIESCENT", @"Memory tile inactive");
             break;
     }
-    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX.MEMORY.TILE.LABEL", nil), state);
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX.MEMORY.TILE.LABEL",
+                                                                 @"Memory tile label"), state);
 }
 
 @end

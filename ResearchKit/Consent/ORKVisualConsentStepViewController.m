@@ -738,9 +738,9 @@
         if (index == [self pageCount]-1) {
             sceneViewController.continueButtonItem = self.continueButtonItem;
         } else {
-            NSString *buttonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
+            NSString *buttonTitle = ORKLocalizedString(@"BUTTON_NEXT", @"Button title, default is Next");
             if (sceneViewController.section.type == ORKConsentSectionTypeOverview) {
-                buttonTitle = ORKLocalizedString(@"BUTTON_GET_STARTED", nil);
+                buttonTitle = ORKLocalizedString(@"BUTTON_GET_STARTED", @"Button title, default is Get Started");
             }
             
             sceneViewController.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(next)];

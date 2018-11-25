@@ -1176,10 +1176,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_yes.length) {
-        _yes = ORKLocalizedString(@"BOOL_YES", nil);
+        _yes = ORKLocalizedString(@"BOOL_YES", @"Yes");
     }
     if (!_no.length) {
-        _no = ORKLocalizedString(@"BOOL_NO", nil);
+        _no = ORKLocalizedString(@"BOOL_NO", @"No");
     }
     
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
@@ -2549,7 +2549,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
         [NSRegularExpression regularExpressionWithPattern:EmailValidationRegularExpressionPattern
                                                   options:(NSRegularExpressionOptions)0
                                                     error:nil];
-        NSString *invalidMessage = ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil);
+        NSString *invalidMessage = ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", @"Invalid email address message");
         _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegularExpression:validationRegularExpression
                                                                                      invalidMessage:invalidMessage];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;

@@ -141,7 +141,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
     
     // nil reset to default fonts
     self.xAxisFont = nil;
@@ -248,7 +248,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)setNoDataText:(NSString *)noDataText {
     if (!noDataText) {
-        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
     }
     _noDataText = [noDataText copy];
     _noDataLabel.text = _noDataText;
@@ -1082,7 +1082,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
             
             // Boundary check
             if ( pointIndex < _dataPoints[plotIndex].count ) {
-                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
+                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", @"Graph and Separator"));
                 NSObject<ORKValueCollectionType> *dataPoint = _dataPoints[plotIndex][pointIndex];
                 value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
             }
@@ -1091,7 +1091,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
         if ([_dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
             element.accessibilityLabel = [self.dataSource graphChartView:self titleForXAxisAtPointIndex:pointIndex];
         } else {
-            element.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_GRAPH_POINT_%@", nil), ORKLocalizedStringFromNumber(@(pointIndex))];
+            element.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_GRAPH_POINT_%@", @"Graph Point"), ORKLocalizedStringFromNumber(@(pointIndex))];
         }
         element.accessibilityValue = value;
         [accessibilityElements addObject:element];

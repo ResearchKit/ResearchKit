@@ -435,7 +435,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         // Resign the keyboard to allow the alert to be centered on the screen.
         [self makePasscodeViewResignFirstResponder];
         
-        NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
+        NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", @"Passcode Touch ID prompt");
         ORKWeakTypeOf(self) weakSelf = self;
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
@@ -454,10 +454,11 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                     }
                 } else if (error.code != LAErrorUserCancel) {
                     // Display the error message.
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil)
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE",
+                                                                    @"Passcode Touch ID error title")
                                                                                    message:error.localizedDescription
                                                                             preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
+                    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", @"OK button title")
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
                                                                 ORKStrongTypeOf(self) secondStrongSelf = weakSelf;

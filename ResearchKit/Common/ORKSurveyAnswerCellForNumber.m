@@ -179,7 +179,7 @@
     ORKNumericAnswerFormat *numericFormat = (ORKNumericAnswerFormat *)answerFormat;
     
     _defaultNumericAnswer = numericFormat.defaultNumericAnswer;
-    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", @"Text or phone number placeholder entry placeholder");
 
     self.textField.manageUnitAndPlaceholder = YES;
     self.textField.unit = numericFormat.unit;

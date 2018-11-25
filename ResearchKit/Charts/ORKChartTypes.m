@@ -86,7 +86,7 @@
     if (self.isEmptyRange || _minimumValue == _maximumValue) {
         return @(_maximumValue).stringValue;
     } else {
-        NSString *rangeFormat = ORKLocalizedString(@"AX_GRAPH_RANGE_FORMAT_%@_%@", nil);
+        NSString *rangeFormat = ORKLocalizedString(@"AX_GRAPH_RANGE_FORMAT_%@_%@", @"Graph range format %@_%@");
         return [NSString stringWithFormat:rangeFormat, @(_minimumValue).stringValue, @(_maximumValue).stringValue];
     }
 }

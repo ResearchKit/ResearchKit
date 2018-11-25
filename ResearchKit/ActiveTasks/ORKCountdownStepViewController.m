@@ -262,7 +262,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
                                                               [[NSNotificationCenter defaultCenter] removeObserver:self name:UIAccessibilityAnnouncementDidFinishNotification object:nil];
                                                               [super countDownTimerFired:timer finished:finished];
                                                           }];
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_ANNOUNCE_BEGIN_TASK", nil));
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_ANNOUNCE_BEGIN_TASK", @"Announce beginning task for countdown"));
         } else {
             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
             [super countDownTimerFired:timer finished:finished];
