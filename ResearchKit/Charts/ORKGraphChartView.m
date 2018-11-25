@@ -829,8 +829,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 }
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
-    void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
-        CGFloat alpha = hidden ? 0.0 : 1.0;
+    void (^updateAlpha)(BOOL) = ^(BOOL isHidden) {
+        CGFloat alpha = isHidden ? 0.0 : 1.0;
         _scrubberThumbView.alpha = alpha;
         _scrubberLine.alpha = alpha;
         _scrubberLabel.alpha = alpha;
@@ -1219,9 +1219,9 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
-                    [self.plotView.layer addSublayer:pointLayer];
-                    [_pointLayers[plotIndex] addObject:pointLayer];
+                    CALayer *dataPointLayer = graphPointLayerWithColor(color, drawPointIndicator);
+                    [self.plotView.layer addSublayer:dataPointLayer];
+                    [_pointLayers[plotIndex] addObject:dataPointLayer];
                 }
                 }
             }
@@ -1285,8 +1285,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 pointLayerIndex++;
 
                 if (!yAxisValueRange.isEmptyRange) {
-                    CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
+                    CALayer *yPointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                    yPointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
                     pointLayerIndex++;
                 }
             }

@@ -434,12 +434,12 @@ NSString *const ORKTappingStepIdentifier = @"tapping";
         
     for (NSUInteger hand = 1; hand <= handCount; hand++) {
         
-        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * identifier) {
+        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * currentIdentifier) {
             if (undefinedHand) {
-                return identifier;
+                return currentIdentifier;
             } else {
                 NSString *handIdentifier = rightHand ? ORKActiveTaskRightHandIdentifier : ORKActiveTaskLeftHandIdentifier;
-                return [NSString stringWithFormat:@"%@.%@", identifier, handIdentifier];
+                return [NSString stringWithFormat:@"%@.%@", currentIdentifier, handIdentifier];
             }
         };
         
@@ -1347,8 +1347,8 @@ NSString *const ORKSpeechRecognitionStepIdentifier = @"speech.recognition";
     }
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        ORKStepArrayAddStep(steps, step);
+        ORKInstructionStep *finalStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, finalStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -1823,8 +1823,8 @@ NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
     ORKStepArrayAddStep(steps, step);
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        ORKStepArrayAddStep(steps, step);
+        ORKInstructionStep *finalStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, finalStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];

@@ -311,7 +311,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
         [completionOperation addExecutionBlock:^{
             
             typeof(self) strongSelf = weakSelf;
-            [strongSelf onWorkQueueSync:^BOOL(ORKDataCollectionManager *manager) {
+            [strongSelf onWorkQueueSync:^BOOL(ORKDataCollectionManager *collectionManager) {
                 if (_delegate && [_delegate respondsToSelector:@selector(dataCollectionManagerDidCompleteCollection:)]) {
                     [_delegate dataCollectionManagerDidCompleteCollection:self];
                 }
