@@ -77,12 +77,12 @@
 const double ORKSineWaveToneGeneratorAmplitudeDefault = 0.03f;
 const double ORKSineWaveToneGeneratorSampleRateDefault = 44100.0f;
 
-OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
-                                     AudioUnitRenderActionFlags *ioActionFlags,
-                                     const AudioTimeStamp 		*inTimeStamp,
-                                     UInt32 					inBusNumber,
-                                     UInt32 					inNumberFrames,
-                                     AudioBufferList 			*ioData) {
+static OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
+                                            AudioUnitRenderActionFlags *ioActionFlags,
+                                            const AudioTimeStamp 		*inTimeStamp,
+                                            UInt32 					inBusNumber,
+                                            UInt32 					inNumberFrames,
+                                            AudioBufferList 			*ioData) {
     // Fixed amplitude is good enough for our purposes
     const double amplitude = ORKSineWaveToneGeneratorAmplitudeDefault;
 

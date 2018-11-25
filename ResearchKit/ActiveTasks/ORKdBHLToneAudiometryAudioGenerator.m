@@ -84,13 +84,12 @@
 
 const double ORKdBHLSineWaveToneGeneratorSampleRateDefault = 44100.0f;
 
-OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
-                                     AudioUnitRenderActionFlags *ioActionFlags,
-                                     const AudioTimeStamp         *inTimeStamp,
-                                     UInt32                     inBusNumber,
-                                     UInt32                     inNumberFrames,
-                                     AudioBufferList             *ioData) {
-    
+static OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
+                                                AudioUnitRenderActionFlags *ioActionFlags,
+                                                const AudioTimeStamp         *inTimeStamp,
+                                                UInt32                     inBusNumber,
+                                                UInt32                     inNumberFrames,
+                                                AudioBufferList             *ioData) {
     // Get the tone parameters out of the view controller
     ORKdBHLToneAudiometryAudioGenerator *audioGenerator = (__bridge ORKdBHLToneAudiometryAudioGenerator *)inRefCon;
     double amplitude;
@@ -143,13 +142,12 @@ OSStatus ORKdBHLAudioGeneratorRenderTone(void *inRefCon,
     return noErr;
 }
 
-OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
-                                         AudioUnitRenderActionFlags *ioActionFlags,
-                                         const AudioTimeStamp         *inTimeStamp,
-                                         UInt32                     inBusNumber,
-                                         UInt32                     inNumberFrames,
-                                         AudioBufferList             *ioData) {
-    
+static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
+                                             AudioUnitRenderActionFlags *ioActionFlags,
+                                             const AudioTimeStamp         *inTimeStamp,
+                                             UInt32                     inBusNumber,
+                                             UInt32                     inNumberFrames,
+                                             AudioBufferList             *ioData) {
     // Get the tone parameters out of the view controller
     ORKdBHLToneAudiometryAudioGenerator *audioGenerator = (__bridge ORKdBHLToneAudiometryAudioGenerator *)inRefCon;
  

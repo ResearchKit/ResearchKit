@@ -35,6 +35,8 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ORKConsentSection_Private.h"
+
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
     NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type + 1];
@@ -58,7 +60,7 @@ NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
     return url;
 }
 
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
+static UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
     NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
     return [UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil];
 }

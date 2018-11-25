@@ -198,7 +198,9 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenType_COUNT
 };
 
+ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen);
 ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow * _Nullable window);
+ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow * _Nullable window);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow * _Nullable window);
 
 CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
