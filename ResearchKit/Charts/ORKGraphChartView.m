@@ -715,7 +715,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     return _numberOfXAxisPoints;
 }
 
-#pragma Mark - Scrubbing
+#pragma mark - Scrubbing
 
 - (NSInteger)scrubbingPlotIndex {
     NSInteger plotIndex = 0;
@@ -922,7 +922,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     return canvasYPosition;
 }
 
-#pragma Mark - Animation
+#pragma mark - Animation
 
 - (void)animateWithDuration:(NSTimeInterval)duration {
     if (duration < 0) {
