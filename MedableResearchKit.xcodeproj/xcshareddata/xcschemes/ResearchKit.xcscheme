@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B183A4731A8535D100C76870"
                BuildableName = "ResearchKit.framework"
                BlueprintName = "ResearchKit"
-               ReferencedContainer = "container:ResearchKit.xcodeproj">
+               ReferencedContainer = "container:MedableResearchKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
@@ -35,7 +36,7 @@
                BlueprintIdentifier = "86CC8E991AC09332001CCD89"
                BuildableName = "ResearchKitTests.xctest"
                BlueprintName = "ResearchKitTests"
-               ReferencedContainer = "container:ResearchKit.xcodeproj">
+               ReferencedContainer = "container:MedableResearchKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +46,7 @@
             BlueprintIdentifier = "B183A4731A8535D100C76870"
             BuildableName = "ResearchKit.framework"
             BlueprintName = "ResearchKit"
-            ReferencedContainer = "container:ResearchKit.xcodeproj">
+            ReferencedContainer = "container:MedableResearchKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,6 +56,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -67,7 +69,7 @@
             BlueprintIdentifier = "B183A4731A8535D100C76870"
             BuildableName = "ResearchKit.framework"
             BlueprintName = "ResearchKit"
-            ReferencedContainer = "container:ResearchKit.xcodeproj">
+            ReferencedContainer = "container:MedableResearchKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,7 +87,7 @@
             BlueprintIdentifier = "B183A4731A8535D100C76870"
             BuildableName = "ResearchKit.framework"
             BlueprintName = "ResearchKit"
-            ReferencedContainer = "container:ResearchKit.xcodeproj">
+            ReferencedContainer = "container:MedableResearchKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
