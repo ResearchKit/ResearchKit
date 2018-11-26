@@ -944,7 +944,7 @@
             }
             
             if (class) {
-                if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
+                if (class && [class isSubclassOfClass:[ORKChoiceViewCell class]]) {
                     NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                 } else {
                     ORKFormItemCell *formCell = nil;
@@ -962,6 +962,8 @@
                     formCell.isFirstItemInSectionWithoutTitle = isFirstItemWithSectionWithoutTitle;
                     cell = formCell;
                 }
+            } else {
+                NSAssert(NO, @"SHOULD NOT FALL IN HERE");
             }
         }
     }

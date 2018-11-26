@@ -213,6 +213,10 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             _impliedAnswerFormat = boolAnswerFormat.impliedAnswerFormat;
         }
     }
+    
+    if (!_impliedAnswerFormat)
+        _impliedAnswerFormat = [ORKAnswerFormat textAnswerFormat];
+    
     return _impliedAnswerFormat;
 }
 

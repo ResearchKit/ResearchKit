@@ -1084,7 +1084,9 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
             if ( pointIndex < _dataPoints[plotIndex].count ) {
                 NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", @"Graph and Separator"));
                 NSObject<ORKValueCollectionType> *dataPoint = _dataPoints[plotIndex][pointIndex];
-                value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
+                NSString *valueString = (value.length ? value : ORKLocalizedString(@"AX_MISSING_VALUE", @"Missing Graph Value"));
+                NSString *andString = (and.length ? and : ORKLocalizedString(@"AX_MISSING_SEPARATOR", @"No Separator"));
+                value = ORKAccessibilityStringForVariables(valueString, andString, dataPoint.accessibilityLabel);
             }
         }
         

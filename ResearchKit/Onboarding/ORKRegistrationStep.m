@@ -45,7 +45,7 @@ NSString *const ORKRegistrationFormItemIdentifierGender = @"ORKRegistrationFormI
 NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItemDOB";
 NSString *const ORKRegistrationFormItemIdentifierPhoneNumber = @"ORKRegistrationFormItemPhoneNumber";
 
-static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier) {
+static _Nullable id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier) {
     return findInArrayByKey(array, @"identifier", formItemIdentifier);
 }
 

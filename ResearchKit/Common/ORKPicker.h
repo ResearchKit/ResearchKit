@@ -62,9 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKPicker : NSObject
 
-+ (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer delegate:(id<ORKPickerDelegate>) delegate;
++ (nullable id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer delegate:(id<ORKPickerDelegate>) delegate;
 
-id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, _Nullable id answer, id<ORKPickerDelegate> delegate);
+_Nullable id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, _Nullable id answer, id<ORKPickerDelegate> delegate);
 
 @end
 
