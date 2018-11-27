@@ -43,6 +43,7 @@ CGSize const defaultTargetSize = {76, 76};
 @property (nonatomic, assign) NSUInteger targetRow;
 @property (nonatomic, assign) CGSize targetSize;
 
+@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UIView *targetView;
 @property (nonatomic, copy) NSArray *targetConstraints;
 
@@ -59,11 +60,26 @@ CGSize const defaultTargetSize = {76, 76};
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
-        self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.progressView.progressTintColor = self.tintColor;
+        self.progressView.isAccessibilityElement = YES;
+        [self.progressView setAlpha:0.0];
+        [self.progressView setProgress:0.0 animated:NO];
+        
         self.targetView.backgroundColor = self.tintColor;
+
+        self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
+
+        [self addSubview:self.progressView];
         [self addSubview:self.targetView];
         
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.layoutMarginsGuide.topAnchor];
+        NSArray *progressConstraints = @[[self.progressView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor],
+                                         [self.progressView.leftAnchor constraintEqualToAnchor:self.readableContentGuide.leftAnchor],
+                                         [self.progressView.rightAnchor constraintEqualToAnchor:self.readableContentGuide.rightAnchor]];
+        
+        [NSLayoutConstraint activateConstraints:progressConstraints];
+        
+        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.progressView.bottomAnchor];
         NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.layoutMarginsGuide.bottomAnchor];
         
         topConstraint.priority = UILayoutPriorityFittingSizeLevel;
@@ -95,6 +111,13 @@ CGSize const defaultTargetSize = {76, 76};
     if (self.superview != nil) {
         [self reloadData];
     }
+}
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
+    [self.progressView setProgress:progress animated:animated];
+    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+        [self.progressView setAlpha:(progress == 0) ? 0 : 1];
+    }];
 }
 
 - (void)reloadData {
@@ -151,6 +174,13 @@ CGSize const defaultTargetSize = {76, 76};
         _targetView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _targetView;
+}
+
+- (UIProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    }
+    return _progressView;
 }
 
 @end

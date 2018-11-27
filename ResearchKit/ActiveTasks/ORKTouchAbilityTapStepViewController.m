@@ -50,10 +50,11 @@
 
 @interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *samples;
+@property (nonatomic, strong) NSMutableArray<NSValue *> *samplePoints;
 @property (nonatomic, strong) ORKTouchAbilityTapContentView *touchAbilityTapContentView;
 @property (nonatomic, assign) NSUInteger successes;
 @property (nonatomic, assign) NSUInteger failures;
+@property (nonatomic, strong) NSMutableArray *samples;
 
 @end
 
@@ -82,6 +83,7 @@
     [super viewDidLoad];
     
     self.samples = [NSMutableArray new];
+    self.samplePoints = [self makeSamplePoints];
     
     self.touchAbilityTapContentView = [[ORKTouchAbilityTapContentView alloc] init];
     self.touchAbilityTapContentView.dataSource = self;
@@ -90,6 +92,8 @@
     self.activeStepView.activeCustomView = self.touchAbilityTapContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
+    
+    [self.activeStepView updateTitle:nil text:@"FOOOOOOOOOO barrrrrrr"];
     
 }
 
@@ -115,6 +119,29 @@
     return sResult;
 }
 
+
+- (NSMutableArray<NSValue *> *)makeSamplePoints {
+    
+    NSUInteger columns = [self numberOfColumnsForTraitCollection:self.traitCollection];
+    NSUInteger rows = [self numberOfRowsForTraitCollection:self.traitCollection];
+    
+    NSMutableArray *points = [NSMutableArray new];
+    for (NSUInteger i = 0; i < columns; i++) {
+        for (NSUInteger j = 0; j < rows; j++) {
+            CGPoint point = CGPointMake(i, j);
+            [points addObject:[NSValue valueWithCGPoint:point]];
+        }
+    }
+    
+    NSUInteger count = [points count];
+    for (NSUInteger i = 0; i < count; i++) {
+        NSUInteger nElements = count - i;
+        NSUInteger n = (arc4random() % nElements) + i;
+        [points exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+    
+    return [points mutableCopy];
+}
 
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
     
@@ -147,34 +174,54 @@
 }
 
 - (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView {
-    return arc4random_uniform((unsigned int)[self numberOfColumns:tapContentView]);
+    return [self.samplePoints.lastObject CGPointValue].x;
+//    return arc4random_uniform((unsigned int)[self numberOfColumns:tapContentView]);
 }
 
 - (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView {
-    return arc4random_uniform((unsigned int)[self numberOfRows:tapContentView]);
+    return [self.samplePoints.lastObject CGPointValue].y;
+//    return arc4random_uniform((unsigned int)[self numberOfRows:tapContentView]);
 }
 
 
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
+- (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
+    if (!self.isStarted) {
+        [self start];
+    }
+}
+
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
     
-    if ([customView isMemberOfClass:[ORKTouchAbilityTapContentView class]]) {
-        
-        ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
-        CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
-        
-        NSLog(@"%@", [NSValue valueWithCGRect:frame]);
-        
-        ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
-        trial.tracks = tapContentView.tracks;
-        trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
-        
-        [self.samples addObject:trial];
-    }
+
+    ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
+    CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
     
-    [self.touchAbilityTapContentView reloadData];
-    [self.touchAbilityTapContentView startTracking];
+    NSLog(@"%@", [NSValue valueWithCGRect:frame]);
+    
+    ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
+    trial.tracks = tapContentView.tracks;
+    trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
+    
+    [self.samples addObject:trial];
+    
+    [self.samplePoints removeLastObject];
+    
+    NSUInteger total = [self numberOfColumnsForTraitCollection:self.traitCollection] * [self numberOfRowsForTraitCollection:self.traitCollection];
+    NSUInteger done = total - self.samplePoints.count;
+    CGFloat progress = (CGFloat)done/(CGFloat)total;
+    
+    [self.touchAbilityTapContentView setProgress:progress animated:YES];
+    
+    if (self.samplePoints.count > 0) {
+        [self.touchAbilityTapContentView stopTracking];
+        [self.touchAbilityTapContentView reloadData];
+        [self.touchAbilityTapContentView startTracking];
+    } else {
+        [self.touchAbilityTapContentView stopTracking];
+        [self finish];
+    }
 }
 
 @end

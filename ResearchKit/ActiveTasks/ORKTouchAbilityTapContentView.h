@@ -62,8 +62,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
 
 @property (nonatomic, readonly) UIView *targetView;
-@property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> dataSource;
+@property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> _Nullable dataSource;
 
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void)reloadData;
 
 @end
