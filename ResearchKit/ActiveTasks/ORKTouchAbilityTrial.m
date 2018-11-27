@@ -30,28 +30,12 @@
 
 
 #import "ORKTouchAbilityTrial.h"
-#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
 #import "ORKHelpers_Internal.h"
 
 #pragma mark - ORKTouchAbilityTrial
-
-@interface ORKTouchAbilityTrial ()
-
-@property (nonatomic, assign) NSTimeInterval startTime;
-@property (nonatomic, assign) NSTimeInterval endTime;
-@property (nonatomic, assign) BOOL success;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *mutableTracks;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *mutableTapEvents;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityLongPressGestureRecoginzerEvent *> *mutableLongPressEvents;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilitySwipeGestureRecoginzerEvent *> *mutableSwipeEvents;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityPanGestureRecoginzerEvent *> *mutablePanEvents;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityPinchGestureRecoginzerEvent *> *mutablePinchEvents;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityRotationGestureRecoginzerEvent *> *mutableRotationEvents;
-
-@end
 
 @implementation ORKTouchAbilityTrial
 
@@ -63,13 +47,8 @@
     ORK_ENCODE_DOUBLE(aCoder, startTime);
     ORK_ENCODE_DOUBLE(aCoder, endTime);
     ORK_ENCODE_BOOL(aCoder, success);
-    ORK_ENCODE_OBJ(aCoder, mutableTracks);
-    ORK_ENCODE_OBJ(aCoder, mutableTapEvents);
-    ORK_ENCODE_OBJ(aCoder, mutableLongPressEvents);
-    ORK_ENCODE_OBJ(aCoder, mutableSwipeEvents);
-    ORK_ENCODE_OBJ(aCoder, mutablePanEvents);
-    ORK_ENCODE_OBJ(aCoder, mutablePinchEvents);
-    ORK_ENCODE_OBJ(aCoder, mutableRotationEvents);
+    ORK_ENCODE_OBJ(aCoder, tracks);
+    ORK_ENCODE_OBJ(aCoder, gestureRecognizerEvents);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -78,13 +57,8 @@
         ORK_DECODE_DOUBLE(aDecoder, startTime);
         ORK_DECODE_DOUBLE(aDecoder, endTime);
         ORK_DECODE_BOOL(aDecoder, success);
-        ORK_DECODE_OBJ(aDecoder, mutableTracks);
-        ORK_DECODE_OBJ(aDecoder, mutableTapEvents);
-        ORK_DECODE_OBJ(aDecoder, mutableLongPressEvents);
-        ORK_DECODE_OBJ(aDecoder, mutableSwipeEvents);
-        ORK_DECODE_OBJ(aDecoder, mutablePanEvents);
-        ORK_DECODE_OBJ(aDecoder, mutablePinchEvents);
-        ORK_DECODE_OBJ(aDecoder, mutableRotationEvents);
+        ORK_DECODE_OBJ(aDecoder, tracks);
+        ORK_DECODE_OBJ(aDecoder, gestureRecognizerEvents);
     }
     return self;
 }
@@ -94,13 +68,8 @@
     trial.startTime = self.startTime;
     trial.endTime = self.endTime;
     trial.success = self.success;
-    trial.mutableTracks = [self.mutableTracks mutableCopy];
-    trial.mutableTapEvents = [self.mutableTapEvents mutableCopy];
-    trial.mutableLongPressEvents = [self.mutableLongPressEvents mutableCopy];
-    trial.mutableSwipeEvents = [self.mutableSwipeEvents mutableCopy];
-    trial.mutablePanEvents = [self.mutablePanEvents mutableCopy];
-    trial.mutablePinchEvents = [self.mutablePinchEvents mutableCopy];
-    trial.mutableRotationEvents = [self.mutableRotationEvents mutableCopy];
+    trial.tracks = [self.tracks mutableCopy];
+    trial.gestureRecognizerEvents = [self.gestureRecognizerEvents mutableCopy];
     return trial;
 }
 
@@ -115,13 +84,8 @@
     return ((self.startTime == castObject.startTime) &&
             (self.endTime == castObject.endTime) &&
             (self.success == castObject.success) &&
-            [self.mutableTracks isEqual:castObject.mutableTracks] &&
-            [self.mutableTapEvents isEqual:castObject.mutableTapEvents] &&
-            [self.mutableLongPressEvents isEqual:castObject.mutableLongPressEvents] &&
-            [self.mutableSwipeEvents isEqual:castObject.mutableSwipeEvents] &&
-            [self.mutablePanEvents isEqual:castObject.mutablePanEvents] &&
-            [self.mutablePinchEvents isEqual:castObject.mutablePinchEvents] &&
-            [self.mutableRotationEvents isEqual:castObject.mutableRotationEvents]);
+            ORKEqualObjects(self.tracks, castObject.tracks) &&
+            ORKEqualObjects(self.gestureRecognizerEvents, castObject.gestureRecognizerEvents));
 }
 
 - (instancetype)init {
@@ -130,83 +94,98 @@
         self.startTime = [NSDate distantPast].timeIntervalSince1970;
         self.endTime = [NSDate distantFuture].timeIntervalSince1970;
         self.success = NO;
-        self.mutableTracks = [NSMutableArray new];
-        self.mutableTapEvents = [NSMutableArray new];
-        self.mutableLongPressEvents = [NSMutableArray new];
-        self.mutableSwipeEvents = [NSMutableArray new];
-        self.mutablePanEvents = [NSMutableArray new];
-        self.mutablePinchEvents = [NSMutableArray new];
-        self.mutableRotationEvents = [NSMutableArray new];
     }
     return self;
 }
 
-- (NSArray<ORKTouchAbilityTrack *> *)tracks {
-    return [self.mutableTracks copy];
+- (NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
+    if (!_tracks) {
+        _tracks = [NSMutableArray new];
+    }
+    return _tracks;
 }
 
 - (NSArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *)tapEvents {
-    return [self.mutableTapEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilityTapGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilityLongPressGestureRecoginzerEvent *> *)longPressEvents {
-    return [self.mutableLongPressEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilityLongPressGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilitySwipeGestureRecoginzerEvent *> *)swipeEvents {
-    return [self.mutableSwipeEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilitySwipeGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilityPanGestureRecoginzerEvent *> *)panEvents {
-    return [self.mutablePanEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilitySwipeGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilityPinchGestureRecoginzerEvent *> *)pinchEvents {
-    return [self.mutablePinchEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilityPinchGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilityRotationGestureRecoginzerEvent *> *)rotationEvents {
-    return [self.mutableRotationEvents copy];
+    NSMutableArray *result = [NSMutableArray new];
+    
+    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[ORKTouchAbilityRotationGestureRecoginzerEvent class]]) {
+            [result addObject:obj];
+        }
+    }];
+    
+    return [result copy];
 }
 
 - (NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecoginzerEvents {
-    
-    NSMutableArray *events = [[NSMutableArray alloc] init];
-    
-    [events addObjectsFromArray:self.mutableTapEvents];
-    [events addObjectsFromArray:self.mutableLongPressEvents];
-    [events addObjectsFromArray:self.mutableSwipeEvents];
-    [events addObjectsFromArray:self.mutablePanEvents];
-    [events addObjectsFromArray:self.mutablePinchEvents];
-    [events addObjectsFromArray:self.mutableRotationEvents];
-    
-    return [events copy];
+    if (!_gestureRecognizerEvents) {
+        _gestureRecognizerEvents = [NSMutableArray new];
+    }
+    return _gestureRecognizerEvents;
 }
 
-- (void)addTrack:(ORKTouchAbilityTrack *)track {
-    [self.mutableTracks addObject:track];
-}
-
-- (void)addGestureEvent:(ORKTouchAbilityGestureRecoginzerEvent *)gestureEvent {
-    
-    if ([gestureEvent isMemberOfClass:[ORKTouchAbilityTapGestureRecoginzerEvent class]]) {
-        [self.mutableTapEvents addObject:(ORKTouchAbilityTapGestureRecoginzerEvent *)gestureEvent];
-    }
-    else if ([gestureEvent isMemberOfClass:[ORKTouchAbilityLongPressGestureRecoginzerEvent class]]) {
-        [self.mutableLongPressEvents addObject:(ORKTouchAbilityLongPressGestureRecoginzerEvent *)gestureEvent];
-    }
-    else if ([gestureEvent isMemberOfClass:[ORKTouchAbilitySwipeGestureRecoginzerEvent class]]) {
-        [self.mutableSwipeEvents addObject:(ORKTouchAbilitySwipeGestureRecoginzerEvent *)gestureEvent];
-    }
-    else if ([gestureEvent isMemberOfClass:[ORKTouchAbilityPanGestureRecoginzerEvent class]]) {
-        [self.mutablePanEvents addObject:(ORKTouchAbilityPanGestureRecoginzerEvent *)gestureEvent];
-    }
-    else if ([gestureEvent isMemberOfClass:[ORKTouchAbilityPinchGestureRecoginzerEvent class]]) {
-        [self.mutablePinchEvents addObject:(ORKTouchAbilityPinchGestureRecoginzerEvent *)gestureEvent];
-    }
-    else if ([gestureEvent isMemberOfClass:[ORKTouchAbilityRotationGestureRecoginzerEvent class]]) {
-        [self.mutableRotationEvents addObject:(ORKTouchAbilityRotationGestureRecoginzerEvent *)gestureEvent];
-    }
+- (void)setGestureRecoginzerEvents:(NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecoginzerEvents {
+    _gestureRecognizerEvents = [gestureRecoginzerEvents mutableCopy];
 }
 
 @end
@@ -243,13 +222,11 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
+    return (isParentSame &&
             CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow));
 }
 

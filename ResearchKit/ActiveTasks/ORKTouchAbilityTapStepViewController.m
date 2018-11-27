@@ -35,6 +35,7 @@
 #import "ORKTouchAbilityTapContentView.h"
 #import "ORKTouchAbilityTapResult.h"
 #import "ORKTouchAbilityTrial.h"
+#import "ORKTouchAbilityTouchTracker.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -53,16 +54,6 @@
 @property (nonatomic, strong) ORKTouchAbilityTapContentView *touchAbilityTapContentView;
 @property (nonatomic, assign) NSUInteger successes;
 @property (nonatomic, assign) NSUInteger failures;
-
-
-@property (nonatomic, assign) NSUInteger numberOfColumns;
-@property (nonatomic, assign) NSUInteger numberOfRows;
-@property (nonatomic, assign) NSUInteger targetColumn;
-@property (nonatomic, assign) NSUInteger targetRow;
-@property (nonatomic, assign) CGSize targetSize;
-
-@property (nonatomic, strong) UIView *targetView;
-@property (nonatomic, copy) NSArray *targetConstraints;
 
 @end
 
@@ -90,11 +81,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.numberOfColumns = 5;
-    self.numberOfRows = 5;
-    self.targetColumn = 1;
-    self.targetRow = 0;
-    self.targetSize = CGSizeMake(76, 76);
+    self.samples = [NSMutableArray new];
     
     self.touchAbilityTapContentView = [[ORKTouchAbilityTapContentView alloc] init];
     self.touchAbilityTapContentView.dataSource = self;
@@ -120,7 +107,7 @@
     
     ORKTouchAbilityTapResult *tapResult = [[ORKTouchAbilityTapResult alloc] initWithIdentifier:self.step.identifier];
     
-    tapResult.trials = [NSMutableArray new];
+    tapResult.trials = [self.samples mutableCopy];
     
     [results addObject:tapResult];
     sResult.results = [results copy];
@@ -128,36 +115,64 @@
     return sResult;
 }
 
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+
+- (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
+    
+    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        return 5;
+    } else {
+        return 3;
     }
-    return _targetView;
 }
 
+- (NSUInteger)numberOfRowsForTraitCollection:(UITraitCollection *)traitCollection {
+    
+    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+        return 5;
+    } else {
+        return 3;
+    }
+}
 
 #pragma mark - ORKTouchAbilityTapContentViewDataSource
 
 - (NSUInteger)numberOfColumns:(ORKTouchAbilityTapContentView *)tapContentView {
-    return 5;
+    return [self numberOfColumnsForTraitCollection:self.traitCollection];
 }
 
 - (NSUInteger)numberOfRows:(ORKTouchAbilityTapContentView *)tapContentView {
-    return 5;
+    return [self numberOfRowsForTraitCollection:self.traitCollection];
 }
 
 - (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView {
-    return 0; //arc4random_uniform(5);
+    return arc4random_uniform((unsigned int)[self numberOfColumns:tapContentView]);
 }
 
 - (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView {
-    return 0; //arc4random_uniform(5);
+    return arc4random_uniform((unsigned int)[self numberOfRows:tapContentView]);
 }
 
 
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+    
+    if ([customView isMemberOfClass:[ORKTouchAbilityTapContentView class]]) {
+        
+        ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
+        CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
+        
+        NSLog(@"%@", [NSValue valueWithCGRect:frame]);
+        
+        ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
+        trial.tracks = tapContentView.tracks;
+        trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
+        
+        [self.samples addObject:trial];
+    }
+    
     [self.touchAbilityTapContentView reloadData];
     [self.touchAbilityTapContentView startTracking];
 }

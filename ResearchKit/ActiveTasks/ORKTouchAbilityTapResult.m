@@ -30,9 +30,45 @@
 
 #import "ORKTouchAbilityTapResult.h"
 
+#import "ORKResult_Private.h"
+#import "ORKHelpers_Internal.h"
 #import "ORKTouchAbilityTrial.h"
 
 @implementation ORKTouchAbilityTapResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, trials);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        ORK_DECODE_OBJ(aDecoder, trials);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
+}
+
+- (NSUInteger)hash {
+    return super.hash ^ self.trials.hash;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityTapResult *result = [super copyWithZone:zone];
+    result.trials = [self.trials copy];
+    return result;
+}
 
 - (NSMutableArray<ORKTouchAbilityTapTrial *> *)trials {
     if (!_trials) {

@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKTouchAbilityTouchTracker : UIGestureRecognizer
 
 @property (nonatomic, readonly) NSTimeInterval systemUpTime;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
+@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *tracks;
 @property (nonatomic, readonly, getter=isTracking) BOOL tracking;
 @property (nonatomic, weak) id<ORKTouchAbilityTouchTrackerDelegate> _Nullable delegate;
 

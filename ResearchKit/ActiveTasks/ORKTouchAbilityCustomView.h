@@ -37,16 +37,22 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTouchAbilityCustomView;
 @protocol ORKTouchAbilityCustomViewDelegate <NSObject>
 
-@required
+@optional
 - (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView;
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView;
 
 @end
 
 
+@class ORKTouchAbilityTouchTracker;
+@class ORKTouchAbilityTrack;
+@class ORKTouchAbilityGestureRecoginzerEvent;
 @interface ORKTouchAbilityCustomView : ORKActiveStepCustomView
 
-@property (nonatomic, weak) id<ORKTouchAbilityCustomViewDelegate> delegate;
+@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *tracks;
+@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
+
+@property (nonatomic, weak) id<ORKTouchAbilityCustomViewDelegate> _Nullable delegate;
 
 - (void)startTracking;
 - (void)stopTracking;

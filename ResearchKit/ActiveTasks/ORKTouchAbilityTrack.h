@@ -38,35 +38,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTrack: NSObject <NSCopying, NSSecureCoding>
-@property(nonatomic, readonly) NSArray<ORKTouchAbilityTouch *> *touches;
+@property(nonatomic, copy) NSMutableArray<ORKTouchAbilityTouch *> *touches;
 @end
 
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTouch: NSObject <NSCopying, NSSecureCoding>
 
-@property(nonatomic, readonly) NSTimeInterval timestamp;
-@property(nonatomic, readonly) UITouchPhase phase;
-@property(nonatomic, readonly) NSUInteger tapCount;
-@property(nonatomic, readonly) UITouchType type;
+@property(nonatomic, assign) NSTimeInterval timestamp;
+@property(nonatomic, assign) UITouchPhase phase;
+@property(nonatomic, assign) NSUInteger tapCount;
+@property(nonatomic, assign) UITouchType type;
 
-@property(nonatomic, readonly) CGFloat majorRadius;
-@property(nonatomic, readonly) CGFloat majorRadiusTolerance;
+@property(nonatomic, assign) CGFloat majorRadius;
+@property(nonatomic, assign) CGFloat majorRadiusTolerance;
 
-@property(nonatomic, readonly) CGPoint locationInWindow;
-@property(nonatomic, readonly) CGPoint previousLocationInWindow;
-@property(nonatomic, readonly) CGPoint preciseLocationInWindow;
-@property(nonatomic, readonly) CGPoint precisePreviousLocationInWindow;
+@property(nonatomic, assign) CGPoint locationInWindow;
+@property(nonatomic, assign) CGPoint previousLocationInWindow;
+@property(nonatomic, assign) CGPoint preciseLocationInWindow;
+@property(nonatomic, assign) CGPoint precisePreviousLocationInWindow;
 
-@property(nonatomic, readonly) CGFloat force;
-@property(nonatomic, readonly) CGFloat maximumPossibleForce;
+@property(nonatomic, assign) CGFloat force;
+@property(nonatomic, assign) CGFloat maximumPossibleForce;
 
-@property(nonatomic, readonly) CGFloat azimuthAngleInWindow;
-@property(nonatomic, readonly) CGVector azimuthUnitVectorInWindow;
-@property(nonatomic, readonly) CGFloat altitudeAngle;
+@property(nonatomic, assign) CGFloat azimuthAngleInWindow;
+@property(nonatomic, assign) CGVector azimuthUnitVectorInWindow;
+@property(nonatomic, assign) CGFloat altitudeAngle;
 
-@property(nonatomic, readonly) NSNumber * _Nullable estimationUpdateIndex;
-@property(nonatomic, readonly) UITouchProperties estimatedProperties;
-@property(nonatomic, readonly) UITouchProperties estimatedPropertiesExpectingUpdates;
+@property(nonatomic, copy) NSNumber * _Nullable estimationUpdateIndex;
+@property(nonatomic, assign) UITouchProperties estimatedProperties;
+@property(nonatomic, assign) UITouchProperties estimatedPropertiesExpectingUpdates;
 
 - (instancetype)initWithTouch:(UITouch *)touch;
 @end

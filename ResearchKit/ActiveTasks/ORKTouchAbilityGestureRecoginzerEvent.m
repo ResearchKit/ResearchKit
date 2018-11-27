@@ -175,15 +175,13 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.numberOfTapsRequired == castObject.numberOfTapsRequired) &&
-            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired));
+    return (isParentSame &&
+            self.numberOfTapsRequired == castObject.numberOfTapsRequired &&
+            self.numberOfTouchesRequired == castObject.numberOfTouchesRequired);
 }
 
 - (instancetype)initWithTapGestureRecognizer:(UITapGestureRecognizer *)recognizer {
@@ -241,17 +239,15 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.numberOfTapsRequired == castObject.numberOfTapsRequired) &&
-            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired) &&
-            (self.minimumPressDuration == castObject.minimumPressDuration) &&
-            (self.allowableMovement == castObject.allowableMovement));
+    return (isParentSame &&
+            self.numberOfTapsRequired == castObject.numberOfTapsRequired &&
+            self.numberOfTouchesRequired == castObject.numberOfTouchesRequired &&
+            self.minimumPressDuration == castObject.minimumPressDuration &&
+            self.allowableMovement == castObject.allowableMovement);
 }
 
 
@@ -307,16 +303,14 @@
 }
 
 - (BOOL)isEqual:(id)object {
-    
-    if ([self class] != [object class]) {
-        return NO;
-    }
+
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.minimumNumberOfTouches == castObject.minimumNumberOfTouches) &&
-            (self.maximumNumberOfTouches == castObject.maximumNumberOfTouches) &&
+    return (isParentSame &&
+            self.minimumNumberOfTouches == castObject.minimumNumberOfTouches &&
+            self.maximumNumberOfTouches == castObject.maximumNumberOfTouches &&
             CGPointEqualToPoint(self.velocityInWindow, castObject.velocityInWindow));
 }
 
@@ -368,15 +362,13 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.numberOfTouchesRequired == castObject.numberOfTouchesRequired) &&
-            (self.direction == castObject.direction));
+    return (isParentSame &&
+            self.numberOfTouchesRequired == castObject.numberOfTouchesRequired &&
+            self.direction == castObject.direction);
 }
 
 - (instancetype)initWithSwipeGestureRecognizer:(UISwipeGestureRecognizer *)recognizer {
@@ -426,15 +418,13 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.scale == castObject.scale) &&
-            (self.velocity == castObject.velocity));
+    return (isParentSame &&
+            self.scale == castObject.scale &&
+            self.velocity == castObject.velocity);
 }
 
 - (instancetype)initWithPinchGestureRecognizer:(UIPinchGestureRecognizer *)recognizer {
@@ -484,15 +474,13 @@
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ([super isEqual:castObject] &&
-            (self.rotation == castObject.rotation) &&
-            (self.velocity == castObject.velocity));
+    return (isParentSame &&
+            self.rotation == castObject.rotation &&
+            self.velocity == castObject.velocity);
 }
 
 - (instancetype)initWithRotationGestureRecognizer:(UIRotationGestureRecognizer *)recognizer {

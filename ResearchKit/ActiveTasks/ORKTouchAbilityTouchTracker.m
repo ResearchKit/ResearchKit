@@ -30,16 +30,12 @@
 
 
 #import "ORKTouchAbilityTouchTracker.h"
-
 #import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
 
 @interface ORKTouchAbilityTouchTracker ()
 
 @property (nonatomic, assign) NSTimeInterval systemUpTime;
 @property (nonatomic, assign, getter=isTracking) BOOL tracking;
-
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *mutableTracks;
 
 @end
 
@@ -50,16 +46,16 @@
 
 @dynamic delegate;
 
-- (NSMutableArray<ORKTouchAbilityTrack *> *)mutableTracks {
-    if (!_mutableTracks) {
-        _mutableTracks = [NSMutableArray new];
+- (NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
+    if (!_tracks) {
+        _tracks = [NSMutableArray new];
     }
-    return _mutableTracks;
+    return _tracks;
 }
 
-- (NSArray<ORKTouchAbilityTrack *> *)tracks {
-    return [self.mutableTracks copy];
-}
+//- (NSArray<ORKTouchAbilityTrack *> *)tracks {
+//    return [self.mutableTracks copy];
+//}
 
 #pragma mark - Life Cycle
 
@@ -97,7 +93,7 @@
 }
 
 - (void)resetTracks {
-    [self.mutableTracks removeAllObjects];
+    [self.tracks removeAllObjects];
 }
 
 
@@ -117,9 +113,9 @@
     for (UITouch *touch in touches) {
         
         ORKTouchAbilityTrack *track = [[ORKTouchAbilityTrack alloc] init];
-        [track addTouch:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
+        [track.touches addObject:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
         
-        [self.mutableTracks addObject:track];
+        [self.tracks addObject:track];
     }
 }
 
@@ -180,7 +176,7 @@
         }
         
         
-        for (ORKTouchAbilityTrack *track in self.mutableTracks) {
+        for (ORKTouchAbilityTrack *track in self.tracks) {
             
             if (track.touches.count == 0) {
                 continue;
@@ -192,7 +188,7 @@
             if (lastTouch.phase != UITouchPhaseEnded &&
                 CGPointEqualToPoint(lastTouch.locationInWindow, firstTranslatedTouch.previousLocationInWindow)) {
                 
-                [track addTouches:translatedTouches];
+                [track.touches addObjectsFromArray:translatedTouches];
             }
         }
     }

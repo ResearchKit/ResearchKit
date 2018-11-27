@@ -30,14 +30,16 @@
 
 
 #import "ORKTouchAbilityCustomView.h"
-#import "ORKTouchAbilityCustomView_Internal.h"
+//#import "ORKTouchAbilityCustomView_Internal.h"
 
 #import "ORKTouchAbilityTouchTracker.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
 
 @interface ORKTouchAbilityCustomView () <ORKTouchAbilityTouchTrackerDelegate>
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
+
+@property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
+
 @end
 
 @implementation ORKTouchAbilityCustomView
@@ -53,12 +55,21 @@
     return _touchTracker;
 }
 
+- (NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
+    return self.touchTracker.tracks;
+}
+
+- (void)setTracks:(NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
+    self.touchTracker.tracks = tracks;
+}
+
 - (NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecognizerEvents {
     if (!_gestureRecognizerEvents) {
         _gestureRecognizerEvents = [NSMutableArray new];
     }
     return _gestureRecognizerEvents;
 }
+
 
 #pragma mark - Life Cycle
 
@@ -118,6 +129,7 @@
     }
     return self;
 }
+
 
 #pragma mark - ORKTouchAbilityCustomView
 

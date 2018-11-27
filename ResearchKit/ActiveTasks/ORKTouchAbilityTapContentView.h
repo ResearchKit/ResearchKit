@@ -61,6 +61,7 @@ protocol TapTrialViewDataSource: NSObjectProtocol {
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
 
+@property (nonatomic, readonly) UIView *targetView;
 @property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> dataSource;
 
 - (void)reloadData;

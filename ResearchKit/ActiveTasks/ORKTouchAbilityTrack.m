@@ -30,12 +30,8 @@
 
 
 #import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
 #import "ORKHelpers_Internal.h"
 
-@interface ORKTouchAbilityTrack ()
-@property(nonatomic, copy) NSMutableArray<ORKTouchAbilityTouch *> *mutableTouches;
-@end
 
 @implementation ORKTouchAbilityTrack
 
@@ -44,20 +40,20 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, mutableTouches);
+    ORK_ENCODE_OBJ(aCoder, touches);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, mutableTouches);
+        ORK_DECODE_OBJ(aDecoder, touches);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
-    track.mutableTouches = [self.mutableTouches mutableCopy];
+    track.touches = [self.touches mutableCopy];
     return track;
 }
 
@@ -69,61 +65,23 @@
     
     __typeof(self) castObject = object;
     
-    return ORKEqualObjects(self.mutableTouches, castObject.mutableTouches);
+    return ORKEqualObjects(self.touches, castObject.touches);
 }
 
 - (NSUInteger)hash {
     return super.hash ^ self.touches.hash;
 }
 
-- (NSMutableArray<ORKTouchAbilityTouch *> *)mutableTouches {
-    if (!_mutableTouches) {
-        _mutableTouches = @[].mutableCopy;
+- (NSMutableArray<ORKTouchAbilityTouch *> *)touches {
+    if (!_touches) {
+        _touches = [NSMutableArray new];
     }
-    return _mutableTouches;
-}
-
-- (NSArray<ORKTouchAbilityTouch *> *)touches {
-    return [self.mutableTouches copy];
-}
-
-- (void)addTouch:(ORKTouchAbilityTouch *)touch {
-    [self.mutableTouches addObject:touch];
-}
-
-- (void)addTouches:(NSArray<ORKTouchAbilityTouch *> *)touches {
-    [self.mutableTouches addObjectsFromArray:touches];
+    return _touches;
 }
 
 @end
 
-@interface ORKTouchAbilityTouch ()
 
-@property(nonatomic, assign) NSTimeInterval timestamp;
-@property(nonatomic, assign) UITouchPhase phase;
-@property(nonatomic, assign) NSUInteger tapCount;
-@property(nonatomic, assign) UITouchType type;
-
-@property(nonatomic, assign) CGFloat majorRadius;
-@property(nonatomic, assign) CGFloat majorRadiusTolerance;
-
-@property(nonatomic, assign) CGPoint locationInWindow;
-@property(nonatomic, assign) CGPoint previousLocationInWindow;
-@property(nonatomic, assign) CGPoint preciseLocationInWindow;
-@property(nonatomic, assign) CGPoint precisePreviousLocationInWindow;
-
-@property(nonatomic, assign) CGFloat force;
-@property(nonatomic, assign) CGFloat maximumPossibleForce;
-
-@property(nonatomic, assign) CGFloat azimuthAngleInWindow;
-@property(nonatomic, assign) CGVector azimuthUnitVectorInWindow;
-@property(nonatomic, assign) CGFloat altitudeAngle;
-
-@property(nonatomic, copy) NSNumber * _Nullable estimationUpdateIndex;
-@property(nonatomic, assign) UITouchProperties estimatedProperties;
-@property(nonatomic, assign) UITouchProperties estimatedPropertiesExpectingUpdates;
-
-@end
 
 @implementation ORKTouchAbilityTouch
 
