@@ -46,7 +46,7 @@ ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale = @"HKBiological
 ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther = @"HKBiologicalSexOther";
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
-    NSString *string = nil;
+    NSString *string = @"";
     switch (biologicalSex) {
         case HKBiologicalSexFemale: string = ORKBiologicalSexIdentifierFemale; break;
         case HKBiologicalSexMale:   string = ORKBiologicalSexIdentifierMale;   break;
@@ -66,7 +66,7 @@ ORKBloodTypeIdentifier const ORKBloodTypeIdentifierOPositive = @"HKBloodTypeOPos
 ORKBloodTypeIdentifier const ORKBloodTypeIdentifierONegative = @"HKBloodTypeONegative";
 
 NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
-    NSString *string = nil;
+    NSString *string = @"";
     switch (bloodType) {
         case HKBloodTypeAPositive:  string = ORKBloodTypeIdentifierAPositive;   break;
         case HKBloodTypeANegative:  string = ORKBloodTypeIdentifierANegative;   break;

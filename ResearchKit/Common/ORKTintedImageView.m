@@ -43,8 +43,8 @@ ORK_INLINE BOOL ORKIsImageAnimated(UIImage *image) {
 }
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
-    if (!image || !(scale > 0)) {
-        return nil;
+    if (!(scale > 0)) {
+        return image;
     }
     
     ORKTintedImageLog(@"%@ %@ %f", image, tintColor, scale);
