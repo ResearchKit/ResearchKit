@@ -66,13 +66,13 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTapResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials copy];
+    result.trials = [self.trials mutableCopy];
     return result;
 }
 
-- (NSMutableArray<ORKTouchAbilityTapTrial *> *)trials {
+- (NSArray<ORKTouchAbilityTapTrial *> *)trials {
     if (!_trials) {
-        _trials = [NSMutableArray new];
+        _trials = [NSArray new];
     }
     return _trials;
 }

@@ -39,6 +39,7 @@
 @interface ORKTouchAbilityCustomView () <ORKTouchAbilityTouchTrackerDelegate>
 
 @property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
+@property (nonatomic, readwrite) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
 @end
 
@@ -55,17 +56,13 @@
     return _touchTracker;
 }
 
-- (NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
-    return self.touchTracker.tracks;
+- (NSArray<ORKTouchAbilityTrack *> *)tracks {
+    return [self.touchTracker.tracks copy];
 }
 
-- (void)setTracks:(NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
-    self.touchTracker.tracks = tracks;
-}
-
-- (NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecognizerEvents {
+- (NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecognizerEvents {
     if (!_gestureRecognizerEvents) {
-        _gestureRecognizerEvents = [NSMutableArray new];
+        _gestureRecognizerEvents = [NSArray new];
     }
     return _gestureRecognizerEvents;
 }
@@ -150,32 +147,44 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     ORKTouchAbilityTapGestureRecoginzerEvent *event = [[ORKTouchAbilityTapGestureRecoginzerEvent alloc] initWithTapGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
     ORKTouchAbilityLongPressGestureRecoginzerEvent *event = [[ORKTouchAbilityLongPressGestureRecoginzerEvent alloc] initWithLongPressGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)sender {
     ORKTouchAbilityPanGestureRecoginzerEvent *event = [[ORKTouchAbilityPanGestureRecoginzerEvent alloc] initWithPanGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 - (void)handleSwipe:(UISwipeGestureRecognizer *)sender {
     ORKTouchAbilitySwipeGestureRecoginzerEvent *event = [[ORKTouchAbilitySwipeGestureRecoginzerEvent alloc] initWithSwipeGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer *)sender {
     ORKTouchAbilityPinchGestureRecoginzerEvent *event = [[ORKTouchAbilityPinchGestureRecoginzerEvent alloc] initWithPinchGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 - (void)handleRotation:(UIRotationGestureRecognizer *)sender {
     ORKTouchAbilityRotationGestureRecoginzerEvent *event = [[ORKTouchAbilityRotationGestureRecoginzerEvent alloc] initWithRotationGestureRecognizer:sender];
-    [self.gestureRecognizerEvents addObject:event];
+    NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
+    [events addObject:event];
+    self.gestureRecognizerEvents = [events copy];
 }
 
 

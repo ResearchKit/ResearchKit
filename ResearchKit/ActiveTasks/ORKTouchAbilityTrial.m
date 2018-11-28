@@ -98,11 +98,18 @@
     return self;
 }
 
-- (NSMutableArray<ORKTouchAbilityTrack *> *)tracks {
+- (NSArray<ORKTouchAbilityTrack *> *)tracks {
     if (!_tracks) {
-        _tracks = [NSMutableArray new];
+        _tracks = [NSArray new];
     }
     return _tracks;
+}
+
+- (NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecoginzerEvents {
+    if (!_gestureRecognizerEvents) {
+        _gestureRecognizerEvents = [NSArray new];
+    }
+    return _gestureRecognizerEvents;
 }
 
 - (NSArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *)tapEvents {
@@ -175,17 +182,6 @@
     }];
     
     return [result copy];
-}
-
-- (NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecoginzerEvents {
-    if (!_gestureRecognizerEvents) {
-        _gestureRecognizerEvents = [NSMutableArray new];
-    }
-    return _gestureRecognizerEvents;
-}
-
-- (void)setGestureRecoginzerEvents:(NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecoginzerEvents {
-    _gestureRecognizerEvents = [gestureRecoginzerEvents mutableCopy];
 }
 
 @end

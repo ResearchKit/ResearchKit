@@ -52,8 +52,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSTimeInterval endTime;
 @property (nonatomic, assign) BOOL success;
 
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTrack *> *tracks;
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
+@property (nonatomic, copy) NSArray<ORKTouchAbilityTrack *> *tracks;
+@property (nonatomic, copy) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *tapEvents;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityLongPressGestureRecoginzerEvent *> *longPressEvents;

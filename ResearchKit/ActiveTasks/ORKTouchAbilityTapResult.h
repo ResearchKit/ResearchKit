@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTapResult : ORKResult
-@property (nonatomic, copy) NSMutableArray<ORKTouchAbilityTapTrial *> *trials;
+@property (nonatomic, copy) NSArray<ORKTouchAbilityTapTrial *> *trials;
 @end
 
 NS_ASSUME_NONNULL_END

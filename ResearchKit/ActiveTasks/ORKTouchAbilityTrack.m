@@ -72,9 +72,9 @@
     return super.hash ^ self.touches.hash;
 }
 
-- (NSMutableArray<ORKTouchAbilityTouch *> *)touches {
+- (NSArray<ORKTouchAbilityTouch *> *)touches {
     if (!_touches) {
-        _touches = [NSMutableArray new];
+        _touches = [NSArray new];
     }
     return _touches;
 }

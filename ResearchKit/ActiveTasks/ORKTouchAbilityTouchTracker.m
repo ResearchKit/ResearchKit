@@ -113,7 +113,7 @@
     for (UITouch *touch in touches) {
         
         ORKTouchAbilityTrack *track = [[ORKTouchAbilityTrack alloc] init];
-        [track.touches addObject:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
+        track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
         
         [self.tracks addObject:track];
     }
@@ -188,7 +188,9 @@
             if (lastTouch.phase != UITouchPhaseEnded &&
                 CGPointEqualToPoint(lastTouch.locationInWindow, firstTranslatedTouch.previousLocationInWindow)) {
                 
-                [track.touches addObjectsFromArray:translatedTouches];
+                NSMutableArray *touches = [track.touches mutableCopy];
+                [touches addObjectsFromArray:translatedTouches];
+                track.touches = touches;
             }
         }
     }

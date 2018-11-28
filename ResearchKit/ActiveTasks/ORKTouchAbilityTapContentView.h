@@ -34,16 +34,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*
-protocol TapTrialViewDataSource: NSObjectProtocol {
-    func numberOfColumn(_ tapTrialView: TapTrialView) -> Int
-    func numberOfRow(_ tapTrialView: TapTrialView) -> Int
-    func targetColumn(_ tapTrialView: TapTrialView) -> Int
-    func targetRow(_ tapTrialView: TapTrialView) -> Int
-    func targetSize(_ tapTrialView: TapTrialView) -> CGSize
-}
- */
-
 @class ORKTouchAbilityTapContentView;
 @protocol ORKTouchAbilityTapContentViewDataSource <NSObject>
 

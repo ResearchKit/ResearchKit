@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTrack: NSObject <NSCopying, NSSecureCoding>
-@property(nonatomic, copy) NSMutableArray<ORKTouchAbilityTouch *> *touches;
+@property(nonatomic, copy) NSArray<ORKTouchAbilityTouch *> *touches;
 @end
 
 ORK_CLASS_AVAILABLE
