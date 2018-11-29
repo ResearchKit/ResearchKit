@@ -55,6 +55,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> _Nullable dataSource;
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated;
 - (void)reloadData;
 
 @end

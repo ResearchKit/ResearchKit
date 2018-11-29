@@ -30,14 +30,10 @@
 
 
 #import "ORKTouchAbilityTouchTracker.h"
+#import "ORKTouchAbilityTouch.h"
 #import "ORKTouchAbilityTrack.h"
+#import "ORKTouchAbilityTrack_Internal.h"
 
-@interface ORKTouchAbilityTouchTracker ()
-
-@property (nonatomic, assign) NSTimeInterval systemUpTime;
-@property (nonatomic, assign, getter=isTracking) BOOL tracking;
-
-@end
 
 @implementation ORKTouchAbilityTouchTracker
 
@@ -53,15 +49,11 @@
     return _tracks;
 }
 
-//- (NSArray<ORKTouchAbilityTrack *> *)tracks {
-//    return [self.mutableTracks copy];
-//}
 
 #pragma mark - Life Cycle
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.systemUpTime = [NSDate distantPast].timeIntervalSince1970;
         self.tracking = NO;
         self.cancelsTouchesInView = NO;
     }
@@ -70,7 +62,6 @@
 
 - (instancetype)initWithTarget:(id)target action:(SEL)action {
     if (self = [super initWithTarget:target action:action]) {
-        self.systemUpTime = [NSDate distantPast].timeIntervalSince1970;
         self.tracking = NO;
         self.cancelsTouchesInView = NO;
     }
@@ -82,9 +73,6 @@
 
 - (void)startTracking {
     [self resetTracks];
-    
-    NSTimeInterval uptime = [NSProcessInfo processInfo].systemUptime;
-    self.systemUpTime = [NSDate dateWithTimeIntervalSinceNow:-uptime].timeIntervalSince1970;
     self.tracking = YES;
 }
 
@@ -188,7 +176,7 @@
             if (lastTouch.phase != UITouchPhaseEnded &&
                 CGPointEqualToPoint(lastTouch.locationInWindow, firstTranslatedTouch.previousLocationInWindow)) {
                 
-                NSMutableArray *touches = [track.touches mutableCopy];
+                NSMutableArray *touches = [NSMutableArray arrayWithArray:track.touches];
                 [touches addObjectsFromArray:translatedTouches];
                 track.touches = touches;
             }

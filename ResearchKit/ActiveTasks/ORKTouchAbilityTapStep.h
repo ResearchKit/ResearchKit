@@ -39,9 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTapStep : ORKActiveStep
 
-@property (nonatomic, assign, getter = isDominantHandTested) BOOL dominantHandTested;
-@property (nonatomic, assign) NSInteger numberOfTargets;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -120,6 +120,13 @@ CGSize const defaultTargetSize = {76, 76};
     }];
 }
 
+- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated {
+    
+    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+        [self.targetView setAlpha:hidden ? 0 : 1];
+    }];
+}
+
 - (void)reloadData {
     [self resetTracks];
     

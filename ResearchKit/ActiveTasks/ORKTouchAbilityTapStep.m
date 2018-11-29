@@ -54,48 +54,12 @@
     // TODO:
 }
 
-- (BOOL)allowBackNavigation {
+- (BOOL)startsFinished {
     return NO;
 }
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_BOOL(aDecoder, dominantHandTested);
-        ORK_DECODE_INTEGER(aDecoder, numberOfTargets);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_BOOL(aCoder, dominantHandTested);
-    ORK_ENCODE_INTEGER(aCoder, numberOfTargets);
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    __typeof(self) step = [super copyWithZone:zone];
-    step.dominantHandTested = self.dominantHandTested;
-    step.numberOfTargets = self.numberOfTargets;
-    return step;
-}
-
-- (NSUInteger)hash {
-    return [super hash] ^ self.dominantHandTested ^ self.numberOfTargets;
-}
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            (self.dominantHandTested == castObject.dominantHandTested) &&
-            (self.numberOfTargets == castObject.numberOfTargets));
-    
-}
+//- (BOOL)allowBackNavigation {
+//    return NO;
+//}
 
 @end

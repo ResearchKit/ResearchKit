@@ -29,56 +29,59 @@
  */
 
 
-#import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
-#import "ORKTouchAbilityTouch.h"
+#import "ORKTouchAbilityTapTrial.h"
 #import "ORKHelpers_Internal.h"
 
+@interface ORKTouchAbilityTapTrial ()
 
-@implementation ORKTouchAbilityTrack
+@property (nonatomic, assign) CGRect targetFrameInWindow;
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
+@end
+
+@implementation ORKTouchAbilityTapTrial
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, touches);
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_CGRECT(aCoder, targetFrameInWindow);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, touches);
+        ORK_DECODE_CGRECT(aDecoder, targetFrameInWindow);
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
-    track.touches = [self.touches mutableCopy];
-    return track;
+    ORKTouchAbilityTapTrial *trial = [super copyWithZone:zone];
+    trial.targetFrameInWindow = self.targetFrameInWindow;
+    return trial;
 }
 
 - (BOOL)isEqual:(id)object {
     
-    if ([self class] != [object class]) {
-        return NO;
-    }
+    BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     
-    return ORKEqualObjects(self.touches, castObject.touches);
+    return (isParentSame && CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow));
 }
 
-- (NSUInteger)hash {
-    return super.hash ^ self.touches.hash;
-}
-
-- (NSArray<ORKTouchAbilityTouch *> *)touches {
-    if (!_touches) {
-        _touches = [NSArray new];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.targetFrameInWindow = CGRectZero;
     }
-    return _touches;
+    return self;
+}
+
+- (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame {
+    self = [super init];
+    if (self) {
+        self.targetFrameInWindow = targetFrame;
+    }
+    return self;
 }
 
 @end

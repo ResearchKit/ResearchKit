@@ -35,6 +35,8 @@
 #import "ORKTouchAbilityTapContentView.h"
 #import "ORKTouchAbilityTapResult.h"
 #import "ORKTouchAbilityTrial.h"
+#import "ORKTouchAbilityTrial_Internal.h"
+#import "ORKTouchAbilityTapTrial.h"
 #import "ORKTouchAbilityTouchTracker.h"
 
 #import "ORKActiveStepViewController_Internal.h"
@@ -89,7 +91,7 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
         [points exchangeObjectAtIndex:i withObjectAtIndex:n];
     }
     
-    return [points mutableCopy];
+    return points;
 }
 
 
@@ -166,6 +168,7 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self start];
     [self.touchAbilityTapContentView startTracking];
 }
 
@@ -192,9 +195,9 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
 - (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
-    if (!self.isStarted) {
-        [self start];
-    }
+//    if (!self.isStarted) {
+//        [self start];
+//    }
 }
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
@@ -236,7 +239,9 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
         [self.touchAbilityTapContentView startTracking];
     } else {
         [self.touchAbilityTapContentView stopTracking];
-        [self finish];
+        
+        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
+        [self performSelector:@selector(finish) withObject:nil afterDelay:1.5]; // [self finish];
     }
 }
 

@@ -30,12 +30,12 @@
 
 
 #import "ORKTouchAbilityTrial.h"
+#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityTrack.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
 #import "ORKHelpers_Internal.h"
 
-#pragma mark - ORKTouchAbilityTrial
 
 @implementation ORKTouchAbilityTrial
 
@@ -44,9 +44,6 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_DOUBLE(aCoder, startTime);
-    ORK_ENCODE_DOUBLE(aCoder, endTime);
-    ORK_ENCODE_BOOL(aCoder, success);
     ORK_ENCODE_OBJ(aCoder, tracks);
     ORK_ENCODE_OBJ(aCoder, gestureRecognizerEvents);
 }
@@ -54,9 +51,6 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, startTime);
-        ORK_DECODE_DOUBLE(aDecoder, endTime);
-        ORK_DECODE_BOOL(aDecoder, success);
         ORK_DECODE_OBJ(aDecoder, tracks);
         ORK_DECODE_OBJ(aDecoder, gestureRecognizerEvents);
     }
@@ -65,9 +59,6 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTrial *trial = [[[self class] allocWithZone:zone] init];
-    trial.startTime = self.startTime;
-    trial.endTime = self.endTime;
-    trial.success = self.success;
     trial.tracks = [self.tracks mutableCopy];
     trial.gestureRecognizerEvents = [self.gestureRecognizerEvents mutableCopy];
     return trial;
@@ -81,21 +72,8 @@
     
     __typeof(self) castObject = object;
     
-    return ((self.startTime == castObject.startTime) &&
-            (self.endTime == castObject.endTime) &&
-            (self.success == castObject.success) &&
-            ORKEqualObjects(self.tracks, castObject.tracks) &&
+    return (ORKEqualObjects(self.tracks, castObject.tracks) &&
             ORKEqualObjects(self.gestureRecognizerEvents, castObject.gestureRecognizerEvents));
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.startTime = [NSDate distantPast].timeIntervalSince1970;
-        self.endTime = [NSDate distantFuture].timeIntervalSince1970;
-        self.success = NO;
-    }
-    return self;
 }
 
 - (NSArray<ORKTouchAbilityTrack *> *)tracks {
@@ -110,136 +88,6 @@
         _gestureRecognizerEvents = [NSArray new];
     }
     return _gestureRecognizerEvents;
-}
-
-- (NSArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *)tapEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilityTapGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-- (NSArray<ORKTouchAbilityLongPressGestureRecoginzerEvent *> *)longPressEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilityLongPressGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-- (NSArray<ORKTouchAbilitySwipeGestureRecoginzerEvent *> *)swipeEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilitySwipeGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-- (NSArray<ORKTouchAbilityPanGestureRecoginzerEvent *> *)panEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilitySwipeGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-- (NSArray<ORKTouchAbilityPinchGestureRecoginzerEvent *> *)pinchEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilityPinchGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-- (NSArray<ORKTouchAbilityRotationGestureRecoginzerEvent *> *)rotationEvents {
-    NSMutableArray *result = [NSMutableArray new];
-    
-    [self.gestureRecognizerEvents enumerateObjectsUsingBlock:^(ORKTouchAbilityGestureRecoginzerEvent * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[ORKTouchAbilityRotationGestureRecoginzerEvent class]]) {
-            [result addObject:obj];
-        }
-    }];
-    
-    return [result copy];
-}
-
-@end
-
-
-#pragma mark - ORKTouchAbilityTapTrial
-
-@interface ORKTouchAbilityTapTrial ()
-
-@property (nonatomic, assign) CGRect targetFrameInWindow;
-
-@end
-
-@implementation ORKTouchAbilityTapTrial
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_CGRECT(aCoder, targetFrameInWindow);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_CGRECT(aDecoder, targetFrameInWindow);
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityTapTrial *trial = [super copyWithZone:zone];
-    trial.targetFrameInWindow = self.targetFrameInWindow;
-    return trial;
-}
-
-- (BOOL)isEqual:(id)object {
-    
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    
-    return (isParentSame &&
-            CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow));
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.targetFrameInWindow = CGRectZero;
-    }
-    return self;
-}
-
-- (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame {
-    self = [super init];
-    if (self) {
-        self.targetFrameInWindow = targetFrame;
-    }
-    return self;
 }
 
 @end

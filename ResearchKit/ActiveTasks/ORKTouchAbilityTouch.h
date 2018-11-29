@@ -29,56 +29,40 @@
  */
 
 
-#import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
-#import "ORKTouchAbilityTouch.h"
-#import "ORKHelpers_Internal.h"
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ResearchKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation ORKTouchAbilityTrack
+ORK_CLASS_AVAILABLE
+@interface ORKTouchAbilityTouch: NSObject <NSCopying, NSSecureCoding>
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
+@property(nonatomic, readonly) NSTimeInterval timestamp;
+@property(nonatomic, readonly) UITouchPhase phase;
+@property(nonatomic, readonly) NSUInteger tapCount;
+@property(nonatomic, readonly) UITouchType type;
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, touches);
-}
+@property(nonatomic, readonly) CGFloat majorRadius;
+@property(nonatomic, readonly) CGFloat majorRadiusTolerance;
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        ORK_DECODE_OBJ(aDecoder, touches);
-    }
-    return self;
-}
+@property(nonatomic, readonly) CGPoint locationInWindow;
+@property(nonatomic, readonly) CGPoint previousLocationInWindow;
+@property(nonatomic, readonly) CGPoint preciseLocationInWindow;
+@property(nonatomic, readonly) CGPoint precisePreviousLocationInWindow;
 
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
-    track.touches = [self.touches mutableCopy];
-    return track;
-}
+@property(nonatomic, readonly) CGFloat force;
+@property(nonatomic, readonly) CGFloat maximumPossibleForce;
 
-- (BOOL)isEqual:(id)object {
-    
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
-    __typeof(self) castObject = object;
-    
-    return ORKEqualObjects(self.touches, castObject.touches);
-}
+@property(nonatomic, readonly) CGFloat azimuthAngleInWindow;
+@property(nonatomic, readonly) CGVector azimuthUnitVectorInWindow;
+@property(nonatomic, readonly) CGFloat altitudeAngle;
 
-- (NSUInteger)hash {
-    return super.hash ^ self.touches.hash;
-}
+@property(nonatomic, readonly) NSNumber * _Nullable estimationUpdateIndex;
+@property(nonatomic, readonly) UITouchProperties estimatedProperties;
+@property(nonatomic, readonly) UITouchProperties estimatedPropertiesExpectingUpdates;
 
-- (NSArray<ORKTouchAbilityTouch *> *)touches {
-    if (!_touches) {
-        _touches = [NSArray new];
-    }
-    return _touches;
-}
+- (instancetype)initWithTouch:(UITouch *)touch;
 
 @end
+
+NS_ASSUME_NONNULL_END

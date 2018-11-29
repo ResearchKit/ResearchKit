@@ -29,56 +29,13 @@
  */
 
 
-#import "ORKTouchAbilityTrack.h"
-#import "ORKTouchAbilityTrack_Internal.h"
-#import "ORKTouchAbilityTouch.h"
-#import "ORKHelpers_Internal.h"
+#import <UIKit/UIKit.h>
+#import <ResearchKit/ResearchKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-@implementation ORKTouchAbilityTrack
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, touches);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        ORK_DECODE_OBJ(aDecoder, touches);
-    }
-    return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
-    track.touches = [self.touches mutableCopy];
-    return track;
-}
-
-- (BOOL)isEqual:(id)object {
-    
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
-    __typeof(self) castObject = object;
-    
-    return ORKEqualObjects(self.touches, castObject.touches);
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.touches.hash;
-}
-
-- (NSArray<ORKTouchAbilityTouch *> *)touches {
-    if (!_touches) {
-        _touches = [NSArray new];
-    }
-    return _touches;
-}
-
+@interface ORKTouchAbilityTrack ()
+@property(nonatomic, copy) NSArray<ORKTouchAbilityTouch *> *touches;
 @end
+
+NS_ASSUME_NONNULL_END

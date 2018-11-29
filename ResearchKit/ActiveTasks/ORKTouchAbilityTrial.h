@@ -36,43 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKTouchAbilityTrack;
 @class ORKTouchAbilityGestureRecoginzerEvent;
-@class ORKTouchAbilityTapGestureRecoginzerEvent;
-@class ORKTouchAbilityLongPressGestureRecoginzerEvent;
-@class ORKTouchAbilitySwipeGestureRecoginzerEvent;
-@class ORKTouchAbilityPanGestureRecoginzerEvent;
-@class ORKTouchAbilityPinchGestureRecoginzerEvent;
-@class ORKTouchAbilityRotationGestureRecoginzerEvent;
-
-#pragma mark - ORKTouchAbilityTrial
 
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTrial : NSObject <NSCopying, NSSecureCoding>
 
-@property (nonatomic, assign) NSTimeInterval startTime;
-@property (nonatomic, assign) NSTimeInterval endTime;
-@property (nonatomic, assign) BOOL success;
-
-@property (nonatomic, copy) NSArray<ORKTouchAbilityTrack *> *tracks;
-@property (nonatomic, copy) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
-
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityTapGestureRecoginzerEvent *> *tapEvents;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityLongPressGestureRecoginzerEvent *> *longPressEvents;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilitySwipeGestureRecoginzerEvent *> *swipeEvents;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityPanGestureRecoginzerEvent *> *panEvents;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityPinchGestureRecoginzerEvent *> *pinchEvents;
-@property (nonatomic, readonly) NSArray<ORKTouchAbilityRotationGestureRecoginzerEvent *> *rotationEvents;
-
-@end
-
-
-#pragma mark - ORKTouchAbilityTapTrial
-
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTapTrial : ORKTouchAbilityTrial
-
-@property (nonatomic, readonly) CGRect targetFrameInWindow;
-
-- (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame;
+@property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
+@property (nonatomic, readonly) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
 @end
 
