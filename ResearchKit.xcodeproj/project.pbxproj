@@ -142,19 +142,19 @@
 		618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */; };
 		618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */; };
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
-		6506EB25218057FC002DF5DB /* ORKTouchAbilityTapContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6506EB23218057FC002DF5DB /* ORKTouchAbilityTapContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6506EB25218057FC002DF5DB /* ORKTouchAbilityTapContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6506EB23218057FC002DF5DB /* ORKTouchAbilityTapContentView.h */; };
 		6506EB26218057FC002DF5DB /* ORKTouchAbilityTapContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6506EB24218057FC002DF5DB /* ORKTouchAbilityTapContentView.m */; };
 		653BB630219AB51400138F18 /* ORKTouchAbilityTouchTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 653BB62E219AB51400138F18 /* ORKTouchAbilityTouchTracker.h */; };
 		653BB631219AB51400138F18 /* ORKTouchAbilityTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 653BB62F219AB51400138F18 /* ORKTouchAbilityTouchTracker.m */; };
 		653BB634219AC4D700138F18 /* ORKTouchAbilityCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 653BB632219AC4D700138F18 /* ORKTouchAbilityCustomView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		653BB635219AC4D700138F18 /* ORKTouchAbilityCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 653BB633219AC4D700138F18 /* ORKTouchAbilityCustomView.m */; };
-		653BB63A219AF25800138F18 /* ORKTouchAbilityTapResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 653BB638219AF25800138F18 /* ORKTouchAbilityTapResult.h */; };
+		653BB63A219AF25800138F18 /* ORKTouchAbilityTapResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 653BB638219AF25800138F18 /* ORKTouchAbilityTapResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		653BB63B219AF25800138F18 /* ORKTouchAbilityTapResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 653BB639219AF25800138F18 /* ORKTouchAbilityTapResult.m */; };
 		659AAA46218C420F00622C68 /* ORKTouchAbilityTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 659AAA44218C420F00622C68 /* ORKTouchAbilityTrack.m */; };
 		659AAA47218C47A600622C68 /* ORKTouchAbilityTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 659AAA43218C420F00622C68 /* ORKTouchAbilityTrack.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		659AAA4D218C5C7500622C68 /* ORKTouchAbilityGestureRecoginzerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 659AAA4B218C5C7500622C68 /* ORKTouchAbilityGestureRecoginzerEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		659AAA4E218C5C7500622C68 /* ORKTouchAbilityGestureRecoginzerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 659AAA4C218C5C7500622C68 /* ORKTouchAbilityGestureRecoginzerEvent.m */; };
-		65A899282177283200E265FC /* ORKTouchAbilityTapStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A899262177283200E265FC /* ORKTouchAbilityTapStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65A899282177283200E265FC /* ORKTouchAbilityTapStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A899262177283200E265FC /* ORKTouchAbilityTapStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		65A899292177283200E265FC /* ORKTouchAbilityTapStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A899272177283200E265FC /* ORKTouchAbilityTapStep.m */; };
 		65BA136921AFC59400EB8555 /* ORKTouchAbilityTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 65BA136721AFC59400EB8555 /* ORKTouchAbilityTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65BA136A21AFC59400EB8555 /* ORKTouchAbilityTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BA136821AFC59400EB8555 /* ORKTouchAbilityTouch.m */; };
@@ -164,8 +164,18 @@
 		65BA137221AFE4A700EB8555 /* ORKTouchAbilityTapTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BA137021AFE4A700EB8555 /* ORKTouchAbilityTapTrial.m */; };
 		65D152362192D08C00E45120 /* ORKTouchAbilityTrial.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D152342192D08C00E45120 /* ORKTouchAbilityTrial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65D152372192D08C00E45120 /* ORKTouchAbilityTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D152352192D08C00E45120 /* ORKTouchAbilityTrial.m */; };
-		65E3636B2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E363692177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65E3636B2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E363692177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.h */; };
 		65E3636C2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E3636A2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.m */; };
+		65EEE15621B12CA2007858E8 /* ORKTouchAbilityLongPressStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EEE15421B12CA2007858E8 /* ORKTouchAbilityLongPressStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		65EEE15721B12CA2007858E8 /* ORKTouchAbilityLongPressStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EEE15521B12CA2007858E8 /* ORKTouchAbilityLongPressStep.m */; };
+		65EEE15A21B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EEE15821B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.h */; };
+		65EEE15B21B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EEE15921B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.m */; };
+		65EEE15E21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EEE15C21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65EEE15F21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EEE15D21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.m */; };
+		65EEE16221B13018007858E8 /* ORKTouchAbilityLongPressResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EEE16021B13018007858E8 /* ORKTouchAbilityLongPressResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		65EEE16321B13018007858E8 /* ORKTouchAbilityLongPressResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EEE16121B13018007858E8 /* ORKTouchAbilityLongPressResult.m */; };
+		65EEE16621B130D9007858E8 /* ORKTouchAbilityLongPressContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EEE16421B130D9007858E8 /* ORKTouchAbilityLongPressContentView.h */; };
+		65EEE16721B130D9007858E8 /* ORKTouchAbilityLongPressContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EEE16521B130D9007858E8 /* ORKTouchAbilityLongPressContentView.m */; };
 		7118AC5A20BF6A0000D7A6BB /* Noise.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC5920BF6A0000D7A6BB /* Noise.wav */; };
 		7118AC5D20BF6A1200D7A6BB /* Window.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC5B20BF6A1200D7A6BB /* Window.wav */; };
 		7118AC6720BF6A3A00D7A6BB /* Sentence7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7118AC6020BF6A3900D7A6BB /* Sentence7.wav */; };
@@ -908,6 +918,16 @@
 		65D152352192D08C00E45120 /* ORKTouchAbilityTrial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityTrial.m; sourceTree = "<group>"; };
 		65E363692177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityTapStepViewController.h; sourceTree = "<group>"; };
 		65E3636A2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityTapStepViewController.m; sourceTree = "<group>"; };
+		65EEE15421B12CA2007858E8 /* ORKTouchAbilityLongPressStep.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityLongPressStep.h; sourceTree = "<group>"; };
+		65EEE15521B12CA2007858E8 /* ORKTouchAbilityLongPressStep.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityLongPressStep.m; sourceTree = "<group>"; };
+		65EEE15821B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityLongPressStepViewController.h; sourceTree = "<group>"; };
+		65EEE15921B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityLongPressStepViewController.m; sourceTree = "<group>"; };
+		65EEE15C21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityLongPressTrial.h; sourceTree = "<group>"; };
+		65EEE15D21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityLongPressTrial.m; sourceTree = "<group>"; };
+		65EEE16021B13018007858E8 /* ORKTouchAbilityLongPressResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityLongPressResult.h; sourceTree = "<group>"; };
+		65EEE16121B13018007858E8 /* ORKTouchAbilityLongPressResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityLongPressResult.m; sourceTree = "<group>"; };
+		65EEE16421B130D9007858E8 /* ORKTouchAbilityLongPressContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKTouchAbilityLongPressContentView.h; sourceTree = "<group>"; };
+		65EEE16521B130D9007858E8 /* ORKTouchAbilityLongPressContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ORKTouchAbilityLongPressContentView.m; sourceTree = "<group>"; };
 		7118AC5920BF6A0000D7A6BB /* Noise.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Noise.wav; sourceTree = "<group>"; };
 		7118AC5B20BF6A1200D7A6BB /* Window.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Window.wav; sourceTree = "<group>"; };
 		7118AC6020BF6A3900D7A6BB /* Sentence7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sentence7.wav; sourceTree = "<group>"; };
@@ -1925,6 +1945,7 @@
 				653BB62D219AB4A600138F18 /* Shared Views */,
 				659AAA42218C41EA00622C68 /* Shared Models */,
 				65E36368217726CD00AEE2F6 /* Tap Step */,
+				65EEE15321B12C52007858E8 /* Long Press Step */,
 			);
 			name = "Touch Ability";
 			sourceTree = "<group>";
@@ -1944,6 +1965,23 @@
 				653BB639219AF25800138F18 /* ORKTouchAbilityTapResult.m */,
 			);
 			name = "Tap Step";
+			sourceTree = "<group>";
+		};
+		65EEE15321B12C52007858E8 /* Long Press Step */ = {
+			isa = PBXGroup;
+			children = (
+				65EEE15421B12CA2007858E8 /* ORKTouchAbilityLongPressStep.h */,
+				65EEE15521B12CA2007858E8 /* ORKTouchAbilityLongPressStep.m */,
+				65EEE15821B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.h */,
+				65EEE15921B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.m */,
+				65EEE16421B130D9007858E8 /* ORKTouchAbilityLongPressContentView.h */,
+				65EEE16521B130D9007858E8 /* ORKTouchAbilityLongPressContentView.m */,
+				65EEE15C21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.h */,
+				65EEE15D21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.m */,
+				65EEE16021B13018007858E8 /* ORKTouchAbilityLongPressResult.h */,
+				65EEE16121B13018007858E8 /* ORKTouchAbilityLongPressResult.m */,
+			);
+			name = "Long Press Step";
 			sourceTree = "<group>";
 		};
 		7118AC5820BF69C200D7A6BB /* Speech in Noise */ = {
@@ -3157,6 +3195,7 @@
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
 				2E8070F71FAD217500E4FC7F /* ORKSpeechRecognizer.h in Headers */,
 				BF91559C1BDE8D7D007FA459 /* ORKReviewStep.h in Headers */,
+				65EEE15E21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.h in Headers */,
 				BC13CE391B0660220044153C /* ORKNavigableOrderedTask.h in Headers */,
 				65BA137121AFE4A700EB8555 /* ORKTouchAbilityTapTrial.h in Headers */,
 				71BD9EA920969EED007B436E /* ORKEnvironmentSPLMeterStepViewController.h in Headers */,
@@ -3266,6 +3305,7 @@
 				BABBB19D2093299A00CB29E5 /* ORKSurveyCardHeaderView.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */,
+				65EEE15A21B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
 				242C9E111BBE06DE0088B7F4 /* ORKVerificationStepView.h in Headers */,
 				86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */,
@@ -3294,6 +3334,7 @@
 				861D2AEC1B8409B2008C4CD0 /* ORKTimedWalkStepViewController.h in Headers */,
 				86C40C7A1A8D7C5C00081FAC /* ORKAccelerometerRecorder.h in Headers */,
 				242C9E051BBDFDAC0088B7F4 /* ORKVerificationStep.h in Headers */,
+				65EEE15621B12CA2007858E8 /* ORKTouchAbilityLongPressStep.h in Headers */,
 				86C40D141A8D7C5C00081FAC /* ORKHelpers_Private.h in Headers */,
 				FF919A2E1E81AAD0005C2A1E /* ORKTowerOfHanoiResult.h in Headers */,
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
@@ -3328,6 +3369,7 @@
 				86C40C7E1A8D7C5C00081FAC /* ORKActiveStep.h in Headers */,
 				BCB6E65E1B7D534C000D5B34 /* ORKGraphChartView.h in Headers */,
 				86C40DD21A8D7C5C00081FAC /* ORKTextButton.h in Headers */,
+				65EEE16221B13018007858E8 /* ORKTouchAbilityLongPressResult.h in Headers */,
 				BA95AA9A20ACD0BD00E7FF8E /* ORKAmslerGridStepViewController.h in Headers */,
 				86C40CD41A8D7C5C00081FAC /* ORKTableContainerView.h in Headers */,
 				86C40D0E1A8D7C5C00081FAC /* ORKCustomStepView_Internal.h in Headers */,
@@ -3473,6 +3515,7 @@
 				86C40C9C1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.h in Headers */,
 				86C40E1E1A8D7C5C00081FAC /* ORKConsentSignature.h in Headers */,
 				24898B0D1B7186C000B0E7E7 /* ORKScaleRangeImageView.h in Headers */,
+				65EEE16621B130D9007858E8 /* ORKTouchAbilityLongPressContentView.h in Headers */,
 				CBD34A5A1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h in Headers */,
 				71D8EF1720B9EE1900EBCDC6 /* ORKHealthClinicalTypeRecorder.h in Headers */,
 				FF36A48D1D1A0ACA00DE8470 /* ORKAudioLevelNavigationRule.h in Headers */,
@@ -3899,6 +3942,7 @@
 				24A4DA111B8D0F21009C797A /* ORKPasscodeStepView.m in Sources */,
 				BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
+				65EEE15721B12CA2007858E8 /* ORKTouchAbilityLongPressStep.m in Sources */,
 				71769E362088291B00A19914 /* ORKdBHLToneAudiometryContentView.m in Sources */,
 				65E3636C2177271000AEE2F6 /* ORKTouchAbilityTapStepViewController.m in Sources */,
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
@@ -3908,6 +3952,7 @@
 				BC94EF321E962F7400143081 /* ORKDeprecated.m in Sources */,
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
+				65EEE15B21B12CFD007858E8 /* ORKTouchAbilityLongPressStepViewController.m in Sources */,
 				65D152372192D08C00E45120 /* ORKTouchAbilityTrial.m in Sources */,
 				FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
@@ -3922,12 +3967,14 @@
 				86C40C141A8D7C5C00081FAC /* ORKActiveStepQuantityView.m in Sources */,
 				86C40C6C1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.m in Sources */,
 				86C40DF01A8D7C5C00081FAC /* UIResponder+ResearchKit.m in Sources */,
+				65EEE16721B130D9007858E8 /* ORKTouchAbilityLongPressContentView.m in Sources */,
 				865EA16D1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.m in Sources */,
 				BF9155AA1BDE8DA9007FA459 /* ORKWaitStepView.m in Sources */,
 				86C40D261A8D7C5C00081FAC /* ORKFormStepViewController.m in Sources */,
 				BC5FAF851C6901A200057CF1 /* ORKChartTypes.m in Sources */,
 				866DA5261D63D04700C9AF3F /* ORKHealthSampleQueryOperation.m in Sources */,
 				FF5CA6131D2C2670001660A3 /* ORKTableStep.m in Sources */,
+				65EEE16321B13018007858E8 /* ORKTouchAbilityLongPressResult.m in Sources */,
 				86C40C8A1A8D7C5C00081FAC /* ORKActiveStepTimerView.m in Sources */,
 				86AD91111AB7B8A600361FEB /* ORKActiveStepView.m in Sources */,
 				86C40C201A8D7C5C00081FAC /* ORKAudioStepViewController.m in Sources */,
@@ -4054,6 +4101,7 @@
 				FF5CA61C1D2C6453001660A3 /* ORKSignatureStep.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */,
+				65EEE15F21B12F53007858E8 /* ORKTouchAbilityLongPressTrial.m in Sources */,
 				FF919A541E81BEB5005C2A1E /* ORKCollectionResult.m in Sources */,
 				86C40D581A8D7C5C00081FAC /* ORKOrderedTask.m in Sources */,
 				2E8070F91FAD217500E4FC7F /* ORKSpeechRecognitionStepViewController.m in Sources */,

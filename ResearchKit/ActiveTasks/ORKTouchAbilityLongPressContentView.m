@@ -28,12 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilityTapContentView.h"
+#import "ORKTouchAbilityLongPressContentView.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-@interface ORKTouchAbilityTapContentView ()
+@interface ORKTouchAbilityLongPressContentView ()
 
 @property (nonatomic, assign) NSUInteger numberOfColumns;
 @property (nonatomic, assign) NSUInteger numberOfRows;
@@ -47,7 +47,7 @@
 
 @end
 
-@implementation ORKTouchAbilityTapContentView
+@implementation ORKTouchAbilityLongPressContentView
 
 + (BOOL)requiresConstraintBasedLayout {
     return YES;
@@ -64,10 +64,10 @@
         [self.progressView setProgress:0.0 animated:NO];
         
         self.targetView.backgroundColor = self.tintColor;
-
+        
         self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
         self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
-
+        
         [self addSubview:self.progressView];
         [self addSubview:self.targetView];
         
@@ -148,29 +148,29 @@
 
 - (void)updateConstraints {
     [super updateConstraints];
-
+    
     if (self.numberOfColumns == 0 || self.numberOfRows == 0 || self.targetView.superview == nil) {
         return;
     }
     
     CGFloat width = self.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
     CGFloat height = self.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
-
+    
     CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
     CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
-
+    
     if (self.targetConstraints != nil) {
         [NSLayoutConstraint deactivateConstraints:self.targetConstraints];
     }
-
+    
     NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
     NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
     NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leftAnchor constant:columnMidX];
     NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor constant:rowMidY];
-
+    
     NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
     [NSLayoutConstraint activateConstraints:constraints];
-
+    
     self.targetConstraints = constraints;
 }
 

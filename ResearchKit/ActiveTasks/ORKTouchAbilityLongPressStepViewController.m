@@ -29,15 +29,15 @@
  */
 
 
-#import "ORKTouchAbilityTapStepViewController.h"
+
+#import "ORKTouchAbilityLongPressStepViewController.h"
 
 #import "ORKActiveStepView.h"
-#import "ORKTouchAbilityTapContentView.h"
-#import "ORKTouchAbilityTapResult.h"
+#import "ORKTouchAbilityLongPressContentView.h"
+#import "ORKTouchAbilityLongPressResult.h"
 #import "ORKTouchAbilityTrial.h"
 #import "ORKTouchAbilityTrial_Internal.h"
-#import "ORKTouchAbilityTapTrial.h"
-#import "ORKTouchAbilityTouchTracker.h"
+#import "ORKTouchAbilityLongPressTrial.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -45,24 +45,68 @@
 #import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKCollectionResult_Private.h"
-#import "ORKTouchAbilityTapStep.h"
+#import "ORKTouchAbilityLongPressStep.h"
 #import "ORKNavigableOrderedTask.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
 
-@interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
+//NSUInteger numberOfColumnsForTraitCollection(UITraitCollection *traitCollection) {
+//
+//    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+//        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+//        return 5;
+//    } else {
+//        return 3;
+//    }
+//}
+//
+//NSUInteger numberOfRowsForTraitCollection(UITraitCollection *traitCollection) {
+//
+//    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
+//        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
+//        return 5;
+//    } else {
+//        return 3;
+//    }
+//}
+//
+//NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *traitCollection) {
+//
+//    NSUInteger columns = numberOfColumnsForTraitCollection(traitCollection);
+//    NSUInteger rows = numberOfRowsForTraitCollection(traitCollection);
+//
+//    NSMutableArray *points = [NSMutableArray new];
+//    for (NSUInteger i = 0; i < columns; i++) {
+//        for (NSUInteger j = 0; j < rows; j++) {
+//            CGPoint point = CGPointMake(i, j);
+//            [points addObject:[NSValue valueWithCGPoint:point]];
+//        }
+//    }
+//
+//    NSUInteger count = [points count];
+//    for (NSUInteger i = 0; i < count; i++) {
+//        NSUInteger nElements = count - i;
+//        NSUInteger n = (arc4random() % nElements) + i;
+//        [points exchangeObjectAtIndex:i withObjectAtIndex:n];
+//    }
+//
+//    return points;
+//}
+
+
+@interface ORKTouchAbilityLongPressStepViewController () <ORKTouchAbilityLongPressContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
 
 // Data
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
-@property (nonatomic, strong) NSMutableArray<ORKTouchAbilityTapTrial *> *trials;
+@property (nonatomic, strong) NSMutableArray<ORKTouchAbilityLongPressTrial *> *trials;
 
 // UI
-@property (nonatomic, strong) ORKTouchAbilityTapContentView *touchAbilityTapContentView;
+@property (nonatomic, strong) ORKTouchAbilityLongPressContentView *touchAbilityLongPressContentView;
 
 @end
 
-@implementation ORKTouchAbilityTapStepViewController
+@implementation ORKTouchAbilityLongPressStepViewController
 
 
 #pragma mark - ORKActiveStepViewController
@@ -73,10 +117,6 @@
         self.suspendIfInactive = YES;
     }
     return self;
-}
-
-- (ORKTouchAbilityTapStep *)touchAbilityTapStep {
-    return (ORKTouchAbilityTapStep *)self.step;
 }
 
 - (void)initializeInternalButtonItems {
@@ -92,21 +132,20 @@
     
     NSMutableArray *results = [[NSMutableArray alloc] initWithArray:sResult.results];
     
-    ORKTouchAbilityTapResult *tapResult = [[ORKTouchAbilityTapResult alloc] initWithIdentifier:self.step.identifier];
+    ORKTouchAbilityLongPressResult *lpResult = [[ORKTouchAbilityLongPressResult alloc] initWithIdentifier:self.step.identifier];
     
-    tapResult.trials = [self.trials mutableCopy];
+    lpResult.trials = [self.trials mutableCopy];
     
-    [results addObject:tapResult];
+    [results addObject:lpResult];
     sResult.results = [results copy];
     
     return sResult;
 }
 
 - (void)finish {
-    [self.touchAbilityTapContentView stopTracking];
+    [self.touchAbilityLongPressContentView stopTracking];
     [super finish];
 }
-
 
 #pragma mark - UIViewController
 
@@ -116,11 +155,11 @@
     self.trials = [NSMutableArray new];
     self.targetPointsQueue = [self targetPointsForTraitCollection:self.traitCollection];
     
-    self.touchAbilityTapContentView = [[ORKTouchAbilityTapContentView alloc] init];
-    self.touchAbilityTapContentView.dataSource = self;
-    self.touchAbilityTapContentView.delegate = self;
+    self.touchAbilityLongPressContentView = [[ORKTouchAbilityLongPressContentView alloc] init];
+    self.touchAbilityLongPressContentView.dataSource = self;
+    self.touchAbilityLongPressContentView.delegate = self;
     
-    self.activeStepView.activeCustomView = self.touchAbilityTapContentView;
+    self.activeStepView.activeCustomView = self.touchAbilityLongPressContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
@@ -130,11 +169,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    [self.touchAbilityTapContentView startTracking];
+    [self.touchAbilityLongPressContentView startTracking];
 }
 
 
-#pragma mark - ORKTouchAbilityTapStepViewController
+#pragma mark - ORKTouchAbilityLongPressStepViewController
 
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
     
@@ -182,19 +221,19 @@
 
 #pragma mark - ORKTouchAbilityTapContentViewDataSource
 
-- (NSUInteger)numberOfColumns:(ORKTouchAbilityTapContentView *)tapContentView {
+- (NSUInteger)numberOfColumns:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self numberOfColumnsForTraitCollection:self.traitCollection];
 }
 
-- (NSUInteger)numberOfRows:(ORKTouchAbilityTapContentView *)tapContentView {
+- (NSUInteger)numberOfRows:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self numberOfRowsForTraitCollection:self.traitCollection];
 }
 
-- (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView {
+- (NSUInteger)targetColumn:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self.targetPointsQueue.lastObject CGPointValue].x;
 }
 
-- (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView {
+- (NSUInteger)targetRow:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self.targetPointsQueue.lastObject CGPointValue].y;
 }
 
@@ -202,9 +241,9 @@
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
 - (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
-//    if (!self.isStarted) {
-//        [self start];
-//    }
+    //    if (!self.isStarted) {
+    //        [self start];
+    //    }
 }
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
@@ -212,15 +251,15 @@
     
     // Convert target view's frame to window.
     
-    ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
-    CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
+    ORKTouchAbilityLongPressContentView *longPressContentView = (ORKTouchAbilityLongPressContentView *)customView;
+    CGRect frame = [longPressContentView.targetView convertRect:longPressContentView.targetView.bounds toView:nil];
     
     
     // Initiate a new trial.
     
-    ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
-    trial.tracks = tapContentView.tracks;
-    trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
+    ORKTouchAbilityLongPressTrial *trial = [[ORKTouchAbilityLongPressTrial alloc] initWithTargetFrameInWindow:frame];
+    trial.tracks = longPressContentView.tracks;
+    trial.gestureRecognizerEvents = longPressContentView.gestureRecognizerEvents;
     
     
     // Add the trial to trials and remove the target point from the target points queue.
@@ -235,26 +274,26 @@
     NSUInteger done = total - self.targetPointsQueue.count;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [self.touchAbilityTapContentView setProgress:progress animated:YES];
+    [self.touchAbilityLongPressContentView setProgress:progress animated:YES];
     
     
     // Determind if should continue or finish.
     
     if (self.targetPointsQueue.count > 0) {
-        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
+        [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES];
         [self performSelector:@selector(presentNextTrial) withObject:nil afterDelay:1.0];
     } else {
-        [self.touchAbilityTapContentView stopTracking];
-        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
+        [self.touchAbilityLongPressContentView stopTracking];
+        [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES];
         [self performSelector:@selector(finish) withObject:nil afterDelay:1.0]; // [self finish];
     }
 }
 
 - (void)presentNextTrial {
-    [self.touchAbilityTapContentView stopTracking];
-    [self.touchAbilityTapContentView reloadData];
-    [self.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
-    [self.touchAbilityTapContentView startTracking];
+    [self.touchAbilityLongPressContentView stopTracking];
+    [self.touchAbilityLongPressContentView reloadData];
+    [self.touchAbilityLongPressContentView setTargetViewHidden:NO animated:NO];
+    [self.touchAbilityLongPressContentView startTracking];
 }
 
 @end
