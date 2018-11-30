@@ -32,11 +32,6 @@
 #import "ORKTouchAbilityTapTrial.h"
 #import "ORKHelpers_Internal.h"
 
-@interface ORKTouchAbilityTapTrial ()
-
-@property (nonatomic, assign) CGRect targetFrameInWindow;
-
-@end
 
 @implementation ORKTouchAbilityTapTrial
 

@@ -30,7 +30,6 @@
 
 
 #import "ORKTouchAbilityCustomView.h"
-//#import "ORKTouchAbilityCustomView_Internal.h"
 
 #import "ORKTouchAbilityTouchTracker.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
@@ -57,7 +56,7 @@
 }
 
 - (NSArray<ORKTouchAbilityTrack *> *)tracks {
-    return [self.touchTracker.tracks copy];
+    return self.touchTracker.tracks;
 }
 
 - (NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *)gestureRecognizerEvents {

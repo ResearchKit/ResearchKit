@@ -143,10 +143,10 @@
     return touch;
 }
 
-- (instancetype)initWithTouch:(UITouch *)touch {
+- (instancetype)initWithUITouch:(UITouch *)touch {
     self = [super init];
     if (self) {
-        self.timestamp = touch.timestamp + [NSDate dateWithTimeIntervalSinceNow:-[[NSProcessInfo processInfo] systemUptime]].timeIntervalSince1970;;
+        self.timestamp = touch.timestamp + [NSDate dateWithTimeIntervalSinceNow:-[[NSProcessInfo processInfo] systemUptime]].timeIntervalSince1970;
         self.phase = touch.phase;
         self.tapCount = touch.tapCount;
         self.type = touch.type;

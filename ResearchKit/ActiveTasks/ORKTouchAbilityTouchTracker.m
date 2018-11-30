@@ -101,7 +101,7 @@
     for (UITouch *touch in touches) {
         
         ORKTouchAbilityTrack *track = [[ORKTouchAbilityTrack alloc] init];
-        track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithTouch:touch]];
+        track.touches = [NSArray arrayWithObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:touch]];
         
         [self.tracks addObject:track];
     }
@@ -160,7 +160,7 @@
         NSMutableArray<ORKTouchAbilityTouch *> *translatedTouches = [NSMutableArray new];
         
         for (UITouch *coalescedTouch in coalescedTouches) {
-            [translatedTouches addObject:[[ORKTouchAbilityTouch alloc] initWithTouch:coalescedTouch]];
+            [translatedTouches addObject:[[ORKTouchAbilityTouch alloc] initWithUITouch:coalescedTouch]];
         }
         
         

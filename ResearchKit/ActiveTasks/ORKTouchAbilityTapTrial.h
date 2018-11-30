@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTapTrial : ORKTouchAbilityTrial
 
-@property (nonatomic, readonly) CGRect targetFrameInWindow;
+@property (nonatomic, assign) CGRect targetFrameInWindow;
 
 - (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame;
 

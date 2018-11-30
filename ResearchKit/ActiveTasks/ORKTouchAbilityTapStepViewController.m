@@ -146,6 +146,10 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
     return sResult;
 }
 
+- (void)finish {
+    [self.touchAbilityTapContentView stopTracking];
+    [super finish];
+}
 
 #pragma mark - UIViewController
 
@@ -234,15 +238,20 @@ NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *tra
     // Determind if should continue or finish.
     
     if (self.targetPointsQueue.count > 0) {
-        [self.touchAbilityTapContentView stopTracking];
-        [self.touchAbilityTapContentView reloadData];
-        [self.touchAbilityTapContentView startTracking];
+        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
+        [self performSelector:@selector(presentNextTrial) withObject:nil afterDelay:1.0];
     } else {
         [self.touchAbilityTapContentView stopTracking];
-        
         [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
-        [self performSelector:@selector(finish) withObject:nil afterDelay:1.5]; // [self finish];
+        [self performSelector:@selector(finish) withObject:nil afterDelay:1.0]; // [self finish];
     }
+}
+
+- (void)presentNextTrial {
+    [self.touchAbilityTapContentView stopTracking];
+    [self.touchAbilityTapContentView reloadData];
+    [self.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
+    [self.touchAbilityTapContentView startTracking];
 }
 
 @end

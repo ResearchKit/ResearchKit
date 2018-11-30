@@ -44,10 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@class ORKTouchAbilityTouchTracker;
 @class ORKTouchAbilityTrack;
 @class ORKTouchAbilityGestureRecoginzerEvent;
-@interface ORKTouchAbilityCustomView : ORKActiveStepCustomView
+@interface ORKTouchAbilityCustomView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
 
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
