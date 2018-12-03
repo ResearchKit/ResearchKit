@@ -6,7 +6,7 @@ codebase. However, other types of contributions are welcome too, in
 keeping with the ResearchKit™ framework [best practices](../../wiki/best-practices). For example,
 contributions of original free-to-use survey content, back-end integrations,
 validation data, and analysis or processing tools are all welcome. Ask
-on [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) or [contact us](https://developer.apple.com/contact/researchkit/) for guidance.
+on the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit) or [contact us](https://developer.apple.com/contact/researchkit/) for guidance.
 
 
 Contributing software
@@ -42,7 +42,7 @@ consider one of the areas where we'd like to extend ResearchKit:
 * More consent sections
 * Back end integrations
 
-If in doubt, bring your idea up on [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev).
+If in doubt, bring your idea up on the [*ResearchKit* Forum](https://forums.developer.apple.com/community/researchkit).
 
 
 Creating a personal fork<a name="fork"></a>
