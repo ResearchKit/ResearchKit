@@ -65,6 +65,8 @@ ORK_CLASS_AVAILABLE
 /**
  The angle (degrees) passed through from the start position to the maximum angle (e.g. from when the knee is flexed to when it is extended).
  */
-@property (nonatomic, assign) double range;@end
+@property (nonatomic, assign) double range;
+
+@end
 
 NS_ASSUME_NONNULL_END
