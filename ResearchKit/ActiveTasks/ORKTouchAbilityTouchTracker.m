@@ -35,6 +35,12 @@
 #import "ORKTouchAbilityTrack_Internal.h"
 
 
+@interface ORKTouchAbilityTouchTracker ()
+@property (nonatomic, assign, getter=hasBegun) BOOL begun;
+@end
+
+
+
 @implementation ORKTouchAbilityTouchTracker
 
 
@@ -77,10 +83,12 @@
 }
 
 - (void)stopTracking {
+    self.begun = NO;
     self.tracking = NO;
 }
 
 - (void)resetTracks {
+    self.begun = NO;
     [self.tracks removeAllObjects];
 }
 
@@ -93,6 +101,8 @@
     if (self.isTracking == NO) {
         return;
     }
+    
+    self.begun = YES;
     
     if ([self.delegate respondsToSelector:@selector(touchTrackerDidBeginNewTrack:)]) {
         [self.delegate touchTrackerDidBeginNewTrack:self];
@@ -110,7 +120,7 @@
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
     
-    if (self.isTracking == NO) {
+    if (self.isTracking == NO || self.hasBegun == NO) {
         return;
     }
     
@@ -120,7 +130,7 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     
-    if (self.isTracking == NO) {
+    if (self.isTracking == NO || self.hasBegun == NO) {
         return;
     }
    
@@ -136,7 +146,7 @@
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
     
-    if (self.isTracking == NO) {
+    if (self.isTracking == NO || self.hasBegun == NO) {
         return;
     }
     

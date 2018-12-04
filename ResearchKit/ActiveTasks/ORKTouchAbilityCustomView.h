@@ -57,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopTracking;
 - (void)resetTracks;
 
+@property (nonatomic, readonly) BOOL isTracking;
+
 @end
 
 NS_ASSUME_NONNULL_END

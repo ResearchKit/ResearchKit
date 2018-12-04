@@ -50,6 +50,8 @@
 - (ORKTouchAbilityTouchTracker *)touchTracker {
     if (!_touchTracker) {
         _touchTracker = [[ORKTouchAbilityTouchTracker alloc] init];
+        _touchTracker.delaysTouchesBegan = NO;
+        _touchTracker.delaysTouchesEnded = NO;
         _touchTracker.delegate = self;
     }
     return _touchTracker;
@@ -71,46 +73,65 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        
         [self addGestureRecognizer:self.touchTracker];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewTap:)];
         tap.cancelsTouchesInView = NO;
+        tap.delaysTouchesBegan = NO;
+        tap.delaysTouchesEnded = NO;
         tap.delegate = self;
         
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewLongPress:)];
         longPress.cancelsTouchesInView = NO;
+        longPress.delaysTouchesBegan = NO;
+        longPress.delaysTouchesEnded = NO;
         longPress.delegate = self;
         
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewPan:)];
         pan.cancelsTouchesInView = NO;
+        pan.delaysTouchesBegan = NO;
+        pan.delaysTouchesEnded = NO;
         pan.delegate = self;
         
-        UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
         swipeUp.cancelsTouchesInView = NO;
+        swipeUp.delaysTouchesBegan = NO;
+        swipeUp.delaysTouchesEnded = NO;
         swipeUp.delegate = self;
         
-        UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
         swipeDown.cancelsTouchesInView = NO;
+        swipeDown.delaysTouchesBegan = NO;
+        swipeDown.delaysTouchesEnded = NO;
         swipeDown.delegate = self;
         
-        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
         swipeLeft.cancelsTouchesInView = NO;
+        swipeLeft.delaysTouchesBegan = NO;
+        swipeLeft.delaysTouchesEnded = NO;
         swipeLeft.delegate = self;
         
-        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
         swipeRight.cancelsTouchesInView = NO;
+        swipeRight.delaysTouchesBegan = NO;
+        swipeRight.delaysTouchesEnded = NO;
         swipeRight.delegate = self;
         
-        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+        UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewPinch:)];
         pinch.cancelsTouchesInView = NO;
+        pinch.delaysTouchesBegan = NO;
+        pinch.delaysTouchesEnded = NO;
         pinch.delegate = self;
         
-        UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+        UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewRotation:)];
         rotation.cancelsTouchesInView = NO;
+        rotation.delaysTouchesBegan = NO;
+        rotation.delaysTouchesEnded = NO;
         rotation.delegate = self;
         
         [self addGestureRecognizer:tap];
@@ -141,45 +162,49 @@
     [self.touchTracker resetTracks];
 }
 
+- (BOOL)isTracking {
+    return self.touchTracker.isTracking;
+}
+
 
 #pragma mark - GestureRecognizer Handlers
 
-- (void)handleTap:(UITapGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewTap:(UITapGestureRecognizer *)sender {
     ORKTouchAbilityTapGestureRecoginzerEvent *event = [[ORKTouchAbilityTapGestureRecoginzerEvent alloc] initWithTapGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
     self.gestureRecognizerEvents = [events copy];
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewLongPress:(UILongPressGestureRecognizer *)sender {
     ORKTouchAbilityLongPressGestureRecoginzerEvent *event = [[ORKTouchAbilityLongPressGestureRecoginzerEvent alloc] initWithLongPressGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
     self.gestureRecognizerEvents = [events copy];
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewPan:(UIPanGestureRecognizer *)sender {
     ORKTouchAbilityPanGestureRecoginzerEvent *event = [[ORKTouchAbilityPanGestureRecoginzerEvent alloc] initWithPanGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
     self.gestureRecognizerEvents = [events copy];
 }
 
-- (void)handleSwipe:(UISwipeGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewSwipe:(UISwipeGestureRecognizer *)sender {
     ORKTouchAbilitySwipeGestureRecoginzerEvent *event = [[ORKTouchAbilitySwipeGestureRecoginzerEvent alloc] initWithSwipeGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
     self.gestureRecognizerEvents = [events copy];
 }
 
-- (void)handlePinch:(UIPinchGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewPinch:(UIPinchGestureRecognizer *)sender {
     ORKTouchAbilityPinchGestureRecoginzerEvent *event = [[ORKTouchAbilityPinchGestureRecoginzerEvent alloc] initWithPinchGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
     self.gestureRecognizerEvents = [events copy];
 }
 
-- (void)handleRotation:(UIRotationGestureRecognizer *)sender {
+- (void)handleTouchAbilityCustomViewRotation:(UIRotationGestureRecognizer *)sender {
     ORKTouchAbilityRotationGestureRecoginzerEvent *event = [[ORKTouchAbilityRotationGestureRecoginzerEvent alloc] initWithRotationGestureRecognizer:sender];
     NSMutableArray *events = [self.gestureRecognizerEvents mutableCopy];
     [events addObject:event];
@@ -190,12 +215,22 @@
 #pragma mark - ORKTouchAbilityTouchTrackerDelegate
 
 - (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker {
+    
+    if (!self.isTracking) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(touchAbilityCustomViewDidBeginNewTrack:)]) {
         [self.delegate touchAbilityCustomViewDidBeginNewTrack:self];
     }
 }
 
 - (void)touchTrackerDidCompleteNewTracks:(ORKTouchAbilityTouchTracker *)touchTracker {
+    
+    if (!self.isTracking) {
+        return;
+    }
+    
     if ([self.delegate respondsToSelector:@selector(touchAbilityCustomViewDidCompleteNewTracks:)]) {
         [self.delegate touchAbilityCustomViewDidCompleteNewTracks:self];
     }
