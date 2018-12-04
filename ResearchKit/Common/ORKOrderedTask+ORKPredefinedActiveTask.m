@@ -1104,6 +1104,8 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
     ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     ORKStepArrayAddStep(steps, touchAnywhereStep);
+
+    touchAnywhereStep.spokenInstruction = touchAnywhereStep.title;
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
@@ -1185,6 +1187,8 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
     ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
     touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
     ORKStepArrayAddStep(steps, touchAnywhereStep);
+    
+    touchAnywhereStep.spokenInstruction = touchAnywhereStep.title;
     
     ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
