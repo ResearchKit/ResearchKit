@@ -209,25 +209,7 @@
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
     
-    
-    // Convert target view's frame to window.
-    
-    ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
-    CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
-    
-    
-    // Initiate a new trial.
-    
-    ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
-    trial.tracks = tapContentView.tracks;
-    trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
-    
-    
-    // Add the trial to trials and remove the target point from the target points queue.
-    
-    [self.trials addObject:trial];
     [self.targetPointsQueue removeLastObject];
-    
     
     // Calculate current progress and display using progress view.
     
@@ -238,23 +220,52 @@
     [self.touchAbilityTapContentView setProgress:progress animated:YES];
     
     
-    // Determind if should continue or finish.
+    // Animate the target view.
     
-    if (self.targetPointsQueue.count > 0) {
-        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
-        [self performSelector:@selector(presentNextTrial) withObject:nil afterDelay:1.0];
-    } else {
-        [self.touchAbilityTapContentView stopTracking];
-        [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES];
-        [self performSelector:@selector(finish) withObject:nil afterDelay:1.0]; // [self finish];
-    }
-}
+    __weak __typeof(self) weakSelf = self;
+    [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES completion:^(BOOL finished) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
+        // Stop tracking new touch events.
+        
+        [strongSelf.touchAbilityTapContentView stopTracking];
+        
+        
+        // Convert target view's frame to window.
+        
+        ORKTouchAbilityTapContentView *tapContentView = (ORKTouchAbilityTapContentView *)customView;
+        CGRect frame = [tapContentView.targetView convertRect:tapContentView.targetView.bounds toView:nil];
+        
+        
+        // Initiate a new trial.
+        
+        ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
+        trial.tracks = tapContentView.tracks;
+        trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
+        
+        
+        // Add the trial to trials and remove the target point from the target points queue.
+        
+        [strongSelf.trials addObject:trial];
 
-- (void)presentNextTrial {
-    [self.touchAbilityTapContentView stopTracking];
-    [self.touchAbilityTapContentView reloadData];
-    [self.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
-    [self.touchAbilityTapContentView startTracking];
+        
+        // Determind if should continue or finish.
+        
+        if (strongSelf.targetPointsQueue.count > 0) {
+            
+            // Reload and start tracking again.
+            
+            [strongSelf.touchAbilityTapContentView reloadData];
+            [strongSelf.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
+            [strongSelf.touchAbilityTapContentView startTracking];
+            
+        } else {
+            
+            // Finish step.
+            [strongSelf finish];
+        }
+        
+    }];
 }
 
 @end

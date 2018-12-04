@@ -56,6 +56,7 @@ ORK_CLASS_AVAILABLE
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated;
+- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
 - (void)reloadData;
 
 @end

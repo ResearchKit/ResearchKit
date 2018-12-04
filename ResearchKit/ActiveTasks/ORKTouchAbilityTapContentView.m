@@ -119,9 +119,23 @@
 }
 
 - (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated {
+    [self setTargetViewHidden:hidden animated:animated completion:nil];
+}
+
+- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL))completion {
     
-    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+    NSTimeInterval totalDuration = 1.0;
+    NSTimeInterval hideDuration = 0.2;
+    NSTimeInterval remainDuration = totalDuration - hideDuration;
+    
+    [UIView animateWithDuration:animated ? hideDuration : 0 delay:0.0 options:0 animations:^{
         [self.targetView setAlpha:hidden ? 0 : 1];
+    } completion:^(BOOL finished) {
+        if (completion) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(remainDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                completion(finished);
+            });
+        }
     }];
 }
 
