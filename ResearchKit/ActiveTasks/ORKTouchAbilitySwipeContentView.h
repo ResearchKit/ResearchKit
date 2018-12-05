@@ -30,14 +30,28 @@
 
 
 @import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
+#import "ORKTouchAbilityCustomView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+@class ORKTouchAbilitySwipeContentView;
+@protocol ORKTouchAbilitySwipeContentViewDataSource <NSObject>
+
+@required
+- (UISwipeGestureRecognizerDirection)targetDirection:(ORKTouchAbilitySwipeContentView *)swipeContentView;
+
+@end
+
+@interface ORKTouchAbilitySwipeContentView : ORKTouchAbilityCustomView
+
+@property (nonatomic, readonly) UIView *arrowView;
+@property (nonatomic, weak) id<ORKTouchAbilitySwipeContentViewDataSource> _Nullable dataSource;
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+- (void)setArrowViewHidden:(BOOL)hidden animated:(BOOL)animated;
+- (void)setArrowViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
+- (void)reloadData;
+
 
 @end
 

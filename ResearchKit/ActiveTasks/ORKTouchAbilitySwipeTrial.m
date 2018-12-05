@@ -28,17 +28,49 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTouchAbilitySwipeTrial.h"
+#import "ORKHelpers_Internal.h"
 
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@implementation ORKTouchAbilitySwipeTrial
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, targetDirection);
+    ORK_ENCODE_BOOL(aCoder, success);
+}
 
-NS_ASSUME_NONNULL_BEGIN
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        ORK_DECODE_ENUM(aDecoder, targetDirection);
+        ORK_DECODE_BOOL(aDecoder, success);
+    }
+    return self;
+}
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilitySwipeTrial *trial = [super copyWithZone:zone];
+    trial.targetDirection = self.targetDirection;
+    trial.success = self.success;
+    return trial;
+}
+
+- (BOOL)isEqual:(id)object {
+    
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    
+    return (isParentSame &&
+            self.targetDirection == castObject.targetDirection &&
+            self.success == castObject.success);
+}
+
+- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction {
+    if (self = [super init]) {
+        self.targetDirection = direction;
+        self.success = NO;
+    }
+    return self;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

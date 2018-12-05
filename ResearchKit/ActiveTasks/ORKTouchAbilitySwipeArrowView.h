@@ -28,17 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
-
+@interface ORKTouchAbilitySwipeArrowView : UIView
+@property (nonatomic, assign) UISwipeGestureRecognizerDirection direction;
 @end
 
 NS_ASSUME_NONNULL_END

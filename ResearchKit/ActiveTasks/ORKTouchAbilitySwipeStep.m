@@ -29,16 +29,33 @@
  */
 
 
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+#import "ORKTouchAbilitySwipeStep.h"
+#import "ORKTouchAbilitySwipeStepViewController.h"
+#import "ORKhelpers_Internal.h"
 
+@implementation ORKTouchAbilitySwipeStep
 
-NS_ASSUME_NONNULL_BEGIN
++ (Class)stepViewControllerClass {
+    return [ORKTouchAbilitySwipeStepViewController class];
+}
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+        self.shouldContinueOnFinish = YES;
+    }
+    return self;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    // TODO:
+}
+
+- (BOOL)startsFinished {
+    return NO;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

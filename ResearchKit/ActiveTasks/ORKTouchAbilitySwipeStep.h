@@ -29,15 +29,15 @@
  */
 
 
-@import UIKit;
+@import Foundation;
 #import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+#import <ResearchKit/ORKActiveStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+@interface ORKTouchAbilitySwipeStep : ORKActiveStep
 
 @end
 

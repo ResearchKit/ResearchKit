@@ -28,17 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
+@import Foundation;
+#import <ResearchKit/ORKResult.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+@class ORKTouchAbilitySwipeTrial;
 
+ORK_CLASS_AVAILABLE
+@interface ORKTouchAbilitySwipeResult : ORKResult
+@property (nonatomic, copy) NSArray<ORKTouchAbilitySwipeTrial *> *trials;
 @end
 
 NS_ASSUME_NONNULL_END

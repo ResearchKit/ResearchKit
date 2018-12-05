@@ -29,15 +29,19 @@
  */
 
 
-@import UIKit;
-#import <ResearchKit/ORKDefines.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
+#import <UIKit/UIKit.h>
+#import "ORKTouchAbilityTrial.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityLongPressStepViewController : ORKActiveStepViewController
+@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
+
+@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
+@property (nonatomic, assign) BOOL success;
+
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
 
 @end
 
