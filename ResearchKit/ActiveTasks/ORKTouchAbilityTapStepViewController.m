@@ -57,13 +57,30 @@
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
 @property (nonatomic, strong) NSMutableArray<ORKTouchAbilityTapTrial *> *trials;
 
+@property (nonatomic, assign) BOOL success;
+
 // UI
 @property (nonatomic, strong) ORKTouchAbilityTapContentView *touchAbilityTapContentView;
-
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation ORKTouchAbilityTapStepViewController
 
+
+- (UITapGestureRecognizer *)tapGestureRecognizer {
+    if (!_tapGestureRecognizer) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
+    }
+    return _tapGestureRecognizer;
+}
+
+- (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)sender {
+    if (CGRectContainsPoint(self.touchAbilityTapContentView.targetView.bounds, [sender locationInView:self.touchAbilityTapContentView.targetView])) {
+        self.success = YES;
+    } else {
+        self.success = NO;
+    }
+}
 
 #pragma mark - ORKActiveStepViewController
 
@@ -125,11 +142,14 @@
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
     [self.activeStepView updateTitle:nil text:@"FOOOOOOOOOO barrrrrrr"];
+    
+    [self.touchAbilityTapContentView.targetView addGestureRecognizer:self.tapGestureRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
+    self.success = NO;
     [self.touchAbilityTapContentView startTracking];
 }
 
@@ -202,9 +222,7 @@
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
 - (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
-//    if (!self.isStarted) {
-//        [self start];
-//    }
+    
 }
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
@@ -242,7 +260,7 @@
         ORKTouchAbilityTapTrial *trial = [[ORKTouchAbilityTapTrial alloc] initWithTargetFrameInWindow:frame];
         trial.tracks = tapContentView.tracks;
         trial.gestureRecognizerEvents = tapContentView.gestureRecognizerEvents;
-        
+        trial.success = strongSelf.success;
         
         // Add the trial to trials and remove the target point from the target points queue.
         
@@ -254,7 +272,7 @@
         if (strongSelf.targetPointsQueue.count > 0) {
             
             // Reload and start tracking again.
-            
+            strongSelf.success = NO;
             [strongSelf.touchAbilityTapContentView reloadData];
             [strongSelf.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
             [strongSelf.touchAbilityTapContentView startTracking];
