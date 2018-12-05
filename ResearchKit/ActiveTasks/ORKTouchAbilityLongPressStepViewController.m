@@ -51,62 +51,39 @@
 #import "ORKHelpers_Internal.h"
 
 
-//NSUInteger numberOfColumnsForTraitCollection(UITraitCollection *traitCollection) {
-//
-//    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
-//        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-//        return 5;
-//    } else {
-//        return 3;
-//    }
-//}
-//
-//NSUInteger numberOfRowsForTraitCollection(UITraitCollection *traitCollection) {
-//
-//    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
-//        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-//        return 5;
-//    } else {
-//        return 3;
-//    }
-//}
-//
-//NSMutableArray<NSValue *> *targetPointsForTraitCollection(UITraitCollection *traitCollection) {
-//
-//    NSUInteger columns = numberOfColumnsForTraitCollection(traitCollection);
-//    NSUInteger rows = numberOfRowsForTraitCollection(traitCollection);
-//
-//    NSMutableArray *points = [NSMutableArray new];
-//    for (NSUInteger i = 0; i < columns; i++) {
-//        for (NSUInteger j = 0; j < rows; j++) {
-//            CGPoint point = CGPointMake(i, j);
-//            [points addObject:[NSValue valueWithCGPoint:point]];
-//        }
-//    }
-//
-//    NSUInteger count = [points count];
-//    for (NSUInteger i = 0; i < count; i++) {
-//        NSUInteger nElements = count - i;
-//        NSUInteger n = (arc4random() % nElements) + i;
-//        [points exchangeObjectAtIndex:i withObjectAtIndex:n];
-//    }
-//
-//    return points;
-//}
-
-
 @interface ORKTouchAbilityLongPressStepViewController () <ORKTouchAbilityLongPressContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
 
 // Data
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
 @property (nonatomic, strong) NSMutableArray<ORKTouchAbilityLongPressTrial *> *trials;
 
+@property (nonatomic, assign) BOOL success;
+
 // UI
 @property (nonatomic, strong) ORKTouchAbilityLongPressContentView *touchAbilityLongPressContentView;
-
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @end
 
 @implementation ORKTouchAbilityLongPressStepViewController
+
+
+- (UILongPressGestureRecognizer *)longPressGestureRecognizer {
+    if (!_longPressGestureRecognizer) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGestureRecognizer:)];
+    }
+    return _longPressGestureRecognizer;
+}
+
+- (void)handleLongPressGestureRecognizer:(UILongPressGestureRecognizer *)sender {
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if (CGRectContainsPoint(self.touchAbilityLongPressContentView.targetView.bounds, [sender locationInView:self.touchAbilityLongPressContentView.targetView])) {
+            self.success = YES;
+        } else {
+            self.success = NO;
+        }
+    }
+}
 
 
 #pragma mark - ORKActiveStepViewController
@@ -164,11 +141,14 @@
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
     [self.activeStepView updateTitle:nil text:@"FOOOOOOOOOO barrrrrrr"];
+    
+    [self.touchAbilityLongPressContentView.targetView addGestureRecognizer:self.longPressGestureRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
+    self.success = NO;
     [self.touchAbilityLongPressContentView startTracking];
 }
 
@@ -176,23 +156,11 @@
 #pragma mark - ORKTouchAbilityLongPressStepViewController
 
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {
-    
-    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
-        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-        return 5;
-    } else {
-        return 3;
-    }
+    return 3;
 }
 
 - (NSUInteger)numberOfRowsForTraitCollection:(UITraitCollection *)traitCollection {
-    
-    if (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular &&
-        traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular) {
-        return 5;
-    } else {
-        return 3;
-    }
+    return 3;
 }
 
 - (NSMutableArray<NSValue *> *)targetPointsForTraitCollection:(UITraitCollection *)traitCollection {
@@ -241,30 +209,11 @@
 #pragma mark - ORKTouchAbilityCustomViewDelegate
 
 - (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
-    //    if (!self.isStarted) {
-    //        [self start];
-    //    }
+    
 }
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
     
-    
-    // Convert target view's frame to window.
-    
-    ORKTouchAbilityLongPressContentView *longPressContentView = (ORKTouchAbilityLongPressContentView *)customView;
-    CGRect frame = [longPressContentView.targetView convertRect:longPressContentView.targetView.bounds toView:nil];
-    
-    
-    // Initiate a new trial.
-    
-    ORKTouchAbilityLongPressTrial *trial = [[ORKTouchAbilityLongPressTrial alloc] initWithTargetFrameInWindow:frame];
-    trial.tracks = longPressContentView.tracks;
-    trial.gestureRecognizerEvents = longPressContentView.gestureRecognizerEvents;
-    
-    
-    // Add the trial to trials and remove the target point from the target points queue.
-    
-    [self.trials addObject:trial];
     [self.targetPointsQueue removeLastObject];
     
     
@@ -277,23 +226,51 @@
     [self.touchAbilityLongPressContentView setProgress:progress animated:YES];
     
     
-    // Determind if should continue or finish.
+    // Animate the target view.
     
-    if (self.targetPointsQueue.count > 0) {
-        [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES];
-        [self performSelector:@selector(presentNextTrial) withObject:nil afterDelay:1.0];
-    } else {
-        [self.touchAbilityLongPressContentView stopTracking];
-        [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES];
-        [self performSelector:@selector(finish) withObject:nil afterDelay:1.0]; // [self finish];
-    }
-}
-
-- (void)presentNextTrial {
-    [self.touchAbilityLongPressContentView stopTracking];
-    [self.touchAbilityLongPressContentView reloadData];
-    [self.touchAbilityLongPressContentView setTargetViewHidden:NO animated:NO];
-    [self.touchAbilityLongPressContentView startTracking];
+    __weak __typeof(self) weakSelf = self;
+    [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES completion:^(BOOL finished) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
+        
+        // Stop tracking new touch events.
+        
+        [strongSelf.touchAbilityLongPressContentView stopTracking];
+        
+        
+        // Convert target view's frame to window.
+        CGRect frame = [strongSelf.touchAbilityLongPressContentView.targetView convertRect:strongSelf.touchAbilityLongPressContentView.targetView.bounds toView:nil];
+        
+        
+        // Initiate a new trial.
+        
+        ORKTouchAbilityLongPressTrial *trial = [[ORKTouchAbilityLongPressTrial alloc] initWithTargetFrameInWindow:frame];
+        trial.tracks = strongSelf.touchAbilityLongPressContentView.tracks;
+        trial.gestureRecognizerEvents = strongSelf.touchAbilityLongPressContentView.gestureRecognizerEvents;
+        trial.success = strongSelf.success;
+        
+        // Add the trial to trials and remove the target point from the target points queue.
+        
+        [strongSelf.trials addObject:trial];
+        
+        
+        // Determind if should continue or finish.
+        
+        if (strongSelf.targetPointsQueue.count > 0) {
+            
+            // Reload and start tracking again.
+            strongSelf.success = NO;
+            [strongSelf.touchAbilityLongPressContentView reloadData];
+            [strongSelf.touchAbilityLongPressContentView setTargetViewHidden:NO animated:NO];
+            [strongSelf.touchAbilityLongPressContentView startTracking];
+            
+        } else {
+            
+            // Finish step.
+            [strongSelf finish];
+        }
+        
+    }];
 }
 
 @end

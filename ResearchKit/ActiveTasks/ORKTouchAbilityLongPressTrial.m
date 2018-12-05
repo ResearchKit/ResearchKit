@@ -38,12 +38,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_CGRECT(aCoder, targetFrameInWindow);
+    ORK_ENCODE_BOOL(aCoder, success);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_CGRECT(aDecoder, targetFrameInWindow);
+        ORK_DECODE_BOOL(aDecoder, success);
     }
     return self;
 }
@@ -51,6 +53,7 @@
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityLongPressTrial *trial = [super copyWithZone:zone];
     trial.targetFrameInWindow = self.targetFrameInWindow;
+    trial.success = self.success;
     return trial;
 }
 
@@ -60,13 +63,16 @@
     
     __typeof(self) castObject = object;
     
-    return (isParentSame && CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow));
+    return (isParentSame &&
+            CGRectEqualToRect(self.targetFrameInWindow, castObject.targetFrameInWindow) &&
+            self.success == castObject.success);
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.targetFrameInWindow = CGRectZero;
+        self.success = NO;
     }
     return self;
 }
@@ -75,6 +81,7 @@
     self = [super init];
     if (self) {
         self.targetFrameInWindow = targetFrame;
+        self.success = NO;
     }
     return self;
 }

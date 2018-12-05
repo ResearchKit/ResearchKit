@@ -38,6 +38,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityLongPressTrial : ORKTouchAbilityTrial
 
 @property (nonatomic, assign) CGRect targetFrameInWindow;
+@property (nonatomic, assign) BOOL success;
 
 - (instancetype)initWithTargetFrameInWindow:(CGRect)targetFrame;
 
