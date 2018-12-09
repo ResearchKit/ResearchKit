@@ -108,6 +108,13 @@ enum TaskListRow: Int, CustomStringConvertible {
     case weightQuestion
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
+    case forwardBendingRangeOfMotion
+    case trunkRotationRangeOfMotion
+    case sideBendingRangeOfMotion
+    case neckFlexionRangeOfMotion
+    case neckExtensionRangeOfMotion
+    case neckRotationRangeOfMotion
+    case neckSideBendingRangeOfMotion
     case trailMaking
     case videoInstruction
     case webView
@@ -184,6 +191,13 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .walkBackAndForth,
                     .kneeRangeOfMotion,
                     .shoulderRangeOfMotion,
+                    .forwardBendingRangeOfMotion,
+                    .trunkRotationRangeOfMotion,
+                    .sideBendingRangeOfMotion,
+                    .neckFlexionRangeOfMotion,
+                    .neckExtensionRangeOfMotion,
+                    .neckRotationRangeOfMotion,
+                    .neckSideBendingRangeOfMotion,
                     .trailMaking
                 ]),
             TaskListRowSection(title: "Miscellaneous", rows:
@@ -344,6 +358,27 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .shoulderRangeOfMotion:
             return NSLocalizedString("Shoulder Range of Motion", comment: "")
             
+        case .forwardBendingRangeOfMotion:
+            return NSLocalizedString("Forward Bending Range of Motion", comment: "")
+        
+        case .trunkRotationRangeOfMotion:
+            return NSLocalizedString("Trunk Rotation Range of Motion", comment: "")
+        
+        case .sideBendingRangeOfMotion:
+            return NSLocalizedString("Side Bending Range of Motion", comment: "")
+        
+        case .neckFlexionRangeOfMotion:
+            return NSLocalizedString("Neck Flexion Range of Motion", comment: "")
+            
+        case .neckExtensionRangeOfMotion:
+            return NSLocalizedString("Neck Extension Range of Motion", comment: "")
+        
+        case .neckRotationRangeOfMotion:
+            return NSLocalizedString("Neck Rotation Range of Motion", comment: "")
+            
+        case .neckSideBendingRangeOfMotion:
+            return NSLocalizedString("Neck Side Bending Range of Motion", comment: "")
+        
         case .trailMaking:
             return NSLocalizedString("Trail Making Test", comment: "")
             
@@ -530,6 +565,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         case walkBackAndForthTask
         case kneeRangeOfMotion
         case shoulderRangeOfMotion
+        case forwardBendingRangeOfMotion
+        case trunkRotationRangeOfMotion
+        case sideBendingRangeOfMotion
+        case neckFlexionRangeOfMotion
+        case neckExtensionRangeOfMotion
+        case neckRotationRangeOfMotion
+        case neckSideBendingRangeOfMotion
         case trailMaking
         
         // Video instruction tasks.
@@ -689,6 +731,27 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .shoulderRangeOfMotion:
             return shoulderRangeOfMotion
             
+        case .forwardBendingRangeOfMotion:
+            return forwardBendingRangeOfMotion
+        
+        case .trunkRotationRangeOfMotion:
+            return trunkRotationRangeOfMotion
+        
+        case .sideBendingRangeOfMotion:
+            return sideBendingRangeOfMotion
+        
+        case .neckFlexionRangeOfMotion:
+            return neckFlexionRangeOfMotion
+        
+        case .neckExtensionRangeOfMotion:
+            return neckExtensionRangeOfMotion
+        
+        case .neckRotationRangeOfMotion:
+            return neckRotationRangeOfMotion
+            
+        case .neckSideBendingRangeOfMotion:
+            return neckSideBendingRangeOfMotion
+        
         case .trailMaking:
             return trailMaking;
         
@@ -1159,7 +1222,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
         answerFormatDomain.autocorrectionType = UITextAutocorrectionType.no
         answerFormatDomain.spellCheckingType = UITextSpellCheckingType.no
-        answerFormatDomain.textContentType = UITextContentType.URL
         let stepDomain = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepDomain), title: NSLocalizedString("Validated Text", comment: ""), question: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
         stepDomain.text = exampleDetailText
         
@@ -1455,7 +1517,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing:Identifier.passcodeStep))
         passcodeConsentStep.title = NSLocalizedString("Passcode", comment: "")
-        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeTask), steps: [passcodeConsentStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeStep), steps: [passcodeConsentStep])
     }
     
     /// This task presents the Audio pre-defined active task.
@@ -1580,6 +1642,41 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
         return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+    }
+    
+    /// This task presents a forward bending range of motion task
+    private var forwardBendingRangeOfMotion: ORKTask {
+        return ORKOrderedTask.forwardBendingRangeOfMotionTask(withIdentifier: String(describing: Identifier.forwardBendingRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a trunk rotation range of motion task
+    private var trunkRotationRangeOfMotion: ORKTask {
+        return ORKOrderedTask.trunkRotationRangeOfMotionTask(withIdentifier: String(describing: Identifier.trunkRotationRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a side bending range of motion task
+    private var sideBendingRangeOfMotion: ORKTask {
+        return ORKOrderedTask.sideBendingRangeOfMotionTask(withIdentifier: String(describing: Identifier.sideBendingRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a neck flexion range of motion task
+    private var neckFlexionRangeOfMotion: ORKTask {
+        return ORKOrderedTask.neckFlexionRangeOfMotionTask(withIdentifier: String(describing: Identifier.neckFlexionRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a neck extension range of motion task
+    private var neckExtensionRangeOfMotion: ORKTask {
+        return ORKOrderedTask.neckExtensionRangeOfMotionTask(withIdentifier: String(describing: Identifier.neckExtensionRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a neck rotation range of motion task
+    private var neckRotationRangeOfMotion: ORKTask {
+        return ORKOrderedTask.neckRotationRangeOfMotionTask(withIdentifier: String(describing: Identifier.neckRotationRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents a neck side bending range of motion task
+    private var neckSideBendingRangeOfMotion: ORKTask {
+        return ORKOrderedTask.neckSideBendingRangeOfMotionTask(withIdentifier: String(describing: Identifier.neckSideBendingRangeOfMotion), limbOption: .left, intendedUseDescription: nil, options: [])
     }
     
     /// This task presents a trail making task
