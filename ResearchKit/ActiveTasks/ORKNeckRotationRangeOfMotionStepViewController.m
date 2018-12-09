@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2016, Darren Levy. All rights reserved.
- Copyright (c) 2018, David Evans, University of Birmingham. All rights reserved.
+ Copyright (c) 2018, Dr David W. Evans. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
