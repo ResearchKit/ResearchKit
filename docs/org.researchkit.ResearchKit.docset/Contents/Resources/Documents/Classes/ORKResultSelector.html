@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKResultSelector Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/resultIdentifier">resultIdentifier</option>
+		
+		<option value="//api/name/taskIdentifier">taskIdentifier</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/selectorWithResultIdentifier:">+ selectorWithResultIdentifier:</option>
+		
+		<option value="//api/name/selectorWithStepIdentifier:resultIdentifier:">+ selectorWithStepIdentifier:resultIdentifier:</option>
+		
+		<option value="//api/name/selectorWithTaskIdentifier:resultIdentifier:">+ selectorWithTaskIdentifier:resultIdentifier:</option>
+		
+		<option value="//api/name/selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:">+ selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithResultIdentifier:">- initWithResultIdentifier:</option>
+		
+		<option value="//api/name/initWithStepIdentifier:resultIdentifier:">- initWithStepIdentifier:resultIdentifier:</option>
+		
+		<option value="//api/name/initWithTaskIdentifier:resultIdentifier:">- initWithTaskIdentifier:resultIdentifier:</option>
+		
+		<option value="//api/name/initWithTaskIdentifier:stepIdentifier:resultIdentifier:">- initWithTaskIdentifier:stepIdentifier:resultIdentifier:</option>
+		
+		<option value="//api/name/stepIdentifier">- stepIdentifier</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKResultSelector Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKResultPredicate.h<br />ORKResultPredicate.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKResultSelector</code> class unequivocally identifies a result within a set of task results.</p>
+
+<p>You must use an instance of this object to specify the question result you are interested in when
+building a result predicate. See <a href="../Classes/ORKResultPredicate.html"><code>ORKResultPredicate</code></a> for more information.</p>
+
+<p>A result selector object contains a result identifier and, optionally, a task identifier and a step
+identifier. If the task identifier is <code>nil</code>, the selector refers to a result in the ongoing task.
+If you set the step identifier to <code>nil</code>, its value will be the same as the result identifier.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:" title="selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:">+&nbsp;selectorWithTaskIdentifier:stepIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)selectorWithTaskIdentifier:(NSString *)<em>taskIdentifier</em> stepIdentifier:(NSString *)<em>stepIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskIdentifier</code></th>
+						<td><p>An optional task identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>An optional step identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/selectorWithStepIdentifier:resultIdentifier:" title="selectorWithStepIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/selectorWithStepIdentifier:resultIdentifier:">+&nbsp;selectorWithStepIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)selectorWithStepIdentifier:(NSString *)<em>stepIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>An optional step identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/selectorWithTaskIdentifier:resultIdentifier:" title="selectorWithTaskIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/selectorWithTaskIdentifier:resultIdentifier:">+&nbsp;selectorWithTaskIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)selectorWithTaskIdentifier:(NSString *)<em>taskIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskIdentifier</code></th>
+						<td><p>An optional task identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/selectorWithResultIdentifier:" title="selectorWithResultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/selectorWithResultIdentifier:">+&nbsp;selectorWithResultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (instancetype)selectorWithResultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithTaskIdentifier:stepIdentifier:resultIdentifier:" title="initWithTaskIdentifier:stepIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTaskIdentifier:stepIdentifier:resultIdentifier:">&ndash;&nbsp;initWithTaskIdentifier:stepIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTaskIdentifier:(NSString *)<em>taskIdentifier</em> stepIdentifier:(NSString *)<em>stepIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskIdentifier</code></th>
+						<td><p>An optional task identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>An optional step identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithTaskIdentifier:resultIdentifier:" title="initWithTaskIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithTaskIdentifier:resultIdentifier:">&ndash;&nbsp;initWithTaskIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithTaskIdentifier:(NSString *)<em>taskIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskIdentifier</code></th>
+						<td><p>An optional task identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithStepIdentifier:resultIdentifier:" title="initWithStepIdentifier:resultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStepIdentifier:resultIdentifier:">&ndash;&nbsp;initWithStepIdentifier:resultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStepIdentifier:(NSString *)<em>stepIdentifier</em> resultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>stepIdentifier</code></th>
+						<td><p>An optional step identifier string.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithResultIdentifier:" title="initWithResultIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithResultIdentifier:">&ndash;&nbsp;initWithResultIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a result selector initialized with the specified arguments.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithResultIdentifier:(NSString *)<em>resultIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultIdentifier</code></th>
+						<td><p>The result identifier string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A result selector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepIdentifier" title="stepIdentifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepIdentifier">&ndash;&nbsp;stepIdentifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The encapsulated step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)stepIdentifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Setting this property to <code>nil</code> makes it have the same value as the result identifier.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/taskIdentifier" title="taskIdentifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/taskIdentifier">&nbsp;&nbsp;taskIdentifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The encapsulated task identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *taskIdentifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A <code>nil</code> value means that the referenced task is the current one.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resultIdentifier" title="resultIdentifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resultIdentifier">&nbsp;&nbsp;resultIdentifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The encapsulated result identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *resultIdentifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This property cannot be <code>nil</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKResultPredicate.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

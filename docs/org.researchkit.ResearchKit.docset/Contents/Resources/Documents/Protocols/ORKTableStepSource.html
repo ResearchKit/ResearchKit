@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKTableStepSource Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/configureCell:indexPath:tableView:">- configureCell:indexPath:tableView:</option>
+		
+		<option value="//api/name/numberOfRowsInSection:">- numberOfRowsInSection:</option>
+		
+		<option value="//api/name/numberOfSections">- numberOfSections</option>
+		
+		<option value="//api/name/registerCellsForTableView:">- registerCellsForTableView:</option>
+		
+		<option value="//api/name/reuseIdentifierForRowAtIndexPath:">- reuseIdentifierForRowAtIndexPath:</option>
+		
+		<option value="//api/name/titleForHeaderInSection:tableView:">- titleForHeaderInSection:tableView:</option>
+		
+		<option value="//api/name/viewForHeaderInSection:tableView:">- viewForHeaderInSection:tableView:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKTableStepSource Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKTableStep.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKTableStepSource</code> is a protocol that can be used for presenting a list of model
+objects in a UITableView. Any <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> subclass that implements this protocol can be used with
+an <a href="../Classes/ORKTableStepViewController.html"><code>ORKTableStepViewController</code></a> to display the list of items.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/numberOfRowsInSection:" title="numberOfRowsInSection:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberOfRowsInSection:">&ndash;&nbsp;numberOfRowsInSection:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the number of rows in the section.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)numberOfRowsInSection:(NSInteger)<em>section</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>section</code></th>
+						<td><p>The section of the table</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of rows in the tableview section</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/configureCell:indexPath:tableView:" title="configureCell:indexPath:tableView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/configureCell:indexPath:tableView:">&ndash;&nbsp;configureCell:indexPath:tableView:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Method for configuring a cell.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)configureCell:(UITableViewCell *)<em>cell</em> indexPath:(NSIndexPath *)<em>indexPath</em> tableView:(UITableView *)<em>tableView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>cell</code></th>
+						<td><p>The <code>UITableViewCell</code> to configure.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>indexPath</code></th>
+						<td><p>The indexpath for the cell.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tableView</code></th>
+						<td><p>The table view for this cell.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/numberOfSections" title="numberOfSections"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberOfSections">&ndash;&nbsp;numberOfSections</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the number of sections in the tableview used to display this step. Default = <code>1</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)numberOfSections</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of sections in the tableview.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reuseIdentifierForRowAtIndexPath:" title="reuseIdentifierForRowAtIndexPath:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reuseIdentifierForRowAtIndexPath:">&ndash;&nbsp;reuseIdentifierForRowAtIndexPath:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the reuseIdentifier for the object at this index path. Default = <code>ORKBasicCellReuseIdentifier</code></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)reuseIdentifierForRowAtIndexPath:(NSIndexPath *)<em>indexPath</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>indexPath</code></th>
+						<td><p>The indexpath of the section/row for the cell</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The model object for this section/row</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/registerCellsForTableView:" title="registerCellsForTableView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/registerCellsForTableView:">&ndash;&nbsp;registerCellsForTableView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Optional override for registering UITableViewCell instances. The default registers a <code>UITableViewCell</code>
+for <code>ORKBasicCellReuseIdentifier</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)registerCellsForTableView:(UITableView *)<em>tableView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tableView</code></th>
+						<td><p>The table view to register cells</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/titleForHeaderInSection:tableView:" title="titleForHeaderInSection:tableView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/titleForHeaderInSection:tableView:">&ndash;&nbsp;titleForHeaderInSection:tableView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Optional override to return custom header title for section. The default returns <code>nil</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NSString *)titleForHeaderInSection:(NSInteger)<em>section</em> tableView:(UITableView *)<em>tableView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>section</code></th>
+						<td><p>The section for this custom header title</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tableView</code></th>
+						<td><p>The table view for custom section header title</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The custom header title for this section</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewForHeaderInSection:tableView:" title="viewForHeaderInSection:tableView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewForHeaderInSection:tableView:">&ndash;&nbsp;viewForHeaderInSection:tableView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Optional override to return custom header view for section. The default returns <code>nil</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable UIView *)viewForHeaderInSection:(NSInteger)<em>section</em> tableView:(UITableView *)<em>tableView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>section</code></th>
+						<td><p>The section for this custom header view</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tableView</code></th>
+						<td><p>The table view for custom section header view</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The custom header view for this section</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKTableStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

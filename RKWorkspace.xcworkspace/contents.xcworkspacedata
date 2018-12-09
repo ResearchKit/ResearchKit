@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:samples/ORKParkinsonStudy/ORKParkinsonStudy.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ResearchKit.xcodeproj">
    </FileRef>
    <FileRef

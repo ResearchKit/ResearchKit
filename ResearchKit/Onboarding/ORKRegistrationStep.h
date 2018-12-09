@@ -29,7 +29,7 @@
  */
 
 
-@import Foundation;
+@import UIKit;
 #import <ResearchKit/ORKFormStep.h>
 
 
@@ -143,6 +143,15 @@ passcodeValidationRegularExpression:(nullable NSRegularExpression *)passcodeVali
  By default, there is no invalid message.
  */
 @property (nonatomic, copy, nullable) NSString *passcodeInvalidMessage;
+
+/**
+ The password generation rules to use for Automatic Secure Passwords.
+ 
+ If specified, overrides the default passsword generation rules for fields with secureTextEntry.
+ The `passcodeRules` should match the `passcodeValidationRegularExpression` or else a passcode
+ may be generated that fails validation.
+ */
+@property (nonatomic, nullable) UITextInputPasswordRules *passcodeRules API_AVAILABLE(ios(12.0));
 
 /**
  The regular expression used to validate the phone number form item.

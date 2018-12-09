@@ -2,7 +2,8 @@
  Copyright (c) 2015-2017, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
- Copyright (c) 2016-2017, Sage Bionetworks
+ Copyright (c) 2016-2017, Sage Bionetworks.
+ Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -57,7 +58,8 @@
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"timeInterval1"
-                                                                      title:@"How long did it take to fall asleep last night?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"How long did it take to fall asleep last night?"
                                                                      answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
         [steps addObject:step];
     }
@@ -67,7 +69,8 @@
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"timeInterval2"
-                                                                      title:@"How long did it take to fall asleep last night?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"How long did it take to fall asleep last night?"
                                                                      answer:[ORKAnswerFormat timeIntervalAnswerFormatWithDefaultInterval:300 step:5]];
         [steps addObject:step];
     }
@@ -79,7 +82,8 @@
     {
         ORKDateAnswerFormat *dateAnswer = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:nil minimumDate:nil maximumDate:nil calendar: [NSCalendar calendarWithIdentifier:NSCalendarIdentifierHebrew]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"date1"
-                                                                      title:@"When is your birthday?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"When is your birthday?"
                                                                      answer:dateAnswer];
         [steps addObject:step];
     }
@@ -97,7 +101,8 @@
                                                                                    maximumDate:maxDate
                                                                                       calendar: [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"date2"
-                                                                      title:@"What day are you available?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"What day are you available?"
                                                                      answer:dateAnswer];
         [steps addObject:step];
     }
@@ -107,7 +112,8 @@
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"timeOfDay1"
-                                                                      title:@"What time do you get up?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"What time do you get up?"
                                                                      answer:[ORKTimeOfDayAnswerFormat timeOfDayAnswerFormat]];
         [steps addObject:step];
     }
@@ -121,7 +127,8 @@
         dateComponents.hour = 8;
         dateComponents.minute = 15;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"timeOfDay2"
-                                                                      title:@"What time do you get up?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"What time do you get up?"
                                                                      answer:[ORKTimeOfDayAnswerFormat timeOfDayAnswerFormatWithDefaultComponents:dateComponents]];
         [steps addObject:step];
     }
@@ -131,7 +138,8 @@
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"dateTime1"
-                                                                      title:@"When is your next meeting?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"When is your next meeting?"
                                                                      answer:[ORKDateAnswerFormat dateTimeAnswerFormat]];
         [steps addObject:step];
     }
@@ -144,7 +152,8 @@
         NSDate *minDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:8 toDate:[NSDate date] options:(NSCalendarOptions)0];
         NSDate *maxDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:12 toDate:[NSDate date] options:(NSCalendarOptions)0];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"dateTime2"
-                                                                      title:@"When is your next meeting?"
+                                                                      title:@"Date Survey"
+                                                                   question:@"When is your next meeting?"
                                                                      answer:[ORKDateAnswerFormat dateTimeAnswerFormatWithDefaultDate:defaultDate minimumDate:minDate  maximumDate:maxDate calendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]]];
         [steps addObject:step];
         
@@ -243,7 +252,7 @@
     
     for (NSValue *ratio in @[[NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)], [NSValue valueWithCGPoint:CGPointMake(2.0, 1.0)], [NSValue valueWithCGPoint:CGPointMake(1.0, 2.0)]])
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:[NSString stringWithFormat:@"formStep%@",NSStringFromCGPoint(ratio.CGPointValue)] title:@"Image Choices Form" text:@"Testing image choices in a form layout."];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:[NSString stringWithFormat:@"formStep%@",NSStringFromCGPoint(ratio.CGPointValue)] title:@"Image Choice" text:@"Testing image choices in a form layout."];
         
         NSMutableArray *items = [NSMutableArray new];
         
@@ -316,22 +325,26 @@
                                                                        text:@"Cyan" value:@"cyanColor"];
             
             ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color1_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color"
+                                                                           title:@"Image Choice"
+                                                                        question:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1] ]];
             [steps addObject:step1];
             
             ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color2_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color"
+                                                                           title:@"Image Choice"
+                                                                        question:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2] ]];
             [steps addObject:step2];
             
             ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color3_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color"
+                                                                           title:@"Image Choice"
+                                                                        question:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3] ]];
             [steps addObject:step3];
             
             ORKQuestionStep *step6 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color6_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
-                                                                           title:@"Pick a color"
+                                                                           title:@"Image Choice"
+                                                                        question:@"Pick a color"
                                                                           answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3, option4, option5, option6]]];
             [steps addObject:step6];
         }
@@ -356,20 +369,23 @@
     
     // Location question with current location observing on
     ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"step2"];
-    step2.title = @"Where are you right now?";
+    step2.title = @"Location Survey";
+    step2.text = @"Where are you right now?";
     step2.answerFormat = [[ORKLocationAnswerFormat alloc] init];
     [steps addObject:step2];
     
     // Location question with current location observing off
     ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"step3"];
-    step3.title = @"Where is your home?";
+    step3.title = @"Location Survey";
+    step3.text = @"Where is your home?";
     ORKLocationAnswerFormat *locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
     locationAnswerFormat.useCurrentLocation= NO;
     step3.answerFormat = locationAnswerFormat;
     [steps addObject:step3];
     
     ORKCompletionStep *step4 = [[ORKCompletionStep alloc] initWithIdentifier:@"step4"];
-    step4.title = @"Survey Complete";
+    step4.title = @"Location Survey";
+    step4.text = @"Survey Complete";
     [steps addObject:step4];
     
     ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -396,7 +412,8 @@
                                                                                                   minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale1"
-                                                                      title:@"On a scale of 1 to 10, how much pain do you feel?"
+                                                                      title:@"Scale"
+                                                                   question:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -414,7 +431,8 @@
                                                                               minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale2"
-                                                                      title:@"How much money do you need?"
+                                                                      title:@"Scale"
+                                                                      question:@"How much money do you need?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -432,7 +450,8 @@
                                                                               minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale3"
-                                                                      title:@"On a scale of 1 to 10, how much pain do you feel?"
+                                                                      title:@"Scale"
+                                                                      question:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -450,7 +469,8 @@
                                                                               minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale4"
-                                                                      title:@"How much money do you need?"
+                                                                      title:@"Scale"
+                                                                      question:@"How much money do you need?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -468,7 +488,8 @@
                                                                                                   minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale5"
-                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                      title:@"Scale"
+                                                                      question:@"On a scale of 1 to 10, what is your mood?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -486,7 +507,8 @@
                                                                               minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale6"
-                                                                      title:@"How was your mood yesterday?"
+                                                                      title:@"Scale"
+                                                                   question:@"How was your mood yesterday?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -504,7 +526,8 @@
                                                                               minimumValueDescription:@"Not at all"];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale7"
-                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                      title:@"Scale"
+                                                                   question:@"On a scale of 1 to 10, what is your mood?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -522,7 +545,8 @@
                                                                                                   minimumValueDescription:@"Low value"];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale8"
-                                                                      title:@"How would you measure your mood improvement?"
+                                                                      title:@"Scale"
+                                                                   question:@"How would you measure your mood improvement?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -540,7 +564,8 @@
                                                                               minimumValueDescription:@"Not at all"];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale9"
-                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                      title:@"Scale"
+                                                                   question:@"On a scale of 1 to 10, what is your mood?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -558,7 +583,8 @@
                                                                                                   minimumValueDescription:@"Low value"];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale10"
-                                                                      title:@"How would you measure your mood improvement?"
+                                                                      title:@"Scale"
+                                                                   question:@"How would you measure your mood improvement?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -578,7 +604,8 @@
         scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale11"
-                                                                      title:@"How much has your mood improved?"
+                                                                      title:@"Scale"
+                                                                   question:@"How much has your mood improved?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -595,13 +622,15 @@
                                                                                                   maximumValueDescription:@"Hot"
                                                                                                   minimumValueDescription:@"Warm"];
         
+        scaleAnswerFormat.hideSelectedValue = YES;
         scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.minimumImage.accessibilityHint = @"A yellow colored square to represent warmness.";
         scaleAnswerFormat.maximumImage.accessibilityHint = @"A red colored square to represent hot.";
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale12"
-                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                      title:@"Scale"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -618,16 +647,21 @@
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
+        scaleAnswerFormat.hideSelectedValue = YES;
         scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale13"
-                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                      title:@"Scale"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     
     {
+        /*
+         Horizontal text choice scale with visible selected value.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -641,13 +675,43 @@
                                                                                                    vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale14"
-                                                                      title:@"How are you feeling today?"
+                                                                      title:@"Scale"
+                                                                   question:@"How are you feeling today?"
                                                                      answer:scaleAnswerFormat];
         
         [steps addObject:step];
     }
     
     {
+        /*
+         Horizontal text choice scale with hidden selected value.
+         */
+        ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+        ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+        ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+        ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+        ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+        
+        NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+        
+        ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                               defaultIndex:3
+                                                                                                   vertical:NO];
+        
+        scaleAnswerFormat.hideSelectedValue = YES;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
+                                                                      title:@"Scale"
+                                                                   question:@"How are you feeling today?"
+                                                                     answer:scaleAnswerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical text choice scale. Selected value isn't shown for type.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -660,8 +724,11 @@
                                                                                                defaultIndex:NSIntegerMax
                                                                                                    vertical:YES];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
-                                                                      title:@"How are you feeling today?"
+        scaleAnswerFormat.hideSelectedValue = YES;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale16"
+                                                                      title:@"Scale"
+                                                                   question:@"How are you feeling today?"
                                                                      answer:scaleAnswerFormat];
         
         [steps addObject:step];
@@ -712,7 +779,8 @@
         format.minimum = @(0);
         format.maximum = @(199);
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step2"
-                                                                      title:@"How old are you?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"How old are you?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -723,7 +791,8 @@
          */
         ORKBooleanAnswerFormat *format = [ORKBooleanAnswerFormat new];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step3"
-                                                                      title:@"Do you consent to a background check?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Do you consent to a background check?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -734,7 +803,8 @@
          */
         ORKBooleanAnswerFormat *format = [ORKAnswerFormat booleanAnswerFormatWithYesString:@"Agree" noString:@"Disagree"];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step4"
-                                                                      title:@"Do you agree to proceed to the background check questions?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Do you agree to proceed to the background check questions?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -753,7 +823,8 @@
                                                                              value:@(9)]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step5"
-                                                                      title:@"How many hours did you sleep last night?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"How many hours did you sleep last night?"
                                                                      answer:answerFormat];
         
         step.optional = NO;
@@ -778,7 +849,8 @@
                                                                          exclusive:YES]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step6"
-                                                                      title:@"Which symptoms do you have?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Which symptoms do you have?"
                                                                      answer:answerFormat];
         [steps addObject:step];
     }
@@ -804,7 +876,8 @@
                                                      ]];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step7"
-                                                                      title:@"Which symptoms do you have?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Which symptoms do you have?"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
@@ -815,7 +888,8 @@
          A text question with the default multiple-line text entry.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step8"
-                                                                      title:@"How did you feel last night?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"How did you feel last night?"
                                                                      answer:[ORKAnswerFormat textAnswerFormat]];
         [steps addObject:step];
     }
@@ -831,7 +905,8 @@
         format.autocorrectionType = UITextAutocorrectionTypeNo;
         format.spellCheckingType = UITextSpellCheckingTypeNo;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step9"
-                                                                      title:@"What is your name?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your name?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -841,7 +916,8 @@
          A text question with a length limit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step10"
-                                                                      title:@"How did you feel last night?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"How did you feel last night?"
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
         [steps addObject:step];
     }
@@ -852,7 +928,8 @@
          */
         ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step11"
-                                                                      title:@"What is your email?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your email?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -865,7 +942,8 @@
         format.secureTextEntry = YES;
         format.multipleLines = NO;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step12"
-                                                                      title:@"What is your passcode?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your passcode?"
                                                                      answer:format];
         step.placeholder = @"Tap your passcode here";
         [steps addObject:step];
@@ -878,7 +956,8 @@
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:20];
         format.multipleLines = NO;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step13"
-                                                                      title:@"What is your name?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your name?"
                                                                      answer:format];
         [steps addObject:step];
     }
@@ -899,7 +978,8 @@
                                                                               value:@"headache"]
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step14"
-                                                                      title:@"Select a symptom"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Select a symptom"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
@@ -932,7 +1012,8 @@
         ORKMultipleValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat multipleValuePickerAnswerFormatWithValuePickers:
                                                             @[colorFormat, animalFormat]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step15"
-                                                                      title:@"Select a pet:"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Select a pet:"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
@@ -965,7 +1046,8 @@
         
         ORKMultipleValuePickerAnswerFormat *answerFormat = [[ORKMultipleValuePickerAnswerFormat alloc] initWithValuePickers:@[f1, f2] separator:@"-"];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step16"
-                                                                      title:@"Select a letter and number code:"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"Select a letter and number code:"
                                                                      answer:answerFormat];
         
         [steps addObject:step];
@@ -976,7 +1058,8 @@
          A continuous slider question.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step17"
-                                                                      title:@"On a scale of 1 to 10, how much pain do you feel?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                      answer:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:10 minimumValue:1 defaultValue:NSIntegerMax maximumFractionDigits:1]];
         [steps addObject:step];
     }
@@ -986,7 +1069,8 @@
          The same as the previous question, but now using a discrete slider.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step18"
-                                                                      title:@"On a scale of 1 to 10, how much pain do you feel?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                      answer:[ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
                                                                                                                   minimumValue:1
                                                                                                                   defaultValue:NSIntegerMax
@@ -1004,7 +1088,8 @@
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step19"
-                                                                      title:@"What is your gender"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your gender"
                                                                      answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]]];
         [steps addObject:step];
     }
@@ -1016,7 +1101,8 @@
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step20"
-                                                                      title:@"What is your blood type?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your blood type?"
                                                                      answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType]]];
         [steps addObject:step];
     }
@@ -1028,7 +1114,8 @@
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step21"
-                                                                      title:@"What is your date of birth?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"What is your date of birth?"
                                                                      answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
         [steps addObject:step];
     }
@@ -1040,7 +1127,8 @@
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step22"
-                                                                      title:@"How much do you weigh?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"How much do you weigh?"
                                                                      answer:[ORKHealthKitQuantityTypeAnswerFormat answerFormatWithQuantityType:[HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass]
                                                                                                                                           unit:nil
                                                                                                                                          style:ORKNumericAnswerStyleDecimal]];
@@ -1069,7 +1157,8 @@
                                                                          exclusive:NO]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"step23"
-                                                                      title:@"(Misused) Which symptoms do you have?"
+                                                                      title:@"Selection Survey"
+                                                                   question:@"(Misused) Which symptoms do you have?"
                                                                      answer:answerFormat];
         [steps addObject:step];
     }

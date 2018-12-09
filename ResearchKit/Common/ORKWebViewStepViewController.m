@@ -29,15 +29,20 @@
  */
 
 #import "ORKWebViewStepViewController.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKWebViewStep.h"
 
 #import "ORKResult_Private.h"
 #import "ORKCollectionResult_Private.h"
 #import "ORKWebViewStepResult.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 @implementation ORKWebViewStepViewController {
     WKWebView *_webView;
     NSString *_result;
+    ORKNavigationContainerView *_navigationFooterView;
+    NSArray<NSLayoutConstraint *> *_constraints;
+
 }
 
 - (ORKWebViewStep *)webViewStep {
@@ -51,6 +56,10 @@
     
     if (self.step && [self isViewLoaded]) {
         WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+        config.allowsInlineMediaPlayback = true;
+        if ([config respondsToSelector:@selector(mediaTypesRequiringUserActionForPlayback)]) {
+            config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+        }
         WKUserContentController *controller = [[WKUserContentController alloc] init];
         [controller addScriptMessageHandler:self name:@"ResearchKit"];
         config.userContentController = controller;
@@ -59,9 +68,84 @@
         _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _webView.navigationDelegate = self;
         [self.view addSubview:_webView];
-        
+        [self setupNavigationFooterView];
+        [self setupConstraints];
         [_webView loadHTMLString:[self webViewStep].html baseURL:nil];
     }
+}
+
+- (void)setupNavigationFooterView {
+    if (!_navigationFooterView) {
+        _navigationFooterView = [ORKNavigationContainerView new];
+    }
+    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+    _navigationFooterView.neverHasContinueButton = YES;
+    [self.view addSubview:_navigationFooterView];
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+
+    _constraints = nil;
+    _webView.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_webView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_webView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_webView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_webView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 - (void)viewDidLoad {

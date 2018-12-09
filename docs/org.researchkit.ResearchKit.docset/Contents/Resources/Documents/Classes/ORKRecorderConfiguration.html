@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKRecorderConfiguration Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/identifier">identifier</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:">- initWithIdentifier:</option>
+		
+		<option value="//api/name/recorderForStep:outputDirectory:">- recorderForStep:outputDirectory:</option>
+		
+		<option value="//api/name/requestedHealthKitTypesForReading">- requestedHealthKitTypesForReading</option>
+		
+		<option value="//api/name/requestedPermissionMask">- requestedPermissionMask</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKRecorderConfiguration Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKRecorder.h<br />ORKRecorder.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKRecorderConfiguration</code> class is the abstract base class for recorder configurations
+that can be attached to an active step (<a href="../Classes/ORKActiveStep.html"><code>ORKActiveStep</code></a>).</p>
+
+<p>Recorder configurations provide an easy way to collect CoreMotion
+or other sensor data into a serialized format during the duration of an active step.
+If you want to filter or process the data in real time, it is better to
+use the existing APIs directly.</p>
+
+<p>To use a recorder, include its configuration in the <code>recorderConfigurations</code> property
+of an <a href="../Classes/ORKActiveStep.html"><code>ORKActiveStep</code></a> object, include that step in a task, and present it with
+a task view controller.</p>
+
+<p>To add a new recorder, subclass both <code>ORKRecorderConfiguration</code> and <a href="../Classes/ORKRecorder.html"><code>ORKRecorder</code></a>,
+and add the new <code>ORKRecorderConfiguration</code> subclass to an <a href="../Classes/ORKActiveStep.html"><code>ORKActiveStep</code></a> object.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:">&ndash;&nbsp;initWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized recorder configuration.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique <a href="../Classes/ORKRecorderConfiguration.html#//api/name/identifier">identifier</a> of the recorder configuration.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized recorder configuration.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new recorder configuration initialized from data in the given unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>Coder from which to initialize the recorder configuration.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new recorder configuration.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/recorderForStep:outputDirectory:" title="recorderForStep:outputDirectory:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recorderForStep:outputDirectory:">&ndash;&nbsp;recorderForStep:outputDirectory:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a recorder instance using this configuration.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKRecorder *)recorderForStep:(ORKStep *)<em>step</em> outputDirectory:(NSURL *)<em>outputDirectory</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step for which this recorder is being created.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>outputDirectory</code></th>
+						<td><p>The directory in which all output file data should be written (if producing <a href="../Classes/ORKFileResult.html"><code>ORKFileResult</code></a> instances).</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A configured recorder instance.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedHealthKitTypesForReading" title="requestedHealthKitTypesForReading"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedHealthKitTypesForReading">&ndash;&nbsp;requestedHealthKitTypesForReading</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the HealthKit types for which this recorder requires read access in a set of <code>HKSampleType</code> objects.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSSet&lt;HKObjectType*&gt; *)requestedHealthKitTypesForReading</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Typically, the task view controller automatically collects
+and collates the types of HealthKit data requested by each of the active steps in a task,
+and requests access to them at the end of the initial instruction
+steps in the task.</p>
+
+<p>If your recorder requires or would benefit from read access to HealthKit at
+runtime during the task, return the appropriate set of <code>HKSampleType</code> objects.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedPermissionMask" title="requestedPermissionMask"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedPermissionMask">&ndash;&nbsp;requestedPermissionMask</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the permission mask indicating the permissions required for this configuration.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKPermissionMask)requestedPermissionMask</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is typically overridden in new recorder configuration subclasses.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A short string that uniquely identifies the recorder configuration within the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSString *identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The identifier is reproduced in the results of a recorder created from this configuration. In fact, the only way to link a result
+(an <a href="../Classes/ORKFileResult.html"><code>ORKFileResult</code></a> object) to the recorder that generated it is to look at the value of
+<code>identifier</code>. To accurately identify recorder results, you need to ensure that recorder identifiers
+are unique within each step.</p>
+
+<p>In some cases, it can be useful to link the recorder identifier to a unique identifier in a
+database; in other cases, it can make sense to make the identifier human
+readable.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

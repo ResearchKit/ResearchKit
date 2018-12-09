@@ -41,9 +41,6 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat AssumedNavBarHeight = 44;
-static const CGFloat AssumedStatusBarHeight = 20;
-
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
@@ -55,7 +52,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         - customViewContainer
         - headerView
         - stepViewContainer
-    - continueSkipContainer
  */
 
 @implementation ORKVerticalContainerView {
@@ -69,12 +65,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     NSLayoutConstraint *_headerMinimumHeightConstraint;
     NSLayoutConstraint *_illustrationHeightConstraint;
     NSLayoutConstraint *_stepViewCenterInStepViewContainerConstraint;
-    NSLayoutConstraint *_stepViewToContinueConstraint;
-    NSLayoutConstraint *_stepViewToContinueMinimumConstraint;
     NSLayoutConstraint *_topToIllustrationConstraint;
-    
-    NSLayoutConstraint *_continueContainerToScrollContainerBottomConstraint;
-    NSLayoutConstraint *_continueContainerToContainerBottomConstraint;
+    NSLayoutConstraint *_scrollContainerHeightConstraint;
     
     CGFloat _keyboardOverlap;
     
@@ -86,6 +78,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        _scrollContainerShouldCollapseNavbar = YES;
         _scrollContainer = [UIView new];
         [self addSubview:_scrollContainer];
         _container = [UIView new];
@@ -105,21 +98,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
         }
         
         {
-            // This lives in the scroll container, so it doesn't affect the vertical layout of the primary content
-            // except through explicit constraints.
-            _continueSkipContainer = [ORKNavigationContainerView new];
-            _continueSkipContainer.bottomMargin = 20;
-            _continueSkipContainer.translatesAutoresizingMaskIntoConstraints = NO;
-            [_scrollContainer addSubview:_continueSkipContainer];
-        }
-        
-        {
             // Custom View
             _customViewContainer = [UIView new];
             [_container addSubview:self.customViewContainer];
         }
         
-        ORKEnableAutoLayoutForViews(@[_scrollContainer, _container, _headerView, _stepViewContainer, _continueSkipContainer, _customViewContainer]);
+        ORKEnableAutoLayoutForViews(@[_scrollContainer, _container, _headerView, _stepViewContainer, _customViewContainer]);
 
         [self setUpStaticConstraints];
         [self setNeedsUpdateConstraints];
@@ -146,13 +130,14 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_scrollContainer
-                                                        attribute:NSLayoutAttributeHeight
-                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeHeight
-                                                       multiplier:1.0
-                                                         constant:0.0]];
+    _scrollContainerHeightConstraint = [NSLayoutConstraint constraintWithItem:_scrollContainer
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                   multiplier:1.0
+                                                                     constant:_scrollContainerShouldCollapseNavbar ? 0.3 : 0.0]; //anything less than 0.3 does not work for smaller devices.
+    [constraints addObject: _scrollContainerHeightConstraint];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_scrollContainer
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
@@ -173,6 +158,22 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [constraints addObject:heightConstraint];
     
     [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)setScrollContainerShouldCollapseNavbar:(BOOL)scrollContainerShouldCollapseNavbar {
+    if (!scrollContainerShouldCollapseNavbar) {
+        _scrollContainerShouldCollapseNavbar = scrollContainerShouldCollapseNavbar;
+        [NSLayoutConstraint deactivateConstraints:@[_scrollContainerHeightConstraint]];
+        _scrollContainerHeightConstraint = [NSLayoutConstraint constraintWithItem:_scrollContainer
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:1.0
+                                                                         constant:0.0];
+        [_scrollContainerHeightConstraint setActive:YES];
+        [self setNeedsUpdateConstraints];
+    }
 }
 
 - (void)swipeOffAction:(UITapGestureRecognizer *)recognizer {
@@ -266,17 +267,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
         // Keep track of the keyboard overlap, so we can adjust the constraint properly.
         _keyboardOverlap = intersectionSize.height;
         
-        [self updateContinueButtonConstraints];
-        
         // Trigger layout inside the animation block to get the constraint change to animate.
         [self layoutIfNeeded];
         
         if (_keyboardIsUp) {
-            // The content ends at the bottom of the continueSkipContainer.
-            // We want to calculate new insets so it's possible to scroll it fully visible, but no more.
-            // Made a little more complicated because the contentSize will still extend below the bottom of this container,
-            // because we haven't changed our bounds.
-            CGFloat contentMaxY = CGRectGetMaxY([self convertRect:_continueSkipContainer.bounds fromView:_continueSkipContainer]);
+            
+            CGFloat contentMaxY = CGRectGetMaxY([self convertRect:_container.bounds fromView:_container]);
             
             // First compute the contentOffset.y that would make the continue and skip buttons visible
             CGFloat yOffset = MAX(contentMaxY - visibleHeight, 0);
@@ -329,29 +325,14 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self animateLayoutForKeyboardNotification:notification];
 }
 
-- (void)updateContinueButtonConstraints {
-    _continueContainerToScrollContainerBottomConstraint.active = !_continueHugsContent;
-    _continueContainerToContainerBottomConstraint.active = _continueHugsContent;
-    
-    if (_keyboardIsUp) {
-        // Try to move up from the bottom to be above the keyboard.
-        // This will go only so far - if we hit actual content, this will
-        // be counteracted by the constraint to stay below the content.
-        _continueContainerToScrollContainerBottomConstraint.constant = - _keyboardOverlap;
-    } else {
-        _continueContainerToScrollContainerBottomConstraint.constant = 0;
-    }
-}
-
 - (void)updateStepViewCenteringConstraint {
     BOOL hasIllustration = (_imageView.image != nil);
     BOOL hasCaption = _headerView.captionLabel.text.length > 0;
     BOOL hasInstruction = _headerView.instructionLabel.text.length > 0;
     BOOL hasLearnMore = (_headerView.learnMoreButton.alpha > 0);
-    BOOL hasContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
 
     if (_stepViewCenterInStepViewContainerConstraint) {
-        BOOL offsetCentering = !(hasIllustration || hasCaption || hasInstruction || hasLearnMore || hasContinueOrSkip);
+        BOOL offsetCentering = !(hasIllustration || hasCaption || hasInstruction || hasLearnMore);
         _stepViewCenterInStepViewContainerConstraint.active = offsetCentering;
     }    
 }
@@ -381,7 +362,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     {
         BOOL hasStepView = (_stepView != nil);
-        BOOL hasContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
 
         CGFloat continueSpacing = StepViewBottomToContinueTop;
         if (self.continueHugsContent && !hasStepView) {
@@ -390,13 +370,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         if (self.stepViewFillsAvailableSpace) {
             continueSpacing = StepViewBottomToContinueTopForIntroStep;
         }
-        if (!hasContinueOrSkip) {
-            // If we don't actually have continue or skip, we should not apply any space
-            continueSpacing = 0;
-        }
-        CGFloat continueSpacing2 = MIN(10, continueSpacing);
-        _stepViewToContinueConstraint.constant = continueSpacing;
-        _stepViewToContinueMinimumConstraint.constant = continueSpacing2;
     }
     
     {
@@ -432,10 +405,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
         _variableConstraints = [NSMutableArray new];
     }
 
-    _continueContainerToContainerBottomConstraint = nil;
-    _continueContainerToScrollContainerBottomConstraint = nil;
-    
-    NSArray *views = @[_headerView, _customViewContainer, _continueSkipContainer, _stepViewContainer];
+    NSArray *views = @[_headerView, _customViewContainer, _stepViewContainer];
     
     // Roughly center the container, but put it a little above the center if possible
     if (_verticalCenteringEnabled) {
@@ -542,38 +512,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                    constant:_minimumStepHeaderHeight];
     [_variableConstraints addObject:_headerMinimumHeightConstraint];
     
-    {
-        // Normally we want extra space, but we don't want to sacrifice that to scrolling (if it makes a difference)
-        _stepViewToContinueConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
-                                                                      attribute:NSLayoutAttributeTop
-                                                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                         toItem:_stepViewContainer
-                                                                      attribute:NSLayoutAttributeBottom
-                                                                     multiplier:1.0
-                                                                       constant:36.0];
-        _stepViewToContinueConstraint.priority = UILayoutPriorityDefaultLow - 2;
-        [_variableConstraints addObject:_stepViewToContinueConstraint];
-        
-        _stepViewToContinueMinimumConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
-                                                                            attribute:NSLayoutAttributeTop
-                                                                            relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                               toItem:_stepViewContainer
-                                                                            attribute:NSLayoutAttributeBottom
-                                                                           multiplier:1.0
-                                                                             constant:0.0];
-        [_variableConstraints addObject:_stepViewToContinueMinimumConstraint];
-    }
-    
-    _continueContainerToScrollContainerBottomConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
-                                                                                                 attribute:NSLayoutAttributeBottom
-                                                                                                 relatedBy:NSLayoutRelationEqual
-                                                                                                    toItem:_scrollContainer
-                                                                                                 attribute:NSLayoutAttributeBottomMargin
-                                                                                                multiplier:1.0
-                                                                                                  constant:0.0];
-    _continueContainerToScrollContainerBottomConstraint.priority = UILayoutPriorityRequired - 1;
-    [_variableConstraints addObject:_continueContainerToScrollContainerBottomConstraint];
-    
     // Force all to stay within the container's width.
     for (UIView *view in views) {
 #ifdef LAYOUT_DEBUG
@@ -591,7 +529,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                           constant:0.0]];
         } else {
             
-            NSLayoutRelation relation = (view == _continueSkipContainer) ? NSLayoutRelationEqual : NSLayoutRelationGreaterThanOrEqual;
+            NSLayoutRelation relation = NSLayoutRelationGreaterThanOrEqual;
             
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:view
                                                                          attribute:NSLayoutAttributeLeft
@@ -627,10 +565,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         // Because the bottom items are not always present, we add individual "bottom" constraints
         // for all views to ensure the parent sizes large enough to contain everything.
         [_variableConstraints addObject:viewToContainerBottomConstraint];
-        
-        if (view == _continueSkipContainer) {
-            _continueContainerToContainerBottomConstraint = viewToContainerBottomConstraint;
-        }
     }
     
     [self prepareCustomViewContainerConstraints];
@@ -641,7 +575,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
     [self updateConstraintConstantsForWindow:self.window];
     [self updateStepViewCenteringConstraint];
-    [self updateContinueButtonConstraints];
 
     [super updateConstraints];
 }
@@ -704,7 +637,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                                          toItem:_stepViewContainer
                                                                                       attribute:NSLayoutAttributeCenterY
                                                                                      multiplier:1.0
-                                                                                       constant:-(AssumedNavBarHeight + AssumedStatusBarHeight) / 2];
+                                                                                       constant:0.0];
                 verticalCentering2.priority = UILayoutPriorityRequired - 1;
                 [_variableConstraints addObject:verticalCentering2];
                 _stepViewCenterInStepViewContainerConstraint = verticalCentering2;

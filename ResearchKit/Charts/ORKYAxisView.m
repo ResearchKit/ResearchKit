@@ -114,16 +114,17 @@ static const CGFloat ImageVerticalPadding = 3.0;
         _tickLayersByFactor = [NSMutableDictionary new];
         _tickLabelsByFactor = [NSMutableDictionary new];
         
-        NSArray *yAxisLabelFactors = nil;
         CGFloat minimumValue = _parentGraphChartView.minimumValue;
         CGFloat maximumValue = _parentGraphChartView.maximumValue;
-        if (minimumValue == maximumValue) {
-            yAxisLabelFactors = @[ @0.5f ];
-        } else {
-            yAxisLabelFactors = @[ @0.2f, @1.0f ];
+        if (!_yAxisLabelFactors) {
+            if (minimumValue == maximumValue) {
+                _yAxisLabelFactors = @[ @0.5f ];
+            } else {
+                _yAxisLabelFactors = @[ @0.2f, @1.0f ];
+            }
         }
         
-        for (NSNumber *factorNumber in yAxisLabelFactors) {
+        for (NSNumber *factorNumber in _yAxisLabelFactors) {
             
             CGFloat factor = factorNumber.floatValue;
             

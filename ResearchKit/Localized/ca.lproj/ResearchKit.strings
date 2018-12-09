@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Repassa el formulari de sota i prem Acceptar si estàs a punt per continuar.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Revisió";
 "CONSENT_SIGNATURE_TITLE" = "Signatura";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Signa amb el dit a la línia de sota.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signa amb el dit al requadre de sota.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Signa aquí";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Pàgina %1$ld de %2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Pas %1$@ de %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valor no vàlid";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona un sexe";
 "DOB_FORM_ITEM_TITLE" = "Data de naixement";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una data";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Número de telèfon";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verificació";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "esquerra";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Cancel·lar";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Esborrar";
+"BUTTON_APPLY" = "Aplicar";
 "BUTTON_DISAGREE" = "No acceptar";
 "BUTTON_DONE" = "Fet";
 "BUTTON_GET_STARTED" = "Començar";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "Marxa i equilibri";
 "WALK_INTRO_TEXT" = "Aquesta activitat valora la marxa i l’equilibri quan camines i quan estàs quiet. No continuïs si no pots caminar sol de manera segura.";
 "WALK_INTRO_2_TEXT_%ld" = "Busca un lloc on puguis caminar sense assistència de manera seguida uns %ld passos en línia recta.";
-"WALK_INTRO_2_DETAIL" = "Posa’t el telèfon a la butxaca o a la bossa i segueix les instruccions d’àudio.";
+"WALK_INTRO_2_DETAIL" = "Posa’t el dispositiu a la butxaca o a la bossa i segueix les instruccions d’àudio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Ara estigues quiet %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Estigues quiet %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Fes mitja volta i torna allà on has començat.";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Busca un lloc on puguis anar i tornar caminant en línia recta de forma segura. Camina sense parar i gira al final del camí com si estiguessis vorejant un con.\n\nA continuació, se’t demanarà que giris fent un cercle complet i que et quedis quiet amb els braços als costats i els peus separats més o menys per la mateixa distància que hi ha entre espatlla i espatlla.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Quan estiguis a punt per començar, prem Començar.\nLlavors, posa’t el mòbil a la butxaca o a la bossa i segueix les instruccions d’àudio.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Quan estiguis a punt per començar, prem Començar.\nLlavors, posa’t el dispositiu a la butxaca o a la bossa i segueix les instruccions d’àudio.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Vés i torna caminant en línia recta durant %@. Camina naturalment.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Gira fent un cercle complet i llavors queda’t quiet durant %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Has completat l’activitat.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Mà dreta";
 "TAPPING_TASK_TITLE_LEFT" = "Mà esquerra";
 "TAPPING_INTRO_TEXT" = "Aquesta activitat mesura la velocitat de premuda.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Deixa el mòbil sobre una superfície plana.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Deixa el dispositiu sobre una superfície plana.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Prem els botons de la pantalla alternant dos dits de la mateixa mà.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Prem els botons de la pantalla alternant dos dits de la mà dreta.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Prem els botons de la pantalla alternant dos dits de la mà esquerra.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Prem els botons amb la mà ESQUERRA.";
 "TAPPING_SKIP_TITLE" = "Ometre aquesta mà";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Reixeta d’Amsler";
+"AMSLER_GRID_INTRO_TEXT" = "Aquesta activitat ajuda a detectar problemes de visió de l’usuari.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Mantén el dispositiu a una distància de 30 a 40 centímetres de la teva cara, a l’alçada dels ulls, durant tota la prova.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Tanca l’%@ i mira fixament el punt central de la quadrícula.\n\nAmb el dit o el llapis tàctil, marca les distorsions que vegis, com ara línies borroses o ondulades.\n\nQuan hagis acabat, llisca cap a l’esquerra a qualsevol lloc de l’exterior de la reixeta.";
+"AMSLER_GRID_LEFT_EYE" = "ull esquerre";
+"AMSLER_GRID_RIGHT_EYE" = "ull dret";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Veu";
 "AUDIO_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
 "AUDIO_INSTRUCTION" = "Fes un “Aaaaah” tan llarg com puguis al micròfon.";
 "AUDIO_INTRO_TEXT" = "Inspira profundament i fes un “Aaaaah” tan llarg com puguis al micròfon. Mantingues un volum de veu estable fent que les barres d’àudio es mantinguin en blau.";
-"AUDIO_INTENDED_USE" = "Aquesta activitat avalua la teva veu tot gravant-la amb el micròfon de la part inferior del telèfon.";
+"AUDIO_INTENDED_USE" = "Aquesta activitat avalua la teva veu tot gravant‑la amb el micròfon de la part inferior del dispositiu.";
 "AUDIO_TOO_LOUD_LABEL" = "Massa alt";
 "AUDIO_GENERIC_ERROR_LABEL" = "No s’ha pogut gravar l’àudio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Espera mentre es calcula el nivell de soroll de fons.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aquesta activitat mesura la capacitat de sentir diversos sons.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecta els auriculars i posa-te’ls.\n\nEl so serà molt subtil, diferent d’un so d’avís normal. El so començarà baix i anirà pujant de volum. Presta atenció i toca el botó esquerre o el dret per indicar l’orella per on sents el so.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecta els auriculars i posa‑te’ls.\n\nEl so serà molt subtil, diferent d’un so d’avís normal. El so començarà baix i anirà pujant de volum. Presta atenció i toca el botó esquerre o el dret per indicar l’orella per on sents el so.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauries d’escoltar un to. Ajusta el volum amb els controls de la part lateral del dispositiu.\n\nPrem qualsevol botó quan estiguis a punt per començar.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauries d’escoltar un so. Ajusta el volum amb els controls de la part lateral del dispositiu.\n\nPrem qualsevol botó quan estiguis a punt per començar.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Cada cop que comencis a sentir un so, toca el botó esquerre o el dret per indicar per quina orella el sents.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Orella esquerra";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Orella dreta";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, esquerra";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, dreta";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Aquesta activitat identifica els nivells llindar d’audició d’una persona en l’escala dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Comprova que el volum del dispositiu estigui al nivell màxim.\n\nDurant aquesta tasca, es reproduirà un so subtil a l’orella esquerra o dreta.\n\nEscolta atentament i prem el botó cada vegada que sentis un so.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Qüestionari inicial.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecciona la teva preferència de “millor orella”, si cal";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "esquerra";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "dreta";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "cap preferència";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memòria espacial";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No puc resoldre aquest joc";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Amplitud de moviment";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption ha de ser dreta o esquerra";
 
 /* Knee Range of Motion active task */
@@ -430,8 +455,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test de les %@ clavilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar‑la al forat i, un cop fet %@ cops, tornar‑la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar‑la al forat i, un cop fet %@ cops, tornar‑la a treure %@ cops.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla al forat amb la mà esquerra.";
@@ -484,11 +509,11 @@
 "TREMOR_SKIP_NEITHER" = "Puc completar l’activitat amb les dues mans.";
 
 /* Trail making task. */
-"TRAILMAKING_TASK_TITLE" = "Prova d’unir els punts";
-"TRAILMAKING_INTENDED_USE" = "Aquesta activitat avalua la teva atenció visual i la teva capacitat de canvi de tasques gravant el temps que necessites per prémer una sèrie de punts en ordre.";
+"TRAILMAKING_TASK_TITLE" = "Unir els punts";
+"TRAILMAKING_INTENDED_USE" = "Aquesta activitat avalua la teva atenció visual i la teva capacitat de canvi de tasques comptant el temps que necessites per prémer una sèrie de punts en ordre.";
 "TRAILMAKING_INTENDED_USE2_A" = "Després del compte enrere, vés prement punts alternant l’ordre entre nombres i lletres. Comença tocant el primer número, 1, i després els números 2, 3, 4…, fins que arribis al número 7.";
 "TRAILMAKING_INTENDED_USE2_B" = "Després del compte enrere, vés prement punts alternant l’ordre entre nombres i lletres. Comença tocant el primer número, 1, i després la primera lletra, A, i tot seguit, 2, B, 3, C, fins que arribis al número 7.";
-"TRAILMAKING_INTRO_TEXT" = "Fes-ho tan ràpid com puguis sense equivocar-te. \n ";
+"TRAILMAKING_INTRO_TEXT" = "Fes‑ho tant ràpid com puguis sense equivocar‑te. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
 "TRAILMAKING_TIMER" = "%.1f s";
 "TRAILMAKING_ERROR" = "%@ (%d error)";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Reconeixement de veu";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Aquesta activitat grava el que dius amb el micròfon de la part inferior del dispositiu i després ho converteix a text.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Abans de parlar, prem el botó per començar a gravar.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Iniciar la gravació";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Aturar la gravació";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edita la transcripció";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edita la transcripció per corregir les malinterpretacions del text parlat.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "La transcripció apareixerà aquí.";
+"SPEECH_RECOGNITION_FAILED" = "El reconeixement de veu ha fallat.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "No s’ha pogut iniciar el reconeixement de veu.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Reproduir l’àudio";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Aturar l’àudio";
+"SPEECH_IN_NOISE_TITLE" = "Parlat amb soroll";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Aquesta activitat mesura la intel·ligibilitat del text parlat quan hi ha soroll de fons.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Com a part d’aquesta prova, hauràs de fer el següent:\n\nEscoltar una frase.\n\nRepetir amb claredat el que hagis sentit o escriure directament el que hagis sentit amb el teclat.\n\nSi repeteixes el que has sentit, podràs modificar la transcripció generada per l’eina de reconeixement de veu.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Calibratge del volum";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Prem “Reproduir l’àudio”, ajusta el volum a un nivell agradable i després prem “Aturar l’àudio” per continuar.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Escolta";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Es reproduirà només una vegada una frase amb soroll de fons en una relació senyal‑soroll (SNR) aleatòria.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Parla";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeteix el que hagis sentit.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "No s’han trobat dades recollides.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Sonòmetre";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Aquesta activitat mesura el nivell de pressió sonora de l’entorn. Si els nivells de soroll són molt alts, no la podràs fer. Vés a un lloc més tranquil per realitzar aquesta tasca o reprèn l’activitat més tard.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Calculant";
+"ENVIRONMENTSPL_THRESHOLD" = "Llindar: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Sense dades";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Enrere";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Mostrar la miniatura del PDF";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Ocultar la miniatura del PDF";
+"AX_BUTTON_ANNOTATE" = "Anotar";
+"AX_BUTTON_SHOW_SEARCH" = "Mostrar la barra de cerca";
+"AX_BUTTON_HIDE_SEARCH" = "Ocultar la barra de cerca";
+"AX_BUTTON_SHARE" = "Compartir";
 
-"AX_IMAGE_ILLUSTRATION" = "Il·lustració de: %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Il·lustració d’una marca de verificació dins d’un cercle blau que significa que l’activitat s’ha completat amb èxit";
 
 "AX_SIGNVIEW_LABEL" = "Camp designat de signatura";
 "AX_SIGNVIEW_HINT" = "Toca la pantalla i mou el dit per signar";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Té disc amb mides %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Buidar";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Interval de %@ a %@";
 "AX_GRAPH_STACK_PREFIX" = "Pila composta per";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Ona de veu";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Quan hagi començat la gravació, torna a activar per aturar‑la.";
+
 "AX_AUDIO_BAR_GRAPH" = "Gràfic de barres d’àudio";
+
+"AX_AMSLER_GRID_LABEL" = "Reixeta d’Amsler";
+"AX_AMSLER_GRID_HINT" = "Fes servir el dit o el llapis tàctil per marcar la reixeta directament o llisca cap a l’esquerra a l’exterior de la reixeta per acabar.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

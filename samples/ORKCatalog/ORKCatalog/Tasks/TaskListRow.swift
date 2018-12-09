@@ -79,22 +79,27 @@ enum TaskListRow: Int, CustomStringConvertible {
     case imageCapture
     case videoCapture
     case wait
+    case PDFViewer
     case eligibilityTask
     case consent
     case accountCreation
     case login
     case passcode
     case audio
+    case amslerGrid
     case fitness
     case holePegTest
     case psat
     case reactionTime
     case shortWalk
     case spatialSpanMemory
+    case speechRecognition
+    case speechInNoise
     case stroop
-    case timedWalk
     case timedWalkWithTurnAround
     case toneAudiometry
+    case dBHLToneAudiometry
+    case splMeter
     case towerOfHanoi
     case tremorTest
     case twoFingerTappingInterval
@@ -146,6 +151,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .imageCapture,
                     .videoCapture,
                     .wait,
+                    .PDFViewer,
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -158,16 +164,20 @@ enum TaskListRow: Int, CustomStringConvertible {
             TaskListRowSection(title: "Active Tasks", rows:
                 [
                     .audio,
+                    .amslerGrid,
                     .fitness,
                     .holePegTest,
                     .psat,
                     .reactionTime,
                     .shortWalk,
                     .spatialSpanMemory,
+                    .speechRecognition,
+                    .speechInNoise,
                     .stroop,
-                    .timedWalk,
                     .timedWalkWithTurnAround,
                     .toneAudiometry,
+                    .dBHLToneAudiometry,
+                    .splMeter,
                     .towerOfHanoi,
                     .tremorTest,
                     .twoFingerTappingInterval,
@@ -249,6 +259,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .wait:
             return NSLocalizedString("Wait Step", comment: "")
+        
+        case .PDFViewer:
+            return NSLocalizedString("PDF Viewer Step", comment: "")
 
         case .eligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -267,6 +280,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .audio:
             return NSLocalizedString("Audio", comment: "")
+        
+        case .amslerGrid:
+            return NSLocalizedString("Amsler Grid", comment: "")
             
         case .fitness:
             return NSLocalizedString("Fitness Check", comment: "")
@@ -286,17 +302,26 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return NSLocalizedString("Spatial Span Memory", comment: "")
             
+        case .speechRecognition:
+            return NSLocalizedString("Speech Recognition", comment: "")
+            
+        case .speechInNoise:
+            return NSLocalizedString("Speech in Noise", comment: "")
+            
         case .stroop:
             return NSLocalizedString("Stroop", comment: "")
-            
-        case .timedWalk:
-            return NSLocalizedString("Timed Walk", comment: "")
             
         case .timedWalkWithTurnAround:
             return NSLocalizedString("Timed Walk with Turn Around", comment: "")
             
         case .toneAudiometry:
             return NSLocalizedString("Tone Audiometry", comment: "")
+            
+        case .dBHLToneAudiometry:
+            return NSLocalizedString("dBHL Tone Audiometry", comment: "")
+            
+        case .splMeter:
+            return NSLocalizedString("Environment SPL Meter", comment: "")
             
         case .towerOfHanoi:
             return NSLocalizedString("Tower of Hanoi", comment: "")
@@ -353,6 +378,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case surveyTask
         case introStep
         case questionStep
+        case birthdayQuestion
         case summaryStep
         
         // Task with a Boolean question.
@@ -445,6 +471,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case waitStepDeterminate
         case waitStepIndeterminate
         
+        case pdfViewerStep
+        case pdfViewerTask
+        
         // Eligibility task specific indentifiers.
         case eligibilityTask
         case eligibilityIntroStep
@@ -480,16 +509,21 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         // Active tasks.
         case audioTask
+        case amslerGridTask
         case fitnessTask
         case holePegTestTask
         case psatTask
         case reactionTime
         case shortWalkTask
         case spatialSpanMemoryTask
+        case speechRecognitionTask
+        case speechInNoiseTask
         case stroopTask
-        case timedWalkTask
         case timedWalkWithTurnAroundTask
         case toneAudiometryTask
+        case dBHLToneAudiometryTask
+        case splMeterTask
+        case splMeterStep
         case towerOfHanoi
         case tremorTestTask
         case twoFingerTappingIntervalTask
@@ -573,6 +607,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             return videoCaptureTask
         case .wait:
             return waitTask
+            
+        case .PDFViewer:
+            return PDFViewerTask
         
         case .eligibilityTask:
             return eligibilityTask
@@ -591,6 +628,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .audio:
             return audioTask
+            
+        case .amslerGrid:
+            return amslerGridTask
 
         case .fitness:
             return fitnessTask
@@ -610,17 +650,26 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .spatialSpanMemory:
             return spatialSpanMemoryTask
 
+        case .speechRecognition:
+            return speechRecognitionTask
+            
+        case .speechInNoise:
+            return speechInNoiseTask
+            
         case .stroop:
             return stroopTask
             
-        case .timedWalk:
-            return timedWalkTask
-
         case .timedWalkWithTurnAround:
             return timedWalkWithTurnAroundTask
             
         case .toneAudiometry:
             return toneAudiometryTask
+            
+        case .dBHLToneAudiometry:
+            return dBHLToneAudiometryTask
+            
+        case .splMeter:
+            return splMeterTask
             
         case .towerOfHanoi:
             return towerOfHanoiTask
@@ -660,7 +709,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     diastolic values.
     */
     private var formTask: ORKTask {
-        let step = ORKFormStep(identifier: String(describing:Identifier.formStep), title: exampleQuestionText, text: exampleDetailText)
+        let step = ORKFormStep(identifier: String(describing:Identifier.formStep), title: NSLocalizedString("Form Step", comment: ""), text: exampleDetailText)
         
         // A first field, for entering an integer.
         let formItem01Text = NSLocalizedString("Field01", comment: "")
@@ -672,9 +721,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         let formItem02 = ORKFormItem(identifier: String(describing:Identifier.formItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
         formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
         
+        let formItem03Text = NSLocalizedString(exampleQuestionText, comment: "")
+        let scaleAnswerFormat = ORKContinuousScaleAnswerFormat.init(maximumValue: 10, minimumValue: 0, defaultValue: 0.0, maximumFractionDigits: 1)//ORKScaleAnswerFormat(maximumValue: 10, minimumValue: 0, defaultValue: 0, step: 1)
+        let formItem03 = ORKFormItem(identifier: String(describing: Identifier.formItem03), text: formItem03Text, answerFormat: scaleAnswerFormat)
+        
         step.formItems = [
+            formItem03,
             formItem01,
             formItem02
+            
         ]
         
         return ORKOrderedTask(identifier: String(describing:Identifier.formTask), steps: [step])
@@ -687,16 +742,24 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var surveyTask: ORKTask {
         // Create the intro step.
         let instructionStep = ORKInstructionStep(identifier: String(describing:Identifier.introStep))
-        
-        instructionStep.title = NSLocalizedString("Sample Survey", comment: "")
-        
+        instructionStep.title = NSLocalizedString("Simple Survey", comment: "")
         instructionStep.text = exampleDescription
+        instructionStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants.  Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
         
         // Add a question step.
-        let questionStepAnswerFormat = ORKBooleanAnswerFormat()
+        let question1StepAnswerFormat = ORKBooleanAnswerFormat()
         
-        let questionStepTitle = NSLocalizedString("Would you like to subscribe to our newsletter?", comment: "")
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.questionStep), title: questionStepTitle, answer: questionStepAnswerFormat)
+        let question1 = NSLocalizedString("Would you like to subscribe to our newsletter?", comment: "")
+        
+        let question1Step = ORKQuestionStep.init(identifier: String(describing:Identifier.questionStep), title: "Questionnaire", question: question1, answer: question1StepAnswerFormat)
+        question1Step.text = exampleDetailText
+        
+        //Add a question step with different layout format.
+        let question2StepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
+        
+        let question2 = NSLocalizedString("When is your birthday?", comment: "")
+        let question2Step = ORKQuestionStep.init(identifier: String(describing: Identifier.birthdayQuestion), title: "Questionnaire", question: question2, answer: question2StepAnswerFormat)
+        question2Step.text = exampleDetailText
         
         // Add a summary step.
         let summaryStep = ORKInstructionStep(identifier: String(describing:Identifier.summaryStep))
@@ -705,7 +768,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         return ORKOrderedTask(identifier: String(describing:Identifier.surveyTask), steps: [
             instructionStep,
-            questionStep,
+            question1Step,
+            question2Step,
             summaryStep
             ])
     }
@@ -715,7 +779,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKBooleanAnswerFormat()
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.booleanQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep.init(identifier: String(describing:Identifier.booleanQuestionStep), title: NSLocalizedString("Boolean", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
@@ -728,7 +792,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKBooleanAnswerFormat(yesString: "Agree", noString: "Disagree")
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.booleanQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.booleanQuestionStep), title: NSLocalizedString("Custom Boolean", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
@@ -744,7 +808,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.dateAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(describing:Identifier.dateQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing:Identifier.dateQuestionStep), title: NSLocalizedString("Date", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -759,7 +823,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.dateTime()
         
-        let step = ORKQuestionStep(identifier: String(describing:Identifier.dateTimeQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing:Identifier.dateTimeQuestionStep), title: NSLocalizedString("Date and Time", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -770,25 +834,25 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var heightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.heightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: "Height", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep1), title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat1)
         
         step1.text = "Local system"
 
         let answerFormat2 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: "Height", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep2), title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat2)
         
         step2.text = "Metric system"
 
         let answerFormat3 = ORKAnswerFormat.heightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: "Height", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep3), title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat3)
         
         step3.text = "USC system"
 
         let answerFormat4 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.height)!, unit: HKUnit.meterUnit(with: .centi), style: .decimal)
         
-        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep4), title: "Height", answer: answerFormat4)
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.heightQuestionStep4), title: NSLocalizedString("Height", comment: ""), question: exampleQuestionText, answer: answerFormat4)
         
         step4.text = "HealthKit, height"
         
@@ -799,43 +863,43 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var weightQuestionTask: ORKTask {
         let answerFormat1 = ORKAnswerFormat.weightAnswerFormat()
         
-        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: "Weight", answer: answerFormat1)
+        let step1 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep1), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat1)
         
         step1.text = "Local system, default precision"
         
         let answerFormat2 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric)
         
-        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: "Weight", answer: answerFormat2)
+        let step2 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep2), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat2)
         
         step2.text = "Metric system, default precision"
         
         let answerFormat3 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.low, minimumValue: ORKDoubleDefaultValue, maximumValue: ORKDoubleDefaultValue, defaultValue: ORKDoubleDefaultValue)
         
-        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: "Weight", answer: answerFormat3)
+        let step3 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep3), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat3)
         
         step3.text = "Metric system, low precision"
 
         let answerFormat4 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.metric, numericPrecision: ORKNumericPrecision.high, minimumValue: 20.0, maximumValue: 100.0, defaultValue:  45.50)
         
-        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: "Weight", answer: answerFormat4)
+        let step4 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep4), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat4)
         
         step4.text = "Metric system, high precision"
 
         let answerFormat5 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC)
         
-        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: "Weight", answer: answerFormat5)
+        let step5 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep5), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat5)
         
         step5.text = "USC system, default precision"
         
         let answerFormat6 = ORKAnswerFormat.weightAnswerFormat(with: ORKMeasurementSystem.USC, numericPrecision: ORKNumericPrecision.high, minimumValue: 50.0, maximumValue: 150.0, defaultValue: 100.0)
         
-        let step6 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep6), title: "Weight", answer: answerFormat6)
+        let step6 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep6), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat6)
         
         step6.text = "USC system, high precision"
 
         let answerFormat7 = ORKHealthKitQuantityTypeAnswerFormat(quantityType: HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)!, unit: HKUnit.gramUnit(with: .kilo), style: .decimal)
         
-        let step7 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep7), title: "Weight", answer: answerFormat7)
+        let step7 = ORKQuestionStep(identifier: String(describing:Identifier.weightQuestionStep7), title: NSLocalizedString("Weight", comment: ""), question: exampleQuestionText, answer: answerFormat7)
         
         step7.text = "HealthKit, body mass"
 
@@ -861,13 +925,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat1 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep1), title: exampleQuestionText, answer: answerFormat1)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep1), title: NSLocalizedString("Image Choice", comment: ""), question: exampleQuestionText, answer: answerFormat1)
 
         questionStep1.text = exampleDetailText
 
         let answerFormat2 = ORKAnswerFormat.choiceAnswerFormat(with: imageChoces, style: .singleChoice, vertical: true)
         
-        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep2), title: exampleQuestionText, answer: answerFormat2)
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.imageChoiceQuestionStep2), title: NSLocalizedString("Image Choice", comment: ""), question: exampleQuestionText, answer: answerFormat2)
 
         questionStep2.text = exampleDetailText
         
@@ -879,8 +943,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let answerFormat = ORKLocationAnswerFormat()
         
         // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.locationQuestionStep), title: exampleQuestionText, answer: answerFormat)
-        
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.locationQuestionStep), title: NSLocalizedString("Location", comment: ""), question: exampleQuestionText, answer: answerFormat)
         // The detail text is shown in a small font below the title.
         questionStep.text = exampleDetailText
         questionStep.placeholder = NSLocalizedString("Address", comment: "");
@@ -898,13 +961,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         let localizedQuestionStep1AnswerFormatUnit = NSLocalizedString("Your unit", comment: "")
         let questionStep1AnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStep1AnswerFormatUnit)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.numericQuestionStep), title: exampleQuestionText, answer: questionStep1AnswerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.numericQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: exampleQuestionText, answer: questionStep1AnswerFormat)
         
         questionStep1.text = exampleDetailText
         questionStep1.placeholder = NSLocalizedString("Your placeholder.", comment: "")
                 
         // This answer format is similar to the previous one, but this time without displaying a unit.
-        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.numericNoUnitQuestionStep), title: exampleQuestionText, answer: ORKAnswerFormat.decimalAnswerFormat(withUnit: nil))
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.numericNoUnitQuestionStep), title: NSLocalizedString("Numeric", comment: ""), question: exampleQuestionText, answer: ORKAnswerFormat.decimalAnswerFormat(withUnit: nil))
         
         questionStep2.text = exampleDetailText
         questionStep2.placeholder = NSLocalizedString("Placeholder without unit.", comment: "")
@@ -918,49 +981,51 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents two options for questions displaying a scale control.
     private var scaleQuestionTask: ORKTask {
         // The first step is a scale control with 10 discrete ticks.
+        let stepTitle = NSLocalizedString("Scale", comment: "")
+        
         let step1AnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
-        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.discreteScaleQuestionStep), title: exampleQuestionText, answer: step1AnswerFormat)
+        let questionStep1 = ORKQuestionStep(identifier: String(describing:Identifier.discreteScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step1AnswerFormat)
         
-        questionStep1.text = exampleDetailText
+        questionStep1.text = NSLocalizedString("Discrete Scale", comment: "")
         
         // The second step is a scale control that allows continuous movement with a percent formatter.
         let step2AnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: 1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
         step2AnswerFormat.numberStyle = .percent
         
-        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.continuousScaleQuestionStep), title: exampleQuestionText, answer: step2AnswerFormat)
+        let questionStep2 = ORKQuestionStep(identifier: String(describing:Identifier.continuousScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step2AnswerFormat)
         
-        questionStep2.text = exampleDetailText
+        questionStep2.text = NSLocalizedString("Continuous Scale", comment: "")
         
         // The third step is a vertical scale control with 10 discrete ticks.
         let step3AnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
         
-        let questionStep3 = ORKQuestionStep(identifier: String(describing:Identifier.discreteVerticalScaleQuestionStep), title: exampleQuestionText, answer: step3AnswerFormat)
+        let questionStep3 = ORKQuestionStep(identifier: String(describing:Identifier.discreteVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step3AnswerFormat)
         
-        questionStep3.text = exampleDetailText
+        questionStep3.text = NSLocalizedString("Discrete Vertical Scale", comment: "")
         
         // The fourth step is a vertical scale control that allows continuous movement.
         let step4AnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: 5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
-        let questionStep4 = ORKQuestionStep(identifier: String(describing:Identifier.continuousVerticalScaleQuestionStep), title: exampleQuestionText, answer: step4AnswerFormat)
+        let questionStep4 = ORKQuestionStep(identifier: String(describing:Identifier.continuousVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step4AnswerFormat)
         
-        questionStep4.text = exampleDetailText
+        questionStep4.text = "Continuous Vertical Scale"
         
         // The fifth step is a scale control that allows text choices.
         let textChoices : [ORKTextChoice] = [ORKTextChoice(text: "Poor", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fair", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Good", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Above Average", value: 10 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Excellent", value: 5 as NSCoding & NSCopying & NSObjectProtocol)]
 
         let step5AnswerFormat = ORKAnswerFormat.textScale(with: textChoices, defaultIndex: NSIntegerMax, vertical: false)
         
-        let questionStep5 = ORKQuestionStep(identifier: String(describing:Identifier.textScaleQuestionStep), title: exampleQuestionText, answer: step5AnswerFormat)
+        let questionStep5 = ORKQuestionStep(identifier: String(describing:Identifier.textScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step5AnswerFormat)
         
-        questionStep5.text = exampleDetailText
+        questionStep5.text = "Text Scale"
         
         // The sixth step is a vertical scale control that allows text choices.
         let step6AnswerFormat = ORKAnswerFormat.textScale(with: textChoices, defaultIndex: NSIntegerMax, vertical: true)
         
-        let questionStep6 = ORKQuestionStep(identifier: String(describing:Identifier.textVerticalScaleQuestionStep), title: exampleQuestionText, answer: step6AnswerFormat)
+        let questionStep6 = ORKQuestionStep(identifier: String(describing:Identifier.textVerticalScaleQuestionStep), title: stepTitle, question: exampleQuestionText, answer: step6AnswerFormat)
         
-        questionStep6.text = exampleDetailText
+        questionStep6.text = "Text Vertical Scale"
         
         return ORKOrderedTask(identifier: String(describing:Identifier.scaleQuestionTask), steps: [
             questionStep1,
@@ -980,7 +1045,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var textQuestionTask: ORKTask {
         let answerFormat = ORKAnswerFormat.textAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(describing:Identifier.textQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing:Identifier.textQuestionStep), title: NSLocalizedString("Text", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -1006,7 +1071,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.textChoiceQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.textChoiceQuestionStep), title: NSLocalizedString("Text Choice", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         questionStep.text = exampleDetailText
         
@@ -1026,7 +1091,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.timeIntervalAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: String(describing:Identifier.timeIntervalQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let step = ORKQuestionStep(identifier: String(describing:Identifier.timeIntervalQuestionStep), title: NSLocalizedString("Time Interval", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -1043,7 +1108,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let answerFormat = ORKAnswerFormat.timeOfDayAnswerFormat()
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.timeOfDayQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.timeOfDayQuestionStep), title: NSLocalizedString("Time", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
         questionStep.text = exampleDetailText
         
@@ -1069,10 +1134,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let answerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with: textChoices)
         
-        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.valuePickerChoiceQuestionStep), title: exampleQuestionText,
-            answer: answerFormat)
+        let questionStep = ORKQuestionStep(identifier: String(describing:Identifier.valuePickerChoiceQuestionStep), title: NSLocalizedString("Value Picker", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
-        questionStep.text = exampleDetailText
+        questionStep.text = NSLocalizedString("Text Value picker", comment: "")
         
         return ORKOrderedTask(identifier: String(describing:Identifier.valuePickerChoiceQuestionTask), steps: [questionStep])
     }
@@ -1084,7 +1148,7 @@ enum TaskListRow: Int, CustomStringConvertible {
      */
     private var validatedTextQuestionTask: ORKTask {
         let answerFormatEmail = ORKAnswerFormat.emailAnswerFormat()
-        let stepEmail = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
+        let stepEmail = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepEmail), title: NSLocalizedString("Validated Text", comment: ""), question: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
         stepEmail.text = exampleDetailText
         
         let domainRegularExpressionPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
@@ -1095,7 +1159,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
         answerFormatDomain.autocorrectionType = UITextAutocorrectionType.no
         answerFormatDomain.spellCheckingType = UITextSpellCheckingType.no
-        let stepDomain = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepDomain), title: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
+        answerFormatDomain.textContentType = UITextContentType.URL
+        let stepDomain = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepDomain), title: NSLocalizedString("Validated Text", comment: ""), question: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
         stepDomain.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(describing:Identifier.validatedTextQuestionTask), steps: [stepEmail, stepDomain])
@@ -1106,7 +1171,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Create the intro step.
         let instructionStep = ORKInstructionStep(identifier: String(describing:Identifier.introStep))
         
-        instructionStep.title = NSLocalizedString("Sample Survey", comment: "")
+        instructionStep.title = NSLocalizedString("Image Capture Survey", comment: "")
         
         instructionStep.text = exampleDescription
         
@@ -1114,6 +1179,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         instructionStep.image = handSolidImage.withRenderingMode(.alwaysTemplate)
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: String(describing:Identifier.imageCaptureStep))
+        imageCaptureStep.title = NSLocalizedString("Image Capture", comment: "")
         imageCaptureStep.isOptional = false
         imageCaptureStep.accessibilityInstructions = NSLocalizedString("Your instructions for capturing the image", comment: "")
         imageCaptureStep.accessibilityHint = NSLocalizedString("Captures the image visible in the preview", comment: "")
@@ -1133,7 +1199,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Create the intro step.
         let instructionStep = ORKInstructionStep(identifier: String(describing:Identifier.introStep))
         
-        instructionStep.title = NSLocalizedString("Sample Survey", comment: "")
+        instructionStep.title = NSLocalizedString("Video Capture Survey", comment: "")
         
         instructionStep.text = exampleDescription
         
@@ -1141,6 +1207,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         instructionStep.image = handSolidImage.withRenderingMode(.alwaysTemplate)
         
         let videoCaptureStep = ORKVideoCaptureStep(identifier: String(describing:Identifier.VideoCaptureStep))
+        videoCaptureStep.title = NSLocalizedString("Video Capture", comment: "")
         videoCaptureStep.accessibilityInstructions = NSLocalizedString("Your instructions for capturing the video", comment: "")
         videoCaptureStep.accessibilityHint = NSLocalizedString("Captures the video visible in the preview", comment: "")
         videoCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
@@ -1156,16 +1223,25 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a wait task.
     private var waitTask: ORKTask {
         let waitStepIndeterminate = ORKWaitStep(identifier: String(describing:Identifier.waitStepIndeterminate))
-        waitStepIndeterminate.title = exampleQuestionText
+        waitStepIndeterminate.title = NSLocalizedString("Wait Step", comment: "")
         waitStepIndeterminate.text = exampleDescription
         waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.indeterminate
         
         let waitStepDeterminate = ORKWaitStep(identifier: String(describing:Identifier.waitStepDeterminate))
-        waitStepDeterminate.title = exampleQuestionText
+        waitStepDeterminate.title = NSLocalizedString("Wait Step", comment: "")
         waitStepDeterminate.text = exampleDescription
         waitStepDeterminate.indicatorType = ORKProgressIndicatorType.progressBar
         
         return ORKOrderedTask(identifier: String(describing:Identifier.waitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
+    }
+    
+    /// This task presents the PDF Viewer Step
+    private var PDFViewerTask: ORKTask {
+
+        let PDFViewerStep = ORKPDFViewerStep.init(identifier: String(describing: Identifier.pdfViewerStep), pdfURL: Bundle.main.bundleURL.appendingPathComponent("ResearchKit.pdf"))
+        PDFViewerStep.title = NSLocalizedString("PDF Step", comment: "")
+        
+        return ORKOrderedTask(identifier: String(describing: Identifier.pdfViewerTask), steps: [PDFViewerStep])
     }
     
     /**
@@ -1175,12 +1251,13 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var eligibilityTask: ORKTask {
         // Intro step
         let introStep = ORKInstructionStep(identifier: String(describing:Identifier.eligibilityIntroStep))
-        introStep.title = NSLocalizedString("Eligibility Task Example", comment: "")
+        introStep.title = NSLocalizedString("Eligibility Task", comment: "")
+        introStep.text = exampleDescription
+        introStep.detailText = NSLocalizedString("Please use this space to provide instructions for participants.  Please make sure to provide enough information so that users can progress through the survey and complete with ease.", comment: "")
         
         // Form step
         let formStep = ORKFormStep(identifier: String(describing:Identifier.eligibilityFormStep))
         formStep.title = NSLocalizedString("Eligibility", comment: "")
-        formStep.text = exampleQuestionText
         formStep.isOptional = false
         
         // Form items
@@ -1202,11 +1279,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // Ineligible step
         let ineligibleStep = ORKInstructionStep(identifier: String(describing:Identifier.eligibilityIneligibleStep))
-        ineligibleStep.title = NSLocalizedString("You are ineligible to join the study", comment: "")
+        ineligibleStep.title = NSLocalizedString("Eligibility Result", comment: "")
+        ineligibleStep.detailText = NSLocalizedString("You are ineligible to join the study", comment: "")
         
         // Eligible step
         let eligibleStep = ORKCompletionStep(identifier: String(describing:Identifier.eligibilityEligibleStep))
-        eligibleStep.title = NSLocalizedString("You are eligible to join the study", comment: "")
+        eligibleStep.title = NSLocalizedString("Eligibility Result", comment: "")
+        eligibleStep.detailText = NSLocalizedString("You are eligible to join the study", comment: "")
         
         // Create the task
         let eligibilityTask = ORKNavigableOrderedTask(identifier: String(describing:Identifier.eligibilityTask), steps: [
@@ -1269,8 +1348,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         let signature = consentDocument.signatures!.first
         
         let reviewConsentStep = ORKConsentReviewStep(identifier: String(describing:Identifier.consentReviewStep), signature: signature, in: consentDocument)
+        reviewConsentStep.requiresScrollToBottom = true
         
         // In a real application, you would supply your own localized text.
+        reviewConsentStep.title = NSLocalizedString("Consent Document", comment: "")
         reviewConsentStep.text = loremIpsumText
         reviewConsentStep.reasonForConsent = loremIpsumText
 
@@ -1290,7 +1371,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationTitle = NSLocalizedString("Registration", comment: "")
         let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
         let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
-        let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
+        let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 to 8 characters long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB, .includePhoneNumber]
         let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         registrationStep.phoneNumberValidationRegularExpression = try! NSRegularExpression(pattern: "^[+]{1,1}[1]{1,1}\\s{1,1}[(]{1,1}[1-9]{3,3}[)]{1,1}\\s{1,1}[1-9]{3,3}\\s{1,1}[1-9]{4,4}$")
@@ -1373,15 +1454,22 @@ enum TaskListRow: Int, CustomStringConvertible {
         The passcode is stored in the keychain.
         */
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing:Identifier.passcodeStep))
-
-        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeStep), steps: [passcodeConsentStep])
+        passcodeConsentStep.title = NSLocalizedString("Passcode", comment: "")
+        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeTask), steps: [passcodeConsentStep])
     }
     
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTask(withIdentifier: String(describing:Identifier.audioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil,  checkAudioLevel: true, options: [])
     }
-
+    
+    /**
+        Amsler Grid
+     */
+    private var amslerGridTask: ORKTask {
+        return ORKOrderedTask.amslerGridTask(withIdentifier: String(describing: Identifier.amslerGridTask), intendedUseDescription: exampleDescription, options: [])
+    }
+    
     /**
         This task presents the Fitness pre-defined active task. For this example,
         short walking and rest durations of 20 seconds each are used, whereas more
@@ -1419,14 +1507,19 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing:Identifier.spatialSpanMemoryTask), intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
     }
     
+    /// This task presents the Speech Recognition pre-defined active task.
+    private var speechRecognitionTask: ORKTask {
+        return ORKOrderedTask.speechRecognitionTask(withIdentifier: String(describing:Identifier.speechRecognitionTask), intendedUseDescription: exampleDescription, speechRecognizerLocale: .englishUS, speechRecognitionImage: nil, speechRecognitionText: NSLocalizedString("A quick brown fox jumps over the lazy dog.", comment: ""), shouldHideTranscript: false, allowsEdittingTranscript: true, options: []);
+    }
+    
+    /// This task presents the Speech in Noise pre-defined active task.
+    private var speechInNoiseTask: ORKTask {
+        return ORKOrderedTask.speechInNoiseTask(withIdentifier: String(describing: Identifier.speechInNoiseTask), intendedUseDescription: nil, options: []);
+    }
+    
     /// This task presents the Stroop pre-defined active task.
     private var stroopTask: ORKTask {
         return ORKOrderedTask.stroopTask(withIdentifier: String(describing:Identifier.stroopTask), intendedUseDescription: exampleDescription, numberOfAttempts: 10, options: [])
-    }
-
-    /// This task presents the Timed Walk pre-defined active task.
-    private var timedWalkTask: ORKTask {
-        return ORKOrderedTask.timedWalk(withIdentifier: String(describing:Identifier.timedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, includeAssistiveDeviceForm: true, options: [])
     }
 
     /// This task presents the Timed Walk with turn around pre-defined active task.
@@ -1437,6 +1530,21 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents the Tone Audiometry pre-defined active task.
     private var toneAudiometryTask: ORKTask {
         return ORKOrderedTask.toneAudiometryTask(withIdentifier: String(describing:Identifier.toneAudiometryTask), intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: [])
+    }
+    
+    /// This task presents the dBHL Tone Audiometry pre-defined active task.
+    private var dBHLToneAudiometryTask: ORKTask {
+        return ORKOrderedTask.dBHLToneAudiometryTask(withIdentifier: String(describing:Identifier.dBHLToneAudiometryTask), intendedUseDescription: nil, options: [])
+    }
+    
+    /// This task presents the environment spl meter step.
+    private var splMeterTask: ORKTask {
+        let splMeterStep = ORKEnvironmentSPLMeterStep(identifier: String(describing:Identifier.splMeterStep))
+        splMeterStep.samplingInterval = 2
+        splMeterStep.requiredContiguousSamples = 10
+        splMeterStep.thresholdValue = 60
+        splMeterStep.title = NSLocalizedString("SPL Meter", comment: "")
+        return ORKOrderedTask(identifier: String(describing: Identifier.splMeterTask), steps: [splMeterStep])
     }
 
     private var towerOfHanoiTask: ORKTask {
@@ -1492,6 +1600,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a web view step
     private var webView: ORKTask {
         let webViewStep = ORKWebViewStep.init(identifier: String(describing: Identifier.webViewStep), html: exampleHtml)
+        webViewStep.title = NSLocalizedString("Web View", comment: "")
         return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
     }
     

@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKDataLoggerManager Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/pendingUploadBytes">pendingUploadBytes</option>
+		
+		<option value="//api/name/pendingUploadBytesThreshold">pendingUploadBytesThreshold</option>
+		
+		<option value="//api/name/totalBytes">totalBytes</option>
+		
+		<option value="//api/name/totalBytesThreshold">totalBytesThreshold</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addDataLoggerForLogName:formatter:">- addDataLoggerForLogName:formatter:</option>
+		
+		<option value="//api/name/addJSONDataLoggerForLogName:">- addJSONDataLoggerForLogName:</option>
+		
+		<option value="//api/name/dataLogger:finishedLogFile:">- dataLogger:finishedLogFile:</option>
+		
+		<option value="//api/name/dataLoggerByteCountsDidChange:">- dataLoggerByteCountsDidChange:</option>
+		
+		<option value="//api/name/dataLoggerForLogName:">- dataLoggerForLogName:</option>
+		
+		<option value="//api/name/enumerateLogsNeedingUpload:error:">- enumerateLogsNeedingUpload:error:</option>
+		
+		<option value="//api/name/initWithDirectory:delegate:">- initWithDirectory:delegate:</option>
+		
+		<option value="//api/name/logNames">- logNames</option>
+		
+		<option value="//api/name/removeDataLogger:">- removeDataLogger:</option>
+		
+		<option value="//api/name/removeOldAndUploadedLogsToThreshold:error:">- removeOldAndUploadedLogsToThreshold:error:</option>
+		
+		<option value="//api/name/removeUploadedFiles:error:">- removeUploadedFiles:error:</option>
+		
+		<option value="//api/name/unmarkUploadedFiles:error:">- unmarkUploadedFiles:error:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKDataLoggerManager Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td><a href="../Protocols/ORKDataLoggerDelegate.html">ORKDataLoggerDelegate</a></td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKDataLogger.h<br />ORKDataLogger.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKDataLoggerManager</code> class represents a manager for multiple <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a> instances,
+which tracks the total size of log files produced and can notify its <a href="#//api/name/delegate">delegate</a>
+when file sizes reach configurable thresholds.</p>
+
+<p>The <code>ORKDataLoggerManager</code> class is an internal component used by some <a href="../Classes/ORKRecorder.html"><code>ORKRecorder</code></a>
+subclasses for writing data to disk during tasks.</p>
+
+<p>This manager can be used to organize the <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a> logs in a directory,
+and keep track of the total number of bytes stored on disk by each logger. The
+<a href="#//api/name/delegate">delegate</a> can be informed if either the number of bytes pending upload, or the total
+number of bytes, exceeds configurable thresholds.</p>
+
+<p>The configuration of the loggers and their thresholds is persisted in a
+configuration file in the log directory.</p>
+
+<p>If the number of bytes pending upload exceeds the threshold, the natural action is to
+upload them. A block-based enumeration is provided for enumerating all the logs
+pending upload. Use <a href="#//api/name/enumerateLogsNeedingUpload:error:"><code>enumerateLogsNeedingUpload:error:</code></a>, and when a log has been
+processed for upload, use the logger to mark it uploaded.</p>
+
+<p>When the upload succeeds (or at least is successfully queued), the uploaded files
+can be removed across all the loggers by calling <a href="#//api/name/removeUploadedFiles:error:"><code>removeUploadedFiles:error:</code></a></p>
+
+<p>If the total number of bytes exceeds the threshold, the natural action is to remove log
+files that have been marked uploaded, and then remove old log files until the
+threshold is no longer exceeded. You can do this by calling <a href="#//api/name/removeOldAndUploadedLogsToThreshold:error:"><code>removeOldAndUploadedLogsToThreshold:error:</code></a></p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithDirectory:delegate:" title="initWithDirectory:delegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithDirectory:delegate:">&ndash;&nbsp;initWithDirectory:delegate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized data logger manager using the specified directory and <a href="#//api/name/delegate">delegate</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithDirectory:(NSURL *)<em>directory</em> delegate:(id&lt;ORKDataLoggerManagerDelegate&gt;)<em>delegate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>directory</code></th>
+						<td><p>The file URL of the directory where the data loggers should coexist.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>The <a href="#//api/name/delegate">delegate</a> to receive notifications.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized data logger manager.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addJSONDataLoggerForLogName:" title="addJSONDataLoggerForLogName:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addJSONDataLoggerForLogName:">&ndash;&nbsp;addJSONDataLoggerForLogName:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a data logger with a JSON log format to the directory.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKDataLogger *)addJSONDataLoggerForLogName:(NSString *)<em>logName</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logName</code></th>
+						<td><p>The log name prefix for the data logger.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a> object that was added.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method throws an exception if a logger already exists with the specified log name.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addDataLoggerForLogName:formatter:" title="addDataLoggerForLogName:formatter:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addDataLoggerForLogName:formatter:">&ndash;&nbsp;addDataLoggerForLogName:formatter:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Adds a data logger with a particular formatter to the directory.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKDataLogger *)addDataLoggerForLogName:(NSString *)<em>logName</em> formatter:(ORKLogFormatter *)<em>formatter</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logName</code></th>
+						<td><p>The log name prefix for the data logger.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>formatter</code></th>
+						<td><p>The log formatter instance to use for this logger.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a> object that was added, or the existing one if one already existed for
+that log name.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeDataLogger:" title="removeDataLogger:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeDataLogger:">&ndash;&nbsp;removeDataLogger:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes a data logger.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)removeDataLogger:(ORKDataLogger *)<em>logger</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logger</code></th>
+						<td><p>The logger to remove.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dataLoggerForLogName:" title="dataLoggerForLogName:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dataLoggerForLogName:">&ndash;&nbsp;dataLoggerForLogName:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Retrieves the already existing data logger for a log name.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKDataLogger *)dataLoggerForLogName:(NSString *)<em>logName</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logName</code></th>
+						<td><p>The log name prefix for the data logger.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a> object that was retrieved, or <code>nil</code> if one already existed for that log name.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/logNames" title="logNames"></a>
+	<h3 class="method-title"><code><a href="#//api/name/logNames">&ndash;&nbsp;logNames</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the set of log names of the data loggers managed by this object.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray&lt;NSString*&gt; *)logNames</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enumerateLogsNeedingUpload:error:" title="enumerateLogsNeedingUpload:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enumerateLogsNeedingUpload:error:">&ndash;&nbsp;enumerateLogsNeedingUpload:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Enumerates all the logs that need upload across all data loggers, sorted from oldest to first.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)enumerateLogsNeedingUpload:(void ( ^ ) ( ORKDataLogger *dataLogger , NSURL *logFileUrl , BOOL *stop ))<em>block</em> error:(NSError *__autoreleasing *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>block</code></th>
+						<td><p>The block to call during enumeration.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error, on failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if the enumeration succeeds; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Before sorting the logs, this method fetches all the data loggers' logs that need upload.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeUploadedFiles:error:" title="removeUploadedFiles:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeUploadedFiles:error:">&ndash;&nbsp;removeUploadedFiles:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes a set of uploaded files.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)removeUploadedFiles:(NSArray&lt;NSURL*&gt; *)<em>fileURLs</em> error:(NSError *__autoreleasing *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>fileURLs</code></th>
+						<td><p>The array of file URLs that should be removed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error, on failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if the operation succeeds; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is analogous to a similar method in <a href="../Classes/ORKDataLogger.html"><code>ORKDataLogger</code></a>, but it accepts an array of files
+that may relate to any of the data loggers. It is an error to pass a URL which would not
+belong to one of the loggers managed by this manager.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unmarkUploadedFiles:error:" title="unmarkUploadedFiles:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unmarkUploadedFiles:error:">&ndash;&nbsp;unmarkUploadedFiles:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Unmarks the set of uploaded files.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)unmarkUploadedFiles:(NSArray&lt;NSURL*&gt; *)<em>fileURLs</em> error:(NSError *__autoreleasing *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>fileURLs</code></th>
+						<td><p>The array of file URLs that should no longer be marked uploaded.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error, on failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if the operation succeeds; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Use this method to indicate that the specified files should no longer be marked uploaded (for example, because
+the upload did not succeed).</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeOldAndUploadedLogsToThreshold:error:" title="removeOldAndUploadedLogsToThreshold:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeOldAndUploadedLogsToThreshold:error:">&ndash;&nbsp;removeOldAndUploadedLogsToThreshold:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Removes old and uploaded logs to bring total bytes down to a threshold.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)<em>bytes</em> error:(NSError *__autoreleasing *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>bytes</code></th>
+						<td><p>The threshold down to which to remove old log files. File removal stops when the total bytes managed by all the data loggers reaches this threshold.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>The error, on failure.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if the operation succeeds; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method removes uploaded logs first, followed by the oldest log files across
+all of the data loggers, until the total usage falls below a threshold.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dataLogger:finishedLogFile:" title="dataLogger:finishedLogFile:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dataLogger:finishedLogFile:">&ndash;&nbsp;dataLogger:finishedLogFile:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate when a log file rollover occurs.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)dataLogger:(ORKDataLogger *)<em>dataLogger</em> finishedLogFile:(NSURL *)<em>fileUrl</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>dataLogger</code></th>
+						<td><p>The data logger providing the notification.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>fileUrl</code></th>
+						<td><p>The URL of the newly renamed log file.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/dataLoggerByteCountsDidChange:" title="dataLoggerByteCountsDidChange:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/dataLoggerByteCountsDidChange:">&ndash;&nbsp;dataLoggerByteCountsDidChange:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Tells the delegate if the number of bytes in completed logs changes.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)dataLoggerByteCountsDidChange:(ORKDataLogger *)<em>dataLogger</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>dataLogger</code></th>
+						<td><p>The data logger providing the notification.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>When files are removed or added, or marked as uploaded or unmarked, this delegate method is called a short time later. Multiple directory changes
+are rolled up into a single delegate callback.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The delegate of the data logger manager.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (weak, nullable) id&lt;ORKDataLoggerManagerDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/pendingUploadBytesThreshold" title="pendingUploadBytesThreshold"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pendingUploadBytesThreshold">&nbsp;&nbsp;pendingUploadBytesThreshold</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The threshold for <a href="#//api/name/delegate">delegate</a> callback for total bytes not marked uploaded.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property unsigned long long pendingUploadBytesThreshold</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/totalBytesThreshold" title="totalBytesThreshold"></a>
+	<h3 class="method-title"><code><a href="#//api/name/totalBytesThreshold">&nbsp;&nbsp;totalBytesThreshold</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The threshold for <a href="#//api/name/delegate">delegate</a> callback for total bytes of completed logs.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property unsigned long long totalBytesThreshold</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/pendingUploadBytes" title="pendingUploadBytes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pendingUploadBytes">&nbsp;&nbsp;pendingUploadBytes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The total number of bytes of files not marked as pending upload.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property unsigned long long pendingUploadBytes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/totalBytes" title="totalBytes"></a>
+	<h3 class="method-title"><code><a href="#//api/name/totalBytes">&nbsp;&nbsp;totalBytes</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The total number of bytes for all the loggers.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property unsigned long long totalBytes</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataLogger.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

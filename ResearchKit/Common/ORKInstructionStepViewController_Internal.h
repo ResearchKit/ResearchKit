@@ -35,10 +35,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKInstructionStepView;
+@class ORKNavigationContainerView;
 
 @interface ORKInstructionStepViewController ()
 
 @property (nonatomic, strong, nullable) ORKInstructionStepView *stepView;
+
+@property (nonatomic, strong, readonly) ORKNavigationContainerView *navigationFooterView;
 
 // Use button title "Get started" instead of "Next".
 - (void)useAppropriateButtonTitleAsLastBeginningInstructionStep;

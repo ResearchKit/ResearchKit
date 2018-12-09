@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKVerificationStep Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:">- initWithIdentifier:</option>
+		
+		<option value="//api/name/initWithIdentifier:text:verificationViewControllerClass:">- initWithIdentifier:text:verificationViewControllerClass:</option>
+		
+		<option value="//api/name/stepViewControllerClass">- stepViewControllerClass</option>
+		
+		<option value="//api/name/validateParameters">- validateParameters</option>
+		
+		<option value="//api/name/verificationViewControllerClass">- verificationViewControllerClass</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKVerificationStep Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStep.html">ORKStep</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKVerificationStep.h<br />ORKVerificationStep.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKVerificationStep</code> class represents a step that serves as placeholder
+step to use while the user attempts to verify their account.</p>
+
+<p>The verification step contains a text field and a resend email button. The button
+actions must be overriden inside a subclassed verification view controller to provide
+navigation logic.</p>
+
+<p>The developer should redirect user back to the app once the verification is done
+and move forward automatically.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/stepViewControllerClass" title="stepViewControllerClass"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerClass">&ndash;&nbsp;stepViewControllerClass</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (Class)stepViewControllerClass</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithIdentifier:text:verificationViewControllerClass:" title="initWithIdentifier:text:verificationViewControllerClass:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:text:verificationViewControllerClass:">&ndash;&nbsp;initWithIdentifier:text:verificationViewControllerClass:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized verification step using the specified identifier,
+title, text, and class.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> text:(NSString *)<em>text</em> verificationViewControllerClass:(Class)<em>verificationViewControllerClass</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The string that identifies the step (see <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>text</code></th>
+						<td><p>The text shown immediately below the title (see <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>verificationViewControllerClass</code></th>
+						<td><p>The subclassed verification view controller class.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized verification step object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKVerificationStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/verificationViewControllerClass" title="verificationViewControllerClass"></a>
+	<h3 class="method-title"><code><a href="#//api/name/verificationViewControllerClass">&ndash;&nbsp;verificationViewControllerClass</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The view controller subclass used for the step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (Class)verificationViewControllerClass</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The subclass allows you to override button actions in order to provide navigation logic
+for the button items on the step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKVerificationStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/validateParameters" title="validateParameters"></a>
+	<h3 class="method-title"><code><a href="#//api/name/validateParameters">&ndash;&nbsp;validateParameters</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the parameters of the step and throws exceptions on invalid parameters.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)validateParameters</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is called when there is a need to validate the step&rsquo;s parameters, which is typically
+the case when adding a step to an <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> object, and when presenting the
+step view controller.</p>
+
+<p>Subclasses should override this method to provide validation of their additional
+properties, and must call super.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:">&ndash;&nbsp;initWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -44,8 +44,9 @@
 #import "ORKWaitStepView.h"
 
 #import "ORKStepViewController_Internal.h"
-
+#import "ORKNavigationContainerView_Internal.h"
 #import "ORKWaitStep.h"
+#import "ORKTaskViewController_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -54,6 +55,8 @@
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
     NSString *_updatedText;
+    ORKNavigationContainerView *_navigationFooterView;
+    NSArray<NSLayoutConstraint *> *_constraints;
 }
 
 - (ORKWaitStep *)waitStep {
@@ -75,10 +78,84 @@
         _waitStepView.frame = self.view.bounds;
         _waitStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_waitStepView];
-        
-        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
+        [self setupNavigationFooterView];
+        [self setupConstraints];
         _waitStepView.headerView.instructionLabel.text = _updatedText;
+        [self.taskViewController setRegisteredScrollView:_waitStepView];
     }
+}
+
+- (void)setupNavigationFooterView {
+    if (!_navigationFooterView) {
+        _navigationFooterView = [ORKNavigationContainerView new];
+    }
+    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+    _navigationFooterView.neverHasContinueButton = YES;
+    [self.view addSubview:_navigationFooterView];
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _constraints = nil;
+    _waitStepView.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_waitStepView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_waitStepView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_waitStepView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_waitStepView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 - (void)viewDidLoad {

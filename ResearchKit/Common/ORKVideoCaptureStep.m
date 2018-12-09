@@ -53,10 +53,6 @@
     return self;
 }
 
-- (void)setDuration:(NSNumber *)duration {
-    _duration = MIN(MAX(duration, @1), @1200);
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

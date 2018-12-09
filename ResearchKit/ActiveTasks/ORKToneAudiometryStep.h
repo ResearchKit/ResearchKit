@@ -41,6 +41,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) NSTimeInterval toneDuration;
 
+@property (nonatomic, assign) BOOL practiceStep;
+
 @end
 
 NS_ASSUME_NONNULL_END

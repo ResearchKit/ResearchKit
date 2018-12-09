@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKPageStep Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/stepViewControllerClass">+ stepViewControllerClass</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithIdentifier:">- initWithIdentifier:</option>
+		
+		<option value="//api/name/initWithIdentifier:steps:">- initWithIdentifier:steps:</option>
+		
+		<option value="//api/name/requestedHealthKitTypesForReading">- requestedHealthKitTypesForReading</option>
+		
+		<option value="//api/name/requestedPermissions">- requestedPermissions</option>
+		
+		<option value="//api/name/stepAfterStepWithIdentifier:withResult:">- stepAfterStepWithIdentifier:withResult:</option>
+		
+		<option value="//api/name/stepBeforeStepWithIdentifier:withResult:">- stepBeforeStepWithIdentifier:withResult:</option>
+		
+		<option value="//api/name/stepWithIdentifier:">- stepWithIdentifier:</option>
+		
+		<option value="//api/name/steps">- steps</option>
+		
+		<option value="//api/name/validateParameters">- validateParameters</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKPageStep Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStep.html">ORKStep</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKPageStep.h<br />ORKPageStep.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKPageStep</code> class is a concrete subclass of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>, used for presenting a subgrouping of
+<a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> views using a <code>UIPageViewController</code>.</p>
+
+<p>To use <code>ORKPageStep</code>, instantiate the object, fill in its properties, and include it in a task.
+Next, create a task view controller for the task and present it.</p>
+
+<p>The base class implementation will instatiate a read-only <a href="../Classes/ORKPageStepViewController.html"><code>ORKPageStepViewController</code></a> to display
+a series of sub<a href="#//api/name/steps">steps</a>. For each substep, the <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> will be instantiated and added
+as a child of the <code>UIPageViewController</code> contained by the parent <a href="../Classes/ORKPageStepViewController.html"><code>ORKPageStepViewController</code></a>..</p>
+
+<p>Customization can be handled by overriding the base class implementations in either <code>ORKPageStep</code>
+or <a href="../Classes/ORKPageStepViewController.html"><code>ORKPageStepViewController</code></a>.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:" title="initWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:">&ndash;&nbsp;initWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithIdentifier:steps:" title="initWithIdentifier:steps:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:steps:">&ndash;&nbsp;initWithIdentifier:steps:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized page step using the specified identifier and array of <a href="../Classes/ORKPageStep.html#//api/name/steps">steps</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> steps:(NSArray&lt;ORKStep*&gt; *)<em>steps</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique identifier for the step.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>steps</code></th>
+						<td><p>An array of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a> objects in the order in which they should be presented.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized page step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/steps" title="steps"></a>
+	<h3 class="method-title"><code><a href="#//api/name/steps">&ndash;&nbsp;steps</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of steps in the page step. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSArray&lt;ORKStep*&gt; *)steps</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Each element in the array must be a subclass of <a href="../Classes/ORKStep.html"><code>ORKStep</code></a>.
+The associated page step view controller presents the steps in
+array order.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerClass" title="stepViewControllerClass"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerClass">+&nbsp;stepViewControllerClass</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (Class)stepViewControllerClass</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedPermissions" title="requestedPermissions"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedPermissions">&ndash;&nbsp;requestedPermissions</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of access permissions required for the step. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKPermissionMask)requestedPermissions</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The permission mask is used by the <a href="../Classes/ORKStep.html#//api/name/task">task</a> view controller to determine the types of
+access to request from users when they complete the initial instruction steps
+in a <a href="../Classes/ORKStep.html#//api/name/task">task</a>. If your step requires access to APIs that limit access, include
+the permissions you require in this mask.</p>
+
+<p>By default, the property scans the recorders and collates the permissions
+required by the recorders. Subclasses may override this implementation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requestedHealthKitTypesForReading" title="requestedHealthKitTypesForReading"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requestedHealthKitTypesForReading">&ndash;&nbsp;requestedHealthKitTypesForReading</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The set of HealthKit types the step requests for reading. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSSet&lt;HKObjectType*&gt; *)requestedHealthKitTypesForReading</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The <a href="../Classes/ORKStep.html#//api/name/task">task</a> view controller uses this set of types when constructing a list of
+all the HealthKit types required by all the steps in a <a href="../Classes/ORKStep.html#//api/name/task">task</a>, so that it can
+present the HealthKit access dialog just once during that <a href="../Classes/ORKStep.html#//api/name/task">task</a>.</p>
+
+<p>By default, the property scans the recorders and collates the HealthKit
+types the recorders require. Subclasses may override this implementation.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/validateParameters" title="validateParameters"></a>
+	<h3 class="method-title"><code><a href="#//api/name/validateParameters">&ndash;&nbsp;validateParameters</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Checks the parameters of the step and throws exceptions on invalid parameters.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)validateParameters</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is called when there is a need to validate the step&rsquo;s parameters, which is typically
+the case when adding a step to an <a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> object, and when presenting the
+step view controller.</p>
+
+<p>Subclasses should override this method to provide validation of their additional
+properties, and must call super.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepAfterStepWithIdentifier:withResult:" title="stepAfterStepWithIdentifier:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepAfterStepWithIdentifier:withResult:">&ndash;&nbsp;stepAfterStepWithIdentifier:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step after the specified step, if there is one.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepAfterStepWithIdentifier:(NSString *)<em>identifier</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The reference step identifier. Pass <code>nil</code> to specify the first step.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>result</code></th>
+						<td><p>A snapshot of the current set of results.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The step that comes after the specified step, or <code>nil</code> if there isn&rsquo;t one.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The page view controller calls this method to determine the step to display after the specified step.
+The page view controller can also call this method every time the result updates, to determine if the
+new result changes which <a href="#//api/name/steps">steps</a> are available.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepBeforeStepWithIdentifier:withResult:" title="stepBeforeStepWithIdentifier:withResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepBeforeStepWithIdentifier:withResult:">&ndash;&nbsp;stepBeforeStepWithIdentifier:withResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step that precedes the specified step, if there is one.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepBeforeStepWithIdentifier:(NSString *)<em>identifier</em> withResult:(ORKTaskResult *)<em>result</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The reference step identifier.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>result</code></th>
+						<td><p>A snapshot of the current set of results.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The step that precedes the reference step, or <code>nil</code> if there isn&rsquo;t one.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The page view controller calls this method to determine the step to display before the specified step.
+The page view controller can also call this method every time the result changes, to determine if the
+new result changes which <a href="#//api/name/steps">steps</a> are available.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepWithIdentifier:" title="stepWithIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepWithIdentifier:">&ndash;&nbsp;stepWithIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step that matches the specified identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStep *)stepWithIdentifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The identifier of the step to restore.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The step that matches the specified identifier, or <code>nil</code> if there isn&rsquo;t one.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a page step initialized from data in the given unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>The coder from which to initialize the ordered task.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized page step.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>A page step can be serialized and deserialized with <code>NSKeyedArchiver</code>. Note
+that this serialization includes strings that might need to be localized.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStep.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

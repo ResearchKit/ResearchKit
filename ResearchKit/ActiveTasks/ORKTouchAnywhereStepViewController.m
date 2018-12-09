@@ -117,7 +117,7 @@
     _touchAnywhereView = [[ORKTouchAnywhereView alloc] init];
     _touchAnywhereView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _touchAnywhereView;
-    self.cancelButtonItem = nil;
+    
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
     self.internalContinueButtonItem = nil;

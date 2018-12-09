@@ -84,7 +84,7 @@
     
     _isCompletionStep = [_instructionStep isKindOfClass:[ORKCompletionStep class]];
     
-    self.verticalCenteringEnabled = !hasImage;
+    self.verticalCenteringEnabled = NO;
     self.continueHugsContent = !hasImage && !hasFootnote;
     self.stepViewFillsAvailableSpace = ((hasImage || hasFootnote) && !_isCompletionStep);
     
@@ -142,7 +142,6 @@
     }
     
     self.headerView.iconImageView.image = _instructionStep.iconImage;
-    self.headerView.captionLabel.text = _instructionStep.title;
     
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
     NSAttributedString *attributedDetail = _instructionStep.attributedDetailText;
@@ -157,7 +156,7 @@
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
-        [style setAlignment:NSTextAlignmentCenter];
+        [style setAlignment:NSTextAlignmentNatural];
         
         [attributedInstruction appendAttributedString:attributedDetail];
         
@@ -166,7 +165,7 @@
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
-        [style setAlignment:NSTextAlignmentCenter];
+        [style setAlignment:NSTextAlignmentNatural];
         
         NSAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:detail
                                                                                attributes:@{NSParagraphStyleAttributeName: style}];
@@ -181,9 +180,6 @@
     }
     
     self.headerView.instructionLabel.attributedText = attributedInstruction;
-    
-    self.continueSkipContainer.footnoteLabel.text = _instructionStep.footnote;
-    [self.continueSkipContainer updateContinueAndSkipEnabled];
     
     [self tintColorDidChange];
     

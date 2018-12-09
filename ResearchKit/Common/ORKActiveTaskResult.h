@@ -30,15 +30,18 @@
  */
 
 
+#import <ResearchKit/ORKAmslerGridResult.h>
 #import <ResearchKit/ORKFileResult.h>
 #import <ResearchKit/ORKHolePegTestResult.h>
 #import <ResearchKit/ORKPSATResult.h>
 #import <ResearchKit/ORKRangeOfMotionResult.h>
 #import <ResearchKit/ORKReactionTimeResult.h>
 #import <ResearchKit/ORKSpatialSpanMemoryResult.h>
+#import <ResearchKit/ORKSpeechRecognitionResult.h>
 #import <ResearchKit/ORKStroopResult.h>
 #import <ResearchKit/ORKTappingIntervalResult.h>
 #import <ResearchKit/ORKTimedWalkResult.h>
 #import <ResearchKit/ORKToneAudiometryResult.h>
+#import <ResearchKit/ORKdBHLToneAudiometryResult.h>
 #import <ResearchKit/ORKTowerOfHanoiResult.h>
 #import <ResearchKit/ORKTrailmakingResult.h>

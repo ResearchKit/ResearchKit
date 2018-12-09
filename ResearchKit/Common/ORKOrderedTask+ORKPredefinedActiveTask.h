@@ -40,6 +40,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKOrderedTask (ORKPredefinedActiveTask)
 
+/**
+ Returns a predefined Amsler Grid task that helps in detecting problems in user's vision.
+ 
+ In an Amsler Grid task, the participant is shown a square grid. The participant is asked to mark the areas where they notice disctortions in the grid.
+ 
+ Data collected by the task is in the form of an `ORKAmslerGridResult` object.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data collected.
+                                    If the value of this parameter is `nil`, the default localized text is displayed.
+ @param options                     Options that affect the features of the predefined task.
+ */
++ (ORKNavigableOrderedTask *)amslerGridTaskWithIdentifier:(NSString *)identifier
+                                   intendedUseDescription: (nullable NSString *)intendedUseDescription
+                                                  options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that measures the upper extremity function.
@@ -359,6 +374,55 @@ NS_ASSUME_NONNULL_BEGIN
                                      options:(ORKPredefinedTaskOption)options;
 
 /**
+ Returns a predefined Speech Recognition task that transcribes participant's speech.
+ 
+ In a Speech Recognition task, the participant is shown a text or image or both. The participant has to read the text aloud, or describe the image.
+ 
+ A Speech Recognition task finishes when the user presses the Stop Recording button.
+ 
+ Data collected by the task is in the form of an `ORKSpeechRecognitionResult` object.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data collected.
+                                    If the value of this parameter is `nil`, the default localized text is displayed.
+ @param speechRecognizerLocale      An enum that represents the locale to be used by speech recognition API.
+ @param speechRecognitionImage      The image shown to the participant.
+ @param speechRecognitionText       The text shown to the participant.
+ @param shouldHideTranscript        The boolean value used to show or hide the transcription from the user.
+ @param allowsEdittingTranscript    The boolean value used to present step that allows editting transcription.
+ @param options                     Options that affect the features of the predefined task.
+ */
++ (ORKOrderedTask *)speechRecognitionTaskWithIdentifier:(NSString *)identifier
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                 speechRecognizerLocale:(ORKSpeechRecognizerLocale)speechRecognizerLocale
+                                 speechRecognitionImage:(nullable UIImage *)speechRecognitionImage
+                                  speechRecognitionText:(nullable NSString *)speechRecognitionText
+                                   shouldHideTranscript:(BOOL)shouldHideTranscript
+                               allowsEdittingTranscript:(BOOL)allowsEdittingTranscript
+                                                options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that tests speech audiometry.
+ 
+ In a speech in noise task, the participant is asked to listen to some sentences mixed with background noise at varying signal to noise ratio (SNR).
+ 
+ You can use a speech in noise task to measure the speech reception threshold (SRT) of an individual.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, default
+ localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active speech in noise task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)speechInNoiseTaskWithIdentifier:(NSString *)identifier
+                             intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                            options:(ORKPredefinedTaskOption)options;
+
+
+
+/**
  Returns a predefined task that tests tone audiometry.
 
  In a tone audiometry task, the participant is asked to listen to some tones with different audio
@@ -393,6 +457,26 @@ NS_ASSUME_NONNULL_BEGIN
                               shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
                                         toneDuration:(NSTimeInterval)toneDuration
                                              options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that tests dBHL tone audiometry.
+ 
+ In the dBHL tone audiometry task, the participant is asked to listen to some tones with different audio
+ frequencies, playing on different channels (left and right), that vary in dB HL values depending on whether or not the user tapped the button.
+ 
+ You can use a tone audiometry task to measure the hearing threshold of the user.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, default
+ localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active dBHL tone audiometry task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)dBHLToneAudiometryTaskWithIdentifier:(NSString *)identifier
+                                  intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                 options:(ORKPredefinedTaskOption)options;
 
 
 /**
@@ -473,44 +557,6 @@ NS_ASSUME_NONNULL_BEGIN
                                      numberOfDisks:(NSUInteger)numberOfDisks
                                            options:(ORKPredefinedTaskOption)options;
 
-
-/**
- Returns a predefined task that consists of a timed walk.
- 
- In a timed walk task, the participant is asked to walk for a specific distance as quickly as
- possible, but safely. The task is immediately administered again by having the patient walk back
- the same distance.
- A timed walk task can be used to measure lower extremity function.
- 
- The presentation of the timed walk task differs from both the fitness check task and the short
- walk task in that the distance is fixed. After a first walk, the user is asked to turn and reverse
- direction.
- 
- The data collected by this task can include accelerometer, device motion, pedometer data,
- and location where available.
- 
- Data collected by the task is in the form of an `ORKTimedWalkResult` object.
- 
- @param identifier                  The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription      A localized string describing the intended use of the data
-                                      collected. If the value of this parameter is `nil`, the default
-                                      localized text is displayed.
- @param distanceInMeters            The timed walk distance in meters.
- @param timeLimit                   The time limit to complete the trials.
- @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
-                                      about the usage of an assistive device.
- @param options                     Options that affect the features of the predefined task.
- 
- @return An active timed walk task that can be presented with an `ORKTaskViewController` object.
- */
-+ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
-                         intendedUseDescription:(nullable NSString *)intendedUseDescription
-                               distanceInMeters:(double)distanceInMeters
-                                      timeLimit:(NSTimeInterval)timeLimit
-                     includeAssistiveDeviceForm:(BOOL)includeAssistiveDeviceForm
-                                        options:(ORKPredefinedTaskOption)options;
-
-
 /**
  Returns a predefined task that consists of a timed walk, with a distinct turn around step.
 
@@ -534,7 +580,7 @@ NS_ASSUME_NONNULL_BEGIN
  localized text is displayed.
  @param distanceInMeters            The timed walk distance in meters.
  @param timeLimit                   The time limit to complete the trials.
- @param turnAroundTimeLimit         The time limit to complete the turn around step.
+ @param turnAroundTimeLimit         The time limit to complete the turn around step, passing zero or negative value to this parameter will bypass the turnAroundTime step.
  @param includeAssistiveDeviceForm  A Boolean value that indicates whether to inlude the form step
  about the usage of an assistive device.
  @param options                     Options that affect the features of the predefined task.

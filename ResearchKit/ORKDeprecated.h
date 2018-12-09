@@ -32,94 +32,41 @@
 #import "ORKAnswerFormat.h"
 #import "ORKOrderedTask.h"
 #import "ORKRegistrationStep.h"
+#import "ORKQuestionStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Deprecated in v1.5.0 (scheduled for removal in v1.6.0).
- */
-@interface ORKAnswerFormat (Deprecated)
-
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
-                                              invalidMessage:(NSString *)invalidMessage
-__attribute__((deprecated("Use '-textAnswerFormatWithValidationRegularExpression:invalidMessage:' instead.",
-                          "textAnswerFormatWithValidationRegularExpression")));
-
-@end
-
-
-/**
- Deprecated in v1.5.0 (scheduled for removal in v1.6.0).
- */
-@interface ORKTextAnswerFormat (Deprecated)
-
-/**
- Returns an initialized text answer format using the regular expression.
- 
- This method is one of the designated initializers.
- 
- @param validationRegex           The regular expression pattern used to validate the text.
- @param invalidMessage            The text presented to the user when invalid input is received.
- 
- @return An initialized validated text answer format.
+ Deprecated in v2.0 (scheduled for removal).
  */
 
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
-                         invalidMessage:(NSString *)invalidMessage
-__attribute__((deprecated("Use '-initValidationRegularExpression:invalidMessage:' instead.",
-                          "initWithValidationRegularExpression")));
-
-/*
- The regular expression pattern used to validate user's input.
-
- If The value is nil, no validation will be performed.
-*/
-@property (nonatomic, copy, nullable, readonly) NSString *validationRegex
-__attribute__((deprecated("Use 'validationRegularExpression' instead.",
-                          "validationRegularExpression")));
-
-@end
-
+@interface ORKQuestionStep (Deprecated)
 
 /**
- Deprecated in v1.5.0 (scheduled for removal in v1.6.0).
- */
-@interface ORKRegistrationStep (Deprecated)
-
-/**
- Returns an initialized registration step using the specified identifier,
- title, text, options, passcodeValidationRegularExpressionPattern, and
- passcodeInvalidMessage.
+ Returns a new question step that includes the specified identifier, title, question, and answer format.
  
- @param identifier                  The string that identifies the step (see `ORKStep`).
- @param title                       The title of the form (see `ORKStep`).
- @param text                        The text shown immediately below the title (see `ORKStep`).
- @param passcodeValidationRegex     The regular expression pattern used to validate the passcode form item (see `ORKTextAnswerFormat`).
- @param passcodeInvalidMessage      The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
- @param options                     The options used for the step (see `ORKRegistrationStepOption`).
-  
- @return An initialized registration step object.
-   */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
-           passcodeValidationRegex:(nullable NSString *)passcodeValidationRegularExpressionPattern
-            passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
-                           options:(ORKRegistrationStepOption)options
-__attribute__((deprecated("Use '-initWithIdentifier:title:text:passcodeValidationRegularExpression:passcodeInvalidMessage:options:' instead.")));
-
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param title         A localized string that represents the question.
+ @param answerFormat  The format in which the answer is expected.
+ */
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                                    answer:(nullable ORKAnswerFormat *)answerFormat __attribute__((deprecated("Use '-questionStepWithIdentifier:title:question:answer:' instead.","questionStepWithIdentifier")));
 
 /**
- The regular expression pattern used to validate the passcode form item.
- This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
-   
- The passcode invalid message property must also be set along with this property.
- By default, there is no validation on the passcode.
-   */
-@property (nonatomic, copy, nullable, readonly) NSString *passcodeValidationRegex
-__attribute__((deprecated("Use 'passcodeValidationRegularExpression' instead.",
-"passcodeValidationRegularExpression")));
+ Returns a new question step that includes the specified identifier, title, question, and answer format.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param title         A localized string that represents the question.
+ @param text          The primary text shown below the title string.
+ @param answerFormat  The format in which the answer is expected.
+ */
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                                      text:(nullable NSString *)text
+                                    answer:(nullable ORKAnswerFormat *)answerFormat __attribute__((deprecated("Use '-questionStepWithIdentifier:title:question:answer:' instead.",
+                          "questionStepWithIdentifier")));
 
 @end
 

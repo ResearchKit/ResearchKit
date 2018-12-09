@@ -34,10 +34,10 @@
 "CONSENT_NAME_FAMILY" = "Soyad";
 "CONSENT_NAME_PLACEHOLDER" = "Gerekli";
 "CONSENT_REVIEW_TITLE" = "Gözden Geçir";
-"CONSENT_REVIEW_INSTRUCTION" = "Aşağıdaki formu gözden geçirin ve sürdürmeye hazırsanız Kabul Ediyorum’a dokunun.";
+"CONSENT_REVIEW_INSTRUCTION" = "Aşağıdaki formu gözden geçirin, sürdürmeye hazırsanız Kabul Ediyorum’a dokunun.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Gözden Geçir";
 "CONSENT_SIGNATURE_TITLE" = "İmza";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Lütfen parmağınızı kullanarak aşağıdaki çizgiye imza atın.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Lütfen aşağıdaki kutuyu parmağınızı kullanarak imzalayın.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Burayı İmzalayın";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Sayfa %1$ld / %2$ld";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Paylaşma Seçenekleri";
 "CONSENT_SHARE_WIDELY_%@" = "Verilerimi %@ ve dünya çapında nitelikli araştırmacılarla paylaş";
 "CONSENT_SHARE_ONLY_%@" = "Verilerimi yalnızca %@ ile paylaş";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@, bu çalışmaya katılımınız sonucundaki çalışma verilerinizi alacaktır.\n\nKodlanmış çalışma verilerinizin daha kapsamlı bir biçimde paylaşılması (adınız gibi bilgiler olmadan) bu çalışmaya ve ilerideki çalışmalara faydalı olabilir.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@, bu çalışmaya katılımınızdan elde ettiğiniz çalışma verilerinizi alacak.\n\nKodlanmış çalışma verilerinizi daha geniş bir biçimde (adınız gibi bilgiler olmadan) paylaşmanız, bu araştırma ve gelecekteki araştırmalar için yararlı olabilir.";
 "LEARN_MORE_CONSENT_SHARING" = "Veri paylaşımı hakkında daha fazla bilgi";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Tarih";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Adım %1$@ / %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ / %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Geçersiz değer";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Bir cinsiyet seçin";
 "DOB_FORM_ITEM_TITLE" = "Doğum Tarihi";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Bir tarih seçin";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefon Numarası";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Doğrulama";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fit";
 "MEASURING_UNIT_IN" = "inç";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "sol";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Vazgeç";
 "BUTTON_OK" = "Tamam";
 "BUTTON_CLEAR" = "Sil";
+"BUTTON_APPLY" = "Uygula";
 "BUTTON_DISAGREE" = "Kabul Etmiyorum";
 "BUTTON_DONE" = "Bitti";
 "BUTTON_GET_STARTED" = "Başla";
@@ -214,7 +220,7 @@
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivite başlatılıyor";
-"TASK_COMPLETE_TITLE" = "Aktivite Tamamlandı";
+"TASK_COMPLETE_TITLE" = "Tamamlandı";
 "TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunda size haber verilecektir.";
 "COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ saniye kaldı.";
 "TOUCH_ANYWHERE_LABEL" = "Sürdürmek için herhangi bir yere dokunun";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Yürüyüş Tarzı ve Denge";
 "WALK_INTRO_TEXT" = "Bu aktivite, yürürken ve ayakta dururken yürüyüş tarzınızı ve dengenizi ölçer. Yardımsız, güvenli bir şekilde yürüyemiyorsanız devam etmeyin.";
 "WALK_INTRO_2_TEXT_%ld" = "Düz bir çizgide yaklaşık %ld adım yardımsız, güvenli bir şekilde yürüyebileceğiniz bir yer bulun.";
-"WALK_INTRO_2_DETAIL" = "Telefonunuzu cebinize veya çantanıza koyun ve sesli yönergeleri izleyin.";
+"WALK_INTRO_2_DETAIL" = "Aygıtınızı cebinize veya çantanıza koyun ve sesli yönergeleri takip edin.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Şimdi %@ süresince hareketsiz durun.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Hareketsiz bir şekilde %@ durun.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Geriye dönün ve başladığınız yere yürüyün.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Düz bir çizgide en fazla %ld adım yürüyün.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Düz bir çizgide ileri geri güvenli bir şekilde yürüyebileceğiniz bir yer bulun. Yolunuzun sonunda geri dönüp devam ederek durmadan yürümeye çalışın.\n\nSonra tam daire etrafında dönmeniz, ardından da kollarınız yanlarda ve ayaklarınız omuz genişliğinde açık olarak hareketsiz durmanız istenecektir.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Başlamaya hazır olduğunuzda Başla’ya dokunun.\nSonra telefonunuzu cebinize veya çantanıza koyun ve sesli yönergeleri izleyin.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Düz bir çizgide güvenli bir şekilde ileri ve geri yürüyebileceğiniz bir yer bulun. Tıpkı bir koninin etrafında yürüyor gibi, yolunuzun sonundan dönerek sürekli yürümeyi deneyin.\n\nArdından, tam daire çevresinde dönmeniz, kollarınız iki yanınızda ve ayaklarınız omuz genişliğinde açık olacak şekilde ayakta sabit durmanız istenecektir.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Başlamaya hazır olduğunuzda Başla’ya dokunun.\nArdından aygıtınızı cebinize veya çantanıza yerleştirin ve sesli yönergeleri takip edin.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Düz bir çizgide ileri geri %@ yürüyün. Normal bir şekilde yürüyün.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Tam daire şeklinde dönün ve sonra %@ süresince hareketsiz durun.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Bu aktiviteyi tamamladınız.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Sağ El";
 "TAPPING_TASK_TITLE_LEFT" = "Sol El";
 "TAPPING_INTRO_TEXT" = "Bu aktivite, dokunma hızınızı ölçer.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Telefonunuzu düz bir yüzeye koyun.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Aygıtı düz bir zemine koyun.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için aynı elinizin iki parmağını kullanın.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için sağ elinizin iki parmağını kullanın.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Ekrandaki düğmelere dönüşümlü olarak dokunmak için sol elinizin iki parmağını kullanın.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Düğmelere SOL elinizi kullanarak dokunun.";
 "TAPPING_SKIP_TITLE" = "Bu eli atla";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler Izgarası";
+"AMSLER_GRID_INTRO_TEXT" = "Bu aktivite, kullanıcının görüşündeki sorunları algılamaya yardımcı olur.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Aygıtı test boyunca yüzünüzden 30 cm uzakta ve göz seviyenizde tutun.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@ünüzü kapatın ve kare ızgaranın ortasındaki noktaya bakın.\n\nParmağınızı veya ekran kalemini kullanarak gördüğünüz bozulmaları işaretleyin (örneğin bulanık veya dalgalı çizgiler).\n\nİşiniz bittiğinde, ızgaranın dışında herhangi bir yere doğru sola kaydırın.";
+"AMSLER_GRID_LEFT_EYE" = "Sol Göz";
+"AMSLER_GRID_RIGHT_EYE" = "Sağ Göz";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ses";
 "AUDIO_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "AUDIO_INSTRUCTION" = "Mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin.";
 "AUDIO_INTRO_TEXT" = "Derin bir nefes alın ve mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin. Ses çubukları mavi kalacak şekilde ses yüksekliğini sabit tutmaya çalışın.";
-"AUDIO_INTENDED_USE" = "Bu aktivite, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
+"AUDIO_INTENDED_USE" = "Bu aktivite, sesinizi aygıtınızın en altındaki mikrofonla kaydederek değerlendirir.";
 "AUDIO_TOO_LOUD_LABEL" = "Çok Yüksek";
 "AUDIO_GENERIC_ERROR_LABEL" = "Ses kaydı yapılamıyor";
 "AUDIO_LEVEL_CHECK_LABEL" = "Arka plan gürültü düzeyi denetlenirken lütfen bekleyin.";
@@ -294,14 +308,24 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Bu aktivite, farklı sesleri duyabilme becerinizi ölçer.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Başlamadan önce kulaklığınızı takıp kulağınıza yerleştirin.\n\nSes çok hafif gelecek ve normal uyarı sesinden farklı olacaktır.  Alçak tonda başlayan ses yavaş yavaş yükselecektir.  Lütfen dikkatinizi verip sesi hangi kulağınızdan duyduğunuzu belirtmek üzere sol veya sağ düğmeye dokunun.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Başlamadan önce, kulaklıklarınızı bağlayın ve takın.\n\nSes çok hafif ve normal uyarı tonundan farklı olacaktır.  Ses yumuşak bir şekilde başlayacak ve ses düzeyi yavaşça artacaktır.  Lütfen dikkatinizi verin ve hangi kulakta duyduğunuzu belirtmek için sol veya sağ düğmeye dokunun.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda herhangi bir düğmeye dokunun.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Şimdi bir ses duymalısınız. Aygıtınızın yan tarafındaki denetimleri kullanarak ses düzeyini ayarlayın.\n\nBaşlamaya hazır olduğunuzda herhangi bir düğmeye dokunun.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Sesi her duyduğunuzda, sesi hangi kulağınızdan duyduğunuzu belirtmek üzere sol veya sağ düğmeye dokunun.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Sol Kulak";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Sağ Kulak";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Sol";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Sağ";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Bu aktivite, bir bireyin duyma eşiği düzeylerini dB HL ölçeğinde belirler.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Aygıt sesinin en yüksek düzeye ayarlandığından emin olun.\n\nBu görev sırasında, sol veya sağ kulakta hafif bir ses çalacaktır.\n\nDikkatli bir şekilde dinleyin ve sesi her duyduğunuzda düğmeye dokunun.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "İşe alım anketi.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Bir kulağınız “daha iyi duyuyorsa” onu seçin";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "sol";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "sağ";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "tercih yok";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
@@ -321,7 +345,7 @@
 "MEMORY_GAME_FAILED_TITLE" = "Yeniden Deneyin";
 "MEMORY_GAME_FAILED_MESSAGE" = "Bu sefer pek iyi yapamadınız. Devam etmek için İleri’ye dokunun.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Süre Doldu";
-"MEMORY_GAME_TIMEOUT_MESSAGE" = "Süreniz kalmadı.\nDevam etmek için İleri’ye dokunun.";
+"MEMORY_GAME_TIMEOUT_MESSAGE" = "Süreniz doldu.\nSürdürmek için Sonraki’ye dokunun.";
 "MEMORY_GAME_COMPLETE" = "Oyun Tamamlandı";
 "MEMORY_GAME_PAUSED_TITLE" = "Duraklatıldı";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Devam etmek için İleri’ye dokunun";
@@ -355,10 +379,11 @@
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tüm yığını, vurgulanan platforma mümkün olan en az hamlede taşıyın.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Bulmacayı Çöz";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Hamle Sayısı: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Hareket Sayısı: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Bu bulmacayı çözemedim";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Hareket Aralığı";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption sol veya sağ olmalı";
 
 /* Knee Range of Motion active task */
@@ -421,7 +446,7 @@
 "PASAT_INTRO_TEXT" = "Tempolu İşitsel Toplama Testi, işitsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
 "PVSAT_INTRO_TEXT" = "Tempolu Görsel Toplama Testi, görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
 "PAVSAT_INTRO_TEXT" = "Tempolu İşitsel ve Görsel Toplama Testi, işitsel ve görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
-"PSAT_INTRO_TEXT_2_%@" = "Her %@ saniyede bir tek tek rakamlar sunulur.\nHer yeni rakamı bir önceki rakama eklemeniz gerekir.\nDikkat edin, değişen toplamı değil yalnızca son iki rakamın toplamını hesaplamanız gerekir.";
+"PSAT_INTRO_TEXT_2_%@" = "Tek basamaklar her%@ saniyede bir gösterilir.\nHer bir yeni basamağı hemen öncesindeki basamağa eklemelisiniz.\nDikkat edin, toplamı değil, yalnızca son iki sayının toplamını hesaplayabilirsiniz.";
 "PSAT_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "PSAT_INITIAL_INSTRUCTION" = "Bu ilk rakamı aklınızda tutun.";
 "PSAT_INSTRUCTION" = "Bu yeni rakamı bir öncekine ekleyin.";
@@ -488,7 +513,7 @@
 "TRAILMAKING_INTENDED_USE" = "Bu aktivite, bir dizi noktaya sırayla dokunmanız için gereken süreyi kaydederek görsel dikkatinizi ve görev geçişinizi değerlendirir.";
 "TRAILMAKING_INTENDED_USE2_A" = "Geri sayımdan sonra rakamlar ve harfler arasında dönüşümlü olarak noktalara dokunun. Önce “1” rakamına dokunarak başlayın, ardından “2” – “3” – “4”… rakamlarına dokunarak “7” rakamına ulaşın.";
 "TRAILMAKING_INTENDED_USE2_B" = "Geri sayımdan sonra rakamlar ve harfler arasında dönüşümlü olarak noktalara dokunun. Önce “1” rakamına dokunarak başlayın, ardından ilk harf olan “A”ya sonra “2” – “B” – “3” – “C”… noktalarına dokunarak “7” rakamına ulaşın.";
-"TRAILMAKING_INTRO_TEXT" = "Bu işlemi hata yapmadan olabildiğince çabuk gerçekleştirin. \n ";
+"TRAILMAKING_INTRO_TEXT" = "Bunu hata yapmadan olabildiğince hızlı yapın. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
 "TRAILMAKING_TIMER" = "%.1f sn.";
 "TRAILMAKING_ERROR" = "%@ (%d hata)";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Konuşma Tanıma";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Bu aktivite, konuşmanızı aygıtın en altındaki mikrofonla kaydeder ve metne çevirir.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Konuşmaya başlamadan önce kaydı başlatmak için düğmeye basın.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Kaydı Başlat";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Kaydı Durdur";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Dökümü Düzenle";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Konuşmadaki yanlış anlaşılmaları düzeltmek için döküm metnini düzenleyin.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Dökümünüz burada görünecektir.";
+"SPEECH_RECOGNITION_FAILED" = "Konuşma tanıma başarısız oldu.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Konuşma tanıma sıfırlanamadı.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Sesi Çal";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Sesi Durdur";
+"SPEECH_IN_NOISE_TITLE" = "Gürültüde Konuşma";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Bu aktivite, gürültülü ortamlarda sunulduğunda konuşmanın anlaşılabilirliğini ölçer.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Bu testin bir parçası olarak şunları yapacaksınız:\n\nBir cümle dinleyin.\n\nDuyduğunuzu açıkça tekrar edin ya da bu kısmı atlayıp klavyeyi kullanarak duyduğunuzu yazın. \n\nDuyduğunuzu tekrar ederseniz, konuşma tanıma motoru tarafından oluşturulan dökümü değiştirme seçeneğiniz olacaktır.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Ses Düzeyi Ayarlama";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "“Sesi Çal”a dokunun, ses yüksekliğini sizi rahatsız etmeyecek bir düzeye ayarlayın ve ardından “Sesi Durdur”a dokunarak ilerleyin.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Dinle";
+"SPEECH_IN_NOISE_STEP_TEXT" = "Rasgele Sinyal - Gürültü Oranı’nda (SNR) arka plan gürültüsü ile karışık bir cümle yalnızca bir sefer oynatılacaktır.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Seslendir";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Duyduğunuzu tekrar edin.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Toplanmış bir veri bulunamadı.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Çıkış dizini belirtilmemiş";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL Metre";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Bu aktivite, ortam ses baskısı düzeyini ölçer. Gürültü düzeyleri çok yüksekse, ilerleyemezsiniz. Lütfen bu görevi tamamlamak için daha sessiz bir konuma geçin ya da bu aktiviteyi daha sonra tekrar yapın.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Hesaplanıyor";
+"ENVIRONMENTSPL_THRESHOLD" = "Eşik: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Veri Yok";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Geri";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDF Küçük Resmini Göster";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDF Küçük Resmini Gizle";
+"AX_BUTTON_ANNOTATE" = "Açıklama Ekle";
+"AX_BUTTON_SHOW_SEARCH" = "Arama Çubuğunu Göster";
+"AX_BUTTON_HIDE_SEARCH" = "Arama Çubuğunu Gizle";
+"AX_BUTTON_SHARE" = "Paylaş";
 
-"AX_IMAGE_ILLUSTRATION" = "%@ resmi";
+
+"AX_COMPLETION_ILLUSTRATION" = "Mavi daire içinde onay işareti çizimi başarıyı gösterir";
 
 "AX_SIGNVIEW_LABEL" = "Belirtilen imza alanı";
 "AX_SIGNVIEW_HINT" = "İmzalamak için ekrana dokunup parmağınızı hareket ettirin";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ büyüklüklerinde disk içeriyor";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Boş";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@ - %@ aralığında";
 "AX_GRAPH_STACK_PREFIX" = "Yığın içeriği:";
 "AX_GRAPH_AND_SEPARATOR" = " ve ";
 "AX_GRAPH_POINT_%@" = "Nokta: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Konuşma Dalga Biçimi";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Kayıt başlatıldığında, kaydı durdurmak için ikinci kez etkinleştirin.";
+
 "AX_AUDIO_BAR_GRAPH" = "Ses Çubuğu Grafiği";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Izgarası";
+"AX_AMSLER_GRID_HINT" = "Doğrudan ızgarayı işaretlemek için parmağınızı veya ekran kalemini kullanın ya da bitirmek için ızgaranın dışına doğru sola kaydırın.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

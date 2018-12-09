@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.researchkit.ResearchKit</string>
+	<key>CFBundleName</key>
+	<string>ResearchKit Documentation</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	
+	
+	
+	
+	<key>DocSetFeedName</key>
+	<string>ResearchKit Documentation</string>
+	
+	<key>DocSetMinimumXcodeVersion</key>
+	<string>3.0</string>
+	
+	<key>DashDocSetFamily</key>
+	<string>appledoc</string>
+	<key>DocSetPublisherIdentifier</key>
+	<string>org.researchkit.documentation</string>
+	<key>DocSetPublisherName</key>
+	<string>ResearchKit</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2018 ResearchKit. All rights reserved.</string>
+</dict>
+</plist>

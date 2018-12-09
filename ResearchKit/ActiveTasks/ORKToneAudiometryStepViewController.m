@@ -100,6 +100,13 @@
     [self.toneAudiometryContentView.rightButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     self.currentTestIndex = 0;
     self.audioGenerator = [ORKAudioGenerator new];
+    
+    if (UIAccessibilityIsVoiceOverRunning() && !self.toneAudiometryStep.practiceStep) {
+        // Make it possible to tap the buttons as quickly as possible.
+        self.toneAudiometryContentView.isAccessibilityElement = YES;
+        self.toneAudiometryContentView.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_AREA", nil);
+        self.toneAudiometryContentView.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
+    }
 }
 
 - (void)generateFrequencyCombination {
@@ -119,6 +126,11 @@
     [super viewDidAppear:animated];
     
     [self start];
+    
+    if (UIAccessibilityIsVoiceOverRunning() && !self.toneAudiometryStep.practiceStep) {
+        // Put focus on the buttons immediately so that the first tap gets registered instead of just moving focus
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, self.toneAudiometryContentView);
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -158,11 +170,17 @@
 
 - (void)start {
     [super start];
-    
-    [self startCurrentTest];
+    if (self.toneAudiometryStep.practiceStep) {
+        [self.audioGenerator playSoundAtFrequency:1000.0];
+    } else {
+        [self startCurrentTest];
+    }
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
+    if (self.toneAudiometryStep.practiceStep) {
+        [self finish];
+    }
     if (self.samples == nil) {
         _samples = [NSMutableArray array];
     }

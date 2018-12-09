@@ -97,12 +97,17 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
+@property (nonatomic, copy) UIView *containerView;
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
 @end
 
 
-@implementation ORKFormItemCell
+@implementation ORKFormItemCell {
+    CGFloat _leftRightMargin;
+    CAShapeLayer *_contentMaskLayer;
+    NSArray<NSLayoutConstraint *> *_containerConstraints;
+}
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
@@ -115,14 +120,18 @@ static const CGFloat HorizontalMargin = 15.0;
         // need it when they wish to report their default answers to 'ORKFormStepViewController'.
         _delegate = delegate;
         
+        _leftRightMargin = 0.0;
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
         self.formItem = formItem;
         _labelLabel = [[ORKCaption1Label alloc] init];
         _labelLabel.text = formItem.text;
         _labelLabel.numberOfLines = 0;
-        [self.contentView addSubview:_labelLabel];
-        
+        [self setBackgroundColor:[UIColor clearColor]];
+        _containerView = [UIView new];
+        [_containerView addSubview:_labelLabel];
+        [self.contentView addSubview:_containerView];
+        [self setupConstraints];
         [self cellInit];
         [self setAnswer:_answer];
     }
@@ -134,6 +143,100 @@ static const CGFloat HorizontalMargin = 15.0;
         _expectedLayoutWidth = newWidth;
         [self setNeedsUpdateConstraints];
     }
+}
+
+- (void)setupConstraints {
+    if (_containerConstraints) {
+        [NSLayoutConstraint deactivateConstraints:_containerConstraints];
+    }
+    _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _containerConstraints = @[
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:_leftRightMargin],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:-_leftRightMargin],
+                              [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0],
+                              ];
+    [NSLayoutConstraint activateConstraints:_containerConstraints];
+}
+
+-(void) drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    [self setMaskLayers];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setMaskLayers];
+}
+
+- (void)setMaskLayers {
+    if (_useCardView) {
+        if (_contentMaskLayer) {
+            for (CALayer *sublayer in [_contentMaskLayer.sublayers mutableCopy]) {
+                [sublayer removeFromSuperlayer];
+            }
+            [_contentMaskLayer removeFromSuperlayer];
+            _contentMaskLayer = nil;
+        }
+        _contentMaskLayer = [[CAShapeLayer alloc] init];
+
+        UIColor *fillColor = [UIColor ork_borderGrayColor];
+        [_contentMaskLayer setFillColor:[fillColor CGColor]];
+        
+        CAShapeLayer *foreLayer = [CAShapeLayer layer];
+        [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
+        foreLayer.zPosition = 0.0f;
+        
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+
+        if (_isLastItem || _isFirstItemInSectionWithoutTitle) {
+            NSUInteger rectCorners;
+            if (_isLastItem && !_isFirstItemInSectionWithoutTitle) {
+                rectCorners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+            }
+            else if (!_isLastItem && _isFirstItemInSectionWithoutTitle) {
+                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight;
+            }
+            else {
+                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight;
+            }
+            
+            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
+            
+            _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
+                                                           byRoundingCorners: rectCorners
+                                                                 cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
+            
+            CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
+            
+            foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds
+                                                   byRoundingCorners: rectCorners
+                                                         cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
+            
+        }
+        else {
+            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
+            foreLayer.path = [UIBezierPath bezierPathWithRect:foreLayerBounds].CGPath;
+
+            _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
+            CGRect lineBounds = CGRectMake(ORKCardLeftRightMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - 2 * ORKCardLeftRightMargin, 0.5);
+            lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
+            lineLayer.zPosition = 0.0f;
+            [lineLayer setFillColor:[[UIColor ork_midGrayTintColor] CGColor]];
+
+        }
+        [_contentMaskLayer addSublayer:foreLayer];
+        [_contentMaskLayer addSublayer:lineLayer];
+
+        [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
+    }
+}
+
+- (void)setUseCardView:(bool)useCardView {
+    _useCardView = useCardView;
+    _leftRightMargin = ORKCardLeftRightMargin;
+    [self setupConstraints];
 }
 
 - (UITableView *)parentTableView {
@@ -285,8 +388,8 @@ static const CGFloat HorizontalMargin = 15.0;
     textField.delegate = self;
     textField.placeholder = self.formItem.placeholder;
     
-    [self.contentView addSubview:_textFieldView];
-    
+    [self.containerView addSubview:_textFieldView];
+
     self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _textFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -595,6 +698,11 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
+    self.textField.textContentType = answerFormat.textContentType;
+    
+    if (@available(iOS 12.0, *)) {
+        self.textField.passwordRules = answerFormat.passwordRules;
+    }
     
     [self answerDidChange];
 }
@@ -797,7 +905,7 @@ static const CGFloat HorizontalMargin = 15.0;
     [self applyAnswerFormat];
     [self answerDidChange];
     
-    [self.contentView addSubview:_textView];
+    [self.containerView addSubview:_textView];
     [self setUpConstraints];
 }
 
@@ -845,6 +953,11 @@ static const CGFloat HorizontalMargin = 15.0;
         _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         _textView.keyboardType = textAnswerFormat.keyboardType;
         _textView.secureTextEntry = textAnswerFormat.secureTextEntry;
+        _textView.textContentType = textAnswerFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            _textView.passwordRules = textAnswerFormat.passwordRules;
+        }
     } else {
         _maxLength = 0;
     }
@@ -974,7 +1087,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, HorizontalMargin, VerticalMargin, HorizontalMargin);
     
-    [self.contentView addSubview:_selectionView];
+    [self.containerView addSubview:_selectionView];
     [self setUpConstraints];
     
     [super cellInit];
@@ -1040,7 +1153,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat delegate:self];
     
-    [self.contentView addSubview:_sliderView];
+    [self.containerView addSubview:_sliderView];
     [self setUpConstraints];
     
     [super cellInit];
@@ -1223,7 +1336,7 @@ static const CGFloat HorizontalMargin = 15.0;
                                                           leadingMargin:self.separatorInset.left];
     _selectionView.delegate = self;
     
-    [self.contentView addSubview:_selectionView];
+    [self.containerView addSubview:_selectionView];
 
     if (self.formItem.placeholder != nil) {
         [_selectionView setPlaceholderText:self.formItem.placeholder];

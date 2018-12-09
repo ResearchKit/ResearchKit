@@ -35,6 +35,7 @@
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKOrderedTask {
@@ -57,6 +58,7 @@
         _identifier = [identifier copy];
         _steps = steps;
         
+        _progressLabelColor = ORKColor(ORKProgressLabelColorKey);
         [self validateParameters];
     }
     return self;

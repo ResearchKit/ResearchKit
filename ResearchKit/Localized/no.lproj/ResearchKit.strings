@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Se gjennom skjemaet nedenfor, og trykk på Enig hvis du er klar til å fortsette.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Se gjennom";
 "CONSENT_SIGNATURE_TITLE" = "Signatur";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Signer med fingeren på linjen nedenfor.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Signer med fingeren i ruten nedenfor.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Signer her";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Side %1$ld av %2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Trinn %1$@ av %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ av %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig verdi";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Angi kjønn";
 "DOB_FORM_ITEM_TITLE" = "Fødselsdato";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Angi dato";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verifisering";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "fot";
 "MEASURING_UNIT_IN" = "to";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "pund";
+"MEASURING_UNIT_OZ" = "unse(r)";
 
 /* Limb values. */
 "LIMB_LEFT" = "venstre";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Avbryt";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Fjern";
+"BUTTON_APPLY" = "Bruk";
 "BUTTON_DISAGREE" = "Uenig";
 "BUTTON_DONE" = "Ferdig";
 "BUTTON_GET_STARTED" = "Start";
@@ -245,15 +251,15 @@
 "WALK_TASK_TITLE" = "Balanse og gange";
 "WALK_INTRO_TEXT" = "Denne aktiviteten måler balansen og gangen din mens du går og står i ro. Ikke fortsett hvis du ikke kan gå trygt uten hjelp.";
 "WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå omtrent %ld skritt i rett linje.";
-"WALK_INTRO_2_DETAIL" = "Legg telefonen i lommen eller en veske, og følg lydinstruksjonene.";
+"WALK_INTRO_2_DETAIL" = "Legg enheten i lommen eller en veske, og følg lydinstruksjonene.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå stille i %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stå stille i %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Snu og gå tilbake der du startet.";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Gå opptil %ld skritt i rett linje.";
 
 /* Short walk back and forth. */
-"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Finn et sted hvor du trygt kan gå fram og tilbake i en rett linje. Prøv å gå kontinuerlig når du skal snu, som om du skal gå rundt en kjegle.\n\nDu vil bli deretter bedt om å snu deg helt rundt og stå helt stille med armene ned langs siden og føttene med en skulderbreddes avstand.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Trykk på Kom i gang når du er klar til å starte.\nPlasser deretter telefonen i en lomme eller veske, og følg lydinstruksjonene.";
+"WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Finn et sted hvor du trygt kan gå fram og tilbake i en rett linje. Prøv å gå kontinuerlig når du skal snu, som om du skal gå rundt en kjegle.\n\nDu vil bli bedt om å snu deg helt rundt og deretter stå helt stille med armene ned langs siden og føttene med en skulderbreddes avstand.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Trykk på Kom i gang når du er klar til å starte.\nLegg deretter enheten i en lomme eller veske, og følg lydinstruksjonene.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Gå fram og tilbake i en rett linje i %@. Gå så normalt så mulig.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Snu deg helt rundt og stå stille i %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "Du har fullført aktiviteten.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Høyre hånd";
 "TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
 "TAPPING_INTRO_TEXT" = "Denne aktiviteten måler trykkhastigheten din.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Plasser telefonen på en flat overflate.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Plasser enheten på en flat overflate.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Bruk to fingre på samme hånd til å trykke vekselvis på knappene på skjermen.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Bruk to fingre på høyre hånd til å trykke vekselvis på knappene på skjermen.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Bruk to fingre på venstre hånd til å trykke vekselvis på knappene på skjermen.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Trykk på knappene med din VENSTRE hånd.";
 "TAPPING_SKIP_TITLE" = "Utelat denne hånden";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler-rutenett";
+"AMSLER_GRID_INTRO_TEXT" = "Denne aktiviteten kan bidra til å avdekke en persons synsproblemer.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold enheten 30 cm fra ansiktet og i øyehøyde gjennom hele testen.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Lukk %@ og se på prikken i midten av rutenettet.\n\nBruk fingeren eller en stylus til å markere alle forstyrrelser i form av uskarpe eller bølgende linjer.\n\nSveip mot venstre hvor som helst utenfor rutenettet når du er ferdig.";
+"AMSLER_GRID_LEFT_EYE" = "venstre øye";
+"AMSLER_GRID_RIGHT_EYE" = "høyre øye";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
 "AUDIO_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
 "AUDIO_INSTRUCTION" = "Si «aaa» inn i mikrofonen så lenge du klarer.";
 "AUDIO_INTRO_TEXT" = "Trekk pusten dypt inn og si «aaa» inn i mikrofonen så lenge du klarer. Hold et jevnt volum slik at lydstolpene forblir blå.";
-"AUDIO_INTENDED_USE" = "Aktiviteten vil evaluere stemmen din ved å ta den opp i mikrofonen i nedre kant av telefonen.";
+"AUDIO_INTENDED_USE" = "Denne aktiviteten vil evaluere stemmen din ved å ta den opp i mikrofonen i nedre kant av enheten.";
 "AUDIO_TOO_LOUD_LABEL" = "For høyt";
 "AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke ta opp lyd";
 "AUDIO_LEVEL_CHECK_LABEL" = "Vent mens vi kontrollerer støynivået i bakgrunnen.";
@@ -296,12 +310,22 @@
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviteten måler hvor godt du hører ulike lyder.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Før du starter, må du plugge i hodetelefonene og ta dem på.\n\nLyden er svært svak og ulik vanlige varseltoner. Lyden begynner svakt og øker gradvis i volum. Konsentrer deg og trykk på venstre eller høyre knapp for å indikere hvilket øre du hører lyden i.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på en knapp når du er klar til å begynne.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på en hvilken som helst knapp når du er klar til å begynne.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Hver gang du hører en lyd, må du trykke på venstre eller høyre knapp for å indikere hvilket øre du hører lyden i.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Venstre øre";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Høyre øre";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktiviteten identifiserer en persons hørselsterskel målt i dB HL.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Sjekk at volumet på enheten er skrudd helt opp.\n\nUnder denne oppgaven vil du høre en svak tone i enten venstre eller høyre øre.\n\nHør nøye etter og trykk på knappen hver gang du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Introduksjonsskjema.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Angi eventuelt hvilket øre du hører best på";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "venstre";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "høyre";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ingen preferanse";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg klarer ikke å løse oppgaven";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Bevegelsesområde";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption må være venstre eller høyre";
 
 /* Knee Range of Motion active task */
@@ -430,8 +455,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-hulls pluggtest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en plugg i et hull for å måle funksjonen i armene dine. Du vil bli bedt om å gjøre det %@ ganger.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både høyre og venstre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både høyre og venstre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plasser pluggen i hullet med venstre hånd.";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Talegjenkjenning";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "Denne aktiviteten tar opp tale med mikrofonen i nedre kant av enheten og oversetter tale til tekst.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Trykk på knappen for å starte opptaket før du begynner å snakke.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start opptak";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stopp opptak";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Rediger avskrift";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Rediger avskriftteksten for å rette opp eventuelle misoppfatninger av tale.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Avskriften din vises her.";
+"SPEECH_RECOGNITION_FAILED" = "Talegjenkjenning mislyktes.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Kunne ikke initialisere talegjenkjenning.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Spill av lyd";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stopp lyd";
+"SPEECH_IN_NOISE_TITLE" = "Tale og støy";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "Denne aktiviteten måler hvor godt du hører tale i støyende omgivelser.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "Som del av denne testen skal du:\n\nLytte til en setning.\n\nGjenta tydelig det du hørte, eller bruke tastaturet til å skrive inn det du hørte. \n\nHvis du gjentar det du hørte, vil du ha muligheten til å endre avskriften som genereres av talegjenkjenningsmotoren.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volumkalibrering";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Trykk på «Spill av lyd», juster volumet til et behagelig nivå, og trykk deretter på «Stopp lyd» for å fortsette.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Lytt";
+"SPEECH_IN_NOISE_STEP_TEXT" = "En setning blandet med bakgrunnsstøy vil bli spilt av én gang med et tilfeldig signal-til-støy-forhold (SNR).";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Les opp";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Gjenta det du hørte.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "Fant ingen innsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen katalog angitt";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "Desibelmåler";
+"ENVIRONMENTSPL_INTRO_TEXT" = "Denne aktiviteten måler lydtrykksnivået i miljøet. Det er ikke mulig å fortsette hvis støynivået er for høyt. Flytt til et sted med mindre støy for å fullføre denne oppgaven, eller utfør denne aktiviteten på et senere tidspunkt.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Beregner";
+"ENVIRONMENTSPL_THRESHOLD" = "Terskel: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Ingen data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbake";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Vis PDF-miniatyrbilde";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Skjul PDF-miniatyrbilde";
+"AX_BUTTON_ANNOTATE" = "Merknad";
+"AX_BUTTON_SHOW_SEARCH" = "Vis søkelinje";
+"AX_BUTTON_HIDE_SEARCH" = "Skjul søkelinje";
+"AX_BUTTON_SHARE" = "Del";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustrasjon av %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Illustrasjon av et hakemerke i en blå sirkel som viser at det er fullført";
 
 "AX_SIGNVIEW_LABEL" = "Eget signaturfelt";
 "AX_SIGNVIEW_HINT" = "Berør skjermen og flytt fingeren for å signere";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Område fra %@ til %@";
 "AX_GRAPH_STACK_PREFIX" = "Stabel bestående av";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Talebølgeform";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "Når opptaket starter, må du aktivere det en gang til for å stoppe opptaket.";
+
 "AX_AUDIO_BAR_GRAPH" = "Lydgraf";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler-rutenett";
+"AX_AMSLER_GRID_HINT" = "Bruk fingeren eller en stylus til å merke rett i rutenettet, eller sveip til venstre utenfor rutenettet for å avslutte.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

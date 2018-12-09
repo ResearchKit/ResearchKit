@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKNumericAnswerFormat Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/defaultNumericAnswer">defaultNumericAnswer</option>
+		
+		<option value="//api/name/maximum">maximum</option>
+		
+		<option value="//api/name/maximumFractionDigits">maximumFractionDigits</option>
+		
+		<option value="//api/name/minimum">minimum</option>
+		
+		<option value="//api/name/style">style</option>
+		
+		<option value="//api/name/unit">unit</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/initWithStyle:">- initWithStyle:</option>
+		
+		<option value="//api/name/initWithStyle:unit:">- initWithStyle:unit:</option>
+		
+		<option value="//api/name/initWithStyle:unit:minimum:maximum:">- initWithStyle:unit:minimum:maximum:</option>
+		
+		<option value="//api/name/initWithStyle:unit:minimum:maximum:maximumFractionDigits:">- initWithStyle:unit:minimum:maximum:maximumFractionDigits:</option>
+		
+		<option value="//api/name/questionType">- questionType</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKNumericAnswerFormat Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKAnswerFormat.html">ORKAnswerFormat</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKAnswerFormat.h<br />ORKAnswerFormat.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKNumericAnswerFormat</code> class defines the attributes for a numeric
+answer format that participants enter using a numeric keyboard.</p>
+
+<p>If you specify <a href="#//api/name/maximum">maximum</a> or <a href="#//api/name/minimum">minimum</a> values and the user enters a value outside the
+specified range, the question step view controller does not allow navigation
+until the participant provides a value that is within the valid range.</p>
+
+<p>Questions and form items that use this answer format produce an
+<a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> object.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithStyle:" title="initWithStyle:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStyle:">&ndash;&nbsp;initWithStyle:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized numeric answer format using the specified <a href="#//api/name/style">style</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStyle:(ORKNumericAnswerStyle)<em>style</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>style</code></th>
+						<td><p>The <a href="#//api/name/style">style</a> of the numeric answer (decimal or integer).</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized numeric answer format.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithStyle:unit:" title="initWithStyle:unit:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStyle:unit:">&ndash;&nbsp;initWithStyle:unit:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized numeric answer format using the specified <a href="#//api/name/style">style</a> and <a href="#//api/name/unit">unit</a> designation.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStyle:(ORKNumericAnswerStyle)<em>style</em> unit:(nullable NSString *)<em>unit</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>style</code></th>
+						<td><p>The <a href="#//api/name/style">style</a> of the numeric answer (decimal or integer).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>unit</code></th>
+						<td><p>A string that displays a localized version of the <a href="#//api/name/unit">unit</a> designation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized numeric answer format.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithStyle:unit:minimum:maximum:" title="initWithStyle:unit:minimum:maximum:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStyle:unit:minimum:maximum:">&ndash;&nbsp;initWithStyle:unit:minimum:maximum:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized numeric answer format using the specified <a href="#//api/name/style">style</a>, <a href="#//api/name/unit">unit</a> designation, and range
+values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStyle:(ORKNumericAnswerStyle)<em>style</em> unit:(nullable NSString *)<em>unit</em> minimum:(nullable NSNumber *)<em>minimum</em> maximum:(nullable NSNumber *)<em>maximum</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>style</code></th>
+						<td><p>The <a href="#//api/name/style">style</a> of the numeric answer (decimal or integer).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>unit</code></th>
+						<td><p>A string that displays a localized version of the <a href="#//api/name/unit">unit</a> designation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimum</code></th>
+						<td><p>The <a href="#//api/name/minimum">minimum</a> value to apply, or <code>nil</code> if none is specified.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximum</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> value to apply, or <code>nil</code> if none is specified.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized numeric answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithStyle:unit:minimum:maximum:maximumFractionDigits:" title="initWithStyle:unit:minimum:maximum:maximumFractionDigits:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStyle:unit:minimum:maximum:maximumFractionDigits:">&ndash;&nbsp;initWithStyle:unit:minimum:maximum:maximumFractionDigits:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized numeric answer format using the specified <a href="#//api/name/style">style</a>, <a href="#//api/name/unit">unit</a> designation, and range
+values.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStyle:(ORKNumericAnswerStyle)<em>style</em> unit:(nullable NSString *)<em>unit</em> minimum:(nullable NSNumber *)<em>minimum</em> maximum:(nullable NSNumber *)<em>maximum</em> maximumFractionDigits:(nullable NSNumber *)<em>maximumFractionDigits</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>style</code></th>
+						<td><p>The <a href="#//api/name/style">style</a> of the numeric answer (decimal or integer).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>unit</code></th>
+						<td><p>A string that displays a localized version of the <a href="#//api/name/unit">unit</a> designation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>minimum</code></th>
+						<td><p>The <a href="#//api/name/minimum">minimum</a> value to apply, or <code>nil</code> if none is specified.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximum</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> value to apply, or <code>nil</code> if none is specified.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>maximumFractionDigits</code></th>
+						<td><p>The <a href="#//api/name/maximum">maximum</a> fraction digits, or <code>nil</code> if no <a href="#//api/name/maximum">maximum</a> is specified.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized numeric answer format.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/style" title="style"></a>
+	<h3 class="method-title"><code><a href="#//api/name/style">&nbsp;&nbsp;style</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The style of numeric entry (decimal or integer). (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly) ORKNumericAnswerStyle style</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unit" title="unit"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unit">&nbsp;&nbsp;unit</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A string that displays a localized version of the unit designation next to the numeric value.
+(read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, readonly, nullable) NSString *unit</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Examples of unit designations are days, lbs, and liters.
+The unit string is included in the <a href="../Classes/ORKNumericQuestionResult.html"><code>ORKNumericQuestionResult</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/minimum" title="minimum"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minimum">&nbsp;&nbsp;minimum</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The minimum allowed value for the numeric answer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSNumber *minimum</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>nil</code>, which means that no minimum value is displayed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximum" title="maximum"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximum">&nbsp;&nbsp;maximum</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The maximum allowed value for the numeric answer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSNumber *maximum</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>nil</code>, which means that no maximum value is displayed.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximumFractionDigits" title="maximumFractionDigits"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximumFractionDigits">&nbsp;&nbsp;maximumFractionDigits</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The <a href="#//api/name/maximum">maximum</a> number of fraction digits to the right of the decimal point for the
+numeric answer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSNumber *maximumFractionDigits</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>nil</code>, which means that there&rsquo;s no <a href="#//api/name/maximum">maximum</a> number of fraction
+digits.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultNumericAnswer" title="defaultNumericAnswer"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultNumericAnswer">&nbsp;&nbsp;defaultNumericAnswer</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The default numeric answer.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nullable) NSNumber *defaultNumericAnswer</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/questionType" title="questionType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/questionType">&ndash;&nbsp;questionType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The type of question. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKQuestionType)questionType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>You can use this enumerated value in your Objective-C code to switch on
+a rough approximation of the type of question that is being asked.</p>
+
+<p>Note that answer format subclasses override the getter to return the appropriate question
+type.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKAnswerFormat.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

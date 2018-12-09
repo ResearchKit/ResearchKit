@@ -91,18 +91,19 @@
         {
             _captionLabel = [ORKHeadlineLabel new];
             _captionLabel.numberOfLines = 0;
-            _captionLabel.textAlignment = NSTextAlignmentCenter;
+            _captionLabel.textAlignment = NSTextAlignmentNatural;
             [self addSubview:_captionLabel];
         }
         
         {
             _learnMoreButton = [ORKTextButton new];
-            _learnMoreButton.contentEdgeInsets = (UIEdgeInsets){10,10,10,10};
+            _learnMoreButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeading;
+            _learnMoreButton.contentEdgeInsets = (UIEdgeInsets){10,0,10,10};
             [_learnMoreButton setTitle:nil forState:UIControlStateNormal];
             [_learnMoreButton addTarget:self action:@selector(learnMoreAction:) forControlEvents:UIControlEventTouchUpInside];
             _learnMoreButton.exclusiveTouch = YES;
             _learnMoreButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-            _learnMoreButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+            _learnMoreButton.titleLabel.textAlignment = NSTextAlignmentNatural;
             [self addSubview:_learnMoreButton];
             self.learnMoreButtonItem = nil;
         }
@@ -110,7 +111,7 @@
         {
             _instructionLabel = [ORKSubheadlineLabel new];
             _instructionLabel.numberOfLines = 0;
-            _instructionLabel.textAlignment = NSTextAlignmentCenter;
+            _instructionLabel.textAlignment = NSTextAlignmentNatural;
             
             [self addSubview:_instructionLabel];
         }
@@ -281,10 +282,10 @@ const CGFloat IconHeight = 60;
                                                              constant:0.0]];
         
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_iconImageView
-                                                            attribute:NSLayoutAttributeCenterX
+                                                            attribute:NSLayoutAttributeLeft
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:self
-                                                            attribute:NSLayoutAttributeCenterX
+                                                            attribute:NSLayoutAttributeLeft
                                                            multiplier:1.0
                                                              constant:0.0]];
         

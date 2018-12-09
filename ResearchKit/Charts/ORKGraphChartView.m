@@ -3,6 +3,7 @@
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -125,6 +126,59 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return self;
 }
 
+- (void)sharedInit {
+    _numberOfXAxisPoints = -1;
+    _showsHorizontalReferenceLines = NO;
+    _showsVerticalReferenceLines = NO;
+    _dataPoints = [NSMutableArray new];
+    _yAxisPoints = [NSMutableArray new];
+    _lineLayers = [NSMutableArray new];
+    _hasDataPoints = NO;
+    
+    // init null resetable properties
+    _axisColor =  ORKColor(ORKGraphAxisColorKey);
+    _verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
+    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
+    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    
+    // nil reset to default fonts
+    self.xAxisFont = nil;
+    self.yAxisFont = nil;
+    self.scrubberFont = nil;
+    self.noDataFont = nil;
+    
+    [self setDecimalPlaces:0];
+    
+    _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
+    _longPressGestureRecognizer.delaysTouchesBegan = YES;
+    _longPressGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_longPressGestureRecognizer];
+    
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
+    _panGestureRecognizer.delaysTouchesBegan = YES;
+    _panGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_panGestureRecognizer];
+    
+    [self setUpViews];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_axVoiceOverStatusChanged:)
+                                                 name:UIAccessibilityVoiceOverStatusDidChangeNotification
+                                               object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)reloadData {
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
     [self updateAndLayoutVerticalReferenceLineLayers];
@@ -144,6 +198,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _dataSource = dataSource;
     [self reloadData];
 }
+
+#pragma mark - Configuration
 
 - (void)setAxisColor:(UIColor *)axisColor {
     if (!axisColor) {
@@ -208,10 +264,48 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [_yAxisView updateTicksAndLabels];
 }
 
+- (void)setXAxisFont:(UIFont *)xAxisFont {
+    if (!xAxisFont) {
+        xAxisFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    }
+    _xAxisFont = xAxisFont;
+    _xAxisView.titleFont = _xAxisFont;
+}
+
+- (void)setYAxisFont:(UIFont *)yAxisFont {
+    if (!yAxisFont) {
+        yAxisFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    }
+    _yAxisFont = yAxisFont;
+    _yAxisView.titleFont = _yAxisFont;
+}
+
+- (void)setScrubberFont:(UIFont *)scrubberFont {
+    if (!scrubberFont) {
+        scrubberFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    }
+    _scrubberFont = scrubberFont;
+    _scrubberLabel.font = _scrubberFont;
+}
+
+- (void)setNoDataFont:(UIFont *)noDataFont {
+    if (!noDataFont) {
+        noDataFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    }
+    _noDataFont = noDataFont;
+    _noDataLabel.font = _noDataFont;
+}
+
 - (void)setDecimalPlaces:(NSUInteger)decimalPlaces {
     _decimalPlaces = decimalPlaces;
     _decimalFormat = [NSString stringWithFormat:@"%%.%luf", (unsigned long)_decimalPlaces];
     [_yAxisView setDecimalPlaces:_decimalPlaces];
+}
+
+- (void)setYAxisLabelFactors:(NSArray<NSNumber *> *)yAxisLabelFactors {
+    _yAxisLabelFactors = yAxisLabelFactors;
+    _yAxisView.yAxisLabelFactors = yAxisLabelFactors;
+    [_yAxisView updateTicksAndLabels];
 }
 
 - (void)setShowsHorizontalReferenceLines:(BOOL)showsHorizontalReferenceLines {
@@ -223,53 +317,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 - (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
     _showsVerticalReferenceLines = showsVerticalReferenceLines;
     [self updateAndLayoutVerticalReferenceLineLayers];
-}
-
-- (void)sharedInit {
-    _numberOfXAxisPoints = -1;
-    _showsHorizontalReferenceLines = NO;
-    _showsVerticalReferenceLines = NO;
-    _dataPoints = [NSMutableArray new];
-    _yAxisPoints = [NSMutableArray new];
-    _lineLayers = [NSMutableArray new];
-    _hasDataPoints = NO;
-    
-    // init null resetable properties
-    _axisColor =  ORKColor(ORKGraphAxisColorKey);
-    _verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
-    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
-    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
-    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
-    
-    [self setDecimalPlaces:0];
-    
-    _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
-    _longPressGestureRecognizer.delaysTouchesBegan = YES;
-    _longPressGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:_longPressGestureRecognizer];
-    
-    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleScrubbingGesture:)];
-    _panGestureRecognizer.delaysTouchesBegan = YES;
-    _panGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:_panGestureRecognizer];
-    
-    [self setUpViews];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_axVoiceOverStatusChanged:)
-                                                 name:UIAccessibilityVoiceOverStatusChanged
-                                               object:nil];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)tintColorDidChange {
@@ -311,10 +358,10 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)updateContentSizeCategoryFonts {
-    _xAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    _yAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _scrubberLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    _xAxisView.titleFont = self.xAxisFont;
+    _yAxisView.titleFont = self.yAxisFont;
+    _scrubberLabel.font = self.scrubberFont;
+    _noDataLabel.font = self.noDataFont;
 }
 
 - (void)setUpViews {
@@ -760,22 +807,24 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     double scrubberYPosition = [self canvasYPositionForXPosition:xPosition plotIndex:plotIndex];
     double scrubbingValue = [self scrubbingLabelValueForCanvasXPosition:xPosition plotIndex:plotIndex];
 
-    _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
-    _scrubberLabel.text = [NSString stringWithFormat:_decimalFormat, scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
-    CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
-                                                                           _plotView.bounds.size.height)
-                                                        options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
-                                                     attributes:@{NSFontAttributeName: _scrubberLabel.font}
-                                                        context:nil].size;
-    _scrubberLabel.frame = CGRectMake(xPosition + ORKGraphChartViewLeftPadding + ScrubberLineToLabelPadding,
-                                      CGRectGetMinY(_scrubberLine.frame),
-                                      textSize.width + ScrubberLabelHorizontalPadding,
-                                      textSize.height + ScrubberLabelVerticalPadding);
-
-    if (scrubbingValue == ORKDoubleInvalidValue) {
-        [self setScrubberAccessoryViewsHidden:YES];
-    } else {
-        [self setScrubberAccessoryViewsHidden:NO];
+    if (scrubberYPosition == scrubberYPosition) {
+        _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
+        _scrubberLabel.text = [NSString stringWithFormat:_decimalFormat, scrubbingValue == ORKDoubleInvalidValue ? 0.0 : scrubbingValue ];
+        CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
+                                                                               _plotView.bounds.size.height)
+                                                            options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
+                                                         attributes:@{NSFontAttributeName: _scrubberLabel.font}
+                                                            context:nil].size;
+        _scrubberLabel.frame = CGRectMake(xPosition + ORKGraphChartViewLeftPadding + ScrubberLineToLabelPadding,
+                                          CGRectGetMinY(_scrubberLine.frame),
+                                          textSize.width + ScrubberLabelHorizontalPadding,
+                                          textSize.height + ScrubberLabelVerticalPadding);
+        
+        if (scrubbingValue == ORKDoubleInvalidValue) {
+            [self setScrubberAccessoryViewsHidden:YES];
+        } else {
+            [self setScrubberAccessoryViewsHidden:NO];
+        }
     }
 }
 

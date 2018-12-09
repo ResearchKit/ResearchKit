@@ -42,6 +42,8 @@
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
+static const CGFloat CellBottomPadding = 20.0;
+
 @interface ORKTableContainerView () <UIGestureRecognizerDelegate>
 
 @end
@@ -75,6 +77,7 @@
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
         _tableView.preservesSuperviewLayoutMargins = YES;
         _tableView.clipsToBounds = NO; // Do not clip scroll indicators on iPad
+        _tableView.layer.masksToBounds = YES;
         _tableView.scrollIndicatorInsets = ORKScrollIndicatorInsetsForScrollView(self);
         [self addSubview:_tableView];
         
@@ -91,18 +94,6 @@
 #ifdef LAYOUT_DEBUG
         _stepHeaderView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
 #endif
-        
-        _continueSkipContainerView = [ORKNavigationContainerView new];
-        _continueSkipContainerView.preservesSuperviewLayoutMargins = NO;
-        _continueSkipContainerView.translatesAutoresizingMaskIntoConstraints = NO;
-        _continueSkipContainerView.topMargin = 20;
-        _continueSkipContainerView.bottomMargin = 20;
-#ifdef LAYOUT_DEBUG
-        _continueSkipContainerView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
-#endif
-        [_realFooterView addSubview:_continueSkipContainerView];
-        
-        [self setUpConstraints];
         
         _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
         _tapOffGestureRecognizer.delegate = self;
@@ -123,7 +114,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     CGRect bounds = self.bounds;
     _tableView.frame = UIEdgeInsetsInsetRect(bounds, ORKStandardFullScreenLayoutMarginsForView(self));
     // make the contentSize to be correct after changing the frame
@@ -144,7 +135,7 @@
     {
         _tableView.tableFooterView = nil;
         [_realFooterView removeFromSuperview];
-        CGSize footerSize = [_continueSkipContainerView systemLayoutSizeFittingSize:(CGSize){_tableView.bounds.size.width,0} withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityFittingSizeLevel];
+        CGSize footerSize = CGSizeZero;
         CGRect footerBounds = (CGRect){{0,0},footerSize};
         
         CGFloat boundsHeightUnused = _tableView.bounds.size.height - _tableView.contentSize.height;
@@ -161,47 +152,6 @@
 
 - (void)updateBottomConstraintConstant {
     _bottomConstraint.constant = -_keyboardOverlap;
-}
-
-- (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray array];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationLessThanOrEqual
-                                                           toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeWidth
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
-                                                        attribute:NSLayoutAttributeCenterX
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
-                                                        attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                           toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeTop
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
-    _bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainerView
-                                                     attribute:NSLayoutAttributeBottom
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:_realFooterView
-                                                     attribute:NSLayoutAttributeBottomMargin
-                                                    multiplier:1.0
-                                                      constant:0.0];
-    _bottomConstraint.priority = UILayoutPriorityDefaultHigh - 1;
-    [constraints addObject:_bottomConstraint];
-    
-    [self updateBottomConstraintConstant];
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
@@ -259,7 +209,6 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _continueSkipContainerView.topMargin = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMargin, newWindow);
     if (newWindow) {
         [self registerForKeyboardNotifications:YES];
     } else {
@@ -283,7 +232,7 @@
     if (cell == nil) {
         return;
     }
-
+    
     UIScrollView *scrollView = _scrollView;
     
     CGFloat visibleHeight = (scrollView.bounds.size.height - scrollView.contentInset.bottom);
@@ -356,7 +305,8 @@
             // We want to calculate new insets so it's possible to scroll it fully visible, but no more.
             // Made a little more complicated because the contentSize will still extend below the bottom of this container,
             // because we haven't changed our bounds.
-            CGFloat contentMaxY = CGRectGetMaxY([scrollView convertRect:_continueSkipContainerView.bounds fromView:_continueSkipContainerView]) + _realFooterView.layoutMargins.bottom;
+            
+            CGFloat contentMaxY = CGRectGetMaxY([scrollView convertRect:_realFooterView.bounds fromView:_realFooterView]) + _realFooterView.layoutMargins.bottom + CellBottomPadding;
             
             CGFloat keyboardOverlapWithActualContent = MAX(contentMaxY - (contentSize.height - intersectionSize.height), 0);
             UIEdgeInsets insets = (UIEdgeInsets){.bottom = keyboardOverlapWithActualContent };

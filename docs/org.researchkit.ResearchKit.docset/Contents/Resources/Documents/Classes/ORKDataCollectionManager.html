@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKDataCollectionManager Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/collectors">collectors</option>
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/lastCollectionDate">lastCollectionDate</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addHealthCollectorWithSampleType:unit:startDate:error:">- addHealthCollectorWithSampleType:unit:startDate:error:</option>
+		
+		<option value="//api/name/addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:">- addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:</option>
+		
+		<option value="//api/name/addMotionActivityCollectorWithStartDate:error:">- addMotionActivityCollectorWithStartDate:error:</option>
+		
+		<option value="//api/name/initWithPersistenceDirectoryURL:">- initWithPersistenceDirectoryURL:</option>
+		
+		<option value="//api/name/removeCollector:error:">- removeCollector:error:</option>
+		
+		<option value="//api/name/startCollection">- startCollection</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKDataCollectionManager Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKDataCollectionManager.h<br />ORKDataCollectionManager.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The data collection manager is used to collect HealthKit data and CoreMotion data.</p>
+
+<p>It uses <a href="#//api/name/collectors">collectors</a> to track data types to be collected.
+Anchors are used to track progress of each types of data to avoid duplications.
+Collected data samples are returned in the delegation methods, return YES to confirm the samples has been accepted.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithPersistenceDirectoryURL:" title="initWithPersistenceDirectoryURL:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithPersistenceDirectoryURL:">&ndash;&nbsp;initWithPersistenceDirectoryURL:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Initiate the manager with a persistence directory.
+The directory is used to store the configurations and progress of the <a href="#//api/name/collectors">collectors</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithPersistenceDirectoryURL:(NSURL *)<em>directoryURL</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>directoryURL</code></th>
+						<td><p>URL path for the directory.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Initiated ORKDataCollectionManager instance.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/collectors" title="collectors"></a>
+	<h3 class="method-title"><code><a href="#//api/name/collectors">&nbsp;&nbsp;collectors</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An array of collectors.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, readonly) NSArray&lt;ORKCollector*&gt; *collectors</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Implement the delegate to receive collected data objects.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak, nullable) id&lt;ORKDataCollectionManagerDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addHealthCollectorWithSampleType:unit:startDate:error:" title="addHealthCollectorWithSampleType:unit:startDate:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addHealthCollectorWithSampleType:unit:startDate:error:">&ndash;&nbsp;addHealthCollectorWithSampleType:unit:startDate:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Add a collector for HealthKit quantity and category samples.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType *)<em>sampleType</em> unit:(HKUnit *)<em>unit</em> startDate:(NSDate *)<em>startDate</em> error:(NSError *_Nullable *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sampleType</code></th>
+						<td><p>HealthKit sample type.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>unit</code></th>
+						<td><p>HealthKit unit into which data should be collected.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>startDate</code></th>
+						<td><p>Samples should be collected starting at this date.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>Any error detected during this operation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Initiated health collector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:" title="addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:">&ndash;&nbsp;addHealthCorrelationCollectorWithCorrelationType:sampleTypes:units:startDate:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Add a collector for HealthKit correlations.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKHealthCorrelationCollector *)addHealthCorrelationCollectorWithCorrelationType:(HKCorrelationType *)<em>correlationType</em> sampleTypes:(NSArray&lt;HKSampleType*&gt; *)<em>sampleTypes</em> units:(NSArray&lt;HKUnit*&gt; *)<em>units</em> startDate:(NSDate *)<em>startDate</em> error:(NSError *_Nullable *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>correlationType</code></th>
+						<td><p>HealthKit correlation type.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sampleTypes</code></th>
+						<td><p>Array of HKSampleType expected in the correlation.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>units</code></th>
+						<td><p>Array of HKUnit to use when serializing the samples collected (should be same size as sampleTypes).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>startDate</code></th>
+						<td><p>Samples should be collected starting at this date.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>Any error detected during this operation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Initiated health correlation collector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addMotionActivityCollectorWithStartDate:error:" title="addMotionActivityCollectorWithStartDate:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addMotionActivityCollectorWithStartDate:error:">&ndash;&nbsp;addMotionActivityCollectorWithStartDate:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Add a collector for motion activity.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKMotionActivityCollector *)addMotionActivityCollectorWithStartDate:(NSDate *)<em>startDate</em> error:(NSError *_Nullable *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>startDate</code></th>
+						<td><p>When data collection should start.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>Error during this operation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Initiated motion activity collector.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/removeCollector:error:" title="removeCollector:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/removeCollector:error:">&ndash;&nbsp;removeCollector:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Remove a collector.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)removeCollector:(ORKCollector *)<em>collector</em> error:(NSError *_Nullable *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>collector</code></th>
+						<td><p>The collector to be removed.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>Error during this operation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>If this operation is successful.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startCollection" title="startCollection"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startCollection">&ndash;&nbsp;startCollection</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Start data collection.
+This method triggers running all the RKCollector collections associated with the present manager.
+When the collection is completed, <a href="#//api/name/delegate">delegate</a> recieves a method call <code>dataCollectionManagerDidCompleteCollection:</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startCollection</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Extension Methods" name="task_Extension Methods"></a>
+						<h2 class="task-title">Extension Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/lastCollectionDate" title="lastCollectionDate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/lastCollectionDate">&nbsp;&nbsp;lastCollectionDate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Last collection date.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSDate *lastCollectionDate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKDataCollectionManager_Internal.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

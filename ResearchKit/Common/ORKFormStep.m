@@ -55,6 +55,7 @@
         self.text = text;
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }
@@ -64,6 +65,7 @@
     if (self) {
         self.optional = YES;
         self.useSurveyMode = YES;
+        self.useCardView = YES;
     }
     return self;
 }
@@ -114,6 +116,7 @@
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
         ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
+        ORK_DECODE_BOOL(aDecoder, useCardView);
     }
     return self;
 }
@@ -122,6 +125,7 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
     ORK_ENCODE_OBJ(aCoder, footnote);
+    ORK_ENCODE_BOOL(aCoder, useCardView);
 }
 
 + (BOOL)supportsSecureCoding {

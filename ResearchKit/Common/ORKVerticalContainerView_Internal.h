@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window;
 
+@property (nonatomic, assign) BOOL scrollContainerShouldCollapseNavbar;
+
 @end
 
 NS_ASSUME_NONNULL_END

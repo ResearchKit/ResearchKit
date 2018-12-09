@@ -39,10 +39,12 @@
 #import "ORKVerificationStep.h"
 
 #import "ORKHelpers_Internal.h"
-
+#import "ORKSkin.h"
 
 @implementation ORKVerificationStepViewController {
     ORKVerificationStepView *_verificationStepView;
+    NSArray<NSLayoutConstraint *> *_constraints;
+    UIView *_iPadContentView;
 }
 
 - (ORKVerificationStep *)verificationStep {
@@ -55,12 +57,16 @@
     if (self.step && [self isViewLoaded]) {
         self.navigationItem.title = ORKLocalizedString(@"VERIFICATION_NAV_TITLE", nil);
         
-        _verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
-        _verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
+        _verificationStepView = [ORKVerificationStepView new];
         _verificationStepView.headerView.instructionLabel.text = [[self verificationStep].text stringByAppendingString:[NSString stringWithFormat:@"\n\n%@", ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil)]];
         
-        [self.view addSubview:_verificationStepView];
+        _iPadContentView = [self viewForiPadLayoutConstraints];
+        if (_iPadContentView) {
+            [_iPadContentView addSubview:_verificationStepView];
+        }
+        else {
+            [self.view addSubview:_verificationStepView];
+        }
         
         [_verificationStepView.resendEmailButton addTarget:self
                                                    action:@selector(resendEmailButtonHandler:)
@@ -68,9 +74,49 @@
     }
 }
 
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _verificationStepView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_verificationStepView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_iPadContentView ? : self.view
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_verificationStepView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_iPadContentView ? : self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_verificationStepView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_iPadContentView ? : self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_verificationStepView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_iPadContentView ? : self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self stepDidChange];
+    [self setupConstraints];
 }
 
 - (void)resendEmailButtonHandler:(id)sender {

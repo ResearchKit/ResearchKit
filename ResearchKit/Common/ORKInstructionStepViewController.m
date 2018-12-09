@@ -32,7 +32,7 @@
 #import "ORKInstructionStepViewController.h"
 
 #import "ORKInstructionStepView.h"
-#import "ORKNavigationContainerView.h"
+#import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 
 #import "ORKInstructionStepViewController_Internal.h"
@@ -45,7 +45,9 @@
 #import "ORKSkin.h"
 
 
-@implementation ORKInstructionStepViewController
+@implementation ORKInstructionStepViewController {
+    NSArray<NSLayoutConstraint *> *_constraints;
+}
 
 - (ORKInstructionStep *)instructionStep {
     return (ORKInstructionStep *)self.step;
@@ -61,14 +63,89 @@
         self.stepView = [[ORKInstructionStepView alloc] initWithFrame:self.view.bounds];
         self.stepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.stepView];
-        
-        self.stepView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
+        [self setNavigationFooterView];
+        [self setupConstraints];
         self.stepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
-        self.stepView.continueSkipContainer.continueEnabled = YES;
-        self.stepView.continueSkipContainer.hidden = self.isBeingReviewed;
         
         self.stepView.instructionStep = [self instructionStep];
     }
+}
+
+- (void)setNavigationFooterView {
+    if (!_navigationFooterView) {
+        _navigationFooterView = [ORKNavigationContainerView new];
+    }
+    _navigationFooterView.continueButtonItem = self.continueButtonItem;
+    _navigationFooterView.continueEnabled = YES;
+    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+    _navigationFooterView.hidden = self.isBeingReviewed;
+    _navigationFooterView.footnoteLabel.text = [self instructionStep].footnote;
+    [_navigationFooterView updateContinueAndSkipEnabled];
+    [self.view addSubview:_navigationFooterView];
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    _constraints = nil;
+    
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:self.stepView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:self.stepView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:self.stepView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:self.stepView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,12 +166,17 @@
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    self.stepView.continueSkipContainer.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
 }
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     self.stepView.headerView.learnMoreButtonItem = learnMoreButtonItem;
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {

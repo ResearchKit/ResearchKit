@@ -95,15 +95,39 @@
 
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
-    NSDictionary *views = @{ @"imageCaptureView": _imageCaptureView };
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageCaptureView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageCaptureView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
+
+    UIView *iPadContentView = [self viewForiPadLayoutConstraints];
+    [constraints addObjectsFromArray:@[
+                                       [NSLayoutConstraint constraintWithItem:_imageCaptureView
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeTop
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_imageCaptureView
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? :  self.view
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_imageCaptureView
+                                                                    attribute:NSLayoutAttributeRight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeRight
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_imageCaptureView
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.0
+                                                                     constant:0.0]
+                                       ]];
+    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -115,6 +139,11 @@
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     _imageCaptureView.skipButtonItem = skipButtonItem;
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _imageCaptureView.cancelButtonItem = cancelButtonItem;
 }
 
 - (void)retakePressed:(void (^)(void))handler {
@@ -211,7 +240,7 @@
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
         if ([_captureSession canAddInput:input] && [_captureSession canAddOutput:stillImageOutput]) {
             [_captureSession addInput:input];
-            [stillImageOutput setOutputSettings:@{AVVideoCodecKey: AVVideoCodecJPEG}];
+            [stillImageOutput setOutputSettings:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
             [_captureSession addOutput:stillImageOutput];
             _stillImageOutput = stillImageOutput;
         } else {

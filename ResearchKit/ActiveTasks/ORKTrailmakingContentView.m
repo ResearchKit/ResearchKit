@@ -99,6 +99,21 @@
 @end
 
 
+@interface ORKTrailmakingButton : ORKRoundTappingButton
+
+@end
+
+
+@implementation ORKTrailmakingButton
+
++ (UIFont *)defaultFont {
+    // Don't scale too much, because all buttons need to fit on screen and be readable within the circle
+    return [[UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle3] scaledFontForFont:[UIFont systemFontOfSize:20.0] maximumPointSize:30.0];
+}
+
+@end
+
+
 @interface ORKTrailmakingContentView ()
 
 @property (nonatomic, strong) ORKTrailmakingTestView* testView;
@@ -113,6 +128,9 @@
     if (self) {
         self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.isAccessibilityElement = YES;
+        self.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_AREA", nil);
+        self.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
 
         self.testView = [[ORKTrailmakingTestView alloc] init];
         _testView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -121,7 +139,7 @@
         NSMutableArray* buttons = [NSMutableArray array];
         for (int i = 0; i < 13; i++)
         {
-            ORKRoundTappingButton* b = [[ORKRoundTappingButton alloc] init];
+            ORKTrailmakingButton* b = [[ORKTrailmakingButton alloc] init];
             
             NSString* title;
             if ([trailType isEqual:@"A"]) {
