@@ -1020,6 +1020,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _detailText = [detailText copy];
         _value = value;
         _exclusive = exclusive;
+        _attributedText = nil;
     }
     return self;
 }
@@ -1040,6 +1041,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     // Ignore the task reference - it's not part of the content of the step
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.text, castObject.text)
+            && ORKEqualObjects(self.attributedText, castObject.attributedText)
             && ORKEqualObjects(self.detailText, castObject.detailText)
             && ORKEqualObjects(self.value, castObject.value)
             && self.exclusive == castObject.exclusive);
@@ -1047,13 +1049,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step
-    return _text.hash ^ _detailText.hash ^ _value.hash;
+    return _text.hash ^ _attributedText.hash ^ _detailText.hash ^ _value.hash;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, attributedText, NSAttributedString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_OBJ(aDecoder, value);
         ORK_DECODE_BOOL(aDecoder, exclusive);
@@ -1063,6 +1066,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, attributedText);
     ORK_ENCODE_OBJ(aCoder, value);
     ORK_ENCODE_OBJ(aCoder, detailText);
     ORK_ENCODE_BOOL(aCoder, exclusive);

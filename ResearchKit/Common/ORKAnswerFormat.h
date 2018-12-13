@@ -935,6 +935,11 @@ ORK_CLASS_AVAILABLE
 @property (copy, readonly) NSString *text;
 
 /**
+ A read-write property to set an attributed string which will override the `text` property.
+ */
+@property (copy, nullable) NSAttributedString *attributedText;
+
+/**
  The value to return when this choice is selected.
  
  The value of this property is expected to be a scalar property list type, such as `NSNumber`
