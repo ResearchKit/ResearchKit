@@ -92,7 +92,9 @@
         ORKTextChoice *textChoice = [_helper textChoiceAtIndex:index];
         cell.shortLabel.text = textChoice.text;
         cell.longLabel.text = textChoice.detailText;
-        cell.shortLabel.attributedText = textChoice.attributedText;
+        if (textChoice.attributedText) {
+            cell.shortLabel.attributedText = textChoice.attributedText;
+        }
         _cells[@(index)] = cell;
         
         [self setSelectedIndexes:[_helper selectedIndexesForAnswer:_answer]];

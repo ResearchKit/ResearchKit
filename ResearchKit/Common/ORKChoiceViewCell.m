@@ -286,7 +286,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
     [self updateSelectedItem];
 }
 
-+ (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText attributedText:(nullable NSAttributedString *)attributedText inTableView:(UITableView *)tableView {
++ (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText attributedText:(NSAttributedString *)attributedText inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
@@ -304,7 +304,9 @@ static const CGFloat cardTopBottomMargin = 2.0;
         
         shortLabel.frame = CGRectMake(0, 0, labelWidth, 0);
         shortLabel.text = shortText;
-        shortLabel.attributedText = attributedText;
+        if (attributedText) {
+            shortLabel.attributedText = attributedText;
+        }
         ORKAdjustHeightForLabel(shortLabel);
         CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = shortLabel.font.ascender;
     
