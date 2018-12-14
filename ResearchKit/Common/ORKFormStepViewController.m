@@ -1032,7 +1032,7 @@
 
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row]);
-        return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText attributedText:nil inTableView:_tableView];
+        return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText primaryTextAttributedString: nil detailTextAttributedString:nil inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
 }

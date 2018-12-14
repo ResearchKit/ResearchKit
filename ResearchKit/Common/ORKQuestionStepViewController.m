@@ -877,7 +877,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
     ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText attributedText:option.attributedText inTableView:_tableView];
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText primaryTextAttributedString:option.primaryTextAttributedString detailTextAttributedString:option.detailTextAttributedString inTableView:_tableView];
     return height;
 }
 

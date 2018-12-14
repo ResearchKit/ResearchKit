@@ -92,8 +92,11 @@
         ORKTextChoice *textChoice = [_helper textChoiceAtIndex:index];
         cell.shortLabel.text = textChoice.text;
         cell.longLabel.text = textChoice.detailText;
-        if (textChoice.attributedText) {
-            cell.shortLabel.attributedText = textChoice.attributedText;
+        if (textChoice.primaryTextAttributedString) {
+            cell.shortLabel.attributedText = textChoice.primaryTextAttributedString;
+        }
+        if (textChoice.detailTextAttributedString) {
+            cell.longLabel.attributedText = textChoice.detailTextAttributedString;
         }
         _cells[@(index)] = cell;
         
