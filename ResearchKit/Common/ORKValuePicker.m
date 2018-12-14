@@ -150,6 +150,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
     return [[_helper textChoiceAtIndex:row] text];
 }
 
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[_helper textChoiceAtIndex:row] primaryTextAttributedString];
+}
+
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel* valueLabel = (UILabel*)view;
@@ -160,6 +164,9 @@ static const CGFloat PickerMinimumHeight = 34.0;
         [valueLabel setTextAlignment:NSTextAlignmentCenter];
     }
     valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    if (valueLabel.text == nil) {
+        valueLabel.attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    }
     return valueLabel;
 }
 
