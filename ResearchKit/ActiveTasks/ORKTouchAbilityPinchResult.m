@@ -27,11 +27,10 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#import "ORKTouchAbilitySwipeResult.h"
+#import "ORKTouchAbilityPinchResult.h"
 #import "ORKHelpers_Internal.h"
 
-@implementation ORKTouchAbilitySwipeResult
+@implementation ORKTouchAbilityPinchResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -58,12 +57,12 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
+    ORKTouchAbilityPinchResult *result = [super copyWithZone:zone];
     result.trials = [self.trials mutableCopy];
     return result;
 }
 
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
+- (NSArray<ORKTouchAbilityPinchTrial *> *)trials {
     if (!_trials) {
         _trials = [NSArray new];
     }

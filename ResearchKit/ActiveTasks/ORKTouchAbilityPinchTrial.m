@@ -28,21 +28,30 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
+#import "ORKTouchAbilityPinchTrial.h"
 #import "ORKHelpers_Internal.h"
 
-@implementation ORKTouchAbilitySwipeResult
+@implementation ORKTouchAbilityPinchTrial
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
+    ORK_ENCODE_DOUBLE(aCoder, targetScale);
+    ORK_ENCODE_DOUBLE(aCoder, resultScale);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
+        ORK_DECODE_DOUBLE(aDecoder, targetScale);
+        ORK_DECODE_DOUBLE(aDecoder, resultScale);
     }
     return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityPinchTrial *trial = [super copyWithZone:zone];
+    trial.targetScale = self.targetScale;
+    trial.resultScale = self.resultScale;
+    return trial;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -50,24 +59,26 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
+    
+    return (isParentSame &&
+            self.targetScale == castObject.targetScale &&
+            self.resultScale == castObject.resultScale);
 }
 
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
+- (instancetype)init {
+    if (self = [super init]) {
+        self.targetScale = 1.0;
+        self.resultScale = 1.0;
     }
-    return _trials;
+    return self;
+}
+
+- (instancetype)initWithTargetScale:(CGFloat)targetScale {
+    if (self = [super init]) {
+        self.targetScale = targetScale;
+        self.resultScale = 1.0;
+    }
+    return self;
 }
 
 @end

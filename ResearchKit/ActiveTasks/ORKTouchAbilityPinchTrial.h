@@ -28,46 +28,20 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
-#import "ORKHelpers_Internal.h"
 
-@implementation ORKTouchAbilitySwipeResult
+#import <UIKit/UIKit.h>
+#import "ORKTouchAbilityTrial.h"
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
-}
+NS_ASSUME_NONNULL_BEGIN
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
-    }
-    return self;
-}
+ORK_CLASS_AVAILABLE
+@interface ORKTouchAbilityPinchTrial : ORKTouchAbilityTrial
 
-- (BOOL)isEqual:(id)object {
-    
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
-}
+@property (nonatomic, assign) CGFloat targetScale;
+@property (nonatomic, assign) CGFloat resultScale;
 
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
-    }
-    return _trials;
-}
+- (instancetype)initWithTargetScale:(CGFloat)targetScale;
 
 @end
+
+NS_ASSUME_NONNULL_END

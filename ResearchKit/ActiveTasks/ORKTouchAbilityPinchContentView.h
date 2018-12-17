@@ -28,46 +28,29 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
-#import "ORKHelpers_Internal.h"
 
-@implementation ORKTouchAbilitySwipeResult
+@import UIKit;
+#import "ORKTouchAbilityCustomView.h"
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
-}
+NS_ASSUME_NONNULL_BEGIN
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
-    }
-    return self;
-}
+@class ORKTouchAbilityPinchContentView;
+@protocol ORKTouchAbilityPinchContentViewDataSource <NSObject>
 
-- (BOOL)isEqual:(id)object {
-    
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
-    }
-    return _trials;
-}
+@required
+- (CGFloat)targetScale:(ORKTouchAbilityPinchContentView *)pinchContentView;
 
 @end
+
+@interface ORKTouchAbilityPinchContentView : ORKTouchAbilityCustomView
+
+@property (nonatomic, readonly) CGFloat currentScale;
+@property (nonatomic, weak) id<ORKTouchAbilityPinchContentViewDataSource> _Nullable dataSource;
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
+- (void)reloadData;
+
+@end
+
+NS_ASSUME_NONNULL_END

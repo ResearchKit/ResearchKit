@@ -28,46 +28,57 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
-#import "ORKHelpers_Internal.h"
+#import "ORKTouchAbilityPinchGuideView.h"
 
-@implementation ORKTouchAbilitySwipeResult
+@implementation ORKTouchAbilityPinchGuideView
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-- (BOOL)isEqual:(id)object {
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self setNeedsDisplay];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self setNeedsDisplay];
+}
+
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
     
-    BOOL isParentSame = [super isEqual:object];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
     
-    __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
-    }
-    return _trials;
+    [self.backgroundColor setFill];
+    [path fill];
+    
+    CGFloat dashes[2] = {4.0, 4.0};
+    [path setLineDash:dashes count:2 phase:0];
+    [path setLineCapStyle:kCGLineCapButt];
+    [path setLineWidth:4.0];
+    
+    [UIColor.blackColor setStroke];
+    [path stroke];
+    
+    
+    
+    /*
+    let path = UIBezierPath(roundedRect: rect, cornerRadius: 0)
+    path.lineWidth = lineWidth
+    
+    let dashes: [CGFloat] = [lineWidth, lineWidth]
+    path.setLineDash(dashes, count: dashes.count, phase: 0)
+    path.lineCapStyle = CGLineCap.butt
+    
+    lineColor.setStroke()
+    
+    path.stroke()
+    */
 }
 
 @end

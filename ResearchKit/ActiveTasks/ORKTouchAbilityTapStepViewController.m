@@ -92,10 +92,6 @@
     return self;
 }
 
-- (ORKTouchAbilityTapStep *)touchAbilityTapStep {
-    return (ORKTouchAbilityTapStep *)self.step;
-}
-
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
     

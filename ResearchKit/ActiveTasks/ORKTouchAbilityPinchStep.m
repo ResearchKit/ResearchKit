@@ -28,46 +28,32 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
-#import "ORKHelpers_Internal.h"
+#import "ORKTouchAbilityPinchStep.h"
+#import "ORKTouchAbilityPinchStepViewController.h"
 
-@implementation ORKTouchAbilitySwipeResult
+@implementation ORKTouchAbilityPinchStep
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
++ (Class)stepViewControllerClass {
+    return [ORKTouchAbilityPinchStepViewController class];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+        self.shouldContinueOnFinish = YES;
     }
     return self;
 }
 
-- (BOOL)isEqual:(id)object {
+- (void)validateParameters {
+    [super validateParameters];
     
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
+    // TODO:
 }
 
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
-    }
-    return _trials;
+- (BOOL)startsFinished {
+    return NO;
 }
 
 @end

@@ -40,6 +40,16 @@
 @property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
 @property (nonatomic, readwrite) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
+@property (nonatomic, strong) UIPanGestureRecognizer *pan;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeUp;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeDown;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeft;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeRight;
+@property (nonatomic, strong) UIPinchGestureRecognizer *pinch;
+@property (nonatomic, strong) UIRotationGestureRecognizer *rotation;
+
 @end
 
 @implementation ORKTouchAbilityCustomView
@@ -81,18 +91,24 @@
         tap.delaysTouchesBegan = NO;
         tap.delaysTouchesEnded = NO;
         tap.delegate = self;
+        tap.enabled = NO;
+        self.tap = tap;
         
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewLongPress:)];
         longPress.cancelsTouchesInView = NO;
         longPress.delaysTouchesBegan = NO;
         longPress.delaysTouchesEnded = NO;
         longPress.delegate = self;
+        longPress.enabled = NO;
+        self.longPress = longPress;
         
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewPan:)];
         pan.cancelsTouchesInView = NO;
         pan.delaysTouchesBegan = NO;
         pan.delaysTouchesEnded = NO;
         pan.delegate = self;
+        pan.enabled = NO;
+        self.pan = pan;
         
         UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
@@ -100,6 +116,8 @@
         swipeUp.delaysTouchesBegan = NO;
         swipeUp.delaysTouchesEnded = NO;
         swipeUp.delegate = self;
+        swipeUp.enabled = NO;
+        self.swipeUp = swipeUp;
         
         UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
@@ -107,6 +125,8 @@
         swipeDown.delaysTouchesBegan = NO;
         swipeDown.delaysTouchesEnded = NO;
         swipeDown.delegate = self;
+        swipeDown.enabled = NO;
+        self.swipeDown = swipeDown;
         
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -114,6 +134,8 @@
         swipeLeft.delaysTouchesBegan = NO;
         swipeLeft.delaysTouchesEnded = NO;
         swipeLeft.delegate = self;
+        swipeLeft.enabled = NO;
+        self.swipeLeft = swipeLeft;
         
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewSwipe:)];
         swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
@@ -121,18 +143,24 @@
         swipeRight.delaysTouchesBegan = NO;
         swipeRight.delaysTouchesEnded = NO;
         swipeRight.delegate = self;
+        swipeRight.enabled = NO;
+        self.swipeRight = swipeRight;
         
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewPinch:)];
         pinch.cancelsTouchesInView = NO;
         pinch.delaysTouchesBegan = NO;
         pinch.delaysTouchesEnded = NO;
         pinch.delegate = self;
+        pinch.enabled = NO;
+        self.pinch = pinch;
         
         UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleTouchAbilityCustomViewRotation:)];
         rotation.cancelsTouchesInView = NO;
         rotation.delaysTouchesBegan = NO;
         rotation.delaysTouchesEnded = NO;
         rotation.delegate = self;
+        rotation.enabled = NO;
+        self.rotation = rotation;
         
         [self addGestureRecognizer:tap];
         [self addGestureRecognizer:longPress];
@@ -152,10 +180,28 @@
 
 - (void)startTracking {
     [self.touchTracker startTracking];
+    self.tap.enabled        = YES;
+    self.longPress.enabled  = YES;
+    self.pan.enabled        = YES;
+    self.swipeUp.enabled    = YES;
+    self.swipeDown.enabled  = YES;
+    self.swipeLeft.enabled  = YES;
+    self.swipeRight.enabled = YES;
+    self.pinch.enabled      = YES;
+    self.rotation.enabled   = YES;
 }
 
 - (void)stopTracking {
     [self.touchTracker stopTracking];
+    self.tap.enabled        = NO;
+    self.longPress.enabled  = NO;
+    self.pan.enabled        = NO;
+    self.swipeUp.enabled    = NO;
+    self.swipeDown.enabled  = NO;
+    self.swipeLeft.enabled  = NO;
+    self.swipeRight.enabled = NO;
+    self.pinch.enabled      = NO;
+    self.rotation.enabled   = NO;
 }
 
 - (void)resetTracks {

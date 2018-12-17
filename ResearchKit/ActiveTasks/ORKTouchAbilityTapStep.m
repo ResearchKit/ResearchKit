@@ -58,8 +58,4 @@
     return NO;
 }
 
-//- (BOOL)allowBackNavigation {
-//    return NO;
-//}
-
 @end

@@ -187,8 +187,6 @@
 
 - (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
     
-    [self.swipeContentView reloadData];
-    
     
     // Calculate current progress and display using progress view.
     

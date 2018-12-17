@@ -28,46 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilitySwipeResult.h"
-#import "ORKHelpers_Internal.h"
+@import Foundation;
+#import <ResearchKit/ORKResult.h>
 
-@implementation ORKTouchAbilitySwipeResult
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, trials);
-}
+@class ORKTouchAbilityPinchTrial;
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        ORK_ENCODE_OBJ(aDecoder, trials);
-    }
-    return self;
-}
-
-- (BOOL)isEqual:(id)object {
-    
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
-}
-
-- (NSUInteger)hash {
-    return super.hash ^ self.trials.hash;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-    ORKTouchAbilitySwipeResult *result = [super copyWithZone:zone];
-    result.trials = [self.trials mutableCopy];
-    return result;
-}
-
-- (NSArray<ORKTouchAbilitySwipeTrial *> *)trials {
-    if (!_trials) {
-        _trials = [NSArray new];
-    }
-    return _trials;
-}
-
+ORK_CLASS_AVAILABLE
+@interface ORKTouchAbilityPinchResult : ORKResult
+@property (nonatomic, copy) NSArray<ORKTouchAbilityPinchTrial *> *trials;
 @end
+
+NS_ASSUME_NONNULL_END
