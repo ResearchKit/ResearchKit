@@ -29,11 +29,14 @@
  */
 
 #import "ORKTouchAbilityTapContentView.h"
+#import "ORKTouchAbilityTapTrial.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
 @interface ORKTouchAbilityTapContentView ()
+
+@property (nonatomic, assign) BOOL success;
 
 @property (nonatomic, assign) NSUInteger numberOfColumns;
 @property (nonatomic, assign) NSUInteger numberOfRows;
@@ -42,15 +45,33 @@
 @property (nonatomic, assign) CGSize targetSize;
 
 @property (nonatomic, strong) UIView *targetView;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+
 @property (nonatomic, copy) NSArray *targetConstraints;
 
 @end
 
 @implementation ORKTouchAbilityTapContentView
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
+
+#pragma mark - Properties
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
 }
+
+- (UITapGestureRecognizer *)tapGestureRecognizer {
+    if (!_tapGestureRecognizer) {
+        _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
+    }
+    return _tapGestureRecognizer;
+}
+
+
+#pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -68,6 +89,8 @@
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
         [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
+        
+        [self.contentView addGestureRecognizer:self.tapGestureRecognizer];
     }
     return self;
 }
@@ -77,29 +100,59 @@
     self.targetView.backgroundColor = self.tintColor;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+- (void)updateConstraints {
+    [super updateConstraints];
     
-    if (self.superview != nil) {
-        [self reloadData];
+    if (self.numberOfColumns == 0 || self.numberOfRows == 0 || self.targetView.superview == nil) {
+        return;
     }
+    
+    CGFloat width = self.contentView.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
+    CGFloat height = self.contentView.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
+    
+    CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
+    CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
+    
+    if (self.targetConstraints != nil) {
+        [NSLayoutConstraint deactivateConstraints:self.targetConstraints];
+    }
+    
+    NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
+    NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
+    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leftAnchor constant:columnMidX];
+    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor constant:rowMidY];
+    
+    NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
+    [NSLayoutConstraint activateConstraints:constraints];
+    
+    self.targetConstraints = constraints;
 }
 
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
+
+#pragma mark - ORKTouchAbilityCustomView
+
++ (Class)trialClass {
+    return [ORKTouchAbilityTapTrial class];
+}
+
+- (ORKTouchAbilityTrial *)trial {
     
-    if (self.superview != nil) {
-        [self reloadData];
-    }
+    ORKTouchAbilityTapTrial *trial = (ORKTouchAbilityTapTrial *)[super trial];
+    trial.targetFrameInWindow = [self.targetView convertRect:self.targetView.bounds toView:nil];
+    trial.success = self.success;
+    
+    return trial;
 }
 
 - (void)reloadData {
     [self resetTracks];
     
+    self.success = NO;
+    
     self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
-    self.numberOfRows = [self.dataSource numberOfRows:self] ?: 1;
-    self.targetColumn = [self.dataSource targetColumn:self] ?: 0;
-    self.targetRow = [self.dataSource targetRow:self] ?: 0;
+    self.numberOfRows    = [self.dataSource numberOfRows:self]    ?: 1;
+    self.targetColumn    = [self.dataSource targetColumn:self]    ?: 0;
+    self.targetRow       = [self.dataSource targetRow:self]       ?: 0;
     
     NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
     NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
@@ -114,39 +167,15 @@
     [self updateConstraintsIfNeeded];
 }
 
-- (void)updateConstraints {
-    [super updateConstraints];
 
-    if (self.numberOfColumns == 0 || self.numberOfRows == 0 || self.targetView.superview == nil) {
-        return;
+#pragma mark - Gesture Recognizer Handler
+
+- (void)handleTapGestureRecognizer:(UITapGestureRecognizer *)sender {
+    if (CGRectContainsPoint(self.targetView.bounds, [sender locationInView:self.targetView])) {
+        self.success = YES;
+    } else {
+        self.success = NO;
     }
-    
-    CGFloat width = self.contentView.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
-    CGFloat height = self.contentView.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
-
-    CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
-    CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
-
-    if (self.targetConstraints != nil) {
-        [NSLayoutConstraint deactivateConstraints:self.targetConstraints];
-    }
-
-    NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
-    NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
-    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leftAnchor constant:columnMidX];
-    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor constant:rowMidY];
-
-    NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
-    [NSLayoutConstraint activateConstraints:constraints];
-
-    self.targetConstraints = constraints;
-}
-
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
-    }
-    return _targetView;
 }
 
 @end

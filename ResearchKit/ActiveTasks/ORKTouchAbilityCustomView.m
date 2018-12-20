@@ -31,6 +31,8 @@
 
 #import "ORKTouchAbilityCustomView.h"
 
+#import "ORKTouchAbilityTrial.h"
+#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityTouchTracker.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
@@ -59,6 +61,17 @@
 
 
 #pragma mark - Properties
+
++ (Class)trialClass {
+    return [ORKTouchAbilityTrial class];
+}
+
+- (ORKTouchAbilityTrial *)trial {
+    ORKTouchAbilityTrial *trial = [[[[self class] trialClass] alloc] init];
+    trial.tracks = self.tracks;
+    trial.gestureRecognizerEvents = self.gestureRecognizerEvents;
+    return trial;
+}
 
 - (UIView *)contentView {
     if (!_contentView) {
@@ -300,6 +313,26 @@
     return YES;
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self.progressView setProgressTintColor:self.tintColor];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    
+    if (self.superview != nil) {
+        [self reloadData];
+    }
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    
+    if (self.superview != nil) {
+        [self reloadData];
+    }
+}
 
 #pragma mark - GestureRecognizer Handlers
 

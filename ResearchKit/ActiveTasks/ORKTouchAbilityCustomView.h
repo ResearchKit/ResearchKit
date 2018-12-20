@@ -43,11 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
+@class ORKTouchAbilityTrial;
 @class ORKTouchAbilityTrack;
 @class ORKTouchAbilityGestureRecoginzerEvent;
 @interface ORKTouchAbilityCustomView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
 
+@property (nonatomic, readonly) ORKTouchAbilityTrial *trial;
 @property (nonatomic, readonly) UIView *contentView;
 
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
@@ -65,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated;
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
+
++ (Class)trialClass;
+
 @end
 
 NS_ASSUME_NONNULL_END
