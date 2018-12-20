@@ -32,8 +32,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKTouchAbilitySwipeArrowView : UIView
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection direction;
+typedef NS_ENUM(NSUInteger, ORKTouchAbilityArrowViewStyle) {
+    ORKTouchAbilityArrowViewStyleFill,
+    ORKTouchAbilityArrowViewStyleStroke
+};
+
+@interface ORKTouchAbilityArrowView : UIView
+
+@property (nonatomic, assign) ORKTouchAbilityArrowViewStyle style;
+
+- (instancetype)initWithFrame:(CGRect)frame style:(ORKTouchAbilityArrowViewStyle)style;
+
 @end
 
 NS_ASSUME_NONNULL_END

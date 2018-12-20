@@ -7,7 +7,7 @@
 //
 
 #import "ORKTouchAbilitySwipeContentView.h"
-#import "ORKTouchAbilitySwipeArrowView.h"
+#import "ORKTouchAbilityArrowView.h"
 #import "ORKTouchAbilitySwipeTrial.h"
 
 @interface ORKTouchAbilitySwipeContentView ()
@@ -16,7 +16,7 @@
 @property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
 @property (nonatomic, assign) BOOL success;
 
-@property (nonatomic, strong) ORKTouchAbilitySwipeArrowView *arrowView;
+@property (nonatomic, strong) ORKTouchAbilityArrowView *arrowView;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeUpGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeDownGestureRecognizer;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGestureRecognizer;
@@ -28,10 +28,9 @@
 
 #pragma mark - Properties
 
-- (ORKTouchAbilitySwipeArrowView *)arrowView {
+- (ORKTouchAbilityArrowView *)arrowView {
     if (!_arrowView) {
-        _arrowView = [[ORKTouchAbilitySwipeArrowView alloc] initWithFrame:CGRectZero];
-        _arrowView.direction = UISwipeGestureRecognizerDirectionRight;
+        _arrowView = [[ORKTouchAbilityArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityArrowViewStyleFill];
     }
     return _arrowView;
 }
@@ -151,7 +150,25 @@
     } else {
         self.targetDirection = UISwipeGestureRecognizerDirectionRight;
     }
-    _arrowView.direction = self.targetDirection;
+    
+    switch (self.targetDirection) {
+            
+        case UISwipeGestureRecognizerDirectionRight:
+            self.arrowView.transform = CGAffineTransformMakeRotation(M_PI_2);
+            break;
+            
+        case UISwipeGestureRecognizerDirectionLeft:
+            self.arrowView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+            break;
+            
+        case UISwipeGestureRecognizerDirectionUp:
+            self.arrowView.transform = CGAffineTransformIdentity;
+            break;
+            
+        case UISwipeGestureRecognizerDirectionDown:
+            self.arrowView.transform = CGAffineTransformMakeRotation(M_PI);
+            break;
+    }
 }
 
 

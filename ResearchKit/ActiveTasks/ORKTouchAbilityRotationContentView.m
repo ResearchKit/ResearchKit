@@ -29,7 +29,7 @@
  */
 
 #import "ORKTouchAbilityRotationContentView.h"
-#import "ORKTouchAbilityRotationArrowView.h"
+#import "ORKTouchAbilityArrowView.h"
 #import "ORKTouchAbilityRotationTrial.h"
 
 @interface ORKTouchAbilityRotationContentView ()
@@ -49,14 +49,14 @@
 
 - (UIView *)targetView {
     if (!_targetView) {
-        _targetView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleFill];
+        _targetView = [[ORKTouchAbilityArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityArrowViewStyleFill];
     }
     return _targetView;
 }
 
 - (UIView *)guideView {
     if (!_guideView) {
-        _guideView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleStroke];
+        _guideView = [[ORKTouchAbilityArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityArrowViewStyleStroke];
     }
     return _guideView;
 }

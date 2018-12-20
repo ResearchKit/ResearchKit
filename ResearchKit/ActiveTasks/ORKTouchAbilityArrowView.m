@@ -28,9 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilityRotationArrowView.h"
+#import "ORKTouchAbilityArrowView.h"
 
-@implementation ORKTouchAbilityRotationArrowView
+@implementation ORKTouchAbilityArrowView
 
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(300.0, 300.0);
@@ -38,13 +38,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.style = ORKTouchAbilityRotationArrowViewStyleFill;
+        self.style = ORKTouchAbilityArrowViewStyleFill;
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame style:(ORKTouchAbilityRotationArrowViewStyle)style {
+- (instancetype)initWithFrame:(CGRect)frame style:(ORKTouchAbilityArrowViewStyle)style {
     if (self = [super initWithFrame:frame]) {
         self.style = style;
         self.backgroundColor = [UIColor clearColor];
@@ -52,7 +52,7 @@
     return self;
 }
 
-- (void)setStyle:(ORKTouchAbilityRotationArrowViewStyle)style {
+- (void)setStyle:(ORKTouchAbilityArrowViewStyle)style {
     _style = style;
     [self setNeedsDisplay];
 }
@@ -100,7 +100,7 @@
     
     // Fill the path
     
-    if (self.style == ORKTouchAbilityRotationArrowViewStyleFill) {
+    if (self.style == ORKTouchAbilityArrowViewStyleFill) {
         [self.tintColor setFill];
         [[UIBezierPath bezierPathWithCGPath:path] fill];
     } else {
