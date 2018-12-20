@@ -35,8 +35,6 @@
 #import "ORKActiveStepView.h"
 #import "ORKTouchAbilityLongPressContentView.h"
 #import "ORKTouchAbilityLongPressResult.h"
-#import "ORKTouchAbilityTrial.h"
-#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityLongPressTrial.h"
 
 #import "ORKActiveStepViewController_Internal.h"
@@ -57,33 +55,12 @@
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
 @property (nonatomic, strong) NSMutableArray<ORKTouchAbilityLongPressTrial *> *trials;
 
-@property (nonatomic, assign) BOOL success;
-
 // UI
-@property (nonatomic, strong) ORKTouchAbilityLongPressContentView *touchAbilityLongPressContentView;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+@property (nonatomic, strong) ORKTouchAbilityLongPressContentView *longPressView;
+
 @end
 
 @implementation ORKTouchAbilityLongPressStepViewController
-
-
-- (UILongPressGestureRecognizer *)longPressGestureRecognizer {
-    if (!_longPressGestureRecognizer) {
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGestureRecognizer:)];
-    }
-    return _longPressGestureRecognizer;
-}
-
-- (void)handleLongPressGestureRecognizer:(UILongPressGestureRecognizer *)sender {
-    
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        if (CGRectContainsPoint(self.touchAbilityLongPressContentView.targetView.bounds, [sender locationInView:self.touchAbilityLongPressContentView.targetView])) {
-            self.success = YES;
-        } else {
-            self.success = NO;
-        }
-    }
-}
 
 
 #pragma mark - ORKActiveStepViewController
@@ -120,7 +97,7 @@
 }
 
 - (void)finish {
-    [self.touchAbilityLongPressContentView stopTracking];
+    [self.longPressView stopTracking];
     [super finish];
 }
 
@@ -132,24 +109,21 @@
     self.trials = [NSMutableArray new];
     self.targetPointsQueue = [self targetPointsForTraitCollection:self.traitCollection];
     
-    self.touchAbilityLongPressContentView = [[ORKTouchAbilityLongPressContentView alloc] init];
-    self.touchAbilityLongPressContentView.dataSource = self;
-    self.touchAbilityLongPressContentView.delegate = self;
+    self.longPressView = [[ORKTouchAbilityLongPressContentView alloc] init];
+    self.longPressView.dataSource = self;
+    self.longPressView.delegate = self;
     
-    self.activeStepView.activeCustomView = self.touchAbilityLongPressContentView;
+    self.activeStepView.activeCustomView = self.longPressView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
     [self.activeStepView updateTitle:nil text:@"FOOOOOOOOOO barrrrrrr"];
-    
-    [self.touchAbilityLongPressContentView.targetView addGestureRecognizer:self.longPressGestureRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    self.success = NO;
-    [self.touchAbilityLongPressContentView startTracking];
+    [self.longPressView startTracking];
 }
 
 
@@ -223,51 +197,32 @@
     NSUInteger done = total - self.targetPointsQueue.count;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [self.touchAbilityLongPressContentView setProgress:progress animated:YES];
+    [customView setProgress:progress animated:YES];
     
     
     // Animate the target view.
     
-    __weak __typeof(self) weakSelf = self;
-    [self.touchAbilityLongPressContentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        
+    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [strongSelf.touchAbilityLongPressContentView stopTracking];
+        [customView stopTracking];
         
-        
-        // Convert target view's frame to window.
-        CGRect frame = [strongSelf.touchAbilityLongPressContentView.targetView convertRect:strongSelf.touchAbilityLongPressContentView.targetView.bounds toView:nil];
-        
-        
-        // Initiate a new trial.
-        
-        ORKTouchAbilityLongPressTrial *trial = [[ORKTouchAbilityLongPressTrial alloc] initWithTargetFrameInWindow:frame];
-        trial.tracks = strongSelf.touchAbilityLongPressContentView.tracks;
-        trial.gestureRecognizerEvents = strongSelf.touchAbilityLongPressContentView.gestureRecognizerEvents;
-        trial.success = strongSelf.success;
-        
-        // Add the trial to trials and remove the target point from the target points queue.
-        
-        [strongSelf.trials addObject:trial];
-        
+        [self.trials addObject:(ORKTouchAbilityLongPressTrial *)customView.trial];
         
         // Determind if should continue or finish.
         
-        if (strongSelf.targetPointsQueue.count > 0) {
+        if (self.targetPointsQueue.count > 0) {
             
             // Reload and start tracking again.
-            strongSelf.success = NO;
-            [strongSelf.touchAbilityLongPressContentView reloadData];
-            [strongSelf.touchAbilityLongPressContentView setContentViewHidden:NO animated:NO];
-            [strongSelf.touchAbilityLongPressContentView startTracking];
+            [customView reloadData];
+            [customView setContentViewHidden:NO animated:NO];
+            [customView startTracking];
             
         } else {
             
             // Finish step.
-            [strongSelf finish];
+            [self finish];
         }
         
     }];

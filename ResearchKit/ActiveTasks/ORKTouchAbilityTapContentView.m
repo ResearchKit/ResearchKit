@@ -32,7 +32,6 @@
 #import "ORKTouchAbilityTapTrial.h"
 
 #import "ORKHelpers_Internal.h"
-#import "ORKSkin.h"
 
 @interface ORKTouchAbilityTapContentView ()
 
@@ -90,6 +89,7 @@
         
         [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
         
+        self.tapGestureRecognizer.enabled = NO;
         [self.contentView addGestureRecognizer:self.tapGestureRecognizer];
     }
     return self;
@@ -142,6 +142,16 @@
     trial.success = self.success;
     
     return trial;
+}
+
+- (void)startTracking {
+    [super startTracking];
+    self.tapGestureRecognizer.enabled = YES;
+}
+
+- (void)stopTracking {
+    [super stopTracking];
+    self.tapGestureRecognizer.enabled = NO;
 }
 
 - (void)reloadData {

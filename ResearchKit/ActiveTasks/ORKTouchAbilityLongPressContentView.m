@@ -29,11 +29,13 @@
  */
 
 #import "ORKTouchAbilityLongPressContentView.h"
+#import "ORKTouchAbilityLongPressTrial.h"
 
 #import "ORKHelpers_Internal.h"
-#import "ORKSkin.h"
 
 @interface ORKTouchAbilityLongPressContentView ()
+
+@property (nonatomic, assign) BOOL success;
 
 @property (nonatomic, assign) NSUInteger numberOfColumns;
 @property (nonatomic, assign) NSUInteger numberOfRows;
@@ -42,15 +44,33 @@
 @property (nonatomic, assign) CGSize targetSize;
 
 @property (nonatomic, strong) UIView *targetView;
+@property (nonatomic, strong) UILongPressGestureRecognizer *longPressGestureRecognizer;
+
 @property (nonatomic, copy) NSArray *targetConstraints;
 
 @end
 
 @implementation ORKTouchAbilityLongPressContentView
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
+
+#pragma mark - Properties
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
 }
+
+- (UILongPressGestureRecognizer *)longPressGestureRecognizer {
+    if (!_longPressGestureRecognizer) {
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGestureRecognizer:)];
+    }
+    return _longPressGestureRecognizer;
+}
+
+
+#pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -68,6 +88,9 @@
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
         [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
+        
+        self.longPressGestureRecognizer.enabled = NO;
+        [self.contentView addGestureRecognizer:self.longPressGestureRecognizer];
     }
     return self;
 }
@@ -75,43 +98,6 @@
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     self.targetView.backgroundColor = self.tintColor;
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
-- (void)reloadData {
-    [self resetTracks];
-    
-    self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
-    self.numberOfRows = [self.dataSource numberOfRows:self] ?: 1;
-    self.targetColumn = [self.dataSource targetColumn:self] ?: 0;
-    self.targetRow = [self.dataSource targetRow:self] ?: 0;
-    
-    NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
-    NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
-    
-    if ([self.dataSource respondsToSelector:@selector(targetSize:)]) {
-        self.targetSize = [self.dataSource targetSize:self];
-    } else {
-        self.targetSize = CGSizeMake(76, 76);
-    }
-    
-    [self setNeedsUpdateConstraints];
-    [self updateConstraintsIfNeeded];
 }
 
 - (void)updateConstraints {
@@ -142,11 +128,67 @@
     self.targetConstraints = constraints;
 }
 
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+
+#pragma mark - ORKTouchAbilityCustomView
+
++ (Class)trialClass {
+    return [ORKTouchAbilityLongPressTrial class];
+}
+
+- (ORKTouchAbilityTrial *)trial {
+    
+    ORKTouchAbilityLongPressTrial *trial = (ORKTouchAbilityLongPressTrial *)[super trial];
+    trial.targetFrameInWindow = [self.targetView convertRect:self.targetView.bounds toView:nil];
+    trial.success = self.success;
+    
+    return trial;
+}
+
+- (void)startTracking {
+    [super startTracking];
+    self.longPressGestureRecognizer.enabled = YES;
+}
+
+- (void)stopTracking {
+    [super stopTracking];
+    self.longPressGestureRecognizer.enabled = NO;
+}
+
+- (void)reloadData {
+    [self resetTracks];
+    
+    self.success = NO;
+    
+    self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
+    self.numberOfRows    = [self.dataSource numberOfRows:self]    ?: 1;
+    self.targetColumn    = [self.dataSource targetColumn:self]    ?: 0;
+    self.targetRow       = [self.dataSource targetRow:self]       ?: 0;
+    
+    NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
+    NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
+    
+    if ([self.dataSource respondsToSelector:@selector(targetSize:)]) {
+        self.targetSize = [self.dataSource targetSize:self];
+    } else {
+        self.targetSize = CGSizeMake(76, 76);
     }
-    return _targetView;
+    
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+}
+
+
+#pragma mark - Gesture Recognizer Handler
+
+- (void)handleLongPressGestureRecognizer:(UILongPressGestureRecognizer *)sender {
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        if (CGRectContainsPoint(self.targetView.bounds, [sender locationInView:self.targetView])) {
+            self.success = YES;
+        } else {
+            self.success = NO;
+        }
+    }
 }
 
 @end
