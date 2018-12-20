@@ -38,6 +38,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
 
 @property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
+@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
 @property (nonatomic, assign) BOOL success;
 
 - (instancetype)init NS_UNAVAILABLE;

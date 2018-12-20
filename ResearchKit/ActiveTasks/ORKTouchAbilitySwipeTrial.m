@@ -36,12 +36,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, targetDirection);
+    ORK_ENCODE_ENUM(aCoder, resultDirection);
     ORK_ENCODE_BOOL(aCoder, success);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         ORK_DECODE_ENUM(aDecoder, targetDirection);
+        ORK_DECODE_ENUM(aDecoder, resultDirection);
         ORK_DECODE_BOOL(aDecoder, success);
     }
     return self;
@@ -50,6 +52,7 @@
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilitySwipeTrial *trial = [super copyWithZone:zone];
     trial.targetDirection = self.targetDirection;
+    trial.resultDirection = self.resultDirection;
     trial.success = self.success;
     return trial;
 }
@@ -62,12 +65,14 @@
     
     return (isParentSame &&
             self.targetDirection == castObject.targetDirection &&
+            self.resultDirection == castObject.resultDirection &&
             self.success == castObject.success);
 }
 
 - (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction {
     if (self = [super init]) {
         self.targetDirection = direction;
+        self.resultDirection = direction;
         self.success = NO;
     }
     return self;

@@ -35,8 +35,6 @@
 #import "ORKActiveStepView.h"
 #import "ORKTouchAbilitySwipeContentView.h"
 #import "ORKTouchAbilitySwipeResult.h"
-#import "ORKTouchAbilityTrial.h"
-#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilitySwipeTrial.h"
 
 #import "ORKActiveStepViewController_Internal.h"
@@ -58,11 +56,8 @@
 @property (nonatomic, strong) NSArray<NSNumber *> *targetDirectionQueue;
 @property (nonatomic, strong) NSMutableArray<ORKTouchAbilitySwipeTrial *> *trials;
 
-@property (nonatomic, assign) BOOL success;
-
 // UI
 @property (nonatomic, strong) ORKTouchAbilitySwipeContentView *swipeContentView;
-@property (nonatomic, strong) UISwipeGestureRecognizer *swipeGestureRecognizer;
 
 @end
 
@@ -70,22 +65,6 @@
 
 
 #pragma mark - ORKActiveStepViewController
-
-- (UISwipeGestureRecognizer *)swipeGestureRecognizer {
-    if (!_swipeGestureRecognizer) {
-        _swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRecoginzer:)];
-    }
-    return _swipeGestureRecognizer;
-}
-
-- (void)handleSwipeGestureRecoginzer:(UISwipeGestureRecognizer *)sender {
-    
-    if (sender.direction == self.targetDirectionQueue[self.currentTrialIndex].intValue) {
-        self.success = YES;
-    } else {
-        self.success = NO;
-    }
-}
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
@@ -131,7 +110,6 @@
     self.currentTrialIndex = 0;
     self.targetDirectionQueue = [self targetDirections];
     self.trials = [NSMutableArray new];
-    self.swipeGestureRecognizer.direction = self.targetDirectionQueue[self.currentTrialIndex].intValue;
     
     self.swipeContentView = [[ORKTouchAbilitySwipeContentView alloc] init];
     self.swipeContentView.dataSource = self;
@@ -142,14 +120,11 @@
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
     
     [self.activeStepView updateTitle:nil text:@"SWIPE foobarrrrrrr"];
-    
-    [self.swipeContentView addGestureRecognizer:self.swipeGestureRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    self.success = NO;
     [self.swipeContentView startTracking];
 }
 
@@ -194,52 +169,34 @@
     NSUInteger done = self.currentTrialIndex + 1;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [self.swipeContentView setProgress:progress animated:YES];
+    [customView setProgress:progress animated:YES];
     
     
     // Animate the target view.
     
-    __weak __typeof(self) weakSelf = self;
-    [self.swipeContentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        
+    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [strongSelf.swipeContentView stopTracking];
+        [customView stopTracking];
         
-        
-        // Get current target direction
-        UISwipeGestureRecognizerDirection direction = strongSelf.targetDirectionQueue[strongSelf.currentTrialIndex].intValue;
-        
-        // Initiate a new trial.
-        
-        ORKTouchAbilitySwipeTrial *trial = [[ORKTouchAbilitySwipeTrial alloc] initWithTargetDirection:direction];
-        trial.tracks = strongSelf.swipeContentView.tracks;
-        trial.gestureRecognizerEvents = strongSelf.swipeContentView.gestureRecognizerEvents;
-        trial.success = strongSelf.success;
-        
-        // Add the trial to trials and remove the target point from the target points queue.
-        
-        [strongSelf.trials addObject:trial];
+        [self.trials addObject:(ORKTouchAbilitySwipeTrial *)customView.trial];
         
         
         // Determind if should continue or finish.
         
-        strongSelf.currentTrialIndex += 1;
-        if (strongSelf.currentTrialIndex < strongSelf.targetDirectionQueue.count) {
+        self.currentTrialIndex += 1;
+        if (self.currentTrialIndex < self.targetDirectionQueue.count) {
             
             // Reload and start tracking again.
-            strongSelf.success = NO;
-            strongSelf.swipeGestureRecognizer.direction = strongSelf.targetDirectionQueue[strongSelf.currentTrialIndex].intValue;
-            [strongSelf.swipeContentView reloadData];
-            [strongSelf.swipeContentView setContentViewHidden:NO animated:NO];
-            [strongSelf.swipeContentView startTracking];
+            [customView reloadData];
+            [customView setContentViewHidden:NO animated:NO];
+            [customView startTracking];
             
         } else {
             
             // Finish step.
-            [strongSelf finish];
+            [self finish];
         }
         
     }];

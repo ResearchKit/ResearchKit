@@ -8,19 +8,68 @@
 
 #import "ORKTouchAbilitySwipeContentView.h"
 #import "ORKTouchAbilitySwipeArrowView.h"
+#import "ORKTouchAbilitySwipeTrial.h"
 
 @interface ORKTouchAbilitySwipeContentView ()
 
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection *targetDirection;
+@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
+@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
+@property (nonatomic, assign) BOOL success;
+
 @property (nonatomic, strong) ORKTouchAbilitySwipeArrowView *arrowView;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeUpGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeDownGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGestureRecognizer;
+@property (nonatomic, strong) UISwipeGestureRecognizer *swipeRightGestureRecognizer;
 
 @end
 
 @implementation ORKTouchAbilitySwipeContentView
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
+#pragma mark - Properties
+
+- (ORKTouchAbilitySwipeArrowView *)arrowView {
+    if (!_arrowView) {
+        _arrowView = [[ORKTouchAbilitySwipeArrowView alloc] initWithFrame:CGRectZero];
+        _arrowView.direction = UISwipeGestureRecognizerDirectionRight;
+    }
+    return _arrowView;
 }
+
+- (UISwipeGestureRecognizer *)swipeUpGestureRecognizer {
+    if (!_swipeUpGestureRecognizer) {
+        _swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRecoginzer:)];
+        _swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    }
+    return _swipeUpGestureRecognizer;
+}
+
+- (UISwipeGestureRecognizer *)swipeDownGestureRecognizer {
+    if (!_swipeDownGestureRecognizer) {
+        _swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRecoginzer:)];
+        _swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    }
+    return _swipeDownGestureRecognizer;
+}
+
+- (UISwipeGestureRecognizer *)swipeLeftGestureRecognizer {
+    if (!_swipeLeftGestureRecognizer) {
+        _swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRecoginzer:)];
+        _swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    }
+    return _swipeLeftGestureRecognizer;
+}
+
+- (UISwipeGestureRecognizer *)swipeRightGestureRecognizer {
+    if (!_swipeRightGestureRecognizer) {
+        _swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGestureRecoginzer:)];
+        _swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    }
+    return _swipeRightGestureRecognizer;
+}
+
+
+#pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -39,6 +88,16 @@
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
         [NSLayoutConstraint activateConstraints:@[centerXConstraint, centerYConstraint, topConstraint, bottomConstriant]];
+        
+        self.swipeUpGestureRecognizer.enabled    = NO;
+        self.swipeDownGestureRecognizer.enabled  = NO;
+        self.swipeLeftGestureRecognizer.enabled  = NO;
+        self.swipeRightGestureRecognizer.enabled = NO;
+        
+        [self.contentView addGestureRecognizer:self.swipeUpGestureRecognizer];
+        [self.contentView addGestureRecognizer:self.swipeDownGestureRecognizer];
+        [self.contentView addGestureRecognizer:self.swipeLeftGestureRecognizer];
+        [self.contentView addGestureRecognizer:self.swipeRightGestureRecognizer];
     }
     return self;
 }
@@ -48,38 +107,67 @@
     self.arrowView.tintColor = self.tintColor;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
+
+#pragma mark - ORKTouchAbilityCustomView
+
++ (Class)trialClass {
+    return [ORKTouchAbilitySwipeTrial class];
 }
 
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
+- (ORKTouchAbilityTrial *)trial {
     
-    if (self.superview != nil) {
-        [self reloadData];
-    }
+    ORKTouchAbilitySwipeTrial *trial = (ORKTouchAbilitySwipeTrial *)[super trial];
+    trial.targetDirection = self.targetDirection;
+    trial.resultDirection = self.resultDirection;
+    trial.success = self.success;
+    
+    return trial;
+}
+
+- (void)startTracking {
+    [super startTracking];
+    self.swipeUpGestureRecognizer.enabled    = YES;
+    self.swipeDownGestureRecognizer.enabled  = YES;
+    self.swipeLeftGestureRecognizer.enabled  = YES;
+    self.swipeRightGestureRecognizer.enabled = YES;
+}
+
+- (void)stopTracking {
+    [super stopTracking];
+    self.swipeUpGestureRecognizer.enabled    = NO;
+    self.swipeDownGestureRecognizer.enabled  = NO;
+    self.swipeLeftGestureRecognizer.enabled  = NO;
+    self.swipeRightGestureRecognizer.enabled = NO;
 }
 
 - (void)reloadData {
     [self resetTracks];
     
+    self.success = NO;
+    self.resultDirection = UISwipeGestureRecognizerDirectionRight;
+    
     if ([self.dataSource respondsToSelector:@selector(targetDirection:)]) {
-        _arrowView.direction = [self.dataSource targetDirection:self];
+        self.targetDirection = [self.dataSource targetDirection:self];
     } else {
-        _arrowView.direction = UISwipeGestureRecognizerDirectionRight;
+        self.targetDirection = UISwipeGestureRecognizerDirectionRight;
     }
+    _arrowView.direction = self.targetDirection;
 }
 
-- (ORKTouchAbilitySwipeArrowView *)arrowView {
-    if (!_arrowView) {
-        _arrowView = [[ORKTouchAbilitySwipeArrowView alloc] initWithFrame:CGRectZero];
-        _arrowView.direction = UISwipeGestureRecognizerDirectionRight;
+
+#pragma mark - Gesture Recognizer Handler
+
+- (void)handleSwipeGestureRecoginzer:(UISwipeGestureRecognizer *)sender {
+    self.resultDirection = sender.direction;
+    [self checkSuccess];
+}
+
+- (void)checkSuccess {
+    if (self.resultDirection == self.targetDirection) {
+        self.success = YES;
+    } else {
+        self.success = NO;
     }
-    return _arrowView;
 }
 
 @end

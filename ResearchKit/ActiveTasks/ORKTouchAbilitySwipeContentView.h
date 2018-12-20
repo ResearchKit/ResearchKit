@@ -44,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTouchAbilitySwipeContentView : ORKTouchAbilityCustomView
 
-@property (nonatomic, readonly) UIView *arrowView;
 @property (nonatomic, weak) id<ORKTouchAbilitySwipeContentViewDataSource> _Nullable dataSource;
 
 @end
