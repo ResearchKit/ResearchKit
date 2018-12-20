@@ -44,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTouchAbilityPinchContentView : ORKTouchAbilityCustomView
 
-@property (nonatomic, readonly) CGFloat currentScale;
 @property (nonatomic, weak) id<ORKTouchAbilityPinchContentViewDataSource> _Nullable dataSource;
 
 @end

@@ -32,8 +32,6 @@
 
 #import "ORKTouchAbilityPinchContentView.h"
 #import "ORKTouchAbilityPinchStep.h"
-#import "ORKTouchAbilityPinchTrial.h"
-#import "ORKTouchAbilityTrial_Internal.h"
 #import "ORKTouchAbilityPinchResult.h"
 
 #import "ORKActiveStepView.h"
@@ -157,49 +155,32 @@
     NSUInteger done = self.currentTrialIndex + 1;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [self.contentView setProgress:progress animated:YES];
+    [customView setProgress:progress animated:YES];
     
     // Animate the target view.
     
-    __weak __typeof(self) weakSelf = self;
-    [self.contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        
+    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [strongSelf.contentView stopTracking];
+        [customView stopTracking];
         
-        
-        // Get current target direction
-        CGFloat targetScale = strongSelf.targetScaleQueue[strongSelf.currentTrialIndex].doubleValue;
-        
-        // Initiate a new trial.
-        
-        ORKTouchAbilityPinchTrial *trial = [[ORKTouchAbilityPinchTrial alloc] initWithTargetScale:targetScale];
-        trial.tracks = strongSelf.contentView.tracks;
-        trial.gestureRecognizerEvents = strongSelf.contentView.gestureRecognizerEvents;
-        trial.resultScale = strongSelf.contentView.currentScale;
-        
-        // Add the trial to trials and remove the target point from the target points queue.
-        
-        [strongSelf.trials addObject:trial];
-        
+        [self.trials addObject:(ORKTouchAbilityPinchTrial *)customView.trial];
         
         // Determind if should continue or finish.
         
-        strongSelf.currentTrialIndex += 1;
-        if (strongSelf.currentTrialIndex < strongSelf.targetScaleQueue.count) {
+        self.currentTrialIndex += 1;
+        if (self.currentTrialIndex < self.targetScaleQueue.count) {
             
             // Reload and start tracking again.
-            [strongSelf.contentView reloadData];
-            [strongSelf.contentView setContentViewHidden:NO animated:NO];
-            [strongSelf.contentView startTracking];
+            [customView reloadData];
+            [customView setContentViewHidden:NO animated:NO];
+            [customView startTracking];
             
         } else {
             
             // Finish step.
-            [strongSelf finish];
+            [self finish];
         }
         
     }];

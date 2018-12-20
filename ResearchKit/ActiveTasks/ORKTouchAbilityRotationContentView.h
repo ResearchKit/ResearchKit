@@ -44,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTouchAbilityRotationContentView : ORKTouchAbilityCustomView
 
-@property (nonatomic, readonly) CGFloat currentRotation;
 @property (nonatomic, weak) id<ORKTouchAbilityRotationContentViewDataSource> _Nullable dataSource;
 
 @end

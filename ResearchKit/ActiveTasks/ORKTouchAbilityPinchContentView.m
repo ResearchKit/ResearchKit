@@ -31,6 +31,7 @@
 
 #import "ORKTouchAbilityPinchContentView.h"
 #import "ORKTouchAbilityPinchGuideView.h"
+#import "ORKTouchAbilityPinchTrial.h"
 
 @interface ORKTouchAbilityPinchContentView ()
 
@@ -48,9 +49,43 @@
 
 @implementation ORKTouchAbilityPinchContentView
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
+#pragma mark - Properties
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _targetView;
 }
+
+- (UIView *)guideView {
+    if (!_guideView) {
+        _guideView = [[ORKTouchAbilityPinchGuideView alloc] initWithFrame:CGRectZero];
+    }
+    return _guideView;
+}
+
+- (CGFloat)currentScale {
+    CGAffineTransform t = self.targetView.transform;
+    
+    // x scale
+    // CGFloat xScale = sqrt(t.a * t.a + t.c * t.c);
+    
+    // y scale
+    // CGFloat yScale = sqrt(t.b * t.b + t.d * t.d);
+    
+    return sqrt(t.a * t.a + t.c * t.c);
+}
+
+- (UIPinchGestureRecognizer *)pinchGestureRecognizer {
+    if (!_pinchGestureRecognizer) {
+        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGestureRecognizer:)];
+    }
+    return _pinchGestureRecognizer;
+}
+
+
+#pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     
@@ -97,25 +132,23 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     self.targetView.backgroundColor = self.tintColor;
+}
+
+
+#pragma mark - ORKTouchAbilityCustomView
+
++ (Class)trialClass {
+    return [ORKTouchAbilityPinchTrial class];
+}
+
+- (ORKTouchAbilityTrial *)trial {
+    ORKTouchAbilityPinchTrial *trial = (ORKTouchAbilityPinchTrial *)[super trial];
+    trial.targetScale = [self targetScale];
+    trial.resultScale = [self currentScale];
+    return trial;
 }
 
 - (void)startTracking {
@@ -144,38 +177,8 @@
     
 }
 
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[UIView alloc] initWithFrame:CGRectZero];
-    }
-    return _targetView;
-}
 
-- (UIView *)guideView {
-    if (!_guideView) {
-        _guideView = [[ORKTouchAbilityPinchGuideView alloc] initWithFrame:CGRectZero];
-    }
-    return _guideView;
-}
-
-- (CGFloat)currentScale {
-    CGAffineTransform t = self.targetView.transform;
-    
-    // x scale
-    // CGFloat xScale = sqrt(t.a * t.a + t.c * t.c);
-    
-    // y scale
-    // CGFloat yScale = sqrt(t.b * t.b + t.d * t.d);
-    
-    return sqrt(t.a * t.a + t.c * t.c);
-}
-
-- (UIPinchGestureRecognizer *)pinchGestureRecognizer {
-    if (!_pinchGestureRecognizer) {
-        _pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGestureRecognizer:)];
-    }
-    return _pinchGestureRecognizer;
-}
+#pragma mark - Gesture Recognizer Handler
 
 - (void)handlePinchGestureRecognizer:(UIPinchGestureRecognizer *)sender {
     

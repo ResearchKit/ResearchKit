@@ -30,6 +30,7 @@
 
 #import "ORKTouchAbilityRotationContentView.h"
 #import "ORKTouchAbilityRotationArrowView.h"
+#import "ORKTouchAbilityRotationTrial.h"
 
 @interface ORKTouchAbilityRotationContentView ()
 
@@ -44,9 +45,36 @@
 
 @implementation ORKTouchAbilityRotationContentView
 
-+ (BOOL)requiresConstraintBasedLayout {
-    return YES;
+#pragma mark - Properties
+
+- (UIView *)targetView {
+    if (!_targetView) {
+        _targetView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleFill];
+    }
+    return _targetView;
 }
+
+- (UIView *)guideView {
+    if (!_guideView) {
+        _guideView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleStroke];
+    }
+    return _guideView;
+}
+
+- (UIRotationGestureRecognizer *)rotationGestureRecognizer {
+    if (!_rotationGestureRecognizer) {
+        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotationGestureRecognizer:)];
+    }
+    return _rotationGestureRecognizer;
+}
+
+- (CGFloat)currentRotation {
+    CGAffineTransform t = self.targetView.transform;
+    return atan2(t.b, t.a);
+}
+
+
+#pragma mark - UIView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -75,25 +103,23 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    
-    if (self.superview != nil) {
-        [self reloadData];
-    }
-}
-
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     self.targetView.backgroundColor = self.tintColor;
+}
+
+
+#pragma mark - ORKTouchAbilityCustomView
+
++ (Class)trialClass {
+    return [ORKTouchAbilityRotationTrial class];
+}
+
+- (ORKTouchAbilityTrial *)trial {
+    ORKTouchAbilityRotationTrial *trial = (ORKTouchAbilityRotationTrial *)[super trial];
+    trial.targetRotation = [self targetRotation];
+    trial.resultRotation = [self currentRotation];
+    return trial;
 }
 
 - (void)startTracking {
@@ -112,34 +138,10 @@
     self.targetRotation = [self.dataSource targetRotation:self] ?: 0.0;
     self.guideView.transform = CGAffineTransformMakeRotation(self.targetRotation);
     self.targetView.transform = CGAffineTransformIdentity;
-    
 }
 
-- (UIView *)targetView {
-    if (!_targetView) {
-        _targetView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleFill];
-    }
-    return _targetView;
-}
 
-- (UIView *)guideView {
-    if (!_guideView) {
-        _guideView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleStroke];
-    }
-    return _guideView;
-}
-
-- (CGFloat)currentRotation {
-    CGAffineTransform t = self.targetView.transform;
-    return atan2(t.b, t.a);
-}
-
-- (UIRotationGestureRecognizer *)rotationGestureRecognizer {
-    if (!_rotationGestureRecognizer) {
-        _rotationGestureRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotationGestureRecognizer:)];
-    }
-    return _rotationGestureRecognizer;
-}
+#pragma mark - Gesture Recognizer Handler
 
 - (void)handleRotationGestureRecognizer:(UIRotationGestureRecognizer *)sender {
     
