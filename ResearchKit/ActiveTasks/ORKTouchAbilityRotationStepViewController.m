@@ -163,7 +163,7 @@
     // Animate the target view.
     
     __weak __typeof(self) weakSelf = self;
-    [self.contentView setTargetViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [self.contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         
         
@@ -194,7 +194,7 @@
             
             // Reload and start tracking again.
             [strongSelf.contentView reloadData];
-            [strongSelf.contentView setTargetViewHidden:NO animated:NO completion:nil];
+            [strongSelf.contentView setContentViewHidden:NO animated:NO];
             [strongSelf.contentView startTracking];
             
         } else {

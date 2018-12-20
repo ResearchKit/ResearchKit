@@ -35,7 +35,6 @@
 
 @property (nonatomic, assign) CGFloat targetRotation;
 
-@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UIView *targetView;
 @property (nonatomic, strong) UIView *guideView;
 
@@ -54,39 +53,24 @@
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
-        self.progressView.progressTintColor = self.tintColor;
-        self.progressView.isAccessibilityElement = YES;
-        [self.progressView setAlpha:0.0];
-        [self.progressView setProgress:0.0 animated:NO];
-        
-        self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
         self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
         self.guideView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [self addSubview:self.progressView];
-        [self addSubview:self.targetView];
-        [self addSubview:self.guideView];
+        [self.contentView addSubview:self.targetView];
+        [self.contentView addSubview:self.guideView];
         
-        NSArray *progressConstraints = @[[self.progressView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor],
-                                         [self.progressView.leftAnchor constraintEqualToAnchor:self.readableContentGuide.leftAnchor],
-                                         [self.progressView.rightAnchor constraintEqualToAnchor:self.readableContentGuide.rightAnchor]];
+        [NSLayoutConstraint activateConstraints:@[[self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
+                                                  [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor],
+                                                  [self.guideView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
+                                                  [self.guideView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor]]];
         
-        [NSLayoutConstraint activateConstraints:progressConstraints];
-        
-        [NSLayoutConstraint activateConstraints:@[[self.targetView.centerXAnchor constraintEqualToAnchor:self.layoutMarginsGuide.centerXAnchor],
-                                                  [self.targetView.centerYAnchor constraintEqualToAnchor:self.layoutMarginsGuide.centerYAnchor],
-                                                  [self.guideView.centerXAnchor constraintEqualToAnchor:self.layoutMarginsGuide.centerXAnchor],
-                                                  [self.guideView.centerYAnchor constraintEqualToAnchor:self.layoutMarginsGuide.centerYAnchor]]];
-        
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.progressView.bottomAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.layoutMarginsGuide.bottomAnchor];
+        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
+        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
         
         [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
         
-        [self addGestureRecognizer:self.rotationGestureRecognizer];
+        [self.contentView addGestureRecognizer:self.rotationGestureRecognizer];
         self.rotationGestureRecognizer.enabled = NO;
-        
-        [self reloadData];
     }
     return self;
 }
@@ -110,35 +94,6 @@
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     self.targetView.backgroundColor = self.tintColor;
-}
-
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
-    [self.progressView setProgress:progress animated:animated];
-    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.progressView setAlpha:(progress == 0) ? 0 : 1];
-    }];
-}
-
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated {
-    [self setTargetViewHidden:hidden animated:animated completion:nil];
-}
-
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL))completion {
-    
-    NSTimeInterval totalDuration = 1.0;
-    NSTimeInterval hideDuration = 0.2;
-    NSTimeInterval remainDuration = totalDuration - hideDuration;
-    
-    [UIView animateWithDuration:animated ? hideDuration : 0 delay:0.0 options:0 animations:^{
-        [self.targetView setAlpha:hidden ? 0 : 1];
-        [self.guideView setAlpha:hidden ? 0 : 1];
-    } completion:^(BOOL finished) {
-        if (completion) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(remainDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                completion(finished);
-            });
-        }
-    }];
 }
 
 - (void)startTracking {
@@ -165,13 +120,6 @@
         _targetView = [[ORKTouchAbilityRotationArrowView alloc] initWithFrame:CGRectZero style:ORKTouchAbilityRotationArrowViewStyleFill];
     }
     return _targetView;
-}
-
-- (UIProgressView *)progressView {
-    if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    }
-    return _progressView;
 }
 
 - (UIView *)guideView {

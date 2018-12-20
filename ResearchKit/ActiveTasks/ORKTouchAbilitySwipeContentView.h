@@ -47,12 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) UIView *arrowView;
 @property (nonatomic, weak) id<ORKTouchAbilitySwipeContentViewDataSource> _Nullable dataSource;
 
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-- (void)setArrowViewHidden:(BOOL)hidden animated:(BOOL)animated;
-- (void)setArrowViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
-- (void)reloadData;
-
-
 @end
 
 NS_ASSUME_NONNULL_END

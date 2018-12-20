@@ -237,7 +237,7 @@
     // Animate the target view.
     
     __weak __typeof(self) weakSelf = self;
-    [self.touchAbilityTapContentView setTargetViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [self.touchAbilityTapContentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         
         // Stop tracking new touch events.
@@ -270,7 +270,7 @@
             // Reload and start tracking again.
             strongSelf.success = NO;
             [strongSelf.touchAbilityTapContentView reloadData];
-            [strongSelf.touchAbilityTapContentView setTargetViewHidden:NO animated:NO];
+            [strongSelf.touchAbilityTapContentView setContentViewHidden:NO animated:NO];
             [strongSelf.touchAbilityTapContentView startTracking];
             
         } else {

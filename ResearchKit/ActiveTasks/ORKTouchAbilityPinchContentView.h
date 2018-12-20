@@ -47,10 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CGFloat currentScale;
 @property (nonatomic, weak) id<ORKTouchAbilityPinchContentViewDataSource> _Nullable dataSource;
 
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
-- (void)reloadData;
-
 @end
 
 NS_ASSUME_NONNULL_END

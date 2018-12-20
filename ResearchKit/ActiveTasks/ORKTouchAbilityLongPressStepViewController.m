@@ -229,7 +229,7 @@
     // Animate the target view.
     
     __weak __typeof(self) weakSelf = self;
-    [self.touchAbilityLongPressContentView setTargetViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [self.touchAbilityLongPressContentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         
         
@@ -261,7 +261,7 @@
             // Reload and start tracking again.
             strongSelf.success = NO;
             [strongSelf.touchAbilityLongPressContentView reloadData];
-            [strongSelf.touchAbilityLongPressContentView setTargetViewHidden:NO animated:NO];
+            [strongSelf.touchAbilityLongPressContentView setContentViewHidden:NO animated:NO];
             [strongSelf.touchAbilityLongPressContentView startTracking];
             
         } else {

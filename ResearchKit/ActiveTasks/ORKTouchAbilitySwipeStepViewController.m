@@ -200,7 +200,7 @@
     // Animate the target view.
     
     __weak __typeof(self) weakSelf = self;
-    [self.swipeContentView setArrowViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [self.swipeContentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         
         
@@ -233,7 +233,7 @@
             strongSelf.success = NO;
             strongSelf.swipeGestureRecognizer.direction = strongSelf.targetDirectionQueue[strongSelf.currentTrialIndex].intValue;
             [strongSelf.swipeContentView reloadData];
-            [strongSelf.swipeContentView setArrowViewHidden:NO animated:NO];
+            [strongSelf.swipeContentView setContentViewHidden:NO animated:NO];
             [strongSelf.swipeContentView startTracking];
             
         } else {

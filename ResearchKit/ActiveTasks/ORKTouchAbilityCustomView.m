@@ -50,12 +50,22 @@
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinch;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotation;
 
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIProgressView *progressView;
+
 @end
 
 @implementation ORKTouchAbilityCustomView
 
 
 #pragma mark - Properties
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _contentView;
+}
 
 - (ORKTouchAbilityTouchTracker *)touchTracker {
     if (!_touchTracker) {
@@ -78,11 +88,50 @@
     return _gestureRecognizerEvents;
 }
 
+- (UIProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    }
+    return _progressView;
+}
+
 
 #pragma mark - Life Cycle
 
-- (instancetype)init {
-    if (self = [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        // Views
+        
+        [self.contentView setBackgroundColor:UIColor.clearColor];
+        
+        [self.progressView setProgressTintColor:self.tintColor];
+        [self.progressView setIsAccessibilityElement:YES];
+        [self.progressView setAlpha:0.0];
+        [self.progressView setProgress:0.0 animated:NO];
+        
+        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [self addSubview:self.contentView];
+        [self addSubview:self.progressView];
+        
+        NSArray *contentConstraints = @[[self.contentView.topAnchor constraintEqualToAnchor:self.topAnchor],
+                                        [self.contentView.leftAnchor constraintEqualToAnchor:self.leftAnchor],
+                                        [self.contentView.rightAnchor constraintEqualToAnchor:self.rightAnchor],
+                                        [self.contentView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]];
+        
+        [NSLayoutConstraint activateConstraints:contentConstraints];
+        
+        NSArray *progressConstraints = @[[self.progressView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor],
+                                         [self.progressView.leftAnchor constraintEqualToAnchor:self.readableContentGuide.leftAnchor],
+                                         [self.progressView.rightAnchor constraintEqualToAnchor:self.readableContentGuide.rightAnchor]];
+        
+        [NSLayoutConstraint activateConstraints:progressConstraints];
+        
+        // Gesture recognizers
         
         [self addGestureRecognizer:self.touchTracker];
         
@@ -210,6 +259,45 @@
 
 - (BOOL)isTracking {
     return self.touchTracker.isTracking;
+}
+
+- (void)reloadData {
+    // no-op by default.
+}
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
+    [self.progressView setProgress:progress animated:animated];
+    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+        [self.progressView setAlpha:(progress == 0) ? 0 : 1];
+    }];
+}
+
+- (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated {
+    [self setContentViewHidden:hidden animated:animated completion:nil];
+}
+
+- (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL))completion {
+    
+    NSTimeInterval totalDuration = 1.0;
+    NSTimeInterval hideDuration = 0.2;
+    NSTimeInterval remainDuration = totalDuration - hideDuration;
+    
+    [UIView animateWithDuration:animated ? hideDuration : 0 delay:0.0 options:0 animations:^{
+        [self.contentView setAlpha:hidden ? 0 : 1];
+    } completion:^(BOOL finished) {
+        if (completion) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(remainDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                completion(finished);
+            });
+        }
+    }];
+}
+
+
+#pragma mark - UIView
+
++ (BOOL)requiresConstraintBasedLayout {
+    return YES;
 }
 
 

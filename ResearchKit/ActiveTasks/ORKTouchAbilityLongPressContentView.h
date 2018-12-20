@@ -54,11 +54,6 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) UIView *targetView;
 @property (nonatomic, weak) id<ORKTouchAbilityLongPressContentViewDataSource> _Nullable dataSource;
 
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated;
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
-- (void)reloadData;
-
 @end
 
 NS_ASSUME_NONNULL_END

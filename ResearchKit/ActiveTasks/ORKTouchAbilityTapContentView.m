@@ -41,7 +41,6 @@
 @property (nonatomic, assign) NSUInteger targetRow;
 @property (nonatomic, assign) CGSize targetSize;
 
-@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UIView *targetView;
 @property (nonatomic, copy) NSArray *targetConstraints;
 
@@ -56,36 +55,19 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        self.progressView.progressTintColor = self.tintColor;
-        self.progressView.isAccessibilityElement = YES;
-        [self.progressView setAlpha:0.0];
-        [self.progressView setProgress:0.0 animated:NO];
         
         self.targetView.backgroundColor = self.tintColor;
-
-        self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
         self.targetView.translatesAutoresizingMaskIntoConstraints = NO;
-
-        [self addSubview:self.progressView];
-        [self addSubview:self.targetView];
         
-        NSArray *progressConstraints = @[[self.progressView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor],
-                                         [self.progressView.leftAnchor constraintEqualToAnchor:self.readableContentGuide.leftAnchor],
-                                         [self.progressView.rightAnchor constraintEqualToAnchor:self.readableContentGuide.rightAnchor]];
+        [self.contentView addSubview:self.targetView];
         
-        [NSLayoutConstraint activateConstraints:progressConstraints];
-        
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.progressView.bottomAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.layoutMarginsGuide.bottomAnchor];
+        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
+        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
         
         topConstraint.priority = UILayoutPriorityFittingSizeLevel;
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
         [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
-        
-        [self reloadData];
     }
     return self;
 }
@@ -109,34 +91,6 @@
     if (self.superview != nil) {
         [self reloadData];
     }
-}
-
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
-    [self.progressView setProgress:progress animated:animated];
-    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.progressView setAlpha:(progress == 0) ? 0 : 1];
-    }];
-}
-
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated {
-    [self setTargetViewHidden:hidden animated:animated completion:nil];
-}
-
-- (void)setTargetViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL))completion {
-    
-    NSTimeInterval totalDuration = 1.0;
-    NSTimeInterval hideDuration = 0.2;
-    NSTimeInterval remainDuration = totalDuration - hideDuration;
-    
-    [UIView animateWithDuration:animated ? hideDuration : 0 delay:0.0 options:0 animations:^{
-        [self.targetView setAlpha:hidden ? 0 : 1];
-    } completion:^(BOOL finished) {
-        if (completion) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(remainDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                completion(finished);
-            });
-        }
-    }];
 }
 
 - (void)reloadData {
@@ -167,8 +121,8 @@
         return;
     }
     
-    CGFloat width = self.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
-    CGFloat height = self.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
+    CGFloat width = self.contentView.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
+    CGFloat height = self.contentView.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
 
     CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
     CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
@@ -179,8 +133,8 @@
 
     NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
     NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
-    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.layoutMarginsGuide.leftAnchor constant:columnMidX];
-    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor constant:rowMidY];
+    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leftAnchor constant:columnMidX];
+    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor constant:rowMidY];
 
     NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
     [NSLayoutConstraint activateConstraints:constraints];
@@ -193,13 +147,6 @@
         _targetView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _targetView;
-}
-
-- (UIProgressView *)progressView {
-    if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    }
-    return _progressView;
 }
 
 @end
