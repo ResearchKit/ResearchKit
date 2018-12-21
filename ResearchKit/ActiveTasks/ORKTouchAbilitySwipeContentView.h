@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKTouchAbilityCustomView.h"
+#import "ORKTouchAbilityContentView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ORKTouchAbilitySwipeContentView : ORKTouchAbilityCustomView
+@interface ORKTouchAbilitySwipeContentView : ORKTouchAbilityContentView
 
 @property (nonatomic, weak) id<ORKTouchAbilitySwipeContentViewDataSource> _Nullable dataSource;
 

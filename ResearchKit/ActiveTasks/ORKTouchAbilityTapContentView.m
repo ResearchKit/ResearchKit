@@ -81,8 +81,21 @@
         
         [self.contentView addSubview:self.targetView];
         
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.targetView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                            toItem:self.contentView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+        
+        NSLayoutConstraint *bottomConstriant = [NSLayoutConstraint constraintWithItem:self.targetView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self.contentView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         
         topConstraint.priority = UILayoutPriorityFittingSizeLevel;
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
@@ -107,25 +120,53 @@
         return;
     }
     
-    CGFloat width = self.contentView.layoutMarginsGuide.layoutFrame.size.width / self.numberOfColumns;
-    CGFloat height = self.contentView.layoutMarginsGuide.layoutFrame.size.height / self.numberOfRows;
+    CGFloat width = self.contentView.frame.size.width / self.numberOfColumns;
+    CGFloat height = self.contentView.frame.size.height / self.numberOfRows;
     
     CGFloat columnMidX = width * (self.targetColumn + 1.0/2.0);
     CGFloat rowMidY = height * (self.targetRow + 1.0/2.0);
     
     if (self.targetConstraints != nil) {
         [NSLayoutConstraint deactivateConstraints:self.targetConstraints];
+        self.targetConstraints = nil;
     }
     
-    NSLayoutConstraint *widthConstraint = [self.targetView.widthAnchor constraintEqualToConstant:self.targetSize.width];
-    NSLayoutConstraint *heightConstraint = [self.targetView.heightAnchor constraintEqualToConstant:self.targetSize.height];
-    NSLayoutConstraint *centerXConstraint = [self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.leftAnchor constant:columnMidX];
-    NSLayoutConstraint *centerYConstraint = [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor constant:rowMidY];
+    NSMutableArray *constraintsArray = [NSMutableArray array];
     
-    NSArray *constraints = @[widthConstraint, heightConstraint, centerXConstraint, centerYConstraint];
-    [NSLayoutConstraint activateConstraints:constraints];
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                             attribute:NSLayoutAttributeWidth
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:nil
+                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                            multiplier:1.0
+                                                              constant:self.targetSize.width]];
+
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:nil
+                                                             attribute:NSLayoutAttributeNotAnAttribute
+                                                            multiplier:1.0
+                                                              constant:self.targetSize.height]];
     
-    self.targetConstraints = constraints;
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                             attribute:NSLayoutAttributeCenterX
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.contentView
+                                                             attribute:NSLayoutAttributeLeft
+                                                            multiplier:1.0
+                                                              constant:columnMidX]];
+    
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                             attribute:NSLayoutAttributeCenterY
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.contentView
+                                                             attribute:NSLayoutAttributeTop
+                                                            multiplier:1.0
+                                                              constant:rowMidY]];
+    
+    self.targetConstraints = constraintsArray;
+    [NSLayoutConstraint activateConstraints:self.targetConstraints];
 }
 
 

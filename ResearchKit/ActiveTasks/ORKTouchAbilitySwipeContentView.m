@@ -78,15 +78,47 @@
         
         [self.contentView addSubview:self.arrowView];
         
-        NSLayoutConstraint *centerXConstraint = [self.arrowView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor];
-        NSLayoutConstraint *centerYConstraint = [self.arrowView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor];
-        NSLayoutConstraint *topConstraint = [self.arrowView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.arrowView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
+        NSMutableArray *constraintsArray = [NSMutableArray array];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.arrowView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.arrowView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.arrowView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                            toItem:self.contentView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+        
+        NSLayoutConstraint *bottomConstriant = [NSLayoutConstraint constraintWithItem:self.arrowView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self.contentView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         
         topConstraint.priority = UILayoutPriorityFittingSizeLevel;
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
-        [NSLayoutConstraint activateConstraints:@[centerXConstraint, centerYConstraint, topConstraint, bottomConstriant]];
+        [constraintsArray addObject:topConstraint];
+        [constraintsArray addObject:bottomConstriant];
+        
+        [NSLayoutConstraint activateConstraints:constraintsArray];
         
         self.swipeUpGestureRecognizer.enabled    = NO;
         self.swipeDownGestureRecognizer.enabled  = NO;

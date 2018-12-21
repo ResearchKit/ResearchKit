@@ -49,7 +49,7 @@
 #import "ORKHelpers_Internal.h"
 
 
-@interface ORKTouchAbilityLongPressStepViewController () <ORKTouchAbilityLongPressContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
+@interface ORKTouchAbilityLongPressStepViewController () <ORKTouchAbilityLongPressContentViewDataSource, ORKTouchAbilityContentViewDelegate>
 
 // Data
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
@@ -88,7 +88,7 @@
     
     ORKTouchAbilityLongPressResult *lpResult = [[ORKTouchAbilityLongPressResult alloc] initWithIdentifier:self.step.identifier];
     
-    lpResult.trials = [self.trials mutableCopy];
+    lpResult.trials = self.trials;
     
     [results addObject:lpResult];
     sResult.results = [results copy];
@@ -180,13 +180,13 @@
 }
 
 
-#pragma mark - ORKTouchAbilityCustomViewDelegate
+#pragma mark - ORKTouchAbilityContentViewDelegate
 
-- (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidBeginNewTrack:(ORKTouchAbilityContentView *)contentView {
     
 }
 
-- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
     
     [self.targetPointsQueue removeLastObject];
     
@@ -197,27 +197,27 @@
     NSUInteger done = total - self.targetPointsQueue.count;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [customView setProgress:progress animated:YES];
+    [contentView setProgress:progress animated:YES];
     
     
     // Animate the target view.
     
-    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [customView stopTracking];
+        [contentView stopTracking];
         
-        [self.trials addObject:(ORKTouchAbilityLongPressTrial *)customView.trial];
+        [self.trials addObject:(ORKTouchAbilityLongPressTrial *)contentView.trial];
         
         // Determind if should continue or finish.
         
         if (self.targetPointsQueue.count > 0) {
             
             // Reload and start tracking again.
-            [customView reloadData];
-            [customView setContentViewHidden:NO animated:NO];
-            [customView startTracking];
+            [contentView reloadData];
+            [contentView setContentViewHidden:NO animated:NO];
+            [contentView startTracking];
             
         } else {
             

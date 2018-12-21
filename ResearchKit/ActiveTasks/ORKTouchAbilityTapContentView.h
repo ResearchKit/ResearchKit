@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKTouchAbilityCustomView.h"
+#import "ORKTouchAbilityContentView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,11 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityTapContentView : ORKTouchAbilityCustomView
-
-@property (nonatomic, readonly) UIView *targetView;
+@interface ORKTouchAbilityTapContentView : ORKTouchAbilityContentView
 @property (nonatomic, weak) id<ORKTouchAbilityTapContentViewDataSource> _Nullable dataSource;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -46,7 +46,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
-@interface ORKTouchAbilityPinchStepViewController () <ORKTouchAbilityPinchContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
+@interface ORKTouchAbilityPinchStepViewController () <ORKTouchAbilityPinchContentViewDataSource, ORKTouchAbilityContentViewDelegate>
 
 // Data
 @property (nonatomic, assign) NSUInteger currentTrialIndex;
@@ -83,7 +83,7 @@
     
     ORKTouchAbilityPinchResult *pinchResult = [[ORKTouchAbilityPinchResult alloc] initWithIdentifier:self.step.identifier];
     
-    pinchResult.trials = [self.trials mutableCopy];
+    pinchResult.trials = self.trials;
     
     [results addObject:pinchResult];
     sResult.results = [results copy];
@@ -145,9 +145,9 @@
 }
 
 
-#pragma mark - ORKTouchAbilityCustomViewDelegate
+#pragma mark - ORKTouchAbilityContentViewDelegate
 
-- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
     
     // Calculate current progress and display using progress view.
     
@@ -155,17 +155,17 @@
     NSUInteger done = self.currentTrialIndex + 1;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [customView setProgress:progress animated:YES];
+    [contentView setProgress:progress animated:YES];
     
     // Animate the target view.
     
-    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [customView stopTracking];
+        [contentView stopTracking];
         
-        [self.trials addObject:(ORKTouchAbilityPinchTrial *)customView.trial];
+        [self.trials addObject:(ORKTouchAbilityPinchTrial *)contentView.trial];
         
         // Determind if should continue or finish.
         
@@ -173,9 +173,9 @@
         if (self.currentTrialIndex < self.targetScaleQueue.count) {
             
             // Reload and start tracking again.
-            [customView reloadData];
-            [customView setContentViewHidden:NO animated:NO];
-            [customView startTracking];
+            [contentView reloadData];
+            [contentView setContentViewHidden:NO animated:NO];
+            [contentView startTracking];
             
         } else {
             

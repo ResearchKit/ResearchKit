@@ -46,7 +46,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
-@interface ORKTouchAbilityRotationStepViewController () <ORKTouchAbilityRotationContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
+@interface ORKTouchAbilityRotationStepViewController () <ORKTouchAbilityRotationContentViewDataSource, ORKTouchAbilityContentViewDelegate>
 
 // Data
 @property (nonatomic, assign) NSUInteger currentTrialIndex;
@@ -83,7 +83,7 @@
     
     ORKTouchAbilityRotationResult *rotationResult = [[ORKTouchAbilityRotationResult alloc] initWithIdentifier:self.step.identifier];
     
-    rotationResult.trials = [self.trials mutableCopy];
+    rotationResult.trials = self.trials;
     
     [results addObject:rotationResult];
     sResult.results = [results copy];
@@ -146,25 +146,25 @@
 }
 
 
-#pragma mark - ORKTouchAbilityCustomViewDelegate
+#pragma mark - ORKTouchAbilityContentViewDelegate
 
-- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
     
     NSUInteger total = self.targetRotationQueue.count;
     NSUInteger done = self.currentTrialIndex + 1;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [customView setProgress:progress animated:YES];
+    [contentView setProgress:progress animated:YES];
     
     // Animate the target view.
     
-    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [customView stopTracking];
+        [contentView stopTracking];
         
-        [self.trials addObject:(ORKTouchAbilityRotationTrial *)customView.trial];
+        [self.trials addObject:(ORKTouchAbilityRotationTrial *)contentView.trial];
         
         // Determind if should continue or finish.
         
@@ -172,9 +172,9 @@
         if (self.currentTrialIndex < self.targetRotationQueue.count) {
             
             // Reload and start tracking again.
-            [customView reloadData];
-            [customView setContentViewHidden:NO animated:NO];
-            [customView startTracking];
+            [contentView reloadData];
+            [contentView setContentViewHidden:NO animated:NO];
+            [contentView startTracking];
             
         } else {
             

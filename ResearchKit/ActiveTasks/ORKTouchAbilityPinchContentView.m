@@ -98,33 +98,116 @@
         [self.contentView addSubview:self.targetView];
         [self.contentView addSubview:self.guideView];
 
+        NSMutableArray *constraintsArray = [NSMutableArray array];
         
-        NSArray *targetConstraints = @[[self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
-                                       [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor],
-                                       [self.targetView.widthAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.widthAnchor multiplier:0.3],
-                                       [self.targetView.heightAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.heightAnchor multiplier:0.3],
-                                       [self.targetView.widthAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.heightAnchor multiplier:0.3],
-                                       [self.targetView.heightAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.widthAnchor multiplier:0.3]];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
         
-        [NSLayoutConstraint activateConstraints:targetConstraints];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
         
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                multiplier:1.0/3.0
+                                                                  constant:0.0]];
+
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                multiplier:1.0/3.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                multiplier:1.0/3.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                multiplier:1.0/3.0
+                                                                  constant:0.0]];
+        
+        [NSLayoutConstraint activateConstraints:constraintsArray];
+        
+        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.targetView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                            toItem:self.contentView
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+        
+        NSLayoutConstraint *bottomConstriant = [NSLayoutConstraint constraintWithItem:self.targetView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self.contentView
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         
         topConstraint.priority = UILayoutPriorityFittingSizeLevel;
         bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
         
-        [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
+        [constraintsArray addObject:topConstraint];
+        [constraintsArray addObject:bottomConstriant];
         
-        self.guideWidthConstraint = [self.guideView.widthAnchor constraintEqualToAnchor:self.targetView.widthAnchor];
-        self.guideHeightConstraint = [self.guideView.heightAnchor constraintEqualToAnchor:self.targetView.heightAnchor];
+        self.guideWidthConstraint = [NSLayoutConstraint constraintWithItem:self.guideView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.targetView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                multiplier:1.0
+                                                                  constant:0.0];
         
-        NSArray *guideConstraint = @[[self.guideView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
-                                     [self.guideView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor],
-                                     self.guideWidthConstraint,
-                                     self.guideHeightConstraint];
+        self.guideHeightConstraint = [NSLayoutConstraint constraintWithItem:self.guideView
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.targetView
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                 multiplier:1.0
+                                                                   constant:0.0];
         
-        [NSLayoutConstraint activateConstraints:guideConstraint];
+        [constraintsArray addObject:self.guideWidthConstraint];
+        [constraintsArray addObject:self.guideHeightConstraint];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.guideView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.guideView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [NSLayoutConstraint activateConstraints:constraintsArray];
         
         [self.contentView addGestureRecognizer:self.pinchGestureRecognizer];
         self.pinchGestureRecognizer.enabled = NO;
@@ -170,8 +253,21 @@
     
     [NSLayoutConstraint deactivateConstraints:@[self.guideWidthConstraint, self.guideHeightConstraint]];
     
-    self.guideWidthConstraint = [self.guideView.widthAnchor constraintEqualToAnchor:self.targetView.widthAnchor multiplier:self.targetScale];
-    self.guideHeightConstraint = [self.guideView.heightAnchor constraintEqualToAnchor:self.targetView.heightAnchor multiplier:self.targetScale];
+    self.guideWidthConstraint = [NSLayoutConstraint constraintWithItem:self.guideView
+                                                             attribute:NSLayoutAttributeWidth
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.targetView
+                                                             attribute:NSLayoutAttributeWidth
+                                                            multiplier:self.targetScale
+                                                              constant:0.0];
+    
+    self.guideHeightConstraint = [NSLayoutConstraint constraintWithItem:self.guideView
+                                                              attribute:NSLayoutAttributeHeight
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.targetView
+                                                              attribute:NSLayoutAttributeHeight
+                                                             multiplier:self.targetScale
+                                                               constant:0.0];
     
     [NSLayoutConstraint activateConstraints:@[self.guideWidthConstraint, self.guideHeightConstraint]];
     

@@ -48,7 +48,7 @@
 #import "ORKHelpers_Internal.h"
 
 
-@interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityCustomViewDelegate>
+@interface ORKTouchAbilityTapStepViewController () <ORKTouchAbilityTapContentViewDataSource, ORKTouchAbilityContentViewDelegate>
 
 // Data
 @property (nonatomic, strong) NSMutableArray<NSValue *> *targetPointsQueue;
@@ -87,7 +87,7 @@
     
     ORKTouchAbilityTapResult *tapResult = [[ORKTouchAbilityTapResult alloc] initWithIdentifier:self.step.identifier];
     
-    tapResult.trials = [self.trials mutableCopy];
+    tapResult.trials = self.trials;
     
     [results addObject:tapResult];
     sResult.results = [results copy];
@@ -195,13 +195,13 @@
 }
 
 
-#pragma mark - ORKTouchAbilityCustomViewDelegate
+#pragma mark - ORKTouchAbilityContentViewDelegate
 
-- (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidBeginNewTrack:(ORKTouchAbilityContentView *)contentView {
     
 }
 
-- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView {
+- (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
     
     [self.targetPointsQueue removeLastObject];
     
@@ -211,27 +211,27 @@
     NSUInteger done = total - self.targetPointsQueue.count;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
-    [customView setProgress:progress animated:YES];
+    [contentView setProgress:progress animated:YES];
     
     // Animate the target view.
     
     // Note: there is no retain cycle.
-    [customView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+    [contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
         
         // Stop tracking new touch events.
         
-        [customView stopTracking];
+        [contentView stopTracking];
         
-        [self.trials addObject:(ORKTouchAbilityTapTrial *)customView.trial];
+        [self.trials addObject:(ORKTouchAbilityTapTrial *)contentView.trial];
         
         // Determind if should continue or finish.
         
         if (self.targetPointsQueue.count > 0) {
             
             // Reload and start tracking again.
-            [customView reloadData];
-            [customView setContentViewHidden:NO animated:NO];
-            [customView startTracking];
+            [contentView reloadData];
+            [contentView setContentViewHidden:NO animated:NO];
+            [contentView startTracking];
             
         } else {
             

@@ -87,15 +87,57 @@
         [self.contentView addSubview:self.targetView];
         [self.contentView addSubview:self.guideView];
         
-        [NSLayoutConstraint activateConstraints:@[[self.targetView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
-                                                  [self.targetView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor],
-                                                  [self.guideView.centerXAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerXAnchor],
-                                                  [self.guideView.centerYAnchor constraintEqualToAnchor:self.contentView.layoutMarginsGuide.centerYAnchor]]];
+        NSMutableArray *constraintsArray = [NSMutableArray array];
         
-        NSLayoutConstraint *topConstraint = [self.targetView.topAnchor constraintGreaterThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.topAnchor];
-        NSLayoutConstraint *bottomConstriant = [self.targetView.bottomAnchor constraintLessThanOrEqualToAnchor:self.contentView.layoutMarginsGuide.bottomAnchor];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
         
-        [NSLayoutConstraint activateConstraints:@[topConstraint, bottomConstriant]];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.guideView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.guideView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                    toItem:self.contentView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [NSLayoutConstraint activateConstraints:constraintsArray];
         
         [self.contentView addGestureRecognizer:self.rotationGestureRecognizer];
         self.rotationGestureRecognizer.enabled = NO;

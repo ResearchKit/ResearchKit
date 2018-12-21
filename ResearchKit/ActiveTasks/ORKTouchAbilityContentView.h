@@ -34,27 +34,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKTouchAbilityCustomView;
-@protocol ORKTouchAbilityCustomViewDelegate <NSObject>
+@class ORKTouchAbilityContentView;
+
+#pragma mark - ORKTouchAbilityContentViewDelegate
+
+@protocol ORKTouchAbilityContentViewDelegate <NSObject>
 
 @optional
-- (void)touchAbilityCustomViewDidBeginNewTrack:(ORKTouchAbilityCustomView *)customView;
-- (void)touchAbilityCustomViewDidCompleteNewTracks:(ORKTouchAbilityCustomView *)customView;
+- (void)touchAbilityContentViewDidBeginNewTrack:(ORKTouchAbilityContentView *)contentView;
+- (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView;
 
 @end
 
 @class ORKTouchAbilityTrial;
 @class ORKTouchAbilityTrack;
 @class ORKTouchAbilityGestureRecoginzerEvent;
-@interface ORKTouchAbilityCustomView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
 
-@property (nonatomic, readonly) ORKTouchAbilityTrial *trial;
+
+#pragma mark - ORKTouchAbilityCustomView
+
+@interface ORKTouchAbilityContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
+
 @property (nonatomic, readonly) UIView *contentView;
 
+@property (nonatomic, readonly) ORKTouchAbilityTrial *trial;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
-@property (nonatomic, weak) id<ORKTouchAbilityCustomViewDelegate> _Nullable delegate;
+@property (nonatomic, weak) id<ORKTouchAbilityContentViewDelegate> _Nullable delegate;
 
 - (void)startTracking;
 - (void)stopTracking;

@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKTouchAbilityCustomView.h"
+#import "ORKTouchAbilityContentView.h"
 
 #import "ORKTouchAbilityTrial.h"
 #import "ORKTouchAbilityTrial_Internal.h"
@@ -37,7 +37,7 @@
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
 
-@interface ORKTouchAbilityCustomView () <ORKTouchAbilityTouchTrackerDelegate>
+@interface ORKTouchAbilityContentView () <ORKTouchAbilityTouchTrackerDelegate>
 
 @property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
 @property (nonatomic, readwrite) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
@@ -55,9 +55,11 @@
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIProgressView *progressView;
 
+@property (nonatomic, copy) NSArray *contentConstraints;
+
 @end
 
-@implementation ORKTouchAbilityCustomView
+@implementation ORKTouchAbilityContentView
 
 
 #pragma mark - Properties
@@ -131,18 +133,55 @@
         [self addSubview:self.contentView];
         [self addSubview:self.progressView];
         
-        NSArray *contentConstraints = @[[self.contentView.topAnchor constraintEqualToAnchor:self.topAnchor],
-                                        [self.contentView.leftAnchor constraintEqualToAnchor:self.leftAnchor],
-                                        [self.contentView.rightAnchor constraintEqualToAnchor:self.rightAnchor],
-                                        [self.contentView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]];
+        NSMutableArray *constraintsArray = [NSMutableArray array];
         
-        [NSLayoutConstraint activateConstraints:contentConstraints];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
         
-        NSArray *progressConstraints = @[[self.progressView.topAnchor constraintEqualToAnchor:self.layoutMarginsGuide.topAnchor],
-                                         [self.progressView.leftAnchor constraintEqualToAnchor:self.readableContentGuide.leftAnchor],
-                                         [self.progressView.rightAnchor constraintEqualToAnchor:self.readableContentGuide.rightAnchor]];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                 attribute:NSLayoutAttributeLeft
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeLeft
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
         
-        [NSLayoutConstraint activateConstraints:progressConstraints];
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                 attribute:NSLayoutAttributeRight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeRight
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.progressView
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
+                                                                                      options:0
+                                                                                      metrics:nil
+                                                                                        views:NSDictionaryOfVariableBindings(_progressView)]];
+        
+        [NSLayoutConstraint activateConstraints:constraintsArray];
+        
         
         // Gesture recognizers
         
@@ -387,8 +426,8 @@
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(touchAbilityCustomViewDidBeginNewTrack:)]) {
-        [self.delegate touchAbilityCustomViewDidBeginNewTrack:self];
+    if ([self.delegate respondsToSelector:@selector(touchAbilityContentViewDidBeginNewTrack:)]) {
+        [self.delegate touchAbilityContentViewDidBeginNewTrack:self];
     }
 }
 
@@ -398,8 +437,8 @@
         return;
     }
     
-    if ([self.delegate respondsToSelector:@selector(touchAbilityCustomViewDidCompleteNewTracks:)]) {
-        [self.delegate touchAbilityCustomViewDidCompleteNewTracks:self];
+    if ([self.delegate respondsToSelector:@selector(touchAbilityContentViewDidCompleteNewTracks:)]) {
+        [self.delegate touchAbilityContentViewDidCompleteNewTracks:self];
     }
 }
 
