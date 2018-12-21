@@ -200,16 +200,16 @@
     
     self.success = NO;
     
-    self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
-    self.numberOfRows    = [self.dataSource numberOfRows:self]    ?: 1;
-    self.targetColumn    = [self.dataSource targetColumn:self]    ?: 0;
-    self.targetRow       = [self.dataSource targetRow:self]       ?: 0;
+    self.numberOfColumns = [self.dataSource numberOfColumnsInTapContentView:self] ?: 1;
+    self.numberOfRows    = [self.dataSource numberOfRowsInTapContentView:self]    ?: 1;
+    self.targetColumn    = [self.dataSource targetColumnInTapContentView:self]    ?: 0;
+    self.targetRow       = [self.dataSource targetRowInTapContentView:self]       ?: 0;
     
     NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
     NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
     
-    if ([self.dataSource respondsToSelector:@selector(targetSize:)]) {
-        self.targetSize = [self.dataSource targetSize:self];
+    if ([self.dataSource respondsToSelector:@selector(targetSizeInTapContentView:)]) {
+        self.targetSize = [self.dataSource targetSizeInTapContentView:self];
     } else {
         self.targetSize = CGSizeMake(76, 76);
     }

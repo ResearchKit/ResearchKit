@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKTouchAbilityPinchContentViewDataSource <NSObject>
 
 @required
-- (CGFloat)targetScale:(ORKTouchAbilityPinchContentView *)pinchContentView;
+- (CGFloat)targetScaleInPinchContentView:(ORKTouchAbilityPinchContentView *)pinchContentView;
 
 @end
 

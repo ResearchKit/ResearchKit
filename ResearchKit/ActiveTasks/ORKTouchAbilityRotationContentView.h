@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKTouchAbilityRotationContentViewDataSource <NSObject>
 
 @required
-- (CGFloat)targetRotation:(ORKTouchAbilityRotationContentView *)rotationContentView;
+- (CGFloat)targetRotationInRotationContentView:(ORKTouchAbilityRotationContentView *)rotationContentView;
 
 @end
 

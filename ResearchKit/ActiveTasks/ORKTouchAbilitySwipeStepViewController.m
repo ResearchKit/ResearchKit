@@ -148,7 +148,7 @@
 
 #pragma mark - ORKTouchAbilitySwipeContentViewDataSource
 
-- (UISwipeGestureRecognizerDirection)targetDirection:(ORKTouchAbilitySwipeContentView *)swipeContentView {
+- (UISwipeGestureRecognizerDirection)targetDirectionInSwipeContentView:(ORKTouchAbilitySwipeContentView *)swipeContentView {
     return [self.targetDirectionQueue[self.currentTrialIndex] intValue];
 
 }

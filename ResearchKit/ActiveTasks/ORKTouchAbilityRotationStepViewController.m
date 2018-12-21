@@ -141,7 +141,7 @@
 
 #pragma mark - ORKTouchAbilityRotationContentViewDataSource
 
-- (CGFloat)targetRotation:(ORKTouchAbilityRotationContentView *)rotationContentView {
+- (CGFloat)targetRotationInRotationContentView:(ORKTouchAbilityRotationContentView *)rotationContentView {
     return [self.targetRotationQueue[self.currentTrialIndex] doubleValue];
 }
 

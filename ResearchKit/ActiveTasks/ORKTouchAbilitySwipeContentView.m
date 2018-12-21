@@ -177,8 +177,8 @@
     self.success = NO;
     self.resultDirection = UISwipeGestureRecognizerDirectionRight;
     
-    if ([self.dataSource respondsToSelector:@selector(targetDirection:)]) {
-        self.targetDirection = [self.dataSource targetDirection:self];
+    if ([self.dataSource respondsToSelector:@selector(targetDirectionInSwipeContentView:)]) {
+        self.targetDirection = [self.dataSource targetDirectionInSwipeContentView:self];
     } else {
         self.targetDirection = UISwipeGestureRecognizerDirectionRight;
     }

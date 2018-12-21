@@ -200,16 +200,16 @@
     
     self.success = NO;
     
-    self.numberOfColumns = [self.dataSource numberOfColumns:self] ?: 1;
-    self.numberOfRows    = [self.dataSource numberOfRows:self]    ?: 1;
-    self.targetColumn    = [self.dataSource targetColumn:self]    ?: 0;
-    self.targetRow       = [self.dataSource targetRow:self]       ?: 0;
+    self.numberOfColumns = [self.dataSource numberOfColumnsInLongPressContentView:self] ?: 1;
+    self.numberOfRows    = [self.dataSource numberOfRowsInLongPressContentView:self]    ?: 1;
+    self.targetColumn    = [self.dataSource targetColumnInLongPressContentView:self]    ?: 0;
+    self.targetRow       = [self.dataSource targetRowInLongPressContentView:self]       ?: 0;
     
     NSAssert(self.targetColumn >= 0 && self.targetColumn < self.numberOfColumns, @"Target column out of bounds.");
     NSAssert(self.targetRow >= 0 && self.targetRow < self.numberOfRows, @"target row out of bounds.");
     
-    if ([self.dataSource respondsToSelector:@selector(targetSize:)]) {
-        self.targetSize = [self.dataSource targetSize:self];
+    if ([self.dataSource respondsToSelector:@selector(targetSizeInLongPressContentView:)]) {
+        self.targetSize = [self.dataSource targetSizeInLongPressContentView:self];
     } else {
         self.targetSize = CGSizeMake(76, 76);
     }

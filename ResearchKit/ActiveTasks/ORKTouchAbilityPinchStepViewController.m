@@ -140,7 +140,7 @@
 
 #pragma mark - ORKTouchAbilityPinchContentViewDataSource
 
-- (CGFloat)targetScale:(ORKTouchAbilityPinchContentView *)pinchContentView {
+- (CGFloat)targetScaleInPinchContentView:(ORKTouchAbilityPinchContentView *)pinchContentView {
     return [self.targetScaleQueue[self.currentTrialIndex] doubleValue];
 }
 

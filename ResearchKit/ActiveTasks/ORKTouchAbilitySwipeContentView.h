@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKTouchAbilitySwipeContentViewDataSource <NSObject>
 
 @required
-- (UISwipeGestureRecognizerDirection)targetDirection:(ORKTouchAbilitySwipeContentView *)swipeContentView;
+- (UISwipeGestureRecognizerDirection)targetDirectionInSwipeContentView:(ORKTouchAbilitySwipeContentView *)swipeContentView;
 
 @end
 

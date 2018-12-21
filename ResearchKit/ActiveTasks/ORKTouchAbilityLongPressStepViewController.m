@@ -163,19 +163,19 @@
 
 #pragma mark - ORKTouchAbilityTapContentViewDataSource
 
-- (NSUInteger)numberOfColumns:(ORKTouchAbilityLongPressContentView *)tapContentView {
+- (NSUInteger)numberOfColumnsInLongPressContentView:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self numberOfColumnsForTraitCollection:self.traitCollection];
 }
 
-- (NSUInteger)numberOfRows:(ORKTouchAbilityLongPressContentView *)tapContentView {
+- (NSUInteger)numberOfRowsInLongPressContentView:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self numberOfRowsForTraitCollection:self.traitCollection];
 }
 
-- (NSUInteger)targetColumn:(ORKTouchAbilityLongPressContentView *)tapContentView {
+- (NSUInteger)targetColumnInLongPressContentView:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self.targetPointsQueue.lastObject CGPointValue].x;
 }
 
-- (NSUInteger)targetRow:(ORKTouchAbilityLongPressContentView *)tapContentView {
+- (NSUInteger)targetRowInLongPressContentView:(ORKTouchAbilityLongPressContentView *)tapContentView {
     return [self.targetPointsQueue.lastObject CGPointValue].y;
 }
 

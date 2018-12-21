@@ -249,7 +249,7 @@
     
     self.targetView.transform = CGAffineTransformIdentity;
 
-    self.targetScale = [self.dataSource targetScale:self] ?: 1.0;
+    self.targetScale = [self.dataSource targetScaleInPinchContentView:self] ?: 1.0;
     
     [NSLayoutConstraint deactivateConstraints:@[self.guideWidthConstraint, self.guideHeightConstraint]];
     

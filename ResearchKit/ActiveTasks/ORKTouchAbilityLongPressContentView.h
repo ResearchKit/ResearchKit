@@ -38,13 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKTouchAbilityLongPressContentViewDataSource <NSObject>
 
 @required
-- (NSUInteger)numberOfColumns:(ORKTouchAbilityLongPressContentView *)longPressContentView;
-- (NSUInteger)numberOfRows:(ORKTouchAbilityLongPressContentView *)longPressContentView;
-- (NSUInteger)targetColumn:(ORKTouchAbilityLongPressContentView *)longPressContentView;
-- (NSUInteger)targetRow:(ORKTouchAbilityLongPressContentView *)longPressContentView;
+- (NSUInteger)numberOfColumnsInLongPressContentView:(ORKTouchAbilityLongPressContentView *)longPressContentView;
+- (NSUInteger)numberOfRowsInLongPressContentView:(ORKTouchAbilityLongPressContentView *)longPressContentView;
+- (NSUInteger)targetColumnInLongPressContentView:(ORKTouchAbilityLongPressContentView *)longPressContentView;
+- (NSUInteger)targetRowInLongPressContentView:(ORKTouchAbilityLongPressContentView *)longPressContentView;
 
 @optional
-- (CGSize)targetSize:(ORKTouchAbilityLongPressContentView *)longPressContentView;
+- (CGSize)targetSizeInLongPressContentView:(ORKTouchAbilityLongPressContentView *)longPressContentView;
 
 @end
 

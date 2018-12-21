@@ -38,13 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKTouchAbilityTapContentViewDataSource <NSObject>
 
 @required
-- (NSUInteger)numberOfColumns:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)numberOfRows:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)targetColumn:(ORKTouchAbilityTapContentView *)tapContentView;
-- (NSUInteger)targetRow:(ORKTouchAbilityTapContentView *)tapContentView;
+- (NSUInteger)numberOfColumnsInTapContentView:(ORKTouchAbilityTapContentView *)tapContentView;
+- (NSUInteger)numberOfRowsInTapContentView:(ORKTouchAbilityTapContentView *)tapContentView;
+- (NSUInteger)targetColumnInTapContentView:(ORKTouchAbilityTapContentView *)tapContentView;
+- (NSUInteger)targetRowInTapContentView:(ORKTouchAbilityTapContentView *)tapContentView;
 
 @optional
-- (CGSize)targetSize:(ORKTouchAbilityTapContentView *)tapContentView;
+- (CGSize)targetSizeInTapContentView:(ORKTouchAbilityTapContentView *)tapContentView;
 
 @end
 

@@ -177,7 +177,7 @@
 - (void)reloadData {
     [self resetTracks];
     
-    self.targetRotation = [self.dataSource targetRotation:self] ?: 0.0;
+    self.targetRotation = [self.dataSource targetRotationInRotationContentView:self] ?: 0.0;
     self.guideView.transform = CGAffineTransformMakeRotation(self.targetRotation);
     self.targetView.transform = CGAffineTransformIdentity;
 }
