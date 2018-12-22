@@ -28,21 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#import <UIKit/UIKit.h>
-#import "ORKTouchAbilityTrial.h"
+#import <ResearchKit/ResearchKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKTouchAbilityScrollTrial;
+
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
-
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
-@property (nonatomic, assign) BOOL success;
-
-- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
-
+@interface ORKTouchAbilityScrollResult : ORKStepResult
+@property (nonatomic, copy) NSArray<ORKTouchAbilityScrollTrial *> *trials;
 @end
 
 NS_ASSUME_NONNULL_END

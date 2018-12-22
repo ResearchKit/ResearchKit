@@ -29,19 +29,28 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKTouchAbilityTrial.h"
+@import UIKit;
+#import "ORKTouchAbilityContentView.h"
+#import "ORKTouchAbilityScrollTrial.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
+@class ORKTouchAbilityScrollContentView;
+@protocol ORKTouchAbilityScrollContentViewDataSource <NSObject>
 
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
-@property (nonatomic, assign) BOOL success;
+@required
+- (NSUInteger)numberOfItemsInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
+- (NSUInteger)initialItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
+- (NSUInteger)targetItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
 
-- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
+@end
+
+@interface ORKTouchAbilityScrollContentView : ORKTouchAbilityContentView
+
+@property (nonatomic, assign) ORKTouchAbilityScrollTrialDirection direction;
+@property (nonatomic, weak) id<ORKTouchAbilityScrollContentViewDataSource> _Nullable dataSource;
+
+@property (nonatomic, readonly) NSTimeInterval timeIntervalBeforeStopDecelarating;
 
 @end
 

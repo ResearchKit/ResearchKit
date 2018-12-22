@@ -34,14 +34,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, ORKTouchAbilityScrollTrialDirection) {
+    ORKTouchAbilityScrollTrialDirectionHorizontal,
+    ORKTouchAbilityScrollTrialDirectionVertical
+};
+
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
+@interface ORKTouchAbilityScrollTrial : ORKTouchAbilityTrial
 
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
-@property (nonatomic, assign) BOOL success;
+@property (nonatomic, assign) ORKTouchAbilityScrollTrialDirection direction;
 
-- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
+@property (nonatomic, assign) CGPoint initialOffset;
+@property (nonatomic, assign) CGPoint targetOffset;
+@property (nonatomic, assign) CGPoint endDraggingOffset;
+@property (nonatomic, assign) CGPoint endScrollingOffset;
 
 @end
 

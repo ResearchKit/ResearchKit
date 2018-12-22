@@ -127,7 +127,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"%@ dealloc", NSStringFromClass(self.class));
+    ORK_Log_Debug(@"%@ dealloc", NSStringFromClass(self.class));
 }
 
 #pragma mark - ORKTouchAbilityTapStepViewController

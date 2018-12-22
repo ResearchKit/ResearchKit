@@ -42,6 +42,8 @@
 @property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
 @property (nonatomic, readwrite) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
+@property (nonatomic, assign) BOOL shouldSendDelegateCallbacks;
+
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 @property (nonatomic, strong) UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong) UIPanGestureRecognizer *pan;
@@ -117,6 +119,7 @@
     if (self = [super initWithFrame:frame]) {
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.shouldSendDelegateCallbacks = YES;
         
         // Views
         
@@ -330,6 +333,8 @@
 
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(BOOL))completion {
     
+    self.shouldSendDelegateCallbacks = !hidden;
+    
     NSTimeInterval totalDuration = 1.0;
     NSTimeInterval hideDuration = 0.2;
     NSTimeInterval remainDuration = totalDuration - hideDuration;
@@ -422,7 +427,7 @@
 
 - (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker {
     
-    if (!self.isTracking) {
+    if (!self.isTracking || !self.shouldSendDelegateCallbacks) {
         return;
     }
     
@@ -433,7 +438,7 @@
 
 - (void)touchTrackerDidCompleteNewTracks:(ORKTouchAbilityTouchTracker *)touchTracker {
     
-    if (!self.isTracking) {
+    if (!self.isTracking || !self.shouldSendDelegateCallbacks) {
         return;
     }
     

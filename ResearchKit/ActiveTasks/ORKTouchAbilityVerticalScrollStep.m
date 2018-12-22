@@ -28,21 +28,33 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTouchAbilityVerticalScrollStep.h"
+#import "ORKTouchAbilityScrollStepViewController.h"
+#import "ORKhelpers_Internal.h"
 
-#import <UIKit/UIKit.h>
-#import "ORKTouchAbilityTrial.h"
+@implementation ORKTouchAbilityVerticalScrollStep
 
-NS_ASSUME_NONNULL_BEGIN
++ (Class)stepViewControllerClass {
+    return [ORKTouchAbilityScrollStepViewController class];
+}
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+        self.shouldContinueOnFinish = YES;
+    }
+    return self;
+}
 
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
-@property (nonatomic, assign) BOOL success;
+- (void)validateParameters {
+    [super validateParameters];
+    
+    // TODO:
+}
 
-- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
+- (BOOL)startsFinished {
+    return NO;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

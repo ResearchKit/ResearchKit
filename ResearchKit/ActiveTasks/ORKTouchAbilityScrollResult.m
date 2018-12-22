@@ -28,21 +28,46 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKTouchAbilityScrollResult.h"
+#import "ORKHelpers_Internal.h"
 
-#import <UIKit/UIKit.h>
-#import "ORKTouchAbilityTrial.h"
+@implementation ORKTouchAbilityScrollResult
 
-NS_ASSUME_NONNULL_BEGIN
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, trials);
+}
 
-ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilitySwipeTrial : ORKTouchAbilityTrial
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        ORK_ENCODE_OBJ(aDecoder, trials);
+    }
+    return self;
+}
 
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection targetDirection;
-@property (nonatomic, assign) UISwipeGestureRecognizerDirection resultDirection;
-@property (nonatomic, assign) BOOL success;
+- (BOOL)isEqual:(id)object {
+    
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(self.trials, castObject.trials);
+}
 
-- (instancetype)initWithTargetDirection:(UISwipeGestureRecognizerDirection)direction;
+- (NSUInteger)hash {
+    return super.hash ^ self.trials.hash;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityScrollResult *result = [super copyWithZone:zone];
+    result.trials = self.trials;
+    return result;
+}
+
+- (NSArray<ORKTouchAbilityScrollTrial *> *)trials {
+    if (!_trials) {
+        _trials = [NSArray new];
+    }
+    return _trials;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END
