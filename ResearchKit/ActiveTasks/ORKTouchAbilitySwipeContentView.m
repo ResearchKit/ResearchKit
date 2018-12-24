@@ -118,28 +118,6 @@
                                                                  attribute:NSLayoutAttributeCenterY
                                                                 multiplier:1.0
                                                                   constant:0.0]];
-
-        NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.arrowView
-                                                                         attribute:NSLayoutAttributeTop
-                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                            toItem:self.contentView
-                                                                         attribute:NSLayoutAttributeTop
-                                                                        multiplier:1.0
-                                                                          constant:0.0];
-        
-        NSLayoutConstraint *bottomConstriant = [NSLayoutConstraint constraintWithItem:self.arrowView
-                                                                            attribute:NSLayoutAttributeBottom
-                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                               toItem:self.contentView
-                                                                            attribute:NSLayoutAttributeBottom
-                                                                           multiplier:1.0
-                                                                             constant:0.0];
-        
-        topConstraint.priority = UILayoutPriorityFittingSizeLevel;
-        bottomConstriant.priority = UILayoutPriorityFittingSizeLevel;
-        
-        [constraintsArray addObject:topConstraint];
-        [constraintsArray addObject:bottomConstriant];
         
         [NSLayoutConstraint activateConstraints:constraintsArray];
         

@@ -36,6 +36,16 @@
 #import "ORKTouchAbilityTouchTracker.h"
 #import "ORKTouchAbilityGestureRecoginzerEvent.h"
 
+#import "ORKSkin.h"
+
+@interface _ORKTouchAbilityContentView : UIView
+@end
+
+@implementation _ORKTouchAbilityContentView
+- (CGSize)intrinsicContentSize {
+    return CGSizeMake(UIViewNoIntrinsicMetric, 10000.0);
+}
+@end
 
 @interface ORKTouchAbilityContentView () <ORKTouchAbilityTouchTrackerDelegate>
 
@@ -79,7 +89,7 @@
 
 - (UIView *)contentView {
     if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:CGRectZero];
+        _contentView = [[_ORKTouchAbilityContentView alloc] initWithFrame:CGRectZero];
     }
     return _contentView;
 }
@@ -136,55 +146,7 @@
         [self addSubview:self.contentView];
         [self addSubview:self.progressView];
         
-        NSMutableArray *constraintsArray = [NSMutableArray array];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                 attribute:NSLayoutAttributeLeft
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeLeft
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                 attribute:NSLayoutAttributeRight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeRight
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.progressView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
-                                                                                      options:0
-                                                                                      metrics:nil
-                                                                                        views:NSDictionaryOfVariableBindings(_progressView)]];
-        
-        [NSLayoutConstraint activateConstraints:constraintsArray];
-        
+        [self setContentCompressionResistancePriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisVertical];
         
         // Gesture recognizers
         
@@ -364,18 +326,65 @@
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    [self updateLayoutMargins];
     
     if (self.superview != nil) {
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
         [self reloadData];
     }
 }
 
 - (void)setBounds:(CGRect)bounds {
     [super setBounds:bounds];
+    [self updateLayoutMargins];
     
     if (self.superview != nil) {
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
         [self reloadData];
     }
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+    
+    if (self.contentConstraints != nil) {
+        [NSLayoutConstraint deactivateConstraints:self.contentConstraints];
+    }
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _progressView);
+    
+    NSMutableArray *constraintsArray = [NSMutableArray array];
+    
+    [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView]|"
+                                                                                  options:0
+                                                                                  metrics:nil
+                                                                                    views:views]];
+    
+    [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView]|"
+                                                                                  options:0
+                                                                                  metrics:nil
+                                                                                    views:views]];
+    
+    [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
+                                                                                  options:0
+                                                                                  metrics:nil
+                                                                                    views:views]];
+    
+    [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]"
+                                                                                  options:0
+                                                                                  metrics:nil
+                                                                                    views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraintsArray];
+    
+    self.contentConstraints = constraintsArray;
+}
+
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
 }
 
 #pragma mark - GestureRecognizer Handlers

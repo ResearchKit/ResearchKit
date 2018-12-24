@@ -121,22 +121,6 @@
                                                                 multiplier:1.0
                                                                   constant:0.0]];
         
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                    toItem:self.contentView
-                                                                 attribute:NSLayoutAttributeTop
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.targetView
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                    toItem:self.contentView
-                                                                 attribute:NSLayoutAttributeBottom
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
         [NSLayoutConstraint activateConstraints:constraintsArray];
         
         [self.contentView addGestureRecognizer:self.rotationGestureRecognizer];
