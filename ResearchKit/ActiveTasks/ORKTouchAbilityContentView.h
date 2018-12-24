@@ -31,6 +31,7 @@
 
 @import UIKit;
 #import "ORKCustomStepView_Internal.h"
+#import "ORKTouchAbilityTouchTracker.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,10 +51,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTouchAbilityTrack;
 @class ORKTouchAbilityGestureRecoginzerEvent;
 
-
 #pragma mark - ORKTouchAbilityCustomView
 
-@interface ORKTouchAbilityContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
+@interface ORKTouchAbilityContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate, ORKTouchAbilityTouchTrackerDelegate>
 
 @property (nonatomic, readonly) UIView *contentView;
 
@@ -75,6 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;
 
 + (Class)trialClass;
+
+- (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker;
+- (void)touchTrackerDidCompleteNewTracks:(ORKTouchAbilityTouchTracker *)touchTracker;
 
 @end
 

@@ -196,12 +196,22 @@ UICollectionViewDelegate
     }
     
     [self.collectionView setContentOffset:self.initialOffset animated:NO];
-//    self.collectionView.contentOffset = self.initialOffset;
     
     self.endDraggingOffset = CGPointZero;
     self.endScrollingOffset = CGPointZero;
 
     self.timeIntervalBeforeStopDecelarating = 0.0;
+}
+
+- (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker {
+    self.timeIntervalBeforeStopDecelarating = 0.0;
+    [super touchTrackerDidBeginNewTrack:touchTracker];
+}
+
+- (void)touchTrackerDidCompleteNewTracks:(ORKTouchAbilityTouchTracker *)touchTracker {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [super touchTrackerDidCompleteNewTracks:touchTracker];
+    });
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -273,8 +283,7 @@ UICollectionViewDelegate
     if (v <= 0) {
         self.timeIntervalBeforeStopDecelarating = 0.0;
     } else {
-        self.timeIntervalBeforeStopDecelarating = 0.0;
-        //self.timeIntervalBeforeStopDecelarating = (log(v) * 0.5) + 2.3;
+        self.timeIntervalBeforeStopDecelarating = (log(v) * 0.5) + 2.3;
     }
 }
 

@@ -47,7 +47,7 @@
 }
 @end
 
-@interface ORKTouchAbilityContentView () <ORKTouchAbilityTouchTrackerDelegate>
+@interface ORKTouchAbilityContentView ()
 
 @property (nonatomic, strong) ORKTouchAbilityTouchTracker *touchTracker;
 @property (nonatomic, readwrite) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
