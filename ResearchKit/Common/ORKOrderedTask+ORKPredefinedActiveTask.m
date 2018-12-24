@@ -82,6 +82,13 @@
 #import "ORKdBHLToneAudiometryStep.h"
 #import "ORKdBHLToneAudiometryOnboardingStep.h"
 #import "ORKSkin.h"
+#import "ORKTouchAbilityTapStep.h"
+#import "ORKTouchAbilityLongPressStep.h"
+#import "ORKTouchAbilitySwipeStep.h"
+#import "ORKTouchAbilityPinchStep.h"
+#import "ORKTouchAbilityRotationStep.h"
+#import "ORKTouchAbilityVerticalScrollStep.h"
+#import "ORKTouchAbilityHorizontalScrollStep.h"
 
 #import "ORKHelpers_Internal.h"
 #import "UIImage+ResearchKit.h"
@@ -2588,6 +2595,102 @@ NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
         ORKStepArrayAddStep(steps, step);
     }
 
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
+
+
+NSString *const ORKTouchAbilityTapStepIdentifier = @"touchAbilityTap";
+NSString *const ORKTouchAbilityLongPressStepIdentifier = @"touchAbilityLongPress";
+NSString *const ORKTouchAbilitySwipeStepIdentifier = @"touchAbilitySwipe";
+NSString *const ORKTouchAbilityPinchStepIdentifier = @"touchAbilityPinch";
+NSString *const ORKTouchAbilityRotationStepIdentifier = @"touchAbilityRotation";
+NSString *const ORKTouchAbilityVerticalScrollStepIdentifier = @"touchAbilityVerticalScroll";
+NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHorizontalScroll";
+
++ (ORKOrderedTask *)touchAbilityTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       taskOptions:(ORKTouchAbilityTaskOption)taskOptions
+                                           options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray<__kindof ORKStep *> *steps = [NSMutableArray array];
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = ORKLocalizedString(@"Tap Task Title", nil);
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"Tap Task Instructions.", nil);
+            step.image = [UIImage imageNamed:@"trailmaking" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+//    {
+//        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+//        step.title = ORKLocalizedString(@"Tap Task Title", nil);
+//        step.stepDuration = 3.0;
+//
+//        ORKStepArrayAddStep(steps, step);
+//    }
+    
+    if (taskOptions & ORKTouchAbilityTaskOptionTap) {
+        ORKTouchAbilityTapStep *step = [[ORKTouchAbilityTapStep alloc] initWithIdentifier:ORKTouchAbilityTapStepIdentifier];
+        step.title = @"Touch Ability Tap";
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+
+    if (taskOptions & ORKTouchAbilityTaskOptionLongPress) {
+        ORKTouchAbilityLongPressStep *step = [[ORKTouchAbilityLongPressStep alloc] initWithIdentifier:ORKTouchAbilityLongPressStepIdentifier];
+        step.title = @"Touch Ability Long Press";
+
+        ORKStepArrayAddStep(steps, step);
+    }
+
+    if (taskOptions & ORKTouchAbilityTaskOptionSwipe) {
+        ORKTouchAbilitySwipeStep *step = [[ORKTouchAbilitySwipeStep alloc] initWithIdentifier:ORKTouchAbilitySwipeStepIdentifier];
+        step.title = @"Touch Ability Swipe";
+
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    
+    if (taskOptions & ORKTouchAbilityTaskOptionScroll) {
+        ORKTouchAbilityVerticalScrollStep *step1 = [[ORKTouchAbilityVerticalScrollStep alloc] initWithIdentifier:ORKTouchAbilityVerticalScrollStepIdentifier];
+        step1.title = @"Touch Ability Vertical Scroll";
+
+        ORKStepArrayAddStep(steps, step1);
+
+        ORKTouchAbilityHorizontalScrollStep *step2 = [[ORKTouchAbilityHorizontalScrollStep alloc] initWithIdentifier:ORKTouchAbilityHorizontalScrollStepIdentifier];
+        step2.title = @"Touch Ability Horizontal Scroll";
+
+        ORKStepArrayAddStep(steps, step2);
+    }
+    
+    if (taskOptions & ORKTouchAbilityTaskOptionPinch) {
+        ORKTouchAbilityPinchStep *step = [[ORKTouchAbilityPinchStep alloc] initWithIdentifier:ORKTouchAbilityPinchStepIdentifier];
+        step.title = @"Touch Ability Pinch";
+
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (taskOptions & ORKTouchAbilityTaskOptionRotation) {
+        ORKTouchAbilityRotationStep *step = [[ORKTouchAbilityRotationStep alloc] initWithIdentifier:ORKTouchAbilityRotationStepIdentifier];
+        step.title = @"Touch Ability Rotation";
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
