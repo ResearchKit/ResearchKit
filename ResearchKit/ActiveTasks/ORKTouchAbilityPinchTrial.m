@@ -81,4 +81,13 @@
     return self;
 }
 
+- (NSString *)description {
+    
+    NSMutableString *sDescription = [[super description] mutableCopy];
+    [sDescription deleteCharactersInRange:NSMakeRange(0, 1)];
+    [sDescription deleteCharactersInRange:NSMakeRange(sDescription.length-1, 1)];
+    
+    return [NSString stringWithFormat:@"<%@; target scale: %@; result scale: %@>", sDescription, @(self.targetScale), @(self.resultScale)];
+}
+
 @end

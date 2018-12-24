@@ -77,4 +77,26 @@
             CGPointEqualToPoint(self.endScrollingOffset, castObject.endScrollingOffset));
 }
 
+- (NSString *)description {
+    
+    NSMutableString *sDescription = [[super description] mutableCopy];
+    [sDescription deleteCharactersInRange:NSMakeRange(0, 1)];
+    [sDescription deleteCharactersInRange:NSMakeRange(sDescription.length-1, 1)];
+    
+    NSString *directionString;
+    if (self.direction == ORKTouchAbilityScrollTrialDirectionVertical) {
+        directionString = @"vertical";
+    } else {
+        directionString = @"horizontal";
+    }
+    
+    return [NSString stringWithFormat:@"<%@; direction: %@; initial offset: %@; target offset: %@; end dragging offset: %@; end scrolling offset: %@;>",
+            sDescription,
+            directionString,
+            [NSValue valueWithCGPoint:self.initialOffset],
+            [NSValue valueWithCGPoint:self.targetOffset],
+            [NSValue valueWithCGPoint:self.endDraggingOffset],
+            [NSValue valueWithCGPoint:self.endDraggingOffset]];
+}
+
 @end

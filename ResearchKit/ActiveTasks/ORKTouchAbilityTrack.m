@@ -55,7 +55,7 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTrack *track = [[[self class] allocWithZone:zone] init];
-    track.touches = [self.touches mutableCopy];
+    track.touches = [self.touches copy];
     return track;
 }
 
@@ -79,6 +79,10 @@
         _touches = [NSArray new];
     }
     return _touches;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; touches: %@>", self.class.description, self, self.touches];
 }
 
 @end

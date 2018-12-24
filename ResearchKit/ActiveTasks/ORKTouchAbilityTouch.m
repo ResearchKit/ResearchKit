@@ -196,4 +196,27 @@
             (self.estimatedPropertiesExpectingUpdates == castObject.estimatedPropertiesExpectingUpdates));
 }
 
+- (NSString *)description {
+    NSString *phaseString;
+    switch (self.phase) {
+        case UITouchPhaseBegan:
+            phaseString = @"began";
+            break;
+        case UITouchPhaseMoved:
+            phaseString = @"moved";
+            break;
+        case UITouchPhaseEnded:
+            phaseString = @"ended";
+            break;
+        case UITouchPhaseCancelled:
+            phaseString = @"cancelled";
+            break;
+        case UITouchPhaseStationary:
+            phaseString = @"stationary";
+            break;
+    }
+    
+    return [NSString stringWithFormat:@"<%@: %p; phase: %@; timestamp: %.6f; location: (%@, %@)>", self.class.description, self, phaseString, self.timestamp, @(self.locationInWindow.x), @(self.locationInWindow.y)];
+}
+
 @end

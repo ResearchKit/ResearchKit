@@ -137,6 +137,20 @@
     return _locationInWindowOfTouchAtIndex;
 }
 
+- (NSString *)description {
+    NSString *stateString;
+    switch (self.state) {
+        case UIGestureRecognizerStatePossible:  stateString = @"possible";  break;
+        case UIGestureRecognizerStateBegan:     stateString = @"began";     break;
+        case UIGestureRecognizerStateChanged:   stateString = @"changed";   break;
+        case UIGestureRecognizerStateEnded:     stateString = @"ended";     break;
+        case UIGestureRecognizerStateFailed:    stateString = @"failed";    break;
+        case UIGestureRecognizerStateCancelled: stateString = @"cancelled"; break;
+    }
+    
+    return [NSString stringWithFormat:@"<%@: %p; state: %@; numberOfTouches: %@; location: (%@, %@)>", self.class.description, self, stateString, @(self.numberOfTouches), @(self.locationInWindow.x), @(self.locationInWindow.y)];
+}
+
 @end
 
 

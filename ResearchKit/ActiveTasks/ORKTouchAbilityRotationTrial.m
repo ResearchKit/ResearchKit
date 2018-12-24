@@ -31,6 +31,8 @@
 #import "ORKTouchAbilityRotationTrial.h"
 #import "ORKHelpers_Internal.h"
 
+#define radian2Degree(a) (a * 180.0 / M_PI)
+
 @implementation ORKTouchAbilityRotationTrial
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -79,6 +81,18 @@
         self.resultRotation = 0.0;
     }
     return self;
+}
+
+- (NSString *)description {
+    
+    NSMutableString *sDescription = [[super description] mutableCopy];
+    [sDescription deleteCharactersInRange:NSMakeRange(0, 1)];
+    [sDescription deleteCharactersInRange:NSMakeRange(sDescription.length-1, 1)];
+    
+    return [NSString stringWithFormat:@"<%@; target rotation: %@; result rotation: %@>",
+            sDescription,
+            @(radian2Degree(self.targetRotation)),
+            @(radian2Degree(self.resultRotation))];
 }
 
 @end

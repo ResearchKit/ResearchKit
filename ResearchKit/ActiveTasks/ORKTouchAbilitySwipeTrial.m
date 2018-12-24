@@ -78,4 +78,26 @@
     return self;
 }
 
+- (NSString *)description {
+    
+    NSMutableString *sDescription = [[super description] mutableCopy];
+    [sDescription deleteCharactersInRange:NSMakeRange(0, 1)];
+    [sDescription deleteCharactersInRange:NSMakeRange(sDescription.length-1, 1)];
+    
+    return [NSString stringWithFormat:@"<%@; target direction: %@; result direction: %@; success: %@>", sDescription, [self directionStringFor:self.targetDirection], [self directionStringFor:self.resultDirection], self.success ? @"true" : @"false"];
+}
+
+- (NSString *)directionStringFor:(UISwipeGestureRecognizerDirection)direction {
+    switch (direction) {
+        case UISwipeGestureRecognizerDirectionUp:
+            return @"up";
+        case UISwipeGestureRecognizerDirectionDown:
+            return @"down";
+        case UISwipeGestureRecognizerDirectionLeft:
+            return @"left";
+        case UISwipeGestureRecognizerDirectionRight:
+            return @"right";
+    }
+}
+
 @end

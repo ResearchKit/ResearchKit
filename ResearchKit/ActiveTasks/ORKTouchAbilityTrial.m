@@ -59,8 +59,8 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTrial *trial = [[[self class] allocWithZone:zone] init];
-    trial.tracks = [self.tracks mutableCopy];
-    trial.gestureRecognizerEvents = [self.gestureRecognizerEvents mutableCopy];
+    trial.tracks = [self.tracks copy];
+    trial.gestureRecognizerEvents = [self.gestureRecognizerEvents copy];
     return trial;
 }
 
@@ -88,6 +88,10 @@
         _gestureRecognizerEvents = [NSArray new];
     }
     return _gestureRecognizerEvents;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; tracks count: %@; gesture recognizer events count: %@>", self.class.description, self, @(self.tracks.count), @(self.gestureRecognizerEvents.count)];
 }
 
 @end
