@@ -50,6 +50,8 @@ UICollectionViewDelegate
 
 @property (nonatomic, assign) NSTimeInterval timeIntervalBeforeStopDecelarating;
 
+@property (nonatomic, strong) UIVisualEffectView *hintBlurView;
+@property (nonatomic, strong) UILabel *hintLabel;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 
@@ -91,6 +93,14 @@ UICollectionViewDelegate
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
+        self.hintBlurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+        self.hintBlurView.layer.cornerRadius = 8.0;
+        self.hintBlurView.layer.masksToBounds = YES;
+        
+        self.hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.hintLabel.textColor = [UIColor whiteColor];
+        self.hintLabel.font = [UIFont systemFontOfSize:28 weight:UIFontWeightMedium];
+        
         self.collectionView.backgroundColor = UIColor.clearColor;
         self.collectionView.delaysContentTouches = NO;
         self.collectionView.dataSource = self;
@@ -98,19 +108,67 @@ UICollectionViewDelegate
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
         
         self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView addSubview:self.collectionView];
+        self.hintBlurView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
+        [self.contentView addSubview:self.collectionView];
+        [self.contentView insertSubview:self.hintBlurView atIndex:10000];
+        [self.contentView insertSubview:self.hintLabel aboveSubview:self.hintBlurView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _hintBlurView, _hintLabel);
         NSMutableArray *constraintsArray = [NSMutableArray array];
         
         [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_collectionView]|"
                                                                                       options:0
                                                                                       metrics:nil
-                                                                                        views:NSDictionaryOfVariableBindings(_collectionView)]];
+                                                                                        views:views]];
         
         [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_collectionView]|"
                                                                                       options:0
                                                                                       metrics:nil
-                                                                                        views:NSDictionaryOfVariableBindings(_collectionView)]];
+                                                                                        views:views]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintLabel
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.hintBlurView
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintLabel
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.hintBlurView
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[_hintBlurView]"
+                                                                                      options:0
+                                                                                      metrics:nil
+                                                                                        views:views]];
+        
+        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[_hintBlurView]"
+                                                                                      options:0
+                                                                                      metrics:nil
+                                                                                        views:views]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintBlurView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.hintLabel
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                multiplier:1.0
+                                                                  constant:20.0]];
+        
+        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintBlurView
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.hintLabel
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                multiplier:1.0
+                                                                  constant:20.0]];
         
         [NSLayoutConstraint activateConstraints:constraintsArray];
         
@@ -201,6 +259,8 @@ UICollectionViewDelegate
     self.endScrollingOffset = CGPointZero;
 
     self.timeIntervalBeforeStopDecelarating = 0.0;
+    
+    self.hintLabel.text = [NSString stringWithFormat:@"Target: %@", @(self.targetItem + 1)];
 }
 
 - (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker {
