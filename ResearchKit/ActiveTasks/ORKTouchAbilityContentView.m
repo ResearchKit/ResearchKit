@@ -284,6 +284,7 @@
 
 - (void)resetTracks {
     [self.touchTracker resetTracks];
+    self.gestureRecognizerEvents = @[];
 }
 
 - (BOOL)isTracking {
