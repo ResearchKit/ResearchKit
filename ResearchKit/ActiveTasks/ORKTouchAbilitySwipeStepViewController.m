@@ -98,7 +98,7 @@
 }
 
 - (void)finish {
-    [self.swipeContentView stopTracking];
+    [self.swipeContentView endTrial];
     [super finish];
 }
 
@@ -125,7 +125,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    [self.swipeContentView startTracking];
+    [self.swipeContentView startTrial];
 }
 
 - (NSArray<NSNumber *> *)targetDirections {
@@ -178,7 +178,7 @@
         
         // Stop tracking new touch events.
         
-        [contentView stopTracking];
+        [contentView endTrial];
         
         [self.trials addObject:(ORKTouchAbilitySwipeTrial *)contentView.trial];
         
@@ -191,7 +191,7 @@
             // Reload and start tracking again.
             [contentView reloadData];
             [contentView setContentViewHidden:NO animated:NO];
-            [contentView startTracking];
+            [contentView startTrial];
             
         } else {
             

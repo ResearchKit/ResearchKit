@@ -97,7 +97,7 @@
 }
 
 - (void)finish {
-    [self.longPressView stopTracking];
+    [self.longPressView endTrial];
     [super finish];
 }
 
@@ -123,7 +123,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    [self.longPressView startTracking];
+    [self.longPressView startTrial];
 }
 
 
@@ -206,7 +206,7 @@
         
         // Stop tracking new touch events.
         
-        [contentView stopTracking];
+        [contentView endTrial];
         
         [self.trials addObject:(ORKTouchAbilityLongPressTrial *)contentView.trial];
         
@@ -217,7 +217,7 @@
             // Reload and start tracking again.
             [contentView reloadData];
             [contentView setContentViewHidden:NO animated:NO];
-            [contentView startTracking];
+            [contentView startTrial];
             
         } else {
             

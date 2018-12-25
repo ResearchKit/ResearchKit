@@ -156,16 +156,16 @@
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.swipeUpGestureRecognizer.enabled    = YES;
     self.swipeDownGestureRecognizer.enabled  = YES;
     self.swipeLeftGestureRecognizer.enabled  = YES;
     self.swipeRightGestureRecognizer.enabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.swipeUpGestureRecognizer.enabled    = NO;
     self.swipeDownGestureRecognizer.enabled  = NO;
     self.swipeLeftGestureRecognizer.enabled  = NO;

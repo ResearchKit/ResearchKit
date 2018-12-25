@@ -164,13 +164,13 @@
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.tapGestureRecognizer.enabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.tapGestureRecognizer.enabled = NO;
 }
 

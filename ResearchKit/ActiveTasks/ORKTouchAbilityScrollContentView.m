@@ -152,14 +152,14 @@ UICollectionViewDelegate
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.collectionView.userInteractionEnabled = YES;
     self.collectionView.scrollEnabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.collectionView.userInteractionEnabled = NO;
     self.collectionView.scrollEnabled = NO;
 }

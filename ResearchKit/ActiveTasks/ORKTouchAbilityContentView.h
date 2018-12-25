@@ -63,13 +63,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<ORKTouchAbilityContentViewDelegate> _Nullable delegate;
 
-- (void)startTracking;
-- (void)stopTracking;
+- (void)startTrial;
+- (void)endTrial;
+
 - (void)resetTracks;
-
-@property (nonatomic, readonly) BOOL isTracking;
-
 - (void)reloadData;
+
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated;
 - (void)setContentViewHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^ __nullable)(BOOL finished))completion;

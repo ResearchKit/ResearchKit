@@ -164,13 +164,13 @@
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.longPressGestureRecognizer.enabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.longPressGestureRecognizer.enabled = NO;
 }
 

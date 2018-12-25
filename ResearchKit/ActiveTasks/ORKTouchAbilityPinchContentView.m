@@ -213,13 +213,13 @@
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.pinchGestureRecognizer.enabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.pinchGestureRecognizer.enabled = NO;
 }
 

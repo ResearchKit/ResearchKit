@@ -148,13 +148,13 @@
     return trial;
 }
 
-- (void)startTracking {
-    [super startTracking];
+- (void)startTrial {
+    [super startTrial];
     self.rotationGestureRecognizer.enabled = YES;
 }
 
-- (void)stopTracking {
-    [super stopTracking];
+- (void)endTrial {
+    [super endTrial];
     self.rotationGestureRecognizer.enabled = NO;
 }
 

@@ -252,7 +252,7 @@
 
 #pragma mark - ORKTouchAbilityCustomView
 
-- (void)startTracking {
+- (void)startTrial {
     [self.touchTracker startTracking];
     self.tap.enabled        = YES;
     self.longPress.enabled  = YES;
@@ -267,7 +267,7 @@
     self.startDate = [NSDate date];
 }
 
-- (void)stopTracking {
+- (void)endTrial {
     [self.touchTracker stopTracking];
     self.tap.enabled        = NO;
     self.longPress.enabled  = NO;
