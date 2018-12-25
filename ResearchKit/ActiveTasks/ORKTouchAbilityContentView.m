@@ -69,6 +69,9 @@
 
 @property (nonatomic, copy) NSArray *contentConstraints;
 
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
+
 @end
 
 @implementation ORKTouchAbilityContentView
@@ -82,6 +85,8 @@
 
 - (ORKTouchAbilityTrial *)trial {
     ORKTouchAbilityTrial *trial = [[[[self class] trialClass] alloc] init];
+    trial.startDate = self.startDate;
+    trial.endDate = self.endDate;
     trial.tracks = self.tracks;
     trial.gestureRecognizerEvents = self.gestureRecognizerEvents;
     return trial;
@@ -237,6 +242,9 @@
         [self addGestureRecognizer:swipeRight];
         [self addGestureRecognizer:pinch];
         [self addGestureRecognizer:rotation];
+        
+        self.startDate = [NSDate distantPast];
+        self.endDate = [NSDate distantFuture];
     }
     return self;
 }
@@ -255,6 +263,8 @@
     self.swipeRight.enabled = YES;
     self.pinch.enabled      = YES;
     self.rotation.enabled   = YES;
+    
+    self.startDate = [NSDate date];
 }
 
 - (void)stopTracking {
@@ -268,6 +278,8 @@
     self.swipeRight.enabled = NO;
     self.pinch.enabled      = NO;
     self.rotation.enabled   = NO;
+    
+    self.endDate = [NSDate date];
 }
 
 - (void)resetTracks {
@@ -279,7 +291,8 @@
 }
 
 - (void)reloadData {
-    // no-op by default.
+    self.startDate = [NSDate distantPast];
+    self.endDate = [NSDate distantFuture];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {

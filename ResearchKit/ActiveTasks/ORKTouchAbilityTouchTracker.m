@@ -74,6 +74,14 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p; tracking: %@; tracks count: %@;>",
+            self.class.description,
+            self,
+            self.isTracking ? @"true" : @"false",
+            @(self.tracks.count)];
+}
+
 
 #pragma mark - ORKTouchAbilityTouchTracker
 

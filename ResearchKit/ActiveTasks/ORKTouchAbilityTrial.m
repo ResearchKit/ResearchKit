@@ -44,6 +44,8 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, startDate);
+    ORK_ENCODE_OBJ(aCoder, endDate);
     ORK_ENCODE_OBJ(aCoder, tracks);
     ORK_ENCODE_OBJ(aCoder, gestureRecognizerEvents);
 }
@@ -51,6 +53,8 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        ORK_DECODE_OBJ(aDecoder, startDate);
+        ORK_DECODE_OBJ(aDecoder, endDate);
         ORK_DECODE_OBJ(aDecoder, tracks);
         ORK_DECODE_OBJ(aDecoder, gestureRecognizerEvents);
     }
@@ -59,6 +63,8 @@
 
 - (id)copyWithZone:(NSZone *)zone {
     ORKTouchAbilityTrial *trial = [[[self class] allocWithZone:zone] init];
+    trial.startDate = [self.startDate copy];
+    trial.endDate = [self.endDate copy];
     trial.tracks = [self.tracks copy];
     trial.gestureRecognizerEvents = [self.gestureRecognizerEvents copy];
     return trial;
@@ -72,8 +78,24 @@
     
     __typeof(self) castObject = object;
     
-    return (ORKEqualObjects(self.tracks, castObject.tracks) &&
+    return (ORKEqualObjects(self.startDate, castObject.startDate) &&
+            ORKEqualObjects(self.endDate, castObject.endDate) &&
+            ORKEqualObjects(self.tracks, castObject.tracks) &&
             ORKEqualObjects(self.gestureRecognizerEvents, castObject.gestureRecognizerEvents));
+}
+
+- (NSDate *)startDate {
+    if (!_startDate) {
+        _startDate = [NSDate distantPast];
+    }
+    return _startDate;
+}
+
+- (NSDate *)endDate {
+    if (!_endDate) {
+        _endDate = [NSDate distantFuture];
+    }
+    return _endDate;
 }
 
 - (NSArray<ORKTouchAbilityTrack *> *)tracks {
@@ -91,7 +113,13 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; tracks count: %@; gesture recognizer events count: %@>", self.class.description, self, @(self.tracks.count), @(self.gestureRecognizerEvents.count)];
+    return [NSString stringWithFormat:@"<%@: %p; start: %@; end: %@; tracks count: %@; gesture recognizer events count: %@>",
+            self.class.description,
+            self,
+            self.startDate,
+            self.endDate,
+            @(self.tracks.count),
+            @(self.gestureRecognizerEvents.count)];
 }
 
 @end

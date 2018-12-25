@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchAbilityTrial : NSObject <NSCopying, NSSecureCoding>
 
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
+
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityTrack *> *tracks;
 @property (nonatomic, readonly) NSArray<ORKTouchAbilityGestureRecoginzerEvent *> *gestureRecognizerEvents;
 
