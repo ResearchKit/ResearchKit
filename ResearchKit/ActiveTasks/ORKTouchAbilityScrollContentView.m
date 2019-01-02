@@ -29,8 +29,7 @@
  */
 
 #import "ORKTouchAbilityScrollContentView.h"
-
-#define VISIBLE_ITEMS 4
+#import "ORKTouchAbilityPinchGuideView.h"
 
 @interface ORKTouchAbilityScrollContentView () <
 UICollectionViewDataSource,
@@ -38,6 +37,7 @@ UICollectionViewDelegate
 >
 
 @property (nonatomic, assign) NSUInteger numberOfItems;
+@property (nonatomic, assign) NSUInteger visibleItems;
 @property (nonatomic, assign) NSUInteger initialItem;
 @property (nonatomic, assign) NSUInteger targetItem;
 
@@ -50,8 +50,7 @@ UICollectionViewDelegate
 
 @property (nonatomic, assign) NSTimeInterval timeIntervalBeforeStopDecelarating;
 
-@property (nonatomic, strong) UIVisualEffectView *hintBlurView;
-@property (nonatomic, strong) UILabel *hintLabel;
+@property (nonatomic, strong) UIView *hintView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 
@@ -93,14 +92,10 @@ UICollectionViewDelegate
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         
-        self.hintBlurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-        self.hintBlurView.layer.cornerRadius = 8.0;
-        self.hintBlurView.layer.masksToBounds = YES;
+        self.hintView = [[ORKTouchAbilityPinchGuideView alloc] init];
         
-        self.hintLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.hintLabel.textColor = [UIColor whiteColor];
-        self.hintLabel.font = [UIFont systemFontOfSize:28 weight:UIFontWeightMedium];
-        
+        self.collectionView.showsVerticalScrollIndicator = NO;
+        self.collectionView.showsHorizontalScrollIndicator = NO;
         self.collectionView.backgroundColor = UIColor.clearColor;
         self.collectionView.delaysContentTouches = NO;
         self.collectionView.dataSource = self;
@@ -108,14 +103,11 @@ UICollectionViewDelegate
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
         
         self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.hintBlurView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self.contentView addSubview:self.collectionView];
-        [self.contentView insertSubview:self.hintBlurView atIndex:10000];
-        [self.contentView insertSubview:self.hintLabel aboveSubview:self.hintBlurView];
+        [self.contentView insertSubview:self.hintView atIndex:10000];
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView, _hintBlurView, _hintLabel);
+        NSDictionary *views = NSDictionaryOfVariableBindings(_collectionView);
         NSMutableArray *constraintsArray = [NSMutableArray array];
         
         [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_collectionView]|"
@@ -128,48 +120,6 @@ UICollectionViewDelegate
                                                                                       metrics:nil
                                                                                         views:views]];
         
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintLabel
-                                                                 attribute:NSLayoutAttributeCenterX
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.hintBlurView
-                                                                 attribute:NSLayoutAttributeCenterX
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintLabel
-                                                                 attribute:NSLayoutAttributeCenterY
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.hintBlurView
-                                                                 attribute:NSLayoutAttributeCenterY
-                                                                multiplier:1.0
-                                                                  constant:0.0]];
-        
-        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[_hintBlurView]"
-                                                                                      options:0
-                                                                                      metrics:nil
-                                                                                        views:views]];
-        
-        [constraintsArray addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[_hintBlurView]"
-                                                                                      options:0
-                                                                                      metrics:nil
-                                                                                        views:views]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintBlurView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.hintLabel
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                multiplier:1.0
-                                                                  constant:20.0]];
-        
-        [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.hintBlurView
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.hintLabel
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                multiplier:1.0
-                                                                  constant:20.0]];
-        
         [NSLayoutConstraint activateConstraints:constraintsArray];
         
     }
@@ -179,14 +129,42 @@ UICollectionViewDelegate
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    if (self.visibleItems == 0) {
+        return;
+    }
+    
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        CGFloat width = CGRectGetWidth(self.contentView.bounds) / VISIBLE_ITEMS;
+        CGFloat width = CGRectGetWidth(self.contentView.bounds) / self.visibleItems;
         CGFloat height = CGRectGetHeight(self.contentView.bounds);
         self.flowLayout.itemSize = CGSizeMake(width, height);
+        
+        if (self.targetItem < self.initialItem) {
+            self.hintView.frame = CGRectMake(CGRectGetMinX(self.collectionView.frame) + width / 2,
+                                             CGRectGetMinY(self.collectionView.frame),
+                                             width,
+                                             height);
+        } else {
+            self.hintView.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) - width * 1.5,
+                                             CGRectGetMinY(self.collectionView.frame),
+                                             width,
+                                             height);
+        }
     } else {
         CGFloat width = CGRectGetWidth(self.contentView.bounds);
-        CGFloat height = CGRectGetHeight(self.contentView.bounds) / VISIBLE_ITEMS;
+        CGFloat height = CGRectGetHeight(self.contentView.bounds) / self.visibleItems;
         self.flowLayout.itemSize = CGSizeMake(width, height);
+        
+        if (self.targetItem < self.initialItem) {
+            self.hintView.frame = CGRectMake(CGRectGetMinX(self.collectionView.frame),
+                                             CGRectGetMinY(self.collectionView.frame) + height / 2,
+                                             width,
+                                             height);
+        } else {
+            self.hintView.frame = CGRectMake(CGRectGetMinX(self.collectionView.frame),
+                                             CGRectGetMaxY(self.collectionView.frame) - height * 1.5,
+                                             width,
+                                             height);
+        }
     }
 }
 
@@ -203,7 +181,12 @@ UICollectionViewDelegate
     
     trial.direction = self.direction;
     trial.initialOffset = self.initialOffset;
-    trial.targetOffset = self.targetOffset;
+    trial.targetOffsetLowerBound = self.targetOffset;
+    if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        trial.targetOffsetUpperBound = CGPointMake(self.targetOffset.x + self.flowLayout.itemSize.width, self.targetOffset.y);
+    } else {
+        trial.targetOffsetUpperBound = CGPointMake(self.targetOffset.x, self.targetOffset.y + self.flowLayout.itemSize.height);
+    }
     trial.endDraggingOffset = self.endDraggingOffset;
     trial.endScrollingOffset = self.endScrollingOffset;
     
@@ -226,31 +209,34 @@ UICollectionViewDelegate
     [self resetTracks];
     
     self.success = NO;
-    self.numberOfItems = [self.dataSource numberOfItemsInScrollContentView:self] ?: 1;
-    self.initialItem = [self.dataSource initialItemInScrollContentView:self] ?: 0;
-    self.targetItem = [self.dataSource targetItemInScrollContentView:self] ?: 0;
+    self.numberOfItems = [self.dataSource numberOfItemsInScrollContentView:self]        ?: 1;
+    self.visibleItems  = [self.dataSource numberOfVisibleItemsInScrollContentView:self] ?: 1;
+    self.initialItem   = [self.dataSource initialItemInScrollContentView:self]          ?: 0;
+    self.targetItem    = [self.dataSource targetItemInScrollContentView:self]           ?: 0;
     
     [self.collectionView reloadData];
     [self setNeedsLayout];
     [self layoutIfNeeded];
     
+    NSInteger indexDiff = self.targetItem - self.initialItem;
+    
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
         
-        CGFloat width = CGRectGetWidth(self.collectionView.bounds) / VISIBLE_ITEMS;
-        CGFloat offsetX = width * (self.initialItem + 0.5 - 2);
+        CGFloat width = CGRectGetWidth(self.collectionView.bounds) / self.visibleItems;
+        CGFloat offsetX = width * ((self.numberOfItems / 2) - 2.5);
         CGFloat offsetY = self.collectionView.contentOffset.y;
         
         self.initialOffset = CGPointMake(offsetX, offsetY);
-        self.targetOffset = CGPointMake(self.targetItem * width, CGRectGetMinY(self.collectionView.bounds));
+        self.targetOffset = CGPointMake(offsetX - indexDiff * width, offsetY);
         
     } else {
         
-        CGFloat height = CGRectGetHeight(self.collectionView.bounds) / VISIBLE_ITEMS;
+        CGFloat height = CGRectGetHeight(self.collectionView.bounds) / self.visibleItems;
         CGFloat offsetX = self.collectionView.contentOffset.x;
-        CGFloat offsetY = height * (self.initialItem + 0.5 - 2);
+        CGFloat offsetY = height * ((self.numberOfItems / 2) - 2.5);
         
         self.initialOffset = CGPointMake(offsetX, offsetY);
-        self.targetOffset = CGPointMake(CGRectGetMinX(self.collectionView.bounds), self.targetItem * height);
+        self.targetOffset = CGPointMake(offsetX, offsetY - indexDiff * height);
     }
     
     [self.collectionView setContentOffset:self.initialOffset animated:NO];
@@ -259,8 +245,6 @@ UICollectionViewDelegate
     self.endScrollingOffset = CGPointZero;
 
     self.timeIntervalBeforeStopDecelarating = 0.0;
-    
-    self.hintLabel.text = [NSString stringWithFormat:@"Target: %@", @(self.targetItem + 1)];
 }
 
 - (void)touchTrackerDidBeginNewTrack:(ORKTouchAbilityTouchTracker *)touchTracker {
@@ -298,7 +282,7 @@ UICollectionViewDelegate
     label.text = [NSString stringWithFormat:@"%@", @(indexPath.item + 1)];
     
     
-    if (indexPath.item == self.targetItem) {
+    if (indexPath.item == self.initialItem) {
         cell.contentView.backgroundColor = self.tintColor;
         label.textColor = [UIColor whiteColor];
     } else if (indexPath.item % 2 == 0) {

@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (NSUInteger)numberOfItemsInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
+- (NSUInteger)numberOfVisibleItemsInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
 - (NSUInteger)initialItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
 - (NSUInteger)targetItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView;
 

@@ -37,7 +37,8 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, direction);
     ORK_ENCODE_CGPOINT(aCoder, initialOffset);
-    ORK_ENCODE_CGPOINT(aCoder, targetOffset);
+    ORK_ENCODE_CGPOINT(aCoder, targetOffsetUpperBound);
+    ORK_ENCODE_CGPOINT(aCoder, targetOffsetLowerBound);
     ORK_ENCODE_CGPOINT(aCoder, endDraggingOffset);
     ORK_ENCODE_CGPOINT(aCoder, endScrollingOffset);
 }
@@ -46,7 +47,8 @@
     if (self = [super initWithCoder:aDecoder]) {
         ORK_DECODE_ENUM(aDecoder, direction);
         ORK_DECODE_CGPOINT(aDecoder, initialOffset);
-        ORK_DECODE_CGPOINT(aDecoder, targetOffset);
+        ORK_DECODE_CGPOINT(aDecoder, targetOffsetUpperBound);
+        ORK_DECODE_CGPOINT(aDecoder, targetOffsetLowerBound);
         ORK_DECODE_CGPOINT(aDecoder, endDraggingOffset);
         ORK_ENCODE_CGPOINT(aDecoder, endScrollingOffset);
     }
@@ -57,7 +59,8 @@
     ORKTouchAbilityScrollTrial *trial = [super copyWithZone:zone];
     trial.direction = self.direction;
     trial.initialOffset = self.initialOffset;
-    trial.targetOffset = self.targetOffset;
+    trial.targetOffsetUpperBound = self.targetOffsetUpperBound;
+    trial.targetOffsetLowerBound = self.targetOffsetLowerBound;
     trial.endDraggingOffset = self.endDraggingOffset;
     trial.endScrollingOffset = self.endScrollingOffset;
     return trial;
@@ -72,7 +75,8 @@
     return (isParentSame &&
             self.direction == castObject.direction &&
             CGPointEqualToPoint(self.initialOffset, castObject.initialOffset) &&
-            CGPointEqualToPoint(self.targetOffset, castObject.targetOffset) &&
+            CGPointEqualToPoint(self.targetOffsetUpperBound, castObject.targetOffsetUpperBound) &&
+            CGPointEqualToPoint(self.targetOffsetLowerBound, castObject.targetOffsetLowerBound) &&
             CGPointEqualToPoint(self.endDraggingOffset, castObject.endDraggingOffset) &&
             CGPointEqualToPoint(self.endScrollingOffset, castObject.endScrollingOffset));
 }
@@ -90,11 +94,12 @@
         directionString = @"horizontal";
     }
     
-    return [NSString stringWithFormat:@"<%@; direction: %@; initial offset: %@; target offset: %@; end dragging offset: %@; end scrolling offset: %@;>",
+    return [NSString stringWithFormat:@"<%@; direction: %@; initial offset: %@; target offset: [%@, %@]; end dragging offset: %@; end scrolling offset: %@;>",
             sDescription,
             directionString,
             [NSValue valueWithCGPoint:self.initialOffset],
-            [NSValue valueWithCGPoint:self.targetOffset],
+            [NSValue valueWithCGPoint:self.targetOffsetUpperBound],
+            [NSValue valueWithCGPoint:self.targetOffsetLowerBound],
             [NSValue valueWithCGPoint:self.endDraggingOffset],
             [NSValue valueWithCGPoint:self.endDraggingOffset]];
 }

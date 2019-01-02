@@ -47,8 +47,13 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
-#define NUMBER_OF_ITEMS 100
-#define TARGET_ITEM 50
+
+#define TrialData(n, m, t, d) @[@(n), @(m), @(t), @(d)]
+
+#define TrialDataGetNumberOfItems(data) [data[0] unsignedIntegerValue]
+#define TrialDataGetNumberOfMiddleItems(data) [data[1] unsignedIntegerValue]
+#define TrialDataGetTargetItem(data) [data[2] unsignedIntegerValue]
+#define TrialDataGetDestination(data) [data[3] unsignedIntegerValue]
 
 @interface ORKTouchAbilityScrollStepViewController () <
 ORKTouchAbilityScrollContentViewDataSource,
@@ -57,7 +62,7 @@ ORKTouchAbilityContentViewDelegate
 
 // Data
 @property (nonatomic, assign) NSUInteger currentTrialIndex;
-@property (nonatomic, strong) NSArray<NSNumber *> *targetsQueue;
+@property (nonatomic, strong) NSArray<NSArray *> *trialDataQueue;
 @property (nonatomic, strong) NSMutableArray<ORKTouchAbilityScrollTrial *> *trials;
 
 @property (nonatomic, copy) dispatch_block_t endTrialWork;
@@ -119,7 +124,7 @@ ORKTouchAbilityContentViewDelegate
     [super viewDidLoad];
     
     self.currentTrialIndex = 0;
-    self.targetsQueue = [self makeTargets];
+    self.trialDataQueue = [self makeTrialDataQueue];
     self.trials = [NSMutableArray new];
     
     self.contentView = [[ORKTouchAbilityScrollContentView alloc] init];
@@ -140,15 +145,14 @@ ORKTouchAbilityContentViewDelegate
     [self.contentView startTrial];
 }
 
-- (NSArray *)makeTargets {
-    
+- (NSArray *)makeTrialDataQueue {
     
     NSMutableArray *array = [NSMutableArray array];
     
-    [array addObject:@(TARGET_ITEM - 5)];
-    [array addObject:@(TARGET_ITEM - 3)];
-    [array addObject:@(TARGET_ITEM + 3)];
-    [array addObject:@(TARGET_ITEM + 5)];
+    [array addObject:TrialData(19, 5, 7, 11)];
+    [array addObject:TrialData(19, 5, 9, 11)];
+    [array addObject:TrialData(19, 5, 9, 7)];
+    [array addObject:TrialData(19, 5, 11, 7)];
     [array addObjectsFromArray:array];
     
     NSUInteger count = [array count];
@@ -164,15 +168,19 @@ ORKTouchAbilityContentViewDelegate
 #pragma mark - ORKTouchAbilityScrollContentViewDataSource
 
 - (NSUInteger)numberOfItemsInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView {
-    return NUMBER_OF_ITEMS;
+    return TrialDataGetNumberOfItems(self.trialDataQueue[self.currentTrialIndex]);
 }
 
-- (NSUInteger)targetItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView {
-    return self.targetsQueue[self.currentTrialIndex].unsignedIntegerValue;
+- (NSUInteger)numberOfVisibleItemsInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView {
+    return TrialDataGetNumberOfMiddleItems(self.trialDataQueue[self.currentTrialIndex]) + 1;
 }
 
 - (NSUInteger)initialItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView {
-    return TARGET_ITEM;
+    return TrialDataGetTargetItem(self.trialDataQueue[self.currentTrialIndex]);
+}
+
+- (NSUInteger)targetItemInScrollContentView:(ORKTouchAbilityScrollContentView *)scrollContentView {
+    return TrialDataGetDestination(self.trialDataQueue[self.currentTrialIndex]);
 }
 
 
@@ -200,7 +208,7 @@ ORKTouchAbilityContentViewDelegate
     
     // Calculate current progress and display using progress view.
     
-    NSUInteger total = self.targetsQueue.count;
+    NSUInteger total = self.trialDataQueue.count;
     NSUInteger done = self.currentTrialIndex + 1;
     CGFloat progress = (CGFloat)done/(CGFloat)total;
     
@@ -221,7 +229,7 @@ ORKTouchAbilityContentViewDelegate
         // Determind if should continue or finish.
         
         self.currentTrialIndex += 1;
-        if (self.currentTrialIndex < self.targetsQueue.count) {
+        if (self.currentTrialIndex < self.trialDataQueue.count) {
             
             // Reload and start tracking again.
             [self.contentView reloadData];

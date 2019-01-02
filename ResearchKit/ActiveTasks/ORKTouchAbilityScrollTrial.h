@@ -45,7 +45,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) ORKTouchAbilityScrollTrialDirection direction;
 
 @property (nonatomic, assign) CGPoint initialOffset;
-@property (nonatomic, assign) CGPoint targetOffset;
+@property (nonatomic, assign) CGPoint targetOffsetUpperBound;
+@property (nonatomic, assign) CGPoint targetOffsetLowerBound;
 @property (nonatomic, assign) CGPoint endDraggingOffset;
 @property (nonatomic, assign) CGPoint endScrollingOffset;
 
