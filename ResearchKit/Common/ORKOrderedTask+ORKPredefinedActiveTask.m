@@ -87,8 +87,7 @@
 #import "ORKTouchAbilitySwipeStep.h"
 #import "ORKTouchAbilityPinchStep.h"
 #import "ORKTouchAbilityRotationStep.h"
-#import "ORKTouchAbilityVerticalScrollStep.h"
-#import "ORKTouchAbilityHorizontalScrollStep.h"
+#import "ORKTouchAbilityScrollStep.h"
 
 #import "ORKHelpers_Internal.h"
 #import "UIImage+ResearchKit.h"
@@ -2660,16 +2659,19 @@ NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHo
     }
     
     
-    if (taskOptions & ORKTouchAbilityTaskOptionScroll) {
-        ORKTouchAbilityVerticalScrollStep *step1 = [[ORKTouchAbilityVerticalScrollStep alloc] initWithIdentifier:ORKTouchAbilityVerticalScrollStepIdentifier];
-        step1.title = @"Touch Ability Vertical Scroll";
+    if (taskOptions & ORKTouchAbilityTaskOptionVerticalScroll) {
+        ORKTouchAbilityScrollStep *step = [[ORKTouchAbilityScrollStep alloc] initWithIdentifier:ORKTouchAbilityVerticalScrollStepIdentifier];
+        step.title = @"Touch Ability Vertical Scroll";
 
-        ORKStepArrayAddStep(steps, step1);
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (taskOptions & ORKTouchAbilityTaskOptionHorizontalScroll) {
+        ORKTouchAbilityScrollStep *step = [[ORKTouchAbilityScrollStep alloc] initWithIdentifier:ORKTouchAbilityHorizontalScrollStepIdentifier];
+        step.horizontal = YES;
+        step.title = @"Touch Ability Horizontal Scroll";
 
-        ORKTouchAbilityHorizontalScrollStep *step2 = [[ORKTouchAbilityHorizontalScrollStep alloc] initWithIdentifier:ORKTouchAbilityHorizontalScrollStepIdentifier];
-        step2.title = @"Touch Ability Horizontal Scroll";
-
-        ORKStepArrayAddStep(steps, step2);
+        ORKStepArrayAddStep(steps, step);
     }
     
     if (taskOptions & ORKTouchAbilityTaskOptionPinch) {

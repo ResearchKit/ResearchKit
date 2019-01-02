@@ -28,11 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilityHorizontalScrollStep.h"
+#import "ORKTouchAbilityScrollStep.h"
 #import "ORKTouchAbilityScrollStepViewController.h"
 #import "ORKhelpers_Internal.h"
 
-@implementation ORKTouchAbilityHorizontalScrollStep
+@implementation ORKTouchAbilityScrollStep
 
 + (Class)stepViewControllerClass {
     return [ORKTouchAbilityScrollStepViewController class];

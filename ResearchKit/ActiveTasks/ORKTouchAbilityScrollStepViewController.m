@@ -29,8 +29,7 @@
  */
 
 #import "ORKTouchAbilityScrollStepViewController.h"
-#import "ORKTouchAbilityVerticalScrollStep.h"
-#import "ORKTouchAbilityHorizontalScrollStep.h"
+#import "ORKTouchAbilityScrollStep.h"
 
 #import "ORKActiveStepView.h"
 #import "ORKTouchAbilityScrollContentView.h"
@@ -71,11 +70,9 @@ ORKTouchAbilityContentViewDelegate
 @implementation ORKTouchAbilityScrollStepViewController
 
 - (BOOL)isHorizontalStep {
-    if ([self.step isKindOfClass:[ORKTouchAbilityHorizontalScrollStep class]]) {
-        return YES;
-    }
-    return NO;
+    return ((ORKTouchAbilityScrollStep *)self.step).isHorizontal;
 }
+
 
 #pragma mark - ORKActiveStepViewController
 

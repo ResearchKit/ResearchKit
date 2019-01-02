@@ -37,8 +37,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityVerticalScrollStep : ORKActiveStep
-
+@interface ORKTouchAbilityScrollStep : ORKActiveStep
+@property (nonatomic, assign, getter=isHorizontal) BOOL horizontal;
 @end
 
 NS_ASSUME_NONNULL_END
