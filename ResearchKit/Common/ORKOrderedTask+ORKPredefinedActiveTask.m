@@ -2650,7 +2650,7 @@ NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHo
         ORKInstructionStep *instruction = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
         instruction.title = ORKLocalizedString(@"TOUCH_ABILITY_LONG_PRESS_TASK_TITLE", nil);
         instruction.text = ORKLocalizedString(@"TOUCH_ABILITY_LONG_PRESS_TASK_TEXT", nil);
-        instruction.image = [UIImage imageNamed:@"touchAbilityLongPress" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        instruction.image = [UIImage imageNamed:@"touchAbilityTap" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
         instruction.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, instruction);
@@ -2666,7 +2666,14 @@ NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHo
         ORKInstructionStep *instruction = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
         instruction.title = ORKLocalizedString(@"TOUCH_ABILITY_SWIPE_TASK_TITLE", nil);
         instruction.text = ORKLocalizedString(@"TOUCH_ABILITY_SWIPE_TASK_TEXT", nil);
-        instruction.image = [UIImage imageNamed:@"touchAbilitySwipe" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+        
+        NSArray *images = @[[UIImage imageNamed:@"touchAbilitySwipe1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil],
+                            [UIImage imageNamed:@"touchAbilitySwipe2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil],
+                            [UIImage imageNamed:@"touchAbilitySwipe3" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil],
+                            [UIImage imageNamed:@"touchAbilitySwipe4" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil],
+                            [UIImage imageNamed:@"touchAbilitySwipe1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil]];
+
+        instruction.image = [UIImage animatedImageWithImages:images duration:2];
         instruction.shouldTintImages = YES;
         
         ORKStepArrayAddStep(steps, instruction);
