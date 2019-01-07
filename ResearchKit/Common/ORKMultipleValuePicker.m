@@ -253,6 +253,15 @@ static const CGFloat PickerMinimumHeight = 34.0;
     }
 }
 
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSUInteger idx = [self convertFromPickerViewComponent:component];
+    if (idx == NSNotFound) {
+        return nil;
+    } else {
+        return [[self.helpers[idx] textChoiceAtIndex:row] primaryTextAttributedString] ?: nil;
+    }
+}
+
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel* valueLabel = (UILabel*)view;
@@ -263,6 +272,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
         [valueLabel setTextAlignment:NSTextAlignmentCenter];
     }
     valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    NSAttributedString *attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    if (attributedText) {
+        valueLabel.attributedText = attributedText;
+    }
     return valueLabel;
 }
 
