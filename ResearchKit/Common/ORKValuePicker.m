@@ -164,8 +164,9 @@ static const CGFloat PickerMinimumHeight = 34.0;
         [valueLabel setTextAlignment:NSTextAlignmentCenter];
     }
     valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
-    if (valueLabel.text == nil) {
-        valueLabel.attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    NSAttributedString *attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    if (attributedText) {
+        valueLabel.attributedText = attributedText;
     }
     return valueLabel;
 }
