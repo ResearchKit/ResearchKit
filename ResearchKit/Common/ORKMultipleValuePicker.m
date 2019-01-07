@@ -165,10 +165,12 @@ static const CGFloat PickerMinimumHeight = 34.0;
     __block NSMutableArray *strings = [NSMutableArray new];
     [indexNumbers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *title = [[self.helpers[idx] textChoiceAtIndex:[obj integerValue]] text];
+        NSAttributedString *attributedText = [[self.helpers[idx] textChoiceAtIndex:[obj integerValue]] primaryTextAttributedString];
         if (title) {
             [strings addObject:title];
-        }
-        else {
+        } else if (attributedText) {
+            [strings addObject:attributedText.string];
+        } else {
             *stop = YES;
         }
     }];
