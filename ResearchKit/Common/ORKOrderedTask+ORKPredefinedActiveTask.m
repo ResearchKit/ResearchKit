@@ -2713,7 +2713,7 @@ NSString *const ORKTouchAbilityHorizontalScrollStepIdentifier = @"touchAbilityHo
         ORKStepArrayAddStep(steps, instruction);
         
         ORKTouchAbilityScrollStep *step = [[ORKTouchAbilityScrollStep alloc] initWithIdentifier:ORKTouchAbilityHorizontalScrollStepIdentifier];
-        step.title = ORKLocalizedString(@"TOUCH_ABILITY_HORIZONTAL_SCROLL_TASK_TITLE", nil);;
+        step.title = ORKLocalizedString(@"TOUCH_ABILITY_HORIZONTAL_SCROLL_TASK_TITLE", nil);
         step.horizontal = YES;
         
         ORKStepArrayAddStep(steps, step);

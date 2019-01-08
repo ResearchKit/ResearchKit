@@ -118,8 +118,6 @@
     self.activeStepView.activeCustomView = self.swipeContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
-    
-    [self.activeStepView updateTitle:nil text:@"SWIPE foobarrrrrrr"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
