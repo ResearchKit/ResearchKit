@@ -286,7 +286,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
     [self updateSelectedItem];
 }
 
-+ (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailTextAttributedString:(NSAttributedString *)detailTextAttributedString inTableView:(UITableView *)tableView {
++ (CGFloat)suggestedCellHeightForPrimaryText:(NSString *)shortText primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)longText  detailTextAttributedString:(NSAttributedString *)detailTextAttributedString inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
