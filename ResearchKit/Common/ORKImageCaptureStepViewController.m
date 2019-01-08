@@ -55,7 +55,7 @@
     ORKImageCaptureView *_imageCaptureView;
     dispatch_queue_t _sessionQueue;
     AVCaptureSession *_captureSession;
-    AVCaptureStillImageOutput *_stillImageOutput;
+    AVCapturePhotoOutput *_stillImageOutput;
     NSData *_capturedImageData;
     NSURL *_fileURL;
 }
@@ -175,7 +175,7 @@
 
 - (void)queue_CaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^)(BOOL))handler {
     // Capture the JPEG image data, if available
-    NSData *capturedImageData = !imageDataSampleBuffer ? nil : [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+    NSData *capturedImageData = !imageDataSampleBuffer ? nil : [AVCapturePhotoOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
     // If something was captured, stop the capture session
     if (capturedImageData) {
         [_captureSession stopRunning];

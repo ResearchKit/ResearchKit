@@ -132,7 +132,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 - (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError **)error {
     id result = nil;
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
-        NSDate *dob = [_healthStore dateOfBirthWithError:error];
+        NSDate *dob = [_healthStore dateOfBirthComponentsWithError:error];
         if (dob) {
             result = dob;
         }

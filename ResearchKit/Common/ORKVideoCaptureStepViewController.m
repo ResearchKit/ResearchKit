@@ -208,7 +208,7 @@
     
     if (device) {
         // Check if the device has flash.
-        if ([device isFlashModeSupported:_videoCaptureStep.flashMode]) {
+        if ([device hasFlash) {
             [device lockForConfiguration:nil];
             device.flashMode = _videoCaptureStep.flashMode;
             [device unlockForConfiguration];
