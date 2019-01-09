@@ -17,3 +17,5 @@
 #import <ResearchKit/ORKStepHeaderView_Internal.h>
 #import <ResearchKit/ORKHeadlineLabel.h>
 #import <ResearchKit/ORKSubheadlineLabel.h>
+#import <ResearchKit/ORKFormItemCell.h>
+

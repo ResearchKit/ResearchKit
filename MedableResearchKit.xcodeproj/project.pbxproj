@@ -336,7 +336,7 @@
 		86C40CC01A8D7C5C00081FAC /* ORKCompletionStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B521A8D7C5B00081FAC /* ORKCompletionStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		86C40CC21A8D7C5C00081FAC /* ORKCompletionStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B531A8D7C5B00081FAC /* ORKCompletionStep.m */; };
 		86C40CC41A8D7C5C00081FAC /* ORKCompletionStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B541A8D7C5B00081FAC /* ORKCompletionStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86C40CC81A8D7C5C00081FAC /* ORKFormItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B561A8D7C5B00081FAC /* ORKFormItemCell.h */; };
+		86C40CC81A8D7C5C00081FAC /* ORKFormItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B561A8D7C5B00081FAC /* ORKFormItemCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40CCA1A8D7C5C00081FAC /* ORKFormItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B571A8D7C5B00081FAC /* ORKFormItemCell.m */; };
 		86C40CCC1A8D7C5C00081FAC /* ORKImageSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B581A8D7C5B00081FAC /* ORKImageSelectionView.h */; };
 		86C40CCE1A8D7C5C00081FAC /* ORKImageSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B591A8D7C5B00081FAC /* ORKImageSelectionView.m */; };
