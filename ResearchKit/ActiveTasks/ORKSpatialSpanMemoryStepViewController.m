@@ -247,7 +247,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             if (record.gameStatus != ORKSpatialSpanMemoryGameStatusSuccess) {
                 numberOfFailures++;
             }
-            
         }
     }];
     
