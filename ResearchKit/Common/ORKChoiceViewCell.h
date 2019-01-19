@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ORKSelectionTitleLabel *shortLabel;
 @property (nonatomic, strong, readonly) ORKSelectionSubTitleLabel *longLabel;
 
-+ (CGFloat)suggestedCellHeightForShortText:(nullable NSString *)shortText LongText:(nullable NSString *)longText inTableView:(nullable UITableView *)tableView;
++ (CGFloat)suggestedCellHeightForPrimaryText:(nullable NSString *)shortText primaryTextAttributedString: (nullable NSAttributedString *)primaryTextAttributedString detailText:(nullable NSString *)longText  detailTextAttributedString: (nullable NSAttributedString *)detailTextAttributedString inTableView:(nullable UITableView *)tableView;
 
 @property (nonatomic, assign, getter=isImmediateNavigation) BOOL immediateNavigation;
 
