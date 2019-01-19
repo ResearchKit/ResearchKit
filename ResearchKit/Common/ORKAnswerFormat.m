@@ -1005,9 +1005,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 + (instancetype)choiceWithText:(NSString *)text primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)detailText detailTextAttributedString:(NSAttributedString *)detailTextAttributedString value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
-    if (!text && !primaryTextAttributedString && !detailText && !detailTextAttributedString) {
-        NSAssert(NO, @"All the input parameters cannot be nil, please provide at least one non-nil value.");
-    }
     return [[ORKTextChoice alloc] initWithText:text primaryTextAttributedString:primaryTextAttributedString detailText:detailText detailTextAttributedString:detailTextAttributedString value:value exclusive:exclusive];
 }
 
@@ -1025,6 +1022,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithText:(NSString *)text primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)detailText detailTextAttributedString:(NSAttributedString *)detailTextAttributedString value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
+    if (!text && !primaryTextAttributedString && !detailText && !detailTextAttributedString) {
+        NSAssert(NO, @"All the input parameters cannot be nil, please provide at least one non-nil value.");
+    }
     self = [super init];
     if (self) {
         _text = [text copy];
