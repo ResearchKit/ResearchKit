@@ -69,6 +69,7 @@
         [self setTitleColor:_normalHighlightOrSelectTintColor forState:UIControlStateSelected];
         [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
     }
+    [self setDefaultTintColors];
     [self updateBackgroundColor];
 
 }
