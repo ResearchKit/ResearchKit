@@ -48,7 +48,7 @@
 @import MapKit;
 
 
-NSString *const EmailValidationRegularExpressionPattern = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+NSString *const EmailValidationRegularExpressionPattern = @"^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
 id ORKNullAnswerValue() {
     return [NSNull null];
@@ -441,7 +441,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                   numericPrecision:(ORKNumericPrecision)numericPrecision
                                                       minimumValue:(double)minimumValue
                                                       maximumValue:(double)maximumValue
-                                                    defaultValue:(double)defaultValue {
+                                                      defaultValue:(double)defaultValue {
     return [[ORKWeightAnswerFormat alloc] initWithMeasurementSystem:measurementSystem
                                                    numericPrecision:numericPrecision
                                                        minimumValue:minimumValue
@@ -2906,7 +2906,7 @@ static NSString *const kSecureTextEntryEscapeString = @"*";
                                        reason:@"defaultValue must be between minimumValue and maximumValue."
                                      userInfo:nil];
     }
-
+    
     self = [super init];
     if (self) {
         _measurementSystem = measurementSystem;
