@@ -179,10 +179,25 @@
 
 - (void)configureAudioSession {
     NSError *error = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord mode:AVAudioSessionModeMeasurement options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
-    if ([AVAudioSession sharedInstance].isOtherAudioPlaying) {
-        NSError *activationError = nil;
-        [[AVAudioSession sharedInstance] setActive:YES error:&activationError];
+    // Stop any existing audio
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategorySoloAmbient error:&error];
+    if (error) {
+        ORK_Log_Error(@"Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
+    }
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    if (error) {
+        ORK_Log_Error(@"Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
+    }
+    
+    // Force input/output from iOS device
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeMeasurement options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    [[AVAudioSession sharedInstance] overrideOutputAudioPort: AVAudioSessionPortOverrideSpeaker error:&error];
+    if (error) {
+        ORK_Log_Error(@"Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
+    }
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    if (error) {
+        ORK_Log_Error(@"Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
 }
 
@@ -311,16 +326,13 @@
 
 - (void) resetAudioSession {
     NSError *error = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionMixWithOthers error:&error];
     if (error) {
         ORK_Log_Error(@"Setting AVAudioSessionCategory failed with error message: \"%@\"", error.localizedDescription);
     }
-    if ([AVAudioSession sharedInstance].isOtherAudioPlaying) {
-        NSError *activationError = nil;
-        [[AVAudioSession sharedInstance] setActive:YES error:&activationError];
-        if (activationError) {
-            ORK_Log_Error(@"Activating AVAudioSession failed with error message: \"%@\"", activationError.localizedDescription);
-        }
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    if (error) {
+        ORK_Log_Error(@"Activating AVAudioSession failed with error message: \"%@\"", error.localizedDescription);
     }
 }
 
