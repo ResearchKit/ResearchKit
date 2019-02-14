@@ -185,14 +185,12 @@
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
-    
+    self.textLabel.font = [ORKSelectionTitleLabel defaultFont];
     [self updateAppearance];
 }
 
 - (void)updateAppearance {
-    self.textLabel.font = [ORKSelectionTitleLabel defaultFont];
     [self invalidateIntrinsicContentSize];
-
 }
 
 - (void)dealloc {

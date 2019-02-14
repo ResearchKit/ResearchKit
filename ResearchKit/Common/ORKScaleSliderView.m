@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -463,6 +464,18 @@
                                                  metrics:@{@"kMargin": @(kMargin)}
                                                    views:views]];
     }
+
+    // Hide the selected value label if necessary;
+    // skipped when not present (text choice slider)
+    if ([_formatProvider shouldHideSelectedValueLabel] &&
+        !([_formatProvider isVertical] && [self textScaleFormatProvider])) {
+        [self addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+    }
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -492,6 +505,9 @@
         if ([self textScaleFormatProvider]) {
             ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
+            if (textChoice.primaryTextAttributedString) {
+                self.valueLabel.attributedText = textChoice.primaryTextAttributedString;
+            }
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];

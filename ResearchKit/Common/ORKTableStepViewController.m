@@ -52,6 +52,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 @implementation ORKTableStepViewController {
     NSArray<NSLayoutConstraint *> *_constraints;
+    UIColor *_tableViewColor;
 }
 
 - (id <ORKTableStepSource>)tableStep {
@@ -106,7 +107,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 
 - (void)stepDidChange {
     [super stepDidChange];
-    
+    _tableViewColor = ORKNeedWideScreenDesign(self.view) ? [UIColor clearColor] : (ORKColor(ORKBackgroundColorKey));
     [_tableContainer removeFromSuperview];
     _tableContainer = nil;
     
@@ -135,7 +136,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         _tableView.allowsSelection = NO;
         
         _tableView.separatorColor = self.tableStepRef.isBulleted ? [UIColor clearColor] : nil;
-        [_tableView setBackgroundColor:(ORKColor(ORKBackgroundColorKey))];
+        [_tableView setBackgroundColor:_tableViewColor];
         _tableView.alwaysBounceVertical = NO;
         _headerView = _tableContainer.stepHeaderView;
         _headerView.instructionLabel.text = [[self step] text];
@@ -167,46 +168,48 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
     
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
@@ -261,7 +264,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self.tableStep configureCell:cell indexPath:indexPath tableView:tableView];
     
-    [cell setBackgroundColor:(ORKColor(ORKBackgroundColorKey))];
+    [cell setBackgroundColor:_tableViewColor];
     return cell;
 }
 

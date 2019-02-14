@@ -51,7 +51,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         return colors[index]
     }
     
-    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
+    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String? {
         return "Title \(index + 1)"
     }
 }

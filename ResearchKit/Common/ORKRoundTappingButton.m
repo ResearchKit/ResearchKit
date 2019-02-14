@@ -62,10 +62,4 @@ static const CGFloat RoundTappingButtonDiameter = 104;
     return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 3.0];
 }
 
-#pragma mark Accessibility
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    return [super accessibilityTraits] | UIAccessibilityTraitAllowsDirectInteraction;
-}
-
 @end

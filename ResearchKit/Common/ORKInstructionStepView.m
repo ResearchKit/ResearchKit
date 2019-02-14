@@ -156,7 +156,7 @@
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
-        [style setAlignment:NSTextAlignmentLeft];
+        [style setAlignment:NSTextAlignmentNatural];
         
         [attributedInstruction appendAttributedString:attributedDetail];
         
@@ -165,7 +165,7 @@
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
-        [style setAlignment:NSTextAlignmentLeft];
+        [style setAlignment:NSTextAlignmentNatural];
         
         NSAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:detail
                                                                                attributes:@{NSParagraphStyleAttributeName: style}];

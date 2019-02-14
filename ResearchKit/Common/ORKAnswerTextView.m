@@ -38,6 +38,7 @@
 
 @implementation ORKAnswerTextView {
     UITextView *_placeholderTextView;
+    NSArray<UIAccessibilityCustomAction *> *_accessibilityCustomActions;
 }
 
 - (instancetype)init {
@@ -73,8 +74,26 @@
     [self insertSubview:_placeholderTextView atIndex:0];
     
     [self setUpConstraints];
-    
+    [self addAccessoryViewWithDoneButton];
     [self updateAppearance];
+}
+
+- (void)addAccessoryViewWithDoneButton {
+    UIToolbar* accessoryViewWithDoneButton = [[UIToolbar alloc] init];
+    [accessoryViewWithDoneButton sizeToFit];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                      target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                   target:self action:@selector(keyboardAccessoryViewDoneButtonPressed)];
+    accessoryViewWithDoneButton.items = @[flexibleSpace, doneButton];
+    [accessoryViewWithDoneButton setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+    self.inputAccessoryView = accessoryViewWithDoneButton;
+}
+
+- (void)keyboardAccessoryViewDoneButtonPressed {
+    [self resignFirstResponder];
 }
 
 - (void)layoutSubviews {
@@ -147,6 +166,26 @@
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
     return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
+}
+
+- (BOOL)accessibilityDismissKeyboardForAction:(UIAccessibilityCustomAction *)customAction
+{
+    [self resignFirstResponder];
+    return YES;
+}
+
+- (NSArray<UIAccessibilityCustomAction *> *)accessibilityCustomActions
+{
+    NSArray<UIAccessibilityCustomAction *> *actions = nil;
+    if (self.isFirstResponder) {
+        if (_accessibilityCustomActions == nil) {
+            // Users of accessibility technologies may not be able to tap outside the view to dismiss the keyboard, so provide an action for it here.
+            UIAccessibilityCustomAction *dismissKeyboardAction = [[UIAccessibilityCustomAction alloc] initWithName:ORKLocalizedString(@"AX_DISMISS_KEYBOARD_CUSTOM_ACTION", nil) target:self selector:@selector(accessibilityDismissKeyboardForAction:)];
+            _accessibilityCustomActions = @[dismissKeyboardAction];
+        }
+        actions = _accessibilityCustomActions;
+    }
+    return actions;
 }
 
 @end

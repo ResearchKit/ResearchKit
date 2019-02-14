@@ -68,8 +68,14 @@ class ConsentDocument: ORKConsentDocument {
             }
         }
         
-        let signature = ORKConsentSignature(forPersonWithTitle: nil, dateFormatString: nil, identifier: "ConsentDocumentParticipantSignature")
-        signature.title = "Participant Signiature"
+        let signature = ORKConsentSignature(
+            forPersonWithTitle: nil,
+            dateFormatString: nil,
+            identifier: "ConsentDocumentParticipantSignature"
+        )
+        
+        signature.title = "Participant Signature"
+        
         addSignature(signature)
     }
     

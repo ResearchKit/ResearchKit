@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKGraphChartViewDataSource Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/graphChartView:accessibilityLabelForXAxisAtPointIndex:">- graphChartView:accessibilityLabelForXAxisAtPointIndex:</option>
+		
+		<option value="//api/name/graphChartView:accessibilityUnitLabelForPlotIndex:">- graphChartView:accessibilityUnitLabelForPlotIndex:</option>
+		
+		<option value="//api/name/graphChartView:colorForPlotIndex:">- graphChartView:colorForPlotIndex:</option>
+		
+		<option value="//api/name/graphChartView:drawsPointIndicatorsForPlotIndex:">- graphChartView:drawsPointIndicatorsForPlotIndex:</option>
+		
+		<option value="//api/name/graphChartView:drawsVerticalReferenceLineAtPointIndex:">- graphChartView:drawsVerticalReferenceLineAtPointIndex:</option>
+		
+		<option value="//api/name/graphChartView:fillColorForPlotIndex:">- graphChartView:fillColorForPlotIndex:</option>
+		
+		<option value="//api/name/graphChartView:numberOfDataPointsForPlotIndex:">- graphChartView:numberOfDataPointsForPlotIndex:</option>
+		
+		<option value="//api/name/graphChartView:titleForXAxisAtPointIndex:">- graphChartView:titleForXAxisAtPointIndex:</option>
+		
+		<option value="//api/name/maximumValueForGraphChartView:">- maximumValueForGraphChartView:</option>
+		
+		<option value="//api/name/minimumValueForGraphChartView:">- minimumValueForGraphChartView:</option>
+		
+		<option value="//api/name/numberOfDivisionsInXAxisForGraphChartView:">- numberOfDivisionsInXAxisForGraphChartView:</option>
+		
+		<option value="//api/name/numberOfPlotsInGraphChartView:">- numberOfPlotsInGraphChartView:</option>
+		
+		<option value="//api/name/scrubbingPlotIndexForGraphChartView:">- scrubbingPlotIndexForGraphChartView:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKGraphChartViewDataSource Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKGraphChartView.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The abstract <code>ORKGraphChartViewDataSource</code> protocol is the base protocol which conforms the basis
+for the <a href="../Protocols/ORKValueRangeGraphChartViewDataSource.html"><code>ORKValueRangeGraphChartViewDataSource</code></a> and <a href="../Protocols/ORKValueStackGraphChartViewDataSource.html"><code>ORKValueStackGraphChartViewDataSource</code></a>
+protocols, required to populate the concrete <a href="../Classes/ORKGraphChartView.html"><code>ORKGraphChartView</code></a> subclass.</p>
+
+<p>At a minimum, a data source object must implement the <code>graphChartView:numberOfPointsInPlot:</code> and
+<code>graphChartView:plot:valueForPointAtIndex:</code> methods. These methods return
+the number of points in a plot and the points themselves. Each point in a plot is represented by
+an object of the <a href="../Classes/ORKValueRange.html"><code>ORKValueRange</code></a> or <a href="../Classes/ORKValueStack.html"><code>ORKValueStack</code></a> class, depending on the concrete subprotocol.</p>
+
+<p>A data source object may provide additional information to the graph chart view by implementing the
+optional methods.</p>
+
+<p>When configuring an <a href="../Classes/ORKGraphChartView.html"><code>ORKGraphChartView</code></a> object, assign your data source to its <code>dataSource</code>
+property.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/graphChartView:numberOfDataPointsForPlotIndex:" title="graphChartView:numberOfDataPointsForPlotIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:numberOfDataPointsForPlotIndex:">&ndash;&nbsp;graphChartView:numberOfDataPointsForPlotIndex:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the number of value points to be plotted by the graph chart view at the
+specified plot index.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> numberOfDataPointsForPlotIndex:(NSInteger)<em>plotIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the number of value points.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>plotIndex</code></th>
+						<td><p>An index number identifying the plot in the graph chart view. This index
+                                is 0 in a single-plot graph chart view.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of range points in the plot at <code>plotIndex</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/numberOfPlotsInGraphChartView:" title="numberOfPlotsInGraphChartView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberOfPlotsInGraphChartView:">&ndash;&nbsp;numberOfPlotsInGraphChartView:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the number of plots to be plotted by the graph chart view.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)<em>graphChartView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the number of plots.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of plots in the graph chart view.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:colorForPlotIndex:" title="graphChartView:colorForPlotIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:colorForPlotIndex:">&ndash;&nbsp;graphChartView:colorForPlotIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the color of the specified plot.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIColor *)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> colorForPlotIndex:(NSInteger)<em>plotIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the color of the segment.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>plotIndex</code></th>
+						<td><p>An index number identifying the plot in the graph chart view. This index
+                                is always 0 in single-plot graph chart views.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The color of the segment at the specified index in a pie chart view.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the first plot uses the graph chart view <code>tintColor</code>, and
+all subsequent plots uses the current <code>referenceLineColor</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:fillColorForPlotIndex:" title="graphChartView:fillColorForPlotIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:fillColorForPlotIndex:">&ndash;&nbsp;graphChartView:fillColorForPlotIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the fill color of the specified plot.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (UIColor *)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> fillColorForPlotIndex:(NSInteger)<em>plotIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the color of the segment.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>plotIndex</code></th>
+						<td><p>An index number identifying the plot in the graph chart view. This index
+is always 0 in single-plot graph chart views.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The color of the fill layer at the specified index in a line chart view.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The fill color is only used by <a href="../Classes/ORKLineGraphChartView.html"><code>ORKLineGraphChartView</code></a>. If this method is not implemented, the
+chart uses the main color of the specified plot with a 0.4 opacity value.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/scrubbingPlotIndexForGraphChartView:" title="scrubbingPlotIndexForGraphChartView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/scrubbingPlotIndexForGraphChartView:">&ndash;&nbsp;scrubbingPlotIndexForGraphChartView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source which plot the scrubber should snap to in multigraph chart views.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)scrubbingPlotIndexForGraphChartView:(ORKGraphChartView *)<em>graphChartView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the scrubbing plot index.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The index of the plot that the scrubber should snap to.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the scrubber snaps over the first plot.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/maximumValueForGraphChartView:" title="maximumValueForGraphChartView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/maximumValueForGraphChartView:">&ndash;&nbsp;maximumValueForGraphChartView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the upper limit of the y-axis drawn by the graph chart view.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (double)maximumValueForGraphChartView:(ORKGraphChartView *)<em>graphChartView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the maximum value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The maximum value of the y-axis drawn by <code>graphChartView</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the greatest <code>maximumValue</code> of all <a href="../Classes/ORKValueRange.html"><code>ORKValueRange</code></a> instances
+returned in <code>graphChartView:plot:valueForPointAtIndex:</code> is used.</p>
+
+<p>See also: <code>graphChartView:plot:valueForPointAtIndex:</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/minimumValueForGraphChartView:" title="minimumValueForGraphChartView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/minimumValueForGraphChartView:">&ndash;&nbsp;minimumValueForGraphChartView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the lower limit of the y-axis drawn by the graph chart view.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (double)minimumValueForGraphChartView:(ORKGraphChartView *)<em>graphChartView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the minimum value.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The minimum value of the y-axis drawn by <code>graphChartView</code>.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the smallest <code>minimumValue</code> of all <a href="../Classes/ORKValueRange.html">ORKValueRange</a> instances
+returned in <code>graphChartView:plot:valueForPointAtIndex:</code> is used.</p>
+
+<p>See also: <code>graphChartView:plot:valueForPointAtIndex:</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/numberOfDivisionsInXAxisForGraphChartView:" title="numberOfDivisionsInXAxisForGraphChartView:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/numberOfDivisionsInXAxisForGraphChartView:">&ndash;&nbsp;numberOfDivisionsInXAxisForGraphChartView:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
+than the number of data points. A title appearing adjacent to each
+division may optionally be returned by the <a href="#//api/name/graphChartView:titleForXAxisAtPointIndex:"><code>graphChartView:titleForXAxisAtPointIndex:</code></a> method.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)numberOfDivisionsInXAxisForGraphChartView:(ORKGraphChartView *)<em>graphChartView</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the number of divisions in its x-axis.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The number of divisions in the x-axis for <code>graphChartView</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:titleForXAxisAtPointIndex:" title="graphChartView:titleForXAxisAtPointIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:titleForXAxisAtPointIndex:">&ndash;&nbsp;graphChartView:titleForXAxisAtPointIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the title to be displayed adjacent to each division in the x-axis (the
+number returned by <a href="../Protocols/ORKGraphChartViewDataSource.html#//api/name/numberOfDivisionsInXAxisForGraphChartView:"><code>numberOfDivisionsInXAxisForGraphChartView:</code></a>). You can return <code>nil</code> from this
+method if you don&rsquo;t want to display a title for the specified point index.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NSString *)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> titleForXAxisAtPointIndex:(NSInteger)<em>pointIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph chart view asking for the title.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pointIndex</code></th>
+						<td><p>The index of the specified x-axis division.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The title string to be displayed adjacent to each division of the x-axis of the graph chart
+view.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the x-axis has no titles.</p>
+
+<p>See also: <a href="../Protocols/ORKGraphChartViewDataSource.html#//api/name/numberOfDivisionsInXAxisForGraphChartView:"><code>numberOfDivisionsInXAxisForGraphChartView:</code></a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:drawsVerticalReferenceLineAtPointIndex:" title="graphChartView:drawsVerticalReferenceLineAtPointIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:drawsVerticalReferenceLineAtPointIndex:">&ndash;&nbsp;graphChartView:drawsVerticalReferenceLineAtPointIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source if the vertical reference line at the specified point index should be drawn..</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> drawsVerticalReferenceLineAtPointIndex:(NSInteger)<em>pointIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph view asking for the tile.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pointIndex</code></th>
+						<td><p>The index corresponding to the number returned by
+                            <a href="#//api/name/numberOfDivisionsInXAxisForGraphChartView:"><code>numberOfDivisionsInXAxisForGraphChartView:</code></a>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Whether the graph chart view should draw the vertical reference line.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, the graph chart view will draw all vertical reference lines.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:drawsPointIndicatorsForPlotIndex:" title="graphChartView:drawsPointIndicatorsForPlotIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:drawsPointIndicatorsForPlotIndex:">&ndash;&nbsp;graphChartView:drawsPointIndicatorsForPlotIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source if the plot at specified index should display circular indicators on its data points.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> drawsPointIndicatorsForPlotIndex:(NSInteger)<em>plotIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph view asking whether point indicators should be drawn.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>plotIndex</code></th>
+						<td><p>An index number identifying the plot in the graph chart view. This index
+is always 0 in single-plot graph chart views.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>Whether the graph chart view should draw point indicators for its points.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This only applys to <code>ORKLineGrapthChartView</code>.
+If this method is not implemented, point indicators will be drawn for all plots.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:accessibilityUnitLabelForPlotIndex:" title="graphChartView:accessibilityUnitLabelForPlotIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:accessibilityUnitLabelForPlotIndex:">&ndash;&nbsp;graphChartView:accessibilityUnitLabelForPlotIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the unit label for the given plot index so VoiceOver&rsquo;s description of the graph can be read with units.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> accessibilityUnitLabelForPlotIndex:(NSInteger)<em>plotIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph view asking for its unit label</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>plotIndex</code></th>
+						<td><p>An index number identifying the plot in the graph chart view. This index
+is always 0 in single-plot graph chart views.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An appropriate unit label for the given plot.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If this method is not implemented, VoiceOver will speak the graph value without units.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/graphChartView:accessibilityLabelForXAxisAtPointIndex:" title="graphChartView:accessibilityLabelForXAxisAtPointIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/graphChartView:accessibilityLabelForXAxisAtPointIndex:">&ndash;&nbsp;graphChartView:accessibilityLabelForXAxisAtPointIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Asks the data source for the accessibilityLabel at a given point on the x-axis</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)graphChartView:(ORKGraphChartView *)<em>graphChartView</em> accessibilityLabelForXAxisAtPointIndex:(NSInteger)<em>pointIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>graphChartView</code></th>
+						<td><p>The graph view asking for its unit label</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pointIndex</code></th>
+						<td><p>The index corresponding to the number returned by <a href="#//api/name/numberOfDivisionsInXAxisForGraphChartView:"><code>numberOfDivisionsInXAxisForGraphChartView:</code></a>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An appropriate accessibility label for the given index of the graph.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This is used in cases where the UI may be displaying a shortened form (e.g. M, T, W, etc. for days of the week), but VoiceOver should be speaking the longer form. If this method isn&rsquo;t implemented, VoiceOver will speak the label displayed in the UI for the given index.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKGraphChartView.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

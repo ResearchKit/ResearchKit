@@ -265,8 +265,10 @@ static const CGFloat cardTopBottomMargin = 2.0;
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
         self.accessoryView.hidden = _selectedItem ? NO : YES;
-        self.shortLabel.textColor = _selectedItem ? [self tintColor] : [UIColor blackColor];
-        self.longLabel.textColor = _selectedItem ? [[self tintColor] colorWithAlphaComponent:192.0 / 255.0] : [UIColor ork_darkGrayColor];
+        if (_selectedItem) {
+            self.shortLabel.textColor = [self tintColor];
+            self.longLabel.textColor = [[self tintColor] colorWithAlphaComponent:192.0 / 255.0];
+        }
     }
 }
 
@@ -284,7 +286,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
     [self updateSelectedItem];
 }
 
-+ (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
++ (CGFloat)suggestedCellHeightForPrimaryText:(NSString *)shortText primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)longText  detailTextAttributedString:(NSAttributedString *)detailTextAttributedString inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
@@ -293,7 +295,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
     CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
     CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + LabelRightMargin);
    
-    if (shortText.length > 0) {
+    if (shortText.length > 0 || primaryTextAttributedString != nil) {
         static ORKSelectionTitleLabel *shortLabel;
         if (shortLabel == nil) {
             shortLabel = [ORKSelectionTitleLabel new];
@@ -302,14 +304,16 @@ static const CGFloat cardTopBottomMargin = 2.0;
         
         shortLabel.frame = CGRectMake(0, 0, labelWidth, 0);
         shortLabel.text = shortText;
-        
+        if (primaryTextAttributedString) {
+            shortLabel.attributedText = primaryTextAttributedString;
+        }
         ORKAdjustHeightForLabel(shortLabel);
         CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = shortLabel.font.ascender;
     
         height += firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop + shortLabel.frame.size.height;
     }
     
-    if (longText.length > 0) {
+    if (longText.length > 0 || detailTextAttributedString != nil) {
         static ORKSelectionSubTitleLabel *longLabel;
         if (longLabel == nil) {
             longLabel = [ORKSelectionSubTitleLabel new];
@@ -318,7 +322,9 @@ static const CGFloat cardTopBottomMargin = 2.0;
         
         longLabel.frame = CGRectMake(0, 0, labelWidth, 0);
         longLabel.text = longText;
-        
+        if (detailTextAttributedString) {
+            longLabel.attributedText = detailTextAttributedString;
+        }
         ORKAdjustHeightForLabel(longLabel);
         
         CGFloat longLabelApproximateFirstBaselineOffset = longLabel.font.ascender;

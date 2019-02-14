@@ -149,7 +149,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .valuePickerChoiceQuestion,
                     .validatedTextQuestion,
                     .imageCapture,
-//                    .videoCapture,
+                    .videoCapture,
                     .wait,
                     .PDFViewer,
                 ]),
@@ -177,7 +177,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .timedWalkWithTurnAround,
                     .toneAudiometry,
                     .dBHLToneAudiometry,
-//                    .splMeter,
+                    .splMeter,
                     .towerOfHanoi,
                     .tremorTest,
                     .twoFingerTappingInterval,
@@ -755,7 +755,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         question1Step.text = exampleDetailText
         
         //Add a question step with different layout format.
-        let question2StepAnswerFormat = ORKAnswerFormat.dateAnswerFormat()
+        let question2StepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: nil, minimumDate: nil, maximumDate: Date(), calendar: nil)
         
         let question2 = NSLocalizedString("When is your birthday?", comment: "")
         let question2Step = ORKQuestionStep.init(identifier: String(describing: Identifier.birthdayQuestion), title: "Questionnaire", question: question2, answer: question2StepAnswerFormat)
@@ -1159,6 +1159,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.none
         answerFormatDomain.autocorrectionType = UITextAutocorrectionType.no
         answerFormatDomain.spellCheckingType = UITextSpellCheckingType.no
+        answerFormatDomain.textContentType = UITextContentType.URL
         let stepDomain = ORKQuestionStep(identifier: String(describing:Identifier.validatedTextQuestionStepDomain), title: NSLocalizedString("Validated Text", comment: ""), question: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
         stepDomain.text = exampleDetailText
         
@@ -1347,6 +1348,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let signature = consentDocument.signatures!.first
         
         let reviewConsentStep = ORKConsentReviewStep(identifier: String(describing:Identifier.consentReviewStep), signature: signature, in: consentDocument)
+        reviewConsentStep.requiresScrollToBottom = true
         
         // In a real application, you would supply your own localized text.
         reviewConsentStep.title = NSLocalizedString("Consent Document", comment: "")
@@ -1369,7 +1371,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationTitle = NSLocalizedString("Registration", comment: "")
         let passcodeValidationRegularExpressionPattern = "^(?=.*\\d).{4,8}$"
         let passcodeValidationRegularExpression = try! NSRegularExpression(pattern: passcodeValidationRegularExpressionPattern)
-        let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
+        let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 to 8 characters long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.includeGivenName, .includeFamilyName, .includeGender, .includeDOB, .includePhoneNumber]
         let registrationStep = ORKRegistrationStep(identifier: String(describing:Identifier.registrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegularExpression: passcodeValidationRegularExpression, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         registrationStep.phoneNumberValidationRegularExpression = try! NSRegularExpression(pattern: "^[+]{1,1}[1]{1,1}\\s{1,1}[(]{1,1}[1-9]{3,3}[)]{1,1}\\s{1,1}[1-9]{3,3}\\s{1,1}[1-9]{4,4}$")
@@ -1453,7 +1455,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let passcodeConsentStep = ORKPasscodeStep(identifier: String(describing:Identifier.passcodeStep))
         passcodeConsentStep.title = NSLocalizedString("Passcode", comment: "")
-        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeStep), steps: [passcodeConsentStep])
+        return ORKOrderedTask(identifier: String(describing:Identifier.passcodeTask), steps: [passcodeConsentStep])
     }
     
     /// This task presents the Audio pre-defined active task.

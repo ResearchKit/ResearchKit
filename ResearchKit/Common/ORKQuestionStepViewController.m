@@ -146,6 +146,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     self.hasChangedAnswer = NO;
     
     if ([self isViewLoaded]) {
+        BOOL neediPadDesign = ORKNeedWideScreenDesign(self.view);
         [_tableContainer removeFromSuperview];
         [_navigationFooterView removeFromSuperview];
         _tableView.delegate = nil;
@@ -198,6 +199,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _navigationFooterView.skipEnabled = [self skipButtonEnabled];
                 _navigationFooterView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
+            if (neediPadDesign) {
+                [_tableContainer setBackgroundColor:[UIColor clearColor]];
+                [_tableView setBackgroundColor:[UIColor clearColor]];
+            }
             [self setupConstraints:_tableContainer];
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
@@ -243,6 +248,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _navigationFooterView.skipEnabled = [self skipButtonEnabled];
                 _navigationFooterView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
+            if (neediPadDesign) {
+                [_questionView setBackgroundColor:[UIColor clearColor]];
+            }
             [self setupConstraints:_questionView];
         }
     }
@@ -260,47 +268,48 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     view.translatesAutoresizingMaskIntoConstraints = NO;
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
-    
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:view
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:view
                                                   attribute:NSLayoutAttributeLeftMargin
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeLeftMargin
                                                  multiplier:1.0
                                                    constant:ORKSurveyTableContainerLeftRightPadding],
                      [NSLayoutConstraint constraintWithItem:view
                                                   attribute:NSLayoutAttributeRightMargin
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view.safeAreaLayoutGuide
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                   attribute:NSLayoutAttributeRightMargin
                                                  multiplier:1.0
                                                    constant:-ORKSurveyTableContainerLeftRightPadding],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:self.view
+                                                     toItem:viewForiPad ? : self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
@@ -317,20 +326,21 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)setupCellHolderViewConstraints {
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
     if (_cellHolderView) {
         NSArray *cellHolderConstraints = @[
                                            
                                            [NSLayoutConstraint constraintWithItem:_cellHolderView
                                                                         attribute:NSLayoutAttributeLeftMargin
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.view.safeAreaLayoutGuide
+                                                                           toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                                         attribute:NSLayoutAttributeLeftMargin
                                                                        multiplier:1.0
                                                                          constant:ORKSurveyTableContainerLeftRightPadding],
                                            [NSLayoutConstraint constraintWithItem:_cellHolderView
                                                                         attribute:NSLayoutAttributeRightMargin
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.view.safeAreaLayoutGuide
+                                                                           toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                                                         attribute:NSLayoutAttributeRightMargin
                                                                        multiplier:1.0
                                                                          constant:-ORKSurveyTableContainerLeftRightPadding]
@@ -867,7 +877,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
     ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText inTableView:_tableView];
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForPrimaryText:option.text primaryTextAttributedString:option.primaryTextAttributedString detailText:option.detailText  detailTextAttributedString:option.detailTextAttributedString inTableView:_tableView];
     return height;
 }
 

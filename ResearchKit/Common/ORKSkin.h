@@ -83,11 +83,20 @@ ORK_EXTERN NSString *const ORKAuxiliaryImageTintColorKey;
 /// Default color used for navigation container view
 ORK_EXTERN NSString *const ORKNavigationContainerColorKey;
 
+/// Color used for view's backgroud
+ORK_EXTERN NSString *const ORKNavigationContainerShadowColorKey;
+
 /// Default color progress label
 ORK_EXTERN NSString *const ORKProgressLabelColorKey;
 
+/// Default color used by iPadBackgroundView
+ORK_EXTERN NSString *const ORKiPadBackgroundViewColorKey;
+
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
+
+/// Return minimum height for question step header view
+ORK_EXTERN CGFloat ORKQuestionStepMinimumHeaderHeight;
 
 /// Default CGFloat used for rounded corner radii for card view
 ORK_EXTERN CGFloat ORKCardDefaultCornerRadii;
@@ -107,6 +116,14 @@ ORK_EXTERN CGFloat ORKCardTopBottomMargin;
 /// Padding for Form and Question Step Table Containers
 ORK_EXTERN CGFloat ORKSurveyTableContainerLeftRightPadding;
 
+/// Default corner radius for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewCornerRadius;
+
+/// Default Bottom margin for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewBottomPadding;
+
+/// Default Left Right margin for iPadBackgroundView;
+ORK_EXTERN CGFloat ORKiPadBackgroundViewLeftRightPadding;
 
 /// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
@@ -147,6 +164,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricContinueButtonHeightCompact,
     ORKScreenMetricContinueButtonWidth,
     ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
+    ORKScreenMetricMinimumGameViewHeightForMemoryGame,
     ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle,
     ORKScreenMetricTableCellDefaultHeight,
     ORKScreenMetricTextFieldCellHeight,
@@ -169,11 +187,13 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
 
 typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhoneX,
+    ORKScreenTypeiPhoneXSMax,
     ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
+    ORKScreenTypeiPad10_5,
     ORKScreenTypeiPad12_9,
     ORKScreenType_COUNT
 };
@@ -187,6 +207,7 @@ UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
 CGFloat ORKWidthForSignatureView(UIWindow * _Nullable window);
+BOOL ORKNeedWideScreenDesign(UIView *view);
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 

@@ -698,6 +698,11 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
+    self.textField.textContentType = answerFormat.textContentType;
+    
+    if (@available(iOS 12.0, *)) {
+        self.textField.passwordRules = answerFormat.passwordRules;
+    }
     
     [self answerDidChange];
 }
@@ -948,6 +953,11 @@ static const CGFloat HorizontalMargin = 15.0;
         _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         _textView.keyboardType = textAnswerFormat.keyboardType;
         _textView.secureTextEntry = textAnswerFormat.secureTextEntry;
+        _textView.textContentType = textAnswerFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            _textView.passwordRules = textAnswerFormat.passwordRules;
+        }
     } else {
         _maxLength = 0;
     }

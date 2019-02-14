@@ -85,6 +85,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _textLabel.text =  ORKLocalizedString(@"COUNTDOWN_LABEL", nil);
+        _textLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:_textLabel];
         
         _timeLabel = [ORKCountDownViewLabel new];

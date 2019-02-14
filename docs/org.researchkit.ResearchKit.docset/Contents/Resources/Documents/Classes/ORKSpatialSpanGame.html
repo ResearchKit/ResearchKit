@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKSpatialSpanGame Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/gameSize">gameSize</option>
+		
+		<option value="//api/name/seed">seed</option>
+		
+		<option value="//api/name/sequenceLength">sequenceLength</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/enumerateSequenceWithHandler:">- enumerateSequenceWithHandler:</option>
+		
+		<option value="//api/name/initWithGameSize:sequenceLength:seed:">- initWithGameSize:sequenceLength:seed:</option>
+		
+		<option value="//api/name/tileIndexForStep:">- tileIndexForStep:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKSpatialSpanGame Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKSpatialSpanGame.h<br />ORKSpatialSpanGame.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKSpatialSpanGame</code> class represents a model object that represents one game-like experience in a spatial span memory task.</p>
+
+<p>A game consists of a subset of a permutation of the integers [0 .. <a href="#//api/name/gameSize">gameSize</a> - 1],
+which represent the sequence of targets that should be tapped.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithGameSize:sequenceLength:seed:" title="initWithGameSize:sequenceLength:seed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithGameSize:sequenceLength:seed:">&ndash;&nbsp;initWithGameSize:sequenceLength:seed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized spatial span game using the specified game size, sequence length, and <a href="#//api/name/seed">seed</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithGameSize:(NSInteger)<em>gameSize</em> sequenceLength:(NSInteger)<em>sequenceLength</em> seed:(uint32_t)<em>seed</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>gameSize</code></th>
+						<td><p>The number of tiles in the game.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sequenceLength</code></th>
+						<td><p>The number of elements in the sequence that the user has to remember.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>seed</code></th>
+						<td><p>The generator that should be used for generating the sequence. A value of 0 means that a random <a href="#//api/name/seed">seed</a> is used.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This method is the designated initializer.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/gameSize" title="gameSize"></a>
+	<h3 class="method-title"><code><a href="#//api/name/gameSize">&nbsp;&nbsp;gameSize</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The number of tiles in the game.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSInteger gameSize</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sequenceLength" title="sequenceLength"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sequenceLength">&nbsp;&nbsp;sequenceLength</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The length of the sequence. A sequence is a sub-array of a random permutation of integers (0..gameSize-1) that  has a length of <code>sequenceLength</code>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSInteger sequenceLength</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/seed" title="seed"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seed">&nbsp;&nbsp;seed</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The seed to use to generate the sequence. Note that if you pass <code>seed</code> to another game, you get the same game.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) uint32_t seed</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enumerateSequenceWithHandler:" title="enumerateSequenceWithHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enumerateSequenceWithHandler:">&ndash;&nbsp;enumerateSequenceWithHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Enumerates the sequence, calling the block once for each element.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)enumerateSequenceWithHandler:(void ( ^ ) ( NSInteger step , NSInteger tileIndex , BOOL isLastStep , BOOL *stop ))<em>handler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handler</code></th>
+						<td><p>The block to be called for each element in the sequence. The <code>handler</code> block takes the following parameters:</p>
+
+<p><code>step</code>         The step in the sequence. The step starts at 0 and increments by one on each call.
+<code>tileIndex</code>    The index in [ 0 .. <a href="#//api/name/gameSize">gameSize</a> ] that corresponds to the step&rsquo;s element of the sequence.
+<code>isLastStep</code>   A Boolean value that indicates if this is the last step in the sequence.
+<code>stop</code>         A Boolean value that indicates if the enumeration should be terminated (pass <code>NO</code> to terminate the enumeration).</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/tileIndexForStep:" title="tileIndexForStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/tileIndexForStep:">&ndash;&nbsp;tileIndexForStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the value of the specified step in the sequence.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSInteger)tileIndexForStep:(NSInteger)<em>step</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKSpatialSpanGame.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

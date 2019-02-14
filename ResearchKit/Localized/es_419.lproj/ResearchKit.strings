@@ -269,6 +269,8 @@
 "TAPPING_INSTRUCTION_LEFT" = "Toca los botones usando tu mano izquierda.";
 "TAPPING_SKIP_TITLE" = "Omitir esta mano";
 
+/* Amsler Grid Task.*/
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
 "AUDIO_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
@@ -290,6 +292,8 @@
 "TONE_AUDIOMETRY_INSTRUCTION" = "Toca el botón en cuanto escuches un sonido.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, izquierda";
 "TONE_LABEL_%@_RIGHT" = "%@ HZ, derecha";
+
+/* dBHL Tone audiometry active task. */
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memoria espacial";
@@ -430,6 +434,10 @@
 
 /* Trail making task. */
 
+/* Speech Recognition active task. */
+
+/* Speech In Noise active task. */
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se pudo crear el archivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No se pudo eliminar suficientes registros para alcanzar el umbral";
@@ -439,13 +447,15 @@
 "ERROR_RECORDER_NO_DATA" = "Datos recopilados no encontrados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Directorio de salida no especificado";
 
+/* Environment SPL*/
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Sin datos";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Atrás";
 
-"AX_IMAGE_ILLUSTRATION" = "Ilustración de %@";
+
 
 "AX_SIGNVIEW_LABEL" = "Campo para firma";
 "AX_SIGNVIEW_HINT" = "Usa tu dedo para firmar la pantalla";
@@ -479,6 +489,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tiene discos de tamaño %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vacía";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Rango de %@ a %@";
 "AX_GRAPH_STACK_PREFIX" = "Pila compuesta de";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
@@ -486,5 +497,14 @@
 
 
 
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+
 /* Unsorted */
 "AX_VIDEO_CAPTURED_LABEL" = "Vídeo capturado";
+"AX_IMAGE_ILLUSTRATION" = "Ilustración de %@";

@@ -51,6 +51,7 @@
     self = [super initWithIdentifier:identifier];
     _speechRecognitionImage = image;
     _text = text;
+    _speechRecognizerLocale = ORKSpeechRecognizerLocaleEnglishUS;
     return self;
 }
 
@@ -86,7 +87,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.speechRecognizerLocale == castObject.speechRecognizerLocale));
+            [self.speechRecognizerLocale isEqual:castObject.speechRecognizerLocale]);
 }
 
 - (BOOL)allowsBackNavigation {

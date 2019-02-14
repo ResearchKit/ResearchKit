@@ -47,22 +47,10 @@ static const NSUInteger MaximumNumberOfDisks = 8;
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        [self commonInit];
+        self.optional = YES;
+        self.numberOfDisks = 3;
     }
     return self;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (void)commonInit {
-    self.optional = YES;
-    self.numberOfDisks = 3;
 }
 
 + (BOOL)supportsSecureCoding {

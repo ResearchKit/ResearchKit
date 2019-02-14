@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "नीचे दिए गए फ़ॉर्म को देखें और जारी रखने के लिए “सहमत” पर टैप करें।";
 "CONSENT_REVIEW_ALERT_TITLE" = "समीक्षा";
 "CONSENT_SIGNATURE_TITLE" = "हस्ताक्षर";
-"CONSENT_SIGNATURE_INSTRUCTION" = "कृपया अपनी उँगली का उपयोग करके नीचे दी गई रेखा पर हस्ताक्षर करें।";
+"CONSENT_SIGNATURE_INSTRUCTION" = "कृपया अपनी उँगली का उपयोग करके नीचे दिए गए बॉक्स में हस्ताक्षर करें।";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "यहाँ हस्ताक्षर करें";
 "CONSENT_PAGE_NUMBER_FORMAT" = "पृष्ठ %1$ld/%2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "तिथि";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "चरण %1$@/%2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "अमान्य मान";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "लिंग चुनें";
 "DOB_FORM_ITEM_TITLE" = "जन्मतिथि";
 "DOB_FORM_ITEM_PLACEHOLDER" = "तिथि चुनें";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "फ़ोन नंबर";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "सत्यापन";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "सें॰मी॰";
 "MEASURING_UNIT_FT" = "फ़ीट";
 "MEASURING_UNIT_IN" = "इंच";
+"MEASURING_UNIT_KG" = "कि॰ग्रा॰";
+"MEASURING_UNIT_LB" = "पाउंड";
+"MEASURING_UNIT_OZ" = "औंस";
 
 /* Limb values. */
 "LIMB_LEFT" = "बायाँ";
@@ -196,13 +201,14 @@
 "BUTTON_CANCEL" = "रद्द करें";
 "BUTTON_OK" = "ठीक";
 "BUTTON_CLEAR" = "साफ़ करें";
+"BUTTON_APPLY" = "लागू करें";
 "BUTTON_DISAGREE" = "असहमत";
 "BUTTON_DONE" = "पूर्ण";
 "BUTTON_GET_STARTED" = "आरंभ करें";
 "BUTTON_LEARN_MORE" = "और अधिक जानें";
 "BUTTON_NEXT" = "अगला";
-"BUTTON_SKIP" = "छोड़ें";
-"BUTTON_SKIP_QUESTION" = "यह प्रश्न छोड़ें";
+"BUTTON_SKIP" = "स्किप करें";
+"BUTTON_SKIP_QUESTION" = "यह प्रश्न स्किप करें";
 "BUTTON_START_TIMER" = "टाइमर प्रारंभ करें";
 "BUTTON_OPTION_SAVE" = "बाद के लिए सहेजें";
 "BUTTON_OPTION_DISCARD" = "परिणाम ख़ारिज करें";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "चाल और संतुलन";
 "WALK_INTRO_TEXT" = "इस गतिविधि द्वारा आपके पैदल चलने या खड़े रहने पर आपकी चाल और संतुलन का मापन किया जाता है। यदि आप बिना किसी सहायता के सुरक्षित पैदल नहीं चल सकते हैं, तो इसे जारी न रखें।";
 "WALK_INTRO_2_TEXT_%ld" = "ऐसी जगह ढूँढें जहाँ आप बिना किसी सहायता के लगभग %ld क़दम सीधी रेखा में चल सकें।";
-"WALK_INTRO_2_DETAIL" = "अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का अनुसरण करें।";
+"WALK_INTRO_2_DETAIL" = "अपने उपकरण को जेब या बैग में रखें और ऑडियो निर्देशों का अनुसरण करें।";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "अब %@ तक स्थिर खड़े रहें।";
 "WALK_STAND_INSTRUCTION_FORMAT" = "%@ तक स्थिर खड़े रहें।";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "ऐसी जगह ढूँढें, जहाँ आप एक ओर व दूसरी ओर सुरक्षित रूप से सीधी रेखा में चल सकें। मार्ग की समाप्ति पर मुड़ें और लगातार चलते रहने का प्रयास करें, जैसे कि आप किसी शंकु के इर्द-गिर्द चल रहे हों।\n\nइसके बाद आपको पूर्ण वृत्त में मुड़ने के लिए, फिर अपनी भुजाओं को फैलाकर और अपने पैरों को लगभग कंधे की चौड़ाई तक फैलाकर स्थिर खड़े रहने के लिए कहा जाएगा।";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "जब आप शुरू करने के लिए तैयार हों, “आरंभ करें” पर टैप करें।\nफिर अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का पालन करें।";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "जब आप शुरू करने के लिए तैयार हों, “आरंभ करें” पर टैप करें।\nफिर अपने उपकरण को जेब या बैग में रखें और ऑडियो निर्देशों का पालन करें।";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ तक पीछे और आगे सीधी रेखा में चलें। अपनी सामान्य चाल से चलें।";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "पूर्ण वृत्त में मुड़ें फिर %@ तक स्थिर खड़े रहें।";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "आपने गतिविधि को पूर्ण कर लिया है।";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "दायॉं हाथ";
 "TAPPING_TASK_TITLE_LEFT" = "बायाँ हाथ";
 "TAPPING_INTRO_TEXT" = "इस गतिविधि द्वारा आपकी टैप करने की गति का मापन किया जाता है।";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "अपना फ़ोन समतल सतह पर रखें।";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "अपना उपकरण समतल सतह पर रखें।";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए एक ही हाथ की दो उँगलियों का उपयोग करें।";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए दाएँ हाथ की दो उँगलियों का उपयोग करें।";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "स्क्रीन पर बटनों पर एक के बाद एक टैप करने के लिए बाएँ हाथ की दो उँगलियों का उपयोग करें।";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "अपने बाएँ हाथ से बटनों पर टैप करें।";
 "TAPPING_SKIP_TITLE" = "इस हाथ को स्किप करें";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler ग्रिड";
+"AMSLER_GRID_INTRO_TEXT" = "इस गतिविधि से प्रयोगकर्ता की दृष्टि से संबंधित समस्याओं का पता लगाने में मदद मिलती है।";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "पूरे परीक्षण के दौरान उपकरण को अपने चेहरे से १२ इंच दूर और अपनी आँखों के बराबर की ऊँचाई पर पकड़कर रखें।";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "अपनी %@ बंद करें और वर्गाकार ग्रिड के मध्य में स्थित डॉट की तरफ़ देखते रहें।\n\nअपनी उँगली या स्टाइलस का उपयोग करके आपको दिखने वाली धुँधली या हिलती हुई रेखाओं जैसे किसी भी व्यवधान को चिह्नित करें।\n\nइसे पूर्ण करने पर ग्रिड के बाहर कहीं भी बाईं ओर स्वाइप करें।";
+"AMSLER_GRID_LEFT_EYE" = "बाईं आँख";
+"AMSLER_GRID_RIGHT_EYE" = "दाईं आँख";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "वॉइस";
 "AUDIO_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "AUDIO_INSTRUCTION" = "जितनी देर तक बोल सकें, माइक्रोफ़ोन में “आह” बोलिए।";
 "AUDIO_INTRO_TEXT" = "गहरी साँस लें और जितनी देर तक बोल सकें, माइक्रोफ़ोन में “आह” बोलें। अपनी बोलने की गति और आवाज़ स्थिर रखें ताकि ऑडियो बारों का रंग नीला बना रहे।";
-"AUDIO_INTENDED_USE" = "इस गतिविधि द्वारा आपके फ़ोन के नीचे लगे माइक्रोफ़ोन से आपकी आवाज़ को रिकॉर्ड करके उसका मूल्यांकन किया जाता है।";
+"AUDIO_INTENDED_USE" = "इस गतिविधि द्वारा आपके उपकरण के नीचे लगे माइक्रोफ़ोन से आपकी आवाज़ को रिकॉर्ड करके उसका मूल्यांकन किया जाता है।";
 "AUDIO_TOO_LOUD_LABEL" = "बहुत तेज़";
 "AUDIO_GENERIC_ERROR_LABEL" = "ऑडियो रिकॉर्ड करने में असमर्थ";
 "AUDIO_LEVEL_CHECK_LABEL" = "पृष्ठभूमि नॉइज़ स्तर की जाँच होने तक कृपया प्रतीक्षा करें।";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "दायाँ कान";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, बाएँ";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, दाएँ";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "टोन ऑडियोमेट्री";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "इस गतिविधि से किसी व्यक्ति के सुनने की सीमा के स्तरों की पहचान dB HL स्केल में की जाती है।";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "सुनिश्चित करें कि उपकरण का वॉल्यूम अधिकतम स्तर पर सेट है।\n\nइस परीक्षण के दौरान या तो बाएँ या दाएँ कान में हल्की टोन बजाई जाएगी।\n\nध्यान से सुनें और हर बार टोन सुनाई देने पर बटन पर टैप करें।";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "ऑनबोर्डिंग प्रश्न।";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "‘बेहतर कान' के लिए अपनी प्राथमिकता चुनें, यदि कोई हो";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "बायाँ";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "दायाँ";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "कोई प्राथमिकता नहीं है";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "स्थानिक याददाश्त";
@@ -355,10 +379,11 @@
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "पूरे स्टैक को चिह्नांकित प्लेटफ़ॉर्म पर कम से कम प्रयासों में स्थानांतरित करें।";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "पहेली हल करें";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %1$@ \n %2$@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "यह पहेली मेरे द्वारा हल नहीं की जा सकती है";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "गति की सीमा";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption बाएँ या दाएँ होना चाहिए";
 
 /* Knee Range of Motion active task */
@@ -487,7 +512,7 @@
 "TRAILMAKING_TASK_TITLE" = "ट्रेल निर्माण परीक्षण";
 "TRAILMAKING_INTENDED_USE" = "इस गतिविधि द्वारा क्रमानुसार बिंदुओं की शृंखला को टैप करने में लगने वाले आवश्यक समय को रिकॉर्ड करके आपकी विज़ुअल एकाग्रता का और कार्य स्विचिंग का मूल्यांकन किया जाता है।";
 "TRAILMAKING_INTENDED_USE2_A" = "उल्टी गिनती के बाद संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद संख्या ‘२’ – ‘३’ – ‘४’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
-"TRAILMAKING_INTENDED_USE2_B" = "उल्टी गिनती के बाद, संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद पहले अक्षर ‘A’ पर टैप करके आरंभ करें फिर ‘२’ – ‘B’ – ‘३’ – ‘C’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
+"TRAILMAKING_INTENDED_USE2_B" = "उल्टी गिनती के बाद, संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद पहले अक्षर ‘क’ पर टैप करके आरंभ करें फिर ‘२’ – ‘ख’ – ‘३’ – ‘ग’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
 "TRAILMAKING_INTRO_TEXT" = "जितना जल्दी संभव हो बिना ग़लती किए यह करें। \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "TRAILMAKING_TIMER" = "%.1f से॰";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "ड़";
 "TRAILMAKING_LETTER_F" = "च";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "बोली पहचान";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "इस गतिविधि से आपकी बोली को उपकरण के नीचे लगे माइक्रोफ़ोन से रिकॉर्ड किया जाता है और उसे टेक्स्ट में अनुवादित किया जाता है।";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "रिकॉर्डिंग शुरू करने के लिए बोलने से पहले बटन दबाएँ।";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "रिकॉर्डिंग शुरू करें";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "रिकॉर्डिंग रोकें";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "अनुलेखन संपादित करें";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "बोली के किसी ग़लत इंटरप्रिटेशन को सुधारने के लिए अनुलेखन टेक्स्ट संपादित करें।";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "आपका अनुलेखन यहाँ दिखाई देगा।";
+"SPEECH_RECOGNITION_FAILED" = "बोली पहचान विफल।";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "बोली पहचान शुरू करने में विफल।";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "ऑडियो चलाएँ";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "ऑडियो रोकें";
+"SPEECH_IN_NOISE_TITLE" = "नॉइज़ में बोली";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "इस गतिविधि से शोर से भरे माहौल में प्रस्तुत की गई बोली की स्पष्टता मापी जाती है।";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "इस परीक्षण के भाग के रूप में आपको यह करना होगा :\n\nवाक्य को सुनें।\n\nआपने जो सुना उसे स्पष्ट रूप से दोहराएँ या आपने जो सुना उसे कीबोर्ड का उपयोग करके टाइप करने के लिए आगे स्किप करें। \n\nयदि आप सुना हुआ दोहराते हैं, तो आपके पास बोली पहचान इंजन के द्वारा जनरेट किए गए अनुलेखन को संशोधित करने का विकल्प होगा।";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "वॉल्यूम अंशांकन";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "‘ऑडियो चलाएँ' पर टैप करें, आरामदेय स्तर पर अपना वॉल्यूम समायोजित करें और फिर जारी रखने के लिए ‘ऑडियो रोकें' पर टैप करें।";
+"SPEECH_IN_NOISE_STEP_TITLE" = "सुनें";
+"SPEECH_IN_NOISE_STEP_TEXT" = "पृष्ठभूमि के शोर के साथ अनियमित नॉइज़ अनुपात सिग्नल (SNR) पर मिश्रित वाक्य को केवल एक बार चलाया जाएगा।";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "बोलें";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "सुने हुए को दोहराएँ।";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "अधिकतम संग्रहण सीमा तक पहुँचने के लिए आवश्यक लॉग फ़ाइलें नहीं हटाई जा सकीं";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "कोई संग्रहित डेटा नहीं मिला।";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "कोई आउटपुट निर्देशिका निर्दिष्ट नहीं";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL मीटर";
+"ENVIRONMENTSPL_INTRO_TEXT" = "इस गतिविधि से माहौल का ध्वनि दबाव स्तर मापा जाता है। यदि शोर का स्तर अधिक उच्च होम, तो आप जारी नहीं रख पाएँगे। कृपया इस कार्य को पूरा करने के लिए किसी शांत स्थान पर जाएँ या इस गतिविधि को बाद में पुनः करें।";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "गणना जारी है";
+"ENVIRONMENTSPL_THRESHOLD" = "सीमा : %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "कोई डेटा नहीं";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "वापस";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDF थंबनेल दिखाएँ";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDF थंबनेल छिपाएँ";
+"AX_BUTTON_ANNOTATE" = "टिप्पणी करें";
+"AX_BUTTON_SHOW_SEARCH" = "खोज बार दिखाएँ";
+"AX_BUTTON_HIDE_SEARCH" = "खोज बार छिपाएँ";
+"AX_BUTTON_SHARE" = "साझा करें";
 
-"AX_IMAGE_ILLUSTRATION" = "%@ का चित्रांकन";
+
+"AX_COMPLETION_ILLUSTRATION" = "नीले रंग के वृत्त में चेक मार्क का चित्रण सफलता को बताता है";
 
 "AX_SIGNVIEW_LABEL" = "निर्दिष्ट हस्ताक्षर फ़ील्ड";
 "AX_SIGNVIEW_HINT" = "हस्ताक्षर करने के लिए स्क्रीन को स्पर्श करें और अपनी उँगली हिलाएँ";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "%1$@ से %2$@ तक श्रेणी";
 "AX_GRAPH_STACK_PREFIX" = "निम्नलिखित का संग्रह";
 "AX_GRAPH_AND_SEPARATOR" = " और ";
 "AX_GRAPH_POINT_%@" = "पॉइंट : %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "स्पीच वेवफ़ॉर्म";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "रिकॉर्डिंग शुरू होने पर रिकॉर्डिंग रोकने के लिए दूसरी बार सक्रिय करें।";
+
 "AX_AUDIO_BAR_GRAPH" = "ऑडियो बार ग्राफ़";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler ग्रिड";
+"AX_AMSLER_GRID_HINT" = "ग्रिड को सीधे चिह्नित करने के लिए अपनी उँगली या स्टाइलस का उपयोग करें या पूरा करने के लिए ग्रिड के बाहर बाएँ स्वाइप करें।";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

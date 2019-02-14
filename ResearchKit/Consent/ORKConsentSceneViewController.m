@@ -53,7 +53,6 @@
 
 @end
 
-
 @implementation ORKConsentSceneView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -121,6 +120,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 @implementation ORKConsentSceneViewController {
     ORKNavigationContainerView *_navigationFooterView;
     NSArray<NSLayoutConstraint *> *_constraints;
+    
 }
 
 - (instancetype)initWithSection:(ORKConsentSection *)section {
@@ -138,7 +138,9 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     _sceneView = [ORKConsentSceneView new];
     _sceneView.consentSection = _section;
     _sceneView.imageView.hidden = _imageHidden;
+    
     [self.view addSubview:_sceneView];
+    
     if (_section.content.length||_section.htmlContent.length || _section.contentURL) {
         _sceneView.headerView.learnMoreButtonItem = [[UIBarButtonItem alloc] initWithTitle:_learnMoreButtonTitle ? : localizedLearnMoreForType(_section.type) style:UIBarButtonItemStylePlain target:self action:@selector(showContent:)];
     }
@@ -277,6 +279,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
     viewController.title = _section.title ?: ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationController.navigationBar.prefersLargeTitles = YES;
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];
 }

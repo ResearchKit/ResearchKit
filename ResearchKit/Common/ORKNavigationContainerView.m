@@ -34,6 +34,7 @@
 #import "ORKSkin.h"
 
 static const CGFloat ORKStackViewSpacing = 10.0;
+static const CGFloat shadowHeight = 0.75;
 
 @implementation ORKNavigationContainerView {
     
@@ -48,6 +49,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     NSMutableArray *_cancelButtonConstraints;
     
     UIVisualEffectView *effectView;
+    UIColor *_appTintColor;
     
     BOOL _continueButtonJustTapped;
 }
@@ -60,16 +62,12 @@ static const CGFloat ORKStackViewSpacing = 10.0;
         [self setupViews];
         [self setupFootnoteLabel];
         self.preservesSuperviewLayoutMargins = NO;
+        _appTintColor = nil;
         self.skipButtonStyle = ORKNavigationContainerButtonStyleTextBold;
         self.cancelButtonStyle = ORKNavigationContainerButtonStyleTextBold;
         [self setUpConstraints];
         [self updateContinueAndSkipEnabled];
     }
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(0, -1);
-    self.layer.shadowOpacity = 0.2;
-    self.layer.shadowRadius = 1.0;
-    self.layer.masksToBounds = NO;
     return self;
 }
 
@@ -92,6 +90,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _continueButton.exclusiveTouch = YES;
     _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    if (_appTintColor) {
+        _continueButton.normalTintColor = _appTintColor;
+    }
     
 }
 
@@ -106,6 +107,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _cancelButtonView.translatesAutoresizingMaskIntoConstraints = NO;
 
     [_cancelButtonView addSubview:_cancelButton];
+    if (_appTintColor) {
+        _cancelButton.normalTintColor = _appTintColor;
+    }
     [self setCancelButtonConstraints];
 }
 
@@ -175,7 +179,9 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
     _skipButtonView.translatesAutoresizingMaskIntoConstraints = NO;
     [_skipButtonView addSubview:_skipButton];
-
+    if (_appTintColor) {
+        _skipButton.normalTintColor = _appTintColor;
+    }
     [self setSkipButtonConstraints];
 }
 
@@ -237,7 +243,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
 - (void)setupFootnoteLabel {
     _footnoteLabel = [ORKFootnoteLabel new];
     _footnoteLabel.numberOfLines = 0;
-    _footnoteLabel.textAlignment = NSTextAlignmentLeft;
+    _footnoteLabel.textAlignment = NSTextAlignmentNatural;
     _footnoteLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_footnoteLabel];
 }
@@ -313,6 +319,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
             [_parentStackView addArrangedSubview:subStack];
         }
     }
+    _appTintColor = [[UIApplication sharedApplication].delegate window].tintColor;
     [self setupContinueButton];
     [self setupCancelButton];
     [self setupSkipButton];
@@ -331,7 +338,8 @@ static const CGFloat ORKStackViewSpacing = 10.0;
             [_subStackView1 addArrangedSubview:_continueButton];
         }
         
-        if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])) {
+        if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+           
             [_subStackView1 insertArrangedSubview:_cancelButtonView atIndex:[[_subStackView1 arrangedSubviews] count]];
             [_subStackView1 insertArrangedSubview:_skipButtonView atIndex:[[_subStackView1 arrangedSubviews] count] - 1];
             _parentStackView.axis = UILayoutConstraintAxisHorizontal;
@@ -352,6 +360,14 @@ static const CGFloat ORKStackViewSpacing = 10.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(self.bounds.origin.x, self.bounds.origin.y - shadowHeight, self.bounds.size.width, shadowHeight)];
+    self.layer.shadowPath = shadowPath.CGPath;
+    self.layer.shadowColor = ORKColor(ORKNavigationContainerShadowColorKey).CGColor;
+    self.layer.shadowOffset = CGSizeZero;
+    self.layer.shadowOpacity = 0.2;
+    self.layer.shadowRadius = 1.0;
+    self.layer.masksToBounds = NO;
     [self arrangeSubStacks];
 }
 
@@ -561,14 +577,14 @@ static const CGFloat ORKStackViewSpacing = 10.0;
     [constraints addObjectsFromArray:@[
                                        [NSLayoutConstraint constraintWithItem:_parentStackView
                                                                     attribute:NSLayoutAttributeLeft
-                                                                    relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                    relatedBy:NSLayoutRelationEqual
                                                                        toItem:self.safeAreaLayoutGuide
                                                                     attribute:NSLayoutAttributeLeft
                                                                    multiplier:1.0
                                                                      constant:ORKStackViewSpacing],
                                        [NSLayoutConstraint constraintWithItem:_parentStackView
                                                                     attribute:NSLayoutAttributeRight
-                                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                    relatedBy:NSLayoutRelationEqual
                                                                        toItem:self.safeAreaLayoutGuide
                                                                     attribute:NSLayoutAttributeRight
                                                                    multiplier:1.0
@@ -586,7 +602,7 @@ static const CGFloat ORKStackViewSpacing = 10.0;
                                                                        toItem:self.safeAreaLayoutGuide
                                                                     attribute:NSLayoutAttributeRight
                                                                    multiplier:1.0
-                                                                     constant:ORKStackViewSpacing]
+                                                                     constant:-ORKStackViewSpacing]
                                        ]];
     [constraints addObjectsFromArray:@[
                                        [NSLayoutConstraint constraintWithItem:effectView

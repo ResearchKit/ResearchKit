@@ -88,30 +88,35 @@
     if (_playerNode) {
         [_playerNode stop];
         [_mixerNode removeTapOnBus:0];
+        [_audioEngine stop];
+        _noiseAudioBuffer = nil;
+        _speechAudioBuffer = nil;
+        _filterAudioBuffer = nil;
+        _audioEngine = nil;
+        _playerNode = nil;
+        _mixerNode = nil;
     }
 }
 
 - (void)setupBuffers {
-    [self loadFileName:[self speechInNoiseStep].noiseFileNameWithExtension intoBuffer:&_noiseAudioBuffer];
     [self loadFileName:[self speechInNoiseStep].speechFileNameWithExtension intoBuffer:&_speechAudioBuffer];
+    [self loadFileName:[self speechInNoiseStep].noiseFileNameWithExtension intoBuffer:&_noiseAudioBuffer];
     [self loadFileName:[self speechInNoiseStep].filterFileNameWithExtension intoBuffer:&_filterAudioBuffer];
     
-    int randomOffset = arc4random_uniform(_noiseToneCapacity - _speechToneCapacity);
-    for (int i = 0; i < _speechToneCapacity; i++) {
-        _speechAudioBuffer.floatChannelData[0][i] += _noiseAudioBuffer.floatChannelData[0][i + randomOffset] * [self speechInNoiseStep].gainAppliedToNoise;
-    }
-    
-    for (int i = 0; i < _speechToneCapacity; i++) {
-        _speechAudioBuffer.floatChannelData[0][i] *= _filterAudioBuffer.floatChannelData[0][i];
-    }
-    
     _mixerNode = _audioEngine.mainMixerNode;
-    
     [_audioEngine connect:_playerNode to:_mixerNode format:_speechAudioBuffer.format];
     [_audioEngine startAndReturnError:nil];
+    
     if ([self speechInNoiseStep].willAudioLoop) {
         [_playerNode scheduleBuffer:_speechAudioBuffer atTime:nil options:AVAudioPlayerNodeBufferLoops completionHandler:nil];
     } else {
+        int randomOffset = arc4random_uniform(_noiseToneCapacity - _speechToneCapacity);
+        for (int i = 0; i < _speechToneCapacity; i++) {
+            _speechAudioBuffer.floatChannelData[0][i] += _noiseAudioBuffer.floatChannelData[0][i + randomOffset] * [self speechInNoiseStep].gainAppliedToNoise;
+        }
+        for (int i = 0; i < _speechToneCapacity; i++) {
+            _speechAudioBuffer.floatChannelData[0][i] *= _filterAudioBuffer.floatChannelData[0][i];
+        }
         [_playerNode scheduleBuffer:_speechAudioBuffer atTime:nil options:AVAudioPlayerNodeBufferInterrupts completionHandler:nil];
     }
 }

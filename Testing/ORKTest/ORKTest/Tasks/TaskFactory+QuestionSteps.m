@@ -2,7 +2,8 @@
  Copyright (c) 2015-2017, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2015-2017, Ricardo Sanchez-Saez.
- Copyright (c) 2016-2017, Sage Bionetworks
+ Copyright (c) 2016-2017, Sage Bionetworks.
+ Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -621,6 +622,7 @@
                                                                                                   maximumValueDescription:@"Hot"
                                                                                                   minimumValueDescription:@"Warm"];
         
+        scaleAnswerFormat.hideSelectedValue = YES;
         scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.minimumImage.accessibilityHint = @"A yellow colored square to represent warmness.";
@@ -628,7 +630,7 @@
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale12"
                                                                       title:@"Scale"
-                                                                   question:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
@@ -645,17 +647,21 @@
                                                                               maximumValueDescription:nil
                                                                               minimumValueDescription:nil];
         
+        scaleAnswerFormat.hideSelectedValue = YES;
         scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale13"
                                                                       title:@"Scale"
-                                                                   question:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                   question:@"How warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     
     {
+        /*
+         Horizontal text choice scale with visible selected value.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -677,6 +683,35 @@
     }
     
     {
+        /*
+         Horizontal text choice scale with hidden selected value.
+         */
+        ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+        ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+        ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+        ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+        ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+        
+        NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+        
+        ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                               defaultIndex:3
+                                                                                                   vertical:NO];
+        
+        scaleAnswerFormat.hideSelectedValue = YES;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
+                                                                      title:@"Scale"
+                                                                   question:@"How are you feeling today?"
+                                                                     answer:scaleAnswerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical text choice scale. Selected value isn't shown for type.
+         */
         ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
         ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
         ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
@@ -689,7 +724,9 @@
                                                                                                defaultIndex:NSIntegerMax
                                                                                                    vertical:YES];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale15"
+        scaleAnswerFormat.hideSelectedValue = YES;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale16"
                                                                       title:@"Scale"
                                                                    question:@"How are you feeling today?"
                                                                      answer:scaleAnswerFormat];

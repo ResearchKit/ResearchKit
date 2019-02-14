@@ -68,16 +68,6 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.optional = YES;
-        self.useSurveyMode = YES;
-        self.useCardView = YES;
-    }
-    return self;
-}
-
 - (void)validateParameters {
     [super validateParameters];
     
@@ -128,6 +118,8 @@
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, question, NSString);
+        ORK_DECODE_BOOL(aDecoder, useCardView);
     }
     return self;
 }
@@ -137,6 +129,8 @@
     
     ORK_ENCODE_OBJ(aCoder, answerFormat);
     ORK_ENCODE_OBJ(aCoder, placeholder);
+    ORK_ENCODE_OBJ(aCoder, question);
+    ORK_ENCODE_BOOL(aCoder, useCardView);
 }
 
 + (BOOL)supportsSecureCoding {

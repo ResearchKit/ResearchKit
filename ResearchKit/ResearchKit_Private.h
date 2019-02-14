@@ -38,11 +38,14 @@
 #import <ResearchKit/ORKErrors.h>
 
 #import <ResearchKit/ORKAnswerFormat_Private.h>
+#import <ResearchKit/ORKConsentDocument_Private.h>
 #import <ResearchKit/ORKConsentSection_Private.h>
+#import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 #import <ResearchKit/ORKOrderedTask_Private.h>
 #import <ResearchKit/ORKPageStep_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
 #import <ResearchKit/ORKStepNavigationRule_Private.h>
+
 #import <ResearchKit/ORKAudioLevelNavigationRule.h>
 
 #import <ResearchKit/ORKCollectionResult_Private.h>
@@ -67,6 +70,7 @@
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKdBHLToneAudiometryStep.h>
+#import <ResearchKit/ORKdBHLToneAudiometryOnboardingStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
 #import <ResearchKit/ORKTrailmakingStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
@@ -105,12 +109,11 @@
 #import <ResearchKit/ORKStreamingAudioRecorder.h>
 #import <ResearchKit/ORKDeviceMotionRecorder.h>
 #import <ResearchKit/ORKHealthQuantityTypeRecorder.h>
-#if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
 #import <ResearchKit/ORKHealthClinicalTypeRecorder.h>
-#endif
 #import <ResearchKit/ORKLocationRecorder.h>
 #import <ResearchKit/ORKPedometerRecorder.h>
 #import <ResearchKit/ORKTouchRecorder.h>
+#import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 
 // For custom steps
 #import <ResearchKit/ORKCustomStepView.h>

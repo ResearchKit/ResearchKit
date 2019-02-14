@@ -394,6 +394,7 @@ ORK_CLASS_AVAILABLE
 
 ORK_CLASS_AVAILABLE
 #if defined(__IPHONE_12_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_12_0
+API_AVAILABLE(ios(12.0))
 @interface ORKHealthClinicalTypeRecorderConfiguration : ORKRecorderConfiguration
 
 /**
@@ -409,7 +410,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthClinicalType:(HKClinicalType *)healthClinicalType
-            healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType NS_DESIGNATED_INITIALIZER;
+            healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
 
 /**
  Returns a new health clinical type recorder configuration initialized from data in the given unarchiver.

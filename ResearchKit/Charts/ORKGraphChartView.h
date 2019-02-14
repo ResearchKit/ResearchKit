@@ -3,6 +3,7 @@
  Copyright (c) 2015, James Cox.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2017, Macro Yau.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -455,6 +456,38 @@ IB_DESIGNABLE
  The default value for this property is `nil`.
 */
 @property (nonatomic, strong, nullable) IBInspectable UIImage *minimumValueImage;
+
+/**
+ The font used to for the x-axis of the chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *xAxisFont;
+
+/**
+ The font used to for the y-axis of the chart.
+
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *yAxisFont;
+
+/**
+ The font used to display the value when scrubbing the chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *scrubberFont;
+
+/**
+ The font used for the "no data" label in the chart.
+ 
+ The default value for this property is the appropriate font. Setting this property to
+ `nil` resets it to its default value.
+ */
+@property (nonatomic, strong, null_resettable) IBInspectable UIFont *noDataFont;
 
 /**
  The long press gesture recognizer that is used for scrubbing by the graph chart view. You can use

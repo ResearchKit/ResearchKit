@@ -390,6 +390,8 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     
     _pdfActionsView.translatesAutoresizingMaskIntoConstraints = NO;
     [_parentStackView addArrangedSubview:_pdfActionsView];
+    
+    [self updateActionButtonAccessibilityLabels];
 }
 
 - (void)setupPDFStackView {
@@ -511,6 +513,14 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     _pdfActionsView.annotationActionButton.alpha = !_isFreehandDrawingActive ? PDFInactiveButtonAlpha : 1.0;
     _pdfActionsView.searchActionButton.alpha = _searchBar.isHidden ? PDFInactiveButtonAlpha : 1.0;
     _pdfActionsView.shareActionButton.alpha = PDFInactiveButtonAlpha;
+    [self updateActionButtonAccessibilityLabels];
+}
+
+- (void)updateActionButtonAccessibilityLabels {
+    _pdfActionsView.thumbnailActionButton.accessibilityLabel = _pdfThumbnailView.isHidden ?ORKLocalizedString(@"AX_BUTTON_SHOW_PDF_THUMBNAIL" , nil) : ORKLocalizedString(@"AX_BUTTON_HIDE_PDF_THUMBNAIL", nil);
+    _pdfActionsView.annotationActionButton.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_ANNOTATE" , nil);
+    _pdfActionsView.searchActionButton.accessibilityLabel = _searchBar.isHidden ? ORKLocalizedString(@"AX_BUTTON_SHOW_SEARCH", nil) : ORKLocalizedString(@"AX_BUTTON_HIDE_SEARCH", nil);
+    _pdfActionsView.shareActionButton.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_SHARE", nil);
 }
 
 - (void)shareButtonAction {
@@ -518,8 +528,8 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
         
     }
     else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectShareButton)]) {
-            [self.delegate didSelectShareButton];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectShareButton:)]) {
+            [self.delegate didSelectShareButton:_pdfActionsView.shareActionButton];
         }
     }
     _isShareActive = !_isShareActive;
@@ -780,6 +790,12 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
 }
 
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    if (_keyboardUnderlapView) {
+        _keyboardUnderlapView.hidden = YES;
+    }
+}
+
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWillAppear:(NSNotification *)aNotification {
     
@@ -787,8 +803,7 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
     CGSize keyboardSize = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue.size;
     //    Offset with assumed view controller's navigation container's height.
     keyboardSize.height = keyboardSize.height - 200.0;
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+
     if (_keyboardUnderlapView && _keyboardUnderlapView.isHidden) {
         [_keyboardUnderlapView removeFromSuperview];
         [NSLayoutConstraint constraintWithItem:_keyboardUnderlapView
@@ -801,6 +816,10 @@ const CGFloat PDFhideViewAnimationDuration = 0.5;
         _keyboardUnderlapView.hidden = NO;
         [_parentStackView insertArrangedSubview:_keyboardUnderlapView atIndex:[[_parentStackView subviews] count]];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateShareButton {

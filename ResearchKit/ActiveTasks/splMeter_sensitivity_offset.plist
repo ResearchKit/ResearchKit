@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>iPhone</key>
+	<real>-23.3</real>
+	<key>iPod touch</key>
+	<real>-23.3</real>
+	<key>iPad</key>
+	<real>-29.3</real>
+</dict>
+</plist>

@@ -53,6 +53,7 @@
         [_tapButton setDiameter:200];
         _tapButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        _tapButton.accessibilityTraits = UIAccessibilityTraitButton | UIAccessibilityTraitAllowsDirectInteraction;
 
         [self addSubview:_tapButton];
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -67,6 +68,13 @@
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)didMoveToWindow {
+    if (self.window != nil && UIAccessibilityIsVoiceOverRunning()) {
+        // Ensure that VoiceOver is aware of the direct touch area so that the first tap gets registered
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _tapButton);
+    }
 }
 
 - (void)tintColorDidChange {

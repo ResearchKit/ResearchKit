@@ -89,7 +89,7 @@ static const CGFloat GraphHeight = 150.0;
     CGRect bounds = self.bounds;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, ORKColor(ORKBackgroundColorKey).CGColor);
+    CGContextSetFillColorWithColor(context, ORKNeedWideScreenDesign(self) ? ORKColor(ORKiPadBackgroundViewColorKey).CGColor : ORKColor(ORKBackgroundColorKey).CGColor);
     CGContextFillRect(context, bounds);
     
     CGFloat scale = self.window.screen.scale;
