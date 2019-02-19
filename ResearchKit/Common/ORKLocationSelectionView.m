@@ -231,8 +231,8 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL didResign = [_textField resignFirstResponder];
-    [super resignFirstResponder];
+    BOOL didResign = [super resignFirstResponder];
+    didResign = [_textField resignFirstResponder] || didResign;
     return didResign;
 }
 
