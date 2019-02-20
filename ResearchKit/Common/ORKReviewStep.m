@@ -47,10 +47,11 @@
                       resultSource:(id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        if (steps)
+        if (steps) {
             _steps = [steps copy];
-        else
+        } else {
             _steps = @[];
+        }
         _resultSource = resultSource;
         _excludeInstructionSteps = NO;
     }
