@@ -590,7 +590,6 @@
 "AX_SELECTED" = "Selected";
 "AX_UNSELECTED" = "Un-selected";
 
-"AX_SLIDER_NOT_FOUND" = "Response slider not found";
 "AX_SLIDER_LABEL" = "Response slider. Range from %@ to %@";
 "AX_UNLABELED_IMAGE" = "Unlabeled image";
 
