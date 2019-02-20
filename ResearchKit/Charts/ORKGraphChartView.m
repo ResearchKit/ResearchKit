@@ -1014,7 +1014,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 - (NSMutableArray<NSObject<ORKValueCollectionType> *> *)normalizedCanvasDataPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     [self throwOverrideException];
-    return [NSMutableArray array];
+    return nil;
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
