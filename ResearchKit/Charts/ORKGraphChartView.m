@@ -1285,8 +1285,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 pointLayerIndex++;
 
                 if (!yAxisValueRange.isEmptyRange) {
-                    CALayer *yPointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                    yPointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
+                    pointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
                     pointLayerIndex++;
                 }
             }
