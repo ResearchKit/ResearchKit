@@ -195,7 +195,7 @@
 
 - (NSString *)selectedLabelText {
     if (_answer == nil || _answer == ORKNullAnswerValue()) {
-        return @"";
+        return nil;
     }
     
     return [[self labelFormatter] stringFromDate:_date];
