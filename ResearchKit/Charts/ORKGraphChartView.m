@@ -613,7 +613,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     }
     
     return pointLayer;
-    }
+}
     
 - (BOOL)shouldDrawPointIndicatorForPointWithIndex:(NSInteger)pointIndex inPlotWithIndex:(NSInteger)plotIndex {
     ORKValueRange *dataPoint = (ORKValueRange *)_dataPoints[plotIndex][pointIndex];
@@ -1219,14 +1219,14 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *dataPointLayer = graphPointLayerWithColor(color, drawPointIndicator);
-                    [self.plotView.layer addSublayer:dataPointLayer];
-                    [_pointLayers[plotIndex] addObject:dataPointLayer];
-                }
-                }
-            }
+                    pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
+                    [self.plotView.layer addSublayer:pointLayer];
+                    [_pointLayers[plotIndex] addObject:pointLayer];
                 }
             }
+        }
+    }
+}
     
 - (void)updatePlotColorsForPlotIndex:(NSInteger)plotIndex {
     [super updatePlotColorsForPlotIndex:plotIndex];
