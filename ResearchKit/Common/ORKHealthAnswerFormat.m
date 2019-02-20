@@ -46,7 +46,7 @@ ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale = @"HKBiological
 ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther = @"HKBiologicalSexOther";
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
-    NSString *string = @"";
+    NSString *string = nil;
     switch (biologicalSex) {
         case HKBiologicalSexFemale: string = ORKBiologicalSexIdentifierFemale; break;
         case HKBiologicalSexMale:   string = ORKBiologicalSexIdentifierMale;   break;
@@ -66,7 +66,7 @@ ORKBloodTypeIdentifier const ORKBloodTypeIdentifierOPositive = @"HKBloodTypeOPos
 ORKBloodTypeIdentifier const ORKBloodTypeIdentifierONegative = @"HKBloodTypeONegative";
 
 NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
-    NSString *string = @"";
+    NSString *string = nil;
     switch (bloodType) {
         case HKBloodTypeAPositive:  string = ORKBloodTypeIdentifierAPositive;   break;
         case HKBloodTypeANegative:  string = ORKBloodTypeIdentifierANegative;   break;
@@ -214,9 +214,8 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         }
     }
     
-    if (!_impliedAnswerFormat)
-        _impliedAnswerFormat = [ORKAnswerFormat textAnswerFormat];
-    
+    NSAssert(_impliedAnswerFormat, @"_impliedAnswerFormat should have been set");
+
     return _impliedAnswerFormat;
 }
 
