@@ -341,6 +341,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
     
+    if (!taskRunUUID) {
+        taskRunUUID = [NSUUID UUID];
+    }
     self.taskRunUUID = taskRunUUID;
     
     [self.childNavigationController.navigationBar setShadowImage:[UIImage new]];
@@ -357,14 +360,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 #pragma clang diagnostic pop
 
@@ -375,7 +378,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate {
     
-    self = [self initWithTask:task taskRunUUID:[NSUUID UUID]];
+    self = [self initWithTask:task taskRunUUID:nil];
     
     if (self) {
         self.delegate = delegate;
@@ -831,9 +834,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (NSUUID *)taskRunUUID {
-    if (_taskRunUUID == nil) {
-        _taskRunUUID = [NSUUID UUID];
-    }
     return _taskRunUUID;
 }
 
@@ -1635,7 +1635,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     }
 }
 
-+ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     if ([identifierComponents.lastObject isEqualToString:_PageViewControllerRestorationKey]) {
         ORKPageViewController *pageViewController = [self pageViewController];
         pageViewController.restorationIdentifier = identifierComponents.lastObject;
@@ -1648,7 +1648,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         return navigationController;
     }
     
-    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:[NSUUID UUID]];
+    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
     taskViewController.restorationIdentifier = identifierComponents.lastObject;
     taskViewController.restorationClass = self;
     return taskViewController;
