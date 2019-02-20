@@ -156,7 +156,7 @@ NSBundle *ORKDefaultLocaleBundle(void);
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-_Nullable id findInArrayByKey(NSArray * array, NSString *key, id value);
+_Nullable id ORKFindInArrayByKey(NSArray *array, NSString *key, id value);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
