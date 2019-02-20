@@ -648,9 +648,3 @@
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
 "AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
-
-/* Missing Graph Value */
-AX_MISSING_VALUE = "Missing Value";
-
-/* Missing Graph Separator */
-AX_MISSING_SEPARATOR = "Missing Separator";

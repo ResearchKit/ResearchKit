@@ -1077,16 +1077,14 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
         ORKLineGraphAccessibilityElement *element = [[ORKLineGraphAccessibilityElement alloc] initWithAccessibilityContainer:self index:pointIndex maxIndex:maxNumberOfPoints];
         
         // Data points for all plots at any given pointIndex must be included (eg "2 and 4" or "range from 1-2 and range from 4-5").
-        NSString *value = nil;
+        NSString *value = @"";
         for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
             
             // Boundary check
-            if ( pointIndex < _dataPoints[plotIndex].count ) {
-                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
+            if (pointIndex < _dataPoints[plotIndex].count) {
+                NSString *and = (value.length == 0 ? @"" : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
                 NSObject<ORKValueCollectionType> *dataPoint = _dataPoints[plotIndex][pointIndex];
-                NSString *valueString = (value.length ? value : ORKLocalizedString(@"AX_MISSING_VALUE", @"Missing Graph Value"));
-                NSString *andString = (and.length ? and : ORKLocalizedString(@"AX_MISSING_SEPARATOR", @"No Separator"));
-                value = ORKAccessibilityStringForVariables(valueString, andString, dataPoint.accessibilityLabel);
+                value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
             }
         }
         
