@@ -394,7 +394,7 @@
     self.fileURL = outputFileURL;
     
     if (UIAccessibilityIsVoiceOverRunning()) {
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_VIDEO_CAPTURE_COMPLETE", @"Video capture completed"));
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_VIDEO_CAPTURE_COMPLETE", nil));
     }
 }
 

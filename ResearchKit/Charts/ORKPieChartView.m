@@ -277,7 +277,7 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (void)setNoDataText:(NSString *)noDataText {
     if (!noDataText) {
-        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     }
     _titleTextView.noDataLabel.text = noDataText;
 }

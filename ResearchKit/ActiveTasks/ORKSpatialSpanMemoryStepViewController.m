@@ -502,10 +502,10 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.footerHidden = NO;
     _contentView.buttonItem = nil;
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
-    NSString *pluralItemName = step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", @"Spatial memory item, plural");
-    NSString *standaloneItemName = step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE", @"Spatial memory item, singular");
+    NSString *pluralItemName = step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil);
+    NSString *standaloneItemName = step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE", nil);
     _contentView.capitalizedPluralItemDescription = [standaloneItemName capitalizedStringWithLocale:[NSLocale currentLocale]];
-    NSString *titleFormat = step.requireReversal ?  ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@", @"Spatial memory game reversal title") : ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_TITLE_%@", @"Spatial memory game title");
+    NSString *titleFormat = step.requireReversal ?  ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@", nil) : ORKLocalizedString(@"MEMORY_GAME_GAMEPLAY_TITLE_%@", nil);
     NSString *title = [NSString stringWithFormat:titleFormat, pluralItemName];
     [self.activeStepView updateTitle:title text:nil];
     

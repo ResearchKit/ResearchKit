@@ -72,7 +72,7 @@
         
         _noDataLabel = [UILabel new];
         _noDataLabel.textColor = [UIColor lightGrayColor];
-        _noDataLabel.text = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
+        _noDataLabel.text = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
         _noDataLabel.textAlignment = NSTextAlignmentCenter;
         _noDataLabel.hidden = YES;
         

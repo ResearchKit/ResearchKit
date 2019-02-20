@@ -136,7 +136,7 @@ static const CGFloat TickViewSize = 122;
 }
 
 - (NSString *)accessibilityLabel {
-    return ORKLocalizedString(@"AX_COMPLETION_ILLUSTRATION", @"Completion illustration");
+    return ORKLocalizedString(@"AX_COMPLETION_ILLUSTRATION", nil);
 }
 
 @end

@@ -254,11 +254,10 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *title = nil;
-    NSString *kilogramString = ORKLocalizedString(@"MEASURING_UNIT_KG", @"Kilogram");
     if (_answerFormat.useMetricSystem) {
         if (component == 0) {
             if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-                title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], kilogramString];
+                title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
             } else {
                 title = [NSString stringWithFormat:@"%@", _majorValues[row]];
             }
@@ -268,13 +267,13 @@ static const CGFloat PickerMinimumHeight = 34.0;
             formatter.maximumFractionDigits = 0;
             title = [NSString stringWithFormat:@".%@", [formatter stringFromNumber:_minorValues[row]]];
         } else if (component == 2) {
-            title = kilogramString;
+            title = ORKLocalizedString(@"MEASURING_UNIT_KG", nil);
         }
     } else {
         if (component == 0) {
-            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", @"Pound")];
+            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
         } else {
-            title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", @"Ounce")];
+            title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
         }
     }    
     return title;

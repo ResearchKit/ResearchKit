@@ -106,7 +106,7 @@
 
 - (void)answerDidChange {
     _selectionView.answer = self.answer;
-    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", @"Text or phone number placeholder entry placeholder");
+    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     [_selectionView setPlaceholderText:placeholder];
 }
 

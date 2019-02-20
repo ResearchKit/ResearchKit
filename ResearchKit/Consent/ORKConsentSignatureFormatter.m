@@ -73,7 +73,7 @@
             nameStr = [names componentsJoinedByString:@"&nbsp;"];
         }
 
-        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", @"Consent document printed name line");
+        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);
         [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, nameStr, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
     }
 
@@ -87,7 +87,7 @@
         } else {
             [body appendString:@"<br/>"];
         }
-        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", @"Consent document signature line");
+        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil);
         [signatureElements addObject:[NSString stringWithFormat:signatureImageWrapper, imageTag ? : @"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
     }
 
