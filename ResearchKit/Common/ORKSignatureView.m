@@ -339,15 +339,12 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         return;
     }
     
-    // Default to the minimum. Will be assigned a real
-    // value on all devices.
+    // Will be assigned a real value on all devices.
     CGFloat pressure;
-    
     if ([self isForceTouchAvailable] || [self isTouchTypeStylus:touch]) {
         // If the device supports Force Touch, or is using a stylus, use it.
         pressure = [touch force];
-    }
-    else {
+    } else {
         // If not, use a heuristic based on the speed of
         // the stroke. Scale this speed logarithmically to
         // require very slow touches to max out the line width.
