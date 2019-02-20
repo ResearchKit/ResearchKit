@@ -31,8 +31,6 @@
 
 #import "ORKConsentSection.h"
 
-#import "ORKConsentDocument_Internal.h"
-
 #import "ORKHelpers_Internal.h"
 
 #import "ORKConsentSection_Private.h"
