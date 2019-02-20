@@ -434,12 +434,12 @@ NSString *const ORKTappingStepIdentifier = @"tapping";
         
     for (NSUInteger hand = 1; hand <= handCount; hand++) {
         
-        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * currentIdentifier) {
+        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * stepIdentifier) {
             if (undefinedHand) {
-                return currentIdentifier;
+                return stepIdentifier;
             } else {
                 NSString *handIdentifier = rightHand ? ORKActiveTaskRightHandIdentifier : ORKActiveTaskLeftHandIdentifier;
-                return [NSString stringWithFormat:@"%@.%@", currentIdentifier, handIdentifier];
+                return [NSString stringWithFormat:@"%@.%@", stepIdentifier, handIdentifier];
             }
         };
         
@@ -1342,8 +1342,8 @@ NSString *const ORKSpeechRecognitionStepIdentifier = @"speech.recognition";
     }
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *finalStep = [self makeCompletionStep];
-        ORKStepArrayAddStep(steps, finalStep);
+        ORKInstructionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -1818,8 +1818,8 @@ NSString *const ORKReactionTimeStepIdentifier = @"reactionTime";
     ORKStepArrayAddStep(steps, step);
     
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *finalStep = [self makeCompletionStep];
-        ORKStepArrayAddStep(steps, finalStep);
+        ORKInstructionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -2088,7 +2088,7 @@ NSString *const ORKTremorTestTurnWristStepIdentifier = @"tremor.handQueenWave";
                                                  handIdentifier:(NSString *)handIdentifier
                                                 introDetailText:(NSString *)detailText
                                                         options:(ORKPredefinedTaskOption)options {
-    NSMutableArray<ORKStep*> *steps = [NSMutableArray array];
+    NSMutableArray<ORKStep *> *steps = [NSMutableArray array];
     NSString *stepFinishedInstruction = ORKLocalizedString(@"TREMOR_TEST_ACTIVE_STEP_FINISHED_INSTRUCTION", nil);
     BOOL rightHand = !leftHand && ![handIdentifier isEqualToString:ORKActiveTaskMostAffectedHandIdentifier];
     
