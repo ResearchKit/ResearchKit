@@ -944,7 +944,7 @@
             }
             
             if (class) {
-                if (class && [class isSubclassOfClass:[ORKChoiceViewCell class]]) {
+                if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
                     NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                 } else {
                     ORKFormItemCell *formCell = nil;
