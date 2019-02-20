@@ -70,8 +70,8 @@
         }
         
         self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
-                             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@",nil), investigatorShortDescription] value:@(YES)],
-                               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@",nil), investigatorLongDescription] value:@(NO)],
+                             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@", nil), investigatorShortDescription] value:@(YES)],
+                               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
                                ]];
         self.optional = NO;
         self.useSurveyMode = NO;

@@ -584,7 +584,7 @@ NSString *const ORKAudioTooLoudStepIdentifier = @"audio.tooloud";
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"AUDIO_TASK_TITLE", nil);
-            step.text = speechInstruction ? : ORKLocalizedString(@"AUDIO_INTRO_TEXT",nil);
+            step.text = speechInstruction ? : ORKLocalizedString(@"AUDIO_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"AUDIO_CALL_TO_ACTION", nil);
             step.image = [UIImage imageNamed:@"phonesoundwaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -2581,7 +2581,7 @@ NSString *const ORKTrailmakingStepIdentifier = @"trailmaking";
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
             step.title = ORKLocalizedString(@"TRAILMAKING_TASK_TITLE", nil);
-            step.text = trailmakingInstruction ? : ORKLocalizedString(@"TRAILMAKING_INTRO_TEXT",nil);
+            step.text = trailmakingInstruction ? : ORKLocalizedString(@"TRAILMAKING_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TRAILMAKING_CALL_TO_ACTION", nil);
             if (UIAccessibilityIsVoiceOverRunning()) {
                 step.detailText = [NSString stringWithFormat:ORKLocalizedString(@"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER", nil), step.detailText];
