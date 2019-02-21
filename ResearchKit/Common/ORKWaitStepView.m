@@ -41,7 +41,7 @@
 #import "ORKWaitStepView.h"
 
 #import "ORKNavigationContainerView.h"
-
+#import "ORKStepHeaderView_Internal.h"
 #import "ORKAccessibility.h"
 #import "ORKSkin.h"
 
@@ -72,9 +72,9 @@
                 break;
         }
         self.verticalCenteringEnabled = YES;
+        self.headerView.instructionLabel.textAlignment = NSTextAlignmentCenter;
         self.continueHugsContent = YES;
         self.stepViewFillsAvailableSpace = NO;
-        self.continueSkipContainer.neverHasContinueButton = YES;
 
         [self setUpConstraints];
     }

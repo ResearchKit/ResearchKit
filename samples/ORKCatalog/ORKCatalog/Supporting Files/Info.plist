@@ -22,10 +22,22 @@
 	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app captures photos and video during certain tasks.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>This app uses Face ID during passcode step.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>This app reads your HealthKit data during certain tasks.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app records your location during certain tasks.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app records audio during certain tasks.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app records motion data during certain tasks.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses Speech Recognition during certain tasks.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>This app reads your Health Records data during certain tasks.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

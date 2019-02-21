@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "Review the form below, and tap Agree if you\'re ready to continue.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Review";
 "CONSENT_SIGNATURE_TITLE" = "Signature";
-"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger on the line below.";
+"CONSENT_SIGNATURE_INSTRUCTION" = "Please sign using your finger in the box below.";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "Sign Here";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Page %1$ld of %2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Date";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Step %1$@ of %2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@ of %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Invalid value";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
 "DOB_FORM_ITEM_TITLE" = "Date of Birth";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "Phone Number";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verification";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "left";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "Cancel";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Clear";
+"BUTTON_APPLY" = "Apply";
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";
 "BUTTON_GET_STARTED" = "Get Started";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "Gait and Balance";
 "WALK_INTRO_TEXT" = "This activity measures your gait and balance as you walk and stand still. Do not continue if you cannot safely walk unassisted.";
 "WALK_INTRO_2_TEXT_%ld" = "Find a place where you can safely walk unassisted for about %ld steps in a straight line.";
-"WALK_INTRO_2_DETAIL" = "Put your phone in a pocket or bag and follow the audio instructions.";
+"WALK_INTRO_2_DETAIL" = "Put your device in a pocket or bag and follow the audio instructions.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Now stand still for %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stand still for %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Turn around, and walk back to where you started.";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "Find a place where you can safely walk back and forth in a straight line. Try to walk continuously by turning at the ends of your path, as if you are walking around a cone.\n\nNext you will be instructed to turn around in a full circle, then stand still with your arms at your sides and your feet about shoulder-width apart.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your phone in a pocket or bag and follow the audio instructions.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "Tap Get Started when you are ready to begin.\nThen place your device in a pocket or bag and follow the audio instructions.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "Walk back and forth in a straight line for %@. Walk as you would normally.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "Turn in a full circle and then stand still for %@.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "You have completed the activity.";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Right Hand";
 "TAPPING_TASK_TITLE_LEFT" = "Left Hand";
 "TAPPING_INTRO_TEXT" = "This activity measures your tapping speed.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your phone on a flat surface.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Put your device on a flat surface.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Use two fingers on the same hand to alternately tap the buttons on the screen.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Use two fingers on your right hand to alternately tap the buttons on the screen.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Use two fingers on your left hand to alternately tap the buttons on the screen.";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "Tap the buttons using your LEFT hand.";
 "TAPPING_SKIP_TITLE" = "Skip this hand";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "Amsler Grid";
+"AMSLER_GRID_INTRO_TEXT" = "This activity helps in detecting problems in user's vision.";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "Hold the device 12 inches from your face and at eye level throughout the test.";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Close your %@ and stare at the dot in the center of the square grid.\n\nUsing your finger or stylus, mark any distortions you see such as blurred or wavy lines.\n\nWhen you are done, swipe left anywhere outside the grid.";
+"AMSLER_GRID_LEFT_EYE" = "Left Eye";
+"AMSLER_GRID_RIGHT_EYE" = "Right Eye";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";
 "AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "AUDIO_INSTRUCTION" = "Say “Aaaaah” into the microphone for as long as you can.";
 "AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
-"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
+"AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your device.";
 "AUDIO_TOO_LOUD_LABEL" = "Too Loud";
 "AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
 "AUDIO_LEVEL_CHECK_LABEL" = "Please wait while we check the background noise level.";
@@ -302,6 +316,16 @@
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Right Ear";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "This activity identifies hearing threshold levels of an individual in dB HL scale.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Make sure the device volume is set to the maximum level.\n\nDuring this task, a subtle tone will play in either the left or right ear.\n\nListen carefully and tap the button every time you hear a tone.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Onboarding questionnaire.";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Select your preference for 'better ear', if any";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "left";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "right";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "no preference";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "Range of Motion";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
 
 /* Knee Range of Motion active task */
@@ -370,12 +395,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Tap again when you are done.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Extend your left knee. Then tap anywhere.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Extend your right knee. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Return to the start position and tap again when you are done.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and extend your right knee as far as you can. Return to the start position and tap again when you are done.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left knee. Tap the screen and extend your left knee as far as you can.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right knee. Tap the screen and extend your right knee as far as you can.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left knee to the start position. Then tap anywhere.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position. Then tap anywhere.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
@@ -386,12 +411,12 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Lift your left arm up. Then tap anywhere.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Lift your right arm up. Then tap anywhere.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Return to the start position and tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Return to the start position and tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder. Tap the screen and raise your left arm to the front as far as you can.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder. Tap the screen and raise your right arm to the front as far as you can.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left arm to the start position. Then tap anywhere.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right arm to the start position. Then tap anywhere.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Timed Walk";
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "Speech Recognition";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "This activity records your speech with the microphone at the bottom of the device, and translates it to text.";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "Press the button to start recording before speaking.";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "Start Recording";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "Stop Recording";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "Edit Transcript";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit transcript text to correct any misinterpretation of the speech.";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
+"SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "Play Audio";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "Stop Audio";
+"SPEECH_IN_NOISE_TITLE" = "Speech in Noise";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "This activity measures intelligibility of speech when presented in noisy environments.";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "As part of this test, you will:\n\nListen to a sentence.\n\nRepeat clearly what you heard or skip ahead to type in what you heard using the keyboard. \n\nIf you repeat what you heard, you will have the option to modify the transcript generated by the speech recognition engine.";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "Volume Calibration";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "Tap 'Play Audio', adjust your volume to a comfortable level and then tap 'Stop Audio' to proceed.";
+"SPEECH_IN_NOISE_STEP_TITLE" = "Listen";
+"SPEECH_IN_NOISE_STEP_TEXT" = "A sentence mixed with background noise at a randomized Signal to Noise Ratio (SNR) will be played only once.";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "No collected data was found.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "SPL Meter";
+"ENVIRONMENTSPL_INTRO_TEXT" = "This activity measures the environment sound pressure level. If the noise levels are too high, you will be unable to proceed. Please move to a quieter location to complete this task or retake this activity at a later time.";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "Calculating";
+"ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "No Data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "Show PDF Thumbnail";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "Hide PDF Thumbnail";
+"AX_BUTTON_ANNOTATE" = "Annotate";
+"AX_BUTTON_SHOW_SEARCH" = "Show Search Bar";
+"AX_BUTTON_HIDE_SEARCH" = "Hide Search Bar";
+"AX_BUTTON_SHARE" = "Share";
 
-"AX_IMAGE_ILLUSTRATION" = "Illustration of %@";
+
+"AX_COMPLETION_ILLUSTRATION" = "Illustration of a check mark in a blue circle conveying success";
 
 "AX_SIGNVIEW_LABEL" = "Designated signature field";
 "AX_SIGNVIEW_HINT" = "Touch the screen and move your finger to sign";
@@ -540,7 +605,7 @@
 "AX_IMAGE_CAPTURED_LABEL" = "Captured image";
 
 "AX_VIDEO_CAPTURE_LABEL" = "Video capture preview";
-"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete"; 
+"AX_VIDEO_CAPTURE_COMPLETE" = "Video capture complete";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Unable to place disk with size %@ on disk with size %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
@@ -550,9 +615,36 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Dismiss keyboard";
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Range from %@ to %@";
 "AX_GRAPH_STACK_PREFIX" = "Stack composed of";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
 "AX_GRAPH_POINT_%@" = "Point: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "Speech Waveform";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "When recording starts, activate a second time to stop recording.";
+
 "AX_AUDIO_BAR_GRAPH" = "Audio Bar Graph";
+
+"AX_AMSLER_GRID_LABEL" = "Amsler Grid";
+"AX_AMSLER_GRID_HINT" = "Use your finger or stylus to mark the grid directly, or swipe left outside the grid to finish.";
+
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tappable Buttons";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Tap for Left Ear";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your left ear.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Tap for Right Ear";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Activate to start the test. When the test starts, tap directly on this button when you hear a sound in your right ear.";
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons for each ear are located. When the test starts, the buttons will be directly tappable. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Tap for one finger";
+"AX_TAP_BUTTON_2_LABEL" = "Tap for other finger";
+"AX_TAP_BUTTON_HINT" = "Activate to make the buttons directly tappable.";
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Using VoiceOver, explore the screen by touch to learn where the buttons are located. Activate either button to make the buttons directly tappable.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Buttons are now directly tappable.";
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Using VoiceOver, the button will be directly tappable. It will be located near the center of the screen.";
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";

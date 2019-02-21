@@ -53,7 +53,6 @@
 
 @end
 
-
 @implementation ORKConsentSceneView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -69,17 +68,14 @@
     _consentSection = consentSection;
     
     BOOL isOverview = (consentSection.type == ORKConsentSectionTypeOverview);
-    self.verticalCenteringEnabled = isOverview;
+    self.verticalCenteringEnabled = NO;
     self.continueHugsContent =  isOverview;
     
     self.headerView.instructionLabel.hidden = ![consentSection summary].length;
-    self.headerView.captionLabel.text = consentSection.title;
     
     self.imageView.image = consentSection.image;
     self.headerView.instructionLabel.text = [consentSection summary];
     
-    self.continueSkipContainer.continueEnabled = YES;
-    [self.continueSkipContainer updateContinueAndSkipEnabled];
 }
 
 @end
@@ -121,33 +117,110 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 }
 
 
-@implementation ORKConsentSceneViewController
+@implementation ORKConsentSceneViewController {
+    ORKNavigationContainerView *_navigationFooterView;
+    NSArray<NSLayoutConstraint *> *_constraints;
+    
+}
 
 - (instancetype)initWithSection:(ORKConsentSection *)section {
     self = [super init];
     if (self) {
         _section = section;
+        self.title = section.title;
         self.learnMoreButtonTitle = _section.customLearnMoreButtonTitle;
     }
     return self;
 }
 
-- (void)loadView {
-    _sceneView = [ORKConsentSceneView new];
-    self.view = _sceneView;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _sceneView = [ORKConsentSceneView new];
     _sceneView.consentSection = _section;
-    _sceneView.continueSkipContainer.continueButtonItem = _continueButtonItem;
     _sceneView.imageView.hidden = _imageHidden;
+    
+    [self.view addSubview:_sceneView];
     
     if (_section.content.length||_section.htmlContent.length || _section.contentURL) {
         _sceneView.headerView.learnMoreButtonItem = [[UIBarButtonItem alloc] initWithTitle:_learnMoreButtonTitle ? : localizedLearnMoreForType(_section.type) style:UIBarButtonItemStylePlain target:self action:@selector(showContent:)];
     }
+    [self setupNavigationFooterView];
+    [self setupConstraints];
 }
+
+- (void)setupNavigationFooterView {
+    if (!_navigationFooterView) {
+        _navigationFooterView = [ORKNavigationContainerView new];
+    }
+    _navigationFooterView.continueButtonItem = _continueButtonItem;
+    _navigationFooterView.cancelButtonItem = _cancelButtonItem;
+    _navigationFooterView.continueEnabled = YES;
+    [_navigationFooterView updateContinueAndSkipEnabled];
+    [self.view addSubview:_navigationFooterView];
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _constraints = nil;
+    _sceneView.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_sceneView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_sceneView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_sceneView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_sceneView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+}
+
 
 - (void)setImageHidden:(BOOL)imageHidden {
     _imageHidden = imageHidden;
@@ -156,7 +229,12 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     _continueButtonItem = continueButtonItem;
-    _sceneView.continueSkipContainer.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    _cancelButtonItem = cancelButtonItem;
+    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 - (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle {
@@ -201,6 +279,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
     viewController.title = _section.title ?: ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationController.navigationBar.prefersLargeTitles = YES;
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];
 }

@@ -42,6 +42,7 @@
 #import "ORKAnswerTextField.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult_Private.h"
 
 #import "ORKHelpers_Internal.h"
@@ -105,10 +106,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 - (instancetype)initWithFormMode:(BOOL)formMode
               useCurrentLocation:(BOOL)useCurrentLocation
-                   leadingMargin:(CGFloat)leadingMargin; {
-    
-    
-    
+                   leadingMargin:(CGFloat)leadingMargin {
     if (NO == formMode) {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {
@@ -118,7 +116,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     if (self) {
         _textField = [[ORKAnswerTextField alloc] init];
         _textField.delegate = self;
-        _textField.placeholder = ORKLocalizedString(@"LOCATION_QUESTION_PLACEHOLDER",nil);
+        _textField.placeholder = ORKLocalizedString(@"LOCATION_QUESTION_PLACEHOLDER", nil);
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.adjustsFontSizeToFitWidth = YES;
@@ -233,7 +231,9 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (BOOL)resignFirstResponder {
-    return [_textField resignFirstResponder];
+    BOOL didResign = [super resignFirstResponder];
+    didResign = [_textField resignFirstResponder] || didResign;
+    return didResign;
 }
 
 - (CGSize)intrinsicContentSize {
@@ -376,7 +376,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 - (void)updateMapWithLocation:(ORKLocation *)location {
     
-    MKPlacemark *placemark = location ? [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil] : nil;
+    MKPlacemark *placemark = location ? [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:location.addressDictionary] : nil;
     
     [_mapView removeAnnotations:_mapView.annotations];
     

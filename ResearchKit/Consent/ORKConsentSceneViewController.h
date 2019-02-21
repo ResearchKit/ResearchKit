@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
 
+@property (nonatomic, strong, nullable) UIBarButtonItem *cancelButtonItem;
+
 @property (nonatomic, strong, nullable) NSString *learnMoreButtonTitle;
 
 @property (nonatomic, assign) BOOL imageHidden;

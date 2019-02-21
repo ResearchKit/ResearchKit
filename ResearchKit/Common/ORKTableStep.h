@@ -84,7 +84,29 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @optional
 - (void)registerCellsForTableView:(UITableView *)tableView;
-    
+
+/**
+ Optional override to return custom header title for section. The default returns `nil`.
+ 
+ @param section         The section for this custom header title
+ @param tableView       The table view for custom section header title
+ 
+ @return                The custom header title for this section
+ */
+@optional
+- (nullable NSString *)titleForHeaderInSection:(NSInteger)section tableView:(UITableView *)tableView;
+
+/**
+ Optional override to return custom header view for section. The default returns `nil`.
+ 
+ @param section         The section for this custom header view
+ @param tableView       The table view for custom section header view
+ 
+ @return                The custom header view for this section
+ */
+@optional
+- (nullable UIView *)viewForHeaderInSection:(NSInteger)section tableView:(UITableView *)tableView;
+
 @end
 
 /**
@@ -109,6 +131,19 @@ ORK_CLASS_AVAILABLE
  The array of items in table. These items must conform to NSCopying and NSSecureCoding protocols.
  */
 @property (nonatomic, copy, nullable) NSArray <id <NSObject, NSCopying, NSSecureCoding>> *items;
+
+/**
+ Boolean flag representing if the table data should be displayed in a bulleted format.
+ */
+@property (nonatomic) BOOL isBulleted;
+
+/**
+ The array of icon names to display instead of bullets.
+ 
+ Images are only visible if the isBulleted property is set to YES. Images names must reference
+ images in you application project not the ResearchKit framework.
+ */
+@property (nonatomic, copy, nullable) NSArray <NSString *> *bulletIconNames;
 
 /**
  Returns the number of sections in the tableview used to display this step. Default = `1`.

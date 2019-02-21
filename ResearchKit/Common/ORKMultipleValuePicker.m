@@ -44,6 +44,8 @@
 
 @end
 
+static const CGFloat PickerSpacerHeight = 15.0;
+static const CGFloat PickerMinimumHeight = 34.0;
 
 @implementation ORKMultipleValuePicker {
     UIPickerView *_pickerView;
@@ -163,10 +165,12 @@
     __block NSMutableArray *strings = [NSMutableArray new];
     [indexNumbers enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *title = [[self.helpers[idx] textChoiceAtIndex:[obj integerValue]] text];
+        NSAttributedString *attributedText = [[self.helpers[idx] textChoiceAtIndex:[obj integerValue]] primaryTextAttributedString];
         if (title) {
             [strings addObject:title];
-        }
-        else {
+        } else if (attributedText) {
+            [strings addObject:attributedText.string];
+        } else {
             *stop = YES;
         }
     }];
@@ -249,6 +253,43 @@
     } else {
         return [[self.helpers[idx] textChoiceAtIndex:row] text] ?: @"";
     }
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSUInteger idx = [self convertFromPickerViewComponent:component];
+    if (idx == NSNotFound) {
+        return nil;
+    } else {
+        return [[self.helpers[idx] textChoiceAtIndex:row] primaryTextAttributedString] ?: nil;
+    }
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel* valueLabel = (UILabel*)view;
+    if (!valueLabel)
+    {
+        valueLabel = [[UILabel alloc] init];
+        [valueLabel setFont:[self defaultFont]];
+        [valueLabel setTextAlignment:NSTextAlignmentCenter];
+    }
+    valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    NSAttributedString *attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
+    if (attributedText) {
+        valueLabel.attributedText = attributedText;
+    }
+    return valueLabel;
+}
+
+- (UIFont *)defaultFont {
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    UIFont *font = [self defaultFont];
+    CGFloat height =  font.pointSize + PickerSpacerHeight;
+    return (height < PickerMinimumHeight ? PickerMinimumHeight : height);
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {

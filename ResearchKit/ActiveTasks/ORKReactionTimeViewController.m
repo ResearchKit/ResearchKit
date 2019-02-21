@@ -37,6 +37,8 @@
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 
+#import "ORKCollectionResult_Private.h"
+#import "ORKReactionTimeResult.h"
 #import "ORKReactionTimeStep.h"
 #import "ORKResult.h"
 
@@ -230,7 +232,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (NSTimeInterval)stimulusInterval {
     ORKReactionTimeStep *step = [self reactionTimeStep];
     NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
-    NSTimeInterval randomFactor = ((NSTimeInterval)rand() / RAND_MAX) * range;
+    NSTimeInterval randomFactor = ((NSTimeInterval)arc4random() / RAND_MAX) * range;
     return randomFactor + step.minimumStimulusInterval;
 }
 

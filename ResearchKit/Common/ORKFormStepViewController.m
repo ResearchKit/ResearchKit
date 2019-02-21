@@ -37,6 +37,7 @@
 #import "ORKFormSectionTitleLabel.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKTableContainerView.h"
+#import "ORKSurveyCardHeaderView.h"
 #import "ORKTextChoiceCellGroup.h"
 
 #import "ORKNavigationContainerView_Internal.h"
@@ -44,13 +45,14 @@
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKQuestionResult_Private.h"
 #import "ORKFormItem_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
-
 
 @interface ORKTableCellItem : NSObject
 
@@ -150,7 +152,7 @@
 }
 
 - (void)setTitle:(NSString *)title {
-    _title = [[title uppercaseStringWithLocale:[NSLocale currentLocale]] copy];
+    _title = title;
 }
 
 - (void)addFormItem:(ORKFormItem *)item {
@@ -270,6 +272,7 @@
 
 @end
 
+
 @interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate, ORKTableContainerViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
@@ -289,11 +292,12 @@
 
 @implementation ORKFormStepViewController {
     ORKAnswerDefaultSource *_defaultSource;
-    ORKNavigationContainerView *_continueSkipView;
+    ORKNavigationContainerView *_navigationFooterView;
     NSMutableSet *_formItemCells;
     NSMutableArray<ORKTableSection *> *_sections;
     BOOL _skipped;
     ORKFormItemCell *_currentFirstResponderCell;
+    NSArray<NSLayoutConstraint *> *_constraints;
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
@@ -302,9 +306,9 @@
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
         NSArray *resultsArray = [(ORKStepResult *)result results];
-        for (ORKQuestionResult *result in resultsArray) {
-            id answer = result.answer ? : ORKNullAnswerValue();
-            [self setAnswer:answer forIdentifier:result.identifier];
+        for (ORKQuestionResult *currentResult in resultsArray) {
+            id answer = currentResult.answer ? : ORKNullAnswerValue();
+            [self setAnswer:answer forIdentifier:currentResult.identifier];
         }
         self.originalAnswers = [[NSDictionary alloc] initWithDictionary:self.savedAnswers];
     }
@@ -392,6 +396,7 @@
         }
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }
@@ -461,10 +466,14 @@
 // Override to monitor button title change
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    _continueSkipView.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
 }
 
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _navigationFooterView.cancelButtonItem = cancelButtonItem;
+}
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
@@ -475,7 +484,7 @@
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     
-    _continueSkipView.skipButtonItem = skipButtonItem;
+    _navigationFooterView.skipButtonItem = skipButtonItem;
     [self updateButtonStates];
 }
 
@@ -490,14 +499,15 @@
     _tableView = nil;
     _formItemCells = nil;
     _headerView = nil;
-    _continueSkipView = nil;
+    [_navigationFooterView removeFromSuperview];
+    _navigationFooterView = nil;
     
     if (self.isViewLoaded && self.step) {
         [self buildSections];
         
         _formItemCells = [NSMutableSet new];
         
-        _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
+        _tableContainer = [ORKTableContainerView new];
         _tableContainer.delegate = self;
         [self.view addSubview:_tableContainer];
         _tableContainer.tapOffView = self.view;
@@ -510,26 +520,107 @@
         _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
+        if ([self formStep].useCardView) {
+            _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+            if (ORKNeedWideScreenDesign(self.view)) {
+                [_tableView setBackgroundColor:[UIColor clearColor]];
+                [self.taskViewController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+                [self.view setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+            }
+            else {
+                [_tableView setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
+                [self.taskViewController.navigationBar setBarTintColor:[_tableView backgroundColor]];
+                [self.view setBackgroundColor:[_tableView backgroundColor]];
+            }
+        }
         _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.text = [[self formStep] title];
         _headerView.captionLabel.useSurveyMode = [[self formStep] useSurveyMode];
         _headerView.instructionLabel.text = [[self formStep] text];
         _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
-        _continueSkipView = _tableContainer.continueSkipContainerView;
-        _continueSkipView.skipButtonItem = self.skipButtonItem;
-        _continueSkipView.continueEnabled = [self continueButtonEnabled];
-        _continueSkipView.continueButtonItem = self.continueButtonItem;
-        _continueSkipView.optional = self.step.optional;
-        _continueSkipView.footnoteLabel.text = [self formStep].footnote;
+        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView.skipButtonItem = self.skipButtonItem;
+        _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+        _navigationFooterView.continueButtonItem = self.continueButtonItem;
+        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
+        _navigationFooterView.optional = self.step.optional;
+        _navigationFooterView.footnoteLabel.text = [self formStep].footnote;
+        [self.view addSubview:_navigationFooterView];
         if (self.readOnlyMode) {
-            _continueSkipView.optional = YES;
-            [_continueSkipView setNeverHasContinueButton:YES];
-            _continueSkipView.skipEnabled = [self skipButtonEnabled];
-            _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
+            _navigationFooterView.optional = YES;
+            [_navigationFooterView setNeverHasContinueButton:YES];
+            _navigationFooterView.skipEnabled = [self skipButtonEnabled];
+            _navigationFooterView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
         }
-
+        [self setupConstraints];
     }
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _tableContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    _constraints = nil;
+    
+    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
+    CGFloat margin = ORKNeedWideScreenDesign(self.view) ? 0.0 : ORKSurveyTableContainerLeftRightPadding;
+    
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeLeftMargin
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeLeftMargin
+                                                 multiplier:1.0
+                                                   constant:margin],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeRightMargin
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                  attribute:NSLayoutAttributeRightMargin
+                                                 multiplier:1.0
+                                                   constant:-margin],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:viewForiPad ? : self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableContainer
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:_navigationFooterView
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+    
 }
 
 - (void)buildSections {
@@ -644,8 +735,8 @@
 
 
 - (void)updateButtonStates {
-    _continueSkipView.continueEnabled = [self continueButtonEnabled];
-    _continueSkipView.skipEnabled = [self skipButtonEnabled];
+    _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+    _navigationFooterView.skipEnabled = [self skipButtonEnabled];
 }
 
 #pragma mark Helpers
@@ -776,12 +867,20 @@
     if (cell == nil) {
         ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
         ORKTableCellItem *cellItem = [section items][indexPath.row];
+        bool isLastItem = [section items].count == indexPath.row + 1;
+        bool isFirstItemWithSectionWithoutTitle = indexPath.row == 0 && !section.title;
         ORKFormItem *formItem = cellItem.formItem;
         id answer = _savedAnswers[formItem.identifier];
         
         if (section.textChoiceCellGroup) {
             [section.textChoiceCellGroup setAnswer:answer];
-            cell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+            ORKChoiceViewCell *choiceViewCell = nil;
+            choiceViewCell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+            choiceViewCell.useCardView = [self formStep].useCardView;
+            choiceViewCell.isLastItem = isLastItem;
+            choiceViewCell.isFirstItemInSectionWithoutTitle = isFirstItemWithSectionWithoutTitle;
+            cell = choiceViewCell;
+
         } else {
             ORKAnswerFormat *answerFormat = [cellItem.formItem impliedAnswerFormat];
             ORKQuestionType type = answerFormat.questionType;
@@ -803,7 +902,8 @@
                 case ORKQuestionTypeTimeOfDay:
                 case ORKQuestionTypeTimeInterval:
                 case ORKQuestionTypeMultiplePicker:
-                case ORKQuestionTypeHeight: {
+                case ORKQuestionTypeHeight:
+                case ORKQuestionTypeWeight: {
                     class = [ORKFormItemPickerCell class];
                     break;
                 }
@@ -857,12 +957,21 @@
                         _savedAnswers = [NSMutableDictionary new];
                     }
                     formCell.savedAnswers = _savedAnswers;
+                    formCell.useCardView = [self formStep].useCardView;
+                    formCell.isLastItem = isLastItem;
+                    formCell.isFirstItemInSectionWithoutTitle = isFirstItemWithSectionWithoutTitle;
                     cell = formCell;
                 }
+            } else {
+                NSAssert(NO, @"SHOULD NOT FALL IN HERE");
             }
         }
     }
+    else {
+        [cell setNeedsDisplay];
+    }
     cell.userInteractionEnabled = !self.readOnlyMode;
+    
     return cell;
 }
 
@@ -900,7 +1009,7 @@
     if ([cell isKindOfClass:[ORKFormItemCell class]]) {
         [cell becomeFirstResponder];
     } else {
-        // Dismiss other textField's keyboard 
+        // Dismiss other textField's keyboard
         [tableView endEditing:NO];
         
         ORKTableSection *section = _sections[indexPath.section];
@@ -914,6 +1023,7 @@
             [self removeAnswerForIdentifier:formItemIdentifier];
         }
         
+        _skipped = NO;
         [self updateButtonStates];
         [self notifyDelegateOnResultChange];
     }
@@ -924,30 +1034,44 @@
 
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row]);
-        return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
+        return [ORKChoiceViewCell suggestedCellHeightForPrimaryText:cellItem.choice.text primaryTextAttributedString:cellItem.choice.primaryTextAttributedString detailText:cellItem.choice.detailText detailTextAttributedString:cellItem.choice.detailTextAttributedString inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     NSString *title = _sections[section].title;
+
     // Make first section header view zero height when there is no title
-    return (title.length > 0) ? UITableViewAutomaticDimension : ((section == 0) ? 0 : UITableViewAutomaticDimension);
+    return [self formStep].useCardView ? UITableViewAutomaticDimension : (title.length > 0) ? UITableViewAutomaticDimension : ((section == 0) ? 0 : UITableViewAutomaticDimension);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSString *title = _sections[section].title;
+    ORKFormStep *formStep = [self formStep];
     
-    ORKFormSectionHeaderView *view = (ORKFormSectionHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
-    
-    if (view == nil) {
-        // Do not create a header view if first section header has no title
-        if (title.length > 0 || section > 0) {
-            view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView firstSection:(section == 0)];
+    if (formStep.useCardView && _sections[section].items.count > 0) {
+        
+        ORKSurveyCardHeaderView *cardHeaderView = (ORKSurveyCardHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
+        
+        if (cardHeaderView == nil && title) {
+            cardHeaderView = [[ORKSurveyCardHeaderView alloc] initWithTitle:title];
         }
+        
+        return cardHeaderView;
     }
-
-    return view;
+    else {
+        ORKFormSectionHeaderView *view = (ORKFormSectionHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
+        
+        if (view == nil) {
+            // Do not create a header view if first section header has no title
+            if (title.length > 0 || section > 0) {
+                view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView firstSection:(section == 0)];
+            }
+        }
+        
+        return view;
+    }
 }
 
 #pragma mark ORKFormItemCellDelegate
@@ -981,6 +1105,7 @@
         [self removeAnswerForIdentifier:cell.formItem.identifier];
     }
     
+    _skipped = NO;
     [self updateButtonStates];
     [self notifyDelegateOnResultChange];
 }

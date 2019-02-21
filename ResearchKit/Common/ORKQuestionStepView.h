@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) ORKQuestionStep *questionStep;
 @property (nonatomic, strong, nullable) ORKQuestionStepCustomView *questionCustomView;
 
+- (void)setCustomHeaderTitle:(nullable NSString *)text;
+
 @end
 
 NS_ASSUME_NONNULL_END

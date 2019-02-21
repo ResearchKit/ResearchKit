@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 import MapKit
+import Speech
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows
@@ -102,6 +103,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
         providerType = ConsentSignatureResultTableViewProvider.self
         
     // Active Tasks
+    case is ORKAmslerGridResult:
+        providerType = AmslerGridResultTableViewProvider.self
+        
     case is ORKPasscodeResult:
         providerType = PasscodeResultTableViewProvider.self
         
@@ -110,6 +114,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
         
     case is ORKSpatialSpanMemoryResult:
         providerType = SpatialSpanMemoryResultTableViewProvider.self
+        
+    case is ORKSpeechRecognitionResult:
+        providerType = SpeechRecognitionResultTableViewProvider.self
         
     case is ORKStroopResult:
         providerType = StroopResultTableViewProvider.self
@@ -154,6 +161,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
       
     case is ORKVideoInstructionStepResult:
         providerType = VideoInstructionStepResultTableViewProvider.self
+        
+    case is ORKWebViewStepResult:
+        providerType = WebViewStepResultTableViewProvider.self
         
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
@@ -523,6 +533,33 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKAmslerGridResult` instance.
+class AmslerGridResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let amslerGridResult = result as! ORKAmslerGridResult
+        let image = amslerGridResult.image!
+        let eyeSide:String = amslerGridResult.eyeSide.rawValue == 0 ? "Not Specified" : amslerGridResult.eyeSide.rawValue == 1 ? "Left" : "Right"
+        
+        return super.resultRowsForSection(section) + [
+            // The captured image.
+            ResultRow(text: "Eye Side", detail: eyeSide),
+            .textImage("image", image: image)
+        ]
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let lastRow = self.tableView(tableView, numberOfRowsInSection: (indexPath as NSIndexPath).section) - 1
+        
+        if (indexPath as NSIndexPath).row == lastRow {
+            return 300
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+}
+
 /// Table view provider specific to an `ORKPasscodeResult` instance.
 class PasscodeResultTableViewProvider: ResultTableViewProvider   {
     // MARK: ResultTableViewProvider
@@ -626,6 +663,61 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
         return rows + questionResult.gameRecords!.map { gameRecord in
             // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
             return ResultRow(text: "game", detail: gameRecord.score)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKSpeechRecognitionResult` instance.
+class SpeechRecognitionResultTableViewProvider: ResultTableViewProvider {
+    //MARK: UITableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        let speechRecognitionResult = result as! ORKSpeechRecognitionResult
+        if let segments = speechRecognitionResult.transcription?.segments {
+            return segments.count + 1
+        }
+        else {
+            return 2
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+         if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+            
+        let speechRecognitionResult = result as! ORKSpeechRecognitionResult
+        if speechRecognitionResult.transcription?.segments != nil {
+            return "Transcritption " + String(section)
+        }
+        else {
+            return "Error"
+        }
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let speechRecognitionResult = result as! ORKSpeechRecognitionResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if (section == 0) {
+            return rows
+        }
+        
+        if let segments = speechRecognitionResult.transcription?.segments {
+            let segement = segments[section - 1]
+            return [
+                ResultRow(text: "substring", detail: segement.substring),
+                ResultRow(text: "confidence", detail: segement.confidence),
+                ResultRow(text: "timestamp", detail: segement.timestamp),
+                ResultRow(text: "duration", detail: segement.duration)
+            ]
+        }
+        else {
+            return [ResultRow(text: "error", detail: "speech recognition failed or cancelled")]
         }
     }
 }
@@ -810,8 +902,11 @@ class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
         let rangeOfMotionResult = result as! ORKRangeOfMotionResult
         let rows = super.resultRowsForSection(section)
         return rows + [
-            ResultRow(text: "flexed", detail: rangeOfMotionResult.flexed),
-            ResultRow(text: "extended", detail: rangeOfMotionResult.extended)
+            ResultRow(text: "start", detail: rangeOfMotionResult.start),
+            ResultRow(text: "finish", detail: rangeOfMotionResult.finish),
+            ResultRow(text: "minimum", detail: rangeOfMotionResult.minimum),
+            ResultRow(text: "maximum", detail: rangeOfMotionResult.maximum),
+            ResultRow(text: "range", detail: rangeOfMotionResult.range)
         ]
     }
 }
@@ -1145,6 +1240,25 @@ class VideoInstructionStepResultTableViewProvider: ResultTableViewProvider {
             return rows + [
                 ResultRow(text: "playbackStoppedTime", detail: videoInstructionStepResult.playbackStoppedTime),
                 ResultRow(text: "playbackCompleted", detail: videoInstructionStepResult.playbackCompleted)
+            ]
+        }
+        
+        return rows
+    }
+}
+
+/// Table view provider specific to an `ORKWebViewStepResult` instance.
+class WebViewStepResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let webViewStepResult = result as! ORKWebViewStepResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "result", detail: webViewStepResult.result)
             ]
         }
         

@@ -33,6 +33,7 @@
 @import Foundation;
 #import <ResearchKit/ORKDefines.h>
 
+@class ORKHTMLPDFPageRenderer;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -148,28 +149,28 @@ ORK_CLASS_AVAILABLE
 /// @name PDF generation
 
 /**
- Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
- purposes of isolated unit testing.
-
- @param writer              The instance of the ORKHTMLPDFWriter upon which the class depends.
- @param sectionFormatter    An instance of ORKConsentSectionFormatter
- @param signatureFormatter  An instance of ORKConsentSignatureFormatter
- */
-- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
-              consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
-            consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter;
-
-/**
  Writes the document's content into a PDF file.
  
  The PDF is generated in a form suitable for printing. This is done asynchronously,
  so the PDF data is returned through a completion block.
  
  @param handler     The handler block for generated PDF data. When successful, the returned
-                    data represents a complete PDF document that represents the consent.
+    data represents a complete PDF document that represents the consent.
  */
 - (void)makePDFWithCompletionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
 
+/**
+ Writes the document's content into a PDF file using the specified renderer.
+ 
+ The PDF is generated in a form suitable for printing. This is done asynchronously,
+ so the PDF data is returned through a completion block.
+ 
+ @param render      The PDF renderer.
+ @param handler     The handler block for generated PDF data. When successful, the returned
+    data represents a complete PDF document that represents the consent.
+ */
+- (void)makeCustomPDFWithRenderer:(ORKHTMLPDFPageRenderer *)renderer
+                completionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -34,7 +34,7 @@
 #import "ORKRecorder_Internal.h"
 
 #import "ORKDataLogger.h"
-#import "ORKResult.h"
+#import "ORKFileResult.h"
 
 #import "ORKHelpers_Internal.h"
 

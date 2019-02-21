@@ -56,7 +56,7 @@ class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
         return CGFloat(index + 1)
     }
     
-    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String {
+    func pieChartView(_ pieChartView: ORKPieChartView, titleForSegmentAt index: Int) -> String? {
         return "Title \(index + 1)"
     }
 }

@@ -2,6 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2015, Bruce Duncan.
+ Copyright (c) 2018, Brian Ganninger.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -112,6 +113,7 @@
             
             _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
             _leftRangeDescriptionLabel.numberOfLines = -1;
+            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_leftRangeDescriptionLabel];
             
             _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
@@ -120,6 +122,7 @@
             
             _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
             _rightRangeDescriptionLabel.numberOfLines = -1;
+            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_rightRangeDescriptionLabel];
             
             if (textChoices) {
@@ -174,8 +177,6 @@
             _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
             _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
             _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -463,6 +464,18 @@
                                                  metrics:@{@"kMargin": @(kMargin)}
                                                    views:views]];
     }
+
+    // Hide the selected value label if necessary;
+    // skipped when not present (text choice slider)
+    if ([_formatProvider shouldHideSelectedValueLabel] &&
+        !([_formatProvider isVertical] && [self textScaleFormatProvider])) {
+        [self addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                 options:0
+                                                 metrics:nil
+                                                   views:views]];
+    }
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -492,6 +505,9 @@
         if ([self textScaleFormatProvider]) {
             ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
+            if (textChoice.primaryTextAttributedString) {
+                self.valueLabel.attributedText = textChoice.primaryTextAttributedString;
+            }
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];

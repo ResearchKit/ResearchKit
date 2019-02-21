@@ -88,6 +88,14 @@
         _leftLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _rightLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
+        _leftButton.accessibilityLabel = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL", nil);
+        _leftButton.accessibilityHint = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT", nil);
+        _rightButton.accessibilityLabel = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL", nil);
+        _rightButton.accessibilityHint = ORKLocalizedString(@"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT", nil);
+        // The labels will be included in the button accessibility label, so we should not expose them additionally here.
+        _leftLabel.isAccessibilityElement = NO;
+        _rightLabel.isAccessibilityElement = NO;
+        
         [self addSubview:_captionLabel];
         [self addSubview:_progressView];
         [self addSubview:_leftButton];

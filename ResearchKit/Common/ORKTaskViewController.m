@@ -42,6 +42,7 @@
 #import "ORKVisualConsentStepViewController.h"
 
 #import "ORKActiveStep.h"
+#import "ORKCollectionResult_Private.h"
 #import "ORKFormStep.h"
 #import "ORKInstructionStep.h"
 #import "ORKOrderedTask.h"
@@ -55,6 +56,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKObserver.h"
 #import "ORKSkin.h"
+#import "ORKBorderedButton.h"
 
 @import AVFoundation;
 @import CoreMotion;
@@ -159,6 +161,77 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 @end
 
 
+@interface ORKPageViewController: UIPageViewController
+
+@property (nonatomic, copy, nullable) UITableView * tableView;
+
+@end
+
+@implementation ORKPageViewController {
+    NSArray<NSLayoutConstraint *> *_constraints;
+}
+
+- (instancetype)init {
+    self = [super initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                  options:nil];
+    if (self) {
+        [self setupTableView];
+        [self setupConstraints];
+    }
+    return self;
+}
+
+- (void)setupTableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    }
+    _tableView.userInteractionEnabled = NO;
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+    [self.view insertSubview:_tableView atIndex:0];
+}
+
+- (void)setupConstraints {
+    _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+    }
+    _constraints = @[
+                     [NSLayoutConstraint constraintWithItem:_tableView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableView
+                                                  attribute:NSLayoutAttributeLeft
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeLeft
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableView
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeRight
+                                                 multiplier:1.0
+                                                   constant:0.0],
+                     [NSLayoutConstraint constraintWithItem:_tableView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                 multiplier:1.0
+                                                   constant:100.0]
+                     ];
+    [NSLayoutConstraint activateConstraints:_constraints];
+}
+
+@end
+
+
 @interface ORKTaskViewController () <ORKViewControllerToolbarObserverDelegate, ORKScrollViewObserverDelegate> {
     NSMutableDictionary *_managedResults;
     NSMutableArray *_managedStepIdentifiers;
@@ -187,7 +260,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 @property (nonatomic, strong) UIImageView *hairline;
 
 @property (nonatomic, strong) UINavigationController *childNavigationController;
-@property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (nonatomic, strong) ORKPageViewController *pageViewController;
 @property (nonatomic, strong) ORKStepViewController *currentStepViewController;
 
 @end
@@ -214,10 +287,9 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 static NSString *const _PageViewControllerRestorationKey = @"pageViewController";
 static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigationController";
 
-+ (UIPageViewController *)pageViewController {
-    UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                                             options:nil];
++ (ORKPageViewController *)pageViewController {
+    ORKPageViewController *pageViewController = [ORKPageViewController new];
+
     if ([pageViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
         pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -256,18 +328,20 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (instancetype)commonInitWithTask:(id<ORKTask>)task taskRunUUID:(NSUUID *)taskRunUUID {
-    UIPageViewController *pageViewController = [[self class] pageViewController];
+    ORKPageViewController *pageViewController = [[self class] pageViewController];
     self.childNavigationController = [[UINavigationController alloc] initWithRootViewController:pageViewController];
     
     _pageViewController = pageViewController;
+    [_pageViewController.navigationController.navigationBar setPrefersLargeTitles:YES];
     [self setTask: task];
     
     self.showsProgressInNavigationBar = YES;
+    self.discardable = NO;
     
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
     
-    self.taskRunUUID = taskRunUUID;
+    self.taskRunUUID = taskRunUUID ?: [NSUUID UUID];
     
     [self.childNavigationController.navigationBar setShadowImage:[UIImage new]];
     self.hairline = [self findHairlineViewUnder:self.childNavigationController.navigationBar];
@@ -283,14 +357,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 #pragma clang diagnostic pop
 
@@ -350,6 +424,23 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (UIBarButtonItem *)defaultLearnMoreButtonItem {
     return [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_LEARN_MORE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(learnMoreAction:)];
+}
+
+- (UIBarButtonItem *)rightBarItemWithText:(NSString *)text {
+    UILabel *progressLabelNavigationItem = [UILabel new];
+    progressLabelNavigationItem.numberOfLines = 1;
+    progressLabelNavigationItem.textAlignment = NSTextAlignmentRight;
+    id<ORKTask> task = self.task;
+    if ([task isKindOfClass:[ORKOrderedTask class]]) {
+        ORKOrderedTask *orderedTask = (ORKOrderedTask *)task;
+        progressLabelNavigationItem.textColor = orderedTask.progressLabelColor;
+    }
+    else {
+        progressLabelNavigationItem.textColor = ORKColor(ORKProgressLabelColorKey);
+    }
+    [progressLabelNavigationItem setText:text];
+    
+    return [[UIBarButtonItem alloc] initWithCustomView:progressLabelNavigationItem];
 }
 
 - (void)requestHealthStoreAccessWithReadTypes:(NSSet *)readTypes
@@ -739,13 +830,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [NSString stringWithFormat:@"%@:%@", stepIdentifier, @(index)];
 }
 
-- (NSUUID *)taskRunUUID {
-    if (_taskRunUUID == nil) {
-        _taskRunUUID = [NSUUID UUID];
-    }
-    return _taskRunUUID;
-}
-
 - (ORKTaskResult *)result {
     
     ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:[self.task identifier] taskRunUUID:self.taskRunUUID outputDirectory:self.outputDirectory];
@@ -975,7 +1059,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         // Set the progress label only if non-nil or if it is nil having previously set a progress label.
         if (progressLabel || strongSelf->_hasSetProgressLabel) {
-            strongSelf.pageViewController.navigationItem.title = progressLabel;
+            strongSelf.pageViewController.navigationItem.rightBarButtonItem = [strongSelf rightBarItemWithText:progressLabel];
         }
         
         strongSelf->_hasSetProgressLabel = (progressLabel != nil);
@@ -1020,10 +1104,24 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_currentStepViewController == viewController) {
         _pageViewController.toolbarItems = viewController.toolbarItems;
         _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
-        _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
-        if (![self shouldDisplayProgressLabel]) {
+        if (!ORKNeedWideScreenDesign(self.view)) {
             _pageViewController.navigationItem.title = viewController.navigationItem.title;
             _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+            CGFloat maxWidth = UIScreen.mainScreen.bounds.size.width - 40;
+            CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleLargeTitle].pointSize;
+            CGFloat width = [_pageViewController.navigationItem.title sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]}].width;
+            while (width > maxWidth) {
+                fontSize -= 1;
+                // adhering to iPhone Typography Guidelines
+                if (fontSize <= 17) {
+                    break;
+                }
+                width = [_pageViewController.navigationItem.title sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]}].width;
+            }
+            _pageViewController.navigationController.navigationBar.largeTitleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:fontSize]};
+        }
+        if (![self shouldDisplayProgressLabel]) {
+            _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
         }
     }
 }
@@ -1032,6 +1130,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // alpha's range [0.0, 1.0]
     float alpha = MAX( MIN(scrollView.contentOffset.y / 64.0, 1.0), 0.0);
     self.hairline.alpha = alpha;
+    _pageViewController.tableView.contentOffset = scrollView.contentOffset;
 }
 
 - (NSArray<ORKStep *> *)stepsForReviewStep:(ORKReviewStep *)reviewStep {
@@ -1156,7 +1255,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
-- (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
+- (void)presentCancelOptions:(BOOL)saveable sender:(id)sender {
     
     if ([self.delegate respondsToSelector:@selector(taskViewControllerShouldConfirmCancel:)] &&
         ![self.delegate taskViewControllerShouldConfirmCancel:self]) {
@@ -1174,7 +1273,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    alert.popoverPresentationController.barButtonItem = sender;
+    
+    if ([sender isKindOfClass:[ORKBorderedButton class]]) {
+        UIView *cancelButtonView = (UIView *)sender;
+        alert.popoverPresentationController.sourceView = cancelButtonView;
+        alert.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(cancelButtonView.bounds), CGRectGetMidY(cancelButtonView.bounds),0,0);
+    }
+    else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        alert.popoverPresentationController.barButtonItem = sender;
+    }
     
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
@@ -1224,7 +1331,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         isStandaloneReviewStep = reviewStep.isStandalone;
     }
     
-    if ((isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
+    if (self.discardable || (isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];
@@ -1400,6 +1507,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 static NSString *const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
 static NSString *const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
+static NSString *const _ORKDiscardableTaskRestoreKey = @"discardableTask";
 static NSString *const _ORKManagedResultsRestoreKey = @"managedResults";
 static NSString *const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
 static NSString *const _ORKHasSetProgressLabelRestoreKey = @"hasSetProgressLabel";
@@ -1417,6 +1525,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     
     [coder encodeObject:_taskRunUUID forKey:_ORKTaskRunUUIDRestoreKey];
     [coder encodeBool:self.showsProgressInNavigationBar forKey:_ORKShowsProgressInNavigationBarRestoreKey];
+    [coder encodeBool:self.discardable forKey:_ORKDiscardableTaskRestoreKey];
     [coder encodeObject:_managedResults forKey:_ORKManagedResultsRestoreKey];
     [coder encodeObject:_managedStepIdentifiers forKey:_ORKManagedStepIdentifiersRestoreKey];
     [coder encodeBool:_hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
@@ -1442,6 +1551,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     
     _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
+    self.discardable = [coder decodeBoolForKey:_ORKDiscardableTaskRestoreKey];
     
     _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
     [self ensureDirectoryExists:_outputDirectory];
@@ -1480,8 +1590,8 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
 - (void)applicationFinishedRestoringState {
     [super applicationFinishedRestoringState];
     
-    _pageViewController = (UIPageViewController *)[self.childNavigationController viewControllers][0];
-    
+    _pageViewController = (ORKPageViewController *)[self.childNavigationController viewControllers][0];
+
     if (!_task) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Task must be provided to restore task view controller"
@@ -1518,9 +1628,9 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     }
 }
 
-+ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     if ([identifierComponents.lastObject isEqualToString:_PageViewControllerRestorationKey]) {
-        UIPageViewController *pageViewController = [self pageViewController];
+        ORKPageViewController *pageViewController = [self pageViewController];
         pageViewController.restorationIdentifier = identifierComponents.lastObject;
         pageViewController.restorationClass = self;
         return pageViewController;

@@ -38,6 +38,8 @@
 #import "ORKVerticalContainerView.h"
 
 #import "ORKActiveStepViewController_Internal.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKPSATResult.h"
 #import "ORKPSATStep.h"
 #import "ORKResult.h"
 #import "ORKStepViewController_Internal.h"
@@ -196,7 +198,7 @@
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
     if (self.currentDigitIndex == 0) {
         [self.psatContentView setEnabled:YES];
-        [self.activeStepView updateTitle:ORKLocalizedString(@"PSAT_INSTRUCTION", nil) text:nil];
+        [self.activeStepView updateTitle:nil text:ORKLocalizedString(@"PSAT_INSTRUCTION", nil)];
     } else {
         [self saveSample];
     }

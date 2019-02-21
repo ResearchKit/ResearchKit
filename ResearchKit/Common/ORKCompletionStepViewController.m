@@ -135,6 +135,10 @@ static const CGFloat TickViewSize = 122;
     return [super accessibilityTraits] | UIAccessibilityTraitImage;
 }
 
+- (NSString *)accessibilityLabel {
+    return ORKLocalizedString(@"AX_COMPLETION_ILLUSTRATION", nil);
+}
+
 @end
 
 
@@ -151,8 +155,6 @@ static const CGFloat TickViewSize = 122;
     }
     
     self.stepView.stepView = _completionStepView;
-    
-    self.stepView.continueSkipContainer.continueButtonItem = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -166,41 +168,11 @@ static const CGFloat TickViewSize = 122;
     if (animated) {
         [_completionStepView setAnimationPoint:1 animated:YES];
     }
-    
-    UILabel *captionLabel = self.stepView.headerView.captionLabel;
-    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, captionLabel);
-    _completionStepView.accessibilityLabel = [NSString localizedStringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), captionLabel.accessibilityLabel];
 }
 
 - (void)setCheckmarkColor:(UIColor *)checkmarkColor {
     _checkmarkColor = [checkmarkColor copy];
     _completionStepView.tintColor = checkmarkColor;
-}
-
-- (void)setShouldShowContinueButton:(BOOL)shouldShowContinueButton {
-    _shouldShowContinueButton = shouldShowContinueButton;
-    
-    // Update button states
-    [self setContinueButtonItem:self.continueButtonItem];
-    [self updateNavRightBarButtonItem];
-}
-
-// Override top right bar button item
-- (void)updateNavRightBarButtonItem {
-    if (self.shouldShowContinueButton) {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-    else {
-        self.navigationItem.rightBarButtonItem = self.continueButtonItem;
-    }
-}
-
-- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    [super setContinueButtonItem:continueButtonItem];
-    if (!self.shouldShowContinueButton) {
-        self.stepView.continueSkipContainer.continueButtonItem = nil;
-    }
-    [self updateNavRightBarButtonItem];
 }
 
 @end

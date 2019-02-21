@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKConsentSignature Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/familyName">familyName</option>
+		
+		<option value="//api/name/givenName">givenName</option>
+		
+		<option value="//api/name/identifier">identifier</option>
+		
+		<option value="//api/name/requiresName">requiresName</option>
+		
+		<option value="//api/name/requiresSignatureImage">requiresSignatureImage</option>
+		
+		<option value="//api/name/signatureDate">signatureDate</option>
+		
+		<option value="//api/name/signatureDateFormatString">signatureDateFormatString</option>
+		
+		<option value="//api/name/signatureImage">signatureImage</option>
+		
+		<option value="//api/name/title">title</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/signatureForPersonWithTitle:dateFormatString:identifier:">+ signatureForPersonWithTitle:dateFormatString:identifier:</option>
+		
+		<option value="//api/name/signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:">+ signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKConsentSignature Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td>NSCopying<br />NSSecureCoding</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKConsentSignature.h<br />ORKConsentSignature.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKConsentSignature</code> class represents a signature in as <a href="../Classes/ORKConsentDocument.html"><code>ORKConsentDocument</code></a> object.
+The signature can be that of an investigator, possibly prefilled with
+an image, date, and first and last name; or you might need to collect the details of a signature.</p>
+
+<p>Signatures can be collected in a consent review step (<a href="../Classes/ORKConsentReviewStep.html"><code>ORKConsentReviewStep</code></a>). After a signature has
+been obtained (which produces an <a href="../Classes/ORKConsentSignatureResult.html"><code>ORKConsentSignatureResult</code></a> object), the resulting signature
+can be substituted into a copy of the document, and used when generating a PDF.</p>
+
+<p>Alternatively, the details of a signature can be uploaded to a server
+for PDF generation elsewhere or simply as a record of having obtained consent.</p>
+
+<p>The signature object has no concept of a cryptographic signature &ndash; it is merely
+a record of any input the user made during a consent review step. Also, an <code>ORKConsentSignature</code> object
+does not verify or vouch for user identity.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:" title="signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:">+&nbsp;signatureForPersonWithTitle:dateFormatString:identifier:givenName:familyName:signatureImage:dateString:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a fully populated signature.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKConsentSignature *)signatureForPersonWithTitle:(NSString *)<em>title</em> dateFormatString:(NSString *)<em>dateFormatString</em> identifier:(NSString *)<em>identifier</em> givenName:(NSString *)<em>givenName</em> familyName:(NSString *)<em>familyName</em> signatureImage:(UIImage *)<em>signatureImage</em> dateString:(NSString *)<em>signatureDate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>title</code></th>
+						<td><p>The <a href="#//api/name/title">title</a> of the signatory.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>dateFormatString</code></th>
+						<td><p>The format string to use when formatting the date of signature.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The <a href="#//api/name/identifier">identifier</a> of the signature, unique within this document.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>givenName</code></th>
+						<td><p>The given name of the signatory.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>familyName</code></th>
+						<td><p>The family name of the signatory.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>signatureImage</code></th>
+						<td><p>An image of the signature.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>signatureDate</code></th>
+						<td><p>The date on which the signature was obtained, represented as a string.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Use this factory method when you need to prepopulate the investigator&rsquo;s signature in a generated consent document.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signatureForPersonWithTitle:dateFormatString:identifier:" title="signatureForPersonWithTitle:dateFormatString:identifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatureForPersonWithTitle:dateFormatString:identifier:">+&nbsp;signatureForPersonWithTitle:dateFormatString:identifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a signature to be collected.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (ORKConsentSignature *)signatureForPersonWithTitle:(NSString *)<em>title</em> dateFormatString:(NSString *)<em>dateFormatString</em> identifier:(NSString *)<em>identifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>title</code></th>
+						<td><p>The <a href="#//api/name/title">title</a> of the signatory.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>dateFormatString</code></th>
+						<td><p>The format string to use when formatting the date of signature.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The <a href="#//api/name/identifier">identifier</a> of the signature, unique within this document.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Use this factory method when representing a request to collect a signature for a consent review step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Consent review configuration" name="task_Consent review configuration"></a>
+						<h2 class="task-title">Consent review configuration</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/requiresName" title="requiresName"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requiresName">&nbsp;&nbsp;requiresName</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the user needs to enter their name during consent review.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL requiresName</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>YES</code>. In a consent review step, the name entry screen is not displayed when the value of this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/requiresSignatureImage" title="requiresSignatureImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/requiresSignatureImage">&nbsp;&nbsp;requiresSignatureImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the user needs to draw a signature during consent review.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL requiresSignatureImage</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The default value of this property is <code>YES</code>. In a consent review step, the signature entry
+screen is not shown when this property is <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Identifying signatories" name="task_Identifying signatories"></a>
+						<h2 class="task-title">Identifying signatories</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The identifier for this signature.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The identifier should be unique in the document. It can be used to find or
+replace a specific signature in an <a href="../Classes/ORKConsentDocument.html"><code>ORKConsentDocument</code></a> object. The identifier is also reproduced in
+the <a href="../Classes/ORKConsentSignatureResult.html"><code>ORKConsentSignatureResult</code></a> object produced by an <a href="../Classes/ORKConsentReviewStep.html"><code>ORKConsentReviewStep</code></a> object.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						<a title="Personal information." name="task_Personal information."></a>
+						<h2 class="task-title">Personal information.</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/title" title="title"></a>
+	<h3 class="method-title"><code><a href="#//api/name/title">&nbsp;&nbsp;title</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The title of the signatory.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *title</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/givenName" title="givenName"></a>
+	<h3 class="method-title"><code><a href="#//api/name/givenName">&nbsp;&nbsp;givenName</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The given name (first name in Western languages)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *givenName</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/familyName" title="familyName"></a>
+	<h3 class="method-title"><code><a href="#//api/name/familyName">&nbsp;&nbsp;familyName</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The family name (last name in Western languages)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *familyName</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signatureImage" title="signatureImage"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatureImage">&nbsp;&nbsp;signatureImage</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The image of the signature, if any.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) UIImage *signatureImage</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signatureDate" title="signatureDate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatureDate">&nbsp;&nbsp;signatureDate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The date associated with the signature.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *signatureDate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/signatureDateFormatString" title="signatureDateFormatString"></a>
+	<h3 class="method-title"><code><a href="#//api/name/signatureDateFormatString">&nbsp;&nbsp;signatureDateFormatString</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The date format string to be used when producing a date string for the PDF
+or consent review.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSString *signatureDateFormatString</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>For example, @&ldquo;yyyy-MM-dd &lsquo;at&rsquo; HH:mm&rdquo;. When the value of this property is <code>nil</code>,
+the current date and time for the current locale is used.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKConsentSignature.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

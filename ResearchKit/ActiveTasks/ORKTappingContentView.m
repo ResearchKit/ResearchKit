@@ -84,10 +84,14 @@
         _tapButton1 = [[ORKRoundTappingButton alloc] init];
         _tapButton1.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton1 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        _tapButton1.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_1_LABEL", nil);
+        _tapButton1.accessibilityHint = ORKLocalizedString(@"AX_TAP_BUTTON_HINT", nil);
         
         _tapButton2 = [[ORKRoundTappingButton alloc] init];
         _tapButton2.translatesAutoresizingMaskIntoConstraints = NO;
         [_tapButton2 setTitle:ORKLocalizedString(@"TAP_BUTTON_TITLE", nil) forState:UIControlStateNormal];
+        _tapButton2.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_2_LABEL", nil);
+        _tapButton2.accessibilityHint = ORKLocalizedString(@"AX_TAP_BUTTON_HINT", nil);
         
         _lastTappedButton = -1;
         
@@ -253,12 +257,12 @@
                                                views:views]];
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton1]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tapButton2]-(==10)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil
                                                views:views]];
@@ -296,7 +300,7 @@
     CGFloat topToProgressViewOffset = 0.0;
     CGFloat topToCaptionLabelOffset = 0.0;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad12_9) {
+    if (screenType == ORKScreenTypeiPad || screenType == ORKScreenTypeiPad10_5 || screenType == ORKScreenTypeiPad12_9) {
         topToProgressViewOffset = 0;
         topToCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {

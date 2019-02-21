@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSDate *dismissedDate;
 
 @property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
+@property (nonatomic, assign) BOOL shouldIgnoreiPadDesign;
 
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 
@@ -81,8 +82,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ork_setBackButtonItem:(nullable UIBarButtonItem *)backButton;
 
 // internal method for updating the right bar button item.
-- (void)updateNavRightBarButtonItem;
 - (void)updateNavLeftBarButtonItem;
+
+// Use this view to layout iPad Constraints.
+- (UIView *)viewForiPadLayoutConstraints;
+
+// internal method for updating title label for iPad designs.
+- (void)setiPadStepTitleLabelText:(NSString *)text;
+
+// internal method for updating iPadBackgroundViewColor.
+- (void)setiPadBackgroundViewColor:(UIColor *)color;
 
 @end
 

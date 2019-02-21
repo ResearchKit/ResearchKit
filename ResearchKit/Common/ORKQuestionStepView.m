@@ -37,7 +37,7 @@
 
 #import "ORKStep_Private.h"
 #import "ORKQuestionStep_Internal.h"
-
+#import "ORKSkin.h"
 
 @implementation ORKQuestionStepView
 
@@ -48,17 +48,20 @@
 }
 
 - (void)setQuestionStep:(ORKQuestionStep *)step {
-    self.continueSkipContainer.useNextForSkip = (step ? NO : YES);
     _questionStep = step;
     self.headerView.instructionLabel.hidden = ![_questionStep text].length;
     
+    self.minimumStepHeaderHeight = ORKQuestionStepMinimumHeaderHeight;
     self.headerView.captionLabel.useSurveyMode = step.useSurveyMode;
-    self.headerView.captionLabel.text = _questionStep.title;
     self.headerView.instructionLabel.text = _questionStep.text;
-    self.continueSkipContainer.optional = _questionStep.optional;
-    
-    [self.continueSkipContainer updateContinueAndSkipEnabled];
 }
+
+- (void)setCustomHeaderTitle:(nullable NSString *)text {
+    if (text) {
+        self.headerView.captionLabel.text = text;
+    }
+}
+
 
 #pragma mark - Accessibility
 
@@ -85,12 +88,6 @@
     }
     if (self.questionCustomView) {
         [elements addObject:self.questionCustomView];
-    }
-    if (self.continueSkipContainer.continueButton != nil) {
-        [elements addObject:self.continueSkipContainer.continueButton];
-    }
-    if (self.continueSkipContainer.skipButton != nil) {
-        [elements addObject:self.continueSkipContainer.skipButton];
     }
     return elements;
 }

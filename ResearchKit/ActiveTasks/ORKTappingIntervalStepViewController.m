@@ -40,7 +40,8 @@
 #import "ORKStepViewController_Internal.h"
 
 #import "ORKActiveStepView.h"
-#import "ORKResult.h"
+#import "ORKCollectionResult_Private.h"
+#import "ORKTappingIntervalResult.h"
 #import "ORKStep.h"
 
 #import "ORKHelpers_Internal.h"
@@ -77,11 +78,10 @@
 
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
-    
+
     // Don't show next button
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
-    self.internalSkipButtonItem.title = ORKLocalizedString(@"TAPPING_SKIP_TITLE", nil);
 }
 
 - (void)viewDidLoad {
@@ -170,6 +170,14 @@
     }
     // Update label
     [_tappingContentView setTapCount:_hitButtonCount];
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        static NSNumberFormatter *TapCountAnnouncementFormatter = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            TapCountAnnouncementFormatter = [[NSNumberFormatter alloc] init];
+        });
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [TapCountAnnouncementFormatter stringFromNumber:@(_hitButtonCount)]);
+    }
 }
 
 - (void)releaseTouch:(UITouch *)touch onButton:(ORKTappingButtonIdentifier)buttonIdentifier {
@@ -240,6 +248,23 @@
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
     
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        if (!_tappingContentView.isAccessibilityElement) {
+            // Make the buttons directly tappable with VoiceOver
+            _tappingContentView.isAccessibilityElement = YES;
+            _tappingContentView.accessibilityLabel = ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_AREA", nil);
+            _tappingContentView.accessibilityTraits = UIAccessibilityTraitAllowsDirectInteraction;
+            // Ensure that VoiceOver is aware of the direct touch area so that the first tap gets registered
+            UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _tappingContentView);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // Work around an issue in VoiceOver where announcements don't get spoken if they happen during a button activation
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT", nil));
+            });
+            // Don't actually handle this as a tap yet.
+            return;
+        }
+    }
+    
     if (self.samples == nil) {
         // Start timer on first touch event on button
         _samples = [NSMutableArray array];
@@ -248,10 +273,6 @@
     }
     
     NSInteger index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
-    
-    if ( _tappingContentView.lastTappedButton == index ) {
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"TAP_BUTTON_TITLE", nil));
-    }
     _tappingContentView.lastTappedButton = index;
     
     [self receiveTouch:[[event touchesForView:button] anyObject] onButton:index];

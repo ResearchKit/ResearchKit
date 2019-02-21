@@ -50,6 +50,7 @@
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
+    NSString *_defaultTextAnswer;
 }
 
 - (void)applyAnswerFormat {
@@ -58,11 +59,17 @@
     if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
         ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
         _maxLength = [textAnswerFormat maximumLength];
+        _defaultTextAnswer = textAnswerFormat.defaultTextAnswer;
         self.textView.autocorrectionType = textAnswerFormat.autocorrectionType;
         self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         self.textView.keyboardType = textAnswerFormat.keyboardType;
         self.textView.secureTextEntry = textAnswerFormat.secureTextEntry;
+        self.textView.textContentType = textAnswerFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            self.textView.passwordRules = textAnswerFormat.passwordRules;
+        }
     } else {
         _maxLength = 0;
     }
@@ -102,13 +109,27 @@
         [self applyAnswerFormat];
         
         [self answerDidChange];
+        
+        // Avoid exposing both this cell and its inner text view as elements to accessibility
+        // See also ORKCustomStepView -accessibilityElements
+        self.accessibilityElements = @[self.textView];
     }
     [super prepareView];
+}
+
+- (void)assignDefaultAnswer {
+    if (_defaultTextAnswer) {
+        [self ork_setAnswer:_defaultTextAnswer];
+        if (self.textView) {
+            self.textView.text = _defaultTextAnswer;
+        }
+    }
 }
 
 - (void)answerDidChange {
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
+    [self assignDefaultAnswer];
 }
 
 - (void)setUpConstraints {
@@ -268,6 +289,11 @@
         self.textField.spellCheckingType = textFormat.spellCheckingType;
         self.textField.keyboardType = textFormat.keyboardType;
         self.textField.secureTextEntry = textFormat.secureTextEntry;
+        self.textField.textContentType = textFormat.textContentType;
+        
+        if (@available(iOS 12.0, *)) {
+            self.textField.passwordRules = textFormat.passwordRules;
+        }
     }
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     

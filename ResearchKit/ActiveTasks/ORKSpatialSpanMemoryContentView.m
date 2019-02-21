@@ -170,7 +170,7 @@
 
 @implementation ORKSpatialSpanMemoryContentView {
     ORKQuantityPairView *_quantityPairView;
-    ORKNavigationContainerView *_continueView;
+    UIView *_continueView;
 }
 
 - (ORKActiveStepQuantityView *)countView {
@@ -192,10 +192,8 @@
         _quantityPairView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_quantityPairView];
         
-        _continueView = [ORKNavigationContainerView new];
+        _continueView = [UIView new];
         _continueView.translatesAutoresizingMaskIntoConstraints = NO;
-        _continueView.continueEnabled = YES;
-        _continueView.bottomMargin = 20;
         [self addSubview:_continueView];
         
         ORKActiveStepQuantityView *countView = [self countView];
@@ -259,9 +257,31 @@
     [self updateFooterHidden];
 }
 
-- (void)setButtonItem:(UIBarButtonItem *)buttonItem {
+- (void)setButtonItem:(ORKBorderedButton *)buttonItem {
     _buttonItem = buttonItem;
-    _continueView.continueButtonItem = buttonItem;
+    if (buttonItem) {
+        buttonItem.contentEdgeInsets = (UIEdgeInsets){.top = 2, .bottom = 2, .left = 8, .right = 8};
+        buttonItem.translatesAutoresizingMaskIntoConstraints = NO;
+        [_continueView addSubview:buttonItem];
+        [[NSLayoutConstraint constraintWithItem:_buttonItem
+                                      attribute:NSLayoutAttributeCenterX
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:_continueView
+                                      attribute:NSLayoutAttributeCenterX
+                                     multiplier:1.0
+                                       constant:0.0] setActive:YES];
+        [[NSLayoutConstraint constraintWithItem:_buttonItem
+                                      attribute:NSLayoutAttributeCenterY
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:_continueView
+                                      attribute:NSLayoutAttributeCenterY
+                                     multiplier:1.0
+                                       constant:0.0] setActive:YES];
+    }
+    else {
+        [_buttonItem removeFromSuperview];
+    }
+    
     _continueView.hidden = (buttonItem == nil);
     [self updateFooterHidden];
 }
@@ -288,9 +308,9 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_gameView(>=ORKScreenMetricMinimumGameViewHeightForMemoryGame)][_quantityPairView]|"
                                              options:NSLayoutFormatAlignAllCenterX
-                                             metrics:nil
+                                             metrics:@{@"ORKScreenMetricMinimumGameViewHeightForMemoryGame": @(ORKGetMetricForWindow(ORKScreenMetricMinimumGameViewHeightForMemoryGame, self.window))}
                                                views:views]];
     NSLayoutConstraint *gameViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_gameView
                                                                       attribute:NSLayoutAttributeHeight
@@ -324,7 +344,7 @@
                                                          constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
                                                         attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                        relatedBy:NSLayoutRelationEqual
                                                            toItem:_quantityPairView
                                                         attribute:NSLayoutAttributeTop
                                                        multiplier:1.0

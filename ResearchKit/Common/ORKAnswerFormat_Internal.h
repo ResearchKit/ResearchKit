@@ -65,6 +65,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextScaleAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 
 @class ORKQuestionResult;
@@ -132,10 +133,11 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 - (NSInteger)numberOfSteps;
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
 - (BOOL)isVertical;
+- (BOOL)shouldHideSelectedValueLabel;
 - (NSString *)maximumValueDescription;
 - (NSString *)minimumValueDescription;
-- (UIImage *)maximumImage;
-- (UIImage *)minimumImage;
+- (nullable UIImage *)maximumImage;
+- (nullable UIImage *)minimumImage;
 - (nullable NSArray<UIColor *> *)gradientColors;
 - (nullable NSArray<NSNumber *> *)gradientLocations;
 
@@ -145,7 +147,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 @protocol ORKTextScaleAnswerFormatProvider <ORKScaleAnswerFormatProvider>
 
 - (NSArray<ORKTextChoice *> *)textChoices;
-- (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
+- (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
 - (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value;
 
 @end
@@ -228,6 +230,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 @end
 
 
+@interface ORKWeightAnswerFormat ()
+
+@property (nonatomic, readonly) BOOL useMetricSystem;
+
+@end
+
+
 @interface ORKAnswerDefaultSource : NSObject
 
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore;
@@ -237,7 +246,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKHeightAnswerFormat)
 
 - (void)fetchDefaultValueForAnswerFormat:(nullable ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler;
 
-- (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat;
+- (nullable HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat;
 - (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force;
 
 @end

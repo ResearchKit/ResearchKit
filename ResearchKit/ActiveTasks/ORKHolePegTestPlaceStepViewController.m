@@ -36,12 +36,14 @@
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
-#import "ORKTaskViewController.h"
+#import "ORKTaskViewController_Internal.h"
+#import "ORKNavigationContainerView_Internal.h"
 
+#import "ORKCollectionResult_Private.h"
 #import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestResult.h"
 #import "ORKNavigableOrderedTask.h"
-#import "ORKResult.h"
-
+#import "ORKVerticalContainerView_Internal.h"
 #import "ORKHelpers_Internal.h"
 
 
@@ -87,6 +89,7 @@
     self.holePegTestPlaceContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestPlaceContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
+    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
 }
 
 #pragma mark - step life cycle methods
@@ -141,19 +144,14 @@
 
 #pragma mark - hole peg test content view delegate
 
-- (NSString *)stepTitle {
-    NSString *title = ([self holePegTestPlaceStep].movingDirection == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil);
-    return title;
-}
-
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
     if (!self.isStarted) {
         self.sampleStart = CACurrentMediaTime();
         [self start];
     }
     
-    [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
+    [self.activeStepView updateTitle:nil
+                                text:[[self holePegTestPlaceStep].movingDirection == ORKBodySagittalRight ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)]]];
 }
 
 - (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView withDistance:(CGFloat)distance {
@@ -162,8 +160,8 @@
     [self saveSampleWithDistance:distance];
     
     [holePegTestPlaceContentView setProgress:((CGFloat)self.successes / [self holePegTestPlaceStep].numberOfPegs) animated:YES];
-    [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+    [self.activeStepView updateTitle:nil
+                                text:[[self holePegTestPlaceStep].movingDirection == ORKBodySagittalRight ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
     
     if (self.successes >= [self holePegTestPlaceStep].numberOfPegs) {
         [((ORKNavigableOrderedTask *)self.taskViewController.task) removeNavigationRuleForTriggerStepIdentifier:[self holePegTestPlaceStep].identifier];
@@ -174,8 +172,8 @@
 - (void)holePegTestPlaceDidFail:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
     self.failures++;
     
-    [self.activeStepView updateTitle:[self stepTitle]
-                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+    [self.activeStepView updateTitle:nil
+                                text:[[self holePegTestPlaceStep].movingDirection == ORKBodySagittalRight ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
 }
 
 @end

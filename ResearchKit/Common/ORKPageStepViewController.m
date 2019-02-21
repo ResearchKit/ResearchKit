@@ -266,6 +266,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     
     // Setup view controller
     stepViewController.delegate = self;
+    stepViewController.cancelButtonItem = self.cancelButtonItem;
     stepViewController.outputDirectory = self.outputDirectory;
     
     // Setup page direction

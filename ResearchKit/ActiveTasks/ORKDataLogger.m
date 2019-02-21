@@ -323,7 +323,16 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (BOOL)canAcceptLogObject:(id)object {
-    return [object isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:object];
+    if ([object isKindOfClass:[NSDictionary class]] && [NSJSONSerialization isValidJSONObject:object]) {
+        return true;
+    } else if ([object isKindOfClass:[NSData class]]) {
+        if ([NSJSONSerialization JSONObjectWithData:object
+                                            options:kNilOptions
+                                              error:nil]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 - (BOOL)beginLogWithFileHandle:(NSFileHandle *)fileHandle error:(NSError **)error {
@@ -393,8 +402,17 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     // Serialize each object separately to the buffer, pending a single write, so the
     // objects form part of a single array.
     __block BOOL success = YES;
+    __block NSError *localError;
+    if (error) {
+        localError = *error;
+    }
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:obj options:(NSJSONWritingOptions)0 error:error];
+        NSData *data;
+        if ([obj isKindOfClass:[NSData class]]) {
+            data = obj;
+        } else {
+            data = [NSJSONSerialization dataWithJSONObject:obj options:(NSJSONWritingOptions)0 error:&localError];
+        }
         if (!data) {
             success = NO;
             *stop = YES;

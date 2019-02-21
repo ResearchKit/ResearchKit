@@ -40,7 +40,7 @@
 
 @implementation ORKVideoCaptureView {
     ORKStepHeaderView *_headerView;
-    ORKNavigationContainerView *_continueSkipContainer;
+    ORKNavigationContainerView *_navigationFooterView;
     UIBarButtonItem *_captureButtonItem;
     UIBarButtonItem *_stopButtonItem;
     UIBarButtonItem *_recordingButtonItem;
@@ -91,13 +91,14 @@
                                                                target:self
                                                                action:@selector(retakePressed)];
         
-        _continueSkipContainer = [ORKNavigationContainerView new];
-        _continueSkipContainer.continueEnabled = YES;
-        _continueSkipContainer.topMargin = 5;
-        _continueSkipContainer.bottomMargin = 15;
-        _continueSkipContainer.optional = YES;
-        _continueSkipContainer.backgroundColor = ORKColor(ORKBackgroundColorKey);
-        [self addSubview:_continueSkipContainer];
+        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView.continueEnabled = YES;
+        _navigationFooterView.optional = YES;
+        _navigationFooterView.footnoteLabel.textAlignment = NSTextAlignmentCenter;
+        _navigationFooterView.footnoteLabel.text = @" ";
+        _navigationFooterView.backgroundColor = ORKColor(ORKNavigationContainerColorKey);
+        [_navigationFooterView setAlpha:0.8];
+        [self addSubview:_navigationFooterView];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
@@ -174,9 +175,9 @@
         _playerViewController.view.hidden = YES;
         
         // Show skip, if available, and hide the template and continue/capture button
-        _continueSkipContainer.continueButtonItem = nil;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
-        _continueSkipContainer.skipEnabled = YES;
+        _navigationFooterView.continueButtonItem = nil;
+        _navigationFooterView.skipButtonItem = _skipButtonItem;
+        _navigationFooterView.skipEnabled = YES;
     } else if (self.videoFileURL) {
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
@@ -184,9 +185,9 @@
         _playerViewController.view.hidden = NO;
         
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
-        _continueSkipContainer.continueButtonItem = _continueButtonItem;
-        _continueSkipContainer.skipButtonItem = _recaptureButtonItem;
-        _continueSkipContainer.skipEnabled = YES;
+        _navigationFooterView.continueButtonItem = _continueButtonItem;
+        _navigationFooterView.skipButtonItem = _recaptureButtonItem;
+        _navigationFooterView.skipEnabled = YES;
     } else if (self.recording) {
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
@@ -194,12 +195,11 @@
         _playerViewController.view.hidden = YES;
         
         // Change the continue button back to capture.
-        _continueSkipContainer.continueButtonItem = _stopButtonItem;
+        _navigationFooterView.continueButtonItem = _stopButtonItem;
     
         // Start a timer to show recording progress.
-        _recordingButtonItem.title = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
-        _continueSkipContainer.skipButtonItem = _recordingButtonItem;
-        _continueSkipContainer.skipEnabled = NO;
+        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:_videoCaptureStep.duration.floatValue];
+        _navigationFooterView.skipEnabled = NO;
         _recordTime = 0.0;
         _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
@@ -213,10 +213,11 @@
         _playerViewController.view.hidden = YES;
         
         // Change the continue button back to capture, and change the recapture button back to skip (if available)
-        _continueSkipContainer.continueButtonItem = _captureButtonItem;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
-        _continueSkipContainer.skipEnabled = YES;
+        _navigationFooterView.continueButtonItem = _captureButtonItem;
+        _navigationFooterView.skipButtonItem = _skipButtonItem;
+        _navigationFooterView.skipEnabled = YES;
     }
+    _navigationFooterView.cancelButtonItem = _cancelButtonItem;
 }
 
 - (void)setVideoFileURL:(NSURL *)videoFileURL {
@@ -242,8 +243,6 @@
 }
 
 - (void)updateConstraints {
-    const CGFloat ContinueSkipContainerTranslucentAlpha = 0.5;
-    const CGFloat ContinueSkipContainerOpaqueAlpha = 0.0;
     
     if (_variableConstraints) {
         [NSLayoutConstraint deactivateConstraints:_variableConstraints];
@@ -255,64 +254,115 @@
     }
     
     UIView *playerView = _playerViewController.view;
+    _headerView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    _previewView.translatesAutoresizingMaskIntoConstraints = NO;
+    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    playerView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView, playerView);
-    ORKEnableAutoLayoutForViews(views.allValues);
-    
-    [_variableConstraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
-                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                             metrics:nil
-                                               views:views]];
-    
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    
-    [_variableConstraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
-                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                             metrics:nil
-                                               views:views]];
-    [_variableConstraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
-                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                             metrics:nil
-                                               views:views]];
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[playerView]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playerView]-[_continueSkipContainer]|"
-                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    
-    
-    // Float the continue view over the previewView if in landscape to give more room for the preview
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
-                                                   views:views]];
-        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                    multiplier:1.0
-                                                                      constant:0.0]];
-        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:ContinueSkipContainerTranslucentAlpha];
-    } else {
-        [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:ContinueSkipContainerOpaqueAlpha];
-    }
+    [_variableConstraints addObjectsFromArray:@[
+                                                [NSLayoutConstraint constraintWithItem:_headerView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeTop
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_headerView
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.safeAreaLayoutGuide
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_headerView
+                                                                             attribute:NSLayoutAttributeRight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.safeAreaLayoutGuide
+                                                                             attribute:NSLayoutAttributeRight
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:playerView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeTop
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:playerView
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:playerView
+                                                                             attribute:NSLayoutAttributeRight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeRight
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:playerView
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_navigationFooterView
+                                                                             attribute:NSLayoutAttributeRight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self
+                                                                             attribute:NSLayoutAttributeRight
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                
+                                                [NSLayoutConstraint constraintWithItem:_previewView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:playerView
+                                                                             attribute:NSLayoutAttributeTop
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_previewView
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:playerView
+                                                                             attribute:NSLayoutAttributeLeft
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_previewView
+                                                                             attribute:NSLayoutAttributeRight
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:playerView
+                                                                             attribute:NSLayoutAttributeRight
+                                                                            multiplier:1.0
+                                                                              constant:0.0],
+                                                [NSLayoutConstraint constraintWithItem:_previewView
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:playerView
+                                                                             attribute:NSLayoutAttributeBottom
+                                                                            multiplier:1.0
+                                                                              constant:0.0]
+                                                
+                                                
+                                                ]];
     
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
@@ -337,6 +387,11 @@
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     _continueButtonItem = continueButtonItem;
+    [self updateAppearance];
+}
+
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    _cancelButtonItem = cancelButtonItem;
     [self updateAppearance];
 }
 
@@ -397,8 +452,7 @@
         [self updateAppearance];
     } else {
         CGFloat remainingTime = _videoCaptureStep.duration.floatValue - _recordTime;
-        _recordingButtonItem.title = [self formattedTimeFromSeconds:remainingTime];
-        _continueSkipContainer.skipButtonItem = _recordingButtonItem;
+        _navigationFooterView.footnoteLabel.text = [self formattedTimeFromSeconds:remainingTime];
     }
 }
 

@@ -37,7 +37,7 @@
 "CONSENT_REVIEW_INSTRUCTION" = "下記のフォームを確認して、続ける場合は“同意する”をタップしてください。";
 "CONSENT_REVIEW_ALERT_TITLE" = "確認";
 "CONSENT_SIGNATURE_TITLE" = "署名";
-"CONSENT_SIGNATURE_INSTRUCTION" = "下の線の上に指で署名してください。";
+"CONSENT_SIGNATURE_INSTRUCTION" = "下の枠内に指で署名してください。";
 "CONSENT_SIGNATURE_PLACEHOLDER" = "ここに署名";
 "CONSENT_PAGE_NUMBER_FORMAT" = "ページ%1$ld/%2$ld";
 
@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日付";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "ステップ%1$@/%2$@";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "値が無効です";
@@ -115,6 +115,8 @@
 "GENDER_FORM_ITEM_PLACEHOLDER" = "性別を選択";
 "DOB_FORM_ITEM_TITLE" = "生年月日";
 "DOB_FORM_ITEM_PLACEHOLDER" = "日付を選択";
+"PHONE_NUMBER_FORM_ITEM_TITLE" = "電話番号";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "確認";
@@ -180,6 +182,9 @@
 "MEASURING_UNIT_CM" = "cm";
 "MEASURING_UNIT_FT" = "ft";
 "MEASURING_UNIT_IN" = "in";
+"MEASURING_UNIT_KG" = "kg";
+"MEASURING_UNIT_LB" = "lb";
+"MEASURING_UNIT_OZ" = "oz";
 
 /* Limb values. */
 "LIMB_LEFT" = "左";
@@ -196,6 +201,7 @@
 "BUTTON_CANCEL" = "キャンセル";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "消去";
+"BUTTON_APPLY" = "適用";
 "BUTTON_DISAGREE" = "同意しない";
 "BUTTON_DONE" = "完了";
 "BUTTON_GET_STARTED" = "開始";
@@ -245,7 +251,7 @@
 "WALK_TASK_TITLE" = "歩行/バランス";
 "WALK_INTRO_TEXT" = "このアクティビティでは、歩行中とじっと立っているときの歩行/バランスを測定します。介助なしで安全に歩行できない場合は、続行しないでください。";
 "WALK_INTRO_2_TEXT_%ld" = "介助なしで安全に、まっすぐに%ld歩程度歩ける場所を見つけてください。";
-"WALK_INTRO_2_DETAIL" = "電話をポケットまたはバッグに入れて、音声による指示に従ってください。";
+"WALK_INTRO_2_DETAIL" = "デバイスをポケットまたはバッグに入れて、音声による指示に従ってください。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "ここで%@間じっと立っていてください。";
 "WALK_STAND_INSTRUCTION_FORMAT" = "%@間じっと立っていてください。";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "後ろを向いて、元の場所まで歩いて戻ってください。";
@@ -253,7 +259,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "安全にまっすぐ行ったり来たり歩ける場所を見つけてください。進路の終わりまで来たら、コーンを回るように折り返して歩き続けます。\n\n次に、完全な円を描いて回るように指示されます。その後、両腕を脇につけ、足を肩幅くらいに開いてじっと立ってください。";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "開始の準備ができたら、“開始”をタップしてください。\n次に、電話をポケットまたはバッグに入れて、音声による指示に従ってください。";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "開始の準備ができたら、“開始”をタップしてください。\n次に、デバイスをポケットまたはバッグに入れて、音声による指示に従ってください。";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "まっすぐ行ったり来たりして%@間歩きます。いつもと同じように歩いてください。";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "完全な円を描いて歩いてから、%@間じっと立ってください。";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "アクティビティが完了しました。";
@@ -263,7 +269,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "右手";
 "TAPPING_TASK_TITLE_LEFT" = "左手";
 "TAPPING_INTRO_TEXT" = "このアクティビティでは、タップの速度を測定します。";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "電話を平らな面に置いてください。";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "デバイスを平らな面に置いてください。";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "同じ手の2本の指を使って、画面上のボタンを交互にタップします。";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "右手の2本の指を使って、画面上のボタンを交互にタップしてください。";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "左手の2本の指を使って、画面上のボタンを交互にタップしてください。";
@@ -279,12 +285,20 @@
 "TAPPING_INSTRUCTION_LEFT" = "左手を使ってボタンをタップしてください。";
 "TAPPING_SKIP_TITLE" = "この手をスキップ";
 
+/* Amsler Grid Task.*/
+"AMSLER_GRID_TITLE" = "アムスラーグリッド";
+"AMSLER_GRID_INTRO_TEXT" = "このアクティビティは、ユーザの視力の問題を検出するときに役立てることができます。";
+"AMSLER_GRID_INSTRUCTION_TEXT" = "テストの間、デバイスを目の高さで、顔から30センチメートルほど離して持ってください。";
+"AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "%@を閉じて、四角形のグリッドの中央にあるドットを見つめます。\n\n指かスタイラスペンで、不鮮明な線や破線などの歪みをマークします。\n\n終わったら、グリッドの外を左へスワイプします。";
+"AMSLER_GRID_LEFT_EYE" = "左目";
+"AMSLER_GRID_RIGHT_EYE" = "右目";
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "声";
 "AUDIO_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
 "AUDIO_INSTRUCTION" = "マイクに向かってできるだけ長く「あーーーー」と声を出してください。";
 "AUDIO_INTRO_TEXT" = "大きく息を吸ってから、マイクに向かってできるだけ長く「あーーーー」と声を出してください。声の大きさを一定に保って、オーディオバーを青色のままにしてください。";
-"AUDIO_INTENDED_USE" = "このアクティビティでは、電話の下部にあるマイクで録音することで、あなたの声を評価します。";
+"AUDIO_INTENDED_USE" = "このアクティビティでは、デバイスの下部にあるマイクで録音することで、あなたの声を評価します。";
 "AUDIO_TOO_LOUD_LABEL" = "大きすぎる";
 "AUDIO_GENERIC_ERROR_LABEL" = "声を録音できません";
 "AUDIO_LEVEL_CHECK_LABEL" = "背景ノイズのレベルを確認中です。しばらくお待ちください。";
@@ -296,12 +310,22 @@
 "TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、さまざまな音がどのように聞こえるかが測定されます。";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "始める前に、ヘッドフォンを接続して装着してください。\n\n普通の通知音ではなく、非常にかすかな音が聞こえます。最初は弱い音で、徐々に大きくなっていきます。よく聞いて、どちらの耳で聞こえたかを左ボタンか右ボタンをタップして示してください。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"TONE_AUDIOMETRY_PREP_TEXT" = "すると音が聞こえてくるはずです。デバイスの横にあるコントロールで音量を調整してください。\n\n始める準備ができたらボタンをタップしてください。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "音が聞こえてくるのでデバイスの横にあるコントロールで音量を調整してください。\n\n始める準備ができたらボタンをタップしてください。";
 "TONE_AUDIOMETRY_INSTRUCTION" = "音が聞こえ始めるたびに、どちらの耳で聞こえたかを左ボタンか右ボタンをタップして示してください。";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "左耳";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "右耳";
 "TONE_LABEL_%@_LEFT" = "%@ Hz、左";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz、右";
+
+/* dBHL Tone audiometry active task. */
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
+"dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、個人の聴覚閾値レベルをdBHL単位で識別します。";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "デバイスの音量が最大レベルまで設定されていることを確認してください。\n\nこのタスクの間に、かすかな音が左耳か右耳のどちらかに流れます。\n\n耳を澄ませて、音が聞こえるたびにボタンをタップしてください。";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING" = "開始時の質問。";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "聴きやすいほうの耳があれば選択します";
+"dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "左";
+"dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "右";
+"dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "設定なし";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
@@ -319,7 +343,7 @@
 "MEMORY_GAME_COMPLETE_TITLE" = "シーケンス完了";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "続けるには、“次へ”をタップしてください";
 "MEMORY_GAME_FAILED_TITLE" = "やり直す";
-"MEMORY_GAME_FAILED_MESSAGE" = "うまくできませんでした。\n続けるには、“次へ”をタップしてください。";
+"MEMORY_GAME_FAILED_MESSAGE" = "うまくできませんでした。\\n続けるには、“次へ”をタップしてください。";
 "MEMORY_GAME_TIMEOUT_TITLE" = "タイムアップ";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "時間がなくなりました。\n続けるには、“次へ”をタップしてください。";
 "MEMORY_GAME_COMPLETE" = "ゲーム完了";
@@ -359,6 +383,7 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "降参";
 
 /* Range of Motion active task */
+"RANGE_OF_MOTION_TITLE" = "可動域";
 "LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOptionは左または右にする必要があります";
 
 /* Knee Range of Motion active task */
@@ -500,6 +525,32 @@
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
 
+/* Speech Recognition active task. */
+"SPEECH_TASK_TITLE" = "音声認識";
+"SPEECH_RECOGNITION_INTRO_TEXT" = "このアクティビティは、デバイスの下部にあるマイクで発声した内容を記録して、テキストに書き起こします。";
+"SPEECH_RECOGNITION_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"SPEECH_RECOGNITION_INTRO_2_TEXT" = "ボタンを押して、収録を開始してから、話します。";
+"SPEECH_RECOGNITION_START_RECORD_LABEL" = "録画を開始";
+"SPEECH_RECOGNITION_STOP_RECORD_LABEL" = "録画を停止";
+"SPEECH_RECOGNITION_QUESTION_TITLE" = "発音表記を編集";
+"SPEECH_RECOGNITION_QUESTION_TEXT" = "発音表記のテキストを修正して、発声内容の聞き間違いを訂正します。";
+"SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "発音表記はここに表示されます。";
+"SPEECH_RECOGNITION_FAILED" = "音声認識できませんでした。";
+"SPEECH_RECOGNITION_INIT_FAILURE" = "音声認識を初期化できませんでした。";
+
+/* Speech In Noise active task. */
+"SPEECH_IN_NOISE_START_AUDIO_LABEL" = "オーディオを再生";
+"SPEECH_IN_NOISE_STOP_AUDIO_LABEL" = "オーディオを停止";
+"SPEECH_IN_NOISE_TITLE" = "ノイズの中で発声";
+"SPEECH_IN_NOISE_INTRO_TEXT" = "このアクティビティでは、雑音環境下での発声の明瞭度を測定します。";
+"SPEECH_IN_NOISE_DETAIL_TEXT" = "このテストの一環として、次のことを行います:\n\n文章を聴きます。\n\n聞こえた内容をはっきりと繰り返すか、スキップしてキーボードを使って入力します。\n\n聞こえた内容を繰り返す場合、音声認識エンジンから生成される発音表記を修正するオプションがあります。";
+"SPEECH_IN_NOISE_CALIBRATION_TITLE" = "音量の調整";
+"SPEECH_IN_NOISE_CALIBRATION_TEXT" = "“オーディオを再生”をタップして、音量を快適なレベルへ調整してから、“オーディオを停止”をタップして次に進みます。";
+"SPEECH_IN_NOISE_STEP_TITLE" = "聴く";
+"SPEECH_IN_NOISE_STEP_TEXT" = "ランダムなSN比（SNR）で背景ノイズと混ざった文章が一度だけ再生されます。";
+"SPEECH_IN_NOISE_SPEAK_TITLE" = "話す";
+"SPEECH_IN_NOISE_SPEAK_TEXT" = "聞こえた内容を繰り返します。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "しきい値に達するのに十分なログファイルを削除できませんでした";
@@ -509,13 +560,27 @@
 "ERROR_RECORDER_NO_DATA" = "収集したデータが見つかりませんでした。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "出力ディレクトリが指定されていません";
 
+/* Environment SPL*/
+"ENVIRONMENTSPL_TITLE" = "騒音計";
+"ENVIRONMENTSPL_INTRO_TEXT" = "このアクティビティでは、環境の音圧レベルを測定します。ノイズレベルが高すぎる場合、アクティビティを続けることはできません。静かな場所に移動してこのタスクを完了するか、後でこのアクティビティを行ってください。";
+"ENVIRONMENTSPL_UNIT" = "dBA";
+"ENVIRONMENTSPL_CALCULATING" = "計算中";
+"ENVIRONMENTSPL_THRESHOLD" = "閾値: %@ dBA";
+
 /* Charts */
 "CHART_NO_DATA_TEXT" = "データなし";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "戻る";
+"AX_BUTTON_SHOW_PDF_THUMBNAIL" = "PDFサムネールを表示";
+"AX_BUTTON_HIDE_PDF_THUMBNAIL" = "PDFサムネールを非表示";
+"AX_BUTTON_ANNOTATE" = "注釈";
+"AX_BUTTON_SHOW_SEARCH" = "検索バーを表示";
+"AX_BUTTON_HIDE_SEARCH" = "検索バーを非表示";
+"AX_BUTTON_SHARE" = "共有";
 
-"AX_IMAGE_ILLUSTRATION" = "%@のイラスト";
+
+"AX_COMPLETION_ILLUSTRATION" = "成功を示すために青い丸の中にチェックマークがある図";
 
 "AX_SIGNVIEW_LABEL" = "指定された署名フィールド";
 "AX_SIGNVIEW_HINT" = "画面をタッチしながら指を動かして署名します";
@@ -550,9 +615,22 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@のサイズの円盤があります";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
 
+
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "範囲%@〜%@";
 "AX_GRAPH_STACK_PREFIX" = "次の内容のスタック:";
 "AX_GRAPH_AND_SEPARATOR" = "と";
 "AX_GRAPH_POINT_%@" = "ポイント: %@";
 
+"AX_SPEECH_RECOGNITION_WAVEFORM" = "音声波形";
+"AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "録音の開始後に再度アクティベートすると録音が停止します。";
+
 "AX_AUDIO_BAR_GRAPH" = "オーディオバーグラフ";
+
+"AX_AMSLER_GRID_LABEL" = "アムスラーグリッド";
+"AX_AMSLER_GRID_HINT" = "指かスタイラスペンでグリッドに直接マークするか、グリッドの外を左にスワイプして終了します。";
+
+/* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+/* This contains the visual text, followed by a VoiceOver-specific description. */
+
+/* This contains the visual text, followed by a VoiceOver-specific description. */

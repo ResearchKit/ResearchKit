@@ -40,22 +40,136 @@
 
 
 static const CGFloat LabelRightMargin = 44.0;
+static const CGFloat cardTopBottomMargin = 2.0;
 
+@interface ORKChoiceViewCell()
+
+@property (nonatomic) UIView *containerView;
+
+@end
 
 @implementation ORKChoiceViewCell {
+    
+    CGFloat _leftRightMargin;
+    CGFloat _topBottomMargin;
+    CAShapeLayer *_contentMaskLayer;
+    
     UIImageView *_checkView;
     ORKSelectionTitleLabel *_shortLabel;
     ORKSelectionSubTitleLabel *_longLabel;
+    NSArray<NSLayoutConstraint *> *_containerConstraints;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.clipsToBounds = YES;
+        _leftRightMargin = 0.0;
+        _topBottomMargin = 0.0;
         _checkView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         self.accessoryView = _checkView;
+        [self setupContainerView];
+        [self setupConstraints];
     }
     return self;
+}
+
+- (void) drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    [self setMaskLayers];
+}
+
+- (void)setMaskLayers {
+    if (_useCardView) {
+        if (_contentMaskLayer) {
+            for (CALayer *sublayer in [_contentMaskLayer.sublayers mutableCopy]) {
+                [sublayer removeFromSuperlayer];
+            }
+            [_contentMaskLayer removeFromSuperlayer];
+            _contentMaskLayer = nil;
+        }
+        _contentMaskLayer = [[CAShapeLayer alloc] init];
+        UIColor *fillColor = [UIColor ork_borderGrayColor];
+        [_contentMaskLayer setFillColor:[fillColor CGColor]];
+        
+        CAShapeLayer *foreLayer = [CAShapeLayer layer];
+        [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
+        foreLayer.zPosition = 0.0f;
+        
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+
+        if (_isLastItem || _isFirstItemInSectionWithoutTitle) {
+            NSUInteger rectCorners;
+            if (_isLastItem && !_isFirstItemInSectionWithoutTitle) {
+                rectCorners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+            }
+            else if (!_isLastItem && _isFirstItemInSectionWithoutTitle) {
+                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight;
+            }
+            else {
+                rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight;
+            }
+            
+            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
+            
+            _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
+                                                           byRoundingCorners: rectCorners
+                                                                 cornerRadii: (CGSize){ORKCardDefaultCornerRadii, ORKCardDefaultCornerRadii}].CGPath;
+            
+            CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
+            
+            foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds
+                                                   byRoundingCorners: rectCorners
+                                                         cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
+        }
+        else {
+            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
+            foreLayer.path = [UIBezierPath bezierPathWithRect:foreLayerBounds].CGPath;
+            _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
+            
+            CGRect lineBounds = CGRectMake(_leftRightMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - 2 * _leftRightMargin, 0.5);
+            lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
+            lineLayer.zPosition = 0.0f;
+            [lineLayer setFillColor:[[UIColor ork_midGrayTintColor] CGColor]];
+
+        }
+        [_contentMaskLayer addSublayer:foreLayer];
+        [_contentMaskLayer addSublayer:lineLayer];
+        [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
+    }
+}
+
+
+- (void)setupContainerView {
+    if (!_containerView) {
+        _containerView = [UIView new];
+    }
+    
+    [self.contentView addSubview:_containerView];
+}
+
+- (void)setupConstraints {
+    if (_containerConstraints) {
+        [NSLayoutConstraint deactivateConstraints:_containerConstraints];
+    }
+    
+    _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _containerConstraints = @[
+                              [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
+                              [NSLayoutConstraint constraintWithItem:self.contentView
+                                                           attribute:NSLayoutAttributeBottom
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:self
+                                                           attribute:NSLayoutAttributeBottom
+                                                          multiplier:1.0
+                                                            constant:0.0],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:_leftRightMargin],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-_leftRightMargin],
+                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0]
+                              ];
+    [NSLayoutConstraint activateConstraints:_containerConstraints];
 }
 
 - (void)layoutSubviews {
@@ -111,13 +225,24 @@ static const CGFloat LabelRightMargin = 44.0;
         }
     }
     [self updateSelectedItem];
+    [self setMaskLayers];
+}
+
+- (void)setUseCardView:(bool)useCardView {
+    _useCardView = useCardView;
+    _leftRightMargin = ORKCardLeftRightMargin;
+    _topBottomMargin = cardTopBottomMargin;
+    [self setBackgroundColor:[UIColor clearColor]];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    [self setupConstraints];
+
 }
 
 - (ORKSelectionTitleLabel *)shortLabel {
     if (_shortLabel == nil ) {
         _shortLabel = [ORKSelectionTitleLabel new];
         _shortLabel.numberOfLines = 0;
-        [self.contentView addSubview:_shortLabel];
+        [self.containerView addSubview:_shortLabel];
     }
     return _shortLabel;
 }
@@ -127,7 +252,7 @@ static const CGFloat LabelRightMargin = 44.0;
         _longLabel = [ORKSelectionSubTitleLabel new];
         _longLabel.numberOfLines = 0;
         _longLabel.textColor = [UIColor ork_darkGrayColor];
-        [self.contentView addSubview:_longLabel];
+        [self.containerView addSubview:_longLabel];
     }
     return _longLabel;
 }
@@ -140,8 +265,10 @@ static const CGFloat LabelRightMargin = 44.0;
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
         self.accessoryView.hidden = _selectedItem ? NO : YES;
-        self.shortLabel.textColor = _selectedItem ? [self tintColor] : [UIColor blackColor];
-        self.longLabel.textColor = _selectedItem ? [[self tintColor] colorWithAlphaComponent:192.0 / 255.0] : [UIColor ork_darkGrayColor];
+        if (_selectedItem) {
+            self.shortLabel.textColor = [self tintColor];
+            self.longLabel.textColor = [[self tintColor] colorWithAlphaComponent:192.0 / 255.0];
+        }
     }
 }
 
@@ -159,7 +286,7 @@ static const CGFloat LabelRightMargin = 44.0;
     [self updateSelectedItem];
 }
 
-+ (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
++ (CGFloat)suggestedCellHeightForPrimaryText:(NSString *)shortText primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)longText  detailTextAttributedString:(NSAttributedString *)detailTextAttributedString inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
@@ -168,7 +295,7 @@ static const CGFloat LabelRightMargin = 44.0;
     CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
     CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + LabelRightMargin);
    
-    if (shortText.length > 0) {
+    if (shortText.length > 0 || primaryTextAttributedString != nil) {
         static ORKSelectionTitleLabel *shortLabel;
         if (shortLabel == nil) {
             shortLabel = [ORKSelectionTitleLabel new];
@@ -177,14 +304,16 @@ static const CGFloat LabelRightMargin = 44.0;
         
         shortLabel.frame = CGRectMake(0, 0, labelWidth, 0);
         shortLabel.text = shortText;
-        
+        if (primaryTextAttributedString) {
+            shortLabel.attributedText = primaryTextAttributedString;
+        }
         ORKAdjustHeightForLabel(shortLabel);
         CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = shortLabel.font.ascender;
     
         height += firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop + shortLabel.frame.size.height;
     }
     
-    if (longText.length > 0) {
+    if (longText.length > 0 || detailTextAttributedString != nil) {
         static ORKSelectionSubTitleLabel *longLabel;
         if (longLabel == nil) {
             longLabel = [ORKSelectionSubTitleLabel new];
@@ -193,7 +322,9 @@ static const CGFloat LabelRightMargin = 44.0;
         
         longLabel.frame = CGRectMake(0, 0, labelWidth, 0);
         longLabel.text = longText;
-        
+        if (detailTextAttributedString) {
+            longLabel.attributedText = detailTextAttributedString;
+        }
         ORKAdjustHeightForLabel(longLabel);
         
         CGFloat longLabelApproximateFirstBaselineOffset = longLabel.font.ascender;

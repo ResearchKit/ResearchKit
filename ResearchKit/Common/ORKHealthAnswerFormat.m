@@ -35,6 +35,7 @@
 
 #import "ORKHelpers_Internal.h"
 
+#import "ORKQuestionResult_Private.h"
 #import "ORKResult.h"
 
 
@@ -212,6 +213,9 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
             _impliedAnswerFormat = boolAnswerFormat.impliedAnswerFormat;
         }
     }
+    
+    NSAssert(_impliedAnswerFormat, @"_impliedAnswerFormat should have been set");
+
     return _impliedAnswerFormat;
 }
 
@@ -326,21 +330,25 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         return _impliedAnswerFormat;
     }
     
-    if (_quantityType) {
-        if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierHeight]) {
-            ORKHeightAnswerFormat *format = [ORKDateAnswerFormat heightAnswerFormat];
-            _impliedAnswerFormat = format;
-        } else {
+    if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierHeight]) {
+        ORKHeightAnswerFormat *format = [ORKHeightAnswerFormat heightAnswerFormat];
+        _impliedAnswerFormat = format;
+        _unit = [HKUnit meterUnitWithMetricPrefix:(HKMetricPrefixCenti)];
+    } else if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierBodyMass]) {
+        ORKWeightAnswerFormat *format = [ORKWeightAnswerFormat weightAnswerFormat];
+        _impliedAnswerFormat = format;
+        _unit = [HKUnit gramUnitWithMetricPrefix:(HKMetricPrefixKilo)];
+    } else {
         ORKNumericAnswerFormat *format = nil;
-            HKUnit *unit = [self healthKitUserUnit];
+        HKUnit *unit = [self healthKitUserUnit];
         if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
             format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
         } else {
             format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
-            }
-            _impliedAnswerFormat = format;
         }
+        _impliedAnswerFormat = format;
     }
+
     return _impliedAnswerFormat;
 }
 

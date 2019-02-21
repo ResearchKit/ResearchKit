@@ -84,7 +84,7 @@
     
     _isCompletionStep = [_instructionStep isKindOfClass:[ORKCompletionStep class]];
     
-    self.verticalCenteringEnabled = !hasImage;
+    self.verticalCenteringEnabled = NO;
     self.continueHugsContent = !hasImage && !hasFootnote;
     self.stepViewFillsAvailableSpace = ((hasImage || hasFootnote) && !_isCompletionStep);
     
@@ -142,33 +142,44 @@
     }
     
     self.headerView.iconImageView.image = _instructionStep.iconImage;
-    self.headerView.captionLabel.text = _instructionStep.title;
     
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
+    NSAttributedString *attributedDetail = _instructionStep.attributedDetailText;
     NSString *detail = _instructionStep.detailText;
     NSString *text = _instructionStep.text;
+    attributedDetail = attributedDetail.length ? attributedDetail : nil;
     detail = detail.length ? detail : nil;
     text = text.length ? text : nil;
     
-    if (detail && text) {
+    if (attributedDetail && text) {
         [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
-        [style setAlignment:NSTextAlignmentCenter];
+        [style setAlignment:NSTextAlignmentNatural];
+        
+        [attributedInstruction appendAttributedString:attributedDetail];
+        
+    } else if (detail && text) {
+        [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
+
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
+        [style setAlignment:NSTextAlignmentNatural];
         
         NSAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:detail
                                                                                attributes:@{NSParagraphStyleAttributeName: style}];
         [attributedInstruction appendAttributedString:attString];
         
-    } else if (detail || text) {
-        [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:detail ? : text attributes:nil]];
+    } else if (attributedDetail || detail || text) {
+        if (attributedDetail) {
+            [attributedInstruction appendAttributedString:attributedDetail];
+        } else {
+            [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:detail ? : text attributes:nil]];
+        }
     }
     
     self.headerView.instructionLabel.attributedText = attributedInstruction;
-    
-    self.continueSkipContainer.footnoteLabel.text = _instructionStep.footnote;
-    [self.continueSkipContainer updateContinueAndSkipEnabled];
     
     [self tintColorDidChange];
     

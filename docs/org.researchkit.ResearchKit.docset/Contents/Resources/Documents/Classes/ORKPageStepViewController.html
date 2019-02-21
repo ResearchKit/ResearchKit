@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKPageStepViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/pageStep">pageStep</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/goToStep:direction:animated:">- goToStep:direction:animated:</option>
+		
+		<option value="//api/name/initWithStep:result:">- initWithStep:result:</option>
+		
+		<option value="//api/name/result">- result</option>
+		
+		<option value="//api/name/resultSource">- resultSource</option>
+		
+		<option value="//api/name/stepViewControllerForStep:">- stepViewControllerForStep:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKPageStepViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStepViewController.html">ORKStepViewController</a> : UIViewController</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKPageStepViewController.h<br />ORKPageStepViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/pageStep" title="pageStep"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pageStep">&nbsp;&nbsp;pageStep</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The <a href="../Classes/ORKPageStep.html"><code>ORKPageStep</code></a> associated with this view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, nullable) ORKPageStep *pageStep</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stepViewControllerForStep:" title="stepViewControllerForStep:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stepViewControllerForStep:">&ndash;&nbsp;stepViewControllerForStep:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the step view controller to associate with this step. By default, this will
+return the step view controller instantiated by the given step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStepViewController *)stepViewControllerForStep:(ORKStep *)<em>step</em></code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><a href="../Classes/ORKStepViewController.html"><code>ORKStepViewController</code></a> subclass for this step.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resultSource" title="resultSource"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resultSource">&ndash;&nbsp;resultSource</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an <a href="../Protocols/ORKTaskResultSource.html"><code>ORKTaskResultSource</code></a> for the steps that are included as substeps for this
+page view controller.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (id&lt;ORKTaskResultSource&gt;)resultSource</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><a href="../Protocols/ORKTaskResultSource.html"><code>ORKTaskResultSource</code></a> for the step results</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/goToStep:direction:animated:" title="goToStep:direction:animated:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/goToStep:direction:animated:">&ndash;&nbsp;goToStep:direction:animated:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Go to the given step.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)goToStep:(ORKStep *)<em>step</em> direction:(UIPageViewControllerNavigationDirection)<em>direction</em> animated:(BOOL)<em>animated</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step to go to</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>direction</code></th>
+						<td><p>The direction in which navigate</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>animated</code></th>
+						<td><p>Should the change of view controllers be animated.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKPageStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithStep:result:" title="initWithStep:result:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithStep:result:">&ndash;&nbsp;initWithStep:result:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> view controller for the specified <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithStep:(ORKStep *)<em>step</em> result:(ORKResult *)<em>result</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> to be presented.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>result</code></th>
+						<td><p>The current <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> <a href="../Classes/ORKStepViewController.html#//api/name/result">result</a> for this <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A newly initialized <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> view controller.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/result" title="result"></a>
+	<h3 class="method-title"><code><a href="#//api/name/result">&ndash;&nbsp;result</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The current state of the result. (read-only)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (ORKStepResult *)result</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The task view controller uses this property to get the results for the
+<a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>, and to collate them into the task result.</p>
+
+<p>The current <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a> result and any subsidiary results representing data collected
+so far are available in this property. You can detect significant changes to the result,
+such as when the user enters a new answer, using the
+<code>stepViewControllerResultDidChange:</code> <a href="../Classes/ORKStepViewController.html#//api/name/delegate">delegate</a> callback.</p>
+
+<p>Subclasses <em>must</em> use this property to return the current results.
+Subclasses <em>may</em> call super to obtain
+a clean, empty result object appropriate for the <a href="../Classes/ORKStepViewController.html#//api/name/step">step</a>, to which they can
+attach appropriate child results.</p>
+
+<p>The implementations of this method in the ResearchKit framework currently create a new
+result object on every call, so do not call this method unless it is
+actually necessary.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepViewController.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

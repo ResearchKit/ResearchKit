@@ -72,17 +72,7 @@
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
-        _videoCaptureView = [[ORKVideoCaptureView alloc] initWithFrame:CGRectZero];
-        _videoCaptureView.videoCaptureStep = (ORKVideoCaptureStep *)step;
-        _videoCaptureView.delegate = self;
-        [self.view addSubview:_videoCaptureView];
-        
-        _videoCaptureStep = (ORKVideoCaptureStep *)self.step;
-        _movieFileOutput = [AVCaptureMovieFileOutput new];
-    
         self.fileURL = nil;
-        
-        [self setUpConstraints];
     }
     return self;
 }
@@ -90,17 +80,40 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    NSDictionary *views = @{ @"videoCaptureView": _videoCaptureView };
     _videoCaptureView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[videoCaptureView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[videoCaptureView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
+    UIView *iPadContentView = [self viewForiPadLayoutConstraints];
+    [constraints addObjectsFromArray:@[
+                                       [NSLayoutConstraint constraintWithItem:_videoCaptureView
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeTop
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_videoCaptureView
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? :  self.view
+                                                                    attribute:NSLayoutAttributeLeft
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_videoCaptureView
+                                                                    attribute:NSLayoutAttributeRight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeRight
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_videoCaptureView
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:iPadContentView ? : self.view
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.0
+                                                                     constant:0.0]
+                                       ]];
+
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -114,16 +127,45 @@
     _videoCaptureView.skipButtonItem = skipButtonItem;
 }
 
+- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
+    [super setCancelButtonItem:cancelButtonItem];
+    _videoCaptureView.cancelButtonItem = cancelButtonItem;
+}
+
+- (void)stepDidChange {
+    [super stepDidChange];
+    
+    if (self.step && [self isViewLoaded]) {
+        [_videoCaptureView removeFromSuperview];
+        _videoCaptureView = nil;
+        _movieFileOutput = nil;
+        
+        _videoCaptureView = [[ORKVideoCaptureView alloc] initWithFrame:CGRectZero];
+        _videoCaptureView.videoCaptureStep = (ORKVideoCaptureStep *)self.step;
+        _videoCaptureView.delegate = self;
+        _videoCaptureView.cancelButtonItem = self.cancelButtonItem;
+        [self.view addSubview:_videoCaptureView];
+        
+        
+        _videoCaptureStep = (ORKVideoCaptureStep *)self.step;
+        _movieFileOutput = [AVCaptureMovieFileOutput new];
+        
+        [self setUpConstraints];
+        
+        
+        // Capture actions should be performed off the main queue to keep the UI responsive
+        _sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+        
+        // Setup the capture session
+        dispatch_async(_sessionQueue, ^{
+            [self queue_SetupCaptureSession];
+        });
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Capture actions should be performed off the main queue to keep the UI responsive
-    _sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
-    
-    // Setup the capture session
-    dispatch_async(_sessionQueue, ^{
-        [self queue_SetupCaptureSession];
-    });
+    [self stepDidChange];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -158,12 +200,10 @@
     // Get the camera
     AVCaptureDevice *device;
     
-    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    for (AVCaptureDevice *d in devices) {
-        if (d.position == _videoCaptureStep.devicePosition) {
-            device = d;
-            break;
-        }
+    AVCaptureDeviceDiscoverySession *discoverySession = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera] mediaType:AVMediaTypeVideo position:_videoCaptureStep.devicePosition ? : AVCaptureDevicePositionBack];
+
+    if (discoverySession.devices.count > 0) {
+        device = discoverySession.devices[0];
     }
     
     if (device) {
@@ -261,7 +301,7 @@
 
 #pragma mark - ORKVideoCaptureViewDelegate
 
-- (void)retakePressed:(void (^)())handler {
+- (void)retakePressed:(void (^)(void))handler {
     dispatch_async(_sessionQueue, ^{
         [_captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -273,7 +313,7 @@
     });
 }
 
-- (void)capturePressed:(void (^)())handler {
+- (void)capturePressed:(void (^)(void))handler {
     // Capture the video via the output
     dispatch_async(_sessionQueue, ^{
         _fileURL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",self.step.identifier]];
@@ -282,21 +322,34 @@
         if ([fileManager fileExistsAtPath:_fileURL.path]) {
             [fileManager removeItemAtURL:_fileURL error:nil];
         }
-
-
-        [_movieFileOutput startRecordingToOutputFileURL:_fileURL
-                                      recordingDelegate:self];
-        
-        // Use the main queue, as UI components may need to be updated
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (handler) {
-                handler();
-            }
-        });
+        AVCaptureConnection *connection = [_movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+        if (connection.isActive) {
+            [_movieFileOutput startRecordingToOutputFileURL:_fileURL
+                                          recordingDelegate:self];
+            
+            // Use the main queue, as UI components may need to be updated
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (handler) {
+                    handler();
+                }
+            });
+        }
+        else {
+            NSLog(@"Connection not ready");
+            // Use the main queue, as UI components may need to be updated
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (handler) {
+                    handler();
+                }
+                 [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)}]];
+                
+            });
+        }
     });
 }
 
-- (void)stopCapturePressed:(void (^)())handler {
+- (void)stopCapturePressed:(void (^)(void))handler {
+    if (_movieFileOutput.recording) {
     dispatch_async(_sessionQueue, ^{
         [_movieFileOutput stopRecording];
         
@@ -307,6 +360,13 @@
             }
         });
     });
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (handler) {
+                handler();
+            }
+        });
+    }
 }
 
 - (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation {

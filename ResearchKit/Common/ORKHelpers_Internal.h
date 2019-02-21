@@ -81,9 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 #define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@ORK_STRINGIFY(x)]
-#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@ORK_STRINGIFY(x)]
-#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
-#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class], nil] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
 
 #define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 
@@ -149,18 +149,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
-NSBundle *ORKBundle();
-NSBundle *ORKDefaultLocaleBundle();
+NSBundle *ORKBundle(void);
+NSBundle *ORKDefaultLocaleBundle(void);
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-id findInArrayByKey(NSArray * array, NSString *key, id value);
+_Nullable id ORKFindInArrayByKey(NSArray *array, NSString *key, id value);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
-NSURL *ORKCreateRandomBaseURL();
+NSURL *ORKCreateRandomBaseURL(void);
 
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
@@ -173,16 +173,16 @@ UIImage *ORKImageWithColor(UIColor *color);
 
 void ORKEnableAutoLayoutForViews(NSArray *views);
 
-NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter();
-NSDateComponentsFormatter *ORKDurationStringFormatter();
+NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(void);
+NSDateComponentsFormatter *ORKDurationStringFormatter(void);
 
-NSDateFormatter *ORKTimeOfDayLabelFormatter();
-NSCalendar *ORKTimeOfDayReferenceCalendar();
+NSDateFormatter *ORKTimeOfDayLabelFormatter(void);
+NSCalendar *ORKTimeOfDayReferenceCalendar(void);
 
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
-BOOL ORKCurrentLocalePresentsFamilyNameFirst();
+BOOL ORKCurrentLocalePresentsFamilyNameFirst(void);
 
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
@@ -242,7 +242,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
 NSURL *ORKURLForRelativePath(NSString *relativePath);
 NSString *ORKRelativePathForURL(NSURL *url);
 
-id ORKDynamicCast_(id x, Class objClass);
+_Nullable id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
@@ -269,7 +269,7 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
 
-NSNumberFormatter *ORKDecimalNumberFormatter();
+NSNumberFormatter *ORKDecimalNumberFormatter(void);
 
 ORK_INLINE double ORKFeetAndInchesToInches(double feet, double inches) {
     return (feet * 12) + inches;
@@ -280,7 +280,7 @@ ORK_INLINE void ORKInchesToFeetAndInches(double inches, double *outFeet, double 
         return;
     }
     *outFeet = floor(inches / 12);
-    *outInches = fmod(inches, 12);
+    *outInches = round(fmod(inches, 12));
 }
 
 ORK_INLINE double ORKInchesToCentimeters(double inches) {
@@ -298,6 +298,52 @@ ORK_INLINE void ORKCentimetersToFeetAndInches(double centimeters, double *outFee
 
 ORK_INLINE double ORKFeetAndInchesToCentimeters(double feet, double inches) {
     return ORKInchesToCentimeters(ORKFeetAndInchesToInches(feet, inches));
+}
+
+ORK_INLINE void ORKKilogramsToWholeAndFraction(double kilograms, double *outWhole, double *outFraction) {
+    if (outWhole == NULL || outFraction == NULL) {
+        return;
+    }
+    *outWhole = floor(kilograms);
+    *outFraction = round((kilograms - floor(kilograms)) * 100);
+}
+
+ORK_INLINE void ORKKilogramsToPoundsAndOunces(double kilograms, double * _Nullable outPounds, double * _Nullable outOunces) {
+    const double ORKPoundsPerKilogram = 2.20462262;
+    double fractionalPounds = kilograms * ORKPoundsPerKilogram;
+    double pounds = floor(fractionalPounds);
+    double ounces = round((fractionalPounds - pounds) * 16);
+    if (ounces == 16) {
+        pounds += 1;
+        ounces = 0;
+    }
+    if (outPounds != NULL) {
+        *outPounds = pounds;
+    }
+    if (outOunces != NULL) {
+        *outOunces = ounces;
+    }
+}
+
+ORK_INLINE double ORKKilogramsToPounds(double kilograms) {
+    double pounds;
+    ORKKilogramsToPoundsAndOunces(kilograms, &pounds, NULL);
+    return pounds;
+}
+
+ORK_INLINE double ORKWholeAndFractionToKilograms(double whole, double fraction) {
+    double kg = (whole + (fraction / 100));
+    return (round(100 * kg) / 100);
+}
+
+ORK_INLINE double ORKPoundsAndOuncesToKilograms(double pounds, double ounces) {
+    const double ORKKilogramsPerPound = 0.45359237;
+    double kg = (pounds + (ounces / 16)) * ORKKilogramsPerPound;
+    return (round(100 * kg) / 100);
+}
+
+ORK_INLINE double ORKPoundsToKilograms(double pounds) {
+    return ORKPoundsAndOuncesToKilograms(pounds, 0);
 }
 
 ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseColor, NSUInteger colorIndex, NSUInteger totalColors) {
@@ -320,8 +366,8 @@ ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseCol
 }
 
 // Localization
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
+ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 
 #define ORKDefaultLocalizedValue(key) \
 [ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]

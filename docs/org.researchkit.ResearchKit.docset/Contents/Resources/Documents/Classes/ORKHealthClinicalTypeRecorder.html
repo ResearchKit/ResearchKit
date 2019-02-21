@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKHealthClinicalTypeRecorder Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/finishRecordingWithError:">- finishRecordingWithError:</option>
+		
+		<option value="//api/name/initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:">- initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:</option>
+		
+		<option value="//api/name/isRecording">- isRecording</option>
+		
+		<option value="//api/name/start">- start</option>
+		
+		<option value="//api/name/stop">- stop</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKHealthClinicalTypeRecorder Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKRecorder.html">ORKRecorder</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKHealthClinicalTypeRecorder.h<br />ORKHealthClinicalTypeRecorder.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKHealthClinicalTypeRecorder</code> class represents a recorder for collecting health records data from HealthKit during
+an active task.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:" title="initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:">&ndash;&nbsp;initWithIdentifier:healthClinicalType:healthFHIRResourceType:step:outputDirectory:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized health clinical type recorder using the specified HKClinicalType and HKFHIRResourceType.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithIdentifier:(NSString *)<em>identifier</em> healthClinicalType:(HKClinicalType *)<em>healthClinicalType</em> healthFHIRResourceType:(nullable HKFHIRResourceType)<em>healthFHIRResourceType</em> step:(ORKStep *)<em>step</em> outputDirectory:(NSURL *)<em>outputDirectory</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>The unique identifier of the recorder (assigned by the recorder configuration).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>healthClinicalType</code></th>
+						<td><p>The HKClinicalType data that should be collected during the active task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>healthFHIRResourceType</code></th>
+						<td><p>The HKFHIRResourceType for the predicate used to query the HKClinicalType.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>step</code></th>
+						<td><p>The step that requested this recorder.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>outputDirectory</code></th>
+						<td><p>The directory in which the health records data queried from HealthKit should be stored.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized health quantity type recorder.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKHealthClinicalTypeRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/start" title="start"></a>
+	<h3 class="method-title"><code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Starts data <a href="../Classes/ORKRecorder.html#//api/name/recording">recording</a>.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)start</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If an error occurs when <a href="../Classes/ORKRecorder.html#//api/name/recording">recording</a> starts, it is returned through the <a href="../Classes/ORKRecorder.html#//api/name/delegate">delegate</a>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stop" title="stop"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stop">&ndash;&nbsp;stop</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Stops data <a href="../Classes/ORKRecorder.html#//api/name/recording">recording</a>, which generally triggers the return of results.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stop</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>If an error occurs when stopping the recorder, it is returned through the <a href="../Classes/ORKRecorder.html#//api/name/delegate">delegate</a>.
+Subclasses should call <a href="../Classes/ORKRecorder.html#//api/name/finishRecordingWithError:"><code>finishRecordingWithError:</code></a> rather than calling super.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/finishRecordingWithError:" title="finishRecordingWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/finishRecordingWithError:">&ndash;&nbsp;finishRecordingWithError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Indicates that <a href="../Classes/ORKRecorder.html#//api/name/recording">recording</a> has failed; <a href="../Classes/ORKRecorder.html#//api/name/stop">stop</a> <a href="../Classes/ORKRecorder.html#//api/name/recording">recording</a> and report the error to the
+<a href="../Classes/ORKRecorder.html#//api/name/delegate">delegate</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)finishRecordingWithError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>Error that occurred.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isRecording" title="isRecording"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isRecording">&ndash;&nbsp;isRecording</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>A Boolean value indicating whether the recorder is currently recording.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)isRecording</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p><code>YES</code> if the recorder is recording; otherwise, <code>NO</code>.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

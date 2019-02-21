@@ -34,57 +34,28 @@
 #import "ORKRegistrationStep_Internal.h"
 
 
-@implementation ORKAnswerFormat (Deprecated)
+@implementation ORKQuestionStep (Deprecated)
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegularExpressionPattern
-                                              invalidMessage:(NSString *)invalidMessage {
-        return [[ORKTextAnswerFormat alloc] initWithValidationRegex:validationRegularExpressionPattern
-                                                     invalidMessage:invalidMessage];
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(NSString *)title
+                                    answer:(ORKAnswerFormat *)answer {
+    
+    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
+    step.question = title;
+    step.answerFormat = answer;
+    return step;
 }
 
-@end
-
-
-@implementation ORKTextAnswerFormat (Deprecated)
-
-- (instancetype)initWithValidationRegex:(NSString *)validationRegularExpressionPattern
-                         invalidMessage:(NSString *)invalidMessage {
-    NSRegularExpression *validationRegularExpression = [NSRegularExpression regularExpressionWithPattern:validationRegularExpressionPattern
-                                                                                         options:(NSRegularExpressionOptions)0
-                                                                                           error:nil];
-    return [self initWithValidationRegularExpression:validationRegularExpression
-                                      invalidMessage:invalidMessage];
-
-}
-
-- (NSString *)validationRegex {
-    return self.validationRegularExpression.pattern;
-}
-
-@end
-
-
-@implementation ORKRegistrationStep (Deprecated)
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
-           passcodeValidationRegex:(nullable NSString *)passcodeValidationRegularExpressionPattern
-            passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
-                           options:(ORKRegistrationStepOption)options {
-    NSRegularExpression *validationRegularExpression = [NSRegularExpression regularExpressionWithPattern:passcodeValidationRegularExpressionPattern
-                                                                                                 options:(NSRegularExpressionOptions)0
-                                                                                                   error:nil];
-    return [self initWithIdentifier:identifier
-                              title:title
-                               text:text
-passcodeValidationRegularExpression:validationRegularExpression
-             passcodeInvalidMessage:passcodeInvalidMessage
-                            options:options];
-}
-
-- (NSString *)passcodeValidationRegex {
-    return [self passwordAnswerFormat].validationRegularExpression.pattern;
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                                      text:(nullable NSString *)text
+                                    answer:(nullable ORKAnswerFormat *)answerFormat {
+    
+    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
+    step.question = title;
+    step.text = text;
+    step.answerFormat = answerFormat;
+    return step;
 }
 
 @end

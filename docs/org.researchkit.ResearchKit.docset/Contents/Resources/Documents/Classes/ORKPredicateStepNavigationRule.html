@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ORKPredicateStepNavigationRule Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">ResearchKit </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">ResearchKit</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/additionalTaskResults">additionalTaskResults</option>
+		
+		<option value="//api/name/defaultStepIdentifier">defaultStepIdentifier</option>
+		
+		<option value="//api/name/destinationStepIdentifiers">destinationStepIdentifiers</option>
+		
+		<option value="//api/name/resultPredicates">resultPredicates</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/identifierForDestinationStepWithTaskResult:">- identifierForDestinationStepWithTaskResult:</option>
+		
+		<option value="//api/name/initWithCoder:">- initWithCoder:</option>
+		
+		<option value="//api/name/initWithResultPredicates:destinationStepIdentifiers:">- initWithResultPredicates:destinationStepIdentifiers:</option>
+		
+		<option value="//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:">- initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:</option>
+		
+		<option value="//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:">- initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ORKPredicateStepNavigationRule Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/ORKStepNavigationRule.html">ORKStepNavigationRule</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ORKStepNavigationRule.h<br />ORKStepNavigationRule.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <code>ORKPredicateStepNavigationRule</code> can be used to match any answer combination in the results of
+the ongoing task (or in those of previously completed tasks) and jump accordingly. You must provide
+one or more result predicates (each predicate can match one or more step results within the task).</p>
+
+<p>Predicate step navigation rules contain an arbitrary number of result predicates with a
+corresponding number of destination step identifiers, plus an optional default step identifier that
+is used if none of the result predicates match. One result predicate can match one or more question
+results; if matching several question results, that predicate can belong to the same or to
+different task results). This rule allows you to define arbitrarily complex task navigation
+behaviors.</p>
+
+<p>The <a href="../Classes/ORKResultPredicate.html"><code>ORKResultPredicate</code></a> class provides convenience class methods to build predicates for all the
+<a href="../Classes/ORKQuestionResult.html"><code>ORKQuestionResult</code></a> subtypes. Predicates must supply both the task result identifier and the
+question result identifier, in addition to one or more expected answers.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:" title="initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:">&ndash;&nbsp;initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized predicate step navigation rule using the specified result predicates,
+destination step identifiers, and an optional default step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithResultPredicates:(NSArray&lt;NSPredicate*&gt; *)<em>resultPredicates</em> destinationStepIdentifiers:(NSArray&lt;NSString*&gt; *)<em>destinationStepIdentifiers</em> defaultStepIdentifier:(nullable NSString *)<em>defaultStepIdentifier</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultPredicates</code></th>
+						<td><p>An array of result predicates. Each result predicate can match
+                                        one or more question results in the ongoing task result or
+                                        in any of the additional task results.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>destinationStepIdentifiers</code></th>
+						<td><p>An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in the result predicates parameters. If you want for a
+                                        certain predicate match to end te task, you achieve that by
+                                        using the <code>ORKNullStepIdentifier</code> constant.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultStepIdentifier</code></th>
+						<td><p>The identifier of the step, which is used if none of the
+                                        result predicates match. If this argument is <code>nil</code> and none
+                                        of the predicates match, the default ordered task navigation
+                                        behavior takes place (that is, the task goes to the next
+                                        step in order).</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized predicate step navigation rule.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithResultPredicates:destinationStepIdentifiers:" title="initWithResultPredicates:destinationStepIdentifiers:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithResultPredicates:destinationStepIdentifiers:">&ndash;&nbsp;initWithResultPredicates:destinationStepIdentifiers:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized predicate step navigation rule using the specified result predicates and
+destination step identifiers.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithResultPredicates:(NSArray&lt;NSPredicate*&gt; *)<em>resultPredicates</em> destinationStepIdentifiers:(NSArray&lt;NSString*&gt; *)<em>destinationStepIdentifiers</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultPredicates</code></th>
+						<td><p>An array of result predicates. Each result predicate can match
+                                        one or more question results in the ongoing task result or
+                                        in any of the additional task results.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>destinationStepIdentifiers</code></th>
+						<td><p>An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in the result predicates parameters.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized predicate step navigation rule.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithCoder:" title="initWithCoder:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithCoder:">&ndash;&nbsp;initWithCoder:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns a new predicate step navigation rule that was initialized from data in the given
+unarchiver.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithCoder:(NSCoder *)<em>aDecoder</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aDecoder</code></th>
+						<td><p>The coder from which to initialize the step navigation rule.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>A new predicate step navigation rule.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/additionalTaskResults" title="additionalTaskResults"></a>
+	<h3 class="method-title"><code><a href="#//api/name/additionalTaskResults">&nbsp;&nbsp;additionalTaskResults</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>An optional array of additional task results.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, nullable) NSArray&lt;ORKTaskResult*&gt; *additionalTaskResults</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>With this property, a task can have different navigation behavior depending on the results of
+related tasks that the user may have already completed. The predicate step navigation rule can use
+the question results within these tasks, in addition to the current task question results, to match
+the result predicates.</p>
+
+<p>You must ensure that all the task result identifiers are unique and that they are different from
+the ongoing task result identifier. Also ensure that no task result contains question
+results with duplicate identifiers. Question results <em>can have</em> equal identifiers provided that
+they belong to different task results.</p>
+
+<p>Each object in the array should be of the <a href="../Classes/ORKTaskResult.html"><code>ORKTaskResult</code></a> class.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resultPredicates" title="resultPredicates"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resultPredicates">&nbsp;&nbsp;resultPredicates</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of result predicates.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray&lt;NSPredicate*&gt; *resultPredicates</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This property contains one result predicate for each of the step identifiers in the
+<a href="#//api/name/destinationStepIdentifiers"><code>destinationStepIdentifiers</code></a> property.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/destinationStepIdentifiers" title="destinationStepIdentifiers"></a>
+	<h3 class="method-title"><code><a href="#//api/name/destinationStepIdentifiers">&nbsp;&nbsp;destinationStepIdentifiers</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The array of destination step identifiers. It contains one step identifier for each of the
+predicates in the <a href="#//api/name/resultPredicates"><code>resultPredicates</code></a> parameter.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSArray&lt;NSString*&gt; *destinationStepIdentifiers</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/defaultStepIdentifier" title="defaultStepIdentifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultStepIdentifier">&nbsp;&nbsp;defaultStepIdentifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>The identifier of the step that is used if none of the result predicates match.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly, nullable) NSString *defaultStepIdentifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+
+						
+						<h2 class="task-title">Other Methods</h2>
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:" title="initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:">&ndash;&nbsp;initWithResultPredicates:destinationStepIdentifiers:defaultStepIdentifier:validateArrays:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns an initialized predicate step navigation rule using the specified result predicates,
+destination step identifiers, and an optional default step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithResultPredicates:(NSArray&lt;NSPredicate*&gt; *)<em>resultPredicates</em> destinationStepIdentifiers:(NSArray&lt;NSString*&gt; *)<em>destinationStepIdentifiers</em> defaultStepIdentifier:(NSString *)<em>defaultStepIdentifier</em> validateArrays:(BOOL)<em>validateArrays</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>resultPredicates</code></th>
+						<td><p>An array of result predicates. Each result predicate can match
+                                        one or more step results in the ongoing task.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>destinationStepIdentifiers</code></th>
+						<td><p>An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in the <a href="#//api/name/resultPredicates"><code>resultPredicates</code></a> parameter.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>defaultStepIdentifier</code></th>
+						<td><p>The identifier of the step which is used if none of the
+                                    result predicates match. If this argument is <code>nil</code> and none
+                                    of the predicates match, the default ordered task navigation
+                                    behavior takes place (that is, the task goes to the next step in
+                                    order).</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>validateArrays</code></th>
+						<td><p><code>YES</code> to throw an exception if result predicates or
+                                        destination step identifiers are <code>nil</code> or empty; <code>NO</code> to skip
+                                        their validation.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>An initialized predicate step navigation rule.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule_Private.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/identifierForDestinationStepWithTaskResult:" title="identifierForDestinationStepWithTaskResult:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifierForDestinationStepWithTaskResult:">&ndash;&nbsp;identifierForDestinationStepWithTaskResult:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the target step identifier.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)<em>taskResult</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>taskResult</code></th>
+						<td><p>The up-to-date task result, used for calculating the destination step.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The identifier of the destination step.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Subclasses must implement this method to calculate the next step based on the passed task result.
+The <code>ORKNullStepIdentifier</code> constant can be returned to indicate that the ongoing task should end
+after the step navigation rule is triggered.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ORKStepNavigationRule.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 ResearchKit. All rights reserved. Updated: 2018-07-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

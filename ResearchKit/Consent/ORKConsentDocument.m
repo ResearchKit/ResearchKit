@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Alex Basson. All rights reserved.
-
+ Copyright (c) 2017, Medable Inc. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -89,8 +90,8 @@
 }
 
 - (void)makePDFWithCompletionHandler:(void (^)(NSData *data, NSError *error))completionBlock {
-    [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil]
-          withCompletionBlock:^(NSData *data, NSError *error) {
+    [_writer writePDFFromHTML:[self htmlForMobile:NO title:nil detail:nil]
+          completionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
             // condition (can only happen if they pass us really invalid content).
@@ -101,10 +102,25 @@
     }];
 }
 
+- (void)makeCustomPDFWithRenderer:(ORKHTMLPDFPageRenderer *)renderer completionHandler:(void (^)(NSData * _Nullable, NSError * _Nullable))completionBlock {
+    _writer.printRenderer = renderer;
+    return [_writer writePDFFromHTML:[self htmlForMobile:NO title:nil detail:nil] completionBlock:^(NSData *data, NSError *error) {
+        if (error) {
+            // Pass the webview error straight through. This is a pretty exceptional
+            // condition (can only happen if they pass us really invalid content).
+            completionBlock(nil, error);
+        } else {
+            completionBlock(data, nil);
+        }
+        _writer.printRenderer = nil;
+    }];
+
+}
+
 #pragma mark - Private
 
 - (NSString *)mobileHTMLWithTitle:(NSString *)title detail:(NSString *)detail {
-    return [self htmlForMobile:YES withTitle:title detail:detail];
+    return [self htmlForMobile:YES title:title detail:detail];
 }
 
 + (NSString *)cssStyleSheet:(BOOL)mobile {
@@ -144,9 +160,10 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n", mobile ? @"66.6%" : @"33.3%"];
+    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; margin-top: 100px;}\n", mobile ? @"66.6%" : @"33.3%"];
     [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
-    [css appendString:@".inbox { position: relative; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
+    [css appendString:@".inbox { position: absolute; bottom:10px; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
+    [css appendString:@".inboxImage { position: relative; bottom:60px; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];
     [css appendString:@".border { -webkit-box-sizing: border-box; box-sizing: border-box; }\n"];
     
@@ -156,7 +173,7 @@
 + (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile {
     NSMutableString *html = [NSMutableString string];
     
-    [html appendString:@"<html><head><style>"];
+    [html appendString:@"<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'><style>"];
     [html appendString:[[self class] cssStyleSheet:mobile]];
     [html appendString:@"</style></head><body>"];
     [html appendString:body];
@@ -165,7 +182,7 @@
     return [html copy];
 }
 
-- (NSString *)htmlForMobile:(BOOL)mobile withTitle:(NSString *)title detail:(NSString *)detail {
+- (NSString *)htmlForMobile:(BOOL)mobile title:(NSString *)title detail:(NSString *)detail {
     NSMutableString *body = [NSMutableString new];
     
     // header
@@ -192,17 +209,18 @@
                 [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
             }
         }
+    }
+    
+    if (!mobile) {
+        // page break
+        [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
+        [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
         
-        if (!mobile) {
-            // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle ? : @""];
-            [body appendFormat:@"<p>%@</p>", _signaturePageContent ? : @""];
-            
-            for (ORKConsentSignature *signature in self.signatures) {
-                [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
-            }
+        for (ORKConsentSignature *signature in self.signatures) {
+            [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
         }
     }
+    
     return [[self class] wrapHTMLBody:body mobile:mobile];
 }
 

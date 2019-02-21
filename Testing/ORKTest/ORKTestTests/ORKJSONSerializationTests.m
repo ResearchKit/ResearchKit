@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2018, Brian Ganninger.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -179,6 +180,17 @@
 } \
 @end \
 
+#define ORK_MAKE_TEST_INIT_ALT(class, block) \
+@interface class (ORKTest_Alt) \
+- (instancetype)orktest_init_alt; \
+@end \
+\
+@implementation class (ORKTest_Alt) \
+- (instancetype)orktest_init_alt { \
+return block(); \
+} \
+@end \
+
 
 /*
  Add an orktest_init method to all the classes which make init unavailable. This
@@ -203,8 +215,19 @@ ORK_MAKE_TEST_INIT(ORKAccelerometerRecorderConfiguration, ^{return [super initWi
 ORK_MAKE_TEST_INIT(ORKHealthQuantityTypeRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKAudioRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKHealthClinicalTypeRecorderConfiguration, ^{return [self initWithIdentifier:@"testRecorder" healthClinicalType:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord] healthFHIRResourceType:nil];});
+ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
+    return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
+}))
+ORK_MAKE_TEST_INIT_ALT(CLCircularRegion, (^{
+    return [self initWithCenter:CLLocationCoordinate2DMake(3.0, 4.0) radius:150.0 identifier:@"identifier"];
+}))
 ORK_MAKE_TEST_INIT(ORKLocation, (^{
-    ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}];
+    ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] orktest_init] userInput:@"addressStringA" addressDictionary:@{@"city":@"cityA", @"street":@"street"}];
+    return location;
+}));
+ORK_MAKE_TEST_INIT_ALT(ORKLocation, (^{
+    ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(4.0, 5.0) region:[[CLCircularRegion alloc] orktest_init_alt] userInput:@"addressStringB" addressDictionary:@{@"city":@"cityB", @"street":@"street"}];
     return location;
 }));
 ORK_MAKE_TEST_INIT(HKSampleType, (^{
@@ -219,9 +242,10 @@ ORK_MAKE_TEST_INIT(HKCorrelationType, (^{
 ORK_MAKE_TEST_INIT(HKCharacteristicType, (^{
     return [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
 }))
-ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
-    return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
+ORK_MAKE_TEST_INIT(HKClinicalType, (^{
+    return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord];
 }))
+
 ORK_MAKE_TEST_INIT(NSNumber, (^{
     return [self initWithInt:123];
 }))
@@ -354,12 +378,13 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                      [ORKStepNavigationRule class],     // abstract base class
                                                      [ORKSkipStepNavigationRule class],     // abstract base class
                                                      [ORKStepModifier class],     // abstract base class
-                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialzation
-                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialzation
-                                                     [ORKCollector class], // ORKCollector doesn't support JSON serialzation
+                                                     [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialization
+                                                     [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialization
+                                                     [ORKCollector class], // ORKCollector doesn't support JSON serialization
                                                      [ORKHealthCollector class],
                                                      [ORKHealthCorrelationCollector class],
-                                                     [ORKMotionActivityCollector class]
+                                                     [ORKMotionActivityCollector class],
+                                                     [ORKShoulderRangeOfMotionStep class],
                                                      ];
     
     if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {
@@ -410,6 +435,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKTextAnswerFormat.autocapitalizationType",
                                               @"ORKTextAnswerFormat.autocorrectionType",
                                               @"ORKTextAnswerFormat.spellCheckingType",
+                                              @"ORKTextAnswerFormat.textContentType",
+                                              @"ORKTextAnswerFormat.passwordRules",
                                               @"ORKInstructionStep.image",
                                               @"ORKInstructionStep.auxiliaryImage",
                                               @"ORKInstructionStep.iconImage",
@@ -432,15 +459,19 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKHeightAnswerFormat.useMetricSystem",
+                                              @"ORKWeightAnswerFormat.useMetricSystem",
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
                                               @"ORKLoginStep.loginViewControllerClass",
                                               @"ORKRegistrationStep.passcodeValidationRegularExpression",
                                               @"ORKRegistrationStep.passcodeInvalidMessage",
+                                              @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
+                                              @"ORKRegistrationStep.phoneNumberInvalidMessage",
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
                                               @"ORKNavigablePageStep.steps",
+                                              @"ORKNumericAnswerFormat.defaultNumericAnswer"
                                               ];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
@@ -591,9 +622,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     } else if (p.propertyClass == [NSTimeZone class]) {
         [instance setValue:index?[NSTimeZone timeZoneWithName:[NSTimeZone knownTimeZoneNames][0]]:[NSTimeZone timeZoneForSecondsFromGMT:1000] forKey:p.propertyName];
     } else if (p.propertyClass == [ORKLocation class]) {
-        [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
+        [instance setValue:(index ? [[ORKLocation alloc] orktest_init] : [[ORKLocation alloc] orktest_init_alt]) forKey:p.propertyName];
     } else if (p.propertyClass == [CLCircularRegion class]) {
-        [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
+        [instance setValue:index?[[CLCircularRegion alloc] orktest_init_alt]:[[CLCircularRegion alloc] orktest_init] forKey:p.propertyName];
     } else if (p.propertyClass == [NSPredicate class]) {
         [instance setValue:[NSPredicate predicateWithFormat:index?@"1 == 1":@"1 == 2"] forKey:p.propertyName];
     } else if (p.propertyClass == [NSRegularExpression class]) {
@@ -673,7 +704,16 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKSignatureResult.signatureImage",
                                               @"ORKSignatureResult.signaturePath",
                                               @"ORKPageStep.steps",
-                                              @"ORKNavigablePageStep.steps",
+                                              
+                                              @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
+                                              @"ORKRegistrationStep.phoneNumberInvalidMessage",
+                                              @"ORKTableStep.bulletIconNames",
+                                              @"ORKAmslerGridResult.image",
+                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthClinicalType",
+                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthFHIRResourceType",
+                                              @"ORKInstructionStep.attributedDetailText",
+                                              @"ORKOrderedTask.progressLabelColor",
+                                              @"ORKQuestionStep.question"
                                               ];
     
     // Test Each class
@@ -740,7 +780,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
         // NSData and NSDateComponents in your properties mess up the following test.
         // NSDateComponents - seems to be due to serializing and then deserializing introducing a leap month:no flag.
-        if (aClass == [NSDateComponents class] || aClass == [ORKDateQuestionResult class] || aClass == [ORKDateAnswerFormat class] || aClass == [ORKDataResult class]) {
+        if (aClass == [NSDateComponents class] ||
+            aClass == [ORKDateQuestionResult class] ||
+            aClass == [ORKDateAnswerFormat class]) {
             continue;
         }
         
@@ -847,6 +889,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        
                                        // For a specific class
                                        @"ORKHeightAnswerFormat.useMetricSystem",
+                                       @"ORKWeightAnswerFormat.useMetricSystem",
                                        @"ORKNavigablePageStep.steps",
                                        @"ORKPageStep.steps",
                                        @"ORKResult.saveable",
@@ -857,18 +900,27 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKStepResult.isPreviousResult",
                                        @"ORKTextAnswerFormat.validationRegex",
                                        @"ORKVideoCaptureStep.duration",
+                                       @"ORKQuestionStep.useCardView",
+                                       @"ORKFormStep.useCardView",
+                                       @"ORKSpeechRecognitionStep.shouldHideTranscript",
+                                       @"ORKTableStep.isBulleted",
+                                       @"ORKPDFViewerStep.actionBarOption"
                                        ];
     
     NSArray *hashExclusionList = @[
                                    @"ORKDateQuestionResult.calendar",
                                    @"ORKDateQuestionResult.timeZone",
                                    @"ORKToneAudiometryResult.outputVolume",
+                                   @"ORKToneAudiometryResult.channel",
                                    @"ORKConsentSection.contentURL",
                                    @"ORKConsentSection.customAnimationURL",
                                    @"ORKNumericAnswerFormat.minimum",
                                    @"ORKNumericAnswerFormat.maximum",
+                                   @"ORKNumericAnswerFormat.maximumFractionDigits",
+                                   @"ORKNumericAnswerFormat.defaultNumericAnswer",
                                    @"ORKVideoCaptureStep.duration",
                                    @"ORKTextAnswerFormat.validationRegularExpression",
+                                   @"ORKPDFViewerStep.pdfURL"
                                    ];
     
     // Test Each class
@@ -920,7 +972,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                             ![hashExclusionList containsObject:dottedPropertyName]) {
                             // Only check the hash for non-primitive type properties because often the
                             // hash into a table can be referenced using a subset of the properties used to test equality.
-                            XCTAssertNotEqual([instance hash], [copiedInstance hash], @"%@", dottedPropertyName);
+                            XCTAssertNotEqual([instance hash], [copiedInstance hash], @"(%@, %@) %@", [instance valueForKey:p.propertyName], [copiedInstance valueForKey:p.propertyName], dottedPropertyName);
                         }
                         
                         [self applySomeValueToClassProperty:p forObject:copiedInstance index:0 forEqualityCheck:YES];
@@ -978,6 +1030,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKVideoInstructionStepViewController" : @"ORKVideoInstructionStep",
                                                                              @"ORKVisualConsentStepViewController" : @"ORKVisualConsentStep",
                                                                              @"ORKWalkingTaskStepViewController" : @"ORKWalkingTaskStep",
+                                                                             @"ORKTableStepViewController" : @"ORKTableStep",
+                                                                             @"ORKdBHLToneAudiometryStepViewController" : @"ORKdBHLToneAudiometryStep"
                                                                              };
     
     NSDictionary <NSString *, NSDictionary *> *kvMapForStep = @{ // Steps that require modification to validate
