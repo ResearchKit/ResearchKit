@@ -50,7 +50,7 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     ORKTintedImageLog(@"%@ %@ %f", image, tintColor, scale);
     
     UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
-    CGContextRef context     = UIGraphicsGetCurrentContext();
+    CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetBlendMode(context, kCGBlendModeNormal);
     CGContextSetAlpha(context, 1);
     

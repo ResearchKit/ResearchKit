@@ -71,13 +71,14 @@ ORK_CLASS_AVAILABLE
  
  Subclasses must implement this method to calculate the next step based on the passed task result.
  The `ORKNullStepIdentifier` constant can be returned to indicate that the ongoing task should end
- after the step navigation rule is triggered.
+ after the step navigation rule is triggered. Returning `nil` makes the task to go to the next
+ contiguous step.
  
  @param taskResult      The up-to-date task result, used for calculating the destination step.
  
  @return The identifier of the destination step.
  */
-- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult;
+- (nullable NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult;
 
 @end
 

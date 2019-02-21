@@ -58,7 +58,6 @@
 - (void)dealloc {
     [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     self.speechSynthesizer.delegate = nil;
-    _speechSynthesizer = nil;
 }
 
 - (void)speakText:(NSString *)text {

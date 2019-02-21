@@ -33,7 +33,7 @@
 #import "ORKResult_Private.h"
 #import "ORKHelpers_Internal.h"
 
-@implementation ORKSpeechRecognitonResult
+@implementation ORKSpeechRecognitionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -61,7 +61,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKSpeechRecognitonResult *result = [super copyWithZone:zone];
+    ORKSpeechRecognitionResult *result = [super copyWithZone:zone];
     result.transcription = [self.transcription copy];
     return result;
 }
