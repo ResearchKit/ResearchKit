@@ -114,6 +114,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _tableView.delegate = nil;
     _tableView.dataSource = nil;
     _tableView = nil;
+
     _headerView = nil;
     [_navigationFooterView removeFromSuperview];
     _navigationFooterView = nil;

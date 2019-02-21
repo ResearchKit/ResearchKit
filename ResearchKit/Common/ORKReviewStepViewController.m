@@ -311,7 +311,7 @@
     ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
     NSString *shortText = step.title != nil ? step.title : step.text;
     NSString *longText = [self answerStringForStep:step withStepResult:stepResult];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:shortText LongText:longText inTableView:_tableContainer.tableView];
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForPrimaryText:shortText primaryTextAttributedString:nil detailText:longText detailTextAttributedString:nil inTableView:_tableContainer.tableView];
     return height;
 }
 

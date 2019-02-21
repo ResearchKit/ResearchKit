@@ -505,6 +505,9 @@
         if ([self textScaleFormatProvider]) {
             ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
+            if (textChoice.primaryTextAttributedString) {
+                self.valueLabel.attributedText = textChoice.primaryTextAttributedString;
+            }
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];

@@ -81,9 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 #define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@ORK_STRINGIFY(x)]
 
 #define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@ORK_STRINGIFY(x)]
-#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@ORK_STRINGIFY(x)]
-#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
-#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class], nil] forKey:@ORK_STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class], nil] forKey:@ORK_STRINGIFY(x)] mutableCopy]
 
 #define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@ORK_STRINGIFY(x)]
 
@@ -156,7 +156,7 @@ NSBundle *ORKDefaultLocaleBundle(void);
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-id findInArrayByKey(NSArray * array, NSString *key, id value);
+_Nullable id ORKFindInArrayByKey(NSArray *array, NSString *key, id value);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
@@ -242,7 +242,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
 NSURL *ORKURLForRelativePath(NSString *relativePath);
 NSString *ORKRelativePathForURL(NSURL *url);
 
-id ORKDynamicCast_(id x, Class objClass);
+_Nullable id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 

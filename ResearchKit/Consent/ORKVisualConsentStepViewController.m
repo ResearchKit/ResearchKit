@@ -528,14 +528,14 @@
 
     if (!animateBeforeTransition && !transitionBeforeAnimate) {
         [_animator animateTransitionWithDirection:direction
-                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *loadAnimator, UIPageViewControllerNavigationDirection loadDirection) {
                                           
                                           fromViewController.imageHidden = YES;
                                           toViewController.imageHidden = YES;
                                           
                                           ORKStrongTypeOf(self) strongSelf = weakSelf;
                                           [strongSelf doShowViewController:toViewController
-                                                                 direction:direction
+                                                                 direction:loadDirection
                                                                   animated:YES
                                                                 completion:^(BOOL finished) {
                                                                     
@@ -543,27 +543,27 @@
                                                                     dispatch_semaphore_signal(semaphore);
                                                                 }];
                                       }
-                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
         
                                     animatorFinished = YES;
-                                    finishAndNilAnimator(animator);
+                                    finishAndNilAnimator(completedAnimator);
                                     dispatch_semaphore_signal(semaphore);
                                 }];
         
     } else if (animateBeforeTransition && !transitionBeforeAnimate) {
         [_animator animateTransitionWithDirection:direction
-                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *loadAnimator, UIPageViewControllerNavigationDirection loadDirection) {
                                           
                                           fromViewController.imageHidden = YES;
                                       }
-                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
                                     
                                     animatorFinished = YES;
-                                    finishAndNilAnimator(animator);
+                                    finishAndNilAnimator(completedAnimator);
                                     
                                     ORKStrongTypeOf(self) strongSelf = weakSelf;
                                     [strongSelf doShowViewController:toViewController
-                                                           direction:direction
+                                                           direction:completedDirection
                                                             animated:YES
                                                           completion:^(BOOL finished) {
                                                               
@@ -585,10 +585,10 @@
                             
                             [_animator animateTransitionWithDirection:direction
                                                           loadHandler:nil
-                                                    completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                                    completionHandler:^(ORKVisualConsentTransitionAnimator *completedAnimator, UIPageViewControllerNavigationDirection completedDirection) {
                                                         
                                                         animatorFinished = YES;
-                                                        finishAndNilAnimator(animator);
+                                                        finishAndNilAnimator(completedAnimator);
                                                         dispatch_semaphore_signal(semaphore);
                                                     }];
                             
@@ -625,7 +625,7 @@
                      forward:forward
                     animated:animated
                   completion:^(BOOL finished) {
-                      if (preloadNextViewController) {
+                      if (viewController && preloadNextViewController) {
                           ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
                           ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
                           [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image

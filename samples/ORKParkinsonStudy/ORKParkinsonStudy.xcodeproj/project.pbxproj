@@ -119,7 +119,6 @@
 		BA87DBF920B81E3D004ACAFF /* ConsentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentDocument.swift; sourceTree = "<group>"; };
 		BA87DBFD20B81EBF004ACAFF /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA87DC0920B8334C004ACAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = ORKParkinsonStudy/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		BA87DC0B20B83350004ACAFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BA87DC0D20B83642004ACAFF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		BA87DC1020B8BA08004ACAFF /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		BA907FAD20C07558003E7BE9 /* tremor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tremor.json; sourceTree = "<group>"; };
@@ -367,7 +366,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = BA87DB9520B80FFB004ACAFF;
@@ -488,7 +486,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA87DC0920B8334C004ACAFF /* Base */,
-				BA87DC0B20B83350004ACAFF /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

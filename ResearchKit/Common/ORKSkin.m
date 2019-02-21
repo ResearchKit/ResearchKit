@@ -134,7 +134,7 @@ const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 const CGSize ORKiPad10_5ScreenSize = (CGSize){834, 1112};
 const CGSize ORKiPad12_9ScreenSize = (CGSize){1024, 1366};
 
-ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
+static ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat maximumDimension = MAX(bounds.size.width, bounds.size.height);
     if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
@@ -159,7 +159,7 @@ ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     return screenType;
 }
 
-ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
+static ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat minimumDimension = MIN(bounds.size.width, bounds.size.height);
     if (minimumDimension < ORKiPhone4ScreenSize.width + 1) {
@@ -184,7 +184,7 @@ ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
     return screenType;
 }
 
-UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
+static UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
     if (!window) {
         // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window
         // because we may need the window before the keyWindow is set (e.g., if a view controller
@@ -199,22 +199,14 @@ ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow *window) {
     return ORKGetVerticalScreenTypeForBounds(window.bounds);
 }
 
-ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
+static ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window);
     return ORKGetHorizontalScreenTypeForBounds(window.bounds);
 }
 
-ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
-    ORKScreenType screenType = ORKScreenTypeiPhone6;
-    if (screen == [UIScreen mainScreen]) {
-        screenType = ORKGetVerticalScreenTypeForBounds(screen.bounds);
-    }
-    return screenType;
-}
-
 const CGFloat ORKScreenMetricMaxDimension = 10000.0;
 
-CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
+static CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
         //   iPhoneX, iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad     iPad 10.5,   iPad 12.9
         {        128,       128,       128,       100,       100,       218,       218,       218},      // ORKScreenMetricTopToCaptionBaseline
@@ -283,7 +275,7 @@ const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthiPad = 0.0;
 
-CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
+static CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
     CGFloat margin = 0;
     switch (ORKGetHorizontalScreenTypeForWindow(window)) {
         case ORKScreenTypeiPhone4:
@@ -306,7 +298,7 @@ CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
     return ORKStandardLeftTableViewCellMarginForWindow(cell.window);
 }
 
-CGFloat ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(CGFloat screenSizeWidth, UIWindow *window) {
+static CGFloat ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(CGFloat screenSizeWidth, UIWindow *window) {
     // Use adaptive side margin, if window is wider than iPhone6 Plus.
     // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad or iPad12_9
     
@@ -316,7 +308,7 @@ CGFloat ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(CGFloat screenSizeWi
     return ORKLayoutMarginWidthThinBezelRegular + (ORKLayoutMarginWidthiPad - ORKLayoutMarginWidthThinBezelRegular)*ratio;
 }
 
-CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
+static CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     CGFloat margin = 0;
     switch (ORKGetHorizontalScreenTypeForWindow(window)) {

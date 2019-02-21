@@ -213,8 +213,7 @@
     _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
-#pragma ORKPDFViewerStepViewDelegate
-
+#pragma mark ORKPDFViewerStepViewDelegate
 
 - (void)didSelectShareButton:(id)sender {
     NSData *pdfData = [[_pdfView getDocument] dataRepresentation];
