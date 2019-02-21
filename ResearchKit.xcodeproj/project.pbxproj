@@ -3528,10 +3528,10 @@
 				"zh-Hans",
 				"pt-PT",
 				"fr-CA",
-				"es-MX",
 				"en-GB",
 				"en-AU",
 				nb,
+				"es-419",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
