@@ -46,7 +46,7 @@ ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierMale = @"HKBiological
 ORKBiologicalSexIdentifier const ORKBiologicalSexIdentifierOther = @"HKBiologicalSexOther";
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
-    NSString *string = @"";
+    NSString *string = nil;
     switch (biologicalSex) {
         case HKBiologicalSexFemale: string = ORKBiologicalSexIdentifierFemale; break;
         case HKBiologicalSexMale:   string = ORKBiologicalSexIdentifierMale;   break;
@@ -66,7 +66,7 @@ ORKBloodTypeIdentifier const ORKBloodTypeIdentifierOPositive = @"HKBloodTypeOPos
 ORKBloodTypeIdentifier const ORKBloodTypeIdentifierONegative = @"HKBloodTypeONegative";
 
 NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
-    NSString *string = @"";
+    NSString *string = nil;
     switch (bloodType) {
         case HKBloodTypeAPositive:  string = ORKBloodTypeIdentifierAPositive;   break;
         case HKBloodTypeANegative:  string = ORKBloodTypeIdentifierANegative;   break;
@@ -214,9 +214,8 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         }
     }
     
-    if (!_impliedAnswerFormat)
-        _impliedAnswerFormat = [ORKAnswerFormat textAnswerFormat];
-    
+    NSAssert(_impliedAnswerFormat, @"_impliedAnswerFormat should have been set");
+
     return _impliedAnswerFormat;
 }
 
@@ -331,26 +330,25 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         return _impliedAnswerFormat;
     }
     
-    if (_quantityType) {
-        if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierHeight]) {
-            ORKHeightAnswerFormat *format = [ORKHeightAnswerFormat heightAnswerFormat];
-            _impliedAnswerFormat = format;
-            _unit = [HKUnit meterUnitWithMetricPrefix:(HKMetricPrefixCenti)];
-        } else if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierBodyMass]) {
-            ORKWeightAnswerFormat *format = [ORKWeightAnswerFormat weightAnswerFormat];
-            _impliedAnswerFormat = format;
-            _unit = [HKUnit gramUnitWithMetricPrefix:(HKMetricPrefixKilo)];
+    if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierHeight]) {
+        ORKHeightAnswerFormat *format = [ORKHeightAnswerFormat heightAnswerFormat];
+        _impliedAnswerFormat = format;
+        _unit = [HKUnit meterUnitWithMetricPrefix:(HKMetricPrefixCenti)];
+    } else if ([_quantityType.identifier isEqualToString:HKQuantityTypeIdentifierBodyMass]) {
+        ORKWeightAnswerFormat *format = [ORKWeightAnswerFormat weightAnswerFormat];
+        _impliedAnswerFormat = format;
+        _unit = [HKUnit gramUnitWithMetricPrefix:(HKMetricPrefixKilo)];
+    } else {
+        ORKNumericAnswerFormat *format = nil;
+        HKUnit *unit = [self healthKitUserUnit];
+        if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
+            format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
         } else {
-            ORKNumericAnswerFormat *format = nil;
-            HKUnit *unit = [self healthKitUserUnit];
-            if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
-                format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit localizedUnitString]];
-            } else {
-                format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
-            }
-            _impliedAnswerFormat = format;
+            format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit localizedUnitString]];
         }
+        _impliedAnswerFormat = format;
     }
+
     return _impliedAnswerFormat;
 }
 

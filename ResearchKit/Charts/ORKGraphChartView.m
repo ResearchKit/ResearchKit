@@ -613,7 +613,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     }
     
     return pointLayer;
-    }
+}
     
 - (BOOL)shouldDrawPointIndicatorForPointWithIndex:(NSInteger)pointIndex inPlotWithIndex:(NSInteger)plotIndex {
     ORKValueRange *dataPoint = (ORKValueRange *)_dataPoints[plotIndex][pointIndex];
@@ -1014,7 +1014,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 - (NSMutableArray<NSObject<ORKValueCollectionType> *> *)normalizedCanvasDataPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     [self throwOverrideException];
-    return [NSMutableArray array];
+    return nil;
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
@@ -1074,19 +1074,17 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     NSMutableArray<id> *accessibilityElements = [[NSMutableArray alloc] initWithCapacity:maxNumberOfPoints];
     
     for (NSInteger pointIndex = 0; pointIndex < maxNumberOfPoints; pointIndex++) {
-        ORKLineGraphAccessibilityElement *element = [[ORKLineGraphAccessibilityElement alloc] initWithAccessibilityContainer:self index:pointIndex maxIndex:maxNumberOfPoints];
+        ORKGraphChartAccessibilityElement *element = [[ORKGraphChartAccessibilityElement alloc] initWithAccessibilityContainer:self index:pointIndex maxIndex:maxNumberOfPoints];
         
         // Data points for all plots at any given pointIndex must be included (eg "2 and 4" or "range from 1-2 and range from 4-5").
-        NSString *value = nil;
+        NSString *value = @"";
         for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
             
             // Boundary check
-            if ( pointIndex < _dataPoints[plotIndex].count ) {
-                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
+            if (pointIndex < _dataPoints[plotIndex].count) {
+                NSString *and = (value.length == 0 ? @"" : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
                 NSObject<ORKValueCollectionType> *dataPoint = _dataPoints[plotIndex][pointIndex];
-                NSString *valueString = (value.length ? value : ORKLocalizedString(@"AX_MISSING_VALUE", @"Missing Graph Value"));
-                NSString *andString = (and.length ? and : ORKLocalizedString(@"AX_MISSING_SEPARATOR", @"No Separator"));
-                value = ORKAccessibilityStringForVariables(valueString, andString, dataPoint.accessibilityLabel);
+                value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
             }
         }
         
@@ -1221,14 +1219,14 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *dataPointLayer = graphPointLayerWithColor(color, drawPointIndicator);
-                    [self.plotView.layer addSublayer:dataPointLayer];
-                    [_pointLayers[plotIndex] addObject:dataPointLayer];
-                }
-                }
-            }
+                    pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
+                    [self.plotView.layer addSublayer:pointLayer];
+                    [_pointLayers[plotIndex] addObject:pointLayer];
                 }
             }
+        }
+    }
+}
     
 - (void)updatePlotColorsForPlotIndex:(NSInteger)plotIndex {
     [super updatePlotColorsForPlotIndex:plotIndex];
@@ -1287,8 +1285,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 pointLayerIndex++;
 
                 if (!yAxisValueRange.isEmptyRange) {
-                    CALayer *yPointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                    yPointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
+                    pointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
                     pointLayerIndex++;
                 }
             }

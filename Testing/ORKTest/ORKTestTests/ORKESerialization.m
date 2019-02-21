@@ -1491,7 +1491,7 @@ internalEncodingTable =
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
             })),
-   ENTRY(ORKSpeechRecognitonResult,
+   ENTRY(ORKSpeechRecognitionResult,
          nil,
          (@{
             PROPERTY(transcription, SFTranscription, NSObject, NO, nil, nil)

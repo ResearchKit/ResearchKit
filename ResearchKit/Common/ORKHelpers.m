@@ -80,7 +80,7 @@ CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return ORKAdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
-id findInArrayByKey(NSArray * array, NSString *key, id value) {
+id ORKFindInArrayByKey(NSArray *array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
     if (matches.count) {

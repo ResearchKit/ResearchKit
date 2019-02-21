@@ -116,7 +116,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     if (self) {
         _textField = [[ORKAnswerTextField alloc] init];
         _textField.delegate = self;
-        _textField.placeholder = ORKLocalizedString(@"LOCATION_QUESTION_PLACEHOLDER",nil);
+        _textField.placeholder = ORKLocalizedString(@"LOCATION_QUESTION_PLACEHOLDER", nil);
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.adjustsFontSizeToFitWidth = YES;

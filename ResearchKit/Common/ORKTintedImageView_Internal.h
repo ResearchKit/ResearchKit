@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedCache;
 
-- (void)cacheImage:(UIImage *)image tintColor:(nullable UIColor *)tintColor scale:(CGFloat)scale;
+- (void)cacheImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
 
 @end
 

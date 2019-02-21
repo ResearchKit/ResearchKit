@@ -34,7 +34,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIImage *ORKImageByTintingImage(UIImage *image, UIColor * _Nullable tintColor, CGFloat scale);
+UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale);
 
 @interface ORKTintedImageView : UIImageView
 

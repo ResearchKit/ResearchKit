@@ -28,10 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKLineGraphAccessibilityElement.h"
+#import "ORKGraphChartAccessibilityElement.h"
 
 
-@interface ORKLineGraphAccessibilityElement()
+@interface ORKGraphChartAccessibilityElement()
 
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) NSInteger maxIndex;
@@ -39,7 +39,7 @@
 @end
 
 
-@implementation ORKLineGraphAccessibilityElement
+@implementation ORKGraphChartAccessibilityElement
 
 - (nonnull instancetype)initWithAccessibilityContainer:(nonnull UIView *)container index:(NSInteger)index maxIndex:(NSInteger)maxIndex {
     self = [super initWithAccessibilityContainer:container];

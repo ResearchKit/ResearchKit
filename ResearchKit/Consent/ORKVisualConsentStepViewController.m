@@ -625,7 +625,7 @@
                      forward:forward
                     animated:animated
                   completion:^(BOOL finished) {
-                      if (preloadNextViewController) {
+                      if (viewController && preloadNextViewController) {
                           ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
                           ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
                           [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image

@@ -43,7 +43,7 @@
 NSString *ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *slider) {
     ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[slider ork_superviewOfType:[ORKScaleSliderView class]];
     if (!slider || !sliderView) {
-        return ORKLocalizedString(@"AX_SLIDER_NOT_FOUND",@"No slider found");
+        return nil;
     }
     
     NSNumber *normalizedValue = [sliderView.formatProvider normalizedValueForNumber:@(value)];
@@ -53,7 +53,7 @@ NSString *ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *
 NSString *ORKAccessibilityFormatContinuousScaleSliderValue(CGFloat value, ORKScaleSlider *slider) {
     ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[slider ork_superviewOfType:[ORKScaleSliderView class]];
     if (!slider || !sliderView) {
-        return ORKLocalizedString(@"AX_SLIDER_NOT_FOUND",@"No slider found");
+        return nil;
     }
     
     return [sliderView.formatProvider localizedStringForNumber:@(value)];
