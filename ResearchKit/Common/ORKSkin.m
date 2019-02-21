@@ -199,17 +199,9 @@ ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow *window) {
     return ORKGetVerticalScreenTypeForBounds(window.bounds);
 }
 
-ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
+static ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window);
     return ORKGetHorizontalScreenTypeForBounds(window.bounds);
-}
-
-ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
-    ORKScreenType screenType = ORKScreenTypeiPhone6;
-    if (screen == [UIScreen mainScreen]) {
-        screenType = ORKGetVerticalScreenTypeForBounds(screen.bounds);
-    }
-    return screenType;
 }
 
 const CGFloat ORKScreenMetricMaxDimension = 10000.0;
