@@ -50,7 +50,7 @@
  @return The picker object
  */
 id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPickerDelegate> delegate) {
-    id<ORKPicker> picker;
+    id<ORKPicker> picker = nil;
     
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
@@ -82,7 +82,7 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
  @return The picker object
  */
 + (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer delegate:(id<ORKPickerDelegate>) delegate {
-    id<ORKPicker> picker;
+    id<ORKPicker> picker = nil;
     
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];

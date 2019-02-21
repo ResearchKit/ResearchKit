@@ -156,7 +156,7 @@ NSBundle *ORKDefaultLocaleBundle(void);
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-id findInArrayByKey(NSArray * array, NSString *key, id value);
+_Nullable id findInArrayByKey(NSArray * array, NSString *key, id value);
 
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
@@ -242,7 +242,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
 NSURL *ORKURLForRelativePath(NSString *relativePath);
 NSString *ORKRelativePathForURL(NSURL *url);
 
-id ORKDynamicCast_(id x, Class objClass);
+_Nullable id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 

@@ -150,7 +150,7 @@
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-    _placeholder = placeholder ? : ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
+    _placeholder = placeholder ? : ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", @"Long placeholder text");
     _placeholderTextView.text = _placeholder;
 }
 

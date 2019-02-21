@@ -154,9 +154,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (void)configureTitle {
-    NSString *format = ORKLocalizedString(@"REACTION_TIME_TASK_ATTEMPTS_FORMAT", nil);
+    NSString *format = ORKLocalizedString(@"REACTION_TIME_TASK_ATTEMPTS_FORMAT",
+                                          @"Reaction time attempts label format");
     NSString *text = [NSString stringWithFormat:format, ORKLocalizedStringFromNumber(@(_results.count + 1)), ORKLocalizedStringFromNumber(@([self reactionTimeStep].numberOfAttempts))];
-    [self.activeStepView updateTitle:ORKLocalizedString(@"REACTION_TIME_TASK_ACTIVE_STEP_TITLE", nil) text:text];
+    [self.activeStepView updateTitle:ORKLocalizedString(@"REACTION_TIME_TASK_ACTIVE_STEP_TITLE",
+                                                        @"Reaction time active step title") text:text];
 }
 
 - (void)attemptDidFinish {
@@ -232,7 +234,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (NSTimeInterval)stimulusInterval {
     ORKReactionTimeStep *step = [self reactionTimeStep];
     NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
-    NSTimeInterval randomFactor = ((NSTimeInterval)rand() / RAND_MAX) * range;
+    NSTimeInterval randomFactor = ((NSTimeInterval)arc4random() / RAND_MAX) * range;
     return randomFactor + step.minimumStimulusInterval;
 }
 

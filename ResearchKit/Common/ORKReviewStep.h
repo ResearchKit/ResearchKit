@@ -66,7 +66,7 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
                                              steps:(NSArray *)steps
-                                      resultSource:(id<ORKTaskResultSource, NSSecureCoding>)resultSource;
+                                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource;
 
 /**
  Returns a new embedded review step that includes the specified identifier. Steps and step results are directly taken 
@@ -89,7 +89,7 @@ ORK_CLASS_AVAILABLE
  
  This property contains the source that should be consulted to obtain step results.
  */
-@property (nonatomic, readonly) id<ORKTaskResultSource, NSSecureCoding> resultSource;
+@property (nullable, nonatomic, readonly) id<ORKTaskResultSource, NSSecureCoding> resultSource;
 
 /**
  A Boolean value indicating whether instruction steps should be excluded from review.

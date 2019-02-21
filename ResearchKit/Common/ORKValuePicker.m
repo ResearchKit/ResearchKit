@@ -95,14 +95,14 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (NSString *)selectedLabelText {
     if ( _answer == ORKNullAnswerValue() || _answer == nil ) {
-        return nil;
+        return @"";
     }
    
     NSNumber *indexNumber = [_helper selectedIndexForAnswer:_answer];
     NSInteger row = indexNumber.integerValue;
     
     if (row == 0) {
-        return nil;
+        return @"";
     }
     
     return [self pickerView:_pickerView titleForRow:row forComponent:0];

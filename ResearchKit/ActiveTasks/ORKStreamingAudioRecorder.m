@@ -160,10 +160,10 @@
         
         [inputnode installTapOnBus:0 bufferSize:1024 format:mainMixerFormat block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
             id<ORKStreamingAudioResultDelegate> delegate = (id<ORKStreamingAudioResultDelegate>)self.delegate;
-            NSError *error;
-            [mixerOutputFile writeFromBuffer:buffer error:&error];
-            if (error!=nil) {
-                [self finishRecordingWithError:error];
+            NSError *recordingError;
+            [mixerOutputFile writeFromBuffer:buffer error:&recordingError];
+            if (recordingError!=nil) {
+                [self finishRecordingWithError:recordingError];
                 return;
             }
             

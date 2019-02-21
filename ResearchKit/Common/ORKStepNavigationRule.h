@@ -77,7 +77,7 @@ ORK_CLASS_AVAILABLE
  
  @return The identifier of the destination step.
  */
-- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult;
+- (nullable NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult;
 
 @end
 

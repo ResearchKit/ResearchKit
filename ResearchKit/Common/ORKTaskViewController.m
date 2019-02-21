@@ -375,7 +375,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate {
     
-    self = [self initWithTask:task taskRunUUID:nil];
+    self = [self initWithTask:task taskRunUUID:[NSUUID UUID]];
     
     if (self) {
         self.delegate = delegate;
@@ -1291,7 +1291,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     if (supportSaving && saveable) {
-        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", @"Save button title")
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction *action) {
                                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1300,7 +1300,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 }]];
     }
     
-    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
+    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", @"Discard button title") : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", @"Stop button title");
     
     [alert addAction:[UIAlertAction actionWithTitle:discardTitle
                                               style:UIAlertActionStyleDestructive
@@ -1310,7 +1310,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 });
                                             }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", @"Cancel button title")
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
     
@@ -1648,7 +1648,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         return navigationController;
     }
     
-    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
+    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:[NSUUID UUID]];
     taskViewController.restorationIdentifier = identifierComponents.lastObject;
     taskViewController.restorationClass = self;
     return taskViewController;

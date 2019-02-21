@@ -154,12 +154,12 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (NSString *)selectedLabelText {
     if ( _answer == ORKNullAnswerValue() || _answer == nil ) {
-        return nil;
+        return @"";
     }
     
     NSArray *indexNumbers = [self indexNumbersForAnswer:_answer];
     if (indexNumbers == nil) {
-        return nil;
+        return @"";
     }
     
     __block NSMutableArray *strings = [NSMutableArray new];
@@ -178,7 +178,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
     if (strings.count == self.helpers.count) {
         return [strings componentsJoinedByString:_separator];
     } else {
-        return nil;
+        return @"";
     }
 }
 

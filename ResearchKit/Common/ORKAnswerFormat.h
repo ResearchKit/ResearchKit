@@ -203,7 +203,7 @@ ORK_CLASS_AVAILABLE
  `@(YES)` and `@(NO)`, respectively, so its `impliedAnswerFormat` is an 
  `ORKTextChoiceAnswerFormat` with those options.
  */
-- (ORKAnswerFormat *)impliedAnswerFormat;
+- (nullable ORKAnswerFormat *)impliedAnswerFormat;
 
 @end
 

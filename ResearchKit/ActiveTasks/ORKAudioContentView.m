@@ -95,7 +95,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
         [self addSubview:_timerLabel];
         [self addSubview:_graphView];
         
-        _timerLabel.text = @"06:00";
+        _timerLabel.text = [NSString stringWithFormat:@"06:00"];
         _alertLabel.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
         
         self.alertThreshold = GraphViewBlueZoneHeight / ((GraphViewRedZoneHeight * 2) + GraphViewBlueZoneHeight);
@@ -252,7 +252,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 - (NSString *)accessibilityLabel {
     NSString *timerAxString = _timerLabel.isHidden ? nil : _timerLabel.accessibilityLabel;
     NSString *alertAxString = _alertLabel.isHidden ? nil : _alertLabel.accessibilityLabel;
-    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", nil), timerAxString, alertAxString);
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", @"Audio Bar Graph"), timerAxString, alertAxString);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

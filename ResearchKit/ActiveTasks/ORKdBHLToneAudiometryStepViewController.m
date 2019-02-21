@@ -276,19 +276,19 @@
     double preStimulusDelay = delay1 + delay2 + 1;
     _resultUnit.preStimulusDelay = preStimulusDelay;
     
-    _preStimulusDelayWorkBlock = dispatch_block_create(0, ^{
+    _preStimulusDelayWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [_audioGenerator playSoundAtFrequency:[freq floatValue] onChannel:_audioChannel dBHL:_currentdBHL];
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(preStimulusDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), _preStimulusDelayWorkBlock);
     
-    _pulseDurationWorkBlock = dispatch_block_create(0, ^{
+    _pulseDurationWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [_audioGenerator stop];
     });
     // adding 0.2 seconds to account for the fadeInDuration which is being set in ORKdBHLToneAudiometryAudioGenerator
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((preStimulusDelay + toneDuration + 0.2) * NSEC_PER_SEC)), dispatch_get_main_queue(), _pulseDurationWorkBlock);
 
     ORKWeakTypeOf(self)weakSelf = self;
-    _postStimulusDelayWorkBlock = dispatch_block_create(0, ^{
+    _postStimulusDelayWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         ORKStrongTypeOf(self) strongSelf = weakSelf;
         NSUInteger storedTestIndex = _currentTestIndex;
         if (_currentTestIndex == storedTestIndex) {

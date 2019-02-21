@@ -221,7 +221,7 @@
 }
 
 - (NSString *)accessibilityLabel {
-    return ORKLocalizedString(@"AX_VIDEO_CAPTURE_LABEL", nil);
+    return ORKLocalizedString(@"AX_VIDEO_CAPTURE_LABEL", @"Video capture label");
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

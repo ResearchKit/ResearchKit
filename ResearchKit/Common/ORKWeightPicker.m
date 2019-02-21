@@ -254,10 +254,11 @@ static const CGFloat PickerMinimumHeight = 34.0;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *title = nil;
+    NSString *kilogramString = ORKLocalizedString(@"MEASURING_UNIT_KG", @"Kilogram");
     if (_answerFormat.useMetricSystem) {
         if (component == 0) {
             if (_answerFormat.numericPrecision != ORKNumericPrecisionHigh) {
-                title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_KG", nil)];
+                title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], kilogramString];
             } else {
                 title = [NSString stringWithFormat:@"%@", _majorValues[row]];
             }
@@ -267,13 +268,13 @@ static const CGFloat PickerMinimumHeight = 34.0;
             formatter.maximumFractionDigits = 0;
             title = [NSString stringWithFormat:@".%@", [formatter stringFromNumber:_minorValues[row]]];
         } else if (component == 2) {
-            title = ORKLocalizedString(@"MEASURING_UNIT_KG", nil);
+            title = kilogramString;
         }
     } else {
         if (component == 0) {
-            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", nil)];
+            title = [NSString stringWithFormat:@"%@ %@", _majorValues[row], ORKLocalizedString(@"MEASURING_UNIT_LB", @"Pound")];
         } else {
-            title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", nil)];
+            title = [NSString stringWithFormat:@"%@ %@", _minorValues[row], ORKLocalizedString(@"MEASURING_UNIT_OZ", @"Ounce")];
         }
     }    
     return title;
@@ -322,10 +323,11 @@ static const CGFloat PickerMinimumHeight = 34.0;
     _canonicalMinimumValue = minimumValue;
     _canonicalMaximumValue = maximumValue;
     
-    for (double i = minimumValue; i <= maximumValue; i++) {
+    for (NSInteger i = minimumValue; i <= maximumValue; i++) {
         [mutableWholeValues addObject:@(i)];
         if (_answerFormat.numericPrecision == ORKNumericPrecisionDefault) {
-            [mutableWholeValues addObject:@(i + 0.5)];
+            double preciseValue = i + 0.5;
+            [mutableWholeValues addObject:@(preciseValue)];
         }
     }
     wholeValues = [mutableWholeValues copy];

@@ -141,7 +141,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
     
     // nil reset to default fonts
     self.xAxisFont = nil;
@@ -248,7 +248,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)setNoDataText:(NSString *)noDataText {
     if (!noDataText) {
-        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", @"Empty graph label");
     }
     _noDataText = [noDataText copy];
     _noDataLabel.text = _noDataText;
@@ -715,7 +715,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     return _numberOfXAxisPoints;
 }
 
-#pragma Mark - Scrubbing
+#pragma mark - Scrubbing
 
 - (NSInteger)scrubbingPlotIndex {
     NSInteger plotIndex = 0;
@@ -829,8 +829,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 }
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
-    void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
-        CGFloat alpha = hidden ? 0.0 : 1.0;
+    void (^updateAlpha)(BOOL) = ^(BOOL isHidden) {
+        CGFloat alpha = isHidden ? 0.0 : 1.0;
         _scrubberThumbView.alpha = alpha;
         _scrubberLine.alpha = alpha;
         _scrubberLabel.alpha = alpha;
@@ -922,7 +922,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
     return canvasYPosition;
 }
 
-#pragma Mark - Animation
+#pragma mark - Animation
 
 - (void)animateWithDuration:(NSTimeInterval)duration {
     if (duration < 0) {
@@ -1014,7 +1014,7 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
 
 - (NSMutableArray<NSObject<ORKValueCollectionType> *> *)normalizedCanvasDataPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     [self throwOverrideException];
-    return nil;
+    return [NSMutableArray array];
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
@@ -1082,16 +1082,18 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
             
             // Boundary check
             if ( pointIndex < _dataPoints[plotIndex].count ) {
-                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
+                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", @"Graph and Separator"));
                 NSObject<ORKValueCollectionType> *dataPoint = _dataPoints[plotIndex][pointIndex];
-                value = ORKAccessibilityStringForVariables(value, and, dataPoint.accessibilityLabel);
+                NSString *valueString = (value.length ? value : ORKLocalizedString(@"AX_MISSING_VALUE", @"Missing Graph Value"));
+                NSString *andString = (and.length ? and : ORKLocalizedString(@"AX_MISSING_SEPARATOR", @"No Separator"));
+                value = ORKAccessibilityStringForVariables(valueString, andString, dataPoint.accessibilityLabel);
             }
         }
         
         if ([_dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
             element.accessibilityLabel = [self.dataSource graphChartView:self titleForXAxisAtPointIndex:pointIndex];
         } else {
-            element.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_GRAPH_POINT_%@", nil), ORKLocalizedStringFromNumber(@(pointIndex))];
+            element.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_GRAPH_POINT_%@", @"Graph Point"), ORKLocalizedStringFromNumber(@(pointIndex))];
         }
         element.accessibilityValue = value;
         [accessibilityElements addObject:element];
@@ -1219,9 +1221,9 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 [_pointLayers[plotIndex] addObject:pointLayer];
                 
                 if (!dataPoint.isEmptyRange) {
-                    CALayer *pointLayer = graphPointLayerWithColor(color, drawPointIndicator);
-                    [self.plotView.layer addSublayer:pointLayer];
-                    [_pointLayers[plotIndex] addObject:pointLayer];
+                    CALayer *dataPointLayer = graphPointLayerWithColor(color, drawPointIndicator);
+                    [self.plotView.layer addSublayer:dataPointLayer];
+                    [_pointLayers[plotIndex] addObject:dataPointLayer];
                 }
                 }
             }
@@ -1285,8 +1287,8 @@ ORK_INLINE CALayer *graphPointLayerWithColor(UIColor *color, BOOL drawPointIndic
                 pointLayerIndex++;
 
                 if (!yAxisValueRange.isEmptyRange) {
-                    CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
-                    pointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
+                    CALayer *yPointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                    yPointLayer.position = CGPointMake(positionOnXAxis, yAxisValueRange.maximumValue);
                     pointLayerIndex++;
                 }
             }

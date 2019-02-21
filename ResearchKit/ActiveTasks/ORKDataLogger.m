@@ -402,12 +402,16 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     // Serialize each object separately to the buffer, pending a single write, so the
     // objects form part of a single array.
     __block BOOL success = YES;
+    __block NSError *localError;
+    if (error) {
+        localError = *error;
+    }
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSData *data;
         if ([obj isKindOfClass:[NSData class]]) {
             data = obj;
         } else {
-            data = [NSJSONSerialization dataWithJSONObject:obj options:(NSJSONWritingOptions)0 error:error];
+            data = [NSJSONSerialization dataWithJSONObject:obj options:(NSJSONWritingOptions)0 error:&localError];
         }
         if (!data) {
             success = NO;

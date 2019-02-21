@@ -645,7 +645,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
-- (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer; {
+- (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer {
     [self saveAnswer:answer];
     self.hasChangedAnswer = YES;
 }
@@ -748,9 +748,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
     
-    ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+    ORKChoiceViewCell *cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     
     cell.useCardView = self.questionStep.useCardView;
     cell.userInteractionEnabled = !self.readOnlyMode;
