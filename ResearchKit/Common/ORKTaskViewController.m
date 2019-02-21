@@ -1291,7 +1291,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     if (supportSaving && saveable) {
-        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", @"Save button title")
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction *action) {
                                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1300,7 +1300,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 }]];
     }
     
-    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", @"Discard button title") : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", @"Stop button title");
+    NSString *discardTitle = saveable ? ORKLocalizedString(@"BUTTON_OPTION_DISCARD", nil) : ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
     
     [alert addAction:[UIAlertAction actionWithTitle:discardTitle
                                               style:UIAlertActionStyleDestructive
@@ -1310,7 +1310,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                 });
                                             }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", @"Cancel button title")
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
     

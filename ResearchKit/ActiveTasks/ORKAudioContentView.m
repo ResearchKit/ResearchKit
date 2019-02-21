@@ -252,7 +252,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 - (NSString *)accessibilityLabel {
     NSString *timerAxString = _timerLabel.isHidden ? nil : _timerLabel.accessibilityLabel;
     NSString *alertAxString = _alertLabel.isHidden ? nil : _alertLabel.accessibilityLabel;
-    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", @"Audio Bar Graph"), timerAxString, alertAxString);
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_AUDIO_BAR_GRAPH", nil), timerAxString, alertAxString);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

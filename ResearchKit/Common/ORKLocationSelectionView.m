@@ -401,29 +401,25 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (void)notifyDelegateOfError:(NSError *)error {
-    NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"Generic location error message");
+    NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"");
     NSString *message = nil;
     
     switch (error.code) {
         case kCLErrorLocationUnknown:
         case kCLErrorHeadingFailure:
-            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN",
-                                         @"Unknown location error message");
+            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN", @"");
             break;
         case kCLErrorDenied:
         case kCLErrorRegionMonitoringDenied:
-            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_DENIED",
-                                         @"Location monitoring denied message");
+            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_DENIED", @"");
             break;
         case kCLErrorNetwork:
-            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK",
-                                         @"Error getting geocode network message");
+            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
             break;
         case kCLErrorGeocodeFoundNoResult:
         case kCLErrorGeocodeFoundPartialResult:
         case kCLErrorGeocodeCanceled:
-            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE",
-                                         @"Error getting location geocode message");
+            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
             break;
         default:
             break;
