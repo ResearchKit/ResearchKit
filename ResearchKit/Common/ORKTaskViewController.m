@@ -341,10 +341,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
     
-    if (!taskRunUUID) {
-        taskRunUUID = [NSUUID UUID];
-    }
-    self.taskRunUUID = taskRunUUID;
+    self.taskRunUUID = taskRunUUID ?: [NSUUID UUID];
     
     [self.childNavigationController.navigationBar setShadowImage:[UIImage new]];
     self.hairline = [self findHairlineViewUnder:self.childNavigationController.navigationBar];
