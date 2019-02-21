@@ -833,10 +833,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [NSString stringWithFormat:@"%@:%@", stepIdentifier, @(index)];
 }
 
-- (NSUUID *)taskRunUUID {
-    return _taskRunUUID;
-}
-
 - (ORKTaskResult *)result {
     
     ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:[self.task identifier] taskRunUUID:self.taskRunUUID outputDirectory:self.outputDirectory];
