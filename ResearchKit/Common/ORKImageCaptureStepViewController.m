@@ -297,12 +297,12 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (NSURL *)writeCapturedDataWithError:(NSError **)error {
+- (NSURL *)writeCapturedDataWithError:(NSError **)errorOut {
     NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
     if (!URL) {
-        if (error) {
-            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY", nil)}];
+        if (errorOut != NULL) {
+            *errorOut = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY", nil)}];
         }
         return nil;
     }
@@ -313,8 +313,8 @@
         if (writeError) {
             ORK_Log_Warning(@"%@", writeError);
         }
-        if (error) {
-            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];
+        if (errorOut != NULL) {
+            *errorOut = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];
         }
         return nil;
     }

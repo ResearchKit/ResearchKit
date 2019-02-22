@@ -129,16 +129,16 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     _unitsTable = nil;
 }
 
-- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError **)error {
+- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError **)errorOut {
     id result = nil;
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
-        NSDate *dob = [_healthStore dateOfBirthWithError:error];
+        NSDate *dob = [_healthStore dateOfBirthWithError:errorOut];
         if (dob) {
             result = dob;
         }
     }
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBloodType]) {
-        HKBloodTypeObject *bloodType = [_healthStore bloodTypeWithError:error];
+        HKBloodTypeObject *bloodType = [_healthStore bloodTypeWithError:errorOut];
         if (bloodType && bloodType.bloodType != HKBloodTypeNotSet) {
             result = ORKHKBloodTypeString(bloodType.bloodType);
         }
@@ -147,7 +147,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBiologicalSex]) {
-        HKBiologicalSexObject *biologicalSex = [_healthStore biologicalSexWithError:error];
+        HKBiologicalSexObject *biologicalSex = [_healthStore biologicalSexWithError:errorOut];
         if (biologicalSex && biologicalSex.biologicalSex != HKBiologicalSexNotSet) {
             result = ORKHKBiologicalSexString(biologicalSex.biologicalSex);
         }
@@ -156,7 +156,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierFitzpatrickSkinType]) {
-        HKFitzpatrickSkinTypeObject *skinType = [_healthStore fitzpatrickSkinTypeWithError:error];
+        HKFitzpatrickSkinTypeObject *skinType = [_healthStore fitzpatrickSkinTypeWithError:errorOut];
         if (skinType && skinType.skinType != HKFitzpatrickSkinTypeNotSet) {
             result = @(skinType.skinType);
         }
@@ -165,7 +165,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     if (ORK_IOS_10_WATCHOS_3_AVAILABLE && [[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierWheelchairUse]) {
-        HKWheelchairUseObject *wheelchairUse = [_healthStore wheelchairUseWithError:error];
+        HKWheelchairUseObject *wheelchairUse = [_healthStore wheelchairUseWithError:errorOut];
         if (wheelchairUse && wheelchairUse.wheelchairUse != HKWheelchairUseNotSet) {
             result = (wheelchairUse.wheelchairUse == HKWheelchairUseYes) ? @YES : @NO;
         }
