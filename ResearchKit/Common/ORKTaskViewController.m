@@ -679,7 +679,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORK_Log_Warning(@"Could not set audio session active: %@", error);
     }
     
-    if (errorOut) {
+    if (errorOut != NULL) {
         *errorOut = error;
     }
     
