@@ -325,7 +325,11 @@
         dispatch_block_cancel(_pulseDurationWorkBlock);
         dispatch_block_cancel(_postStimulusDelayWorkBlock);
     }
-    if ([self validateResultFordBHL:_currentdBHL]) {
+    if (_resultUnit.userTapTimeStamp - _resultUnit.startOfUnitTimeStamp < _resultUnit.preStimulusDelay) {
+        NSNumber *currentKey = [NSNumber numberWithFloat:_currentdBHL];
+        ORKdBHLToneAudiometryTransitions *currentTransitionObject = [_transitionsDictionary objectForKey:currentKey];
+        currentTransitionObject.userInitiated -= 1;
+    } else if ([self validateResultFordBHL:_currentdBHL]) {
         _resultSample.calculatedThreshold = _currentdBHL;
         _indexOfFreqLoopList += 1;
         if (_indexOfFreqLoopList >= _freqLoopList.count) {
@@ -337,11 +341,10 @@
             [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
             return;
         }
-    } else {
-        _currentdBHL = _currentdBHL - _dBHLStepDownSize;
-        [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
-        return;
     }
+    _currentdBHL = _currentdBHL - _dBHLStepDownSize;
+    [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
+    return;
 }
 
 - (BOOL)validateResultFordBHL:(float)dBHL {
