@@ -204,7 +204,6 @@ const CGFloat ORKScreenMetricMaxDimension = 10000.0;
 
 static CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
-        //   iPhoneX, iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad     iPad 10.5,   iPad 12.9
         //   iPhoneX, iPhoneXSMAX, iPhone 6+,  iPhone 6,  iPhone 5,    iPad,    iPad 10.5,   iPad 12.9
         {        128,       128,       128,       128,       100,       218,       218,       218},      // ORKScreenMetricTopToCaptionBaseline
         {         35,        35,        35,        35,        32,        35,        35,        35},      // ORKScreenMetricFontSizeHeadline
