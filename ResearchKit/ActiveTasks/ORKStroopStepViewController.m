@@ -45,8 +45,8 @@
 @interface ORKStroopStepViewController ()
 
 @property (nonatomic, strong) ORKStroopContentView *stroopContentView;
-@property (nonatomic, copy) NSMutableDictionary *colors;
-@property (nonatomic, copy) NSMutableDictionary *differentColorLabels;
+@property (nonatomic, strong) NSDictionary *colors;
+@property (nonatomic, strong) NSDictionary *differentColorLabels;
 @property (nonatomic) NSUInteger questionNumber;
 
 @end
@@ -94,20 +94,19 @@
     _blue = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
     _yellow = [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
     
-    self.colors = [[NSMutableDictionary alloc] initWithObjectsAndKeys: _red, _redString, _blue, _blueString, _yellow, _yellowString, _green, _greenString, nil];
+    self.colors = @{
+                    _redString: _red,
+                    _blueString: _blue,
+                    _yellowString: _yellow,
+                    _greenString: _green,
+                    };
     
-    self.differentColorLabels = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:_blue,
-                                                                                     _green,
-                                                                                     _yellow, nil], _redString,
-                                 [NSArray arrayWithObjects:_red,
-                                  _green,
-                                  _yellow, nil], _blueString,
-                                 [NSArray arrayWithObjects:_red,
-                                  _blue,
-                                  _green, nil], _yellowString,
-                                 [NSArray arrayWithObjects:_red,
-                                  _blue,
-                                  _yellow, nil], _greenString, nil];
+    self.differentColorLabels = @{
+                                  _redString: @[_blue, _green, _yellow],
+                                  _blueString: @[_red, _green, _yellow,],
+                                  _yellowString: @[_red, _blue, _green],
+                                  _greenString: @[_red, _blue, _yellow],
+                                  };
 
     self.questionNumber = 0;
     _stroopContentView = [ORKStroopContentView new];

@@ -65,8 +65,8 @@ ORK_CLASS_AVAILABLE
  @param resultSource  The source that should be consulted to obtain the corresponding step results.
  */
 + (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
-                                             steps:(NSArray *)steps
-                                      resultSource:(id<ORKTaskResultSource, NSSecureCoding>)resultSource;
+                                             steps:(nullable NSArray *)steps
+                                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource;
 
 /**
  Returns a new embedded review step that includes the specified identifier. Steps and step results are directly taken 
@@ -82,14 +82,14 @@ ORK_CLASS_AVAILABLE
  This property contains all steps that are included in the review process. Currently, only question, instruction and 
  form steps can be reviewed. Any other step type will be ignored.
  */
-@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
+@property (nonatomic, copy, readonly, nullable) NSArray<ORKStep *> *steps;
 
 /**
  The result source to obtain step results from. (read-only)
  
  This property contains the source that should be consulted to obtain step results.
  */
-@property (nonatomic, readonly) id<ORKTaskResultSource, NSSecureCoding> resultSource;
+@property (nonatomic, readonly, nullable) id<ORKTaskResultSource, NSSecureCoding> resultSource;
 
 /**
  A Boolean value indicating whether instruction steps should be excluded from review.

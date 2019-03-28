@@ -460,8 +460,8 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
-                                                                ORKStrongTypeOf(self) strongSelf = weakSelf;
-                                                                [strongSelf makePasscodeViewBecomeFirstResponder];
+                                                                ORKStrongTypeOf(self) innerStrongSelf = weakSelf;
+                                                                [innerStrongSelf makePasscodeViewBecomeFirstResponder];
                                                             }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
                 }

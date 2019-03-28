@@ -80,7 +80,7 @@ CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return ORKAdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
-id findInArrayByKey(NSArray * array, NSString *key, id value) {
+id ORKFindInArrayByKey(NSArray *array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
     if (matches.count) {
@@ -344,39 +344,9 @@ BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
     return (language != nil) && [familyNameFirstLanguages containsObject:language];
 }
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen) {
-    
-    if (screen != [UIScreen mainScreen]) {
-        return NO;
-    }
-   
-    // If our screen's minimum dimension is bigger than a fixed threshold,
-    // decide to use wide content margins. This is less restrictive than UIKit,
-    // but a good enough approximation.
-    CGRect screenRect = screen.bounds;
-    CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
-    BOOL isWideScreenFormat = (minDimension > 375.);
-    
-    return isWideScreenFormat;
-}
-
 #define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR 20.0
 #define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT 16.0
 #define ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL 15.0
-
-CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
-    if (ORKWantsWideContentMargins(tableView.window.screen)) {
-        if (CGRectGetWidth(tableView.frame) > 320.0) {
-            return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR;
-            
-        } else {
-            return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
-        }
-    } else {
-        // Probably should be ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL
-        return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
-    }
-}
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;

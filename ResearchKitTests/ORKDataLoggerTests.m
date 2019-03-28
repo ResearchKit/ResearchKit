@@ -198,24 +198,24 @@
     XCTAssertFalse([_dataLogger isFileUploadedAtURL:_finishedLogFiles[1]]);
 }
 
-- (NSArray *)allLogsWithError:(NSError **)error {
+- (NSArray *)allLogsWithError:(NSError **)errorOut {
     NSMutableArray *logs = [NSMutableArray array];
     [_dataLogger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         [logs addObject:logFileUrl];
-    } error:error];
+    } error:errorOut];
     return logs;
 }
 
-- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError **)error {
+- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError **)errorOut {
     NSMutableArray *logs = [NSMutableArray array];
     if (uploaded) {
         [_dataLogger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
-        } error:error];
+        } error:errorOut];
     } else {
         [_dataLogger enumerateLogsNeedingUpload:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
-        } error:error];
+        } error:errorOut];
     }
     return logs;
 }

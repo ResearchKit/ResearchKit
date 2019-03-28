@@ -263,11 +263,9 @@
 				"zh-Hant",
 				ja,
 				es,
-				"es-MX",
 				it,
 				nl,
 				ko,
-				"pt-BR",
 				"pt-PT",
 				da,
 				fi,
@@ -295,6 +293,8 @@
 				"en-AU",
 				"zh-HK",
 				"fr-CA",
+				"es-419",
+				pt,
 			);
 			mainGroup = 869230B51AAA890A00BFE11B;
 			productRefGroup = 869230BF1AAA890A00BFE11B /* Products */;
@@ -534,7 +534,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,7 +556,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

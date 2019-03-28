@@ -276,19 +276,19 @@
     double preStimulusDelay = delay1 + delay2 + 1;
     _resultUnit.preStimulusDelay = preStimulusDelay;
     
-    _preStimulusDelayWorkBlock = dispatch_block_create(0, ^{
+    _preStimulusDelayWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [_audioGenerator playSoundAtFrequency:[freq floatValue] onChannel:_audioChannel dBHL:_currentdBHL];
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(preStimulusDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), _preStimulusDelayWorkBlock);
     
-    _pulseDurationWorkBlock = dispatch_block_create(0, ^{
+    _pulseDurationWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         [_audioGenerator stop];
     });
     // adding 0.2 seconds to account for the fadeInDuration which is being set in ORKdBHLToneAudiometryAudioGenerator
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((preStimulusDelay + toneDuration + 0.2) * NSEC_PER_SEC)), dispatch_get_main_queue(), _pulseDurationWorkBlock);
 
     ORKWeakTypeOf(self)weakSelf = self;
-    _postStimulusDelayWorkBlock = dispatch_block_create(0, ^{
+    _postStimulusDelayWorkBlock = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, ^{
         ORKStrongTypeOf(self) strongSelf = weakSelf;
         NSUInteger storedTestIndex = _currentTestIndex;
         if (_currentTestIndex == storedTestIndex) {
@@ -325,7 +325,11 @@
         dispatch_block_cancel(_pulseDurationWorkBlock);
         dispatch_block_cancel(_postStimulusDelayWorkBlock);
     }
-    if ([self validateResultFordBHL:_currentdBHL]) {
+    if (_resultUnit.userTapTimeStamp - _resultUnit.startOfUnitTimeStamp < _resultUnit.preStimulusDelay) {
+        NSNumber *currentKey = [NSNumber numberWithFloat:_currentdBHL];
+        ORKdBHLToneAudiometryTransitions *currentTransitionObject = [_transitionsDictionary objectForKey:currentKey];
+        currentTransitionObject.userInitiated -= 1;
+    } else if ([self validateResultFordBHL:_currentdBHL]) {
         _resultSample.calculatedThreshold = _currentdBHL;
         _indexOfFreqLoopList += 1;
         if (_indexOfFreqLoopList >= _freqLoopList.count) {
@@ -337,11 +341,10 @@
             [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
             return;
         }
-    } else {
-        _currentdBHL = _currentdBHL - _dBHLStepDownSize;
-        [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
-        return;
     }
+    _currentdBHL = _currentdBHL - _dBHLStepDownSize;
+    [self estimatedBHLAndPlayToneWithFrequency:_freqLoopList[_indexOfFreqLoopList]];
+    return;
 }
 
 - (BOOL)validateResultFordBHL:(float)dBHL {

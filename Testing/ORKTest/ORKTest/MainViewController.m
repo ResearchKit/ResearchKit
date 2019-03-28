@@ -619,9 +619,9 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
              data after the test is complete. In a real application, only
              delete your data when you've processed it or sent it to a server.
              */
-            NSError *err = nil;
-            if (![[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
-                NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
+            NSError *error = nil;
+            if (![[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&error]) {
+                NSLog(@"Error removing %@: %@", outputDirectoryURL, error);
             }
         }
     }];
@@ -795,9 +795,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     [self dismissViewControllerAnimated:YES completion:^{
         if (dir)
         {
-            NSError *err = nil;
-            if (![[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
-                NSLog(@"Error removing %@: %@", dir, err);
+            NSError *error = nil;
+            if (![[NSFileManager defaultManager] removeItemAtURL:dir error:&error]) {
+                NSLog(@"Error removing %@: %@", dir, error);
             }
         }
     }];

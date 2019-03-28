@@ -68,7 +68,7 @@
     ORKSpeechRecognizer *_speechRecognizer;
     
     dispatch_queue_t _speechRecognitionQueue;
-    ORKSpeechRecognitonResult *_localResult;
+    ORKSpeechRecognitionResult *_localResult;
     BOOL _errorState;
     float _peakPower;
 }
@@ -99,7 +99,7 @@
    
     [ORKSpeechRecognizer requestAuthorization];
 
-    _localResult = [[ORKSpeechRecognitonResult alloc] initWithIdentifier:self.step.identifier];
+    _localResult = [[ORKSpeechRecognitionResult alloc] initWithIdentifier:self.step.identifier];
     _speechRecognitionQueue = dispatch_queue_create("SpeechRecognitionQueue", DISPATCH_QUEUE_SERIAL);
 }
 

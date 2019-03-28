@@ -341,7 +341,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _managedResults = [NSMutableDictionary dictionary];
     _managedStepIdentifiers = [NSMutableArray array];
     
-    self.taskRunUUID = taskRunUUID;
+    self.taskRunUUID = taskRunUUID ?: [NSUUID UUID];
     
     [self.childNavigationController.navigationBar setShadowImage:[UIImage new]];
     self.hairline = [self findHairlineViewUnder:self.childNavigationController.navigationBar];
@@ -357,14 +357,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    return [self commonInitWithTask:nil taskRunUUID:[NSUUID UUID]];
+    return [self commonInitWithTask:nil taskRunUUID:nil];
 }
 #pragma clang diagnostic pop
 
@@ -679,7 +679,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORK_Log_Warning(@"Could not set audio session active: %@", error);
     }
     
-    if (errorOut) {
+    if (errorOut != NULL) {
         *errorOut = error;
     }
     
@@ -828,13 +828,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (id <NSCopying>)uniqueManagedKey:(NSString*)stepIdentifier index:(NSUInteger)index {
     return [NSString stringWithFormat:@"%@:%@", stepIdentifier, @(index)];
-}
-
-- (NSUUID *)taskRunUUID {
-    if (_taskRunUUID == nil) {
-        _taskRunUUID = [NSUUID UUID];
-    }
-    return _taskRunUUID;
 }
 
 - (ORKTaskResult *)result {
@@ -1635,7 +1628,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     }
 }
 
-+ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     if ([identifierComponents.lastObject isEqualToString:_PageViewControllerRestorationKey]) {
         ORKPageViewController *pageViewController = [self pageViewController];
         pageViewController.restorationIdentifier = identifierComponents.lastObject;

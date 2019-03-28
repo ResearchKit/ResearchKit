@@ -345,10 +345,7 @@
     _container.layoutMargins = layoutMargins;
 }
 
-- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMargin, window);
-    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMarginForIntroStep, window);
-    
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {    
     {
         BOOL hasIllustration = (_imageView.image != nil);
         _headerView.hasContentAbove = hasIllustration;
@@ -358,18 +355,6 @@
         
         _illustrationHeightConstraint.constant = (_imageView.image ? IllustrationHeight : 0);
         _topToIllustrationConstraint.constant = (_imageView.image ?IllustrationTopMargin : 0);
-    }
-    
-    {
-        BOOL hasStepView = (_stepView != nil);
-
-        CGFloat continueSpacing = StepViewBottomToContinueTop;
-        if (self.continueHugsContent && !hasStepView) {
-            continueSpacing = 0;
-        }
-        if (self.stepViewFillsAvailableSpace) {
-            continueSpacing = StepViewBottomToContinueTopForIntroStep;
-        }
     }
     
     {

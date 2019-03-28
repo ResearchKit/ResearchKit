@@ -322,10 +322,11 @@ static const CGFloat PickerMinimumHeight = 34.0;
     _canonicalMinimumValue = minimumValue;
     _canonicalMaximumValue = maximumValue;
     
-    for (double i = minimumValue; i <= maximumValue; i++) {
+    for (NSInteger i = minimumValue; i <= maximumValue; i++) {
         [mutableWholeValues addObject:@(i)];
         if (_answerFormat.numericPrecision == ORKNumericPrecisionDefault) {
-            [mutableWholeValues addObject:@(i + 0.5)];
+            double preciseValue = i + 0.5;
+            [mutableWholeValues addObject:@(preciseValue)];
         }
     }
     wholeValues = [mutableWholeValues copy];

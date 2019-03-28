@@ -306,9 +306,9 @@
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
         NSArray *resultsArray = [(ORKStepResult *)result results];
-        for (ORKQuestionResult *result in resultsArray) {
-            id answer = result.answer ? : ORKNullAnswerValue();
-            [self setAnswer:answer forIdentifier:result.identifier];
+        for (ORKQuestionResult *currentResult in resultsArray) {
+            id answer = currentResult.answer ? : ORKNullAnswerValue();
+            [self setAnswer:answer forIdentifier:currentResult.identifier];
         }
         self.originalAnswers = [[NSDictionary alloc] initWithDictionary:self.savedAnswers];
     }
@@ -962,6 +962,8 @@
                     formCell.isFirstItemInSectionWithoutTitle = isFirstItemWithSectionWithoutTitle;
                     cell = formCell;
                 }
+            } else {
+                NSAssert(NO, @"SHOULD NOT FALL IN HERE");
             }
         }
     }

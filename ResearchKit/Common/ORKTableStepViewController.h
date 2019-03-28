@@ -65,7 +65,7 @@ ORK_CLASS_AVAILABLE
 /**
  @return    The table view managed by the controller object.
  */
-@property (nonatomic, readonly) UITableView *tableView;
+@property (nonatomic, readonly, nullable) UITableView *tableView;
 
 /**
  Whether or not the continue button should be enabled for this step. Default = YES
