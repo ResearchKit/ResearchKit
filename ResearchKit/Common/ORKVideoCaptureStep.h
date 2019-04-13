@@ -88,11 +88,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, getter=isAudioMute) BOOL audioMute;
 
 /**
- Constants indicating the mode of the flash on the receiver's device, if it has one.
+ Constants indicating the desired torch mode to use
  
- The default value is `AVCaptureFlashModeOff` (see `AVCaptureFlashMode`).
+ The default value is `AVCaptureTorchModeAuto` (see `AVCaptureTorchMode`).
  */
-@property (nonatomic) AVCaptureFlashMode flashMode;
+@property (nonatomic) AVCaptureTorchMode torchMode;
 
 /**
  Constants indicating the physical position of an AVCaptureDevice's hardware on the system.

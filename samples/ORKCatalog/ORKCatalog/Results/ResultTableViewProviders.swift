@@ -398,7 +398,7 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
         let location = questionResult.locationAnswer
-        let address = (location?.addressDictionary?["FormattedAddressLines"] as AnyObject).componentsJoined(by: " ")
+        let address = CNPostalAddressFormatter.string(from: (location?.postalAddress)!, style: .mailingAddress)
         let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
             ResultRow(text: "latitude", detail: location?.coordinate.latitude),
@@ -529,7 +529,7 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
             return 200
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 
@@ -556,7 +556,7 @@ class AmslerGridResultTableViewProvider: ResultTableViewProvider {
             return 300
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 
@@ -590,8 +590,8 @@ class FileResultTableViewProvider: ResultTableViewProvider {
             // The URL of the generated file on disk.
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
-        
-        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType , contentType.hasPrefix("image/") {
+
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType , contentType.hasPrefix("image/") , !contentType.hasSuffix(".dng"){
             
             if let image = UIImage.init(contentsOfFile: fileURL.path) {
                 return rows + [
@@ -620,7 +620,7 @@ class FileResultTableViewProvider: ResultTableViewProvider {
             }
         }
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

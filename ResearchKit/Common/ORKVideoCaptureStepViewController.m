@@ -207,13 +207,13 @@
     }
     
     if (device) {
-        // Check if the device has flash.
-        if ([device isFlashModeSupported:_videoCaptureStep.flashMode]) {
+        // Check if the device has the requested torchMode
+        if([device isTorchModeSupported:_videoCaptureStep.torchMode]){
             [device lockForConfiguration:nil];
-            device.flashMode = _videoCaptureStep.flashMode;
+            device.torchMode = _videoCaptureStep.torchMode;
             [device unlockForConfiguration];
         }
-
+        
         // Configure the input and output
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         

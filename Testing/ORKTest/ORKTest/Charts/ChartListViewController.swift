@@ -75,7 +75,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         self.tableView.dataSource = self;
         
         // ORKPieChartView
-        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
+        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as? PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
         pieChartView?.dataSource = randomColorPieChartDataSource
         // Optional custom configuration
@@ -121,7 +121,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
 
         // ORKBarGraphChartView
-        barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as? BarGraphChartTableViewCell
         let barGraphChartView = barGraphChartTableViewCell.graphChartView as! ORKBarGraphChartView
         barGraphChartView.dataSource = barGraphChartDataSource
         executeAfterDelay(1.5) {
@@ -162,7 +162,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
 
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as? LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
         // Optional custom configuration
@@ -204,7 +204,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
         
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as? DiscreteGraphChartTableViewCell
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphChartView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
         // Optional custom configuration
@@ -276,7 +276,7 @@ class ChartPerformanceListViewController: UIViewController, UITableViewDataSourc
         self.tableView.dataSource = self;
         
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as? LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = graphChartDataSource
         // Optional custom configuration
@@ -284,7 +284,7 @@ class ChartPerformanceListViewController: UIViewController, UITableViewDataSourc
         lineGraphChartView.showsVerticalReferenceLines = true
 
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as? DiscreteGraphChartTableViewCell
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphChartView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = graphChartDataSource
         // Optional custom configuration

@@ -397,7 +397,6 @@ ORK_CLASS_AVAILABLE
 /**
  Returns a new step modifier.
  
- @param stepIdentifier    The step identifier for the step to modify
  @param resultPredicate   The result predicate to use to determine if the step should be modified
  @param keyValueMap       The mapping dictionary for this object
  @return                  A new step modifier

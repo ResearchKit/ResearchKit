@@ -173,12 +173,6 @@ CGFloat ORKExpectedLabelHeight(UILabel *label) {
     return expectedLabelSize.height;
 }
 
-void ORKAdjustHeightForLabel(UILabel *label) {
-    CGRect rect = label.frame;
-    rect.size.height = ORKExpectedLabelHeight(label);
-    label.frame = rect;
-}
-
 UIImage *ORKImageWithColor(UIColor *color) {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
