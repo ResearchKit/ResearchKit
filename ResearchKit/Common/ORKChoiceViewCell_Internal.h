@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2019, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,30 +29,23 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
-#import "ORKHelpers_Internal.h"
+#import "ORKChoiceViewCell.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKScaleSlider;
+@protocol ORKChoiceOtherViewCellDelegate <NSObject>
 
-// Used to properly format values from the ORKScaleSlider.
-ORK_EXTERN NSString * _Nullable ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *slider);
-ORK_EXTERN NSString * _Nullable ORKAccessibilityFormatContinuousScaleSliderValue(CGFloat value, ORKScaleSlider *slider);
+- (void)textChoiceOtherCellDidBecomeFirstResponder:(ORKChoiceOtherViewCell *)choiceOtherViewCell;
+- (void)textChoiceOtherCellDidResignFirstResponder:(ORKChoiceOtherViewCell *)choiceOtherViewCell;
 
-// Performs a block on the main thread after a delay. If Voice Over is not running, the block is performed immediately.
-ORK_EXTERN void ORKAccessibilityPerformBlockAfterDelay(NSTimeInterval delay, void(^block)(void));
+@end
 
-// Convenience for posting an accessibility notification after a delay.
-ORK_INLINE void ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityNotifications notification, _Nullable id argument, NSTimeInterval delay) {
-    ORKAccessibilityPerformBlockAfterDelay(delay, ^{
-        UIAccessibilityPostNotification(notification, argument);
-    });
-}
 
-// Creates a string suitable for Voice Over by joining the variables with ", " and avoiding nil and empty strings.
-#define ORKAccessibilityStringForVariables(...) _ORKAccessibilityStringForVariables(ORK_NARG(__VA_ARGS__),  ##__VA_ARGS__)
-ORK_EXTERN NSString *_ORKAccessibilityStringForVariables(NSInteger numParameters, NSString *baseString, ...);
+@interface ORKChoiceOtherViewCell() <UITextViewDelegate>
+
+@property (nonatomic, weak) id<ORKChoiceOtherViewCellDelegate> delegate;
+
+@end
 
 NS_ASSUME_NONNULL_END

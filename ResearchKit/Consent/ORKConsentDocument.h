@@ -165,7 +165,7 @@ ORK_CLASS_AVAILABLE
  The PDF is generated in a form suitable for printing. This is done asynchronously,
  so the PDF data is returned through a completion block.
  
- @param render      The PDF renderer.
+ @param renderer      The PDF renderer.
  @param handler     The handler block for generated PDF data. When successful, the returned
     data represents a complete PDF document that represents the consent.
  */

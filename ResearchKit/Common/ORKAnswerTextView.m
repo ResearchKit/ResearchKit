@@ -168,6 +168,13 @@
     return [UIFont systemFontOfSize:((NSNumber *)[descriptor objectForKey:UIFontDescriptorSizeAttribute]).doubleValue + 2.0];
 }
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [super setBackgroundColor:backgroundColor];
+    if (_placeholderTextView) {
+        [_placeholderTextView setBackgroundColor:backgroundColor];
+    }
+}
+
 - (BOOL)accessibilityDismissKeyboardForAction:(UIAccessibilityCustomAction *)customAction
 {
     [self resignFirstResponder];

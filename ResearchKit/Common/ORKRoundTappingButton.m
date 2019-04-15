@@ -39,21 +39,21 @@ static const CGFloat RoundTappingButtonDiameter = 104;
 - (void)init_ORKTextButton {
     [super init_ORKTextButton];
     self.fadeDelay = 0.2;
-    self.diameter = RoundTappingButtonDiameter;
+    _diameter = RoundTappingButtonDiameter;
 }
 
-- (void)setDiameter:(CGFloat)diameter_ {
-    diameter = diameter_;
+- (void)setDiameter:(CGFloat)diameter {
+    _diameter = diameter;
     self.layer.cornerRadius = diameter * 0.5;
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(diameter, diameter);
+    return CGSizeMake(_diameter, _diameter);
 }
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    self.layer.cornerRadius = diameter * 0.5;
+    self.layer.cornerRadius = _diameter * 0.5;
 }
 
 + (UIFont *)defaultFont {

@@ -41,9 +41,9 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, start);
     ORK_ENCODE_DOUBLE(aCoder, finish);
-    ORK_DECODE_DOUBLE(aCoder, minimum);
-    ORK_DECODE_DOUBLE(aCoder, maximum);
-    ORK_DECODE_DOUBLE(aCoder, range);
+    ORK_ENCODE_DOUBLE(aCoder, minimum);
+    ORK_ENCODE_DOUBLE(aCoder, maximum);
+    ORK_ENCODE_DOUBLE(aCoder, range);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

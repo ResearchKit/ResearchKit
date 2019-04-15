@@ -64,12 +64,12 @@ public extension TaskFactory {
             ORKTextChoice(text: "Nausea", value: "nausea" as NSCoding & NSCopying & NSObjectProtocol)
         ]
         answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
-        step = ORKQuestionStep(identifier: "symptom", title: "Which is your most severe symptom?", answer: answerFormat)
+        step = ORKQuestionStep(identifier: "symptom", title: "Symptoms", question: "Which is your most severe symptom?", answer: answerFormat)
         step.isOptional = false
         steps.append(step)
         
         answerFormat = ORKAnswerFormat.booleanAnswerFormat()
-        step = ORKQuestionStep(identifier: "severity", title: "Does your symptom interfere with your daily life?", answer: answerFormat)
+        step = ORKQuestionStep(identifier: "severity", title: "Symptoms", question: "Does your symptom interfere with your daily life?", answer: answerFormat)
         step.isOptional = false
         steps.append(step)
         

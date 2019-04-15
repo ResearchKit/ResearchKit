@@ -244,8 +244,8 @@
     cell.immediateNavigation = YES;
     ORKStep *step = _steps[indexPath.row];
     ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
-    cell.shortLabel.text = step.title != nil ? step.title : step.text;
-    cell.longLabel.text = [self answerStringForStep:step withStepResult:stepResult];
+    [cell setPrimaryText:step.title ? : step.text];
+    [cell setDetailText:[self answerStringForStep:step withStepResult:stepResult]];
     return cell;
 }
 
@@ -307,12 +307,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ORKStep *step = _steps[indexPath.row];
-    ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
-    NSString *shortText = step.title != nil ? step.title : step.text;
-    NSString *longText = [self answerStringForStep:step withStepResult:stepResult];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForPrimaryText:shortText primaryTextAttributedString:nil detailText:longText detailTextAttributedString:nil inTableView:_tableContainer.tableView];
-    return height;
+    return UITableViewAutomaticDimension;
 }
 
 @end

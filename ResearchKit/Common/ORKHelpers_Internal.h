@@ -31,8 +31,8 @@
 
 
 @import UIKit;
+#import <ResearchKit/ORKTypes.h>
 #import "ORKHelpers_Private.h"
-#import "ORKTypes.h"
 #import "ORKErrors.h"
 
 
@@ -166,7 +166,6 @@ NSURL *ORKCreateRandomBaseURL(void);
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
 
 CGFloat ORKExpectedLabelHeight(UILabel *label);
-void ORKAdjustHeightForLabel(UILabel *label);
 
 // build a image with color
 UIImage *ORKImageWithColor(UIColor *color);
@@ -205,7 +204,7 @@ ORKMutableOrderedSetCopyObjects(NSOrderedSet *a) {
         return nil;
     }
     NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:a.count];
-    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [a enumerateObjectsUsingBlock:^(id obj, __unused NSUInteger idx, __unused BOOL *stop) {
         [b addObject:[obj copy]];
     }];
     return b;
@@ -217,7 +216,7 @@ ORKMutableDictionaryCopyObjects(NSDictionary *a) {
         return nil;
     }
     NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:a.count];
-    [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, __unused BOOL *stop) {
         b[key] = [obj copy];
     }];
     return b;

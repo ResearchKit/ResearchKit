@@ -220,15 +220,37 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self.contentView addSubview:_button];
     
     _button.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *views = @{@"button": _button};
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:@[
+                                              [NSLayoutConstraint constraintWithItem:_button
+                                                                           attribute:NSLayoutAttributeTop
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.contentView
+                                                                           attribute:NSLayoutAttributeTop
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:_button
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.contentView
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:_button
+                                                                           attribute:NSLayoutAttributeLeft
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.contentView.safeAreaLayoutGuide
+                                                                           attribute:NSLayoutAttributeLeft
+                                                                          multiplier:1.0
+                                                                            constant:0.0],
+                                              [NSLayoutConstraint constraintWithItem:_button
+                                                                           attribute:NSLayoutAttributeRight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.contentView.safeAreaLayoutGuide
+                                                                           attribute:NSLayoutAttributeRight
+                                                                          multiplier:1.0
+                                                                            constant:0.0]
+                                              ]];
 }
 
 - (void)configureButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector {
@@ -258,6 +280,8 @@ ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
     
     UICollectionView *_collectionView;
     NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *_buttonSections;
+    NSMutableArray<NSLayoutConstraint *> *_constraints;
+    UIView *_statusBarBackground;
 }
 
 
@@ -287,40 +311,73 @@ ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
     [_collectionView registerClass:[ButtonCell class]
         forCellWithReuseIdentifier:CollectionViewCellReuseIdentifier];
     
-    UIView *statusBarBackground = [UIView new];
-    statusBarBackground.backgroundColor = HeaderColor();
-    [self.view addSubview:statusBarBackground];
+    _statusBarBackground = [UIView new];
+    _statusBarBackground.backgroundColor = HeaderColor();
+    [self.view addSubview:_statusBarBackground];
 
-    _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    statusBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *views = @{@"collectionView": _collectionView,
-                            @"statusBarBackground": statusBarBackground,
-                            @"topLayoutGuide": self.topLayoutGuide};
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[statusBarBackground]|"
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[statusBarBackground]"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:statusBarBackground
-                                                          attribute:NSLayoutAttributeBottom
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.topLayoutGuide
-                                                          attribute:NSLayoutAttributeBottom
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[collectionView]|"
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[topLayoutGuide][collectionView]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
+    [self setupConstraints];
     
     _buttonSections = TestButtonTable();
+}
+
+- (void)setupConstraints {
+    if (_constraints) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+        _constraints = nil;
+    }
+    
+    _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    _statusBarBackground.translatesAutoresizingMaskIntoConstraints = NO;
+    NSDictionary *views = @{@"collectionView": _collectionView,
+                            @"statusBarBackground": _statusBarBackground};
+    
+    _constraints = [[NSMutableArray alloc] init];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[statusBarBackground]|"
+                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                              metrics:nil
+                                                                                views:views]];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[statusBarBackground]"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:views]];
+    [_constraints addObject:[NSLayoutConstraint constraintWithItem:_statusBarBackground
+                                                         attribute:NSLayoutAttributeBottom
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.view.safeAreaLayoutGuide
+                                                         attribute:NSLayoutAttributeTop
+                                                        multiplier:1.0
+                                                          constant:0.0]];
+    [_constraints addObjectsFromArray:@[
+                                        [NSLayoutConstraint constraintWithItem:_collectionView
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.view.safeAreaLayoutGuide
+                                                                     attribute:NSLayoutAttributeTop
+                                                                    multiplier:1.0
+                                                                      constant:0.0],
+                                        [NSLayoutConstraint constraintWithItem:_collectionView
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.view
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                    multiplier:1.0
+                                                                      constant:0.0],
+                                        [NSLayoutConstraint constraintWithItem:_collectionView
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.view
+                                                                     attribute:NSLayoutAttributeRight
+                                                                    multiplier:1.0
+                                                                      constant:0.0],
+                                        [NSLayoutConstraint constraintWithItem:_collectionView
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.view.safeAreaLayoutGuide
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1.0
+                                                                      constant:0.0]
+                                        ]];
+    [NSLayoutConstraint activateConstraints:_constraints];    
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

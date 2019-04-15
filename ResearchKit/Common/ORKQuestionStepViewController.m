@@ -31,7 +31,7 @@
 
 #import "ORKQuestionStepViewController_Private.h"
 
-#import "ORKChoiceViewCell.h"
+#import "ORKChoiceViewCell_Internal.h"
 #import "ORKQuestionStepView.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKSurveyAnswerCellForScale.h"
@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 };
 
 
-@interface ORKQuestionStepViewController () <UITableViewDataSource,UITableViewDelegate, ORKSurveyAnswerCellDelegate> {
+@interface ORKQuestionStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKSurveyAnswerCellDelegate, ORKTextChoiceCellGroupDelegate, ORKChoiceOtherViewCellDelegate, ORKTableContainerViewDelegate> {
     id _answer;
     
     ORKTableContainerView *_tableContainer;
@@ -82,6 +82,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     id _defaultAnswer;
     
     BOOL _visible;
+    UITableViewCell *_currentFirstResponderCell;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -667,10 +668,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
     if (section == ORKQuestionSectionAnswer) {
-        _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
-                                                                                   answer:self.answer
-                                                                       beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
-                                                                      immediateNavigation:[self isStepImmediateNavigation]];
+        if (!_choiceCellGroup) {
+            _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
+                                                                                       answer:self.answer
+                                                                           beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
+                                                                          immediateNavigation:[self isStepImmediateNavigation]];
+            _choiceCellGroup.delegate = self;
+        }
         return _choiceCellGroup.size;
     }
     return 0;
@@ -748,8 +752,17 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
     
-    ORKChoiceViewCell *cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+    ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+    }
     
+    if ([cell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
+        ORKChoiceOtherViewCell *otherCell = (ORKChoiceOtherViewCell *)cell;
+        otherCell.delegate = self;
+        cell = otherCell;
+    }
+
     cell.useCardView = self.questionStep.useCardView;
     cell.userInteractionEnabled = !self.readOnlyMode;
     
@@ -821,19 +834,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
     
-    // Capture `isStepImmediateNavigation` before saving an answer.
-    BOOL immediateNavigation = [self isStepImmediateNavigation];
-    
-    id answer = (self.questionStep.questionType == ORKQuestionTypeBoolean) ? [_choiceCellGroup answerForBoolean] :[_choiceCellGroup answer];
-    
-    [self saveAnswer:answer];
-    self.hasChangedAnswer = YES;
-    
-    if (immediateNavigation) {
-        // Proceed as continueButton tapped
-        ORKSuppressPerformSelectorWarning(
-                                         [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -843,7 +843,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         case ORKQuestionTypeSingleChoice:
         case ORKQuestionTypeMultipleChoice:{
             if ([self.questionStep isFormatFitsChoiceCells]) {
-                height = [self heightForChoiceItemOptionAtIndex:indexPath.row];
+                return UITableViewAutomaticDimension;
             } else {
                 height = [ORKSurveyAnswerCellForPicker suggestedCellHeightForView:tableView];
             }
@@ -873,11 +873,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return height;
 }
 
-- (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
-    ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForPrimaryText:option.text primaryTextAttributedString:option.primaryTextAttributedString detailText:option.detailText  detailTextAttributedString:option.detailTextAttributedString inTableView:_tableView];
-    return height;
-}
 
 #pragma mark - ORKSurveyAnswerCellDelegate
 
@@ -917,6 +912,52 @@ static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
     self.originalAnswer = [coder decodeObjectOfClasses:decodeableSet forKey:_ORKOriginalAnswerRestoreKey];
     
     [self answerDidChange];
+}
+
+#pragma mark - ORKTableContainerViewDelegate;
+
+- (nonnull UITableViewCell *)currentFirstResponderCellForTableContainerView:(nonnull ORKTableContainerView *)tableContainerView {
+    return _currentFirstResponderCell;
+}
+
+#pragma mark - ORKTextChoiceCellGroupDelegate
+
+- (void)answerChangedForIndexPath:(NSIndexPath *)indexPath {
+    // Capture `isStepImmediateNavigation` before saving an answer.
+    BOOL immediateNavigation = [self isStepImmediateNavigation];
+    
+    id answer = (self.questionStep.questionType == ORKQuestionTypeBoolean) ? [_choiceCellGroup answerForBoolean] :[_choiceCellGroup answer];
+    
+    [self saveAnswer:answer];
+    self.hasChangedAnswer = YES;
+    
+    if (immediateNavigation) {
+        // Proceed as continueButton tapped
+        ORKSuppressPerformSelectorWarning(
+                                          [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
+    }
+}
+
+- (void)tableViewCellHeightUpdated {
+    [_tableView reloadData];
+}
+
+#pragma mark - ORKChoiceOtherViewCellDelegate
+
+- (void)textChoiceOtherCellDidBecomeFirstResponder:(ORKChoiceOtherViewCell *)choiceOtherViewCell {
+    _currentFirstResponderCell = choiceOtherViewCell;
+    NSIndexPath *indexPath = [_tableView indexPathForCell:choiceOtherViewCell];
+    if (indexPath) {
+        [_tableContainer scrollCellVisible:choiceOtherViewCell animated:YES];
+    }
+}
+
+- (void)textChoiceOtherCellDidResignFirstResponder:(ORKChoiceOtherViewCell *)choiceOtherViewCell {
+    if (_currentFirstResponderCell == choiceOtherViewCell) {
+        _currentFirstResponderCell = nil;
+    }
+    NSIndexPath *indexPath = [_tableView indexPathForCell:choiceOtherViewCell];
+    [_choiceCellGroup textViewDidResignResponderForCellAtIndexPath:indexPath];
 }
 
 //FIXME: Need Accessibility for Continue and skip button. Lost support when moved navigationFooterViewView outside VerticalContainerView.

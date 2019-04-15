@@ -32,7 +32,7 @@
 #import "ORKStepHeaderView.h"
 #import "ORKHeadlineLabel.h"
 #import "ORKSubheadlineLabel.h"
-#import "ORKTextButton.h"
+#import <ResearchKit/ORKTextButton.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

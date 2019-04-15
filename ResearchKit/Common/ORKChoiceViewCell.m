@@ -29,22 +29,31 @@
  */
 
 
-#import "ORKChoiceViewCell.h"
+#import "ORKChoiceViewCell_Internal.h"
 
 #import "ORKSelectionTitleLabel.h"
 #import "ORKSelectionSubTitleLabel.h"
 
 #import "ORKAccessibility.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKAnswerTextView.h"
 #import "ORKSkin.h"
 
 
 static const CGFloat LabelRightMargin = 44.0;
-static const CGFloat cardTopBottomMargin = 2.0;
+static const CGFloat CardTopBottomMargin = 2.0;
+static const CGFloat LabelTopBottomMargin = 20.0;
+static const CGFloat TextViewTopMargin = 20.0;
+static const CGFloat TextViewHeight = 100.0;
+
 
 @interface ORKChoiceViewCell()
 
 @property (nonatomic) UIView *containerView;
+@property (nonatomic) ORKSelectionTitleLabel *primaryLabel;
+@property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
+@property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
+@property (nonatomic) CGFloat cellLeftMargin;
 
 @end
 
@@ -55,9 +64,6 @@ static const CGFloat cardTopBottomMargin = 2.0;
     CAShapeLayer *_contentMaskLayer;
     
     UIImageView *_checkView;
-    ORKSelectionTitleLabel *_shortLabel;
-    ORKSelectionSubTitleLabel *_longLabel;
-    NSArray<NSLayoutConstraint *> *_containerConstraints;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -69,7 +75,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
         _checkView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
         self.accessoryView = _checkView;
         [self setupContainerView];
-        [self setupConstraints];
+        _cellLeftMargin = self.separatorInset.left;
     }
     return self;
 }
@@ -139,91 +145,135 @@ static const CGFloat cardTopBottomMargin = 2.0;
     }
 }
 
-
 - (void)setupContainerView {
     if (!_containerView) {
         _containerView = [UIView new];
     }
-    
-    [self.contentView addSubview:_containerView];
+    [self addSubview:_containerView];
 }
 
+- (void)addContainerViewToSelfConstraints {
+    [_containerConstraints addObjectsFromArray:@[
+                                                 [NSLayoutConstraint constraintWithItem:_containerView
+                                                                              attribute:NSLayoutAttributeTop
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self
+                                                                              attribute:NSLayoutAttributeTop
+                                                                             multiplier:1.0
+                                                                               constant:0],
+                                                 [NSLayoutConstraint constraintWithItem:_containerView
+                                                                              attribute:NSLayoutAttributeLeft
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self
+                                                                              attribute:NSLayoutAttributeLeft
+                                                                             multiplier:1.0
+                                                                               constant:_leftRightMargin],
+                                                 [NSLayoutConstraint constraintWithItem:_containerView
+                                                                              attribute:NSLayoutAttributeRight
+                                                                              relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self
+                                                                              attribute:NSLayoutAttributeRight
+                                                                             multiplier:1.0
+                                                                               constant:-_leftRightMargin]
+                                                                ]];
+}
+
+- (void)addPrimaryLabelToContainerViewConstraints {
+    if (_primaryLabel) {
+        
+        [_containerConstraints addObjectsFromArray:@[
+                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                                                                  attribute:NSLayoutAttributeTop
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeTop
+                                                                                 multiplier:1.0
+                                                                                   constant:LabelTopBottomMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                 multiplier:1.0
+                                                                                   constant:_cellLeftMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                 multiplier:1.0
+                                                                                   constant:-LabelRightMargin]
+                                                     ]];
+    }
+}
+
+- (void)addDetailLabelConstraints {
+    if (_detailLabel) {
+        [_containerConstraints addObjectsFromArray:@[
+                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
+                                                                                  attribute:NSLayoutAttributeTop
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_primaryLabel ? : _containerView
+                                                                                  attribute:_primaryLabel ? NSLayoutAttributeBottom : NSLayoutAttributeTop
+                                                                                 multiplier:1.0
+                                                                                   constant:_primaryLabel ? 0.0 : LabelTopBottomMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                 multiplier:1.0
+                                                                                   constant:_cellLeftMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                 multiplier:1.0
+                                                                                   constant:-LabelRightMargin]
+                                                     ]];
+    }
+}
+
+- (void)addContainerViewBottomConstraint {
+    [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:_containerView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:_detailLabel ? : _primaryLabel
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1.0
+                                                                   constant:LabelTopBottomMargin]];
+}
+
+
 - (void)setupConstraints {
+    if (!_primaryLabel && !_detailLabel) {
+        return;
+    }
+    
     if (_containerConstraints) {
         [NSLayoutConstraint deactivateConstraints:_containerConstraints];
     }
     
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    _containerConstraints = [[NSMutableArray alloc] init];
+    [self addContainerViewToSelfConstraints];
+    [self addPrimaryLabelToContainerViewConstraints];
+    [self addDetailLabelConstraints];
+    [self addContainerViewBottomConstraint];
+    [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:_containerView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     
-    _containerConstraints = @[
-                              [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
-                              [NSLayoutConstraint constraintWithItem:self.contentView
-                                                           attribute:NSLayoutAttributeBottom
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:self
-                                                           attribute:NSLayoutAttributeBottom
-                                                          multiplier:1.0
-                                                            constant:0.0],
-                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0],
-                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:_leftRightMargin],
-                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-_leftRightMargin],
-                              [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0]
-                              ];
     [NSLayoutConstraint activateConstraints:_containerConstraints];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, self.window);
-    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, self.window);
-    
-    CGFloat cellLeftMargin = self.separatorInset.left;
-
-    CGFloat labelWidth =  self.bounds.size.width - (cellLeftMargin + LabelRightMargin);
-    CGFloat cellHeight = self.bounds.size.height;
-    
-    if (self.longLabel.text.length == 0 && self.shortLabel.text.length == 0) {
-        self.shortLabel.frame = CGRectZero;
-        self.longLabel.frame = CGRectZero;
-    } else if (self.longLabel.text.length == 0) {
-        self.shortLabel.frame = CGRectMake(cellLeftMargin, 0, labelWidth, cellHeight);
-        self.longLabel.frame = CGRectZero;
-    } else if (self.shortLabel.text.length == 0) {
-        self.longLabel.frame = CGRectMake(cellLeftMargin, 0, labelWidth, cellHeight);
-        self.shortLabel.frame = CGRectZero;
-    } else {
-        {
-            self.shortLabel.frame = CGRectMake(cellLeftMargin, 0,
-                                               labelWidth, 1);
-            
-            ORKAdjustHeightForLabel(self.shortLabel);
-            
-            CGRect rect = self.shortLabel.frame;
-            
-            CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = self.shortLabel.font.ascender;
-            
-            rect.origin.y = firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop;
-            self.shortLabel.frame = rect;
-        }
-        
-        {
-            self.longLabel.frame = CGRectMake(cellLeftMargin, 0,
-                                              labelWidth, 1);
-            
-            ORKAdjustHeightForLabel(self.longLabel);
-            
-            CGRect rect = self.longLabel.frame;
-            
-            CGFloat shortLabelBaselineApproximateOffsetFromBottom = ABS(self.shortLabel.font.descender);
-            CGFloat longLabelApproximateFirstBaselineOffset = self.longLabel.font.ascender;
-            
-            rect.origin.y = CGRectGetMaxY(self.shortLabel.frame) - shortLabelBaselineApproximateOffsetFromBottom + labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset;
-    
-            self.longLabel.frame = rect;
-            
-        }
-    }
     [self updateSelectedItem];
     [self setMaskLayers];
 }
@@ -231,30 +281,10 @@ static const CGFloat cardTopBottomMargin = 2.0;
 - (void)setUseCardView:(bool)useCardView {
     _useCardView = useCardView;
     _leftRightMargin = ORKCardLeftRightMargin;
-    _topBottomMargin = cardTopBottomMargin;
+    _topBottomMargin = CardTopBottomMargin;
     [self setBackgroundColor:[UIColor clearColor]];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self setupConstraints];
-
-}
-
-- (ORKSelectionTitleLabel *)shortLabel {
-    if (_shortLabel == nil ) {
-        _shortLabel = [ORKSelectionTitleLabel new];
-        _shortLabel.numberOfLines = 0;
-        [self.containerView addSubview:_shortLabel];
-    }
-    return _shortLabel;
-}
-
-- (ORKSelectionSubTitleLabel *)longLabel {
-    if (_longLabel == nil) {
-        _longLabel = [ORKSelectionSubTitleLabel new];
-        _longLabel.numberOfLines = 0;
-        _longLabel.textColor = [UIColor ork_darkGrayColor];
-        [self.containerView addSubview:_longLabel];
-    }
-    return _longLabel;
 }
 
 - (void)tintColorDidChange {
@@ -264,11 +294,7 @@ static const CGFloat cardTopBottomMargin = 2.0;
 
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
-        self.accessoryView.hidden = _selectedItem ? NO : YES;
-        if (_selectedItem) {
-            self.shortLabel.textColor = [self tintColor];
-            self.longLabel.textColor = [[self tintColor] colorWithAlphaComponent:192.0 / 255.0];
-        }
+        self.accessoryView.hidden = self.isCellSelected ? NO : YES;
     }
 }
 
@@ -281,77 +307,176 @@ static const CGFloat cardTopBottomMargin = 2.0;
     }
 }
 
-- (void)setSelectedItem:(BOOL)selectedItem {
-    _selectedItem = selectedItem;
+- (void)setCellSelected:(BOOL)cellSelected {
+    _cellSelected = cellSelected;
     [self updateSelectedItem];
 }
 
-+ (CGFloat)suggestedCellHeightForPrimaryText:(NSString *)shortText primaryTextAttributedString:(NSAttributedString *)primaryTextAttributedString detailText:(NSString *)longText  detailTextAttributedString:(NSAttributedString *)detailTextAttributedString inTableView:(UITableView *)tableView {
-    CGFloat height = 0;
-    
-    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
-    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, tableView.window);
-    CGFloat lastBaselineToBottom = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLastBaselineToBottom, tableView.window);
-    CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
-    CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + LabelRightMargin);
-   
-    if (shortText.length > 0 || primaryTextAttributedString != nil) {
-        static ORKSelectionTitleLabel *shortLabel;
-        if (shortLabel == nil) {
-            shortLabel = [ORKSelectionTitleLabel new];
-            shortLabel.numberOfLines = 0;
-        }
-        
-        shortLabel.frame = CGRectMake(0, 0, labelWidth, 0);
-        shortLabel.text = shortText;
-        if (primaryTextAttributedString) {
-            shortLabel.attributedText = primaryTextAttributedString;
-        }
-        ORKAdjustHeightForLabel(shortLabel);
-        CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = shortLabel.font.ascender;
-    
-        height += firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop + shortLabel.frame.size.height;
+- (void)setupPrimaryLabel {
+    if (!_primaryLabel) {
+        _primaryLabel = [ORKSelectionTitleLabel new];
+        _primaryLabel.numberOfLines = 0;
+        [self.containerView addSubview:_primaryLabel];
+        _primaryLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setupConstraints];
     }
-    
-    if (longText.length > 0 || detailTextAttributedString != nil) {
-        static ORKSelectionSubTitleLabel *longLabel;
-        if (longLabel == nil) {
-            longLabel = [ORKSelectionSubTitleLabel new];
-            longLabel.numberOfLines = 0;
-        }
-        
-        longLabel.frame = CGRectMake(0, 0, labelWidth, 0);
-        longLabel.text = longText;
-        if (detailTextAttributedString) {
-            longLabel.attributedText = detailTextAttributedString;
-        }
-        ORKAdjustHeightForLabel(longLabel);
-        
-        CGFloat longLabelApproximateFirstBaselineOffset = longLabel.font.ascender;
-        
-        if (shortText.length > 0) {
-            height += labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;
-        } else {
-            height += firstBaselineOffsetFromTop - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;
-        }
+}
 
+- (void)setupDetailLabel {
+    if (!_detailLabel) {
+        _detailLabel = [ORKSelectionSubTitleLabel new];
+        _detailLabel.numberOfLines = 0;
+        _detailLabel.textColor = [UIColor ork_darkGrayColor];
+        [self.containerView addSubview:_detailLabel];
+        _detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setupConstraints];
     }
-    
-    height += lastBaselineToBottom;
-   
-    CGFloat minCellHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, tableView.window);
-    
-    return MAX(height, minCellHeight);
+}
+
+- (void)setPrimaryText:(NSString *)primaryText {
+    if (primaryText) {
+        [self setupPrimaryLabel];
+        _primaryLabel.text = primaryText;
+    }
+}
+
+- (void)setPrimaryAttributedText:(NSAttributedString *)primaryAttributedText {
+    if (primaryAttributedText) {
+        [self setupPrimaryLabel];
+        _primaryLabel.attributedText = primaryAttributedText;
+    }
+}
+
+- (void)setDetailText:(NSString *)detailText {
+    if (detailText) {
+        [self setupDetailLabel];
+        _detailLabel.text = detailText;
+    }
+}
+
+- (void)setDetailAttributedText:(NSAttributedString *)detailAttributedText {
+    if (detailAttributedText) {
+        [self setupDetailLabel];
+        _detailLabel.attributedText = detailAttributedText;
+    }
 }
 
 #pragma mark - Accessibility
 
 - (NSString *)accessibilityLabel {
-    return ORKAccessibilityStringForVariables(self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
+    return ORKAccessibilityStringForVariables(_primaryLabel.accessibilityLabel, _detailLabel.accessibilityLabel);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {
-    return UIAccessibilityTraitButton | (self.selectedItem ? UIAccessibilityTraitSelected : 0);
+    return UIAccessibilityTraitButton | (self.isCellSelected ? UIAccessibilityTraitSelected : 0);
+}
+
+@end
+
+
+@implementation ORKChoiceOtherViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style
+              reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    _textViewHidden = NO;
+    [self setupAnswerTextView];
+    return self;
+}
+
+- (void)setupAnswerTextView {
+    if (!_textView) {
+        _textView = [[ORKAnswerTextView alloc] init];
+        _textView.delegate = self;
+        _textView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.containerView addSubview:_textView];
+        [self updateTextView];
+    }
+}
+
+- (void)hideTextView:(BOOL)textViewHidden {
+    _textViewHidden = textViewHidden;
+    [self updateTextView];
+    [self setupConstraints];
+}
+
+- (void)updateTextView {
+    [self.textView setHidden:_textViewHidden];
+}
+
+- (void)addOtherAnswerTextViewConstraints {
+    
+    NSLayoutConstraint *textViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_textView
+                                                                                attribute:NSLayoutAttributeHeight
+                                                                                relatedBy:NSLayoutRelationEqual
+                                                                                   toItem:nil
+                                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                                               multiplier:1.0
+                                                                                 constant:MAX(_textView.font.pointSize, TextViewHeight)];
+    textViewHeightConstraint.priority = UILayoutPriorityDefaultLow;
+    
+    [self.containerConstraints addObjectsFromArray:@[
+                                                     [NSLayoutConstraint constraintWithItem:_textView
+                                                                                  attribute:NSLayoutAttributeTop
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.detailLabel ? : self.primaryLabel
+                                                                                  attribute:NSLayoutAttributeBottom
+                                                                                 multiplier:1.0
+                                                                                   constant:TextViewTopMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_textView
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.containerView
+                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                 multiplier:1.0
+                                                                                   constant:self.cellLeftMargin],
+                                                     [NSLayoutConstraint constraintWithItem:_textView
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.containerView
+                                                                                  attribute:NSLayoutAttributeRight
+                                                                                 multiplier:1.0
+                                                                                   constant:-LabelRightMargin],
+                                                     textViewHeightConstraint,
+                                                     [NSLayoutConstraint constraintWithItem:self.containerView
+                                                                                  attribute:NSLayoutAttributeBottom
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_textView
+                                                                                  attribute:NSLayoutAttributeBottom
+                                                                                 multiplier:1.0
+                                                                                   constant:LabelTopBottomMargin]
+                                                     ]];
+}
+
+// Overriding ContainerView Bottom Constraints
+- (void)addContainerViewBottomConstraint {
+    if (_textViewHidden) {
+        [super addContainerViewBottomConstraint];
+    }
+    else {
+        [self addOtherAnswerTextViewConstraints];
+    }
+}
+
+- (void)setMaskLayers {
+    [super setMaskLayers];
+    _textView.layer.borderWidth = 0.25;
+    [_textView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    _textView.layer.cornerRadius = 10.0;
+}
+
+# pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textChoiceOtherCellDidBecomeFirstResponder:)]) {
+        [self.delegate textChoiceOtherCellDidBecomeFirstResponder:self];
+    }
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textChoiceOtherCellDidResignFirstResponder:)]) {
+        [self.delegate textChoiceOtherCellDidResignFirstResponder:self];
+    }
 }
 
 @end

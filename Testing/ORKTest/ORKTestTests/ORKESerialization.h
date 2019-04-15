@@ -40,6 +40,16 @@ typedef _Nullable id (^ORKESerializationObjectToJSONBlock)(id object);
 typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 
+@interface ORKESerializationLocalizer : NSObject
+
+- (instancetype)initWithBundle:(NSBundle *)bundle tableName:(NSString *)tableName;
+
+@property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, strong) NSString *tableName;
+
+@end
+
+
 @interface ORKESerializer : NSObject
 
 + (nullable NSDictionary *)JSONObjectForObject:(id)object error:(NSError **)error;
@@ -47,6 +57,8 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 + (nullable NSData *)JSONDataForObject:(id)object error:(NSError **)error;
 
 + (nullable id)objectFromJSONObject:(NSDictionary *)object error:(NSError **)error;
+
++ (nullable id)objectFromJSONObject:(NSDictionary *)object localizer:(ORKESerializationLocalizer *)localizer error:(NSError **)error;
 
 + (nullable id)objectFromJSONData:(NSData *)data error:(NSError **)error;
 
