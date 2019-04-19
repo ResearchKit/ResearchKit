@@ -774,8 +774,12 @@
     }];
     
     if (animated) {
-        [_tableView deleteSections:sectionsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
-        [_tableView insertSections:sectionsToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (sectionsToDelete.count > 0) {
+            [_tableView deleteSections:sectionsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        if (sectionsToInsert.count > 0) {
+            [_tableView insertSections:sectionsToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
         [_tableView endUpdates];
     }
 }
@@ -1065,7 +1069,7 @@
         [tableView endEditing:NO];
         
         ORKTableSection *section = _sections[indexPath.section];
-        [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
+        [section.textChoiceCellGroup didSelectCellAtIndexPath:[self unfilteredIndexPathForIndexPath:indexPath]];
     }
     [self filterSections:YES];
 }
