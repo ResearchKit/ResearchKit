@@ -750,10 +750,6 @@
     ORKTaskResult *taskResult = self.taskViewController.result;
     NSArray<ORKFormItem *> *formItems = [self allFormItems];
     
-    if (animated) {
-        [_tableView beginUpdates];
-    }
-    
     NSMutableIndexSet *sectionsToInsert = [NSMutableIndexSet indexSet];
     NSMutableIndexSet *sectionsToDelete = [NSMutableIndexSet indexSet];
     
@@ -774,6 +770,10 @@
     }];
     
     if (animated) {
+        if (sectionsToInsert.count == 0 && sectionsToDelete.count == 0) {
+            return;
+        }
+        [_tableView beginUpdates];
         if (sectionsToDelete.count > 0) {
             [_tableView deleteSections:sectionsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
         }
