@@ -50,6 +50,7 @@
 #import "ORKFormItem_Internal.h"
 #import "ORKResult_Private.h"
 #import "ORKStep_Private.h"
+#import "ORKResultPredicate.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
@@ -295,6 +296,7 @@
     ORKNavigationContainerView *_navigationFooterView;
     NSMutableSet *_formItemCells;
     NSMutableArray<ORKTableSection *> *_sections;
+    NSMutableArray<ORKTableSection *> *_allSections;
     BOOL _skipped;
     UITableViewCell *_currentFirstResponderCell;
     NSArray<NSLayoutConstraint *> *_constraints;
@@ -504,6 +506,7 @@
     
     if (self.isViewLoaded && self.step) {
         [self buildSections];
+        [self filterSections:NO];
         
         _formItemCells = [NSMutableSet new];
         
@@ -626,7 +629,7 @@
 - (void)buildSections {
     NSArray *items = [self allFormItems];
     
-    _sections = [NSMutableArray new];
+    _allSections = [NSMutableArray new];
     ORKTableSection *section = nil;
     
     NSArray *singleSectionTypes = @[@(ORKQuestionTypeBoolean),
@@ -638,8 +641,8 @@
         // Section header
         if ([item impliedAnswerFormat] == nil) {
             // Add new section
-            section = [[ORKTableSection alloc] initWithSectionIndex:_sections.count];
-            [_sections addObject:section];
+            section = [[ORKTableSection alloc] initWithSectionIndex:_allSections.count];
+            [_allSections addObject:section];
             
             // Save title
             section.title = item.text;
@@ -657,8 +660,8 @@
             // Items require individual section
             if (multiCellChoices || multilineTextEntry || scale) {
                 // Add new section
-                section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
-                [_sections addObject:section];
+                section = [[ORKTableSection alloc]  initWithSectionIndex:_allSections.count];
+                [_allSections addObject:section];
                 
                 // Save title
                 section.title = item.text;
@@ -670,8 +673,8 @@
             } else {
                 // In case no section available, create new one.
                 if (section == nil) {
-                    section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
-                    [_sections addObject:section];
+                    section = [[ORKTableSection alloc]  initWithSectionIndex:_allSections.count];
+                    [_allSections addObject:section];
                 }
                 [section addFormItem:item];
             }
@@ -737,6 +740,48 @@
 - (void)updateButtonStates {
     _navigationFooterView.continueEnabled = [self continueButtonEnabled];
     _navigationFooterView.skipEnabled = [self skipButtonEnabled];
+}
+
+- (void)filterSections:(BOOL)animated {
+    
+    NSArray<ORKTableSection *> *oldSections = _sections;
+    _sections = [NSMutableArray new];
+    
+    ORKTaskResult *taskResult = self.taskViewController.result;
+    NSArray<ORKFormItem *> *formItems = [self allFormItems];
+    
+    if (animated) {
+        [_tableView beginUpdates];
+    }
+    
+    NSMutableIndexSet *sectionsToInsert = [NSMutableIndexSet indexSet];
+    NSMutableIndexSet *sectionsToDelete = [NSMutableIndexSet indexSet];
+    
+    [formItems enumerateObjectsUsingBlock:^(ORKFormItem * _Nonnull formItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL hideFormItem = [formItem.hideItemPredicate evaluateWithObject:@[taskResult]
+                                                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName : taskResult.identifier}];
+        ORKTableSection *section = _allSections[idx];
+        if (!hideFormItem) {
+            [_sections addObject:section];
+            if (![oldSections containsObject:section]) {
+                [sectionsToInsert addIndex:_sections.count - 1];
+            }
+        } else {
+            if ([oldSections containsObject:section]) {
+                [sectionsToDelete addIndex:[oldSections indexOfObject:section]];
+            }
+        }
+    }];
+    
+    if (animated) {
+        [_tableView deleteSections:sectionsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView insertSections:sectionsToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView endUpdates];
+    }
+}
+
+- (NSIndexPath *)unfilteredIndexPathForIndexPath:(NSIndexPath *)filteredIndexPath {
+    return [NSIndexPath indexPathForRow:filteredIndexPath.row inSection:[_allSections indexOfObject:_sections[filteredIndexPath.section]]];
 }
 
 #pragma mark Helpers
@@ -860,7 +905,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
+    NSIndexPath *unfilteredIndexPath = [self unfilteredIndexPathForIndexPath:indexPath];
+    NSString *identifier = [NSString stringWithFormat:@"%ld-%ld",(long)unfilteredIndexPath.section, (long)unfilteredIndexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -876,7 +922,7 @@
             [section.textChoiceCellGroup setAnswer:answer];
             section.textChoiceCellGroup.delegate = self;
             ORKChoiceViewCell *choiceViewCell = nil;
-            choiceViewCell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+            choiceViewCell = [section.textChoiceCellGroup cellAtIndexPath:unfilteredIndexPath withReuseIdentifier:identifier];
             if ([choiceViewCell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
                 ORKChoiceOtherViewCell *choiceOtherViewCell = (ORKChoiceOtherViewCell *)choiceViewCell;
                 choiceOtherViewCell.delegate = self;
@@ -1021,6 +1067,7 @@
         ORKTableSection *section = _sections[indexPath.section];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
     }
+    [self filterSections:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
