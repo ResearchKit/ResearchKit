@@ -707,8 +707,11 @@
 }
 
 - (BOOL)allNonOptionalFormItemsHaveAnswers {
+    ORKTaskResult *taskResult = self.taskViewController.result;
     for (ORKFormItem *item in [self formItems]) {
-        if (!item.optional) {
+        BOOL hideFormItem = [item.hideItemPredicate evaluateWithObject:@[taskResult]
+                                                 substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName : taskResult.identifier}];
+        if (!item.optional && !hideFormItem) {
             id answer = _savedAnswers[item.identifier];
             if (ORKIsAnswerEmpty(answer) || ![item.impliedAnswerFormat isAnswerValid:answer]) {
                 return NO;
