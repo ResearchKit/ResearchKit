@@ -791,6 +791,10 @@
     return [NSIndexPath indexPathForRow:filteredIndexPath.row inSection:[_allSections indexOfObject:_sections[filteredIndexPath.section]]];
 }
 
+- (NSIndexPath *)filteredIndexPathForIndexPath:(NSIndexPath *)unfilteredIndexPath {
+    return [NSIndexPath indexPathForRow:unfilteredIndexPath.row inSection:[_sections indexOfObject:_allSections[unfilteredIndexPath.section]]];
+}
+
 #pragma mark Helpers
 
 - (ORKFormStep *)formStep {
@@ -1199,8 +1203,9 @@ static NSString *const _ORKOriginalAnswersRestoreKey = @"originalAnswers";
 #pragma mark ORKTextChoiceCellGroupDelegate
 
 - (void)answerChangedForIndexPath:(NSIndexPath *)indexPath {
-    ORKTableSection *section = _sections[indexPath.section];
-    ORKTableCellItem *cellItem = section.items[indexPath.row];
+    NSIndexPath *filteredIndexPath = [self filteredIndexPathForIndexPath:indexPath];
+    ORKTableSection *section = _sections[filteredIndexPath.section];
+    ORKTableCellItem *cellItem = section.items[filteredIndexPath.row];
     id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]]) ? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
     NSString *formItemIdentifier = cellItem.formItem.identifier;
     if (answer && formItemIdentifier) {
