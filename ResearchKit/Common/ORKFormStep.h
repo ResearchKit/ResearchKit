@@ -203,7 +203,7 @@ ORK_CLASS_AVAILABLE
 /**
  A predicate that when true, hides the item from display.
  */
-@property (nonatomic, nullable) NSPredicate *hideItemPredicate;
+@property (nonatomic, nullable) NSPredicate *hidePredicate;
 
 /**
  Returns an form item that can be used for confirming a text entry.
