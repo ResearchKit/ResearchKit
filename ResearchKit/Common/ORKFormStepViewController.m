@@ -297,7 +297,7 @@
     NSMutableSet *_formItemCells;
     NSMutableArray<ORKTableSection *> *_sections;
     NSMutableArray<ORKTableSection *> *_allSections;
-    NSMutableArray<ORKFormItem *> *_filteredForms;
+    NSMutableArray<ORKFormItem *> *_hiddenFormItems;
     BOOL _skipped;
     UITableViewCell *_currentFirstResponderCell;
     NSArray<NSLayoutConstraint *> *_constraints;
@@ -507,7 +507,7 @@
     
     if (self.isViewLoaded && self.step) {
         [self buildSections];
-        [self filterSections:NO];
+        [self hideSections];
         
         _formItemCells = [NSMutableSet new];
         
@@ -746,11 +746,11 @@
     _navigationFooterView.skipEnabled = [self skipButtonEnabled];
 }
 
-- (void)filterSections:(BOOL)animated {
+- (void)hideSections {
     
     NSArray<ORKTableSection *> *oldSections = _sections;
     _sections = [NSMutableArray new];
-    _filteredForms = [NSMutableArray new];
+    _hiddenFormItems = [NSMutableArray new];
     
     ORKTaskResult *taskResult = self.taskViewController.result;
     NSArray<ORKFormItem *> *formItems = [self allFormItems];
@@ -771,11 +771,11 @@
             if ([oldSections containsObject:section]) {
                 [sectionsToDelete addIndex:[oldSections indexOfObject:section]];
             }
-            [_filteredForms addObject:formItem];
+            [_hiddenFormItems addObject:formItem];
         }
     }];
     
-    if (animated) {
+    if (_tableView) {
         if (sectionsToInsert.count == 0 && sectionsToDelete.count == 0) {
             return;
         }
@@ -842,7 +842,7 @@
     NSMutableArray *qResults = [NSMutableArray new];
     for (ORKFormItem *item in items) {
         
-        if ([_filteredForms containsObject:item]) {
+        if ([_hiddenFormItems containsObject:item]) {
             continue;
         }
         
@@ -1085,7 +1085,7 @@
         ORKTableSection *section = _sections[indexPath.section];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:[self unfilteredIndexPathForIndexPath:indexPath]];
     }
-    [self filterSections:YES];
+    [self hideSections];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
