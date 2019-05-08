@@ -775,7 +775,7 @@
         }
     }];
     
-    if (_tableView) {
+    if (_tableView != nil) {
         if (sectionsToInsert.count == 0 && sectionsToDelete.count == 0) {
             return;
         }
