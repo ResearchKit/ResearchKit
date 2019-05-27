@@ -56,4 +56,17 @@
     return NO;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityRotationStep *step = [super copyWithZone:zone];
+    return step;
+}
+
+- (BOOL)isEqual:(id)other {
+    return other == self || [super isEqual:other];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 @end

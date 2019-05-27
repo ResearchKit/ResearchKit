@@ -57,4 +57,34 @@
     return NO;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    ORKTouchAbilityScrollStep *step = [super copyWithZone:zone];
+    step.horizontal = self.isHorizontal;
+    return step;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, horizontal);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, horizontal);
+}
+
+- (BOOL)isEqual:(id)other {
+    BOOL isParentSame = [super isEqual:other];
+    
+    __typeof(self) castObject = other;
+    return isParentSame && self.isHorizontal == castObject.isHorizontal;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 @end
