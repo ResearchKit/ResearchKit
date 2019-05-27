@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTouchAbilityScrollTrial;
 
 ORK_CLASS_AVAILABLE
-@interface ORKTouchAbilityScrollResult : ORKStepResult
+@interface ORKTouchAbilityScrollResult : ORKResult
 @property (nonatomic, copy) NSArray<ORKTouchAbilityScrollTrial *> *trials;
 @end
 
