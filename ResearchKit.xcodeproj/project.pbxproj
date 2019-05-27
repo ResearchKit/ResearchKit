@@ -152,7 +152,7 @@
 		6500FC9E21CA3C0B00AC1CA3 /* ORKTouchAbilityRotationTrial.m in Sources */ = {isa = PBXBuildFile; fileRef = 6500FC9C21CA3C0B00AC1CA3 /* ORKTouchAbilityRotationTrial.m */; };
 		6500FCA121CA3C3000AC1CA3 /* ORKTouchAbilityRotationResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 6500FC9F21CA3C3000AC1CA3 /* ORKTouchAbilityRotationResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6500FCA221CA3C3000AC1CA3 /* ORKTouchAbilityRotationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6500FCA021CA3C3000AC1CA3 /* ORKTouchAbilityRotationResult.m */; };
-		6500FCA521CA472B00AC1CA3 /* ORKTouchAbilityArrowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6500FCA321CA472B00AC1CA3 /* ORKTouchAbilityArrowView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6500FCA521CA472B00AC1CA3 /* ORKTouchAbilityArrowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6500FCA321CA472B00AC1CA3 /* ORKTouchAbilityArrowView.h */; };
 		6500FCA621CA472B00AC1CA3 /* ORKTouchAbilityArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6500FCA421CA472B00AC1CA3 /* ORKTouchAbilityArrowView.m */; };
 		6506EB25218057FC002DF5DB /* ORKTouchAbilityTapContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6506EB23218057FC002DF5DB /* ORKTouchAbilityTapContentView.h */; };
 		6506EB26218057FC002DF5DB /* ORKTouchAbilityTapContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6506EB24218057FC002DF5DB /* ORKTouchAbilityTapContentView.m */; };
@@ -3830,6 +3830,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				tr,

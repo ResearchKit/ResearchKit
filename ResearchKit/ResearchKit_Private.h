@@ -76,6 +76,12 @@
 #import <ResearchKit/ORKWalkingTaskStep.h>
 #import <ResearchKit/ORKSpeechRecognitionStep.h>
 #import <ResearchKit/ORKSpeechInNoiseStep.h>
+#import <ResearchKit/ORKTouchAbilityTapStep.h>
+#import <ResearchKit/ORKTouchAbilityLongPressStep.h>
+#import <ResearchKit/ORKTouchAbilitySwipeStep.h>
+#import <ResearchKit/ORKTouchAbilityScrollStep.h>
+#import <ResearchKit/ORKTouchAbilityPinchStep.h>
+#import <ResearchKit/ORKTouchAbilityRotationStep.h>
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
