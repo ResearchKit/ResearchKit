@@ -194,9 +194,9 @@
             if (lastTouch.phase != UITouchPhaseEnded &&
                 CGPointEqualToPoint(lastTouch.locationInWindow, firstTranslatedTouch.previousLocationInWindow)) {
                 
-                NSMutableArray *touches = [NSMutableArray arrayWithArray:track.touches];
-                [touches addObjectsFromArray:translatedTouches];
-                track.touches = touches;
+                NSMutableArray *trackTouches = [NSMutableArray arrayWithArray:track.touches];
+                [trackTouches addObjectsFromArray:translatedTouches];
+                track.touches = trackTouches;
             }
         }
     }
