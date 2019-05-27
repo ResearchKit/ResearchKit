@@ -200,22 +200,25 @@
     
     // Animate the target view.
     
+    ORKWeakTypeOf(contentView) weakContentView = contentView;
     [contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+        
+        ORKStrongTypeOf(contentView) strongContentView = weakContentView;
         
         // Stop tracking new touch events.
         
-        [contentView endTrial];
+        [strongContentView endTrial];
         
-        [self.trials addObject:(ORKTouchAbilityLongPressTrial *)contentView.trial];
+        [self.trials addObject:(ORKTouchAbilityLongPressTrial *)strongContentView.trial];
         
         // Determind if should continue or finish.
         
         if (self.targetPointsQueue.count > 0) {
             
             // Reload and start tracking again.
-            [contentView reloadData];
-            [contentView setContentViewHidden:NO animated:NO];
-            [contentView startTrial];
+            [strongContentView reloadData];
+            [strongContentView setContentViewHidden:NO animated:NO];
+            [strongContentView startTrial];
             
         } else {
             

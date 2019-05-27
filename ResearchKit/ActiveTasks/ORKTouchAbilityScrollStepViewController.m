@@ -194,7 +194,7 @@ ORKTouchAbilityContentViewDelegate
 
 - (void)touchAbilityContentViewDidCompleteNewTracks:(ORKTouchAbilityContentView *)contentView {
     
-    self.endTrialWork = dispatch_block_create(0, ^{
+    self.endTrialWork = dispatch_block_create(DISPATCH_BLOCK_NO_QOS_CLASS, ^{
         [self endTrial];
     });
     
@@ -215,29 +215,32 @@ ORKTouchAbilityContentViewDelegate
     
     // Animate the target view.
     
+    ORKWeakTypeOf(self) weakSelf = self;
     [self.contentView setContentViewHidden:YES animated:YES completion:^(BOOL finished) {
+        
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
         
         // Stop tracking new touch events.
         
-        [self.contentView endTrial];
+        [strongSelf.contentView endTrial];
         
-        [self.trials addObject:(ORKTouchAbilityScrollTrial *)self.contentView.trial];
+        [strongSelf.trials addObject:(ORKTouchAbilityScrollTrial *)strongSelf.contentView.trial];
         
         
         // Determind if should continue or finish.
         
-        self.currentTrialIndex += 1;
-        if (self.currentTrialIndex < self.trialDataQueue.count) {
+        strongSelf.currentTrialIndex += 1;
+        if (strongSelf.currentTrialIndex < strongSelf.trialDataQueue.count) {
             
             // Reload and start tracking again.
-            [self.contentView reloadData];
-            [self.contentView setContentViewHidden:NO animated:NO];
-            [self.contentView startTrial];
+            [strongSelf.contentView reloadData];
+            [strongSelf.contentView setContentViewHidden:NO animated:NO];
+            [strongSelf.contentView startTrial];
             
         } else {
             
             // Finish step.
-            [self finish];
+            [strongSelf finish];
         }
         
     }];
