@@ -551,6 +551,24 @@
 "SPEECH_IN_NOISE_SPEAK_TITLE" = "Speak";
 "SPEECH_IN_NOISE_SPEAK_TEXT" = "Repeat what you heard.";
 
+/* Touch Ability active task. */
+"TOUCH_ABILITY_INSTRUCTION_TITLE" = "Touch Ability Activity";
+"TOUCH_ABILITY_INSTRUCTION_DETAIL" = "This activity will measure your touch screen usability. Please locate a comfortable spot to proceed with this activity.";
+"TOUCH_ABILITY_TAP_TITLE" = "Tap Ability";
+"TOUCH_ABILITY_TAP_TEXT" = "Please click on the squares appear on the screen. Square will disappear upon clicking. Please await for next square to appear before next click.";
+"TOUCH_ABILITY_LONG_PRESS_TITLE" = "Long Press Ability";
+"TOUCH_ABILITY_LONG_PRESS_TEXT" = "Please long press on the squares appear on the screen for at least one second before lift up from screen. Once finger lift up, square will disappear despite whether it is long pressed for one second or not. Please await for next square to appear before next press.";
+"TOUCH_ABILITY_SWIPE_TITLE" = "Swipe Ability";
+"TOUCH_ABILITY_SWIPE_TEXT" = "Please swipe in direction of the arrow on the screen. arrow will disappear upon swiping completion. Please await for next arrow to appear before next swipe.";
+"TOUCH_ABILITY_VERTICAL_SCROLL_TITLE" = "Vertical Scroll Ability";
+"TOUCH_ABILITY_VERTICAL_SCROLL_TEXT" = "This test will require you to scroll through a list of number, and drag the item labeled by the color into a dotted line box. Once hand is lifted up from the list and stop scrolling for one second, list and box will disappear. Please await for next list to appear before next test.";
+"TOUCH_ABILITY_HORIZONTAL_SCROLL_TITLE" = "Horizontal Scroll Ability";
+"TOUCH_ABILITY_HORIZONTAL_SCROLL_TEXT" = "This test will require you to scroll through a horizontal list of number, and drag the item labeled by the color into a dotted line box. Once hand is lifted up from the list and stop scrolling for one second, list and box will disappear. Please await for next list to appear before next trial.";
+"TOUCH_ABILITY_PINCH_TITLE" = "Pinch Ability";
+"TOUCH_ABILITY_PINCH_TEXT" = "Please use two finger pinching gesture to readjust the size of cube similar the dash line box. Once completing and lifting up your fingers, cube and box will disappear. Please await for cube and box to appear before next trial.";
+"TOUCH_ABILITY_ROTATION_TITLE" = "Rotation Ability";
+"TOUCH_ABILITY_ROTATION_TEXT" = "Please use two finger rotating gesture to readjust the arrow to align with dashed arrow.  Once completing and lifting up your fingers, arrow will disappear. Please await for cube and box to appear before next trial.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

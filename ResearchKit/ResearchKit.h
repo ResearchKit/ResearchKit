@@ -116,4 +116,15 @@
 #import <ResearchKit/ORKDataCollectionManager.h>
 #import <ResearchKit/ORKCollector.h>
 
+#import <ResearchKit/ORKTouchAbilityTouch.h>
+#import <ResearchKit/ORKTouchAbilityTrack.h>
+#import <ResearchKit/ORKTouchAbilityGestureRecoginzerEvent.h>
+#import <ResearchKit/ORKTouchAbilityTrial.h>
+#import <ResearchKit/ORKTouchAbilityTapTrial.h>
+#import <ResearchKit/ORKTouchAbilityLongPressTrial.h>
+#import <ResearchKit/ORKTouchAbilitySwipeTrial.h>
+#import <ResearchKit/ORKTouchAbilityScrollTrial.h>
+#import <ResearchKit/ORKTouchAbilityPinchTrial.h>
+#import <ResearchKit/ORKTouchAbilityRotationTrial.h>
+
 #import <ResearchKit/ORKDeprecated.h>

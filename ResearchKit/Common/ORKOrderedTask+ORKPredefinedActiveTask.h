@@ -681,6 +681,14 @@ NS_ASSUME_NONNULL_BEGIN
                                         trailType:(ORKTrailMakingTypeIdentifier)trailType
                                           options:(ORKPredefinedTaskOption)options;
 
+
+
++ (ORKOrderedTask *)touchAbilityTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       taskOptions:(ORKTouchAbilityTaskOption)taskOptions
+                                           options:(ORKPredefinedTaskOption)options;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
