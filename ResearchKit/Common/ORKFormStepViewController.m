@@ -759,66 +759,106 @@
 }
 
 - (void)hideSections {
-    NSArray<ORKTableSection *> *oldSections = _sections;
-    _sections = [NSMutableArray new];
-    
-    NSArray *oldHiddenCellItems = _hiddenCellItems;
-    
-    _hiddenCellItems = [NSMutableArray new];
+    NSMutableArray<ORKTableSection *> *newSections = [NSMutableArray new];
+    NSMutableArray<ORKTableCellItem *> *newHiddenCellItems = [NSMutableArray new];
     _hiddenFormItems = [NSMutableArray new];
+    
+    NSMutableArray *deleteRows = [NSMutableArray new];
+    NSMutableArray *insertRows = [NSMutableArray new];
+    NSMutableIndexSet *deleteSections = [NSMutableIndexSet new];
+    NSMutableIndexSet *insertSections = [NSMutableIndexSet new];
+    NSMutableIndexSet *sectionsToReload = [NSMutableIndexSet new];
     
     ORKTaskResult *taskResult = self.taskViewController.result;
     
-    NSMutableIndexSet *sectionsToInsert = [NSMutableIndexSet indexSet];
-    NSMutableIndexSet *sectionsToDelete = [NSMutableIndexSet indexSet];
-    NSMutableIndexSet *sectionsToUpdateCells = [NSMutableIndexSet indexSet];
-    
     for (ORKTableSection *section in _allSections) {
         BOOL hideSection = YES;
+        NSUInteger currentSectionIndex = [_sections indexOfObject:section];
+        NSMutableArray *pendingRowInsertions = [NSMutableArray new];
+        NSMutableArray *pendingRowDeletions = [NSMutableArray new];
         for (ORKFormItem *formItem in section.formItems) {
             BOOL formItemIsHidden = [formItem.hidePredicate evaluateWithObject:@[taskResult]
                                                          substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName : taskResult.identifier}];
             ORKTableCellItem *cellItem = [section cellItemForFormItem:formItem];
+            NSArray *currentShowingCellItems = [self showingCellItemsForSection:section];
+            NSUInteger currentRowIndex = [currentShowingCellItems indexOfObject:cellItem];
+            NSMutableArray *newRows = [NSMutableArray new];
             if (formItemIsHidden) {
-                if (cellItem) {
-                    [_hiddenCellItems addObject:cellItem];
+                if (currentRowIndex != NSNotFound && currentSectionIndex != NSNotFound) {
+                    [pendingRowDeletions addObject:[NSIndexPath indexPathForRow:currentRowIndex inSection:currentSectionIndex]];
                 }
                 [_hiddenFormItems addObject:formItem];
+                if (cellItem) {
+                    [newHiddenCellItems addObject:cellItem];
+                }
             } else {
+                if (cellItem && currentRowIndex == NSNotFound) {
+                    [pendingRowInsertions addObject:[NSIndexPath indexPathForRow:newRows.count inSection:newSections.count]];
+                }
+                if (cellItem) {
+                    [newRows addObject:cellItem];
+                }
                 hideSection = NO;
             }
         }
-        if (!hideSection) {
-            [_sections addObject:section];
-            if (![oldSections containsObject:section]) {
-                [sectionsToInsert addIndex:_sections.count - 1];
+        
+        if (hideSection) {
+            if (currentSectionIndex != NSNotFound) {
+                [deleteSections addIndex:currentSectionIndex];
             }
-            if (section.formItems.count > 1 && ![oldHiddenCellItems isEqualToArray:_hiddenCellItems]) {
-                [sectionsToUpdateCells addIndex:_sections.count - 1];
-            }
+            [deleteRows addObjectsFromArray:pendingRowDeletions];
+            [insertRows addObjectsFromArray:pendingRowInsertions];
         } else {
-            if ([oldSections containsObject:section]) {
-                [sectionsToDelete addIndex:[oldSections indexOfObject:section]];
+            [newSections addObject:section];
+            if (currentSectionIndex == NSNotFound) {
+                [insertSections addIndex:newSections.count - 1];
+                [deleteRows addObjectsFromArray:pendingRowDeletions];
+                [insertRows addObjectsFromArray:pendingRowInsertions];
+            } else if (section.formItems.count > 1) {
+                [sectionsToReload addIndex:newSections.count - 1];
             }
         }
     }
-
+    
     if (_tableView != nil) {
-        if (sectionsToInsert.count == 0 && sectionsToDelete.count == 0 && sectionsToUpdateCells.count == 0) {
-            return;
+        if (insertSections.count > 0 || deleteSections.count > 0 || insertRows.count > 0 || deleteRows.count > 0) {
+            [_tableView beginUpdates];
+            _sections = newSections;
+            _hiddenCellItems = newHiddenCellItems;
+            if (deleteRows.count > 0) {
+                [_tableView deleteRowsAtIndexPaths:deleteRows withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            if (deleteSections.count > 0) {
+                [_tableView deleteSections:deleteSections withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            if (insertSections.count > 0) {
+                [_tableView insertSections:insertSections withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            if (insertRows.count > 0) {
+                [_tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            [_tableView endUpdates];
+        } else {
+            _sections = newSections;
+            _hiddenCellItems = newHiddenCellItems;
         }
-        [_tableView beginUpdates];
-        if (sectionsToDelete.count > 0) {
-            [_tableView deleteSections:sectionsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (sectionsToReload.count > 0) {
+            [_tableView reloadSections:sectionsToReload withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-        if (sectionsToInsert.count > 0) {
-            [_tableView insertSections:sectionsToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-        [_tableView endUpdates];
-        if (sectionsToUpdateCells.count > 0) {
-            [_tableView reloadSections:sectionsToUpdateCells withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        _sections = newSections;
+        _hiddenCellItems = newHiddenCellItems;
+    }
+}
+
+- (NSArray *)showingCellItemsForSection:(ORKTableSection *)section {
+    NSMutableArray *showingCells = [NSMutableArray new];
+    for (ORKTableCellItem *cellItem in section.items) {
+        if (![_hiddenCellItems containsObject:cellItem]) {
+            [showingCells addObject:cellItem];
         }
     }
+    return showingCells;
 }
 
 - (NSIndexPath *)unhiddenIndexPathForIndexPath:(NSIndexPath *)hiddenIndexPath {
@@ -946,7 +986,7 @@
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
     ORKTableSection *sectionObject = (ORKTableSection *)_sections[section];
-    return sectionObject.items.count;
+    return [self showingCellItemsForSection:sectionObject].count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -955,14 +995,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *unhiddenIndexPath = [self unhiddenIndexPathForIndexPath:indexPath];
+    
+    ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
+    NSArray <ORKTableCellItem *> *showingCellItems = [self showingCellItemsForSection:section];
+    ORKTableCellItem *cellItem = showingCellItems[indexPath.row];
+    
     NSString *identifier = [NSString stringWithFormat:@"%ld-%ld",(long)unhiddenIndexPath.section, (long)unhiddenIndexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-    ORKTableCellItem *cellItem = [section items][indexPath.row];
+    UITableViewCell *cell;
+    
+    // if the state of the tableview changes due to dynamic hiding/showing via a hidePredicate, the
+    // corner radius of the cells in the section may change based on which rows are first, middle, and
+    // last. Forcing a reload of the cell ensures they are drawn correctly based on the new state.
+    if (section.items.count < 2) {
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    }
     
     if (cell == nil) {
-        bool isLastItem = [section items].count == indexPath.row + 1;
+        bool isLastItem = showingCellItems.count == indexPath.row + 1;
+
         bool isFirstItemWithSectionWithoutTitle = indexPath.row == 0 && !section.title;
         ORKFormItem *formItem = cellItem.formItem;
         id answer = _savedAnswers[formItem.identifier];
@@ -1071,7 +1122,7 @@
         [cell setNeedsDisplay];
     }
     cell.userInteractionEnabled = !self.readOnlyMode;
-    cell.hidden = [_hiddenCellItems containsObject:cellItem];
+    
     return cell;
 }
 
@@ -1120,8 +1171,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row]);
-    return [_hiddenCellItems containsObject:cellItem] ? 0 : UITableViewAutomaticDimension;
+    return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
