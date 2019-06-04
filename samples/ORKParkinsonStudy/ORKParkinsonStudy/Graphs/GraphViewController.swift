@@ -40,6 +40,7 @@ class GraphViewController: UITableViewController {
     var chartTableViewCells: [UITableViewCell]!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         createGraph()
         tableView.backgroundColor = Colors.tableViewBackgroundColor.color
     }
@@ -52,8 +53,8 @@ class GraphViewController: UITableViewController {
     func createGraph() {
         // ORKBarGraphChartView
         barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as? BarGraphChartTableViewCell
-        if (barGraphChartTableViewCell == nil) {
-            barGraphChartTableViewCell = BarGraphChartTableViewCell.init(style: .default, reuseIdentifier: "cell")
+        if barGraphChartTableViewCell == nil {
+            barGraphChartTableViewCell = BarGraphChartTableViewCell(style: .default, reuseIdentifier: "cell")
         }
         
         barGraphChartTableViewCell.titleLabel.text = "June 4, 2018"
@@ -67,7 +68,7 @@ class GraphViewController: UITableViewController {
         barGraphChartView.showsHorizontalReferenceLines = true
         barGraphChartView.showsVerticalReferenceLines = true
         barGraphChartView.yAxisLabelFactors = [0.0, 0.25, 0.5, 0.75, 1.0]
-
+        
         chartTableViewCells = [barGraphChartTableViewCell]
         tableView.reloadData()
     }
@@ -81,7 +82,7 @@ class GraphViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chartTableViewCells[(indexPath as NSIndexPath).row];
+        let cell = chartTableViewCells[(indexPath as NSIndexPath).row]
         return cell
     }
     
@@ -90,7 +91,7 @@ class GraphViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return section == 0 ? LegendSectionHeaderView.init(legends: [GraphLegend.init(title: "Tremor", color: Colors.tremorGraphColor.color), GraphLegend.init(title: "Dyskinesia", color: Colors.dyskinesiaSymptomGraphColor.color)], layout: .horizontal) : nil
+        return section == 0 ? LegendSectionHeaderView(legends: [GraphLegend(title: "Tremor", color: Colors.tremorGraphColor.color), GraphLegend(title: "Dyskinesia", color: Colors.dyskinesiaSymptomGraphColor.color)], layout: .horizontal) : nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +117,7 @@ class GraphLegend: NSObject {
 }
 
 class LegendSectionHeaderView: UIView {
-    var legends:[GraphLegend]
+    var legends: [GraphLegend]
     var axis: NSLayoutConstraint.Axis
     var stackView: UIStackView!
     
@@ -132,7 +133,7 @@ class LegendSectionHeaderView: UIView {
     }
     
     func setupView() {
-        if (stackView == nil) {
+        if stackView == nil {
             stackView = UIStackView()
         }
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -141,40 +142,40 @@ class LegendSectionHeaderView: UIView {
         addLegends()
         self.addSubview(stackView)
         NSLayoutConstraint.activate([
-            NSLayoutConstraint.init(item: stackView,
-                                    attribute: .top,
-                                    relatedBy: .equal,
-                                    toItem: self,
-                                    attribute: .top,
-                                    multiplier: 1.0,
-                                    constant: 0.0),
-            NSLayoutConstraint.init(item: stackView,
-                                    attribute: .bottom,
-                                    relatedBy: .equal,
-                                    toItem: self,
-                                    attribute: .bottom,
-                                    multiplier: 1.0,
-                                    constant: 0.0),
-            NSLayoutConstraint.init(item: stackView,
-                                    attribute: .left,
-                                    relatedBy: .equal,
-                                    toItem: self,
-                                    attribute: .left,
-                                    multiplier: 1.0,
-                                    constant: 0.0),
-            NSLayoutConstraint.init(item: stackView,
-                                    attribute: .right,
-                                    relatedBy: .equal,
-                                    toItem: self,
-                                    attribute: .right,
-                                    multiplier: 1.0,
-                                    constant: 0.0)
+            NSLayoutConstraint(item: stackView,
+                               attribute: .top,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .top,
+                               multiplier: 1.0,
+                               constant: 0.0),
+            NSLayoutConstraint(item: stackView,
+                               attribute: .bottom,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .bottom,
+                               multiplier: 1.0,
+                               constant: 0.0),
+            NSLayoutConstraint(item: stackView,
+                               attribute: .left,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .left,
+                               multiplier: 1.0,
+                               constant: 0.0),
+            NSLayoutConstraint(item: stackView,
+                               attribute: .right,
+                               relatedBy: .equal,
+                               toItem: self,
+                               attribute: .right,
+                               multiplier: 1.0,
+                               constant: 0.0)
             ])
     }
     
     func addLegends() {
         for legend in legends {
-            let view = UIView.init(frame: CGRect.init(x: 0.0, y: 0.0, width: 15.0, height: 15.0))
+            let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 15.0))
             view.translatesAutoresizingMaskIntoConstraints = false
             let colorView = UIView()
             colorView.translatesAutoresizingMaskIntoConstraints = false
@@ -188,48 +189,48 @@ class LegendSectionHeaderView: UIView {
             view.addSubview(legendLabel)
             
             NSLayoutConstraint.activate([
-                NSLayoutConstraint.init(item: legendLabel,
-                                        attribute: .centerY,
-                                        relatedBy: .equal,
-                                        toItem: view,
-                                        attribute: .centerY,
-                                        multiplier: 1.0,
-                                        constant: 0.0),
-                NSLayoutConstraint.init(item: legendLabel,
-                                        attribute: .centerX,
-                                        relatedBy: .equal,
-                                        toItem: view,
-                                        attribute: .centerX,
-                                        multiplier: 1.0,
-                                        constant: 0.0),
-                NSLayoutConstraint.init(item: colorView,
-                                        attribute: .centerY,
-                                        relatedBy: .equal,
-                                        toItem: view,
-                                        attribute: .centerY,
-                                        multiplier: 1.0,
-                                        constant: 0.0),
-                NSLayoutConstraint.init(item: colorView,
-                                        attribute: .right,
-                                        relatedBy: .equal,
-                                        toItem: legendLabel,
-                                        attribute: .left,
-                                        multiplier: 1.0,
-                                        constant: -5.0),
-                NSLayoutConstraint.init(item: colorView,
-                                        attribute: .width,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .notAnAttribute,
-                                        multiplier: 1.0,
-                                        constant: 10.0),
-                NSLayoutConstraint.init(item: colorView,
-                                        attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil,
-                                        attribute: .notAnAttribute,
-                                        multiplier: 1.0,
-                                        constant: 10.0)
+                NSLayoutConstraint(item: legendLabel,
+                                   attribute: .centerY,
+                                   relatedBy: .equal,
+                                   toItem: view,
+                                   attribute: .centerY,
+                                   multiplier: 1.0,
+                                   constant: 0.0),
+                NSLayoutConstraint(item: legendLabel,
+                                   attribute: .centerX,
+                                   relatedBy: .equal,
+                                   toItem: view,
+                                   attribute: .centerX,
+                                   multiplier: 1.0,
+                                   constant: 0.0),
+                NSLayoutConstraint(item: colorView,
+                                   attribute: .centerY,
+                                   relatedBy: .equal,
+                                   toItem: view,
+                                   attribute: .centerY,
+                                   multiplier: 1.0,
+                                   constant: 0.0),
+                NSLayoutConstraint(item: colorView,
+                                   attribute: .right,
+                                   relatedBy: .equal,
+                                   toItem: legendLabel,
+                                   attribute: .left,
+                                   multiplier: 1.0,
+                                   constant: -5.0),
+                NSLayoutConstraint(item: colorView,
+                                   attribute: .width,
+                                   relatedBy: .equal,
+                                   toItem: nil,
+                                   attribute: .notAnAttribute,
+                                   multiplier: 1.0,
+                                   constant: 10.0),
+                NSLayoutConstraint(item: colorView,
+                                   attribute: .height,
+                                   relatedBy: .equal,
+                                   toItem: nil,
+                                   attribute: .notAnAttribute,
+                                   multiplier: 1.0,
+                                   constant: 10.0)
                 ])
             
             stackView.addArrangedSubview(view)

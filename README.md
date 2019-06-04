@@ -54,6 +54,7 @@ available through use of the *HealthKit* and *CoreMotion* APIs if you are progra
 while *iPhone* sensors actively collect data. See
 *[Active Tasks](http://researchkit.org/docs/docs/ActiveTasks/ActiveTasks.html)* for more
 information.
+ResearchKit active tasks are not diagnostic tools nor medical devices of any kind and output from those active tasks may not be used for diagnosis. Developers and researchers are responsible for complying with all applicable laws and regulations with respect to further development and use of the active tasks.
 
 Charts
 ------------

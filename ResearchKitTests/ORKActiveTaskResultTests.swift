@@ -39,6 +39,7 @@ class ORKAmslerGridResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         let bundle = Bundle(identifier: "org.researchkit.ResearchKit")
         image = UIImage(named: "amslerGrid", in: bundle, compatibleWith: nil)
@@ -71,6 +72,7 @@ class ORKHolePegTestResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKHolePegTestResult(identifier: identifier)
         
@@ -83,7 +85,7 @@ class ORKHolePegTestResultTests: XCTestCase {
         result.totalFailures = 5
         result.totalTime = 5.0
         result.totalDistance = 10.0
-        result.samples = [2,4]
+        result.samples = [2, 4]
     }
 
     func testProperties() {
@@ -97,7 +99,11 @@ class ORKHolePegTestResultTests: XCTestCase {
         XCTAssertEqual(result.totalFailures, 5)
         XCTAssertEqual(result.totalTime, 5.0)
         XCTAssertEqual(result.totalDistance, 10.0)
-        XCTAssertEqual(result.samples as! [Int], [2,4])
+        guard let samples = result.samples as? [Int] else {
+            XCTFail("unable to cast samples array to array of int")
+            return
+        }
+        XCTAssertEqual(samples, [2, 4])
     }
     
     func testIsEqual() {
@@ -117,7 +123,7 @@ class ORKHolePegTestResultTests: XCTestCase {
         newResult.totalFailures = 5
         newResult.totalTime = 5.0
         newResult.totalDistance = 10.0
-        newResult.samples = [2,4]
+        newResult.samples = [2, 4]
         newResult.startDate = date
         newResult.endDate = date
         
@@ -132,6 +138,7 @@ class ORKPSATResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "TESTS"
         result = ORKPSATResult(identifier: identifier)
         
@@ -188,6 +195,7 @@ class ORKRangeOfMotionResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKRangeOfMotionResult(identifier: identifier)
         
@@ -232,6 +240,7 @@ class ORKReactionTimeResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKReactionTimeResult(identifier: identifier)
         
@@ -269,6 +278,7 @@ class ORKSpatialSpanMemoryResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKSpatialSpanMemoryResult(identifier: identifier)
         
@@ -311,6 +321,7 @@ class ORKSpeechRecognitionResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "Result"
         result = ORKSpeechRecognitionResult(identifier: identifier)
         
@@ -342,6 +353,7 @@ class ORKStroopResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKStroopResult(identifier: identifier)
         
@@ -388,6 +400,7 @@ class ORKTappingIntervalResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKTappingIntervalResult(identifier: identifier)
         
@@ -432,6 +445,7 @@ class ORKTimedWalkResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKTimedWalkResult(identifier: identifier)
         
@@ -469,6 +483,7 @@ class ORKToneAudiometryResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKToneAudiometryResult(identifier: identifier)
         
@@ -506,6 +521,7 @@ class ORKdBHLToneAudiometryResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKdBHLToneAudiometryResult(identifier: identifier)
         
@@ -552,6 +568,7 @@ class ORKTowerOfHanoiResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKTowerOfHanoiResult(identifier: identifier)
         
@@ -592,6 +609,7 @@ class ORKTrailmakingResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKTrailmakingResult(identifier: identifier)
         

@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "倒计时开始后，轮流轻点包含数字和字母的圆点。首先，轻点第一个数字“1”，然后轻点第一个字母“A”，以此类推，依次轻点“2”–“B”–“3”–“C”…直到数字“7”。";
 "TRAILMAKING_INTRO_TEXT" = "以最快的速度完成而不出错。\n ";
 "TRAILMAKING_CALL_TO_ACTION" = "轻点“开始”来进行测试。";
-"TRAILMAKING_TIMER" = "%.1f 秒";
-"TRAILMAKING_ERROR" = "%@（%d 个错误）";
-"TRAILMAKING_ERROR_PLURAL" = "%@（%d 个错误）";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

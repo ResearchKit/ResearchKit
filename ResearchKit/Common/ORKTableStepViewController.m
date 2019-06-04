@@ -35,14 +35,14 @@
 #import "ORKTableStepViewController_Internal.h"
 
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKStepHeaderView_Internal.h"
 #import "ORKTableContainerView.h"
 
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
 
 #import "ORKTableStep.h"
-
+#import "ORKStepContentView.h"
+#import "ORKBodyItem.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
@@ -84,12 +84,6 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     [self updateButtonStates];
 }
 
-- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
-    [super setLearnMoreButtonItem:learnMoreButtonItem];
-    self.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
-    [_tableContainer setNeedsLayout];
-}
-
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     [super setCancelButtonItem:cancelButtonItem];
     self.navigationFooterView.cancelButtonItem = self.cancelButtonItem;
@@ -105,6 +99,11 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     return [self numSections] > 1 ? UITableViewStyleGrouped : UITableViewStylePlain;
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [_tableContainer sizeHeaderToFit];
+}
+
 - (void)stepDidChange {
     [super stepDidChange];
     _tableViewColor = ORKNeedWideScreenDesign(self.view) ? [UIColor clearColor] : (ORKColor(ORKBackgroundColorKey));
@@ -116,13 +115,12 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _tableView = nil;
 
     _headerView = nil;
-    [_navigationFooterView removeFromSuperview];
     _navigationFooterView = nil;
     
     if (self.step) {
-        _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
+        _tableContainer = [[ORKTableContainerView alloc] initWithStyle:self.tableViewStyle];
         if ([self conformsToProtocol:@protocol(ORKTableContainerViewDelegate)]) {
-            _tableContainer.delegate = (id)self;
+            _tableContainer.tableContainerDelegate = (id)self;
         }
         [self.view addSubview:_tableContainer];
         _tableContainer.tapOffView = self.view;
@@ -134,22 +132,25 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = [self numSections] > 1 ? 30.0 : 0.0;
-        _tableView.allowsSelection = NO;
+        _tableView.allowsSelection = self.tableStepRef.allowsSelection;
         
-        _tableView.separatorColor = self.tableStepRef.isBulleted ? [UIColor clearColor] : nil;
+        _tableView.separatorColor = self.tableStepRef.bulletType == ORKBulletTypeNone ? [UIColor clearColor] : nil;
         [_tableView setBackgroundColor:_tableViewColor];
         _tableView.alwaysBounceVertical = NO;
-        _headerView = _tableContainer.stepHeaderView;
-        _headerView.instructionLabel.text = [[self step] text];
-        _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
-        
-        _navigationFooterView = [ORKNavigationContainerView new];
+        _headerView = _tableContainer.stepContentView;
+        _headerView.stepTitle = [[self step] title];
+        _headerView.stepText = [[self step] text];
+        _headerView.bodyItems = [[self step] bodyItems];
+        _headerView.stepTopContentImage = [[self step] image];
+        _headerView.auxiliaryImage = [[self step] auxiliaryImage];
+        _headerView.titleIconImage = [[self step] iconImage];
+        _tableContainer.stepTopContentImageContentMode = [[self step] imageContentMode];
+        _navigationFooterView = _tableContainer.navigationFooterView;
         _navigationFooterView.skipButtonItem = self.skipButtonItem;
         _navigationFooterView.continueEnabled = [self continueButtonEnabled];
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
         _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
         _navigationFooterView.optional = self.step.optional;
-        [self.view addSubview:_navigationFooterView];
         
         [self setupConstraints];
         // Register the cells for the table view
@@ -166,59 +167,35 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
     _tableContainer.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = nil;
     
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
-
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_tableContainer
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeTop
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0]
                      ];
@@ -265,7 +242,11 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self.tableStep configureCell:cell indexPath:indexPath tableView:tableView];
     
-    [cell setBackgroundColor:_tableViewColor];
+    // Only set the background color if it is using the default cell type
+    if ([reuseIdentifier isEqualToString:ORKBasicCellReuseIdentifier]) {
+        [cell setBackgroundColor:_tableViewColor];
+    }
+    
     return cell;
 }
 

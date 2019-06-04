@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Після вступного відліку торкайте крапки, змінюючи черговість між цифрами і буквами. Почніть торканням першої цифри «1», потім торкніть першу букву «А», а після неї «2» – «Б» – «3» − «В»…, доки не дійдете до цифри «7».";
 "TRAILMAKING_INTRO_TEXT" = "Зробіть це якомога швидше, не припускаючись помилок. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
-"TRAILMAKING_TIMER" = "%.1f с";
-"TRAILMAKING_ERROR" = "%@ (помилка %d)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (помилки %d)";
 "TRAILMAKING_LETTER_A" = "А";
 "TRAILMAKING_LETTER_B" = "Б";
 "TRAILMAKING_LETTER_C" = "В";

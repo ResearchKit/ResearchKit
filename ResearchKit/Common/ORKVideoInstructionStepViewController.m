@@ -79,24 +79,25 @@
     [super stepDidChange];
     _playbackStoppedTime = NAN;
     _playbackCompleted = NO;
-    if (self.step && [self isViewLoaded] && [self videoInstructionStep].image) {
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
-        [tapRecognizer addTarget:self action:@selector(play)];
-        [self.stepView.instructionImageView addGestureRecognizer:tapRecognizer];
-        
-        if (self.stepView.instructionImageView.image) {
-            UIImageView *playImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play" inBundle:ORKBundle() compatibleWithTraitCollection:nil]];
-            self.stepView.instructionImageView.userInteractionEnabled = YES;
-            [self.stepView.instructionImageView addSubview:playImageView];
-            
-            playImageView.translatesAutoresizingMaskIntoConstraints = NO;
-            
-            NSLayoutConstraint* xConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-            NSLayoutConstraint* yConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-            
-            [self.stepView.instructionImageView addConstraints:@[xConstraint, yConstraint]];
-        }
-    }
+    //FIXME: video instruction step needs to adopt ORKInstructionStepContainerView
+//    if (self.step && [self isViewLoaded] && [self videoInstructionStep].image) {
+//        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] init];
+//        [tapRecognizer addTarget:self action:@selector(play)];
+//        [self.stepView.instructionImageView addGestureRecognizer:tapRecognizer];
+//
+//        if (self.stepView.instructionImageView.image) {
+//            UIImageView *playImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play" inBundle:ORKBundle() compatibleWithTraitCollection:nil]];
+//            self.stepView.instructionImageView.userInteractionEnabled = YES;
+//            [self.stepView.instructionImageView addSubview:playImageView];
+//
+//            playImageView.translatesAutoresizingMaskIntoConstraints = NO;
+//
+//            NSLayoutConstraint* xConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+//            NSLayoutConstraint* yConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.instructionImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+//
+//            [self.stepView.instructionImageView addConstraints:@[xConstraint, yConstraint]];
+//        }
+//    }
 }
 
 - (void)setThumbnailImageFromAsset {

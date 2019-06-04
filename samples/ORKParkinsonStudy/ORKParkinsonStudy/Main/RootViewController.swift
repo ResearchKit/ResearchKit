@@ -41,7 +41,7 @@ class RootViewController: UIViewController, OnboardingManagerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (OnboardingStateManager.shared.getOnboardingCompletedState() == false) {
+        if OnboardingStateManager.shared.getOnboardingCompletedState() == false {
             let onboardingViewController = OnboardingViewController(task: nil, taskRun: nil)
             onboardingViewController.onboardingManagerDelegate = self
             
@@ -53,25 +53,25 @@ class RootViewController: UIViewController, OnboardingManagerDelegate {
     
     func didCompleteOnboarding() {
         
-        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let taskListViewController = TaskListViewController()
         let taskListNavController = UINavigationController(rootViewController: taskListViewController)
         taskListNavController.navigationBar.shadowImage = UIImage()
         taskListNavController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         taskListNavController.tabBarItem.title = NSLocalizedString("Tasks", comment: "")
-        taskListNavController.tabBarItem.image = UIImage.init(named: "surveyTab")
+        taskListNavController.tabBarItem.image = UIImage(named: "surveyTab")
         taskListNavController.navigationBar.titleTextAttributes = textAttributes
         
-        let graphViewController = GraphViewController.init(style: .grouped)
+        let graphViewController = GraphViewController(style: .grouped)
         graphViewController.title = "Graphs"
-        let graphNavigationController = UINavigationController.init(rootViewController: graphViewController)
+        let graphNavigationController = UINavigationController(rootViewController: graphViewController)
         
         graphNavigationController.view.backgroundColor = Colors.tableViewBackgroundColor.color
         graphNavigationController.navigationBar.prefersLargeTitles = true
         graphNavigationController.navigationBar.barTintColor = Colors.appTintColor.color
         graphNavigationController.tabBarItem.title = NSLocalizedString("Graphs", comment: "")
-        graphNavigationController.tabBarItem.image = UIImage.init(named: "graphTab")
+        graphNavigationController.tabBarItem.image = UIImage(named: "graphTab")
         graphNavigationController.navigationBar.titleTextAttributes = textAttributes
         graphNavigationController.navigationBar.largeTitleTextAttributes = textAttributes
         

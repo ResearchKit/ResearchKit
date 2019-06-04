@@ -296,8 +296,8 @@
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hlas";
 "AUDIO_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"AUDIO_INSTRUCTION" = "Řekněte \"Ááááá\" do mikrofonu a vydržte co nejdéle.";
-"AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \"Ááááá\". Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
+"AUDIO_INSTRUCTION" = "Řekněte \“Ááááá\” do mikrofonu a vydržte co nejdéle.";
+"AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \“Ááááá\”. Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
 "AUDIO_INTENDED_USE" = "Tato aktivita nahraje váš hlas pomocí mikrofonu u dolního okraje zařízení a vyhodnotí ho.";
 "AUDIO_TOO_LOUD_LABEL" = "Příliš nahlas";
 "AUDIO_GENERIC_ERROR_LABEL" = "Nelze zaznamenávat zvuk";
@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Po skončení odpočtu střídavě klepejte na body u číslic a písmen. Začněte klepnutím na číslo „1“, potom na písmeno „A“ a pak na „2“ – „B“ – „3“ – „C“… až do čísla „7“.";
 "TRAILMAKING_INTRO_TEXT" = "Udělejte to co nejrychleji, aniž byste dělali chyby. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (chyby: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (chyby: %d)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

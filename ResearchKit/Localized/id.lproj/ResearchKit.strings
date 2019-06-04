@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Setelah hitungan mundur, ketuk lingkaran dengan urutan selang-seling antara angka dan huruf. Mulai dengan mengetuk angka pertama '1' diikuti dengan mengetuk huruf 'A', lalu '2' – 'B' – '3' – 'C'… hingga Anda mencapai angka '7'.";
 "TRAILMAKING_INTRO_TEXT" = "Lakukan ini secepat mungkin tanpa melakukan kesalahan. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
-"TRAILMAKING_TIMER" = "%.1f d";
-"TRAILMAKING_ERROR" = "%@ (%d kesalahan)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d kesalahan)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

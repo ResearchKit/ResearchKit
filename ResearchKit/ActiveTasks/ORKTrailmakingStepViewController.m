@@ -51,7 +51,6 @@
 
 #define BOUND(lo, hi, v) (((v) < (lo)) ? (lo) : (((v) > (hi)) ? (hi) : (v)))
 
-
 @implementation ORKTrailmakingStepViewController {
     ORKTrailmakingContentView *_trailmakingContentView;
     NSArray *_testPoints;
@@ -107,12 +106,17 @@
 
 - (void)timerUpdated:(NSTimer*)timer {
     NSTimeInterval elapsed = [[NSDate date] timeIntervalSinceDate: self.presentedDate];
-    NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_TIMER", nil), elapsed];
     
-    if (_errors == 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR", nil), text, _errors];
-    } else if (_errors > 1) {
-        text = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_PLURAL", nil), text, _errors];
+    NSDateComponentsFormatter *durationFormatter = [NSDateComponentsFormatter new];
+    [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleAbbreviated];
+    [durationFormatter setAllowedUnits:NSCalendarUnitSecond];
+    [durationFormatter setFormattingContext:NSFormattingContextDynamic];
+    [durationFormatter setMaximumUnitCount:1];
+    NSString *text = [durationFormatter stringFromTimeInterval:elapsed];
+    
+    if(_errors > 0){
+        NSString *localizedErrors = [NSString localizedStringWithFormat:ORKLocalizedString(@"TRAILMAKING_ERROR_FORMAT", nil), _errors];
+        text = [NSString stringWithFormat:@"%@ %@", text, localizedErrors];
     }
     
     _timerLabel.text = text;

@@ -56,6 +56,7 @@
 #import <ResearchKit/ORKVideoInstructionStep.h>
 #import <ResearchKit/ORKWebViewStep.h>
 #import <ResearchKit/ORKEnvironmentSPLMeterStep.h>
+#import <ResearchKit/ORKLearnMoreInstructionStep.h>
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
@@ -112,6 +113,9 @@
 #import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKLineGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
+
+#import <ResearchKit/ORKBodyItem.h>
+#import <ResearchKit/ORKLearnMoreItem.h>
 
 #import <ResearchKit/ORKDataCollectionManager.h>
 #import <ResearchKit/ORKCollector.h>

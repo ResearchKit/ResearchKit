@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Dopo il conto alla rovescia, tocca i punti in ordine alternato tra numeri e lettere. Inizia toccando il primo numero “1” seguito dalla prima lettera “A”, quindi “2” – “B” – “3” – “C”… fino a raggiungere il numero “7”.";
 "TRAILMAKING_INTRO_TEXT" = "Fallo più velocemente che puoi senza commettere errori. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d errore)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d errori)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

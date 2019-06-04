@@ -37,6 +37,7 @@ class ORKEnvironmentSPLMeterResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifer = "RESULT"
         result = ORKEnvironmentSPLMeterResult(identifier: identifer)
         result.sensitivityOffset = 40

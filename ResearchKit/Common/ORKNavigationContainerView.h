@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)hasContinueOrSkip;
 
+- (void)removeStyling;
+
 @end
 
 NS_ASSUME_NONNULL_END

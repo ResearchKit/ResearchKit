@@ -41,7 +41,7 @@ class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
             ORKValueRange(minimumValue: 2, maximumValue: 6),
             ORKValueRange(minimumValue: 3, maximumValue: 8),
             ORKValueRange(minimumValue: 5, maximumValue: 10),
-            ORKValueRange(minimumValue: 8, maximumValue: 13),
+            ORKValueRange(minimumValue: 8, maximumValue: 13)
         ],
         [
             ORKValueRange(value: 1),
@@ -49,7 +49,7 @@ class DiscreteGraphDataSource: NSObject, ORKValueRangeGraphChartViewDataSource {
             ORKValueRange(minimumValue: 3, maximumValue: 10),
             ORKValueRange(minimumValue: 5, maximumValue: 11),
             ORKValueRange(minimumValue: 7, maximumValue: 13),
-            ORKValueRange(minimumValue: 10, maximumValue: 13),
+            ORKValueRange(minimumValue: 10, maximumValue: 13)
         ]
     ]
     

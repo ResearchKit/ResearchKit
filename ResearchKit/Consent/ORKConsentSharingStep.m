@@ -45,10 +45,6 @@
     return [ORKConsentSharingStepViewController class];
 }
 
-- (BOOL)showsProgress {
-    return NO;
-}
-
 - (BOOL)useSurveyMode {
     return NO;
 }
@@ -77,7 +73,7 @@
         self.useSurveyMode = NO;
         self.title = ORKLocalizedString(@"CONSENT_SHARING_TITLE", nil);
         self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
-        
+        self.showsProgress = NO;
         self.localizedLearnMoreHTMLContent = localizedLearnMoreHTMLContent;
     }
     return self;

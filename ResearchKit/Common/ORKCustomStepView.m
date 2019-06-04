@@ -79,11 +79,9 @@
     NSString *_title;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super init];
     if (self) {
-        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
-        
         self.translatesAutoresizingMaskIntoConstraints = NO;
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
         [self addGestureRecognizer:recognizer];
@@ -138,7 +136,7 @@
 -(void)useCardViewWithTitle:(NSString *)title {
     _title = title;
     _useCardView = YES;
-    _leftRightMargin = ORKCardLeftRightMargin;
+    _leftRightMargin = 0.0;
     [self setBackgroundColor:[UIColor clearColor]];
     [self setupHeaderViewWithTitle:title];
     [self setupConstraints];
@@ -202,14 +200,14 @@
                                                                                                                 toItem:self
                                                                                                              attribute:NSLayoutAttributeLeft
                                                                                                             multiplier:1.0
-                                                                                                              constant:_leftRightMargin],
+                                                                                                              constant:ORKCardLeftRightMarginForWindow(self.window)],   //Adding Padding to match surveyCardHeader in Question Step.
                                                                                 [NSLayoutConstraint constraintWithItem:_containerView
                                                                                                              attribute:NSLayoutAttributeRight
                                                                                                              relatedBy:NSLayoutRelationEqual
                                                                                                                 toItem:self
                                                                                                              attribute:NSLayoutAttributeRight
                                                                                                             multiplier:1.0
-                                                                                                              constant:-_leftRightMargin]
+                                                                                                              constant:-ORKCardLeftRightMarginForWindow(self.window)]   //Adding Padding to match surveyCardHeader in Question Step.
                                                                                 ]];
     
     [NSLayoutConstraint activateConstraints:_containerConstraints];
@@ -236,14 +234,14 @@
                                                         attribute:NSLayoutAttributeLeft
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeLeftMargin
+                                                        attribute:NSLayoutAttributeLeft
                                                        multiplier:1.0
                                                          constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
                                                         attribute:NSLayoutAttributeRight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_containerView
-                                                        attribute:NSLayoutAttributeRightMargin
+                                                        attribute:NSLayoutAttributeRight
                                                        multiplier:1.0
                                                          constant:0.0]];
      [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView

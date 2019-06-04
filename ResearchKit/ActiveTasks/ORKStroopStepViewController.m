@@ -111,7 +111,6 @@
     self.questionNumber = 0;
     _stroopContentView = [ORKStroopContentView new];
     self.activeStepView.activeCustomView = _stroopContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
     
     [self.stroopContentView.RButton addTarget:self
                                        action:@selector(buttonPressed:)
@@ -149,14 +148,6 @@
                                                            userInfo:nil
                                                             repeats:NO];
     }
-}
-
-- (void)startNextQuestionTimer {
-    _nextQuestionTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
-                                                         target:self
-                                                       selector:@selector(startNextQuestionOrFinish)
-                                                       userInfo:nil
-                                                        repeats:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "לאחר הספירה לאחור, הקש/י על הנקודות בסדר מתחלף תוך מעבר בין מספרים ואותיות. התחל/י בהקשה על המספר ׳1׳ ולאחר מכן על האות הראשונה ׳א׳, והמשך/י כך עם ׳2׳ – ׳ב׳ – ׳3׳ – ׳ג׳ וכן הלאה, עד שתגיע/י למספר ׳7׳.";
 "TRAILMAKING_INTRO_TEXT" = "בצע/י את הבדיקה מהר ככל שתוכל/י מבלי לטעות.\n";
 "TRAILMAKING_CALL_TO_ACTION" = "הקש/י על ״התחלה״ כדי להתחיל.";
-"TRAILMAKING_TIMER" = "%.1f שנ׳";
-"TRAILMAKING_ERROR" = "‏%@ (מס׳ שגיאות: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "‏%@ (מס׳ שגיאות: %d)";
 "TRAILMAKING_LETTER_A" = "א";
 "TRAILMAKING_LETTER_B" = "ב";
 "TRAILMAKING_LETTER_C" = "ג";

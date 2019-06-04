@@ -45,15 +45,17 @@ static const CGFloat CardTopBottomMargin = 2.0;
 static const CGFloat LabelTopBottomMargin = 20.0;
 static const CGFloat TextViewTopMargin = 20.0;
 static const CGFloat TextViewHeight = 100.0;
-
+static const CGFloat CheckViewDimension = 25.0;
+static const CGFloat CheckViewBorderWidth = 2.0;
+static const CGFloat LabelLeadingPadding = 10.0;
 
 @interface ORKChoiceViewCell()
 
 @property (nonatomic) UIView *containerView;
 @property (nonatomic) ORKSelectionTitleLabel *primaryLabel;
 @property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
+@property (nonatomic) UIImageView *checkView;
 @property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
-@property (nonatomic) CGFloat cellLeftMargin;
 
 @end
 
@@ -62,8 +64,6 @@ static const CGFloat TextViewHeight = 100.0;
     CGFloat _leftRightMargin;
     CGFloat _topBottomMargin;
     CAShapeLayer *_contentMaskLayer;
-    
-    UIImageView *_checkView;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -72,10 +72,8 @@ static const CGFloat TextViewHeight = 100.0;
         self.clipsToBounds = YES;
         _leftRightMargin = 0.0;
         _topBottomMargin = 0.0;
-        _checkView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-        self.accessoryView = _checkView;
         [self setupContainerView];
-        _cellLeftMargin = self.separatorInset.left;
+        [self setupCheckView];
     }
     return self;
 }
@@ -190,17 +188,17 @@ static const CGFloat TextViewHeight = 100.0;
                                                                                  multiplier:1.0
                                                                                    constant:LabelTopBottomMargin],
                                                      [NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  attribute:NSLayoutAttributeLeading
                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                     toItem:_checkView
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
-                                                                                   constant:_cellLeftMargin],
+                                                                                   constant:LabelLeadingPadding],
                                                      [NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                   relatedBy:NSLayoutRelationEqual
                                                                                      toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
                                                                                    constant:-LabelRightMargin]
                                                      ]];
@@ -218,17 +216,17 @@ static const CGFloat TextViewHeight = 100.0;
                                                                                  multiplier:1.0
                                                                                    constant:_primaryLabel ? 0.0 : LabelTopBottomMargin],
                                                      [NSLayoutConstraint constraintWithItem:_detailLabel
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  attribute:NSLayoutAttributeLeading
                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                     toItem:_checkView
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
-                                                                                   constant:_cellLeftMargin],
+                                                                                   constant:LabelLeadingPadding],
                                                      [NSLayoutConstraint constraintWithItem:_detailLabel
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                   relatedBy:NSLayoutRelationEqual
                                                                                      toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
                                                                                    constant:-LabelRightMargin]
                                                      ]];
@@ -245,7 +243,6 @@ static const CGFloat TextViewHeight = 100.0;
                                                                    constant:LabelTopBottomMargin]];
 }
 
-
 - (void)setupConstraints {
     if (!_primaryLabel && !_detailLabel) {
         return;
@@ -258,6 +255,7 @@ static const CGFloat TextViewHeight = 100.0;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
     _containerConstraints = [[NSMutableArray alloc] init];
     [self addContainerViewToSelfConstraints];
+    [self addCheckViewToContainerViewConstraints];
     [self addPrimaryLabelToContainerViewConstraints];
     [self addDetailLabelConstraints];
     [self addContainerViewBottomConstraint];
@@ -280,7 +278,7 @@ static const CGFloat TextViewHeight = 100.0;
 
 - (void)setUseCardView:(bool)useCardView {
     _useCardView = useCardView;
-    _leftRightMargin = ORKCardLeftRightMargin;
+    _leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
     _topBottomMargin = CardTopBottomMargin;
     [self setBackgroundColor:[UIColor clearColor]];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -294,7 +292,7 @@ static const CGFloat TextViewHeight = 100.0;
 
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
-        self.accessoryView.hidden = self.isCellSelected ? NO : YES;
+        [self updateCheckView];
     }
 }
 
@@ -333,6 +331,54 @@ static const CGFloat TextViewHeight = 100.0;
     }
 }
 
+- (void)setupCheckView {
+    if (!_checkView) {
+        _checkView = [UIImageView new];
+    }
+    _checkView.layer.cornerRadius = CheckViewDimension * 0.5;
+    _checkView.layer.borderWidth = CheckViewBorderWidth;
+    _checkView.layer.borderColor = self.tintColor.CGColor;
+    _checkView.layer.masksToBounds = YES;
+    _checkView.contentMode = UIViewContentModeCenter;
+    [self.containerView addSubview:_checkView];
+}
+
+- (void)addCheckViewToContainerViewConstraints {
+    if (_checkView) {
+        _checkView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_containerConstraints addObjectsFromArray:@[
+                                                     [NSLayoutConstraint constraintWithItem:_checkView
+                                                                                  attribute:NSLayoutAttributeCenterY
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeCenterY
+                                                                                 multiplier:1.0
+                                                                                   constant:0.0],
+                                                     [NSLayoutConstraint constraintWithItem:_checkView
+                                                                                  attribute:NSLayoutAttributeWidth
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:nil
+                                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                                 multiplier:1.0
+                                                                                   constant:CheckViewDimension],
+                                                     [NSLayoutConstraint constraintWithItem:_checkView
+                                                                                  attribute:NSLayoutAttributeHeight
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:nil
+                                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                                 multiplier:1.0
+                                                                                   constant:CheckViewDimension],
+                                                     [NSLayoutConstraint constraintWithItem:_checkView
+                                                                                  attribute:NSLayoutAttributeLeading
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:_containerView
+                                                                                  attribute:NSLayoutAttributeLeading
+                                                                                 multiplier:1.0
+                                                                                   constant:ORKSurveyItemMargin]
+                                                     ]];
+    }
+}
+
 - (void)setPrimaryText:(NSString *)primaryText {
     if (primaryText) {
         [self setupPrimaryLabel];
@@ -360,6 +406,21 @@ static const CGFloat TextViewHeight = 100.0;
         _detailLabel.attributedText = detailAttributedText;
     }
 }
+
+- (void)updateCheckView {
+    if (_checkView) {
+        if (_cellSelected) {
+            _checkView.backgroundColor = self.tintColor;
+            _checkView.image = [[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            _checkView.tintColor = UIColor.whiteColor;
+        }
+        else {
+            _checkView.backgroundColor = UIColor.clearColor;
+            _checkView.image = nil;
+        }
+    }
+}
+
 
 #pragma mark - Accessibility
 
@@ -424,17 +485,17 @@ static const CGFloat TextViewHeight = 100.0;
                                                                                  multiplier:1.0
                                                                                    constant:TextViewTopMargin],
                                                      [NSLayoutConstraint constraintWithItem:_textView
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                  attribute:NSLayoutAttributeLeading
                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:self.containerView
-                                                                                  attribute:NSLayoutAttributeLeft
+                                                                                     toItem:self.checkView
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
-                                                                                   constant:self.cellLeftMargin],
+                                                                                   constant:LabelLeadingPadding],
                                                      [NSLayoutConstraint constraintWithItem:_textView
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                   relatedBy:NSLayoutRelationEqual
                                                                                      toItem:self.containerView
-                                                                                  attribute:NSLayoutAttributeRight
+                                                                                  attribute:NSLayoutAttributeTrailing
                                                                                  multiplier:1.0
                                                                                    constant:-LabelRightMargin],
                                                      textViewHeightConstraint,

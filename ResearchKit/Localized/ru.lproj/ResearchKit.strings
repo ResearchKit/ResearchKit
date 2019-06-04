@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Когда закончится обратный отсчет, нужно будет попеременно касаться то цифр, то букв. Сначала коснитесь цифры 1, затем — буквы А, а потом — цифры 2, буквы Б, цифры 3, буквы В и так далее, пока не дойдете до цифры 7.";
 "TRAILMAKING_INTRO_TEXT" = "Это нужно делать быстро, но правильно. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
-"TRAILMAKING_TIMER" = "%.1f с";
-"TRAILMAKING_ERROR" = "%@ (ошибок: %d)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (ошибок: %d)";
 "TRAILMAKING_LETTER_A" = "А";
 "TRAILMAKING_LETTER_B" = "Б";
 "TRAILMAKING_LETTER_C" = "В";

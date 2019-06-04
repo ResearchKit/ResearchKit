@@ -36,6 +36,7 @@ class ORKResultPredicateTests: XCTestCase {
     var identifier: String!
     
     override func setUp() {
+        super.setUp()
         identifier = "TESTING"
         selector = ORKResultSelector(resultIdentifier: identifier)
     }

@@ -133,8 +133,6 @@ ORKTouchAbilityContentViewDelegate
     self.contentView.delegate = self;
     
     self.activeStepView.activeCustomView = self.contentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

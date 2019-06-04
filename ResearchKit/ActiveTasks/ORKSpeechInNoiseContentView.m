@@ -43,7 +43,6 @@
 
 @interface ORKSpeechInNoiseContentView () <UITextFieldDelegate>
 
-@property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) ORKAudioGraphView *graphView;
 @property (nonatomic, strong) ORKSubheadlineLabel *transcriptLabel;
 
@@ -126,7 +125,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _graphView, _playButton);
     const CGFloat graphHeight = 150;
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textLabel]-(5)-[_graphView(graphHeight)]-buttonGap-[_playButton(50)]-topBottomMargin-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textLabel]-(5)-[_graphView(graphHeight)]-buttonGap-[_playButton(50)]-(>=topBottomMargin)-|"
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:@{
                                                                                        @"graphHeight": @(graphHeight),
@@ -153,7 +152,7 @@
     
     
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-twiceSideMargin-[_playButton(200)]-twiceSideMargin-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-twiceSideMargin-[_playButton(>=200)]-twiceSideMargin-|"
                                              options:0
                                              metrics: @{@"twiceSideMargin": @(twiceSideMargin)}
                                                views:views]];

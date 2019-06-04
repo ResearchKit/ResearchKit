@@ -49,6 +49,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.consentDocument = consentDocument;
+        self.showsProgress = NO;
     }
     return self;
 }
@@ -86,10 +87,6 @@
 
 - (NSUInteger)hash {
     return super.hash ^ self.consentDocument.hash;
-}
-
-- (BOOL)showsProgress {
-    return NO;
 }
 
 @end

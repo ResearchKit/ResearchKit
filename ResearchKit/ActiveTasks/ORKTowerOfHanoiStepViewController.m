@@ -75,7 +75,6 @@ static const NSUInteger NumberOfTowers = 3;
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     _towerOfHanoiCustomView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
-    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle, self.view.window);
     
     [self setUpTowers];
     [self setUpTowerViews];

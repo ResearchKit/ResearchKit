@@ -30,15 +30,14 @@
 
 
 @import UIKit;
-#import "ORKVerticalContainerView.h"
-
+#import "ORKStepContainerView_Private.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKQuestionStep;
 @class ORKQuestionStepCustomView;
 
-@interface ORKQuestionStepView : ORKVerticalContainerView
+@interface ORKQuestionStepView : ORKStepContainerView
 
 @property (nonatomic, strong, nullable) ORKQuestionStep *questionStep;
 @property (nonatomic, strong, nullable) ORKQuestionStepCustomView *questionCustomView;

@@ -134,21 +134,6 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
     }];
 }
 
-- (void)updateLayoutMargins {
-    CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self updateLayoutMargins];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self updateLayoutMargins];
-}
-
 - (void)updateConstraints {
     if ([self.constraints count]) {
         [NSLayoutConstraint deactivateConstraints:self.constraints];

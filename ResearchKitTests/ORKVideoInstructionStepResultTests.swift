@@ -37,6 +37,7 @@ class ORKVideoInstructionStepResultTests: XCTestCase {
     let date = Date()
 
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKVideoInstructionStepResult(identifier: identifier)
         result.playbackCompleted = true

@@ -377,4 +377,6 @@ ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
 
+NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment);
+
 NS_ASSUME_NONNULL_END
