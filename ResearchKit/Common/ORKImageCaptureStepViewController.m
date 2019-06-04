@@ -178,7 +178,7 @@
                                                                     processedFormat:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
     }
     [photoSettings setAutoStillImageStabilizationEnabled:NO];
-    [photoSettings setFlashMode:(AVCaptureFlashModeAuto)];
+    [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
     
     return photoSettings;
 }
@@ -194,9 +194,9 @@
         _imageDataExtension = @"jpeg";
     }
     
-    [photoSettings setFlashMode:(AVCaptureFlashModeAuto)];
     [photoSettings setAutoStillImageStabilizationEnabled: [_photoOutput isStillImageStabilizationSupported]];
-    
+    [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
+
     return photoSettings;
 }
 
