@@ -90,7 +90,7 @@
     if (cell == nil) {
         ORKTextChoice *textChoice = [_helper textChoiceAtIndex:index];
         if ([textChoice isKindOfClass:[ORKTextChoiceOther class]]) {
-            ORKChoiceOtherViewCell * choiceOtherViewCell = [[ORKChoiceOtherViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            ORKChoiceOtherViewCell *choiceOtherViewCell = [[ORKChoiceOtherViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             ORKTextChoiceOther *textChoiceOther = (ORKTextChoiceOther *)textChoice;
             choiceOtherViewCell.textView.placeholder = textChoiceOther.textViewPlaceholderText;
             choiceOtherViewCell.textView.text = textChoiceOther.textViewText;

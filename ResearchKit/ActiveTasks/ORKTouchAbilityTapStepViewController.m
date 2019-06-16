@@ -114,8 +114,6 @@
     self.trialView.delegate = self;
     
     self.activeStepView.activeCustomView = self.trialView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

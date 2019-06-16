@@ -517,3 +517,7 @@ NSNumberFormatter *ORKDecimalNumberFormatter() {
     numberFormatter.usesGroupingSeparator = NO;
     return numberFormatter;
 }
+
+NSString* ORKSwiftLocalizedString(NSString *key, NSString *comment) {
+    return ORKLocalizedString(key, comment);
+}

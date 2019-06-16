@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "倒數之後，以交互順序點一下數字和字母之間的圓點。開始先點第一個數字「1」，再點第一個字母「A」，然後點「2」–「B」–「3」–「C」⋯直到數字「7」。";
 "TRAILMAKING_INTRO_TEXT" = "請用最快的速度完成，不要出錯。";
 "TRAILMAKING_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
-"TRAILMAKING_TIMER" = "%.1f 秒";
-"TRAILMAKING_ERROR" = "%@（%d 項錯誤）";
-"TRAILMAKING_ERROR_PLURAL" = "%@（%d 項錯誤）";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

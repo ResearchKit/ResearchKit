@@ -37,6 +37,7 @@ class ORKPasscodeResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifier = "RESULT"
         result = ORKPasscodeResult(identifier: identifier)
         result.isPasscodeSaved = true

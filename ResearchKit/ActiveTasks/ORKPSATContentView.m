@@ -129,7 +129,7 @@
     const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewWidth, self.window);
     const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewHeight, self.window);
     
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _digitLabel, _keyboardView);
     
@@ -139,11 +139,20 @@
                                              metrics:nil
                                                views:views]];
     
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_keyboardView(==keyboardWidth)]-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:@{ @"keyboardWidth": @(ORKPSATKeyboardWidth) }
-                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:ORKPSATKeyboardWidth]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_keyboardView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_keyboardView(==keyboardHeight)]"

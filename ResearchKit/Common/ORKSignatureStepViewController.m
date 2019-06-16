@@ -37,7 +37,8 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
-#import "ORKVerticalContainerView_Internal.h"
+#import "ORKStepContainerView_Private.h"
+#import "ORKStepView_Private.h"
 
 #import "ORKResult_Private.h"
 #import "ORKCollectionResult_Private.h"
@@ -177,7 +178,7 @@
 @end
 
 
-@interface ORKConsentSigningView : ORKVerticalContainerView
+@interface ORKConsentSigningView : ORKStepContainerView
 
 @property (nonatomic, strong) ORKSignatureWrapperView *wrapperView;
 
@@ -186,16 +187,19 @@
 
 @implementation ORKConsentSigningView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init
+{
+    self = [super init];
     if (self) {
-        
-        _wrapperView = [ORKSignatureWrapperView new];
-        _wrapperView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        self.stepView = _wrapperView;
+        [self setupWrapperView];
     }
     return self;
+}
+
+- (void)setupWrapperView {
+    _wrapperView = [ORKSignatureWrapperView new];
+    _wrapperView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.customContentView = _wrapperView;
 }
 
 @end
@@ -234,7 +238,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [self.taskViewController setRegisteredScrollView:_signingView];
     // set the original path and update state
     self.signatureView.signaturePath = self.originalPath;
     [self updateButtonStates];
@@ -286,7 +289,12 @@
     _signingView.wrapperView.signatureView.delegate = self;
     _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _signingView.frame = self.view.bounds;
-    _signingView.headerView.instructionLabel.text = self.step.text;
+    _signingView.stepTitle = self.step.title;
+    _signingView.stepText = self.step.text;
+    _signingView.stepDetailText = self.step.detailText;
+    _signingView.stepTopContentImage = self.step.image;
+    _signingView.stepTopContentImageContentMode = self.step.imageContentMode;
+    _signingView.bodyItems = self.step.bodyItems;
     [self setupNavigationFooterView];
 
     [self updateButtonStates];
@@ -298,13 +306,12 @@
 }
 
 - (void)setupNavigationFooterView {
-    if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
+    if (!_navigationFooterView && _signingView) {
+        _navigationFooterView = _signingView.navigationFooterView;
     }
     _navigationFooterView.skipButtonItem = self.skipButtonItem;
     _navigationFooterView.continueButtonItem = self.continueButtonItem;
     _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
-    [self.view addSubview:_navigationFooterView];
     
     _navigationFooterView.optional = NO;
     [_navigationFooterView updateContinueAndSkipEnabled];
@@ -315,57 +322,34 @@
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
     _constraints = nil;
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
     _signingView.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_signingView
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_signingView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_signingView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_signingView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeTop
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
                                                    constant:0.0]
                      ];

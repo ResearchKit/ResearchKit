@@ -83,7 +83,7 @@ class TaskListViewController: UIViewController {
     
     func setupHeader() {
         
-        let attributedDescription = NSMutableAttributedString.init(string: "Powered by ResearchKit", attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14.0, weight: .light)])
+        let attributedDescription = NSMutableAttributedString(string: "Powered by ResearchKit", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .light)])
         attributedDescription.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 16.0, weight: .bold), range: NSRange(location: 11, length: 11))
         
         headerView = HeaderView(title: "Parkinson's Study", descriptionText: attributedDescription, iconName: "CheckMark", invertColors: true)
@@ -110,17 +110,17 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case TaskListViewTableSections.surveys.rawValue:
-            if (indexPath.row == 0) {
+            if indexPath.row == 0 {
                 cell = StudyTableCell(text: "Activities of Daily Life", iconName: "heartbeat", style: .default, reuseIdentifier: "tableCell")
-            } else if (indexPath.row == 1) {
+            } else if indexPath.row == 1 {
                 cell = StudyTableCell(text: "Basic Survey", iconName: "timer", style: .default, reuseIdentifier: "tableCell")
             }
         case TaskListViewTableSections.activeTasks.rawValue:
-            if (indexPath.row == 0) {
+            if indexPath.row == 0 {
                 cell = StudyTableCell(text: "6-Minute Walk", iconName: "walkingman", style: .default, reuseIdentifier: "tableCell")
-            } else if (indexPath.row == 1) {
+            } else if indexPath.row == 1 {
                 cell = StudyTableCell(text: "Spatial Span Memory", iconName: "memory-second-screen", style: .default, reuseIdentifier: "tableCell")
-            } else if (indexPath.row == 2) {
+            } else if indexPath.row == 2 {
                 cell = StudyTableCell(text: "Speech Recognition", iconName: "audioGraph", style: .default, reuseIdentifier: "tableCell")
             }
         default:
@@ -137,35 +137,35 @@ extension TaskListViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case TaskListViewTableSections.surveys.rawValue:
-            if (indexPath.row == 0) {
+            if indexPath.row == 0 {
                 let overallHealthAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: 10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: "Perfect Health", minimumValueDescription: "Very Poor")
                 
-                let overallHealthQStep = ORKQuestionStep.init(identifier: "OverallHealthQuestion", title: "ADL", question: "How would you rate your overall health?", answer: overallHealthAnswerFormat)
+                let overallHealthQStep = ORKQuestionStep(identifier: "OverallHealthQuestion", title: "ADL", question: "How would you rate your overall health?", answer: overallHealthAnswerFormat)
                 task = ORKOrderedTask(identifier: "task", steps: [overallHealthQStep])
-            } else if (indexPath.row == 1) {
-                let significantEventAnswerFormat = ORKBooleanAnswerFormat.init(yesString: "Yes", noString: "No")
-                let significantEventQStep = ORKQuestionStep.init(identifier: "significantEventQuestion", title: "Basic Survey", question: "Have you experienced any falls or significant events that have limited your mobility in the past three months?", answer: significantEventAnswerFormat)
+            } else if indexPath.row == 1 {
+                let significantEventAnswerFormat = ORKBooleanAnswerFormat(yesString: "Yes", noString: "No")
+                let significantEventQStep = ORKQuestionStep(identifier: "significantEventQuestion", title: "Basic Survey", question: "Have you experienced any falls or significant events that have limited your mobility in the past three months?", answer: significantEventAnswerFormat)
                 
-                let nonmotorSymptomsAnswerFormat = ORKTextChoiceAnswerFormat.init(style: .multipleChoice, textChoices: [ORKTextChoice.init(text: "Pain", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice.init(text: "Fatigue", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice.init(text: "Cognitive impairments", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice.init(text: "Digestive or Bowel issues", value: 4 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice.init(text: "Gait Impairments", value: 5 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice.init(text: "Other", value: 6 as NSCoding & NSCopying & NSObjectProtocol)])
+                let nonmotorSymptomsAnswerFormat = ORKTextChoiceAnswerFormat(style: .multipleChoice, textChoices: [ORKTextChoice(text: "Pain", value: 1 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Fatigue", value: 2 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Cognitive impairments", value: 3 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Digestive or Bowel issues", value: 4 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Gait Impairments", value: 5 as NSCoding & NSCopying & NSObjectProtocol), ORKTextChoice(text: "Other", value: 6 as NSCoding & NSCopying & NSObjectProtocol)])
                 
-                let nonmotorSymptomsQStep = ORKQuestionStep.init(identifier: "nonmotorSymptomsQuestion", title: "Basic Survey", question: "Which of the following non-motor symptoms do you feel", answer: nonmotorSymptomsAnswerFormat)
+                let nonmotorSymptomsQStep = ORKQuestionStep(identifier: "nonmotorSymptomsQuestion", title: "Basic Survey", question: "Which of the following non-motor symptoms do you feel", answer: nonmotorSymptomsAnswerFormat)
                 task = ORKOrderedTask(identifier: "task", steps: [significantEventQStep, nonmotorSymptomsQStep])
             }
         case TaskListViewTableSections.activeTasks.rawValue:
-            if (indexPath.row == 0) {
-                task = ORKOrderedTask.fitnessCheck(withIdentifier: "sixMinuteWalk", intendedUseDescription: "", walkDuration: 6*60, restDuration: 2*60, options: [])
-            } else if (indexPath.row == 1) {
-                task = ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing:"spatialSpan"), intendedUseDescription: "", initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
-                break;
-            } else if (indexPath.row == 2) {
+            if indexPath.row == 0 {
+                task = ORKOrderedTask.fitnessCheck(withIdentifier: "sixMinuteWalk", intendedUseDescription: "", walkDuration: 6 * 60, restDuration: 2 * 60, options: [])
+            } else if indexPath.row == 1 {
+                task = ORKOrderedTask.spatialSpanMemoryTask(withIdentifier: String(describing: "spatialSpan"), intendedUseDescription: "", initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maximumTests: 5, maximumConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
+                break
+            } else if indexPath.row == 2 {
                 task = ORKOrderedTask.speechRecognitionTask(withIdentifier: "speechRecognition", intendedUseDescription: "", speechRecognizerLocale: .englishUS, speechRecognitionImage: nil, speechRecognitionText: "A quick brown fox jumps over the lazy dog.", shouldHideTranscript: true, allowsEdittingTranscript: true, options: [])
-                break;
+                break
             }
         default:
             break
         }
         
-        if (task != nil) {
+        if task != nil {
             let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
             taskViewController.delegate = self
             
@@ -203,7 +203,6 @@ extension TaskListViewController: ORKTaskViewControllerDelegate {
         switch reason {
         case .completed, .discarded, .failed, .saved:
             self.dismiss(animated: false, completion: nil)
-            break;
         }
     }
 }
@@ -233,7 +232,7 @@ class StudyTableCell: UITableViewCell {
         imageView.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
         
-        if (image != nil) {
+        if image != nil {
             titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10.0).isActive = true
         } else {
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: PADDING).isActive = true

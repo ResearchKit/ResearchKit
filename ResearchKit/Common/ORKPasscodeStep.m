@@ -47,11 +47,8 @@
     
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:identifier];
     step.passcodeFlow = passcodeFlow;
+    step.showsProgress = NO;
     return step;
-}
-
-- (BOOL)showsProgress {
-    return NO;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

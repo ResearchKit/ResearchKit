@@ -35,6 +35,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 
+#import "ORKBodyItem.h"
 #import "ORKStep_Private.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKSkin.h"
@@ -44,21 +45,23 @@
 - (void)setQuestionCustomView:(ORKQuestionStepCustomView *)questionCustomView {
     _questionCustomView = questionCustomView;
     questionCustomView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.stepView = _questionCustomView;
+    self.customContentView = _questionCustomView;
 }
 
 - (void)setQuestionStep:(ORKQuestionStep *)step {
     _questionStep = step;
-    self.headerView.instructionLabel.hidden = ![_questionStep text].length;
-    
-    self.minimumStepHeaderHeight = ORKQuestionStepMinimumHeaderHeight;
-    self.headerView.captionLabel.useSurveyMode = step.useSurveyMode;
-    self.headerView.instructionLabel.text = _questionStep.text;
+    self.stepTitle = step.title;
+    self.stepTopContentImage = step.image;
+    self.stepTopContentImageContentMode = step.imageContentMode;
+    self.titleIconImage = step.iconImage;
+    self.stepText = step.text;
+    self.stepDetailText = step.detailText;
+    self.bodyItems = step.bodyItems;
 }
 
 - (void)setCustomHeaderTitle:(nullable NSString *)text {
     if (text) {
-        self.headerView.captionLabel.text = text;
+        self.stepTitle = text;
     }
 }
 
@@ -77,15 +80,6 @@
     // tell VO the order of the elements.
     // Desired order: Headline label, Instruction label, "Learn more" button, picker, "Next" button, "Skip" button
     
-    if (self.headerView.captionLabel != nil) {
-        [elements addObject:self.headerView.captionLabel];
-    }
-    if (self.headerView.instructionLabel != nil) {
-        [elements addObject:self.headerView.instructionLabel];
-    }
-    if (self.headerView.learnMoreButton != nil) {
-        [elements addObject:self.headerView.learnMoreButton];
-    }
     if (self.questionCustomView) {
         [elements addObject:self.questionCustomView];
     }

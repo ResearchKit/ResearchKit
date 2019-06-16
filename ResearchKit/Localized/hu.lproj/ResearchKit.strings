@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "A visszaszámlálás után koppintson felváltva a számokat és betűket jelölő pontokra a megfelelő sorrendben. Először koppintson az 1-re, majd az A-ra, a 2-re, a B-re, a 3-ra, a C-re és így tovább, amíg eléri a 7-es számot.";
 "TRAILMAKING_INTRO_TEXT" = "Olyan gyorsan végezze el hibátlanul, ahogy csak tudja. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
-"TRAILMAKING_TIMER" = "%.1f mp";
-"TRAILMAKING_ERROR" = "%@ (%d hiba)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d hiba)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

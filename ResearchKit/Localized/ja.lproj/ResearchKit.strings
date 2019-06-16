@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "カウントダウンの後、数字と文字を交互にタップしてください。最初に数字“1”をタップして、文字“A”をタップしてから、“2”–“B”–“3”–“C”の順にタップし、数字“7”まで続けます。";
 "TRAILMAKING_INTRO_TEXT" = "間違えずにできるだけ速くこれを行ってください。\n ";
 "TRAILMAKING_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"TRAILMAKING_TIMER" = "%.1f秒";
-"TRAILMAKING_ERROR" = "%@（%d個のエラー）";
-"TRAILMAKING_ERROR_PLURAL" = "%@（%d個のエラー）";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

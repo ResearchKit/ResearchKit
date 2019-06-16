@@ -32,25 +32,28 @@
 
 @interface ORKAmslerGridContentView() {
     UIBezierPath *path;
+    CGFloat dimension;
 }
 @end
 
 @implementation ORKAmslerGridContentView
 
 - (void)plotAmslerGrid {
+    dimension = MIN(self.bounds.size.width, self.bounds.size.height);
+    
     path = [[UIBezierPath alloc] init];
     path.lineWidth = _lineWidth;
     
-    CGFloat cellSize = MIN(self.bounds.size.width, self.bounds.size.height)/_numberOfCellsPerSide;
+    CGFloat cellSize = dimension/_numberOfCellsPerSide;
     
     for (int index = 0; index < _numberOfCellsPerSide; index ++) {
         CGPoint startVertical = CGPointMake((CGFloat)index * cellSize, 0);
-        CGPoint endVertical = CGPointMake((CGFloat)index * cellSize, self.bounds.size.height);
+        CGPoint endVertical = CGPointMake((CGFloat)index * cellSize, dimension);
         [path moveToPoint:startVertical];
         [path addLineToPoint:endVertical];
         
         CGPoint startHorizontal = CGPointMake(0, (CGFloat)index * cellSize);
-        CGPoint endHorizontal = CGPointMake(self.bounds.size.width, (CGFloat)index * cellSize);
+        CGPoint endHorizontal = CGPointMake(dimension, (CGFloat)index * cellSize);
         [path moveToPoint:startHorizontal];
         [path addLineToPoint:endHorizontal];
     }
@@ -65,13 +68,9 @@
     [self plotAmslerGrid];
     [_lineColor setStroke];
     [path stroke];
-    UIBezierPath *circleInTheCenter = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2) radius:self.bounds.size.width/_ratioOfWidthToRadius startAngle:0 endAngle:360 clockwise:YES];
+    UIBezierPath *circleInTheCenter = [UIBezierPath bezierPathWithArcCenter:CGPointMake(dimension/2, dimension/2) radius:dimension/_ratioOfWidthToRadius startAngle:0 endAngle:360 clockwise:YES];
     [_lineColor setFill];
     [circleInTheCenter fill];
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
 }
 
 - (instancetype)init
@@ -83,8 +82,21 @@
         _ratioOfWidthToRadius = 75;
         _lineColor = [UIColor blackColor];
         _backgroundColor = [UIColor whiteColor];
+        [self setDimensionConstraint];
     }
     return self;
+}
+
+- (void)setDimensionConstraint {
+    [NSLayoutConstraint activateConstraints:@[
+                                              [NSLayoutConstraint constraintWithItem:self
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                          multiplier:1.0
+                                                                            constant:0.0]
+                                              ]];
 }
 
 @end

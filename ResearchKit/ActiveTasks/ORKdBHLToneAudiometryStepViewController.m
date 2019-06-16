@@ -35,6 +35,7 @@
 #import "ORKdBHLToneAudiometryAudioGenerator.h"
 #import "ORKRoundTappingButton.h"
 #import "ORKdBHLToneAudiometryContentView.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -133,6 +134,7 @@
     
     self.dBHLToneAudiometryContentView = [[ORKdBHLToneAudiometryContentView alloc] init];
     self.activeStepView.activeCustomView = self.dBHLToneAudiometryContentView;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     
     [self.dBHLToneAudiometryContentView.tapButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
 

@@ -55,6 +55,7 @@
 #import <ResearchKit/ORKQuestionResult_Private.h>
 #import <ResearchKit/ORKSignatureResult_Private.h>
 #import <ResearchKit/ORKResult_Private.h>
+#import <ResearchKit/ORKStepContainerView_Private.h>
 
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKAmslerGridStep.h>
@@ -88,6 +89,8 @@
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
+#import <ResearchKit/ORKPasscodeStepViewController_Internal.h>
+#import <ResearchKit/ORKInstructionStepViewController_Internal.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKAmslerGridStepViewController.h>
@@ -112,6 +115,7 @@
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>
 #import <ResearchKit/ORKVideoInstructionStepViewController.h>
 #import <ResearchKit/ORKSpeechRecognitionStepViewController.h>
+#import <ResearchKit/ORKLearnMoreStepViewController.h>
 
 #import <ResearchKit/ORKAccelerometerRecorder.h>
 #import <ResearchKit/ORKAudioRecorder.h>
@@ -125,10 +129,12 @@
 #import <ResearchKit/ORKHTMLPDFPageRenderer.h>
 
 // For custom steps
+#import <ResearchKit/ORKStepView_Private.h>
 #import <ResearchKit/ORKCustomStepView.h>
 #import <ResearchKit/ORKTappingContentView.h>
 #import <ResearchKit/ORKVerticalContainerView.h>
 #import <ResearchKit/ORKVerticalContainerView_Internal.h>
+#import <ResearchKit/ORKStepContainerView.h>
 #import <ResearchKit/ORKNavigationContainerView.h>
 #import <ResearchKit/ORKNavigationContainerView_Internal.h>
 #import <ResearchKit/ORKStepHeaderView.h>
@@ -143,6 +149,7 @@
 #import <ResearchKit/ORKProgressView.h>
 #import <ResearchKit/ORKFreehandDrawingView.h>
 #import <ResearchKit/ORKAudioGraphView.h>
+#import <ResearchKit/ORKInstructionStepContainerView.h>
 
 #import <ResearchKit/ORKLabel.h>
 #import <ResearchKit/ORKUnitLabel.h>
@@ -167,3 +174,6 @@
 #import <ResearchKit/ORKSkin.h>
 #import <ResearchKit/ORKDefaultFont.h>
 #import <ResearchKit/ORKVoiceEngine.h>
+
+#import <ResearchKit/ORKLearnMoreView.h>
+#import <ResearchKit/ORKBodyContainerView.h>

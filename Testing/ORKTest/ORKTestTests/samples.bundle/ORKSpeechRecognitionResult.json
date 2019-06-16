@@ -1,0 +1,61 @@
+{"userInfo":{},"_class":"ORKSpeechRecognitionResult","identifier":"","startDate":"2019-05-27T00:35:06-0700","endDate":"2019-05-27T00:35:06-0700",
+    "transcription" : {
+        "formattedString": "complete string",
+        "speakingRate" : 1.5,
+        "averagePauseDuration" : 1.0,
+        "segments" : [
+            {
+                "substring" : "complete",
+                "substringRange" : { "location" : 0, "length" : 8},
+                "timestamp" : 0.0,
+                "duration" : 0.5,
+                "confidence" : 1.0,
+                "alternativeSubstrings" : [ "test1", "test2" ],
+                "voiceAnalytics" : {
+                    "jitter" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "shimmer" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "pitch" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "voicing" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    }
+                }
+            },
+            {
+                "substring" : "string",
+                "substringRange" : { "location" : 9, "length" : 6},
+                "timestamp" : 0.0,
+                "duration" : 0.5,
+                "confidence" : 1.0,
+                "alternativeSubstrings" : [ "test1", "test2" ],
+                "voiceAnalytics" : {
+                    "jitter" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "shimmer" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "pitch" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    },
+                    "voicing" : {
+                        "acousticFeatureValuePerFrame" : [ 1, 2, 3],
+                        "frameDuration" : 0.5
+                    }
+                }
+            }
+        ]
+    }
+}

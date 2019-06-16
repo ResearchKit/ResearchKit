@@ -32,6 +32,7 @@
 #import "ORKBorderedButton.h"
 #import "ORKTextButton_Internal.h"
 
+static const CGFloat ORKBorderedButtonCornerRadii = 14.0;
 
 @implementation ORKBorderedButton {
 
@@ -48,7 +49,7 @@
 
 - (void)setLayerAndFadeDelay {
     self.layer.borderWidth = 0.0f;
-    self.layer.cornerRadius = 10.0f;
+    self.layer.cornerRadius = ORKBorderedButtonCornerRadii;
     self.fadeDelay = 0.0;
 }
 

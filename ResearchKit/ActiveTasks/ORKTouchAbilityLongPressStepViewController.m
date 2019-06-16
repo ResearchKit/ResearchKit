@@ -114,8 +114,6 @@
     self.longPressView.delegate = self;
     
     self.activeStepView.activeCustomView = self.longPressView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

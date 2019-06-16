@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "카운트다운이 지나면 숫자와 한글 자음을 순서대로 연결하십시오. 먼저 숫자 1을 탭하여 시작한 다음, 자음 ㄱ을 탭합니다. 그런 다음 숫자 7에 도달할 때까지 2 – ㄴ – 3 – ㄷ의 순서대로 탭하십시오.";
 "TRAILMAKING_INTRO_TEXT" = "실수 없이 최대한 빠르게 해보십시오. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
-"TRAILMAKING_TIMER" = "%.1f초";
-"TRAILMAKING_ERROR" = "%@(오류 %d개)";
-"TRAILMAKING_ERROR_PLURAL" = "%@(오류 %d개)";
 "TRAILMAKING_LETTER_A" = "ㄱ";
 "TRAILMAKING_LETTER_B" = "ㄴ";
 "TRAILMAKING_LETTER_C" = "ㄷ";

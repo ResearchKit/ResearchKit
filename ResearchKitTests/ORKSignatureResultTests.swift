@@ -37,6 +37,7 @@ class ORKSignatureResultTests: XCTestCase {
     let date = Date()
 
     override func setUp() {
+        super.setUp()
         let bundle = Bundle(identifier: "org.researchkit.ResearchKit")
         image = UIImage(named: "heartbeat", in: bundle, compatibleWith: .none)
         path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))

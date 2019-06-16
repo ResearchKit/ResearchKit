@@ -50,7 +50,6 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
     if (self) {
         _color = [[self tintColor] colorWithAlphaComponent:0.8];
         _animationDuration = DEFAULT_ANIMATION_DURATION;
-        self.frame = CGRectMake(0.0, 0.0, VIEW_DIMENSION, VIEW_DIMENSION);
         _value = VALUE_MIN;
         _backgroundLayer = [self createShapeLayer];
         _backgroundLayer.borderColor = _color.CGColor;
@@ -59,6 +58,22 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
         [self.layer addSublayer:_backgroundLayer];
 
         _filledCircleLayer = [self filledCircleLayer];
+        [NSLayoutConstraint activateConstraints:@[
+                                                  [NSLayoutConstraint constraintWithItem:self
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                                              multiplier:1.0
+                                                                                constant:VIEW_DIMENSION],
+                                                  [NSLayoutConstraint constraintWithItem:self
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                                              multiplier:1.0
+                                                                                constant:VIEW_DIMENSION]
+                                                  ]];
 
     }
     

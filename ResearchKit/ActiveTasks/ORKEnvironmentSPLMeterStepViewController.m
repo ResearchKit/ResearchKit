@@ -32,6 +32,7 @@
 #import "ORKEnvironmentSPLMeterStepViewController.h"
 
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKRoundTappingButton.h"
 #import "ORKEnvironmentSPLMeterContentView.h"
 
@@ -105,6 +106,7 @@
     _environmentSPLMeterContentView = [ORKEnvironmentSPLMeterContentView new];
     [_environmentSPLMeterContentView setProgress:0.01 animated:YES];
     self.activeStepView.activeCustomView = _environmentSPLMeterContentView;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     [self requestMicrophoneAuthorization];
     [self configureAudioSession];
     _audioEngine = [[AVAudioEngine alloc] init];

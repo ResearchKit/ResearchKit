@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -26,6 +26,8 @@
 	<string>This app captures photos and video during certain tasks.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>This app uses Face ID during passcode step.</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>This app reads your Health Records data during certain tasks.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>This app reads your HealthKit data during certain tasks.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -36,8 +38,6 @@
 	<string>This app records motion data during certain tasks.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>This app uses Speech Recognition during certain tasks.</string>
-	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
-	<string>This app reads your Health Records data during certain tasks.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

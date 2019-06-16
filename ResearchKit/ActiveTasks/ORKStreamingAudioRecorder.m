@@ -139,12 +139,12 @@
         
         _audioEngine = [[AVAudioEngine alloc] init];
         AVAudioInputNode *inputnode = _audioEngine.inputNode;
-        AVAudioFormat *mainMixerFormat = [[_audioEngine mainMixerNode] outputFormatForBus:0];
+        AVAudioFormat *recordingFormat = [inputnode inputFormatForBus:0];
         
         NSURL *audiourl = [self recordingFileURL];
         
         // Update the file type to be written to the file
-        NSMutableDictionary *modifiedSettings = [NSMutableDictionary dictionaryWithDictionary:[mainMixerFormat settings]];
+        NSMutableDictionary *modifiedSettings = [NSMutableDictionary dictionaryWithDictionary:[recordingFormat settings]];
         if (@available(iOS 11.0, *)) {
             modifiedSettings[AVAudioFileTypeKey] = [NSNumber numberWithInt:kAudioFileWAVEType];
         } else {
@@ -158,7 +158,7 @@
             return;
         }
         
-        [inputnode installTapOnBus:0 bufferSize:1024 format:mainMixerFormat block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
+        [inputnode installTapOnBus:0 bufferSize:1024 format:recordingFormat block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
             id<ORKStreamingAudioResultDelegate> delegate = (id<ORKStreamingAudioResultDelegate>)self.delegate;
             NSError *recordingError;
             [mixerOutputFile writeFromBuffer:buffer error:&recordingError];

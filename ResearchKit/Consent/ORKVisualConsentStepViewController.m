@@ -182,9 +182,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    CGRect viewBounds = self.view.bounds;
-   
+       
     // Prepare pageViewController
     _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -198,92 +196,6 @@
         _pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     }
     [self.view addSubview:_pageViewController.view];
-    
-    if (ORKNeedWideScreenDesign(self.view)) {
-        UIView *_iPadContentView;
-        self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-        [self setiPadBackgroundViewColor:_backgroundColor];
-        _iPadContentView = [self viewForiPadLayoutConstraints];
-        [_iPadContentView setBackgroundColor:_backgroundColor];
-        self.animationView = [ORKAnimationPlaceholderView new];
-        _animationView.translatesAutoresizingMaskIntoConstraints = NO;
-        [_iPadContentView addSubview:_animationView];
-        _pageViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-        [NSLayoutConstraint activateConstraints:@[
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeTop
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeRight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_pageViewController.view
-                                                                               attribute:NSLayoutAttributeBottom
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeBottom
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  
-                                                  
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeTop
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeLeft
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:_iPadContentView
-                                                                               attribute:NSLayoutAttributeRight
-                                                                              multiplier:1.0
-                                                                                constant:0.0],
-                                                  [NSLayoutConstraint constraintWithItem:_animationView
-                                                                               attribute:NSLayoutAttributeHeight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:nil
-                                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                                              multiplier:1.0
-                                                                                constant:ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)]
-                                                  ]];
-    }
-    else {
-        
-        _pageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _pageViewController.view.frame = viewBounds;
-        
-        self.view.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
-        
-        self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
-                              (CGRect){{0, 0}, {viewBounds.size.width, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
-        _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-        [self.view addSubview:_animationView];
-        _animationView.backgroundColor = [UIColor clearColor];
-    }
-    
     
     [self addChildViewController:_pageViewController];
     [_pageViewController didMoveToParentViewController:self];
@@ -449,13 +361,6 @@
             completion(NO);
         }
         return;
-    }
-    
-    if (ORKNeedWideScreenDesign(self.view)) {
-        [self setiPadStepTitleLabelText:viewController.title];
-    }
-    else {
-        self.title = viewController.title;
     }
     
     ORKWeakTypeOf(self) weakSelf = self;
@@ -625,13 +530,6 @@
                      forward:forward
                     animated:animated
                   completion:^(BOOL finished) {
-                      if (viewController && preloadNextViewController) {
-                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
-                          ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
-                          [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
-                                                              tintColor:currentSceneImageView.tintColor
-                                                                  scale:currentSceneImageView.window.screen.scale];
-                      }
                   }];
 }
 
@@ -647,7 +545,6 @@
     }
     // Stop old hairline scroll view observer and start new one
     _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView delegate:self];
-    [self.taskViewController setRegisteredScrollView:viewController.sceneView];
 
     ORKConsentSceneViewController *fromViewController = nil;
     NSUInteger currentIndex = [self currentIndex];

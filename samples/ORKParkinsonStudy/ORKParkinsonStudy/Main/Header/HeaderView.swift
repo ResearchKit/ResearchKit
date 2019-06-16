@@ -39,8 +39,8 @@ class HeaderView: UIView {
     var iconName: String!
     var invertColors: Bool!
     
-    let PADDING: CGFloat = 30.0;
-    let CIRCLE_DIM: CGFloat = 60.0;
+    let PADDING: CGFloat = 30.0
+    let CIRCLEDIM: CGFloat = 60.0
     var nameContainer: UIView!
     var iconContainer: UIView!
     var bottomLineView: UIView!
@@ -70,8 +70,6 @@ class HeaderView: UIView {
         let activeLabel = UILabel()
         activeLabel.attributedText = self.descriptionText
         activeLabel.translatesAutoresizingMaskIntoConstraints = false
-        //activeLabel.textColor = (self.invertColors == true) ? UIColor(red: 217.0/255.0, green: 217.0/255.0, blue: 217.0/255.0, alpha: 1.0) : UIColor.lightGray
-//        activeLabel.font =
         activeLabel.textColor = UIColor.white
         self.nameContainer.addSubview(activeLabel)
         
@@ -87,7 +85,7 @@ class HeaderView: UIView {
         
         activeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 3.0).isActive = true
         activeLabel.leadingAnchor.constraint(equalTo: self.nameContainer.safeAreaLayoutGuide.leadingAnchor, constant: PADDING).isActive = true
-        activeLabel.bottomAnchor.constraint(equalTo: self.nameContainer.bottomAnchor, constant: -(PADDING + (CIRCLE_DIM / 2) - 15)).isActive = true
+        activeLabel.bottomAnchor.constraint(equalTo: self.nameContainer.bottomAnchor, constant: -(PADDING + (CIRCLEDIM / 2) - 15)).isActive = true
         
         nameLabel.topAnchor.constraint(equalTo: self.nameContainer.topAnchor, constant: PADDING).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: self.nameContainer.safeAreaLayoutGuide.leadingAnchor, constant: PADDING).isActive = true
@@ -103,7 +101,7 @@ class HeaderView: UIView {
     func setupIcon() {
         self.iconContainer = UIView()
 
-        self.iconContainer.layer.cornerRadius = CIRCLE_DIM / 2;
+        self.iconContainer.layer.cornerRadius = CIRCLEDIM / 2
         self.iconContainer.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(iconContainer)
         
@@ -113,11 +111,11 @@ class HeaderView: UIView {
         iconView.translatesAutoresizingMaskIntoConstraints = false
         self.iconContainer.addSubview(iconView)
         
-        let ICON_PADDING: CGFloat = 5.0;
-        iconView.topAnchor.constraint(equalTo: self.iconContainer.topAnchor, constant: ICON_PADDING).isActive = true
-        iconView.leadingAnchor.constraint(equalTo: self.iconContainer.leadingAnchor, constant: ICON_PADDING).isActive = true
-        iconView.trailingAnchor.constraint(equalTo: self.iconContainer.trailingAnchor, constant: -ICON_PADDING).isActive = true
-        iconView.bottomAnchor.constraint(equalTo: self.iconContainer.bottomAnchor, constant: -ICON_PADDING).isActive = true
+        let iconPadding: CGFloat = 5.0
+        iconView.topAnchor.constraint(equalTo: self.iconContainer.topAnchor, constant: iconPadding).isActive = true
+        iconView.leadingAnchor.constraint(equalTo: self.iconContainer.leadingAnchor, constant: iconPadding).isActive = true
+        iconView.trailingAnchor.constraint(equalTo: self.iconContainer.trailingAnchor, constant: -iconPadding).isActive = true
+        iconView.bottomAnchor.constraint(equalTo: self.iconContainer.bottomAnchor, constant: -iconPadding).isActive = true
         iconContainer.backgroundColor = invertColors ? UIColor.white : UIColor.clear
     }
     
@@ -133,10 +131,10 @@ class HeaderView: UIView {
         self.nameContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.nameContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
-        self.iconContainer.heightAnchor.constraint(equalToConstant: CIRCLE_DIM).isActive = true
-        self.iconContainer.widthAnchor.constraint(equalToConstant: CIRCLE_DIM).isActive = true
+        self.iconContainer.heightAnchor.constraint(equalToConstant: CIRCLEDIM).isActive = true
+        self.iconContainer.widthAnchor.constraint(equalToConstant: CIRCLEDIM).isActive = true
         self.iconContainer.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: PADDING).isActive = true
-        self.iconContainer.topAnchor.constraint(equalTo: self.nameContainer.bottomAnchor, constant: -(CIRCLE_DIM / 2)).isActive = true
+        self.iconContainer.topAnchor.constraint(equalTo: self.nameContainer.bottomAnchor, constant: -(CIRCLEDIM / 2)).isActive = true
         self.iconContainer.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0.0).isActive = true
         
         bottomLineView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true

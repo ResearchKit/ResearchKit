@@ -116,8 +116,6 @@
     self.swipeContentView.delegate = self;
     
     self.activeStepView.activeCustomView = self.swipeContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

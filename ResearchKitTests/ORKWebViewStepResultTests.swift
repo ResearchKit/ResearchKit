@@ -36,6 +36,7 @@ class ORKWebViewStepResultTests: XCTestCase {
     let date = Date()
     
     override func setUp() {
+        super.setUp()
         identifer = "RESULT"
         result = ORKWebViewStepResult(identifier: identifer)
         result.result = "RESULTTORESULT"

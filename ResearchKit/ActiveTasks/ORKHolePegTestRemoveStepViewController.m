@@ -33,6 +33,7 @@
 
 #import "ORKActiveStepView.h"
 #import "ORKHolePegTestRemoveContentView.h"
+#import "ORKStepContainerView_Private.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -86,8 +87,7 @@
     self.holePegTestRemoveContentView.threshold = [self holePegTestRemoveStep].threshold;
     self.holePegTestRemoveContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestRemoveContentView;
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.activeStepView.scrollContainerShouldCollapseNavbar = NO;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     
     NSString *identifier = [[self holePegTestRemoveStep].identifier stringByReplacingOccurrencesOfString:@"remove" withString:@"place"];
     NSTimeInterval placeStepDuration = ((ORKHolePegTestResult *)[[self.taskViewController.result stepResultForStepIdentifier:identifier].results firstObject]).totalTime;
@@ -150,7 +150,7 @@
 #pragma mark - hole peg test content view delegate
 
 - (void)holePegTestRemoveDidProgress:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView {
-    [self.activeStepView updateTitle:nil
+    [self.activeStepView updateTitle:self.step.title
                                 text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)]]];
 }
 
@@ -160,7 +160,7 @@
     [self saveSampleWithDistance:distance];
     
     [holePegTestRemoveContentView setProgress:((CGFloat)self.successes / [self holePegTestRemoveStep].numberOfPegs) animated:YES];
-    [self.activeStepView updateTitle:nil
+    [self.activeStepView updateTitle:self.step.title
                                 text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
     
     if (self.successes >= [self holePegTestRemoveStep].numberOfPegs) {
@@ -171,7 +171,7 @@
 - (void)holePegTestRemoveDidFail:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView {
     self.failures++;
     
-    [self.activeStepView updateTitle:nil
+    [self.activeStepView updateTitle:self.step.title
                                 text:[[self holePegTestRemoveStep].movingDirection == ORKBodySagittalLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) stringByAppendingString:[@"\n" stringByAppendingString:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)]]];
 }
 

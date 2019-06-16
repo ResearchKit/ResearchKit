@@ -38,10 +38,108 @@
 
 @end
 
-
 @implementation ORKStepTests
 
-- (void)testFormStep {
+- (void)testAttributes {
+    ORKStep *step = [[ORKStep alloc] initWithIdentifier:@"STEP"];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"TASK" steps:NULL];
+    ORKResult *result = [[ORKResult alloc] initWithIdentifier:@"RESULT"];
+    
+    [step setTitle:@"Title"];
+    [step setText:@"Text"];
+    [step setTask:task];
+    step.showsProgress = NO;
+    [step setDetailText:@"DETAIL"];
+    [step setFootnote:@"FOOTNOTE"];
+    
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"org.researchkit.ResearchKit"];
+    UIImage *imageOne = [UIImage imageNamed:@"heart-fitness" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIImage *imageTwo = [UIImage imageNamed:@"phoneshake" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIImage *imageThree = [UIImage imageNamed:@"heartbeat" inBundle:bundle compatibleWithTraitCollection:nil];
+    [step setImage:imageOne];
+    [step setAuxiliaryImage:imageTwo];
+    [step setIconImage:imageThree];
+    
+    ORKStepViewController *controller = [step instantiateStepViewControllerWithResult:result];
+    
+    XCTAssertEqual([step title], @"Title");
+    XCTAssertEqual([step text], @"Text");
+    XCTAssertEqual([step task], task);
+    XCTAssertEqual([controller restorationIdentifier], [step identifier]);
+    XCTAssertEqual([controller restorationClass], [step stepViewControllerClass]);
+    XCTAssertEqual([controller step], step);
+    XCTAssertEqual([step stepViewControllerClass], [ORKStepViewController class]);
+    XCTAssertEqual([step isRestorable], YES);
+    XCTAssertEqual([step showsProgress], NO);
+    XCTAssert([step.identifier isEqualToString:@"STEP"]);
+    XCTAssert([step isEqual:step]);
+    XCTAssertFalse([step isEqual:@"TEST"]);
+    XCTAssertEqual([step requestedPermissions], ORKPermissionNone);
+    XCTAssertEqualObjects([step requestedHealthKitTypesForReading], nil);
+}
+
+- (void)testCopyWithIdentifier {
+    NSString *firstIdentifier = @"STEP";
+    ORKStep *step = [[ORKStep alloc] initWithIdentifier:firstIdentifier];
+    step.title = @"TITLE";
+    step.text = @"TEXT";
+    
+    XCTAssertEqual(step.identifier, firstIdentifier);
+    
+    NSString *newIdentifier = @"NEW STEP";
+    ORKStep *newStep = [step copyWithIdentifier:newIdentifier];
+    
+    XCTAssertEqual(newStep.identifier, newIdentifier);
+    XCTAssertEqual(newStep.title, @"TITLE");
+    XCTAssertEqual(newStep.text, @"TEXT");
+}
+
+- (void) testCopyWithZone {
+    ORKStep *step = [[ORKStep alloc] initWithIdentifier:@"STEP"];
+    ORKStep *newStep = [step copyWithZone:nil];
+    XCTAssert([newStep isEqual:step]);
+}
+
+@end
+
+@interface ORKInstructionStepTests : XCTestCase
+
+@end
+
+@implementation ORKInstructionStepTests
+
+- (void)testAttributes {
+    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"step"];
+    
+    [step setDetailText:@"DETAILS"];
+    NSAttributedString *attributeString = [[NSAttributedString alloc] initWithString:@"ATTRIBUTE"];
+    [step setAttributedDetailText:attributeString];
+    [step setFootnote:@"FOOTNOTE"];
+    
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"org.researchkit.ResearchKit"];
+    UIImage *image = [UIImage imageNamed:@"heartbeat" inBundle:bundle compatibleWithTraitCollection:nil];
+    [step setImage:image];
+    [step setAuxiliaryImage:image];
+    [step setIconImage:image];
+    
+    XCTAssert([step.detailText isEqualToString:@"DETAILS"]);
+    XCTAssertEqual(step.attributedDetailText, attributeString);
+    XCTAssert([step.footnote isEqualToString:@"FOOTNOTE"]);
+    XCTAssertEqual([step image], image);
+    XCTAssertEqual([step auxiliaryImage], image);
+    XCTAssertEqual([step iconImage], image);
+}
+
+@end
+
+
+@interface ORKFormStepTests : XCTestCase
+
+@end
+
+@implementation ORKFormStepTests
+
+- (void)testAttributes {
     // Test duplicate form step identifier validation
     ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"form" title:@"Form" text:@"Form test"];
     NSMutableArray *items = [NSMutableArray new];
@@ -51,25 +149,56 @@
                                               text:@"formItem1"
                                       answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
     [items addObject:item];
-
+    
     item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
                                               text:@"formItem2"
                                       answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
     [items addObject:item];
-
+    
     [formStep setFormItems:items];
     XCTAssertNoThrow([formStep validateParameters]);
-
+    
     item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
                                               text:@"formItem2"
                                       answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
     [items addObject:item];
-
+    
+    item = [[ORKFormItem alloc] initWithSectionTitle:@"formItem3"
+                                          detailText:@"formItem3"
+                                       learnMoreItem:[ORKLearnMoreItem learnMoreItemWithText:@"learnMoreItemText" learnMoreInstructionStep:[[ORKLearnMoreInstructionStep alloc] initWithIdentifier:@"instructionStepIdentifier"]]
+                                       showsProgress:YES];
+    [items addObject:item];
+    
+    XCTAssertEqual(item.text, @"formItem3");
+    XCTAssertEqual(item.detailText, @"formItem3");
+    XCTAssertNotNil(item.detailText);
+    XCTAssertNotNil(item.learnMoreItem);
+    XCTAssertTrue(item.showsProgress);
+    
+    item = [[ORKFormItem alloc] initWithSectionTitle:nil
+                                          detailText:nil
+                                       learnMoreItem:nil
+                                       showsProgress:NO];
+    [items addObject:item];
+    
+    XCTAssertNil(item.text);
+    XCTAssertNil(item.detailText);
+    XCTAssertNil(item.learnMoreItem);
+    XCTAssertFalse(item.showsProgress);
+    
     [formStep setFormItems:items];
     XCTAssertThrows([formStep validateParameters]);
 }
 
-- (void)testReactionTimeStep {
+@end
+
+@interface ORKReactionTimeStepTests : XCTestCase
+
+@end
+
+@implementation ORKReactionTimeStepTests
+
+- (void)testAttributes {
     ORKReactionTimeStep *validReactionTimeStep = [[ORKReactionTimeStep alloc] initWithIdentifier:@"ReactionTimeStep"];
     
     validReactionTimeStep.maximumStimulusInterval = 8;
@@ -77,40 +206,48 @@
     validReactionTimeStep.thresholdAcceleration = 0.5;
     validReactionTimeStep.numberOfAttempts = 3;
     validReactionTimeStep.timeout = 10;
-
+    
     XCTAssertNoThrow([validReactionTimeStep validateParameters]);
     
     ORKReactionTimeStep *reactionTimeStep = [validReactionTimeStep copy];
     XCTAssertEqualObjects(reactionTimeStep, validReactionTimeStep);
-
+    
     // minimumStimulusInterval cannot be zero or less
     reactionTimeStep = [validReactionTimeStep copy];
     validReactionTimeStep.minimumStimulusInterval = 0;
     XCTAssertThrows([validReactionTimeStep validateParameters]);
-
+    
     // minimumStimulusInterval cannot be higher than maximumStimulusInterval
     reactionTimeStep = [validReactionTimeStep copy];
     validReactionTimeStep.maximumStimulusInterval = 8;
     validReactionTimeStep.minimumStimulusInterval = 10;
     XCTAssertThrows([validReactionTimeStep validateParameters]);
-
+    
     // thresholdAcceleration cannot be zero or less
     reactionTimeStep = [validReactionTimeStep copy];
     validReactionTimeStep.thresholdAcceleration = 0;
     XCTAssertThrows([validReactionTimeStep validateParameters]);
-
+    
     // timeout cannot be zero or less
     reactionTimeStep = [validReactionTimeStep copy];
     validReactionTimeStep.timeout = 0;
     XCTAssertThrows([validReactionTimeStep validateParameters]);
-
+    
     // numberOfAttempts cannot be zero or less
     reactionTimeStep = [validReactionTimeStep copy];
     validReactionTimeStep.numberOfAttempts = 0;
     XCTAssertThrows([validReactionTimeStep validateParameters]);
 }
 
-- (void)testPageResult {
+@end
+
+@interface ORKPageStepTests : XCTestCase
+
+@end
+
+@implementation ORKPageStepTests
+
+- (void)testAttributes {
     
     NSArray *steps = @[[[ORKStep alloc] initWithIdentifier:@"step1"],
                        [[ORKStep alloc] initWithIdentifier:@"step2"],
@@ -161,55 +298,15 @@
     XCTAssertEqualObjects([pageStep stepWithIdentifier:@"step2"], step2);
     XCTAssertEqualObjects([pageStep stepWithIdentifier:@"step3"], step3);
 }
+@end
 
-- (void)testInstructionStep {
-    ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"step"];
-    
-    [step setDetailText:@"DETAILS"];
-    NSAttributedString *attributeString = [[NSAttributedString alloc] initWithString:@"ATTRIBUTE"];
-    [step setAttributedDetailText:attributeString];
-    [step setFootnote:@"FOOTNOTE"];
-    
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"org.researchkit.ResearchKit"];
-    UIImage *image = [UIImage imageNamed:@"heartbeat" inBundle:bundle compatibleWithTraitCollection:nil];
-    [step setImage:image];
-    [step setAuxiliaryImage:image];
-    [step setIconImage:image];
-    
-    XCTAssert([step.detailText isEqualToString:@"DETAILS"]);
-    XCTAssertEqual(step.attributedDetailText, attributeString);
-    XCTAssert([step.footnote isEqualToString:@"FOOTNOTE"]);
-    XCTAssertEqual([step image], image);
-    XCTAssertEqual([step auxiliaryImage], image);
-    XCTAssertEqual([step iconImage], image);
-}
+@interface ORKNavigablePageStepTests : XCTestCase
 
-- (void)testStep {
-    ORKStep *step = [[ORKStep alloc] initWithIdentifier:@"STEP"];
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"TASK" steps:NULL];
-    ORKResult *result = [[ORKResult alloc] initWithIdentifier:@"RESULT"];
-    
-    [step setTitle:@"Title"];
-    [step setText:@"Text"];
-    [step setTask:task];
-    
-    ORKStepViewController *controller = [step instantiateStepViewControllerWithResult:result];
-    
-    XCTAssertEqual([step title], @"Title");
-    XCTAssertEqual([step text], @"Text");
-    XCTAssertEqual([step task], task);
-    XCTAssertEqual([controller restorationIdentifier], [step identifier]);
-    XCTAssertEqual([controller restorationClass], [step stepViewControllerClass]);
-    XCTAssertEqual([controller step], step);
-    XCTAssertEqual([step stepViewControllerClass], [ORKStepViewController class]);
-    XCTAssertEqual([step isRestorable], YES);
-    XCTAssert([step.identifier isEqualToString:@"STEP"]);
-    XCTAssert([step isEqual:step]);
-    XCTAssertEqual([step requestedPermissions], ORKPermissionNone);
-    XCTAssertEqualObjects([step requestedHealthKitTypesForReading], nil);
-}
+@end
 
-- (void)testORKNavigablePageStep {
+@implementation ORKNavigablePageStepTests
+
+- (void)testAttributes {
     ORKQuestionStep *stepOne = [ORKQuestionStep questionStepWithIdentifier:@"stepOne"
                                                                      title:@"QUESTION"
                                                                   question:@"Which step do we go to?"
@@ -244,7 +341,7 @@
     // Check step if answer is YES
     ORKStep *nextStep = [pageStep stepAfterStepWithIdentifier:@"stepOne" withResult:taskResult];
     XCTAssert([nextStep.identifier isEqualToString:@"stepTwo"]);
-
+    
     // Check step if answer is NO
     result.booleanAnswer = @(NO);
     stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"stepOne" results:@[result]];
@@ -258,10 +355,18 @@
     taskResult.results = @[stepResult];
     nextStep = [pageStep stepAfterStepWithIdentifier:@"stepOne" withResult:taskResult];
     XCTAssert([nextStep.identifier isEqualToString:@"stepFour"]);
-
+    
 }
 
-- (void)testPasscodeStep {
+@end
+
+@interface ORKPasscodeStepTests : XCTestCase
+
+@end
+
+@implementation ORKPasscodeStepTests
+
+- (void)testAttributes {
     
     ORKPasscodeStep *step = [ORKPasscodeStep passcodeStepWithIdentifier:@"STEP" passcodeFlow:ORKPasscodeFlowAuthenticate];
     XCTAssert([step.identifier isEqualToString:@"STEP"]);
@@ -269,7 +374,15 @@
     XCTAssertEqual(step.passcodeType, ORKPasscodeType4Digit);
 }
 
-- (void)testQuestionStep {
+@end
+
+@interface ORKQuestionStepTests : XCTestCase
+
+@end
+
+@implementation ORKQuestionStepTests
+
+- (void)testAttributes {
     NSString *identifier = @"Identifier";
     NSString *title = @"Title";
     NSString *question = @"How are you?";
@@ -301,7 +414,15 @@
     XCTAssertThrowsSpecificNamed([incorrectStep validateParameters], NSException, NSInvalidArgumentException);
 }
 
-- (void)testPDFViewerStep {
+@end
+
+@interface ORKPDFViewerStepTests : XCTestCase
+
+@end
+
+@implementation ORKPDFViewerStepTests
+
+- (void)testAttributes {
     NSString *identifier = @"STEP";
     NSURL *url = [NSURL URLWithString:@"TESTINGURL"];
     
@@ -313,7 +434,15 @@
     XCTAssertEqual([step actionBarOption], ORKPDFViewerActionBarOptionExcludeShare);
 }
 
-- (void)testRegistrationStep {
+@end
+
+@interface ORKRegistrationStepTests : XCTestCase
+
+@end
+
+@implementation ORKRegistrationStepTests
+
+- (void)testAttributes {
     NSString *identifier = @"STEP";
     NSString *title = @"TITLE";
     NSString *text = @"TEXT";
@@ -338,7 +467,15 @@
     XCTAssert([[[[step formItems] objectAtIndex:2] identifier] isEqualToString:@"ORKRegistrationFormItemConfirmPassword"]);
 }
 
-- (void)testWebViewStep {
+@end
+
+@interface ORKWebViewStepTests: XCTestCase
+
+@end
+
+@implementation ORKWebViewStepTests
+
+- (void)testAttributes {
     NSString *identifier = @"STEP";
     NSString *html = @"HTML";
     ORKWebViewStep *step = [ORKWebViewStep webViewStepWithIdentifier:identifier html:html];
@@ -352,10 +489,32 @@
     XCTAssertThrowsSpecificNamed([step validateParameters], NSException, NSInvalidArgumentException);
 }
 
-- (void)testEnvironmentSPLMeterStep {
+@end
+
+@interface ORKLearnMoreInstructionStepTests : XCTestCase
+
+@end
+
+@implementation ORKLearnMoreInstructionStepTests
+
+- (void)testAttributes {
+    NSString *identifier = @"STEP";
+    ORKLearnMoreInstructionStep *step = [[ORKLearnMoreInstructionStep alloc] initWithIdentifier:identifier];
+    XCTAssertEqual([step identifier], identifier);
+}
+
+@end
+
+@interface ORKEnvironmentSPLMeterStepTests : XCTestCase
+
+@end
+
+@implementation ORKEnvironmentSPLMeterStepTests
+
+- (void)testAttributes {
     NSString *identifier = @"STEP";
     ORKEnvironmentSPLMeterStep *step = [[ORKEnvironmentSPLMeterStep alloc] initWithIdentifier:identifier];
-
+    
     XCTAssertEqual([step identifier], identifier);
     XCTAssertNoThrow([step validateParameters]);
     XCTAssertEqual([step thresholdValue], 35.0);
@@ -377,5 +536,3 @@
 }
 
 @end
-
-

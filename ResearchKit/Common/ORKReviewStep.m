@@ -116,7 +116,7 @@
 }
 
 - (BOOL)isStandalone {
-    return _steps != nil;
+    return _steps.count > 0;
 }
 
 @end

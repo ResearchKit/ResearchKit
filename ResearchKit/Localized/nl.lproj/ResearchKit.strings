@@ -322,7 +322,7 @@
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Met deze activiteit bepaal je de gehoordrempelwaarden van een individu op de dB HL-schaal.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Zorg ervoor dat het volume van het apparaat op het hoogste niveau is ingesteld.\n\nTijdens deze taak wordt er een subtiele toon afgespeeld in het linker- of rechteroor.\n\nLuister aandachtig en tik telkens wanneer je een toon hoort op de knop.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Intakevragenlijst.";
-"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \"beter oor\", indien van toepassing";
+"dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Selecteer je voorkeur voor \“beter oor\”, indien van toepassing";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "geen voorkeur";
@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Tik na het aftellen op stippen, waarbij je afwisselend op cijfers en letters tikt. Begin door op het eerste cijfer '1' te tikken, gevolgd door een tik op de eerste letter 'A', en dan '2' – 'B' – '3' – 'C'… totdat je het cijfer '7' bereikt.";
 "TRAILMAKING_INTRO_TEXT" = "Doe dit zo snel als je kunt zonder fouten te maken. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
-"TRAILMAKING_TIMER" = "%.1f sec.";
-"TRAILMAKING_ERROR" = "%@ (%d fout)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d fouten)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

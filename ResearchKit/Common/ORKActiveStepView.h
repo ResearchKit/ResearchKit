@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import "ORKVerticalContainerView.h"
+#import "ORKStepContainerView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKActiveStep;
 @class ORKActiveStepCustomView;
 
-@interface ORKActiveStepView : ORKVerticalContainerView
+@interface ORKActiveStepView : ORKStepContainerView;
 
 @property (nonatomic, strong, nullable) ORKActiveStep *activeStep;
 @property (nonatomic, strong, nullable) ORKActiveStepCustomView *activeCustomView;
