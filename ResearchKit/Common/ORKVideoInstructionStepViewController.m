@@ -110,14 +110,25 @@
         self.videoInstructionStep.image = nil;
         return;
     }
-    AVAsset* asset = [AVAsset assetWithURL:[self videoInstructionStep].videoURL];
-    CMTime duration = [asset duration];
-    duration.value = MIN([self videoInstructionStep].thumbnailTime, duration.value / duration.timescale) * duration.timescale;
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    CGImageRef thumbnailImageRef = [imageGenerator copyCGImageAtTime:duration actualTime:NULL error:NULL];
-    UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
-    CGImageRelease(thumbnailImageRef);
-    [self videoInstructionStep].image = thumbnailImage;
+    
+    [self videoInstructionStep].image = [UIImage imageNamed:@"placeholder"];
+
+    ORKWeakTypeOf(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        ORKStrongTypeOf(self) strongSelf = weakSelf;
+        AVAsset* asset = [AVAsset assetWithURL:[strongSelf videoInstructionStep].videoURL];
+        CMTime duration = [asset duration];
+        duration.value = MIN([strongSelf videoInstructionStep].thumbnailTime, duration.value / duration.timescale) * duration.timescale;
+        AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        CGImageRef thumbnailImageRef = [imageGenerator copyCGImageAtTime:duration actualTime:NULL error:NULL];
+        UIImage *thumbnailImage = [UIImage imageWithCGImage:thumbnailImageRef];
+        CGImageRelease(thumbnailImageRef);
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [strongSelf videoInstructionStep].image = thumbnailImage;
+            [strongSelf stepDidChange];
+        });
+    });
 }
 
 - (void)play {
