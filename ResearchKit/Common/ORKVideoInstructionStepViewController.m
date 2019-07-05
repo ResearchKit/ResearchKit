@@ -93,7 +93,9 @@
             playImageView.translatesAutoresizingMaskIntoConstraints = NO;
 
             NSLayoutConstraint* xConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.stepContentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-            NSLayoutConstraint* yConstraint = [NSLayoutConstraint constraintWithItem:self.stepView.stepContentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:playImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+            
+            CGFloat yOffSet = ORKStepContainerTopContentHeightForWindow(self.view.window)/2 - playImageView.frame.size.height/2;
+            NSLayoutConstraint* yConstraint = [NSLayoutConstraint constraintWithItem:playImageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.stepView.stepContentView attribute:NSLayoutAttributeTop multiplier:1 constant:yOffSet];
 
             [self.stepView.stepContentView addConstraints:@[xConstraint, yConstraint]];
         }
