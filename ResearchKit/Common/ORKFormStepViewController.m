@@ -692,9 +692,11 @@
             BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
 
             BOOL scale = (answerFormat.questionType == ORKQuestionTypeScale);
+         
+            BOOL valuePicker = [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]];
 
             // Items require individual section
-            if (multiCellChoices || multilineTextEntry || scale) {
+            if (multiCellChoices || multilineTextEntry || scale || valuePicker) {
                 // Add new section
                 section = [[ORKTableSection alloc]  initWithSectionIndex:_allSections.count];
                 [_allSections addObject:section];
