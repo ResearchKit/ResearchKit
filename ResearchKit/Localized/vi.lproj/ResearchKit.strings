@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Sau thời gian đếm ngược, chạm vào các dấu chấm theo thứ tự luân phiên giữa các số và chữ cái. Bắt đầu bằng cách chạm vào số đầu tiên '1', tiếp theo là chạm vào chữ cái đầu tiên 'A' và sau đó là '2' – 'B' – '3' – 'C'… cho tới khi bạn đến số '7'.";
 "TRAILMAKING_INTRO_TEXT" = "Thực hiện việc này nhanh nhất có thể mà không mắc lỗi. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
-"TRAILMAKING_TIMER" = "%.1f giây";
-"TRAILMAKING_ERROR" = "%@ (%d lỗi)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d lỗi)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

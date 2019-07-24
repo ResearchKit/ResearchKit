@@ -659,5 +659,14 @@ ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseHK;
 /// Chinese (Taiwan)
 ORK_EXTERN ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW;
 
+typedef NS_OPTIONS(NSUInteger, ORKTouchAbilityTaskOption) {
+    ORKTouchAbilityTaskOptionTap              = 1 << 0,
+    ORKTouchAbilityTaskOptionLongPress        = 1 << 1,
+    ORKTouchAbilityTaskOptionSwipe            = 1 << 2,
+    ORKTouchAbilityTaskOptionVerticalScroll   = 1 << 3,
+    ORKTouchAbilityTaskOptionHorizontalScroll = 1 << 4,
+    ORKTouchAbilityTaskOptionPinch            = 1 << 5,
+    ORKTouchAbilityTaskOptionRotation         = 1 << 6
+} ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_END

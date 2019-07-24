@@ -566,7 +566,7 @@
     ORKTableStep *tableStep = [[ORKTableStep alloc] initWithIdentifier:@"tableStep"];
     tableStep.title = @"Table Step";
     tableStep.items = @[@"Item 1", @"Item 2", @"Item 3"];
-    tableStep.isBulleted = YES;
+    tableStep.bulletType = ORKBulletTypeNumber;
     [steps addObject:tableStep];
     
     ORKCompletionStep *stepLast = [[ORKCompletionStep alloc] initWithIdentifier:@"lastStep"];

@@ -50,12 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = tabBarController.viewControllers![1] as! UINavigationController
 
         // Find the `ResultViewController` (if any) that's a view controller in the navigation controller.
-        return navigationController.viewControllers.filter { $0 is ResultViewController }.first as? ResultViewController
+        return navigationController.viewControllers.first(where: { (someVC) -> Bool in
+            someVC is ResultViewController
+        }) as? ResultViewController
     }
     
     // MARK: UIApplicationDelegate
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         
         // When a task result has been finished, update the result view controller's task result.
         taskListViewController.taskResultFinishedCompletionHandler = { [unowned self] taskResult in

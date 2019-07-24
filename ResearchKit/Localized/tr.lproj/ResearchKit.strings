@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Geri sayımdan sonra rakamlar ve harfler arasında dönüşümlü olarak noktalara dokunun. Önce “1” rakamına dokunarak başlayın, ardından ilk harf olan “A”ya sonra “2” – “B” – “3” – “C”… noktalarına dokunarak “7” rakamına ulaşın.";
 "TRAILMAKING_INTRO_TEXT" = "Bunu hata yapmadan olabildiğince hızlı yapın. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
-"TRAILMAKING_TIMER" = "%.1f sn.";
-"TRAILMAKING_ERROR" = "%@ (%d hata)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d hata)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

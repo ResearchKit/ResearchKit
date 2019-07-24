@@ -141,21 +141,6 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     }];
 }
 
-- (void)updateLayoutMargins {
-    CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self updateLayoutMargins];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self updateLayoutMargins];
-}
-
 - (void)updateConstraints {
     if ([self.constraints count]) {
         [NSLayoutConstraint deactivateConstraints:self.constraints];
@@ -165,7 +150,6 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    NSDictionary *metrics = @{@"diameter": @(ORKHolePegViewDiameter)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
@@ -179,16 +163,6 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pegView(diameter)]->=0-|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:metrics views:views]];
-    
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_holeView]->=0-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
 

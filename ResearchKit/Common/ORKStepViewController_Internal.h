@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKStepViewController.h"
+#import <ResearchKit/ORKStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -72,9 +72,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
-- (void)showValidityAlertWithMessage:(NSString *)text;
+- (BOOL)showValidityAlertWithMessage:(NSString *)text;
 
-- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (BOOL)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 - (void)initializeInternalButtonItems;
 

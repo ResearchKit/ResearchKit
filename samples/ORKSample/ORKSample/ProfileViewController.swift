@@ -83,7 +83,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileStaticTableViewCell.reuseIdentifier, for: indexPath) as? ProfileStaticTableViewCell else { fatalError("Unable to dequeue a ProfileStaticTableViewCell") }
         let objectType = healthObjectTypes[(indexPath as NSIndexPath).row]
         
-        switch(objectType.identifier) {
+        switch objectType.identifier {
             case HKCharacteristicTypeIdentifier.dateOfBirth.rawValue:
                 configureCellWithDateOfBirth(cell)
             
@@ -124,8 +124,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
             let age = ageComponents.year
 
             cell.valueLabel.text = "\(age ?? 0)"
-        }
-        catch {
+        } catch {
         }
     }
     

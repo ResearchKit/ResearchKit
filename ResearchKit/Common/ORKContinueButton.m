@@ -35,6 +35,7 @@
 
 
 static const CGFloat ContinueButtonTouchMargin = 10;
+static const CGFloat ContinueButtonHeight = 50.0;
 
 @implementation ORKContinueButton {
     NSLayoutConstraint *_heightConstraint;
@@ -66,11 +67,6 @@ static const CGFloat ContinueButtonTouchMargin = 10;
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    CGFloat height = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ?
-        ORKGetMetricForWindow(ORKScreenMetricContinueButtonHeightCompact, window) :
-        ORKGetMetricForWindow(ORKScreenMetricContinueButtonHeightRegular, window);
-    _heightConstraint.constant = height;
-    
     _widthConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window);
 }
 
@@ -81,7 +77,7 @@ static const CGFloat ContinueButtonTouchMargin = 10;
                                                         toItem:nil
                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                     multiplier:1.0
-                                                      constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+                                                      constant:ContinueButtonHeight];
     _heightConstraint.active = YES;
     
     _widthConstraint = [NSLayoutConstraint constraintWithItem:self

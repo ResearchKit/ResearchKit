@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "उल्टी गिनती के बाद, संख्याओं और अक्षरों के बीच वैकल्पिक क्रम में डॉट पर टैप करें। पहली संख्या ‘१’ पर टैप करके उसके बाद पहले अक्षर ‘क’ पर टैप करके आरंभ करें फिर ‘२’ – ‘ख’ – ‘३’ – ‘ग’ पर तब तक टैप करते जाएँ… जब तक आप संख्या ‘७’ तक नहीं पहुँच जाते।";
 "TRAILMAKING_INTRO_TEXT" = "जितना जल्दी संभव हो बिना ग़लती किए यह करें। \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
-"TRAILMAKING_TIMER" = "%.1f से॰";
-"TRAILMAKING_ERROR" = "%@ (%d त्रुटि)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d त्रुटियाँ)";
 "TRAILMAKING_LETTER_A" = "क";
 "TRAILMAKING_LETTER_B" = "ख";
 "TRAILMAKING_LETTER_C" = "ग";

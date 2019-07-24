@@ -33,14 +33,15 @@ import ResearchKit
 
 public extension TaskFactory {
 
-   @objc class func makeNavigableOrderedTask(_ taskIdentifier : String) -> ORKNavigableOrderedTask {
+   @objc
+   class func makeNavigableOrderedTask(_ taskIdentifier: String) -> ORKNavigableOrderedTask {
         var steps: [ORKStep] = []
         var answerFormat: ORKAnswerFormat
         var step: ORKStep
         var textChoices: [ORKTextChoice]
         
         // Intro step
-        step = ORKInstructionStep(identifier:"introStep")
+        step = ORKInstructionStep(identifier: "introStep")
         step.title = "This task demonstrates rule-based navigation within tasks"
         steps.append(step)
 
@@ -64,12 +65,12 @@ public extension TaskFactory {
             ORKTextChoice(text: "Nausea", value: "nausea" as NSCoding & NSCopying & NSObjectProtocol)
         ]
         answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoices)
-        step = ORKQuestionStep(identifier: "symptom", title: "Which is your most severe symptom?", answer: answerFormat)
+        step = ORKQuestionStep(identifier: "symptom", title: "Symptoms", question: "Which is your most severe symptom?", answer: answerFormat)
         step.isOptional = false
         steps.append(step)
         
         answerFormat = ORKAnswerFormat.booleanAnswerFormat()
-        step = ORKQuestionStep(identifier: "severity", title: "Does your symptom interfere with your daily life?", answer: answerFormat)
+        step = ORKQuestionStep(identifier: "severity", title: "Symptoms", question: "Does your symptom interfere with your daily life?", answer: answerFormat)
         step.isOptional = false
         steps.append(step)
         
@@ -108,9 +109,9 @@ public extension TaskFactory {
         var predicateRule: ORKPredicateStepNavigationRule
         
         // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
-        var resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formFeeling");
+        var resultSelector = ORKResultSelector(stepIdentifier: "introForm", resultIdentifier: "formFeeling")
         let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
-        resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formMood");
+        resultSelector = ORKResultSelector(stepIdentifier: "introForm", resultIdentifier: "formMood")
         let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "good" as NSCoding & NSCopying & NSObjectProtocol)
         let predicateGoodMoodAndFeeling: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
@@ -126,7 +127,7 @@ public extension TaskFactory {
         //      [NSPredicate predicateWithFormat:
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
         //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-        resultSelector = ORKResultSelector.init(resultIdentifier: "symptom");
+        resultSelector = ORKResultSelector(resultIdentifier: "symptom")
         let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "headache" as NSCoding & NSCopying & NSObjectProtocol)
         
         // User didn't chose headache at the symptom step
@@ -142,11 +143,11 @@ public extension TaskFactory {
         // Equivalent to:
         //      [NSPredicate predicateWithFormat:
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-        resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
+        resultSelector = ORKResultSelector(resultIdentifier: "severity")
         let predicateSevereYes: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: true)
         
         // User chose NO at the severity step
-        resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
+        resultSelector = ORKResultSelector(resultIdentifier: "severity")
         let predicateSevereNo: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector, expectedAnswer: false)
         
         let predicateSevereHeadache: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereYes])

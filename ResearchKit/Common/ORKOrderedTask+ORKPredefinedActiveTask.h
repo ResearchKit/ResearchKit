@@ -32,7 +32,6 @@
 @import UIKit;
 #import <ResearchKit/ORKOrderedTask.h>
 
-
 @class ORKNavigableOrderedTask;
 
 
@@ -680,6 +679,38 @@ NS_ASSUME_NONNULL_BEGIN
                            trailmakingInstruction:(nullable NSString *)trailmakingInstruction
                                         trailType:(ORKTrailMakingTypeIdentifier)trailType
                                           options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that measures visual acuity using landolt C.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ 
+ @return An landolt C visual acuity task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)landoltCVisualAcuityTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)itendedDescription;
+
+/**
+ Returns a predefined task that measures contrast sensitivity using landolt C.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ 
+ @return An landolt C contrast sensitivity task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)landoltCContrastSensitivityTaskWithIdentifier:(NSString *)identifier
+                                    intendedUseDescription:(nullable NSString *)itendedDescription;                                     
+
+
++ (ORKOrderedTask *)touchAbilityTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                       taskOptions:(ORKTouchAbilityTaskOption)taskOptions
+                                           options:(ORKPredefinedTaskOption)options;
 
 @end
 

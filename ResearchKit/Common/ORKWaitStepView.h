@@ -39,13 +39,13 @@
 
 
 @import UIKit;
-#import "ORKVerticalContainerView.h"
+#import "ORKStepContainerView.h"
 #import "ORKTypes.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKWaitStepView : ORKVerticalContainerView
+@interface ORKWaitStepView : ORKStepContainerView
 
 - (instancetype)initWithIndicatorType:(ORKProgressIndicatorType)type;
 

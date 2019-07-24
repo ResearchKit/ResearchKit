@@ -245,29 +245,29 @@
     return [[self recordingDirectoryURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [self logName], [self extension]]];
 }
 
-- (BOOL)recreateFileWithError:(NSError **)error {
+- (BOOL)recreateFileWithError:(NSError **)errorOut {
     NSURL *url = [self recordingFileURL];
     if (!url) {
-        if (error) {
-            *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
+        if (errorOut != NULL) {
+            *errorOut = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
         }
         return NO;
     }
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if (![fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:error]) {
+    if (![fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:errorOut]) {
         return NO;
     }
     
     if ([fileManager fileExistsAtPath:[url path]]) {
-        if (![fileManager removeItemAtPath:[url path] error:error]) {
+        if (![fileManager removeItemAtPath:[url path] error:errorOut]) {
             return NO;
         }
     }
     
     [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
-    [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+    [fileManager setAttributes:@{NSFileProtectionKey: ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:errorOut];
     return YES;
 }
 

@@ -34,15 +34,15 @@ import Foundation
 class OnboardingStateManager: NSObject {
     
     static let shared = OnboardingStateManager()
-    let ONBOARDING_COMPLETED_KEY = "OnboardingCompletedKey"
+    let onboardingCompletedKey = "OnboardingCompletedKey"
     
     func setOnboardingCompletedState(state: Bool) {
         let defaults = UserDefaults.standard
-        defaults.set(state, forKey: ONBOARDING_COMPLETED_KEY)
+        defaults.set(state, forKey: onboardingCompletedKey)
     }
     
     func getOnboardingCompletedState() -> Bool {
         let defaults = UserDefaults.standard
-        return defaults.bool(forKey: ONBOARDING_COMPLETED_KEY)
+        return defaults.bool(forKey: onboardingCompletedKey)
     }
 }

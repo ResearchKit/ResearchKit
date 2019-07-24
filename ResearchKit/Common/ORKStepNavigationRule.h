@@ -253,12 +253,11 @@ ORK_CLASS_AVAILABLE
  step navigation rules to be triggered before a task step is shown. Each step can have one skip rule
  at most.
  
- Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns
- the identifier of the destination step for the rule.
+ Subclasses must implement the `stepShouldSkipWithTaskResult:` method, which returns whether the
+ step should be skipped.
  
- Two concrete subclasses are included: `ORKPredicateStepNavigationRule` can match any answer
- combination in the results of the ongoing task and jump accordingly; `ORKDirectStepNavigationRule`
- unconditionally navigates to the step specified by the destination step identifier.
+ A concrete subclass is included: `ORKPredicateSkipStepNavigationRule`, which will skip the step
+ if the results of the ongoing task match the provided `resultPredicate`.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKSkipStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
@@ -397,7 +396,6 @@ ORK_CLASS_AVAILABLE
 /**
  Returns a new step modifier.
  
- @param stepIdentifier    The step identifier for the step to modify
  @param resultPredicate   The result predicate to use to determine if the step should be modified
  @param keyValueMap       The mapping dictionary for this object
  @return                  A new step modifier

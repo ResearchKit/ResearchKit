@@ -33,9 +33,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 
-func executeAfterDelay(_ delay:Double, closure:@escaping ()->()) {
+func executeAfterDelay(_ delay: Double, closure: @escaping () -> Void) {
     let delayTime = DispatchTime.now() + delay
-    let dispatchWorkItem = DispatchWorkItem(block: closure);
+    let dispatchWorkItem = DispatchWorkItem(block: closure)
     DispatchQueue.main.asyncAfter(
         deadline: delayTime, execute: dispatchWorkItem)
 }
@@ -72,10 +72,11 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
-        self.tableView.dataSource = self;
+        super.viewDidLoad()
+        self.tableView.dataSource = self
         
         // ORKPieChartView
-        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell
+        pieChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as? PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
         pieChartView?.dataSource = randomColorPieChartDataSource
         // Optional custom configuration
@@ -121,7 +122,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
 
         // ORKBarGraphChartView
-        barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as! BarGraphChartTableViewCell
+        barGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: barGraphChartIdentifier) as? BarGraphChartTableViewCell
         let barGraphChartView = barGraphChartTableViewCell.graphChartView as! ORKBarGraphChartView
         barGraphChartView.dataSource = barGraphChartDataSource
         executeAfterDelay(1.5) {
@@ -162,7 +163,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
 
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as? LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
         // Optional custom configuration
@@ -204,7 +205,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         }
         
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as? DiscreteGraphChartTableViewCell
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphChartView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = discreteGraphChartDataSource
         // Optional custom configuration
@@ -242,7 +243,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chartTableViewCells[(indexPath as NSIndexPath).row];
+        let cell = chartTableViewCells[(indexPath as NSIndexPath).row]
         return cell
     }
     
@@ -253,7 +254,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         lineGraphChartTableViewCell.graphChartView.animate(withDuration: 0.5)
         discreteGraphChartTableViewCell.graphChartView.animate(withDuration: 0.5)
         discreteGraphChartTableViewCell.graphChartView.animate(withDuration: 2.5)
-    }    
+    }
 }
 
 class ChartPerformanceListViewController: UIViewController, UITableViewDataSource {
@@ -273,10 +274,11 @@ class ChartPerformanceListViewController: UIViewController, UITableViewDataSourc
     }
     
     override func viewDidLoad() {
-        self.tableView.dataSource = self;
+        super.viewDidLoad()
+        self.tableView.dataSource = self
         
         // ORKLineGraphChartView
-        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as! LineGraphChartTableViewCell
+        lineGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: lineGraphChartIdentifier) as? LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = graphChartDataSource
         // Optional custom configuration
@@ -284,7 +286,7 @@ class ChartPerformanceListViewController: UIViewController, UITableViewDataSourc
         lineGraphChartView.showsVerticalReferenceLines = true
 
         // ORKDiscreteGraphChartView
-        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
+        discreteGraphChartTableViewCell = tableView.dequeueReusableCell(withIdentifier: discreteGraphChartIdentifier) as? DiscreteGraphChartTableViewCell
         let discreteGraphChartView = discreteGraphChartTableViewCell.graphChartView as! ORKDiscreteGraphChartView
         discreteGraphChartView.dataSource = graphChartDataSource
         // Optional custom configuration
@@ -302,12 +304,12 @@ class ChartPerformanceListViewController: UIViewController, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chartTableViewCells[(indexPath as NSIndexPath).row];
+        let cell = chartTableViewCells[(indexPath as NSIndexPath).row]
         return cell
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         lineGraphChartTableViewCell.graphChartView.animate(withDuration: 0.5)
-    }    
+    }
 }

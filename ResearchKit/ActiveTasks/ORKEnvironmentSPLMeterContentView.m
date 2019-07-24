@@ -170,23 +170,9 @@ static const CGFloat DBLabelFontSize = 35.0;
     [super finishStep:viewController];
 }
 
-- (void)updateLayoutMargins {
-    CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self updateLayoutMargins];
-}
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    [self updateLayoutMargins];
-}
-
 - (void)setUpConstraints {
 
+    _ringView.translatesAutoresizingMaskIntoConstraints = NO;
     NSArray *constraints = @[
                              
                              [NSLayoutConstraint constraintWithItem:_ringView

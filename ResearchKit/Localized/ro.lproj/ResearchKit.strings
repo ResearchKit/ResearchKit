@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "După numărătoarea inversă, apăsați punctele în ordine alternativă între numere și litere. Începeți prin apăsarea primului număr, ‘1’, apoi apăsați prima literă, 'A' și continuați cu '2' – 'B' – '3' – 'C'… până când ajungeți la numărul ’7’.";
 "TRAILMAKING_INTRO_TEXT" = "Faceți acest lucru cât mai rapid puteți fără să faceți greșeli. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
-"TRAILMAKING_TIMER" = "%.1f sec.";
-"TRAILMAKING_ERROR" = "%@ (%d eroare)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d erori)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

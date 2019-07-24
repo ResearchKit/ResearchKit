@@ -30,15 +30,52 @@
 
 
 @import Foundation;
+@import UIKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface ORKESerializationLocalizer : NSObject
+
+- (instancetype)initWithBundle:(NSBundle *)bundle tableName:(NSString *)tableName;
+
+@property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, strong) NSString *tableName;
+
+@end
+
+@protocol ORKESerializationImageProvider
+
+- (UIImage *)imageForReference:(NSDictionary *)reference;
+- (nullable NSDictionary *)referenceBySavingImage:(UIImage *)image;
+
+@end
+
+@interface ORKESerializationContext : NSObject
+
+- (instancetype)initWithLocalizer:(nullable ORKESerializationLocalizer *)localizer
+                    imageProvider:(nullable id<ORKESerializationImageProvider>)imageProvider;
+
+@property (nonatomic, strong, nullable) ORKESerializationLocalizer *localizer;
+@property (nonatomic, strong, nullable) id<ORKESerializationImageProvider> imageProvider;
+
+@end
+
 typedef _Nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
 typedef _Nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
-typedef _Nullable id (^ORKESerializationObjectToJSONBlock)(id object);
-typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
+typedef _Nullable id (^ORKESerializationObjectToJSONBlock)(id object, ORKESerializationContext *context);
+typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject, ORKESerializationContext *context);
 
+
+
+
+@interface ORKESerializationBundleImageProvider : NSObject<ORKESerializationImageProvider>
+
+- (instancetype)initWithBundle:(NSBundle *)bundle;
+
+@property (nonatomic, strong, readonly) NSBundle *bundle;
+
+@end
 
 @interface ORKESerializer : NSObject
 
@@ -48,9 +85,15 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 + (nullable id)objectFromJSONObject:(NSDictionary *)object error:(NSError **)error;
 
++ (nullable id)objectFromJSONObject:(NSDictionary *)object context:(ORKESerializationContext *)context error:(NSError **)error;
+
++ (NSDictionary *)JSONObjectForObject:(id)object context:(ORKESerializationContext *)context error:(__unused NSError **)error;
+
 + (nullable id)objectFromJSONData:(NSData *)data error:(NSError **)error;
 
 + (NSArray *)serializableClasses;
+
++ (NSArray<NSString *> *)serializedPropertiesForClass:(Class)c;
 
 @end
 

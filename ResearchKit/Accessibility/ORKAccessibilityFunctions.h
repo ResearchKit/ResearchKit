@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 #import "ORKHelpers_Internal.h"
 
 

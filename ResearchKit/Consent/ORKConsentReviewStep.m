@@ -53,6 +53,7 @@
         _consentDocument = consentDocument;
         _signature = signature;
         _requiresScrollToBottom = NO;
+        self.showsProgress = NO;
     }
     return self;
 }
@@ -102,10 +103,6 @@
 
 - (NSUInteger)hash {
     return super.hash ^ self.consentDocument.hash ^ self.signature.hash ^ self.reasonForConsent.hash ^ (_requiresScrollToBottom ? 0xf : 0x0);
-}
-
-- (BOOL)showsProgress {
-    return NO;
 }
 
 @end

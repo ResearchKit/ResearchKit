@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+ORK_CLASS_AVAILABLE
 @interface ORKEnvironmentSPLMeterResult : ORKResult
 
 @property (nonatomic, assign) double sensitivityOffset;

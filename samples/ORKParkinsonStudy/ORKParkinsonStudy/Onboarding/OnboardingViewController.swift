@@ -50,6 +50,7 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.delegate = self
     }
     
@@ -71,7 +72,7 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
             NSLocalizedString("ONBOARDING_WELCOME_EXPECTATIONS_STUDY_OWNER", comment: "") as NSString
         ]
         whatToExpectStep.bulletIconNames = ["phone", "calendar", "share"]
-        whatToExpectStep.isBulleted = true
+        whatToExpectStep.bulletType = .circle
         
         // Requirements
         let requirementsStep = ORKTableStep(identifier: "requirementsStep")
@@ -91,7 +92,7 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
         // Review step
         let signature = consentDoc.signatures!.first!
         let reviewStep = ORKConsentReviewStep(identifier: "reviewStep", signature: signature, in: consentDoc)
-        reviewStep.text =  NSLocalizedString("ONBOARDING_WELCOME_REVIEW_BODY", comment: "")
+        reviewStep.text = NSLocalizedString("ONBOARDING_WELCOME_REVIEW_BODY", comment: "")
         reviewStep.reasonForConsent = NSLocalizedString(
             "ONBOARDING_WELCOME_REVIEW_CONSENT_AFFIRM", comment: ""
         )
@@ -119,7 +120,9 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
     func signatureResult(taskViewController: ORKTaskViewController) -> ORKConsentSignatureResult? {
         
         let taskResults: [ORKResult]? = taskViewController.result.results
-        let reviewStepResult = taskResults?.filter { $0.identifier == "reviewStep" }.first
+        let reviewStepResult = taskResults?.first(where: { (result) -> Bool in
+            result.identifier == "reviewStep"
+        })
         let reviewStepResults = (reviewStepResult as? ORKStepResult)?.results
         let signatureResult = reviewStepResults?.first as? ORKConsentSignatureResult
         
@@ -131,8 +134,8 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
         
         // If there is a signature result, and no consent, exit onboarding.
         if
-            let _signatureResult = signatureResult(taskViewController: taskViewController),
-            _signatureResult.consented == false {
+            let signatureResult = signatureResult(taskViewController: taskViewController),
+            signatureResult.consented == false {
             
             self.presentingViewController?.dismiss(animated: false, completion: nil)
             
@@ -156,8 +159,8 @@ class OnboardingViewController: ORKTaskViewController, ORKTaskViewControllerDele
             // Access the first and last name from the review step
             
             if
-                let _signatureResult = signatureResult(taskViewController: taskViewController),
-                let signature = _signatureResult.signature {
+                let signatureResult = signatureResult(taskViewController: taskViewController),
+                let signature = signatureResult.signature {
                 
                 let defaults = UserDefaults.standard
                 defaults.set(signature.givenName, forKey: "firstName")

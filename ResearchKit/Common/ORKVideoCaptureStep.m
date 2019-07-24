@@ -47,7 +47,7 @@
         self.optional = YES;
         self.duration = @120;
         self.audioMute = NO;
-        self.flashMode = AVCaptureFlashModeOff;
+        self.torchMode = AVCaptureTorchModeAuto;
         self.devicePosition = AVCaptureDevicePositionBack;
     }
     return self;
@@ -60,7 +60,7 @@
         ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
         ORK_DECODE_OBJ(aDecoder, duration);
         ORK_DECODE_BOOL(aDecoder, audioMute);
-        ORK_DECODE_ENUM(aDecoder, flashMode);
+        ORK_DECODE_ENUM(aDecoder, torchMode);
         ORK_DECODE_ENUM(aDecoder, devicePosition);
         ORK_DECODE_OBJ(aDecoder, accessibilityHint);
         ORK_DECODE_OBJ(aDecoder, accessibilityInstructions);
@@ -74,7 +74,7 @@
     ORK_ENCODE_UIEDGEINSETS(aCoder, templateImageInsets);
     ORK_ENCODE_OBJ(aCoder, duration);
     ORK_ENCODE_BOOL(aCoder, audioMute);
-    ORK_ENCODE_ENUM(aCoder, flashMode);
+    ORK_ENCODE_ENUM(aCoder, torchMode);
     ORK_ENCODE_ENUM(aCoder, devicePosition);
     ORK_ENCODE_OBJ(aCoder, accessibilityHint);
     ORK_ENCODE_OBJ(aCoder, accessibilityInstructions);
@@ -90,7 +90,7 @@
     step.templateImageInsets = self.templateImageInsets;
     step.duration = self.duration;
     step.audioMute = self.audioMute;
-    step.flashMode = self.flashMode;
+    step.torchMode = self.torchMode;
     step.devicePosition = self.devicePosition;
     step.accessibilityHint = self.accessibilityHint;
     step.accessibilityInstructions = self.accessibilityInstructions;
@@ -98,7 +98,7 @@
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.templateImage.hash ^ self.duration.hash ^ self.audioMute ^ self.flashMode ^ self.devicePosition ^ self.accessibilityHint.hash ^ self.accessibilityInstructions.hash;
+    return super.hash ^ self.templateImage.hash ^ self.duration.hash ^ self.audioMute ^ self.torchMode ^ self.devicePosition ^ self.accessibilityHint.hash ^ self.accessibilityInstructions.hash;
 }
 
 - (BOOL)isEqual:(id)object {
@@ -110,7 +110,7 @@
     UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets) &&
     ORKEqualObjects(self.duration, castObject.duration) &&
     (self.audioMute == castObject.audioMute) &&
-    (self.flashMode == castObject.flashMode) &&
+    (self.torchMode == castObject.torchMode) &&
     (self.devicePosition == castObject.devicePosition) &&
     ORKEqualObjects(self.accessibilityHint, castObject.accessibilityHint) &&
     ORKEqualObjects(self.accessibilityInstructions, castObject.accessibilityInstructions);

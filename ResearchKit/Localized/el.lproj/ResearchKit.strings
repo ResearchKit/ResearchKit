@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Μετά την αντίστροφη μέτρηση, αγγίξτε κουκκίδες σε εναλλάξ σειρά μεταξύ αριθμών και γραμμάτων. Ξεκινήστε αγγίζοντας τον πρώτο αριθμό «1», μετά το πρώτο γράμμα «A», και στη συνέχεια «2» – «B» – «3» – «C»… μέχρι να φτάσετε στον αριθμό «7».";
 "TRAILMAKING_INTRO_TEXT" = "Κάντε αυτήν τη δραστηριότητα όσο πιο γρήγορα μπορείτε χωρίς να κάνετε λάθη. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
-"TRAILMAKING_TIMER" = "%.1f δ.";
-"TRAILMAKING_ERROR" = "%@ (%d σφάλμα)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d σφάλματα)";
 "TRAILMAKING_LETTER_A" = "Α";
 "TRAILMAKING_LETTER_B" = "Β";
 "TRAILMAKING_LETTER_C" = "Γ";

@@ -34,6 +34,7 @@
 #import "ORKActiveStepTimer.h"
 #import "ORKActiveStepTimerView.h"
 #import "ORKActiveStepView.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKVerticalContainerView.h"
@@ -118,16 +119,17 @@
 
 - (void)setActiveStepView {
     if (!_activeStepView) {
-        _activeStepView = [[ORKActiveStepView alloc] initWithFrame:self.view.bounds];
+        _activeStepView = [ORKActiveStepView new];
     }
-    [_activeStepView setCustomView:_customView];
-    _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+    if (_customView) {
+        _activeStepView.customContentView = _customView;
+    }
     [self.view addSubview:_activeStepView];
 }
 
 - (void)setNavigationFooterView {
     if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
+        _navigationFooterView = _activeStepView.navigationFooterView;
     }
     _navigationFooterView.skipButtonItem = self.skipButtonItem;
     _navigationFooterView.continueEnabled = _finished;
@@ -141,7 +143,6 @@
     [_navigationFooterView updateContinueAndSkipEnabled];
     
     [self updateContinueButtonItem];
-    [self.view addSubview:_navigationFooterView];
 }
 
 - (void)setupConstraints {
@@ -150,61 +151,38 @@
     }
     _constraints = nil;
     
-    UIView *viewForiPad = [self viewForiPadLayoutConstraints];
     
     _activeStepView.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     
     _constraints = @[
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeTop
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeLeft
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeLeft
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeRight
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
-                                                  attribute:NSLayoutAttributeRight
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeBottom
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeBottom
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeLeft
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
-                                                  attribute:NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                   constant:0.0],
-                     [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeRight
-                                                  relatedBy:NSLayoutRelationEqual
-                                                     toItem:viewForiPad ? : self.view
+                                                     toItem:self.view
                                                   attribute:NSLayoutAttributeRight
                                                  multiplier:1.0
                                                    constant:0.0],
                      [NSLayoutConstraint constraintWithItem:_activeStepView
                                                   attribute:NSLayoutAttributeBottom
                                                   relatedBy:NSLayoutRelationEqual
-                                                     toItem:_navigationFooterView
-                                                  attribute:NSLayoutAttributeTop
+                                                     toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
                                                  multiplier:1.0
-                                                   constant:0.0],
+                                                   constant:0.0]
                      
                      ];
     [NSLayoutConstraint activateConstraints:_constraints];
@@ -217,26 +195,16 @@
     [self prepareStep];
 }
 
-- (UIView *)customViewContainer {
-    __unused UIView *view = [self view];
-    return _activeStepView.customViewContainer;
-}
-
-- (ORKTintedImageView *)imageView {
-    __unused UIView *view = [self view];
-    return _activeStepView.imageView;
-}
-
 - (void)setCustomView:(UIView *)customView {
     _customView = customView;
-    [_activeStepView setStepView:_customView];
+    if (_customView) {
+        [_activeStepView setCustomContentView:_customView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     ORK_Log_Debug(@"%@",self);
-
-    [self.taskViewController setRegisteredScrollView:_activeStepView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -272,7 +240,6 @@
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
-    _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
@@ -520,7 +487,15 @@
     BOOL isHalfway = !_hasSpokenHalfwayCountdown && timer.runtime > timer.duration / 2.0;
     if (!finished && self.activeStep.shouldSpeakRemainingTimeAtHalfway && !UIAccessibilityIsVoiceOverRunning() && isHalfway) {
         _hasSpokenHalfwayCountdown = YES;
-        NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), @(countDownValue)];
+        
+        NSDateComponentsFormatter *secondsFormatter = [NSDateComponentsFormatter new];
+        secondsFormatter.unitsStyle = NSDateFormatterFullStyle;
+        secondsFormatter.allowedUnits = NSCalendarUnitSecond;
+        secondsFormatter.formattingContext = NSFormattingContextDynamic;
+        secondsFormatter.maximumUnitCount = 1;
+        NSString *seconds = [secondsFormatter stringFromTimeInterval:countDownValue];
+        NSString *text = [NSString localizedStringWithFormat:ORKLocalizedString(@"COUNTDOWN_SPOKEN_REMAINING_%@", nil), seconds];
+        
         [voice speakText:text];
     }
 }

@@ -88,6 +88,14 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy) NSString *accessibilityHint;
 
+/**
+ A boolean value indicating whether or not RAW image data should be captured.
+ 
+ The default value of this property is 'NO'. If set to YES, the step will capture in RAW and
+ display preview using HEIC or JPEG. RAW format will only be captured if the device supports it.
+ */
+@property (nonatomic, assign) BOOL captureRaw;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,9 +29,8 @@
  */
 
 #import <ResearchKit/ORKTypes.h>
+#import <ResearchKit/ORKContinueButton.h>
 #import "ORKNavigationContainerView.h"
-#import "ORKContinueButton.h"
-#import "ORKBorderedButton.h"
 #import "ORKFootnoteLabel.h"
 
 
@@ -59,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) ORKNavigationContainerButtonStyle cancelButtonStyle;
 
 - (void)updateContinueAndSkipEnabled;
+- (void)deprioritizeContentWidthConstraints;
 
 @end
 

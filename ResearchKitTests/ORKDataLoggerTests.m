@@ -32,6 +32,7 @@
 @import XCTest;
 @import ResearchKit.Private;
 
+#import "ORKHelpers_Internal.h"
 
 @interface ORKDataLoggerTests : XCTestCase <ORKDataLoggerDelegate> {
     NSURL *_directory;
@@ -48,8 +49,10 @@
 
 - (void)setUp {
     [super setUp];
+    NSURL *baseURL = [NSURL fileURLWithPath:NSHomeDirectory()];
+    NSURL *standardizedBaseURL = [baseURL URLByStandardizingPath];
     
-    _directory = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[NSUUID UUID].UUIDString] isDirectory:YES];
+    _directory = [NSURL fileURLWithPath:[NSUUID UUID].UUIDString isDirectory:YES relativeToURL:standardizedBaseURL];
     
     BOOL success = [[NSFileManager defaultManager] createDirectoryAtURL:_directory withIntermediateDirectories:YES attributes:nil error:nil];
     XCTAssertTrue(success, @"Create log directory");
@@ -198,24 +201,24 @@
     XCTAssertFalse([_dataLogger isFileUploadedAtURL:_finishedLogFiles[1]]);
 }
 
-- (NSArray *)allLogsWithError:(NSError **)error {
+- (NSArray *)allLogsWithError:(NSError **)errorOut {
     NSMutableArray *logs = [NSMutableArray array];
     [_dataLogger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         [logs addObject:logFileUrl];
-    } error:error];
+    } error:errorOut];
     return logs;
 }
 
-- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError **)error {
+- (NSArray *)logsUploaded:(BOOL)uploaded withError:(NSError **)errorOut {
     NSMutableArray *logs = [NSMutableArray array];
     if (uploaded) {
         [_dataLogger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
-        } error:error];
+        } error:errorOut];
     } else {
         [_dataLogger enumerateLogsNeedingUpload:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
-        } error:error];
+        } error:errorOut];
     }
     return logs;
 }
@@ -246,11 +249,25 @@
         NSArray *uploaded = [self logsUploaded:YES withError:&error];
         XCTAssertNil(error);
         XCTAssertEqual(uploaded.count, 1);
-        XCTAssertEqualObjects(uploaded, @[_finishedLogFiles[0]]);
+        
+        NSURL *uploadedURL = [uploaded objectAtIndex:0];
+        NSString *uploadedFileName = [[uploadedURL lastPathComponent] stringByDeletingPathExtension];
+        
+        NSURL *finishedURL = [_finishedLogFiles objectAtIndex:0];
+        NSString *finishedFileName = [[finishedURL lastPathComponent] stringByDeletingPathExtension];
+        
+        XCTAssert([uploadedFileName isEqualToString: finishedFileName]);
         
         NSArray *needUpload = [self logsUploaded:NO withError:&error];
         XCTAssertNil(error);
-        XCTAssertEqualObjects(needUpload, @[_finishedLogFiles[1]]);
+        
+        NSURL *needUploadedURL = [needUpload objectAtIndex:0];
+        NSString *needUploadedFileName = [[needUploadedURL lastPathComponent] stringByDeletingPathExtension];
+        
+        NSURL *notFinishedURL = [_finishedLogFiles objectAtIndex:1];
+        NSString *notFinishedFileName = [[notFinishedURL lastPathComponent] stringByDeletingPathExtension];
+        
+        XCTAssert([needUploadedFileName isEqualToString:notFinishedFileName]);
     }
 }
 
@@ -275,7 +292,7 @@
     {
         NSDictionary *attribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:&error];
         XCTAssertNil(error);
-        XCTAssertEqualObjects(attribs[NSFileProtectionKey], ORKFileProtectionFromMode(_dataLogger.fileProtectionMode));
+        XCTAssertTrue([attribs[NSFileProtectionKey] isEqualToString:ORKFileProtectionFromMode(_dataLogger.fileProtectionMode)]);
     }
     {
         NSDictionary *attribs = [[NSFileManager defaultManager] attributesOfItemAtPath:[(NSURL *)logs[0] path] error:&error];

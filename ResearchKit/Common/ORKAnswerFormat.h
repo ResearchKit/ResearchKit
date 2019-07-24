@@ -1011,6 +1011,71 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKTextChoiceOther` class defines the choice option to describe an answer not
+ included in provided choices.
+ 
+ The `ORKTextChoiceOther` provides an optional text view of type `ORKAnswerTextView` that allows users to enter free form text.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTextChoiceOther : ORKTextChoice
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns a text choice other object that includes the specified text, detail text, exclusivity and a text view with placeholder text for additional user input.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ @param textViewPlaceholderText      The placeholder text for the text view.
+ 
+ @return A text choice other instance.
+ */
++ (instancetype)choiceWithText:(nullable NSString *)text
+                    detailText:(nullable NSString *)detailText
+                         value:(id<NSCopying, NSCoding, NSObject>)value
+                     exclusive:(BOOL)exclusive
+       textViewPlaceholderText:(NSString *)textViewPlaceholderText;
+
+/**
+ Returns an initialized text choice other object using the specified primary text or text with string attributes, detail text or text with string attributes, exclusivity and an optional view for free form text entry.
+ 
+ This method is the designated initializer.
+ 
+ @param text                         The primary text that describes the choice in a localized string.
+ @param primaryTextAttributedString  The primary text that describes the choice in an attributed string. Setting this will override `text`.
+ @param detailText                   The detail text to display below the primary text, in a localized string.
+ @param detailTextAttributedString   The detail text to display below the primary text, in an attributed string. Setting this will override `detailText`.
+ @param value                        The value to record in a result object when this item is selected.
+ @param exclusive                    Whether this choice is to be considered exclusive within the set of choices.
+ @param textViewPlaceholderText      The placeholder text for the text view.
+ @param textViewInputOptional        Whether the user is required to provide additional text when selecting this choice.
+ @param textViewStartsHidden         Whether the text view should be hidden untill the cell is selected.
+ 
+ @return An initialized text choice other object.
+ */
+- (instancetype)initWithText:(nullable NSString *)text
+ primaryTextAttributedString:(nullable NSAttributedString *)primaryTextAttributedString
+                  detailText:(nullable NSString *)detailText
+  detailTextAttributedString:(nullable NSAttributedString *)detailTextAttributedString
+                       value:(id<NSCopying, NSCoding, NSObject>)value
+                   exclusive:(BOOL)exclusive
+     textViewPlaceholderText:(NSString *)textViewPlaceholderText
+       textViewInputOptional:(BOOL)textViewInputOptional
+        textViewStartsHidden:(BOOL)textViewStartsHidden;
+
+@property (copy, readonly, nullable) NSString *textViewPlaceholderText;
+
+@property (readonly) BOOL textViewInputOptional;
+
+@property (readonly) BOOL textViewStartsHidden;
+
+@end
+
+
+/**
  The `ORKImageChoice` class defines a choice that can
  be included in an `ORKImageChoiceAnswerFormat` object.
  

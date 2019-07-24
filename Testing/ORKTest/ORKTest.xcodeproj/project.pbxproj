@@ -21,6 +21,7 @@
 		86717AFE1AC0C8BC00AC2A23 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD81AC0C53800AC2A23 /* ORKESerialization.m */; };
 		86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 86717B091AC0CC0400AC2A23 /* Localizable.strings */; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B119F055229BD4B6001402F9 /* samples.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B119F054229BD4B6001402F9 /* samples.bundle */; };
 		BC2A3CE11C58F1ED00DA64B7 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; };
 		BC2A3CE21C58F1ED00DA64B7 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BC2A3CE01C58F1ED00DA64B7 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BCEDC7D71E8A45DE00C5405F /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEDC7D31E8A45DE00C5405F /* ChartDataSources.swift */; };
@@ -121,6 +122,7 @@
 		86717B2B1AC0CC4A00AC2A23 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86D347F91AC0E1B4006DB02B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ORKTest.entitlements; sourceTree = "<group>"; };
+		B119F054229BD4B6001402F9 /* samples.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = samples.bundle; sourceTree = "<group>"; };
 		B1337BA01B1E709B0098AA54 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA11B1E709C0098AA54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA21B1E70A00098AA54 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		86717AA61AC0C0FE00AC2A23 /* ORKTestTests */ = {
 			isa = PBXGroup;
 			children = (
+				B119F054229BD4B6001402F9 /* samples.bundle */,
 				866DA52D1D63D1EE00C9AF3F /* ORKDataCollectionTests.m */,
 				86717AFF1AC0C93E00AC2A23 /* ORKESerialization.h */,
 				86717AD81AC0C53800AC2A23 /* ORKESerialization.m */,
@@ -383,9 +386,8 @@
 				TargetAttributes = {
 					86717A891AC0C0FE00AC2A23 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeamName = "Apple Inc. - SPG-NGS";
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -397,14 +399,14 @@
 					};
 					86717AA21AC0C0FE00AC2A23 = {
 						CreatedOnToolsVersion = 6.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 86717A891AC0C0FE00AC2A23;
 					};
 				};
 			};
 			buildConfigurationList = 86717A851AC0C0FE00AC2A23 /* Build configuration list for PBXProject "ORKTest" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -486,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B119F055229BD4B6001402F9 /* samples.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +645,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -686,7 +689,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -703,10 +706,9 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -714,7 +716,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -727,10 +729,9 @@
 				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -738,7 +739,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -749,7 +750,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -760,6 +761,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
 			};
@@ -771,13 +773,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ORKTest.app/ORKTest";
 			};

@@ -100,14 +100,14 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
     stepIdentifier = SymptomStepIdentifier;
-    step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"What is your symptom?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Survey" question:@"What is your symptom?" answer:answerFormat];
     step.optional = NO;
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
     stepIdentifier = SeverityStepIdentifier;
-    step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Survey" question:@"Does your symptom interferes with your daily life?" answer:answerFormat];
     step.optional = NO;
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
@@ -1685,7 +1685,8 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
     
     // Setup the task
     ORKStep *boolStep = [ORKQuestionStep  questionStepWithIdentifier:@"question"
-                                                               title:@"Yes or No"
+                                                               title:@"Question"
+                                                            question:@"Yes or No"
                                                               answer:[ORKAnswerFormat booleanAnswerFormat]];
     
     ORKStep *nextStep = [[ORKInstructionStep alloc] initWithIdentifier:@"nextStep"];

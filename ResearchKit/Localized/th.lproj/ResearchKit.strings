@@ -515,9 +515,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "หลังจากการนับถอยหลัง ให้แตะวงกลมที่มีตัวเลขและตัวอักษรในลำดับที่สลับกัน โดยเริ่มต้นด้วยการแตะตัวเลขแรก '1' แล้วแตะตัวอักษรแรก 'A' จากนั้นแตะ '2' – 'B' – '3' – 'C'… จนกว่าจะถึงตัวเลข '7'";
 "TRAILMAKING_INTRO_TEXT" = "ทำเช่นนี้ให้เร็วที่สุดเท่าที่จะทำได้โดยไม่ทำผิด \n";
 "TRAILMAKING_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
-"TRAILMAKING_TIMER" = "%.1f วิ";
-"TRAILMAKING_ERROR" = "%@ (ผิด %d ครั้ง)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (ผิด %d ครั้ง)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";

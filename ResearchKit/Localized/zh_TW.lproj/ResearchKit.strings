@@ -1,21 +1,21 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
- 
+
  2.  Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3.  Neither the name of the copyright holder(s) nor the names of any contributors
  may be used to endorse or promote products derived from this software without
  specific prior written permission. No license is granted to the trademarks of
  the copyright holders even if such marks are included in this software.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -515,15 +515,30 @@
 "TRAILMAKING_INTENDED_USE2_B" = "倒數之後，以交互順序點一下數字和字母之間的圓點。開始先點第一個數字「1」，再點第一個字母「A」，然後點「2」–「B」–「3」–「C」⋯直到數字「7」。";
 "TRAILMAKING_INTRO_TEXT" = "請用最快的速度完成，不要出錯。";
 "TRAILMAKING_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
-"TRAILMAKING_TIMER" = "%.1f 秒";
-"TRAILMAKING_ERROR" = "%@（%d 項錯誤）";
-"TRAILMAKING_ERROR_PLURAL" = "%@（%d 項錯誤）";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
 "TRAILMAKING_LETTER_D" = "D";
 "TRAILMAKING_LETTER_E" = "E";
 "TRAILMAKING_LETTER_F" = "F";
+
+/* Touch Ability active task. */
+"TOUCH_ABILITY_INSTRUCTION_TITLE" = "觸控能力測試活動";
+"TOUCH_ABILITY_INSTRUCTION_DETAIL" = "此項活動會測量您的觸控螢幕使用能力。請找一個可以讓您舒適使用本裝置的位置，來完成此項活動。";
+"TOUCH_ABILITY_TAP_TITLE" = "點按能力測驗";
+"TOUCH_ABILITY_TAP_TEXT" = "請點按畫面中出現的方塊，點按後方塊即會消失，請待方塊再次出現再進行下一次點按。";
+"TOUCH_ABILITY_LONG_PRESS_TITLE" = "長按能力測驗";
+"TOUCH_ABILITY_LONG_PRESS_TEXT" = "請長按畫面中出現的方塊，持續至少一秒鐘再抬起。無論是否確實長按至少一秒鐘，當您將手抬起後方塊即會消失，請待方塊再次出現再進行下一次長按。";
+"TOUCH_ABILITY_SWIPE_TITLE" = "掃動能力測驗";
+"TOUCH_ABILITY_SWIPE_TEXT" = "請依畫面中箭頭的方向掃動。當您完成掃動手勢後，箭頭即會消失，請待箭頭再次出現再進行下一次掃動。";
+"TOUCH_ABILITY_VERTICAL_SCROLL_TITLE" = "垂直滾動測驗";
+"TOUCH_ABILITY_VERTICAL_SCROLL_TEXT" = "此項測驗將要求您滾動一個數字列表，請將其中被色彩標記的項目移至虛線方框內。當您將手抬起並且列表停止滾動一秒鐘後，列表和方框即會消失，請待列表再次出現再進行下一次測驗。";
+"TOUCH_ABILITY_HORIZONTAL_SCROLL_TITLE" = "水平滾動測驗";
+"TOUCH_ABILITY_HORIZONTAL_SCROLL_TEXT" = "此項測驗將要求您滾動一個水平的數字列表，請將其中被色彩標記的項目移至虛線方框內。當您將手抬起並且列表停止滾動一秒鐘後，列表和方框即會消失，請待列表再次出現再進行下一次測驗。";
+"TOUCH_ABILITY_PINCH_TITLE" = "兩指縮放測驗";
+"TOUCH_ABILITY_PINCH_TEXT" = "請透過兩指縮放手勢將畫面中的方塊調整至與虛線方框相同大小。當您完成並將手指全數抬起後，方塊和方框即會消失，請待它們重新出現後再進行下一次測驗。";
+"TOUCH_ABILITY_ROTATION_TITLE" = "兩指旋轉測驗";
+"TOUCH_ABILITY_ROTATION_TEXT" = "請透過兩指旋轉手勢將畫面中的箭頭調整至對齊虛線箭頭。當您完成並將手指全數抬起後，箭頭即會消失，請待它們重新出現後再進行下一次測驗。";
 
 /* Speech Recognition active task. */
 "SPEECH_TASK_TITLE" = "語音辨識";

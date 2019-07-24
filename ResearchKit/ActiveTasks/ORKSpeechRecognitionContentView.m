@@ -43,7 +43,6 @@
 
 @interface ORKSpeechRecognitionContentView () <UITextFieldDelegate>
 
-@property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) ORKAudioGraphView *graphView;
 @property (nonatomic, strong) ORKSubheadlineLabel *transcriptLabel;
 

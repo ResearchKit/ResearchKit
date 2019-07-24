@@ -34,6 +34,7 @@
 #import "ORKActiveStepView.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKStepContainerView_Private.h"
 #import "ORKSpeechInNoiseContentView.h"
 #import "ORKSpeechInNoiseStep.h"
 
@@ -74,6 +75,7 @@
     _installedTap = NO;
     self.speechInNoiseContentView = [[ORKSpeechInNoiseContentView alloc] init];
     self.activeStepView.activeCustomView = self.speechInNoiseContentView;
+    self.activeStepView.customContentFillsAvailableSpace = YES;
     _speechInNoiseContentView.alertColor = [UIColor blueColor];
     [self.speechInNoiseContentView.playButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
     

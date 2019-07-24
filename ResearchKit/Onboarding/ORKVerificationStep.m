@@ -57,6 +57,7 @@
     if (self) {
         self.title = ORKLocalizedString(@"VERIFICATION_STEP_TITLE", nil);
         self.text = text;
+        self.showsProgress = NO;
         _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
         
         [self validateParameters];
@@ -79,10 +80,6 @@
 }
 
 - (BOOL)allowsBackNavigation {
-    return NO;
-}
-
-- (BOOL)showsProgress {
     return NO;
 }
 
