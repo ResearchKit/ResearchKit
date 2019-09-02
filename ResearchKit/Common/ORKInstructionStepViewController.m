@@ -165,7 +165,9 @@
 #pragma mark - ORKStepContainerLearnMoreItemDelegate
 
 - (void)stepViewLearnMoreButtonPressed:(ORKLearnMoreInstructionStep *)learnMoreStep {
-    [self presentViewController:[[ORKLearnMoreStepViewController alloc] initWithStep:learnMoreStep] animated:YES completion:nil];
+    ORKLearnMoreStepViewController *learnMoreViewController = [[ORKLearnMoreStepViewController alloc] initWithStep:learnMoreStep];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:learnMoreViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 @end
