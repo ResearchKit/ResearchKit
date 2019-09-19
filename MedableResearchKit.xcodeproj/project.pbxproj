@@ -351,7 +351,7 @@
 		86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B641A8D7C5B00081FAC /* ORKAnswerFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B651A8D7C5B00081FAC /* ORKAnswerFormat.m */; };
 		86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */; };
-		86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B671A8D7C5B00081FAC /* ORKAnswerTextField.h */; };
+		86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B671A8D7C5B00081FAC /* ORKAnswerTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40CEC1A8D7C5C00081FAC /* ORKAnswerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B681A8D7C5B00081FAC /* ORKAnswerTextField.m */; };
 		86C40CEE1A8D7C5C00081FAC /* ORKAnswerTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40B691A8D7C5B00081FAC /* ORKAnswerTextView.h */; };
 		86C40CF01A8D7C5C00081FAC /* ORKAnswerTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40B6A1A8D7C5B00081FAC /* ORKAnswerTextView.m */; };
@@ -424,7 +424,7 @@
 		86C40D821A8D7C5C00081FAC /* ORKSelectionSubTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BB31A8D7C5C00081FAC /* ORKSelectionSubTitleLabel.m */; };
 		86C40D841A8D7C5C00081FAC /* ORKSelectionTitleLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BB41A8D7C5C00081FAC /* ORKSelectionTitleLabel.h */; };
 		86C40D861A8D7C5C00081FAC /* ORKSelectionTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BB51A8D7C5C00081FAC /* ORKSelectionTitleLabel.m */; };
-		86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BB71A8D7C5C00081FAC /* ORKSkin.h */; };
+		86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BB71A8D7C5C00081FAC /* ORKSkin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BB81A8D7C5C00081FAC /* ORKSkin.m */; };
 		86C40D8E1A8D7C5C00081FAC /* ORKStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BB91A8D7C5C00081FAC /* ORKStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BBA1A8D7C5C00081FAC /* ORKStep.m */; };
@@ -3075,6 +3075,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */,
+				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				865EA1681ABA1AA10037C68E /* ORKPicker.h in Headers */,
 				BF1D43851D4904C6007EE90B /* ORKVideoInstructionStep.h in Headers */,
@@ -3185,7 +3187,6 @@
 				BA0AA6961EAEC0B600671ACE /* ORKStroopStep.h in Headers */,
 				71769E2920880C4500A19914 /* ORKdBHLToneAudiometryResult.h in Headers */,
 				BABBB19D2093299A00CB29E5 /* ORKSurveyCardHeaderView.h in Headers */,
-				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
 				242C9E111BBE06DE0088B7F4 /* ORKVerificationStepView.h in Headers */,
@@ -3419,7 +3420,6 @@
 				861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */,
 				86C40C461A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.h in Headers */,
 				86C40C521A8D7C5C00081FAC /* ORKTappingIntervalStep.h in Headers */,
-				86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */,
 				8419D6721FB73EC60088D7E5 /* ORKWebViewStepViewController.h in Headers */,
 				86C40DFE1A8D7C5C00081FAC /* ORKConsentDocument.h in Headers */,
 				D442397D1AF17F7600559D96 /* ORKImageCaptureStepViewController.h in Headers */,

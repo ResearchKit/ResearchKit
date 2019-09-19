@@ -20,3 +20,5 @@
 #import <ResearchKit/ORKFormItemCell.h>
 #import <ResearchKit/ORKPicker.h>
 #import <ResearchKit/ORKDateTimePicker.h>
+#import <ResearchKit/ORKAnswerTextField.h>
+#import <ResearchKit/ORKSkin.h>
