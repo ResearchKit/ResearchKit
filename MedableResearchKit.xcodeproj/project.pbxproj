@@ -1248,13 +1248,15 @@
 		959A2C0C1D68C91400841B04 /* ORKShoulderRangeOfMotionStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKShoulderRangeOfMotionStep.m; sourceTree = "<group>"; };
 		95E11E531D73396300BF865B /* ORKShoulderRangeOfMotionStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKShoulderRangeOfMotionStepViewController.h; sourceTree = "<group>"; };
 		95E11E541D73396300BF865B /* ORKShoulderRangeOfMotionStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKShoulderRangeOfMotionStepViewController.m; sourceTree = "<group>"; };
+		A17DE997233D069A00A19A73 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		A17DE998233D06A600A19A73 /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		A17DE999233D06B300A19A73 /* zh-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-TW"; path = "zh-TW.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
 		B11C549D1A9EF4A700265E61 /* ORKConsentSharingStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKConsentSharingStepViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B11DF3B31AA109C8009E76D2 /* AppledocSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		B11DF4C21AA10D70009E76D2 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ResearchKit.strings; sourceTree = "<group>"; };
-		B14660481AA10DD7002F95C2 /* zh_TW */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B183A5951A8535D100C76870 /* ResearchKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ResearchKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B18AABE01A9F08D9003871B5 /* ResearchKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = ResearchKit.modulemap; sourceTree = "<group>"; };
 		B1A860DB1A9693C400EA57B7 /* consent_01@2x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_01@2x.m4v"; sourceTree = "<group>"; };
@@ -1271,8 +1273,6 @@
 		B1A860E71A9693C400EA57B7 /* consent_05@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_05@3x.m4v"; sourceTree = "<group>"; };
 		B1A860E81A9693C400EA57B7 /* consent_06@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_06@3x.m4v"; sourceTree = "<group>"; };
 		B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = "consent_07@3x.m4v"; sourceTree = "<group>"; };
-		B1B349E41AA10DED005FAD66 /* zh_HK */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = zh_HK; path = zh_HK.lproj/ResearchKit.strings; sourceTree = "<group>"; };
-		B1B349E51AA10DF8005FAD66 /* zh_CN */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349E61AA10E02005FAD66 /* vi */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = vi; path = vi.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349E71AA10E0B005FAD66 /* uk */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = uk; path = uk.lproj/ResearchKit.strings; sourceTree = "<group>"; };
 		B1B349E81AA10E12005FAD66 /* th */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = th; path = th.lproj/ResearchKit.strings; sourceTree = "<group>"; };
@@ -3499,9 +3499,6 @@
 				en,
 				Base,
 				tr,
-				zh_TW,
-				zh_HK,
-				zh_CN,
 				vi,
 				uk,
 				th,
@@ -3535,16 +3532,11 @@
 				cs,
 				ca,
 				ar,
-				"zh-Hant",
-				"zh-HK",
-				"zh-Hans",
-				"pt-PT",
-				"fr-CA",
-				"es-MX",
-				"en-GB",
-				"en-AU",
 				nb,
 				"es-419",
+				"zh-HK",
+				"zh-CN",
+				"zh-TW",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -3992,9 +3984,6 @@
 			children = (
 				B1C0F4E21A9BA65F0022C153 /* en */,
 				B11DF4C21AA10D70009E76D2 /* tr */,
-				B14660481AA10DD7002F95C2 /* zh_TW */,
-				B1B349E41AA10DED005FAD66 /* zh_HK */,
-				B1B349E51AA10DF8005FAD66 /* zh_CN */,
 				B1B349E61AA10E02005FAD66 /* vi */,
 				B1B349E71AA10E0B005FAD66 /* uk */,
 				B1B349E81AA10E12005FAD66 /* th */,
@@ -4029,6 +4018,9 @@
 				B1B34A051AA10EDF005FAD66 /* ca */,
 				B1B34A061AA10EE4005FAD66 /* ar */,
 				B1B34A061AABBCCDDEEFFAAA /* no */,
+				A17DE997233D069A00A19A73 /* zh-HK */,
+				A17DE998233D06A600A19A73 /* zh-CN */,
+				A17DE999233D06B300A19A73 /* zh-TW */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
