@@ -437,7 +437,7 @@
 		86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BC21A8D7C5C00081FAC /* ORKSurveyAnswerCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40DA61A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BC51A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.h */; };
 		86C40DA81A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BC61A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.m */; };
-		86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BC71A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h */; };
+		86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BC71A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86C40DAC1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BC81A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.m */; };
 		86C40DAE1A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BC91A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.h */; };
 		86C40DB01A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BCA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.m */; };
@@ -3075,6 +3075,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */,
 				86C40D8A1A8D7C5C00081FAC /* ORKSkin.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
@@ -3403,7 +3404,6 @@
 				BC94EF311E962F7400143081 /* ORKDeprecated.h in Headers */,
 				86C40CB01A8D7C5C00081FAC /* ORKRecorder_Internal.h in Headers */,
 				86C40E101A8D7C5C00081FAC /* ORKConsentSceneViewController.h in Headers */,
-				86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */,
 				10864C9E1B27146B000F4158 /* ORKPSATStep.h in Headers */,
 				86C40D6E1A8D7C5C00081FAC /* ORKResult_Private.h in Headers */,
 				781D54121DF886AB00223305 /* ORKTrailmakingStep.h in Headers */,

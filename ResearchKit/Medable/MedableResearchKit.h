@@ -22,3 +22,4 @@
 #import <ResearchKit/ORKDateTimePicker.h>
 #import <ResearchKit/ORKAnswerTextField.h>
 #import <ResearchKit/ORKSkin.h>
+#import <ResearchKit/ORKSurveyAnswerCellForNumber.h>
