@@ -647,7 +647,7 @@
     for (ORKFormItem *item in items) {
         if (!item.answerFormat) {
             // Add new section
-            section = [[ORKTableSection alloc] initWithSectionIndex:_sections.count];
+            section = [[ORKTableSection alloc] initWithSectionIndex:_allSections.count];
             [_allSections addObject:section];
             
             // Save title
