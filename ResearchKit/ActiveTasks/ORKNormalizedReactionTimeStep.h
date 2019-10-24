@@ -1,5 +1,6 @@
 /*
- Copyright (c) 2017, Apple Inc. All rights reserved.
+ Copyright (c) 2019, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,39 +30,35 @@
  */
 
 
+@import Foundation;
+@import AudioToolbox;
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKActiveStep.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKStroopStep : ORKActiveStep
+@interface ORKNormalizedReactionTimeStep : ORKActiveStep
+
+@property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval timeout;
 
 @property (nonatomic, assign) NSInteger numberOfAttempts;
 
-/**
-A Boolean value indicating whether this task randomizes the visual and color of each stroop question.
-This means that the color of the text displayed and the text may not match, which makes for a harder stroop test. 
+@property (nonatomic, assign) double thresholdAcceleration;
 
-By default, this property is set to `YES`
-*/
-@property (nonatomic, assign) BOOL randomizeVisualAndColorAlignment;
+@property (nonatomic, assign) SystemSoundID successSound;
 
-/**
-A Boolean value indicating whether this task should use text or boxes.
-If set to `YES` then color words will be displayed for the user to guess.
-If set to `NO` we will display a square box with the current color for the user to guess
+@property (nonatomic, assign) SystemSoundID timeoutSound;
 
-By default, this property is set to `YES`
-*/
-@property (nonatomic, assign) BOOL useTextForStimuli;
+@property (nonatomic, assign) SystemSoundID failureSound;
 
-/**
-A Boolean value indicating whether this task will use a 2x2 grid of buttons
+@property (nonatomic) NSNumber *currentInterval;
 
-By default, this property is set to `NO`
-*/
-@property (nonatomic, assign) BOOL useGridLayoutForButtons;
 
 @end
 

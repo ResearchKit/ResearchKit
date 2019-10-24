@@ -332,7 +332,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.childNavigationController = [[UINavigationController alloc] initWithRootViewController:pageViewController];
     
     _pageViewController = pageViewController;
-    [_pageViewController.navigationController.navigationBar setPrefersLargeTitles:YES];
+    [_pageViewController.navigationController.navigationBar setPrefersLargeTitles:NO];
     [self setTask: task];
     
     self.showsProgressInNavigationBar = YES;
@@ -1379,6 +1379,17 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [self showViewController:stepViewController goForward:YES animated:YES];
     }
     
+}
+
+- (void)flipToFirstPage {
+    if ([self.task isKindOfClass:[ORKOrderedTask class]]) {
+        ORKOrderedTask *orderedTask = (ORKOrderedTask *)self.task;
+        ORKStep *firstStep = [[orderedTask steps] firstObject];
+        if (firstStep) {
+            [_managedStepIdentifiers removeAllObjects];
+            [self showViewController:[self viewControllerForStep:firstStep] goForward:YES animated:NO];
+        }
+    }
 }
 
 - (void)flipToPreviousPageFrom:(ORKStepViewController *)fromController {

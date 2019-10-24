@@ -36,6 +36,7 @@
 #import <ResearchKit/ORKPSATResult.h>
 #import <ResearchKit/ORKRangeOfMotionResult.h>
 #import <ResearchKit/ORKReactionTimeResult.h>
+#import <ResearchKit/ORKNormalizedReactionTimeResult.h>
 #import <ResearchKit/ORKSpatialSpanMemoryResult.h>
 #import <ResearchKit/ORKSpeechRecognitionResult.h>
 #import <ResearchKit/ORKStroopResult.h>
