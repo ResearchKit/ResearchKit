@@ -97,7 +97,11 @@
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setUpConstraints];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil)
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self
+                                                                             action:@selector(done:)];
+    
 }
 
 - (void)setUpConstraints {
