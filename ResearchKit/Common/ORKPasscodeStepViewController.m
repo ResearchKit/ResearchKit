@@ -429,8 +429,16 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
                     }
                 } else if (error.code != LAErrorUserCancel) {
                     // Display the error message.
+                    NSString *errorMessage = error.localizedDescription;
+                    if (error.code == LAErrorTouchIDLockout) {
+                        errorMessage = ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_LOCKED_OUT_MESSAGE", nil);
+                    } else if (error.code == LAErrorTouchIDNotEnrolled) {
+                        errorMessage = ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_NOT_ENROLLED_MESSAGE", nil);
+                    } else if (error.code == LAErrorAuthenticationFailed) {
+                        errorMessage = ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_RETRY_LIMIT_MESSAGE", nil);
+                    }
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil)
-                                                                                   message:error.localizedDescription
+                                                                                   message:errorMessage
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
