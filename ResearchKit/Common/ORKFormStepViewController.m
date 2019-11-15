@@ -299,6 +299,10 @@
 
 @interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate, ORKTableContainerViewDelegate, ORKTextChoiceCellGroupDelegate, ORKChoiceOtherViewCellDelegate, ORKLearnMoreViewDelegate>
 
+// Handle keyboard
+@property (nonatomic) UIEdgeInsets cachedContentInsets;
+@property (nonatomic) UIEdgeInsets cachedScrollIndicatorInsets;
+
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ORKStepContentView *headerView;
@@ -356,6 +360,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self stepDidChange];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
 }
 
 - (void)viewDidLayoutSubviews {
@@ -402,6 +409,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateDefaults:(NSMutableDictionary *)defaults {
@@ -1243,20 +1255,73 @@
     }
 }
 
+#pragma mark UIKeyboardNotifications
+- (void)keyboardWillHide:(NSNotification *)notification {
+    UIView *inputView = _currentFirstResponderCell;
+
+    if (inputView == nil) {
+        return;
+    }
+
+    UITableView *tableView = ORKFirstObjectOfClass(UITableView, inputView, superview);
+
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+        if (UIEdgeInsetsEqualToEdgeInsets(tableView.contentInset, _cachedContentInsets) == NO) {
+            tableView.contentInset = _cachedContentInsets;
+        }
+
+        if (UIEdgeInsetsEqualToEdgeInsets(tableView.scrollIndicatorInsets, _cachedScrollIndicatorInsets) == NO) {
+            tableView.scrollIndicatorInsets = _cachedScrollIndicatorInsets;
+        }
+    }
+                     completion:^(BOOL finished) {
+        _cachedScrollIndicatorInsets = UIEdgeInsetsZero;
+        _cachedContentInsets = UIEdgeInsetsZero;
+    }];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    UITableViewCell *cell = _currentFirstResponderCell;
+    UITableView *tableView = ORKFirstObjectOfClass(UITableView, cell, superview);
+
+    _cachedContentInsets = tableView.contentInset;
+    _cachedScrollIndicatorInsets = tableView.scrollIndicatorInsets;
+
+    NSDictionary *userInfo = notification.userInfo;
+    CGSize keyboardSize = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue.size;
+    keyboardSize.height = keyboardSize.height - 44;
+
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+
+    tableView.contentInset = contentInsets;
+    tableView.scrollIndicatorInsets = contentInsets;
+
+    CGRect cellFrame = cell.frame;
+    CGPoint desiredOffset = cellFrame.origin;
+
+    CGRect availableFrame = tableView.frame;
+    availableFrame.size.height -= keyboardSize.height;
+
+    desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height / 2);
+
+    if (availableFrame.size.height > cellFrame.size.height) {
+        desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height - cellFrame.size.height) - (cellFrame.size.height - 100);
+    }
+    desiredOffset.y = MAX(desiredOffset.y, 0);
+
+    [tableView setContentOffset:desiredOffset animated:NO];
+}
+
 #pragma mark ORKFormItemCellDelegate
 
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell {
     _currentFirstResponderCell = cell;
-    NSIndexPath *path = [_tableView indexPathForCell:cell];
-    if (path) {
-        [_tableContainer scrollCellVisible:cell animated:YES];
-    }
 }
 
 - (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell {
-    if (_currentFirstResponderCell == cell) {
-        _currentFirstResponderCell = nil;
-    }
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input {
