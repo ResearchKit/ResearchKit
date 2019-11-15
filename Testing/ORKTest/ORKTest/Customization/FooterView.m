@@ -75,14 +75,6 @@
                                                         attribute:NSLayoutAttributeBottom
                                                        multiplier:1.0
                                                          constant:-20.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueButton
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationLessThanOrEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeWidth
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
