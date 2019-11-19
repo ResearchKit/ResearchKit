@@ -38,7 +38,7 @@
 {
     self = [super init];
     if (self) {
-        self.numberOfLines = 2;
+        self.numberOfLines = 0;
         self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
