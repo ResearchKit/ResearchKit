@@ -250,6 +250,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly, nullable) ORKAnswerFormat *answerFormat;
 
 /**
+ A predicate that when true, hides the item from display.
+ */
+@property (nonatomic, nullable) NSPredicate *hidePredicate;
+
+/**
  Returns an form item that can be used for confirming a text entry.
  
  This form item is intended to be used with an `ORKFormStep` in order to confirm a previous
