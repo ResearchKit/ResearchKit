@@ -47,6 +47,7 @@
 #import "ORKSpatialSpanGame.h"
 #import "ORKSpatialSpanGameState.h"
 #import "ORKSpatialSpanMemoryStep.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"

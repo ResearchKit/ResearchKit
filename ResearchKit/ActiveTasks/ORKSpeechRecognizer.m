@@ -59,7 +59,7 @@
     [SFSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus status) {
         switch (status) {
             case SFSpeechRecognizerAuthorizationStatusAuthorized:
-                ORK_Log_Debug(@"Speech recognition request was authorized");
+                ORK_Log_Debug("Speech recognition request was authorized");
                 break;
             default:
                 // User did not authorize speech recognition
@@ -124,7 +124,7 @@
 
 - (void)speechRecognizer:(SFSpeechRecognizer *)speechRecognizer availabilityDidChange:(BOOL)available {
     dispatch_async(_responseQueue, ^{
-        ORK_Log_Debug(@"Availability did change = %d", available);
+        ORK_Log_Debug("Availability did change = %d", available);
         [_responseDelegate availabilityDidChange:available];
     });
 }
@@ -133,14 +133,14 @@
 
 - (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didFinishRecognition:(SFSpeechRecognitionResult *)recognitionResult {
     dispatch_async(_responseQueue, ^{
-        ORK_Log_Debug(@"did produce final result %@", [[recognitionResult bestTranscription] formattedString]);
+        ORK_Log_Debug("did produce final result %@", [[recognitionResult bestTranscription] formattedString]);
         [_responseDelegate didHypothesizeTranscription:[recognitionResult bestTranscription]];
     });
 }
 - (void)speechRecognitionTask:(SFSpeechRecognitionTask *)task didHypothesizeTranscription:(SFTranscription *)transcription {
     dispatch_async(_responseQueue, ^{
         // Produces transcription if shouldReportPartialResults is true
-        ORK_Log_Debug(@"did produce partial results %@", [transcription formattedString]);
+        ORK_Log_Debug("did produce partial results %@", [transcription formattedString]);
         [_responseDelegate didHypothesizeTranscription:transcription];
     });
 }
@@ -157,7 +157,7 @@
 
 - (void)speechRecognitionTaskWasCancelled:(SFSpeechRecognitionTask *)task {
     dispatch_async(_responseQueue, ^{
-        ORK_Log_Debug(@"Request cancelled");
+        ORK_Log_Debug("Request cancelled");
         [_responseDelegate didFinishRecognitionWithError:nil];
     });
 }

@@ -122,10 +122,6 @@
     [self.trialView startTrial];
 }
 
-- (void)dealloc {
-    ORK_Log_Debug(@"%@ dealloc", NSStringFromClass(self.class));
-}
-
 #pragma mark - ORKTouchAbilityTapStepViewController
 
 - (NSUInteger)numberOfColumnsForTraitCollection:(UITraitCollection *)traitCollection {

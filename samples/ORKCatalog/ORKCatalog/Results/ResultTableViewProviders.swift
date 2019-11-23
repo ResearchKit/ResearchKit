@@ -170,6 +170,9 @@ func resultTableViewProviderForResult(_ result: ORKResult?) -> UITableViewDataSo
         
     case is ORKLandoltCResult:
         providerType = LandoltCStepResultProvider.self
+
+    case is ORKEnvironmentSPLMeterResult:
+        providerType = SPLMeterStepResultTableViewProvider.self
         
     default:
         fatalError("No ResultTableViewProvider defined for \(type(of: result)).")
@@ -275,7 +278,13 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         
         // Show an empty row if there isn't any metadata in the rows for this section.
         if resultRows.isEmpty {
-            return tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.noChildResults.rawValue, for: indexPath)
+            let noChildResultsCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ResultRow.TableViewCellIdentifier.noChildResults.rawValue, for: indexPath)
+            
+            if #available(iOS 13.0, *) {
+                noChildResultsCell.textLabel?.textColor = UIColor.label
+            }
+            
+            return noChildResultsCell
         }
 
         // Fetch the `ResultRow` that corresponds to `indexPath`.
@@ -287,6 +296,11 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
 
                 cell.textLabel!.text = text
                 cell.detailTextLabel!.text = detailText
+                
+                if #available(iOS 13.0, *) {
+                    cell.textLabel?.textColor = UIColor.label
+                    cell.detailTextLabel?.textColor = UIColor.secondaryLabel
+                }
                 
                 /*
                     In this sample, the accessory type should be a disclosure
@@ -302,6 +316,10 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
 
                 cell.leftTextLabel.text = text
                 cell.rightImageView.image = image
+                
+                if #available(iOS 13.0, *) {
+                    cell.leftTextLabel.textColor = UIColor.label
+                }
 
                 return cell
 
@@ -596,8 +614,10 @@ class FileResultTableViewProvider: ResultTableViewProvider {
             // The URL of the generated file on disk.
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
-        
+
+
         if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType, contentType.hasPrefix("image/"), !contentType.hasSuffix(".dng") {
+            
             if let image = UIImage(contentsOfFile: fileURL.path) {
                 return rows + [
                     // The image of the generated file on disk.
@@ -1307,6 +1327,7 @@ class LandoltCStepResultProvider: ResultTableViewProvider {
     
     override func resultRowsForSection(_ section: Int) -> [ResultRow] {
         let landoltCResult = result as! ORKLandoltCResult
+
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
@@ -1315,6 +1336,26 @@ class LandoltCStepResultProvider: ResultTableViewProvider {
                 ResultRow(text: "letterAngle", detail: landoltCResult.letterAngle),
                 ResultRow(text: "sliderAngle", detail: landoltCResult.sliderAngle),
                 ResultRow(text: "score", detail: landoltCResult.score)
+            ]
+        }
+        
+        return rows
+    }
+}
+
+/// Table view provider specific to an `ORKEnvironmentSPLMeterResult` instance.
+class SPLMeterStepResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(_ section: Int) -> [ResultRow] {
+        let splMeterResult = result as! ORKEnvironmentSPLMeterResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "sensitivityOffset", detail: splMeterResult.sensitivityOffset),
+                ResultRow(text: "recordedSPLMeterSamples", detail: splMeterResult.recordedSPLMeterSamples)
             ]
         }
         

@@ -94,6 +94,9 @@
     step.optional = _optional;
     step.text = _text;
     step.detailText = self.detailText;
+    step.headerTextAlignment = _headerTextAlignment;
+    step.bodyItemTextAlignment = _bodyItemTextAlignment;
+    step.buildInBodyItems = _buildInBodyItems;
     step.footnote = self.footnote;
     step.image = self.image;
     step.imageContentMode = self.imageContentMode;
@@ -103,6 +106,7 @@
     step.showsProgress = _showsProgress;
     step.shouldTintImages = _shouldTintImages;
     step.useSurveyMode = _useSurveyMode;
+    step.useExtendedPadding = _useExtendedPadding;
     return step;
 }
 
@@ -117,6 +121,9 @@
             && ORKEqualObjects(self.title, castObject.title)
             && ORKEqualObjects(self.text, castObject.text)
             && ORKEqualObjects(self.detailText, castObject.detailText)
+            && (self.headerTextAlignment == castObject.headerTextAlignment)
+            && (self.bodyItemTextAlignment == castObject.bodyItemTextAlignment)
+            && (self.buildInBodyItems == castObject.buildInBodyItems)
             && ORKEqualObjects(self.footnote, castObject.footnote)
             && ORKEqualObjects(self.image, castObject.image)
             && ORKEqualObjects(self.auxiliaryImage, castObject.auxiliaryImage)
@@ -126,12 +133,13 @@
             && (self.showsProgress == castObject.showsProgress)
             && (self.optional == castObject.optional)
             && (self.shouldTintImages == castObject.shouldTintImages)
-            && (self.useSurveyMode == castObject.useSurveyMode));
+            && (self.useSurveyMode == castObject.useSurveyMode)
+            && (self.useExtendedPadding == castObject.useExtendedPadding));
 }
 
 - (NSUInteger)hash {
     // Ignore the task reference - it's not part of the content of the step.
-    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^ _imageContentMode ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ _bodyItems.hash ^ (_showsProgress ? 0xf : 0x0);
+    return _identifier.hash ^ _title.hash ^ _text.hash ^ self.detailText.hash ^_headerTextAlignment ^ _bodyItemTextAlignment ^ (_buildInBodyItems ? 0xf : 0x0) ^ _imageContentMode ^ self.footnote.hash ^ (_optional ? 0xf : 0x0) ^ _bodyItems.hash ^ (_showsProgress ? 0xf : 0x0) ^ (_useExtendedPadding ? 0xf : 0x0);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -145,6 +153,8 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+        ORK_DECODE_ENUM(aDecoder, headerTextAlignment);
+        ORK_DECODE_ENUM(aDecoder, bodyItemTextAlignment);
         ORK_DECODE_OBJ_CLASS(aDecoder, footnote, NSString);
         ORK_DECODE_IMAGE(aDecoder, image);
         ORK_DECODE_ENUM(aDecoder, imageContentMode);
@@ -156,6 +166,8 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, task, ORKOrderedTask);
         ORK_DECODE_BOOL(aDecoder, shouldTintImages);
         ORK_DECODE_BOOL(aDecoder, useSurveyMode);
+        ORK_DECODE_BOOL(aDecoder, buildInBodyItems);
+        ORK_DECODE_BOOL(aDecoder, useExtendedPadding);
     }
     return self;
 }
@@ -165,6 +177,8 @@
     ORK_ENCODE_OBJ(aCoder, title);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, detailText);
+    ORK_ENCODE_ENUM(aCoder, headerTextAlignment);
+    ORK_ENCODE_ENUM(aCoder, bodyItemTextAlignment);
     ORK_ENCODE_OBJ(aCoder, footnote);
     ORK_ENCODE_IMAGE(aCoder, image);
     ORK_ENCODE_ENUM(aCoder, imageContentMode);
@@ -175,6 +189,8 @@
     ORK_ENCODE_BOOL(aCoder, optional);
     ORK_ENCODE_BOOL(aCoder, shouldTintImages);
     ORK_ENCODE_BOOL(aCoder, useSurveyMode);
+    ORK_ENCODE_BOOL(aCoder, buildInBodyItems);
+    ORK_ENCODE_BOOL(aCoder, useExtendedPadding);
     if ([_task isKindOfClass:[ORKOrderedTask class]]) {
         ORK_ENCODE_OBJ(aCoder, task);
     }

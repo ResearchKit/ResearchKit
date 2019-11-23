@@ -44,6 +44,7 @@
 #import "ORKToneAudiometryStep.h"
 #import "ORKStepContainerView_Private.h"
 #import "ORKHelpers_Internal.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import <MediaPlayer/MediaPlayer.h>
 

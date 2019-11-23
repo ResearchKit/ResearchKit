@@ -66,7 +66,10 @@
     if (!self.navigationFooterView) {
         self.navigationFooterView = [ORKNavigationContainerView new];
     }
-    [self.navigationFooterView removeStyling];
+    
+    if (_isNavigationContainerScrollable == NO) {
+        [self.navigationFooterView removeStyling];
+    }
 }
 
 - (void)setStepTopContentImage:(UIImage *)stepTopContentImage {
@@ -110,9 +113,30 @@
     [_stepContentView setStepDetailText:_stepDetailText];
 }
 
+- (void)setStepHeaderTextAlignment:(NSTextAlignment)stepHeaderTextAlignment {
+    _stepHeaderTextAlignment = stepHeaderTextAlignment;
+    [_stepContentView setStepHeaderTextAlignment:_stepHeaderTextAlignment];
+}
+
+- (void)setBodyTextAlignment:(NSTextAlignment)bodyTextAlignment {
+    _bodyTextAlignment = bodyTextAlignment;
+    [_stepContentView setBodyTextAlignment:_bodyTextAlignment];
+}
+
 - (void)setBodyItems:(NSArray<ORKBodyItem *> *)bodyItems {
     _bodyItems = bodyItems;
     [_stepContentView setBodyItems:_bodyItems];
+}
+
+- (void)setBuildInBodyItems:(BOOL)buildInBodyItems {
+    _buildInBodyItems = buildInBodyItems;
+    [_stepContentView setBuildsInBodyItems:_buildInBodyItems];
+}
+
+
+- (void)setUseExtendedPadding:(BOOL)useExtendedPadding {
+    _useExtendedPadding = useExtendedPadding;
+    [_stepContentView setUseExtendedPadding:_useExtendedPadding];
 }
 
 - (UIImage *)topContentAndAuxiliaryImage {

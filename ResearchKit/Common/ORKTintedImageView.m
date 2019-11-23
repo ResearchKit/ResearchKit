@@ -179,7 +179,6 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
                 _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             }
         } else {
-            // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
             NSArray *animationImages = image.images;
             NSMutableArray *tintedAnimationImages = [[NSMutableArray alloc] initWithCapacity:animationImages.count];
             for (UIImage *animationImage in animationImages) {

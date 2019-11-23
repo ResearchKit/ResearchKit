@@ -120,6 +120,7 @@
 - (void)setActiveStepView {
     if (!_activeStepView) {
         _activeStepView = [ORKActiveStepView new];
+        [_activeStepView placeNavigationContainerInsideScrollView];
     }
     if (_customView) {
         _activeStepView.customContentView = _customView;
@@ -133,15 +134,14 @@
     }
     _navigationFooterView.skipButtonItem = self.skipButtonItem;
     _navigationFooterView.continueEnabled = _finished;
-    
+
     ORKActiveStep *step = [self activeStep];
     _navigationFooterView.useNextForSkip = step.shouldUseNextAsSkipButton;
     _navigationFooterView.optional = step.optional;
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
     BOOL neverHasContinueButton = (step.shouldContinueOnFinish && !step.startsFinished);
     [_navigationFooterView setNeverHasContinueButton:neverHasContinueButton];
     [_navigationFooterView updateContinueAndSkipEnabled];
-    
+
     [self updateContinueButtonItem];
 }
 
@@ -204,12 +204,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    ORK_Log_Debug(@"%@",self);
+    
+    if (_activeStepView.navigationFooterView) {
+        [_activeStepView.navigationFooterView flattenIfNeeded];
+    }
+    ORK_Log_Debug("%@",self);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -224,7 +228,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     
     [self suspend];
 }
@@ -249,7 +253,6 @@
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     [super setCancelButtonItem:cancelButtonItem];
-    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 - (void)setFinished:(BOOL)finished {
@@ -312,7 +315,7 @@
     
     self.finished = [[self activeStep] startsFinished];
     
-    ORK_Log_Debug(@"%@", self);
+    ORK_Log_Debug("%@", self);
     _activeStepView.activeStep = self.activeStep;
     
     if ([self.activeStep hasCountDown]) {
@@ -353,7 +356,7 @@
 }
 
 - (void)start {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     self.started = YES;
     [self startTimer];
     [_activeStepView.activeCustomView startStep:self];
@@ -379,7 +382,7 @@
 }
 
 - (void)suspend {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished || !self.started) {
         return;
     }
@@ -391,7 +394,7 @@
 }
 
 - (void)resume {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished || !self.started) {
         return;
     }
@@ -403,7 +406,7 @@
 }
 
 - (void)finish {
-    ORK_Log_Debug(@"%@",self);
+    ORK_Log_Debug("%@",self);
     if (self.finished) {
         return;
     }

@@ -88,6 +88,7 @@
 #import <ResearchKit/ORKTouchAbilityRotationStep.h>
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
+#import <ResearchKit/ORKFormStepViewController_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
 #import <ResearchKit/ORKPasscodeStepViewController_Internal.h>
 #import <ResearchKit/ORKInstructionStepViewController_Internal.h>
@@ -109,7 +110,6 @@
 #import <ResearchKit/ORKStroopStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
-#import <ResearchKit/ORKdBHLToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>

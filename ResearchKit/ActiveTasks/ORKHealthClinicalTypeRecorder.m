@@ -110,7 +110,7 @@
                                                               NSError *logError = nil;
                                                               [_logger append:clinicalRecord.FHIRResource.data error:&logError];
                                                               if (logError) {
-                                                                  ORK_Log_Warning(@"Failed to add health records object to the logger with error: %@", logError);
+                                                                  ORK_Log_Error("Failed to add health records object to the logger with error: %@", logError);
                                                                   return;
                                                               }
                                                           }];

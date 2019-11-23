@@ -128,14 +128,14 @@ static BOOL stateTransitionIsValid(ORKOperationState fromState, ORKOperationStat
     } else if ([self isReady]) {
         self.state = ORKOperationExecuting;
         
-        ORK_Log_Debug(@"%@ start", self.class);
+        ORK_Log_Debug("%@ start", self.class);
         _startBlock(self);
     }
     [self.lock unlock];
 }
 
 - (void)finish {
-    ORK_Log_Debug(@"%@ finish: %@", self, (self.error ? : @"OK"));
+    ORK_Log_Debug("%@ finish: %@", self, (self.error ? : @"OK"));
     self.state = ORKOperationFinished;
 }
 

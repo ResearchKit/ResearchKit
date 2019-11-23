@@ -349,13 +349,24 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     NSUInteger expectedTotalProgress = _orderedTaskSteps.count;
     
+    for (ORKStep *step in _orderedTaskSteps) {
+        ORKTaskProgress currentProgress = [_orderedTask progressOfCurrentStep:step withResult:mockTaskResult];
+        if (!currentProgress.shouldBePresented) {
+            expectedTotalProgress -= 1;
+        }
+    }
+    
     for (NSUInteger stepIndex = 0; stepIndex < _orderedTaskStepIdentifiers.count; stepIndex++) {
         ORKStep *currentStep = _orderedTaskSteps[stepIndex];
         XCTAssertEqualObjects(currentStep, [_orderedTask stepWithIdentifier:_orderedTaskStepIdentifiers[stepIndex]]);
         
-        const NSUInteger expectedCurrentProgress = stepIndex;
-        ORKTaskProgress currentProgress = [_orderedTask progressOfCurrentStep:currentStep withResult:mockTaskResult];
-        XCTAssertTrue(currentProgress.total == expectedTotalProgress && currentProgress.current == expectedCurrentProgress);
+         ORKTaskProgress currentProgress = [_orderedTask progressOfCurrentStep:currentStep withResult:mockTaskResult];
+        
+        if (currentProgress.shouldBePresented) {
+            const NSUInteger expectedCurrentProgress = stepIndex;
+            XCTAssertEqual(currentProgress.total, expectedTotalProgress);
+            XCTAssertEqual(currentProgress.current, expectedCurrentProgress);
+        }
         
         NSString *expectedPreviousStep = (stepIndex != 0) ? _orderedTaskSteps[stepIndex - 1] : nil;
         NSString *expectedNextStep = (stepIndex < _orderedTaskStepIdentifiers.count - 1) ? _orderedTaskSteps[stepIndex + 1] : nil;

@@ -36,6 +36,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKLearnMoreInstructionStep;
+
 @interface ORKTaskViewController () <ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
 
 - (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
@@ -44,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Any StepVC contains a vertical scroll view should register here.
 // So taskVC can monitor scroll view's content offset and update hairline's alpha.
 @property (nonatomic, weak, nullable) UIScrollView *registeredScrollView;
+
+- (void)learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreInstructionStep fromStepViewController:(ORKStepViewController *)stepViewController;
 
 @end
 

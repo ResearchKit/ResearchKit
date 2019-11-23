@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL manageUnitAndPlaceholder;
 
+@property (nonatomic) BOOL hideUnitWhenAnswerEmpty;
+
 @end
 
 
@@ -69,7 +71,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKUnitTextField *textField;
 
+@property (nonatomic, strong) UILabel *errorMessageLabel;
+
 @property (nonatomic, readonly) CGFloat estimatedWidth;
+
+@property (nonatomic) BOOL hideUnitWhenAnswerEmpty;
 
 @end
 

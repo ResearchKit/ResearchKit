@@ -240,13 +240,9 @@
     return button;
 }
 
-- (void)ork_setBackButtonItem:(UIBarButtonItem *)backButton {
-    [super ork_setBackButtonItem:backButton];
-}
-
-- (void)updateNavLeftBarButtonItem {
+- (void)updateBarButtonItems {
     if ([self currentIndex] == 0) {
-        [super updateNavLeftBarButtonItem];
+        [super updateBarButtonItems];
     } else {
         self.navigationItem.leftBarButtonItem = [self goToPreviousPageButton];
     }
@@ -257,7 +253,7 @@
         return;
     }
     
-    [self updateNavLeftBarButtonItem];
+    [self updateBarButtonItems];
 }
 
 #pragma mark - actions
@@ -415,7 +411,7 @@
         BOOL semaphoreBTimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
         
         if (semaphoreATimedOut || semaphoreBTimedOut) {
-            ORK_Log_Debug(@"[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
+            ORK_Log_Debug("[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
         }
             
         dispatch_async(dispatch_get_main_queue(), ^{

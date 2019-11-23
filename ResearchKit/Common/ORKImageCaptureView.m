@@ -171,7 +171,6 @@
         _navigationFooterView.continueButtonItem = _captureButtonItem;
         _navigationFooterView.skipButtonItem = _skipButtonItem;
     }
-    _navigationFooterView.cancelButtonItem = _cancelButtonItem;
 }
 
 - (void)setCapturedImage:(UIImage *)capturedImage {

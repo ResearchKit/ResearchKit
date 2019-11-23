@@ -101,6 +101,12 @@ ORK_EXTERN NSString *const ORKBulletItemTextColorKey;
 /// ORKStepContentView stepTopContentImage  KVO keyPath image changed
 ORK_EXTERN NSString *const ORKStepTopContentImageChangedKey;
 
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKDoneButtonPressedKey;
+
+/// Name of notification that is triggered when the keyboard's done button is pressed
+ORK_EXTERN NSString *const ORKResetDoneButtonKey;
+
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
 
@@ -134,6 +140,20 @@ ORK_EXTERN CGFloat ORKiPadBackgroundViewLeftRightPadding;
 /// Default body to body item padding;
 ORK_EXTERN CGFloat ORKBodyToBodyPaddingStandard;
 
+/// Default body to body item padding;
+ORK_EXTERN CGFloat ORKBodyToBodyParagraphPaddingStandard;
+
+/// Step Content Icon Image View Dimension
+ORK_EXTERN CGFloat ORKStepContentIconImageViewDimension;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityHidden;
+
+/// Navigation Container Effect View Style
+ORK_EXTERN CGFloat ORKEffectViewOpacityVisible;
+
+/// Checkmark View dimension
+ORK_EXTERN CGFloat CheckmarkViewDimension;
 
 /// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
@@ -219,6 +239,7 @@ BOOL ORKNeedWideScreenDesign(UIView *view);
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 
 CGFloat ORKStepContainerLeftRightPaddingForWindow(UIWindow *window);
+CGFloat ORKStepContainerExtendedLeftRightPaddingForWindow(UIWindow *window);
 CGFloat ORKStepContainerTopPaddingForWindow(UIWindow *window);
 CGFloat ORKStepContainerTopContentHeightForWindow(UIWindow *window);
 CGFloat ORKStepContainerFirstItemTopPaddingForWindow(UIWindow *window);

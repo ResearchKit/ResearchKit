@@ -105,8 +105,12 @@
 }
 
 - (void)answerDidChange {
+    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
+    ORKLocationAnswerFormat *locationAnswerFormat = ORKDynamicCast(answerFormat, ORKLocationAnswerFormat);
+
     _selectionView.answer = self.answer;
-    NSString *placeholder = self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
+    NSString *placeholder = locationAnswerFormat.placeholder ? :
+        (self.step.placeholder ? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil));
     [_selectionView setPlaceholderText:placeholder];
 }
 

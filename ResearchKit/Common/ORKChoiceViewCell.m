@@ -38,23 +38,20 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKAnswerTextView.h"
 #import "ORKSkin.h"
+#import "ORKCheckmarkView.h"
 
-
-static const CGFloat LabelRightMargin = 44.0;
 static const CGFloat CardTopBottomMargin = 2.0;
-static const CGFloat LabelTopBottomMargin = 20.0;
+static const CGFloat LabelTopBottomMargin = 14.0;
 static const CGFloat TextViewTopMargin = 20.0;
 static const CGFloat TextViewHeight = 100.0;
-static const CGFloat CheckViewDimension = 25.0;
-static const CGFloat CheckViewBorderWidth = 2.0;
-static const CGFloat LabelLeadingPadding = 10.0;
+static const CGFloat LabelCheckViewPadding = 10.0;
 
-@interface ORKChoiceViewCell()
+@interface ORKChoiceViewCell() <CAAnimationDelegate>
 
 @property (nonatomic) UIView *containerView;
 @property (nonatomic) ORKSelectionTitleLabel *primaryLabel;
 @property (nonatomic) ORKSelectionSubTitleLabel *detailLabel;
-@property (nonatomic) UIImageView *checkView;
+@property (nonatomic) ORKCheckmarkView *checkView;
 @property (nonatomic) NSMutableArray<NSLayoutConstraint *> *containerConstraints;
 
 @end
@@ -64,6 +61,10 @@ static const CGFloat LabelLeadingPadding = 10.0;
     CGFloat _leftRightMargin;
     CGFloat _topBottomMargin;
     CAShapeLayer *_contentMaskLayer;
+    UIColor *_fillColor;
+    CAShapeLayer *_foreLayer;
+    CAShapeLayer *_animationLayer;
+    CGRect _foreLayerBounds;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -83,8 +84,21 @@ static const CGFloat LabelLeadingPadding = 10.0;
     [self setMaskLayers];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 13.0, *)) {
+        _fillColor = [UIColor secondarySystemGroupedBackgroundColor];
+        // FIXME:- dark mode color displays solid black after animation ends if the views are stacked
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+            _fillColor = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
+        }
+    } else {
+        _fillColor = [UIColor ork_borderGrayColor];
+    }
+}
+
 - (void)setMaskLayers {
-    if (_useCardView) {
+    if (_useCardView && !_animationLayer) {
         if (_contentMaskLayer) {
             for (CALayer *sublayer in [_contentMaskLayer.sublayers mutableCopy]) {
                 [sublayer removeFromSuperlayer];
@@ -93,15 +107,28 @@ static const CGFloat LabelLeadingPadding = 10.0;
             _contentMaskLayer = nil;
         }
         _contentMaskLayer = [[CAShapeLayer alloc] init];
-        UIColor *fillColor = [UIColor ork_borderGrayColor];
-        [_contentMaskLayer setFillColor:[fillColor CGColor]];
+        UIColor *borderColor;
+        if (@available(iOS 13.0, *)) {
+            _fillColor = [UIColor secondarySystemGroupedBackgroundColor];
+            // FIXME:- dark mode color displays solid black after animation ends if the views are stacked
+            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                _fillColor = [UIColor colorWithRed:0.173 green:0.173 blue:0.180 alpha:1.0];
+            }
+            borderColor = UIColor.separatorColor;
+        } else {
+            _fillColor = [UIColor ork_borderGrayColor];
+            borderColor = [UIColor ork_midGrayTintColor];
+        }
+        [_contentMaskLayer setFillColor:[_fillColor CGColor]];
         
-        CAShapeLayer *foreLayer = [CAShapeLayer layer];
-        [foreLayer setFillColor:[[UIColor whiteColor] CGColor]];
-        foreLayer.zPosition = 0.0f;
+        [_foreLayer removeFromSuperlayer];
+        _foreLayer = nil;
+        _foreLayer = [CAShapeLayer layer];
+        [_foreLayer setFillColor:[_fillColor CGColor]];
+        _foreLayer.zPosition = 0.0f;
         
         CAShapeLayer *lineLayer = [CAShapeLayer layer];
-
+        
         if (_isLastItem || _isFirstItemInSectionWithoutTitle) {
             NSUInteger rectCorners;
             if (_isLastItem && !_isFirstItemInSectionWithoutTitle) {
@@ -114,7 +141,7 @@ static const CGFloat LabelLeadingPadding = 10.0;
                 rectCorners = UIRectCornerTopLeft | UIRectCornerTopRight | UIRectCornerBottomLeft | UIRectCornerBottomRight;
             }
             
-            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
+            _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height - ORKCardDefaultBorderWidth);
             
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.containerView.bounds
                                                            byRoundingCorners: rectCorners
@@ -122,22 +149,27 @@ static const CGFloat LabelLeadingPadding = 10.0;
             
             CGFloat foreLayerCornerRadii = ORKCardDefaultCornerRadii >= ORKCardDefaultBorderWidth ? ORKCardDefaultCornerRadii - ORKCardDefaultBorderWidth : ORKCardDefaultCornerRadii;
             
-            foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: foreLayerBounds
+            _foreLayer.path = [UIBezierPath bezierPathWithRoundedRect: _foreLayerBounds
                                                    byRoundingCorners: rectCorners
                                                          cornerRadii: (CGSize){foreLayerCornerRadii, foreLayerCornerRadii}].CGPath;
         }
         else {
-            CGRect foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
-            foreLayer.path = [UIBezierPath bezierPathWithRect:foreLayerBounds].CGPath;
+            _foreLayerBounds = CGRectMake(ORKCardDefaultBorderWidth, 0, self.containerView.bounds.size.width - 2 * ORKCardDefaultBorderWidth, self.containerView.bounds.size.height);
+            _foreLayer.path = [UIBezierPath bezierPathWithRect:_foreLayerBounds].CGPath;
             _contentMaskLayer.path = [UIBezierPath bezierPathWithRect:self.containerView.bounds].CGPath;
             
-            CGRect lineBounds = CGRectMake(_leftRightMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - 2 * _leftRightMargin, 0.5);
+            CGRect lineBounds = CGRectMake(ORKSurveyItemMargin, self.containerView.bounds.size.height - 1.0, self.containerView.bounds.size.width - ORKSurveyItemMargin, 0.5);
             lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;
             lineLayer.zPosition = 0.0f;
-            [lineLayer setFillColor:[[UIColor ork_midGrayTintColor] CGColor]];
-
         }
-        [_contentMaskLayer addSublayer:foreLayer];
+        
+        lineLayer.fillColor = borderColor.CGColor;
+        if (_cardViewStyle == ORKCardViewStyleBordered) {
+            _contentMaskLayer.fillColor = borderColor.CGColor;
+        }
+        
+        [_contentMaskLayer addSublayer:_foreLayer];
+        
         [_contentMaskLayer addSublayer:lineLayer];
         [_containerView.layer insertSublayer:_contentMaskLayer atIndex:0];
     }
@@ -152,84 +184,84 @@ static const CGFloat LabelLeadingPadding = 10.0;
 
 - (void)addContainerViewToSelfConstraints {
     [_containerConstraints addObjectsFromArray:@[
-                                                 [NSLayoutConstraint constraintWithItem:_containerView
-                                                                              attribute:NSLayoutAttributeTop
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeTop
-                                                                             multiplier:1.0
-                                                                               constant:0],
-                                                 [NSLayoutConstraint constraintWithItem:_containerView
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeLeft
-                                                                             multiplier:1.0
-                                                                               constant:_leftRightMargin],
-                                                 [NSLayoutConstraint constraintWithItem:_containerView
-                                                                              attribute:NSLayoutAttributeRight
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:self
-                                                                              attribute:NSLayoutAttributeRight
-                                                                             multiplier:1.0
-                                                                               constant:-_leftRightMargin]
-                                                                ]];
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeTop
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeTop
+                                    multiplier:1.0
+                                      constant:0],
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeLeft
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeLeft
+                                    multiplier:1.0
+                                      constant:_leftRightMargin],
+        [NSLayoutConstraint constraintWithItem:_containerView
+                                     attribute:NSLayoutAttributeRight
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self
+                                     attribute:NSLayoutAttributeRight
+                                    multiplier:1.0
+                                      constant:-_leftRightMargin]
+    ]];
 }
 
 - (void)addPrimaryLabelToContainerViewConstraints {
     if (_primaryLabel) {
         
         [_containerConstraints addObjectsFromArray:@[
-                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                                  attribute:NSLayoutAttributeTop
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeTop
-                                                                                 multiplier:1.0
-                                                                                   constant:LabelTopBottomMargin],
-                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_checkView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:LabelLeadingPadding],
-                                                     [NSLayoutConstraint constraintWithItem:_primaryLabel
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:-LabelRightMargin]
-                                                     ]];
+            [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_containerView
+                                         attribute:NSLayoutAttributeTop
+                                        multiplier:1.0
+                                          constant:LabelTopBottomMargin],
+            [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                         attribute:NSLayoutAttributeTrailing
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_checkView
+                                         attribute:NSLayoutAttributeLeading
+                                        multiplier:1.0
+                                          constant:-LabelCheckViewPadding],
+            [NSLayoutConstraint constraintWithItem:_primaryLabel
+                                         attribute:NSLayoutAttributeLeading
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_containerView
+                                         attribute:NSLayoutAttributeLeading
+                                        multiplier:1.0
+                                          constant:ORKSurveyItemMargin]
+        ]];
     }
 }
 
 - (void)addDetailLabelConstraints {
     if (_detailLabel) {
         [_containerConstraints addObjectsFromArray:@[
-                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
-                                                                                  attribute:NSLayoutAttributeTop
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_primaryLabel ? : _containerView
-                                                                                  attribute:_primaryLabel ? NSLayoutAttributeBottom : NSLayoutAttributeTop
-                                                                                 multiplier:1.0
-                                                                                   constant:_primaryLabel ? 0.0 : LabelTopBottomMargin],
-                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
-                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_checkView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:LabelLeadingPadding],
-                                                     [NSLayoutConstraint constraintWithItem:_detailLabel
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:-LabelRightMargin]
-                                                     ]];
+            [NSLayoutConstraint constraintWithItem:_detailLabel
+                                         attribute:NSLayoutAttributeTop
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_primaryLabel ? : _containerView
+                                         attribute:_primaryLabel ? NSLayoutAttributeBottom : NSLayoutAttributeTop
+                                        multiplier:1.0
+                                          constant:_primaryLabel ? 0.0 : LabelTopBottomMargin],
+            [NSLayoutConstraint constraintWithItem:_detailLabel
+                                         attribute:NSLayoutAttributeTrailing
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_checkView
+                                         attribute:NSLayoutAttributeLeading
+                                        multiplier:1.0
+                                          constant:-LabelCheckViewPadding],
+            [NSLayoutConstraint constraintWithItem:_detailLabel
+                                         attribute:NSLayoutAttributeLeading
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_containerView
+                                         attribute:NSLayoutAttributeLeading
+                                        multiplier:1.0
+                                          constant:ORKSurveyItemMargin]
+        ]];
     }
 }
 
@@ -255,9 +287,9 @@ static const CGFloat LabelLeadingPadding = 10.0;
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
     _containerConstraints = [[NSMutableArray alloc] init];
     [self addContainerViewToSelfConstraints];
-    [self addCheckViewToContainerViewConstraints];
     [self addPrimaryLabelToContainerViewConstraints];
     [self addDetailLabelConstraints];
+    [self addCheckViewToContainerViewConstraints];
     [self addContainerViewBottomConstraint];
     [_containerConstraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeBottom
@@ -291,29 +323,49 @@ static const CGFloat LabelLeadingPadding = 10.0;
 }
 
 - (void)updateSelectedItem {
-    if (_immediateNavigation == NO) {
         [self updateCheckView];
-    }
 }
 
 - (void)setImmediateNavigation:(BOOL)immediateNavigation {
     _immediateNavigation = immediateNavigation;
-    
-    if (_immediateNavigation == YES) {
-        self.accessoryView = nil;
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
 }
 
-- (void)setCellSelected:(BOOL)cellSelected {
+- (void)setCellSelected:(BOOL)cellSelected highlight:(BOOL)highlight {
     _cellSelected = cellSelected;
     [self updateSelectedItem];
+    
+    if (highlight) {
+        _animationLayer = [CAShapeLayer layer];
+        [_animationLayer setOpaque:NO];
+        _animationLayer.frame = _foreLayerBounds;
+        _animationLayer.zPosition = 1.0f;
+        [_contentMaskLayer addSublayer:_animationLayer];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+        if (@available(iOS 13.0, *)) {
+            animation.fromValue = (__bridge id _Nullable)(UIColor.systemGray5Color.CGColor);
+        } else {
+            animation.fromValue = (__bridge id _Nullable)([UIColor colorWithRed:0.282 green:0.282 blue:0.235 alpha:1.0].CGColor);
+        }
+        animation.toValue = (__bridge id _Nullable)(_fillColor.CGColor);
+        animation.beginTime = 0.0;
+        animation.duration = 0.45;
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        animation.removedOnCompletion = YES;
+        animation.delegate = self;
+        [_animationLayer addAnimation:animation forKey:@"backgroundColor"];
+        _animationLayer.backgroundColor = _fillColor.CGColor;
+    }
 }
 
 - (void)setupPrimaryLabel {
     if (!_primaryLabel) {
         _primaryLabel = [ORKSelectionTitleLabel new];
         _primaryLabel.numberOfLines = 0;
+        if (@available(iOS 13.0, *)) {
+            _primaryLabel.textColor = [UIColor labelColor];
+        } else {
+            _primaryLabel.textColor = [UIColor blackColor];
+        }
         [self.containerView addSubview:_primaryLabel];
         _primaryLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self setupConstraints];
@@ -331,15 +383,29 @@ static const CGFloat LabelLeadingPadding = 10.0;
     }
 }
 
+- (UIImage *)unCheckedImage {
+    if (@available(iOS 13.0, *)) {
+        UIImageConfiguration *configuration = [UIImageSymbolConfiguration configurationWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody] scale:UIImageSymbolScaleLarge];
+        return [UIImage systemImageNamed:@"circle" withConfiguration:configuration];
+    } else {
+        return nil;
+    }
+}
+
+- (UIImage *)checkedImage {
+    if (@available(iOS 13.0, *)) {
+        UIImageConfiguration *configuration = [UIImageSymbolConfiguration configurationWithFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody] scale:UIImageSymbolScaleLarge];
+        return [UIImage systemImageNamed:@"checkmark.circle.fill" withConfiguration:configuration];
+    } else {
+        return [[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+}
+
 - (void)setupCheckView {
     if (!_checkView) {
-        _checkView = [UIImageView new];
+        _checkView = [[ORKCheckmarkView alloc] initWithDefaults];
     }
-    _checkView.layer.cornerRadius = CheckViewDimension * 0.5;
-    _checkView.layer.borderWidth = CheckViewBorderWidth;
-    _checkView.layer.borderColor = self.tintColor.CGColor;
-    _checkView.layer.masksToBounds = YES;
-    _checkView.contentMode = UIViewContentModeCenter;
+    [_checkView setChecked:NO];
     [self.containerView addSubview:_checkView];
 }
 
@@ -347,35 +413,21 @@ static const CGFloat LabelLeadingPadding = 10.0;
     if (_checkView) {
         _checkView.translatesAutoresizingMaskIntoConstraints = NO;
         [_containerConstraints addObjectsFromArray:@[
-                                                     [NSLayoutConstraint constraintWithItem:_checkView
-                                                                                  attribute:NSLayoutAttributeCenterY
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeCenterY
-                                                                                 multiplier:1.0
-                                                                                   constant:0.0],
-                                                     [NSLayoutConstraint constraintWithItem:_checkView
-                                                                                  attribute:NSLayoutAttributeWidth
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:nil
-                                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                                 multiplier:1.0
-                                                                                   constant:CheckViewDimension],
-                                                     [NSLayoutConstraint constraintWithItem:_checkView
-                                                                                  attribute:NSLayoutAttributeHeight
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:nil
-                                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                                 multiplier:1.0
-                                                                                   constant:CheckViewDimension],
-                                                     [NSLayoutConstraint constraintWithItem:_checkView
-                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_containerView
-                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                 multiplier:1.0
-                                                                                   constant:ORKSurveyItemMargin]
-                                                     ]];
+            [NSLayoutConstraint constraintWithItem:_checkView
+                                         attribute:NSLayoutAttributeCenterY
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_containerView
+                                         attribute:NSLayoutAttributeCenterY
+                                        multiplier:1.0
+                                          constant:0.0],
+            [NSLayoutConstraint constraintWithItem:_checkView
+                                         attribute:NSLayoutAttributeTrailing
+                                         relatedBy:NSLayoutRelationEqual
+                                            toItem:_containerView
+                                         attribute:NSLayoutAttributeTrailing
+                                        multiplier:1.0
+                                          constant:-ORKSurveyItemMargin]
+        ]];
     }
 }
 
@@ -409,15 +461,7 @@ static const CGFloat LabelLeadingPadding = 10.0;
 
 - (void)updateCheckView {
     if (_checkView) {
-        if (_cellSelected) {
-            _checkView.backgroundColor = self.tintColor;
-            _checkView.image = [[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            _checkView.tintColor = UIColor.whiteColor;
-        }
-        else {
-            _checkView.backgroundColor = UIColor.clearColor;
-            _checkView.image = nil;
-        }
+        [_checkView setChecked:_cellSelected];
     }
 }
 
@@ -430,6 +474,30 @@ static const CGFloat LabelLeadingPadding = 10.0;
 
 - (UIAccessibilityTraits)accessibilityTraits {
     return UIAccessibilityTraitButton | (self.isCellSelected ? UIAccessibilityTraitSelected : 0);
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted
+                 animated:animated];
+    
+    if (highlighted) {
+        if (@available(iOS 13.0, *)) {
+            [_foreLayer setFillColor:UIColor.systemGray5Color.CGColor];
+        } else {
+            self.layer.backgroundColor = [UIColor colorWithRed:0.282 green:0.282 blue:0.235 alpha:1.0].CGColor;
+        }
+    }
+    else {
+        _foreLayer.fillColor = _fillColor.CGColor;
+    }
+}
+
+#pragma mark - Animation Delegate
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    [_animationLayer removeFromSuperlayer];
+    _animationLayer = nil;
+    [self setMaskLayers];
 }
 
 @end
@@ -477,36 +545,36 @@ static const CGFloat LabelLeadingPadding = 10.0;
     textViewHeightConstraint.priority = UILayoutPriorityDefaultLow;
     
     [self.containerConstraints addObjectsFromArray:@[
-                                                     [NSLayoutConstraint constraintWithItem:_textView
-                                                                                  attribute:NSLayoutAttributeTop
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:self.detailLabel ? : self.primaryLabel
-                                                                                  attribute:NSLayoutAttributeBottom
-                                                                                 multiplier:1.0
-                                                                                   constant:TextViewTopMargin],
-                                                     [NSLayoutConstraint constraintWithItem:_textView
-                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:self.checkView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:LabelLeadingPadding],
-                                                     [NSLayoutConstraint constraintWithItem:_textView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:self.containerView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:-LabelRightMargin],
-                                                     textViewHeightConstraint,
-                                                     [NSLayoutConstraint constraintWithItem:self.containerView
-                                                                                  attribute:NSLayoutAttributeBottom
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:_textView
-                                                                                  attribute:NSLayoutAttributeBottom
-                                                                                 multiplier:1.0
-                                                                                   constant:LabelTopBottomMargin]
-                                                     ]];
+        [NSLayoutConstraint constraintWithItem:_textView
+                                     attribute:NSLayoutAttributeTop
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self.detailLabel ? : self.primaryLabel
+                                     attribute:NSLayoutAttributeBottom
+                                    multiplier:1.0
+                                      constant:TextViewTopMargin],
+        [NSLayoutConstraint constraintWithItem:_textView
+                                     attribute:NSLayoutAttributeTrailing
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self.checkView
+                                     attribute:NSLayoutAttributeLeading
+                                    multiplier:1.0
+                                      constant:-LabelCheckViewPadding],
+        [NSLayoutConstraint constraintWithItem:_textView
+                                     attribute:NSLayoutAttributeLeading
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:self.containerView
+                                     attribute:NSLayoutAttributeLeading
+                                    multiplier:1.0
+                                      constant:ORKSurveyItemMargin],
+        textViewHeightConstraint,
+        [NSLayoutConstraint constraintWithItem:self.containerView
+                                     attribute:NSLayoutAttributeBottom
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:_textView
+                                     attribute:NSLayoutAttributeBottom
+                                    multiplier:1.0
+                                      constant:LabelTopBottomMargin]
+    ]];
 }
 
 // Overriding ContainerView Bottom Constraints

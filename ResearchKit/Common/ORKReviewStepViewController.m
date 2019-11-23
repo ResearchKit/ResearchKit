@@ -67,7 +67,6 @@
 
 
 @implementation ORKReviewStepViewController {
-    ORKNavigationContainerView *_navigationFooterView;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
  
@@ -110,11 +109,6 @@
     _navigationFooterView.skipButtonItem = self.skipButtonItem;
 }
 
-- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
-    [super setCancelButtonItem:cancelButtonItem];
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
-}
-
 - (void)stepDidChange {
     [super stepDidChange];
     
@@ -144,7 +138,6 @@
         _navigationFooterView.continueEnabled = YES;
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
         _navigationFooterView.optional = self.step.optional;
-        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
         [self setupConstraints];
         [_tableContainer setNeedsLayout];
     }
@@ -242,7 +235,11 @@
 - (NSString *)answerStringForQuestionStep:(ORKQuestionStep *)questionStep withQuestionResult:(ORKQuestionResult *)questionResult {
     NSString *answerString = nil;
     if (questionStep && questionResult && questionStep.answerFormat && [questionResult isKindOfClass:questionStep.answerFormat.questionResultClass] && questionResult.answer) {
-        answerString = [questionStep.answerFormat stringForAnswer:questionResult.answer];
+        if ([questionResult.answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+            answerString = questionStep.answerFormat.customDontKnowButtonText;
+        } else {
+            answerString = [questionStep.answerFormat stringForAnswer:questionResult.answer];
+        }
     }
     return answerString;
 }
@@ -257,7 +254,12 @@
                 ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
                 if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
                     NSString *formItemTextString = formItem.text;
-                    NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
+                    NSString *formItemAnswerString;
+                    if ([questionResult.answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+                        formItemAnswerString = formItem.answerFormat.customDontKnowButtonText;
+                    } else {
+                        formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
+                    }
                     if (formItemTextString && formItemAnswerString) {
                         [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
                     }

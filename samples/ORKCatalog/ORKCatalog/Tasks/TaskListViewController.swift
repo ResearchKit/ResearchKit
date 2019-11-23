@@ -46,7 +46,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     var waitStepViewController: ORKWaitStepViewController?
     var waitStepUpdateTimer: Timer?
     var waitStepProgress: CGFloat = 0.0
-    
+
     // MARK: Types
     
     enum TableViewCellIdentifier: String {
@@ -60,6 +60,16 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         with the created task.
     */
     var taskResultFinishedCompletionHandler: ((ORKResult) -> Void)?
+    
+    // MARK: View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemGroupedBackground
+        }
+    }
     
     // MARK: UITableViewDataSource
 
@@ -81,6 +91,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         let taskListRow = TaskListRow.sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
         
         cell.textLabel!.text = "\(taskListRow)"
+        
+        if #available(iOS 13.0, *) {
+            cell.textLabel?.textColor = UIColor.label
+        }
         
         return cell
     }
@@ -109,10 +123,10 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         taskViewController.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
         /*
-            We present the task directly, but it is also possible to use segues.
-            The task property of the task view controller can be set any time before
-            the task view controller is presented.
-        */
+         We present the task directly, but it is also possible to use segues.
+         The task property of the task view controller can be set any time before
+         the task view controller is presented.
+         */
         present(taskViewController, animated: true, completion: nil)
     }
     
@@ -151,6 +165,13 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
                     RunLoop.main.add(self.waitStepUpdateTimer!, forMode: RunLoop.Mode.common)
                 }
             })
+        }
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, learnMoreButtonPressedWith learnMoreStep: ORKLearnMoreInstructionStep, for stepViewController: ORKStepViewController) {
+        //        FIXME: Temporary fix. This method should not be called if it is only used to present the learnMoreStepViewController, the stepViewController should present the learnMoreStepViewController.
+        stepViewController.present(UINavigationController(rootViewController: ORKLearnMoreStepViewController(step: learnMoreStep)), animated: true) {
+            
         }
     }
     

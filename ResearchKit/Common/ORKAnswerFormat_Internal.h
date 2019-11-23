@@ -83,13 +83,9 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 @property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
 
-- (BOOL)isAnswerValid:(id)answer;
-
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
 - (nonnull Class)questionResultClass;
-
-- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer;
 
 - (nullable NSString *)stringForAnswer:(id)answer;
 
@@ -134,8 +130,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
 - (BOOL)isVertical;
 - (BOOL)shouldHideSelectedValueLabel;
+- (BOOL)shouldHideRanges;
+- (BOOL)shouldHideLabels;
+- (BOOL)shouldHideValueMarkers;
+- (BOOL)shouldShowDontKnowButton;
 - (NSString *)maximumValueDescription;
 - (NSString *)minimumValueDescription;
+- (nullable NSString *)customDontKnowButtonText;
 - (nullable UIImage *)maximumImage;
 - (nullable UIImage *)minimumImage;
 - (nullable NSArray<UIColor *> *)gradientColors;

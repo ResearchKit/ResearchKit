@@ -41,8 +41,8 @@
         indexOffset = 3;
         ORKdBHLToneAudiometryStep *toneAudiometryStep = [self getFutureStep];
         ORKAudioChannel userSelectedChannel = ORKAudioChannelLeft;
-        NSString *userSelectedChannelString = ((ORKChoiceQuestionResult *)self.result.results[0]).choiceAnswers[0];
-        NSString *userSelectedHeadphoneTypeString = ((ORKChoiceQuestionResult *)self.result.results[1]).choiceAnswers[0];
+        NSString *userSelectedChannelString = (NSString *)((ORKChoiceQuestionResult *)self.result.results[0]).choiceAnswers[0];
+        NSString *userSelectedHeadphoneTypeString = (NSString *)((ORKChoiceQuestionResult *)self.result.results[1]).choiceAnswers[0];
         if ([userSelectedChannelString isEqualToString:@"RIGHT"]) {
             userSelectedChannel = ORKAudioChannelRight;
         } else {

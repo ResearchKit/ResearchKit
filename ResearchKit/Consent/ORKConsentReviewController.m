@@ -81,8 +81,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     
     _toolbar = [[UIToolbar alloc] init];
     
-    _toolbar.items = [@[_cancelButtonItem,
-                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil]] arrayByAddingObjectsFromArray:self.toolbarItems];
+    _toolbar.items = self.toolbarItems;
     
     self.view.backgroundColor = ORKColor(ORKConsentBackgroundColorKey);
     if (self.navigationController.navigationBar) {

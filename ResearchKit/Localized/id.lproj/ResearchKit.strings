@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Nama Belakang";
 "CONSENT_NAME_PLACEHOLDER" = "Diperlukan";
 "CONSENT_REVIEW_TITLE" = "Tinjauan";
-"CONSENT_REVIEW_INSTRUCTION" = "Tinjau formulir di bawah, dan ketuk Setuju jika Anda siap melanjutkan.";
+"CONSENT_REVIEW_INSTRUCTION" = "Tinjau formulir di bawah dan ketuk Setuju jika Anda siap melanjutkan.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Tinjauan";
 "CONSENT_SIGNATURE_TITLE" = "Tanda Tangan";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Tanda tangani menggunakan jari Anda di kotak di bawah.";
@@ -46,8 +46,8 @@
 "CONSENT_SECTION_DATA_GATHERING" = "Pengumpulan Data";
 "CONSENT_SECTION_PRIVACY" = "Privasi";
 "CONSENT_SECTION_DATA_USE" = "Penggunaan Data";
-"CONSENT_SECTION_STUDY_SURVEY" = "Survei Studi";
-"CONSENT_SECTION_STUDY_TASKS" = "Tugas Studi";
+"CONSENT_SECTION_STUDY_SURVEY" = "Survei Kajian";
+"CONSENT_SECTION_STUDY_TASKS" = "Tugas Kajian";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Komitmen Waktu";
 "CONSENT_SECTION_WITHDRAWING" = "Penarikan Diri";
 "CONSENT_LEARN_MORE_TITLE" = "Lebih Lanjut";
@@ -56,9 +56,9 @@
 "LEARN_MORE_DATA_GATHERING" = "Lebih lanjut mengenai cara data dikumpulkan";
 "LEARN_MORE_DATA_USE" = "Lebih lanjut mengenai cara data digunakan";
 "LEARN_MORE_PRIVACY" = "Lebih lanjut mengenai cara privasi dan identitas Anda dilindungi";
-"LEARN_MORE_WELCOME" = "Pelajari lebih lanjut mengenai studi terlebih dahulu";
-"LEARN_MORE_STUDY_SURVEY" = "Lebih lanjut mengenai survei studi";
-"LEARN_MORE_TIME_COMMITMENT" = "Lebih lanjut mengenai dampak studi terhadap waktu Anda";
+"LEARN_MORE_WELCOME" = "Pelajari lebih lanjut mengenai kajian terlebih dahulu";
+"LEARN_MORE_STUDY_SURVEY" = "Lebih lanjut mengenai survei kajian";
+"LEARN_MORE_TIME_COMMITMENT" = "Lebih lanjut mengenai dampak kajian terhadap waktu Anda";
 "LEARN_MORE_TASKS" = "Lebih lanjut mengenai tugas yang bersangkutan";
 "LEARN_MORE_WITHDRAWING" = "Lebih lanjut mengenai penarikan diri";
 
@@ -67,15 +67,22 @@
 "CONSENT_SHARE_WIDELY_%@" = "Bagikan data saya dengan %@ dan peneliti berkualifikasi di seluruh dunia";
 "CONSENT_SHARE_ONLY_%@" = "Hanya bagikan data saya dengan %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data kajian Anda dari partisipasi Anda dalam kajian ini.\n\nBerbagi data kajian yang dikodekan secara lebih luas (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan mendatang.";
-"LEARN_MORE_CONSENT_SHARING" = "Pelajari berbagi data lebih lanjut";
+"LEARN_MORE_CONSENT_SHARING" = "Lebih lanjut mengenai berbagi data";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Nama %@ (dicetak)";
-"CONSENT_DOC_LINE_SIGNATURE" = "Tanda Tangan %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nama Tercetak";
+"CONSENT_DOC_LINE_SIGNATURE" = "Tanda Tangan";
 "CONSENT_DOC_LINE_DATE" = "Tanggal";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ dari %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Pertanyaan %1$@ dari %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Dilewati";
+"REVIEW_EDIT_ANSWER" = "Edit";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nilai tidak sah";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Batalkan";
 "BUTTON_OK" = "OKE";
 "BUTTON_CLEAR" = "Bersihkan";
+"BUTTON_CLEAR_SIGNATURE" = "Bersihkan Tanda Tangan";
 "BUTTON_APPLY" = "Terapkan";
 "BUTTON_DISAGREE" = "Tidak Setuju";
 "BUTTON_DONE" = "Selesai";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Bersihkan jawaban";
 "BUTTON_READ_ONLY_MODE" = "Jawaban ini tidak dapat dimodifikasi.";
 "BUTTON_COPYRIGHT" = "Hak Cipta";
+"BUTTON_CLOSE" = "Tutup";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Memulai aktivitas dalam";
 "TASK_COMPLETE_TITLE" = "Aktivitas Selesai";
 "TASK_COMPLETE_TEXT" = "Data Anda akan dianalisis dan Anda akan diberi tahu setelah hasil Anda siap.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "Tersisa %@ detik.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Tersisa %@.";
 "TOUCH_ANYWHERE_LABEL" = "Sentuh di mana saja untuk melanjutkan";
 
 /* Image capture step. */
@@ -245,7 +254,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Duduk dengan nyaman selama %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Jalan secepat mungkin selama %@.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Aktivitas ini memonitor detak jantung Anda dan mengukur seberapa jauh Anda dapat berjalan dalam %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Jalan di luar ruangan dengan laju secepat mungkin selama %1$@. Saat Anda selesai, duduk dan istirahat dengan nyaman selama %2$@. Untuk memulai, ketuk Mulai.";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Berjalan kaki di luar ruangan dengan laju secepat mungkin selama %1$@. Setelah selesai, duduk dan istirahat dengan nyaman selama %2$@. Untuk memulai, ketuk Mulai.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Gaya dan Keseimbangan";
@@ -311,7 +320,7 @@
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, sambungkan dan kenakan headphone Anda.\n\nBunyi akan terdengar sangat halus dan berbeda dengan nada peringatan biasa.  Bunyi akan terdengar lembut pada awalnya, namun volumenya perlahan-lahan akan bertambah.  Perhatikan dan ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengarnya.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda telah mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di sisi perangkat Anda.\n\nKetuk tombol mana pun setelah Anda siap memulai.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Setiap kali Anda mulai mendegar bunyi, ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengar bunyi tersebut.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Setiap kali Anda mulai mendengar bunyi, ketuk tombol kiri atau kanan untuk menunjukkan di telinga mana Anda mendengar bunyi tersebut.";
 "TONE_AUDIOMETRY_LABEL_LEFT_EAR" = "Telinga Kiri";
 "TONE_AUDIOMETRY_LABEL_RIGHT_EAR" = "Telinga Kanan";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
@@ -319,13 +328,40 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Ketuk saat mendengar nada.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Nada & Volume";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Anda akan mendengar rangkaian nada.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Saat mendengar nada, ketuk tombol.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Untuk tes ini, volume akan diatur ke 50 persen.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Tes ini memerlukan waktu sekitar 10 menit.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Nyalakan Jangan Ganggu untuk menghindari gangguan.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Nada akan diputar di telinga kanan Anda terlebih dahulu.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Sekarang nada akan diputar di telinga kiri Anda.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengidentifikasi level ambang pendengaran seseorang dalam skala dB HL.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Pastikan volume perangkat diatur ke level maksimum.\n\nSelama tugas ini, nada halus akan diputar di telinga kiri atau kanan.\n\nDengarkan dengan seksama dan ketuk tombol setiap kali Anda mendengar nada.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Tes ini mengidentifikasi level bunyi yang diperlukan agar Anda dapat mendengarnya.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Daftar pertanyaan orientasi.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Pilih preferensi Anda untuk 'telinga yang lebih baik', jika ada";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "kiri";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "kanan";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "tidak ada preferensi";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Tes Dibatalkan";
+"dBHL_ALERT_TITLE_START_OVER" = "Mulai Lagi";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Batalkan Tes";
+"dBHL_ALERT_TEXT" = "Hubungkan ulang AirPods atau EarPods Anda untuk mengikuti tes ini.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ Selesai";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Headphone";
+"HEADPHONES_UNKNOWN" = "Tidak Diketahui";
+"HEADPHONES_NONE" = "Tidak Ada";
+"CONNECTED" = "Terhubung";
+"NOT_CONNECTED" = "Tidak Terhubung";
+"HEADPHONE_CONNECTED_%@" = "Terhubung - %@";
+"HEADPHONE_DETECT_TITLE" = "Hubungkan Headphone Anda";
+"HEADPHONE_DETECT_TEXT" = "Tes ini memerlukan Apple AirPods atau Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Spasial";
@@ -343,7 +379,7 @@
 "MEMORY_GAME_COMPLETE_TITLE" = "Urutan Selesai";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Untuk melanjutkan, ketuk Berikutnya";
 "MEMORY_GAME_FAILED_TITLE" = "Coba Lagi";
-"MEMORY_GAME_FAILED_MESSAGE" = "Anda tidak berhasil menyelesaikannya. Ketuk Berikutnya untuk melanjutkan.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Sebelumnya Anda tidak berhasil. Ketuk Berikutnya untuk melanjutkan.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Waktu Habis";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Anda kehabisan waktu.\nKetuk Berikutnya untuk melanjutkan.";
 "MEMORY_GAME_COMPLETE" = "Permainan Selesai";
@@ -354,10 +390,10 @@
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Waktu Reaksi";
 "REACTION_TIME_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi waktu yang Anda butuhkan untuk merespons isyarat visual.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goyang perangkat ke arah mana pun segera setelah titik biru muncul di layar. Anda akan diminta untuk melakukannya sebanyak %D kali.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goyangkan perangkat ke arah mana pun segera setelah titik biru muncul di layar. Anda akan diminta untuk melakukannya sebanyak %D kali.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %@ dari %@";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyang perangkat dengan cepat saat lingkaran biru muncul";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyangkan perangkat dengan cepat saat lingkaran biru muncul";
 
 /* Stroop active task.*/
 "STROOP_TASK_TITLE" = "Stroop";
@@ -391,37 +427,37 @@
 "KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Jangkauan Gerakan Lutut Kanan";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aktivitas ini mengukur seberapa jauh Anda dapat meregangkan lutut kiri Anda.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aktivitas ini mengukur seberapa jauh Anda dapat meregangkan lutut kanan Anda.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Duduk di tepi kursi. Saat Anda memulai, taruh perangkat di lutut kiri Anda untuk pengukuran. Nyalakan bunyi perangkat sehingga Anda dapat mendengar instruksi.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Duduk di tepi kursi. Saat Anda memulai, taruh perangkat di lutut kanan Anda untuk pengukuran. Nyalakan bunyi perangkat sehingga Anda dapat mendengar instruksi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Duduk di tepi kursi. Saat Anda memulai, taruh perangkat di lutut kiri Anda untuk pengukuran. Nyalakan bunyi pada perangkat sehingga Anda dapat mendengar instruksi.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Duduk di tepi kursi. Saat Anda memulai, taruh perangkat di lutut kanan Anda untuk pengukuran. Nyalakan bunyi pada perangkat sehingga Anda dapat mendengar instruksi.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Letakkan perangkat di lutut kiri Anda dengan layar menghadap keluar, sebagaimana yang terlihat di gambar.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Letakkan perangkat di lutut kanan Anda dengan layar menghadap keluar, sebagaimana yang terlihat di gambar.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Setelah siap, ketuk layar untuk memulai dan regangkan lutut kiri Anda sejauh mungkin. Ketuk lagi setelah selesai.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Setelah siap, ketuk layar untuk memulai dan regangkan lutut kanan Anda sejauh mungkin. Ketuk lagi setelah selesai.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan perangkat di lutut kiri Anda";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan perangkat di lutut kanan Anda";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Regangkan lutut kiri Anda. Lalu, ketuk di mana saja.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Regangkan lutut kanan Anda. Lalu, ketuk di mana saja.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Setelah siap, ketuk layar untuk memulai dan regangkan lutut kiri Anda sejauh mungkin. Kembali ke posisi semula dan ketuk lagi setelah Anda selesai.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Setelah siap, ketuk layar untuk memulai dan regangkan lutut kanan Anda sejauh mungkin. Kembali ke posisi semula dan ketuk lagi setelah Anda selesai.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan perangkat di lutut kiri Anda. Ketuk layar dan regangkan lutut kiri Anda sejauh mungkin.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan perangkat di lutut kanan Anda. Ketuk layar dan regangkan lutut kanan Anda sejauh mungkin.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Setelah selesai, kembalikan lutut kiri Anda ke posisi semula, lalu ketuk di mana pun.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Setelah selesai, kembalikan lutut kanan Anda ke posisi semula, lalu ketuk di mana pun.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Jangkauan Gerakan Bahu Kiri";
 "SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Jangkauan Gerakan Bahu Kanan";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "Aktivitas ini mengukur seberapa jauh Anda dapat meregangkan bahu kiri Anda.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "Aktivitas ini mengukur seberapa jauh Anda dapat meregangkan bahu kanan Anda.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Saat Anda memulai, taruh perangkat di bahu kiri Anda untuk pengukuran. Nyalakan bunyi perangkat sehingga Anda dapat mendengar instruksi.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Saat Anda memulai, taruh perangkat di bahu kanan Anda untuk pengukuran. Nyalakan bunyi perangkat sehingga Anda dapat mendengar instruksi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Saat Anda memulai, taruh perangkat di bahu kiri Anda untuk pengukuran. Nyalakan bunyi pada perangkat sehingga Anda dapat mendengar instruksi.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Saat Anda memulai, taruh perangkat di bahu kanan Anda untuk pengukuran. Nyalakan bunyi pada perangkat sehingga Anda dapat mendengar instruksi.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Letakkan perangkat di bahu kiri Anda dengan layar menghadap keluar, sebagaimana yang terlihat di gambar.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Letakkan perangkat di bahu kanan Anda dengan layar menghadap keluar, sebagaimana yang terlihat di gambar.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Setelah siap, ketuk layar untuk memulai dan angkat lengan kiri Anda sejauh mungkin. Ketuk lagi setelah selesai.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Setelah siap, ketuk layar untuk memulai dan angkat lengan kanan Anda sejauh mungkin. Ketuk lagi setelah selesai.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan perangkat di bahu kiri Anda";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan perangkat di bahu kanan Anda";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Angkat lengan kiri Anda ke atas. Lalu, ketuk di mana saja.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Angkat lengan kanan Anda ke atas. Lalu, ketuk di mana saja.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Setelah siap, ketuk layar untuk memulai dan angkat lengan kiri Anda sejauh mungkin. Kembali ke posisi semula dan ketuk lagi setelah Anda selesai.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Setelah siap, ketuk layar untuk memulai dan angkat lengan kanan Anda sejauh mungkin. Kembali ke posisi semula dan ketuk lagi setelah Anda selesai.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Letakkan perangkat di bahu kiri Anda. Ketuk layar dan angkat lengan kiri Anda ke depan sejauh mungkin.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Letakkan perangkat di bahu kanan Anda. Ketuk layar dan angkat lengan kanan Anda ke depan sejauh mungkin.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Setelah selesai, kembalikan lengan kiri Anda ke posisi semula, lalu ketuk di mana pun.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Setelah selesai, kembalikan lengan kanan Anda ke posisi semula, lalu ketuk di mana pun.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Berjalan Kaki dibatasi Waktu";
 "TIMED_WALK_INTRO_DETAIL" = "Aktivitas ini mengukur fungsi ekstrem rendah Anda.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Carilah tempat, lebih baik di luar ruangan, di mana Anda dapat berjalan sekitar %@ dengan lurus secepat mungkin, namun tetap aman. Jangan kurangi kecepatan hingga Anda tiba di garis akhir.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari tempat (usahakan di luar ruangan) yang memungkinkan Anda untuk berjalan lurus sekitar selama %@ secepat mungkin dengan aman. Jangan kurangi kecepatan hingga Anda melewat garis akhir.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Ketuk Berikutnya untuk memulai.";
 "TIMED_WALK_FORM_TITLE" = "Perangkat bantuan";
 "TIMED_WALK_FORM_TEXT" = "Gunakan perangkat bantuan yang sama untuk tiap pengujian.";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "Pengujian Paced Auditory Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori Anda.";
 "PVSAT_INTRO_TEXT" = "Pengujian Paced Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung visual Anda.";
 "PAVSAT_INTRO_TEXT" = "Pengujian Paced Auditory dan Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori dan visual Anda.";
-"PSAT_INTRO_TEXT_2_%@" = "Digit tunggal dimunculkan setiap %@ detik.\nAnda harus menambahkan setiap digit baru ke digit sebelumnya.\nIngat, jangan menghitung jumlah total, tapi hanya jumlah dua angka terakhir.";
+"PSAT_INTRO_TEXT_2_%@" = "Digit tunggal dimunculkan setiap %@.\nAnda harus menambahkan setiap digit baru ke digit sebelumnya.\nIngat, jangan menghitung jumlah total, tapi hanya jumlah dua angka terakhir.";
 "PSAT_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "PSAT_INITIAL_INSTRUCTION" = "Ingat digit pertama ini.";
 "PSAT_INSTRUCTION" = "Tambahkan digit baru ini ke digit sebelumnya.";
@@ -563,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Menghitung";
 "ENVIRONMENTSPL_THRESHOLD" = "Ambang: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Kebisingan Latar Belakang OKE";
+"ENVIRONMENTSPL_NOISE" = "Suara Latar Belakang Terlalu Bising";
+"ENVIRONMENTSPL_TITLE_2" = "Cari tempat yang sunyi";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Untuk memastikan akurasi, tes ini harus diambil di tempat yang sunyi.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Mulai Tugas";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Tidak Ada Data";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Pindahkan penggeser untuk memasukkan nilai";
+"SLIDER_I_DONT_KNOW" = "Saya Tidak Tahu";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Halaman";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Kembali";
@@ -586,6 +636,7 @@
 
 "AX_SELECTED" = "Dipilih";
 "AX_UNSELECTED" = "Tidak dipilih";
+"AX_SELECT_ALL_THAT_APPLY" = "PILIH SEMUA YANG SESUAI";
 
 "AX_SLIDER_LABEL" = "Penggeser respons. Berkisar dari %@ hingga %@";
 "AX_UNLABELED_IMAGE" = "Gambar tidak dilabeli";
@@ -612,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Memiliki disk dengan ukuran %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Tutup papan ketik";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Berkisar dari %@ hingga %@";
 "AX_GRAPH_STACK_PREFIX" = "Tumpukan terdiri dari";
@@ -626,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Grid Amsler";
 "AX_AMSLER_GRID_HINT" = "Gunakan jari atau stylus Anda untuk menandai grid secara langsung, atau gesek ke kiri di luar grid untuk menyelesaikan.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Tombol yang Dapat Diketuk";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Ketuk untuk Telinga Kiri";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktifkan untuk memulai tes. Setelah tes dimulai, ketuk tombol ini secara langsung setelah Anda mendengar bunyi di telinga kiri Anda.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Ketuk untuk Telinga Kanan";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktifkan untuk memulai tes. Setelah tes dimulai, ketuk tombol ini secara langsung setelah Anda mendengar bunyi di telinga kanan Anda.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Menggunakan VoiceOver, jelajahi layar dengan sentuhan untuk mempelajari lokasi tombol untuk setiap telinga. Setelah tes dimulai, tombol akan dapat diketuk secara langsung. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Ketuk untuk satu jari";
+"AX_TAP_BUTTON_2_LABEL" = "Ketuk untuk jari lainnya";
+"AX_TAP_BUTTON_HINT" = "Aktifkan agar tombol dapat diketuk secara langsung.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Menggunakan VoiceOver, jelajahi layar untuk mempelajari lokasi tombol. Aktifkan tombol mana pun agar dapat diketuk secara langsung.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Tombol sudah dapat diketuk secara langsung.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Menggunakan VoiceOver, tombol akan dapat diketuk secara langsung. Tombol akan berada di dekat bagian pusat layar.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Menggunakan VoiceOver, tombol dalam tes akan dapat diketuk secara langsung.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Tidak dapat memulihkan restoreData untuk memulai";

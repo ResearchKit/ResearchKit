@@ -80,7 +80,7 @@
 
 - (CGSize)intrinsicContentSize {
     CGSize intrinsic = [super intrinsicContentSize];
-    return (CGSize){.width=intrinsic.width,ORKExpectedLabelHeight(self)};
+    return (CGSize){.width=intrinsic.width, self.frame.size.height == 0.0 ? ORKExpectedLabelHeight(self) : self.frame.size.height};
 }
 
 @end

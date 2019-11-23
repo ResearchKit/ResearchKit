@@ -479,6 +479,7 @@
     NSString *identifier = @"STEP";
     NSString *html = @"HTML";
     ORKWebViewStep *step = [ORKWebViewStep webViewStepWithIdentifier:identifier html:html];
+    step.customCSS = @"body { font-size: 12px; }";
     
     XCTAssertEqual([step identifier], identifier);
     XCTAssertEqual([step html], html);

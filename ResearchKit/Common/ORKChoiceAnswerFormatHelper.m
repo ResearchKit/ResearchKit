@@ -139,7 +139,11 @@
     
     if (answer != nil && answer != ORKNullAnswerValue() ) {
         
-        NSAssert([answer isKindOfClass:[ORKChoiceQuestionResult answerClass] ], @"Wrong answer type");
+        if (![answer isKindOfClass:[ORKChoiceQuestionResult answerClass]]) {
+            @throw [NSException exceptionWithName:@"Wrong answer type"
+                                           reason:[NSString stringWithFormat:@"Expected answer type %@, but was given %@", [ORKChoiceQuestionResult answerClass], [answer class]]
+                                         userInfo:nil];
+        }
         
         for (id answerValue in (NSArray *)answer) {
             id<ORKAnswerOption> matchedChoice = nil;
@@ -160,7 +164,13 @@
             }
             
             if (nil == matchedChoice) {
-                NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
+                
+                if (![answerValue isKindOfClass:[NSNumber class]]) {
+                    @throw [NSException exceptionWithName:@"No matching choice found"
+                                                   reason:[NSString stringWithFormat:@"Provided choice of type %@ not found in available choices", [answerValue class]]
+                                                 userInfo:nil];
+                }
+                
                 if (_isValuePicker) {
                     matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue + 1];
                 } else {

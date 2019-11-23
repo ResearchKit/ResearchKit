@@ -114,6 +114,12 @@ typedef NS_ENUM(NSInteger, ORKBulletType) {
 @optional
 - (nullable UIView *)viewForHeaderInSection:(NSInteger)section tableView:(UITableView *)tableView;
 
+/**
+ Optional override for configuring the table style.
+ */
+@optional
+- (UITableViewStyle)customTableViewStyle;
+
 @end
 
 /**
@@ -163,6 +169,13 @@ ORK_CLASS_AVAILABLE
  Default value is NO
  */
 @property (nonatomic) BOOL allowsSelection;
+
+/**
+ Boolean flag representing if the navigation container should get pinned to the bottom of the view
+ 
+ Default value is NO
+ */
+@property (nonatomic) BOOL pinNavigationContainer;
 
 /**
  Returns the number of sections in the tableview used to display this step. Default = `1`.

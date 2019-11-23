@@ -152,14 +152,14 @@ static NSUInteger const QueryLimitSize = 1000;
                                                                                      NSError *error) {
                                                                         
                                                                         ORKHealthSampleQueryOperation *op = weakSelf;
-                                                                        ORK_Log_Debug(@"\nHK Query returned: %@\n", @{@"sampleType": sampleType, @"items":@([sampleObjects count]), @"newAnchor":[newAnchor description]?:@"nil"});
+                                                                        ORK_Log_Debug("\nHK Query returned: %@\n", @{@"sampleType": sampleType, @"items":@([sampleObjects count]), @"newAnchor":[newAnchor description]?:@"nil"});
                                                                         // Signal that query returned
                                                                         dispatch_semaphore_signal(_sem);
                                                                         [op handleResults:sampleObjects newAnchor:newAnchor error:error itemIdentifier:itemIdentifier];
                                                                  }];
 
     
-    ORK_Log_Debug(@"\nHK Query: %@ \n", @{@"identifier": sampleType.identifier, @"anchor": anchor.description ? :@"", @"startDate": [NSDateFormatter localizedStringFromDate:startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]});
+    ORK_Log_Debug("\nHK Query: %@ \n", @{@"identifier": sampleType.identifier, @"anchor": anchor.description ? :@"", @"startDate": [NSDateFormatter localizedStringFromDate:startDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]});
     [_manager.healthStore executeQuery:syncQuery];
     
     [self.lock unlock];
@@ -175,7 +175,7 @@ static NSUInteger const QueryLimitSize = 1000;
 }
 
 - (void)timeoutForAnchor:(HKQueryAnchor *)anchor {
-    ORK_Log_Debug(@"Query timeout: cancel operation %@", self);
+    ORK_Log_Debug("Query timeout: cancel operation %@", self);
     [self.lock lock];
     
     if ([self isExecuting] && ![self isCancelled] && [anchor isEqual:_currentAnchor]) {

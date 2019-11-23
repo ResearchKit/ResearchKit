@@ -56,8 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *navigationFooterView;
-
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished; // Let subclass receive timer fires
 
 - (void)applicationWillResignActive:(NSNotification *)notification;

@@ -31,7 +31,12 @@
 
 @import Foundation;
 #import <ResearchKit/ORKStep.h>
+#import <ResearchKit/ORKDefines.h>
 
+typedef NS_ENUM(NSInteger, ORKCardViewStyle) {
+    ORKCardViewStyleDefault,
+    ORKCardViewStyleBordered
+} ORK_ENUM_AVAILABLE;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -91,6 +96,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) BOOL useCardView;
 
+/**
+   Footer text to display beneath the last formItem.
+*/
+@property (nonatomic, copy, nullable) NSString *footerText;
+
+@property (nonatomic) ORKCardViewStyle cardViewStyle;
+
 @end
 
 
@@ -140,6 +152,28 @@ ORK_CLASS_AVAILABLE
                           optional:(BOOL) optional;
 
 /**
+ Returns an initialized form item using the specified identifier, title, optionality and answer format.
+ 
+ @param identifier    The string that identifies the form item, which should be unique within the form step.
+ @param text    The text displayed as a prompt for the form item's question.
+ @param detailText     The detail text displayed below the form items title
+ @param learnMoreItem    The `ORKLearnMoreItem` to be presented when button is pressed.
+ @param showsProgress    A Boolean that determines if the formItem will display a progress indicator
+ @param answerFormat  The answer format for the form item.
+ @param optional      A Boolean that determines whether the item is optional
+ 
+ @return An initialized form item.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              text:(nullable NSString *)text
+                        detailText:(nullable NSString *)detailText
+                     learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem
+                     showsProgress:(BOOL)showsProgress
+                      answerFormat:(nullable ORKAnswerFormat *)answerFormat
+                           tagText:(nullable NSString *)tagText
+                          optional:(BOOL) optional;
+
+/**
  Returns an initialized form item using the specified section title.
  
  @param sectionTitle   The title of the section.
@@ -147,6 +181,17 @@ ORK_CLASS_AVAILABLE
  @return An initialized form item for use as a section header in a form.
  */
 - (instancetype)initWithSectionTitle:(nullable NSString *)sectionTitle;
+
+/**
+ Returns an initialized form item using the specified section title.
+ 
+@param sectionTitle   The title of the section.
+@param text     The detail text displayed below the form items title
+@param learnMoreItem    The `ORKLearnMoreItem` to be presented when button is pressed.
+@param showsProgress    A Boolean that determines if the formItem will display a progress indicator
+ 
+@return An initialized form item for use as a section header in a form.
+*/
 
 - (instancetype)initWithSectionTitle:(nullable NSString *)sectionTitle
                           detailText:(nullable NSString *)text
@@ -177,11 +222,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, readonly, nullable) NSString *text;
 
-@property (nonatomic, copy, readonly, nullable) NSString *detailText;
+@property (nonatomic, copy, nullable) NSString *detailText;
 
-@property (nonatomic, readonly) BOOL showsProgress;
+@property (nonatomic) BOOL showsProgress;
 
-@property (nonatomic, copy, readonly, nullable) ORKLearnMoreItem *learnMoreItem;
+@property (nonatomic, copy, nullable) ORKLearnMoreItem *learnMoreItem;
+
+@property (nonatomic, copy, nullable) NSString *tagText;
 
 /**
  A localized string that displays placeholder information for the form item.

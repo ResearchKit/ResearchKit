@@ -50,7 +50,7 @@
 @implementation ORKAudioRecorder
 
 - (void)dealloc {
-    ORK_Log_Debug(@"Remove audiorecorder %p", self);
+    ORK_Log_Debug("Remove audiorecorder %p", self);
     [_audioRecorder stop];
     _audioRecorder = nil;
 }
@@ -85,7 +85,7 @@
     if (_savedSessionCategory) {
         NSError *error;
         if (![[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:&error]) {
-            ORK_Log_Error(@"Failed to restore the audio session category: %@", [error localizedDescription]);
+            ORK_Log_Error("Failed to restore the audio session category: %@", [error localizedDescription]);
         }
         _savedSessionCategory = nil;
     }
@@ -113,7 +113,7 @@
             return;
         }
         
-        ORK_Log_Debug(@"Create audioRecorder %p", self);
+        ORK_Log_Debug("Create audioRecorder %p", self);
         _audioRecorder = [[AVAudioRecorder alloc]
                           initWithURL:soundFileURL
                           settings:self.recorderSettings

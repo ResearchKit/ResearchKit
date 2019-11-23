@@ -178,7 +178,7 @@
                                                                     processedFormat:@{AVVideoCodecKey: AVVideoCodecTypeJPEG}];
     }
     [photoSettings setAutoStillImageStabilizationEnabled:NO];
-    [photoSettings setFlashMode:(AVCaptureFlashModeAuto)];
+    [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
     
     return photoSettings;
 }
@@ -194,9 +194,9 @@
         _imageDataExtension = @"jpeg";
     }
     
-    [photoSettings setFlashMode:(AVCaptureFlashModeAuto)];
     [photoSettings setAutoStillImageStabilizationEnabled: [_photoOutput isStillImageStabilizationSupported]];
-    
+    [photoSettings setFlashMode:(([_photoOutput.supportedFlashModes containsObject:[NSNumber numberWithInt:AVCaptureFlashModeOn]] ? AVCaptureFlashModeAuto : AVCaptureFlashModeOff))];
+
     return photoSettings;
 }
 
@@ -375,7 +375,7 @@
     NSError *writeError = nil;
     if (![_capturedImageData writeToURL:URL options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
         if (writeError) {
-            ORK_Log_Warning(@"%@", writeError);
+            ORK_Log_Error("%@", writeError);
         }
         if (errorOut != NULL) {
             *errorOut = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];

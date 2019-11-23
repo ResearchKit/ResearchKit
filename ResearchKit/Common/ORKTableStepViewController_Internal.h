@@ -40,7 +40,7 @@
 @interface ORKTableStepViewController ()
 
 @property (nonatomic, strong, readonly) ORKTableContainerView *tableContainer;
-@property (nonatomic, strong, readonly) ORKNavigationContainerView *navigationFooterView;
+
 @property (nonatomic, strong, readonly) ORKStepContentView *headerView;
     
 /**

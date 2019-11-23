@@ -41,16 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKEnvironmentSPLMeterContentView : ORKActiveStepCustomView
 
-- (void)setProgress:(CGFloat)progress
-           animated:(BOOL)animated;
+- (void)setProgress:(CGFloat)progress;
 
 - (void)setProgressCircle:(CGFloat)progress;
 
-- (void)setDBText:(NSString *)text;
-
-- (void)setThreshold:(double)threshold;
-
 @property(nonatomic, strong) ORKRingView *ringView;
+
+- (void)reachedOptimumNoiseLevel;
 
 @end
 

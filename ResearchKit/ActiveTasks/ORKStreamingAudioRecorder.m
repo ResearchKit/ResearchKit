@@ -46,7 +46,7 @@
 @implementation ORKStreamingAudioRecorder
 
 - (void)dealloc {
-    ORK_Log_Debug(@"Remove audiorecorder %p", self);
+    ORK_Log_Debug("Remove audiorecorder %p", self);
     if ([_audioEngine isRunning]) {
         [_audioEngine stop];
         [[_audioEngine inputNode] removeTapOnBus:0];
@@ -69,7 +69,7 @@
     if (_savedSessionCategory) {
         NSError *error;
         if (![[AVAudioSession sharedInstance] setCategory:_savedSessionCategory error:&error]) {
-            ORK_Log_Error(@"Failed to restore the audio session category: %@", [error localizedDescription]);
+            ORK_Log_Error("Failed to restore the audio session category: %@", [error localizedDescription]);
         }
         _savedSessionCategory = nil;
     }
@@ -135,7 +135,7 @@
             return;
         }
         
-        ORK_Log_Debug(@"Create audioEngine recorder %p", self);
+        ORK_Log_Debug("Create audioEngine recorder %p", self);
         
         _audioEngine = [[AVAudioEngine alloc] init];
         AVAudioInputNode *inputnode = _audioEngine.inputNode;
@@ -149,7 +149,7 @@
             modifiedSettings[AVAudioFileTypeKey] = [NSNumber numberWithInt:kAudioFileWAVEType];
         } else {
             // Fallback on earlier versions
-            ORK_Log_Warning(@"ORKStreamingAudioRecorder can only be used with iOS 11.0 or above.");
+            ORK_Log_Info("ORKStreamingAudioRecorder can only be used with iOS 11.0 or above.");
         }
         
         AVAudioFile *mixerOutputFile = [[AVAudioFile alloc] initForWriting:audiourl settings:modifiedSettings error:&error];

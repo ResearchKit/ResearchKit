@@ -282,6 +282,7 @@ ORKTDefineStringKey(CollectionViewCellReuseIdentifier);
     NSArray<NSDictionary<NSString *, NSArray<NSString *> *> *> *_buttonSections;
     NSMutableArray<NSLayoutConstraint *> *_constraints;
     UIView *_statusBarBackground;
+    ORKTaskResult * _miniFormTaskResult;
 }
 
 
@@ -481,10 +482,11 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
 
     id<ORKTask> task = [[TaskFactory sharedInstance] makeTaskWithIdentifier:identifier];
     NSParameterAssert(task != nil);
+    NSError *error;
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
-        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
+        _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self error: &error];
     } else {
         // No saved data, just create the task and the corresponding task view controller.
         _taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
@@ -493,7 +495,7 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
     // If we have stored data then data will contain the stored data.
     // If we don't, data will be nil (and the task will be opened up as a 'new' task.
     NSData *data = _savedViewControllers[identifier];
-    _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
+    _taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self error: &error];
     
     [self beginTask];
 }
@@ -519,6 +521,11 @@ NSString *RemoveParenthesisAndCapitalizeString(NSString *string) {
      */
     if ([task isKindOfClass:[DynamicTask class]]) {
         _taskViewController.defaultResultSource = _lastRouteResult;
+    }
+    
+    if ([_taskViewController.task.identifier isEqualToString: @"MiniFormTaskIdentifier"] && _miniFormTaskResult) {
+        _taskViewController.defaultResultSource = _miniFormTaskResult;
+        _taskViewController.reviewMode = ORKTaskViewControllerReviewModeStandalone;
     }
     
     /*
@@ -758,6 +765,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSObject<ORKTask> *task = taskViewController.task;
             if (task.isEmbeddedReviewTask) {
                 [TaskFactory sharedInstance].embeddedReviewTaskResult = taskViewController.result;
+            }
+            if ([task.identifier isEqualToString: @"MiniFormTaskIdentifier"]) {
+                _miniFormTaskResult = taskViewController.result;
             }
             [self taskViewControllerDidComplete:taskViewController];
         }

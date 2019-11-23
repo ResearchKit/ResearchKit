@@ -48,7 +48,17 @@ typedef NS_ENUM(NSInteger, ORKBodyItemStyle) {
     /**
      image style body item
      */
-    ORKBodyItemStyleImage
+    ORKBodyItemStyleImage,
+    
+    /**
+     horizontal rule
+     */
+    ORKBodyItemStyleHorizontalRule,
+    
+    /**
+     tag label
+     */
+    ORKBodyItemStyleTag
 } ORK_ENUM_AVAILABLE;
 
 @class ORKLearnMoreItem;
@@ -58,15 +68,23 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle;
 
-@property (nonatomic) NSString *text;
+- (instancetype)initWithText:(nullable NSString *)text detailText:(nullable NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle;
 
-@property (nonatomic) NSString *detailText;
+- (instancetype)initWithHorizontalRule;
+
+@property (nonatomic, nullable) NSString *text;
+
+@property (nonatomic, nullable) NSString *detailText;
 
 @property (nonatomic, nullable) UIImage *image;
 
 @property (nonatomic, nullable) ORKLearnMoreItem *learnMoreItem;
 
 @property (nonatomic) ORKBodyItemStyle bodyItemStyle;
+
+@property (nonatomic) BOOL useCardStyle;
+
+@property (nonatomic) BOOL useSecondaryColor;
 
 @end
 
