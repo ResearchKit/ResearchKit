@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ vil motta data fra undersøkelsen du deltar i.\n\nEn videre deling av dine kodede opplysninger (navn og lignende fjernes) kan komme til nytte både i denne og framtidige undersøkelser.";
 "LEARN_MORE_CONSENT_SHARING" = "Finn ut mer om datadeling";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Navnet til %@ (store bokstaver)";
-"CONSENT_DOC_LINE_SIGNATURE" = "Signaturen til %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Navn (i blokkbokstaver)";
+"CONSENT_DOC_LINE_SIGNATURE" = "Signatur";
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ av %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Spørsmål %1$@ av %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Hoppet over";
+"REVIEW_EDIT_ANSWER" = "Rediger";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig verdi";
@@ -92,7 +99,7 @@
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Finner ikke din nåværende posisjon. Skriv inn adressen, eller gå om mulig til et sted med bedre GPS-signal.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Du har ikke gitt appen tilgang til stedstjenester. Du kan endre tilgangen til stedstjenester i Innstillinger.";
 "LOCATION_ERROR_GEOCODE" = "Fant ingen treff for angitt adresse. Kontroller at adressen er riktig og prøv igjen.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Du er enten ikke koblet til Internett, eller du har oversteget grensen for antall adressesøk. Hvis du ikke er koblet til Internett, må du slå på Wi-Fi for å svare på spørsmålet. Du kan hoppe over spørsmålet hvis hopp over-knappen er tilgjengelig, eller komme tilbake til undersøkelsen når du er koblet til Internett. Prøv ellers igjen om noen minutter.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Du er enten ikke koblet til internett, eller du har oversteget grensen for antall adressesøk. Hvis du ikke er koblet til internett, må du slå på Wi-Fi for å svare på spørsmålet. Du kan hoppe over spørsmålet hvis hopp over-knappen er tilgjengelig, eller komme tilbake til undersøkelsen når du er koblet til internett. Prøv ellers igjen om noen minutter.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksten overstiger makslengden: %@";
@@ -116,12 +123,12 @@
 "DOB_FORM_ITEM_TITLE" = "Fødselsdato";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Angi dato";
 "PHONE_NUMBER_FORM_ITEM_TITLE" = "Telefonnummer";
-"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+1 (555) 555 5555";
+"PHONE_NUMBER_FORM_ITEM_PLACEHOLDER" = "+47 20 00 00 00";
 
 /* Verification step */
 "VERIFICATION_NAV_TITLE" = "Verifisering";
 "VERIFICATION_STEP_TITLE" = "Verifiser e-postadressen";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på koblingen nedenfor hvis du ikke mottok verifiseringsmeldingen på e-post og vil sende den på nytt.";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på lenken nedenfor hvis du ikke mottok verifiseringsmeldingen på e-post og vil sende den på nytt.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Send verifiseringsmelding på nytt";
 
 /* Login step */
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Avbryt";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Fjern";
+"BUTTON_CLEAR_SIGNATURE" = "Fjern signatur";
 "BUTTON_APPLY" = "Bruk";
 "BUTTON_DISAGREE" = "Uenig";
 "BUTTON_DONE" = "Ferdig";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Fjern svar";
 "BUTTON_READ_ONLY_MODE" = "Dette svaret kan ikke endres.";
 "BUTTON_COPYRIGHT" = "Copyright";
+"BUTTON_CLOSE" = "Lukk";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starter aktivitet om";
 "TASK_COMPLETE_TITLE" = "Aktivitet fullført";
 "TASK_COMPLETE_TEXT" = "Dataene vil bli analysert, og du blir varslet når resultatene er klare.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ sekunder gjenstår.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ gjenstår.";
 "TOUCH_ANYWHERE_LABEL" = "Berør hvor som helst for å fortsette";
 
 /* Image capture step. */
@@ -269,7 +278,7 @@
 "TAPPING_TASK_TITLE_RIGHT" = "Høyre hånd";
 "TAPPING_TASK_TITLE_LEFT" = "Venstre hånd";
 "TAPPING_INTRO_TEXT" = "Denne aktiviteten måler trykkhastigheten din.";
-"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Plasser enheten på en flat overflate.";
+"TAPPING_INTRO_TEXT_2_REST_PHONE" = "Plasser enheten på et flatt underlag.";
 "TAPPING_INTRO_TEXT_2_MOST_AFFECTED" = "Bruk to fingre på samme hånd til å trykke vekselvis på knappene på skjermen.";
 "TAPPING_INTRO_TEXT_2_RIGHT_FIRST" = "Bruk to fingre på høyre hånd til å trykke vekselvis på knappene på skjermen.";
 "TAPPING_INTRO_TEXT_2_LEFT_FIRST" = "Bruk to fingre på venstre hånd til å trykke vekselvis på knappene på skjermen.";
@@ -319,13 +328,40 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Trykk når du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tone og volum";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Du vil høre en rekke med toner.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Trykk på knappen når du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "I denne testen settes volumet til 50 prosent.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Testen tar ca. 10 minutter.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Slå på Ikke forstyrr for å unngå forstyrrelser.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Toner spilles først av i det høyre øret ditt.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Toner spilles nå av i det venstre øret ditt.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktiviteten identifiserer en persons hørselsterskel målt i dB HL.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Sjekk at volumet på enheten er skrudd helt opp.\n\nUnder denne oppgaven vil du høre en svak tone i enten venstre eller høyre øre.\n\nHør nøye etter og trykk på knappen hver gang du hører en tone.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Denne testen måler hvor høy en lyd må være før du hører den.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Introduksjonsskjema.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Angi eventuelt hvilket øre du hører best på";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "venstre";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "høyre";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "ingen preferanse";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Test avbrutt";
+"dBHL_ALERT_TITLE_START_OVER" = "Start på nytt";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Avbryt test";
+"dBHL_ALERT_TEXT" = "For å ta denne testen koble til AirPods eller EarPods på nytt.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ fullført";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Hodetelefoner";
+"HEADPHONES_UNKNOWN" = "Ukjent";
+"HEADPHONES_NONE" = "Ingen";
+"CONNECTED" = "Tilkoblet";
+"NOT_CONNECTED" = "Ikke tilkoblet";
+"HEADPHONE_CONNECTED_%@" = "Tilkoblet – %@";
+"HEADPHONE_DETECT_TITLE" = "Koble til hodetelefonene dine";
+"HEADPHONE_DETECT_TEXT" = "Denne testen krever Apple AirPods eller Apple EarPods";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sett deg på kanten av stolen. Når du starter, må du legge enheten på høyre kne for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legg enheten på venstre kne med skjermen vendt utover, som illustrert på bildet.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legg enheten på høyre kne med skjermen vendt utover, som illustrert på bildet.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å starte og strekker ut venstre bein så langt du klarer. Trykk én gang til når du er ferdig.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, trykker du på skjermen for å starte og strekker ut høyre bein så langt du klarer. Trykk én gang til når du er ferdig.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legg enheten på venstre kne";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legg enheten på høyre kne";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strekk ut venstre bein. Trykk deretter hvor som helst.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strekk ut høyre bein. Trykk deretter hvor som helst.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Trykk på skjermen for å begynne, og strekk ut venstre bein slå langt du klarer. Flytt tilbake til startposisjonen og trykk en gang til når du er ferdig.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Trykk på skjermen for å begynne, og strekk ut høyre bein slå langt du klarer. Flytt tilbake til startposisjonen og trykk en gang til når du er ferdig.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Plasser enheten din på venstre kne. Trykk på skjermen og strekk ut venstre bein så langt du kan.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Plasser enheten din på høyre kne. Trykk på skjermen og strekk ut høyre bein så langt du kan.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Før venstre bein tilbake til startposisjonen når du er ferdig. Trykk så hvor som helst på skjermen.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Før høyre bein tilbake til startposisjonen når du er ferdig. Trykk så hvor som helst på skjermen.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bevegelsesområde for venstre skulder";
@@ -411,12 +447,12 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Når du starter, må du legge enheten på høyre skulder for en måling. Slå på lyden på enheten så du kan høre instruksjonene.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Legg enheten på venstre skulder med skjermen vendt utover, som illustrert på bildet.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Legg enheten på høyre skulder med skjermen vendt utover, som illustrert på bildet.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Når du er klar, trykker du på skjermen for å starte og løfter venstre arm så høyt du klarer. Trykk én gang til når du er ferdig.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Når du er klar, trykker du på skjermen for å starte og løfter høyre arm så høyt du klarer. Trykk én gang til når du er ferdig.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Legg enheten på venstre skulder";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Legg enheten på høyre skulder";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Løft venstre arm. Trykk deretter hvor som helst.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Løft høyre arm. Trykk deretter hvor som helst.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Trykk på skjermen for å begynne, og hev venstre arm slå langt du klarer. Flytt tilbake til startposisjonen og trykk en gang til når du er ferdig.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Trykk på skjermen for å begynne, og hev høyre arm slå langt du klarer. Flytt tilbake til startposisjonen og trykk en gang til når du er ferdig.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Plasser enheten din på venstre skulder. Trykk på skjermen og hev venstre arm så langt fram du klarer.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Plasser enheten din på høyre skulder. Trykk på skjermen og hev høyre arm så langt fram du klarer.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Før venstre arm tilbake til startposisjonen når du er ferdig. Trykk så hvor som helst på skjermen.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Før høyre arm tilbake til startposisjonen når du er ferdig. Trykk så hvor som helst på skjermen.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "PASAT-testen (Paced Auditory Serial Addition Test) måler hvor raskt du behandler lydinformasjon og evnen din til å gjøre utregninger.";
 "PVSAT_INTRO_TEXT" = "PVSAT-testen (Paced Visual Serial Addition Test) måler hvor raskt du behandler synsinformasjon og evnen din til å gjøre utregninger.";
 "PAVSAT_INTRO_TEXT" = "PAVSAT-testen (Paced Auditory and Visual Serial Addition Test) måler hvor raskt du behandler lyd- og synsinformasjon og evnen din til å gjøre utregninger.";
-"PSAT_INTRO_TEXT_2_%@" = "Enkeltsifre vises hvert %@. sekund.\nDu må legge det nye sifferet sammen med det som ble vist rett før.\nMerk at du ikke skal summere alle tallene, bare de to som ble vist sist.";
+"PSAT_INTRO_TEXT_2_%@" = "Enkeltsifre vises i %@s intervaller.\nDu må legge det nye sifferet sammen med det som ble vist rett før.\nMerk at du ikke skal summere alle tallene, bare de to som ble vist sist.";
 "PSAT_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
 "PSAT_INITIAL_INSTRUCTION" = "Husk dette første sifferet.";
 "PSAT_INSTRUCTION" = "Legg dette nye sifferet til det forrige.";
@@ -515,9 +551,6 @@
 "TRAILMAKING_INTENDED_USE2_B" = "Etter nedtellingen trykker du vekselvis på prikker med tall og bokstaver. Begynn med å trykke på det første tallet, '1', og deretter trykke på den første bokstaven, ‘A’. Deretter trykker du på '2' – 'B' – '3' – 'C'… til du kommer til tallet '7'.";
 "TRAILMAKING_INTRO_TEXT" = "Gjør dette så fort du klarer uten å gjøre feil. \n ";
 "TRAILMAKING_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
-"TRAILMAKING_TIMER" = "%.1f s";
-"TRAILMAKING_ERROR" = "%@ (%d feil)";
-"TRAILMAKING_ERROR_PLURAL" = "%@ (%d feil)";
 "TRAILMAKING_LETTER_A" = "A";
 "TRAILMAKING_LETTER_B" = "B";
 "TRAILMAKING_LETTER_C" = "C";
@@ -566,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Beregner";
 "ENVIRONMENTSPL_THRESHOLD" = "Terskel: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Omgivelsesstøy OK";
+"ENVIRONMENTSPL_NOISE" = "For mye bakgrunnsstøy";
+"ENVIRONMENTSPL_TITLE_2" = "Finn et rolig sted";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Testen bør tas i stille omgivelser for å sikre et nøyaktig resultat.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Start oppgave";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Ingen data";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Flytt skyveknappen for å oppgi en verdi";
+"SLIDER_I_DONT_KNOW" = "Jeg vet ikke";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Side";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbake";
@@ -589,6 +636,7 @@
 
 "AX_SELECTED" = "Markert";
 "AX_UNSELECTED" = "Ikke markert";
+"AX_SELECT_ALL_THAT_APPLY" = "MERK AV ALT SOM GJELDER";
 
 "AX_SLIDER_LABEL" = "Svarskyveknapp fra %@ til %@";
 "AX_UNLABELED_IMAGE" = "Bilde uten etikett";
@@ -615,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Lukk tastatur";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Område fra %@ til %@";
 "AX_GRAPH_STACK_PREFIX" = "Stabel bestående av";
@@ -629,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amsler-rutenett";
 "AX_AMSLER_GRID_HINT" = "Bruk fingeren eller en stylus til å merke rett i rutenettet, eller sveip til venstre utenfor rutenettet for å avslutte.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Trykkbare knapper";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Trykk for venstre øre";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktiver for å starte testen. Når testen har startet, trykker du på denne knappen når du hører en lyd i venstre øre.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Trykk for høyre øre";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktiver for å starte testen. Når testen har startet, trykker du på denne knappen når du hører en lyd i høyre øre.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Bruk berøring for å utforske hvor hver knapp er på skjermen når du bruker VoiceOver. Når testen starter, kan du trykke på knappene direkte. %@ ";
+"AX_TAP_BUTTON_1_LABEL" = "Trykk med én finger";
+"AX_TAP_BUTTON_2_LABEL" = "Trykk med en annen finger";
+"AX_TAP_BUTTON_HINT" = "Aktiver for å kunne trykke på knappene direkte.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Bruk berøring for å utforske hvor knappene er på skjermen når du bruker VoiceOver. Aktiver en av knappene så du kan trykke på dem direkte.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Knappene kan nå trykkes på direkte.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Denne knappen kan trykkes på direkte når du bruker VoiceOver. Den vil være plassert nær midten av skjermen.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Knappene i testen kan trykkes på direkte også når du bruker VoiceOver.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Kan ikke dekode restoreData for initialisering";

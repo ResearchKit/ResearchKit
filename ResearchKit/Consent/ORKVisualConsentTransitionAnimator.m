@@ -173,7 +173,7 @@
         if (([keyPath isEqualToString:@"status"] && object == _moviePlayer) ||
             ([keyPath isEqualToString:@"duration"] && object == _playerItem)) {
             if (_moviePlayer.error) {
-                ORK_Log_Warning(@"%@", _moviePlayer.error);
+                ORK_Log_Error("%@", _moviePlayer.error);
             }
             
             [self attemptAnimationWithContext:animationContext];

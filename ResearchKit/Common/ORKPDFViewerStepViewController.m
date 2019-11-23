@@ -50,7 +50,6 @@
 @implementation ORKPDFViewerStepViewController {
     NSArray<NSLayoutConstraint *> *_constraints;
     ORKPDFViewerStepView *_pdfView;
-    ORKNavigationContainerView *_navigationFooterView;
     
     NSString *_newFilename;
 }
@@ -90,7 +89,6 @@
     }
     _navigationFooterView.continueButtonItem = self.continueButtonItem;
     _navigationFooterView.continueEnabled = YES;
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
     _navigationFooterView.hidden = self.isBeingReviewed;
     [_navigationFooterView updateContinueAndSkipEnabled];
     [self.view addSubview:_navigationFooterView];
@@ -210,7 +208,6 @@
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     [super setCancelButtonItem:cancelButtonItem];
-    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 #pragma mark ORKPDFViewerStepViewDelegate

@@ -34,7 +34,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-@class ORKBorderedButton;
+@class ORKPlaybackButton;
 
 @interface ORKSpeechInNoiseContentView : ORKActiveStepCustomView
 
@@ -46,11 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSArray *samples;
 
-@property (nonatomic) ORKBorderedButton *playButton;
+@property (nonatomic) ORKPlaybackButton *playButton;
 
 // Samples should be in the range of (0, 1).
 - (void)addSample:(NSNumber *)sample;
 - (void)removeAllSamples;
+- (void)setGraphViewHidden:(BOOL)hidden;
 
 @end
 

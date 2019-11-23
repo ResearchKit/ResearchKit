@@ -57,12 +57,4 @@ class ORKCompletionStepViewControllerTests: XCTestCase {
         XCTAssertEqual(completionController.shouldShowContinueButton, true)
         XCTAssertEqual(completionController.checkmarkColor, UIColor.blue)
     }
-    
-    func testStepView() {
-        guard let contentView = completionController.stepView?.customContentView else {
-            XCTFail("UNABLE TO FIND STEPVIEW")
-            return
-        }
-        XCTAssertEqual(contentView.tintColor, UIColor.blue)
-    }
 }

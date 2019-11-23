@@ -63,7 +63,6 @@ public class ORKLandoltCStepViewController: ORKActiveStepViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        navigationFooterView.neverHasContinueButton = true
         activeStepView?.customContentView = visionStepView
         activeStepView?.removeCustomContentPadding()
         activeStepView?.customContentFillsAvailableSpace = true

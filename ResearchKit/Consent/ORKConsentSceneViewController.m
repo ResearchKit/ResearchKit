@@ -126,7 +126,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     [self.view addSubview:_sceneView];
     
     if (_section.content.length||_section.htmlContent.length || _section.contentURL) {
-        NSLog(@"%@", localizedLearnMoreForType(_section.type));
+        ORK_Log_Info("%@", localizedLearnMoreForType(_section.type));
     }
     [self setupNavigationFooterView];
     [self setupConstraints];
@@ -137,7 +137,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
         _navigationFooterView = _sceneView.navigationFooterView ;
     }
     _navigationFooterView.continueButtonItem = _continueButtonItem;
-    _navigationFooterView.cancelButtonItem = _cancelButtonItem;
     _navigationFooterView.continueEnabled = YES;
     [_navigationFooterView updateContinueAndSkipEnabled];
 }
@@ -189,7 +188,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     _cancelButtonItem = cancelButtonItem;
-    _navigationFooterView.cancelButtonItem = cancelButtonItem;
 }
 
 - (UIScrollView *)scrollView {

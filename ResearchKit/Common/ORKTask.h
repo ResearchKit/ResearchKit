@@ -54,6 +54,9 @@ typedef struct {
     
     /// The total number of steps in the task.
     NSUInteger total;
+    
+    /// Indicates if the the step should present a progress label
+    BOOL shouldBePresented;
 } ORKTaskProgress ORK_AVAILABLE_DECL;
 
 /**
@@ -65,6 +68,34 @@ typedef struct {
  @return A task progress structure.
  */
 ORK_EXTERN ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) ORK_AVAILABLE_DECL;
+
+/**
+
+ `ORKTaskTotalProgress` is a structure that represents how far a task has progressed based on the total amount of questions.
+  
+ Note that the values in an `ORKTotalTaskProgress` structure are used only for display; you don't use the values to access the steps in a task.
+ */
+typedef struct {
+    /// The position of the current question based on the total amount of questions within the task.
+    NSUInteger currentStepStartingProgressPosition;
+    
+    /// The total number of questions in the task.
+    NSUInteger total;
+    
+    /// Determines if the task should display the progress based on the total amount of questions in the task or the total amount in each step
+    BOOL stepShouldShowTotalProgress;
+} ORKTaskTotalProgress ORK_AVAILABLE_DECL;
+
+/**
+ Returns a task progress structure with the specified current and total values.
+ 
+ @param currentStepStartingProgressPosition   The position of the current question based on the total amount of questions within the task.
+ @param total     The total number of questions in the task.
+ @param stepShouldShowTotalProgress     Determines if the task should display the progress based on the total amount of questions in the task or the total amount in each step
+ 
+ @return A task progress structure.
+ */
+ORK_EXTERN ORKTaskTotalProgress ORKTaskTotalProgressMake(NSUInteger currentStepStartingProgressPosition, NSUInteger total, BOOL stepShouldShowTotalProgress) ORK_AVAILABLE_DECL;
 
 /**
  The `ORKTask` protocol defines a task to be carried out by a participant
@@ -167,6 +198,26 @@ ORK_AVAILABLE_DECL
  @return The current step's index and the total number of steps in the task, as an `ORKTaskProgress` object.
  */
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result;
+
+/**
+ Returns the progress of the current step based on the total amount of questions in the task.
+ 
+ During a task, each questions can display its progress (that is, the current question number out of the total amount of questions in the task) in its header view.
+
+ @param currentStep    The current step.
+ 
+ @return The current step's index and the total number of steps in the task, as an `ORKTaskProgress` object.
+ The index of the current step's first question, the total amount of questions in the task, and a BOOL to determine if the step should display its progress labels in this manner.
+ */
+- (ORKTaskTotalProgress)totalProgressOfCurrentStep:(ORKStep *)currentStep;
+
+/**
+ Returns true if the provided step is the first or last object in the array of steps
+
+ @param step    The current step.
+ */
+
+- (BOOL)shouldHideProgressFor:(ORKStep *)step;
 
 /**
  Validates the task parameters.

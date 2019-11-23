@@ -2,7 +2,7 @@
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2015, Bruce Duncan.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -64,14 +64,19 @@
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTouched:)];
         [self addGestureRecognizer:panGesture];
         
-        self.minimumTrackTintColor = [UIColor clearColor];
-        self.maximumTrackTintColor = [UIColor clearColor];
+        if (@available(iOS 13.0, *)) {
+            self.maximumTrackTintColor = [UIColor systemGray3Color];
+        } else {
+            self.maximumTrackTintColor = [UIColor systemGrayColor];
+        }
         
         self.gradientLayer = [CAGradientLayer layer];
         
         _numberOfSteps = 2;
         
         self.showThumb = NO;
+        self.hideValueMarkers = NO;
+        self.isWaitingForUserFeedback = NO;
         
         _axLastOutputTime = 0;
         _thumbImageNeedsTransformUpdate = NO;
@@ -204,9 +209,13 @@ static CGFloat LineWidth = 1.0;
     CGRect trackRect = [self trackRectForBounds:bounds];
     CGFloat centerY = bounds.size.height / 2.0;
     
-    [[UIColor blackColor] set];
+    if (@available(iOS 13.0, *)) {
+        [[UIColor systemGray3Color] set];
+    } else {
+        [[UIColor systemGrayColor] setStroke];
+    }
     
-    if (_numberOfSteps > 0) {
+    if (_numberOfSteps > 0 && !_hideValueMarkers) {
         
         UIBezierPath *path = [[UIBezierPath alloc] init];
         [path setLineWidth:LineWidth];
@@ -214,11 +223,20 @@ static CGFloat LineWidth = 1.0;
         for (int discreteOffset = 0; discreteOffset <= _numberOfSteps; ++discreteOffset) {
             CGFloat x = trackRect.origin.x + (trackRect.size.width - LineWidth) * discreteOffset / _numberOfSteps;
             x += LineWidth / 2; // Draw in center of line (center of pixel on 1x devices)
-            [path moveToPoint:CGPointMake(x, centerY - 3.5)];
-            [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
+            [path moveToPoint:CGPointMake(x, centerY - 6)];
+            [path addLineToPoint:CGPointMake(x, centerY + 6)];
         }
+        
         [path stroke];
+        [[UIBezierPath bezierPathWithRect:trackRect] fill];
     }
+    
+    UIBezierPath *path2 = [[UIBezierPath alloc] init];
+    [path2 setLineWidth:2.5];
+    [path2 moveToPoint:CGPointMake(2.0, centerY)];
+    [path2 addLineToPoint:CGPointMake(trackRect.size.width + 2.0, centerY)];
+    [path2 stroke];
+    
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
 
@@ -262,7 +280,7 @@ static const CGFloat Padding = 2.0;
                                               CGRectGetWidth(trackRect),
                                               gradientHeight);
         }
-       
+        
         _gradientLayer.startPoint = CGPointMake(0, 0.5);
         _gradientLayer.endPoint = CGPointMake(1, 0.5);
     }

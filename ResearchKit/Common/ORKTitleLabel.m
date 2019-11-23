@@ -34,14 +34,9 @@
 
 @implementation ORKTitleLabel
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.numberOfLines = 2;
-        self.textAlignment = NSTextAlignmentLeft;
-    }
-    return self;
+- (void)updateAppearance {
+    self.font = [[self class] defaultFont];
+    [self invalidateIntrinsicContentSize];
 }
 
 + (UIFont *)defaultFont {

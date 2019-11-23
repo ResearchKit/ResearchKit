@@ -34,13 +34,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ORKRingViewDelegate <NSObject>
+
+@optional
+- (void)ringViewDidFinishFillAnimation;
+
+@end
+
 @interface ORKRingView : UIView
 
 @property (nonatomic) double value;
 @property (nonatomic) UIColor *color;
 @property (nonatomic) CFTimeInterval animationDuration;
+@property (nonatomic, weak, nullable) id<ORKRingViewDelegate> delegate;
 
 - (void)setValue:(double)value WithColor:(nullable UIColor *)color;
+
+- (void)fillRingWithDuration:(NSTimeInterval)duration;
+
+- (void)setBackgroundLayerStrokeColor:(UIColor *)backgroundStrokeColor circleStrokeColor:(UIColor *)circleStrokeColor;
+
+- (void)resetLayerColors;
+
 
 @end
 

@@ -60,6 +60,12 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) NSString *stepDetailText;
 
+@property (nonatomic) NSTextAlignment stepHeaderTextAlignment;
+
+@property (nonatomic) NSTextAlignment bodyTextAlignment;
+
+@property (nonatomic) BOOL buildInBodyItems;
+
 @property (nonatomic, nullable) UIImage *titleIconImage;
 
 @property (nonatomic) BOOL showScrollIndicator;
@@ -69,6 +75,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, nullable) ORKNavigationContainerView *navigationFooterView;
 
 @property (nonatomic, weak) id<ORKStepViewLearnMoreItemDelegate> delegate;
+
+@property (nonatomic) BOOL useExtendedPadding;
 
 - (void)pinNavigationContainerToBottom;
 

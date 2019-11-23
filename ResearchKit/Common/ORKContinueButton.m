@@ -39,7 +39,6 @@ static const CGFloat ContinueButtonHeight = 50.0;
 
 @implementation ORKContinueButton {
     NSLayoutConstraint *_heightConstraint;
-    NSLayoutConstraint *_widthConstraint;
 }
 
 - (instancetype)initWithTitle:(NSString *)title isDoneButton:(BOOL)isDoneButton {
@@ -54,22 +53,6 @@ static const CGFloat ContinueButtonHeight = 50.0;
     return self;
 }
 
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
-    [self updateConstraintConstantsForWindow:newWindow];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange: previousTraitCollection];
-    if (self.traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass) {
-        [self updateConstraintConstantsForWindow:self.window];
-    }
-}
-
-- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    _widthConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window);
-}
-
 - (void)setUpConstraints {
     _heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                      attribute:NSLayoutAttributeHeight
@@ -79,22 +62,6 @@ static const CGFloat ContinueButtonHeight = 50.0;
                                                     multiplier:1.0
                                                       constant:ContinueButtonHeight];
     _heightConstraint.active = YES;
-    
-    _widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                    attribute:NSLayoutAttributeWidth
-                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                       toItem:nil
-                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                   multiplier:1.0
-                                                     constant:0.0];  // constant will be set in updateConstraintConstantsForWindow:
-    [_widthConstraint setPriority:UILayoutPriorityDefaultLow];
-    _widthConstraint.active = YES;
-    [self updateConstraintConstantsForWindow:self.window];
-}
-
-- (void)updateConstraints {
-    [self updateConstraintConstantsForWindow:self.window];
-    [super updateConstraints];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {

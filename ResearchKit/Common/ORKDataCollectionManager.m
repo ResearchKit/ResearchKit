@@ -243,7 +243,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     [self onWorkQueueSync:^BOOL(ORKDataCollectionManager *manager) {
         
         if (_operationQueue.operationCount > 0) {
-            ORK_Log_Debug(@"[startWithObserving] returned due to operation queue is not empty (queue size = %@)", @(_operationQueue.operationCount));
+            ORK_Log_Debug("[startWithObserving] returned due to operation queue is not empty (queue size = %@)", @(_operationQueue.operationCount));
             errorOut = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorException userInfo:@{NSLocalizedFailureReasonErrorKey: @"Cannot remove collector during collection."}];
             return NO;
         }
@@ -277,7 +277,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
     [self onWorkQueueAsync:^BOOL(ORKDataCollectionManager *manager) {
         
         if (_operationQueue.operationCount > 0) {
-            ORK_Log_Debug(@"[startWithObserving] returned due to operation queue is not empty (queue size = %@)", @(_operationQueue.operationCount));
+            ORK_Log_Debug("[startWithObserving] returned due to operation queue is not empty (queue size = %@)", @(_operationQueue.operationCount));
             return NO;
         }
         
@@ -329,7 +329,7 @@ static inline void dispatch_sync_if_not_on_queue(dispatch_queue_t queue, dispatc
             [completionOperation addDependency:operation];
         }
         
-        ORK_Log_Debug(@"Data Collection queue - new operations:\n%@", operations);
+        ORK_Log_Debug("Data Collection queue - new operations:\n%@", operations);
         [_operationQueue addOperations:operations waitUntilFinished:NO];
         [_operationQueue addOperation:completionOperation];
         

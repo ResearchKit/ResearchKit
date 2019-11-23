@@ -58,7 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) ORKNavigationContainerButtonStyle cancelButtonStyle;
 
 - (void)updateContinueAndSkipEnabled;
-- (void)deprioritizeContentWidthConstraints;
 
 @end
 

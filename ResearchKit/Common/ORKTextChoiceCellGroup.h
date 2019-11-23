@@ -57,6 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<ORKTextChoiceCellGroupDelegate> delegate;
 
+@property (nonatomic, copy)  ORKTextChoiceAnswerFormat *answerFormat;
+
 - (void)textViewDidResignResponderForCellAtIndexPath:(NSIndexPath *)indexPath;
 
 - (nullable ORKChoiceViewCell *)cellAtIndexPath:(NSIndexPath *)indexPath withReuseIdentifier:(nullable NSString *)identifier;

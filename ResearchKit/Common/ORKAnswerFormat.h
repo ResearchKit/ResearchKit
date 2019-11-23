@@ -56,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKHeightAnswerFormat;
 @class ORKWeightAnswerFormat;
 @class ORKLocationAnswerFormat;
+@class ORKSESAnswerFormat;
 
 @class ORKTextChoice;
 @class ORKImageChoice;
@@ -93,6 +94,20 @@ ORK_CLASS_AVAILABLE
  type.
  */
 @property (readonly) ORKQuestionType questionType;
+
+/**
+ Determines if the "I Don't Know" button will show.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldShowDontKnowButton) BOOL showDontKnowButton;
+
+/**
+ Custom text that will be shown inside of the "I Don't Know" button if showDontKnowButton is set to true.
+ 
+ Defults to nil.
+ */
+@property (nonatomic, nullable) NSString *customDontKnowButtonText;
 
 /// @name Factory methods
 
@@ -183,6 +198,8 @@ ORK_CLASS_AVAILABLE
                                                       defaultValue:(double)defaultValue;
 
 + (ORKLocationAnswerFormat *)locationAnswerFormat;
+
++ (ORKSESAnswerFormat *)socioEconomicAnswerFormatWithTopRungText:(NSString *)topRungText bottomRungText:(NSString *)bottomRungText;
 
 /// @name Validation
 
@@ -382,6 +399,27 @@ ORK_CLASS_AVAILABLE
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
 
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
+/**
+ Determines if the value markers on the slider are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
+
 @end
 
 
@@ -548,6 +586,20 @@ ORK_CLASS_AVAILABLE
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
 
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
 @end
 
 
@@ -642,6 +694,27 @@ ORK_CLASS_AVAILABLE
  If nil, the stops are spread uniformly across the range. Defaults to nil.
  */
 @property (copy, nullable) NSArray<NSNumber *> *gradientLocations;
+
+/**
+ Determines if the minimum and maximum numbers are hidden on the slider.
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideRanges) BOOL hideRanges;
+
+/**
+ Determines if the bottom left and bottom right description labels are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideLabels) BOOL hideLabels;
+
+/**
+ Determines if the value markers on the slider are hidden
+ 
+ Defults to false.
+ */
+@property (nonatomic, assign, getter=shouldHideValueMarkers) BOOL hideValueMarkers;
 
 @end
 
@@ -1264,7 +1337,7 @@ Returns an initialized numeric answer format using the specified style, unit des
  
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
-  */
+ */
 @property (copy, readonly, nullable) NSString *unit;
 
 /**
@@ -1294,6 +1367,20 @@ Returns an initialized numeric answer format using the specified style, unit des
  The default numeric answer.
  */
 @property (copy, nullable) NSNumber *defaultNumericAnswer;
+
+/**
+ A property that specifies whether the unit is hidden when the answer is empty.
+ 
+ Defaults to `YES`.
+ */
+@property (assign) BOOL hideUnitWhenAnswerIsEmpty;
+
+/**
+The placeholder to dislpay when the answer is empty.
+ 
+Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+*/
+@property (copy, nullable) NSString *placeholder;
 
 @end
 
@@ -1564,6 +1651,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
 
+/**
+ The placeholder to dislpay when the answer is empty.
+ 
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+  */
+@property (copy, nullable) NSString *placeholder;
+
 @end
 
 
@@ -1826,6 +1920,28 @@ ORK_CLASS_AVAILABLE
  By default, this value is YES.
  */
 @property (nonatomic, assign) BOOL useCurrentLocation;
+
+/**
+ The placeholder to dislpay when the answer is empty.
+ 
+ Overrides any specified step placeholder. Setting it to `nil` displays the default placeholeder.
+  */
+@property (copy, nullable) NSString *placeholder;
+
+@end
+
+/**
+ Socio-Economic Ladder Answer Format.
+
+ This answer format works best in ORKFormStep, there is a known issue where the cell might get squished if presented inside an ORKQuestionStep.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKSESAnswerFormat : ORKAnswerFormat
+
+- (instancetype)initWithTopRungText:(nullable NSString *)topRungText bottomRungText:(nullable NSString *)bottomRungText;
+
+@property (nonatomic, nullable) NSString *topRungText;
+@property (nonatomic, nullable) NSString *bottomRungText;
 
 @end
 

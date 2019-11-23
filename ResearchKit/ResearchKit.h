@@ -55,8 +55,10 @@
 #import <ResearchKit/ORKWaitStep.h>
 #import <ResearchKit/ORKVideoInstructionStep.h>
 #import <ResearchKit/ORKWebViewStep.h>
+#import <ResearchKit/ORKCustomStep.h>
 #import <ResearchKit/ORKEnvironmentSPLMeterStep.h>
 #import <ResearchKit/ORKLearnMoreInstructionStep.h>
+#import <ResearchKit/ORKSecondaryTaskStep.h>
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
@@ -82,6 +84,7 @@
 #import <ResearchKit/ORKTextButton.h>
 #import <ResearchKit/ORKBorderedButton.h>
 #import <ResearchKit/ORKContinueButton.h>
+#import <ResearchKit/ORKPlaybackButton.h>
 
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
@@ -99,6 +102,8 @@
 #import <ResearchKit/ORKVerificationStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
 #import <ResearchKit/ORKWebViewStepViewController.h>
+#import <ResearchKit/ORKReviewViewController.h>
+#import <ResearchKit/ORKCustomStepViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 

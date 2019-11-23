@@ -47,6 +47,7 @@
     _activeStep = step;
     self.stepTitle = step.title;
     self.stepText = step.text;
+    self.stepDetailText = step.detailText;
     self.stepTopContentImage = step.image;
     self.stepTopContentImageContentMode = step.imageContentMode;
 }

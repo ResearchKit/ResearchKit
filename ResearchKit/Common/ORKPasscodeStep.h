@@ -78,6 +78,14 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) ORKPasscodeType passcodeType;
 
+/**
+ This will toggle if biometrics (TouchId or FaceId) will be used or not
+ 
+ The default value of this property is `YES`
+ */
+@property (nonatomic) BOOL useBiometrics;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

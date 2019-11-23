@@ -162,9 +162,27 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *detailText;
 
 /**
+ An 'NSTextAlignment' that controls the text alignment for step title, text and detailText.
+ */
+@property (nonatomic) NSTextAlignment headerTextAlignment;
+
+/**
  Array of `ORKBodyItem` type items to display textual info.
  */
 @property (nonatomic) NSArray<ORKBodyItem *> *bodyItems;
+
+/**
+ An 'NSTextAlignment' that controls the text alignment for text bodyItems.
+ */
+@property (nonatomic) NSTextAlignment bodyItemTextAlignment;
+
+/**
+ A `Boolen` value indicating if the body items of the step should build in.
+ 
+ Default value is NO resulting in all body items being displayed. Set to YES to
+ only show the first item and subsequent items will build in on continue.
+ */
+@property (nonatomic, assign) BOOL buildInBodyItems;
 
 /**
  Additional text to display for the step in a localized string at the bottom of the view.
@@ -210,6 +228,11 @@ ORK_CLASS_AVAILABLE
 Whether to show progress for this step when it is presented. The default is YES.
  */
 @property (nonatomic, assign) BOOL showsProgress;
+
+/**
+ Whether to use extended outer padding for views
+ */
+@property (nonatomic, assign) BOOL useExtendedPadding;
 
 /**
  The task that contains the step.

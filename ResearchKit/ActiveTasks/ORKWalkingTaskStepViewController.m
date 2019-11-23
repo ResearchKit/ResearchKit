@@ -163,7 +163,7 @@
 
 - (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder {
     NSInteger numberOfSteps = [pedometerRecorder totalNumberOfSteps];
-    ORK_Log_Debug(@"Steps: %lld", (long long)numberOfSteps);
+    ORK_Log_Debug("Steps: %lld", (long long)numberOfSteps);
     if (_intendedSteps > 0 && numberOfSteps >= _intendedSteps) {
         [self finish];
     }

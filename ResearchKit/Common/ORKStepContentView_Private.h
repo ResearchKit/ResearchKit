@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKTitleLabel;
 @class ORKBodyContainerView;
+@class ORKCompletionCheckmarkView;
 @interface ORKStepContentView ()
 
 @property (nonatomic, nullable) UIImageView *topContentImageView;
@@ -47,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // This padding is ignored if there is a `topContentImageView` or `iconImageView` above the label.
 - (void)setAdditionalTopPaddingForTopLabel:(CGFloat)padding;
+
+- (nullable ORKCompletionCheckmarkView *)completionCheckmarkView;
 
 @end
 

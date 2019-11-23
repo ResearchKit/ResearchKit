@@ -55,6 +55,14 @@ class ResultViewController: UITableViewController {
     
     // MARK: View Life Cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemGroupedBackground
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

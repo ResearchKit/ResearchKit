@@ -56,22 +56,31 @@ NSString *const ORKiPadBackgroundViewColorKey = @"ORKiPadBacgroundViewColorKey";
 NSString *const ORKTopContentImageViewBackgroundColorKey = @"ORKTopContentImageViewBackgroundColorKey";
 NSString *const ORKBulletItemTextColorKey = @"ORKBulletItemTextColorKey";
 NSString *const ORKStepTopContentImageChangedKey = @"ORKStepTopContentImageChanged";
+NSString *const ORKDoneButtonPressedKey = @"ORKDoneButtonPressed";
+NSString *const ORKResetDoneButtonKey = @"ORKResetDoneButton";
 CGFloat ORKQuestionStepMinimumHeaderHeight = 29.75;
 CGFloat ORKCardDefaultCornerRadii = 10.0;
-CGFloat ORKCardDefaultBorderWidth = 0.5;
+CGFloat ORKCardDefaultBorderWidth = 0.0;
 CGFloat ORKCardDefaultFontSize = 25.0;
-CGFloat ORKSurveyItemMargin = 20.0;
+CGFloat ORKSurveyItemMargin = 16.0;
 CGFloat ORKSurveyTableContainerLeftRightPadding = 20.0;
 CGFloat ORKiPadBackgroundViewCornerRadius = 20.0;
 CGFloat ORKiPadBackgroundViewBottomPadding = 50.0;
 CGFloat ORKiPadBackgroundViewLeftRightPadding = 115.0;
 
-CGFloat ORKStepContainerLeftRightMarginForXSMax = 22.0;
-CGFloat ORKStepContainerLeftRightMarginForXS = 12.0;
-CGFloat ORKStepContainerLeftRightMarginFor7Plus = 22.0;
-CGFloat ORKStepContainerLeftRightMarginFor7 = 12.0;
-CGFloat ORKStepContainerLeftRightMarginForSE = 8.0;
-CGFloat ORKStepContainerLeftRightMarginForDefault = 12.0;
+CGFloat ORKStepContainerLeftRightMarginForXSMax = 20.0;
+CGFloat ORKStepContainerLeftRightMarginForXS = 16.0;
+CGFloat ORKStepContainerLeftRightMarginFor7Plus = 20.0;
+CGFloat ORKStepContainerLeftRightMarginFor7 = 16.0;
+CGFloat ORKStepContainerLeftRightMarginForSE = 16.0;
+CGFloat ORKStepContainerLeftRightMarginForDefault = 16.0;
+
+CGFloat ORKStepContainerExtendedLeftRightMarginForXSMax = 24.0;
+CGFloat ORKStepContainerExtendedLeftRightMarginForXS = 24.0;
+CGFloat ORKStepContainerExtendedLeftRightMarginFor7Plus = 24.0;
+CGFloat ORKStepContainerExtendedLeftRightMarginFor7 = 24.0;
+CGFloat ORKStepContainerExtendedLeftRightMarginForSE = 16.0;
+CGFloat ORKStepContainerExtendedLeftRightMarginForDefault = 24.0;
 
 CGFloat ORKStepContainerTopMarginForXSMax = 44.0;
 CGFloat ORKStepContainerTopMarginForXS = 44.0;
@@ -82,13 +91,20 @@ CGFloat ORKStepContainerTopMarginForDefault = 20.0;
 
 CGFloat ORKStepContainerTitleToBodyTopPaddingStandard = 15.0;
 CGFloat ORKStepContainerTitleToBodyTopPaddingShort = 11.0;
-CGFloat ORKBodyToBodyPaddingStandard = 22.0;
+CGFloat ORKBodyToBodyPaddingStandard = 12.0;
+CGFloat ORKBodyToBodyParagraphPaddingStandard = 22.0;
 
-CGFloat ORKStepContainerTitleToBulletTopPaddingStandard = 57.0;
 CGFloat ORKStepContainerTitleToBulletTopPaddingShort = 37.0;
 
 CGFloat ORKStepContainerTopContentHeightPercentage = 36.0;
 CGFloat ORKStepContainerFirstItemTopPaddingPercentage = 9.0;
+
+CGFloat ORKStepContentIconImageViewDimension = 80.0;
+
+CGFloat ORKEffectViewOpacityHidden = 0.0;
+CGFloat ORKEffectViewOpacityVisible = 1.0;
+
+CGFloat CheckmarkViewDimension = 25.0;
 
 @implementation UIColor (ORKColor)
 
@@ -116,9 +132,16 @@ static NSMutableDictionary *colors() {
     static NSMutableDictionary *colors = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        UIColor *backgroundColor;
+        if (@available(iOS 13.0, *)) {
+            backgroundColor = [UIColor secondarySystemBackgroundColor];
+        } else {
+            backgroundColor = [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1.0];
+        }
+
         colors = [@{
                     ORKSignatureColorKey: ORKRGB(0x000000),
-                    ORKBackgroundColorKey: [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:244.0 / 255.0 alpha:1.0],
+                    ORKBackgroundColorKey: backgroundColor,
                     ORKConsentBackgroundColorKey: ORKRGB(0xffffff),
                     ORKToolBarTintColorKey: ORKRGB(0xffffff),
                     ORKLightTintColorKey: ORKRGB(0xeeeeee),
@@ -264,14 +287,14 @@ static CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType s
         {         30,        30,        30,        30,        20,        30,        30,        30},      // ORKScreenMetricLearnMoreButtonSideMargin
         {         10,        10,        10,        10,         0,        10,        10,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
-        {        274,       350,       274,       274,       217,       476,       525,       595},      // ORKScreenMetricVerticalScaleHeight
-        {        208,       208,       208,       208,       208,       256,       256,       256},      // ORKScreenMetricSignatureViewHeight
-        {        324,       384,       384,       324,       304,       384,       384,       384},      // ORKScreenMetricPSATKeyboardViewWidth
-        {        197,       197,       197,       167,       157,       197,       197,       197},      // ORKScreenMetricPSATKeyboardViewHeight
-        {        238,       380,       288,       238,       180,       476,       525,       595},      // ORKScreenMetricLocationQuestionMapHeight
-        {         40,        40,        40,        40,        20,        40,        40,        40},      // ORKScreenMetricTopToIconImageViewTop
-        {         44,        44,        44,        44,        40,        80,        80,        80},      // ORKScreenMetricIconImageViewToCaptionBaseline
-        {         30,        30,        30,        30,        26,        30,        30,        30},      // ORKScreenMetricVerificationTextBaselineToResendButtonBaseline
+        {        274,       322,       274,       217,       217,       446,       446,       446},      // ORKScreenMetricVerticalScaleHeight
+        {        200,       200,       200,       200,       198,       256,       256,       256},      // ORKScreenMetricSignatureViewHeight
+        {        324,       384,       324,       304,       304,       384,       384,       384},      // ORKScreenMetricPSATKeyboardViewWidth
+        {        197,       197,       167,       157,       157,       197,       197,       197},      // ORKScreenMetricPSATKeyboardViewHeight
+        {        238,       238,       238,       150,        90,       238,       238,       238},      // ORKScreenMetricLocationQuestionMapHeight
+        {         40,        40,        40,        20,        14,        40,        40,        40},      // ORKScreenMetricTopToIconImageViewTop
+        {         44,        44,        44,        40,        40,        80,        80,        80},      // ORKScreenMetricIconImageViewToCaptionBaseline
+        {         30,        30,        30,        26,        22,        30,        30,        30},      // ORKScreenMetricVerificationTextBaselineToResendButtonBaseline
     };
     return metrics[metric][screenType];
 }
@@ -445,6 +468,31 @@ CGFloat ORKStepContainerLeftRightPaddingForWindow(UIWindow *window) {
     return margin;
 }
 
+CGFloat ORKStepContainerExtendedLeftRightPaddingForWindow(UIWindow *window) {
+    CGFloat margin = 0;
+    switch (ORKGetHorizontalScreenTypeForWindow(window)) {
+        case ORKScreenTypeiPhoneXSMax:
+            margin = ORKStepContainerExtendedLeftRightMarginForXSMax;
+            break;
+        case ORKScreenTypeiPhoneX:
+            margin = ORKStepContainerExtendedLeftRightMarginForXS;
+            break;
+        case ORKScreenTypeiPhone6Plus:
+            margin = ORKStepContainerExtendedLeftRightMarginFor7Plus;
+            break;
+        case ORKScreenTypeiPhone6:
+            margin = ORKStepContainerExtendedLeftRightMarginFor7;
+            break;
+        case ORKScreenTypeiPhone5:
+            margin = ORKStepContainerExtendedLeftRightMarginForSE;
+            break;
+        default:
+            margin = ORKStepContainerExtendedLeftRightMarginForDefault;
+            break;
+    }
+    return margin;
+}
+
 CGFloat ORKStepContainerTopPaddingForWindow(UIWindow *window) {
     CGFloat margin = 0;
     switch (ORKGetVerticalScreenTypeForWindow(window)) {
@@ -512,7 +560,8 @@ CGFloat ORKStepContainerTitleToBulletTopPaddingForWindow(UIWindow *window) {
         case ORKScreenTypeiPhone6Plus:
         case ORKScreenTypeiPhone6:
         default:
-            padding = ORKStepContainerTitleToBulletTopPaddingStandard;
+            // FIXME:- defaulting to short padding for larger devices as well
+            padding = ORKStepContainerTitleToBulletTopPaddingShort;
             break;
     }
     return padding;

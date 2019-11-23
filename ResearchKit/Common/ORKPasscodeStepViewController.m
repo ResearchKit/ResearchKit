@@ -72,7 +72,6 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
     LAContext *_touchContext;
     ORKPasscodeType _authenticationPasscodeType;
     BOOL _useTouchId;
-    ORKNavigationContainerView *_navigationFooterView;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -107,7 +106,6 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         _navigationFooterView = _passcodeStepView.navigationFooterView;
         _navigationFooterView.neverHasContinueButton = YES;
         _navigationFooterView.skipEnabled = NO;
-        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
         [_navigationFooterView updateContinueAndSkipEnabled];
         
         _passcode = [NSMutableString new];
@@ -117,7 +115,7 @@ static CGFloat const kForgotPasscodeHeight              = 100.0f;
         _isChangingState = NO;
         _isTouchIdAuthenticated = NO;
         _isPasscodeSaved = NO;
-        _useTouchId = YES;
+        _useTouchId = [self passcodeStep].useBiometrics;
         
         // If this has text, we should add the forgot passcode button with this title
         if ([self hasForgotPasscode]) {
