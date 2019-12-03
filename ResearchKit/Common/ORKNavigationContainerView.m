@@ -117,9 +117,6 @@ static const CGFloat activityIndicatorPadding = 24.0;
     _continueButton.exclusiveTouch = YES;
     _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    if (_appTintColor) {
-        _continueButton.normalTintColor = _appTintColor;
-    }
     [self addSubview:_continueButton];
 }
 
@@ -131,9 +128,6 @@ static const CGFloat activityIndicatorPadding = 24.0;
     [_skipButton setTitle:nil forState:UIControlStateNormal];
     [_skipButton addTarget:self action:@selector(skipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
-    if (_appTintColor) {
-        _skipButton.normalTintColor = _appTintColor;
-    }
     [self addSubview:_skipButton];
 }
 
@@ -146,10 +140,15 @@ static const CGFloat activityIndicatorPadding = 24.0;
 }
 
 - (void)setupViews {
-    _appTintColor = [[UIApplication sharedApplication].delegate window].tintColor;
     [self setupContinueButton];
     [self setupSkipButton];
     [self setUpConstraints];
+}
+
+- (void)didMoveToWindow {
+    _appTintColor = self.window.tintColor ? : ORKColor(ORKBlueHighlightColorKey);
+    _continueButton.normalTintColor = _appTintColor;
+    _skipButton.normalTintColor = _appTintColor;
 }
 
 - (void)setSkipButtonStyle:(ORKNavigationContainerButtonStyle)skipButtonStyle {
