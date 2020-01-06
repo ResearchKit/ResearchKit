@@ -49,7 +49,7 @@
 "CONSENT_SECTION_STUDY_SURVEY" = "Studienumfrage";
 "CONSENT_SECTION_STUDY_TASKS" = "Studienaufgaben";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Zeitaufwand";
-"CONSENT_SECTION_WITHDRAWING" = "Aussteigen";
+"CONSENT_SECTION_WITHDRAWING" = "Zurücktreten";
 "CONSENT_LEARN_MORE_TITLE" = "Weitere Infos";
 
 /* Consent section learn more */
@@ -60,22 +60,29 @@
 "LEARN_MORE_STUDY_SURVEY" = "Weitere Infos über die Studienumfrage";
 "LEARN_MORE_TIME_COMMITMENT" = "Weitere Infos über den für diese Studie benötigten Zeitaufwand";
 "LEARN_MORE_TASKS" = "Weitere Infos über die Aufgaben in der Studie";
-"LEARN_MORE_WITHDRAWING" = "Weitere Infos zum Aussteigen aus der Studie";
+"LEARN_MORE_WITHDRAWING" = "Weitere Infos zum Zurücktreten";
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Freigabe-Optionen";
 "CONSENT_SHARE_WIDELY_%@" = "Meine Daten mit %@ und qualifizierten Forschern auf der ganzen Welt teilen";
 "CONSENT_SHARE_ONLY_%@" = "Meine Daten nur mit „%@“ teilen";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ wird die Studiendaten von deiner Teilnahme an dieser Studie erhalten.\n\nDurch Teilen deiner codierten Studiendaten (ohne Informationen wie deinem Namen) mit einer breiteren Basis können diese und künftige Studien profitieren.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Die Studiendaten deiner Teilnahme an dieser Studie werden an %@ gesendet.\n\nDurch Teilen deiner codierten Studiendaten (ohne Informationen wie deinem Namen) mit einer breiteren Basis können diese und künftige Studien profitieren.";
 "LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "Name von %@ (Druckbuchstaben)";
-"CONSENT_DOC_LINE_SIGNATURE" = "Unterschrift von %@";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Gedruckter Name";
+"CONSENT_DOC_LINE_SIGNATURE" = "Unterschrift";
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@ von %2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "Frage %1$@ von %2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Übersprungen";
+"REVIEW_EDIT_ANSWER" = "Bearbeiten";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ungültiger Wert";
@@ -172,7 +179,7 @@
 /* Gender values. */
 "GENDER_FEMALE" = "Weiblich";
 "GENDER_MALE" = "Männlich";
-"GENDER_OTHER" = "Sonstiges";
+"GENDER_OTHER" = "Divers";
 
 /* Boolean answer strings */
 "BOOL_NO" = "Nein";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Abbrechen";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Löschen";
+"BUTTON_CLEAR_SIGNATURE" = "Unterschrift löschen";
 "BUTTON_APPLY" = "Anwenden";
 "BUTTON_DISAGREE" = "Ablehnen";
 "BUTTON_DONE" = "Fertig";
@@ -217,13 +225,14 @@
 "BUTTON_CLEAR_ANSWER" = "Antwort löschen";
 "BUTTON_READ_ONLY_MODE" = "Diese Antwort kann nicht geändert werden.";
 "BUTTON_COPYRIGHT" = "Copyright";
+"BUTTON_CLOSE" = "Schließen";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Aktivität beginnt in";
 "TASK_COMPLETE_TITLE" = "Aktivität abgeschlossen";
 "TASK_COMPLETE_TEXT" = "Deine Daten werden analysiert und du wirst benachrichtigt, wenn deine Ergebnisse bereitstehen.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "Noch %@ Sekunden.";
-"TOUCH_ANYWHERE_LABEL" = "Tippe irgendwo auf den Bildschirm, um fortzufahren";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "Noch %@.";
+"TOUCH_ANYWHERE_LABEL" = "Tippe auf den Bildschirm, um fortzufahren.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Bild aufnehmen";
@@ -319,13 +328,40 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometrie";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tippe, wenn du einen Ton hörst.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Ton & Lautstärke";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Du wirst eine Serie von Tönen hören.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Wenn du einen Ton hörst, tippe auf die Taste.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "Für diesen Test wird die Lautstärke auf 50 Prozent gestellt.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Dieser Test dauert etwa 10 Minuten.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "Aktiviere „Nicht stören“, um Unterbrechungen zu vermeiden.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "Es werden erst in deinem rechten Ohr Töne wiedergegeben.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "Es werden jetzt in deinem linken Ohr Töne wiedergegeben.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Diese Aktivität identifiziert die Hörschwellenpegel eines Individuums in db auf einer HL-Skala.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Vergewissere dich, dass die Gerätelautstärke auf den höchsten Pegel eingestellt ist.\n\nWährend dieser Aufgabe wird ein leiser Ton im linken oder rechten Ohr abgespielt.\n\nHöre genau zu und tippe jedes Mal auf die Taste, wenn du einen Ton hörst.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Dieser Test identifiziert, wie laut ein Ton sein muss, damit du ihn hörst.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Eingangsfragebogen.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Wähle das „bessere Ohr“ als deine Vorliebe, falls nötig";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "links";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "rechts";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "keine Vorliebe";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Test abgebrochen";
+"dBHL_ALERT_TITLE_START_OVER" = "Erneut starten";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Test abbrechen";
+"dBHL_ALERT_TEXT" = "Schließe deine AirPods oder EarPods erneut an, um diesen Test zu machen.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ vollständig";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Kopfhörer";
+"HEADPHONES_UNKNOWN" = "Unbekannt";
+"HEADPHONES_NONE" = "Keine";
+"CONNECTED" = "Verbunden";
+"NOT_CONNECTED" = "Nicht verbunden";
+"HEADPHONE_CONNECTED_%@" = "Verbunden - %@";
+"HEADPHONE_DETECT_TITLE" = "Kopfhörer anschließen";
+"HEADPHONE_DETECT_TEXT" = "Für diesen Test sind Apple AirPods oder Apple EarPods erforderlich";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Räumliches Gedächtnis";
@@ -343,7 +379,7 @@
 "MEMORY_GAME_COMPLETE_TITLE" = "Sequenz abgeschlossen";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Zum Fortfahren tippst du auf „Weiter“";
 "MEMORY_GAME_FAILED_TITLE" = "Erneut versuchen";
-"MEMORY_GAME_FAILED_MESSAGE" = "Du hast es diesmal nicht ganz geschafft. Zum Fortfahren tippst du auf „Weiter“.";
+"MEMORY_GAME_FAILED_MESSAGE" = "Du hast es diesmal nicht ganz geschafft. Zum Fortfahren tippe auf „Weiter“.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Zeit ist abgelaufen";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Deine Zeit ist vorbei.\nTippe auf „Weiter“, um fortzufahren.";
 "MEMORY_GAME_COMPLETE" = "Spiel abgeschlossen";
@@ -354,7 +390,7 @@
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaktionszeit";
 "REACTION_TIME_TASK_INTENDED_USE" = "Mit dieser Aktivität wird bewertet, wie lange du brauchst, um auf optische Reize zu reagieren.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schüttle das Gerät, sobald der blaue Punkt auf dem Bildschirm angezeigt wird. Du wirst %D mal darum gebeten.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schüttle das Gerät, sobald der blaue Punkt auf dem Bildschirm angezeigt wird. Du wirst %D-mal dazu aufgefordert.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %@ von %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Wenn der blaue Kreis angezeigt wird, schüttle das Gerät schnell";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Setze dich an den Rand eines Stuhls. Wenn es losgeht, legst du dein Gerät zur Messung auf dein rechtes Knie. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lege dein Gerät wie abgebildet auf dein linkes Knie mit dem Bildschirm nach außen.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lege dein Gerät wie abgebildet auf dein rechtes Knie mit dem Bildschirm nach außen.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und strecke dein linkes Knie so weit aus, wie du kannst. Tippe erneut, wenn du fertig bist.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und strecke dein rechtes Knie so weit aus, wie du kannst. Tippe erneut, wenn du fertig bist.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf dein linkes Knie";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf dein rechtes Knie";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Strecke dein linkes Knie aus und tippe irgendwo auf den Bildschirm.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Strecke dein rechtes Knie aus und tippe irgendwo auf den Bildschirm.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe zum Starten auf den Bildschirm und strecke dein linkes Knie so weit wie möglich durch. Kehre zur Startposition zurück und tippe erneut, wenn du fertig bist.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe zum Starten auf den Bildschirm und strecke dein rechtes Knie so weit wie möglich durch. Kehre zur Startposition zurück und tippe erneut, wenn du fertig bist.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf dein linkes Knie. Tippe auf den Bildschirm und strecke dein linkes Knie so weit wie möglich durch.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf dein rechtes Knie. Tippe auf den Bildschirm und strecke dein rechtes Knie so weit wie möglich durch.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Wenn du fertig bist, bringe dein linkes Knie wieder in die Startposition und tippe dann auf den Bildschirm.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Wenn du fertig bist, bringe dein rechtes Knie wieder in die Startposition und tippe dann auf den Bildschirm.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Linke Schulter Bewegungsumfang";
@@ -411,12 +447,12 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Wenn es losgeht, legst du dein Gerät zur Messung auf deine rechte Schulter. Bitte schalte bei deinem Gerät den Ton an, damit du die Anweisungen hören kannst.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Lege dein Gerät wie abgebildet auf deine linke Schulter mit dem Bildschirm nach außen.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Lege dein Gerät wie abgebildet auf deine rechte Schulter mit dem Bildschirm nach außen.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und hebe deinen linken Arm so weit, wie du kannst. Tippe erneut, wenn du fertig bist.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe auf den Bildschirm, um anzufangen und hebe deinen rechten Arm so weit, wie du kannst. Tippe erneut, wenn du fertig bist.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf deine linke Schulter";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf deine rechte Schulter";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Hebe deinen linken Arm und tippe irgendwo auf den Bildschirm.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Hebe deinen rechten Arm und tippe irgendwo auf den Bildschirm.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Wenn du bereit bist, tippe zum Starten auf den Bildschirm und hebe den linken Arm so weit wie möglich an. Kehre zur Startposition zurück und tippe erneut, wenn du fertig bist.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Wenn du bereit bist, tippe zum Starten auf den Bildschirm und hebe den rechten Arm so weit wie möglich an. Kehre zur Startposition zurück und tippe erneut, wenn du fertig bist.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Lege dein Gerät auf deine linke Schulter. Tippe auf den Bildschirm und strecke den linken Arm so weit wie möglich nach vorne aus.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Lege dein Gerät auf deine rechte Schulter. Tippe auf den Bildschirm und strecke den rechten Arm so weit wie möglich nach vorne aus.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Wenn du fertig bist, bringe deinen linken Arm wieder in die Startposition und tippe dann auf den Bildschirm.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Wenn du fertig bist, bringe deinen rechten Arm wieder in die Startposition und tippe dann auf den Bildschirm.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gehen mit Zeitmessung";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "Der akustische Serienaddiertest mit Zeitlimit (PASAT, Paced Auditory Serial Addition Test) misst, wie schnell du akustische Informationen verarbeiten und rechnen kannst.";
 "PVSAT_INTRO_TEXT" = "Der visuelle Serienaddiertest mit Zeitlimit (PASAT, Paced Visual Serial Addition Test) misst, wie schnell du optische Informationen verarbeiten und rechnen kannst.";
 "PAVSAT_INTRO_TEXT" = "Der audiovisuelle Serienaddiertest mit Zeitlimit (PAVSAT, Paced Auditory and Visual Serial Addition Test) misst, wie schnell du akustische und optische Informationen verarbeiten und rechnen kannst.";
-"PSAT_INTRO_TEXT_2_%@" = "Alle %@ Sekunden werden einzelne Zahlen präsentiert.\nDie musst jede neue Zahl zu der unmittelbar vorhergehenden addieren.\nAchtung, du sollst nicht die Gesamtsumme bilden, sondern nur die Summe der beiden letzten Zahlen.";
+"PSAT_INTRO_TEXT_2_%@" = "Alle %@ werden einzelne Zahlen präsentiert.\nDu musst jede neue Zahl zu der unmittelbar vorhergehenden addieren.\nAchtung, du sollst nicht die Gesamtsumme bilden, sondern nur die Summe der beiden letzten Zahlen.";
 "PSAT_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
 "PSAT_INITIAL_INSTRUCTION" = "Merke dir die erste Zahl.";
 "PSAT_INSTRUCTION" = "Addiere diese Zahl zur vorherigen.";
@@ -455,8 +491,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole-Peg-Test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Mit dieser Aktivität wird die Reaktionsfähigkeit deiner oberen Extremitäten gemessen, indem du aufgefordert wirst, einen Kreis auf einem Loch zu platzieren. Das Ganze wird %@-mal wiederholt.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sowohl deine linke als auch die rechte Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@maligen Wiederholung wieder %@ Mal entfernen.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sowohl deine rechte als auch die linke Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@maligen Wiederholung wieder %@ Mal entfernen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sowohl deine linke als auch die rechte Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@-maligen Wiederholung wieder %@-mal entfernen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sowohl deine rechte als auch die linke Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@-maligen Wiederholung wieder %@-mal entfernen.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Bewege den Kreis mit der linken Hand in das Loch.";
@@ -487,10 +523,10 @@
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_LEFT" = "Halte dein Telefon nun mit ausgestreckter LINKER Hand in Schulterhöhe.";
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INTRO_RIGHT" = "Halte dein Telefon nun mit ausgestreckter RECHTER Hand in Schulterhöhe.";
 "TREMOR_TEST_ACTIVE_STEP_EXTEND_ARM_INSTRUCTION_%ld" = "Halte mit ausgestreckter Hand %ld Sekunden lang dein Telefon.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Halte dein Telefon nun mit angewinkelten Ellenbogen in Schulterhöhe.";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO" = "Halte dein Telefon nun mit angewinkeltem Ellenbogen in Schulterhöhe.";
 "TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_LEFT" = "Halte dein Telefon nun in deiner LINKEN Hand mit angewinkeltem Ellenbogen in Schulterhöhe.";
 "TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INTRO_RIGHT" = "Halte dein Telefon nun in deiner RECHTEN Hand mit angewinkeltem Ellenbogen in Schulterhöhe.";
-"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Halte mit angewinkelten Ellenbogen %ld Sekunden lang dein Telefon";
+"TREMOR_TEST_ACTIVE_STEP_BEND_ARM_INSTRUCTION_%ld" = "Halte mit angewinkeltem Ellenbogen %ld Sekunden lang dein Telefon";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO" = "Winkle nun deinen Ellenbogen an und berühre wiederholt mit deinem Telefon deine Nase.";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_LEFT" = "Winkle nun deinen Ellenbogen an, halte dein Telefon in der LINKEN Hand und berühre wiederholt mit deinem Telefon deine Nase.";
 "TREMOR_TEST_ACTIVE_STEP_TOUCH_NOSE_INTRO_RIGHT" = "Winkle nun deinen Ellenbogen an, halte dein Telefon in der RECHTEN Hand und berühre wiederholt mit deinem Telefon deine Nase.";
@@ -563,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Rechnen";
 "ENVIRONMENTSPL_THRESHOLD" = "Schwellenwert: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Hintergrundgeräusch OK";
+"ENVIRONMENTSPL_NOISE" = "Zu viel Hintergrundgeräusch";
+"ENVIRONMENTSPL_TITLE_2" = "Einen ruhigen Ort finden";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "Um sicherzustellen, dass erfasste Daten akkurat sind, sollte dieser Test in einer ruhigen Umgebung erfolgen.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Aufgabe starten";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Keine Daten";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Bewege den Schieberegler zur Werteingabe";
+"SLIDER_I_DONT_KNOW" = "Ich weiß nicht";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Seite";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Zurück";
@@ -586,6 +636,7 @@
 
 "AX_SELECTED" = "Ausgewählt";
 "AX_UNSELECTED" = "Nicht ausgewählt";
+"AX_SELECT_ALL_THAT_APPLY" = "ALLE ZUTREFFENDEN OPTIONEN AUSWÄHLEN";
 
 "AX_SLIDER_LABEL" = "Antwortregler. Bereich von %@ bis %@";
 "AX_UNLABELED_IMAGE" = "Nicht markiertes Bild";
@@ -612,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mit Scheiben in den Größen %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Leer";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Tastatur schließen";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Bereich von %@ bis %@";
 "AX_GRAPH_STACK_PREFIX" = "Stapel besteht aus";
@@ -626,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amsler-Gitter";
 "AX_AMSLER_GRID_HINT" = "Markiere das Gitter direkt mit deinem Finger oder dem Stylus oder streiche links an einer beliebigen Stelle außerhalb des Gitters, um die Aufgabe zu beenden.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Antippbare Tasten";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Für das linke Ohr tippen";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Zum Starten des Tests aktivieren. Wenn der Test startet, tippe direkt auf diese Taste, wenn du im linken Ohr einen Ton hörst.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Für das rechte Ohr tippen";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Zum Starten des Tests aktivieren. Wenn der Test startet, tippe direkt auf diese Taste, wenn du im rechten Ohr einen Ton hörst.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ Verwende VoiceOver und erkunde den Bildschirm mit deinen Fingern, um zu lernen, wo sich die Tasten für jedes Ohr befinden. Wenn der Test startet, können die Tasten direkt angetippt werden. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Für einen Finger tippen";
+"AX_TAP_BUTTON_2_LABEL" = "Für den anderen Finger tippen";
+"AX_TAP_BUTTON_HINT" = "Aktivieren, damit die Tasten antippbar werden.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ Verwende VoiceOver und erkunde den Bildschirm mit deinen Fingern, um zu lernen, wo sich die Tasten befinden. Aktiviere eine der beiden Tasten, damit sie direkt angetippt werden können.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "Tasten können jetzt direkt angetippt werden.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ Beim Verwenden von VoiceOver kann die Taste direkt angetippt werden. Sie befindet sich in der Nähe der Bildschirmmitte.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Beim Verwenden von VoiceOver können die Tasten im Test direkt angetippt werden.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "restoreData kann nicht für Initialisierung decodiert werden";

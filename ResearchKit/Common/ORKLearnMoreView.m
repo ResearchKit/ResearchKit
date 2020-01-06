@@ -141,8 +141,21 @@ ORK_CLASS_AVAILABLE
     }
 }
 
+- (void)setLearnMoreButtonTextAlignment:(NSTextAlignment)textAlignment {
+    if (textAlignment == NSTextAlignmentLeft) {
+        [_learnMoreButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    } else {
+        _learnMoreButton.titleLabel.textAlignment = textAlignment;
+    }
+}
+
+- (BOOL)isTextLink {
+    return _learnMoreButton.titleLabel.text.length > 0;
+}
+
 - (void)setupConstraints {
     _learnMoreButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_learnMoreButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     NSArray<NSLayoutConstraint *> *constraints = @[
                                                    [NSLayoutConstraint constraintWithItem:self
                                                                                 attribute:NSLayoutAttributeTop

@@ -37,6 +37,7 @@
 #import "ORKPSATContentView.h"
 #import "ORKPSATKeyboardView.h"
 #import "ORKVerticalContainerView.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKCollectionResult_Private.h"

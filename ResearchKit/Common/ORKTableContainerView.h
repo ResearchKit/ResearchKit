@@ -60,9 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)scrollCellVisible:(UITableViewCell *)cell animated:(BOOL)animated;
     
-- (instancetype)initWithStyle:(UITableViewStyle)style;
+- (instancetype)initWithStyle:(UITableViewStyle)style pinNavigationContainer:(BOOL)pinNavigationContainer;
 
 - (void)sizeHeaderToFit;
+
+- (void)resizeFooterToFit;
 
 @end
 

@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-
+#import <ResearchKit/ORKFormStep.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,10 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL isFirstItemInSectionWithoutTitle;
 
+@property (nonatomic) ORKCardViewStyle cardViewStyle;
+
 - (void)setPrimaryText:(NSString *)primaryText;
 - (void)setPrimaryAttributedText: (NSAttributedString *)primaryAttributedText;
 - (void)setDetailText:(NSString *)detailText;
 - (void)setDetailAttributedText:(NSAttributedString *)detailAttributedText;
+- (void)setCellSelected:(BOOL)cellSelected highlight:(BOOL)highlight;
 
 @end
 

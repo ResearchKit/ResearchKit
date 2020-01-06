@@ -164,7 +164,6 @@
             [_testView addSubview:b];
         }
         _tapButtons = [buttons copy];
-        
         [self setUpConstraints];
     }
     return self;

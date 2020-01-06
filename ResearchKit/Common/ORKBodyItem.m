@@ -36,6 +36,10 @@
 @implementation ORKBodyItem
 
 - (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle {
+    return [self initWithText:text detailText:detailText image:image learnMoreItem:learnMoreItem bodyItemStyle:bodyItemStyle useCardStyle:NO];
+}
+
+- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText image:(nullable UIImage *)image learnMoreItem:(nullable ORKLearnMoreItem *)learnMoreItem bodyItemStyle:(ORKBodyItemStyle)bodyItemStyle useCardStyle:(BOOL)useCardStyle {
     self = [super init];
     if (self) {
         self.text = text;
@@ -43,13 +47,24 @@
         self.learnMoreItem = learnMoreItem;
         self.bodyItemStyle = bodyItemStyle;
         self.image = image;
+        self.useCardStyle = useCardStyle;
+        self.useSecondaryColor = NO;
     }
     [self validateParameters];
     return self;
 }
 
+- (instancetype)initWithHorizontalRule {
+    return [self initWithText:nil
+                   detailText:nil
+                        image:nil
+                learnMoreItem:nil
+                bodyItemStyle:ORKBodyItemStyleHorizontalRule
+                 useCardStyle:NO];
+}
+
 - (void)validateParameters {
-    if (!_text && !_detailText && !_learnMoreItem) {
+    if (_bodyItemStyle != ORKBodyItemStyleHorizontalRule && !_text && !_detailText && !_learnMoreItem) {
         NSAssert(NO, @"Parameters text, detailText and learnMoreItem cannot be nil at the same time.");
     }
 }
@@ -66,6 +81,8 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, learnMoreItem, ORKLearnMoreItem);
         ORK_DECODE_INTEGER(aDecoder, bodyItemStyle);
         ORK_DECODE_IMAGE(aDecoder, image);
+        ORK_DECODE_BOOL(aDecoder, useCardStyle);
+        ORK_DECODE_BOOL(aDecoder, useSecondaryColor);
     }
     return self;
 }
@@ -76,6 +93,8 @@
     ORK_ENCODE_OBJ(aCoder, learnMoreItem);
     ORK_ENCODE_INTEGER(aCoder, bodyItemStyle);
     ORK_ENCODE_IMAGE(aCoder, image);
+    ORK_ENCODE_BOOL(aCoder, useCardStyle);
+    ORK_ENCODE_BOOL(aCoder, useSecondaryColor);
 }
 
 - (nonnull id)copyWithZone:(nullable NSZone *)zone {
@@ -85,6 +104,8 @@
     bodyItem->_learnMoreItem = [self.learnMoreItem copy];
     bodyItem->_bodyItemStyle = self.bodyItemStyle;
     bodyItem->_image = [self.image copy];
+    bodyItem->_useCardStyle = self.useCardStyle;
+    bodyItem->_useSecondaryColor = self.useSecondaryColor;
     return bodyItem;
 }
 
@@ -102,7 +123,9 @@
             && ORKEqualObjects(self.detailText, castObject.detailText)
             && ORKEqualObjects(self.learnMoreItem, castObject.learnMoreItem)
             && (self.bodyItemStyle == castObject.bodyItemStyle)
-            && ORKEqualObjects(self.image, castObject.image));
+            && ORKEqualObjects(self.image, castObject.image)
+            && (self.useCardStyle == castObject.useCardStyle)
+            && (self.useSecondaryColor == castObject.useSecondaryColor));
 }
 
 @end

@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "사용자가 참여한 이 연구 조사의 데이터가 %@(으)로 보내집니다.\n\n코드화된 사용자의 연구 데이터를 더 광범위하게 공유할수록(사용자 이름 등의 정보는 제외) 현재 및 향후 실시될 연구에 도움이 됩니다.";
 "LEARN_MORE_CONSENT_SHARING" = "데이터 공유에 관하여 더 알아보기";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@의 이름 (인쇄됨)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@의 서명";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "프린트된 이름";
+"CONSENT_DOC_LINE_SIGNATURE" = "서명";
 "CONSENT_DOC_LINE_DATE" = "날짜";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%1$@/%2$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "질문 %1$@/%2$@";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "건너뜀";
+"REVIEW_EDIT_ANSWER" = "편집";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "유효하지 않은 값";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "취소";
 "BUTTON_OK" = "확인";
 "BUTTON_CLEAR" = "지우기";
+"BUTTON_CLEAR_SIGNATURE" = "서명 지우기";
 "BUTTON_APPLY" = "적용";
 "BUTTON_DISAGREE" = "동의 안 함";
 "BUTTON_DONE" = "완료";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "대답 지우기";
 "BUTTON_READ_ONLY_MODE" = "이 대답을 수정할 수 없습니다.";
 "BUTTON_COPYRIGHT" = "저작권";
+"BUTTON_CLOSE" = "닫기";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "실험 시작까지";
 "TASK_COMPLETE_TITLE" = "실험 완료";
 "TASK_COMPLETE_TEXT" = "데이터를 분석하여 결과가 준비되면 통보합니다.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@초 남았습니다.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ 남았습니다.";
 "TOUCH_ANYWHERE_LABEL" = "계속하려면 아무 곳이나 터치하십시오.";
 
 /* Image capture step. */
@@ -259,7 +268,7 @@
 
 /* Short walk back and forth. */
 "WALK_INTRO_2_TEXT_BACK_AND_FORTH_INSTRUCTION" = "일직선으로 안전하게 왔다 갔다 할 수 있는 공간을 찾으십시오. 계속 걷다가 반환점에서 마치 원뿔형 도로 표지가 있는 것처럼 주변을 돌아서 되돌아갑니다.\n\n그런 다음, 제자리에서 한 바퀴 돌고난 후 양팔을 옆구리에 붙이고 발은 어깨너비만큼 벌린 채 서 있으십시오.";
-"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "시기할 준비가 되면 시작하기를 탭하십시오.\n그런 다음 기기를 주머니나 가방에 넣고 오디오 지침을 따르십시오.";
+"WALK_INTRO_2_DETAIL_BACK_AND_FORTH_INSTRUCTION" = "시작할 준비가 되면 시작하기를 탭하십시오.\n그런 다음 기기를 주머니나 가방에 넣고 오디오 지침을 따르십시오.";
 "WALK_BACK_AND_FORTH_INSTRUCTION_FORMAT" = "%@ 동안 일직선으로 왔다 갔다 걸으십시오. 평상시 걷는 것처럼 걸으면 됩니다.";
 "WALK_BACK_AND_FORTH_STAND_INSTRUCTION_FORMAT" = "원을 그리며 돌아선 다음 %@ 동안 가만히 서 있으십시오.";
 "WALK_BACK_AND_FORTH_FINISHED_VOICE" = "이 실험을 완료했습니다.";
@@ -319,13 +328,40 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "순음 청력 검사";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "소리가 들리면 탭하십시오.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "소리 및 음량";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "일련의 소리를 듣게 됩니다.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "소리가 들리면 버튼을 탭하십시오.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "이 테스트에서는 음량이 50퍼센트로 설정됩니다.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "이 테스트는 10분 정도 소요됩니다.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "테스트가 중단되는 것을 방지하기 위해 방해금지 모드를 켜십시오.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "먼저 오른쪽 귀에서 소리를 재생합니다.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "이제 왼쪽 귀에서 소리를 재생합니다.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "이 실험은 개인의 청각 임계 기준을 dB HL 등급으로 확인합니다.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "기기 음량을 최대로 설정했는지 확인하십시오.\n\n이 실험을 진행하는 동안 감지하기 힘든 소리가 왼쪽 귀나 오른쪽 귀에 각각 재생됩니다.\n\n잘 듣고 소리가 들릴 때마다 버튼을 탭하십시오.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "이 테스트에서는 사용자가 소리를 듣기 위해 필요한 음량을 파악합니다.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "사전 설문 사항.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "'더 잘 들리는 귀'가 있는 경우 선호하는 귀를 선택하십시오.";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "왼쪽";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "오른쪽";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "선호하는 쪽 없음";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "테스트가 취소됨";
+"dBHL_ALERT_TITLE_START_OVER" = "다시 시작";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "테스트 취소";
+"dBHL_ALERT_TEXT" = "이 테스트를 실시하려면 AirPods 또는 EarPods를 다시 연결하십시오.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ 완료";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "헤드폰";
+"HEADPHONES_UNKNOWN" = "알 수 없음";
+"HEADPHONES_NONE" = "없음";
+"CONNECTED" = "연결됨";
+"NOT_CONNECTED" = "연결 안 됨";
+"HEADPHONE_CONNECTED_%@" = "연결됨 - %@";
+"HEADPHONE_DETECT_TITLE" = "헤드폰에 연결";
+"HEADPHONE_DETECT_TEXT" = "이 테스트는 Apple AirPods 또는 Apple EarPods이 필요합니다.";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "공간 기억";
@@ -344,7 +380,7 @@
 "MEMORY_GAME_COMPLETE_MESSAGE" = "계속하려면 다음을 탭하십시오.";
 "MEMORY_GAME_FAILED_TITLE" = "다시 시도";
 "MEMORY_GAME_FAILED_MESSAGE" = "이번에는 성공적으로 완료하지 못했습니다. 계속하려면 다음을 탭하십시오.";
-"MEMORY_GAME_TIMEOUT_TITLE" = "제한 시간 종료";
+"MEMORY_GAME_TIMEOUT_TITLE" = "제한 시간 도달";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "시간이 초과되었습니다.\n계속하려면 다음을 탭하십시오.";
 "MEMORY_GAME_COMPLETE" = "게임 종료";
 "MEMORY_GAME_PAUSED_TITLE" = "일시 정지됨";
@@ -393,14 +429,14 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "이 실험에서는 사용자가 오른쪽 무릎을 얼마나 펼 수 있는지 측정합니다.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "의자 가장자리에 앉으십시오. 실험을 시작하면 측정을 위해 기기를 왼쪽 무릎에 놓아두게 됩니다. 지침을 들을 수 있도록 기기 사운드를 켜두십시오.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "의자 가장자리에 앉으십시오. 실험을 시작하면 측정을 위해 기기를 오른쪽 무릎에 놓아두게 됩니다. 지침을 들을 수 있도록 기기 사운드를 켜두십시오.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 왼쪽 무릎에 놓으십시오.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 오른쪽 무릎에 놓으십시오.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "준비가 되면 화면을 탭하여 시작한 다음 왼쪽 무릎을 최대한 많이 폅니다. 완료하면 다시 탭하십시오.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "준비가 되면 화면을 탭하여 시작한 다음 오른쪽 무릎을 최대한 많이 폅니다. 완료하면 다시 탭하십시오.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "기기를 왼쪽 무릎에 놓으십시오.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "기기를 오른쪽 무릎에 놓으십시오.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "왼쪽 무릎을 편 다음 아무 곳이나 탭하십시오.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "오른쪽 무릎을 편 다음 아무 곳이나 탭하십시오.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 왼쪽 무릎 위에 놓으십시오.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 오른쪽 무릎 위에 놓으십시오.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "준비가 되면 화면을 탭하여 시작한 다음 왼쪽 무릎을 최대한 많이 폅니다. 완료하면 시작 위치로 되돌리고 다시 탭하십시오.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "준비가 되면 화면을 탭하여 시작한 다음 오른쪽 무릎을 최대한 많이 폅니다. 완료하면 시작 위치로 되돌린 다음 다시 탭하십시오.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "기기를 왼쪽 무릎 위에 놓으십시오. 화면을 탭하고 왼쪽 무릎을 최대한 많이 폅니다.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "기기를 오른쪽 무릎 위에 놓으십시오. 화면을 탭하고 오른쪽 무릎을 최대한 많이 폅니다.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "완료하면 왼쪽 무릎을 시작했던 위치로 되돌린 다음 아무 곳이나 탭하십시오.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "완료하면 오른쪽 무릎을 시작했던 위치로 되돌린 다음 아무 곳이나 탭하십시오.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "왼쪽 어깨 관절 가동 범위";
@@ -409,14 +445,14 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "이 실험에서는 사용자가 오른쪽 어깨를 얼마나 펼 수 있는지 측정합니다.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "실험을 시작하면 측정을 위해 기기를 왼쪽 어깨에 놓아두게 됩니다. 지침을 들을 수 있도록 기기 사운드를 켜두십시오.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "실험을 시작하면 측정을 위해 기기를 오른쪽 어깨에 놓아두게 됩니다. 지침을 들을 수 있도록 기기 사운드를 켜두십시오.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 왼쪽 어깨에 놓으십시오.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 오른쪽 어깨에 놓으십시오.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "준비가 되면 화면을 탭하여 시작한 다음 왼팔을 최대한 많이 들어 올립니다. 완료하면 다시 탭하십시오.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "준비가 되면 화면을 탭하여 시작한 다음 오른팔을 최대한 많이 들어 올립니다. 완료하면 다시 탭하십시오.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "기기를 왼쪽 어깨에 놓으십시오.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "기기를 오른쪽 어깨에 놓으십시오.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "왼팔을 위로 올린 다음 아무 곳이나 탭하십시오.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "오른팔을 위로 올린 다음 아무 곳이나 탭하십시오.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 왼쪽 어깨 위에 놓으십시오.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "그림에 표시된 대로 화면을 위로 향하게 한 채로 기기를 오른쪽 어깨 위에 놓으십시오.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "준비가 되면 화면을 탭하여 시작한 다음 왼쪽 팔을 최대한 많이 들어 올립니다. 완료하면 시작 위치로 되돌리고 다시 탭하십시오.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "준비가 되면 화면을 탭하여 시작한 다음 오른쪽 팔을 최대한 많이 들어 올립니다. 완료하면 시작 위치로 되돌리고 다시 탭하십시오.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "기기를 왼쪽 어깨 위에 놓으십시오. 화면을 탭하고 왼쪽 팔을 최대한 앞으로 들어 올립니다.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "기기를 오른쪽 어깨 위에 놓으십시오. 화면을 탭하고 오른쪽 팔을 최대한 앞으로 들어 올립니다.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "완료하면 왼쪽 팔을 시작했던 위치로 되돌린 다음 아무 곳이나 탭하십시오.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "완료하면 오른쪽 팔을 시작했던 위치로 되돌린 다음 아무 곳이나 탭하십시오.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "보행 테스트";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "PASAT 테스트(Paced Auditory Serial Addition Test)는 사용자의 청각 정보 처리 속도 및 계산 능력을 측정합니다.";
 "PVSAT_INTRO_TEXT" = "PVSAT 테스트(Paced Visual Serial Addition Test)는 사용자의 시각 정보 처리 속도 및 계산 능력을 측정합니다.";
 "PAVSAT_INTRO_TEXT" = "PAVSAT 테스트(Paced Auditory and Visual Serial Addition Test)는 사용자의 청각 및 시각 정보 처리 속도 및 계산 능력을 측정합니다.";
-"PSAT_INTRO_TEXT_2_%@" = "한 자릿수의 숫자가 %@초마다 제시됩니다.\n새로운 숫자가 제시될 때마다 직전에 제시된 숫자에 더하십시오.\n총 누계를 계산하지 않도록 주의하십시오. 직전에 제시된 두 개의 숫자만 더하십시오.";
+"PSAT_INTRO_TEXT_2_%@" = "한 자릿수의 숫자가 %@마다 제시됩니다.\n새로운 숫자가 제시될 때마다 직전에 제시된 숫자에 더하십시오.\n총 누계를 계산하지 않도록 주의하십시오. 직전에 제시된 두 개의 숫자만 더하십시오.";
 "PSAT_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
 "PSAT_INITIAL_INSTRUCTION" = "아래 첫 번째 숫자를 기억하십시오.";
 "PSAT_INSTRUCTION" = "아래 새로운 숫자를 이전 숫자에 더하십시오.";
@@ -510,7 +546,7 @@
 
 /* Trail making task. */
 "TRAILMAKING_TASK_TITLE" = "선로 잇기 검사";
-"TRAILMAKING_INTENDED_USE" = "이 실험은 여러 개의 점을 순서대로 탭하는 데 들인 시간을 기록하여 사용자의 시주의와 과제 전환 능력을 평가합니다.";
+"TRAILMAKING_INTENDED_USE" = "이 실험은 여러 개의 점을 순서대로 탭하는 데 들인 시간을 기록하여 사용자의 시각적 주의력과 과제 전환 능력을 평가합니다.";
 "TRAILMAKING_INTENDED_USE2_A" = "카운트다운이 지나면 숫자와 한글 자음을 순서대로 연결하십시오. 숫자 1을 먼저 탭하여 시작합니다. 그런 다음 숫자 7에 도달할 때까지 2 – 3 – 4의 순서대로 탭하십시오.";
 "TRAILMAKING_INTENDED_USE2_B" = "카운트다운이 지나면 숫자와 한글 자음을 순서대로 연결하십시오. 먼저 숫자 1을 탭하여 시작한 다음, 자음 ㄱ을 탭합니다. 그런 다음 숫자 7에 도달할 때까지 2 – ㄴ – 3 – ㄷ의 순서대로 탭하십시오.";
 "TRAILMAKING_INTRO_TEXT" = "실수 없이 최대한 빠르게 해보십시오. \n ";
@@ -563,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "계산 중";
 "ENVIRONMENTSPL_THRESHOLD" = "임계값: %@dBA";
+"ENVIRONMENTSPL_OK" = "주변 소음 양호함";
+"ENVIRONMENTSPL_NOISE" = "주변 소음이 너무 큼";
+"ENVIRONMENTSPL_TITLE_2" = "조용한 장소 찾기";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "이 테스트는 정확성을 높이기 위해 조용한 환경에서 진행해야 합니다.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "과제 시작";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "데이터 없음";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "슬라이더를 이동하여 값 입력";
+"SLIDER_I_DONT_KNOW" = "모르겠음";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "페이지";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "뒤로";
@@ -586,6 +636,7 @@
 
 "AX_SELECTED" = "선택됨";
 "AX_UNSELECTED" = "선택 안 됨";
+"AX_SELECT_ALL_THAT_APPLY" = "해당되는 사항은 모두 선택하십시오.";
 
 "AX_SLIDER_LABEL" = "응답 슬라이더. %@에서 %@까지의 범위";
 "AX_UNLABELED_IMAGE" = "꼬리표 없는 이미지";
@@ -612,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ 크기의 디스크가 있음";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "비어 있음";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "키보드 닫기";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "%@에서 %@까지의 범위";
 "AX_GRAPH_STACK_PREFIX" = "다음으로 구성된 스택";
@@ -626,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "암슬러 격자";
 "AX_AMSLER_GRID_HINT" = "격자에 직접 표시하려면 손가락이나 스타일러스를 사용하고, 완료하려면 격자 바깥을 왼쪽으로 쓸어 넘기십시오.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "탭할 수 있는 버튼";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "왼쪽 귀를 위한 탭";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "테스트를 시작하려면 활성화하십시오. 테스트가 시작되면 왼쪽 귀에 소리가 들리는 경우 이 버튼을 직접 탭하십시오.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "오른쪽 귀를 위한 탭";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "테스트를 시작하려면 활성화하십시오. 테스트가 시작되면 오른쪽 귀에 소리가 들리는 경우 이 버튼을 직접 탭하십시오.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ VoiceOver를 사용하여 화면을 터치하고 탐색하여 양쪽 귀와 연결된 각각의 버튼이 어디에 있는지 파악합니다. 테스트가 시작되면 버튼을 직접 탭할 수 있습니다. %@";
+"AX_TAP_BUTTON_1_LABEL" = "한 손가락으로 탭하기";
+"AX_TAP_BUTTON_2_LABEL" = "다른 손가락으로 탭하기";
+"AX_TAP_BUTTON_HINT" = "버튼을 직접 탭할 수 있도록 하려면 활성화하십시오.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ VoiceOver를 사용하여 화면을 터치하고 탐색하여 버튼이 어디에 있는지 파악합니다. 버튼을 직접 탭할 수 있도록 하려면 버튼을 각각 활성화하십시오.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "이제 버튼을 직접 탭할 수 있습니다.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ VoiceOver를 사용하여 버튼을 직접 탭할 수 있으며, 탭은 화면의 중앙 근처에 위치합니다.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ VoiceOver를 사용하여 테스트 중에 버튼을 직접 탭할 수 있습니다.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "초기화를 위한 restoreData 디코딩을 할 수 없음";

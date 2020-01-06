@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) UIView *customContentView;
 @property (nonatomic, assign) BOOL customContentFillsAvailableSpace;
 
+- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding;
+
 @end
 
 NS_ASSUME_NONNULL_END

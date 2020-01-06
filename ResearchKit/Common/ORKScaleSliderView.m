@@ -3,7 +3,7 @@
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
  Copyright (c) 2015, Bruce Duncan.
  Copyright (c) 2018, Brian Ganninger.
-
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -39,24 +39,42 @@
 #import "ORKScaleRangeLabel.h"
 #import "ORKScaleSlider.h"
 #import "ORKScaleValueLabel.h"
+#import "ORKDontKnowButton.h"
 
 #import "ORKAnswerFormat_Internal.h"
 
 #import "ORKSkin.h"
+
+#import "ORKHelpers_Internal.h"
+
+static const CGFloat ValueLabelTopPadding = 16.0;
+static const CGFloat ValueLabelBottomPadding = 20.5;
+static const CGFloat MoveSliderLabelTopPadding = 8.0;
+static const CGFloat MoveSliderLabelBottomPadding = 38.0;
+static const CGFloat RangeViewHorizontalPadding = 16.0;
+static const CGFloat SliderBottomPadding = 16.0;
+static const CGFloat DontKnowButtonTopBottomPadding = 16.0;
+static const CGFloat kMargin = 25.0;
 
 
 // #define LAYOUT_DEBUG 1
 
 @implementation ORKScaleSliderView {
     id<ORKScaleAnswerFormatProvider> _formatProvider;
+    UIStackView *_topStackView;
     ORKScaleSlider *_slider;
+    UILabel *_moveSliderLabel;
+    ORKDontKnowButton *_dontKnowButton;
+    UIView *_dontKnowBackgroundView;
     ORKScaleRangeDescriptionLabel *_leftRangeDescriptionLabel;
     ORKScaleRangeDescriptionLabel *_rightRangeDescriptionLabel;
     UIView *_leftRangeView;
     UIView *_rightRangeView;
+    UIView *_dividerView;
     ORKScaleValueLabel *_valueLabel;
     NSMutableArray<ORKScaleRangeLabel *> *_textChoiceLabels;
     NSNumber *_currentNumberValue;
+    NSMutableArray *constraints;
 }
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider
@@ -67,6 +85,9 @@
         _delegate = delegate;
         
         _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
+        _slider.hideValueMarkers = [formatProvider shouldHideValueMarkers];
+        _slider.isWaitingForUserFeedback = ([formatProvider defaultAnswer] == nil && ![formatProvider isVertical]) ? YES : NO;
+        _slider.minimumTrackTintColor = [UIColor systemBlueColor];
         _slider.userInteractionEnabled = YES;
         _slider.contentMode = UIViewContentModeRedraw;
         [self addSubview:_slider];
@@ -78,10 +99,10 @@
         _slider.numberOfSteps = numberOfSteps;
         
         [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-
+        
         BOOL isVertical = [formatProvider isVertical];
         _slider.vertical = isVertical;
-
+        
         NSArray<ORKTextChoice *> *textChoices = [[self textScaleFormatProvider] textChoices];
         _slider.textChoices = textChoices;
         
@@ -102,36 +123,48 @@
                 [_textChoiceLabels addObject:stepLabel];
             }
         } else {
-            _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
-            _valueLabel.textAlignment = NSTextAlignmentCenter;
-            _valueLabel.text = @" ";
-            [self addSubview:_valueLabel];
+            [self setupTopLabels];
+            [self setUpSliderAndRangeLabels];
+            [self setupRangeDescriptionLabels];
+            [self setupDontKnowButton];
             
-            _leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            _leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-            [self addSubview:_leftRangeLabel];
-            
-            _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-            _leftRangeDescriptionLabel.numberOfLines = -1;
-            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _topStackView = [[UIStackView alloc] init];
+            _topStackView.axis = UILayoutConstraintAxisHorizontal;
+            _topStackView.distribution = UIStackViewDistributionFill;
+            _topStackView.alignment = _slider.isWaitingForUserFeedback ? UIStackViewAlignmentLeading : UIStackViewAlignmentCenter;
+            _topStackView.translatesAutoresizingMaskIntoConstraints = NO;
+           
+            [self addSubview:_leftRangeView];
+            [self addSubview:_rightRangeView];
             [self addSubview:_leftRangeDescriptionLabel];
-            
-            _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            _rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-            [self addSubview:_rightRangeLabel];
-            
-            _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-            _rightRangeDescriptionLabel.numberOfLines = -1;
-            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_rightRangeDescriptionLabel];
+            [self addSubview:_valueLabel];
+
+            if (![formatProvider isVertical]) {
+                [self addSubview:_topStackView];
+                
+                [_topStackView addArrangedSubview: _slider.isWaitingForUserFeedback ? _moveSliderLabel : _valueLabel];
+                
+                if ([formatProvider shouldShowDontKnowButton]) {
+                    [self addSubview:_dontKnowBackgroundView];
+                    [self addSubview:_dividerView];
+                    [self addSubview:_dontKnowButton];
+                }
+            }
             
             if (textChoices) {
-                _leftRangeDescriptionLabel.textColor = [UIColor blackColor];
-                _rightRangeDescriptionLabel.textColor = [UIColor blackColor];
+                if (@available(iOS 13.0, *)) {
+                    [_leftRangeDescriptionLabel setTextColor:[UIColor labelColor]];
+                    [_rightRangeDescriptionLabel setTextColor:[UIColor labelColor]];
+                } else {
+                    _leftRangeDescriptionLabel.textColor = [UIColor blackColor];
+                    _rightRangeDescriptionLabel.textColor = [UIColor blackColor];
+                }
+                
                 _leftRangeLabel.text = @"";
                 _rightRangeLabel.text = @"";
             }
-
+            
 #if LAYOUT_DEBUG
             self.backgroundColor = [UIColor greenColor];
             _valueLabel.backgroundColor = [UIColor blueColor];
@@ -140,27 +173,7 @@
             _rightRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
 #endif
             
-            if ([formatProvider minimumImage]) {
-                _leftRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
-            } else {
-                ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-                leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-                leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
-                _leftRangeView = leftRangeLabel;
-            }
             
-            if ([formatProvider maximumImage]) {
-                _rightRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
-            } else {
-                ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-                rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-                rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
-                _rightRangeView = rightRangeLabel;
-            }
-            
-            [self addSubview:_leftRangeView];
-            [self addSubview:_rightRangeView];
-        
             if (isVertical) {
                 _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
                 _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
@@ -169,14 +182,19 @@
                 _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
             }
             
-            _leftRangeDescriptionLabel.text = [formatProvider minimumValueDescription];
-            _rightRangeDescriptionLabel.text = [formatProvider maximumValueDescription];
-
+            _leftRangeDescriptionLabel.text = [formatProvider shouldHideLabels] ? @"" : [formatProvider minimumValueDescription];
+            _rightRangeDescriptionLabel.text = [formatProvider shouldHideLabels] ? @"" : [formatProvider maximumValueDescription];
+            
+            _moveSliderLabel.translatesAutoresizingMaskIntoConstraints = NO;
             _valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
             _leftRangeView.translatesAutoresizingMaskIntoConstraints = NO;
             _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
             _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
             _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _dontKnowButton.translatesAutoresizingMaskIntoConstraints = NO;
+            _dividerView.translatesAutoresizingMaskIntoConstraints = NO;
         }
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -187,17 +205,148 @@
     return self;
 }
 
+- (void)setupTopLabels {
+    _moveSliderLabel = [UILabel new];
+    _moveSliderLabel.text = ORKLocalizedString(@"SLIDER_MOVE_SLIDER_FOR_VALUE", nil);
+    _moveSliderLabel.textAlignment = NSTextAlignmentLeft;
+    _moveSliderLabel.numberOfLines = 0;
+    _moveSliderLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    UIFontDescriptor *moveSliderDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
+    UIFontDescriptor *moveSliderFontDescriptor = [moveSliderDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+    [_moveSliderLabel setFont: [UIFont fontWithDescriptor:moveSliderFontDescriptor size:[[moveSliderFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    if (@available(iOS 13.0, *)) {
+        _moveSliderLabel.textColor = [UIColor secondaryLabelColor];
+    } else {
+        _moveSliderLabel.textColor = [UIColor grayColor];
+    }
+    
+    _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
+    _valueLabel.text = @"";
+    _valueLabel.textAlignment = NSTextAlignmentCenter;
+    UIFontDescriptor *valueLabelDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleTitle2];
+    UIFontDescriptor *valueLabelFontDescriptor = [valueLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+    [_valueLabel setFont: [UIFont fontWithDescriptor:valueLabelFontDescriptor size:[[valueLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    [_valueLabel setTextColor:[UIColor systemBlueColor]];
+}
+
+- (void)setUpSliderAndRangeLabels {
+    UIFontDescriptor *rangeLabelDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
+    UIFontDescriptor *rangeLabelRangeFontDescriptor = [rangeLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+    
+    _leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+    _leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+    if (@available(iOS 13.0, *)) {
+        [_leftRangeLabel setTextColor:[UIColor labelColor]];
+    }
+    [_leftRangeLabel setFont: [UIFont fontWithDescriptor:rangeLabelRangeFontDescriptor size:[[rangeLabelRangeFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    
+    _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+    _rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+    if (@available(iOS 13.0, *)) {
+        [_rightRangeLabel setTextColor:[UIColor labelColor]];
+    }
+    [_rightRangeLabel setFont: [UIFont fontWithDescriptor:rangeLabelRangeFontDescriptor size:[[rangeLabelRangeFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    
+    if ([_formatProvider minimumImage]) {
+        _leftRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[_formatProvider minimumImage]];
+    } else {
+        ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+        leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+        leftRangeLabel.text = [_formatProvider localizedStringForNumber:[_formatProvider minimumNumber]];
+        if ([_formatProvider shouldHideRanges]) {
+            leftRangeLabel.text = @"";
+        } else {
+            leftRangeLabel.text = [_formatProvider localizedStringForNumber:[_formatProvider minimumNumber]];
+        }
+        _leftRangeView = leftRangeLabel;
+    }
+    
+    if ([_formatProvider maximumImage]) {
+        _rightRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[_formatProvider maximumImage]];
+    } else {
+        ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+        rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+        if ([_formatProvider shouldHideRanges]) {
+            rightRangeLabel.text = @"";
+        } else {
+            rightRangeLabel.text = [_formatProvider localizedStringForNumber:[_formatProvider maximumNumber]];
+        }
+        
+        _rightRangeView = rightRangeLabel;
+    }
+}
+
+- (void)setupRangeDescriptionLabels {
+    UIFontDescriptor *rangeDescriptionLabelDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleFootnote];
+    UIFontDescriptor *rangeDescriptionLabelFontDescriptor = [rangeDescriptionLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
+    
+    _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+    _leftRangeDescriptionLabel.numberOfLines = -1;
+    [_leftRangeDescriptionLabel setFont: [UIFont fontWithDescriptor:rangeDescriptionLabelFontDescriptor size:[[rangeDescriptionLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    if (@available(iOS 13.0, *)) {
+        [_leftRangeDescriptionLabel setTextColor:[UIColor labelColor]];
+    }
+   
+    _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+    _rightRangeDescriptionLabel.numberOfLines = -1;
+    [_rightRangeDescriptionLabel setFont: [UIFont fontWithDescriptor:rangeDescriptionLabelFontDescriptor size:[[rangeDescriptionLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    if (@available(iOS 13.0, *)) {
+        [_rightRangeDescriptionLabel setTextColor:[UIColor labelColor]];
+    }
+}
+
+- (void)setupDontKnowButton {
+    if(!_dontKnowBackgroundView) {
+        _dontKnowBackgroundView = [UIView new];
+
+        UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapGesture:)];
+        [_dontKnowBackgroundView addGestureRecognizer:tapGesture1];
+        _dontKnowBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    
+    if (!_dontKnowButton) {
+        _dontKnowButton = [ORKDontKnowButton new];
+        _dontKnowButton.customDontKnowButtonText = [_formatProvider customDontKnowButtonText];
+        [_dontKnowButton addTarget:self action:@selector(dontKnowButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (!_dividerView) {
+        _dividerView = [UIView new];
+        if (@available(iOS 13.0, *)) {
+            [_dividerView setBackgroundColor:[UIColor separatorColor]];
+        } else {
+            [_dividerView setBackgroundColor:[UIColor lightGrayColor]];
+        }
+    }
+}
+
 - (void)setUpConstraints {
     BOOL isVertical = [_formatProvider isVertical];
     NSArray<ORKTextChoice *> *textChoices = _slider.textChoices;
     NSDictionary *views = nil;
+    
+    NSDictionary *metrics = @{@"valueLabelTopPadding":@(ValueLabelTopPadding),
+                              @"valueLabelBottomPadding":@(ValueLabelBottomPadding),
+                              @"moveSliderLabelTopPadding":@(MoveSliderLabelTopPadding),
+                              @"moveSliderLabelBottomPadding":@(MoveSliderLabelBottomPadding),
+                              @"rangeViewHorizontalPadding": @(RangeViewHorizontalPadding),
+                              @"sliderBottomPadding": @(SliderBottomPadding),
+                              @"dontKnowButtonTopBottomPadding": @(DontKnowButtonTopBottomPadding),
+                              @"kMargin": @(kMargin)};
+    
     if (isVertical && textChoices) {
         views = NSDictionaryOfVariableBindings(_slider);
     } else {
-        views = NSDictionaryOfVariableBindings(_slider, _leftRangeView, _rightRangeView, _valueLabel, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
+        views = NSDictionaryOfVariableBindings(_topStackView, _slider, _leftRangeView, _rightRangeView, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel, _dividerView, _dontKnowButton, _valueLabel);
     }
     
-    NSMutableArray *constraints = [NSMutableArray new];
+    if (constraints) {
+        [NSLayoutConstraint deactivateConstraints:constraints];
+    }
+    
+    constraints = [NSMutableArray new];
     if (isVertical) {
         _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
         _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
@@ -217,7 +366,7 @@
                                                                 attribute:NSLayoutAttributeCenterY
                                                                multiplier:1.0
                                                                  constant:0.0]];
-
+            
             [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
                                                                 attribute:NSLayoutAttributeCenterX
                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
@@ -225,7 +374,7 @@
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:0.25
                                                                  constant:0.0]];
-
+            
             [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
@@ -236,12 +385,12 @@
             for (int i = 0; i < _textChoiceLabels.count; i++) {
                 // Put labels to the right side of the slider.
                 [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
-                                                                 attribute:NSLayoutAttributeLeading
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:_slider
-                                                                 attribute:NSLayoutAttributeCenterX
-                                                                multiplier:1.0
-                                                                  constant:SideLabelMargin]];
+                                                                    attribute:NSLayoutAttributeLeading
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:_slider
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:SideLabelMargin]];
                 
                 if (i == 0) {
                     // First label
@@ -267,7 +416,7 @@
                                                                         attribute:NSLayoutAttributeTrailing
                                                                        multiplier:1.0
                                                                          constant:-SideLabelMargin]];
-
+                    
                 } else {
                     // Middle labels
                     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
@@ -435,47 +584,132 @@
                                                                  constant:0.0]];
         }
     } else {
-        // Horizontal slider constraints
+        
+        if (_slider.isWaitingForUserFeedback) {
+            [constraints addObjectsFromArray:
+                                [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-moveSliderLabelTopPadding-[_topStackView]-moveSliderLabelBottomPadding-[_slider]-sliderBottomPadding-[_leftRangeDescriptionLabel]-(>=8)-|"
+                                                                        options:0
+                                                                        metrics:metrics
+                                                                          views:views]];
+        } else {
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-valueLabelTopPadding-[_topStackView]-valueLabelBottomPadding-[_slider]-sliderBottomPadding-[_leftRangeDescriptionLabel]-(>=8)-|"
+                                                     options:0
+                                                     metrics:metrics
+                                                       views:views]];
+        }
+
         [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
-                                                 options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeftToRight
-                                                 metrics:nil
-                                                   views:views]];
+                     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_topStackView]-kMargin-|"
+                                                             options:0
+                                                             metrics:metrics
+                                                               views:views]];
+        
         [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_leftRangeDescriptionLabel]-(>=8)-|"
-                                                 options:NSLayoutFormatDirectionLeftToRight
-                                                 metrics:nil
-                                                   views:views]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_rightRangeDescriptionLabel]-(>=8)-|"
-                                                 options:NSLayoutFormatDirectionLeftToRight
-                                                 metrics:nil
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeView]-rangeViewHorizontalPadding-[_slider]-rangeViewHorizontalPadding-[_rightRangeView(==_leftRangeView)]-kMargin-|"
+                                                 options:NSLayoutFormatAlignAllCenterY
+                                                 metrics:metrics
                                                    views:views]];
         
-        const CGFloat kMargin = 17.0;
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeView]-kMargin-[_slider]-kMargin-[_rightRangeView(==_leftRangeView)]-kMargin-|"
-                                                 options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
-                                                 metrics:@{@"kMargin": @(kMargin)}
-                                                   views:views]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeDescriptionLabel]-(>=16)-[_rightRangeDescriptionLabel(==_leftRangeDescriptionLabel)]-kMargin-|"
-                                                 options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
-                                                 metrics:@{@"kMargin": @(kMargin)}
-                                                   views:views]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeDescriptionLabel
+                                                            attribute:NSLayoutAttributeLeft
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_slider
+                                                            attribute:NSLayoutAttributeLeft
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_slider
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
+                                                            attribute:NSLayoutAttributeCenterY
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_leftRangeDescriptionLabel
+                                                            attribute:NSLayoutAttributeCenterY
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        
+        
+        if ([_formatProvider shouldShowDontKnowButton]) {
+            [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
+            [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
+            [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
+            [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
+            
+            
+             CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
+            
+            [constraints addObjectsFromArray:
+                                 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dividerView]|"
+                                                                         options:0
+                                                                         metrics:metrics
+                                                                           views:views]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dividerView
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:nil
+                                                                attribute:NSLayoutAttributeNotAnAttribute
+                                                               multiplier:1.0
+                                                                 constant:separatorHeight]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dividerView
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:_leftRangeDescriptionLabel
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:8.0]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_dividerView
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:DontKnowButtonTopBottomPadding]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_dividerView
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                   toItem:_dividerView
+                                                                attribute:NSLayoutAttributeLeft
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                   toItem:_dividerView
+                                                                attribute:NSLayoutAttributeRight
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [[self.bottomAnchor constraintEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive: YES];
+        }
     }
-
-    // Hide the selected value label if necessary;
-    // skipped when not present (text choice slider)
+    
     if ([_formatProvider shouldHideSelectedValueLabel] &&
-        !([_formatProvider isVertical] && [self textScaleFormatProvider])) {
-        [self addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
+             !([_formatProvider isVertical] && [self textScaleFormatProvider]) && !_slider.isWaitingForUserFeedback) {
+        _valueLabel.layer.opacity = 0.0;
+    } else {
+         _valueLabel.layer.opacity = 1.0;
     }
-
+       
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -487,9 +721,12 @@
 }
 
 - (void)setCurrentNumberValue:(NSNumber *)value {
-    
     _currentNumberValue = value ? [_formatProvider normalizedValueForNumber:value] : nil;
-    _slider.showThumb = _currentNumberValue ? YES : NO;
+    _slider.showThumb = YES;
+    
+    if (_currentNumberValue && _slider.isWaitingForUserFeedback) {
+        [self resetViewToDefault];
+    }
     
     [self updateCurrentValueLabel];
     _slider.value = _currentNumberValue.floatValue;
@@ -518,10 +755,58 @@
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
+    if (_slider.isWaitingForUserFeedback) {
+        [self resetViewToDefault];
+    }
+    
+    if (_dontKnowButton && [_dontKnowButton isDontKnowButtonActive]) {
+        [_dontKnowButton setButtonInactive];
+    }
     
     _currentNumberValue = [_formatProvider normalizedValueForNumber:@(_slider.value)];
     [self updateCurrentValueLabel];
     [self notifyDelegate];
+}
+
+- (void)resetViewToDefault {
+    _slider.isWaitingForUserFeedback = NO;
+    [_topStackView removeArrangedSubview:_moveSliderLabel];
+    [_moveSliderLabel removeFromSuperview];
+    [_topStackView addArrangedSubview:_valueLabel];
+     _topStackView.alignment = UIStackViewAlignmentCenter;
+    
+    [NSLayoutConstraint deactivateConstraints:constraints];
+    [constraints removeAllObjects];
+    [self setUpConstraints];
+}
+
+- (void)dontKnowButtonWasPressed {
+
+    if (_dontKnowButton && ![_dontKnowButton isDontKnowButtonActive]) {
+        [_slider setShowThumb:YES];
+        [_dontKnowButton setButtonActive];
+        _currentNumberValue = nil;
+        [self notifyDelegate];
+    }
+
+    if (!_slider.isWaitingForUserFeedback) {
+        _slider.isWaitingForUserFeedback = YES;
+        
+        [_topStackView removeArrangedSubview:_valueLabel];
+        [_valueLabel removeFromSuperview];
+        
+        [_topStackView addArrangedSubview:_moveSliderLabel];
+        _topStackView.alignment = UIStackViewAlignmentLeading;
+        
+        [NSLayoutConstraint deactivateConstraints:constraints];
+        [constraints removeAllObjects];
+        [self setUpConstraints];
+        _slider.value =  [_formatProvider minimumNumber].floatValue;
+    }
+}
+
+- (void) tapGesture: (id)sender {
+    //this tap gesture is here to avoid the cell being selected if the user missed the dont know button
 }
 
 - (void)notifyDelegate {
@@ -551,6 +836,9 @@
 }
 
 - (id)currentAnswerValue {
+    if ([_dontKnowButton isDontKnowButtonActive]) {
+        return [ORKDontKnowAnswer answer];
+    }
     if ([self textScaleFormatProvider]) {
         id<NSCopying, NSCoding, NSObject> value = [self currentTextChoiceValue];
         return value ? @[value] : @[];
@@ -560,7 +848,9 @@
 }
 
 - (void)setCurrentAnswerValue:(id)currentAnswerValue {
-    if ([self textScaleFormatProvider]) {
+    if (currentAnswerValue == [ORKDontKnowAnswer answer] && _dontKnowButton) {
+        [self dontKnowButtonWasPressed];
+    } else if ([self textScaleFormatProvider]) {
         
         if (ORKIsAnswerEmpty(currentAnswerValue)) {
             [self setCurrentTextChoiceValue:nil];
@@ -570,6 +860,7 @@
     } else {
         [self setCurrentNumberValue:currentAnswerValue];
     }
+    
 }
 
 #pragma mark - Accessibility

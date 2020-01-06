@@ -80,33 +80,37 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 // Override to monitor button title change
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    self.navigationFooterView.continueButtonItem = continueButtonItem;
+    _navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
-}
-
-- (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
-    [super setCancelButtonItem:cancelButtonItem];
-    self.navigationFooterView.cancelButtonItem = self.cancelButtonItem;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
-    self.navigationFooterView.skipButtonItem = skipButtonItem;
+    _navigationFooterView.skipButtonItem = skipButtonItem;
     [self updateButtonStates];
 }
     
 - (UITableViewStyle)tableViewStyle {
+    if ([self.tableStep respondsToSelector:@selector(customTableViewStyle)]) {
+        return [self.tableStep customTableViewStyle];
+    }
+    
     return [self numSections] > 1 ? UITableViewStyleGrouped : UITableViewStylePlain;
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [_tableContainer sizeHeaderToFit];
+    
+    // Recalculate the footer view size if needed.
+    [_tableContainer layoutSubviews];
+    [self updateEffectViewStylingAndAnimate:NO];
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
-    _tableViewColor = ORKNeedWideScreenDesign(self.view) ? [UIColor clearColor] : (ORKColor(ORKBackgroundColorKey));
+
+    _tableViewColor = ORKNeedWideScreenDesign(self.view) ? [UIColor clearColor] : ORKColor(ORKBackgroundColorKey);
     [_tableContainer removeFromSuperview];
     _tableContainer = nil;
     
@@ -118,7 +122,7 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     _navigationFooterView = nil;
     
     if (self.step) {
-        _tableContainer = [[ORKTableContainerView alloc] initWithStyle:self.tableViewStyle];
+        _tableContainer = [[ORKTableContainerView alloc] initWithStyle:self.tableViewStyle pinNavigationContainer:self.tableStepRef.pinNavigationContainer];
         if ([self conformsToProtocol:@protocol(ORKTableContainerViewDelegate)]) {
             _tableContainer.tableContainerDelegate = (id)self;
         }
@@ -138,19 +142,23 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
         [_tableView setBackgroundColor:_tableViewColor];
         _tableView.alwaysBounceVertical = NO;
         _headerView = _tableContainer.stepContentView;
+        [_tableContainer.stepContentView setUseExtendedPadding:[[self step] useExtendedPadding]];
+        
         _headerView.stepTitle = [[self step] title];
         _headerView.stepText = [[self step] text];
         _headerView.bodyItems = [[self step] bodyItems];
         _headerView.stepTopContentImage = [[self step] image];
         _headerView.auxiliaryImage = [[self step] auxiliaryImage];
         _headerView.titleIconImage = [[self step] iconImage];
+        _headerView.stepHeaderTextAlignment = [[self step] headerTextAlignment];
         _tableContainer.stepTopContentImageContentMode = [[self step] imageContentMode];
         _navigationFooterView = _tableContainer.navigationFooterView;
         _navigationFooterView.skipButtonItem = self.skipButtonItem;
         _navigationFooterView.continueEnabled = [self continueButtonEnabled];
         _navigationFooterView.continueButtonItem = self.continueButtonItem;
-        _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
         _navigationFooterView.optional = self.step.optional;
+        
+        [_navigationFooterView setUseExtendedPadding:[[self step] useExtendedPadding]];
         
         [self setupConstraints];
         // Register the cells for the table view
@@ -158,6 +166,10 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
             [self.tableStep registerCellsForTableView:_tableView];
         } else {
             [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ORKBasicCellReuseIdentifier];
+        }
+        
+        if (self.tableStepRef.pinNavigationContainer == NO) {
+            [_navigationFooterView removeStyling];
         }
     }
 }
@@ -207,7 +219,20 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
 }
 
 - (void)updateButtonStates {
-    self.navigationFooterView.continueEnabled = [self continueButtonEnabled];
+    _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+}
+
+- (void)updateEffectViewStylingAndAnimate:(BOOL)animated {
+    CGFloat currentOpacity = [_navigationFooterView effectViewOpacity];
+    CGFloat startOfFooter = _navigationFooterView.frame.origin.y;
+    CGFloat contentPosition = (_tableView.contentSize.height - _tableView.contentOffset.y);
+
+    CGFloat newOpacity = (contentPosition < startOfFooter) ? ORKEffectViewOpacityHidden : ORKEffectViewOpacityVisible;
+    if (newOpacity != currentOpacity) {
+        // Don't animate transition from hidden to visible as text appears behind during animation
+        if (currentOpacity == ORKEffectViewOpacityHidden) { animated = NO; }
+        [_navigationFooterView setStylingOpactity:newOpacity animated:animated];
+    }
 }
 
 #pragma mark UITableViewDataSource
@@ -241,10 +266,14 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self.tableStep configureCell:cell indexPath:indexPath tableView:tableView];
-    
+
     // Only set the background color if it is using the default cell type
     if ([reuseIdentifier isEqualToString:ORKBasicCellReuseIdentifier]) {
-        [cell setBackgroundColor:_tableViewColor];
+        if (@available(iOS 13.0, *)) {
+            [cell setBackgroundColor:[UIColor clearColor]];
+        } else {
+            [cell setBackgroundColor:[UIColor whiteColor]];
+        }
     }
     
     return cell;
@@ -264,6 +293,19 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     } else {
         return nil;
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // FIXME:- temporary fix for estimating tableFooterView's height
+    if (indexPath == tableView.indexPathsForVisibleRows.lastObject) {
+        [self.view setNeedsLayout];
+    }
+}
+
+// MARK: ScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self updateEffectViewStylingAndAnimate:YES];
 }
 
 @end

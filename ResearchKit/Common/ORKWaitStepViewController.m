@@ -55,7 +55,6 @@
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
     NSString *_updatedText;
-    ORKNavigationContainerView *_navigationFooterView;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
 
@@ -85,6 +84,7 @@
         _waitStepView.stepTitle = self.step.title;
         _waitStepView.stepText = _updatedText;
         _waitStepView.stepDetailText = self.step.detailText;
+        _waitStepView.stepHeaderTextAlignment = self.step.headerTextAlignment;
         _waitStepView.bodyItems = self.step.bodyItems;
         _waitStepView.stepTopContentImageContentMode = self.step.imageContentMode;
     }
@@ -93,9 +93,8 @@
 - (void)setupNavigationFooterView {
     if (!_navigationFooterView) {
         _navigationFooterView = _waitStepView.navigationFooterView;
+        _navigationFooterView.neverHasContinueButton = YES;
     }
-    _navigationFooterView.cancelButtonItem = self.cancelButtonItem;
-    _navigationFooterView.neverHasContinueButton = YES;
 }
 
 - (void)setupConstraints {

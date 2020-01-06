@@ -48,13 +48,27 @@
     self.stepTitle = _instructionStep.title;
     self.stepText = _instructionStep.text;
     self.stepDetailText = _instructionStep.detailText;
-
+    self.stepHeaderTextAlignment = _instructionStep.headerTextAlignment;
+    self.bodyTextAlignment = _instructionStep.bodyItemTextAlignment;
     self.bodyItems = _instructionStep.bodyItems;
-    
-    self.stepTopContentImage = _instructionStep.image;
-    self.stepTopContentImageContentMode = _instructionStep.imageContentMode;
+    self.buildInBodyItems = _instructionStep.buildInBodyItems;
+    self.useExtendedPadding = _instructionStep.useExtendedPadding;
+
     self.auxiliaryImage = _instructionStep.auxiliaryImage;
     self.titleIconImage = _instructionStep.iconImage;
+    
+    [super updatePaddingConstraints];
+    if (_instructionStep.centerImageVertically) {
+        UIImageView *centeredImageView = [UIImageView new];
+        centeredImageView.image = _instructionStep.image;
+        centeredImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self setCustomContentView:centeredImageView withTopPadding:80.0];
+        [self customContentFillsAvailableSpace];
+    }
+    else {
+        self.stepTopContentImage = _instructionStep.image;
+        self.stepTopContentImageContentMode = _instructionStep.imageContentMode;
+    }
 }
 
 @end

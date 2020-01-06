@@ -47,12 +47,14 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, attributedDetailText, NSAttributedString);
+        ORK_DECODE_BOOL(aDecoder, centerImageVertically);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, centerImageVertically);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -61,15 +63,19 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKInstructionStep *step = [super copyWithZone:zone];
+    step.centerImageVertically = self.centerImageVertically;
     return step;
 }
 
 - (BOOL)isEqual:(id)object {
-    return [super isEqual:object];
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return isParentSame && self.centerImageVertically == castObject.centerImageVertically;
 }
 
 - (NSUInteger)hash {
-    return super.hash;
+    return super.hash ^ (_centerImageVertically ? 0xf : 0x0);
 }
 
 @end

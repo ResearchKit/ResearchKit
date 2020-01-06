@@ -54,6 +54,7 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSAttributedString *attributedDetailText;
 
+@property (nonatomic) BOOL centerImageVertically;
 
 @end
 

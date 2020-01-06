@@ -58,7 +58,7 @@
 "LEARN_MORE_PRIVACY" = "További információk az adatok és személyes információk védelmének módjáról";
 "LEARN_MORE_WELCOME" = "További információk a vizsgálatról";
 "LEARN_MORE_STUDY_SURVEY" = "További információk a kérdőívről";
-"LEARN_MORE_TIME_COMMITMENT" = "További információk arról, mennyi időt vesz igénybe a felmérés";
+"LEARN_MORE_TIME_COMMITMENT" = "További információk arról, hogy mennyi időt vesz igénybe a tanulmány";
 "LEARN_MORE_TASKS" = "További információk a bennfoglalt feladatokról";
 "LEARN_MORE_WITHDRAWING" = "További információk a visszavonásról";
 
@@ -69,13 +69,20 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "A(z) %@ meg fogja kapni az Ön vizsgálati adatait az Ön vizsgálatban való részvételéről.\n\nA kódolt vizsgálati adatok szélesebb körű megosztása (az olyan információk nélkül, mint az Ön neve) segítheti ezt és a jövőbeli kutatásokat.";
 "LEARN_MORE_CONSENT_SHARING" = "További infó az adatok megosztásáról";
 
-/* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
-"CONSENT_DOC_LINE_PRINTED_NAME" = "%@ neve (kinyomtatva)";
-"CONSENT_DOC_LINE_SIGNATURE" = "%@ aláírása";
+/* Lines beneath typewritten signatures on documents.*/
+"CONSENT_DOC_LINE_PRINTED_NAME" = "Nyomtatott név";
+"CONSENT_DOC_LINE_SIGNATURE" = "Aláírás";
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
 "STEP_PROGRESS_FORMAT" = "%2$@/%1$@";
+
+/* Progress indication (in formItem section header). */
+"FORM_ITEM_PROGRESS" = "%2$@/%1$@. kérdés";
+
+/* ORKTaskReviewViewController */
+"REVIEW_SKIPPED_ANSWER" = "Átugorva";
+"REVIEW_EDIT_ANSWER" = "Szerkesztés";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Érvénytelen érték";
@@ -201,6 +208,7 @@
 "BUTTON_CANCEL" = "Mégsem";
 "BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Törlés";
+"BUTTON_CLEAR_SIGNATURE" = "Aláírás törlése";
 "BUTTON_APPLY" = "Alkalmazás";
 "BUTTON_DISAGREE" = "Nem fogadom el";
 "BUTTON_DONE" = "Kész";
@@ -217,12 +225,13 @@
 "BUTTON_CLEAR_ANSWER" = "Válasz törlése";
 "BUTTON_READ_ONLY_MODE" = "Ez a válasz nem módosítható.";
 "BUTTON_COPYRIGHT" = "Szerzői jog";
+"BUTTON_CLOSE" = "Bezárás";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Tevékenység indítása:";
-"TASK_COMPLETE_TITLE" = "Tevék. befejezve";
+"TASK_COMPLETE_TITLE" = "Tevékenység befejezve";
 "TASK_COMPLETE_TEXT" = "Az adatok ki lesznek elemezve, és értesítést fog kapni, ha az eredmény elkészült.";
-"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ másodperc van hátra.";
+"COUNTDOWN_SPOKEN_REMAINING_%@" = "%@ maradt.";
 "TOUCH_ANYWHERE_LABEL" = "A folytatáshoz érintse meg a képernyőt";
 
 /* Image capture step. */
@@ -287,7 +296,7 @@
 
 /* Amsler Grid Task.*/
 "AMSLER_GRID_TITLE" = "Amsler-rács";
-"AMSLER_GRID_INTRO_TEXT" = "Ez a tevékenység segít észlelni a felhasználó látással kapcsolatos problémáit.";
+"AMSLER_GRID_INTRO_TEXT" = "Ez a tevékenység segít észlelni a felhasználó látásával kapcsolatos problémákat.";
 "AMSLER_GRID_INSTRUCTION_TEXT" = "A vizsgálat alatt tartsa 30 cm-re az eszközt az arcától, szemmagasságban.";
 "AMSLER_GRID_INSTRUCTION_DETAIL_TEXT" = "Csukja be a %@, és nézze a négyzetrács közepén lévő pontot.\n\nAz ujja vagy egy érintőceruza segítségével jelölje meg az összes torzítva megjelenő elemet, például elmosott vagy hullámos vonalakat.\n\nHa elkészült, legyintsen balra bárhol, a rácson kívül.";
 "AMSLER_GRID_LEFT_EYE" = "bal szemét";
@@ -319,13 +328,40 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Koppintson, amikor hangot hall.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Hang és hangerő";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "Egy hangsorozatot fog hallani.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "Amikor hangot hall, koppintson a gombra.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_3" = "A hangerő 50 százalékra lesz állítva ehhez a teszthez.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_4" = "Ez a vizsgálat 10 percig tart.";
+"dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_5" = "A zavaró körülmények kizárásához kapcsolja be a Ne zavarjanak funkciót.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_RIGHT_EAR" = "A hangok először a jobb fülében lesznek lejátszva.";
+"dBHL_TONE_AUDIOMETRY_STEP_TITLE_LEFT_EAR" = "A hangok most a bal fülében lesznek lejátszva.";
 "dBHL_TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység megméri egy személy hallási küszöbének szintjét a dB HL skálán.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "Győződjön meg róla, hogy az eszköz hangereje a maximális szintre van állítva.\n\nA feladat alatt egy halk hang lesz lejátszva a bal vagy jobb fülében.\n\nHallgasson figyelmesen, és minden alkalommal koppintson a gombra, amikor hangot hall.";
+"dBHL_TONE_AUDIOMETRY_INTRO_TEXT_2" = "Ez a vizsgálat megállapítja, hogy milyen hangosnak kell lennie egy hangnak, hogy Ön azt meghallja.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING" = "Belépési kérdőív.";
 "dBHL_TONE_AUDIOMETRY_ONBOARDING_QUESTION" = "Ha az egyik fülére jobban hall, válassza ki itt.";
 "dBHL_TONE_AUDIOMETRY_OPTION_LEFT" = "bal";
 "dBHL_TONE_AUDIOMETRY_OPTION_RIGHT" = "jobb";
 "dBHL_TONE_AUDIOMETRY_OPTION_NO_PREFERENCE" = "nincs beállítás";
+"dBHL_ALERT_TITLE_TEST_INTERRUPTED" = "Teszt megszakítva";
+"dBHL_ALERT_TITLE_START_OVER" = "Újrakezdés";
+"dBHL_ALERT_TITLE_CANCEL_TEST" = "Teszt megszakítása";
+"dBHL_ALERT_TEXT" = "Csatlakoztassa újra az AirPods vagy EarPods fülhallgatóját a teszt elvégzéséhez.";
+"dBHL_PROGRESS_COMPLETION_%@" = "%@ teljesítve";
+
+/* Headphones. */
+"AIRPODS" = "AirPods";
+"EARPODS" = "EarPods";
+"HEADPHONES" = "Fejhallgató";
+"HEADPHONES_UNKNOWN" = "Ismeretlen";
+"HEADPHONES_NONE" = "Nincs";
+"CONNECTED" = "Csatlakoztatva";
+"NOT_CONNECTED" = "Nem kapcsolódik";
+"HEADPHONE_CONNECTED_%@" = "Csatlakoztatva – %@";
+"HEADPHONE_DETECT_TITLE" = "Fejhallgató csatlakoztatása";
+"HEADPHONE_DETECT_TEXT" = "Ehhez a vizsgálathoz Apple AirPodsra vagy Apple EarPodsra van szükség";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Térbeli memória";
@@ -395,12 +431,12 @@
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Üljön le egy szék szélére. Első lépésként tegye az eszközét a jobb térdére egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Tegye az eszközét a bal térdére úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Tegye az eszközét a jobb térdére úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, először koppintson a képernyőre, majd nyújtsa ki a bal térdét, amennyire csak tudja. Koppintson ismét, ha elkészült.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, először koppintson a képernyőre, majd nyújtsa ki a jobb térdét, amennyire csak tudja. Koppintson ismét, ha elkészült.";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye az eszközét a bal térdére";
-"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye az eszközét a jobb térdére";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Nyújtsa ki a bal térdét, majd koppintson valahová.";
-"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Nyújtsa ki a jobb térdét, majd koppintson valahová.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, a kezdéshez koppintson a képernyőre, és nyújtsa ki a bal térdét, amennyire csak tudja. Térjen vissza a kiinduló helyzetbe, és koppintson ismét, ha elkészült.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, a kezdéshez koppintson a képernyőre, és nyújtsa ki a jobb térdét, amennyire csak tudja. Térjen vissza a kiinduló helyzetbe, és koppintson ismét, ha elkészült.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye eszközét a bal térdére. Koppintson a képernyőre, és nyújtsa ki bal térdét, amennyire csak tudja.";
+"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye eszközét a jobb térdére. Koppintson a képernyőre, és nyújtsa ki jobb térdét, amennyire csak tudja.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ha elkészült, engedje vissza bal térdét a kiinduló helyzetbe. Majd koppintson bárhova.";
+"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ha elkészült, engedje vissza jobb térdét a kiinduló helyzetbe. Majd koppintson bárhova.";
 
 /* Shoulder Range of Motion active task */
 "SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Bal váll mozgástartománya";
@@ -411,18 +447,18 @@
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Első lépésként tegye az eszközét a jobb vállára egy mérés elvégzéséhez. Kapcsolja be a hangot az eszközén, hogy hallja az utasításokat.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Tegye az eszközét a bal vállára úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Tegye az eszközét a jobb vállára úgy, hogy a kijelző kifelé nézzen, ahogy ez a képen is látható.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, először koppintson a képernyőre, majd emelje fel a bal karját, amennyire csak tudja. Koppintson ismét, ha elkészült.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, először koppintson a képernyőre, majd emelje fel a jobb karját, amennyire csak tudja. Koppintson ismét, ha elkészült.";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye az eszközét a bal vállára";
-"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye az eszközét a jobb vállára";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Emelje fel a bal karját, majd koppintson valahová.";
-"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Emelje fel a jobb karját, majd koppintson valahová.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "Ha készen áll, a kezdéshez koppintson a képernyőre, és emelje fel a bal karját, amennyire csak tudja. Térjen vissza a kiinduló helyzetbe, és koppintson ismét, ha elkészült.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "Ha készen áll, a kezdéshez koppintson a képernyőre, és emelje fel a jobb karját, amennyire csak tudja. Térjen vissza a kiinduló helyzetbe, és koppintson ismét, ha elkészült.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Tegye eszközét a bal vállára. Koppintson a képernyőre, és emelje fel bal karját előre, amennyire csak tudja.";
+"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Tegye eszközét a jobb vállára. Koppintson a képernyőre, és emelje fel jobb karját előre, amennyire csak tudja.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "Ha elkészült, engedje vissza bal karját a kiinduló helyzetbe. Majd koppintson bárhova.";
+"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "Ha elkészült, engedje vissza jobb karját a kiinduló helyzetbe. Majd koppintson bárhova.";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Időre mért gyaloglás";
 "TIMED_WALK_INTRO_DETAIL" = "Ez a tevékenység az alsó végtagok működését méri.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Keressen olyan helyet, lehetőleg kültéren, ahol %@ távolságot egyenesen tud gyalogolni olyan gyorsan, ahogy csak tud, de biztonságosan. Ne lassítson le, amíg el nem hagyta a célvonalat.";
-"TIMED_WALK_INTRO_2_DETAIL" = "Koppintson\na Következő elemre\na kezdéshez.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Koppintson a Következő gombra a kezdéshez.";
 "TIMED_WALK_FORM_TITLE" = "Segítőeszköz";
 "TIMED_WALK_FORM_TEXT" = "Ugyanazt a segítőeszközt használja minden teszthez.";
 "TIMED_WALK_QUESTION_TEXT" = "Használ boka-járáskönnyítőt?";
@@ -446,7 +482,7 @@
 "PASAT_INTRO_TEXT" = "Az Ütemes hallási sorozatösszeadási teszt a hallási információfeldolgozási sebességet és számítási képességet méri.";
 "PVSAT_INTRO_TEXT" = "Az Ütemes vizuális sorozatösszeadási teszt a vizuális információfeldolgozási sebességet és számítási képességet méri.";
 "PAVSAT_INTRO_TEXT" = "Az Ütemes hallási és vizuális sorozatösszeadási teszt a hallási és vizuális információfeldolgozási sebességet és számítási képességet méri.";
-"PSAT_INTRO_TEXT_2_%@" = "%@ másodpercenként számjegyek jelennek meg.\nMinden új számjegyet adjon hozzá az előtte lévőhöz.\nFigyelem: Ne számítsa ki a teljes sorozat összegét, csak az utolsó két számjegy összegét.";
+"PSAT_INTRO_TEXT_2_%@" = "Egyszámjegyű számok jelennek meg %@ időközönként.\nMinden új számjegyet adjon hozzá az előtte lévőhöz.\nFigyelem: Ne a teljes sorozat összegét számítsa ki, csak az utolsó két számjegyét.";
 "PSAT_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
 "PSAT_INITIAL_INSTRUCTION" = "Jegyezze meg ezt az első számjegyet.";
 "PSAT_INSTRUCTION" = "Adja hozzá ezt az új számjegyet az előzőhöz.";
@@ -563,9 +599,23 @@
 "ENVIRONMENTSPL_UNIT" = "dBA";
 "ENVIRONMENTSPL_CALCULATING" = "Számítás";
 "ENVIRONMENTSPL_THRESHOLD" = "Küszöb: %@ dBA";
+"ENVIRONMENTSPL_OK" = "Elfogadható mértékű háttérzaj";
+"ENVIRONMENTSPL_NOISE" = "Túl erős háttérzaj";
+"ENVIRONMENTSPL_TITLE_2" = "Keressen egy csendes helyet";
+"ENVIRONMENTSPL_INTRO_TEXT_2" = "A pontos eredményhez ezt a vizsgálatot halk környezetben kell elvégezni.";
+
+/* Secondary Task Step*/
+"SECONDARY_TASK_START_BUTTON" = "Feladat elkezdése";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "Nincs adat";
+
+/* Slider */
+"SLIDER_MOVE_SLIDER_FOR_VALUE" = "Értékbeállítás a csúszka mozgatásával";
+"SLIDER_I_DONT_KNOW" = "Nem tudom";
+
+/* Review Step */
+"REVIEW_STEP_PAGE" = "Oldal";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Vissza";
@@ -586,6 +636,7 @@
 
 "AX_SELECTED" = "Kiválasztva";
 "AX_UNSELECTED" = "Nincs kijelölve";
+"AX_SELECT_ALL_THAT_APPLY" = "JELÖLJE MEG AZ ÖSSZES VONATKOZÓ ELEMET";
 
 "AX_SLIDER_LABEL" = "Válaszcsúszka. Tartomány: %@ - %@";
 "AX_UNLABELED_IMAGE" = "Címke nélküli kép";
@@ -612,6 +663,7 @@
 "AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Üres";
 
+"AX_DISMISS_KEYBOARD_CUSTOM_ACTION" = "Billentyűzet bezárása";
 
 "AX_GRAPH_RANGE_FORMAT_%@_%@" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_STACK_PREFIX" = "Halom a következőkből:";
@@ -626,8 +678,24 @@
 "AX_AMSLER_GRID_LABEL" = "Amsler-rács";
 "AX_AMSLER_GRID_HINT" = "Az ujja vagy egy érintőceruza segítségével jelölje meg közvetlenül a rácsot, vagy legyintsen balra a rácson kívül a befejezéshez.";
 
+"AX_TAP_BUTTON_DIRECT_TOUCH_AREA" = "Koppintható gombok";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_LABEL" = "Koppintás a bal fülhöz";
+"AX_TONE_AUDIOMETRY_BUTTON_LEFT_EAR_HINT" = "Aktiválja a teszt megkezdéséhez. Ha a teszt elkezdődött, koppintson közvetlenül a gombra, amikor egy hangot hall a bal fülében.";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_LABEL" = "Koppintás a jobb fülhöz";
+"AX_TONE_AUDIOMETRY_BUTTON_RIGHT_EAR_HINT" = "Aktiválja a teszt megkezdéséhez. Ha a teszt elkezdődött, koppintson közvetlenül a gombra, amikor egy hangot hall a jobb fülében.";
 /* This contains the visual text, followed by a VoiceOver-specific description, followed by the visual text on the following page (since VoiceOver users may not have a chance to hear the visual text before needing to perform the actions). */
+"AX_TONE_AUDIOMETRY_PREP_TEXT_VOICEOVER" = "%@ A VoiceOver használatával tapintással felfedezheti a képernyőt, és megtanulhatja az egyes fülekhez tartozó gombok helyét. Ha a teszt elindul a gombok közvetlenül koppinthatóak lesznek. %@";
+"AX_TAP_BUTTON_1_LABEL" = "Koppintás egy ujjhoz";
+"AX_TAP_BUTTON_2_LABEL" = "Koppintás másik ujjhoz";
+"AX_TAP_BUTTON_HINT" = "Aktiválja, hogy közvetlenül koppinthatóvá tegye a gombokat.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TAPPING_INSTRUCTION_VOICEOVER" = "%@ A VoiceOver használatával tapintással felfedezheti a képernyőt, és megtanulhatja a gombok helyét. Aktiválja bármelyik gombot, hogy közvetlenül koppinthatóvá tegye a gombokat.";
+"AX_TAP_BUTTON_DIRECT_TOUCH_ANNOUNCEMENT" = "A gombokra immár közvetlenül rá lehet koppintani.";
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_dBHL_TONE_AUDIOMETRY_INTRO_TEXT" = "%@ VoiceOver használata esetén a gombra közvetlenül rá lehet koppintani. A gomb a képernyő közepének közelében lesz.";
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
+"AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ VoiceOver használata esetén a gombok a tesztben közvetlenül koppinthatók lesznek.";
+
+/* Restore error */
+"RESTORE_ERROR_CANNOT_DECODE" = "Nem lehet dekódolni a restoreData paramétert az inicializáláshoz";

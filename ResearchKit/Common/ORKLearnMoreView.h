@@ -64,6 +64,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setLearnMoreButtonFont: (UIFont *)font;
 
+- (void)setLearnMoreButtonTextAlignment:(NSTextAlignment)textAlignment;
+
+- (BOOL)isTextLink;
+
 @end
 
 

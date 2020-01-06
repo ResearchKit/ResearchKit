@@ -40,6 +40,7 @@
 #import "ORKStroopStep.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKBorderedButton.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 
 @interface ORKStroopStepViewController ()

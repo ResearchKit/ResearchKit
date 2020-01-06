@@ -42,6 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol ORKBodyItemContainerViewDelegate <NSObject>
+
+@optional
+- (void)bodyContainerViewDidLoadBodyItems;
+
+@end
+
 
 @class ORKBodyItem;
 @interface ORKBodyContainerView : UIStackView
@@ -50,11 +57,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithBodyItems:(NSArray<ORKBodyItem *> *)bodyItems
+                    textAlignment:(NSTextAlignment)textAlignment
                          delegate:(id<ORKBodyContainerViewDelegate>)delegate;
+
+- (void)updateBodyItemViews;
+- (BOOL)hasShownAllBodyItem;
+- (UIView *)lastVisibleBodyItem;
 
 @property (nonatomic, nonnull) NSArray<ORKBodyItem *> *bodyItems;
 
+@property (nonatomic) BOOL buildsInBodyItems;
+
 @property (nonatomic, weak) id<ORKBodyContainerViewDelegate> delegate;
+
+@property (nonatomic, weak) id<ORKBodyItemContainerViewDelegate> bodyItemDelegate;
 
 @end
 

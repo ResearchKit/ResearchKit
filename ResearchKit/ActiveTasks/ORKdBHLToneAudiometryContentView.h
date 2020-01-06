@@ -33,18 +33,20 @@
 @import UIKit;
 #import "ORKCustomStepView_Internal.h"
 #import "ORKUnitLabel.h"
-
+#import "ORKRoundTappingButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKRoundTappingButton;
+@interface ORKdBHLToneAudiometryButton : ORKRoundTappingButton
+
+@end
 
 @interface ORKdBHLToneAudiometryContentView : ORKActiveStepCustomView
 
 - (void)setProgress:(CGFloat)progress
            animated:(BOOL)animated;
 
-@property (nonatomic, strong, readonly) ORKRoundTappingButton *tapButton;
+@property (nonatomic, strong, readonly) ORKdBHLToneAudiometryButton *tapButton;
 @property (nonatomic, strong) UIProgressView *progressView;
 
 @end

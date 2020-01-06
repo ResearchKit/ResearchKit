@@ -66,6 +66,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, assign) BOOL willAudioLoop;
 
+@property (nonatomic) BOOL hideGraphView;
+
 @end
 
 NS_ASSUME_NONNULL_END

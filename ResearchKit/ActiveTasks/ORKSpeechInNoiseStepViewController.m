@@ -41,6 +41,7 @@
 #import "ORKCollectionResult_Private.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKRoundTappingButton.h"
+#import "ORKPlaybackButton.h"
 #import "ORKSkin.h"
 
 #import <AVFoundation/AVFoundation.h>
@@ -78,7 +79,7 @@
     self.activeStepView.customContentFillsAvailableSpace = YES;
     _speechInNoiseContentView.alertColor = [UIColor blueColor];
     [self.speechInNoiseContentView.playButton addTarget:self action:@selector(tapButtonPressed) forControlEvents:UIControlEventTouchDown];
-    
+    [_speechInNoiseContentView setGraphViewHidden:[self speechInNoiseStep].hideGraphView];
     _audioEngine = [[AVAudioEngine alloc] init];
     _playerNode = [[AVAudioPlayerNode alloc] init];
     [_audioEngine attachNode:_playerNode];
@@ -180,7 +181,7 @@
         if ([self speechInNoiseStep].willAudioLoop) {
             [_speechInNoiseContentView.playButton setTitle:ORKLocalizedString(@"SPEECH_IN_NOISE_STOP_AUDIO_LABEL", nil)
                              forState:UIControlStateNormal];
-            [_speechInNoiseContentView.playButton setNormalTintColor:[UIColor ork_redColor]];
+            [_speechInNoiseContentView.playButton setTintColor:[UIColor ork_redColor]];
         } else {
             ORKWeakTypeOf(self) weakSelf = self;
             [_speechInNoiseContentView.playButton setEnabled:NO];

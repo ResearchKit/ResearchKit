@@ -342,7 +342,7 @@ static const NSInteger kNumberOfSamples = 5;
         [[NSFileManager defaultManager] createDirectoryAtPath:_outputPath withIntermediateDirectories:YES attributes:nil error:&error];
         
         if (error) {
-            NSLog(@"Failed to create directory %@", error);
+            ORK_Log_Error("Failed to create directory %@", error);
         }
     }
     
@@ -356,13 +356,13 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-     NSLog(@"didCompleteWithResult: %@", result);
+     ORK_Log_Debug("didCompleteWithResult: %@", result);
     _recorder = recorder;
     _result = result;
 }
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError: %@", error);
+    ORK_Log_Error("didFailWithError: %@", error);
     _recorder = nil;
     _result = nil;
 }

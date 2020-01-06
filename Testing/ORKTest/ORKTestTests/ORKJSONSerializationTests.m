@@ -207,6 +207,7 @@ ORK_MAKE_TEST_INIT(ORKSkipStepNavigationRule, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKKeyValueStepModifier, ^{return [super init];});
 ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKDontKnowAnswer, ^{return [ORKDontKnowAnswer answer];});
 ORK_MAKE_TEST_INIT(ORKLoginStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString title:@"title" text:@"text" loginViewControllerClass:NSClassFromString(@"ORKLoginStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKVerificationStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString text:@"text" verificationViewControllerClass:NSClassFromString(@"ORKVerificationStepViewController") ];});
 ORK_MAKE_TEST_INIT(ORKStep, ^{return [self initWithIdentifier:[NSUUID UUID].UUIDString];});
@@ -365,18 +366,35 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                  [ORKHealthCorrelationCollector class],
                                                  [ORKMotionActivityCollector class],
                                                  [ORKShoulderRangeOfMotionStep class],
-                                                 ];
-        _classesExcludedForORKESerialization = @[
-                                                 [ORKStepNavigationRule class],     // abstract base class
-                                                 [ORKSkipStepNavigationRule class],     // abstract base class
-                                                 [ORKStepModifier class],     // abstract base class
-                                                 [ORKPredicateSkipStepNavigationRule class],     // NSPredicate doesn't yet support JSON serialization
-                                                 [ORKKeyValueStepModifier class],     // NSPredicate doesn't yet support JSON serialization
-                                                 [ORKCollector class], // ORKCollector doesn't support JSON serialization
-                                                 [ORKHealthCollector class],
-                                                 [ORKHealthCorrelationCollector class],
-                                                 [ORKMotionActivityCollector class],
-                                                 [ORKShoulderRangeOfMotionStep class],
+                                                 [ORKTouchAbilityTouch class],
+                                                 [ORKTouchAbilityTrack class],
+                                                 [ORKTouchAbilityTrial class],
+                                                 [ORKTouchAbilityTapStep class],
+                                                 [ORKTouchAbilityTapTrial class],
+                                                 [ORKTouchAbilityPinchStep class],
+                                                 [ORKTouchAbilitySwipeStep class],
+                                                 [ORKTouchAbilityTapResult class],
+                                                 [ORKTouchAbilityPinchTrial class],
+                                                 [ORKTouchAbilityLongPressTrial class],
+                                                 [ORKTouchAbilityScrollTrial class],
+                                                 [ORKTouchAbilityRotationTrial class],
+                                                 [ORKTouchAbilitySwipeTrial class],
+                                                 [ORKTouchAbilityGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilityRotationGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilityPinchGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilitySwipeGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilityPanGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilityLongPressGestureRecoginzerEvent class],
+                                                 [ORKTouchAbilityTapGestureRecoginzerEvent class],
+                                                 [ORKCustomStep class],
+                                                 [ORKTouchAbilityRotationStep class],
+                                                 [ORKTouchAbilityLongPressStep class],
+                                                 [ORKTouchAbilityScrollStep class],
+                                                 [ORKTouchAbilityPinchResult class],
+                                                 [ORKTouchAbilityRotationResult class],
+                                                 [ORKTouchAbilityLongPressResult class],
+                                                 [ORKTouchAbilitySwipeResult class],
+                                                 [ORKTouchAbilityScrollResult class]
                                                  ];
         _propertyExclusionList = @[
                                    @"superclass",
@@ -498,7 +516,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 @implementation ORKJSONSerializationTests
 
 - (Class)unarchiver:(NSKeyedUnarchiver *) __unused unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
-    NSLog(@"Cannot decode object with class: %@ (original classes: %@)", name, classNames);
+    ORK_Log_Info("Cannot decode object with class: %@ (original classes: %@)", name, classNames);
     return nil;
 }
 
@@ -549,7 +567,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict1 options:NSJSONWritingPrettyPrinted error:nil];
     NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID].UUIDString stringByAppendingPathExtension:@"json"]];
     [data writeToFile:tempPath atomically:YES];
-    NSLog(@"JSON file at %@", tempPath);
+    ORK_Log_Info("JSON file at %@", tempPath);
     
     ORKOrderedTask *task2 = [ORKESerializer objectFromJSONObject:dict1 error:nil];
     
@@ -560,10 +578,50 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 }
 
 /*
+ Verify that all the known classes that can have dont know answers, serialize them as separate properties with
+ the prefix noAnswer_
+ */
+- (void)testDontKnowSerialization {
+    
+    NSDictionary *examples = @{
+        @"ORKBooleanQuestionResult" : @"booleanAnswer",
+        @"ORKDateQuestionResult": @"dateAnswer",
+        @"ORKNumericQuestionResult" : @"numericAnswer",
+        @"ORKScaleQuestionResult" : @"scaleAnswer"
+    };
+    [examples enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull className, NSString *  _Nonnull answerProp, __unused BOOL * _Nonnull stop) {
+        ORKQuestionResult *result = [(ORKQuestionResult *)[NSClassFromString(className) alloc] initWithIdentifier:[[NSUUID UUID] UUIDString]];
+        [result setAnswer:[ORKDontKnowAnswer answer]];
+        result.startDate = [NSDate date];
+        result.endDate = [NSDate date];
+        NSDictionary *dict = [ORKESerializer JSONObjectForObject:result error:nil];
+        
+        // Do not expect the property name for the answer to have a value
+        XCTAssertNil([dict valueForKey:answerProp]);
+        
+        // Do expect the "dont know" version of the property name for the answer to have a value.
+        XCTAssertEqualObjects(@"ORKDontKnowAnswer",
+                              [[dict valueForKey:[@"noAnswer_" stringByAppendingString:answerProp]] valueForKey:@"_class"]);
+        
+    }];
+}
+
+- (void)_verifyDontKnowExampleFromPath:(NSString *)path
+                    answerPropertyName:(NSString *)propertyName
+                               context:(ORKESerializationContext *)context {
+
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:0 error:NULL];
+    id instance = [ORKESerializer objectFromJSONObject:dict context:context error:NULL];
+    XCTAssertNotNil(instance);
+    XCTAssertEqualObjects([instance valueForKey:propertyName], [ORKDontKnowAnswer answer]);
+}
+
+/*
  Verifies there is a sample for every JSON-serializable class.
  Verifies all registered properties for each of those classes is present in the sample.
  Verifies that all properties in the sample are registered.
  Attempts a decode of the sample, twice: once with image decoding enabled and once with images mapped to nil.
+ Provides special handling for dont know answers, verifying that they deserialize as expected.
  */
 - (void)testORKSampleDeserialization {
     NSString *bundlePath = [[NSBundle bundleForClass:[ORKJSONSerializationTests class]] pathForResource:@"samples" ofType:@"bundle"];
@@ -584,6 +642,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
     // Decode where images are "decoded"
     for (NSString *path in paths) {
+        if ([[path lastPathComponent] hasPrefix:@"DontKnow"]) {
+            continue;
+        }
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:0 error:NULL];
         NSString *className = [[path lastPathComponent] stringByDeletingPathExtension];
         NSMutableArray<NSString *> *knownProperties = [[ORKESerializer serializedPropertiesForClass:NSClassFromString(className)] mutableCopy];
@@ -595,7 +656,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
         NSMutableSet *extraKnownProps = [knownPropSet mutableCopy]; [extraKnownProps minusSet:intersectionSet];
         NSMutableSet *extraLoadedProps = [loadedPropSet mutableCopy]; [extraLoadedProps minusSet:intersectionSet];
         XCTAssertEqualObjects(extraKnownProps, [NSSet set], @"Extra properties registered but not in example for %@", className);
-        XCTAssertEqualObjects(extraLoadedProps, [NSSet set], @"Extra properties in sample but not registered for %@", className);
+        XCTAssertEqualObjects(extraLoadedProps, [NSSet set], @"Extra properties in sample but not registered for %@ on %@", className, path);
         id instance = [ORKESerializer objectFromJSONObject:dict context:context error:NULL];
         XCTAssertNotNil(instance);
         XCTAssertEqualObjects(NSStringFromClass([instance class]), className);
@@ -605,12 +666,30 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
     // Decode with image decoding failing and returning nil instead of an image: silently suppress the failure
     for (NSString *path in paths) {
+        if ([[path lastPathComponent] hasPrefix:@"DontKnow"]) {
+            continue;
+        }
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:path] options:0 error:NULL];
         NSString *className = [[path lastPathComponent] stringByDeletingPathExtension];
         id instance = [ORKESerializer objectFromJSONObject:dict context:context error:NULL];
         XCTAssertNotNil(instance);
         XCTAssertEqualObjects(NSStringFromClass([instance class]), className);
     }
+
+    // Test the dont know examples
+    NSDictionary *examples = @{
+        @"DontKnowBooleanResult" : @"booleanAnswer",
+        @"DontKnowDateResult": @"dateAnswer",
+        @"DontKnowNumericResult" : @"numericAnswer",
+        @"DontKnowScaleResult" : @"scaleAnswer"
+    };
+    [examples enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSString *  _Nonnull propName, __unused BOOL * _Nonnull stop) {
+        [self _verifyDontKnowExampleFromPath:[bundle pathForResource:key ofType:@"json"]
+                          answerPropertyName:propName
+                                     context:context];
+    }];
+    
+    
     
 }
 
@@ -761,7 +840,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     NSString *outputPath = [[docsDir path] stringByAppendingPathComponent:[NSStringFromClass(aClass) stringByAppendingString:@".json"]];
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:NULL];
     [data writeToFile:outputPath atomically:YES];
-    NSLog(@"%@", outputPath);
+    ORK_Log_Info("%@", outputPath);
 }
 
 - (BOOL)applySomeValueToClassProperty:(ClassProperty *)p forObject:(id)instance index:(NSInteger)index forEqualityCheck:(BOOL)equality {
@@ -866,6 +945,8 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                               @"ORKAnswerFormat.healthKitUnit",
                                               @"ORKAnswerFormat.healthKitUserUnit",
                                               @"ORKCollectionResult.firstResult",
+                                              
+                                              @"ORKCustomStep.contentView",  // UIView is not able to be serialized
                                               
                                               // Images: ignored so we can do the equality test and pass
                                               @"ORKImageChoice.normalStateImage",
@@ -1226,7 +1307,11 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKVisualConsentStepViewController" : @"ORKVisualConsentStep",
                                                                              @"ORKWalkingTaskStepViewController" : @"ORKWalkingTaskStep",
                                                                              @"ORKTableStepViewController" : @"ORKTableStep",
-                                                                             @"ORKdBHLToneAudiometryStepViewController" : @"ORKdBHLToneAudiometryStep"
+                                                                             @"ORKdBHLToneAudiometryStepViewController" : @"ORKdBHLToneAudiometryStep",
+
+                                                                             @"ORKSecondaryTaskStepViewController" : @"ORKSecondaryTaskStep",
+                                                                             @"ORKHeadphoneDetectStepViewController" : @"ORKHeadphoneDetectStep",
+                                                                             @"ORKWebViewStepViewController": @"ORKWebViewStep",
                                                                              };
     
     NSDictionary <NSString *, NSDictionary *> *kvMapForStep = @{ // Steps that require modification to validate
@@ -1247,6 +1332,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                 @"ORKTimedWalkStep" : @{@"distanceInMeters" : @30.0,
                                                                                         @"stepDuration" : @2.0},
                                                                 @"ORKWalkingTaskStep" : @{@"numberOfStepsPerLeg" : @2},
+                                                                @"ORKWebViewStep" : @{@"html": @""}
                                                                 };
     
     // Find all classes that subclass from ORKStepViewController
@@ -1317,6 +1403,50 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
             XCTAssertTrue([stepResult.results containsObject:result], @"Step result does not contain added result for %@", NSStringFromClass([stepViewController class]));
         }
     }
+}
+
+- (void)testInvalidDBHLValue {
+    // Non ORKInvalidDBHLValue-containing sample
+    ORKdBHLToneAudiometryFrequencySample *sample = [[ORKdBHLToneAudiometryFrequencySample alloc] init];
+    sample.channel = ORKAudioChannelLeft;
+    sample.frequency = 1000;
+    sample.calculatedThreshold = 0.5;
+    
+    NSDictionary *sampleDictionary = [ORKESerializer JSONObjectForObject:sample error:NULL];
+    ORKdBHLToneAudiometryFrequencySample *deserializedSample = [ORKESerializer objectFromJSONObject:sampleDictionary error:NULL];
+    
+    XCTAssertEqualObjects(sample, deserializedSample);
+
+    NSData *sampleData = [ORKESerializer JSONDataForObject:sample error:NULL];
+    deserializedSample = [ORKESerializer objectFromJSONData:sampleData error:NULL];
+
+    XCTAssertEqualObjects(sample, deserializedSample);
+
+    // ORKInvalidDBHLValue-containing sample
+    sample.calculatedThreshold = ORKInvalidDBHLValue;
+    
+    sampleDictionary = [ORKESerializer JSONObjectForObject:sample error:NULL];
+    deserializedSample = [ORKESerializer objectFromJSONObject:sampleDictionary error:NULL];
+    
+    XCTAssertEqualObjects(sample, deserializedSample);
+
+    sampleData = [ORKESerializer JSONDataForObject:sample error:NULL];
+    deserializedSample = [ORKESerializer objectFromJSONData:sampleData error:NULL];
+
+    XCTAssertEqualObjects(sample, deserializedSample);
+}
+
+- (void)testMissingDefaultValueKeyInScaleAnswerFormat {
+    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:nil];
+
+    NSDictionary *payloadForContinuousScale = @{@"minimumValueDescription":@"",@"maximum":@100,@"_class":@"ORKContinuousScaleAnswerFormat",@"vertical":@NO,@"minimum":@0,@"maximumFractionDigits":@0,@"hideSelectedValue":@NO,@"hideRanges":@NO,@"hideLabels":@NO,@"numberStyle":@"percent",@"maximumValueDescription":@"",@"showDontKnowButton":@NO,@"customDontKnowButtonText":@""};
+
+    ORKContinuousScaleAnswerFormat *continuousScaleAnswerFormat = (ORKContinuousScaleAnswerFormat *)[ORKESerializer objectFromJSONObject:payloadForContinuousScale context:context error:NULL];
+    XCTAssertEqual(continuousScaleAnswerFormat.defaultValue, DBL_MAX);
+
+    NSDictionary *payloadForScale = @{@"minimumValueDescription":@"",@"maximum":@100,@"_class":@"ORKScaleAnswerFormat",@"vertical":@NO,@"minimum":@0,@"hideSelectedValue":@NO,@"hideRanges":@NO,@"hideLabels":@NO,@"hideValueMarkers":@NO,@"step":@10,@"maximumValueDescription":@"",@"showDontKnowButton":@NO,@"customDontKnowButtonText":@""};
+    ORKScaleAnswerFormat *scaleAnswerFormat = (ORKScaleAnswerFormat *)[ORKESerializer objectFromJSONObject:payloadForScale context:context error:NULL];
+    XCTAssertEqual(scaleAnswerFormat.defaultValue, INT_MAX);
 }
 
 @end

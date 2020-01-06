@@ -54,6 +54,10 @@
 + (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(id)answer delegate:(id<ORKPickerDelegate>) delegate {
     id<ORKPicker> picker = nil;
     
+    if ([answer isKindOfClass:[ORKDontKnowAnswer class]]) {
+        answer = nil;
+    }
+    
     if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     } else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]]) {

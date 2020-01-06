@@ -85,7 +85,7 @@
     self.timedWalkContentView = [ORKTimedWalkContentView new];
     self.activeStepView.activeCustomView = self.timedWalkContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
-    self.navigationFooterView.continueEnabled = YES;
+    _navigationFooterView.continueEnabled = YES;
     
     self.timerUpdateInterval = 0.1f;
 }

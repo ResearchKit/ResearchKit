@@ -46,22 +46,30 @@
 - (void)gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
+@optional
+- (void)gestureTouchesHaveEndedWithTimeInterval;
+
 @end
 
 
 @interface ORKSignatureGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic, weak) id<ORKSignatureGestureRecognizerDelegate> eventDelegate;
+@property (nonatomic, strong) NSTimer *endEditingTimer;
+
+- (void)cancelAutoScrollTimer;
 
 @end
 
 
 static const CGFloat TopToSigningLineRatio = 0.7;
-
+static const CGFloat TouchesEndedTimeInterval = 2.0;
 
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.endEditingTimer invalidate];
+    
     if (touches.count > 1 || self.numberOfTouches > 1) {
         for (UITouch *touch in touches) {
             [self ignoreTouch:touch forEvent:event];
@@ -73,12 +81,19 @@ static const CGFloat TopToSigningLineRatio = 0.7;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.endEditingTimer invalidate];
     [self.eventDelegate gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     self.state = UIGestureRecognizerStateEnded;
     [self.eventDelegate gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event];
+    
+    self.endEditingTimer = [NSTimer scheduledTimerWithTimeInterval:TouchesEndedTimeInterval target:self selector:@selector(timerDidEnd) userInfo:nil repeats:NO];
+}
+
+- (void)timerDidEnd {
+    [self.eventDelegate gestureTouchesHaveEndedWithTimeInterval];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -93,6 +108,10 @@ static const CGFloat TopToSigningLineRatio = 0.7;
         return YES;
     }
     return NO;
+}
+
+- (void)cancelAutoScrollTimer {
+    [self.endEditingTimer invalidate];
 }
 
 @end
@@ -119,6 +138,7 @@ static const CGFloat LineWidthStepValue = 0.25f;
 @property (nonatomic, strong) UIBezierPath *currentPath;
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSArray *backgroundLines;
+@property (nonatomic) BOOL setWidth;
 
 @end
 
@@ -139,17 +159,36 @@ static const CGFloat LineWidthStepValue = 0.25f;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _lineWidth = DefaultLineWidth;
-        _lineWidthVariation = DefaultLineWidthVariation;
-        
-        self.layer.borderColor = [[UIColor ork_midGrayTintColor] CGColor];
-        self.layer.borderWidth = 1.0;
-        self.layer.cornerRadius = 10.0;
-        
-        [self makeSignatureGestureRecognizer];
-        [self setUpConstraints];
+        self.setWidth = YES;
+        [self commonInit];
     }
     return self;
+}
+
+- (instancetype)initWithoutDefaultWidth {
+    self = [super init];
+    if (self) {
+        self.setWidth = NO;
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    _lineWidth = DefaultLineWidth;
+    _lineWidthVariation = DefaultLineWidthVariation;
+    
+    if (@available(iOS 13.0, *)) {
+        self.layer.borderColor = [[UIColor separatorColor] CGColor];
+    } else {
+        self.layer.borderColor = [[UIColor ork_midGrayTintColor] CGColor];
+    }
+    self.layer.borderWidth = 1.0;
+    self.layer.cornerRadius = 10.0;
+    self.clipsToBounds = YES;
+    
+    [self makeSignatureGestureRecognizer];
+    [self setUpConstraints];
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -159,7 +198,10 @@ static const CGFloat LineWidthStepValue = 0.25f;
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
     _heightConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, window);
-    _widthConstraint.constant = ORKWidthForSignatureView(window);
+    
+    if (self.setWidth) {
+        _widthConstraint.constant = ORKWidthForSignatureView(window);
+    }
 }
 
 - (void)setUpConstraints {
@@ -174,14 +216,16 @@ static const CGFloat LineWidthStepValue = 0.25f;
                                                       constant:0.0]; // constant set in updateConstraintConstantsForWindow:
     [constraints addObject:_heightConstraint];
 
-    _widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                    attribute:NSLayoutAttributeWidth
-                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                       toItem:nil
-                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                   multiplier:1.0
-                                                     constant:0.0]; // constant set in updateConstraintConstantsForWindow:
-    [constraints addObject:_widthConstraint];
+    if (self.setWidth) {
+        _widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:0.0]; // constant set in updateConstraintConstantsForWindow:
+        [constraints addObject:_widthConstraint];
+    }
     
     [NSLayoutConstraint activateConstraints:constraints];
     [self updateConstraintConstantsForWindow:self.window];
@@ -221,7 +265,11 @@ static const CGFloat LineWidthStepValue = 0.25f;
 
 - (UIColor *)lineColor {
     if (_lineColor == nil) {
-        _lineColor = ORKColor(ORKSignatureColorKey);
+        if (@available(iOS 13.0, *)) {
+            _lineColor = [UIColor labelColor];
+        } else {
+           _lineColor = ORKColor(ORKSignatureColorKey);
+        }
     }
     return _lineColor;
 }
@@ -416,6 +464,12 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     [self commitCurrentPath];
 }
 
+- (void)gestureTouchesHaveEndedWithTimeInterval {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(signatureViewDidEndEditingWithTimeInterval)]) {
+        [self.delegate signatureViewDidEndEditingWithTimeInterval];
+    }
+}
+
 - (void)commitCurrentPath {
     CGRect rect = self.currentPath.bounds;
     if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
@@ -428,7 +482,14 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)drawRect:(CGRect)rect {
-    [[UIColor whiteColor] setFill];
+    UIColor *fillColor;
+    if (@available(iOS 13.0, *)) {
+        fillColor = [UIColor systemBackgroundColor];
+    } else {
+        fillColor = [UIColor whiteColor];
+    }
+    
+    [fillColor setFill];
     CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
     
     for (UIBezierPath *path in self.pathArray) {
@@ -458,7 +519,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     UIGraphicsBeginImageContext(imageContextSize);
 
     for (UIBezierPath *path in self.pathArray) {
-        [self.lineColor setStroke];
+        [[UIColor blackColor] setStroke];
         [path stroke];
     }
     
@@ -481,6 +542,15 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         [self.pathArray removeAllObjects];
         [self setNeedsDisplayInRect:self.bounds];
     }
+}
+
+- (void)cancelAutoScrollTimer {
+    [(ORKSignatureGestureRecognizer *)_signatureGestureRecognizer cancelAutoScrollTimer];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    _enabled = enabled;
+    [self setUserInteractionEnabled:enabled];
 }
 
 #pragma mark - Accessibility

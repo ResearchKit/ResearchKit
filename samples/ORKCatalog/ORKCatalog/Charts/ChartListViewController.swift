@@ -51,6 +51,11 @@ class ChartListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            self.tableView.backgroundColor = UIColor.systemBackground
+        }
+        
         // ORKPieChartView
         pieChartTableViewCell = (tableView.dequeueReusableCell(withIdentifier: pieChartIdentifier) as! PieChartTableViewCell)
         let pieChartView = pieChartTableViewCell.pieChartView
@@ -91,6 +96,13 @@ class ChartListViewController: UITableViewController {
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell, barGraphChartTableViewCell]
         
+        if #available(iOS 13.0, *) {
+            pieChartView?.backgroundColor = UIColor.secondarySystemBackground
+            lineGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+            discreteGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+            barGraphChartView.backgroundColor = UIColor.secondarySystemBackground
+        }
+        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
@@ -100,6 +112,11 @@ class ChartListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chartTableViewCells[(indexPath as NSIndexPath).row]
+        
+        if #available(iOS 13.0, *) {
+            cell.contentView.backgroundColor = UIColor.systemBackground
+        }
+        
         return cell
     }
     

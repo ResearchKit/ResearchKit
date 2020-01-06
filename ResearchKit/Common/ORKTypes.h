@@ -121,7 +121,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /**
      In a location question, the participant can enter a location using a map view.
      */
-    ORKQuestionTypeLocation
+    ORKQuestionTypeLocation,
+    
+    /**
+     In a socio-economic ladder, participant can pick their socio economic status.
+     */
+    ORKQuestionTypeSES
 } ORK_ENUM_AVAILABLE;
 
 
@@ -357,6 +362,24 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
     /// United States customary system.
     ORKMeasurementSystemUSC,
 } ORK_ENUM_AVAILABLE;
+
+/**
+ Route Identifiers for supported headphone types.
+ */
+typedef NSString *ORKHeadphoneTypeIdentifier NS_STRING_ENUM;
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPods;
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods;
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown;
+
+ORK_CLASS_AVAILABLE
+@interface ORKDontKnowAnswer : NSObject<NSCopying, NSSecureCoding>
+
++ (instancetype)answer;
+
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
 
 
 /**

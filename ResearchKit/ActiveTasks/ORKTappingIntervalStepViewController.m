@@ -42,6 +42,7 @@
 #import "ORKCollectionResult_Private.h"
 #import "ORKTappingIntervalResult.h"
 #import "ORKStep.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 #import "ORKHelpers_Internal.h"
 
@@ -96,7 +97,6 @@
     _expired = NO;
     
     _tappingContentView = [[ORKTappingContentView alloc] init];
-    _tappingContentView.hasSkipButton = self.step.optional;
     self.activeStepView.activeCustomView = _tappingContentView;
     self.activeStepView.customContentFillsAvailableSpace = YES;
     

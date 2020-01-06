@@ -33,8 +33,10 @@
 
 static const double VALUE_MIN = 0.0;
 static const double VALUE_MAX = 1.0;
-static const double VIEW_DIMENSION = 200.0;
+static const double VIEW_DIMENSION = 150.0;
 static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
+static const CGFloat RingLineWidth = 3.0;
+static const CGFloat CircleLineWidth = 6.0;
 
 @implementation ORKRingView {
     CAShapeLayer *_circleLayer;
@@ -54,7 +56,12 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
         _backgroundLayer = [self createShapeLayer];
         _backgroundLayer.borderColor = _color.CGColor;
         
-        _backgroundLayer.strokeColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+        if (@available(iOS 13.0, *)) {
+            _backgroundLayer.strokeColor = [[UIColor systemGray6Color] CGColor];
+        } else {
+            // Fallback on earlier versions
+            _backgroundLayer.strokeColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+        }
         [self.layer addSublayer:_backgroundLayer];
 
         _filledCircleLayer = [self filledCircleLayer];
@@ -81,14 +88,13 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
 }
 
 - (CAShapeLayer *)createShapeLayer {
-    CGFloat diameter = VIEW_DIMENSION;
     CAShapeLayer *layer = [CAShapeLayer layer];
     layer.lineCap = kCALineCapRound;
     layer.path = [self createPath].CGPath;
     layer.fillColor = [UIColor clearColor].CGColor;
     layer.strokeColor = _color.CGColor;
     
-    layer.lineWidth = diameter * 0.075;
+    layer.lineWidth = RingLineWidth;
     return layer;
 }
 
@@ -109,7 +115,7 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
 
 - (CAShapeLayer *)filledCircleLayer {
     CAShapeLayer *filledCircle = [CAShapeLayer layer];
-    CGRect bounds = CGRectMake(1, 5, VIEW_DIMENSION, VIEW_DIMENSION);
+    CGRect bounds = self.bounds;
     UIBezierPath *maskLayerPath = [UIBezierPath bezierPathWithRoundedRect:bounds cornerRadius:VIEW_DIMENSION / 2.0];
     filledCircle.path = maskLayerPath.CGPath;
     filledCircle.fillColor = [UIColor whiteColor].CGColor;
@@ -138,6 +144,8 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
             
             [_circleLayer removeFromSuperlayer];
             _circleLayer = [self createShapeLayer];
+            _circleLayer.lineWidth = CircleLineWidth;
+            _circleLayer.strokeColor = UIColor.systemGrayColor.CGColor;
             [self.layer addSublayer:_circleLayer];
             
             CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
@@ -156,6 +164,9 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
                     }
                     else {
                         [_circleLayer setStrokeColor:_color.CGColor];
+                        if (_value == VALUE_MAX && self.delegate && [self.delegate respondsToSelector:@selector(ringViewDidFinishFillAnimation)]) {
+                            [self.delegate ringViewDidFinishFillAnimation];
+                        }
                     }
                 }
             }];
@@ -177,6 +188,30 @@ static const CFTimeInterval DEFAULT_ANIMATION_DURATION = 1.25;
         _color = color;
     }
     [self setValue:value];
+}
+
+- (void)setBackgroundLayerStrokeColor:(UIColor *)backgroundStrokeColor circleStrokeColor:(UIColor *)circleStrokeColor {
+    if (_backgroundLayer) {
+        _backgroundLayer.strokeColor = backgroundStrokeColor.CGColor;
+    }
+    if (_circleLayer) {
+        _circleLayer.strokeColor = circleStrokeColor.CGColor;
+    }
+}
+
+- (void)resetLayerColors {
+    if (@available(iOS 13.0, *)) {
+        _backgroundLayer.strokeColor = [[UIColor systemGray6Color] CGColor];
+    } else {
+        // Fallback on earlier versions
+        _backgroundLayer.strokeColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
+    }
+    _circleLayer.strokeColor = UIColor.systemGrayColor.CGColor;
+}
+
+- (void)fillRingWithDuration:(NSTimeInterval)duration {
+    _animationDuration = duration;
+    [self setValue:1.0];
 }
 
 - (void)ringAnimation {

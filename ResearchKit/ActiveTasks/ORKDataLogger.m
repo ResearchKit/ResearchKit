@@ -534,7 +534,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 - (void)setupDirectorySource {
     int dirFD = open([_url fileSystemRepresentation], O_EVTONLY);
     if (dirFD < 0) {
-        ORK_Log_Warning(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
+        ORK_Log_Info("Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
     } else {
         // Dispatch to a concurrent queue, so we don't store up blocks while our
         // queue is working.
@@ -882,14 +882,14 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (((NSNumber *)parameters[NSURLIsRegularFileKey]).boolValue) {
         if (((NSNumber *)parameters[NSURLFileSizeKey]).intValue > 0) {
             NSURL *destinationUrl = [ORKDataLogger nextUrlForDirectoryUrl:_url logName:_logName];
-            ORK_Log_Debug(@"Rollover: %@ to %@", [url lastPathComponent], [destinationUrl lastPathComponent]);
+            ORK_Log_Debug("Rollover: %@ to %@", [url lastPathComponent], [destinationUrl lastPathComponent]);
             [fileManager moveItemAtURL:url toURL:destinationUrl error:nil];
             if (self.fileProtectionMode == ORKFileProtectionCompleteUnlessOpen) {
                 // Upgrade to complete file protection after roll-over
                 NSError *error = nil;
                 if (![fileManager setAttributes:@{NSFileProtectionKey: NSFileProtectionComplete}
                                    ofItemAtPath:[destinationUrl path] error:&error]) {
-                    ORK_Log_Warning(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
+                    ORK_Log_Error("Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
                 }
             }
             
