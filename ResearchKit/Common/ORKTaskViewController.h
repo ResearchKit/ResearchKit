@@ -379,7 +379,7 @@ ORK_CLASS_AVAILABLE
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
 
 /**
  Creates a new task view controller that starts the task at the step that has the specified step identifier.
