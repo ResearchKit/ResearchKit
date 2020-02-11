@@ -172,7 +172,13 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
     if (self) {
         _lastNodeInput = 0;
         
-        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
+//        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
+        
+        if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
+            _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"frequency_dBSPL_AIRPODS" ofType:@"plist"]];
+        } else {
+            _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"frequency_dBSPL_EARPODS" ofType:@"plist"]];
+        }
 
         _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
         
