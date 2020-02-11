@@ -173,14 +173,18 @@ static OSStatus ORKdBHLAudioGeneratorZeroTone(void *inRefCon,
         _lastNodeInput = 0;
         
 //        _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"frequency_dBSPL_%@", [headphones uppercaseString]]  ofType:@"plist"]];
-        
         if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
             _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"frequency_dBSPL_AIRPODS" ofType:@"plist"]];
         } else {
             _sensitivityPerFrequency = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"frequency_dBSPL_EARPODS" ofType:@"plist"]];
         }
 
-        _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
+//        _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:[NSString stringWithFormat:@"retspl_%@", [headphones uppercaseString]] ofType:@"plist"]];
+        if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
+            _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"retspl_AIRPODS" ofType:@"plist"]];
+        } else {
+            _retspl = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"retspl_EARPODS" ofType:@"plist"]];
+        }
         
         if ([[headphones uppercaseString] isEqualToString:@"AIRPODS"]) {
             _volumeCurve = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"volume_curve_AIRPODS" ofType:@"plist"]];
