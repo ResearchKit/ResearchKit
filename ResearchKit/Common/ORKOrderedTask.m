@@ -139,6 +139,14 @@
     }
 }
 
+- (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps {
+    NSMutableArray *newSteps = [_steps mutableCopy];
+    
+    [newSteps addObjectsFromArray:additionalSteps];
+    
+    _steps = [newSteps copy];
+}
+
 - (NSUInteger)indexOfStep:(ORKStep *)step {
     NSUInteger index = [_steps indexOfObject:step];
     if (index == NSNotFound) {

@@ -532,6 +532,7 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 - (void)flipToFirstPage;
+- (void)flipToLastPage;
 
 /**
  Returns the step after the  provided step
@@ -539,7 +540,7 @@ ORK_CLASS_AVAILABLE
  @param step         The `ORKStep` before the one returned.
  @return        The `ORKStep` after `step`.
  */
-- (ORKStep *)stepAfterStep:(ORKStep *)step;
+- (nullable ORKStep *)stepAfterStep:(ORKStep *)step;
 
 /**
  Returns true if the step provided is instruction step and is the  first step in the task.

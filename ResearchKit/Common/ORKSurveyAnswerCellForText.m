@@ -45,6 +45,8 @@ static const CGFloat TextViewBottomPadding = 16.0;
 static const CGFloat TextViewMinimumHeight = 140.0;
 static const CGFloat ErrorLabelTopPadding = 4.0;
 static const CGFloat ErrorLabelBottomPadding = 10.0;
+static const CGFloat StandardSpacing = 8.0;
+
 
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
@@ -350,6 +352,7 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
     _textField.keyboardType = UIKeyboardTypeDefault;
     
     [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.accessibilityElements = @[_textField];
     
     [self addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
@@ -386,38 +389,16 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
     }
     
     constraints = [NSMutableArray new];
-    NSDictionary *metrics = @{@"errorLabelTopPadding":@(ErrorLabelTopPadding), @"errorLabelBottomPadding":@(ErrorLabelBottomPadding)};
-    NSDictionary *views = NSDictionaryOfVariableBindings(_textField, _errorLabel);
-    if (self.errorLabel.attributedText == nil) {
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|"
-                                                                                 options:NSLayoutFormatDirectionLeadingToTrailing | NSLayoutFormatAlignAllLeading
-                                                                                 metrics:nil
-                                                                                   views:views]];
-        
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_errorLabel(==0)]"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-    } else {
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-errorLabelTopPadding-[_errorLabel]-errorLabelBottomPadding-|"
-                                                                                 options:NSLayoutFormatDirectionLeadingToTrailing | NSLayoutFormatAlignAllLeading
-                                                                                 metrics:metrics
-                                                                                   views:views]];
-    }
+
+    [[_textField.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:StandardSpacing] setActive:YES];
+    [[_textField.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-StandardSpacing] setActive:YES];
+    [[_textField.topAnchor constraintEqualToAnchor:self.topAnchor constant:0.0] setActive:YES];
+    [[_textField.bottomAnchor constraintEqualToAnchor:_errorLabel.topAnchor constant:ErrorLabelTopPadding] setActive:YES];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
+    [[_errorLabel.leadingAnchor constraintEqualToAnchor:_textField.leadingAnchor constant:0.0] setActive:YES];
+    [[_errorLabel.trailingAnchor constraintEqualToAnchor:_textField.trailingAnchor constant:0.0] setActive:YES];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_errorLabel
-                                                        attribute:NSLayoutAttributeRight
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_textField
-                                                        attribute:NSLayoutAttributeRight
-                                                       multiplier:1.0
-                                                         constant:0.0]];
+    [[self.bottomAnchor constraintEqualToAnchor:_errorLabel.bottomAnchor constant:ErrorLabelBottomPadding] setActive:YES];
     
     // Get a full width layout
     [constraints addObject:[self.class fullWidthLayoutConstraint:_textField]];
@@ -474,14 +455,29 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
 }
 
 - (void)textFieldDidChange:(UITextField *)textField {
+    [self checkTextAndSetAnswer];
+}
+
+- (void)checkTextAndSetAnswer {
     NSString *text = self.textField.text;
-    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    
+    if (text.length && [answerFormat isAnswerValidWithString:text]) {
+        [self ork_setAnswer:text];
+    } else {
+        [self ork_setAnswer:ORKNullAnswerValue()];
+        [self removeErrorMessage];
+    }
 }
 
 - (void)updateErrorLabelWithMessage:(NSString *)message {
     NSString *separatorString = @":";
     NSString *stringtoParse = message ? : ORKLocalizedString(@"RANGE_ALERT_TITLE", @"");
     NSString *parsedString = [stringtoParse componentsSeparatedByString:separatorString].firstObject;
+    
+    if (![self.accessibilityElements containsObject:self.errorLabel]) {
+        self.accessibilityElements = [self.accessibilityElements arrayByAddingObject:self.errorLabel];
+    }
     
     if (@available(iOS 13.0, *)) {
         
@@ -508,6 +504,15 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
     [self setUpConstraints];
 }
 
+- (void)removeErrorMessage {
+    self.errorLabel.attributedText = nil;
+    if ([self.accessibilityElements containsObject:self.errorLabel]) {
+        NSMutableArray *tempArray = [self.accessibilityElements mutableCopy];
+        [tempArray removeObject:self.errorLabel];
+        self.accessibilityElements = [tempArray copy];
+    }
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -530,7 +535,7 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
         }
     }
     
-    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
+    [self checkTextAndSetAnswer];
     
     return YES;
 }
@@ -541,12 +546,17 @@ static const CGFloat ErrorLabelBottomPadding = 10.0;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.textField resignFirstResponder];
+    
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSString *text = self.textField.text;
-    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    
+    if (text.length && ![answerFormat isAnswerValidWithString:text]) {
+        [self updateErrorLabelWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
+    }
 }
 
 @end

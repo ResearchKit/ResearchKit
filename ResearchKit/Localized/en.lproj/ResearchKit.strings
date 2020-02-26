@@ -328,7 +328,7 @@
 
 /* dBHL Tone audiometry active task. */
 "dBHL_TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tap when you hear a tone.";
+"dBHL_TONE_AUDIOMETRY_TASK_TITLE_2" = "Tap the button when you hear a tone.";
 "dBHL_TONE_AUDIOMETRY_INTRO_TITLE" = "Tone & Volume";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_1" = "You will hear a series of tones.";
 "dBHL_TONE_AUDIOMETRY_BODY_ITEM_TEXT_2" = "When you hear a tone, tap on the button.";
