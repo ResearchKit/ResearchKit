@@ -217,7 +217,15 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
             [_navigationFooterView removeStyling];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
-            _questionView.isNavigationContainerScrollable = YES;
+            ORKQuestionStep *questionStep = (ORKQuestionStep *)self.step;
+            
+            if (questionStep && questionStep.questionType == ORKQuestionTypeScale) {
+                id<ORKScaleAnswerFormatProvider> formatProvider = (id<ORKScaleAnswerFormatProvider>)[questionStep impliedAnswerFormat];
+                
+                if (formatProvider && [formatProvider isVertical]) {
+                   [_questionView placeNavigationContainerInsideScrollView];
+                }
+            }
             
             ORKQuestionStep *step = [self questionStep];
             _navigationFooterView = _questionView.navigationFooterView;
@@ -360,6 +368,8 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     
     [self stepDidChange];
     
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (BOOL)showValidityAlertWithMessage:(NSString *)text {
@@ -403,6 +413,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     if (!scheduledRefresh) {
         [self refreshDefaults];
     }
+    
     if (_tableContainer) {
         [_tableContainer sizeHeaderToFit];
         [_tableContainer resizeFooterToFit];
@@ -627,6 +638,29 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     // FIXME: - add explicit property in QuestionStep to dictate this behavior
 //    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.isBeingReviewed;
     return NO;
+}
+
+#pragma mark NSNotification methods
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    
+    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect convertedKeyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+    
+    if (CGRectGetMaxY(_currentFirstResponderCell.frame) >= CGRectGetMinY(convertedKeyboardFrame)) {
+        
+        [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, CGRectGetHeight(convertedKeyboardFrame) - CGRectGetHeight(_currentFirstResponderCell.frame), 0)];
+        
+        NSIndexPath *currentFirstResponderCellIndex = [self.tableView indexPathForCell:_currentFirstResponderCell];
+        
+        if (currentFirstResponderCellIndex) {
+            [self.tableView scrollToRowAtIndexPath:currentFirstResponderCellIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self.tableView setContentInset:UIEdgeInsetsZero];
 }
 
 #pragma mark - ORKQuestionStepCustomViewDelegate

@@ -426,6 +426,11 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     return [super accessibilityValue];
 }
 
+- (BOOL)accessibilityActivate
+{
+    return [self becomeFirstResponder];
+}
+
 @end
 
 

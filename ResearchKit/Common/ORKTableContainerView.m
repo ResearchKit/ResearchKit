@@ -42,6 +42,7 @@
 #import "ORKBodyItem.h"
 #import "ORKBodyContainerView.h"
 
+
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
@@ -49,6 +50,7 @@
 
 @end
 
+static const CGFloat FooterViewHeightOffset = 20.0;
 
 @implementation ORKTableContainerView {
     CGFloat _leftRightPadding;
@@ -92,6 +94,7 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
     }
+    
     _tableView.backgroundColor = ORKColor(ORKBackgroundColorKey);
     _tableView.allowsSelection = YES;
     _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
@@ -209,26 +212,18 @@
 }
 
 - (void)resizeFooterToFit {
-//     This method would resize the tableFooterView, so that navigationContainerView can have appropriate height.
-    if (self.isNavigationContainerScrollable) { // only need to resize if navigationFooter is non-sticky to the bottom.
-        CGFloat navigationFooterHeight = self.navigationFooterView.bounds.size.height;
+    //     This method would resize the tableFooterView, so that navigationContainerView can have appropriate height.
+    if (self.isNavigationContainerScrollable && _tableView.bounds.size.height > 0 && self.navigationFooterView.bounds.size.height > 0 && ![self.navigationFooterView wasContinueOrSkipButtonJustPressed]) {
+        CGFloat minHeight = self.navigationFooterView.bounds.size.height;
         _tableView.tableFooterView = nil;
-        [_footerView removeFromSuperview]; //removing footerView so that table's contentSize does not account for navigationContainerView.
-        
-        /*
-          if tableViews content's height is less than tableView's height,the footerView will be pinned to the bottom of the screen. Otherwise, the footerView's height will be set the current navigationFooterView's height.
-         */
-        if (_tableView.contentSize.height < _tableView.bounds.size.height) {
-            [self pinNavigationContainerToBottom];
-        } else {
-            CGFloat requiredTableFooterHeight = navigationFooterHeight;
-            
-            CGRect footerBounds = CGRectMake(0.0, 0.0, _tableView.bounds.size.width, requiredTableFooterHeight);
-            [_footerView setBounds:footerBounds];
-            _tableView.tableFooterView = _footerView;
-        }
+        [_tableView layoutIfNeeded];
+        CGFloat tableViewHeight = self.tableView.bounds.size.height;
+        CGFloat newHeight = tableViewHeight - self.tableView.contentSize.height + FooterViewHeightOffset;
+        CGRect footerBounds = newHeight < minHeight ? CGRectMake(0.0, 0.0, _tableView.bounds.size.width, minHeight) : CGRectMake(0.0, 0.0, _tableView.bounds.size.width, newHeight);
+
+        [_footerView setBounds:footerBounds];
+        _tableView.tableFooterView = _footerView;
     }
-    
 }
 
 - (void)sizeHeaderToFit {

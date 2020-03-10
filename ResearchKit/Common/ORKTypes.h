@@ -368,6 +368,7 @@ typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
  */
 typedef NSString *ORKHeadphoneTypeIdentifier NS_STRING_ENUM;
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPods;
+ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierAirPodsPro;
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierEarPods;
 ORK_EXTERN ORKHeadphoneTypeIdentifier const ORKHeadphoneTypeIdentifierUnknown;
 

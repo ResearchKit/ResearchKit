@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03F7FD9F23959DD500432EF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */; };
 		3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9F91ABF682D00C2ABE5 /* Main.storyboard */; };
 		3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FC1ABF683700C2ABE5 /* LaunchScreen.xib */; };
 		3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E39B9FF1ABF683F00C2ABE5 /* Images.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		246DF9FF1BEADFDF00591E9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA021BEAE01700591E9A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246DFA031BEAE02100591E9A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */,
+				03F7FD9E23959DD500432EF6 /* SceneDelegate.swift */,
 				259E77171AFFD23B0070F786 /* Displaying Charts */,
 				3E838B891ABFD104006AE2D4 /* Displaying Results */,
 				3E838B881ABFD0E5006AE2D4 /* Presenting Tasks */,
@@ -334,6 +337,7 @@
 				BC9A273D1B82741900BDA84D /* ResultTableViewProviders.swift in Sources */,
 				BC9A273F1B82741900BDA84D /* TextImageTableViewCell.swift in Sources */,
 				86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */,
+				03F7FD9F23959DD500432EF6 /* SceneDelegate.swift in Sources */,
 				BC9A273C1B82741900BDA84D /* ImageTableViewCell.swift in Sources */,
 				BC9A27351B82740D00BDA84D /* TaskListViewController.swift in Sources */,
 				BC9A27341B82740D00BDA84D /* TaskListRow.swift in Sources */,

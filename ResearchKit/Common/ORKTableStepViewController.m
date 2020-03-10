@@ -70,6 +70,16 @@ ORKDefineStringKey(ORKBasicCellReuseIdentifier);
     [super viewWillAppear:animated];
 
     [self.taskViewController setRegisteredScrollView:_tableView];
+    
+    if (_tableContainer) {
+        [_tableContainer sizeHeaderToFit];
+        [_tableContainer resizeFooterToFit];
+        [_tableContainer layoutIfNeeded];
+    }
+    
+    if (_tableView) {
+        [_tableView reloadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

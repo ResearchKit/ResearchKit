@@ -32,6 +32,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKCustomStep.h"
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKStepContentView.h"
 
 @interface ORKCustomStepViewController ()
 
@@ -39,7 +40,7 @@
 
 @implementation ORKCustomStepViewController {
     UIScrollView *_scrollView;
-    UIView *_contentView;
+    ORKStepContentView *_contentView;
     NSMutableArray<NSLayoutConstraint *> *_constraints;
 }
 
@@ -56,12 +57,11 @@
     _contentView = nil;
     
     if (self.step && [self isViewLoaded]) {
-
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         [self.view addSubview:_scrollView];
                 
-        _contentView = [[UIView alloc] init];
+        _contentView = [[ORKStepContentView alloc] init];
         [_scrollView addSubview:_contentView];
         
         [_contentView addSubview:[self customStep].contentView];
@@ -232,6 +232,22 @@
 
 - (void)updateButtonStates {
     _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+}
+
+- (void)setScrollEnabled:(BOOL)scrollEnabled {
+    [_scrollView setScrollEnabled:scrollEnabled];
+}
+
+- (BOOL)isScrollEnabled {
+    return _scrollView.scrollEnabled;
+}
+
+- (void)setScrollViewOffset:(UIEdgeInsets)contentInset {
+    _scrollView.contentInset = contentInset;
+}
+
+- (void)scrollToPoint:(CGPoint)point {
+    [_scrollView setContentOffset:point animated:YES];
 }
 
 @end

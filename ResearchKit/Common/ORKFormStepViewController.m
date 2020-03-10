@@ -392,9 +392,16 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
-    [_tableContainer sizeHeaderToFit];
-    [_tableContainer resizeFooterToFit];
-    [_tableContainer layoutIfNeeded];
+    
+    if (_tableContainer) {
+        [_tableContainer sizeHeaderToFit];
+        [_tableContainer resizeFooterToFit];
+        [_tableContainer layoutIfNeeded];
+    }
+    
+    if (_tableView) {
+        [_tableView reloadData];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -1009,10 +1016,29 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 #pragma mark NSNotification methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    if ((_currentFirstResponderCell.frame.origin.y + _currentFirstResponderCell.frame.size.height) >= (self.view.frame.size.height - keyboardSize.height)) {
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height + TableViewYOffsetStandard, 0);
+    if (_currentFirstResponderCell) {
+        if ([_currentFirstResponderCell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
+            CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+               CGRect convertedKeyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+               
+               if (CGRectGetMaxY(_currentFirstResponderCell.frame) >= CGRectGetMinY(convertedKeyboardFrame)) {
+                   
+                   [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, CGRectGetHeight(convertedKeyboardFrame), 0)];
+                   
+                   NSIndexPath *currentFirstResponderCellIndex = [self.tableView indexPathForCell:_currentFirstResponderCell];
+                   
+                   if (currentFirstResponderCellIndex) {
+                       [self.tableView scrollToRowAtIndexPath:currentFirstResponderCellIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                   }
+               }
+        } else {
+            CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+            
+            if ((_currentFirstResponderCell.frame.origin.y + _currentFirstResponderCell.frame.size.height) >= (self.view.frame.size.height - keyboardSize.height)) {
+                _tableView.contentInset = UIEdgeInsetsMake(0, 0, keyboardSize.height + TableViewYOffsetStandard, 0);
+            }
+        }
     }
 }
 
@@ -1061,6 +1087,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
             choiceViewCell.cardViewStyle = [self formStep].cardViewStyle;
             choiceViewCell.isLastItem = isLastItem;
             choiceViewCell.isFirstItemInSectionWithoutTitle = isFirstItemWithSectionWithoutTitle;
+            [choiceViewCell layoutSubviews];
             cell = choiceViewCell;
 
         } else {
@@ -1430,7 +1457,9 @@ static NSString *const _ORKAnsweredSectionsRestoreKey = @"answeredSections";
     [self notifyDelegateOnResultChange];
     
     ORKFormItemCell *cell = (ORKFormItemCell *)[_tableView cellForRowAtIndexPath:indexPath];
-    [self handleAutoScrollForNonKeyboardCell:cell];
+    if (![cell isKindOfClass:[ORKChoiceOtherViewCell class]]) {
+        [self handleAutoScrollForNonKeyboardCell:cell];
+    }
     [self updateAnsweredSections];
 
     if (immediateNavigation) {

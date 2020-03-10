@@ -164,9 +164,11 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     }
     _questionLabel.numberOfLines = 0;
     _questionLabel.textAlignment = NSTextAlignmentLeft;
+    _questionLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
     _answerLabel.numberOfLines = 0;
     _answerLabel.textAlignment = NSTextAlignmentLeft;
+    _answerLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCallout];
     
     [_containerView addSubview:_questionLabel];
     [_containerView addSubview:_answerLabel];

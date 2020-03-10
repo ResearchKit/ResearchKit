@@ -37,6 +37,14 @@ ORK_CLASS_AVAILABLE
 
 - (BOOL)continueButtonEnabled;
 
+@property (nonatomic, getter=isScrollEnabled) BOOL scrollEnabled;
+
+- (void)updateButtonStates;
+
+- (void)setScrollViewOffset:(UIEdgeInsets)contentInset;
+
+- (void)scrollToPoint:(CGPoint)point;
+
 @end
 
 NS_ASSUME_NONNULL_END

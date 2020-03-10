@@ -40,6 +40,8 @@ ORK_EXTERN id ORKNullAnswerValue(void) ORK_AVAILABLE_DECL;
 
 @interface ORKAnswerFormat ()
 
+- (nonnull Class)questionResultClass;
+
 - (BOOL)isAnswerValid:(id)answer;
 
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text;
