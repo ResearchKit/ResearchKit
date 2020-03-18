@@ -7,12 +7,10 @@ The *ResearchKit™ framework* is an open source software framework that makes i
 for medical research or for other research projects.
 
 * [Getting Started](#gettingstarted)
-* Documentation:
-    * [Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html)
-    *  [Framework Reference](http://researchkit.org/docs/index.html)
+* [Documentation](docs/)
 * [Best Practices](../../wiki/best-practices)
 * [Contributing to ResearchKit](CONTRIBUTING.md)
-* [Website](http://researchkit.org) and [Blog](http://researchkit.org/blog.html)
+* [Website](https://www.researchandcare.org)
 * [ResearchKit BSD License](#license)
 
 Getting More Information
@@ -32,7 +30,7 @@ Surveys
 
 The *ResearchKit framework* provides a pre-built user interface for surveys, which can be presented
 modally on an *iPhone*, *iPod Touch*, or *iPad*. See
- *[Creating Surveys](http://researchkit.org/docs/docs/Survey/CreatingSurveys.html)* for more
+ *[Creating Surveys](docs/Survey/)* for more
  information.
 
 
@@ -41,7 +39,7 @@ Consent
 
 The *ResearchKit framework* provides visual consent templates that you can customize to explain the
 details of your research study and obtain a signature if needed.
-See *[Obtaining Consent](http://researchkit.org/docs/docs/InformedConsent/InformedConsent.html)* for
+See *[Obtaining Consent](docs/InformedConsent/)* for
 more information.
 
 
@@ -52,7 +50,7 @@ Some studies may need data beyond survey questions or the passive data collectio
 available through use of the *HealthKit* and *CoreMotion* APIs if you are programming for *iOS*.
 *ResearchKit*'s active tasks invite users to perform activities under semi-controlled conditions,
 while *iPhone* sensors actively collect data. See
-*[Active Tasks](http://researchkit.org/docs/docs/ActiveTasks/ActiveTasks.html)* for more
+*[Active Tasks](docs/ActiveTasks/)* for more
 information.
 ResearchKit active tasks are not diagnostic tools nor medical devices of any kind and output from those active tasks may not be used for diagnosis. Developers and researchers are responsible for complying with all applicable laws and regulations with respect to further development and use of the active tasks.
 

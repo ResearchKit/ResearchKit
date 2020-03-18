@@ -90,7 +90,6 @@
     [_amslerGridView addSubview:_freehandDrawingView];
    
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [panGestureRecognizer setMinimumNumberOfTouches:2];
     [self.activeStepView addGestureRecognizer:panGestureRecognizer];
     
     self.activeStepView.isAccessibilityElement = YES;

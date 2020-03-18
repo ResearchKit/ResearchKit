@@ -379,7 +379,7 @@ ORK_CLASS_AVAILABLE
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut;
 
 /**
  Creates a new task view controller that starts the task at the step that has the specified step identifier.
@@ -532,6 +532,7 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 - (void)flipToFirstPage;
+- (void)flipToLastPage;
 
 /**
  Returns the step after the  provided step
@@ -539,7 +540,7 @@ ORK_CLASS_AVAILABLE
  @param step         The `ORKStep` before the one returned.
  @return        The `ORKStep` after `step`.
  */
-- (ORKStep *)stepAfterStep:(ORKStep *)step;
+- (nullable ORKStep *)stepAfterStep:(ORKStep *)step;
 
 /**
  Returns true if the step provided is instruction step and is the  first step in the task.

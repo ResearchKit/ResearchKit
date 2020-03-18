@@ -32,47 +32,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    // MARK: Properties
-
-    var window: UIWindow?
-    
-    var tabBarController: UITabBarController {
-        return window!.rootViewController as! UITabBarController
-    }
-    
-    var taskListViewController: TaskListViewController {
-        let navigationController = tabBarController.viewControllers!.first as! UINavigationController
-
-        return navigationController.visibleViewController as! TaskListViewController
-    }
-    
-    var resultViewController: ResultViewController? {
-        let navigationController = tabBarController.viewControllers![1] as! UINavigationController
-
-        // Find the `ResultViewController` (if any) that's a view controller in the navigation controller.
-        return navigationController.viewControllers.first(where: { (someVC) -> Bool in
-            someVC is ResultViewController
-        }) as? ResultViewController
-    }
-    
-    // MARK: UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        
-        // When a task result has been finished, update the result view controller's task result.
-        taskListViewController.taskResultFinishedCompletionHandler = { [unowned self] taskResult in
-            /*
-                If we're displaying a new result, make sure the result view controller's
-                navigation controller is at the root.
-            */
-            if let navigationController = self.resultViewController?.navigationController {
-                navigationController.popToRootViewController(animated: false)
-            }
-            
-            // Set the result so we can display it.
-            self.resultViewController?.result = taskResult
-        }
-        
         return true
     }
 }

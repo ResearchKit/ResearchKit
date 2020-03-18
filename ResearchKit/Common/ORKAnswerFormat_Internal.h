@@ -85,8 +85,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKWeightAnswerFormat)
 
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
-- (nonnull Class)questionResultClass;
-
 - (nullable NSString *)stringForAnswer:(id)answer;
 
 @end

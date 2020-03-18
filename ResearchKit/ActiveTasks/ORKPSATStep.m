@@ -60,8 +60,8 @@
     
     NSTimeInterval const ORKPSATStimulusMinimumDuration = 0.2;
     
-    NSInteger const ORKPSATSerieMinimumLength = 10;
-    NSInteger const ORKPSATSerieMaximumLength = 120;
+    NSInteger const ORKPSATSeriesMinimumLength = 3;
+    NSInteger const ORKPSATSeriesMaximumLength = 120;
 
     NSTimeInterval totalDuration = (self.seriesLength + 1) * self.interStimulusInterval;
     if (self.stepDuration != totalDuration) {
@@ -83,9 +83,9 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"stimulus duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATStimulusMinimumDuration), @(self.interStimulusInterval)] userInfo:nil];
     }
     
-    if (self.seriesLength < ORKPSATSerieMinimumLength ||
-        self.seriesLength > ORKPSATSerieMaximumLength) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSerieMinimumLength), @(ORKPSATSerieMaximumLength)] userInfo:nil];
+    if (self.seriesLength < ORKPSATSeriesMinimumLength ||
+        self.seriesLength > ORKPSATSeriesMaximumLength) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"series length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSeriesMinimumLength), @(ORKPSATSeriesMaximumLength)] userInfo:nil];
     }
 }
 

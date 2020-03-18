@@ -132,6 +132,14 @@ ORK_CLASS_AVAILABLE
 - (instancetype)copyWithSteps:(NSArray <ORKStep *> *)steps identifier:(NSString *)identifier;
 
 /**
+ Append the passed steps to the end of the current task.
+ 
+ @param steps       The steps to append to the task.
+ */
+
+- (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps;
+
+/**
  Find the index of a given step.
  
  @param step        The step to look for

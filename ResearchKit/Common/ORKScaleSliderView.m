@@ -90,6 +90,7 @@ static const CGFloat kMargin = 25.0;
         _slider.minimumTrackTintColor = [UIColor systemBlueColor];
         _slider.userInteractionEnabled = YES;
         _slider.contentMode = UIViewContentModeRedraw;
+        self.accessibilityElements = [self.accessibilityElements arrayByAddingObject:_slider];
         [self addSubview:_slider];
         
         _slider.maximumValue = [formatProvider maximumNumber].floatValue;
@@ -149,6 +150,7 @@ static const CGFloat kMargin = 25.0;
                     [self addSubview:_dontKnowBackgroundView];
                     [self addSubview:_dividerView];
                     [self addSubview:_dontKnowButton];
+                    self.accessibilityElements = [self.accessibilityElements arrayByAddingObject:_dontKnowButton];
                 }
             }
             
@@ -873,15 +875,15 @@ static const CGFloat kMargin = 25.0;
 }
 
 - (NSInteger)accessibilityElementCount {
-    return (_slider != nil ? 1 : 0);
+    return self.accessibilityElements.count;
 }
 
 - (id)accessibilityElementAtIndex:(NSInteger)index {
-    return _slider;
+    return [self.accessibilityElements objectAtIndex:index];
 }
 
 - (NSInteger)indexOfAccessibilityElement:(id)element {
-    return (element == _slider ? 0 : NSNotFound);
+    return [self.accessibilityElements indexOfObject:element];
 }
 
 @end
