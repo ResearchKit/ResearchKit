@@ -43,6 +43,11 @@ ORK_CLASS_AVAILABLE
 @interface ORKRangeOfMotionResult : ORKResult
 
 /**
+ The physical orientation of the device.
+ */
+@property (nonatomic, assign) NSUInteger orientation;
+
+/**
  The angle (degrees) from the device reference position at the start position.
  */
 @property (nonatomic, assign) double start;

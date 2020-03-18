@@ -124,7 +124,9 @@
     ORKRangeOfMotionContentView *_contentView;
     UITapGestureRecognizer *_gestureRecognizer;
     CMAttitude *_referenceAttitude;
-    UIInterfaceOrientation _orientation;
+    //UIInterfaceOrientation _orientation;
+    UIDeviceOrientation _orientation;
+    //UIDeviceOrientation _orientation = [[UIDevice currentDevice] orientation];
 }
 
 @end
@@ -149,11 +151,11 @@
 - (void)calculateAndSetAngles {
     _startAngle = ([self getDeviceAngleInDegreesFromAttitude:_referenceAttitude]);
     
-    //This function calculates maximum and minimum angles recorded by the device
+    //This calculates maximum and minimum angles recorded by the device
     if (_newAngle > _maxAngle) {
         _maxAngle = _newAngle;
     }
-    if (_minAngle == 0.0 || _newAngle < _minAngle) {
+    if (_newAngle < _minAngle) {
         _minAngle = _newAngle;
     }
 }
@@ -170,7 +172,7 @@
     
     double angle = [self getDeviceAngleInDegreesFromAttitude:currentAttitude];
 
-    //This function shifts the range of angles reported by the device from +/-180 degrees to -90 to +270 degrees, which should be sufficient to cover all ahievable knee and shoulder ranges of motion
+    //This shifts the range of angles reported by the device from +/-180 degrees to -90 to +270 degrees, which should be sufficient to cover all ahievable knee and shoulder ranges of motion
     BOOL shiftAngleRange = angle > 90 && angle <= 180;
     if (shiftAngleRange) {
         _newAngle = fabs(angle) - 360;
@@ -188,17 +190,18 @@
  angle.
  */
 - (double)getDeviceAngleInDegreesFromAttitude:(CMAttitude *)attitude {
-    if (!_orientation) {
-        _orientation = [UIApplication sharedApplication].statusBarOrientation;
-    }
-    double angle;
-    if (UIInterfaceOrientationIsLandscape(_orientation)) {
+    //if (!_orientation) {
+       // _orientation = [UIApplication sharedApplication].statusBarOrientation;
+    //}
+    double angle = 0.0;
+    //if (UIInterfaceOrientationIsLandscape(_orientation)) {
+    if (UIDeviceOrientationIsLandscape(_orientation)) {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
         double y = attitude.quaternion.y;
         double z = attitude.quaternion.z;
         angle = radiansToDegrees(allOrientationsForRoll(x, w, y, z));
-    } else {
+    } else if (UIDeviceOrientationIsPortrait(_orientation)) {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
         double y = attitude.quaternion.y;
@@ -216,13 +219,53 @@
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
     
-    result.start = 90.0 - _startAngle;
-    result.finish = result.start - _newAngle;
-    //Because the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule), maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks
-    result.minimum = result.start - _maxAngle;
-    result.maximum = result.start - _minAngle;
-    result.range = fabs(result.maximum - result.minimum);
+    //int ORIENTATION_UNDETECTABLE = -2;
+    int ORIENTATION_UNSPECIFIED = -1;
+    int ORIENTATION_LANDSCAPE_LEFT = 0; // equivalent to LANDSCAPE in Android
+    int ORIENTATION_PORTRAIT = 1;
+    int ORIENTATION_LANDSCAPE_RIGHT = 2; // equivalent to REVERSE_LANDSCAPE in Android
+    int ORIENTATION_PORTRAIT_UPSIDE_DOWN = 3;  // equivalent to REVERSE_PORTRAIT in Android
     
+    if (UIDeviceOrientationLandscapeLeft == _orientation) {
+        result.orientation = ORIENTATION_LANDSCAPE_LEFT;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationPortrait == _orientation) {
+        result.orientation = ORIENTATION_PORTRAIT;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+    // In LandscapeRight device orientation, the task uses roll in the direction opposite to the original CoreMotion device axes (i.e. right hand rule). Therefore, maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks.
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationLandscapeRight == _orientation) {
+        result.orientation = ORIENTATION_LANDSCAPE_RIGHT;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+    // In Portrait device orientation, the task uses pitch in the direction opposite to the original CoreMotion device axes.
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) {
+        result.orientation = ORIENTATION_PORTRAIT_UPSIDE_DOWN;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationFaceUp == _orientation ||
+               UIDeviceOrientationFaceDown == _orientation) {
+        result.orientation = ORIENTATION_UNSPECIFIED;
+        result.start = NAN;
+        result.finish = NAN;
+        result.minimum = NAN;
+        result.maximum = NAN;
+        result.range = NAN;
+    }
+               
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return stepResult;
