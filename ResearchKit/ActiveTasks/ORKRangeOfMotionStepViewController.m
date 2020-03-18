@@ -124,9 +124,9 @@
     ORKRangeOfMotionContentView *_contentView;
     UITapGestureRecognizer *_gestureRecognizer;
     CMAttitude *_referenceAttitude;
+    
     //UIInterfaceOrientation _orientation;
-    UIDeviceOrientation _orientation;
-    //UIDeviceOrientation _orientation = [[UIDevice currentDevice] orientation];
+    UIDeviceOrientation _orientation; // changed for this
 }
 
 @end
@@ -136,13 +136,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _contentView = [ORKRangeOfMotionContentView new];
     _contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _contentView;
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
+    
+    // Initiate orientation notifications
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    // Captures the initial device orientation
+    _orientation = [[UIDevice currentDevice] orientation];
 }
-    //This function records the angle of the device when the screen is tapped
+
+- (void)viewWillDisappear:(BOOL)animated { // added this
+    [super viewWillDisappear:animated];
+ 
+    // Ends orientation notifications
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([[UIDevice currentDevice] isGeneratingDeviceOrientationNotifications]) {
+        [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    }
+}
+
+    //Records the angle of the device when the screen is tapped
 - (void)handleTap:(UIGestureRecognizer *)sender {
     [self calculateAndSetAngles];
     [self finish];
@@ -228,16 +245,16 @@
     
     if (UIDeviceOrientationLandscapeLeft == _orientation) {
         result.orientation = ORIENTATION_LANDSCAPE_LEFT;
-        result.start = 90.0 - _startAngle;
-        result.finish = result.start - _newAngle;
-        result.minimum = result.start - _maxAngle;
-        result.maximum = result.start - _minAngle;
+        result.start = 90.0 - _startAngle; // TODO
+        result.finish = result.start - _newAngle; // TODO
+        result.minimum = result.start - _maxAngle; // TODO
+        result.maximum = result.start - _minAngle; // TODO
         result.range = fabs(result.maximum - result.minimum);
     } else if (UIDeviceOrientationPortrait == _orientation) {
         result.orientation = ORIENTATION_PORTRAIT;
         result.start = 90.0 - _startAngle;
         result.finish = result.start - _newAngle;
-    // In LandscapeRight device orientation, the task uses roll in the direction opposite to the original CoreMotion device axes (i.e. right hand rule). Therefore, maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks.
+    // In Landscape Right device orientation, the task uses roll in the direction opposite to the original CoreMotion device axes (i.e. right hand rule). Therefore, maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks.
         result.minimum = result.start - _maxAngle;
         result.maximum = result.start - _minAngle;
         result.range = fabs(result.maximum - result.minimum);
@@ -251,13 +268,14 @@
         result.range = fabs(result.maximum - result.minimum);
     } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) {
         result.orientation = ORIENTATION_PORTRAIT_UPSIDE_DOWN;
-        result.start = 90.0 - _startAngle;
-        result.finish = result.start - _newAngle;
-        result.minimum = result.start - _maxAngle;
-        result.maximum = result.start - _minAngle;
+        result.start = 90.0 - _startAngle; // TODO
+        result.finish = result.start - _newAngle; // TODO
+        result.minimum = result.start - _maxAngle; // TODO
+        result.maximum = result.start - _minAngle; // TODO
         result.range = fabs(result.maximum - result.minimum);
-    } else if (UIDeviceOrientationFaceUp == _orientation ||
-               UIDeviceOrientationFaceDown == _orientation) {
+    //} else if (UIDeviceOrientationFaceUp == _orientation ||
+    //           UIDeviceOrientationFaceDown == _orientation) {
+    } else if (!UIDeviceOrientationIsValidInterfaceOrientation(_orientation)) {
         result.orientation = ORIENTATION_UNSPECIFIED;
         result.start = NAN;
         result.finish = NAN;
