@@ -200,7 +200,7 @@ enum ResultRow {
         storyboard.
     */
     enum TableViewCellIdentifier: String {
-        case `default` =         "Default"
+        case `default` =        "Default"
         case noResultSet =      "NoResultSet"
         case noChildResults =   "NoChildResults"
         case textImage =        "TextImage"
