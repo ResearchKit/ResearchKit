@@ -45,7 +45,7 @@ ORK_CLASS_AVAILABLE
 /**
  The physical orientation of the device.
  */
-@property (nonatomic, assign) NSUInteger orientation;
+@property (nonatomic, assign) NSInteger orientation;
 
 /**
  The angle (degrees) from the device reference position at the start position.
