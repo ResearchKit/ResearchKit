@@ -142,7 +142,7 @@
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
     
-     // Initiates orientation notifications
+     // Initiate orientation notifications
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     _orientation = [[UIDevice currentDevice] orientation]; // captures the initial device orientation
 }
@@ -183,7 +183,6 @@
         _referenceAttitude = motion.attitude;
     }
     CMAttitude *currentAttitude = [motion.attitude copy];
-
     [currentAttitude multiplyByInverseOfAttitude:_referenceAttitude];
     
     double angle = [self getDeviceAngleInDegreesFromAttitude:currentAttitude];
@@ -252,7 +251,6 @@
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
     
-    //int ORIENTATION_UNDETECTABLE = -2;
     int ORIENTATION_UNSPECIFIED = -1;
     int ORIENTATION_LANDSCAPE_LEFT = 0; // equivalent to LANDSCAPE in Android
     int ORIENTATION_PORTRAIT = 1;
@@ -289,7 +287,6 @@
         result.minimum = result.start + _minAngle;
         result.maximum = result.start + _maxAngle;
         result.range = fabs(result.maximum - result.minimum);
-    //} else if (UIDeviceOrientationFaceUp == _orientation || UIDeviceOrientationFaceDown == _orientation) {
     } else if (!UIDeviceOrientationIsValidInterfaceOrientation(_orientation)) {
         result.orientation = ORIENTATION_UNSPECIFIED;
         result.start = NAN;
