@@ -43,13 +43,53 @@
     ORKStepResult *stepResult = [super result];
     
     ORKRangeOfMotionResult *result = [[ORKRangeOfMotionResult alloc] initWithIdentifier:self.step.identifier];
-    result.start = 90.0 - _startAngle;
-    result.finish = result.start - _newAngle;
-    //Because the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule), maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks
-    result.minimum = result.start - _maxAngle;
-    result.maximum = result.start - _minAngle;
-    result.range = fabs(result.maximum - result.minimum);
-
+    
+    int ORIENTATION_UNSPECIFIED = -1;
+    int ORIENTATION_LANDSCAPE_LEFT = 0; // equivalent to LANDSCAPE in Android
+    int ORIENTATION_PORTRAIT = 1;
+    int ORIENTATION_LANDSCAPE_RIGHT = 2; // equivalent to REVERSE_LANDSCAPE in Android
+    int ORIENTATION_PORTRAIT_UPSIDE_DOWN = 3;  // equivalent to REVERSE_PORTRAIT in Android
+    
+    if (UIDeviceOrientationLandscapeLeft == _orientation) {
+        result.orientation = ORIENTATION_LANDSCAPE_LEFT;
+        result.start = 90.0 + _startAngle;
+        result.finish = result.start + _newAngle;
+        result.minimum = result.start + _minAngle;
+        result.maximum = result.start + _maxAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationPortrait == _orientation) {
+        result.orientation = ORIENTATION_PORTRAIT;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+    // In Portrait device orientation, the task uses pitch in the direction opposite to the original CoreMotion device axes (i.e. right hand rule). Therefore, maximum and minimum angles are reported the 'wrong' way around for the knee and shoulder tasks.
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationLandscapeRight == _orientation) {
+        result.orientation = ORIENTATION_LANDSCAPE_RIGHT;
+        result.start = 90.0 - _startAngle;
+        result.finish = result.start - _newAngle;
+    // In Landscape Right device orientation, the task uses roll in the direction opposite to the original CoreMotion device axes.
+        result.minimum = result.start - _maxAngle;
+        result.maximum = result.start - _minAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) {
+        result.orientation = ORIENTATION_PORTRAIT_UPSIDE_DOWN;
+        result.start = -90 - _startAngle;
+        result.finish = result.start + _newAngle;
+        result.minimum = result.start + _minAngle;
+        result.maximum = result.start + _maxAngle;
+        result.range = fabs(result.maximum - result.minimum);
+    //} else if (UIDeviceOrientationFaceUp == _orientation || UIDeviceOrientationFaceDown == _orientation) {
+    } else if (!UIDeviceOrientationIsValidInterfaceOrientation(_orientation)) {
+        result.orientation = ORIENTATION_UNSPECIFIED;
+        result.start = NAN;
+        result.finish = NAN;
+        result.minimum = NAN;
+        result.maximum = NAN;
+        result.range = NAN;
+    }
+               
     stepResult.results = [self.addedResults arrayByAddingObject:result] ? : @[result];
     
     return stepResult;
