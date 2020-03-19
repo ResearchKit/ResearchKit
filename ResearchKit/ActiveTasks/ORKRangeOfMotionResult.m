@@ -92,8 +92,7 @@
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    //return [NSString stringWithFormat:@"<%@: start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, self.start, self.finish, self.minimum, self.maximum, self.range];
-    return [NSString stringWithFormat:@"<%@: orientation: %lu; start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, (unsigned long)self.orientation, self.start, self.finish, self.minimum, self.maximum, self.range];
+    return [NSString stringWithFormat:@"<%@: orientation: %li; start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, (long)self.orientation, self.start, self.finish, self.minimum, self.maximum, self.range];
 }
 
 @end
