@@ -124,9 +124,7 @@
     ORKRangeOfMotionContentView *_contentView;
     UITapGestureRecognizer *_gestureRecognizer;
     CMAttitude *_referenceAttitude;
-    
-    //UIInterfaceOrientation _orientation;
-    UIDeviceOrientation _orientation; // changed for this
+    UIDeviceOrientation _orientation;
 }
 
 @end
@@ -143,13 +141,12 @@
     _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.activeStepView addGestureRecognizer:_gestureRecognizer];
     
-    // Initiate orientation notifications
+     // Initiates orientation notifications
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    // Captures the initial device orientation
-    _orientation = [[UIDevice currentDevice] orientation];
+    _orientation = [[UIDevice currentDevice] orientation]; // captures the initial device orientation
 }
 
-- (void)viewWillDisappear:(BOOL)animated { // added this
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
  
     // Ends orientation notifications
@@ -159,7 +156,7 @@
     }
 }
 
-    //Records the angle of the device when the screen is tapped
+   //Records the angle of the device when the screen is tapped
 - (void)handleTap:(UIGestureRecognizer *)sender {
     [self calculateAndSetAngles];
     [self finish];
@@ -207,11 +204,7 @@
  angle.
  */
 - (double)getDeviceAngleInDegreesFromAttitude:(CMAttitude *)attitude {
-    //if (!_orientation) {
-       // _orientation = [UIApplication sharedApplication].statusBarOrientation;
-    //}
     double angle = 0.0;
-    //if (UIInterfaceOrientationIsLandscape(_orientation)) {
     if (UIDeviceOrientationIsLandscape(_orientation)) {
         double x = attitude.quaternion.x;
         double w = attitude.quaternion.w;
