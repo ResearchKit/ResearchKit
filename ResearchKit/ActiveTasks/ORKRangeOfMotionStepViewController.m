@@ -210,7 +210,7 @@
         } else {
             _newAngle = angle;
         }
-    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) {
+    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) { // TODO
        BOOL shiftAngleRange = angle < -90 && angle >= -180;
        if (shiftAngleRange) {
            _newAngle = 360 - fabs(angle);
@@ -218,7 +218,6 @@
            _newAngle = angle;
        }
     }
-    
     [self calculateAndSetAngles];
 }
 
