@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2016, Darren Levy. All rights reserved.
- Copyright (c) 2020, David Evans. All rights reserved.
+ Copyright (c) 2020, David W. Evans. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -208,7 +208,7 @@
         } else {
             _newAngle = angle;
         }
-    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) { // TODO
+    } else if (UIDeviceOrientationPortraitUpsideDown == _orientation) {
        BOOL shiftAngleRange = angle < -90 && angle >= -180;
        if (shiftAngleRange) {
            _newAngle = 360 - fabs(angle);
