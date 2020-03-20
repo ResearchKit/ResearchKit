@@ -221,6 +221,103 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
+ The forward bending range of motion task returns a task that measures the range of motion during standing forward bending, while holding the device against the chest with either the left or right hand.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param limbOption              With which hand the device is being held during the task.
+ @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ */
++ (ORKOrderedTask *)forwardBendingRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                    options:(ORKPredefinedTaskOption)options;
+
+
+/**
+ The trunk rotation range of motion task returns a task that measures the range of motion during seated trunk rotation (twisting) to the left and right sides (or vice versa), while holding the device against the chest with both hands.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param limbOption              In which direction the trunk is being rotated during the task.
+ @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ */
++ (ORKOrderedTask *)trunkRotationRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                       limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                          options:(ORKPredefinedTaskOption)options;
+
+
+/**
+ The side bending range of motion task returns a task that measures the range of motion during standing side (lateral) bending to the left and right sides (or vice versa), while holding the device against the chest with the opposite (contralateral) hand.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param limbOption              Towards which side the trunk is being bent during the task.
+ @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param options                 Options that affect the features of the predefined task.
+ */
++ (ORKOrderedTask *)sideBendingRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                       limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                          options:(ORKPredefinedTaskOption)options;
+
+
+/**
+ The neck flexion range of motion task returns a task that measures the range of motion of the head during seated neck flexion, while holding the device against the side of the face with either the left or right hand.
+     
+     @param identifier              The task identifier to use for this task, appropriate to the study.
+     @param limbOption              With which hand the device is being held during the task.
+     @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+     @param options                 Options that affect the features of the predefined task.
+     */
++ (ORKOrderedTask *)neckFlexionRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                       limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                          options:(ORKPredefinedTaskOption)options;
+    
+    
+/**
+ The neck extension range of motion task returns a task that measures the range of motion of the head during seated neck extension, while holding the device against the side of the face with either the left or right hand.
+     
+     @param identifier              The task identifier to use for this task, appropriate to the study.
+     @param limbOption              With which hand the device is being held during the task.
+     @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+     @param options                 Options that affect the features of the predefined task.
+     */
++ (ORKOrderedTask *)neckExtensionRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                    limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                       options:(ORKPredefinedTaskOption)options;
+    
+/**
+ The neck rotation range of motion task returns a task that measures the range of motion of the head during seated neck rotation (turning the head) to the left or right side, while holding the device against the side of the face with the opposite (contralateral) hand.
+     
+     @param identifier              The task identifier to use for this task, appropriate to the study.
+     @param limbOption              In which direction the neck is being rotated during the task.
+     @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+     @param options                 Options that affect the features of the predefined task.
+     */
++ (ORKOrderedTask *)neckRotationRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                      limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                          intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                         options:(ORKPredefinedTaskOption)options;
+    
+    
+/**
+ The neck side bending range of motion task returns a task that measures the range of motion of the head during seated side (lateral) bending to the left or right side, while holding the device against the side of the face with the opposite (contralateral) hand.
+     
+     @param identifier              The task identifier to use for this task, appropriate to the study.
+     @param limbOption              Towards which side the neck is being bent during the task.
+     @param intendedUseDescription  A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+     @param options                 Options that affect the features of the predefined task.
+     */
++ (ORKOrderedTask *)neckSideBendingRangeOfMotionTaskWithIdentifier:(NSString *)identifier
+                                                    limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                       options:(ORKPredefinedTaskOption)options;
+    
+    
+/**
  Returns a predefined task that enables an audio recording WITH a check of the audio level.
  
  In an audio recording task, the participant is asked to make some kind of sound
