@@ -125,7 +125,6 @@
     ORKRangeOfMotionContentView *_contentView;
     UITapGestureRecognizer *_gestureRecognizer;
     CMAttitude *_referenceAttitude;
-    UIDeviceOrientation _orientation;
 }
 
 @end
