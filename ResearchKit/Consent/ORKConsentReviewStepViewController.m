@@ -218,6 +218,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     [formStep setFormItems:formItems];
     
     formStep.optional = NO;
+    formStep.useCardView = NO;
     
     ORKTextQuestionResult *givenNameDefault = [[ORKTextQuestionResult alloc] initWithIdentifier:_GivenNameIdentifier];
     givenNameDefault.textAnswer = _signatureFirst;
