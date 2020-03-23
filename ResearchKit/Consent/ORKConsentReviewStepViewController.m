@@ -207,12 +207,10 @@ static NSString *const _FamilyNameIdentifier = @"family";
     givenNameFormItem.optional = NO;
     familyNameFormItem.optional = NO;
     
-    ORKFormItem *sectionTitleFormItem = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"CONSENT_NAME_SECTION_TITLE", nil)];
-    
-    NSArray *formItems = @[sectionTitleFormItem, givenNameFormItem, familyNameFormItem];
+    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
     if (ORKCurrentLocalePresentsFamilyNameFirst())
     {
-        formItems = @[sectionTitleFormItem, familyNameFormItem, givenNameFormItem];
+        formItems = @[familyNameFormItem, givenNameFormItem];
     }
     
     [formStep setFormItems:formItems];
