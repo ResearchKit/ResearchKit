@@ -207,14 +207,15 @@ static NSString *const _FamilyNameIdentifier = @"family";
     givenNameFormItem.optional = NO;
     familyNameFormItem.optional = NO;
     
-    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
+    ORKFormItem *sectionTitleFormItem = [[ORKFormItem alloc] initWithSectionTitle:@""];
+    
+    NSArray *formItems = @[sectionTitleFormItem, givenNameFormItem, familyNameFormItem];
     if (ORKCurrentLocalePresentsFamilyNameFirst())
     {
-        formItems = @[familyNameFormItem, givenNameFormItem];
+        formItems = @[sectionTitleFormItem, familyNameFormItem, givenNameFormItem];
     }
     
     [formStep setFormItems:formItems];
-    formStep.useCardView = NO;
     
     formStep.optional = NO;
     
