@@ -214,6 +214,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     }
     
     [formStep setFormItems:formItems];
+    formStep.useCardView = NO;
     
     formStep.optional = NO;
     
