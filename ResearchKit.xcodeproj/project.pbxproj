@@ -86,7 +86,6 @@
 		14D3F09C225BCA8100A3962D /* ORKBorderedButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3F09B225BCA8100A3962D /* ORKBorderedButtonTests.swift */; };
 		14E79040226A5F72009D8083 /* ORKStepViewControllerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E7903F226A5F72009D8083 /* ORKStepViewControllerHelpers.swift */; };
 		14F7AC8B2269035200D52F41 /* ORKStepViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F7AC8A2269035200D52F41 /* ORKStepViewControllerTests.swift */; };
-		168EEAB6230B6F9E003FD2FA /* plist-to-strings.py in Resources */ = {isa = PBXBuildFile; fileRef = 168EEAB1230B6F9E003FD2FA /* plist-to-strings.py */; };
 		1B4B95B81F5F012E006B629F /* ORKWeightPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4B95B71F5F012E006B629F /* ORKWeightPicker.m */; };
 		1B4B95BA1F5F014E006B629F /* ORKWeightPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B4B95B91F5F014E006B629F /* ORKWeightPicker.h */; };
 		241A2E871B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -981,8 +980,6 @@
 		14D3F09B225BCA8100A3962D /* ORKBorderedButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKBorderedButtonTests.swift; sourceTree = "<group>"; };
 		14E7903F226A5F72009D8083 /* ORKStepViewControllerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKStepViewControllerHelpers.swift; sourceTree = "<group>"; };
 		14F7AC8A2269035200D52F41 /* ORKStepViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ORKStepViewControllerTests.swift; sourceTree = "<group>"; };
-		168EEAAF230B6F9E003FD2FA /* find_headers.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = find_headers.rb; sourceTree = "<group>"; };
-		168EEAB1230B6F9E003FD2FA /* plist-to-strings.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "plist-to-strings.py"; sourceTree = "<group>"; };
 		1B4B95B71F5F012E006B629F /* ORKWeightPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWeightPicker.m; sourceTree = "<group>"; };
 		1B4B95B91F5F014E006B629F /* ORKWeightPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWeightPicker.h; sourceTree = "<group>"; };
 		241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeStepViewController_Internal.h; sourceTree = "<group>"; };
@@ -2005,15 +2002,6 @@
 			name = ORKButtonTests;
 			sourceTree = "<group>";
 		};
-		168EEAAE230B6F9E003FD2FA /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				168EEAAF230B6F9E003FD2FA /* find_headers.rb */,
-				168EEAB1230B6F9E003FD2FA /* plist-to-strings.py */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
 		2429D56D1BBB52E4003A512F /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -2211,7 +2199,6 @@
 		3FFF18341829DB1D00167070 = {
 			isa = PBXGroup;
 			children = (
-				168EEAAE230B6F9E003FD2FA /* scripts */,
 				B11DF3B21AA109C8009E76D2 /* docs */,
 				86B623AF19520B770074CD3C /* ResearchKit */,
 				86CC8EA61AC09383001CCD89 /* ResearchKitTests */,
@@ -4350,7 +4337,6 @@
 				86C40DFA1A8D7C5C00081FAC /* MovieTintShader.fsh in Resources */,
 				E2EE530022E7735700F34987 /* VolumeCalibration.wav in Resources */,
 				B1A860EA1A9693C400EA57B7 /* consent_01@2x.m4v in Resources */,
-				168EEAB6230B6F9E003FD2FA /* plist-to-strings.py in Resources */,
 				71B7B4DA20AA91D400C5768A /* retspl_AIRPODS.plist in Resources */,
 				71F3B28021001DED00FB1C41 /* splMeter_sensitivity_offset.plist in Resources */,
 				E26E32D622E75FB7004F42EC /* Noise.wav in Resources */,
