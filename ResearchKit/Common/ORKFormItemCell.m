@@ -201,7 +201,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
             fillColor = [UIColor secondarySystemGroupedBackgroundColor];
             borderColor = UIColor.separatorColor;
         } else {
-            fillColor = [UIColor ork_borderGrayColor];
+            fillColor = [UIColor whiteColor];
             borderColor = [UIColor ork_midGrayTintColor];
         }
         [_contentMaskLayer setFillColor:[fillColor CGColor]];
