@@ -116,7 +116,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
             }
             borderColor = UIColor.separatorColor;
         } else {
-            _fillColor = [UIColor ork_borderGrayColor];
+            _fillColor = [UIColor whiteColor];
             borderColor = [UIColor ork_midGrayTintColor];
         }
         [_contentMaskLayer setFillColor:[_fillColor CGColor]];
@@ -313,7 +313,12 @@ static const CGFloat LabelCheckViewPadding = 10.0;
     _useCardView = useCardView;
     _leftRightMargin = ORKCardLeftRightMarginForWindow(self.window);
     _topBottomMargin = CardTopBottomMargin;
-    [self setBackgroundColor:[UIColor clearColor]];
+    if (@available(iOS 13.0, *)) {
+        [self setBackgroundColor:[UIColor clearColor]];
+    } else {
+        [self setBackgroundColor:[UIColor ork_borderGrayColor]];
+    }
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self setupConstraints];
 }
@@ -345,7 +350,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         _animationLayer.zPosition = 1.0f;
         [_contentMaskLayer addSublayer:_animationLayer];
         
-        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"fillColor"];
         
         if (@available(iOS 13.0, *))
         {
@@ -370,9 +375,9 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         animation.removedOnCompletion = YES;
         animation.delegate = self;
         
-        [_animationLayer addAnimation:animation forKey:@"backgroundColor"];
+        [_animationLayer addAnimation:animation forKey:@"fillColor"];
         
-        _animationLayer.backgroundColor = _fillColor.CGColor;
+        _animationLayer.fillColor = _fillColor.CGColor;
     }
 }
 
