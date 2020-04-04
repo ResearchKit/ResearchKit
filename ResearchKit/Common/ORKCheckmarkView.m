@@ -108,9 +108,7 @@ static const CGFloat CheckmarkViewBorderWidth = 2.0;
         //        FIXME: Need to be replaced.
         if (@available(iOS 13.0, *)) {
             self.tintColor = self.window.tintColor ? : UIColor.systemBlueColor;
-//            self.tintColor = UIColor.systemBlueColor;
         } else {
-//            self.backgroundColor = [self tintColor];
             self.backgroundColor = self.window.tintColor ? : [self tintColor];
             self.tintColor = UIColor.whiteColor;
         }
@@ -137,7 +135,6 @@ static const CGFloat CheckmarkViewBorderWidth = 2.0;
     } else {
         self.layer.cornerRadius = _dimension * 0.5;
         self.layer.borderWidth = CheckmarkViewBorderWidth;
-//        self.layer.borderColor = self.tintColor.CGColor;
         self.layer.borderColor = self.window.tintColor.CGColor ? : self.tintColor.CGColor;
         self.layer.masksToBounds = YES;
     }
