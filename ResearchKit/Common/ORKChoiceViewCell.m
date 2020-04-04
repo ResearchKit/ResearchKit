@@ -347,7 +347,7 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         _animationLayer = [CAShapeLayer layer];
         [_animationLayer setOpaque:NO];
         _animationLayer.frame = CGRectMake(_foreLayerBounds.origin.x, _foreLayerBounds.origin.y, _foreLayerBounds.size.width, _foreLayerBounds.size.height - 1.0);
-        _animationLayer.path = _contentMaskLayer.path
+        _animationLayer.path = _contentMaskLayer.path;
         _animationLayer.zPosition = 1.0f;
         [_contentMaskLayer addSublayer:_animationLayer];
         
