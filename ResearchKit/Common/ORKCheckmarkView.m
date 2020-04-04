@@ -135,7 +135,8 @@ static const CGFloat CheckmarkViewBorderWidth = 2.0;
     } else {
         self.layer.cornerRadius = _dimension * 0.5;
         self.layer.borderWidth = CheckmarkViewBorderWidth;
-        self.layer.borderColor = self.tintColor.CGColor;
+//        self.layer.borderColor = self.tintColor.CGColor;
+        self.layer.borderColor = self.window.tintColor.CGColor ? : self.tintColor.CGColor;
         self.layer.masksToBounds = YES;
     }
     
