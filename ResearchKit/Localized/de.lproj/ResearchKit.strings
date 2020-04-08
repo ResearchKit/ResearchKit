@@ -64,9 +64,9 @@
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Freigabe-Optionen";
-"CONSENT_SHARE_WIDELY_%@" = "Meine Daten mit %@ und qualifizierten Forschern auf der ganzen Welt teilen";
-"CONSENT_SHARE_ONLY_%@" = "Meine Daten nur mit „%@“ teilen";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ erhält die Daten, die Sie bereitstellen oder die durch Ihre Nutzung von Medopad entstehen.\n\nMedopad kann anonymisierte Daten, d. h. ohne Informationen wie Namen, mit Dritten innerhalb und außerhalb des Vereinigten Königreichs zu Forschungs- und gewerblichen Zwecken teilen.";
+"CONSENT_SHARE_WIDELY_%@" = "Teilen Sie meine Gesundheitsdaten mit meinem medizinischen Fachpersonal und mit Forschungsinstitutionen weltweit";
+"CONSENT_SHARE_ONLY_%@" = "Teilen Sie meine Gesundheitsdaten nur mit meinem medizinischen Fachpersonal";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Ihre Gesundheitsdaten können Ihnen und Ihrem medizinischen Fachpersonal helfen, informiertere Entscheidungen zu treffen.\n\nMit Ihrer ausdrücklichen Zustimmung kann Medopad anonymisierte Gesundheitsdaten mit Dritten innerhalb oder außerhalb der EU zu Forschungszwecken teilen und die Forschungsresultate zu gesundheitlichen Zwecken nutzen.";
 "LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
 
 /* Lines beneath typewritten signatures on documents.*/
