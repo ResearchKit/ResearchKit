@@ -44,7 +44,7 @@
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "Welcome";
 "CONSENT_SECTION_DATA_GATHERING" = "Data Gathering";
-"CONSENT_SECTION_PRIVACY" = "Privacy";
+"CONSENT_SECTION_PRIVACY" = "Data Access";
 "CONSENT_SECTION_DATA_USE" = "Data Use";
 "CONSENT_SECTION_STUDY_SURVEY" = "Study Survey";
 "CONSENT_SECTION_STUDY_TASKS" = "Study Tasks";
@@ -64,9 +64,9 @@
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive the data provided by you or generated through your use of Medopad.\n\nMedopad may share anonymised data i.e. without information such as name with third parties in and outside UK for research and commerical purposes.";
+"CONSENT_SHARE_WIDELY_%@" = "Share my data with the clinical team and researchers";
+"CONSENT_SHARE_ONLY_%@" = "Only share my data with the clinical team";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Your health data can help you and your health professionals to make more informed decisions.\n\nMedopad may use and share de-identified health data with third parties worldwide for research purposes and use the research results for its own purposes. Your data will never be sold to third parties.";
 "LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
 
 /* Lines beneath typewritten signatures on documents.*/

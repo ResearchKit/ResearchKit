@@ -43,13 +43,13 @@
 
 /* Consent section titles. */
 "CONSENT_SECTION_WELCOME" = "Willkommen";
-"CONSENT_SECTION_DATA_GATHERING" = "Datenerfassung";
-"CONSENT_SECTION_PRIVACY" = "Datenschutz";
-"CONSENT_SECTION_DATA_USE" = "Datennutzung";
+"CONSENT_SECTION_DATA_GATHERING" = "Datenerhebung";
+"CONSENT_SECTION_PRIVACY" = "Zugang zu den Daten";
+"CONSENT_SECTION_DATA_USE" = "Nutzung der Daten";
 "CONSENT_SECTION_STUDY_SURVEY" = "Studienumfrage";
 "CONSENT_SECTION_STUDY_TASKS" = "Studienaufgaben";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Zeitaufwand";
-"CONSENT_SECTION_WITHDRAWING" = "Zurücktreten";
+"CONSENT_SECTION_WITHDRAWING" = "Widerrufsrecht";
 "CONSENT_LEARN_MORE_TITLE" = "Weitere Infos";
 
 /* Consent section learn more */
@@ -63,10 +63,10 @@
 "LEARN_MORE_WITHDRAWING" = "Weitere Infos zum Zurücktreten";
 
 /* Consent sharing step */
-"CONSENT_SHARING_TITLE" = "Freigabe-Optionen";
-"CONSENT_SHARE_WIDELY_%@" = "Teilen Sie meine Gesundheitsdaten mit meinem medizinischen Fachpersonal und mit Forschungsinstitutionen weltweit";
+"CONSENT_SHARING_TITLE" = "Freigabeoptionen";
+"CONSENT_SHARE_WIDELY_%@" = "Teilen Sie meine Gesundheitsdaten mit meinem medizinischen Fachpersonal und mit Wissenschaftler/innen";
 "CONSENT_SHARE_ONLY_%@" = "Teilen Sie meine Gesundheitsdaten nur mit meinem medizinischen Fachpersonal";
-"CONSENT_SHARING_DESCRIPTION_%@" = "Ihre Gesundheitsdaten können Ihnen und Ihrem medizinischen Fachpersonal helfen, informiertere Entscheidungen zu treffen.\n\nMit Ihrer ausdrücklichen Zustimmung kann Medopad anonymisierte Gesundheitsdaten mit Dritten innerhalb oder außerhalb der EU zu Forschungszwecken teilen und die Forschungsresultate zu gesundheitlichen Zwecken nutzen.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Ihre Gesundheitsdaten können Ihnen und Ihrem medizinischen Fachpersonal helfen Entscheidungen zu treffen.\n\nMit Ihrer Zustimmung kann Medopad anonymisierte Gesundheitsdaten mit Dritten weltweit zu Forschungszwecken teilen und die Forschungsresultate für eigene Zwecke nutzen. Ihre Daten werden nie an Dritte verkauft.";
 "LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
 
 /* Lines beneath typewritten signatures on documents.*/
