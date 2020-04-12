@@ -52,7 +52,8 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
-     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent {
+     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
+    isForCOVID:(BOOL)isForCOVID {
     self = [super initWithIdentifier:identifier];
     if (self) {
         if ( investigatorShortDescription.length == 0 ) {
@@ -65,14 +66,24 @@
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"localizedLearnMoreHTMLContent should not be empty." userInfo:nil];
         }
         
-        self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
-                             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@", nil), investigatorShortDescription] value:@(YES)],
-                               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
-                               ]];
+        if (isForCOVID) {
+            self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
+            @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_COVID", nil) value:@(YES)],
+              [ORKTextChoice choiceWithText:ORKLocalizedString(@"CONSENT_SHARE_ONLY_COVID", nil) value:@(NO)],
+              ]];
+            self.text = ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_COVID", nil);
+        } else {
+            self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
+            @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@", nil), investigatorShortDescription] value:@(YES)],
+              [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
+              ]];
+            self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
+        }
+        
         self.optional = NO;
         self.useSurveyMode = NO;
         self.title = ORKLocalizedString(@"CONSENT_SHARING_TITLE", nil);
-        self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
+        
         self.showsProgress = NO;
         self.localizedLearnMoreHTMLContent = localizedLearnMoreHTMLContent;
     }

@@ -59,7 +59,8 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
-     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent;
+     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
+        isForCOVID:(BOOL) isForCOVID;
 
 /// Localized HTML content to present in the Learn More section for the step.
 @property (nonatomic, copy) NSString *localizedLearnMoreHTMLContent;

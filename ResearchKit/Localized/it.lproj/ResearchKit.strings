@@ -67,6 +67,9 @@
 "CONSENT_SHARE_WIDELY_%@" = "Condividi i miei dati con %@ e con ricercatori qualificati a livello mondiale";
 "CONSENT_SHARE_ONLY_%@" = "Condividi i miei dati solo con %@";
 "CONSENT_SHARING_DESCRIPTION_%@" = "Partecipando allo studio, invierai a %@ i dati raccolti.\n\nUna condivisione più ampia di questi dati codificati (senza rivelare informazioni sensibili come il tuo nome) può aiutare questo studio ed eventuali ricerche future.";
+"CONSENT_SHARE_WIDELY_COVID" = "Condividi i miei dati con e con ricercatori qualificati a livello mondiale";
+"CONSENT_SHARE_ONLY_COVID" = "Condividi i miei dati solo con";
+"CONSENT_SHARING_DESCRIPTION_COVID" = "Partecipando allo studio, invierai a i dati raccolti.\n\nUna condivisione più ampia di questi dati codificati (senza rivelare informazioni sensibili come il tuo nome) può aiutare questo studio ed eventuali ricerche future.";
 "LEARN_MORE_CONSENT_SHARING" = "Scopri di più sulla condivisione dei dati";
 
 /* Lines beneath typewritten signatures on documents.*/
