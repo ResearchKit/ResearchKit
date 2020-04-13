@@ -34,7 +34,7 @@
 "CONSENT_NAME_FAMILY" = "Nachname";
 "CONSENT_NAME_PLACEHOLDER" = "Erforderlich";
 "CONSENT_REVIEW_TITLE" = "Überprüfen";
-"CONSENT_REVIEW_INSTRUCTION" = "Lies das Formular unten nochmals durch und tippe auf „Akzeptieren“, wenn du bereit zum Fortfahren bist.";
+"CONSENT_REVIEW_INSTRUCTION" = "Lesen Sie das Formular unten nochmals durch und tippen Sie auf \"Akzeptieren\", wenn Sie bereit zum Fortfahren sind.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Überprüfen";
 "CONSENT_SIGNATURE_TITLE" = "Unterschrift";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Unterzeichne mit deinem Finger in dem Feld unten.";
