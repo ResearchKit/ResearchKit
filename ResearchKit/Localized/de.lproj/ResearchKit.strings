@@ -69,7 +69,7 @@
 "CONSENT_SHARING_DESCRIPTION_%@" = "Die Studiendaten deiner Teilnahme an dieser Studie werden an %@ gesendet.\n\nDurch Teilen deiner codierten Studiendaten (ohne Informationen wie deinem Namen) mit einer breiteren Basis können diese und künftige Studien profitieren.";
 "CONSENT_SHARE_WIDELY_COVID" = "Teilen Sie meine Gesundheitsdaten mit meinem medizinischen Fachpersonal und mit Wissenschaftler/innen";
 "CONSENT_SHARE_ONLY_COVID" = "Teilen Sie meine Gesundheitsdaten nur mit meinem medizinischen Fachpersonal";
-"CONSENT_SHARING_DESCRIPTION_COVID" = "Ihre Gesundheitsdaten können Ihnen und Ihrem medizinischen Fachpersonal helfen Entscheidungen zu treffen.\n\nMit Ihrer Zustimmung kann Medopad anonymisierte Gesundheitsdaten mit Dritten weltweit zu Forschungszwecken teilen und die Forschungsresultate für eigene Zwecke nutzen. Ihre Daten werden nie an Dritte verkauft.";
+"CONSENT_SHARING_DESCRIPTION_COVID" = "Ihre Gesundheitsdaten können Ihnen und Ihrem medizinischen Fachpersonal helfen Entscheidungen zu treffen. Mit Ihrer Zustimmung kann Ihre Klinik anonymisierte Gesundheitsdaten zu Forschungszwecken nutzen.\n\nMit Ihrer Zustimmung kann Medopad anonymisierte Gesundheitsdaten mit Dritten weltweit zu Forschungszwecken teilen und die Forschungsresultate für eigene Zwecke nutzen. Ihre Daten werden nie an Dritte verkauft.";
 "LEARN_MORE_CONSENT_SHARING" = "Weitere Infos zur Datenfreigabe";
 
 /* Lines beneath typewritten signatures on documents.*/
