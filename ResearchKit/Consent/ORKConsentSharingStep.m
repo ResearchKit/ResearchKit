@@ -53,6 +53,7 @@
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
      localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent isForCOVID:(BOOL)isForCOVID
+    summary:(NSString *)summary
     choice1Text:(NSString *)choice1Text
     choice2Text:(NSString *)choice2Text {
     self = [super initWithIdentifier:identifier];
@@ -86,7 +87,10 @@
             @[[ORKTextChoice choiceWithText:choice1Text value:@(YES)],
               [ORKTextChoice choiceWithText:choice2Text value:@(NO)],
               ]];
-            self.text = localizedLearnMoreHTMLContent;
+        }
+        
+        if (summary.length > 0) {
+            self.text = summary;
         }
         
         self.optional = NO;

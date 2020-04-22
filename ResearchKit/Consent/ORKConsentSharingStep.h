@@ -60,7 +60,8 @@ ORK_CLASS_AVAILABLE
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
      localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
-                        isForCOVID:(BOOL) isForCOVID
+                        isForCOVID:(BOOL)isForCOVID
+    summary:(NSString *)summary
     choice1Text:(NSString *)choice1Text
     choice2Text:(NSString *)choice2Text;
 
