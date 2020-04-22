@@ -72,13 +72,11 @@
             @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_COVID", nil) value:@(YES)],
               [ORKTextChoice choiceWithText:ORKLocalizedString(@"CONSENT_SHARE_ONLY_COVID", nil) value:@(NO)],
               ]];
-            self.text = ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_COVID", nil);
         } else {
             self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
             @[[ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_WIDELY_%@", nil), investigatorShortDescription] value:@(YES)],
               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
               ]];
-            self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
         }
         
         if (choice1Text.length > 0 && choice2Text.length > 0) {
@@ -87,6 +85,8 @@
               [ORKTextChoice choiceWithText:choice2Text value:@(NO)],
               ]];
         }
+        
+        self.text = localizedLearnMoreHTMLContent;
         
         self.optional = NO;
         self.useSurveyMode = NO;
