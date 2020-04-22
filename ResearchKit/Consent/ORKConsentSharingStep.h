@@ -60,7 +60,9 @@ ORK_CLASS_AVAILABLE
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
      localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
-        isForCOVID:(BOOL) isForCOVID;
+                        isForCOVID:(BOOL) isForCOVID
+    choice1Text:(NSString *)choice1Text
+    choice2Text:(NSString *)choice2Text;
 
 /// Localized HTML content to present in the Learn More section for the step.
 @property (nonatomic, copy) NSString *localizedLearnMoreHTMLContent;

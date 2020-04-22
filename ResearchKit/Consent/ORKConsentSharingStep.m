@@ -52,8 +52,9 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
-     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
-    isForCOVID:(BOOL)isForCOVID {
+     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent isForCOVID:(BOOL)isForCOVID
+    choice1Text:(NSString *)choice1Text
+    choice2Text:(NSString *)choice2Text {
     self = [super initWithIdentifier:identifier];
     if (self) {
         if ( investigatorShortDescription.length == 0 ) {
@@ -78,6 +79,13 @@
               [ORKTextChoice choiceWithText:[NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARE_ONLY_%@", nil), investigatorLongDescription] value:@(NO)],
               ]];
             self.text = [NSString localizedStringWithFormat:ORKLocalizedString(@"CONSENT_SHARING_DESCRIPTION_%@", nil), investigatorLongDescription];
+        }
+        
+        if (choice1Text.length > 0 && choice2Text.length > 0) {
+            self.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
+            @[[ORKTextChoice choiceWithText:choice1Text value:@(YES)],
+              [ORKTextChoice choiceWithText:choice2Text value:@(NO)],
+              ]];
         }
         
         self.optional = NO;
