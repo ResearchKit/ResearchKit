@@ -64,9 +64,9 @@
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data with %@ and qualified researchers worldwide";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
+"CONSENT_SHARE_WIDELY_%@" = "I agree to the %@ using my data and consent to Medopad using my de-identified data";
+"CONSENT_SHARE_ONLY_%@" = "I only agree to the %@ using my data";
+"CONSENT_SHARING_DESCRIPTION_%@" = "Your health data can help you and your health and care professionals to make more informed decisions. The %@ will use your personal identifiable health data for your own healthcare purposes only. The %@ may use your de-identified health data for healthcare research purposes and to improve %@ services.\n\nMedopad may use and share de-identified health data with third parties worldwide for research purposes and use the research results for its own purposes. Your data will never be sold to third parties.";
 "CONSENT_SHARE_WIDELY_COVID" = "Share my data with the clinical team and researchers";
 "CONSENT_SHARE_ONLY_COVID" = "Only share my data with the clinical team";
 "CONSENT_SHARING_DESCRIPTION_COVID" = "Your health data can help you and your health professionals to make more informed decisions.\n\nMedopad may use and share de-identified health data with third parties worldwide for research purposes and use the research results for its own purposes. Your data will never be sold to third parties.";
