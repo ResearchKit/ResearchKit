@@ -200,8 +200,9 @@
 
 
 @implementation ORKFormSectionHeaderView {
-    ORKFormSectionTitleLabel *_label;
     BOOL _firstSection;
+@package
+    ORKFormSectionTitleLabel *_label;
 }
 
 - (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView firstSection:(BOOL)firstSection {
