@@ -280,6 +280,7 @@
     _signingView.wrapperView.signatureView.delegate = nil;
     
     _signingView = [ORKConsentSigningView new];
+    [_signingView placeNavigationContainerInsideScrollView];
     _signingView.wrapperView.signatureView.delegate = self;
     _signingView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _signingView.frame = self.view.bounds;

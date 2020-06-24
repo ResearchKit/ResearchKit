@@ -1,1 +1,9 @@
-{"_class":"ORKNavigableOrderedTask","steps":[],"stepModifiers":{},"identifier":"","skipStepNavigationRules":{},"shouldReportProgress":false,"stepNavigationRules":{}}
+{
+    "_class": "ORKNavigableOrderedTask",
+    "steps": [],
+    "stepModifiers": {},
+    "identifier": "",
+    "skipStepNavigationRules": {},
+    "shouldReportProgress": false,
+    "stepNavigationRules": {}
+}

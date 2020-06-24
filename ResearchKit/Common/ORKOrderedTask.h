@@ -134,7 +134,7 @@ ORK_CLASS_AVAILABLE
 /**
  Append the passed steps to the end of the current task.
  
- @param steps       The steps to append to the task.
+ @param additionalSteps The steps to append to the task.
  */
 
 - (void)appendSteps:(NSArray<ORKStep *> *)additionalSteps;

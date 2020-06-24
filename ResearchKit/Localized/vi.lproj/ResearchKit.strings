@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Hoạt động này sẽ đánh giá trí nhớ không gian ngắn hạn của bạn bằng cách yêu cầu bạn lặp lại thứ tự sáng lên của %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "những bông hoa";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "những bông hoa";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Một số %@ sẽ sáng lên lần lượt. Hãy chạm vào các %@ này theo thứ tự sáng lên của chúng.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Một số %@ sẽ sáng lên lần lượt. Hãy chạm vào các %@ này theo thứ tự ngược với thứ tự sáng lên của chúng.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Một số %@ sẽ sáng lên lần lượt. Hãy chạm vào các %@ này theo thứ tự sáng lên của chúng.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Một số %@ sẽ sáng lên lần lượt. Hãy chạm vào các %@ này theo thứ tự ngược với thứ tự sáng lên của chúng.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Để bắt đầu, chạm Bắt đầu, sau đó theo dõi chặt chẽ.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Điểm";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Kiểm tra Bảng %@ Lỗ";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một miếng gỗ vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Cả tay trái và phải của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Cả tay trái và phải của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Cả tay phải và trái của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";

@@ -73,7 +73,7 @@
 - (void)stepDidChange {
     [super stepDidChange];
     _hrFormatter = [[NSNumberFormatter alloc] init];
-    _hrFormatter.numberStyle = kCFNumberFormatterNoStyle;
+    _hrFormatter.numberStyle = NSNumberFormatterNoStyle;
     _contentView.timeLeft = self.fitnessStep.stepDuration;
     
 }

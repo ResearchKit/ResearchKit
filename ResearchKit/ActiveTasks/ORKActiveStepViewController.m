@@ -492,7 +492,7 @@
         _hasSpokenHalfwayCountdown = YES;
         
         NSDateComponentsFormatter *secondsFormatter = [NSDateComponentsFormatter new];
-        secondsFormatter.unitsStyle = NSDateFormatterFullStyle;
+        secondsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
         secondsFormatter.allowedUnits = NSCalendarUnitSecond;
         secondsFormatter.formattingContext = NSFormattingContextDynamic;
         secondsFormatter.maximumUnitCount = 1;

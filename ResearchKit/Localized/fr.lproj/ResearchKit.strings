@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Cette activité évalue votre mémoire spatiale à court terme en vous demandant de répéter l’ordre dans lequel les images de %@ s’éclairent.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "fleurs";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "fleurs";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Certaines des images de %@ s’allumeront une par une. Touchez ces images de %@ dans l’ordre dans lequel elles s’allument.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Certaines des images de %@ s’allumeront une par une. Touchez ces images de %@ dans l’ordre inverse dans lequel elles s’allument.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Certaines des images de %@ s’allumeront une par une. Touchez ces images de %@ dans l’ordre dans lequel elles s’allument.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Certaines des images de %@ s’allumeront une par une. Touchez ces images de %@ dans l’ordre inverse dans lequel elles s’allument.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Pour commencer, touchez Démarrer puis regardez avec attention.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Résultat";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test des %@ chevilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité évalue le fonctionnement de vos extrémités supérieures. Vous devez placer un rond dans un trou et répéter cette opération %@ fois.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Votre main gauche et droite seront toutes les deux testées.\nVous devez récupérer l’élément aussi rapidement que possible, le placer dans le trou et, une fois l’opération répétée %@ fois, le retirer de nouveau %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Votre main gauche et droite seront toutes les deux testées.\nVous devez récupérer l’élément aussi rapidement que possible, le placer dans le trou et, une fois l’opération répétée %@ fois, le retirer de nouveau %@ fois.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Votre main droite et gauche seront toutes les deux testées.\nVous devez récupérer l’élément aussi rapidement que possible, le placer dans le trou et, une fois l’opération répétée %@ fois, le retirer de nouveau %@ fois.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";

@@ -171,6 +171,8 @@ ORKSpeechRecognizerLocale const ORKSpeechRecognizerLocaleChineseTW = @"zh-TW";
 
 const double ORKDoubleDefaultValue = DBL_MAX;
 
+const CGFloat ORKCGFloatDefaultValue = CGFLOAT_MAX;
+
 @implementation ORKDontKnowAnswer
 
 + (instancetype)new {

@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tämä aktiiviteetti mittaa lyhytaikaista avaruudellista muistiasi. Toista järjestys, jossa %@ syttyy.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kukkia";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kukkia";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ samassa järjestyksessä kuin ne syttyivät.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ käänteisessä syttymisjärjestyksessä.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ samassa järjestyksessä kuin ne syttyivät.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Näet yksi kerrallaan syttyviä %@. Napauta %@ käänteisessä syttymisjärjestyksessä.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Aloita napauttamalla Aloita ja katso tarkasti.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Tulos";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ reiän palikkatesti";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan palikan reikään. Tämä toistetaan %@ kertaa.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sekä oikea että vasen käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";

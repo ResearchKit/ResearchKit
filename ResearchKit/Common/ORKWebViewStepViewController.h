@@ -30,8 +30,8 @@
 
 @import UIKit;
 @import WebKit;
-#import "ORKStepViewController.h"
-#import "ORKSignatureView.h"
+#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKSignatureView.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class ORKCustomSignatureFooterView;
+
 /**
  The `ORKWebViewStepViewController` class is a step view controller subclass
  used to manage a web view step (`ORKWebViewStep`).
@@ -53,11 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 ORK_CLASS_AVAILABLE
-@interface ORKWebViewStepViewController : ORKStepViewController<WKScriptMessageHandler, WKNavigationDelegate, ORKSignatureViewDelegate, UIScrollViewDelegate>
+@interface ORKWebViewStepViewController : ORKStepViewController<WKScriptMessageHandler, WKNavigationDelegate, ORKSignatureViewDelegate,  ORKCustomSignatureFooterViewStatusDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, weak, nullable) id<ORKWebViewStepDelegate> webViewDelegate;
-
+@property (nonatomic) CGFloat bottomOffset;
+@property (nonatomic) BOOL shouldScrollAfterSignature;
 - (void)startPreload;
+
+- (void)scrollSignatureViewRect:(CGRect)rect toPoint:(CGPoint)endPoint animated:(BOOL)animated;
 
 @end
 

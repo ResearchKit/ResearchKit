@@ -169,7 +169,7 @@ ORK_CLASS_AVAILABLE
 /**
  Array of `ORKBodyItem` type items to display textual info.
  */
-@property (nonatomic) NSArray<ORKBodyItem *> *bodyItems;
+@property (nonatomic, nullable) NSArray<ORKBodyItem *> *bodyItems;
 
 /**
  An 'NSTextAlignment' that controls the text alignment for text bodyItems.
@@ -191,6 +191,7 @@ ORK_CLASS_AVAILABLE
  in order to include disclaimer, copyright, etc. that is important to display in the step but
  should not distract from the main purpose of the step.
  */
+
 @property (nonatomic, copy, nullable) NSString *footnote;
 
 /**

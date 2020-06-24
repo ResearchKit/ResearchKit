@@ -55,7 +55,6 @@
 @end
 
 @implementation ORKInstructionStepViewController {
-    ORKNavigationContainerView *_navigationFooterView;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
 

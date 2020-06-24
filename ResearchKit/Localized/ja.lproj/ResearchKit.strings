@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "このアクティビティでは、%@が明るく表示される順番を再現することで、短期空間記憶を測定します。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と同じ順番でタップしてください。";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と逆の順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と同じ順番でタップしてください。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "%@のいくつかが1つずつ明るく表示されます。それらの%@を明るく表示された順番と逆の順番でタップしてください。";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてから、じっと見てください。";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "スコア";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";

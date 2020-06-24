@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Această activitate vă măsoară memoria spațială pe termen scurt, solicitându-vă să repetați ordinea în care se aprind simbolurile reprezentând %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flori";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flori";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea în care s‑au aprins.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea inversă aprinderii lor.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea în care s‑au aprins.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Unele dintre simbolurile de %@ se vor aprinde pe rând. Apăsați pe %@ în ordinea inversă aprinderii lor.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Pentru a începe, apăsați “Start”, apoi priviți cu atenție.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Scor";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Testul cu %@ cercuri";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Această activitate vă măsoară funcționalitatea extremităților superioare, solicitându‑vă să plasați un cerc într‑un orificiu. Va trebui să repetați acțiunea de %@ ori.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Va fi testată atât mâna stângă, cât și mâna dreaptă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Va fi testată atât mâna stângă, cât și mâna dreaptă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Va fi testată atât mâna dreaptă, cât și mâna stângă.\nTrebuie să ridicați cercul cât mai rapid posibil, să-l plasați în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți din nou de %@ ori.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";

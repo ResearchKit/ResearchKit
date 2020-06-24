@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView;
-- (NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index;
+- (nullable NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index;
 
 @end
 
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 - (void)towerOfHanoiTowerViewWasSelected:(ORKTowerOfHanoiTowerView *)towerView;
-- (ORKTowerOfHanoiTowerView *)towerOfHanoiHighlightedTowerView;
+- (nullable ORKTowerOfHanoiTowerView *)towerOfHanoiHighlightedTowerView;
 
 @end
 

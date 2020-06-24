@@ -29,10 +29,10 @@
  */
 
 
-#import "ORKStepHeaderView.h"
-#import "ORKHeadlineLabel.h"
-#import "ORKSubheadlineLabel.h"
+#import <ResearchKit/ORKStepHeaderView.h>
+#import <ResearchKit/ORKHeadlineLabel.h>
 #import <ResearchKit/ORKTextButton.h>
+#import <ResearchKit/ORKSubheadlineLabel.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

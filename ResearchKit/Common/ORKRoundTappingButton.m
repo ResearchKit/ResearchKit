@@ -76,6 +76,7 @@ static const CGFloat RoundTappingButtonDefaultDiameter = 104;
                                                     multiplier:1.0
                                                       constant:_diameter];
     [NSLayoutConstraint activateConstraints:@[_widthConstraint, _heightConstraint]];
+
 }
 
 - (void)tintColorDidChange {

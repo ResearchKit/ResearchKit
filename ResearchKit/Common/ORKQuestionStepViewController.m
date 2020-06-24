@@ -236,7 +236,6 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
             [_navigationFooterView updateContinueAndSkipEnabled];
             
             [self.view addSubview:_questionView];
-
             if (_customQuestionView) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
@@ -425,6 +424,11 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     }
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)answerDidChange {
     if ([self.questionStep formatRequiresTableView] && !_customQuestionView) {
         [self.tableView reloadData];
@@ -468,8 +472,6 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     _visible = YES;
     
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
-    // TODO: Remove reloadData later.
-    [_tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -514,6 +516,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     _navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
 }
+
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];

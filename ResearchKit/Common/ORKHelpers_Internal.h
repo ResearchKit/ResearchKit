@@ -32,8 +32,8 @@
 
 @import UIKit;
 #import <ResearchKit/ORKTypes.h>
-#import "ORKHelpers_Private.h"
-#import "ORKErrors.h"
+#import <ResearchKit/ORKHelpers_Private.h>
+#import <ResearchKit/ORKErrors.h>
 #import <Foundation/Foundation.h>
 #import <os/log.h>
 

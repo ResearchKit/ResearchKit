@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKChoiceViewCell.h"
+#import <ResearchKit/ORKChoiceViewCell.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

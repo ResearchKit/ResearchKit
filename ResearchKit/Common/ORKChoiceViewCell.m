@@ -543,6 +543,9 @@ static const CGFloat LabelCheckViewPadding = 10.0;
         _textView = [[ORKAnswerTextView alloc] init];
         _textView.delegate = self;
         _textView.translatesAutoresizingMaskIntoConstraints = NO;
+        if (@available(iOS 13.0, *)) {
+            _textView.backgroundColor = [UIColor secondarySystemGroupedBackgroundColor];
+        }
         [self.containerView addSubview:_textView];
         [self updateTextView];
     }

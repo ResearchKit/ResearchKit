@@ -226,6 +226,9 @@
 "BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
 "BUTTON_COPYRIGHT" = "Copyright";
 "BUTTON_CLOSE" = "Close";
+"BUTTON_START_TEST" = "Start Test";
+"BUTTON_PRACTICE_TEST" = "Practice Test";
+"BUTTON_PRACTICE_AGAIN" = "Practice Again";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";
@@ -350,6 +353,8 @@
 "dBHL_ALERT_TITLE_CANCEL_TEST" = "Cancel Test";
 "dBHL_ALERT_TEXT" = "Reconnect your AirPods or EarPods to take this test.";
 "dBHL_PROGRESS_COMPLETION_%@" = "%@ Complete";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS" = "TEST IN PROGRESS";
+"dBHL_TONE_AUDIOMETRY_TESTING_IN_PROGRESS_FMT" = "TEST IN PROGRESS \U2022 %@";
 
 /* Headphones. */
 "AIRPODS" = "AirPods";
@@ -368,8 +373,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "This activity measures your short-term spatial memory by asking you to repeat the order in which %@ light up.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flowers";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flowers";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Some of the %@ will light up one at a time. Tap those %@ in the same order they lit up.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Some of the %@ will light up one at a time. Tap those %@ in the reverse of the order they lit up.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "To begin, tap Get Started, then watch closely.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Score";
@@ -491,8 +496,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Both your left and right hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@%@" = "Both your right and left hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Put the peg in the hole using your left hand.";
@@ -514,7 +519,7 @@
 "TREMOR_TEST_INTRO_2_DETAIL_3_TASK" = "three tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_4_TASK" = "four tasks";
 "TREMOR_TEST_INTRO_2_DETAIL_5_TASK" = "five tasks";
-"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap next to proceed.";
+"TREMOR_TEST_ACTIVE_STEP_INTRO_TEXT" = "Tap Next to proceed.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO" = "Prepare to hold your phone in your lap.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_LEFT" = "Prepare to hold your phone in your lap with your LEFT hand.";
 "TREMOR_TEST_ACTIVE_STEP_IN_LAP_INTRO_RIGHT" = "Prepare to hold your phone in your lap with your RIGHT hand.";
@@ -569,6 +574,7 @@
 "SPEECH_RECOGNITION_QUESTION_TEXT" = "Edit transcript text to correct any misinterpretation of the speech.";
 "SPEECH_RECOGNITION_TRANSCRIPTION_LABEL" = "Your transcription will appear here.";
 "SPEECH_RECOGNITION_FAILED" = "Speech recognition failed.";
+"SPEECH_RECOGNITION_FAILED_TRY_AGAIN" = "Could not record. Tap to try again.";
 "SPEECH_RECOGNITION_INIT_FAILURE" = "Failed to initialize speech recognition.";
 
 /* Speech In Noise active task. */
@@ -602,6 +608,15 @@
 "TOUCH_ABILITY_ROTATION_TITLE" = "Rotation Ability";
 "TOUCH_ABILITY_ROTATION_TEXT" = "Please use two finger rotating gesture to readjust the arrow to align with dashed arrow.  Once completing and lifting up your fingers, arrow will disappear. Please await for cube and box to appear before next trial.";
 
+/* ORKFrontFacingCameraStepContentView */
+"FRONT_FACING_CAMERA_START_TITLE" = "Start Recording";
+"FRONT_FACING_CAMERA_STOP_TITLE" = "Stop Recording";
+"FRONT_FACING_CAMERA_START_TIME" = "0:00";
+"FRONT_FACING_CAMERA_REVIEW_OPTIONS_TITLE" = "Video Options";
+"FRONT_FACING_CAMERA_REVIEW_VIDEO" = "Review Video";
+"FRONT_FACING_CAMERA_RETRY_VIDEO" = "Delete and Retry";
+"FRONT_FACING_CAMERA_SUBMIT_VIDEO" = "Submit Video";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
@@ -619,7 +634,7 @@
 "ENVIRONMENTSPL_THRESHOLD" = "Threshold: %@ dBA";
 "ENVIRONMENTSPL_OK" = "Background Noise OK";
 "ENVIRONMENTSPL_NOISE" = "Too Much Background Noise";
-"ENVIRONMENTSPL_TITLE_2" = "Find a quiet place";
+"ENVIRONMENTSPL_TITLE_2" = "Find a Quiet Place";
 "ENVIRONMENTSPL_INTRO_TEXT_2" = "To ensure accuracy, this test should be taken in a quiet environment.";
 
 /* Secondary Task Step*/
@@ -632,8 +647,19 @@
 "SLIDER_MOVE_SLIDER_FOR_VALUE" = "Move slider to enter value";
 "SLIDER_I_DONT_KNOW" = "I Don’t Know";
 
+/* Word Count Error */
+"MAX_WORD_COUNT_ERROR" = "You’ve reached the maximum character count";
+
 /* Review Step */
 "REVIEW_STEP_PAGE" = "Page";
+
+/* Request Health Data Step */
+"REQUEST_HEALTH_DATA_STEP_VIEW_TITLE" = "Health App Data";
+"REQUEST_HEALTH_DATA_STEP_VIEW_DESCRIPTION" = "The study is requesting data from the Health app";
+"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_DEFAULT" = "Review Request";
+"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_CONNECTED" = "Requested";
+"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_NOT_SUPPORTED" = "HealthKit not supported by this device";
+"REQUEST_HEALTH_DATA_STEP_BUTTON_STATE_ERROR" = "Encountered error";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
@@ -714,6 +740,10 @@
 
 /* This contains the visual text, followed by a VoiceOver-specific description. */
 "AX_TRAILMAKING_CALL_TO_ACTION_VOICEOVER" = "%@ Using VoiceOver, the buttons in the test will be directly tappable.";
+
+"AX_SES_TOP" = "Top";
+"AX_SES_BOTTOM" = "Bottom";
+"AX_SES_PERCENT" = "Percent";
 
 /* Restore error */
 "RESTORE_ERROR_CANNOT_DECODE" = "Cannot decode restoreData for initialization";

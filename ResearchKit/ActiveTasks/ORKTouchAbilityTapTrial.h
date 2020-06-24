@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKTouchAbilityTrial.h"
+#import <ResearchKit/ORKTouchAbilityTrial.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

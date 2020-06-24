@@ -34,13 +34,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static const CGFloat ORKStepContainerTopCustomContentPaddingStandard = 20.0;
+static const CGFloat ORKStepContainerNavigationFooterTopPaddingStandard = 10.0;
+static const CGFloat ORKContentBottomPadding = 19.0;
+static const CGFloat ORKBodyItemScrollPadding = 24.0;
+static const CGFloat ImageViewMaxHeightAndWidth = 175.0;
+
 @class ORKStepContentView;
 @interface ORKStepContainerView ()
 
 @property (nonatomic) UIView *customContentView;
 @property (nonatomic, assign) BOOL customContentFillsAvailableSpace;
+@property (nonatomic) BOOL scrollEnabled;
+@property (nonatomic) BOOL pinNavigationContainer;
 
 - (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding;
+- (void)setCustomContentView:(UIView *)customContentView withTopPadding:(CGFloat)topPadding sidePadding:(CGFloat)sidePadding;
+- (void)setScrollViewCustomContentInset:(CGFloat)scrollViewCustomContentInset;
+- (void)setScrollViewInset:(UIEdgeInsets)inset;
+- (void)scrollToPoint:(CGPoint)point;
+- (CGFloat)contentHeight;
 
 @end
 

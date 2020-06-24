@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ez a tevékenység a rövidtávú térbeli memóriát vizsgálja. Ehhez ismételje meg a felvillanó %@ képeinek sorrendjét.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "virágok";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "virágok";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésükkel azonos sorrendben.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésük fordított sorrendjében.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésükkel azonos sorrendben.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "A(z) %@ egymás után fel fognak villanni. Koppintson a(z) %@ képeire a megjelenésük fordított sorrendjében.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre, majd figyeljen.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Eredmény";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ lyukú körillesztő teszt";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ez a tevékenység a felső végtagok mozgását vizsgálja, amelynek során a rendszer megkéri Önt, hogy illesszen bele egy kört egy lyukba. Ezt %@ alkalommal kell megtennie.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "A bal és a jobb keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "A bal és a jobb keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "A jobb és a bal keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";

@@ -98,7 +98,11 @@
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        if (@available(iOS 13.0, *)) {
+            self.digitLabel.textColor = [[UIColor labelColor] colorWithAlphaComponent:0.3f];
+        } else {
+            self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        }
         self.digitLabel.text = ORKLocalizedString(@"PSAT_NO_DIGIT", nil);
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];

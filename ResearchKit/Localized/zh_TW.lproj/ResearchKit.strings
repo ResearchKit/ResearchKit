@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此活動會讓您重複%@亮起來的順序以測量您的短期空間記憶。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花朵";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分的%@會一次點亮一個。按照相同的點亮順序點一下這些%@。";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "部分的%@會一次點亮一個。按照相反的點亮順序點一下這些%@。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "部分的%@會一次點亮一個。按照相同的點亮順序點一下這些%@。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "部分的%@會一次點亮一個。按照相反的點亮順序點一下這些%@。";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "若要開始，請點一下「開始測試」，然後仔細觀看螢幕。";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "分數";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@孔圓柱測試";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "此活動會要求您將圓柱放入孔中，藉此測量您的上肢功能。將會要求您執行%@次。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "將會測試您的左手和右手。\n您必須儘快拿起圓柱，將其放入孔中，完成%@次之後，再將圓柱從孔中取出%@次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "將會測試您的左手和右手。\n您必須儘快拿起圓柱，將其放入孔中，完成%@次之後，再將圓柱從孔中取出%@次。";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "將會測試您的右手和左手。\n您必須儘快拿起圓柱，將其放入孔中，完成%@次之後，再將圓柱從孔中取出%@次。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始測試」來開始。";

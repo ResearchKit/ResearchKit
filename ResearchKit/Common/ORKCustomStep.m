@@ -29,6 +29,7 @@
  */
 
 #import "ORKCustomStep.h"
+#import "ORKHelpers_Internal.h"
 
 @implementation ORKCustomStep
 
@@ -36,6 +37,41 @@
                              contentView:(UIView *)contentView {
     ORKCustomStep *step = [[ORKCustomStep alloc] initWithIdentifier:identifier];
     step.contentView = contentView;
+    return step;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, pinNavigationContainer);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, pinNavigationContainer);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL superIsEqual = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (superIsEqual
+            && self.pinNavigationContainer == castObject.pinNavigationContainer);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKCustomStep *step = [super copyWithZone:zone];
+    step.pinNavigationContainer = self.pinNavigationContainer;
+    step.detailText = self.detailText;
+    step.text = self.text;
+    step.title = self.title;
     return step;
 }
 

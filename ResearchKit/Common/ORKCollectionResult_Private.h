@@ -66,4 +66,10 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+@interface ORKTaskResult ()
+
+- (void)setTaskRunUUID:(NSUUID * _Nonnull)taskRunUUID;
+
+@end
+
 NS_ASSUME_NONNULL_END

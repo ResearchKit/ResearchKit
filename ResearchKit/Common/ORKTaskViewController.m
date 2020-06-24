@@ -131,6 +131,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 
 @end
 
+
 @interface ORKTaskViewController () <ORKTaskReviewViewControllerDelegate, UINavigationControllerDelegate> {
     NSMutableDictionary *_managedResults;
     NSMutableArray *_managedStepIdentifiers;
@@ -241,7 +242,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [self commonInitWithTask:task taskRunUUID:taskRunUUID];
 }
 
-- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(nullable NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut {
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate error:(NSError* __autoreleasing *)errorOut {
     
     self = [self initWithTask:task taskRunUUID:nil];
     
@@ -262,7 +263,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (instancetype)initWithTask:(id<ORKTask>)task
-      startingStepIdentifier:(NSString *)startingStepIdentifier
                ongoingResult:(nullable ORKTaskResult *)ongoingResult
          defaultResultSource:(nullable id<ORKTaskResultSource>)defaultResultSource
                     delegate:(id<ORKTaskViewControllerDelegate>)delegate {
@@ -274,12 +274,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         _defaultResultSource = defaultResultSource;
         if (ongoingResult != nil) {
             for (ORKResult *stepResult in ongoingResult.results) {
-                [_managedStepIdentifiers addObject:stepResult.identifier];
-                _managedResults[stepResult.identifier] = stepResult;
+                NSString *stepResultIdentifier = stepResult.identifier;
+                if ([task stepWithIdentifier:stepResultIdentifier] == nil) {
+                    @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ongoingResults has results for identifiers not found within the task steps" userInfo:nil];
+                }
+                [_managedStepIdentifiers addObject:stepResultIdentifier];
+                _managedResults[stepResultIdentifier] = stepResult;
             }
-        }
-        if (startingStepIdentifier != nil) {
-            _restoredStepIdentifier = startingStepIdentifier;
+            _restoredStepIdentifier = ongoingResult.results.lastObject.identifier;
         }
     }
     return self;
@@ -646,6 +648,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_taskReviewViewController) {
         [_childNavigationController setViewControllers:@[_taskReviewViewController] animated:NO];
         [self setTaskReviewViewControllerNavbar];
+    }
+    
+    if (_currentStepViewController) {
+        [self setUpProgressLabelForStepViewController:_currentStepViewController];
     }
 }
 
@@ -1167,7 +1173,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
-
     if (self.discardable) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
@@ -1265,23 +1270,22 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)flipToFirstPage {
-    if ([self.task isKindOfClass:[ORKOrderedTask class]]) {
-        ORKOrderedTask *orderedTask = (ORKOrderedTask *)self.task;
-        ORKStep *firstStep = [[orderedTask steps] firstObject];
-        if (firstStep) {
-            [_managedStepIdentifiers removeAllObjects];
-            [self showStepViewController:[self viewControllerForStep:firstStep] goForward:YES animated:NO];
-        }
+    ORKStep *firstStep = [_task stepAfterStep:nil withResult:[self result]];
+    if (firstStep) {
+        [self showStepViewController:[self viewControllerForStep:firstStep] goForward:YES animated:NO];
     }
 }
 
 - (void)flipToLastPage {
-    if ([self.task isKindOfClass:[ORKOrderedTask class]]) {
-        ORKOrderedTask *orderedTask = (ORKOrderedTask *)self.task;
-        ORKStep *lastStep = [[orderedTask steps] lastObject];
-        if (lastStep) {
-            [self showStepViewController:[self viewControllerForStep:lastStep] goForward:YES animated:YES];
-        }
+    ORKStep *initialCurrentStep = _currentStepViewController.step;
+    ORKStep *lastStep = nil;
+    ORKStep *nextStep = _currentStepViewController.step;
+    do {
+        lastStep = nextStep;
+        nextStep = [_task stepAfterStep:lastStep withResult:[self result]];
+    } while (nextStep != nil);
+    if (lastStep != initialCurrentStep) {
+        [self showStepViewController:[self viewControllerForStep:lastStep] goForward:YES animated:YES];
     }
 }
 
@@ -1309,6 +1313,29 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             [self showStepViewController:stepViewController goForward:NO animated:animated];
         }
     }
+}
+
+- (void)flipToPageWithIdentifier:(NSString *)identifier forward:(BOOL)forward animated:(BOOL)animated
+{
+    NSUInteger index =
+    [[(ORKOrderedTask *)self.task steps] indexOfObjectPassingTest:^BOOL(ORKStep * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+    {
+            if ([obj.identifier isEqualToString:identifier])
+            {
+                *stop = YES;
+                return YES;
+            }
+            
+            return NO;
+    }];
+        
+        if (index == NSNotFound) { return; }
+        
+        ORKStep *step = [[(ORKOrderedTask *)self.task steps] objectAtIndex:index];
+        if (step)
+        {
+            [self showStepViewController:[self viewControllerForStep:step] goForward:forward animated:animated];
+        }
 }
 
 #pragma mark -  ORKStepViewControllerDelegate

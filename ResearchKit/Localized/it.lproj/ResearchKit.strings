@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "L'attività valuta la tua memoria spaziale a breve termine. Ripeti l'ordine di accensione dei simboli a forma di %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "fiore";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "fiori";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali seguendo l'ordine di accensione.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali in ordine inverso rispetto alla sequenza iniziale.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali seguendo l'ordine di accensione.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "I simboli a forma di %@ si accenderanno uno alla volta. Toccali in ordine inverso rispetto alla sequenza iniziale.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Per cominciare, tocca Inizia e osserva con attenzione.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Punteggio";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test dei %@ pioli";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Questo test valuta la funzionalità dei tuoi arti superiori. Dovrai posizionare l'icona colorata nella sagoma vuota %@ volte.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Verranno esaminate entrambe le mani.\nDovrai afferrare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";

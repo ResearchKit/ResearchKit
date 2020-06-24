@@ -339,6 +339,13 @@ static const CGFloat rungButtonPadding = 10.0;
         } else {
             [rungButton setSelected:NO highlight:NO];
         }
+        
+        float percentage = (((double)i + 1) / _buttons.count) * 100;
+        bool isTopPercentile = percentage <= 50.0;
+        NSString *topOrBottomText = isTopPercentile ? ORKLocalizedString(@"AX_SES_TOP", nil) : ORKLocalizedString(@"AX_SES_BOTTOM", nil);
+        int buttonPercentageRange = isTopPercentile ? (int)percentage : (int)(100.0 - percentage + (100.0 / _buttons.count));
+        
+        rungButton.accessibilityLabel = [NSString stringWithFormat:@"%@ %d %@", topOrBottomText, buttonPercentageRange, ORKLocalizedString(@"AX_SES_PERCENT", nil)];
     }
 }
 
