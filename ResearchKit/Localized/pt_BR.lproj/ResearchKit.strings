@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Esta atividade mede a sua memória espacial de curto prazo ao pedir que você repita a ordem em que as %@ se acendem.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flores";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flores";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Algumas das %@ serão acesas uma por vez. Toque nas %@ na mesma ordem em que se acenderam.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Algumas das %@ serão acesas uma por vez. Toque nas %@ na ordem reversa em que se acenderam.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Algumas das %@ serão acesas uma por vez. Toque nas %@ na mesma ordem em que se acenderam.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Algumas das %@ serão acesas uma por vez. Toque nas %@ na ordem reversa em que se acenderam.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Para começar, toque em Iniciar e observe com atenção.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Pontuação";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ Pinos nos Buracos";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta atividade determinará a capacidade das suas extremidades superiores, solicitando que você coloque um círculo dentro de um buraco. Você precisará fazer isso %@ vezes.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tanto a sua mão esquerda como a direita serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Tanto a sua mão esquerda como a direita serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tanto a sua mão direita como a esquerda serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Toque em Iniciar para começar.";

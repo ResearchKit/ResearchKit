@@ -43,11 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKdBHLToneAudiometryContentView : ORKActiveStepCustomView
 
-- (void)setProgress:(CGFloat)progress
-           animated:(BOOL)animated;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 @property (nonatomic, strong, readonly) ORKdBHLToneAudiometryButton *tapButton;
-@property (nonatomic, strong) UIProgressView *progressView;
 
 @end
 

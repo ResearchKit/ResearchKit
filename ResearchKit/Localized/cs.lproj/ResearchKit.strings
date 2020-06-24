@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tato aktivita změří vaši krátkodobou prostorovou paměť. Budete požádáni o zopakování pořadí, ve kterém se budou rozsvěcovat %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "květiny";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "květiny";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v pořadí, ve kterém se rozsvěcovaly.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v obráceném pořadí rozsvěcování.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v pořadí, ve kterém se rozsvěcovaly.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Některé %@ se postupně rozsvítí. Klepejte na %@ v obráceném pořadí rozsvěcování.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Chcete-li začít, klepněte na Začít a pozorně se dívejte.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skóre";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@kolíkový test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tato aktivita otestuje motoriku vašich horních končetin. Požádáme vás o zasunutí kolíku do otvoru. Budete k tomu vyzváni celkem %@×.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Bude proveden test levé i pravé ruky.\nCo nejrychleji uchopte kolík a zasuňte ho do otvoru. Tuto akci proveďte %@× a potom ho opět %@× vyndejte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Bude proveden test levé i pravé ruky.\nCo nejrychleji uchopte kolík a zasuňte ho do otvoru. Tuto akci proveďte %@× a potom ho opět %@× vyndejte.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Bude proveden test pravé i levé ruky.\nCo nejrychleji uchopte kolík a zasuňte ho do otvoru. Tuto akci proveďte %@× a potom ho opět %@× vyndejte.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";

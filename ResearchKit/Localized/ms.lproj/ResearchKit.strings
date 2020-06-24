@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktiviti ini mengukur memori ruang jangka pendek anda dengan meminta anda mengulangi tertib %@ bernyala.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bunga";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bunga";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Sesetengah %@ akan bernyala satu demi satu. Ketik %@ tersebut dalam urutan yang sama ia menyala.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Sesetengah %@ akan bernyala satu demi satu. Ketik %@ tersebut dalam urutan terbalik ia menyala.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Sesetengah %@ akan bernyala satu demi satu. Ketik %@ tersebut dalam urutan yang sama ia menyala.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Sesetengah %@ akan bernyala satu demi satu. Ketik %@ tersebut dalam urutan terbalik ia menyala.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Untuk memulakan, ketik Mulakan, kemudian lihat dengan teliti.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skor";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Ujian Pancang %@ Lubang";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktiviti ini mengukur fungsi anggota badan atas anda dengan meminta anda meletakkan pancang ke dalam lubang. Anda akan diminta melakukan ini sebanyak %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, masukkannya ke dalam lubang dan setelah dilakukan sebanyak %@ kali, keluarkannya lagi sebanyak %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Tangan kiri dan kanan anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, masukkannya ke dalam lubang dan setelah dilakukan sebanyak %@ kali, keluarkannya lagi sebanyak %@ kali.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, masukkannya ke dalam lubang dan setelah dilakukan sebanyak %@ kali, keluarkannya lagi sebanyak %@ kali.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";

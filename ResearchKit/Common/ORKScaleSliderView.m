@@ -283,7 +283,8 @@ static const CGFloat kMargin = 25.0;
     UIFontDescriptor *rangeDescriptionLabelFontDescriptor = [rangeDescriptionLabelDescriptor fontDescriptorWithSymbolicTraits:(UIFontDescriptorTraitBold)];
     
     _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-    _leftRangeDescriptionLabel.numberOfLines = -1;
+    _leftRangeDescriptionLabel.numberOfLines = 0;
+    _leftRangeDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [_leftRangeDescriptionLabel setFont: [UIFont fontWithDescriptor:rangeDescriptionLabelFontDescriptor size:[[rangeDescriptionLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
     _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     if (@available(iOS 13.0, *)) {
@@ -291,7 +292,8 @@ static const CGFloat kMargin = 25.0;
     }
    
     _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-    _rightRangeDescriptionLabel.numberOfLines = -1;
+    _rightRangeDescriptionLabel.numberOfLines = 0;
+    _rightRangeDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [_rightRangeDescriptionLabel setFont: [UIFont fontWithDescriptor:rangeDescriptionLabelFontDescriptor size:[[rangeDescriptionLabelFontDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
     _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     if (@available(iOS 13.0, *)) {
@@ -328,15 +330,6 @@ static const CGFloat kMargin = 25.0;
     BOOL isVertical = [_formatProvider isVertical];
     NSArray<ORKTextChoice *> *textChoices = _slider.textChoices;
     NSDictionary *views = nil;
-    
-    NSDictionary *metrics = @{@"valueLabelTopPadding":@(ValueLabelTopPadding),
-                              @"valueLabelBottomPadding":@(ValueLabelBottomPadding),
-                              @"moveSliderLabelTopPadding":@(MoveSliderLabelTopPadding),
-                              @"moveSliderLabelBottomPadding":@(MoveSliderLabelBottomPadding),
-                              @"rangeViewHorizontalPadding": @(RangeViewHorizontalPadding),
-                              @"sliderBottomPadding": @(SliderBottomPadding),
-                              @"dontKnowButtonTopBottomPadding": @(DontKnowButtonTopBottomPadding),
-                              @"kMargin": @(kMargin)};
     
     if (isVertical && textChoices) {
         views = NSDictionaryOfVariableBindings(_slider);
@@ -587,122 +580,59 @@ static const CGFloat kMargin = 25.0;
         }
     } else {
         
+        [[_topStackView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin] setActive:YES];
+        [[_topStackView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin] setActive:YES];
+        
+        //Vertical Constraints
         if (_slider.isWaitingForUserFeedback) {
-            [constraints addObjectsFromArray:
-                                [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-moveSliderLabelTopPadding-[_topStackView]-moveSliderLabelBottomPadding-[_slider]-sliderBottomPadding-[_leftRangeDescriptionLabel]-(>=8)-|"
-                                                                        options:0
-                                                                        metrics:metrics
-                                                                          views:views]];
+            [constraints addObject:[_topStackView.topAnchor constraintEqualToAnchor:self.topAnchor constant:MoveSliderLabelTopPadding]];
+            [constraints addObject:[_slider.topAnchor constraintEqualToAnchor:_topStackView.bottomAnchor constant:MoveSliderLabelBottomPadding]];
         } else {
-            [constraints addObjectsFromArray:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-valueLabelTopPadding-[_topStackView]-valueLabelBottomPadding-[_slider]-sliderBottomPadding-[_leftRangeDescriptionLabel]-(>=8)-|"
-                                                     options:0
-                                                     metrics:metrics
-                                                       views:views]];
+            [constraints addObject:[_topStackView.topAnchor constraintEqualToAnchor:self.topAnchor constant:ValueLabelTopPadding]];
+            [constraints addObject:[_slider.topAnchor constraintEqualToAnchor:_topStackView.bottomAnchor constant:ValueLabelBottomPadding]];
         }
-
-        [constraints addObjectsFromArray:
-                     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_topStackView]-kMargin-|"
-                                                             options:0
-                                                             metrics:metrics
-                                                               views:views]];
         
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeView]-rangeViewHorizontalPadding-[_slider]-rangeViewHorizontalPadding-[_rightRangeView(==_leftRangeView)]-kMargin-|"
-                                                 options:NSLayoutFormatAlignAllCenterY
-                                                 metrics:metrics
-                                                   views:views]];
+        [[_leftRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding] setActive:YES];
+        [[_rightRangeDescriptionLabel.topAnchor constraintEqualToAnchor:_slider.bottomAnchor constant:SliderBottomPadding] setActive:YES];
         
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeDescriptionLabel
-                                                            attribute:NSLayoutAttributeLeft
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_slider
-                                                            attribute:NSLayoutAttributeLeft
-                                                           multiplier:1.0
-                                                             constant:0.0]];
+        //Horizontal constraints for center elements
+        [[_leftRangeView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:kMargin] setActive:YES];
+        [[_rightRangeView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-kMargin] setActive:YES];
+        [[_leftRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor] setActive:YES];
+        [[_rightRangeView.centerYAnchor constraintEqualToAnchor:_slider.centerYAnchor] setActive:YES];
+        [[_slider.leadingAnchor constraintEqualToAnchor:_leftRangeView.trailingAnchor constant:RangeViewHorizontalPadding] setActive:YES];
+        [[_slider.trailingAnchor constraintEqualToAnchor:_rightRangeView.leadingAnchor constant:-RangeViewHorizontalPadding] setActive:YES];
         
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
-                                                            attribute:NSLayoutAttributeRight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_slider
-                                                            attribute:NSLayoutAttributeRight
-                                                           multiplier:1.0
-                                                             constant:0.0]];
+        //Horizontal constraints for bottom elements
+        [[_leftRangeDescriptionLabel.leadingAnchor constraintEqualToAnchor:_slider.leadingAnchor] setActive:YES];
+        [[_leftRangeDescriptionLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.centerXAnchor] setActive:YES];
+        [[_rightRangeDescriptionLabel.trailingAnchor constraintEqualToAnchor:_slider.trailingAnchor] setActive:YES];
+        [[_rightRangeDescriptionLabel.leadingAnchor constraintGreaterThanOrEqualToAnchor:self.centerXAnchor] setActive:YES];
         
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_leftRangeDescriptionLabel
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0
-                                                             constant:0.0]];
+        UILabel *largerDescriptionLabel = _leftRangeDescriptionLabel.text.length >= _rightRangeDescriptionLabel.text.length ? _leftRangeDescriptionLabel : _rightRangeDescriptionLabel;
         
-        
+        //Constraints for dont know button elements
         if ([_formatProvider shouldShowDontKnowButton]) {
             [[_dontKnowBackgroundView.topAnchor constraintEqualToAnchor:_dividerView.topAnchor] setActive:YES];
             [[_dontKnowBackgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor] setActive:YES];
             [[_dontKnowBackgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor] setActive:YES];
             [[_dontKnowBackgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor] setActive:YES];
-            
-            
+
              CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
-            
-            [constraints addObjectsFromArray:
-                                 [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dividerView]|"
-                                                                         options:0
-                                                                         metrics:metrics
-                                                                           views:views]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dividerView
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:nil
-                                                                attribute:NSLayoutAttributeNotAnAttribute
-                                                               multiplier:1.0
-                                                                 constant:separatorHeight]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dividerView
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                   toItem:_leftRangeDescriptionLabel
-                                                                attribute:NSLayoutAttributeBottom
-                                                               multiplier:1.0
-                                                                 constant:8.0]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:_dividerView
-                                                                attribute:NSLayoutAttributeBottom
-                                                               multiplier:1.0
-                                                                 constant:DontKnowButtonTopBottomPadding]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
-                                                                attribute:NSLayoutAttributeCenterX
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:_dividerView
-                                                                attribute:NSLayoutAttributeCenterX
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
-                                                                attribute:NSLayoutAttributeLeft
-                                                                relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                   toItem:_dividerView
-                                                                attribute:NSLayoutAttributeLeft
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:_dontKnowButton
-                                                                attribute:NSLayoutAttributeRight
-                                                                relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                   toItem:_dividerView
-                                                                attribute:NSLayoutAttributeRight
-                                                               multiplier:1.0
-                                                                 constant:0.0]];
+
+            [[_dividerView.leftAnchor constraintEqualToAnchor:self.leftAnchor] setActive:YES];
+            [[_dividerView.rightAnchor constraintEqualToAnchor:self.rightAnchor] setActive:YES];
+            [[_dividerView.heightAnchor constraintEqualToConstant:separatorHeight] setActive:YES];
+            [[_dividerView.topAnchor constraintGreaterThanOrEqualToAnchor: largerDescriptionLabel.bottomAnchor constant:8.0] setActive:YES];
+
+            [[_dontKnowButton.topAnchor constraintGreaterThanOrEqualToAnchor:_dividerView.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive:YES];
+            [[_dontKnowButton.centerXAnchor constraintEqualToAnchor:_dividerView.centerXAnchor] setActive:YES];
             
             [[self.bottomAnchor constraintEqualToAnchor:_dontKnowButton.bottomAnchor constant:DontKnowButtonTopBottomPadding] setActive: YES];
+        } else {
+            [[self.bottomAnchor constraintEqualToAnchor:largerDescriptionLabel.bottomAnchor constant:8.0] setActive: YES];
         }
+        
     }
     
     if ([_formatProvider shouldHideSelectedValueLabel] &&

@@ -39,6 +39,7 @@ ORK_CLASS_AVAILABLE
                              contentView:(UIView *)contentView;
 
 @property (nonatomic, strong, nullable) UIView *contentView;
+@property (nonatomic) BOOL pinNavigationContainer;
 
 @end
 

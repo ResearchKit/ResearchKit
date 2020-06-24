@@ -52,11 +52,11 @@ class AssessmentManager {
         let toDate = Date()
         let fromDate: Date = calendar.date(byAdding: .day, value: -7, to: toDate)!
         
-        manager?.queryTremor(from: fromDate, to: toDate, withHandler: { (results, error) in
+        manager?.queryTremor(from: fromDate, to: toDate, withHandler: { (_/*results*/, _/*error*/) in
             
         })
         
-        manager?.queryDyskineticSymptom(from: fromDate, to: toDate, withHandler: { (results, error) in
+        manager?.queryDyskineticSymptom(from: fromDate, to: toDate, withHandler: { (_/*results*/, _/*error*/) in
             
         })
     }

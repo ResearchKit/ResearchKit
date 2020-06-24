@@ -285,6 +285,9 @@ static const float ReviewQuestionAnswerPadding = 2.0;
     [_button setTitle:ORKLocalizedString(@"REVIEW_EDIT_ANSWER", nil) forState:UIControlStateNormal];
     [_button setTitleColor:self.tintColor forState:UIControlStateNormal];
     
+    UIFontDescriptor *buttonDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+    [_button.titleLabel setFont:[UIFont fontWithDescriptor:buttonDescriptor size:[[buttonDescriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]]];
+    
     _button.translatesAutoresizingMaskIntoConstraints = NO;
     [_containerView addSubview:_button];
 }

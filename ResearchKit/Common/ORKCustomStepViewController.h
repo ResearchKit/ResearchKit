@@ -28,20 +28,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKStepViewController.h"
+#import <ResearchKit/ORKStepViewController.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKCustomStepViewController : ORKStepViewController
 
-- (BOOL)continueButtonEnabled;
-
 @property (nonatomic, getter=isScrollEnabled) BOOL scrollEnabled;
+@property (nonatomic, getter=showScrollIndicator) BOOL showScrollIndicator;
+
+@property (nonatomic) NSTextAlignment stepHeaderTextAlignment;
+@property (nonatomic) NSTextAlignment bodyTextAlignment;
+
+- (BOOL)continueButtonEnabled;
 
 - (void)updateButtonStates;
 
-- (void)setScrollViewOffset:(UIEdgeInsets)contentInset;
+- (void)setScrollViewInset:(UIEdgeInsets)contentInset;
+
+- (void)resetScrollViewInset;
 
 - (void)scrollToPoint:(CGPoint)point;
 

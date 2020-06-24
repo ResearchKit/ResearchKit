@@ -196,6 +196,10 @@
     return YES;
 }
 
+- (void)setTaskRunUUID:(NSUUID * _Nonnull)taskRunUUID {
+    self->_taskRunUUID = [taskRunUUID copy];
+}
+
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     

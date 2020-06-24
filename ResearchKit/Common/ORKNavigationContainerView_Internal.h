@@ -30,8 +30,8 @@
 
 #import <ResearchKit/ORKTypes.h>
 #import <ResearchKit/ORKContinueButton.h>
-#import "ORKNavigationContainerView.h"
-#import "ORKFootnoteLabel.h"
+#import <ResearchKit/ORKNavigationContainerView.h>
+#import <ResearchKit/ORKFootnoteLabel.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

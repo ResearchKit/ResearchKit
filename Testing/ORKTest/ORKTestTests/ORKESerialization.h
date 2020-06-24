@@ -40,7 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBundle:(NSBundle *)bundle tableName:(NSString *)tableName;
 
 @property (nonatomic, strong) NSBundle *bundle;
-@property (nonatomic, strong) NSString *tableName;
+@property (nonatomic, copy) NSString *tableName;
+
+- (NSString *)localizedStringForString:(NSString *)string;
 
 @end
 
@@ -51,13 +53,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef NS_ENUM(NSInteger, ORKESerializationPropertyModifierType) {
+    ORKESerializationPropertyModifierTypePath
+} ORK_ENUM_AVAILABLE;
+
+@interface ORKESerializationPropertyModifier: NSObject
+
+- (instancetype)initWithKeypath:(NSString *)keypath value:(id)value type:(ORKESerializationPropertyModifierType)type;
+
+@property (nonatomic, copy, readonly) NSString *keypath;
+@property (nonatomic, copy, readonly) id value;
+@property (nonatomic, assign, readonly) ORKESerializationPropertyModifierType type;
+
+@end
+
+@interface ORKESerializationPropertyInjector : NSObject
+
+- (instancetype)initWithBundle:(NSBundle *)bundle modifiers:(nullable NSArray<ORKESerializationPropertyModifier *> *)modifiers;
+
+@property (nonatomic, strong, readonly) NSBundle *bundle;
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, id> *propertyValues;
+
+@end
+
+@protocol ORKESerializationStringInterpolator
+
+- (NSString *)interpolatedStringForString:(NSString *)string;
+
+@end
+
 @interface ORKESerializationContext : NSObject
 
 - (instancetype)initWithLocalizer:(nullable ORKESerializationLocalizer *)localizer
-                    imageProvider:(nullable id<ORKESerializationImageProvider>)imageProvider;
+                    imageProvider:(nullable id<ORKESerializationImageProvider>)imageProvider
+               stringInterpolator:(nullable id<ORKESerializationStringInterpolator>)stringInterpolator
+                 propertyInjector:(nullable ORKESerializationPropertyInjector *)propertyInjector;
+
+- (instancetype)initWithBundle:(NSBundle *)bundle
+         localizationTableName:(NSString *)localizationTableName
+             propertyModifiers:(nullable NSArray<ORKESerializationPropertyModifier *> *)modifiers;
 
 @property (nonatomic, strong, nullable) ORKESerializationLocalizer *localizer;
 @property (nonatomic, strong, nullable) id<ORKESerializationImageProvider> imageProvider;
+@property (nonatomic, strong, nullable) id<ORKESerializationStringInterpolator> stringInterpolator;
+@property (nonatomic, strong, nullable) ORKESerializationPropertyInjector *propertyInjector;
 
 @end
 
@@ -109,7 +148,8 @@ typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject, ORKESe
                                containerClass:(nullable Class)containerClass
                                writeAfterInit:(BOOL)writeAfterInit
                             objectToJSONBlock:(nullable ORKESerializationObjectToJSONBlock)objectToJSON
-                            jsonToObjectBlock:(nullable ORKESerializationJSONToObjectBlock)jsonToObjectBlock;
+                            jsonToObjectBlock:(nullable ORKESerializationJSONToObjectBlock)jsonToObjectBlock
+                            skipSerialization:(BOOL)skipSerialization;
 
 @end
 

@@ -39,7 +39,7 @@ class ORKCompletionStepViewControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        step = ORKInstructionStep(identifier: "STEP")
+        step = ORKCompletionStep(identifier: "STEP")
         result = ORKResult(identifier: "RESULT")
         completionController = ORKCompletionStepViewController(step: step, result: result)
         completionController.shouldShowContinueButton = true

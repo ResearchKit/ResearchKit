@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Mit dieser Aktivität wird dein räumliches Kurzzeitgedächtnis gemessen, indem du aufgefordert wirst, die Reihenfolge, in der die %@ aufleuchten, zu wiederholen.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "Blumen";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "Blumen";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippe in derselben Reihenfolge auf diese %@.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippe in umgekehrter Reihenfolge auf diese %@.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippe in derselben Reihenfolge auf diese %@.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Einige der %@ werden der Reihe nach aufleuchten. Tippe in umgekehrter Reihenfolge auf diese %@.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“ und schaue dann genau hin.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Ergebnis";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole-Peg-Test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Mit dieser Aktivität wird die Reaktionsfähigkeit deiner oberen Extremitäten gemessen, indem du aufgefordert wirst, einen Kreis auf einem Loch zu platzieren. Das Ganze wird %@-mal wiederholt.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sowohl deine linke als auch die rechte Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@-maligen Wiederholung wieder %@-mal entfernen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Sowohl deine linke als auch die rechte Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@-maligen Wiederholung wieder %@-mal entfernen.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sowohl deine rechte als auch die linke Hand werden getestet.\nDu musst den Stift so schnell wie möglich greifen, in das Loch stecken und nach einer %@-maligen Wiederholung wieder %@-mal entfernen.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tippe zum Starten auf „Los geht’s“.";

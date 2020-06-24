@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Táto aktivita zmeria vašu krátkodobú pamäť zobrazením sekvencie obrázkov (%@), ktorú budete musieť zopakovať.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kvety";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kvety";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v rovnakom poradí, v akom sa rozsvietili.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v opačnom poradí, v akom sa rozsvietili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v rovnakom poradí, v akom sa rozsvietili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Obrázky (%@) sa budú postupne rozsvecovať. Klepnite na obrázky (%@) v opačnom poradí, v akom sa rozsvietili.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Klepnutím na Začať spustite test a pozorne sa dívajte.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skóre";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-kolíkový test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Táto aktivita slúži na otestovanie motoriky horných končatín. Počas testu budete umiestňovať kolíky do otvorov. Test budete opakovať %@-krát.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Otestovaná bude vaša ľavá aj pravá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Otestovaná bude vaša ľavá aj pravá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Otestovaná bude vaša pravá aj ľavá ruka.\nČo najrýchlejšie vezmite kolík, umiestnite do otvoru %@-krát a potom ho vytiahnite taktiež %@-krát.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aktivitu spustíte klepnutím na Začať.";

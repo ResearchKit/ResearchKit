@@ -315,6 +315,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     NSMutableArray<ORKTableSection *> *_sections;
     NSMutableSet *_answeredSections;
     BOOL _skipped;
+    BOOL _autoScrollCancelled;
     UITableViewCell *_currentFirstResponderCell;
     NSArray<NSLayoutConstraint *> *_constraints;
 }
@@ -407,6 +408,17 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
+    _autoScrollCancelled = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    _autoScrollCancelled = YES;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)updateAnsweredSections {
@@ -958,7 +970,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:0 inSection:(indexPath.section + 1)];
     ORKFormItemCell *nextCell = [self.tableView cellForRowAtIndexPath:nextIndexPath];
     
-    if ([nextCell respondsToSelector:@selector(formItem)]) {
+    if ([nextCell respondsToSelector:@selector(formItem)] && !_autoScrollCancelled) {
         ORKQuestionType type = nextCell.formItem.impliedAnswerFormat.questionType;
         if ([self doesTableCellTypeUseKeyboard:type] && [nextCell isKindOfClass:[ORKFormItemCell class]]) {
             return YES;

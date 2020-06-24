@@ -29,8 +29,8 @@
  */
 
 
-#import "ORKTaskViewController_Private.h"
-#import "ORKReviewStepViewController.h"
+#import <ResearchKit/ORKTaskViewController_Private.h>
+#import <ResearchKit/ORKReviewStepViewController.h>
 @import HealthKit;
 
 
@@ -48,6 +48,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) UIScrollView *registeredScrollView;
 
 - (void)learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreInstructionStep fromStepViewController:(ORKStepViewController *)stepViewController;
+
+- (void)flipToPageWithIdentifier:(NSString *)identifier forward:(BOOL)forward animated:(BOOL)animated;
+
+- (void)flipToFirstPage;
+
+- (void)flipToLastPage;
 
 @end
 

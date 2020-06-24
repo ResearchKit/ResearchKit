@@ -29,7 +29,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "ORKDefines.h"
+#import <ResearchKit/ORKDefines.h>
 
 @class ORKOrderedTask;
 @class ORKTaskResult;

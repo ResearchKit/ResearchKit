@@ -30,7 +30,7 @@
 
 
 @import UIKit;
-#import "ORKDefaultFont.h"
+#import <ResearchKit/ORKDefaultFont.h>
 #import <ResearchKit/ORKDefines.h>
 
 

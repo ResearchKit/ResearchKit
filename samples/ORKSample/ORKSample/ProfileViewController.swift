@@ -58,7 +58,7 @@ class ProfileViewController: UITableViewController, HealthClientType {
 
         // Request authrization to query the health objects that need to be shown.
         let typesToRequest = Set<HKObjectType>(healthObjectTypes)
-        healthStore.requestAuthorization(toShare: nil, read: typesToRequest) { authorized, error in
+        healthStore.requestAuthorization(toShare: nil, read: typesToRequest) { (authorized, _) in
             guard authorized else { return }
             
             // Reload the table view cells on the main thread.

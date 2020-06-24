@@ -1,4 +1,4 @@
-/*
+ /*
  Copyright (c) 2019, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -33,15 +33,26 @@
 #import "ORKCustomStep.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepContentView.h"
+#import "ORKStepContainerView_Private.h"
+#import "ORKStepView_Private.h"
 
 @interface ORKCustomStepViewController ()
 
 @end
 
 @implementation ORKCustomStepViewController {
-    UIScrollView *_scrollView;
-    ORKStepContentView *_contentView;
+    ORKStepContainerView *_containerView;
+    
     NSMutableArray<NSLayoutConstraint *> *_constraints;
+}
+
+- (instancetype)initWithStep:(ORKStep *)step {
+    if (![step isKindOfClass:[ORKCustomStep class]]) {
+        @throw NSInvalidArgumentException;
+    }
+    
+    self = [super initWithStep:step];
+    return self;
 }
 
 - (ORKCustomStep *)customStep {
@@ -49,24 +60,16 @@
 }
 
 - (void)stepDidChange {
-        
-    [_scrollView removeFromSuperview];
-    _scrollView = nil;
-
-    [_contentView removeFromSuperview];
-    _contentView = nil;
+    [_containerView removeFromSuperview];
+    _containerView = nil;
     
     if (self.step && [self isViewLoaded]) {
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        [self.view addSubview:_scrollView];
-                
-        _contentView = [[ORKStepContentView alloc] init];
-        [_scrollView addSubview:_contentView];
-        
-        [_contentView addSubview:[self customStep].contentView];
-                
-        [self setupNavigationFooterView];
+        _containerView = [[ORKStepContainerView alloc] init];
+        [self configureContainerView];
+        [_containerView setPinNavigationContainer:self.customStep.pinNavigationContainer];
+        [_containerView setCustomContentView:[self customStep].contentView withTopPadding:0.0 sidePadding:0.0];
+        [_containerView setUseExtendedPadding:self.step.useExtendedPadding];
+        [self.view addSubview:_containerView];
         [self setupConstraints];
     }
 }
@@ -81,120 +84,37 @@
     
     _constraints = nil;
     [self customStep].contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
-    _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    _containerView.translatesAutoresizingMaskIntoConstraints = NO;
     
     _constraints = [[NSMutableArray alloc] initWithArray:@[
-        [NSLayoutConstraint constraintWithItem:_scrollView
+        [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeTop
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:viewForiPad ? : self.view.safeAreaLayoutGuide
                                      attribute:NSLayoutAttributeTop
                                     multiplier:1.0
                                       constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_scrollView
+        [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeLeading
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:viewForiPad ? : self.view
                                      attribute:NSLayoutAttributeLeading
                                     multiplier:1.0
                                       constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_scrollView
+        [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeTrailing
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:viewForiPad ? : self.view
                                      attribute:NSLayoutAttributeTrailing
                                     multiplier:1.0
                                       constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_scrollView
+        [NSLayoutConstraint constraintWithItem:_containerView
                                      attribute:NSLayoutAttributeBottom
                                      relatedBy:NSLayoutRelationEqual
                                         toItem:viewForiPad ? : self.view
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0.0],
-
-        [NSLayoutConstraint constraintWithItem:_contentView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_scrollView
-                                     attribute:NSLayoutAttributeTop
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_contentView
-                                     attribute:NSLayoutAttributeLeft
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeLeft
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_contentView
-                                     attribute:NSLayoutAttributeRight
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeRight
-                                    multiplier:1.0
-                                      constant:0.0],
-
-        [NSLayoutConstraint constraintWithItem:[self customStep].contentView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_contentView
-                                     attribute:NSLayoutAttributeTop
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:[self customStep].contentView
-                                     attribute:NSLayoutAttributeLeft
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_contentView
-                                     attribute:NSLayoutAttributeLeft
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:[self customStep].contentView
-                                     attribute:NSLayoutAttributeRight
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_contentView
-                                     attribute:NSLayoutAttributeRight
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:[self customStep].contentView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_contentView
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0.0],
-
-        [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                        toItem:_contentView
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1.0
-                                      constant:0.0],
-        [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                     attribute:NSLayoutAttributeLeft
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeLeft
-                                    multiplier:1.0
-                                      constant:0],
-        [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                     attribute:NSLayoutAttributeRight
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeRight
-                                    multiplier:1.0
-                                      constant:0],
-        [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_scrollView
                                      attribute:NSLayoutAttributeBottom
                                     multiplier:1.0
                                       constant:0.0]
-
     ]];
     
     [NSLayoutConstraint activateConstraints:_constraints];
@@ -205,24 +125,40 @@
     [self stepDidChange];
 }
 
+- (void)configureContainerView {
+    [_containerView setStepTitle:self.customStep.title];
+    [_containerView setStepText:self.customStep.text];
+    [_containerView setStepDetailText:self.customStep.detailText];
+}
+
+- (void)setStepHeaderTextAlignment:(NSTextAlignment)stepHeaderTextAlignment {
+    [_containerView setStepHeaderTextAlignment:stepHeaderTextAlignment];
+}
+
+- (NSTextAlignment)stepHeaderTextAlignment {
+    return [_containerView stepHeaderTextAlignment];
+}
+
+- (void)setBodyTextAlignment:(NSTextAlignment)bodyTextAlignment {
+    [_containerView setBodyTextAlignment:bodyTextAlignment];
+}
+
+- (NSTextAlignment)bodyTextAlignment {
+    return [_containerView bodyTextAlignment];
+}
+
 - (void)setupNavigationFooterView {
-    if (!_navigationFooterView) {
-        _navigationFooterView = [ORKNavigationContainerView new];
-        [_navigationFooterView removeStyling];
-    }
-    
-    _navigationFooterView.continueButtonItem = self.continueButtonItem;
-    _navigationFooterView.continueEnabled = [self continueButtonEnabled];
-    _navigationFooterView.skipButtonItem = [self skipButtonItem];
-    [_navigationFooterView updateContinueAndSkipEnabled];
-    [_navigationFooterView setUseExtendedPadding:[self.step useExtendedPadding]];
-    
-    [_scrollView addSubview:_navigationFooterView];
+    _containerView.navigationFooterView.continueButtonItem = self.continueButtonItem;
+    _containerView.navigationFooterView.continueEnabled = [self continueButtonEnabled];
+    _containerView.navigationFooterView.skipButtonItem = [self skipButtonItem];
+    [_containerView.navigationFooterView updateContinueAndSkipEnabled];
+    [_containerView.navigationFooterView setUseExtendedPadding:[self.step useExtendedPadding]];
+    [_containerView.navigationFooterView setOptional:self.step.isOptional];
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
-    _navigationFooterView.continueButtonItem = continueButtonItem;
+    _containerView.navigationFooterView.continueButtonItem = continueButtonItem;
     [self updateButtonStates];
 }
 
@@ -231,23 +167,50 @@
 }
 
 - (void)updateButtonStates {
-    _navigationFooterView.continueEnabled = [self continueButtonEnabled];
+    _containerView.navigationFooterView.continueEnabled = [self continueButtonEnabled];
 }
 
 - (void)setScrollEnabled:(BOOL)scrollEnabled {
-    [_scrollView setScrollEnabled:scrollEnabled];
+    [_containerView setScrollEnabled:scrollEnabled];
 }
 
 - (BOOL)isScrollEnabled {
-    return _scrollView.scrollEnabled;
+    return _containerView.scrollEnabled;
 }
 
-- (void)setScrollViewOffset:(UIEdgeInsets)contentInset {
-    _scrollView.contentInset = contentInset;
+- (void)setShowScrollIndicator:(BOOL)showScrollIndicator {
+    if (_containerView) {
+        [_containerView setShowScrollIndicator:showScrollIndicator];
+    }
+}
+
+- (BOOL)showScrollIndicator {
+    return _containerView.showScrollIndicator;
+}
+
+- (void)setScrollViewInset:(UIEdgeInsets)contentInset {
+    [_containerView setScrollViewInset:contentInset];
+}
+
+- (void)resetScrollViewInset {
+    if (_containerView.pinNavigationContainer) {
+        [_containerView setScrollViewInset:UIEdgeInsetsMake(0.0, 0.0, -(_containerView.navigationFooterView.frame.size.height + ORKContentBottomPadding), 0.0)];
+    } else {
+        [_containerView setScrollViewInset:UIEdgeInsetsZero];
+    }
+}
+
+- (void)showActivityIndicatorInContinueButton:(BOOL)showActivityIndicator {
+    [_containerView.navigationFooterView showActivityIndicator:showActivityIndicator];
 }
 
 - (void)scrollToPoint:(CGPoint)point {
-    [_scrollView setContentOffset:point animated:YES];
+    [_containerView scrollToPoint:point];
+}
+
+- (void)setSkipButtonTitle:(NSString *)skipButtonTitle {
+    [super setSkipButtonTitle:skipButtonTitle];
+    [self setupNavigationFooterView];
 }
 
 @end

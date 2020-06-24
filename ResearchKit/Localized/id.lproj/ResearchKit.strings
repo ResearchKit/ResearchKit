@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aktivitas ini mengukur memori spasial jangka pendek dengan meminta Anda untuk mengulangi urutan menyalanya %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bunga";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bunga";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut sesuai urutan menyalanya.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut berkebalikan dengan urutan menyalanya.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut sesuai urutan menyalanya.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut berkebalikan dengan urutan menyalanya.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Untuk memulai, ketuk Mulai, lalu perhatikan dengan saksama.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skor";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan diminta untuk melakukan ini %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan dites.\nAnda harus mengambil pasak secepat mungkin, memasukkannya ke lubang, dan, setelah selesai %@ kali, mencabutnya lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Tangan kiri dan kanan Anda akan dites.\nAnda harus mengambil pasak secepat mungkin, memasukkannya ke lubang, dan, setelah selesai %@ kali, mencabutnya lagi %@ kali.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan dites.\nAnda harus mengambil pasak secepat mungkin, memasukkannya ke lubang, dan, setelah selesai %@ kali, mencabutnya lagi %@ kali.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";

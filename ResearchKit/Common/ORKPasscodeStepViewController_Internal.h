@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKPasscodeStepViewController.h"
+#import <ResearchKit/ORKPasscodeStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

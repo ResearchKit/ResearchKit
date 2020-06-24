@@ -38,6 +38,16 @@
 #import <objc/runtime.h>
 
 
+@interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
+
+@end
+
+
+@implementation ORKJSONSerializationTests
+
+@end
+
+
 @interface ClassProperty : NSObject
 
 @property (nonatomic, copy) NSString *propertyName;
@@ -90,7 +100,7 @@
 @end
 
 
-@interface MockCountingDictionary : NSObject
+@interface MockCountingDictionary : NSObject<NSMutableCopying, NSCopying>
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
@@ -98,7 +108,7 @@
 
 - (void)stopObserving;
 
-- (NSArray *)unTouchedKeys;
+- (NSArray *)untouchedKeys;
 
 @property (nonatomic, strong) NSMutableSet *touchedKeys;
 
@@ -108,12 +118,12 @@
 
 
 @implementation MockCountingDictionary {
-    NSDictionary *_d;
+    NSMutableDictionary *_d;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    _d = dictionary;
+    _d = [dictionary mutableCopy];
     return self;
 }
 
@@ -144,15 +154,15 @@
     self.touchedKeys = nil;
 }
 
-- (NSArray *)unTouchedKeys {
-    NSMutableArray *unTouchedKeys = [NSMutableArray new];
+- (NSArray *)untouchedKeys {
+    NSMutableArray *untouchedKeys = [NSMutableArray new];
     NSArray *keys = [_d allKeys];
     for (NSString *key in keys) {
         if ([self.touchedKeys containsObject:key] == NO) {
-            [unTouchedKeys addObject:key];
+            [untouchedKeys addObject:key];
         }
     }
-    return [unTouchedKeys copy];
+    return [untouchedKeys copy];
 }
 
 - (id)objectForKey:(id)aKey {
@@ -160,6 +170,10 @@
         [self.touchedKeys addObject:aKey];
     }
     return [_d objectForKey:aKey];
+}
+
+- (void)setObject:(id)anObject forKey:(id<NSCopying>)aKey {
+    [_d setObject:anObject forKey:aKey];
 }
 
 - (id)objectForKeyedSubscript:(id)key {
@@ -171,6 +185,16 @@
 
 - (NSDictionary *)_containedDictionary {
     return [_d copy];
+}
+
+- (nonnull id)copyWithZone:(nullable NSZone *)__unused zone {
+    // Return self rather than a copy
+    return self;
+}
+
+- (nonnull id)mutableCopyWithZone:(nullable NSZone *)__unused zone {
+    // Return self rather than a copy
+    return self;
 }
 
 @end
@@ -226,10 +250,10 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
 ORK_MAKE_TEST_INIT(ORKHealthClinicalTypeRecorderConfiguration, ^{return [self initWithIdentifier:@"testRecorder" healthClinicalType:[HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord] healthFHIRResourceType:nil];});
 ORK_MAKE_TEST_INIT(CLCircularRegion, (^{
     return [self initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"];
-}))
+}));
 ORK_MAKE_TEST_INIT_ALT(CLCircularRegion, (^{
     return [self initWithCenter:CLLocationCoordinate2DMake(3.0, 4.0) radius:150.0 identifier:@"identifier"];
-}))
+}));
 ORK_MAKE_TEST_INIT(ORKLocation, (^{
     CNMutablePostalAddress *postalAddress = [[CNMutablePostalAddress alloc] init];
     postalAddress.city = @"cityA";
@@ -246,38 +270,38 @@ ORK_MAKE_TEST_INIT_ALT(ORKLocation, (^{
 }));
 ORK_MAKE_TEST_INIT(HKSampleType, (^{
     return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
-}))
+}));
 ORK_MAKE_TEST_INIT(HKQuantityType, (^{
     return [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBodyMass];
-}))
+}));
 ORK_MAKE_TEST_INIT(HKCorrelationType, (^{
     return [HKCorrelationType correlationTypeForIdentifier:HKCorrelationTypeIdentifierBloodPressure];
-}))
+}));
 ORK_MAKE_TEST_INIT(HKCharacteristicType, (^{
     return [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
-}))
+}));
 ORK_MAKE_TEST_INIT(HKClinicalType, (^{
     return [HKClinicalType clinicalTypeForIdentifier:HKClinicalTypeIdentifierAllergyRecord];
-}))
-
+}));
 ORK_MAKE_TEST_INIT(NSNumber, (^{
     return [self initWithInt:123];
-}))
+}));
 ORK_MAKE_TEST_INIT(HKUnit, (^{
     return [HKUnit unitFromString:@"kg"];
-}))
+}));
 ORK_MAKE_TEST_INIT(NSURL, (^{
     return [self initFileURLWithPath:@"/usr"];
-}))
+}));
 ORK_MAKE_TEST_INIT(NSTimeZone, (^{
     return [NSTimeZone timeZoneForSecondsFromGMT:60*60];
-}))
+}));
 ORK_MAKE_TEST_INIT(NSCalendar, (^{
     return [self initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-}))
+}));
 ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     return [self initWithPattern:@"." options:0 error:nil];
-}))
+}));
+ORK_MAKE_TEST_INIT(UIColor, (^{ return [self initWithRed:1 green:1 blue:1 alpha:1]; }));
 
 @interface ORKJSONTestImageSerialization : NSObject<ORKESerializationImageProvider>
 
@@ -396,6 +420,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                  [ORKTouchAbilitySwipeResult class],
                                                  [ORKTouchAbilityScrollResult class]
                                                  ];
+        
         _propertyExclusionList = @[
                                    @"superclass",
                                    @"description",
@@ -407,66 +432,97 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                    @"healthKitUnit",
                                    @"answer",
                                    @"firstResult",
-                                   @"ORKPageStep.steps",
-                                   @"ORKNavigablePageStep.steps",
-                                   @"ORKTextAnswerFormat.validationRegex",
-                                   @"ORKRegistrationStep.passcodeValidationRegex",
                                    @"textViewText",
                                    @"ORKConsentSection.image",
-                                   @"ORKSpeechRecognitionResult.transcription"
+                                   @"ORKNavigablePageStep.steps",
+                                   @"ORKPageStep.steps",
+                                   @"ORKRegistrationStep.passcodeValidationRegex",
+                                   @"ORKSpeechRecognitionResult.transcription",
+                                   @"ORKTextAnswerFormat.validationRegex",
                                    ];
+        
         _knownNotSerializedProperties = @[
-                                          @"ORKStep.task",
-                                          @"ORKStep.restorable",
-                                          @"ORKReviewStep.isStandalone",
-                                          @"ORKAnswerFormat.questionType",
-                                          @"ORKQuestionStep.questionType",
-                                          @"ORKConsentSection.escapedContent",
-                                          @"ORKConsentSignature.signatureImage",
-                                          @"ORKConsentDocument.writer",
-                                          @"ORKConsentDocument.signatureFormatter",
-                                          @"ORKConsentDocument.sectionFormatter",
-                                          @"ORKConsentDocument.sections",
-                                          @"ORKConsentDocument.signatures",
-                                          @"ORKContinuousScaleAnswerFormat.numberFormatter",
-                                          @"ORKFormItem.step",
-                                          @"ORKTimeIntervalAnswerFormat.maximumInterval",
-                                          @"ORKTimeIntervalAnswerFormat.defaultInterval",
-                                          @"ORKTimeIntervalAnswerFormat.step",
-                                          @"ORKTextAnswerFormat.maximumLength",
-                                          @"ORKTextAnswerFormat.autocapitalizationType",
-                                          @"ORKTextAnswerFormat.autocorrectionType",
-                                          @"ORKTextAnswerFormat.spellCheckingType",
-                                          @"ORKTextAnswerFormat.textContentType",
-                                          @"ORKTextAnswerFormat.passwordRules",
-                                          @"ORKStep.requestedPermissions",
-                                          @"ORKOrderedTask.providesBackgroundAudioPrompts",
-                                          @"ORKScaleAnswerFormat.numberFormatter",
-                                          @"ORKStep.allowsBackNavigation",
+                                          @"ORKActiveStep.image",
+                                          @"ORKAmslerGridResult.image",
+                                          @"ORKAnswerFormat.healthKitUnit",
                                           @"ORKAnswerFormat.healthKitUserUnit",
-                                          @"ORKOrderedTask.requestedPermissions",
-                                          @"ORKStep.showsProgress",
-                                          @"ORKResult.saveable",
+                                          @"ORKAnswerFormat.questionType",
+                                          @"ORKBodyItem.image",
                                           @"ORKCollectionResult.firstResult",
-                                          @"ORKHeightAnswerFormat.useMetricSystem",
-                                          @"ORKWeightAnswerFormat.useMetricSystem",
+                                          @"ORKConsentDocument.sectionFormatter", // created on demand
+                                          @"ORKConsentDocument.sections",
+                                          @"ORKConsentDocument.signatureFormatter", // created on demand
+                                          @"ORKConsentDocument.signatures",
+                                          @"ORKConsentDocument.writer", // created on demand
+                                          @"ORKConsentSection.customImage",
+                                          @"ORKConsentSection.escapedContent",
+                                          @"ORKConsentSection.image",
+                                          @"ORKConsentSignature.signatureImage",
+                                          @"ORKContinuousScaleAnswerFormat.maximumImage",
+                                          @"ORKContinuousScaleAnswerFormat.minimumImage",
+                                          @"ORKContinuousScaleAnswerFormat.numberFormatter",
+                                          @"ORKCustomStep.contentView",  // UIView is not able to be serialized
                                           @"ORKDataResult.data",
-                                          @"ORKVerificationStep.verificationViewControllerClass",
+                                          @"ORKFormItem.step",  // weak ref - object will be nil
+                                          @"ORKHealthClinicalTypeRecorderConfiguration.healthClinicalType",
+                                          @"ORKHealthClinicalTypeRecorderConfiguration.healthFHIRResourceType",
+                                          @"ORKHeightAnswerFormat.useMetricSystem",
+                                          @"ORKImageCaptureStep.templateImage",
+                                          @"ORKImageChoice.normalStateImage",
+                                          @"ORKImageChoice.selectedStateImage",
+                                          @"ORKImageChoice.value",
+                                          @"ORKInstructionStep.attributedDetailText",
+                                          @"ORKInstructionStep.auxiliaryImage",
+                                          @"ORKInstructionStep.iconImage",
+                                          @"ORKInstructionStep.image",
                                           @"ORKLoginStep.loginViewControllerClass",
-                                          @"ORKRegistrationStep.passcodeValidationRegularExpression",
-                                          @"ORKRegistrationStep.passcodeInvalidMessage",
-                                          @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
-                                          @"ORKRegistrationStep.phoneNumberInvalidMessage",
-                                          @"ORKSignatureResult.signatureImage",
-                                          @"ORKSignatureResult.signaturePath",
-                                          @"ORKPageStep.steps",
                                           @"ORKNavigablePageStep.steps",
                                           @"ORKNumericAnswerFormat.defaultNumericAnswer",
-                                          @"ORKInstructionStep.attributedDetailText",
                                           @"ORKOrderedTask.progressLabelColor",
+                                          @"ORKOrderedTask.providesBackgroundAudioPrompts",
+                                          @"ORKOrderedTask.requestedPermissions",
+                                          @"ORKPageStep.steps",
+                                          @"ORKQuestionResult.answer",
+                                          @"ORKQuestionStep.question",
+                                          @"ORKQuestionStep.questionType",
+                                          @"ORKRegistrationStep.passcodeInvalidMessage",
                                           @"ORKRegistrationStep.passcodeRules",
+                                          @"ORKRegistrationStep.passcodeValidationRegularExpression",
+                                          @"ORKRegistrationStep.phoneNumberInvalidMessage",
+                                          @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
+                                          @"ORKResult.saveable",
+                                          @"ORKReviewStep.isStandalone",
+                                          @"ORKScaleAnswerFormat.maximumImage",
+                                          @"ORKScaleAnswerFormat.minimumImage",
+                                          @"ORKScaleAnswerFormat.numberFormatter",
+                                          @"ORKSignatureResult.signatureImage",
+                                          @"ORKSignatureResult.signaturePath",
+                                          @"ORKSpatialSpanMemoryStep.customTargetImage",
+                                          @"ORKStep.allowsBackNavigation",
+                                          @"ORKStep.auxiliaryImage",
+                                          @"ORKStep.iconImage",
+                                          @"ORKStep.image",
+                                          @"ORKStep.requestedPermissions",
+                                          @"ORKStep.restorable",
+                                          @"ORKStep.showsProgress",
+                                          @"ORKStep.task", // weak ref - object will be nil,
+                                          @"ORKTableStep.bulletIconNames",
+                                          @"ORKTextAnswerFormat.autocapitalizationType",
+                                          @"ORKTextAnswerFormat.autocorrectionType",
+                                          @"ORKTextAnswerFormat.maximumLength",
+                                          @"ORKTextAnswerFormat.passwordRules",
+                                          @"ORKTextAnswerFormat.spellCheckingType",
+                                          @"ORKTextAnswerFormat.textContentType",
                                           @"ORKTextChoice.detailTextAttributedString",
-                                          @"ORKTextChoice.primaryTextAttributedString"
+                                          @"ORKTextChoice.primaryTextAttributedString",
+                                          @"ORKTextChoice.value",
+                                          @"ORKTimeIntervalAnswerFormat.defaultInterval",
+                                          @"ORKTimeIntervalAnswerFormat.maximumInterval",
+                                          @"ORKTimeIntervalAnswerFormat.step",
+                                          @"ORKVerificationStep.verificationViewControllerClass",
+                                          @"ORKVideoCaptureStep.templateImage",
+                                          @"ORKWeightAnswerFormat.useMetricSystem",
+                                          @"ORKWebViewStep.customViewProvider"
                                           ];
         _allowedUnTouchedKeys = @[@"_class"];
     }
@@ -484,6 +540,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     [stringsForClassesExcluded addObject:@"ORKSignatureGestureRecognizer"];
     [stringsForClassesExcluded addObject:@"ORKTouchGestureRecognizer"];
     [stringsForClassesExcluded addObject:@"ORKHealthClinicalTypeRecorderConfiguration"];
+    [stringsForClassesExcluded addObject:@"ORKUSDZModelManagerScene"];
+    [stringsForClassesExcluded addObject:@"ORKBlurFooterView"];
+    [stringsForClassesExcluded addObject:@"ORKFrontFacingCameraStepOptionsView"];
     
     // Find all classes that conform to NSSecureCoding
     NSMutableArray<Class> *classesWithSecureCoding = [NSMutableArray new];
@@ -508,12 +567,12 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 @end
 
 
-@interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
+@interface ORKJSONSerializationTests (Tests)
 
 @end
 
 
-@implementation ORKJSONSerializationTests
+@implementation ORKJSONSerializationTests  (Tests)
 
 - (Class)unarchiver:(NSKeyedUnarchiver *) __unused unarchiver cannotDecodeObjectOfClassName:(NSString *)name originalClasses:(NSArray *)classNames {
     ORK_Log_Info("Cannot decode object with class: %@ (original classes: %@)", name, classNames);
@@ -630,7 +689,10 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
     ORKJSONTestImageSerialization *testImageSerialization = [[ORKJSONTestImageSerialization alloc] init];
     testImageSerialization.generateImages = YES;
-    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:testImageSerialization];
+    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil
+                                                                              imageProvider:testImageSerialization
+                                                                         stringInterpolator:nil
+                                                                           propertyInjector:nil];
     
     ORKJSONSerializationTestConfiguration *testConfiguration = [[ORKJSONSerializationTestConfiguration alloc] init];
     
@@ -642,6 +704,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
     // Decode where images are "decoded"
     for (NSString *path in paths) {
+        
         if ([[path lastPathComponent] hasPrefix:@"DontKnow"]) {
             continue;
         }
@@ -698,7 +761,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 // JSON Serialization
 - (void)testORKSerialization {
     ORKJSONTestImageSerialization *testImageSerialization = [[ORKJSONTestImageSerialization alloc] init];
-    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:testImageSerialization];
+    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:testImageSerialization stringInterpolator:nil propertyInjector:nil];
     
     ORKJSONSerializationTestConfiguration *testConfiguration = [[ORKJSONSerializationTestConfiguration alloc] init];
     // Find all classes that are serializable this way
@@ -720,7 +783,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     NSArray *propertyExclusionList = testConfiguration.propertyExclusionList;
     NSArray *knownNotSerializedProperties = testConfiguration.knownNotSerializedProperties;
     NSArray *allowedUnTouchedKeys = testConfiguration.allowedUnTouchedKeys;
-    
+
     // Test Each class
     for (Class aClass in classesWithORKSerialization) {
         
@@ -736,31 +799,40 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
         Class currentClass = aClass;
         while ([classesWithORKSerialization containsObject:currentClass]) {
             
-            objc_property_t *props = class_copyPropertyList(currentClass, &count);
+            objc_property_t *objcProperties = class_copyPropertyList(currentClass, &count);
             for (uint i = 0; i < count; i++) {
-                objc_property_t property = props[i];
-                ClassProperty *p = [[ClassProperty alloc] initWithObjcProperty:property];
+                objc_property_t objcProperty = objcProperties[i];
+                ClassProperty *classProperty = [[ClassProperty alloc] initWithObjcProperty:objcProperty];
                 
-                NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",NSStringFromClass(currentClass),p.propertyName];
-                if ([propertyExclusionList containsObject: p.propertyName] == NO &&
-                    [propertyExclusionList containsObject: dottedPropertyName] == NO) {
-                    if (p.isPrimitiveType == NO) {
+                NSString *dottedPropertyName = [NSString stringWithFormat:@"%@.%@",
+                                                NSStringFromClass(currentClass),
+                                                classProperty.propertyName];
+                NSString *dottedOriginalClassPropertyName = [NSString stringWithFormat:@"%@.%@",
+                                                             NSStringFromClass(aClass),
+                                                             classProperty.propertyName];
+                if (![propertyExclusionList containsObject:classProperty.propertyName] &&
+                    ![propertyExclusionList containsObject:dottedPropertyName] &&
+                    ![propertyExclusionList containsObject:dottedOriginalClassPropertyName]) {
+                    if (classProperty.isPrimitiveType == NO) {
                         // Assign value to object type property
-                        if (p.propertyClass == [NSObject class] && (aClass == [ORKTextChoice class] || aClass == [ORKImageChoice class]))
+                        if (classProperty.propertyClass == [NSObject class] &&
+                            (aClass == [ORKTextChoice class] || aClass == [ORKImageChoice class]))
                         {
                             // Map NSObject to string, since it's used where either a string or a number is acceptable
-                            [instance setValue:@"test" forKey:p.propertyName];
+                            [instance setValue:@"test" forKey:classProperty.propertyName];
                         } else {
-                            id itemInstance = [self instanceForClass:p.propertyClass];
-                            [instance setValue:itemInstance forKey:p.propertyName];
+                            id itemInstance = [self instanceForClass:classProperty.propertyClass];
+                            [instance setValue:itemInstance forKey:classProperty.propertyName];
                         }
                     }
-                    [propertyNames addObject:p.propertyName];
-                    dottedPropertyNames[p.propertyName] = dottedPropertyName;
+                    if ([classProperty.propertyName isEqualToString:@"steps"]) {
+                        NSLog(@"steps");
+                    }
+                    [propertyNames addObject:classProperty.propertyName];
+                    dottedPropertyNames[classProperty.propertyName] = dottedPropertyName;
                 }
             }
             currentClass = [currentClass superclass];
-            
         }
         
         if ([aClass isSubclassOfClass:[ORKTextScaleAnswerFormat class]]) {
@@ -788,7 +860,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
         } else if ([aClass isSubclassOfClass:[ORKReviewStep class]]) {
             [instance setValue:[ORKTaskResult new] forKey:@"resultSource"]; // Manually add here because it's a protocol and hence property doesn't have a class
         }
-        
+
         // Serialization
         id mockDictionary = [[MockCountingDictionary alloc] initWithDictionary:[ORKESerializer JSONObjectForObject:instance context:context error:NULL]];
         
@@ -796,9 +868,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
         XCTAssertTrue([NSStringFromClass(aClass) isEqualToString:mockDictionary[@"_class"]]);
         
         // All properties should have matching fields in dictionary (allow predefined exceptions)
-        for (NSString *pName in propertyNames) {
-            if (mockDictionary[pName] == nil) {
-                NSString *notSerializedProperty = dottedPropertyNames[pName];
+        for (NSString *propertyName in propertyNames) {
+            if (mockDictionary[propertyName] == nil) {
+                NSString *notSerializedProperty = dottedPropertyNames[propertyName];
                 BOOL success = [knownNotSerializedProperties containsObject:notSerializedProperty];
                 if (!success) {
                     XCTAssertTrue(success, "Unexpected notSerializedProperty = %@ (%@)", notSerializedProperty, NSStringFromClass(aClass));
@@ -810,10 +882,10 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
         
         id instance2 = [ORKESerializer objectFromJSONObject:mockDictionary context:context error:NULL];
         
-        NSArray *unTouchedKeys = [mockDictionary unTouchedKeys];
+        NSArray *untouchedKeys = [mockDictionary untouchedKeys];
         
         // Make sure all keys are touched by initializer
-        for (NSString *key in unTouchedKeys) {
+        for (NSString *key in untouchedKeys) {
             XCTAssertTrue([allowedUnTouchedKeys containsObject:key], @"untouched %@ in %@", key, aClass);
         }
         
@@ -908,87 +980,12 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 - (void)testSecureCoding {
     ORKJSONSerializationTestConfiguration *testConfiguration = [[ORKJSONSerializationTestConfiguration alloc] init];
     NSArray<Class> *classesWithSecureCoding = testConfiguration.classesWithSecureCoding;
-    
-    // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass",
-                                       @"description",
-                                       @"descriptionSuffix",
-                                       @"debugDescription",
-                                       @"hash",
-                                       @"requestedHealthKitTypesForReading",
-                                       @"requestedHealthKitTypesForWriting",
-                                       @"healthKitUnit",
-                                       @"firstResult",
-                                       @"correlationType",
-                                       @"sampleType",
-                                       @"unit",
-                                       @"ORKPageStep.steps",
-                                       @"ORKNavigablePageStep.steps",
-                                       @"ORKTextAnswerFormat.validationRegex",
-                                       @"ORKRegistrationStep.passcodeValidationRegex",
-                                       @"textViewText"
-                                       ];
-    NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
-                                              @"ORKConsentDocument.signatureFormatter", // created on demand
-                                              @"ORKConsentDocument.sectionFormatter", // created on demand
-                                              @"ORKStep.task", // weak ref - object will be nil
-                                              @"ORKFormItem.step",  // weak ref - object will be nil
-                                              
-                                              // id<> properties - these are actually serialized, but we can't fill them in properly for this test
-                                              @"ORKTextChoice.value",
-                                              @"ORKImageChoice.value",
-                                              @"ORKQuestionResult.answer",
-                                              @"ORKVerificationStep.verificationViewControllerClass",
-                                              @"ORKLoginStep.loginViewControllerClass",
-                                              
-                                              // Not serialized - computed property
-                                              @"ORKAnswerFormat.healthKitUnit",
-                                              @"ORKAnswerFormat.healthKitUserUnit",
-                                              @"ORKCollectionResult.firstResult",
-                                              
-                                              @"ORKCustomStep.contentView",  // UIView is not able to be serialized
-                                              
-                                              // Images: ignored so we can do the equality test and pass
-                                              @"ORKImageChoice.normalStateImage",
-                                              @"ORKImageChoice.selectedStateImage",
-                                              @"ORKImageCaptureStep.templateImage",
-                                              @"ORKVideoCaptureStep.templateImage",
-                                              @"ORKConsentSignature.signatureImage",
-                                              @"ORKConsentSection.customImage",
-                                              @"ORKInstructionStep.image",
-                                              @"ORKInstructionStep.auxiliaryImage",
-                                              @"ORKInstructionStep.iconImage",
-                                              @"ORKActiveStep.image",
-                                              @"ORKStep.image",
-                                              @"ORKStep.iconImage",
-                                              @"ORKStep.auxiliaryImage",
-                                              @"ORKStep.image",
-                                              @"ORKStep.auxiliaryImage",
-                                              @"ORKStep.iconImage",
-                                              @"ORKSpatialSpanMemoryStep.customTargetImage",
-                                              @"ORKScaleAnswerFormat.minimumImage",
-                                              @"ORKScaleAnswerFormat.maximumImage",
-                                              @"ORKContinuousScaleAnswerFormat.minimumImage",
-                                              @"ORKContinuousScaleAnswerFormat.maximumImage",
-                                              @"ORKSignatureResult.signatureImage",
-                                              @"ORKSignatureResult.signaturePath",
-                                              @"ORKPageStep.steps",
-                                              
-                                              @"ORKRegistrationStep.phoneNumberValidationRegularExpression",
-                                              @"ORKRegistrationStep.phoneNumberInvalidMessage",
-                                              @"ORKTableStep.bulletIconNames",
-                                              @"ORKAmslerGridResult.image",
-                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthClinicalType",
-                                              @"ORKHealthClinicalTypeRecorderConfiguration.healthFHIRResourceType",
-                                              @"ORKInstructionStep.attributedDetailText",
-                                              @"ORKOrderedTask.progressLabelColor",
-                                              @"ORKQuestionStep.question",
-                                              @"ORKConsentSection.image",
-                                              @"ORKBodyItem.image"
-                                              ];
+    NSArray *propertyExclusionList = testConfiguration.propertyExclusionList;
+    NSArray *knownNotSerializedProperties = testConfiguration.knownNotSerializedProperties;
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
+        
         id instance = [self instanceForClass:aClass];
         
         // Find all properties of this class
@@ -1179,7 +1176,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                        @"ORKSpeechRecognitionStep.shouldHideTranscript",
                                        @"ORKTableStep.isBulleted",
                                        @"ORKTableStep.allowsSelection",
-                                       @"ORKPDFViewerStep.actionBarOption"
+                                       @"ORKPDFViewerStep.actionBarOption",
                                        ];
     
     NSArray *hashExclusionList = @[
@@ -1291,6 +1288,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
     
     NSDictionary <NSString *, NSString *> *mapStepClassForViewController = @{ // classes that require custom step class
                                                                              @"ORKActiveStepViewController" : @"ORKActiveStep",
+                                                                             @"ORKCompletionStepViewController" : @"ORKCompletionStep",
                                                                              @"ORKConsentReviewStepViewController" : @"ORKConsentReviewStep",
                                                                              @"ORKFormStepViewController" : @"ORKFormStep",
                                                                              @"ORKHolePegTestPlaceStepViewController" : @"ORKHolePegTestPlaceStep",
@@ -1312,6 +1310,9 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
                                                                              @"ORKSecondaryTaskStepViewController" : @"ORKSecondaryTaskStep",
                                                                              @"ORKHeadphoneDetectStepViewController" : @"ORKHeadphoneDetectStep",
                                                                              @"ORKWebViewStepViewController": @"ORKWebViewStep",
+                                                                             
+                                                                             @"ORKCustomStepViewController":@"ORKCustomStep",
+                                                                             @"ORKRequestPermissionsStepViewController":@"ORKRequestPermissionsStep"
                                                                              };
     
     NSDictionary <NSString *, NSDictionary *> *kvMapForStep = @{ // Steps that require modification to validate
@@ -1437,7 +1438,7 @@ ORK_MAKE_TEST_INIT(NSRegularExpression, (^{
 }
 
 - (void)testMissingDefaultValueKeyInScaleAnswerFormat {
-    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:nil];
+    ORKESerializationContext *context = [[ORKESerializationContext alloc] initWithLocalizer:nil imageProvider:nil stringInterpolator:nil propertyInjector:nil];
 
     NSDictionary *payloadForContinuousScale = @{@"minimumValueDescription":@"",@"maximum":@100,@"_class":@"ORKContinuousScaleAnswerFormat",@"vertical":@NO,@"minimum":@0,@"maximumFractionDigits":@0,@"hideSelectedValue":@NO,@"hideRanges":@NO,@"hideLabels":@NO,@"numberStyle":@"percent",@"maximumValueDescription":@"",@"showDontKnowButton":@NO,@"customDontKnowButtonText":@""};
 

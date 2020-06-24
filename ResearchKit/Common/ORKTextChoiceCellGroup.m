@@ -220,6 +220,7 @@
             // It is ok to not create the cell at here
             ORKChoiceViewCell *cell = _cells[@(index)];
             [cell setCellSelected:NO highlight:NO];
+
         }
     }
 }

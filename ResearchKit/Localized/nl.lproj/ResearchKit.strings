@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Tijdens deze activiteit wordt je ruimtelijk kortetermijngeheugen gemeten door je de volgorde waarin %@ oplichten te laten herhalen.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "bloemen";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bloemen";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in dezelfde volgorde als waarin ze oplichtten.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in de omgekeerde volgorde als waarin ze oplichtten.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in dezelfde volgorde als waarin ze oplichtten.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Een aantal van de %@ licht een voor een op. Tik op die %@ in de omgekeerde volgorde als waarin ze oplichtten.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen en kijk goed.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Score";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-schijventest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tijdens deze activiteit meet je het functioneren van je bovenste ledematen door een schijfje in een cirkel te plaatsen. Dit moet je %@ keer doen.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Zowel je linker- als rechterhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Zowel je linker- als rechterhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Zowel je rechter- als linkerhand wordt getest.\nJe moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat je dit %@ keer hebt gedaan, moet je het schijfje %@ keer weer weghalen.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";

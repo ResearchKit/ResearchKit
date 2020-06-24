@@ -30,6 +30,7 @@
 
 
 @import Foundation;
+@import UIKit;
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -491,6 +492,8 @@ typedef NS_ENUM(NSInteger, ORKNavigationContainerButtonStyle) {
 } ORK_ENUM_AVAILABLE;
 
 extern const double ORKDoubleDefaultValue ORK_AVAILABLE_DECL;
+
+extern const CGFloat ORKCGFloatDefaultValue ORK_AVAILABLE_DECL;
 
 /**
  Identifiers for locales that support speech recognition.
