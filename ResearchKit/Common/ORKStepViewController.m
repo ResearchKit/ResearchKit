@@ -42,7 +42,7 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-static const CGFloat iPadStepTitleLabelFontSize = 50.0;
+static const CGFloat iPadStepTitleLabelFontSize = 34.0;
 static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
 
 @interface iPadLayoutConstants : NSObject
@@ -204,7 +204,7 @@ static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
         [self.navigationController.navigationBar setPrefersLargeTitles:NO];
         [self setupiPadBackgroundViewWithColor:ORKColor(ORKiPadBackgroundViewColorKey) andCornerRadius:ORKiPadBackgroundViewCornerRadius];
         [self setupiPadContentView];
-        [self setupiPadStepTitleLabelWithFont:[UIFont systemFontOfSize:iPadStepTitleLabelFontSize weight:UIFontWeightBold]];
+        [self setupiPadStepTitleLabelWithFont:[UIFont systemFontOfSize:iPadStepTitleLabelFontSize weight:UIFontWeightRegular]];
         [self setupiPadConstraintsWithLayoutConstants:[iPadLayoutConstants new]];
     } else { //iPhone
         [self setupiPadBackgroundViewWithColor:ORKColor(ORKBackgroundColorKey) andCornerRadius:0.0];
