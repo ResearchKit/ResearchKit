@@ -42,8 +42,87 @@
 #import "ORKHelpers_Internal.h"
 #import "ORKSkin.h"
 
-static const CGFloat iPadStepTitleLabelPadding = 15.0;
-static const CGFloat iPadStepTitleLabelFontSize = 50.0;
+static const CGFloat iPadStepTitleLabelFontSize = 34.0;
+static const CGFloat iPhoneStepTitleLabelFontSize = 28.0;
+
+@interface iPadLayoutConstants : NSObject
+
+@property (readonly) CGFloat iPadStepTitleLabelTopPadding;
+@property (readonly) CGFloat iPadStepTitleLabelPadding;
+@property (readonly) CGFloat iPadBackgroundViewBottomPadding;
+@property (readonly) CGFloat iPadBackgroundViewLeftRightPadding;
+@property (readonly) CGFloat iPadContentViewLeftRightPadding;
+@property (readonly) CGFloat iPadContentViewTitleLabelPadding;
+@property (readonly) CGFloat iPadContentViewBottomPadding;
+
+@end
+
+@implementation iPadLayoutConstants
+
+- (CGFloat)iPadStepTitleLabelTopPadding {
+    return self.iPadBackgroundViewBottomPadding;
+}
+
+- (CGFloat)iPadStepTitleLabelPadding {
+    return 15.0;
+}
+
+- (CGFloat)iPadBackgroundViewBottomPadding {
+    return ORKiPadBackgroundViewBottomPadding;
+}
+
+- (CGFloat)iPadBackgroundViewLeftRightPadding {
+    return ORKiPadBackgroundViewLeftRightPadding;
+}
+
+- (CGFloat)iPadContentViewLeftRightPadding {
+    return self.iPadStepTitleLabelPadding;
+}
+
+- (CGFloat)iPadContentViewTitleLabelPadding {
+    return self.iPadStepTitleLabelPadding;
+}
+
+- (CGFloat)iPadContentViewBottomPadding {
+    return self.iPadStepTitleLabelPadding;
+}
+
+@end
+
+@interface iPhoneLayoutConstants : iPadLayoutConstants
+@end
+
+@implementation iPhoneLayoutConstants
+
+- (CGFloat)iPadStepTitleLabelTopPadding {
+    return 20.0;
+}
+
+- (CGFloat)iPadStepTitleLabelPadding {
+    return 28.0;
+}
+
+- (CGFloat)iPadBackgroundViewBottomPadding {
+    return 0.0;
+}
+
+- (CGFloat)iPadBackgroundViewLeftRightPadding {
+    return 0.0;
+}
+
+- (CGFloat)iPadContentViewLeftRightPadding {
+    return 0.0;
+}
+
+- (CGFloat)iPadContentViewTitleLabelPadding {
+    return 10.0;
+}
+
+- (CGFloat)iPadContentViewBottomPadding {
+    return 0.0;
+}
+
+@end
 
 @interface ORKStepViewController () {
     BOOL _hasBeenPresented;
@@ -108,29 +187,39 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.title = @"";
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-    [self.taskViewController.navigationBar setBarTintColor:[self.view backgroundColor]];
-    if ([self step].title) {
-        self.title = [self step].title;
-    } else {
-        self.title = @"";
+    
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *appearance = [UINavigationBarAppearance new];
+        appearance.backgroundColor = self.view.backgroundColor;
+        appearance.shadowImage = [UIImage new];
+        appearance.shadowColor = UIColor.clearColor;
+        self.taskViewController.navigationBar.standardAppearance = appearance;
+        self.taskViewController.navigationBar.scrollEdgeAppearance = appearance;
     }
-    if (!_shouldIgnoreiPadDesign && ORKNeedWideScreenDesign(self.view)) {
+    
+    if (!_shouldIgnoreiPadDesign && ORKNeedWideScreenDesign(self.view)) { //iPad
         [self.navigationController.navigationBar setPrefersLargeTitles:NO];
-        [self setupiPadBackgroundView];
+        [self setupiPadBackgroundViewWithColor:ORKColor(ORKiPadBackgroundViewColorKey) andCornerRadius:ORKiPadBackgroundViewCornerRadius];
         [self setupiPadContentView];
-        [self setupiPadStepTitleLabel];
-        [self setupiPadConstraints];
+        [self setupiPadStepTitleLabelWithFont:[UIFont systemFontOfSize:iPadStepTitleLabelFontSize weight:UIFontWeightRegular]];
+        [self setupiPadConstraintsWithLayoutConstants:[iPadLayoutConstants new]];
+    } else { //iPhone
+        [self setupiPadBackgroundViewWithColor:ORKColor(ORKBackgroundColorKey) andCornerRadius:0.0];
+        [self setupiPadContentView];
+        [self setupiPadStepTitleLabelWithFont:[UIFont systemFontOfSize:iPhoneStepTitleLabelFontSize weight:UIFontWeightRegular]];
+        [self setupiPadConstraintsWithLayoutConstants:[iPhoneLayoutConstants new]];
     }
 }
 
-- (void)setupiPadBackgroundView {
+- (void)setupiPadBackgroundViewWithColor:(UIColor *)bgColor andCornerRadius:(CGFloat)cornerRadius {
     if (!_iPadBackgroundView) {
         _iPadBackgroundView = [UIView new];
     }
-    [_iPadBackgroundView setBackgroundColor:ORKColor(ORKiPadBackgroundViewColorKey)];
-    _iPadBackgroundView.layer.cornerRadius = ORKiPadBackgroundViewCornerRadius;
+    [_iPadBackgroundView setBackgroundColor:bgColor];
+    _iPadBackgroundView.layer.cornerRadius = cornerRadius;
     [self.view addSubview:_iPadBackgroundView];
 }
 
@@ -142,13 +231,13 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     [_iPadBackgroundView addSubview:_iPadContentView];
 }
 
-- (void)setupiPadStepTitleLabel {
+- (void)setupiPadStepTitleLabelWithFont:(UIFont *)font {
     if (!_iPadStepTitleLabel) {
         _iPadStepTitleLabel = [UILabel new];
     }
     _iPadStepTitleLabel.numberOfLines = 0;
     _iPadStepTitleLabel.textAlignment = NSTextAlignmentNatural;
-    [_iPadStepTitleLabel setFont:[UIFont systemFontOfSize:iPadStepTitleLabelFontSize weight:UIFontWeightBold]];
+    [_iPadStepTitleLabel setFont:font];
     [_iPadStepTitleLabel setAdjustsFontSizeToFitWidth:YES];
     [_iPadStepTitleLabel setText:self.step.title];
     [_iPadBackgroundView addSubview:_iPadStepTitleLabel];
@@ -166,7 +255,7 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
     }
 }
 
-- (void)setupiPadConstraints {
+- (void)setupiPadConstraintsWithLayoutConstants:(iPadLayoutConstants *)layoutConstants {
     _iPadBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
     _iPadContentView.translatesAutoresizingMaskIntoConstraints = NO;
     _iPadStepTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -189,70 +278,70 @@ static const CGFloat iPadStepTitleLabelFontSize = 50.0;
                                                          toItem:self.view.safeAreaLayoutGuide
                                                       attribute:NSLayoutAttributeLeft
                                                      multiplier:1.0
-                                                       constant:ORKiPadBackgroundViewLeftRightPadding],
+                                                       constant:layoutConstants.iPadBackgroundViewLeftRightPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeRight
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:self.view.safeAreaLayoutGuide
                                                       attribute:NSLayoutAttributeRight
                                                      multiplier:1.0
-                                                       constant:-ORKiPadBackgroundViewLeftRightPadding],
+                                                       constant:-layoutConstants.iPadBackgroundViewLeftRightPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeBottom
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:self.view.safeAreaLayoutGuide
                                                       attribute:NSLayoutAttributeBottom
                                                      multiplier:1.0
-                                                       constant:-ORKiPadBackgroundViewBottomPadding],
+                                                       constant:-layoutConstants.iPadBackgroundViewBottomPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadStepTitleLabel
                                                       attribute:NSLayoutAttributeTop
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeTop
                                                      multiplier:1.0
-                                                       constant:ORKiPadBackgroundViewBottomPadding],
+                                                       constant:layoutConstants.iPadStepTitleLabelTopPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadStepTitleLabel
                                                       attribute:NSLayoutAttributeLeft
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeLeft
                                                      multiplier:1.0
-                                                       constant:iPadStepTitleLabelPadding],
+                                                       constant:layoutConstants.iPadStepTitleLabelPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadStepTitleLabel
                                                       attribute:NSLayoutAttributeRight
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeRight
                                                      multiplier:1.0
-                                                       constant:-iPadStepTitleLabelPadding],
+                                                       constant:-layoutConstants.iPadStepTitleLabelPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadContentView
                                                       attribute:NSLayoutAttributeTop
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadStepTitleLabel
                                                       attribute:NSLayoutAttributeBottom
                                                      multiplier:1.0
-                                                       constant:iPadStepTitleLabelPadding],
+                                                       constant:layoutConstants.iPadContentViewTitleLabelPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadContentView
                                                       attribute:NSLayoutAttributeLeft
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeLeft
                                                      multiplier:1.0
-                                                       constant:iPadStepTitleLabelPadding],
+                                                       constant:layoutConstants.iPadContentViewLeftRightPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadContentView
                                                       attribute:NSLayoutAttributeRight
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeRight
                                                      multiplier:1.0
-                                                       constant:-iPadStepTitleLabelPadding],
+                                                       constant:-layoutConstants.iPadContentViewLeftRightPadding],
                          [NSLayoutConstraint constraintWithItem:_iPadContentView
                                                       attribute:NSLayoutAttributeBottom
                                                       relatedBy:NSLayoutRelationEqual
                                                          toItem:_iPadBackgroundView
                                                       attribute:NSLayoutAttributeBottom
                                                      multiplier:1.0
-                                                       constant:-iPadStepTitleLabelPadding]
+                                                       constant:-layoutConstants.iPadContentViewBottomPadding]
                          ];
     [NSLayoutConstraint activateConstraints:_iPadConstraints];
 }
