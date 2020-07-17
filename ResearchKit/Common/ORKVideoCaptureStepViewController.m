@@ -176,6 +176,8 @@
         dispatch_async(_sessionQueue, ^{
             [_captureSession startRunning];
         });
+    } else {
+        [self setFileURL:_fileURL];
     }
 }
 
