@@ -184,6 +184,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [_childNavigationController.navigationBar setShadowImage:[UIImage new]];
     [_childNavigationController.navigationBar setTranslucent:NO];
     [_childNavigationController.navigationBar setBarTintColor:ORKColor(ORKBackgroundColorKey)];
+    [_childNavigationController.navigationBar setTintColor:ORKColor(ORKBlueHighlightColorKey) ];
     
     if (@available(iOS 13.0, *)) {
         [_childNavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor secondaryLabelColor]}];
