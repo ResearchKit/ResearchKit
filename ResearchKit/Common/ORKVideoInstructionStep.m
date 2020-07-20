@@ -45,6 +45,7 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         _thumbnailTime = 0;
+        self.imageContentMode = UIViewContentModeScaleAspectFill;
     }
     return self;
 }
