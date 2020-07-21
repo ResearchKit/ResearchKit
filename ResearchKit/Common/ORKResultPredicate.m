@@ -215,7 +215,15 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
             // or part of an additional subquery predicate (for question results with an array of answers, like ORKChoiceQuestionResult).
             for (NSString *subPredicateFormat in subPredicateFormatArray) {
                 if (!areSubPredicateFormatsSubquery) {
-                    [format appendString:@" AND $z."];
+                    if ([subPredicateFormat hasPrefix:@"("]) {
+                        /*
+                           For complex queries (e.g. TimeOfDay) where nested logic is needed, we will skip the $z. prefix
+                           and allow the caller to handle. NOTE: caller will need to prefix any key references with '$z'
+                         */
+                        [format appendString:@" AND "];
+                    } else {
+                        [format appendString:@" AND $z."];
+                    }
                     [format appendString:subPredicateFormat];
                 } else {
                     [format appendString:@" AND SUBQUERY($z."];
@@ -399,14 +407,14 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                    maximumExpectedHour:(NSInteger)maximumExpectedHour
                                                  maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
     return [self predicateMatchingResultSelector:resultSelector
-                         subPredicateFormatArray:@[ @"answer.hour >= %@",
-                                                    @"answer.minute >= %@",
-                                                    @"answer.hour <= %@",
-                                                    @"answer.minute <= %@" ]
+                         subPredicateFormatArray:@[ @"($z.answer.hour > %@ OR ($z.answer.hour == %@ AND $z.answer.minute >= %@)) AND ($z.answer.hour < %@ OR ($z.answer.hour == %@ AND $z.answer.minute <= %@))" ]
                  subPredicateFormatArgumentArray:@[ @(minimumExpectedHour),
+                                                    @(minimumExpectedHour),
                                                     @(minimumExpectedMinute),
                                                     @(maximumExpectedHour),
+                                                    @(maximumExpectedHour),
                                                     @(maximumExpectedMinute) ]];
+    
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultSelector:(ORKResultSelector *)resultSelector
