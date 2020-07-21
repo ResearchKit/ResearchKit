@@ -344,7 +344,7 @@ CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
 
 static CGFloat ORKStandardHorizontalAdaptiveSizeMarginForiPadWidth(CGFloat screenSizeWidth, UIWindow *window) {
     // Use adaptive side margin, if window is wider than iPhone6 Plus.
-    // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad or iPad12_9
+    // Min Margin = ORKLayoutMarginWidthThinBezelRegular, Max Margin = ORKLayoutMarginWidthiPad or iPad12_9
     
     CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (screenSizeWidth - ORKiPhone6PlusScreenSize.width);
     ratio = MIN(1.0, ratio);
