@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2016, Darren Levy. All rights reserved.
- Copyright (c) 2016, David W. Evans. All rights reserved.
+ Copyright (c) 2020, David W. Evans. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
