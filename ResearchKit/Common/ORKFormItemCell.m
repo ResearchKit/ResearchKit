@@ -132,7 +132,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
         _delegate = delegate;
         
         _maxLabelWidth = maxLabelWidth;
-        _minTextFieldWidth = 40.0;
+        _minTextFieldWidth = 135.0;
         _answer = [answer copy];
         self.formItem = formItem;
         _labelLabel = [[ORKCaption1Label alloc] init];
