@@ -63,6 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ORKFormItem *formItem;
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
+@property (nonatomic) CGFloat minTextFieldWidth;
 @property (nonatomic) CGFloat expectedLayoutWidth;
 @property (nonatomic) NSDictionary *savedAnswers;
 @property (nonatomic) BOOL useCardView;

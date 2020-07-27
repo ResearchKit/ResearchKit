@@ -132,6 +132,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
         _delegate = delegate;
         
         _maxLabelWidth = maxLabelWidth;
+        _minTextFieldWidth = 40.0;
         _answer = [answer copy];
         self.formItem = formItem;
         _labelLabel = [[ORKCaption1Label alloc] init];
@@ -608,6 +609,7 @@ static const CGFloat InlineFormItemLabelToTextFieldPadding = 3.0;
             [[self.textFieldView.centerYAnchor constraintEqualToAnchor:self.labelLabel.centerYAnchor constant:0.0] setActive:YES];
             [[self.textFieldView.leftAnchor constraintEqualToAnchor:self.labelLabel.rightAnchor constant:InlineFormItemLabelToTextFieldPadding] setActive:YES];
             [[self.errorLabel.topAnchor constraintEqualToAnchor:self.labelLabel.bottomAnchor constant:ErrorLabelTopPadding] setActive:YES];
+            [[self.textFieldView.widthAnchor constraintGreaterThanOrEqualToConstant:self.minTextFieldWidth] setActive:YES];
         } else {
             [[self.textFieldView.topAnchor constraintEqualToAnchor:self.containerView.topAnchor
             constant:ORKSurveyItemMargin] setActive:YES];
