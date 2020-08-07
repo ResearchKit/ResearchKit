@@ -43,6 +43,11 @@ ORK_CLASS_AVAILABLE
 @interface ORKRangeOfMotionResult : ORKResult
 
 /**
+ The physical orientation of the device at the start position (the commencement of recording).
+ */
+@property (nonatomic, assign) NSInteger orientation;
+
+/**
  The angle (degrees) from the device reference position at the start position.
  */
 @property (nonatomic, assign) double start;

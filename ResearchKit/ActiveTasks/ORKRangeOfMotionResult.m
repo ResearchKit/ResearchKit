@@ -39,6 +39,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, orientation);
     ORK_ENCODE_DOUBLE(aCoder, start);
     ORK_ENCODE_DOUBLE(aCoder, finish);
     ORK_ENCODE_DOUBLE(aCoder, minimum);
@@ -49,6 +50,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        ORK_DECODE_INTEGER(aDecoder, orientation);
         ORK_DECODE_DOUBLE(aDecoder, start);
         ORK_DECODE_DOUBLE(aDecoder, finish);
         ORK_DECODE_DOUBLE(aDecoder, minimum);
@@ -66,6 +68,7 @@
     BOOL isParentSame = [super isEqual:object];
     __typeof(self) castObject = object;
     return isParentSame &&
+    self.orientation == castObject.orientation &&
     self.start == castObject.start &&
     self.finish == castObject.finish &&
     self.minimum == castObject.minimum &&
@@ -79,6 +82,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRangeOfMotionResult *result = [super copyWithZone:zone];
+    result.orientation = self.orientation;
     result.start = self.start;
     result.finish = self.finish;
     result.minimum = self.minimum;
@@ -88,7 +92,7 @@
 }
 
 - (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
-    return [NSString stringWithFormat:@"<%@: start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, self.start, self.finish, self.minimum, self.maximum, self.range];
+    return [NSString stringWithFormat:@"<%@: orientation: %li; start: %f; finish: %f; minimum: %f; maximum: %f; range: %f>", self.class.description, self.orientation, self.start, self.finish, self.minimum, self.maximum, self.range];
 }
 
 @end

@@ -200,7 +200,7 @@ enum ResultRow {
         storyboard.
     */
     enum TableViewCellIdentifier: String {
-        case `default` =          "Default"
+        case `default` =        "Default"
         case noResultSet =      "NoResultSet"
         case noChildResults =   "NoChildResults"
         case textImage =        "TextImage"
@@ -958,6 +958,7 @@ class RangeOfMotionResultTableViewProvider: ResultTableViewProvider {
         let rangeOfMotionResult = result as! ORKRangeOfMotionResult
         let rows = super.resultRowsForSection(section)
         return rows + [
+            ResultRow(text: "orientation", detail: rangeOfMotionResult.orientation),
             ResultRow(text: "start", detail: rangeOfMotionResult.start),
             ResultRow(text: "finish", detail: rangeOfMotionResult.finish),
             ResultRow(text: "minimum", detail: rangeOfMotionResult.minimum),

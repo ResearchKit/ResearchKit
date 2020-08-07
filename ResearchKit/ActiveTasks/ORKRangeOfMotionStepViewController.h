@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKRangeOfMotionStepViewController : ORKActiveStepViewController {
+    UIDeviceOrientation _orientation;
     double _startAngle;
     double _newAngle;
     double _minAngle;
