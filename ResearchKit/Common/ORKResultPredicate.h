@@ -373,6 +373,32 @@ ORK_CLASS_AVAILABLE
                                                   matchingPattern:(NSString *)pattern;
 
 /**
+ Returns a predicate matching a result of type `ORKWebViewStepResult` whose result is equal to the
+ specified string.
+ 
+ @param resultSelector      The result selector object which specifies the step result you are
+                                interested in.
+ @param expectedString      The expected result string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForWebViewStepResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                  expectedString:(NSString *)expectedString;
+
+/**
+ Returns a predicate matching a result of type `ORKWebViewStepResult` whose result matches the
+ specified regular expression pattern.
+ 
+ @param resultSelector      The result selector object which specifies the step result you are
+                                interested in.
+ @param pattern             An ICU-compliant regular expression pattern that matches the result string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForWebViewStepResultWithResultSelector:(ORKResultSelector *)resultSelector
+                                                 matchingPattern:(NSString *)pattern;
+
+/**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
  specified integer value.
  
