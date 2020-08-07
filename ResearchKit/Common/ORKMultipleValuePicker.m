@@ -273,6 +273,7 @@ static const CGFloat PickerMinimumHeight = 34.0;
         [valueLabel setFont:[self defaultFont]];
         [valueLabel setTextAlignment:NSTextAlignmentCenter];
     }
+    valueLabel.adjustsFontSizeToFitWidth = YES;
     valueLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
     NSAttributedString *attributedText = [self pickerView:pickerView attributedTitleForRow:row forComponent:component];
     if (attributedText) {
