@@ -1297,6 +1297,17 @@ static ORKStepResult *(^getConsentStepResult)(NSString *, NSString *, BOOL) = ^O
                                                                           maximumExpectedHour:expectedDateComponentsMaximum.hour
                                                                         maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
+    expectedDateComponentsMinimum.hour = 6;
+    expectedDateComponentsMinimum.minute = 0;
+    expectedDateComponentsMaximum.hour = 7;
+    expectedDateComponentsMaximum.minute = 0;
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultSelector:resultSelector
+                                                                          minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                        minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                          maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                        maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    
+    
     // ORKTimeIntervalQuestionResult
     resultSelector.resultIdentifier = FloatNumericStepIdentifier;
     XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultSelector:resultSelector
