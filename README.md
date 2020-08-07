@@ -9,6 +9,7 @@ for medical research or for other research projects.
 * [Getting Started](#gettingstarted)
 * [Documentation](docs/)
 * [Best Practices](../../wiki/best-practices)
+* [Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing to ResearchKit](CONTRIBUTING.md)
 * [Website](https://www.researchandcare.org)
 * [ResearchKit BSD License](#license)
