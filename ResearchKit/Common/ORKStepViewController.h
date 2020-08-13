@@ -31,7 +31,7 @@
 
 @import UIKit;
 #import <ResearchKit/ORKDefines.h>
-#import "ORKTask.h"
+#import <ResearchKit/ORKTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

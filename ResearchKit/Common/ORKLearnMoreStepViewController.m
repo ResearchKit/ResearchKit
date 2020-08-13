@@ -36,6 +36,8 @@
 #import "ORKNavigationContainerView.h"
 #import "ORKHelpers_Internal.h"
 
+static const CGFloat ORKScrollViewCustomContentInset = 40.0;
+
 @implementation ORKLearnMoreStepViewController
 
 - (void)stepDidChange {
@@ -60,6 +62,10 @@
     self.navigationController.navigationBar.shadowImage = [UIImage new];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonPressed:)];
+    
+    if (self.stepView.navigationFooterView.isHidden) {
+        [self.stepView setScrollViewCustomContentInset: ORKScrollViewCustomContentInset];
+    }
 }
 
 - (void)doneButtonPressed:(id)sender {

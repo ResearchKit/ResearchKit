@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKVerticalContainerView.h"
+#import <ResearchKit/ORKVerticalContainerView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

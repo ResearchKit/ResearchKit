@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Aquesta activitat mesura la memòria espacial a curt termini demanant-te que repeteixis l’ordre en què s’il·luminen les %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "flors";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "flors";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre en què s’hagin il·luminat.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre invers en què s’hagin il·luminat.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre en què s’hagin il·luminat.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Algunes de les %@ s’il·luminaran d’una en una. Prem les %@ en qüestió en l’ordre invers en què s’hagin il·luminat.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Per començar, prem Començar i mira atentament.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Puntuació";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test de les %@ clavilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar‑la al forat i, un cop fet %@ cops, tornar‑la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar‑la al forat i, un cop fet %@ cops, tornar‑la a treure %@ cops.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar‑la al forat i, un cop fet %@ cops, tornar‑la a treure %@ cops.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, toca Començar.";

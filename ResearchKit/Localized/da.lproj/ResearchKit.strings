@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktivitet måler din rumlige korttidshukommelse ved at bede dig om at gentage den rækkefølge, som de enkelte %@ blinker i.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomster";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomster";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Nogle af %@ne vil blinke en ad gangen. Tryk på %@ne i den samme rækkefølge, som de blinker i.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Nogle af %@ne vil blinke en ad gangen. Tryk på disse %@ i modsat rækkefølge af, hvordan de blinkede.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Nogle af %@ne vil blinke en ad gangen. Tryk på %@ne i den samme rækkefølge, som de blinker i.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Nogle af %@ne vil blinke en ad gangen. Tryk på disse %@ i modsat rækkefølge af, hvordan de blinkede.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Du starter ved at trykke på Gå i gang og følge nøje med.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Point";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-huls pindetest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler funktionen i dine hænder ved at bede dig om at anbringe en pind i et hul. Du bliver bedt om at gøre dette %@ gange.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";

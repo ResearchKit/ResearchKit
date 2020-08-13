@@ -58,7 +58,6 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
     BOOL _hasMultipleChoiceItem;
     NSString *_tagText;
     CAShapeLayer *_headlineMaskLayer;
-    UIStackView *_headlineStackView;
     NSArray<NSLayoutConstraint *> *_headerViewConstraints;
     NSArray<NSLayoutConstraint *> *_learnMoreViewConstraints;
 }

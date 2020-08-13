@@ -79,8 +79,10 @@ enum TaskListRow: Int, CustomStringConvertible {
     case validatedTextQuestion
     case imageCapture
     case videoCapture
+    case frontFacingCamera
     case wait
     case PDFViewer
+    case requestPermissions
     case eligibilityTask
     case consent
     case accountCreation
@@ -156,8 +158,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .validatedTextQuestion,
                     .imageCapture,
                     .videoCapture,
+                    .frontFacingCamera,
                     .wait,
-                    .PDFViewer
+                    .PDFViewer,
+                    .requestPermissions
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -269,11 +273,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .videoCapture:
             return NSLocalizedString("Video Capture Step", comment: "")
             
+        case .frontFacingCamera:
+            return NSLocalizedString("Front Facing Camera Step", comment: "")
+            
         case .wait:
             return NSLocalizedString("Wait Step", comment: "")
         
         case .PDFViewer:
             return NSLocalizedString("PDF Viewer Step", comment: "")
+            
+        case .requestPermissions:
+            return NSLocalizedString("Request Permissions Step", comment: "")
 
         case .eligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -490,6 +500,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case videoCaptureTask
         case videoCaptureStep
         
+        case frontFacingCameraStep
+        
         // Task with an example of waiting.
         case waitTask
         case waitStepDeterminate
@@ -497,6 +509,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case pdfViewerStep
         case pdfViewerTask
+        
+        case requestPermissionsStep
         
         // Eligibility task specific indentifiers.
         case eligibilityTask
@@ -635,11 +649,18 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .videoCapture:
             return videoCaptureTask
+            
+        case .frontFacingCamera:
+            return frontFacingCameraStep
+            
         case .wait:
             return waitTask
             
         case .PDFViewer:
             return PDFViewerTask
+            
+        case .requestPermissions:
+            return requestPermissionsTask
         
         case .eligibilityTask:
             return eligibilityTask
@@ -1186,7 +1207,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var textQuestionTask: ORKTask {
         let answerFormat = ORKAnswerFormat.textAnswerFormat()
         answerFormat.multipleLines = true
-        answerFormat.maximumLength = 280;
+        answerFormat.maximumLength = 280
         
         let step = ORKQuestionStep(identifier: String(describing: Identifier.textQuestionStep), title: NSLocalizedString("Text", comment: ""), question: exampleQuestionText, answer: answerFormat)
         
@@ -1387,6 +1408,30 @@ enum TaskListRow: Int, CustomStringConvertible {
         PDFViewerStep.title = NSLocalizedString("PDF Step", comment: "")
         
         return ORKOrderedTask(identifier: String(describing: Identifier.pdfViewerTask), steps: [PDFViewerStep])
+    }
+    
+    private var requestPermissionsTask: ORKTask {
+        let healthKitTypesToWrite: Set<HKSampleType> = [
+            HKObjectType.quantityType(forIdentifier: .bodyMassIndex)!,
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.workoutType()]
+        
+        let healthKitTypesToRead: Set<HKObjectType> = [
+            HKObjectType.characteristicType(forIdentifier: .dateOfBirth)!,
+            HKObjectType.characteristicType(forIdentifier: .bloodType)!,
+            HKObjectType.workoutType()]
+        
+        
+        let healthKitPermissionType = ORKHealthKitPermissionType(sampleTypesToWrite: healthKitTypesToWrite,
+                                                                 objectTypesToRead: healthKitTypesToRead)
+        
+        let requestPermissionsStep = ORKRequestPermissionsStep(identifier: String(describing: Identifier.requestPermissionsStep),
+                                                               permissionTypes: [healthKitPermissionType])
+       
+        requestPermissionsStep.title = "Health Data Request"
+        requestPermissionsStep.text = "Please review the health data types below and enable sharing to contribute to the study."
+        
+        return ORKOrderedTask(identifier: String(describing: Identifier.requestPermissionsStep), steps: [requestPermissionsStep])
     }
     
     /**
@@ -1786,10 +1831,25 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [videoInstructionStep])
     }
     
-    // This task presents a web view step
+
+    /// This task presents a video instruction step
+    private var frontFacingCameraStep: ORKTask {
+        let frontFacingCameraStep = ORKFrontFacingCameraStep(identifier: String(describing: Identifier.frontFacingCameraStep))
+        frontFacingCameraStep.maximumRecordingLimit = 30.0
+        frontFacingCameraStep.title = "Front Facing Camera Step"
+        frontFacingCameraStep.text = "Your text goes here."
+        frontFacingCameraStep.allowsRetry = true
+        frontFacingCameraStep.allowsReview = true
+
+        return ORKOrderedTask(identifier: String(describing: Identifier.videoInstructionTask), steps: [frontFacingCameraStep])
+    }
+    
+    
+    /// This task presents a web view step
     private var webView: ORKTask {
         let webViewStep = ORKWebViewStep(identifier: String(describing: Identifier.webViewStep), html: exampleHtml)
         webViewStep.title = NSLocalizedString("Web View", comment: "")
+        webViewStep.showSignatureAfterContent = true
         return ORKOrderedTask(identifier: String(describing: Identifier.webViewTask), steps: [webViewStep])
     }
     

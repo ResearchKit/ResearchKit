@@ -30,7 +30,7 @@
 
 
 @import Foundation;
-#import "ORKStepContainerView.h"
+#import <ResearchKit/ORKStepContainerView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

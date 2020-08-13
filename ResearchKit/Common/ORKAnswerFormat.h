@@ -1602,6 +1602,24 @@ ORK_CLASS_AVAILABLE
 @property BOOL multipleLines;
 
 /**
+A Boolean that determines if the clear button should be hidden.
+ 
+This only applies if multipleLines is set to YES.
+
+This By default, the value of this property is `NO`.
+*/
+@property BOOL hideClearButton;
+
+/**
+A Boolean that determines if the word count label should be hidden.
+ 
+This only applies if multipleLines is set to YES.
+
+This By default, the value of this property is `NO`.
+*/
+@property BOOL hideCharacterCountLabel;
+
+/**
  The autocapitalization type that applies to the user's input.
  
  By default, the value of this property is `UITextAutocapitalizationTypeSentences`.

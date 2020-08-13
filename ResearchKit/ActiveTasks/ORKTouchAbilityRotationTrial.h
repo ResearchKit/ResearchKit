@@ -28,7 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKTouchAbilityTrial.h"
+#import <ResearchKit/ORKTouchAbilityTrial.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

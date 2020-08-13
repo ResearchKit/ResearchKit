@@ -133,10 +133,10 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, sampleType);
-        ORK_DECODE_OBJ(aDecoder, unit);
-        ORK_DECODE_OBJ(aDecoder, startDate);
-        ORK_DECODE_OBJ(aDecoder, lastAnchor);
+        ORK_DECODE_OBJ_CLASS(aDecoder, sampleType, HKSampleType);
+        ORK_DECODE_OBJ_CLASS(aDecoder, unit, HKUnit);
+        ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, lastAnchor, HKQueryAnchor);
     }
     return self;
 }
@@ -219,18 +219,17 @@ static NSString *const ItemIdentifierFormatWithTwoPlaceholders = @"org.researchk
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, correlationType);
+        ORK_DECODE_OBJ_CLASS(aDecoder, correlationType, HKCorrelationType);
         ORK_DECODE_OBJ_ARRAY(aDecoder, sampleTypes, HKSampleType);
         ORK_DECODE_OBJ_ARRAY(aDecoder, units, HKUnit);
-        ORK_DECODE_OBJ(aDecoder, startDate);
-        ORK_DECODE_OBJ(aDecoder, lastAnchor);
+        ORK_DECODE_OBJ_CLASS(aDecoder, startDate, NSDate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, lastAnchor, HKQueryAnchor);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    
     ORK_ENCODE_OBJ(aCoder, correlationType);
     ORK_ENCODE_OBJ(aCoder, sampleTypes);
     ORK_ENCODE_OBJ(aCoder, units);

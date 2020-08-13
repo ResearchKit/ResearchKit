@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Denne aktiviteten måler den visuelle korttidshukommelsen din ved å be deg gjenta i hvilken rekkefølge %@ lyser.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "blomstene";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "blomstene";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i samme rekkefølge som de lyser opp.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i omvendt rekkefølge av hvordan de lyser opp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i samme rekkefølge som de lyser opp.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Noen av %@ vil lyse én om gangen. Trykk på disse %@ i omvendt rekkefølge av hvordan de lyser opp.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Begynn ved å trykke på Start, og følg så nøye med.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Poeng";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-hulls pluggtest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en plugg i et hull for å måle funksjonen i armene dine. Du vil bli bedt om å gjøre det %@ ganger.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både høyre og venstre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Start for å begynne.";

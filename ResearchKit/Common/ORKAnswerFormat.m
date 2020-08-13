@@ -2611,6 +2611,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     _spellCheckingType = UITextSpellCheckingTypeDefault;
     _keyboardType = UIKeyboardTypeDefault;
     _multipleLines = NO;
+    _hideClearButton = NO;
+    _hideCharacterCountLabel = NO;
 }
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
@@ -2665,6 +2667,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_spellCheckingType = _spellCheckingType;
     answerFormat->_keyboardType = _keyboardType;
     answerFormat->_multipleLines = _multipleLines;
+    answerFormat->_hideClearButton = _hideClearButton;
+    answerFormat->_hideCharacterCountLabel = _hideCharacterCountLabel;
     answerFormat->_secureTextEntry = _secureTextEntry;
     answerFormat->_textContentType = _textContentType;
     answerFormat->_placeholder = _placeholder;
@@ -2689,8 +2693,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    BOOL isValid = YES;
-    if (text && text.length > 0) {
+    BOOL isValid = NO;
+    
+    if (text &&
+        [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length > 0)
+    {
         isValid = ([self isTextLengthValidWithString:text] && [self isTextRegularExpressionValidWithString:text]);
     }
     return isValid;
@@ -2737,6 +2744,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     answerFormat->_maximumLength = _maximumLength;
     answerFormat->_keyboardType = _keyboardType;
     answerFormat->_multipleLines = _multipleLines;
+    answerFormat->_hideClearButton = _hideClearButton;
+    answerFormat->_hideCharacterCountLabel = _hideCharacterCountLabel;
     answerFormat->_secureTextEntry = _secureTextEntry;
     answerFormat->_autocapitalizationType = _autocapitalizationType;
     answerFormat->_textContentType = _textContentType;
@@ -2772,6 +2781,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
+        ORK_DECODE_BOOL(aDecoder, hideClearButton);
+        ORK_DECODE_BOOL(aDecoder, hideCharacterCountLabel);
         ORK_DECODE_BOOL(aDecoder, secureTextEntry);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
     }
@@ -2793,6 +2804,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
+    ORK_ENCODE_BOOL(aCoder, hideClearButton);
+    ORK_ENCODE_BOOL(aCoder, hideCharacterCountLabel);
     ORK_ENCODE_BOOL(aCoder, secureTextEntry);
     ORK_ENCODE_OBJ(aCoder, placeholder);
 }
@@ -2821,7 +2834,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.keyboardType == castObject.keyboardType &&
              ORKEqualObjects(self.textContentType, castObject.textContentType) &&
              equalPasswordRules &&
-             self.multipleLines == castObject.multipleLines) &&
+             self.multipleLines == castObject.multipleLines &&
+             self.hideClearButton == castObject.hideClearButton &&
+             self.hideCharacterCountLabel == castObject.hideCharacterCountLabel) &&
              self.secureTextEntry == castObject.secureTextEntry) &&
              ORKEqualObjects(self.placeholder, castObject.placeholder);
 }

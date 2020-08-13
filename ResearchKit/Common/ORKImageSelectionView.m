@@ -371,7 +371,11 @@ static const CGFloat SpacerHeight = 5.0;
 - (void)setLabelText:(NSString *)text {
     if (_singleChoice || [text length] > 0) {
         _choiceLabel.text = text;
-        _choiceLabel.textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            _choiceLabel.textColor = [UIColor labelColor];
+        } else {
+            _choiceLabel.textColor = [UIColor blackColor];
+        }
         
         _choiceLabel.hidden = NO;
         _placeHolderLabel.hidden = !_choiceLabel.hidden;

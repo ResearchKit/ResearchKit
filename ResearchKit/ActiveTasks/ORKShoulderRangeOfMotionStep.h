@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKRangeOfMotionStep.h"
+#import <ResearchKit/ORKRangeOfMotionStep.h>
 
 
 /**

@@ -39,9 +39,9 @@
 #import "ORKSkin.h"
 #import "ORKHelpers_Internal.h"
 #import "ORKSignatureResult_Private.h"
+#import "ORKCustomSignatureFooterView.h"
 
 static const CGFloat ORKSignatureTopPadding = 37.0;
-static const CGFloat ORKSignatureToClearPadding = 15.0;
 
 @implementation ORKWebViewStepViewController {
     UIScrollView *_scrollView;
@@ -49,10 +49,10 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
     NSString *_result;
     NSMutableArray<NSLayoutConstraint *> *_constraints;
     
-    ORKSignatureView *_signatureView;
-    UIButton *_clearButton;
+    ORKCustomSignatureFooterView *_signatureView;
     
     CGFloat _leftRightPadding;
+    CGFloat _bottomOffset;
 }
 
 - (ORKWebViewStep *)webViewStep {
@@ -76,15 +76,11 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
         [self.view addSubview:_scrollView];
         
         if ([self webViewStep].showSignatureAfterContent) {
-            _signatureView = [[ORKSignatureView alloc] initWithoutDefaultWidth];
+            _signatureView = [[ORKCustomSignatureFooterView alloc] init];
+            _signatureView.signatureViewDelegate = self;
             _signatureView.delegate = self;
+            _signatureView.customViewProvider = [self webViewStep].customViewProvider;
             [_scrollView addSubview:_signatureView];
-            
-            _clearButton = [[ORKTextButton alloc] init];
-            [_clearButton.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline]];
-            [_clearButton setTitle:ORKLocalizedString(@"BUTTON_CLEAR_SIGNATURE", nil) forState:UIControlStateNormal];
-            [_clearButton addTarget:self action:@selector(clearSignature) forControlEvents:UIControlEventTouchUpInside];
-            [_scrollView addSubview:_clearButton];
         }
         
         WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
@@ -175,7 +171,6 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
     _navigationFooterView.translatesAutoresizingMaskIntoConstraints = NO;
     _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     _signatureView.translatesAutoresizingMaskIntoConstraints = NO;
-    _clearButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     _constraints = [[NSMutableArray alloc] initWithArray:@[
         [NSLayoutConstraint constraintWithItem:_scrollView
@@ -244,7 +239,7 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
                                       constant:0]
     ]];
     
-    if ([self webViewStep].showSignatureAfterContent) {
+    if ([[self webViewStep] showSignatureAfterContent]) {
         [_constraints addObjectsFromArray:@[
             [NSLayoutConstraint constraintWithItem:_signatureView
                                          attribute:NSLayoutAttributeTop
@@ -252,7 +247,7 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
                                             toItem:_webView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
-                                          constant:ORKSignatureTopPadding],
+                                          constant:ORKSignatureTopPadding / 2.0],
             [NSLayoutConstraint constraintWithItem:_signatureView
                                          attribute:NSLayoutAttributeLeading
                                          relatedBy:NSLayoutRelationEqual
@@ -267,34 +262,14 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
                                          attribute:NSLayoutAttributeTrailing
                                         multiplier:1.0
                                           constant:-_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_clearButton
+            
+            [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                          attribute:NSLayoutAttributeTop
                                          relatedBy:NSLayoutRelationEqual
                                             toItem:_signatureView
                                          attribute:NSLayoutAttributeBottom
                                         multiplier:1.0
-                                          constant:ORKSignatureToClearPadding],
-            [NSLayoutConstraint constraintWithItem:_clearButton
-                                         attribute:NSLayoutAttributeLeading
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.view
-                                         attribute:NSLayoutAttributeLeading
-                                        multiplier:1.0
-                                          constant:_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_clearButton
-                                         attribute:NSLayoutAttributeTrailing
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:self.view
-                                         attribute:NSLayoutAttributeTrailing
-                                        multiplier:1.0
-                                          constant:-_leftRightPadding],
-            [NSLayoutConstraint constraintWithItem:_navigationFooterView
-                                         attribute:NSLayoutAttributeTop
-                                         relatedBy:NSLayoutRelationEqual
-                                            toItem:_clearButton
-                                         attribute:NSLayoutAttributeBottom
-                                        multiplier:1.0
-                                          constant:ORKSignatureTopPadding],
+                                          constant:ORKSignatureTopPadding / 2.0],
             [NSLayoutConstraint constraintWithItem:_navigationFooterView
                                          attribute:NSLayoutAttributeBottom
                                          relatedBy:NSLayoutRelationEqual
@@ -339,10 +314,45 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
     scrollView.pinchGestureRecognizer.enabled = NO;
 }
 
+/**
+ This will modify the `contentOffset` on `_scrollView` so the bottom of the provided rect aligns with the provided endPoint.
+ 
+ @param rect                     A rect in `_signatureView` used as a reference point for the scroll.
+ @param endPoint            The point the bottom of the rect should be scrolled to.
+ @param animated            A boolean value indicating wether the scroll should be animated or not.
+ */
+- (void)scrollSignatureViewRect:(CGRect)rect toPoint:(CGPoint)endPoint animated:(BOOL)animated {
+    CGRect rectInView = [_signatureView convertRect:rect toView:self.view];
+    
+    CGFloat offset = endPoint.y - (rectInView.origin.y + rectInView.size.height);
+    
+    if (offset < 0) {
+        CGFloat xOffset = _scrollView.contentOffset.x;
+        CGFloat yOffset = _scrollView.contentOffset.y - offset;
+    
+        if (animated) {
+            [UIView animateWithDuration:0.2 animations:^{
+                [_scrollView setContentOffset:CGPointMake(xOffset, yOffset)];
+            }];
+        } else {
+            [_scrollView setContentOffset:CGPointMake(xOffset, yOffset)];
+        }
+    }
+}
+
+- (void)setBottomOffset:(CGFloat)bottomOffset {
+    _bottomOffset = bottomOffset;
+    [_scrollView setContentSize:CGSizeMake(_scrollView.contentSize.width, _scrollView.contentSize.height + bottomOffset)];
+}
+
+- (CGFloat)bottomOffset {
+    return _bottomOffset;
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    if (![self webViewStep].showSignatureAfterContent) {
+    if (![[self webViewStep] showSignatureAfterContent]) {
         [_scrollView setContentInset:UIEdgeInsetsMake(0, 0, _navigationFooterView.frame.size.height, 0)];
     } else {
         [_scrollView setContentInset:UIEdgeInsetsZero];
@@ -377,8 +387,8 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
         childResult.userInfo = @{@"html": [self webViewStep].html};
         parentResult.results = [parentResult.results arrayByAddingObject:childResult] ? : @[childResult];
         
-        if ([self webViewStep].showSignatureAfterContent && _signatureView.signatureExists) {
-            ORKSignatureResult *signatureResult = [[ORKSignatureResult alloc] initWithSignatureImage:_signatureView.signatureImage signaturePath:_signatureView.signaturePath];
+        if ([[self webViewStep] showSignatureAfterContent] && [_signatureView isComplete]) {
+            ORKSignatureResult *signatureResult = [_signatureView result];
             parentResult.results = [parentResult.results arrayByAddingObject:signatureResult] ? : @[signatureResult];
         }
     }
@@ -454,18 +464,15 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
 
 // MARK: Signature
 
-- (void)clearSignature {
-    [_signatureView clear];
-    _navigationFooterView.continueEnabled = NO;
-}
-
 - (void)signatureViewDidEditImage:(nonnull ORKSignatureView *)signatureView {
-    _navigationFooterView.continueEnabled = YES;
+    _navigationFooterView.continueEnabled = [_signatureView isComplete];
 }
 
 - (void)signatureViewDidEndEditingWithTimeInterval {
-    CGPoint bottom = CGPointMake(0, _scrollView.contentSize.height - _scrollView.bounds.size.height + _scrollView.contentInset.bottom);
-    [_scrollView setContentOffset:bottom animated:YES];
+    if (_shouldScrollAfterSignature) {
+        CGPoint bottom = CGPointMake(0, _scrollView.contentSize.height - _scrollView.bounds.size.height + _scrollView.contentInset.bottom);
+        [_scrollView setContentOffset:bottom animated:YES];
+    }
 }
 
 // MARK: Color
@@ -484,6 +491,12 @@ static const CGFloat ORKSignatureToClearPadding = 15.0;
     CGFloat b = components[2];
     
     return [NSString stringWithFormat:@"#%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255)];
+}
+
+// MARK: ORKCustomSignatureFooterViewStatusDelegate
+
+- (void)signatureFooterView:(nonnull ORKCustomSignatureFooterView *)footerView didChangeCompletedStatus:(BOOL)isComplete {
+    _navigationFooterView.continueEnabled = isComplete;
 }
 
 @end

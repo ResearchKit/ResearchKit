@@ -58,6 +58,7 @@ ORK_CLASS_AVAILABLE
     [button setTitle:text forState:UIControlStateNormal];
     [button setTitleColor:button.tintColor forState:UIControlStateNormal];
     button.titleLabel.numberOfLines = 0;
+    button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     button.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [button setContentEdgeInsets:UIEdgeInsetsMake(CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN, CGFLOAT_MIN)];
     return button;

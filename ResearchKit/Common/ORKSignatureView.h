@@ -46,6 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class ORKCustomSignatureFooterView;
+
+@protocol ORKCustomSignatureFooterViewStatusDelegate <NSObject>
+
+- (void)signatureFooterView:(nonnull ORKCustomSignatureFooterView *)footerView didChangeCompletedStatus:(BOOL)isComplete;
+
+@end
+
 
 @interface ORKSignatureView : UIView
 

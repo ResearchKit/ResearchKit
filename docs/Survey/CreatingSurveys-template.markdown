@@ -1,7 +1,7 @@
 # 
 <sub>These materials are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.</sub>
 
-#Creating Surveys
+# Creating Surveys
 
 A survey is a sequence of questions that you use to collect data from your users.  In a ResearchKit app, a survey is composed of a <i>survey task</i> that has a collection of step objects (`ORKStep`). Each step object handles a specific question in the survey, such as "What medications are you taking?" or "How many hours did you sleep last night?".
 
@@ -28,7 +28,7 @@ The steps for creating a task to present a survey are:
 2. <a href="#task">Create a task</a>
 3. <a href="#results">Collect results</a>
 
-##1. Create Steps<a name="create"></a>
+## 1. Create Steps<a name="create"></a>
 
 The survey module provides a single-question step (`ORKQuestionStep`)
 and a form step that can contain more than one item
@@ -106,7 +106,7 @@ Adding this question step to a task and presenting the task produces a screen th
 </figure>
 </center>
 
-###Form Step
+### Form Step
 
 When your survey has several related questions, you can use a form step ([ORKFormStep](#)) to present them all on one page.  Form steps support all the same answer formats as question
 steps, but can contain multiple items ([ORKFormItem](#)), each with its
@@ -251,7 +251,7 @@ and will never decide what question to show based on previous answers.
 To introduce conditional logic, you must either subclass
 `ORKOrderedTask` or implement the `ORKTask` protocol yourself.*
 
-##3. Collect Results<a name="results"></a>
+## 3. Collect Results<a name="results"></a>
 
 The [result]([ORKTaskViewController result]) property of the task view controller gives you the results of the task.
 Each step view controller that the user views produces a step result

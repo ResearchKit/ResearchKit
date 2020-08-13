@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "Availability.h"
 
 #import "ORKTouchAbilityTouch.h"
 #import "ORKHelpers_Internal.h"
@@ -214,6 +215,17 @@
         case UITouchPhaseStationary:
             phaseString = @"stationary";
             break;
+#if defined(__IPHONE_13_4)
+        case UITouchPhaseRegionEntered:
+            phaseString = @"entered";
+            break;
+        case UITouchPhaseRegionMoved:
+            phaseString = @"moved";
+            break;
+        case UITouchPhaseRegionExited:
+            phaseString = @"exited";
+            break;
+#endif
     }
     
     return [NSString stringWithFormat:@"<%@: %p; phase: %@; timestamp: %.6f; location: (%@, %@)>", self.class.description, self, phaseString, self.timestamp, @(self.locationInWindow.x), @(self.locationInWindow.y)];

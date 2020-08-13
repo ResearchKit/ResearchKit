@@ -368,8 +368,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "To ćwiczenie mierzy Twoją krótkotrwałą pamięć przestrzenną: podświetla %@ w określonej sekwencji i prosi o jej powtórzenie.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "kwiaty";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "kwiaty";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Widoczne na ekranie %@ będą kolejno podświetlane. Stuknij w te %@ w takie samej kolejności.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Widoczne na ekranie %@ będą kolejno podświetlane. Stuknij w te %@ w odwrotnej kolejności.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@%@" = "Widoczne na ekranie %@ będą kolejno podświetlane. Stuknij w te %@ w takie samej kolejności.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@%@" = "Widoczne na ekranie %@ będą kolejno podświetlane. Stuknij w te %@ w odwrotnej kolejności.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start, a następnie obserwuj ekran.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Wynik";
@@ -491,7 +491,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-HPT (otwory i kołki)";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność górnej partii ciała: umieszczasz kołek (pełne kółko) w otworze (puste kółko). Do wykonania %@ razy.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Testowane będą zarówno lewa, jak i prawa ręka.\nMusisz podnieść kołek tak szybko, jak to możliwe, umieścić go w otworze, oraz po %@ razach, wyjąć go %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@%@" = "Testowane będą zarówno lewa, jak i prawa ręka.\nMusisz podnieść kołek tak szybko, jak to możliwe, umieścić go w otworze, oraz po %@ razach, wyjąć go %@ razy.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Testowane będą zarówno prawa, jak i lewa ręka.\nMusisz podnieść kołek tak szybko, jak to możliwe, umieścić go w otworze, oraz po %@ razach, wyjąć go %@ razy.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";

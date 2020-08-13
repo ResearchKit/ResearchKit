@@ -36,7 +36,7 @@ enum Activity: Int {
     
     static var allValues: [Activity] {
         var index = 0
-        return Array (
+        return Array(
             AnyIterator {
                 let returnedElement = self.init(rawValue: index)
                 index += 1
