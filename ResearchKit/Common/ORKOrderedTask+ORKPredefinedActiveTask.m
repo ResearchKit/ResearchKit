@@ -1293,8 +1293,8 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
     /* Conclusion step */
             
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-    ORKCompletionStep *completionStep = [self makeCompletionStep];
-    ORKStepArrayAddStep(steps, completionStep);
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
@@ -1538,8 +1538,8 @@ NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.mot
     /* Conclusion step */
             
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-    ORKCompletionStep *completionStep = [self makeCompletionStep];
-    ORKStepArrayAddStep(steps, completionStep);
+        ORKCompletionStep *completionStep = [self makeCompletionStep];
+        ORKStepArrayAddStep(steps, completionStep);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
