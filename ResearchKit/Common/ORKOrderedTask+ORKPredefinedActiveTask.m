@@ -121,11 +121,8 @@ NSString *const ORKEditSpeechTranscript0StepIdentifier = @"editSpeechTranscript0
 
 NSString *const ORKConclusionStepIdentifier = @"conclusion";
 
-NSString *const ORKActiveTaskDominantLimbIdentifier = @"dominantLimb";
 NSString *const ORKActiveTaskLeftLimbIdentifier = @"left";
-NSString *const ORKActiveTaskMostAffectedLimbIdentifier = @"mostAffected";
 NSString *const ORKActiveTaskRightLimbIdentifier = @"right";
-NSString *const ORKActiveTaskSkipLimbStepIdentifier = @"skipLimb";
 
 NSString *const ORKActiveTaskLeftHandIdentifier = @"left";
 NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
