@@ -432,6 +432,10 @@
 "KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_FIRST" = "This activity measures how far you can extend your knees one at a time. The left kneee will be tested first";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_FIRST" = "This activity measures how far you can extend your knees one at a time. The right knee will be tested first";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_SECOND" = "Now repeat the same test using your left knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_SECOND" = "Now repeat the same test using your right knee.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
