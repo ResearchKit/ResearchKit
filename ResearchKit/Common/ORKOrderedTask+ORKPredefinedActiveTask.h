@@ -193,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- The knee range of motion task returns a task that measures the range of motion for either a left or right knee.
+ The knee range of motion task returns a task that measures the range of motion for either a left or right knee, or both.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param limbOption              Which knee is being measured.
@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- The shoulder range of motion task returns a task that measures the range of motion for either a left or right shoulder.
+ The shoulder range of motion task returns a task that measures the range of motion for either a left or right shoulder, or both.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param limbOption              Which shoulder is being measured.

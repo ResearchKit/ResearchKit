@@ -423,17 +423,24 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
 
-/* Range of Motion active task */
+/* Range of Motion active tasks */
 "RANGE_OF_MOTION_TITLE" = "Range of Motion";
-"LIMB_OPTION_LEFT_OR_RIGHT_ERROR" = "limbOption must be left or right";
+"RANGE_OF_MOTION_SOUND" = "Please ensure that the sound on your device is switched on so that you can hear the instructions during the test.";
+"LIMB_OPTION_ERROR" = "limbOption must be left, right or both";
 
 /* Knee Range of Motion active task */
-"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee Range of Motion";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will put your device on your left knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will put your device on your right knee for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"KNEE_RANGE_OF_MOTION_TITLE_LEFT" = "Left Knee";
+"KNEE_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Knee";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left knee. You will need to sit down on the edge of a chair.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right knee. You will need to sit down on the edge of a chair.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_FIRST" = "This activity measures how far you can extend each of your knees one at a time. Your left knee will be tested first.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_FIRST" = "This activity measures how far you can extend each of your knees one at a time. Your right knee will be tested first.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_SECOND" = "Now repeat the same test using your left knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_SECOND" = "Now repeat the same test using your right knee.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "Sit down on the edge of a chair. When you begin you will need to put your device on your left knee for a measurement.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "Sit down on the edge of a chair. When you begin you will need to put your device on your right knee for a measurement.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT_SECOND" = "When you begin you will need to put your device on your left knee for a measurement.";
+"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT_SECOND" = "When you begin you will need to put your device on your right knee for a measurement.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left knee with the screen facing out, as pictured.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right knee with the screen facing out, as pictured.";
 "KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and extend your left knee as far as you can. Return to the start position and tap again when you are done.";
@@ -444,16 +451,22 @@
 "KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT" = "When you are done, return your right knee to the start position. Then tap anywhere.";
 
 /* Shoulder Range of Motion active task */
-"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder Range of Motion";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can extend your left shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can extend your right shoulder.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will put your device on your left shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will put your device on your right shoulder for a measurement. Please turn the sound on your device on so you can hear instructions.";
+"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT" = "Left Shoulder";
+"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT" = "Right Shoulder";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT" = "This activity measures how far you can raise your left shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT" = "This activity measures how far you can raise your right shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_FIRST" = "This activity measures how far you can raise your shoulders one at a time. Your left shoulder will be tested first.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_FIRST" = "This activity measures how far you can raise your shoulders one at a time. Your right shoulder will be tested first.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_SECOND" = "Now repeat the same test using your left shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_SECOND" = "Now repeat the same test using your right shoulder.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT" = "When you begin you will need to put your device on your left shoulder for a measurement.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT" = "When you begin you will need to put your device on your right shoulder for a measurement.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT_SECOND" = "When you begin you will need to put your device on your left shoulder for a measurement.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT_SECOND" = "When you begin you will need to put your device on your right shoulder for a measurement.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT" = "Place your device on your left shoulder with the screen facing out, as pictured.";
 "SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT" = "Place your device on your right shoulder with the screen facing out, as pictured.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm as far as you can. Return to the start position and tap again when you are done.";
-"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm as far as you can. Return to the start position and tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT" = "When ready, tap the screen to begin and raise your left arm to the front as far as you can. Return to the start position and tap again when you are done.";
+"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT" = "When ready, tap the screen to begin and raise your right arm to the front as far as you can. Return to the start position and tap again when you are done.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT" = "Place your device on your left shoulder. Tap the screen and raise your left arm to the front as far as you can.";
 "SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT" = "Place your device on your right shoulder. Tap the screen and raise your right arm to the front as far as you can.";
 "SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT" = "When you are done, return your left arm to the start position. Then tap anywhere.";

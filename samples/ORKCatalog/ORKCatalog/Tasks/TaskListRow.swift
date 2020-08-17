@@ -1796,12 +1796,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task presents a knee range of motion task
     private var kneeRangeOfMotion: ORKTask {
-        return ORKOrderedTask.kneeRangeOfMotionTask(withIdentifier: String(describing: Identifier.kneeRangeOfMotion), limbOption: .right, intendedUseDescription: exampleDescription, options: [])
+        return ORKOrderedTask.kneeRangeOfMotionTask(withIdentifier: String(describing: Identifier.kneeRangeOfMotion), limbOption: .both, intendedUseDescription: exampleDescription, options: [])
     }
     
     /// This task presents a shoulder range of motion task
     private var shoulderRangeOfMotion: ORKTask {
-        return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .left, intendedUseDescription: exampleDescription, options: [])
+        return ORKOrderedTask.shoulderRangeOfMotionTask(withIdentifier: String(describing: Identifier.shoulderRangeOfMotion), limbOption: .both, intendedUseDescription: exampleDescription, options: [])
     }
     
     /// This task presents a trail making task

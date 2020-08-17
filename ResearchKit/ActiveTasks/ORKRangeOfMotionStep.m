@@ -57,7 +57,7 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    if (self.limbOption != ORKPredefinedTaskLimbOptionLeft && self.limbOption != ORKPredefinedTaskLimbOptionRight) {
+    if (self.limbOption != ORKPredefinedTaskLimbOptionLeft && self.limbOption != ORKPredefinedTaskLimbOptionRight && self.limbOption != ORKPredefinedTaskLimbOptionBoth) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:ORKLocalizedString(@"LIMB_OPTION_LEFT_OR_RIGHT_ERROR", nil)
                                      userInfo:nil];

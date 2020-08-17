@@ -121,6 +121,9 @@ NSString *const ORKEditSpeechTranscript0StepIdentifier = @"editSpeechTranscript0
 
 NSString *const ORKConclusionStepIdentifier = @"conclusion";
 
+NSString *const ORKActiveTaskLeftLimbIdentifier = @"left";
+NSString *const ORKActiveTaskRightLimbIdentifier = @"right";
+
 NSString *const ORKActiveTaskLeftHandIdentifier = @"left";
 NSString *const ORKActiveTaskMostAffectedHandIdentifier = @"mostAffected";
 NSString *const ORKActiveTaskRightHandIdentifier = @"right";
@@ -1062,78 +1065,241 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
                                              limbOption:(ORKPredefinedTaskLimbOption)limbOption
                                  intendedUseDescription:(NSString *)intendedUseDescription
                                                 options:(ORKPredefinedTaskOption)options {
+    
     NSMutableArray *steps = [NSMutableArray array];
-    NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
-    UIImage *kneeStartImage = [UIImage imageNamed:@"knee_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-    UIImage *kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
     
-    if (limbOption == ORKPredefinedTaskLimbOptionLeft) {
-        limbType = ORKLocalizedString(@"LIMB_LEFT", nil);
-        
-        kneeStartImage = [UIImage imageNamed:@"knee_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-        kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-    }
+    // Setup which limb (left or right) to start with and how many limbs (1 or both) to add, based on the limbOption parameter. If both limbs are selected, the order is randomly allocated
+    NSUInteger limbCount = ((limbOption & ORKPredefinedTaskLimbOptionBoth) == ORKPredefinedTaskLimbOptionBoth) ? 2 : 1;
+    BOOL doingBoth = (limbCount == 2);
+    BOOL rightLimb;
     
-    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep0.text = intendedUseDescription;
-        instructionStep0.detailText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT", nil);
-        instructionStep0.shouldTintImages = YES;
-        instructionStep0.imageContentMode = UIViewContentModeCenter;
-        ORKStepArrayAddStep(steps, instructionStep0);
+    switch (limbOption) {
+        case ORKPredefinedTaskLimbOptionLeft:
+            rightLimb = NO; break;
+        case ORKPredefinedTaskLimbOptionRight:
+        case ORKPredefinedTaskLimbOptionUnspecified:
+            rightLimb = YES; break;
+        default:
+            rightLimb = (arc4random()%2 == 0); break;
+        }
+    
+    for (NSUInteger limb = 1; limb <= limbCount; limb++) {
         
-        ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-        instructionStep1.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep1.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT", nil);
-        ORKStepArrayAddStep(steps, instructionStep1);
+        // Create unique identifiers when both limbs are selected
+        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * stepIdentifier) {
+            if (!doingBoth) {
+                return stepIdentifier;
+            } else {
+                NSString *limbIdentifier = rightLimb ? ORKActiveTaskRightLimbIdentifier : ORKActiveTaskLeftLimbIdentifier;
+                return [NSString stringWithFormat:@"%@.%@", stepIdentifier, limbIdentifier];
+            }
+        };
         
-        ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
-        instructionStep2.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep2.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+        if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         
-        instructionStep2.detailText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
-        instructionStep2.image = kneeStartImage;
-        instructionStep2.imageContentMode = UIViewContentModeCenter;
-        instructionStep2.shouldTintImages = YES;
-        ORKStepArrayAddStep(steps, instructionStep2);
-        
-        ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
-        instructionStep3.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
-        
-        instructionStep3.image = kneeMaximumImage;
-        instructionStep3.imageContentMode = UIViewContentModeCenter;
-        instructionStep3.shouldTintImages = YES;
-        ORKStepArrayAddStep(steps, instructionStep3);
-    }
-    NSString *instructionText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil) : ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
-    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
-    touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    ORKStepArrayAddStep(steps, touchAnywhereStep);
+            {   /* Instruction step 0 */
+            
+                ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction0StepIdentifier)];
+            
+                if (doingBoth) {
+                    // Set the title and instructions based on the limb(s) selected
+                    if (limb == 1) {
+                        if (rightLimb) {
+                            instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                            instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_FIRST", nil); // different instructions for right being first
+                            instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    } else {
+                            instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                            instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_FIRST", nil); // different instructions for left being first
+                            instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                        }
+                
+                    } else { // limb == 2
+                        if (rightLimb) {
+                            instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                            instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_SECOND", nil); // different instructions for right being second
+                            //instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                        } else {
+                            instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                            instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_SECOND", nil); // different instructions for left being second
+                            //instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                        }
+                    }
+                } else { // not doing both
+                    if (rightLimb) {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT", nil);
+                        instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    } else {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT", nil);
+                        instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    }
+                }
+                instructionStep0.shouldTintImages = YES;
+                instructionStep0.imageContentMode = UIViewContentModeCenter;
+                ORKStepArrayAddStep(steps, instructionStep0);
+            }
+            
+            {   /* Instruction step 1 */
+    
+                ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction1StepIdentifier)];
+    
+                if (limb == 1) {
+                    if (rightLimb) {
+                        instructionStep1.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep1.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT", nil);
+                    } else {
+                        instructionStep1.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep1.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT", nil);
+                    }
+                } else { // limb == 2
+                    if (rightLimb) {
+                        instructionStep1.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep1.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT_SECOND", nil); // different instruction for right being second
+                    } else {
+                        instructionStep1.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep1.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT_SECOND", nil); // different instruction for left being second
+                    }
+                }
+                instructionStep1.shouldTintImages = YES;
+                instructionStep1.imageContentMode = UIViewContentModeCenter;
+                ORKStepArrayAddStep(steps, instructionStep1);
+            }
+            
+            {   /* Instruction step 2 */
+            
+                UIImage *kneeStartImage;
+            
+                ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction2StepIdentifier)];
 
-    touchAnywhereStep.spokenInstruction = touchAnywhereStep.text;
+                if (limb == 1) {
+                    if (rightLimb) {
+                        instructionStep2.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep2.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
+                        kneeStartImage = [UIImage imageNamed:@"knee_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    } else {
+                        instructionStep2.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep2.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil);
+                        kneeStartImage = [UIImage imageNamed:@"knee_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    }
+                } else {
+                    if (rightLimb) {
+                        instructionStep2.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep2.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
+                        kneeStartImage = [UIImage imageNamed:@"knee_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    } else {
+                        instructionStep2.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep2.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil);
+                        kneeStartImage = [UIImage imageNamed:@"knee_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    }
+                }
+                instructionStep2.image = kneeStartImage;
+                instructionStep2.imageContentMode = UIViewContentModeCenter;
+                instructionStep2.shouldTintImages = YES;
+                ORKStepArrayAddStep(steps, instructionStep2);
+            }
+            
+            {   /* Instruction step 3 */
+            
+                UIImage *kneeMaximumImage;
+            
+                ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction3StepIdentifier)];
+
+                if (limb == 1) {
+                    if (rightLimb) {
+                        instructionStep3.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep3.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+                        kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    } else {
+                        instructionStep3.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep3.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil);
+                        kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    }
+                } else {
+                    if (rightLimb) {
+                        instructionStep3.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                        instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep3.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+                        kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    } else {
+                        instructionStep3.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                        instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep3.detailText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil);
+                        kneeMaximumImage = [UIImage imageNamed:@"knee_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                    }
+                }
+                instructionStep3.image = kneeMaximumImage;
+                instructionStep3.imageContentMode = UIViewContentModeCenter;
+                instructionStep3.shouldTintImages = YES;
+                ORKStepArrayAddStep(steps, instructionStep3);
+            }
+        }
+            
+        {   /* Touch anywhere step */
+            
+            NSString *touchAnywhereStepText;
+            // Set the instructions to be displayed and spoken
+            if (rightLimb) {
+                touchAnywhereStepText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
+            } else {
+                    touchAnywhereStepText = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil);
+            }
+            ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:appendIdentifier(ORKTouchAnywhereStepIdentifier) instructionText:touchAnywhereStepText];
+            
+            touchAnywhereStep.spokenInstruction = touchAnywhereStepText;
+            
+            // Set title based on the selected limb(s)
+            if (rightLimb) {
+                touchAnywhereStep.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+            } else {
+            touchAnywhereStep.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+            }
+            ORKStepArrayAddStep(steps, touchAnywhereStep);
+        }
+            
+        {   /* Range of motion step */
+            
+            ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
     
-    ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
-    
-    ORKRangeOfMotionStep *kneeRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:ORKKneeRangeOfMotionStepIdentifier limbOption:limbOption];
-    kneeRangeOfMotionStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    kneeRangeOfMotionStep.text = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
-    ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
-    
-    kneeRangeOfMotionStep.spokenInstruction = kneeRangeOfMotionStep.text;
-    kneeRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
-    kneeRangeOfMotionStep.optional = NO;
-    
-    ORKStepArrayAddStep(steps, kneeRangeOfMotionStep);
-    
+            ORKRangeOfMotionStep *kneeRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:appendIdentifier(ORKKneeRangeOfMotionStepIdentifier) limbOption:limbOption];
+            
+            // Set title and instructions based on the selected limb(s)
+            if (rightLimb) {
+            kneeRangeOfMotionStep.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+            kneeRangeOfMotionStep.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
+            } else {
+            kneeRangeOfMotionStep.title = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_TITLE_LEFT", nil);
+            kneeRangeOfMotionStep.text = ORKLocalizedString(@"KNEE_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil);
+            }
+            kneeRangeOfMotionStep.spokenInstruction = kneeRangeOfMotionStep.text;
+            kneeRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
+            kneeRangeOfMotionStep.optional = NO;
+            ORKStepArrayAddStep(steps, kneeRangeOfMotionStep);
+        }
+        // Flip to the other limb if doing both (ignored if limbCount == 1)
+        rightLimb = !rightLimb;
+    }
+                            
+    /* Conclusion step */
+                                    
     if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKCompletionStep *completionStep = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, completionStep);
     }
-    
+                        
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    return task;
+        return task;
 }
 
 
@@ -1142,80 +1308,244 @@ NSString *const ORKKneeRangeOfMotionStepIdentifier = @"knee.range.of.motion";
 NSString *const ORKShoulderRangeOfMotionStepIdentifier = @"shoulder.range.of.motion";
 
 + (ORKOrderedTask *)shoulderRangeOfMotionTaskWithIdentifier:(NSString *)identifier
-                                                 limbOption:(ORKPredefinedTaskLimbOption)limbOption
-                                     intendedUseDescription:(NSString *)intendedUseDescription
-                                                    options:(ORKPredefinedTaskOption)options {
+                                             limbOption:(ORKPredefinedTaskLimbOption)limbOption
+                                 intendedUseDescription:(NSString *)intendedUseDescription
+                                                options:(ORKPredefinedTaskOption)options {
+    
     NSMutableArray *steps = [NSMutableArray array];
-    NSString *limbType = ORKLocalizedString(@"LIMB_RIGHT", nil);
-    UIImage *shoulderStartImage = [UIImage imageNamed:@"shoulder_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-    UIImage *shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
     
-    if (limbOption == ORKPredefinedTaskLimbOptionLeft) {
-        limbType = ORKLocalizedString(@"LIMB_LEFT", nil);
-        shoulderStartImage = [UIImage imageNamed:@"shoulder_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-        shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-    }
+    // Setup which limb (left or right) to start with and how many limbs (1 or both) to add, based on the limbOption parameter. If both limbs are selected, the order is randomly allocated
+    NSUInteger limbCount = ((limbOption & ORKPredefinedTaskLimbOptionBoth) == ORKPredefinedTaskLimbOptionBoth) ? 2 : 1;
+    BOOL doingBoth = (limbCount == 2);
+    BOOL rightLimb;
     
-    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep0.text = intendedUseDescription;
-        instructionStep0.detailText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT", nil);
-        instructionStep0.shouldTintImages = YES;
-        instructionStep0.imageContentMode = UIViewContentModeCenter;
-        ORKStepArrayAddStep(steps, instructionStep0);
+    switch (limbOption) {
+        case ORKPredefinedTaskLimbOptionLeft:
+            rightLimb = NO; break;
+        case ORKPredefinedTaskLimbOptionRight:
+        case ORKPredefinedTaskLimbOptionUnspecified:
+            rightLimb = YES; break;
+        default:
+            rightLimb = (arc4random()%2 == 0); break;
+        }
+    
+    for (NSUInteger limb = 1; limb <= limbCount; limb++) {
         
-        ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-        instructionStep1.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep1.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT", nil);
-        ORKStepArrayAddStep(steps, instructionStep1);
+        // Create unique identifiers when both limbs are selected
+        NSString * (^appendIdentifier) (NSString *) = ^ (NSString * stepIdentifier) {
+            if (!doingBoth) {
+                return stepIdentifier;
+            } else {
+                NSString *limbIdentifier = rightLimb ? ORKActiveTaskRightLimbIdentifier : ORKActiveTaskLeftLimbIdentifier;
+                return [NSString stringWithFormat:@"%@.%@", stepIdentifier, limbIdentifier];
+            }
+        };
         
-        ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction2StepIdentifier];
-        instructionStep2.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep2.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
-        instructionStep2.image = shoulderStartImage;
-        instructionStep2.imageContentMode = UIViewContentModeCenter;
-        instructionStep2.shouldTintImages = YES;
-        ORKStepArrayAddStep(steps, instructionStep2);
+        if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         
-        ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction3StepIdentifier];
-        instructionStep3.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        instructionStep3.text = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
-        instructionStep3.image = shoulderMaximumImage;
-        instructionStep3.imageContentMode = UIViewContentModeCenter;
-        instructionStep3.shouldTintImages = YES;
-        ORKStepArrayAddStep(steps, instructionStep3);
+        {   /* Instruction step 0 */
+            
+            ORKInstructionStep *instructionStep0 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction0StepIdentifier)];
+            
+            if (doingBoth) {
+                // Set the title and instructions based on the limb(s) selected
+                if (limb == 1) {
+                    if (rightLimb) {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_FIRST", nil); // different instructions for right being first
+                        instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    } else {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_FIRST", nil); // different instructions for left being first
+                        instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    }
+                
+                } else { // limb == 2
+                    if (rightLimb) {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT_SECOND", nil); // different instructions for right being second
+                        //instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    } else {
+                        instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                        instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT_SECOND", nil); // different instructions for left being second
+                        //instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                    }
+                }
+            } else { // not doing both
+                if (rightLimb) {
+                    instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_RIGHT", nil);
+                    instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                } else {
+                    instructionStep0.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep0.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_0_LEFT", nil);
+                    instructionStep0.detailText = ORKLocalizedString(@"RANGE_OF_MOTION_SOUND", nil);
+                }
+            }
+            instructionStep0.shouldTintImages = YES;
+            instructionStep0.imageContentMode = UIViewContentModeCenter;
+            ORKStepArrayAddStep(steps, instructionStep0);
+        }
+            
+        {   /* Instruction step 1 */
+    
+            ORKInstructionStep *instructionStep1 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction1StepIdentifier)];
+    
+            if (limb == 1) {
+                if (rightLimb) {
+                    instructionStep1.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep1.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT", nil);
+                } else {
+                    instructionStep1.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep1.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT", nil);
+                }
+            } else { // limb == 2
+                if (rightLimb) {
+                    instructionStep1.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep1.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_RIGHT_SECOND", nil); // different instruction for right being second
+                } else {
+                    instructionStep1.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep1.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep1.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_1_LEFT_SECOND", nil); // different instruction for left being second
+                }
+            }
+            instructionStep1.shouldTintImages = YES;
+            instructionStep1.imageContentMode = UIViewContentModeCenter;
+            ORKStepArrayAddStep(steps, instructionStep1);
+        }
+            
+        {   /* Instruction step 2 */
+            
+            UIImage *shoulderStartImage;
+            
+            ORKInstructionStep *instructionStep2 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction2StepIdentifier)];
+
+            if (limb == 1) {
+                if (rightLimb) {
+                    instructionStep2.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep2.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
+                    shoulderStartImage = [UIImage imageNamed:@"shoulder_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                } else {
+                    instructionStep2.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep2.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil);
+                    shoulderStartImage = [UIImage imageNamed:@"shoulder_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                }
+            } else {
+                if (rightLimb) {
+                    instructionStep2.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep2.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_RIGHT", nil);
+                    shoulderStartImage = [UIImage imageNamed:@"knee_start_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                } else {
+                    instructionStep2.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep2.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep2.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_2_LEFT", nil);
+                    shoulderStartImage = [UIImage imageNamed:@"shoulder_start_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                }
+            }
+            instructionStep2.image = shoulderStartImage;
+            instructionStep2.imageContentMode = UIViewContentModeCenter;
+            instructionStep2.shouldTintImages = YES;
+            ORKStepArrayAddStep(steps, instructionStep2);
+        }
+            
+        {   /* Instruction step 3 */
+            
+            UIImage *shoulderMaximumImage;
+            
+            ORKInstructionStep *instructionStep3 = [[ORKInstructionStep alloc] initWithIdentifier:appendIdentifier(ORKInstruction3StepIdentifier)];
+
+            if (limb == 1) {
+                if (rightLimb) {
+                    instructionStep3.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep3.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+                    shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                } else {
+                    instructionStep3.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep3.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil);
+                    shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                }
+            } else {
+                if (rightLimb) {
+                    instructionStep3.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                    instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep3.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_RIGHT", nil);
+                    shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_right" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                } else {
+                    instructionStep3.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                    instructionStep3.text = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
+                    instructionStep3.detailText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TEXT_INSTRUCTION_3_LEFT", nil);
+                    shoulderMaximumImage = [UIImage imageNamed:@"shoulder_maximum_left" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                }
+            }
+            instructionStep3.image = shoulderMaximumImage;
+            instructionStep3.imageContentMode = UIViewContentModeCenter;
+            instructionStep3.shouldTintImages = YES;
+            ORKStepArrayAddStep(steps, instructionStep3);
+            }
+        }
+                            
+        {   /* Touch anywhere step */
+                            
+            NSString *touchAnywhereStepText;
+            // Set the instructions to be displayed and spoken
+            if (rightLimb) {
+                touchAnywhereStepText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
+            } else {
+                touchAnywhereStepText = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil);
+            }
+            ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:appendIdentifier(ORKTouchAnywhereStepIdentifier) instructionText:touchAnywhereStepText];
+            
+            touchAnywhereStep.spokenInstruction = touchAnywhereStepText;
+                            
+            // Set title based on the selected limb(s)
+            if (rightLimb) {
+                touchAnywhereStep.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+            } else {
+                touchAnywhereStep.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+            }
+            ORKStepArrayAddStep(steps, touchAnywhereStep);
+        }
+                            
+        {   /* Range of motion step */
+                            
+            ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
+                
+            ORKRangeOfMotionStep *shoulderRangeOfMotionStep = [[ORKRangeOfMotionStep alloc] initWithIdentifier:appendIdentifier(ORKKneeRangeOfMotionStepIdentifier) limbOption:limbOption];
+                            
+            // Set title and instructions based on the selected limb(s)
+            if (rightLimb) {
+                shoulderRangeOfMotionStep.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_RIGHT", nil);
+                shoulderRangeOfMotionStep.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
+            } else {
+                shoulderRangeOfMotionStep.title = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TITLE_LEFT", nil);
+                shoulderRangeOfMotionStep.text = ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil);
+                }
+            shoulderRangeOfMotionStep.spokenInstruction = shoulderRangeOfMotionStep.text;
+            shoulderRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
+            shoulderRangeOfMotionStep.optional = NO;
+                        ORKStepArrayAddStep(steps, shoulderRangeOfMotionStep);
+            }
+            // Flip to the other limb if doing both (ignored if limbCount == 1)
+            rightLimb = !rightLimb;
+        }
+                    
+        /* Conclusion step */
+                            
+        if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
+            ORKCompletionStep *completionStep = [self makeCompletionStep];
+            ORKStepArrayAddStep(steps, completionStep);
     }
-    
-    NSString *instructionText = ([limbType isEqualToString:ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_LEFT", nil) : ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_TOUCH_ANYWHERE_STEP_INSTRUCTION_RIGHT", nil);
-    ORKTouchAnywhereStep *touchAnywhereStep = [[ORKTouchAnywhereStep alloc] initWithIdentifier:ORKTouchAnywhereStepIdentifier instructionText:instructionText];
-    touchAnywhereStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    ORKStepArrayAddStep(steps, touchAnywhereStep);
-    
-    touchAnywhereStep.spokenInstruction = touchAnywhereStep.text;
-    
-    ORKDeviceMotionRecorderConfiguration *deviceMotionRecorderConfig = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:ORKDeviceMotionRecorderIdentifier frequency:100];
-    
-    ORKShoulderRangeOfMotionStep *shoulderRangeOfMotionStep = [[ORKShoulderRangeOfMotionStep alloc] initWithIdentifier:ORKShoulderRangeOfMotionStepIdentifier limbOption:limbOption];
-    shoulderRangeOfMotionStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-    shoulderRangeOfMotionStep.text = ([limbType isEqualToString: ORKLocalizedString(@"LIMB_LEFT", nil)])? ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_LEFT", nil) :
-    ORKLocalizedString(@"SHOULDER_RANGE_OF_MOTION_SPOKEN_INSTRUCTION_RIGHT", nil);
-    
-    shoulderRangeOfMotionStep.spokenInstruction = shoulderRangeOfMotionStep.text;
-    
-    shoulderRangeOfMotionStep.recorderConfigurations = @[deviceMotionRecorderConfig];
-    shoulderRangeOfMotionStep.optional = NO;
-    
-    ORKStepArrayAddStep(steps, shoulderRangeOfMotionStep);
-    
-    if (!(options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKCompletionStep *completionStep = [self makeCompletionStep];
-        completionStep.title = ORKLocalizedString(@"RANGE_OF_MOTION_TITLE", nil);
-        ORKStepArrayAddStep(steps, completionStep);
-    }
-    
+                
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    return task;
+                    return task;
 }
 
 
