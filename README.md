@@ -1,3 +1,12 @@
+# ❗️ Important notice <br>
+This repository contains a version of `ResearchKit` without any `HealthKit` features. This is necessary, if one does not use any `HealthKit`-related features of `ResearchKit` in their app, in order to pass the **App Store App Review**. In many times, removing `HealthKit` may be a request from the App Review team in order to proceed with the review of your app. 
+<br>
+Make sure to also exclude `HealthKit` from you Info.plist file and its package dependency in the project target.
+
+<br><br>
+
+
+
 ResearchKit Framework
 ===========
 
