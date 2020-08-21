@@ -1417,6 +1417,7 @@
 		CBD34A591BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKSurveyAnswerCellForLocation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D012B6B824C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D012B6BA24C116D700F4A842 /* ta-IN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ta-IN"; path = "ta-IN.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
+		D069B8F524EF5B63007432B4 /* lt-LT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "lt-LT"; path = "lt-LT.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D0FB60EE2373334000FBF8D0 /* bg-BG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bg-BG"; path = "bg-BG.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKImageCaptureView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -3545,6 +3546,7 @@
 				"bg-BG",
 				es_419,
 				"ta-IN",
+				"lt-LT",
 			);
 			mainGroup = 3FFF18341829DB1D00167070;
 			productRefGroup = 3FFF183E1829DB1D00167070 /* Products */;
@@ -4032,6 +4034,7 @@
 				A17DE999233D06B300A19A73 /* zh-TW */,
 				D0FB60EE2373334000FBF8D0 /* bg-BG */,
 				D012B6BA24C116D700F4A842 /* ta-IN */,
+				D069B8F524EF5B63007432B4 /* lt-LT */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
