@@ -39,11 +39,11 @@ ORK_CLASS_AVAILABLE
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (instancetype)initWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
-                         objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
+//- (instancetype)initWithSampleTypesToWrite:(nullable NSSet<HKSampleType *> *)sampleTypesToWrite
+//                         objectTypesToRead:(nullable NSSet<HKObjectType *> *)objectTypesToRead;
 
-@property (nonatomic, nullable) NSSet<HKSampleType *> *sampleTypesToWrite;
-@property (nonatomic, nullable) NSSet<HKObjectType *> *objectTypesToRead;
+//@property (nonatomic, nullable) NSSet<HKSampleType *> *sampleTypesToWrite;
+//@property (nonatomic, nullable) NSSet<HKObjectType *> *objectTypesToRead;
 
 @end
 

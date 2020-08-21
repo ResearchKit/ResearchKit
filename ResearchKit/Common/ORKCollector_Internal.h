@@ -46,29 +46,29 @@
 
 @protocol ORKHealthCollectable <NSObject>
 
-- (HKSampleType *)sampleType;
+/*- (HKSampleType *)sampleType;
 - (NSArray<HKSampleType *> *)collectableSampleTypes;
 - (NSDate *)startDate;
 - (HKQueryAnchor *)lastAnchor;
-- (void)setLastAnchor:(HKQueryAnchor *)lastAnchor;
+- (void)setLastAnchor:(HKQueryAnchor *)lastAnchor;*/
 
 @end
 
 
 @interface ORKHealthCollector() <ORKHealthCollectable>
 
-- (instancetype)initWithSampleType:(HKSampleType *)objectType unit:(HKUnit *)unit startDate:(NSDate *)startDate;
+// - (instancetype)initWithSampleType:(HKSampleType *)objectType unit:(HKUnit *)unit startDate:(NSDate *)startDate;
 
-@property (copy) HKQueryAnchor *lastAnchor;
+// @property (copy) HKQueryAnchor *lastAnchor;
 
 @end
 
 
 @interface ORKHealthCorrelationCollector() <ORKHealthCollectable>
 
-- (instancetype)initWithCorrelationType:(HKCorrelationType *)objectType sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units startDate:(NSDate *)startDate;
+// - (instancetype)initWithCorrelationType:(HKCorrelationType *)objectType sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units startDate:(NSDate *)startDate;
 
-@property (copy) HKQueryAnchor *lastAnchor;
+// @property (copy) HKQueryAnchor *lastAnchor;
 
 @end
 

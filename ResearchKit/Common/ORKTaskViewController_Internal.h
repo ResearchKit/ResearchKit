@@ -31,7 +31,7 @@
 
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
-@import HealthKit;
+// @import HealthKit;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,8 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTaskViewController () <ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
 
-- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
-- (nullable NSSet<HKObjectType *> *)requestedHealthTypesForWrite;
+// - (nullable NSSet<HKObjectType *> *)requestedHealthTypesForRead;
+// - (nullable NSSet<HKObjectType *> *)requestedHealthTypesForWrite;
 
 // Any StepVC contains a vertical scroll view should register here.
 // So taskVC can monitor scroll view's content offset and update hairline's alpha.
