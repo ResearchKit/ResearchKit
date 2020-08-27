@@ -196,9 +196,12 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     NSString *destinationStepIdentifier = nil;
     for (NSInteger i = 0; i < _resultPredicates.count; i++) {
         NSPredicate *predicate = _resultPredicates[i];
+        NSLog(@"%@", predicate);
+        NSLog(@"%@", allTaskResults);
         // The predicate can either have:
         // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoing task identifier;
         // - a hardcoded task identifier set by the developer (the substitutionVariables dictionary is ignored in this case)
+        NSLog(@"%@", taskResult.identifier);
         if ([predicate evaluateWithObject:allTaskResults
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
             destinationStepIdentifier = _destinationStepIdentifiers[i];
