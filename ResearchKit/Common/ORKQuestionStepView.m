@@ -51,6 +51,8 @@
 - (void)setQuestionStep:(ORKQuestionStep *)step {
     _questionStep = step;
     self.stepTitle = step.title;
+	self.stepAttributedTitle = step.attributedTitle;
+	self.stepAttributedText = step.attributedText;
     self.stepTopContentImage = step.image;
     self.stepTopContentImageContentMode = step.imageContentMode;
     self.titleIconImage = step.iconImage;
@@ -63,6 +65,12 @@
 - (void)setCustomHeaderTitle:(nullable NSString *)text {
     if (text) {
         self.stepTitle = text;
+    }
+}
+
+- (void)setCustomHeaderAttributedTitle:(nullable NSAttributedString *)text {
+    if (text) {
+        self.stepAttributedTitle = text;
     }
 }
 

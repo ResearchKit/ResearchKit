@@ -46,6 +46,7 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
     
     UIView *_headlineView;
     NSString *_title;
+	NSAttributedString *_attributedTitle;
     UILabel *_titleLabel;
     NSString *_detailText;
     UILabel *_detailTextLabel;
@@ -110,6 +111,54 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
     return self;
 }
 
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle {
+    
+    self = [super init];
+    if (self) {
+        _attributedTitle = attributedTitle;
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setupHeaderView];
+        [self setupConstraints];
+    }
+    return self;
+}
+
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle detailText:(nullable NSString *)text learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText tagText:(nullable NSString *)tagText {
+    
+    self = [super init];
+    if (self) {
+        _attributedTitle = attributedTitle;
+        _detailText = text;
+        _learnMoreView = learnMoreView;
+        _progressText = progressText;
+        _showBorder = NO;
+        _hasMultipleChoiceItem = NO;
+        _tagText = tagText;
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setupHeaderView];
+        [self setupConstraints];
+    }
+    return self;
+}
+
+- (instancetype)initWithAttributedTitle:(NSAttributedString *)attributedTitle detailText:(NSString *)text learnMoreView:(ORKLearnMoreView *)learnMoreView progressText:(NSString *)progressText tagText:(nullable NSString *)tagText showBorder:(BOOL)showBorder hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem {
+    
+    self = [super init];
+    if (self) {
+        _attributedTitle = attributedTitle;
+        _detailText = text;
+        _learnMoreView = learnMoreView;
+        _progressText = progressText;
+        _showBorder = showBorder;
+        _tagText = tagText;
+        _hasMultipleChoiceItem = hasMultipleChoiceItem;
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setupHeaderView];
+        [self setupConstraints];
+    }
+    return self;
+}
+
 - (void)setupHeaderView {
     [self setupHeadlineView];
     [self addSubview:_headlineView];
@@ -152,7 +201,7 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
     }
-    _titleLabel.text = _title;
+
     _titleLabel.numberOfLines = 0;
     if (@available(iOS 13.0, *)) {
         _titleLabel.textColor = [UIColor labelColor];
@@ -161,7 +210,13 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
     }
     _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _titleLabel.textAlignment = NSTextAlignmentNatural;
-    [_titleLabel setFont:[self titleLabelFont]];
+  
+	if (_attributedTitle != nil) {
+		_titleLabel.attributedText = _attributedTitle;
+	} else {
+		_titleLabel.text = _title;
+		[_titleLabel setFont:[self titleLabelFont]];
+	}
 }
 
 - (void)setUpDetailTextLabel {
@@ -271,7 +326,7 @@ static const CGFloat SelectAllThatApplyBottomPadding = 6.0;
         
         [_headlineMaskLayer addSublayer:foreLayer];
         
-        if (_titleLabel.text) {
+		if (_titleLabel.text || _titleLabel.attributedText) {
             CAShapeLayer *lineLayer = [CAShapeLayer layer];
             CGRect lineBounds = CGRectMake(0.0, _headlineView.bounds.size.height - 1.0, _headlineView.bounds.size.width, 0.5);
             lineLayer.path = [UIBezierPath bezierPathWithRect:lineBounds].CGPath;

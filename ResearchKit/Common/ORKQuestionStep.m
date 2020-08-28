@@ -48,12 +48,25 @@
 
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
                                      title:(nullable NSString *)title
-                                      question:(nullable NSString *)question
+								  question:(nullable NSString *)question
                                     answer:(nullable ORKAnswerFormat *)answerFormat {
     
     ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
     step.title = title;
     step.question = question;
+    step.answerFormat = answerFormat;
+    step.tagText = nil;
+    return step;
+}
+
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+						   attributedTitle:(nullable NSAttributedString *)attributedTitle
+						attributedQuestion:(nullable NSAttributedString *)attributedQuestion
+									answer:(nullable ORKAnswerFormat *)answerFormat {
+    
+    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
+    step.attributedTitle = attributedTitle;
+    step.attributedQuestion = attributedQuestion;
     step.answerFormat = answerFormat;
     step.tagText = nil;
     return step;
@@ -104,6 +117,7 @@
     questionStep.answerFormat = [self.answerFormat copy];
     questionStep.placeholder = [self.placeholder copy];
     questionStep.learnMoreItem = [self.learnMoreItem copy];
+	questionStep.attributedQuestion = [self.attributedQuestion copy];
     questionStep.question = [self.question copy];
     questionStep.tagText = [self.tagText copy];
     return questionStep;
@@ -121,11 +135,15 @@
 }
 
 - (NSUInteger)hash {
-    return super.hash ^ self.answerFormat.hash ^ self.question.hash ^ self.questionType ^ self.placeholder.hash ^ (_useCardView ? 0xf : 0x0) ^ self.learnMoreItem.hash ^ self.tagText.hash;
+	return super.hash ^ self.answerFormat.hash ^ self.question.hash ^ self.attributedQuestion.hash ^ self.questionType ^ self.placeholder.hash ^ (_useCardView ? 0xf : 0x0) ^ self.learnMoreItem.hash ^ self.tagText.hash;
 }
 
 - (void)setQuestion:(NSString *)question {
     _question = question;
+}
+
+- (void)setAttributedQuestion:(NSAttributedString *)attributedQuestion {
+    _attributedQuestion = attributedQuestion;
 }
 
 - (ORKQuestionType)questionType {
@@ -143,6 +161,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, question, NSString);
+		ORK_DECODE_OBJ_CLASS(aDecoder, attributedQuestion, NSAttributedString);
         ORK_DECODE_OBJ_CLASS(aDecoder, learnMoreItem, ORKLearnMoreItem);
         ORK_DECODE_BOOL(aDecoder, useCardView);
         ORK_DECODE_OBJ_CLASS(aDecoder, tagText, NSString);
@@ -156,6 +175,7 @@
     ORK_ENCODE_OBJ(aCoder, answerFormat);
     ORK_ENCODE_OBJ(aCoder, placeholder);
     ORK_ENCODE_OBJ(aCoder, question);
+	ORK_ENCODE_OBJ(aCoder, attributedQuestion);
     ORK_ENCODE_OBJ(aCoder, learnMoreItem);
     ORK_ENCODE_BOOL(aCoder, useCardView);
     ORK_ENCODE_OBJ(aCoder, tagText);

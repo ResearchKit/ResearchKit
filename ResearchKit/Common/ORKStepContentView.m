@@ -334,6 +334,11 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 - (void)setStepTitle:(NSString *)stepTitle {
     _stepTitle = stepTitle;
+	
+	if (_stepTitle == nil) {
+		return;
+	}
+	
     if (!_titleLabel) {
         [self setupTitleLabel];
         [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTitleLabel];
@@ -347,6 +352,22 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
     
     NSAttributedString *attributedStepTitle = [[NSAttributedString alloc] initWithString:stepTitle ?: @"" attributes:hyphenAttribute];
     [_titleLabel setAttributedText:attributedStepTitle];
+}
+
+- (void)setStepAttributedTitle:(NSAttributedString *)stepAttributedTitle {
+	_stepAttributedTitle = stepAttributedTitle;
+	
+	if (_stepAttributedTitle == nil) {
+		return;
+	}
+	
+	if(!_titleLabel) {
+		[self setupTitleLabel];
+		[self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTitleLabel];
+        [self setNeedsUpdateConstraints];
+	}
+	
+	[_titleLabel setAttributedText:stepAttributedTitle];
 }
 
 - (void)setupTitleLabel {
@@ -406,6 +427,11 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
 
 - (void)setStepText:(NSString *)stepText {
     _stepText = stepText;
+	
+	if(_stepText == nil) {
+		return;
+	}
+	
     if (stepText && !_textLabel) {
         [self setupTextLabel];
         [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTextLabel];
@@ -416,6 +442,31 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         [_textLabel setText:_stepText];
     }
     else if (!stepText) {
+        [_textLabel removeFromSuperview];
+        _textLabel = nil;
+        [self deactivateTextLabelConstraints];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTextLabel];
+        [self setNeedsUpdateConstraints];
+    }
+}
+
+- (void)setStepAttributedText:(NSAttributedString *)stepAttributedText {
+    _stepAttributedText = stepAttributedText;
+	
+	if(_stepAttributedText == nil) {
+		return;
+	}
+	
+    if (stepAttributedText && !_textLabel) {
+        [self setupTextLabel];
+        [self updateViewConstraintsForSequence:ORKUpdateConstraintSequenceTextLabel];
+        [self setNeedsUpdateConstraints];
+        [_textLabel setAttributedText:stepAttributedText];
+    }
+    else if (stepAttributedText && _textLabel) {
+       [_textLabel setAttributedText:stepAttributedText];
+    }
+    else if (!stepAttributedText) {
         [_textLabel removeFromSuperview];
         _textLabel = nil;
         [self deactivateTextLabelConstraints];
@@ -795,7 +846,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKUpdateConstraintSequence) {
         attribute = NSLayoutAttributeBottom;
     }
     
-    else if (_textLabel && ![_stepText isEqualToString:@""]) {
+	else if (_textLabel && ![_stepText isEqualToString:@""] && ![_stepAttributedText.string isEqualToString:@""]) {
         topItem = _textLabel;
         topPadding = ORKBodyToBodyPaddingStandard;
         attribute = NSLayoutAttributeBottom;

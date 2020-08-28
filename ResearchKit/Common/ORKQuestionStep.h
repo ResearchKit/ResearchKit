@@ -70,8 +70,21 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
                                      title:(nullable NSString *)title
-                                      question:(nullable NSString *)question
+								  question:(nullable NSString *)question
                                     answer:(nullable ORKAnswerFormat *)answerFormat;
+
+/**
+ Returns a new question step that includes the specified identifier, title, question, and answer format.
+ 
+ @param identifier    The identifier of the step (a step identifier should be unique within the task).
+ @param attributedTitle         A localized attributed string that represents the primary text of the question.
+ @param attributedQuestion      A localized attributed string that represents the question as a text.
+ @param answerFormat  The format in which the answer is expected.
+ */
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+						   attributedTitle:(nullable NSAttributedString *)attributedTitle
+						attributedQuestion:(nullable NSAttributedString *)attributedQuestion
+									answer:(nullable ORKAnswerFormat *)answerFormat;
 
 /**
  Returns a new question step that includes the specified identifier, title, question, answer, and learnMoreItem format.
@@ -103,6 +116,13 @@ ORK_CLASS_AVAILABLE
  Different from the step title.
  */
 @property (nonatomic, strong, nullable) NSString *question;
+
+/**
+ The attributed question for the step.
+ 
+ Different from the step title.
+ */
+@property (nonatomic, strong, nullable) NSAttributedString *attributedQuestion;
 
 /**
  The question type. (read-only)

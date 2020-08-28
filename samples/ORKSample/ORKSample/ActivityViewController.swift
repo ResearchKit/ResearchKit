@@ -32,7 +32,7 @@ import UIKit
 import ResearchKit
 
 enum Activity: Int {
-    case survey, microphone, tapping, trailmaking
+    case survey, microphone, tapping, trailmaking, surveyTasksAttributedStrings
     
     static var allValues: [Activity] {
         var index = 0
@@ -55,7 +55,9 @@ enum Activity: Int {
                 return "Tapping"
             case .trailmaking:
                 return "Trail Making Test"
-        }
+			case .surveyTasksAttributedStrings:
+				return "Survey using attributed strings"
+		}
     }
     
     var subtitle: String {
@@ -68,6 +70,8 @@ enum Activity: Int {
                 return "Test tapping speed"
             case .trailmaking:
                 return "Test visual attention"
+			case .surveyTasksAttributedStrings:
+				return "Answer 3 short questions"
         }
     }
 }
@@ -125,6 +129,8 @@ class ActivityViewController: UITableViewController {
             
             case .trailmaking:
                 taskViewController = ORKTaskViewController(task: StudyTasks.trailmakingTask, taskRun: NSUUID() as UUID)
+			case .surveyTasksAttributedStrings:
+				taskViewController = ORKTaskViewController(task: StudyTasks.surveyTaskAttributedTexts, taskRun: NSUUID() as UUID)
         }
 
         taskViewController.delegate = self
