@@ -103,9 +103,19 @@
     [_stepContentView setStepTitle:_stepTitle];
 }
 
+- (void)setStepAttributedTitle:(NSAttributedString *)stepAttributedTitle {
+	_stepAttributedTitle = stepAttributedTitle;
+	[_stepContentView setStepAttributedTitle:_stepAttributedTitle];
+}
+
 - (void)setStepText:(NSString *)stepText {
     _stepText = stepText;
     [_stepContentView setStepText:_stepText];
+}
+
+- (void)setStepAttributedText:(NSAttributedString *)stepAttributedText {
+    _stepAttributedText = stepAttributedText;
+    [_stepContentView setStepAttributedText:_stepAttributedText];
 }
 
 - (void)setStepDetailText:(NSString *)stepDetailText {

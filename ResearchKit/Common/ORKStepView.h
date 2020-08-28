@@ -54,9 +54,13 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) UIImage *auxiliaryImage; // Only underlayed when stepTopContentImage is added.
 
-@property (nonatomic) NSString *stepTitle;
+@property (nonatomic, nullable) NSString *stepTitle;
+
+@property (nonatomic, nullable) NSAttributedString *stepAttributedTitle;
 
 @property (nonatomic, nullable) NSString *stepText;
+
+@property (nonatomic, nullable) NSAttributedString *stepAttributedText;
 
 @property (nonatomic, nullable) NSString *stepDetailText;
 

@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  Typically, you subclass `ORKQuestionStepCustomView` only when you need to implement a new
  answer format for the survey engine.
  
- To ensure that your subclass is allocated the display space it requires, you should implement 
+ To ensure that your subclass is allocated the display space it requires, you should implement
  `sizeThatFits:`, or include internal constraints, or report an intrinsic content size.
  */
 ORK_CLASS_AVAILABLE
@@ -85,6 +85,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) ORKSurveyAnswerCell *cell;
 
 - (void)useCardViewWithTitle:(NSString *)title detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText tagText:(nullable NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem;
+
+- (void)useCardViewWithAttributedTitle:(NSAttributedString *)attributedTitle detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText tagText:(nullable NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem;
 
 @end
 

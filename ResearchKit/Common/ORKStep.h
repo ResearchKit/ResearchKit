@@ -106,7 +106,7 @@ ORK_CLASS_AVAILABLE
  
  The identifier is reproduced in the results of a step. In fact, the only way to link a result
  (an `ORKStepResult` object) to the step that generated it is to look at the value of
- `identifier`. To accurately identify step results, you need to ensure that step identifiers 
+ `identifier`. To accurately identify step results, you need to ensure that step identifiers
  are unique within each task.
  
  In some cases, it can be useful to link the step identifier to a unique identifier in a
@@ -145,6 +145,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *title;
 
 /**
+ The primary text to display for the step in a localized attributed string.
+ */
+@property (nonatomic, copy, nullable) NSAttributedString *attributedTitle;
+
+/**
  Additional text to display for the step in a localized string.
  
  The additional text is displayed in a smaller font below `title`. If you need to display a
@@ -153,6 +158,16 @@ ORK_CLASS_AVAILABLE
  */
 
 @property (nonatomic, copy, nullable) NSString *text;
+
+/**
+ Additional text to display for the step in a localized attributed string.
+ 
+ The additional text is displayed in a smaller font below `title`. If you need to display a
+ long question, it can work well to keep the title short and put the additional content in
+ the `text` property.
+ */
+
+@property (nonatomic, copy, nullable) NSAttributedString *attributedText;
 
 /**
  Additional detailed explanation for the instruction.
@@ -296,7 +311,7 @@ Whether to show progress for this step when it is presented. The default is YES.
  using the `-stepViewControllerClass` method and initializing that instance by calling `initWithIdentifier:result:`
  on the provided `ORKStepViewController` class instance.
  
- Override this method if you need to customize the behavior before presenting the step or if 
+ Override this method if you need to customize the behavior before presenting the step or if
  the view controller is presented using a nib or storyboard.
  
  @param result    The result associated with this step

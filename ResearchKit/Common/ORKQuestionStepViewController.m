@@ -193,6 +193,8 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
             _headerView.stepTopContentImage = self.step.image;
             _headerView.titleIconImage = self.step.iconImage;
             _headerView.stepTitle = self.step.title;
+			_headerView.stepAttributedTitle = self.step.attributedTitle;
+			_headerView.stepAttributedText = self.step.attributedText;
             _headerView.stepText = self.step.text;
             // TODO:- we are currently not setting detailText to _headerView because we are restricting detailText to be displayed only inside ORKSurveyCardHeaderView, might wanna rethink this later. Please use the text property on ORKQuestionStep for adding extra information.
             _headerView.stepHeaderTextAlignment = self.step.headerTextAlignment;
@@ -278,8 +280,13 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
                     if (self.questionStep.impliedAnswerFormat != nil && self.questionStep.impliedAnswerFormat.questionType == ORKQuestionTypeMultipleChoice) {
                         hasMultipleChoiceFormItem = YES;
                     }
-                    
-                    [_cellHolderView useCardViewWithTitle:self.questionStep.question detailText:self.step.detailText learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
+					
+					if (self.questionStep.attributedQuestion != nil) {
+						[_cellHolderView useCardViewWithAttributedTitle:self.questionStep.attributedQuestion detailText:self.step.detailText learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
+					} else {
+						
+						[_cellHolderView useCardViewWithTitle:self.questionStep.question detailText:self.step.detailText learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
+					}
                 }
                 _questionView.questionCustomView = _cellHolderView;
             }
@@ -681,7 +688,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if ([self questionStep].useCardView && [self questionStep].question) {
+    if ([self questionStep].useCardView && ([self questionStep].question || [self questionStep].attributedQuestion)) {
         ORKLearnMoreView *learnMoreView;
         NSString *sectionProgressText = nil;
         BOOL hasMultipleChoiceFormItem = NO;
@@ -703,8 +710,14 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
         if (self.questionStep.impliedAnswerFormat != nil && self.questionStep.impliedAnswerFormat.questionType == ORKQuestionTypeMultipleChoice) {
             hasMultipleChoiceFormItem = YES;
         }
+		
+		if (self.questionStep.attributedQuestion != nil) {
+			  return [[ORKSurveyCardHeaderView alloc] initWithAttributedTitle:self.questionStep.attributedQuestion detailText:self.questionStep.detailText  learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
+		} else {
+			   return [[ORKSurveyCardHeaderView alloc] initWithTitle:self.questionStep.question detailText:self.questionStep.detailText  learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
+		}
 
-        return [[ORKSurveyCardHeaderView alloc] initWithTitle:self.questionStep.question detailText:self.questionStep.detailText  learnMoreView:learnMoreView progressText:sectionProgressText tagText:self.questionStep.tagText showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
+     
     }
     return nil;
 }
@@ -764,7 +777,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     
     ORKSurveyAnswerCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) { 
+    if (cell == nil) {
         cell = [[class alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier step:[self questionStep] answer:self.answer delegate:self];
     }
     

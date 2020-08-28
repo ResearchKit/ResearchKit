@@ -52,6 +52,22 @@ NS_ASSUME_NONNULL_BEGIN
                     showBorder:(BOOL)showBorder
          hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem;
 
+- (instancetype) initWithAttributedTitle:(NSAttributedString *)attributedTitle;
+
+- (instancetype) initWithAttributedTitle:(NSAttributedString *)attributedTitle
+                    detailText:(nullable NSString *)text
+                 learnMoreView:(nullable ORKLearnMoreView *)learnMoreView
+                 progressText:(nullable NSString *)progressText
+                       tagText:(nullable NSString *)tagText;
+
+- (instancetype) initWithAttributedTitle:(NSAttributedString *)attributedTitle
+                    detailText:(nullable NSString *)text
+                 learnMoreView:(nullable ORKLearnMoreView *)learnMoreView
+                  progressText:(nullable NSString *)progressText
+                       tagText:(nullable NSString *)tagText
+                    showBorder:(BOOL)showBorder
+         hasMultipleChoiceItem:(BOOL)hasMultipleChoiceItem;
+
 @end
 
 NS_ASSUME_NONNULL_END

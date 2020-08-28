@@ -77,6 +77,7 @@
     BOOL _useCardView;
     NSArray<NSLayoutConstraint *> *_containerConstraints;
     NSString *_title;
+	NSAttributedString *_attributedTitle;
 }
 
 - (instancetype)init {
@@ -113,6 +114,18 @@
     }
 }
 
+- (void)setupHeaderViewWithAttributedTitle:(NSAttributedString *)attributedTitle detailText:(nullable NSString *)detailText learnMoreView:(nullable ORKLearnMoreView *)learnMoreView progressText:(nullable NSString *)progressText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
+    if (!_cardHeaderView) {
+        _cardHeaderView = [[ORKSurveyCardHeaderView alloc]initWithAttributedTitle:attributedTitle detailText:detailText learnMoreView:learnMoreView progressText:progressText tagText:nil showBorder:NO hasMultipleChoiceItem:hasMultipleChoiceFormItem];
+    }
+    _cardHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_cardHeaderView];
+    if (!attributedTitle) {
+        [_cardHeaderView removeFromSuperview];
+        _cardHeaderView = nil;
+    }
+}
+
 - (void)tapAction {
     [_cell becomeFirstResponder];
 }
@@ -139,6 +152,15 @@
     _leftRightMargin = 0.0;
     [self setBackgroundColor:[UIColor clearColor]];
     [self setupHeaderViewWithTitle:title detailText:detailText learnMoreView:learnMoreView progressText:progressText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
+    [self setupConstraints];
+}
+
+-(void)useCardViewWithAttributedTitle:(NSAttributedString *)attributedTitle detailText:(NSString *)detailText learnMoreView:(ORKLearnMoreView *)learnMoreView progressText:(NSString *)progressText tagText:(NSString *)tagText hasMultipleChoiceFormItem:(BOOL)hasMultipleChoiceFormItem {
+	_attributedTitle = attributedTitle;
+    _useCardView = YES;
+    _leftRightMargin = 0.0;
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self setupHeaderViewWithAttributedTitle:attributedTitle detailText:detailText learnMoreView:learnMoreView progressText:progressText hasMultipleChoiceFormItem:hasMultipleChoiceFormItem];
     [self setupConstraints];
 }
 
