@@ -81,6 +81,20 @@ static const float FirstSectionHeaderPadding = 24.0;
     return self;
 }
 
+-(instancetype)initWithNavigableTask:(ORKNavigableOrderedTask *)task result:(ORKTaskResult *)result delegate:(id<ORKReviewViewControllerDelegate>)delegate{
+    self = [super init];
+    if (self) {
+        _steps = task.steps;
+        _navigableOrderedTask = task;
+        _resultSource = result;
+        _delegate = delegate;
+        _isCompleted = YES;
+        [self createReviewSectionsWithDefaultResultSource:_resultSource];
+    }
+    return self;
+}
+
+
 - (instancetype)initWithTask:(ORKNavigableOrderedTask *)task delegate:(id<ORKReviewViewControllerDelegate>)delegate isCompleted:(BOOL)isCompleted incompleteText:(NSString *)incompleteText {
     self = [super init];
         if (self) {
@@ -402,11 +416,31 @@ static const float FirstSectionHeaderPadding = 24.0;
     return nil;
 }
 
+- (nullable ORKNavigableOrderedTask *)taskForStep:(nullable ORKStep *)step sourceTask:(ORKNavigableOrderedTask *)sourceTask {
+    return nil;
+}
+
 - (void)footerButtonTappedForSection:(id)sender {
     UIButton *button = (UIButton *)sender;
     
-    ORKOrderedTask *subOrderedTask = [[ORKOrderedTask alloc] initWithIdentifier:[[NSUUID UUID] UUIDString] steps:@[[self stepForIdentifier:_reviewSections[button.tag].stepIdentifier]]];
-    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:subOrderedTask taskRunUUID:[NSUUID UUID]];
+    if (_navigableOrderedTask != nil) {
+        ORKNavigableOrderedTask *subNavigableOrderedTask = [self taskForStep:[self stepForIdentifier:_reviewSections[button.tag].stepIdentifier] sourceTask:_navigableOrderedTask ];
+        if (subNavigableOrderedTask != nil) {
+            ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:subNavigableOrderedTask taskRunUUID:[NSUUID UUID]];
+            [self presentTaskViewController: taskViewController];
+        }else {
+            [NSException raise:@"Can not be nil" format:@"Not supposed to be nil"];
+        }
+    }else{
+        ORKOrderedTask *subOrderedTask = [[ORKOrderedTask alloc] initWithIdentifier:[[NSUUID UUID] UUIDString] steps:@[[self stepForIdentifier:_reviewSections[button.tag].stepIdentifier]]];
+        ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:subOrderedTask taskRunUUID:[NSUUID UUID]];
+        [self presentTaskViewController:taskViewController];
+    }
+    
+
+}
+
+-(void)presentTaskViewController:(ORKTaskViewController *)taskViewController{
     taskViewController.delegate = self;
     [taskViewController.navigationBar setTranslucent:YES];
     taskViewController.navigationBar.prefersLargeTitles = NO;
@@ -415,6 +449,7 @@ static const float FirstSectionHeaderPadding = 24.0;
     taskViewController.showsProgressInNavigationBar = NO;
     [self presentViewController:taskViewController animated:YES completion:nil];
 }
+
 
 #pragma mark - UItableViewDelegate
 
