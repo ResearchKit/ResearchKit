@@ -52,11 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorder : ORKRecorder
 
-@property (nonatomic, copy, readonly) HKQuantityType *quantityType;
+//@property (nonatomic, copy, readonly) HKQuantityType *quantityType;
 
-@property (nonatomic, copy, readonly) HKUnit *unit;
+//@property (nonatomic, copy, readonly) HKUnit *unit;
 
-@property (nonatomic, copy, readonly, nullable) HKQuantitySample *lastSample;
+//@property (nonatomic, copy, readonly, nullable) HKQuantitySample *lastSample;
 
 /**
  Returns an initialized health quantity type recorder using the specified quantity type and unit.
@@ -69,11 +69,11 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized health quantity type recorder.
 */
-- (instancetype)initWithIdentifier:(NSString *)identifier
+/*- (instancetype)initWithIdentifier:(NSString *)identifier
                 healthQuantityType:(HKQuantityType *)quantityType
                               unit:(HKUnit *)unit
                               step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;*/
 
 @end
 

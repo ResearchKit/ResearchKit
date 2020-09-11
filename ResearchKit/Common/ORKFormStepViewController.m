@@ -321,7 +321,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
-    _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
+    // _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
     if (result) {
         NSAssert([result isKindOfClass:[ORKStepResult class]], @"Expect a ORKStepResult instance");
 
@@ -364,18 +364,18 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
     [super viewWillAppear:animated];
     [self updateAnsweredSections];
     NSMutableSet *types = [NSMutableSet set];
-    for (ORKFormItem *item in [self formItems]) {
-        ORKAnswerFormat *format = [item answerFormat];
-        HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
-        if (objType) {
-            [types addObject:objType];
-        }
-    }
+    //for (ORKFormItem *item in [self formItems]) {
+        // ORKAnswerFormat *format = [item answerFormat];
+        // HKObjectType *objType = [format healthKitObjectTypeForAuthorization];
+        //if (objType) {
+         //   [types addObject:objType];
+        //}
+    //}
     
     BOOL refreshDefaultsPending = NO;
     if (types.count) {
-        NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (![types isSubsetOfSet:alreadyRequested]) {
+        //NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
+        /*if (![types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
                 if (!success) {
@@ -385,7 +385,7 @@ static const CGFloat DelayBeforeAutoScroll = 0.25;
                     [self refreshDefaults];
                 });
             }];
-        }
+        }*/
     }
     if (!refreshDefaultsPending) {
         [self refreshDefaults];

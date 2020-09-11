@@ -51,18 +51,18 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
-    self = [super init];
+//- (instancetype)initWithSampleTypesToWrite:(NSSet<HKSampleType *> *)sampleTypesToWrite objectTypesToRead:(NSSet<HKObjectType *> *)objectTypesToRead {
+    //self = [super init];
     
-    if (self) {
-        self.sampleTypesToWrite = sampleTypesToWrite;
-        self.objectTypesToRead = objectTypesToRead;
-        [self setupCardView];
-        [self checkHealthKitAuthorizationStatus];
-    }
+    //if (self) {
+    //    self.sampleTypesToWrite = sampleTypesToWrite;
+    //    self.objectTypesToRead = objectTypesToRead;
+    //    [self setupCardView];
+    //    [self checkHealthKitAuthorizationStatus];
+    //}
     
-    return self;
-}
+    //return self;
+//}
 
 - (void)setupCardView {
     UIImage *image;
@@ -82,7 +82,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
 }
 
 - (void)checkHealthKitAuthorizationStatus {
-    if (![HKHealthStore isHealthDataAvailable]) {
+    /*if (![HKHealthStore isHealthDataAvailable]) {
         [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateNotSupported];
         return;
     }
@@ -102,7 +102,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
         }];
     } else {
         [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateDefault];
-    }
+    }*/
 }
 
 - (void)setRequestPermissionsButtonState:(ORKRequestPermissionsButtonState)state {
@@ -143,7 +143,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
 }
 
 - (void)requestPermissionButtonPressed {
-    [[HKHealthStore new] requestAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(BOOL success, NSError * _Nullable error) {
+    /*[[HKHealthStore new] requestAuthorizationToShareTypes:_sampleTypesToWrite readTypes:_objectTypesToRead completion:^(BOOL success, NSError * _Nullable error) {
         
         if (error) {
             [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
@@ -155,7 +155,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ORKRequestPermissionsButtonState) {
         } else {
             [self setRequestPermissionsButtonState:ORKRequestPermissionsButtonStateError];
         }
-    }];
+    }];*/
 }
 
 - (void)setEnableContinue:(BOOL)enableContinue {

@@ -693,7 +693,6 @@
 		B1A860F61A9693C400EA57B7 /* consent_06@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E81A9693C400EA57B7 /* consent_06@3x.m4v */; };
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* ResearchKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* ResearchKit.strings */; };
-		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B8760F291AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h */; };
 		B8760F2C1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8760F2A1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.m */; };
 		BA0AA6941EAEC0B600671ACE /* ORKStroopContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = BA0AA68E1EAEC0B600671ACE /* ORKStroopContentView.h */; };
@@ -1932,7 +1931,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B1F7852241503900D022FE /* Speech.framework in Frameworks */,
-				B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2339,6 +2337,29 @@
 			name = "Custom Vision View";
 			sourceTree = "<group>";
 		};
+		51198798245FC31C004FC2C7 /* 3D Model Manager */ = {
+			isa = PBXGroup;
+			children = (
+				51198799245FC33C004FC2C7 /* ORK3DModelManager.h */,
+				5D26E77724997EA200E53D27 /* ORK3DModelManager_Internal.h */,
+				5119879A245FC33C004FC2C7 /* ORK3DModelManager.m */,
+			);
+			name = "3D Model Manager";
+			sourceTree = "<group>";
+		};
+		511987B624612C95004FC2C7 /* USDZ Model Manager */ = {
+			isa = PBXGroup;
+			children = (
+				51198767245CA50D004FC2C7 /* ORKUSDZModelManagerScene.h */,
+				51198768245CA50D004FC2C7 /* ORKUSDZModelManagerScene.m */,
+				5119879D245FE68D004FC2C7 /* ORKUSDZModelManager.h */,
+				5119879E245FE68D004FC2C7 /* ORKUSDZModelManager.m */,
+				5166E49D247355D500151C57 /* ORKUSDZModelManagerResult.h */,
+				5166E49E247355D500151C57 /* ORKUSDZModelManagerResult.m */,
+			);
+			name = "USDZ Model Manager";
+			sourceTree = "<group>";
+		};
 		511987C024632E33004FC2C7 /* Request Permissions Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2362,29 +2383,6 @@
 				BA95AA9320ACD05100E7FF8E /* AmslerGrid */,
 			);
 			name = "Vision Tasks";
-			sourceTree = "<group>";
-		};
-		51198798245FC31C004FC2C7 /* 3D Model Manager */ = {
-			isa = PBXGroup;
-			children = (
-				51198799245FC33C004FC2C7 /* ORK3DModelManager.h */,
-				5D26E77724997EA200E53D27 /* ORK3DModelManager_Internal.h */,
-				5119879A245FC33C004FC2C7 /* ORK3DModelManager.m */,
-			);
-			name = "3D Model Manager";
-			sourceTree = "<group>";
-		};
-		511987B624612C95004FC2C7 /* USDZ Model Manager */ = {
-			isa = PBXGroup;
-			children = (
-				51198767245CA50D004FC2C7 /* ORKUSDZModelManagerScene.h */,
-				51198768245CA50D004FC2C7 /* ORKUSDZModelManagerScene.m */,
-				5119879D245FE68D004FC2C7 /* ORKUSDZModelManager.h */,
-				5119879E245FE68D004FC2C7 /* ORKUSDZModelManager.m */,
-				5166E49D247355D500151C57 /* ORKUSDZModelManagerResult.h */,
-				5166E49E247355D500151C57 /* ORKUSDZModelManagerResult.m */,
-			);
-			name = "USDZ Model Manager";
 			sourceTree = "<group>";
 		};
 		5175144B2459EBD3009E8FFC /* 3D Model */ = {

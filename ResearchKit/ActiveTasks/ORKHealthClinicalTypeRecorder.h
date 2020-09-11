@@ -45,9 +45,9 @@ ORK_CLASS_AVAILABLE
 API_AVAILABLE(ios(12.0))
 @interface ORKHealthClinicalTypeRecorder : ORKRecorder
 
-@property (nonatomic, copy, readonly) HKClinicalType *healthClinicalType;
+//@property (nonatomic, copy, readonly) HKClinicalType *healthClinicalType;
 
-@property (nonatomic, copy, readonly) HKFHIRResourceType healthFHIRResourceType;
+//@property (nonatomic, copy, readonly) HKFHIRResourceType healthFHIRResourceType;
 
 /**
  Returns an initialized health clinical type recorder using the specified HKClinicalType and HKFHIRResourceType.
@@ -60,12 +60,12 @@ API_AVAILABLE(ios(12.0))
  
  @return An initialized health quantity type recorder.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier
+/*- (instancetype)initWithIdentifier:(NSString *)identifier
                 healthClinicalType:(HKClinicalType *)healthClinicalType
             healthFHIRResourceType:(nullable HKFHIRResourceType)healthFHIRResourceType
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(12.0));
-
+*/
 @end
 #endif
 

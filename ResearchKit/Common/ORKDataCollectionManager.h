@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  If NO is returned or this method is not implemented, the manager will stop the collection for the collector and repeat this same collection next time,
  until the data is accepted.
  */
-- (BOOL)healthCollector:(ORKHealthCollector *)collector didCollectSamples:(NSArray<HKSample *> *)samples;
+// - (BOOL)healthCollector:(ORKHealthCollector *)collector didCollectSamples:(NSArray<HKSample *> *)samples;
 
 /**
  Method for delivering the collected health correlations.
@@ -72,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
  If NO is returned or this method is not implemented, the manager will stop the collection for the collector and repeat this same collection next time,
  until the data is accepted.
  */
-- (BOOL)healthCorrelationCollector:(ORKHealthCorrelationCollector *)collector didCollectCorrelations:(NSArray<HKCorrelation *> *)correlations;
+// - (BOOL)healthCorrelationCollector:(ORKHealthCorrelationCollector *)collector didCollectCorrelations:(NSArray<HKCorrelation *> *)correlations;
 
 /**
  Method for delivering the collected motion activities.
@@ -145,10 +145,10 @@ ORK_CLASS_AVAILABLE
  
  @return Initiated health collector.
  */
-- (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType *)sampleType
-                                                    unit:(HKUnit *)unit
-                                               startDate:(NSDate *)startDate
-                                                   error:(NSError * _Nullable *)error;
+// - (ORKHealthCollector *)addHealthCollectorWithSampleType:(HKSampleType *)sampleType
+//                                                    unit:(HKUnit *)unit
+//                                               startDate:(NSDate *)startDate
+//                                                   error:(NSError * _Nullable *)error;
 
 /**
  Add a collector for HealthKit correlations.
@@ -161,11 +161,11 @@ ORK_CLASS_AVAILABLE
  
  @return Initiated health correlation collector.
  */
-- (ORKHealthCorrelationCollector *)addHealthCorrelationCollectorWithCorrelationType:(HKCorrelationType *)correlationType
-                                                                        sampleTypes:(NSArray<HKSampleType *> *)sampleTypes
-                                                                              units:(NSArray<HKUnit *> *)units
-                                                                          startDate:(NSDate *)startDate
-                                                                              error:(NSError * _Nullable *)error;
+// - (ORKHealthCorrelationCollector *)addHealthCorrelationCollectorWithCorrelationType:(HKCorrelationType *)correlationType
+//                                                                        sampleTypes:(NSArray<HKSampleType *> *)sampleTypes
+//                                                                              units:(NSArray<HKUnit *> *)units
+//                                                                          startDate:(NSDate *)startDate
+//                                                                              error:(NSError * _Nullable *)error;
 
 /**
  Add a collector for motion activity.

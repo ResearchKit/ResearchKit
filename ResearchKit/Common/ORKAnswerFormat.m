@@ -44,7 +44,7 @@
 
 #import "ORKHelpers_Internal.h"
 
-@import HealthKit;
+// @import HealthKit;
 @import MapKit;
 @import Contacts;
 
@@ -89,25 +89,25 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 }
 
 
-@implementation ORKAnswerDefaultSource {
-    NSMutableDictionary *_unitsTable;
-}
+//@implementation ORKAnswerDefaultSource {
+ //   NSMutableDictionary *_unitsTable;
+//}
 
-@synthesize healthStore=_healthStore;
+// @synthesize healthStore=_healthStore;
 
-+ (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore {
+/*+ (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore {
     ORKAnswerDefaultSource *source = [[ORKAnswerDefaultSource alloc] initWithHealthStore:healthStore];
     return source;
-}
+}*/
 
-#pragma clang diagnostic push
+/*#pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
 }
 #pragma clang diagnostic pop
-
-- (instancetype)initWithHealthStore:(HKHealthStore *)healthStore {
+*/
+/*- (instancetype)initWithHealthStore:(HKHealthStore *)healthStore {
     self = [super init];
     if (self) {
         _healthStore = healthStore;
@@ -120,17 +120,17 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     return self;
-}
-
+}*/
+/*
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)healthKitUserPreferencesDidChange:(NSNotification *)notification {
     _unitsTable = nil;
-}
+}*/
 
-- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError **)errorOut {
+/*- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError **)errorOut {
     id result = nil;
     if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
         NSDate *dob = [[NSCalendar currentCalendar] dateFromComponents:[_healthStore dateOfBirthComponentsWithError:errorOut]];
@@ -175,9 +175,9 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     return result;
-}
+}*/
 
-- (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler {
+/*- (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler {
     if (!unit) {
         handler(nil, nil);
         return;
@@ -200,9 +200,9 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }];
         [healthStore executeQuery:sampleQuery];
     });
-}
+}*/
 
-- (void)fetchDefaultValueForAnswerFormat:(ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler {
+/*- (void)fetchDefaultValueForAnswerFormat:(ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler {
     HKObjectType *objectType = [answerFormat healthKitObjectType];
     BOOL handled = NO;
     if (objectType) {
@@ -223,9 +223,9 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     if (!handled) {
         handler(nil, nil);
     }
-}
+}*/
 
-- (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat {
+/*- (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat {
     __block HKUnit *unit = [answerFormat healthKitUnit];
     HKObjectType *objectType = [answerFormat healthKitObjectType];
     if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
@@ -257,17 +257,17 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
         }
     }
     return unit;
-}
+}*/
 
-- (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force {
+/*- (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force {
     HKUnit *unit = [answerFormat healthKitUserUnit];
     HKUnit *healthKitDefault = [self defaultHealthKitUnitForAnswerFormat:answerFormat];
     if (!ORKEqualObjects(unit,healthKitDefault) && (force || (unit == nil))) {
         [answerFormat setHealthKitUserUnit:healthKitDefault];
     }
-}
+}*/
 
-@end
+//@end
 
 
 #pragma mark - ORKAnswerFormat
@@ -511,7 +511,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
     return NO;
 }
 
-- (HKObjectType *)healthKitObjectType {
+/*- (HKObjectType *)healthKitObjectType {
     return nil;
 }
 
@@ -529,7 +529,7 @@ static NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattin
 
 - (void)setHealthKitUserUnit:(HKUnit *)unit {
     
-}
+}*/
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeNone;

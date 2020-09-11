@@ -46,7 +46,7 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
 // static NSString *const HKSourceIdentifierKey = @"sourceBundleIdentifier";
 
 
-@implementation HKSample (ORKJSONDictionary)
+/*@implementation HKSample (ORKJSONDictionary)
 
 - (NSMutableDictionary *)ork_JSONMutableDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithCapacity:12];
@@ -103,15 +103,15 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     return [self ork_JSONMutableDictionaryWithOptions:options unit:unit];
 }
 
-@end
+@end*/
 
 
-@interface HKCategorySample (ORKJSONDictionary)
+/*@interface HKCategorySample (ORKJSONDictionary)
 
-@end
+@end*/
 
 
-@implementation HKCategorySample (ORKJSONDictionary)
+/*@implementation HKCategorySample (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:unit];
@@ -122,15 +122,15 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     return dictionary;
 }
 
-@end
+@end*/
 
 
-@interface HKQuantitySample (ORKJSONDictionary)
+/*@interface HKQuantitySample (ORKJSONDictionary)
 
-@end
+@end*/
 
 
-@implementation HKQuantitySample (ORKJSONDictionary)
+/*@implementation HKQuantitySample (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:unit];
@@ -143,10 +143,10 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
     return dictionary;
 }
 
-@end
+@end*/
 
 
-@implementation HKCorrelation (ORKJSONDictionary)
+/*@implementation HKCorrelation (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units {
     NSMutableDictionary *mutableDictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:nil];
@@ -167,3 +167,4 @@ static NSString *const HKCorrelatedObjectsKey = @"objects";
 }
 
 @end
+*/

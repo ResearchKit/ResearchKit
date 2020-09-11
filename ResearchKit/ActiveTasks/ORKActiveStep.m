@@ -165,7 +165,7 @@
             (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
 
-- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
+/*- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     NSMutableSet<HKObjectType *> *set = [NSMutableSet set];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
         NSSet<HKObjectType *> *subset = [config requestedHealthKitTypesForReading];
@@ -174,7 +174,7 @@
         }
     }
     return set;
-}
+}*/
 
 - (ORKPermissionMask)requestedPermissions {
     ORKPermissionMask mask = [super requestedPermissions];
