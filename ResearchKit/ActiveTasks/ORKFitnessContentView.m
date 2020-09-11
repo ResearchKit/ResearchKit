@@ -303,7 +303,7 @@
             unit = NSLengthFormatterUnitMeter;
             // Force showing 0 meters if the distance is sufficiently short to be displayed in cm or mm
             unitString = [_lengthFormatter unitStringFromValue:0 unit:NSLengthFormatterUnitMeter];
-            displayDistance = 0;
+//            displayDistance = 0;
             break;
         default:
             break;
