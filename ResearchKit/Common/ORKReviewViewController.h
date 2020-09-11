@@ -41,14 +41,19 @@
 @class ORKLearnMoreInstructionStep;
 @class ORKStepViewController;
 @class ORKStep;
+@class ORKTaskViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKReviewViewControllerDelegate <NSObject>
 
 @required
+
+
+- (void)reviewViewController:(ORKReviewViewController *)reviewViewController willPresentTaskViewController:(ORKTaskViewController *)taskViewController;
 - (void)reviewViewController:(ORKReviewViewController *)reviewViewController didUpdateResult:(ORKTaskResult *)updatedResult source:(ORKTaskResult *)resultSource;
 - (void)reviewViewControllerDidSelectIncompleteCell:(ORKReviewViewController *)reviewViewController;
+
 @optional
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreStep;
 @end

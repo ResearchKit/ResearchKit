@@ -49,6 +49,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKReviewIncompleteCell.h"
 #import "ORKNavigableOrderedTask.h"
+#import "ORKTask.h"
 
 static const float FirstSectionHeaderPadding = 24.0;
 
@@ -203,6 +204,8 @@ static const float FirstSectionHeaderPadding = 24.0;
             ORKFormStep *formStep = (ORKFormStep *)step;
             ORKStepResult *result = [defaultResultSource stepResultForStepIdentifier:formStep.identifier];
             if (result) {
+                NSLog(@"REview result");
+                
                 [_reviewSections addObject:[self reviewSectionForFormStep:formStep withResult:result]];
             }
         }
@@ -223,8 +226,14 @@ static const float FirstSectionHeaderPadding = 24.0;
             if (formItem.answerFormat) {
                 ORKResult *formItemResult = [result resultForIdentifier:formItem.identifier];
                 ORKReviewItem *formReviewItem = [[ORKReviewItem alloc] init];
+                NSLog(@"%@",formItem.text);
                 if (formItem.text) {
-                    formReviewItem.question = formItem.text;
+                    if ([formItem.text isEqualToString:@" "]){
+                        formReviewItem.question = _currentSectionTitle;
+                    }else{
+                        formReviewItem.question = formItem.text;
+                    }
+                    
                 } else {
                     // formItem.text will return nil if a question was constructed as follows
                     // - you create a section header with the ORKFormItem(sectionTitle: API
@@ -254,6 +263,7 @@ static const float FirstSectionHeaderPadding = 24.0;
 
 - (NSString *)answerStringForFormItem:(ORKFormItem *)formItem withFormItemResult:(ORKResult *)formItemResult {
     NSString *answerString = nil;
+    NSLog(@"%@",formItemResult);
     if (formItem && formItemResult && [formItemResult isKindOfClass:[ORKQuestionResult class]]) {
         ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
         if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
@@ -447,6 +457,9 @@ static const float FirstSectionHeaderPadding = 24.0;
     taskViewController.defaultResultSource = _resultSource;
     taskViewController.discardable = YES;
     taskViewController.showsProgressInNavigationBar = NO;
+    if (_delegate && [_delegate respondsToSelector:@selector(reviewViewController:willPresentTaskViewController:)]) {
+        [_delegate reviewViewController:self willPresentTaskViewController: taskViewController];
+    }
     [self presentViewController:taskViewController animated:YES completion:nil];
 }
 
@@ -476,9 +489,9 @@ static const float FirstSectionHeaderPadding = 24.0;
     [taskViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
-    stepViewController.shouldPresentInReview = _isCompleted;
-}
+//- (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
+//    stepViewController.shouldPresentInReview = _isCompleted;
+//}
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreButtonPressedWithStep:(ORKLearnMoreInstructionStep *)learnMoreStep forStepViewController:(ORKStepViewController *)stepViewController {
     if (_delegate && [_delegate respondsToSelector:@selector(taskViewController:learnMoreButtonPressedWithStep:)]) {

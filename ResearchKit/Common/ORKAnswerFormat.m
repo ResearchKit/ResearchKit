@@ -1023,6 +1023,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)stringForAnswer:(id)answer {
+    if (_helper == nil) {
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    }
     return [_helper stringForChoiceAnswer:answer];
 }
 
