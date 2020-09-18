@@ -1427,6 +1427,7 @@
 		D442397C1AF17F7600559D96 /* ORKImageCaptureStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureStepViewController.m; sourceTree = "<group>"; };
 		D45852081AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureCameraPreviewView.h; sourceTree = "<group>"; };
 		D45852091AF6CCFA00A2DE13 /* ORKImageCaptureCameraPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureCameraPreviewView.m; sourceTree = "<group>"; };
+		DA5FE5B1251534CA00A86D37 /* ro-RO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ro-RO"; path = "ro-RO.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentDocumentTests.m; sourceTree = "<group>"; };
 		FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSectionFormatter.h; sourceTree = "<group>"; };
 		FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatter.m; sourceTree = "<group>"; };
@@ -4036,7 +4037,7 @@
 				D0FB60EE2373334000FBF8D0 /* bg-BG */,
 				D012B6BA24C116D700F4A842 /* ta-IN */,
 				D069B8F624EF5C71007432B4 /* ka-GE */,
-				DADD31192515339C005FC771 /* ro-RO */,
+				DA5FE5B1251534CA00A86D37 /* ro-RO */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";
@@ -4045,7 +4046,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D012B6B824C116D700F4A842 /* ta-IN */,
-				DA25025A25152C5700C54366 /* ka-GE */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
