@@ -98,7 +98,7 @@
 "AX_GRAPH_POINT_%@" = "წერტილი: %@";
 
 /* (No Comment) */
-"AX_GRAPH_RANGE_FORMAT_%@_%@" = "დიაპაზონი: % @-დან% @-მდე";
+"AX_GRAPH_RANGE_FORMAT_%@_%@" = "დიაპაზონი: %@-დან%@-მდე";
 
 /* (No Comment) */
 "AX_GRAPH_STACK_PREFIX" = "დასტა შედგება";
@@ -125,7 +125,7 @@
 "AX_SIGNVIEW_UNSIGNED" = "ხელმოუწერელი";
 
 /* (No Comment) */
-"AX_SLIDER_LABEL" = "პასუხის სლაიდერი. დიაპაზონი % @-დან %@-მდე";
+"AX_SLIDER_LABEL" = "პასუხის სლაიდერი. დიაპაზონი %@-დან %@-მდე";
 
 /* (No Comment) */
 "AX_SPEECH_RECOGNITION_START_RECORDING_HINT" = "ჩაწერის დაწყებისას, მეორედ გაააქტიურეთ ჩაწერის შეჩერების მიზნით.";
